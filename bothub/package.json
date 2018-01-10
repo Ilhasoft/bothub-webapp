@@ -15,6 +15,7 @@
     "bootstrap-less": "^3.3.8",
     "css-loader": "^0.28.8",
     "jquery": "^3.2.1",
+    "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "node-less": "^1.0.0",
     "style-loader": "^0.19.1",
