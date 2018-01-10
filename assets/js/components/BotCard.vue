@@ -91,21 +91,18 @@
 		.up-down-card-column {
 			width: 10%;
 			height: 100%;
-			/* background: black; */
 			float: left;
 		}
 		.image-card-column {
 			width: 20%;
 			height: 100%;
 			line-height: 100px;
-			/* background: yellow; */
 			float: left;
 			margin: 0;
 			img {
 				margin: 25px auto;
 				display: block;
 				box-shadow: 1px 1px 5px black;
-				/* background-color: #fff; */
 				padding: 4px;
 				width: 140px;
 				height: 140px;
@@ -115,8 +112,10 @@
 		.body-card-column {
 			width: 70%;
 			height: 100%;
-			/* background: green; */
 			float: left;
+			hr {
+				opacity: 0.19;
+			}
 			h3 {
 				width: 238px;
 				height: 23px;
