@@ -1,0 +1,15 @@
+{% load render_bundle from webpack_loader %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bothub</title>
+</head>
+<body>
+    <div id="app">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    {% render_bundle 'main' %}
+</body>
+</html>
