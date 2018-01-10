@@ -4,7 +4,7 @@
 			<up-down-vote :reputation="card.informations_count.reputation"></up-down-vote>
 		</div>
 		<div class="image-card-column">
-			<img src="https://evangelicoblog.com/midia/2015/02/belo-ceu.jpg" alt="">
+			<img src="/static/images/bothub_logo.svg" alt="">
 		</div>
 		<div class="body-card-column">
 			<h3>{{card.bot_name}}</h3>
