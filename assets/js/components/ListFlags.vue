@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <span>
         <span :key="i" v-for="(flag, i) in flags">
             <img class="flag" :src="'/static/images/components/flags/'+flag+'.png'" alt="">
         </span>
-    </div>
+    </span>
 </template>
 
 <script>

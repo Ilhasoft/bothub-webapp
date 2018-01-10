@@ -8,8 +8,10 @@
 		</div>
 		<div class="body-card-column">
 			<h3>{{card.bot_name}}</h3>
-			<span class="updated-at">Updated {{timeDifference(card.updated_at)}} by {{card.updated_by}}</span>
-			<list-flags :flags="card.languages"></list-flags>
+			<div>
+				<span class="updated-at">Updated {{timeDifference(card.updated_at)}} by {{card.updated_by}}</span>
+				<list-flags :flags="card.languages"></list-flags>
+			</div>
 			<hr>
 			<p>
 				{{card.description}}
