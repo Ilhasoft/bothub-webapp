@@ -1,7 +1,7 @@
 <template>
     <div>
         <span :key="i" v-for="(flag, i) in flags">
-            <img :src="'/static/images/components/flags/'+flag+'.png'" alt="">
+            <img class="flag" :src="'/static/images/components/flags/'+flag+'.png'" alt="">
         </span>
     </div>
 </template>
@@ -17,6 +17,10 @@
     }
 </script>
 
-<style>
-
+<style lang="less">
+    .flag {
+        width: 20.1px;
+        height: 20.1px;
+        margin-right: 6px;
+    }
 </style>

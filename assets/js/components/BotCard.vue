@@ -8,7 +8,7 @@
 		</div>
 		<div class="body-card-column">
 			<h3>{{card.bot_name}}</h3>
-			<span>Updated {{timeDifference(card.updated_at)}} by {{card.updated_by}}</span>
+			<span class="updated-at">Updated {{timeDifference(card.updated_at)}} by {{card.updated_by}}</span>
 			<list-flags :flags="card.languages"></list-flags>
 			<hr>
 			<p>
@@ -20,70 +20,72 @@
 </template>
 
 <script>
-import ListFlags from "./ListFlags.vue"
-import UpDownVote from "./UpDownVote.vue"
-import ListTags from "./ListTags.vue"
-export default {
-	name: 'card',
-	props: {
-		card: {
-			type: Object,
-			required: true
+	import ListFlags from "./ListFlags.vue"
+	import UpDownVote from "./UpDownVote.vue"
+	import ListTags from "./ListTags.vue"
+	export default {
+		name: 'card',
+		props: {
+			card: {
+				type: Object,
+				required: true
+			}
+		},
+		mounted() {
+		},
+		methods:{
+			timeDifference(previous) {
+
+				var msPerMinute = 60 * 1000;
+				var msPerHour = msPerMinute * 60;
+				var msPerDay = msPerHour * 24;
+				var msPerMonth = msPerDay * 30;
+				var msPerYear = msPerDay * 365;
+
+				var elapsed = Date.now() - previous;
+
+				if (elapsed < msPerMinute) {
+					return Math.round(elapsed/1000) + ' seconds ago';
+				}
+
+				else if (elapsed < msPerHour) {
+					return Math.round(elapsed/msPerMinute) + ' minutes ago';
+				}
+
+				else if (elapsed < msPerDay ) {
+					return Math.round(elapsed/msPerHour ) + ' hours ago';
+				}
+
+				else if (elapsed < msPerMonth) {
+					return Math.round(elapsed/msPerDay) + ' days ago';
+				}
+
+				else if (elapsed < msPerYear) {
+					return Math.round(elapsed/msPerMonth) + ' months ago';
+				}
+
+				else {
+					return Math.round(elapsed/msPerYear ) + ' years ago';
+				}
+			}
+		},
+		components:{
+			ListFlags,
+			UpDownVote,
+			ListTags
 		}
-	},
-	mounted() {
-	},
-	methods:{
-		timeDifference(previous) {
-
-			var msPerMinute = 60 * 1000;
-			var msPerHour = msPerMinute * 60;
-			var msPerDay = msPerHour * 24;
-			var msPerMonth = msPerDay * 30;
-			var msPerYear = msPerDay * 365;
-
-			var elapsed = Date.now() - previous;
-
-			if (elapsed < msPerMinute) {
-				return Math.round(elapsed/1000) + ' seconds ago';
-			}
-
-			else if (elapsed < msPerHour) {
-				return Math.round(elapsed/msPerMinute) + ' minutes ago';
-			}
-
-			else if (elapsed < msPerDay ) {
-				return Math.round(elapsed/msPerHour ) + ' hours ago';
-			}
-
-			else if (elapsed < msPerMonth) {
-				return Math.round(elapsed/msPerDay) + ' days ago';
-			}
-
-			else if (elapsed < msPerYear) {
-				return Math.round(elapsed/msPerMonth) + ' months ago';
-			}
-
-			else {
-				return Math.round(elapsed/msPerYear ) + ' years ago';
-			}
-		}
-	},
-	components:{
-		ListFlags,
-		UpDownVote,
-		ListTags
 	}
-}
 </script>
 <style lang="less">
+	@import url('https://fonts.googleapis.com/css?family=Encode+Sans');
 	.bot-card {
+		font-family: 'Encode Sans', sans-serif;
 		margin: 0 auto;
-		width: 80%;
-		/* background: red; */
+		width: 1080;
+		background: #f8f8f8;
 		border-radius: 25px;
 		padding: 25px;
-		height: 190px;
+		height: 200px;
 		.up-down-card-column {
 			width: 10%;
 			height: 100%;
@@ -98,7 +100,7 @@ export default {
 			float: left;
 			margin: 0;
 			img {
-				margin: 5px auto;
+				margin: 25px auto;
 				display: block;
 				box-shadow: 1px 1px 5px black;
 				/* background-color: #fff; */
@@ -113,6 +115,29 @@ export default {
 			height: 100%;
 			/* background: green; */
 			float: left;
+			h3 {
+				width: 238px;
+				height: 23px;
+				font-size: 18px;
+				font-weight: 500;
+				font-style: normal;
+				font-stretch: normal;
+				line-height: normal;
+				letter-spacing: normal;
+				color: #000000;
+			}
+			.updated-at{
+				width: 211px;
+				height: 15px;
+				opacity: 0.3;
+				font-size: 12px;
+				font-weight: normal;
+				font-style: normal;
+				font-stretch: normal;
+				line-height: normal;
+				letter-spacing: normal;
+				color: #000000;
+			}
 		}
 		&:hover {
 			box-shadow: 0 5px 15px rgba(0,0,0,0.3);

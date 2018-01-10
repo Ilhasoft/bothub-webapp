@@ -22,7 +22,7 @@
 				{
 					bot_name: 'Bot Example',
 					bot_slug: 'bot_slug',
-					languages: ['EN', 'PT', 'ES', 'DE'],
+					languages: ['NL', 'PT', 'ES', 'DE'],
 					description: 'This is the brief description about this bot, this bot do bla bla bla anything',
 					tags: ['food', 'blabla', 'othertag', 'etc'],
 					updated_at: new Date("10/10/2015"),
@@ -36,7 +36,7 @@
 				{
 					bot_name: 'Bot Example 2',
 					bot_slug: 'bot_slug_2',
-					languages: ['EN', 'PT', 'ES', 'DE'],
+					languages: ['EN', 'PT', 'ES', 'DE', 'IT', 'NL', 'FR'],
 					description: 'This is the brief description about this bot, this bot do bla bla bla anything',
 					tags: ['food', 'blabla', 'othertag', 'etc'],
 					updated_at: new Date("12/12/2017"),

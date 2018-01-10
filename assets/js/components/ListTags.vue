@@ -3,6 +3,9 @@
       <div class="tag" :key="i" v-for="(tag, i) in tags">
           {{tag}}
       </div>
+      <div class="tag">
+          ...
+      </div>
   </div>
 </template>
 <script>
@@ -20,6 +23,7 @@
     .list-tags{
         display: inline-block;
         .tag{
+            font-size: 12px; 
             display: inline-block;
             margin-right: 10px;
             border-radius: 12px;
