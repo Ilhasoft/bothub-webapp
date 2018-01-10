@@ -25,7 +25,7 @@
 					languages: ['EN', 'PT', 'ES', 'DE'],
 					description: 'This is the brief description about this bot, this bot do bla bla bla anything',
 					tags: ['food', 'blabla', 'othertag', 'etc'],
-					updated_at: '21231231',
+					updated_at: new Date("10/10/2015"),
 					updated_by: 'Username',
 					informations_count: {
 						reputation: 302,
@@ -39,7 +39,8 @@
 					languages: ['EN', 'PT', 'ES', 'DE'],
 					description: 'This is the brief description about this bot, this bot do bla bla bla anything',
 					tags: ['food', 'blabla', 'othertag', 'etc'],
-					updated_at: '22211122',
+					updated_at: new Date("12/12/2017"),
+					updated_by: 'fulano de tal',
 					informations_count: {
 						reputation: 102,
 						issues: 1321,
