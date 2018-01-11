@@ -1,6 +1,6 @@
 <template>
     <div class="stars">
-      <span>Stars</span>
+      <span>{{count}} Stars</span>
       <img v-on:click="set_image()" :src="star" alt="">
     </div>
 </template>
@@ -37,7 +37,6 @@
 <style lang="less">
     .stars {
         font-size: 15px;
-        width: 61px;
         height: 15px;
         span {
             line-height: 15px;
@@ -50,7 +49,7 @@
             letter-spacing: normal;
             color: #000000;
         }
-        img{
+        img {
             width: 15px;
             height: 15px;
             vertical-align: middle;
