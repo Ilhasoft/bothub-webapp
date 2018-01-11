@@ -27,10 +27,12 @@
 					tags: ['food', 'blabla', 'othertag', 'etc'],
 					updated_at: new Date("10/10/2015"),
 					updated_by: 'Username',
-					informations_count: {
+					informations: {
 						reputation: 302,
+						stars: 200,
 						issues: 3321,
-						forks: 223
+						forks: 223,
+						starred: false
 					}
 				},
 				{
@@ -41,10 +43,12 @@
 					tags: ['food', 'blabla', 'othertag', 'etc'],
 					updated_at: new Date("12/12/2017"),
 					updated_by: 'fulano de tal',
-					informations_count: {
+					informations: {
 						reputation: 102,
+						stars: 200,
 						issues: 1321,
-						forks: 23
+						forks: 23,
+						starred: true
 					}
 				}  
 			]

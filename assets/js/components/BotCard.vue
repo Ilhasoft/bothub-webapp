@@ -7,7 +7,12 @@
 			<img src="/static/images/bothub_logo.svg" alt="">
 		</div>
 		<div class="body-card-column">
-			<h3>{{card.bot_name}}</h3>
+			<header>
+				<div class="bot-title">{{card.bot_name}}</div>
+				<div class="bot-informations">
+					<stars :status="card.informations.starred" :count="card.informations.stars"></stars>
+				</div>
+			</header>
 			<div>
 				<span class="updated-at">Updated {{timeDifference(card.updated_at)}} by {{card.updated_by}}</span>
 				<list-flags :flags="card.languages"></list-flags>
@@ -25,8 +30,15 @@
 	import ListFlags from "./ListFlags.vue"
 	import UpDownVote from "./UpDownVote.vue"
 	import ListTags from "./ListTags.vue"
+	import Stars from "./bot_informations/Stars.vue"
 	export default {
 		name: 'card',
+		components: {
+			ListFlags,
+			UpDownVote,
+			ListTags,
+			Stars
+		},
 		props: {
 			card: {
 				type: Object,
@@ -70,11 +82,6 @@
 					return Math.round(elapsed/msPerYear ) + ' years ago';
 				}
 			}
-		},
-		components:{
-			ListFlags,
-			UpDownVote,
-			ListTags
 		}
 	}
 </script>
@@ -116,17 +123,28 @@
 			hr {
 				opacity: 0.19;
 			}
-			h3 {
-				width: 238px;
-				height: 23px;
-				font-size: 18px;
-				font-weight: 500;
-				font-style: normal;
-				font-stretch: normal;
-				line-height: normal;
-				letter-spacing: normal;
-				color: #000000;
+			header{
+				width: 100%;
+				height: 35px;
+				.bot-title {
+					width: 238px;
+					height: 23px;
+					color: #000000;
+					line-height: normal;
+					letter-spacing: normal;
+					font-size: 18px;
+					font-weight: 500;
+					font-style: normal;
+					font-stretch: normal;
+					float: left;
+				}
+				.bot-informations {
+					height: 25px;
+					width: 400px;
+					float: right;
+				}
 			}
+			
 			.updated-at{
 				width: 211px;
 				height: 15px;
