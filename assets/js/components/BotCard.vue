@@ -1,7 +1,7 @@
 <template>
 	<div class="bot-card">
 		<div class="up-down-card-column">
-			<up-down-vote :reputation="card.informations_count.reputation"></up-down-vote>
+			<up-down-vote :reputation="card.informations.reputation"></up-down-vote>
 		</div>
 		<div class="image-card-column">
 			<img src="/static/images/bothub_logo.svg" alt="">
