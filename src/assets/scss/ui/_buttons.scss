@@ -1,12 +1,14 @@
 input[type="button"],
 input[type="submit"],
-button {
+button,
+.button {
   background-color: $primary-color;
   border: none;
   border-radius: 5px;
   padding: 13px 30px;
   color: #FFF;
   cursor: pointer;
+  text-decoration: none;
 
   transition: all 0.2s ease-in-out;
 
