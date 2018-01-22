@@ -1,0 +1,13 @@
+.container {
+  width: 90%;
+  position: relative;
+  float: none;
+  background-color: #f4f4f4;
+  margin: 0 auto;
+  max-width: 1900px;
+
+  @media (max-width: 990px) {
+    width: 100%;
+    padding: 0 20px;
+  }
+}
