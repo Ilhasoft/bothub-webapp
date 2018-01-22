@@ -1,0 +1,16 @@
+input[type="button"],
+input[type="submit"],
+button {
+  background-color: $primary-color;
+  border: none;
+  border-radius: 5px;
+  padding: 13px 30px;
+  color: #FFF;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $dark-green2;
+  }
+}

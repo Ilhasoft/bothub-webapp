@@ -1,0 +1,20 @@
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="file"],
+input[type="password"]
+{
+  height: 56px;
+  padding: 0 30px;
+  font-size: 17px;
+  color: $dark-grey;
+  border-radius: 5px;
+  border: 1px solid $grey;
+  box-shadow: none;
+  display: block;
+  width: 100%;
+  outline-color: $primary-color;
+  outline-width: 1px;
+}
+
