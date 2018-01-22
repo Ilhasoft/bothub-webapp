@@ -1,0 +1,31 @@
+
+// Default styles for general config.
+@import
+  '_body',
+  '_colors',
+  '_reset',
+  '_typo',
+  '_variables'
+;
+
+// Config UI default styles
+@import
+  'ui/_alerts',
+  'ui/_buttons',
+  'ui/_forms',
+  'ui/_selects',
+  'ui/_tags'
+;
+
+// Add styles for components
+@import
+  'components/_cta',
+  'components/_footer-nav',
+  'components/_home-top-bar',
+  'components/_modals',
+  'components/_nav',
+  'components/_scrool-up',
+  'components/_section-title',
+  'components/_social-nav',
+  'components/_submenu'
+;
