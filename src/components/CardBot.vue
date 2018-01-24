@@ -5,6 +5,7 @@
       <li class="bot-summary__item">547 copy <i class="material-icons">content_copy</i></li>
       <li class="bot-summary__item">321 stars <i class="material-icons">grade</i></li>
     </ul>
+    <up-down-vote></up-down-vote>
     <div class="card-bot__image">
       <img src="../assets/images/avatar.png" alt="">
     </div>
@@ -48,14 +49,19 @@
 </template>
 
 <script>
+import UpDownVote from './UpDownVote.vue'
+
 export default {
   name: 'CardBot',
+  components: {
+    UpDownVote
+  },
   data () {
     return {
       bot_title: 'Bot-ZicaVirus',
       bot_author: 'david_gazques',
       bot_author_name: 'David Gazques',
-      bot_text: 'ASwimming hundreds of feet beneath the ocean’s surface in many parts of the world are prolific architects. calledlarvaceans. ASwimming hundreds of feet beneath the ocean’s surface in many parts of the architects called.'
+      bot_text: 'A Swimming hundreds of feet beneath the ocean’s surface in many parts of the world are prolific architects calledlarvaceans. A Swimming hundreds of feet beneath the ocean’s surface in many parts of the architects called.'
     }
   }
 }
@@ -123,7 +129,7 @@ export default {
     align-items: center;
   }
   .card-bot__updated {
-    font-size: 10px;
+    font-size: 12px;
     color: $dark-grey;
     margin-right: 10px;
   }
@@ -144,7 +150,7 @@ export default {
   .card-bot__image {
     width: 134px;
     height: 134px;
-    margin-right: 30px;
+    margin: 0 30px 0 -10px;
     overflow: hidden;
     border-radius: 100%;
     img {
@@ -152,12 +158,12 @@ export default {
     }
   }
   .card-bot__excerpt {
-    margin: 12px 0;
-    font-size: 14px;
-    line-height: 18px;
+    margin: 25px 0;
+    font-size: 15px;
+    line-height: 20px;
   }
   .card-bot__content {
-    width: calc(100% - 164px);
+    width: calc(100% - 264px);
   }
   .card-bot__badge {
     width: 100%;
