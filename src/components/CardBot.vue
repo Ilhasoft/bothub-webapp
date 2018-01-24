@@ -1,5 +1,10 @@
 <template>
   <div class="card-bot">
+    <ul class="bot-card__summary">
+      <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
+      <li class="bot-summary__item">547 copy <i class="material-icons">content_copy</i></li>
+      <li class="bot-summary__item">321 stars <i class="material-icons">grade</i></li>
+    </ul>
     <div class="card-bot__image">
       <img src="../assets/images/avatar.png" alt="">
     </div>
@@ -7,11 +12,6 @@
       <div class="card-bot__header">
         <span class="card-bot__title">{{ bot_title }}</span>
         <span class="card-bot__author">{{ bot_author }}</span>
-        <ul class="bot-card__summary">
-          <li class="bot-issues">6547 issues <i class="material-icons">lightbulb_outline</i></li>
-          <li class="bot-copy">547 copy <i class="material-icons">content_copy</i></li>
-          <li class="bot-stars">321 stars <i class="material-icons">star_rate</i></li>
-        </ul>
       </div>
       <div class="card-bot__info">
         <div class="card-bot__updated">
@@ -97,6 +97,27 @@ export default {
       top: 0;
     }
   }
+  .bot-card__summary {
+    color: $dark-grey;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: absolute;
+    top: 23px;
+    right: 28px;
+    display: flex;
+    justify-content: flex-end;
+    .bot-summary__item {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin-left: 30px;
+      .material-icons {
+        margin-left: 10px;
+        font-size: 16px;
+      }
+    }
+  }
   .card-bot__info {
     display: flex;
     align-items: center;
@@ -121,9 +142,11 @@ export default {
     }
   }
   .card-bot__image {
-    max-width: 134px;
-    height: 100%;
+    width: 134px;
+    height: 134px;
     margin-right: 30px;
+    overflow: hidden;
+    border-radius: 100%;
     img {
       width: 100%;
     }
