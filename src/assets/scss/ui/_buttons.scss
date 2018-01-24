@@ -1,18 +1,97 @@
+
 input[type="button"],
 input[type="submit"],
-button,
-.button {
-  background-color: $primary-color;
-  border: none;
+button {
+  background-color: $grey;
   border-radius: 5px;
-  padding: 13px 30px;
-  color: #FFF;
+  border: 1px solid $grey;
+  padding: 5px 30px;
+  color: $dark-grey;
   cursor: pointer;
   text-decoration: none;
-
+  display: inline-flex;
+  align-items:center;
   transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
 
   &:hover {
-    background-color: $dark-green2;
+    background-color: $dark-grey;
+    color: #FFF;
   }
 }
+
+.btn {
+  background-color: $grey;
+  border-radius: 5px;
+  border: 1px solid $grey;
+  padding: 5px 30px;
+  color: $dark-grey;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items:center;
+  transition: all 0.2s ease-in-out;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $dark-grey;
+    color: #FFF;
+  }
+
+  &-default {
+    background-color: $primary-color;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 30px;
+    color: #FFF;
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: $dark-green2;
+    }
+  }
+
+  &-primary {
+    border: 1px solid $dark-grey;
+  }
+
+
+  &-update {
+    border-radius: 50px;
+    color: $apple-green;
+    background-color: transparent;
+    border-color: $apple-green;
+
+    &:hover {
+      background-color: $apple-green;
+      color: $dark-green2;
+    }
+  }
+
+  &-available-update {
+    background-color: transparent;
+    border: none;
+
+    .material-icons {
+      background-color: $apple-green;
+      border-radius: 50px;
+      padding: 5px;
+      margin-left: 10px;
+      color: $dark-green2;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: $dark-green2;
+    }
+  }
+}
+
+

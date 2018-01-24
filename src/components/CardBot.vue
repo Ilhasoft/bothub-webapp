@@ -7,6 +7,11 @@
       <div class="card-bot__header">
         <span class="card-bot__title">{{ bot_title }}</span>
         <span class="card-bot__author">{{ bot_author }}</span>
+        <ul class="bot-card__summary">
+          <li class="bot-issues">6547 issues <i class="material-icons">lightbulb_outline</i></li>
+          <li class="bot-copy">547 copy <i class="material-icons">content_copy</i></li>
+          <li class="bot-stars">321 stars <i class="material-icons">star_rate</i></li>
+        </ul>
       </div>
       <div class="card-bot__info">
         <div class="card-bot__updated">
@@ -34,6 +39,10 @@
         <span class="badge">symptoms</span>
         <span class="badge">...</span>
       </div>
+    </div>
+    <div class="bot-action">
+      <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
+      <a href="#" class="btn btn-available-update">Available Update <i class="material-icons">refresh</i></a>
     </div>
   </div>
 </template>
@@ -63,6 +72,7 @@ export default {
     position: relative;
     transition: all .2s ease-in-out;
     align-items: center;
+    margin-bottom: 30px;
     &:hover {
       box-shadow: 0 0 20px 5px rgba($dark-green,.2);
     }
@@ -130,5 +140,11 @@ export default {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+  }
+  .bot-action {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    z-index: 2;
   }
 </style>

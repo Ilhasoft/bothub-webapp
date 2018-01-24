@@ -1,9 +1,7 @@
 <template>
   <div class="search">
     <input type="text" placeholder="the world of robots is here">
-    <input type="submit" value="Ok">
-    <button>Ok</button>
-    <a href="#" class="button">Ok</a>
+    <button><i class="material-icons">search</i></button>
   </div>
 </template>
 
