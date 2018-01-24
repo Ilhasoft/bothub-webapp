@@ -1,0 +1,20 @@
+.badge {
+  letter-spacing: 0.6px;
+  padding: 1px 10px;
+  border-radius: 10px;
+  background: #eaeaea;
+  color: #444;
+  font-size: 0.8rem;
+  line-height: 20px;
+  min-height: 20px;
+  min-width: 20px;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  margin-bottom: 5px;
+
+  &--danger {
+    background-color: #f4516c;
+    color: #ffffff;
+  }
+}
