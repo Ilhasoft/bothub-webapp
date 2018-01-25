@@ -9,8 +9,7 @@
     </a>
   </div>
 </template>
-<script>
-</script>
+<script></script>
 <style lang="scss" scoped>
 @import '../assets/scss/_colors';
 .up-down-vote {
