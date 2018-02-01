@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!--<topbar></topbar>-->
     <h1>{{ mensagem }} <span>{{ subtitulo }}</span></h1>
     <div class="search">
       <search></search>
@@ -18,12 +19,14 @@
 <script>
 import CardBot from './CardBot.vue'
 import Search from './Search.vue'
+import TopBar from './TopBar.vue'
 
 export default {
   name: 'HomePage',
   components: {
     CardBot,
-    Search
+    Search,
+    TopBar
   },
   data () {
     return {

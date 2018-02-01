@@ -1,6 +1,16 @@
 # BotHub
 
-> A BotHub project
+> A BotHub is a project Vue.js based.
+
+## First Step - Install vue CLI
+
+Vue.js provides an official CLI for quickly scaffolding ambitious Single Page Applications. 
+It provides batteries-included build setups for a modern frontend workflow. 
+It takes only a few minutes to get up and running with hot-reload, lint-on-save, and production-ready builds:
+
+```
+ npm install --global vue-cli
+```
 
 ## Build Setup
 
