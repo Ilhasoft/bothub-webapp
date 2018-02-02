@@ -33,7 +33,7 @@
             Joined 2 years ago · last seen 9 days ago
           </span>
           </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
+          <a href="#" class="author__url">http://davidgasquez.buthub.api/</a>
           <span class="author__bot-counts">60 bots</span>
         </div>
       </div>
@@ -51,7 +51,7 @@
             Joined 2 years ago · last seen 9 days ago
           </span>
           </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
+          <a href="#" class="author__url">http://davidgasquez.buthub.api/</a>
           <span class="author__bot-counts">60 bots</span>
         </div>
       </div>
@@ -69,7 +69,7 @@
             Joined 2 years ago · last seen 9 days ago
           </span>
           </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
+          <a href="#" class="author__url">http://davidgasquez.buthub.api/</a>
           <span class="author__bot-counts">60 bots</span>
         </div>
       </div>
@@ -101,6 +101,7 @@ export default {
 
 <style scoped lang="scss">
   @import '../assets/scss/_variables';
+  @import '../assets/scss/_colors';
   h1 {
     font-family: $font-secondary;
     width: 100%;
@@ -119,14 +120,24 @@ export default {
 /*Card Author */
   .authors-list {
     display: flex;
+    flex-wrap: wrap;
   }
   .card-author {
     background-color: #fff;
     border-radius: 10px;
-    width: 33%;
+    width: calc(33.33% - 30px);
     padding: 20px;
     display: flex;
     margin: 15px;
+
+    @media (max-width: 992px) {
+      width: calc(50% - 30px);
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      margin: 10px 0;
+    }
   }
   .card-author__image {
     width: 100px;
@@ -139,5 +150,30 @@ export default {
   }
   .card-author__info {
     width: calc(100% - 120px);
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .author__name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .author__location {
+    display: block;
+  }
+  .author__joined {
+    display: block;
+  }
+  .author__url {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  .author__bot-counts {
+    display: block;
+    margin-top: 10px;
   }
 </style>
