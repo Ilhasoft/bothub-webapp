@@ -11,5 +11,6 @@
 
 <style scoped lang="scss">
   .search {
+    margin-top: 40px;
   }
 </style>
