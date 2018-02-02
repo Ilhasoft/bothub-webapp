@@ -1,13 +1,13 @@
 <template>
   <div class="topbar">
     <div class="topbar-brand">
-      <img src="" alt="Logo BotHub">
+      <img src="../assets/images/logo-white.svg" alt="Logo BotHub">
     </div>
     <div class="topbar-action-buttom">
       <a href="#" class="btn">Criar Bot</a>
     </div>
     <div class="topbar-avatar">
-      <img src="" alt="Avatar">
+      <img src="../assets/images/man.png" alt="Avatar">
     </div>
   </div>
 </template>
@@ -18,6 +18,6 @@
 
 <style scoped lang="scss">
   .topbar {
-    background-color: #fff;
+    background-color: transparent;
   }
 </style>
