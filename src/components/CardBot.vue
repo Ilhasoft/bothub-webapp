@@ -43,7 +43,6 @@
     </div>
     <div class="bot-action">
       <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
-      <a href="#" class="btn btn-available-update">Available Update <i class="material-icons">refresh</i></a>
     </div>
   </div>
 </template>
@@ -172,8 +171,8 @@ export default {
   }
   .bot-action {
     position: absolute;
-    bottom: 10px;
-    right: 0;
+    bottom: 20px;
+    right: 20px;
     z-index: 2;
   }
 </style>
