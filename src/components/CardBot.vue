@@ -78,7 +78,7 @@ export default {
     position: relative;
     transition: all .2s ease-in-out;
     align-items: center;
-    margin-bottom: 30px;
+    margin: 15px;
     &:hover {
       box-shadow: 0 0 20px 5px rgba($dark-green,.2);
     }
