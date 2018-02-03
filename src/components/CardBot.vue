@@ -134,7 +134,6 @@ export default {
     transition: all .2s ease-in-out;
     align-items: center;
     margin: 30px 15px;
-    width: 100%;
     &:last-child {
       margin-bottom: 0;
     }
