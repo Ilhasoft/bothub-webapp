@@ -116,21 +116,35 @@ export default {
 
 <style scoped lang="scss">
   @import "../assets/scss/_colors";
+  .card-bot__list {
+    /*Config for large devices*/
+    @media (min-width: 2000px) {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+  }
   .card-bot {
     display: flex;
+    flex-wrap: wrap;
     background-color: #FFF;
     border-radius: 20px;
     padding: 20px;
-    flex-wrap: wrap;
     position: relative;
     transition: all .2s ease-in-out;
     align-items: center;
     margin: 30px 15px;
+    width: 100%;
     &:last-child {
       margin-bottom: 0;
     }
     &:hover {
       box-shadow: 0 0 20px 5px rgba($dark-green,.1);
+    }
+    /*Config for large devices*/
+    @media (min-width: 2000px) {
+      width: calc(50% - 40px);
+      height: 10vh;
     }
   }
   .card-bot__title,
