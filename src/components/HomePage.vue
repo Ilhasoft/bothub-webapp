@@ -10,12 +10,10 @@
 
     <section class="best-of-month">
       <div class="container">
-        <div class="card-list">
-          <h3 class="section-title">
-            {{ best_of_month_title }}
-          </h3>
-          <card-bot></card-bot>
-        </div>
+        <h3 class="section-title">
+          {{ best_of_month_title }}
+        </h3>
+        <card-bot></card-bot>
       </div>
     </section>
 
@@ -32,14 +30,21 @@
       </div>
     </section>
 
+    <section class="best-of-month">
+      <div class="container">
+        <h3 class="section-title">
+          {{ top_bots }}
+        </h3>
+        <card-bot></card-bot>
+      </div>
+    </section>
+
     <section class="top-authors">
       <h3 class="section-title">
         {{ top_authors_title }}
       </h3>
       <div class="container">
-        <div class="authors-list">
-          <card-author></card-author>
-        </div>
+        <card-author></card-author>
       </div>
     </section>
 
@@ -63,6 +68,7 @@ export default {
   data () {
     return {
       best_of_month_title: 'Best bots of the month',
+      top_bots: 'Top Bots',
       top_authors_title: 'Top Authors'
     }
   }
@@ -72,4 +78,14 @@ export default {
 <style scoped lang="scss">
   @import '../assets/scss/_variables';
   @import '../assets/scss/_colors';
+  .best-of-month,
+  .top-authors {
+    padding: 60px 0;
+  }
+  .best-of-month {
+    background-color: #F8F8F8;
+  }
+  .top-authors {
+    background-color: #F8F8F8;
+  }
 </style>

@@ -1,20 +1,58 @@
 <template>
-  <div class="card-author">
-    <div class="card-author__image">
-      <img src="../assets/images/man.png" alt="">
-    </div>
-    <div class="card-author__info">
-      <div class="author__name">{{ author_name }}</div>
-      <div class="author__info">
-      <span class="author__location">
-        {{ author_location }}
-      </span>
-        <span class="author__joined">
-        Joined {{ author_joined }} · last seen {{ author_last_seen }}
-      </span>
+  <div class="authors-list">
+    <div class="card-author">
+      <div class="card-author__image">
+        <img src="../assets/images/man.png" alt="">
       </div>
-      <a href="#" class="author__url">{{ author_url }}</a>
-      <span class="author__bot-counts">{{ author_bot_counts }} bots</span>
+      <div class="card-author__info">
+        <div class="author__name">{{ author_name }}</div>
+        <div class="author__info">
+        <span class="author__location">
+          {{ author_location }}
+        </span>
+          <span class="author__joined">
+          Joined {{ author_joined }} · last seen {{ author_last_seen }}
+        </span>
+        </div>
+        <a href="#" class="author__url">{{ author_url }}</a>
+        <span class="author__bot-counts">{{ author_bot_counts }} bots</span>
+      </div>
+    </div>
+    <div class="card-author">
+      <div class="card-author__image">
+        <img src="../assets/images/man.png" alt="">
+      </div>
+      <div class="card-author__info">
+        <div class="author__name">{{ author_name }}</div>
+        <div class="author__info">
+        <span class="author__location">
+          {{ author_location }}
+        </span>
+          <span class="author__joined">
+          Joined {{ author_joined }} · last seen {{ author_last_seen }}
+        </span>
+        </div>
+        <a href="#" class="author__url">{{ author_url }}</a>
+        <span class="author__bot-counts">{{ author_bot_counts }} bots</span>
+      </div>
+    </div>
+    <div class="card-author">
+      <div class="card-author__image">
+        <img src="../assets/images/man.png" alt="">
+      </div>
+      <div class="card-author__info">
+        <div class="author__name">{{ author_name }}</div>
+        <div class="author__info">
+        <span class="author__location">
+          {{ author_location }}
+        </span>
+          <span class="author__joined">
+          Joined {{ author_joined }} · last seen {{ author_last_seen }}
+        </span>
+        </div>
+        <a href="#" class="author__url">{{ author_url }}</a>
+        <span class="author__bot-counts">{{ author_bot_counts }} bots</span>
+      </div>
     </div>
   </div>
 </template>
