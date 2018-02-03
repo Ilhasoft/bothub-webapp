@@ -1,5 +1,5 @@
 <template>
-  <div class="card-list">
+  <div class="card-bot__list">
     <div class="card-bot">
       <ul class="bot-card__summary">
         <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
@@ -126,6 +126,9 @@ export default {
     transition: all .2s ease-in-out;
     align-items: center;
     margin: 30px 15px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:hover {
       box-shadow: 0 0 20px 5px rgba($dark-green,.1);
     }
