@@ -2,8 +2,59 @@
   <div class="footer">
     <div class="container">
       <div class="footer__content">
-        <div class="brand">
-          <img src="../assets/images/logo-white.svg" alt="">
+        <div class="footer-col nav-box">
+          <div class="brand">
+            <img src="../assets/images/logo-white.svg" alt="">
+          </div>
+          <ul class="footer-nav">
+            <li class="footer-nav__item"><a href="#">Terms & conditions</a></li>
+            <li class="footer-nav__item"><a href="#">Privacy policy</a></li>
+            <li class="footer-nav__item"><a href="#">Copyrights Notification</a></li>
+          </ul>
+          <ul class="social-nav">
+            <li class="social-nav__item facebook">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="social-nav__item gplus">
+              <a href="#">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+            </li>
+            <li class="social-nav__item instagram">
+              <a href="#">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li class="social-nav__item twitter">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col contact-box">
+          <h4>Contact Us</h4>
+          <div class="vcard">
+            <span class="email">bothub@contact.com</span>
+            <span class="address">
+              Rua José Pontes de Magalhães
+              70, JTR Ed. Espanha Sala 803,
+              Jatiúca - Maceió AL
+            </span>
+            <span class="tel">+55 82 3022.5978</span>
+          </div>
+        </div>
+
+        <div class="footer-col subscribe-box">
+          <h4>Subscribe</h4>
+          <span>
+            Enter your email to get notified about our new solutions
+          </span>
+          <input type="text">
+          <buttom>GO</buttom>
         </div>
       </div>
     </div>
@@ -19,6 +70,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

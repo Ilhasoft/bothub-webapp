@@ -38,7 +38,6 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/scss/_colors';
-  /*Bot Category*/
   .bot-category {
     padding: 50px 10px 0;
     background-color: #F8F8F8;

@@ -19,8 +19,47 @@
   justify-content: center;
   .brand {
     width: 140px;
+    margin-bottom: 40px;
     img {
       width: 140px;
     }
   }
+}
+
+.footer-col {
+  width: 33.33%;
+  padding: 0 30px;
+}
+
+.footer-nav,
+.social-nav {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  display: flex;
+
+  a {
+    color: #5E5786;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+      color: #aba8c2;
+    }
+  }
+}
+
+.footer-nav {
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.footer-nav__item {
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
 }
