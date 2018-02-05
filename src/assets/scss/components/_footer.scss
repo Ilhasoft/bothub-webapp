@@ -112,7 +112,9 @@
   }
 }
 
+//--------------------------------
 // Contact Us
+//--------------------------------
 
 .vcard {
 
@@ -137,4 +139,75 @@
 
 .locality {
   padding-bottom: 20px;
+}
+
+//--------------------------------
+// Subscribe
+//--------------------------------
+
+.subscribe-box__description {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.subscribe-box__input {
+  background-color: #3B326B;
+  border-radius: 5px;
+  display: flex;
+
+  input {
+    background-color: transparent;
+    border: 0 solid transparent !important;
+    font-weight: 300;
+    color: #FFFFFF;
+    font-size: 14px;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #766F97;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: #766F97;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: #766F97;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+      color: #766F97;
+    }
+
+    &:focus {
+      background-color: #766ea7;
+
+      &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #FFFFFF;
+      }
+      &::-moz-placeholder { /* Firefox 19+ */
+        color: #FFFFFF;
+      }
+      &:-ms-input-placeholder { /* IE 10+ */
+        color: #FFFFFF;
+      }
+      &:-moz-placeholder { /* Firefox 18- */
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .btn-subscribe {
+    padding: 0 20px;
+    border-radius: 0 5px 5px 0;
+    font-size: 30px;
+    border: none;
+    color: #7E9AF8;
+    transition: all 0.2s ease-in-out;
+    background-color: #2a206b;
+
+    &:hover {
+      color: #FFFFFF;
+    }
+  }
 }

@@ -54,11 +54,13 @@
 
         <div class="footer-col subscribe-box">
           <h4 class="footer-col__title">Subscribe</h4>
-          <span>
+          <span class="subscribe-box__description">
             Enter your email to get notified about our new solutions
           </span>
-          <input type="text">
-          <buttom>GO</buttom>
+          <div class="subscribe-box__input">
+            <input type="text" name="" placeholder="Email">
+            <button class="btn-subscribe"><i class="material-icons">mail_outline</i></button>
+          </div>
         </div>
       </div>
     </div>
