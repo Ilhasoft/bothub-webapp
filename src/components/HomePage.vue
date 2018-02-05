@@ -8,35 +8,7 @@
 
     <div class="bot-category">
       <div class="container">
-        <ul class="bot-category__list">
-          <li class="bot-category__item">
-            <a class="bot-category__content bot-category__content--active" href="">All bots</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Business</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Communication</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Project</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Education</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Entertainment</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Finance</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Health</a>
-          </li>
-          <li class="bot-category__item">
-            <a class="bot-category__content" href="">Identity</a>
-          </li>
-        </ul>
+          <bot-category></bot-category>
       </div>
     </div>
 
@@ -53,16 +25,7 @@
 
     <!--<div class="badge badge&#45;&#45;danger">Danger</div>-->
 
-    <section class="cta">
-      <div class="cta-content">
-        <p>
-          Bothub is a project created for and by developers.
-          for and by developers. Are you a developers
-          Would you like to collaborate.
-        </p>
-        <a href="#" class="btn">Start your Bot</a>
-      </div>
-    </section>
+    <cta></cta>
 
     <section class="top-bots">
       <div class="container">
@@ -88,34 +51,29 @@
       </div>
     </section>
 
-    <div class="footer">
-      <div class="container">
-        <div class="footer__content">
-          <div class="brand">
-            <img src="../assets/images/logo-white.svg" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="site-info">
-        Bothub is a project by ilhasoft. © 2017 All rights reserved. IMGBG-By Julie - Busy City
-      </div>
-    </div>
+    <home-footer></home-footer>
   </div>
 </template>
 
 <script>
+import TopBar from './TopBar.vue'
+import Search from './Search.vue'
+import BotCategory from './BotCategory.vue'
 import CardBot from './CardBot.vue'
 import CardAuthor from './CardAuthor.vue'
-import Search from './Search.vue'
-import TopBar from './TopBar.vue'
+import Cta from './Cta.vue'
+import HomeFooter from './HomeFooter.vue'
 
 export default {
   name: 'HomePage',
   components: {
+    TopBar,
+    Search,
+    BotCategory,
     CardBot,
     CardAuthor,
-    Search,
-    TopBar
+    Cta,
+    HomeFooter
   },
   data () {
     return {
@@ -137,44 +95,13 @@ export default {
   }
   .best-of-month,
   .top-authors,
-  .top-bots,
-  .bot-category {
+  .top-bots {
     background-color: #F8F8F8;
   }
-  /*Bot Category*/
+
   .bot-category {
     padding: 50px 10px 0;
-  }
-  .bot-category__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  .bot-category__item {
-    padding: 3px;
-    color: #000;
-    font-size: 14px;
-    .bot-category__content {
-      border: 1px solid #EAE7E6;
-      text-decoration: none;
-      padding: 15px 24px;
-      display: block;
-      border-radius: 5px;
-      color: #000;
-      transition: all 0.2s ease-in-out;
-      &:hover,
-      &--active {
-        border-color: $primary-color;
-        background-color: $primary-color;
-        color: #FFF;
-      }
-      &--active {
-        font-weight: 500;
-      }
-    }
+    background-color: #F8F8F8;
   }
 
   /*Authors List*/
@@ -182,5 +109,4 @@ export default {
     display: flex;
     flex-wrap: wrap;
   }
-
 </style>

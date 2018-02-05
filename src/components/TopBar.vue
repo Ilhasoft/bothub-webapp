@@ -16,7 +16,9 @@
 </template>
 
 <script>
-
+export default {
+  name: 'TopBar'
+}
 </script>
 
 <style scoped lang="scss">
