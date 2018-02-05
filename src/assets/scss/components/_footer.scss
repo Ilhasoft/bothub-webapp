@@ -26,10 +26,18 @@
   }
 }
 
+//--------------------------------
+// Create Footer Columns
+//--------------------------------
+
 .footer-col {
   width: 33.33%;
   padding: 0 30px;
 }
+
+//--------------------------------
+// Common Config
+//--------------------------------
 
 .footer-nav,
 .social-nav {
@@ -37,6 +45,16 @@
   margin: 20px 0;
   padding: 0;
   display: flex;
+}
+
+//--------------------------------
+// Footer Nav Config
+//--------------------------------
+
+.footer-nav {
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 300;
 
   a {
     color: #5E5786;
@@ -49,17 +67,40 @@
   }
 }
 
-.footer-nav {
-  flex-direction: column;
-  font-size: 14px;
-  font-weight: 300;
-}
-
 .footer-nav__item {
   margin-bottom: 10px;
 
   &:last-child {
     margin-bottom: 0;
   }
+}
 
+//--------------------------------
+// Social Nav Config
+//--------------------------------
+
+.social-nav {
+
+}
+.social-nav__item {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  margin-right: 5px;
+
+  a {
+    background-color: #5E5786;
+    border-radius: 50px;
+    width: 100%;
+    color: $brand-color;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #aba8c2;
+    }
+  }
 }
