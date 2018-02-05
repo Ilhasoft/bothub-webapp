@@ -36,20 +36,24 @@
         </div>
 
         <div class="footer-col contact-box">
-          <h4>Contact Us</h4>
+          <h4 class="footer-col__title">Contact Us</h4>
           <div class="vcard">
             <span class="email">bothub@contact.com</span>
-            <span class="address">
-              Rua José Pontes de Magalhães
-              70, JTR Ed. Espanha Sala 803,
-              Jatiúca - Maceió AL
-            </span>
+            <address class="adr">
+              <span class="street-address">
+                Rua José Pontes de Magalhães <br>
+                70, JTR Ed. Espanha Sala 803,
+              </span>
+              <span class="locality">
+                Jatiúca - Maceió AL
+              </span>
+            </address>
             <span class="tel">+55 82 3022.5978</span>
           </div>
         </div>
 
         <div class="footer-col subscribe-box">
-          <h4>Subscribe</h4>
+          <h4 class="footer-col__title">Subscribe</h4>
           <span>
             Enter your email to get notified about our new solutions
           </span>

@@ -14,7 +14,7 @@
 }
 
 .footer__content {
-  padding: 50px 15px;
+  padding: 50px 15px 30px;
   display: flex;
   justify-content: center;
   .brand {
@@ -33,6 +33,13 @@
 .footer-col {
   width: 33.33%;
   padding: 0 30px;
+}
+
+.footer-col__title {
+  text-transform: uppercase;
+  font-weight: 300;
+  color: #FFF;
+  font-size: 16px;
 }
 
 //--------------------------------
@@ -80,7 +87,7 @@
 //--------------------------------
 
 .social-nav {
-
+  margin: 20px 0;
 }
 .social-nav__item {
   width: 30px;
@@ -103,4 +110,31 @@
       background-color: #aba8c2;
     }
   }
+}
+
+// Contact Us
+
+.vcard {
+
+}
+.email,
+.street-address,
+.locality,
+.adr,
+.tel {
+  display: block;
+  font-size: 14px;
+}
+
+.adr {
+  font-style: normal;
+  line-height: 18px;
+}
+
+.street-address {
+  padding-top: 20px;
+}
+
+.locality {
+  padding-bottom: 20px;
 }
