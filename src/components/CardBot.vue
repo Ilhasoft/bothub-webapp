@@ -1,5 +1,4 @@
 <template>
-  <div class="card-bot__list">
     <div class="card-bot">
       <ul class="bot-card__summary">
         <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
@@ -46,53 +45,6 @@
         <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
       </div>
     </div>
-    <div class="card-bot">
-      <ul class="bot-card__summary">
-        <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
-        <li class="bot-summary__item">547 copy <i class="material-icons">content_copy</i></li>
-        <li class="bot-summary__item">321 stars <i class="material-icons">grade</i></li>
-      </ul>
-      <up-down-vote></up-down-vote>
-      <div class="card-bot__image">
-        <img src="../assets/images/avatar.png" alt="">
-      </div>
-      <div class="card-bot__content">
-        <div class="card-bot__header">
-          <span class="card-bot__title">{{ bot_title }}</span>
-          <span class="card-bot__author">{{ bot_author }}</span>
-        </div>
-        <div class="card-bot__info">
-          <div class="card-bot__updated">
-            Updated 2 weeks ago by {{ bot_author_name }}
-          </div>
-          <ul class="card-bot__flags">
-            <li class="flags-item"><img src="../assets/images/flags/EN.png" alt="Flag ES"></li>
-            <li class="flags-item"><img src="../assets/images/flags/ES.png" alt="Flag ES"></li>
-            <li class="flags-item"><img src="../assets/images/flags/PT.png" alt="Flag PT"></li>
-            <li class="flags-item"><img src="../assets/images/flags/IT.png" alt="Flag IT"></li>
-            <li class="flags-item"><img src="../assets/images/flags/NL.png" alt="Flag NL"></li>
-            <li class="flags-item"><img src="../assets/images/flags/FR.png" alt="Flag FR"></li>
-            <li class="flags-item"><img src="../assets/images/flags/DE.png" alt="Flag DE"></li>
-          </ul>
-        </div>
-        <div class="card-bot__excerpt">
-          {{ bot_text }}
-        </div>
-        <div class="card-bot__badge">
-          <span class="badge">cheers</span>
-          <span class="badge">bug</span>
-          <span class="badge">precaution</span>
-          <span class="badge">virus</span>
-          <span class="badge">disease</span>
-          <span class="badge">symptoms</span>
-          <span class="badge">...</span>
-        </div>
-      </div>
-      <div class="bot-action">
-        <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>

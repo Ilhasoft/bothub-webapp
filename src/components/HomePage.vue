@@ -46,6 +46,8 @@
           {{ best_of_month_title }}
         </h3>
         <card-bot></card-bot>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
       </div>
     </section>
 
@@ -68,6 +70,8 @@
           {{ top_bots }}
         </h3>
         <card-bot></card-bot>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
       </div>
     </section>
 
@@ -76,7 +80,11 @@
         {{ top_authors_title }}
       </h3>
       <div class="container">
-        <card-author></card-author>
+        <div class="authors-list">
+          <card-author></card-author>
+          <card-author></card-author>
+          <card-author></card-author>
+        </div>
       </div>
     </section>
 
@@ -133,6 +141,7 @@ export default {
   .bot-category {
     background-color: #F8F8F8;
   }
+  /*Bot Category*/
   .bot-category {
     padding: 50px 10px 0;
   }
@@ -166,6 +175,12 @@ export default {
         font-weight: 500;
       }
     }
+  }
+
+  /*Authors List*/
+  .authors-list {
+    display: flex;
+    flex-wrap: wrap;
   }
 
 </style>
