@@ -1,99 +1,87 @@
 <template>
-  <div class="container">
-    <!--<topbar></topbar>-->
-    <h1>{{ mensagem }} <span>{{ subtitulo }}</span></h1>
-    <div class="search">
+  <div class="main">
+    <top-bar></top-bar>
+
+    <div class="container">
       <search></search>
     </div>
-    <div class="card-list">
+
+    <div class="bot-category">
+      <div class="container">
+          <bot-category></bot-category>
+      </div>
+    </div>
+
+    <section class="best-of-month">
+      <div class="container">
+        <h3 class="section-title">
+          {{ best_of_month_title }}
+        </h3>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
+      </div>
+    </section>
+
+    <!--<div class="badge badge&#45;&#45;danger">Danger</div>-->
+
+    <cta></cta>
+
+    <section class="top-bots">
+      <div class="container">
+        <h3 class="section-title">
+          {{ top_bots }}
+        </h3>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
+        <card-bot></card-bot>
+      </div>
+    </section>
+
+    <cta></cta>
+
+    <section class="top-authors">
       <h3 class="section-title">
-        Best bots of the month
+        {{ top_authors_title }}
       </h3>
-    </div>
+      <div class="container">
+        <div class="authors-list">
+          <card-author></card-author>
+          <card-author></card-author>
+          <card-author></card-author>
+        </div>
+      </div>
+    </section>
 
-    <div class="badge badge--danger">Danger</div>
-    <card-bot></card-bot>
-
-  <section class="top-authors">
-    <h3 class="section-title">
-      Top Authors
-    </h3>
-    <div class="authors-list">
-      <div class="card-author">
-        <div class="card-author__image">
-          <img src="../assets/images/man.png" alt="">
-        </div>
-        <div class="card-author__info">
-          <div class="author__name">Matthew Russell</div>
-          <div class="author__info">
-          <span class="author__location">
-            Granada, Andalusia, Spain
-          </span>
-            <span class="author__joined">
-            Joined 2 years ago · last seen 9 days ago
-          </span>
-          </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
-          <span class="author__bot-counts">60 bots</span>
-        </div>
-      </div>
-      <div class="card-author">
-        <div class="card-author__image">
-          <img src="../assets/images/man.png" alt="">
-        </div>
-        <div class="card-author__info">
-          <div class="author__name">Matthew Russell</div>
-          <div class="author__info">
-          <span class="author__location">
-            Granada, Andalusia, Spain
-          </span>
-            <span class="author__joined">
-            Joined 2 years ago · last seen 9 days ago
-          </span>
-          </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
-          <span class="author__bot-counts">60 bots</span>
-        </div>
-      </div>
-      <div class="card-author">
-        <div class="card-author__image">
-          <img src="../assets/images/man.png" alt="">
-        </div>
-        <div class="card-author__info">
-          <div class="author__name">Matthew Russell</div>
-          <div class="author__info">
-          <span class="author__location">
-            Granada, Andalusia, Spain
-          </span>
-            <span class="author__joined">
-            Joined 2 years ago · last seen 9 days ago
-          </span>
-          </div>
-          <a href="#" class="auhor__url">http://davidgasquez.buthub.api/</a>
-          <span class="author__bot-counts">60 bots</span>
-        </div>
-      </div>
-    </div>
-  </section>
+    <home-footer></home-footer>
   </div>
 </template>
 
 <script>
-import CardBot from './CardBot.vue'
-import Search from './Search.vue'
 import TopBar from './TopBar.vue'
+import Search from './Search.vue'
+import BotCategory from './BotCategory.vue'
+import CardBot from './CardBot.vue'
+import CardAuthor from './CardAuthor.vue'
+import Cta from './Cta.vue'
+import HomeFooter from './HomeFooter.vue'
 
 export default {
   name: 'HomePage',
   components: {
-    CardBot,
+    TopBar,
     Search,
-    TopBar
+    BotCategory,
+    CardBot,
+    CardAuthor,
+    Cta,
+    HomeFooter
   },
   data () {
     return {
-      mensagem: 'Robot Society',
-      subtitulo: 'TRAIN YOURS'
+      best_of_month_title: 'Best bots of the month',
+      top_bots: 'Top Bots',
+      top_authors_title: 'Top Authors'
     }
   }
 }
@@ -101,43 +89,26 @@ export default {
 
 <style scoped lang="scss">
   @import '../assets/scss/_variables';
-  h1 {
-    font-family: $font-secondary;
-    width: 100%;
-    position: relative;
-    margin: 0 auto;
-    font-weight: normal;
-    background-color: #42b983;
-    text-align: center;
-    span {
-      color: #FFF;
-      display: block;
-      font-size: 16px;
-      font-weight: 300;
-    }
+  @import '../assets/scss/_colors';
+  .best-of-month,
+  .top-bots,
+  .top-authors {
+    padding: 40px 0;
   }
-/*Card Author */
+  .best-of-month,
+  .top-authors,
+  .top-bots {
+    background-color: #F8F8F8;
+  }
+
+  .bot-category {
+    padding: 50px 10px 0;
+    background-color: #F8F8F8;
+  }
+
+  /*Authors List*/
   .authors-list {
     display: flex;
-  }
-  .card-author {
-    background-color: #fff;
-    border-radius: 10px;
-    width: 33%;
-    padding: 20px;
-    display: flex;
-    margin: 15px;
-  }
-  .card-author__image {
-    width: 100px;
-    margin-right: 20px;
-    overflow: hidden;
-    border-radius: 10px;
-    img {
-      width: 100%;
-    }
-  }
-  .card-author__info {
-    width: calc(100% - 120px);
+    flex-wrap: wrap;
   }
 </style>

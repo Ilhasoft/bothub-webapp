@@ -1,3 +1,8 @@
 * {
  box-sizing: border-box;
 }
+
+body {
+  background: $primary-color url("../images/bg.jpg") no-repeat center top fixed;
+  background-size: cover;
+}

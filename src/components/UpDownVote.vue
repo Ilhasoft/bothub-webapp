@@ -21,9 +21,15 @@
     font-size: 20px;
     padding: 5px 10px;
     border-radius: 20px 0 0 20px;
-    color: #FFF;
+    color: #AEAEAE;
     text-align: center;
-    background-color: $dark-green;
+    background-color: #F2F2F2;
+    box-shadow: inset 0 2px 6px -2px #929292;
+    &-active {
+      background-color: $dark-green;
+      box-shadow: inset 0 2px 6px 0 #1b756a;
+      color: #FFF;
+    }
   }
   .vote-button {
     color: $dark-green2;

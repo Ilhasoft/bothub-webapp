@@ -1,51 +1,50 @@
 <template>
-  <div class="card-bot">
-    <ul class="bot-card__summary">
-      <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
-      <li class="bot-summary__item">547 copy <i class="material-icons">content_copy</i></li>
-      <li class="bot-summary__item">321 stars <i class="material-icons">grade</i></li>
-    </ul>
-    <up-down-vote></up-down-vote>
-    <div class="card-bot__image">
-      <img src="../assets/images/avatar.png" alt="">
-    </div>
-    <div class="card-bot__content">
-      <div class="card-bot__header">
-        <span class="card-bot__title">{{ bot_title }}</span>
-        <span class="card-bot__author">{{ bot_author }}</span>
+    <div class="card-bot">
+      <ul class="bot-card__summary">
+        <li class="bot-summary__item">6547 issues <i class="material-icons">lightbulb_outline</i></li>
+        <li class="bot-summary__item">547 copy <i class="material-icons">content_copy</i></li>
+        <li class="bot-summary__item">321 stars <i class="material-icons">grade</i></li>
+      </ul>
+      <up-down-vote></up-down-vote>
+      <div class="card-bot__image">
+        <img src="../assets/images/avatar.png" alt="">
       </div>
-      <div class="card-bot__info">
-        <div class="card-bot__updated">
-          Updated 2 weeks ago by {{ bot_author_name }}
+      <div class="card-bot__content">
+        <div class="card-bot__header">
+          <span class="card-bot__title">{{ bot_title }}</span>
+          <span class="card-bot__author">{{ bot_author }}</span>
         </div>
-        <ul class="card-bot__flags">
-          <li class="flags-item"><img src="../assets/images/flags/EN.png" alt="Flag ES"></li>
-          <li class="flags-item"><img src="../assets/images/flags/ES.png" alt="Flag ES"></li>
-          <li class="flags-item"><img src="../assets/images/flags/PT.png" alt="Flag PT"></li>
-          <li class="flags-item"><img src="../assets/images/flags/IT.png" alt="Flag IT"></li>
-          <li class="flags-item"><img src="../assets/images/flags/NL.png" alt="Flag NL"></li>
-          <li class="flags-item"><img src="../assets/images/flags/FR.png" alt="Flag FR"></li>
-          <li class="flags-item"><img src="../assets/images/flags/DE.png" alt="Flag DE"></li>
-        </ul>
+        <div class="card-bot__info">
+          <div class="card-bot__updated">
+            Updated 2 weeks ago by {{ bot_author_name }}
+          </div>
+          <ul class="card-bot__flags">
+            <li class="flags-item"><img src="../assets/images/flags/EN.png" alt="Flag ES"></li>
+            <li class="flags-item"><img src="../assets/images/flags/ES.png" alt="Flag ES"></li>
+            <li class="flags-item"><img src="../assets/images/flags/PT.png" alt="Flag PT"></li>
+            <li class="flags-item"><img src="../assets/images/flags/IT.png" alt="Flag IT"></li>
+            <li class="flags-item"><img src="../assets/images/flags/NL.png" alt="Flag NL"></li>
+            <li class="flags-item"><img src="../assets/images/flags/FR.png" alt="Flag FR"></li>
+            <li class="flags-item"><img src="../assets/images/flags/DE.png" alt="Flag DE"></li>
+          </ul>
+        </div>
+        <div class="card-bot__excerpt">
+          {{ bot_text }}
+        </div>
+        <div class="card-bot__badge">
+          <span class="badge">cheers</span>
+          <span class="badge">bug</span>
+          <span class="badge">precaution</span>
+          <span class="badge">virus</span>
+          <span class="badge">disease</span>
+          <span class="badge">symptoms</span>
+          <span class="badge">...</span>
+        </div>
       </div>
-      <div class="card-bot__excerpt">
-        {{ bot_text }}
-      </div>
-      <div class="card-bot__badge">
-        <span class="badge">cheers</span>
-        <span class="badge">bug</span>
-        <span class="badge">precaution</span>
-        <span class="badge">virus</span>
-        <span class="badge">disease</span>
-        <span class="badge">symptoms</span>
-        <span class="badge">...</span>
+      <div class="bot-action">
+        <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
       </div>
     </div>
-    <div class="bot-action">
-      <a href="#" class="btn btn-update">Update <i class="material-icons">refresh</i></a>
-      <a href="#" class="btn btn-available-update">Available Update <i class="material-icons">refresh</i></a>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -69,18 +68,34 @@ export default {
 
 <style scoped lang="scss">
   @import "../assets/scss/_colors";
+  .card-bot__list {
+    /*Config for large devices*/
+    @media (min-width: 2000px) {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+  }
   .card-bot {
     display: flex;
+    flex-wrap: wrap;
     background-color: #FFF;
     border-radius: 20px;
     padding: 20px;
-    flex-wrap: wrap;
     position: relative;
     transition: all .2s ease-in-out;
     align-items: center;
-    margin-bottom: 30px;
+    margin: 30px 15px;
+    &:last-child {
+      margin-bottom: 0;
+    }
     &:hover {
-      box-shadow: 0 0 20px 5px rgba($dark-green,.2);
+      box-shadow: 0 0 20px 5px rgba($dark-green,.1);
+    }
+    /*Config for large devices*/
+    @media (min-width: 2000px) {
+      width: calc(50% - 40px);
+      height: 10vh;
     }
   }
   .card-bot__title,
@@ -172,8 +187,8 @@ export default {
   }
   .bot-action {
     position: absolute;
-    bottom: 10px;
-    right: 0;
+    bottom: 20px;
+    right: 20px;
     z-index: 2;
   }
 </style>
