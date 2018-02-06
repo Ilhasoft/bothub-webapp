@@ -38,6 +38,8 @@
       </div>
     </section>
 
+    <cta></cta>
+
     <section class="top-authors">
       <h3 class="section-title">
         {{ top_authors_title }}
