@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - "node"
+before_script:
+  - yarn install
+script:
+  - yarn run lin
+  - yarn test
+after_success:
+  - yarn run coveralls
