@@ -4,7 +4,8 @@ node_js:
 before_script:
   - yarn install
 script:
-  - yarn run lin
+  - yarn run lint
   - yarn test
+  - yarn run build
 after_success:
   - yarn run coveralls
