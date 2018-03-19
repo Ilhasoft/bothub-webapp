@@ -8,11 +8,13 @@
 <script>
 import AuthStatus from '@/components/shared/AuthStatus';
 
+const components = {
+  'auth-status': AuthStatus,
+};
+
 export default {
   name: 'HelloWorld',
-  components: {
-    'auth-status': AuthStatus,
-  },
+  components,
 };
 </script>
 
