@@ -1,30 +1,37 @@
 <template>
-  <form @submit="onSubmit">
+  <form @submit.prevent="onSubmit">
     <field
       label="E-mail"
       help-text="Type your e-mail"
+      :errors="errors.username"
     >
       <email-input
         is-required
         v-model="data.username"
+        @input="cleanFieldErrors('username')"
       />
     </field>
     <field
       label="Password"
+      :errors="errors.password"
     >
       <text-input
         type="password"
         is-required
         :max-length=16
         v-model="data.password"
+        @input="cleanFieldErrors('password')"
       />
     </field>
-    <p>{{ data }}</p>
-    <button type="submit">Login</button>
+    <button
+      type="submit"
+      :disabled="submitting"
+    >Login</button>
   </form>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Field from '@/components/shared/form/Field';
 import EmailInput from '@/components/shared/form/inputs/EmailInput';
 import TextInput from '@/components/shared/form/inputs/TextInput';
@@ -40,16 +47,37 @@ export default {
   components,
   data() {
     return {
+      submitting: false,
       data: {
         username: '',
         password: '',
       },
+      errors: {},
     };
   },
   methods: {
-    onSubmit() {
-      this.$emit('submit');
+    async onSubmit() {
+      this.errors = {};
+      this.submitting = true;
+
+      try {
+        await this.login(this.data);
+      } catch (error) {
+        const data = error.response && error.response.data;
+        if (data) {
+          this.errors = data;
+        }
+        this.submitting = false;
+      }
+
+      return false;
     },
+    cleanFieldErrors(field) {
+      this.errors[field] = [];
+    },
+    ...mapActions([
+      'login',
+    ]),
   },
 };
 </script>
