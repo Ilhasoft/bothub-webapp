@@ -2,17 +2,17 @@
   <div class="hello">
     <h1>Bothub</h1>
     <h2><auth-status /></h2>
-    <login />
+    <login-form />
   </div>
 </template>
 
 <script>
 import AuthStatus from '@/components/auth/AuthStatus';
-import Login from '@/components/auth/LoginForm';
+import LoginForm from '@/components/auth/LoginForm';
 
 const components = {
   'auth-status': AuthStatus,
-  login: Login,
+  LoginForm,
 };
 
 export default {
