@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
-import AuthStatus from '@/components/shared/AuthStatus';
+import AuthStatus from '@/components/auth/AuthStatus';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
