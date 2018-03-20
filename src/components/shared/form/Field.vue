@@ -2,8 +2,10 @@
   <div class="field">
     <label>{{ label }}:</label>
     <slot />
-    <div v-if="helpText && !validateError" class="help-text">{{ helpText }}</div>
-    <div v-if="validateError" class="validate-error">{{ validateError }}</div>
+    <div v-if="helpText && errorsList.length === 0" class="help-text">{{ helpText }}</div>
+    <ul v-if="errorsList.length > 0" class="errors-list">
+      <li v-for="(error, index) in errorsList" :key="index">{{ error }}</li>
+    </ul>
   </div>
 </template>
 
@@ -18,11 +20,22 @@ export default {
     helpText: {
       type: String,
     },
+    errors: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   data() {
     return {
       validateError: false,
     };
+  },
+  computed: {
+    errorsList() {
+      if (this.validateError) return [this.validateError];
+      if (this.errors.length > 0) return this.errors;
+      return [];
+    },
   },
   mounted() {
     if (this.$slots.default) {
@@ -56,10 +69,15 @@ export default {
     margin: 4px 0;
   }
 
-  .validate-error {
-    @extend .help-text;
+  .errors-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 
-    color: red;
+    li {
+      @extend .help-text;
+      color: red;
+    }
   }
 }
 </style>
