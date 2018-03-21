@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit">
+    <messages :msgs="msgs" />
     <field
       label="E-mail"
       help-text="Type your e-mail"
@@ -35,11 +36,13 @@ import { mapActions } from 'vuex';
 import Field from '@/components/shared/form/Field';
 import EmailInput from '@/components/shared/form/inputs/EmailInput';
 import TextInput from '@/components/shared/form/inputs/TextInput';
+import Messages from '@/components/shared/Messages';
 
 const components = {
   Field,
   EmailInput,
   TextInput,
+  Messages,
 };
 
 export default {
@@ -54,6 +57,12 @@ export default {
       },
       errors: {},
     };
+  },
+  computed: {
+    msgs() {
+      return (this.errors.non_field_errors &&
+        this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
+    },
   },
   methods: {
     async onSubmit() {
