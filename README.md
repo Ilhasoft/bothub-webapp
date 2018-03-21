@@ -1,6 +1,8 @@
-# bothub-webapp
+# bothub webapp
 
-> bothub webapp
+[![Build Status](https://travis-ci.org/push-flow/bothub.svg?branch=master)](https://travis-ci.org/push-flow/bothub)
+
+[![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub?branch=master)
 
 ## Build Setup
 
