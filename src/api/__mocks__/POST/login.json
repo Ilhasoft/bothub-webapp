@@ -5,9 +5,21 @@
       "password": "123456"
     },
     "response": {
-      "code": 200,
+      "status": 200,
       "data": {
         "token": "1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+      }
+    }
+  },
+  {
+    "data": {
+      "username": "fake@user.com",
+      "password": "123"
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "non_field_errors": ["Invalid password"]
       }
     }
   }

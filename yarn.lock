@@ -6226,7 +6226,7 @@ repeating@^2.0.0:
 
 "request-mockup-json@https://github.com/douglasppaz/request-mockup-json#develop":
   version "0.1.0"
-  resolved "https://github.com/douglasppaz/request-mockup-json#771a6fb1b98ac0bffebf7d957223c12242c0c076"
+  resolved "https://github.com/douglasppaz/request-mockup-json#0604e5e9ba4e753b1c2ff473d2a5225151fc7192"
 
 request-promise-core@1.1.1:
   version "1.1.1"

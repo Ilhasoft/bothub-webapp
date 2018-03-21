@@ -1,6 +1,10 @@
 import requestMockupJson from 'request-mockup-json';
 
+const config = {
+  mockupsPath: __dirname,
+};
+
 export default {
-  get: requestMockupJson.create('GET', __dirname),
-  post: requestMockupJson.create('POST', __dirname),
+  get: requestMockupJson.create('GET', config),
+  post: requestMockupJson.create('POST', config),
 };
