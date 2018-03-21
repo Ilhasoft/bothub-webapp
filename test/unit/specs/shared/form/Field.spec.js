@@ -31,7 +31,7 @@ describe('Field.vue', () => {
       const errorMsg = 'ERROR!!_';
       wrapper.vm.validateError = errorMsg;
       Vue.nextTick(() => {
-        const validateErrorElem = wrapper.find('.field .validate-error').element;
+        const validateErrorElem = wrapper.find('.field .errors-list li').element;
         expect(validateErrorElem.textContent)
           .toBe(errorMsg);
         done();
