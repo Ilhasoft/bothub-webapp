@@ -4,7 +4,10 @@
     <slot />
     <div v-if="helpText && errorsList.length === 0" class="help-text">{{ helpText }}</div>
     <ul v-if="errorsList.length > 0" class="errors-list">
-      <li v-for="(error, index) in errorsList" :key="index">{{ error }}</li>
+      <li
+        v-for="(error, index) in errorsList"
+        :key="index"
+        class="item">{{ error }}</li>
     </ul>
   </div>
 </template>
@@ -74,7 +77,7 @@ export default {
     margin: 0;
     list-style: none;
 
-    li {
+    .item {
       @extend .help-text;
       color: red;
     }

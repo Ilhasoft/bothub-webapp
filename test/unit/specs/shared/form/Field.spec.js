@@ -3,17 +3,14 @@ import { shallow } from '@vue/test-utils';
 import Field from '@/components/shared/form/Field';
 import TextInput from '@/components/shared/form/inputs/TextInput';
 
+const getWrapper = (propsData, slots = {}) => (shallow(Field, { propsData, slots }));
+
 describe('Field.vue', () => {
   const label = 'LABEL_!!';
   const helpText = 'HELP_!!TEXT';
 
   describe('empty', () => {
-    const wrapper = shallow(Field, {
-      propsData: {
-        label,
-        helpText,
-      },
-    });
+    const wrapper = getWrapper({ label, helpText });
 
     it('correct label', () => {
       const labelElem = wrapper.find('.field label').element;
@@ -31,7 +28,7 @@ describe('Field.vue', () => {
       const errorMsg = 'ERROR!!_';
       wrapper.vm.validateError = errorMsg;
       Vue.nextTick(() => {
-        const validateErrorElem = wrapper.find('.field .errors-list li').element;
+        const validateErrorElem = wrapper.find('.field .errors-list .item').element;
         expect(validateErrorElem.textContent)
           .toBe(errorMsg);
         done();
@@ -40,15 +37,12 @@ describe('Field.vue', () => {
   });
 
   describe('with input', () => {
-    const wrapper = shallow(Field, {
-      propsData: {
-        label,
-        helpText,
-      },
-      slots: {
+    const wrapper = getWrapper(
+      { label, helpText },
+      {
         default: TextInput,
       },
-    });
+    );
 
     it('contains input', () => {
       expect(wrapper.contains('input'))
@@ -60,5 +54,17 @@ describe('Field.vue', () => {
       const textInput = wrapper.vm.$slots.default[0].componentInstance;
       textInput.$emit('validate', validateValue);
     });
+  });
+
+  it('with prop errors', () => {
+    const wrapper = getWrapper(
+      {
+        label,
+        helpText,
+        errors: ['hi'],
+      },
+    );
+    expect(wrapper.findAll('.errors-list .item').length)
+      .toBe(1);
   });
 });
