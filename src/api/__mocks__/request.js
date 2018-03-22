@@ -5,6 +5,8 @@ const config = {
 };
 
 export default {
-  get: requestMockupJson.create('GET', config),
-  post: requestMockupJson.create('POST', config),
+  $http: {
+    get: requestMockupJson.create('GET', config),
+    post: requestMockupJson.create('POST', config),
+  },
 };
