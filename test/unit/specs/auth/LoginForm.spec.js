@@ -35,4 +35,12 @@ describe('LoginForm.vue', () => {
       .toBeFalsy();
     done();
   });
+
+  it('clean field errors', () => {
+    const wrapper = getWrapper();
+    const field = 'username';
+    wrapper.vm.cleanFieldErrors(field);
+    expect(wrapper.vm.errors[field])
+      .toHaveLength(0);
+  });
 });
