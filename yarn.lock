@@ -6048,6 +6048,10 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
+"request-mockup-json@https://github.com/douglasppaz/request-mockup-json#develop":
+  version "0.1.0"
+  resolved "https://github.com/douglasppaz/request-mockup-json#771a6fb1b98ac0bffebf7d957223c12242c0c076"
+
 request-promise-core@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/request-promise-core/-/request-promise-core-1.1.1.tgz#3eee00b2c5aa83239cfb04c5700da36f81cd08b6"
