@@ -26,35 +26,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .messages {
-    padding: 0;
-    margin: 8px 0;
-    list-style: none;
-    border-radius: 16px;
-    overflow: hidden;
+.messages {
+  padding: 0;
+  margin: 8px 0;
+  list-style: none;
+  border-radius: 16px;
+  overflow: hidden;
 
-    .item {
-      padding: 8px 16px;
-      text-align: left;
-      font-size: 18px;
-      font-weight: bold;
-      color: black;
+  .item {
+    padding: 8px 16px;
+    text-align: left;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 
-      &.default {
-        background-color: #eeeeee;
-      }
-      &.success {
-        background-color: green;
-        color: white;
-      }
-      &.error {
-        background-color: red;
-        color: white;
-      }
-      &.warning {
-        background-color: yellow;
-      }
+    &.default {
+      background-color: #eeeeee;
+    }
+    &.success {
+      background-color: green;
+      color: white;
+    }
+    &.error {
+      background-color: red;
+      color: white;
+    }
+    &.warning {
+      background-color: yellow;
     }
   }
+}
 </style>
 
