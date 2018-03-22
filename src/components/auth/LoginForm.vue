@@ -71,6 +71,8 @@ export default {
 
       try {
         await this.login(this.data);
+        this.$emit('authenticated');
+        return true;
       } catch (error) {
         const data = error.response && error.response.data;
         if (data) {
