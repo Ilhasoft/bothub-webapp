@@ -31,7 +31,7 @@ export default {
       'closeLoginModal',
     ]),
     onAuthenticated() {
-      if (this.next) this.$router.push(this.next.path);
+      if (this.next && this.$router) this.$router.push(this.next.path);
       this.closeLoginModal();
     },
   },

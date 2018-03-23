@@ -12,9 +12,7 @@ const getWrapper = () => {
   store.replaceState({
     LoginModal: {
       open: false,
-      promise: null,
-      resolve: null,
-      reject: null,
+      next: null,
     },
   });
   return shallow(LoginModal, { store, localVue });
@@ -44,6 +42,18 @@ describe('LoginModal.vue', () => {
     it('onAuthenticated', (done) => {
       const wrapper = getWrapper();
       store.dispatch('openLoginModal');
+
+      Vue.nextTick(() => {
+        wrapper.vm.onAuthenticated();
+        expect(store.getters.loginModalOpen)
+          .toBeFalsy();
+        done();
+      });
+    });
+
+    it('onAuthenticated with next', (done) => {
+      const wrapper = getWrapper();
+      store.dispatch('openLoginModal', { path: '/myprofile/' });
 
       Vue.nextTick(() => {
         wrapper.vm.onAuthenticated();
