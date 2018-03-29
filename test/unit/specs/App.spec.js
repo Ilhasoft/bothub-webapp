@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
-import HelloWorld from '@/components/HelloWorld';
+import App from '@/App';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -11,8 +11,8 @@ localVue.use(VueRouter);
 
 describe('HelloWorld.vue', () => {
   it('should render correct contents', () => {
-    const wrapper = shallow(HelloWorld, { store, localVue });
-    const h1 = wrapper.find('.hello h1');
-    expect(h1.element.textContent).toBe('Bothub');
+    const wrapper = shallow(App, { store, localVue });
+    expect(wrapper.find({ ref: 'loginModal' }).exists())
+      .toBeTruthy();
   });
 });

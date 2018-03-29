@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <login-modal />
+    <login-modal ref="loginModal" />
     <router-view />
   </div>
 </template>
