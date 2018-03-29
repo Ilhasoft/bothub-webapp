@@ -11,7 +11,7 @@ import AuthStatus from '@/components/auth/AuthStatus';
 import LoginForm from '@/components/auth/LoginForm';
 
 const components = {
-  'auth-status': AuthStatus,
+  AuthStatus,
   LoginForm,
 };
 
