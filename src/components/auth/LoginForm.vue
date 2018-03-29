@@ -65,6 +65,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'login',
+    ]),
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
@@ -86,9 +89,6 @@ export default {
     cleanFieldErrors(field) {
       this.errors[field] = [];
     },
-    ...mapActions([
-      'login',
-    ]),
   },
 };
 </script>
