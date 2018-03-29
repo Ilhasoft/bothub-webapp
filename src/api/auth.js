@@ -18,4 +18,13 @@ export default {
       },
     );
   },
+  resetPassword(nickname, token, password) {
+    return request.$http.put(
+      `/reset-password/${nickname}/`,
+      {
+        token,
+        password,
+      },
+    );
+  },
 };

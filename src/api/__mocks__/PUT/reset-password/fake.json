@@ -1,0 +1,12 @@
+[
+  {
+    "data": {
+      "token": "token1",
+      "password": "n123456"
+    },
+    "response": {
+      "status": 200,
+      "data": {}
+    }
+  }
+]

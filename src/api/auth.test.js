@@ -13,3 +13,8 @@ test('forgotPassword', async () => {
   const response = await auth.forgotPassword('fake@user.com');
   expect(Object.keys(response.data).length).toBe(0);
 });
+
+test('resetPassword', async () => {
+  const response = await auth.resetPassword('fake', 'token1', 'n123456');
+  expect(Object.keys(response.data).length).toBe(0);
+});
