@@ -1,11 +1,14 @@
 <template>
   <div id="app">
-    <login-modal ref="loginModal" />
+    <login-modal
+      ref="loginModal"
+      v-if="loginModalOpen" />
     <router-view />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import LoginModal from '@/components/shared/LoginModal';
 
 const components = {
@@ -15,6 +18,9 @@ const components = {
 export default {
   name: 'App',
   components,
+  computed: {
+    ...mapGetters(['loginModalOpen']),
+  },
 };
 </script>
 

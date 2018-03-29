@@ -19,48 +19,26 @@ const getWrapper = () => {
 };
 
 describe('LoginModal.vue', () => {
-  describe('not open', () => {
-    it('not exists', () => {
-      const wrapper = getWrapper();
-      expect(wrapper.find({ ref: 'loginModal' }).exists())
+  it('onAuthenticated', (done) => {
+    const wrapper = getWrapper();
+
+    Vue.nextTick(() => {
+      wrapper.vm.onAuthenticated();
+      expect(store.getters.loginModalOpen)
         .toBeFalsy();
+      done();
     });
   });
 
-  describe('open', () => {
-    it('exists', (done) => {
-      const wrapper = getWrapper();
-      store.dispatch('openLoginModal');
+  it('onAuthenticated with next', (done) => {
+    const wrapper = getWrapper();
+    store.dispatch('openLoginModal', { path: '/myprofile/' });
 
-      Vue.nextTick(() => {
-        expect(wrapper.find({ ref: 'loginModal' }).exists())
-          .toBeTruthy();
-        done();
-      });
-    });
-
-    it('onAuthenticated', (done) => {
-      const wrapper = getWrapper();
-      store.dispatch('openLoginModal');
-
-      Vue.nextTick(() => {
-        wrapper.vm.onAuthenticated();
-        expect(store.getters.loginModalOpen)
-          .toBeFalsy();
-        done();
-      });
-    });
-
-    it('onAuthenticated with next', (done) => {
-      const wrapper = getWrapper();
-      store.dispatch('openLoginModal', { path: '/myprofile/' });
-
-      Vue.nextTick(() => {
-        wrapper.vm.onAuthenticated();
-        expect(store.getters.loginModalOpen)
-          .toBeFalsy();
-        done();
-      });
+    Vue.nextTick(() => {
+      wrapper.vm.onAuthenticated();
+      expect(store.getters.loginModalOpen)
+        .toBeFalsy();
+      done();
     });
   });
 });

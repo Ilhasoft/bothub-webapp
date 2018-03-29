@@ -10,9 +10,29 @@ localVue.use(Vuex);
 localVue.use(VueRouter);
 
 describe('HelloWorld.vue', () => {
-  it('should render correct contents', () => {
+  describe('loginModal', () => {
     const wrapper = shallow(App, { store, localVue });
-    expect(wrapper.find({ ref: 'loginModal' }).exists())
-      .toBeTruthy();
+
+    describe('close', () => {
+      it('no exists', (done) => {
+        store.dispatch('closeLoginModal');
+        localVue.nextTick(() => {
+          expect(wrapper.find({ ref: 'loginModal' }).exists())
+            .toBeFalsy();
+          done();
+        });
+      });
+    });
+
+    describe('open', () => {
+      it('exists', (done) => {
+        store.dispatch('openLoginModal');
+        localVue.nextTick(() => {
+          expect(wrapper.find({ ref: 'loginModal' }).exists())
+            .toBeTruthy();
+          done();
+        });
+      });
+    });
   });
 });
