@@ -8,5 +8,17 @@
       "status": 200,
       "data": {}
     }
+  },
+  {
+    "data": {
+      "token": "invalid_token",
+      "password": "n123456"
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "token": ["Invalid token for this user"]
+      }
+    }
   }
 ]
