@@ -10,4 +10,12 @@ export default {
       },
     );
   },
+  forgotPassword(email) {
+    return request.$http.post(
+      '/forgot-password/',
+      {
+        email,
+      },
+    );
+  },
 };
