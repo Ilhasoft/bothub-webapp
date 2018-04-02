@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import MyProfile from '@/components/MyProfile';
+import ResetPassword from '@/components/ResetPassword';
 import store from '../store';
 
 Vue.use(Router);
@@ -25,6 +26,11 @@ export default new Router({
           next();
         }
       },
+    },
+    {
+      path: '/reset-password/:nickname/:token/',
+      name: 'ResetPassword',
+      component: ResetPassword,
     },
   ],
 });
