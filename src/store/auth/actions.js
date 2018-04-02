@@ -6,4 +6,10 @@ export default {
     const response = await auth.login(username, password);
     commit(TYPES.SET_TOKEN, response.data.token);
   },
+  async forgotPassword(store, { email }) {
+    await auth.forgotPassword(email);
+  },
+  async resetPassword(store, { nickname, token, password }) {
+    await auth.resetPassword(nickname, token, password);
+  },
 };

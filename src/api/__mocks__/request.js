@@ -8,5 +8,6 @@ export default {
   $http: {
     get: requestMockupJson.create('GET', config),
     post: requestMockupJson.create('POST', config),
+    put: requestMockupJson.create('PUT', config),
   },
 };

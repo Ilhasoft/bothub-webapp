@@ -12,3 +12,7 @@ test('has $http.get', () => {
 test('has $http.post', () => {
   expect(request.$http.post).toBeDefined();
 });
+
+test('has $http.put', () => {
+  expect(request.$http.put).toBeDefined();
+});

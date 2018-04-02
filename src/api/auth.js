@@ -10,4 +10,21 @@ export default {
       },
     );
   },
+  forgotPassword(email) {
+    return request.$http.post(
+      '/forgot-password/',
+      {
+        email,
+      },
+    );
+  },
+  resetPassword(nickname, token, password) {
+    return request.$http.put(
+      `/reset-password/${nickname}/`,
+      {
+        token,
+        password,
+      },
+    );
+  },
 };
