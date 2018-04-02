@@ -5,6 +5,7 @@
       label="E-mail"
       help-text="Type your e-mail"
       :errors="errors.email"
+      ref='emailField'
     >
       <email-input
         is-required
@@ -46,10 +47,7 @@ export default {
   },
   computed: {
     msgs() {
-      return (this.errors.non_field_errors &&
-        this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) ||
-        this.success_msgs.map(text => ({ text, class: 'success' })) ||
-        [];
+      return this.success_msgs.map(text => ({ text, class: 'success' })) || [];
     },
   },
   methods: {
