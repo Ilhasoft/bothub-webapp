@@ -48,14 +48,16 @@ export default {
       data: {},
       errors: {},
       submitting: false,
+      success_msgs: [],
     };
   },
   computed: {
     msgs() {
       return (
-        (this.errors.token && this.errors.token) ||
-        []).map(text => ({ text, class: 'error' })) ||
-      [];
+        this.errors.token && this.errors.token
+          .map(text => ({ text, class: 'error' }))) ||
+        this.success_msgs.map(text => ({ text, class: 'success' })) ||
+        [];
     },
   },
   methods: {
@@ -72,6 +74,8 @@ export default {
           token: this.token,
           password: this.data.password,
         });
+        this.success_msgs = ['Password changed'];
+        this.$emit('reseted');
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
