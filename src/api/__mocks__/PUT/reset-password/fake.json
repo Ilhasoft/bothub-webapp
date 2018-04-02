@@ -20,5 +20,17 @@
         "token": ["Invalid token for this user"]
       }
     }
+  },
+  {
+    "data": {
+      "token": "token1",
+      "password": ""
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "password": ["This field may not be blank."]
+      }
+    }
   }
 ]

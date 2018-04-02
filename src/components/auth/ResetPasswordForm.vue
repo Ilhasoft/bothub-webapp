@@ -52,7 +52,10 @@ export default {
   },
   computed: {
     msgs() {
-      return [];
+      return (
+        (this.errors.token && this.errors.token) ||
+        []).map(text => ({ text, class: 'error' })) ||
+      [];
     },
   },
   methods: {
