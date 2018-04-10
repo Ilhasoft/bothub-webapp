@@ -1,22 +1,24 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="msgs" />
-    <field
+    <b-field
       label="E-mail"
-      help-text="Type your e-mail"
-      :errors="errors.email"
-      ref='emailField'
-    >
-      <email-input
-        is-required
+      :type="errors.email && 'is-danger'"
+      :message="errors.email">
+      <b-input
+        type="email"
         v-model="data.email"
-        @input="cleanFieldErrors('email')"
-      />
-    </field>
-    <button
-      type="submit"
-      :disabled="submitting"
-    >Reset password</button>
+        @input="cleanFieldErrors('email')" />
+    </b-field>
+    <div class="field">
+      <div class="control">
+        <button
+            type="submit"
+            class="button is-primary"
+            :disabled="submitting"
+          >Reset password</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -73,7 +75,7 @@ export default {
       return false;
     },
     cleanFieldErrors(field) {
-      this.errors[field] = [];
+      this.errors[field] = null;
     },
   },
 };
