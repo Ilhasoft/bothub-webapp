@@ -25,13 +25,9 @@
 <script>
 import { mapActions } from 'vuex';
 import Messages from '@/components/shared/Messages';
-import Field from '@/components/shared/form/Field';
-import EmailInput from '@/components/shared/form/inputs/EmailInput';
 
 const components = {
   Messages,
-  Field,
-  EmailInput,
 };
 
 export default {
