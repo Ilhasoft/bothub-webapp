@@ -1,33 +1,40 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="msgs" />
-    <field
+    <b-field
       label="E-mail"
-      help-text="Type your e-mail"
-      :errors="errors.username"
-    >
-      <email-input
-        is-required
-        v-model="data.username"
-        @input="cleanFieldErrors('username')"
-      />
-    </field>
-    <field
+      :type="errors.username && 'is-danger'"
+      :message="errors.username">
+      <b-input
+        type="email"
+        v-model="data.username" />
+    </b-field>
+    <b-field
       label="Password"
-      :errors="errors.password"
-    >
-      <text-input
+      :type="errors.password && 'is-danger'"
+      :message="errors.password">
+      <b-input
         type="password"
-        is-required
-        :max-length=16
         v-model="data.password"
-        @input="cleanFieldErrors('password')"
-      />
-    </field>
-    <button
-      type="submit"
-      :disabled="submitting"
-    >Login</button>
+        password-reveal />
+    </b-field>
+    <div class="field">
+      <div class="control has-text-right">
+        <a
+          href=""
+          class="has-text-grey"
+          @click.prevent="forgotPasswordClick">Forgot password?</a>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control has-text-centered">
+        <button
+            type="submit"
+            class="button is-primary"
+            :disabled="submitting"
+          >Login</button>
+      </div>
+    </div>
   </form>
 </template>
 
@@ -88,6 +95,9 @@ export default {
     },
     cleanFieldErrors(field) {
       this.errors[field] = [];
+    },
+    forgotPasswordClick() {
+      this.$emit('forgotPasswordClick');
     },
   },
 };

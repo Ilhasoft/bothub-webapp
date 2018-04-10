@@ -1,18 +1,24 @@
 <template>
   <b-modal :active="open" @close="closeLoginModal">
     <div class="card">
-      <div class="card-content">
-        <div v-show="tab === 'login'">
-          <login-form @authenticated="onAuthenticated" />
-          <p><a href="" @click.prevent="showForgotPassword">forgot password?!</a></p>
-        </div>
-        <div v-show="tab === 'forgot-password'">
+      <b-tabs
+        v-model="activeTab"
+        position="is-centered"
+        expanded>
+        <b-tab-item label="Me Registered">
+          <p>comming soon...</p>
+        </b-tab-item>
+        <b-tab-item label="I have registered">
+          <login-form
+            @authenticated="onAuthenticated"
+            @forgotPasswordClick="showForgotPasswordTab" />
+        </b-tab-item>
+        <b-tab-item
+          :visible="activeTab === 2"
+          label="Forgot password">
           <forgot-password-form />
-        </div>
-        <p><button
-          ref="cancelBtn"
-          @click="closeLoginModal">cancel</button></p>
-      </div>
+        </b-tab-item>
+      </b-tabs>
     </div>
   </b-modal>
 </template>
@@ -32,12 +38,13 @@ export default {
   components,
   data() {
     return {
-      tab: 'login',
+      activeTab: 1,
     };
   },
   computed: {
     ...mapGetters({
       open: 'loginModalOpen',
+      next: 'loginModalNext',
     }),
   },
   methods: {
@@ -48,8 +55,8 @@ export default {
       if (this.next && this.$router) this.$router.push(this.next.path);
       this.closeLoginModal();
     },
-    showForgotPassword() {
-      this.tab = 'forgot-password';
+    showForgotPasswordTab() {
+      this.activeTab = 2;
     },
   },
 };
