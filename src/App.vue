@@ -25,17 +25,4 @@ export default {
 </script>
 
 <style lang="scss">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-#app {
-  font-family: sans-serif;
-  color: #2c3e50;
-}
 </style>
