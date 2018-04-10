@@ -41,6 +41,6 @@ describe('LoginForm.vue', () => {
     const field = 'username';
     wrapper.vm.cleanFieldErrors(field);
     expect(wrapper.vm.errors[field])
-      .toHaveLength(0);
+      .toBeNull();
   });
 });

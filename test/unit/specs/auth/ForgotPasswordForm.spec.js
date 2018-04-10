@@ -43,7 +43,7 @@ describe('ForgotPasswordForm.vue', () => {
         it('after clean: no errors', async () => {
           await wrapper.vm.onSubmit();
           wrapper.vm.cleanFieldErrors('email');
-          expect(wrapper.vm.errors.email.length).toBe(0);
+          expect(wrapper.vm.errors.email).toBeNull();
         });
       });
     });
