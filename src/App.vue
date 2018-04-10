@@ -1,23 +1,41 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <login-modal
+      ref="loginModal"
+      v-if="loginModalOpen" />
+    <router-view />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import LoginModal from '@/components/shared/LoginModal';
+
+const components = {
+  LoginModal,
+};
+
 export default {
   name: 'App',
+  components,
+  computed: {
+    ...mapGetters(['loginModalOpen']),
+  },
 };
 </script>
 
-<style>
+<style lang="scss">
+html,
+body,
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  font-family: sans-serif;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
