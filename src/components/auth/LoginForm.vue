@@ -7,7 +7,8 @@
       :message="errors.username">
       <b-input
         type="email"
-        v-model="data.username" />
+        v-model="data.username"
+        @input="cleanFieldErrors('username')" />
     </b-field>
     <b-field
       label="Password"
@@ -16,7 +17,8 @@
       <b-input
         type="password"
         v-model="data.password"
-        password-reveal />
+        password-reveal
+        @input="cleanFieldErrors('password')" />
     </b-field>
     <div class="field">
       <div class="control has-text-right">
@@ -94,7 +96,7 @@ export default {
       return false;
     },
     cleanFieldErrors(field) {
-      this.errors[field] = [];
+      this.errors[field] = null;
     },
     forgotPasswordClick() {
       this.$emit('forgotPasswordClick');
