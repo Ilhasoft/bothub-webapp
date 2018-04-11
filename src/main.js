@@ -1,4 +1,3 @@
-import 'buefy/lib/buefy.css';
 import '@mdi/font/css/materialdesignicons.css';
 
 import Vue from 'vue';
