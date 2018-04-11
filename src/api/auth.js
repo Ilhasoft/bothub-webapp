@@ -27,4 +27,15 @@ export default {
       },
     );
   },
+  register(email, name, nickname, password) {
+    return request.$http.post(
+      '/register/',
+      {
+        email,
+        name,
+        nickname,
+        password,
+      },
+    );
+  },
 };
