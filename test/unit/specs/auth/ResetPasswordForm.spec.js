@@ -2,6 +2,7 @@
 jest.mock('@/api/request');
 
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -9,6 +10,7 @@ import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 describe('ResetPasswordForm.vue', () => {
   describe('submit form', () => {

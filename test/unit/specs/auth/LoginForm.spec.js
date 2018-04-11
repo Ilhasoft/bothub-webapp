@@ -2,6 +2,7 @@
 jest.mock('@/api/request');
 
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -9,6 +10,7 @@ import LoginForm from '@/components/auth/LoginForm';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 const getWrapper = () => {
   store.replaceState({ Auth: {} });

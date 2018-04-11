@@ -1,4 +1,5 @@
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -6,6 +7,7 @@ import LoginModal from '@/components/shared/LoginModal';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 describe('LoginModal.vue', () => {
   describe('close modal on authenticated', () => {
