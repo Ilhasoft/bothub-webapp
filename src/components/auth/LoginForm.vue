@@ -23,7 +23,8 @@
     <div class="field">
       <div class="control has-text-right">
         <a
-          href=""
+          ref="forgotPassword"
+          href="#forgot-password"
           class="has-text-grey"
           @click.prevent="forgotPasswordClick">Forgot password?</a>
       </div>
