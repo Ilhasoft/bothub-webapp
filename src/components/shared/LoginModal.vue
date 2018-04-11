@@ -6,7 +6,7 @@
         position="is-centered"
         expanded>
         <b-tab-item label="Me Registered">
-          <p>comming soon...</p>
+          <register-form @registered="onRegistered" />
         </b-tab-item>
         <b-tab-item label="I have registered">
           <login-form
@@ -27,10 +27,12 @@
 import { mapGetters, mapActions } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
+import RegisterForm from '@/components/auth/RegisterForm';
 
 const components = {
   LoginForm,
   ForgotPasswordForm,
+  RegisterForm,
 };
 
 export default {
@@ -55,6 +57,10 @@ export default {
       if (this.next && this.$router) this.$router.push(this.next.path);
       this.close();
     },
+    onRegistered() {
+      /* istanbul ignore next */
+      this.activeTab = 1;
+    },
     showForgotPasswordTab() {
       /* istanbul ignore next */
       this.activeTab = 2;
@@ -62,6 +68,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>
