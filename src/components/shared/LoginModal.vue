@@ -1,5 +1,5 @@
 <template>
-  <b-modal :active="open" @close="closeLoginModal">
+  <b-modal :active="open" @close="close">
     <div class="card">
       <b-tabs
         v-model="activeTab"
@@ -48,12 +48,12 @@ export default {
     }),
   },
   methods: {
-    ...mapActions([
-      'closeLoginModal',
-    ]),
+    ...mapActions({
+      close: 'closeLoginModal',
+    }),
     onAuthenticated() {
       if (this.next && this.$router) this.$router.push(this.next.path);
-      this.closeLoginModal();
+      this.close();
     },
     showForgotPasswordTab() {
       this.activeTab = 2;
