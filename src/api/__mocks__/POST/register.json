@@ -1,0 +1,28 @@
+[
+  {
+    "data": {
+      "email": "new@user.com",
+      "name": "New",
+      "nickname": "new",
+      "password": "n123456"
+    },
+    "response": {
+      "status": 200,
+      "data": {}
+    }
+  },
+  {
+    "data": {
+      "email": "fake@user.com",
+      "name": "Fake",
+      "nickname": "fake",
+      "password": "123456"
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "email": ["user with this email already exists."]
+      }
+    }
+  }
+]

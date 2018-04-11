@@ -18,3 +18,8 @@ test('resetPassword', async () => {
   const response = await auth.resetPassword('fake', 'token1', 'n123456');
   expect(Object.keys(response.data).length).toBe(0);
 });
+
+test('register', async () => {
+  const response = await auth.register('new@user.com', 'New', 'new', 'n123456');
+  expect(response.status).toBe(200);
+});
