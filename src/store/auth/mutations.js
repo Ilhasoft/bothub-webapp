@@ -1,6 +1,6 @@
 import window from 'global/window';
 
-import TYPES from './types';
+import TYPES from '../types';
 
 export default {
   [TYPES.RETRIEVE_AUTH_TOKEN](state) {

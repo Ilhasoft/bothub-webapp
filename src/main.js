@@ -7,7 +7,7 @@ import App from './App';
 import router from './router';
 import store from './store';
 
-import AUTH_TYPES from './store/auth/types';
+import AUTH_TYPES from './store/types';
 
 Vue.use(Buefy);
 Vue.config.productionTip = false;

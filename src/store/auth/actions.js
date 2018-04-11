@@ -1,5 +1,5 @@
 import auth from '@/api/auth';
-import TYPES from './types';
+import TYPES from '../types';
 
 export default {
   async login({ commit }, { username, password }) {
