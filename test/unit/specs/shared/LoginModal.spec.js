@@ -49,28 +49,4 @@ describe('LoginModal.vue', () => {
       });
     });
   });
-
-  describe('tabs', () => {
-    let wrapper;
-    beforeEach(() => {
-      store.replaceState({
-        LoginModal: {
-          open: false,
-          next: null,
-        },
-      });
-      wrapper = shallow(LoginModal, { store, localVue });
-    });
-
-    test('default: login visible', () => {
-      expect(wrapper.vm.tab === 'login')
-        .toBeTruthy();
-    });
-
-    test('forgot password visible', () => {
-      wrapper.vm.showForgotPassword();
-      expect(wrapper.vm.tab === 'forgot-password')
-        .toBeTruthy();
-    });
-  });
 });

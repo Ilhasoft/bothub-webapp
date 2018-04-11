@@ -101,7 +101,7 @@ describe('ResetPasswordForm.vue', () => {
         test('after clean: no errors', async () => {
           await wrapper.vm.onSubmit();
           wrapper.vm.cleanFieldErrors('password');
-          expect(wrapper.vm.errors.password.length).toBe(0);
+          expect(wrapper.vm.errors.password).toBeNull();
         });
       });
     });

@@ -25,17 +25,15 @@ export default {
 </script>
 
 <style lang="scss">
-html,
-body,
-#app {
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-#app {
-  font-family: sans-serif;
-  color: #2c3e50;
-}
+@import "~bulma/sass/utilities/_all";
+
+$primary: $turquoise;
+$primary-invert: findColorInvert($primary);
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
 </style>

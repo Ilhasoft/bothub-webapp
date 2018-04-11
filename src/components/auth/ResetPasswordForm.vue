@@ -1,34 +1,33 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="msgs" />
-    <field
-      label="New password"
-      :errors="errors.password"
-    >
-      <text-input
+    <b-field
+      label="New Password"
+      :type="errors.password && 'is-danger'"
+      :message="errors.password">
+      <b-input
         type="password"
-        is-required
-        :max-length=16
         v-model="data.password"
-        @input="cleanFieldErrors('password')"
-      />
-    </field>
-    <button
-      type="submit"
-      :disabled="submitting"
-    >Reset password</button>
+        password-reveal
+        @input="cleanFieldErrors('password')" />
+    </b-field>
+    <div class="field">
+      <div class="control">
+        <button
+            type="submit"
+            class="button is-primary"
+            :disabled="submitting"
+          >Reset password</button>
+      </div>
+    </div>
   </form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import Field from '@/components/shared/form/Field';
-import TextInput from '@/components/shared/form/inputs/TextInput';
 import Messages from '@/components/shared/Messages';
 
 const components = {
-  Field,
-  TextInput,
   Messages,
 };
 
@@ -88,7 +87,7 @@ export default {
       return false;
     },
     cleanFieldErrors(field) {
-      this.errors[field] = [];
+      this.errors[field] = null;
     },
   },
 };

@@ -1,26 +1,34 @@
 <template>
-  <modal ref="loginModal">
-    <div v-show="tab === 'login'">
-      <login-form @authenticated="onAuthenticated" />
-      <p><a href="" @click.prevent="showForgotPassword">forgot password?!</a></p>
+  <b-modal :active="open" @close="close">
+    <div class="card">
+      <b-tabs
+        v-model="activeTab"
+        position="is-centered"
+        expanded>
+        <b-tab-item label="Me Registered">
+          <p>comming soon...</p>
+        </b-tab-item>
+        <b-tab-item label="I have registered">
+          <login-form
+            @authenticated="onAuthenticated"
+            @forgotPasswordClick="showForgotPasswordTab" />
+        </b-tab-item>
+        <b-tab-item
+          :visible="activeTab === 2"
+          label="Forgot password">
+          <forgot-password-form />
+        </b-tab-item>
+      </b-tabs>
     </div>
-    <div v-show="tab === 'forgot-password'">
-      <forgot-password-form />
-    </div>
-    <p><button
-      ref="cancelBtn"
-      @click="closeLoginModal">cancel</button></p>
-  </modal>
+  </b-modal>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Modal from '@/components/shared/Modal';
 import LoginForm from '@/components/auth/LoginForm';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
 
 const components = {
-  Modal,
   LoginForm,
   ForgotPasswordForm,
 };
@@ -30,7 +38,7 @@ export default {
   components,
   data() {
     return {
-      tab: 'login',
+      activeTab: 1,
     };
   },
   computed: {
@@ -40,15 +48,15 @@ export default {
     }),
   },
   methods: {
-    ...mapActions([
-      'closeLoginModal',
-    ]),
+    ...mapActions({
+      close: 'closeLoginModal',
+    }),
     onAuthenticated() {
       if (this.next && this.$router) this.$router.push(this.next.path);
-      this.closeLoginModal();
+      this.close();
     },
-    showForgotPassword() {
-      this.tab = 'forgot-password';
+    showForgotPasswordTab() {
+      this.activeTab = 2;
     },
   },
 };

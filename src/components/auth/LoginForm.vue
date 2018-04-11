@@ -1,47 +1,51 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="msgs" />
-    <field
+    <b-field
       label="E-mail"
-      help-text="Type your e-mail"
-      :errors="errors.username"
-    >
-      <email-input
-        is-required
+      :type="errors.username && 'is-danger'"
+      :message="errors.username">
+      <b-input
+        type="email"
         v-model="data.username"
-        @input="cleanFieldErrors('username')"
-      />
-    </field>
-    <field
+        @input="cleanFieldErrors('username')" />
+    </b-field>
+    <b-field
       label="Password"
-      :errors="errors.password"
-    >
-      <text-input
+      :type="errors.password && 'is-danger'"
+      :message="errors.password">
+      <b-input
         type="password"
-        is-required
-        :max-length=16
         v-model="data.password"
-        @input="cleanFieldErrors('password')"
-      />
-    </field>
-    <button
-      type="submit"
-      :disabled="submitting"
-    >Login</button>
+        password-reveal
+        @input="cleanFieldErrors('password')" />
+    </b-field>
+    <div class="field">
+      <div class="control has-text-right">
+        <a
+          ref="forgotPassword"
+          href="#forgot-password"
+          class="has-text-grey"
+          @click.prevent="forgotPasswordClick">Forgot password?</a>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control has-text-centered">
+        <button
+            type="submit"
+            class="button is-primary"
+            :disabled="submitting"
+          >Login</button>
+      </div>
+    </div>
   </form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import Field from '@/components/shared/form/Field';
-import EmailInput from '@/components/shared/form/inputs/EmailInput';
-import TextInput from '@/components/shared/form/inputs/TextInput';
 import Messages from '@/components/shared/Messages';
 
 const components = {
-  Field,
-  EmailInput,
-  TextInput,
   Messages,
 };
 
@@ -87,7 +91,10 @@ export default {
       return false;
     },
     cleanFieldErrors(field) {
-      this.errors[field] = [];
+      this.errors[field] = null;
+    },
+    forgotPasswordClick() {
+      this.$emit('forgotPasswordClick');
     },
   },
 };
