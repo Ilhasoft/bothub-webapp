@@ -56,6 +56,7 @@ export default {
       this.close();
     },
     showForgotPasswordTab() {
+      /* istanbul ignore next */
       this.activeTab = 2;
     },
   },

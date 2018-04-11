@@ -12,51 +12,82 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Buefy);
 
-const getWrapper = () => {
-  store.replaceState({ Auth: {} });
-  return shallow(LoginForm, { store, localVue });
-};
-
 describe('LoginForm.vue', () => {
   describe('do login', () => {
-    it('valid login', async (done) => {
-      const wrapper = getWrapper();
-      wrapper.vm.data.username = 'fake@user.com';
-      wrapper.vm.data.password = '123456';
-      await wrapper.vm.onSubmit();
-      expect(wrapper.vm.$store.getters.authenticated)
-        .toBeTruthy();
-      done();
+    describe('valid login', () => {
+      let wrapper;
+      beforeEach(() => {
+        store.replaceState({ Auth: {} });
+        wrapper = shallow(LoginForm, { store, localVue });
+        wrapper.vm.data.username = 'fake@user.com';
+        wrapper.vm.data.password = '123456';
+      });
+
+      test('authenticated', async (done) => {
+        await wrapper.vm.onSubmit();
+        expect(wrapper.vm.$store.getters.authenticated)
+          .toBeTruthy();
+        done();
+      });
+
+      test('emit event', async (done) => {
+        await wrapper.vm.onSubmit();
+        expect(wrapper.emitted('authenticated').length)
+          .toBe(1);
+        done();
+      });
     });
 
-    it('invalid login', async (done) => {
-      const wrapper = getWrapper();
-      wrapper.vm.data.username = 'fake@user.com';
-      wrapper.vm.data.password = '123';
-      await wrapper.vm.onSubmit();
-      expect(wrapper.vm.$store.getters.authenticated)
-        .toBeFalsy();
-      done();
+    describe('invalid login', () => {
+      let wrapper;
+      beforeEach(() => {
+        store.replaceState({ Auth: {} });
+        wrapper = shallow(LoginForm, { store, localVue });
+        wrapper.vm.data.username = 'fake@user.com';
+        wrapper.vm.data.password = '123';
+      });
+
+      test('not authenticated', async (done) => {
+        await wrapper.vm.onSubmit();
+        expect(wrapper.vm.$store.getters.authenticated)
+          .toBeFalsy();
+        done();
+      });
     });
   });
 
   describe('fields', () => {
-    it('clean errors', () => {
-      const wrapper = getWrapper();
-      const field = 'username';
-      wrapper.vm.cleanFieldErrors(field);
-      expect(wrapper.vm.errors[field])
-        .toBeNull();
+    describe('clean username errors', () => {
+      let wrapper;
+      beforeEach(() => {
+        store.replaceState({});
+        wrapper = shallow(LoginForm, { store, localVue });
+        wrapper.vm.errors = { username: ['error'] };
+      });
+
+      test('errors to be null', () => {
+        const field = 'username';
+        wrapper.vm.cleanFieldErrors(field);
+        expect(wrapper.vm.errors[field])
+          .toBeNull();
+      });
     });
   });
 
   describe('emit events', () => {
-    it('forgotPasswordClick', () => {
-      const wrapper = getWrapper();
-      const fp = wrapper.find({ ref: 'forgotPassword' });
-      fp.trigger('click');
-      expect(wrapper.emitted('forgotPasswordClick').length)
-        .toBeGreaterThan(0);
+    describe('forgotPasswordClick', () => {
+      let wrapper;
+      beforeEach(() => {
+        store.replaceState({});
+        wrapper = shallow(LoginForm, { store, localVue });
+      });
+
+      test('emit when click on forgot password link', () => {
+        const fp = wrapper.find({ ref: 'forgotPassword' });
+        fp.trigger('click');
+        expect(wrapper.emitted('forgotPasswordClick').length)
+          .toBeGreaterThan(0);
+      });
     });
   });
 });

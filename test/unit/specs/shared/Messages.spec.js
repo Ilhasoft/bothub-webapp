@@ -8,19 +8,19 @@ const getWrapper = (msgs = []) => (shallow(Messages, {
 }));
 
 describe('Messages.vue', () => {
-  it('empty', () => {
+  test('empty', () => {
     const wrapper = getWrapper();
     expect(wrapper.findAll('.messages .item').length)
       .toBe(0);
   });
 
-  it('one', () => {
+  test('one', () => {
     const wrapper = getWrapper(['hi']);
     expect(wrapper.findAll('.messages .item').length)
       .toBe(1);
   });
 
-  it('error', () => {
+  test('error', () => {
     const text = 'bye';
     const wrapper = getWrapper([{ text, class: 'error' }]);
     expect(wrapper.findAll('.messages .item').length)
