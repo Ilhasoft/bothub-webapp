@@ -38,4 +38,14 @@ export default {
       },
     );
   },
+  profile(nickname) {
+    return request.$http.get(
+      `/user-profile/${nickname}/`,
+    );
+  },
+  myProfile() {
+    return request.$http.get(
+      '/my-profile/',
+    );
+  },
 };

@@ -1,4 +1,4 @@
-import TYPES from './types';
+import TYPES from '../types';
 
 export default {
   [TYPES.OPEN_LOGIN_MODAL](state, next) {

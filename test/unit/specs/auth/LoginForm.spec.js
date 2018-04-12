@@ -17,7 +17,10 @@ describe('LoginForm.vue', () => {
     describe('valid login', () => {
       let wrapper;
       beforeEach(() => {
-        store.replaceState({ Auth: {} });
+        store.replaceState({
+          Auth: { token: null },
+          User: {},
+        });
         wrapper = shallow(LoginForm, { store, localVue });
         wrapper.vm.data.username = 'fake@user.com';
         wrapper.vm.data.password = '123456';
@@ -60,7 +63,9 @@ describe('LoginForm.vue', () => {
     describe('clean username errors', () => {
       let wrapper;
       beforeEach(() => {
-        store.replaceState({});
+        store.replaceState({
+          Auth: {},
+        });
         wrapper = shallow(LoginForm, { store, localVue });
         wrapper.vm.errors = { username: ['error'] };
       });

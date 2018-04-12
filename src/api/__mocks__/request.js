@@ -1,13 +1,20 @@
 import requestMockupJson from 'request-mockup-json';
-
-const config = {
-  mockupsPath: __dirname,
-};
+import store from '../../store';
 
 export default {
-  $http: {
-    get: requestMockupJson.create('GET', config),
-    post: requestMockupJson.create('POST', config),
-    put: requestMockupJson.create('PUT', config),
+  get $http() {
+    const config = {
+      mockupsPath: __dirname,
+      headers: {
+        ...((store.getters.authenticated) ?
+          { Authorization: `Token ${store.getters.authToken}` } : {}),
+      },
+    };
+
+    return {
+      get: requestMockupJson.create('GET', config),
+      post: requestMockupJson.create('POST', config),
+      put: requestMockupJson.create('PUT', config),
+    };
   },
 };

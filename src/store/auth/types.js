@@ -1,4 +1,0 @@
-export default {
-  SET_TOKEN: 'SET_TOKEN',
-  RETRIEVE_AUTH_TOKEN: 'RETRIEVE_AUTH_TOKEN',
-};
