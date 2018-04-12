@@ -17,7 +17,10 @@ describe('LoginForm.vue', () => {
     describe('valid login', () => {
       let wrapper;
       beforeEach(() => {
-        store.replaceState({ Auth: {} });
+        store.replaceState({
+          User: {},
+          Auth: {},
+        });
         wrapper = shallow(LoginForm, { store, localVue });
         wrapper.vm.data.username = 'fake@user.com';
         wrapper.vm.data.password = '123456';
