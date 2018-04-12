@@ -7,8 +7,6 @@ import App from './App';
 import router from './router';
 import store from './store';
 
-import AUTH_TYPES from './store/types';
-
 Vue.use(Buefy);
 Vue.config.productionTip = false;
 
@@ -19,7 +17,4 @@ new Vue({
   components: { App },
   template: '<App />',
   store,
-  beforeCreate() {
-    this.$store.commit(AUTH_TYPES.RETRIEVE_AUTH_TOKEN);
-  },
 });

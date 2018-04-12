@@ -2,9 +2,16 @@ import auth from '@/api/auth';
 import TYPES from '../types';
 
 export default {
-  async login({ commit }, { username, password }) {
+  async login({ commit, dispatch }, { username, password }) {
     const response = await auth.login(username, password);
     commit(TYPES.SET_TOKEN, response.data.token);
+    dispatch('updateMyProfile');
+  },
+  retriveAuthToken({ commit }) {
+    /* istanbul ignore next */
+    if (window.localStorage) {
+      commit(TYPES.SET_TOKEN, window.localStorage.getItem('authToken'));
+    }
   },
   async forgotPassword(store, { email }) {
     await auth.forgotPassword(email);
