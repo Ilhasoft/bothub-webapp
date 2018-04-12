@@ -27,6 +27,11 @@
       </div>
     </header>
     <hr />
+    <nav class="container">
+      <router-link :to="{ name: 'home' }" href="#home">Home</router-link> -
+      <router-link :to="{ name: 'myProfile' }" href="#my-profile">My Profile</router-link>
+    </nav>
+    <hr />
     <slot />
   </div>
 </template>

@@ -2,13 +2,16 @@
 jest.mock('@/api/request');
 
 import Vuex from 'vuex';
+import Router from 'vue-router';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
 import Layout from '@/components/shared/Layout';
+import router from '@/router';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Router);
 
 describe('Layout.vue', () => {
   describe('authenticated', () => {
@@ -22,7 +25,7 @@ describe('Layout.vue', () => {
           profiles: {},
         },
       });
-      wrapper = shallow(Layout, { store, localVue });
+      wrapper = shallow(Layout, { store, localVue, router });
     });
 
     test('show logout', () => {
@@ -40,7 +43,7 @@ describe('Layout.vue', () => {
           profiles: {},
         },
       });
-      wrapper = shallow(Layout, { store, localVue });
+      wrapper = shallow(Layout, { store, localVue, router });
     });
 
     test('show login', () => {
@@ -60,7 +63,7 @@ describe('Layout.vue', () => {
           profiles: {},
         },
       });
-      wrapper = shallow(Layout, { store, localVue });
+      wrapper = shallow(Layout, { store, localVue, router });
       await wrapper.vm.logout();
     });
 
