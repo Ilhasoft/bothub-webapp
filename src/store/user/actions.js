@@ -15,7 +15,9 @@ export default {
     }
   },
   async updateProfile({ commit }, { nickname }) {
+    /* istanbul ignore next */
     const response = await auth.profile(nickname);
+    /* istanbul ignore next */
     commit(TYPES.SET_PROFILE, {
       nickname,
       data: response.data,
