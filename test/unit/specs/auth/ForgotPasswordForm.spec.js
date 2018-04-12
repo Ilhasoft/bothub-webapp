@@ -17,7 +17,9 @@ describe('ForgotPasswordForm.vue', () => {
     describe('valid email', () => {
       let wrapper;
       beforeEach(() => {
-        store.replaceState({});
+        store.replaceState({
+          Auth: {},
+        });
         wrapper = shallow(ForgotPasswordForm, { store, localVue });
         wrapper.vm.data.email = 'fake@user.com';
       });
@@ -36,7 +38,9 @@ describe('ForgotPasswordForm.vue', () => {
     describe('invalid email', () => {
       let wrapper;
       beforeEach(() => {
-        store.replaceState({});
+        store.replaceState({
+          Auth: {},
+        });
         wrapper = shallow(ForgotPasswordForm, { store, localVue });
         wrapper.vm.data.email = 'no@user.com';
       });
@@ -48,7 +52,9 @@ describe('ForgotPasswordForm.vue', () => {
 
       describe('clean field errors', () => {
         beforeEach(() => {
-          store.replaceState({});
+          store.replaceState({
+            Auth: {},
+          });
           wrapper = shallow(ForgotPasswordForm, { store, localVue });
           wrapper.vm.data.email = 'no@user.com';
         });
