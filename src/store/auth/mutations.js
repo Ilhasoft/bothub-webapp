@@ -7,7 +7,11 @@ export default {
     state.token = token;
     /* istanbul ignore next */
     if (window.localStorage) {
-      window.localStorage.setItem('authToken', token);
+      if (token) {
+        window.localStorage.setItem('authToken', token);
+      } else {
+        window.localStorage.removeItem('authToken');
+      }
     }
   },
 };

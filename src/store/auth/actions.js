@@ -13,6 +13,10 @@ export default {
       commit(TYPES.SET_TOKEN, window.localStorage.getItem('authToken'));
     }
   },
+  logout({ commit, dispatch }) {
+    commit(TYPES.SET_TOKEN, null);
+    dispatch('updateMyProfile');
+  },
   async forgotPassword(store, { email }) {
     await auth.forgotPassword(email);
   },
