@@ -1,0 +1,13 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "nickname": "fake",
+        "email": "fake@user.com",
+        "name": "Fake",
+        "locale": ""
+      }
+    }
+  }
+]
