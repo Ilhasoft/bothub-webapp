@@ -9,7 +9,7 @@ localVue.use(Buefy);
 describe('FormGenerator.vue', () => {
   describe('valid schema', () => {
     let wrapper;
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(
         FormGenerator,
         {
@@ -29,27 +29,28 @@ describe('FormGenerator.vue', () => {
               },
             },
           },
-        });
+        },
+      );
     });
 
-    it('2 fields', () => {
+    test('2 fields', () => {
       expect(wrapper.vm.fields.length)
         .toBe(2);
     });
 
-    it('name in fields', () => {
+    test('name in fields', () => {
       expect(wrapper.vm.fields.map(({ name }) => name))
         .toContain('name');
     });
 
-    it('country in fields', () => {
+    test('country in fields', () => {
       expect(wrapper.vm.fields.map(({ name }) => name))
         .toContain('name');
     });
   });
 
   describe('invalid schema', () => {
-    it('null', () => {
+    test('null', () => {
       expect(() => {
         shallow(
           FormGenerator,
@@ -62,7 +63,7 @@ describe('FormGenerator.vue', () => {
       }).toThrow();
     });
 
-    it('with null element', () => {
+    test('with null element', () => {
       expect(() => {
         shallow(
           FormGenerator,

@@ -1,10 +1,12 @@
 <template>
   <div>
+    <messages :msgs="msgs" />
     <b-field
       v-for="field in fields"
       :key="field.name"
       :label="field.label"
-      :message="field.helpText">
+      :type="field.errors && 'is-danger'"
+      :message="field.errors || field.helpText">
       <component
         :v-if="field.inputComponent"
         :is="field.inputComponent"
@@ -16,6 +18,7 @@
 </template>
 
 <script>
+import Messages from '@/components/shared/Messages';
 import StringInput from './inputs/StringInput';
 import ChoiceInput from './inputs/ChoiceInput';
 import BooleanInput from './inputs/BooleanInput';
@@ -27,12 +30,21 @@ const relatedInputComponent = {
   boolean: BooleanInput,
 };
 
+const components = {
+  Messages,
+},
+
 export default {
   name: 'FormGenerator',
+  components,
   props: {
     schema: {
       required: true,
       type: Object,
+    },
+    errors: {
+      type: Object,
+      default: () => ({}),
     },
   },
   mounted() {
@@ -64,9 +76,14 @@ export default {
             helpText,
             inputProps,
             inputComponent: relatedInputComponent[type],
+            errors: this.errors[name],
           };
         })
         .filter(field => !!field);
+    },
+    msgs() {
+      return (this.errors.non_field_errors &&
+        this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
   },
   methods: {
