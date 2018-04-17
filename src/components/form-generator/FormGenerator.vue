@@ -32,7 +32,7 @@ const relatedInputComponent = {
 
 const components = {
   Messages,
-},
+};
 
 export default {
   name: 'FormGenerator',
