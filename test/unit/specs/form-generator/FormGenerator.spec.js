@@ -24,9 +24,6 @@ describe('FormGenerator.vue', () => {
                 type: 'string',
                 label: 'Your Country',
               },
-              field: {
-                type: 'field',
-              },
             },
           },
         },

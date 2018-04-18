@@ -22,12 +22,15 @@ import Messages from '@/components/shared/Messages';
 import StringInput from './inputs/StringInput';
 import ChoiceInput from './inputs/ChoiceInput';
 import BooleanInput from './inputs/BooleanInput';
+import MultipleChoice from './inputs/MultipleChoice';
 
 const relatedInputComponent = {
+  field: StringInput,
   string: StringInput,
   slug: StringInput,
   choice: ChoiceInput,
   boolean: BooleanInput,
+  'multiple choice': MultipleChoice,
 };
 
 const components = {
@@ -62,12 +65,14 @@ export default {
           const {
             type,
             label,
+            style,
             help_text: helpText,
-            read_only: readOnly,
             ...inputProps
           } = this.schema[name];
 
-          if (type === 'field' || readOnly) return false;
+          if (style &&
+            typeof style.show === 'boolean' &&
+            !style.show) return false;
 
           return {
             type,
