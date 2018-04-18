@@ -87,6 +87,7 @@ export default {
         .filter(field => !!field);
     },
     msgs() {
+      /* istanbul ignore next */
       return (this.errors.non_field_errors &&
         this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
