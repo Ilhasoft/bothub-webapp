@@ -23,6 +23,10 @@ export default {
   async resetPassword(store, { nickname, token, password }) {
     await auth.resetPassword(nickname, token, password);
   },
+  async getRegisterShema() {
+    const response = await auth.getRegisterShema();
+    return response;
+  },
   async register(store, { email, name, nickname, password }) {
     await auth.register(email, name, nickname, password);
   },
