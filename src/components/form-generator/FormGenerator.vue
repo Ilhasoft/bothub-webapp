@@ -25,6 +25,7 @@ import BooleanInput from './inputs/BooleanInput';
 import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
+import PasswordInput from './inputs/PasswordInput';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -35,6 +36,7 @@ const relatedInputComponent = {
   'multiple choice': MultipleChoice,
   text: TextInput,
   email: EmailInput,
+  password: PasswordInput,
 };
 
 const components = {
