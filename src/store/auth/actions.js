@@ -2,6 +2,10 @@ import auth from '@/api/auth';
 import TYPES from '../types';
 
 export default {
+  async getLoginSchema() {
+    const response = await auth.getLoginSchema();
+    return response;
+  },
   async login({ commit, dispatch }, { username, password }) {
     const response = await auth.login(username, password);
     commit(TYPES.SET_TOKEN, response.data.token);
