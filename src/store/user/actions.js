@@ -14,6 +14,7 @@ export default {
         });
         commit(TYPES.SET_NICKNAME_AUTHENTICATED, { nickname: response.data.nickname });
       } catch (error) {
+        /* istanbul ignore next */
         dispatch('logout');
       }
     }
