@@ -5,8 +5,8 @@ export default {
     const { data } = await request.$http.options('/repository/new/');
     return data.actions.POST;
   },
-  async new(name, slug, language, categories, description = '', isPrivate = false) {
-    const { data } = await request.$http.post(
+  new(name, slug, language, categories, description = '', isPrivate = false) {
+    return request.$http.post(
       '/repository/new/',
       {
         name,
@@ -17,6 +17,5 @@ export default {
         is_private: isPrivate,
       },
     );
-    return data;
   },
 };

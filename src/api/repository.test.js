@@ -19,6 +19,6 @@ describe('api/repository', () => {
       '',
       true,
     );
-    expect(response.uuid).toBe('8511fd26-a3bc-4f74-9af1-176abca5401d');
+    expect(response.data.uuid).toBe('8511fd26-a3bc-4f74-9af1-176abca5401d');
   });
 });

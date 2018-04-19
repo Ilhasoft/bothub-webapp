@@ -50,7 +50,7 @@ export default {
 
       try {
         const response = await this.newRepository(this.data);
-        this.$emit('created', response);
+        this.$emit('created', response.data);
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
