@@ -1,5 +1,8 @@
 <template>
   <div>
+    <new-repository-modal
+      v-if="newRepositoryModalOpen"
+      @requestClose="closeNewRepositoryModal" />
     <header class="container">
       <div class="columns">
         <div class="column">
@@ -11,7 +14,7 @@
             <p>Hello, {{ myProfile.name || '...' }}</p>
             <p><a
               href="#start-your-bot"
-              @click.prevent="openRepositoryForm">start your bot</a></p>
+              @click.prevent="openNewRepositoryModal">start your bot</a></p>
             <p><a
               ref="logout"
               href="#logout"
@@ -39,10 +42,22 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+
+const components = {
+  NewRepositoryModal,
+};
+
 export default {
   name: 'Layout',
+  components,
   mounted() {
     this.updateMyProfile();
+  },
+  data() {
+    return {
+      newRepositoryModalOpen: false,
+    };
   },
   computed: {
     ...mapGetters([
@@ -56,7 +71,14 @@ export default {
       'logout',
       'openLoginModal',
     ]),
-    openRepositoryForm() {},
+    openNewRepositoryModal() {
+      /* istanbul ignore next */
+      this.newRepositoryModalOpen = true;
+    },
+    closeNewRepositoryModal() {
+      /* istanbul ignore next */
+      this.newRepositoryModalOpen = false;
+    },
   },
 };
 </script>

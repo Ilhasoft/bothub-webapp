@@ -1,0 +1,122 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "New Repository List",
+        "description": "Create a new Repository, add examples and train a bot.",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "POST": {
+            "uuid": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "UUID"
+            },
+            "owner": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "Owner"
+            },
+            "name": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Name",
+              "help_text": "Repository display name",
+              "max_length": 64
+            },
+            "slug": {
+              "type": "slug",
+              "required": true,
+              "read_only": false,
+              "label": "Slug",
+              "help_text": "Easy way to found and share repositories",
+              "max_length": 32
+            },
+            "language": {
+              "type": "choice",
+              "required": true,
+              "read_only": false,
+              "label": "Language",
+              "help_text": "Repository's examples language. The examples can be translated to other languages.",
+              "choices": [
+                {
+                  "value": "en",
+                  "display_name": "English"
+                },
+                {
+                  "value": "de",
+                  "display_name": "German"
+                },
+                {
+                  "value": "es",
+                  "display_name": "Spanish"
+                },
+                {
+                  "value": "pt",
+                  "display_name": "Portuguese"
+                },
+                {
+                  "value": "fr",
+                  "display_name": "French"
+                },
+                {
+                  "value": "it",
+                  "display_name": "Italian"
+                },
+                {
+                  "value": "nl",
+                  "display_name": "Dutch"
+                }
+              ]
+            },
+            "categories": {
+              "type": "field",
+              "required": true,
+              "read_only": false,
+              "label": "Categories",
+              "help_text": "Categories for approaching repositories with the same purpose"
+            },
+            "categories_list": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "Categories list"
+            },
+            "description": {
+              "type": "string",
+              "required": false,
+              "read_only": false,
+              "label": "Description",
+              "help_text": "Tell what your bot do!"
+            },
+            "is_private": {
+              "type": "boolean",
+              "required": false,
+              "read_only": false,
+              "label": "Private",
+              "help_text": "Your repository can be private, only you can see and use, or can be public and all community can see and use."
+            },
+            "created_at": {
+              "type": "datetime",
+              "required": false,
+              "read_only": true,
+              "label": "Created at"
+            }
+          }
+        }
+      }
+    }
+  }
+]

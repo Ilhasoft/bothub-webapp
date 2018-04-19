@@ -6,7 +6,7 @@
     <option
       v-for="choice in choices"
       :key="choice.value"
-      :value="choice.value">{{choice.display_name}}</option>
+      :value="choice.value">{{ choice.display_name }}</option>
   </b-select>
 </template>
 
