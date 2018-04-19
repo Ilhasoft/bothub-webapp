@@ -1,6 +1,10 @@
 import request from './request';
 
 export default {
+  async getLoginSchema() {
+    const { data } = await request.$http.options('/login/');
+    return data.actions.POST;
+  },
   login(username, password) {
     return request.$http.post(
       '/login/',
