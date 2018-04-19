@@ -23,6 +23,7 @@ import StringInput from './inputs/StringInput';
 import ChoiceInput from './inputs/ChoiceInput';
 import BooleanInput from './inputs/BooleanInput';
 import MultipleChoice from './inputs/MultipleChoice';
+import TextInput from './inputs/TextInput';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -31,6 +32,7 @@ const relatedInputComponent = {
   choice: ChoiceInput,
   boolean: BooleanInput,
   'multiple choice': MultipleChoice,
+  text: TextInput,
 };
 
 const components = {
