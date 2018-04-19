@@ -29,7 +29,7 @@ export default {
   name: 'RegisterForm',
   components,
   async mounted() {
-    this.formSchema = await this.getRegisterShema();
+    this.formSchema = await this.getRegisterSchema();
   },
   data() {
     return {
@@ -42,7 +42,7 @@ export default {
   methods: {
     ...mapActions([
       'register',
-      'getRegisterShema',
+      'getRegisterSchema',
     ]),
     async onSubmit() {
       this.submitting = true;

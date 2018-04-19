@@ -20,8 +20,8 @@ describe('api/auth.js', () => {
     expect(Object.keys(response.data).length).toBe(0);
   });
 
-  test('getRegisterShema', async () => {
-    const response = await auth.getRegisterShema();
+  test('getRegisterSchema', async () => {
+    const response = await auth.getRegisterSchema();
     expect(response).toBeDefined();
   });
 

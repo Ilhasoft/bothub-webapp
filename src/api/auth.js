@@ -27,7 +27,7 @@ export default {
       },
     );
   },
-  async getRegisterShema() {
+  async getRegisterSchema() {
     const { data } = await request.$http.options('/register/');
     return data.actions.POST;
   },
