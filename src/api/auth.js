@@ -18,6 +18,10 @@ export default {
       },
     );
   },
+  async getResetPasswordSchema(nickname) {
+    const { data } = await request.$http.options(`/reset-password/${nickname}/`);
+    return data.actions.PUT;
+  },
   resetPassword(nickname, token, password) {
     return request.$http.put(
       `/reset-password/${nickname}/`,

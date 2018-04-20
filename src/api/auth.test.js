@@ -15,6 +15,11 @@ describe('api/auth.js', () => {
     expect(Object.keys(response.data).length).toBe(0);
   });
 
+  test('getResetPasswordSchema', async () => {
+    const response = await auth.getResetPasswordSchema('fake');
+    expect(typeof response).toBe('object');
+  });
+
   test('resetPassword', async () => {
     const response = await auth.resetPassword('fake', 'token1', 'n123456');
     expect(Object.keys(response.data).length).toBe(0);
