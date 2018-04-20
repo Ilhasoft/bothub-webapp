@@ -94,5 +94,31 @@ describe('ResetPasswordForm.vue', () => {
         expect(response).toBeFalsy();
       });
     });
+
+    describe('invalid user', () => {
+      let wrapper;
+      beforeEach(() => {
+        wrapper = shallow(
+          ResetPasswordForm,
+          {
+            store,
+            localVue,
+            propsData: {
+              nickname: 'other',
+              token: 'token1',
+            },
+          });
+        wrapper.vm.data.password = 'n123456';
+      });
+
+      describe('turn valid', () => {
+        beforeEach(() => { wrapper.vm.nickname = 'fake'; });
+
+        test('return true', async () => {
+          const response = await wrapper.vm.onSubmit();
+          expect(response).toBeTruthy();
+        });
+      });
+    });
   });
 });
