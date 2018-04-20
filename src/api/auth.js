@@ -14,6 +14,10 @@ export default {
       },
     );
   },
+  async getForgotPasswordSchema() {
+    const { data } = await request.$http.options('/forgot-password/');
+    return data.actions.POST;
+  },
   forgotPassword(email) {
     return request.$http.post(
       '/forgot-password/',

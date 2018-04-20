@@ -15,6 +15,11 @@ describe('api/auth.js', () => {
     expect(response.data.token).toBe('1f5e7e21d331536b58448595f69eb50a6b5e49b8');
   });
 
+  test('getForgotPasswordSchema', async () => {
+    const response = await auth.getForgotPasswordSchema();
+    expect(typeof response).toBe('object');
+  });
+
   test('forgotPassword', async () => {
     const response = await auth.forgotPassword('fake@user.com');
     expect(Object.keys(response.data).length).toBe(0);

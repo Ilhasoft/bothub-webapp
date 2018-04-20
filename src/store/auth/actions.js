@@ -21,6 +21,10 @@ export default {
     commit(TYPES.SET_TOKEN, null);
     dispatch('updateMyProfile');
   },
+  async getForgotPasswordSchema() {
+    const response = await auth.getForgotPasswordSchema();
+    return response;
+  },
   async forgotPassword(store, { email }) {
     await auth.forgotPassword(email);
   },
