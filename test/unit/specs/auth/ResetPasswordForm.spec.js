@@ -93,19 +93,6 @@ describe('ResetPasswordForm.vue', () => {
         const response = await wrapper.vm.onSubmit();
         expect(response).toBeFalsy();
       });
-
-      describe('clean field errors', () => {
-        test('before clean: has errors', async () => {
-          await wrapper.vm.onSubmit();
-          expect(wrapper.vm.errors.password.length).toBeGreaterThanOrEqual(1);
-        });
-
-        test('after clean: no errors', async () => {
-          await wrapper.vm.onSubmit();
-          wrapper.vm.cleanFieldErrors('password');
-          expect(wrapper.vm.errors.password).toBeNull();
-        });
-      });
     });
   });
 });

@@ -3,6 +3,7 @@
     <messages :msgs="msgs" />
     <b-field
       v-for="field in fields"
+      v-show="field.type !== 'hidden'"
       :key="field.name"
       :label="field.label"
       :type="field.errors && 'is-danger'"
@@ -38,6 +39,7 @@ const relatedInputComponent = {
   text: TextInput,
   email: EmailInput,
   password: PasswordInput,
+  hidden: StringInput,
 };
 
 const components = {

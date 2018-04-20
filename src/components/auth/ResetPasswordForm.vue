@@ -1,16 +1,13 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="msgs" />
-    <b-field
-      label="New Password"
-      :type="errors.password && 'is-danger'"
-      :message="errors.password">
-      <b-input
-        type="password"
-        v-model="data.password"
-        password-reveal
-        @input="cleanFieldErrors('password')" />
-    </b-field>
+    <form-generator
+      v-if="formSchema"
+      :schema="formSchema"
+      v-model="data"
+      :initialData="initialData"
+      :errors="errors"
+      class="field" />
     <div class="field">
       <div class="control">
         <button
@@ -26,9 +23,11 @@
 <script>
 import { mapActions } from 'vuex';
 import Messages from '@/components/shared/Messages';
+import FormGenerator from '@/components/form-generator/FormGenerator';
 
 const components = {
   Messages,
+  FormGenerator,
 };
 
 export default {
@@ -42,11 +41,23 @@ export default {
       required: true,
     },
   },
+  mounted() {
+    this.updateFormSchema();
+  },
+  watch: {
+    nickname() {
+      this.updateFormSchema();
+    },
+  },
   data() {
     return {
+      formSchema: null,
       data: {},
-      errors: {},
+      initialData: {
+        token: this.token,
+      },
       submitting: false,
+      errors: {},
       success_msgs: [],
     };
   },
@@ -61,6 +72,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'getResetPasswordSchema',
       'resetPassword',
     ]),
     async onSubmit() {
@@ -86,8 +98,10 @@ export default {
 
       return false;
     },
-    cleanFieldErrors(field) {
-      this.errors[field] = null;
+    async updateFormSchema() {
+      this.formSchema = await this.getResetPasswordSchema({
+        nickname: this.nickname,
+      });
     },
   },
 };
