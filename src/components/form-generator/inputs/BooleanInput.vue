@@ -6,12 +6,17 @@
 
 <script>
 export default {
+  props: {
+    initialData: {
+      type: String,
+    },
+  },
   mounted() {
     this.update();
   },
   data() {
     return {
-      value: false,
+      value: this.initialData || false,
     };
   },
   computed: {

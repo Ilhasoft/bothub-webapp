@@ -12,7 +12,8 @@
         :is="field.inputComponent"
         v-bind="field.inputProps"
         v-model="formData[field.name]"
-        @input="update()" />
+        @input="update()"
+        :initialData="initialData[field.name]" />
     </b-field>
   </div>
 </template>
@@ -52,6 +53,10 @@ export default {
       type: Object,
     },
     errors: {
+      type: Object,
+      default: () => ({}),
+    },
+    initialData: {
       type: Object,
       default: () => ({}),
     },
