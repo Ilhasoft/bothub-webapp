@@ -59,26 +59,6 @@ describe('LoginForm.vue', () => {
     });
   });
 
-  describe('fields', () => {
-    describe('clean username errors', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({
-          Auth: {},
-        });
-        wrapper = shallow(LoginForm, { store, localVue });
-        wrapper.vm.errors = { username: ['error'] };
-      });
-
-      test('errors to be null', () => {
-        const field = 'username';
-        wrapper.vm.cleanFieldErrors(field);
-        expect(wrapper.vm.errors[field])
-          .toBeNull();
-      });
-    });
-  });
-
   describe('emit events', () => {
     describe('forgotPasswordClick', () => {
       let wrapper;
