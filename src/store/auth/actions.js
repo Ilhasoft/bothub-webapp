@@ -28,6 +28,10 @@ export default {
   async forgotPassword(store, { email }) {
     await auth.forgotPassword(email);
   },
+  async getResetPasswordSchema(store, { nickname }) {
+    const response = await auth.getResetPasswordSchema(nickname);
+    return response;
+  },
   async resetPassword(store, { nickname, token, password }) {
     await auth.resetPassword(nickname, token, password);
   },

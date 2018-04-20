@@ -1,0 +1,38 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "Reset Password Instance",
+        "description": "Reset password",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "PUT": {
+            "token": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Token",
+              "style": {}
+            },
+            "password": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Password",
+              "style": {}
+            }
+          }
+        }
+      }
+    }
+  }
+]

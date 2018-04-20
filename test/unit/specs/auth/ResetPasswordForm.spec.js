@@ -93,17 +93,30 @@ describe('ResetPasswordForm.vue', () => {
         const response = await wrapper.vm.onSubmit();
         expect(response).toBeFalsy();
       });
+    });
 
-      describe('clean field errors', () => {
-        test('before clean: has errors', async () => {
-          await wrapper.vm.onSubmit();
-          expect(wrapper.vm.errors.password.length).toBeGreaterThanOrEqual(1);
-        });
+    describe('invalid user', () => {
+      let wrapper;
+      beforeEach(() => {
+        wrapper = shallow(
+          ResetPasswordForm,
+          {
+            store,
+            localVue,
+            propsData: {
+              nickname: 'other',
+              token: 'token1',
+            },
+          });
+        wrapper.vm.data.password = 'n123456';
+      });
 
-        test('after clean: no errors', async () => {
-          await wrapper.vm.onSubmit();
-          wrapper.vm.cleanFieldErrors('password');
-          expect(wrapper.vm.errors.password).toBeNull();
+      describe('turn valid', () => {
+        beforeEach(() => { wrapper.vm.nickname = 'fake'; });
+
+        test('return true', async () => {
+          const response = await wrapper.vm.onSubmit();
+          expect(response).toBeTruthy();
         });
       });
     });
