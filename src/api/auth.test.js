@@ -25,6 +25,11 @@ describe('api/auth.js', () => {
     expect(Object.keys(response.data).length).toBe(0);
   });
 
+  test('getRegisterSchema', async () => {
+    const response = await auth.getRegisterSchema();
+    expect(response).toBeDefined();
+  });
+
   test('register', async () => {
     const response = await auth.register('new@user.com', 'New', 'new', 'n123456');
     expect(response.status).toBe(200);

@@ -72,9 +72,6 @@ export default {
 
       return false;
     },
-    cleanFieldErrors(field) {
-      this.errors[field] = null;
-    },
     forgotPasswordClick() {
       this.$emit('forgotPasswordClick');
     },
