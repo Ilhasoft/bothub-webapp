@@ -29,15 +29,18 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Messages from '@/components/shared/Messages';
+import FormGenerator from '@/components/form-generator/FormGenerator';
 
 const components = {
-  Messages,
+  FormGenerator,
 };
 
 export default {
   name: 'LoginForm',
   components,
+  async mounted() {
+    this.formSchema = await this.getLoginSchema();
+  },
   data() {
     return {
       formSchema: null,
@@ -48,6 +51,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'getLoginSchema',
       'login',
     ]),
     async onSubmit() {

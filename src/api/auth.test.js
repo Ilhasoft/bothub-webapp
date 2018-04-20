@@ -5,6 +5,11 @@ jest.mock('./request');
 import auth from './auth';
 
 describe('api/auth.js', () => {
+  test('getLoginSchema', async () => {
+    const response = await auth.getLoginSchema();
+    expect(typeof response).toBe('object');
+  });
+
   test('login', async () => {
     const response = await auth.login('fake@user.com', '123456');
     expect(response.data.token).toBe('1f5e7e21d331536b58448595f69eb50a6b5e49b8');
