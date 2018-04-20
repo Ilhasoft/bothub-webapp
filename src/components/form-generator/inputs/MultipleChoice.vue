@@ -18,13 +18,16 @@ export default {
       required: true,
       type: Array,
     },
+    initialData: {
+      type: String,
+    },
   },
   mounted() {
     this.update();
   },
   data() {
     return {
-      value: [],
+      value: this.initialData || [],
     };
   },
   computed: {
