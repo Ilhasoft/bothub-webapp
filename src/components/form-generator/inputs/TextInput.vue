@@ -12,13 +12,16 @@ export default {
     max_length: {
       type: Number,
     },
+    initialData: {
+      type: String,
+    },
   },
   mounted() {
     this.update();
   },
   data() {
     return {
-      value: '',
+      value: this.initialData || '',
     };
   },
   methods: {

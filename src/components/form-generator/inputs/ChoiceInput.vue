@@ -17,13 +17,16 @@ export default {
       required: true,
       type: Array,
     },
+    initialData: {
+      type: String,
+    },
   },
   mounted() {
     this.update();
   },
   data() {
     return {
-      value: null,
+      value: this.initialData || null,
     };
   },
   methods: {
