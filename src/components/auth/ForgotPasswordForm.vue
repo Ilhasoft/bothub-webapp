@@ -1,15 +1,12 @@
 <template>
   <form @submit.prevent="onSubmit">
-    <messages :msgs="msgs" />
-    <b-field
-      label="E-mail"
-      :type="errors.email && 'is-danger'"
-      :message="errors.email">
-      <b-input
-        type="email"
-        v-model="data.email"
-        @input="cleanFieldErrors('email')" />
-    </b-field>
+    <messages :msgs="success_msgs" />
+    <form-generator
+      v-if="formSchema"
+      :schema="formSchema"
+      v-model="data"
+      :errors="errors"
+      class="field" />
     <div class="field">
       <div class="control">
         <button
@@ -24,32 +21,32 @@
 
 <script>
 import { mapActions } from 'vuex';
+import FormGenerator from '@/components/form-generator/FormGenerator';
 import Messages from '@/components/shared/Messages';
 
 const components = {
+  FormGenerator,
   Messages,
 };
 
 export default {
   name: 'ForgotPasswordForm',
   components,
+  async mounted() {
+    this.formSchema = await this.getForgotPasswordSchema();
+  },
   data() {
     return {
+      formSchema: null,
+      data: {},
       submitting: false,
-      data: {
-        email: '',
-      },
-      success_msgs: [],
       errors: {},
+      success_msgs: [],
     };
-  },
-  computed: {
-    msgs() {
-      return this.success_msgs.map(text => ({ text, class: 'success' })) || [];
-    },
   },
   methods: {
     ...mapActions([
+      'getForgotPasswordSchema',
       'forgotPassword',
     ]),
     async onSubmit() {
@@ -58,7 +55,12 @@ export default {
 
       try {
         await this.forgotPassword(this.data);
-        this.success_msgs = ['Check your email, we\'ve sent you the instructions to reset your password.'];
+        this.success_msgs = [
+          {
+            class: 'success',
+            text: 'Check your email, we\'ve sent you the instructions to reset your password.',
+          },
+        ];
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
@@ -69,9 +71,6 @@ export default {
       }
 
       return false;
-    },
-    cleanFieldErrors(field) {
-      this.errors[field] = null;
     },
   },
 };
