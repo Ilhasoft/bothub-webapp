@@ -27,6 +27,10 @@ export default {
       },
     );
   },
+  async getRegisterSchema() {
+    const { data } = await request.$http.options('/register/');
+    return data.actions.POST;
+  },
   register(email, name, nickname, password) {
     return request.$http.post(
       '/register/',

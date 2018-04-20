@@ -13,11 +13,14 @@ localVue.use(Vuex);
 localVue.use(Buefy);
 
 describe('RegisterForm.spec.js', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(RegisterForm, { store, localVue });
+  });
+
   describe('register', () => {
     describe('valid', () => {
-      let wrapper;
       beforeEach(() => {
-        wrapper = shallow(RegisterForm, { store, localVue });
         wrapper.vm.data.email = 'new@user.com';
         wrapper.vm.data.name = 'New';
         wrapper.vm.data.nickname = 'new';
@@ -37,10 +40,9 @@ describe('RegisterForm.spec.js', () => {
         done();
       });
     });
+
     describe('invalid: user with email exists', () => {
-      let wrapper;
       beforeEach(() => {
-        wrapper = shallow(RegisterForm, { store, localVue });
         wrapper.vm.data.email = 'fake@user.com';
         wrapper.vm.data.name = 'Fake';
         wrapper.vm.data.nickname = 'fake';
