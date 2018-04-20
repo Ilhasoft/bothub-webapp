@@ -1,6 +1,10 @@
 import request from './request';
 
 export default {
+  async getLoginSchema() {
+    const { data } = await request.$http.options('/login/');
+    return data.actions.POST;
+  },
   login(username, password) {
     return request.$http.post(
       '/login/',
@@ -30,6 +34,10 @@ export default {
         password,
       },
     );
+  },
+  async getRegisterSchema() {
+    const { data } = await request.$http.options('/register/');
+    return data.actions.POST;
   },
   register(email, name, nickname, password) {
     return request.$http.post(
