@@ -26,7 +26,11 @@
           <b-dropdown position="is-bottom-left">
             <button
               slot="trigger"
-              class="topbar-avatar" />
+              class="topbar-avatar">
+              <b-icon
+                icon="account"
+                class="topbar-avatar-icon" />
+            </button>
             <b-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
             </b-dropdown-item>
@@ -111,6 +115,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/utilities.scss';
+
 .topbar {
   padding: 16px;
 
@@ -122,14 +128,24 @@ export default {
 
   &-avatar {
     $size: 36px;
+
+    position: relative;
     width: $size;
     height: $size;
     overflow: hidden;
     border-radius: 100%;
     border: 2px solid #fff;
-    background-color: #dddddd;
+    background-color: $white-ter;
     outline: none;
     cursor: pointer;
+
+    &-icon {
+      position: absolute;
+      left: 50%;
+      height: 50%;
+      transform: translate(-50%, -50%);
+      color: $grey-light;
+    }
   }
 }
 </style>
