@@ -3,6 +3,7 @@ jest.mock('@/api/request');
 
 import Vuex from 'vuex';
 import Router from 'vue-router';
+import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -12,6 +13,7 @@ import router from '@/router';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Router);
+localVue.use(Buefy);
 
 describe('Layout.vue', () => {
   describe('authenticated', () => {
@@ -28,8 +30,8 @@ describe('Layout.vue', () => {
       wrapper = shallow(Layout, { store, localVue, router });
     });
 
-    test('show logout', () => {
-      expect(wrapper.find({ ref: 'logout' }).exists())
+    test('show authenticated', () => {
+      expect(wrapper.find({ ref: 'authenticated' }).exists())
         .toBeTruthy();
     });
   });
@@ -46,8 +48,8 @@ describe('Layout.vue', () => {
       wrapper = shallow(Layout, { store, localVue, router });
     });
 
-    test('show login', () => {
-      expect(wrapper.find({ ref: 'login' }).exists())
+    test('show not authenticated', () => {
+      expect(wrapper.find({ ref: 'notAuthenticated' }).exists())
         .toBeTruthy();
     });
   });

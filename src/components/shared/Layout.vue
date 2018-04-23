@@ -13,7 +13,10 @@
           </div>
         </div>
       </div>
-      <div class="level-right" v-if="authenticated">
+      <div
+        v-if="authenticated"
+        ref="authenticated"
+        class="level-right">
         <div class="level-item">
           <button
             class="button is-primary-light"
@@ -27,13 +30,16 @@
             <b-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
             </b-dropdown-item>
-            <b-dropdown-item
-              ref="logout"
-              @click="logout()">Logout</b-dropdown-item>
+            <b-dropdown-item @click="logout()">
+              Logout
+            </b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
-      <div class="level-right" v-else>
+      <div
+        v-else
+        ref="notAuthenticated"
+        class="level-right">
         <div class="level-item">
           <button
             ref="login"
