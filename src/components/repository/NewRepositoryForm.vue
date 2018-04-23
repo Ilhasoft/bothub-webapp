@@ -4,7 +4,8 @@
       v-if="formSchema"
       :schema="formSchema"
       v-model="data"
-      :errors="errors" />
+      :errors="errors"
+      class="field" />
     <div class="field">
       <div class="control has-text-centered">
         <button
