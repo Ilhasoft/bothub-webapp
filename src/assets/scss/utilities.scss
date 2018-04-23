@@ -3,7 +3,11 @@
 $primary-light: #b3f0be;
 $primary-light-invert: #099081;
 
+$secondary: #2a206b;
+$secondary-invert: #7E9AF8;
+
 $colors: join(('primary-light': ($primary-light, $primary-light-invert)), $colors);
+$colors: join(('secondary': ($secondary, $secondary-invert)), $colors);
 
 $link: $primary;
 $link-invert: $primary-invert;

@@ -46,4 +46,8 @@ body {
   background-position: center top;
   background-size: cover;
 }
+
+.container-padding {
+  padding: 0 8px;
+}
 </style>
