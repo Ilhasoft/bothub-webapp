@@ -29,8 +29,9 @@ export default {
 
 @import "~bulma/sass/utilities/_all";
 
-$primary: #26c2b1;
-$primary-invert: findColorInvert($primary);
+$primary-light: #b3f0be;
+
+$colors: join(("primary-light": ($primary-light, #099081)), $colors);
 
 $link: $primary;
 $link-invert: $primary-invert;
@@ -43,6 +44,12 @@ $family-sans-serif: 'Encode Sans', sans-serif;
 
 * {
  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {

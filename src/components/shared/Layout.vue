@@ -3,38 +3,42 @@
     <new-repository-modal
       v-if="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal" />
-    <header class="container">
-      <div class="columns">
-        <div class="column">
-          <h1 class="logo">Bothub</h1>
-        </div>
-        <div class="column">[search]</div>
-        <div class="column">
-          <div v-if="authenticated">
-            <p>Hello, {{ myProfile.name || '...' }}</p>
-            <p><a
-              href="#start-your-bot"
-              @click.prevent="openNewRepositoryModal">start your bot</a></p>
-            <p><a
-              ref="logout"
-              href="#logout"
-              @click.prevent="logout">Logout</a></p>
-          </div>
-          <div v-if="!authenticated">
-            <p><a
-              ref="login"
-              href="#login"
-              @click.prevent="openLoginModal">Login</a></p>
+    <div class="topbar level">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="topbar-brand">
+            <router-link to="/">
+              <img src="@/assets/imgs/logo-white.svg" alt="bothub">
+            </router-link>
           </div>
         </div>
       </div>
-    </header>
-    <hr />
-    <nav class="container">
-      <router-link :to="{ name: 'home' }" href="#home">Home</router-link> -
-      <router-link :to="{ name: 'myProfile' }" href="#my-profile">My Profile</router-link>
-    </nav>
-    <hr />
+      <div class="level-right" v-if="authenticated">
+        <div class="level-item">
+          <button
+            class="button is-primary-light"
+            @click.prevent="openNewRepositoryModal">start your bot</button>
+        </div>
+        <div class="level-item">
+          <b-dropdown position="is-bottom-left">
+            <button
+              slot="trigger"
+              class="topbar-avatar" />
+            <router-link :to="{ name: 'myProfile' }" href="#my-profile">
+              <b-dropdown-item>{{ myProfile.name || '...' }}</b-dropdown-item>
+            </router-link>
+            <b-dropdown-item @click="logout()">Logout</b-dropdown-item>
+          </b-dropdown>
+        </div>
+      </div>
+      <div class="level-right" v-else>
+        <div class="level-item">
+          <button
+            class="button is-primary-light"
+            @click.prevent="openLoginModal">sign in</button>
+        </div>
+      </div>
+    </div>
     <slot />
   </div>
 </template>
@@ -84,8 +88,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.logo {
-  font-size: 2em;
+.topbar {
+  padding: 16px;
+
+  &-brand {
+    width: 140px;
+
+    img { width: 100%; }
+  }
+
+  &-avatar {
+    $size: 36px;
+    width: $size;
+    height: $size;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    background-color: #dddddd;
+    outline: none;
+    cursor: pointer;
+  }
 }
 </style>
 
