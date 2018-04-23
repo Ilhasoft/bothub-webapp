@@ -3,18 +3,41 @@
     <li
       v-for="category in categories"
       :key="category.id"
-      :class="{ active: category.active }">{{ category.name }}</li>
+      :class="{ active: current === category.id }"
+      @click="$emit('clickOnCategory', category.id)">{{ category.name }}</li>
   </ul>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'CategoriesList',
   props: {
-    categories: {
-      type: Array,
-      required: true,
+    current: {
+      type: Number,
+      default: 0,
     },
+  },
+  async mounted() {
+    const categoriesResponse = await this.getAllCategories();
+    this.allCategories = categoriesResponse.data;
+  },
+  data() {
+    return {
+      allCategories: [],
+    };
+  },
+  computed: {
+    categories() {
+      return [{ id: 0, name: 'All', active: this.current === 0 }]
+        .concat(this.allCategories);
+    },
+  },
+  methods: {
+    ...mapActions([
+      'getAllCategories',
+    ]),
   },
 };
 </script>

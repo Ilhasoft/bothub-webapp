@@ -1,11 +1,17 @@
-import { shallow } from '@vue/test-utils';
+/* eslint-disable import/first */
+jest.mock('@/api/request');
+
+import { shallow, createLocalVue } from '@vue/test-utils';
 import CategoriesList from '@/components/shared/CategoriesList';
+import store from '@/store';
+
+const localVue = createLocalVue();
 
 
 describe('CategoriesList.vue', () => {
   let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(CategoriesList, { propsData: { categories: [] } });
+  beforeEach(async () => {
+    wrapper = shallow(CategoriesList, { localVue, store });
   });
 
   test('mount', () => {

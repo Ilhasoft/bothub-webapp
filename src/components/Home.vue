@@ -6,7 +6,9 @@
     </header>
     <div class="container"><search-bar /></div>
     <div class="wrapper">
-      <categories-list :categories="categories" />
+      <categories-list
+        :current="currentCategory"
+        @clickOnCategory="setCurrentCategory($event)" />
     </div>
   </layout>
 </template>
@@ -27,11 +29,14 @@ export default {
   components,
   data() {
     return {
-      categories: [
-        { id: 0, name: 'All', active: true },
-        { id: 1, name: 'BI' },
-      ],
+      allCategories: [],
+      currentCategory: 0,
     };
+  },
+  methods: {
+    setCurrentCategory(id) {
+      this.currentCategory = id;
+    },
   },
 };
 </script>
