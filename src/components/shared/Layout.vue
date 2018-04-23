@@ -27,13 +27,16 @@
             <b-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
             </b-dropdown-item>
-            <b-dropdown-item @click="logout()">Logout</b-dropdown-item>
+            <b-dropdown-item
+              ref="logout"
+              @click="logout()">Logout</b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
       <div class="level-right" v-else>
         <div class="level-item">
           <button
+            ref="login"
             class="button is-primary-light"
             @click.prevent="openLoginModal">sign in</button>
         </div>
@@ -91,6 +94,7 @@ export default {
       this.newRepositoryModalOpen = false;
     },
     openMyProfile() {
+      /* istanbul ignore next */
       this.$router.push('myProfile');
     },
   },
