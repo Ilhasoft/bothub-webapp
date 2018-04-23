@@ -8,6 +8,6 @@ describe('api/category.js', () => {
   test('getAll', async () => {
     const response = await category.getAll();
     expect(typeof response).toBe('object');
-    expect(typeof response.data.results).toBe('object');
+    expect(typeof response.data).toBe('object');
   });
 });

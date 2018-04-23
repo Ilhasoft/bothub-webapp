@@ -2,25 +2,20 @@
   {
     "response": {
       "status": 200,
-      "data": {
-        "count": 3,
-        "next": null,
-        "previous": null,
-        "results": [
-          {
-            "id": 1,
-            "name": "Business"
-          },
-          {
-            "id": 2,
-            "name": "World"
-          },
-          {
-            "id": 3,
-            "name": "Technology"
-          }
-        ]
-      }
+      "data": [
+        {
+          "id": 1,
+          "name": "Business"
+        },
+        {
+          "id": 2,
+          "name": "World"
+        },
+        {
+          "id": 3,
+          "name": "Technology"
+        }
+      ]
     }
   }
 ]
