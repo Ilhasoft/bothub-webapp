@@ -1,0 +1,12 @@
+@import '~bulma/sass/utilities/_all';
+
+$primary-light: #b3f0be;
+$primary-light-invert: #099081;
+
+$colors: join(('primary-light': ($primary-light, $primary-light-invert)), $colors);
+
+$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+$family-sans-serif: 'Encode Sans', sans-serif;

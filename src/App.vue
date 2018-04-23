@@ -26,21 +26,9 @@ export default {
 
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,700|Roboto:300,400,700,900');
-
-@import "~bulma/sass/utilities/_all";
-
-$primary-light: #b3f0be;
-
-$colors: join(("primary-light": ($primary-light, #099081)), $colors);
-
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
-
-$family-sans-serif: 'Encode Sans', sans-serif;
-
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~@/assets/scss/utilities.scss';
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 * {
  box-sizing: border-box;
