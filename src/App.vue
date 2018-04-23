@@ -45,6 +45,7 @@ body {
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
+  background-attachment: fixed;
 }
 
 .container-padding {
