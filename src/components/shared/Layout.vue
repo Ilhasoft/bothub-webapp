@@ -3,7 +3,7 @@
     <new-repository-modal
       v-if="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal" />
-    <div class="topbar level">
+    <div class="topbar level is-mobile">
       <div class="level-left">
         <div class="level-item">
           <div class="topbar-brand">
@@ -17,10 +17,10 @@
         v-if="authenticated"
         ref="authenticated"
         class="level-right">
-        <div class="level-item">
+        <div class="level-item is-hidden-mobile">
           <button
             class="button is-primary-light"
-            @click.prevent="openNewRepositoryModal">start your bot</button>
+            @click.prevent="openNewRepositoryModal()">start your bot</button>
         </div>
         <div class="level-item">
           <b-dropdown position="is-bottom-left">
@@ -29,6 +29,9 @@
               class="topbar-avatar" />
             <b-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
+            </b-dropdown-item>
+            <b-dropdown-item @click="openNewRepositoryModal()">
+              Start your bot
             </b-dropdown-item>
             <b-dropdown-item @click="logout()">
               Logout
