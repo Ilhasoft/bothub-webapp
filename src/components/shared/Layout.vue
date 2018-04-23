@@ -24,9 +24,9 @@
             <button
               slot="trigger"
               class="topbar-avatar" />
-            <router-link :to="{ name: 'myProfile' }" href="#my-profile">
-              <b-dropdown-item>{{ myProfile.name || '...' }}</b-dropdown-item>
-            </router-link>
+            <b-dropdown-item @click="openMyProfile()">
+              {{ myProfile.name || '...' }}
+            </b-dropdown-item>
             <b-dropdown-item @click="logout()">Logout</b-dropdown-item>
           </b-dropdown>
         </div>
@@ -56,7 +56,14 @@ export default {
   name: 'Layout',
   components,
   mounted() {
+    document.title = this.title;
     this.updateMyProfile();
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'bothub',
+    },
   },
   data() {
     return {
@@ -82,6 +89,9 @@ export default {
     closeNewRepositoryModal() {
       /* istanbul ignore next */
       this.newRepositoryModalOpen = false;
+    },
+    openMyProfile() {
+      this.$router.push('myProfile');
     },
   },
 };
