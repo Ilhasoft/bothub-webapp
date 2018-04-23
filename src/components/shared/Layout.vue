@@ -56,6 +56,7 @@
       </div>
     </div>
     <slot />
+    <site-footer />
   </div>
 </template>
 
@@ -63,9 +64,11 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import SiteFooter from '@/components/shared/SiteFooter';
 
 const components = {
   NewRepositoryModal,
+  SiteFooter,
 };
 
 export default {

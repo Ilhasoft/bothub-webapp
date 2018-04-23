@@ -45,7 +45,7 @@ header {
 .wrapper {
   margin-top: -25px;
   background-color: #f8f8f8;
-  min-height: 200px;
+  min-height: 400px;
   padding: 36px 8px 8px;
 }
 </style>
