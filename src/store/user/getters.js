@@ -1,4 +1,4 @@
 export default {
   myProfile: ({ profiles, nicknameAuthenticated }) => (profiles[nicknameAuthenticated] || {}),
-  getProfile: ({ profiles }) => nickname => (profiles[nickname] || {}),
+  getProfile: ({ profiles }) => nickname => (profiles[nickname] || { name: nickname, nickname }),
 };
