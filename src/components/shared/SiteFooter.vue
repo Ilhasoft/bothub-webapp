@@ -8,7 +8,7 @@
               <img src="~@/assets/imgs/logo-white.svg" alt="bothub" />
             </div>
             <ul class="footer-item">
-              <li><a href="#">Terms & conditions</a></li>
+              <li><a href="#">Terms &amp; conditions</a></li>
               <li><a href="#">Privacy policy</a></li>
               <li><a href="#">Copyrights Notification</a></li>
             </ul>
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="footer-license">
-        <p class="has-text-centered">Bothub is a project by IlhaSoft.
+        <p class="has-text-centered">Bothub is a project by Ilhasoft.
           &copy; 2018 All rights reserved.</p>
       </div>
     </div>
