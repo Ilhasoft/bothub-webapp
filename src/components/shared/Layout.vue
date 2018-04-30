@@ -3,39 +3,60 @@
     <new-repository-modal
       v-if="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal" />
-    <header class="container">
-      <div class="columns">
-        <div class="column">
-          <h1 class="logo">Bothub</h1>
-        </div>
-        <div class="column">[search]</div>
-        <div class="column">
-          <div v-if="authenticated">
-            <p>Hello, {{ myProfile.name || '...' }}</p>
-            <p><a
-              href="#start-your-bot"
-              @click.prevent="openNewRepositoryModal">start your bot</a></p>
-            <p><a
-              ref="logout"
-              href="#logout"
-              @click.prevent="logout">Logout</a></p>
-          </div>
-          <div v-if="!authenticated">
-            <p><a
-              ref="login"
-              href="#login"
-              @click.prevent="openLoginModal">Login</a></p>
+    <div class="topbar level is-mobile">
+      <div class="level-left">
+        <div class="level-item">
+          <div class="topbar-brand">
+            <router-link to="/">
+              <img src="@/assets/imgs/logo-white.svg" alt="bothub">
+            </router-link>
           </div>
         </div>
       </div>
-    </header>
-    <hr />
-    <nav class="container">
-      <router-link :to="{ name: 'home' }" href="#home">Home</router-link> -
-      <router-link :to="{ name: 'myProfile' }" href="#my-profile">My Profile</router-link>
-    </nav>
-    <hr />
+      <div
+        v-if="authenticated"
+        ref="authenticated"
+        class="level-right">
+        <div class="level-item is-hidden-mobile">
+          <button
+            class="button is-primary-light"
+            @click.prevent="openNewRepositoryModal()">start your bot</button>
+        </div>
+        <div class="level-item">
+          <b-dropdown position="is-bottom-left">
+            <button
+              slot="trigger"
+              class="topbar-avatar">
+              <b-icon
+                icon="account"
+                class="topbar-avatar-icon" />
+            </button>
+            <b-dropdown-item @click="openMyProfile()">
+              {{ myProfile.name || '...' }}
+            </b-dropdown-item>
+            <b-dropdown-item @click="openNewRepositoryModal()">
+              Start your bot
+            </b-dropdown-item>
+            <b-dropdown-item @click="logout()">
+              Logout
+            </b-dropdown-item>
+          </b-dropdown>
+        </div>
+      </div>
+      <div
+        v-else
+        ref="notAuthenticated"
+        class="level-right">
+        <div class="level-item">
+          <button
+            ref="login"
+            class="button is-primary-light"
+            @click.prevent="openLoginModal">sign in</button>
+        </div>
+      </div>
+    </div>
     <slot />
+    <site-footer />
   </div>
 </template>
 
@@ -43,16 +64,25 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import SiteFooter from '@/components/shared/SiteFooter';
 
 const components = {
   NewRepositoryModal,
+  SiteFooter,
 };
 
 export default {
   name: 'Layout',
   components,
   mounted() {
+    document.title = this.title;
     this.updateMyProfile();
+  },
+  props: {
+    title: {
+      type: String,
+      default: 'bothub',
+    },
   },
   data() {
     return {
@@ -79,13 +109,47 @@ export default {
       /* istanbul ignore next */
       this.newRepositoryModalOpen = false;
     },
+    openMyProfile() {
+      /* istanbul ignore next */
+      this.$router.push('myProfile');
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.logo {
-  font-size: 2em;
+@import '~@/assets/scss/utilities.scss';
+
+.topbar {
+  padding: 16px;
+
+  &-brand {
+    width: 140px;
+
+    img { width: 100%; }
+  }
+
+  &-avatar {
+    $size: 36px;
+
+    position: relative;
+    width: $size;
+    height: $size;
+    overflow: hidden;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    background-color: $white-ter;
+    outline: none;
+    cursor: pointer;
+
+    &-icon {
+      position: absolute;
+      left: 50%;
+      height: 50%;
+      transform: translate(-50%, -50%);
+      color: $grey-light;
+    }
+  }
 }
 </style>
 

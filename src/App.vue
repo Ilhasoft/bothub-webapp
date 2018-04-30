@@ -25,15 +25,30 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~bulma/sass/utilities/_all";
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,700|Roboto:300,400,700,900');
+@import '~@/assets/scss/utilities.scss';
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
-$primary: $turquoise;
-$primary-invert: findColorInvert($primary);
+* {
+ box-sizing: border-box;
+}
 
-$link: $primary;
-$link-invert: $primary-invert;
-$link-focus-border: $primary;
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+body {
+  background-image: url('~@/assets/imgs/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.container-padding {
+  padding: 0 8px;
+}
 </style>
