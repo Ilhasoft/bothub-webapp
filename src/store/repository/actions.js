@@ -16,4 +16,7 @@ export default {
     const response = await repository.new(name, slug, language, categories, description, isPrivate);
     return response;
   },
+  getAllRepositories() {
+    return repository.getAll();
+  },
 };
