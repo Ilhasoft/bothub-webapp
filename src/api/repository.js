@@ -1,4 +1,6 @@
 import request from './request';
+import utils from './utils';
+
 
 export default {
   async getNewSchema() {
@@ -17,5 +19,8 @@ export default {
         is_private: isPrivate,
       },
     );
+  },
+  getAll() {
+    return new utils.List('/repositories/');
   },
 };
