@@ -14,13 +14,13 @@ localVue.use(Buefy);
 
 
 describe('RepositoryCard.vue', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(RepositoryCard, {
-      localVue,
-      store,
-      propsData: {
-        repository: {
+  describe('full', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallow(RepositoryCard, {
+        localVue,
+        store,
+        propsData: {
           uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
           owner: 1,
           owner__nickname: 'fake',
@@ -37,11 +37,29 @@ describe('RepositoryCard.vue', () => {
           is_private: false,
           created_at: '2018-04-20T17:05:42.035514Z',
         },
-      },
+      });
+    });
+
+    test('mount', () => {
+      expect(wrapper.vm).toBeDefined();
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  describe('minimum', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallow(RepositoryCard, {
+        localVue,
+        store,
+        propsData: {
+          owner__nickname: 'fake',
+          name: 'Repository',
+        },
+      });
+    });
+
+    test('mount', () => {
+      expect(wrapper.vm).toBeDefined();
+    });
   });
 });

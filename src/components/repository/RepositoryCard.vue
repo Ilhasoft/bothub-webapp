@@ -14,7 +14,7 @@
               </button>
             </div>
             <div class="repository-left-avatar">
-              <img src="@/assets/imgs/avatar.png" :alt="repository.name" />
+              <img src="@/assets/imgs/avatar.png" :alt="name" />
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
           <div class="level repository-infospace">
             <div class="level-left">
               <div class="level-item">
-                <a class="repository-title title is-4">{{ repository.name }}</a>
+                <a class="repository-title title is-4">{{ name }}</a>
               </div>
             </div>
             <div class="level-right">
@@ -38,17 +38,17 @@
           </div>
           <div>
             <div class="subtitle is-6 repository-infospace">Created by
-              {{ getProfile(repository.owner__nickname).name || repository.owner__nickname }}</div>
+              {{ getProfile(owner__nickname).name || owner__nickname }}</div>
             <div class="repository-infospace">
-              <flags-list :languages="repository.available_languages" />
+              <flags-list :languages="available_languages" />
             </div>
             <p
-              v-if="repository.description"
-              class="repository-description">{{ repository.description }}</p>
+              v-if="description"
+              class="repository-description">{{ description }}</p>
             <p
               v-else
               class="repository-description repository-description-empty">No description</p>
-            <repository-categories-list :categories="repository.categories_list" />
+            <repository-categories-list :categories="categories_list" />
           </div>
         </div>
       </div>
@@ -69,14 +69,29 @@ const components = {
 export default {
   name: 'RepositoryCard',
   props: {
-    repository: {
-      type: Object,
+    name: {
+      type: String,
       required: true,
+    },
+    owner__nickname: {
+      type: String,
+      required: true,
+    },
+    available_languages: {
+      type: Array,
+      default: () => ([]),
+    },
+    description: {
+      type: String,
+    },
+    categories_list: {
+      type: Array,
+      default: () => ([]),
     },
   },
   components,
   mounted() {
-    this.updateProfile({ nickname: this.repository.owner__nickname });
+    this.updateProfile({ nickname: this.owner__nickname });
   },
   computed: {
     ...mapGetters([
@@ -93,6 +108,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+
+.card {
+  margin: 1rem 0;
+}
 
 .repository {
   &-left {
