@@ -19,4 +19,7 @@ export default {
   getAllRepositories() {
     return repository.getAll();
   },
+  searchRepositories(store, querys) {
+    return repository.search(querys);
+  },
 };
