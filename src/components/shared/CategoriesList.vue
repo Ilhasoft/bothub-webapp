@@ -4,7 +4,7 @@
       v-for="category in categories"
       :key="category.id"
       :class="{ active: current === category.id }"
-      @click="$emit('clickOnCategory', category.id)">{{ category.name }}</li>
+      @click="$emit('input', category.id)">{{ category.name }}</li>
   </ul>
 </template>
 

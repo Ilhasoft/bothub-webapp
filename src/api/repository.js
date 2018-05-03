@@ -1,4 +1,8 @@
+import qs from 'query-string';
+
 import request from './request';
+import utils from './utils';
+
 
 export default {
   async getNewSchema() {
@@ -17,5 +21,12 @@ export default {
         is_private: isPrivate,
       },
     );
+  },
+  getAll() {
+    return new utils.List('/repositories/');
+  },
+  search(query) {
+    const queryString = qs.stringify(query);
+    return new utils.List(`/repositories/?${queryString}`);
   },
 };

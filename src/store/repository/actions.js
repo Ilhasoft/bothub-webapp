@@ -16,4 +16,11 @@ export default {
     const response = await repository.new(name, slug, language, categories, description, isPrivate);
     return response;
   },
+  getAllRepositories() {
+    /* istanbul ignore next */
+    return repository.getAll();
+  },
+  searchRepositories(store, querys) {
+    return repository.search(querys);
+  },
 };
