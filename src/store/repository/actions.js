@@ -22,4 +22,7 @@ export default {
   searchRepositories(store, querys) {
     return repository.search(querys);
   },
+  getRepository(store, { ownerNickname, slug }) {
+    return repository.get(ownerNickname, slug);
+  },
 };
