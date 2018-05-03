@@ -3,26 +3,15 @@
     <div class="card-content">
       <div class="columns">
         <div class="column is-narrow">
-          <div class="repository-left">
-            <div class="repository-left-updownvote">
-              <button class="repository-left-updownvote-btn">
-                <b-icon icon="chevron-up" />
-              </button>
-              <div class="repository-left-updownvote-value">0</div>
-              <button class="repository-left-updownvote-btn">
-                <b-icon icon="chevron-down" />
-              </button>
-            </div>
-            <div class="repository-left-avatar">
-              <img src="@/assets/imgs/avatar.png" :alt="name" />
-            </div>
-          </div>
+          <repository-avatar :name="name" />
         </div>
         <div class="column">
           <div class="level repository-infospace">
             <div class="level-left">
               <div class="level-item">
-                <a class="repository-title title is-4">{{ name }}</a>
+                <router-link
+                  :to="`/${owner__nickname}/${slug}/`"
+                  class="repository-title title is-4">{{ name }}</router-link>
               </div>
             </div>
             <div class="level-right">
@@ -58,10 +47,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
 import RepositoryCategoriesList from '@/components/repository/RepositoryCategoriesList';
 import FlagsList from '@/components/shared/FlagsList';
 
 const components = {
+  RepositoryAvatar,
   RepositoryCategoriesList,
   FlagsList,
 };
@@ -69,6 +60,10 @@ const components = {
 export default {
   name: 'RepositoryCard',
   props: {
+    slug: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -114,71 +109,6 @@ export default {
 }
 
 .repository {
-  &-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &-updownvote {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      align-self: center;
-
-      &-value {
-        width: 100px;
-        font-size: 20px;
-        padding: 5px 10px;
-        border-radius: 20px 0 0 20px;
-        color: #AEAEAE;
-        text-align: center;
-        background-color: #F2F2F2;
-        box-shadow: inset 0 2px 6px -2px #929292;
-
-        &-active {
-          background-color: #0f0;
-          box-shadow: inset 0 2px 6px 0 #1b756a;
-          color: #FFF;
-        }
-      }
-
-      &-btn {
-        color: #0a0;
-        font-size: 30px;
-        background-color: transparent;
-        border: 0;
-        outline: none;
-        cursor: pointer;
-
-        @media (max-width: $desktop) {
-          width: 30px;
-          height: 40px;
-          text-align: center;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      }
-    }
-
-    &-avatar {
-      width: 134px;
-      height: 134px;
-      margin: 0 0 0 -10px;
-      overflow: hidden;
-      border-radius: 100%;
-      position: relative;
-      z-index: 2;
-
-      @media (max-width: $desktop) {
-        width: 100px;
-        height: 100px;
-      }
-    }
-  }
-
   &-title {
     font-weight: 500;
     display: inline-block;
