@@ -8,7 +8,7 @@ describe('API List', () => {
   test('repositories test', async () => {
     const list = new List('/repositories/');
     await list.next();
-    expect(list.items).toHaveLength(1);
-    expect(list.hasNext).toBeFalsy();
+    expect(list.items).toHaveLength(20);
+    expect(list.hasNext).toBeTruthy();
   });
 });

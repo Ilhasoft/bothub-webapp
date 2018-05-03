@@ -8,7 +8,7 @@
     <div class="wrapper">
       <categories-list
         :current="currentCategory"
-        @clickOnCategory="setCurrentCategory($event)" />
+        v-model="currentCategory" />
       <div class="container">
         <pagination
           v-if="repositoryList"
@@ -38,8 +38,13 @@ const components = {
 export default {
   name: 'Home',
   components,
-  async mounted() {
-    this.repositoryList = await this.getAllRepositories();
+  mounted() {
+    this.updateRepositoryList();
+  },
+  watch: {
+    currentCategory() {
+      this.updateRepositoryList();
+    },
   },
   data() {
     return {
@@ -51,9 +56,13 @@ export default {
   methods: {
     ...mapActions([
       'getAllRepositories',
+      'searchRepositories',
     ]),
-    setCurrentCategory(id) {
-      this.currentCategory = id;
+    async updateRepositoryList() {
+      this.repositoryList = null;
+      this.repositoryList = this.currentCategory > 0 ?
+        await this.searchRepositories({ categories: [this.currentCategory] }) :
+        await this.getAllRepositories();
     },
   },
 };
