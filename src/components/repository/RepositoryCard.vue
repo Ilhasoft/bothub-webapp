@@ -28,7 +28,9 @@
           <div>
             <div class="subtitle is-6 repository-infospace">Created by
               {{ getProfile(owner__nickname).name || owner__nickname }}</div>
-            <div class="repository-infospace">
+            <div
+              v-if="available_languages"
+              class="repository-infospace">
               <flags-list :languages="available_languages" />
             </div>
             <p
@@ -37,7 +39,9 @@
             <p
               v-else
               class="repository-description repository-description-empty">No description</p>
-            <repository-categories-list :categories="categories_list" />
+            <div v-if="categories_list">
+              <repository-categories-list :categories="categories_list" />
+            </div>
           </div>
         </div>
       </div>
@@ -74,14 +78,12 @@ export default {
     },
     available_languages: {
       type: Array,
-      default: () => ([]),
     },
     description: {
       type: String,
     },
     categories_list: {
       type: Array,
-      default: () => ([]),
     },
   },
   components,
