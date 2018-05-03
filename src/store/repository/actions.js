@@ -21,9 +21,11 @@ export default {
     return repository.getAll();
   },
   searchRepositories(store, querys) {
+    /* istanbul ignore next */
     return repository.search(querys);
   },
   getRepository(store, { ownerNickname, slug }) {
+    /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
 };
