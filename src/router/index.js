@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/components/Home';
 import MyProfile from '@/components/MyProfile';
 import ResetPassword from '@/components/ResetPassword';
+import Repository from '@/components/Repository';
 import store from '../store';
 
 Vue.use(Router);
@@ -30,6 +31,11 @@ export default new Router({
           next();
         }
       },
+    },
+    {
+      path: '/:ownerNickname/:slug/',
+      name: 'repository',
+      component: Repository,
     },
   ],
 });
