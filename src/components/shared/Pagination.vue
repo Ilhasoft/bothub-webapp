@@ -29,7 +29,6 @@ export default {
   props: {
     itemComponent: {
       required: true,
-      type: Object,
     },
     list: {
       required: true,
