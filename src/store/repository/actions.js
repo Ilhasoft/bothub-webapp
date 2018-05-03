@@ -17,6 +17,7 @@ export default {
     return response;
   },
   getAllRepositories() {
+    /* istanbul ignore next */
     return repository.getAll();
   },
 };
