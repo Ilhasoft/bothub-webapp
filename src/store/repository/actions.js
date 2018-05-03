@@ -20,4 +20,7 @@ export default {
     /* istanbul ignore next */
     return repository.getAll();
   },
+  searchRepositories(store, querys) {
+    return repository.search(querys);
+  },
 };

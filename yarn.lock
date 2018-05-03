@@ -6015,6 +6015,13 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
+query-string@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.0.0.tgz#8b8f39447b73e8290d6f5e3581779218e9171142"
+  dependencies:
+    decode-uri-component "^0.2.0"
+    strict-uri-encode "^2.0.0"
+
 querystring-es3@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -6259,9 +6266,11 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-"request-mockup-json@https://github.com/douglasppaz/request-mockup-json#develop":
+"request-mockup-json@https://github.com/douglasppaz/request-mockup-json":
   version "0.1.0"
-  resolved "https://github.com/douglasppaz/request-mockup-json#e8f7a4c8e65d1714e0241a2d6e34a8c1539fceee"
+  resolved "https://github.com/douglasppaz/request-mockup-json#df6c8e05f65ca0de1ac4e8b41bd732e89873c7dd"
+  dependencies:
+    query-string "^6.0.0"
 
 request-promise-core@1.1.1:
   version "1.1.1"
@@ -6922,6 +6931,10 @@ stream-shift@^1.0.0:
 strict-uri-encode@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
+
+strict-uri-encode@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-2.0.0.tgz#b9c7330c7042862f6b142dc274bbcc5866ce3546"
 
 string-length@^1.0.1:
   version "1.0.1"

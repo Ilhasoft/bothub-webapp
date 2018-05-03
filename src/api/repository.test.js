@@ -25,6 +25,15 @@ describe('api/repository', () => {
   test('getAll', async () => {
     const list = repository.getAll();
     await list.next();
-    expect(list.items).toHaveLength(1);
+    expect(list.items).toHaveLength(20);
+  });
+
+  test('search categories', async () => {
+    const list = repository.search({ categories: [1] });
+    await list.next();
+    expect(list.items).toHaveLength(15);
+    list.items.forEach((item) => {
+      expect(item.categories.includes(1)).toBeTruthy();
+    });
   });
 });
