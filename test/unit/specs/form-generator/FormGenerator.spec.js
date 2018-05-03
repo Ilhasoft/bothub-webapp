@@ -45,34 +45,4 @@ describe('FormGenerator.vue', () => {
         .toContain('name');
     });
   });
-
-  describe('invalid schema', () => {
-    test('null', () => {
-      expect(() => {
-        shallow(
-          FormGenerator,
-          {
-            localVue,
-            propsData: {
-              schema: null,
-            },
-          });
-      }).toThrow();
-    });
-
-    test('with null element', () => {
-      expect(() => {
-        shallow(
-          FormGenerator,
-          {
-            localVue,
-            propsData: {
-              schema: {
-                name: null,
-              },
-            },
-          });
-      }).toThrow();
-    });
-  });
 });
