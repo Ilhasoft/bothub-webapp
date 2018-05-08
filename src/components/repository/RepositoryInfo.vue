@@ -25,7 +25,11 @@
       </div>
       <div>
         <div class="subtitle is-6 repository-infospace">Created by
-          {{ getProfile(owner__nickname).name || owner__nickname }}</div>
+          {{ getProfile(owner__nickname).name || owner__nickname }} -
+          <a
+            :href="repositoryURL"
+            class="has-text-grey"
+            target="_blank">{{ repositoryURL }}</a></div>
         <div
           v-if="available_languages"
           class="repository-infospace">
@@ -97,6 +101,9 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+    repositoryURL() {
+      return `https://bothub.it/${this.owner__nickname}/${this.slug}/`;
+    },
   },
   methods: {
     ...mapActions([
