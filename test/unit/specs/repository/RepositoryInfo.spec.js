@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import Buefy from 'buefy';
 import Router from 'vue-router';
 import { shallow, createLocalVue } from '@vue/test-utils';
-import RepositoryCard from '@/components/repository/RepositoryCard';
+import RepositoryInfo from '@/components/repository/RepositoryInfo';
 
 import store from '@/store';
 import router from '@/router';
@@ -19,7 +19,7 @@ localVue.use(Router);
 describe('RepositoryCard.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(RepositoryCard, {
+    wrapper = shallow(RepositoryInfo, {
       localVue,
       store,
       router,

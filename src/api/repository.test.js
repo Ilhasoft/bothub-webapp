@@ -36,4 +36,10 @@ describe('api/repository', () => {
       expect(item.categories.includes(1)).toBeTruthy();
     });
   });
+
+  test('get', async () => {
+    const response = await repository.get('douglas', 'repo1');
+    expect(response.data).toBeDefined();
+    expect(response.data.slug).toBe('repo1');
+  });
 });
