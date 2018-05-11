@@ -6,6 +6,7 @@ import LoginModal from './login-modal';
 import User from './user';
 import Repository from './repository';
 import Category from './category';
+import Example from './example';
 
 Vue.use(Vuex);
 
@@ -16,6 +17,7 @@ const store = new Vuex.Store({
     User,
     Repository,
     Category,
+    Example,
   },
 });
 
