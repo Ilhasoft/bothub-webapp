@@ -30,5 +30,21 @@
         "intent": "name"
       }
     }
+  },
+  {
+    "data": {
+      "repository": "8511fd26-a3bc-4f74-9af1-176abca5401d",
+      "text": "",
+      "entities": [],
+      "intent": ""
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "text": [
+          "This field may not be blank."
+        ]
+      }
+    }
   }
 ]
