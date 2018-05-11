@@ -10,10 +10,9 @@
     <div class="field">
       <div class="control">
         <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting"
-          >Reset password</button>
+          type="submit"
+          class="button is-primary"
+          :disabled="submitting">Reset password</button>
       </div>
     </div>
   </form>
