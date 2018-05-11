@@ -8,4 +8,6 @@ export const getEntitiesList = (entities, extra = []) => entities
     result.concat([current]) :
     result), []);
 
-export const ONE = 1;
+export const LEVEL_NOTHING = 0;
+export const LEVEL_READER = 0;
+export const LEVEL_ADMIN = 0;
