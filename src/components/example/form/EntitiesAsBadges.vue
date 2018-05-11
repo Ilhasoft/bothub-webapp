@@ -20,7 +20,9 @@
         @click="add()"
         class="button is-rounded is-small">Add an entity for "{{ textSelected }}"</button>
     </div>
-    <form @submit.prevent="confirmAdding()" v-if="adding">
+    <form
+      v-if="adding"
+      @submit.prevent="confirmAdding()">
       <b-field>
         <p class="control">
           <span class="button is-static is-small">{{ addingText }} is</span>
@@ -58,9 +60,11 @@ export default {
   props: {
     value: {
       type: Array,
+      default: null,
     },
     initialData: {
       type: Array,
+      default: null,
     },
     text: {
       type: String,
@@ -80,7 +84,7 @@ export default {
       this.$emit('input', this.entities);
     },
     text(newText, oldText) {
-      this.adding = false;
+      this.cancelAdding();
 
       /*
         Entity follow text,
@@ -130,7 +134,7 @@ export default {
         (this.adding.start !== this.selected.start ||
         this.adding.end !== this.selected.end)) {
         /* istanbul ignore next */
-        this.adding = false;
+        this.cancelAdding();
       }
     },
   },
@@ -174,13 +178,13 @@ export default {
       }
 
       this.entities.push(this.adding);
-      this.adding = false;
+      this.cancelAdding();
     },
     cancelAdding() {
       this.adding = false;
     },
     remove(index) {
-      this.adding = false;
+      this.cancelAdding();
       this.entities.splice(index, 1);
     },
     getEntityClass(entity) {
