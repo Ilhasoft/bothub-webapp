@@ -9,5 +9,5 @@ export const getEntitiesList = (entities, extra = []) => entities
     result), []);
 
 export const LEVEL_NOTHING = 0;
-export const LEVEL_READER = 0;
-export const LEVEL_ADMIN = 0;
+export const LEVEL_READER = 1;
+export const LEVEL_ADMIN = 2;
