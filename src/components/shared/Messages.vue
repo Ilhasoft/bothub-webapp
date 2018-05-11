@@ -1,14 +1,21 @@
 <template>
-  <ul v-if="list.length > 0" class="messages">
-    <li
+  <div class="messages">
+    <div
+      v-if="list.length > 0"
       v-for="(msg, index) in list"
       :key="index"
-      :class="msg.class || 'default'"
-      class="item">{{ msg.text }}</li>
-  </ul>
+      :class="getClass(msg)">{{ msg.text }}</div>
+  </div>
 </template>
 
 <script>
+const notificationRelatedClass = {
+  info: 'is-info',
+  success: 'is-success',
+  warning: 'is-warning',
+  error: 'is-danger',
+};
+
 export default {
   name: 'Messages',
   props: {
@@ -22,39 +29,23 @@ export default {
       return this.msgs.map(msg => (typeof msg === 'object' ? msg : { text: msg }));
     },
   },
+  methods: {
+    getClass(msg) {
+      const notificationClass = notificationRelatedClass[msg.class || 'info'];
+      return `notification ${notificationClass}`;
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .messages {
-  padding: 0;
-  margin: 8px 0;
-  list-style: none;
-  border-radius: 16px;
-  overflow: hidden;
+  .notification {
+    margin: 8px 0;
 
-  .item {
-    padding: 8px 16px;
-    text-align: left;
-    font-size: 18px;
-    font-weight: bold;
-    color: black;
-
-    &.default {
-      background-color: #eeeeee;
-    }
-    &.success {
-      background-color: green;
-      color: white;
-    }
-    &.error {
-      background-color: red;
-      color: white;
-    }
-    &.warning {
-      background-color: yellow;
+    &:first-child {
+      margin: 0 0 8px;
     }
   }
 }
 </style>
-
