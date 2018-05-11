@@ -125,6 +125,7 @@ export default {
       this.entities = this.entities.filter(value => !!value);
     },
     selected() {
+      /* istanbul ignore next */
       if (this.adding && this.selected &&
         (this.adding.start !== this.selected.start ||
         this.adding.end !== this.selected.end)) {
@@ -142,6 +143,7 @@ export default {
   computed: {
     textSelected() {
       const { start, end } = this.selected;
+      /* istanbul ignore next */
       if (start === 0 && end === 0) {
         /* istanbul ignore next */
         return false;
@@ -165,6 +167,7 @@ export default {
       });
     },
     confirmAdding(value) {
+      /* istanbul ignore next */
       if (value) {
         /* istanbul ignore next */
         this.adding.entity = value;
