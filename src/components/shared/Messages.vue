@@ -10,10 +10,10 @@
 
 <script>
 const notificationRelatedClass = {
-  'info': 'is-info',
-  'success': 'is-success',
-  'warning': 'is-warning',
-  'error': 'is-danger',
+  info: 'is-info',
+  success: 'is-success',
+  warning: 'is-warning',
+  error: 'is-danger',
 };
 
 export default {
@@ -33,7 +33,7 @@ export default {
     getClass(msg) {
       const notificationClass = notificationRelatedClass[msg.class || 'info'];
       return `notification ${notificationClass}`;
-    }
+    },
   },
 };
 </script>
