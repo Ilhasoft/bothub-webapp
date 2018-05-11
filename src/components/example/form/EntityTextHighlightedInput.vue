@@ -52,6 +52,7 @@ export default {
   },
   watch: {
     value() {
+      /* istanbul ignore next */
       if (this.value !== this.out) {
         this.out = this.value;
       }
