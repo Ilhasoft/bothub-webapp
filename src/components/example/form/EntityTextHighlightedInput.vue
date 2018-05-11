@@ -1,20 +1,31 @@
 <template>
-  <div class="highlighted">
-    <div
-      v-for="(entity, i) in entitiesBlocks"
-      :key="i"
-      class="highlighted-item">
+  <div class="control has-icons-right">
+    <div class="highlighted">
+      <div
+        v-for="(entity, i) in entitiesBlocks"
+        :key="i"
+        class="highlighted-item">
         <span class="highlighted-item-before">{{ entity.before }}</span>
         <span :class="`highlighted-item-text ${entity.colorClass}`">{{ entity.text }}</span>
       </div>
-    <input
-      ref="input"
-      type="text"
-      class="input"
-      v-model="out"
-      @select="emitSelected()"
-      @click="emitSelected()"
-      @keyup="emitSelected()" />
+      <input
+        ref="input"
+        type="text"
+        class="input"
+        v-model="out"
+        @select="emitSelected()"
+        @click="emitSelected()"
+        @keyup="emitSelected()" />
+    </div>
+    <span
+      v-if="errors.length > 0"
+      class="icon is-small is-right">
+      <b-icon icon="alert" />
+    </span>
+    <p
+      v-for="(error, i) in errors"
+      :key="i"
+      class="error help is-danger">{{ error }}</p>
   </div>
 </template>
 
@@ -34,8 +45,17 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    errors: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   watch: {
+    value() {
+      if (this.value !== this.out) {
+        this.out = this.value;
+      }
+    },
     out() {
       this.$emit('input', this.out);
     },
@@ -120,5 +140,9 @@ export default {
       border-radius: 4px;
     }
   }
+}
+
+.error {
+  padding: 2px 4px;
 }
 </style>
