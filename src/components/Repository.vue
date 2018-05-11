@@ -32,12 +32,30 @@
       </ul>
       <b-tabs
         v-model="activeTab"
-        class="hide-tabs-nav">
+        class="hide-tabs-nav tabs-remove-padding">
         <b-tab-item>
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>No description.</p>
         </b-tab-item>
-        <b-tab-item>Examples</b-tab-item>
+        <b-tab-item>
+          <div class="new-example-wrapper">
+            <new-example-form
+              v-if="repository.authorization.can_contribute"
+              :repository="repository" />
+            <div v-else-if="authenticated">
+              <div class="notification is-warning">
+                You can not contribute to this repository
+              </div>
+            </div>
+            <div v-else>
+              <div class="notification is-info">
+                Sign in to your account to contribute to this repository.
+              </div>
+              <login-form hideForgotPassword />
+            </div>
+          </div>
+          <div style="height: 300px;"></div>
+        </b-tab-item>
         <b-tab-item>Translate</b-tab-item>
         <b-tab-item>Update</b-tab-item>
         <b-tab-item>Issues</b-tab-item>
@@ -59,12 +77,16 @@ import Layout from '@/components/shared/Layout';
 import Loading from '@/components/shared/Loading';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components/shared/ErrorMessage';
+import NewExampleForm from '@/components/example/NewExampleForm';
+import LoginForm from '@/components/auth/LoginForm';
 
 const components = {
   Layout,
   Loading,
   RepositoryInfo,
   ErrorMessage,
+  NewExampleForm,
+  LoginForm,
 };
 
 export default {
@@ -81,7 +103,7 @@ export default {
   data() {
     return {
       repository: null,
-      activeTab: 0,
+      activeTab: 1,
       hasError: false,
       errorDetail: null,
     };
@@ -177,12 +199,23 @@ export default {
     }
   }
 }
+
+.new-example-wrapper {
+  padding: 8px;
+  background-color: $white-ter;
+}
 </style>
 
 <style lang="scss">
 .hide-tabs-nav {
   > nav.tabs {
     display: none;
+  }
+}
+
+.tabs-remove-padding {
+  .tab-content {
+    padding: 0;
   }
 }
 </style>

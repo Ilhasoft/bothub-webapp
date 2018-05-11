@@ -6,7 +6,9 @@
       v-model="data"
       :errors="errors"
       class="field" />
-    <div class="field">
+    <div
+      v-if="!hideForgotPassword"
+      class="field">
       <div class="control has-text-right">
         <a
           ref="forgotPassword"
@@ -37,6 +39,12 @@ const components = {
 
 export default {
   name: 'LoginForm',
+  props: {
+    hideForgotPassword: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components,
   async mounted() {
     this.formSchema = await this.getLoginSchema();
