@@ -54,7 +54,11 @@ export default {
       return this.list.items
         .map((data, i) => ({
           id: i,
-          data,
+          data: Object.assign(
+            {},
+            this.$attrs,
+            data,
+          ),
         }))
         .filter(item => !this.deletions.includes(item.id));
     },
