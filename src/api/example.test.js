@@ -24,4 +24,8 @@ describe('api/example', () => {
     await list.next();
     expect(list.items).toHaveLength(1);
   });
+  test('delete', async () => {
+    const response = await example.delete(1);
+    expect(response.status).toBe(204);
+  });
 });

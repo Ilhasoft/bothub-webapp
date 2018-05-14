@@ -19,4 +19,7 @@ export default {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid });
     return new utils.List(`/examples/?${queryString}`);
   },
+  delete(exampleId) {
+    return request.$http.delete(`/example/${exampleId}/`);
+  },
 };
