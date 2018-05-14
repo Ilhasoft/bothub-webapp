@@ -5,4 +5,8 @@ export default {
     const response = await example.new(repository, text, entities, intent);
     return response;
   },
+  async getExamples(store, { repositoryUuid }) {
+    const response = await example.all(repositoryUuid);
+    return response;
+  },
 };
