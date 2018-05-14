@@ -9,4 +9,8 @@ export default {
     const response = await example.all(repositoryUuid);
     return response;
   },
+  async deleteExample(store, { id }) {
+    await example.delete(id);
+    return true;
+  },
 };
