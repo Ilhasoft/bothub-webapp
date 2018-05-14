@@ -24,4 +24,20 @@ describe('Pagination.vue', () => {
   test('mount', () => {
     expect(wrapper.vm).toBeDefined();
   });
+
+  describe('item deleted', () => {
+    beforeEach(() => {
+      wrapper.vm.onItemDeleted(0);
+    });
+
+    test('index on deletions', () => {
+      expect(wrapper.vm.deletions).toContain(0);
+    });
+
+    test('item filtered', () => {
+      wrapper.vm.items.forEach((item) => {
+        expect(item.id).not.toBe(0);
+      });
+    });
+  });
 });
