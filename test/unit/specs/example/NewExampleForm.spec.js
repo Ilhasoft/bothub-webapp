@@ -68,6 +68,10 @@ describe('NewExampleForm.vue', () => {
       test('don\'t have errrors', () => {
         expect(Object.keys(wrapper.vm.errors).length).toBe(0);
       });
+
+      test('emit created', () => {
+        expect(wrapper.emitted('created').length).toBe(1);
+      });
     });
   });
 
