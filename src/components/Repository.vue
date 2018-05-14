@@ -17,31 +17,32 @@
         <li
           @click="activeTab = 1"
           :class="{'navbar-item': true, 'active': activeTab === 1}">Examples</li>
-        <li
-          @click="activeTab = 2"
-          :class="{'navbar-item': true, 'active': activeTab === 2}">Translate</li>
-        <li
-          @click="activeTab = 3"
-          :class="{'navbar-item': true, 'active': activeTab === 3}">Update</li>
-        <li
-          @click="activeTab = 4"
-          :class="{'navbar-item': true, 'active': activeTab === 4}">Issues</li>
-        <li
-          @click="activeTab = 5"
-          :class="{'navbar-item': true, 'active': activeTab === 5}">Historic</li>
       </ul>
       <b-tabs
         v-model="activeTab"
         class="hide-tabs-nav tabs-remove-padding">
         <b-tab-item>
-          <p v-if="repository.description">{{ repository.description }}</p>
-          <p v-else>No description.</p>
+          <div class="notification">
+            <p>
+              <span>{{ repository.examples__count }} examples,</span>
+              <span>created {{ repository.created_at | moment('from') }}.</span>
+            </p>
+            <p>
+              <span>You {{ repository.authorization.can_contribute | can_t }} contribute and</span>
+              <span>you {{ repository.authorization.can_write | can_t }} write.</span>
+            </p>
+          </div>
+          <div class="tab-padding">
+            <p v-if="repository.description">{{ repository.description }}</p>
+            <p v-else>No description.</p>
+          </div>
         </b-tab-item>
         <b-tab-item>
-          <div class="new-example-wrapper">
+          <div class="notification">
             <new-example-form
               v-if="repository.authorization.can_contribute"
-              :repository="repository" />
+              :repository="repository"
+              @created="onExampleCreated()" />
             <div v-else-if="authenticated">
               <div class="notification is-warning">
                 You can not contribute to this repository
@@ -54,7 +55,10 @@
               <login-form hideForgotPassword />
             </div>
           </div>
-          <div style="height: 300px;"></div>
+          <h1 class="title examples-title">Examples</h1>
+          <examples-list
+            ref="examplesList"
+            :repository="repository" />
         </b-tab-item>
         <b-tab-item>Translate</b-tab-item>
         <b-tab-item>Update</b-tab-item>
@@ -79,6 +83,7 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components/shared/ErrorMessage';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components/auth/LoginForm';
+import ExamplesList from '@/components/example/ExamplesList';
 
 const components = {
   Layout,
@@ -87,6 +92,7 @@ const components = {
   ErrorMessage,
   NewExampleForm,
   LoginForm,
+  ExamplesList,
 };
 
 export default {
@@ -103,10 +109,15 @@ export default {
   data() {
     return {
       repository: null,
-      activeTab: 1,
+      activeTab: 0,
       hasError: false,
       errorDetail: null,
     };
+  },
+  filters: {
+    can_t(value) {
+      return value ? 'can' : 'can\'t';
+    },
   },
   computed: {
     ...mapGetters([
@@ -129,6 +140,9 @@ export default {
         this.errorDetail = detail;
       }
     },
+    onExampleCreated() {
+      this.$refs.examplesList.updateExamples();
+    },
   },
 };
 </script>
@@ -149,6 +163,10 @@ export default {
     border-radius: 0;
     padding: 8px;
   }
+}
+
+.tab-padding {
+  padding: 8px;
 }
 
 .navbar {
@@ -200,9 +218,8 @@ export default {
   }
 }
 
-.new-example-wrapper {
-  padding: 8px;
-  background-color: $white-ter;
+.examples-title {
+  margin: 48px 8px 0;
 }
 </style>
 
