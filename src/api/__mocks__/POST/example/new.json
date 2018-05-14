@@ -27,7 +27,7 @@
             "entity": "name"
           }
         ],
-        "intent": "name"
+        "intent": "greet"
       }
     }
   },
