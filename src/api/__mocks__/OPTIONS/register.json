@@ -1,0 +1,58 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "Register User List",
+        "description": "Register new user",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "POST": {
+            "email": {
+              "type": "email",
+              "required": true,
+              "read_only": false,
+              "label": "Email",
+              "help_text": "User's e-mail.",
+              "max_length": 254,
+              "style": {}
+            },
+            "name": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Name",
+              "help_text": "User's name.",
+              "max_length": 32,
+              "style": {}
+            },
+            "nickname": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Nickname",
+              "help_text": "User's nickname, using letters, numbers, underscores and hyphens without spaces.",
+              "max_length": 16,
+              "style": {}
+            },
+            "password": {
+              "type": "password",
+              "required": true,
+              "read_only": false,
+              "label": "Password",
+              "style": {}
+            }
+          }
+        }
+      }
+    }
+  }
+]

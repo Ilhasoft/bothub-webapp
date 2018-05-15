@@ -1,0 +1,56 @@
+<template>
+  <div class="card">
+    <div class="card-content">
+      <repository-info
+        :slug="slug"
+        :name="name"
+        :owner__nickname="owner__nickname"
+        :available_languages="available_languages"
+        :description="description"
+        :categories_list="categories_list" />
+    </div>
+  </div>
+</template>
+
+<script>
+import RepositoryInfo from '@/components/repository/RepositoryInfo';
+
+const components = {
+  RepositoryInfo,
+};
+
+export default {
+  name: 'RepositoryCard',
+  props: {
+    slug: {
+      type: String,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    owner__nickname: {
+      type: String,
+      required: true,
+    },
+    available_languages: {
+      type: Array,
+    },
+    description: {
+      type: String,
+    },
+    categories_list: {
+      type: Array,
+    },
+  },
+  components,
+};
+</script>
+
+<style lang="scss" scoped>
+.card {
+  margin: 1rem 0;
+}
+</style>
+

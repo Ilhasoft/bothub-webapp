@@ -1,0 +1,28 @@
+import Buefy from 'buefy';
+import { shallow, createLocalVue } from '@vue/test-utils';
+
+import MultipleChoice from '@/components/form-generator/inputs/MultipleChoice';
+
+const localVue = createLocalVue();
+localVue.use(Buefy);
+
+describe('MultipleChoice.vue', () => {
+  describe('valid', () => {
+    let wrapper;
+    beforeAll(() => {
+      wrapper = shallow(MultipleChoice, {
+        localVue,
+        propsData: {
+          choices: [
+            { value: 1, display_name: 'One' },
+            { value: 2, display_name: 'Two' },
+          ],
+        },
+      });
+    });
+
+    it('mount', () => {
+      expect(wrapper.vm).toBeDefined();
+    });
+  });
+});
