@@ -18,4 +18,8 @@ export default class List {
     this.items = this.items.concat(response.data.results);
     return this.items;
   }
+
+  get empty() {
+    return this.items.length === 0;
+  }
 }

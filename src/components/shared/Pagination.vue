@@ -1,10 +1,11 @@
 <template>
   <div>
     <component
-      v-for="item in list.items"
+      v-for="item in items"
       :key="item.id"
       :is="itemComponent"
-      v-bind="item" />
+      v-bind="item.data"
+      @deleted="onItemDeleted(item.id)" />
     <loading v-if="loading" />
     <div
       v-if="list.hasNext"
@@ -45,13 +46,31 @@ export default {
   data() {
     return {
       loading: false,
+      deletions: [],
     };
+  },
+  computed: {
+    items() {
+      return this.list.items
+        .map((data, i) => ({
+          id: i,
+          data: Object.assign(
+            {},
+            this.$attrs,
+            data,
+          ),
+        }))
+        .filter(item => !this.deletions.includes(item.id));
+    },
   },
   methods: {
     async loadingMore() {
       this.loading = true;
       await this.list.next();
       this.loading = false;
+    },
+    onItemDeleted(id) {
+      this.deletions.push(id);
     },
   },
 };

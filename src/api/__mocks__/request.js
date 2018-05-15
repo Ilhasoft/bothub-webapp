@@ -16,6 +16,7 @@ export default {
       post: requestMockupJson.create('POST', config),
       put: requestMockupJson.create('PUT', config),
       options: requestMockupJson.create('OPTIONS', config),
+      delete: requestMockupJson.create('DELETE', config),
     };
   },
 };
