@@ -32,4 +32,7 @@ export default {
   get(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/`);
   },
+  train(ownerNickname, slug) {
+    return request.$http.get(`/repository/${ownerNickname}/${slug}/train/`);
+  },
 };
