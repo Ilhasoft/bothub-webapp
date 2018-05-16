@@ -1,4 +1,5 @@
 export default (Vue) => {
+  /* istanbul ignore next */
   Vue.filter('languageVerbose', lang => ({
     en: 'English',
     de: 'German',

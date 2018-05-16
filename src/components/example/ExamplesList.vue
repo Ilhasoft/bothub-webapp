@@ -53,6 +53,7 @@ export default {
       });
     },
     onItemDeleted(id) {
+      /* istanbul ignore next */
       this.$emit('exampleDeleted', id);
     },
   },
