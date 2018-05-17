@@ -71,6 +71,7 @@ export default {
     },
     onItemDeleted(id) {
       this.deletions.push(id);
+      this.$emit('itemDeleted', id);
     },
   },
 };

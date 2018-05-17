@@ -23,14 +23,33 @@
         class="hide-tabs-nav tabs-remove-padding">
         <b-tab-item>
           <div class="notification">
-            <p>
-              <span>{{ repository.examples__count }} examples,</span>
-              <span>created {{ repository.created_at | moment('from') }}.</span>
-            </p>
-            <p>
-              <span>You {{ repository.authorization.can_contribute | can_t }} contribute and</span>
-              <span>you {{ repository.authorization.can_write | can_t }} write.</span>
-            </p>
+            <div class="columns">
+              <div class="column">
+                <p>
+                  <span>{{ repository.examples__count }} examples,</span>
+                  <span>created {{ repository.created_at | moment('from') }}.</span>
+                </p>
+                <p>
+                  <span>You {{ repository.authorization.can_contribute | can_t }}
+                    contribute and</span>
+                  <span>you {{ repository.authorization.can_write | can_t }} write.</span>
+                </p>
+              </div>
+              <div
+                v-if="repository.authorization.can_write"
+                class="column is-narrow">
+                <button
+                  :disabled="!repository.ready_for_train || training"
+                  class="button is-primary is-medium"
+                  @click="train()">
+                  <b-icon
+                    :icon="training ? 'refresh' : 'school'"
+                    :customClass="training && 'icon-spin' || null" />
+                  <span v-if="training">Training</span>
+                  <span v-else>Train</span>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="tab-padding">
             <p v-if="repository.description">{{ repository.description }}</p>
@@ -55,10 +74,34 @@
               <login-form hideForgotPassword />
             </div>
           </div>
+          <div
+            v-if="repository.authorization.can_write && repository.ready_for_train"
+            class="notification is-info">
+            <div class="level">
+              <div class="level-left">
+                <div class="level-item">Repository ready to train</div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <button
+                    :disabled="training"
+                    class="button is-info is-inverted is-outlined"
+                    @click="train()">
+                    <b-icon
+                      :icon="training ? 'refresh' : 'school'"
+                      :customClass="training && 'icon-spin' || null" />
+                    <span v-if="training">Training</span>
+                    <span v-else>Train</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <h1 class="title examples-title">Examples</h1>
           <examples-list
             ref="examplesList"
-            :repository="repository" />
+            :repository="repository"
+            @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
         <b-tab-item>Translate</b-tab-item>
         <b-tab-item>Update</b-tab-item>
@@ -71,7 +114,73 @@
       class="wrapper">
         <loading />
       </div>
-    <div v-else><error-message :detail="errorDetail" /></div>
+    <div v-else><error-message :detail="!!errorDetail" /></div>
+    <b-modal
+      v-if="!!trainResponse"
+      active
+      @close="onCloseTrainResponseModal()">
+      <div class="card">
+        <div class="card-content">
+          <h1 class="title">Repository Trained!</h1>
+          <table class="table is-fullwidth is-hoverable">
+            <thead>
+              <tr>
+                <th colspan="2">Languages Report</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(data, language) in trainResponse.languages_report"
+                :key="language">
+                <td>{{ language | languageVerbose }}</td>
+                <td class="has-text-right">
+                  <b-icon
+                    v-if="data.status === 'trained'"
+                    icon="check"
+                    type="is-success" />
+                  <b-icon
+                    v-else-if="data.status === 'not_ready_for_train'"
+                    icon="dots-horizontal"
+                    type="is-info" />
+                  <div v-else-if="data.status === 'failed'">
+                    <div>
+                      <b-icon
+                        icon="close"
+                        type="is-danger" />
+                    </div>
+                    <p class="is-size-7">{{ data.error }}</p>
+                  </div>
+                  <span v-else>{{ data.status }}</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="columns">
+            <div class="column has-text-centered">
+              <b-icon
+                icon="check"
+                type="is-success"
+                size="is-small" />
+              <span>Trained</span>
+            </div>
+            <div class="column has-text-centered">
+              <b-icon
+                icon="dots-horizontal"
+                type="is-info"
+                size="is-small" />
+              <span>No changes</span>
+            </div>
+            <div class="column has-text-centered">
+              <b-icon
+                icon="close"
+                type="is-danger"
+                size="is-small" />
+              <span>Failed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </b-modal>
   </layout>
 </template>
 
@@ -112,6 +221,8 @@ export default {
       activeTab: 0,
       hasError: false,
       errorDetail: null,
+      training: false,
+      trainResponse: null,
     };
   },
   filters: {
@@ -127,10 +238,13 @@ export default {
   methods: {
     ...mapActions([
       'getRepository',
+      'trainRepository',
     ]),
-    async updateRepository() {
+    async updateRepository(doNull = true) {
       const { ownerNickname, slug } = this.$route.params;
-      this.repository = null;
+      if (doNull) {
+        this.repository = null;
+      }
       try {
         const response = await this.getRepository({ ownerNickname, slug });
         this.repository = response.data;
@@ -142,6 +256,28 @@ export default {
     },
     onExampleCreated() {
       this.$refs.examplesList.updateExamples();
+      this.updateRepository(false);
+    },
+    async train() {
+      const { ownerNickname, slug } = this.$route.params;
+      this.training = true;
+      try {
+        const response = await this.trainRepository({ ownerNickname, slug });
+        this.trainResponse = response.data;
+      } catch (e) {
+        this.$toast.open({
+          message: 'Repository not trained :(',
+          type: 'is-danger',
+        });
+      }
+      this.training = false;
+      await this.updateRepository(false);
+    },
+    onExampleDeleted() {
+      this.updateRepository(false);
+    },
+    onCloseTrainResponseModal() {
+      this.trainResponse = null;
     },
   },
 };

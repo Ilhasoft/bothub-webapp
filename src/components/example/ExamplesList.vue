@@ -4,7 +4,8 @@
         v-if="examplesList"
         :itemComponent="exampleItemElem"
         :list="examplesList"
-        :repository="repository" />
+        :repository="repository"
+        @itemDeleted="onItemDeleted" />
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -50,6 +51,10 @@ export default {
       this.examplesList = await this.getExamples({
         repositoryUuid: this.repository.uuid || this.repository,
       });
+    },
+    onItemDeleted(id) {
+      /* istanbul ignore next */
+      this.$emit('exampleDeleted', id);
     },
   },
 };

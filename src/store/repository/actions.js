@@ -28,4 +28,7 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
+  trainRepository(store, { ownerNickname, slug }) {
+    return repository.train(ownerNickname, slug);
+  },
 };

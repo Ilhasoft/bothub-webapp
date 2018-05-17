@@ -1,0 +1,20 @@
+[
+  {
+    "response": {
+      "data": {
+        "response": {
+          "repository_uuid": "4c49b02a-8c6f-4e99-b758-8b407fe1ee4e",
+          "languages": [
+            "en",
+            "de",
+            "es",
+            "pt",
+            "fr",
+            "it",
+            "nl"
+          ]
+        }
+      }
+    }
+  }
+]
