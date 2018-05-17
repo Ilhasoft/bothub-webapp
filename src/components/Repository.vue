@@ -17,6 +17,9 @@
         <li
           @click="activeTab = 1"
           :class="{'navbar-item': true, 'active': activeTab === 1}">Examples</li>
+        <li
+          @click="activeTab = 2"
+          :class="{'navbar-item': true, 'active': activeTab === 2}">Analyze Text</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -51,10 +54,8 @@
               </div>
             </div>
           </div>
-          <div class="tab-padding">
-            <p v-if="repository.description">{{ repository.description }}</p>
-            <p v-else>No description.</p>
-          </div>
+          <p v-if="repository.description">{{ repository.description }}</p>
+          <p v-else>No description.</p>
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
@@ -103,10 +104,39 @@
             :repository="repository"
             @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
-        <b-tab-item>Translate</b-tab-item>
-        <b-tab-item>Update</b-tab-item>
-        <b-tab-item>Issues</b-tab-item>
-        <b-tab-item>Historic</b-tab-item>
+        <b-tab-item>
+          <div class="tab-padding">
+            <div v-if="authenticated">
+              <p class="item">Make a HTTP request to NLP service, follow the example bellow.</p>
+              <div class="columns">
+                <div class="column is-half">
+                  <div class="item">
+                    <p><strong>URL:</strong></p>
+                    <div class="pre">https://nlp.bothub.it/v1/message</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>Header:</strong></p>
+                    <div class="pre">Authorization: Bearer {{ repository.authorization.uuid }}</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>POST with form-data:</strong></p>
+                    <div class="pre">language: [language code]
+  msg: [text to analyze]</div>
+                  </div>
+                </div>
+                <div class="column is-half">
+                  <p class="item"><strong>Generator:</strong></p>
+                  <request-generator :authorizationUuid="repository.authorization.uuid" />
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="notification is-warning">
+                Sign in to your account to analyze text.
+              </div>
+            </div>
+          </div>
+        </b-tab-item>
       </b-tabs>
     </div>
     <div
@@ -193,6 +223,7 @@ import ErrorMessage from '@/components/shared/ErrorMessage';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components/auth/LoginForm';
 import ExamplesList from '@/components/example/ExamplesList';
+import RequestGenerator from '@/components/repository/RequestGenerator';
 
 const components = {
   Layout,
@@ -202,6 +233,7 @@ const components = {
   NewExampleForm,
   LoginForm,
   ExamplesList,
+  RequestGenerator,
 };
 
 export default {
@@ -218,7 +250,7 @@ export default {
   data() {
     return {
       repository: null,
-      activeTab: 0,
+      activeTab: 2,
       hasError: false,
       errorDetail: null,
       training: false,
@@ -355,7 +387,7 @@ export default {
 }
 
 .examples-title {
-  margin: 48px 8px 0;
+  margin: 2rem 8px 0;
 }
 </style>
 
