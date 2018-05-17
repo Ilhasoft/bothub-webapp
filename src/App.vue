@@ -94,4 +94,19 @@ $entities-colors: (
   animation-iteration-count: infinite;
   animation-timing-function: linear;
 }
+
+.item {
+  margin-bottom: 1rem;
+}
+
+.pre {
+  white-space: pre;
+  word-wrap: break-word;
+  padding: 16px;
+  background-color: $white-ter;
+  max-width: 100%;
+  overflow: auto;
+  font-family: monospace;
+  font-size: .75rem;
+}
 </style>

@@ -1,0 +1,69 @@
+<template>
+  <div>
+    <b-field label="Language">
+      <b-select v-model="language">
+        <option
+          v-for="(verbose, language) in languages"
+          :key="language"
+          :value="language">{{ verbose }}</option>
+      </b-select>
+    </b-field>
+    <b-field label="Message">
+      <b-input v-model="msg" type="textarea" />
+    </b-field>
+    <b-tabs v-model="activeTab">
+      <b-tab-item label="cURL">
+        <div class="pre">curl -X POST \
+-H 'Authorization: Bearer {{ authorizationUuid }}' \
+-F 'language={{ language }}' \
+-F 'msg={{ msg }}' \
+https://nlp.bothub.it/v1/message</div>
+      </b-tab-item>
+      <b-tab-item label="Python">
+        <div class="pre">import requests
+
+data = {
+  'language': '{{ language }}',
+  'msg': '{{ msg }}',
+}
+headers = { 'Authorization': 'Bearer {{ authorizationUuid }}' }
+r = requests.post('https://nlp.bothub.it/v1/message', headers=headers, data=data)
+print(r.json())</div>
+      </b-tab-item>
+      <b-tab-item label="Javascript">
+        <div class="pre">var data = new FormData();
+data.append('language', '{{ language }}');
+data.append('msg', '{{ msg }}');
+var request = new XMLHttpRequest();
+request.onload = function () {
+  console.log(JSON.parse(request.response));
+};
+request.open('POST', 'https://nlp.bothub.it/v1/message');
+request.setRequestHeader('Authorization', 'Bearer {{ authorizationUuid }}');
+request.send(data);</div>
+      </b-tab-item>
+    </b-tabs>
+  </div>
+</template>
+
+<script>
+import { LANGUAGES } from '@/utils';
+
+export default {
+  name: 'RequestGenerator',
+  props: {
+    authorizationUuid: {
+      type: String,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      languages: LANGUAGES,
+      activeTab: 0,
+      language: 'en',
+      msg: '',
+    };
+  },
+};
+</script>
