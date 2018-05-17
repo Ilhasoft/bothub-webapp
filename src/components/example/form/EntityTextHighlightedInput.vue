@@ -11,7 +11,10 @@
       <input
         ref="input"
         type="text"
-        class="input"
+        :class="{
+          'input': true,
+          'is-danger': errors.length > 0,
+        }"
         v-model="out"
         @select="emitSelected()"
         @click="emitSelected()"

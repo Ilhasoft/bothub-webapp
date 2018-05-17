@@ -42,4 +42,9 @@ describe('api/repository', () => {
     expect(response.data).toBeDefined();
     expect(response.data.slug).toBe('repo1');
   });
+
+  test('train', async () => {
+    const response = await repository.train('douglas', 'repo1');
+    expect(response.data).toBeDefined();
+  });
 });

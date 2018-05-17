@@ -7,10 +7,12 @@ import VueMoment from 'vue-moment';
 import App from './App';
 import router from './router';
 import store from './store';
+import applyFilters from './utils/filters';
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
 Vue.config.productionTip = false;
+applyFilters(Vue);
 
 /* eslint-disable no-new */
 new Vue({
