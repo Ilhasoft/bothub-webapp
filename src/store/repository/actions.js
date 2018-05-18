@@ -32,4 +32,8 @@ export default {
     /* istanbul ignore next */
     return repository.train(ownerNickname, slug);
   },
+  analyzeText(store, { ownerNickname, slug, language, text }) {
+    /* istanbul ignore next */
+    return repository.analyze(ownerNickname, slug, language, text);
+  },
 };
