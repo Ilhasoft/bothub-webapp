@@ -211,7 +211,10 @@
         </div>
       </div>
     </b-modal>
-    <analyze-text-drawer />
+    <analyze-text-drawer
+      v-if="repository && authenticated"
+      :ownerNickname="repository.owner__nickname"
+      :slug="repository.slug" />
   </layout>
 </template>
 
