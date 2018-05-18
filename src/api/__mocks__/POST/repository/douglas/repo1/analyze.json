@@ -39,5 +39,19 @@
         }
       }
     }
+  },
+  {
+    "data": {
+      "language": "en",
+      "text": ""
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "text": [
+          "This field may not be blank."
+        ]
+      }
+    }
   }
 ]
