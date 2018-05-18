@@ -1,0 +1,57 @@
+[
+  {
+    "data": {
+      "language": "en",
+      "text": "My name is Douglas"
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "repository_uuid": "8511fd26-a3bc-4f74-9af1-176abca5401d",
+        "update_id": 1,
+        "language": "en",
+        "msg": "My name is Douglas",
+        "answer": {
+          "intent": {
+            "name": "greet",
+            "confidence": 0.7424270364852223
+          },
+          "entities": [
+            {
+              "start": 11,
+              "end": 18,
+              "value": "Douglas",
+              "entity": "name",
+              "extractor": "ner_crf"
+            }
+          ],
+          "intent_ranking": [
+            {
+              "name": "greet",
+              "confidence": 0.7424270364852223
+            },
+            {
+              "name": "affirm",
+              "confidence": 0.14410867735373414
+            }
+          ],
+          "text": "My name is Douglas"
+        }
+      }
+    }
+  },
+  {
+    "data": {
+      "language": "en",
+      "text": ""
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "text": [
+          "This field may not be blank."
+        ]
+      }
+    }
+  }
+]

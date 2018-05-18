@@ -35,4 +35,13 @@ export default {
   train(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/train/`);
   },
+  analyze(ownerNickname, slug, language, text) {
+    return request.$http.post(
+      `/repository/${ownerNickname}/${slug}/analyze/`,
+      {
+        language,
+        text,
+      },
+    );
+  },
 };
