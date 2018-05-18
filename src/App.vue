@@ -109,4 +109,8 @@ $entities-colors: (
   font-family: monospace;
   font-size: .75rem;
 }
+
+.mh-200 {
+  max-height: 200px;
+}
 </style>
