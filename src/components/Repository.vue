@@ -211,6 +211,10 @@
         </div>
       </div>
     </b-modal>
+    <analyze-text-drawer
+      v-if="repository && authenticated"
+      :ownerNickname="repository.owner__nickname"
+      :slug="repository.slug" />
   </layout>
 </template>
 
@@ -224,6 +228,7 @@ import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components/auth/LoginForm';
 import ExamplesList from '@/components/example/ExamplesList';
 import RequestGenerator from '@/components/repository/RequestGenerator';
+import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 
 const components = {
   Layout,
@@ -234,6 +239,7 @@ const components = {
   LoginForm,
   ExamplesList,
   RequestGenerator,
+  AnalyzeTextDrawer,
 };
 
 export default {
