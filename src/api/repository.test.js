@@ -47,4 +47,9 @@ describe('api/repository', () => {
     const response = await repository.train('douglas', 'repo1');
     expect(response.data).toBeDefined();
   });
+
+  test('analyze', async () => {
+    const response = await repository.analyze('douglas', 'repo1', 'en', 'My name is Douglas');
+    expect(response.data).toBeDefined();
+  });
 });
