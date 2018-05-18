@@ -40,7 +40,7 @@ export default {
       `/repository/${ownerNickname}/${slug}/analyze/`,
       {
         language,
-        msg: text,
+        text,
       },
     );
   },

@@ -2,7 +2,7 @@
   {
     "data": {
       "language": "en",
-      "msg": "My name is Douglas"
+      "text": "My name is Douglas"
     },
     "response": {
       "status": 200,
