@@ -1,6 +1,10 @@
 <template>
-  <b-modal :active="open" @close="close">
-    <div class="card">
+  <b-modal
+    :active="open"
+    @close="close">
+    <div
+      v-if="open"
+      class="card">
       <b-tabs
         v-model="activeTab"
         position="is-centered"

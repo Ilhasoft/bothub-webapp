@@ -1,8 +1,10 @@
 <template>
   <b-modal
-    active
+    :active="active"
     @close="requestClose">
-    <div class="card">
+    <div
+      v-if="active"
+      class="card">
       <div class="card-content">
         <new-repository-form @created="closeAndRedirect" />
       </div>
@@ -20,15 +22,28 @@ const components = {
 export default {
   name: 'NewRepositoryModal',
   components,
+  props: {
+    active: {
+      default: false,
+    },
+  },
   methods: {
     requestClose() {
       /* istanbul ignore next */
       this.$emit('requestClose');
     },
-    closeAndRedirect() {
+    closeAndRedirect(repository) {
       /* istanbul ignore next */
       this.requestClose();
-      // TODO: redirect to repository route - use arg[0].uuid
+
+      /* istanbul ignore next */
+      this.$router.push({
+        name: 'repository',
+        params: {
+          ownerNickname: repository.owner__nickname,
+          slug: repository.slug,
+        },
+      });
     },
   },
 };

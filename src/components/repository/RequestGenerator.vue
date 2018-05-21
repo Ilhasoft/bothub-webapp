@@ -16,7 +16,7 @@
         <div class="pre">curl -X POST \
 -H 'Authorization: Bearer {{ authorizationUuid }}' \
 -F 'language={{ language }}' \
--F 'msg={{ msg }}' \
+-F "msg={{ msg_escaped.curl }}" \
 https://nlp.bothub.it/v1/message</div>
       </b-tab-item>
       <b-tab-item label="Python">
@@ -24,7 +24,7 @@ https://nlp.bothub.it/v1/message</div>
 
 data = {
   'language': '{{ language }}',
-  'msg': '{{ msg }}',
+  'msg': '{{ msg_escaped.python }}',
 }
 headers = { 'Authorization': 'Bearer {{ authorizationUuid }}' }
 r = requests.post('https://nlp.bothub.it/v1/message', headers=headers, data=data)
@@ -33,7 +33,7 @@ print(r.json())</div>
       <b-tab-item label="Javascript">
         <div class="pre">var data = new FormData();
 data.append('language', '{{ language }}');
-data.append('msg', '{{ msg }}');
+data.append('msg', '{{ msg_escaped.javascript }}');
 var request = new XMLHttpRequest();
 request.onload = function () {
   console.log(JSON.parse(request.response));
@@ -64,6 +64,15 @@ export default {
       language: 'en',
       msg: '',
     };
+  },
+  computed: {
+    msg_escaped() {
+      return {
+        curl: this.msg.replace(/"/g, '\\"'),
+        python: this.msg.replace(/'/g, '\\\''),
+        javascript: this.msg.replace(/'/g, '\\\''),
+      };
+    },
   },
 };
 </script>

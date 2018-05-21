@@ -1,7 +1,7 @@
 <template>
   <div>
     <new-repository-modal
-      v-if="newRepositoryModalOpen"
+      :active="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal" />
     <div class="topbar level is-mobile">
       <div class="level-left">

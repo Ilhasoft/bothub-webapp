@@ -5,8 +5,8 @@
         v-for="(entity, i) in entitiesBlocks"
         :key="i"
         class="example-text-highlighted">
-        <div class="example-text-highlighted-before">{{ entity.before }}</div>
-        <div :class="`example-text-highlighted-text ${entity.colorClass}`">{{ entity.text }}</div>
+        <span class="example-text-highlighted-before">{{ entity.before }}</span>
+        <span :class="`example-text-highlighted-text ${entity.colorClass}`">{{ entity.text }}</span>
       </div>
       <div class="example-text-content">{{ text }}</div>
     </div>
@@ -158,18 +158,11 @@ export default {
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
-    height: 3rem;
+    min-height: 3rem;
 
     &-content,
     &-highlighted {
-      position: absolute;
-      display: flex;
-      align-items: center;
       padding: 8px;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
     }
 
     &-content {
@@ -178,12 +171,13 @@ export default {
 
     &-highlighted {
       position: absolute;
+      top: 0;
+      left: 0;
       z-index: 0;
 
       &-before,
       &-text {
         color: rgba(0, 0, 0, 0);
-        white-space: pre;
       }
 
       &-text {
