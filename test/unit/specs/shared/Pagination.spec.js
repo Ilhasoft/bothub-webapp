@@ -56,7 +56,7 @@ describe('Pagination.vue', () => {
       });
 
       test('has items', () => {
-        console.log(wrapper.vm.items.length);
+        expect(wrapper.vm.list.items.length).toBeGreaterThan(0);
       });
     });
   });
