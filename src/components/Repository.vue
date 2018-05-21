@@ -146,10 +146,11 @@
       </div>
     <div v-else><error-message :detail="!!errorDetail" /></div>
     <b-modal
-      v-if="!!trainResponse"
-      active
+      :active="!!trainResponse"
       @close="onCloseTrainResponseModal()">
-      <div class="card">
+      <div
+        v-if="!!trainResponse"
+        class="card">
         <div class="card-content">
           <h1 class="title">Repository Trained!</h1>
           <table class="table is-fullwidth is-hoverable">
