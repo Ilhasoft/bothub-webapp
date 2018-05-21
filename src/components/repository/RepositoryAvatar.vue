@@ -45,7 +45,7 @@ export default {
       width: 100px;
       font-size: 20px;
       padding: 5px 10px;
-      border-radius: 20px 0 0 20px;
+      border-radius: 20px;
       color: #AEAEAE;
       text-align: center;
       background-color: #F2F2F2;
@@ -81,7 +81,7 @@ export default {
   &-img {
     width: 134px;
     height: 134px;
-    margin: 0 0 0 -10px;
+    margin: 0 0 0 -20px;
     overflow: hidden;
     border-radius: 100%;
     position: relative;
@@ -90,6 +90,10 @@ export default {
     @media (max-width: $desktop) {
       width: 100px;
       height: 100px;
+    }
+
+    @media (max-width: $tablet) {
+      display: none;
     }
   }
 }

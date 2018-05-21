@@ -9,10 +9,9 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting"
-          >Register</button>
+          type="submit"
+          class="button is-primary"
+          :disabled="submitting">Register</button>
       </div>
     </div>
   </form>

@@ -14,7 +14,9 @@ localVue.use(Vuex);
 describe('ExamplesList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    store.replaceState({});
+    store.replaceState({
+      Auth: {},
+    });
     wrapper = shallow(ExamplesList, {
       localVue,
       propsData: {
@@ -26,5 +28,15 @@ describe('ExamplesList.vue', () => {
 
   test('mount', () => {
     expect(wrapper.vm).toBeDefined();
+  });
+
+  describe('update list', () => {
+    beforeEach(async () => {
+      await wrapper.vm.updateExamples();
+    });
+
+    test('have items', () => {
+      expect(wrapper.vm.examplesList.items.length).toBeGreaterThan(0);
+    });
   });
 });

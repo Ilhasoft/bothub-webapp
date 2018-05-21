@@ -6,14 +6,14 @@
       :is="itemComponent"
       v-bind="item.data"
       @deleted="onItemDeleted(item.id)" />
-    <loading v-if="loading" />
+    <loading v-if="list.loading" />
     <div
       v-if="list.hasNext"
       class="next has-text-centered">
       <button
         class="button is-primary"
-        :disabled="loading"
-        @click="loadingMore()">{{ moreText }}</button>
+        :disabled="list.loading"
+        @click="next()">{{ moreText }}</button>
     </div>
   </div>
 </template>
@@ -41,11 +41,10 @@ export default {
   },
   components,
   async mounted() {
-    this.loadingMore();
+    await this.list.next();
   },
   data() {
     return {
-      loading: false,
       deletions: [],
     };
   },
@@ -64,10 +63,8 @@ export default {
     },
   },
   methods: {
-    async loadingMore() {
-      this.loading = true;
+    async next() {
       await this.list.next();
-      this.loading = false;
     },
     onItemDeleted(id) {
       this.deletions.push(id);
