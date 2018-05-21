@@ -25,10 +25,18 @@ export default {
       /* istanbul ignore next */
       this.$emit('requestClose');
     },
-    closeAndRedirect() {
+    closeAndRedirect(repository) {
       /* istanbul ignore next */
       this.requestClose();
-      // TODO: redirect to repository route - use arg[0].uuid
+
+      /* istanbul ignore next */
+      this.$router.push({
+        name: 'repository',
+        params: {
+          ownerNickname: repository.owner__nickname,
+          slug: repository.slug,
+        },
+      });
     },
   },
 };
