@@ -4,32 +4,31 @@
       <repository-avatar :name="name" />
     </div>
     <div class="column">
-      <div class="level repository-infospace">
-        <div class="level-left">
-          <div class="level-item">
-            <router-link
-              :to="`/${owner__nickname}/${slug}/`"
-              class="repository-title title is-4">{{ name }}</router-link>
-          </div>
+      <div class="repository-header repository-infospace">
+        <div class="repository-header-title">
+          <router-link
+            :to="`/${owner__nickname}/${slug}/`"
+            class="title is-4">{{ name }}</router-link>
         </div>
-        <div class="level-right">
-          <div class="level-item repository-status">
+        <div class="repository-header-info">
+          <div class="repository-header-info-item">
             <span>0 issues</span>
             <b-icon icon="alert-circle-outline" />
           </div>
-          <div class="level-item repository-status">
+          <div class="repository-header-info-item">
             <span>0 stars</span>
             <b-icon icon="star" />
           </div>
         </div>
       </div>
       <div>
-        <div class="subtitle is-6 repository-infospace">Created by
-          {{ getProfile(owner__nickname).name || owner__nickname }} -
-          <a
+        <div class="subtitle is-6 repository-infospace">
+          <p>Created by {{ getProfile(owner__nickname).name || owner__nickname }}</p>
+          <p><a
             :href="repositoryURL"
             class="has-text-grey"
-            target="_blank">{{ repositoryURL }}</a></div>
+            target="_blank">{{ repositoryURL }}</a></p>
+        </div>
         <div
           v-if="available_languages"
           class="repository-infospace">
@@ -117,30 +116,6 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 .repository {
-  &-title {
-    font-weight: 500;
-    display: inline-block;
-    color: $secondary;
-    text-decoration: none;
-    transition: color .2s ease;
-
-    &:hover {
-      color: $link;
-    }
-  }
-
-  &-status {
-    display: flex;
-    align-items: center;
-    color: $grey-light;
-
-    > * {
-      margin-right: 4px;
-
-      &:last-child { margin-right: 0; }
-    }
-  }
-
   &-infospace {
     margin-bottom: .5rem;
   }
@@ -150,6 +125,54 @@ export default {
 
     &-empty {
       font-style: italic;
+    }
+  }
+
+  &-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    &-title {
+      a {
+        font-weight: 500;
+        display: inline-block;
+        color: $secondary;
+        text-decoration: none;
+        transition: color .2s ease;
+
+        &:hover {
+          color: $link;
+        }
+      }
+    }
+
+    &-info {
+      display: flex;
+      align-items: center;
+      margin-left: 8px;
+
+      &-item {
+        display: flex;
+        align-items: center;
+        color: $grey-light;
+        margin-right: 8px;
+
+        &:last-child { margin-right: 0; }
+
+        span {
+          padding-right: 8px;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+      flex-direction: column-reverse;
+
+      &-info {
+        margin: 0 0 4px 0;
+      }
     }
   }
 }
