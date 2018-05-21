@@ -47,10 +47,14 @@ export default {
       'getExamples',
     ]),
     async updateExamples() {
-      this.examplesList = null;
-      this.examplesList = await this.getExamples({
-        repositoryUuid: this.repository.uuid || this.repository,
-      });
+      if (this.examplesList) {
+        this.examplesList.reset();
+        await this.examplesList.next();
+      } else {
+        this.examplesList = await this.getExamples({
+          repositoryUuid: this.repository.uuid || this.repository,
+        });
+      }
     },
     onItemDeleted(id) {
       /* istanbul ignore next */

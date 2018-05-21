@@ -40,4 +40,24 @@ describe('Pagination.vue', () => {
       });
     });
   });
+
+  describe('reset list', () => {
+    beforeEach(() => {
+      wrapper.vm.list.reset();
+    });
+
+    test('no items', () => {
+      expect(wrapper.vm.list.items.length).toBe(0);
+    });
+
+    describe('next', () => {
+      beforeEach(async () => {
+        await wrapper.vm.next();
+      });
+
+      test('has items', () => {
+        console.log(wrapper.vm.items.length);
+      });
+    });
+  });
 });
