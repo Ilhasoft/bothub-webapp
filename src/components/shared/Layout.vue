@@ -84,6 +84,11 @@ export default {
       default: 'bothub',
     },
   },
+  watch: {
+    title() {
+      document.title = this.title;
+    },
+  },
   data() {
     return {
       newRepositoryModalOpen: false,
@@ -111,7 +116,7 @@ export default {
     },
     openMyProfile() {
       /* istanbul ignore next */
-      this.$router.push('myProfile');
+      this.$router.push({ name: 'myProfile' });
     },
   },
 };
