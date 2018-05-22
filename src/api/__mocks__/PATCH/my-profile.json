@@ -1,0 +1,22 @@
+[
+  {
+    "headers": {
+      "Authorization": "Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+    },
+    "data": {
+      "nickname": "fake",
+      "email": "fake@user.com",
+      "name": "New Name",
+      "locale": ""
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "nickname": "fake",
+        "email": "fake@user.com",
+        "name": "New Name",
+        "locale": ""
+      }
+    }
+  }
+]

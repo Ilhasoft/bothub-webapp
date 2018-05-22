@@ -1,0 +1,60 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "My User Profile Instance",
+        "description": "Manager current user profile.\n\nretrieve:\nGet current user profile\n\nupdate:\nUpdate current user profile.\n\npartial_update:\nUpdate, partially, current user profile.",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "PUT": {
+            "nickname": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Nickname",
+              "help_text": "User's nickname, using letters, numbers, underscores and hyphens without spaces.",
+              "max_length": 16,
+              "style": {}
+            },
+            "email": {
+              "type": "email",
+              "required": true,
+              "read_only": false,
+              "label": "Email",
+              "help_text": "User's email.",
+              "max_length": 254,
+              "style": {}
+            },
+            "name": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Name",
+              "help_text": "User's name.",
+              "max_length": 32,
+              "style": {}
+            },
+            "locale": {
+              "type": "string",
+              "required": false,
+              "read_only": false,
+              "label": "Locale",
+              "help_text": "User's locale.",
+              "max_length": 48,
+              "style": {}
+            }
+          }
+        }
+      }
+    }
+  }
+]

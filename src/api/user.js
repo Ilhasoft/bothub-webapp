@@ -17,4 +17,19 @@ export default {
   myRepositories() {
     return new utils.List('/my-repositories/');
   },
+  async getMyProfileSchema() {
+    const { data } = await request.$http.options('/my-profile/');
+    return data.actions.PUT;
+  },
+  updateMyProfile(nickname, email, name, locale) {
+    return request.$http.patch(
+      '/my-profile/',
+      {
+        nickname,
+        email,
+        name,
+        locale,
+      },
+    );
+  },
 };
