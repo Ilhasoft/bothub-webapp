@@ -7,6 +7,7 @@ export default class List {
   constructor(initial) {
     this.initial = initial;
     this.nextEntryPoint = initial;
+    this.loading = false;
   }
 
   get hasNext() {
