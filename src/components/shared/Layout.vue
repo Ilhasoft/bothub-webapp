@@ -86,6 +86,7 @@ export default {
   },
   watch: {
     title() {
+      /* istanbul ignore next */
       document.title = this.title;
     },
   },
