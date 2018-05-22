@@ -4,6 +4,7 @@ jest.mock('./request');
 
 import auth from './auth';
 
+
 describe('api/auth.js', () => {
   test('getLoginSchema', async () => {
     const response = await auth.getLoginSchema();
@@ -43,17 +44,5 @@ describe('api/auth.js', () => {
   test('register', async () => {
     const response = await auth.register('new@user.com', 'New', 'new', 'n123456');
     expect(response.status).toBe(200);
-  });
-
-  test('profile', async () => {
-    const response = await auth.profile('fake');
-    expect(response.status).toBe(200);
-    expect(response.data.nickname).toBe('fake');
-  });
-
-  test('myProfile', async () => {
-    const response = await auth.myProfile();
-    expect(response.status).toBe(200);
-    expect(response.data.nickname).toBe('fake');
   });
 });

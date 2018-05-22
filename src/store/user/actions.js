@@ -1,5 +1,6 @@
-import auth from '@/api/auth';
+import user from '@/api/user';
 import TYPES from '../types';
+
 
 export default {
   async updateMyProfile({ commit, dispatch, getters }) {
@@ -7,7 +8,7 @@ export default {
       commit(TYPES.SET_NICKNAME_AUTHENTICATED, { nickname: null });
     } else {
       try {
-        const response = await auth.myProfile();
+        const response = await user.myProfile();
         commit(TYPES.SET_PROFILE, {
           nickname: response.data.nickname,
           data: response.data,
@@ -21,11 +22,14 @@ export default {
   },
   async updateProfile({ commit }, { nickname }) {
     /* istanbul ignore next */
-    const response = await auth.profile(nickname);
+    const response = await user.profile(nickname);
     /* istanbul ignore next */
     commit(TYPES.SET_PROFILE, {
       nickname,
       data: response.data,
     });
+  },
+  getMyRepositories() {
+    return user.myRepositories();
   },
 };
