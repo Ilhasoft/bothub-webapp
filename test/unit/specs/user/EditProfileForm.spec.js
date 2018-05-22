@@ -60,11 +60,15 @@ describe('EditProfileForm.spec.js', () => {
       });
 
       test('no errors', () => {
-        expect(Object.keys(wrapper.vm.errors).length).toBe(0);
+        expect(Object.keys(wrapper.vm.errors)).toHaveLength(0);
       });
 
       test('return true', () => {
         expect(r).toBeTruthy();
+      });
+
+      test('emit edited', () => {
+        expect(wrapper.emitted('edited')).toHaveLength(1);
       });
     });
   });
