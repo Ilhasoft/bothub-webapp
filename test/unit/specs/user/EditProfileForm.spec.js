@@ -2,7 +2,6 @@
 jest.mock('@/api/request');
 
 import Vuex from 'vuex';
-// import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -13,7 +12,6 @@ import EditProfileForm from '@/components/user/EditProfileForm';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
-// localVue.use(Buefy);
 
 describe('EditProfileForm.spec.js', () => {
   let wrapper;
