@@ -32,4 +32,17 @@ export default {
       },
     );
   },
+  async getChangePasswordSchema() {
+    const { data } = await request.$http.options('/change-password/');
+    return data.actions.PUT;
+  },
+  changePassword(currentPassword, password) {
+    return request.$http.put(
+      '/change-password/',
+      {
+        current_password: currentPassword,
+        password,
+      },
+    );
+  },
 };

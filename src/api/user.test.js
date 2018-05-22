@@ -40,4 +40,16 @@ describe('api/user.js', () => {
     expect(response.status).toBe(200);
     expect(response.data.name).toBe(newName);
   });
+
+  test('getChangePasswordSchema', async () => {
+    const response = user.getChangePasswordSchema();
+    expect(typeof response).toBe('object');
+  });
+
+  test('changePassword', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = user.changePassword('n123456', 'd123456');
+    expect(response.status).toBe(200);
+  });
 });
