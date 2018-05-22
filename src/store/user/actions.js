@@ -47,4 +47,11 @@ export default {
   patchMyProfile(store, { nickname, email, name, locale }) {
     return user.updateMyProfile(nickname, email, name, locale);
   },
+  async getChangePasswordSchema() {
+    const schema = await user.getChangePasswordSchema();
+    return schema;
+  },
+  changePassword(store, { current_password: currentPassword, password }) {
+    return user.changePassword(currentPassword, password);
+  },
 };
