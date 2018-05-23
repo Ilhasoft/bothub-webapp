@@ -140,5 +140,150 @@
         }
       }
     }
+  },
+  {
+    "headers": {
+      "Authorization": "Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "Repository Instance",
+        "description": "Manager repository.\n\nretrieve:\nGet repository data.\n\nupdate:\nUpdate your repository.\n\npartial_update:\nUpdate, partially, your repository.\n\ndelete:\nDelete your repository.",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "PUT": {
+            "uuid": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "Uuid",
+              "style": {
+                "show": false
+              }
+            },
+            "owner": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "Owner",
+              "style": {
+                "show": false
+              }
+            },
+            "name": {
+              "type": "string",
+              "required": true,
+              "read_only": false,
+              "label": "Name",
+              "help_text": "Repository display name",
+              "max_length": 64,
+              "style": {}
+            },
+            "slug": {
+              "type": "slug",
+              "required": true,
+              "read_only": false,
+              "label": "Slug",
+              "help_text": "Easy way to found and share repositories",
+              "max_length": 32,
+              "style": {}
+            },
+            "language": {
+              "type": "choice",
+              "required": true,
+              "read_only": false,
+              "label": "Language",
+              "help_text": "Repository's examples language. The examples can be translated to other languages.",
+              "choices": [
+                {
+                  "value": "en",
+                  "display_name": "English"
+                },
+                {
+                  "value": "de",
+                  "display_name": "German"
+                },
+                {
+                  "value": "es",
+                  "display_name": "Spanish"
+                },
+                {
+                  "value": "pt",
+                  "display_name": "Portuguese"
+                },
+                {
+                  "value": "fr",
+                  "display_name": "French"
+                },
+                {
+                  "value": "it",
+                  "display_name": "Italian"
+                },
+                {
+                  "value": "nl",
+                  "display_name": "Dutch"
+                }
+              ],
+              "style": {}
+            },
+            "categories": {
+              "type": "multiple choice",
+              "required": true,
+              "read_only": false,
+              "label": "Categories",
+              "help_text": "Categories for approaching repositories with the same purpose",
+              "choices": [
+                {
+                  "value": 1,
+                  "display_name": "Category 1"
+                },
+                {
+                  "value": 2,
+                  "display_name": "Category 2"
+                },
+                {
+                  "value": 3,
+                  "display_name": "Category 3"
+                },
+                {
+                  "value": 4,
+                  "display_name": "Category 4"
+                },
+                {
+                  "value": 5,
+                  "display_name": "Category 5"
+                }
+              ],
+              "style": {}
+            },
+            "description": {
+              "type": "text",
+              "required": true,
+              "read_only": false,
+              "label": "Description",
+              "help_text": "Tell what your bot do!",
+              "style": {}
+            },
+            "is_private": {
+              "type": "boolean",
+              "required": false,
+              "read_only": false,
+              "label": "Private",
+              "help_text": "Your repository can be private, only you can see and use, or can be public and all community can see and use.",
+              "style": {}
+            }
+          }
+        }
+      }
+    }
   }
 ]

@@ -13,7 +13,7 @@ localVue.use(Vuex);
 
 describe('EditRepositoryForm.vue', () => {
   let wrapper;
-  beforeEach(() => {
+  beforeEach(async () => {
     store.replaceState({
       Auth: {},
     });
@@ -26,10 +26,15 @@ describe('EditRepositoryForm.vue', () => {
         slug: 'repo1',
       },
     });
+    await localVue.nextTick();
   });
 
   test('mount', () => {
     expect(wrapper.vm).toBeDefined();
+  });
+
+  test('has formSchema', () => {
+    expect(wrapper.vm.formSchema).not.toBe(null);
   });
 
   describe('valid data', () => {
