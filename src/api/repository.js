@@ -44,4 +44,21 @@ export default {
       },
     );
   },
+  async getEditSchema(ownerNickname, slug) {
+    const { data } = await request.$http.options(`/repository/${ownerNickname}/${slug}/`);
+    return data.actions.PUT;
+  },
+  edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate) {
+    return request.$http.patch(
+      `/repository/${ownerNickname}/${slug}/`,
+      {
+        name,
+        slug: newSlug,
+        language,
+        categories,
+        description,
+        is_private: isPrivate,
+      },
+    );
+  },
 };

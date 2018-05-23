@@ -5,11 +5,16 @@
       class="wrapper">
       <repository-info
         hideDescription
+        :showEditAction="repository.authorization.can_write"
+        :showTrainAction="repository.authorization.can_write && repository.ready_for_train"
+        :training="training"
         :slug="repository.slug"
         :name="repository.name"
         :owner__nickname="repository.owner__nickname"
         :available_languages="repository.available_languages"
-        :categories_list="repository.categories_list" />
+        :categories_list="repository.categories_list"
+        @train="train()"
+        @edit="openEditModal()" />
       <ul class="navbar">
         <li
           @click="activeTab = 0"
@@ -212,6 +217,20 @@
         </div>
       </div>
     </b-modal>
+    <b-modal :active.sync="editModalOpen">
+      <div
+        v-if="repository && editModalOpen"
+        class="card">
+        <div class="card-content">
+          <h1 class="title is-4">Edit Repository</h1>
+          <edit-repository-form
+            :ownerNickname="repository.owner__nickname"
+            :slug="repository.slug"
+            :initialData="getEditInitialData()"
+            @edited="onEdited()" />
+        </div>
+      </div>
+    </b-modal>
     <analyze-text-drawer
       v-if="repository && authenticated"
       :ownerNickname="repository.owner__nickname"
@@ -230,6 +249,8 @@ import LoginForm from '@/components/auth/LoginForm';
 import ExamplesList from '@/components/example/ExamplesList';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
+import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
+
 
 const components = {
   Layout,
@@ -241,6 +262,7 @@ const components = {
   ExamplesList,
   RequestGenerator,
   AnalyzeTextDrawer,
+  EditRepositoryForm,
 };
 
 export default {
@@ -262,6 +284,7 @@ export default {
       errorDetail: null,
       training: false,
       trainResponse: null,
+      editModalOpen: false,
     };
   },
   filters: {
@@ -317,6 +340,36 @@ export default {
     },
     onCloseTrainResponseModal() {
       this.trainResponse = null;
+    },
+    openEditModal() {
+      this.editModalOpen = true;
+    },
+    getEditInitialData() {
+      const {
+        name,
+        slug,
+        language,
+        categories_list: categories,
+        description,
+        is_private: isPrivate,
+      } = this.repository;
+      return {
+        name,
+        slug,
+        language,
+        categories: categories.map(
+          ({ id, name: n }) => ({ value: id, display_name: n })),
+        description,
+        is_private: isPrivate,
+      };
+    },
+    onEdited() {
+      this.updateRepository();
+      this.editModalOpen = false;
+      this.$toast.open({
+        message: 'Repository edited!',
+        type: 'is-success',
+      });
     },
   },
 };
