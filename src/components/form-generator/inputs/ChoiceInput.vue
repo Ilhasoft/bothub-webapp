@@ -18,7 +18,7 @@ export default {
       type: Array,
     },
     initialData: {
-      type: String,
+      type: [Array, String],
     },
   },
   mounted() {
