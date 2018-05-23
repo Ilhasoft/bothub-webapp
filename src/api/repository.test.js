@@ -4,6 +4,10 @@ jest.mock('./request');
 
 import repository from './repository';
 
+import store from '@/store';
+import TYPES from '@/store/types';
+
+
 describe('api/repository', () => {
   test('getNewSchema', async () => {
     const response = await repository.getNewSchema();
@@ -51,5 +55,26 @@ describe('api/repository', () => {
   test('analyze', async () => {
     const response = await repository.analyze('douglas', 'repo1', 'en', 'My name is Douglas');
     expect(response.data).toBeDefined();
+  });
+
+  test('getEditSchema', async () => {
+    const response = await repository.getEditSchema('fake', 'repo1');
+    expect(typeof response).toBe('object');
+  });
+
+  test('edit', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.edit(
+      'fake',
+      'repo1',
+      'Repository',
+      'repo1',
+      'en',
+      [1],
+      'New description',
+      false,
+    );
+    expect(response.status).toBe(200);
   });
 });

@@ -1,5 +1,6 @@
 import request from './request';
 
+
 export default {
   async getLoginSchema() {
     const { data } = await request.$http.options('/login/');
@@ -52,16 +53,6 @@ export default {
         nickname,
         password,
       },
-    );
-  },
-  profile(nickname) {
-    return request.$http.get(
-      `/user-profile/${nickname}/`,
-    );
-  },
-  myProfile() {
-    return request.$http.get(
-      '/my-profile/',
     );
   },
 };

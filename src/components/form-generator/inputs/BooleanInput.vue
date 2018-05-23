@@ -8,7 +8,7 @@
 export default {
   props: {
     initialData: {
-      type: String,
+      type: Boolean,
     },
   },
   mounted() {

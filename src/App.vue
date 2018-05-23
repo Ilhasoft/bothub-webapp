@@ -99,6 +99,10 @@ $entities-colors: (
   margin-bottom: 1rem;
 }
 
+.item-1-2 {
+  margin-bottom: .5rem;
+}
+
 .pre {
   white-space: pre;
   word-wrap: break-word;

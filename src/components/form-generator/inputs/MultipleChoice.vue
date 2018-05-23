@@ -19,7 +19,7 @@ export default {
       type: Array,
     },
     initialData: {
-      type: String,
+      type: [Array, String],
     },
   },
   mounted() {
@@ -32,7 +32,8 @@ export default {
   },
   computed: {
     filteredData() {
-      return this.choices.filter(choice => !this.value.includes(choice));
+      const values = this.value.map(({ value }) => (value));
+      return this.choices.filter(({ value }) => (!values.includes(value)));
     },
   },
   methods: {

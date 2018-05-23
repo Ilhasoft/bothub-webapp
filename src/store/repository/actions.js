@@ -36,4 +36,30 @@ export default {
     /* istanbul ignore next */
     return repository.analyze(ownerNickname, slug, language, text);
   },
+  async getEditRepositorySchema(store, { ownerNickname, slug }) {
+    /* istanbul ignore next */
+    const response = await repository.getEditSchema(ownerNickname, slug);
+    return response;
+  },
+  editRepository(store, {
+    ownerNickname,
+    repositorySlug,
+    name,
+    slug,
+    language,
+    categories,
+    description,
+    is_private: isPrivate,
+  }) {
+    return repository.edit(
+      ownerNickname,
+      repositorySlug,
+      name,
+      slug,
+      language,
+      categories,
+      description,
+      isPrivate,
+    );
+  },
 };
