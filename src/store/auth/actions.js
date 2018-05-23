@@ -1,6 +1,7 @@
 import auth from '@/api/auth';
 import TYPES from '../types';
 
+
 export default {
   async getLoginSchema() {
     const response = await auth.getLoginSchema();
