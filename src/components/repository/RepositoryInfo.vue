@@ -19,6 +19,21 @@
             <span>0 stars</span>
             <b-icon icon="star" />
           </div>
+          <button
+            :disabled="training"
+            v-if="showTrainAction"
+            @click="$emit('train')"
+            class="action repository-header-info-item">
+            <b-icon
+              :icon="training ? 'refresh' : 'school'"
+              :customClass="training && 'icon-spin' || null" />
+          </button>
+          <button
+            v-if="showEditAction"
+            @click="$emit('edit')"
+            class="action repository-header-info-item">
+            <b-icon icon="pencil" />
+          </button>
         </div>
       </div>
       <div>
@@ -92,6 +107,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    showTrainAction: {
+      type: Boolean,
+      default: false,
+    },
+    showEditAction: {
+      type: Boolean,
+      default: false,
+    },
+    training: {
+      type: Boolean,
+      default: false,
+    },
   },
   mounted() {
     this.updateProfile({ nickname: this.owner__nickname });
@@ -130,7 +157,7 @@ export default {
 
   &-header {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
 
     &-title {
@@ -152,17 +179,41 @@ export default {
       align-items: center;
       margin-left: 8px;
 
+      &-item.action {
+        box-shadow: 1px 1px 3px rgba(100, 100, 100, .5);
+        color: $primary;
+        border-radius: 4px;
+        border: none;
+        background-color: white;
+        cursor: pointer;
+        outline: none;
+
+        &:hover {
+          box-shadow: 1px 1px 4px rgba(100, 100, 100, .7);
+        }
+
+        &:disabled {
+          color: $grey-light;
+          cursor: not-allowed;
+        }
+      }
+
       &-item {
         display: flex;
         align-items: center;
         color: $grey-light;
         margin-right: 8px;
+        padding: 4px;
 
         &:last-child { margin-right: 0; }
 
         span {
           padding-right: 8px;
           white-space: nowrap;
+
+          &:last-child {
+            padding-right: 0;
+          }
         }
       }
     }
