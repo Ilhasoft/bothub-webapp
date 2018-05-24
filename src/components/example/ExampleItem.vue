@@ -1,14 +1,9 @@
 <template>
   <div class="example">
     <div class="example-text">
-      <div
-        v-for="(entity, i) in entitiesBlocks"
-        :key="i"
-        class="example-text-highlighted">
-        <span class="example-text-highlighted-before">{{ entity.before }}</span>
-        <span :class="`example-text-highlighted-text ${entity.colorClass}`">{{ entity.text }}</span>
-      </div>
-      <div class="example-text-content">{{ text }}</div>
+      <highlighted-text
+        :text="text"
+        :entities="entities" />
     </div>
     <div
       v-if="entitiesList.length > 0"
@@ -28,7 +23,7 @@
           <span>{{ intent }}</span>
         </div>
         <div class="level-item has-text-grey-light">
-          {{ created_at | moment("from") }}
+          {{ created_at | moment('from') }}
         </div>
       </div>
       <div
@@ -51,6 +46,12 @@
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
+import HighlightedText from '@/components/shared/HighlightedText';
+
+
+const components = {
+  HighlightedText,
+};
 
 export default {
   name: 'ExampleItem',
@@ -79,6 +80,7 @@ export default {
       default: /* istanbul ignore next */ () => ({}),
     },
   },
+  components,
   data() {
     return {
       deleteDialog: null,
@@ -87,22 +89,6 @@ export default {
   computed: {
     entitiesList() {
       return getEntitiesList(this.entities);
-    },
-    entitiesBlocks() {
-      return this.entities
-        .map(({ start, end, entity }) => {
-          const color = getEntityColor(entity, this.entities);
-          const colorClass = `entity-${color}`;
-          const before = this.text.substring(0, start);
-          const text = this.text.substring(start, end);
-          return {
-            start,
-            end,
-            colorClass,
-            before,
-            text,
-          };
-        });
     },
   },
   methods: {
@@ -153,38 +139,11 @@ export default {
   }
 
   &-text {
-    position: relative;
     font-size: 1.25rem;
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
-    min-height: 3rem;
-
-    &-content,
-    &-highlighted {
-      padding: 8px;
-    }
-
-    &-content {
-      z-index: 1;
-    }
-
-    &-highlighted {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-
-      &-before,
-      &-text {
-        color: rgba(0, 0, 0, 0);
-      }
-
-      &-text {
-        opacity: .75;
-        border-radius: 4px;
-      }
-    }
+    padding: 8px 16px;
   }
 
   &-entities,
@@ -194,9 +153,9 @@ export default {
 
   &-entities {
     > * {
-      margin: 0 8px;
+      margin: 4px 8px 0 0;
 
-      &:first-child {
+      &:last-child {
         margin: 0;
       }
     }
