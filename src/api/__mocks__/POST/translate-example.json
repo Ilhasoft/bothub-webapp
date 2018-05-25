@@ -1,0 +1,33 @@
+[
+  {
+    "data": {
+      "original_example": 1,
+      "language": "pt",
+      "text": "meu nome é douglas",
+      "entities": [
+        {
+          "start": 12,
+          "end": 19,
+          "entity": "name"
+        }
+      ]
+    },
+    "response": {
+      "status": 201,
+      "data": {
+        "id": 1,
+        "original_example": 1,
+        "language": "pt",
+        "text": "meu nome é douglas",
+        "has_valid_entities": true,
+        "entities": [
+          {
+            "start": 12,
+            "end": 19,
+            "entity": "name"
+          }
+        ]
+      }
+    }
+  }
+]
