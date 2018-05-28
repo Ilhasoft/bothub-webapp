@@ -54,6 +54,7 @@ $pie-size: 100px;
 $pie-border: 8px;
 
 .pie {
+  display: inline-block;
   position: relative;
   width: $pie-size;
   height: $pie-size;
