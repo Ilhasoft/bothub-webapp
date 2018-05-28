@@ -146,35 +146,46 @@
             @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
         <b-tab-item>
-          <div class="notification">
-            <div class="columns">
-              <div class="column">
-                <b-field label="Translate from:">
-                  <language-select
-                    v-model="translate.from" />
-                </b-field>
-              </div>
-              <div class="column is-narrow">
-                <div class="field">
-                  <label class="label">&nbsp;</label>
-                  <b-icon
-                    icon="chevron-right"
-                    size="is-medium" />
+          <div v-if="repository.authorization.can_contribute">
+            <div class="notification">
+              <div class="columns">
+                <div class="column">
+                  <b-field label="Translate from:">
+                    <language-select
+                      v-model="translate.from" />
+                  </b-field>
+                </div>
+                <div class="column is-narrow">
+                  <div class="field">
+                    <label class="label">&nbsp;</label>
+                    <b-icon
+                      icon="chevron-right"
+                      size="is-medium" />
+                  </div>
+                </div>
+                <div class="column">
+                  <b-field label="Translate to:">
+                    <language-select
+                      v-model="translate.to" />
+                  </b-field>
                 </div>
               </div>
-              <div class="column">
-                <b-field label="Translate to:">
-                  <language-select
-                    v-model="translate.to" />
-                </b-field>
-              </div>
             </div>
+            <translate-list
+              v-if="!!translate.from && !!translate.to"
+              :repository="repository"
+              :from="translate.from"
+              :to="translate.to" />
           </div>
-          <translate-list
-            v-if="!!translate.from && !!translate.to"
-            :repository="repository"
-            :from="translate.from"
-            :to="translate.to" />
+          <div v-else-if="authenticated"></div>
+          <div
+            v-else
+            class="notification">
+            <div class="notification is-info">
+              Sign in to your account to contribute to this repository.
+            </div>
+            <login-form hideForgotPassword />
+          </div>
         </b-tab-item>
       </b-tabs>
     </div>
