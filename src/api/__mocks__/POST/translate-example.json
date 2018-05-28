@@ -29,5 +29,21 @@
         ]
       }
     }
+  },
+  {
+    "data": {
+      "original_example": 1,
+      "language": "pt",
+      "text": "meu nome é douglas",
+      "entities": []
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "entities": [
+          "Invalid entities"
+        ]
+      }
+    }
   }
 ]
