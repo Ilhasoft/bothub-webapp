@@ -45,9 +45,9 @@ export default {
 
 <style lang="scss" scoped>
 span {
-  display: inline-block;
+  display: inline-flex;
   width: 16px;
-
+  align-items: center;
 
   img {
     display: inline-block;
