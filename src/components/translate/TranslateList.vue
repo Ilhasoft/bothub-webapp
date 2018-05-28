@@ -1,10 +1,13 @@
 <template>
-  <pagination
-    v-if="translateList"
-    :list="translateList"
-    :itemComponent="translateExampleItem"
-    :repository="repository"
-    :translateTo="to" />
+  <div>
+    <pagination
+      v-if="translateList"
+      :list="translateList"
+      :itemComponent="translateExampleItem"
+      :repository="repository"
+      :translateTo="to" />
+    <p v-if="translateList && translateList.empty">No examples to translate.</p>
+  </div>
 </template>
 
 <script>

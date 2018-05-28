@@ -146,8 +146,8 @@
             @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
         <b-tab-item>
-          <div v-if="repository.authorization.can_contribute">
-            <div class="notification">
+          <div class="notification">
+            <div v-if="repository.authorization.can_contribute">
               <div class="columns">
                 <div class="column">
                   <b-field label="Translate from:">
@@ -171,21 +171,23 @@
                 </div>
               </div>
             </div>
-            <translate-list
-              v-if="!!translate.from && !!translate.to"
-              :repository="repository"
-              :from="translate.from"
-              :to="translate.to" />
-          </div>
-          <div v-else-if="authenticated"></div>
-          <div
-            v-else
-            class="notification">
-            <div class="notification is-info">
-              Sign in to your account to contribute to this repository.
+            <div v-else-if="authenticated">
+              <div class="notification is-warning">
+                You can not contribute to this repository
+              </div>
             </div>
-            <login-form hideForgotPassword />
+            <div v-else>
+              <div class="notification is-info">
+                Sign in to your account to contribute to this repository.
+              </div>
+              <login-form hideForgotPassword />
+            </div>
           </div>
+          <translate-list
+            v-if="!!translate.from && !!translate.to"
+            :repository="repository"
+            :from="translate.from"
+            :to="translate.to" />
         </b-tab-item>
       </b-tabs>
     </div>
