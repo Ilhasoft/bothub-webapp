@@ -21,10 +21,13 @@
           :class="{'navbar-item': true, 'active': activeTab === 0}">Status</li>
         <li
           @click="activeTab = 1"
-          :class="{'navbar-item': true, 'active': activeTab === 1}">Examples</li>
+          :class="{'navbar-item': true, 'active': activeTab === 1}">Analyze Text</li>
         <li
           @click="activeTab = 2"
-          :class="{'navbar-item': true, 'active': activeTab === 2}">Analyze Text</li>
+          :class="{'navbar-item': true, 'active': activeTab === 2}">Examples</li>
+        <li
+          @click="activeTab = 3"
+          :class="{'navbar-item': true, 'active': activeTab === 3}">Translate</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -61,6 +64,39 @@
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>No description.</p>
+        </b-tab-item>
+        <b-tab-item>
+          <div class="tab-padding">
+            <div v-if="authenticated">
+              <p class="item">Make a HTTP request to NLP service, follow the example bellow.</p>
+              <div class="columns">
+                <div class="column is-half">
+                  <div class="item">
+                    <p><strong>URL:</strong></p>
+                    <div class="pre">https://nlp.bothub.it/v1/message</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>Header:</strong></p>
+                    <div class="pre">Authorization: Bearer {{ repository.authorization.uuid }}</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>POST with form-data:</strong></p>
+                    <div class="pre">language: [language code]
+  msg: [text to analyze]</div>
+                  </div>
+                </div>
+                <div class="column is-half">
+                  <p class="item"><strong>Generator:</strong></p>
+                  <request-generator :authorizationUuid="repository.authorization.uuid" />
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="notification is-warning">
+                Sign in to your account to analyze text.
+              </div>
+            </div>
+          </div>
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
@@ -110,36 +146,45 @@
             @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
         <b-tab-item>
-          <div class="tab-padding">
-            <div v-if="authenticated">
-              <p class="item">Make a HTTP request to NLP service, follow the example bellow.</p>
+          <div v-if="repository.authorization.can_contribute">
+            <div class="notification">
               <div class="columns">
-                <div class="column is-half">
-                  <div class="item">
-                    <p><strong>URL:</strong></p>
-                    <div class="pre">https://nlp.bothub.it/v1/message</div>
-                  </div>
-                  <div class="item">
-                    <p><strong>Header:</strong></p>
-                    <div class="pre">Authorization: Bearer {{ repository.authorization.uuid }}</div>
-                  </div>
-                  <div class="item">
-                    <p><strong>POST with form-data:</strong></p>
-                    <div class="pre">language: [language code]
-  msg: [text to analyze]</div>
+                <div class="column">
+                  <b-field label="Translate from:">
+                    <language-select
+                      v-model="translate.from" />
+                  </b-field>
+                </div>
+                <div class="column is-narrow">
+                  <div class="field">
+                    <label class="label">&nbsp;</label>
+                    <b-icon
+                      icon="chevron-right"
+                      size="is-medium" />
                   </div>
                 </div>
-                <div class="column is-half">
-                  <p class="item"><strong>Generator:</strong></p>
-                  <request-generator :authorizationUuid="repository.authorization.uuid" />
+                <div class="column">
+                  <b-field label="Translate to:">
+                    <language-select
+                      v-model="translate.to" />
+                  </b-field>
                 </div>
               </div>
             </div>
-            <div v-else>
-              <div class="notification is-warning">
-                Sign in to your account to analyze text.
-              </div>
+            <translate-list
+              v-if="!!translate.from && !!translate.to"
+              :repository="repository"
+              :from="translate.from"
+              :to="translate.to" />
+          </div>
+          <div v-else-if="authenticated"></div>
+          <div
+            v-else
+            class="notification">
+            <div class="notification is-info">
+              Sign in to your account to contribute to this repository.
             </div>
+            <login-form hideForgotPassword />
           </div>
         </b-tab-item>
       </b-tabs>
@@ -149,7 +194,9 @@
       class="wrapper">
         <loading />
       </div>
-    <div v-else><error-message :detail="!!errorDetail" /></div>
+    <div v-else>
+      <error-message :detail="!!errorDetail" />
+    </div>
     <b-modal
       :active="!!trainResponse"
       @close="onCloseTrainResponseModal()">
@@ -250,6 +297,8 @@ import ExamplesList from '@/components/example/ExamplesList';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
+import LanguageSelect from '@/components/shared/LanguageSelect';
+import TranslateList from '@/components/translate/TranslateList';
 
 
 const components = {
@@ -263,6 +312,8 @@ const components = {
   RequestGenerator,
   AnalyzeTextDrawer,
   EditRepositoryForm,
+  LanguageSelect,
+  TranslateList,
 };
 
 export default {
@@ -285,6 +336,10 @@ export default {
       training: false,
       trainResponse: null,
       editModalOpen: false,
+      translate: {
+        from: null,
+        to: null,
+      },
     };
   },
   filters: {
@@ -310,6 +365,7 @@ export default {
       try {
         const response = await this.getRepository({ ownerNickname, slug });
         this.repository = response.data;
+        this.translate.from = this.repository.language;
       } catch (e) {
         this.hasError = true;
         const { detail } = e.response.data;

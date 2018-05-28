@@ -1,53 +1,59 @@
 <template>
-  <div class="wrapper">
-    <b-tag
-      rounded
-      closable
-      v-for="(entity, i) in entities"
-      :key="i"
-      @close="remove(i)"
-      :class="getEntityClass(entity.entity)">
-      <span>{{ entity.entity || '...' }}:&nbsp;</span>
-      <span>"{{ text.substring(entity.start, entity.end) }}"</span>
-    </b-tag>
-    <span v-if="entities.length === 0 && !textSelected">No entities</span>
-    <div
-      v-if="textSelected && !adding"
-      class="new">
-      <button
-        ref="addBtn"
-        type="button"
-        @click="add()"
-        class="button is-rounded is-small">Add an entity for "{{ textSelected }}"</button>
+  <div>
+    <div class="wrapper">
+      <b-tag
+        rounded
+        closable
+        v-for="(entity, i) in entities"
+        :key="i"
+        @close="remove(i)"
+        :class="getEntityClass(entity.entity)">
+        <span>{{ entity.entity || '...' }}:&nbsp;</span>
+        <span>"{{ text.substring(entity.start, entity.end) }}"</span>
+      </b-tag>
+      <span v-if="entities.length === 0 && !textSelected">No entities</span>
+      <div
+        v-if="textSelected && !adding"
+        class="new">
+        <button
+          ref="addBtn"
+          type="button"
+          @click="add()"
+          class="button is-rounded is-small">Add an entity for "{{ textSelected }}"</button>
+      </div>
+      <form
+        v-if="adding"
+        @submit.prevent="confirmAdding()">
+        <b-field>
+          <p class="control">
+            <span class="button is-static is-small">{{ addingText }} is</span>
+          </p>
+          <b-autocomplete
+            ref="addingInput"
+            open-on-focus
+            v-model="adding.entity"
+            :data="entitiesList"
+            size="is-small"
+            type="text"
+            @select="confirmAdding($event)" />
+          <p class="control">
+            <button
+              type="submit"
+              class="button is-primary is-small">OK</button>
+          </p>
+          <p class="control adding-cancel">
+            <button
+              type="button"
+              class="delete"
+              @click="cancelAdding()" />
+          </p>
+        </b-field>
+      </form>
     </div>
-    <form
-      v-if="adding"
-      @submit.prevent="confirmAdding()">
-      <b-field>
-        <p class="control">
-          <span class="button is-static is-small">{{ addingText }} is</span>
-        </p>
-        <b-autocomplete
-          ref="addingInput"
-          open-on-focus
-          v-model="adding.entity"
-          :data="entitiesList"
-          size="is-small"
-          type="text"
-          @select="confirmAdding($event)" />
-        <p class="control">
-          <button
-            type="submit"
-            class="button is-primary is-small">OK</button>
-        </p>
-        <p class="control adding-cancel">
-          <button
-            type="button"
-            class="delete"
-            @click="cancelAdding()" />
-        </p>
-      </b-field>
-    </form>
+    <p
+      v-for="(error, i) in errors"
+      :key="i"
+      class="error help is-danger">{{ error }}</p>
   </div>
 </template>
 
@@ -75,6 +81,10 @@ export default {
       required: true,
     },
     extraEntitiesList: {
+      type: Array,
+      default: () => ([]),
+    },
+    errors: {
       type: Array,
       default: () => ([]),
     },

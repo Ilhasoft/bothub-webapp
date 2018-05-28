@@ -38,6 +38,7 @@ export default {
     }
   },
   getMyRepositories() {
+    /* istanbul ignore next */
     return user.myRepositories();
   },
   async getMyProfileSchema() {
