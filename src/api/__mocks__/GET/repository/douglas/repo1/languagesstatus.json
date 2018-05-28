@@ -1,0 +1,90 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "languages_status": {
+          "en": {
+            "is_base_language": true,
+            "examples": {
+              "count": 2,
+              "entities": [
+                "name"
+              ]
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "de": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "es": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "pt": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "fr": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "it": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          },
+          "nl": {
+            "is_base_language": false,
+            "examples": {
+              "count": 0,
+              "entities": []
+            },
+            "base_translations": {
+              "count": 0,
+              "percentage": 0.0
+            }
+          }
+        }
+      }
+    }
+  }
+]

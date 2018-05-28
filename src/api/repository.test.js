@@ -76,5 +76,12 @@ describe('api/repository', () => {
       false,
     );
     expect(response.status).toBe(200);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
+
+  test('getLanguagesStatus', async () => {
+    const response = await repository.getLanguagesStatus('douglas', 'repo1');
+    expect(response.status).toBe(200);
   });
 });
