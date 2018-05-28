@@ -13,7 +13,7 @@
         v-for="(entity, i) in entitiesList"
         :key="i"
         :class="getEntityClass(entity)">{{ entity }}</b-tag>
-      </div>
+    </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
         <div
@@ -127,7 +127,7 @@ export default {
   $radius: 8px;
 
   margin: 16px 8px;
-  background-color: #E3E3E3;
+  background-color: $white-bis;
   border-radius: $radius;
   overflow: visible;
 
@@ -144,16 +144,17 @@ export default {
     border-radius: $radius;
     transition: box-shadow .2s ease;
     padding: 8px 16px;
+    margin-bottom: 4px;
   }
 
   &-entities,
   &-infos {
-    padding: 4px 8px;
+    padding: 4px 8px 4px 16px;
   }
 
   &-entities {
     > * {
-      margin: 4px 8px 0 0;
+      margin: 0 8px 0 0;
 
       &:last-child {
         margin: 0;
