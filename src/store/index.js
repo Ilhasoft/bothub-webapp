@@ -7,6 +7,7 @@ import User from './user';
 import Repository from './repository';
 import Category from './category';
 import Example from './example';
+import Translate from './translate';
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
     Repository,
     Category,
     Example,
+    Translate,
   },
 });
 

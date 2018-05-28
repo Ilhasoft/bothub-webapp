@@ -30,15 +30,24 @@
         v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
-          <a
-            :href="`#delete-example-${id}`"
-            class="has-text-danger"
-            @click.prevent="deleteThisExample()">
-            <b-icon icon="delete" />
-          </a>
+          <button
+            class="button is-primary"
+            @click="toggleFormOpen()">
+            <span>Translate</span>
+            <b-icon icon="chevron-down" />
+          </button>
         </div>
       </div>
     </div>
+    <b-collapse :open="formOpen">
+      <div class="translate-form">
+        <new-translate-form
+          :exampleId="id"
+          :translateTo="translateTo"
+          @translated="onTranslated()"
+          :extraEntitiesList="entitiesList" />
+      </div>
+    </b-collapse>
   </div>
 </template>
 
@@ -47,17 +56,20 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
 import HighlightedText from '@/components/shared/HighlightedText';
+import NewTranslateForm from './NewTranslateForm';
 
 
 const components = {
   HighlightedText,
+  NewTranslateForm,
 };
 
 export default {
-  name: 'ExampleItem',
+  name: 'TranslateExample',
   props: {
     id: {
       type: Number,
+      required: true,
     },
     text: {
       type: String,
@@ -79,11 +91,20 @@ export default {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
     },
+    language: {
+      type: String,
+      required: true,
+    },
+    translateTo: {
+      type: String,
+      required: true,
+    },
   },
   components,
   data() {
     return {
       deleteDialog: null,
+      formOpen: false,
     };
   },
   computed: {
@@ -98,23 +119,19 @@ export default {
     getEntityClass(entity) {
       return `entity-${getEntityColor(entity, this.entities)}`;
     },
-    deleteThisExample() {
-      return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$dialog.confirm({
-          message: 'Are you sure? The example will be deleted.',
-          confirmText: 'Delete',
-          type: 'is-danger',
-          onConfirm: async () => {
-            await this.deleteExample({ id: this.id });
-            this.$emit('deleted');
-            resolve();
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
-          },
-        });
+    toggleFormOpen() {
+      /* istanbul ignore next */
+      this.formOpen = !this.formOpen;
+    },
+    onTranslated() {
+      /* istanbul ignore next */
+      this.$toast.open({
+        message: 'Example translated!',
+        type: 'is-success',
       });
+      /* istanbul ignore next */
+      // Emit deleted event to remove example from list
+      this.$emit('deleted');
     },
   },
 };
@@ -161,5 +178,9 @@ export default {
       }
     }
   }
+}
+
+.translate-form {
+  padding: 8px 16px 16px;
 }
 </style>

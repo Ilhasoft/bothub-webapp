@@ -13,4 +13,12 @@ export default {
     await example.delete(id);
     return true;
   },
+  async getExamplesToTranslate(store, { repositoryUuid, from, to }) {
+    const response = await example.search(repositoryUuid, {
+      language: from,
+      has_not_translation_to: to,
+      ordering: 'created_at',
+    });
+    return response;
+  },
 };

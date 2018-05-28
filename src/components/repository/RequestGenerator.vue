@@ -1,12 +1,7 @@
 <template>
   <div>
     <b-field label="Language">
-      <b-select v-model="language">
-        <option
-          v-for="(verbose, language) in languages"
-          :key="language"
-          :value="language">{{ verbose }}</option>
-      </b-select>
+      <language-select v-model="language" />
     </b-field>
     <b-field label="Message">
       <b-input v-model="msg" type="textarea" />
@@ -47,10 +42,16 @@ request.send(data);</div>
 </template>
 
 <script>
-import { LANGUAGES } from '@/utils';
+import LanguageSelect from '@/components/shared/LanguageSelect';
+
+
+const components = {
+  LanguageSelect,
+};
 
 export default {
   name: 'RequestGenerator',
+  components,
   props: {
     authorizationUuid: {
       type: String,
@@ -59,7 +60,6 @@ export default {
   },
   data() {
     return {
-      languages: LANGUAGES,
       activeTab: 0,
       language: 'en',
       msg: '',
