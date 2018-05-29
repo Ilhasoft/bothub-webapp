@@ -32,10 +32,26 @@ describe('TranslationsList.vue', () => {
   describe('update translations', () => {
     beforeEach(async () => {
       await wrapper.vm.updateTranslations();
+      await wrapper.vm.translationsList.next();
     });
 
     test('has translations list', () => {
       expect(wrapper.vm.translationsList).not.toBe(null);
+    });
+
+    test('translationsList has one items', () => {
+      expect(wrapper.vm.translationsList.items).toHaveLength(1);
+    });
+  });
+
+  describe('set toLanguage prop', () => {
+    beforeEach(async () => {
+      wrapper.setProps({ toLanguage: 'pt' });
+      await localVue.nextTick();
+    });
+
+    test('translationsList has zero items', () => {
+      expect(wrapper.vm.translationsList.items).toHaveLength(0);
     });
   });
 });

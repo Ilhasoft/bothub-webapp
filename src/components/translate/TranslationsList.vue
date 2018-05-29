@@ -36,6 +36,9 @@ export default {
   async mounted() {
     await this.updateTranslations();
   },
+  watch: {
+    async toLanguage() { await this.updateTranslations(); },
+  },
   data() {
     return {
       translationsList: null,
@@ -47,8 +50,10 @@ export default {
       'getTranslations',
     ]),
     async updateTranslations() {
+      this.translationsList = null;
       this.translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
+        to_language: this.toLanguage,
       });
     },
   },
