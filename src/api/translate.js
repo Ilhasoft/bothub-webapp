@@ -1,4 +1,7 @@
+import qs from 'query-string';
+
 import request from './request';
+import utils from './utils';
 
 
 export default {
@@ -12,5 +15,9 @@ export default {
         entities,
       },
     );
+  },
+  translations(repositoryUuid, query) {
+    const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
+    return new utils.List(`/translations/?${queryString}`);
   },
 };
