@@ -8,4 +8,7 @@ export default {
   async getTranslations(store, { repositoryUuid, query }) {
     return translate.translations(repositoryUuid, query);
   },
+  async deleteTranslation(store, { translationId }) {
+    return translate.delete(translationId);
+  },
 };
