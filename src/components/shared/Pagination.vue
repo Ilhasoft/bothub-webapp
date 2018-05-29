@@ -5,7 +5,8 @@
       :key="item.id"
       :is="itemComponent"
       v-bind="item.data"
-      @deleted="onItemDeleted(item.id)" />
+      @deleted="onItemDeleted(item.id)"
+      @dispatchEvent="onDispatchEvent($event)" />
     <loading v-if="list.loading" />
     <div
       v-if="list.hasNext"
@@ -69,6 +70,9 @@ export default {
     onItemDeleted(id) {
       this.deletions.push(id);
       this.$emit('itemDeleted', id);
+    },
+    onDispatchEvent(event) {
+      this.$emit(event);
     },
   },
 };
