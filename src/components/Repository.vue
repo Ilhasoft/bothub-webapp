@@ -190,13 +190,15 @@
             v-if="!!translate.from && !!translate.to"
             :repository="repository"
             :from="translate.from"
-            :to="translate.to" />
+            :to="translate.to"
+            @translated="onTranslated()" />
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
             <div class="columns">
               <div class="column">
                 <translations-status
+                  ref="translationsStatus"
                   :ownerNickname="repository.owner__nickname"
                   :repositorySlug="repository.slug"
                   v-model="toLanguage" />
@@ -204,6 +206,7 @@
             </div>
           </div>
           <translations-list
+            ref="translationsList"
             :repository="repository"
             :toLanguage="toLanguage" />
         </b-tab-item>
@@ -451,6 +454,14 @@ export default {
         message: 'Repository edited!',
         type: 'is-success',
       });
+    },
+    async onTranslated() {
+      const {
+        translationsStatus,
+        translationsList,
+      } = this.$refs;
+      await translationsStatus.updateTranslationsStatus();
+      await translationsList.updateTranslations();
     },
   },
 };
