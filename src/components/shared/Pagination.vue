@@ -72,6 +72,7 @@ export default {
       this.$emit('itemDeleted', id);
     },
     onDispatchEvent(event) {
+      /* istanbul ignore next */
       this.$emit(event);
     },
   },
