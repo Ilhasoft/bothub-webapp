@@ -1,0 +1,25 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "id": 1,
+        "repository_update": 1,
+        "deleted_in": null,
+        "text": "my name is douglas",
+        "entities": [
+          {
+            "repository_example": 1,
+            "start": 11,
+            "end": 18,
+            "entity": "name"
+          }
+        ],
+        "intent": "greet",
+        "language": "en",
+        "created_at": "2018-05-29T13:37:53.853592Z",
+        "translations": []
+      }
+    }
+  }
+]
