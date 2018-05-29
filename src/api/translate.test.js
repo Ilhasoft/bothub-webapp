@@ -27,4 +27,9 @@ describe('api/translate', () => {
     await list.next();
     expect(list.items).toHaveLength(1);
   });
+
+  test('delete', async () => {
+    const response = await translate.delete(1);
+    expect(response.status).toBe(204);
+  });
 });
