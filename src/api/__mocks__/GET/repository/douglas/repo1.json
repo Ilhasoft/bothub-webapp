@@ -5,7 +5,7 @@
       "data": {
         "uuid": "4c49b02a-8c6f-4e99-b758-8b407fe1ee4e",
         "owner": 2,
-        "owner__nickname": "fake",
+        "owner__nickname": "douglas",
         "name": "Repository 1",
         "slug": "repo1",
         "language": "en",
