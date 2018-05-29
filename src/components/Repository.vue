@@ -28,6 +28,9 @@
         <li
           @click="activeTab = 3"
           :class="{'navbar-item': true, 'active': activeTab === 3}">Translate</li>
+        <li
+          @click="activeTab = 4"
+          :class="{'navbar-item': true, 'active': activeTab === 4}">Translations</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -189,6 +192,21 @@
             :from="translate.from"
             :to="translate.to" />
         </b-tab-item>
+        <b-tab-item>
+          <div class="notification">
+            <div class="columns">
+              <div class="column">
+                <translations-status
+                  :ownerNickname="repository.owner__nickname"
+                  :repositorySlug="repository.slug"
+                  v-model="toLanguage" />
+              </div>
+            </div>
+          </div>
+          <translations-list
+            :repository="repository"
+            :toLanguage="toLanguage" />
+        </b-tab-item>
       </b-tabs>
     </div>
     <div
@@ -301,6 +319,8 @@ import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import LanguageSelect from '@/components/shared/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
+import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsList from '@/components/translate/TranslationsList';
 
 
 const components = {
@@ -316,6 +336,8 @@ const components = {
   EditRepositoryForm,
   LanguageSelect,
   TranslateList,
+  TranslationsStatus,
+  TranslationsList,
 };
 
 export default {
@@ -342,6 +364,7 @@ export default {
         from: null,
         to: null,
       },
+      toLanguage: null,
     };
   },
   filters: {
