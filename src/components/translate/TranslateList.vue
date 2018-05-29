@@ -5,7 +5,8 @@
       :list="translateList"
       :itemComponent="translateExampleItem"
       :repository="repository"
-      :translateTo="to" />
+      :translateTo="to"
+      @translated="onTranslated" />
     <p v-if="translateList && translateList.empty">No examples to translate.</p>
   </div>
 </template>
@@ -63,6 +64,12 @@ export default {
           to: this.to,
         });
       }
+    },
+    onTranslated() {
+      /* istanbul ignore next */
+      this.updateList();
+      /* istanbul ignore next */
+      this.$emit('translated');
     },
   },
 };

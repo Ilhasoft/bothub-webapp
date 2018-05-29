@@ -130,8 +130,7 @@ export default {
         type: 'is-success',
       });
       /* istanbul ignore next */
-      // Emit deleted event to remove example from list
-      this.$emit('deleted');
+      this.$emit('dispatchEvent', 'translated');
     },
   },
 };
