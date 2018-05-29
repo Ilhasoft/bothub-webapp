@@ -40,7 +40,7 @@ export default {
   computed: {
     validPercent() {
       return validsPercents.reduce(
-        (current, next) => (next < this.percent ? next : current),
+        (current, next) => (next <= this.percent ? next : current),
         validsPercents[0]);
     },
   },
