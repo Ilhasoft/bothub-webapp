@@ -16,7 +16,7 @@ export default {
       },
     );
   },
-  translations(repositoryUuid, query) {
+  translations(repositoryUuid, query = {}) {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
     return new utils.List(`/translations/?${queryString}`);
   },
