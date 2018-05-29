@@ -7,7 +7,7 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 
-describe('TranslateExampleItem.vue', () => {
+describe('TranslateList.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(TranslateList, {
