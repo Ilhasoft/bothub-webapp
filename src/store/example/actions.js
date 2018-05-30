@@ -21,4 +21,8 @@ export default {
     });
     return response;
   },
+  async getExample(store, { id }) {
+    const response = await example.get(id);
+    return response;
+  },
 };

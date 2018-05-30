@@ -62,4 +62,7 @@ export default {
       isPrivate,
     );
   },
+  getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
+    return repository.getLanguagesStatus(ownerNickname, slug);
+  },
 };

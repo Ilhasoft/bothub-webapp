@@ -61,4 +61,8 @@ export default {
       },
     );
   },
+  getLanguagesStatus(ownerNickname, slug) {
+    return request.$http.get(
+      `/repository/${ownerNickname}/${slug}/languagesstatus/`);
+  },
 };

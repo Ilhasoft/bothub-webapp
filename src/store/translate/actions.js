@@ -5,4 +5,10 @@ export default {
     const response = await translate.new(exampleId, language, text, entities);
     return response;
   },
+  async getTranslations(store, { repositoryUuid, ...query }) {
+    return translate.translations(repositoryUuid, query);
+  },
+  async deleteTranslation(store, { translationId }) {
+    return translate.delete(translationId);
+  },
 };

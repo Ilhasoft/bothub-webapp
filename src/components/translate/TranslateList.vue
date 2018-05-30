@@ -1,10 +1,14 @@
 <template>
-  <pagination
-    v-if="translateList"
-    :list="translateList"
-    :itemComponent="translateExampleItem"
-    :repository="repository"
-    :translateTo="to" />
+  <div>
+    <pagination
+      v-if="translateList"
+      :list="translateList"
+      :itemComponent="translateExampleItem"
+      :repository="repository"
+      :translateTo="to"
+      @translated="onTranslated" />
+    <p v-if="translateList && translateList.empty">No examples to translate.</p>
+  </div>
 </template>
 
 <script>
@@ -60,6 +64,12 @@ export default {
           to: this.to,
         });
       }
+    },
+    onTranslated() {
+      /* istanbul ignore next */
+      this.updateList();
+      /* istanbul ignore next */
+      this.$emit('translated');
     },
   },
 };

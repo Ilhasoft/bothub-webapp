@@ -28,6 +28,9 @@
         <li
           @click="activeTab = 3"
           :class="{'navbar-item': true, 'active': activeTab === 3}">Translate</li>
+        <li
+          @click="activeTab = 4"
+          :class="{'navbar-item': true, 'active': activeTab === 4}">Translations</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -146,8 +149,8 @@
             @exampleDeleted="onExampleDeleted" />
         </b-tab-item>
         <b-tab-item>
-          <div v-if="repository.authorization.can_contribute">
-            <div class="notification">
+          <div class="notification">
+            <div v-if="repository.authorization.can_contribute">
               <div class="columns">
                 <div class="column">
                   <b-field label="Translate from:">
@@ -171,21 +174,41 @@
                 </div>
               </div>
             </div>
-            <translate-list
-              v-if="!!translate.from && !!translate.to"
-              :repository="repository"
-              :from="translate.from"
-              :to="translate.to" />
-          </div>
-          <div v-else-if="authenticated"></div>
-          <div
-            v-else
-            class="notification">
-            <div class="notification is-info">
-              Sign in to your account to contribute to this repository.
+            <div v-else-if="authenticated">
+              <div class="notification is-warning">
+                You can not contribute to this repository
+              </div>
             </div>
-            <login-form hideForgotPassword />
+            <div v-else>
+              <div class="notification is-info">
+                Sign in to your account to contribute to this repository.
+              </div>
+              <login-form hideForgotPassword />
+            </div>
           </div>
+          <translate-list
+            v-if="!!translate.from && !!translate.to"
+            :repository="repository"
+            :from="translate.from"
+            :to="translate.to"
+            @translated="onTranslated()" />
+        </b-tab-item>
+        <b-tab-item>
+          <div class="notification">
+            <div class="columns">
+              <div class="column">
+                <translations-status
+                  ref="translationsStatus"
+                  :ownerNickname="repository.owner__nickname"
+                  :repositorySlug="repository.slug"
+                  v-model="toLanguage" />
+              </div>
+            </div>
+          </div>
+          <translations-list
+            ref="translationsList"
+            :repository="repository"
+            :toLanguage="toLanguage" />
         </b-tab-item>
       </b-tabs>
     </div>
@@ -299,6 +322,8 @@ import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import LanguageSelect from '@/components/shared/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
+import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsList from '@/components/translate/TranslationsList';
 
 
 const components = {
@@ -314,6 +339,8 @@ const components = {
   EditRepositoryForm,
   LanguageSelect,
   TranslateList,
+  TranslationsStatus,
+  TranslationsList,
 };
 
 export default {
@@ -340,6 +367,7 @@ export default {
         from: null,
         to: null,
       },
+      toLanguage: null,
     };
   },
   filters: {
@@ -426,6 +454,14 @@ export default {
         message: 'Repository edited!',
         type: 'is-success',
       });
+    },
+    async onTranslated() {
+      const {
+        translationsStatus,
+        translationsList,
+      } = this.$refs;
+      await translationsStatus.updateTranslationsStatus();
+      await translationsList.updateTranslations();
     },
   },
 };

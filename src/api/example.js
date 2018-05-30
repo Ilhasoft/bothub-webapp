@@ -29,4 +29,7 @@ export default {
     });
     return new utils.List(`/examples/?${queryString}`);
   },
+  get(id) {
+    return request.$http.get(`/example/${id}/`);
+  },
 };
