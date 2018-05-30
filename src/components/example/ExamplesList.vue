@@ -15,12 +15,10 @@
 <script>
 import { mapActions } from 'vuex';
 
-import Loading from '@/components/shared/Loading';
 import Pagination from '@/components/shared/Pagination';
 import ExampleItem from './ExampleItem';
 
 const components = {
-  Loading,
   Pagination,
 };
 
