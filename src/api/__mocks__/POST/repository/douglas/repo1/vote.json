@@ -26,5 +26,16 @@
                 "votes_sum": -1
             }
         }
+    },
+    {
+        "data": {
+            "vote": 1
+        },
+        "response": {
+            "status": 401,
+            "data": {
+                "detail":"Authentication credentials were not provided."
+            }
+        }
     }
 ]
