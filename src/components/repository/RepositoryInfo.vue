@@ -1,7 +1,11 @@
 <template>
   <div class="columns">
     <div class="column is-narrow">
-      <repository-avatar :name="name" />
+      <repository-avatar
+        :name="name"
+        :ownerNickname="owner__nickname"
+        :slug="slug"
+        :votesSum="votes_sum" />
     </div>
     <div class="column">
       <div class="repository-header repository-infospace">
@@ -118,6 +122,10 @@ export default {
     training: {
       type: Boolean,
       default: false,
+    },
+    votes_sum: {
+      type: Number,
+      default: 0,
     },
   },
   mounted() {

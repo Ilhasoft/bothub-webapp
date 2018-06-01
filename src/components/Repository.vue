@@ -13,6 +13,7 @@
         :owner__nickname="repository.owner__nickname"
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
+        :votes_sum="repository.votes_sum"
         @train="train()"
         @edit="openEditModal()" />
       <ul class="navbar">
