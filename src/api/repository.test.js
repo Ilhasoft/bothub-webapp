@@ -84,4 +84,31 @@ describe('api/repository', () => {
     const response = await repository.getLanguagesStatus('douglas', 'repo1');
     expect(response.status).toBe(200);
   });
+
+  test('vote', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.vote('douglas', 'repo1', 1);
+    expect(response.status).toBe(201);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
+
+  test('voteUp', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.voteUp('douglas', 'repo1');
+    expect(response.status).toBe(201);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
+
+  test('voteUp', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.voteDown('douglas', 'repo1');
+    expect(response.status).toBe(201);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
 });
