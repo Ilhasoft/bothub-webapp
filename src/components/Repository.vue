@@ -218,7 +218,7 @@
         <loading />
       </div>
     <div v-else>
-      <error-message :detail="!!errorDetail" />
+      <error-message :detail="errorDetail" />
     </div>
     <b-modal
       :active="!!trainResponse"
@@ -346,12 +346,18 @@ const components = {
 export default {
   name: 'Repository',
   components,
-  mounted() {
-    this.updateRepository();
+  async mounted() {
+    await this.updateRepository();
   },
   watch: {
-    authenticated() {
-      this.updateRepository();
+    async authenticated() {
+      await this.updateRepository();
+    },
+    '$route.params.ownerNickname': async () => {
+      await this.updateRepository();
+    },
+    '$route.params.slug': async () => {
+      await this.updateRepository();
     },
   },
   data() {
