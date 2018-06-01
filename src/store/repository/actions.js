@@ -65,4 +65,10 @@ export default {
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
     return repository.getLanguagesStatus(ownerNickname, slug);
   },
+  repositoryVoteUp(store, { ownerNickname, slug }) {
+    return repository.voteUp(ownerNickname, slug);
+  },
+  repositoryVoteDown(store, { ownerNickname, slug }) {
+    return repository.voteDown(ownerNickname, slug);
+  },
 };
