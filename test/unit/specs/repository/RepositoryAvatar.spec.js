@@ -45,22 +45,6 @@ describe('RepositoryAvatar.vue', () => {
     test('return true', () => {
       expect(r).toBeTruthy();
     });
-
-    describe('unauthenticated', () => {
-      let r;
-      beforeEach(async () => {
-        store.replaceState({
-          Auth: {
-            token: null,
-          },
-        });
-        r = await wrapper.vm.onUp();
-      });
-
-      test('return false', () => {
-        expect(r).toBeFalsy();
-      });
-    })
   });
 
   describe('voteDown', () => {
@@ -71,6 +55,22 @@ describe('RepositoryAvatar.vue', () => {
 
     test('return true', () => {
       expect(r).toBeTruthy();
+    });
+  });
+
+  describe('voteUp unauthenticated', () => {
+    let r;
+    beforeEach(async () => {
+      store.replaceState({
+        Auth: {
+          token: null,
+        },
+      });
+      r = await wrapper.vm.onUp();
+    });
+
+    test('return false', () => {
+      expect(r).toBeFalsy();
     });
   });
 });
