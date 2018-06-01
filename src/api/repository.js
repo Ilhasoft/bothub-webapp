@@ -65,4 +65,17 @@ export default {
     return request.$http.get(
       `/repository/${ownerNickname}/${slug}/languagesstatus/`);
   },
+  vote(ownerNickname, slug, value) {
+    return request.$http.post(
+      `/repository/${ownerNickname}/${slug}/vote/`,
+      {
+        vote: value,
+      });
+  },
+  voteUp(ownerNickname, slug) {
+    return this.vote(ownerNickname, slug, 1);
+  },
+  voteDown(ownerNickname, slug) {
+    return this.vote(ownerNickname, slug, -1);
+  },
 };

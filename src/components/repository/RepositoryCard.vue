@@ -7,7 +7,8 @@
         :owner__nickname="owner__nickname"
         :available_languages="available_languages"
         :description="description"
-        :categories_list="categories_list" />
+        :categories_list="categories_list"
+        :votes_sum="votes_sum" />
     </div>
   </div>
 </template>
@@ -42,6 +43,10 @@ export default {
     },
     categories_list: {
       type: Array,
+    },
+    votes_sum: {
+      type: Number,
+      default: 0,
     },
   },
   components,
