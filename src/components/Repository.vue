@@ -346,12 +346,18 @@ const components = {
 export default {
   name: 'Repository',
   components,
-  mounted() {
-    this.updateRepository();
+  async mounted() {
+    await this.updateRepository();
   },
   watch: {
-    authenticated() {
-      this.updateRepository();
+    async authenticated() {
+      await this.updateRepository();
+    },
+    '$route.params.ownerNickname': async () => {
+      await this.updateRepository();
+    },
+    '$route.params.slug': async () => {
+      await this.updateRepository();
     },
   },
   data() {
