@@ -103,6 +103,7 @@ export default {
     async onSubmit() {
       this.submitting = true;
       this.result = null;
+      this.errors = null;
       try {
         const response = await this.analyzeText({
           ownerNickname: this.ownerNickname,
@@ -114,8 +115,17 @@ export default {
         this.submitting = false;
         return true;
       } catch (error) {
-        const data = error.response && error.response.data;
-        if (data) {
+        const { response } = error;
+        const { status, data } = response;
+
+        if (!response || status === 500) {
+          this.$toast.open({
+            message:
+              (data && data.detail) ||
+              'Something unexpected happened! We couldn’t analyze your text.',
+            type: 'is-danger',
+          });
+        } else if (data) {
           this.errors = data;
         }
       }
