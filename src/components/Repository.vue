@@ -218,7 +218,7 @@
         <loading />
       </div>
     <div v-else>
-      <error-message :detail="!!errorDetail" />
+      <error-message :detail="errorDetail" />
     </div>
     <b-modal
       :active="!!trainResponse"
