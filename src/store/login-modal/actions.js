@@ -1,8 +1,8 @@
 import TYPES from '../types';
 
 export default {
-  openLoginModal({ commit }, next) {
-    commit(TYPES.OPEN_LOGIN_MODAL, next);
+  openLoginModal({ commit }, { next, redirectToWhenFails } = {}) {
+    commit(TYPES.OPEN_LOGIN_MODAL, { next, redirectToWhenFails });
   },
 
   closeLoginModal({ commit }) {
