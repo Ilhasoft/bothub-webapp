@@ -26,7 +26,10 @@ export default new Router({
       component: MyProfile,
       beforeEnter: async (to, from, next) => {
         if (!store.getters.authenticated) {
-          store.dispatch('openLoginModal', to);
+          store.dispatch('openLoginModal', {
+            next: to,
+            redirectToWhenFails: { name: 'home' },
+          });
         } else {
           next();
         }
