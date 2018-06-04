@@ -5,7 +5,7 @@
     :value="value">
     <option :value="null">-</option>
     <option
-      v-for="(label, language) in languages"
+      v-for="[language, label] in languages"
       :value="language"
       :key="language">{{ label }}</option>
   </b-select>
@@ -21,11 +21,17 @@ export default {
     value: {
       type: String,
     },
+    exclude: {
+      type: Array,
+      default: () => ([]),
+    },
   },
-  data() {
-    return {
-      languages: LANGUAGES,
-    };
+  computed: {
+    languages() {
+      return Object.keys(LANGUAGES)
+        .map(lang => ([lang, LANGUAGES[lang]]))
+        .filter(([lang]) => !this.exclude.includes(lang));
+    },
   },
 };
 </script>
