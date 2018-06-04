@@ -470,6 +470,7 @@ export default {
       } = this.$refs;
       await translationsStatus.updateTranslationsStatus();
       await translationsList.updateTranslations();
+      await this.updateRepository(false);
     },
   },
 };
