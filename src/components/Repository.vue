@@ -170,7 +170,8 @@
                 <div class="column">
                   <b-field label="Translate to:">
                     <language-select
-                      v-model="translate.to" />
+                      v-model="translate.to"
+                      :exclude=[translate.from] />
                   </b-field>
                 </div>
               </div>
