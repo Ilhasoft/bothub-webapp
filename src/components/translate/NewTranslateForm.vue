@@ -103,6 +103,7 @@ export default {
         }
         this.submitting = false;
         if (language) {
+          /* istanbul ignore next */
           this.$toast.open({
             message: language.join(' '),
             type: 'is-danger',
