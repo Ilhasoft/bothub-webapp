@@ -97,11 +97,17 @@ export default {
         this.$emit('translated');
         return true;
       } catch (error) {
-        const data = error.response && error.response.data;
+        const { language, ...data } = error.response && error.response.data;
         if (data) {
           this.errors = data;
         }
         this.submitting = false;
+        if (language) {
+          this.$toast.open({
+            message: language.join(' '),
+            type: 'is-danger',
+          });
+        }
       }
 
       return false;
