@@ -12,7 +12,7 @@
         <button
           type="submit"
           class="button is-primary"
-          :disabled="submitting">Register</button>
+          :disabled="submitting">Create bot</button>
       </div>
     </div>
   </form>
