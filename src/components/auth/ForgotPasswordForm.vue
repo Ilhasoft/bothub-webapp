@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <messages :msgs="success_msgs" />
+    <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
       :schema="formSchema"
@@ -22,10 +23,13 @@
 import { mapActions } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Messages from '@/components/shared/Messages';
+import Loading from '@/components/shared/Loading';
+
 
 const components = {
   FormGenerator,
   Messages,
+  Loading,
 };
 
 export default {
