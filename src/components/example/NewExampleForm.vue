@@ -42,8 +42,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import EntityTextHighlightedInput from './form/EntityTextHighlightedInput';
-import EntitiesAsBadges from './form/EntitiesAsBadges';
+import EntityTextHighlightedInput from '@/components/inputs/EntityTextHighlightedInput';
+import EntitiesAsBadges from '@/components/inputs/EntitiesAsBadges';
 
 const components = {
   EntityTextHighlightedInput,

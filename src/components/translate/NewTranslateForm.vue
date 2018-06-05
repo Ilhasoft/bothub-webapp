@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import EntityTextHighlightedInput from '@/components/example/form/EntityTextHighlightedInput';
-import EntitiesAsBadges from '@/components/example/form/EntitiesAsBadges';
+import EntityTextHighlightedInput from '@/components/inputs/EntityTextHighlightedInput';
+import EntitiesAsBadges from '@/components/inputs/EntitiesAsBadges';
 import { mapActions } from 'vuex';
 
 
