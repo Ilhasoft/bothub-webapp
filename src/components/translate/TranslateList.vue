@@ -6,7 +6,7 @@
       :itemComponent="translateExampleItem"
       :repository="repository"
       :translateTo="to"
-      @translated="onTranslated" />
+      @translated="onTranslated()" />
     <p v-if="translateList && translateList.empty">No examples to translate.</p>
   </div>
 </template>
@@ -58,6 +58,7 @@ export default {
     async updateList() {
       this.translateList = null;
       if (!!this.from && !!this.to) {
+        await this.$nextTick();
         this.translateList = await this.getExamplesToTranslate({
           repositoryUuid: this.repository.uuid,
           from: this.from,
@@ -65,11 +66,11 @@ export default {
         });
       }
     },
-    onTranslated() {
-      /* istanbul ignore next */
-      this.updateList();
+    async onTranslated() {
       /* istanbul ignore next */
       this.$emit('translated');
+      /* istanbul ignore next */
+      await this.updateList();
     },
   },
 };
