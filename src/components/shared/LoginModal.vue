@@ -9,10 +9,10 @@
         v-model="activeTab"
         position="is-centered"
         expanded>
-        <b-tab-item label="Me Registered">
+        <b-tab-item label="Create account">
           <register-form @registered="onRegistered" />
         </b-tab-item>
-        <b-tab-item label="I have registered">
+        <b-tab-item label="Login">
           <login-form
             @authenticated="onAuthenticated"
             @forgotPasswordClick="showForgotPasswordTab" />
