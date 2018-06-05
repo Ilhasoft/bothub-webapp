@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit()">
+    <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
       :schema="formSchema"
@@ -11,18 +12,21 @@
         <button
           type="submit"
           class="button is-primary"
-          :disabled="submitting">Register</button>
+          :disabled="submitting">Create bot</button>
       </div>
     </div>
   </form>
 </template>
 
 <script>
-import FormGenerator from '@/components/form-generator/FormGenerator';
 import { mapActions } from 'vuex';
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import Loading from '@/components/shared/Loading';
+
 
 const components = {
   FormGenerator,
+  Loading,
 };
 
 export default {
