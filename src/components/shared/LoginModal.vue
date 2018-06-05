@@ -1,7 +1,7 @@
 <template>
   <b-modal
     :active="open"
-    @close="close">
+    @close="onClose()">
     <div
       v-if="open"
       class="card">
@@ -51,6 +51,7 @@ export default {
     ...mapGetters({
       open: 'loginModalOpen',
       next: 'loginModalNext',
+      redirectToWhenFails: 'loginModalRedirectToWhenFails',
     }),
   },
   methods: {
@@ -58,7 +59,9 @@ export default {
       close: 'closeLoginModal',
     }),
     onAuthenticated() {
-      if (this.next && this.$router) this.$router.push(this.next.path);
+      if (this.next) {
+        this.$router.push(this.next.path || this.next);
+      }
       this.close();
     },
     onRegistered() {
@@ -68,6 +71,13 @@ export default {
     showForgotPasswordTab() {
       /* istanbul ignore next */
       this.activeTab = 2;
+    },
+    onClose() {
+      if (this.redirectToWhenFails) {
+        this.$router.push(
+          this.redirectToWhenFails.path || this.redirectToWhenFails);
+      }
+      this.close();
     },
   },
 };

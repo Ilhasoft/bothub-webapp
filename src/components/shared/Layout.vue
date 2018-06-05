@@ -51,7 +51,7 @@
           <button
             ref="login"
             class="button is-primary-light"
-            @click.prevent="openLoginModal">sign in</button>
+            @click.prevent="openLoginModal()">sign in</button>
         </div>
       </div>
     </div>
