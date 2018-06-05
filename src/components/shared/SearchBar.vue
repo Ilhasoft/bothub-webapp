@@ -35,14 +35,12 @@ export default {
     border: none;
     outline: none;
     font-size: 18px;
-    color: #A5A5A5;
+    color: $grey-dark;
     font-weight: 300;
 
-    $placeholder-color: #B7B7B7;
-    &::-webkit-input-placeholder { color: $placeholder-color; }
-    &::-moz-placeholder { color: $placeholder-color; }
-    &:-ms-input-placeholder { color: $placeholder-color; }
-    &:-moz-placeholder { color: $placeholder-color; }
+    @include placeholder {
+      color: $grey-lighter;
+    }
   }
 
   button {
