@@ -156,7 +156,7 @@ export default {
   }
 
   &-description {
-    margin: 1.5rem 0;
+    margin: .75rem 0;
 
     &-empty {
       font-style: italic;

@@ -69,6 +69,7 @@ import RepositoryCard from '@/components/repository/RepositoryCard';
 import Pagination from '@/components/shared/Pagination';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import ChangePasswordForm from '@/components/user/ChangePasswordForm';
+import LoginIsRequired from '@/components/auth/LoginIsRequired';
 
 const components = {
   Layout,
@@ -79,6 +80,7 @@ const components = {
 };
 
 export default {
+  extends: LoginIsRequired,
   name: 'MyProfile',
   components,
   mounted() {

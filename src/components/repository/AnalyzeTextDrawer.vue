@@ -148,7 +148,7 @@ export default {
   width: 300px;
   max-width: calc(100% - 4rem);
   max-height: 90vh;
-  z-index: 10;
+  z-index: 9;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
   overflow: auto;
 
