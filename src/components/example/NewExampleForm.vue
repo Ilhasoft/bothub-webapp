@@ -1,5 +1,6 @@
 <template>
   <form @submit.prevent="onSubmit()">
+    <messages :msgs="nonFieldsErrors" />
     <div class="field inputs">
       <div class="inputs-text">
         <entity-text-highlighted-input
@@ -42,12 +43,15 @@
 
 <script>
 import { mapActions } from 'vuex';
+import Messages from '@/components/shared/Messages';
 import EntityTextHighlightedInput from './form/EntityTextHighlightedInput';
 import EntitiesAsBadges from './form/EntitiesAsBadges';
+
 
 const components = {
   EntityTextHighlightedInput,
   EntitiesAsBadges,
+  Messages,
 };
 
 export default {
@@ -74,6 +78,16 @@ export default {
       submitting: false,
       errors: {},
     };
+  },
+  computed: {
+    nonFieldsErrors() {
+      /* istanbul ignore next */
+      return (this.errors.non_field_errors || [])
+        .map(text => ({
+          class: 'error',
+          text,
+        }));
+    },
   },
   methods: {
     ...mapActions([
