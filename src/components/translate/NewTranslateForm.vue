@@ -1,22 +1,9 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <div class="field inputs">
-      <div class="inputs-text">
-        <entity-text-highlighted-input
-          v-model="data.text"
-          :errors="errors.text"
-          @selected="updateSelected($event)"
-          :entities="data.entities" />
-      </div>
-      <div class="inputs-entities">
-        <entities-as-badges
-          v-model="data.entities"
-          :text="data.text"
-          :selected="selected"
-          :extraEntitiesList="extraEntitiesList"
-          :errors="errors.entities" />
-      </div>
-    </div>
+    <example-with-entities-input
+      v-model="data"
+      :errors="errors"
+      :extraEntitiesList="extraEntitiesList" />
     <div class="field has-text-right">
       <button
         type="submit"
@@ -27,14 +14,12 @@
 </template>
 
 <script>
-import EntityTextHighlightedInput from '@/components/example/form/EntityTextHighlightedInput';
-import EntitiesAsBadges from '@/components/example/form/EntitiesAsBadges';
 import { mapActions } from 'vuex';
+import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
 
 
 const components = {
-  EntityTextHighlightedInput,
-  EntitiesAsBadges,
+  ExampleWithEntitiesInput,
 };
 
 export default {

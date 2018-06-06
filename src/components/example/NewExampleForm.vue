@@ -1,22 +1,10 @@
 <template>
   <form @submit.prevent="onSubmit()">
     <messages :msgs="nonFieldsErrors" />
-    <div class="field inputs">
-      <div class="inputs-text">
-        <entity-text-highlighted-input
-          v-model="data.text"
-          :errors="errors.text"
-          @selected="updateSelected($event)"
-          :entities="data.entities" />
-      </div>
-      <div class="inputs-entities">
-        <entities-as-badges
-          v-model="data.entities"
-          :text="data.text"
-          :selected="selected"
-          :extraEntitiesList="extraEntitiesList" />
-      </div>
-    </div>
+    <example-with-entities-input
+      v-model="data"
+      :errors="errors"
+      :extraEntitiesList="extraEntitiesList" />
     <div class="field level">
       <div class="level-left">
         <div class="level-item">
@@ -44,13 +32,11 @@
 <script>
 import { mapActions } from 'vuex';
 import Messages from '@/components/shared/Messages';
-import EntityTextHighlightedInput from './form/EntityTextHighlightedInput';
-import EntitiesAsBadges from './form/EntitiesAsBadges';
+import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
 
 
 const components = {
-  EntityTextHighlightedInput,
-  EntitiesAsBadges,
+  ExampleWithEntitiesInput,
   Messages,
 };
 

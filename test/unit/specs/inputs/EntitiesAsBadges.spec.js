@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
-import EntitiesAsBadges from '@/components/example/form/EntitiesAsBadges';
+import EntitiesAsBadges from '@/components/inputs/EntitiesAsBadges';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

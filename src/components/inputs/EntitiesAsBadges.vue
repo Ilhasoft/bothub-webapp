@@ -188,6 +188,7 @@ export default {
       }
 
       this.entities.push(this.adding);
+      this.$emit('entityAdded', this.adding);
       this.cancelAdding();
     },
     cancelAdding() {
@@ -218,6 +219,10 @@ export default {
     &:first-child {
       margin-left: 0;
     }
+  }
+
+  > form {
+    margin: 0 4px;
   }
 
   .new {
