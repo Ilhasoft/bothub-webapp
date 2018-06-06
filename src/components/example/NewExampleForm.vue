@@ -1,21 +1,10 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <div class="field inputs">
-      <div class="inputs-text">
-        <entity-text-highlighted-input
-          v-model="data.text"
-          :errors="errors.text"
-          @selected="updateSelected($event)"
-          :entities="data.entities" />
-      </div>
-      <div class="inputs-entities">
-        <entities-as-badges
-          v-model="data.entities"
-          :text="data.text"
-          :selected="selected"
-          :extraEntitiesList="extraEntitiesList" />
-      </div>
-    </div>
+    <messages :msgs="nonFieldsErrors" />
+    <example-with-entities-input
+      v-model="data.textAndEntities"
+      :errors="errors"
+      :extraEntitiesList="extraEntitiesList" />
     <div class="field level">
       <div class="level-left">
         <div class="level-item">
@@ -42,12 +31,13 @@
 
 <script>
 import { mapActions } from 'vuex';
-import EntityTextHighlightedInput from './form/EntityTextHighlightedInput';
-import EntitiesAsBadges from './form/EntitiesAsBadges';
+import Messages from '@/components/shared/Messages';
+import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
+
 
 const components = {
-  EntityTextHighlightedInput,
-  EntitiesAsBadges,
+  ExampleWithEntitiesInput,
+  Messages,
 };
 
 export default {
@@ -66,14 +56,26 @@ export default {
   data() {
     return {
       data: {
-        text: '',
-        entities: [],
+        textAndEntities: {
+          text: '',
+          entities: [],
+        },
         intent: '',
       },
       selected: { start: 0, end: 0 },
       submitting: false,
       errors: {},
     };
+  },
+  computed: {
+    nonFieldsErrors() {
+      /* istanbul ignore next */
+      return (this.errors.non_field_errors || [])
+        .map(text => ({
+          class: 'error',
+          text,
+        }));
+    },
   },
   methods: {
     ...mapActions([
@@ -90,7 +92,8 @@ export default {
       try {
         await this.newExample({
           repository: this.repository.uuid || this.repository,
-          ...this.data,
+          intent: this.data.intent,
+          ...this.data.textAndEntities,
         });
         this.data = {
           text: '',

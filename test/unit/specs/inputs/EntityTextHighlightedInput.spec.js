@@ -1,5 +1,5 @@
 import { shallow, createLocalVue } from '@vue/test-utils';
-import EntityTextHighlightedInput from '@/components/example/form/EntityTextHighlightedInput';
+import EntityTextHighlightedInput from '@/components/inputs/EntityTextHighlightedInput';
 
 const localVue = createLocalVue();
 

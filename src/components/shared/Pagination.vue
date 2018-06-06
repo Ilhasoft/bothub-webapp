@@ -1,10 +1,10 @@
 <template>
   <div>
     <component
-      v-for="item in items"
-      :key="item.id"
+      v-for="item in list.items"
+      :key="item.key"
       :is="itemComponent"
-      v-bind="item.data"
+      v-bind="addAttrs(item.data)"
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <loading v-if="list.loading" />
@@ -44,36 +44,20 @@ export default {
   async mounted() {
     await this.list.next();
   },
-  data() {
-    return {
-      deletions: [],
-    };
-  },
-  computed: {
-    items() {
-      return this.list.items
-        .map((data, i) => ({
-          id: i,
-          data: Object.assign(
-            {},
-            this.$attrs,
-            data,
-          ),
-        }))
-        .filter(item => !this.deletions.includes(item.id));
-    },
-  },
   methods: {
     async next() {
       await this.list.next();
     },
     onItemDeleted(id) {
-      this.deletions.push(id);
+      this.list.delete(id);
       this.$emit('itemDeleted', id);
     },
     onDispatchEvent(event) {
       /* istanbul ignore next */
       this.$emit(event);
+    },
+    addAttrs(obj) {
+      return Object.assign({}, obj, this.$attrs);
     },
   },
 };

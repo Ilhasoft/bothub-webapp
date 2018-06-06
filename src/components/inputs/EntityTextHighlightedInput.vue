@@ -107,6 +107,16 @@ export default {
           { start: 0, end: 0 } :
           { start: selectionStart, end: selectionEnd });
     },
+    clearSelected() {
+      /* istanbul ignore next */
+      if (this.$refs.input.setSelectionRange) {
+        /* istanbul ignore next */
+        this.$refs.input.setSelectionRange(0, 0);
+      } else {
+        /* istanbul ignore next */
+        this.$refs.input.focus();
+      }
+    },
   },
 };
 </script>
