@@ -36,7 +36,10 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => ({}),
+      default: () => ({
+        text: '',
+        entities: [],
+      }),
     },
     errors: {
       type: Object,
@@ -48,6 +51,12 @@ export default {
     },
   },
   watch: {
+    value: {
+      handler() {
+        this.data = this.value;
+      },
+      deep: true,
+    },
     data: {
       handler() {
         /* istanbul ignore next */
@@ -58,10 +67,7 @@ export default {
   },
   data() {
     return {
-      data: {
-        text: '',
-        entities: [],
-      },
+      data: this.value,
       selected: { start: 0, end: 0 },
     };
   },
