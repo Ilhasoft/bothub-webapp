@@ -36,14 +36,16 @@ describe('NewExampleForm.vue', () => {
     const text = 'my name is douglas';
     beforeEach(() => {
       wrapper.vm.data = {
-        text,
-        entities: [
-          {
-            start: 11,
-            end: 18,
-            entity: 'name',
-          },
-        ],
+        textAndEntities: {
+          text,
+          entities: [
+            {
+              start: 11,
+              end: 18,
+              entity: 'name',
+            },
+          ],
+        },
         intent: 'greet',
       };
     });
@@ -79,8 +81,10 @@ describe('NewExampleForm.vue', () => {
     const text = '';
     beforeEach(() => {
       wrapper.vm.data = {
-        text,
-        entities: [],
+        textAndEntities: {
+          text,
+          entities: [],
+        },
         intent: '',
       };
     });

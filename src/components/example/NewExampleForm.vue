@@ -2,7 +2,7 @@
   <form @submit.prevent="onSubmit()">
     <messages :msgs="nonFieldsErrors" />
     <example-with-entities-input
-      v-model="data"
+      v-model="data.textAndEntities"
       :errors="errors"
       :extraEntitiesList="extraEntitiesList" />
     <div class="field level">
@@ -56,8 +56,10 @@ export default {
   data() {
     return {
       data: {
-        text: '',
-        entities: [],
+        textAndEntities: {
+          text: '',
+          entities: [],
+        },
         intent: '',
       },
       selected: { start: 0, end: 0 },
@@ -90,7 +92,8 @@ export default {
       try {
         await this.newExample({
           repository: this.repository.uuid || this.repository,
-          ...this.data,
+          intent: this.data.intent,
+          ...this.data.textAndEntities,
         });
         this.data = {
           text: '',
