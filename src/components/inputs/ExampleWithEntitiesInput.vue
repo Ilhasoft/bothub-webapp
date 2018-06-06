@@ -11,6 +11,7 @@
     <div class="inputs-entities">
       <entities-as-badges
         v-model="data.entities"
+        :errors="errors.entities"
         :text="data.text"
         :selected="selected"
         :extraEntitiesList="extraEntitiesList"
