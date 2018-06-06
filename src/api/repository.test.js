@@ -37,7 +37,7 @@ describe('api/repository', () => {
     await list.next();
     expect(list.items).toHaveLength(15);
     list.items.forEach((item) => {
-      expect(item.categories.includes(1)).toBeTruthy();
+      expect(item.data.categories.includes(1)).toBeTruthy();
     });
   });
 
