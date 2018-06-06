@@ -30,12 +30,8 @@ describe('Pagination.vue', () => {
       wrapper.vm.onItemDeleted(0);
     });
 
-    test('index on deletions', () => {
-      expect(wrapper.vm.deletions).toContain(0);
-    });
-
     test('item filtered', () => {
-      wrapper.vm.items.forEach((item) => {
+      wrapper.vm.list.items.forEach((item) => {
         expect(item.id).not.toBe(0);
       });
     });
