@@ -4,7 +4,9 @@
       <h1 class="title has-text-white has-text-centered">Robot Society</h1>
       <h2 class="subtitle has-text-white has-text-weight-light has-text-centered">TRAIN YOURS!</h2>
     </header>
-    <div class="container"><search-bar /></div>
+    <div class="container">
+      <search-bar v-model="search" />
+    </div>
     <div class="wrapper">
       <categories-list
         :current="currentCategory"
@@ -15,6 +17,9 @@
           class="repository-list"
           :itemComponent="repositoryItemElem"
           :list="repositoryList" />
+        <p
+          v-if="repositoryList && repositoryList.empty"
+          class="has-text-centered">Repositories not found.</p>
       </div>
     </div>
   </layout>
@@ -45,24 +50,29 @@ export default {
     currentCategory() {
       this.updateRepositoryList();
     },
+    search() {
+      this.updateRepositoryList();
+    },
   },
   data() {
     return {
       currentCategory: 0,
+      search: '',
       repositoryItemElem: RepositoryCard,
       repositoryList: null,
     };
   },
   methods: {
     ...mapActions([
-      'getAllRepositories',
       'searchRepositories',
     ]),
     async updateRepositoryList() {
+      const { search } = this;
       this.repositoryList = null;
+
       this.repositoryList = this.currentCategory > 0 ?
-        await this.searchRepositories({ categories: [this.currentCategory] }) :
-        await this.getAllRepositories();
+        await this.searchRepositories({ categories: [this.currentCategory], search }) :
+        await this.searchRepositories({ search });
     },
   },
 };
