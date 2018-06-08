@@ -15,14 +15,6 @@
             class="title is-4">{{ name }}</router-link>
         </div>
         <div class="repository-header-info">
-          <div class="repository-header-info-item">
-            <span>0 issues</span>
-            <b-icon icon="alert-circle-outline" />
-          </div>
-          <div class="repository-header-info-item">
-            <span>0 stars</span>
-            <b-icon icon="star" />
-          </div>
           <button
             :disabled="training"
             v-if="showTrainAction"
