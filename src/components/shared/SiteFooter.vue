@@ -9,28 +9,24 @@
             </div>
             <ul class="footer-item">
               <li><a href="#">Terms &amp; conditions</a></li>
-              <li><a href="#">Privacy policy</a></li>
-              <li><a href="#">Copyrights Notification</a></li>
             </ul>
             <ul class="footer-item footer-sociallist">
               <li class="footer-sociallist-item">
-                <a href="#"><b-icon icon="facebook" /></a>
+                <a
+                  href="https://www.facebook.com/bothub.it"
+                  target="_blank"><b-icon icon="facebook" /></a>
               </li>
               <li class="footer-sociallist-item">
-                <a href="#"><b-icon icon="google-plus" /></a>
-              </li>
-              <li class="footer-sociallist-item">
-                <a href="#"><b-icon icon="instagram" /></a>
-              </li>
-              <li class="footer-sociallist-item">
-                <a href="#"><b-icon icon="twitter" /></a>
+                <a
+                  href="https://github.com/push-flow/"
+                  target="_blank"><b-icon icon="github-circle" /></a>
               </li>
             </ul>
           </div>
           <div class="column">
             <h4 class="footer-title has-text-white">Contact Us</h4>
             <div class="footer-section-item">
-              <p>bothub@contact.com</p>
+              <p>bothub@ilhasoft.com.br</p>
             </div>
             <div class="footer-section-item">
               <p>Rua José Pontes de Magalhães 70,</p>
@@ -50,11 +46,17 @@
               <div class="footer-has-input">
                 <b-field>
                   <input
+                    v-model="email"
+                    :disabled="submittingNewsletter"
                     type="email"
                     class="input footer-input"
                     placeholder="your@email.com" />
                   <span class="control">
-                    <button class="button is-secondary"><b-icon icon="email" /></button>
+                    <button class="button is-secondary">
+                      <b-icon
+                        :icon="submittingNewsletter ? 'refresh' : 'email'"
+                        :customClass="submittingNewsletter ? 'icon-spin' : null" />
+                    </button>
                   </span>
                 </b-field>
               </div>
@@ -71,10 +73,55 @@
 </template>
 
 <script>
+import axios from 'axios';
+import qs from 'query-string';
+
+
 export default {
   name: 'SiteFooter',
+  data() {
+    return {
+      email: '',
+      submittingNewsletter: false,
+    };
+  },
   methods: {
-    onSubscribeSubmit() {},
+    async onSubscribeSubmit() {
+      /* istanbul ignore next */
+      const {
+        MAILCHIMP_LOGIN,
+        MAILCHIMP_DATACENTER,
+        MAILCHIMP_USER_ID,
+        MAILCHIMP_LIST_ID,
+      } = process.env;
+      /* istanbul ignore next */
+      const baseUrl = `https://${MAILCHIMP_LOGIN}.${MAILCHIMP_DATACENTER}.list-manage.com/subscribe/post`;
+      /* istanbul ignore next */
+      const query = {
+        u: MAILCHIMP_USER_ID,
+        id: MAILCHIMP_LIST_ID,
+        EMAIL: this.email,
+      };
+      /* istanbul ignore next */
+      const url = `${baseUrl}?${qs.stringify(query)}`;
+      /* istanbul ignore next */
+      this.submittingNewsletter = true;
+      /* istanbul ignore next */
+      try {
+        await axios.get(url);
+      } catch (e) {
+        // eslint-disable-next-line no-empty
+      }
+      /* istanbul ignore next */
+      this.submittingNewsletter = false;
+      /* istanbul ignore next */
+      this.email = '';
+      /* istanbul ignore next */
+      this.$toast.open({
+        message: 'Thank you for subscribing!',
+        type: 'is-success',
+      });
+    },
   },
 };
 </script>
@@ -142,6 +189,7 @@ footer {
 
       &-item {
         $size: 36px;
+
         width: $size;
         height: $size;
         line-height: $size;
