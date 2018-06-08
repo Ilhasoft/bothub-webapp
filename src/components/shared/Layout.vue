@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="layout">
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal" />
@@ -55,7 +55,9 @@
         </div>
       </div>
     </div>
-    <slot />
+    <div class="layout-content">
+      <slot />
+    </div>
     <site-footer />
   </div>
 </template>
@@ -125,6 +127,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+
+.layout {
+  min-height: 100vh;
+
+  &-content {
+    min-height: calc(100vh - 500px);
+  }
+}
 
 .topbar {
   padding: 16px;
