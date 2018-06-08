@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="container">
+    <div class="wrapper">
       <reset-password-form
         :nickname="$route.params.nickname"
         :token="$route.params.token" />
@@ -22,3 +22,15 @@ export default {
   components,
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~@/assets/scss/utilities.scss';
+
+.wrapper {
+  background-color: $white;
+  padding: 8px;
+  max-width: 400px;
+  margin: 0 auto 16px;
+  border-radius: 4px;
+}
+</style>
