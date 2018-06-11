@@ -34,7 +34,7 @@ export default class List {
     this.loading = true;
     const response = await request.$http.get(this.nextEntryPoint);
     this.nextEntryPoint = response.data.next;
-    this.items = this.items.concat(response.data.results);
+    this.items = this.itemsList.concat(response.data.results);
     this.loading = false;
     return this.items;
   }
