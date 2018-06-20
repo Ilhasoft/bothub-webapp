@@ -128,6 +128,9 @@ export default {
 
 <style lang="scss" scoped>
 footer {
+  width: 100%;
+  overflow: hidden;
+
   $font-color: #5E5786;
   $font-color-lighten: #aba8c2;
   $background-color: #221859;
