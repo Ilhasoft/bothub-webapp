@@ -16,22 +16,22 @@
         :votes_sum="repository.votes_sum"
         @train="train()"
         @edit="openEditModal()" />
-      <ul class="navbar">
+      <ul class="repository-navbar">
         <li
           @click="activeTab = 0"
-          :class="{'navbar-item': true, 'active': activeTab === 0}">Status</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 0}">Status</li>
         <li
           @click="activeTab = 1"
-          :class="{'navbar-item': true, 'active': activeTab === 1}">Examples</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 1}">Examples</li>
         <li
           @click="activeTab = 2"
-          :class="{'navbar-item': true, 'active': activeTab === 2}">Translate</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 2}">Translate</li>
         <li
           @click="activeTab = 3"
-          :class="{'navbar-item': true, 'active': activeTab === 3}">Translations</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 3}">Translations</li>
         <li
           @click="activeTab = 4"
-          :class="{'navbar-item': true, 'active': activeTab === 4}">Analyze Text</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 4}">Analyze Text</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -498,7 +498,7 @@ export default {
   padding: 8px;
 }
 
-.navbar {
+.repository-navbar {
   $primary-darken: darken($primary, 5%);
 
   list-style: none;
