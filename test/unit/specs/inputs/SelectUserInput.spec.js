@@ -7,7 +7,6 @@ import Vuex from 'vuex';
 import store from '@/store';
 import { shallow, createLocalVue } from '@vue/test-utils';
 import SelectUserInput from '@/components/inputs/SelectUserInput';
-import { wrap } from 'module';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
