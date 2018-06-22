@@ -24,13 +24,9 @@
         </div>
         <div class="level-item">
           <b-dropdown position="is-bottom-left">
-            <button
+            <user-avatar
               slot="trigger"
-              class="topbar-avatar">
-              <b-icon
-                icon="account"
-                class="topbar-avatar-icon" />
-            </button>
+              :profile="myProfile" />
             <b-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
             </b-dropdown-item>
@@ -67,10 +63,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import SiteFooter from '@/components/shared/SiteFooter';
+import UserAvatar from '@/components/shared/UserAvatar';
 
 const components = {
   NewRepositoryModal,
   SiteFooter,
+  UserAvatar,
 };
 
 export default {
@@ -143,28 +141,6 @@ export default {
     width: 140px;
 
     img { width: 100%; }
-  }
-
-  &-avatar {
-    $size: 36px;
-
-    position: relative;
-    width: $size;
-    height: $size;
-    overflow: hidden;
-    border-radius: 100%;
-    border: 2px solid #fff;
-    background-color: $white-ter;
-    outline: none;
-    cursor: pointer;
-
-    &-icon {
-      position: absolute;
-      left: 50%;
-      height: 50%;
-      transform: translate(-50%, -50%);
-      color: $grey-light;
-    }
   }
 }
 </style>
