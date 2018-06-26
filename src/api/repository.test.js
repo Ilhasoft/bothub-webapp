@@ -6,6 +6,7 @@ import repository from './repository';
 
 import store from '@/store';
 import TYPES from '@/store/types';
+import { ROLE_CONTRIBUTOR } from '@/utils';
 
 
 describe('api/repository', () => {
@@ -108,6 +109,19 @@ describe('api/repository', () => {
 
     const response = await repository.voteDown('douglas', 'repo1');
     expect(response.status).toBe(201);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
+
+  test('updateAuthorizationRole', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.updateAuthorizationRole(
+      '8511fd26-a3bc-4f74-9af1-176abca5401d',
+      'douglas',
+      ROLE_CONTRIBUTOR);
+    expect(response.status).toBe(200);
+    expect(response.data.role).toBe(ROLE_CONTRIBUTOR);
 
     store.commit(TYPES.SET_TOKEN, null);
   });

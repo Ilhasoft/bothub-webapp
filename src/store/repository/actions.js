@@ -71,4 +71,10 @@ export default {
   repositoryVoteDown(store, { ownerNickname, slug }) {
     return repository.voteDown(ownerNickname, slug);
   },
+  repositoryUpdateAuthorizationRole(store, { repositoryUuid, userNickname, newRole }) {
+    return repository.updateAuthorizationRole(
+      repositoryUuid,
+      userNickname,
+      newRole);
+  },
 };

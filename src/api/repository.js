@@ -78,4 +78,9 @@ export default {
   voteDown(ownerNickname, slug) {
     return this.vote(ownerNickname, slug, -1);
   },
+  updateAuthorizationRole(repositoryUuid, userNickname, role) {
+    return request.$http.patch(
+      `/authorization-role/${repositoryUuid}/${userNickname}/`,
+      { role });
+  },
 };
