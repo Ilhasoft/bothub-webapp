@@ -16,6 +16,12 @@
         </div>
         <div class="repository-header-info">
           <button
+            v-if="showManagerAuthorizationAction"
+            @click="$emit('managerAuthorization')"
+            class="action repository-header-info-item">
+            <b-icon icon="account-group" />
+          </button>
+          <button
             :disabled="training"
             v-if="showTrainAction"
             @click="$emit('train')"
@@ -100,6 +106,10 @@ export default {
       type: Array,
     },
     hideDescription: {
+      type: Boolean,
+      default: false,
+    },
+    showManagerAuthorizationAction: {
       type: Boolean,
       default: false,
     },
