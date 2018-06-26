@@ -64,6 +64,18 @@ describe('SelectUserInput.vue', () => {
           expect(wrapper.vm.query).toBe('');
         });
       });
+
+      describe('change value', () => {
+        const newValue = null;
+
+        beforeEach(() => {
+          wrapper.vm.value = newValue;
+        });
+
+        test('selected equal value', () => {
+          expect(wrapper.vm.selected).toBe(newValue);
+        });
+      });
     });
   });
 });

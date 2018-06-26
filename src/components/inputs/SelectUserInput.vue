@@ -56,6 +56,10 @@ export default {
   name: 'SelectUserInput',
   components,
   props: {
+    value: {
+      type: Object,
+      default: () => ({}),
+    },
     debounceTime: {
       type: Number,
       default: 750,
@@ -67,6 +71,16 @@ export default {
       this.setTimeoutId = setTimeout(
         () => { this.updateData(); },
         this.debounceTime);
+    },
+    selected() {
+      this.$emit('input', this.selected);
+    },
+    value: {
+      handler() {
+        this.selected = this.value;
+        this.query = '';
+      },
+      deep: true,
     },
   },
   data() {
@@ -100,12 +114,10 @@ export default {
     },
     onSelected(profile) {
       this.selected = profile;
-      this.$emit('input', profile);
     },
     removeSelected() {
       this.selected = null;
       this.query = '';
-      this.$emit('input', null);
     },
   },
 };
