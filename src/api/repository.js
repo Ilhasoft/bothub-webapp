@@ -83,4 +83,8 @@ export default {
       `/authorization-role/${repositoryUuid}/${userNickname}/`,
       { role });
   },
+  getAuthorizationList(repositoryUuid) {
+    const queryString = qs.stringify({ repository: repositoryUuid });
+    return new utils.List(`/authorizations/?${queryString}`);
+  },
 };
