@@ -79,7 +79,6 @@ export default {
         const { response } = error;
         const { data } = response;
 
-
         this.$toast.open({
           message: data.detail || 'Something wrong happened...',
           type: 'is-danger',
