@@ -76,6 +76,9 @@ export default {
     },
   },
   components,
+  mounted() {
+    this.updateUserProfile();
+  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -83,6 +86,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'updateProfile',
       'repositoryUpdateAuthorizationRole',
     ]),
     edit() {
@@ -117,6 +121,9 @@ export default {
           throw error;
         }
       }
+    },
+    updateUserProfile() {
+      this.updateProfile({ nickname: this.user__nickname });
     },
   },
 };
