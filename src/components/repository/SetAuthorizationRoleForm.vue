@@ -25,7 +25,7 @@
           <label class="label">&nbsp;</label>
           <button
             :disabled="!userProfile || !role"
-            class="button is-primary">Update</button>
+            class="button is-primary">Invite</button>
         </div>
       </div>
     </div>
