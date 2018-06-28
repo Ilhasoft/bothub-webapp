@@ -10,7 +10,10 @@
     <div class="media-right"><small>{{ role | roleVerbose }}</small></div>
     <div class="media-right">&nbsp;</div>
     <div class="media-right">
-      <div class="clickable-icon">
+      <div
+        ref="editBtn"
+        @click="onEdit()"
+        class="clickable-icon">
         <b-icon
           icon="pencil"
           size="is-small" />
@@ -69,6 +72,19 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+  },
+  methods: {
+    onEdit() {
+      this.$emit(
+        'dispatchEvent',
+        {
+          event: 'edit',
+          value: {
+            userProfile: this.getProfile(this.user__nickname),
+            role: this.role,
+          },
+        });
+    },
   },
 };
 </script>

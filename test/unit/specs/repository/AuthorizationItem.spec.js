@@ -39,4 +39,15 @@ describe('AuthorizationItem.vue', () => {
   test('mount', () => {
     expect(wrapper.vm).toBeDefined();
   });
+
+  describe('click on edit', () => {
+    beforeEach(() => {
+      const edit = wrapper.find({ ref: 'editBtn' });
+      edit.trigger('click');
+    });
+
+    test('emit dispatchEvent', () => {
+      expect(wrapper.emitted('dispatchEvent')).toBeDefined();
+    });
+  });
 });
