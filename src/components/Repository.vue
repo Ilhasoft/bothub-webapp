@@ -312,13 +312,15 @@ msg: [text to analyze]</div>
         <div class="card-content">
           <h1 class="title is-4">Manager Team</h1>
           <set-authorization-role-form
+            ref="setAuthorizationRoleForm"
             :repositoryUuid="repository.uuid"
             @roleSetted="onRoleSetted()" />
         </div>
         <div class="card-content">
           <authorizations-list
             ref="authorizationsList"
-            :repositoryUuid="repository.uuid" />
+            :repositoryUuid="repository.uuid"
+            @edit="onEditRole($event)" />
         </div>
       </div>
     </b-modal>
@@ -496,6 +498,9 @@ export default {
     },
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();
+    },
+    onEditRole(value) {
+      this.$refs.setAuthorizationRoleForm.setData(value);
     },
   },
 };
