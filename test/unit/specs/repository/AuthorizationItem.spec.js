@@ -6,12 +6,14 @@ import Buefy from 'buefy';
 import { shallow, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
+import applyFilters from '@/utils/filters';
 
 import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Buefy);
+applyFilters(localVue);
 
 describe('AuthorizationItem.vue', () => {
   let wrapper;
