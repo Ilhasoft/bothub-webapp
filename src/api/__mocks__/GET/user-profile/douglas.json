@@ -1,0 +1,13 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "nickname": "douglas",
+        "email": "douglas@bothub.it",
+        "name": "Douglas",
+        "locale": "Brazil"
+      }
+    }
+  }
+]
