@@ -77,4 +77,7 @@ export default {
       userNickname,
       newRole);
   },
+  repositoryAuthorizationList(store, { repositoryUuid }) {
+    return repository.getAuthorizationList(repositoryUuid);
+  },
 };
