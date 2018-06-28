@@ -12,7 +12,7 @@
     <div class="media-right">
       <div
         ref="editBtn"
-        @click="onEdit()"
+        @click="edit()"
         class="clickable-icon">
         <b-icon
           icon="pencil"
@@ -20,7 +20,10 @@
       </div>
     </div>
     <div class="media-right">
-      <div class="clickable-icon">
+      <div
+        ref="removeBtn"
+        @click="remove()"
+        class="clickable-icon">
         <b-icon
           icon="close"
           size="is-small" />
@@ -30,9 +33,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/shared/UserAvatar';
+import { ROLE_NOT_SETTED } from '@/utils';
 
 
 const components = {
@@ -47,6 +51,10 @@ export default {
       required: true,
     },
     user__nickname: {
+      type: String,
+      required: true,
+    },
+    repository: {
       type: String,
       required: true,
     },
@@ -74,7 +82,10 @@ export default {
     ]),
   },
   methods: {
-    onEdit() {
+    ...mapActions([
+      'repositoryUpdateAuthorizationRole',
+    ]),
+    edit() {
       this.$emit(
         'dispatchEvent',
         {
@@ -84,6 +95,28 @@ export default {
             role: this.role,
           },
         });
+    },
+    async remove() {
+      try {
+        await this.repositoryUpdateAuthorizationRole({
+          repositoryUuid: this.repository,
+          userNickname: this.user__nickname,
+          newRole: ROLE_NOT_SETTED,
+        });
+        this.$emit('deleted');
+      } catch (error) {
+        const { response } = error;
+        const { data } = response;
+
+        this.$toast.open({
+          message: data.detail || 'Something wrong happened...',
+          type: 'is-danger',
+        });
+
+        if (!data.detail) {
+          throw error;
+        }
+      }
     },
   },
 };
