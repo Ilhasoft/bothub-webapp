@@ -90,6 +90,10 @@ export default {
         }
       }
     },
+    setData({ userProfile, role }) {
+      this.userProfile = userProfile;
+      this.role = role;
+    },
   },
 };
 </script>
