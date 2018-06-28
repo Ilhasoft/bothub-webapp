@@ -311,7 +311,14 @@ msg: [text to analyze]</div>
         class="card">
         <div class="card-content">
           <h1 class="title is-4">Manager Team</h1>
-          <set-authorization-role-form :repositoryUuid="repository.uuid" />
+          <set-authorization-role-form
+            :repositoryUuid="repository.uuid"
+            @roleSetted="onRoleSetted()" />
+        </div>
+        <div class="card-content">
+          <authorizations-list
+            ref="authorizationsList"
+            :repositoryUuid="repository.uuid" />
         </div>
       </div>
     </b-modal>
@@ -339,6 +346,7 @@ import TranslateList from '@/components/translate/TranslateList';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
 
 
 const components = {
@@ -357,6 +365,7 @@ const components = {
   TranslationsStatus,
   TranslationsList,
   SetAuthorizationRoleForm,
+  AuthorizationsList,
 };
 
 export default {
@@ -392,11 +401,6 @@ export default {
       toLanguage: null,
       managerAuthorizationModalOpen: false,
     };
-  },
-  filters: {
-    can_t(value) {
-      return value ? 'can' : 'can\'t';
-    },
   },
   computed: {
     ...mapGetters([
@@ -489,6 +493,9 @@ export default {
     },
     openManagerAuthorization() {
       this.managerAuthorizationModalOpen = true;
+    },
+    onRoleSetted() {
+      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };
@@ -583,4 +590,3 @@ export default {
   }
 }
 </style>
-
