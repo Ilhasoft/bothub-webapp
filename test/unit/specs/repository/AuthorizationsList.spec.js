@@ -41,4 +41,16 @@ describe('AuthorizationsList.vue', () => {
       expect(wrapper.vm.authorizationsList.items.length).toBeGreaterThan(0);
     });
   });
+
+  describe('on edit', () => {
+    const value = { userProfile: {}, role: 0 };
+    beforeEach(() => {
+      wrapper.vm.onEdit(value);
+    });
+
+    test('emit edit', () => {
+      expect(wrapper.emitted('edit')).toBeDefined();
+      expect(wrapper.emitted('edit')[0][0]).toMatchObject(value);
+    });
+  });
 });

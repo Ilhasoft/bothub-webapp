@@ -1,9 +1,11 @@
 <template>
   <div>
     <pagination
-        v-if="authorizationsList"
-        :itemComponent="authorizationItemElem"
-        :list="authorizationsList" />
+      ref="list"
+      v-if="authorizationsList"
+      :itemComponent="authorizationItemElem"
+      :list="authorizationsList"
+      @edit="onEdit($event)" />
     <p
       v-if="authorizationsList && authorizationsList.empty"
       class="no-examples">No users in your team.</p>
@@ -50,6 +52,9 @@ export default {
           repositoryUuid: this.repositoryUuid,
         });
       }
+    },
+    onEdit(value) {
+      this.$emit('edit', value);
     },
   },
 };
