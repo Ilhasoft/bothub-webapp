@@ -125,7 +125,6 @@ export default {
         });
         this.$emit('deleted');
       } catch (error) {
-        /* istanbul ignore next */
         this.handlerError(error);
       }
       this.submitting = false;
@@ -145,7 +144,6 @@ export default {
         this.submitted = true;
         this.$emit('roleChanged');
       } catch (error) {
-        /* istanbul ignore next */
         this.handlerError(error);
       }
       this.submitting = false;
