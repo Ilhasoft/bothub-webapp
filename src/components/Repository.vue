@@ -74,6 +74,8 @@
             <new-example-form
               v-if="repository.authorization.can_contribute"
               :repository="repository"
+              :extraEntitiesList="repository.entities"
+              :extraIntentsList="repository.intents"
               @created="onExampleCreated()" />
             <div v-else-if="authenticated">
               <div class="notification is-warning">

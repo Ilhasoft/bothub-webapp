@@ -11,9 +11,9 @@
           <b-field
             horizontal
             label="Intent">
-            <b-input
-              type="text"
-              v-model="data.intent" />
+            <b-autocomplete
+              v-model="data.intent"
+              :data="extraIntentsList" />
           </b-field>
         </div>
       </div>
@@ -45,6 +45,10 @@ export default {
   components,
   props: {
     extraEntitiesList: {
+      type: Array,
+      default: () => ([]),
+    },
+    extraIntentsList: {
       type: Array,
       default: () => ([]),
     },
