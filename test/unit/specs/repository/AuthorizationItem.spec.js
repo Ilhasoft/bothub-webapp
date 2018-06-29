@@ -8,6 +8,7 @@ import { shallow, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import applyFilters from '@/utils/filters';
+import { ROLE_USER } from '@/utils';
 
 import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
@@ -43,14 +44,14 @@ describe('AuthorizationItem.vue', () => {
     expect(wrapper.vm).toBeDefined();
   });
 
-  describe('click on edit', () => {
-    beforeEach(() => {
-      const edit = wrapper.find({ ref: 'editBtn' });
-      edit.trigger('click');
+  describe('change role', () => {
+    beforeEach(async () => {
+      wrapper.vm.newRole = ROLE_USER;
+      await wrapper.vm.updateRole();
     });
 
-    test('emit dispatchEvent', () => {
-      expect(wrapper.emitted('dispatchEvent')).toBeDefined();
+    test('emit roleChanged', () => {
+      expect(wrapper.emitted('roleChanged')).toBeDefined();
     });
   });
 

@@ -7,17 +7,30 @@
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
       <p><small>{{ user__nickname }}</small></p>
     </div>
-    <div class="media-right"><small>{{ role | roleVerbose }}</small></div>
-    <div class="media-right">&nbsp;</div>
     <div class="media-right">
-      <div
-        ref="editBtn"
-        @click="edit()"
-        class="clickable-icon">
-        <b-icon
-          icon="pencil"
-          size="is-small" />
-      </div>
+      <b-select
+        expanded
+        v-model="newRole"
+        size="is-small">
+        <option
+          v-for="(label, value) in roles"
+          :value="value"
+          :key="value">
+          {{ label }}
+        </option>
+      </b-select>
+    </div>
+    <div
+      v-if="submitted || submitted || true"
+      class="media-right">
+      <b-icon
+        v-if="submitting"
+        icon="refresh"
+        customClass="icon-spin" />
+      <b-icon
+        v-if="submitted"
+        icon="check"
+        customClass="has-text-success" />
     </div>
     <div class="media-right">
       <div
@@ -36,7 +49,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/shared/UserAvatar';
-import { ROLE_NOT_SETTED } from '@/utils';
+import { ROLE_NOT_SETTED, ROLES } from '@/utils';
 
 
 const components = {
@@ -79,6 +92,19 @@ export default {
   mounted() {
     this.updateUserProfile();
   },
+  watch: {
+    newRole() {
+      this.updateRole();
+    },
+  },
+  data() {
+    return {
+      roles: ROLES,
+      newRole: this.role,
+      submitting: false,
+      submitted: false,
+    };
+  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -89,18 +115,8 @@ export default {
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
     ]),
-    edit() {
-      this.$emit(
-        'dispatchEvent',
-        {
-          event: 'edit',
-          value: {
-            userProfile: this.getProfile(this.user__nickname),
-            role: this.role,
-          },
-        });
-    },
     async remove() {
+      this.submitting = true;
       try {
         await this.repositoryUpdateAuthorizationRole({
           repositoryUuid: this.repository,
@@ -109,21 +125,48 @@ export default {
         });
         this.$emit('deleted');
       } catch (error) {
-        const { response } = error;
-        const { data } = response;
-
-        this.$toast.open({
-          message: data.detail || 'Something wrong happened...',
-          type: 'is-danger',
-        });
-
-        if (!data.detail) {
-          throw error;
-        }
+        /* istanbul ignore next */
+        this.handlerError(error);
       }
+      this.submitting = false;
     },
     updateUserProfile() {
       this.updateProfile({ nickname: this.user__nickname });
+    },
+    async updateRole() {
+      this.submitting = true;
+      this.submitted = false;
+      try {
+        await this.repositoryUpdateAuthorizationRole({
+          repositoryUuid: this.repository,
+          userNickname: this.user__nickname,
+          newRole: this.newRole,
+        });
+        this.submitted = true;
+        this.$emit('roleChanged');
+      } catch (error) {
+        /* istanbul ignore next */
+        this.handlerError(error);
+      }
+      this.submitting = false;
+    },
+    handlerError(error) {
+      const { response } = error;
+
+      if (!response) {
+        throw error;
+      }
+
+      const { data } = response;
+
+      this.$toast.open({
+        message: data.detail || 'Something wrong happened...',
+        type: 'is-danger',
+      });
+
+      if (!data.detail) {
+        throw error;
+      }
     },
   },
 };
