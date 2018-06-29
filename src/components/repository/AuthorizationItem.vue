@@ -135,7 +135,7 @@ export default {
               this.handlerError(error);
             }
             this.submitting = false;
-            resolve()
+            resolve();
           },
           onCancel: () => {
             /* istanbul ignore next */
