@@ -103,6 +103,7 @@ export default {
       newRole: this.role,
       submitting: false,
       submitted: false,
+      removeDialog: null,
     };
   },
   computed: {
@@ -116,18 +117,32 @@ export default {
       'repositoryUpdateAuthorizationRole',
     ]),
     async remove() {
-      this.submitting = true;
-      try {
-        await this.repositoryUpdateAuthorizationRole({
-          repositoryUuid: this.repository,
-          userNickname: this.user__nickname,
-          newRole: ROLE_NOT_SETTED,
+      return new Promise((resolve, reject) => {
+        this.removeDialog = this.$dialog.confirm({
+          message: 'Are you sure?',
+          confirmText: 'Remove',
+          type: 'is-danger',
+          onConfirm: async () => {
+            this.submitting = true;
+            try {
+              await this.repositoryUpdateAuthorizationRole({
+                repositoryUuid: this.repository,
+                userNickname: this.user__nickname,
+                newRole: ROLE_NOT_SETTED,
+              });
+              this.$emit('deleted');
+            } catch (error) {
+              this.handlerError(error);
+            }
+            this.submitting = false;
+            resolve()
+          },
+          onCancel: () => {
+            /* istanbul ignore next */
+            reject();
+          },
         });
-        this.$emit('deleted');
-      } catch (error) {
-        this.handlerError(error);
-      }
-      this.submitting = false;
+      });
     },
     updateUserProfile() {
       this.updateProfile({ nickname: this.user__nickname });

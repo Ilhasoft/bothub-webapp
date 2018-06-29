@@ -55,10 +55,12 @@ describe('AuthorizationItem.vue', () => {
     });
   });
 
-  describe('click on remove', () => {
-    beforeEach(() => {
-      const remove = wrapper.find({ ref: 'removeBtn' });
-      remove.trigger('click');
+  describe('remove', () => {
+    beforeEach(async () => {
+      const removePromise = wrapper.vm.remove();
+      await localVue.nextTick();
+      wrapper.vm.removeDialog.confirm();
+      await removePromise;
     });
 
     test('emit deleted', () => {
