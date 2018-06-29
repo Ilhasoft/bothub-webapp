@@ -6,7 +6,8 @@
         v-model="data.text"
         :errors="errors.text"
         @selected="updateSelected($event)"
-        :entities="data.entities" />
+        :entities="data.entities"
+        :allEntities="allEntities" />
     </div>
     <div class="inputs-entities">
       <entities-as-badges
@@ -15,6 +16,7 @@
         :text="data.text"
         :selected="selected"
         :extraEntitiesList="extraEntitiesList"
+        :allEntities="allEntities"
         @entityAdded="onEntityAdded()" />
     </div>
   </div>
@@ -46,6 +48,10 @@ export default {
       default: () => ({}),
     },
     extraEntitiesList: {
+      type: Array,
+      default: () => ([]),
+    },
+    allEntities: {
       type: Array,
       default: () => ([]),
     },

@@ -4,7 +4,8 @@
     <example-with-entities-input
       v-model="data.textAndEntities"
       :errors="errors"
-      :extraEntitiesList="extraEntitiesList" />
+      :extraEntitiesList="extraEntitiesList"
+      :allEntities="repository.entities" />
     <div class="field level">
       <div class="level-left">
         <div class="level-item">

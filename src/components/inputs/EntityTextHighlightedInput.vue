@@ -52,6 +52,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    allEntities: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   watch: {
     value() {
@@ -75,7 +79,10 @@ export default {
     entitiesBlocks() {
       return this.entities
         .map(({ start, end, entity }) => {
-          const color = getEntityColor(entity, this.entities);
+          const color = getEntityColor(
+            entity,
+            this.allEntities,
+            this.entities);
           const colorClass = `entity-${color}`;
           const before = this.out.substring(0, start);
           const text = this.out.substring(start, end);

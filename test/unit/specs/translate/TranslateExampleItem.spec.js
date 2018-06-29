@@ -24,6 +24,9 @@ describe('TranslateExampleItem.vue', () => {
             entity: 'name',
           },
         ],
+        repository: {
+          entities: [],
+        },
         created_at: '2018-04-30T12:32:37.848387Z',
       },
     });
