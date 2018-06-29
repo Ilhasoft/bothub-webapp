@@ -19,7 +19,7 @@
             v-if="showManagerAuthorizationAction"
             @click="$emit('managerAuthorization')"
             class="action repository-header-info-item">
-            <b-icon icon="account-group" />
+            <b-icon icon="account-plus" />
           </button>
           <button
             :disabled="training"
