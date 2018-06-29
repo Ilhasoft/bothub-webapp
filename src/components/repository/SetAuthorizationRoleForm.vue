@@ -2,8 +2,8 @@
   <form @submit.prevent="onSubmit()">
     <div class="columns">
       <div class="column">
-        <b-field label="User:">
-          <select-user-input v-model="userProfile" />
+        <b-field label="Users:">
+          <select-users-input v-model="usersProfile" />
         </b-field>
       </div>
       <div class="column is-4">
@@ -15,7 +15,7 @@
         <div class="field">
           <label class="label">&nbsp;</label>
           <button
-            :disabled="!userProfile || !role"
+            :disabled="usersProfile.length === 0 || !role"
             class="button is-primary">Invite</button>
         </div>
       </div>
@@ -26,12 +26,12 @@
 <script>
 import { mapActions } from 'vuex';
 
-import SelectUserInput from '@/components/inputs/SelectUserInput';
+import SelectUsersInput from '@/components/inputs/SelectUsersInput';
 import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 const components = {
-  SelectUserInput,
+  SelectUsersInput,
   RoleSelect,
 };
 
@@ -46,7 +46,7 @@ export default {
   },
   data() {
     return {
-      userProfile: null,
+      usersProfile: [],
       role: null,
       errors: null,
     };
@@ -57,32 +57,37 @@ export default {
     ]),
     async onSubmit() {
       this.errors = null;
-      try {
-        await this.repositoryUpdateAuthorizationRole({
-          repositoryUuid: this.repositoryUuid,
-          userNickname: this.userProfile.nickname,
-          newRole: this.role,
-        });
-        this.$emit('roleSetted');
-        this.userProfile = null;
-        this.role = null;
-      } catch (error) {
-        const { response } = error;
-        const { data } = response;
+      let roleSetted = false;
 
-        this.$toast.open({
-          message: data.detail || 'Something wrong happened...',
-          type: 'is-danger',
-        });
+      await Promise.all(this.usersProfile.map(async (userProfile) => {
+        try {
+          await this.repositoryUpdateAuthorizationRole({
+            repositoryUuid: this.repositoryUuid,
+            userNickname: userProfile.nickname,
+            newRole: this.role,
+          });
+          roleSetted = true;
+        } catch (error) {
+          const { response } = error;
+          const { data } = response;
 
-        if (!data.detail) {
-          throw error;
+          this.$toast.open({
+            message: data.detail || 'Something wrong happened...',
+            type: 'is-danger',
+          });
+
+          if (!data.detail) {
+            throw error;
+          }
         }
+      }));
+
+      if (roleSetted) {
+        this.$emit('roleSetted');
       }
-    },
-    setData({ userProfile, role }) {
-      this.userProfile = userProfile;
-      this.role = role;
+
+      this.usersProfile = [];
+      this.role = null;
     },
   },
 };

@@ -37,18 +37,10 @@ describe('SetAuthorizationRoleForm.vue', () => {
 
   describe('fill', () => {
     beforeEach(() => {
-      wrapper.vm.userProfile = {
+      wrapper.vm.usersProfile = [{
         nickname: 'douglas',
-      };
+      }];
       wrapper.vm.role = ROLE_CONTRIBUTOR;
-    });
-
-    test('check userProfile nickname', () => {
-      expect(wrapper.vm.userProfile.nickname).toBe('douglas');
-    });
-
-    test('check role', () => {
-      expect(wrapper.vm.role).toBe(ROLE_CONTRIBUTOR);
     });
 
     describe('submit', () => {
@@ -64,14 +56,10 @@ describe('SetAuthorizationRoleForm.vue', () => {
 
   describe('fill with owner', () => {
     beforeEach(() => {
-      wrapper.vm.userProfile = {
+      wrapper.vm.usersProfile = [{
         nickname: 'fake',
-      };
+      }];
       wrapper.vm.role = ROLE_CONTRIBUTOR;
-    });
-
-    test('check userProfile nickname', () => {
-      expect(wrapper.vm.userProfile.nickname).toBe('fake');
     });
 
     describe('submit', () => {
