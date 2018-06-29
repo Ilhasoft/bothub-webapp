@@ -55,4 +55,7 @@ export default {
   changePassword(store, { current_password: currentPassword, password }) {
     return user.changePassword(currentPassword, password);
   },
+  searchUser(store, query) {
+    return user.search(query);
+  },
 };

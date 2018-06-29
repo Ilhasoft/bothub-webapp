@@ -78,4 +78,13 @@ export default {
   voteDown(ownerNickname, slug) {
     return this.vote(ownerNickname, slug, -1);
   },
+  updateAuthorizationRole(repositoryUuid, userNickname, role) {
+    return request.$http.patch(
+      `/authorization-role/${repositoryUuid}/${userNickname}/`,
+      { role });
+  },
+  getAuthorizationList(repositoryUuid) {
+    const queryString = qs.stringify({ repository: repositoryUuid });
+    return new utils.List(`/authorizations/?${queryString}`);
+  },
 };

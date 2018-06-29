@@ -5,6 +5,7 @@
       class="wrapper">
       <repository-info
         hideDescription
+        :showManagerAuthorizationAction="repository.authorization.is_admin"
         :showEditAction="repository.authorization.can_write"
         :showTrainAction="repository.authorization.can_write && repository.ready_for_train"
         :training="training"
@@ -14,6 +15,7 @@
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
         :votes_sum="repository.votes_sum"
+        @managerAuthorization="openManagerAuthorization()"
         @train="train()"
         @edit="openEditModal()" />
       <ul class="repository-navbar">
@@ -303,6 +305,25 @@ msg: [text to analyze]</div>
         </div>
       </div>
     </b-modal>
+    <b-modal :active.sync="managerAuthorizationModalOpen">
+      <div
+        v-if="repository && managerAuthorizationModalOpen"
+        class="card">
+        <div class="card-content">
+          <h1 class="title is-4">Manager Team</h1>
+          <set-authorization-role-form
+            ref="setAuthorizationRoleForm"
+            :repositoryUuid="repository.uuid"
+            @roleSetted="onRoleSetted()" />
+        </div>
+        <div class="card-content">
+          <authorizations-list
+            ref="authorizationsList"
+            :repositoryUuid="repository.uuid"
+            @edit="onEditRole($event)" />
+        </div>
+      </div>
+    </b-modal>
     <analyze-text-drawer
       v-if="repository && authenticated"
       :ownerNickname="repository.owner__nickname"
@@ -326,6 +347,8 @@ import LanguageSelect from '@/components/shared/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
 
 
 const components = {
@@ -343,6 +366,8 @@ const components = {
   TranslateList,
   TranslationsStatus,
   TranslationsList,
+  SetAuthorizationRoleForm,
+  AuthorizationsList,
 };
 
 export default {
@@ -376,12 +401,8 @@ export default {
         to: null,
       },
       toLanguage: null,
+      managerAuthorizationModalOpen: false,
     };
-  },
-  filters: {
-    can_t(value) {
-      return value ? 'can' : 'can\'t';
-    },
   },
   computed: {
     ...mapGetters([
@@ -471,6 +492,15 @@ export default {
       await translationsStatus.updateTranslationsStatus();
       await translationsList.updateTranslations();
       await this.updateRepository(false);
+    },
+    openManagerAuthorization() {
+      this.managerAuthorizationModalOpen = true;
+    },
+    onRoleSetted() {
+      this.$refs.authorizationsList.updateAuthorizations();
+    },
+    onEditRole(value) {
+      this.$refs.setAuthorizationRoleForm.setData(value);
     },
   },
 };
@@ -565,4 +595,3 @@ export default {
   }
 }
 </style>
-
