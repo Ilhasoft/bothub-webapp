@@ -8,16 +8,7 @@
       </div>
       <div class="column is-4">
         <b-field label="Role:">
-          <b-select
-            expanded
-            v-model="role">
-            <option
-              v-for="(label, value) in roles"
-              :value="value"
-              :key="value">
-              {{ label }}
-            </option>
-          </b-select>
+          <role-select v-model="role" />
         </b-field>
       </div>
       <div class="column is-narrow">
@@ -35,12 +26,13 @@
 <script>
 import { mapActions } from 'vuex';
 
-import { ROLES } from '@/utils';
 import SelectUserInput from '@/components/inputs/SelectUserInput';
+import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 const components = {
   SelectUserInput,
+  RoleSelect,
 };
 
 export default {
@@ -54,7 +46,6 @@ export default {
   },
   data() {
     return {
-      roles: ROLES,
       userProfile: null,
       role: null,
       errors: null,

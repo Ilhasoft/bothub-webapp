@@ -8,17 +8,9 @@
       <p><small>{{ user__nickname }}</small></p>
     </div>
     <div class="media-right">
-      <b-select
-        expanded
+      <role-select
         v-model="newRole"
-        size="is-small">
-        <option
-          v-for="(label, value) in roles"
-          :value="value"
-          :key="value">
-          {{ label }}
-        </option>
-      </b-select>
+        size="is-small" />
     </div>
     <div
       v-if="submitted || submitted || true"
@@ -49,11 +41,13 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/shared/UserAvatar';
-import { ROLE_NOT_SETTED, ROLES } from '@/utils';
+import RoleSelect from '@/components/inputs/RoleSelect';
+import { ROLE_NOT_SETTED } from '@/utils';
 
 
 const components = {
   UserAvatar,
+  RoleSelect,
 };
 
 export default {
@@ -99,7 +93,6 @@ export default {
   },
   data() {
     return {
-      roles: ROLES,
       newRole: this.role,
       submitting: false,
       submitted: false,
