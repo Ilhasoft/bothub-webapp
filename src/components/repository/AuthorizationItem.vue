@@ -138,7 +138,6 @@ export default {
             resolve();
           },
           onCancel: () => {
-            /* istanbul ignore next */
             reject();
           },
         });
