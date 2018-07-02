@@ -117,4 +117,8 @@ $entities-colors: (
 .mh-200 {
   max-height: 200px;
 }
+
+.align-items-center {
+  align-items: center;
+}
 </style>

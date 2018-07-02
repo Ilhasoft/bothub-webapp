@@ -5,6 +5,7 @@
       class="wrapper">
       <repository-info
         hideDescription
+        :showManagerAuthorizationAction="repository.authorization.is_admin"
         :showEditAction="repository.authorization.can_write"
         :showTrainAction="repository.authorization.can_write && repository.ready_for_train"
         :training="training"
@@ -14,6 +15,7 @@
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
         :votes_sum="repository.votes_sum"
+        @managerAuthorization="openManagerAuthorization()"
         @train="train()"
         @edit="openEditModal()" />
       <ul class="repository-navbar">
@@ -74,6 +76,8 @@
             <new-example-form
               v-if="repository.authorization.can_contribute"
               :repository="repository"
+              :extraEntitiesList="repository.entities"
+              :extraIntentsList="repository.intents"
               @created="onExampleCreated()" />
             <div v-else-if="authenticated">
               <div class="notification is-warning">
@@ -182,12 +186,14 @@
         <b-tab-item>
           <div class="tab-padding">
             <div v-if="authenticated">
-              <p class="item">Make a HTTP request to NLP service, follow the example bellow.</p>
               <div class="columns">
                 <div class="column is-half">
                   <div class="item">
+                    <p>Make a HTTP request to NLP service, follow the example bellow.</p>
+                  </div>
+                  <div class="item">
                     <p><strong>URL:</strong></p>
-                    <div class="pre">https://nlp.bothub.it/v1/message</div>
+                    <div class="pre">https://nlp.bothub.it/parse/</div>
                   </div>
                   <div class="item">
                     <p><strong>Header:</strong></p>
@@ -196,11 +202,43 @@
                   <div class="item">
                     <p><strong>POST with form-data:</strong></p>
                     <div class="pre">language: [language code]
-msg: [text to analyze]</div>
+text: [text to analyze]</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>Response:</strong></p>
+                    <div class="pre">{
+  "text": "yes",
+  "language": "en",
+  "answer": {
+    "intent": {
+      "name": "affirmative",
+      "confidence": 0.5872959956337126
+    },
+    "entities": [],
+    "intent_ranking": [
+      {
+        "name": "affirmative",
+        "confidence": 0.5872959956337126
+      },
+      {
+        "name": "negative",
+        "confidence": 0.2952035928665842
+      },
+      {
+        "name": "doubt",
+        "confidence": 0.11750041149970303
+      }
+    ],
+    "text": "yes"
+  }
+}</div>
                   </div>
                 </div>
                 <div class="column is-half">
-                  <p class="item"><strong>Generator:</strong></p>
+                  <div class="item">
+                    <div><strong>Code Generator:</strong></div>
+                    <div>Generate code to your respective programming language.</div>
+                  </div>
                   <request-generator :authorizationUuid="repository.authorization.uuid" />
                 </div>
               </div>
@@ -303,6 +341,25 @@ msg: [text to analyze]</div>
         </div>
       </div>
     </b-modal>
+    <b-modal :active.sync="managerAuthorizationModalOpen">
+      <div
+        v-if="repository && managerAuthorizationModalOpen"
+        class="card">
+        <div class="card-content">
+          <h1 class="title is-4">Manager Team</h1>
+          <set-authorization-role-form
+            ref="setAuthorizationRoleForm"
+            :repositoryUuid="repository.uuid"
+            @roleSetted="onRoleSetted()" />
+        </div>
+        <div class="card-content">
+          <authorizations-list
+            ref="authorizationsList"
+            :repositoryUuid="repository.uuid"
+            @edit="onEditRole($event)" />
+        </div>
+      </div>
+    </b-modal>
     <analyze-text-drawer
       v-if="repository && authenticated"
       :ownerNickname="repository.owner__nickname"
@@ -326,6 +383,8 @@ import LanguageSelect from '@/components/shared/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
 
 
 const components = {
@@ -343,6 +402,8 @@ const components = {
   TranslateList,
   TranslationsStatus,
   TranslationsList,
+  SetAuthorizationRoleForm,
+  AuthorizationsList,
 };
 
 export default {
@@ -376,12 +437,8 @@ export default {
         to: null,
       },
       toLanguage: null,
+      managerAuthorizationModalOpen: false,
     };
-  },
-  filters: {
-    can_t(value) {
-      return value ? 'can' : 'can\'t';
-    },
   },
   computed: {
     ...mapGetters([
@@ -471,6 +528,15 @@ export default {
       await translationsStatus.updateTranslationsStatus();
       await translationsList.updateTranslations();
       await this.updateRepository(false);
+    },
+    openManagerAuthorization() {
+      this.managerAuthorizationModalOpen = true;
+    },
+    onRoleSetted() {
+      this.$refs.authorizationsList.updateAuthorizations();
+    },
+    onEditRole(value) {
+      this.$refs.setAuthorizationRoleForm.setData(value);
     },
   },
 };
@@ -565,4 +631,3 @@ export default {
   }
 }
 </style>
-

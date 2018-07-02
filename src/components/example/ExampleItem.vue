@@ -3,7 +3,8 @@
     <div class="example-text">
       <highlighted-text
         :text="text"
-        :entities="entities" />
+        :entities="entities"
+        :allEntities="repository.entities" />
     </div>
     <div
       v-if="entitiesList.length > 0"
@@ -96,7 +97,11 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
-      return `entity-${getEntityColor(entity, this.entities)}`;
+      const color = getEntityColor(
+        entity,
+        this.repository.entities,
+        this.entities);
+      return `entity-${color}`;
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {

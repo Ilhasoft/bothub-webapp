@@ -3,7 +3,7 @@
   "short_name": "bothub",
   "start_url": "..",
   "display": "standalone",
-  "background_color": "#00d1b2",
+  "background_color": "#f8f8f8",
   "description": "Repository of examples for training and Natural Language Processing API.",
   "icons": [
     {

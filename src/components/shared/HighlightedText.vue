@@ -27,12 +27,19 @@ export default {
       type: Array,
       required: true,
     },
+    allEntities: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   computed: {
     entitiesBlocks() {
       return this.entities
         .map(({ start, end, entity }) => {
-          const color = getEntityColor(entity, this.entities);
+          const color = getEntityColor(
+            entity,
+            this.allEntities,
+            this.entities);
           const colorClass = `entity-${color}`;
           const before = this.text.substring(0, start);
           const text = this.text.substring(start, end);

@@ -1,0 +1,22 @@
+[
+  {
+    "query_string": {
+      "search": "d"
+    },
+    "response": {
+      "status": 200,
+      "data": [
+        {
+          "nickname": "admin",
+          "name": "Admin",
+          "locale": ""
+        },
+        {
+          "nickname": "douglas",
+          "name": "Douglas Paz",
+          "locale": ""
+        }
+      ]
+    }
+  }
+]

@@ -52,9 +52,19 @@ export default {
       this.list.delete(id);
       this.$emit('itemDeleted', id);
     },
-    onDispatchEvent(event) {
-      /* istanbul ignore next */
-      this.$emit(event);
+    onDispatchEvent(arg) {
+      let event;
+      let value;
+
+      if (arg instanceof Object) {
+        event = arg.event;
+        value = arg.value;
+      } else {
+        event = arg;
+        value = null;
+      }
+
+      this.$emit(event, value);
     },
     addAttrs(obj) {
       return Object.assign({}, obj, this.$attrs);

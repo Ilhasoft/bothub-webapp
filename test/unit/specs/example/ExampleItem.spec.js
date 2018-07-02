@@ -33,6 +33,7 @@ describe('ExampleItem.vue', () => {
           authorization: {
             can_contribute: true,
           },
+          entities: [],
         },
       },
       store,
