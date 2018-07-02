@@ -187,7 +187,7 @@
                 <div class="column is-half">
                   <div class="item">
                     <p><strong>URL:</strong></p>
-                    <div class="pre">https://nlp.bothub.it/v1/message</div>
+                    <div class="pre">https://nlp.bothub.it/parse/</div>
                   </div>
                   <div class="item">
                     <p><strong>Header:</strong></p>
@@ -196,7 +196,7 @@
                   <div class="item">
                     <p><strong>POST with form-data:</strong></p>
                     <div class="pre">language: [language code]
-msg: [text to analyze]</div>
+text: [text to analyze]</div>
                   </div>
                 </div>
                 <div class="column is-half">
