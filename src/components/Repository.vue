@@ -186,12 +186,14 @@
         <b-tab-item>
           <div class="tab-padding">
             <div v-if="authenticated">
-              <p class="item">Make a HTTP request to NLP service, follow the example bellow.</p>
               <div class="columns">
                 <div class="column is-half">
                   <div class="item">
+                    <p>Make a HTTP request to NLP service, follow the example bellow.</p>
+                  </div>
+                  <div class="item">
                     <p><strong>URL:</strong></p>
-                    <div class="pre">https://nlp.bothub.it/v1/message</div>
+                    <div class="pre">https://nlp.bothub.it/parse/</div>
                   </div>
                   <div class="item">
                     <p><strong>Header:</strong></p>
@@ -200,11 +202,43 @@
                   <div class="item">
                     <p><strong>POST with form-data:</strong></p>
                     <div class="pre">language: [language code]
-msg: [text to analyze]</div>
+text: [text to analyze]</div>
+                  </div>
+                  <div class="item">
+                    <p><strong>Response:</strong></p>
+                    <div class="pre">{
+  "text": "yes",
+  "language": "en",
+  "answer": {
+    "intent": {
+      "name": "affirmative",
+      "confidence": 0.5872959956337126
+    },
+    "entities": [],
+    "intent_ranking": [
+      {
+        "name": "affirmative",
+        "confidence": 0.5872959956337126
+      },
+      {
+        "name": "negative",
+        "confidence": 0.2952035928665842
+      },
+      {
+        "name": "doubt",
+        "confidence": 0.11750041149970303
+      }
+    ],
+    "text": "yes"
+  }
+}</div>
                   </div>
                 </div>
                 <div class="column is-half">
-                  <p class="item"><strong>Generator:</strong></p>
+                  <div class="item">
+                    <div><strong>Code Generator:</strong></div>
+                    <div>Generate code to your respective programming language.</div>
+                  </div>
                   <request-generator :authorizationUuid="repository.authorization.uuid" />
                 </div>
               </div>
