@@ -18,7 +18,7 @@
               </li>
               <li class="footer-sociallist-item">
                 <a
-                  href="https://github.com/push-flow/"
+                  href="https://github.com/Ilhasoft/bothub/"
                   target="_blank"><b-icon icon="github-circle" /></a>
               </li>
             </ul>
