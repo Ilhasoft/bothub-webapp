@@ -12,8 +12,8 @@ export const colorsList = [
   'lavender-tea',
   'very-berry',
 ];
-export const getEntityColor = (entity, entities) => {
-  const entitiesList = getEntitiesList(entities);
+export const getEntityColor = (entity, entities, flexibleEntities) => {
+  const entitiesList = getEntitiesList(entities, flexibleEntities);
   const i = entitiesList.indexOf(entity) % colorsList.length;
   return colorsList[i];
 };

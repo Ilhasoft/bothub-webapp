@@ -5,7 +5,8 @@
         <div class="column">
           <highlighted-text
             :text="currentText"
-            :entities="currentEntities" />
+            :entities="currentEntities"
+            :allEntities="repository.entities" />
         </div>
         <div class="column is-narrow">
           <button
@@ -144,8 +145,11 @@ export default {
       'deleteTranslation',
     ]),
     getEntityClass(entity) {
-      /* istanbul ignore next */
-      return `entity-${getEntityColor(entity, this.currentEntities)}`;
+      const color = getEntityColor(
+        entity,
+        this.repository.entities,
+        this.currentEntities);
+      return `entity-${color}`;
     },
     deleteThisTranslation() {
       return new Promise((resolve, reject) => {

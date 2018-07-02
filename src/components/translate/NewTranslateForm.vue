@@ -3,7 +3,8 @@
     <example-with-entities-input
       v-model="data"
       :errors="errors"
-      :extraEntitiesList="extraEntitiesList" />
+      :extraEntitiesList="extraEntitiesList"
+      :allEntities="repository.entities" />
     <div class="field has-text-right">
       <button
         type="submit"
@@ -37,6 +38,10 @@ export default {
     translateTo: {
       type: String,
       required: true,
+    },
+    repository: {
+      type: Object,
+      default: null,
     },
   },
   watch: {
