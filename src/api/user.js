@@ -1,5 +1,6 @@
-import request from './request';
+import qs from 'query-string';
 
+import request from './request';
 import utils from './utils';
 
 
@@ -44,5 +45,9 @@ export default {
         password,
       },
     );
+  },
+  search(query) {
+    const queryString = qs.stringify(query);
+    return request.$http.get(`/search-user/?${queryString}`);
   },
 };

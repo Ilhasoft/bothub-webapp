@@ -56,4 +56,30 @@ describe('Pagination.vue', () => {
       });
     });
   });
+
+  describe('on dispatch event', () => {
+    describe('without value', () => {
+      const event = 'event';
+      beforeEach(() => {
+        wrapper.vm.onDispatchEvent(event);
+      });
+
+      test('emit event', () => {
+        expect(wrapper.emitted(event)).toBeDefined();
+      });
+    });
+
+    describe('with value', () => {
+      const event = 'event';
+      const value = { ok: true };
+      beforeEach(() => {
+        wrapper.vm.onDispatchEvent({ event, value });
+      });
+
+      test('emit event', () => {
+        expect(wrapper.emitted(event)).toBeDefined();
+        expect(wrapper.emitted(event)[0][0]).toMatchObject(value);
+      });
+    });
+  });
 });

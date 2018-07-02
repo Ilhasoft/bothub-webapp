@@ -52,4 +52,11 @@ describe('api/user.js', () => {
     const response = user.changePassword('n123456', 'd123456');
     expect(response.status).toBe(200);
   });
+
+  test('search', async () => {
+    store.commit(TYPES.SET_TOKEN, null);
+
+    const response = await user.search({ search: 'd' });
+    expect(response.status).toBe(200);
+  });
 });
