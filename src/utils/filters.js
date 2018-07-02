@@ -1,4 +1,4 @@
-import { LANGUAGES } from '.';
+import { LANGUAGES, ROLES } from '.';
 
 
 export default (Vue) => {
@@ -7,4 +7,9 @@ export default (Vue) => {
 
   /* istanbul ignore next */
   Vue.filter('percent', value => `${(value * 100).toFixed(1)}%`);
+
+  /* istanbul ignore next */
+  Vue.filter('roleVerbose', role => ROLES[role]);
+
+  Vue.filter('can_t', value => (value ? 'can' : 'can\'t'));
 };

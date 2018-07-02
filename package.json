@@ -16,7 +16,7 @@
   "dependencies": {
     "@mdi/font": "^2.2.43",
     "axios": "^0.18.0",
-    "buefy": "^0.6.5",
+    "buefy": "0.6.6",
     "dotenv": "^6.0.0",
     "global": "^4.3.2",
     "query-string": "^6.0.0",

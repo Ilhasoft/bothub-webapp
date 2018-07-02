@@ -1,0 +1,27 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "nickname": "douglas",
+        "email": "douglas@bothub.it",
+        "name": "Douglas",
+        "locale": "Brazil"
+      }
+    }
+  },
+  {
+    "headers": {
+      "Authorization": "Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "nickname": "douglas",
+        "email": "douglas@bothub.it",
+        "name": "Douglas",
+        "locale": "Brazil"
+      }
+    }
+  }
+]
