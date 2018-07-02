@@ -22,6 +22,9 @@ describe('NewTranslateForm.vue', () => {
       propsData: {
         exampleId: 1,
         translateTo: 'pt',
+        repository: {
+          entities: [],
+        },
       },
       store,
     });

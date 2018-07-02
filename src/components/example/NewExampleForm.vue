@@ -4,16 +4,17 @@
     <example-with-entities-input
       v-model="data.textAndEntities"
       :errors="errors"
-      :extraEntitiesList="extraEntitiesList" />
+      :extraEntitiesList="extraEntitiesList"
+      :allEntities="repository.entities" />
     <div class="field level">
       <div class="level-left">
         <div class="level-item">
           <b-field
             horizontal
             label="Intent">
-            <b-input
-              type="text"
-              v-model="data.intent" />
+            <b-autocomplete
+              v-model="data.intent"
+              :data="extraIntentsList" />
           </b-field>
         </div>
       </div>
@@ -45,6 +46,10 @@ export default {
   components,
   props: {
     extraEntitiesList: {
+      type: Array,
+      default: () => ([]),
+    },
+    extraIntentsList: {
       type: Array,
       default: () => ([]),
     },

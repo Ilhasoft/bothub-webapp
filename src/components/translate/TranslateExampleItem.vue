@@ -3,7 +3,8 @@
     <div class="example-text">
       <highlighted-text
         :text="text"
-        :entities="entities" />
+        :entities="entities"
+        :allEntities="repository.entities" />
     </div>
     <div
       v-if="entitiesList.length > 0"
@@ -45,7 +46,8 @@
           :exampleId="id"
           :translateTo="translateTo"
           @translated="onTranslated()"
-          :extraEntitiesList="entitiesList" />
+          :extraEntitiesList="entitiesList"
+          :repository="repository" />
       </div>
     </b-collapse>
   </div>
@@ -117,7 +119,11 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
-      return `entity-${getEntityColor(entity, this.entities)}`;
+      const color = getEntityColor(
+        entity,
+        this.repository.entities,
+        this.entities);
+      return `entity-${color}`;
     },
     toggleFormOpen() {
       /* istanbul ignore next */

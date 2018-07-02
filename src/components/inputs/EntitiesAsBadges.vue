@@ -88,6 +88,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    allEntities: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   watch: {
     entities() {
@@ -199,8 +203,11 @@ export default {
       this.entities.splice(index, 1);
     },
     getEntityClass(entity) {
-      /* istanbul ignore next */
-      return `entity-${getEntityColor(entity, this.entities)}`;
+      const color = getEntityColor(
+        entity,
+        this.allEntities,
+        this.entities);
+      return `entity-${color}`;
     },
   },
 };
