@@ -80,4 +80,11 @@ export default {
   repositoryAuthorizationList(store, { repositoryUuid }) {
     return repository.getAuthorizationList(repositoryUuid);
   },
+  async getRequestRepositoryAuthorizationSchema() {
+    const response = await repository.getRequestAuthorizationSchema();
+    return response;
+  },
+  requestRepositoryAuthorization(store, { repositoryUuid, text }) {
+    return repository.requestAuthorization(repositoryUuid, text);
+  },
 };

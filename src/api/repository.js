@@ -87,4 +87,16 @@ export default {
     const queryString = qs.stringify({ repository: repositoryUuid });
     return new utils.List(`/authorizations/?${queryString}`);
   },
+  async getRequestAuthorizationSchema() {
+    const { data } = await request.$http.options('/request-authorization/');
+    return data.actions.POST;
+  },
+  requestAuthorization(repositoryUuid, text) {
+    return request.$http.post(
+      '/request-authorization/',
+      {
+        repository: repositoryUuid,
+        text,
+      });
+  },
 };

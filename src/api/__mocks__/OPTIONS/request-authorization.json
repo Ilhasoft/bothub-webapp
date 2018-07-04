@@ -1,0 +1,51 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "name": "Request Authorization List",
+        "description": "",
+        "renders": [
+          "application/json",
+          "text/html"
+        ],
+        "parses": [
+          "application/json",
+          "application/x-www-form-urlencoded",
+          "multipart/form-data"
+        ],
+        "actions": {
+          "POST": {
+            "user": {
+              "type": "field",
+              "required": false,
+              "read_only": true,
+              "label": "User",
+              "style": {
+                "show": false
+              }
+            },
+            "repository": {
+              "type": "field",
+              "required": true,
+              "read_only": false,
+              "label": "Repository",
+              "style": {
+                "show": false
+              }
+            },
+            "text": {
+              "type": "text",
+              "required": true,
+              "read_only": false,
+              "label": "Leave a message for repository administrators",
+              "min_length": 5,
+              "max_length": 250,
+              "style": {}
+            }
+          }
+        }
+      }
+    }
+  }
+]
