@@ -87,4 +87,7 @@ export default {
   requestRepositoryAuthorization(store, { repositoryUuid, text }) {
     return repository.requestAuthorization(repositoryUuid, text);
   },
+  repositoryAuthorizationRequestsList(store, { repositoryUuid }) {
+    return repository.getAuthorizationRequestsList(repositoryUuid);
+  },
 };
