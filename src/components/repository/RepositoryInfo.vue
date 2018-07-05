@@ -16,12 +16,6 @@
         </div>
         <div class="repository-header-info">
           <button
-            v-if="showRequestAuthorization"
-            @click="$emit('requestAuthorization')"
-            class="action repository-header-info-item">
-            <b-icon icon="account-key" />
-          </button>
-          <button
             v-if="showManagerAuthorizationAction"
             @click="$emit('managerAuthorization')"
             class="action repository-header-info-item">
@@ -112,10 +106,6 @@ export default {
       type: Array,
     },
     hideDescription: {
-      type: Boolean,
-      default: false,
-    },
-    showRequestAuthorization: {
       type: Boolean,
       default: false,
     },
