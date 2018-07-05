@@ -162,4 +162,22 @@ describe('api/repository', () => {
 
     store.commit(TYPES.SET_TOKEN, null);
   });
+
+  test('approveRequestAuthorization', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.approveRequestAuthorization(1);
+    expect(response.status).toBe(200);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
+
+  test('rejectRequestAuthorization', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const response = await repository.rejectRequestAuthorization(1);
+    expect(response.status).toBe(204);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
 });

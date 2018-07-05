@@ -105,4 +105,10 @@ export default {
     });
     return new utils.List(`/authorization-requests/?${queryString}`);
   },
+  approveRequestAuthorization(id) {
+    return request.$http.put(`/review-authorization-request/${id}/`);
+  },
+  rejectRequestAuthorization(id) {
+    return request.$http.delete(`/review-authorization-request/${id}/`);
+  },
 };
