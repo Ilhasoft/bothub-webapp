@@ -152,4 +152,14 @@ describe('api/repository', () => {
 
     store.commit(TYPES.SET_TOKEN, null);
   });
+
+  test('getAuthorizationRequestsList', async () => {
+    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+
+    const list = repository.getAuthorizationRequestsList('8511fd26-a3bc-4f74-9af1-176abca5401d');
+    await list.next();
+    expect(list.items).toHaveLength(1);
+
+    store.commit(TYPES.SET_TOKEN, null);
+  });
 });

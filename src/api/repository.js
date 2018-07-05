@@ -99,4 +99,10 @@ export default {
         text,
       });
   },
+  getAuthorizationRequestsList(repositoryUuid) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+    });
+    return new utils.List(`/authorization-requests/?${queryString}`);
+  },
 };
