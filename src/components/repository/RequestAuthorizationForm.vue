@@ -33,7 +33,7 @@ export default {
   name: 'RequestAuthorizationForm',
   components,
   async mounted() {
-    await this.updateFormSchema()
+    await this.updateFormSchema();
   },
   props: {
     repositoryUUid: {
