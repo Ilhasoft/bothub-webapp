@@ -80,4 +80,20 @@ export default {
   repositoryAuthorizationList(store, { repositoryUuid }) {
     return repository.getAuthorizationList(repositoryUuid);
   },
+  async getRequestRepositoryAuthorizationSchema() {
+    const response = await repository.getRequestAuthorizationSchema();
+    return response;
+  },
+  requestRepositoryAuthorization(store, { repositoryUuid, text }) {
+    return repository.requestAuthorization(repositoryUuid, text);
+  },
+  repositoryAuthorizationRequestsList(store, { repositoryUuid }) {
+    return repository.getAuthorizationRequestsList(repositoryUuid);
+  },
+  approveRequestAuthorization(store, { id }) {
+    return repository.approveRequestAuthorization(id);
+  },
+  rejectRequestAuthorization(store, { id }) {
+    return repository.rejectRequestAuthorization(id);
+  },
 };

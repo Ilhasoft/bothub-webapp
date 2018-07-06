@@ -87,4 +87,28 @@ export default {
     const queryString = qs.stringify({ repository: repositoryUuid });
     return new utils.List(`/authorizations/?${queryString}`);
   },
+  async getRequestAuthorizationSchema() {
+    const { data } = await request.$http.options('/request-authorization/');
+    return data.actions.POST;
+  },
+  requestAuthorization(repositoryUuid, text) {
+    return request.$http.post(
+      '/request-authorization/',
+      {
+        repository: repositoryUuid,
+        text,
+      });
+  },
+  getAuthorizationRequestsList(repositoryUuid) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+    });
+    return new utils.List(`/authorization-requests/?${queryString}`);
+  },
+  approveRequestAuthorization(id) {
+    return request.$http.put(`/review-authorization-request/${id}/`);
+  },
+  rejectRequestAuthorization(id) {
+    return request.$http.delete(`/review-authorization-request/${id}/`);
+  },
 };
