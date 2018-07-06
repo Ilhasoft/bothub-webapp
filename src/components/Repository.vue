@@ -40,24 +40,27 @@
         class="hide-tabs-nav tabs-remove-padding">
         <b-tab-item>
           <div class="notification">
-            <div class="columns">
-              <div class="column">
-                <p>
-                  <span>{{ repository.examples__count }} examples,</span>
-                  <span>created {{ repository.created_at | moment('from') }}.</span>
-                </p>
+            <div class="columns is-variable is-2">
+              <div class="column has-text-right has-text-centered-mobile">
+                <img src="@/assets/imgs/mascot.svg" class="status-mascot status-center-36px" />
+              </div>
+              <div class="column is-two-fifths has-text-centered has-text-primary">
                 <p>
                   <span>You {{ repository.authorization.can_contribute | can_t }}
                     contribute and</span>
                   <span>you {{ repository.authorization.can_write | can_t }} write.</span>
                 </p>
+                <p class="is-size-7">
+                  <span>{{ repository.examples__count }} examples,</span>
+                  <span>created {{ repository.created_at | moment('from') }}.</span>
+                </p>
               </div>
               <div
                 v-if="repository.authorization.can_write"
-                class="column is-narrow">
+                class="column has-text-centered">
                 <button
                   :disabled="!repository.ready_for_train || training"
-                  class="button is-primary is-medium"
+                  class="button is-primary status-center-36px"
                   @click="train()">
                   <b-icon
                     :icon="training ? 'refresh' : 'school'"
@@ -66,6 +69,24 @@
                   <span v-else>Train</span>
                 </button>
               </div>
+              <div
+                v-else-if="repository.available_request_authorization"
+                class="column has-text-centered">
+                <button
+                  class="button is-primary is-outlined status-center-36px"
+                  @click="openRequestAuthorizationModal()">Request Authorization</button>
+              </div>
+              <div
+                v-else-if="
+                  repository.request_authorization &&
+                  !repository.request_authorization.approved_by"
+                class="column has-text-centered">
+                <button
+                  disabled
+                  class="button is-primary is-outlined is-small">Authorization Requested</button>
+                <p class="is-size-7 has-text-grey">Wait for admin review.</p>
+              </div>
+              <div v-else class="column" />
             </div>
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
@@ -341,6 +362,18 @@ text: [text to analyze]</div>
         </div>
       </div>
     </b-modal>
+    <b-modal :active.sync="requestAuthorizationModal">
+      <div
+        v-if="repository && requestAuthorizationModal"
+        class="card">
+        <div class="card-content">
+          <h1 class="title is-4">Request Authorization</h1>
+          <request-authorization-form
+            :repositoryUUid="repository.uuid"
+            @requested="onAuthorizationRequested()" />
+        </div>
+      </div>
+    </b-modal>
     <b-modal :active.sync="managerAuthorizationModalOpen">
       <div
         v-if="repository && managerAuthorizationModalOpen"
@@ -357,6 +390,12 @@ text: [text to analyze]</div>
             ref="authorizationsList"
             :repositoryUuid="repository.uuid"
             @edit="onEditRole($event)" />
+        </div>
+        <div class="card-content">
+          <h1 class="title is-5">Authorization Requests</h1>
+          <authorization-requests-list
+            :repositoryUuid="repository.uuid"
+            @review="onReviewAuthorizationRequest()" />
         </div>
       </div>
     </b-modal>
@@ -385,6 +424,8 @@ import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
+import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
+import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
 
 const components = {
@@ -404,6 +445,8 @@ const components = {
   TranslationsList,
   SetAuthorizationRoleForm,
   AuthorizationsList,
+  RequestAuthorizationForm,
+  AuthorizationRequestsList,
 };
 
 export default {
@@ -437,6 +480,7 @@ export default {
         to: null,
       },
       toLanguage: null,
+      requestAuthorizationModal: false,
       managerAuthorizationModalOpen: false,
     };
   },
@@ -529,6 +573,9 @@ export default {
       await translationsList.updateTranslations();
       await this.updateRepository(false);
     },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModal = true;
+    },
     openManagerAuthorization() {
       this.managerAuthorizationModalOpen = true;
     },
@@ -537,6 +584,17 @@ export default {
     },
     onEditRole(value) {
       this.$refs.setAuthorizationRoleForm.setData(value);
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModal = false;
+      this.$toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
+    },
+    onReviewAuthorizationRequest() {
+      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };
@@ -615,6 +673,16 @@ export default {
 
 .examples-title {
   margin: 2rem 8px 0;
+}
+
+.status-mascot {
+  display: inline-block;
+  vertical-align: bottom;
+  height: 36px;
+}
+
+.status-center-36px {
+  margin: 3px;
 }
 </style>
 
