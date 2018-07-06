@@ -84,6 +84,7 @@
                   class="button is-primary is-outlined is-small">Authorization Requested</button>
                 <p class="is-size-7 has-text-grey">Wait for admin review.</p>
               </div>
+              <div v-else class="column" />
             </div>
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
@@ -388,6 +389,12 @@ text: [text to analyze]</div>
             :repositoryUuid="repository.uuid"
             @edit="onEditRole($event)" />
         </div>
+        <div class="card-content">
+          <h1 class="title is-5">Authorization Requests</h1>
+          <authorization-requests-list
+            :repositoryUuid="repository.uuid"
+            @review="onReviewAuthorizationRequest()" />
+        </div>
       </div>
     </b-modal>
     <analyze-text-drawer
@@ -416,6 +423,7 @@ import TranslationsList from '@/components/translate/TranslationsList';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
+import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
 
 const components = {
@@ -436,6 +444,7 @@ const components = {
   SetAuthorizationRoleForm,
   AuthorizationsList,
   RequestAuthorizationForm,
+  AuthorizationRequestsList,
 };
 
 export default {
@@ -581,6 +590,9 @@ export default {
         type: 'is-success',
       });
       this.updateRepository(false);
+    },
+    onReviewAuthorizationRequest() {
+      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };
