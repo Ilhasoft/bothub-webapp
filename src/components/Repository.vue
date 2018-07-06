@@ -77,7 +77,9 @@
                   @click="openRequestAuthorizationModal()">Request Authorization</button>
               </div>
               <div
-                v-else-if="repository.request_authorization"
+                v-else-if="
+                  repository.request_authorization &&
+                  !repository.request_authorization.approved_by"
                 class="column has-text-centered">
                 <button
                   disabled
