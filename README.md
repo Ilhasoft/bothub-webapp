@@ -1,6 +1,6 @@
 # Bothub Webapp
 
-[![Build Status](https://travis-ci.org/push-flow/bothub-webapp.svg?branch=master)](https://travis-ci.org/push-flow/bothub-webapp) [![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub-webapp/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub-webapp?branch=master)
+[![Build Status](https://travis-ci.org/Ilhasoft/bothub-webapp.svg?branch=master)](https://travis-ci.org/Ilhasoft/bothub-webapp) [![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub-webapp/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub-webapp?branch=master)
 
 ## Build Setup
 
