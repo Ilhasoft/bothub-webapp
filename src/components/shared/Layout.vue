@@ -8,7 +8,7 @@
         <div class="level-item">
           <div class="topbar-brand">
             <router-link to="/">
-              <img src="@/assets/imgs/logo-white.png" alt="bothub">
+              <img src="@/assets/imgs/logo-white.svg" alt="bothub">
             </router-link>
           </div>
         </div>
