@@ -5,7 +5,7 @@
         <div class="columns">
           <div class="column">
             <div class="footer-item footer-brand">
-              <img src="~@/assets/imgs/logo-white.png" alt="bothub" />
+              <img src="~@/assets/imgs/logo-white.svg" alt="bothub" />
             </div>
             <ul class="footer-item">
               <li><a href="#">Terms &amp; conditions</a></li>
