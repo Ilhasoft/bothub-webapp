@@ -7,7 +7,7 @@
     <b-select
       expanded
       v-model="role"
-      :v-bind="$attrs">
+      v-bind="$attrs">
       <option
         v-for="(label, value) in roles"
         :value="value"
