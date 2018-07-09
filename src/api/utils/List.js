@@ -45,6 +45,7 @@ export default class List {
 
   async reset() {
     this.items = [];
+    this.deletions = [];
     this.nextEntryPoint = this.initial;
   }
 
