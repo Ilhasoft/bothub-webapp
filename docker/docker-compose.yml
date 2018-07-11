@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  bothub_frontend:
+    image: ${BOTHUB_IMAGE_NAME:-ilha/bothub_frontend}:${TAG:-latest}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - 80:80
+    environment:
+      # - SECRET_KEY=SK
+      # - DEBUG
+      # - ALLOWED_HOSTS
+      # - DEFAULT_DATABASE
+      # - LANGUAGE_CODE
+      # - TIME_ZONE
+      # - EMAIL_HOST=
+      # - EMAIL_PORT
+      # - DEFAULT_FROM_EMAIL
+      # - SERVER_EMAIL
+      # - EMAIL_HOST_USER
+      # - EMAIL_HOST_PASSWORD
+      # - EMAIL_USE_SSL
+      # - EMAIL_USE_TLS
+      # - ADMINS
+      # - CSRF_COOKIE_DOMAIN
+      # - CSRF_COOKIE_SECURE
+      - BOTHUB_WEBAPP_BASE_URL=http://localhost/
+      - BOTHUB_NLP_BASE_URL=http://localhost:2657/
+      # - WEBAPP_REPO=https://github.com/Ilhasoft/bothub-webapp
+      # - WEBAPP_BRANCH=master
+      - API_BASE_URL=/api
