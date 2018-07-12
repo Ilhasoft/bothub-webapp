@@ -13,7 +13,7 @@ export const LEVEL_READER = 1;
 export const LEVEL_CONTRIBUTOR = 2;
 export const LEVEL_ADMIN = 3;
 
-export const LANGUAGES = {
+export const VERBOSE_LANGUAGES = {
   en: 'English',
   de: 'German',
   es: 'Spanish',
@@ -21,7 +21,15 @@ export const LANGUAGES = {
   fr: 'French',
   it: 'Italian',
   nl: 'Dutch',
+  pt_br: 'Brazilian Portuguese',
 };
+export const LANGUAGES = process.env.SUPPORTED_LANGUAGES
+  .split('|')
+  .map(v => v.split(':')[0])
+  .reduce((current, lang) => {
+    Object.assign(current, { lang: VERBOSE_LANGUAGES[lang] || lang });
+    return current;
+  }, {});
 
 export const ROLE_NOT_SETTED = 0;
 export const ROLE_USER = 1;

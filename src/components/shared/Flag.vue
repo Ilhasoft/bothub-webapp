@@ -6,25 +6,28 @@
     }">
     <img
       v-if="language === 'de'"
-      src="@/assets/imgs/flags/DE.png" />
+      src="@/assets/imgs/flags/de.svg" />
     <img
-      v-if="language === 'en'"
-      src="@/assets/imgs/flags/EN.png" />
+      v-else-if="language === 'en'"
+      src="@/assets/imgs/flags/us.svg" />
     <img
-      v-if="language === 'es'"
-      src="@/assets/imgs/flags/ES.png" />
+      v-else-if="language === 'es'"
+      src="@/assets/imgs/flags/es.svg" />
     <img
-      v-if="language === 'fr'"
-      src="@/assets/imgs/flags/FR.png" />
+      v-else-if="language === 'fr'"
+      src="@/assets/imgs/flags/fr.svg" />
     <img
-      v-if="language === 'it'"
-      src="@/assets/imgs/flags/IT.png" />
+      v-else-if="language === 'it'"
+      src="@/assets/imgs/flags/it.svg" />
     <img
-      v-if="language === 'nl'"
-      src="@/assets/imgs/flags/NL.png" />
+      v-else-if="language === 'nl'"
+      src="@/assets/imgs/flags/nl.svg" />
     <img
-      v-if="language === 'pt'"
-      src="@/assets/imgs/flags/PT.png" />
+      v-else-if="language === 'pt'"
+      src="@/assets/imgs/flags/pt.svg" />
+    <img
+      v-else-if="language === 'pt_br'"
+      src="@/assets/imgs/flags/br.svg" />
   </span>
 </template>
 
