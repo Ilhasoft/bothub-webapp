@@ -21,6 +21,7 @@ export const VERBOSE_LANGUAGES = {
   fr: 'French',
   it: 'Italian',
   nl: 'Dutch',
+  pt_br: 'Brazilian Portuguese',
 };
 export const LANGUAGES = process.env.SUPPORTED_LANGUAGES
   .split('|')
