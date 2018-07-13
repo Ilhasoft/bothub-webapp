@@ -418,7 +418,7 @@ import ExamplesList from '@/components/example/ExamplesList';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
-import LanguageSelect from '@/components/shared/LanguageSelect';
+import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
