@@ -27,7 +27,7 @@ export const LANGUAGES = process.env.SUPPORTED_LANGUAGES
   .split('|')
   .map(v => v.split(':')[0])
   .reduce((current, lang) => {
-    Object.assign(current, { lang: VERBOSE_LANGUAGES[lang] || lang });
+    Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
     return current;
   }, {});
 

@@ -42,7 +42,7 @@ request.send(data);</div>
 </template>
 
 <script>
-import LanguageSelect from '@/components/shared/LanguageSelect';
+import LanguageSelect from '@/components/inputs/LanguageSelect';
 
 
 const components = {
