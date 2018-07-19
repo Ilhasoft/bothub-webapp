@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  bothub_frontend:
+    image: ${BOTHUB_FRONTEND_IMAGE_NAME:-ilha/bothub_frontend}:${BOTHUB_FRNTEND_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - 80:80
+    environment:
+      - API_BASE_URL=${API_BASE_URL:-/api}
+      - MAILCHIMP_LOGIN=${MAILCHIMP_LOGIN:-}
+      - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER:-}
+      - MAILCHIMP_USER_ID=${MAILCHIMP_USER_ID:-}
+      - MAILCHIMP_LIST_ID=${MAILCHIMP_LIST_ID:-}

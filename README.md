@@ -23,3 +23,9 @@ yarn run lint
 # run all tests
 yarn test
 ```
+
+## Build docker image
+
+```
+cd docker && ./build.sh
+```
