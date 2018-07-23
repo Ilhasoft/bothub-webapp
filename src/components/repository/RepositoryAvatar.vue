@@ -44,7 +44,6 @@ export default {
   },
   watch: {
     votesSum() {
-      /* istanbul ignore next */
       this.finalVotesSum = this.votesSum;
     },
   },
@@ -78,7 +77,6 @@ export default {
             type: 'is-danger',
           });
         } else {
-          /* istanbul ignore next */
           this.$toast.open({
             message: 'The vote was not registered.',
             type: 'is-danger',
