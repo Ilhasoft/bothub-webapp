@@ -16,7 +16,8 @@ describe('api/example', () => {
           entity: 'name',
         },
       ],
-      'greet');
+      'greet',
+    );
     expect(response.status).toBe(201);
   });
 

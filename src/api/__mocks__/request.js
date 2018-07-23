@@ -6,8 +6,8 @@ export default {
     const config = {
       mockupsPath: __dirname,
       headers: {
-        ...((store.getters.authenticated) ?
-          { Authorization: `Token ${store.getters.authToken}` } : {}),
+        ...((store.getters.authenticated)
+          ? { Authorization: `Token ${store.getters.authToken}` } : {}),
       },
     };
 

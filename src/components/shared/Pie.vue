@@ -41,7 +41,8 @@ export default {
     validPercent() {
       return validsPercents.reduce(
         (current, next) => (next <= this.percent ? next : current),
-        validsPercents[0]);
+        validsPercents[0],
+      );
     },
   },
 };
@@ -110,4 +111,3 @@ $pie-border: 8px;
   }
 }
 </style>
-

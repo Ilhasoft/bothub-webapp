@@ -69,9 +69,9 @@ export default {
     msgs() {
       return (
         this.errors.token && this.errors.token
-          .map(text => ({ text, class: 'error' }))) ||
-        this.success_msgs.map(text => ({ text, class: 'success' })) ||
-        [];
+          .map(text => ({ text, class: 'error' })))
+        || this.success_msgs.map(text => ({ text, class: 'success' }))
+        || [];
     },
   },
   methods: {

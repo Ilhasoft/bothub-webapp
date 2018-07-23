@@ -75,7 +75,8 @@ export default {
     onClose() {
       if (this.redirectToWhenFails) {
         this.$router.push(
-          this.redirectToWhenFails.path || this.redirectToWhenFails);
+          this.redirectToWhenFails.path || this.redirectToWhenFails,
+        );
       }
       this.close();
     },

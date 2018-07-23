@@ -32,7 +32,9 @@ export default {
     /* istanbul ignore next */
     return repository.train(ownerNickname, slug);
   },
-  analyzeText(store, { ownerNickname, slug, language, text }) {
+  analyzeText(store, {
+    ownerNickname, slug, language, text,
+  }) {
     /* istanbul ignore next */
     return repository.analyze(ownerNickname, slug, language, text);
   },
@@ -75,7 +77,8 @@ export default {
     return repository.updateAuthorizationRole(
       repositoryUuid,
       userNickname,
-      newRole);
+      newRole,
+    );
   },
   repositoryAuthorizationList(store, { repositoryUuid }) {
     return repository.getAuthorizationList(repositoryUuid);

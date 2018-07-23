@@ -48,7 +48,8 @@ describe('EditProfileForm.spec.js', () => {
           'email',
           'name',
           'locale',
-        ]));
+        ]),
+      );
     });
 
     describe('submit', () => {
@@ -88,7 +89,8 @@ describe('EditProfileForm.spec.js', () => {
           'email',
           'name',
           'locale',
-        ]));
+        ]),
+      );
     });
 
     describe('submit', () => {

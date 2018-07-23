@@ -44,7 +44,8 @@ describe('ChangePasswordForm.spec.js', () => {
         expect.arrayContaining([
           'current_password',
           'password',
-        ]));
+        ]),
+      );
     });
 
     describe('submit', () => {
@@ -80,7 +81,8 @@ describe('ChangePasswordForm.spec.js', () => {
         expect.arrayContaining([
           'current_password',
           'password',
-        ]));
+        ]),
+      );
     });
 
     describe('submit', () => {

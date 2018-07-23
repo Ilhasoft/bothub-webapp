@@ -100,7 +100,8 @@ export default {
       const color = getEntityColor(
         entity,
         this.repository.entities,
-        this.entities);
+        this.entities,
+      );
       return `entity-${color}`;
     },
     deleteThisExample() {

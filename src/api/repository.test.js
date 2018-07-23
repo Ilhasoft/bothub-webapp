@@ -119,7 +119,8 @@ describe('api/repository', () => {
     const response = await repository.updateAuthorizationRole(
       '8511fd26-a3bc-4f74-9af1-176abca5401d',
       'douglas',
-      ROLE_CONTRIBUTOR);
+      ROLE_CONTRIBUTOR,
+    );
     expect(response.status).toBe(200);
     expect(response.data.role).toBe(ROLE_CONTRIBUTOR);
 
@@ -147,7 +148,8 @@ describe('api/repository', () => {
     const repositoryUuid = '8511fd26-a3bc-4f74-9af1-176abca5401d';
     const response = await repository.requestAuthorization(
       repositoryUuid,
-      'I can contribute');
+      'I can contribute',
+    );
     expect(response.data.repository).toBe(repositoryUuid);
 
     store.commit(TYPES.SET_TOKEN, null);

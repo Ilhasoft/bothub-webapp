@@ -26,7 +26,8 @@ describe('ResetPasswordForm.vue', () => {
               nickname: 'fake',
               token: 'token1',
             },
-          });
+          },
+        );
         wrapper.vm.data.password = 'n123456';
       });
 
@@ -58,7 +59,8 @@ describe('ResetPasswordForm.vue', () => {
               nickname: 'fake',
               token: 'invalid_token',
             },
-          });
+          },
+        );
         wrapper.vm.data.password = 'n123456';
       });
 
@@ -85,7 +87,8 @@ describe('ResetPasswordForm.vue', () => {
               nickname: 'fake',
               token: 'token1',
             },
-          });
+          },
+        );
         wrapper.vm.data.password = '';
       });
 
@@ -107,7 +110,8 @@ describe('ResetPasswordForm.vue', () => {
               nickname: 'other',
               token: 'token1',
             },
-          });
+          },
+        );
         wrapper.vm.data.password = 'n123456';
       });
 
