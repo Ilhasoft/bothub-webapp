@@ -43,7 +43,7 @@ describe('LoginForm.vue', () => {
           .toBeTruthy();
       });
 
-      test('emit event authenticated', () => {
+      test('emit authenticated event', () => {
         expect(wrapper.emitted('authenticated')).toBeDefined();
       });
     });
@@ -77,7 +77,7 @@ describe('LoginForm.vue', () => {
       forgotPassword.trigger('click');
     });
 
-    test('emit event forgotPasswordClick', () => {
+    test('emit forgotPasswordClick event', () => {
       expect(wrapper.emitted('forgotPasswordClick')).toBeDefined();
     });
   });
