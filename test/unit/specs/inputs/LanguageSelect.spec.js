@@ -1,6 +1,5 @@
 import Buefy from 'buefy';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import LanguageSelect from '@/components/inputs/LanguageSelect';
 
 
@@ -10,7 +9,7 @@ localVue.use(Buefy);
 describe('LanguageSelect.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(LanguageSelect, { localVue });
+    wrapper = shallowMount(LanguageSelect, { localVue });
   });
 
   test('mount', () => {
