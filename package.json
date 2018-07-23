@@ -9,7 +9,9 @@
     "start": "yarn dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "coveralls": "cat ./test/unit/coverage/lcov.info | coveralls",
+    "unit-watch": "jest --config test/unit/jest.conf.js --watch",
     "test": "yarn unit",
+    "test-watch": "yarn unit-watch",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
   },
