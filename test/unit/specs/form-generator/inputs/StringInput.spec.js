@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import StringInput from '@/components/form-generator/inputs/StringInput';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -9,7 +9,7 @@ localVue.use(Buefy);
 describe('StringInput.vue', () => {
   let wrapper;
   beforeAll(() => {
-    wrapper = shallow(StringInput, { localVue });
+    wrapper = shallowMount(StringInput, { localVue });
   });
 
   it('mount', () => {
