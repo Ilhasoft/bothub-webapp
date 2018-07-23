@@ -1,19 +1,16 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import applyFilters from '@/utils/filters';
 import { ROLE_USER } from '@/utils';
-
 import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Buefy);
 applyFilters(localVue);
 
@@ -25,7 +22,7 @@ describe('AuthorizationItem.vue', () => {
       User: { profiles: {} },
     });
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-    wrapper = shallow(AuthorizationItem, {
+    wrapper = shallowMount(AuthorizationItem, {
       localVue,
       propsData: {
         uuid: 'de6e3f36-833f-4ef8-a3da-c576ea606139',
@@ -50,7 +47,7 @@ describe('AuthorizationItem.vue', () => {
       await wrapper.vm.updateRole();
     });
 
-    test('emit roleChanged', () => {
+    test('emit roleChanged event', () => {
       expect(wrapper.emitted('roleChanged')).toBeDefined();
     });
   });
@@ -63,7 +60,7 @@ describe('AuthorizationItem.vue', () => {
       await removePromise;
     });
 
-    test('emit deleted', () => {
+    test('emit deleted event', () => {
       expect(wrapper.emitted('deleted')).toBeDefined();
     });
   });
