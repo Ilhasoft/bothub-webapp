@@ -1,17 +1,14 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import VueMoment from 'vue-moment';
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
 import store from '@/store';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ExampleItem from '@/components/example/ExampleItem';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(VueMoment);
 localVue.use(Buefy);
 
@@ -21,7 +18,7 @@ describe('ExampleItem.vue', () => {
     store.replaceState({
       Auth: {},
     });
-    wrapper = shallow(ExampleItem, {
+    wrapper = shallowMount(ExampleItem, {
       localVue,
       propsData: {
         id: 1,
@@ -40,7 +37,7 @@ describe('ExampleItem.vue', () => {
     });
   });
 
-  test('mount', () => {
+  test('mounted', () => {
     expect(wrapper.vm).toBeDefined();
   });
 
@@ -52,8 +49,8 @@ describe('ExampleItem.vue', () => {
       await deletePromise;
     });
 
-    test('emit deleted', () => {
-      expect(wrapper.emitted('deleted').length).toBe(1);
+    test('emit deleted event', () => {
+      expect(wrapper.emitted('deleted')).toBeDefined();
     });
   });
 });
