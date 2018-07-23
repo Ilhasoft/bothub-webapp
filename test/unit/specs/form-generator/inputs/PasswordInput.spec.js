@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import PasswordInput from '@/components/form-generator/inputs/PasswordInput';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -9,7 +9,7 @@ localVue.use(Buefy);
 describe('PasswordInput.vue', () => {
   let wrapper;
   beforeAll(() => {
-    wrapper = shallow(PasswordInput, { localVue });
+    wrapper = shallowMount(PasswordInput, { localVue });
   });
 
   it('mount', () => {
