@@ -6,8 +6,8 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
 
-const localVue = createLocalVue();
 
+const localVue = createLocalVue();
 
 describe('ForgotPasswordForm.vue', () => {
   let wrapper;
