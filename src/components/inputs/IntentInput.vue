@@ -1,7 +1,8 @@
 <template>
   <b-autocomplete
     open-on-focus
-    v-model="currentValue"
+    v-model.lazy="currentValue"
+    @input="onInput($event)"
     v-bind="$attrs"
     :data="filteredIntents" />
 </template>
@@ -34,6 +35,15 @@ export default {
   computed: {
     filteredIntents() {
       return filterAndOrderListByText(this.intents, this.currentValue);
+    },
+  },
+  methods: {
+    async onInput(value) {
+      await this.$nextTick();
+      this.currentValue = value
+        .toLowerCase()
+        .replace(' ', '_')
+        .replace(/[,.\/\\;+=!?@#$%¨&*()\[\]^"'~{}ç:<>|]/, '');
     },
   },
 };
