@@ -2,22 +2,18 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
-import Vuex from 'vuex';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
 import NewTranslateForm from '@/components/translate/NewTranslateForm';
 
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
-localVue.use(Vuex);
 
 describe('NewTranslateForm.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(NewTranslateForm, {
+    wrapper = shallowMount(NewTranslateForm, {
       localVue,
       propsData: {
         exampleId: 1,
@@ -30,8 +26,8 @@ describe('NewTranslateForm.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('fill with valid data', () => {

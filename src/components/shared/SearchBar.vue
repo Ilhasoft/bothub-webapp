@@ -27,7 +27,8 @@ export default {
       this.clearTimeout();
       this.setTimeoutId = setTimeout(
         () => { this.submit(); },
-        this.debounceTime);
+        this.debounceTime,
+      );
     },
   },
   data() {
@@ -97,4 +98,3 @@ export default {
   }
 }
 </style>
-

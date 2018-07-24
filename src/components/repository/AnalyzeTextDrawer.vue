@@ -121,8 +121,8 @@ export default {
         if (!response || status === 500) {
           this.$toast.open({
             message:
-              (data && data.detail) ||
-              'Something unexpected happened! We couldn’t analyze your text.',
+              (data && data.detail)
+              || 'Something unexpected happened! We couldn’t analyze your text.',
             type: 'is-danger',
           });
         } else if (data) {
@@ -180,4 +180,3 @@ export default {
   }
 }
 </style>
-

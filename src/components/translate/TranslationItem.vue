@@ -126,14 +126,14 @@ export default {
   },
   computed: {
     currentText() {
-      return this.showingOriginal ?
-        this.original.text :
-        this.text;
+      return this.showingOriginal
+        ? this.original.text
+        : this.text;
     },
     currentEntities() {
-      return this.showingOriginal ?
-        this.original.entities :
-        this.entities;
+      return this.showingOriginal
+        ? this.original.entities
+        : this.entities;
     },
     entitiesList() {
       return getEntitiesList(this.currentEntities);
@@ -148,7 +148,8 @@ export default {
       const color = getEntityColor(
         entity,
         this.repository.entities,
-        this.currentEntities);
+        this.currentEntities,
+      );
       return `entity-${color}`;
     },
     deleteThisTranslation() {

@@ -1,15 +1,12 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-
 import ExamplesList from '@/components/example/ExamplesList';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('ExamplesList.vue', () => {
   let wrapper;
@@ -17,7 +14,7 @@ describe('ExamplesList.vue', () => {
     store.replaceState({
       Auth: {},
     });
-    wrapper = shallow(ExamplesList, {
+    wrapper = shallowMount(ExamplesList, {
       localVue,
       propsData: {
         repository: '8511fd26-a3bc-4f74-9af1-176abca5401d',
@@ -26,8 +23,8 @@ describe('ExamplesList.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('update list', () => {

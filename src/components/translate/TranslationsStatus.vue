@@ -76,8 +76,8 @@ export default {
         }))
         .filter(languageStatus => (!languageStatus.status.is_base_language))
         .sort((a, b) => (
-          a.status.base_translations.percentage <
-          b.status.base_translations.percentage));
+          a.status.base_translations.percentage
+          < b.status.base_translations.percentage));
     },
   },
   methods: {

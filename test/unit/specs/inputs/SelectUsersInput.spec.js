@@ -1,22 +1,22 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
+import Vue from 'vue';
 import Buefy from 'buefy';
-import Vuex from 'vuex';
-
 import store from '@/store';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import SelectUsersInput from '@/components/inputs/SelectUsersInput';
 
+
+Vue.config.silent = true;
 const localVue = createLocalVue();
 localVue.use(Buefy);
-localVue.use(Vuex);
 
 describe('SelectUsersInput.vue', () => {
   let wrapper;
   const debounceTime = 50;
   beforeEach(() => {
-    wrapper = shallow(SelectUsersInput, {
+    wrapper = mount(SelectUsersInput, {
       localVue,
       store,
       propsData: {
@@ -33,7 +33,7 @@ describe('SelectUsersInput.vue', () => {
     let taginput;
     beforeEach(async () => {
       taginput = wrapper.find({ ref: 'taginput' });
-      taginput.vm.newTag = 'd';
+      taginput.setData({ newTag: 'd' });
 
       await new Promise((resolve) => {
         setTimeout(resolve, debounceTime + 200);
@@ -42,6 +42,7 @@ describe('SelectUsersInput.vue', () => {
 
     test('has data', () => {
       expect(wrapper.vm.data).not.toBeNull();
+      expect(wrapper.vm.data).not.toHaveLength(0);
     });
 
     describe('add first', () => {

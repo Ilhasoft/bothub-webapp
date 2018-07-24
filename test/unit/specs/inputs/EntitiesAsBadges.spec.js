@@ -1,6 +1,7 @@
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EntitiesAsBadges from '@/components/inputs/EntitiesAsBadges';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -12,7 +13,7 @@ describe('EntitiesAsBadges.vue', () => {
     end: 18,
   };
   beforeEach(() => {
-    wrapper = shallow(EntitiesAsBadges, {
+    wrapper = shallowMount(EntitiesAsBadges, {
       localVue,
       propsData: {
         text: 'my name is douglas',

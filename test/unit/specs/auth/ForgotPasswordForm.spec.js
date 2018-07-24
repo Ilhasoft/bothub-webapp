@@ -1,52 +1,60 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
 
 describe('ForgotPasswordForm.vue', () => {
-  describe('submit form', () => {
-    describe('valid email', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({
-          Auth: {},
-        });
-        wrapper = shallow(ForgotPasswordForm, { store, localVue });
-        wrapper.vm.data.email = 'fake@user.com';
+  let wrapper;
+  beforeEach(() => {
+    store.replaceState({
+      Auth: {},
+    });
+    wrapper = shallowMount(ForgotPasswordForm, { store, localVue });
+  });
+
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('fill email with valid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.email = 'fake@user.com';
+    });
+
+    describe('submit form', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
       });
 
-      test('return true', async () => {
-        const r = await wrapper.vm.onSubmit();
+      test('return is true', () => {
         expect(r).toBeTruthy();
       });
 
-      test('success msg', async () => {
-        await wrapper.vm.onSubmit();
+      test('success msg', () => {
         expect(wrapper.vm.success_msgs.filter(msg => (msg.class === 'success')).length).toBe(1);
       });
     });
+  });
 
-    describe('invalid email', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({
-          Auth: {},
-        });
-        wrapper = shallow(ForgotPasswordForm, { store, localVue });
-        wrapper.vm.data.email = 'no@user.com';
+  describe('fill email with invalid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.email = 'no@user.com';
+    });
+
+    describe('submit form', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
       });
 
-      test('return false', async () => {
-        const r = await wrapper.vm.onSubmit();
+      test('return is false', () => {
         expect(r).toBeFalsy();
       });
     });

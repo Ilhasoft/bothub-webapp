@@ -110,9 +110,9 @@ export default {
         const findClosestStart = (lastMatch) => {
           if (lastMatch === undefined) {
             const index = newText.indexOf(oldEntityText);
-            return index === -1 ?
-              index :
-              findClosestStart(index);
+            return index === -1
+              ? index
+              : findClosestStart(index);
           }
 
           const from = lastMatch + oldEntityText.length;
@@ -125,9 +125,9 @@ export default {
           const prevDiff = Math.abs(entity.start - lastMatch);
           const nextDiff = Math.abs(entity.start - index);
 
-          return prevDiff < nextDiff ?
-            lastMatch :
-            findClosestStart(index);
+          return prevDiff < nextDiff
+            ? lastMatch
+            : findClosestStart(index);
         };
 
         const start = findClosestStart();
@@ -144,9 +144,9 @@ export default {
     },
     selected() {
       /* istanbul ignore next */
-      if (this.adding && this.selected &&
-        (this.adding.start !== this.selected.start ||
-        this.adding.end !== this.selected.end)) {
+      if (this.adding && this.selected
+        && (this.adding.start !== this.selected.start
+        || this.adding.end !== this.selected.end)) {
         /* istanbul ignore next */
         this.cancelAdding();
       }
@@ -206,7 +206,8 @@ export default {
       const color = getEntityColor(
         entity,
         this.allEntities,
-        this.entities);
+        this.entities,
+      );
       return `entity-${color}`;
     },
   },

@@ -13,7 +13,8 @@ export default {
         text,
         entities,
         intent,
-      });
+      },
+    );
   },
   all(repositoryUuid) {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid });

@@ -53,16 +53,8 @@ export default {
       this.$emit('itemDeleted', id);
     },
     onDispatchEvent(arg) {
-      let event;
-      let value;
-
-      if (arg instanceof Object) {
-        event = arg.event;
-        value = arg.value;
-      } else {
-        event = arg;
-        value = null;
-      }
+      const [event, value] = arg instanceof Object
+        ? [arg.event, arg.value] : [arg, null];
 
       this.$emit(event, value);
     },

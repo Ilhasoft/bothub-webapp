@@ -70,9 +70,9 @@ export default {
       const { search } = this;
       this.repositoryList = null;
 
-      this.repositoryList = this.currentCategory > 0 ?
-        await this.searchRepositories({ categories: [this.currentCategory], search }) :
-        await this.searchRepositories({ search });
+      this.repositoryList = this.currentCategory > 0
+        ? await this.searchRepositories({ categories: [this.currentCategory], search })
+        : await this.searchRepositories({ search });
     },
   },
 };

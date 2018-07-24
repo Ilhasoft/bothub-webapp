@@ -63,14 +63,16 @@ export default {
   },
   getLanguagesStatus(ownerNickname, slug) {
     return request.$http.get(
-      `/repository/${ownerNickname}/${slug}/languagesstatus/`);
+      `/repository/${ownerNickname}/${slug}/languagesstatus/`,
+    );
   },
   vote(ownerNickname, slug, value) {
     return request.$http.post(
       `/repository/${ownerNickname}/${slug}/vote/`,
       {
         vote: value,
-      });
+      },
+    );
   },
   voteUp(ownerNickname, slug) {
     return this.vote(ownerNickname, slug, 1);
@@ -81,7 +83,8 @@ export default {
   updateAuthorizationRole(repositoryUuid, userNickname, role) {
     return request.$http.patch(
       `/authorization-role/${repositoryUuid}/${userNickname}/`,
-      { role });
+      { role },
+    );
   },
   getAuthorizationList(repositoryUuid) {
     const queryString = qs.stringify({ repository: repositoryUuid });
@@ -97,7 +100,8 @@ export default {
       {
         repository: repositoryUuid,
         text,
-      });
+      },
+    );
   },
   getAuthorizationRequestsList(repositoryUuid) {
     const queryString = qs.stringify({

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination.vue renders correctly 1`] = `
+<div>
+  <!---->
+  <div class="next has-text-centered">
+    <button class="button is-primary">More</button>
+  </div>
+</div>
+`;

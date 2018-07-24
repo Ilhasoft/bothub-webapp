@@ -67,4 +67,3 @@ export default {
   margin: 8px;
 }
 </style>
-

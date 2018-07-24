@@ -1,9 +1,8 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
 import TYPES from '@/store/types';
@@ -11,8 +10,8 @@ import { ROLE_CONTRIBUTOR } from '@/utils';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Buefy);
+HTMLElement.prototype.insertAdjacentElement = jest.fn();
 
 describe('SetAuthorizationRoleForm.vue', () => {
   let wrapper;
@@ -21,7 +20,7 @@ describe('SetAuthorizationRoleForm.vue', () => {
       Auth: {},
     });
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-    wrapper = shallow(SetAuthorizationRoleForm, {
+    wrapper = shallowMount(SetAuthorizationRoleForm, {
       localVue,
       store,
       propsData: {
