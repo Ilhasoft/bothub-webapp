@@ -43,7 +43,7 @@ export default {
       this.currentValue = value
         .toLowerCase()
         .replace(' ', '_')
-        .replace(/[,.\/\\;+=!?@#$%¨&*()\[\]^"'~{}ç:<>|]/, '');
+        .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, '');
     },
   },
 };
