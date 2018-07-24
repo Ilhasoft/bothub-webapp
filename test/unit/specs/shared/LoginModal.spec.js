@@ -12,6 +12,9 @@ describe('LoginModal.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
+      Auth: {
+        token: null,
+      },
       LoginModal: {
         open: false,
         next: null,
