@@ -26,8 +26,8 @@ describe('RequestAuthorizationForm.vue', () => {
     await wrapper.vm.updateFormSchema();
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('check schema', () => {
