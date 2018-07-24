@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityTextHighlightedInput.vue simple renders correctly 1`] = `
+<div class="control has-icons-right">
+  <div class="highlighted">
+    <div class="highlighted-item"><span class="highlighted-item-before"></span> <span class="highlighted-item-text entity-selected"></span></div>
+    <input type="text" class="input">
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`EntityTextHighlightedInput.vue with valid entities renders correctly 1`] = `
+<div class="control has-icons-right">
+  <div class="highlighted">
+    <div class="highlighted-item"><span class="highlighted-item-before"></span> <span class="highlighted-item-text entity-sunflower">hi</span></div>
+    <div class="highlighted-item"><span class="highlighted-item-before"></span> <span class="highlighted-item-text entity-selected"></span></div>
+    <input type="text" class="input">
+  </div>
+  <!---->
+</div>
+`;
