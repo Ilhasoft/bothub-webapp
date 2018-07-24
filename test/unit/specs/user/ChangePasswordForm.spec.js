@@ -1,30 +1,29 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import TYPES from '@/store/types';
-
 import ChangePasswordForm from '@/components/user/ChangePasswordForm';
 
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
-describe('ChangePasswordForm.spec.js', () => {
+describe('ChangePasswordForm.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(ChangePasswordForm, {
+    store.replaceState({
+      Auth: {
+        token: '1f5e7e21d331536b58448595f69eb50a6b5e49b8',
+      },
+    });
+    wrapper = shallowMount(ChangePasswordForm, {
       store,
       localVue,
     });
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('has formSchema', () => {
@@ -33,10 +32,12 @@ describe('ChangePasswordForm.spec.js', () => {
 
   describe('fill with valid data', () => {
     beforeEach(() => {
-      wrapper.vm.data = {
-        current_password: 'n123456',
-        password: 'd123456',
-      };
+      wrapper.setData({
+        data: {
+          current_password: 'n123456',
+          password: 'd123456',
+        },
+      });
     });
 
     test('has data', () => {
@@ -70,10 +71,12 @@ describe('ChangePasswordForm.spec.js', () => {
 
   describe('fill with invalid data', () => {
     beforeEach(() => {
-      wrapper.vm.data = {
-        current_password: 'n12345',
-        password: 'd123456',
-      };
+      wrapper.setData({
+        data: {
+          current_password: 'n12345',
+          password: 'd123456',
+        },
+      });
     });
 
     test('has data', () => {
