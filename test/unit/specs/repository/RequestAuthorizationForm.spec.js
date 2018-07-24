@@ -1,18 +1,13 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
 
 describe('RequestAuthorizationForm.vue', () => {
   let wrapper;
@@ -21,7 +16,7 @@ describe('RequestAuthorizationForm.vue', () => {
       Auth: {},
     });
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-    wrapper = shallow(RequestAuthorizationForm, {
+    wrapper = shallowMount(RequestAuthorizationForm, {
       localVue,
       store,
       propsData: {
