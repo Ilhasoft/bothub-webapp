@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExampleWithEntitiesInput.vue renders correctly 1`] = `
+<div class="field inputs">
+  <div class="inputs-text">
+    <entitytexthighlightedinput-stub></entitytexthighlightedinput-stub>
+  </div>
+  <div class="inputs-entities">
+    <entitiesasbadges-stub></entitiesasbadges-stub>
+  </div>
+</div>
+`;

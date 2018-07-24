@@ -87,7 +87,7 @@ export default {
           const response = await this.searchUser({
             search: value,
           });
-          const data = response.data;
+          const { data } = response;
           const results = data.filter((user) => {
             const existsOnNewValue = this.newValue.reduce((previus, u) => {
               if (previus) return previus;
@@ -98,7 +98,8 @@ export default {
           this.data = results;
           return results;
         },
-        this.debounceTime);
+        this.debounceTime,
+      );
     },
   },
 };

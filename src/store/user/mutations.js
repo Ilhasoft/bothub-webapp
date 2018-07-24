@@ -10,7 +10,8 @@ export default {
           data,
           lastUpdate,
         },
-      });
+      },
+    );
   },
   [TYPES.SET_NICKNAME_AUTHENTICATED](state, { nickname }) {
     state.nicknameAuthenticated = nickname;

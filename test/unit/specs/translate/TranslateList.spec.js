@@ -1,16 +1,16 @@
 import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-import TranslateList from '@/components/translate/TranslateList';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
+import TranslateList from '@/components/translate/TranslateList';
+
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-
 describe('TranslateList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(TranslateList, {
+    wrapper = shallowMount(TranslateList, {
       localVue,
       store,
       propsData: {
@@ -23,8 +23,8 @@ describe('TranslateList.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('set from and to', () => {

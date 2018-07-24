@@ -2,16 +2,13 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-
 import NewExampleForm from '@/components/example/NewExampleForm';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
-localVue.use(Vuex);
 
 describe('NewExampleForm.vue', () => {
   let wrapper;
@@ -19,7 +16,7 @@ describe('NewExampleForm.vue', () => {
     store.replaceState({
       Auth: {},
     });
-    wrapper = shallow(NewExampleForm, {
+    wrapper = shallowMount(NewExampleForm, {
       localVue,
       propsData: {
         repository: '8511fd26-a3bc-4f74-9af1-176abca5401d',
@@ -28,7 +25,7 @@ describe('NewExampleForm.vue', () => {
     });
   });
 
-  test('mount', () => {
+  test('mounted', () => {
     expect(wrapper.vm).toBeDefined();
   });
 
@@ -51,28 +48,27 @@ describe('NewExampleForm.vue', () => {
     });
 
     describe('submit', () => {
-      let response;
+      let r;
       beforeEach(async () => {
-        response = await wrapper.vm.onSubmit();
-        await localVue.nextTick();
+        r = await wrapper.vm.onSubmit();
       });
 
       test('return true', () => {
-        expect(response).toBeTruthy();
+        expect(r).toBeTruthy();
       });
 
       test('data cleaned', () => {
         expect(wrapper.vm.data.text).toBe('');
-        expect(wrapper.vm.data.entities.length).toBe(0);
+        expect(wrapper.vm.data.entities).toHaveLength(0);
         expect(wrapper.vm.data.intent).toBe('');
       });
 
       test('don\'t have errrors', () => {
-        expect(Object.keys(wrapper.vm.errors).length).toBe(0);
+        expect(Object.keys(wrapper.vm.errors)).toHaveLength(0);
       });
 
-      test('emit created', () => {
-        expect(wrapper.emitted('created').length).toBe(1);
+      test('emit created event', () => {
+        expect(wrapper.emitted('created')).toBeDefined();
       });
     });
   });
@@ -90,18 +86,17 @@ describe('NewExampleForm.vue', () => {
     });
 
     describe('submit', () => {
-      let response;
+      let r;
       beforeEach(async () => {
-        response = await wrapper.vm.onSubmit();
-        await localVue.nextTick();
+        r = await wrapper.vm.onSubmit();
       });
 
       test('return false', () => {
-        expect(response).toBeFalsy();
+        expect(r).toBeFalsy();
       });
 
       test('have errrors', () => {
-        expect(Object.keys(wrapper.vm.errors).length).toBeGreaterThan(0);
+        expect(Object.keys(wrapper.vm.errors)).not.toHaveLength(0);
       });
     });
   });

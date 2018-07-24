@@ -1,32 +1,35 @@
-import Vuex from 'vuex';
 import Buefy from 'buefy';
-import Router from 'vue-router';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import router from '@/router';
 import LoginModal from '@/components/shared/LoginModal';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Buefy);
-localVue.use(Router);
 
 describe('LoginModal.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
+      Auth: {
+        token: null,
+      },
       LoginModal: {
         open: false,
         next: null,
         redirectToWhenFails: null,
       },
     });
-    wrapper = shallow(LoginModal, {
+    wrapper = shallowMount(LoginModal, {
       store,
       router,
       localVue,
     });
+  });
+
+  test('mount', () => {
+    expect(wrapper.vm).toBeDefined();
   });
 
   describe('simple', () => {

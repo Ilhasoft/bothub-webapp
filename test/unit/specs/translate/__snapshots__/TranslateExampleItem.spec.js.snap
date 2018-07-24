@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslateExampleItem.vue renders correctly 1`] = `
+<div class="example">
+  <div class="example-text">
+    <highlightedtext-stub></highlightedtext-stub>
+  </div>
+  <div class="example-entities">
+    <btag-stub class="entity-sunflower">name</btag-stub>
+  </div>
+  <div class="example-infos level is-mobile">
+    <div class="level-left">
+      <!---->
+      <div class="level-item has-text-grey-light">
+        3 months ago
+      </div>
+    </div>
+    <!---->
+  </div>
+  <bcollapse-stub>
+    <div class="translate-form">
+      <newtranslateform-stub></newtranslateform-stub>
+    </div>
+  </bcollapse-stub>
+</div>
+`;

@@ -45,13 +45,14 @@ export default {
       'repositoryAuthorizationRequestsList',
     ]),
     async updateRequests() {
-      const repositoryUuid = this.repositoryUuid;
+      const { repositoryUuid } = this;
       if (this.requestsList) {
         this.requestsList.reset();
         await this.requestsList.next();
       } else {
         this.requestsList = await this.repositoryAuthorizationRequestsList(
-          { repositoryUuid });
+          { repositoryUuid },
+        );
       }
     },
     async onItemDeleted() {
@@ -61,4 +62,3 @@ export default {
   },
 };
 </script>
-

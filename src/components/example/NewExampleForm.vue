@@ -9,13 +9,17 @@
     <div class="field level">
       <div class="level-left">
         <div class="level-item">
-          <b-field
-            horizontal
-            label="Intent">
-            <b-autocomplete
-              v-model="data.intent"
-              :data="extraIntentsList" />
-          </b-field>
+          <div>
+            <b-field
+              horizontal
+              label="Intent"
+              :type="errors.intent && 'is-danger'"
+              :message="errors.intent">
+              <intent-input
+                v-model="data.intent"
+                :intents="extraIntentsList" />
+            </b-field>
+          </div>
         </div>
       </div>
       <div class="level-right">
@@ -34,11 +38,13 @@
 import { mapActions } from 'vuex';
 import Messages from '@/components/shared/Messages';
 import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
+import IntentInput from '@/components/inputs/IntentInput';
 
 
 const components = {
   ExampleWithEntitiesInput,
   Messages,
+  IntentInput,
 };
 
 export default {
@@ -135,4 +141,3 @@ export default {
   }
 }
 </style>
-

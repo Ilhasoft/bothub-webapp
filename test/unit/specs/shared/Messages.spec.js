@@ -1,31 +1,59 @@
-import { shallow } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Messages from '@/components/shared/Messages';
 
-const getWrapper = (msgs = []) => (shallow(Messages, {
-  propsData: {
-    msgs,
-  },
-}));
+
+const localVue = createLocalVue();
 
 describe('Messages.vue', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(Messages, {
+      localVue,
+      propsData: {
+        msgs: [],
+      },
+    });
+  });
+
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
   test('empty', () => {
-    const wrapper = getWrapper();
     expect(wrapper.findAll('.messages .notification').length)
       .toBe(0);
   });
 
-  test('one', () => {
-    const wrapper = getWrapper(['hi']);
-    expect(wrapper.findAll('.messages .notification').length)
-      .toBe(1);
+  describe('set msgs with one item', () => {
+    beforeEach(() => {
+      wrapper.setProps({ msgs: ['hi'] });
+    });
+
+    test('has .notifications items', () => {
+      expect(wrapper.findAll('.messages .notification').length)
+        .toBe(1);
+    });
+
+    test('check snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 
-  test('error', () => {
+  describe('set msgs with on error item', () => {
     const text = 'bye';
-    const wrapper = getWrapper([{ text, class: 'error' }]);
-    expect(wrapper.findAll('.messages .notification.is-danger').length)
-      .toBe(1);
-    expect(wrapper.find('.messages .notification.is-danger').element.textContent)
-      .toBe(text);
+    beforeEach(() => {
+      wrapper.setProps({ msgs: [{ text, class: 'error' }] });
+    });
+
+    test('has .notification.is-danger items', () => {
+      expect(wrapper.findAll('.messages .notification.is-danger').length)
+        .toBe(1);
+      expect(wrapper.find('.messages .notification.is-danger').element.textContent)
+        .toBe(text);
+    });
+
+    test('check snapshot', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 });

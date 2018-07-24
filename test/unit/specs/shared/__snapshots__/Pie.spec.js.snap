@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pie.vue renders correctly 1`] = `
+<div data-percent="10" class="pie">
+  <div class="pie-percent">10.0%</div>
+</div>
+`;

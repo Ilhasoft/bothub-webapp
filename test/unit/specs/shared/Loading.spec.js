@@ -1,14 +1,16 @@
-import { shallow } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Loading from '@/components/shared/Loading';
 
+
+const localVue = createLocalVue();
 
 describe('Loading.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(Loading);
+    wrapper = shallowMount(Loading, { localVue });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

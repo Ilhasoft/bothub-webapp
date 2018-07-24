@@ -19,7 +19,9 @@
 </template>
 
 <script>
-import { ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN } from '@/utils';
+import {
+  ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN,
+} from '@/utils';
 
 
 const helpTextDict = {

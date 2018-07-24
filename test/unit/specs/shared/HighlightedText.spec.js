@@ -1,11 +1,14 @@
-import { shallow } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import HighlightedText from '@/components/shared/HighlightedText';
 
+
+const localVue = createLocalVue();
 
 describe('HighlightedText.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(HighlightedText, {
+    wrapper = shallowMount(HighlightedText, {
+      localVue,
       propsData: {
         text: 'text',
         entities: [
@@ -15,7 +18,7 @@ describe('HighlightedText.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

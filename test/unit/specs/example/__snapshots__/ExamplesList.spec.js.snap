@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExamplesList.vue renders correctly 1`] = `
+<div>
+  <pagination-stub repository="8511fd26-a3bc-4f74-9af1-176abca5401d"></pagination-stub>
+  <p class="no-examples">No examples.</p>
+</div>
+`;

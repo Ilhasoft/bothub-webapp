@@ -1,18 +1,21 @@
-import { shallow } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import FlagsList from '@/components/shared/FlagsList';
 
+
+const localVue = createLocalVue();
 
 describe('FlagsList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(FlagsList, {
+    wrapper = shallowMount(FlagsList, {
+      localVue,
       propsData: {
         languages: ['en', 'pt'],
       },
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

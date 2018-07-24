@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div class="columns">
+  <div class="column is-narrow">
+    <repositoryavatar-stub></repositoryavatar-stub>
+  </div>
+  <div class="column">
+    <div class="repository-header repository-infospace">
+      <div class="repository-header-title">
+        <router-link-stub class="title is-4">Repository</router-link-stub>
+      </div>
+      <div class="repository-header-info">
+        <!---->
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <div>
+      <div class="subtitle is-6 repository-infospace">
+        <p>Created by Fake</p>
+        <p>
+          <a href="https://bothub.it/fake/repository/" target="_blank" class="has-text-grey">https://bothub.it/fake/repository/</a>
+        </p>
+      </div>
+      <div class="repository-infospace">
+        <flagslist-stub></flagslist-stub>
+      </div>
+      <div>
+        <p class="repository-description repository-description-empty">No description</p>
+      </div>
+      <div>
+        <repositorycategorieslist-stub></repositorycategorieslist-stub>
+      </div>
+    </div>
+  </div>
+</div>
+`;

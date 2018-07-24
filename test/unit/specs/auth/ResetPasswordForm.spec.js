@@ -1,123 +1,90 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
 
 describe('ResetPasswordForm.vue', () => {
-  describe('submit form', () => {
-    describe('valid', () => {
-      let wrapper;
-      beforeEach(() => {
-        wrapper = shallow(
-          ResetPasswordForm,
-          {
-            store,
-            localVue,
-            propsData: {
-              nickname: 'fake',
-              token: 'token1',
-            },
-          });
-        wrapper.vm.data.password = 'n123456';
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(
+      ResetPasswordForm,
+      {
+        store,
+        localVue,
+        propsData: {
+          nickname: 'fake',
+          token: 'token1',
+        },
+      },
+    );
+  });
+
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('fill password with valid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.password = 'n123456';
+    });
+
+    describe('submit form', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
       });
 
-      test('return true', async () => {
-        const response = await wrapper.vm.onSubmit();
-        expect(response).toBeTruthy();
+      test('return true', () => {
+        expect(r).toBeTruthy();
       });
 
-      test('show success msg', async () => {
-        await wrapper.vm.onSubmit();
-        expect(wrapper.vm.msgs.filter(msg => (msg.class === 'success')).length).toBe(1);
+      test('emit reseted event', () => {
+        expect(wrapper.emitted('reseted')).toBeDefined();
       });
 
-      test('emitted reseted', async () => {
-        await wrapper.vm.onSubmit();
-        expect(wrapper.emitted('reseted').length).toBe(1);
+      test('show success msg', () => {
+        expect(wrapper.vm.msgs.filter(
+          msg => (msg.class === 'success'),
+        )).toHaveLength(1);
       });
     });
 
-    describe('invalid token', () => {
-      let wrapper;
+    describe('pass invalid token', () => {
       beforeEach(() => {
-        wrapper = shallow(
-          ResetPasswordForm,
-          {
-            store,
-            localVue,
-            propsData: {
-              nickname: 'fake',
-              token: 'invalid_token',
-            },
-          });
-        wrapper.vm.data.password = 'n123456';
+        wrapper.setProps({ token: 'invalid_token' });
       });
 
-      test('return false', async () => {
-        const response = await wrapper.vm.onSubmit();
-        expect(response).toBeFalsy();
-      });
-
-      test('show error', async () => {
-        await wrapper.vm.onSubmit();
-        expect(wrapper.vm.msgs.filter(msg => (msg.class === 'error')).length).toBe(1);
-      });
-    });
-
-    describe('invalid password', () => {
-      let wrapper;
-      beforeEach(() => {
-        wrapper = shallow(
-          ResetPasswordForm,
-          {
-            store,
-            localVue,
-            propsData: {
-              nickname: 'fake',
-              token: 'token1',
-            },
-          });
-        wrapper.vm.data.password = '';
-      });
-
-      test('return false', async () => {
-        const response = await wrapper.vm.onSubmit();
-        expect(response).toBeFalsy();
-      });
-    });
-
-    describe('invalid user', () => {
-      let wrapper;
-      beforeEach(() => {
-        wrapper = shallow(
-          ResetPasswordForm,
-          {
-            store,
-            localVue,
-            propsData: {
-              nickname: 'other',
-              token: 'token1',
-            },
-          });
-        wrapper.vm.data.password = 'n123456';
-      });
-
-      describe('turn valid', () => {
-        beforeEach(() => { wrapper.vm.nickname = 'fake'; });
-
-        test('return true', async () => {
-          const response = await wrapper.vm.onSubmit();
-          expect(response).toBeTruthy();
+      describe('submit form', () => {
+        let r;
+        beforeEach(async () => {
+          r = await wrapper.vm.onSubmit();
         });
+
+        test('return false', () => {
+          expect(r).toBeFalsy();
+        });
+      });
+    });
+  });
+
+  describe('fill password with invalid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.password = '';
+    });
+
+    describe('submit form', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
+      });
+
+      test('return false', () => {
+        expect(r).toBeFalsy();
       });
     });
   });

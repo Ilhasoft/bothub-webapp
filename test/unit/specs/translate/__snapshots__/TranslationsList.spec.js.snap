@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationsList.vue renders correctly 1`] = `
+<div>
+  <pagination-stub repository="[object Object]"></pagination-stub>
+  <p class="no-examples">No translations.</p>
+</div>
+`;

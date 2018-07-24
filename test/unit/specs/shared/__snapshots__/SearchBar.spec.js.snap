@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBar.vue renders correctly 1`] = `
+<form class="search">
+  <input type="text" placeholder="the world of robots is here">
+  <button type="submit">
+    <bicon-stub></bicon-stub>
+  </button>
+</form>
+`;

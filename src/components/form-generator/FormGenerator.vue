@@ -83,9 +83,9 @@ export default {
             ...inputProps
           } = this.schema[name];
 
-          if (style &&
-            typeof style.show === 'boolean' &&
-            !style.show) return false;
+          if (style
+            && typeof style.show === 'boolean'
+            && !style.show) return false;
 
           return {
             type,
@@ -101,8 +101,8 @@ export default {
     },
     msgs() {
       /* istanbul ignore next */
-      return (this.errors.non_field_errors &&
-        this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
+      return (this.errors.non_field_errors
+        && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
   },
   methods: {

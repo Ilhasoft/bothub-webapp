@@ -551,7 +551,8 @@ export default {
         slug,
         language,
         categories: categories.map(
-          ({ id, name: n }) => ({ value: id, display_name: n })),
+          ({ id, name: n }) => ({ value: id, display_name: n }),
+        ),
         description,
         is_private: isPrivate,
       };

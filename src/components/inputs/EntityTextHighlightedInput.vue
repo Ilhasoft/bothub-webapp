@@ -82,7 +82,8 @@ export default {
           const color = getEntityColor(
             entity,
             this.allEntities,
-            this.entities);
+            this.entities,
+          );
           const colorClass = `entity-${color}`;
           const before = this.out.substring(0, start);
           const text = this.out.substring(start, end);
@@ -110,9 +111,10 @@ export default {
       this.selectionEnd = selectionEnd;
       this.$emit(
         'selected',
-        selectionStart === selectionEnd ?
-          { start: 0, end: 0 } :
-          { start: selectionStart, end: selectionEnd });
+        selectionStart === selectionEnd
+          ? { start: 0, end: 0 }
+          : { start: selectionStart, end: selectionEnd },
+      );
     },
     clearSelected() {
       /* istanbul ignore next */

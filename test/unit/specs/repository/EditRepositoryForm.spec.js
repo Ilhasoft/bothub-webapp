@@ -1,24 +1,22 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('EditRepositoryForm.vue', () => {
   let wrapper;
-  beforeEach(async () => {
+  beforeEach(() => {
     store.replaceState({
       Auth: {},
     });
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-    wrapper = shallow(EditRepositoryForm, {
+    wrapper = shallowMount(EditRepositoryForm, {
       localVue,
       store,
       propsData: {
@@ -26,11 +24,10 @@ describe('EditRepositoryForm.vue', () => {
         slug: 'repo1',
       },
     });
-    await localVue.nextTick();
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('has formSchema', () => {

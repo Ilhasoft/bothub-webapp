@@ -75,8 +75,12 @@ export default {
       'approveRequestAuthorization',
       'rejectRequestAuthorization',
     ]),
-    updateUserProfile() {
-      this.updateProfile({ nickname: this.user__nickname });
+    async updateUserProfile() {
+      try {
+        await this.updateProfile({ nickname: this.user__nickname });
+      } catch (e) {
+        this.handlerError(e);
+      }
     },
     async approve() {
       try {

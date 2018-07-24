@@ -40,7 +40,9 @@ export default {
     const response = await auth.getRegisterSchema();
     return response;
   },
-  async register(store, { email, name, nickname, password }) {
+  async register(store, {
+    email, name, nickname, password,
+  }) {
     await auth.register(email, name, nickname, password);
   },
 };

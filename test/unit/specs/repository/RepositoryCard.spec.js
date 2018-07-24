@@ -1,28 +1,19 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import Router from 'vue-router';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import store from '@/store';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 
-import store from '@/store';
-import router from '@/router';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
-localVue.use(Router);
-
 
 describe('RepositoryCard.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(RepositoryCard, {
+    wrapper = shallowMount(RepositoryCard, {
       localVue,
       store,
-      router,
       propsData: {
         uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
         owner: 1,
@@ -43,7 +34,7 @@ describe('RepositoryCard.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

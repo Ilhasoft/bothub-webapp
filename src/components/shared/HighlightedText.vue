@@ -39,7 +39,8 @@ export default {
           const color = getEntityColor(
             entity,
             this.allEntities,
-            this.entities);
+            this.entities,
+          );
           const colorClass = `entity-${color}`;
           const before = this.text.substring(0, start);
           const text = this.text.substring(start, end);

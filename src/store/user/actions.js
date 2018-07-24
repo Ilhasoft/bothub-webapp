@@ -45,7 +45,9 @@ export default {
     const schema = await user.getMyProfileSchema();
     return schema;
   },
-  patchMyProfile(store, { nickname, email, name, locale }) {
+  patchMyProfile(store, {
+    nickname, email, name, locale,
+  }) {
     return user.updateMyProfile(nickname, email, name, locale);
   },
   async getChangePasswordSchema() {
