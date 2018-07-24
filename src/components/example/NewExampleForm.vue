@@ -15,9 +15,9 @@
               label="Intent"
               :type="errors.intent && 'is-danger'"
               :message="errors.intent">
-              <b-autocomplete
+              <intent-input
                 v-model="data.intent"
-                :data="extraIntentsList" />
+                :intents="extraIntentsList" />
             </b-field>
           </div>
         </div>
@@ -38,11 +38,13 @@
 import { mapActions } from 'vuex';
 import Messages from '@/components/shared/Messages';
 import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
+import IntentInput from '@/components/inputs/IntentInput';
 
 
 const components = {
   ExampleWithEntitiesInput,
   Messages,
+  IntentInput,
 };
 
 export default {
