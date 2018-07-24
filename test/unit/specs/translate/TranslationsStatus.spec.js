@@ -1,21 +1,19 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import applyFilters from '@/utils/filters';
 
 import store from '@/store';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 applyFilters(localVue);
 
 describe('TranslationsStatus.vue', () => {
   let wrapper;
   beforeEach(async () => {
-    wrapper = shallow(TranslationsStatus, {
+    wrapper = shallowMount(TranslationsStatus, {
       localVue,
       store,
       propsData: {
@@ -26,8 +24,8 @@ describe('TranslationsStatus.vue', () => {
     await wrapper.vm.updateTranslationsStatus();
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('click on DE status', () => {
