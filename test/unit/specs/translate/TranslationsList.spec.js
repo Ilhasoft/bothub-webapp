@@ -1,20 +1,19 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-import TranslationsList from '@/components/translate/TranslationsList';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import store from '@/store';
+import TranslationsList from '@/components/translate/TranslationsList';
+
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 applyFilters(localVue);
 
 describe('TranslationsList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(TranslationsList, {
+    wrapper = shallowMount(TranslationsList, {
       localVue,
       store,
       propsData: {
@@ -25,8 +24,8 @@ describe('TranslationsList.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('update translations', () => {
