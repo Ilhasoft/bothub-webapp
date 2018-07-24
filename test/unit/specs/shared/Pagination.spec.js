@@ -1,9 +1,10 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import { shallow, createLocalVue } from '@vue/test-utils';
-import Pagination from '@/components/shared/Pagination';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import repository from '@/api/repository';
+import Pagination from '@/components/shared/Pagination';
+
 
 const localVue = createLocalVue();
 
@@ -12,7 +13,7 @@ const Foo = localVue.component('foo', { render: () => ('<div />') });
 describe('Pagination.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(Pagination, {
+    wrapper = shallowMount(Pagination, {
       localVue,
       propsData: {
         itemComponent: Foo,
@@ -21,8 +22,8 @@ describe('Pagination.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('item deleted', () => {
