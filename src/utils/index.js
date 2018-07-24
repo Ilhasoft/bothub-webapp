@@ -41,3 +41,17 @@ export const ROLES = {
   [ROLE_CONTRIBUTOR]: 'Contributor',
   [ROLE_ADMIN]: 'Admin',
 };
+
+const strTrueIndexOf = (a, b) => (a
+  .toString()
+  .toLowerCase()
+  .indexOf(b.toLowerCase())
+);
+
+export const filterAndOrderListByText = (list, text) => (
+  text
+    ? list
+      .filter(item => strTrueIndexOf(item, text) >= 0)
+      .sort((a, b) => strTrueIndexOf(a, text) - strTrueIndexOf(b, text))
+    : list
+);
