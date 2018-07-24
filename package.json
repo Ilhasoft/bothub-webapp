@@ -2,7 +2,7 @@
   "name": "bothub-webapp",
   "version": "1.9.3",
   "description": "Bothub web application",
-  "author": "Ilhasoft <contact@ilhasoft.com.br>",
+  "author": "Ilhasoft <contato@ilhasoft.com.br>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
