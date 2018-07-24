@@ -1,17 +1,17 @@
 import Buefy from 'buefy';
 import VueMoment from 'vue-moment';
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TranslateExampleItem from '@/components/translate/TranslateExampleItem';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
 localVue.use(VueMoment);
 
-
 describe('TranslateExampleItem.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(TranslateExampleItem, {
+    wrapper = shallowMount(TranslateExampleItem, {
       localVue,
       propsData: {
         id: 1,
@@ -32,7 +32,7 @@ describe('TranslateExampleItem.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });
