@@ -1,78 +1,84 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
 import store from '@/store';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import LoginForm from '@/components/auth/LoginForm';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
 
 describe('LoginForm.vue', () => {
-  describe('do login', () => {
-    describe('valid login', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({
-          Auth: { token: null },
-          User: {},
-        });
-        wrapper = shallow(LoginForm, { store, localVue });
-        wrapper.vm.data.username = 'fake@user.com';
-        wrapper.vm.data.password = '123456';
-      });
+  let wrapper;
+  beforeEach(() => {
+    store.replaceState({
+      Auth: { token: null },
+      User: {},
+    });
+    wrapper = shallowMount(LoginForm, { store, localVue });
+  });
 
-      test('authenticated', async (done) => {
-        await wrapper.vm.onSubmit();
-        expect(wrapper.vm.$store.getters.authenticated)
-          .toBeTruthy();
-        done();
-      });
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
 
-      test('emit event', async (done) => {
-        await wrapper.vm.onSubmit();
-        expect(wrapper.emitted('authenticated').length)
-          .toBe(1);
-        done();
-      });
+  describe('fill form with valid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.username = 'fake@user.com';
+      wrapper.vm.data.password = '123456';
     });
 
-    describe('invalid login', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({ Auth: {} });
-        wrapper = shallow(LoginForm, { store, localVue });
-        wrapper.vm.data.username = 'fake@user.com';
-        wrapper.vm.data.password = '123';
+    describe('submit', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
       });
 
-      test('not authenticated', async (done) => {
-        await wrapper.vm.onSubmit();
+      test('return true', () => {
+        expect(r).toBeTruthy();
+      });
+
+      test('user is authenticated', () => {
         expect(wrapper.vm.$store.getters.authenticated)
-          .toBeFalsy();
-        done();
+          .toBeTruthy();
+      });
+
+      test('emit authenticated event', () => {
+        expect(wrapper.emitted('authenticated')).toBeDefined();
       });
     });
   });
 
-  describe('emit events', () => {
-    describe('forgotPasswordClick', () => {
-      let wrapper;
-      beforeEach(() => {
-        store.replaceState({});
-        wrapper = shallow(LoginForm, { store, localVue });
+  describe('fill form with invalid data', () => {
+    beforeEach(() => {
+      wrapper.vm.data.username = 'fake@user.com';
+      wrapper.vm.data.password = '123';
+    });
+
+    describe('submit', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
       });
 
-      test('emit when click on forgot password link', () => {
-        const fp = wrapper.find({ ref: 'forgotPassword' });
-        fp.trigger('click');
-        expect(wrapper.emitted('forgotPasswordClick').length)
-          .toBeGreaterThan(0);
+      test('return false', () => {
+        expect(r).toBeFalsy();
       });
+
+      test('user is not authenticated', () => {
+        expect(wrapper.vm.$store.getters.authenticated).toBeFalsy();
+      });
+    });
+  });
+
+  describe('click on forgot password button', () => {
+    beforeEach(() => {
+      const forgotPassword = wrapper.find({ ref: 'forgotPassword' });
+      forgotPassword.trigger('click');
+    });
+
+    test('emit forgotPasswordClick event', () => {
+      expect(wrapper.emitted('forgotPasswordClick')).toBeDefined();
     });
   });
 });

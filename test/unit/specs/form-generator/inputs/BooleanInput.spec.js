@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BooleanInput from '@/components/form-generator/inputs/BooleanInput';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -9,7 +9,11 @@ localVue.use(Buefy);
 describe('BooleanInput.vue', () => {
   let wrapper;
   beforeAll(() => {
-    wrapper = shallow(BooleanInput, { localVue });
+    wrapper = shallowMount(BooleanInput, { localVue });
+  });
+
+  test('mounted', () => {
+    expect(wrapper.vm).toBeDefined();
   });
 
   describe('when value true', () => {

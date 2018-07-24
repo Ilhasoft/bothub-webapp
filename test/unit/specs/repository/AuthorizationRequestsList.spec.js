@@ -1,15 +1,12 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
+
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
 describe('AuthorizationRequestsList.vue', () => {
   let wrapper;
@@ -19,7 +16,7 @@ describe('AuthorizationRequestsList.vue', () => {
         token: '1f5e7e21d331536b58448595f69eb50a6b5e49b8',
       },
     });
-    wrapper = shallow(AuthorizationRequestsList, {
+    wrapper = shallowMount(AuthorizationRequestsList, {
       localVue,
       propsData: {
         repositoryUuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
@@ -28,8 +25,8 @@ describe('AuthorizationRequestsList.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('on item deleted', () => {

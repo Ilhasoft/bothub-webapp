@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ChoiceInput from '@/components/form-generator/inputs/ChoiceInput';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -10,7 +10,7 @@ describe('ChoiceInput.vue', () => {
   describe('valid', () => {
     let wrapper;
     beforeAll(() => {
-      wrapper = shallow(ChoiceInput, {
+      wrapper = shallowMount(ChoiceInput, {
         localVue,
         propsData: {
           choices: [

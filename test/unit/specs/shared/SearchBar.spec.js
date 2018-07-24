@@ -1,6 +1,5 @@
 import Buefy from 'buefy';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import SearchBar from '@/components/shared/SearchBar';
 
 const localVue = createLocalVue();
@@ -11,7 +10,7 @@ describe('SearchBar.vue', () => {
   let wrapper;
   const debounceTime = 500;
   beforeEach(() => {
-    wrapper = shallow(SearchBar, {
+    wrapper = shallowMount(SearchBar, {
       localVue,
       propsData: {
         debounceTime,
@@ -19,8 +18,8 @@ describe('SearchBar.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('typing in input', () => {
@@ -37,8 +36,7 @@ describe('SearchBar.vue', () => {
     });
 
     test('input not emitted', () => {
-      const inputEmitted = wrapper.emitted('input');
-      expect(inputEmitted).not.toBeDefined();
+      expect(wrapper.emitted('input')).not.toBeDefined();
     });
 
     describe('wait debounce time', () => {

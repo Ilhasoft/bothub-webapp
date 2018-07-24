@@ -1,25 +1,18 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import Buefy from 'buefy';
-import Router from 'vue-router';
-import { shallow, createLocalVue } from '@vue/test-utils';
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import router from '@/router';
+import RepositoryInfo from '@/components/repository/RepositoryInfo';
+
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(Buefy);
-localVue.use(Router);
-
 
 describe('RepositoryCard.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(RepositoryInfo, {
+    wrapper = shallowMount(RepositoryInfo, {
       localVue,
       store,
       router,
@@ -43,7 +36,7 @@ describe('RepositoryCard.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

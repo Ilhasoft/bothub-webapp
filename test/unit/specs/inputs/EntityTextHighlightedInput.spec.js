@@ -1,4 +1,4 @@
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EntityTextHighlightedInput from '@/components/inputs/EntityTextHighlightedInput';
 
 const localVue = createLocalVue();
@@ -7,21 +7,21 @@ describe('EntityTextHighlightedInput.vue', () => {
   describe('simple', () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = shallow(EntityTextHighlightedInput, {
+      wrapper = shallowMount(EntityTextHighlightedInput, {
         localVue,
         propsData: {},
       });
     });
 
-    test('mount', () => {
-      expect(wrapper.vm).toBeDefined();
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 
   describe('with valid entities', () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = shallow(EntityTextHighlightedInput, {
+      wrapper = shallowMount(EntityTextHighlightedInput, {
         localVue,
         propsData: {
           value: 'hi',
@@ -36,8 +36,8 @@ describe('EntityTextHighlightedInput.vue', () => {
       });
     });
 
-    test('mount', () => {
-      expect(wrapper.vm).toBeDefined();
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
     });
 
     describe('type in input', () => {
@@ -47,6 +47,10 @@ describe('EntityTextHighlightedInput.vue', () => {
         newValue = `${input.element.value} my name is douglas`;
         input.element.value = newValue;
         input.trigger('input');
+      });
+
+      test('emit input event', () => {
+        expect(wrapper.emitted('input')).toBeDefined();
       });
 
       test('input value is same of component value', () => {
@@ -61,7 +65,7 @@ describe('EntityTextHighlightedInput.vue', () => {
       });
 
       test('emit selected', () => {
-        expect(wrapper.emitted('selected').length).toBe(1);
+        expect(wrapper.emitted('selected')).toBeDefined();
       });
     });
   });

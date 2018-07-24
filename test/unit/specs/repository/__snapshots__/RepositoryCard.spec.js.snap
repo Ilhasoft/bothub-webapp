@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div class="card">
+  <div class="card-content">
+    <repositoryinfo-stub></repositoryinfo-stub>
+  </div>
+</div>
+`;

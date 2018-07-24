@@ -1,18 +1,14 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import Buefy from 'buefy';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
-import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import applyFilters from '@/utils/filters';
+import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
-localVue.use(Vuex);
 applyFilters(localVue);
 
 
@@ -23,7 +19,7 @@ describe('AnalyzeTextDrawer.vue', () => {
       Auth: {},
     });
 
-    wrapper = shallow(AnalyzeTextDrawer, {
+    wrapper = shallowMount(AnalyzeTextDrawer, {
       localVue,
       propsData: {
         ownerNickname: 'douglas',

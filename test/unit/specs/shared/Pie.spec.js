@@ -1,6 +1,7 @@
-import { shallow, createLocalVue } from '@vue/test-utils';
-import Pie from '@/components/shared/Pie';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
+import Pie from '@/components/shared/Pie';
+
 
 const localVue = createLocalVue();
 applyFilters(localVue);
@@ -8,7 +9,7 @@ applyFilters(localVue);
 describe('Pie.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(Pie, {
+    wrapper = shallowMount(Pie, {
       localVue,
       propsData: {
         percent: 10,
@@ -16,7 +17,7 @@ describe('Pie.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

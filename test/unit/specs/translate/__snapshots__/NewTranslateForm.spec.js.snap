@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTranslateForm.vue renders correctly 1`] = `
+<form>
+  <examplewithentitiesinput-stub></examplewithentitiesinput-stub>
+  <div class="field has-text-right">
+    <button type="submit" class="button is-primary">Submit Translation</button>
+  </div>
+</form>
+`;

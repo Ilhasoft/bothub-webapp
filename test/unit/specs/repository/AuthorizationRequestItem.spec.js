@@ -3,18 +3,16 @@ jest.mock('@/api/request');
 
 import Buefy from 'buefy';
 import Vuex from 'vuex';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
-import AuthorizationRequestItem from '@/components/repository/AuthorizationRequestItem';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
+import AuthorizationRequestItem from '@/components/repository/AuthorizationRequestItem';
 
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
 localVue.use(Vuex);
 
-describe('RepositoryAvatar.vue', () => {
+describe('AuthorizationRequestItem.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
@@ -25,7 +23,7 @@ describe('RepositoryAvatar.vue', () => {
         profiles: {},
       },
     });
-    wrapper = shallow(AuthorizationRequestItem, {
+    wrapper = shallowMount(AuthorizationRequestItem, {
       localVue,
       store,
       propsData: {
@@ -41,10 +39,9 @@ describe('RepositoryAvatar.vue', () => {
   });
 
   describe('approve', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
       const approveBtn = wrapper.find({ ref: 'approveBtn' });
       approveBtn.trigger('click');
-      await localVue.nextTick();
     });
 
     test('deleted emitted', () => {

@@ -1,20 +1,20 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import { shallow, createLocalVue } from '@vue/test-utils';
-import CategoriesList from '@/components/shared/CategoriesList';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
+import CategoriesList from '@/components/shared/CategoriesList';
+
 
 const localVue = createLocalVue();
-
 
 describe('CategoriesList.vue', () => {
   let wrapper;
   beforeEach(async () => {
-    wrapper = shallow(CategoriesList, { localVue, store });
+    wrapper = shallowMount(CategoriesList, { localVue, store });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

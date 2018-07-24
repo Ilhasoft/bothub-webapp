@@ -2,17 +2,14 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
-import Vuex from 'vuex';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
-import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
-
 import store from '@/store';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
+import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
 
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
-localVue.use(Vuex);
+HTMLElement.prototype.insertAdjacentElement = jest.fn();
 
 describe('RepositoryAvatar.vue', () => {
   let wrapper;
@@ -22,7 +19,7 @@ describe('RepositoryAvatar.vue', () => {
         token: '1f5e7e21d331536b58448595f69eb50a6b5e49b8',
       },
     });
-    wrapper = shallow(RepositoryAvatar, {
+    wrapper = shallowMount(RepositoryAvatar, {
       localVue,
       store,
       propsData: {

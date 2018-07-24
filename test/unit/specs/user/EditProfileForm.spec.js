@@ -1,30 +1,32 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import TYPES from '@/store/types';
-
 import EditProfileForm from '@/components/user/EditProfileForm';
 
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 
-describe('EditProfileForm.spec.js', () => {
+describe('EditProfileForm.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(EditProfileForm, {
+    store.replaceState({
+      Auth: {
+        token: '1f5e7e21d331536b58448595f69eb50a6b5e49b8',
+      },
+      User: {
+        profiles: {},
+      },
+    });
+    wrapper = shallowMount(EditProfileForm, {
       store,
       localVue,
     });
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   test('has formSchema', () => {
@@ -33,12 +35,14 @@ describe('EditProfileForm.spec.js', () => {
 
   describe('fill with valid data', () => {
     beforeEach(() => {
-      wrapper.vm.data = {
-        nickname: 'fake',
-        email: 'fake@user.com',
-        name: 'New Name',
-        locale: '',
-      };
+      wrapper.setData({
+        data: {
+          nickname: 'fake',
+          email: 'fake@user.com',
+          name: 'New Name',
+          locale: '',
+        },
+      });
     });
 
     test('has data', () => {
@@ -74,12 +78,14 @@ describe('EditProfileForm.spec.js', () => {
 
   describe('fill with invalid data', () => {
     beforeEach(() => {
-      wrapper.vm.data = {
-        nickname: '',
-        email: 'fake@user.com',
-        name: 'New Name',
-        locale: '',
-      };
+      wrapper.setData({
+        data: {
+          nickname: '',
+          email: 'fake@user.com',
+          name: 'New Name',
+          locale: '',
+        },
+      });
     });
 
     test('has data', () => {

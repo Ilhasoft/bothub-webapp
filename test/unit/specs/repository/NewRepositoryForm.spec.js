@@ -1,15 +1,12 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import NewRepositoryForm from '@/components/repository/NewRepositoryForm';
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(Buefy);
 
 describe('NewRepositoryForm.vue', () => {
@@ -19,7 +16,7 @@ describe('NewRepositoryForm.vue', () => {
       Auth: {},
       Repository: {},
     });
-    wrapper = shallow(NewRepositoryForm, { localVue, store });
+    wrapper = shallowMount(NewRepositoryForm, { localVue, store });
   });
 
   test('mount', () => {

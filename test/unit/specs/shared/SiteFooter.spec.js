@@ -1,19 +1,18 @@
 import Buefy from 'buefy';
-
-import { shallow, createLocalVue } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import SiteFooter from '@/components/shared/SiteFooter';
+
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
 
-
 describe('SiteFooter.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(SiteFooter, { localVue });
+    wrapper = shallowMount(SiteFooter, { localVue });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });
