@@ -1,16 +1,15 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
-import Vuex from 'vuex';
 import VueMoment from 'vue-moment';
 import Buefy from 'buefy';
-import { shallow, createLocalVue } from '@vue/test-utils';
-import TranslationItem from '@/components/translate/TranslationItem';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import store from '@/store';
+import TranslationItem from '@/components/translate/TranslationItem';
+
 
 const localVue = createLocalVue();
-localVue.use(Vuex);
 localVue.use(VueMoment);
 localVue.use(Buefy);
 applyFilters(localVue);
@@ -18,7 +17,7 @@ applyFilters(localVue);
 describe('TranslationItem.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(TranslationItem, {
+    wrapper = shallowMount(TranslationItem, {
       localVue,
       store,
       propsData: {
@@ -33,8 +32,8 @@ describe('TranslationItem.vue', () => {
     });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('click to show original', () => {
@@ -62,7 +61,7 @@ describe('TranslationItem.vue', () => {
     });
 
     test('emit deleted', () => {
-      expect(wrapper.emitted('deleted')).toHaveLength(1);
+      expect(wrapper.emitted('deleted')).toBeDefined();
     });
   });
 });
