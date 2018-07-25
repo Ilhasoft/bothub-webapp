@@ -1,6 +1,6 @@
 # Bothub Webapp
 
-[![Build Status](https://travis-ci.org/Ilhasoft/bothub-webapp.svg?branch=master)](https://travis-ci.org/Ilhasoft/bothub-webapp) [![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub-webapp/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub-webapp?branch=master) [![node>=6.9](https://img.shields.io/badge/node-%3E%3D6.0-blue.svg)](https://nodejs.org/en/download/releases/) [![License AGPL-3.0](https://img.shields.io/badge/license-%20AGPL--3.0-yellow.svg)](https://github.com/Ilhasoft/bothub-webapp/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Ilhasoft/bothub-webapp.svg?branch=master)](https://travis-ci.org/Ilhasoft/bothub-webapp) [![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub-webapp/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub-webapp?branch=master) [![node>=6.9](https://img.shields.io/badge/node-%3E%3D6.9-blue.svg)](https://nodejs.org/en/download/releases/) [![License AGPL-3.0](https://img.shields.io/badge/license-%20AGPL--3.0-yellow.svg)](https://github.com/Ilhasoft/bothub-webapp/blob/master/LICENSE)
 
 ## Development
 
