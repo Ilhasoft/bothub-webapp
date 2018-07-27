@@ -29,6 +29,7 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
+@import '~bh/assets/scss/bh.scss';
 
 * {
  box-sizing: border-box;
