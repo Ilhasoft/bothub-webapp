@@ -57,8 +57,14 @@ module.exports = {
         loader: 'style!css!sass'
       },
       {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader',
+        include: [resolve('src/bh')]
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
+        exclude: [resolve('src/bh')],
         options: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')

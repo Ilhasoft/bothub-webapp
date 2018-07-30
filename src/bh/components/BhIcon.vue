@@ -1,19 +1,18 @@
 <template>
   <span
     @click="$emit('click', $event)"
-    :class="classAttr">
-    <img
-      :alt="value"
-      :src="imgSrc" />
-  </span>
+    :class="classAttr"
+    v-html="svg" />
 </template>
 
 <script>
 import CommentQuestion from 'bh/assets/icons/comment-question.svg';
+import PlusCircle from 'bh/assets/icons/plus-circle.svg';
 
 
 const icons = {
   'help-text': CommentQuestion,
+  'plus-circle': PlusCircle,
 };
 
 export default {
@@ -40,14 +39,14 @@ export default {
 
       return classes.join(' ');
     },
-    imgSrc() {
+    svg() {
       return icons[this.value];
     },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .bh {
   &-icon {
     display: inline-block;
@@ -55,12 +54,13 @@ export default {
     height: 1.25rem;
     vertical-align: text-top;
 
-    img {
+    svg {
       display: block;
       width: 100%;
       max-width: 100%;
       height: 100%;
       max-height: 100%;
+      fill: currentColor;
     }
 
     &-small {

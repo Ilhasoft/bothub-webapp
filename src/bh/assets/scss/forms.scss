@@ -16,7 +16,9 @@
   font-weight: $font-weight-lighter;
   line-height: 1rem;
   color: $color-bolder-grey;
+  text-decoration: none;
   outline: none;
+  -webkit-appearance: none;
 
   &-small {
     padding: .25rem;
@@ -52,7 +54,35 @@
 @mixin button() {
   @include form-item();
 
+  font-weight: $font-weight-normal;
+  color: $color-grey;
+  cursor: pointer;
   background-color: white;
-  border: 1px solid transparent;
+  border: 1px solid $color-grey;
   border-radius: $form-components-border-radius;
+
+  &:disabled {
+    color: $color-lighter-grey;
+    cursor: not-allowed;
+    background-color: $color-grey;
+  }
+
+  &-primary {
+    color: $primary-color-inverted;
+    background-color: $primary-color;
+    border: 1px solid transparent;
+  }
+
+  &-rounded {
+    padding: .5rem 1rem;
+    border-radius: 19px;
+  }
+
+  > * {
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
