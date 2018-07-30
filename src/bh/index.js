@@ -3,6 +3,7 @@ import BhField from './components/BhField';
 import BhIcon from './components/BhIcon';
 import BhTooltip from './components/BhTooltip';
 import BhButton from './components/BhButton';
+import BhTextareaInput from './components/BhTextareaInput';
 
 
 const components = [
@@ -11,6 +12,7 @@ const components = [
   BhIcon,
   BhTooltip,
   BhButton,
+  BhTextareaInput,
 ];
 
 export default {

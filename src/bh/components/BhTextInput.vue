@@ -13,10 +13,6 @@
 export default {
   name: 'BhTextInput',
   props: {
-    value: {
-      type: String,
-      default: '',
-    },
     size: {
       type: String,
       default: null,
@@ -29,7 +25,7 @@ export default {
   },
   data() {
     return {
-      val: this.value,
+      val: this.$attrs.value || '',
     };
   },
   computed: {
@@ -40,7 +36,7 @@ export default {
         classes.push(`bh-textinput-${this.size}`);
       }
 
-      return classes.join(' ');
+      return classes;
     },
   },
 };
