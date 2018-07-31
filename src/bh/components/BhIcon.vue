@@ -6,14 +6,8 @@
 </template>
 
 <script>
-import CommentQuestion from 'bh/assets/icons/comment-question.svg';
-import PlusCircle from 'bh/assets/icons/plus-circle.svg';
+import { icons } from '../utils';
 
-
-const icons = {
-  'help-text': CommentQuestion,
-  'plus-circle': PlusCircle,
-};
 
 export default {
   name: 'BhIcon',
@@ -37,7 +31,7 @@ export default {
         classes.push(`bh-icon-${this.size}`);
       }
 
-      return classes.join(' ');
+      return classes;
     },
     svg() {
       return icons[this.value];
@@ -68,9 +62,14 @@ export default {
       height: 1rem;
     }
 
-    &-large {
+    &-medium {
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    &-large {
+      width: 1.75rem;
+      height: 1.75rem;
     }
   }
 }

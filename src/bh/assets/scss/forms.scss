@@ -7,43 +7,82 @@
   }
 }
 
-@mixin form-component() {
-  display: block;
-  width: 100%;
-  height: 2.25rem;
-  min-height: 2.25rem;
-  padding: .5rem;
+@mixin form-component-sizes() {
+  height: $form-component-height-normal;
+  min-height: $form-component-height-normal;
+
+  &-small {
+    height: $form-component-height-small;
+  }
+
+  &-medium {
+    height: $form-component-height-medium;
+  }
+
+  &-large {
+    height: $form-component-height-large;
+  }
+}
+
+@mixin form-component-font() {
   font-family: $font-family;
   font-size: 1rem;
   font-weight: $font-weight-lighter;
   line-height: 1rem;
   color: $color-bolder-grey;
   text-decoration: none;
-  outline: none;
-  -webkit-appearance: none;
+}
+
+@mixin form-component() {
+  @include form-component-sizes();
+  @include form-component-font();
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+
+  input,
+  textarea {
+    @include form-component-font();
+
+    flex-grow: 1;
+    padding: .5rem;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: $color-lighter-grey;
+    }
+  }
 
   &-small {
-    height: 1.5rem;
-    min-height: 1.5rem;
-    padding: .25rem;
-    font-size: .75rem;
-    line-height: .75rem;
+    input,
+    textarea {
+      padding: .25rem;
+      font-size: .75rem;
+      line-height: .75rem;
+    }
   }
 
   &-medium {
-    height: 3rem;
-    min-height: 3rem;
-    padding: .75rem;
-    font-size: 1.25rem;
-    line-height: 1.25rem;
+    input,
+    textarea {
+      padding: .75rem;
+      font-size: 1.25rem;
+      line-height: 1.25rem;
+    }
   }
 
   &-large {
-    height: 4rem;
-    min-height: 4rem;
-    padding: 1rem;
-    font-size: 1.5rem;
-    line-height: 1.5rem;
+    input,
+    textarea {
+      padding: 1rem;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
   }
 }
 
@@ -53,23 +92,44 @@
   background-color: white;
   border: 1px solid $color-lighter-grey;
   border-radius: $form-components-border-radius;
-
-  &::placeholder {
-    color: $color-lighter-grey;
-  }
 }
 
 @mixin textarea() {
   @include form-component();
 
-  overflow: hidden;
-  resize: none;
+  height: auto;
   background-color: white;
   border: 1px solid $color-lighter-grey;
   border-radius: $form-components-border-radius;
 
-  &::placeholder {
-    color: $color-lighter-grey;
+  textarea {
+    min-height: calc(#{$form-component-height-normal} - 2px);
+    overflow: hidden;
+    resize: none;
+  }
+
+  &-small {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-small} - 2px);
+    }
+  }
+
+  &-medium {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-medium} - 2px);
+    }
+  }
+
+  &-large {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-large} - 2px);
+    }
   }
 }
 
@@ -82,6 +142,7 @@
   background-color: white;
   border: 1px solid $color-grey;
   border-radius: $form-components-border-radius;
+  outline: none;
 
   &:disabled {
     color: $color-lighter-grey;
@@ -92,6 +153,12 @@
   &-primary {
     color: $primary-color-inverted;
     background-color: $primary-color;
+    border: 1px solid transparent;
+  }
+
+  &-secondary {
+    color: $secondary-color-inverted;
+    background-color: $secondary-color;
     border: 1px solid transparent;
   }
 

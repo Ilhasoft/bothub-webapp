@@ -1,10 +1,11 @@
 <template>
   <div class="bh-input-wrapper">
-    <textarea
-      ref="textarea"
-      v-bind="$attrs"
-      v-model="val"
-      :class="inputClassAttr" />
+    <div :class="inputClassAttr">
+      <textarea
+        ref="textarea"
+        v-bind="$attrs"
+        v-model="val" />
+    </div>
   </div>
 </template>
 
@@ -27,9 +28,20 @@ export default {
     updateTextareaHeight() {
       const { textarea } = this.$refs;
       const offset = textarea.offsetHeight - textarea.clientHeight;
-      textarea.style.height = textarea.style.minHeight;
+      const computedStyle = window.getComputedStyle(textarea);
+      textarea.style.height = computedStyle.getPropertyValue('min-height');
       textarea.style.height = `${offset + textarea.scrollHeight}px`;
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~bh/assets/scss/forms.scss';
+
+.bh {
+  &-textinput {
+    @include textarea();
+  }
+}
+</style>

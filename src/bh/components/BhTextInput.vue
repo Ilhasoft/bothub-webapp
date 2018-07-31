@@ -1,11 +1,12 @@
 <template>
   <div class="bh-input-wrapper">
-    <input
-      ref="input"
-      type="text"
-      v-bind="$attrs"
-      v-model="val"
-      :class="inputClassAttr" />
+    <div :class="inputClassAttr">
+      <input
+        ref="input"
+        type="text"
+        v-bind="$attrs"
+        v-model="val" />
+    </div>
   </div>
 </template>
 
@@ -13,7 +14,15 @@
 export default {
   name: 'BhTextInput',
   props: {
+    value: {
+      type: String,
+      default: '',
+    },
     size: {
+      type: String,
+      default: null,
+    },
+    prependText: {
       type: String,
       default: null,
     },
@@ -25,7 +34,7 @@ export default {
   },
   data() {
     return {
-      val: this.$attrs.value || '',
+      val: this.value,
     };
   },
   computed: {

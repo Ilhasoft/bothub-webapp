@@ -2,7 +2,8 @@
   <button
     :disabled="disabled"
     :type="type"
-    :class="classAttr">
+    :class="classAttr"
+    @click="$emit('click', $event)">
     <slot />
   </button>
 </template>
@@ -19,9 +20,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    secondary: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
-      default: 'submit',
+      default: 'button',
     },
     size: {
       type: String,
@@ -40,6 +45,10 @@ export default {
         classes.push('bh-button-primary');
       }
 
+      if (this.secondary) {
+        classes.push('bh-button-secondary');
+      }
+
       if (this.size) {
         classes.push(`bh-button-${this.size}`);
       }
@@ -48,7 +57,7 @@ export default {
         classes.push('bh-button-rounded');
       }
 
-      return classes.join(' ');
+      return classes;
     },
   },
 };
