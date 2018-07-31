@@ -37,17 +37,19 @@
   @include form-component-sizes();
   @include form-component-font();
 
+  $gap: 4px;
+
   display: flex;
   flex-wrap: nowrap;
-  align-items: stretch;
+  align-items: center;
   justify-content: space-between;
 
-  input,
-  textarea {
+  > * {
     @include form-component-font();
 
     flex-grow: 1;
     padding: .5rem;
+    margin-right: 4px;
     background: none;
     border: none;
     outline: none;
@@ -56,11 +58,14 @@
     &::placeholder {
       color: $color-lighter-grey;
     }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &-small {
-    input,
-    textarea {
+    > * { /* stylelint-disable-line no-descending-specificity */
       padding: .25rem;
       font-size: .75rem;
       line-height: .75rem;
@@ -68,8 +73,7 @@
   }
 
   &-medium {
-    input,
-    textarea {
+    > * { /* stylelint-disable-line no-descending-specificity */
       padding: .75rem;
       font-size: 1.25rem;
       line-height: 1.25rem;
@@ -77,8 +81,7 @@
   }
 
   &-large {
-    input,
-    textarea {
+    > * { /* stylelint-disable-line no-descending-specificity */
       padding: 1rem;
       font-size: 1.5rem;
       line-height: 1.5rem;
@@ -92,6 +95,11 @@
   background-color: white;
   border: 1px solid $color-lighter-grey;
   border-radius: $form-components-border-radius;
+
+  &-prependtext {
+    height: 100%;
+    background-color: $color-lighter-grey;
+  }
 }
 
 @mixin textarea() {
@@ -163,15 +171,8 @@
   }
 
   &-rounded {
-    padding: .5rem 1rem;
-    border-radius: 19px;
-  }
-
-  > * {
-    margin-right: 8px;
-
-    &:last-child {
-      margin-right: 0;
-    }
+    padding-right: .5rem;
+    padding-left: .5rem;
+    border-radius: 18px;
   }
 }

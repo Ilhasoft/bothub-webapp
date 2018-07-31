@@ -1,6 +1,9 @@
 <template>
   <div class="bh-input-wrapper">
     <div :class="inputClassAttr">
+      <span
+        class="bh-textinput-prependtext"
+        v-if="prependText">{{ prependText }}</span>
       <input
         ref="input"
         type="text"
