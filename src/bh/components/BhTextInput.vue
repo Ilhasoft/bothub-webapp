@@ -9,6 +9,7 @@
         type="text"
         v-bind="$attrs"
         v-model="val" />
+      <slot name="append"></slot>
     </div>
   </div>
 </template>
