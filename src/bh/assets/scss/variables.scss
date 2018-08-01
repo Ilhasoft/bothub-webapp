@@ -7,14 +7,21 @@ $font-weight-medium: 500;
 $font-weight-lighter: 300;
 $font-weight-bolder: 700;
 
+// Sizes
+
+$height-normal: 2.25rem;
+$height-small: 1.5rem;
+$height-medium: 3rem;
+$height-large: 4rem;
+
 
 // Forms
 
 $form-components-border-radius: 4px;
-$form-component-height-normal: 2.25rem;
-$form-component-height-small: 1.5rem;
-$form-component-height-medium: 3rem;
-$form-component-height-large: 4rem;
+$form-component-height-normal: $height-normal;
+$form-component-height-small: $height-small;
+$form-component-height-medium: $height-medium;
+$form-component-height-large: $height-large;
 
 
 // z-index
