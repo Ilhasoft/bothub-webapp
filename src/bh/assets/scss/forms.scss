@@ -1,5 +1,6 @@
 @import '~./colors.scss';
 @import '~./variables.scss';
+@import '~./typography.scss';
 
 .bh {
   &-input-wrapper {
@@ -24,8 +25,9 @@
   }
 }
 
-@mixin form-component-font() {
-  font-family: $font-family;
+@mixin form-component-typography() {
+  @include typography();
+
   font-size: 1rem;
   font-weight: $font-weight-lighter;
   line-height: 1rem;
@@ -35,7 +37,7 @@
 
 @mixin form-component() {
   @include form-component-sizes();
-  @include form-component-font();
+  @include form-component-typography();
 
   $gap: 4px;
 
@@ -45,7 +47,7 @@
   justify-content: space-between;
 
   > * {
-    @include form-component-font();
+    @include form-component-typography();
 
     flex-grow: 1;
     padding: .5rem;
