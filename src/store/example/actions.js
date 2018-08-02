@@ -1,4 +1,6 @@
 import example from '@/api/example';
+import entity from '@/api/entity';
+
 
 export default {
   async newExample(store, {
@@ -25,6 +27,10 @@ export default {
   },
   async getExample(store, { id }) {
     const response = await example.get(id);
+    return response;
+  },
+  async getEntities(store, { repositoryUuid, value }) {
+    const response = await entity.search(repositoryUuid, { value });
     return response;
   },
 };

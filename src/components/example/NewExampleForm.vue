@@ -1,143 +1,217 @@
 <template>
-  <form @submit.prevent="onSubmit()">
-    <messages :msgs="nonFieldsErrors" />
-    <example-with-entities-input
-      v-model="data.textAndEntities"
-      :errors="errors"
-      :extraEntitiesList="extraEntitiesList"
-      :allEntities="repository.entities" />
-    <div class="field level">
-      <div class="level-left">
-        <div class="level-item">
-          <div>
-            <b-field
-              horizontal
-              label="Intent"
-              :type="errors.intent && 'is-danger'"
-              :message="errors.intent">
-              <intent-input
-                v-model="data.intent"
-                :intents="extraIntentsList" />
-            </b-field>
+  <div>
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <form @submit.prevent="addExample()">
+          <div class="columns is-variable is-2">
+            <div class="column is-three-fifths">
+              <bh-field label>
+                <example-with-highlighted-text-input
+                  ref="textInput"
+                  v-model="text"
+                  size="medium"
+                  placeholder="Add a sentence"
+                  :entities="entities"
+                  @textSelected="setTextSelected($event)" />
+              </bh-field>
+            </div>
+            <div class="column">
+              <bh-field
+                label="Intent"
+                helpText="When your bot receives a message, your bot can use a
+                          recognizer to examine the message and determine intent.">
+                <bh-text-input
+                  v-model="intent"
+                  size="medium"
+                  placeholder="Intent" />
+              </bh-field>
+            </div>
+            <div class="column is-narrow">
+              <bh-field label>
+                <bh-button
+                  primary
+                  type="submit"
+                  :disabled="!isValid"
+                  :tooltipHover="!isValid ? validationErrors : null"
+                  size="medium">Submit</bh-button>
+              </bh-field>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="level-right">
-        <div class="level-item">
-          <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting">Submit example</button>
-        </div>
+        </form>
       </div>
     </div>
-  </form>
+    <div
+      v-if="entities.length > 0"
+      class="columns is-variable is-1">
+      <div class="column">
+        <entities-badges
+          editLabelEnable
+          :entities="preparedEntities" />
+      </div>
+    </div>
+    <div class="columns is-variable is-1">
+      <div class="column is-narrow">
+        <new-entity-input
+          :repository="repository"
+          :text="text"
+          :textSelected="textSelected"
+          :labels="labels"
+          @newEntity="addNewEntity($event)" />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Messages from '@/components/shared/Messages';
-import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
-import IntentInput from '@/components/inputs/IntentInput';
+import ExampleWithHighlightedTextInput from '@/components/inputs/ExampleWithHighlightedTextInput';
+import NewEntityInput from '@/components/inputs/NewEntityInput';
+import EntitiesBadges from '@/components/inputs/EntitiesBadges';
 
 
 const components = {
-  ExampleWithEntitiesInput,
-  Messages,
-  IntentInput,
+  ExampleWithHighlightedTextInput,
+  NewEntityInput,
+  EntitiesBadges,
 };
 
 export default {
   name: 'NewExampleForm',
   components,
   props: {
-    extraEntitiesList: {
-      type: Array,
-      default: () => ([]),
-    },
-    extraIntentsList: {
-      type: Array,
-      default: () => ([]),
-    },
-    repository: {
-      type: [String, Object],
-      required: true,
+    repository: [Object, String],
+    required: true,
+  },
+  watch: {
+    text(text, oldText) {
+      this.validateEntities(text, oldText);
     },
   },
   data() {
     return {
-      data: {
-        textAndEntities: {
-          text: '',
-          entities: [],
-        },
-        intent: '',
-      },
-      selected: { start: 0, end: 0 },
-      submitting: false,
-      errors: {},
+      textSelected: null,
+      text: '',
+      intent: '',
+      entities: [],
     };
   },
   computed: {
-    nonFieldsErrors() {
-      /* istanbul ignore next */
-      return (this.errors.non_field_errors || [])
-        .map(text => ({
-          class: 'error',
-          text,
+    validationErrors() {
+      const errors = [];
+
+      if (!this.text) {
+        errors.push('You need type a text to sentence');
+      }
+
+      if (!this.intent && this.entities.length === 0) {
+        errors.push('Set a intent or one entity');
+      }
+
+      return errors;
+    },
+    isValid() {
+      return this.validationErrors.length === 0;
+    },
+    labels() {
+      return this.entities.reduce((current, { entity, label, pristineLabel }) => {
+        if (label || pristineLabel) {
+          return Object.assign(current, { [entity]: label || pristineLabel });
+        }
+        return current;
+      }, {});
+    },
+    preparedEntities() {
+      return this.entities
+        .map(({
+          label,
+          pristineLabel,
+          entity,
+          ...others
+        }) => ({
+          label: this.labels[entity],
+          entity,
+          ...others,
         }));
     },
   },
   methods: {
-    ...mapActions([
-      'newExample',
-    ]),
-    updateSelected(value) {
-      /* istanbul ignore next */
-      this.selected = value;
+    setTextSelected(value) {
+      this.textSelected = value;
     },
-    async onSubmit() {
-      this.errors = {};
-      this.submitting = true;
+    addNewEntity(entity) {
+      this.entities.push(entity);
+      this.$refs.textInput.clearSelected();
+    },
+    validateEntities(text, oldText) {
+      /*
+        Entity follow text,
+        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components/TextEditor.js
+      */
+      this.entities.forEach((entity, i) => {
+        const oldEntityText = oldText.substring(entity.start, entity.end);
 
-      try {
-        await this.newExample({
-          repository: this.repository.uuid || this.repository,
-          intent: this.data.intent,
-          ...this.data.textAndEntities,
-        });
-        this.data = {
-          text: '',
-          entities: [],
-          intent: '',
+        const findClosestStart = (lastMatch) => {
+          if (lastMatch === undefined) {
+            const index = text.indexOf(oldEntityText);
+            return index === -1
+              ? index
+              : findClosestStart(index);
+          }
+
+          const from = lastMatch + oldEntityText.length;
+          const index = text.indexOf(oldEntityText, from);
+
+          if (index === -1) {
+            return lastMatch;
+          }
+
+          const prevDiff = Math.abs(entity.start - lastMatch);
+          const nextDiff = Math.abs(entity.start - index);
+
+          return prevDiff < nextDiff
+            ? lastMatch
+            : findClosestStart(index);
         };
 
-        this.submitting = false;
-        this.$emit('created');
-        return true;
-      } catch (error) {
-        const data = error.response && error.response.data;
-        if (data) {
-          this.errors = data;
+        const start = findClosestStart();
+        if (start === -1) {
+          this.entities[i] = false;
+          return false;
         }
-        this.submitting = false;
-      }
 
-      return false;
+        this.entities[i].start = start;
+        this.entities[i].end = start + oldEntityText.length;
+        return true;
+      });
+      this.entities = this.entities.filter(value => !!value);
     },
+    addExample() {},
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-
 .inputs {
-  background-color: $grey-lighter;
-  border-radius: 3px 3px 4px 4px;
+  display: flex;
 
-  &-entities {
-    padding: 8px;
+  &-item {
+    margin-right: 8px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .text-input {
+    flex-grow: 3;
+  }
+
+  .intent-input {
+    flex-grow: 1;
+  }
+
+  .submit-btn {
+    min-height: 10px;
+    background-color: green;
   }
 }
 </style>

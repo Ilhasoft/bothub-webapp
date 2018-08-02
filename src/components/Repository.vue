@@ -469,7 +469,7 @@ export default {
   data() {
     return {
       repository: null,
-      activeTab: 0,
+      activeTab: 1,
       hasError: false,
       errorDetail: null,
       training: false,

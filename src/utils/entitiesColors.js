@@ -14,6 +14,6 @@ export const colorsList = [
 ];
 export const getEntityColor = (entity, entities, flexibleEntities) => {
   const entitiesList = getEntitiesList(entities, flexibleEntities);
-  const i = entitiesList.indexOf(entity) % colorsList.length;
+  const i = entitiesList.indexOf(entity.entity || entity) % colorsList.length;
   return colorsList[i];
 };
