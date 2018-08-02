@@ -89,7 +89,7 @@ export default {
     }
 
     &-primary {
-      color: $primary-color;
+      color: $color-primary;
     }
 
     svg {
