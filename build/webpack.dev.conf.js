@@ -67,6 +67,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       }
     ]),
     new StyleLintPlugin({
+      syntax: 'scss',
       files: [
         'src/bh/**/*.vue',
         'src/bh/**/*.scss',
