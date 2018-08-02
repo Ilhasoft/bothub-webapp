@@ -71,7 +71,6 @@ export default {
     width: $form-component-height-normal;
     padding: 0;
     margin: 0;
-    color: $color-grey;
     cursor: pointer;
     background: none;
     border: none;
