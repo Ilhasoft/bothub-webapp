@@ -12,12 +12,12 @@
       class="bh-button-tooltip"
       open
       direction="down">
-        <span v-if="(tooltipHover instanceof String)">{{ tooltipHover }}</span>
-        <span v-else>
+        <span v-if="(tooltipHover instanceof Array)">
           <div
             v-for="(text, i) in tooltipHover"
             :key="i">{{ text }}</div>
         </span>
+        <span v-else>{{ tooltipHover }}</span>
       </bh-tooltip>
   </div>
 </template>
