@@ -1,11 +1,25 @@
 <template>
-  <button
-    :disabled="disabled"
-    :type="type"
-    :class="classAttr"
-    @click="$emit('click', $event)">
-    <slot />
-  </button>
+  <div class="bh-button-wrapper">
+    <button
+      :disabled="disabled"
+      :type="type"
+      :class="classAttr"
+      @click="$emit('click', $event)">
+      <slot />
+    </button>
+    <bh-tooltip
+      v-if="tooltipHover"
+      class="bh-button-tooltip"
+      open
+      direction="down">
+        <span v-if="(tooltipHover instanceof String)">{{ tooltipHover }}</span>
+        <span v-else>
+          <div
+            v-for="(text, i) in tooltipHover"
+            :key="i">{{ text }}</div>
+        </span>
+      </bh-tooltip>
+  </div>
 </template>
 
 <script>
@@ -35,6 +49,10 @@ export default {
     rounded: {
       type: Boolean,
       default: false,
+    },
+    tooltipHover: {
+      type: [String, Array],
+      default: null,
     },
   },
   computed: {
@@ -68,7 +86,28 @@ export default {
 
 .bh {
   &-button {
+    $parent: &;
+
     @include button();
+
+    &-tooltip {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      display: none;
+      width: max-content;
+      transform: translate(-50%, calc(-100% - 8px));
+    }
+
+    &-wrapper {
+      position: relative;
+
+      &:hover {
+        #{$parent}-tooltip {
+          display: block;
+        }
+      }
+    }
   }
 }
 </style>
