@@ -133,6 +133,26 @@ export default {
         }))
         .sort((a, b) => (a.start - b.start));
     },
+    data() {
+      const { text, intent, entities } = this;
+
+      return {
+        text,
+        intent,
+        entities: entities
+          .map(({
+            start,
+            end,
+            entity,
+            label,
+          }) => ({
+            start,
+            end,
+            entity,
+            label,
+          })),
+      };
+    },
   },
   methods: {
     setTextSelected(value) {
