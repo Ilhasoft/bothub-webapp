@@ -17,8 +17,8 @@
           v-if="editEntityEnable"
           value="dots-horizontal"
           size="small" />
-        <bh-dropdown-item>Edit</bh-dropdown-item>
-        <bh-dropdown-item>Remove</bh-dropdown-item>
+        <bh-dropdown-item @click="editEntity(entity)">Edit</bh-dropdown-item>
+        <bh-dropdown-item @click="removeEntity(entity)">Remove</bh-dropdown-item>
       </bh-dropdown>
     </bh-badge>
   </div>
@@ -57,6 +57,12 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
+    },
+    editEntity(entity) {
+      this.$emit('edit', entity);
+    },
+    removeEntity(entity) {
+      this.$emit('remove', entity);
     },
   },
 };

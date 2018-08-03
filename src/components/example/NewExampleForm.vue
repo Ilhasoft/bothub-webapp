@@ -46,7 +46,8 @@
       <div class="column">
         <entities-badges-input
           editEntityEnable
-          :entities="preparedEntities" />
+          :entities="preparedEntities"
+          @remove="removeEntity($event)" />
       </div>
     </div>
     <div class="columns is-variable is-1">
@@ -126,11 +127,16 @@ export default {
           pristineLabel,
           entity,
           ...others
-        }) => ({
-          label: this.labels[entity],
-          entity,
-          ...others,
-        }))
+        }) => (this.labels[entity]
+          ? {
+            label: this.labels[entity],
+            entity,
+            ...others,
+          }
+          : {
+            entity,
+            ...others,
+          }))
         .sort((a, b) => (a.start - b.start));
     },
     data() {
@@ -145,12 +151,18 @@ export default {
             end,
             entity,
             label,
-          }) => ({
-            start,
-            end,
-            entity,
-            label,
-          })),
+          }) => (label
+            ? {
+              start,
+              end,
+              entity,
+              label,
+            }
+            : {
+              start,
+              end,
+              entity,
+            })),
       };
     },
   },
@@ -204,6 +216,26 @@ export default {
         return true;
       });
       this.entities = this.entities.filter(value => !!value);
+    },
+    findEntityIndex(entity) {
+      return this.entities.reduce((currentIndex, e, index) => {
+        if (e.start === entity.start
+            && e.end === entity.end
+            && e.entity === entity.entity) {
+          if (e.label || entity.label) {
+            if (e.label !== entity.label) {
+              return currentIndex;
+            }
+          }
+
+          return index;
+        }
+        return currentIndex;
+      }, -1);
+    },
+    removeEntity(entity) {
+      const entityIndex = this.findEntityIndex(entity);
+      this.entities.splice(entityIndex, 1);
     },
     addExample() {},
   },
