@@ -7,6 +7,8 @@ import BhTextareaInput from './components/BhTextareaInput';
 import BhIconButton from './components/BhIconButton';
 import BhLoading from './components/BhLoading';
 import BhBadge from './components/BhBadge';
+import BhDropdown from './components/BhDropdown';
+import BhDropdownItem from './components/BhDropdownItem';
 
 
 const components = [
@@ -19,6 +21,8 @@ const components = [
   BhIconButton,
   BhLoading,
   BhBadge,
+  BhDropdown,
+  BhDropdownItem,
 ];
 
 export default {

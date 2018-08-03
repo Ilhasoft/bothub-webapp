@@ -52,9 +52,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '~bh/assets/scss/variables.scss';
+@import '~bh/assets/scss/typography.scss';
 
 .bh {
   &-tooltip {
+    @include typography();
+
     $background-color: black;
 
     z-index: $tooltip-z-index;
