@@ -122,8 +122,7 @@ export default {
       this.cancelCustomizeLabel();
       const label = this.labels[value] || null;
       if (label) {
-        this.pristineLabel = label;
-        this.currentLabel = this.pristineLabel;
+        this.currentLabel = label;
         this.searchingLabel = false;
       } else {
         this.setTimeoutId = setTimeout(
