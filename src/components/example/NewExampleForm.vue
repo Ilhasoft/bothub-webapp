@@ -11,7 +11,7 @@
                   v-model="text"
                   size="medium"
                   placeholder="Add a sentence"
-                  :entities="entities"
+                  :entities="preparedEntities"
                   @textSelected="setTextSelected($event)" />
               </bh-field>
             </div>
@@ -44,8 +44,8 @@
       v-if="entities.length > 0"
       class="columns is-variable is-1">
       <div class="column">
-        <entities-badges
-          editLabelEnable
+        <entities-badges-input
+          editEntityEnable
           :entities="preparedEntities" />
       </div>
     </div>
@@ -65,13 +65,13 @@
 <script>
 import ExampleWithHighlightedTextInput from '@/components/inputs/ExampleWithHighlightedTextInput';
 import NewEntityInput from '@/components/inputs/NewEntityInput';
-import EntitiesBadges from '@/components/inputs/EntitiesBadges';
+import EntitiesBadgesInput from '@/components/inputs/EntitiesBadgesInput';
 
 
 const components = {
   ExampleWithHighlightedTextInput,
   NewEntityInput,
-  EntitiesBadges,
+  EntitiesBadgesInput,
 };
 
 export default {
@@ -130,7 +130,8 @@ export default {
           label: this.labels[entity],
           entity,
           ...others,
-        }));
+        }))
+        .sort((a, b) => (a.start - b.start));
     },
   },
   methods: {

@@ -11,10 +11,15 @@
         <span><strong>{{ entity.entity }}</strong></span>
         <span v-if="entity.label">is <strong>{{ entity.label }}</strong></span>
       </span>
-      <bh-icon-button
-        v-if="editLabelEnable"
-        value="dots-horizontal"
-        size="small" />
+      <bh-dropdown>
+        <bh-icon-button
+          slot="trigger"
+          v-if="editEntityEnable"
+          value="dots-horizontal"
+          size="small" />
+        <bh-dropdown-item>Edit</bh-dropdown-item>
+        <bh-dropdown-item>Remove</bh-dropdown-item>
+      </bh-dropdown>
     </bh-badge>
   </div>
 </template>
@@ -34,10 +39,15 @@ export default {
       type: Array,
       default: () => ([]),
     },
-    editLabelEnable: {
+    editEntityEnable: {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      editEntityDropDown: true,
+    };
   },
   methods: {
     getEntityClass(entity) {
@@ -54,6 +64,7 @@ export default {
 
 <style lang="scss" scoped>
 .entities-badges {
+  position: relative;
   margin: -4px;
 
   &__badge {
