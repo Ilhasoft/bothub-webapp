@@ -115,12 +115,16 @@ export default {
       deep: true,
     },
     entity(value) {
-      this.searchingLabel = true;
-      this.currentLabel = null;
-      this.pristineLabel = null;
       this.clearTimeout();
-      this.cancelCustomizeLabel();
-      const label = this.labels[value] || null;
+      this.searchingLabel = true;
+      if (!this.editMode) {
+        this.currentLabel = null;
+        this.pristineLabel = null;
+        this.cancelCustomizeLabel();
+      } else {
+        this.editMode = false;
+      }
+      const label = this.currentLabel || this.labels[value] || null;
       if (label) {
         this.currentLabel = label;
         this.searchingLabel = false;
@@ -148,6 +152,7 @@ export default {
   data() {
     return {
       addingMode: false,
+      editMode: false,
       entity: '',
       currentLabel: null,
       pristineLabel: null,
@@ -178,6 +183,7 @@ export default {
     },
     disableAddingMode() {
       this.addingMode = false;
+      this.editMode = false;
       this.entity = null;
     },
     addEntity() {
@@ -210,6 +216,16 @@ export default {
       if (this.setTimeoutId) {
         clearTimeout(this.setTimeoutId);
         this.setTimeoutId = null;
+      }
+    },
+    fillEdit(entity, label, pristineLabel) {
+      this.editMode = true;
+      this.addingMode = true;
+      this.currentLabel = label;
+      this.entity = entity;
+      if (this.currentLabel) {
+        this.pristineLabel = pristineLabel;
+        this.hasCustomizedLabel = true;
       }
     },
   },

@@ -88,8 +88,8 @@ export default {
     },
   },
   methods: {
-    emitTextSelected() {
-      const { selectionStart, selectionEnd } = this.$refs.textarea;
+    emitTextSelected(value = null) {
+      const { selectionStart, selectionEnd } = value || this.$refs.textarea;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
       this.$emit(

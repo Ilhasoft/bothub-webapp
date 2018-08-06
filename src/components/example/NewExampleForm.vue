@@ -47,12 +47,14 @@
         <entities-badges-input
           editEntityEnable
           :entities="preparedEntities"
-          @remove="removeEntity($event)" />
+          @remove="removeEntity($event)"
+          @edit="editEntity($event)" />
       </div>
     </div>
     <div class="columns is-variable is-1">
       <div class="column is-narrow">
         <new-entity-input
+          ref="newEntityInput"
           :repository="repository"
           :text="text"
           :textSelected="textSelected"
@@ -236,6 +238,20 @@ export default {
     removeEntity(entity) {
       const entityIndex = this.findEntityIndex(entity);
       this.entities.splice(entityIndex, 1);
+    },
+    async editEntity(entity) {
+      this.removeEntity(entity);
+      await this.$nextTick();
+      this.$refs.textInput.emitTextSelected({
+        selectionStart: entity.start,
+        selectionEnd: entity.end,
+      });
+      await this.$nextTick();
+      this.$refs.newEntityInput.fillEdit(
+        entity.entity,
+        entity.label,
+        entity.pristineLabel,
+      );
     },
     addExample() {},
   },
