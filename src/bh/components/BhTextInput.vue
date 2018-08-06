@@ -30,10 +30,16 @@ export default {
       type: String,
       default: null,
     },
+    formatters: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   watch: {
     val(value) {
-      this.$emit('input', value);
+      const out = this.formatters.reduce((c, f) => f(c), value);
+      this.val = out;
+      this.$emit('input', out);
     },
   },
   data() {

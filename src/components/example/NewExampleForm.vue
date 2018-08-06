@@ -6,12 +6,13 @@
           <div class="columns is-variable is-2">
             <div class="column is-three-fifths">
               <bh-field label>
-                <example-with-highlighted-text-input
+                <example-text-with-highlighted-entities-input
                   ref="textInput"
                   v-model="text"
                   size="medium"
                   placeholder="Add a sentence"
                   :entities="preparedEntities"
+                  :formatters="textareaFormatters"
                   @textSelected="setTextSelected($event)" />
               </bh-field>
             </div>
@@ -66,13 +67,15 @@
 </template>
 
 <script>
-import ExampleWithHighlightedTextInput from '@/components/inputs/ExampleWithHighlightedTextInput';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import NewEntityInput from '@/components/inputs/NewEntityInput';
 import EntitiesBadgesInput from '@/components/inputs/EntitiesBadgesInput';
 
+import { formatters } from 'bh/utils';
+
 
 const components = {
-  ExampleWithHighlightedTextInput,
+  ExampleTextWithHighlightedEntitiesInput,
   NewEntityInput,
   EntitiesBadgesInput,
 };
@@ -140,6 +143,13 @@ export default {
             ...others,
           }))
         .sort((a, b) => (a.start - b.start));
+    },
+    textareaFormatters() {
+      return [
+        formatters.trimStart(),
+        formatters.removeBreakLines(),
+        formatters.removeMultipleWhiteSpaces(),
+      ];
     },
     data() {
       const { text, intent, entities } = this;

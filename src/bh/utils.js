@@ -13,6 +13,8 @@ export const icons = {
   'dots-horizontal': DotsHorizontal,
 };
 
-export default {
-  icons,
+export const formatters = {
+  trimStart: () => v => (v.trimStart()),
+  removeBreakLines: () => v => (v.replace('\n', '')),
+  removeMultipleWhiteSpaces: () => v => (v.replace(/\s{2,}/g, ' ')),
 };
