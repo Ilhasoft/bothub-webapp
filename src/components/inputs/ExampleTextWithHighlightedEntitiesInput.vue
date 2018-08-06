@@ -31,7 +31,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 
 
 export default {
-  name: 'ExampleWithHighlightedTextInput',
+  name: 'ExampleTextWithHighlightedEntitiesInput',
   extends: BhTextareaInput,
   props: {
     entities: {
