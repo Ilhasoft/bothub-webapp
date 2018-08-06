@@ -13,7 +13,11 @@
                   placeholder="Add a sentence"
                   :entities="preparedEntities"
                   :formatters="textareaFormatters"
-                  @textSelected="setTextSelected($event)" />
+                  @textSelected="setTextSelected($event)">
+                  <language-append-select-input
+                    slot="append"
+                    v-model="language" />
+                </example-text-with-highlighted-entities-input>
               </bh-field>
             </div>
             <div class="column">
@@ -70,6 +74,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import NewEntityInput from '@/components/inputs/NewEntityInput';
 import EntitiesBadgesInput from '@/components/inputs/EntitiesBadgesInput';
+import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { formatters } from 'bh/utils';
 
@@ -78,6 +83,7 @@ const components = {
   ExampleTextWithHighlightedEntitiesInput,
   NewEntityInput,
   EntitiesBadgesInput,
+  LanguageAppendSelectInput,
 };
 
 export default {
@@ -96,6 +102,7 @@ export default {
     return {
       textSelected: null,
       text: '',
+      language: this.repository.language,
       intent: '',
       entities: [],
     };
@@ -152,10 +159,16 @@ export default {
       ];
     },
     data() {
-      const { text, intent, entities } = this;
+      const {
+        text,
+        language,
+        intent,
+        entities,
+      } = this;
 
       return {
         text,
+        language,
         intent,
         entities: entities
           .map(({
