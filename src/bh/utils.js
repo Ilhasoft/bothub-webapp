@@ -4,6 +4,14 @@ import CloseCircle from 'bh/assets/icons/close-circle.svg';
 import Close from 'bh/assets/icons/close.svg';
 import DotsHorizontal from 'bh/assets/icons/dots-horizontal.svg';
 import MenuDown from 'bh/assets/icons/menu-down.svg';
+import FlagBr from 'bh/assets/icons/flag-br.svg';
+import FlagDe from 'bh/assets/icons/flag-de.svg';
+import FlagEs from 'bh/assets/icons/flag-es.svg';
+import FlagFr from 'bh/assets/icons/flag-fr.svg';
+import FlagIt from 'bh/assets/icons/flag-it.svg';
+import FlagNl from 'bh/assets/icons/flag-nl.svg';
+import FlagPt from 'bh/assets/icons/flag-pt.svg';
+import FlagUs from 'bh/assets/icons/flag-us.svg';
 
 
 export const icons = {
@@ -13,6 +21,14 @@ export const icons = {
   close: Close,
   'dots-horizontal': DotsHorizontal,
   'menu-down': MenuDown,
+  'flag-br': FlagBr,
+  'flag-de': FlagDe,
+  'flag-es': FlagEs,
+  'flag-fr': FlagFr,
+  'flag-it': FlagIt,
+  'flag-nl': FlagNl,
+  'flag-pt': FlagPt,
+  'flag-us': FlagUs,
 };
 
 export const formatters = {
