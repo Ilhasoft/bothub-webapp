@@ -55,7 +55,6 @@ export default {
       z-index: $dropdown-z-index;
       width: max-content;
       min-width: 100px;
-      max-width: 200px;
       padding: .5rem 0;
       background-color: white;
       border-radius: 4px;

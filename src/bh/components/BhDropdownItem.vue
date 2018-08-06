@@ -20,13 +20,21 @@ export default {
   &-dropdown-item {
     @include typography();
 
-    display: block;
+    display: flex;
     padding: .5rem .75rem;
     cursor: pointer;
 
     &:hover {
       color: $color-primary;
       background-color: $color-lighter-grey;
+    }
+
+    & > * {
+      margin-right: 8px;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
