@@ -1,16 +1,17 @@
 <template>
-  <div class="bh-input-wrapper example-w-highlighted-text">
+  <div class="bh-input-wrapper example-txt-w-highlighted-entities">
     <div
       v-for="(entity, i) in entitiesBlocks"
       :key="i"
       :class="entityClassAttr">
-      <span class="example-w-highlighted-text-entity-before">{{ entity.before }}</span><!--
-      --><span :class="[
+      <span :class="[
+        'example-txt-w-highlighted-entities__entity__before',
+      ]">{{ entity.before }}</span><span :class="[
         entity.colorClass,
-        'example-w-highlighted-text-entity-text'
+        'example-txt-w-highlighted-entities__entity__text'
       ]">{{ entity.text }}</span>
     </div>
-    <div class="example-w-highlighted-text-input">
+    <div class="example-txt-w-highlighted-entities__input">
       <div :class="inputClassAttr">
         <textarea
           ref="textarea"
@@ -19,6 +20,7 @@
           @select="emitTextSelected()"
           @click="emitTextSelected()"
           @keyup="emitTextSelected()" />
+        <slot name="append" />
       </div>
     </div>
   </div>
@@ -27,12 +29,19 @@
 <script>
 import BhTextareaInput from 'bh/components/BhTextareaInput';
 
+import Flag from '@/components/shared/Flag';
+
 import { getEntityColor } from '@/utils/entitiesColors';
 
+
+const components = {
+  Flag,
+};
 
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   extends: BhTextareaInput,
+  components,
   props: {
     entities: {
       type: Array,
@@ -51,10 +60,10 @@ export default {
   },
   computed: {
     entityClassAttr() {
-      const classes = ['example-w-highlighted-text-entity'];
+      const classes = ['example-txt-w-highlighted-entities__entity'];
 
       if (this.size) {
-        classes.push(`example-w-highlighted-text-entity-${this.size}`);
+        classes.push(`example-txt-w-highlighted-entities__entity--${this.size}`);
       }
 
       return classes;
@@ -123,11 +132,11 @@ export default {
   }
 }
 
-.example-w-highlighted-text {
+.example-txt-w-highlighted-entities {
   background-color: white;
   border-radius: $form-components-border-radius;
 
-  &-entity {
+  &__entity {
     @include form-component-typography();
 
     position: absolute;
@@ -139,39 +148,43 @@ export default {
     background: none;
     border-color: transparent;
 
-    &-before,
-    &-text {
+    &__before,
+    &__text {
       color: rgba(0, 0, 0, 0);
       white-space: pre-line;
     }
 
-    &-text {
+    &__text {
       border-radius: 4px;
       opacity: .5;
     }
 
-    &-small {
+    &--small {
       padding: .25rem;
       font-size: .75rem;
       line-height: .75rem;
     }
 
-    &-medium {
+    &--medium {
       padding: .75rem;
       font-size: 1.25rem;
       line-height: 1.25rem;
     }
 
-    &-large {
+    &--large {
       padding: 1rem;
       font-size: 1.5rem;
       line-height: 1.5rem;
     }
   }
 
-  &-input {
+  &__input {
     position: inherit;
     z-index: 1;
+
+    &__language {
+      flex-grow: 0;
+    }
   }
 }
 </style>
