@@ -18,7 +18,7 @@
       <div class="columns is-variable is-1">
         <div class="column">
           <bh-field label="Entity">
-            <bh-autocomplete
+            <bh-autocomplete-input
               v-model="entity"
               :data="availableEntities"
               :prepend-text="`${textSelectedValue} is:`" />

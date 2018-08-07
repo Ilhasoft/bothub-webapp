@@ -2,7 +2,7 @@
   <div>
     <div class="columns is-variable is-1">
       <div class="column">
-        <form @submit.prevent="addExample()">
+        <form @submit.prevent="onSubmit()">
           <div class="columns is-variable is-2">
             <div class="column is-three-fifths">
               <bh-field label>
@@ -16,7 +16,8 @@
                   @textSelected="setTextSelected($event)">
                   <language-append-select-input
                     slot="append"
-                    v-model="language" />
+                    v-model="language"
+                    class="language-append" />
                 </example-text-with-highlighted-entities-input>
               </bh-field>
             </div>
@@ -24,8 +25,9 @@
               <bh-field
                 label="Intent"
                 helpText="When your bot receives a message, your bot can use a
-                          recognizer to examine the message and determine intent.">
-                <bh-autocomplete
+                          recognizer to examine the message and determine intent."
+                :errors="errors.intent">
+                <bh-autocomplete-input
                   v-model="intent"
                   size="medium"
                   placeholder="Intent"
@@ -78,6 +80,7 @@ import NewEntityInput from '@/components/inputs/NewEntityInput';
 import EntitiesBadgesInput from '@/components/inputs/EntitiesBadgesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
+import { mapActions } from 'vuex';
 import { formatters } from 'bh/utils';
 
 
@@ -107,6 +110,8 @@ export default {
       language: this.repository.language,
       intent: '',
       entities: [],
+      errors: {},
+      submitting: false,
     };
   },
   computed: {
@@ -194,6 +199,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'newExample',
+    ]),
     setTextSelected(value) {
       this.textSelected = value;
     },
@@ -278,39 +286,39 @@ export default {
         entity.pristineLabel,
       );
     },
-    addExample() {
-      this.text = '';
-      this.language = this.repository.language;
-      this.intent = '';
-      this.entities = [];
+    async onSubmit() {
+      this.errors = {};
+      this.submitting = true;
+
+      try {
+        await this.newExample({
+          repository: this.repository.uuid || this.repository,
+          ...this.data,
+        });
+
+        this.text = '';
+        this.language = this.repository.language;
+        this.intent = '';
+        this.entities = [];
+        this.submitting = false;
+
+        this.$emit('created');
+        return true;
+      } catch (error) {
+        const data = error.response && error.response.data;
+        if (data) {
+          this.errors = data;
+        }
+        this.submitting = false;
+      }
+      return false;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.inputs {
-  display: flex;
-
-  &-item {
-    margin-right: 8px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  .text-input {
-    flex-grow: 3;
-  }
-
-  .intent-input {
-    flex-grow: 1;
-  }
-
-  .submit-btn {
-    min-height: 10px;
-    background-color: green;
-  }
+.language-append {
+  flex-grow: 0;
 }
 </style>

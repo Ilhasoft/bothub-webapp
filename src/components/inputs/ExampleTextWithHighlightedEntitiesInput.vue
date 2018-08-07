@@ -1,5 +1,5 @@
 <template>
-  <div class="bh-input-wrapper example-txt-w-highlighted-entities">
+  <bh-input class="example-txt-w-highlighted-entities">
     <div
       v-for="(entity, i) in entitiesBlocks"
       :key="i"
@@ -23,11 +23,11 @@
         <slot name="append" />
       </div>
     </div>
-  </div>
+  </bh-input>
 </template>
 
 <script>
-import BhTextareaInput from 'bh/components/BhTextareaInput';
+import BhTextarea from 'bh/components/BhTextarea';
 
 import Flag from '@/components/shared/Flag';
 
@@ -40,7 +40,7 @@ const components = {
 
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
-  extends: BhTextareaInput,
+  extends: BhTextarea,
   components,
   props: {
     entities: {
@@ -125,9 +125,7 @@ export default {
 @import '~bh/assets/scss/variables.scss';
 
 .bh {
-  &-textinput {
-    @include textarea();
-
+  &-textarea {
     background: none;
   }
 }
@@ -181,10 +179,6 @@ export default {
   &__input {
     position: inherit;
     z-index: 1;
-
-    &__language {
-      flex-grow: 0;
-    }
   }
 }
 </style>
