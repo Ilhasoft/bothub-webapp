@@ -20,6 +20,7 @@
       <button
         v-for="(item, i) in filteredData"
         :key="i"
+        type="button"
         class="bh-autocomplete__list__item"
         @click="select(item)"
         v-html="highlightVerboseItem(item)" />
