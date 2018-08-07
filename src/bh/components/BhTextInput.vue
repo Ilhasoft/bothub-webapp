@@ -36,6 +36,9 @@ export default {
     },
   },
   watch: {
+    value(value) {
+      this.val = value;
+    },
     val(value) {
       const out = this.formatters.reduce((c, f) => f(c), value);
       this.val = out;
