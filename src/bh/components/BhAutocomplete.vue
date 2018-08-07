@@ -39,7 +39,7 @@ const strTrueIndexOf = (a, b) => (a
 );
 
 export default {
-  name: 'BhAutocompleteInput',
+  name: 'BhAutocomplete',
   extends: BhText,
   props: {
     data: {

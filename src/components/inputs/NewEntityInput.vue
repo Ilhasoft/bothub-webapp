@@ -18,10 +18,11 @@
       <div class="columns is-variable is-1">
         <div class="column">
           <bh-field label="Entity">
-            <bh-autocomplete-input
+            <bh-autocomplete
               v-model="entity"
               :data="availableEntities"
-              :prepend-text="`${textSelectedValue} is:`" />
+              :prepend-text="`${textSelectedValue} is:`"
+              :formatters="entityFormatters" />
           </bh-field>
         </div>
         <div
@@ -77,6 +78,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { formatters } from '@/utils';
 
 
 export default {
@@ -174,6 +176,11 @@ export default {
 
       const { start, end } = this.textSelected;
       return this.text.substring(start, end);
+    },
+    entityFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
     },
   },
   methods: {

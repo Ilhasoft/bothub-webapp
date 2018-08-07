@@ -12,7 +12,7 @@
                   size="medium"
                   placeholder="Add a sentence"
                   :entities="preparedEntities"
-                  :formatters="textareaFormatters"
+                  :formatters="textFormatters"
                   @textSelected="setTextSelected($event)">
                   <language-append-select-input
                     slot="append"
@@ -27,11 +27,12 @@
                 helpText="When your bot receives a message, your bot can use a
                           recognizer to examine the message and determine intent."
                 :errors="errors.intent">
-                <bh-autocomplete-input
+                <bh-autocomplete
                   v-model="intent"
                   size="medium"
                   placeholder="Intent"
-                  :data="repository.intents" />
+                  :data="repository.intents"
+                  :formatters="intentFormatters" />
               </bh-field>
             </div>
             <div class="column is-narrow">
@@ -81,7 +82,8 @@ import EntitiesBadgesInput from '@/components/inputs/EntitiesBadgesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions } from 'vuex';
-import { formatters } from 'bh/utils';
+import { formatters as bhFormatters } from 'bh/utils';
+import { formatters } from '@/utils';
 
 
 const components = {
@@ -158,11 +160,16 @@ export default {
           }))
         .sort((a, b) => (a.start - b.start));
     },
-    textareaFormatters() {
+    textFormatters() {
       return [
-        formatters.trimStart(),
-        formatters.removeBreakLines(),
-        formatters.removeMultipleWhiteSpaces(),
+        bhFormatters.trimStart(),
+        bhFormatters.removeBreakLines(),
+        bhFormatters.removeMultipleWhiteSpaces(),
+      ];
+    },
+    intentFormatters() {
+      return [
+        formatters.bothubItemKey(),
       ];
     },
     data() {

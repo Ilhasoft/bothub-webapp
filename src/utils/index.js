@@ -55,3 +55,10 @@ export const filterAndOrderListByText = (list, text) => (
       .sort((a, b) => strTrueIndexOf(a, text) - strTrueIndexOf(b, text))
     : list
 );
+
+export const formatters = {
+  bothubItemKey: () => v => v
+    .toLowerCase()
+    .replace(' ', '_')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, ''),
+};
