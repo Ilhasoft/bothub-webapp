@@ -278,7 +278,12 @@ export default {
         entity.pristineLabel,
       );
     },
-    addExample() {},
+    addExample() {
+      this.text = '';
+      this.language = this.repository.language;
+      this.intent = '';
+      this.entities = [];
+    },
   },
 };
 </script>
