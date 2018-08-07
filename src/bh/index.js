@@ -1,9 +1,9 @@
-import BhTextInput from './components/BhTextInput';
+import BhText from './components/BhText';
 import BhField from './components/BhField';
 import BhIcon from './components/BhIcon';
 import BhTooltip from './components/BhTooltip';
 import BhButton from './components/BhButton';
-import BhTextareaInput from './components/BhTextareaInput';
+import BhTextarea from './components/BhTextarea';
 import BhIconButton from './components/BhIconButton';
 import BhLoading from './components/BhLoading';
 import BhBadge from './components/BhBadge';
@@ -11,15 +11,16 @@ import BhDropdown from './components/BhDropdown';
 import BhDropdownItem from './components/BhDropdownItem';
 import BhLanguageFlag from './components/BhLanguageFlag';
 import BhAutocomplete from './components/BhAutocomplete';
+import BhInput from './components/BhInput';
 
 
 const components = [
-  BhTextInput,
+  BhText,
   BhField,
   BhIcon,
   BhTooltip,
   BhButton,
-  BhTextareaInput,
+  BhTextarea,
   BhIconButton,
   BhLoading,
   BhBadge,
@@ -27,6 +28,7 @@ const components = [
   BhDropdownItem,
   BhLanguageFlag,
   BhAutocomplete,
+  BhInput,
 ];
 
 export default {

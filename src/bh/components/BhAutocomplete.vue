@@ -1,15 +1,15 @@
 <template>
-  <div class="bh-input-wrapper">
+  <bh-input>
     <div :class="inputClassAttr">
       <span
-        class="bh-textinput-prependtext"
+        :class="`${className}__prependtext`"
         v-if="prependText">{{ prependText }}</span>
       <input
         ref="input"
         type="text"
         v-bind="$attrs"
         v-model="val"
-        @focus="setFocused(true)"
+        @focus="onFocus()"
         @blur="onBlur()"
         @keyup.esc="onEsc()" />
       <slot name="append"></slot>
@@ -25,11 +25,11 @@
         @click="select(item)"
         v-html="highlightVerboseItem(item)" />
     </div>
-  </div>
+  </bh-input>
 </template>
 
 <script>
-import BhTextInput from './BhTextInput';
+import BhText from './BhText';
 
 
 const strTrueIndexOf = (a, b) => (a
@@ -39,8 +39,8 @@ const strTrueIndexOf = (a, b) => (a
 );
 
 export default {
-  name: 'BhAutocomplete',
-  extends: BhTextInput,
+  name: 'BhAutocompleteInput',
+  extends: BhText,
   props: {
     data: {
       type: Array,
@@ -73,6 +73,7 @@ export default {
   },
   data() {
     return {
+      className: 'bh-autocomplete',
       selected: null,
       focused: false,
       closeForced: false,
@@ -142,6 +143,9 @@ export default {
         }
       }
     },
+    onFocus() {
+      this.setFocused(true);
+    },
     onBlur() {
       this.finish();
       this.setFocused(false);
@@ -167,9 +171,13 @@ export default {
 @import '~bh/assets/scss/colors.scss';
 @import '~bh/assets/scss/typography.scss';
 @import '~bh/assets/scss/variables.scss';
+@import '~bh/assets/scss/forms.scss';
+
 
 .bh {
   &-autocomplete {
+    @include input();
+
     &__list {
       @include typography();
 

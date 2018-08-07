@@ -1,22 +1,22 @@
 <template>
-  <div class="bh-input-wrapper">
+  <bh-input>
     <div :class="inputClassAttr">
       <span
-        class="bh-textinput-prependtext"
+        :class="`${className}__prependtext`"
         v-if="prependText">{{ prependText }}</span>
       <input
         ref="input"
         type="text"
         v-bind="$attrs"
         v-model="val" />
-      <slot name="append"></slot>
+      <slot name="append" />
     </div>
-  </div>
+  </bh-input>
 </template>
 
 <script>
 export default {
-  name: 'BhTextInput',
+  name: 'BhText',
   props: {
     value: {
       type: String,
@@ -47,15 +47,16 @@ export default {
   },
   data() {
     return {
+      className: 'bh-text',
       val: this.value,
     };
   },
   computed: {
     inputClassAttr() {
-      const classes = ['bh-textinput'];
+      const classes = [this.className];
 
       if (this.size) {
-        classes.push(`bh-textinput-${this.size}`);
+        classes.push(`${this.className}--${this.size}`);
       }
 
       return classes;
@@ -66,10 +67,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '~bh/assets/scss/forms.scss';
+@import '~bh/assets/scss/colors.scss';
+
 
 .bh {
-  &-textinput {
+  $parent: &;
+
+  &-text {
     @include input();
+  }
+
+  &-input {
+    &--has-error {
+      #{$parent}-text {
+        border-color: $color-danger;
+      }
+    }
   }
 }
 </style>

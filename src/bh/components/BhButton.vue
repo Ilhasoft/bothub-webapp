@@ -1,5 +1,5 @@
 <template>
-  <div class="bh-button-wrapper">
+  <div class="bh-button">
     <button
       :disabled="disabled"
       :type="type"
@@ -9,7 +9,7 @@
     </button>
     <bh-tooltip
       v-if="tooltipHover"
-      class="bh-button-tooltip"
+      class="bh-button__tooltip"
       open
       direction="down">
         <span v-if="(tooltipHover instanceof Array)">
@@ -57,22 +57,22 @@ export default {
   },
   computed: {
     classAttr() {
-      const classes = ['bh-button'];
+      const classes = ['bh-button__button'];
 
       if (this.primary) {
-        classes.push('bh-button-primary');
+        classes.push('bh-button__button--primary');
       }
 
       if (this.secondary) {
-        classes.push('bh-button-secondary');
+        classes.push('bh-button__button--secondary');
       }
 
       if (this.size) {
-        classes.push(`bh-button-${this.size}`);
+        classes.push(`bh-button__button--${this.size}`);
       }
 
       if (this.rounded) {
-        classes.push('bh-button-rounded');
+        classes.push('bh-button__button--rounded');
       }
 
       return classes;
@@ -81,16 +81,21 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~bh/assets/scss/forms.scss';
+
 
 .bh {
   &-button {
     $parent: &;
 
-    @include button();
+    position: relative;
 
-    &-tooltip {
+    &__button {
+      @include button();
+    }
+
+    &__tooltip {
       position: absolute;
       top: 0;
       left: 50%;
@@ -99,13 +104,9 @@ export default {
       transform: translate(-50%, calc(-100% - 8px));
     }
 
-    &-wrapper {
-      position: relative;
-
-      &:hover {
-        #{$parent}-tooltip {
-          display: block;
-        }
+    &:hover {
+      #{$parent}__tooltip {
+        display: block;
       }
     }
   }

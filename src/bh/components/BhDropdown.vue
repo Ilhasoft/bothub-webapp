@@ -44,6 +44,7 @@ export default {
 <style lang="scss">
 @import '~bh/assets/scss/variables.scss';
 
+
 .bh {
   &-dropdown {
     position: relative;

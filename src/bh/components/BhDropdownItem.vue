@@ -16,6 +16,7 @@ export default {
 @import '~bh/assets/scss/colors.scss';
 @import '~bh/assets/scss/typography.scss';
 
+
 .bh {
   &-dropdown-item {
     @include typography();

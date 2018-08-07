@@ -17,6 +17,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    danger: {
+      type: Boolean,
+      default: false,
+    },
     direction: {
       type: String,
       default: null,
@@ -40,6 +44,10 @@ export default {
     classAttr() {
       const classes = ['bh-tooltip'];
 
+      if (this.danger) {
+        classes.push('bh-tooltip--danger');
+      }
+
       if (this.direction) {
         classes.push(`bh-tooltip--${this.direction}`);
       }
@@ -50,14 +58,28 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~bh/assets/scss/variables.scss';
 @import '~bh/assets/scss/typography.scss';
+@import '~bh/assets/scss/colors.scss';
+
+@mixin down($size: 6px, $color: black) {
+  border-top: $size solid $color;
+  border-right: $size solid transparent;
+  border-left: $size solid transparent;
+}
+
+@mixin up($size: 6px, $color: black) {
+  border-right: $size solid transparent;
+  border-bottom: $size solid $color;
+  border-left: $size solid transparent;
+}
 
 .bh {
   &-tooltip {
     @include typography();
 
+    $parent: &;
     $background-color: black;
 
     z-index: $tooltip-z-index;
@@ -71,16 +93,45 @@ export default {
 
     &--down {
       &::before {
+        @include down($color: $background-color);
+
         position: absolute;
         bottom: 0;
         left: 50%;
         width: 0;
         height: 0;
         content: '';
-        border-top: 6px solid $background-color;
-        border-right: 6px solid transparent;
-        border-left: 6px solid transparent;
         transform: translate(-50%, 100%);
+      }
+    }
+
+    &--up {
+      &::before {
+        @include up($color: $background-color);
+
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 0;
+        height: 0;
+        content: '';
+        transform: translate(-50%, -100%);
+      }
+    }
+
+    &--danger {
+      background-color: $color-danger;
+
+      &#{$parent}--down {
+        &::before {
+          @include down($color: $color-danger);
+        }
+      }
+
+      &#{$parent}--up {
+        &::before {
+          @include up($color: $color-danger);
+        }
       }
     }
   }

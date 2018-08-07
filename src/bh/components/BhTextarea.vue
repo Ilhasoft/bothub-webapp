@@ -1,20 +1,20 @@
 <template>
-  <div class="bh-input-wrapper">
+  <bh-input>
     <div :class="inputClassAttr">
       <textarea
         ref="textarea"
         v-bind="$attrs"
         v-model="val" />
     </div>
-  </div>
+  </bh-input>
 </template>
 
 <script>
-import BhTextInput from './BhTextInput';
+import BhText from './BhText';
 
 export default {
-  name: 'BhTextareaInput',
-  extends: BhTextInput,
+  name: 'BhTextarea',
+  extends: BhText,
   async mounted() {
     await this.$nextTick();
     this.updateTextareaHeight();
@@ -23,6 +23,11 @@ export default {
     val() {
       this.updateTextareaHeight();
     },
+  },
+  data() {
+    return {
+      className: 'bh-textarea',
+    };
   },
   methods: {
     updateTextareaHeight() {
@@ -36,11 +41,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~bh/assets/scss/forms.scss';
 
+
 .bh {
-  &-textinput {
+  &-textarea {
     @include textarea();
   }
 }

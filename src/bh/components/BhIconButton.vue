@@ -42,11 +42,11 @@ export default {
       ];
 
       if (this.primary) {
-        classes.push('bh-icon-button-primary');
+        classes.push('bh-icon-button--primary');
       }
 
       if (this.size) {
-        classes.push(`bh-icon-button-${this.size}`);
+        classes.push(`bh-icon-button--${this.size}`);
       }
 
       return classes;
@@ -76,19 +76,19 @@ export default {
     border: none;
     outline: none;
 
-    &-small {
+    &--small {
       width: $form-component-height-small;
     }
 
-    &-medium {
+    &--medium {
       width: $form-component-height-medium;
     }
 
-    &-large {
+    &--large {
       width: $form-component-height-large;
     }
 
-    &-primary {
+    &--primary {
       color: $color-primary;
     }
 

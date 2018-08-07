@@ -28,7 +28,7 @@ export default {
       ];
 
       if (this.size) {
-        classes.push(`bh-icon-${this.size}`);
+        classes.push(`bh-icon--${this.size}`);
       }
 
       return classes;
@@ -58,17 +58,17 @@ export default {
       fill: currentColor;
     }
 
-    &-small {
+    &--small {
       width: 1rem;
       height: 1rem;
     }
 
-    &-medium {
+    &--medium {
       width: 1.5rem;
       height: 1.5rem;
     }
 
-    &-large {
+    &--large {
       width: 1.75rem;
       height: 1.75rem;
     }

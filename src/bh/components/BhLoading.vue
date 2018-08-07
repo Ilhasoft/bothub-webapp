@@ -20,7 +20,7 @@ export default {
       const classes = ['bh-loading'];
 
       if (this.size) {
-        classes.push(`bh-loading-${this.size}`);
+        classes.push(`bh-loading--${this.size}`);
       }
 
       return classes;
@@ -29,12 +29,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~bh/assets/scss/colors.scss';
 @import '~bh/assets/scss/variables.scss';
 
+
 .bh {
   &-loading {
+    $parent: &;
     $reduce-factor: .5;
 
     display: inline-flex;
@@ -57,28 +59,28 @@ export default {
       }
     }
 
-    &-small {
+    &--small {
       height: $height-small;
 
-      span { /* stylelint-disable-line no-descending-specificity */
+      #{$parent} span {
         width: ($height-small * $reduce-factor);
         height: ($height-small * $reduce-factor);
       }
     }
 
-    &-medium {
+    &--medium {
       height: $height-medium;
 
-      span { /* stylelint-disable-line no-descending-specificity */
+      #{$parent} span {
         width: ($height-medium * $reduce-factor);
         height: ($height-medium * $reduce-factor);
       }
     }
 
-    &-large {
+    &--large {
       height: $height-large;
 
-      span { /* stylelint-disable-line no-descending-specificity */
+      #{$parent} span {
         width: ($height-large * $reduce-factor);
         height: ($height-large * $reduce-factor);
       }

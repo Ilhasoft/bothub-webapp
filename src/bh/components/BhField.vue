@@ -1,23 +1,25 @@
 <template>
-  <div class="bh-field">
+  <div :class="classAttr">
     <div
       v-if="label !== null"
-      class="bh-field-label">
+      class="bh-field__label">
       <span>{{ label || '&nbsp;' }}</span>
       <span
         v-if="helpText"
-        class="bh-field-label-help-text">
+        class="bh-field__label__help-text">
         <bh-icon
           value="help-text"
           @click="toggleHelpTextTooltip()" />
         <bh-tooltip
           :open.sync="helpTextTooltipOpen"
-          class="bh-field-label-help-text-tooltip">
+          class="bh-field__label__help-text__tooltip">
           <p>{{ helpText }}</p>
         </bh-tooltip>
       </span>
     </div>
-    <slot class="bh-field-input" />
+    <div class="bh-field__input">
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -33,11 +35,34 @@ export default {
       type: String,
       default: null,
     },
+    errors: {
+      type: Array,
+      default: () => ([]),
+    },
+  },
+  provide() {
+    const bhField = {};
+    Object.defineProperty(bhField, 'errors', {
+      enumerable: true,
+      get: () => this.errors,
+    });
+    return { bhField };
   },
   data() {
     return {
       helpTextTooltipOpen: false,
     };
+  },
+  computed: {
+    classAttr() {
+      const classes = ['bh-field'];
+
+      if (this.errors.length > 0) {
+        classes.push('bh-field--has-error');
+      }
+
+      return classes;
+    },
   },
   methods: {
     toggleHelpTextTooltip() {
@@ -47,15 +72,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~bh/assets/scss/variables.scss';
 @import '~bh/assets/scss/colors.scss';
 
+
 .bh {
   &-field {
+    $parent: &;
     $margin: 8px 0;
 
-    &-label {
+    &__label {
       margin: $margin;
       font-family: $font-family;
       font-size: 1rem;
@@ -63,13 +90,13 @@ export default {
       line-height: 1.5rem;
       color: $color-bolder-grey;
 
-      &-help-text {
+      &__help-text {
         position: relative;
         display: inline-block;
         vertical-align: bottom;
         cursor: pointer;
 
-        &-tooltip {
+        &__tooltip {
           position: absolute;
           top: 0;
           left: calc(100% + 8px);
@@ -79,8 +106,14 @@ export default {
       }
     }
 
-    &-input {
+    &__input {
       margin: $margin;
+    }
+
+    &--has-error {
+      #{$parent}__label {
+        color: $color-danger;
+      }
     }
   }
 }

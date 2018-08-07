@@ -29,6 +29,7 @@ export default {
 @import '~bh/assets/scss/variables.scss';
 @import '~bh/assets/scss/typography.scss';
 
+
 .bh {
   &-badge {
     @include typography();
