@@ -42,7 +42,7 @@
               <slot v-else-if="currentLabel">edit {{ currentLabel }} label</slot>
               <slot v-else>add label</slot>
             </bh-button>
-            <bh-text-input
+            <bh-text
               v-else
               v-model="currentLabel">
               <span slot="append">
@@ -51,7 +51,7 @@
                   size="small"
                   @click="cancelCustomizeLabel()" />
               </span>
-            </bh-text-input>
+            </bh-text>
           </bh-field>
         </div>
         <div class="column is-narrow">
