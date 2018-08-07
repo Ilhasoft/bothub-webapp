@@ -25,10 +25,11 @@
                 label="Intent"
                 helpText="When your bot receives a message, your bot can use a
                           recognizer to examine the message and determine intent.">
-                <bh-text-input
+                <bh-autocomplete
                   v-model="intent"
                   size="medium"
-                  placeholder="Intent" />
+                  placeholder="Intent"
+                  :data="repository.intents" />
               </bh-field>
             </div>
             <div class="column is-narrow">
@@ -63,6 +64,7 @@
           :repository="repository"
           :text="text"
           :textSelected="textSelected"
+          :availableEntities="repository.entities"
           :labels="labels"
           @newEntity="addNewEntity($event)" />
       </div>

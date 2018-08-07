@@ -18,8 +18,9 @@
       <div class="columns is-variable is-1">
         <div class="column">
           <bh-field label="Entity">
-            <bh-text-input
+            <bh-autocomplete
               v-model="entity"
+              :data="availableEntities"
               :prepend-text="`${textSelectedValue} is:`" />
           </bh-field>
         </div>
@@ -96,6 +97,10 @@ export default {
     repository: {
       type: [Object, String],
       required: true,
+    },
+    availableEntities: {
+      type: Array,
+      default: () => ([]),
     },
     labels: {
       type: Object,
