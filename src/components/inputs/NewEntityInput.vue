@@ -1,19 +1,16 @@
 <template>
   <form @submit.prevent="addEntity()">
-    <bh-field
+    <bh-button
       v-if="!addingMode"
-      label>
-      <bh-button
-        rounded
-        :tooltipHover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
-        @click="enableAddingMode()">
-        <span>
-          <span>Add new entity</span>
-          <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
-        </span>
-        <bh-icon value="plus-circle" />
-      </bh-button>
-    </bh-field>
+      rounded
+      :tooltipHover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
+      @click="enableAddingMode()">
+      <span>
+        <span>Add new entity</span>
+        <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
+      </span>
+      <bh-icon value="plus-circle" />
+    </bh-button>
     <div v-else>
       <div class="columns is-variable is-1">
         <div class="column">
