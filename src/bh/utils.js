@@ -33,8 +33,12 @@ export const icons = {
   'flag-us': FlagUs,
 };
 
+const trimStart = () => v => (v.trimStart());
+const removeBreakLines = () => v => (v.replace('\n', ''));
+const removeMultipleWhiteSpaces = () => v => (v.replace(/\s{2,}/g, ' '));
+
 export const formatters = {
-  trimStart: () => v => (v.trimStart()),
-  removeBreakLines: () => v => (v.replace('\n', '')),
-  removeMultipleWhiteSpaces: () => v => (v.replace(/\s{2,}/g, ' ')),
+  trimStart,
+  removeBreakLines,
+  removeMultipleWhiteSpaces,
 };
