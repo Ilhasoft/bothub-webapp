@@ -22,6 +22,7 @@ module.exports = {
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.js',
+    'src/bh/*/**/*.vue',
     'src/components/*/**/*.vue',
     '!src/main.js',
     '!src/router/index.js',

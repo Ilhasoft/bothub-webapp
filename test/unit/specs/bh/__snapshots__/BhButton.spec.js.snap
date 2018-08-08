@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhButton.vue renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button"></button>
+  <!---->
+</div>
+`;

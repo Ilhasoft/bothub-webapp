@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhAutocomplete.vue renders correctly 1`] = `
+<bhinput-stub>
+  <div class="bh-autocomplete">
+    <!---->
+    <input type="text"> </div>
+  <!---->
+</bhinput-stub>
+`;

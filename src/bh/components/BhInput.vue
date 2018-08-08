@@ -5,7 +5,7 @@
       v-if="hasError"
       class="bh-input__errors">
       <div
-        v-for="(error, i) in this.bhField.errors"
+        v-for="(error, i) in errors"
         :key="i"
         class="bh-input__errors__item">
         <span>-</span>
@@ -18,10 +18,20 @@
 <script>
 export default {
   name: 'BhInput',
-  inject: ['bhField'],
+  inject: {
+    bhField: {
+      default: null,
+    },
+  },
   computed: {
     hasError() {
-      return this.bhField.errors.length > 0;
+      return this.errors.length > 0;
+    },
+    errors() {
+      if (!this.bhField) {
+        return [];
+      }
+      return this.bhField.errors;
     },
     classAttr() {
       const classes = ['bh-input'];

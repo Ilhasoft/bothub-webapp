@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhTextarea.vue renders correctly 1`] = `
+<bhinput-stub>
+  <div class="bh-textarea">
+    <textarea style="height: 0px;"></textarea>
+  </div>
+</bhinput-stub>
+`;
