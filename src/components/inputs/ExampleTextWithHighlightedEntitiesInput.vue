@@ -1,26 +1,28 @@
 <template>
-  <bh-input class="example-txt-w-highlighted-entities">
-    <div
-      v-for="(entity, i) in entitiesBlocks"
-      :key="i"
-      :class="entityClassAttr">
-      <span :class="[
-        'example-txt-w-highlighted-entities__entity__before',
-      ]">{{ entity.before }}</span><span :class="[
-        entity.colorClass,
-        'example-txt-w-highlighted-entities__entity__text'
-      ]">{{ entity.text }}</span>
-    </div>
-    <div class="example-txt-w-highlighted-entities__input">
-      <div :class="inputClassAttr">
-        <textarea
-          ref="textarea"
-          v-bind="$attrs"
-          v-model="val"
-          @select="emitTextSelected()"
-          @click="emitTextSelected()"
-          @keyup="emitTextSelected()" />
-        <slot name="append" />
+  <bh-input>
+    <div class="example-txt-w-highlighted-entities">
+      <div
+        v-for="(entity, i) in entitiesBlocks"
+        :key="i"
+        :class="entityClassAttr">
+        <span :class="[
+          'example-txt-w-highlighted-entities__entity__before',
+        ]">{{ entity.before }}</span><span :class="[
+          entity.colorClass,
+          'example-txt-w-highlighted-entities__entity__text'
+        ]">{{ entity.text }}</span>
+      </div>
+      <div class="example-txt-w-highlighted-entities__input">
+        <div :class="inputClassAttr">
+          <textarea
+            ref="textarea"
+            v-bind="$attrs"
+            v-model="val"
+            @select="emitTextSelected()"
+            @click="emitTextSelected()"
+            @keyup="emitTextSelected()" />
+          <slot name="append" />
+        </div>
       </div>
     </div>
   </bh-input>
@@ -131,6 +133,7 @@ export default {
 }
 
 .example-txt-w-highlighted-entities {
+  position: relative;
   background-color: white;
   border-radius: $form-components-border-radius;
 
