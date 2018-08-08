@@ -8,28 +8,12 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
         <div class="columns is-variable is-2">
           <div class="column is-three-fifths">
             <bhfield-stub>
-              <exampletextwithhighlightedentitiesinput-stub size="medium" placeholder="Add a sentence" formatters="function (v) {
-      /* istanbul ignore next */cov_1oyjq7f3e2.f[1]++;
-      cov_1oyjq7f3e2.s[3]++;
-      return v.trimStart();
-    },function (v) {
-      /* istanbul ignore next */cov_1oyjq7f3e2.f[3]++;
-      cov_1oyjq7f3e2.s[5]++;
-      return v.replace('\\n', '');
-    },function (v) {
-      /* istanbul ignore next */cov_1oyjq7f3e2.f[5]++;
-      cov_1oyjq7f3e2.s[7]++;
-      return v.replace(/\\s{2,}/g, ' ');
-    }"></exampletextwithhighlightedentitiesinput-stub>
+              <exampletextwithhighlightedentitiesinput-stub size="medium" placeholder="Add a sentence" formatters="textFormatters"></exampletextwithhighlightedentitiesinput-stub>
             </bhfield-stub>
           </div>
           <div class="column">
             <bhfield-stub>
-              <bhautocomplete-stub size="medium" placeholder="Intent" formatters="function (v) {
-      /* istanbul ignore next */cov_2522u8mndo.f[10]++;
-      cov_2522u8mndo.s[26]++;
-      return v.toLowerCase().replace(' ', '_').replace(/[,./\\\\;+=!?@#$%¨&amp;*()[\\]^&quot;'~{}ç:<>|]/, '');
-    }"></bhautocomplete-stub>
+              <bhautocomplete-stub size="medium" placeholder="Intent" formatters="intentFormatters"></bhautocomplete-stub>
             </bhfield-stub>
           </div>
           <div class="column is-narrow">

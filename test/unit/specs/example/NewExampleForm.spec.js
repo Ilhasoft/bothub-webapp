@@ -53,5 +53,60 @@ describe('NewExampleForm.vue', () => {
       expect(data.intent).toBe(intent);
       expect(data.entities[0]).toMatchObject(entity);
     });
+
+    describe('submit', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
+      });
+
+      test('return true', () => {
+        expect(r).toBeTruthy();
+      });
+    });
+
+    describe('remove entity', () => {
+      beforeEach(() => {
+        wrapper.vm.removeEntity(entity);
+      });
+
+      test('no entities', () => {
+        expect(wrapper.vm.entities).toHaveLength(0);
+      });
+    });
+
+    describe('edit entity', () => {
+      beforeEach(async () => {
+        await wrapper.vm.editEntity(entity);
+      });
+
+      test('no entities', () => {
+        expect(wrapper.vm.entities).toHaveLength(0);
+      });
+    });
   });
+
+  // Problems here because Vue.js
+  // Error reported in https://github.com/vuejs/vue-test-utils/issues/829
+  // describe('just set text', () => {
+  //   const text = 'my name is douglas';
+  //   beforeEach(() => {
+  //     wrapper.vm.text = text;
+  //   });
+
+  //   describe('submit', () => {
+  //     let r;
+  //     beforeEach(async () => {
+  //       r = await wrapper.vm.onSubmit();
+  //     });
+
+  //     test('return false', () => {
+  //       expect(r).toBeFalsy();
+  //     });
+
+  //     test('has errors', () => {
+  //       expect(Object.keys(wrapper.vm.errors)).not.toHaveLength(0);
+  //     });
+  //   });
+  // });
 });

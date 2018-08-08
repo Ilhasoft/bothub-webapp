@@ -165,16 +165,20 @@ export default {
         .sort((a, b) => (a.start - b.start));
     },
     textFormatters() {
-      return [
+      const formattersList = [
         bhFormatters.trimStart(),
         bhFormatters.removeBreakLines(),
         bhFormatters.removeMultipleWhiteSpaces(),
       ];
+      formattersList.toString = () => 'textFormatters';
+      return formattersList;
     },
     intentFormatters() {
-      return [
+      const formattersList = [
         formatters.bothubItemKey(),
       ];
+      formattersList.toString = () => 'intentFormatters';
+      return formattersList;
     },
     data() {
       const {
@@ -288,16 +292,20 @@ export default {
     async editEntity(entity) {
       this.removeEntity(entity);
       await this.$nextTick();
-      this.$refs.textInput.emitTextSelected({
-        selectionStart: entity.start,
-        selectionEnd: entity.end,
-      });
+      if (this.$refs.textInput.emitTextSelected) {
+        this.$refs.textInput.emitTextSelected({
+          selectionStart: entity.start,
+          selectionEnd: entity.end,
+        });
+      }
       await this.$nextTick();
-      this.$refs.newEntityInput.fillEdit(
-        entity.entity,
-        entity.label,
-        entity.pristineLabel,
-      );
+      if (this.$refs.newEntityInput.fillEdit) {
+        this.$refs.newEntityInput.fillEdit(
+          entity.entity,
+          entity.label,
+          entity.pristineLabel,
+        );
+      }
     },
     async onSubmit() {
       this.errors = {};
