@@ -5,7 +5,9 @@
         <form @submit.prevent="onSubmit()">
           <div class="columns is-variable is-2">
             <div class="column is-three-fifths">
-              <bh-field label>
+              <bh-field
+                label
+                :errors="errors.text || errors.language">
                 <example-text-with-highlighted-entities-input
                   ref="textInput"
                   v-model="text"
@@ -49,17 +51,19 @@
         </form>
       </div>
     </div>
-    <div
-      v-if="entities.length > 0"
-      class="columns is-variable is-1">
-      <div class="column">
-        <entities-badges-input
-          editEntityEnable
-          :entities="preparedEntities"
-          @remove="removeEntity($event)"
-          @edit="editEntity($event)" />
+    <bh-field :errors="errors.entities">
+      <div
+        v-if="entities.length > 0"
+        class="columns is-variable is-1">
+        <div class="column">
+          <entities-badges-input
+            editEntityEnable
+            :entities="preparedEntities"
+            @remove="removeEntity($event)"
+            @edit="editEntity($event)" />
+        </div>
       </div>
-    </div>
+    </bh-field>
     <div class="columns is-variable is-1">
       <div class="column is-narrow">
         <new-entity-input
