@@ -10,6 +10,7 @@ module.exports = {
   moduleNameMapper: {
     '.*\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^bh$': '<rootDir>/src/bh',
     '^bh/(.*)$': '<rootDir>/src/bh/$1',
   },
   transform: {

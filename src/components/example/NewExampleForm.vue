@@ -33,7 +33,7 @@
                   v-model="intent"
                   size="medium"
                   placeholder="Intent"
-                  :data="repository.intents"
+                  :data="repository.intents || []"
                   :formatters="intentFormatters" />
               </bh-field>
             </div>
@@ -218,7 +218,9 @@ export default {
     },
     addNewEntity(entity) {
       this.entities.push(entity);
-      this.$refs.textInput.clearSelected();
+      if (this.$refs.textInput.clearSelected) {
+        this.$refs.textInput.clearSelected();
+      }
     },
     validateEntities(text, oldText) {
       /*
