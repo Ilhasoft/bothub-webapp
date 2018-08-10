@@ -15,7 +15,7 @@
         :key="i"
         :class="getEntityClass(entity)">
           <strong>{{ entity }}</strong>
-          <span>as</span>
+          <span>is</span>
           <strong>{{ getEntityLabel(entity) }}</strong>
       </b-tag>
     </div>
