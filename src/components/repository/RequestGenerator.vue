@@ -57,11 +57,14 @@ export default {
       type: String,
       required: true,
     },
+    defaultLanguageField: {
+      type: String,
+    },
   },
   data() {
     return {
       activeTab: 0,
-      language: 'en',
+      language: this.defaultLanguageField,
       text: '',
     };
   },

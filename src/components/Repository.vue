@@ -260,7 +260,8 @@ text: [text to analyze]</div>
                     <div><strong>Code Generator:</strong></div>
                     <div>Generate code to your respective programming language.</div>
                   </div>
-                  <request-generator :authorizationUuid="repository.authorization.uuid" />
+                  <request-generator :authorizationUuid="repository.authorization.uuid"
+                                     :defaultLanguageField="repository.language"/>
                 </div>
               </div>
             </div>
