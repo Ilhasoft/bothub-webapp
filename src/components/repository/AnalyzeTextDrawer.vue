@@ -58,7 +58,7 @@
                 </tbody>
               </table>
             </div>
-            <div v-if="result.answer.labels_as_entity.length &&
+            <div v-if="result.answer.labels_as_entity &&
               result.answer.labels_as_entity.length > 0">
               <p><strong>Labels:</strong></p>
               <table class="table is-fullwidth is-striped is-hoverable is-narrow">
