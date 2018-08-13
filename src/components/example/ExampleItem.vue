@@ -13,10 +13,10 @@
         rounded
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)">
-          <strong>{{ entity }}</strong>
-          <span>is</span>
-          <strong>{{ getEntityLabel(entity) }}</strong>
+        :class="entity.class">
+          <strong>{{ entity.value }}</strong>
+          <span v-if="entity.label">is</span>
+          <strong v-if="entity.label">{{ entity.label }}</strong>
       </b-tag>
     </div>
     <div class="example-infos level is-mobile">
@@ -93,7 +93,12 @@ export default {
   },
   computed: {
     entitiesList() {
-      return getEntitiesList(this.entities);
+      return getEntitiesList(this.entities)
+        .map(entity => ({
+          value: entity,
+          class: this.getEntityClass(entity),
+          label: this.getEntityLabel(entity),
+        }));
     },
   },
   methods: {
