@@ -403,7 +403,8 @@ text: [text to analyze]</div>
     <analyze-text-drawer
       v-if="repository && authenticated"
       :ownerNickname="repository.owner__nickname"
-      :slug="repository.slug" />
+      :slug="repository.slug"
+      :availableLanguages="repository.available_languages" />
   </layout>
 </template>
 
