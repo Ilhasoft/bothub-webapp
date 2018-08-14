@@ -45,7 +45,7 @@ describe('NewExampleForm.vue', () => {
         {
           start: 11,
           end: 18,
-          entity: 'name'
+          entity: 'name',
         },
       ];
     });
