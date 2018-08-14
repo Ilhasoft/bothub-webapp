@@ -23,7 +23,7 @@
           </bh-field>
         </div>
         <div
-          v-if="entity"
+          v-if="entity && !customLabelDisabled"
           class="column is-narrow">
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
@@ -56,7 +56,7 @@
           <bh-field label>
             <bh-button
               primary
-              :disabled="!entity || searchingLabel"
+              :disabled="!entity || (searchingLabel && !customLabelDisabled)"
               type="submit">add</bh-button>
           </bh-field>
         </div>
@@ -79,7 +79,7 @@ import { formatters } from '@/utils';
 
 
 export default {
-  name: 'NewEntityInput',
+  name: 'NewEntity',
   props: {
     text: {
       type: String,
@@ -105,6 +105,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    customLabelDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   watch: {
     textSelected: {
@@ -120,6 +124,11 @@ export default {
     },
     entity(value) {
       this.clearTimeout();
+
+      if (this.customLabelDisabled) {
+        return null;
+      }
+
       this.searchingLabel = true;
       if (!this.editMode) {
         this.currentLabel = null;
@@ -151,6 +160,8 @@ export default {
           this.debounceTime,
         );
       }
+
+      return this.setTimeoutId;
     },
   },
   data() {
@@ -209,7 +220,7 @@ export default {
         data.label = this.currentLabel;
       }
 
-      this.$emit('newEntity', data);
+      this.$emit('new', data);
       this.disableAddingMode();
       this.entity = null;
       return false;
@@ -232,7 +243,7 @@ export default {
       this.addingMode = true;
       this.currentLabel = label;
       this.entity = entity;
-      if (this.currentLabel) {
+      if (this.currentLabel !== this.pristineLabel) {
         this.pristineLabel = pristineLabel;
         this.hasCustomizedLabel = true;
       }
