@@ -52,6 +52,7 @@
       <div class="column">
         <bh-field :errors="errors.entities">
           <entities-input
+            ref="entitiesInput"
             v-model="entities"
             :repository="repository"
             :text="text"

@@ -1,10 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NewTranslateForm.vue renders correctly 1`] = `
-<form>
-  <examplewithentitiesinput-stub></examplewithentitiesinput-stub>
-  <div class="field has-text-right">
-    <button type="submit" class="button is-primary">Submit Translation</button>
+<div>
+  <form class="columns is-variable is-2">
+    <div class="column">
+      <bhfield-stub>
+        <exampletextwithhighlightedentitiesinput-stub placeholder="Translate sentence" size="medium"></exampletextwithhighlightedentitiesinput-stub>
+      </bhfield-stub>
+    </div>
+    <div class="column is-narrow">
+      <bhfield-stub>
+        <bhbutton-stub>Submit Translation</bhbutton-stub>
+      </bhfield-stub>
+    </div>
+  </form>
+  <div class="columns is-variable is-1">
+    <div class="column">
+      <bhfield-stub>
+        <entitiesinput-stub></entitiesinput-stub>
+      </bhfield-stub>
+    </div>
   </div>
-</form>
+</div>
 `;
