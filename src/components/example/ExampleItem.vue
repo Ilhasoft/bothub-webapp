@@ -14,9 +14,9 @@
         v-for="(entity, i) in entitiesList"
         :key="i"
         :class="entity.class">
-          <strong>{{ entity.value }}</strong>
-          <span v-if="entity.label">is</span>
-          <strong v-if="entity.label">{{ entity.label }}</strong>
+        <strong>{{ entity.value }}</strong>
+        <span v-if="entity.label">is</span>
+        <strong v-if="entity.label">{{ entity.label }}</strong>
       </b-tag>
     </div>
     <div class="example-infos level is-mobile">

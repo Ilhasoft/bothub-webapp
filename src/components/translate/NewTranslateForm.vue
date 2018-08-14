@@ -1,26 +1,59 @@
 <template>
-  <form @submit.prevent="onSubmit()">
-    <example-with-entities-input
-      v-model="data"
-      :errors="errors"
-      :extraEntitiesList="extraEntitiesList"
-      :allEntities="repository.entities" />
-    <div class="field has-text-right">
-      <button
-        type="submit"
-        class="button is-primary"
-        :disabled="submitting">Submit Translation</button>
+  <div>
+    <form
+      class="columns is-variable is-2"
+      @submit.prevent="onSubmit()">
+      <div class="column">
+        <bh-field
+          label
+          :errors="errors.text">
+          <example-text-with-highlighted-entities-input
+            ref="textInput"
+            v-model="text"
+            placeholder="Translate sentence"
+            size="medium"
+            :entities="entities"
+            :availableEntities="repository.entities"
+            @textSelected="setTextSelected($event)" />
+        </bh-field>
+      </div>
+      <div class="column is-narrow">
+        <bh-field label>
+          <bh-button
+            secondary
+            type="submit"
+            size="medium"
+            :disabled="!isValid || submitting">Submit Translation</bh-button>
+        </bh-field>
+      </div>
+    </form>
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <bh-field :errors="errors.entities">
+          <entities-input
+            customLabelDisabled
+            v-model="entities"
+            :repository="repository"
+            :text="text"
+            :textSelected="textSelected"
+            :availableEntities="repository.entities"
+            @entityAdded="onEntityAdded($event)"
+            @entityEdited="onEditEntity($event)" />
+        </bh-field>
+      </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import EntitiesInput from '@/components/inputs/EntitiesInput';
 
 
 const components = {
-  ExampleWithEntitiesInput,
+  ExampleTextWithHighlightedEntitiesInput,
+  EntitiesInput,
 };
 
 export default {
@@ -45,7 +78,10 @@ export default {
     },
   },
   watch: {
-    data: {
+    text() {
+      this.errors = {};
+    },
+    entities: {
       handler() {
         this.errors = {};
       },
@@ -54,19 +90,38 @@ export default {
   },
   data() {
     return {
-      data: {
-        text: '',
-        entities: [],
-      },
+      text: '',
+      entities: [],
+      textSelected: null,
       errors: {},
-      selected: {},
       submitting: false,
     };
+  },
+  computed: {
+    isValid() {
+      return !!this.text;
+    },
   },
   methods: {
     ...mapActions([
       'newTranslation',
     ]),
+    setTextSelected(value) {
+      this.textSelected = value;
+    },
+    onEntityAdded() {
+      if (this.$refs.textInput.clearSelected) {
+        this.$refs.textInput.clearSelected();
+      }
+    },
+    onEditEntity(entity) {
+      if (this.$refs.textInput.emitTextSelected) {
+        this.$refs.textInput.emitTextSelected({
+          selectionStart: entity.start,
+          selectionEnd: entity.end,
+        });
+      }
+    },
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
@@ -75,25 +130,25 @@ export default {
         await this.newTranslation({
           exampleId: this.exampleId,
           language: this.translateTo,
-          text: this.data.text,
-          entities: this.data.entities,
+          text: this.text,
+          entities: this.entities,
         });
-        this.data = {
-          text: '',
-          entities: [],
-        };
+
+        this.text = '';
+        this.entities = [];
 
         this.submitting = false;
         this.$emit('translated');
         return true;
       } catch (error) {
         const { language, ...data } = error.response && error.response.data;
+
         if (data) {
           this.errors = data;
         }
+
         this.submitting = false;
         if (language) {
-          /* istanbul ignore next */
           this.$toast.open({
             message: language.join(' '),
             type: 'is-danger',
@@ -103,23 +158,6 @@ export default {
 
       return false;
     },
-    updateSelected(value) {
-      /* istanbul ignore next */
-      this.selected = value;
-    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-
-.inputs {
-  background-color: $grey-lighter;
-  border-radius: 3px 3px 4px 4px;
-
-  &-entities {
-    padding: 8px;
-  }
-}
-</style>
