@@ -223,7 +223,7 @@ export default {
       this.$emit('new', data);
       this.disableAddingMode();
       this.entity = null;
-      return false;
+      return true;
     },
     customizeLabel() {
       this.hasCustomizedLabel = true;

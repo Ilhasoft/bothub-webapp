@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewEntity.vue enter in adding mode set textSelected renders correctly 1`] = `
+<form>
+  <bhbutton-stub><span><span>Add new entity</span> <span>for "douglas"</span></span>
+    <bhicon-stub></bhicon-stub>
+  </bhbutton-stub>
+</form>
+`;
+
+exports[`NewEntity.vue renders correctly 1`] = `
+<form>
+  <bhbutton-stub><span><span>Add new entity</span>
+    <!---->
+    </span>
+    <bhicon-stub></bhicon-stub>
+  </bhbutton-stub>
+</form>
+`;

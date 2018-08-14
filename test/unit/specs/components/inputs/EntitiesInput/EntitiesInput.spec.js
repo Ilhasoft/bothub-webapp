@@ -7,7 +7,7 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('NewExampleForm.vue', () => {
+describe('EntitiesInput.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(EntitiesInput, {
