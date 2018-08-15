@@ -42,9 +42,15 @@
           <bh-button
             primary
             type="submit"
-            :disabled="!isValid"
+            :disabled="!isValid || submitting "
             :tooltipHover="!isValid ? validationErrors : null"
-            size="medium">Submit</bh-button>
+            size="medium">
+            <slot v-if="!submitting">Submit</slot>
+             <bh-loading
+                ref="load"
+                v-if="submitting"
+                size="small" />
+            </bh-button>
         </bh-field>
       </div>
     </form>
