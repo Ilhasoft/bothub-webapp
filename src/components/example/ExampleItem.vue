@@ -1,10 +1,15 @@
 <template>
   <div class="example">
     <div class="example-text">
-      <highlighted-text
-        :text="text"
-        :entities="entities"
-        :allEntities="repository.entities" />
+      <div class="example-text__main">
+        <highlighted-text
+          :text="text"
+          :entities="entities"
+          :allEntities="repository.entities" />
+      </div>
+      <div class="example-text__right">
+        <bh-language-flag :language="language" />
+      </div>
     </div>
     <div
       v-if="entitiesList.length > 0"
@@ -67,6 +72,10 @@ export default {
     text: {
       type: String,
       default: '...',
+    },
+    language: {
+      type: String,
+      default: null,
     },
     intent: {
       type: String,
@@ -162,12 +171,21 @@ export default {
   }
 
   &-text {
-    font-size: 1.25rem;
+    display: flex;
+    padding: 8px 16px;
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
-    padding: 8px 16px;
     margin-bottom: 4px;
+
+    &__main {
+      flex-grow: 1;
+      font-size: 1.25rem;
+    }
+
+    &__rigth {
+      flex-grow: 0;
+    }
   }
 
   &-entities,
