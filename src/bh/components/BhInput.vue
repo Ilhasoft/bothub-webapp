@@ -9,7 +9,12 @@
         :key="i"
         class="bh-input__errors__item">
         <span>-</span>
-        <span>{{ error }}</span>
+        <div v-if="(error instanceof Object)">
+          <div
+            v-for="(value,key) in error"
+            :key="value,key">{{ key }}: {{ value }}</div>
+        </div>
+        <span v-else>{{ error }}</span>
       </div>
     </div>
   </div>
