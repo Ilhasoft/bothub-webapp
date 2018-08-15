@@ -31,6 +31,7 @@
       <div class="column">
         <bh-field :errors="errors.entities">
           <entities-input
+            ref="entitiesInput"
             customLabelDisabled
             v-model="entities"
             :repository="repository"
