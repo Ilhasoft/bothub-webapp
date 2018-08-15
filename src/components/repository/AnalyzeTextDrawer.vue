@@ -39,35 +39,24 @@
           <b-tab-item label="To Humans">
             <div class="item">
               <strong>Intent:</strong>
-              <div v-if="result.answer.intent">
-                <span>{{ result.answer.intent.name }}</span>
-                <span>({{ result.answer.intent.confidence | percent }})</span>
+              <div v-if="result.intent">
+                <span>{{ result.intent.name }}</span>
+                <span>({{ result.intent.confidence | percent }})</span>
               </div>
               <div v-else>No detected</div>
             </div>
-            <div v-if="result.answer.entities.length > 0">
-              <p><strong>Entities:</strong></p>
+            <div
+              v-for="(entities, label) in result.entities"
+              :key="label"
+              v-if="entities.length > 0">
+              <p><strong>{{ label }}:</strong></p>
               <table class="table is-fullwidth is-striped is-hoverable is-narrow">
                 <tbody>
                   <tr
-                    v-for="(entity, i) in result.answer.entities"
+                    v-for="(entity, i) in entities"
                     :key="i">
                     <td>{{ entity.value }}</td>
                     <td>{{ entity.entity }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div v-if="result.answer.labels_as_entity &&
-              result.answer.labels_as_entity.length > 0">
-              <p><strong>Labels:</strong></p>
-              <table class="table is-fullwidth is-striped is-hoverable is-narrow">
-                <tbody>
-                  <tr
-                    v-for="(label, i) in result.answer.labels_as_entity"
-                    :key="i">
-                    <td>{{ label.value }}</td>
-                    <td>{{ label.entity }}</td>
                   </tr>
                 </tbody>
               </table>
