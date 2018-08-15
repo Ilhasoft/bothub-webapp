@@ -13,7 +13,11 @@
         rounded
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)">{{ entity }}</b-tag>
+        :class="entity.class">
+        <strong>{{ entity.value }}</strong>
+        <span v-if="entity.label">is</span>
+        <strong v-if="entity.label">{{ entity.label }}</strong>
+      </b-tag>
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -89,7 +93,12 @@ export default {
   },
   computed: {
     entitiesList() {
-      return getEntitiesList(this.entities);
+      return getEntitiesList(this.entities)
+        .map(entity => ({
+          value: entity,
+          class: this.getEntityClass(entity),
+          label: this.getEntityLabel(entity),
+        }));
     },
   },
   methods: {
@@ -103,6 +112,14 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
+    },
+    getEntityLabel(entityName) {
+      return this.entities.reduce((current, e) => {
+        if (e.entity === entityName) {
+          return e.label;
+        }
+        return current;
+      }, 'unlabeled');
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {

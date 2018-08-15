@@ -2,33 +2,28 @@
 
 exports[`NewExampleForm.vue renders correctly 1`] = `
 <div>
+  <form class="columns is-variable is-2">
+    <div class="column is-three-fifths">
+      <bhfield-stub>
+        <exampletextwithhighlightedentitiesinput-stub size="medium" placeholder="Add a sentence" formatters="textFormatters"></exampletextwithhighlightedentitiesinput-stub>
+      </bhfield-stub>
+    </div>
+    <div class="column">
+      <bhfield-stub>
+        <bhautocomplete-stub size="medium" placeholder="Intent" formatters="intentFormatters"></bhautocomplete-stub>
+      </bhfield-stub>
+    </div>
+    <div class="column is-narrow">
+      <bhfield-stub>
+        <bhbutton-stub>Submit</bhbutton-stub>
+      </bhfield-stub>
+    </div>
+  </form>
   <div class="columns is-variable is-1">
     <div class="column">
-      <form>
-        <div class="columns is-variable is-2">
-          <div class="column is-three-fifths">
-            <bhfield-stub>
-              <exampletextwithhighlightedentitiesinput-stub size="medium" placeholder="Add a sentence" formatters="textFormatters"></exampletextwithhighlightedentitiesinput-stub>
-            </bhfield-stub>
-          </div>
-          <div class="column">
-            <bhfield-stub>
-              <bhautocomplete-stub size="medium" placeholder="Intent" formatters="intentFormatters"></bhautocomplete-stub>
-            </bhfield-stub>
-          </div>
-          <div class="column is-narrow">
-            <bhfield-stub>
-              <bhbutton-stub>Submit</bhbutton-stub>
-            </bhfield-stub>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-  <bhfield-stub></bhfield-stub>
-  <div class="columns is-variable is-1">
-    <div class="column is-narrow">
-      <newentityinput-stub></newentityinput-stub>
+      <bhfield-stub>
+        <entitiesinput-stub></entitiesinput-stub>
+      </bhfield-stub>
     </div>
   </div>
 </div>

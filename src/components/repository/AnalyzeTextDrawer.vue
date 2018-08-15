@@ -58,6 +58,20 @@
                 </tbody>
               </table>
             </div>
+            <div v-if="result.answer.labels_as_entity &&
+              result.answer.labels_as_entity.length > 0">
+              <p><strong>Labels:</strong></p>
+              <table class="table is-fullwidth is-striped is-hoverable is-narrow">
+                <tbody>
+                  <tr
+                    v-for="(label, i) in result.answer.labels_as_entity"
+                    :key="i">
+                    <td>{{ label.value }}</td>
+                    <td>{{ label.entity }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </b-tab-item>
           <b-tab-item label="raw">
             <pre class="mh-200">{{ JSON.stringify(result, null, 2) }}</pre>

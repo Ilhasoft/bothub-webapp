@@ -209,11 +209,6 @@ export default {
           background-color: $color-lighter-grey;
         }
       }
-
-      &__empty {
-        padding: .5rem;
-        font-style: italic;
-      }
     }
   }
 }
