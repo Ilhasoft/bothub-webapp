@@ -405,6 +405,7 @@ text: [text to analyze]</div>
       v-if="repository && authenticated"
       :ownerNickname="repository.owner__nickname"
       :slug="repository.slug"
+      :defaultLanguage="repository.language"
       :availableLanguages="repository.available_languages" />
   </layout>
 </template>

@@ -85,6 +85,10 @@ export default {
       type: String,
       required: true,
     },
+    defaultLanguage: {
+      type: String,
+      default: null,
+    },
     availableLanguages: {
       type: Array,
       required: true,
@@ -93,7 +97,7 @@ export default {
   data() {
     return {
       data: {
-        language: 'en',
+        language: this.defaultLanguage || this.availableLanguages[0],
         text: '',
       },
       submitting: false,
