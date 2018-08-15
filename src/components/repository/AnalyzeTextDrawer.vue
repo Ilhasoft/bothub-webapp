@@ -12,7 +12,7 @@
               expanded
               v-model="data.language">
               <option
-                v-for="(verbose, language) in languages"
+                v-for="(verbose, language) in availableLanguagesList"
                 :key="language"
                 :value="language">{{ verbose }}</option>
             </b-select>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { LANGUAGES } from '@/utils';
+import { languageListToDict } from '@/utils';
 import { mapActions } from 'vuex';
 
 export default {
@@ -96,10 +96,13 @@ export default {
       type: String,
       required: true,
     },
+    availableLanguages: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
-      languages: LANGUAGES,
       data: {
         language: 'en',
         text: '',
@@ -109,6 +112,11 @@ export default {
       activeTab: 0,
       errors: null,
     };
+  },
+  computed: {
+    availableLanguagesList() {
+      return languageListToDict(this.availableLanguages);
+    },
   },
   methods: {
     ...mapActions([

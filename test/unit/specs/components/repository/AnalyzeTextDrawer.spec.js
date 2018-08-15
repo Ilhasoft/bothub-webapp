@@ -24,6 +24,7 @@ describe('AnalyzeTextDrawer.vue', () => {
       propsData: {
         ownerNickname: 'douglas',
         slug: 'repo1',
+        availableLanguages: ['en'],
       },
       store,
     });
