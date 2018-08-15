@@ -39,14 +39,12 @@ describe('AnalyzeTextDrawer.vue', () => {
       wrapper.vm.data = {
         language: 'en',
         text: 'My name is Douglas',
-        availableLanguages: ['en', 'pt'],
       };
     });
 
     test('check data', () => {
       expect(wrapper.vm.data.language).toBe('en');
       expect(wrapper.vm.data.text).toBe('My name is Douglas');
-      expect(wrapper.vm.data.availableLanguages).toEqual(['en', 'pt']);
     });
 
     describe('submit', () => {

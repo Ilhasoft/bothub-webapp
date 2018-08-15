@@ -43,6 +43,7 @@ request.send(data);</div>
 
 <script>
 import LanguageSelect from '@/components/inputs/LanguageSelect';
+import { LANGUAGES } from '@/utils';
 
 
 const components = {
@@ -59,6 +60,7 @@ export default {
     },
     defaultLanguageField: {
       type: String,
+      default: LANGUAGES[Object.keys(LANGUAGES)[0]],
     },
   },
   data() {

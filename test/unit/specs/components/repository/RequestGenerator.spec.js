@@ -18,6 +18,16 @@ describe('RepositoryCard.vue', () => {
       },
     });
   });
+  test('Check if language renders correctly with default value of props when defaultLanguageField is null', () => {
+    wrapper.setProps({ defaultLanguageField: null });
+    expect(wrapper.vm.language).toBe('en');
+  });
+
+  test('Check if language renders correctly when defaultLanguageField is en', () => {
+    wrapper.setProps({ defaultLanguageField: 'en' });
+    expect(wrapper.vm.language).toBe('en');
+  });
+
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
