@@ -15,7 +15,9 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
     <div class="column is-narrow">
       <bhfield-stub>
-        <bhbutton-stub>Submit</bhbutton-stub>
+        <bhbutton-stub>Submit
+          <!---->
+        </bhbutton-stub>
       </bhfield-stub>
     </div>
   </form>
