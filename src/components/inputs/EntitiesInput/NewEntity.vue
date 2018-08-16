@@ -40,16 +40,18 @@
               <slot v-else-if="currentLabel">edit {{ currentLabel }} label</slot>
               <slot v-else>add label</slot>
             </bh-button>
-            <bh-text
+            <bh-autocomplete
               v-else
-              v-model="currentLabel">
+              v-model="currentLabel"
+              :data="availableLabels"
+              :formatters="labelFormatters">
               <span slot="append">
                 <bh-icon-button
                   value="close"
                   size="small"
                   @click="cancelCustomizeLabel()" />
               </span>
-            </bh-text>
+            </bh-autocomplete>
           </bh-field>
         </div>
         <div class="column is-narrow">
@@ -104,6 +106,10 @@ export default {
     labels: {
       type: Object,
       default: () => ({}),
+    },
+    availableLabels: {
+      type: Array,
+      default: () => ([]),
     },
     customLabelDisabled: {
       type: Boolean,
@@ -186,6 +192,11 @@ export default {
       return this.text.substring(start, end);
     },
     entityFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
+    },
+    labelFormatters() {
       return [
         formatters.bothubItemKey(),
       ];

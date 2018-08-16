@@ -13,7 +13,7 @@
             size="medium"
             placeholder="Add a sentence"
             :entities="entities"
-            :availableEntities="repository.entities"
+            :availableEntities="repository.entities || []"
             :formatters="textFormatters"
             @textSelected="setTextSelected($event)">
             <language-append-select-input
@@ -63,7 +63,8 @@
             :repository="repository"
             :text="text"
             :textSelected="textSelected"
-            :availableEntities="repository.entities"
+            :availableEntities="repository.entities || []"
+            :availableLabels="repository.labels_list || []"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>

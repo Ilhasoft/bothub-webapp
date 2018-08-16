@@ -31,6 +31,7 @@
         :textSelected="textSelected"
         :repository="repository"
         :availableEntities="availableEntities"
+        :availableLabels="availableLabels"
         @new="addEntity($event)" />
     </div>
   </bh-input>
@@ -66,6 +67,10 @@ export default {
       default: null,
     },
     availableEntities: {
+      type: Array,
+      default: () => ([]),
+    },
+    availableLabels: {
       type: Array,
       default: () => ([]),
     },
