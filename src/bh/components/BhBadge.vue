@@ -1,5 +1,11 @@
 <template>
-  <div :class="classAttr"><slot /></div>
+  <div
+    :class="{
+      'bh-badge': true,
+      [`bh-badge--${this.size}`]: !!this.size,
+    }">
+    <slot />
+  </div>
 </template>
 
 <script>
@@ -9,17 +15,6 @@ export default {
     size: {
       type: String,
       default: null,
-    },
-  },
-  computed: {
-    classAttr() {
-      const classes = ['bh-badge'];
-
-      if (this.size) {
-        classes.push(`bh-badge--${this.size}`);
-      }
-
-      return classes;
     },
   },
 };
