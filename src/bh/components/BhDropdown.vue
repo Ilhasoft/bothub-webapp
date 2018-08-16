@@ -1,6 +1,8 @@
 <template>
   <div class="bh-dropdown">
-    <div @click="openDropdown()">
+    <div
+      ref="openDropdown"
+      @click="openDropdown()">
       <slot name="trigger" />
     </div>
     <div

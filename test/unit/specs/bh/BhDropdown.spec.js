@@ -18,4 +18,44 @@ describe('BhDropdown.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('Dropdown get focus when open data is true', () => {
+    beforeEach(async () => {
+      wrapper.setData({
+        open: true,
+      });
+      await localVue.nextTick();
+    });
+
+    test('Watch when data: { open: true } get focus in dropdown', () => {
+      expect(wrapper.find({ ref: 'dropdown' }).is(':focus')).toBeTruthy();
+    });
+  });
+
+  describe('Dropdown dont get focus when open data is false', () => {
+    beforeEach(async () => {
+      wrapper.setData({
+        open: false,
+      });
+      await localVue.nextTick();
+    });
+
+    test('Watch when data: { open: false } dont get focus in dropdown', () => {
+      expect(wrapper.find({ ref: 'dropdown' }).is(':focus')).toBeFalsy();
+    });
+  });
+
+  describe('Dropdown on click', () => {
+    test('when click in dropdown set data: {open: false}', () => {
+      wrapper.find({ ref: 'dropdown' }).trigger('click');
+      expect(wrapper.vm.open).toBeFalsy();
+    });
+  });
+
+  describe('Open dropdown', () => {
+    test('when click in openDropdown set data: {open: true}', () => {
+      wrapper.find({ ref: 'openDropdown' }).trigger('click');
+      expect(wrapper.vm.open).toBeTruthy();
+    });
+  });
 });
