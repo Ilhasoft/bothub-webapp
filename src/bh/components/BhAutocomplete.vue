@@ -2,9 +2,11 @@
   <bh-input>
     <div :class="inputClassAttr">
       <div
-        :class="`${className}__prepend-text`"
-        v-if="prependText">
-        <span :class="`${className}__prepend-text__content`">{{ prependText }}</span>
+        v-if="$slots.prepend"
+        :class="`${className}__prepend`">
+        <div :class="`${className}__prepend__content`">
+          <slot name="prepend" />
+        </div>
       </div>
       <input
         ref="input"

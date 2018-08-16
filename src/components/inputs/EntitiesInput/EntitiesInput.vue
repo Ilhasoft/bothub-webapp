@@ -10,7 +10,10 @@
         ]">
         <span>
           <span><strong>{{ entity.entity }}</strong></span>
-          <span v-if="entity.label">is <strong>{{ entity.label }}</strong></span>
+          <span v-if="entity.label">
+            <bh-icon value="equal" />
+            <strong>{{ entity.label }}</strong>
+          </span>
         </span>
         <bh-dropdown>
           <bh-icon-button

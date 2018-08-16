@@ -18,8 +18,12 @@
             <bh-autocomplete
               v-model="entity"
               :data="availableEntities"
-              :prepend-text="`${textSelectedValue} is:`"
-              :formatters="entityFormatters" />
+              :formatters="entityFormatters">
+              <span slot="prepend">
+                <span>{{ textSelectedValue }}</span>
+                <bh-icon value="equal" />
+              </span>
+            </bh-autocomplete>
           </bh-field>
         </div>
         <div

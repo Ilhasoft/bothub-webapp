@@ -5,6 +5,7 @@ import Close from 'bh/assets/icons/close.svg';
 import DotsHorizontal from 'bh/assets/icons/dots-horizontal.svg';
 import MenuDown from 'bh/assets/icons/menu-down.svg';
 import Earth from 'bh/assets/icons/earth.svg';
+import Equal from 'bh/assets/icons/equal.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -23,6 +24,7 @@ export const icons = {
   'dots-horizontal': DotsHorizontal,
   'menu-down': MenuDown,
   earth: Earth,
+  equal: Equal,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
