@@ -1,5 +1,8 @@
 <template>
-  <div :class="classAttr">
+  <div :class="{
+    'bh-loading':true,
+    [`bh-loading--${this.size}`]: !!this.size,
+  }">
     <span />
     <span />
     <span />
@@ -13,17 +16,6 @@ export default {
     size: {
       type: String,
       default: null,
-    },
-  },
-  computed: {
-    classAttr() {
-      const classes = ['bh-loading'];
-
-      if (this.size) {
-        classes.push(`bh-loading--${this.size}`);
-      }
-
-      return classes;
     },
   },
 };

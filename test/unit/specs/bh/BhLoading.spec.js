@@ -18,4 +18,16 @@ describe('BhLoading.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('when size string is not blank', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        size: 'small',
+      });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });
