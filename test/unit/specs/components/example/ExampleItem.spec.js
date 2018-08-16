@@ -3,6 +3,7 @@ jest.mock('@/api/request');
 
 import VueMoment from 'vue-moment';
 import Buefy from 'buefy';
+import BH from 'bh';
 import store from '@/store';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ExampleItem from '@/components/example/ExampleItem';
@@ -11,6 +12,7 @@ import ExampleItem from '@/components/example/ExampleItem';
 const localVue = createLocalVue();
 localVue.use(VueMoment);
 localVue.use(Buefy);
+localVue.use(BH);
 
 describe('ExampleItem.vue', () => {
   let wrapper;
@@ -32,6 +34,7 @@ describe('ExampleItem.vue', () => {
           },
           entities: [],
         },
+        language: 'en',
       },
       store,
     });
