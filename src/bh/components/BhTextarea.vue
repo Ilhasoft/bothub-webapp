@@ -3,6 +3,7 @@
     <div :class="inputClassAttr">
       <textarea
         ref="textarea"
+        :class="`${className}__input`"
         v-bind="$attrs"
         v-model="val" />
     </div>

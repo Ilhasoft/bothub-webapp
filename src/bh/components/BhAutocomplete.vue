@@ -1,11 +1,14 @@
 <template>
   <bh-input>
     <div :class="inputClassAttr">
-      <span
-        :class="`${className}__prependtext`"
-        v-if="prependText">{{ prependText }}</span>
+      <div
+        :class="`${className}__prepend-text`"
+        v-if="prependText">
+        <span :class="`${className}__prepend-text__content`">{{ prependText }}</span>
+      </div>
       <input
         ref="input"
+        :class="`${className}__input`"
         type="text"
         v-bind="$attrs"
         v-model="val"
@@ -176,7 +179,7 @@ export default {
 
 .bh {
   &-autocomplete {
-    @include input();
+    @include text();
 
     &__list {
       @include typography();

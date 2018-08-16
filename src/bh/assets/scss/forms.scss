@@ -34,6 +34,7 @@
   @include form-component-sizes();
   @include form-component-typography();
 
+  $p: &;
   $gap: 4px;
 
   display: flex;
@@ -42,11 +43,20 @@
   justify-content: space-between;
 
   > * {
+    flex-grow: 1;
+    margin-right: .25rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__input {
     @include form-component-typography();
 
-    flex-grow: 1;
+    display: block;
+    width: 100%;
     padding: .5rem;
-    margin-right: 4px;
     background: none;
     border: none;
     outline: none;
@@ -55,47 +65,86 @@
     &::placeholder {
       color: $color-lighter-grey;
     }
-
-    &:last-child {
-      margin-right: 0;
-    }
   }
 
   &--small {
-    > * { /* stylelint-disable-line no-descending-specificity */
+    $fs: .75rem;
+
+    font-size: $fs;
+    line-height: $fs;
+
+    #{$p}__input {
       padding: .25rem;
-      font-size: .75rem;
-      line-height: .75rem;
+      font-size: $fs;
+      line-height: $fs;
     }
   }
 
   &--medium {
-    > * { /* stylelint-disable-line no-descending-specificity */
+    $fs: 1.25rem;
+
+    font-size: $fs;
+    line-height: $fs;
+
+    #{$p}__input {
       padding: .75rem;
-      font-size: 1.25rem;
-      line-height: 1.25rem;
+      font-size: $fs;
+      line-height: $fs;
     }
   }
 
   &--large {
-    > * { /* stylelint-disable-line no-descending-specificity */
+    $fs: 1.5rem;
+
+    font-size: $fs;
+    line-height: $fs;
+
+    #{$p}__input {
       padding: 1rem;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
+      font-size: $fs;
+      line-height: $fs;
     }
   }
 }
 
-@mixin input() {
+@mixin text() {
   @include form-component();
+
+  $p: &;
 
   background-color: white;
   border: 1px solid $color-lighter-grey;
   border-radius: $form-components-border-radius;
 
-  &__prependtext {
+  &__prepend-text {
+    display: flex;
+    flex-grow: 0;
+    align-items: center;
     height: 100%;
+    padding: 0 .5rem;
     background-color: $color-lighter-grey;
+
+    &__content {
+      white-space: nowrap;
+    }
+  }
+
+  &--small {
+    #{$p}__prepend-text {
+      padding: 0 .25rem;
+    }
+  }
+
+  &--medium {
+    #{$p}__prepend-text {
+      padding: 0 .75rem;
+    }
+  }
+
+  &--large {
+    #{$p}__prepend-text {
+      padding: 0 1rem;
+    }
   }
 }
 

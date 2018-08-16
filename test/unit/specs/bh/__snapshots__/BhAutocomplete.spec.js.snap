@@ -4,7 +4,7 @@ exports[`BhAutocomplete.vue focus on input press esc renders correctly 1`] = `
 <bhinput-stub>
   <div class="bh-autocomplete">
     <!---->
-    <input type="text"> </div>
+    <input type="text" class="bh-autocomplete__input"> </div>
   <!---->
 </bhinput-stub>
 `;
@@ -13,7 +13,7 @@ exports[`BhAutocomplete.vue focus on input renders correctly 1`] = `
 <bhinput-stub>
   <div class="bh-autocomplete">
     <!---->
-    <input type="text"> </div>
+    <input type="text" class="bh-autocomplete__input"> </div>
   <div class="bh-autocomplete__list">
     <button type="button" class="bh-autocomplete__list__item"><strong></strong>a<strong></strong></button>
     <button type="button" class="bh-autocomplete__list__item"><strong></strong>a<strong></strong>b<strong></strong></button>
@@ -28,7 +28,7 @@ exports[`BhAutocomplete.vue renders correctly 1`] = `
 <bhinput-stub>
   <div class="bh-autocomplete">
     <!---->
-    <input type="text"> </div>
+    <input type="text" class="bh-autocomplete__input"> </div>
   <!---->
 </bhinput-stub>
 `;
