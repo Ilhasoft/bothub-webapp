@@ -4,7 +4,11 @@
     :tabindex="_uid"
     @click="close()"
     @blur="close()"
-    :class="classAttr">
+    :class="{
+      'bh-tooltip': true,
+      'bh-tooltip--danger': danger,
+      [`bh-tooltip--${this.direction}`]: !!this.direction,
+    }">
     <slot />
   </div>
 </template>
@@ -38,21 +42,6 @@ export default {
   methods: {
     close() {
       this.$emit('update:open', false);
-    },
-  },
-  computed: {
-    classAttr() {
-      const classes = ['bh-tooltip'];
-
-      if (this.danger) {
-        classes.push('bh-tooltip--danger');
-      }
-
-      if (this.direction) {
-        classes.push(`bh-tooltip--${this.direction}`);
-      }
-
-      return classes;
     },
   },
 };
