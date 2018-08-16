@@ -13,7 +13,7 @@
             size="medium"
             placeholder="Add a sentence"
             :entities="entities"
-            :availableEntities="repository.entities"
+            :availableEntities="availableEntities"
             :formatters="textFormatters"
             @textSelected="setTextSelected($event)">
             <language-append-select-input
@@ -63,7 +63,8 @@
             :repository="repository"
             :text="text"
             :textSelected="textSelected"
-            :availableEntities="repository.entities"
+            :availableEntities="availableEntities"
+            :availableLabels="availableLabels"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -140,6 +141,21 @@ export default {
       ];
       formattersList.toString = () => 'intentFormatters';
       return formattersList;
+    },
+    availableEntities() {
+      const repositoryEntities = this.repository.entities || [];
+      const entitiesFlat = this.entities.map(e => e.entity);
+      return repositoryEntities
+        .concat(entitiesFlat)
+        .filter((entity, index, current) => (current.indexOf(entity) === index));
+    },
+    availableLabels() {
+      const repositoryLabels = this.repository.labels_list || [];
+      const labelsFlat = this.entities.map(e => e.label);
+      return repositoryLabels
+        .concat(labelsFlat)
+        .filter(label => !!label)
+        .filter((label, index, current) => (current.indexOf(label) === index));
     },
     data() {
       const {

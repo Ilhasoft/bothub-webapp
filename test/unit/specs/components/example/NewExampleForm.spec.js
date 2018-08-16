@@ -54,6 +54,27 @@ describe('NewExampleForm.vue', () => {
       expect(wrapper.vm.isValid).toBeTruthy();
     });
 
+    test('name in availableEntities', () => {
+      expect('name').toContain(wrapper.vm.availableEntities);
+    });
+
+    describe('entity with label', () => {
+      beforeEach(() => {
+        wrapper.vm.entities = [
+          {
+            start: 11,
+            end: 18,
+            entity: 'name',
+            label: 'person',
+          },
+        ];
+      });
+
+      test('person in availableLabels', () => {
+        expect('person').toContain(wrapper.vm.availableLabels);
+      });
+    });
+
     describe('on submit', () => {
       let r;
       beforeEach(async () => {
