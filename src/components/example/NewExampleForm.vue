@@ -46,10 +46,10 @@
             :tooltipHover="!isValid ? validationErrors : null"
             size="medium">
             <slot v-if="!submitting">Submit</slot>
-             <bh-loading
-                ref="load"
-                v-if="submitting"
-                size="small" />
+            <bh-loading
+              ref="load"
+              v-if="submitting"
+              size="small" />
             </bh-button>
         </bh-field>
       </div>
