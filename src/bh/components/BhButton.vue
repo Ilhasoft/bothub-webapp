@@ -3,7 +3,13 @@
     <button
       :disabled="disabled"
       :type="type"
-      :class="classAttr"
+      :class="{
+        'bh-button__button':true,
+        'bh-button__button--primary': primary,
+        'bh-button__button--secondary': secondary,
+        [`bh-button__button--${this.size}`]: !!this.size,
+        'bh-button__button--rounded': rounded
+      }"
       @click="$emit('click', $event)">
       <slot />
     </button>
@@ -53,29 +59,6 @@ export default {
     tooltipHover: {
       type: [String, Array],
       default: null,
-    },
-  },
-  computed: {
-    classAttr() {
-      const classes = ['bh-button__button'];
-
-      if (this.primary) {
-        classes.push('bh-button__button--primary');
-      }
-
-      if (this.secondary) {
-        classes.push('bh-button__button--secondary');
-      }
-
-      if (this.size) {
-        classes.push(`bh-button__button--${this.size}`);
-      }
-
-      if (this.rounded) {
-        classes.push('bh-button__button--rounded');
-      }
-
-      return classes;
     },
   },
 };
