@@ -18,4 +18,40 @@ describe('BhIconButton.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('when primary is true', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        primary: true,
+      });
+      localVue.nextTick();
+    });
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('when size props is not blank', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        size: 'smal',
+      });
+      localVue.nextTick();
+    });
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+  describe('when Size props is not blank and Primary props is true', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        size: 'smal',
+        primary: true,
+      });
+      localVue.nextTick();
+    });
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });

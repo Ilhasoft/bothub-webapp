@@ -2,7 +2,12 @@
   <button
     :disabled="disabled"
     :type="type"
-    :class="classAttr"
+    :class="{
+      'bh-icon-button': true,
+      'bh-icon-button--primary': this.primary,
+      [`bh-icon-button--${this.size}`]: !!this.size
+
+    }"
     @click="$emit('click', $event)"
     v-html="svg" />
 </template>
@@ -36,21 +41,6 @@ export default {
     },
   },
   computed: {
-    classAttr() {
-      const classes = [
-        'bh-icon-button',
-      ];
-
-      if (this.primary) {
-        classes.push('bh-icon-button--primary');
-      }
-
-      if (this.size) {
-        classes.push(`bh-icon-button--${this.size}`);
-      }
-
-      return classes;
-    },
     svg() {
       return icons[this.value];
     },
