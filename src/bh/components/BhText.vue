@@ -40,14 +40,27 @@ export default {
       default: () => ([]),
     },
   },
+  mounted() {
+    const { input } = this.$refs;
+
+    if (input) {
+      input.oninput = async () => {
+        const formattedValue = this.formatters.reduce((c, f) => f(c), input.value);
+        const { selectionStart } = input;
+        if (input.value !== formattedValue) {
+          this.val = formattedValue;
+          await this.$nextTick();
+          input.setSelectionRange(selectionStart, selectionStart);
+        }
+      };
+    }
+  },
   watch: {
     value(value) {
       this.val = value;
     },
     val(value) {
-      const out = this.formatters.reduce((c, f) => f(c), value);
-      this.val = out;
-      this.$emit('input', out);
+      this.$emit('input', value);
     },
   },
   data() {
