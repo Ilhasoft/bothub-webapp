@@ -84,6 +84,36 @@ describe('BhAutocomplete.vue', () => {
       test('selected event emitted', () => {
         expect(wrapper.emitted('selected')).toBeDefined();
       });
+
+      describe('select empty (null) item', () => {
+        beforeEach((() => {
+          wrapper.vm.select(null);
+        }));
+
+        test('selected event emit null value', () => {
+          const eventValues = wrapper.emitted('selected');
+          const eventValue = eventValues[eventValues.length - 1][0];
+          expect(eventValue).toBeNull();
+        });
+      });
+    });
+  });
+
+  describe('type "z" in input', () => {
+    const value = 'z';
+
+    beforeEach(() => {
+      const input = wrapper.find({ ref: 'input' });
+      input.element.value = value;
+      input.trigger('input');
+    });
+
+    test(`val equal ${value}`, () => {
+      expect(wrapper.vm.val).toBe(value);
+    });
+
+    test('autocomplete is closed', () => {
+      expect(wrapper.vm.autocompleteOpen).toBeFalsy();
     });
   });
 
@@ -114,6 +144,42 @@ describe('BhAutocomplete.vue', () => {
         test('selected event emitted with abcd value', () => {
           expect(wrapper.emitted('selected')[0][0]).toBe('abcd');
         });
+      });
+    });
+  });
+
+  describe('using verboseField and indexField', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        verboseField: 'label',
+        indexField: 'id',
+        data: [
+          { id: 1, label: 'a' },
+          { id: 2, label: 'b' },
+        ],
+      });
+    });
+
+    describe('type "b" in input', () => {
+      const value = { id: 2, label: 'b' };
+      const query = 'b';
+
+      beforeEach(() => {
+        const input = wrapper.find({ ref: 'input' });
+        input.element.value = query;
+        input.trigger('input');
+      });
+
+      test('renders correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+
+      test(`val equal ${query}`, () => {
+        expect(wrapper.vm.val).toBe(query);
+      });
+
+      test(`${value} in top of filteredData`, () => {
+        expect(value).toMatchObject(wrapper.vm.filteredData[0]);
       });
     });
   });
