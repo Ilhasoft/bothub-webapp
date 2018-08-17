@@ -18,4 +18,26 @@ describe('BhField.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('pass errors', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        errors: ['error 1'],
+      });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('toggle help text tooltip', () => {
+    beforeEach(() => {
+      wrapper.vm.toggleHelpTextTooltip();
+    });
+
+    test('helpTextTooltipOpen is true', () => {
+      expect(wrapper.vm.helpTextTooltipOpen).toBeTruthy();
+    });
+  });
 });

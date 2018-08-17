@@ -1,5 +1,8 @@
 <template>
-  <div :class="classAttr">
+  <div :class="{
+    'bh-field': true,
+    'bh-field--has-error': errors.length > 0,
+  }">
     <div
       v-if="label !== null"
       class="bh-field__label">
@@ -44,7 +47,7 @@ export default {
     const bhField = {};
     Object.defineProperty(bhField, 'errors', {
       enumerable: true,
-      get: () => this.errors,
+      get: /* istanbul ignore next */ () => this.errors,
     });
     return { bhField };
   },
@@ -52,17 +55,6 @@ export default {
     return {
       helpTextTooltipOpen: false,
     };
-  },
-  computed: {
-    classAttr() {
-      const classes = ['bh-field'];
-
-      if (this.errors.length > 0) {
-        classes.push('bh-field--has-error');
-      }
-
-      return classes;
-    },
   },
   methods: {
     toggleHelpTextTooltip() {
