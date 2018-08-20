@@ -14,7 +14,7 @@
           ]">{{ entity.text }}</span>
         </div>
         <textarea
-          ref="textarea"
+          ref="input"
           class="bh-textarea__input example-txt-w-highlighted-entities__input"
           v-bind="$attrs"
           v-model="val"
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     emitTextSelected(value = null) {
-      const { selectionStart, selectionEnd } = value || this.$refs.textarea;
+      const { selectionStart, selectionEnd } = value || this.$refs.input;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
       this.$emit(
@@ -110,11 +110,12 @@ export default {
       );
     },
     async clearSelected() {
+      const { input } = this.$refs;
       await this.$nextTick();
-      if (this.$refs.textarea.setSelectionRange) {
-        this.$refs.textarea.setSelectionRange(0, 0);
+      if (input.setSelectionRange) {
+        input.setSelectionRange(0, 0);
       } else {
-        this.$refs.textarea.focus();
+        input.focus();
       }
     },
   },
