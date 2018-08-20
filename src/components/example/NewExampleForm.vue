@@ -182,11 +182,13 @@ export default {
     },
     onEntityAdded() {
       if (this.$refs.textInput.clearSelected) {
+        /* istanbul ignore next */
         this.$refs.textInput.clearSelected();
       }
     },
     onEditEntity(entity) {
       if (this.$refs.textInput.emitTextSelected) {
+        /* istanbul ignore next */
         this.$refs.textInput.emitTextSelected({
           selectionStart: entity.start,
           selectionEnd: entity.end,
@@ -211,10 +213,14 @@ export default {
         this.$emit('created');
         return true;
       } catch (error) {
+        /* istanbul ignore next */
         const data = error.response && error.response.data;
+        /* istanbul ignore next */
         if (data) {
+          /* istanbul ignore next */
           this.errors = data;
         }
+        /* istanbul ignore next */
         this.submitting = false;
       }
       return false;
