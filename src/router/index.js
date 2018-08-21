@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components/Home';
-import MyProfile from '@/components/MyProfile';
-import ResetPassword from '@/components/ResetPassword';
-import Repository from '@/components/Repository';
+import Home from '@/components-v1/Home';
+import MyProfile from '@/components-v1/MyProfile';
+import ResetPassword from '@/components-v1/ResetPassword';
+import Repository from '@/components-v1/Repository';
 import store from '../store';
 
 Vue.use(Router);

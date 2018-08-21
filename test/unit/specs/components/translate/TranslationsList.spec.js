@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import store from '@/store';
-import TranslationsList from '@/components/translate/TranslationsList';
+import TranslationsList from '@/components-v1/translate/TranslationsList';
 
 
 const localVue = createLocalVue();

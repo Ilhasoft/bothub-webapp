@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import HighlightedText from '@/components/shared/HighlightedText';
+import HighlightedText from '@/components-v1/shared/HighlightedText';
 
 
 const localVue = createLocalVue();

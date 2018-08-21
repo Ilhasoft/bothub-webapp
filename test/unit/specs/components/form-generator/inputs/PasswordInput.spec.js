@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import PasswordInput from '@/components/form-generator/inputs/PasswordInput';
+import PasswordInput from '@/components-v1/form-generator/inputs/PasswordInput';
 
 
 const localVue = createLocalVue();

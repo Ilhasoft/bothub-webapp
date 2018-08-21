@@ -2,7 +2,7 @@ import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import router from '@/router';
-import LoginModal from '@/components/shared/LoginModal';
+import LoginModal from '@/components-v1/shared/LoginModal';
 
 
 const localVue = createLocalVue();

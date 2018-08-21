@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 
-import EntitiesInput from '@/components/inputs/EntitiesInput';
+import EntitiesInput from '@/components-v1/inputs/EntitiesInput';
 
 
 const localVue = createLocalVue();

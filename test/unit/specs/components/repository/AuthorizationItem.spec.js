@@ -7,7 +7,7 @@ import store from '@/store';
 import TYPES from '@/store/types';
 import applyFilters from '@/utils/filters';
 import { ROLE_USER } from '@/utils';
-import AuthorizationItem from '@/components/repository/AuthorizationItem';
+import AuthorizationItem from '@/components-v1/repository/AuthorizationItem';
 
 
 const localVue = createLocalVue();

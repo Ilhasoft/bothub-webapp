@@ -9,7 +9,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import LoginModal from '@/components/shared/LoginModal';
+import LoginModal from '@/components-v1/shared/LoginModal';
 
 const components = {
   LoginModal,

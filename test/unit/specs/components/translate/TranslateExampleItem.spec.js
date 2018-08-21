@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
 import VueMoment from 'vue-moment';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import TranslateExampleItem from '@/components/translate/TranslateExampleItem';
+import TranslateExampleItem from '@/components-v1/translate/TranslateExampleItem';
 
 
 const localVue = createLocalVue();

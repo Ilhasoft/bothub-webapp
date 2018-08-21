@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
-import Pie from '@/components/shared/Pie';
+import Pie from '@/components-v1/shared/Pie';
 
 
 const localVue = createLocalVue();

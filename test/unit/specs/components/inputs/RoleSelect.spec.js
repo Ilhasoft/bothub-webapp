@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import RoleSelect from '@/components/inputs/RoleSelect';
+import RoleSelect from '@/components-v1/inputs/RoleSelect';
 
 
 const localVue = createLocalVue();

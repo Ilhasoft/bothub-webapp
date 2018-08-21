@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import FormGenerator from '@/components/form-generator/FormGenerator';
+import FormGenerator from '@/components-v1/form-generator/FormGenerator';
 
 
 const localVue = createLocalVue();

@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
-import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
+import RequestAuthorizationForm from '@/components-v1/repository/RequestAuthorizationForm';
 
 
 const localVue = createLocalVue();

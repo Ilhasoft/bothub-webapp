@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ChoiceInput from '@/components/form-generator/inputs/ChoiceInput';
+import ChoiceInput from '@/components-v1/form-generator/inputs/ChoiceInput';
 
 
 const localVue = createLocalVue();

@@ -3,7 +3,7 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import CategoriesList from '@/components/shared/CategoriesList';
+import CategoriesList from '@/components-v1/shared/CategoriesList';
 
 
 const localVue = createLocalVue();

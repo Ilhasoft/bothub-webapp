@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BooleanInput from '@/components/form-generator/inputs/BooleanInput';
+import BooleanInput from '@/components-v1/form-generator/inputs/BooleanInput';
 
 
 const localVue = createLocalVue();

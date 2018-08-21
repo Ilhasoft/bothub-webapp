@@ -1,6 +1,6 @@
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import ExampleTextWithHighlightedEntitiesInput from '@/components-v1/inputs/ExampleTextWithHighlightedEntitiesInput';
 
 
 const localVue = createLocalVue();

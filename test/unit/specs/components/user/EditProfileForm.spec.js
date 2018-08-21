@@ -3,7 +3,7 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import EditProfileForm from '@/components/user/EditProfileForm';
+import EditProfileForm from '@/components-v1/user/EditProfileForm';
 
 
 const localVue = createLocalVue();

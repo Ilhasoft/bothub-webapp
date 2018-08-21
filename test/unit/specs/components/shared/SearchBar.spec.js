@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import SearchBar from '@/components/shared/SearchBar';
+import SearchBar from '@/components-v1/shared/SearchBar';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

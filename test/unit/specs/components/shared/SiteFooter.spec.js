@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import SiteFooter from '@/components/shared/SiteFooter';
+import SiteFooter from '@/components-v1/shared/SiteFooter';
 
 
 const localVue = createLocalVue();

@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import NewTranslateForm from '@/components/translate/NewTranslateForm';
+import NewTranslateForm from '@/components-v1/translate/NewTranslateForm';
 import store from '@/store';
 
 

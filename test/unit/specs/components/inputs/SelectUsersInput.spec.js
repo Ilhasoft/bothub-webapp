@@ -5,7 +5,7 @@ import Vue from 'vue';
 import Buefy from 'buefy';
 import store from '@/store';
 import { mount, createLocalVue } from '@vue/test-utils';
-import SelectUsersInput from '@/components/inputs/SelectUsersInput';
+import SelectUsersInput from '@/components-v1/inputs/SelectUsersInput';
 
 
 Vue.config.silent = true;

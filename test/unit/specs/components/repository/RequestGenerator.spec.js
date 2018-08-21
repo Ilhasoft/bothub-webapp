@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import RequestGenerator from '@/components/repository/RequestGenerator';
+import RequestGenerator from '@/components-v1/repository/RequestGenerator';
 
 
 const localVue = createLocalVue();

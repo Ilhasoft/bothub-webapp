@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Messages from '@/components/shared/Messages';
+import Messages from '@/components-v1/shared/Messages';
 
 
 const localVue = createLocalVue();

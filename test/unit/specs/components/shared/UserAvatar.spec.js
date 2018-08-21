@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import UserAvatar from '@/components/shared/UserAvatar';
+import UserAvatar from '@/components-v1/shared/UserAvatar';
 
 
 const localVue = createLocalVue();

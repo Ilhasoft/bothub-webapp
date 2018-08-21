@@ -6,7 +6,7 @@ import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import store from '@/store';
-import TranslationItem from '@/components/translate/TranslationItem';
+import TranslationItem from '@/components-v1/translate/TranslationItem';
 
 
 const localVue = createLocalVue();

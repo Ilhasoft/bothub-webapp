@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import router from '@/router';
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
+import RepositoryInfo from '@/components-v1/repository/RepositoryInfo';
 
 
 const localVue = createLocalVue();

@@ -1,6 +1,6 @@
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
+import LanguageAppendSelectInput from '@/components-v1/inputs/LanguageAppendSelectInput';
 
 
 const localVue = createLocalVue();

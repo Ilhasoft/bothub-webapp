@@ -6,7 +6,7 @@ import Buefy from 'buefy';
 import BH from 'bh';
 import store from '@/store';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ExampleItem from '@/components/example/ExampleItem';
+import ExampleItem from '@/components-v1/example/ExampleItem';
 
 
 const localVue = createLocalVue();

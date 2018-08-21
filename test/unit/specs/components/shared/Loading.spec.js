@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Loading from '@/components/shared/Loading';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const localVue = createLocalVue();

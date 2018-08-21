@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import LanguageSelect from '@/components/inputs/LanguageSelect';
+import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
 
 
 const localVue = createLocalVue();

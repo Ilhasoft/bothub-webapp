@@ -1,6 +1,6 @@
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ErrorMessage from '@/components/shared/ErrorMessage';
+import ErrorMessage from '@/components-v1/shared/ErrorMessage';
 
 
 const localVue = createLocalVue();

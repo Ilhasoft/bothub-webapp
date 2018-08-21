@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import Buefy from 'buefy';
 import store from '@/store';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
+import RepositoryAvatar from '@/components-v1/repository/RepositoryAvatar';
 
 
 const localVue = createLocalVue();

@@ -5,7 +5,7 @@ import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import router from '@/router';
-import Layout from '@/components/shared/Layout';
+import Layout from '@/components-v1/shared/Layout';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import FlagsList from '@/components/shared/FlagsList';
+import FlagsList from '@/components-v1/shared/FlagsList';
 
 
 const localVue = createLocalVue();

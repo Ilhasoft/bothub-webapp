@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
-import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
+import EditRepositoryForm from '@/components-v1/repository/EditRepositoryForm';
 
 
 const localVue = createLocalVue();

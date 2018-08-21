@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
-import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
+import ForgotPasswordForm from '@/components-v1/auth/ForgotPasswordForm';
 
 
 const localVue = createLocalVue();
