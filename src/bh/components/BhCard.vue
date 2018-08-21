@@ -26,9 +26,11 @@ export default {
  .bh {
    background-color: $color-primary-inverted;
    @include typography();
+
    span {
      color:black;
    }
+
    &-card{
     display: flex;
     flex-direction: row;
