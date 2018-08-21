@@ -31,7 +31,7 @@ export default {
     },
     toLanguage: {
       type: String,
-      required: true,
+      default: undefined,
     },
   },
   data() {

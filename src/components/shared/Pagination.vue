@@ -31,7 +31,7 @@ export default {
   components,
   props: {
     itemComponent: {
-      type: Object,
+      type: [Object, Function],
       required: true,
     },
     list: {
