@@ -1,15 +1,15 @@
 <template>
   <div class="bh">
     <div class="bh-card">
-      <div class="bh-card-left">
-        <div class="bh-card-left-content">
+      <div class="bh-card__left">
+        <div class="bh-card__left__content">
           <slot />
           <p v-if="$slots.right">Entities</p>
         </div>
       </div>
       <div
         v-if="$slots.right"
-        class="bh-card-right">
+        class="bh-card__right">
         <slot name="right"/>
       </div>
     </div>
@@ -39,8 +39,8 @@ export default {
     border-radius: 4px;
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.16);
     transition: 0.3s;
-    }
-    &-card-left{
+
+    &__left{
       position: relative;
       flex-grow: 1;
       height: auto;
@@ -51,20 +51,21 @@ export default {
       p{
         color:$color-grey;
       }
-      &-content{
+
+      &__content{
         display: flex;
         flex-grow: 1;
         align-items: center;
 
         padding: 20px 20px 20px 20px;
 
-        &-flex-display{
+        &__flex-display{
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           width: 100%;
 
-          &-label{
+          &__label{
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -74,7 +75,8 @@ export default {
         }
       }
     }
-    &-card-right{
+
+    &__right{
       position: relative;
       display: flex;
       flex-direction: row;
@@ -83,10 +85,11 @@ export default {
       width: 40%;
       padding: 15px 5px 15px 15px;
 
-      &-space-around{
+      &__space-around{
         margin-bottom: 5px;
       }
     }
+   }
  }
 
 </style>

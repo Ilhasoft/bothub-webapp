@@ -1,8 +1,8 @@
 <template>
   <bh-card>
-    <div class="bh-card-left-content-flex-display">
+    <div class="bh-card__left__content__flex-display">
       <strong> {{ title }}</strong>
-      <div class="bh-card-left-content-flex-display-label">
+      <div class="bh-card__left__content__flex-display__label">
         <p><strong>{{ SentencesSize }}</strong> Sentences </p>
         <p v-if="entities.length != 0 "><strong>{{ entitiesSize }}</strong> Entities</p>
       </div>
@@ -13,7 +13,7 @@
         :key="i"
         :class="[
           getEntityClass(entity),
-          'bh-card-right-space-around'
+          'bh-card__right__space-around'
       ]">
         <span>{{ entity }}</span>
       </bh-badge>
