@@ -5,7 +5,7 @@
         <highlighted-text
           :text="text"
           :entities="entities"
-          :allEntities="repository.entities" />
+          :all-entities="repository.entities" />
       </div>
       <div class="example-text__right">
         <bh-language-flag :language="language" />
@@ -15,10 +15,10 @@
       v-if="entitiesList.length > 0"
       class="example-entities">
       <b-tag
-        rounded
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="entity.class">
+        :class="entity.class"
+        rounded>
         <strong>{{ entity.value }}</strong>
         <span v-if="entity.label">is</span>
         <strong v-if="entity.label">{{ entity.label }}</strong>
@@ -65,9 +65,11 @@ const components = {
 
 export default {
   name: 'ExampleItem',
+  components,
   props: {
     id: {
       type: Number,
+      required: true,
     },
     text: {
       type: String,
@@ -94,7 +96,6 @@ export default {
       default: /* istanbul ignore next */ () => ({}),
     },
   },
-  components,
   data() {
     return {
       deleteDialog: null,

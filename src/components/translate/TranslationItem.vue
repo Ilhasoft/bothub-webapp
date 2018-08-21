@@ -6,7 +6,7 @@
           <highlighted-text
             :text="currentText"
             :entities="currentEntities"
-            :allEntities="repository.entities" />
+            :all-entities="repository.entities" />
         </div>
         <div class="column is-narrow">
           <button
@@ -20,9 +20,9 @@
               'is-loading': loadingOriginal,
             }"
             @click="toggleOriginal()">
-              <span v-if="showingOriginal">Show Translated</span>
-              <span v-else>Show Original</span>
-            </button>
+            <span v-if="showingOriginal">Show Translated</span>
+            <span v-else>Show Original</span>
+          </button>
         </div>
       </div>
     </div>
@@ -30,10 +30,10 @@
       v-if="entitiesList.length > 0"
       class="translation-entities">
       <b-tag
-        rounded
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)">{{ entity }}</b-tag>
+        :class="getEntityClass(entity)"
+        rounded>{{ entity }}</b-tag>
     </div>
     <div class="translation-infos level is-mobile">
       <div class="level-left">

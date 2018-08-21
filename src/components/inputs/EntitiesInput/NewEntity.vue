@@ -2,8 +2,8 @@
   <form @submit.prevent="addEntity()">
     <bh-button
       v-if="!addingMode"
+      :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
       rounded
-      :tooltipHover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
       @click="enableAddingMode()">
       <span>
         <span>Add new entity</span>
@@ -32,11 +32,11 @@
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
               v-if="!hasCustomizedLabel"
-              secondary
               :disabled="!entity || searchingLabel"
-              :tooltipHover="!currentLabel
+              :tooltip-hover="!currentLabel
                 ? ['Categorize their entities.', 'Ex: dog is animal']
-                : null"
+              : null"
+              secondary
               @click="customizeLabel()">
               <bh-loading
                 v-if="searchingLabel"
@@ -61,8 +61,8 @@
         <div class="column is-narrow">
           <bh-field label>
             <bh-button
-              primary
               :disabled="!entity || (searchingLabel && !customLabelDisabled)"
+              primary
               type="submit">add</bh-button>
           </bh-field>
         </div>
@@ -120,6 +120,38 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      addingMode: false,
+      editMode: false,
+      entity: '',
+      currentLabel: null,
+      pristineLabel: null,
+      hasCustomizedLabel: false,
+      setTimeoutId: null,
+      searchingLabel: false,
+    };
+  },
+  computed: {
+    textSelectedValue() {
+      if (!this.textSelected) {
+        return null;
+      }
+
+      const { start, end } = this.textSelected;
+      return this.text.substring(start, end);
+    },
+    entityFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
+    },
+    labelFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
+    },
+  },
   watch: {
     textSelected: {
       handler(value, oldValue) {
@@ -172,38 +204,6 @@ export default {
       }
 
       return this.setTimeoutId;
-    },
-  },
-  data() {
-    return {
-      addingMode: false,
-      editMode: false,
-      entity: '',
-      currentLabel: null,
-      pristineLabel: null,
-      hasCustomizedLabel: false,
-      setTimeoutId: null,
-      searchingLabel: false,
-    };
-  },
-  computed: {
-    textSelectedValue() {
-      if (!this.textSelected) {
-        return null;
-      }
-
-      const { start, end } = this.textSelected;
-      return this.text.substring(start, end);
-    },
-    entityFormatters() {
-      return [
-        formatters.bothubItemKey(),
-      ];
-    },
-    labelFormatters() {
-      return [
-        formatters.bothubItemKey(),
-      ];
     },
   },
   methods: {

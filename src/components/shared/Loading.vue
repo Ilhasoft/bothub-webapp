@@ -1,8 +1,8 @@
 <template>
   <div class="spinner">
-    <div class="bounce"></div>
-    <div class="bounce"></div>
-    <div class="bounce"></div>
+    <div class="bounce"/>
+    <div class="bounce"/>
+    <div class="bounce"/>
   </div>
 </template>
 

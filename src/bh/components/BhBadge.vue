@@ -2,8 +2,8 @@
   <div
     :class="{
       'bh-badge': true,
-      [`bh-badge--${this.size}`]: !!this.size,
-    }">
+      [`bh-badge--${size}`]: !!size,
+  }">
     <slot />
   </div>
 </template>

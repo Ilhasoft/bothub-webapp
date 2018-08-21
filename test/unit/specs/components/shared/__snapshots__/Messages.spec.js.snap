@@ -4,12 +4,12 @@ exports[`Messages.vue renders correctly 1`] = `<div class="messages"></div>`;
 
 exports[`Messages.vue set msgs with on error item check snapshot 1`] = `
 <div class="messages">
-  <div class="notification is-danger">bye</div>
+  <div if="true" class="notification is-danger">bye</div>
 </div>
 `;
 
 exports[`Messages.vue set msgs with one item check snapshot 1`] = `
 <div class="messages">
-  <div class="notification is-info">hi</div>
+  <div if="true" class="notification is-info">hi</div>
 </div>
 `;

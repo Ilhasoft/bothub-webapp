@@ -2,13 +2,13 @@
   <div
     v-show="open"
     :tabindex="_uid"
-    @click="close()"
-    @blur="close()"
     :class="{
       'bh-tooltip': true,
       'bh-tooltip--danger': danger,
-      [`bh-tooltip--${this.direction}`]: !!this.direction,
-    }">
+      [`bh-tooltip--${direction}`]: !!direction,
+    }"
+    @click="close()"
+    @blur="close()">
     <slot />
   </div>
 </template>

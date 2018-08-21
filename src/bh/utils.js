@@ -35,8 +35,13 @@ export const icons = {
   'flag-us': FlagUs,
 };
 
+/* istanbul ignore next */
 const trimStart = () => v => (v.trimStart());
+
+/* istanbul ignore next */
 const removeBreakLines = () => v => (v.replace('\n', ''));
+
+/* istanbul ignore next */
 const removeMultipleWhiteSpaces = () => v => (v.replace(/\s{2,}/g, ' '));
 
 export const formatters = {

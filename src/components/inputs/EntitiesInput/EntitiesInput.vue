@@ -7,7 +7,7 @@
         :class="[
           'entities-input__badges__badge',
           getEntityClass(entity),
-        ]">
+      ]">
         <span>
           <span><strong>{{ entity.entity }}</strong></span>
           <span v-if="entity.label">
@@ -28,13 +28,13 @@
     <div class="entities-input__new-entity">
       <new-entity
         ref="newEntity"
-        :customLabelDisabled="customLabelDisabled"
-        class="entities-input__new-entity__wrapper"
+        :custom-label-disabled="customLabelDisabled"
         :text="text"
-        :textSelected="textSelected"
+        :text-selected="textSelected"
         :repository="repository"
-        :availableEntities="availableEntities"
-        :availableLabels="availableLabels"
+        :available-entities="availableEntities"
+        :available-labels="availableLabels"
+        class="entities-input__new-entity__wrapper"
         @new="addEntity($event)" />
     </div>
   </bh-input>
@@ -82,14 +82,6 @@ export default {
       default: false,
     },
   },
-  watch: {
-    preparedEntities(value) {
-      this.$emit('input', value);
-    },
-    text(text, oldText) {
-      this.validateEntities(text, oldText);
-    },
-  },
   data() {
     return {
       entities: this.value,
@@ -127,6 +119,14 @@ export default {
       return this.preparedEntities.map(e => (this.labels[e.entity]
         ? { ...e, label: this.labels[e.entity] }
         : e));
+    },
+  },
+  watch: {
+    preparedEntities(value) {
+      this.$emit('input', value);
+    },
+    text(text, oldText) {
+      this.validateEntities(text, oldText);
     },
   },
   methods: {

@@ -3,9 +3,9 @@
     <div
       v-for="{ status, language, selected } in filteredLanguagesStatus"
       :key="language"
+      :ref="`status-${language}`"
       class="column is-3"
-      @click="select(language)"
-      :ref="`status-${language}`">
+      @click="select(language)">
       <div :class="{ card: true, selected }">
         <div class="card-percentage">
           <pie :percent="status.base_translations.percentage" />
@@ -32,6 +32,7 @@ const components = {
 
 export default {
   name: 'TranslationsStatus',
+  components,
   props: {
     ownerNickname: {
       type: String,
@@ -44,17 +45,6 @@ export default {
     value: {
       type: String,
       default: null,
-    },
-  },
-  components,
-  async mounted() {
-    await this.updateTranslationsStatus();
-  },
-  watch: {
-    async ownerNickname() { await this.updateTranslationsStatus(); },
-    async repositorySlug() { await this.updateTranslationsStatus(); },
-    selected() {
-      this.$emit('input', this.selected);
     },
   },
   data() {
@@ -79,6 +69,16 @@ export default {
           a.status.base_translations.percentage
           < b.status.base_translations.percentage));
     },
+  },
+  watch: {
+    async ownerNickname() { await this.updateTranslationsStatus(); },
+    async repositorySlug() { await this.updateTranslationsStatus(); },
+    selected() {
+      this.$emit('input', this.selected);
+    },
+  },
+  async mounted() {
+    await this.updateTranslationsStatus();
   },
   methods: {
     ...mapActions([

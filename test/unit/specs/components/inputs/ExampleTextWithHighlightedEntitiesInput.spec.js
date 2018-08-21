@@ -19,9 +19,9 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   describe('set text', () => {
     const textareaValue = 'hi kids';
     beforeEach(() => {
-      const textarea = wrapper.find({ ref: 'textarea' });
-      textarea.element.value = textareaValue;
-      textarea.trigger('input');
+      const input = wrapper.find({ ref: 'input' });
+      input.element.value = textareaValue;
+      input.trigger('input');
     });
 
     test(`val is ${textareaValue}`, () => {
@@ -30,8 +30,8 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
 
     describe('select text', () => {
       beforeEach(() => {
-        const textarea = wrapper.find({ ref: 'textarea' });
-        textarea.element.setSelectionRange(0, 2);
+        const input = wrapper.find({ ref: 'input' });
+        input.element.setSelectionRange(0, 2);
       });
 
       test('renders correctly', () => {

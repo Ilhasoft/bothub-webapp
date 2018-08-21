@@ -1,7 +1,10 @@
 <template>
   <span
+    :class="{
+      'bh-icon': true,
+      [`bh-icon--${size}`]: !!size,
+    }"
     @click="$emit('click', $event)"
-    :class="classAttr"
     v-html="svg" />
 </template>
 
@@ -22,17 +25,6 @@ export default {
     },
   },
   computed: {
-    classAttr() {
-      const classes = [
-        'bh-icon',
-      ];
-
-      if (this.size) {
-        classes.push(`bh-icon--${this.size}`);
-      }
-
-      return classes;
-    },
     svg() {
       return icons[this.value];
     },

@@ -1,11 +1,11 @@
 <template>
   <div>
     <pagination
-        v-if="examplesList"
-        :itemComponent="exampleItemElem"
-        :list="examplesList"
-        :repository="repository"
-        @itemDeleted="onItemDeleted" />
+      v-if="examplesList"
+      :item-component="exampleItemElem"
+      :list="examplesList"
+      :repository="repository"
+      @itemDeleted="onItemDeleted" />
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -31,14 +31,14 @@ export default {
       required: true,
     },
   },
-  async mounted() {
-    await this.updateExamples();
-  },
   data() {
     return {
       examplesList: null,
       exampleItemElem: ExampleItem,
     };
+  },
+  async mounted() {
+    await this.updateExamples();
   },
   methods: {
     ...mapActions([
