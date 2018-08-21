@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhBadge.vue renders correctly 1`] = `
+<div class="bh">
+  <div class="bh-card">
+    <div class="bh-card-left">
+      <div class="bh-card-left-content">
+        <!---->
+      </div>
+    </div>
+    <!---->
+  </div>
+</div>
+`;

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCard.vue RepositoryCard.vue renders correctly when have entities array props 1`] = `
+<bhcard-stub>
+  <div class="bh-card-left-content-flex-display"><strong> Caminhão</strong>
+    <div class="bh-card-left-content-flex-display-label">
+      <p><strong>0</strong> Sentences </p>
+      <p><strong>3</strong> Entities</p>
+    </div>
+  </div>
+</bhcard-stub>
+`;
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<bhcard-stub>
+  <div class="bh-card-left-content-flex-display"><strong> Caminhão</strong>
+    <div class="bh-card-left-content-flex-display-label">
+      <p><strong>0</strong> Sentences </p>
+      <!---->
+    </div>
+  </div>
+</bhcard-stub>
+`;
