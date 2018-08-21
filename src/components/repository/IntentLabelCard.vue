@@ -1,23 +1,24 @@
 <template>
   <bh-card>
     <div class="bh-card-left-content-flex-display">
-      <strong> {{title}}</strong>
+      <strong> {{ title }}</strong>
       <div class="bh-card-left-content-flex-display-label">
         <p><strong>{{ SentencesSize }}</strong> Sentences </p>
         <p v-if="entities.length != 0 "><strong>{{ entitiesSize }}</strong> Entities</p>
       </div>
     </div>
     <template slot="right">
-      <bh-badge v-for="(entity, i) in entities"
+      <bh-badge
+        v-for="(entity, i) in entities"
         :key="i"
         :class="[
           getEntityClass(entity),
           'bh-card-right-space-around'
-        ]">
-       <span>{{ entity }}</span>
+      ]">
+        <span>{{ entity }}</span>
       </bh-badge>
     </template>
-    </bh-card>
+  </bh-card>
 </template>
 <script>
 import BhCard from '@/bh/components/BhCard';
@@ -31,6 +32,7 @@ const components = {
 };
 export default {
   name: 'IntentLabelCard',
+  components,
   props: {
     title: {
       type: String,
@@ -45,12 +47,11 @@ export default {
       default: () => ([]),
     },
   },
-  components,
   computed: {
     entitiesSize() {
       return this.entities.length;
     },
-    SentencesSize() {
+    sentencesSize() {
       return this.examples.length;
     },
   },

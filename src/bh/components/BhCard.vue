@@ -1,21 +1,23 @@
 <template>
-<div class="bh">
-  <div class="bh-card">
-    <div class="bh-card-left">
-      <div class="bh-card-left-content">
-        <slot />
-        <p v-if="$slots.right">Entities</p>
-     </div>
-    </div>
-    <div v-if="$slots.right" class="bh-card-right">
-      <slot name="right"/>
+  <div class="bh">
+    <div class="bh-card">
+      <div class="bh-card-left">
+        <div class="bh-card-left-content">
+          <slot />
+          <p v-if="$slots.right">Entities</p>
+        </div>
+      </div>
+      <div
+        v-if="$slots.right"
+        class="bh-card-right">
+        <slot name="right"/>
+      </div>
     </div>
   </div>
-</div>
 </template>
 <script>
 export default {
-  name: 'bhCard',
+  name: 'BhCard',
 };
 </script>
 <style lang="scss" scoped>
@@ -78,6 +80,7 @@ export default {
       justify-content: space-around;
       width: 40%;
       padding: 15px 5px 15px 15px;
+
       &-space-around{
         margin-bottom: 5px;
       }

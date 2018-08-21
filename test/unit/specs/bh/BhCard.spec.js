@@ -7,7 +7,7 @@ import BhCard from 'bh/components/BhCard';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('BhBadge.vue', () => {
+describe('BhCard.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(BhCard, {
