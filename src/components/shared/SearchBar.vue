@@ -1,10 +1,12 @@
 <template>
-  <form class="search" @submit.prevent="submit()">
+  <form
+    class="search"
+    @submit.prevent="submit()">
     <input
       ref="input"
+      v-model="data"
       type="text"
-      placeholder="the world of robots is here"
-      v-model="data" />
+      placeholder="the world of robots is here" >
     <button type="submit"><b-icon icon="magnify" /></button>
   </form>
 </template>
@@ -22,6 +24,12 @@ export default {
       default: 750,
     },
   },
+  data() {
+    return {
+      data: this.value,
+      setTimeoutId: null,
+    };
+  },
   watch: {
     data() {
       this.clearTimeout();
@@ -30,12 +38,6 @@ export default {
         this.debounceTime,
       );
     },
-  },
-  data() {
-    return {
-      data: this.value,
-      setTimeoutId: null,
-    };
   },
   methods: {
     submit() {

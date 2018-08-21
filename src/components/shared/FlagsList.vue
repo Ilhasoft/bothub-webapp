@@ -15,6 +15,7 @@ const components = {
 
 export default {
   name: 'FlagList',
+  components,
   props: {
     languages: {
       type: Array,
@@ -22,9 +23,9 @@ export default {
     },
     size: {
       type: String,
+      default: null,
     },
   },
-  components,
 };
 </script>
 

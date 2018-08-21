@@ -3,8 +3,12 @@
     <span
       slot="trigger"
       class="clickable">
-      <bh-language-flag v-if="val" :language="val" />
-      <bh-icon value="earth" v-else />
+      <bh-language-flag
+        v-if="val"
+        :language="val" />
+      <bh-icon
+        v-else
+        value="earth" />
       <bh-icon value="menu-down" />
     </span>
     <bh-dropdown-item
@@ -12,8 +16,8 @@
       :key="language"
       @click="setVal(language)">
       <bh-language-flag
-        size="small"
-        :language="language" />
+        :language="language"
+        size="small" />
       <span>{{ verbose }}</span>
     </bh-dropdown-item>
   </bh-dropdown>
@@ -27,9 +31,15 @@ export default {
   name: 'LanguageAppendSelectInput',
   props: {
     value: {
-      props: String,
+      type: String,
       default: null,
     },
+  },
+  data() {
+    return {
+      val: this.value,
+      LANGUAGES,
+    };
   },
   watch: {
     value(value) {
@@ -38,12 +48,6 @@ export default {
     val(value) {
       this.$emit('input', value);
     },
-  },
-  data() {
-    return {
-      val: this.value,
-      LANGUAGES,
-    };
   },
   methods: {
     setVal(value) {

@@ -10,9 +10,9 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting">Register</button>
+          :disabled="submitting"
+          type="submit"
+          class="button is-primary">Register</button>
       </div>
     </div>
   </form>
@@ -32,9 +32,6 @@ const components = {
 export default {
   name: 'RegisterForm',
   components,
-  async mounted() {
-    this.formSchema = await this.getRegisterSchema();
-  },
   data() {
     return {
       formSchema: null,
@@ -42,6 +39,9 @@ export default {
       submitting: false,
       errors: {},
     };
+  },
+  async mounted() {
+    this.formSchema = await this.getRegisterSchema();
   },
   methods: {
     ...mapActions([

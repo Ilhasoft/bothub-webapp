@@ -1,9 +1,9 @@
 <template>
   <b-input
-    password-reveal
-    type="password"
     :maxlength="max_length"
     v-model="value"
+    password-reveal
+    type="password"
     @input="update()" />
 </template>
 
@@ -12,18 +12,20 @@ export default {
   props: {
     max_length: {
       type: Number,
+      default: null,
     },
     initialData: {
       type: String,
+      default: '',
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || '',
+      value: this.initialData,
     };
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

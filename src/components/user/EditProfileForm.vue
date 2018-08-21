@@ -6,14 +6,14 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      class="field"
-      :initialData="myProfile" />
+      :initial-data="myProfile"
+      class="field" />
     <div class="field">
       <div class="control has-text-centered">
         <button
+          :disabled="submitting"
           type="submit"
-          class="button is-primary"
-          :disabled="submitting">Edit</button>
+          class="button is-primary">Edit</button>
       </div>
     </div>
   </form>
@@ -33,9 +33,6 @@ const components = {
 export default {
   name: 'EditProfileForm',
   components,
-  async mounted() {
-    this.formSchema = await this.getMyProfileSchema();
-  },
   data() {
     return {
       formSchema: null,
@@ -48,6 +45,9 @@ export default {
     ...mapGetters([
       'myProfile',
     ]),
+  },
+  async mounted() {
+    this.formSchema = await this.getMyProfileSchema();
   },
   methods: {
     ...mapActions([

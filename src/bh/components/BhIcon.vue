@@ -1,10 +1,10 @@
 <template>
   <span
-    @click="$emit('click', $event)"
     :class="{
       'bh-icon': true,
       [`bh-icon--${size}`]: !!size,
     }"
+    @click="$emit('click', $event)"
     v-html="svg" />
 </template>
 

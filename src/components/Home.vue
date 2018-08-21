@@ -14,9 +14,9 @@
       <div class="container">
         <pagination
           v-if="repositoryList"
-          class="repository-list"
-          :itemComponent="repositoryItemElem"
-          :list="repositoryList" />
+          :item-component="repositoryItemElem"
+          :list="repositoryList"
+          class="repository-list" />
         <p
           v-if="repositoryList && repositoryList.empty"
           class="has-text-centered">Repositories not found.</p>
@@ -43,8 +43,13 @@ const components = {
 export default {
   name: 'Home',
   components,
-  mounted() {
-    this.updateRepositoryList();
+  data() {
+    return {
+      currentCategory: 0,
+      search: '',
+      repositoryItemElem: RepositoryCard,
+      repositoryList: null,
+    };
   },
   watch: {
     currentCategory() {
@@ -54,13 +59,8 @@ export default {
       this.updateRepositoryList();
     },
   },
-  data() {
-    return {
-      currentCategory: 0,
-      search: '',
-      repositoryItemElem: RepositoryCard,
-      repositoryList: null,
-    };
+  mounted() {
+    this.updateRepositoryList();
   },
   methods: {
     ...mapActions([

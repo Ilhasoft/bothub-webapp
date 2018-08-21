@@ -8,7 +8,9 @@
         <div class="level-item">
           <div class="topbar-brand">
             <router-link to="/">
-              <img src="@/assets/imgs/logo-white.svg" alt="bothub">
+              <img
+                src="@/assets/imgs/logo-white.svg"
+                alt="bothub">
             </router-link>
           </div>
         </div>
@@ -74,20 +76,10 @@ const components = {
 export default {
   name: 'Layout',
   components,
-  mounted() {
-    document.title = this.title;
-    this.updateMyProfile();
-  },
   props: {
     title: {
       type: String,
       default: 'bothub',
-    },
-  },
-  watch: {
-    title() {
-      /* istanbul ignore next */
-      document.title = this.title;
     },
   },
   data() {
@@ -100,6 +92,16 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+  },
+  watch: {
+    title() {
+      /* istanbul ignore next */
+      document.title = this.title;
+    },
+  },
+  mounted() {
+    document.title = this.title;
+    this.updateMyProfile();
   },
   methods: {
     ...mapActions([

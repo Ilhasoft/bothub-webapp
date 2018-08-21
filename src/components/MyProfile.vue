@@ -13,16 +13,16 @@
           <div class="column is-narrow">
             <div class="item-1-2">
               <button
-                @click="openEditProfileModal()"
-                class="button is-outlined is-primary">
+                class="button is-outlined is-primary"
+                @click="openEditProfileModal()">
                 <b-icon icon="pencil" />
                 <span>Edit Profile</span>
               </button>
             </div>
             <div class="item-1-2">
               <button
-                @click="openChangePasswordModal()"
-                class="button is-outlined is-primary">
+                class="button is-outlined is-primary"
+                @click="openChangePasswordModal()">
                 <b-icon icon="lock-reset" />
                 <span>Change Password</span>
               </button>
@@ -32,9 +32,9 @@
         <h1 class="title is-4">My Repositories</h1>
         <pagination
           v-if="repositoryList"
-          class="repository-list"
-          :itemComponent="repositoryItemElem"
-          :list="repositoryList" />
+          :item-component="repositoryItemElem"
+          :list="repositoryList"
+          class="repository-list" />
       </div>
     </div>
     <b-modal :active.sync="editProfileModalOpen">
@@ -80,18 +80,9 @@ const components = {
 };
 
 export default {
-  extends: LoginIsRequired,
   name: 'MyProfile',
   components,
-  mounted() {
-    this.updateMyProfile();
-    this.updateMyRepositories();
-  },
-  computed: {
-    ...mapGetters([
-      'myProfile',
-    ]),
-  },
+  extends: LoginIsRequired,
   data() {
     return {
       repositoryItemElem: RepositoryCard,
@@ -99,6 +90,15 @@ export default {
       editProfileModalOpen: false,
       changePasswordModalOpen: false,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'myProfile',
+    ]),
+  },
+  mounted() {
+    this.updateMyProfile();
+    this.updateMyRepositories();
   },
   methods: {
     ...mapActions([
