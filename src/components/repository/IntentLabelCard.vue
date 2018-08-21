@@ -3,10 +3,11 @@
     <div class="bh-card__left__content__flex-display">
       <strong> {{ title }}</strong>
       <div class="bh-card__left__content__flex-display__label">
-        <p><strong>{{ SentencesSize }}</strong> Sentences </p>
-        <p v-if="entities.length != 0 "><strong>{{ entitiesSize }}</strong> Entities</p>
+        <p><strong>{{ 0 }}</strong> Sentences </p>
+        <p v-if="entities.length != 0 "><strong>{{ 0 }}</strong> Entities</p>
       </div>
     </div>
+    <p v-if="entities.length != 0">Entities</p>
     <template slot="right">
       <bh-badge
         v-for="(entity, i) in entities"
@@ -45,14 +46,6 @@ export default {
     entities: {
       type: Array,
       default: () => ([]),
-    },
-  },
-  computed: {
-    entitiesSize() {
-      return this.entities.length;
-    },
-    sentencesSize() {
-      return this.examples.length;
     },
   },
   methods: {

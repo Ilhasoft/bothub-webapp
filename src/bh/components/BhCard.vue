@@ -4,7 +4,6 @@
       <div class="bh-card__left">
         <div class="bh-card__left__content">
           <slot />
-          <p v-if="$slots.right">Entities</p>
         </div>
       </div>
       <div
