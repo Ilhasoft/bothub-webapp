@@ -1,7 +1,8 @@
 <template>
-  <div :class="{
-    'bh-field': true,
-    'bh-field--has-error': errors.length > 0,
+  <div
+    :class="{
+      'bh-field': true,
+      'bh-field--has-error': errors.length > 0,
   }">
     <div
       v-if="label !== null"

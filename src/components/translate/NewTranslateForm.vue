@@ -5,25 +5,25 @@
       @submit.prevent="onSubmit()">
       <div class="column">
         <bh-field
-          label
-          :errors="errors.text">
+          :errors="errors.text"
+          label>
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="text"
+            :entities="entities"
+            :available-entities="repository.entities"
             placeholder="Translate sentence"
             size="medium"
-            :entities="entities"
-            :availableEntities="repository.entities"
             @textSelected="setTextSelected($event)" />
         </bh-field>
       </div>
       <div class="column is-narrow">
         <bh-field label>
           <bh-button
+            :disabled="!isValid || submitting"
             secondary
             type="submit"
-            size="medium"
-            :disabled="!isValid || submitting">Submit Translation</bh-button>
+            size="medium">Submit Translation</bh-button>
         </bh-field>
       </div>
     </form>
@@ -32,12 +32,12 @@
         <bh-field :errors="errors.entities">
           <entities-input
             ref="entitiesInput"
-            customLabelDisabled
             v-model="entities"
             :repository="repository"
             :text="text"
-            :textSelected="textSelected"
-            :availableEntities="repository.entities"
+            :text-selected="textSelected"
+            :available-entities="repository.entities"
+            custom-label-disabled
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -78,17 +78,6 @@ export default {
       default: null,
     },
   },
-  watch: {
-    text() {
-      this.errors = {};
-    },
-    entities: {
-      handler() {
-        this.errors = {};
-      },
-      deep: true,
-    },
-  },
   data() {
     return {
       text: '',
@@ -101,6 +90,17 @@ export default {
   computed: {
     isValid() {
       return !!this.text;
+    },
+  },
+  watch: {
+    text() {
+      this.errors = {};
+    },
+    entities: {
+      handler() {
+        this.errors = {};
+      },
+      deep: true,
     },
   },
   methods: {

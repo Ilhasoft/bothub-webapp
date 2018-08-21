@@ -9,10 +9,15 @@ localVue.use(Buefy);
 describe('ErrorMessage.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ErrorMessage, { localVue });
+    wrapper = shallowMount(ErrorMessage, {
+      localVue,
+      propsData: {
+        detail: 'Error 1',
+      },
+    });
   });
 
-  test('mount', () => {
-    expect(wrapper.vm).toBeDefined();
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });

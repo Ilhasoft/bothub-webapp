@@ -1,5 +1,7 @@
 <template>
-  <div class="pie" :data-percent="validPercent">
+  <div
+    :data-percent="validPercent"
+    class="pie">
     <div class="pie-percent">{{ (percent/100) | percent }}</div>
   </div>
 </template>

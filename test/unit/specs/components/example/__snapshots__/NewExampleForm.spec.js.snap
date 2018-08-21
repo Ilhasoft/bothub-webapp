@@ -5,12 +5,12 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column is-three-fifths">
       <bhfield-stub>
-        <exampletextwithhighlightedentitiesinput-stub size="medium" placeholder="Add a sentence" formatters="textFormatters"></exampletextwithhighlightedentitiesinput-stub>
+        <exampletextwithhighlightedentitiesinput-stub formatters="textFormatters" size="medium" placeholder="Add a sentence"></exampletextwithhighlightedentitiesinput-stub>
       </bhfield-stub>
     </div>
     <div class="column">
       <bhfield-stub>
-        <bhautocomplete-stub size="medium" placeholder="Intent" formatters="intentFormatters"></bhautocomplete-stub>
+        <bhautocomplete-stub formatters="intentFormatters" size="medium" placeholder="Intent"></bhautocomplete-stub>
       </bhfield-stub>
     </div>
     <div class="column is-narrow">

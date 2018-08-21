@@ -16,19 +16,19 @@ import BhText from './BhText';
 export default {
   name: 'BhTextarea',
   extends: BhText,
-  async mounted() {
-    await this.$nextTick();
-    this.updateTextareaHeight();
+  data() {
+    return {
+      className: 'bh-textarea',
+    };
   },
   watch: {
     val() {
       this.updateTextareaHeight();
     },
   },
-  data() {
-    return {
-      className: 'bh-textarea',
-    };
+  async mounted() {
+    await this.$nextTick();
+    this.updateTextareaHeight();
   },
   methods: {
     updateTextareaHeight() {

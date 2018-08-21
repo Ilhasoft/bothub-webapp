@@ -9,9 +9,9 @@
       v-show="open"
       ref="dropdown"
       :tabindex="_uid"
+      class="bh-dropdown__content"
       @click="closeDropdown()"
-      @blur="closeDropdown()"
-      class="bh-dropdown__content"><slot /></div>
+      @blur="closeDropdown()"><slot /></div>
   </div>
 </template>
 

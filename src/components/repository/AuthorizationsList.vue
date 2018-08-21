@@ -1,9 +1,9 @@
 <template>
   <div>
     <pagination
-      ref="list"
       v-if="authorizationsList"
-      :itemComponent="authorizationItemElem"
+      ref="list"
+      :item-component="authorizationItemElem"
       :list="authorizationsList"
       @edit="onEdit($event)" />
     <p
@@ -25,21 +25,21 @@ const components = {
 
 export default {
   name: 'AuthorizationsList',
+  components,
   props: {
     repositoryUuid: {
       type: String,
       required: true,
     },
   },
-  components,
-  async mounted() {
-    await this.updateAuthorizations();
-  },
   data() {
     return {
       authorizationsList: null,
       authorizationItemElem: AuthorizationItem,
     };
+  },
+  async mounted() {
+    await this.updateAuthorizations();
   },
   methods: {
     ...mapActions(['repositoryAuthorizationList']),

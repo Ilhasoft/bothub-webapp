@@ -7,7 +7,7 @@
         'bh-button__button':true,
         'bh-button__button--primary': primary,
         'bh-button__button--secondary': secondary,
-        [`bh-button__button--${this.size}`]: !!this.size,
+        [`bh-button__button--${size}`]: !!size,
         'bh-button__button--rounded': rounded
       }"
       @click="$emit('click', $event)">
@@ -18,13 +18,13 @@
       class="bh-button__tooltip"
       open
       direction="down">
-        <span v-if="(tooltipHover instanceof Array)">
-          <div
-            v-for="(text, i) in tooltipHover"
-            :key="i">{{ text }}</div>
-        </span>
-        <span v-else>{{ tooltipHover }}</span>
-      </bh-tooltip>
+      <span v-if="(tooltipHover instanceof Array)">
+        <div
+          v-for="(text, i) in tooltipHover"
+          :key="i">{{ text }}</div>
+      </span>
+      <span v-else>{{ tooltipHover }}</span>
+    </bh-tooltip>
   </div>
 </template>
 

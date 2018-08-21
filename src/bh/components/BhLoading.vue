@@ -1,7 +1,8 @@
 <template>
-  <div :class="{
-    'bh-loading':true,
-    [`bh-loading--${this.size}`]: !!this.size,
+  <div
+    :class="{
+      'bh-loading':true,
+      [`bh-loading--${size}`]: !!size,
   }">
     <span />
     <span />

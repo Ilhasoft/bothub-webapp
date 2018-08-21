@@ -21,10 +21,10 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting"
-          >Login</button>
+          :disabled="submitting"
+          type="submit"
+          class="button is-primary"
+        >Login</button>
       </div>
     </div>
   </form>
@@ -43,15 +43,12 @@ const components = {
 
 export default {
   name: 'LoginForm',
+  components,
   props: {
     hideForgotPassword: {
       type: Boolean,
       default: false,
     },
-  },
-  components,
-  async mounted() {
-    this.formSchema = await this.getLoginSchema();
   },
   data() {
     return {
@@ -60,6 +57,9 @@ export default {
       submitting: false,
       errors: {},
     };
+  },
+  async mounted() {
+    this.formSchema = await this.getLoginSchema();
   },
   methods: {
     ...mapActions([

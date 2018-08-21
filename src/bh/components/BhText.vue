@@ -11,9 +11,9 @@
       <input
         ref="input"
         :class="`${className}__input`"
-        type="text"
         v-bind="$attrs"
-        v-model="val" />
+        v-model="val"
+        type="text" >
       <slot name="append" />
     </div>
   </bh-input>
@@ -40,29 +40,6 @@ export default {
       default: () => ([]),
     },
   },
-  mounted() {
-    const { input } = this.$refs;
-
-    if (input) {
-      input.oninput = async () => {
-        const formattedValue = this.formatters.reduce((c, f) => f(c), input.value);
-        const { selectionStart } = input;
-        if (input.value !== formattedValue) {
-          this.val = formattedValue;
-          await this.$nextTick();
-          input.setSelectionRange(selectionStart, selectionStart);
-        }
-      };
-    }
-  },
-  watch: {
-    value(value) {
-      this.val = value;
-    },
-    val(value) {
-      this.$emit('input', value);
-    },
-  },
   data() {
     return {
       className: 'bh-text',
@@ -79,6 +56,29 @@ export default {
 
       return classes;
     },
+  },
+  watch: {
+    value(value) {
+      this.val = value;
+    },
+    val(value) {
+      this.$emit('input', value);
+    },
+  },
+  mounted() {
+    const { input } = this.$refs;
+
+    if (input) {
+      input.oninput = async () => {
+        const formattedValue = this.formatters.reduce((c, f) => f(c), input.value);
+        const { selectionStart } = input;
+        if (input.value !== formattedValue) {
+          this.val = formattedValue;
+          await this.$nextTick();
+          input.setSelectionRange(selectionStart, selectionStart);
+        }
+      };
+    }
   },
 };
 </script>

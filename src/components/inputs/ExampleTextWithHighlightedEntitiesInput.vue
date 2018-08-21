@@ -6,18 +6,20 @@
           v-for="(entity, i) in entitiesBlocks"
           :key="i"
           :class="entityClassAttr">
-          <span :class="[
-            'example-txt-w-highlighted-entities__entity__before',
-          ]">{{ entity.before }}</span><span :class="[
-            entity.colorClass,
-            'example-txt-w-highlighted-entities__entity__text'
+          <span
+            :class="[
+              'example-txt-w-highlighted-entities__entity__before',
+          ]">{{ entity.before }}</span><span
+            :class="[
+              entity.colorClass,
+              'example-txt-w-highlighted-entities__entity__text'
           ]">{{ entity.text }}</span>
         </div>
         <textarea
           ref="input"
-          class="bh-textarea__input example-txt-w-highlighted-entities__input"
           v-bind="$attrs"
           v-model="val"
+          class="bh-textarea__input example-txt-w-highlighted-entities__input"
           @select="emitTextSelected()"
           @click="emitTextSelected()"
           @keyup="emitTextSelected()" />
@@ -41,8 +43,8 @@ const components = {
 
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
-  extends: BhTextarea,
   components,
+  extends: BhTextarea,
   props: {
     entities: {
       type: Array,

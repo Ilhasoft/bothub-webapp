@@ -4,10 +4,9 @@
       v-if="repository"
       class="wrapper">
       <repository-info
-        hideDescription
-        :showManagerAuthorizationAction="repository.authorization.is_admin"
-        :showEditAction="repository.authorization.can_write"
-        :showTrainAction="repository.authorization.can_write && repository.ready_for_train"
+        :show-manager-authorization-action="repository.authorization.is_admin"
+        :show-edit-action="repository.authorization.can_write"
+        :show-train-action="repository.authorization.can_write && repository.ready_for_train"
         :training="training"
         :slug="repository.slug"
         :name="repository.name"
@@ -15,25 +14,26 @@
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
         :votes_sum="repository.votes_sum"
+        hide-description
         @managerAuthorization="openManagerAuthorization()"
         @train="train()"
         @edit="openEditModal()" />
       <ul class="repository-navbar">
         <li
-          @click="activeTab = 0"
-          :class="{'repository-navbar-item': true, 'active': activeTab === 0}">Status</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 0}"
+          @click="activeTab = 0">Status</li>
         <li
-          @click="activeTab = 1"
-          :class="{'repository-navbar-item': true, 'active': activeTab === 1}">Examples</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 1}"
+          @click="activeTab = 1">Examples</li>
         <li
-          @click="activeTab = 2"
-          :class="{'repository-navbar-item': true, 'active': activeTab === 2}">Translate</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 2}"
+          @click="activeTab = 2">Translate</li>
         <li
-          @click="activeTab = 3"
-          :class="{'repository-navbar-item': true, 'active': activeTab === 3}">Translations</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 3}"
+          @click="activeTab = 3">Translations</li>
         <li
-          @click="activeTab = 4"
-          :class="{'repository-navbar-item': true, 'active': activeTab === 4}">Analyze Text</li>
+          :class="{'repository-navbar-item': true, 'active': activeTab === 4}"
+          @click="activeTab = 4">Analyze Text</li>
       </ul>
       <b-tabs
         v-model="activeTab"
@@ -42,7 +42,9 @@
           <div class="notification">
             <div class="columns is-variable is-2">
               <div class="column has-text-right has-text-centered-mobile">
-                <img src="@/assets/imgs/mascot.svg" class="status-mascot status-center-36px" />
+                <img
+                  src="@/assets/imgs/mascot.svg"
+                  class="status-mascot status-center-36px" >
               </div>
               <div class="column is-two-fifths has-text-centered has-text-primary">
                 <p>
@@ -64,7 +66,7 @@
                   @click="train()">
                   <b-icon
                     :icon="training ? 'refresh' : 'school'"
-                    :customClass="training && 'icon-spin' || null" />
+                    :custom-class="training && 'icon-spin' || null" />
                   <span v-if="training">Training</span>
                   <span v-else>Train</span>
                 </button>
@@ -79,14 +81,16 @@
               <div
                 v-else-if="
                   repository.request_authorization &&
-                  !repository.request_authorization.approved_by"
+                !repository.request_authorization.approved_by"
                 class="column has-text-centered">
                 <button
                   disabled
                   class="button is-primary is-outlined is-small">Authorization Requested</button>
                 <p class="is-size-7 has-text-grey">Wait for admin review.</p>
               </div>
-              <div v-else class="column" />
+              <div
+                v-else
+                class="column" />
             </div>
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
@@ -97,8 +101,8 @@
             <new-example-form
               v-if="repository.authorization.can_contribute"
               :repository="repository"
-              :extraEntitiesList="repository.entities"
-              :extraIntentsList="repository.intents"
+              :extra-entities-list="repository.entities"
+              :extra-intents-list="repository.intents"
               @created="onExampleCreated()" />
             <div v-else-if="authenticated">
               <div class="notification is-warning">
@@ -109,7 +113,7 @@
               <div class="notification is-info">
                 Sign in to your account to contribute to this repository.
               </div>
-              <login-form hideForgotPassword />
+              <login-form hide-forgot-password />
             </div>
           </div>
           <div
@@ -127,7 +131,7 @@
                     @click="train()">
                     <b-icon
                       :icon="training ? 'refresh' : 'school'"
-                      :customClass="training && 'icon-spin' || null" />
+                      :custom-class="training && 'icon-spin' || null" />
                     <span v-if="training">Training</span>
                     <span v-else>Train</span>
                   </button>
@@ -163,7 +167,7 @@
                   <b-field label="Translate to:">
                     <language-select
                       v-model="translate.to"
-                      :exclude=[translate.from] />
+                      :exclude="[translate.from]" />
                   </b-field>
                 </div>
               </div>
@@ -177,7 +181,7 @@
               <div class="notification is-info">
                 Sign in to your account to contribute to this repository.
               </div>
-              <login-form hideForgotPassword />
+              <login-form hide-forgot-password />
             </div>
           </div>
           <translate-list
@@ -193,8 +197,8 @@
               <div class="column">
                 <translations-status
                   ref="translationsStatus"
-                  :ownerNickname="repository.owner__nickname"
-                  :repositorySlug="repository.slug"
+                  :owner-nickname="repository.owner__nickname"
+                  :repository-slug="repository.slug"
                   v-model="toLanguage" />
               </div>
             </div>
@@ -202,7 +206,7 @@
           <translations-list
             ref="translationsList"
             :repository="repository"
-            :toLanguage="toLanguage" />
+            :to-language="toLanguage" />
         </b-tab-item>
         <b-tab-item>
           <div class="tab-padding">
@@ -223,36 +227,36 @@
                   <div class="item">
                     <p><strong>POST with form-data:</strong></p>
                     <div class="pre">language: [language code]
-text: [text to analyze]</div>
+                    text: [text to analyze]</div>
                   </div>
                   <div class="item">
                     <p><strong>Response:</strong></p>
                     <div class="pre">{
-  "text": "yes",
-  "language": "en",
-  "answer": {
-    "intent": {
-      "name": "affirmative",
-      "confidence": 0.5872959956337126
-    },
-    "entities": [],
-    "intent_ranking": [
-      {
-        "name": "affirmative",
-        "confidence": 0.5872959956337126
-      },
-      {
-        "name": "negative",
-        "confidence": 0.2952035928665842
-      },
-      {
-        "name": "doubt",
-        "confidence": 0.11750041149970303
-      }
-    ],
-    "text": "yes"
-  }
-}</div>
+                    "text": "yes",
+                    "language": "en",
+                    "answer": {
+                    "intent": {
+                    "name": "affirmative",
+                    "confidence": 0.5872959956337126
+                    },
+                    "entities": [],
+                    "intent_ranking": [
+                    {
+                    "name": "affirmative",
+                    "confidence": 0.5872959956337126
+                    },
+                    {
+                    "name": "negative",
+                    "confidence": 0.2952035928665842
+                    },
+                    {
+                    "name": "doubt",
+                    "confidence": 0.11750041149970303
+                    }
+                    ],
+                    "text": "yes"
+                    }
+                    }</div>
                   </div>
                 </div>
                 <div class="column is-half">
@@ -261,8 +265,8 @@ text: [text to analyze]</div>
                     <div>Generate code to your respective programming language.</div>
                   </div>
                   <request-generator
-                    :authorizationUuid="repository.authorization.uuid"
-                    :defaultLanguageField="repository.language"/>
+                    :authorization-uuid="repository.authorization.uuid"
+                    :default-language-field="repository.language"/>
                 </div>
               </div>
             </div>
@@ -278,8 +282,8 @@ text: [text to analyze]</div>
     <div
       v-else-if="!hasError"
       class="wrapper">
-        <loading />
-      </div>
+      <loading />
+    </div>
     <div v-else>
       <error-message :detail="errorDetail" />
     </div>
@@ -357,9 +361,9 @@ text: [text to analyze]</div>
         <div class="card-content">
           <h1 class="title is-4">Edit Repository</h1>
           <edit-repository-form
-            :ownerNickname="repository.owner__nickname"
+            :owner-nickname="repository.owner__nickname"
             :slug="repository.slug"
-            :initialData="getEditInitialData()"
+            :initial-data="getEditInitialData()"
             @edited="onEdited()" />
         </div>
       </div>
@@ -371,7 +375,7 @@ text: [text to analyze]</div>
         <div class="card-content">
           <h1 class="title is-4">Request Authorization</h1>
           <request-authorization-form
-            :repositoryUUid="repository.uuid"
+            :repository-uuid="repository.uuid"
             @requested="onAuthorizationRequested()" />
         </div>
       </div>
@@ -384,29 +388,29 @@ text: [text to analyze]</div>
           <h1 class="title is-4">Manager Team</h1>
           <set-authorization-role-form
             ref="setAuthorizationRoleForm"
-            :repositoryUuid="repository.uuid"
+            :repository-uuid="repository.uuid"
             @roleSetted="onRoleSetted()" />
         </div>
         <div class="card-content">
           <authorizations-list
             ref="authorizationsList"
-            :repositoryUuid="repository.uuid"
+            :repository-uuid="repository.uuid"
             @edit="onEditRole($event)" />
         </div>
         <div class="card-content">
           <h1 class="title is-5">Authorization Requests</h1>
           <authorization-requests-list
-            :repositoryUuid="repository.uuid"
+            :repository-uuid="repository.uuid"
             @review="onReviewAuthorizationRequest()" />
         </div>
       </div>
     </b-modal>
     <analyze-text-drawer
       v-if="repository && authenticated"
-      :ownerNickname="repository.owner__nickname"
+      :owner-nickname="repository.owner__nickname"
       :slug="repository.slug"
-      :defaultLanguage="repository.language"
-      :availableLanguages="repository.available_languages" />
+      :default-language="repository.language"
+      :available-languages="repository.available_languages" />
   </layout>
 </template>
 
@@ -456,20 +460,6 @@ const components = {
 export default {
   name: 'Repository',
   components,
-  async mounted() {
-    await this.updateRepository();
-  },
-  watch: {
-    async authenticated() {
-      await this.updateRepository();
-    },
-    '$route.params.ownerNickname': async () => {
-      await this.updateRepository();
-    },
-    '$route.params.slug': async () => {
-      await this.updateRepository();
-    },
-  },
   data() {
     return {
       repository: null,
@@ -492,6 +482,20 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+  },
+  watch: {
+    async authenticated() {
+      await this.updateRepository();
+    },
+    '$route.params.ownerNickname': async () => {
+      await this.updateRepository();
+    },
+    '$route.params.slug': async () => {
+      await this.updateRepository();
+    },
+  },
+  async mounted() {
+    await this.updateRepository();
   },
   methods: {
     ...mapActions([

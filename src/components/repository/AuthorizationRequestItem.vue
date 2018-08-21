@@ -9,8 +9,8 @@
     </div>
     <div
       ref="approveBtn"
-      @click="approve()"
-      class="clickable-icon has-text-success">
+      class="clickable-icon has-text-success"
+      @click="approve()">
       <b-icon
         icon="check"
         size="is-small" />
@@ -18,8 +18,8 @@
     <div class="media-right">
       <div
         ref="rejectBtn"
-        @click="reject()"
-        class="clickable-icon has-text-danger">
+        class="clickable-icon has-text-danger"
+        @click="reject()">
         <b-icon
           icon="close"
           size="is-small" />
@@ -55,9 +55,6 @@ export default {
       required: true,
     },
   },
-  mounted() {
-    this.updateUserProfile();
-  },
   data() {
     return {
       rejectDialog: null,
@@ -67,6 +64,9 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+  },
+  mounted() {
+    this.updateUserProfile();
   },
   methods: {
     ...mapActions([
