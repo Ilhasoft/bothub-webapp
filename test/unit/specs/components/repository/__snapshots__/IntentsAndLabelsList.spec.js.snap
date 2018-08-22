@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div class="no-examples">
+  <div class="button-position">
+    <bhbutton-stub>
+      Intents
+    </bhbutton-stub>
+    <bhbutton-stub class="button-position-space">
+      Labels
+    </bhbutton-stub>
+  </div>
+  <div></div>
+  <!---->
+</div>
+`;

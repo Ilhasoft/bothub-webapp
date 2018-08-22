@@ -139,6 +139,10 @@
               </div>
             </div>
           </div>
+          <intents-and-labels-list
+            :labels="repository.labels"
+            :intents="repository.intents"
+          />
           <h1 class="title examples-title">Examples</h1>
           <examples-list
             ref="examplesList"
@@ -434,6 +438,7 @@ import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRo
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
+import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
 
 const components = {
@@ -455,6 +460,7 @@ const components = {
   AuthorizationsList,
   RequestAuthorizationForm,
   AuthorizationRequestsList,
+  IntentsAndLabelsList,
 };
 
 export default {

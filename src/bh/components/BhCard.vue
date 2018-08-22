@@ -80,7 +80,7 @@ export default {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-around;
+      justify-content: flex-start;
       width: 40%;
       padding: 15px 5px 15px 15px;
 

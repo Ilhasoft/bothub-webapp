@@ -4,20 +4,24 @@
       <strong> {{ title }}</strong>
       <div class="bh-card__left__content__flex-display__label">
         <p><strong>{{ 0 }}</strong> Sentences </p>
-        <p v-if="entities.length != 0 "><strong>{{ 0 }}</strong> Entities</p>
+        <p v-if="labelEntities != null"><strong>{{ 0 }}</strong> Entities</p>
       </div>
     </div>
-    <p v-if="entities.length != 0">Entities</p>
+    <p v-if="labelEntities != null">Entities</p>
     <template slot="right">
-      <bh-badge
-        v-for="(entity, i) in entities"
-        :key="i"
-        :class="[
-          getEntityClass(entity),
-          'bh-card__right__space-around'
-      ]">
-        <span>{{ entity }}</span>
-      </bh-badge>
+      <div v-if="labelEntities != null">
+        <bh-badge
+          v-for="(entities, i) in labelEntities"
+          :key="i"
+          :class="[
+            getEntityClass(entities),
+            'bh-card__right__space-around'
+          ]"
+          size="small"
+          class="margin-badge">
+          <span> {{ entities }} </span>
+        </bh-badge>
+      </div>
     </template>
   </bh-card>
 </template>
@@ -32,27 +36,27 @@ const components = {
   BhBadge,
 };
 export default {
-  name: 'IntentLabelCard',
+  name: 'IntentsAndLabelsCard',
   components,
   props: {
     title: {
       type: String,
       required: true,
     },
-    examples: {
+    intents: {
       type: Array,
-      default: () => ([]),
+      default: null,
     },
-    entities: {
+    labelEntities: {
       type: Array,
-      default: () => ([]),
+      default: null,
     },
   },
   methods: {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.entities,
+        this.labelEntities,
       );
       return `entity-${color}`;
     },
@@ -60,4 +64,7 @@ export default {
 };
 </script>
 <style>
+  .margin-badge{
+    margin-left: 5px;
+  }
 </style>
