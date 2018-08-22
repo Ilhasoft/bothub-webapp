@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <slot />
+    <div class="layout__content"><slot /></div>
     <site-footer />
   </div>
 </template>
@@ -179,6 +179,10 @@ export default {
         height: $heigth;
       }
     }
+  }
+
+  &__content {
+    min-height: calc(100vh - 4rem);
   }
 }
 </style>
