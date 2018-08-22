@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Layout from '@/components-v1/shared/Layout';
+import Layout from '@/components/shared/Layout';
 import ResetPasswordForm from '@/components-v1/auth/ResetPasswordForm';
 
 const components = {

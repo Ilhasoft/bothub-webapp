@@ -210,6 +210,18 @@
     border: 1px solid transparent;
   }
 
+  &--primary-inverted {
+    color: $color-primary;
+    background-color: $color-primary-inverted;
+    border: 1px solid transparent;
+  }
+
+  &--primary-transparent {
+    color: $color-primary-inverted;
+    background-color: transparent;
+    border: 1px solid $color-primary-inverted;
+  }
+
   &--secondary {
     color: $color-secondary-inverted;
     background-color: $color-secondary;

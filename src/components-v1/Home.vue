@@ -27,7 +27,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Layout from '@/components-v1/shared/Layout';
+import Layout from '@/components/shared/Layout';
 import SearchBar from '@/components-v1/shared/SearchBar';
 import CategoriesList from '@/components-v1/shared/CategoriesList';
 import Pagination from '@/components-v1/shared/Pagination';

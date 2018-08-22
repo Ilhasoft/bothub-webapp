@@ -63,7 +63,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import Layout from '@/components-v1/shared/Layout';
+import Layout from '@/components/shared/Layout';
 import UserProfile from '@/components-v1/user/UserProfile';
 import RepositoryCard from '@/components-v1/repository/RepositoryCard';
 import Pagination from '@/components-v1/shared/Pagination';

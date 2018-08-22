@@ -30,35 +30,35 @@ export default {
     @include typography();
 
     display: inline-flex;
-    height: $height-normal;
+    height: $size-normal;
     padding: 0 1rem;
     font-size: 1rem;
-    line-height: $height-normal;
+    line-height: $size-normal;
     background-color: white;
-    border-radius: ($height-normal / 2);
+    border-radius: ($size-normal / 2);
 
     &--small {
-      height: $height-small;
+      height: $size-small;
       padding: 0 .75rem;
       font-size: .75rem;
-      line-height: $height-small;
-      border-radius: ($height-small / 2);
+      line-height: $size-small;
+      border-radius: ($size-small / 2);
     }
 
     &--medium {
-      height: $height-medium;
+      height: $size-medium;
       padding: 0 1.25rem;
       font-size: 1.25rem;
-      line-height: $height-medium;
-      border-radius: ($height-medium / 2);
+      line-height: $size-medium;
+      border-radius: ($size-medium / 2);
     }
 
     &--large {
-      height: $height-large;
+      height: $size-large;
       padding: 0 1.5rem;
       font-size: 1.5rem;
-      line-height: $height-large;
-      border-radius: ($height-large / 2);
+      line-height: $size-large;
+      border-radius: ($size-large / 2);
     }
 
     > * {

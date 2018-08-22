@@ -19,16 +19,3 @@ $colors: (
   ('color-secondary', $color-secondary),
   ('color-secondary-inverted', $color-secondary-inverted),
 );
-
-@each $color in $colors {
-  $color-name: nth($color, 1);
-  $color-value: nth($color, 2);
-
-  .text-#{$color-name} {
-    color: $color-value;
-  }
-
-  .background-#{$color-name} {
-    background-color: $color-value;
-  }
-}

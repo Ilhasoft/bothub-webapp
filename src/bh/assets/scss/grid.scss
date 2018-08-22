@@ -1,0 +1,12 @@
+$grid-gap: .5rem;
+
+.bh {
+  &-grid {
+    display: flex;
+    margin: -($grid-gap);
+
+    &__item {
+      margin: $grid-gap;
+    }
+  }
+}

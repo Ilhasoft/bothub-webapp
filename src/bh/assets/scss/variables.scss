@@ -9,19 +9,25 @@ $font-weight-bolder: 700;
 
 // Sizes
 
-$height-normal: 2.25rem;
-$height-small: 1.5rem;
-$height-medium: 3rem;
-$height-large: 4rem;
+$size-normal: 2.25rem;
+$size-small: 1.5rem;
+$size-medium: 3rem;
+$size-large: 4rem;
+$sizes: (
+  ('normal', $size-normal),
+  ('small', $size-small),
+  ('medium', $size-medium),
+  ('large', $size-large),
+);
 
 
 // Forms
 
 $form-components-border-radius: 4px;
-$form-component-height-normal: $height-normal;
-$form-component-height-small: $height-small;
-$form-component-height-medium: $height-medium;
-$form-component-height-large: $height-large;
+$form-component-height-normal: $size-normal;
+$form-component-height-small: $size-small;
+$form-component-height-medium: $size-medium;
+$form-component-height-large: $size-large;
 
 
 // z-index

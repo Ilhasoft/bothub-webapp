@@ -34,11 +34,11 @@ export default {
 
     display: inline-flex;
     align-items: center;
-    height: $height-normal;
+    height: $size-normal;
 
     span {
-      width: ($height-normal * $reduce-factor);
-      height: ($height-normal * $reduce-factor);
+      width: ($size-normal * $reduce-factor);
+      height: ($size-normal * $reduce-factor);
       background-color: $color-lighter-grey;
       border-radius: 100%;
       animation: bh-loading-bouncedelay 1.4s infinite ease-in-out both;
@@ -53,29 +53,29 @@ export default {
     }
 
     &--small {
-      height: $height-small;
+      height: $size-small;
 
       #{$parent} span {
-        width: ($height-small * $reduce-factor);
-        height: ($height-small * $reduce-factor);
+        width: ($size-small * $reduce-factor);
+        height: ($size-small * $reduce-factor);
       }
     }
 
     &--medium {
-      height: $height-medium;
+      height: $size-medium;
 
       #{$parent} span {
-        width: ($height-medium * $reduce-factor);
-        height: ($height-medium * $reduce-factor);
+        width: ($size-medium * $reduce-factor);
+        height: ($size-medium * $reduce-factor);
       }
     }
 
     &--large {
-      height: $height-large;
+      height: $size-large;
 
       #{$parent} span {
-        width: ($height-large * $reduce-factor);
-        height: ($height-large * $reduce-factor);
+        width: ($size-large * $reduce-factor);
+        height: ($size-large * $reduce-factor);
       }
     }
   }

@@ -2,4 +2,37 @@
 @import '~./colors';
 @import '~./typography';
 @import '~./forms';
+@import '~./grid';
 @import '~./utils';
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+body {
+  @include typography();
+
+  height: 100%;
+  background-color: $color-lighter-grey;
+}
+
+@each $color in $colors {
+  $color-name: nth($color, 1);
+  $color-value: nth($color, 2);
+
+  .text-#{$color-name} {
+    color: $color-value;
+  }
+
+  .background-#{$color-name} {
+    background-color: $color-value;
+  }
+}

@@ -1,5 +1,9 @@
 <template>
-  <div class="bh-dropdown">
+  <div
+    :class="{
+      'bh-dropdown': true,
+      [`bh-dropdown--${position}`]: !!position,
+  }">
     <div
       ref="openDropdown"
       @click="openDropdown()">
@@ -18,6 +22,12 @@
 <script>
 export default {
   name: 'BhDropdown',
+  props: {
+    position: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
       open: false,
@@ -49,6 +59,8 @@ export default {
 
 .bh {
   &-dropdown {
+    $parent: &;
+
     position: relative;
 
     &__content {
@@ -63,6 +75,12 @@ export default {
       border-radius: 4px;
       outline: none;
       box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
+    }
+
+    &--left {
+      #{$parent}__content {
+        transform: translate(-100%);
+      }
     }
   }
 }

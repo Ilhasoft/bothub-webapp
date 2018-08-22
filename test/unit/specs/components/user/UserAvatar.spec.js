@@ -1,11 +1,10 @@
-import Buefy from 'buefy';
-
+import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import UserAvatar from '@/components-v1/shared/UserAvatar';
+import UserAvatar from '@/components/user/UserAvatar';
 
 
 const localVue = createLocalVue();
-localVue.use(Buefy);
+localVue.use(BH);
 
 describe('UserAvatar.vue', () => {
   let wrapper;
@@ -18,5 +17,15 @@ describe('UserAvatar.vue', () => {
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('with small size', () => {
+    beforeEach(() => {
+      wrapper.setProps({ size: 'small' });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 });

@@ -7,3 +7,11 @@ exports[`BhText.vue renders correctly 1`] = `
     <input type="text" class="bh-text__input"> </div>
 </bhinput-stub>
 `;
+
+exports[`BhText.vue with small size renders correctly 1`] = `
+<bhinput-stub>
+  <div class="bh-text bh-text--small">
+    <!---->
+    <input type="text" class="bh-text__input"> </div>
+</bhinput-stub>
+`;

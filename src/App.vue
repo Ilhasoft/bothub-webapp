@@ -31,23 +31,6 @@ export default {
 @import '~buefy/src/scss/buefy';
 @import '~bh/assets/scss/bh.scss';
 
-* {
- box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-}
-
-body {
-  background-image: url('~@/assets/imgs/bg.jpg');
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
-  background-attachment: fixed;
-}
 
 .container-padding {
   padding: 0 8px;

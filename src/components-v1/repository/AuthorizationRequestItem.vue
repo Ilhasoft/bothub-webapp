@@ -31,7 +31,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import UserAvatar from '@/components-v1/shared/UserAvatar';
+import UserAvatar from '@/components/user/UserAvatar';
 
 
 const components = {

@@ -5,7 +5,9 @@
       :type="type"
       :class="{
         'bh-button__button':true,
-        'bh-button__button--primary': primary,
+        'bh-button__button--primary': primary && !inverted && !transparent,
+        'bh-button__button--primary-inverted': primary && inverted && !transparent,
+        'bh-button__button--primary-transparent': primary && !inverted && transparent,
         'bh-button__button--secondary': secondary,
         [`bh-button__button--${size}`]: !!size,
         'bh-button__button--rounded': rounded
@@ -37,6 +39,14 @@ export default {
       default: false,
     },
     primary: {
+      type: Boolean,
+      default: false,
+    },
+    inverted: {
+      type: Boolean,
+      default: false,
+    },
+    transparent: {
       type: Boolean,
       default: false,
     },
