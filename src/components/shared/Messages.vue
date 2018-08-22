@@ -1,8 +1,8 @@
 <template>
   <div class="messages">
     <div
-      v-if="list.length > 0"
       v-for="(msg, index) in list"
+      :if="list.length > 0"
       :key="index"
       :class="getClass(msg)">{{ msg.text }}</div>
   </div>

@@ -1,8 +1,8 @@
 <template>
   <b-input
-    type="textarea"
     :maxlength="max_length"
     v-model="value"
+    type="textarea"
     @input="update()" />
 </template>
 
@@ -11,18 +11,20 @@ export default {
   props: {
     max_length: {
       type: Number,
+      default: null,
     },
     initialData: {
       type: String,
+      default: '',
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || '',
+      value: this.initialData,
     };
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

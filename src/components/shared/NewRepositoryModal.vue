@@ -24,6 +24,7 @@ export default {
   components,
   props: {
     active: {
+      type: Boolean,
       default: false,
     },
   },

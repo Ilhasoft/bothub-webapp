@@ -2,7 +2,7 @@
   <bh-input>
     <div :class="inputClassAttr">
       <textarea
-        ref="textarea"
+        ref="input"
         :class="`${className}__input`"
         v-bind="$attrs"
         v-model="val" />
@@ -16,27 +16,27 @@ import BhText from './BhText';
 export default {
   name: 'BhTextarea',
   extends: BhText,
-  async mounted() {
-    await this.$nextTick();
-    this.updateTextareaHeight();
+  data() {
+    return {
+      className: 'bh-textarea',
+    };
   },
   watch: {
     val() {
       this.updateTextareaHeight();
     },
   },
-  data() {
-    return {
-      className: 'bh-textarea',
-    };
+  async mounted() {
+    await this.$nextTick();
+    this.updateTextareaHeight();
   },
   methods: {
     updateTextareaHeight() {
-      const { textarea } = this.$refs;
-      const offset = textarea.offsetHeight - textarea.clientHeight;
-      const computedStyle = window.getComputedStyle(textarea);
-      textarea.style.height = computedStyle.getPropertyValue('min-height');
-      textarea.style.height = `${offset + textarea.scrollHeight}px`;
+      const { input } = this.$refs;
+      const offset = input.offsetHeight - input.clientHeight;
+      const computedStyle = window.getComputedStyle(input);
+      input.style.height = computedStyle.getPropertyValue('min-height');
+      input.style.height = `${offset + input.scrollHeight}px`;
     },
   },
 };

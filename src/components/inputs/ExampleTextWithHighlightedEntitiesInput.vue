@@ -6,18 +6,20 @@
           v-for="(entity, i) in entitiesBlocks"
           :key="i"
           :class="entityClassAttr">
-          <span :class="[
-            'example-txt-w-highlighted-entities__entity__before',
-          ]">{{ entity.before }}</span><span :class="[
-            entity.colorClass,
-            'example-txt-w-highlighted-entities__entity__text'
+          <span
+            :class="[
+              'example-txt-w-highlighted-entities__entity__before',
+          ]">{{ entity.before }}</span><span
+            :class="[
+              entity.colorClass,
+              'example-txt-w-highlighted-entities__entity__text'
           ]">{{ entity.text }}</span>
         </div>
         <textarea
-          ref="textarea"
-          class="bh-textarea__input example-txt-w-highlighted-entities__input"
+          ref="input"
           v-bind="$attrs"
           v-model="val"
+          class="bh-textarea__input example-txt-w-highlighted-entities__input"
           @select="emitTextSelected()"
           @click="emitTextSelected()"
           @keyup="emitTextSelected()" />
@@ -41,8 +43,8 @@ const components = {
 
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
-  extends: BhTextarea,
   components,
+  extends: BhTextarea,
   props: {
     entities: {
       type: Array,
@@ -99,7 +101,7 @@ export default {
   },
   methods: {
     emitTextSelected(value = null) {
-      const { selectionStart, selectionEnd } = value || this.$refs.textarea;
+      const { selectionStart, selectionEnd } = value || this.$refs.input;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
       this.$emit(
@@ -110,11 +112,12 @@ export default {
       );
     },
     async clearSelected() {
+      const { input } = this.$refs;
       await this.$nextTick();
-      if (this.$refs.textarea.setSelectionRange) {
-        this.$refs.textarea.setSelectionRange(0, 0);
+      if (input.setSelectionRange) {
+        input.setSelectionRange(0, 0);
       } else {
-        this.$refs.textarea.focus();
+        input.focus();
       }
     },
   },

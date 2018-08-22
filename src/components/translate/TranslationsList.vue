@@ -1,10 +1,10 @@
 <template>
   <div>
     <pagination
-        v-if="translationsList"
-        :itemComponent="translationItemElem"
-        :list="translationsList"
-        :repository="repository" />
+      v-if="translationsList"
+      :item-component="translationItemElem"
+      :list="translationsList"
+      :repository="repository" />
     <p
       v-if="translationsList && translationsList.empty"
       class="no-examples">No translations.</p>
@@ -23,6 +23,7 @@ const components = {
 
 export default {
   name: 'TranslationsList',
+  components,
   props: {
     repository: {
       type: Object,
@@ -30,20 +31,20 @@ export default {
     },
     toLanguage: {
       type: String,
+      default: undefined,
     },
-  },
-  components,
-  async mounted() {
-    await this.updateTranslations();
-  },
-  watch: {
-    async toLanguage() { await this.updateTranslations(); },
   },
   data() {
     return {
       translationsList: null,
       translationItemElem: TranslationItem,
     };
+  },
+  watch: {
+    async toLanguage() { await this.updateTranslations(); },
+  },
+  async mounted() {
+    await this.updateTranslations();
   },
   methods: {
     ...mapActions([

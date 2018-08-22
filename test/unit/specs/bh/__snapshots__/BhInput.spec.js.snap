@@ -40,3 +40,9 @@ exports[`BhInput.vue without errors renders correctly 1`] = `
   <!---->
 </div>
 `;
+
+exports[`BhInput.vue without provider renders correctly 1`] = `
+<div class="bh-input">
+  <!---->
+</div>
+`;

@@ -1,7 +1,7 @@
 <template>
   <b-select
-    expanded
     v-model="value"
+    expanded
     @input="update()">
     <option
       v-for="choice in choices"
@@ -19,15 +19,16 @@ export default {
     },
     initialData: {
       type: [Array, String],
+      default: null,
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || null,
+      value: this.initialData,
     };
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

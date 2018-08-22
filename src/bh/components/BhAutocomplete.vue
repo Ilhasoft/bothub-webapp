@@ -11,13 +11,13 @@
       <input
         ref="input"
         :class="`${className}__input`"
-        type="text"
         v-bind="$attrs"
         v-model="val"
+        type="text"
         @focus="onFocus()"
         @blur="onBlur()"
-        @keyup.esc="onEsc()" />
-      <slot name="append"></slot>
+        @keyup.esc="onEsc()" >
+      <slot name="append"/>
     </div>
     <div
       v-if="autocompleteOpen"
@@ -64,18 +64,6 @@ export default {
       default: false,
     },
   },
-  watch: {
-    selected(item) {
-      if (item) {
-        this.$emit('selected', this.indexItem(item));
-      } else {
-        this.$emit('selected', null);
-      }
-    },
-    val() {
-      this.closeForced = false;
-    },
-  },
   data() {
     return {
       className: 'bh-autocomplete',
@@ -110,6 +98,18 @@ export default {
       }
 
       return false;
+    },
+  },
+  watch: {
+    selected(item) {
+      if (item) {
+        this.$emit('selected', this.indexItem(item));
+      } else {
+        this.$emit('selected', null);
+      }
+    },
+    val() {
+      this.closeForced = false;
     },
   },
   methods: {

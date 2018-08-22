@@ -1,8 +1,8 @@
 <template>
   <b-select
+    :value="value"
     expanded
-    @input="$emit('input', $event)"
-    :value="value">
+    @input="$emit('input', $event)">
     <option :value="null">-</option>
     <option
       v-for="[language, label] in languages"
@@ -20,6 +20,7 @@ export default {
   props: {
     value: {
       type: String,
+      default: null,
     },
     exclude: {
       type: Array,

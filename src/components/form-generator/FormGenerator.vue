@@ -13,8 +13,8 @@
         :is="field.inputComponent"
         v-bind="field.inputProps"
         v-model="formData[field.name]"
-        @input="update()"
-        :initialData="initialData[field.name]" />
+        :initial-data="initialData[field.name]"
+        @input="update()" />
     </b-field>
   </div>
 </template>
@@ -63,9 +63,6 @@ export default {
       default: () => ({}),
     },
   },
-  mounted() {
-    this.update();
-  },
   data() {
     return {
       formData: {},
@@ -104,6 +101,9 @@ export default {
       return (this.errors.non_field_errors
         && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

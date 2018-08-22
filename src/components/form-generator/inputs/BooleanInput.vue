@@ -9,20 +9,21 @@ export default {
   props: {
     initialData: {
       type: Boolean,
+      default: false,
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || false,
+      value: this.initialData,
     };
   },
   computed: {
     verboseValue() {
       return this.value ? 'Yes' : 'No';
     },
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

@@ -4,8 +4,8 @@
     :type="type"
     :class="{
       'bh-icon-button': true,
-      'bh-icon-button--primary': this.primary,
-      [`bh-icon-button--${this.size}`]: !!this.size
+      'bh-icon-button--primary': primary,
+      [`bh-icon-button--${size}`]: !!size
 
     }"
     @click="$emit('click', $event)"

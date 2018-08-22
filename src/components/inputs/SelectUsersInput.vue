@@ -1,9 +1,9 @@
 <template>
   <b-taginput
     ref="taginput"
-    autocomplete
     v-model="newValue"
     :data="data"
+    autocomplete
     field="name"
     placeholder="Search user"
     @typing="updateData($event)">
@@ -45,6 +45,13 @@ export default {
       default: 750,
     },
   },
+  data() {
+    return {
+      setTimeoutId: null,
+      data: [],
+      newValue: this.value,
+    };
+  },
   watch: {
     value: {
       handler() {
@@ -58,13 +65,6 @@ export default {
       },
       deep: true,
     },
-  },
-  data() {
-    return {
-      setTimeoutId: null,
-      data: [],
-      newValue: this.value,
-    };
   },
   methods: {
     ...mapActions([

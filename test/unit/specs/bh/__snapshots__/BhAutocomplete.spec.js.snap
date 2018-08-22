@@ -32,3 +32,12 @@ exports[`BhAutocomplete.vue renders correctly 1`] = `
   <!---->
 </bhinput-stub>
 `;
+
+exports[`BhAutocomplete.vue using verboseField and indexField type "b" in input renders correctly 1`] = `
+<bhinput-stub>
+  <div class="bh-autocomplete">
+    <!---->
+    <input type="text" class="bh-autocomplete__input"> </div>
+  <!---->
+</bhinput-stub>
+`;

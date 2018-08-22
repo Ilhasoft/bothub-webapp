@@ -1,23 +1,25 @@
 <template>
   <bh-card>
-    <div class="bh-card-left-content-flex-display">
-      <strong> {{title}}</strong>
-      <div class="bh-card-left-content-flex-display-label">
-        <p><strong>{{ SentencesSize }}</strong> Sentences </p>
-        <p v-if="entities.length != 0 "><strong>{{ entitiesSize }}</strong> Entities</p>
+    <div class="bh-card__left__content__flex-display">
+      <strong> {{ title }}</strong>
+      <div class="bh-card__left__content__flex-display__label">
+        <p><strong>{{ 0 }}</strong> Sentences </p>
+        <p v-if="entities.length != 0 "><strong>{{ 0 }}</strong> Entities</p>
       </div>
     </div>
+    <p v-if="entities.length != 0">Entities</p>
     <template slot="right">
-      <bh-badge v-for="(entity, i) in entities"
+      <bh-badge
+        v-for="(entity, i) in entities"
         :key="i"
         :class="[
           getEntityClass(entity),
-          'bh-card-right-space-around'
-        ]">
-       <span>{{ entity }}</span>
+          'bh-card__right__space-around'
+      ]">
+        <span>{{ entity }}</span>
       </bh-badge>
     </template>
-    </bh-card>
+  </bh-card>
 </template>
 <script>
 import BhCard from '@/bh/components/BhCard';
@@ -31,6 +33,7 @@ const components = {
 };
 export default {
   name: 'IntentLabelCard',
+  components,
   props: {
     title: {
       type: String,
@@ -43,15 +46,6 @@ export default {
     entities: {
       type: Array,
       default: () => ([]),
-    },
-  },
-  components,
-  computed: {
-    entitiesSize() {
-      return this.entities.length;
-    },
-    SentencesSize() {
-      return this.examples.length;
     },
   },
   methods: {

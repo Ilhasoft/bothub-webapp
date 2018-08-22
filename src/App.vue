@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <login-modal
-      ref="loginModal"
-      v-if="loginModalOpen" />
+      v-if="loginModalOpen"
+      ref="loginModal" />
     <router-view />
   </div>
 </template>

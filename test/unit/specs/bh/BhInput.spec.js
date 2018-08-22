@@ -8,6 +8,19 @@ const localVue = createLocalVue();
 localVue.use(BH);
 
 describe('BhInput.vue', () => {
+  describe('without provider', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallowMount(BhInput, {
+        localVue,
+      });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
   describe('without errors', () => {
     let wrapper;
     beforeEach(() => {

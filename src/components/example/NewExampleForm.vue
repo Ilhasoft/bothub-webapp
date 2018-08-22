@@ -5,16 +5,16 @@
       @submit.prevent="onSubmit()">
       <div class="column is-three-fifths">
         <bh-field
-          label
-          :errors="errors.text || errors.language">
+          :errors="errors.text || errors.language"
+          label>
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="text"
+            :entities="entities"
+            :available-entities="availableEntities"
+            :formatters="textFormatters"
             size="medium"
             placeholder="Add a sentence"
-            :entities="entities"
-            :availableEntities="availableEntities"
-            :formatters="textFormatters"
             @textSelected="setTextSelected($event)">
             <language-append-select-input
               slot="append"
@@ -25,32 +25,32 @@
       </div>
       <div class="column">
         <bh-field
+          :errors="errors.intent"
           label="Intent"
-          helpText="When your bot receives a message, your bot can use a
-                    recognizer to examine the message and determine intent."
-          :errors="errors.intent">
+          help-text="When your bot receives a message, your bot can use a
+                    recognizer to examine the message and determine intent.">
           <bh-autocomplete
             v-model="intent"
-            size="medium"
-            placeholder="Intent"
             :data="repository.intents || []"
-            :formatters="intentFormatters" />
+            :formatters="intentFormatters"
+            size="medium"
+            placeholder="Intent" />
         </bh-field>
       </div>
       <div class="column is-narrow">
         <bh-field label>
           <bh-button
+            :disabled="!isValid || submitting "
+            :tooltip-hover="!isValid ? validationErrors : null"
             primary
             type="submit"
-            :disabled="!isValid || submitting "
-            :tooltipHover="!isValid ? validationErrors : null"
             size="medium">
             <slot v-if="!submitting">Submit</slot>
             <bh-loading
-              ref="load"
               v-if="submitting"
+              ref="load"
               size="small" />
-            </bh-button>
+          </bh-button>
         </bh-field>
       </div>
     </form>
@@ -62,9 +62,9 @@
             v-model="entities"
             :repository="repository"
             :text="text"
-            :textSelected="textSelected"
-            :availableEntities="availableEntities"
-            :availableLabels="availableLabels"
+            :text-selected="textSelected"
+            :available-entities="availableEntities"
+            :available-labels="availableLabels"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -182,11 +182,13 @@ export default {
     },
     onEntityAdded() {
       if (this.$refs.textInput.clearSelected) {
+        /* istanbul ignore next */
         this.$refs.textInput.clearSelected();
       }
     },
     onEditEntity(entity) {
       if (this.$refs.textInput.emitTextSelected) {
+        /* istanbul ignore next */
         this.$refs.textInput.emitTextSelected({
           selectionStart: entity.start,
           selectionEnd: entity.end,
@@ -211,10 +213,14 @@ export default {
         this.$emit('created');
         return true;
       } catch (error) {
+        /* istanbul ignore next */
         const data = error.response && error.response.data;
+        /* istanbul ignore next */
         if (data) {
+          /* istanbul ignore next */
           this.errors = data;
         }
+        /* istanbul ignore next */
         this.submitting = false;
       }
       return false;

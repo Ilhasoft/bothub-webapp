@@ -12,8 +12,8 @@
       v-if="list.hasNext"
       class="next has-text-centered">
       <button
-        class="button is-primary"
         :disabled="list.loading"
+        class="button is-primary"
         @click="next()">{{ moreText }}</button>
     </div>
   </div>
@@ -28,8 +28,10 @@ const components = {
 
 export default {
   name: 'Pagination',
+  components,
   props: {
     itemComponent: {
+      type: [Object, Function],
       required: true,
     },
     list: {
@@ -37,10 +39,10 @@ export default {
       type: Object,
     },
     moreText: {
+      type: String,
       default: 'More',
     },
   },
-  components,
   async mounted() {
     await this.list.next();
   },
