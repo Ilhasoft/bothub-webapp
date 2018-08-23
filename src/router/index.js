@@ -4,6 +4,7 @@ import Home from '@/components-v1/Home';
 import MyProfile from '@/components-v1/MyProfile';
 import ResetPassword from '@/components-v1/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
+import RepositoryTrainings from '@/views/repository/Trainings';
 import store from '../store';
 
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/:ownerNickname/:slug/',
       name: 'repository-home',
       component: RepositoryHome,
+    },
+    {
+      path: '/:ownerNickname/:slug/trainings/',
+      name: 'repository-trainings',
+      component: RepositoryTrainings,
     },
   ],
 });

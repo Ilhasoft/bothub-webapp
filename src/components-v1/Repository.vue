@@ -418,7 +418,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import Loading from '@/components-v1/shared/Loading';
-import RepositoryInfo from '@/components-v1/repository/RepositoryInfo';
+import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components-v1/shared/ErrorMessage';
 import NewExampleForm from '@/components-v1/example/NewExampleForm';
 import LoginForm from '@/components-v1/auth/LoginForm';

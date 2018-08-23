@@ -25,11 +25,13 @@
               ownerNickname: repository.owner__nickname,
               slug: repository.slug,
             },
-        }">{{ repository.absolute_url }}</router-link>
+        }">{{ repository.absolute_url ||
+        `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
       </div>
       <div class="repository-info__info-item">
         <span>Created by</span>
-        <span>{{ getProfile(repository.owner__nickname).name || repository.owner__nickname }}</span>
+        <strong class="medium">{{ getProfile(repository.owner__nickname).name
+        || repository.owner__nickname }}</strong>
       </div>
       <div class="repository-info__flags">
         <span
@@ -50,9 +52,6 @@
           :key="category.id"
           class="repository-info__categories__category">{{ category.name }}</bh-badge>
       </div>
-    </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
-      d
     </div>
   </div>
 </template>
@@ -114,6 +113,7 @@ export default {
   &__title {
     font-size: 1.25rem;
     font-weight: $font-weight-bolder;
+    margin-bottom: .5rem;
 
     &__bagde {
       display: none;
@@ -124,7 +124,7 @@ export default {
         font-size: 1.5em;
       }
 
-      @media screen and (max-width: 800px) {
+      @media screen and (max-width: $mobile-width) {
         display: inline-block;
       }
     }

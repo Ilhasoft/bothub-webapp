@@ -20,12 +20,12 @@
       <div class="layout__header__item">
         <div
           v-if="authenticated"
-          class="bh-grid">
+          class="bh-grid bh-grid--ever-desktop">
           <bh-button
             primary
             inverted
             size="medium"
-            class="bh-grid__item"
+            class="bh-grid__item hide-mobile"
             @click="openNewRepositoryModal()">start your bot</bh-button>
           <bh-dropdown position="left">
             <user-avatar
@@ -46,9 +46,10 @@
         </div>
         <div
           v-else
-          class="bh-grid">
+          class="bh-grid bh-grid--ever-desktop">
           <bh-button
             primary
+            inverted
             transparent
             size="medium"
             class="bh-grid__item"
@@ -57,7 +58,7 @@
             primary
             inverted
             size="medium"
-            class="bh-grid__item"
+            class="bh-grid__item hide-mobile"
             @click="openLoginModal()">sign up</bh-button>
         </div>
       </div>
