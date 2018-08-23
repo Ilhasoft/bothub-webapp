@@ -1,16 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhCard.vue renders correctly 1`] = `
-<div class="bh">
-  <div class="bh-card">
-    <div class="bh-card__left">
-      <div class="bh-card__left__content">
-        <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
-      </div>
-    </div>
-    <div class="bh-card__right">
-      <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
-    </div>
+<div class="bh-card">
+  <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
+  <div class="bh-card__right">
+    <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
   </div>
 </div>
 `;

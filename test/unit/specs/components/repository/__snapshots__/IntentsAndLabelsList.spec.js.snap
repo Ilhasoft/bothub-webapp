@@ -1,12 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="no-examples">
+exports[`RepositoryCard.vue RepositoryCard.vue renders correctly with all props 1`] = `
+<div>
   <div class="button-position">
-    <bhbutton-stub>
+    <bhbutton-stub class="button-position__space">
       Intents
     </bhbutton-stub>
-    <bhbutton-stub class="button-position-space">
+    <bhbutton-stub class="button-position__space">
+      Labels
+    </bhbutton-stub>
+  </div>
+  <div>
+    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
+    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
+    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
+  </div>
+  <!---->
+</div>
+`;
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div>
+  <div class="button-position">
+    <bhbutton-stub class="button-position__space">
+      Intents
+    </bhbutton-stub>
+    <bhbutton-stub class="button-position__space">
       Labels
     </bhbutton-stub>
   </div>

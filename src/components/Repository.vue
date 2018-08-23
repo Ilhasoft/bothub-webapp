@@ -141,8 +141,7 @@
           </div>
           <intents-and-labels-list
             :labels="repository.labels"
-            :intents="repository.intents"
-          />
+            :intents="repository.intents"/>
           <h1 class="title examples-title">Examples</h1>
           <examples-list
             ref="examplesList"

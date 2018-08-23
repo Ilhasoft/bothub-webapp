@@ -1,25 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryCard.vue RepositoryCard.vue renders correctly with diferents props When intents array props and labelEntities array props have a arary 1`] = `
+exports[`RepositoryCard.vue RepositoryCard.vue renders correctly with diferents props When labelEntities array props have a array. Renders correctly 1`] = `
 <bhcard-stub>
-  <div class="bh-card__left__content__flex-display"><strong> cat and dog</strong>
-    <div class="bh-card__left__content__flex-display__label">
-      <p><strong>0</strong> Sentences </p>
-      <p><strong>0</strong> Entities</p>
+  <div class="i-a-l-card">
+    <div class="i-a-l-card__left">
+      <div class="i-a-l-card__left__content"><strong> Dog</strong>
+        <div class="i-a-l-card__left__content__info">
+          <p><strong> 0 </strong> Sentences </p>
+          <p><strong> 0 </strong> Entities</p>
+        </div>
+      </div>
+      <p>Entities</p>
+    </div>
+    <div slot="right" class="entities">
+      <bhbadge-stub class="entities__entity entity-sunflower"><span> Dog </span></bhbadge-stub>
+      <bhbadge-stub class="entities__entity entity-energos"><span> Cat </span></bhbadge-stub>
+      <bhbadge-stub class="entities__entity entity-blue-martina"><span> Buy </span></bhbadge-stub>
     </div>
   </div>
-  <p>Entities</p>
 </bhcard-stub>
 `;
 
-exports[`RepositoryCard.vue renders correctly without any array props 1`] = `
+exports[`RepositoryCard.vue renders correctly 1`] = `
 <bhcard-stub>
-  <div class="bh-card__left__content__flex-display"><strong> dog</strong>
-    <div class="bh-card__left__content__flex-display__label">
-      <p><strong>0</strong> Sentences </p>
+  <div class="i-a-l-card">
+    <div class="i-a-l-card__left">
+      <div class="i-a-l-card__left__content"><strong> dog</strong>
+        <div class="i-a-l-card__left__content__info">
+          <p><strong> 0 </strong> Sentences </p>
+          <!---->
+        </div>
+      </div>
       <!---->
     </div>
+    <!---->
   </div>
-  <!---->
 </bhcard-stub>
 `;

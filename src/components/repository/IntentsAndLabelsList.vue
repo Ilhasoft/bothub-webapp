@@ -1,9 +1,10 @@
 <template>
-  <div class="no-examples">
+  <div>
     <div class="button-position">
       <bh-button
         ref="intents"
         :primary="active"
+        class="button-position__space"
         size="medium"
         @click="activeChange(true)">
         Intents
@@ -11,7 +12,7 @@
       <bh-button
         ref="labels"
         :primary="!active"
-        class="button-position-space"
+        class="button-position__space"
         size="medium"
         @click="activeChange(false)">
         Labels
@@ -22,7 +23,7 @@
         v-for="intent in intents"
         :key="intent"
         :title="intent"
-      />
+        class="card" />
     </div>
     <div v-if="!active">
       <intents-and-labels-card
@@ -30,15 +31,16 @@
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
-      />
+        class="card"/>
     </div>
-
   </div>
 </template>
+
 <script>
 import BhCard from '@/bh/components/BhCard';
 import BhButton from '@/bh/components/BhButton';
 import IntentsAndLabelsCard from './IntentsAndLabelsCard';
+
 
 export default {
   name: 'IntentsAndLabelsList',
@@ -70,13 +72,19 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.button-position{
-  display: flex;
-  margin: 20px 20px 20px 11px;;
 
-  &-space{
-    margin-left: 10px;
+<style lang="scss" scoped>
+
+.button-position {
+  display: flex;
+  margin: 0 -.25rem;
+
+  &__space {
+    margin: .25rem;
   }
+}
+
+.card {
+  margin: 1rem 0;
 }
 </style>

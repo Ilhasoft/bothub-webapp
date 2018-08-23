@@ -1,6 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
+
 const localVue = createLocalVue();
 
 describe('RepositoryCard.vue', () => {
@@ -32,8 +33,22 @@ describe('RepositoryCard.vue', () => {
       labelsBtn.vm.$emit('click');
     });
 
-    test('Data return false after intents button clicked', () => {
+    test('Data return false after labels button clicked', () => {
       expect(wrapper.vm.active).toBeFalsy();
+    });
+  });
+
+  describe('RepositoryCard.vue', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        labels: ['Dog', 'Cat', 'Buy'],
+        intents: ['Buy', 'Change', 'Trade'],
+      });
+      localVue.nextTick();
+    });
+
+    test('renders correctly with all props', () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

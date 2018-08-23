@@ -14,23 +14,20 @@ describe('RepositoryCard.vue', () => {
     });
   });
 
-  test('renders correctly without any array props', () => {
+  test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
   describe('RepositoryCard.vue renders correctly with diferents props', () => {
     beforeEach(() => {
-      wrapper = shallowMount(IntentsAndLabelsCard, {
-        localVue,
-        propsData: {
-          title: 'cat and dog',
-          intents: ['service', 'pay', 'trade'],
-          labelEntities: ['service', 'pay', 'trade'],
-        },
+      wrapper.setProps({
+        title: 'Dog',
+        labelEntities: ['Dog', 'Cat', 'Buy'],
       });
+      localVue.nextTick();
     });
 
-    test('When intents array props and labelEntities array props have a arary', () => {
+    test('When labelEntities array props have a array. Renders correctly', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
