@@ -41,7 +41,6 @@ export default {
     display: inline-block;
     width: 1em;
     height: 1em;
-    padding: 0 !important;
     vertical-align: middle;
 
     svg {

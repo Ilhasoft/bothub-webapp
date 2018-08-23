@@ -217,6 +217,12 @@
   }
 
   &--primary-transparent {
+    color: $color-primary;
+    background-color: transparent;
+    border: 1px solid $color-primary;
+  }
+
+  &--primary-inverted-transparent {
     color: $color-primary-inverted;
     background-color: transparent;
     border: 1px solid $color-primary-inverted;

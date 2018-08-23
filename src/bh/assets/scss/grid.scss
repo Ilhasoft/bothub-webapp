@@ -1,7 +1,11 @@
+@import '~./variables.scss';
+
 $grid-gap: .5rem;
 
 .bh {
   &-grid {
+    $parent: &;
+
     display: flex;
     margin: -($grid-gap);
 
@@ -16,6 +20,14 @@ $grid-gap: .5rem;
           flex-grow: $grow;
         }
       }
+    }
+
+    @media screen and (max-width: $mobile-width) {
+      flex-direction: column;
+    }
+
+    &--ever-desktop {
+      flex-direction: row;
     }
   }
 }

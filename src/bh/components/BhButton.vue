@@ -8,9 +8,10 @@
         'bh-button__button--primary': primary && !inverted && !transparent,
         'bh-button__button--primary-inverted': primary && inverted && !transparent,
         'bh-button__button--primary-transparent': primary && !inverted && transparent,
+        'bh-button__button--primary-inverted-transparent': primary && inverted && transparent,
         'bh-button__button--secondary': secondary,
         [`bh-button__button--${size}`]: !!size,
-        'bh-button__button--rounded': rounded
+        'bh-button__button--rounded': rounded,
       }"
       @click="$emit('click', $event)">
       <slot />
@@ -83,6 +84,7 @@ export default {
     $parent: &;
 
     position: relative;
+    display: inline-block;
 
     &__button {
       @include button();

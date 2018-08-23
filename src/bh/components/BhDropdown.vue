@@ -62,6 +62,7 @@ export default {
     $parent: &;
 
     position: relative;
+    display: inline-block;
 
     &__content {
       position: absolute;
