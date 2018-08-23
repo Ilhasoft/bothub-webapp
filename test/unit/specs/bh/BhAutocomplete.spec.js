@@ -141,8 +141,50 @@ describe('BhAutocomplete.vue', () => {
           expect(wrapper.emitted('selected')).toBeDefined();
         });
 
-        test('selected event emitted with abcd value', () => {
+        test('selected event emitted with "abcd" value', () => {
           expect(wrapper.emitted('selected')[0][0]).toBe('abcd');
+        });
+      });
+    });
+
+    describe('type "z" in input', () => {
+      beforeEach(() => {
+        const input = wrapper.find({ ref: 'input' });
+        input.element.value = 'z';
+        input.trigger('input');
+      });
+
+      describe('blur on input', () => {
+        beforeEach(() => {
+          const input = wrapper.find({ ref: 'input' });
+          input.trigger('blur');
+        });
+
+        test('selected event emitted', () => {
+          expect(wrapper.emitted('selected')).toBeDefined();
+        });
+
+        test('selected event emitted with "z" value', () => {
+          expect(wrapper.emitted('selected')[0][0]).toBe('a');
+        });
+
+        describe('blank input finish', () => {
+          beforeEach(() => {
+            const input = wrapper.find({ ref: 'input' });
+            input.element.value = '';
+            input.trigger('input');
+          });
+
+          describe('blur on input', () => {
+            beforeEach(() => {
+              const input = wrapper.find({ ref: 'input' });
+              input.trigger('blur');
+            });
+
+            test('selected event emitted', () => {
+              expect(wrapper.emitted('selected')[1][0]).toBeNull();
+            });
+          });
         });
       });
     });
@@ -180,6 +222,20 @@ describe('BhAutocomplete.vue', () => {
 
       test(`${value} in top of filteredData`, () => {
         expect(value).toMatchObject(wrapper.vm.filteredData[0]);
+      });
+
+      describe('select first item', () => {
+        beforeEach((() => {
+          wrapper.vm.select(wrapper.vm.filteredData[0]);
+        }));
+
+        test('selected event emitted', () => {
+          expect(wrapper.emitted('selected')).toBeDefined();
+        });
+
+        test('selected event emitted value\'s id', () => {
+          expect(wrapper.emitted('selected')[0][0]).toBe(2);
+        });
       });
     });
   });
