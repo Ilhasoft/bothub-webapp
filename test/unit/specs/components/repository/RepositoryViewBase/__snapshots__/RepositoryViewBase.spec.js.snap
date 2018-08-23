@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryNavigation.vue error -1 renders correctly 1`] = `
+<layout-stub>
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__error">
+      <h1>-1</h1>
+    </div>
+  </div>
+</layout-stub>
+`;
+
+exports[`RepositoryNavigation.vue error 404 renders correctly 1`] = `
+<layout-stub>
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__error">
+      <h1>Bot not found</h1>
+    </div>
+  </div>
+</layout-stub>
+`;
+
+exports[`RepositoryNavigation.vue loading renders correctly 1`] = `
+<layout-stub>
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
+    </div>
+  </div>
+</layout-stub>
+`;
+
+exports[`RepositoryNavigation.vue renders correctly 1`] = `
+<layout-stub>
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
+    </div>
+  </div>
+</layout-stub>
+`;

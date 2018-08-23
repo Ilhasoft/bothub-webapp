@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryNavigation.vue renders correctly 1`] = `
+<div class="repository-nav">
+  <div class="repository-nav__desktop">
+    <router-link-stub>Status</router-link-stub>
+    <router-link-stub>Trainings</router-link-stub>
+    <router-link-stub>Translate</router-link-stub>
+    <router-link-stub>Translated Sentences</router-link-stub>
+    <router-link-stub>Analyze Text</router-link-stub>
+    <router-link-stub>Settings</router-link-stub>
+  </div>
+  <div class="repository-nav__mobile">
+    <bhdropdown-stub>
+      <bhdropdownitem-stub>Status</bhdropdownitem-stub>
+      <bhdropdownitem-stub>Trainings</bhdropdownitem-stub>
+      <bhdropdownitem-stub>Translate</bhdropdownitem-stub>
+      <bhdropdownitem-stub>Translated Sentences</bhdropdownitem-stub>
+      <bhdropdownitem-stub>Analyze Text</bhdropdownitem-stub>
+      <bhdropdownitem-stub>Settings</bhdropdownitem-stub>
+    </bhdropdown-stub>
+  </div>
+</div>
+`;

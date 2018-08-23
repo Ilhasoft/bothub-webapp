@@ -92,7 +92,8 @@ export default {
 
 .rpstr-vw-bs {
   $navigation-height: 4rem;
-  $header-height: (12rem + $navigation-height);
+  $header-height: (14rem + $navigation-height);
+  $card-width: 1200px;
 
   margin: 4rem 0;
 
@@ -103,13 +104,13 @@ export default {
     background-color: $color-primary;
     margin-bottom: -($header-height);
 
-    @media screen and (max-width: $mobile-width) {
+    @media screen and (max-width: $card-width) {
       display: none;
     }
   }
 
   &__card {
-    max-width: $mobile-width;
+    max-width: $card-width;
     margin: 0 auto;
     background-color: white;
     border-radius: .5rem;
@@ -144,7 +145,7 @@ export default {
       }
     }
 
-    @media screen and (max-width: $mobile-width) {
+    @media screen and (max-width: $card-width) {
       border-radius: 0;
     }
   }
@@ -165,7 +166,7 @@ export default {
     }
   }
 
-  @media screen and (max-width: $mobile-width) {
+  @media screen and (max-width: $card-width) {
     margin: 1rem 0;
   }
 }
