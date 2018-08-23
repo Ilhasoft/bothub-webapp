@@ -62,4 +62,14 @@ describe('BhText.vue', () => {
       });
     });
   });
+
+  describe('update value prop', () => {
+    beforeEach(() => {
+      wrapper.setProps({ value: 'a' });
+    });
+
+    test('val equal "a"', () => {
+      expect(wrapper.vm.val).toBe('a');
+    });
+  });
 });
