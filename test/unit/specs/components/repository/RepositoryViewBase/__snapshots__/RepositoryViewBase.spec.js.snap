@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryNavigation.vue error -1 renders correctly 1`] = `
+exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 <layout-stub>
   <div class="rpstr-vw-bs">
     <div class="rpstr-vw-bs__error">
@@ -10,7 +10,7 @@ exports[`RepositoryNavigation.vue error -1 renders correctly 1`] = `
 </layout-stub>
 `;
 
-exports[`RepositoryNavigation.vue error 404 renders correctly 1`] = `
+exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 <layout-stub>
   <div class="rpstr-vw-bs">
     <div class="rpstr-vw-bs__error">
@@ -20,7 +20,7 @@ exports[`RepositoryNavigation.vue error 404 renders correctly 1`] = `
 </layout-stub>
 `;
 
-exports[`RepositoryNavigation.vue loading renders correctly 1`] = `
+exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 <layout-stub>
   <div class="rpstr-vw-bs">
     <div class="rpstr-vw-bs__loading">
@@ -30,7 +30,7 @@ exports[`RepositoryNavigation.vue loading renders correctly 1`] = `
 </layout-stub>
 `;
 
-exports[`RepositoryNavigation.vue renders correctly 1`] = `
+exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <layout-stub>
   <div class="rpstr-vw-bs">
     <div class="rpstr-vw-bs__loading">

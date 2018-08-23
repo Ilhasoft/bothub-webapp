@@ -87,7 +87,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'bothub',
+      default: 'Bothub',
     },
     withoutBackground: {
       type: Boolean,
@@ -107,7 +107,6 @@ export default {
   },
   watch: {
     title() {
-      /* istanbul ignore next */
       document.title = this.title;
     },
   },
@@ -122,15 +121,12 @@ export default {
       'openLoginModal',
     ]),
     openNewRepositoryModal() {
-      /* istanbul ignore next */
       this.newRepositoryModalOpen = true;
     },
     closeNewRepositoryModal() {
-      /* istanbul ignore next */
       this.newRepositoryModalOpen = false;
     },
     openMyProfile() {
-      /* istanbul ignore next */
       this.$router.push({ name: 'myProfile' });
     },
   },

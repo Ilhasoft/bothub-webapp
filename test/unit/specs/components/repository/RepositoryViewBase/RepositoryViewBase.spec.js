@@ -7,7 +7,7 @@ const localVue = createLocalVue();
 localVue.use(BH);
 
 
-describe('RepositoryNavigation.vue', () => {
+describe('RepositoryViewBase.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(RepositoryViewBase, {

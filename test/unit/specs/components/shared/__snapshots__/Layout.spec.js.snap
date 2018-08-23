@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout.vue renders correctly 1`] = `
+<div class="layout">
+  <newrepositorymodal-stub></newrepositorymodal-stub>
+  <div class="layout__header">
+    <div class="layout__header__item">
+      <router-link-stub class="layout__header__logo">
+        <img src="@/assets/imgs/logo-white.svg" alt="bothub">
+      </router-link-stub>
+    </div>
+    <div class="layout__header__item">
+      <div class="bh-grid bh-grid--ever-desktop">
+        <bhbutton-stub class="bh-grid__item">sign in</bhbutton-stub>
+        <bhbutton-stub class="bh-grid__item hide-mobile">sign up</bhbutton-stub>
+      </div>
+    </div>
+  </div>
+  <div class="layout__content"></div>
+  <sitefooter-stub></sitefooter-stub>
+</div>
+`;
