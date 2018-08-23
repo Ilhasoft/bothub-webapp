@@ -174,7 +174,6 @@ export default {
 
 <style lang="scss">
 @import '~bh/assets/scss/colors.scss';
-@import '~bh/assets/scss/typography.scss';
 @import '~bh/assets/scss/variables.scss';
 @import '~bh/assets/scss/forms.scss';
 
@@ -184,8 +183,6 @@ export default {
     @include text();
 
     &__list {
-      @include typography();
-
       position: absolute;
       top: calc(100% + 4px);
       left: 0;

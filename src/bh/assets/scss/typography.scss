@@ -6,7 +6,7 @@
 @mixin typography() {
   font-family: $font-family;
   font-weight: $font-weight-normal;
-  line-height: 1rem;
+  line-height: 1.25;
   color: $color-bolder-grey;
 
   strong {

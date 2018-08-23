@@ -33,13 +33,16 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bh/assets/scss/variables.scss';
+
+
 .bh {
   &-icon {
     display: inline-block;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1em;
+    height: 1em;
     padding: 0 !important;
-    vertical-align: text-top;
+    vertical-align: middle;
 
     svg {
       display: block;
@@ -50,20 +53,30 @@ export default {
       fill: currentColor;
     }
 
-    &--small {
-      width: 1rem;
-      height: 1rem;
+    @each $size in $sizes {
+      $size-name: nth($size, 1);
+      $size-value: nth($size, 2);
+
+      &--#{$size-name} {
+        width: $size-value;
+        height: $size-value;
+      }
     }
 
-    &--medium {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
+    // &--small {
+    //   width: 1rem;
+    //   height: 1rem;
+    // }
 
-    &--large {
-      width: 1.75rem;
-      height: 1.75rem;
-    }
+    // &--medium {
+    //   width: 1.5rem;
+    //   height: 1.5rem;
+    // }
+
+    // &--large {
+    //   width: 1.75rem;
+    //   height: 1.75rem;
+    // }
   }
 }
 </style>

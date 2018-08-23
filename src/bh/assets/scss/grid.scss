@@ -6,7 +6,16 @@ $grid-gap: .5rem;
     margin: -($grid-gap);
 
     &__item {
+      flex-grow: 1;
       margin: $grid-gap;
+
+      @for $grow from 0 to 12 {
+        &--grow-#{$grow} {
+          flex-basis: auto;
+          flex-shrink: 1;
+          flex-grow: $grow;
+        }
+      }
     }
   }
 }

@@ -22,19 +22,17 @@ export default {
 
 <style lang="scss">
 @import '~bh/assets/scss/variables.scss';
-@import '~bh/assets/scss/typography.scss';
+@import '~bh/assets/scss/colors.scss';
 
 
 .bh {
   &-badge {
-    @include typography();
-
     display: inline-flex;
     height: $size-normal;
     padding: 0 1rem;
     font-size: 1rem;
     line-height: $size-normal;
-    background-color: white;
+    background-color: $color-lighter-grey;
     border-radius: ($size-normal / 2);
 
     &--small {

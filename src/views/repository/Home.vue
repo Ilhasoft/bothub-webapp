@@ -1,17 +1,24 @@
 <template>
-  <repository-views-base>hey</repository-views-base>
+  <repository-view-base
+    :repository="repository"
+    :loading="loading"
+    :error-code="errorCode">
+    <h1>hey</h1>
+  </repository-view-base>
 </template>
 
 <script>
-import RepositoryViewsBase from '@/components/repository/RepositoryViewsBase';
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import RepositoryBase from './Base';
 
 
 const components = {
-  RepositoryViewsBase,
+  RepositoryViewBase,
 };
 
 export default {
   name: 'RepositoryHome',
   components,
+  extends: RepositoryBase,
 };
 </script>

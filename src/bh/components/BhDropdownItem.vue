@@ -14,13 +14,10 @@ export default {
 
 <style lang="scss">
 @import '~bh/assets/scss/colors.scss';
-@import '~bh/assets/scss/typography.scss';
 
 
 .bh {
   &-dropdown-item {
-    @include typography();
-
     display: flex;
     padding: .5rem .75rem;
     cursor: pointer;

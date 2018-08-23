@@ -6,6 +6,7 @@ import ResetPassword from '@/components-v1/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import store from '../store';
 
+
 Vue.use(Router);
 
 export default new Router({

@@ -7,6 +7,7 @@ import MenuDown from 'bh/assets/icons/menu-down.svg';
 import Earth from 'bh/assets/icons/earth.svg';
 import Equal from 'bh/assets/icons/equal.svg';
 import Account from 'bh/assets/icons/account.svg';
+import Botinho from 'bh/assets/icons/botinho.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -27,6 +28,7 @@ export const icons = {
   earth: Earth,
   equal: Equal,
   account: Account,
+  botinho: Botinho,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,

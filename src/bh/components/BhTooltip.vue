@@ -49,7 +49,6 @@ export default {
 
 <style lang="scss">
 @import '~bh/assets/scss/variables.scss';
-@import '~bh/assets/scss/typography.scss';
 @import '~bh/assets/scss/colors.scss';
 
 @mixin down($size: 6px, $color: black) {
@@ -66,8 +65,6 @@ export default {
 
 .bh {
   &-tooltip {
-    @include typography();
-
     $parent: &;
     $background-color: black;
 

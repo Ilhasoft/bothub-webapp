@@ -1,7 +1,7 @@
 <template>
   <bh-avatar :size="size">
     <bh-icon
-      :size="size"
+      :size="reducedSize"
       value="account" />
   </bh-avatar>
 </template>
@@ -16,7 +16,17 @@ export default {
     },
     size: {
       type: String,
-      default: null,
+      default: 'normal',
+    },
+  },
+  computed: {
+    reducedSize() {
+      return ({
+        small: 'small',
+        normal: 'small',
+        medium: 'normal',
+        large: 'medium',
+      })[this.size];
     },
   },
 };
