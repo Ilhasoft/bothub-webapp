@@ -3,7 +3,7 @@
 exports[`BhCard.vue renders correctly 1`] = `
 <div class="bh-card">
   <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
-  <div class="bh-card__right">
+  <div class="bh-card">
     <div class="bh-card__left__content__flex-display"><span>Teste Slot content </span></div>
   </div>
 </div>

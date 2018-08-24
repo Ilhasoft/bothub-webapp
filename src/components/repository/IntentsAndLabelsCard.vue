@@ -3,17 +3,17 @@
     <div class="i-a-l-card">
       <div class="i-a-l-card__left">
         <div class="i-a-l-card__left__content">
-          <strong> {{ title }}</strong>
+          <strong>{{ title }}</strong>
           <div class="i-a-l-card__left__content__info">
-            <p><strong> {{ 0 }} </strong> Sentences </p>
-            <p v-if="labelEntities"><strong> {{ 0 }} </strong> Entities</p>
+            <p><strong>{{ 0 }}</strong> Sentences</p>
+            <p v-if="labelEntities"><strong>{{ 0 }}</strong> Entities</p>
           </div>
         </div>
         <p v-if="labelEntities">Entities</p>
       </div>
       <div
         v-if="labelEntities"
-        slot="right"
+        slot="append"
         class="entities">
         <bh-badge
           v-for="(entities, i) in labelEntities"
@@ -23,7 +23,7 @@
           ]"
           size="small"
           class="entities__entity">
-          <span> {{ entities }} </span>
+          <span>{{ entities }}</span>
         </bh-badge>
       </div>
     </div>
@@ -102,12 +102,10 @@ export default {
 }
 
 .entities {
-  flex-wrap: wrap;
-  width: 30%;
-  margin: 0 -.25rem;
+  flex-basis: 30%;
 
   &__entity {
-    margin: .50rem;
+    margin: .25rem;
   }
 }
 </style>

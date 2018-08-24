@@ -2,9 +2,9 @@
   <div class="bh-card">
     <slot />
     <div
-      v-if="$slots.right"
-      class="bh-card__right">
-      <slot name="right"/>
+      v-if="$slots.append"
+      class="bh-card">
+      <slot name="append"/>
     </div>
   </div>
 </template>

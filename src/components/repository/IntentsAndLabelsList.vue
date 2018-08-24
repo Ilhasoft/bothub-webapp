@@ -1,37 +1,37 @@
 <template>
-  <div>
-    <div class="button-position">
+  <div class="intents-and-labels-list">
+    <div class="intents-and-labels-list__radio">
       <bh-button
         ref="intents"
-        :primary="active"
-        class="button-position__space"
+        :primary="listActived === 'intents'"
+        class="intents-and-labels-list__radio__button"
         size="medium"
-        @click="activeChange(true)">
+        @click="activeRadioButton('intents')" >
         Intents
       </bh-button>
       <bh-button
         ref="labels"
-        :primary="!active"
-        class="button-position__space"
+        :primary="listActived === 'labels'"
+        class="intents-and-labels-list__radio__button"
         size="medium"
-        @click="activeChange(false)">
+        @click="activeRadioButton('labels')">
         Labels
       </bh-button>
     </div>
-    <div v-if="active">
+    <div v-if="listActived === 'intents'">
       <intents-and-labels-card
         v-for="intent in intents"
         :key="intent"
         :title="intent"
         class="card" />
     </div>
-    <div v-if="!active">
+    <div v-else>
       <intents-and-labels-card
         v-for="label in labels"
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
-        class="card"/>
+        class="card" />
     </div>
   </div>
 </template>
@@ -52,35 +52,36 @@ export default {
   props: {
     labels: {
       type: Array,
-      default: null,
-
+      required: true,
     },
     intents: {
       type: Array,
-      default: null,
+      required: true,
     },
   },
   data() {
     return {
-      active: true,
+      listActived: 'intents',
     };
   },
   methods: {
-    activeChange(value) {
-      this.active = value;
+    activeRadioButton(value) {
+      this.listActived = value;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.intents-and-labels-list {
 
-.button-position {
-  display: flex;
-  margin: 0 -.25rem;
+  &__radio {
+    margin: 0 -.25rem;
+    display: flex;
 
-  &__space {
-    margin: .25rem;
+    &__button {
+      margin: .25rem;
+    }
   }
 }
 

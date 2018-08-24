@@ -9,6 +9,14 @@ describe('RepositoryCard.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(IntentsAndLabelsList, {
       localVue,
+      propsData: {
+        intents: ['Dog', 'Cat', 'Buy'],
+        labels: [{
+          entities: ['Buy', 'Change', 'Trade'],
+          repository: 'c60c115c-3f6c-451b-a118-653f1f1fb4fe',
+          value: 'animal',
+        }],
+      },
     });
   });
 
@@ -23,7 +31,7 @@ describe('RepositoryCard.vue', () => {
     });
 
     test('Data return true after intents button clicked', () => {
-      expect(wrapper.vm.active).toBeTruthy();
+      expect(wrapper.vm.listActived).toEqual('intents');
     });
   });
 
@@ -33,22 +41,8 @@ describe('RepositoryCard.vue', () => {
       labelsBtn.vm.$emit('click');
     });
 
-    test('Data return false after labels button clicked', () => {
-      expect(wrapper.vm.active).toBeFalsy();
-    });
-  });
-
-  describe('RepositoryCard.vue', () => {
-    beforeEach(() => {
-      wrapper.setProps({
-        labels: ['Dog', 'Cat', 'Buy'],
-        intents: ['Buy', 'Change', 'Trade'],
-      });
-      localVue.nextTick();
-    });
-
-    test('renders correctly with all props', () => {
-      expect(wrapper).toMatchSnapshot();
+    test('Data return labels after labels button clicked', () => {
+      expect(wrapper.vm.listActived).toEqual('labels');
     });
   });
 });

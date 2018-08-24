@@ -1,6 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import IntentsAndLabelsCard from '@/components/repository/IntentsAndLabelsCard';
 
+
 const localVue = createLocalVue();
 
 describe('RepositoryCard.vue', () => {
@@ -21,10 +22,8 @@ describe('RepositoryCard.vue', () => {
   describe('RepositoryCard.vue renders correctly with diferents props', () => {
     beforeEach(() => {
       wrapper.setProps({
-        title: 'Dog',
         labelEntities: ['Dog', 'Cat', 'Buy'],
       });
-      localVue.nextTick();
     });
 
     test('When labelEntities array props have a array. Renders correctly', () => {
