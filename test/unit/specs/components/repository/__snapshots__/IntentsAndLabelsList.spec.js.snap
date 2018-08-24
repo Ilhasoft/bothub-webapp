@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryCard.vue renders correctly 1`] = `
+exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
 <div class="intents-and-labels-list">
   <div class="intents-and-labels-list__radio">
     <bhbutton-stub class="intents-and-labels-list__radio__button">

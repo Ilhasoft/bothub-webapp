@@ -1,9 +1,11 @@
 <template>
   <div class="bh-card">
-    <slot />
+    <div class="bh-card__main">
+      <slot />
+    </div>
     <div
       v-if="$slots.append"
-      class="bh-card">
+      class="bh-card__append">
       <slot name="append"/>
     </div>
   </div>
@@ -22,6 +24,14 @@ export default {
     border: 1px solid rgba(207, 213, 217, 1);
     border-radius: 4px;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.16);
+
+    &__main {
+      flex-grow: 1;
+    }
+
+    &__append {
+      flex-grow: 0;
+    }
   }
 }
 </style>

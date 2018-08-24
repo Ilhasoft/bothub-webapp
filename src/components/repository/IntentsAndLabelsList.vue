@@ -6,7 +6,7 @@
         :primary="listActived === 'intents'"
         class="intents-and-labels-list__radio__button"
         size="medium"
-        @click="activeRadioButton('intents')" >
+        @click="activeList('intents')" >
         Intents
       </bh-button>
       <bh-button
@@ -14,7 +14,7 @@
         :primary="listActived === 'labels'"
         class="intents-and-labels-list__radio__button"
         size="medium"
-        @click="activeRadioButton('labels')">
+        @click="activeList('labels')">
         Labels
       </bh-button>
     </div>
@@ -65,7 +65,7 @@ export default {
     };
   },
   methods: {
-    activeRadioButton(value) {
+    activeList(value) {
       this.listActived = value;
     },
   },

@@ -4,7 +4,7 @@ import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
 const localVue = createLocalVue();
 
-describe('RepositoryCard.vue', () => {
+describe('IntentsAndLabelsList.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(IntentsAndLabelsList, {

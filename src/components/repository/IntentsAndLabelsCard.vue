@@ -5,11 +5,11 @@
         <div class="i-a-l-card__left__content">
           <strong>{{ title }}</strong>
           <div class="i-a-l-card__left__content__info">
-            <p><strong>{{ 0 }}</strong> Sentences</p>
-            <p v-if="labelEntities"><strong>{{ 0 }}</strong> Entities</p>
+            <span><strong>{{ 0 }}</strong> Sentences</span>
+            <span v-if="labelEntities"><strong>{{ 0 }}</strong> Entities</span>
           </div>
         </div>
-        <p v-if="labelEntities">Entities</p>
+        <span v-if="labelEntities">Entities</span>
       </div>
       <div
         v-if="labelEntities"
@@ -19,10 +19,10 @@
           v-for="(entities, i) in labelEntities"
           :key="i"
           :class="[
+            'entities__entity',
             getEntityClass(entities),
           ]"
-          size="small"
-          class="entities__entity">
+          size="small">
           <span>{{ entities }}</span>
         </bh-badge>
       </div>
@@ -40,6 +40,7 @@ const components = {
   BhCard,
   BhBadge,
 };
+
 export default {
   name: 'IntentsAndLabelsCard',
   components,
@@ -88,7 +89,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: 100%;
+      flex-grow: 1;
 
       &__info {
         display: flex;

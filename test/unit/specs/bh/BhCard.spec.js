@@ -6,7 +6,7 @@ import BhCard from 'bh/components/BhCard';
 
 const localVue = createLocalVue();
 localVue.use(BH);
-const pComponentContent = compileToFunctions('<div class="bh-card__left__content__flex-display"><span>Teste Slot content </span> </div>');
+const pComponentContent = compileToFunctions('<div class="bh-card__left__content__flex-display"><span>Test Slot content </span> </div>');
 
 describe('BhCard.vue', () => {
   let wrapper;

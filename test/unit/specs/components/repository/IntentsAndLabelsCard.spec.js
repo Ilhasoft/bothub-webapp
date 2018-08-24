@@ -4,7 +4,7 @@ import IntentsAndLabelsCard from '@/components/repository/IntentsAndLabelsCard';
 
 const localVue = createLocalVue();
 
-describe('RepositoryCard.vue', () => {
+describe('IntentsAndLabelsCard.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(IntentsAndLabelsCard, {
@@ -19,7 +19,7 @@ describe('RepositoryCard.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('RepositoryCard.vue renders correctly with diferents props', () => {
+  describe('renders correctly with diferents props', () => {
     beforeEach(() => {
       wrapper.setProps({
         labelEntities: ['Dog', 'Cat', 'Buy'],
