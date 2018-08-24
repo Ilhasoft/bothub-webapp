@@ -3,7 +3,7 @@ FROM node:8-alpine
 ENV WORKDIR /home/app
 WORKDIR $WORKDIR
 
-RUN apk update && apk add git && apk add yarn && apk add nginx
+RUN apk update && apk add git yarn nginx
 
 RUN adduser -D -g 'www' www
 
