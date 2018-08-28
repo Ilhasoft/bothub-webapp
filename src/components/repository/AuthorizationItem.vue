@@ -18,17 +18,17 @@
       <b-icon
         v-if="submitting"
         icon="refresh"
-        customClass="icon-spin" />
+        custom-class="icon-spin" />
       <b-icon
         v-if="submitted"
         icon="check"
-        customClass="has-text-success" />
+        custom-class="has-text-success" />
     </div>
     <div class="media-right">
       <div
         ref="removeBtn"
-        @click="remove()"
-        class="clickable-icon">
+        class="clickable-icon"
+        @click="remove()">
         <b-icon
           icon="close"
           size="is-small" />
@@ -52,6 +52,7 @@ const components = {
 
 export default {
   name: 'AuthorizationItem',
+  components,
   props: {
     uuid: {
       type: String,
@@ -82,15 +83,6 @@ export default {
       required: true,
     },
   },
-  components,
-  mounted() {
-    this.updateUserProfile();
-  },
-  watch: {
-    newRole() {
-      this.updateRole();
-    },
-  },
   data() {
     return {
       newRole: this.role,
@@ -103,6 +95,14 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+  },
+  watch: {
+    newRole() {
+      this.updateRole();
+    },
+  },
+  mounted() {
+    this.updateUserProfile();
   },
   methods: {
     ...mapActions([

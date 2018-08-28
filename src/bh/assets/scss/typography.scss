@@ -1,0 +1,15 @@
+@import '~./variables.scss';
+@import '~./colors.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+@mixin typography() {
+  font-family: $font-family;
+  font-weight: $font-weight-normal;
+  line-height: 1rem;
+  color: $color-bolder-grey;
+
+  strong {
+    font-weight: $font-weight-bolder;
+  }
+}

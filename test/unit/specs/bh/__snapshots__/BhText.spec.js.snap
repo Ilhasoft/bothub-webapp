@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhText.vue renders correctly 1`] = `
+<bhinput-stub>
+  <div class="bh-text">
+    <!---->
+    <input type="text" class="bh-text__input"> </div>
+</bhinput-stub>
+`;

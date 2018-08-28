@@ -19,10 +19,6 @@ export default {
       default: 0,
     },
   },
-  async mounted() {
-    const categoriesResponse = await this.getAllCategories();
-    this.allCategories = categoriesResponse.data;
-  },
   data() {
     return {
       allCategories: [],
@@ -33,6 +29,10 @@ export default {
       return [{ id: 0, name: 'All', active: this.current === 0 }]
         .concat(this.allCategories);
     },
+  },
+  async mounted() {
+    const categoriesResponse = await this.getAllCategories();
+    this.allCategories = categoriesResponse.data;
   },
   methods: {
     ...mapActions([

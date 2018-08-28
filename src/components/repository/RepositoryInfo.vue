@@ -3,9 +3,9 @@
     <div class="column is-narrow">
       <repository-avatar
         :name="name"
-        :ownerNickname="owner__nickname"
+        :owner-nickname="owner__nickname"
         :slug="slug"
-        :votesSum="votes_sum" />
+        :votes-sum="votes_sum" />
     </div>
     <div class="column">
       <div class="repository-header repository-infospace">
@@ -17,23 +17,23 @@
         <div class="repository-header-info">
           <button
             v-if="showManagerAuthorizationAction"
-            @click="$emit('managerAuthorization')"
-            class="action repository-header-info-item">
+            class="action repository-header-info-item"
+            @click="$emit('managerAuthorization')">
             <b-icon icon="account-plus" />
           </button>
           <button
-            :disabled="training"
             v-if="showTrainAction"
-            @click="$emit('train')"
-            class="action repository-header-info-item">
+            :disabled="training"
+            class="action repository-header-info-item"
+            @click="$emit('train')">
             <b-icon
               :icon="training ? 'refresh' : 'school'"
-              :customClass="training && 'icon-spin' || null" />
+              :custom-class="training && 'icon-spin' || null" />
           </button>
           <button
             v-if="showEditAction"
-            @click="$emit('edit')"
-            class="action repository-header-info-item">
+            class="action repository-header-info-item"
+            @click="$emit('edit')">
             <b-icon icon="pencil" />
           </button>
         </div>
@@ -98,12 +98,15 @@ export default {
     },
     available_languages: {
       type: Array,
+      default: () => ([]),
     },
     description: {
       type: String,
+      default: '',
     },
     categories_list: {
       type: Array,
+      default: () => ([]),
     },
     hideDescription: {
       type: Boolean,
@@ -130,9 +133,6 @@ export default {
       default: 0,
     },
   },
-  mounted() {
-    this.updateProfile({ nickname: this.owner__nickname });
-  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -140,6 +140,9 @@ export default {
     repositoryURL() {
       return `https://bothub.it/${this.owner__nickname}/${this.slug}/`;
     },
+  },
+  mounted() {
+    this.updateProfile({ nickname: this.owner__nickname });
   },
   methods: {
     ...mapActions([

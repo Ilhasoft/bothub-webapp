@@ -1,100 +1,199 @@
 <template>
-  <form @submit.prevent="onSubmit()">
-    <messages :msgs="nonFieldsErrors" />
-    <example-with-entities-input
-      v-model="data.textAndEntities"
-      :errors="errors"
-      :extraEntitiesList="extraEntitiesList"
-      :allEntities="repository.entities" />
-    <div class="field level">
-      <div class="level-left">
-        <div class="level-item">
-          <div>
-            <b-field
-              horizontal
-              label="Intent"
-              :type="errors.intent && 'is-danger'"
-              :message="errors.intent">
-              <intent-input
-                v-model="data.intent"
-                :intents="extraIntentsList" />
-            </b-field>
-          </div>
-        </div>
+  <div>
+    <form
+      class="columns is-variable is-2"
+      @submit.prevent="onSubmit()">
+      <div class="column is-three-fifths">
+        <bh-field
+          :errors="errors.text || errors.language"
+          label>
+          <example-text-with-highlighted-entities-input
+            ref="textInput"
+            v-model="text"
+            :entities="entities"
+            :available-entities="availableEntities"
+            :formatters="textFormatters"
+            size="medium"
+            placeholder="Add a sentence"
+            @textSelected="setTextSelected($event)">
+            <language-append-select-input
+              slot="append"
+              v-model="language"
+              class="language-append" />
+          </example-text-with-highlighted-entities-input>
+        </bh-field>
       </div>
-      <div class="level-right">
-        <div class="level-item">
-          <button
+      <div class="column">
+        <bh-field
+          :errors="errors.intent"
+          label="Intent"
+          help-text="When your bot receives a message, your bot can use a
+                    recognizer to examine the message and determine intent.">
+          <bh-autocomplete
+            v-model="intent"
+            :data="repository.intents || []"
+            :formatters="intentFormatters"
+            size="medium"
+            placeholder="Intent" />
+        </bh-field>
+      </div>
+      <div class="column is-narrow">
+        <bh-field label>
+          <bh-button
+            :disabled="!isValid || submitting "
+            :tooltip-hover="!isValid ? validationErrors : null"
+            primary
             type="submit"
-            class="button is-primary"
-            :disabled="submitting">Submit example</button>
-        </div>
+            size="medium">
+            <slot v-if="!submitting">Submit</slot>
+            <bh-loading
+              v-if="submitting"
+              ref="load"
+              size="small" />
+          </bh-button>
+        </bh-field>
+      </div>
+    </form>
+    <div class="columns is-variable is-1">
+      <div class="column">
+        <bh-field :errors="errors.entities">
+          <entities-input
+            ref="entitiesInput"
+            v-model="entities"
+            :repository="repository"
+            :text="text"
+            :text-selected="textSelected"
+            :available-entities="availableEntities"
+            :available-labels="availableLabels"
+            @entityAdded="onEntityAdded($event)"
+            @entityEdited="onEditEntity($event)" />
+        </bh-field>
       </div>
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import EntitiesInput from '@/components/inputs/EntitiesInput';
+import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
+
 import { mapActions } from 'vuex';
-import Messages from '@/components/shared/Messages';
-import ExampleWithEntitiesInput from '@/components/inputs/ExampleWithEntitiesInput';
-import IntentInput from '@/components/inputs/IntentInput';
+import { formatters as bhFormatters } from 'bh/utils';
+import { formatters } from '@/utils';
 
 
 const components = {
-  ExampleWithEntitiesInput,
-  Messages,
-  IntentInput,
+  ExampleTextWithHighlightedEntitiesInput,
+  EntitiesInput,
+  LanguageAppendSelectInput,
 };
 
 export default {
   name: 'NewExampleForm',
   components,
   props: {
-    extraEntitiesList: {
-      type: Array,
-      default: () => ([]),
-    },
-    extraIntentsList: {
-      type: Array,
-      default: () => ([]),
-    },
     repository: {
-      type: [String, Object],
+      type: [Object, String],
       required: true,
     },
   },
   data() {
     return {
-      data: {
-        textAndEntities: {
-          text: '',
-          entities: [],
-        },
-        intent: '',
-      },
-      selected: { start: 0, end: 0 },
-      submitting: false,
+      textSelected: null,
+      text: '',
+      language: this.repository.language,
+      intent: '',
+      entities: [],
       errors: {},
+      submitting: false,
     };
   },
   computed: {
-    nonFieldsErrors() {
-      /* istanbul ignore next */
-      return (this.errors.non_field_errors || [])
-        .map(text => ({
-          class: 'error',
-          text,
-        }));
+    validationErrors() {
+      const errors = [];
+
+      if (!this.text) {
+        errors.push('You need type a text to sentence');
+      }
+
+      if (!this.intent && this.entities.length === 0) {
+        errors.push('Set a intent or one entity');
+      }
+
+      return errors;
+    },
+    isValid() {
+      return this.validationErrors.length === 0;
+    },
+    textFormatters() {
+      const formattersList = [
+        bhFormatters.trimStart(),
+        bhFormatters.removeBreakLines(),
+        bhFormatters.removeMultipleWhiteSpaces(),
+      ];
+      formattersList.toString = () => 'textFormatters';
+      return formattersList;
+    },
+    intentFormatters() {
+      const formattersList = [
+        formatters.bothubItemKey(),
+      ];
+      formattersList.toString = () => 'intentFormatters';
+      return formattersList;
+    },
+    availableEntities() {
+      const repositoryEntities = this.repository.entities || [];
+      const entitiesFlat = this.entities.map(e => e.entity);
+      return repositoryEntities
+        .concat(entitiesFlat)
+        .filter((entity, index, current) => (current.indexOf(entity) === index));
+    },
+    availableLabels() {
+      const repositoryLabels = this.repository.labels_list || [];
+      const labelsFlat = this.entities.map(e => e.label);
+      return repositoryLabels
+        .concat(labelsFlat)
+        .filter(label => !!label)
+        .filter((label, index, current) => (current.indexOf(label) === index));
+    },
+    data() {
+      const {
+        text,
+        language,
+        intent,
+        entities,
+      } = this;
+
+      return {
+        text,
+        language,
+        intent,
+        entities,
+      };
     },
   },
   methods: {
     ...mapActions([
       'newExample',
     ]),
-    updateSelected(value) {
-      /* istanbul ignore next */
-      this.selected = value;
+    setTextSelected(value) {
+      this.textSelected = value;
+    },
+    onEntityAdded() {
+      if (this.$refs.textInput.clearSelected) {
+        /* istanbul ignore next */
+        this.$refs.textInput.clearSelected();
+      }
+    },
+    onEditEntity(entity) {
+      if (this.$refs.textInput.emitTextSelected) {
+        /* istanbul ignore next */
+        this.$refs.textInput.emitTextSelected({
+          selectionStart: entity.start,
+          selectionEnd: entity.end,
+        });
+      }
     },
     async onSubmit() {
       this.errors = {};
@@ -103,26 +202,27 @@ export default {
       try {
         await this.newExample({
           repository: this.repository.uuid || this.repository,
-          intent: this.data.intent,
-          ...this.data.textAndEntities,
+          ...this.data,
         });
-        this.data = {
-          text: '',
-          entities: [],
-          intent: '',
-        };
 
+        this.text = '';
+        this.intent = '';
+        this.entities = [];
         this.submitting = false;
+
         this.$emit('created');
         return true;
       } catch (error) {
+        /* istanbul ignore next */
         const data = error.response && error.response.data;
+        /* istanbul ignore next */
         if (data) {
+          /* istanbul ignore next */
           this.errors = data;
         }
+        /* istanbul ignore next */
         this.submitting = false;
       }
-
       return false;
     },
   },
@@ -130,14 +230,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-
-.inputs {
-  background-color: $grey-lighter;
-  border-radius: 3px 3px 4px 4px;
-
-  &-entities {
-    padding: 8px;
-  }
+.language-append {
+  flex-grow: 0;
 }
 </style>

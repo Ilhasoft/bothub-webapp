@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhButton.vue When Priamry props is true renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--primary"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Primary and Secondary props is true renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--primary bh-button__button--secondary"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Primary, Secondary and Roundend props is true renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--primary bh-button__button--secondary bh-button__button--rounded"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Primary, Secondary and roundend props is true and size is not blank renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--primary bh-button__button--secondary bh-button__button--rounded bh-button__button--smal"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Rounded props is true renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--rounded"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Secondary props is true renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--secondary"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue When Size props is not blank renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button bh-button__button--small"></button>
+  <!---->
+</div>
+`;
+
+exports[`BhButton.vue renders correctly 1`] = `
+<div class="bh-button">
+  <button type="button" class="bh-button__button"></button>
+  <!---->
+</div>
+`;

@@ -1,8 +1,8 @@
 <template>
   <b-input
-    type="email"
     :maxlength="max_length"
     v-model="value"
+    type="email"
     @input="update()" />
 </template>
 
@@ -11,18 +11,20 @@ export default {
   props: {
     max_length: {
       type: Number,
+      default: null,
     },
     initialData: {
       type: String,
+      default: '',
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || '',
+      value: this.initialData,
     };
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

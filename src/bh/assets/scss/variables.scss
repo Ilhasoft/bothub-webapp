@@ -1,0 +1,31 @@
+// Typography
+
+$font-family: 'Roboto', sans-serif;
+$font-size: 16px;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-lighter: 300;
+$font-weight-bolder: 700;
+
+// Sizes
+
+$height-normal: 2.25rem;
+$height-small: 1.5rem;
+$height-medium: 3rem;
+$height-large: 4rem;
+
+
+// Forms
+
+$form-components-border-radius: 4px;
+$form-component-height-normal: $height-normal;
+$form-component-height-small: $height-small;
+$form-component-height-medium: $height-medium;
+$form-component-height-large: $height-large;
+
+
+// z-index
+
+$tooltip-z-index: 10;
+$dropdown-z-index: 9;
+$autocomplete-z-index: 8;

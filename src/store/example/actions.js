@@ -1,10 +1,12 @@
 import example from '@/api/example';
+import entity from '@/api/entity';
+
 
 export default {
   async newExample(store, {
-    repository, text, entities, intent,
+    repository, text, language, entities, intent,
   }) {
-    const response = await example.new(repository, text, entities, intent);
+    const response = await example.new(repository, text, language, entities, intent);
     return response;
   },
   async getExamples(store, { repositoryUuid }) {
@@ -25,6 +27,10 @@ export default {
   },
   async getExample(store, { id }) {
     const response = await example.get(id);
+    return response;
+  },
+  async getEntities(store, { repositoryUuid, value }) {
+    const response = await entity.search(repositoryUuid, { value });
     return response;
   },
 };

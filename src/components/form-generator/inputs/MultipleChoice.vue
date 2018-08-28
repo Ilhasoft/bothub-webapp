@@ -1,14 +1,14 @@
 <template>
   <b-taginput
+    v-model="value"
+    :data="filteredData"
     expanded
     autocomplete
     open-on-focus
     clear-on-select
-    v-model="value"
-    @input="update()"
-    :data="filteredData"
     field="display_name"
-    icon="label" />
+    icon="label"
+    @input="update()" />
 </template>
 
 <script>
@@ -20,14 +20,12 @@ export default {
     },
     initialData: {
       type: [Array, String],
+      default: () => ([]),
     },
-  },
-  mounted() {
-    this.update();
   },
   data() {
     return {
-      value: this.initialData || [],
+      value: this.initialData,
     };
   },
   computed: {
@@ -35,6 +33,9 @@ export default {
       const values = this.value.map(({ value }) => (value));
       return this.choices.filter(({ value }) => (!values.includes(value)));
     },
+  },
+  mounted() {
+    this.update();
   },
   methods: {
     update() {

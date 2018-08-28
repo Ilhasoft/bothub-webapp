@@ -22,6 +22,7 @@ const components = {
 
 export default {
   name: 'RepositoryCard',
+  components,
   props: {
     slug: {
       type: String,
@@ -37,19 +38,21 @@ export default {
     },
     available_languages: {
       type: Array,
+      default: () => ([]),
     },
     description: {
       type: String,
+      default: '',
     },
     categories_list: {
       type: Array,
+      default: () => ([]),
     },
     votes_sum: {
       type: Number,
       default: 0,
     },
   },
-  components,
 };
 </script>
 

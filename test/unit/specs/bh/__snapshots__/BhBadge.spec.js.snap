@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhBadge.vue renders correctly 1`] = `<div class="bh-badge"></div>`;
+
+exports[`BhBadge.vue when size string is not blank renders correctly 1`] = `<div class="bh-badge bh-badge--small"></div>`;

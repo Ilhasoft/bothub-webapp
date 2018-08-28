@@ -5,7 +5,9 @@
         <div class="columns">
           <div class="column">
             <div class="footer-item footer-brand">
-              <img src="~@/assets/imgs/logo-white.svg" alt="bothub" />
+              <img
+                src="~@/assets/imgs/logo-white.svg"
+                alt="bothub" >
             </div>
             <ul class="footer-item">
               <li><a href="#">Terms &amp; conditions</a></li>
@@ -50,12 +52,12 @@
                     :disabled="submittingNewsletter"
                     type="email"
                     class="input footer-input"
-                    placeholder="your@email.com" />
+                    placeholder="your@email.com" >
                   <span class="control">
                     <button class="button is-secondary">
                       <b-icon
                         :icon="submittingNewsletter ? 'refresh' : 'email'"
-                        :customClass="submittingNewsletter ? 'icon-spin' : null" />
+                        :custom-class="submittingNewsletter ? 'icon-spin' : null" />
                     </button>
                   </span>
                 </b-field>
@@ -66,7 +68,7 @@
       </div>
       <div class="footer-license">
         <p class="has-text-centered">Bothub is a project by Ilhasoft.
-          &copy; 2018 All rights reserved.</p>
+        &copy; 2018 All rights reserved.</p>
       </div>
     </div>
   </footer>
