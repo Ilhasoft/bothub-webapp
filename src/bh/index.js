@@ -12,6 +12,7 @@ import BhDropdownItem from './components/BhDropdownItem';
 import BhLanguageFlag from './components/BhLanguageFlag';
 import BhAutocomplete from './components/BhAutocomplete';
 import BhInput from './components/BhInput';
+import BhCard from './components/BhCard';
 
 
 const components = [
@@ -29,6 +30,7 @@ const components = [
   BhLanguageFlag,
   BhAutocomplete,
   BhInput,
+  BhCard,
 ];
 
 export default {
