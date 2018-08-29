@@ -5,9 +5,7 @@ exports[`BhCard.vue renders correctly 1`] = `
   <div class="bh-card__main">
     <div>default</div>
   </div>
-  <div class="bh-card__append">
-    <div>append</div>
-  </div>
+  <div>append</div>
 </div>
 `;
 
@@ -16,8 +14,6 @@ exports[`BhCard.vue set shadow hard renders correctly 1`] = `
   <div class="bh-card__main">
     <div>default</div>
   </div>
-  <div class="bh-card__append">
-    <div>append</div>
-  </div>
+  <div>append</div>
 </div>
 `;

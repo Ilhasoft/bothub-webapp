@@ -9,11 +9,10 @@
     <div class="bh-card__main">
       <slot />
     </div>
-    <div
+    <slot
       v-if="$slots.append"
-      class="bh-card__append">
-      <slot name="append"/>
-    </div>
+      name="append"
+      class="bh-card__append" />
   </div>
 </template>
 
