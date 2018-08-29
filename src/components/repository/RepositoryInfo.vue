@@ -50,7 +50,7 @@
         <bh-badge
           v-for="category in repository.categories_list"
           :key="category.id"
-          class="repository-info__categories__category">{{ category }}</bh-badge>
+          class="repository-info__categories__category">{{ category.name || category }}</bh-badge>
       </div>
     </div>
   </div>
