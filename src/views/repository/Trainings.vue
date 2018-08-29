@@ -3,22 +3,34 @@
     :repository="repository"
     :loading="loading"
     :error-code="errorCode">
-    <h1>Trainings</h1>
+    <div
+      v-if="repository"
+      class="trainings">
+      <intents-and-labels-list
+        :intents="repository.intents"
+        :labels="repository.labels" />
+    </div>
   </repository-view-base>
 </template>
 
 <script>
-import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
-
-const components = {
-  RepositoryViewBase,
-};
 
 export default {
   name: 'RepositoryTrainings',
-  components,
+  components: {
+    RepositoryViewBase,
+    IntentsAndLabelsList,
+  },
   extends: RepositoryBase,
 };
 </script>
+
+<style lang="scss" scoped>
+.trainings {
+  padding: 1rem;
+}
+</style>
