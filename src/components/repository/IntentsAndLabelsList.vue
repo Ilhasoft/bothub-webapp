@@ -24,7 +24,7 @@
         :key="intent"
         :title="intent"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', $event)" />
+        @showSentences="$emit('showSentences', { type: 'intent', id: intent })" />
     </div>
     <div v-else-if="listActived === 'labels'">
       <intents-and-labels-item
@@ -33,7 +33,7 @@
         :title="label.value"
         :label-entities="label.entities"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', $event)" />
+        @showSentences="$emit('showSentences', { type: 'label', id: label.value })" />
     </div>
   </div>
 </template>
