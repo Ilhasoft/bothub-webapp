@@ -40,6 +40,7 @@ export default {
 
     display: flex;
     flex-direction: row;
+    background-color: white;
     border: 1px solid $color-lighter-grey;
     border-radius: $radius-normal;
 
