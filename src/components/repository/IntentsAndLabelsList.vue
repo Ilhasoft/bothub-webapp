@@ -41,7 +41,7 @@
         @showSentences="$emit('showSentences', { type: 'label', id: label.value })" />
       <p
         v-if="labels.length === 0"
-        class="intents-and-labels-list__empty-message">There is no Labels </p>
+        class="intents-and-labels-list__empty-message">There is no labels </p>
     </div>
   </div>
 </template>
