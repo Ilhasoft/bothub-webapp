@@ -1,10 +1,10 @@
 <template>
   <bh-card>
-    <div class="i-a-l-card">
-      <div class="i-a-l-card__left">
-        <div class="i-a-l-card__left__content">
+    <div class="i-a-l-item">
+      <div class="i-a-l-item__left">
+        <div class="i-a-l-item__left__content">
           <strong>{{ title }}</strong>
-          <div class="i-a-l-card__left__content__info">
+          <div class="i-a-l-item__left__content__info">
             <span><strong>{{ 0 }}</strong> Sentences</span>
             <span v-if="labelEntities"><strong>{{ 0 }}</strong> Entities</span>
           </div>
@@ -31,19 +31,11 @@
 </template>
 
 <script>
-import BhCard from '@/bh/components/BhCard';
-import BhBadge from '@/bh/components/BhBadge';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 
-const components = {
-  BhCard,
-  BhBadge,
-};
-
 export default {
-  name: 'IntentsAndLabelsCard',
-  components,
+  name: 'IntentsAndLabelsItem',
   props: {
     title: {
       type: String,
@@ -70,7 +62,7 @@ export default {
 @import '~bh/assets/scss/bh.scss';
 
 
-.i-a-l-card {
+.i-a-l-item {
   flex-grow: 1;
   display: flex;
   color:$color-grey;

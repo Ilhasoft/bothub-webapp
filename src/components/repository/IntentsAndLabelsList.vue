@@ -19,14 +19,14 @@
       </bh-button>
     </div>
     <div v-if="listActived === 'intents'">
-      <intents-and-labels-card
+      <intents-and-labels-item
         v-for="intent in intents"
         :key="intent"
         :title="intent"
         class="intents-and-labels-list__item" />
     </div>
-    <div v-else>
-      <intents-and-labels-card
+    <div v-else-if="listActived === 'labels'">
+      <intents-and-labels-item
         v-for="label in labels"
         :key="label.value"
         :title="label.value"
@@ -37,24 +37,20 @@
 </template>
 
 <script>
-import BhCard from '@/bh/components/BhCard';
-import BhButton from '@/bh/components/BhButton';
-import IntentsAndLabelsCard from './IntentsAndLabelsCard';
+import IntentsAndLabelsItem from '@/components/repository/IntentsAndLabelsItem';
 
 
 export default {
   name: 'IntentsAndLabelsList',
   components: {
-    BhCard,
-    IntentsAndLabelsCard,
-    BhButton,
+    IntentsAndLabelsItem,
   },
   props: {
-    labels: {
+    intents: {
       type: Array,
       required: true,
     },
-    intents: {
+    labels: {
       type: Array,
       required: true,
     },
