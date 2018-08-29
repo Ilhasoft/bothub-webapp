@@ -95,6 +95,11 @@
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>No description.</p>
+          <hr>
+          <intents-and-labels-list
+            :labels="repository.labels"
+            :intents="repository.intents"
+            @showSentences="activeTab = 1" />
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
@@ -139,9 +144,6 @@
               </div>
             </div>
           </div>
-          <intents-and-labels-list
-            :labels="repository.labels"
-            :intents="repository.intents" />
           <h1 class="title examples-title">Examples</h1>
           <examples-list
             ref="examplesList"

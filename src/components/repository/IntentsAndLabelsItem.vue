@@ -6,7 +6,7 @@
         <div class="i-a-l-item__main__info-wrapper">
           <div class="i-a-l-item__main__info">
             <span v-if="labelEntities">{{ labelEntities.length }} Entities</span>
-            <span><a>Show sentences</a></span>
+            <span><a @click.prevent="$emit('showSentences')">Show sentences</a></span>
           </div>
         </div>
       </div>

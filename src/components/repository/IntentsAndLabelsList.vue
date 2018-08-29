@@ -23,7 +23,8 @@
         v-for="intent in intents"
         :key="intent"
         :title="intent"
-        class="intents-and-labels-list__item" />
+        class="intents-and-labels-list__item"
+        @showSentences="$emit('showSentences', $event)" />
     </div>
     <div v-else-if="listActived === 'labels'">
       <intents-and-labels-item
