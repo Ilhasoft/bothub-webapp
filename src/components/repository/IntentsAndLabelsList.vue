@@ -32,7 +32,8 @@
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
-        class="intents-and-labels-list__item" />
+        class="intents-and-labels-list__item"
+        @showSentences="$emit('showSentences', $event)" />
     </div>
   </div>
 </template>
