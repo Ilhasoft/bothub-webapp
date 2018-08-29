@@ -23,7 +23,7 @@
         v-for="intent in intents"
         :key="intent"
         :title="intent"
-        class="card" />
+        class="intents-and-labels-list__item" />
     </div>
     <div v-else>
       <intents-and-labels-card
@@ -31,7 +31,7 @@
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
-        class="card" />
+        class="intents-and-labels-list__item" />
     </div>
   </div>
 </template>
@@ -74,7 +74,6 @@ export default {
 
 <style lang="scss" scoped>
 .intents-and-labels-list {
-
   &__radio {
     margin: 0 -.25rem;
     display: flex;
@@ -83,9 +82,9 @@ export default {
       margin: .25rem;
     }
   }
-}
 
-.card {
-  margin: 1rem 0;
+  &__item {
+    margin: 1rem 0;
+  }
 }
 </style>
