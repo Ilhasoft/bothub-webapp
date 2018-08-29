@@ -13,6 +13,7 @@ import BhLanguageFlag from './components/BhLanguageFlag';
 import BhAutocomplete from './components/BhAutocomplete';
 import BhInput from './components/BhInput';
 import BhAvatar from './components/BhAvatar';
+import BhCard from './components/BhCard';
 
 
 const components = [
@@ -31,6 +32,7 @@ const components = [
   BhAutocomplete,
   BhInput,
   BhAvatar,
+  BhCard,
 ];
 
 export default {

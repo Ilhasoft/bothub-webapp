@@ -95,6 +95,11 @@
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>No description.</p>
+          <hr>
+          <intents-and-labels-list
+            :labels="repository.labels"
+            :intents="repository.intents"
+            @showSentences="activeTab = 1" />
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
@@ -434,6 +439,7 @@ import SetAuthorizationRoleForm from '@/components-v1/repository/SetAuthorizatio
 import AuthorizationsList from '@/components-v1/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components-v1/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components-v1/repository/AuthorizationRequestsList';
+import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
 
 const components = {
@@ -455,6 +461,7 @@ const components = {
   AuthorizationsList,
   RequestAuthorizationForm,
   AuthorizationRequestsList,
+  IntentsAndLabelsList,
 };
 
 export default {
