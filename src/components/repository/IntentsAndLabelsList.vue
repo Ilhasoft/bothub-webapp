@@ -36,6 +36,7 @@
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
+        :sentences-count="label.examples__count"
         class="intents-and-labels-list__item"
         @showSentences="$emit('showSentences', { type: 'label', id: label.value })" />
       <p
