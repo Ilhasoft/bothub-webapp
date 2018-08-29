@@ -3,30 +3,27 @@
 exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
 <bhcard-stub>
   <div class="i-a-l-item">
-    <div class="i-a-l-item__left">
-      <div class="i-a-l-item__left__content"><strong>dog</strong>
-        <div class="i-a-l-item__left__content__info"><span><strong>0</strong> Sentences</span>
+    <div class="i-a-l-item__main">
+      <div><strong>dog</strong></div>
+      <div class="i-a-l-item__main__info-wrapper">
+        <div class="i-a-l-item__main__info"><span>0 Sentences</span>
           <!---->
         </div>
       </div>
-      <!---->
     </div>
-    <!---->
   </div>
+  <!---->
 </bhcard-stub>
 `;
 
 exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When labelEntities array props have a array. Renders correctly 1`] = `
 <bhcard-stub>
   <div class="i-a-l-item">
-    <div class="i-a-l-item__left">
-      <div class="i-a-l-item__left__content"><strong>dog</strong>
-        <div class="i-a-l-item__left__content__info"><span><strong>0</strong> Sentences</span> <span><strong>0</strong> Entities</span></div>
-      </div> <span>Entities</span></div>
-    <div slot="append" class="entities">
-      <bhbadge-stub class="entities__entity entity-sunflower"><span>Dog</span></bhbadge-stub>
-      <bhbadge-stub class="entities__entity entity-energos"><span>Cat</span></bhbadge-stub>
-      <bhbadge-stub class="entities__entity entity-blue-martina"><span>Buy</span></bhbadge-stub>
+    <div class="i-a-l-item__main">
+      <div><strong>dog</strong></div>
+      <div class="i-a-l-item__main__info-wrapper">
+        <div class="i-a-l-item__main__info"><span>0 Sentences</span> <span>0 Entities</span></div>
+      </div>
     </div>
   </div>
 </bhcard-stub>

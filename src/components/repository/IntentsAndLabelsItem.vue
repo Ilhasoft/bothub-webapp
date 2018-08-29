@@ -1,25 +1,31 @@
 <template>
   <bh-card>
     <div class="i-a-l-item">
-      <div class="i-a-l-item__left">
-        <div class="i-a-l-item__left__content">
-          <strong>{{ title }}</strong>
-          <div class="i-a-l-item__left__content__info">
-            <span><strong>{{ 0 }}</strong> Sentences</span>
-            <span v-if="labelEntities"><strong>{{ 0 }}</strong> Entities</span>
+      <div class="i-a-l-item__main">
+        <div><strong>{{ title }}</strong></div>
+        <div class="i-a-l-item__main__info-wrapper">
+          <div class="i-a-l-item__main__info">
+            <span>{{ 0 }} Sentences</span>
+            <span v-if="labelEntities">{{ 0 }} Entities</span>
           </div>
         </div>
-        <span v-if="labelEntities">Entities</span>
       </div>
+    </div>
+    <div
+      v-if="labelEntities"
+      slot="append"
+      class="i-a-l-item__entities">
       <div
         v-if="labelEntities"
-        slot="append"
-        class="entities">
+        class="i-a-l-item__entities__label">
+        <span>Entities</span>
+      </div>
+      <div class="i-a-l-item__entities__badges">
         <bh-badge
           v-for="(entities, i) in labelEntities"
           :key="i"
           :class="[
-            'entities__entity',
+            'i-a-l-item__entities__badges__item',
             getEntityClass(entities),
           ]"
           size="small">
@@ -59,46 +65,55 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/bh.scss';
+@import '~bh/assets/scss/colors.scss';
 
 
 .i-a-l-item {
-  flex-grow: 1;
   display: flex;
-  color:$color-grey;
 
-  &__left {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    border-color: #ebebeb;
-    border-style: double;
-    border-width: 0px 2px 0px 0px;
-    height: auto;
-    padding: 20px 20px 20px 20px;
+  &__main {
+    padding: 1rem;
 
-    &__content {
+    &__info-wrapper {
+      margin-top: .75rem;
+    }
+
+    &__info {
+      $margin: .5rem;
+
       display: flex;
-      flex-direction: column;
       justify-content: space-between;
-      flex-grow: 1;
+      margin: -($margin);
 
-      &__info {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 30%;
-        margin-top: 20px;
+      > span {
+        color: $color-grey;
+        margin: $margin;
       }
     }
   }
-}
 
-.entities {
-  flex-basis: 30%;
+  &__entities {
+    display: flex;
+    align-items: stretch;
+    flex-basis: 35%;
 
-  &__entity {
-    margin: .25rem;
+    &__label {
+      display: flex;
+      align-items: center;
+      padding: 1rem;
+      border-right: 1px solid $color-lighter-grey;
+      color: $color-grey;
+    }
+
+    &__badges {
+      $item-margin: .25rem;
+
+      padding: (1rem - $item-margin);
+
+      &__item {
+        margin: $item-margin;
+      }
+    }
   }
 }
 </style>
