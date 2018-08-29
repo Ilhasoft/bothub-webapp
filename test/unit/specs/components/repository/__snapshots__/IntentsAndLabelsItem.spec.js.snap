@@ -7,6 +7,7 @@ exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info">
+          <!---->
           <!----><span><a>Show sentences</a></span></div>
       </div>
     </div>
@@ -21,7 +22,8 @@ exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When la
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
-        <div class="i-a-l-item__main__info"><span>3 Entities</span> <span><a>Show sentences</a></span></div>
+        <div class="i-a-l-item__main__info">
+          <!----><span>3 entities</span> <span><a>Show sentences</a></span></div>
       </div>
     </div>
   </div>

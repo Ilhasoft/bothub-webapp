@@ -21,8 +21,9 @@
     <div v-if="listActived === 'intents'">
       <intents-and-labels-item
         v-for="intent in intents"
-        :key="intent"
-        :title="intent"
+        :key="intent.value"
+        :title="intent.value"
+        :sentences-count="intent.examples__count"
         class="intents-and-labels-list__item"
         @showSentences="$emit('showSentences', { type: 'intent', id: intent })" />
     </div>

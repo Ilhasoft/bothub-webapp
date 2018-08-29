@@ -5,7 +5,8 @@
         <div><strong>{{ title }}</strong></div>
         <div class="i-a-l-item__main__info-wrapper">
           <div class="i-a-l-item__main__info">
-            <span v-if="labelEntities">{{ labelEntities.length }} Entities</span>
+            <span v-if="sentencesCount !== null">{{ sentencesCount }} sentences</span>
+            <span v-if="labelEntities">{{ labelEntities.length }} entities</span>
             <span><a @click.prevent="$emit('showSentences')">Show sentences</a></span>
           </div>
         </div>
@@ -49,6 +50,10 @@ export default {
     },
     labelEntities: {
       type: Array,
+      default: null,
+    },
+    sentencesCount: {
+      type: Number,
       default: null,
     },
   },
