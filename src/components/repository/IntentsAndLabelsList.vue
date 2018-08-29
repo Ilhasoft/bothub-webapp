@@ -26,6 +26,9 @@
         :sentences-count="intent.examples__count"
         class="intents-and-labels-list__item"
         @showSentences="$emit('showSentences', { type: 'intent', id: intent })" />
+      <p
+        v-if="intents.length === 0"
+        class="intents-and-labels-list__empty-message">There is no intents </p>
     </div>
     <div v-else-if="listActived === 'labels'">
       <intents-and-labels-item
@@ -35,6 +38,9 @@
         :label-entities="label.entities"
         class="intents-and-labels-list__item"
         @showSentences="$emit('showSentences', { type: 'label', id: label.value })" />
+      <p
+        v-if="labels.length === 0"
+        class="intents-and-labels-list__empty-message">There is no Labels </p>
     </div>
   </div>
 </template>
@@ -73,6 +79,11 @@ export default {
 
 <style lang="scss" scoped>
 .intents-and-labels-list {
+  &__empty-message {
+    margin: 1rem;
+    font-style: italic;
+  }
+
   &__radio {
     margin: 0 -.25rem;
     display: flex;
@@ -85,5 +96,6 @@ export default {
   &__item {
     margin: 1rem 0;
   }
+
 }
 </style>
