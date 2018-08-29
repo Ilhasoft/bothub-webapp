@@ -11,9 +11,9 @@ exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
     </bhbutton-stub>
   </div>
   <div>
-    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
-    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
-    <intentsandlabelscard-stub class="card"></intentsandlabelscard-stub>
+    <intentsandlabelscard-stub class="intents-and-labels-list__item"></intentsandlabelscard-stub>
+    <intentsandlabelscard-stub class="intents-and-labels-list__item"></intentsandlabelscard-stub>
+    <intentsandlabelscard-stub class="intents-and-labels-list__item"></intentsandlabelscard-stub>
   </div>
 </div>
 `;

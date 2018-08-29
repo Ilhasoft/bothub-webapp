@@ -6,7 +6,9 @@ import BhCard from 'bh/components/BhCard';
 
 const localVue = createLocalVue();
 localVue.use(BH);
-const pComponentContent = compileToFunctions('<div class="bh-card__left__content__flex-display"><span>Test Slot content </span> </div>');
+
+const defaultSlotComponent = compileToFunctions('<div>default</div>');
+const appendSlotComponent = compileToFunctions('<div>append</div>');
 
 describe('BhCard.vue', () => {
   let wrapper;
@@ -14,13 +16,23 @@ describe('BhCard.vue', () => {
     wrapper = shallowMount(BhCard, {
       localVue,
       slots: {
-        default: pComponentContent,
-        append: pComponentContent,
+        default: defaultSlotComponent,
+        append: appendSlotComponent,
       },
     });
   });
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('set shadow hard', () => {
+    beforeEach(() => {
+      wrapper.setProps({ shadow: 'hard' });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
   });
 });

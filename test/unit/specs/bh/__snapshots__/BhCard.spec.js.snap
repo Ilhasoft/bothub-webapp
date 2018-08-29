@@ -1,12 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhCard.vue renders correctly 1`] = `
-<div class="bh-card">
+<div class="bh-card bh-card--shaded">
   <div class="bh-card__main">
-    <div class="bh-card__left__content__flex-display"><span>Test Slot content </span></div>
+    <div>default</div>
   </div>
   <div class="bh-card__append">
-    <div class="bh-card__left__content__flex-display"><span>Test Slot content </span></div>
+    <div>append</div>
+  </div>
+</div>
+`;
+
+exports[`BhCard.vue set shadow hard renders correctly 1`] = `
+<div class="bh-card bh-card--shaded-hard">
+  <div class="bh-card__main">
+    <div>default</div>
+  </div>
+  <div class="bh-card__append">
+    <div>append</div>
   </div>
 </div>
 `;
