@@ -1,13 +1,15 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import IntentsAndLabelsCard from '@/components/repository/IntentsAndLabelsCard';
+import BH from 'bh';
+import IntentsAndLabelsItem from '@/components/repository/IntentsAndLabelsItem';
 
 
 const localVue = createLocalVue();
+localVue.use(BH);
 
-describe('IntentsAndLabelsCard.vue', () => {
+describe('IntentsAndLabelsItem.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(IntentsAndLabelsCard, {
+    wrapper = shallowMount(IntentsAndLabelsItem, {
       localVue,
       propsData: {
         title: 'dog',

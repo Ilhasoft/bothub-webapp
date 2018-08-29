@@ -1,8 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import BH from 'bh';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
-
 const localVue = createLocalVue();
+localVue.use(BH);
 
 describe('IntentsAndLabelsList.vue', () => {
   let wrapper;
