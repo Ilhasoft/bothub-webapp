@@ -3,7 +3,8 @@
     :class="{
       'bh-badge': true,
       [`bh-badge--${size}`]: !!size,
-  }">
+    }"
+    @click="$emit('click', $event)">
     <slot />
   </div>
 </template>
