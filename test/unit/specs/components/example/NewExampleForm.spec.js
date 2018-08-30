@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 
-import NewExampleForm from '@/components-v1/example/NewExampleForm';
+import NewExampleForm from '@/components/example/NewExampleForm';
 import store from '@/store';
 
 

@@ -31,7 +31,7 @@
                     recognizer to examine the message and determine intent.">
           <bh-autocomplete
             v-model="intent"
-            :data="repository.intents || []"
+            :data="repository.intents_list || []"
             :formatters="intentFormatters"
             size="medium"
             placeholder="Intent" />
@@ -74,27 +74,25 @@
 </template>
 
 <script>
-import ExampleTextWithHighlightedEntitiesInput from '@/components-v1/inputs/ExampleTextWithHighlightedEntitiesInput';
-import EntitiesInput from '@/components-v1/inputs/EntitiesInput';
-import LanguageAppendSelectInput from '@/components-v1/inputs/LanguageAppendSelectInput';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import EntitiesInput from '@/components/inputs/EntitiesInput';
+import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions } from 'vuex';
 import { formatters as bhFormatters } from 'bh/utils';
 import { formatters } from '@/utils';
 
 
-const components = {
-  ExampleTextWithHighlightedEntitiesInput,
-  EntitiesInput,
-  LanguageAppendSelectInput,
-};
-
 export default {
   name: 'NewExampleForm',
-  components,
+  components: {
+    ExampleTextWithHighlightedEntitiesInput,
+    EntitiesInput,
+    LanguageAppendSelectInput,
+  },
   props: {
     repository: {
-      type: [Object, String],
+      type: Object,
       required: true,
     },
   },
@@ -143,7 +141,7 @@ export default {
       return formattersList;
     },
     availableEntities() {
-      const repositoryEntities = this.repository.entities || [];
+      const repositoryEntities = this.repository.entities_list || [];
       const entitiesFlat = this.entities.map(e => e.entity);
       return repositoryEntities
         .concat(entitiesFlat)
@@ -201,7 +199,7 @@ export default {
 
       try {
         await this.newExample({
-          repository: this.repository.uuid || this.repository,
+          repository: this.repository.uuid,
           ...this.data,
         });
 

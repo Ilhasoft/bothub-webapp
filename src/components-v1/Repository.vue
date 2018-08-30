@@ -425,7 +425,7 @@ import Layout from '@/components/shared/Layout';
 import Loading from '@/components-v1/shared/Loading';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components-v1/shared/ErrorMessage';
-import NewExampleForm from '@/components-v1/example/NewExampleForm';
+import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components-v1/auth/LoginForm';
 import ExamplesList from '@/components-v1/example/ExamplesList';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
