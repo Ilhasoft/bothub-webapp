@@ -1,7 +1,7 @@
 <template>
   <div class="exampleSearchInput">
     <bh-text
-      :value="initialData"
+      :value="dictyToString"
       @input="dictyMount">
       <div slot="append">
         <bh-button
@@ -23,19 +23,24 @@ export default {
   name: 'ExampleSearchInput',
   props: {
     initialData: {
-      type: String,
-      default: '',
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
     return {
-      value: this.initialData,
+      dictyToString: this.initialData,
       dicty: this.initialData,
+      dictyString: [],
     };
   },
   watch: {
-    initialData(value) {
-      console.log(value);
+    initialData(valueObj) {
+      Object.keys(valueObj).forEach((key) => {
+        const value = valueObj[key];
+        this.dictyString.push(`${key}:${value}`);
+        console.log(this.dictyString);
+      });
     },
   },
   methods: {
