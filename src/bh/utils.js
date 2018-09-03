@@ -9,6 +9,7 @@ import Equal from 'bh/assets/icons/equal.svg';
 import Account from 'bh/assets/icons/account.svg';
 import Botinho from 'bh/assets/icons/botinho.svg';
 import DotsVertical from 'bh/assets/icons/dots-vertical.svg';
+import Magnify from 'bh/assets/icons/magnify.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -30,6 +31,7 @@ export const icons = {
   equal: Equal,
   account: Account,
   botinho: Botinho,
+  magnify: Magnify,
   'dots-vertical': DotsVertical,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
@@ -49,6 +51,38 @@ const removeBreakLines = () => v => (v.replace('\n', ''));
 
 /* istanbul ignore next */
 const removeMultipleWhiteSpaces = () => v => (v.replace(/\s{2,}/g, ' '));
+
+/* turns String to Dicty */
+export function dictyMount(value) {
+  const labelAndIntityAndEntityFilter = value.toLowerCase().match(/((intent|label|entity):([a-zA-Z0-9_-]+))/g);
+  const textFilter = value.toLowerCase().replace(/((intent|label|entity):([a-zA-Z0-9_-]+))/g, '');
+  const dicty = {};
+
+  Object.assign(dicty, { text: `${textFilter.trim()}` });
+  if (labelAndIntityAndEntityFilter) {
+    labelAndIntityAndEntityFilter.forEach((filter) => {
+      const splited = filter.trim().split(':');
+      Object.assign(dicty, { [splited[0]]: splited[1] });
+    });
+  }
+  return dicty;
+}
+
+/* turns Dicty to String */
+export function stringMount(value) {
+  let dictyToString = '';
+
+  Object.keys(value).forEach((key) => {
+    if (key === 'text') {
+      const dictyValue = value[key];
+      dictyToString += ` ${dictyValue} `;
+    } else {
+      const dictyValue = value[key];
+      dictyToString += `${key}:${dictyValue} `;
+    }
+  });
+  return dictyToString;
+}
 
 export const formatters = {
   trimStart,

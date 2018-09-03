@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import { dictyMount, stringMount } from '@/bh/utils';
+
 export default {
   name: 'ExampleSearchInput',
   props: {
@@ -29,35 +31,19 @@ export default {
   },
   data() {
     return {
-      dictyToString: this.initialData,
       dicty: this.initialData,
-      dictyString: [],
+      dictyToString: '',
     };
   },
   watch: {
-    initialData(valueObj) {
-      Object.keys(valueObj).forEach((key) => {
-        const value = valueObj[key];
-        this.dictyString.push(`${key}:${value}`);
-        console.log(this.dictyString);
-      });
+    initialData(value) {
+      this.dictyToString = stringMount(value);
     },
   },
   methods: {
     dictyMount(value) {
-      const labelAndIntityAndEntityFilter = value.toLowerCase().match(/((intent|label|entity):([a-zA-Z0-9_-]+))/g);
-      const textFilter = value.toLowerCase().replace(/((intent|label|entity):([a-zA-Z0-9_-]+))/g, '');
-      const dicty = {};
-
-      Object.assign(dicty, { text: `${textFilter.trim()}` });
-
-      if (labelAndIntityAndEntityFilter) {
-        labelAndIntityAndEntityFilter.forEach((filter) => {
-          const splited = filter.trim().split(':');
-          Object.assign(dicty, { [splited[0]]: splited[1] });
-        });
-      }
-      this.$emit('input', dicty);
+      this.dicty = dictyMount(value);
+      this.$emit('input', this.dicty);
     },
   },
 };

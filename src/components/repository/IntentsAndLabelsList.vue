@@ -2,7 +2,7 @@
   <div class="intents-and-labels-list">
     <example-search-input
       v-model="searchQuery"
-      :initial-data="{intent:'aee', label:'opaa'}"/>
+      :initial-data="{intent:'intent_here', label:'label_here', text:'Text Here'}"/>
     <pre>{{ searchQuery }}</pre>
 
     <div class="intents-and-labels-list__radio">
