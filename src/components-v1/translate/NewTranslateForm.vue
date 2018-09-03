@@ -48,8 +48,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import ExampleTextWithHighlightedEntitiesInput from '@/components-v1/inputs/ExampleTextWithHighlightedEntitiesInput';
-import EntitiesInput from '@/components-v1/inputs/EntitiesInput';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import EntitiesInput from '@/components/inputs/EntitiesInput';
 
 
 const components = {

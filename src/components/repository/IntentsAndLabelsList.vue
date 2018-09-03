@@ -30,7 +30,7 @@
         :title="intent.value"
         :sentences-count="intent.examples__count"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', { type: 'intent', id: intent })" />
+        @showSentences="$emit('showSentences', { type: 'intent', intent })" />
       <p
         v-if="intents.length === 0"
         class="intents-and-labels-list__empty-message">There is no intents </p>
@@ -43,7 +43,8 @@
         :label-entities="label.entities"
         :sentences-count="label.examples__count"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', { type: 'label', id: label.value })" />
+        @showSentences="$emit('showSentences', { type: 'label', label })"
+        @showEntitySentences="$emit('showSentences', { type: 'entity', label, entity: $event })" />
       <p
         v-if="labels.length === 0"
         class="intents-and-labels-list__empty-message">There is no labels </p>

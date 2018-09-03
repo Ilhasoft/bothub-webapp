@@ -14,7 +14,6 @@ exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
   <div>
     <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
     <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
-    <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
     <!---->
   </div>
 </div>

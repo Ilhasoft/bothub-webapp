@@ -23,15 +23,15 @@
       </div>
       <div class="i-a-l-item__entities__badges">
         <bh-badge
-          v-for="(entities, i) in labelEntities"
+          v-for="(entity, i) in labelEntities"
           :key="i"
           :class="[
             'i-a-l-item__entities__badges__item',
-            getEntityClass(entities),
+            getEntityClass(entity),
+            'clickable',
           ]"
-          size="small">
-          <span>{{ entities }}</span>
-        </bh-badge>
+          size="small"
+          @click="$emit('showEntitySentences', entity)">{{ entity }}</bh-badge>
       </div>
     </div>
   </bh-card>

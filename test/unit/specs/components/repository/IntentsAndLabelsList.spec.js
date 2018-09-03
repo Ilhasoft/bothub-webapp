@@ -11,9 +11,18 @@ describe('IntentsAndLabelsList.vue', () => {
     wrapper = shallowMount(IntentsAndLabelsList, {
       localVue,
       propsData: {
-        intents: ['Dog', 'Cat', 'Buy'],
+        intents: [
+          {
+            value: 'dog',
+            examples__count: 1,
+          },
+          {
+            value: 'cat',
+            examples__count: 1,
+          },
+        ],
         labels: [{
-          entities: ['Buy', 'Change', 'Trade'],
+          entities: ['dog', 'cat'],
           repository: 'c60c115c-3f6c-451b-a118-653f1f1fb4fe',
           value: 'animal',
         }],

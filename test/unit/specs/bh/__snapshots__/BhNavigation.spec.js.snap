@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhNavigation.vue default and a slot active a renders correctly 1`] = `
+<div>
+  <p class="bh-navigation__nav"><span><a><bhicon-stub></bhicon-stub></a></span> <span><a>a</a></span></p>
+  <div>a</div>
+</div>
+`;
+
+exports[`BhNavigation.vue default and a slot renders correctly 1`] = `
+<div>
+  <p class="bh-navigation__nav"><span><a><bhicon-stub></bhicon-stub></a></span> <span><a>default</a></span></p>
+  <div>default</div>
+</div>
+`;
+
+exports[`BhNavigation.vue just default slot renders correctly 1`] = `
+<div>
+  <p class="bh-navigation__nav"><span><a><bhicon-stub></bhicon-stub></a></span> <span><a>default</a></span></p>
+  <div>default</div>
+</div>
+`;
