@@ -38,16 +38,16 @@
             <h1 class="bh-title-2">Intenties</h1>
             <div class="repository-home__info__attribute__card">
               <bh-badge
-                v-for="(intents, index) in repository.intents"
+                v-for="(intent, index) in repository.intents"
                 :key="index"
                 size="small"
                 color="grey"
                 class="repository-home__info__attribute__card__badge">
-                <span v-if="intents">{{ intents }}</span>
+                <span v-if="intent">{{ intent.value }}</span>
               </bh-badge>
             </div>
           </div>
-          <div class="repository-home__info__attribute  bh-grid__item">
+          <div class="repository-home__info__attribute bh-grid__item">
             <h1 class="bh-title-2">Categories</h1>
             <div class="repository-home__info__attribute__card">
               <bh-badge
@@ -98,8 +98,8 @@ export default {
     align-items: center;
 
     &__mascot {
-      width: 70px;
-      height: 70px;
+      width: 4rem;
+      height: 4rem;
     }
 
     &__message {
@@ -135,6 +135,7 @@ export default {
 
         &__badge {
           margin: .25rem;
+
           > span {
             color: $color-primary-inverted
           }
