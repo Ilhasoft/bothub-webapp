@@ -2,6 +2,7 @@
 
 exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
 <div class="intents-and-labels-list">
+  <examplesearchinput-stub></examplesearchinput-stub> <pre>{}</pre>
   <div class="intents-and-labels-list__radio">
     <bhbutton-stub class="intents-and-labels-list__radio__button">
       Intents
@@ -14,6 +15,7 @@ exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
     <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
     <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
     <intentsandlabelsitem-stub class="intents-and-labels-list__item"></intentsandlabelsitem-stub>
+    <!---->
   </div>
 </div>
 `;
