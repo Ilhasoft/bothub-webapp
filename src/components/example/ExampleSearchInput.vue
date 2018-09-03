@@ -21,6 +21,7 @@
 <script>
 import { dictyMount, stringMount } from '@/bh/utils';
 
+
 export default {
   name: 'ExampleSearchInput',
   props: {
