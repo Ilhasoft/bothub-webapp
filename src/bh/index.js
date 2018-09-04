@@ -15,6 +15,7 @@ import BhInput from './components/BhInput';
 import BhAvatar from './components/BhAvatar';
 import BhCard from './components/BhCard';
 import BhNavigation from './components/BhNavigation';
+import BhTable from './components/BhTable';
 
 
 const components = [
@@ -35,6 +36,7 @@ const components = [
   BhAvatar,
   BhCard,
   BhNavigation,
+  BhTable,
 ];
 
 export default {
