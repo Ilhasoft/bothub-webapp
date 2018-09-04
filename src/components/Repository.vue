@@ -236,32 +236,41 @@
                   </div>
                   <div class="item">
                     <p><strong>Response:</strong></p>
-                    <div class="pre">{
-                    "text": "yes",
-                    "language": "en",
-                    "answer": {
-                    "intent": {
-                    "name": "affirmative",
-                    "confidence": 0.5872959956337126
-                    },
-                    "entities": [],
-                    "intent_ranking": [
-                    {
-                    "name": "affirmative",
-                    "confidence": 0.5872959956337126
-                    },
-                    {
-                    "name": "negative",
-                    "confidence": 0.2952035928665842
-                    },
-                    {
-                    "name": "doubt",
-                    "confidence": 0.11750041149970303
-                    }
-                    ],
-                    "text": "yes"
-                    }
-                    }</div>
+                    <pre class="pre">
+{
+  "intent": {
+    "name": "love",
+    "confidence": 0.6943462393863934
+  },
+  "intent_ranking": [
+    {
+      "name": "love",
+      "confidence": 0.6943462393863934
+    },
+    {
+      "name": "hate",
+      "confidence": 0.30565376061360666
+    }
+  ],
+  "labels_list": [
+    "animal"
+  ],
+  "entities_list": [],
+  "entities": {
+    "animal": [
+      {
+        "value": "puppy",
+        "entity": "dog",
+        "confidence": 0.67255946125065845
+      }
+    ],
+    "other": []
+  },
+  "text": "i love my puppy",
+  "update_id": 47,
+  "language": "en"
+}
+                    </pre>
                   </div>
                 </div>
                 <div class="column is-half">
