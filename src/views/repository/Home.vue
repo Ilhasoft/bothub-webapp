@@ -7,18 +7,18 @@
     <bh-table>
       <thead>
         <tr>
-          <th>id</th>
-          <th>nome</th>
-          <th>Idade</th>
+          <th>Entities</th>
+          <th>Synonyms</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>teste here</td>
-          <td>joaozinho</td>
-          <td>20</td>
-        </tr>
-      </tbody>
+      <tr>
+        <td>Comprar</td>
+        <td>Mercar Obter Adiquirir</td>
+      </tr>
+      <tr>
+        <td>Generic</td>
+        <td>Mercar Obter Adiquirir</td>
+      </tr>
     </bh-table>
   </repository-view-base>
 </template>

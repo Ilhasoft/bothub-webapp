@@ -1,5 +1,5 @@
 <template>
-  <div class="bh bh-grid">
+  <div class="bh-grid">
     <table class="bh-grid__item bh-table">
       <slot/>
     </table>
@@ -20,23 +20,28 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scopped>
 @import '~bh/assets/scss/colors.scss';
 
-
-.bh {
-
-  &-table {
-    border-collapse:separate;
-    border: solid rgb(19, 9, 9) 1px;
+  .bh-table {
+    overflow: hidden;
+    border-collapse: separate;
+    border: solid $color-grey 1px;
     border-radius: 1rem;
 
-    th, td {
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius:1rem;
+
+    th {
+    padding: 1rem;
+    border-right: solid $color-grey 1px;
+
     }
+
+    td {
+    padding: 1rem;
+    border-top: solid $color-grey 1px;
+    border-right: solid $color-grey 1px;
+    }
+
   }
-}
 
 </style>
