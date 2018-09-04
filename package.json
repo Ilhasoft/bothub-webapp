@@ -84,7 +84,7 @@
     "url-loader": "^0.6.2",
     "vue-jest": "^2.6.0",
     "vue-loader": "^13.7.2",
-    "vue-style-loader": "^3.1.2",
+    "vue-style-loader": "https://github.com/Ilhasoft/vue-style-loader#inject-in-import-order",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
