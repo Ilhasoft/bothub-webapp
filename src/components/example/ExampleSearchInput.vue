@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { dictyMount, stringMount } from '@/bh/utils';
+import { turnsStringToDicty, stringMount } from '@/bh/utils';
 
 
 export default {
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     dictyMount(value) {
-      this.dicty = dictyMount(value);
+      this.dicty = turnsStringToDicty(value);
       this.$emit('input', this.dicty);
     },
   },

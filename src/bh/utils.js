@@ -54,10 +54,17 @@ const removeBreakLines = () => v => (v.replace('\n', ''));
 /* istanbul ignore next */
 const removeMultipleWhiteSpaces = () => v => (v.replace(/\s{2,}/g, ' '));
 
+export const formatters = {
+  trimStart,
+  removeBreakLines,
+  removeMultipleWhiteSpaces,
+};
+
 /* turns String to Dicty */
-export function dictyMount(value) {
-  const labelAndIntityAndEntityFilter = value.toLowerCase().match(/((intent|label|entity):([a-zA-Z0-9_-]+))/g);
-  const textFilter = value.toLowerCase().replace(/((intent|label|entity):([a-zA-Z0-9_-]+))/g, '');
+export function turnsStringToDicty(value) {
+  const regex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
+  const labelAndIntityAndEntityFilter = value.toLowerCase().match(regex);
+  const textFilter = value.toLowerCase().replace(regex, '');
   const dicty = {};
 
   Object.assign(dicty, { text: `${textFilter.trim()}` });
@@ -85,9 +92,3 @@ export function stringMount(value) {
   });
   return dictyToString;
 }
-
-export const formatters = {
-  trimStart,
-  removeBreakLines,
-  removeMultipleWhiteSpaces,
-};
