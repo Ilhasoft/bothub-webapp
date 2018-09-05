@@ -60,7 +60,8 @@ export const filterAndOrderListByText = (list, text) => (
 
 export const formatters = {
   bothubItemKey: () => v => v
-    .toLowerCase()
-    .replace(' ', '_')
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, ''),
+    .toLowerCase().replace(' ', '_')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ''),
 };
