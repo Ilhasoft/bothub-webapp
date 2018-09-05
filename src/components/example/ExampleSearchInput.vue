@@ -1,8 +1,6 @@
 <template>
   <div class="exampleSearchInput">
-    <bh-text
-      :value="dictyToString"
-      @input="dictyMount">
+    <bh-text v-model="dictyToString">
       <div slot="append">
         <bh-button
           size="small"
@@ -19,32 +17,33 @@
 </template>
 
 <script>
-import { turnsStringToDicty, stringMount } from '@/bh/utils';
+import equal from 'deep-equal';
+import { exampleSearchToDicty, exampleSearchToString } from '@/bh/utils';
 
 
 export default {
   name: 'ExampleSearchInput',
   props: {
-    initialData: {
+    value: {
       type: Object,
       default: () => ({}),
     },
   },
   data() {
     return {
-      dicty: this.initialData,
-      dictyToString: '',
+      dictyToString: exampleSearchToString(this.value),
+      current: {},
     };
   },
   watch: {
-    initialData(value) {
-      this.dictyToString = stringMount(value);
+    value(value) {
+      if (!equal(this.current, value)) {
+        this.dictyToString = exampleSearchToString(value);
+      }
     },
-  },
-  methods: {
-    dictyMount(value) {
-      this.dicty = turnsStringToDicty(value);
-      this.$emit('input', this.dicty);
+    dictyToString(value) {
+      this.current = exampleSearchToDicty(value);
+      this.$emit('input', this.current);
     },
   },
 };

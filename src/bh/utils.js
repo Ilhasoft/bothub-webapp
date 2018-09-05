@@ -60,35 +60,28 @@ export const formatters = {
   removeMultipleWhiteSpaces,
 };
 
-/* turns String to Dicty */
-export function turnsStringToDicty(value) {
-  const regex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
-  const labelAndIntityAndEntityFilter = value.toLowerCase().match(regex);
-  const textFilter = value.toLowerCase().replace(regex, '');
-  const dicty = {};
+const exampleSearchFilterWithRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
 
-  Object.assign(dicty, { text: `${textFilter.trim()}` });
-  if (labelAndIntityAndEntityFilter) {
-    labelAndIntityAndEntityFilter.forEach((filter) => {
-      const splited = filter.trim().split(':');
-      Object.assign(dicty, { [splited[0]]: splited[1] });
-    });
+const extractGroupsOfRegex = (regularExpression, value) => {
+  let match;
+  const regexGroups = {};
+  /* eslint-disable no-cond-assign */
+  while (match = regularExpression.exec(value)) {
+    Object.assign(regexGroups, { [match[2]]: match[3] });
   }
-  return dicty;
-}
+  /* eslint-enable */
+  return regexGroups;
+};
+
+/* turns String to Dicty */
+export const exampleSearchToDicty = value => ({
+  text: value.toLowerCase().replace(exampleSearchFilterWithRegex, '').trim(),
+  ...extractGroupsOfRegex(exampleSearchFilterWithRegex, value),
+});
 
 /* turns Dicty to String */
-export function stringMount(value) {
-  let dictyToString = '';
-
-  Object.keys(value).forEach((key) => {
-    if (key === 'text') {
-      const dictyValue = value[key];
-      dictyToString += ` ${dictyValue} `;
-    } else {
-      const dictyValue = value[key];
-      dictyToString += `${key}:${dictyValue} `;
-    }
-  });
-  return dictyToString;
-}
+export const exampleSearchToString = value => Object.keys(value)
+  .map(key => (key === 'text'
+    ? value[key]
+    : `${key}:${value[key]}`))
+  .join(' ');

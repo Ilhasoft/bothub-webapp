@@ -1,8 +1,7 @@
 <template>
   <div class="intents-and-labels-list">
     <example-search-input
-      v-model="searchQuery"
-      :initial-data="{intent:'intent_here', label:'label_here', text:'Text Here'}"/>
+      v-model="searchQuery" />
     <pre>{{ searchQuery }}</pre>
 
     <div class="intents-and-labels-list__radio">
@@ -76,7 +75,7 @@ export default {
   data() {
     return {
       listActived: 'intents',
-      searchQuery: {},
+      searchQuery: { intent: 'intent_here', label: 'label_here', text: 'Text Heree' },
     };
   },
   methods: {

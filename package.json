@@ -19,6 +19,7 @@
     "@mdi/font": "^2.5.94",
     "axios": "^0.18.0",
     "buefy": "^0.6.6",
+    "deep-equal": "^1.0.1",
     "global": "^4.3.2",
     "query-string": "^6.1.0",
     "vue": "^2.5.2",
