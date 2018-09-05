@@ -1,47 +1,39 @@
 <template>
-  <div class="bh-grid">
-    <table class="bh-grid__item bh-table">
-      <slot/>
-    </table>
-  </div>
+  <table class="bh-table">
+    <slot/>
+  </table>
 </template>
+
 <script>
 export default {
   name: 'BhTable',
-  props: {
-    data: {
-      type: Array,
-      default: () => [],
-    },
-    columns: {
-      type: Array,
-      default: () => [],
-    },
-  },
 };
 </script>
+
 <style lang="scss" scopped>
 @import '~bh/assets/scss/colors.scss';
 
+
   .bh-table {
-    overflow: hidden;
+    $borderTableSize: 1px;
+    width: 100%;
     border-collapse: separate;
-    border: solid $color-grey 1px;
+    border: solid $color-grey $borderTableSize;
     border-radius: 1rem;
 
+    td, th {
+      width: 50%;
+      padding: 1rem;
+      border-top: solid $color-grey $borderTableSize;
+      border-left: solid $color-grey $borderTableSize;
+    }
 
     th {
-    padding: 1rem;
-    border-right: solid $color-grey 1px;
-
+      border-top: none;
     }
 
-    td {
-    padding: 1rem;
-    border-top: solid $color-grey 1px;
-    border-right: solid $color-grey 1px;
+    td:first-child, th:first-child {
+      border-left: none;
     }
-
   }
-
 </style>
