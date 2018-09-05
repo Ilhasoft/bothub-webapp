@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       className: 'bh-text',
-      val: this.value,
+      val: this.formatters.reduce((c, f) => f(c), this.value),
     };
   },
   computed: {
