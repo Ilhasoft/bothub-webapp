@@ -11,9 +11,9 @@
     <div class="field">
       <div class="control">
         <button
+          :disabled="submitting"
           type="submit"
-          class="button is-primary"
-          :disabled="submitting">Reset password</button>
+          class="button is-primary">Reset password</button>
       </div>
     </div>
   </form>
@@ -35,9 +35,6 @@ const components = {
 export default {
   name: 'ForgotPasswordForm',
   components,
-  async mounted() {
-    this.formSchema = await this.getForgotPasswordSchema();
-  },
   data() {
     return {
       formSchema: null,
@@ -46,6 +43,9 @@ export default {
       errors: {},
       success_msgs: [],
     };
+  },
+  async mounted() {
+    this.formSchema = await this.getForgotPasswordSchema();
   },
   methods: {
     ...mapActions([

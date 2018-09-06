@@ -11,5 +11,6 @@ export default (Vue) => {
   /* istanbul ignore next */
   Vue.filter('roleVerbose', role => ROLES[role]);
 
+  /* istanbul ignore next */
   Vue.filter('can_t', value => (value ? 'can' : 'can\'t'));
 };

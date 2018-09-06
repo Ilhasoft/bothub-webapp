@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhLoading.vue renders correctly 1`] = `<div class="bh-loading"><span></span> <span></span> <span></span></div>`;
+
+exports[`BhLoading.vue when size string is not blank renders correctly 1`] = `<div class="bh-loading bh-loading--small"><span></span> <span></span> <span></span></div>`;

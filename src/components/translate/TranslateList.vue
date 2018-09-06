@@ -3,9 +3,9 @@
     <pagination
       v-if="translateList"
       :list="translateList"
-      :itemComponent="translateExampleItem"
+      :item-component="translateExampleItem"
       :repository="repository"
-      :translateTo="to"
+      :translate-to="to"
       @translated="onTranslated()" />
     <p v-if="translateList && translateList.empty">No examples to translate.</p>
   </div>
@@ -38,18 +38,18 @@ export default {
       required: true,
     },
   },
-  async mounted() {
-    await this.updateList();
-  },
-  watch: {
-    async from() { await this.updateList(); },
-    async to() { await this.updateList(); },
-  },
   data() {
     return {
       translateList: null,
       translateExampleItem: TranslateExampleItem,
     };
+  },
+  watch: {
+    async from() { await this.updateList(); },
+    async to() { await this.updateList(); },
+  },
+  async mounted() {
+    await this.updateList();
   },
   methods: {
     ...mapActions([

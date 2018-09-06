@@ -23,13 +23,15 @@ export const VERBOSE_LANGUAGES = {
   nl: 'Dutch',
   pt_br: 'Brazilian Portuguese',
 };
-export const LANGUAGES = process.env.SUPPORTED_LANGUAGES
+
+export const languageListToDict = list => (list.reduce((current, lang) => {
+  Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
+  return current;
+}, {}));
+
+export const LANGUAGES = languageListToDict(process.env.SUPPORTED_LANGUAGES
   .split('|')
-  .map(v => v.split(':')[0])
-  .reduce((current, lang) => {
-    Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
-    return current;
-  }, {});
+  .map(v => v.split(':')[0]));
 
 export const ROLE_NOT_SETTED = 0;
 export const ROLE_USER = 1;
@@ -55,3 +57,12 @@ export const filterAndOrderListByText = (list, text) => (
       .sort((a, b) => strTrueIndexOf(a, text) - strTrueIndexOf(b, text))
     : list
 );
+
+export const formatters = {
+  bothubItemKey: () => v => v
+    .toLowerCase()
+    .replace(/[\s]/g, '_')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ''),
+};

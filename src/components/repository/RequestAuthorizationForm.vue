@@ -10,9 +10,9 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
+          :disabled="submitting"
           type="submit"
-          class="button is-primary"
-          :disabled="submitting">Request</button>
+          class="button is-primary">Request</button>
       </div>
     </div>
   </form>
@@ -32,9 +32,6 @@ const components = {
 export default {
   name: 'RequestAuthorizationForm',
   components,
-  async mounted() {
-    await this.updateFormSchema();
-  },
   props: {
     repositoryUUid: {
       type: String,
@@ -48,6 +45,9 @@ export default {
       errors: {},
       submitting: false,
     };
+  },
+  async mounted() {
+    await this.updateFormSchema();
   },
   methods: {
     ...mapActions([

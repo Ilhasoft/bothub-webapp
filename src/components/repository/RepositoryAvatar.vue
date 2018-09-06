@@ -2,19 +2,21 @@
   <div class="avatar">
     <div class="avatar-updownvote">
       <button
-        @click="onUp()"
-        class="avatar-updownvote-btn">
+        class="avatar-updownvote-btn"
+        @click="onUp()">
         <b-icon icon="chevron-up" />
       </button>
       <div class="avatar-updownvote-value">{{ finalVotesSum || 0 }}</div>
       <button
-        @click="onDown()"
-        class="avatar-updownvote-btn">
+        class="avatar-updownvote-btn"
+        @click="onDown()">
         <b-icon icon="chevron-down" />
       </button>
     </div>
     <div class="avatar-img">
-      <img src="@/assets/imgs/avatar.png" :alt="name" />
+      <img
+        :alt="name"
+        src="@/assets/imgs/avatar.png" >
     </div>
   </div>
 </template>
@@ -42,15 +44,15 @@ export default {
       default: 0,
     },
   },
-  watch: {
-    votesSum() {
-      this.finalVotesSum = this.votesSum;
-    },
-  },
   data() {
     return {
       finalVotesSum: this.votesSum,
     };
+  },
+  watch: {
+    votesSum() {
+      this.finalVotesSum = this.votesSum;
+    },
   },
   methods: {
     ...mapActions([

@@ -6,16 +6,16 @@
       v-if="formSchema"
       :schema="formSchema"
       v-model="data"
-      :initialData="initialData"
+      :initial-data="initialData"
       :errors="errors"
       class="field" />
     <div class="field">
       <div class="control">
         <button
-            type="submit"
-            class="button is-primary"
-            :disabled="submitting"
-          >Reset password</button>
+          :disabled="submitting"
+          type="submit"
+          class="button is-primary"
+        >Reset password</button>
       </div>
     </div>
   </form>
@@ -39,18 +39,12 @@ export default {
   components,
   props: {
     nickname: {
+      type: String,
       required: true,
     },
     token: {
+      type: String,
       required: true,
-    },
-  },
-  mounted() {
-    this.updateFormSchema();
-  },
-  watch: {
-    nickname() {
-      this.updateFormSchema();
     },
   },
   data() {
@@ -73,6 +67,14 @@ export default {
         || this.success_msgs.map(text => ({ text, class: 'success' }))
         || [];
     },
+  },
+  watch: {
+    nickname() {
+      this.updateFormSchema();
+    },
+  },
+  mounted() {
+    this.updateFormSchema();
   },
   methods: {
     ...mapActions([

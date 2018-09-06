@@ -1,74 +1,79 @@
 <template>
   <div class="drawer">
     <b-collapse :open="false">
-      <button class="drawer-title" slot="trigger">Analyze Text</button>
+      <button
+        slot="trigger"
+        class="drawer-title">Analyze Text</button>
       <div class="drawer-content">
         <form @submit.prevent="onSubmit()">
           <b-field
-            label="Language"
-            :type="this.errors && this.errors.language && 'is-danger'"
-            :message="this.errors && this.errors.language">
+            :type="errors && errors.language && 'is-danger'"
+            :message="errors && errors.language"
+            label="Language">
             <b-select
-              expanded
-              v-model="data.language">
+              v-model="data.language"
+              expanded>
               <option
-                v-for="(verbose, language) in languages"
+                v-for="(verbose, language) in availableLanguagesList"
                 :key="language"
                 :value="language">{{ verbose }}</option>
             </b-select>
           </b-field>
           <b-field
-            label="Text"
-            :type="this.errors && this.errors.text && 'is-danger'"
-            :message="this.errors && this.errors.text">
+            :type="errors && errors.text && 'is-danger'"
+            :message="errors && errors.text"
+            label="Text">
             <b-input
               v-model="data.text"
               type="textarea" />
           </b-field>
           <div class="field has-text-right">
             <button
+              :disabled="submitting"
               type="submit"
-              class="button is-primary is-small"
-              :disabled="submitting">Analyze</button>
+              class="button is-primary is-small">Analyze</button>
           </div>
         </form>
       </div>
       <b-tabs
-          v-if="result"
-          v-model="activeTab">
-          <b-tab-item label="To Humans">
-            <div class="item">
-              <strong>Intent:</strong>
-              <div v-if="result.answer.intent">
-                <span>{{ result.answer.intent.name }}</span>
-                <span>({{ result.answer.intent.confidence | percent }})</span>
-              </div>
-              <div v-else>No detected</div>
+        v-if="result"
+        v-model="activeTab">
+        <b-tab-item label="To Humans">
+          <div class="item">
+            <strong>Intent:</strong>
+            <div v-if="result.intent">
+              <span>{{ result.intent.name }}</span>
+              <span>({{ result.intent.confidence | percent }})</span>
             </div>
-            <div v-if="result.answer.entities.length > 0">
-              <p><strong>Entities:</strong></p>
-              <table class="table is-fullwidth is-striped is-hoverable is-narrow">
-                <tbody>
-                  <tr
-                    v-for="(entity, i) in result.answer.entities"
-                    :key="i">
-                    <td>{{ entity.value }}</td>
-                    <td>{{ entity.entity }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </b-tab-item>
-          <b-tab-item label="raw">
-            <pre class="mh-200">{{ JSON.stringify(result, null, 2) }}</pre>
-          </b-tab-item>
-        </b-tabs>
+            <div v-else>No detected</div>
+          </div>
+          <div
+            v-for="(entities, label) in result.entities"
+            v-if="entities.length > 0"
+            :key="label">
+            <p><strong>{{ label }}:</strong></p>
+            <table class="table is-fullwidth is-striped is-hoverable is-narrow">
+              <tbody>
+                <tr
+                  v-for="(entity, i) in entities"
+                  :key="i">
+                  <td>{{ entity.value }}</td>
+                  <td>{{ entity.entity }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </b-tab-item>
+        <b-tab-item label="raw">
+          <pre class="mh-200">{{ JSON.stringify(result, null, 2) }}</pre>
+        </b-tab-item>
+      </b-tabs>
     </b-collapse>
   </div>
 </template>
 
 <script>
-import { LANGUAGES } from '@/utils';
+import { languageListToDict } from '@/utils';
 import { mapActions } from 'vuex';
 
 export default {
@@ -82,12 +87,19 @@ export default {
       type: String,
       required: true,
     },
+    defaultLanguage: {
+      type: String,
+      default: null,
+    },
+    availableLanguages: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
-      languages: LANGUAGES,
       data: {
-        language: 'en',
+        language: this.defaultLanguage || this.availableLanguages[0],
         text: '',
       },
       submitting: false,
@@ -95,6 +107,11 @@ export default {
       activeTab: 0,
       errors: null,
     };
+  },
+  computed: {
+    availableLanguagesList() {
+      return languageListToDict(this.availableLanguages);
+    },
   },
   methods: {
     ...mapActions([

@@ -4,16 +4,16 @@
       <highlighted-text
         :text="text"
         :entities="entities"
-        :allEntities="repository.entities" />
+        :all-entities="repository.entities" />
     </div>
     <div
       v-if="entitiesList.length > 0"
       class="example-entities">
       <b-tag
-        rounded
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)">{{ entity }}</b-tag>
+        :class="getEntityClass(entity)"
+        rounded>{{ entity }}</b-tag>
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -43,11 +43,11 @@
     <b-collapse :open="formOpen">
       <div class="translate-form">
         <new-translate-form
-          :exampleId="id"
-          :translateTo="translateTo"
-          @translated="onTranslated()"
-          :extraEntitiesList="entitiesList"
-          :repository="repository" />
+          :example-id="id"
+          :translate-to="translateTo"
+          :extra-entities-list="entitiesList"
+          :repository="repository"
+          @translated="onTranslated()" />
       </div>
     </b-collapse>
   </div>
@@ -68,6 +68,7 @@ const components = {
 
 export default {
   name: 'TranslateExample',
+  components,
   props: {
     id: {
       type: Number,
@@ -102,7 +103,6 @@ export default {
       required: true,
     },
   },
-  components,
   data() {
     return {
       deleteDialog: null,

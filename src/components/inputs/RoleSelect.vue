@@ -1,13 +1,13 @@
 <template>
   <b-tooltip
-    multilined
     :active="!!helpText"
     :label="helpText"
+    multilined
     class="blocked">
     <b-select
-      expanded
       v-model="role"
-      v-bind="$attrs">
+      v-bind="$attrs"
+      expanded>
       <option
         v-for="(label, value) in roles"
         :value="value"
@@ -35,14 +35,7 @@ export default {
   props: {
     value: {
       type: [Number, String],
-    },
-  },
-  watch: {
-    value() {
-      this.role = this.value;
-    },
-    role() {
-      this.$emit('input', this.role);
+      default: null,
     },
   },
   data() {
@@ -58,6 +51,14 @@ export default {
       }
 
       return helpTextDict[this.role];
+    },
+  },
+  watch: {
+    value() {
+      this.role = this.value;
+    },
+    role() {
+      this.$emit('input', this.role);
     },
   },
 };

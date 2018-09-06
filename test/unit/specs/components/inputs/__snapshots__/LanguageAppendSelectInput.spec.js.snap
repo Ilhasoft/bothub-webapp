@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageAppendSelectInput.vue renders correctly 1`] = `
+<bhdropdown-stub class="example-txt-w-highlighted-entities__input__language">
+  <bhdropdownitem-stub>
+    <bhlanguageflag-stub size="small"></bhlanguageflag-stub> <span>English</span></bhdropdownitem-stub>
+  <bhdropdownitem-stub>
+    <bhlanguageflag-stub size="small"></bhlanguageflag-stub> <span>Portuguese</span></bhdropdownitem-stub>
+</bhdropdown-stub>
+`;

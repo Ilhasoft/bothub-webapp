@@ -10,9 +10,9 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
+          :disabled="submitting"
           type="submit"
-          class="button is-primary"
-          :disabled="submitting">Create bot</button>
+          class="button is-primary">Create bot</button>
       </div>
     </div>
   </form>
@@ -32,9 +32,6 @@ const components = {
 export default {
   name: 'NewRepositoryForm',
   components,
-  async mounted() {
-    this.formSchema = await this.getNewRepositorySchema();
-  },
   data() {
     return {
       formSchema: null,
@@ -42,6 +39,9 @@ export default {
       submitting: false,
       errors: {},
     };
+  },
+  async mounted() {
+    this.formSchema = await this.getNewRepositorySchema();
   },
   methods: {
     ...mapActions([

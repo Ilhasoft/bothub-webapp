@@ -1,10 +1,10 @@
 <template>
   <div>
     <pagination
-        v-if="requestsList"
-        :itemComponent="authorizationRequestItem"
-        :list="requestsList"
-        @itemDeleted="onItemDeleted()" />
+      v-if="requestsList"
+      :item-component="authorizationRequestItem"
+      :list="requestsList"
+      @itemDeleted="onItemDeleted()" />
     <p
       v-if="requestsList && requestsList.empty"
       class="no-examples">No requests.</p>
@@ -25,9 +25,6 @@ const components = {
 export default {
   name: 'AuthorizationRequestsList',
   components,
-  async mounted() {
-    await this.updateRequests();
-  },
   props: {
     repositoryUuid: {
       type: String,
@@ -39,6 +36,9 @@ export default {
       requestsList: null,
       authorizationRequestItem: AuthorizationRequestItem,
     };
+  },
+  async mounted() {
+    await this.updateRequests();
   },
   methods: {
     ...mapActions([

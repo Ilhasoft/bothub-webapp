@@ -1,33 +1,34 @@
 <template>
-  <span :class="{
+  <span
+    :class="{
       'is-small': size === 'small',
       'is-medium': size === 'medium',
       'is-large': size === 'large',
-    }">
+  }">
     <img
       v-if="language === 'de'"
-      src="@/assets/imgs/flags/de.svg" />
+      src="@/assets/imgs/flags/de.svg" >
     <img
       v-else-if="language === 'en'"
-      src="@/assets/imgs/flags/us.svg" />
+      src="@/assets/imgs/flags/us.svg" >
     <img
       v-else-if="language === 'es'"
-      src="@/assets/imgs/flags/es.svg" />
+      src="@/assets/imgs/flags/es.svg" >
     <img
       v-else-if="language === 'fr'"
-      src="@/assets/imgs/flags/fr.svg" />
+      src="@/assets/imgs/flags/fr.svg" >
     <img
       v-else-if="language === 'it'"
-      src="@/assets/imgs/flags/it.svg" />
+      src="@/assets/imgs/flags/it.svg" >
     <img
       v-else-if="language === 'nl'"
-      src="@/assets/imgs/flags/nl.svg" />
+      src="@/assets/imgs/flags/nl.svg" >
     <img
       v-else-if="language === 'pt'"
-      src="@/assets/imgs/flags/pt.svg" />
+      src="@/assets/imgs/flags/pt.svg" >
     <img
       v-else-if="language === 'pt_br'"
-      src="@/assets/imgs/flags/br.svg" />
+      src="@/assets/imgs/flags/br.svg" >
   </span>
 </template>
 
@@ -41,6 +42,7 @@ export default {
     },
     size: {
       type: String,
+      default: null,
     },
   },
 };

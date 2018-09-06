@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhField.vue pass errors renders correctly 1`] = `
+<div class="bh-field bh-field--has-error">
+  <!---->
+  <div class="bh-field__input"></div>
+</div>
+`;
+
+exports[`BhField.vue renders correctly 1`] = `
+<div class="bh-field">
+  <!---->
+  <div class="bh-field__input"></div>
+</div>
+`;

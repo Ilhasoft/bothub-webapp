@@ -6,14 +6,14 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initialData="initialData"
+      :initial-data="initialData"
       class="field" />
     <div class="field">
       <div class="control has-text-centered">
         <button
+          :disabled="submitting"
           type="submit"
-          class="button is-primary"
-          :disabled="submitting">Edit</button>
+          class="button is-primary">Edit</button>
       </div>
     </div>
   </form>
@@ -33,12 +33,6 @@ const components = {
 export default {
   name: 'EditRepositoryForm',
   components,
-  async mounted() {
-    this.formSchema = await this.getEditRepositorySchema({
-      ownerNickname: this.ownerNickname,
-      slug: this.slug,
-    });
-  },
   props: {
     ownerNickname: {
       type: String,
@@ -60,6 +54,12 @@ export default {
       submitting: false,
       errors: {},
     };
+  },
+  async mounted() {
+    this.formSchema = await this.getEditRepositorySchema({
+      ownerNickname: this.ownerNickname,
+      slug: this.slug,
+    });
   },
   methods: {
     ...mapActions([
