@@ -23,6 +23,9 @@
             <div v-if="currentIntent">
               <h1>Intent {{ currentIntent.value }}</h1>
               <pre>{{ currentIntent }}</pre>
+              <examples-list
+                :repository="repository"
+                :query="{ intent: currentIntent.value }" />
             </div>
           </div>
           <bh-navigation
@@ -56,6 +59,7 @@ import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
+import ExamplesList from '@/components/example/ExamplesList';
 
 
 export default {
@@ -64,6 +68,7 @@ export default {
     RepositoryViewBase,
     IntentsAndLabelsList,
     NewExampleForm,
+    ExamplesList,
   },
   extends: RepositoryBase,
   data() {
