@@ -51,6 +51,7 @@ export default {
 @import '~bh/assets/scss/variables.scss';
 @import '~bh/assets/scss/colors.scss';
 
+
 @mixin down($size: 6px, $color: black) {
   border-top: $size solid $color;
   border-right: $size solid transparent;
@@ -62,6 +63,7 @@ export default {
   border-bottom: $size solid $color;
   border-left: $size solid transparent;
 }
+
 
 .bh {
   &-tooltip {
