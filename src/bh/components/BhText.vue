@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       className: 'bh-text',
-      val: this.formatters.reduce((c, f) => f(c), this.value || ''),
+      val: this.value,
     };
   },
   computed: {
@@ -67,7 +67,7 @@ export default {
   },
   mounted() {
     const { input } = this.$refs;
-
+    this.formatters.reduce((c, f) => f(c), this.value || '');
     if (input) {
       input.oninput = async () => {
         const formattedValue = this.formatters.reduce((c, f) => f(c), input.value);
