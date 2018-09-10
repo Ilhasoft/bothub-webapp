@@ -427,7 +427,7 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components-v1/shared/ErrorMessage';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components-v1/auth/LoginForm';
-import ExamplesList from '@/components-v1/example/ExamplesList';
+import ExamplesList from '@/components/example/ExamplesList';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
 import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
 import EditRepositoryForm from '@/components-v1/repository/EditRepositoryForm';

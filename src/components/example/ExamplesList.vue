@@ -15,10 +15,12 @@
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
 import ExampleItem from '@/components/example/ExampleItem';
+import ExampleSearchInput from './ExampleSearchInput';
 
 
 const components = {
   Pagination,
+  ExampleSearchInput,
 };
 
 export default {
@@ -40,20 +42,25 @@ export default {
       exampleItemElem: ExampleItem,
     };
   },
+  watch: {
+    query() {
+      this.updateExamples(true);
+    },
+  },
   async mounted() {
     await this.updateExamples();
   },
   methods: {
-    async updateExamples() {
-      if (this.examplesList) {
-        this.examplesList.reset();
-        await this.examplesList.next();
-      } else {
+    async updateExamples(force = false) {
+      if (!this.examplesList || force) {
         this.examplesList = this.$api.examples.search(
           this.repository.uuid,
           this.query,
         );
       }
+
+      this.examplesList.reset();
+      await this.examplesList.next();
     },
     onItemDeleted() {
     },

@@ -21,11 +21,10 @@
             slot="intent"
             :label="currentIntent && `Intent: ${currentIntent.value}`">
             <div v-if="currentIntent">
-              <h1>Intent {{ currentIntent.value }}</h1>
-              <pre>{{ currentIntent }}</pre>
+              <example-search-input v-model="searchQuery" />
               <examples-list
                 :repository="repository"
-                :query="{ intent: currentIntent.value }" />
+                :query="searchQuery" />
             </div>
           </div>
           <bh-navigation
@@ -39,6 +38,8 @@
                   :key="entity"><a @click.prevent="openEntity(entity)">{{ entity }}</a></div>
               </div>
               <pre>{{ currentLabel }}</pre>
+              <example-search-input
+              />
             </div>
             <div
               slot="entity"
@@ -60,6 +61,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
+import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 
 
 export default {
@@ -69,6 +71,7 @@ export default {
     IntentsAndLabelsList,
     NewExampleForm,
     ExamplesList,
+    ExampleSearchInput,
   },
   extends: RepositoryBase,
   data() {
@@ -77,7 +80,13 @@ export default {
       currentIntent: null,
       currentLabel: null,
       currentEntity: null,
+      searchQuery: {},
     };
+  },
+  watch: {
+    currentIntent(value) {
+      this.searchQuery = { intent: value.value };
+    },
   },
   methods: {
     onShowSentences({

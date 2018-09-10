@@ -1,9 +1,5 @@
 <template>
   <div class="intents-and-labels-list">
-    <example-search-input
-      v-model="searchQuery" />
-    <pre>{{ searchQuery }}</pre>
-
     <div class="intents-and-labels-list__radio">
       <bh-button
         ref="intents"
@@ -53,14 +49,12 @@
 
 <script>
 import IntentsAndLabelsItem from '@/components/repository/IntentsAndLabelsItem';
-import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 
 
 export default {
   name: 'IntentsAndLabelsList',
   components: {
     IntentsAndLabelsItem,
-    ExampleSearchInput,
   },
   props: {
     intents: {
@@ -75,15 +69,11 @@ export default {
   data() {
     return {
       listActived: 'intents',
-      searchQuery: { intent: 'intent_here', label: 'label_here', text: 'Text Heree' },
     };
   },
   methods: {
     activeList(value) {
       this.listActived = value;
-    },
-    searchQueryMount(value) {
-      this.searchQuery = value;
     },
   },
 };

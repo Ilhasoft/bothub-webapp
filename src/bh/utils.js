@@ -75,13 +75,13 @@ const extractGroupsOfRegex = (regularExpression, value) => {
 
 /* turns String to Dicty */
 export const exampleSearchToDicty = value => ({
-  text: value.toLowerCase().replace(exampleSearchFilterWithRegex, '').trim(),
+  search: value.toLowerCase().replace(exampleSearchFilterWithRegex, '').trim(),
   ...extractGroupsOfRegex(exampleSearchFilterWithRegex, value),
 });
 
 /* turns Dicty to String */
 export const exampleSearchToString = value => Object.keys(value)
-  .map(key => (key === 'text'
+  .map(key => (key === 'search'
     ? value[key]
     : `${key}:${value[key]}`))
   .join(' ');
