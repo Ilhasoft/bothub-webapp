@@ -3,15 +3,11 @@
     <bh-text
       v-model="dictyToString">
       <div slot="append">
-        <bh-button
+        <bh-icon-button
+          value="magnify"
           size="small"
-          inverted
-          primary>
-          <bh-icon
-            value="magnify"
-            size="small"
-            class="exampleSearchInput__icon" />
-        </bh-button>
+          class="exampleSearchInput__icon"
+          @click="submit()" />
       </div>
     </bh-text>
   </div>
@@ -62,6 +58,10 @@ export default {
         clearTimeout(this.setTimeoutId);
         this.setTimeoutId = null;
       }
+    },
+    submit() {
+      this.clearTimeout();
+      this.$emit('input', exampleSearchToDicty(this.dictyToString));
     },
   },
 };

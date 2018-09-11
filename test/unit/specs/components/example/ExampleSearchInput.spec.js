@@ -23,20 +23,36 @@ describe('ExampleSearchInput.vue', () => {
       wrapper.setProps({
         value: {
           intent: 'intent_value',
-          label: 'label_here',
-          text: 'text_here',
-          entity: 'entity_here',
+          label: 'label_value',
+          text: 'text_value',
+          entity: 'entity_value',
         },
       });
     });
 
-    test('renders correctly', () => {
+    test('Check props value receives correctly values', () => {
       expect(wrapper.vm.value).toEqual({
         intent: 'intent_value',
-        label: 'label_here',
-        text: 'text_here',
-        entity: 'entity_here',
+        label: 'label_value',
+        text: 'text_value',
+        entity: 'entity_value',
       });
+    });
+  });
+
+  describe('ExampleSearchInput.vue', () => {
+    beforeEach(() => {
+      wrapper.vm.setTimeoutId = 1;
+      wrapper.vm.submit();
+      wrapper.vm.clearTimeout();
+    });
+
+    test('emity event works when button is clicked', () => {
+      expect(wrapper.emitted('input')).toBeDefined();
+    });
+
+    test('clear timeout works correctly', () => {
+      expect(wrapper.vm.setTimeoutId).toBeNull();
     });
   });
 });
