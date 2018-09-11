@@ -2,7 +2,7 @@
 
 exports[`ExamplesList.vue renders correctly 1`] = `
 <div>
-  <!---->
+  <pagination-stub repository="[object Object]"></pagination-stub>
   <!---->
 </div>
 `;
