@@ -15,12 +15,10 @@
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
 import ExampleItem from '@/components/example/ExampleItem';
-import ExampleSearchInput from './ExampleSearchInput';
 
 
 const components = {
   Pagination,
-  ExampleSearchInput,
 };
 
 export default {
@@ -59,7 +57,7 @@ export default {
         );
       }
 
-      this.examplesList.reset();
+      await this.examplesList.reset();
       await this.examplesList.next();
     },
     onItemDeleted() {

@@ -1,7 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ExampleSearchInput.vue renders correctly 1`] = `
-<div class="exampleSearchInput">
-  <bhtext-stub></bhtext-stub>
-</div>
-`;
+exports[`ExampleSearchInput.vue renders correctly 1`] = `<bhtext-stub class="example-search-input"></bhtext-stub>`;

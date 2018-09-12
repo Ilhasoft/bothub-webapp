@@ -38,8 +38,7 @@
                   :key="entity"><a @click.prevent="openEntity(entity)">{{ entity }}</a></div>
               </div>
               <pre>{{ currentLabel }}</pre>
-              <example-search-input
-              />
+              <example-search-input />
             </div>
             <div
               slot="entity"

@@ -59,29 +59,3 @@ export const formatters = {
   removeBreakLines,
   removeMultipleWhiteSpaces,
 };
-
-const exampleSearchFilterWithRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
-
-const extractGroupsOfRegex = (regularExpression, value) => {
-  let match;
-  const regexGroups = {};
-  /* eslint-disable no-cond-assign */
-  while (match = regularExpression.exec(value)) {
-    Object.assign(regexGroups, { [match[2]]: match[3] });
-  }
-  /* eslint-enable */
-  return regexGroups;
-};
-
-/* turns String to Dicty */
-export const exampleSearchToDicty = value => ({
-  search: value.toLowerCase().replace(exampleSearchFilterWithRegex, '').trim(),
-  ...extractGroupsOfRegex(exampleSearchFilterWithRegex, value),
-});
-
-/* turns Dicty to String */
-export const exampleSearchToString = value => Object.keys(value)
-  .map(key => (key === 'search'
-    ? value[key]
-    : `${key}:${value[key]}`))
-  .join(' ');

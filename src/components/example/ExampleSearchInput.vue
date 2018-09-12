@@ -1,21 +1,20 @@
 <template>
-  <div class="exampleSearchInput">
-    <bh-text
-      v-model="dictyToString">
-      <div slot="append">
-        <bh-icon-button
-          value="magnify"
-          size="small"
-          class="exampleSearchInput__icon"
-          @click="submit()" />
-      </div>
-    </bh-text>
-  </div>
+  <bh-text
+    v-model="dictyToString"
+    class="example-search-input">
+    <div slot="append">
+      <bh-icon-button
+        value="magnify"
+        size="small"
+        class="exampleSearchInput__icon"
+        @click="submit()" />
+    </div>
+  </bh-text>
 </template>
 
 <script>
 import equal from 'deep-equal';
-import { exampleSearchToDicty, exampleSearchToString } from '@/bh/utils';
+import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 
 export default {

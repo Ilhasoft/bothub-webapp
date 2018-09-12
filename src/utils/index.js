@@ -64,3 +64,38 @@ export const formatters = {
     .replace(' ', '_')
     .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, ''),
 };
+
+const exampleSearchRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
+
+const extractGroupsFromRegex = (regularExpression, value) => {
+  let match;
+  const regexGroups = [];
+  /* eslint-disable no-cond-assign */
+  while (match = regularExpression.exec(value)) {
+    regexGroups.push(match);
+  }
+  /* eslint-enable */
+
+  return regexGroups;
+};
+
+/* turns String to Dicty */
+export const exampleSearchToDicty = (value) => {
+  let dicty = {};
+  dicty = {
+    search: value.toLowerCase().replace(exampleSearchRegex, '').trim(),
+  };
+  Object.assign(dicty, extractGroupsFromRegex(exampleSearchRegex, value)
+    .reduce((acc, { 2: key, 3: v }) => {
+      Object.assign(acc, { [key]: v });
+      return acc;
+    }, {}));
+  return dicty;
+};
+
+/* turns Dicty to String */
+export const exampleSearchToString = value => Object.keys(value)
+  .map(key => (key === 'search'
+    ? value[key]
+    : `${key}:${value[key]}`))
+  .join(' ');
