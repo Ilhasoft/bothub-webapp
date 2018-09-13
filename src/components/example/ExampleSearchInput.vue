@@ -1,15 +1,18 @@
 <template>
-  <bh-text
-    v-model="toString"
-    class="example-search-input">
-    <div slot="append">
-      <bh-icon-button
-        value="magnify"
-        size="small"
-        class="exampleSearchInput__icon"
-        @click="submit()" />
-    </div>
-  </bh-text>
+  <form
+    @submit.prevent="submit()">
+    <bh-text
+      v-model="toString"
+      class="example-search-input">
+      <div slot="append">
+        <bh-icon-button
+          value="magnify"
+          size="small"
+          class="exampleSearchInput__icon"
+          @click="submit()" />
+      </div>
+    </bh-text>
+  </form>
 </template>
 
 <script>
@@ -32,9 +35,13 @@ export default {
   data() {
     return {
       toString: exampleSearchToString(this.value),
-      current: {},
       setTimeoutId: null,
     };
+  },
+  computed: {
+    current() {
+      return exampleSearchToDicty(this.toString);
+    },
   },
   watch: {
     value(value) {
@@ -42,8 +49,7 @@ export default {
         this.toString = exampleSearchToString(value);
       }
     },
-    toString(value) {
-      this.current = exampleSearchToDicty(value);
+    toString() {
       this.clearTimeout();
       this.setTimeoutId = setTimeout(
         () => { this.$emit('input', this.current); },
@@ -60,7 +66,7 @@ export default {
     },
     submit() {
       this.clearTimeout();
-      this.$emit('input', exampleSearchToDicty(this.toString));
+      this.$emit('input', this.current);
     },
   },
 };

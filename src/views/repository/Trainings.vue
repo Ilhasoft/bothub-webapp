@@ -84,13 +84,19 @@ export default {
   },
   watch: {
     currentIntent(value) {
-      this.searchQueryIntent = { intent: value.value };
+      this.searchQueryIntent = value
+        ? { intent: value.value }
+        : null;
     },
     currentLabel(value) {
-      this.searchQueryLabel = { label: value.value };
+      this.searchQueryLabel = value
+        ? { label: value.value }
+        : null;
     },
     currentEntity(value) {
-      this.searchQueryEntity = { entity: value };
+      this.searchQueryEntity = value
+        ? { entity: value }
+        : null;
     },
   },
   methods: {
