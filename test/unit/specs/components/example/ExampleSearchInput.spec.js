@@ -18,7 +18,7 @@ describe('ExampleSearchInput.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('ExampleSearchInput.vue', () => {
+  describe('When value received a object, expected the object turns to string', () => {
     beforeEach(() => {
       wrapper.setProps({
         value: {
@@ -30,33 +30,40 @@ describe('ExampleSearchInput.vue', () => {
       });
     });
 
-    test('Check props value receives correctly values', () => {
-      expect(wrapper.vm.value).toEqual({
-        intent: 'intent_value',
-        label: 'label_value',
-        text: 'text_value',
-        entity: 'entity_value',
-      });
+    test('Expect data toString be String type', () => {
+      expect(typeof wrapper.vm.toString).toBe('string');
     });
   });
 
-  describe('ExampleSearchInput.vue', () => {
+  describe('Check current computed data turns string to Dicty', () => {
+    beforeEach(() => {
+      wrapper.setData({
+        toString: 'intent:intent_value label:label_value',
+      });
+    });
+
+    test('Expect computed Data current be Object', () => {
+      expect(typeof wrapper.vm.current).toBe('object');
+    });
+  });
+
+  describe('Check submit method emit value', () => {
     beforeEach(() => {
       wrapper.vm.submit();
     });
 
-    test('emity event works when button is clicked', () => {
+    test('emitted to be defined', () => {
       expect(wrapper.emitted('input')).toBeDefined();
     });
   });
 
-  describe('ExampleSearchInput.vue', () => {
+  describe('Check clearTimeOut method works correctly', () => {
     beforeEach(() => {
       wrapper.vm.setTimeoutId = 1;
       wrapper.vm.clearTimeout();
     });
 
-    test('clear timeout works correctly', () => {
+    test('after clearTimeOut called, SetTimeoutId is null', () => {
       expect(wrapper.vm.setTimeoutId).toBeNull();
     });
   });
