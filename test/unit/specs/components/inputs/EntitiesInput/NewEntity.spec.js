@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 
-import NewEntity from '@/components-v1/inputs/EntitiesInput/NewEntity';
+import NewEntity from '@/components/inputs/EntitiesInput/NewEntity';
 import store from '@/store';
 
 

@@ -5,7 +5,7 @@
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
-      @itemDeleted="onItemDeleted" />
+      @itemDeleted="onItemDeleted($event)" />
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -13,10 +13,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleItem from './ExampleItem';
+import ExampleItem from '@/components/example/ExampleItem';
+
 
 const components = {
   Pagination,
@@ -27,8 +26,12 @@ export default {
   components,
   props: {
     repository: {
-      type: [String, Object],
+      type: Object,
       required: true,
+    },
+    query: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -41,22 +44,18 @@ export default {
     await this.updateExamples();
   },
   methods: {
-    ...mapActions([
-      'getExamples',
-    ]),
     async updateExamples() {
       if (this.examplesList) {
         this.examplesList.reset();
         await this.examplesList.next();
       } else {
-        this.examplesList = await this.getExamples({
-          repositoryUuid: this.repository.uuid || this.repository,
-        });
+        this.examplesList = this.$api.examples.search(
+          this.repository.uuid,
+          this.query,
+        );
       }
     },
-    onItemDeleted(id) {
-      /* istanbul ignore next */
-      this.$emit('exampleDeleted', id);
+    onItemDeleted() {
     },
   },
 };

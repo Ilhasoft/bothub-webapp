@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 
-import NewExampleForm from '@/components-v1/example/NewExampleForm';
+import NewExampleForm from '@/components/example/NewExampleForm';
 import store from '@/store';
 
 
@@ -87,18 +87,6 @@ describe('NewExampleForm.vue', () => {
 
       test('created event emitted', () => {
         expect(wrapper.emitted('created')).toBeDefined();
-      });
-    });
-
-    describe('simple repository prop', () => {
-      let r;
-      beforeEach(async () => {
-        wrapper.setProps({ repository: '8511fd26-a3bc-4f74-9af1-176abca5401d' });
-        r = await wrapper.vm.onSubmit();
-      });
-
-      test('return is true', () => {
-        expect(r).toBeTruthy();
       });
     });
   });

@@ -95,6 +95,11 @@
           </div>
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>No description.</p>
+          <hr>
+          <intents-and-labels-list
+            :labels="repository.labels"
+            :intents="repository.intents"
+            @showSentences="activeTab = 1" />
         </b-tab-item>
         <b-tab-item>
           <div class="notification">
@@ -231,32 +236,41 @@
                   </div>
                   <div class="item">
                     <p><strong>Response:</strong></p>
-                    <div class="pre">{
-                    "text": "yes",
-                    "language": "en",
-                    "answer": {
-                    "intent": {
-                    "name": "affirmative",
-                    "confidence": 0.5872959956337126
-                    },
-                    "entities": [],
-                    "intent_ranking": [
-                    {
-                    "name": "affirmative",
-                    "confidence": 0.5872959956337126
-                    },
-                    {
-                    "name": "negative",
-                    "confidence": 0.2952035928665842
-                    },
-                    {
-                    "name": "doubt",
-                    "confidence": 0.11750041149970303
-                    }
-                    ],
-                    "text": "yes"
-                    }
-                    }</div>
+                    <pre class="pre">
+{
+  "intent": {
+    "name": "love",
+    "confidence": 0.6943462393863934
+  },
+  "intent_ranking": [
+    {
+      "name": "love",
+      "confidence": 0.6943462393863934
+    },
+    {
+      "name": "hate",
+      "confidence": 0.30565376061360666
+    }
+  ],
+  "labels_list": [
+    "animal"
+  ],
+  "entities_list": [],
+  "entities": {
+    "animal": [
+      {
+        "value": "puppy",
+        "entity": "dog",
+        "confidence": 0.67255946125065845
+      }
+    ],
+    "other": []
+  },
+  "text": "i love my puppy",
+  "update_id": 47,
+  "language": "en"
+}
+                    </pre>
                   </div>
                 </div>
                 <div class="column is-half">
@@ -420,7 +434,7 @@ import Layout from '@/components/shared/Layout';
 import Loading from '@/components-v1/shared/Loading';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import ErrorMessage from '@/components-v1/shared/ErrorMessage';
-import NewExampleForm from '@/components-v1/example/NewExampleForm';
+import NewExampleForm from '@/components/example/NewExampleForm';
 import LoginForm from '@/components-v1/auth/LoginForm';
 import ExamplesList from '@/components-v1/example/ExamplesList';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
@@ -434,6 +448,7 @@ import SetAuthorizationRoleForm from '@/components-v1/repository/SetAuthorizatio
 import AuthorizationsList from '@/components-v1/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components-v1/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components-v1/repository/AuthorizationRequestsList';
+import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 
 
 const components = {
@@ -455,6 +470,7 @@ const components = {
   AuthorizationsList,
   RequestAuthorizationForm,
   AuthorizationRequestsList,
+  IntentsAndLabelsList,
 };
 
 export default {

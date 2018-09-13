@@ -1,8 +1,9 @@
 <template>
   <layout :title="title || repository && repository.name || undefined">
     <div class="rpstr-vw-bs">
-      <div
+      <bh-card
         v-if="repository && !loading"
+        shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
           <div class="bh-grid bh-grid--ever-desktop">
@@ -25,7 +26,7 @@
         <div class="rpstr-vw-bs__card__content">
           <slot />
         </div>
-      </div>
+      </bh-card>
       <div
         v-else-if="errorCode"
         class="rpstr-vw-bs__error">
@@ -112,8 +113,6 @@ export default {
   &__card {
     max-width: $card-width;
     margin: 0 auto;
-    background-color: white;
-    border-radius: .5rem;
 
     &__header {
       position: relative;

@@ -4,7 +4,8 @@
       'bh-badge': true,
       [`bh-badge--${size}`]: !!size,
       [`bh-badge--color-${color}`]: !!color
-  }">
+    }"
+    @click="$emit('click', $event)">
     <slot />
   </div>
 </template>

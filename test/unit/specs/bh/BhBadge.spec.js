@@ -30,4 +30,14 @@ describe('BhBadge.vue', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
+
+  describe('click in badge', () => {
+    beforeEach(() => {
+      wrapper.trigger('click');
+    });
+
+    test('emitted click event', () => {
+      expect(wrapper.emitted('click')).toBeDefined();
+    });
+  });
 });

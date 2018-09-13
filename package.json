@@ -1,6 +1,6 @@
 {
   "name": "bothub-webapp",
-  "version": "1.9.5",
+  "version": "1.10.2",
   "description": "Bothub web application",
   "author": "Ilhasoft <contato@ilhasoft.com.br>",
   "private": true,
@@ -84,7 +84,7 @@
     "url-loader": "^0.6.2",
     "vue-jest": "^2.6.0",
     "vue-loader": "^13.7.2",
-    "vue-style-loader": "^3.1.2",
+    "vue-style-loader": "https://github.com/Ilhasoft/vue-style-loader#inject-in-import-order",
     "vue-template-compiler": "^2.5.16",
     "webpack": "^3.12.0",
     "webpack-bundle-analyzer": "^2.13.1",
@@ -92,8 +92,8 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 6.9.0",
+    "npm": ">= 3.10.8"
   },
   "browserslist": [
     "> 1%",
