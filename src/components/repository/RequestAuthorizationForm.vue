@@ -33,7 +33,7 @@ export default {
   name: 'RequestAuthorizationForm',
   components,
   props: {
-    repositoryUUid: {
+    repositoryUuid: {
       type: String,
       required: true,
     },
@@ -63,7 +63,7 @@ export default {
 
       try {
         const response = await this.requestRepositoryAuthorization({
-          repositoryUuid: this.repositoryUUid,
+          repositoryUuid: this.repositoryUuid,
           ...this.data,
         });
         this.$emit('requested', response.data);
