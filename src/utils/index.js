@@ -61,8 +61,10 @@ export const filterAndOrderListByText = (list, text) => (
 export const formatters = {
   bothubItemKey: () => v => v
     .toLowerCase()
-    .replace(' ', '_')
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/, ''),
+    .replace(/[\s]/g, '_')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ''),
 };
 
 const exampleSearchRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
