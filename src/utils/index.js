@@ -75,23 +75,18 @@ const extractGroupsFromRegex = (regularExpression, value) => {
     regexGroups.push(match);
   }
   /* eslint-enable */
-
   return regexGroups;
 };
 
 /* turns String to Dicty */
-export const exampleSearchToDicty = (value) => {
-  let dicty = {};
-  dicty = {
-    search: value.toLowerCase().replace(exampleSearchRegex, '').trim(),
-  };
-  Object.assign(dicty, extractGroupsFromRegex(exampleSearchRegex, value)
-    .reduce((acc, { 2: key, 3: v }) => {
+export const exampleSearchToDicty = value => extractGroupsFromRegex(exampleSearchRegex, value)
+  .reduce(
+    (acc, { 2: key, 3: v }) => {
       Object.assign(acc, { [key]: v });
       return acc;
-    }, {}));
-  return dicty;
-};
+    },
+    { search: value.toLowerCase().replace(exampleSearchRegex, '').trim() },
+  );
 
 /* turns Dicty to String */
 export const exampleSearchToString = value => Object.keys(value)

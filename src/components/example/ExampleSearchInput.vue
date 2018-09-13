@@ -1,6 +1,6 @@
 <template>
   <bh-text
-    v-model="dictyToString"
+    v-model="toString"
     class="example-search-input">
     <div slot="append">
       <bh-icon-button
@@ -31,7 +31,7 @@ export default {
   },
   data() {
     return {
-      dictyToString: exampleSearchToString(this.value),
+      toString: exampleSearchToString(this.value),
       current: {},
       setTimeoutId: null,
     };
@@ -39,10 +39,10 @@ export default {
   watch: {
     value(value) {
       if (!equal(this.current, value)) {
-        this.dictyToString = exampleSearchToString(value);
+        this.toString = exampleSearchToString(value);
       }
     },
-    dictyToString(value) {
+    toString(value) {
       this.current = exampleSearchToDicty(value);
       this.clearTimeout();
       this.setTimeoutId = setTimeout(
@@ -60,7 +60,7 @@ export default {
     },
     submit() {
       this.clearTimeout();
-      this.$emit('input', exampleSearchToDicty(this.dictyToString));
+      this.$emit('input', exampleSearchToDicty(this.toString));
     },
   },
 };

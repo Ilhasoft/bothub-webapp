@@ -21,10 +21,10 @@
             slot="intent"
             :label="currentIntent && `Intent: ${currentIntent.value}`">
             <div v-if="currentIntent">
-              <example-search-input v-model="searchQuery" />
+              <example-search-input v-model="searchQueryIntent" />
               <examples-list
                 :repository="repository"
-                :query="searchQuery" />
+                :query="searchQueryIntent" />
             </div>
           </div>
           <bh-navigation
@@ -32,17 +32,21 @@
             :label="currentLabel && `Label: ${currentLabel.value}`">
             <div v-if="currentLabel">
               <h1>Label {{ currentLabel.value }}</h1>
+              <example-search-input v-model="searchQueryLabel" />
+              <examples-list
+                :repository="repository"
+                :query="searchQueryLabel" />
+              <p>{{ searchQueryLabel }}</p>
               <div>
                 <div
                   v-for="entity in currentLabel.entities"
                   :key="entity"><a @click.prevent="openEntity(entity)">{{ entity }}</a></div>
               </div>
-              <pre>{{ currentLabel }}</pre>
-              <example-search-input />
             </div>
             <div
               slot="entity"
               :label="currentEntity && `Entity: ${currentEntity}`">
+              <example-search-input v-model="searchQueryEntity" />
               <div v-if="currentEntity">
                 {{ currentEntity }}
               </div>
@@ -79,12 +83,20 @@ export default {
       currentIntent: null,
       currentLabel: null,
       currentEntity: null,
-      searchQuery: {},
+      searchQueryIntent: {},
+      searchQueryLabel: {},
+      searchQueryEntity: {},
     };
   },
   watch: {
     currentIntent(value) {
-      this.searchQuery = { intent: value.value };
+      this.searchQueryIntent = { intent: value.value };
+    },
+    currentLabel(value) {
+      this.searchQueryLabel = { label: value.value, entities: value.entities };
+    },
+    currentEntity(value) {
+      this.searchQueryEntity = { entity: value };
     },
   },
   methods: {

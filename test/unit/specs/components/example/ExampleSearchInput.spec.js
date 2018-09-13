@@ -42,13 +42,18 @@ describe('ExampleSearchInput.vue', () => {
 
   describe('ExampleSearchInput.vue', () => {
     beforeEach(() => {
-      wrapper.vm.setTimeoutId = 1;
       wrapper.vm.submit();
-      wrapper.vm.clearTimeout();
     });
 
     test('emity event works when button is clicked', () => {
       expect(wrapper.emitted('input')).toBeDefined();
+    });
+  });
+
+  describe('ExampleSearchInput.vue', () => {
+    beforeEach(() => {
+      wrapper.vm.setTimeoutId = 1;
+      wrapper.vm.clearTimeout();
     });
 
     test('clear timeout works correctly', () => {
