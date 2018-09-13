@@ -56,21 +56,29 @@ export default {
 
       return classes;
     },
+    formattedValue() {
+      return this.formatters.reduce((c, f) => f(c), this.value || '');
+    },
   },
   watch: {
-    value(value) {
-      this.val = value;
+    value() {
+      this.val = this.formattedValue;
     },
     val(value) {
       this.$emit('input', value);
     },
+    formatters() {
+      this.$nextTick();
+      this.val = this.formattedValue;
+    },
   },
   mounted() {
-    const { input } = this.$refs;
+    this.val = this.formattedValue;
 
+    const { input } = this.$refs;
     if (input) {
       input.oninput = async () => {
-        const formattedValue = this.formatters.reduce((c, f) => f(c), input.value);
+        const formattedValue = this.formatters.reduce((c, f) => f(c), input.value || '');
         const { selectionStart } = input;
         if (input.value !== formattedValue) {
           this.val = formattedValue;
