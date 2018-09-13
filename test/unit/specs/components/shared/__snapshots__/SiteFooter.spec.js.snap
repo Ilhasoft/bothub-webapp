@@ -8,6 +8,7 @@ exports[`SiteFooter.vue renders correctly 1`] = `
         <div class="column">
           <div class="footer-item footer-brand">
             <img src="~@/assets/imgs/logo-white.svg" alt="bothub">
+            <div>Webapp v1.10.2</div>
           </div>
           <ul class="footer-item">
             <li>
