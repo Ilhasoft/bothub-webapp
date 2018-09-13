@@ -18,7 +18,7 @@ describe('ExampleSearchInput.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('When value received a object, expected the object turns to string', () => {
+  describe('value received a object, expected the object turns to string', () => {
     beforeEach(() => {
       wrapper.setProps({
         value: {
@@ -30,24 +30,24 @@ describe('ExampleSearchInput.vue', () => {
       });
     });
 
-    test('Expect data toString be String type', () => {
+    test('expect data toString be String type', () => {
       expect(typeof wrapper.vm.toString).toBe('string');
     });
   });
 
-  describe('Check current computed data turns string to Dicty', () => {
+  describe('check current computed data turns string to Dicty', () => {
     beforeEach(() => {
       wrapper.setData({
         toString: 'intent:intent_value label:label_value',
       });
     });
 
-    test('Expect computed Data current be Object', () => {
+    test('expect computed Data current be Object', () => {
       expect(typeof wrapper.vm.current).toBe('object');
     });
   });
 
-  describe('Check submit method emit value', () => {
+  describe('check submit method emit value', () => {
     beforeEach(() => {
       wrapper.vm.submit();
     });
@@ -57,7 +57,7 @@ describe('ExampleSearchInput.vue', () => {
     });
   });
 
-  describe('Check clearTimeOut method works correctly', () => {
+  describe('check clearTimeOut method works correctly', () => {
     beforeEach(() => {
       wrapper.vm.setTimeoutId = 1;
       wrapper.vm.clearTimeout();
