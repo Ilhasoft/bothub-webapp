@@ -7,7 +7,8 @@
             <div class="footer-item footer-brand">
               <img
                 src="~@/assets/imgs/logo-white.svg"
-                alt="bothub" >
+                alt="bothub">
+              <div>Webapp v{{ version }}</div>
             </div>
             <ul class="footer-item">
               <li><a href="#">Terms &amp; conditions</a></li>
@@ -77,6 +78,7 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
+import { version } from '@/../package.json';
 
 
 export default {
@@ -85,6 +87,7 @@ export default {
     return {
       email: '',
       submittingNewsletter: false,
+      version,
     };
   },
   methods: {
