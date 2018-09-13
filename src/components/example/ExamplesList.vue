@@ -56,9 +56,6 @@ export default {
           this.query,
         );
       }
-
-      await this.examplesList.reset();
-      await this.examplesList.next();
     },
     onItemDeleted() {
     },
