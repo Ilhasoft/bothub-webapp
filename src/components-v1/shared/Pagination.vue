@@ -43,6 +43,11 @@ export default {
       default: 'More',
     },
   },
+  watch: {
+    async list() {
+      await this.list.next();
+    },
+  },
   async mounted() {
     await this.list.next();
   },
