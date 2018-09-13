@@ -5,7 +5,7 @@
         <highlighted-text
           :text="text"
           :entities="entities"
-          :all-entities="repository.entities" />
+          :all-entities="repository.entities || repository.entities_list" />
       </div>
       <div class="example-text__right">
         <bh-language-flag :language="language" />
@@ -118,7 +118,7 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repository.entities,
+        this.repository.entities || this.repository.entities_list,
         this.entities,
       );
       return `entity-${color}`;
