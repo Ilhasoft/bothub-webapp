@@ -36,20 +36,14 @@
               <examples-list
                 :repository="repository"
                 :query="searchQueryLabel" />
-              <p>{{ searchQueryLabel }}</p>
-              <div>
-                <div
-                  v-for="entity in currentLabel.entities"
-                  :key="entity"><a @click.prevent="openEntity(entity)">{{ entity }}</a></div>
-              </div>
             </div>
             <div
               slot="entity"
               :label="currentEntity && `Entity: ${currentEntity}`">
               <example-search-input v-model="searchQueryEntity" />
-              <div v-if="currentEntity">
-                {{ currentEntity }}
-              </div>
+              <examples-list
+                :repository="repository"
+                :query="searchQueryEntity" />
             </div>
           </bh-navigation>
         </bh-navigation>
@@ -93,7 +87,7 @@ export default {
       this.searchQueryIntent = { intent: value.value };
     },
     currentLabel(value) {
-      this.searchQueryLabel = { label: value.value, entities: value.entities };
+      this.searchQueryLabel = { label: value.value };
     },
     currentEntity(value) {
       this.searchQueryEntity = { entity: value };
