@@ -69,6 +69,60 @@ describe('BhText.vue', () => {
         });
       });
     });
+
+    describe('with small size', () => {
+      beforeEach(() => {
+        wrapper.setProps({ size: 'small' });
+      });
+
+      test('renders correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+    });
+
+    describe('type abc', () => {
+      beforeEach(() => {
+        const input = wrapper.find({ ref: 'input' });
+        input.element.value = 'abc';
+        input.trigger('input');
+      });
+
+      test('val is abc', () => {
+        expect(wrapper.vm.val).toBe('abc');
+      });
+    });
+
+    describe('eat "a" formatter', () => {
+      beforeEach(() => {
+        wrapper.setProps({
+          formatters: [
+            value => value.replace('a', ''),
+          ],
+        });
+      });
+
+      describe('type abc', () => {
+        beforeEach(() => {
+          const input = wrapper.find({ ref: 'input' });
+          input.element.value = 'abc';
+          input.trigger('input');
+        });
+
+        test('val is bc', () => {
+          expect(wrapper.vm.val).toBe('bc');
+        });
+      });
+    });
+
+    describe('update value prop', () => {
+      beforeEach(() => {
+        wrapper.setProps({ value: 'a' });
+      });
+
+      test('val equal "a"', () => {
+        expect(wrapper.vm.val).toBe('a');
+      });
+    });
   });
 
   describe('with initial formatters', () => {
@@ -96,60 +150,6 @@ describe('BhText.vue', () => {
           expect(emitted[0][0]).toBe('ok_ok');
         });
       });
-    });
-  });
-
-  describe('with small size', () => {
-    beforeEach(() => {
-      wrapper.setProps({ size: 'small' });
-    });
-
-    test('renders correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('type abc', () => {
-    beforeEach(() => {
-      const input = wrapper.find({ ref: 'input' });
-      input.element.value = 'abc';
-      input.trigger('input');
-    });
-
-    test('val is abc', () => {
-      expect(wrapper.vm.val).toBe('abc');
-    });
-  });
-
-  describe('eat "a" formatter', () => {
-    beforeEach(() => {
-      wrapper.setProps({
-        formatters: [
-          value => value.replace('a', ''),
-        ],
-      });
-    });
-
-    describe('type abc', () => {
-      beforeEach(() => {
-        const input = wrapper.find({ ref: 'input' });
-        input.element.value = 'abc';
-        input.trigger('input');
-      });
-
-      test('val is bc', () => {
-        expect(wrapper.vm.val).toBe('bc');
-      });
-    });
-  });
-
-  describe('update value prop', () => {
-    beforeEach(() => {
-      wrapper.setProps({ value: 'a' });
-    });
-
-    test('val equal "a"', () => {
-      expect(wrapper.vm.val).toBe('a');
     });
   });
 });
