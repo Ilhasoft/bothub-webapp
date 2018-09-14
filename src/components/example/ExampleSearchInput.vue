@@ -1,14 +1,10 @@
 <template>
-  <form
-    @submit.prevent="submit()">
-    <bh-text
-      v-model="toString"
-      class="example-search-input">
+  <form @submit.prevent="submit()">
+    <bh-text v-model="toString">
       <div slot="append">
         <bh-icon-button
           value="magnify"
           size="small"
-          class="exampleSearchInput__icon"
           @click="submit()" />
       </div>
     </bh-text>

@@ -18,7 +18,7 @@ describe('ExampleSearchInput.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('value received a object, expected the object turns to string', () => {
+  describe('value received a object', () => {
     beforeEach(() => {
       wrapper.setProps({
         value: {
@@ -30,12 +30,16 @@ describe('ExampleSearchInput.vue', () => {
       });
     });
 
-    test('expect data toString be String type', () => {
+    test('data toString be String type', () => {
       expect(typeof wrapper.vm.toString).toBe('string');
+    });
+
+    test('data toString renders correctly string format', () => {
+      expect(wrapper.vm.toString).toBe('intent:intent_value label:label_value text:text_value entity:entity_value');
     });
   });
 
-  describe('check current computed data turns string to Dicty', () => {
+  describe('set string to data toString', () => {
     beforeEach(() => {
       wrapper.setData({
         toString: 'intent:intent_value label:label_value',
@@ -45,25 +49,31 @@ describe('ExampleSearchInput.vue', () => {
     test('expect computed Data current be Object', () => {
       expect(typeof wrapper.vm.current).toBe('object');
     });
+    // test('expect computed Data renders correctly object value', () => {
+    //   expect(wrapper.vm.current).toMatchObject({
+    //     intent: 'intent_value',
+    //     label: 'label_value',
+    //   });
+    // });
   });
 
-  describe('check submit method emit value', () => {
+  describe('active submit method', () => {
     beforeEach(() => {
       wrapper.vm.submit();
     });
 
-    test('emitted to be defined', () => {
+    test('emitted is defined', () => {
       expect(wrapper.emitted('input')).toBeDefined();
     });
   });
 
-  describe('check clearTimeOut method works correctly', () => {
+  describe('set value for SetTimeoutId and called clearTimeout method', () => {
     beforeEach(() => {
       wrapper.vm.setTimeoutId = 1;
       wrapper.vm.clearTimeout();
     });
 
-    test('after clearTimeOut called, SetTimeoutId is null', () => {
+    test('data setTimeoutId should be null', () => {
       expect(wrapper.vm.setTimeoutId).toBeNull();
     });
   });

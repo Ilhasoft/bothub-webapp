@@ -2,6 +2,6 @@
 
 exports[`ExampleSearchInput.vue renders correctly 1`] = `
 <form>
-  <bhtext-stub class="example-search-input"></bhtext-stub>
+  <bhtext-stub></bhtext-stub>
 </form>
 `;

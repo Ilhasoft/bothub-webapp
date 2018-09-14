@@ -80,7 +80,7 @@ const extractGroupsFromRegex = (regularExpression, value) => {
   return regexGroups;
 };
 
-/* turns String to Dicty */
+/* Receive a string and mount a dicty from groups of a regular expression matchs */
 export const exampleSearchToDicty = value => extractGroupsFromRegex(exampleSearchRegex, value)
   .reduce(
     (acc, { 2: key, 3: v }) => {
@@ -90,7 +90,7 @@ export const exampleSearchToDicty = value => extractGroupsFromRegex(exampleSearc
     { search: value.toLowerCase().replace(exampleSearchRegex, '').trim() },
   );
 
-/* turns Dicty to String */
+/* Receive a Object and return a String with each Key and value from Object */
 export const exampleSearchToString = value => Object.keys(value)
   .map(key => (key === 'search'
     ? value[key]
