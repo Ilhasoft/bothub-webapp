@@ -36,10 +36,10 @@ export default {
       links: [
         ['repository-home', 'Status'],
         ['repository-trainings', 'Trainings'],
-        ['home', 'Translate'],
-        ['home', 'Translated Sentences'],
-        ['home', 'Analyze Text'],
-        ['home', 'Settings'],
+        ['repository-translate', 'Translate'],
+        ['repository-translations', 'Translated Sentences'],
+        ['repository-analyze-text', 'Analyze Text'],
+        ['repository-settings', 'Settings'],
       ],
     };
   },
