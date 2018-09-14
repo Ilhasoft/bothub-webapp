@@ -78,7 +78,6 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
-import { version } from '@/../package.json';
 
 
 export default {
@@ -87,7 +86,7 @@ export default {
     return {
       email: '',
       submittingNewsletter: false,
-      version,
+      version: process.env.VERSION,
     };
   },
   methods: {
