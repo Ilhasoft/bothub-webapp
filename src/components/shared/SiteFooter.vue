@@ -7,7 +7,8 @@
             <div class="footer-item footer-brand">
               <img
                 src="~@/assets/imgs/logo-white.svg"
-                alt="bothub" >
+                alt="bothub">
+              <div>Webapp v{{ version }}</div>
             </div>
             <ul class="footer-item">
               <li><a href="#">Terms &amp; conditions</a></li>
@@ -85,6 +86,7 @@ export default {
     return {
       email: '',
       submittingNewsletter: false,
+      version: process.env.VERSION,
     };
   },
   methods: {
