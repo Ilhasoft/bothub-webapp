@@ -22,6 +22,8 @@ export const VERBOSE_LANGUAGES = {
   it: 'Italian',
   nl: 'Dutch',
   pt_br: 'Brazilian Portuguese',
+  id: 'Indonesian',
+  mn: 'Mongolian',
 };
 
 export const languageListToDict = list => (list.reduce((current, lang) => {
