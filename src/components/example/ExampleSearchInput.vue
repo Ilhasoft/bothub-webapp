@@ -1,11 +1,11 @@
 <template>
-  <form @submit.prevent="submit()">
+  <form @submit.prevent="onSubmit()">
     <bh-text v-model="toString">
       <div slot="append">
         <bh-icon-button
           value="magnify"
           size="small"
-          @click="submit()" />
+          type="submit" />
       </div>
     </bh-text>
   </form>
@@ -60,7 +60,7 @@ export default {
         this.setTimeoutId = null;
       }
     },
-    submit() {
+    onSubmit() {
       this.clearTimeout();
       this.$emit('input', this.current);
     },

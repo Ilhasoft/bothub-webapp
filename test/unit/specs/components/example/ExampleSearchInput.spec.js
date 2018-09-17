@@ -59,7 +59,7 @@ describe('ExampleSearchInput.vue', () => {
 
   describe('active submit method', () => {
     beforeEach(() => {
-      wrapper.vm.submit();
+      wrapper.vm.onSubmit();
     });
 
     test('emitted is defined', () => {
