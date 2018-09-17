@@ -64,20 +64,12 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      repository: null,
-      activeTab: 0,
-      hasError: false,
-      errorDetail: null,
-      training: false,
       trainResponse: null,
-      editModalOpen: false,
       translate: {
         from: null,
         to: null,
       },
       toLanguage: null,
-      requestAuthorizationModal: false,
-      managerAuthorizationModalOpen: false,
     };
   },
   methods: {
@@ -125,9 +117,6 @@ export default {
     onCloseTrainResponseModal() {
       this.trainResponse = null;
     },
-    openEditModal() {
-      this.editModalOpen = true;
-    },
     getEditInitialData() {
       const {
         name,
@@ -158,18 +147,10 @@ export default {
     },
     async onTranslated() {
       const {
-        translationsStatus,
         translationsList,
       } = this.$refs;
-      await translationsStatus.updateTranslationsStatus();
       await translationsList.updateTranslations();
       await this.updateRepository(false);
-    },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModal = true;
-    },
-    openManagerAuthorization() {
-      this.managerAuthorizationModalOpen = true;
     },
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();

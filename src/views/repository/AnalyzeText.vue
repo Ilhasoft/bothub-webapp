@@ -97,24 +97,6 @@ export default {
   name: 'RepositoryAnalyzeText',
   components,
   extends: RepositoryBase,
-  data() {
-    return {
-      repository: null,
-      activeTab: 0,
-      hasError: false,
-      errorDetail: null,
-      training: false,
-      trainResponse: null,
-      editModalOpen: false,
-      translate: {
-        from: null,
-        to: null,
-      },
-      toLanguage: null,
-      requestAuthorizationModal: false,
-      managerAuthorizationModalOpen: false,
-    };
-  },
 };
 </script>
 
