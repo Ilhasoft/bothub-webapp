@@ -24,7 +24,10 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
         </p>
       </div>
       <div class="repository-infospace">
-        <flagslist-stub></flagslist-stub>
+        <div class="repository-infospace-flags">
+          <bhlanguageflag-stub class="repository-infospace-flags-item"></bhlanguageflag-stub>
+          <bhlanguageflag-stub class="repository-infospace-flags-item"></bhlanguageflag-stub>
+        </div>
       </div>
       <div>
         <p class="repository-description repository-description-empty">No description</p>
