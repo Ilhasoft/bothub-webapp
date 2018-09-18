@@ -35,8 +35,7 @@
         v-if="!!translate.from && !!translate.to"
         :repository="repository"
         :from="translate.from"
-        :to="translate.to"
-        @translated="onTranslated()" />
+        :to="translate.to" />
     </div>
   </repository-view-base>
 </template>
@@ -46,15 +45,14 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
 import TranslateList from '@/components-v1/translate/TranslateList';
-import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
 import TranslationsList from '@/components-v1/translate/TranslationsList';
 import { mapActions } from 'vuex';
+
 
 const components = {
   RepositoryViewBase,
   LanguageSelect,
   TranslateList,
-  TranslationsStatus,
   TranslationsList,
 };
 
@@ -75,7 +73,6 @@ export default {
   methods: {
     ...mapActions([
       'getRepository',
-      'trainRepository',
     ]),
     async updateRepository(doNull = true) {
       const { ownerNickname, slug } = this.$route.params;
@@ -92,82 +89,14 @@ export default {
         this.errorDetail = detail;
       }
     },
-    onExampleCreated() {
-      this.$refs.examplesList.updateExamples();
-      this.updateRepository(false);
-    },
-    async train() {
-      const { ownerNickname, slug } = this.$route.params;
-      this.training = true;
-      try {
-        const response = await this.trainRepository({ ownerNickname, slug });
-        this.trainResponse = response.data;
-      } catch (e) {
-        this.$toast.open({
-          message: 'Repository not trained :(',
-          type: 'is-danger',
-        });
-      }
-      this.training = false;
-      await this.updateRepository(false);
-    },
-    onExampleDeleted() {
-      this.updateRepository(false);
-    },
-    onCloseTrainResponseModal() {
-      this.trainResponse = null;
-    },
-    getEditInitialData() {
-      const {
-        name,
-        slug,
-        language,
-        categories_list: categories,
-        description,
-        is_private: isPrivate,
-      } = this.repository;
-      return {
-        name,
-        slug,
-        language,
-        categories: categories.map(
-          ({ id, name: n }) => ({ value: id, display_name: n }),
-        ),
-        description,
-        is_private: isPrivate,
-      };
-    },
-    onEdited() {
-      this.updateRepository();
-      this.editModalOpen = false;
-      this.$toast.open({
-        message: 'Repository edited!',
-        type: 'is-success',
-      });
-    },
     async onTranslated() {
       const {
+        translationsStatus,
         translationsList,
       } = this.$refs;
+      await translationsStatus.updateTranslationsStatus();
       await translationsList.updateTranslations();
       await this.updateRepository(false);
-    },
-    onRoleSetted() {
-      this.$refs.authorizationsList.updateAuthorizations();
-    },
-    onEditRole(value) {
-      this.$refs.setAuthorizationRoleForm.setData(value);
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModal = false;
-      this.$toast.open({
-        message: 'Request made! Wait for review of an admin.',
-        type: 'is-success',
-      });
-      this.updateRepository(false);
-    },
-    onReviewAuthorizationRequest() {
-      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };

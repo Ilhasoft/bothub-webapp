@@ -101,8 +101,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bh/assets/scss/colors.scss';
-
 
 .repository-analyze-text {
   padding: 1rem;
