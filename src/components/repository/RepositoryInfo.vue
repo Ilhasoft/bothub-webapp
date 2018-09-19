@@ -49,7 +49,13 @@
         <div
           v-if="available_languages"
           class="repository-infospace">
-          <flags-list :languages="available_languages" />
+          <div class="repository-infospace-flags">
+            <bh-language-flag
+              v-for="language in available_languages"
+              :key="language"
+              :language="language"
+              class="repository-infospace-flags-item" />
+          </div>
         </div>
         <div v-if="!hideDescription">
           <p
@@ -158,6 +164,16 @@ export default {
 .repository {
   &-infospace {
     margin-bottom: .5rem;
+
+    &-flags {
+      $margin: .25rem;
+
+      margin: -($margin);
+
+      &-item {
+        margin: $margin;
+      }
+    }
   }
 
   &-description {

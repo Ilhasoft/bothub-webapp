@@ -2,12 +2,14 @@
 jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import BH from 'bh';
 import store from '@/store';
 import router from '@/router';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 
 
 const localVue = createLocalVue();
+localVue.use(BH);
 
 describe('RepositoryCard.vue', () => {
   let wrapper;
