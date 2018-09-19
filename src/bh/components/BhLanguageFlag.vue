@@ -14,6 +14,8 @@ const languageCountryFlagDict = {
   it: 'flag-it',
   nl: 'flag-nl',
   pt_br: 'flag-br',
+  id: 'flag-id',
+  mn: 'flag-mn',
 };
 
 export default {
