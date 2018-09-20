@@ -21,11 +21,10 @@
             slot="intent"
             :label="currentIntent && `Intent: ${currentIntent.value}`">
             <div v-if="currentIntent">
-              <h1>Intent {{ currentIntent.value }}</h1>
-              <pre>{{ currentIntent }}</pre>
+              <example-search-input v-model="searchQueryIntent" />
               <examples-list
                 :repository="repository"
-                :query="{ intent: currentIntent.value }" />
+                :query="searchQueryIntent" />
             </div>
           </div>
           <bh-navigation
@@ -33,19 +32,18 @@
             :label="currentLabel && `Label: ${currentLabel.value}`">
             <div v-if="currentLabel">
               <h1>Label {{ currentLabel.value }}</h1>
-              <div>
-                <div
-                  v-for="entity in currentLabel.entities"
-                  :key="entity"><a @click.prevent="openEntity(entity)">{{ entity }}</a></div>
-              </div>
-              <pre>{{ currentLabel }}</pre>
+              <example-search-input v-model="searchQueryLabel" />
+              <examples-list
+                :repository="repository"
+                :query="searchQueryLabel" />
             </div>
             <div
               slot="entity"
               :label="currentEntity && `Entity: ${currentEntity}`">
-              <div v-if="currentEntity">
-                {{ currentEntity }}
-              </div>
+              <example-search-input v-model="searchQueryEntity" />
+              <examples-list
+                :repository="repository"
+                :query="searchQueryEntity" />
             </div>
           </bh-navigation>
         </bh-navigation>
@@ -60,6 +58,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
+import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 
 
 export default {
@@ -69,6 +68,7 @@ export default {
     IntentsAndLabelsList,
     NewExampleForm,
     ExamplesList,
+    ExampleSearchInput,
   },
   extends: RepositoryBase,
   data() {
@@ -77,7 +77,27 @@ export default {
       currentIntent: null,
       currentLabel: null,
       currentEntity: null,
+      searchQueryIntent: {},
+      searchQueryLabel: {},
+      searchQueryEntity: {},
     };
+  },
+  watch: {
+    currentIntent(value) {
+      this.searchQueryIntent = value
+        ? { intent: value.value }
+        : null;
+    },
+    currentLabel(value) {
+      this.searchQueryLabel = value
+        ? { label: value.value }
+        : null;
+    },
+    currentEntity(value) {
+      this.searchQueryEntity = value
+        ? { entity: value }
+        : null;
+    },
   },
   methods: {
     onShowSentences({

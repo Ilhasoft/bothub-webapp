@@ -9,6 +9,7 @@ import Equal from 'bh/assets/icons/equal.svg';
 import Account from 'bh/assets/icons/account.svg';
 import Botinho from 'bh/assets/icons/botinho.svg';
 import DotsVertical from 'bh/assets/icons/dots-vertical.svg';
+import Magnify from 'bh/assets/icons/magnify.svg';
 import FlagVariant from 'bh/assets/icons/flag-variant.svg';
 import Home from 'bh/assets/icons/home.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
@@ -35,6 +36,7 @@ export const icons = {
   account: Account,
   botinho: Botinho,
   'dots-vertical': DotsVertical,
+  magnify: Magnify,
   'flag-variant': FlagVariant,
   home: Home,
   'flag-br': FlagBr,
