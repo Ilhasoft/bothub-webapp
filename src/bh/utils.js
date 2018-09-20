@@ -18,6 +18,8 @@ import FlagIt from 'bh/assets/icons/flag-it.svg';
 import FlagNl from 'bh/assets/icons/flag-nl.svg';
 import FlagPt from 'bh/assets/icons/flag-pt.svg';
 import FlagUs from 'bh/assets/icons/flag-us.svg';
+import FlagId from 'bh/assets/icons/flag-id.svg';
+import FlagMn from 'bh/assets/icons/flag-mn.svg';
 
 
 export const icons = {
@@ -41,6 +43,8 @@ export const icons = {
   'flag-nl': FlagNl,
   'flag-pt': FlagPt,
   'flag-us': FlagUs,
+  'flag-id': FlagId,
+  'flag-mn': FlagMn,
 };
 
 /* istanbul ignore next */

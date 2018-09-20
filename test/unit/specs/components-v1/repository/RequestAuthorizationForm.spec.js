@@ -20,7 +20,7 @@ describe('RequestAuthorizationForm.vue', () => {
       localVue,
       store,
       propsData: {
-        repositoryUUid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+        repositoryUuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
       },
     });
     await wrapper.vm.updateFormSchema();
