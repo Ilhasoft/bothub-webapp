@@ -41,20 +41,21 @@ describe('ExampleSearchInput.vue', () => {
 
   describe('set string to data toString', () => {
     beforeEach(() => {
-      wrapper.setData({
-        toString: 'intent:intent_value label:label_value',
-      });
+      // TODO: solved this pls, use setData
+      wrapper.vm.toString = 'intent:intent_value label:label_value';
     });
 
     test('expect computed Data current be Object', () => {
       expect(typeof wrapper.vm.current).toBe('object');
     });
-    // test('expect computed Data renders correctly object value', () => {
-    //   expect(wrapper.vm.current).toMatchObject({
-    //     intent: 'intent_value',
-    //     label: 'label_value',
-    //   });
-    // });
+
+    test('expect computed Data renders correctly object value', () => {
+      expect(wrapper.vm.current).toMatchObject({
+        intent: 'intent_value',
+        label: 'label_value',
+        search: '',
+      });
+    });
   });
 
   describe('active submit method', () => {
@@ -62,7 +63,7 @@ describe('ExampleSearchInput.vue', () => {
       wrapper.vm.onSubmit();
     });
 
-    test('emitted is defined', () => {
+    test('emitted input event', () => {
       expect(wrapper.emitted('input')).toBeDefined();
     });
   });
