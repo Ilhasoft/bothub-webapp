@@ -3,6 +3,7 @@
     :class="{
       'bh-badge': true,
       [`bh-badge--${size}`]: !!size,
+      [`bh-badge--color-${color}`]: !!color
     }"
     @click="$emit('click', $event)">
     <slot />
@@ -14,6 +15,10 @@ export default {
   name: 'BhBadge',
   props: {
     size: {
+      type: String,
+      default: null,
+    },
+    color: {
       type: String,
       default: null,
     },
@@ -33,7 +38,6 @@ export default {
     padding: 0 1rem;
     font-size: 1rem;
     line-height: $size-normal;
-    background-color: $color-lighter-grey;
     border-radius: ($size-normal / 2);
 
     &--small {
@@ -58,6 +62,15 @@ export default {
       font-size: 1.5rem;
       line-height: $size-large;
       border-radius: ($size-large / 2);
+    }
+
+    @each $color in $colors {
+      $color-name: nth($color, 1);
+      $color-value: nth($color, 2);
+
+      &--#{$color-name} {
+        background-color: $color-value;
+      }
     }
 
     > * {

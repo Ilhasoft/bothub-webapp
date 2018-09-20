@@ -80,6 +80,23 @@ export default {
 @import '~@/bh/assets/scss/variables.scss';
 @import '~@/bh/assets/scss/colors.scss';
 
+<<<<<<< HEAD
+=======
+.repository {
+  &-infospace {
+    margin-bottom: .5rem;
+
+    &-flags {
+      $margin: .25rem;
+
+      margin: -($margin);
+
+      &-item {
+        margin: $margin;
+      }
+    }
+  }
+>>>>>>> 069429b2252b0d021188ac5e6a803ce483edd5f3
 
 .repository-info {
   &__big-badge-wrapper {
