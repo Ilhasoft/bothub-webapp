@@ -33,7 +33,7 @@
         </div>
       </div>
       <div v-else-if="authenticated">
-        <div class="notification is-warning">
+        <div class="bh-notification is-warning">
           You can not edit this repository
         </div>
       </div>
@@ -41,7 +41,7 @@
     <div
       v-else
       class="settings__login-section">
-      <div class="notification is-info">
+      <div class="bh-notification is-info">
         Sign in to your account to edit this repository.
       </div>
       <login-form hide-forgot-password />

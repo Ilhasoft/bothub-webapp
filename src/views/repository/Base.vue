@@ -1,7 +1,6 @@
 <script>
 import { mapGetters } from 'vuex';
 
-
 export default {
   name: 'RepositoryBase',
   data() {

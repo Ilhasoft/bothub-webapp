@@ -6,14 +6,14 @@
     <div v-if="repository">
       <div class="notification">
         <div v-if="repository.authorization.can_contribute">
-          <div class="columns">
-            <div class="column">
+          <div class="bh-grid repository-translate">
+            <div class="bh-grid__item">
               <b-field label="Translate from:">
                 <language-select
                   v-model="translate.from" />
               </b-field>
             </div>
-            <div class="column is-narrow">
+            <div class="repository-translate__teste">
               <div class="field">
                 <label class="label">&nbsp;</label>
                 <b-icon
@@ -21,7 +21,7 @@
                   size="is-medium" />
               </div>
             </div>
-            <div class="column">
+            <div class="bh-grid__item">
               <b-field label="Translate to:">
                 <language-select
                   v-model="translate.to"
@@ -31,12 +31,12 @@
           </div>
         </div>
         <div v-else-if="authenticated">
-          <div class="notification is-warning">
+          <div class="bh-notification is-warning">
             You can not contribute to this repository
           </div>
         </div>
         <div v-else>
-          <div class="notification is-info">
+          <div class="bh-notification is-info">
             Sign in to your account to contribute to this repository.
           </div>
           <login-form hide-forgot-password />
@@ -114,3 +114,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.repository-translate {
+
+  &__teste {
+       align-self: center;
+  }
+}
+</style>

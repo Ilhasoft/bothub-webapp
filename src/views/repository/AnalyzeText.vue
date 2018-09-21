@@ -6,31 +6,28 @@
     <div
       v-if="repository"
       class="repository-analyze-text">
-      <div class="tab-padding">
-        <div>
-          <div class="columns">
-            <div class="column is-half">
-              <div class="item">
-                <p>Make a HTTP request to NLP service, follow the example bellow.</p>
-              </div>
-              <div class="item">
-                <p><strong>URL:</strong></p>
-                <div class="pre">https://nlp.bothub.it/parse/</div>
-              </div>
-              <div class="item">
-                <p><strong>Header:</strong></p>
-                <div class="pre">Authorization: Bearer repository.authorization.uuid</div>
-              </div>
-              <div class="item">
-                <p><strong>POST with form-data:</strong></p>
-                <pre class="pre">
-language: [language code]
+      <div>
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <div class="repository-analyze-text__item">
+              <p>Make a HTTP request to NLP service, follow the example bellow.</p>
+            </div>
+            <div class="repository-analyze-text__item">
+              <p><strong>URL:</strong></p>
+              <div class="pre">https://nlp.bothub.it/parse/</div>
+            </div>
+            <div class="repository-analyze-text__item">
+              <p><strong>Header:</strong></p>
+              <div class="pre">Authorization: Bearer repository.authorization.uuid </div>
+            </div>
+            <div class="repository-analyze-text__item">
+              <p><strong>POST with form-data:</strong></p>
+              <pre class="pre">language: [language code]
 text: [text to analyze]</pre>
-              </div>
-              <div class="item">
-                <p><strong>Response:</strong></p>
-                <pre class="pre">
-{
+            </div>
+            <div class="repository-analyze-text__item">
+              <p><strong>Response:</strong></p>
+              <pre class="pre">{
   "intent": {
     "name": "love",
     "confidence": 0.6943462393863934
@@ -63,18 +60,17 @@ text: [text to analyze]</pre>
   "update_id": 47,
   "language": "en"
 }
-                </pre>
-              </div>
+              </pre>
             </div>
-            <div class="column is-half">
-              <div class="item">
-                <div><strong>Code Generator:</strong></div>
-                <div>Generate code to your respective programming language.</div>
-              </div>
-              <request-generator
-                :default-language-field="repository.language"
-                authorization-uuid="repository.authorizatiom.uuid"/>
+          </div>
+          <div class="bh-grid__item">
+            <div class="repository-analyze-text__item">
+              <div><strong>Code Generator:</strong></div>
+              <div>Generate code to your respective programming language.</div>
             </div>
+            <request-generator
+              :default-language-field="repository.language"
+              authorization-uuid="repository.authorizatiom.uuid"/>
           </div>
         </div>
       </div>
@@ -88,14 +84,12 @@ import RepositoryBase from './Base';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
 
 
-const components = {
-  RepositoryViewBase,
-  RequestGenerator,
-};
-
 export default {
   name: 'RepositoryAnalyzeText',
-  components,
+  components: {
+    RepositoryViewBase,
+    RequestGenerator,
+  },
   extends: RepositoryBase,
 };
 </script>
@@ -103,5 +97,11 @@ export default {
 <style lang="scss">
 .repository-analyze-text {
   padding: 1rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
+
+  &__item {
+    margin: 1rem;
+  }
 }
 </style>
