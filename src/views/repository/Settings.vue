@@ -110,7 +110,6 @@ export default {
 </script>
 
 <style lang="scss">
-
   .settings {
     padding: -1rem;
 

@@ -101,7 +101,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .repository-analyze-text {
   padding: 1rem;
 }
