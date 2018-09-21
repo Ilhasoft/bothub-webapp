@@ -12,8 +12,10 @@
           alt="mascot"
           class="repository-home__permissions__mascot">
         <div class="repository-home__permissions__message">
-          <p>You can’t contribute</p>
-          <p>and you can’t write.</p>
+          <p>You {{ repository.authorization &&
+          repository.authorization.can_contribute | can_t }} contribute</p>
+          <p>and you {{ repository.authorization &&
+          repository.authorization.can_write | can_t }} write.</p>
         </div>
       </div>
       <div class="repository-home__info">
@@ -32,32 +34,38 @@
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>There is no description for this repository</p>
         </div>
-        <h1 class="bh-title-1">Can identify</h1>
-        <div class="bh-grid">
-          <div class="repository-home__info__attribute bh-grid__item">
-            <h1 class="bh-title-2">Intenties</h1>
-            <div class="repository-home__info__attribute__card">
-              <bh-badge
-                v-for="(intent, index) in repository.intents"
-                :key="index"
-                size="small"
-                color="grey"
-                class="repository-home__info__attribute__card__badge">
-                <span v-if="intent">{{ intent.value }}</span>
-              </bh-badge>
+        <div v-if="repository.intents.length > 0 || repository.labels_list.length > 0">
+          <h1 class="bh-title-1">Can identify</h1>
+          <div class="bh-grid">
+            <div
+              v-if="repository.intents.length > 0"
+              class="repository-home__info__attribute bh-grid__item">
+              <h1 class="bh-title-2">Intenties</h1>
+              <div class="repository-home__info__attribute__card">
+                <bh-badge
+                  v-for="(intent, index) in repository.intents"
+                  :key="index"
+                  size="small"
+                  color="grey"
+                  class="repository-home__info__attribute__card__badge">
+                  <span v-if="intent">{{ intent.value }}</span>
+                </bh-badge>
+              </div>
             </div>
-          </div>
-          <div class="repository-home__info__attribute bh-grid__item">
-            <h1 class="bh-title-2">Categories</h1>
-            <div class="repository-home__info__attribute__card">
-              <bh-badge
-                v-for="(category, index) in repository.categories_list"
-                :key="index"
-                size="small"
-                color="grey"
-                class="repository-home__info__attribute__card__badge">
-                <span>{{ category }}</span>
-              </bh-badge>
+            <div
+              v-if="repository.labels_list.length > 0"
+              class="repository-home__info__attribute bh-grid__item">
+              <h1 class="bh-title-2">Labels</h1>
+              <div class="repository-home__info__attribute__card">
+                <bh-badge
+                  v-for="(label, index) in repository.labels_list"
+                  :key="index"
+                  size="small"
+                  color="grey"
+                  class="repository-home__info__attribute__card__badge">
+                  <span>{{ label }}</span>
+                </bh-badge>
+              </div>
             </div>
           </div>
         </div>

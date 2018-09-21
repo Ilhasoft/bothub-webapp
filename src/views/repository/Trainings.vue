@@ -7,7 +7,22 @@
       v-if="repository"
       class="trainings">
       <div class="trainings__new-example">
-        <new-example-form :repository="repository" />
+        <div v-if="repository.authorization">
+          <new-example-form
+            v-if="repository.authorization.can_contribute"
+            :repository="repository" />
+          <div v-else-if="authenticated">
+            <div class="notification is-warning">
+              You can not contribute to this repository
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="notification is-info">
+            Sign in to your account to contribute to this repository.
+          </div>
+          <login-form hide-forgot-password />
+        </div>
       </div>
       <div class="trainings__navigation">
         <bh-navigation :actived.sync="currentPath">
@@ -60,6 +75,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
+import LoginForm from '@/components-v1/auth/LoginForm';
 
 
 export default {
@@ -69,6 +85,7 @@ export default {
     IntentsAndLabelsList,
     NewExampleForm,
     ExamplesList,
+    LoginForm,
   },
   extends: RepositoryBase,
   data() {

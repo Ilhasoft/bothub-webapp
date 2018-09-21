@@ -5,7 +5,7 @@
     :error-code="errorCode">
     <div v-if="repository">
       <div class="notification">
-        <div>
+        <div v-if="repository.authorization.can_contribute">
           <div class="columns">
             <div class="column">
               <b-field label="Translate from:">
@@ -30,6 +30,17 @@
             </div>
           </div>
         </div>
+        <div v-else-if="authenticated">
+          <div class="notification is-warning">
+            You can not contribute to this repository
+          </div>
+        </div>
+        <div v-else>
+          <div class="notification is-info">
+            Sign in to your account to contribute to this repository.
+          </div>
+          <login-form hide-forgot-password />
+        </div>
       </div>
       <translate-list
         v-if="!!translate.from && !!translate.to"
@@ -41,12 +52,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
 import TranslateList from '@/components-v1/translate/TranslateList';
 import TranslationsList from '@/components-v1/translate/TranslationsList';
-import { mapActions } from 'vuex';
+import LoginForm from '@/components-v1/auth/LoginForm';
 
 
 const components = {
@@ -54,6 +66,7 @@ const components = {
   LanguageSelect,
   TranslateList,
   TranslationsList,
+  LoginForm,
 };
 
 export default {
