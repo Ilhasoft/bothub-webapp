@@ -3,10 +3,12 @@
     v-show="open"
     class="bh-modal">
     <div
+      ref="background"
       class="bh-modal__background"
       @click="backgroundClose()" />
     <div class="bh-modal__close">
       <button
+        ref="closeBtn"
         class="bh-modal__close__button"
         @click="close()">
         <bh-icon
