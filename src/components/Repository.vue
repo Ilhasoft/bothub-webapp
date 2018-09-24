@@ -419,6 +419,12 @@
         </div>
       </div>
     </b-modal>
+    <train-modal
+      v-if="repository"
+      :open.sync="trainModalOpen"
+      :ready-for-train="repository.ready_for_train"
+      :requirements-to-train="repository.requirements_to_train"
+      :languages-ready-for-train="repository.languages_ready_for_train" />
     <analyze-text-drawer
       v-if="repository && authenticated"
       :owner-nickname="repository.owner__nickname"
@@ -449,6 +455,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
+import TrainModal from '@/components/repository/TrainModal';
 
 
 const components = {
@@ -471,6 +478,7 @@ const components = {
   RequestAuthorizationForm,
   AuthorizationRequestsList,
   IntentsAndLabelsList,
+  TrainModal,
 };
 
 export default {
@@ -492,6 +500,7 @@ export default {
       toLanguage: null,
       requestAuthorizationModal: false,
       managerAuthorizationModalOpen: false,
+      trainModalOpen: true,
     };
   },
   computed: {
