@@ -9,6 +9,9 @@ $color-secondary: #87b4d9;
 $color-secondary-inverted: white;
 
 $color-danger: #F44336;
+$color-info: #209cee;
+$color-warning: #ffdd57;
+
 
 $colors: (
   ('color-grey', $color-grey),
@@ -18,4 +21,7 @@ $colors: (
   ('color-primary-inverted', $color-primary-inverted),
   ('color-secondary', $color-secondary),
   ('color-secondary-inverted', $color-secondary-inverted),
+  ('color-danger', $color-danger),
+  ('color-info', $color-info),
+  ('color-warning', $color-warning),
 );

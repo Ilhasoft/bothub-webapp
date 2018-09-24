@@ -5,9 +5,9 @@
     :error-code="errorCode">
     <div
       v-if="repository && repository.authorization"
-      class="settings">
+      class="repository-settings">
       <div v-if="repository.authorization.can_write">
-        <div class="settings__edit-repository-section">
+        <div class="repository-settings__edit-repository-section">
           <h1 class="bh-title-2">Edit Repository</h1>
           <edit-repository-form
             :owner-nickname="repository.owner__nickname"
@@ -16,7 +16,7 @@
             @edited="onEdited()" />
         </div>
         <hr>
-        <div class="settings__manager-team-section">
+        <div class="repository-settings__manager-team-section">
           <h1 class="bh-title-2">Manager Team</h1>
           <set-authorization-role-form
             ref="setAuthorizationRoleForm"
@@ -32,7 +32,9 @@
             @review="onReviewAuthorizationRequest()" />
         </div>
       </div>
-      <div v-else-if="authenticated">
+      <div
+        v-else-if="authenticated"
+        class="bh-notification">
         <div class="bh-notification is-warning">
           You can not edit this repository
         </div>
@@ -40,7 +42,7 @@
     </div>
     <div
       v-else
-      class="settings__login-section">
+      class="repository-settings__login-section">
       <div class="bh-notification is-info">
         Sign in to your account to edit this repository.
       </div>
@@ -50,6 +52,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
@@ -60,20 +63,23 @@ import AuthorizationRequestsList from '@/components-v1/repository/AuthorizationR
 import LoginForm from '@/components-v1/auth/LoginForm';
 
 
-const components = {
-  RepositoryViewBase,
-  EditProfileForm,
-  EditRepositoryForm,
-  SetAuthorizationRoleForm,
-  AuthorizationsList,
-  AuthorizationRequestsList,
-  LoginForm,
-};
-
 export default {
   name: 'RepositorySettings',
-  components,
+  components: {
+    RepositoryViewBase,
+    EditProfileForm,
+    EditRepositoryForm,
+    SetAuthorizationRoleForm,
+    AuthorizationsList,
+    AuthorizationRequestsList,
+    LoginForm,
+  },
   extends: RepositoryBase,
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
+  },
   methods: {
     getEditInitialData() {
       const {
@@ -110,7 +116,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .settings {
+  .repository-settings {
     padding: -1rem;
 
     &__edit-repository-section {

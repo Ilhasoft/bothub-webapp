@@ -5,26 +5,26 @@
     :error-code="errorCode">
     <div
       v-if="repository"
-      class="trainings">
-      <div class="trainings__new-example">
-        <div v-if="repository.authorization">
-          <new-example-form
-            v-if="repository.authorization.can_contribute"
-            :repository="repository" />
-          <div v-else-if="authenticated">
-            <div class="notification is-warning">
-              You can not contribute to this repository
-            </div>
+      class="repository-trainings">
+      <div class="repository-trainings__new-example">
+        <div
+          v-if="repository.authorization &&
+          repository.authorization.can_contribute">
+          <new-example-form :repository="repository" />
+        </div>
+        <div v-else-if="authenticated">
+          <div class="bh-notification is-warning">
+            You can not contribute to this repository
           </div>
         </div>
         <div v-else>
-          <div class="notification is-info">
+          <div class="bh-notification is-info">
             Sign in to your account to contribute to this repository.
           </div>
           <login-form hide-forgot-password />
         </div>
       </div>
-      <div class="trainings__navigation">
+      <div class="repository-trainings__navigation">
         <bh-navigation :actived.sync="currentPath">
           <div label="Home">
             <intents-and-labels-list
@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
@@ -95,6 +96,11 @@ export default {
       currentLabel: null,
       currentEntity: null,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
   },
   methods: {
     onShowSentences({
@@ -125,7 +131,8 @@ export default {
 @import '~bh/assets/scss/colors.scss';
 
 
-.trainings {
+.repository-trainings {
+
   &__new-example {
     padding: 1rem;
     background-color: $color-lighter-grey;

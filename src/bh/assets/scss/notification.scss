@@ -1,26 +1,29 @@
 @import '~./colors.scss';
+
+
 .bh {
-  margin-bottom: -1rem;
 
   &-notification {
-    padding:1.5rem 2.5rem 1.5rem 2.5rem;
-    margin-bottom: 1rem;
+    padding:1.5rem 2.5rem;
+    background-color: $color-lighter-grey;
     border-radius: .25rem;
-
   }
 }
 
 .is-info {
+  margin: 1rem 0;
   color: $color-primary-inverted;
-  background-color:#167df0;
+  background-color: $color-info
 }
 
 .is-warning {
+  margin: 1rem 0;
   color: $color-bolder-grey;
-  background-color: #ffdd57;
+  background-color: $color-warning
 }
 
 .is-danger {
+  margin: 1rem 0;
   color: $color-primary-inverted;
   background-color: $danger;
 }

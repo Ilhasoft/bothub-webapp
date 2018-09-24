@@ -4,9 +4,9 @@
     :loading="loading"
     :error-code="errorCode">
     <div v-if="repository">
-      <div class="notification">
-        <div class="columns">
-          <div class="column">
+      <div class="bh-notification">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
             <translations-status
               ref="translationsStatus"
               :owner-nickname="repository.owner__nickname"

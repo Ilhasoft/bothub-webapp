@@ -18,7 +18,7 @@
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>Header:</strong></p>
-              <div class="pre">Authorization: Bearer repository.authorization.uuid </div>
+              <div class="pre">Authorization: Bearer {{ repository.authorization.uuid }} </div>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>POST with form-data:</strong></p>
@@ -97,11 +97,9 @@ export default {
 <style lang="scss">
 .repository-analyze-text {
   padding: 1rem;
-  margin-top: -1rem;
-  margin-bottom: -1rem;
 
   &__item {
-    margin: 1rem;
+    margin: 1rem 0;
   }
 }
 </style>
