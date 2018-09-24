@@ -6,7 +6,7 @@
     <div
       v-if="repository"
       class="repository-analyze-text">
-      <div>
+      <div v-if="repository.authorization" >
         <div class="bh-grid">
           <div class="bh-grid__item">
             <div class="repository-analyze-text__item">
@@ -74,14 +74,22 @@ text: [text to analyze]</pre>
           </div>
         </div>
       </div>
+      <div v-else>
+        <div class="bh-notification is-info">
+          Sign in to your account to contribute to this repository.
+        </div>
+        <login-form hide-forgot-password />
+      </div>
     </div>
   </repository-view-base>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
+import LoginForm from '@/components-v1/auth/LoginForm';
 
 
 export default {
@@ -89,8 +97,14 @@ export default {
   components: {
     RepositoryViewBase,
     RequestGenerator,
+    LoginForm,
   },
   extends: RepositoryBase,
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
+  },
 };
 </script>
 
