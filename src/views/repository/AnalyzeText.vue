@@ -3,10 +3,10 @@
     :repository="repository"
     :loading="loading"
     :error-code="errorCode">
-    <div
-      v-if="repository"
-      class="repository-analyze-text">
-      <div v-if="repository.authorization" >
+    <div v-if="repository">
+      <div
+        v-if="authenticated"
+        class="repository-analyze-text" >
         <div class="bh-grid">
           <div class="bh-grid__item">
             <div class="repository-analyze-text__item">
@@ -74,8 +74,10 @@ text: [text to analyze]</pre>
           </div>
         </div>
       </div>
-      <div v-else>
-        <div class="bh-notification is-info">
+      <div
+        v-else
+        class="bh-notification">
+        <div class="bh-notification bh-notification--info">
           Sign in to your account to contribute to this repository.
         </div>
         <login-form hide-forgot-password />

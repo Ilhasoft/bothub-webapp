@@ -32,12 +32,12 @@
           </div>
         </div>
         <div v-else-if="authenticated">
-          <div class="bh-notification is-warning">
+          <div class="bh-notification bh-notification--warning">
             You can not contribute to this repository
           </div>
         </div>
         <div v-else>
-          <div class="bh-notification is-info">
+          <div class="bh-notification bh-notification--info">
             Sign in to your account to contribute to this repository.
           </div>
           <login-form hide-forgot-password />

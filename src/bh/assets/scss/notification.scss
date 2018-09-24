@@ -4,27 +4,29 @@
 .bh {
 
   &-notification {
-    padding:1.5rem 2.5rem;
+    padding: 1.5rem 2.5rem;
     background-color: $color-lighter-grey;
-    border-radius: .25rem;
+    border-radius: $radius-small;
+
+    &--info {
+      margin: 1rem 0;
+      color: $color-primary-inverted;
+      background-color: $color-info
+    }
+
+    &--warning {
+      margin: 1rem 0;
+      color: $color-bolder-grey;
+      background-color: $color-warning
+    }
+
+    &--danger {
+      margin: 1rem 0;
+      color: $color-primary-inverted;
+      background-color: $danger;
+    }
   }
 }
 
-.is-info {
-  margin: 1rem 0;
-  color: $color-primary-inverted;
-  background-color: $color-info
-}
 
-.is-warning {
-  margin: 1rem 0;
-  color: $color-bolder-grey;
-  background-color: $color-warning
-}
-
-.is-danger {
-  margin: 1rem 0;
-  color: $color-primary-inverted;
-  background-color: $danger;
-}
 

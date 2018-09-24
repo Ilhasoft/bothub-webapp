@@ -35,15 +35,15 @@
       <div
         v-else-if="authenticated"
         class="bh-notification">
-        <div class="bh-notification is-warning">
+        <div class="bh-notification bh-notification--warning">
           You can not edit this repository
         </div>
       </div>
     </div>
     <div
       v-else
-      class="repository-settings__login-section">
-      <div class="bh-notification is-info">
+      class="repository-settings__login-section bh-notification">
+      <div class="bh-notification bh-notification--info">
         Sign in to your account to edit this repository.
       </div>
       <login-form hide-forgot-password />
