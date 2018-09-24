@@ -12,7 +12,6 @@ $color-danger: #F44336;
 $color-info: #209cee;
 $color-warning: #ffdd57;
 
-
 $colors: (
   ('color-grey', $color-grey),
   ('color-lighter-grey', $color-lighter-grey),
@@ -21,7 +20,10 @@ $colors: (
   ('color-primary-inverted', $color-primary-inverted),
   ('color-secondary', $color-secondary),
   ('color-secondary-inverted', $color-secondary-inverted),
-  ('color-danger', $color-danger),
-  ('color-info', $color-info),
-  ('color-warning', $color-warning),
+);
+
+$notification-colors: (
+  ('danger', $color-danger, white),
+  ('info', $color-info, white),
+  ('warning', $color-warning, black),
 );

@@ -7,22 +7,16 @@
     background-color: $color-lighter-grey;
     border-radius: $radius-small;
 
-    &--info {
-      margin: 1rem 0;
-      color: $color-primary-inverted;
-      background-color: $color-info
-    }
+    @each $color in $notification-colors {
+      $definition: nth($color, 1);
+      $bg: nth($color, 2);
+      $font-color: nth($color, 3);
 
-    &--warning {
-      margin: 1rem 0;
-      color: $color-bolder-grey;
-      background-color: $color-warning
-    }
-
-    &--danger {
-      margin: 1rem 0;
-      color: $color-primary-inverted;
-      background-color: $danger;
+      &--#{$definition} {
+        margin: 1rem 0;
+        color: $font-color;
+        background-color: $bg;
+      }
     }
   }
 }
