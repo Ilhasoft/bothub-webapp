@@ -124,9 +124,8 @@ export default {
 
 <style lang="scss">
 .repository-translate {
-
   &__translate-arrow-icon {
-       align-self: center;
+    align-self: center;
   }
 }
 </style>

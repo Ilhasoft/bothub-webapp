@@ -132,7 +132,6 @@ export default {
 
 
 .repository-trainings {
-
   &__new-example {
     padding: 1rem;
     background-color: $color-lighter-grey;

@@ -34,11 +34,11 @@
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>There is no description for this repository</p>
         </div>
-        <div v-if="repository.intents.length > 0 || repository.labels_list.length > 0">
+        <div v-if="hasIntents || hasLabels">
           <h1 class="bh-title-1">Can identify</h1>
           <div class="bh-grid">
             <div
-              v-if="repository.intents.length > 0"
+              v-if="hasIntents"
               class="repository-home__info__attribute bh-grid__item">
               <h1 class="bh-title-2">Intenties</h1>
               <div class="repository-home__info__attribute__card">
@@ -53,7 +53,7 @@
               </div>
             </div>
             <div
-              v-if="repository.labels_list.length > 0"
+              v-if="hasLabels"
               class="repository-home__info__attribute bh-grid__item">
               <h1 class="bh-title-2">Labels</h1>
               <div class="repository-home__info__attribute__card">
@@ -79,14 +79,20 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 
 
-const components = {
-  RepositoryViewBase,
-};
-
 export default {
   name: 'RepositoryHome',
-  components,
+  components: {
+    RepositoryViewBase,
+  },
   extends: RepositoryBase,
+  computed: {
+    hasIntents() {
+      return this.repository.intents.length > 0;
+    },
+    hasLabels() {
+      return this.repository.labels_list.length > 0;
+    },
+  },
 };
 </script>
 
