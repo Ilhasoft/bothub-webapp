@@ -41,6 +41,7 @@ export default {
       data() {
         return {
           modalList: [],
+          initialHtmlOverflow: document.querySelector('html').style.overflow,
         };
       },
       computed: {
@@ -52,7 +53,7 @@ export default {
         hasModalOpen(value) {
           document.querySelector('html').style.overflow = value
             ? 'hidden'
-            : 'auto';
+            : this.initialHtmlOverflow;
         },
       },
       methods: {
