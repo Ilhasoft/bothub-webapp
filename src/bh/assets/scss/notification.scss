@@ -4,6 +4,7 @@
 .bh {
   &-notification {
     padding: 1.5rem 2.5rem;
+    margin: 0.5rem 0;
     background-color: $color-lighter-grey;
     border-radius: $radius-small;
 
@@ -13,8 +14,6 @@
       $font-color: nth($color, 3);
 
       &--#{$definition} {
-        padding: 1.5rem;
-        margin: 1rem 0;
         color: $font-color;
         background-color: $bg;
       }
