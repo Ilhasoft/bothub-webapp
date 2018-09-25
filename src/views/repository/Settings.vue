@@ -116,15 +116,15 @@ export default {
 </script>
 
 <style lang="scss">
-  .repository-settings {
-    padding: 1rem;
+.repository-settings {
+  padding: 1rem;
 
-    &__edit-repository-section {
-      margin: 1rem 0;
-    }
-
-    &__manager-team-section {
-      margin: 1rem 0;
-    }
+  &__edit-repository-section {
+    margin: 1rem 0;
   }
+
+  &__manager-team-section {
+    margin: 1rem 0;
+  }
+}
 </style>
