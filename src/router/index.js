@@ -62,7 +62,7 @@ export default new Router({
       component: RepositoryTranslations,
     },
     {
-      path: '/:ownerNickname/:slug/analyze_text/',
+      path: '/:ownerNickname/:slug/analyzetext/',
       name: 'repository-analyze-text',
       component: RepositoryAnalyzeText,
     },

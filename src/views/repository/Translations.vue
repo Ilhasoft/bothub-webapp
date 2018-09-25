@@ -31,16 +31,14 @@ import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
 import TranslationsList from '@/components-v1/translate/TranslationsList';
 
 
-const components = {
-  RepositoryViewBase,
-  TranslationsStatus,
-  TranslationsList,
-  mapGetters,
-};
-
 export default {
   name: 'RepositoryTranslations',
-  components,
+  components: {
+    RepositoryViewBase,
+    TranslationsStatus,
+    TranslationsList,
+    mapGetters,
+  },
   extends: RepositoryBase,
   data() {
     return {

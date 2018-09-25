@@ -7,14 +7,14 @@
       v-if="repository"
       class="repository-trainings">
       <div class="repository-trainings__new-example">
-        <div
-          v-if="repository.authorization &&
-          repository.authorization.can_contribute">
-          <new-example-form :repository="repository" />
-        </div>
-        <div v-else-if="authenticated">
-          <div class="bh-notification bh-notification--warning">
-            You can not contribute to this repository
+        <div v-if="authenticated">
+          <new-example-form
+            v-if="repository.authorization.can_contribute"
+            :repository="repository" />
+          <div v-else>
+            <div class="bh-notification bh-notification--warning">
+              You can not contribute to this repository
+            </div>
           </div>
         </div>
         <div v-else>

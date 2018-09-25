@@ -5,10 +5,10 @@
     :error-code="errorCode">
     <div v-if="repository">
       <div class="bh-notification">
-        <div
-          v-if="repository.authorization &&
-          repository.authorization.can_contribute">
-          <div class="bh-grid repository-translate">
+        <div v-if="authenticated">
+          <div
+            v-if="repository.authorization.can_contribute"
+            class="bh-grid repository-translate">
             <div class="bh-grid__item">
               <bh-field label="Translate from:">
                 <language-select v-model="translate.from" />
@@ -17,9 +17,9 @@
             <div class="repository-translate__translate-arrow-icon">
               <div class="field">
                 <label class="label">&nbsp;</label>
-                <b-icon
-                  icon="chevron-right"
-                  size="is-medium" />
+                <bh-icon
+                  value="chevron-right"
+                  size="small" />
               </div>
             </div>
             <div class="bh-grid__item">
@@ -30,10 +30,10 @@
               </bh-field>
             </div>
           </div>
-        </div>
-        <div v-else-if="authenticated">
-          <div class="bh-notification bh-notification--warning">
-            You can not contribute to this repository
+          <div v-else>
+            <div class="bh-notification bh-notification--warning">
+              You can not contribute to this repository
+            </div>
           </div>
         </div>
         <div v-else>
@@ -62,17 +62,15 @@ import TranslationsList from '@/components-v1/translate/TranslationsList';
 import LoginForm from '@/components-v1/auth/LoginForm';
 
 
-const components = {
-  RepositoryViewBase,
-  LanguageSelect,
-  TranslateList,
-  TranslationsList,
-  LoginForm,
-};
-
 export default {
   name: 'RepositoryTranslate',
-  components,
+  components: {
+    RepositoryViewBase,
+    LanguageSelect,
+    TranslateList,
+    TranslationsList,
+    LoginForm,
+  },
   extends: RepositoryBase,
   data() {
     return {
@@ -93,7 +91,6 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
-
     async updateRepository(doNull = true) {
       const { ownerNickname, slug } = this.$route.params;
       if (doNull) {

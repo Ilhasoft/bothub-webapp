@@ -3,10 +3,10 @@
     :repository="repository"
     :loading="loading"
     :error-code="errorCode">
-    <div
-      v-if="repository && repository.authorization"
-      class="repository-settings">
-      <div v-if="repository.authorization.can_write">
+    <div v-if="repository && authenticated">
+      <div
+        v-if="repository.authorization.can_write"
+        class="repository-settings">
         <div class="repository-settings__edit-repository-section">
           <h1 class="bh-title-2">Edit Repository</h1>
           <edit-repository-form
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div
-        v-else-if="authenticated"
+        v-else
         class="bh-notification">
         <div class="bh-notification bh-notification--warning">
           You can not edit this repository
@@ -117,18 +117,14 @@ export default {
 
 <style lang="scss">
   .repository-settings {
-    padding: -1rem;
+    padding: 1rem;
 
     &__edit-repository-section {
-      padding: 1rem;
+      margin: 1rem 0;
     }
 
     &__manager-team-section {
-      padding: 1rem;
-    }
-
-    &__login-section {
-      padding: 1rem;
+      margin: 1rem 0;
     }
   }
 </style>

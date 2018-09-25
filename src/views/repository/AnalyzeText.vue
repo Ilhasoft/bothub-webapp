@@ -70,7 +70,7 @@ text: [text to analyze]</pre>
             </div>
             <request-generator
               :default-language-field="repository.language"
-              authorization-uuid="repository.authorizatiom.uuid"/>
+              :authorization-uuid="repository.authorization.uuid"/>
           </div>
         </div>
       </div>

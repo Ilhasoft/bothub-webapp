@@ -11,6 +11,7 @@ import Botinho from 'bh/assets/icons/botinho.svg';
 import DotsVertical from 'bh/assets/icons/dots-vertical.svg';
 import FlagVariant from 'bh/assets/icons/flag-variant.svg';
 import Home from 'bh/assets/icons/home.svg';
+import ChevronRight from 'bh/assets/icons/chevron-right.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -35,6 +36,7 @@ export const icons = {
   'dots-vertical': DotsVertical,
   'flag-variant': FlagVariant,
   home: Home,
+  'chevron-right': ChevronRight,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,

@@ -40,15 +40,15 @@
             <div
               v-if="hasIntents"
               class="repository-home__info__attribute bh-grid__item">
-              <h1 class="bh-title-2">Intenties</h1>
+              <h1 class="bh-title-2">Intents</h1>
               <div class="repository-home__info__attribute__card">
                 <bh-badge
-                  v-for="(intent, index) in repository.intents"
-                  :key="index"
+                  v-for="(intent) in repository.intents_list"
+                  :key="intent"
                   size="small"
                   color="grey"
                   class="repository-home__info__attribute__card__badge">
-                  <span v-if="intent">{{ intent.value }}</span>
+                  <span>{{ intent }}</span>
                 </bh-badge>
               </div>
             </div>
@@ -58,8 +58,8 @@
               <h1 class="bh-title-2">Labels</h1>
               <div class="repository-home__info__attribute__card">
                 <bh-badge
-                  v-for="(label, index) in repository.labels_list"
-                  :key="index"
+                  v-for="(label) in repository.labels_list"
+                  :key="label"
                   size="small"
                   color="grey"
                   class="repository-home__info__attribute__card__badge">
@@ -87,7 +87,7 @@ export default {
   extends: RepositoryBase,
   computed: {
     hasIntents() {
-      return this.repository.intents.length > 0;
+      return this.repository.intents_list.length > 0;
     },
     hasLabels() {
       return this.repository.labels_list.length > 0;
