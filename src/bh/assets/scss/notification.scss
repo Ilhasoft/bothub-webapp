@@ -13,6 +13,7 @@
       $font-color: nth($color, 3);
 
       &--#{$definition} {
+        padding: 1.5rem;
         margin: 1rem 0;
         color: $font-color;
         background-color: $bg;
