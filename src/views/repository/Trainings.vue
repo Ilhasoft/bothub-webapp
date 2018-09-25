@@ -14,7 +14,7 @@
           <div label="Home">
             <intents-and-labels-list
               :intents="repository.intents"
-              :labels="repository.labels"
+              :labels="repository.labels.concat([repository.other_label])"
               @showSentences="onShowSentences($event)" />
           </div>
           <div
