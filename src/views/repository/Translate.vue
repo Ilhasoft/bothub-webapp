@@ -87,6 +87,11 @@ export default {
       'authenticated',
     ]),
   },
+  watch: {
+    async authenticated() {
+      await this.updateRepository();
+    },
+  },
   methods: {
     ...mapActions([
       'getRepository',

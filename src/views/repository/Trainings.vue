@@ -106,6 +106,9 @@ export default {
     ]),
   },
   watch: {
+    async authenticated() {
+      await this.updateRepository();
+    },
     currentIntent(value) {
       this.searchQueryIntent = value
         ? { intent: value.value }
