@@ -22,19 +22,19 @@ export default class List {
       .filter(item => !this.deletions.includes(item.id));
   }
 
-  set items(value) {
-    this.itemsList = value;
-  }
-
   get hasNext() {
     return !this.loading && !!this.nextEntryPoint;
   }
 
   async next() {
+    if (this.loading) {
+      return false;
+    }
+
     this.loading = true;
     const response = await request.$http.get(this.nextEntryPoint);
     this.nextEntryPoint = response.data.next;
-    this.items = this.itemsList.concat(response.data.results);
+    this.itemsList = this.itemsList.concat(response.data.results);
     this.loading = false;
     return this.items;
   }
@@ -44,7 +44,7 @@ export default class List {
   }
 
   async reset() {
-    this.items = [];
+    this.itemsList = [];
     this.deletions = [];
     this.nextEntryPoint = this.initial;
   }

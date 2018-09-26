@@ -22,6 +22,8 @@ export const VERBOSE_LANGUAGES = {
   it: 'Italian',
   nl: 'Dutch',
   pt_br: 'Brazilian Portuguese',
+  id: 'Indonesian',
+  mn: 'Mongolian',
 };
 
 export const languageListToDict = list => (list.reduce((current, lang) => {
@@ -66,3 +68,33 @@ export const formatters = {
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
 };
+
+const exampleSearchRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
+
+const extractGroupsFromRegex = (regularExpression, value) => {
+  let match;
+  const regexGroups = [];
+  /* eslint-disable no-cond-assign */
+  while (match = regularExpression.exec(value)) {
+    regexGroups.push(match);
+  }
+  /* eslint-enable */
+  return regexGroups;
+};
+
+/* Receive a string and mount a dicty from groups of a regular expression matchs */
+export const exampleSearchToDicty = value => extractGroupsFromRegex(exampleSearchRegex, value)
+  .reduce(
+    (acc, { 2: key, 3: v }) => {
+      Object.assign(acc, { [key]: v });
+      return acc;
+    },
+    { search: value.toLowerCase().replace(exampleSearchRegex, '').trim() },
+  );
+
+/* Receive a Object and return a String with each Key and value from Object */
+export const exampleSearchToString = value => Object.keys(value)
+  .map(key => (key === 'search'
+    ? value[key]
+    : `${key}:${value[key]}`))
+  .join(' ');

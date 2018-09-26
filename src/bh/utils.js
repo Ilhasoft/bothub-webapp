@@ -9,6 +9,7 @@ import Equal from 'bh/assets/icons/equal.svg';
 import Account from 'bh/assets/icons/account.svg';
 import Botinho from 'bh/assets/icons/botinho.svg';
 import DotsVertical from 'bh/assets/icons/dots-vertical.svg';
+import Magnify from 'bh/assets/icons/magnify.svg';
 import FlagVariant from 'bh/assets/icons/flag-variant.svg';
 import Home from 'bh/assets/icons/home.svg';
 import ChevronRight from 'bh/assets/icons/chevron-right.svg';
@@ -20,6 +21,8 @@ import FlagIt from 'bh/assets/icons/flag-it.svg';
 import FlagNl from 'bh/assets/icons/flag-nl.svg';
 import FlagPt from 'bh/assets/icons/flag-pt.svg';
 import FlagUs from 'bh/assets/icons/flag-us.svg';
+import FlagId from 'bh/assets/icons/flag-id.svg';
+import FlagMn from 'bh/assets/icons/flag-mn.svg';
 
 
 export const icons = {
@@ -34,6 +37,7 @@ export const icons = {
   account: Account,
   botinho: Botinho,
   'dots-vertical': DotsVertical,
+  magnify: Magnify,
   'flag-variant': FlagVariant,
   home: Home,
   'chevron-right': ChevronRight,
@@ -45,6 +49,8 @@ export const icons = {
   'flag-nl': FlagNl,
   'flag-pt': FlagPt,
   'flag-us': FlagUs,
+  'flag-id': FlagId,
+  'flag-mn': FlagMn,
 };
 
 /* istanbul ignore next */
