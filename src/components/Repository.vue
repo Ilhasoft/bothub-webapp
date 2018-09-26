@@ -286,6 +286,9 @@
                     :default-language-field="repository.language"/>
                 </div>
               </div>
+              <hr>
+              <h3 class="title is-3">Updates</h3>
+              <updates-list :repository="repository" />
             </div>
             <div v-else>
               <div class="notification is-warning">
@@ -452,6 +455,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
+import UpdatesList from '@/components/update/UpdatesList';
 
 
 const components = {
@@ -474,6 +478,7 @@ const components = {
   RequestAuthorizationForm,
   AuthorizationRequestsList,
   IntentsAndLabelsList,
+  UpdatesList,
 };
 
 export default {
