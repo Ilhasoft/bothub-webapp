@@ -96,21 +96,6 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
-    async updateRepository(doNull = true) {
-      const { ownerNickname, slug } = this.$route.params;
-      if (doNull) {
-        this.repository = null;
-      }
-      try {
-        const response = await this.getRepository({ ownerNickname, slug });
-        this.repository = response.data;
-        this.translate.from = this.repository.language;
-      } catch (e) {
-        this.hasError = true;
-        const { detail } = e.response.data;
-        this.errorDetail = detail;
-      }
-    },
     async onTranslated() {
       const {
         translationsStatus,

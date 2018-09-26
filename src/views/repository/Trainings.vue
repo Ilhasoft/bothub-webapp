@@ -10,7 +10,8 @@
         <div v-if="authenticated">
           <new-example-form
             v-if="repository.authorization.can_contribute"
-            :repository="repository" />
+            :repository="repository"
+            @created="onExampleCreated()" />
           <div v-else>
             <div class="bh-notification bh-notification--warning">
               You can not contribute to this repository
@@ -39,7 +40,8 @@
               <example-search-input v-model="searchQueryIntent" />
               <examples-list
                 :repository="repository"
-                :query="searchQueryIntent" />
+                :query="searchQueryIntent"
+                @exampleDeleted="onExampleDeleted" />
             </div>
           </div>
           <bh-navigation
@@ -50,7 +52,8 @@
               <example-search-input v-model="searchQueryLabel" />
               <examples-list
                 :repository="repository"
-                :query="searchQueryLabel" />
+                :query="searchQueryLabel"
+                @exampleDeleted="onExampleDeleted" />
             </div>
             <div
               slot="entity"
@@ -58,7 +61,8 @@
               <example-search-input v-model="searchQueryEntity" />
               <examples-list
                 :repository="repository"
-                :query="searchQueryEntity" />
+                :query="searchQueryEntity"
+                @exampleDeleted="onExampleDeleted" />
             </div>
           </bh-navigation>
         </bh-navigation>
@@ -145,6 +149,12 @@ export default {
     openEntity(entity) {
       this.currentEntity = entity;
       this.currentPath = 'label.entity';
+    },
+    onExampleCreated() {
+      this.updateRepository(true);
+    },
+    onExampleDeleted() {
+      this.updateRepository(true);
     },
   },
 };
