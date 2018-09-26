@@ -18,6 +18,7 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
         </tbody>
       </table>
     </div>
+    <!---->
     <div class="train-modal__buttons level">
       <div class="level-left">
         <div class="train-modal__flags">
@@ -40,6 +41,9 @@ exports[`TrainModal.vue renders correctly 1`] = `
 <bhmodal-stub>
   <div class="train-modal">
     <h1 class="title is-3">Train Status</h1>
+    <div>
+      <p>You don't have any pendency to train.</p>
+    </div>
     <div class="train-modal__buttons level">
       <div class="level-left">
         <div class="train-modal__flags">

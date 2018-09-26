@@ -20,6 +20,9 @@
           </tbody>
         </table>
       </div>
+      <div v-if="Object.keys(requirementsToTrain).length === 0">
+        <p>You don't have any pendency to train.</p>
+      </div>
       <div class="train-modal__buttons level">
         <div class="level-left">
           <div class="train-modal__flags">
