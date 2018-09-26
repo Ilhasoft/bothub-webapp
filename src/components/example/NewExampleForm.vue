@@ -117,8 +117,8 @@ export default {
         errors.push('You need type a text to sentence');
       }
 
-      if (!this.intent && this.entities.length === 0) {
-        errors.push('Set a intent or one entity');
+      if (!this.intent) {
+        errors.push('Intent is required');
       }
 
       return errors;
