@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhModal.vue close modal clicking in background renders correctly 1`] = `
+<div class="bh-modal">
+  <div class="bh-modal__background"></div>
+  <div class="bh-modal__close">
+    <button class="bh-modal__close__button">
+      <bhicon-stub></bhicon-stub>
+    </button>
+  </div>
+  <bhcard-stub class="bh-modal__content"></bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal clicking in closeBtn renders correctly 1`] = `
+<div class="bh-modal">
+  <div class="bh-modal__background"></div>
+  <div class="bh-modal__close">
+    <button class="bh-modal__close__button">
+      <bhicon-stub></bhicon-stub>
+    </button>
+  </div>
+  <bhcard-stub class="bh-modal__content"></bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal pass false via open prop open modal pass true via open prop renders correctly 1`] = `
+<div class="bh-modal" style="">
+  <div class="bh-modal__background"></div>
+  <div class="bh-modal__close">
+    <button class="bh-modal__close__button">
+      <bhicon-stub></bhicon-stub>
+    </button>
+  </div>
+  <bhcard-stub class="bh-modal__content"></bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal pass false via open prop renders correctly 1`] = `
+<div class="bh-modal" style="display: none;">
+  <div class="bh-modal__background"></div>
+  <div class="bh-modal__close">
+    <button class="bh-modal__close__button">
+      <bhicon-stub></bhicon-stub>
+    </button>
+  </div>
+  <bhcard-stub class="bh-modal__content"></bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue renders correctly 1`] = `
+<div class="bh-modal">
+  <div class="bh-modal__background"></div>
+  <div class="bh-modal__close">
+    <button class="bh-modal__close__button">
+      <bhicon-stub></bhicon-stub>
+    </button>
+  </div>
+  <bhcard-stub class="bh-modal__content"></bhcard-stub>
+</div>
+`;

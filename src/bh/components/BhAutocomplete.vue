@@ -163,7 +163,7 @@ export default {
       setTimeout(() => {
         this.closeForced = false;
         this.focused = value;
-      }, 100);
+      }, 200);
     },
     forceClosed() {
       this.closeForced = true;

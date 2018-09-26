@@ -6,7 +6,7 @@
       <repository-info
         :show-manager-authorization-action="repository.authorization.is_admin"
         :show-edit-action="repository.authorization.can_write"
-        :show-train-action="repository.authorization.can_write && repository.ready_for_train"
+        :show-train-action="repository.authorization.can_write"
         :training="training"
         :slug="repository.slug"
         :name="repository.name"
@@ -14,6 +14,9 @@
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
         :votes_sum="repository.votes_sum"
+        :ready-for-train="repository.ready_for_train"
+        :requirements-to-train="repository.requirements_to_train"
+        :languages-ready-for-train="repository.languages_ready_for_train"
         hide-description
         @managerAuthorization="openManagerAuthorization()"
         @train="train()"
