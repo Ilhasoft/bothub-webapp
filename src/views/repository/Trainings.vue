@@ -5,11 +5,26 @@
     :error-code="errorCode">
     <div
       v-if="repository"
-      class="trainings">
-      <div class="trainings__new-example">
-        <new-example-form :repository="repository" />
+      class="repository-trainings">
+      <div class="repository-trainings__new-example">
+        <div v-if="authenticated">
+          <new-example-form
+            v-if="repository.authorization.can_contribute"
+            :repository="repository" />
+          <div v-else>
+            <div class="bh-notification bh-notification--warning">
+              You can not contribute to this repository
+            </div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="bh-notification bh-notification--info">
+            Sign in to your account to contribute to this repository.
+          </div>
+          <login-form hide-forgot-password />
+        </div>
       </div>
-      <div class="trainings__navigation">
+      <div class="repository-trainings__navigation">
         <bh-navigation :actived.sync="currentPath">
           <div label="Home">
             <intents-and-labels-list
@@ -53,11 +68,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
+import LoginForm from '@/components-v1/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 
 
@@ -68,6 +85,7 @@ export default {
     IntentsAndLabelsList,
     NewExampleForm,
     ExamplesList,
+    LoginForm,
     ExampleSearchInput,
   },
   extends: RepositoryBase,
@@ -81,6 +99,11 @@ export default {
       searchQueryLabel: {},
       searchQueryEntity: {},
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
   },
   watch: {
     currentIntent(value) {
@@ -128,7 +151,7 @@ export default {
 @import '~bh/assets/scss/colors.scss';
 
 
-.trainings {
+.repository-trainings {
   &__new-example {
     padding: 1rem;
     background-color: $color-lighter-grey;

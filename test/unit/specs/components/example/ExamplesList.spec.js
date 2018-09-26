@@ -25,4 +25,14 @@ describe('ExamplesList.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  describe('update list', () => {
+    beforeEach(async () => {
+      await wrapper.vm.updateExamples();
+    });
+
+    test('have items', () => {
+      expect(wrapper.vm.examplesList.items.length).toBeGreaterThan(0);
+    });
+  });
 });
