@@ -3,50 +3,52 @@
     :repository="repository"
     :loading="loading"
     :error-code="errorCode">
-    <div v-if="repository && authenticated">
-      <div
-        v-if="repository.authorization.can_write"
-        class="repository-settings">
-        <div class="repository-settings__edit-repository-section">
-          <h1 class="bh-title-2">Edit Repository</h1>
-          <edit-repository-form
-            :owner-nickname="repository.owner__nickname"
-            :slug="repository.slug"
-            :initial-data="getEditInitialData()"
-            @edited="onEdited()" />
+    <div v-if="repository">
+      <div v-if="authenticated">
+        <div
+          v-if="repository.authorization.can_write"
+          class="repository-settings">
+          <div class="repository-settings__edit-repository-section">
+            <h1 class="bh-title-2">Edit Repository</h1>
+            <edit-repository-form
+              :owner-nickname="repository.owner__nickname"
+              :slug="repository.slug"
+              :initial-data="getEditInitialData()"
+              @edited="onEdited()" />
+          </div>
+          <hr>
+          <div class="repository-settings__manager-team-section">
+            <h1 class="bh-title-2">Manager Team</h1>
+            <set-authorization-role-form
+              ref="setAuthorizationRoleForm"
+              :repository-uuid="repository.uuid"
+              @roleSetted="onRoleSetted()" />
+            <authorizations-list
+              ref="authorizationsList"
+              :repository-uuid="repository.uuid"
+              @edit="onEditRole($event)" />
+            <h1 class="bh-title-2">Authorization Requests</h1>
+            <authorization-requests-list
+              :repository-uuid="repository.uuid"
+              @review="onReviewAuthorizationRequest()" />
+          </div>
         </div>
-        <hr>
-        <div class="repository-settings__manager-team-section">
-          <h1 class="bh-title-2">Manager Team</h1>
-          <set-authorization-role-form
-            ref="setAuthorizationRoleForm"
-            :repository-uuid="repository.uuid"
-            @roleSetted="onRoleSetted()" />
-          <authorizations-list
-            ref="authorizationsList"
-            :repository-uuid="repository.uuid"
-            @edit="onEditRole($event)" />
-          <h1 class="bh-title-2">Authorization Requests</h1>
-          <authorization-requests-list
-            :repository-uuid="repository.uuid"
-            @review="onReviewAuthorizationRequest()" />
+        <div
+          v-else
+          class="bh-notification">
+          <div class="bh-notification bh-notification--warning">
+            You can not edit this repository
+          </div>
         </div>
       </div>
       <div
         v-else
-        class="bh-notification">
-        <div class="bh-notification bh-notification--warning">
-          You can not edit this repository
+        class="repository-settings__login-section bh-notification">
+        <div class="bh-notification bh-notification--info">
+          Sign in to your account to edit this repository.
         </div>
+        <login-form hide-forgot-password />
       </div>
-    </div>
-    <div
-      v-else
-      class="repository-settings__login-section bh-notification">
-      <div class="bh-notification bh-notification--info">
-        Sign in to your account to edit this repository.
-      </div>
-      <login-form hide-forgot-password />
     </div>
   </repository-view-base>
 </template>
