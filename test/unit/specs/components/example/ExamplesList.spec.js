@@ -28,7 +28,8 @@ describe('ExamplesList.vue', () => {
 
   describe('update list', () => {
     beforeEach(async () => {
-      await wrapper.vm.updateExamples();
+      wrapper.vm.updateExamples();
+      await wrapper.vm.examplesList.next();
     });
 
     test('have items', () => {

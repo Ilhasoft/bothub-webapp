@@ -45,11 +45,11 @@ export default {
       this.updateExamples(true);
     },
   },
-  async mounted() {
-    await this.updateExamples();
+  mounted() {
+    this.updateExamples();
   },
   methods: {
-    async updateExamples(force = false) {
+    updateExamples(force = false) {
       if (!this.examplesList || force) {
         this.examplesList = this.$api.examples.search(
           this.repository.uuid,
