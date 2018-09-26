@@ -25,7 +25,7 @@
             v-if="showTrainAction"
             :disabled="training"
             class="action repository-header-info-item"
-            @click="$emit('train')">
+            @click="trainModalOpen = true;">
             <b-icon
               :icon="training ? 'refresh' : 'school'"
               :custom-class="training && 'icon-spin' || null" />
@@ -70,6 +70,13 @@
         </div>
       </div>
     </div>
+    <train-modal
+      :open.sync="trainModalOpen"
+      :ready-for-train="readyForTrain"
+      :requirements-to-train="requirementsToTrain"
+      :languages-ready-for-train="languagesReadyForTrain"
+      :training="training"
+      @train="$emit('train')" />
   </div>
 </template>
 
@@ -79,11 +86,14 @@ import { mapActions, mapGetters } from 'vuex';
 import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
 import RepositoryCategoriesList from '@/components/repository/RepositoryCategoriesList';
 import FlagsList from '@/components/shared/FlagsList';
+import TrainModal from '@/components/repository/TrainModal';
+
 
 const components = {
   RepositoryAvatar,
   RepositoryCategoriesList,
   FlagsList,
+  TrainModal,
 };
 
 export default {
@@ -138,6 +148,23 @@ export default {
       type: Number,
       default: 0,
     },
+    readyForTrain: {
+      type: Boolean,
+      default: false,
+    },
+    requirementsToTrain: {
+      type: Object,
+      default: () => ({}),
+    },
+    languagesReadyForTrain: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  data() {
+    return {
+      trainModalOpen: false,
+    };
   },
   computed: {
     ...mapGetters([

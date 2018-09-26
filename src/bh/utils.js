@@ -6,6 +6,11 @@ import DotsHorizontal from 'bh/assets/icons/dots-horizontal.svg';
 import MenuDown from 'bh/assets/icons/menu-down.svg';
 import Earth from 'bh/assets/icons/earth.svg';
 import Equal from 'bh/assets/icons/equal.svg';
+import School from 'bh/assets/icons/school.svg';
+import Minus from 'bh/assets/icons/minus.svg';
+import Check from 'bh/assets/icons/check.svg';
+import Exclamation from 'bh/assets/icons/exclamation.svg';
+import Refresh from 'bh/assets/icons/refresh.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -27,6 +32,11 @@ export const icons = {
   'menu-down': MenuDown,
   earth: Earth,
   equal: Equal,
+  school: School,
+  minus: Minus,
+  check: Check,
+  exclamation: Exclamation,
+  refresh: Refresh,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,

@@ -3,6 +3,6 @@
 exports[`BhDropdown.vue renders correctly 1`] = `
 <div class="bh-dropdown">
   <div></div>
-  <div tabindex="1" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="2" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;

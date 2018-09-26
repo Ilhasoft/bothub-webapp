@@ -37,5 +37,6 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
       </div>
     </div>
   </div>
+  <trainmodal-stub></trainmodal-stub>
 </div>
 `;
