@@ -35,10 +35,9 @@
             repository.authorization.can_write | can_t }} write.</p>
           </div>
           <bh-button
-            :disabled="!repository.ready_for_train"
             class="rpstr-vw-bs__general-header__buttons"
             primary
-            @click="openModal=true">
+            @click="trainModalOpen=true">
             <bh-icon
               value="school"
               size="small"/>
@@ -60,17 +59,19 @@
         <bh-loading />
       </div>
     </div>
-    <p>{{ repository.ready_for_train }}</p>
     <train-modal
+      v-if="repository"
       :ready-for-train="repository.ready_for_train"
       :requirements-to-train="repository.requirements_to_train"
       :languages-ready-for-train="repository.languages_ready_for_train"
-      :open="openModal"
+      :open.sync="trainModalOpen"
+      @train="train()"
     />
   </layout>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
@@ -83,6 +84,11 @@ const ERROR_VERBOSE_LOOKUP = {
 
 export default {
   name: 'RepositoryViewBase',
+  inject: {
+    updateRepository: {
+      default: null,
+    },
+  },
   components: {
     Layout,
     RepositoryInfo,
@@ -112,8 +118,32 @@ export default {
   },
   data() {
     return {
-      openModal: false,
+      trainModalOpen: false,
+      trainResponse: null,
     };
+  },
+  methods: {
+    ...mapActions([
+      'trainRepository',
+    ]),
+    async train() {
+      const { ownerNickname, slug } = this.$route.params;
+      this.training = true;
+      try {
+        const response = this.trainRepository({ ownerNickname, slug });
+        this.trainResponse = response.data;
+      } catch (e) {
+        this.$toast.open({
+          message: 'Repository not trained :(',
+          type: 'is-danger',
+        });
+      }
+      this.training = false;
+      await this.updateRepository(true);
+    },
+  },
+  onCloseTrainResponseModal() {
+    this.trainResponse = null;
   },
 };
 </script>
@@ -153,14 +183,17 @@ export default {
     &__mascot {
       width: 4rem;
       height: 4rem;
+
     }
 
     &__message {
       margin-left: 1rem;
+
     }
 
     &__buttons {
-      margin-left: 1rem;
+      margin-left: 4rem;
+
     }
   }
 

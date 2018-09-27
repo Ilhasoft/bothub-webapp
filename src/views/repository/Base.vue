@@ -11,6 +11,11 @@ export default {
   async mounted() {
     this.updateRepository();
   },
+  provide() {
+    return {
+      updateRepository: this.updateRepository,
+    };
+  },
   methods: {
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
