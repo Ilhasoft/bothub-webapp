@@ -23,6 +23,28 @@
             :repository="repository"
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
+        <div class="rpstr-vw-bs__general-header">
+          <img
+            src="@/assets/imgs/mascot.svg"
+            alt="mascot"
+            class="rpstr-vw-bs__general-header__mascot">
+          <div class="rpstr-vw-bs__general-header__message">
+            <p>You {{ repository.authorization &&
+            repository.authorization.can_contribute | can_t }} contribute</p>
+            <p>and you {{ repository.authorization &&
+            repository.authorization.can_write | can_t }} write.</p>
+          </div>
+          <bh-button
+            :disabled="!repository.ready_for_train"
+            class="rpstr-vw-bs__general-header__buttons"
+            primary
+            @click="openModal=true">
+            <bh-icon
+              value="school"
+              size="small"/>
+            Train Your Bot
+          </bh-button>
+        </div>
         <div class="rpstr-vw-bs__card__content">
           <slot />
         </div>
@@ -38,29 +60,35 @@
         <bh-loading />
       </div>
     </div>
+    <p>{{ repository.ready_for_train }}</p>
+    <train-modal
+      :ready-for-train="repository.ready_for_train"
+      :requirements-to-train="repository.requirements_to_train"
+      :languages-ready-for-train="repository.languages_ready_for_train"
+      :open="openModal"
+    />
   </layout>
 </template>
 
 <script>
 import Layout from '@/components/shared/Layout';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-
 import RepositoryNavigation from './RepositoryNavigation';
+import TrainModal from '@/components/repository/TrainModal';
 
 
 const ERROR_VERBOSE_LOOKUP = {
   404: 'Bot not found',
 };
 
-const components = {
-  Layout,
-  RepositoryInfo,
-  RepositoryNavigation,
-};
-
 export default {
   name: 'RepositoryViewBase',
-  components,
+  components: {
+    Layout,
+    RepositoryInfo,
+    RepositoryNavigation,
+    TrainModal,
+  },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
   },
@@ -81,6 +109,11 @@ export default {
       type: String,
       default: null,
     },
+  },
+  data() {
+    return {
+      openModal: false,
+    };
   },
 };
 </script>
@@ -107,6 +140,27 @@ export default {
 
     @media screen and (max-width: $card-width) {
       display: none;
+    }
+  }
+
+   &__general-header {
+    background-color: $color-lighter-grey;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__mascot {
+      width: 4rem;
+      height: 4rem;
+    }
+
+    &__message {
+      margin-left: 1rem;
+    }
+
+    &__buttons {
+      margin-left: 1rem;
     }
   }
 
