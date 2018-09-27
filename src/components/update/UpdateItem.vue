@@ -15,8 +15,12 @@
                   <div v-if="trained_at">
                     Trained at {{ trained_at | moment('from') }} by {{ by__nickname }}
                   </div>
-                  <div v-else-if="failed_at">Train failed at {{ failed_at | moment('from') }}</div>
-                  <div v-else>Training...</div>
+                  <div v-else-if="failed_at">
+                    Train failed at {{ failed_at | moment('from') }}
+                  </div>
+                  <div v-else>
+                    Training...
+                  </div>
                 </div>
                 <div v-else>
                   Not trained yet.
@@ -117,7 +121,8 @@ export default {
     padding: 1rem;
 
     &__content {
-      font-size: .75rem;
+      white-space: pre-wrap;
+      word-break: break-all;
     }
   }
 }
