@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UpdateList.vue renders correctly 1`] = `
+<div class="update-item">
+  <bhcard-stub>
+    <div class="update-item__content">
+      <div class="update-item__header">
+        <bhlanguageflag-stub></bhlanguageflag-stub> <span>English</span></div>
+      <div class="level">
+        <div class="level-left">
+          <h4 class="title is-4">
+            <div>#1</div>
+            <div class="subtitle is-7">
+              <div>
+                Not trained yet.
+              </div>
+            </div>
+          </h4>
+        </div>
+        <div class="level-right">
+          <!---->
+        </div>
+      </div>
+    </div>
+  </bhcard-stub>
+  <bhmodal-stub>
+    <div class="update-item__log">
+      <h2 class="title is-2">Training Log</h2> <pre class="update-item__log__content"></pre></div>
+  </bhmodal-stub>
+</div>
+`;

@@ -1,4 +1,6 @@
 import repository from '@/api/repository';
+import update from '@/api/update';
+
 
 export default {
   async getNewRepositorySchema() {
@@ -98,5 +100,8 @@ export default {
   },
   rejectRequestAuthorization(store, { id }) {
     return repository.rejectRequestAuthorization(id);
+  },
+  getUpdatesList(store, { repositoryUuid }) {
+    return update.search(repositoryUuid);
   },
 };
