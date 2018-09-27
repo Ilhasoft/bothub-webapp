@@ -42,8 +42,8 @@ export default {
     ...mapActions([
       'getUpdatesList',
     ]),
-    async updateUpdates() {
-      if (this.updatesList) {
+    async updateUpdates(force = false) {
+      if (this.updatesList || force) {
         this.updatesList.reset();
         await this.updatesList.next();
       } else {
