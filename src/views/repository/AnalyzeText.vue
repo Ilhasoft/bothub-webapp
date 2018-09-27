@@ -107,6 +107,11 @@ export default {
       'authenticated',
     ]),
   },
+  watch: {
+    async authenticated() {
+      await this.updateRepository();
+    },
+  },
 };
 </script>
 
