@@ -135,7 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
-@import '~@/bh/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 
 .layout {

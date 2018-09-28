@@ -148,7 +148,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 
 .repository-trainings {
