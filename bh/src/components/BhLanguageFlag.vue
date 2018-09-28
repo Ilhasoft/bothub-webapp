@@ -1,7 +1,8 @@
 <template>
   <bh-icon
     :value="iconValue"
-    v-bind="$attrs" />
+    v-bind="$attrs"
+  />
 </template>
 
 <script>

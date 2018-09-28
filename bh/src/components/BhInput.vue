@@ -3,16 +3,19 @@
     <slot />
     <div
       v-if="hasError"
-      class="bh-input__errors">
+      class="bh-input__errors"
+    >
       <div
         v-for="(error, i) in errors"
         :key="i"
-        class="bh-input__errors__item">
+        class="bh-input__errors__item"
+      >
         <span>-</span>
         <div v-if="(error instanceof Object)">
           <div
-            v-for="(value,key) in error"
-            :key="value,key">{{ key }}: {{ value }}</div>
+            v-for="(value, key) in error"
+            :key="key"
+          >{{ key }}: {{ value }}</div>
         </div>
         <span v-else>{{ error }}</span>
       </div>

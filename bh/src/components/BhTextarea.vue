@@ -3,9 +3,10 @@
     <div :class="inputClassAttr">
       <textarea
         ref="input"
+        v-model="val"
         :class="`${className}__input`"
         v-bind="$attrs"
-        v-model="val" />
+      />
     </div>
   </bh-input>
 </template>

@@ -8,7 +8,8 @@
       [`bh-tooltip--${direction}`]: !!direction,
     }"
     @click="close()"
-    @blur="close()">
+    @blur="close()"
+  >
     <slot />
   </div>
 </template>

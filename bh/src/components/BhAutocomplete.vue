@@ -3,32 +3,36 @@
     <div :class="inputClassAttr">
       <div
         v-if="$slots.prepend"
-        :class="`${className}__prepend`">
+        :class="`${className}__prepend`"
+      >
         <div :class="`${className}__prepend__content`">
           <slot name="prepend" />
         </div>
       </div>
       <input
         ref="input"
+        v-model="val"
         :class="`${className}__input`"
         v-bind="$attrs"
-        v-model="val"
         type="text"
         @focus="onFocus()"
         @blur="onBlur()"
-        @keyup.esc="onEsc()" >
-      <slot name="append"/>
+        @keyup.esc="onEsc()"
+      >
+      <slot name="append" />
     </div>
     <div
       v-if="autocompleteOpen"
-      class="bh-autocomplete__list">
+      class="bh-autocomplete__list"
+    >
       <button
         v-for="(item, i) in filteredData"
         :key="i"
         type="button"
         class="bh-autocomplete__list__item"
         @click="select(item)"
-        v-html="highlightVerboseItem(item)" />
+        v-html="highlightVerboseItem(item)"
+      />
     </div>
   </bh-input>
 </template>

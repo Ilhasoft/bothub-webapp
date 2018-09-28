@@ -3,10 +3,12 @@
     :class="{
       'bh-dropdown': true,
       [`bh-dropdown--${position}`]: !!position,
-  }">
+    }"
+  >
     <div
       ref="openDropdown"
-      @click="openDropdown()">
+      @click="openDropdown()"
+    >
       <slot name="trigger" />
     </div>
     <div
@@ -15,7 +17,8 @@
       :tabindex="_uid"
       class="bh-dropdown__content"
       @click="closeDropdown()"
-      @blur="closeDropdown()"><slot /></div>
+      @blur="closeDropdown()"
+    ><slot /></div>
   </div>
 </template>
 

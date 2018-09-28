@@ -1,7 +1,8 @@
 <template>
   <div
     class="bh-dropdown-item"
-    @click="$emit('click', $event)">
+    @click="$emit('click', $event)"
+  >
     <slot />
   </div>
 </template>

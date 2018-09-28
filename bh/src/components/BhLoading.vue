@@ -3,7 +3,8 @@
     :class="{
       'bh-loading':true,
       [`bh-loading--${size}`]: !!size,
-  }">
+    }"
+  >
     <span />
     <span />
     <span />

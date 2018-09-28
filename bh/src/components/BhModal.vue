@@ -1,19 +1,23 @@
 <template>
   <div
     v-show="open"
-    class="bh-modal">
+    class="bh-modal"
+  >
     <div
       ref="background"
       class="bh-modal__background"
-      @click="backgroundClose()" />
+      @click="backgroundClose()"
+    />
     <div class="bh-modal__close">
       <button
         ref="closeBtn"
         class="bh-modal__close__button"
-        @click="close()">
+        @click="close()"
+      >
         <bh-icon
           size="medium"
-          value="close" />
+          value="close"
+        />
       </button>
     </div>
     <bh-card class="bh-modal__content">

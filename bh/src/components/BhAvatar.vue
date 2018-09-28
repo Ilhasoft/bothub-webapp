@@ -4,7 +4,8 @@
       'bh-avatar': true,
       [`bh-avatar--${size}`]: !!size,
     }"
-    @click="$emit('click', $event)">
+    @click="$emit('click', $event)"
+  >
     <div class="bh-avatar__content"><slot /></div>
   </button>
 </template>

@@ -5,14 +5,16 @@
       !!shadow
         ? `bh-card--shaded-${shadow}`
         : 'bh-card--shaded'
-  ]">
+    ]"
+  >
     <div class="bh-card__main">
       <slot />
     </div>
     <slot
       v-if="$slots.append"
       name="append"
-      class="bh-card__append" />
+      class="bh-card__append"
+    />
   </div>
 </template>
 

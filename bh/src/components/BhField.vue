@@ -3,20 +3,25 @@
     :class="{
       'bh-field': true,
       'bh-field--has-error': errors.length > 0,
-  }">
+    }"
+  >
     <div
       v-if="label !== null"
-      class="bh-field__label">
+      class="bh-field__label"
+    >
       <span>{{ label || '&nbsp;' }}</span>
       <span
         v-if="helpText"
-        class="bh-field__label__help-text">
+        class="bh-field__label__help-text"
+      >
         <bh-icon
           value="help-text"
-          @click="toggleHelpTextTooltip()" />
+          @click="toggleHelpTextTooltip()"
+        />
         <bh-tooltip
           :open.sync="helpTextTooltipOpen"
-          class="bh-field__label__help-text__tooltip">
+          class="bh-field__label__help-text__tooltip"
+        >
           <p>{{ helpText }}</p>
         </bh-tooltip>
       </span>

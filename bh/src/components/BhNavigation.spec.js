@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { compileToFunctions } from 'vue-template-compiler';
 

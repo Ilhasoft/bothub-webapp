@@ -2,11 +2,13 @@
   <div>
     <p
       v-if="!bhNavigation.children"
-      class="bh-navigation__nav">
+      class="bh-navigation__nav"
+    >
       <span><a @click.prevent="navigateTo('default')"><bh-icon value="home" /></a></span>
       <span
         v-for="{path, label} in navigation"
-        :key="path"><a @click.prevent="navigateTo(path)">{{ label }}</a></span>
+        :key="path"
+      ><a @click.prevent="navigateTo(path)">{{ label }}</a></span>
     </p>
     <slot :name="currentSlotName" />
   </div>

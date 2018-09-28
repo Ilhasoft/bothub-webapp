@@ -5,7 +5,8 @@
       [`bh-icon--${size}`]: !!size,
     }"
     @click="$emit('click', $event)"
-    v-html="svg" />
+    v-html="svg"
+  />
 </template>
 
 <script>

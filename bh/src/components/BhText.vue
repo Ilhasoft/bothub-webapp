@@ -3,17 +3,19 @@
     <div :class="inputClassAttr">
       <div
         v-if="$slots.prepend"
-        :class="`${className}__prepend`">
+        :class="`${className}__prepend`"
+      >
         <div :class="`${className}__prepend__content`">
           <slot name="prepend" />
         </div>
       </div>
       <input
         ref="input"
+        v-model="val"
         :class="`${className}__input`"
         v-bind="$attrs"
-        v-model="val"
-        type="text" >
+        type="text"
+      >
       <slot name="append" />
     </div>
   </bh-input>
