@@ -7,6 +7,8 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
       <h1>-1</h1>
     </div>
   </div>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -17,6 +19,8 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
       <h1>Bot not found</h1>
     </div>
   </div>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -27,6 +31,8 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
       <bhloading-stub></bhloading-stub>
     </div>
   </div>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -37,5 +43,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
       <bhloading-stub></bhloading-stub>
     </div>
   </div>
+  <trainmodal-stub></trainmodal-stub>
+  <!---->
 </layout-stub>
 `;

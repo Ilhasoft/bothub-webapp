@@ -24,25 +24,34 @@
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
         <div class="rpstr-vw-bs__general-header">
-          <img
-            src="@/assets/imgs/mascot.svg"
-            alt="mascot"
-            class="rpstr-vw-bs__general-header__mascot">
-          <div class="rpstr-vw-bs__general-header__message">
-            <p>You {{ repository.authorization &&
-            repository.authorization.can_contribute | can_t }} contribute</p>
-            <p>and you {{ repository.authorization &&
-            repository.authorization.can_write | can_t }} write.</p>
+          <div class="bh-grid">
+            <div class="bh-grid__item rpstr-vw-bs__general-header__prepend">
+              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__general-header__align-center">
+                <img
+                  src="@/assets/imgs/mascot.svg"
+                  alt="mascot"
+                  class="rpstr-vw-bs__general-header__mascot bh-grid__item">
+                <div class="rpstr-vw-bs__general-header__message bh-grid__item">
+                  <p>You {{ repository.authorization &&
+                  repository.authorization.can_contribute | can_t }} contribute</p>
+                  <p>and you {{ repository.authorization &&
+                  repository.authorization.can_write | can_t }} write.</p>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="authenticated && repository.authorization.can_write "
+              class="bh-grid__item rpstr-vw-bs__general-header__append">
+              <bh-button
+                primary
+                @click="trainModalOpen=true">
+                <bh-icon
+                  value="school"
+                  size="small"/>
+                <span>Train Your Bot</span>
+              </bh-button>
+            </div>
           </div>
-          <bh-button
-            class="rpstr-vw-bs__general-header__buttons"
-            primary
-            @click="trainModalOpen=true">
-            <bh-icon
-              value="school"
-              size="small"/>
-            Train Your Bot
-          </bh-button>
         </div>
         <div class="rpstr-vw-bs__card__content">
           <slot />
@@ -61,21 +70,27 @@
     </div>
     <train-modal
       v-if="repository"
+      :training="training"
       :ready-for-train="repository.ready_for_train"
       :requirements-to-train="repository.requirements_to_train"
       :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
-      @train="train()"
-    />
+      @train="train()" />
+    <train-response
+      v-if="trainResponseData"
+      :train-response="trainResponseData"
+      :open="openTrainResponse"
+      @closeTrainResponse="openTrainResponse = false" />
   </layout>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
-import TrainModal from '@/components/repository/TrainModal';
+import TrainModal from '@/components-v1/repository/TrainModal';
+import TrainResponse from '@/components-v1/repository/TrainResponse';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -94,6 +109,7 @@ export default {
     RepositoryInfo,
     RepositoryNavigation,
     TrainModal,
+    TrainResponse,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -119,8 +135,15 @@ export default {
   data() {
     return {
       trainModalOpen: false,
-      trainResponse: null,
+      trainResponseData: null,
+      openTrainResponse: false,
+      training: false,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
   },
   methods: {
     ...mapActions([
@@ -130,24 +153,22 @@ export default {
       const { ownerNickname, slug } = this.$route.params;
       this.training = true;
       try {
-        const response = this.trainRepository({ ownerNickname, slug });
-        this.trainResponse = response.data;
+        const response = await this.trainRepository({ ownerNickname, slug });
+        this.trainResponseData = response.data;
+        this.openTrainResponse = true;
       } catch (e) {
         this.$toast.open({
           message: 'Repository not trained :(',
           type: 'is-danger',
         });
       }
+      this.trainModalOpen = false;
       this.training = false;
       await this.updateRepository(true);
     },
   },
-  onCloseTrainResponseModal() {
-    this.trainResponse = null;
-  },
 };
 </script>
-
 
 <style lang="scss" scoped>
 @import '~@/bh/assets/scss/colors.scss';
@@ -176,24 +197,27 @@ export default {
    &__general-header {
     background-color: $color-lighter-grey;
     padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     &__mascot {
       width: 4rem;
       height: 4rem;
+    }
 
+    &__align-center {
+      margin: auto;
     }
 
     &__message {
-      margin-left: 1rem;
-
+      align-self: center;
     }
 
-    &__buttons {
-      margin-left: 4rem;
+    &__prepend {
+      flex-grow: 1;
+      }
 
+    &__append {
+      align-self: center;
+      text-align: center;
     }
   }
 

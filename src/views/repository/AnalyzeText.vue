@@ -87,7 +87,6 @@ text: [text to analyze]</pre>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
@@ -102,16 +101,6 @@ export default {
     LoginForm,
   },
   extends: RepositoryBase,
-  computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
-  },
-  watch: {
-    async authenticated() {
-      await this.updateRepository();
-    },
-  },
 };
 </script>
 

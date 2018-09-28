@@ -9,6 +9,10 @@ $grid-gap: .5rem;
     display: flex;
     margin: -($grid-gap);
 
+    &--fit-content {
+      width: fit-content;
+    }
+
     &__item {
       flex-grow: 1;
       margin: $grid-gap;

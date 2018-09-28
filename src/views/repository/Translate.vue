@@ -47,13 +47,14 @@
         v-if="!!translate.from && !!translate.to"
         :repository="repository"
         :from="translate.from"
-        :to="translate.to" />
+        :to="translate.to"
+        @translated="examplesTransleted" />
     </div>
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
@@ -82,28 +83,12 @@ export default {
       toLanguage: null,
     };
   },
-  computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
-  },
-  watch: {
-    async authenticated() {
-      await this.updateRepository();
-    },
-  },
   methods: {
     ...mapActions([
       'getRepository',
     ]),
-    async onTranslated() {
-      const {
-        translationsStatus,
-        translationsList,
-      } = this.$refs;
-      await translationsStatus.updateTranslationsStatus();
-      await translationsList.updateTranslations();
-      await this.updateRepository(false);
+    examplesTransleted() {
+      this.updateRepository(true);
     },
   },
 };

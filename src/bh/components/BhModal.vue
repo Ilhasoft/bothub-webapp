@@ -10,7 +10,7 @@
         class="bh-modal__close__button"
         @click="close()">
         <bh-icon
-          size="medium"
+          size="small"
           value="close" />
       </button>
     </div>
