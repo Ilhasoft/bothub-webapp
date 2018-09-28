@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhLanguageFlag from 'bh/components/BhLanguageFlag';
+import BH from '..';
+import BhLanguageFlag from './BhLanguageFlag';
 
 
 const localVue = createLocalVue();

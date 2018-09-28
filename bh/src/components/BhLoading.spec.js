@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhLoading from 'bh/components/BhLoading';
+import BH from '..';
+import BhLoading from './BhLoading';
 
 
 const localVue = createLocalVue();

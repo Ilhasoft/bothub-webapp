@@ -1,7 +1,8 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { compileToFunctions } from 'vue-template-compiler';
-import BH from 'bh';
-import BhCard from 'bh/components/BhCard';
+
+import BH from '..';
+import BhCard from './BhCard';
 
 
 const localVue = createLocalVue();

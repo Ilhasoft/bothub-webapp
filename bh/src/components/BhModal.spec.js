@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhModal from 'bh/components/BhModal';
+import BH from '..';
+import BhModal from './BhModal';
 
 
 describe('BhModal.vue', () => {

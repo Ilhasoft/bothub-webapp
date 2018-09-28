@@ -1,8 +1,8 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import { compileToFunctions } from 'vue-template-compiler';
 
-import BH from 'bh';
-import BhNavigation from 'bh/components/BhNavigation';
+import BH from '..';
+import BhNavigation from './BhNavigation';
 
 
 const localVue = createLocalVue();

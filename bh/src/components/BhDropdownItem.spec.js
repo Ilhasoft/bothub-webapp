@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhDropdownItem from 'bh/components/BhDropdownItem';
+import BH from '..';
+import BhDropdownItem from './BhDropdownItem';
 
 
 const localVue = createLocalVue();

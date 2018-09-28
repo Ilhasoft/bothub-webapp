@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhTooltip from 'bh/components/BhTooltip';
+import BH from '..';
+import BhTooltip from './BhTooltip';
 
 
 const localVue = createLocalVue();

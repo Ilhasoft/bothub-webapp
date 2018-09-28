@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhAutocomplete.vue focus on input press esc renders correctly 1`] = `
+VueWrapper {
+  "_emitted": Object {},
+  "_emittedByOrder": Array [],
+  "isFunctionalComponent": undefined,
+}
+`;
+
+exports[`BhAutocomplete.vue focus on input renders correctly 1`] = `
+VueWrapper {
+  "_emitted": Object {},
+  "_emittedByOrder": Array [],
+  "isFunctionalComponent": undefined,
+}
+`;
+
+exports[`BhAutocomplete.vue renders correctly 1`] = `
+VueWrapper {
+  "_emitted": Object {},
+  "_emittedByOrder": Array [],
+  "isFunctionalComponent": undefined,
+}
+`;
+
+exports[`BhAutocomplete.vue using verboseField and indexField type "b" in input renders correctly 1`] = `
+VueWrapper {
+  "_emitted": Object {
+    "input": Array [
+      Array [
+        "b",
+      ],
+    ],
+  },
+  "_emittedByOrder": Array [
+    Object {
+      "args": Array [
+        "b",
+      ],
+      "name": "input",
+    },
+  ],
+  "isFunctionalComponent": undefined,
+}
+`;

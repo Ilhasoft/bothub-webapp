@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhAutocomplete from 'bh/components/BhAutocomplete';
+import BH from '../index';
+import BhAutocomplete from './BhAutocomplete';
 
 
 const localVue = createLocalVue();

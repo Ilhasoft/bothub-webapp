@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
-import BH from 'bh';
-import BhBadge from 'bh/components/BhBadge';
+import BH from '..';
+import BhBadge from './BhBadge';
 
 
 const localVue = createLocalVue();
