@@ -9,12 +9,20 @@ $grid-gap: .5rem;
     display: flex;
     padding: $grid-gap;
 
-    &--multiline + &--multiline {
-      margin-top: (-2 * $grid-gap);
+    @media screen and (max-width: $mobile-width) {
+      flex-direction: column;
     }
 
-    &--columns {
+    &--row {
+      flex-direction: row;
+    }
+
+    &--column {
       flex-direction: column;
+    }
+
+    &--multiline + &--multiline {
+      margin-top: (-2 * $grid-gap);
     }
 
     &__item {
@@ -32,14 +40,6 @@ $grid-gap: .5rem;
       &--nested {
         margin: (-1 * $grid-gap);
       }
-    }
-
-    @media screen and (max-width: $mobile-width) {
-      flex-direction: column;
-    }
-
-    &--ever-desktop {
-      flex-direction: row;
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <div class="bh-grid bh-grid--columns">
+    <div class="bh-grid bh-grid--column">
       <section class="bh-grid__item">
         <h1>BH Documentation</h1>
       </section>
