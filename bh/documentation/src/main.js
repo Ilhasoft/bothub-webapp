@@ -1,8 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import BH from 'bh';
+import App from './App.vue';
+import 'bh/src/assets/scss/bh.scss';
 
-Vue.config.productionTip = false
+Vue.use(BH);
+
+
+const appElem = document.createElement('div');
+document.body.insertBefore(appElem, document.body.childNodes[0]);
 
 new Vue({
-  render: h => h(App)
-}).$mount('#app')
+  render: h => h(App),
+}).$mount(appElem);

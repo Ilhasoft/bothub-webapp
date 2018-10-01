@@ -1,23 +1,20 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: 'babel-eslint'
   },
   extends: [
     'plugin:vue/recommended',
     'airbnb-base',
   ],
   plugins: [
-    'vue',
+    'vue'
   ],
   settings: {
     'import/resolver': {
       webpack: {
-        config: 'webpack.config.js',
-      },
-    },
-  },
-  rules: {
-    'vue/no-v-html': ['off'],
+        config: 'webpack.config.js'
+      }
+    }
   },
 };
