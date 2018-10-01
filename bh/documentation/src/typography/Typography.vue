@@ -15,7 +15,6 @@
     auctor dictum lectus. Etiam maximus eget neque eu tincidunt. In a augue vitae nunc laoreet
     aliquet ac et lectus. Mauris sed auctor est, non sagittis orci. Ut id libero vulputate,
     auctor libero id, volutpat nisi.</p>
-    </bh-card>
   </div>
 </template>
 
