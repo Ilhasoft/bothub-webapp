@@ -9,6 +9,23 @@ $grid-gap: .5rem;
     display: flex;
     padding: (.5 * $grid-gap);
 
+    &__item {
+      flex-grow: 1;
+      margin: $grid-gap;
+
+      @for $grow from 0 to 12 {
+        &--grow-#{$grow} {
+          flex-basis: auto;
+          flex-shrink: 1;
+          flex-grow: $grow;
+        }
+      }
+
+      &--nested {
+        margin: (-.5 * $grid-gap);
+      }
+    }
+
     @media screen and (max-width: $mobile-width) {
       flex-direction: column;
     }
@@ -25,21 +42,20 @@ $grid-gap: .5rem;
       margin-top: (-1 * $grid-gap);
     }
 
-    &__item {
-      flex-grow: 1;
-      margin: $grid-gap;
+    &--half {
+      padding: (.25 * $grid-gap);
 
-      @for $grow from 0 to 12 {
-        &--grow-#{$grow} {
-          flex-basis: auto;
-          flex-shrink: 1;
-          flex-grow: $grow;
+      #{$parent}__item {
+        margin: (.5 * $grid-gap);
+
+        &--nested {
+          margin: (-.25 * $grid-gap);
         }
       }
+    }
 
-      &--nested {
-        margin: (-.5 * $grid-gap);
-      }
+    &--multiline#{&}--half + &--multiline#{&}--half {
+      margin-top: (-.5 * $grid-gap);
     }
   }
 }

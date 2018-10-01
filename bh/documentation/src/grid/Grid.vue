@@ -9,6 +9,8 @@
     <grow-item />
     <h3>Nested item</h3>
     <nested-item />
+    <h3>Half Gap</h3>
+    <half-gap />
   </div>
 </template>
 
@@ -17,6 +19,7 @@ import SimpleGrid from './examples/SimpleGrid';
 import MultilineGrid from './examples/MultilineGrid';
 import GrowItem from './examples/GrowItem';
 import NestedItem from './examples/NestedItem';
+import HalfGap from './examples/HalfGap';
 
 
 export default {
@@ -26,6 +29,7 @@ export default {
     MultilineGrid,
     GrowItem,
     NestedItem,
+    HalfGap,
   },
 };
 </script>
