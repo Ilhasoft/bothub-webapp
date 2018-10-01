@@ -3,8 +3,8 @@ import BH from 'bh';
 import App from './App';
 import 'bh/src/assets/scss/bh.scss';
 
-Vue.use(BH);
 
+Vue.use(BH);
 
 const appElem = document.createElement('div');
 document.body.insertBefore(appElem, document.body.childNodes[0]);
