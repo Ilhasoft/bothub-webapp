@@ -6,7 +6,7 @@
           <highlighted-text
             :text="currentText"
             :entities="currentEntities"
-            :all-entities="repository.entities" />
+            :all-entities="repository.entities || repository.entities_list" />
         </div>
         <div class="column is-narrow">
           <button
@@ -147,7 +147,7 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repository.entities,
+        this.repository.entities || this.repository.entities_list,
         this.currentEntities,
       );
       return `entity-${color}`;
