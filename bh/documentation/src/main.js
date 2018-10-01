@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import BH from 'bh';
-import App from './App.vue';
+import App from './App';
 import 'bh/src/assets/scss/bh.scss';
 
 Vue.use(BH);
