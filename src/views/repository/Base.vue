@@ -8,6 +8,11 @@ export default {
       errorCode: null,
     };
   },
+  watch: {
+    $route() {
+      this.updateRepository();
+    },
+  },
   async mounted() {
     this.updateRepository();
   },
