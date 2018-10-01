@@ -7,7 +7,7 @@ $grid-gap: .5rem;
     $parent: &;
 
     display: flex;
-    padding: $grid-gap;
+    padding: (.5 * $grid-gap);
 
     @media screen and (max-width: $mobile-width) {
       flex-direction: column;
@@ -22,7 +22,7 @@ $grid-gap: .5rem;
     }
 
     &--multiline + &--multiline {
-      margin-top: (-2 * $grid-gap);
+      margin-top: (-1 * $grid-gap);
     }
 
     &__item {
@@ -38,7 +38,7 @@ $grid-gap: .5rem;
       }
 
       &--nested {
-        margin: (-1 * $grid-gap);
+        margin: (-.5 * $grid-gap);
       }
     }
   }
