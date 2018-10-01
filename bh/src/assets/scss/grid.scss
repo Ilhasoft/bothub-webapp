@@ -7,7 +7,15 @@ $grid-gap: .5rem;
     $parent: &;
 
     display: flex;
-    margin: -($grid-gap);
+    padding: $grid-gap;
+
+    &--multiline + &--multiline {
+      margin-top: (-2 * $grid-gap);
+    }
+
+    &--columns {
+      flex-direction: column;
+    }
 
     &__item {
       flex-grow: 1;
@@ -20,6 +28,10 @@ $grid-gap: .5rem;
           flex-grow: $grow;
         }
       }
+
+      &--nested {
+        margin: (-1 * $grid-gap);
+      }
     }
 
     @media screen and (max-width: $mobile-width) {
@@ -28,10 +40,6 @@ $grid-gap: .5rem;
 
     &--ever-desktop {
       flex-direction: row;
-    }
-
-    &--columns {
-      flex-direction: column;
     }
   }
 }
