@@ -164,7 +164,7 @@ export default {
       }
       this.trainModalOpen = false;
       this.training = false;
-      await this.updateRepository(true);
+      await this.updateRepository(false);
     },
   },
 };
