@@ -5,6 +5,7 @@
 @import '~./grid';
 @import '~./shadow';
 @import '~./notification';
+@import '~./title';
 
 * {
   box-sizing: border-box;
@@ -15,6 +16,7 @@ body {
   width: 100%;
   min-height: 100%;
   padding: 0;
+  margin: 0;
 }
 
 body {
@@ -66,27 +68,5 @@ strong {
     @media screen and (max-width: $mobile-width) {
       display: auto;
     }
-  }
-}
-
-.bh {
-  &-title-1 {
-    margin-bottom: 2rem;
-    font-size: 2rem;
-  }
-
-  &-title-2 {
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-  }
-
-  &-title-3 {
-    margin-bottom: 2rem;
-    font-size: 1.25rem;
-  }
-
-  &-title-4 {
-    margin-bottom: 2rem;
-    font-size: .75rem;
   }
 }

@@ -29,5 +29,9 @@ $grid-gap: .5rem;
     &--ever-desktop {
       flex-direction: row;
     }
+
+    &--columns {
+      flex-direction: column;
+    }
   }
 }
