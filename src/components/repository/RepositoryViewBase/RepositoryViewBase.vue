@@ -25,7 +25,7 @@
         </div>
         <div class="rpstr-vw-bs__general-header">
           <div class="bh-grid">
-            <div class="bh-grid__item rpstr-vw-bs__general-header__prepend">
+            <div class="bh-grid__item">
               <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__general-header__align-center">
                 <img
                   src="@/assets/imgs/mascot.svg"
@@ -41,7 +41,7 @@
             </div>
             <div
               v-if="authenticated && repository.authorization.can_write "
-              class="bh-grid__item rpstr-vw-bs__general-header__append">
+              class="bh-grid__item rpstr-vw-bs__general-header__button">
               <bh-button
                 primary
                 @click="trainModalOpen=true">
@@ -211,11 +211,7 @@ export default {
       align-self: center;
     }
 
-    &__prepend {
-      flex-grow: 1;
-      }
-
-    &__append {
+    &__button {
       align-self: center;
       text-align: center;
     }
