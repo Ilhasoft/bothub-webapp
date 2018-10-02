@@ -6,7 +6,8 @@
       "language": "en",
       "categories": [1],
       "description": "",
-      "is_private": true
+      "is_private": true,
+      "use_language_model_featurizer": true
     },
     "response": {
       "status": 201,
@@ -32,7 +33,8 @@
       "language": "en",
       "categories": [],
       "description": "",
-      "is_private": false
+      "is_private": false,
+      "use_language_model_featurizer": false
     },
     "response": {
       "status": 400,

@@ -577,6 +577,7 @@ export default {
         categories_list: categories,
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
       } = this.repository;
       return {
         name,
@@ -587,6 +588,7 @@ export default {
         ),
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
       };
     },
     onEdited() {

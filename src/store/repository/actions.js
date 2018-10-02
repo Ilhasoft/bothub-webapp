@@ -14,8 +14,10 @@ export default {
     categories,
     description,
     is_private: isPrivate,
+    use_language_model_featurizer: useLanguageModelFeaturizer,
   }) {
-    const response = await repository.new(name, slug, language, categories, description, isPrivate);
+    const response = await repository.new(name, slug, language, categories, description, isPrivate,
+      useLanguageModelFeaturizer);
     return response;
   },
   getAllRepositories() {
@@ -54,6 +56,7 @@ export default {
     categories,
     description,
     is_private: isPrivate,
+    use_language_model_featurizer: useLanguageModelFeaturizer,
   }) {
     return repository.edit(
       ownerNickname,
@@ -64,6 +67,7 @@ export default {
       categories,
       description,
       isPrivate,
+      useLanguageModelFeaturizer,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
