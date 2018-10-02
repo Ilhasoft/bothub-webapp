@@ -23,15 +23,15 @@
             :repository="repository"
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
-        <div class="rpstr-vw-bs__general-header">
+        <div class="rpstr-vw-bs__status-bar">
           <div class="bh-grid">
             <div class="bh-grid__item">
-              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__general-header__align-center">
+              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__status-bar__align-center">
                 <img
                   src="@/assets/imgs/mascot.svg"
                   alt="mascot"
-                  class="rpstr-vw-bs__general-header__mascot bh-grid__item">
-                <div class="rpstr-vw-bs__general-header__message bh-grid__item">
+                  class="rpstr-vw-bs__status-bar__mascot bh-grid__item">
+                <div class="rpstr-vw-bs__status-bar__message bh-grid__item">
                   <p>You {{ repository.authorization &&
                   repository.authorization.can_contribute | can_t }} contribute</p>
                   <p>and you {{ repository.authorization &&
@@ -41,10 +41,10 @@
             </div>
             <div
               v-if="authenticated && repository.authorization.can_write "
-              class="bh-grid__item rpstr-vw-bs__general-header__button">
+              class="bh-grid__item rpstr-vw-bs__status-bar__button">
               <bh-button
                 primary
-                @click="trainModalOpen=true">
+                @click="openTrainModal()">
                 <bh-icon
                   value="school"
                   size="small"/>
@@ -79,8 +79,7 @@
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
-      :open="openTrainResponse"
-      @closeTrainResponse="openTrainResponse = false" />
+      :open.sync="openTrainResponse" />
   </layout>
 </template>
 
@@ -166,6 +165,9 @@ export default {
       this.training = false;
       await this.updateRepository(false);
     },
+    openTrainModal() {
+      this.trainModalOpen = true;
+    },
   },
 };
 </script>
@@ -194,7 +196,7 @@ export default {
     }
   }
 
-   &__general-header {
+   &__status-bar {
     background-color: $color-lighter-grey;
     padding: 1rem;
 

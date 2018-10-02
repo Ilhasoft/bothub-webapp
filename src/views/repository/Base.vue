@@ -20,11 +20,11 @@ export default {
     $route() {
       this.updateRepository();
     },
-    async authenticated() {
-      await this.updateRepository();
+    authenticated() {
+      this.updateRepository();
     },
   },
-  async mounted() {
+  mounted() {
     this.updateRepository();
   },
   provide() {

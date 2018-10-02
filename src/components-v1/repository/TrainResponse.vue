@@ -1,7 +1,5 @@
 <template>
-  <b-modal
-    :active="open"
-    @close="$emit('closeTrainResponse');">
+  <b-modal :active.sync="openValue">
     <div
       v-if="!!trainResponse"
       class="card">
@@ -79,6 +77,19 @@ export default {
     open: {
       type: Boolean,
       default: false,
+    },
+  },
+  data() {
+    return {
+      openValue: this.open,
+    };
+  },
+  watch: {
+    open(value) {
+      this.openValue = value;
+    },
+    openValue(value) {
+      this.$emit('update:open', value);
     },
   },
 };

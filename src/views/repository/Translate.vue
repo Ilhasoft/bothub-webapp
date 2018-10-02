@@ -48,7 +48,7 @@
         :repository="repository"
         :from="translate.from"
         :to="translate.to"
-        @translated="examplesTransleted" />
+        @translated="examplesTransleted()" />
     </div>
   </repository-view-base>
 </template>
