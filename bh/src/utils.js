@@ -18,6 +18,7 @@ import Minus from './assets/icons/minus.svg';
 import Check from './assets/icons/check.svg';
 import Exclamation from './assets/icons/exclamation.svg';
 import Refresh from './assets/icons/refresh.svg';
+import CodeTags from './assets/icons/code-tags.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -51,6 +52,7 @@ export const icons = {
   check: Check,
   exclamation: Exclamation,
   refresh: Refresh,
+  'code-tags': CodeTags,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
