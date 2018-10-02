@@ -3,6 +3,7 @@
     <h2>Grid</h2>
     <h3>Simple grid</h3>
     <simple-grid />
+    <pre v-highlightjs="simpleGridCode"><code class="html" /></pre>
     <h3>Multiline grid</h3>
     <multiline-grid />
     <h3>Grow item</h3>
@@ -16,6 +17,7 @@
 
 <script>
 import SimpleGrid from './examples/SimpleGrid';
+import simpleGridCode from '!!raw-loader!./examples/SimpleGrid';
 import MultilineGrid from './examples/MultilineGrid';
 import GrowItem from './examples/GrowItem';
 import NestedItem from './examples/NestedItem';
@@ -30,6 +32,11 @@ export default {
     GrowItem,
     NestedItem,
     HalfGap,
+  },
+  data() {
+    return {
+      simpleGridCode,
+    };
   },
 };
 </script>

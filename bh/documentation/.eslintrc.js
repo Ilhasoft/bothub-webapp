@@ -15,6 +15,10 @@ module.exports = {
       webpack: {
         config: 'webpack.config.js'
       }
-    }
+    },
+  },
+  rules: {
+    'import/no-webpack-loader-syntax': ['off'],
+    'import/no-duplicates': ['off'],
   },
 };
