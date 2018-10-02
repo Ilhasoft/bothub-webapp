@@ -3,7 +3,22 @@
     <div class="bh-grid">
       <div class="bh-grid__item">
         <div :is="component" />
-        <pre v-highlightjs="code"><code :class="codeClass" /></pre>
+        <div class="example__code">
+          <bh-button
+            primary
+            full-width
+            class="example__code__trigger"
+            @click="toggleCodeOpen()">
+            <bh-icon value="code-tags" />
+            <span v-show="!codeOpen">Open Code</span>
+            <span v-show="codeOpen">Close Code</span>
+          </bh-button>
+          <div
+            v-show="codeOpen"
+            class="example__code__content">
+            <pre v-highlightjs="code"><code :class="codeClass" /></pre>
+          </div>
+        </div>
       </div>
     </div>
   </bh-card>
@@ -26,5 +41,26 @@ export default {
       default: 'html',
     },
   },
+  data() {
+    return {
+      codeOpen: false,
+    };
+  },
+  methods: {
+    toggleCodeOpen() {
+      this.codeOpen = !this.codeOpen;
+    },
+  },
 };
 </script>
+
+<style lang="scss" scoped>
+.example {
+  &__code {
+    margin: 1rem 0;
+
+    &__trigger {}
+    &__content {}
+  }
+}
+</style>

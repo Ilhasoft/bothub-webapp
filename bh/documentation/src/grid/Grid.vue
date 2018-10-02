@@ -2,40 +2,59 @@
   <div>
     <h2>Grid</h2>
     <h3>Simple grid</h3>
-    <simple-grid />
-    <pre v-highlightjs="simpleGridCode"><code class="html" /></pre>
+    <example
+      :component="SimpleGrid"
+      :code="simpleGridCode" />
     <h3>Multiline grid</h3>
-    <multiline-grid />
+    <example
+      :component="MultilineGrid"
+      :code="multilineGridCode" />
     <h3>Grow item</h3>
-    <grow-item />
+    <example
+      :component="GrowItem"
+      :code="growItemCode" />
     <h3>Nested item</h3>
-    <nested-item />
+    <example
+      :component="NestedItem"
+      :code="nestedItemCode" />
     <h3>Half Gap</h3>
-    <half-gap />
+    <example
+      :component="HalfGap"
+      :code="halfGapCode" />
   </div>
 </template>
 
 <script>
+import Example from '@/Example';
 import SimpleGrid from './examples/SimpleGrid';
 import simpleGridCode from '!!raw-loader!./examples/SimpleGrid';
 import MultilineGrid from './examples/MultilineGrid';
+import multilineGridCode from '!!raw-loader!./examples/MultilineGrid';
 import GrowItem from './examples/GrowItem';
+import growItemCode from '!!raw-loader!./examples/GrowItem';
 import NestedItem from './examples/NestedItem';
+import nestedItemCode from '!!raw-loader!./examples/NestedItem';
 import HalfGap from './examples/HalfGap';
+import halfGapCode from '!!raw-loader!./examples/HalfGap';
 
 
 export default {
   name: 'Grid',
   components: {
-    SimpleGrid,
-    MultilineGrid,
-    GrowItem,
-    NestedItem,
-    HalfGap,
+    Example,
   },
   data() {
     return {
+      SimpleGrid,
       simpleGridCode,
+      MultilineGrid,
+      multilineGridCode,
+      GrowItem,
+      growItemCode,
+      NestedItem,
+      nestedItemCode,
+      HalfGap,
+      halfGapCode,
     };
   },
 };
