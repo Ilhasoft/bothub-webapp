@@ -18,6 +18,8 @@ import Minus from 'bh/assets/icons/minus.svg';
 import Check from 'bh/assets/icons/check.svg';
 import Exclamation from 'bh/assets/icons/exclamation.svg';
 import Refresh from 'bh/assets/icons/refresh.svg';
+import Information from 'bh/assets/icons/information.svg';
+import ClipboardTextOutline from 'bh/assets/icons/clipboard-text-outline.svg';
 import FlagBr from 'bh/assets/icons/flag-br.svg';
 import FlagDe from 'bh/assets/icons/flag-de.svg';
 import FlagEs from 'bh/assets/icons/flag-es.svg';
@@ -51,6 +53,8 @@ export const icons = {
   check: Check,
   exclamation: Exclamation,
   refresh: Refresh,
+  information: Information,
+  'clipboard-text-outline': ClipboardTextOutline,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
