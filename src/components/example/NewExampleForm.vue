@@ -196,7 +196,9 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
-
+      if (this.$refs.entitiesInput.clearEntityForm) {
+        this.$refs.entitiesInput.clearEntityForm();
+      }
       try {
         await this.newExample({
           repository: this.repository.uuid,
@@ -207,7 +209,6 @@ export default {
         this.intent = '';
         this.entities = [];
         this.submitting = false;
-
         this.$emit('created');
         return true;
       } catch (error) {
