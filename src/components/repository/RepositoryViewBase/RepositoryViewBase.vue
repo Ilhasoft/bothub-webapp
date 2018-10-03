@@ -26,7 +26,7 @@
         <div class="rpstr-vw-bs__status-bar">
           <div class="bh-grid">
             <div class="bh-grid__item">
-              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__status-bar__align-center">
+              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__status-bar__authorization">
                 <img
                   src="@/assets/imgs/mascot.svg"
                   alt="mascot"
@@ -79,7 +79,7 @@
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
-      :open.sync="openTrainResponse" />
+      :open.sync="trainResponseOpen" />
   </layout>
 </template>
 
@@ -135,7 +135,7 @@ export default {
     return {
       trainModalOpen: false,
       trainResponseData: null,
-      openTrainResponse: false,
+      trainResponseOpen: false,
       training: false,
     };
   },
@@ -154,7 +154,7 @@ export default {
       try {
         const response = await this.trainRepository({ ownerNickname, slug });
         this.trainResponseData = response.data;
-        this.openTrainResponse = true;
+        this.trainResponseOpen = true;
       } catch (e) {
         this.$toast.open({
           message: 'Repository not trained :(',
@@ -205,7 +205,7 @@ export default {
       height: 4rem;
     }
 
-    &__align-center {
+    &__authorization {
       margin: auto;
     }
 
