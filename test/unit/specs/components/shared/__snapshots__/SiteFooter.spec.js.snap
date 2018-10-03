@@ -6,26 +6,19 @@ exports[`SiteFooter.vue renders correctly 1`] = `
     <div class="footer-content">
       <div class="columns">
         <div class="column">
-          <div class="footer-item footer-brand">
-            <img src="~@/assets/imgs/logo-white.svg" alt="bothub">
+          <div class="footer-item footer-brand"><img src="~@/assets/imgs/logo-white.svg" alt="bothub">
             <div>Webapp v0.0.0</div>
           </div>
           <ul class="footer-item">
-            <li>
-              <a href="#">Terms &amp; conditions</a>
-            </li>
+            <li><a href="#">Terms &amp; conditions</a></li>
           </ul>
           <ul class="footer-item footer-sociallist">
-            <li class="footer-sociallist-item">
-              <a href="https://www.facebook.com/bothub.it" target="_blank">
-                <bicon-stub></bicon-stub>
-              </a>
-            </li>
-            <li class="footer-sociallist-item">
-              <a href="https://github.com/Ilhasoft/bothub/" target="_blank">
-                <bicon-stub></bicon-stub>
-              </a>
-            </li>
+            <li class="footer-sociallist-item"><a href="https://www.facebook.com/bothub.it" target="_blank">
+                <bicon-stub icon="facebook"></bicon-stub>
+              </a></li>
+            <li class="footer-sociallist-item"><a href="https://github.com/Ilhasoft/bothub/" target="_blank">
+                <bicon-stub icon="github-circle"></bicon-stub>
+              </a></li>
           </ul>
         </div>
         <div class="column">
@@ -49,15 +42,15 @@ exports[`SiteFooter.vue renders correctly 1`] = `
           </div>
           <form>
             <div class="footer-has-input">
-              <bfield-stub>
-                <input type="email" placeholder="your@email.com" class="input footer-input"> <span class="control"><button class="button is-secondary"><bicon-stub></bicon-stub></button></span></bfield-stub>
+              <bfield-stub addons="true"><input type="email" placeholder="your@email.com" class="input footer-input"> <span class="control"><button class="button is-secondary"><bicon-stub icon="email"></bicon-stub></button></span></bfield-stub>
             </div>
           </form>
         </div>
       </div>
     </div>
     <div class="footer-license">
-      <p class="has-text-centered">Bothub is a project by Ilhasoft. © 2018 All rights reserved.</p>
+      <p class="has-text-centered">Bothub is a project by Ilhasoft.
+        © 2018 All rights reserved.</p>
     </div>
   </div>
 </footer>

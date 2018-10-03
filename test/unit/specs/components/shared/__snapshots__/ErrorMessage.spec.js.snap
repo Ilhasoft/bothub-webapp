@@ -3,7 +3,7 @@
 exports[`ErrorMessage.vue renders correctly 1`] = `
 <div class="error-message">
   <div class="error-message-icons">
-    <bicon-stub class="error-message-icons-sad"></bicon-stub>
+    <bicon-stub icon="emoticon-sad" customsize="error-message-icons-sad-size" class="error-message-icons-sad"></bicon-stub>
   </div>
   <div class="error-message-detail">Error 1</div>
 </div>

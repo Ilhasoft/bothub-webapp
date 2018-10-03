@@ -4,20 +4,20 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
 <div>
   <form class="columns is-variable is-2">
     <div class="column">
-      <bhfield-stub>
-        <exampletextwithhighlightedentitiesinput-stub placeholder="Translate sentence" size="medium"></exampletextwithhighlightedentitiesinput-stub>
+      <bhfield-stub label="" errors="">
+        <exampletextwithhighlightedentitiesinput-stub entities="" availableentities="" placeholder="Translate sentence" size="medium"></exampletextwithhighlightedentitiesinput-stub>
       </bhfield-stub>
     </div>
     <div class="column is-narrow">
-      <bhfield-stub>
-        <bhbutton-stub>Submit Translation</bhbutton-stub>
+      <bhfield-stub label="" errors="">
+        <bhbutton-stub disabled="true" secondary="true" type="submit" size="medium">Submit Translation</bhbutton-stub>
       </bhfield-stub>
     </div>
   </form>
   <div class="columns is-variable is-1">
     <div class="column">
-      <bhfield-stub>
-        <entitiesinput-stub></entitiesinput-stub>
+      <bhfield-stub errors="">
+        <entitiesinput-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" customlabeldisabled="true"></entitiesinput-stub>
       </bhfield-stub>
     </div>
   </div>

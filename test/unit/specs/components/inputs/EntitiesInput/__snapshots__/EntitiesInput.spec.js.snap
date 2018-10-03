@@ -4,7 +4,7 @@ exports[`EntitiesInput.vue newEntity emit new event change text to "my name is" 
 <bhinput-stub>
   <div class="entities-input__badges"></div>
   <div class="entities-input__new-entity">
-    <newentity-stub class="entities-input__new-entity__wrapper"></newentity-stub>
+    <newentity-stub text="the name is" debouncetime="750" repository="[object Object]" availableentities="" labels="[object Object]" availablelabels="" class="entities-input__new-entity__wrapper"></newentity-stub>
   </div>
 </bhinput-stub>
 `;
@@ -13,16 +13,16 @@ exports[`EntitiesInput.vue newEntity emit new event renders correctly 1`] = `
 <bhinput-stub>
   <div class="entities-input__badges">
     <bhbadge-stub class="entities-input__badges__badge entity-sunflower"><span><span><strong>name</strong></span>
-      <!---->
-      </span>
+      <!----></span>
       <bhdropdown-stub>
+        <bhiconbutton-stub type="button" value="dots-horizontal" size="small"></bhiconbutton-stub>
         <bhdropdownitem-stub>Edit</bhdropdownitem-stub>
         <bhdropdownitem-stub>Remove</bhdropdownitem-stub>
       </bhdropdown-stub>
     </bhbadge-stub>
   </div>
   <div class="entities-input__new-entity">
-    <newentity-stub class="entities-input__new-entity__wrapper"></newentity-stub>
+    <newentity-stub text="my name is douglas" debouncetime="750" repository="[object Object]" availableentities="" labels="[object Object]" availablelabels="" class="entities-input__new-entity__wrapper"></newentity-stub>
   </div>
 </bhinput-stub>
 `;
@@ -31,7 +31,7 @@ exports[`EntitiesInput.vue renders correctly 1`] = `
 <bhinput-stub>
   <div class="entities-input__badges"></div>
   <div class="entities-input__new-entity">
-    <newentity-stub class="entities-input__new-entity__wrapper"></newentity-stub>
+    <newentity-stub text="my name is douglas" debouncetime="750" repository="[object Object]" availableentities="" labels="[object Object]" availablelabels="" class="entities-input__new-entity__wrapper"></newentity-stub>
   </div>
 </bhinput-stub>
 `;
