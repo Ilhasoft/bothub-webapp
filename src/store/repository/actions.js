@@ -15,9 +15,10 @@ export default {
     description,
     is_private: isPrivate,
     use_language_model_featurizer: useLanguageModelFeaturizer,
+    use_competing_intents: useCompetingIntents,
   }) {
     const response = await repository.new(name, slug, language, categories, description, isPrivate,
-      useLanguageModelFeaturizer);
+      useLanguageModelFeaturizer, useCompetingIntents);
     return response;
   },
   getAllRepositories() {
@@ -57,6 +58,7 @@ export default {
     description,
     is_private: isPrivate,
     use_language_model_featurizer: useLanguageModelFeaturizer,
+    use_competing_intents: useCompetingIntents,
   }) {
     return repository.edit(
       ownerNickname,
@@ -68,6 +70,7 @@ export default {
       description,
       isPrivate,
       useLanguageModelFeaturizer,
+      useCompetingIntents,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
