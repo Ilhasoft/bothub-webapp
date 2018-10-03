@@ -13,6 +13,9 @@
       <section class="bh-grid__item">
         <grid />
       </section>
+      <section class="bh-grid__item">
+        <autocomplete />
+      </section>
     </div>
   </div>
 </template>
@@ -21,6 +24,7 @@
 import Installation from './installation/Installation';
 import Typography from './typography/Typography';
 import Grid from './grid/Grid';
+import Autocomplete from './autocomplete/Autocomplete';
 
 export default {
   name: 'App',
@@ -28,6 +32,7 @@ export default {
     Installation,
     Typography,
     Grid,
+    Autocomplete,
   },
 };
 </script>
