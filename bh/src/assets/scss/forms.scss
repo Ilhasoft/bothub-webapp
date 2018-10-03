@@ -239,4 +239,10 @@
     padding-left: .5rem;
     border-radius: 18px;
   }
+
+  &--full-width {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
 }

@@ -1,0 +1,84 @@
+<template>
+  <div>
+    <h2>Grid</h2>
+    <h3>Simple grid</h3>
+    <example
+      :component="SimpleGrid"
+      :code="simpleGridCode" />
+    <h3>Multiline grid</h3>
+    <example
+      :component="MultilineGrid"
+      :code="multilineGridCode" />
+    <h3>Grow item</h3>
+    <example
+      :component="GrowItem"
+      :code="growItemCode" />
+    <h3>Nested item</h3>
+    <example
+      :component="NestedItem"
+      :code="nestedItemCode" />
+    <h3>Half Gap</h3>
+    <example
+      :component="HalfGap"
+      :code="halfGapCode" />
+  </div>
+</template>
+
+<script>
+import Example from '@/Example';
+import SimpleGrid from './examples/SimpleGrid';
+import simpleGridCode from '!!raw-loader!./examples/SimpleGrid';
+import MultilineGrid from './examples/MultilineGrid';
+import multilineGridCode from '!!raw-loader!./examples/MultilineGrid';
+import GrowItem from './examples/GrowItem';
+import growItemCode from '!!raw-loader!./examples/GrowItem';
+import NestedItem from './examples/NestedItem';
+import nestedItemCode from '!!raw-loader!./examples/NestedItem';
+import HalfGap from './examples/HalfGap';
+import halfGapCode from '!!raw-loader!./examples/HalfGap';
+
+
+export default {
+  name: 'Grid',
+  components: {
+    Example,
+  },
+  data() {
+    return {
+      SimpleGrid,
+      simpleGridCode,
+      MultilineGrid,
+      multilineGridCode,
+      GrowItem,
+      growItemCode,
+      NestedItem,
+      nestedItemCode,
+      HalfGap,
+      halfGapCode,
+    };
+  },
+};
+</script>
+
+<style lang="scss">
+$colors: (
+  'red',
+  'green',
+  'blue',
+  'pink',
+  'purple',
+);
+
+@each $color in $colors {
+  .#{$color} {
+    background-color: #{$color};
+    color: white;
+    font-weight: bolder;
+
+    &.item {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+}
+</style>

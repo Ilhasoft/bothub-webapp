@@ -13,3 +13,35 @@
     font-weight: $font-weight-bolder;
   }
 }
+
+h1,
+h2,
+h3,
+h4 {
+  font-size: 1rem;
+  font-weight: normal;
+  padding: 0;
+}
+
+@for $i from 0 to 4 {
+  $n: $i + 1;
+  $font-size: (2rem - ($i * .25rem));
+  $margin: .75rem 0;
+
+  h#{$n} {
+    font-size: $font-size;
+    margin: $margin;
+  }
+
+  .bh {
+    &-title-#{$n} { // depreciate this class
+      font-size: $font-size;
+      margin: $margin;
+    }
+  }
+}
+
+p {
+  margin: .5rem 0;
+  padding: 0;
+}

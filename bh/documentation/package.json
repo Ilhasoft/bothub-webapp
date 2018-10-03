@@ -1,0 +1,36 @@
+{
+  "name": "bh-documentation",
+  "version": "0.1.0",
+  "main": "src/main.js",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "webpack-dev-server",
+    "lint": "eslint --ext .js,.vue src",
+    "build": "webpack --mode=production"
+  },
+  "dependencies": {
+    "bh": "../",
+    "highlight.js": "^9.12.0",
+    "vue": "^2.5.17",
+    "vue-highlightjs": "^1.3.3",
+    "vue-markdown": "^2.2.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.6.1",
+    "eslint-plugin-vue": "^4.7.1",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  }
+}
