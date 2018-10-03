@@ -39,7 +39,7 @@ export default {
 
       /* istanbul ignore next */
       this.$router.push({
-        name: 'repository',
+        name: 'repository-home',
         params: {
           ownerNickname: repository.owner__nickname,
           slug: repository.slug,
