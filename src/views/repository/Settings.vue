@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
@@ -77,16 +76,6 @@ export default {
     LoginForm,
   },
   extends: RepositoryBase,
-  computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
-  },
-  watch: {
-    async authenticated() {
-      await this.updateRepository();
-    },
-  },
   methods: {
     getEditInitialData() {
       const {

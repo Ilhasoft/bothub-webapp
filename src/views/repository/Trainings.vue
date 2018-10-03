@@ -72,7 +72,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
@@ -104,15 +103,7 @@ export default {
       searchQueryEntity: {},
     };
   },
-  computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
-  },
   watch: {
-    async authenticated() {
-      await this.updateRepository();
-    },
     currentIntent(value) {
       this.searchQueryIntent = value
         ? { intent: value.value }
