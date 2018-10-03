@@ -71,17 +71,16 @@ import EditProfileForm from '@/components-v1/user/EditProfileForm';
 import ChangePasswordForm from '@/components-v1/user/ChangePasswordForm';
 import LoginIsRequired from '@/components-v1/auth/LoginIsRequired';
 
-const components = {
-  Layout,
-  UserProfile,
-  Pagination,
-  EditProfileForm,
-  ChangePasswordForm,
-};
 
 export default {
   name: 'MyProfile',
-  components,
+  components: {
+    Layout,
+    UserProfile,
+    Pagination,
+    EditProfileForm,
+    ChangePasswordForm,
+  },
   extends: LoginIsRequired,
   data() {
     return {
@@ -113,6 +112,7 @@ export default {
     },
     onMyProfileEdited() {
       this.updateMyProfile();
+      this.updateMyRepositories();
       this.$toast.open({
         message: 'Profile edited!',
         type: 'is-success',
