@@ -1,0 +1,45 @@
+<template>
+  <div>
+    <div class="bh-grid">
+      <div class="bh-grid__item">
+        <bh-button>Simple Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button primary>Primary Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button
+        primary
+        inverted>Primary Inverted Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button
+        primary
+        transparent>Primary Transparent Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button secondary>Secondary Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button rounded>Rounded button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button
+        primary
+        tooltipHover="i'm Tooltip">Button Tooltip</bh-button>
+      </div>
+    </div>
+    <div class="bh-grid">
+      <div class="bh-grid__item">
+        <bh-button
+        fullWidth>fullWidth button</bh-button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'SimpleButton',
+};
+</script>

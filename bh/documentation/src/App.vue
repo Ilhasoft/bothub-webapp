@@ -16,6 +16,12 @@
       <section class="bh-grid__item">
         <autocomplete />
       </section>
+      <section class="bh-grid__item">
+        <card />
+      </section>
+      <section class="bh-grid__item">
+        <buttons />
+      </section>
     </div>
   </div>
 </template>
@@ -25,6 +31,8 @@ import Installation from './installation/Installation';
 import Typography from './typography/Typography';
 import Grid from './grid/Grid';
 import Autocomplete from './autocomplete/Autocomplete';
+import Card from './card/Card'
+import Buttons from './button/Buttons';
 
 export default {
   name: 'App',
@@ -33,9 +41,8 @@ export default {
     Typography,
     Grid,
     Autocomplete,
+    Card,
+    Buttons
   },
 };
 </script>
-
-<style lang="scss">
-</style>

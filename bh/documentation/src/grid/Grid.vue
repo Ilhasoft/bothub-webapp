@@ -67,6 +67,8 @@ $colors: (
   'blue',
   'pink',
   'purple',
+  'aquamarine',
+  'turquoise'
 );
 
 @each $color in $colors {
