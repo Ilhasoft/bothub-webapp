@@ -33,6 +33,7 @@ describe('NewRepositoryForm.vue', () => {
         description: '',
         is_private: true,
         use_language_model_featurizer: true,
+        use_competing_intents: false,
       };
     });
 
@@ -61,6 +62,7 @@ describe('NewRepositoryForm.vue', () => {
         description: '',
         is_private: false,
         use_language_model_featurizer: false,
+        use_competing_intents: false,
       };
     });
 

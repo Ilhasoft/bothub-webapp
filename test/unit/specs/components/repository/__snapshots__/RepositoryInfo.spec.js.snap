@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="columns">
+<div class="columns" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" language="en" categories="1,2" created_at="2018-04-20T17:05:42.035514Z">
   <div class="column is-narrow">
-    <repositoryavatar-stub></repositoryavatar-stub>
+    <repositoryavatar-stub name="Repository" ownernickname="fake" slug="repository" votessum="0"></repositoryavatar-stub>
   </div>
   <div class="column">
     <div class="repository-header repository-infospace">
       <div class="repository-header-title">
-        <router-link-stub class="title is-4">Repository</router-link-stub>
+        <router-link-stub to="/fake/repository/" tag="a" event="click" class="title is-4">Repository</router-link-stub>
       </div>
       <div class="repository-header-info">
         <!---->
@@ -19,24 +19,22 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
     <div>
       <div class="subtitle is-6 repository-infospace">
         <p>Created by Fake</p>
-        <p>
-          <a href="https://bothub.it/fake/repository/" target="_blank" class="has-text-grey">https://bothub.it/fake/repository/</a>
-        </p>
+        <p><a href="https://bothub.it/fake/repository/" target="_blank" class="has-text-grey">https://bothub.it/fake/repository/</a></p>
       </div>
       <div class="repository-infospace">
         <div class="repository-infospace-flags">
-          <bhlanguageflag-stub class="repository-infospace-flags-item"></bhlanguageflag-stub>
-          <bhlanguageflag-stub class="repository-infospace-flags-item"></bhlanguageflag-stub>
+          <bhlanguageflag-stub language="en" class="repository-infospace-flags-item"></bhlanguageflag-stub>
+          <bhlanguageflag-stub language="pt" class="repository-infospace-flags-item"></bhlanguageflag-stub>
         </div>
       </div>
       <div>
         <p class="repository-description repository-description-empty">No description</p>
       </div>
       <div>
-        <repositorycategorieslist-stub></repositorycategorieslist-stub>
+        <repositorycategorieslist-stub categories="[object Object],[object Object]"></repositorycategorieslist-stub>
       </div>
     </div>
   </div>
-  <trainmodal-stub></trainmodal-stub>
+  <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
 </div>
 `;

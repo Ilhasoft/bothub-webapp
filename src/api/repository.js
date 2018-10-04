@@ -10,7 +10,7 @@ export default {
     return data.actions.POST;
   },
   new(name, slug, language, categories, description = '', isPrivate = false,
-    useLanguageModelFeaturizer = true) {
+    useLanguageModelFeaturizer = true, useCompetingIntents = false) {
     return request.$http.post(
       '/repository/new/',
       {
@@ -21,6 +21,7 @@ export default {
         description,
         is_private: isPrivate,
         use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       },
     );
   },
@@ -51,7 +52,7 @@ export default {
     return data.actions.PUT;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
-    useLanguageModelFeaturizer) {
+    useLanguageModelFeaturizer, useCompetingIntents) {
     return request.$http.patch(
       `/repository/${ownerNickname}/${slug}/`,
       {
@@ -62,6 +63,7 @@ export default {
         description,
         is_private: isPrivate,
         use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       },
     );
   },

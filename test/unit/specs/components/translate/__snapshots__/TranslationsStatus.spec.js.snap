@@ -5,60 +5,60 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span></span>
-        <flag-stub></flag-stub>
+        <flag-stub language="de"></flag-stub>
       </p>
     </div>
   </div>
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span></span>
-        <flag-stub></flag-stub>
+        <flag-stub language="es"></flag-stub>
       </p>
     </div>
   </div>
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span>Portuguese</span>
-        <flag-stub></flag-stub>
+        <flag-stub language="pt"></flag-stub>
       </p>
     </div>
   </div>
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span></span>
-        <flag-stub></flag-stub>
+        <flag-stub language="fr"></flag-stub>
       </p>
     </div>
   </div>
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span></span>
-        <flag-stub></flag-stub>
+        <flag-stub language="it"></flag-stub>
       </p>
     </div>
   </div>
   <div class="column is-3">
     <div class="card">
       <div class="card-percentage">
-        <pie-stub></pie-stub>
+        <pie-stub percent="0"></pie-stub>
       </div>
       <p class="card-language"><span></span>
-        <flag-stub></flag-stub>
+        <flag-stub language="nl"></flag-stub>
       </p>
     </div>
   </div>

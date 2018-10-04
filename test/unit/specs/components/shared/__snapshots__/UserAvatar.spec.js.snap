@@ -2,6 +2,6 @@
 
 exports[`UserAvatar.vue renders correctly 1`] = `
 <button type="button" class="avatar">
-  <bicon-stub class="avatar-icon"></bicon-stub>
+  <bicon-stub icon="account" class="avatar-icon"></bicon-stub>
 </button>
 `;
