@@ -2,8 +2,6 @@
 
 exports[`BhTextarea.vue renders correctly 1`] = `
 <bhinput-stub>
-  <div class="bh-textarea">
-    <textarea class="bh-textarea__input" style="height: 0px;"></textarea>
-  </div>
+  <div class="bh-textarea"><textarea class="bh-textarea__input" style="height: 0px;"></textarea></div>
 </bhinput-stub>
 `;

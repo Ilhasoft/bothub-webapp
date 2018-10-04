@@ -7,7 +7,7 @@ exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info">
-          <!----><span><a>Show sentences</a></span></div>
+          <!----> <span><a>Show sentences</a></span></div>
       </div>
     </div>
   </div>
@@ -23,6 +23,14 @@ exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When la
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info"><span>3 Entities</span> <span><a>Show sentences</a></span></div>
       </div>
+    </div>
+  </div>
+  <div class="i-a-l-item__entities">
+    <div class="i-a-l-item__entities__label"><span>Entities</span></div>
+    <div class="i-a-l-item__entities__badges">
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-sunflower"><span>Dog</span></bhbadge-stub>
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-energos"><span>Cat</span></bhbadge-stub>
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-blue-martina"><span>Buy</span></bhbadge-stub>
     </div>
   </div>
 </bhcard-stub>
