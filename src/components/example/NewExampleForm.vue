@@ -198,6 +198,9 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
+      if (this.$refs.entitiesInput.clearEntityForm) {
+        this.$refs.entitiesInput.clearEntityForm();
+      }
 
       try {
         await this.newExample({
