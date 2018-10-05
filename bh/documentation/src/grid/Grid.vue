@@ -85,6 +85,7 @@ $colors: (
     &.item {
       padding: 1rem;
       text-align: center;
+      border-radius: 0.5rem;
     }
   }
 }
