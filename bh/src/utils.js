@@ -1,3 +1,4 @@
+import Information from 'bh/assets/icons/information.svg';
 import CommentQuestion from './assets/icons/comment-question.svg';
 import PlusCircle from './assets/icons/plus-circle.svg';
 import CloseCircle from './assets/icons/close-circle.svg';
@@ -19,6 +20,7 @@ import Check from './assets/icons/check.svg';
 import Exclamation from './assets/icons/exclamation.svg';
 import Refresh from './assets/icons/refresh.svg';
 import CodeTags from './assets/icons/code-tags.svg';
+import ClipboardTextOutline from 'bh/assets/icons/clipboard-text-outline.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -52,6 +54,8 @@ export const icons = {
   check: Check,
   exclamation: Exclamation,
   refresh: Refresh,
+  information: Information,
+  'clipboard-text-outline': ClipboardTextOutline,
   'code-tags': CodeTags,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
