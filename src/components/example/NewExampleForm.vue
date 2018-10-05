@@ -107,6 +107,8 @@ export default {
       entities: [],
       errors: {},
       submitting: false,
+      debounceTime: 1000,
+      setTimeoutId: null,
     };
   },
   computed: {
@@ -173,12 +175,39 @@ export default {
       };
     },
   },
+  watch: {
+    text(value) {
+      this.clearTimeout();
+      this.setTimeoutId = setTimeout(() => {
+        if (value) {
+          this.analyze(value);
+        } else {
+          this.intent = '';
+        }
+      },
+      this.debounceTime);
+    },
+  },
   methods: {
     ...mapActions([
       'newExample',
+      'analyzeText',
     ]),
     setTextSelected(value) {
       this.textSelected = value;
+    },
+    async analyze(value) {
+      try {
+        const response = await this.analyzeText({
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+          language: this.repository.language,
+          text: value,
+        });
+        this.intent = response.data.intent.name;
+      } catch (error) {
+        this.intent = '';
+      }
     },
     onEntityAdded() {
       if (this.$refs.textInput.clearSelected) {
@@ -227,6 +256,12 @@ export default {
         this.submitting = false;
       }
       return false;
+    },
+    clearTimeout() {
+      if (this.setTimeoutId) {
+        clearTimeout(this.setTimeoutId);
+        this.setTimeoutId = null;
+      }
     },
   },
 };
