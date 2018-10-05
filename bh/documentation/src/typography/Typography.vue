@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <bh-card class="typography">
     <h2>Typography</h2>
     <h3>Headers</h3>
     <h1>Header 1</h1>
@@ -15,7 +15,7 @@
     auctor dictum lectus. Etiam maximus eget neque eu tincidunt. In a augue vitae nunc laoreet
     aliquet ac et lectus. Mauris sed auctor est, non sagittis orci. Ut id libero vulputate,
     auctor libero id, volutpat nisi.</p>
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -23,3 +23,9 @@ export default {
   name: 'Typography',
 };
 </script>
+
+<style lang="scss">
+.typography {
+  padding: 1rem;
+}
+</style>

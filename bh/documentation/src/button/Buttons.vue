@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <bh-card class="buttons">
     <h2>Buttons</h2>
     <example
       :component="SimpleButton"
       :code="simpleButtonCode" />
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -30,3 +30,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.buttons {
+  padding: 1rem;
+}
+</style>

@@ -1,13 +1,13 @@
 <template>
-  <div class="blue">
+  <div class="">
     <div class="bh-grid bh-grid--half bh-grid--multiline">
-      <div class="bh-grid__item red item">A</div>
-      <div class="bh-grid__item red item">B</div>
+      <div class="bh-grid__item turquoise item">A</div>
+      <div class="bh-grid__item turquoise item">B</div>
     </div>
     <div class="bh-grid bh-grid--half bh-grid--multiline">
-      <div class="bh-grid__item red item">C</div>
-      <div class="bh-grid__item red item">D</div>
-      <div class="bh-grid__item red item">E</div>
+      <div class="bh-grid__item turquoise item">C</div>
+      <div class="bh-grid__item turquoise item">D</div>
+      <div class="bh-grid__item turquoise item">E</div>
     </div>
   </div>
 </template>

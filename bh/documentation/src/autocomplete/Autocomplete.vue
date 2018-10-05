@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <bh-card class="autocomplete">
     <h2>Autocomplete</h2>
     <h3>Simple Autocomplete</h3>
     <example
       :component="SimpleAutocomplete"
       :code="simpleAutocompleteCode" />
     <api :data="api" />
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -32,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.autocomplete {
+  padding: 1rem;
+}
+</style>

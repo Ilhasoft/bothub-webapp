@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <bh-card class="installation">
     <h2>Installation</h2>
     <vue-markdown>{{ installation }}</vue-markdown>
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -22,3 +22,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.installation {
+  padding: 1rem;
+}
+</style>

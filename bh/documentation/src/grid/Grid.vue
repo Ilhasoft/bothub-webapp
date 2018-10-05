@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <bh-card class="grid">
     <h2>Grid</h2>
     <h3>Simple grid</h3>
     <example
@@ -21,7 +21,7 @@
     <example
       :component="HalfGap"
       :code="halfGapCode" />
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -61,6 +61,9 @@ export default {
 </script>
 
 <style lang="scss">
+.grid {
+  padding: 1rem;
+}
 $colors: (
   'red',
   'green',
@@ -68,7 +71,9 @@ $colors: (
   'pink',
   'purple',
   'aquamarine',
-  'turquoise'
+  'turquoise',
+  'Gainsboro',
+  'MediumAquaMarine'
 );
 
 @each $color in $colors {

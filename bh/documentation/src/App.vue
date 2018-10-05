@@ -1,8 +1,8 @@
 <template>
   <div class="app">
     <div class="bh-grid bh-grid--column">
-      <section class="bh-grid__item">
-        <h1>BH Documentation</h1>
+      <section class="bh-grid__item bh-grid__item--nested">
+        <HeaderComponent />
       </section>
       <section class="bh-grid__item">
         <installation />
@@ -31,8 +31,9 @@ import Installation from './installation/Installation';
 import Typography from './typography/Typography';
 import Grid from './grid/Grid';
 import Autocomplete from './autocomplete/Autocomplete';
-import Card from './card/Card'
+import Card from './card/Card';
 import Buttons from './button/Buttons';
+import HeaderComponent from './header/HeaderComponent';
 
 export default {
   name: 'App',
@@ -42,7 +43,8 @@ export default {
     Grid,
     Autocomplete,
     Card,
-    Buttons
+    Buttons,
+    HeaderComponent,
   },
 };
 </script>
