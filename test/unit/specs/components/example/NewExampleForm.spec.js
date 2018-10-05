@@ -22,6 +22,9 @@ describe('NewExampleForm.vue', () => {
       propsData: {
         repository: {
           uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+          owner__nickname: 'douglas',
+          slug: 'repo1',
+          language: 'en',
         },
       },
       store,
@@ -169,6 +172,26 @@ describe('NewExampleForm.vue', () => {
 
     test('textSelected is equal to value emitted by textInput', () => {
       expect(wrapper.vm.textSelected).toMatchObject(eventValue);
+    });
+  });
+
+  describe('text intent field autofill', () => {
+    beforeEach(async () => {
+      await wrapper.vm.analyze('My name is Douglas');
+    });
+
+    test('intent field was autocompleted', () => {
+      expect(wrapper.vm.intent).toBe('greet');
+    });
+  });
+
+  describe('intent autofill failed', () => {
+    beforeEach(async () => {
+      await wrapper.vm.analyze('i like pizza');
+    });
+
+    test('intent field dont receive value', () => {
+      expect(wrapper.vm.intent).toBe('');
     });
   });
 });

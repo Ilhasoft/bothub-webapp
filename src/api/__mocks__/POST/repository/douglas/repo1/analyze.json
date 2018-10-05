@@ -11,31 +11,9 @@
         "update_id": 1,
         "language": "en",
         "msg": "My name is Douglas",
-        "answer": {
-          "intent": {
-            "name": "greet",
-            "confidence": 0.7424270364852223
-          },
-          "entities": [
-            {
-              "start": 11,
-              "end": 18,
-              "value": "Douglas",
-              "entity": "name",
-              "extractor": "ner_crf"
-            }
-          ],
-          "intent_ranking": [
-            {
-              "name": "greet",
-              "confidence": 0.7424270364852223
-            },
-            {
-              "name": "affirm",
-              "confidence": 0.14410867735373414
-            }
-          ],
-          "text": "My name is Douglas"
+        "intent": {
+          "confidence": 0.6926029544379818,
+          "name": "greet"
         }
       }
     }
