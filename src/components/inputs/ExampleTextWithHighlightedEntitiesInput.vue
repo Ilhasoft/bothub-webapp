@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import BhTextarea from 'bh/components/BhTextarea';
+import BH from 'bh';
 
 import Flag from '@/components-v1/shared/Flag';
 
@@ -44,7 +44,7 @@ const components = {
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   components,
-  extends: BhTextarea,
+  extends: BH.components.BhTextarea,
   props: {
     entities: {
       type: Array,
@@ -125,8 +125,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/forms.scss';
-@import '~bh/assets/scss/variables.scss';
+@import '~bh/src/assets/scss/forms.scss';
+@import '~bh/src/assets/scss/variables.scss';
 
 .bh {
   &-textarea {

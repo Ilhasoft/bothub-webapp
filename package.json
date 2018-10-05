@@ -10,7 +10,7 @@
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "coveralls": "cat ./test/unit/coverage/lcov.info | coveralls",
     "unit-watch": "jest --config test/unit/jest.conf.js --watch",
-    "test": "yarn unit",
+    "test": "yarn unit test/unit",
     "test-watch": "yarn unit-watch",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
@@ -18,6 +18,7 @@
   "dependencies": {
     "@mdi/font": "^2.5.94",
     "axios": "^0.18.0",
+    "bh": "./bh/",
     "buefy": "^0.6.6",
     "deep-equal": "^1.0.1",
     "global": "^4.3.2",
