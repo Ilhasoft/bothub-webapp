@@ -1,5 +1,10 @@
 <template>
-  <div class="bh-button">
+  <div
+    :class="{
+      'bh-button': true,
+      'bh-button--full-width': fullWidth,
+    }"
+  >
     <button
       :disabled="disabled"
       :type="type"
@@ -12,6 +17,7 @@
         'bh-button__button--secondary': secondary,
         [`bh-button__button--${size}`]: !!size,
         'bh-button__button--rounded': rounded,
+        'bh-button__button--full-width': fullWidth,
       }"
       @click="$emit('click', $event)"
     >
@@ -74,6 +80,10 @@ export default {
       type: [String, Array],
       default: null,
     },
+    fullWidth: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -106,6 +116,11 @@ export default {
       #{$parent}__tooltip {
         display: block;
       }
+    }
+
+    &--full-width {
+      display: block;
+      width: 100%;
     }
   }
 }
