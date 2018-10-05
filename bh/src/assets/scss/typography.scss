@@ -18,9 +18,9 @@ h1,
 h2,
 h3,
 h4 {
+  padding: 0;
   font-size: 1rem;
   font-weight: normal;
-  padding: 0;
 }
 
 @for $i from 0 to 4 {
@@ -29,19 +29,19 @@ h4 {
   $margin: .75rem 0;
 
   h#{$n} {
-    font-size: $font-size;
     margin: $margin;
+    font-size: $font-size;
   }
 
   .bh {
     &-title-#{$n} { // depreciate this class
-      font-size: $font-size;
       margin: $margin;
+      font-size: $font-size;
     }
   }
 }
 
 p {
-  margin: .5rem 0;
   padding: 0;
+  margin: .5rem 0;
 }
