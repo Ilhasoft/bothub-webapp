@@ -45,7 +45,7 @@ describe('BhModal.vue', () => {
 
   describe('close modal clicking in background', () => {
     beforeEach(() => {
-      const background = wrapper.find({ ref: 'background' });
+      const background = wrapper.find({ ref: 'modal' });
       background.trigger('click');
     });
 

@@ -1,13 +1,10 @@
 <template>
   <div
     v-show="open"
+    ref="modal"
     class="bh-modal"
+    @click="backgroundClose($event)"
   >
-    <div
-      ref="background"
-      class="bh-modal__background"
-      @click="backgroundClose()"
-    />
     <div class="bh-modal__close">
       <button
         ref="closeBtn"
@@ -15,7 +12,7 @@
         @click="close()"
       >
         <bh-icon
-          size="medium"
+          size="small"
           value="close"
         />
       </button>
@@ -60,8 +57,8 @@ export default {
     close() {
       this.$emit('update:open', false);
     },
-    backgroundClose() {
-      if (this.backgroundCloses) {
+    backgroundClose(event) {
+      if (this.backgroundCloses && event.target === this.$refs.modal) {
         this.close();
       }
     },
@@ -82,16 +79,8 @@ export default {
     width: 100%;
     height: 100%;
     padding: .5rem;
-
-    &__background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, .5);
-    }
+    overflow: auto;
+    background-color: rgba(0, 0, 0, .5);
 
     &__close {
       text-align: right;

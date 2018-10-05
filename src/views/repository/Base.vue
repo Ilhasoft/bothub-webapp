@@ -1,4 +1,7 @@
 <script>
+import { mapGetters } from 'vuex';
+
+
 export default {
   name: 'RepositoryBase',
   data() {
@@ -8,8 +11,26 @@ export default {
       errorCode: null,
     };
   },
-  async mounted() {
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
+  },
+  watch: {
+    $route() {
+      this.updateRepository();
+    },
+    authenticated() {
+      this.updateRepository();
+    },
+  },
+  mounted() {
     this.updateRepository();
+  },
+  provide() {
+    return {
+      updateRepository: this.updateRepository,
+    };
   },
   methods: {
     async updateRepository(silent = false) {

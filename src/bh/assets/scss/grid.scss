@@ -1,0 +1,37 @@
+@import '~./variables.scss';
+
+$grid-gap: .5rem;
+
+.bh {
+  &-grid {
+    $parent: &;
+
+    display: flex;
+    margin: -($grid-gap);
+
+    &--fit-content {
+      width: fit-content;
+    }
+
+    &__item {
+      flex-grow: 1;
+      margin: $grid-gap;
+
+      @for $grow from 0 to 12 {
+        &--grow-#{$grow} {
+          flex-basis: auto;
+          flex-shrink: 1;
+          flex-grow: $grow;
+        }
+      }
+    }
+
+    @media screen and (max-width: $mobile-width) {
+      flex-direction: column;
+    }
+
+    &--ever-desktop {
+      flex-direction: row;
+    }
+  }
+}

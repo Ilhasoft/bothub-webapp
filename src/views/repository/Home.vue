@@ -6,18 +6,6 @@
     <div
       v-if="repository"
       class="repository-home">
-      <div class="repository-home__permissions">
-        <img
-          src="@/assets/imgs/mascot.svg"
-          alt="mascot"
-          class="repository-home__permissions__mascot">
-        <div class="repository-home__permissions__message">
-          <p>You {{ repository.authorization &&
-          repository.authorization.can_contribute | can_t }} contribute</p>
-          <p>and you {{ repository.authorization &&
-          repository.authorization.can_write | can_t }} write.</p>
-        </div>
-      </div>
       <div class="repository-home__info">
         <div class="repository-home__info__header">
           <span>
@@ -102,23 +90,6 @@ export default {
 
 
 .repository-home {
-  &__permissions {
-    background-color: $color-lighter-grey;
-    padding: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &__mascot {
-      width: 4rem;
-      height: 4rem;
-    }
-
-    &__message {
-      margin-left: 1rem;
-    }
-  }
-
   &__info {
     padding: 3rem;
 

@@ -14,7 +14,7 @@
               :owner-nickname="repository.owner__nickname"
               :slug="repository.slug"
               :initial-data="getEditInitialData()"
-              @edited="onEdited()" />
+              @edited="onEdited($event)" />
           </div>
           <hr>
           <div class="repository-settings__manager-team-section">
@@ -54,7 +54,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
@@ -77,11 +76,6 @@ export default {
     LoginForm,
   },
   extends: RepositoryBase,
-  computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
-  },
   methods: {
     getEditInitialData() {
       const {
@@ -102,9 +96,18 @@ export default {
         is_private: isPrivate,
       };
     },
-    onEdited() {
-      this.updateRepository();
-      this.editModalOpen = false;
+    onEdited(repository) {
+      if (this.repository.slug === repository.slug) {
+        this.updateRepository();
+      } else {
+        this.$router.push({
+          name: 'repository-settings',
+          params: {
+            ownerNickname: this.repository.owner__nickname,
+            slug: repository.slug,
+          },
+        });
+      }
       this.$toast.open({
         message: 'Repository edited!',
         type: 'is-success',

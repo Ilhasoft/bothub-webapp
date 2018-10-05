@@ -13,7 +13,17 @@ describe('RepositoryViewBase.vue', () => {
     wrapper = shallowMount(RepositoryViewBase, {
       localVue,
       propsData: {
-        repository: {},
+        repository: {
+          ready_for_train: false,
+          requirements_to_train: {
+            en: [
+              'There was no change in this bot version. No examples or translations for English have been added or removed.',
+            ],
+          },
+          languages_ready_for_train: {
+            en: false,
+          },
+        },
       },
     });
   });
