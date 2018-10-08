@@ -70,9 +70,7 @@ $colors: (
   'blue',
   'pink',
   'purple',
-  'aquamarine',
   'turquoise',
-  'Gainsboro',
   'MediumAquaMarine'
 );
 
