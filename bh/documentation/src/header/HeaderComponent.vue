@@ -23,7 +23,4 @@ export default {
   background-color: #00d1b2;
   color: white;
 }
-.item {
-  justify-content: center;
-}
 </style>

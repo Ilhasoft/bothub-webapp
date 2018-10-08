@@ -1,8 +1,6 @@
 <template>
   <bh-card>
-    <div class="bh-grid bh-grid--multiline">
-      <h2>Card</h2>
-    </div>
+    <h2>Card</h2>
     <div class="bh-grid bh-grid--multiline">
       <div class="bh-grid__item">
         <h3>Simple Card</h3>

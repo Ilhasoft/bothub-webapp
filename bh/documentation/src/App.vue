@@ -22,6 +22,9 @@
       <section class="bh-grid__item">
         <buttons />
       </section>
+      <section class="bh-grid__item">
+        <Icons />
+      </section>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@ import Autocomplete from './autocomplete/Autocomplete';
 import Card from './card/Card';
 import Buttons from './button/Buttons';
 import HeaderComponent from './header/HeaderComponent';
+import Icons from './icon/Icon';
 
 export default {
   name: 'App',
@@ -45,6 +49,7 @@ export default {
     Card,
     Buttons,
     HeaderComponent,
+    Icons,
   },
 };
 </script>
