@@ -1,7 +1,6 @@
 <template>
   <bh-card class="modal">
-    <h2>Icon</h2>
-    <h3>All Icons</h3>
+    <h2>Modal</h2>
     <example
       :component="ModalExamples"
       :code="ModalExamplesCode" />
