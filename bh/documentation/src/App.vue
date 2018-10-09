@@ -37,8 +37,11 @@
       <section class="bh-grid__item">
         <TextComponent />
       </section>
-      <section class="bh-grid__item">
+      <!-- <section class="bh-grid__item">
         <text-area />
+      </section> -->
+      <section class="bh-grid__item">
+        <Dropdown />
       </section>
     </div>
   </div>
@@ -58,6 +61,7 @@ import Badge from './badge/Badge';
 import Modal from './modal/Modal';
 import TextComponent from './text/TextComponent';
 import TextArea from './text-area/TextArea';
+import Dropdown from './dropdown/Dropdown';
 
 export default {
   name: 'App',
@@ -75,6 +79,7 @@ export default {
     Modal,
     TextComponent,
     TextArea,
+    Dropdown,
   },
 };
 </script>
