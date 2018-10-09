@@ -28,6 +28,9 @@
       <section class="bh-grid__item">
         <Avatar />
       </section>
+      <section class="bh-grid__item">
+        <Badge />
+      </section>
     </div>
   </div>
 </template>
@@ -42,6 +45,7 @@ import Buttons from './button/Buttons';
 import HeaderComponent from './header/HeaderComponent';
 import Icons from './icon/Icon';
 import Avatar from './avatar/Avatar';
+import Badge from './badge/Badge';
 
 export default {
   name: 'App',
@@ -55,6 +59,7 @@ export default {
     HeaderComponent,
     Icons,
     Avatar,
+    Badge,
   },
 };
 </script>
