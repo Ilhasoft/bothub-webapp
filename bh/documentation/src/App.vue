@@ -37,6 +37,9 @@
       <section class="bh-grid__item">
         <TextComponent />
       </section>
+      <section class="bh-grid__item">
+        <text-area />
+      </section>
     </div>
   </div>
 </template>
@@ -54,6 +57,7 @@ import Avatar from './avatar/Avatar';
 import Badge from './badge/Badge';
 import Modal from './modal/Modal';
 import TextComponent from './text/TextComponent';
+import TextArea from './text-area/TextArea';
 
 export default {
   name: 'App',
@@ -70,6 +74,7 @@ export default {
     Badge,
     Modal,
     TextComponent,
+    TextArea,
   },
 };
 </script>
