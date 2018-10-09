@@ -1,5 +1,5 @@
 <template>
-  <bh-card class="buttons">
+  <bh-card class="badge">
     <h2>Badge</h2>
     <div class="bh-grid">
       <div class="bh-grid__item">
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss">
-.buttons {
+.badge {
   padding: 1rem;
 }
 </style>
