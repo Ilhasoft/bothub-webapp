@@ -117,8 +117,8 @@ export default {
         errors.push('You need type a text to sentence');
       }
 
-      if (!this.intent && this.entities.length === 0) {
-        errors.push('Set a intent or one entity');
+      if (!this.intent) {
+        errors.push('Intent is required');
       }
 
       return errors;
@@ -198,6 +198,9 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
+      if (this.$refs.entitiesInput.clearEntityForm) {
+        this.$refs.entitiesInput.clearEntityForm();
+      }
 
       try {
         await this.newExample({

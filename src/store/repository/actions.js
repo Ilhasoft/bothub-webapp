@@ -1,4 +1,6 @@
 import repository from '@/api/repository';
+import update from '@/api/update';
+
 
 export default {
   async getNewRepositorySchema() {
@@ -12,8 +14,11 @@ export default {
     categories,
     description,
     is_private: isPrivate,
+    use_language_model_featurizer: useLanguageModelFeaturizer,
+    use_competing_intents: useCompetingIntents,
   }) {
-    const response = await repository.new(name, slug, language, categories, description, isPrivate);
+    const response = await repository.new(name, slug, language, categories, description, isPrivate,
+      useLanguageModelFeaturizer, useCompetingIntents);
     return response;
   },
   getAllRepositories() {
@@ -52,6 +57,8 @@ export default {
     categories,
     description,
     is_private: isPrivate,
+    use_language_model_featurizer: useLanguageModelFeaturizer,
+    use_competing_intents: useCompetingIntents,
   }) {
     return repository.edit(
       ownerNickname,
@@ -62,6 +69,8 @@ export default {
       categories,
       description,
       isPrivate,
+      useLanguageModelFeaturizer,
+      useCompetingIntents,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
@@ -98,5 +107,8 @@ export default {
   },
   rejectRequestAuthorization(store, { id }) {
     return repository.rejectRequestAuthorization(id);
+  },
+  getUpdatesList(store, { repositoryUuid }) {
+    return update.search(repositoryUuid);
   },
 };

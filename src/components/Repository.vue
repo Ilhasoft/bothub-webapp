@@ -6,7 +6,7 @@
       <repository-info
         :show-manager-authorization-action="repository.authorization.is_admin"
         :show-edit-action="repository.authorization.can_write"
-        :show-train-action="repository.authorization.can_write && repository.ready_for_train"
+        :show-train-action="repository.authorization.can_write"
         :training="training"
         :slug="repository.slug"
         :name="repository.name"
@@ -14,6 +14,9 @@
         :available_languages="repository.available_languages"
         :categories_list="repository.categories_list"
         :votes_sum="repository.votes_sum"
+        :ready-for-train="repository.ready_for_train"
+        :requirements-to-train="repository.requirements_to_train"
+        :languages-ready-for-train="repository.languages_ready_for_train"
         hide-description
         @managerAuthorization="openManagerAuthorization()"
         @train="train()"
@@ -142,6 +145,22 @@
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div
+            v-if="Object.keys(repository.languages_warnings).length > 0"
+            class="notification is-warning">
+            <div>
+              <strong>Warning!</strong>
+            </div>
+            <div
+              v-for="(warnings, lang) in repository.languages_warnings"
+              v-if="warnings.length > 0"
+              :key="lang">
+              <div>In the sentences in <strong>{{ lang | languageVerbose }}</strong>:</div>
+              <div
+                v-for="(warning, index) in warnings"
+                :key="index">- {{ warning }}</div>
             </div>
           </div>
           <h1 class="title examples-title">Examples</h1>
@@ -283,6 +302,9 @@
                     :default-language-field="repository.language"/>
                 </div>
               </div>
+              <hr>
+              <h3 class="title is-3">Updates</h3>
+              <updates-list :repository="repository" />
             </div>
             <div v-else>
               <div class="notification is-warning">
@@ -449,6 +471,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
+import UpdatesList from '@/components/update/UpdatesList';
 
 
 const components = {
@@ -471,6 +494,7 @@ const components = {
   RequestAuthorizationForm,
   AuthorizationRequestsList,
   IntentsAndLabelsList,
+  UpdatesList,
 };
 
 export default {
@@ -569,6 +593,8 @@ export default {
         categories_list: categories,
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       } = this.repository;
       return {
         name,
@@ -579,6 +605,8 @@ export default {
         ),
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       };
     },
     onEdited() {

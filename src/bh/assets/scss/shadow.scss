@@ -1,7 +1,6 @@
 $shadow-color: rgba(0, 0, 0, 0.5);
 
 @mixin shadow() {
-
   &--shaded {
     box-shadow: .25rem .25rem .5rem -.25rem $shadow-color;
 
