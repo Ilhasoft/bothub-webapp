@@ -21,6 +21,7 @@ import Exclamation from './assets/icons/exclamation.svg';
 import Refresh from './assets/icons/refresh.svg';
 import CodeTags from './assets/icons/code-tags.svg';
 import ClipboardTextOutline from './assets/icons/clipboard-text-outline.svg';
+import InvertColors from './assets/icons/invert-colors.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -55,8 +56,9 @@ export const icons = {
   exclamation: Exclamation,
   refresh: Refresh,
   information: Information,
-  'clipboard-text-outline': ClipboardTextOutline,
   'code-tags': CodeTags,
+  'clipboard-text-outline': ClipboardTextOutline,
+  'invert-colors': InvertColors,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
