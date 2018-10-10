@@ -2,7 +2,7 @@
   <div class="app">
     <div class="bh-grid bh-grid--column">
       <section class="bh-grid__item bh-grid__item--nested">
-        <HeaderComponent />
+        <header-component />
       </section>
       <section class="bh-grid__item">
         <installation />
@@ -23,25 +23,22 @@
         <buttons />
       </section>
       <section class="bh-grid__item">
-        <Icons />
+        <icons />
       </section>
       <section class="bh-grid__item">
-        <Avatar />
+        <avatar />
       </section>
       <section class="bh-grid__item">
-        <Badge />
+        <badge />
       </section>
       <section class="bh-grid__item">
-        <Modal />
+        <modal />
       </section>
       <section class="bh-grid__item">
-        <TextComponent />
+        <text-component />
       </section>
-      <!-- <section class="bh-grid__item">
-        <text-area />
-      </section> -->
       <section class="bh-grid__item">
-        <Dropdown />
+        <dropdown />
       </section>
     </div>
   </div>
@@ -60,7 +57,6 @@ import Avatar from './avatar/Avatar';
 import Badge from './badge/Badge';
 import Modal from './modal/Modal';
 import TextComponent from './text/TextComponent';
-import TextArea from './text-area/TextArea';
 import Dropdown from './dropdown/Dropdown';
 
 export default {
@@ -78,7 +74,6 @@ export default {
     Badge,
     Modal,
     TextComponent,
-    TextArea,
     Dropdown,
   },
 };

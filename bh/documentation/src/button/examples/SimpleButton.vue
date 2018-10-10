@@ -25,19 +25,15 @@
           primary
           tooltip-hover="i'm Tooltip">Button Tooltip</bh-button>
       </div>
-      <div class="bh-grid">
-        <div class="bh-grid__item">
-          <bh-button
-            disabled>Disabled Button</bh-button>
-        </div>
-      </div>
-    </div>
-    <div class="bh-grid">
       <div class="bh-grid__item">
         <bh-button
-          full-width>Full Width Button</bh-button>
+          disabled>Disabled Button</bh-button>
       </div>
     </div>
+    <bh-button
+      full-width>
+      Full Width Button
+    </bh-button>
   </div>
 </template>
 

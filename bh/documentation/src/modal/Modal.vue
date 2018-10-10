@@ -1,10 +1,16 @@
 <template>
-  <bh-card class="modal">
-    <h2>Modal</h2>
-    <example
-      :component="ModalExamples"
-      :code="ModalExamplesCode" />
-    <api :data="api" />
+  <bh-card class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Modal</h2>
+    </div>
+    <div class="bh-grid__item">
+      <example
+        :component="ModalExamples"
+        :code="ModalExamplesCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </bh-card>
 </template>
 
@@ -31,9 +37,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.modal {
-  padding: 1rem;
-}
-</style>

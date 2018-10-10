@@ -1,10 +1,16 @@
 <template>
-  <bh-card class="icon">
-    <h2>Dropdown</h2>
-    <example
-      :component="SimpleDropDownExample"
-      :code="simpleDropDownExampleCode" />
-    <api :data="api" />
+  <bh-card class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Dropdown</h2>
+    </div>
+    <div class="bh-grid__item">
+      <example
+        :component="SimpleDropDownExample"
+        :code="simpleDropDownExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </bh-card>
 </template>
 
@@ -31,9 +37,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.icon {
-  padding: 1rem;
-}
-</style>

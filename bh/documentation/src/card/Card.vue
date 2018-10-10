@@ -1,23 +1,21 @@
 <template>
-  <bh-card>
-    <h2>Card</h2>
-    <div class="bh-grid bh-grid--multiline">
-      <div class="bh-grid__item">
-        <h3>Simple Card</h3>
-        <example
-          :component="SimpleCard"
-          :code="simpleCardCode" />
-      </div>
+  <bh-card class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Card</h2>
     </div>
-    <div class="bh-grid bh-grid--multiline">
-      <div class="bh-grid__item">
-        <h3>Card with border shadows</h3>
-        <example
-          :component="CardShadows"
-          :code="cardShadowsCode" />
-      </div>
+    <div class="bh-grid__item">
+      <h3>Simple Card</h3>
+      <example
+        :component="SimpleCard"
+        :code="simpleCardCode" />
     </div>
-    <div class="bh-grid bh-grid--multiline">
+    <div class="bh-grid__item">
+      <h3>Card with border shadows</h3>
+      <example
+        :component="CardShadows"
+        :code="cardShadowsCode" />
+    </div>
+    <div class="bh-grid__item">
       <api :data="api" />
     </div>
   </bh-card>

@@ -1,8 +1,6 @@
 <template>
   <div class="bh-grid">
-    <bh-card
-      class="bh-grid__item"
-      shadow="">
+    <bh-card class="bh-grid__item">
       <div class="bh-grid">
         <div class="bh-grid__item item">
           <h4>No shadow</h4>
