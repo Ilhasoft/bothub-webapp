@@ -20,6 +20,9 @@ $colors: (
   ('color-primary-inverted', $color-primary-inverted),
   ('color-secondary', $color-secondary),
   ('color-secondary-inverted', $color-secondary-inverted),
+  ('color-danger', $color-danger),
+  ('color-info', $color-info),
+  ('color-warning', $color-warning),
 );
 
 $notification-colors: (
