@@ -179,7 +179,7 @@ export default {
 
 .rpstr-vw-bs {
   $navigation-height: 4rem;
-  $header-height: (14rem + $navigation-height);
+  $header-height: (16rem + $navigation-height);
   $card-width: 1200px;
 
   margin: 4rem 0;
