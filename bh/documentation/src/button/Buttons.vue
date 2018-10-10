@@ -1,31 +1,25 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Buttons</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Simple Buttons</h3>
-      <example
-        :component="SimpleButton"
-        :code="simpleButtonCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Sizes</h3>
-      <example
-        :component="SizeButtons"
-        :code="sizeButtonsCode" />
-    </div>
+  <div>
+    <h2>Buttons</h2>
+    <h3>Simple Buttons</h3>
+    <example
+      :component="SimpleButtons"
+      :code="simpleButtonsCode" />
+    <h3>Sizes</h3>
+    <example
+      :component="ButtonSizes"
+      :code="buttonSizesCode" />
     <api :data="api" />
-  </bh-card>
+  </div>
 </template>
 
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import SimpleButton from './examples/SimpleButton';
-import simpleButtonCode from '!!raw-loader!./examples/SimpleButton';
-import SizeButtons from './examples/SizeButtons';
-import sizeButtonsCode from '!!raw-loader!./examples/SizeButtons';
+import SimpleButtons from './examples/SimpleButtons';
+import simpleButtonsCode from '!!raw-loader!./examples/SimpleButtons';
+import ButtonSizes from './examples/ButtonSizes';
+import buttonSizesCode from '!!raw-loader!./examples/ButtonSizes';
 import api from './api';
 
 
@@ -37,12 +31,13 @@ export default {
   },
   data() {
     return {
-      SimpleButton,
-      simpleButtonCode,
-      SizeButtons,
-      sizeButtonsCode,
+      SimpleButtons,
+      simpleButtonsCode,
+      ButtonSizes,
+      buttonSizesCode,
       api,
     };
   },
 };
 </script>
+</div></template>

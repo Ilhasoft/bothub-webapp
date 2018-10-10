@@ -20,7 +20,13 @@
         <card />
       </section>
       <section class="bh-grid__item">
-        <buttons />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <buttons />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
         <icons />
