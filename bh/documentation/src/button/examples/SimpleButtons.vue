@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bh-grid">
+    <div class="bh-grid bh-grid--multiline">
       <div class="bh-grid__item">
         <bh-button primary>Primary Button</bh-button>
       </div>
@@ -17,6 +17,8 @@
       <div class="bh-grid__item">
         <bh-button secondary>Secondary Button</bh-button>
       </div>
+    </div>
+    <div class="bh-grid bh-grid--multiline">
       <div class="bh-grid__item">
         <bh-button rounded>Rounded Button</bh-button>
       </div>
@@ -30,10 +32,14 @@
           disabled>Disabled Button</bh-button>
       </div>
     </div>
-    <bh-button
-      full-width>
-      Full Width Button
-    </bh-button>
+    <div class="bh-grid bh-grid--multiline">
+      <div class="bh-grid__item">
+        <bh-button
+          full-width>
+          Full Width Button
+        </bh-button>
+      </div>
+    </div>
   </div>
 </template>
 
