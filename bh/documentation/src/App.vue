@@ -40,6 +40,12 @@
       <section class="bh-grid__item">
         <dropdown />
       </section>
+      <section class="bh-grid__item">
+        <loading />
+      </section>
+      <section class="bh-grid__item">
+        <notification />
+      </section>
     </div>
   </div>
 </template>
@@ -58,6 +64,8 @@ import Badge from './badge/Badge';
 import Modal from './modal/Modal';
 import TextComponent from './text/TextComponent';
 import Dropdown from './dropdown/Dropdown';
+import loading from './loading/Loading';
+import Notification from './notification/Notification';
 
 export default {
   name: 'App',
@@ -75,6 +83,8 @@ export default {
     Modal,
     TextComponent,
     Dropdown,
+    loading,
+    Notification,
   },
 };
 </script>
