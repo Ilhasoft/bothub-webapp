@@ -1,24 +1,15 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Card</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Simple Card</h3>
-      <example
-        :component="SimpleCard"
-        :code="simpleCardCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Card with border shadows</h3>
-      <example
-        :component="CardShadows"
-        :code="cardShadowsCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Card</h2>
+    <example
+      :component="SimpleCard"
+      :code="simpleCardCode" />
+    <h3>Card with border shadows</h3>
+    <example
+      :component="CardShadows"
+      :code="cardShadowsCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

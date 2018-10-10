@@ -41,7 +41,13 @@
         </bh-card>
       </section>
       <section class="bh-grid__item">
-        <card />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <card />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
         <bh-card>
