@@ -147,19 +147,20 @@
               </div>
             </div>
           </div>
-          <div>
+          <div
+            v-if="Object.keys(repository.languages_warnings).length > 0"
+            class="notification is-warning">
+            <div>
+              <strong>Warning!</strong>
+            </div>
             <div
               v-for="(warnings, lang) in repository.languages_warnings"
               v-if="warnings.length > 0"
               :key="lang">
-              <div class="notification is-warning">
-                <div>
-                  <strong>{{ lang | languageVerbose }}</strong>
-                </div>
-                <p
-                  v-for="(warning, index) in warnings"
-                  :key="index">{{ warning }}</p>
-              </div>
+              <div>In the sentences in <strong>{{ lang | languageVerbose }}</strong>:</div>
+              <div
+                v-for="(warning, index) in warnings"
+                :key="index">- {{ warning }}</div>
             </div>
           </div>
           <h1 class="title examples-title">Examples</h1>
