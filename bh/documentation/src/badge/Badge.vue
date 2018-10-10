@@ -5,6 +5,10 @@
     <example
       :component="BadgeExample"
       :code="badgeExampleCode" />
+    <h3>Example Badge with text</h3>
+    <example
+      :component="BadgeWithText"
+      :code="badgeWithTextCode" />
     <h3>Badge Sizes</h3>
     <example
       :component="BadgeSize"
@@ -20,6 +24,8 @@ import BadgeExample from './examples/BadgeExample';
 import badgeExampleCode from '!!raw-loader!./examples/BadgeExample';
 import BadgeSize from './examples/BadgeSize';
 import badgeSizeCode from '!!raw-loader!./examples/BadgeSize';
+import BadgeWithText from './examples/BadgeWithText';
+import badgeWithTextCode from '!!raw-loader!./examples/BadgeWithText';
 import api from './api';
 
 
@@ -35,6 +41,8 @@ export default {
       badgeExampleCode,
       BadgeSize,
       badgeSizeCode,
+      BadgeWithText,
+      badgeWithTextCode,
       api,
     };
   },

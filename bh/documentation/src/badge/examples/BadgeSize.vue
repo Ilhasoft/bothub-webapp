@@ -33,6 +33,6 @@
 
 <script>
 export default {
-  name: 'BadgeSize',
+  name: 'BadgeSizes',
 };
 </script>

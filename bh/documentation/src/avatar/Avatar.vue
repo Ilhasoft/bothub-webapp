@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Avatar</h2>
-    <h3>Examples of Avatar field</h3>
+    <h3>Avatar Example</h3>
     <example
       :component="AvatarExample"
       :code="avatarExampleCode" />

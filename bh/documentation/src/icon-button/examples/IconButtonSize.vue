@@ -4,29 +4,25 @@
       <bh-icon-button
         slot="trigger"
         value="dots-horizontal"
-        size="small"
-        @click="buttonClicked()" />
+        size="small" />
     </div>
     <div class="bh-grid__item item">
       <bh-icon-button
         slot="trigger"
         value="dots-horizontal"
-        size="normal"
-        @click="buttonClicked()" />
+        size="normal" />
     </div>
     <div class="bh-grid__item item">
       <bh-icon-button
         slot="trigger"
         value="dots-horizontal"
-        size="medium"
-        @click="buttonClicked()" />
+        size="medium" />
     </div>
     <div class="bh-grid__item item">
       <bh-icon-button
         slot="trigger"
         value="dots-horizontal"
-        size="large"
-        @click="buttonClicked()" />
+        size="large" />
     </div>
   </div>
 </template>
@@ -34,10 +30,5 @@
 <script>
 export default {
   name: 'IconButtonSize',
-  methods: {
-    buttonClicked() {
-      alert('Button Clicked');
-    },
-  },
 };
 </script>
