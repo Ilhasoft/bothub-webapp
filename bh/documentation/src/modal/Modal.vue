@@ -6,7 +6,7 @@
     <div class="bh-grid__item">
       <example
         :component="ModalExamples"
-        :code="ModalExamplesCode" />
+        :code="modalExamplesCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -18,7 +18,7 @@
 import Example from '@/Example';
 import Api from '@/Api';
 import ModalExamples from './examples/ModalExample';
-import ModalExamplesCode from '!!raw-loader!./examples/ModalExample';
+import modalExamplesCode from '!!raw-loader!./examples/ModalExample';
 import api from './api';
 
 
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       ModalExamples,
-      ModalExamplesCode,
+      modalExamplesCode,
       api,
     };
   },
