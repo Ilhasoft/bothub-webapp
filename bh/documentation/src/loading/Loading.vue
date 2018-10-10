@@ -32,7 +32,7 @@ import api from './api';
 
 
 export default {
-  name: 'Autocomplete',
+  name: 'Loading',
   components: {
     Example,
     Api,

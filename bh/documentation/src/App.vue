@@ -46,6 +46,9 @@
       <section class="bh-grid__item">
         <notification />
       </section>
+      <section class="bh-grid__item">
+        <icon-button />
+      </section>
     </div>
   </div>
 </template>
@@ -66,6 +69,7 @@ import TextComponent from './text/TextComponent';
 import Dropdown from './dropdown/Dropdown';
 import loading from './loading/Loading';
 import Notification from './notification/Notification';
+import IconButton from './icon-button/IconButton';
 
 export default {
   name: 'App',
@@ -85,6 +89,7 @@ export default {
     Dropdown,
     loading,
     Notification,
+    IconButton,
   },
 };
 </script>

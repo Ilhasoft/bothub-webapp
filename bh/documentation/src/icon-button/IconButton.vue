@@ -1,12 +1,13 @@
 <template>
   <bh-card class="bh-grid">
     <div class="bh-grid__item">
-      <h2>Notifications</h2>
+      <h2>Icon Buttons</h2>
     </div>
     <div class="bh-grid__item">
+      <h3>Icons Buttons</h3>
       <example
-        :component="NotificationExample"
-        :code="notificationExampleCode" />
+        :component="IconButtonExamples"
+        :code="iconButtonExamplesCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -17,21 +18,21 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import NotificationExample from './examples/NotificationExample';
-import notificationExampleCode from '!!raw-loader!./examples/NotificationExample';
+import IconButtonExamples from './examples/IconButtonExamples';
+import iconButtonExamplesCode from '!!raw-loader!./examples/IconButtonExamples';
 import api from './api';
 
 
 export default {
-  name: 'Notification',
+  name: 'IconButton',
   components: {
     Example,
     Api,
   },
   data() {
     return {
-      NotificationExample,
-      notificationExampleCode,
+      IconButtonExamples,
+      iconButtonExamplesCode,
       api,
     };
   },
