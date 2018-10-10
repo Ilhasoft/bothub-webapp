@@ -1,12 +1,12 @@
 <template>
   <bh-card class="bh-grid">
     <div class="bh-grid__item">
-      <h2>Modal</h2>
+      <h2>Notifications</h2>
     </div>
     <div class="bh-grid__item">
       <example
-        :component="ModalExamples"
-        :code="modalExamplesCode" />
+        :component="NotificationExample"
+        :code="notificationExampleCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -17,8 +17,8 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import ModalExamples from './examples/ModalExample';
-import modalExamplesCode from '!!raw-loader!./examples/ModalExample';
+import NotificationExample from './examples/NotificationExample';
+import notificationExampleCode from '!!raw-loader!./examples/NotificationExample';
 import api from './api';
 
 
@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      ModalExamples,
-      modalExamplesCode,
+      NotificationExample,
+      notificationExampleCode,
       api,
     };
   },

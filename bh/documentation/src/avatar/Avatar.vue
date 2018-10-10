@@ -13,7 +13,7 @@
       <h3>Sizes</h3>
       <example
         :component="AvatarSize"
-        :code="AvatarSizeCode" />
+        :code="avatarSizeCode" />
     </div>
 
     <api :data="api" />
@@ -26,7 +26,7 @@ import Api from '@/Api';
 import AvatarExample from './examples/AvatarExample';
 import avatarExampleCode from '!!raw-loader!./examples/AvatarExample';
 import AvatarSize from './examples/AvatarSize';
-import AvatarSizeCode from '!!raw-loader!./examples/AvatarSize';
+import avatarSizeCode from '!!raw-loader!./examples/AvatarSize';
 import api from './api';
 
 
@@ -41,7 +41,7 @@ export default {
       AvatarExample,
       avatarExampleCode,
       AvatarSize,
-      AvatarSizeCode,
+      avatarSizeCode,
       api,
     };
   },
