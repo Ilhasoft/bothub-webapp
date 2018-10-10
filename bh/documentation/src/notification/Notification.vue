@@ -1,17 +1,11 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Notifications</h2>
-    </div>
-    <div class="bh-grid__item">
-      <example
-        :component="NotificationExample"
-        :code="notificationExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Notifications</h2>
+    <example
+      :component="NotificationExample"
+      :code="notificationExampleCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

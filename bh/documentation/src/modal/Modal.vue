@@ -1,17 +1,11 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Modal</h2>
-    </div>
-    <div class="bh-grid__item">
-      <example
-        :component="ModalExamples"
-        :code="modalExamplesCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Modal</h2>
+    <example
+      :component="ModalExamples"
+      :code="modalExamplesCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

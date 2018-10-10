@@ -1,22 +1,16 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Badge</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Badge Example</h3>
-      <example
-        :component="BadgeExample"
-        :code="badgeExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Badge Sizes</h3>
-      <example
-        :component="BadgeSize"
-        :code="badgeSizeCode" />
-    </div>
+  <div>
+    <h2>Badge</h2>
+    <h3>Badge Example</h3>
+    <example
+      :component="BadgeExample"
+      :code="badgeExampleCode" />
+    <h3>Badge Sizes</h3>
+    <example
+      :component="BadgeSize"
+      :code="badgeSizeCode" />
     <api :data="api" />
-  </bh-card>
+  </div>
 </template>
 
 <script>

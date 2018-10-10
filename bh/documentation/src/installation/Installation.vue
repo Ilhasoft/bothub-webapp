@@ -1,8 +1,8 @@
 <template>
-  <bh-card class="installation">
+  <div class="installation">
     <h2>Installation</h2>
     <vue-markdown>{{ installation }}</vue-markdown>
-  </bh-card>
+  </div>
 </template>
 
 <script>

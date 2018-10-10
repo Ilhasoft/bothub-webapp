@@ -1,24 +1,16 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Loading</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Simple Loading</h3>
-      <example
-        :component="SimpleLoadingExample"
-        :code="simpleLoadingExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Sizes</h3>
-      <example
-        :component="LoadingSizes"
-        :code="loadingSizeseCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div >
+    <h2>Loading</h2>
+    <h3>Simple Loading</h3>
+    <example
+      :component="SimpleLoadingExample"
+      :code="simpleLoadingExampleCode" />
+    <h3>Sizes</h3>
+    <example
+      :component="LoadingSizes"
+      :code="loadingSizeseCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

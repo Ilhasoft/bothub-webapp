@@ -1,24 +1,16 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Icon</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>All Icons</h3>
-      <example
-        :component="IconExamples"
-        :code="iconExamplesCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Icon Sizes</h3>
-      <example
-        :component="IconSize"
-        :code="iconSizeCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Icon</h2>
+    <h3>All Icons</h3>
+    <example
+      :component="IconExamples"
+      :code="iconExamplesCode" />
+    <h3>Icon Sizes</h3>
+    <example
+      :component="IconSize"
+      :code="iconSizeCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

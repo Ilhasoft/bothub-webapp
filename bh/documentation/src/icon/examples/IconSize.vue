@@ -1,5 +1,5 @@
 <template>
-  <bh-card shadow="shaded">
+  <div shadow="shaded">
     <div class="bh-grid">
       <div class="bh-grid__item item">
         <bh-icon
@@ -22,7 +22,7 @@
           value="botinho"/>
       </div>
     </div>
-  </bh-card>
+  </div>
 </template>
 
 <script>

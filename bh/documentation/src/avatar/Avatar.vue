@@ -1,23 +1,16 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Avatar</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Examples of Avatar field</h3>
-      <example
-        :component="AvatarExample"
-        :code="avatarExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Sizes</h3>
-      <example
-        :component="AvatarSize"
-        :code="avatarSizeCode" />
-    </div>
-
+  <div>
+    <h2>Avatar</h2>
+    <h3>Examples of Avatar field</h3>
+    <example
+      :component="AvatarExample"
+      :code="avatarExampleCode" />
+    <h3>Sizes</h3>
+    <example
+      :component="AvatarSize"
+      :code="avatarSizeCode" />
     <api :data="api" />
-  </bh-card>
+  </div>
 </template>
 
 <script>

@@ -1,17 +1,11 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Dropdown</h2>
-    </div>
-    <div class="bh-grid__item">
-      <example
-        :component="SimpleDropDownExample"
-        :code="simpleDropDownExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Dropdown</h2>
+    <example
+      :component="SimpleDropDownExample"
+      :code="simpleDropDownExampleCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

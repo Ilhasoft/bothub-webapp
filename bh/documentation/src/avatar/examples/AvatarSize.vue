@@ -2,36 +2,26 @@
   <div>
     <div class="bh-grid">
       <div class="bh-grid__item item">
-        <bh-avatar
-          size="small"
-          @click="avatarClicked()">
-          <bh-icon
-            value="botinho"/>
+        <bh-avatar size="small">
+          <bh-icon value="botinho"/>
         </bh-avatar>
       </div>
       <div class="bh-grid__item item">
-        <bh-avatar
-          size="normal"
-          @click="avatarClicked()">
+        <bh-avatar size="normal">
           <bh-icon
             size="small"
             value="botinho"/>
         </bh-avatar>
       </div>
       <div class="bh-grid__item item">
-        <bh-avatar
-          size="medium"
-          @click="avatarClicked()">
+        <bh-avatar size="medium">
           <bh-icon
             size="normal"
             value="botinho"/>
         </bh-avatar>
       </div>
-      <div
-        class="bh-grid__item item"
-        @click="avatarClicked()">
-        <bh-avatar
-          size="large">
+      <div class="bh-grid__item item">
+        <bh-avatar size="large">
           <bh-icon
             size="medium"
             value="botinho"/>
@@ -43,11 +33,6 @@
 
 <script>
 export default {
-  name: 'AvatarSize',
-  methods: {
-    avatarClicked() {
-      alert('Avatar Clicked');
-    },
-  },
+  name: 'AvatarSizes',
 };
 </script>

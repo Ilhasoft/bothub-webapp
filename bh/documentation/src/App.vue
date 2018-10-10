@@ -5,16 +5,40 @@
         <header-component />
       </section>
       <section class="bh-grid__item">
-        <installation />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <installation />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <typography />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <typography />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <grid />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <grid />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <autocomplete />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <autocomplete />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
         <card />
@@ -29,31 +53,85 @@
         </bh-card>
       </section>
       <section class="bh-grid__item">
-        <icons />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <icons />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <avatar />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <avatar />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <badge />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <badge />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <modal />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <modal />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <text-component />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <text-component />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <dropdown />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <dropdown />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <loading />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <loading />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <notification />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <notification />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <icon-button />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <icon-button />
+            </div>
+          </div>
+        </bh-card>
       </section>
     </div>
   </div>

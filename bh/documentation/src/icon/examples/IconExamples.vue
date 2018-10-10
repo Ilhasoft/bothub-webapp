@@ -1,5 +1,5 @@
 <template>
-  <bh-card
+  <div
     class="bh-grid"
     shadow="shaded">
     <bh-icon
@@ -126,7 +126,7 @@
       class="bh-grid__item"
       value="school"
       size="normal"/>
-  </bh-card>
+  </div>
 </template>
 
 <script>

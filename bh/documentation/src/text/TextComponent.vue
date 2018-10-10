@@ -1,24 +1,16 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Text</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Simple Text Field Example</h3>
-      <example
-        :component="SimpleTextExample"
-        :code="simpleTextExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <h3>Text field with Slot</h3>
-      <example
-        :component="SlotTextExample"
-        :code="slotTextExampleCode" />
-    </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
-  </bh-card>
+  <div>
+    <h2>Text</h2>
+    <h3>Simple Text Field Example</h3>
+    <example
+      :component="SimpleTextExample"
+      :code="simpleTextExampleCode" />
+    <h3>Text field with Slot</h3>
+    <example
+      :component="SlotTextExample"
+      :code="slotTextExampleCode" />
+    <api :data="api" />
+  </div>
 </template>
 
 <script>

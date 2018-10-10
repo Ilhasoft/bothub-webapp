@@ -1,17 +1,12 @@
 <template>
-  <bh-card class="bh-grid">
-    <div class="bh-grid__item">
-      <h2>Autocomplete</h2>
-    </div>
-    <div class="bh-grid__item">
-      <h3>Simple Autocomplete</h3>
-      <example
-        :component="SimpleAutocomplete"
-        :code="simpleAutocompleteCode" />
-    </div>
-
+  <div>
+    <h2>Autocomplete</h2>
+    <h3>Simple Autocomplete</h3>
+    <example
+      :component="SimpleAutocomplete"
+      :code="simpleAutocompleteCode" />
     <api :data="api" />
-  </bh-card>
+  </div>
 </template>
 
 <script>

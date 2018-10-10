@@ -1,5 +1,5 @@
 <template>
-  <bh-card class="grid">
+  <div class="grid">
     <h2>Grid</h2>
     <h3>Simple grid</h3>
     <example
@@ -21,7 +21,7 @@
     <example
       :component="HalfGap"
       :code="halfGapCode" />
-  </bh-card>
+  </div>
 </template>
 
 <script>
