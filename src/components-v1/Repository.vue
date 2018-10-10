@@ -147,6 +147,22 @@
               </div>
             </div>
           </div>
+          <div
+            v-if="Object.keys(repository.languages_warnings).length > 0"
+            class="notification is-warning">
+            <div>
+              <strong>Warning!</strong>
+            </div>
+            <div
+              v-for="(warnings, lang) in repository.languages_warnings"
+              v-if="warnings.length > 0"
+              :key="lang">
+              <div>In the sentences in <strong>{{ lang | languageVerbose }}</strong>:</div>
+              <div
+                v-for="(warning, index) in warnings"
+                :key="index">- {{ warning }}</div>
+            </div>
+          </div>
           <h1 class="title examples-title">Examples</h1>
           <examples-list
             ref="examplesList"
@@ -577,6 +593,8 @@ export default {
         categories_list: categories,
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       } = this.repository;
       return {
         name,
@@ -587,6 +605,8 @@ export default {
         ),
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       };
     },
     onEdited() {

@@ -2,18 +2,17 @@
 
 exports[`NewEntity.vue enter in adding mode set textSelected renders correctly 1`] = `
 <form>
-  <bhbutton-stub><span><span>Add new entity</span> <span>for "douglas"</span></span>
-    <bhicon-stub></bhicon-stub>
+  <bhbutton-stub type="button" rounded="true"><span><span>Add new entity</span> <span>for "douglas"</span></span>
+    <bhicon-stub value="plus-circle"></bhicon-stub>
   </bhbutton-stub>
 </form>
 `;
 
 exports[`NewEntity.vue renders correctly 1`] = `
 <form>
-  <bhbutton-stub><span><span>Add new entity</span>
-    <!---->
-    </span>
-    <bhicon-stub></bhicon-stub>
+  <bhbutton-stub type="button" rounded="true" tooltiphover="Highlight words to mark as entity"><span><span>Add new entity</span>
+    <!----></span>
+    <bhicon-stub value="plus-circle"></bhicon-stub>
   </bhbutton-stub>
 </form>
 `;

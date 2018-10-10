@@ -3,15 +3,16 @@
 exports[`RepositoryNavigation.vue renders correctly 1`] = `
 <div class="repository-nav">
   <div class="repository-nav__desktop">
-    <router-link-stub>Status</router-link-stub>
-    <router-link-stub>Trainings</router-link-stub>
-    <router-link-stub>Translate</router-link-stub>
-    <router-link-stub>Translated Sentences</router-link-stub>
-    <router-link-stub>Analyze Text</router-link-stub>
-    <router-link-stub>Settings</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Status</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Trainings</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Translate</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Translated Sentences</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Analyze Text</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Settings</router-link-stub>
   </div>
   <div class="repository-nav__mobile">
-    <bhdropdown-stub>
+    <bhdropdown-stub position="left">
+      <bhicon-stub value="dots-vertical" size="normal" class="clickable text-color-primary"></bhicon-stub>
       <bhdropdownitem-stub>Status</bhdropdownitem-stub>
       <bhdropdownitem-stub>Trainings</bhdropdownitem-stub>
       <bhdropdownitem-stub>Translate</bhdropdownitem-stub>

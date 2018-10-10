@@ -4,9 +4,7 @@ exports[`ExampleTextWithHighlightedEntitiesInput.vue renders correctly 1`] = `
 <bhinput-stub data-v-73f15743="">
   <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
     <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
-      <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input"
-        style="height: 0px;"></textarea>
+      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
     </div>
   </div>
 </bhinput-stub>
@@ -16,9 +14,7 @@ exports[`ExampleTextWithHighlightedEntitiesInput.vue set text select text render
 <bhinput-stub data-v-73f15743="">
   <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
     <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text">hi</span></div>
-      <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input"
-        style="height: 0px;"></textarea>
+      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text">hi</span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
     </div>
   </div>
 </bhinput-stub>
@@ -29,9 +25,7 @@ exports[`ExampleTextWithHighlightedEntitiesInput.vue set text with entity render
   <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
     <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
       <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before">hi </span><span data-v-73f15743="" class="entity-sunflower example-txt-w-highlighted-entities__entity__text">kids</span></div>
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
-      <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input"
-        style="height: 0px;"></textarea>
+      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
     </div>
   </div>
 </bhinput-stub>

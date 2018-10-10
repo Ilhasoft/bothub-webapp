@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="card">
+<div class="card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
   <div class="card-content">
-    <repositoryinfo-stub></repositoryinfo-stub>
+    <repositoryinfo-stub repository="[object Object]"></repositoryinfo-stub>
   </div>
 </div>
 `;

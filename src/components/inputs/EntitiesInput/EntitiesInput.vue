@@ -215,6 +215,9 @@ export default {
       });
       this.entities = this.entities.filter(value => !!value);
     },
+    clearEntityForm() {
+      this.$refs.newEntity.disableAddingMode();
+    },
   },
 };
 </script>
