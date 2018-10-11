@@ -1,35 +1,71 @@
 export default {
   props: [
     {
-      name: 'data',
-      type: 'Array',
-      description: 'List of items',
+      name: 'disabled',
+      type: 'Boolean',
+      description: 'Disabled Button',
       required: true,
     },
     {
-      name: 'verbose-field',
-      type: 'String',
-      description: 'If items are objects use this prop to set key with printable value.',
-      default: 'null',
-    },
-    {
-      name: 'index-field',
-      type: 'String',
-      description: 'If items are objects use this prop to set key with index value.',
-      default: 'null',
-    },
-    {
-      name: 'force-select-first',
+      name: 'primary',
       type: 'Boolean',
-      description: 'Forces user select first element from search or list.',
+      description: 'Set primary style to button',
+      default: 'null',
+    },
+    {
+      name: 'inverted',
+      type: 'Boolean',
+      description: 'Reverse button color',
+      default: 'null',
+    },
+    {
+      name: 'transparent',
+      type: 'Boolean',
+      description: 'Set a transparent color for Button',
+      default: 'false',
+    },
+    {
+      name: 'secondary',
+      type: 'Boolean',
+      description: 'Set secondary style to Button',
+      default: 'false',
+    },
+    {
+      name: 'type',
+      type: 'String',
+      description: 'define the Type of Button',
+      default: 'false',
+    },
+    {
+      name: 'size',
+      type: 'String',
+      description: 'Set the size Button',
+      default: 'false',
+    },
+    {
+      name: 'rounded',
+      type: 'Boolean',
+      description: 'Set rounded borders to Button',
+      default: 'false',
+    },
+    {
+      name: 'tooltipHover',
+      type: 'String, Array',
+      description: 'Define tooltip text',
+      default: 'false',
+    },
+    {
+      name: 'fullWidth',
+      type: 'Boolean',
+      description: 'Force button occupy maximum space of parent element',
       default: 'false',
     },
   ],
   events: [
     {
-      name: 'selected',
-      description: 'Emitted when item is selected.',
-      parameters: 'Value or item selected',
+      name: 'click',
+      description: 'Emitted action when Button is clicked',
+      parameters: 'Event',
     },
   ],
 };
