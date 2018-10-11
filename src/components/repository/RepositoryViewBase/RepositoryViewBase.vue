@@ -101,7 +101,7 @@
       <div v-if="repository && requestAuthorizationModal">
         <div class="bh-grid bh-grid--column">
           <div class="bh-grid__item">
-            <h1 class="bh-title 2">Request Authorization</h1>
+            <h1 class="bh-title-2">Request Authorization</h1>
           </div>
           <request-authorization-form
             :repository-uuid="repository.uuid"
