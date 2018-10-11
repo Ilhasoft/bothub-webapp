@@ -1,5 +1,5 @@
 <template>
-  <div shadow="shaded">
+  <div>
     <div class="bh-grid">
       <div class="bh-grid__item item">
         <bh-icon
