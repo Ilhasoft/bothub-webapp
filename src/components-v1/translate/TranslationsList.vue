@@ -4,7 +4,8 @@
       v-if="translationsList"
       :item-component="translationItemElem"
       :list="translationsList"
-      :repository="repository" />
+      :repository="repository"
+      @itemDeleted="examplesDeleted()" />
     <p
       v-if="translationsList && translationsList.empty"
       class="no-examples">No translations.</p>
@@ -56,6 +57,9 @@ export default {
         repositoryUuid: this.repository.uuid,
         to_language: this.toLanguage,
       });
+    },
+    examplesDeleted() {
+      this.$emit('itemDeleted');
     },
   },
 };
