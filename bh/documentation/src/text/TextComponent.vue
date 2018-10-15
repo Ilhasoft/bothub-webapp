@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h2>Text</h2>
-    <h3>Simple Text Field Example</h3>
+    <h2>Text Input</h2>
+    <h3>Simple Text Input Example</h3>
     <example
       :component="SimpleTextExample"
       :code="simpleTextExampleCode" />
-    <h3>Text field with Slot</h3>
+    <h3>Text Input with Slot</h3>
     <example
       :component="SlotTextExample"
       :code="slotTextExampleCode" />
