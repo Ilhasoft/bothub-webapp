@@ -1,17 +1,9 @@
 <template>
-  <div class="bh-grid">
-    <bh-badge
-      class="bh-grid__item"
-      color="grey" />
-    <bh-badge
-      class="bh-grid__item"
-      color="secondary" />
-    <bh-badge
-      class="bh-grid__item"
-      color="primary" />
-    <bh-badge
-      class="bh-grid__item"
-      color="lighter-grey" />
+  <div>
+    <bh-badge color="grey">Grey Badge</bh-badge>
+    <bh-badge color="secondary">Secondary Badge</bh-badge>
+    <bh-badge color="primary">Primary Badge</bh-badge>
+    <bh-badge color="lighter-grey">Lighter Grey Badge</bh-badge>
   </div>
 </template>
 
