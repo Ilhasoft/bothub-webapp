@@ -30,9 +30,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.modal {
-  padding: 1rem;
-}
-</style>

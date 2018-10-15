@@ -23,9 +23,3 @@ export default {
   name: 'Typography',
 };
 </script>
-
-<style lang="scss">
-.typography {
-  padding: 1rem;
-}
-</style>

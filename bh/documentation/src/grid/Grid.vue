@@ -61,9 +61,6 @@ export default {
 </script>
 
 <style lang="scss">
-.grid {
-  padding: 1rem;
-}
 $colors: (
   'red',
   'green',

@@ -22,9 +22,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.installation {
-  padding: 1rem;
-}
-</style>
