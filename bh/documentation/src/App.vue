@@ -34,7 +34,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <autocomplete />
             </div>
           </div>
