@@ -2,7 +2,7 @@
 
 exports[`ExamplesList.vue renders correctly 1`] = `
 <div>
-  <pagination-stub repository="[object Object]"></pagination-stub>
+  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" repository="[object Object]"></pagination-stub>
   <p class="no-examples">No examples.</p>
 </div>
 `;

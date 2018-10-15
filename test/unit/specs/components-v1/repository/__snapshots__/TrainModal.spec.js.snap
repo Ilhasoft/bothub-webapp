@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
-<bhmodal-stub>
+<bhmodal-stub open="true" backgroundcloses="true">
   <div class="train-modal">
     <h1 class="title is-3">Train Status</h1>
     <div>
@@ -23,14 +23,15 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
       <div class="level-left">
         <div class="train-modal__flags">
           <div class="train-modal__flags__item">
-            <bhlanguageflag-stub></bhlanguageflag-stub>
-            <bhicon-stub class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
+            <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
+            <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
           </div>
         </div>
       </div>
       <div class="level-rigth">
-        <bhbutton-stub>
-          <bhicon-stub></bhicon-stub> <span>Train</span></bhbutton-stub>
+        <bhbutton-stub primary="true" type="button">
+          <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
+        </bhbutton-stub>
       </div>
     </div>
   </div>
@@ -38,7 +39,7 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
 `;
 
 exports[`TrainModal.vue renders correctly 1`] = `
-<bhmodal-stub>
+<bhmodal-stub open="true" backgroundcloses="true">
   <div class="train-modal">
     <h1 class="title is-3">Train Status</h1>
     <div>
@@ -48,14 +49,15 @@ exports[`TrainModal.vue renders correctly 1`] = `
       <div class="level-left">
         <div class="train-modal__flags">
           <div class="train-modal__flags__item">
-            <bhlanguageflag-stub></bhlanguageflag-stub>
-            <bhicon-stub class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
+            <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
+            <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
           </div>
         </div>
       </div>
       <div class="level-rigth">
-        <bhbutton-stub>
-          <bhicon-stub></bhicon-stub> <span>Train</span></bhbutton-stub>
+        <bhbutton-stub primary="true" type="button">
+          <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
+        </bhbutton-stub>
       </div>
     </div>
   </div>

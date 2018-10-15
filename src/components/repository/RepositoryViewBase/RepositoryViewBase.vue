@@ -25,31 +25,39 @@
         </div>
         <div class="rpstr-vw-bs__status-bar">
           <div class="bh-grid">
-            <div class="bh-grid__item">
-              <div class="bh-grid bh-grid--fit-content rpstr-vw-bs__status-bar__authorization">
-                <img
-                  src="@/assets/imgs/mascot.svg"
-                  alt="mascot"
-                  class="rpstr-vw-bs__status-bar__mascot bh-grid__item">
-                <div class="rpstr-vw-bs__status-bar__message bh-grid__item">
-                  <p>You {{ repository.authorization &&
-                  repository.authorization.can_contribute | can_t }} contribute</p>
-                  <p>and you {{ repository.authorization &&
-                  repository.authorization.can_write | can_t }} write.</p>
-                </div>
+            <div class="bh-grid__item text-center">
+              <div class="rpstr-vw-bs__status-bar__button">
+                <bh-icon
+                  size="normal"
+                  value="botinho" />
+              </div>
+              <div>
+                <div><small>You {{ repository.authorization &&
+                repository.authorization.can_contribute | can_t }} contribute</small></div>
+                <div><small>and you {{ repository.authorization &&
+                repository.authorization.can_write | can_t }} write.</small></div>
               </div>
             </div>
             <div
               v-if="authenticated && repository.authorization.can_write "
-              class="bh-grid__item rpstr-vw-bs__status-bar__button">
-              <bh-button
-                primary
-                @click="openTrainModal()">
-                <bh-icon
-                  value="school"
-                  size="small"/>
-                <span>Train Your Bot</span>
-              </bh-button>
+              class="bh-grid__item bh-grid__item--grow-0 text-center">
+              <div class="rpstr-vw-bs__status-bar__button">
+                <bh-button
+                  :primary="repository.ready_for_train"
+                  :secondary="!repository.ready_for_train"
+                  @click="openTrainModal()">
+                  <bh-icon
+                    value="school"
+                    size="small" />
+                  <span v-if="repository.ready_for_train">Train Your Bot</span>
+                  <span v-else>Requirements missed</span>
+                </bh-button>
+              </div>
+              <div>
+                <small v-if="repository.ready_for_train">Your bot is ready for training.</small>
+                <small v-else>Your bot is not ready for training.</small>
+              </div>
+              <div><small>{{ requirementsCount }} requirements missed.</small></div>
             </div>
           </div>
         </div>
@@ -143,6 +151,14 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    requirementsCount() {
+      return Object
+        .keys(this.repository.requirements_to_train)
+        .reduce(
+          (previous, lang) => this.repository.requirements_to_train[lang].length + previous,
+          0,
+        );
+    },
   },
   methods: {
     ...mapActions([
@@ -179,7 +195,7 @@ export default {
 
 .rpstr-vw-bs {
   $navigation-height: 4rem;
-  $header-height: (14rem + $navigation-height);
+  $header-height: (16rem + $navigation-height);
   $card-width: 1200px;
 
   margin: 4rem 0;
@@ -200,22 +216,8 @@ export default {
     background-color: $color-lighter-grey;
     padding: 1rem;
 
-    &__mascot {
-      width: 4rem;
-      height: 4rem;
-    }
-
-    &__authorization {
-      margin: auto;
-    }
-
-    &__message {
-      align-self: center;
-    }
-
     &__button {
-      align-self: center;
-      text-align: center;
+      margin-bottom: .5rem;
     }
   }
 

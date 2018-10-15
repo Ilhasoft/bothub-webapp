@@ -6,53 +6,64 @@
     <div
       v-if="repository"
       class="repository-home">
-      <div class="repository-home__info">
-        <div class="repository-home__info__header">
-          <span>
-            <bh-icon value="flag-variant" />
-            {{ repository.available_languages.length }} language
-          </span>
-          <span>
-            <bh-icon value="botinho" />
-            {{ repository.examples__count }} Examples, created a
-            {{ repository.created_at | moment('from') }}
-          </span>
+      <div class="bh-grid bh-grid--column">
+        <div class="bh-grid__item">
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--grow-0">
+              <bh-icon value="flag-variant" />
+              <span>{{ repository.available_languages.length }} languages</span>
+            </div>
+            <div class="bh-grid__item bh-grid__item--grow-0">
+              <bh-icon value="botinho" />
+              <span>{{ repository.examples__count }} examples</span>
+            </div>
+            <div class="bh-grid__item bh-grid__item--grow-0">
+              <bh-icon />
+              <span>Created {{ repository.created_at | moment('from') }}</span>
+            </div>
+          </div>
         </div>
-        <div class="repository-home__info__description">
+        <div class="bh-grid__item">
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else>There is no description for this repository</p>
         </div>
-        <div v-if="hasIntents || hasLabels">
-          <h1 class="bh-title-1">Can identify</h1>
-          <div class="bh-grid">
-            <div
-              v-if="hasIntents"
-              class="repository-home__info__attribute bh-grid__item">
-              <h1 class="bh-title-2">Intents</h1>
-              <div class="repository-home__info__attribute__card">
-                <bh-badge
-                  v-for="(intent) in repository.intents_list"
-                  :key="intent"
-                  size="small"
-                  color="grey"
-                  class="repository-home__info__attribute__card__badge">
-                  <span>{{ intent }}</span>
-                </bh-badge>
+        <div class="bh-grid__item">
+          <div v-if="hasIntents || hasLabels">
+            <h2 class="bh-title-2">Can identify</h2>
+            <div class="bh-grid">
+              <div
+                v-if="hasIntents"
+                class="bh-grid__item">
+                <div class="repository-home__attribute">
+                  <h3 class="bh-title-3">Intents</h3>
+                  <div class="repository-home__attribute__card">
+                    <bh-badge
+                      v-for="(intent) in repository.intents_list"
+                      :key="intent"
+                      size="small"
+                      color="grey"
+                      class="repository-home__attribute__card__badge">
+                      <span>{{ intent }}</span>
+                    </bh-badge>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div
-              v-if="hasLabels"
-              class="repository-home__info__attribute bh-grid__item">
-              <h1 class="bh-title-2">Labels</h1>
-              <div class="repository-home__info__attribute__card">
-                <bh-badge
-                  v-for="(label) in repository.labels_list"
-                  :key="label"
-                  size="small"
-                  color="grey"
-                  class="repository-home__info__attribute__card__badge">
-                  <span>{{ label }}</span>
-                </bh-badge>
+              <div
+                v-if="hasLabels"
+                class="bh-grid__item">
+                <div class="repository-home__attribute">
+                  <h3 class="bh-title-3">Labels</h3>
+                  <div class="repository-home__attribute__card">
+                    <bh-badge
+                      v-for="(label) in repository.labels_list"
+                      :key="label"
+                      size="small"
+                      color="grey"
+                      class="repository-home__attribute__card__badge">
+                      <span>{{ label }}</span>
+                    </bh-badge>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -90,38 +101,18 @@ export default {
 
 
 .repository-home {
-  &__info {
-    padding: 3rem;
+  &__attribute {
+    &__card {
+      background-color: $color-lighter-grey;
+      border-radius: 6px;
+      padding: .75rem;
+      margin: -.25rem;
 
-    &__header {
-      margin-bottom: 4rem;
-      color: $color-grey;
+      &__badge {
+        margin: .25rem;
 
-      > span {
-        margin-right: 4rem;
-      }
-    }
-
-    &__description {
-      margin-bottom: 4rem;
-      color: $color-grey;
-    }
-
-    &__attribute {
-      flex-basis: 50%;
-
-      &__card {
-        background-color: $color-lighter-grey;
-        border-radius: 6px;
-        padding: .75rem;
-        margin: -.25rem;
-
-        &__badge {
-          margin: .25rem;
-
-          > span {
-            color: $color-primary-inverted
-          }
+        > span {
+          color: $color-primary-inverted
         }
       }
     }

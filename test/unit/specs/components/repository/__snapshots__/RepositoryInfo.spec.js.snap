@@ -4,13 +4,13 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
 <div class="bh-grid">
   <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
     <div class="repository-info__big-badge">
-      <bhicon-stub class="repository-info__big-badge__icon"></bhicon-stub>
+      <bhicon-stub value="botinho" size="medium" class="repository-info__big-badge__icon"></bhicon-stub>
     </div>
   </div>
   <div class="bh-grid__item">
-    <div class="repository-info__title"><span class="repository-info__title__bagde"><bhicon-stub class="repository-info__title__bagde__icon"></bhicon-stub></span> <span></span></div>
+    <div class="repository-info__title"><span class="repository-info__title__bagde"><bhicon-stub value="botinho" class="repository-info__title__bagde__icon"></bhicon-stub></span> <span></span></div>
     <div class="repository-info__info-item">
-      <router-link-stub>/undefined/undefined/</router-link-stub>
+      <router-link-stub to="[object Object]" tag="a" event="click">/undefined/undefined/</router-link-stub>
     </div>
     <div class="repository-info__info-item"><span>Created by</span> <strong class="medium"></strong></div>
     <div class="repository-info__flags"></div>
