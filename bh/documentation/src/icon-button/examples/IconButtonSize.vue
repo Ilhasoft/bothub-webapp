@@ -1,29 +1,21 @@
 <template>
-  <div class="bh-grid">
-    <div class="bh-grid__item item">
-      <bh-icon-button
-        slot="trigger"
-        value="dots-horizontal"
-        size="small" />
-    </div>
-    <div class="bh-grid__item item">
-      <bh-icon-button
-        slot="trigger"
-        value="dots-horizontal"
-        size="normal" />
-    </div>
-    <div class="bh-grid__item item">
-      <bh-icon-button
-        slot="trigger"
-        value="dots-horizontal"
-        size="medium" />
-    </div>
-    <div class="bh-grid__item item">
-      <bh-icon-button
-        slot="trigger"
-        value="dots-horizontal"
-        size="large" />
-    </div>
+  <div>
+    <bh-icon-button
+      slot="trigger"
+      value="dots-horizontal"
+      size="small" />
+    <bh-icon-button
+      slot="trigger"
+      value="dots-horizontal"
+      size="normal" />
+    <bh-icon-button
+      slot="trigger"
+      value="dots-horizontal"
+      size="medium" />
+    <bh-icon-button
+      slot="trigger"
+      value="dots-horizontal"
+      size="large" />
   </div>
 </template>
 

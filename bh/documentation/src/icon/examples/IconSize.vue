@@ -1,27 +1,17 @@
 <template>
   <div>
-    <div class="bh-grid">
-      <div class="bh-grid__item item">
-        <bh-icon
-          size="small"
-          value="botinho"/>
-      </div>
-      <div class="bh-grid__item item">
-        <bh-icon
-          size="normal"
-          value="botinho"/>
-      </div>
-      <div class="bh-grid__item item">
-        <bh-icon
-          size="medium"
-          value="botinho"/>
-      </div>
-      <div class="bh-grid__item item">
-        <bh-icon
-          size="large"
-          value="botinho"/>
-      </div>
-    </div>
+    <bh-icon
+      size="small"
+      value="botinho"/>
+    <bh-icon
+      size="normal"
+      value="botinho"/>
+    <bh-icon
+      size="medium"
+      value="botinho"/>
+    <bh-icon
+      size="large"
+      value="botinho"/>
   </div>
 </template>
 
