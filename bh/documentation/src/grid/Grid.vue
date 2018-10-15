@@ -21,6 +21,10 @@
     <example
       :component="HalfGap"
       :code="halfGapCode" />
+    <h3>Space Between</h3>
+    <example
+      :component="SpaceBetween"
+      :code="spaceBetweenCode" />
   </div>
 </template>
 
@@ -36,6 +40,8 @@ import NestedItem from './examples/NestedItem';
 import nestedItemCode from '!!raw-loader!./examples/NestedItem';
 import HalfGap from './examples/HalfGap';
 import halfGapCode from '!!raw-loader!./examples/HalfGap';
+import SpaceBetween from './examples/SpaceBetween';
+import spaceBetweenCode from '!!raw-loader!./examples/SpaceBetween';
 
 
 export default {
@@ -55,6 +61,8 @@ export default {
       nestedItemCode,
       HalfGap,
       halfGapCode,
+      SpaceBetween,
+      spaceBetweenCode,
     };
   },
 };
