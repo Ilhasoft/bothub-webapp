@@ -31,12 +31,20 @@ h4 {
   h#{$n} {
     margin: $margin;
     font-size: $font-size;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   .bh {
     &-title-#{$n} { // depreciate this class
       margin: $margin;
       font-size: $font-size;
+
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 }
