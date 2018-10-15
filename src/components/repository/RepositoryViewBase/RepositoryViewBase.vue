@@ -59,6 +59,15 @@
               </div>
               <div><small>{{ requirementsCount }} requirements missed.</small></div>
             </div>
+            <div
+              v-else-if="authenticated && !repository.authorization.can_write"
+              class="bh-grid__item bh-grid__item--grow-0 text-center">
+              <div class="rpstr-vw-bs__status-bar__button">
+                <bh-button
+                  primary
+                  @click="openRequestAuthorizationModal()">Request Authorization</bh-button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="rpstr-vw-bs__card__content">
@@ -88,6 +97,19 @@
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
+    <bh-modal :open.sync="requestAuthorizationModal">
+      <div v-if="repository && requestAuthorizationModal">
+        <div class="bh-grid bh-grid--column">
+          <div class="bh-grid__item">
+            <h1 class="bh-title-2">Request Authorization</h1>
+          </div>
+          <request-authorization-form
+            :repository-uuid="repository.uuid"
+            class="bh-grid__item"
+            @requested="onAuthorizationRequested()" />
+        </div>
+      </div>
+    </bh-modal>
   </layout>
 </template>
 
@@ -98,6 +120,7 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components-v1/repository/TrainModal';
 import TrainResponse from '@/components-v1/repository/TrainResponse';
+import RequestAuthorizationForm from '@/components-v1/repository/RequestAuthorizationForm';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -117,6 +140,7 @@ export default {
     RepositoryNavigation,
     TrainModal,
     TrainResponse,
+    RequestAuthorizationForm,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -145,6 +169,7 @@ export default {
       trainResponseData: null,
       trainResponseOpen: false,
       training: false,
+      requestAuthorizationModal: false,
     };
   },
   computed: {
@@ -183,6 +208,17 @@ export default {
     },
     openTrainModal() {
       this.trainModalOpen = true;
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModal = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModal = false;
+      this.$toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
     },
   },
 };

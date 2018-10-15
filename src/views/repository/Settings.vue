@@ -116,6 +116,9 @@ export default {
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();
     },
+    onReviewAuthorizationRequest() {
+      this.$refs.authorizationsList.updateAuthorizations();
+    },
   },
 };
 </script>
