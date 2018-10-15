@@ -61,7 +61,7 @@
             </div>
             <div
               v-else-if="authenticated && !repository.authorization.can_write"
-              class="-grid__item bh-grid__item--grow-0 text-center">
+              class="bh-grid__item bh-grid__item--grow-0 text-center">
               <div class="rpstr-vw-bs__status-bar__button">
                 <bh-button
                   primary
