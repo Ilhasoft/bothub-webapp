@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="installation">
     <h2>Installation</h2>
     <vue-markdown>{{ installation }}</vue-markdown>
   </div>
@@ -22,3 +22,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.installation {
+  padding: 1rem;
+}
+</style>

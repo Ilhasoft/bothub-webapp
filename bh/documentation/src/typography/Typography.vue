@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="typography">
     <h2>Typography</h2>
     <h3>Headers</h3>
     <h1>Header 1</h1>
@@ -23,3 +23,9 @@ export default {
   name: 'Typography',
 };
 </script>
+
+<style lang="scss">
+.typography {
+  padding: 1rem;
+}
+</style>

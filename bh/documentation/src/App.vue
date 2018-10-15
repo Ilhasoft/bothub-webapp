@@ -1,26 +1,143 @@
 <template>
   <div class="app">
     <div class="bh-grid bh-grid--column">
-      <section class="bh-grid__item">
-        <h1>BH Documentation</h1>
+      <section class="bh-grid__item bh-grid__item--nested">
+        <header-component />
       </section>
       <section class="bh-grid__item">
-        <installation />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <installation />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <typography />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <typography />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <grid />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <grid />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <autocomplete />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <autocomplete />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <card />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <card />
+            </div>
+          </div>
+        </bh-card>
       </section>
       <section class="bh-grid__item">
-        <buttons />
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <buttons />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <icons />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <avatar />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <badge />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <modal />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <text-component />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <dropdown />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <loading />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <notification />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <icon-button />
+            </div>
+          </div>
+        </bh-card>
       </section>
     </div>
   </div>
@@ -31,8 +148,18 @@ import Installation from './installation/Installation';
 import Typography from './typography/Typography';
 import Grid from './grid/Grid';
 import Autocomplete from './autocomplete/Autocomplete';
-import Card from './card/Card'
+import Card from './card/Card';
 import Buttons from './button/Buttons';
+import HeaderComponent from './header/HeaderComponent';
+import Icons from './icon/Icon';
+import Avatar from './avatar/Avatar';
+import Badge from './badge/Badge';
+import Modal from './modal/Modal';
+import TextComponent from './text/TextComponent';
+import Dropdown from './dropdown/Dropdown';
+import loading from './loading/Loading';
+import Notification from './notification/Notification';
+import IconButton from './icon-button/IconButton';
 
 export default {
   name: 'App',
@@ -42,7 +169,17 @@ export default {
     Grid,
     Autocomplete,
     Card,
-    Buttons
+    Buttons,
+    HeaderComponent,
+    Icons,
+    Avatar,
+    Badge,
+    Modal,
+    TextComponent,
+    Dropdown,
+    loading,
+    Notification,
+    IconButton,
   },
 };
 </script>

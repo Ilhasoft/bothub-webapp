@@ -4,7 +4,8 @@
     :type="type"
     :class="{
       'bh-icon-button': true,
-      'bh-icon-button--primary': primary,
+      'bh-icon-button--primary': primary && !inverted,
+      'bh-icon-button--primary-inverted': primary && inverted,
       [`bh-icon-button--${size}`]: !!size
 
     }"
@@ -25,6 +26,10 @@ export default {
       default: false,
     },
     primary: {
+      type: Boolean,
+      default: false,
+    },
+    inverted: {
       type: Boolean,
       default: false,
     },
@@ -81,6 +86,10 @@ export default {
 
     &--primary {
       color: $color-primary;
+    }
+
+    &--primary-inverted {
+      color: $color-primary-inverted;
     }
 
     svg {

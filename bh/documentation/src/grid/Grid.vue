@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grid">
     <h2>Grid</h2>
     <h3>Simple grid</h3>
     <example
@@ -61,14 +61,17 @@ export default {
 </script>
 
 <style lang="scss">
+.grid {
+  padding: 1rem;
+}
 $colors: (
   'red',
   'green',
   'blue',
   'pink',
   'purple',
-  'aquamarine',
-  'turquoise'
+  'turquoise',
+  'MediumAquaMarine'
 );
 
 @each $color in $colors {
@@ -80,6 +83,7 @@ $colors: (
     &.item {
       padding: 1rem;
       text-align: center;
+      border-radius: 0.5rem;
     }
   }
 }
