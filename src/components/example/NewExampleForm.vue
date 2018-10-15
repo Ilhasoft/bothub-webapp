@@ -203,6 +203,7 @@ export default {
           slug: this.repository.slug,
           language: this.repository.language,
           text: value,
+          rasaFormat: true,
         });
         this.intent = response.data.intent.name;
       } catch (error) {

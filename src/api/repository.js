@@ -38,9 +38,13 @@ export default {
   train(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/train/`);
   },
-  analyze(ownerNickname, slug, language, text) {
+  analyze(ownerNickname, slug, language, text, rasaFormat = false) {
+    const params = {};
+    if (rasaFormat) {
+      Object.assign(params, { rasa_format: true });
+    }
     return request.$http.post(
-      `/repository/${ownerNickname}/${slug}/analyze/`,
+      `/repository/${ownerNickname}/${slug}/analyze/?${qs.stringify(params)}`,
       {
         language,
         text,

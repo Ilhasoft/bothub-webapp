@@ -38,10 +38,10 @@ export default {
     return repository.train(ownerNickname, slug);
   },
   analyzeText(store, {
-    ownerNickname, slug, language, text,
+    ownerNickname, slug, language, text, rasaFormat,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(ownerNickname, slug, language, text);
+    return repository.analyze(ownerNickname, slug, language, text, rasaFormat);
   },
   async getEditRepositorySchema(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
