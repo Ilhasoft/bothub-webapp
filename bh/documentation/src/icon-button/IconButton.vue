@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <h2>Icon Buttons</h2>
-    <h3>Icons Buttons</h3>
-    <example
-      :component="IconButtonExamples"
-      :code="iconButtonExamplesCode" />
-    <h3>Sizes</h3>
-    <example
-      :component="IconButtonSize"
-      :code="iconButtonSizeCode" />
-    <api :data="api" />
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid__item">
+      <h2>Icon Buttons</h2>
+      <h3>Icons Buttons</h3>
+      <example
+        :component="IconButtonExamples"
+        :code="iconButtonExamplesCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Sizes</h3>
+      <example
+        :component="IconButtonSize"
+        :code="iconButtonSizeCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </div>
 </template>
 

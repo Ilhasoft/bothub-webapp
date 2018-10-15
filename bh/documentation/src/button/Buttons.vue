@@ -1,19 +1,27 @@
 <template>
-  <div>
-    <h2>Buttons</h2>
-    <h3>Simple Buttons</h3>
-    <example
-      :component="SimpleButtons"
-      :code="simpleButtonsCode" />
-    <h3>Sizes</h3>
-    <example
-      :component="ButtonSizes"
-      :code="buttonSizesCode" />
-    <h3>Button Click</h3>
-    <example
-      :component="ButtonActionExample"
-      :code="buttonActionExampleCode" />
-    <api :data="api" />
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid__item">
+      <h2>Buttons</h2>
+      <h3>Simple Buttons</h3>
+      <example
+        :component="SimpleButtons"
+        :code="simpleButtonsCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Sizes</h3>
+      <example
+        :component="ButtonSizes"
+        :code="buttonSizesCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Button Click</h3>
+      <example
+        :component="ButtonActionExample"
+        :code="buttonActionExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </div>
 </template>
 

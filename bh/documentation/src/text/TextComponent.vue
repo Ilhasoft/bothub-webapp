@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <h2>Text Input</h2>
-    <h3>Simple Text Input Example</h3>
-    <example
-      :component="SimpleTextExample"
-      :code="simpleTextExampleCode" />
-    <h3>Text Input with Slot</h3>
-    <example
-      :component="SlotTextExample"
-      :code="slotTextExampleCode" />
-    <api :data="api" />
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid__item">
+      <h2>Text Input</h2>
+      <h3>Simple Text Input Example</h3>
+      <example
+        :component="SimpleTextExample"
+        :code="simpleTextExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Text Input with Slot</h3>
+      <example
+        :component="SlotTextExample"
+        :code="slotTextExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </div>
 </template>
 

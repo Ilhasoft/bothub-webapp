@@ -1,10 +1,14 @@
 <template>
-  <div>
-    <h2>Notifications</h2>
-    <example
-      :component="NotificationExample"
-      :code="notificationExampleCode" />
-    <api :data="api" />
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid__item">
+      <h2>Notifications</h2>
+      <example
+        :component="NotificationExample"
+        :code="notificationExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </div>
 </template>
 

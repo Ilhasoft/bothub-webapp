@@ -1,30 +1,42 @@
 <template>
-  <div class="grid">
-    <h2>Grid</h2>
-    <h3>Simple grid</h3>
-    <example
-      :component="SimpleGrid"
-      :code="simpleGridCode" />
-    <h3>Multiline grid</h3>
-    <example
-      :component="MultilineGrid"
-      :code="multilineGridCode" />
-    <h3>Grow item</h3>
-    <example
-      :component="GrowItem"
-      :code="growItemCode" />
-    <h3>Nested item</h3>
-    <example
-      :component="NestedItem"
-      :code="nestedItemCode" />
-    <h3>Half Gap</h3>
-    <example
-      :component="HalfGap"
-      :code="halfGapCode" />
-    <h3>Space Between</h3>
-    <example
-      :component="SpaceBetween"
-      :code="spaceBetweenCode" />
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid__item">
+      <h2>Grid</h2>
+      <h3>Simple grid</h3>
+      <example
+        :component="SimpleGrid"
+        :code="simpleGridCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Multiline grid</h3>
+      <example
+        :component="MultilineGrid"
+        :code="multilineGridCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Grow item</h3>
+      <example
+        :component="GrowItem"
+        :code="growItemCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Nested item</h3>
+      <example
+        :component="NestedItem"
+        :code="nestedItemCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h3>Half Gap</h3>
+      <example
+        :component="HalfGap"
+        :code="halfGapCode" />
+      <h3>Space Between</h3>
+    </div>
+    <div class="bh-grid__item">
+      <example
+        :component="SpaceBetween"
+        :code="spaceBetweenCode" />
+    </div>
   </div>
 </template>
 
