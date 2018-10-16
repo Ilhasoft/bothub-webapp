@@ -17,7 +17,6 @@ import Example from '@/Example';
 import Api from '@/Api';
 import NotificationExample from './examples/NotificationExample';
 import notificationExampleCode from '!!raw-loader!./examples/NotificationExample';
-import api from './api';
 
 
 export default {
@@ -30,7 +29,6 @@ export default {
     return {
       NotificationExample,
       notificationExampleCode,
-      api,
     };
   },
 };
