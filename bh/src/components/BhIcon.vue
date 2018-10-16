@@ -40,9 +40,9 @@ export default {
 .bh {
   &-icon {
     display: inline-block;
-    width: 1em;
-    height: 1em;
-    vertical-align: middle;
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: text-top;
 
     svg {
       display: block;
@@ -62,21 +62,6 @@ export default {
         height: $size-value;
       }
     }
-
-    // &--small {
-    //   width: 1rem;
-    //   height: 1rem;
-    // }
-
-    // &--medium {
-    //   width: 1.5rem;
-    //   height: 1.5rem;
-    // }
-
-    // &--large {
-    //   width: 1.75rem;
-    //   height: 1.75rem;
-    // }
   }
 }
 </style>
