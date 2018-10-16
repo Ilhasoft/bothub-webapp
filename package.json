@@ -11,7 +11,7 @@
     "coveralls": "cat ./test/unit/coverage/lcov.info | coveralls",
     "unit-watch": "jest --config test/unit/jest.conf.js --watch",
     "test": "yarn unit test/unit",
-    "test-watch": "yarn unit-watch",
+    "test-watch": "yarn unit-watch test/unit",
     "lint": "eslint --ext .js,.vue src test/unit",
     "build": "node build/build.js"
   },
