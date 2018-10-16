@@ -91,7 +91,7 @@ export default {
     background-color: white;
 
     &--color-inverted {
-      background-color: #222;
+      background-color: #34495e;
     }
 
     &__wrapper {
