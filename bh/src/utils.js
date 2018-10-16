@@ -22,6 +22,8 @@ import Refresh from './assets/icons/refresh.svg';
 import CodeTags from './assets/icons/code-tags.svg';
 import ClipboardTextOutline from './assets/icons/clipboard-text-outline.svg';
 import InvertColors from './assets/icons/invert-colors.svg';
+import ClipboardAlert from './assets/icons/clipboard-alert.svg';
+import Alert from './assets/icons/alert.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -59,6 +61,8 @@ export const icons = {
   'code-tags': CodeTags,
   'clipboard-text-outline': ClipboardTextOutline,
   'invert-colors': InvertColors,
+  'clipboard-alert': ClipboardAlert,
+  alert: Alert,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
