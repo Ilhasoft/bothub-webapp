@@ -6,9 +6,6 @@
         :component="NotificationExample"
         :code="notificationExampleCode" />
     </div>
-    <div class="bh-grid__item">
-      <api :data="api" />
-    </div>
   </div>
 </template>
 
