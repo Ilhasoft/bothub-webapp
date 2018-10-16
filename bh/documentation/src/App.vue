@@ -7,7 +7,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <installation />
             </div>
           </div>
@@ -16,7 +16,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <typography />
             </div>
           </div>
@@ -25,7 +25,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <grid />
             </div>
           </div>
@@ -43,7 +43,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <card />
             </div>
           </div>
@@ -52,7 +52,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <buttons />
             </div>
           </div>
@@ -61,7 +61,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <icons />
             </div>
           </div>
@@ -70,7 +70,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <avatar />
             </div>
           </div>
@@ -79,7 +79,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <badge />
             </div>
           </div>
@@ -88,7 +88,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <modal />
             </div>
           </div>
@@ -97,7 +97,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <text-input />
             </div>
           </div>
@@ -106,7 +106,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <dropdown />
             </div>
           </div>
@@ -115,7 +115,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <loading />
             </div>
           </div>
@@ -124,7 +124,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <notification />
             </div>
           </div>
@@ -133,7 +133,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <icon-button />
             </div>
           </div>
@@ -142,7 +142,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <language-flag />
             </div>
           </div>
@@ -151,7 +151,7 @@
       <section class="bh-grid__item">
         <bh-card>
           <div class="bh-grid">
-            <div class="bh-grid__item">
+            <div class="bh-grid__item bh-grid__item--nested">
               <Tooltip />
             </div>
           </div>
