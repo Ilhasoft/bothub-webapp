@@ -71,6 +71,7 @@ export default {
     $parent: &;
     $background-color: black;
 
+    position: relative;
     z-index: $tooltip-z-index;
     display: block;
     padding: 8px 12px;
