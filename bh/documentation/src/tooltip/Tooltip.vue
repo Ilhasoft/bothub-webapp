@@ -2,9 +2,15 @@
   <div class="bh-grid bh-grid--column">
     <div class="bh-grid__item">
       <h2>Tooltip</h2>
+      <h3>Types</h3>
       <example
-        :component="TooltipExamples"
-        :code="tooltipExamplesCode" />
+        :component="TooltipTypesExample"
+        :code="tooltipTypesExampleCode" />
+      <h3>Close event</h3>
+      <p>The <code>open</code> prop can be sync. Update event is emitted on click or blur event.</p>
+      <example
+        :component="TooltipCloseExample"
+        :code="tooltipCloseExampleCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -15,8 +21,10 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import TooltipExamples from './examples/TooltipExamples';
-import tooltipExamplesCode from '!!raw-loader!./examples/TooltipExamples';
+import TooltipTypesExample from './examples/TooltipTypes';
+import tooltipTypesExampleCode from '!!raw-loader!./examples/TooltipTypes';
+import TooltipCloseExample from './examples/TooltipClose';
+import tooltipCloseExampleCode from '!!raw-loader!./examples/TooltipClose';
 import api from './api';
 
 
@@ -28,8 +36,10 @@ export default {
   },
   data() {
     return {
-      TooltipExamples,
-      tooltipExamplesCode,
+      TooltipTypesExample,
+      tooltipTypesExampleCode,
+      TooltipCloseExample,
+      tooltipCloseExampleCode,
       api,
     };
   },
