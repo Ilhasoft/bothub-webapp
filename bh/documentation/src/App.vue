@@ -148,6 +148,15 @@
           </div>
         </bh-card>
       </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <Tooltip />
+            </div>
+          </div>
+        </bh-card>
+      </section>
     </div>
   </div>
 </template>
@@ -170,6 +179,7 @@ import loading from './loading/Loading';
 import Notification from './notification/Notification';
 import IconButton from './icon-button/IconButton';
 import LanguageFlag from './languageFlag/LanguageFlag';
+import Tooltip from './tooltip/Tooltip';
 
 export default {
   name: 'App',
@@ -191,6 +201,7 @@ export default {
     Notification,
     IconButton,
     LanguageFlag,
+    Tooltip,
   },
 };
 </script>
