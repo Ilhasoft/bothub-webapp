@@ -29,23 +29,10 @@ body {
   $color-name: nth($color, 1);
   $color-value: nth($color, 2);
 
-  .text-#{$color-name} {
-    color: $color-value;
-  }
-
   .background-#{$color-name} {
     background-color: $color-value;
   }
 }
-
-strong {
-  font-weight: $font-weight-bolder;
-
-  &.medium {
-    font-weight: $font-weight-medium;
-  }
-}
-
 
 .clickable {
   cursor: pointer;

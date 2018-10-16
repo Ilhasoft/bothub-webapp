@@ -31,6 +31,7 @@ h4 {
   h#{$n} {
     margin: $margin;
     font-size: $font-size;
+    font-weight: $font-weight-medium;
 
     &:first-child {
       margin-top: 0;
@@ -53,4 +54,30 @@ p {
   padding: 0;
   margin: .5rem 0;
   word-wrap: break-word;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: $font-weight-bolder;
+
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
+}
+
+small {
+  color: $color-grey;
+}
+
+@each $color in $colors {
+  $color-name: nth($color, 1);
+  $color-value: nth($color, 2);
+
+  .text-#{$color-name} {
+    color: $color-value;
+  }
 }
