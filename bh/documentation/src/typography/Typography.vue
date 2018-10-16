@@ -1,22 +1,24 @@
 <template>
-  <div class="typography">
-    <h2>Typography</h2>
-    <h3>Headers</h3>
-    <example
-      :component="HeadersTypography"
-      :code="headersTypographyCode" />
-    <h3>Paragraphs</h3>
-    <example
-      :component="ParagraphsTypography"
-      :code="paragraphsTypographyCode" />
-    <h3>Links and modifiers</h3>
-    <example
-      :component="LinksAndModifiersTypography"
-      :code="linksAndModifiersTypographyCode" />
-    <h3>Text Colors</h3>
-    <example
-      :component="TextColorsTypography"
-      :code="textColorsTypographyCode" />
+  <div class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Typography</h2>
+      <h3>Headers</h3>
+      <example
+        :component="HeadersTypography"
+        :code="headersTypographyCode" />
+      <h3>Paragraphs</h3>
+      <example
+        :component="ParagraphsTypography"
+        :code="paragraphsTypographyCode" />
+      <h3>Links and modifiers</h3>
+      <example
+        :component="LinksAndModifiersTypography"
+        :code="linksAndModifiersTypographyCode" />
+      <h3>Text Colors</h3>
+      <example
+        :component="TextColorsTypography"
+        :code="textColorsTypographyCode" />
+    </div>
   </div>
 </template>
 
