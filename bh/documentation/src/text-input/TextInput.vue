@@ -30,7 +30,7 @@ import api from './api';
 
 
 export default {
-  name: 'TextComponent',
+  name: 'TextInput',
   components: {
     Example,
     Api,

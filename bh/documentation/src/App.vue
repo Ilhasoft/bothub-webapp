@@ -98,7 +98,7 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item">
-              <text-component />
+              <text-input />
             </div>
           </div>
         </bh-card>
@@ -173,7 +173,7 @@ import Icons from './icon/Icon';
 import Avatar from './avatar/Avatar';
 import Badge from './badge/Badge';
 import Modal from './modal/Modal';
-import TextComponent from './text/TextComponent';
+import TextInput from './text-input/TextInput';
 import Dropdown from './dropdown/Dropdown';
 import loading from './loading/Loading';
 import Notification from './notification/Notification';
@@ -195,7 +195,7 @@ export default {
     Avatar,
     Badge,
     Modal,
-    TextComponent,
+    TextInput,
     Dropdown,
     loading,
     Notification,
