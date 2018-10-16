@@ -8,7 +8,7 @@
         :code="simpleLoadingExampleCode" />
     </div>
     <div class="bh-grid__item">
-      <h3>Sizes</h3>
+      <h3>Loading Sizes</h3>
       <example
         :component="LoadingSizes"
         :code="loadingSizeseCode" />

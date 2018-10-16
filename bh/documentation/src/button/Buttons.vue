@@ -8,7 +8,7 @@
         :code="simpleButtonsCode" />
     </div>
     <div class="bh-grid__item">
-      <h3>Sizes</h3>
+      <h3>Button Sizes</h3>
       <example
         :component="ButtonSizes"
         :code="buttonSizesCode" />

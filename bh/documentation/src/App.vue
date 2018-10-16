@@ -98,7 +98,7 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item">
-              <text-component />
+              <text-input />
             </div>
           </div>
         </bh-card>
@@ -148,6 +148,15 @@
           </div>
         </bh-card>
       </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <Tooltip />
+            </div>
+          </div>
+        </bh-card>
+      </section>
     </div>
   </div>
 </template>
@@ -164,12 +173,13 @@ import Icons from './icon/Icon';
 import Avatar from './avatar/Avatar';
 import Badge from './badge/Badge';
 import Modal from './modal/Modal';
-import TextComponent from './text/TextComponent';
+import TextInput from './text-input/TextInput';
 import Dropdown from './dropdown/Dropdown';
 import loading from './loading/Loading';
 import Notification from './notification/Notification';
 import IconButton from './icon-button/IconButton';
 import LanguageFlag from './languageFlag/LanguageFlag';
+import Tooltip from './tooltip/Tooltip';
 
 export default {
   name: 'App',
@@ -185,12 +195,13 @@ export default {
     Avatar,
     Badge,
     Modal,
-    TextComponent,
+    TextInput,
     Dropdown,
     loading,
     Notification,
     IconButton,
     LanguageFlag,
+    Tooltip,
   },
 };
 </script>

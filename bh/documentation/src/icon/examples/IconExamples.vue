@@ -63,6 +63,15 @@
     <bh-icon
       value="school"
       size="normal"/>
+    <bh-icon
+      value="alert"
+      size="normal"/>
+    <bh-icon
+      value="clipboard-alert"
+      size="normal"/>
+    <bh-icon
+      value="clipboard-text-outline"
+      size="normal"/>
   </div>
 </template>
 

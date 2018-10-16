@@ -14,6 +14,12 @@
         :code="iconSizeCode" />
     </div>
     <div class="bh-grid__item">
+      <h3>Icon Colors</h3>
+      <example
+        :component="IconColor"
+        :code="iconColorCode" />
+    </div>
+    <div class="bh-grid__item">
       <api :data="api" />
     </div>
   </div>
@@ -26,6 +32,8 @@ import IconExamples from './examples/IconExamples';
 import iconExamplesCode from '!!raw-loader!./examples/IconExamples';
 import IconSize from './examples/IconSize';
 import iconSizeCode from '!!raw-loader!./examples/IconSize';
+import IconColor from './examples/IconColors';
+import iconColorCode from '!!raw-loader!./examples/IconColors';
 import api from './api';
 
 
@@ -41,6 +49,8 @@ export default {
       iconExamplesCode,
       IconSize,
       iconSizeCode,
+      IconColor,
+      iconColorCode,
       api,
     };
   },

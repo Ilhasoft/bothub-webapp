@@ -2,13 +2,13 @@
   <div class="bh-grid bh-grid--column">
     <div class="bh-grid__item">
       <h2>Avatar</h2>
-      <h3>Avatar Example</h3>
+      <h3>Simple Avatar Example</h3>
       <example
         :component="AvatarExample"
         :code="avatarExampleCode" />
     </div>
     <div class="bh-grid__item">
-      <h3>Sizes</h3>
+      <h3>Avatar Sizes</h3>
       <example
         :component="AvatarSize"
         :code="avatarSizeCode" />
