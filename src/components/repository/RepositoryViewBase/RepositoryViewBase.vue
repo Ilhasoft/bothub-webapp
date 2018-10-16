@@ -24,48 +24,87 @@
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
         <div class="rpstr-vw-bs__status-bar">
-          <div class="bh-grid">
-            <div class="bh-grid__item text-center">
-              <div class="rpstr-vw-bs__status-bar__button">
-                <bh-icon
-                  size="normal"
-                  value="botinho" />
-              </div>
-              <div>
-                <div><small>You {{ repository.authorization &&
-                repository.authorization.can_contribute | can_t }} contribute</small></div>
-                <div><small>and you {{ repository.authorization &&
-                repository.authorization.can_write | can_t }} write.</small></div>
+          <div class="bh-grid bh-grid--space-between">
+            <div class="bh-grid__item">
+              <div class="bh-grid text-color-grey">
+                <div class="bh-grid__item">
+                  <bh-icon value="flag-variant" />
+                  <span>{{ repository.available_languages.length }} languages</span>
+                </div>
+                <div class="bh-grid__item">
+                  <bh-icon value="botinho" />
+                  <span>{{ repository.examples__count }} examples</span>
+                </div>
               </div>
             </div>
-            <div
-              v-if="authenticated && repository.authorization.can_write "
-              class="bh-grid__item bh-grid__item--grow-0 text-center">
-              <div class="rpstr-vw-bs__status-bar__button">
-                <bh-button
-                  :primary="repository.ready_for_train"
-                  :secondary="!repository.ready_for_train"
-                  @click="openTrainModal()">
-                  <bh-icon
-                    value="school"
-                    size="small" />
-                  <span v-if="repository.ready_for_train">Train Your Bot</span>
-                  <span v-else>Requirements missed</span>
-                </bh-button>
+            <div class="bh-grid__item">
+              <div
+                v-if="authenticated && repository.authorization.can_write"
+                class="bh-grid">
+                <div
+                  v-if="warningsCount > 0"
+                  class="bh-grid__item">
+                  <a
+                    href="#warnings"
+                    @click.prevent="openWarningsModal()">
+                    <bh-icon value="alert" />
+                    <span>{{ warningsCount }} warnings</span>
+                  </a>
+                </div>
+                <div class="bh-grid__item">
+                  <a
+                    href="#requirements"
+                    @click.prevent="openTrainModal()">
+                    <bh-icon value="clipboard-alert" />
+                    <span>{{ requirementsCount }} requirements missed</span>
+                  </a>
+                </div>
+                <div class="bh-grid__item">
+                  <a
+                    href="#train"
+                    @click.prevent="openTrainModal()">
+                    <bh-icon value="school" />
+                    <span>Train</span>
+                  </a>
+                </div>
               </div>
-              <div>
-                <small v-if="repository.ready_for_train">Your bot is ready for training.</small>
-                <small v-else>Your bot is not ready for training.</small>
+              <div
+                v-else-if="authenticated && repository.available_request_authorization"
+                class="bh-grid">
+                <div class="bh-grid__item">
+                  <a
+                    href="#requestauthorization"
+                    @click.prevent="openRequestAuthorizationModal()">
+                    <bh-icon />
+                    <span>Request Authorization</span>
+                  </a>
+                </div>
               </div>
-              <div><small>{{ requirementsCount }} requirements missed.</small></div>
-            </div>
-            <div
-              v-else-if="authenticated && !repository.authorization.can_write"
-              class="bh-grid__item bh-grid__item--grow-0 text-center">
-              <div class="rpstr-vw-bs__status-bar__button">
-                <bh-button
-                  primary
-                  @click="openRequestAuthorizationModal()">Request Authorization</bh-button>
+              <div
+                v-else-if="authenticated
+                  && repository.request_authorization
+                && !repository.request_authorization.approved_by"
+                class="bh-grid">
+                <div class="bh-grid__item">
+                  <span class="text-color-grey">Authorization Requested</span>
+                </div>
+              </div>
+              <div
+                v-else-if="!authenticated"
+                class="bh-grid">
+                <div class="bh-grid__item">
+                  <a
+                    href="#signin"
+                    @click.prevent="openLoginModal()">
+                    <bh-icon value="account" />
+                    <span>Sign in</span>
+                  </a>
+                </div>
+              </div>
+              <div
+                v-else
+                class="bh-grid">
+                <div class="bh-grid__item">&nbsp;</div>
               </div>
             </div>
           </div>
@@ -107,6 +146,23 @@
             :repository-uuid="repository.uuid"
             class="bh-grid__item"
             @requested="onAuthorizationRequested()" />
+        </div>
+      </div>
+    </bh-modal>
+    <bh-modal :open.sync="warningsModelOpen">
+      <div v-if="repository">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <h2>Warnings</h2>
+            <div
+              v-for="(warnings, lang) in repository.languages_warnings"
+              :key="lang">
+              <div><strong>{{ lang | languageVerbose }}</strong></div>
+              <div
+                v-for="(warning, index) in warnings"
+                :key="index">{{ warning }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </bh-modal>
@@ -170,6 +226,7 @@ export default {
       trainResponseOpen: false,
       training: false,
       requestAuthorizationModal: false,
+      warningsModelOpen: false,
     };
   },
   computed: {
@@ -184,10 +241,19 @@ export default {
           0,
         );
     },
+    warningsCount() {
+      return Object
+        .keys(this.repository.languages_warnings)
+        .reduce(
+          (previous, lang) => this.repository.languages_warnings[lang].length + previous,
+          0,
+        );
+    },
   },
   methods: {
     ...mapActions([
       'trainRepository',
+      'openLoginModal',
     ]),
     async train() {
       const { ownerNickname, slug } = this.$route.params;
@@ -220,6 +286,9 @@ export default {
       });
       this.updateRepository(false);
     },
+    openWarningsModal() {
+      this.warningsModelOpen = true;
+    },
   },
 };
 </script>
@@ -248,13 +317,8 @@ export default {
     }
   }
 
-   &__status-bar {
+  &__status-bar {
     background-color: $color-lighter-grey;
-    padding: 1rem;
-
-    &__button {
-      margin-bottom: .5rem;
-    }
   }
 
   &__card {

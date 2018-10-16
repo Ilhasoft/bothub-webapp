@@ -8,34 +8,18 @@
       class="repository-home">
       <div class="bh-grid bh-grid--column">
         <div class="bh-grid__item">
-          <div class="bh-grid">
-            <div class="bh-grid__item bh-grid__item--grow-0">
-              <bh-icon value="flag-variant" />
-              <span>{{ repository.available_languages.length }} languages</span>
-            </div>
-            <div class="bh-grid__item bh-grid__item--grow-0">
-              <bh-icon value="botinho" />
-              <span>{{ repository.examples__count }} examples</span>
-            </div>
-            <div class="bh-grid__item bh-grid__item--grow-0">
-              <bh-icon />
-              <span>Created {{ repository.created_at | moment('from') }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="bh-grid__item">
           <p v-if="repository.description">{{ repository.description }}</p>
-          <p v-else>There is no description for this repository</p>
+          <p v-else><i class="text-color-grey">There is no description for this repository</i></p>
         </div>
         <div class="bh-grid__item">
           <div v-if="hasIntents || hasLabels">
-            <h2 class="bh-title-2">Can identify</h2>
+            <h3>Can identify</h3>
             <div class="bh-grid">
               <div
                 v-if="hasIntents"
                 class="bh-grid__item">
                 <div class="repository-home__attribute">
-                  <h3 class="bh-title-3">Intents</h3>
+                  <h4>Intents</h4>
                   <div class="repository-home__attribute__card">
                     <bh-badge
                       v-for="(intent) in repository.intents_list"
@@ -52,7 +36,7 @@
                 v-if="hasLabels"
                 class="bh-grid__item">
                 <div class="repository-home__attribute">
-                  <h3 class="bh-title-3">Labels</h3>
+                  <h4>Labels</h4>
                   <div class="repository-home__attribute__card">
                     <bh-badge
                       v-for="(label) in repository.labels_list"
