@@ -1,6 +1,6 @@
 <template>
   <bh-card>
-    <div class="bh-grid bh-grid--colum">
+    <div class="bh-grid bh-grid--column">
       <div class="bh-grid__item">
         <h3>Header</h3>
       </div>
