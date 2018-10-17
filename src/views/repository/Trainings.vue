@@ -5,27 +5,31 @@
     :error-code="errorCode">
     <div
       v-if="repository"
-      class="repository-trainings">
-      <div class="repository-trainings__new-example">
-        <div v-if="authenticated">
-          <new-example-form
-            v-if="repository.authorization.can_contribute"
-            :repository="repository"
-            @created="onExampleCreated()" />
-          <div v-else>
-            <div class="bh-notification bh-notification--warning">
-              You can not contribute to this repository
+      class="bh-grid bh-grid--column">
+      <div class="bh-grid__item bh-grid__item--nested">
+        <div class="bh-grid trainings-repository__new-example">
+          <div class="bh-grid__item">
+            <div v-if="authenticated">
+              <new-example-form
+                v-if="repository.authorization.can_contribute"
+                :repository="repository"
+                @created="onExampleCreated()" />
+              <div v-else>
+                <div class="bh-notification bh-notification--warning">
+                  You can not contribute to this repository
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="bh-notification bh-notification--info">
+                Sign in to your account to contribute to this repository.
+              </div>
+              <login-form hide-forgot-password />
             </div>
           </div>
         </div>
-        <div v-else>
-          <div class="bh-notification bh-notification--info">
-            Sign in to your account to contribute to this repository.
-          </div>
-          <login-form hide-forgot-password />
-        </div>
       </div>
-      <div class="repository-trainings__navigation">
+      <div class="bh-grid__item">
         <bh-navigation :actived.sync="currentPath">
           <div label="Home">
             <intents-and-labels-list
@@ -155,14 +159,9 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 
 
-.repository-trainings {
+.trainings-repository {
   &__new-example {
-    padding: 1rem;
     background-color: $color-lighter-grey;
-  }
-
-  &__navigation {
-    padding: 1rem;
   }
 }
 </style>

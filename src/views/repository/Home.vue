@@ -96,11 +96,10 @@ export default {
         margin: .25rem;
 
         > span {
-          color: $color-primary-inverted
+          color: $color-primary-inverted;
         }
       }
     }
   }
 }
-
 </style>
