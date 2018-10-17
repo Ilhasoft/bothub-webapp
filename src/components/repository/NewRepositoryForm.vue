@@ -5,15 +5,13 @@
       v-if="formSchema"
       :schema="formSchema"
       v-model="data"
-      :errors="errors"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Create bot</button>
-      </div>
+      :errors="errors" />
+    <div class="new-repository-form__create-button">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Create bot
+      </bh-button>
     </div>
   </form>
 </template>
@@ -69,3 +67,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.new-repository-form {
+
+  &__create-button {
+    text-align: center;
+  }
+}
+</style>
