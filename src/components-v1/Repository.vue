@@ -468,7 +468,7 @@ import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
 import TranslationsList from '@/components-v1/translate/TranslationsList';
 import SetAuthorizationRoleForm from '@/components-v1/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components-v1/repository/AuthorizationsList';
-import RequestAuthorizationForm from '@/components-v1/repository/RequestAuthorizationForm';
+import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AuthorizationRequestsList from '@/components-v1/repository/AuthorizationRequestsList';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import UpdatesList from '@/components/update/UpdatesList';

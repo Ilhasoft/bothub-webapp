@@ -5,15 +5,13 @@
       v-if="formSchema"
       :schema="formSchema"
       v-model="data"
-      :errors="errors"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Request</button>
-      </div>
+      :errors="errors" />
+    <div>
+      <bh-button
+        :disabled="submitting"
+        full-width
+        type="submit"
+        primary> Request </bh-button>
     </div>
   </form>
 </template>
