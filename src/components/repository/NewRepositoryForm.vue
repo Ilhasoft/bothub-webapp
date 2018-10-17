@@ -6,7 +6,7 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors" />
-    <div class="new-repository-form__create-button">
+    <div class="new-repository-form__create-bot-button">
       <bh-button
         :disabled="submitting"
         primary
@@ -68,10 +68,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .new-repository-form {
 
-  &__create-button {
+  &__create-bot-button {
     text-align: center;
   }
 }
