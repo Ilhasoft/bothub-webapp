@@ -15,7 +15,7 @@
 import { mapActions } from 'vuex';
 
 import Pagination from '@/components-v1/shared/Pagination';
-import AuthorizationRequestItem from './AuthorizationRequestItem';
+import AuthorizationRequestItem from '@/components/repository/AuthorizationRequestItem';
 
 
 const components = {
