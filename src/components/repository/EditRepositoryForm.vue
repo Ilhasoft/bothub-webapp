@@ -6,15 +6,12 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initial-data="initialData"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Edit</button>
-      </div>
+      :initial-data="initialData" />
+    <div class="edit-repository-form__edit-button">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Edit</bh-button>
     </div>
   </form>
 </template>
@@ -91,3 +88,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.edit-repository-form {
+
+  &__edit-button {
+    text-align: center;
+  }
+}
+</style>

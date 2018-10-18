@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditRepositoryForm.vue renders correctly 1`] = `
+<form>
+  <!---->
+  <formgenerator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]"></formgenerator-stub>
+  <div class="edit-repository-form__edit-button">
+    <bh-button primary="" type="submit">Edit</bh-button>
+  </div>
+</form>
+`;
