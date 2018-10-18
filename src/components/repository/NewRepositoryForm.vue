@@ -1,19 +1,21 @@
 <template>
-  <form @submit.prevent="onSubmit()">
-    <loading v-if="!formSchema" />
-    <form-generator
-      v-if="formSchema"
-      :schema="formSchema"
-      v-model="data"
-      :errors="errors" />
-    <div class="new-repository-form__create-bot-button">
-      <bh-button
-        :disabled="submitting"
-        primary
-        type="submit">Create bot
-      </bh-button>
-    </div>
-  </form>
+  <div class="new-repository-form">
+    <form @submit.prevent="onSubmit()">
+      <loading v-if="!formSchema" />
+      <form-generator
+        v-if="formSchema"
+        :schema="formSchema"
+        v-model="data"
+        :errors="errors" />
+      <div class="new-repository-form__create-bot-button">
+        <bh-button
+          :disabled="submitting"
+          primary
+          type="submit">Create bot
+        </bh-button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
