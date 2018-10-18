@@ -3,6 +3,6 @@
 exports[`AuthorizationRequestsList.vue renders correctly 1`] = `
 <div>
   <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More"></pagination-stub>
-  <p class="no-examples">No requests.</p>
+  <p>No requests.</p>
 </div>
 `;

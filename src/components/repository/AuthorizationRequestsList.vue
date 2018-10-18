@@ -5,9 +5,7 @@
       :item-component="authorizationRequestItem"
       :list="requestsList"
       @itemDeleted="onItemDeleted()" />
-    <p
-      v-if="requestsList && requestsList.empty"
-      class="no-examples">No requests.</p>
+    <p v-if="requestsList && requestsList.empty">No requests.</p>
   </div>
 </template>
 
@@ -15,7 +13,7 @@
 import { mapActions } from 'vuex';
 
 import Pagination from '@/components-v1/shared/Pagination';
-import AuthorizationRequestItem from './AuthorizationRequestItem';
+import AuthorizationRequestItem from '@/components-v1/repository/AuthorizationRequestItem';
 
 
 const components = {
