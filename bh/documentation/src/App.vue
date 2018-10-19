@@ -26,6 +26,15 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
+              <Table />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
               <grid />
             </div>
           </div>
@@ -180,6 +189,7 @@ import Notification from './notification/Notification';
 import IconButton from './icon-button/IconButton';
 import LanguageFlag from './languageFlag/LanguageFlag';
 import Tooltip from './tooltip/Tooltip';
+import Table from './table/Table';
 
 export default {
   name: 'App',
@@ -202,6 +212,7 @@ export default {
     IconButton,
     LanguageFlag,
     Tooltip,
+    Table,
   },
 };
 </script>
