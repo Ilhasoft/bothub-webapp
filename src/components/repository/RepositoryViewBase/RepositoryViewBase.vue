@@ -51,7 +51,9 @@
                     <span>{{ warningsCount }} warnings</span>
                   </a>
                 </div>
-                <div class="bh-grid__item">
+                <div
+                  v-if="requirementsCount > 0"
+                  class="bh-grid__item">
                   <a
                     href="#requirements"
                     @click.prevent="openTrainModal()">
@@ -61,6 +63,9 @@
                 </div>
                 <div class="bh-grid__item">
                   <a
+                    :class="{
+                      'text-color-grey': !repository.ready_for_train,
+                    }"
                     href="#train"
                     @click.prevent="openTrainModal()">
                     <bh-icon value="school" />
