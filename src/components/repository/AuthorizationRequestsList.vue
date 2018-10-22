@@ -5,9 +5,7 @@
       :item-component="authorizationRequestItem"
       :list="requestsList"
       @itemDeleted="onItemDeleted()" />
-    <p
-      v-if="requestsList && requestsList.empty"
-      class="no-examples">No requests.</p>
+    <p v-if="requestsList && requestsList.empty">No requests.</p>
   </div>
 </template>
 

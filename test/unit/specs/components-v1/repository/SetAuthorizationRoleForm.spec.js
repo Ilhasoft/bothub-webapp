@@ -7,7 +7,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import { ROLE_CONTRIBUTOR } from '@/utils';
-import SetAuthorizationRoleForm from '@/components-v1/repository/SetAuthorizationRoleForm';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

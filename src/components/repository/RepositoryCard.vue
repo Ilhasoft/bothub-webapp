@@ -1,9 +1,11 @@
 <template>
-  <div class="card">
-    <div class="card-content">
-      <repository-info :repository="$attrs" />
+  <bh-card class="repository-card">
+    <div class="bh-grid">
+      <div class="bh-grid__item">
+        <repository-info :repository="$attrs" />
+      </div>
     </div>
-  </div>
+  </bh-card>
 </template>
 
 <script>
@@ -20,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
+.repository-card {
   margin: 1rem 0;
 }
 </style>
