@@ -7,18 +7,17 @@
       <div v-if="authenticated">
         <div
           v-if="repository.authorization.can_write"
-          class="repository-settings">
-          <div class="repository-settings__edit-repository-section">
-            <h1 class="bh-title-2">Edit Repository</h1>
+          class="bh-grid bh-grid--column">
+          <div class="bh-grid__item">
+            <h1>Edit Repository</h1>
             <edit-repository-form
               :owner-nickname="repository.owner__nickname"
               :slug="repository.slug"
               :initial-data="getEditInitialData()"
               @edited="onEdited($event)" />
           </div>
-          <hr>
-          <div class="repository-settings__manager-team-section">
-            <h1 class="bh-title-2">Manager Team</h1>
+          <div class="bh-grid__item">
+            <h1>Manager Team</h1>
             <set-authorization-role-form
               ref="setAuthorizationRoleForm"
               :repository-uuid="repository.uuid"
@@ -27,7 +26,9 @@
               ref="authorizationsList"
               :repository-uuid="repository.uuid"
               @edit="onEditRole($event)" />
-            <h1 class="bh-title-2">Authorization Requests</h1>
+          </div>
+          <div class="bh-grid__item">
+            <h1>Authorization Requests</h1>
             <authorization-requests-list
               :repository-uuid="repository.uuid"
               @review="onReviewAuthorizationRequest()" />
@@ -35,19 +36,23 @@
         </div>
         <div
           v-else
-          class="bh-notification">
-          <div class="bh-notification bh-notification--warning">
-            You can not edit this repository
+          class="bh-grid">
+          <div class="bh-grid__item">
+            <div class="bh-notification bh-notification--warning">
+              You can not edit this repository
+            </div>
           </div>
         </div>
       </div>
       <div
         v-else
-        class="repository-settings__login-section bh-notification">
-        <div class="bh-notification bh-notification--info">
-          Sign in to your account to edit this repository.
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--info">
+            Sign in to your account to edit this repository.
+          </div>
+          <login-form hide-forgot-password />
         </div>
-        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -123,17 +128,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.repository-settings {
-  padding: 1rem;
-
-  &__edit-repository-section {
-    margin: 1rem 0;
-  }
-
-  &__manager-team-section {
-    margin: 1rem 0;
-  }
-}
-</style>
