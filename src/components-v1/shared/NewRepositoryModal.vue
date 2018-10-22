@@ -13,15 +13,14 @@
 </template>
 
 <script>
-import NewRepositoryForm from '@/components-v1/repository/NewRepositoryForm';
+import NewRepositoryForm from '@/components/repository/NewRepositoryForm';
 
-const components = {
-  NewRepositoryForm,
-};
 
 export default {
   name: 'NewRepositoryModal',
-  components,
+  components: {
+    NewRepositoryForm,
+  },
   props: {
     active: {
       type: Boolean,

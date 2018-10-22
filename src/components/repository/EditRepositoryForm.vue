@@ -6,15 +6,12 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initial-data="initialData"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Edit</button>
-      </div>
+      :initial-data="initialData" />
+    <div class="text-center">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Edit</bh-button>
     </div>
   </form>
 </template>
