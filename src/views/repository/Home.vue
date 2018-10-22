@@ -11,42 +11,41 @@
           <p v-if="repository.description">{{ repository.description }}</p>
           <p v-else><i class="text-color-grey">There is no description for this repository</i></p>
         </div>
-        <div class="bh-grid__item">
-          <div v-if="hasIntents || hasLabels">
-            <h3>Can identify</h3>
-            <div class="bh-grid">
-              <div
-                v-if="hasIntents"
-                class="bh-grid__item">
-                <div class="repository-home__attribute">
-                  <h4>Intents</h4>
-                  <div class="repository-home__attribute__card">
-                    <bh-badge
-                      v-for="(intent) in repository.intents_list"
-                      :key="intent"
-                      size="small"
-                      color="grey"
-                      class="repository-home__attribute__card__badge">
-                      <span>{{ intent }}</span>
-                    </bh-badge>
-                  </div>
+        <div
+          v-if="hasIntents || hasLabels"
+          class="bh-grid__item bh-grid__item--nested">
+          <div class="bh-grid">
+            <div
+              v-if="hasIntents"
+              class="bh-grid__item">
+              <div class="repository-home__attribute">
+                <h4>Intents</h4>
+                <div class="repository-home__attribute__card">
+                  <bh-badge
+                    v-for="(intent) in repository.intents_list"
+                    :key="intent"
+                    size="small"
+                    color="grey"
+                    class="repository-home__attribute__card__badge">
+                    <span>{{ intent }}</span>
+                  </bh-badge>
                 </div>
               </div>
-              <div
-                v-if="hasLabels"
-                class="bh-grid__item">
-                <div class="repository-home__attribute">
-                  <h4>Labels</h4>
-                  <div class="repository-home__attribute__card">
-                    <bh-badge
-                      v-for="(label) in repository.labels_list"
-                      :key="label"
-                      size="small"
-                      color="grey"
-                      class="repository-home__attribute__card__badge">
-                      <span>{{ label }}</span>
-                    </bh-badge>
-                  </div>
+            </div>
+            <div
+              v-if="hasLabels"
+              class="bh-grid__item">
+              <div class="repository-home__attribute">
+                <h4>Labels</h4>
+                <div class="repository-home__attribute__card">
+                  <bh-badge
+                    v-for="(label) in repository.labels_list"
+                    :key="label"
+                    size="small"
+                    color="grey"
+                    class="repository-home__attribute__card__badge">
+                    <span>{{ label }}</span>
+                  </bh-badge>
                 </div>
               </div>
             </div>

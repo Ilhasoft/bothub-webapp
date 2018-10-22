@@ -31,7 +31,7 @@ import paragraphsTypographyCode from '!!raw-loader!./examples/Paragraphs';
 import LinksAndModifiersTypography from './examples/LinksAndModifiers';
 import linksAndModifiersTypographyCode from '!!raw-loader!./examples/LinksAndModifiers';
 import TextColorsTypography from './examples/TextColors';
-import textColorsTypographyCode from '!!raw-loader!./examples/LinksAndModifiers';
+import textColorsTypographyCode from '!!raw-loader!./examples/TextColors';
 
 
 export default {
