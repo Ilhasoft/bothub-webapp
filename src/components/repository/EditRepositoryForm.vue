@@ -7,7 +7,7 @@
       v-model="data"
       :errors="errors"
       :initial-data="initialData" />
-    <div class="">
+    <div class="text-center">
       <bh-button
         :disabled="submitting"
         primary
