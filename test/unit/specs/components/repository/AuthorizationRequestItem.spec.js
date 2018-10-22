@@ -5,7 +5,7 @@ import Buefy from 'buefy';
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import AuthorizationRequestItem from '@/components-v1/repository/AuthorizationRequestItem';
+import AuthorizationRequestItem from '@/components/repository/AuthorizationRequestItem';
 
 
 const localVue = createLocalVue();
