@@ -1,11 +1,11 @@
 <template>
   <bh-modal :open.sync="openValue">
     <div class="train-modal">
-      <h1 class="title is-3">Train Status</h1>
+      <h1>Train Status</h1>
       <div
         v-for="(requirements, lang) in requirementsToTrain"
         :key="lang">
-        <table class="table is-fullwidth">
+        <table>
           <thead>
             <tr>
               <th>{{ lang | languageVerbose }} is not ready to train</th>
@@ -23,25 +23,23 @@
       <div v-if="Object.keys(requirementsToTrain).length === 0">
         <p>You don't have any pendency to train.</p>
       </div>
-      <div class="train-modal__buttons level">
-        <div class="level-left">
-          <div class="train-modal__flags">
-            <div
-              v-for="(langReadyForTrain, lang) in languagesReadyForTrain"
-              :key="lang"
-              class="train-modal__flags__item">
-              <bh-language-flag :language="lang" />
-              <bh-icon
-                :value="langReadyForTrain ? 'check' : 'exclamation'"
-                :class="{
-                  'train-modal__flags__item__status': true,
-                  'train-modal__flags__item__status--ready': langReadyForTrain,
-                }"
-                size="small" />
-            </div>
+      <div class="bh-grid bh-grid--space-between train-modal__buttons">
+        <div class="train-modal__flags">
+          <div
+            v-for="(langReadyForTrain, lang) in languagesReadyForTrain"
+            :key="lang"
+            class="train-modal__flags__item">
+            <bh-language-flag :language="lang" />
+            <bh-icon
+              :value="langReadyForTrain ? 'check' : 'exclamation'"
+              :class="{
+                'train-modal__flags__item__status': true,
+                'train-modal__flags__item__status--ready': langReadyForTrain,
+              }"
+              size="small" />
           </div>
         </div>
-        <div class="level-rigth">
+        <div>
           <bh-button
             :disabled="!readyForTrain"
             primary

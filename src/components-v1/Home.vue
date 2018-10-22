@@ -31,7 +31,7 @@ import Layout from '@/components/shared/Layout';
 import SearchBar from '@/components-v1/shared/SearchBar';
 import CategoriesList from '@/components-v1/shared/CategoriesList';
 import Pagination from '@/components-v1/shared/Pagination';
-import RepositoryCard from '@/components-v1/repository/RepositoryCard';
+import RepositoryCard from '@/components/repository/RepositoryCard';
 
 const components = {
   Layout,

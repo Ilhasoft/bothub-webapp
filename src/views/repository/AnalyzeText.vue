@@ -73,6 +73,9 @@ text: [text to analyze]</pre>
               :authorization-uuid="repository.authorization.uuid"/>
           </div>
         </div>
+        <hr>
+        <h3>Updates</h3>
+        <updates-list :repository="repository" />
       </div>
       <div
         v-else
@@ -91,6 +94,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import RequestGenerator from '@/components-v1/repository/RequestGenerator';
 import LoginForm from '@/components-v1/auth/LoginForm';
+import UpdatesList from '@/components/update/UpdatesList';
 
 
 export default {
@@ -99,6 +103,7 @@ export default {
     RepositoryViewBase,
     RequestGenerator,
     LoginForm,
+    UpdatesList,
   },
   extends: RepositoryBase,
 };

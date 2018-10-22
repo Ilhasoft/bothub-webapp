@@ -1,0 +1,27 @@
+@import '~./colors.scss';
+
+
+$cedule-padding: .75rem;
+
+table { width: 100%; }
+table th {
+  padding: $cedule-padding;
+  text-align: left;
+  background-color: $color-lighter-grey;
+}
+
+table td {
+  padding: $cedule-padding;
+  text-align: left;
+  background-color: $color-primary-inverted;
+  border-bottom: .1rem solid $color-lighter-grey;
+}
+
+@media screen and (max-width: 430px) {
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: .5rem 0;
+  }
+}

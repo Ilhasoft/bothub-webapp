@@ -58,9 +58,10 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
-import SetAuthorizationRoleForm from '@/components-v1/repository/SetAuthorizationRoleForm';
-import AuthorizationsList from '@/components-v1/repository/AuthorizationsList';
-import AuthorizationRequestsList from '@/components-v1/repository/AuthorizationRequestsList';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
+import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
+
 import LoginForm from '@/components-v1/auth/LoginForm';
 
 

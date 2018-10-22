@@ -6,9 +6,7 @@
       :item-component="authorizationItemElem"
       :list="authorizationsList"
       @edit="onEdit($event)" />
-    <p
-      v-if="authorizationsList && authorizationsList.empty"
-      class="no-examples">No users in your team.</p>
+    <p v-if="authorizationsList && authorizationsList.empty">No users in your team.</p>
   </div>
 </template>
 
@@ -16,7 +14,7 @@
 import { mapActions } from 'vuex';
 
 import Pagination from '@/components-v1/shared/Pagination';
-import AuthorizationItem from './AuthorizationItem';
+import AuthorizationItem from '@/components-v1/repository/AuthorizationItem';
 
 
 const components = {
