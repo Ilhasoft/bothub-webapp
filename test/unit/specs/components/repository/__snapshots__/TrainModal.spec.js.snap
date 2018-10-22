@@ -3,9 +3,9 @@
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
 <bhmodal-stub open="true" backgroundcloses="true">
   <div class="train-modal">
-    <h1 class="title is-3">Train Status</h1>
+    <h1>Train Status</h1>
     <div>
-      <table class="table is-fullwidth">
+      <table>
         <thead>
           <tr>
             <th>English is not ready to train</th>
@@ -19,16 +19,14 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
       </table>
     </div>
     <!---->
-    <div class="train-modal__buttons level">
-      <div class="level-left">
-        <div class="train-modal__flags">
-          <div class="train-modal__flags__item">
-            <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
-            <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
-          </div>
+    <div class="bh-grid bh-grid--space-between train-modal__buttons">
+      <div class="train-modal__flags">
+        <div class="train-modal__flags__item">
+          <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
+          <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
         </div>
       </div>
-      <div class="level-rigth">
+      <div>
         <bhbutton-stub primary="true" type="button">
           <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
         </bhbutton-stub>
@@ -41,20 +39,18 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
 exports[`TrainModal.vue renders correctly 1`] = `
 <bhmodal-stub open="true" backgroundcloses="true">
   <div class="train-modal">
-    <h1 class="title is-3">Train Status</h1>
+    <h1>Train Status</h1>
     <div>
       <p>You don't have any pendency to train.</p>
     </div>
-    <div class="train-modal__buttons level">
-      <div class="level-left">
-        <div class="train-modal__flags">
-          <div class="train-modal__flags__item">
-            <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
-            <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
-          </div>
+    <div class="bh-grid bh-grid--space-between train-modal__buttons">
+      <div class="train-modal__flags">
+        <div class="train-modal__flags__item">
+          <bhlanguageflag-stub language="en"></bhlanguageflag-stub>
+          <bhicon-stub value="check" size="small" class="train-modal__flags__item__status train-modal__flags__item__status--ready"></bhicon-stub>
         </div>
       </div>
-      <div class="level-rigth">
+      <div>
         <bhbutton-stub primary="true" type="button">
           <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
         </bhbutton-stub>
