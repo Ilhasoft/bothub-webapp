@@ -65,7 +65,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 import Layout from '@/components/shared/Layout';
 import UserProfile from '@/components-v1/user/UserProfile';
-import RepositoryCard from '@/components-v1/repository/RepositoryCard';
+import RepositoryCard from '@/components/repository/RepositoryCard';
 import Pagination from '@/components-v1/shared/Pagination';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
 import ChangePasswordForm from '@/components-v1/user/ChangePasswordForm';
