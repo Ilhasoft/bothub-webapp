@@ -1,21 +1,18 @@
 <template>
-  <div class="new-repository-form">
-    <form @submit.prevent="onSubmit()">
-      <loading v-if="!formSchema" />
-      <form-generator
-        v-if="formSchema"
-        :schema="formSchema"
-        v-model="data"
-        :errors="errors" />
-      <div class="new-repository-form__create-bot-button">
-        <bh-button
-          :disabled="submitting"
-          primary
-          type="submit">Create bot
-        </bh-button>
-      </div>
-    </form>
-  </div>
+  <form @submit.prevent="onSubmit()">
+    <loading v-if="!formSchema" />
+    <form-generator
+      v-if="formSchema"
+      :schema="formSchema"
+      v-model="data"
+      :errors="errors" />
+    <div class="text-center">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Create bot</bh-button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -69,12 +66,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.new-repository-form {
-
-  &__create-bot-button {
-    text-align: center;
-  }
-}
-</style>

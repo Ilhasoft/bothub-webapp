@@ -105,8 +105,4 @@ $entities-colors: (
 .align-items-center {
   align-items: center;
 }
-
-.text-center {
-  text-align: center;
-}
 </style>
