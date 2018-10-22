@@ -4,51 +4,64 @@
     :loading="loading"
     :error-code="errorCode">
     <div v-if="repository">
-      <div class="bh-notification">
-        <div v-if="authenticated">
-          <div
-            v-if="repository.authorization.can_contribute"
-            class="bh-grid repository-translate">
-            <div class="bh-grid__item">
-              <bh-field label="Translate from:">
-                <language-select v-model="translate.from" />
-              </bh-field>
-            </div>
-            <div class="repository-translate__translate-arrow-icon">
-              <div class="field">
-                <label class="label">&nbsp;</label>
-                <bh-icon
-                  value="chevron-right"
-                  size="small" />
+      <div v-if="authenticated">
+        <div v-if="repository.authorization.can_contribute">
+          <div class="repository-translate">
+            <div class="bh-grid">
+              <div class="bh-grid__item">
+                <bh-field label="Translate from:">
+                  <language-select v-model="translate.from" />
+                </bh-field>
+              </div>
+              <div class="repository-translate__translate-arrow-icon">
+                <div class="field">
+                  <label class="label">&nbsp;</label>
+                  <bh-icon
+                    value="chevron-right"
+                    size="small" />
+                </div>
+              </div>
+              <div class="bh-grid__item">
+                <bh-field label="Translate to:">
+                  <language-select
+                    v-model="translate.to"
+                    :exclude="[translate.from]" />
+                </bh-field>
               </div>
             </div>
+          </div>
+          <div
+            v-if="!!translate.from && !!translate.to"
+            class="bh-grid">
             <div class="bh-grid__item">
-              <bh-field label="Translate to:">
-                <language-select
-                  v-model="translate.to"
-                  :exclude="[translate.from]" />
-              </bh-field>
+              <translate-list
+                :repository="repository"
+                :from="translate.from"
+                :to="translate.to"
+                @translated="examplesTransleted()" />
             </div>
           </div>
-          <div v-else>
+        </div>
+        <div
+          v-else
+          class="bh-grid">
+          <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
               You can not contribute to this repository
             </div>
           </div>
         </div>
-        <div v-else>
+      </div>
+      <div
+        v-else
+        class="bh-grid">
+        <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
             Sign in to your account to contribute to this repository.
           </div>
           <login-form hide-forgot-password />
         </div>
       </div>
-      <translate-list
-        v-if="!!translate.from && !!translate.to"
-        :repository="repository"
-        :from="translate.from"
-        :to="translate.to"
-        @translated="examplesTransleted()" />
     </div>
   </repository-view-base>
 </template>
@@ -95,7 +108,12 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~bh/src/assets/scss/colors.scss';
+
+
 .repository-translate {
+  background-color: $color-lighter-grey;
+
   &__translate-arrow-icon {
     align-self: center;
   }
