@@ -4,7 +4,7 @@
     :loading="loading"
     :error-code="errorCode">
     <div v-if="repository">
-      <div class="bh-notification">
+      <div class="translations__header">
         <div class="bh-grid">
           <div class="bh-grid__item">
             <translations-status
@@ -15,11 +15,15 @@
           </div>
         </div>
       </div>
-      <translations-list
-        ref="translationsList"
-        :repository="repository"
-        :to-language="toLanguage"
-        @itemDeleted="examplesTransleted()" />
+      <div class="bh-grid">
+        <div class="bh-grid__item">
+          <translations-list
+            ref="translationsList"
+            :repository="repository"
+            :to-language="toLanguage"
+            @itemDeleted="examplesTransleted()" />
+        </div>
+      </div>
     </div>
   </repository-view-base>
 </template>
@@ -60,3 +64,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~bh/src/assets/scss/colors.scss';
+
+
+.translations {
+  &__header {
+    background-color: $color-lighter-grey;
+  }
+}
+</style>
