@@ -13,6 +13,7 @@
         <p>&nbsp;</p>
         <bh-button
           :disabled="usersProfile.length === 0 || !role"
+          type="submit"
           primary>Invite</bh-button>
       </div>
     </div>
@@ -26,14 +27,12 @@ import SelectUsersInput from '@/components-v1/inputs/SelectUsersInput';
 import RoleSelect from '@/components-v1/inputs/RoleSelect';
 
 
-const components = {
-  SelectUsersInput,
-  RoleSelect,
-};
-
 export default {
   name: 'SetAuthorizationRoleForm',
-  components,
+  components: {
+    SelectUsersInput,
+    RoleSelect,
+  },
   props: {
     repositoryUuid: {
       required: true,

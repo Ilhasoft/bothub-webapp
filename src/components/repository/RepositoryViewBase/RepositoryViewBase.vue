@@ -111,6 +111,12 @@
                 class="bh-grid">
                 <div class="bh-grid__item">&nbsp;</div>
               </div>
+              <analyze-text-drawer
+                v-if="repository && authenticated"
+                :owner-nickname="repository.owner__nickname"
+                :slug="repository.slug"
+                :default-language="repository.language"
+                :available-languages="repository.available_languages" />
             </div>
           </div>
         </div>
@@ -182,6 +188,7 @@ import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components-v1/repository/TrainResponse';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
+import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -202,6 +209,7 @@ export default {
     TrainModal,
     TrainResponse,
     RequestAuthorizationForm,
+    AnalyzeTextDrawer,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),

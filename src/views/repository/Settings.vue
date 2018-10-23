@@ -90,6 +90,8 @@ export default {
         language,
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       } = this.repository;
       return {
         name,
@@ -100,6 +102,8 @@ export default {
         ),
         description,
         is_private: isPrivate,
+        use_language_model_featurizer: useLanguageModelFeaturizer,
+        use_competing_intents: useCompetingIntents,
       };
     },
     onEdited(repository) {
