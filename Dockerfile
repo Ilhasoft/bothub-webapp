@@ -18,7 +18,7 @@ COPY . .
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN nginx -t
 
-RUN mkdir dist/ && chown -R www:www dist/
+RUN mkdir -p ./dist/ && chown -R www:www ./dist/
 
 RUN chmod +x entrypoint.sh
 ENTRYPOINT [ "./entrypoint.sh" ]
