@@ -1,11 +1,9 @@
 <template>
   <b-modal :active.sync="openValue">
-    <div
-      v-if="!!trainResponse"
-      class="card">
-      <div class="card-content">
-        <h1 class="title">Repository Trained!</h1>
-        <table class="table is-fullwidth is-hoverable">
+    <bh-card v-if="!!trainResponse">
+      <div class="bh-grid bh-grid--column">
+        <h1>Repository Trained!</h1>
+        <table>
           <thead>
             <tr>
               <th colspan="2">Languages Report</th>
@@ -16,45 +14,42 @@
               v-for="(data, language) in trainResponse.languages_report"
               :key="language">
               <td>{{ language | languageVerbose }}</td>
-              <td class="has-text-right">
-                <b-icon
+              <td class="text-right">
+                <bh-icon
                   v-if="data.status === 'trained'"
-                  icon="check"
-                  type="is-success" />
-                <b-icon
+                  value="check" />
+                <bh-icon
                   v-else-if="data.status === 'not_ready_for_train'"
-                  icon="dots-horizontal"
-                  type="is-info" />
+                  value="dots-horizontal" />
                 <div v-else-if="data.status === 'failed'">
                   <div>
-                    <b-icon
-                      icon="close"
-                      type="is-danger" />
+                    <bh-icon
+                      value="close" />
                   </div>
-                  <p class="is-size-7">{{ data.error }}</p>
+                  <small>{{ data.error }}</small>
                 </div>
                 <span v-else>{{ data.status }}</span>
               </td>
             </tr>
           </tbody>
         </table>
-        <div class="columns">
-          <div class="column has-text-centered">
-            <b-icon
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <bh-icon
               icon="check"
               type="is-success"
               size="is-small" />
             <span>Trained</span>
           </div>
-          <div class="column has-text-centered">
-            <b-icon
+          <div class="bh-grid__item">
+            <bh-icon
               icon="dots-horizontal"
               type="is-info"
               size="is-small" />
             <span>No changes</span>
           </div>
-          <div class="column has-text-centered">
-            <b-icon
+          <div class="bh-grid__item">
+            <bh-icon
               icon="close"
               type="is-danger"
               size="is-small" />
@@ -62,7 +57,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </bh-card>
   </b-modal>
 </template>
 
