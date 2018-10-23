@@ -1,5 +1,5 @@
 <template>
-  <b-modal :active.sync="openValue">
+  <bh-modal :open.sync="openValue">
     <bh-card v-if="!!trainResponse">
       <div class="bh-grid bh-grid--column">
         <div class="bh-grid__item">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </bh-card>
-  </b-modal>
+  </bh-modal>
 </template>
 
 <script>

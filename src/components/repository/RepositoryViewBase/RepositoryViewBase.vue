@@ -180,7 +180,7 @@ import Layout from '@/components/shared/Layout';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components/repository/TrainModal';
-import TrainResponse from '@/components-v1/repository/TrainResponse';
+import TrainResponse from '@/components/repository/TrainResponse';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 
 
