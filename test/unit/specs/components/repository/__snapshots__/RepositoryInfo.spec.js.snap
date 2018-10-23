@@ -1,40 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="columns" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" language="en" categories="1,2" created_at="2018-04-20T17:05:42.035514Z">
-  <div class="column is-narrow">
-    <repositoryavatar-stub name="Repository" ownernickname="fake" slug="repository" votessum="0"></repositoryavatar-stub>
-  </div>
-  <div class="column">
-    <div class="repository-header repository-infospace">
-      <div class="repository-header-title">
-        <router-link-stub to="/fake/repository/" tag="a" event="click" class="title is-4">Repository</router-link-stub>
-      </div>
-      <div class="repository-header-info">
-        <!---->
-        <!---->
-        <!---->
-      </div>
-    </div>
-    <div>
-      <div class="subtitle is-6 repository-infospace">
-        <p>Created by Fake</p>
-        <p><a href="https://bothub.it/fake/repository/" target="_blank" class="has-text-grey">https://bothub.it/fake/repository/</a></p>
-      </div>
-      <div class="repository-infospace">
-        <div class="repository-infospace-flags">
-          <bhlanguageflag-stub language="en" class="repository-infospace-flags-item"></bhlanguageflag-stub>
-          <bhlanguageflag-stub language="pt" class="repository-infospace-flags-item"></bhlanguageflag-stub>
-        </div>
-      </div>
-      <div>
-        <p class="repository-description repository-description-empty">No description</p>
-      </div>
-      <div>
-        <repositorycategorieslist-stub categories="[object Object],[object Object]"></repositorycategorieslist-stub>
-      </div>
+<div class="bh-grid">
+  <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
+    <div class="repository-info__big-badge">
+      <bhicon-stub value="botinho" size="medium" class="repository-info__big-badge__icon"></bhicon-stub>
     </div>
   </div>
-  <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
+  <div class="bh-grid__item">
+    <div class="repository-info__title"><span class="repository-info__title__bagde"><bhicon-stub value="botinho" class="repository-info__title__bagde__icon"></bhicon-stub></span> <span></span></div>
+    <div class="repository-info__info-item">
+      <router-link-stub to="[object Object]" tag="a" event="click">/undefined/undefined/</router-link-stub>
+    </div>
+    <div class="repository-info__info-item"><span>Created by</span> <strong class="medium"></strong></div>
+    <div class="repository-info__flags"></div>
+    <div class="repository-info__categories"></div>
+  </div>
 </div>
 `;

@@ -1,61 +1,69 @@
 <template>
-  <div class="layout">
+  <div
+    :class="{
+      layout: true,
+      'layout--without-background': withoutBackground,
+  }">
     <new-repository-modal
       :active="newRepositoryModalOpen"
-      @requestClose="closeNewRepositoryModal" />
-    <div class="topbar level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          <div class="topbar-brand">
-            <router-link to="/">
-              <img
-                src="@/assets/imgs/logo-white.svg"
-                alt="bothub">
-            </router-link>
-          </div>
-        </div>
+      @requestClose="closeNewRepositoryModal()" />
+    <div class="layout__header">
+      <div class="layout__header__item">
+        <router-link
+          class="layout__header__logo"
+          to="/">
+          <img
+            src="@/assets/imgs/logo-white.svg"
+            alt="bothub">
+        </router-link>
       </div>
-      <div
-        v-if="authenticated"
-        ref="authenticated"
-        class="level-right">
-        <div class="level-item is-hidden-mobile">
-          <button
-            class="button is-primary-light"
-            @click.prevent="openNewRepositoryModal()">start your bot</button>
-        </div>
-        <div class="level-item">
-          <b-dropdown position="is-bottom-left">
+      <div class="layout__header__item">
+        <div
+          v-if="authenticated"
+          class="bh-grid bh-grid--ever-desktop">
+          <bh-button
+            primary
+            inverted
+            size="medium"
+            class="bh-grid__item hide-mobile"
+            @click="openNewRepositoryModal()">start your bot</bh-button>
+          <bh-dropdown position="left">
             <user-avatar
               slot="trigger"
-              :profile="myProfile" />
-            <b-dropdown-item @click="openMyProfile()">
+              :profile="myProfile"
+              class="bh-grid__item"
+              size="medium" />
+            <bh-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
-            </b-dropdown-item>
-            <b-dropdown-item @click="openNewRepositoryModal()">
+            </bh-dropdown-item>
+            <bh-dropdown-item @click="openNewRepositoryModal()">
               Start your bot
-            </b-dropdown-item>
-            <b-dropdown-item @click="logout()">
+            </bh-dropdown-item>
+            <bh-dropdown-item @click="logout()">
               Logout
-            </b-dropdown-item>
-          </b-dropdown>
+            </bh-dropdown-item>
+          </bh-dropdown>
         </div>
-      </div>
-      <div
-        v-else
-        ref="notAuthenticated"
-        class="level-right">
-        <div class="level-item">
-          <button
-            ref="login"
-            class="button is-primary-light"
-            @click.prevent="openLoginModal()">sign in</button>
+        <div
+          v-else
+          class="bh-grid bh-grid--ever-desktop">
+          <bh-button
+            primary
+            inverted
+            transparent
+            size="medium"
+            class="bh-grid__item"
+            @click="openLoginModal()">sign in</bh-button>
+          <bh-button
+            primary
+            inverted
+            size="medium"
+            class="bh-grid__item hide-mobile"
+            @click="openLoginModal()">sign up</bh-button>
         </div>
       </div>
     </div>
-    <div class="layout-content">
-      <slot />
-    </div>
+    <div class="layout__content"><slot /></div>
     <site-footer />
   </div>
 </template>
@@ -63,9 +71,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
-import SiteFooter from '@/components/shared/SiteFooter';
-import UserAvatar from '@/components/shared/UserAvatar';
+import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import SiteFooter from '@/components-v1/shared/SiteFooter';
+import UserAvatar from '@/components/user/UserAvatar';
 
 const components = {
   NewRepositoryModal,
@@ -79,7 +87,11 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'bothub',
+      default: 'Bothub',
+    },
+    withoutBackground: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -95,7 +107,6 @@ export default {
   },
   watch: {
     title() {
-      /* istanbul ignore next */
       document.title = this.title;
     },
   },
@@ -110,15 +121,12 @@ export default {
       'openLoginModal',
     ]),
     openNewRepositoryModal() {
-      /* istanbul ignore next */
       this.newRepositoryModalOpen = true;
     },
     closeNewRepositoryModal() {
-      /* istanbul ignore next */
       this.newRepositoryModalOpen = false;
     },
     openMyProfile() {
-      /* istanbul ignore next */
       this.$router.push({ name: 'myProfile' });
     },
   },
@@ -127,22 +135,51 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/colors.scss';
+
 
 .layout {
-  min-height: 100vh;
+  $parent: &;
 
-  &-content {
-    min-height: calc(100vh - 500px);
+  &::before {
+    display: block;
+    width: 100%;
+    height: 10rem;
+    margin-bottom: -10rem;
+    content: "";
+    background-color: $color-primary;
   }
-}
 
-.topbar {
-  padding: 16px;
+  &--without-background {
+    #{$parent}::before {
+      display: none;
+    }
+  }
 
-  &-brand {
-    width: 140px;
+  &__header {
+    $heigth: 2rem;
 
-    img { width: 100%; }
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem;
+
+    &__item {
+      flex-grow: 0;
+    }
+
+    &__logo {
+      display: inline-block;
+      padding: .25rem;
+      border: 1px solid transparent;
+
+      img {
+        height: $heigth;
+      }
+    }
+  }
+
+  &__content {
+    min-height: calc(100vh - 4rem);
   }
 }
 </style>

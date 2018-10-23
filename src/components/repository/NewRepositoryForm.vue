@@ -5,23 +5,20 @@
       v-if="formSchema"
       :schema="formSchema"
       v-model="data"
-      :errors="errors"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Create bot</button>
-      </div>
+      :errors="errors" />
+    <div class="text-center">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Create bot</bh-button>
     </div>
   </form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components/shared/Loading';
+import FormGenerator from '@/components-v1/form-generator/FormGenerator';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const components = {

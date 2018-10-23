@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAvatar.vue renders correctly 1`] = `
+<bhavatar-stub size="normal">
+  <bhicon-stub value="account" size="small"></bhicon-stub>
+</bhavatar-stub>
+`;
+
+exports[`UserAvatar.vue with small size renders correctly 1`] = `
+<bhavatar-stub size="small">
+  <bhicon-stub value="account" size="small"></bhicon-stub>
+</bhavatar-stub>
+`;

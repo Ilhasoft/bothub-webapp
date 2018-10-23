@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BhIcon.vue renders correctly 1`] = `<span class="bh-icon">test-file-stub</span>`;

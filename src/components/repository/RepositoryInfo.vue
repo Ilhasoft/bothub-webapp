@@ -1,285 +1,160 @@
 <template>
-  <div class="columns">
-    <div class="column is-narrow">
-      <repository-avatar
-        :name="name"
-        :owner-nickname="owner__nickname"
-        :slug="slug"
-        :votes-sum="votes_sum" />
-    </div>
-    <div class="column">
-      <div class="repository-header repository-infospace">
-        <div class="repository-header-title">
-          <router-link
-            :to="`/${owner__nickname}/${slug}/`"
-            class="title is-4">{{ name }}</router-link>
-        </div>
-        <div class="repository-header-info">
-          <button
-            v-if="showManagerAuthorizationAction"
-            class="action repository-header-info-item"
-            @click="$emit('managerAuthorization')">
-            <b-icon icon="account-plus" />
-          </button>
-          <button
-            v-if="showTrainAction"
-            :disabled="training"
-            class="action repository-header-info-item"
-            @click="trainModalOpen = true;">
-            <b-icon
-              :icon="training ? 'refresh' : 'school'"
-              :custom-class="training && 'icon-spin' || null" />
-          </button>
-          <button
-            v-if="showEditAction"
-            class="action repository-header-info-item"
-            @click="$emit('edit')">
-            <b-icon icon="pencil" />
-          </button>
-        </div>
-      </div>
-      <div>
-        <div class="subtitle is-6 repository-infospace">
-          <p>Created by {{ getProfile(owner__nickname).name || owner__nickname }}</p>
-          <p><a
-            :href="repositoryURL"
-            class="has-text-grey"
-            target="_blank">{{ repositoryURL }}</a></p>
-        </div>
-        <div
-          v-if="available_languages"
-          class="repository-infospace">
-          <div class="repository-infospace-flags">
-            <bh-language-flag
-              v-for="language in available_languages"
-              :key="language"
-              :language="language"
-              class="repository-infospace-flags-item" />
-          </div>
-        </div>
-        <div v-if="!hideDescription">
-          <p
-            v-if="description"
-            class="repository-description">{{ description }}</p>
-          <p
-            v-else
-            class="repository-description repository-description-empty">No description</p>
-        </div>
-        <div v-if="categories_list">
-          <repository-categories-list :categories="categories_list" />
-        </div>
+  <div class="bh-grid">
+    <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
+      <div class="repository-info__big-badge">
+        <bh-icon
+          size="medium"
+          value="botinho"
+          class="repository-info__big-badge__icon" />
       </div>
     </div>
-    <train-modal
-      :open.sync="trainModalOpen"
-      :ready-for-train="readyForTrain"
-      :requirements-to-train="requirementsToTrain"
-      :languages-ready-for-train="languagesReadyForTrain"
-      :training="training"
-      @train="$emit('train')" />
+    <div class="bh-grid__item">
+      <div class="repository-info__title">
+        <span class="repository-info__title__bagde">
+          <bh-icon
+            value="botinho"
+            class="repository-info__title__bagde__icon" />
+        </span>
+        <span>{{ repository.name }}</span>
+      </div>
+      <div class="repository-info__info-item">
+        <router-link
+          :to="{
+            name: 'repository-home',
+            params: {
+              ownerNickname: repository.owner__nickname,
+              slug: repository.slug,
+            },
+        }">{{ repository.absolute_url ||
+        `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
+      </div>
+      <div class="repository-info__info-item">
+        <span>Created by</span>
+        <strong class="medium">{{ getProfile(repository.owner__nickname).name
+        || repository.owner__nickname }}</strong>
+      </div>
+      <div class="repository-info__flags">
+        <span
+          v-for="language in repository.available_languages"
+          :key="language"
+          :class="{
+            'repository-info__flags__flag': true,
+            'repository-info__flags__flag--main': language == repository.language,
+        }">
+          <bh-language-flag
+            :language="language"
+            size="small" />
+        </span>
+      </div>
+      <div class="repository-info__categories">
+        <bh-badge
+          v-for="category in repository.categories_list"
+          :key="category.id"
+          color="lighter-grey"
+          class="repository-info__categories__category">{{ category.name || category }}</bh-badge>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
-import RepositoryAvatar from '@/components/repository/RepositoryAvatar';
-import RepositoryCategoriesList from '@/components/repository/RepositoryCategoriesList';
-import FlagsList from '@/components/shared/FlagsList';
-import TrainModal from '@/components/repository/TrainModal';
-
-
-const components = {
-  RepositoryAvatar,
-  RepositoryCategoriesList,
-  FlagsList,
-  TrainModal,
-};
 
 export default {
   name: 'RepositoryInfo',
-  components,
   props: {
-    slug: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    owner__nickname: {
-      type: String,
-      required: true,
-    },
-    available_languages: {
-      type: Array,
-      default: () => ([]),
-    },
-    description: {
-      type: String,
-      default: '',
-    },
-    categories_list: {
-      type: Array,
-      default: () => ([]),
-    },
-    hideDescription: {
-      type: Boolean,
-      default: false,
-    },
-    showManagerAuthorizationAction: {
-      type: Boolean,
-      default: false,
-    },
-    showTrainAction: {
-      type: Boolean,
-      default: false,
-    },
-    showEditAction: {
-      type: Boolean,
-      default: false,
-    },
-    training: {
-      type: Boolean,
-      default: false,
-    },
-    votes_sum: {
-      type: Number,
-      default: 0,
-    },
-    readyForTrain: {
-      type: Boolean,
-      default: false,
-    },
-    requirementsToTrain: {
+    repository: {
       type: Object,
-      default: () => ({}),
+      required: true,
     },
-    languagesReadyForTrain: {
-      type: Object,
-      default: () => ({}),
-    },
-  },
-  data() {
-    return {
-      trainModalOpen: false,
-    };
   },
   computed: {
     ...mapGetters([
       'getProfile',
-    ]),
-    repositoryURL() {
-      return `https://bothub.it/${this.owner__nickname}/${this.slug}/`;
-    },
-  },
-  mounted() {
-    this.updateProfile({ nickname: this.owner__nickname });
-  },
-  methods: {
-    ...mapActions([
-      'updateProfile',
     ]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/variables.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
-.repository {
-  &-infospace {
+
+.repository-info {
+  &__big-badge-wrapper {
+    display: block;
+
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  &__big-badge {
+    $size: 6rem;
+
+    position: relative;
+    display: block;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: #009688;
+    overflow: hidden;
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: $font-weight-bolder;
     margin-bottom: .5rem;
 
-    &-flags {
-      $margin: .25rem;
+    &__bagde {
+      display: none;
+      vertical-align: middle;
+      margin-right: .5rem;
 
-      margin: -($margin);
-
-      &-item {
-        margin: $margin;
+      &__icon {
+        font-size: 1.5em;
       }
-    }
-  }
 
-  &-description {
-    margin: .75rem 0;
-
-    &-empty {
-      font-style: italic;
-    }
-  }
-
-  &-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &-title {
-      a {
-        font-weight: 500;
+      @media screen and (max-width: $mobile-width) {
         display: inline-block;
-        color: $secondary;
-        text-decoration: none;
-        transition: color .2s ease;
-
-        &:hover {
-          color: $link;
-        }
       }
     }
+  }
 
-    &-info {
-      display: flex;
-      align-items: center;
-      margin-left: 8px;
+  &__info-item {
+    color: $color-grey;
+  }
 
-      &-item.action {
-        box-shadow: 1px 1px 3px rgba(100, 100, 100, .5);
-        color: $primary;
-        border-radius: 4px;
-        border: none;
-        background-color: white;
-        cursor: pointer;
-        outline: none;
+  &__flags {
+    margin: .5rem -.25rem;
 
-        &:hover {
-          box-shadow: 1px 1px 4px rgba(100, 100, 100, .7);
-        }
+    &__flag {
+      display: inline-block;
+      margin: .25rem;
+      padding: 0 .25rem .25rem;
+      border-bottom: .25rem solid transparent;
 
-        &:disabled {
-          color: $grey-light;
-          cursor: not-allowed;
-        }
-      }
-
-      &-item {
-        display: flex;
-        align-items: center;
-        color: $grey-light;
-        margin-right: 8px;
-        padding: 4px;
-
-        &:last-child { margin-right: 0; }
-
-        span {
-          padding-right: 8px;
-          white-space: nowrap;
-
-          &:last-child {
-            padding-right: 0;
-          }
-        }
+      &--main {
+        border-color: $color-primary;
       }
     }
+  }
 
-    @media screen and (max-width: $tablet) {
-      flex-direction: column-reverse;
+  &__categories {
+    margin: .5rem -.25rem;
 
-      &-info {
-        margin: 0 0 4px 0;
-      }
+    &__category {
+      margin: .25rem;
     }
   }
 }

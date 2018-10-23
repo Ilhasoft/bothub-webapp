@@ -1,0 +1,22 @@
+@import '~./colors.scss';
+
+
+.bh {
+  &-notification {
+    padding: 1rem 1rem;
+    margin: 0.5rem 0;
+    background-color: $color-lighter-grey;
+    border-radius: $radius-small;
+
+    @each $color in $notification-colors {
+      $definition: nth($color, 1);
+      $bg: nth($color, 2);
+      $font-color: nth($color, 3);
+
+      &--#{$definition} {
+        color: $font-color;
+        background-color: $bg;
+      }
+    }
+  }
+}

@@ -31,7 +31,7 @@
                     recognizer to examine the message and determine intent.">
           <bh-autocomplete
             v-model="intent"
-            :data="repository.intents || []"
+            :data="repository.intents_list || []"
             :formatters="intentFormatters"
             size="medium"
             placeholder="Intent" />
@@ -79,22 +79,20 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions } from 'vuex';
-import { formatters as bhFormatters } from 'bh/utils';
+import BH from 'bh';
 import { formatters } from '@/utils';
 
 
-const components = {
-  ExampleTextWithHighlightedEntitiesInput,
-  EntitiesInput,
-  LanguageAppendSelectInput,
-};
-
 export default {
   name: 'NewExampleForm',
-  components,
+  components: {
+    ExampleTextWithHighlightedEntitiesInput,
+    EntitiesInput,
+    LanguageAppendSelectInput,
+  },
   props: {
     repository: {
-      type: [Object, String],
+      type: Object,
       required: true,
     },
   },
@@ -128,9 +126,9 @@ export default {
     },
     textFormatters() {
       const formattersList = [
-        bhFormatters.trimStart(),
-        bhFormatters.removeBreakLines(),
-        bhFormatters.removeMultipleWhiteSpaces(),
+        BH.utils.formatters.trimStart(),
+        BH.utils.formatters.removeBreakLines(),
+        BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
       return formattersList;
@@ -143,7 +141,7 @@ export default {
       return formattersList;
     },
     availableEntities() {
-      const repositoryEntities = this.repository.entities || [];
+      const repositoryEntities = this.repository.entities_list || [];
       const entitiesFlat = this.entities.map(e => e.entity);
       return repositoryEntities
         .concat(entitiesFlat)
@@ -204,7 +202,7 @@ export default {
 
       try {
         await this.newExample({
-          repository: this.repository.uuid || this.repository,
+          repository: this.repository.uuid,
           ...this.data,
         });
 

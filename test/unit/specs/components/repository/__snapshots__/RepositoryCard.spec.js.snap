@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" language="en" categories="1,2" created_at="2018-04-20T17:05:42.035514Z">
-  <div class="card-content">
-    <repositoryinfo-stub slug="repository" name="Repository" owner__nickname="fake" available_languages="en,pt" description="" categories_list="[object Object],[object Object]" votes_sum="0" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></repositoryinfo-stub>
+<bh-card class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
+  <div class="bh-grid">
+    <div class="bh-grid__item">
+      <repositoryinfo-stub repository="[object Object]"></repositoryinfo-stub>
+    </div>
   </div>
-</div>
+</bh-card>
 `;

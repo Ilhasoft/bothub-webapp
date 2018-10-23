@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
+<layout-stub title="Bothub">
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__error">
+      <h1>-1</h1>
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+</layout-stub>
+`;
+
+exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
+<layout-stub title="Bothub">
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__error">
+      <h1>Bot not found</h1>
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+</layout-stub>
+`;
+
+exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
+<layout-stub title="Bothub">
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
+    </div>
+  </div>
+  <!---->
+  <!---->
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+</layout-stub>
+`;
+
+exports[`RepositoryViewBase.vue renders correctly 1`] = `
+<layout-stub title="Bothub">
+  <div class="rpstr-vw-bs">
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
+    </div>
+  </div>
+  <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
+  <!---->
+  <bhmodal-stub backgroundcloses="true">
+    <!---->
+  </bhmodal-stub>
+  <bhmodal-stub backgroundcloses="true">
+    <div>
+      <div class="bh-grid">
+        <div class="bh-grid__item">
+          <h2>Warnings</h2>
+        </div>
+      </div>
+    </div>
+  </bhmodal-stub>
+</layout-stub>
+`;

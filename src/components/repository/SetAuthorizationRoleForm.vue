@@ -1,23 +1,20 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <div class="columns">
-      <div class="column">
-        <b-field label="Users:">
-          <select-users-input v-model="usersProfile" />
-        </b-field>
+    <div class="bh-grid">
+      <div class="bh-grid__item bh-grid__item--grow-2">
+        <p><strong>Users:</strong></p>
+        <select-users-input v-model="usersProfile" />
       </div>
-      <div class="column is-4">
-        <b-field label="Role:">
-          <role-select v-model="role" />
-        </b-field>
+      <div class="bh-grid__item">
+        <p><strong>Role:</strong></p>
+        <role-select v-model="role" />
       </div>
-      <div class="column is-narrow">
-        <div class="field">
-          <label class="label">&nbsp;</label>
-          <button
-            :disabled="usersProfile.length === 0 || !role"
-            class="button is-primary">Invite</button>
-        </div>
+      <div class="bh-grid__item bh-grid__item--grow-0">
+        <p>&nbsp;</p>
+        <bh-button
+          :disabled="usersProfile.length === 0 || !role"
+          type="submit"
+          primary>Invite</bh-button>
       </div>
     </div>
   </form>
@@ -26,18 +23,16 @@
 <script>
 import { mapActions } from 'vuex';
 
-import SelectUsersInput from '@/components/inputs/SelectUsersInput';
-import RoleSelect from '@/components/inputs/RoleSelect';
+import SelectUsersInput from '@/components-v1/inputs/SelectUsersInput';
+import RoleSelect from '@/components-v1/inputs/RoleSelect';
 
-
-const components = {
-  SelectUsersInput,
-  RoleSelect,
-};
 
 export default {
   name: 'SetAuthorizationRoleForm',
-  components,
+  components: {
+    SelectUsersInput,
+    RoleSelect,
+  },
   props: {
     repositoryUuid: {
       required: true,

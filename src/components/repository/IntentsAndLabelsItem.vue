@@ -5,7 +5,8 @@
         <div><strong>{{ title }}</strong></div>
         <div class="i-a-l-item__main__info-wrapper">
           <div class="i-a-l-item__main__info">
-            <span v-if="labelEntities">{{ labelEntities.length }} Entities</span>
+            <span v-if="sentencesCount !== null">{{ sentencesCount }} sentences</span>
+            <span v-if="labelEntities">{{ labelEntities.length }} entities</span>
             <span><a @click.prevent="$emit('showSentences')">Show sentences</a></span>
           </div>
         </div>
@@ -22,15 +23,15 @@
       </div>
       <div class="i-a-l-item__entities__badges">
         <bh-badge
-          v-for="(entities, i) in labelEntities"
+          v-for="(entity, i) in labelEntities"
           :key="i"
           :class="[
             'i-a-l-item__entities__badges__item',
-            getEntityClass(entities),
+            getEntityClass(entity),
+            'clickable',
           ]"
-          size="small">
-          <span>{{ entities }}</span>
-        </bh-badge>
+          size="small"
+          @click="$emit('showEntitySentences', entity)">{{ entity }}</bh-badge>
       </div>
     </div>
   </bh-card>
@@ -51,6 +52,10 @@ export default {
       type: Array,
       default: null,
     },
+    sentencesCount: {
+      type: Number,
+      default: null,
+    },
   },
   methods: {
     getEntityClass(entity) {
@@ -65,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 
 .i-a-l-item {
