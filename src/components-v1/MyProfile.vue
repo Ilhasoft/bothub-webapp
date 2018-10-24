@@ -1,62 +1,63 @@
 <template>
   <layout title="My Profile on bothub">
-    <div class="wrapper">
-      <div class="container">
-        <div class="columns is-variable is-2">
-          <div class="column is-narrow">
-            <div class="card">
-              <div class="card-content">
-                <user-profile :profile="myProfile" />
-              </div>
-            </div>
-          </div>
-          <div class="column is-narrow">
-            <div class="item-1-2">
-              <button
-                class="button is-outlined is-primary"
-                @click="openEditProfileModal()">
-                <b-icon icon="pencil" />
-                <span>Edit Profile</span>
-              </button>
-            </div>
-            <div class="item-1-2">
-              <button
-                class="button is-outlined is-primary"
-                @click="openChangePasswordModal()">
-                <b-icon icon="lock-reset" />
-                <span>Change Password</span>
-              </button>
-            </div>
-          </div>
+    <div class="bh-grid bh-grid--column my-profile__header">
+      <div class="text-center">
+        <user-avatar
+          slot="trigger"
+          :profile="myProfile"
+          size="large" />
+        <user-profile :profile="myProfile" />
+      </div>
+      <div class="bh-grid">
+        <div class="bh-grid__item text-center">
+          <bh-button
+            primary
+            inverted
+            @click="openEditProfileModal()">
+            <bh-icon value="account-edit" />
+            <span>Edit Your Profile</span>
+          </bh-button>
+          <bh-button
+            primary
+            inverted
+            @click="openChangePasswordModal()">
+            <bh-icon value="lock-reset" />
+            <span>Change Password</span>
+          </bh-button>
         </div>
-        <h1 class="title is-4">My Repositories</h1>
+      </div>
+    </div>
+    <div class="bh-grid bh-grid--column my-profile__repositories">
+      <div class="bh-grid__item">
+        <h1>Repositories</h1>
+      </div>
+      <div class="bh-grid__item">
         <pagination
           v-if="repositoryList"
           :item-component="repositoryItemElem"
-          :list="repositoryList"
-          class="repository-list" />
+          :list="repositoryList" />
       </div>
     </div>
-    <b-modal :active.sync="editProfileModalOpen">
+    <bh-modal :open.sync="editProfileModalOpen">
       <div
         v-if="editProfileModalOpen"
-        class="card">
-        <div class="card-content">
-          <h1 class="title is-4">Edit your profile</h1>
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <h1>Edit your profile</h1>
           <edit-profile-form @edited="onMyProfileEdited()" />
         </div>
       </div>
-    </b-modal>
-    <b-modal :active.sync="changePasswordModalOpen">
+    </bh-modal>
+    <bh-modal :open.sync="changePasswordModalOpen">
       <div
         v-if="changePasswordModalOpen"
-        class="card">
-        <div class="card-content">
-          <h1 class="title is-4">Change Password</h1>
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <h1>Change Password</h1>
           <change-password-form @changed="onPasswordChanged()" />
         </div>
       </div>
-    </b-modal>
+    </bh-modal>
   </layout>
 </template>
 
@@ -70,6 +71,7 @@ import Pagination from '@/components-v1/shared/Pagination';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
 import ChangePasswordForm from '@/components-v1/user/ChangePasswordForm';
 import LoginIsRequired from '@/components-v1/auth/LoginIsRequired';
+import UserAvatar from '@/components/user/UserAvatar';
 
 
 export default {
@@ -80,6 +82,7 @@ export default {
     Pagination,
     EditProfileForm,
     ChangePasswordForm,
+    UserAvatar,
   },
   extends: LoginIsRequired,
   data() {
@@ -93,6 +96,7 @@ export default {
   computed: {
     ...mapGetters([
       'myProfile',
+      'getProfile',
     ]),
   },
   mounted() {
@@ -134,9 +138,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  background-color: #f8f8f8;
-  min-height: 400px;
-  padding: 8px;
+@import '~bh/src/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/variables.scss';
+
+
+.my-profile {
+  &__header {
+    background-color: $color-primary;
+  }
+
+  &__repositories {
+    margin: $size-small 8rem;
+
+    @media screen and (max-width: $mobile-width) {
+      margin: 1rem 1rem;
+    }
+  }
 }
 </style>
