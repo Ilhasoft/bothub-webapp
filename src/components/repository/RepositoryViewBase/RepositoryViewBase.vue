@@ -147,36 +147,15 @@
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
-    <bh-modal :open.sync="requestAuthorizationModal">
-      <div v-if="repository && requestAuthorizationModal">
-        <div class="bh-grid bh-grid--column">
-          <div class="bh-grid__item">
-            <h1 class="bh-title-2">Request Authorization</h1>
-          </div>
-          <request-authorization-form
-            :repository-uuid="repository.uuid"
-            class="bh-grid__item"
-            @requested="onAuthorizationRequested()" />
-        </div>
-      </div>
-    </bh-modal>
-    <bh-modal :open.sync="warningsModelOpen">
-      <div v-if="repository">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <h2>Warnings</h2>
-            <div
-              v-for="(warnings, lang) in repository.languages_warnings"
-              :key="lang">
-              <div><strong>{{ lang | languageVerbose }}</strong></div>
-              <div
-                v-for="(warning, index) in warnings"
-                :key="index">{{ warning }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </bh-modal>
+    <request-authorization-modal
+      v-if="repository"
+      :open.sync="requestAuthorizationModal"
+      :repository-uuid="repository.uuid"
+      @requestDispatched="onAuthorizationRequested()" />
+    <warning-modal
+      v-if="repository"
+      :languages-warnings="repository.languages_warnings"
+      :open.sync="warningsModelOpen" />
   </layout>
 </template>
 
@@ -187,8 +166,9 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
-import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import WarningModal from '@/components/repository/WarningModal';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -208,8 +188,9 @@ export default {
     RepositoryNavigation,
     TrainModal,
     TrainResponse,
-    RequestAuthorizationForm,
     AnalyzeTextDrawer,
+    RequestAuthorizationModal,
+    WarningModal,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
