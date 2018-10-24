@@ -4,9 +4,6 @@
       <div class="bh-grid__item">
         <h1 class="bh-title-2">Request Authorization</h1>
       </div>
-      <pre>
-         {{ repositoryUuid }}
-      </pre>
       <request-authorization-form
         :repository-uuid="repositoryUuid"
         class="bh-grid__item"
