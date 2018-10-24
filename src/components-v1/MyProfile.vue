@@ -139,7 +139,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/utilities.scss';
 
 
 .my-profile {
@@ -148,11 +148,8 @@ export default {
   }
 
   &__repositories {
-    margin: $size-small 8rem;
-
-    @media screen and (max-width: $mobile-width) {
-      margin: 1rem 1rem;
-    }
+    max-width: $max-card-width;
+    margin: 2rem auto;
   }
 }
 </style>
