@@ -1,6 +1,7 @@
-$color-grey: #9E9E9E;
-$color-lighter-grey: #F5F5F5;
-$color-bolder-grey: #212121;
+$color-white-fake: #F5F5F5;
+$color-grey: #7D7D7D;
+$color-lighter-grey: #B5B5B5;
+$color-bolder-grey: #4D4D4D;
 
 $color-primary:#00d1b2;
 $color-primary-inverted: white;
@@ -13,6 +14,7 @@ $color-info: #209cee;
 $color-warning: #ffdd57;
 
 $colors: (
+  ('color-white-fake', $color-white-fake),
   ('color-grey', $color-grey),
   ('color-lighter-grey', $color-lighter-grey),
   ('color-bolder-grey', $color-bolder-grey),

@@ -23,7 +23,7 @@ body {
   @include typography();
 
   min-height: 100%;
-  background-color: $color-lighter-grey;
+  background-color: $color-white-fake;
 }
 
 @each $color in $colors {
