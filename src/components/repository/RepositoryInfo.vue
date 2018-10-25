@@ -18,7 +18,7 @@
             @click="redirect()" />
         </span>
         <div
-          class="repository-info__cursos-pointer"
+          class="repository-info__cursor-pointer"
           @click="redirect()">
           <span>{{ repository.name }}</span>
         </div>
@@ -175,7 +175,7 @@ export default {
     }
   }
 
-  &__cursos-pointer {
+  &__cursor-pointer {
     cursor: pointer;
   }
 }
