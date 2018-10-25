@@ -25,7 +25,7 @@
                     v-for="(intent) in repository.intents_list"
                     :key="intent"
                     size="small"
-                    color="grey"
+                    color="lighter-grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ intent }}</span>
                   </bh-badge>
@@ -42,7 +42,7 @@
                     v-for="(label) in repository.labels_list"
                     :key="label"
                     size="small"
-                    color="grey"
+                    color="lighter-grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ label }}</span>
                   </bh-badge>
@@ -86,17 +86,13 @@ export default {
 .repository-home {
   &__attribute {
     &__card {
-      background-color: $color-lighter-grey;
+      background-color: $color-white-fake;
       border-radius: 6px;
       padding: .75rem;
       margin: -.25rem;
 
       &__badge {
         margin: .25rem;
-
-        > span {
-          color: $color-primary-inverted
-        }
       }
     }
   }
