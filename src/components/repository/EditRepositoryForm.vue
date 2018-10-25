@@ -11,7 +11,7 @@
       <bh-button
         :disabled="submitting"
         primary
-        type="submit">Edit</bh-button>
+        type="submit">Save</bh-button>
     </div>
   </form>
 </template>

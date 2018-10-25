@@ -9,7 +9,7 @@ RUN adduser -D -g 'www' www
 
 COPY package.json .
 COPY yarn.lock .
-COPY bh .
+COPY bh bh
 
 RUN yarn install
 
