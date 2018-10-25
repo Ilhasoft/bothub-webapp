@@ -38,6 +38,7 @@ export default {
     border-radius: 50%;
     outline: none;
 
+
     @each $size in $sizes {
       $size-name: nth($size, 1);
       $size-value: nth($size, 2);
