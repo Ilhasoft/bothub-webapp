@@ -33,7 +33,7 @@ export default {
     width: $size-normal;
     height: $size-normal;
     cursor: pointer;
-    background-color: $color-lighter-grey;
+    background-color: $color-white-fake;
     border-color: transparent;
     border-radius: 50%;
     outline: none;
