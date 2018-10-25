@@ -3,25 +3,30 @@
 
 $cedule-padding: .75rem;
 
-table { width: 100%; }
-table th {
-  padding: $cedule-padding;
-  text-align: left;
-  background-color: $color-lighter-grey;
-}
+table {
+  width: 100%;
+  border-collapse: collapse;
 
-table td {
-  padding: $cedule-padding;
-  text-align: left;
-  background-color: $color-primary-inverted;
-  border-bottom: .1rem solid $color-lighter-grey;
-}
-
-@media screen and (max-width: 430px) {
   tr {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: .5rem 0;
+    @media screen and (max-width: 430px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: .5rem 0;
+    }
+  }
+
+  th, td {
+    padding: $cedule-padding;
+    background-color: white;
+    border: 0;
+    border-bottom: 1px;
+    border-style: solid;
+    border-color: $color-lighter-grey;
+  }
+
+  th {
+    text-align: left;
+    background-color: $color-lighter-grey;
   }
 }
