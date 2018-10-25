@@ -112,7 +112,7 @@ export default {
 
 
 .repository-translate {
-  background-color: $color-lighter-grey;
+  background-color: $color-white-fake;
 
   &__translate-arrow-icon {
     align-self: center;

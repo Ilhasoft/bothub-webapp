@@ -6,12 +6,14 @@
       <example
         :component="SimpleLoadingExample"
         :code="simpleLoadingExampleCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Loading Sizes</h3>
       <example
         :component="LoadingSizes"
-        :code="loadingSizeseCode" />
+        :code="loadingSizesCode" />
+      <h3>Loading Colors</h3>
+      <example
+        :component="LoadingColorsExample"
+        :code="loadingColorsCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -25,7 +27,9 @@ import Api from '@/Api';
 import SimpleLoadingExample from './examples/SimpleLoadingExample';
 import simpleLoadingExampleCode from '!!raw-loader!./examples/SimpleLoadingExample';
 import LoadingSizes from './examples/LoadingSizes';
-import loadingSizeseCode from '!!raw-loader!./examples/LoadingSizes';
+import loadingSizesCode from '!!raw-loader!./examples/LoadingSizes';
+import LoadingColorsExample from './examples/LoadingColors';
+import loadingColorsCode from '!!raw-loader!./examples/LoadingColors';
 import api from './api';
 
 
@@ -40,7 +44,9 @@ export default {
       SimpleLoadingExample,
       simpleLoadingExampleCode,
       LoadingSizes,
-      loadingSizeseCode,
+      loadingSizesCode,
+      LoadingColorsExample,
+      loadingColorsCode,
       api,
     };
   },

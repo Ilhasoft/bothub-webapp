@@ -71,7 +71,7 @@ export default {
 
 .translations {
   &__header {
-    background-color: $color-lighter-grey;
+    background-color: $color-white-fake;
   }
 }
 </style>

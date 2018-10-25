@@ -1,32 +1,36 @@
+$color-white-fake: #F5F5F5;
+$color-lighter-grey: #D5D5D5;
 $color-grey: #9E9E9E;
-$color-lighter-grey: #F5F5F5;
 $color-bolder-grey: #212121;
 
-$color-primary:#00d1b2;
-$color-primary-inverted: white;
+$color-primary: #25B2A0;
+$color-primary-tone: #2BBFAC;
+$color-primary-inverted: $color-white-fake;
 
-$color-secondary: #87b4d9;
-$color-secondary-inverted: white;
+$color-secondary: #311B92;
+$color-secondary-tone: #5E3E95;
+$color-secondary-inverted: $color-white-fake;
 
 $color-danger: #F44336;
 $color-info: #209cee;
 $color-warning: #ffdd57;
 
 $colors: (
-  ('color-grey', $color-grey),
-  ('color-lighter-grey', $color-lighter-grey),
-  ('color-bolder-grey', $color-bolder-grey),
-  ('color-primary', $color-primary),
-  ('color-primary-inverted', $color-primary-inverted),
-  ('color-secondary', $color-secondary),
-  ('color-secondary-inverted', $color-secondary-inverted),
-  ('color-danger', $color-danger),
-  ('color-info', $color-info),
-  ('color-warning', $color-warning),
+  ('color-white-fake', $color-white-fake, $color-grey),
+  ('color-lighter-grey', $color-lighter-grey, $color-bolder-grey),
+  ('color-grey', $color-grey, $color-white-fake),
+  ('color-bolder-grey', $color-bolder-grey, $color-lighter-grey),
+  ('color-primary', $color-primary, $color-primary-inverted),
+  ('color-primary-tone', $color-primary-tone, $color-primary-inverted),
+  ('color-secondary', $color-secondary, $color-primary-inverted),
+  ('color-secondary-tone', $color-secondary-tone, $color-primary-inverted),
+  ('color-danger', $color-danger, $color-white-fake),
+  ('color-info', $color-info, $color-white-fake),
+  ('color-warning', $color-warning, $color-bolder-grey),
 );
 
 $notification-colors: (
-  ('danger', $color-danger, white),
-  ('info', $color-info, white),
-  ('warning', $color-warning, black),
+  ('danger', $color-danger, $color-white-fake),
+  ('info', $color-info, $color-white-fake),
+  ('warning', $color-warning, $color-bolder-grey),
 );
