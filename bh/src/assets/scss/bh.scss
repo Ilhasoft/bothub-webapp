@@ -83,8 +83,8 @@ small {
   $color-inverted: nth($color, 3);
 
   .background-#{$color-name} {
-    background-color: $color-value;
     color: $color-inverted;
+    background-color: $color-value;
   }
 
   .text-#{$color-name} {

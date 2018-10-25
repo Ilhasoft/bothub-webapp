@@ -32,12 +32,12 @@ export default {
     position: relative;
     width: $size-normal;
     height: $size-normal;
+    color: $color-bolder-grey;
     cursor: pointer;
     background-color: $color-white-fake;
     border-color: transparent;
     border-radius: 50%;
     outline: none;
-
 
     @each $size in $sizes {
       $size-name: nth($size, 1);
