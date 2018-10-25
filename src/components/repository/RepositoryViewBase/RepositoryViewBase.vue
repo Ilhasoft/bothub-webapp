@@ -149,7 +149,7 @@
       :open.sync="trainResponseOpen" />
     <request-authorization-modal
       v-if="repository"
-      :open.sync="requestAuthorizationModal"
+      :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
     <warning-modal
@@ -219,7 +219,7 @@ export default {
       trainResponseData: null,
       trainResponseOpen: false,
       training: false,
-      requestAuthorizationModal: false,
+      requestAuthorizationModalOpen: false,
       warningsModelOpen: false,
     };
   },
@@ -270,10 +270,10 @@ export default {
       this.trainModalOpen = true;
     },
     openRequestAuthorizationModal() {
-      this.requestAuthorizationModal = true;
+      this.requestAuthorizationModalOpen = true;
     },
     onAuthorizationRequested() {
-      this.requestAuthorizationModal = false;
+      this.requestAuthorizationModalOpen = false;
       this.$toast.open({
         message: 'Request made! Wait for review of an admin.',
         type: 'is-success',

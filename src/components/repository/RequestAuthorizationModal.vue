@@ -2,7 +2,7 @@
   <bh-modal :open.sync="openValue">
     <div class="bh-grid bh-grid--column">
       <div class="bh-grid__item">
-        <h1 class="bh-title-2">Request Authorization</h1>
+        <h1>Request Authorization</h1>
       </div>
       <request-authorization-form
         :repository-uuid="repositoryUuid"
@@ -51,36 +51,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-
-
-.train-modal {
-  padding: .5rem;
-
-  &__buttons {
-    margin-top: 1rem;
-  }
-
-  $flags-margin: .25rem;
-  &__flags {
-    display: inline-flex;
-    margin: -($flags-margin);
-
-    &__item {
-      margin: $flags-margin;
-
-      &__status {
-        vertical-align: middle;
-        margin-left: -.25rem;
-        color: $color-grey;
-
-        &--ready {
-          color: $color-primary;
-        }
-      }
-    }
-  }
-}
-</style>
