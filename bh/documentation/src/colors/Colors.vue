@@ -2,10 +2,10 @@
   <div class="bh-grid bh-grid--column">
     <div class="bh-grid__item">
       <h2>Colors</h2>
-      <h3>Colors palette</h3>
+      <h3>Color palette</h3>
       <example
-        :component="ColorsPalette"
-        :code="colorsPaletteCode" />
+        :component="ColorPalette"
+        :code="colorPaletteCode" />
       <h3>Contrast</h3>
       <example
         :component="ContrastColors"
@@ -17,8 +17,8 @@
 <script>
 import Example from '@/Example';
 
-import ColorsPalette from './examples/ColorsPalette';
-import colorsPaletteCode from '!!raw-loader!./examples/ColorsPalette';
+import ColorPalette from './examples/ColorPalette';
+import colorPaletteCode from '!!raw-loader!./examples/ColorPalette';
 import ContrastColors from './examples/Contrast';
 import contrastColorsCode from '!!raw-loader!./examples/Contrast';
 
@@ -30,8 +30,8 @@ export default {
   },
   data() {
     return {
-      ColorsPalette,
-      colorsPaletteCode,
+      ColorPalette,
+      colorPaletteCode,
       ContrastColors,
       contrastColorsCode,
     };

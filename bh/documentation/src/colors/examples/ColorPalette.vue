@@ -3,8 +3,14 @@
     <div class="background-color-primary">
       <span>primary</span>
     </div>
+    <div class="background-color-primary-tone">
+      <span>primary-tone</span>
+    </div>
     <div class="background-color-secondary">
       <span>secondary</span>
+    </div>
+    <div class="background-color-secondary-tone">
+      <span>secondary-tone</span>
     </div>
     <div class="background-color-danger">
       <span>danger</span>
