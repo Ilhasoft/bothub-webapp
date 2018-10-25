@@ -2,20 +2,26 @@
   <div class="bh-grid">
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
-        <bh-icon
+        <bh-icon-button
           size="medium"
           value="botinho"
-          class="repository-info__big-badge__icon" />
+          class="repository-info__big-badge__icon"
+          @click="redirect()" />
       </div>
     </div>
     <div class="bh-grid__item">
       <div class="repository-info__title">
         <span class="repository-info__title__bagde">
-          <bh-icon
+          <bh-icon-button
             value="botinho"
-            class="repository-info__title__bagde__icon" />
+            class="repository-info__title__bagde__icon"
+            @click="redirect()" />
         </span>
-        <span>{{ repository.name }}</span>
+        <div
+          class="repository-info__cursos-pointer"
+          @click="redirect()">
+          <span>{{ repository.name }}</span>
+        </div>
       </div>
       <div class="repository-info__info-item">
         <router-link
@@ -73,6 +79,17 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+  },
+  methods: {
+    redirect() {
+      this.$router.push({
+        name: 'repository-home',
+        params: {
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+        },
+      });
+    },
   },
 };
 </script>
@@ -156,6 +173,10 @@ export default {
     &__category {
       margin: .25rem;
     }
+  }
+
+  &__cursos-pointer {
+    cursor: pointer;
   }
 }
 </style>
