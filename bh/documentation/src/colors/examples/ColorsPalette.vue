@@ -15,6 +15,9 @@
     <div class="background-color-warning">
       <span>warning</span>
     </div>
+    <div class="background-color-white-fake">
+      <span>white-fake</span>
+    </div>
     <div class="background-color-lighter-grey">
       <span>lighter-grey</span>
     </div>
@@ -47,7 +50,6 @@ $margin: .5rem;
 
     span {
       padding: .5rem;
-      background-color: rgba(255, 255, 255, .5);
     }
   }
 }
