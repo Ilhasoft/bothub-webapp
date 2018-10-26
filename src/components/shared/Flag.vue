@@ -29,6 +29,12 @@
     <img
       v-else-if="language === 'pt_br'"
       src="@/assets/imgs/flags/br.svg" >
+    <img
+      v-else-if="language === 'mn'"
+      src="@/assets/imgs/flags/mn.svg" >
+    <img
+      v-else-if="language === 'id'"
+      src="@/assets/imgs/flags/id.svg" >
   </span>
 </template>
 
