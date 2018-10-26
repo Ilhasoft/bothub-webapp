@@ -19,6 +19,11 @@
       }"
       @click="$emit('click', $event)"
     >
+      <bh-icon
+        v-if="loading"
+        spin
+        value="refresh"
+      />
       <slot />
     </button>
     <bh-tooltip
@@ -83,6 +88,10 @@ export default {
       default: null,
     },
     fullWidth: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
       type: Boolean,
       default: false,
     },

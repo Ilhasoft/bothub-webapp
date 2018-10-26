@@ -18,6 +18,10 @@
       <example
         :component="ButtonIconContentExample"
         :code="buttonIconContentExampleCode" />
+      <h3>Button with BhIcon in content</h3>
+      <example
+        :component="ButtonLoadingExample"
+        :code="buttonLoadingExampleCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -36,6 +40,8 @@ import ButtonActionExample from './examples/ButtonActionExample';
 import buttonActionExampleCode from '!!raw-loader!./examples/ButtonActionExample';
 import ButtonIconContentExample from './examples/ButtonIconContent';
 import buttonIconContentExampleCode from '!!raw-loader!./examples/ButtonIconContent';
+import ButtonLoadingExample from './examples/ButtonLoading';
+import buttonLoadingExampleCode from '!!raw-loader!./examples/ButtonLoading';
 import api from './api';
 
 
@@ -55,6 +61,8 @@ export default {
       buttonActionExampleCode,
       ButtonIconContentExample,
       buttonIconContentExampleCode,
+      ButtonLoadingExample,
+      buttonLoadingExampleCode,
       api,
     };
   },
