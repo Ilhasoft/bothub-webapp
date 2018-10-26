@@ -13,6 +13,18 @@ export default {
       default: 'null',
     },
     {
+      name: 'secondary',
+      type: 'Boolean',
+      description: 'Set secondary style to Button',
+      default: 'false',
+    },
+    {
+      name: 'color',
+      type: 'String',
+      description: 'Set color from color pallete.',
+      default: 'false',
+    },
+    {
       name: 'inverted',
       type: 'Boolean',
       description: 'Reverse button color',
@@ -22,12 +34,6 @@ export default {
       name: 'transparent',
       type: 'Boolean',
       description: 'Set a transparent color for Button',
-      default: 'false',
-    },
-    {
-      name: 'secondary',
-      type: 'Boolean',
-      description: 'Set secondary style to Button',
       default: 'false',
     },
     {

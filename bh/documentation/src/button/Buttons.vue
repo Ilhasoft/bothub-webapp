@@ -6,18 +6,18 @@
       <example
         :component="SimpleButtons"
         :code="simpleButtonsCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Button Sizes</h3>
       <example
         :component="ButtonSizes"
         :code="buttonSizesCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Button Click</h3>
       <example
         :component="ButtonActionExample"
         :code="buttonActionExampleCode" />
+      <h3>Button with BhIcon in content</h3>
+      <example
+        :component="ButtonIconContentExample"
+        :code="buttonIconContentExampleCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -34,6 +34,8 @@ import ButtonSizes from './examples/ButtonSizes';
 import buttonSizesCode from '!!raw-loader!./examples/ButtonSizes';
 import ButtonActionExample from './examples/ButtonActionExample';
 import buttonActionExampleCode from '!!raw-loader!./examples/ButtonActionExample';
+import ButtonIconContentExample from './examples/ButtonIconContent';
+import buttonIconContentExampleCode from '!!raw-loader!./examples/ButtonIconContent';
 import api from './api';
 
 
@@ -51,6 +53,8 @@ export default {
       buttonSizesCode,
       ButtonActionExample,
       buttonActionExampleCode,
+      ButtonIconContentExample,
+      buttonIconContentExampleCode,
       api,
     };
   },

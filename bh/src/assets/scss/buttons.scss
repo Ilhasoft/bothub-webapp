@@ -16,7 +16,8 @@
 
     @include size($size-normal);
 
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-weight: $font-weight-bolder;
     color: $color-grey;
     cursor: pointer;
@@ -26,6 +27,14 @@
     border-radius: $form-components-border-radius;
     outline: none;
     box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
+
+    > * {
+      margin-right: .5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
 
     &--rounded {
       border-radius: ($size-normal / 2);
