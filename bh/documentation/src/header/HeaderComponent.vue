@@ -1,5 +1,5 @@
 <template>
-  <nav class="header">
+  <nav class="background-color-primary">
     <div class="bh-grid item">
       <div class="bh-grid__item">
         <h1>BH Documentation</h1>
@@ -17,10 +17,3 @@ export default {
   name: 'HeaderComponent',
 };
 </script>
-
-<style lang="scss">
-.header {
-  background-color: #00d1b2;
-  color: white;
-}
-</style>

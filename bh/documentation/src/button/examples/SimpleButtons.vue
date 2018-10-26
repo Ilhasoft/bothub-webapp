@@ -25,11 +25,15 @@
       <div class="bh-grid__item">
         <bh-button
           primary
-          tooltip-hover="i'm Tooltip">Button Tooltip</bh-button>
+          tooltip-hover="I'm Tooltip">Button Tooltip</bh-button>
       </div>
       <div class="bh-grid__item">
-        <bh-button
-          disabled>Disabled Button</bh-button>
+        <bh-button disabled>Disabled Button</bh-button>
+      </div>
+      <div class="bh-grid__item">
+        <bh-button disabled>
+          <bh-loading />
+        </bh-button>
       </div>
     </div>
     <div class="bh-grid bh-grid--multiline">

@@ -331,7 +331,7 @@ export default {
   }
 
   &__status-bar {
-    background-color: $color-lighter-grey;
+    background-color: $color-white-fake;
   }
 
   &__card {

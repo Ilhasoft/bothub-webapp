@@ -1,31 +1,27 @@
 <template>
-  <div class="bh-grid authorization-request-item__border-bottom">
+  <div class="bh-grid authorization-request-item">
     <div class="bh-grid__item bh-grid__item--grow-0">
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
     <div class="bh-grid__item bh-grid__item--grow-1">
-      <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
-      <p><small>{{ text }}</small></p>
+      <div><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></div>
+      <div><small>{{ text }}</small></div>
     </div>
     <div class="bh-grid__item bh-grid__item--grow-0">
-      <div class="bh-grid">
-        <div class="bh-grid__item">
-          <bh-icon-button
-            ref="approveBtn"
-            primary
-            value="check"
-            size="small"
-            @click="approve()" />
-        </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            ref="rejectBtn"
-            class="authorization-request-item__reject-button"
-            value="close"
-            size="small"
-            @click="reject()" />
-        </div>
-      </div>
+      <bh-icon-button
+        ref="approveBtn"
+        primary
+        value="check"
+        size="small"
+        @click="approve()" />
+    </div>
+    <div class="bh-grid__item bh-grid__item--grow-0">
+      <bh-icon-button
+        ref="rejectBtn"
+        class="text-color-danger"
+        value="close"
+        size="small"
+        @click="reject()" />
     </div>
   </div>
 </template>
@@ -140,12 +136,6 @@ export default {
 
 
 .authorization-request-item {
-  &__border-bottom {
-    border-bottom: 2px solid $color-lighter-grey
-  }
-
-  &__reject-button {
-    color: $color-danger;
-  }
+  border-bottom: 1px solid $color-lighter-grey;
 }
 </style>
