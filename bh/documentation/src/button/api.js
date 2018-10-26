@@ -66,6 +66,12 @@ export default {
       description: 'Force button occupy maximum space of parent element',
       default: 'false',
     },
+    {
+      name: 'loading',
+      type: 'Boolean',
+      description: 'Show loading icon.',
+      default: 'false',
+    },
   ],
   events: [
     {
