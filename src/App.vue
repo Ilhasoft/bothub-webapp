@@ -2,7 +2,8 @@
   <div id="app">
     <login-modal
       v-if="loginModalOpen"
-      ref="loginModal" />
+      ref="loginModal"
+      :current-tab="loginModalTabValue" />
     <router-view />
   </div>
 </template>
@@ -19,7 +20,10 @@ export default {
   name: 'App',
   components,
   computed: {
-    ...mapGetters(['loginModalOpen']),
+    ...mapGetters([
+      'loginModalOpen',
+      'loginModalTabValue',
+    ]),
   },
 };
 </script>
