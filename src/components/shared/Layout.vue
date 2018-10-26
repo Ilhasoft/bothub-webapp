@@ -59,7 +59,7 @@
             inverted
             size="medium"
             class="bh-grid__item hide-mobile"
-            @click="openLoginModal()">sign up</bh-button>
+            @click="openSignupModal()">sign up</bh-button>
         </div>
       </div>
     </div>
@@ -119,6 +119,7 @@ export default {
       'updateMyProfile',
       'logout',
       'openLoginModal',
+      'openSignupModal',
     ]),
     openNewRepositoryModal() {
       this.newRepositoryModalOpen = true;

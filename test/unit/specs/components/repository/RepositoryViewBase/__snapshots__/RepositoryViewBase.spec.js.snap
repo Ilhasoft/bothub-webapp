@@ -9,12 +9,8 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
   </div>
   <!---->
   <!---->
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -27,12 +23,8 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
   </div>
   <!---->
   <!---->
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -45,12 +37,8 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
   </div>
   <!---->
   <!---->
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
+  <!---->
+  <!---->
 </layout-stub>
 `;
 
@@ -63,17 +51,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
   </div>
   <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
   <!---->
-  <bhmodal-stub backgroundcloses="true">
-    <!---->
-  </bhmodal-stub>
-  <bhmodal-stub backgroundcloses="true">
-    <div>
-      <div class="bh-grid">
-        <div class="bh-grid__item">
-          <h2>Warnings</h2>
-        </div>
-      </div>
-    </div>
-  </bhmodal-stub>
+  <requestauthorizationmodal-stub></requestauthorizationmodal-stub>
+  <warningmodal-stub languageswarnings="[object Object]"></warningmodal-stub>
 </layout-stub>
 `;
