@@ -2,52 +2,27 @@
   <div class="bh-grid">
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
-        <router-link
-          :to="{
-            name: 'repository-home',
-            params: {
-              ownerNickname: repository.owner__nickname,
-              slug: repository.slug,
-            },
-        }"><bh-icon-button
-          size="medium"
-          value="botinho"
-          class="repository-info__big-badge__icon" /></router-link>
+        <router-link :to="routerParameters">
+          <bh-icon-button
+            size="medium"
+            value="botinho"
+            class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
     <div class="bh-grid__item">
       <div class="repository-info__title">
         <span class="repository-info__title__bagde">
-          <router-link
-            :to="{
-              name: 'repository-home',
-              params: {
-                ownerNickname: repository.owner__nickname,
-                slug: repository.slug,
-              },
-          }"><bh-icon-button
-            value="botinho"
-            class="repository-info__title__bagde__icon" /></router-link>
+          <router-link :to="routerParameters">
+            <bh-icon-button
+              value="botinho"
+              class="repository-info__title__bagde__icon" /></router-link>
         </span>
-        <router-link
-          :to="{
-            name: 'repository-home',
-            params: {
-              ownerNickname: repository.owner__nickname,
-              slug: repository.slug,
-            },
-        }"><span class="repository-info__title__name">{{ repository.name }}</span></router-link>
+        <router-link :to="routerParameters">
+        <span class="text-color-bolder-grey">{{ repository.name }}</span></router-link>
       </div>
       <div class="repository-info__info-item">
-        <router-link
-          :to="{
-            name: 'repository-home',
-            params: {
-              ownerNickname: repository.owner__nickname,
-              slug: repository.slug,
-            },
-        }">{{ repository.absolute_url ||
-        `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
+        <router-link :to="routerParameters">{{ repository.absolute_url
+        || `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
       </div>
       <div class="repository-info__info-item">
         <span>Created by</span>
@@ -94,6 +69,16 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+    routerParameters() {
+      const to = {
+        name: 'repository-home',
+        params: {
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+        },
+      };
+      return to;
+    },
   },
 };
 </script>
@@ -136,10 +121,6 @@ export default {
     font-size: 1.25rem;
     font-weight: $font-weight-bolder;
     margin-bottom: .5rem;
-
-    &__name {
-      color: $color-bolder-grey
-    }
 
     &__bagde {
       display: none;
