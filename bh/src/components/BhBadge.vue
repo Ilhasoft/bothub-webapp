@@ -68,8 +68,10 @@ export default {
     @each $color in $colors {
       $color-name: nth($color, 1);
       $color-value: nth($color, 2);
+      $color-inverted: nth($color, 3);
 
       &--#{$color-name} {
+        color: $color-inverted;
         background-color: $color-value;
       }
     }

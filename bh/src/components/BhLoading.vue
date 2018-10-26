@@ -36,11 +36,12 @@ export default {
     display: inline-flex;
     align-items: center;
     height: $size-normal;
+    color: $color-lighter-grey;
 
     span {
       width: ($size-normal * $reduce-factor);
       height: ($size-normal * $reduce-factor);
-      background-color: $color-lighter-grey;
+      background-color: currentColor;
       border-radius: 100%;
       animation: bh-loading-bouncedelay 1.4s infinite ease-in-out both;
 

@@ -1,97 +1,10 @@
 @import '~./variables.scss';
 @import '~./colors.scss';
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
 @mixin typography() {
   font-family: $font-family;
   font-weight: $font-weight-normal;
   line-height: 1.25;
   color: $color-bolder-grey;
-
-  strong {
-    font-weight: $font-weight-bolder;
-  }
-}
-
-h1,
-h2,
-h3,
-h4 {
-  padding: 0;
-  font-size: 1rem;
-  font-weight: normal;
-}
-
-@for $i from 0 to 4 {
-  $n: $i + 1;
-  $font-size: (2rem - ($i * .25rem));
-  $margin: .75rem 0;
-
-  h#{$n} {
-    margin: $margin;
-    font-size: $font-size;
-    font-weight: $font-weight-medium;
-
-    &:first-child {
-      margin-top: 0;
-    }
-  }
-
-  .bh {
-    &-title-#{$n} { // depreciate this class
-      margin: $margin;
-      font-size: $font-size;
-
-      &:first-child {
-        margin-top: 0;
-      }
-    }
-  }
-}
-
-p {
-  padding: 0;
-  margin: .5rem 0;
-  word-wrap: break-word;
-}
-
-a {
-  color: $color-primary;
-  text-decoration: none;
-}
-
-strong {
-  font-weight: $font-weight-bolder;
-
-  &.medium {
-    font-weight: $font-weight-medium;
-  }
-}
-
-small {
-  color: $color-grey;
-}
-
-.text {
-  &-left{
-    text-align: left;
-  }
-
-  &-center{
-    text-align: center;
-  }
-
-  &-right{
-    text-align: right;
-  }
-}
-
-@each $color in $colors {
-  $color-name: nth($color, 1);
-  $color-value: nth($color, 2);
-
-  .text-#{$color-name} {
-    color: $color-value;
-  }
 }

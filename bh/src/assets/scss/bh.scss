@@ -7,6 +7,9 @@
 @import '~./notification';
 @import '~./table';
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+
+
 * {
   box-sizing: border-box;
 }
@@ -23,15 +26,69 @@ body {
   @include typography();
 
   min-height: 100%;
-  background-color: $color-lighter-grey;
+  background-color: $color-white-fake;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  padding: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+@for $i from 0 to 4 {
+  $n: $i + 1;
+  $font-size: (2rem - ($i * .25rem));
+  $margin: .75rem 0;
+
+  h#{$n} {
+    margin: $margin;
+    font-size: $font-size;
+    font-weight: $font-weight-medium;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+p {
+  padding: 0;
+  margin: .5rem 0;
+  word-wrap: break-word;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: $font-weight-bolder;
+
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
+}
+
+small {
+  color: $color-grey;
 }
 
 @each $color in $colors {
   $color-name: nth($color, 1);
   $color-value: nth($color, 2);
+  $color-inverted: nth($color, 3);
 
   .background-#{$color-name} {
+    color: $color-inverted;
     background-color: $color-value;
+  }
+
+  .text-#{$color-name} {
+    color: $color-value;
   }
 }
 
@@ -55,5 +112,19 @@ body {
     @media screen and (max-width: $mobile-width) {
       display: auto;
     }
+  }
+}
+
+.text {
+  &-left{
+    text-align: left;
+  }
+
+  &-center{
+    text-align: center;
+  }
+
+  &-right{
+    text-align: right;
   }
 }
