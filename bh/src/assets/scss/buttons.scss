@@ -9,7 +9,7 @@
     @include typography();
 
     @mixin size($size-value) {
-      padding: ($size-value / 3) ($size-value / 1.5);
+      padding: calc(#{($size-value / 3)} - #{$form-components-border-size}) ($size-value / 1.5);
       font-size: ($size-value / 3);
       line-height: ($size-value / 3);
     }
