@@ -1,5 +1,5 @@
 export default {
-  tabValue: '',
   open: false,
+  tabValue: '',
   next: null,
 };

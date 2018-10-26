@@ -2,8 +2,8 @@ import TYPES from '../types';
 
 export default {
   [TYPES.OPEN_LOGIN_MODAL](state, { modalTabValue, next, redirectToWhenFails }) {
-    state.tabValue = modalTabValue;
     state.open = true;
+    state.tabValue = modalTabValue;
     state.next = next;
     state.redirectToWhenFails = redirectToWhenFails;
   },
