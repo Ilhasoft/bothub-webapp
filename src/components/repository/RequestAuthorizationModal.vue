@@ -1,13 +1,12 @@
 <template>
   <bh-modal :open.sync="openValue">
-    <div class="bh-grid bh-grid--column">
+    <div class="bh-grid">
       <div class="bh-grid__item">
         <h1>Request Authorization</h1>
+        <request-authorization-form
+          :repository-uuid="repositoryUuid"
+          @requested="onAuthorizationRequested()" />
       </div>
-      <request-authorization-form
-        :repository-uuid="repositoryUuid"
-        class="bh-grid__item"
-        @requested="onAuthorizationRequested()" />
     </div>
   </bh-modal>
 </template>
