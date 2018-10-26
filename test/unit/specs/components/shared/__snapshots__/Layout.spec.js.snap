@@ -9,8 +9,8 @@ exports[`Layout.vue renders correctly 1`] = `
     </div>
     <div class="layout__header__item">
       <div class="bh-grid bh-grid--ever-desktop">
-        <bhbutton-stub primary="true" inverted="true" transparent="true" type="button" size="medium" class="bh-grid__item">sign in</bhbutton-stub>
-        <bhbutton-stub primary="true" inverted="true" type="button" size="medium" class="bh-grid__item hide-mobile">sign up</bhbutton-stub>
+        <bhbutton-stub size="medium" primary="true" inverted="true" transparent="true" type="button" class="bh-grid__item">sign in</bhbutton-stub>
+        <bhbutton-stub size="medium" primary="true" inverted="true" type="button" class="bh-grid__item hide-mobile">sign up</bhbutton-stub>
       </div>
     </div>
   </div>
