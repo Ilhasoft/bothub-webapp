@@ -3,7 +3,7 @@
     :class="{
       'bh-badge': true,
       [`bh-badge--${size}`]: !!size,
-      [`bh-badge--color-${color}`]: !!color
+      [`bh-badge--${color}`]: !!color
     }"
     @click="$emit('click', $event)"
   >

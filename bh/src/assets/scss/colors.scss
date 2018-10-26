@@ -16,17 +16,17 @@ $color-info: #209cee;
 $color-warning: #ffdd57;
 
 $colors: (
-  ('color-white-fake', $color-white-fake, $color-grey),
-  ('color-lighter-grey', $color-lighter-grey, $color-bolder-grey),
-  ('color-grey', $color-grey, $color-white-fake),
-  ('color-bolder-grey', $color-bolder-grey, $color-lighter-grey),
-  ('color-primary', $color-primary, $color-primary-inverted),
-  ('color-primary-tone', $color-primary-tone, $color-primary-inverted),
-  ('color-secondary', $color-secondary, $color-primary-inverted),
-  ('color-secondary-tone', $color-secondary-tone, $color-primary-inverted),
-  ('color-danger', $color-danger, $color-white-fake),
-  ('color-info', $color-info, $color-white-fake),
-  ('color-warning', $color-warning, $color-bolder-grey),
+  ('white-fake', $color-white-fake, $color-grey),
+  ('lighter-grey', $color-lighter-grey, $color-bolder-grey),
+  ('grey', $color-grey, $color-white-fake),
+  ('bolder-grey', $color-bolder-grey, $color-lighter-grey),
+  ('primary', $color-primary, $color-primary-inverted),
+  ('primary-tone', $color-primary-tone, $color-primary-inverted),
+  ('secondary', $color-secondary, $color-primary-inverted),
+  ('secondary-tone', $color-secondary-tone, $color-primary-inverted),
+  ('danger', $color-danger, $color-white-fake),
+  ('info', $color-info, $color-white-fake),
+  ('warning', $color-warning, $color-bolder-grey),
 );
 
 $notification-colors: (

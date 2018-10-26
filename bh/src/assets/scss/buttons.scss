@@ -1,0 +1,78 @@
+@import '~./colors.scss';
+@import '~./typography.scss';
+
+
+.bh {
+  &-button {
+    $parent: &;
+
+    @include typography();
+
+    @mixin size($size-value) {
+      padding: ($size-value / 3) ($size-value / 1.5);
+      font-size: ($size-value / 3);
+      line-height: ($size-value / 3);
+    }
+
+    @include size($size-normal);
+
+    display: inline-block;
+    font-weight: $font-weight-bolder;
+    color: $color-grey;
+    cursor: pointer;
+    background: none;
+    background-color: $color-white-fake;
+    border: $form-components-border-size solid $color-lighter-grey;
+    border-radius: $form-components-border-radius;
+    outline: none;
+    box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
+
+    &--rounded {
+      border-radius: ($size-normal / 2);
+    }
+
+    &:disabled {
+      color: $color-lighter-grey;
+      cursor: not-allowed;
+      background-color: $color-grey;
+      border-color: $color-grey;
+    }
+
+    @each $size in $sizes {
+      $size-name: nth($size, 1);
+      $size-value: nth($size, 2);
+
+      &--#{$size-name} {
+        @include size($size-value);
+
+        &#{$parent}--rounded {
+          border-radius: ($size-value / 2);
+        }
+      }
+    }
+
+    @each $color in $colors {
+      $color-name: nth($color, 1);
+      $color-value: nth($color, 2);
+      $color-inverted: nth($color, 3);
+
+      &--#{$color-name} {
+        color: $color-inverted;
+        background-color: $color-value;
+        border-color: $color-value;
+
+        &-inverted {
+          color: $color-value;
+          background-color: $color-inverted;
+          border-color: $color-inverted;
+        }
+
+        &-transparent {
+          color: $color-value;
+          background-color: transparent;
+          border-color: $color-value;
+        }
+      }
+    }
+  }
+}
