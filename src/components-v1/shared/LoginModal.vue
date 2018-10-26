@@ -42,9 +42,15 @@ const components = {
 export default {
   name: 'LoginModal',
   components,
+  props: {
+    currentTab: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
-      activeTab: 1,
+      activeTab: this.currentTab === 'signin' ? 1 : 0,
     };
   },
   computed: {
