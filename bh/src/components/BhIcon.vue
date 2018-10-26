@@ -54,8 +54,8 @@ export default {
 .bh {
   &-icon {
     display: inline-block;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     vertical-align: text-top;
 
     svg {
