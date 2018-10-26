@@ -2,26 +2,41 @@
   <div class="bh-grid">
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
-        <bh-icon-button
+        <router-link
+          :to="{
+            name: 'repository-home',
+            params: {
+              ownerNickname: repository.owner__nickname,
+              slug: repository.slug,
+            },
+        }"><bh-icon-button
           size="medium"
           value="botinho"
-          class="repository-info__big-badge__icon"
-          @click="redirect()" />
+          class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
     <div class="bh-grid__item">
       <div class="repository-info__title">
         <span class="repository-info__title__bagde">
-          <bh-icon-button
+          <router-link
+            :to="{
+              name: 'repository-home',
+              params: {
+                ownerNickname: repository.owner__nickname,
+                slug: repository.slug,
+              },
+          }"><bh-icon-button
             value="botinho"
-            class="repository-info__title__bagde__icon"
-            @click="redirect()" />
+            class="repository-info__title__bagde__icon" /></router-link>
         </span>
-        <div
-          class="repository-info__cursor-pointer"
-          @click="redirect()">
-          <span>{{ repository.name }}</span>
-        </div>
+        <router-link
+          :to="{
+            name: 'repository-home',
+            params: {
+              ownerNickname: repository.owner__nickname,
+              slug: repository.slug,
+            },
+        }"><span class="repository-info__title__name">{{ repository.name }}</span></router-link>
       </div>
       <div class="repository-info__info-item">
         <router-link
@@ -80,17 +95,6 @@ export default {
       'getProfile',
     ]),
   },
-  methods: {
-    redirect() {
-      this.$router.push({
-        name: 'repository-home',
-        params: {
-          ownerNickname: this.repository.owner__nickname,
-          slug: this.repository.slug,
-        },
-      });
-    },
-  },
 };
 </script>
 
@@ -133,6 +137,10 @@ export default {
     font-weight: $font-weight-bolder;
     margin-bottom: .5rem;
 
+    &__name {
+      color: $color-bolder-grey
+    }
+
     &__bagde {
       display: none;
       vertical-align: middle;
@@ -173,10 +181,6 @@ export default {
     &__category {
       margin: .25rem;
     }
-  }
-
-  &__cursor-pointer {
-    cursor: pointer;
   }
 }
 </style>
