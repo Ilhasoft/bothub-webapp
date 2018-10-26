@@ -8,7 +8,9 @@
       class="repository-home">
       <div class="bh-grid bh-grid--column">
         <div class="bh-grid__item">
-          <p v-if="repository.description">{{ repository.description }}</p>
+          <p
+            v-if="repository.description"
+            class="repository-home__description">{{ repository.description }}</p>
           <p v-else><i class="text-color-grey">There is no description for this repository</i></p>
         </div>
         <div
@@ -25,7 +27,7 @@
                     v-for="(intent) in repository.intents_list"
                     :key="intent"
                     size="small"
-                    color="grey"
+                    color="lighter-grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ intent }}</span>
                   </bh-badge>
@@ -42,7 +44,7 @@
                     v-for="(label) in repository.labels_list"
                     :key="label"
                     size="small"
-                    color="grey"
+                    color="lighter-grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ label }}</span>
                   </bh-badge>
@@ -84,19 +86,19 @@ export default {
 
 
 .repository-home {
+  &__description {
+    white-space: pre-wrap;
+  }
+
   &__attribute {
     &__card {
-      background-color: $color-lighter-grey;
+      background-color: $color-white-fake;
       border-radius: 6px;
       padding: .75rem;
       margin: -.25rem;
 
       &__badge {
         margin: .25rem;
-
-        > span {
-          color: $color-primary-inverted
-        }
       }
     }
   }

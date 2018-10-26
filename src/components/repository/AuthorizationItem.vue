@@ -1,37 +1,39 @@
 <template>
-  <div class="media align-items-center">
-    <div class="media-left is-hidden-mobile">
+  <div class="bh-grid">
+    <div class="bh-grid__item bh-grid__item--grow-0">
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
-    <div class="media-content">
+    <div class="bh-grid__item bh-grid__item--grow-1">
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
       <p><small>{{ user__nickname }}</small></p>
     </div>
-    <div class="media-right">
-      <role-select
-        v-model="newRole"
-        size="is-small" />
-    </div>
-    <div
-      v-if="submitted || submitted || true"
-      class="media-right">
-      <b-icon
-        v-if="submitting"
-        icon="refresh"
-        custom-class="icon-spin" />
-      <b-icon
-        v-if="submitted"
-        icon="check"
-        custom-class="has-text-success" />
-    </div>
-    <div class="media-right">
+    <div class="bh-grid__item bh-grid__item--grow-0">
       <div
-        ref="removeBtn"
-        class="clickable-icon"
-        @click="remove()">
-        <b-icon
-          icon="close"
-          size="is-small" />
+        v-if="submitted || submitted || true"
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <role-select
+            v-model="newRole"
+            size="is-small" />
+        </div>
+        <div class="bh-grid__item">
+          <bh-icon
+            v-if="submitting"
+            value="refresh" />
+        </div>
+        <div class="bh-grid__item">
+          <bh-icon-button
+            v-if="submitted"
+            size="small"
+            class="text-color-primary"
+            value="check" />
+        </div>
+        <div class="bh-grid__item">
+          <bh-icon-button
+            value="close"
+            size="small"
+            @click="remove()"/>
+        </div>
       </div>
     </div>
   </div>
@@ -45,14 +47,12 @@ import RoleSelect from '@/components-v1/inputs/RoleSelect';
 import { ROLE_NOT_SETTED } from '@/utils';
 
 
-const components = {
-  UserAvatar,
-  RoleSelect,
-};
-
 export default {
   name: 'AuthorizationItem',
-  components,
+  components: {
+    UserAvatar,
+    RoleSelect,
+  },
   props: {
     uuid: {
       type: String,
@@ -108,6 +108,8 @@ export default {
     ...mapActions([
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
+      'approveRequestAuthorization',
+      'rejectRequestAuthorization',
     ]),
     async remove() {
       return new Promise((resolve, reject) => {
@@ -176,10 +178,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.clickable-icon {
-  cursor: pointer;
-  padding: .75rem;
-}
-</style>
