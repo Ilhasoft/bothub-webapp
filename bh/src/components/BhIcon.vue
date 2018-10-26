@@ -71,8 +71,8 @@ export default {
       svg {
         animation-name: BhIconSpin;
         animation-duration: 1s;
-        animation-iteration-count: infinite;
         animation-timing-function: linear;
+        animation-iteration-count: infinite;
       }
     }
 
