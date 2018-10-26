@@ -72,6 +72,12 @@
     <bh-icon
       value="clipboard-text-outline"
       size="normal"/>
+    <bh-icon
+      value="account-edit"
+      size="normal"/>
+    <bh-icon
+      value="lock-reset"
+      size="normal"/>
   </div>
 </template>
 
