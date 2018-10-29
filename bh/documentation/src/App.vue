@@ -179,15 +179,6 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <Tooltip />
-            </div>
-          </div>
-        </bh-card>
-      </section>
-      <section class="bh-grid__item">
-        <bh-card>
-          <div class="bh-grid">
-            <div class="bh-grid__item bh-grid__item--nested">
               <bh-select />
             </div>
           </div>

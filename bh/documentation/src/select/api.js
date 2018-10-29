@@ -3,9 +3,9 @@ export default {
     {
       name: 'disabled',
       type: 'Boolean',
-      description: 'Disabled Button',
+      description: 'Disabled Select',
       default: false,
-      required: true,
+      required: false,
     },
   ],
 };

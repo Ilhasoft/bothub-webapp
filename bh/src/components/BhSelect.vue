@@ -25,18 +25,13 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      selected: null,
-    };
-  },
 };
 </script>
 
 <style lang="scss">
 @import '@scss/colors.scss';
-@import '@scss/variables.scss';
 @import '@scss/forms.scss';
+
 
 .bh {
   &-select {
