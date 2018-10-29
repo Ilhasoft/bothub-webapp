@@ -13,7 +13,7 @@
             src="@/assets/imgs/logo-white.svg"
             alt="bothub">
         </router-link>
-        <div class="bh-grid__item">
+        <div class="bh-grid__item layout__header__center">
           <slot name="center" />
         </div>
         <div class="bh-grid__item bh-grid__item--nested">
@@ -154,6 +154,10 @@ export default {
         display: block;
         height: $size-normal;
       }
+    }
+
+    &__center {
+      width: 750px;
     }
   }
 
