@@ -3,10 +3,10 @@
 exports[`IntentsAndLabelsList.vue renders correctly 1`] = `
 <div class="intents-and-labels-list">
   <div class="intents-and-labels-list__radio">
-    <bhbutton-stub primary="true" type="button" size="medium" class="intents-and-labels-list__radio__button">
+    <bhbutton-stub size="medium" primary="true" type="button" class="intents-and-labels-list__radio__button">
       Intents
     </bhbutton-stub>
-    <bhbutton-stub type="button" size="medium" class="intents-and-labels-list__radio__button">
+    <bhbutton-stub size="medium" type="button" class="intents-and-labels-list__radio__button">
       Labels
     </bhbutton-stub>
   </div>

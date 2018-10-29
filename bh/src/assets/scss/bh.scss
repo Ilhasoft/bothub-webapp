@@ -6,6 +6,7 @@
 @import '~./shadow';
 @import '~./notification';
 @import '~./table';
+@import '~./buttons';
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 
@@ -82,12 +83,12 @@ small {
   $color-value: nth($color, 2);
   $color-inverted: nth($color, 3);
 
-  .background-#{$color-name} {
+  .background-color-#{$color-name} {
     color: $color-inverted;
     background-color: $color-value;
   }
 
-  .text-#{$color-name} {
+  .text-color-#{$color-name} {
     color: $color-value;
   }
 }

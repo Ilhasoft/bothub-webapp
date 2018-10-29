@@ -12,5 +12,11 @@ export default {
       description: 'Set the icon size',
       default: 'false',
     },
+    {
+      name: 'spin',
+      type: 'Boolean',
+      description: 'Spin icon',
+      default: 'false',
+    },
   ],
 };
