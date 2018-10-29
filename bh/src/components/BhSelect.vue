@@ -6,6 +6,7 @@
         'bh-select': true,
         'bh-select__disabled': disabled,
       }"
+      @change="$emit('selected', $event.target.value)"
     >
       <slot />
     </select>
@@ -29,7 +30,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@scss/colors.scss';
 @import '@scss/forms.scss';
 
 

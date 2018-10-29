@@ -26,3 +26,22 @@ describe('BhSelect.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 });
+
+describe('BhSelect Disabled renders correctly', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallowMount(BhSelect, {
+      localVue,
+      slots: {
+        default: defaultSlotOptionsComponent,
+      },
+    });
+    wrapper.setProps({
+      disabled: true,
+    });
+  });
+
+  test('Disabled Select input', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+});
