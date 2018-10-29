@@ -1,7 +1,11 @@
 <template>
-  <div :class="inputClassAttr">
+  <div class="bh-select">
     <select
-      :class="`${className}`"
+      :disabled="disabled"
+      :class="{
+        'bh-select': true,
+        'bh-select__disabled': disabled,
+      }"
     >
       <slot />
     </select>
@@ -16,15 +20,14 @@ export default {
   name: 'BhSelect',
   extends: BhText,
   props: {
-    value: {
-      type: [String, Number, Boolean, Object, Array, Symbol, Function],
-      default: null,
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
     return {
       selected: null,
-      className: 'bh-select',
     };
   },
 };
@@ -38,9 +41,16 @@ export default {
 .bh {
   &-select {
     @include text();
+
+    width: 100%;
+
+    &__disabled {
+      cursor: no-drop;
+    }
   }
+
   &-select:focus {
-    outline: 3px solid $color-primary
+    outline: 2px solid $color-primary;
   }
 }
 </style>
