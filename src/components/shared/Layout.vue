@@ -11,7 +11,12 @@
           to="/">
           <img
             src="@/assets/imgs/logo-white.svg"
-            alt="bothub">
+            alt="Bothub"
+            class="hide-mobile">
+          <img
+            src="@/assets/imgs/icon-white.svg"
+            alt="Bothub"
+            class="hide-desktop">
         </router-link>
         <div
           v-if="$slots.center"
@@ -156,10 +161,12 @@ export default {
     background-color: $color-primary;
 
     &__logo {
+      min-width: ($size-normal * .75);
       padding: ($size-normal * .125) 0;
+
       img {
         display: block;
-        height: $size-normal * .75;
+        height: ($size-normal * .75);
       }
     }
 
