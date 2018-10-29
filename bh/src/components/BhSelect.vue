@@ -35,17 +35,7 @@ export default {
 
 .bh {
   &-select {
-    @include text();
-
-    width: 100%;
-
-    &__disabled {
-      cursor: no-drop;
-    }
-  }
-
-  &-select:focus {
-    outline: 2px solid $color-primary;
+    @include select();
   }
 }
 </style>
