@@ -1,5 +1,14 @@
 <template>
   <layout>
+    <div slot="center">
+      <bh-text v-model="search">
+        <div slot="append">
+          <bh-icon-button
+            class="text-color-grey"
+            value="magnify" />
+        </div>
+      </bh-text>
+    </div>
     <div class="home">
       <div class="bh-grid bh-grid--column">
         <div class="bh-grid__item bh-grid__item--nested">
@@ -39,6 +48,7 @@ export default {
       RepositoryCard,
       currentCategory: 0,
       repositoryList: null,
+      search: '',
     };
   },
   watch: {
