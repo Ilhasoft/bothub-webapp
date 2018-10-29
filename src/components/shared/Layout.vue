@@ -13,7 +13,9 @@
             src="@/assets/imgs/logo-white.svg"
             alt="bothub">
         </router-link>
-        <div class="bh-grid__item layout__header__center">
+        <div
+          v-if="$slots.center"
+          class="bh-grid__item layout__header__center">
           <slot name="center" />
         </div>
         <div class="bh-grid__item bh-grid__item--nested">
@@ -24,6 +26,8 @@
               <bh-button
                 primary
                 inverted
+                rounded
+                max-content
                 @click="openNewRepositoryModal()">start your bot</bh-button>
             </div>
             <div
@@ -36,7 +40,8 @@
                 <bh-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
-                <bh-dropdown-item @click="openNewRepositoryModal()">
+                <bh-dropdown-item
+                  @click="openNewRepositoryModal()">
                   Start your bot
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
@@ -143,6 +148,7 @@ export default {
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/utilities.scss';
 
 
 .layout {
@@ -150,14 +156,15 @@ export default {
     background-color: $color-primary;
 
     &__logo {
+      padding: ($size-normal * .125) 0;
       img {
         display: block;
-        height: $size-normal;
+        height: $size-normal * .75;
       }
     }
 
     &__center {
-      width: 750px;
+      width: $max-repository-card-width;
     }
   }
 
