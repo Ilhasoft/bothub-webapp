@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/components-v1/Home';
+import Home from '@/views/Home';
 import MyProfile from '@/components-v1/MyProfile';
 import ResetPassword from '@/components-v1/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
