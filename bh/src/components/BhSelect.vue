@@ -14,12 +14,8 @@
 </template>
 
 <script>
-import BhText from './BhText';
-
-
 export default {
   name: 'BhSelect',
-  extends: BhText,
   props: {
     disabled: {
       type: Boolean,
