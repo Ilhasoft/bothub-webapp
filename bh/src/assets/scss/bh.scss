@@ -108,10 +108,10 @@ small {
   }
 
   &-desktop {
-    display: none !important;
+    display: none;
 
     @media screen and (max-width: $mobile-width) {
-      display: auto;
+      display: block !important;
     }
   }
 }
