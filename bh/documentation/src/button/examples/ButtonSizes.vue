@@ -1,9 +1,7 @@
 <template>
   <div class="bh-grid">
     <div class="bh-grid__item item">
-      <bh-button
-        primary
-        size="small">Small</bh-button>
+      <bh-button size="small">Small</bh-button>
     </div>
     <div class="bh-grid__item item">
       <bh-button
@@ -13,11 +11,13 @@
     <div class="bh-grid__item item">
       <bh-button
         primary
+        rounded
         size="medium">Medium</bh-button>
     </div>
     <div class="bh-grid__item item">
       <bh-button
         primary
+        transparent
         size="large">Large</bh-button>
     </div>
   </div>
