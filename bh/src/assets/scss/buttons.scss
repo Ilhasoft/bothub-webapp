@@ -40,6 +40,10 @@
       border-radius: ($size-normal / 2);
     }
 
+    &--max-content {
+      width: max-content;
+    }
+
     &:disabled {
       color: $color-lighter-grey;
       cursor: not-allowed;

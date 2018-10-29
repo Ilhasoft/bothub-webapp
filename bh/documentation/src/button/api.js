@@ -72,6 +72,12 @@ export default {
       description: 'Show loading icon.',
       default: 'false',
     },
+    {
+      name: 'max-content',
+      type: 'Boolean',
+      description: 'Fit button to max content.',
+      default: 'false',
+    },
   ],
   events: [
     {

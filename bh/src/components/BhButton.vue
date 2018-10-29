@@ -16,6 +16,7 @@
         [`bh-button--${currentColor}-inverted`]: currentColor && inverted && !transparent,
         [`bh-button--${currentColor}-transparent`]: currentColor && !inverted && transparent,
         'bh-button--rounded': rounded,
+        'bh-button--max-content': maxContent,
       }"
       @click="$emit('click', $event)"
     >
@@ -92,6 +93,10 @@ export default {
       default: false,
     },
     loading: {
+      type: Boolean,
+      default: false,
+    },
+    maxContent: {
       type: Boolean,
       default: false,
     },
