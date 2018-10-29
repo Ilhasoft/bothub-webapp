@@ -68,5 +68,9 @@ $grid-gap: .5rem;
         }
       }
     }
+
+    &--inline {
+      display: inline-flex;
+    }
   }
 }

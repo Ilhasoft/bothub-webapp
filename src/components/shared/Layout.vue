@@ -4,67 +4,84 @@
       layout: true,
       'layout--without-background': withoutBackground,
   }">
-    <new-repository-modal
-      :active="newRepositoryModalOpen"
-      @requestClose="closeNewRepositoryModal()" />
     <div class="layout__header">
-      <div class="layout__header__item">
+      <div class="bh-grid bh-grid--space-between bh-grid--row">
         <router-link
-          class="layout__header__logo"
+          class="bh-grid__item layout__header__logo"
           to="/">
           <img
             src="@/assets/imgs/logo-white.svg"
-            alt="bothub">
+            alt="Bothub"
+            class="hide-mobile">
+          <img
+            src="@/assets/imgs/icon-white.svg"
+            alt="Bothub"
+            class="hide-desktop">
         </router-link>
-      </div>
-      <div class="layout__header__item">
         <div
-          v-if="authenticated"
-          class="bh-grid bh-grid--ever-desktop">
-          <bh-button
-            primary
-            inverted
-            size="medium"
-            class="bh-grid__item hide-mobile"
-            @click="openNewRepositoryModal()">start your bot</bh-button>
-          <bh-dropdown position="left">
-            <user-avatar
-              slot="trigger"
-              :profile="myProfile"
-              class="bh-grid__item"
-              size="medium" />
-            <bh-dropdown-item @click="openMyProfile()">
-              {{ myProfile.name || '...' }}
-            </bh-dropdown-item>
-            <bh-dropdown-item @click="openNewRepositoryModal()">
-              Start your bot
-            </bh-dropdown-item>
-            <bh-dropdown-item @click="logout()">
-              Logout
-            </bh-dropdown-item>
-          </bh-dropdown>
+          v-if="$slots.center"
+          class="bh-grid__item layout__header__center">
+          <slot name="center" />
         </div>
-        <div
-          v-else
-          class="bh-grid bh-grid--ever-desktop">
-          <bh-button
-            primary
-            inverted
-            transparent
-            size="medium"
-            class="bh-grid__item"
-            @click="openLoginModal()">sign in</bh-button>
-          <bh-button
-            primary
-            inverted
-            size="medium"
-            class="bh-grid__item hide-mobile"
-            @click="openSignupModal()">sign up</bh-button>
+        <div class="bh-grid__item bh-grid__item--nested">
+          <div class="bh-grid bh-grid--row">
+            <div
+              v-if="authenticated"
+              class="bh-grid__item hide-mobile">
+              <bh-button
+                primary
+                inverted
+                rounded
+                max-content
+                @click="openNewRepositoryModal()">start your bot</bh-button>
+            </div>
+            <div
+              v-if="authenticated"
+              class="bh-grid__item">
+              <bh-dropdown position="left">
+                <user-avatar
+                  slot="trigger"
+                  :profile="myProfile" />
+                <bh-dropdown-item @click="openMyProfile()">
+                  {{ myProfile.name || '...' }}
+                </bh-dropdown-item>
+                <bh-dropdown-item
+                  @click="openNewRepositoryModal()">
+                  Start your bot
+                </bh-dropdown-item>
+                <bh-dropdown-item @click="logout()">
+                  Logout
+                </bh-dropdown-item>
+              </bh-dropdown>
+            </div>
+            <div
+              v-if="!authenticated"
+              class="bh-grid__item">
+              <bh-button
+                color="white-fake"
+                transparent
+                max-content
+                @click="openLoginModal()">sign in</bh-button>
+            </div>
+            <div
+              v-if="!authenticated"
+              class="bh-grid__item">
+              <bh-button
+                primary
+                inverted
+                max-content
+                class="hide-mobile"
+                @click="openSignupModal()">sign up</bh-button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="layout__content"><slot /></div>
     <site-footer />
+    <new-repository-modal
+      :active="newRepositoryModalOpen"
+      @requestClose="closeNewRepositoryModal()" />
   </div>
 </template>
 
@@ -135,52 +152,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/utilities.scss';
 
 
 .layout {
-  $parent: &;
-
-  &::before {
-    display: block;
-    width: 100%;
-    height: 10rem;
-    margin-bottom: -10rem;
-    content: "";
-    background-color: $color-primary;
-  }
-
-  &--without-background {
-    #{$parent}::before {
-      display: none;
-    }
-  }
-
   &__header {
-    $heigth: 2rem;
-
-    display: flex;
-    justify-content: space-between;
-    padding: .5rem;
-
-    &__item {
-      flex-grow: 0;
-    }
+    background-color: $color-primary;
 
     &__logo {
-      display: inline-block;
-      padding: .25rem;
-      border: 1px solid transparent;
+      min-width: ($size-normal * .75);
+      padding: ($size-normal * .125) 0;
 
       img {
-        height: $heigth;
+        display: block;
+        height: ($size-normal * .75);
       }
+    }
+
+    &__center {
+      width: $max-repository-card-width;
     }
   }
 
   &__content {
-    min-height: calc(100vh - 4rem);
+    min-height: calc(100vh - 3.75rem);
   }
 }
 </style>

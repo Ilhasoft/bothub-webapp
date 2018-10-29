@@ -60,10 +60,11 @@ export default {
 
     svg {
       display: block;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      max-height: 100%;
+      width: 125%;
+      max-width: 125%;
+      height: 125%;
+      max-height: 125%;
+      margin: -12.5%;
       fill: currentColor;
     }
 

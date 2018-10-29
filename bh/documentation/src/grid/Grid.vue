@@ -6,36 +6,30 @@
       <example
         :component="SimpleGrid"
         :code="simpleGridCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Multiline grid</h3>
       <example
         :component="MultilineGrid"
         :code="multilineGridCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Grow item</h3>
       <example
         :component="GrowItem"
         :code="growItemCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Nested item</h3>
       <example
         :component="NestedItem"
         :code="nestedItemCode" />
-    </div>
-    <div class="bh-grid__item">
       <h3>Half Gap</h3>
       <example
         :component="HalfGap"
         :code="halfGapCode" />
       <h3>Space Between</h3>
-    </div>
-    <div class="bh-grid__item">
       <example
         :component="SpaceBetween"
         :code="spaceBetweenCode" />
+      <h3>Inline Grid</h3>
+      <example
+        :component="InlineGridExample"
+        :code="inlineGridExampleCode" />
     </div>
   </div>
 </template>
@@ -54,6 +48,8 @@ import HalfGap from './examples/HalfGap';
 import halfGapCode from '!!raw-loader!./examples/HalfGap';
 import SpaceBetween from './examples/SpaceBetween';
 import spaceBetweenCode from '!!raw-loader!./examples/SpaceBetween';
+import InlineGridExample from './examples/InlineGrid';
+import inlineGridExampleCode from '!!raw-loader!./examples/InlineGrid';
 
 
 export default {
@@ -75,6 +71,8 @@ export default {
       halfGapCode,
       SpaceBetween,
       spaceBetweenCode,
+      InlineGridExample,
+      inlineGridExampleCode,
     };
   },
 };
