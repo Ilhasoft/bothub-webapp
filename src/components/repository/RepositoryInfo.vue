@@ -2,31 +2,27 @@
   <div class="bh-grid">
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
-        <bh-icon
-          size="medium"
-          value="botinho"
-          class="repository-info__big-badge__icon" />
+        <router-link :to="repositoryDetailsRouterParams">
+          <bh-icon-button
+            size="medium"
+            value="botinho"
+            class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
     <div class="bh-grid__item">
       <div class="repository-info__title">
         <span class="repository-info__title__bagde">
-          <bh-icon
-            value="botinho"
-            class="repository-info__title__bagde__icon" />
+          <router-link :to="repositoryDetailsRouterParams">
+            <bh-icon-button
+              value="botinho"
+              class="repository-info__title__bagde__icon" /></router-link>
         </span>
-        <span>{{ repository.name }}</span>
+        <router-link :to="repositoryDetailsRouterParams">
+        <span class="text-color-bolder-grey">{{ repository.name }}</span></router-link>
       </div>
       <div class="repository-info__info-item">
-        <router-link
-          :to="{
-            name: 'repository-home',
-            params: {
-              ownerNickname: repository.owner__nickname,
-              slug: repository.slug,
-            },
-        }">{{ repository.absolute_url ||
-        `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
+        <router-link :to="repositoryDetailsRouterParams">{{ repository.absolute_url
+        || `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
       </div>
       <div class="repository-info__info-item">
         <span>Created by</span>
@@ -73,6 +69,15 @@ export default {
     ...mapGetters([
       'getProfile',
     ]),
+    repositoryDetailsRouterParams() {
+      return {
+        name: 'repository-home',
+        params: {
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+        },
+      };
+    },
   },
 };
 </script>
