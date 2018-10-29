@@ -58,9 +58,9 @@
               v-if="!authenticated"
               class="bh-grid__item">
               <bh-button
-                primary
-                inverted
+                color="white-fake"
                 transparent
+                max-content
                 @click="openLoginModal()">sign in</bh-button>
             </div>
             <div
@@ -69,6 +69,7 @@
               <bh-button
                 primary
                 inverted
+                max-content
                 class="hide-mobile"
                 @click="openSignupModal()">sign up</bh-button>
             </div>
