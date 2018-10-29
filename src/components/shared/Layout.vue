@@ -158,7 +158,7 @@ export default {
   }
 
   &__content {
-    min-height: calc(100vh - 4rem);
+    min-height: calc(100vh - 3.75rem);
   }
 }
 </style>
