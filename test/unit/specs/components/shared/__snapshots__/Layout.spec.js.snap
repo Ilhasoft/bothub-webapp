@@ -2,19 +2,26 @@
 
 exports[`Layout.vue renders correctly 1`] = `
 <div class="layout">
-  <newrepositorymodal-stub></newrepositorymodal-stub>
   <div class="layout__header">
-    <div class="layout__header__item">
-      <router-link-stub to="/" tag="a" event="click" class="layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="bothub"></router-link-stub>
-    </div>
-    <div class="layout__header__item">
-      <div class="bh-grid bh-grid--ever-desktop">
-        <bhbutton-stub primary="true" inverted="true" transparent="true" type="button" size="medium" class="bh-grid__item">sign in</bhbutton-stub>
-        <bhbutton-stub primary="true" inverted="true" type="button" size="medium" class="bh-grid__item hide-mobile">sign up</bhbutton-stub>
+    <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <router-link-stub to="/" tag="a" event="click" class="bh-grid__item layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="bothub"></router-link-stub>
+      <div class="bh-grid__item"></div>
+      <div class="bh-grid__item bh-grid__item--nested">
+        <div class="bh-grid bh-grid--row">
+          <!---->
+          <!---->
+          <div class="bh-grid__item">
+            <bhbutton-stub primary="true" inverted="true" transparent="true" type="button">sign in</bhbutton-stub>
+          </div>
+          <div class="bh-grid__item">
+            <bhbutton-stub primary="true" inverted="true" type="button" class="hide-mobile">sign up</bhbutton-stub>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="layout__content"></div>
   <sitefooter-stub></sitefooter-stub>
+  <newrepositorymodal-stub></newrepositorymodal-stub>
 </div>
 `;
