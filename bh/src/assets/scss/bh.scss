@@ -99,7 +99,7 @@ small {
 }
 
 .hide {
-  display: none;
+  display: none !important;
 
   &-mobile {
     @media screen and (max-width: $mobile-width) {
@@ -108,7 +108,7 @@ small {
   }
 
   &-desktop {
-    display: none;
+    display: none !important;
 
     @media screen and (max-width: $mobile-width) {
       display: block !important;
