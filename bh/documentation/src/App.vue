@@ -170,7 +170,16 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <Tooltip />
+              <tooltip />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <tooltip-hover />
             </div>
           </div>
         </bh-card>
@@ -200,6 +209,7 @@ import LanguageFlag from './languageFlag/LanguageFlag';
 import Tooltip from './tooltip/Tooltip';
 import Table from './table/Table';
 import Colors from './colors/Colors';
+import TooltipHover from './tooltip-hover/TooltipHover';
 
 export default {
   name: 'App',
@@ -224,6 +234,7 @@ export default {
     Tooltip,
     Table,
     Colors,
+    TooltipHover,
   },
 };
 </script>
