@@ -1,6 +1,8 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <bh-text v-model="toString">
+    <bh-text
+      v-model="toString"
+      :debounce="debounceTime">
       <div slot="append">
         <bh-icon-button
           value="magnify"
@@ -46,22 +48,11 @@ export default {
       }
     },
     toString() {
-      this.clearTimeout();
-      this.setTimeoutId = setTimeout(
-        () => { this.$emit('input', this.current); },
-        this.debounceTime,
-      );
+      this.$emit('input', this.current);
     },
   },
   methods: {
-    clearTimeout() {
-      if (this.setTimeoutId) {
-        clearTimeout(this.setTimeoutId);
-        this.setTimeoutId = null;
-      }
-    },
     onSubmit() {
-      this.clearTimeout();
       this.$emit('input', this.current);
     },
   },
