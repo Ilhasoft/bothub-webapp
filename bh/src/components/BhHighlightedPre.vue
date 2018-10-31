@@ -1,8 +1,8 @@
 <template>
-  <pre
-    v-highlightjs="code"
+  <div
+    v-highlightjs="finalCode"
     class="bh-highlighted-pre"
-  ><code :class="codeClass" /></pre>
+  ><code :class="codeClass" /></div>
 </template>
 
 <script>
@@ -11,11 +11,20 @@ export default {
   props: {
     code: {
       type: String,
-      required: true,
+      default: null,
     },
     codeClass: {
       type: String,
       default: 'html',
+    },
+  },
+  computed: {
+    finalCode() {
+      return this.code || (
+        this.$slots.default
+        && this.$slots.default[0]
+        && this.$slots.default[0].text
+      );
     },
   },
 };
@@ -24,6 +33,8 @@ export default {
 <style lang="scss">
 .bh {
   &-highlighted-pre {
+    white-space: pre-wrap;
+
     code {
       padding: 1rem;
     }
