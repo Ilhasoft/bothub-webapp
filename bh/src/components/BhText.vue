@@ -22,8 +22,14 @@
 </template>
 
 <script>
+import DebounceMixin from './DebounceMixin';
+
+
 export default {
   name: 'BhText',
+  mixins: [
+    DebounceMixin,
+  ],
   props: {
     value: {
       type: String,
@@ -67,7 +73,7 @@ export default {
       this.val = this.formattedValue;
     },
     val(value) {
-      this.$emit('input', value);
+      this.onInput(value);
     },
     formatters() {
       this.$nextTick();
