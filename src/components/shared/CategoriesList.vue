@@ -59,10 +59,16 @@ export default {
     val(value) {
       this.$emit('input', value);
     },
+    $route() {
+      this.val = this.$route.query.category || 0;
+    },
   },
   async mounted() {
     const categoriesResponse = await this.getAllCategories();
     this.allCategories = categoriesResponse.data;
+    this.val = this.$route.query.category
+      ? parseInt(this.$route.query.category || 0, 10)
+      : 0;
   },
   methods: {
     ...mapActions([

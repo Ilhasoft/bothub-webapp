@@ -58,6 +58,9 @@ export default {
     search() {
       this.updateRepositoryList();
     },
+    $route() {
+      this.currentCategory = this.$route.query.category || 0;
+    },
   },
   mounted() {
     this.updateRepositoryList();
