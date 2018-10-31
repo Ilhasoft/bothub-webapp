@@ -13,8 +13,8 @@
     ><slot name="tooltip" /></bh-tooltip>
     <div
       class="bh-tooltip-hover__trigger"
-      @mouseover="open=true"
-      @mouseout="open=false"
+      @mouseover="openTootip()"
+      @mouseout="closeTooltip()"
     >
       <slot />
     </div>
@@ -39,10 +39,18 @@ export default {
       open: false,
     };
   },
+  methods: {
+    openTootip() {
+      this.open = true;
+    },
+    closeTooltip() {
+      this.open = false;
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .bh {
   &-tooltip-hover {
     $p: &;

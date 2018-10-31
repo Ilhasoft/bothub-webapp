@@ -1,65 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhButton.vue When Priamry props is true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--primary">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Primary and Secondary props is true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--primary">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Primary, Secondary and Roundend props is true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--rounded bh-button--primary">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Primary, Secondary and roundend props is true and size is not blank renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--rounded bh-button--smal bh-button--primary">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Rounded props is true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--rounded">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Secondary props is true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--secondary">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue When Size props is not blank renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button bh-button--small">
+    <!----> </button>
+  <!---->
+</div>
 `;
 
 exports[`BhButton.vue renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-button__wrapper"><button type="button" class="bh-button__wrapper__button bh-button">
+    <!----> </button>
+  <!---->
+</div>
 `;

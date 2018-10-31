@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhTooltipHover.vue renders correctly 1`] = `
+<div class="bh-tooltip-hover bh-tooltip-hover--down">
+  <bhtooltip-stub direction="down" class="bh-tooltip-hover__tooltip"></bhtooltip-stub>
+  <div class="bh-tooltip-hover__trigger"></div>
+</div>
+`;
