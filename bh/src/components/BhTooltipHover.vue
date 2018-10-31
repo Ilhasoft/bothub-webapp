@@ -12,6 +12,7 @@
       class="bh-tooltip-hover__tooltip"
     ><slot name="tooltip" /></bh-tooltip>
     <div
+      ref="trigger"
       class="bh-tooltip-hover__trigger"
       @mouseover="openTootip()"
       @mouseout="closeTooltip()"
