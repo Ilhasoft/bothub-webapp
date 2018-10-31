@@ -93,17 +93,6 @@ $entities-colors: (
   margin-bottom: .5rem;
 }
 
-.pre {
-  white-space: pre;
-  word-wrap: break-word;
-  padding: 16px;
-  background-color: $white-ter;
-  max-width: 100%;
-  overflow: auto;
-  font-family: monospace;
-  font-size: .75rem;
-}
-
 .mh-200 {
   max-height: 200px;
 }
