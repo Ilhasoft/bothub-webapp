@@ -34,6 +34,8 @@ export default {
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
 @import '~bh/src/assets/scss/bh.scss';
+@import '@mdi/font/css/materialdesignicons.css';
+@import 'highlight.js/styles/github.css';
 
 
 .container-padding {

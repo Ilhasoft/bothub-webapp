@@ -1,5 +1,3 @@
-import '@mdi/font/css/materialdesignicons.css';
-
 import Vue from 'vue';
 import Buefy from 'buefy';
 import VueMoment from 'vue-moment';
