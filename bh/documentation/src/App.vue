@@ -179,7 +179,7 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <bh-select />
+              <SelectComponent />
             </div>
           </div>
         </bh-card>
@@ -209,7 +209,7 @@ import LanguageFlag from './languageFlag/LanguageFlag';
 import Tooltip from './tooltip/Tooltip';
 import Table from './table/Table';
 import Colors from './colors/Colors';
-import BhSelect from './select/Select';
+import SelectComponent from './select/Select';
 
 export default {
   name: 'App',
@@ -234,7 +234,7 @@ export default {
     Tooltip,
     Table,
     Colors,
-    BhSelect,
+    SelectComponent,
   },
 };
 </script>

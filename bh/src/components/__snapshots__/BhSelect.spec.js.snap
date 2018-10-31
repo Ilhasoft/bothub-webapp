@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BhSelect Disabled renders correctly Disabled Select input 1`] = `
+exports[`BhSelect.vue BhSelect Disabled renders correctly Disabled Select input 1`] = `
 VueWrapper {
   "_emitted": Object {},
   "_emittedByOrder": Array [],

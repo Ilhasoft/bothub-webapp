@@ -6,7 +6,7 @@
         'bh-select': true,
         'bh-select__disabled': disabled,
       }"
-      @change="$emit('selected', $event.target.value)"
+      @change="$emit('input', $event.target.value)"
     >
       <slot />
     </select>
