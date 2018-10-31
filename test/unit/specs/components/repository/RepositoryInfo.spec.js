@@ -21,10 +21,11 @@ describe('RepositoryCard.vue', () => {
       propsData: {
         repository: {
           uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
-          categories: [1, 2],
+          categories: [1, 2, 3],
           categories_list: [
             { id: 1, name: 'Business' },
             { id: 2, name: 'Technology' },
+            { id: 3, name: 'Health' },
           ],
         },
         // owner: 1,
