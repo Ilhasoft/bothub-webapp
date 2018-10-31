@@ -1,8 +1,11 @@
 <template>
-  <bh-icon
-    :value="iconValue"
-    v-bind="$attrs"
-  />
+  <bh-tooltip-hover>
+    <div slot="tooltip">{{ language|languageVerbose }}</div>
+    <bh-icon
+      :value="iconValue"
+      v-bind="$attrs"
+    />
+  </bh-tooltip-hover>
 </template>
 
 <script>

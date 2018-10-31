@@ -18,7 +18,7 @@ import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
 import BhTooltipHover from './components/BhTooltipHover';
 
-import utils from './utils';
+import { VERBOSE_LANGUAGES } from './utils';
 
 
 const components = {
@@ -90,7 +90,8 @@ export default {
       const component = components[componentName];
       Vue.component(component.name, component);
     });
+
+    Vue.filter('languageVerbose', lang => VERBOSE_LANGUAGES[lang]);
   },
   components,
-  utils,
 };
