@@ -51,8 +51,6 @@
             query: { category: category.id },
         }">
           <bh-badge
-            v-for="category in repository.categories_list"
-            :key="category.id"
             color="lighter-grey"
             class="repository-info__categories__category">{{ category.name || category }}</bh-badge>
         </router-link>
