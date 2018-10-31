@@ -16,6 +16,7 @@ import BhAvatar from './components/BhAvatar';
 import BhCard from './components/BhCard';
 import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
+import BhTooltipHover from './components/BhTooltipHover';
 
 import utils from './utils';
 
@@ -39,6 +40,7 @@ const components = {
   BhCard,
   BhNavigation,
   BhModal,
+  BhTooltipHover,
 };
 
 export default {
