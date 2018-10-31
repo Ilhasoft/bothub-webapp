@@ -1,13 +1,6 @@
 export default {
   props: [
     {
-      name: 'open',
-      type: 'Boolean',
-      description: 'Control tooltip is open or close',
-      required: false,
-      default: 'false',
-    },
-    {
       name: 'danger',
       type: 'Boolean',
       description: 'Set danger Class',
@@ -19,7 +12,7 @@ export default {
       type: 'String',
       description: 'Set the "up" or "down" direction to controll the direction show of tooltip',
       required: false,
-      default: 'null',
+      default: 'down',
     },
   ],
 };

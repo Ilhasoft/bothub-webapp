@@ -7,6 +7,9 @@
         :component="TooltipHoverSimpleExample"
         :code="tooltipHoverSimpleExampleCode" />
     </div>
+    <div class="bh-grid__item">
+      <api :data="api" />
+    </div>
   </div>
 </template>
 
@@ -15,6 +18,7 @@ import Example from '@/Example';
 import Api from '@/Api';
 import TooltipHoverSimpleExample from './examples/TooltipHoverSimple';
 import tooltipHoverSimpleExampleCode from '!!raw-loader!./examples/TooltipHoverSimple';
+import api from './api';
 
 
 export default {
@@ -27,6 +31,7 @@ export default {
     return {
       TooltipHoverSimpleExample,
       tooltipHoverSimpleExampleCode,
+      api,
     };
   },
 };
