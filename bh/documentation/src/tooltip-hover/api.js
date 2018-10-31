@@ -15,4 +15,14 @@ export default {
       default: 'down',
     },
   ],
+  slots: [
+    {
+      name: 'default',
+      description: 'Trigger elements to open tooltip when hover.',
+    },
+    {
+      name: 'tootip',
+      description: 'Tooltip content.',
+    },
+  ],
 };
