@@ -1,13 +1,14 @@
 <template>
   <bh-card>
-    <div class="i-a-l-item">
+    <div
+      class="i-a-l-item clickable"
+      @click.prevent="$emit('showSentences')">
       <div class="i-a-l-item__main">
         <div><strong>{{ title }}</strong></div>
         <div class="i-a-l-item__main__info-wrapper">
           <div class="i-a-l-item__main__info">
             <span v-if="sentencesCount !== null">{{ sentencesCount }} sentences</span>
             <span v-if="labelEntities">{{ labelEntities.length }} entities</span>
-            <span><a @click.prevent="$emit('showSentences')">Show sentences</a></span>
           </div>
         </div>
       </div>
