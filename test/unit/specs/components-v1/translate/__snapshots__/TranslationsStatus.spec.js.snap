@@ -7,7 +7,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>de</span>
+      <p class="card-language"><span>German</span>
         <flag-stub language="de"></flag-stub>
       </p>
     </div>
@@ -17,7 +17,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>es</span>
+      <p class="card-language"><span>Spanish</span>
         <flag-stub language="es"></flag-stub>
       </p>
     </div>
@@ -27,7 +27,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>pt</span>
+      <p class="card-language"><span>Portuguese</span>
         <flag-stub language="pt"></flag-stub>
       </p>
     </div>
@@ -37,7 +37,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>fr</span>
+      <p class="card-language"><span>French</span>
         <flag-stub language="fr"></flag-stub>
       </p>
     </div>
@@ -47,7 +47,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>it</span>
+      <p class="card-language"><span>Italian</span>
         <flag-stub language="it"></flag-stub>
       </p>
     </div>
@@ -57,7 +57,7 @@ exports[`TranslationsStatus.vue renders correctly 1`] = `
       <div class="card-percentage">
         <pie-stub percent="0"></pie-stub>
       </div>
-      <p class="card-language"><span>nl</span>
+      <p class="card-language"><span>Dutch</span>
         <flag-stub language="nl"></flag-stub>
       </p>
     </div>
