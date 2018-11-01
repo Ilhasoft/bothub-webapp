@@ -16,6 +16,8 @@ import BhAvatar from './components/BhAvatar';
 import BhCard from './components/BhCard';
 import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
+import BhTabs from './components/BhTabs';
+import BhTabItem from './components/BhTabItem';
 
 import utils from './utils';
 
@@ -39,6 +41,8 @@ const components = {
   BhCard,
   BhNavigation,
   BhModal,
+  BhTabs,
+  BhTabItem,
 };
 
 export default {
