@@ -6,7 +6,7 @@
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
-          <div class="bh-grid bh-grid--ever-desktop">
+          <div class="bh-grid bh-grid--row">
             <div class="bh-grid__item">
               <repository-info :repository="repository" />
             </div>
@@ -297,12 +297,10 @@ export default {
   $header-height: (16rem + $navigation-height);
   $card-width: 1200px;
 
-  margin: 4rem 0;
-
   &::before {
     content: "";
     display: block;
-    height: $header-height;
+    height: ($header-height + 4rem);
     background-color: $color-primary;
     margin-bottom: -($header-height);
 
@@ -317,7 +315,7 @@ export default {
 
   &__card {
     max-width: $card-width;
-    margin: 0 auto;
+    margin: 0 auto 4rem;
 
     &__header {
       position: relative;

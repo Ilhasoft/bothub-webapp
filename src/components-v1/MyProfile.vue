@@ -148,7 +148,7 @@ export default {
   }
 
   &__repositories {
-    max-width: $max-card-width;
+    max-width: $max-repository-card-width;
     margin: 2rem auto;
   }
 }

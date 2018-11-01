@@ -23,7 +23,8 @@ $sizes: (
 
 // Forms
 
-$form-components-border-radius: 4px;
+$form-components-border-size: 2px;
+$form-components-border-radius: .25rem;
 $form-component-height-normal: $size-normal;
 $form-component-height-small: $size-small;
 $form-component-height-medium: $size-medium;

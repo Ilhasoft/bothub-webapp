@@ -67,15 +67,4 @@ describe('ExampleSearchInput.vue', () => {
       expect(wrapper.emitted('input')).toBeDefined();
     });
   });
-
-  describe('set value for SetTimeoutId and called clearTimeout method', () => {
-    beforeEach(() => {
-      wrapper.vm.setTimeoutId = 1;
-      wrapper.vm.clearTimeout();
-    });
-
-    test('data setTimeoutId should be null', () => {
-      expect(wrapper.vm.setTimeoutId).toBeNull();
-    });
-  });
 });

@@ -3,6 +3,7 @@
     :class="{
       'bh-icon': true,
       [`bh-icon--${size}`]: !!size,
+      'bh-icon--spin': spin,
     }"
     @click="$emit('click', $event)"
     v-html="svg"
@@ -24,6 +25,10 @@ export default {
       type: String,
       default: null,
     },
+    spin: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     svg() {
@@ -37,20 +42,39 @@ export default {
 @import '@scss/variables.scss';
 
 
+@keyframes BhIconSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .bh {
   &-icon {
     display: inline-block;
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
     vertical-align: text-top;
 
     svg {
       display: block;
-      width: 100%;
-      max-width: 100%;
-      height: 100%;
-      max-height: 100%;
+      width: 125%;
+      max-width: 125%;
+      height: 125%;
+      max-height: 125%;
+      margin: -12.5%;
       fill: currentColor;
+    }
+
+    &--spin {
+      svg {
+        animation-name: BhIconSpin;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
     }
 
     @each $size in $sizes {
