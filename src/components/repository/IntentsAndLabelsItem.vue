@@ -2,7 +2,7 @@
   <bh-card>
     <div
       class="i-a-l-item clickable"
-      @click.prevent="$emit('showSentences')">
+      @click="$emit('showSentences')">
       <div class="i-a-l-item__main">
         <div><strong>{{ title }}</strong></div>
         <div class="i-a-l-item__main__info-wrapper">
