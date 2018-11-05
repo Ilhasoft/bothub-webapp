@@ -52,7 +52,7 @@
         }">
           <bh-badge
             color="lighter-grey"
-            class="repository-info__categories__category">{{ category.name || category }}</bh-badge>
+            class="repository-info__categories__category">{{ category.name }}</bh-badge>
         </router-link>
       </div>
     </div>

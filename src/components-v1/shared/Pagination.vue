@@ -7,7 +7,7 @@
       v-bind="addAttrs(item.data)"
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
-    <loading v-if="list.loading && !listStatusErrorCode" />
+    <loading v-if="list.loading" />
     <p
       class="text-center"
       else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
@@ -53,18 +53,20 @@ export default {
   },
   watch: {
     async list() {
-      this.next();
+      await this.next();
     },
   },
   async mounted() {
-    this.next();
+    await this.next();
   },
   methods: {
     async next() {
       try {
         await this.list.next();
       } catch (e) {
-        this.listStatusErrorCode = e.request.status;
+        this.listStatusErrorCode = e.request
+          ? e.request.status
+          : '';
       }
     },
     onItemDeleted(id) {
