@@ -64,7 +64,6 @@ export default {
   methods: {
     changeTab(newIndex) {
       if (this.activeTab === newIndex) return;
-
       this.tabItems[this.activeTab].deactivate(this.activeTab, newIndex);
       this.tabItems[newIndex].activate(this.activeTab, newIndex);
       this.activeTab = newIndex;
@@ -89,33 +88,32 @@ export default {
       border-bottom: 1px solid $color-lighter-grey;
 
       ul {
-       margin: 0px;
-       padding: 0px;
-       li {
-        padding: .5rem 1rem;
-        margin: 0px 0px -1px 0px;
-        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
 
+        li {
+          padding: .5rem 1rem;
+          margin-bottom: -1px;
+          list-style-type: none;
 
-        &.is-active {
-          border-bottom: 1px solid $color-primary-tone;
-          color:$color-primary-tone;
+          &.is-active {
+            color:$color-primary-tone;
+            border-bottom: 1px solid $color-primary-tone;
+          }
         }
-       }
+
         li:hover {
-        margin: 0px 0px -1px 0px;
-        border-bottom: 1px solid $color-bolder-grey;
-        list-style-type: none;
+          margin-bottom: -1px;
+          list-style-type: none;
+          border-bottom: 1px solid $color-bolder-grey;
+        }
       }
-    }
     }
 
     &__tab-content {
       position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        padding: 1rem;
+      padding: 1rem;
+      overflow: hidden;
     }
   }
 }

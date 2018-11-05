@@ -1,5 +1,5 @@
 <template>
-  <transition name="slide">
+  <transition :name="transitionName">
     <div
       v-show="isActive && visible"
       class="tab-item"
@@ -31,7 +31,7 @@ export default {
   created() {
     if (!this.$parent.$data.isTabs) {
       this.$destroy();
-      throw new Error('You should wrap bTabItem on a bTabs');
+      throw new Error('You should wrap bhTabItem on a bhTabs');
     }
     this.$parent.tabItems.push(this);
   },
@@ -67,14 +67,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.slide-leave-active,
-.slide-enter-active {
-  transition: .3s;
+@import '@scss/variables.scss';
+
+
+.slide-next-enter-active,
+.slide-next-leave-active,
+.slide-prev-enter-active,
+.slide-prev-leave-active {
+  transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
 }
-.slide-enter {
-  transform: translate(100%, 0);
+.slide-prev-leave-to, .slide-next-enter {
+  position: absolute;
+  width: 100%;
+  transform: translate3d(-100%, 0, 0);
 }
-.slide-leave-to {
-  transform: translate(-100%, 0);
+.slide-prev-enter, .slide-next-leave-to {
+  position: absolute;
+  width: 100%;
+  transform: translate3d(100%, 0, 0);
 }
 </style>
