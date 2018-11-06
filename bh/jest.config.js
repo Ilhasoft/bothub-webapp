@@ -11,4 +11,5 @@ module.exports = {
   moduleNameMapper: {
     '.*\\.svg$': '<rootDir>/__mocks__/fileMock.js',
   },
+  snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
 };

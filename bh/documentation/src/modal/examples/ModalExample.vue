@@ -1,6 +1,6 @@
 <template>
   <div class="bh-grid">
-    <div class="bh-grid__item item">
+    <div class="bh-grid__item">
       <div class="bh-grid__item">
         <bh-button
           secondary

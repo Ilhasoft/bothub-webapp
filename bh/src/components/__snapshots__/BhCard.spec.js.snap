@@ -1,17 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhCard.vue renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-card bh-card--shaded">
+  <div class="bh-card__main">
+    <div>default</div>
+  </div>
+  <div>append</div>
+</div>
 `;
 
 exports[`BhCard.vue set shadow hard renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-card bh-card--shaded-hard">
+  <div class="bh-card__main">
+    <div>default</div>
+  </div>
+  <div>append</div>
+</div>
 `;

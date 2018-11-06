@@ -2,11 +2,7 @@
 
 exports[`LanguageAppendSelectInput.vue renders correctly 1`] = `
 <bhdropdown-stub class="example-txt-w-highlighted-entities__input__language"><span class="clickable"><bhicon-stub value="earth"></bhicon-stub> <bhicon-stub value="menu-down"></bhicon-stub></span>
-  <bhdropdownitem-stub>
-    <bhlanguageflag-stub language="en" size="small"></bhlanguageflag-stub> <span>English</span>
-  </bhdropdownitem-stub>
-  <bhdropdownitem-stub>
-    <bhlanguageflag-stub language="pt" size="small"></bhlanguageflag-stub> <span>Portuguese</span>
-  </bhdropdownitem-stub>
+  <bhdropdownitem-stub><span>English</span></bhdropdownitem-stub>
+  <bhdropdownitem-stub><span>Portuguese</span></bhdropdownitem-stub>
 </bhdropdown-stub>
 `;

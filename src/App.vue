@@ -29,7 +29,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,700|Roboto:300,400,700,900');
 @import '~@/assets/scss/utilities.scss';
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
