@@ -94,7 +94,15 @@ export const formatters = {
   removeMultipleWhiteSpaces,
 };
 
-export default {
-  icons,
-  formatters,
+export const VERBOSE_LANGUAGES = {
+  en: 'English',
+  de: 'German',
+  es: 'Spanish',
+  pt: 'Portuguese',
+  fr: 'French',
+  it: 'Italian',
+  nl: 'Dutch',
+  pt_br: 'Brazilian Portuguese',
+  id: 'Indonesian',
+  mn: 'Mongolian',
 };
