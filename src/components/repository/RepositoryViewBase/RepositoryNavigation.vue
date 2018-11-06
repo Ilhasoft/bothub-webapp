@@ -34,11 +34,11 @@ export default {
   data() {
     return {
       links: [
-        ['repository-home', 'Status'],
-        ['repository-trainings', 'Trainings'],
+        ['repository-summary', 'Summary'],
+        ['repository-training', 'Training'],
         ['repository-translate', 'Translate'],
-        ['repository-translations', 'Translated Sentences'],
-        ['repository-analyze-text', 'Analyze Text'],
+        ['repository-translations-status', 'Translation status'],
+        ['repository-integration', 'Integration'],
         ['repository-settings', 'Settings'],
       ],
     };

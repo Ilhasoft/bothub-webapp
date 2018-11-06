@@ -1,3 +1,5 @@
+import VueHighlightJS from 'vue-highlightjs';
+
 import BhText from './components/BhText';
 import BhField from './components/BhField';
 import BhIcon from './components/BhIcon';
@@ -16,6 +18,8 @@ import BhAvatar from './components/BhAvatar';
 import BhCard from './components/BhCard';
 import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
+import BhSelect from './components/BhSelect';
+import BhHighlightedPre from './components/BhHighlightedPre';
 
 import utils from './utils';
 
@@ -39,10 +43,14 @@ const components = {
   BhCard,
   BhNavigation,
   BhModal,
+  BhSelect,
+  BhHighlightedPre,
 };
 
 export default {
   install: (Vue) => {
+    Vue.use(VueHighlightJS);
+
     const $bhModal = new Vue({
       data() {
         return {
