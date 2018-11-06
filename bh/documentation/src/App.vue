@@ -179,7 +179,16 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <SelectComponent />
+              <Select-Component />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <highlighted-pre />
             </div>
           </div>
         </bh-card>
@@ -209,7 +218,11 @@ import LanguageFlag from './languageFlag/LanguageFlag';
 import Tooltip from './tooltip/Tooltip';
 import Table from './table/Table';
 import Colors from './colors/Colors';
+<<<<<<< HEAD
+import HighlightedPre from './highlighted-pre/HighlightedPre';
+=======
 import SelectComponent from './select/Select';
+>>>>>>> 05343b34bfbca69ced12692ec0e702dab13a0017
 
 export default {
   name: 'App',
@@ -234,7 +247,11 @@ export default {
     Tooltip,
     Table,
     Colors,
+<<<<<<< HEAD
+    HighlightedPre,
+=======
     SelectComponent,
+>>>>>>> 05343b34bfbca69ced12692ec0e702dab13a0017
   },
 };
 </script>
