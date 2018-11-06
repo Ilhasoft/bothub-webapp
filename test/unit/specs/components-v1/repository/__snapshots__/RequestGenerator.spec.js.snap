@@ -10,34 +10,37 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
   </bfield-stub>
   <btabs-stub value="0" animated="true">
     <btabitem-stub label="cURL" visible="true">
-      <div class="pre">curl -X POST \\
+      <bh-highlighted-pre code-class="curl">curl -X POST \\
         -H 'Authorization: Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' \\
         -F 'language=en' \\
         -F "text=" \\
-        https://nlp.bothub.it/parse/</div>
+        https://nlp.bothub.it/parse/</bh-highlighted-pre>
     </btabitem-stub>
     <btabitem-stub label="Python" visible="true">
-      <div class="pre">import requests
+      <bh-highlighted-pre code-class="python">import requests
 
         data = {
         'language': 'en',
         'text': '',
         }
+
         headers = { 'Authorization': 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' }
         r = requests.post('https://nlp.bothub.it/parse/', headers=headers, data=data)
-        print(r.json())</div>
+        print(r.json())</bh-highlighted-pre>
     </btabitem-stub>
     <btabitem-stub label="Javascript" visible="true">
-      <div class="pre">var data = new FormData();
+      <bh-highlighted-pre code-class="javascript">var data = new FormData();
         data.append('language', 'en');
         data.append('text', '');
+
         var request = new XMLHttpRequest();
         request.onload = function () {
         console.log(JSON.parse(request.response));
         };
+
         request.open('POST', 'https://nlp.bothub.it/parse/');
         request.setRequestHeader('Authorization', 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d');
-        request.send(data);</div>
+        request.send(data);</bh-highlighted-pre>
     </btabitem-stub>
   </btabs-stub>
 </div>

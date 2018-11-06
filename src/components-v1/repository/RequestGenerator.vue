@@ -10,34 +10,37 @@
     </b-field>
     <b-tabs v-model="activeTab">
       <b-tab-item label="cURL">
-        <div class="pre">curl -X POST \
+        <bh-highlighted-pre code-class="curl">curl -X POST \
         -H 'Authorization: Bearer {{ authorizationUuid }}' \
         -F 'language={{ language }}' \
         -F "text={{ text_escaped.curl }}" \
-        https://nlp.bothub.it/parse/</div>
+        https://nlp.bothub.it/parse/</bh-highlighted-pre>
       </b-tab-item>
       <b-tab-item label="Python">
-        <div class="pre">import requests
+        <bh-highlighted-pre code-class="python">import requests
 
-        data = {
-        'language': '{{ language }}',
-        'text': '{{ text_escaped.python }}',
-        }
-        headers = { 'Authorization': 'Bearer {{ authorizationUuid }}' }
-        r = requests.post('https://nlp.bothub.it/parse/', headers=headers, data=data)
-        print(r.json())</div>
+data = {
+  'language': '{{ language }}',
+  'text': '{{ text_escaped.python }}',
+}
+
+headers = { 'Authorization': 'Bearer {{ authorizationUuid }}' }
+r = requests.post('https://nlp.bothub.it/parse/', headers=headers, data=data)
+print(r.json())</bh-highlighted-pre>
       </b-tab-item>
       <b-tab-item label="Javascript">
-        <div class="pre">var data = new FormData();
-        data.append('language', '{{ language }}');
-        data.append('text', '{{ text_escaped.javascript }}');
-        var request = new XMLHttpRequest();
-        request.onload = function () {
-        console.log(JSON.parse(request.response));
-        };
-        request.open('POST', 'https://nlp.bothub.it/parse/');
-        request.setRequestHeader('Authorization', 'Bearer {{ authorizationUuid }}');
-        request.send(data);</div>
+        <bh-highlighted-pre code-class="javascript">var data = new FormData();
+data.append('language', '{{ language }}');
+data.append('text', '{{ text_escaped.javascript }}');
+
+var request = new XMLHttpRequest();
+request.onload = function () {
+  console.log(JSON.parse(request.response));
+};
+
+request.open('POST', 'https://nlp.bothub.it/parse/');
+request.setRequestHeader('Authorization', 'Bearer {{ authorizationUuid }}');
+request.send(data);</bh-highlighted-pre>
       </b-tab-item>
     </b-tabs>
   </div>
