@@ -2,15 +2,14 @@
   <div>
     <bh-tabs v-model="activeTab">
       <bh-tab-item label="Pictures">
-        Lorem ipsum dolor sit amet.
+        <bh-button
+          primary
+          tooltip-hover="I'm Tooltip">Button Tooltip</bh-button>
       </bh-tab-item>
 
       <bh-tab-item label="Music">
-        <ul>
-          <li>Maybe its time</li>
-          <li>Billie jean</li>
-          <li>Black</li>
-        </ul>
+        <p>John mayer</p>
+        <p>Led zeppelin</p>
       </bh-tab-item>
 
       <bh-tab-item

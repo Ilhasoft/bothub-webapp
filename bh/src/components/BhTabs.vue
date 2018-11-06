@@ -15,7 +15,10 @@
         </li>
       </ul>
     </nav>
-    <section class="bh-tabs__tab-content">
+    <section
+      :class="{ 'bh-tabs__tab-content': tabContent,
+                'bh-tabs__tab-content_hidden': !tabContent }"
+    >
       <slot />
     </section>
   </div>
@@ -43,13 +46,13 @@ export default {
       activeTab: this.value || 0,
       tabItems: [],
       isTabs: true,
+      tabContent: true,
     };
   },
   watch: {
     value(value) {
       this.changeTab(value);
     },
-
     tabItems() {
       if (this.tabItems.length) {
         this.tabItems[this.activeTab].isActive = true;
@@ -113,7 +116,7 @@ export default {
     &__tab-content {
       position: relative;
       padding: 1rem;
-      overflow: hidden;
+      overflow: visible;
     }
   }
 }
