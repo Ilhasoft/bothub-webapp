@@ -77,7 +77,7 @@ export default {
     ]),
     repositoryDetailsRouterParams() {
       return {
-        name: 'repository-home',
+        name: 'repository-summary',
         params: {
           ownerNickname: this.repository.owner__nickname,
           slug: this.repository.slug,

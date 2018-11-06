@@ -2,15 +2,19 @@
   <div
     v-show="open"
     :tabindex="_uid"
-    :class="{
-      'bh-tooltip': true,
-      'bh-tooltip--danger': danger,
-      [`bh-tooltip--${direction}`]: !!direction,
-    }"
+    class="bh-tooltip__wrapper"
     @click="close()"
     @blur="close()"
   >
-    <slot />
+    <div
+      :class="{
+        'bh-tooltip': true,
+        'bh-tooltip--danger': danger,
+        [`bh-tooltip--${direction}`]: !!direction,
+      }"
+    >
+      <slot />
+    </div>
   </div>
 </template>
 
@@ -78,7 +82,6 @@ export default {
     color: white;
     background-color: $background-color;
     border-radius: 4px;
-    outline: none;
     box-shadow: 0 0 16px -2px rgba(0, 0, 0, 1);
 
     &--down {
@@ -123,6 +126,10 @@ export default {
           @include up($color: $color-danger);
         }
       }
+    }
+
+    &__wrapper {
+      outline: none;
     }
   }
 }

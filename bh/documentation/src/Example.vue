@@ -31,10 +31,11 @@
           @click="toggleCodeOpen()" />
         <span v-if="codeOpen">Code</span>
       </div>
-      <pre
-        v-highlightjs="code"
+      <bh-highlighted-pre
         v-show="codeOpen"
-        class="example__code__content"><code :class="codeClass" /></pre>
+        :code="code"
+        :code-class="codeClass"
+        class="example__code__content" />
     </div>
   </div>
 </template>

@@ -24,5 +24,11 @@ export default {
       description: 'Apply formater for input value',
       default: '[]',
     },
+    {
+      name: 'debounce',
+      type: 'Number',
+      description: 'Add debounce time to emit input event.',
+      default: '0',
+    },
   ],
 };
