@@ -184,6 +184,15 @@
           </div>
         </bh-card>
       </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <highlighted-pre />
+            </div>
+          </div>
+        </bh-card>
+      </section>
     </div>
   </div>
 </template>
@@ -210,6 +219,8 @@ import Tooltip from './tooltip/Tooltip';
 import Table from './table/Table';
 import Colors from './colors/Colors';
 import SelectInput from './select/Select';
+import HighlightedPre from './highlighted-pre/HighlightedPre';
+
 
 export default {
   name: 'App',
@@ -235,6 +246,7 @@ export default {
     Table,
     Colors,
     SelectInput,
+    HighlightedPre,
   },
 };
 </script>

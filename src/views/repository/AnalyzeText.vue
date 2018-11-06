@@ -8,26 +8,30 @@
         v-if="authenticated"
         class="repository-analyze-text" >
         <div class="bh-grid">
-          <div class="bh-grid__item">
+          <div class="bh-grid__item bh-grid__item--1-2">
             <div class="repository-analyze-text__item">
               <p>Make a HTTP request to NLP service, follow the example bellow.</p>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>URL:</strong></p>
-              <div class="pre">https://nlp.bothub.it/parse/</div>
+              <bh-highlighted-pre
+                code="https://nlp.bothub.it/parse/"
+                code-class="plaintext" />
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>Header:</strong></p>
-              <div class="pre">Authorization: Bearer {{ repository.authorization.uuid }} </div>
+              <bh-highlighted-pre
+                code-class="plaintext">Authorization: Bearer {{
+                  repository.authorization.uuid }}</bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>POST with form-data:</strong></p>
-              <pre class="pre">language: [language code]
-text: [text to analyze]</pre>
+              <bh-highlighted-pre code-class="plaintext">language: [language code]
+text: [text to analyze]"</bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>Response:</strong></p>
-              <pre class="pre">{
+              <bh-highlighted-pre code-class="json">{
   "intent": {
     "name": "love",
     "confidence": 0.6943462393863934
@@ -59,11 +63,10 @@ text: [text to analyze]</pre>
   "text": "i love my puppy",
   "update_id": 47,
   "language": "en"
-}
-              </pre>
+}</bh-highlighted-pre>
             </div>
           </div>
-          <div class="bh-grid__item">
+          <div class="bh-grid__item bh-grid__item--1-2">
             <div class="repository-analyze-text__item">
               <div><strong>Code Generator:</strong></div>
               <div>Generate code to your respective programming language.</div>
@@ -79,11 +82,13 @@ text: [text to analyze]</pre>
       </div>
       <div
         v-else
-        class="bh-notification">
-        <div class="bh-notification bh-notification--info">
-          Sign in to your account to contribute to this repository.
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--info">
+            Sign in to your account to contribute to this repository.
+          </div>
+          <login-form hide-forgot-password />
         </div>
-        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>

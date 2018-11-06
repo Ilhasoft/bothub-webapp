@@ -78,6 +78,10 @@ small {
   color: $color-grey;
 }
 
+pre {
+  margin: 0;
+}
+
 @each $color in $colors {
   $color-name: nth($color, 1);
   $color-value: nth($color, 2);
