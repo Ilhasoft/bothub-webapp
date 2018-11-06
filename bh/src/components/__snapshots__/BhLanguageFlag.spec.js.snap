@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhLanguageFlag.vue renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<bhtooltiphover-stub direction="down">
+  <div>English</div>
+  <bhicon-stub value="flag-us"></bhicon-stub>
+</bhtooltiphover-stub>
 `;

@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
 
+import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
 import applyFilters from '@/utils/filters';
@@ -8,6 +9,7 @@ import applyFilters from '@/utils/filters';
 import store from '@/store';
 
 const localVue = createLocalVue();
+localVue.use(BH);
 applyFilters(localVue);
 
 describe('TranslationsStatus.vue', () => {

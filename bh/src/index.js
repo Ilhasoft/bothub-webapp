@@ -20,6 +20,7 @@ import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
 import BhSelect from './components/BhSelect';
 import BhHighlightedPre from './components/BhHighlightedPre';
+import BhTooltipHover from './components/BhTooltipHover';
 
 import utils from './utils';
 
@@ -45,6 +46,7 @@ const components = {
   BhModal,
   BhSelect,
   BhHighlightedPre,
+  BhTooltipHover,
 };
 
 export default {
@@ -96,6 +98,8 @@ export default {
       const component = components[componentName];
       Vue.component(component.name, component);
     });
+
+    Vue.filter('languageVerbose', lang => utils.VERBOSE_LANGUAGES[lang]);
   },
   components,
   utils,

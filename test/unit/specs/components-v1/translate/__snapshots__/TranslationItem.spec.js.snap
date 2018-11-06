@@ -13,8 +13,8 @@ exports[`TranslationItem.vue renders correctly 1`] = `
   <!---->
   <div class="translation-infos level is-mobile">
     <div class="level-left">
-      <div class="level-item"><strong>Translated from&nbsp;</strong> <span>English&nbsp;</span>
-        <flag-stub language="en"></flag-stub> <strong>&nbsp;</strong> <strong>to&nbsp;</strong> <span>Portuguese&nbsp;</span>
+      <div class="level-item"><strong>Translated from&nbsp;</strong> <span>en&nbsp;</span>
+        <flag-stub language="en"></flag-stub> <strong>&nbsp;</strong> <strong>to&nbsp;</strong> <span>pt&nbsp;</span>
         <flag-stub language="pt"></flag-stub>
       </div>
       <div class="level-item has-text-grey-light">

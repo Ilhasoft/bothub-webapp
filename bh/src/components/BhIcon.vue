@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { icons } from '../utils';
+import icons from '../icons';
 
 
 export default {
