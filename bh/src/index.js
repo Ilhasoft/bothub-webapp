@@ -22,7 +22,7 @@ import BhSelect from './components/BhSelect';
 import BhHighlightedPre from './components/BhHighlightedPre';
 import BhTooltipHover from './components/BhTooltipHover';
 
-import { VERBOSE_LANGUAGES } from './utils';
+import utils from './utils';
 
 
 const components = {
@@ -99,7 +99,8 @@ export default {
       Vue.component(component.name, component);
     });
 
-    Vue.filter('languageVerbose', lang => VERBOSE_LANGUAGES[lang]);
+    Vue.filter('languageVerbose', lang => utils.VERBOSE_LANGUAGES[lang]);
   },
   components,
+  utils,
 };

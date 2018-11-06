@@ -76,7 +76,7 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions } from 'vuex';
-import { formatters as bhFormatters } from 'bh/src/utils';
+import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -123,9 +123,9 @@ export default {
     },
     textFormatters() {
       const formattersList = [
-        bhFormatters.trimStart(),
-        bhFormatters.removeBreakLines(),
-        bhFormatters.removeMultipleWhiteSpaces(),
+        BH.utils.formatters.trimStart(),
+        BH.utils.formatters.removeBreakLines(),
+        BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
       return formattersList;

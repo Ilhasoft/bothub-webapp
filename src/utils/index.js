@@ -1,4 +1,4 @@
-import { VERBOSE_LANGUAGES } from 'bh/src/utils';
+import BH from 'bh';
 
 
 export const getEntitiesList = (entities, extra = []) => entities
@@ -17,7 +17,7 @@ export const LEVEL_CONTRIBUTOR = 2;
 export const LEVEL_ADMIN = 3;
 
 export const languageListToDict = list => (list.reduce((current, lang) => {
-  Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
+  Object.assign(current, { [lang]: BH.utils.VERBOSE_LANGUAGES[lang] || lang });
   return current;
 }, {}));
 
