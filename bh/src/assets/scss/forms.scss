@@ -186,3 +186,17 @@
     }
   }
 }
+
+@mixin select() {
+  @include form-component();
+   width: 100%;
+  background-color: white;
+  border: 1px solid $color-lighter-grey;
+  border-radius: $form-components-border-radius;
+   &__disabled {
+    cursor: no-drop;
+  }
+   &:focus {
+    outline: none;
+  }
+}

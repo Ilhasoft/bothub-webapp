@@ -14,6 +14,12 @@
         :code="slotTextExampleCode" />
     </div>
     <div class="bh-grid__item">
+      <h3>Debounce</h3>
+      <example
+        :component="DebounceExample"
+        :code="debounceExampleCode" />
+    </div>
+    <div class="bh-grid__item">
       <api :data="api" />
     </div>
   </div>
@@ -26,6 +32,8 @@ import SimpleTextExample from './examples/SimpleTextExample';
 import simpleTextExampleCode from '!!raw-loader!./examples/SimpleTextExample';
 import SlotTextExample from './examples/SlotTextExample';
 import slotTextExampleCode from '!!raw-loader!./examples/SlotTextExample';
+import DebounceExample from './examples/Debounce';
+import debounceExampleCode from '!!raw-loader!./examples/Debounce';
 import api from './api';
 
 
@@ -41,6 +49,8 @@ export default {
       simpleTextExampleCode,
       SlotTextExample,
       slotTextExampleCode,
+      DebounceExample,
+      debounceExampleCode,
       api,
     };
   },

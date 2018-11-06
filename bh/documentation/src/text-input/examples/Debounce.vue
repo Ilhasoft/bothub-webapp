@@ -1,19 +1,18 @@
 <template>
-  <div class="bh-grid--columns">
-    <div class="bh-grid__item">
+  <div>
+    <div>
       <bh-text
         v-model="value"
+        :debounce="750"
         prepend-text="Type something" />
     </div>
-    <div class="bh-grid__item item">
-      <p>{{ value || 'Type Something..' }}</p>
-    </div>
+    <p>{{ value || 'Type Something..' }}</p>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SimpleTextExample',
+  name: 'DebounceExample',
   data() {
     return {
       value: '',

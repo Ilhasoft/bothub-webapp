@@ -43,12 +43,12 @@ export default new Router({
     },
     {
       path: '/:ownerNickname/:slug/',
-      name: 'repository-home',
+      name: 'repository-summary',
       component: RepositoryHome,
     },
     {
-      path: '/:ownerNickname/:slug/trainings/',
-      name: 'repository-trainings',
+      path: '/:ownerNickname/:slug/training/',
+      name: 'repository-training',
       component: RepositoryTrainings,
     },
     {
@@ -58,12 +58,12 @@ export default new Router({
     },
     {
       path: '/:ownerNickname/:slug/translations/',
-      name: 'repository-translations',
+      name: 'repository-translations-status',
       component: RepositoryTranslations,
     },
     {
-      path: '/:ownerNickname/:slug/analyzetext/',
-      name: 'repository-analyze-text',
+      path: '/:ownerNickname/:slug/Integration/',
+      name: 'repository-integration',
       component: RepositoryAnalyzeText,
     },
     {
