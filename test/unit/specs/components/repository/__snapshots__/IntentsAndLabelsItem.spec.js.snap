@@ -2,13 +2,14 @@
 
 exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
 <bhcard-stub>
-  <div class="i-a-l-item">
+  <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info">
           <!---->
-          <!----> <span><a>Show sentences</a></span></div>
+          <!---->
+        </div>
       </div>
     </div>
   </div>
@@ -18,12 +19,12 @@ exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
 
 exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When labelEntities array props have a array. Renders correctly 1`] = `
 <bhcard-stub>
-  <div class="i-a-l-item">
+  <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info">
-          <!----> <span>3 entities</span> <span><a>Show sentences</a></span></div>
+          <!----> <span>3 entities</span></div>
       </div>
     </div>
   </div>

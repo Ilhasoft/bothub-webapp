@@ -82,11 +82,13 @@ text: [text to analyze]"</bh-highlighted-pre>
       </div>
       <div
         v-else
-        class="bh-notification">
-        <div class="bh-notification bh-notification--info">
-          Sign in to your account to contribute to this repository.
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--info">
+            Sign in to your account to contribute to this repository.
+          </div>
+          <login-form hide-forgot-password />
         </div>
-        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
