@@ -43,11 +43,17 @@
         </span>
       </div>
       <div class="repository-info__categories">
-        <bh-badge
-          v-for="category in repository.categories_list"
+        <router-link
+          v-for="category in repositoryCategoryRouterParams"
           :key="category.id"
-          color="lighter-grey"
-          class="repository-info__categories__category">{{ category.name || category }}</bh-badge>
+          :to="{
+            path: '/',
+            query: { category: category.id },
+        }">
+          <bh-badge
+            color="lighter-grey"
+            class="repository-info__categories__category">{{ category.name }}</bh-badge>
+        </router-link>
       </div>
     </div>
   </div>
@@ -77,6 +83,15 @@ export default {
           slug: this.repository.slug,
         },
       };
+    },
+    repositoryCategoryRouterParams() {
+      if (typeof this.repository.categories[0] === 'object') {
+        return this.repository.categories;
+      }
+      if (typeof this.repository.categories_list[0] === 'object') {
+        return this.repository.categories_list;
+      }
+      return [];
     },
   },
 };
