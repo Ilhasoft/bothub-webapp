@@ -1,7 +1,8 @@
 <template>
   <transition
+    :name="transitionName"
     @after-enter="afterEnter"
-    :name="transitionName">
+  >
     <div
       v-show="isActive && visible"
       class="tab-item"
