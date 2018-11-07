@@ -36,10 +36,6 @@ export default {
       type: [String, Number],
       default: null,
     },
-    type: {
-      type: String,
-      default: null,
-    },
     animated: {
       type: Boolean,
       default: true,

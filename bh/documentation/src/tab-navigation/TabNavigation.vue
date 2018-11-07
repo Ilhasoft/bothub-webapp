@@ -2,6 +2,7 @@
   <div class="bh-grid bh-grid--column">
     <div class="bh-grid__item">
       <h2>Tab Navigation</h2>
+      <h3>Tab Navigation Example</h3>
       <example
         :component="TabNavigationExample"
         :code="tabNavigationExampleCode" />
