@@ -1,5 +1,7 @@
 <template>
-  <transition :name="transitionName">
+  <transition
+    @after-enter="afterEnter"
+    :name="transitionName">
     <div
       v-show="isActive && visible"
       class="tab-item"
@@ -42,6 +44,9 @@ export default {
     }
   },
   methods: {
+    afterEnter() {
+      this.$parent.tabContent = true;
+    },
     activate(oldIndex, index) {
       if (!this.$parent.animated) {
         this.transitionName = null;

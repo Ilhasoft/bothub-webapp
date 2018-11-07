@@ -4,7 +4,7 @@
       <bh-tab-item label="Pictures">
         <bh-button
           primary
-          tooltip-hover="I'm Tooltip">Button Tooltip</bh-button>
+          tooltip-hover="I'm Tooltip">Button Tooltip visible</bh-button>
       </bh-tab-item>
 
       <bh-tab-item label="Music">

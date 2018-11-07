@@ -6,9 +6,11 @@
           v-for="(tabItem, index) in tabItems"
           v-show="tabItem.visible"
           :key="index"
-          :class="{ 'is-active': activeTab === index
-                    ,'bh-grid__item bh-grid__item--nested': true
-                    ,'clickable': true }"
+          :class="{
+            'is-active': activeTab === index,
+            'bh-grid__item bh-grid__item--nested': true,
+            'clickable': true
+          }"
           @click="tabClick(index)"
         >
           <span>{{ tabItem.label }}</span>
@@ -16,8 +18,10 @@
       </ul>
     </nav>
     <section
-      :class="{ 'bh-tabs__tab-content': tabContent,
-                'bh-tabs__tab-content_hidden': !tabContent }"
+      :class="{
+        'bh-tabs__tab-content': tabContent,
+        'bh-tabs__tab-content--hidden': !tabContent
+      }"
     >
       <slot />
     </section>
@@ -73,6 +77,7 @@ export default {
       this.$emit('change', newIndex);
     },
     tabClick(value) {
+      this.tabContent = false;
       this.$emit('input', value);
       this.changeTab(value);
     },
@@ -117,6 +122,12 @@ export default {
       position: relative;
       padding: 1rem;
       overflow: visible;
+    }
+
+    &__tab-content--hidden {
+      position: relative;
+      padding: 1rem;
+      overflow: hidden;
     }
   }
 }
