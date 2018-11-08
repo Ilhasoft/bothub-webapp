@@ -16,8 +16,8 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import TabNavigationExample from './examples/TabNavigationExample';
-import tabNavigationExampleCode from '!!raw-loader!./examples/TabNavigationExample';
+import TabNavigationExample from './examples/TabNavigation';
+import tabNavigationExampleCode from '!!raw-loader!./examples/TabNavigation';
 import api from './api';
 
 

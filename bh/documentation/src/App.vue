@@ -179,7 +179,7 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <TabNavigation />
+              <tab-navigation />
             </div>
           </div>
         </bh-card>

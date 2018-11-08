@@ -10,8 +10,8 @@
 
       <bh-tab-item label="Music">
         <bh-button
-        primary
-        tooltip-hover="listen">listen music</bh-button>
+          primary
+          tooltip-hover="listen">listen music</bh-button>
         <p>Kaleo</p>
         <p>Led zeppelin</p>
       </bh-tab-item>

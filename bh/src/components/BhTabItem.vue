@@ -76,20 +76,41 @@ export default {
 @import '@scss/variables.scss';
 
 
-.slide-next-enter-active,
-.slide-next-leave-active,
-.slide-prev-enter-active,
-.slide-prev-leave-active {
-  transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
-}
-.slide-prev-leave-to, .slide-next-enter {
-  position: absolute;
-  width: 100%;
-  transform: translate3d(-100%, 0, 0);
-}
-.slide-prev-enter, .slide-next-leave-to {
-  position: absolute;
-  width: 100%;
-  transform: translate3d(100%, 0, 0);
+.slide {
+  &-next {
+    &-enter-active, &-leave-active {
+      transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    }
+
+    &-enter {
+      position: absolute;
+      width: 100%;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+     &-leave-to {
+      position: absolute;
+      width: 100%;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  &-prev {
+    &-enter-active, &-leave-active {
+      transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
+    }
+
+    &-leave-to {
+      position: absolute;
+      width: 100%;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    &-enter {
+      position: absolute;
+      width: 100%;
+      transform: translate3d(100%, 0, 0);
+    }
+  }
 }
 </style>
