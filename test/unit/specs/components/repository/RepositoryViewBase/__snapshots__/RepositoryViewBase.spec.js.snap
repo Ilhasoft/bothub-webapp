@@ -45,13 +45,46 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <layout-stub title="Bothub">
   <div class="rpstr-vw-bs">
-    <div class="rpstr-vw-bs__loading">
-      <bhloading-stub></bhloading-stub>
-    </div>
+    <bhcard-stub shadow="strong" class="rpstr-vw-bs__card">
+      <div class="rpstr-vw-bs__card__header">
+        <div class="bh-grid bh-grid--row">
+          <div class="bh-grid__item">
+            <repositoryinfo-stub repository="<Repository #1>"></repositoryinfo-stub>
+          </div>
+          <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__card__header__mobile-navigation">
+            <repositorynavigation-stub repository="<Repository #1>"></repositorynavigation-stub>
+          </div>
+        </div>
+        <repositorynavigation-stub repository="<Repository #1>" class="rpstr-vw-bs__card__header__navigation"></repositorynavigation-stub>
+      </div>
+      <div class="rpstr-vw-bs__status-bar">
+        <div class="bh-grid bh-grid--space-between">
+          <div class="bh-grid__item">
+            <div class="bh-grid text-color-grey">
+              <div class="bh-grid__item">
+                <bhicon-stub value="flag-variant"></bhicon-stub> <span>0 languages</span>
+              </div>
+              <div class="bh-grid__item">
+                <bhicon-stub value="botinho"></bhicon-stub> <span>0 examples</span>
+              </div>
+            </div>
+          </div>
+          <div class="bh-grid__item">
+            <div class="bh-grid">
+              <div class="bh-grid__item"><a href="#signin">
+                  <bhicon-stub value="account"></bhicon-stub> <span>Sign in</span>
+                </a></div>
+            </div>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <div class="rpstr-vw-bs__card__content"></div>
+    </bhcard-stub>
   </div>
   <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
   <!---->
-  <requestauthorizationmodal-stub></requestauthorizationmodal-stub>
+  <requestauthorizationmodal-stub repositoryuuid="null"></requestauthorizationmodal-stub>
   <warningmodal-stub languageswarnings="[object Object]"></warningmodal-stub>
 </layout-stub>
 `;

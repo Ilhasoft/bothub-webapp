@@ -1,7 +1,6 @@
 <template>
   <repository-view-base
     :repository="repository"
-    :loading="loading"
     :error-code="errorCode">
     <div
       v-if="repository"

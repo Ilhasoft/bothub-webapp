@@ -1,8 +1,8 @@
 <template>
-  <layout :title="title || repository && repository.name || undefined">
+  <layout :title="title || repository && (repository.name || repository.slug) || undefined">
     <div class="rpstr-vw-bs">
       <bh-card
-        v-if="repository && !loading"
+        v-if="repository"
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
@@ -112,7 +112,7 @@
                 <div class="bh-grid__item">&nbsp;</div>
               </div>
               <analyze-text-drawer
-                v-if="repository && authenticated"
+                v-if="repository && repository.owner__nickname && repository.slug && authenticated"
                 :owner-nickname="repository.owner__nickname"
                 :slug="repository.slug"
                 :default-language="repository.language"
@@ -200,10 +200,6 @@ export default {
       type: Object,
       default: null,
     },
-    loading: {
-      type: Boolean,
-      default: true,
-    },
     errorCode: {
       type: Number,
       default: null,
@@ -228,6 +224,7 @@ export default {
       'authenticated',
     ]),
     requirementsCount() {
+      console.log(Object.keys(this.repository.requirements_to_train));
       return Object
         .keys(this.repository.requirements_to_train)
         .reduce(

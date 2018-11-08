@@ -1,5 +1,6 @@
 <script>
 import { mapGetters } from 'vuex';
+import Repository from '@/models/repository';
 
 
 export default {
@@ -7,7 +8,6 @@ export default {
   data() {
     return {
       repository: null,
-      loading: false,
       errorCode: null,
     };
   },
@@ -36,22 +36,21 @@ export default {
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
 
-      if (!silent) {
+      if (!ownerNickname || !slug) {
         this.repository = null;
-        this.loading = true;
-        this.errorCode = null;
+        return this.repository;
       }
 
-      try {
-        const response = await this.$api.repository.shortcut(ownerNickname, slug);
-        this.repository = response.data;
-      } catch (e) {
-        this.errorCode = e.response.status;
-      } finally {
-        if (!silent) {
-          this.loading = false;
-        }
+      if (!this.repository
+          || this.repository.ownerNickname !== ownerNickname
+          || this.repository.slug !== slug
+          || !silent) {
+        this.repository = new Repository({ owner__nickname: ownerNickname, slug });
       }
+
+      await this.repository.fetch();
+
+      return this.repository;
     },
   },
 };
