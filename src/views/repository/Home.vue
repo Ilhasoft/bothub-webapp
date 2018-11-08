@@ -29,7 +29,7 @@
                     v-for="(intent) in repository.intents_list"
                     :key="intent"
                     size="small"
-                    color="lighter-grey"
+                    color="gray"
                     class="repository-home__attribute__card__badge">
                     <span>{{ intent }}</span>
                   </bh-badge>
@@ -46,7 +46,7 @@
                     v-for="(label) in repository.labels_list"
                     :key="label"
                     size="small"
-                    color="lighter-grey"
+                    color="gray"
                     class="repository-home__attribute__card__badge">
                     <span>{{ label }}</span>
                   </bh-badge>

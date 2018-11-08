@@ -20,13 +20,13 @@ table {
     padding: $cedule-padding;
     background-color: white;
     border: 0;
-    border-color: $color-gray;
+    border-color: $color-gray-light;
     border-style: solid;
     border-bottom: 1px;
   }
 
   th {
     text-align: left;
-    background-color: $color-gray;
+    background-color: $color-gray-light;
   }
 }

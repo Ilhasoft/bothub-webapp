@@ -12,7 +12,7 @@ $color-primary: #2BBFAC;
 $color-primary-lighter: #3DDDC8;
 $color-primary-inverted: $color-fake-white;
 
-$color-primary-darker: #2C2B39;
+$color-secondary-darker: #2C2B39;
 $color-secondary: #312B53;
 $color-secondary-lighter: #4E4871;
 $color-secondary-inverted: $color-fake-white;
@@ -23,21 +23,27 @@ $color-warning: #FFDD57;
 $color-success: #00C853;
 
 $colors: (
-  ('fake-white', $color-fake-white, $color-gray-dark),
-  ('lighter-grey', $color-gray, $color-fake-black),
-  ('grey', $color-gray-dark, $color-fake-white),
-  ('fake-black', $color-fake-black, $color-gray),
-  ('primary', $color-primary, $color-primary-inverted),
-  ('primary-lighter', $color-primary-lighter, $color-primary-inverted),
-  ('secondary', $color-secondary, $color-primary-inverted),
-  ('secondary-lighter', $color-secondary-lighter, $color-primary-inverted),
+  ('fake-white', $color-fake-white, $color-fake-black),
+  ('fake-black', $color-fake-black, $color-fake-white),
+  ('gray-light', $color-gray-light, $color-fake-black),
+  ('gray', $color-gray, $color-fake-black),
+  ('gray-dark', $color-gray-dark, $color-fake-white),
+  ('gray-darker', $color-gray-darker, $color-fake-white),
+  ('primary-darker', $color-primary-darker, $color-fake-white),
+  ('primary', $color-primary, $color-fake-white),
+  ('primary-lighter', $color-primary-lighter, $color-fake-white),
+  ('secondary-darker', $color-secondary-darker, $color-fake-white),
+  ('secondary', $color-secondary, $color-fake-white),
+  ('secondary-lighter', $color-secondary-lighter, $color-fake-white),
   ('danger', $color-danger, $color-fake-white),
   ('info', $color-info, $color-fake-white),
   ('warning', $color-warning, $color-fake-black),
+  ('success', $color-success, $color-fake-white),
 );
 
 $notification-colors: (
   ('danger', $color-danger, $color-fake-white),
   ('info', $color-info, $color-fake-white),
   ('warning', $color-warning, $color-fake-black),
+  ('success', $color-success, $color-fake-white),
 );
