@@ -196,7 +196,7 @@ export default {
       padding: .5rem 0;
       overflow: auto;
       background-color: white;
-      border: solid 1px $color-lighter-grey;
+      border: solid 1px $color-gray;
       border-radius: 4px;
 
       &__item {
@@ -212,7 +212,7 @@ export default {
 
         &:hover {
           color: $color-primary;
-          background-color: $color-lighter-grey;
+          background-color: $color-gray;
         }
       }
     }

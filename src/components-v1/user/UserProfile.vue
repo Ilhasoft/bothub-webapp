@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h4 class="text-color-lighter-grey">
+    <h4 class="text-color-gray">
       <span>{{ profile.name || profile.nickname }}</span>
       <span>({{ profile.nickname }})</span>
     </h4>
-    <p class="text-color-lighter-grey">{{ profile.locale || '-' }}</p>
-    <p class="text-color-lighter-grey">
+    <p class="text-color-gray">{{ profile.locale || '-' }}</p>
+    <p class="text-color-gray">
       <a
         :href="profileURL"
-        class="text-color-lighter-grey"
+        class="text-color-gray"
         target="_blank">{{ profileURL }}</a>
     </p>
   </div>

@@ -3,14 +3,20 @@
     <div class="background-color-primary">
       <span>primary</span>
     </div>
-    <div class="background-color-primary-tone">
-      <span>primary-tone</span>
+    <div class="background-primary-darker">
+      <span>primary-darker</span>
+    </div>
+    <div class="background-color-primary">
+      <span>primary</span>
+    </div>
+    <div class="background-color-primary-lighter">
+      <span>primary-lighter</span>
     </div>
     <div class="background-color-secondary">
       <span>secondary</span>
     </div>
-    <div class="background-color-secondary-tone">
-      <span>secondary-tone</span>
+    <div class="background-color-secondary-lighter">
+      <span>secondary-lighter</span>
     </div>
     <div class="background-color-danger">
       <span>danger</span>
@@ -21,17 +27,17 @@
     <div class="background-color-warning">
       <span>warning</span>
     </div>
-    <div class="background-color-white-fake">
-      <span>white-fake</span>
+    <div class="background-color-fake-white">
+      <span>fake-white</span>
     </div>
-    <div class="background-color-lighter-grey">
+    <div class="background-color-gray">
       <span>lighter-grey</span>
     </div>
-    <div class="background-color-grey">
+    <div class="background-color-gray-dark">
       <span>grey</span>
     </div>
-    <div class="background-color-bolder-grey">
-      <span>bolder-grey</span>
+    <div class="background-color-fake-black">
+      <span>fake-black</span>
     </div>
   </div>
 </template>

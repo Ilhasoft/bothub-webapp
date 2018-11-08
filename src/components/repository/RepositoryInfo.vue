@@ -18,7 +18,7 @@
               class="repository-info__title__bagde__icon" /></router-link>
         </span>
         <router-link :to="repositoryDetailsRouterParams">
-        <span class="text-color-bolder-grey">{{ repository.name }}</span></router-link>
+        <span class="text-color-fake-black">{{ repository.name }}</span></router-link>
       </div>
       <div class="repository-info__info-item">
         <router-link :to="repositoryDetailsRouterParams">{{ repository.absolute_url
@@ -152,7 +152,7 @@ export default {
   }
 
   &__info-item {
-    color: $color-grey;
+    color: $color-gray-dark;
   }
 
   &__flags {

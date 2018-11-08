@@ -2,8 +2,8 @@
 
 exports[`UserProfile.vue renders correctly 1`] = `
 <div>
-  <h4 class="text-color-lighter-grey"><span>Name</span> <span>(nickname)</span></h4>
-  <p class="text-color-lighter-grey">locale</p>
-  <p class="text-color-lighter-grey"><a href="https://bothub.it/nickname/" target="_blank" class="text-color-lighter-grey">https://bothub.it/nickname/</a></p>
+  <h4 class="text-color-gray"><span>Name</span> <span>(nickname)</span></h4>
+  <p class="text-color-gray">locale</p>
+  <p class="text-color-gray"><a href="https://bothub.it/nickname/" target="_blank" class="text-color-gray">https://bothub.it/nickname/</a></p>
 </div>
 `;

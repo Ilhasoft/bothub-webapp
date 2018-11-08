@@ -11,7 +11,9 @@
           <p
             v-if="repository.description"
             class="repository-home__description">{{ repository.description }}</p>
-          <p v-else><i class="text-color-grey">There is no description for this repository</i></p>
+          <p v-else>
+            <i class="text-color-gray-dark">There is no description for this repository</i>
+          </p>
         </div>
         <div
           v-if="hasIntents || hasLabels"
@@ -92,7 +94,7 @@ export default {
 
   &__attribute {
     &__card {
-      background-color: $color-white-fake;
+      background-color: $color-fake-white;
       border-radius: 6px;
       padding: .75rem;
       margin: -.25rem;

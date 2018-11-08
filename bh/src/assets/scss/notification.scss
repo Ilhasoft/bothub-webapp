@@ -5,7 +5,7 @@
   &-notification {
     padding: 1rem 1rem;
     margin: 0.5rem 0;
-    background-color: $color-lighter-grey;
+    background-color: $color-gray;
     border-radius: $radius-small;
 
     @each $color in $notification-colors {
