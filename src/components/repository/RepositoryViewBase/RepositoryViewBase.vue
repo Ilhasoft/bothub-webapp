@@ -224,7 +224,6 @@ export default {
       'authenticated',
     ]),
     requirementsCount() {
-      console.log(Object.keys(this.repository.requirements_to_train));
       return Object
         .keys(this.repository.requirements_to_train)
         .reduce(
