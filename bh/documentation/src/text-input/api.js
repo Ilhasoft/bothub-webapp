@@ -4,7 +4,7 @@ export default {
       name: 'value',
       type: 'String',
       description: 'Set the Text input Value',
-      default: '',
+      default: 'null',
     },
     {
       name: 'size',

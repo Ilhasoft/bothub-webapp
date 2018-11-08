@@ -170,7 +170,34 @@
         <bh-card>
           <div class="bh-grid">
             <div class="bh-grid__item bh-grid__item--nested">
-              <Tooltip />
+              <tooltip />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <select-input />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <highlighted-pre />
+            </div>
+          </div>
+        </bh-card>
+      </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <tooltip-hover />
             </div>
           </div>
         </bh-card>
@@ -209,6 +236,9 @@ import LanguageFlag from './languageFlag/LanguageFlag';
 import Tooltip from './tooltip/Tooltip';
 import Table from './table/Table';
 import Colors from './colors/Colors';
+import SelectInput from './select/Select';
+import HighlightedPre from './highlighted-pre/HighlightedPre';
+import TooltipHover from './tooltip-hover/TooltipHover';
 import TabNavigation from './tab-navigation/TabNavigation';
 
 export default {
@@ -234,6 +264,9 @@ export default {
     Tooltip,
     Table,
     Colors,
+    SelectInput,
+    HighlightedPre,
+    TooltipHover,
     TabNavigation,
   },
 };

@@ -5,7 +5,7 @@
         v-model="value"
         prepend-text="Type something" />
     </div>
-    <div class="bh-grid__item item">
+    <div class="bh-grid__item">
       <p>{{ value || 'Type Something..' }}</p>
     </div>
   </div>

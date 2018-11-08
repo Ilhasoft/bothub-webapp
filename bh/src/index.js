@@ -1,3 +1,5 @@
+import VueHighlightJS from 'vue-highlightjs';
+
 import BhText from './components/BhText';
 import BhField from './components/BhField';
 import BhIcon from './components/BhIcon';
@@ -16,6 +18,9 @@ import BhAvatar from './components/BhAvatar';
 import BhCard from './components/BhCard';
 import BhNavigation from './components/BhNavigation';
 import BhModal from './components/BhModal';
+import BhSelect from './components/BhSelect';
+import BhHighlightedPre from './components/BhHighlightedPre';
+import BhTooltipHover from './components/BhTooltipHover';
 import BhTabs from './components/BhTabs';
 import BhTabItem from './components/BhTabItem';
 
@@ -41,12 +46,17 @@ const components = {
   BhCard,
   BhNavigation,
   BhModal,
+  BhSelect,
+  BhHighlightedPre,
+  BhTooltipHover,
   BhTabs,
   BhTabItem,
 };
 
 export default {
   install: (Vue) => {
+    Vue.use(VueHighlightJS);
+
     const $bhModal = new Vue({
       data() {
         return {
@@ -92,6 +102,8 @@ export default {
       const component = components[componentName];
       Vue.component(component.name, component);
     });
+
+    Vue.filter('languageVerbose', lang => utils.VERBOSE_LANGUAGES[lang]);
   },
   components,
   utils,

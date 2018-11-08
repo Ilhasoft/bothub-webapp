@@ -15,9 +15,6 @@
       v-for="(verbose, language) in LANGUAGES"
       :key="language"
       @click="setVal(language)">
-      <bh-language-flag
-        :language="language"
-        size="small" />
       <span>{{ verbose }}</span>
     </bh-dropdown-item>
   </bh-dropdown>

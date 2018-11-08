@@ -1,3 +1,6 @@
+import BH from 'bh';
+
+
 export const getEntitiesList = (entities, extra = []) => entities
   .map(e => (
     e instanceof Object
@@ -13,21 +16,8 @@ export const LEVEL_READER = 1;
 export const LEVEL_CONTRIBUTOR = 2;
 export const LEVEL_ADMIN = 3;
 
-export const VERBOSE_LANGUAGES = {
-  en: 'English',
-  de: 'German',
-  es: 'Spanish',
-  pt: 'Portuguese',
-  fr: 'French',
-  it: 'Italian',
-  nl: 'Dutch',
-  pt_br: 'Brazilian Portuguese',
-  id: 'Indonesian',
-  mn: 'Mongolian',
-};
-
 export const languageListToDict = list => (list.reduce((current, lang) => {
-  Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
+  Object.assign(current, { [lang]: BH.utils.VERBOSE_LANGUAGES[lang] || lang });
   return current;
 }, {}));
 

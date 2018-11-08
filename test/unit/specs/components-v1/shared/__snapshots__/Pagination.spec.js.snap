@@ -3,6 +3,7 @@
 exports[`Pagination.vue renders correctly 1`] = `
 <div>
   <!---->
+  <p else="" class="text-center"></p>
   <div class="next has-text-centered"><button class="button is-primary">More</button></div>
 </div>
 `;

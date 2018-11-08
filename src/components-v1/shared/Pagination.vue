@@ -8,6 +8,9 @@
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <loading v-if="list.loading" />
+    <p
+      class="text-center"
+      else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
     <div
       v-if="list.hasNext"
       class="next has-text-centered">
@@ -43,17 +46,28 @@ export default {
       default: 'More',
     },
   },
+  data() {
+    return {
+      listStatusErrorCode: null,
+    };
+  },
   watch: {
     async list() {
-      await this.list.next();
+      await this.next();
     },
   },
   async mounted() {
-    await this.list.next();
+    await this.next();
   },
   methods: {
     async next() {
-      await this.list.next();
+      try {
+        await this.list.next();
+      } catch (e) {
+        this.listStatusErrorCode = e.request
+          ? e.request.status
+          : '';
+      }
     },
     onItemDeleted(id) {
       this.list.delete(id);

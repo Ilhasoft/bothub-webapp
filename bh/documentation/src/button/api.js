@@ -4,7 +4,7 @@ export default {
       name: 'disabled',
       type: 'Boolean',
       description: 'Disabled Button',
-      required: true,
+      default: 'false',
     },
     {
       name: 'primary',

@@ -29,11 +29,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,700|Roboto:300,400,700,900');
 @import '~@/assets/scss/utilities.scss';
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
 @import '~bh/src/assets/scss/bh.scss';
+@import '@mdi/font/css/materialdesignicons.css';
+@import 'highlight.js/styles/github.css';
 
 
 .container-padding {
@@ -89,17 +90,6 @@ $entities-colors: (
 
 .item-1-2 {
   margin-bottom: .5rem;
-}
-
-.pre {
-  white-space: pre;
-  word-wrap: break-word;
-  padding: 16px;
-  background-color: $white-ter;
-  max-width: 100%;
-  overflow: auto;
-  font-family: monospace;
-  font-size: .75rem;
 }
 
 .mh-200 {

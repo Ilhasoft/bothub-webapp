@@ -17,9 +17,9 @@ export default {
     {
       name: 'direction',
       type: 'String',
-      description: 'Set the Up or Down direction to controll the direction show of tooltip',
+      description: 'Set the "up" or "down" direction to controll the direction show of tooltip',
       required: false,
-      default: 'false',
+      default: 'null',
     },
   ],
 };
