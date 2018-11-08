@@ -1,13 +1,32 @@
 /* eslint-disable class-methods-use-this */
-import { Model } from 'vue-mc';
+import ModelBase from './base';
 import store from '@/store';
 
-class Repository extends Model {
+
+class Repository extends ModelBase {
+  constructor(attributes, ...args) {
+    super(attributes, ...args);
+    const { uuid, owner__nickname: ownerNickname, slug } = attributes;
+
+    if (!uuid && ownerNickname && slug) {
+      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}`];
+      if (related) {
+        this.set('uuid', related);
+      }
+    }
+  }
+
+  options() {
+    return {
+      identifier: 'uuid',
+    };
+  }
+
   defaults() {
     return {
       uuid: null,
       owner: null,
-      ownerNickname: null,
+      owner__nickname: null,
       slug: '',
       name: '',
       description: '',
@@ -40,7 +59,7 @@ class Repository extends Model {
     return {
       uuid: String,
       owner: Number,
-      ownerNickname: String,
+      owner__nickname: String,
       slug: String,
       name: String,
       description: String,
@@ -71,22 +90,19 @@ class Repository extends Model {
 
   routes() {
     return {
-      fetch: '/v2/repository-shortcut/{ownerNickname}/{slug}/',
+      fetch: '/v2/repository-shortcut/{owner__nickname}/{slug}/',
     };
   }
 
-  getRequest(config) {
-    return super.getRequest(
-      Object.assign(
-        {},
-        config,
-        {
-          baseURL: process.env.API_BASE_URL,
-          headers: store.getters.authenticated
-            ? { Authorization: `Token ${store.getters.authToken}` }
-            : {},
-        },
-      ),
+  onFetchSuccess(response) {
+    super.onFetchSuccess(response);
+    store.dispatch(
+      'setRepositoryRelatedUuid',
+      {
+        ownerNickname: this.owner__nickname,
+        slug: this.slug,
+        uuid: this.uuid,
+      },
     );
   }
 }
