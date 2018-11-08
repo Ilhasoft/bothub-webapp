@@ -1,25 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhTab.vue BhTab Transition false renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-tabs">
+  <nav class="bh-tabs__tab">
+    <ul class="bh-grid bh-grid--inline">
+      <li class="is-active bh-grid__item bh-grid__item--nested clickable"><span></span></li>
+    </ul>
+  </nav>
+  <section class="bh-tabs__tab-content--hidden">
+    <div class="tab-item" style=""></div>
+  </section>
+</div>
 `;
 
 exports[`BhTab.vue BhTab Transition true renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-tabs">
+  <nav class="bh-tabs__tab">
+    <ul class="bh-grid bh-grid--inline">
+      <li class="is-active bh-grid__item bh-grid__item--nested clickable"><span></span></li>
+    </ul>
+  </nav>
+  <section class="bh-tabs__tab-content">
+    <div class="tab-item" style=""></div>
+  </section>
+</div>
 `;
 
 exports[`BhTab.vue renders correctly 1`] = `
-VueWrapper {
-  "_emitted": Object {},
-  "_emittedByOrder": Array [],
-  "isFunctionalComponent": undefined,
-}
+<div class="bh-tabs">
+  <nav class="bh-tabs__tab">
+    <ul class="bh-grid bh-grid--inline">
+      <li class="is-active bh-grid__item bh-grid__item--nested clickable"><span></span></li>
+    </ul>
+  </nav>
+  <section class="bh-tabs__tab-content">
+    <div class="tab-item" style=""></div>
+  </section>
+</div>
 `;
