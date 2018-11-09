@@ -25,7 +25,7 @@ export default {
 
     &:hover {
       color: $color-primary;
-      background-color: $color-lighter-grey;
+      background-color: $color-grey;
     }
 
     & > * {

@@ -86,7 +86,7 @@ export default {
       font-size: 1rem;
       font-weight: $font-weight-medium;
       line-height: 1.5rem;
-      color: $color-bolder-grey;
+      color: $color-fake-black;
 
       &__help-text {
         position: relative;

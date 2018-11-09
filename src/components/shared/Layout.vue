@@ -58,7 +58,7 @@
               v-if="!authenticated"
               class="bh-grid__item">
               <bh-button
-                color="white-fake"
+                color="fake-white"
                 transparent
                 max-content
                 @click="openLoginModal()">sign in</bh-button>

@@ -2,24 +2,32 @@
   <div class="bh-grid">
     <div class="bh-grid__item">
       <div class="contrast-colors__test">
-        <div class="text-color-lighter-grey">lighter-grey</div>
-        <div class="background-color-lighter-grey">
-          <div class="text-color-grey">grey</div>
+        <div class="background-color-grey-light">
+          <p class="text-color-grey-darker">grey light</p>
           <div class="background-color-grey">
-            <div class="text-color-bolder-grey">bolder-grey</div>
-            <div class="background-color-bolder-grey" />
+            <p class="text-color-dark">grey</p>
+            <div class="background-color-grey-dark">
+              <p class="text-color-grey">grey dark</p>
+              <div class="background-color-grey-darker">
+                <p class="text-color-grey-light"> grey darker</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="bh-grid__item">
       <div class="contrast-colors__test">
-        <div class="text-color-bolder-grey">bolder-grey</div>
-        <div class="background-color-bolder-grey">
-          <div class="text-color-grey">grey</div>
-          <div class="background-color-grey">
-            <div class="text-color-lighter-grey">lighter-grey</div>
-            <div class="background-color-lighter-grey" />
+        <div class="background-color-grey-darker">
+          <p class="text-color-grey-light"> grey darker</p>
+          <div class="background-color-grey-dark">
+            <p class="text-color-grey">grey dark</p>
+            <div class="background-color-grey">
+              <p class="text-color-dark">grey</p>
+              <div class="background-color-grey-light">
+                <p class="text-color-grey-darker">grey light</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
