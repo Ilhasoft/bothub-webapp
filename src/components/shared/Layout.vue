@@ -4,6 +4,11 @@
       layout: true,
       'layout--without-background': withoutBackground,
   }">
+    <div
+      v-if="loading"
+      class="layout__loading">
+      <div class="layout__loading__progress" />
+    </div>
     <div class="layout__header">
       <div class="bh-grid bh-grid--space-between bh-grid--row">
         <router-link
@@ -110,6 +115,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -157,8 +166,53 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 
+@keyframes layout-loading-progress {
+  1% {
+    width: 40%
+  }
+  2% {
+    width: 70%;
+  }
+  10% {
+    width: 80%;
+  }
+  50% {
+    width: 90%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
 .layout {
+  $loading-height: .3rem;
+
+  &__loading {
+    position: fixed;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: $loading-height;
+    background-color: $primary;
+    background-color: rgba($primary, .25);
+    overflow: hidden;
+
+    &__progress {
+      display: block;
+      height: $loading-height;
+      width: 20%;
+      background-color: $primary;
+      animation-name: layout-loading-progress;
+      animation-duration: 30s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+    }
+  }
+
   &__header {
+    padding-top: $loading-height;
     background-color: $color-primary;
 
     &__logo {

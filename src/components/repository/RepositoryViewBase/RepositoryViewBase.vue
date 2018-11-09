@@ -1,5 +1,7 @@
 <template>
-  <layout :title="currentTitle">
+  <layout
+    :title="currentTitle"
+    :loading="ready && repository && repository.loading">
     <div class="rpstr-vw-bs">
       <div
         v-if="!ready"
