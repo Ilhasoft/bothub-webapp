@@ -1,8 +1,13 @@
 <template>
-  <layout :title="title || repository && (repository.name || repository.slug) || undefined">
+  <layout :title="currentTitle">
     <div class="rpstr-vw-bs">
+      <div
+        v-if="!ready"
+        class="rpstr-vw-bs__loading">
+        <bh-loading />
+      </div>
       <bh-card
-        v-if="repository"
+        v-else-if="repository"
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
@@ -129,11 +134,6 @@
         class="rpstr-vw-bs__error">
         <h1>{{ errorCode|errorVerbose }}</h1>
       </div>
-      <div
-        v-else
-        class="rpstr-vw-bs__loading">
-        <bh-loading />
-      </div>
     </div>
     <train-modal
       v-if="repository"
@@ -196,6 +196,10 @@ export default {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
   },
   props: {
+    ready: {
+      type: Boolean,
+      default: false,
+    },
     repository: {
       type: Object,
       default: null,
@@ -223,6 +227,21 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    currentTitle() {
+      if (this.title) {
+        return this.title;
+      }
+
+      if (this.repository) {
+        if (this.repository.name) {
+          return this.repository.name;
+        }
+
+        return `${this.repository.owner__nickname}/${this.repository.slug}`;
+      }
+
+      return undefined;
+    },
     requirementsCount() {
       return Object
         .keys(this.repository.requirements_to_train)

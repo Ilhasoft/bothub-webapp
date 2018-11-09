@@ -9,6 +9,7 @@ export default {
     return {
       repository: null,
       errorCode: null,
+      ready: false,
     };
   },
   computed: {
@@ -48,9 +49,15 @@ export default {
         this.repository = new Repository({ owner__nickname: ownerNickname, slug });
       }
 
+      this.repository.on('cache', this.onReady);
+      this.repository.on('fetch', this.onReady);
+
       await this.repository.fetch();
 
       return this.repository;
+    },
+    onReady() {
+      this.ready = true;
     },
   },
 };

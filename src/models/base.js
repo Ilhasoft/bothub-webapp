@@ -20,9 +20,12 @@ class ModelBase extends Model {
 
   onFetch() {
     const cache = store.getters.cachedFetch[`${this.$class}/${this.identifier()}`];
+
     if (cache) {
       this.assign(cache);
+      this.emit('cache', { cache });
     }
+
     return super.onFetch();
   }
 
