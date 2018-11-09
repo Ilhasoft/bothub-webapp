@@ -4,15 +4,15 @@ $shadow-color: rgba(0, 0, 0, 0.3);
   &--shaded {
 
     &-light {
-      box-shadow: 0rem 0rem 1.5rem -0.3rem $shadow-color;
+      box-shadow: 0rem 0rem .5rem .2rem rgba(0, 0, 0, 0.1);
     }
 
     &-strong {
-      box-shadow: 0rem 0rem 1.5rem -0.4rem $shadow-color;
+      box-shadow: 0rem 0rem .5rem .2rem rgba(0, 0, 0, 0.15);
     }
 
     &-hard {
-      box-shadow: 0rem 0rem 1.5rem -0.5rem $shadow-color;
+      box-shadow: 0rem 0rem .5rem .3rem rgba(0, 0, 0, 0.2);
     }
   }
 }
