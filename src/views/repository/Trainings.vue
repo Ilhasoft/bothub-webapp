@@ -161,7 +161,7 @@ export default {
 
 .trainings-repository {
   &__new-example {
-    background-color: $color-white-fake;
+    background-color: $color-fake-white;
   }
 }
 </style>

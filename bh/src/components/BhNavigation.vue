@@ -118,7 +118,7 @@ export default {
     &__nav {
       margin: 1rem 0;
       > span {
-        color: $color-grey;
+        color: $color-grey-dark;
 
         &::after {
           margin: 0 .5rem;

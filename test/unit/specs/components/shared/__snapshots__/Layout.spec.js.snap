@@ -41,7 +41,7 @@ exports[`Layout.vue renders correctly 1`] = `
           <!---->
           <!---->
           <div class="bh-grid__item">
-            <bhbutton-stub color="white-fake" transparent="true" type="button" maxcontent="true">sign in</bhbutton-stub>
+            <bhbutton-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bhbutton-stub>
           </div>
           <div class="bh-grid__item">
             <bhbutton-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">sign up</bhbutton-stub>

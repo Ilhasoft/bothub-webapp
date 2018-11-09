@@ -27,7 +27,7 @@ body {
   @include typography();
 
   min-height: 100%;
-  background-color: $color-white-fake;
+  background-color: $color-fake-white;
 }
 
 h1,
@@ -75,7 +75,7 @@ strong {
 }
 
 small {
-  color: $color-grey;
+  color: $color-grey-dark;
 }
 
 pre {

@@ -76,13 +76,13 @@ export default {
       position: relative;
       display: inline-flex;
       padding: 0 1.5rem 1.25rem;
-      color: $color-grey;
+      color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
 
       &:hover,
       &.router-link-exact-active {
-        color: $color-bolder-grey;
+        color: $color-fake-black;
 
         &::before {
           $size: 10rem;
