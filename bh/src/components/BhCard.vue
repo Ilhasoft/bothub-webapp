@@ -43,7 +43,7 @@ export default {
     display: flex;
     flex-direction: row;
     background-color: white;
-    border: 1px solid $color-lighter-grey;
+    border: 1px solid $color-grey;
     border-radius: $radius-normal;
 
     &__main {

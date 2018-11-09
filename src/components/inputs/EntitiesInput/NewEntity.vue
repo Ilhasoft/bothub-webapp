@@ -67,7 +67,7 @@
         <div class="column is-narrow">
           <bh-field label>
             <bh-icon-button
-              class="text-color-grey"
+              class="text-color-grey-dark"
               value="close-circle"
               @click="disableAddingMode()" />
           </bh-field>

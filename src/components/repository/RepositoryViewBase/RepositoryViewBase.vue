@@ -1,8 +1,15 @@
 <template>
-  <layout :title="title || repository && repository.name || undefined">
+  <layout
+    :title="currentTitle"
+    :loading="ready && repository && repository.loading">
     <div class="rpstr-vw-bs">
+      <div
+        v-if="!ready"
+        class="rpstr-vw-bs__loading">
+        <bh-loading />
+      </div>
       <bh-card
-        v-if="repository && !loading"
+        v-else-if="repository"
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
@@ -26,7 +33,7 @@
         <div class="rpstr-vw-bs__status-bar">
           <div class="bh-grid bh-grid--space-between">
             <div class="bh-grid__item">
-              <div class="bh-grid text-color-grey">
+              <div class="bh-grid text-color-grey-dark">
                 <div class="bh-grid__item">
                   <bh-icon value="flag-variant" />
                   <span>{{ repository.available_languages.length }} languages</span>
@@ -64,7 +71,7 @@
                 <div class="bh-grid__item">
                   <a
                     :class="{
-                      'text-color-grey': !repository.ready_for_train,
+                      'text-color-grey-dark': !repository.ready_for_train,
                     }"
                     href="#train"
                     @click.prevent="openTrainModal()">
@@ -91,7 +98,7 @@
                 && !repository.request_authorization.approved_by"
                 class="bh-grid">
                 <div class="bh-grid__item">
-                  <span class="text-color-grey">Authorization Requested</span>
+                  <span class="text-color-grey-dark">Authorization Requested</span>
                 </div>
               </div>
               <div
@@ -112,7 +119,7 @@
                 <div class="bh-grid__item">&nbsp;</div>
               </div>
               <analyze-text-drawer
-                v-if="repository && authenticated"
+                v-if="repository && repository.owner__nickname && repository.slug && authenticated"
                 :owner-nickname="repository.owner__nickname"
                 :slug="repository.slug"
                 :default-language="repository.language"
@@ -128,11 +135,6 @@
         v-else-if="errorCode"
         class="rpstr-vw-bs__error">
         <h1>{{ errorCode|errorVerbose }}</h1>
-      </div>
-      <div
-        v-else
-        class="rpstr-vw-bs__loading">
-        <bh-loading />
       </div>
     </div>
     <train-modal
@@ -196,13 +198,13 @@ export default {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
   },
   props: {
+    ready: {
+      type: Boolean,
+      default: false,
+    },
     repository: {
       type: Object,
       default: null,
-    },
-    loading: {
-      type: Boolean,
-      default: true,
     },
     errorCode: {
       type: Number,
@@ -227,6 +229,21 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    currentTitle() {
+      if (this.title) {
+        return this.title;
+      }
+
+      if (this.repository) {
+        if (this.repository.name) {
+          return this.repository.name;
+        }
+
+        return `${this.repository.owner__nickname}/${this.repository.slug}`;
+      }
+
+      return undefined;
+    },
     requirementsCount() {
       return Object
         .keys(this.repository.requirements_to_train)
@@ -310,7 +327,7 @@ export default {
   }
 
   &__status-bar {
-    background-color: $color-white-fake;
+    background-color: $color-fake-white;
   }
 
   &__card {

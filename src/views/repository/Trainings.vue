@@ -1,7 +1,7 @@
 <template>
   <repository-view-base
     :repository="repository"
-    :loading="loading"
+    :ready="ready"
     :error-code="errorCode">
     <div
       v-if="repository"
@@ -161,7 +161,7 @@ export default {
 
 .trainings-repository {
   &__new-example {
-    background-color: $color-white-fake;
+    background-color: $color-fake-white;
   }
 }
 </style>

@@ -24,6 +24,7 @@
     "global": "^4.3.2",
     "query-string": "^6.1.0",
     "vue": "^2.5.2",
+    "vue-mc": "^0.4.0",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

@@ -32,9 +32,9 @@ export default {
     position: relative;
     width: $size-normal;
     height: $size-normal;
-    color: $color-bolder-grey;
+    color: $color-fake-black;
     cursor: pointer;
-    background-color: $color-white-fake;
+    background-color: $color-fake-white;
     border-color: transparent;
     border-radius: 50%;
     outline: none;

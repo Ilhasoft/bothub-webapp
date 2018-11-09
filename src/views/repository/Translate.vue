@@ -1,7 +1,7 @@
 <template>
   <repository-view-base
     :repository="repository"
-    :loading="loading"
+    :ready="ready"
     :error-code="errorCode">
     <div v-if="repository">
       <div v-if="authenticated">
@@ -112,7 +112,7 @@ export default {
 
 
 .repository-translate {
-  background-color: $color-white-fake;
+  background-color: $color-fake-white;
 
   &__translate-arrow-icon {
     align-self: center;

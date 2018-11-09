@@ -4,7 +4,7 @@
       <bh-text v-model="search">
         <div slot="append">
           <bh-icon-button
-            class="text-color-grey"
+            class="text-color-grey-dark"
             value="magnify" />
         </div>
       </bh-text>

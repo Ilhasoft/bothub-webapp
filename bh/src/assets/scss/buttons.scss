@@ -19,11 +19,11 @@
     display: inline-flex;
     align-items: center;
     font-weight: $font-weight-bolder;
-    color: $color-grey;
+    color: $color-grey-dark;
     cursor: pointer;
     background: none;
-    background-color: $color-white-fake;
-    border: $form-components-border-size solid $color-lighter-grey;
+    background-color: $color-fake-white;
+    border: $form-components-border-size solid $color-grey;
     border-radius: $form-components-border-radius;
     outline: none;
     box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
@@ -45,10 +45,10 @@
     }
 
     &:disabled {
-      color: $color-lighter-grey;
+      color: $color-grey;
       cursor: not-allowed;
-      background-color: $color-grey;
-      border-color: $color-grey;
+      background-color: $color-grey-dark;
+      border-color: $color-grey-dark;
     }
 
     @each $size in $sizes {

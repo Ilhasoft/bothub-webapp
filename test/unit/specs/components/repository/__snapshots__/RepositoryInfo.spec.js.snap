@@ -11,7 +11,7 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
   </div>
   <div class="bh-grid__item">
     <div class="repository-info__title"><span class="repository-info__title__bagde"><router-link-stub to="[object Object]" tag="a" event="click"><bhiconbutton-stub type="button" value="botinho" class="repository-info__title__bagde__icon"></bhiconbutton-stub></router-link-stub></span>
-      <router-link-stub to="[object Object]" tag="a" event="click"><span class="text-color-bolder-grey"></span></router-link-stub>
+      <router-link-stub to="[object Object]" tag="a" event="click"><span class="text-color-fake-black"></span></router-link-stub>
     </div>
     <div class="repository-info__info-item">
       <router-link-stub to="[object Object]" tag="a" event="click">/undefined/undefined/</router-link-stub>
@@ -20,13 +20,13 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
     <div class="repository-info__flags"></div>
     <div class="repository-info__categories">
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bhbadge-stub color="lighter-grey" class="repository-info__categories__category">Business</bhbadge-stub>
+        <bhbadge-stub color="grey-light" class="repository-info__categories__category">Business</bhbadge-stub>
       </router-link-stub>
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bhbadge-stub color="lighter-grey" class="repository-info__categories__category">Technology</bhbadge-stub>
+        <bhbadge-stub color="grey-light" class="repository-info__categories__category">Technology</bhbadge-stub>
       </router-link-stub>
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bhbadge-stub color="lighter-grey" class="repository-info__categories__category">Health</bhbadge-stub>
+        <bhbadge-stub color="grey-light" class="repository-info__categories__category">Health</bhbadge-stub>
       </router-link-stub>
     </div>
   </div>
