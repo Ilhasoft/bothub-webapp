@@ -1,5 +1,6 @@
 import repository from '@/api/repository';
 import update from '@/api/update';
+import TYPES from '../types';
 
 
 export default {
@@ -110,5 +111,8 @@ export default {
   },
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
+  },
+  async setRepositoryRelatedUuid({ commit }, payload) {
+    await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
 };

@@ -68,4 +68,14 @@ describe('Layout.vue', () => {
       expect(router.history.pending.path).toBe('/myprofile');
     });
   });
+
+  describe('loading', () => {
+    beforeEach(() => {
+      wrapper.setProps({ loading: true });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });

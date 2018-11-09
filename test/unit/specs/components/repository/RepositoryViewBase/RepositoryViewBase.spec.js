@@ -1,6 +1,8 @@
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase/RepositoryViewBase';
+import Repository from '@/models/repository';
+import store from '@/store';
 
 
 const localVue = createLocalVue();
@@ -8,24 +10,28 @@ localVue.use(BH);
 
 
 describe('RepositoryViewBase.vue', () => {
+  let repository;
   let wrapper;
   beforeEach(() => {
+    repository = new Repository({
+      ready_for_train: false,
+      requirements_to_train: {
+        en: [
+          'There was no change in this bot version. No examples or translations for English have been added or removed.',
+        ],
+      },
+      languages_ready_for_train: {
+        en: false,
+      },
+      languages_warnings: {},
+    });
+
     wrapper = shallowMount(RepositoryViewBase, {
       localVue,
       propsData: {
-        repository: {
-          ready_for_train: false,
-          requirements_to_train: {
-            en: [
-              'There was no change in this bot version. No examples or translations for English have been added or removed.',
-            ],
-          },
-          languages_ready_for_train: {
-            en: false,
-          },
-          languages_warnings: {},
-        },
+        repository,
       },
+      store,
     });
   });
 
@@ -37,7 +43,6 @@ describe('RepositoryViewBase.vue', () => {
     beforeEach(() => {
       wrapper.setProps({
         repository: null,
-        loading: true,
       });
     });
 
@@ -79,14 +84,7 @@ describe('RepositoryViewBase.vue', () => {
 
     describe('empty requirements_to_train', () => {
       beforeEach(() => {
-        wrapper.setData({
-          repository: Object.assign(
-            wrapper.vm.repository,
-            {
-              requirements_to_train: {},
-            },
-          ),
-        });
+        repository.set('requirements_to_train', {});
       });
 
       test('equal 0', () => {
@@ -101,17 +99,13 @@ describe('RepositoryViewBase.vue', () => {
     });
 
     describe('languages_warnings with values', () => {
-      beforeEach(() => {
-        wrapper.setData({
-          repository: Object.assign(
-            wrapper.vm.repository,
-            {
-              languages_warnings: {
-                en: ['warning 1'],
-              },
-            },
-          ),
-        });
+      beforeEach(async () => {
+        repository.set(
+          'languages_warnings',
+          {
+            en: ['warning 1'],
+          },
+        );
       });
 
       test('equal 1', () => {

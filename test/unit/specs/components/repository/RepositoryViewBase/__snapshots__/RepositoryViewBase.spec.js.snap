@@ -3,8 +3,8 @@
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 <layout-stub title="Bothub">
   <div class="rpstr-vw-bs">
-    <div class="rpstr-vw-bs__error">
-      <h1>-1</h1>
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
     </div>
   </div>
   <!---->
@@ -17,8 +17,8 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 <layout-stub title="Bothub">
   <div class="rpstr-vw-bs">
-    <div class="rpstr-vw-bs__error">
-      <h1>Bot not found</h1>
+    <div class="rpstr-vw-bs__loading">
+      <bhloading-stub></bhloading-stub>
     </div>
   </div>
   <!---->
@@ -43,7 +43,7 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 `;
 
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
-<layout-stub title="Bothub">
+<layout-stub title="null/">
   <div class="rpstr-vw-bs">
     <div class="rpstr-vw-bs__loading">
       <bhloading-stub></bhloading-stub>
@@ -51,7 +51,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
   </div>
   <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
   <!---->
-  <requestauthorizationmodal-stub></requestauthorizationmodal-stub>
+  <requestauthorizationmodal-stub repositoryuuid="null"></requestauthorizationmodal-stub>
   <warningmodal-stub languageswarnings="[object Object]"></warningmodal-stub>
 </layout-stub>
 `;
