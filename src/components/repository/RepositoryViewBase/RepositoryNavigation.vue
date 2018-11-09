@@ -76,7 +76,7 @@ export default {
       position: relative;
       display: inline-flex;
       padding: 0 1.5rem 1.25rem;
-      color: $color-gray-dark;
+      color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
 

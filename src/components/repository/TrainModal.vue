@@ -118,7 +118,7 @@ export default {
       &__status {
         vertical-align: middle;
         margin-left: -.25rem;
-        color: $color-gray-dark;
+        color: $color-grey-dark;
 
         &--ready {
           color: $color-primary;

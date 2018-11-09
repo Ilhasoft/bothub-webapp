@@ -63,7 +63,7 @@
     -webkit-appearance: none;
 
     &::placeholder {
-      color: $color-gray-dark;
+      color: $color-grey-dark;
     }
   }
 
@@ -113,7 +113,7 @@
   $p: &;
 
   background-color: white;
-  border: 1px solid $color-gray;
+  border: 1px solid $color-grey;
   border-radius: $form-components-border-radius;
 
   &__prepend {
@@ -122,7 +122,7 @@
     align-items: center;
     height: 100%;
     padding: 0 .5rem;
-    background-color: $color-gray;
+    background-color: $color-grey;
 
     &__content {
       white-space: nowrap;
@@ -153,7 +153,7 @@
 
   height: auto;
   background-color: white;
-  border: 1px solid $color-gray;
+  border: 1px solid $color-grey;
   border-radius: $form-components-border-radius;
 
   textarea {
@@ -191,7 +191,7 @@
   @include form-component();
    width: 100%;
   background-color: white;
-  border: 1px solid $color-gray;
+  border: 1px solid $color-grey;
   border-radius: $form-components-border-radius;
    &__disabled {
     cursor: no-drop;

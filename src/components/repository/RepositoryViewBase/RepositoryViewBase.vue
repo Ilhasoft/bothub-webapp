@@ -26,7 +26,7 @@
         <div class="rpstr-vw-bs__status-bar">
           <div class="bh-grid bh-grid--space-between">
             <div class="bh-grid__item">
-              <div class="bh-grid text-color-gray-dark">
+              <div class="bh-grid text-color-grey-dark">
                 <div class="bh-grid__item">
                   <bh-icon value="flag-variant" />
                   <span>{{ repository.available_languages.length }} languages</span>
@@ -64,7 +64,7 @@
                 <div class="bh-grid__item">
                   <a
                     :class="{
-                      'text-color-gray-dark': !repository.ready_for_train,
+                      'text-color-grey-dark': !repository.ready_for_train,
                     }"
                     href="#train"
                     @click.prevent="openTrainModal()">
@@ -91,7 +91,7 @@
                 && !repository.request_authorization.approved_by"
                 class="bh-grid">
                 <div class="bh-grid__item">
-                  <span class="text-color-gray-dark">Authorization Requested</span>
+                  <span class="text-color-grey-dark">Authorization Requested</span>
                 </div>
               </div>
               <div

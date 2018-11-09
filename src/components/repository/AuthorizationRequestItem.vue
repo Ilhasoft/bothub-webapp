@@ -136,6 +136,6 @@ export default {
 
 
 .authorization-request-item {
-  border-bottom: 1px solid $color-gray;
+  border-bottom: 1px solid $color-grey;
 }
 </style>

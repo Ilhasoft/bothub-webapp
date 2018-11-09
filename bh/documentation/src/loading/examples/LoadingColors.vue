@@ -4,7 +4,7 @@
       <bh-loading />
     </div>
     <div class="bh-grid__item item">
-      <bh-loading class="text-color-gray-dark" />
+      <bh-loading class="text-color-grey-dark" />
     </div>
     <div class="bh-grid__item item">
       <bh-loading class="text-color-primary" />

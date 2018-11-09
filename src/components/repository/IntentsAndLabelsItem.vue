@@ -92,7 +92,7 @@ export default {
       margin: -($margin);
 
       > span {
-        color: $color-gray-dark;
+        color: $color-grey-dark;
         margin: $margin;
       }
     }
@@ -107,8 +107,8 @@ export default {
       display: flex;
       align-items: center;
       padding: 1rem;
-      border-right: 1px solid $color-gray;
-      color: $color-gray-dark;
+      border-right: 1px solid $color-grey;
+      color: $color-grey-dark;
     }
 
     &__badges {

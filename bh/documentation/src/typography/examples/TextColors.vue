@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p class="text-color-gray">.text-color-gray</p>
-    <p class="text-color-gray-dark">.text-color-gray-dark</p>
+    <p class="text-color-grey">.text-color-grey</p>
+    <p class="text-color-grey-dark">.text-color-grey-dark</p>
     <p class="text-color-fake-black">.text-color-fake-black</p>
     <p class="text-color-primary">.text-color-primary</p>
     <p class="text-color-primary-lighter">.text-color-primary-lighter</p>

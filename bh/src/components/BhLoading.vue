@@ -36,7 +36,7 @@ export default {
     display: inline-flex;
     align-items: center;
     height: $size-normal;
-    color: $color-gray;
+    color: $color-grey;
 
     span {
       width: ($size-normal * $reduce-factor);

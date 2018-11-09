@@ -51,7 +51,7 @@
             query: { category: category.id },
         }">
           <bh-badge
-            color="gray-light"
+            color="grey-light"
             class="repository-info__categories__category">{{ category.name }}</bh-badge>
         </router-link>
       </div>
@@ -152,7 +152,7 @@ export default {
   }
 
   &__info-item {
-    color: $color-gray-dark;
+    color: $color-grey-dark;
   }
 
   &__flags {

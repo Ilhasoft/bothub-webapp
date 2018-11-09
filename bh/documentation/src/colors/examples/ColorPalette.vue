@@ -18,17 +18,17 @@
     <div class="background-color-secondary-lighter">
       <span>secondary lighter</span>
     </div>
-    <div class="background-color-gray-darker">
-      <span>gray darker</span>
+    <div class="background-color-grey-darker">
+      <span>grey darker</span>
     </div>
-    <div class="background-color-gray-dark">
-      <span>gray dark</span>
+    <div class="background-color-grey-dark">
+      <span>grey dark</span>
     </div>
-    <div class="background-color-gray">
-      <span>gray</span>
+    <div class="background-color-grey">
+      <span>grey</span>
     </div>
-    <div class="background-color-gray-light">
-      <span>gray light</span>
+    <div class="background-color-grey-light">
+      <span>grey light</span>
     </div>
     <div class="background-color-fake-black">
       <span>fake black</span>

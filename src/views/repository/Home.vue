@@ -12,7 +12,7 @@
             v-if="repository.description"
             class="repository-home__description">{{ repository.description }}</p>
           <p v-else>
-            <i class="text-color-gray-dark">There is no description for this repository</i>
+            <i class="text-color-grey-dark">There is no description for this repository</i>
           </p>
         </div>
         <div
@@ -29,7 +29,7 @@
                     v-for="(intent) in repository.intents_list"
                     :key="intent"
                     size="small"
-                    color="gray"
+                    color="grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ intent }}</span>
                   </bh-badge>
@@ -46,7 +46,7 @@
                     v-for="(label) in repository.labels_list"
                     :key="label"
                     size="small"
-                    color="gray"
+                    color="grey"
                     class="repository-home__attribute__card__badge">
                     <span>{{ label }}</span>
                   </bh-badge>
