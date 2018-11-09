@@ -1,19 +1,18 @@
-$shadow-color: rgba(0, 0, 0, 0.5);
+$shadow-color: rgba(0, 0, 0, 0.3);
 
 @mixin shadow() {
   &--shaded {
-    box-shadow: 0rem 0rem .15rem $shadow-color;
 
     &-light {
-      box-shadow: 0rem  0rem 1rem -.25rem $shadow-color;
+      box-shadow: 0rem 0rem 1.5rem -0.3rem $shadow-color;
     }
 
     &-strong {
-      box-shadow: 0rem 0rem 1.5rem -.25rem $shadow-color;
+      box-shadow: 0rem 0rem 1.5rem -0.4rem $shadow-color;
     }
 
     &-hard {
-      box-shadow: 0rem 0rem 2.5rem -.25rem $shadow-color;
+      box-shadow: 0rem 0rem 1.5rem -0.5rem $shadow-color;
     }
   }
 }
