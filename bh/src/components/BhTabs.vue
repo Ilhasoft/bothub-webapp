@@ -89,7 +89,7 @@ export default {
   &-tabs {
     &__tab {
       margin: 0px;
-      border-bottom: 1px solid $color-lighter-grey;
+      border-bottom: 1px solid $color-grey;
 
       ul {
         padding: 0px;
@@ -101,15 +101,15 @@ export default {
           list-style-type: none;
 
           &.is-active {
-            color:$color-primary-tone;
-            border-bottom: 1px solid $color-primary-tone;
+            color: $color-primary;
+            border-bottom: 1px solid $color-primary;
           }
         }
 
         li:hover {
           margin-bottom: -1px;
           list-style-type: none;
-          border-bottom: 1px solid $color-bolder-grey;
+          border-bottom: 1px solid $color-grey-dark;
         }
       }
     }
