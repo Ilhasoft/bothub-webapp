@@ -21,6 +21,8 @@ import BhModal from './components/BhModal';
 import BhSelect from './components/BhSelect';
 import BhHighlightedPre from './components/BhHighlightedPre';
 import BhTooltipHover from './components/BhTooltipHover';
+import BhTabs from './components/BhTabs';
+import BhTabItem from './components/BhTabItem';
 
 import utils from './utils';
 
@@ -47,6 +49,8 @@ const components = {
   BhSelect,
   BhHighlightedPre,
   BhTooltipHover,
+  BhTabs,
+  BhTabItem,
 };
 
 export default {

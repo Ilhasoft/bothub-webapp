@@ -202,6 +202,15 @@
           </div>
         </bh-card>
       </section>
+      <section class="bh-grid__item">
+        <bh-card>
+          <div class="bh-grid">
+            <div class="bh-grid__item bh-grid__item--nested">
+              <tab-navigation />
+            </div>
+          </div>
+        </bh-card>
+      </section>
     </div>
   </div>
 </template>
@@ -230,6 +239,7 @@ import Colors from './colors/Colors';
 import SelectInput from './select/Select';
 import HighlightedPre from './highlighted-pre/HighlightedPre';
 import TooltipHover from './tooltip-hover/TooltipHover';
+import TabNavigation from './tab-navigation/TabNavigation';
 
 export default {
   name: 'App',
@@ -257,6 +267,7 @@ export default {
     SelectInput,
     HighlightedPre,
     TooltipHover,
+    TabNavigation,
   },
 };
 </script>
