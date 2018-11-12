@@ -3,6 +3,7 @@
     <div slot="center">
       <bh-text
         v-model="search"
+        placeholder="Search for bots"
       >
         <div slot="append">
           <bh-icon-button

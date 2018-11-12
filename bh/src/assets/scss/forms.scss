@@ -4,7 +4,8 @@
 
 
 @mixin form-component-sizes() {
-
+  height: $form-component-height-normal + 1rem;
+  min-height: $form-component-height-normal;
 
   &--small {
     height: $form-component-height-small;
@@ -22,7 +23,7 @@
 @mixin form-component-typography() {
   @include typography();
 
-  font-size: 1rem;
+  font-size: .75rem;
   font-weight: $font-weight-lighter;
   line-height: 1rem;
   color: $color-fake-black;
@@ -67,7 +68,7 @@
   }
 
   &--small {
-    $fs: .75rem;
+    $fs: .5rem;
 
     font-size: $fs;
     line-height: $fs;
@@ -80,7 +81,7 @@
   }
 
   &--medium {
-    $fs: 1.25rem;
+    $fs: 1rem;
 
     font-size: $fs;
     line-height: $fs;
@@ -129,18 +130,24 @@
   }
 
   &--small {
+    height: $form-component-height-small + 1rem;
+
     #{$p}__prepend-text {
+      height: $form-component-height-normal + 1rem;
       padding: 0 .25rem;
     }
   }
 
   &--medium {
+    height: $form-component-height-medium + 1rem;
+
     #{$p}__prepend-text {
       padding: 0 .75rem;
     }
   }
 
   &--large {
+    height: $form-component-height-large + 1rem;
     #{$p}__prepend-text {
       padding: 0 1rem;
     }
@@ -156,6 +163,7 @@
   border-radius: $form-components-border-radius;
 
   textarea {
+    height: $form-component-height-smal + 1rem;
     min-height: calc(#{$form-component-height-normal} - 2px);
     overflow: hidden;
     resize: none;
@@ -165,6 +173,7 @@
     height: auto;
 
     textarea {
+      height: $form-component-height-small + 1rem;
       min-height: calc(#{$form-component-height-small} - 2px);
     }
   }
@@ -173,6 +182,7 @@
     height: auto;
 
     textarea {
+      height: $form-component-height-medium + 1rem;
       min-height: calc(#{$form-component-height-medium} - 2px);
     }
   }
@@ -181,6 +191,7 @@
     height: auto;
 
     textarea {
+      height: $form-component-height-large + 1rem;
       min-height: calc(#{$form-component-height-large} - 2px);
     }
   }

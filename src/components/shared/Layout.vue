@@ -221,7 +221,7 @@ export default {
 
       img {
         display: block;
-        height: ($size-normal * 1);
+        height: ($size-normal * 1.2);
       }
     }
 

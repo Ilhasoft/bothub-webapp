@@ -9,7 +9,7 @@
     @include typography();
 
     @mixin size($size-value) {
-      padding: ($size-value / 2) ($size-value / 1.5);
+      padding: ($size-value / 2) ($size-value);
       font-size: ($size-value / 2);
       line-height: ($size-value / 2);
     }
