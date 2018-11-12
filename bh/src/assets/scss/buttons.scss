@@ -9,9 +9,9 @@
     @include typography();
 
     @mixin size($size-value) {
-      padding: calc(#{($size-value / 3)} - #{$form-components-border-size}) ($size-value / 1.5);
-      font-size: ($size-value / 3);
-      line-height: ($size-value / 3);
+      padding: ($size-value / 2) ($size-value / 1.5);
+      font-size: ($size-value / 2);
+      line-height: ($size-value / 2);
     }
 
     @include size($size-normal);
@@ -37,7 +37,7 @@
     }
 
     &--rounded {
-      border-radius: ($size-normal / 2);
+      border-radius: ($size-normal / 1);
     }
 
     &--max-content {

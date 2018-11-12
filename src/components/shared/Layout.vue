@@ -38,7 +38,7 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">start your bot</bh-button>
+                @click="openNewRepositoryModal()">New bot</bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -221,12 +221,12 @@ export default {
 
       img {
         display: block;
-        height: ($size-normal * .75);
+        height: ($size-normal * 1);
       }
     }
 
     &__center {
-      width: $max-repository-card-width;
+      width: 50%;
     }
   }
 

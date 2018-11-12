@@ -1,7 +1,9 @@
 <template>
   <layout>
     <div slot="center">
-      <bh-text v-model="search">
+      <bh-text
+        v-model="search"
+      >
         <div slot="append">
           <bh-icon-button
             class="text-color-grey-dark"
