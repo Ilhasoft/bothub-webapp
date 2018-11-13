@@ -38,7 +38,7 @@
     }
 
     &--rounded {
-      border-radius: ($size-normal / 1);
+      border-radius: $size-normal;
     }
 
     &--max-content {
