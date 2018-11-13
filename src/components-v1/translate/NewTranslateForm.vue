@@ -22,6 +22,7 @@
           <bh-button
             :disabled="!isValid || submitting"
             secondary
+            size="medium"
             type="submit">Submit Translation</bh-button>
         </bh-field>
       </div>

@@ -38,7 +38,7 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">New bot</bh-button>
+                @click="openNewRepositoryModal()">new bot</bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -46,7 +46,8 @@
               <bh-dropdown position="left">
                 <user-avatar
                   slot="trigger"
-                  :profile="myProfile" />
+                  :profile="myProfile"
+                  size="small" />
                 <bh-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
@@ -212,7 +213,7 @@ export default {
   }
 
   &__header {
-    padding-top: $loading-height;
+    padding: $loading-height 1rem;
     background-color: $color-primary;
 
     &__logo {
@@ -221,7 +222,7 @@ export default {
 
       img {
         display: block;
-        height: ($size-normal * 1.2);
+        height: $size-small;
       }
     }
 

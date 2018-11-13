@@ -44,6 +44,7 @@
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             primary
+            size="medium"
             type="submit">
             <slot v-if="!submitting">Submit</slot>
           </bh-button>

@@ -3,10 +3,11 @@
     <div slot="center">
       <bh-text
         v-model="search"
-        placeholder="Search for bots"
+        placeholder="search for bots"
       >
         <div slot="append">
           <bh-icon-button
+            size="small"
             class="text-color-grey-dark"
             value="magnify" />
         </div>
