@@ -7,6 +7,13 @@ $font-weight-medium: 600;
 $font-weight-lighter: 300;
 $font-weight-bolder: 700;
 
+//Font size
+
+$font-normal: .75rem;
+$font-small:  .05rem;
+$font-medium: 1rem;
+$font-large: 1.5rem;
+
 // Sizes
 
 $size-normal: 2.5rem;
@@ -14,10 +21,10 @@ $size-small: 1.75rem;
 $size-medium: 3.25rem;
 $size-large: 4.75rem;
 $sizes: (
-  ('normal', $size-normal),
-  ('small', $size-small),
-  ('medium', $size-medium),
-  ('large', $size-large),
+  ('normal', $size-normal, $font-normal),
+  ('small', $size-small, $font-small),
+  ('medium', $size-medium, $font-medium),
+  ('large', $size-large, $font-large),
 );
 
 
