@@ -4,7 +4,7 @@
       <div class="repository-info__big-badge">
         <router-link :to="repositoryDetailsRouterParams">
           <bh-icon-button
-            size="medium"
+            size="large"
             value="botinho"
             class="repository-info__big-badge__icon" /></router-link>
       </div>
