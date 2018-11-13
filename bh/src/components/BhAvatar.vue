@@ -44,8 +44,8 @@ export default {
       $size-value: nth($size, 2);
 
       &--#{$size-name} {
-        width: $size-value + 1rem;
-        height: $size-value + 1rem;
+        width: $size-value;
+        height: $size-value;
       }
     }
 
