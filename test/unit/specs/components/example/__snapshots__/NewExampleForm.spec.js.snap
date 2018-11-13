@@ -18,7 +18,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
     <div class="column is-narrow">
       <bhfield-stub label="" errors="">
-        <bhbutton-stub disabled="true" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">Submit</bhbutton-stub>
+        <bhbutton-stub disabled="true" size="medium" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">Submit</bhbutton-stub>
       </bhfield-stub>
     </div>
   </form>
