@@ -46,8 +46,7 @@
               <bh-dropdown position="left">
                 <user-avatar
                   slot="trigger"
-                  :profile="myProfile"
-                  size="small" />
+                  :profile="myProfile" />
                 <bh-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
