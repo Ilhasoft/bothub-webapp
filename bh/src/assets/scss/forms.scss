@@ -123,6 +123,10 @@
     }
   }
 
+  &--no-border {
+    border: 1px solid transparent
+  }
+
   &--small {
     height: $form-component-height-small;
 
