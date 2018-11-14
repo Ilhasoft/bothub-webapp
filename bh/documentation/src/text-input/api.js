@@ -30,5 +30,11 @@ export default {
       description: 'Add debounce time to emit input event.',
       default: '0',
     },
+    {
+      name: 'noBorder',
+      type: 'boolean',
+      description: 'Add and Remove border to text area',
+      default: 'false',
+    },
   ],
 };

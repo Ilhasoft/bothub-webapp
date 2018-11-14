@@ -81,6 +81,16 @@ describe('BhText.vue', () => {
       });
     });
 
+    describe('with no border', () => {
+      beforeEach(() => {
+        wrapper.setProps({ noBorder: true });
+      });
+
+      test('renders correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+    });
+
     describe('type abc', () => {
       beforeEach(() => {
         const input = wrapper.find({ ref: 'input' });
