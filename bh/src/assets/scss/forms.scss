@@ -56,7 +56,7 @@
 
     display: block;
     width: 100%;
-    padding: .5rem;
+    padding: .5rem 1rem;
     background: none;
     border: none;
     outline: none;
@@ -68,41 +68,35 @@
   }
 
   &--small {
-    $fs: .75rem;
-
-    font-size: $fs;
-    line-height: $fs;
+    font-size: $font-small;
+    line-height: $font-small;
 
     #{$p}__input {
       padding: .25rem;
-      font-size: $fs;
-      line-height: $fs;
+      font-size: $font-small;
+      line-height: $font-small;
     }
   }
 
   &--medium {
-    $fs: 1.25rem;
-
-    font-size: $fs;
-    line-height: $fs;
+    font-size: $font-medium;
+    line-height: $font-medium;
 
     #{$p}__input {
       padding: .75rem;
-      font-size: $fs;
-      line-height: $fs;
+      font-size: $font-medium;
+      line-height: $font-medium;
     }
   }
 
   &--large {
-    $fs: 1.5rem;
-
-    font-size: $fs;
-    line-height: $fs;
+    font-size: $font-large;
+    line-height: $font-large;
 
     #{$p}__input {
       padding: 1rem;
-      font-size: $fs;
-      line-height: $fs;
+      font-size: $font-large;
+      line-height: $font-large;
     }
   }
 }
@@ -130,18 +124,24 @@
   }
 
   &--small {
+    height: $form-component-height-small;
+
     #{$p}__prepend-text {
+      height: $form-component-height-normal;
       padding: 0 .25rem;
     }
   }
 
   &--medium {
+    height: $form-component-height-medium;
+
     #{$p}__prepend-text {
       padding: 0 .75rem;
     }
   }
 
   &--large {
+    height: $form-component-height-large;
     #{$p}__prepend-text {
       padding: 0 1rem;
     }

@@ -8,13 +8,14 @@
 
     @include typography();
 
-    @mixin size($size-value) {
-      padding: calc(#{($size-value / 3)} - #{$form-components-border-size}) ($size-value / 1.5);
-      font-size: ($size-value / 3);
-      line-height: ($size-value / 3);
+    @mixin size($size-value, $font-size) {
+      $font-size: $font-size;
+      padding: calc(#{($size-value - $font-size) / 2} - #{$form-components-border-size}) ($size-value / 1.6);
+      font-size: $font-size;
+      line-height: $font-size;
     }
 
-    @include size($size-normal);
+    @include size($size-normal, $font-normal);
 
     display: inline-flex;
     align-items: center;
@@ -37,7 +38,7 @@
     }
 
     &--rounded {
-      border-radius: ($size-normal / 2);
+      border-radius: $size-normal;
     }
 
     &--max-content {
@@ -54,12 +55,13 @@
     @each $size in $sizes {
       $size-name: nth($size, 1);
       $size-value: nth($size, 2);
+      $font-size: nth($size, 3);
 
       &--#{$size-name} {
-        @include size($size-value);
+        @include size($size-value, $font-size);
 
         &#{$parent}--rounded {
-          border-radius: ($size-value / 2);
+          border-radius: $size-value / 2;
         }
       }
     }

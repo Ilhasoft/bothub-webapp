@@ -38,7 +38,7 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">start your bot</bh-button>
+                @click="openNewRepositoryModal()">new bot</bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -212,7 +212,7 @@ export default {
   }
 
   &__header {
-    padding-top: $loading-height;
+    padding: $loading-height 1rem;
     background-color: $color-primary;
 
     &__logo {
@@ -221,12 +221,12 @@ export default {
 
       img {
         display: block;
-        height: ($size-normal * .75);
+        height: $size-small;
       }
     }
 
     &__center {
-      width: $max-repository-card-width;
+      width: 50%;
     }
   }
 

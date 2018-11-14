@@ -1,9 +1,13 @@
 <template>
   <layout>
     <div slot="center">
-      <bh-text v-model="search">
+      <bh-text
+        v-model="search"
+        placeholder="search for bots"
+      >
         <div slot="append">
           <bh-icon-button
+            size="small"
             class="text-color-grey-dark"
             value="magnify" />
         </div>
