@@ -61,7 +61,7 @@
         @include size($size-value, $font-size);
 
         &#{$parent}--rounded {
-          border-radius: $size-normal;
+          border-radius: $size-value / 2;
         }
       }
     }
