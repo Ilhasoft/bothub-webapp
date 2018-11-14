@@ -6,7 +6,6 @@
 @mixin form-component-sizes() {
   height: $form-component-height-normal;
   min-height: $form-component-height-normal;
-  padding: 0 1rem;
 
   &--small {
     height: $form-component-height-small;
@@ -57,7 +56,7 @@
 
     display: block;
     width: 100%;
-    padding: .5rem;
+    padding: .5rem 1rem;
     background: none;
     border: none;
     outline: none;
