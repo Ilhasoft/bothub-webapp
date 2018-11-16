@@ -1,7 +1,6 @@
 import qs from 'query-string';
 
 import request from './request';
-import utils from './utils';
 
 
 export default {
@@ -14,9 +13,6 @@ export default {
     return request.$http.get(
       '/my-profile/',
     );
-  },
-  myRepositories() {
-    return new utils.List('/my-repositories/');
   },
   async getMyProfileSchema() {
     const { data } = await request.$http.options('/my-profile/');

@@ -25,13 +25,6 @@ export default {
       },
     );
   },
-  getAll() {
-    return new utils.List('/repositories/');
-  },
-  search(query) {
-    const queryString = qs.stringify(query);
-    return new utils.List(`/repositories/?${queryString}`);
-  },
   get(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/`);
   },
