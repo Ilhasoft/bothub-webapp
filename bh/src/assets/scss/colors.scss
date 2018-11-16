@@ -1,3 +1,4 @@
+$color-white: #fff;
 $color-fake-white: #F5F5F5;
 $color-fake-black: #212121;
 
@@ -23,6 +24,7 @@ $color-warning: #FFDD57;
 $color-success: #00C853;
 
 $colors: (
+  ('white', $color-white, $color-fake-black),
   ('fake-white', $color-fake-white, $color-fake-black),
   ('fake-black', $color-fake-black, $color-fake-white),
   ('grey-light', $color-grey-light, $color-fake-black),
