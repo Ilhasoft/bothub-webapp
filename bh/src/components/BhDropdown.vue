@@ -9,7 +9,20 @@
       ref="openDropdown"
       @click="openDropdown()"
     >
-      <slot name="trigger" />
+      <slot
+        v-if="this.$slots.trigger"
+        name="trigger"
+      />
+      <div
+        v-else
+        class="bh-dropdown__default clickable"
+      >
+        <span class="bh-dropdown__default__title">{{ title }}</span>
+        <bh-icon
+          class="text-color-grey-dark bh-dropdown__default__icon"
+          value="menu-down"
+        />
+      </div>
     </div>
     <div
       v-show="open"
@@ -27,6 +40,10 @@ export default {
   name: 'BhDropdown',
   props: {
     position: {
+      type: String,
+      default: null,
+    },
+    title: {
       type: String,
       default: null,
     },
@@ -58,6 +75,7 @@ export default {
 
 <style lang="scss">
 @import '@scss/variables.scss';
+@import '@scss/colors.scss';
 
 
 .bh {
@@ -66,6 +84,23 @@ export default {
 
     position: relative;
     display: inline-block;
+
+    &__default {
+      width: 100%;
+      padding: .75rem 1rem;
+      background-color: $color-white;
+      border: 1px solid #D5D5D5;
+      border-radius: .5rem;
+
+      &__title {
+        float: left;
+        margin-right: 1rem;
+      }
+
+      &__icon {
+        margin: 2px;
+      }
+    }
 
     &__content {
       position: absolute;

@@ -35,6 +35,6 @@
 
 <script>
 export default {
-  name: 'SimpleDropDownExample',
+  name: 'SlotDropDownExample',
 };
 </script>

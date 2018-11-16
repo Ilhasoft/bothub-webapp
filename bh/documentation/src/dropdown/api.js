@@ -7,5 +7,12 @@ export default {
       default: 'null',
       required: false,
     },
+    {
+      name: 'title',
+      type: 'String',
+      description: 'set the title to show on dropdown',
+      default: 'null',
+      required: false,
+    },
   ],
 };

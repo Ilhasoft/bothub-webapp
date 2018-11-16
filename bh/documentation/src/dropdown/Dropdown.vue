@@ -1,10 +1,16 @@
 <template>
   <div class="bh-grid bh-grid--column">
     <div class="bh-grid__item">
-      <h2>Dropdown</h2>
+      <h2>Dropdown Example</h2>
       <example
-        :component="SimpleDropDownExample"
-        :code="simpleDropDownExampleCode" />
+        :component="DropDownExample"
+        :code="dropDownExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h2>Dropdown with slot Example</h2>
+      <example
+        :component="SlotDropDownExample"
+        :code="slotDropDownExample" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -15,8 +21,10 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import SimpleDropDownExample from './examples/SimpleDropDownExample';
-import simpleDropDownExampleCode from '!!raw-loader!./examples/SimpleDropDownExample';
+import DropDownExample from './examples/DropDownExample';
+import dropDownExampleCode from '!!raw-loader!./examples/DropDownExample';
+import SlotDropDownExample from './examples/SlotDropDownExample';
+import slotDropDownExample from '!!raw-loader!./examples/SlotDropDownExample';
 import api from './api';
 
 
@@ -28,8 +36,10 @@ export default {
   },
   data() {
     return {
-      SimpleDropDownExample,
-      simpleDropDownExampleCode,
+      DropDownExample,
+      dropDownExampleCode,
+      SlotDropDownExample,
+      slotDropDownExample,
       api,
     };
   },
