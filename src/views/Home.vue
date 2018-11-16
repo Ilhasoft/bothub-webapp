@@ -19,11 +19,19 @@
           <categories-list v-model="currentCategory" />
         </div>
         <div class="bh-grid__item">
-          <div v-if="repositoriesList">
-            <repository-card
-              v-for="repository in repositoriesList.toArray()"
-              :key="repository.uuid"
-              :repository="repository" />
+          <repository-card
+            v-for="repository in repositoriesList.toArray()"
+            :key="repository.uuid"
+            :repository="repository" />
+          <loading v-if="repositoriesList.loading" />
+          <p v-else-if="repositoriesList.isEmpty()">Repositories not found.</p>
+          <div
+            v-if="!repositoriesList.isEmpty() && !repositoriesList.isLastPage()"
+            class="next has-text-centered">
+            <button
+              :disabled="repositoriesList.loading"
+              class="button is-primary"
+              @click="nextPage()">More</button>
           </div>
         </div>
       </div>
@@ -35,6 +43,7 @@
 import Layout from '@/components/shared/Layout';
 import CategoriesList from '@/components/shared/CategoriesList';
 import RepositoryCard from '@/components/repository/RepositoryCard';
+import Loading from '@/components-v1/shared/Loading';
 import RepositoriesList from '@/collections/repositories';
 
 
@@ -44,11 +53,12 @@ export default {
     Layout,
     CategoriesList,
     RepositoryCard,
+    Loading,
   },
   data() {
     return {
       currentCategory: 0,
-      repositoriesList: null,
+      repositoriesList: new RepositoriesList(),
       search: '',
     };
   },
@@ -64,12 +74,18 @@ export default {
     },
   },
   mounted() {
-    this.repositoriesList = new RepositoriesList();
     this.updateRepositoriesList();
   },
   methods: {
     async updateRepositoriesList() {
-      this.repositoriesList.page(1).fetch();
+      this.repositoriesList = new RepositoriesList();
+      if (this.currentCategory) {
+        this.repositoriesList.filter.categories = this.currentCategory;
+      }
+      this.repositoriesList.fetch();
+    },
+    async nextPage() {
+      this.repositoriesList.fetch();
     },
   },
 };

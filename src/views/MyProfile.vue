@@ -1,5 +1,5 @@
 <template>
-  <layout title="My Profile on bothub">
+  <layout title="My Profile on Bothub">
     <div class="bh-grid bh-grid--column my-profile__header">
       <div class="text-center">
         <user-avatar
@@ -32,32 +32,42 @@
         <h1>Repositories</h1>
       </div>
       <div class="bh-grid__item">
-        <pagination
-          v-if="repositoryList"
-          :item-component="repositoryItemElem"
-          :list="repositoryList" />
+        <repository-card
+          v-for="repository in myRepositoriesList.toArray()"
+          :key="repository.uuid"
+          :repository="repository" />
+        <loading v-if="myRepositoriesList.loading" />
+        <p v-else-if="myRepositoriesList.isEmpty()">Repositories not found.</p>
+        <div
+          v-if="!myRepositoriesList.isEmpty() && !myRepositoriesList.isLastPage()"
+          class="next has-text-centered">
+          <button
+            :disabled="myRepositoriesList.loading"
+            class="button is-primary"
+            @click="nextPage()">More</button>
+        </div>
       </div>
+      <bh-modal :open.sync="editProfileModalOpen">
+        <div
+          v-if="editProfileModalOpen"
+          class="bh-grid">
+          <div class="bh-grid__item">
+            <h1>Edit your profile</h1>
+            <edit-profile-form @edited="onMyProfileEdited()" />
+          </div>
+        </div>
+      </bh-modal>
+      <bh-modal :open.sync="changePasswordModalOpen">
+        <div
+          v-if="changePasswordModalOpen"
+          class="bh-grid">
+          <div class="bh-grid__item">
+            <h1>Change Password</h1>
+            <change-password-form @changed="onPasswordChanged()" />
+          </div>
+        </div>
+      </bh-modal>
     </div>
-    <bh-modal :open.sync="editProfileModalOpen">
-      <div
-        v-if="editProfileModalOpen"
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <h1>Edit your profile</h1>
-          <edit-profile-form @edited="onMyProfileEdited()" />
-        </div>
-      </div>
-    </bh-modal>
-    <bh-modal :open.sync="changePasswordModalOpen">
-      <div
-        v-if="changePasswordModalOpen"
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <h1>Change Password</h1>
-          <change-password-form @changed="onPasswordChanged()" />
-        </div>
-      </div>
-    </bh-modal>
   </layout>
 </template>
 
@@ -67,11 +77,12 @@ import { mapGetters, mapActions } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import UserProfile from '@/components-v1/user/UserProfile';
 import RepositoryCard from '@/components/repository/RepositoryCard';
-import Pagination from '@/components-v1/shared/Pagination';
 import EditProfileForm from '@/components-v1/user/EditProfileForm';
 import ChangePasswordForm from '@/components-v1/user/ChangePasswordForm';
 import LoginIsRequired from '@/components-v1/auth/LoginIsRequired';
 import UserAvatar from '@/components/user/UserAvatar';
+import Loading from '@/components-v1/shared/Loading';
+import MyRepositoriesList from '@/collections/my-repositories';
 
 
 export default {
@@ -79,15 +90,16 @@ export default {
   components: {
     Layout,
     UserProfile,
-    Pagination,
+    RepositoryCard,
     EditProfileForm,
     ChangePasswordForm,
     UserAvatar,
+    Loading,
   },
   extends: LoginIsRequired,
   data() {
     return {
-      repositoryItemElem: RepositoryCard,
+      myRepositoriesList: new MyRepositoriesList(),
       repositoryList: null,
       editProfileModalOpen: false,
       changePasswordModalOpen: false,
@@ -106,10 +118,13 @@ export default {
   methods: {
     ...mapActions([
       'updateMyProfile',
-      'getMyRepositories',
     ]),
     async updateMyRepositories() {
-      this.repositoryList = await this.getMyRepositories();
+      this.myRepositoriesList = new MyRepositoriesList();
+      this.myRepositoriesList.fetch();
+    },
+    nextPage() {
+      this.myRepositoriesList.fetch();
     },
     openEditProfileModal() {
       this.editProfileModalOpen = true;

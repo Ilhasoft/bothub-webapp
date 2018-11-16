@@ -3,7 +3,7 @@ import ShortRepository from '@/models/short-repository';
 import BaseCollection from './base';
 
 
-class RepositoriesList extends BaseCollection {
+class MyRepositoriesList extends BaseCollection {
   options() {
     return {
       model: ShortRepository,
@@ -12,9 +12,9 @@ class RepositoriesList extends BaseCollection {
 
   routes() {
     return {
-      fetch: 'v2/repositories/',
+      fetch: 'my-repositories/',
     };
   }
 }
 
-export default RepositoriesList;
+export default MyRepositoriesList;
