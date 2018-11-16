@@ -33,7 +33,7 @@ export default {
     {
       name: 'noBorder',
       type: 'boolean',
-      description: 'Add and Remove border to text area',
+      description: 'Add and Remove border to input field',
       default: 'false',
     },
   ],
