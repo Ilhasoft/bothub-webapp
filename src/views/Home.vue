@@ -19,13 +19,12 @@
           <categories-list v-model="currentCategory" />
         </div>
         <div class="bh-grid__item">
-          <pagination
-            v-if="repositoryList"
-            :item-component="RepositoryCard"
-            :list="repositoryList" />
-          <p
-            v-if="repositoryList && repositoryList.empty"
-            class="has-text-centered">Repositories not found.</p>
+          <div v-if="repositoriesList">
+            <repository-card
+              v-for="repository in repositoriesList.toArray()"
+              :key="repository.uuid"
+              :repository="repository" />
+          </div>
         </div>
       </div>
     </div>
@@ -33,11 +32,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import CategoriesList from '@/components/shared/CategoriesList';
-import Pagination from '@/components-v1/shared/Pagination';
 import RepositoryCard from '@/components/repository/RepositoryCard';
+import RepositoriesList from '@/collections/repositories';
 
 
 export default {
@@ -45,41 +43,33 @@ export default {
   components: {
     Layout,
     CategoriesList,
-    Pagination,
+    RepositoryCard,
   },
   data() {
     return {
-      RepositoryCard,
       currentCategory: 0,
-      repositoryList: null,
+      repositoriesList: null,
       search: '',
     };
   },
   watch: {
     currentCategory() {
-      this.updateRepositoryList();
+      this.updateRepositoriesList();
     },
     search() {
-      this.updateRepositoryList();
+      this.updateRepositoriesList();
     },
     $route() {
       this.currentCategory = this.$route.query.category || 0;
     },
   },
   mounted() {
-    this.updateRepositoryList();
+    this.repositoriesList = new RepositoriesList();
+    this.updateRepositoriesList();
   },
   methods: {
-    ...mapActions([
-      'searchRepositories',
-    ]),
-    async updateRepositoryList() {
-      const { search } = this;
-      this.repositoryList = null;
-
-      this.repositoryList = this.currentCategory > 0
-        ? await this.searchRepositories({ categories: [this.currentCategory], search })
-        : await this.searchRepositories({ search });
+    async updateRepositoriesList() {
+      this.repositoriesList.page(1).fetch();
     },
   },
 };

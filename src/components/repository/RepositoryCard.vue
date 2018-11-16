@@ -2,7 +2,7 @@
   <bh-card class="repository-card">
     <div class="bh-grid">
       <div class="bh-grid__item">
-        <repository-info :repository="$attrs" />
+        <repository-info :repository="repository" />
       </div>
     </div>
   </bh-card>
@@ -18,6 +18,12 @@ const components = {
 export default {
   name: 'RepositoryCard',
   components,
+  props: {
+    repository: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 
