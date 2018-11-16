@@ -65,6 +65,7 @@ describe('BhDropdown.vue', () => {
         title: 'Select Item',
       });
     });
+
     test('when Dropdown have a title', () => {
       expect(wrapper).toMatchSnapshot();
     });

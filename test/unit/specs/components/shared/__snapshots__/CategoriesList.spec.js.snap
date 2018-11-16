@@ -2,21 +2,11 @@
 
 exports[`CategoriesList.vue renders correctly 1`] = `
 <div>
-  <div class="bh-grid bh-grid--inline hide-mobile">
-    <div class="bh-grid__item">
-      <bhbutton-stub primary="true" type="button">All</bhbutton-stub>
-    </div>
-  </div>
-  <div class="hide-desktop">
-    <div class="bh-grid">
-      <div class="bh-grid__item">
-        <bhdropdown-stub>
-          <bhbutton-stub primary="true" type="button"><span>All</span>
-            <bhicon-stub value="menu-down"></bhicon-stub>
-          </bhbutton-stub>
-          <bhdropdownitem-stub>All</bhdropdownitem-stub>
-        </bhdropdown-stub>
-      </div>
+  <div class="bh-grid categories-list">
+    <div class="bh-grid__item text-right">
+      <bhdropdown-stub position="left" title="All categories">
+        <bhdropdownitem-stub>All categories</bhdropdownitem-stub>
+      </bhdropdown-stub>
     </div>
   </div>
 </div>
