@@ -31,7 +31,7 @@ export default {
       default: '0',
     },
     {
-      name: 'noBorder',
+      name: 'no-border',
       type: 'boolean',
       description: 'Add and Remove border to input field',
       default: 'false',
