@@ -8,11 +8,16 @@ import BhAvatar from './BhAvatar';
 const localVue = createLocalVue();
 localVue.use(BH);
 
+const defaultSlotComponent = '<img src="https://robohash.org/bothub">';
+
 describe('BhAvatar.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(BhAvatar, {
       localVue,
+      slots: {
+        default: defaultSlotComponent,
+      },
     });
   });
 
@@ -32,23 +37,8 @@ describe('BhAvatar.vue', () => {
     });
   });
 
-  describe('when props have a image', () => {
+  describe('click on avatar', () => {
     beforeEach(() => {
-      wrapper.setProps({
-        imageLink: 'https://robohash.org/bothub.png',
-      });
-    });
-
-    test('renders correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('click on avatar image', () => {
-    beforeEach(() => {
-      wrapper.setProps({
-        imageLink: 'https://robohash.org/bothub.png',
-      });
       wrapper.vm.$emit('click');
     });
 

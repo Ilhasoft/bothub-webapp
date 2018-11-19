@@ -2,14 +2,12 @@
 
 exports[`BhAvatar.vue renders correctly 1`] = `
 <div><button class="bh-avatar">
-    <div class="bh-avatar__content"></div>
+    <div class="bh-avatar__content"><img src="https://robohash.org/bothub"></div>
   </button></div>
 `;
 
-exports[`BhAvatar.vue when props have a image renders correctly 1`] = `<div><img src="https://robohash.org/bothub.png" class="bh-avatar"></div>`;
-
 exports[`BhAvatar.vue when size string is not blank renders correctly 1`] = `
 <div><button class="bh-avatar bh-avatar--small">
-    <div class="bh-avatar__content"></div>
+    <div class="bh-avatar__content"><img src="https://robohash.org/bothub"></div>
   </button></div>
 `;

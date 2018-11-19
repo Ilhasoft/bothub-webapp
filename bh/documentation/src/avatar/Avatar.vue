@@ -14,6 +14,12 @@
         :code="avatarSizeCode" />
     </div>
     <div class="bh-grid__item">
+      <h3>Avatar Image</h3>
+      <example
+        :component="AvatarExampleImage"
+        :code="avatarExampleImageCode" />
+    </div>
+    <div class="bh-grid__item">
       <api :data="api" />
     </div>
   </div>
@@ -26,6 +32,8 @@ import AvatarExample from './examples/AvatarExample';
 import avatarExampleCode from '!!raw-loader!./examples/AvatarExample';
 import AvatarSize from './examples/AvatarSize';
 import avatarSizeCode from '!!raw-loader!./examples/AvatarSize';
+import AvatarExampleImage from './examples/AvatarExampleImage';
+import avatarExampleImageCode from '!!raw-loader!./examples/AvatarExampleImage';
 import api from './api';
 
 
@@ -41,6 +49,8 @@ export default {
       avatarExampleCode,
       AvatarSize,
       avatarSizeCode,
+      AvatarExampleImage,
+      avatarExampleImageCode,
       api,
     };
   },
