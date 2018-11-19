@@ -1,8 +1,10 @@
 <template>
   <bh-avatar
-    :size="size"
-    :image-link="`https://robohash.org/${profile.nickname}.png`"
-  />
+    :size="size">
+    <img
+      :class="reducedSize"
+      :src="`https://robohash.org/${profile.nickname}`">
+  </bh-avatar>
 </template>
 
 <script>
