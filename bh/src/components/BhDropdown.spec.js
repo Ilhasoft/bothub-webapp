@@ -59,6 +59,7 @@ describe('BhDropdown.vue', () => {
       expect(wrapper.vm.open).toBeTruthy();
     });
   });
+
   describe('renders correctly', () => {
     beforeEach(async () => {
       wrapper.setProps({
