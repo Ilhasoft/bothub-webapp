@@ -1,13 +1,25 @@
 <template>
-  <button
-    :class="{
-      'bh-avatar': true,
-      [`bh-avatar--${size}`]: !!size,
-    }"
-    @click="$emit('click', $event)"
-  >
-    <div class="bh-avatar__content"><slot /></div>
-  </button>
+  <div>
+    <img
+      v-if="imageLink"
+      :class="{
+        'bh-avatar': true,
+        [`bh-avatar--${size}`]: !!size,
+      }"
+      :src="imageLink"
+      @click="$emit('click', $event)"
+    >
+    <button
+      v-else
+      :class="{
+        'bh-avatar': true,
+        [`bh-avatar--${size}`]: !!size,
+      }"
+      @click="$emit('click', $event)"
+    >
+      <div class="bh-avatar__content"><slot /></div>
+    </button>
+  </div>
 </template>
 
 <script>
@@ -15,6 +27,10 @@ export default {
   name: 'BhAvatar',
   props: {
     size: {
+      type: String,
+      default: null,
+    },
+    imageLink: {
       type: String,
       default: null,
     },
