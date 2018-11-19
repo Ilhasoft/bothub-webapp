@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="bh-grid categories-list">
-      <div class="bh-grid__item text-right">
+      <div class="bh-grid__item bh-grid__item--nested text-right">
         <bh-dropdown
-          :title="selectedCategoryName"
+          :title="dropdownTitle"
           position="left">
           <bh-dropdown-item
             v-for="category in categories"
@@ -32,7 +32,7 @@ export default {
       return [{ id: 0, name: 'All categories', active: this.current === 0 }]
         .concat(this.allCategories);
     },
-    selectedCategoryName() {
+    dropdownTitle() {
       return this.categories.reduce((current, category) => (
         this.val > 0 && category.id === this.val
           ? category.name
