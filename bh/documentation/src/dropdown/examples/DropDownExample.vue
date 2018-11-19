@@ -8,8 +8,8 @@
         <bh-dropdown
           title="All categories"
           position="left">
-          <bh-dropdown-item >Edit</bh-dropdown-item>
-          <bh-dropdown-item >Remove</bh-dropdown-item>
+          <bh-dropdown-item>Edit</bh-dropdown-item>
+          <bh-dropdown-item>Remove</bh-dropdown-item>
         </bh-dropdown>
       </div>
     </div>
