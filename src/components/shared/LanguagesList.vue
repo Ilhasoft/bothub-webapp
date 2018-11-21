@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     languages() {
-      return [{ id: 0, title: 'All Languages', active: this.current === 0 }]
+      return [{ id: 0, title: 'All languages', active: this.current === 0 }]
         .concat(this.allLanguages);
     },
     dropdownTitle() {

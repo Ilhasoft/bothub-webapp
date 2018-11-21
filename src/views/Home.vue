@@ -88,13 +88,22 @@ export default {
       const { search } = this;
       this.repositoryList = null;
 
-      this.repositoryList = this.currentCategory > 0
-        ? await this.searchRepositories({
+      if (this.currentCategory === 0) {
+        this.repositoryList = await this.searchRepositories({
+          language: this.currentLanguage,
+          search,
+        });
+      } else if (this.currentCategory > 0) {
+        this.repositoryList = await this.searchRepositories({
           categories: this.currentCategory,
           language: this.currentLanguage,
           search,
-        })
-        : await this.searchRepositories({ search });
+        });
+      } else {
+        this.repositoryList = await this.searchRepositories({
+          search,
+        });
+      }
     },
   },
 };
