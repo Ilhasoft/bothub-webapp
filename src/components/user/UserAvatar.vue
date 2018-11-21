@@ -2,7 +2,7 @@
   <bh-avatar
     :size="size">
     <img
-      :class="reducedSize"
+      :class="size"
       :src="`https://robohash.org/${profile.nickname}`">
   </bh-avatar>
 </template>
@@ -18,16 +18,6 @@ export default {
     size: {
       type: String,
       default: 'normal',
-    },
-  },
-  computed: {
-    reducedSize() {
-      return ({
-        small: 'small',
-        normal: 'small',
-        medium: 'normal',
-        large: 'medium',
-      })[this.size];
     },
   },
 };
