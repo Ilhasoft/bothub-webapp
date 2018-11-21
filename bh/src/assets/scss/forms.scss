@@ -123,6 +123,10 @@
     }
   }
 
+  &--no-border {
+    border-color: transparent;
+  }
+
   &--small {
     height: $form-component-height-small;
 
