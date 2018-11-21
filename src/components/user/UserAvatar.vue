@@ -1,8 +1,9 @@
 <template>
-  <bh-avatar :size="size">
-    <bh-icon
-      :size="reducedSize"
-      value="account" />
+  <bh-avatar
+    :size="size">
+    <img
+      :class="reducedSize"
+      :src="`https://robohash.org/${profile.nickname}`">
   </bh-avatar>
 </template>
 

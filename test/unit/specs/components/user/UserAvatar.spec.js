@@ -11,7 +11,11 @@ describe('UserAvatar.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(UserAvatar, {
       localVue,
-      propsData: { profile: {} },
+      propsData: {
+        profile: {
+          nickname: 'botinho',
+        },
+      },
     });
   });
 

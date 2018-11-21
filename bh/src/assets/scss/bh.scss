@@ -133,3 +133,16 @@ pre {
     text-align: right;
   }
 }
+
+img {
+  @each $size in $sizes {
+    $size-name: nth($size, 1);
+    $size-value: nth($size, 2);
+
+    &.#{$size-name} {
+      width: auto !important;
+      max-width: none !important;
+      height: $size-value;
+    }
+  }
+}
