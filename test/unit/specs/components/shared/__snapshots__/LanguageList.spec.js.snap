@@ -4,8 +4,8 @@ exports[`LanguageList.vue renders correctly 1`] = `
 <div>
   <div class="bh-grid categories-list">
     <div class="bh-grid__item bh-grid__item--nested text-right">
-      <bhdropdown-stub position="left" title="All Languages">
-        <bhdropdownitem-stub>All Languages</bhdropdownitem-stub>
+      <bhdropdown-stub position="left" title="All languages">
+        <bhdropdownitem-stub>All languages</bhdropdownitem-stub>
         <bhdropdownitem-stub>English</bhdropdownitem-stub>
         <bhdropdownitem-stub>Portuguese</bhdropdownitem-stub>
       </bhdropdown-stub>
