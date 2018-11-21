@@ -15,7 +15,7 @@
     </div>
     <div class="home">
       <div class="bh-grid bh-grid--column">
-        <div class="bh-grid ">
+        <div class="bh-grid home__keep-inline ">
           <div class="bh-grid__item">
             <categories-list v-model="currentCategory" />
           </div>
@@ -102,10 +102,17 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/variables.scss';
 
 
 .home {
   margin: auto;
   max-width: $max-repository-card-width;
+
+  &__keep-inline {
+    @media screen and (max-width: $mobile-width) {
+      flex-direction: row;
+    }
+  }
 }
 </style>
