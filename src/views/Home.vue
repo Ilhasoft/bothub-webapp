@@ -99,10 +99,6 @@ export default {
           language: this.currentLanguage,
           search,
         });
-      } else {
-        this.repositoryList = await this.searchRepositories({
-          search,
-        });
       }
     },
   },

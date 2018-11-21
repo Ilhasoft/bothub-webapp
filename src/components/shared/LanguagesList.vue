@@ -25,7 +25,8 @@ export default {
     return {
       val: 0,
       selectedLanguage: '',
-      allLanguages: [],
+      allLanguages: Object.keys(LANGUAGES)
+        .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang })),
     };
   },
   computed: {
@@ -44,10 +45,6 @@ export default {
     selectedLanguage(value) {
       this.$emit('input', value);
     },
-  },
-  mounted() {
-    this.allLanguages = Object.keys(LANGUAGES)
-      .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang }));
   },
   methods: {
     select(id, language) {
