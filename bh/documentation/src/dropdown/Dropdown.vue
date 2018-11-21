@@ -21,10 +21,10 @@
 <script>
 import Example from '@/Example';
 import Api from '@/Api';
-import DropDownExample from './examples/DropDownExample';
-import dropDownExampleCode from '!!raw-loader!./examples/DropDownExample';
-import SlotDropDownExample from './examples/SlotDropDownExample';
-import slotDropDownExample from '!!raw-loader!./examples/SlotDropDownExample';
+import DropDownExample from './examples/DropDown';
+import dropDownExampleCode from '!!raw-loader!./examples/DropDown';
+import SlotDropDownExample from './examples/SlotDropDown';
+import slotDropDownExample from '!!raw-loader!./examples/SlotDropDown';
 import api from './api';
 
 
