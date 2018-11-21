@@ -32,6 +32,7 @@ export default {
     position: relative;
     width: $size-normal;
     height: $size-normal;
+    overflow: hidden;
     color: $color-fake-black;
     cursor: pointer;
     background-color: $color-fake-white;
