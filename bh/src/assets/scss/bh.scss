@@ -140,7 +140,8 @@ img {
     $size-value: nth($size, 2);
 
     &.#{$size-name} {
-      max-width: $size-value;
+      width: auto !important;
+      max-width: none !important;
       height: $size-value;
     }
   }
