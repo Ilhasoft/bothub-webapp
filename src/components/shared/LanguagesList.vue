@@ -25,15 +25,12 @@ export default {
     return {
       val: 0,
       selectedLanguage: '',
-      allLanguages: Object.keys(LANGUAGES)
-        .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang })),
+      languages: [{ id: 0, title: 'All languages', active: this.current === 0 }]
+        .concat(Object.keys(LANGUAGES)
+          .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang }))),
     };
   },
   computed: {
-    languages() {
-      return [{ id: 0, title: 'All languages', active: this.current === 0 }]
-        .concat(this.allLanguages);
-    },
     dropdownTitle() {
       return this.languages.reduce((current, language) => (
         this.val > 0 && language.id === this.val
