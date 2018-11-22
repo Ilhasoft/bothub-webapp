@@ -3,6 +3,7 @@
     <div slot="center">
       <bh-text
         v-model="search"
+        no-border
         placeholder="search for bots"
       >
         <div slot="append">

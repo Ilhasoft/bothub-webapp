@@ -47,6 +47,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    noBorder: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -60,6 +64,9 @@ export default {
 
       if (this.size) {
         classes.push(`${this.className}--${this.size}`);
+      }
+      if (this.noBorder) {
+        classes.push(`${this.className}--no-border`);
       }
 
       return classes;
