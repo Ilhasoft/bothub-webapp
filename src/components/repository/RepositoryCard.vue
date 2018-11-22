@@ -99,13 +99,12 @@ export default {
 
 
 .repository-card {
-  margin: 1rem .75rem;
+  margin: 1rem;
   padding: 1rem 0;
-  max-width: 30%;
-  min-width: 30%;
+  width: calc(90% / 3);
 
    @media screen and (max-width: $mobile-width) {
-    max-width: 100%;
+    width: 100%;
   }
 
   &__align-items {
