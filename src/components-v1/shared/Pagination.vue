@@ -7,17 +7,19 @@
       v-bind="addAttrs(item.data)"
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
-    <loading v-if="list.loading" />
-    <p
-      class="text-center"
-      else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
-    <div
-      v-if="list.hasNext"
-      class="next has-text-centered">
-      <button
-        :disabled="list.loading"
-        class="button is-primary"
-        @click="next()">{{ moreText }}</button>
+    <div class="pagination__bottom">
+      <loading v-if="list.loading" />
+      <p
+        class="text-center"
+        else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
+      <div
+        v-if="list.hasNext"
+        class="next has-text-centered">
+        <button
+          :disabled="list.loading"
+          class="button is-primary"
+          @click="next()">{{ moreText }}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -87,6 +89,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.pagination {
+  &__bottom {
+    width: 100%;
+  }
+}
+
 .next {
   margin: 1rem 0;
 }

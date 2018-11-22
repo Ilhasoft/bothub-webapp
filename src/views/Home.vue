@@ -23,7 +23,8 @@
           <pagination
             v-if="repositoryList"
             :item-component="RepositoryCard"
-            :list="repositoryList" />
+            :list="repositoryList"
+            class="bh-grid home__repositories-wrapper" />
           <p
             v-if="repositoryList && repositoryList.empty"
             class="has-text-centered">Repositories not found.</p>
@@ -93,5 +94,9 @@ export default {
 .home {
   margin: auto;
   max-width: $max-repository-card-width;
+
+  &__repositories-wrapper {
+    flex-wrap: wrap;
+  }
 }
 </style>
