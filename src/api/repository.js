@@ -30,7 +30,7 @@ export default {
   },
   search(query) {
     const queryString = qs.stringify(query);
-    return new utils.List(`/repositories/?${queryString}`);
+    return new utils.List(`/v2/repositories/?${queryString}`);
   },
   get(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/`);
