@@ -1,31 +1,15 @@
 <template>
   <div>
-    <div class="bh-grid bh-grid--inline hide-mobile">
-      <div
-        v-for="category in categories"
-        :key="category.id"
-        class="bh-grid__item">
-        <bh-button
-          :primary="val === category.id"
-          @click="select(category.id)">{{ category.name }}</bh-button>
-      </div>
-    </div>
-    <div class="hide-desktop">
-      <div class="bh-grid">
-        <div class="bh-grid__item">
-          <bh-dropdown>
-            <bh-button
-              slot="trigger"
-              primary>
-              <span>{{ selectedCategoryName }}</span>
-              <bh-icon value="menu-down" />
-            </bh-button>
-            <bh-dropdown-item
-              v-for="category in categories"
-              :key="category.id"
-              @click="select(category.id)">{{ category.name }}</bh-dropdown-item>
-          </bh-dropdown>
-        </div>
+    <div class="bh-grid categories-list">
+      <div class="bh-grid__item bh-grid__item--nested text-right">
+        <bh-dropdown
+          :title="dropdownTitle"
+          position="left">
+          <bh-dropdown-item
+            v-for="category in categories"
+            :key="category.id"
+            @click="select(category.id)">{{ category.name }}</bh-dropdown-item>
+        </bh-dropdown>
       </div>
     </div>
   </div>
@@ -45,10 +29,10 @@ export default {
   },
   computed: {
     categories() {
-      return [{ id: 0, name: 'All', active: this.current === 0 }]
+      return [{ id: 0, name: 'All categories', active: this.current === 0 }]
         .concat(this.allCategories);
     },
-    selectedCategoryName() {
+    dropdownTitle() {
       return this.categories.reduce((current, category) => (
         this.val > 0 && category.id === this.val
           ? category.name
@@ -83,3 +67,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.categories-list{
+  margin-top: 1rem;
+}
+</style>

@@ -24,8 +24,8 @@ export default {
     cursor: pointer;
 
     &:hover {
-      color: $color-primary;
-      background-color: $color-grey;
+      color: $color-fake-white;
+      background-color: $color-primary;
     }
 
     & > * {

@@ -59,4 +59,16 @@ describe('BhDropdown.vue', () => {
       expect(wrapper.vm.open).toBeTruthy();
     });
   });
+
+  describe('renders correctly', () => {
+    beforeEach(async () => {
+      wrapper.setProps({
+        title: 'Select Item',
+      });
+    });
+
+    test('when Dropdown have a title', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });
