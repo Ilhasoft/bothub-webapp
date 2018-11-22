@@ -62,16 +62,11 @@
 </template>
 
 <script>
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import { mapGetters } from 'vuex';
 
-const components = {
-  RepositoryInfo,
-};
 
 export default {
   name: 'RepositoryCard',
-  components,
   computed: {
     ...mapGetters([
       'getProfile',
