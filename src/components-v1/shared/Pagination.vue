@@ -92,6 +92,7 @@ export default {
 .pagination {
   &__bottom {
     width: 100%;
+    display: block;
   }
 }
 

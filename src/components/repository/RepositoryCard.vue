@@ -99,11 +99,13 @@ export default {
 
 
 .repository-card {
-  margin: .5rem;
-  padding: 1rem 0;
-  width: calc((100% / 3) - 1rem);
+  $repository-card-margin: .5rem;
 
-   @media screen and (max-width: $mobile-width) {
+  margin: $repository-card-margin;
+  padding: 1rem 0;
+  width: calc((100% / 3) - #{$repository-card-margin} * 2);
+
+  @media screen and (max-width: $mobile-width) {
     width: 100%;
   }
 
