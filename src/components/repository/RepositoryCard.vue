@@ -1,7 +1,8 @@
 <template>
   <bh-card
     shadow="light"
-    class="repository-card">
+    class="repository-card"
+    no-border>
     <div class="bh-grid bh-grid--column repository-card__align-items">
       <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
         <div class="repository-card__big-badge">
