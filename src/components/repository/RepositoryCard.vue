@@ -26,20 +26,19 @@
 
         <div class="repository-card__info-item">
           <span>Created by</span>
-          <span class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
-          || $attrs.owner__nickname }}</span>
+          <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
+          || $attrs.owner__nickname }}</strong>
         </div>
-        <div class="repository-card__flags">
+        <div class="repository-card__flags bh-grid">
           <span
             v-for="language in $attrs.available_languages"
             :key="language"
             :class="{
               'repository-card__flags__flag': true,
-              'repository-card__flags__flag--main': language == $attrs.language,
           }">
             <bh-language-flag
               :language="language"
-              size="small" />
+              :size="language == $attrs.language? 'small' : ''" />
           </span>
         </div>
         <div class="repository-card__categories">
@@ -99,9 +98,9 @@ export default {
 
 
 .repository-card {
-  margin: 1rem;
+  margin: .5rem;
   padding: 1rem 0;
-  width: calc(90% / 3);
+  width: calc((100% / 3) - 1rem);
 
    @media screen and (max-width: $mobile-width) {
     width: 100%;
@@ -165,16 +164,13 @@ export default {
 
   &__flags {
     margin: .5rem -.25rem;
+    justify-content: center;
+    align-items: center;
 
     &__flag {
       display: inline-block;
       margin: .25rem;
       padding: 0 .25rem .25rem;
-      border-bottom: .25rem solid transparent;
-
-      &--main {
-        border-color: $color-primary;
-      }
     }
   }
 

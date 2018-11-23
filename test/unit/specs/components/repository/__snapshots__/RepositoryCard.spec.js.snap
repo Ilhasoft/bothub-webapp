@@ -14,8 +14,8 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
       <div class="repository-card__title"><span class="repository-card__title__bagde"><router-link to="[object Object]"><bhiconbutton-stub type="button" value="botinho" class="repository-card__title__bagde__icon"></bhiconbutton-stub></router-link></span>
         <router-link to="[object Object]"><span class="text-color-fake-black">Repository</span></router-link>
       </div>
-      <div class="repository-card__info-item"><span>Created by</span> <span class="medium text-color-primary">fake</span></div>
-      <div class="repository-card__flags"><span class="repository-card__flags__flag repository-card__flags__flag--main"><bhlanguageflag-stub language="en" size="small"></bhlanguageflag-stub></span><span class="repository-card__flags__flag"><bhlanguageflag-stub language="pt" size="small"></bhlanguageflag-stub></span></div>
+      <div class="repository-card__info-item"><span>Created by</span> <strong class="medium text-color-primary">fake</strong></div>
+      <div class="repository-card__flags bh-grid"><span class="repository-card__flags__flag"><bhlanguageflag-stub language="en" size="small"></bhlanguageflag-stub></span><span class="repository-card__flags__flag"><bhlanguageflag-stub language="pt" size=""></bhlanguageflag-stub></span></div>
       <div class="repository-card__categories">
         <router-link to="[object Object]">
           <bhbadge-stub size="small" color="grey-light" class="repository-card__categories__category">Business</bhbadge-stub>

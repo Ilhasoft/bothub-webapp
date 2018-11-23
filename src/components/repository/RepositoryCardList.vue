@@ -90,7 +90,7 @@ export default {
 .repository-card-list {
   &__item {
     flex-wrap: wrap;
-    margin: -1rem;
+    margin: -.5rem;
   }
 
    @media screen and (max-width: $mobile-width) {
