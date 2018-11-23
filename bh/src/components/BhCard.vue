@@ -4,7 +4,10 @@
       'bh-card',
       !!shadow
         ? `bh-card--shaded-${shadow}`
-        : 'bh-card--shaded'
+        : 'bh-card--shaded',
+      noBorder
+        ? 'bh-card--no-border'
+        : '',
     ]"
   >
     <div class="bh-card__main">
@@ -26,6 +29,10 @@ export default {
       type: String,
       default: null,
     },
+    noBorder: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -45,6 +52,10 @@ export default {
     background-color: white;
     border: 1px solid $color-grey;
     border-radius: $radius-normal;
+
+    &--no-border {
+      border: 1px solid transparent;
+    }
 
     &__main {
       flex-grow: 1;

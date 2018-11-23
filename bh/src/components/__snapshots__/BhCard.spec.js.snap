@@ -9,6 +9,15 @@ exports[`BhCard.vue renders correctly 1`] = `
 </div>
 `;
 
+exports[`BhCard.vue set no-border props renders correctly 1`] = `
+<div class="bh-card bh-card--shaded bh-card--no-border">
+  <div class="bh-card__main">
+    <div>default</div>
+  </div>
+  <div>append</div>
+</div>
+`;
+
 exports[`BhCard.vue set shadow hard renders correctly 1`] = `
 <div class="bh-card bh-card--shaded-hard">
   <div class="bh-card__main">
