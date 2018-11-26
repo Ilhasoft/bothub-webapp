@@ -24,14 +24,12 @@
             <languages-list v-model="currentLanguage" />
           </div>
         </div>
-        <div class="bh-grid__item">
-          <pagination
-            v-if="repositoryList"
-            :item-component="RepositoryCard"
-            :list="repositoryList" />
-          <p
-            v-if="repositoryList && repositoryList.empty"
-            class="has-text-centered">Repositories not found.</p>
+        <div>
+          <repository-card-list
+            :category="currentCategory"
+            :language="currentLanguage"
+            :search="search"
+          />
         </div>
       </div>
     </div>
@@ -39,12 +37,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import CategoriesList from '@/components/shared/CategoriesList';
 import LanguagesList from '@/components/shared/LanguagesList';
-import Pagination from '@/components-v1/shared/Pagination';
-import RepositoryCard from '@/components/repository/RepositoryCard';
+import RepositoryCardList from '@/components/repository/RepositoryCardList';
 
 
 export default {
@@ -52,56 +48,16 @@ export default {
   components: {
     Layout,
     CategoriesList,
-    Pagination,
     LanguagesList,
+    RepositoryCardList,
   },
   data() {
     return {
-      RepositoryCard,
       currentLanguage: '',
       currentCategory: 0,
       repositoryList: null,
       search: '',
     };
-  },
-  watch: {
-    currentLanguage() {
-      this.updateRepositoryList();
-    },
-    currentCategory() {
-      this.updateRepositoryList();
-    },
-    search() {
-      this.updateRepositoryList();
-    },
-    $route() {
-      this.currentCategory = this.$route.query.category || 0;
-    },
-  },
-  mounted() {
-    this.updateRepositoryList();
-  },
-  methods: {
-    ...mapActions([
-      'searchRepositories',
-    ]),
-    async updateRepositoryList() {
-      const { search } = this;
-      this.repositoryList = null;
-
-      if (this.currentCategory === 0) {
-        this.repositoryList = await this.searchRepositories({
-          language: this.currentLanguage,
-          search,
-        });
-      } else if (this.currentCategory > 0) {
-        this.repositoryList = await this.searchRepositories({
-          categories: this.currentCategory,
-          language: this.currentLanguage,
-          search,
-        });
-      }
-    },
   },
 };
 </script>
