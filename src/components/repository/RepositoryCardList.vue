@@ -4,7 +4,7 @@
       v-if="repositoryList"
       :item-component="exampleItemElem"
       :list="repositoryList"
-      class="bh-grid repository-card-list__item" />
+      class="repository-card-list__item" />
     <p
       v-if="repositoryList && repositoryList.empty"
       class="has-text-centered">Repositories not found.</p>
@@ -89,8 +89,8 @@ export default {
 
 .repository-card-list {
   &__item {
+    display: flex;
     flex-wrap: wrap;
-    margin: -.5rem;
   }
 
    @media screen and (max-width: $mobile-width) {

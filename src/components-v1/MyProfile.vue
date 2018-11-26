@@ -36,7 +36,7 @@
           v-if="repositoryList"
           :item-component="repositoryItemElem"
           :list="repositoryList"
-          class="bh-grid my-profile__repositories__cards" />
+          class="my-profile__repositories__cards" />
       </div>
     </div>
     <bh-modal :open.sync="editProfileModalOpen">
@@ -153,6 +153,7 @@ export default {
     margin: 2rem auto;
 
     &__cards {
+      display: flex;
       flex-wrap: wrap;
     }
   }

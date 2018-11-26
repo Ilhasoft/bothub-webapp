@@ -103,10 +103,14 @@ export default {
 
   margin: $repository-card-margin;
   padding: 1rem 0;
-  width: calc((100% / 3) - #{$repository-card-margin} * 2);
+  width: calc(100% * 1/3 - 1rem);
 
   @media screen and (max-width: $mobile-width) {
-    width: 100%;
+    width: calc(100% * 1/2 - 1rem);
+  }
+
+  @media screen and (max-width: $small-mobile-width) {
+    width: calc(100% - 1rem);
   }
 
   &__align-items {
