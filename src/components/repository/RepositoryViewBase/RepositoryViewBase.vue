@@ -30,17 +30,19 @@
             :repository="repository"
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
-        <div class="rpstr-vw-bs__status-bar">
+        <div class="rpstr-vw-bs__status-bar clickable">
           <div class="bh-grid bh-grid--space-between">
             <div class="bh-grid__item">
               <div class="bh-grid text-color-grey-dark">
-                <div class="bh-grid__item">
-                  <bh-icon value="flag-variant" />
-                  <span>{{ repository.available_languages.length }} languages</span>
+                <div class="bh-grid__item rpstr-vw-bs__status-bar__information">
+                  <bh-icon value="language" />
+                  <span class="rpstr-vw-bs__status-bar__information__text">
+                    {{ repository.available_languages.length }} languages</span>
                 </div>
                 <div class="bh-grid__item">
-                  <bh-icon value="botinho" />
-                  <span>{{ repository.examples__count }} examples</span>
+                  <bh-icon value="sentence" />
+                  <span class="rpstr-vw-bs__status-bar__information__text">
+                    {{ repository.examples__count }} sentences</span>
                 </div>
               </div>
             </div>
@@ -51,12 +53,12 @@
                 <div
                   v-if="warningsCount > 0"
                   class="bh-grid__item">
-                  <a
-                    href="#warnings"
-                    @click.prevent="openWarningsModal()">
-                    <bh-icon value="alert" />
-                    <span>{{ warningsCount }} warnings</span>
-                  </a>
+                  <div>
+                    <bh-icon
+                      value="warning" />
+                    <span class="rpstr-vw-bs__status-bar__information__text">
+                      {{ warningsCount }} warnings</span>
+                  </div>
                 </div>
                 <div
                   v-if="requirementsCount > 0"
@@ -68,16 +70,16 @@
                     <span>{{ requirementsCount }} requirements missed</span>
                   </a>
                 </div>
-                <div class="bh-grid__item">
-                  <a
-                    :class="{
-                      'text-color-grey-dark': !repository.ready_for_train,
-                    }"
-                    href="#train"
-                    @click.prevent="openTrainModal()">
-                    <bh-icon value="school" />
-                    <span>Train</span>
-                  </a>
+                <div
+                  v-if="repository.ready_for_train"
+                  class="bh-grid__item">
+                  <div
+                    class="text-color-primary"
+                    @click="openTrainModal()">
+                    <bh-icon value="botinho" />
+                    <span class="rpstr-vw-bs__status-bar__information__text">
+                      Your bot is ready to be trained</span>
+                  </div>
                 </div>
               </div>
               <div
@@ -328,6 +330,20 @@ export default {
 
   &__status-bar {
     background-color: $color-fake-white;
+
+    &__information {
+      &__text {
+        margin: .5rem;
+      }
+
+      &__icon {
+
+      }
+    }
+    &:hover {
+      background-color: $color-grey-light;
+      transition: 0.4s;
+    }
   }
 
   &__card {
