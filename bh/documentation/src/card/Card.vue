@@ -13,6 +13,12 @@
         :code="cardShadowsCode" />
     </div>
     <div class="bh-grid__item">
+      <h3>Card without border</h3>
+      <example
+        :component="NoBorderCardExample"
+        :code="noBorderCardExampleCode" />
+    </div>
+    <div class="bh-grid__item">
       <api :data="api" />
     </div>
   </div>
@@ -25,6 +31,8 @@ import SimpleCard from './examples/SimpleCard';
 import simpleCardCode from '!!raw-loader!./examples/SimpleCard';
 import CardShadows from './examples/CardShadows';
 import cardShadowsCode from '!!raw-loader!./examples/CardShadows';
+import NoBorderCardExample from './examples/NoBorderCard';
+import noBorderCardExampleCode from '!!raw-loader!./examples/NoBorderCard';
 import api from './api';
 
 
@@ -40,6 +48,8 @@ export default {
       simpleCardCode,
       CardShadows,
       cardShadowsCode,
+      NoBorderCardExample,
+      noBorderCardExampleCode,
       api,
 
     };

@@ -35,7 +35,8 @@
         <pagination
           v-if="repositoryList"
           :item-component="repositoryItemElem"
-          :list="repositoryList" />
+          :list="repositoryList"
+          class="my-profile__repositories__cards" />
       </div>
     </div>
     <bh-modal :open.sync="editProfileModalOpen">
@@ -150,6 +151,11 @@ export default {
   &__repositories {
     max-width: $max-repository-card-width;
     margin: 2rem auto;
+
+    &__cards {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }
 </style>

@@ -12,5 +12,11 @@ export default {
       description: 'Set the content of Card',
       default: 'null',
     },
+    {
+      name: 'no-border',
+      type: 'boolean',
+      description: 'Add and Remove border to card',
+      default: 'false',
+    },
   ],
 };
