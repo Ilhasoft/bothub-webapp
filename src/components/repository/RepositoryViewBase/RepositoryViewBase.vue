@@ -30,18 +30,20 @@
             :repository="repository"
             class="rpstr-vw-bs__card__header__navigation" />
         </div>
-        <div class="rpstr-vw-bs__status-bar clickable">
+        <div
+          class="rpstr-vw-bs__status-bar clickable"
+          @click="barClicked()">
           <div class="bh-grid bh-grid--space-between">
             <div class="bh-grid__item">
               <div class="bh-grid text-color-grey-dark">
-                <div class="bh-grid__item rpstr-vw-bs__status-bar__information">
+                <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
                   <bh-icon value="language" />
-                  <span class="rpstr-vw-bs__status-bar__information__text">
+                  <span class="rpstr-vw-bs__status-bar__text-information">
                     {{ repository.available_languages.length }} languages</span>
                 </div>
-                <div class="bh-grid__item">
+                <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
                   <bh-icon value="sentence" />
-                  <span class="rpstr-vw-bs__status-bar__information__text">
+                  <span class="rpstr-vw-bs__status-bar__text-information">
                     {{ repository.examples__count }} sentences</span>
                 </div>
               </div>
@@ -52,32 +54,28 @@
                 class="bh-grid">
                 <div
                   v-if="warningsCount > 0"
-                  class="bh-grid__item">
-                  <div>
-                    <bh-icon
-                      value="warning" />
-                    <span class="rpstr-vw-bs__status-bar__information__text">
+                  class="text-color-grey-dark bh-grid__item">
+                  <div class="rpstr-vw-bs__status-bar__icons-align">
+                    <bh-icon value="warning" />
+                    <span class="rpstr-vw-bs__status-bar__text-information">
                       {{ warningsCount }} warnings</span>
                   </div>
                 </div>
                 <div
                   v-if="requirementsCount > 0"
-                  class="bh-grid__item">
-                  <a
-                    href="#requirements"
-                    @click.prevent="openTrainModal()">
-                    <bh-icon value="clipboard-alert" />
-                    <span>{{ requirementsCount }} requirements missed</span>
-                  </a>
+                  class="text-color-grey-dark bh-grid__item">
+                  <div class="rpstr-vw-bs__status-bar__icons-align">
+                    <bh-icon value="close-circle" />
+                    <span class="rpstr-vw-bs__status-bar__text-information">
+                      {{ requirementsCount }} requirements missed</span>
+                  </div>
                 </div>
                 <div
                   v-if="repository.ready_for_train"
                   class="bh-grid__item">
-                  <div
-                    class="text-color-primary"
-                    @click="openTrainModal()">
+                  <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                     <bh-icon value="botinho" />
-                    <span class="rpstr-vw-bs__status-bar__information__text">
+                    <span class="rpstr-vw-bs__status-bar__text-information">
                       Your bot is ready to be trained</span>
                   </div>
                 </div>
@@ -86,12 +84,11 @@
                 v-else-if="authenticated && repository.available_request_authorization"
                 class="bh-grid">
                 <div class="bh-grid__item">
-                  <a
-                    href="#requestauthorization"
-                    @click.prevent="openRequestAuthorizationModal()">
+                  <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                     <bh-icon />
-                    <span>Request Authorization</span>
-                  </a>
+                    <span
+                      class="rpstr-vw-bs__status-bar__text-information">Request Authorization</span>
+                  </div>
                 </div>
               </div>
               <div
@@ -107,12 +104,10 @@
                 v-else-if="!authenticated"
                 class="bh-grid">
                 <div class="bh-grid__item">
-                  <a
-                    href="#signin"
-                    @click.prevent="openLoginModal()">
+                  <div class="text-color-primary">
                     <bh-icon value="account" />
                     <span>Sign in</span>
-                  </a>
+                  </div>
                 </div>
               </div>
               <div
@@ -146,6 +141,7 @@
       :requirements-to-train="repository.requirements_to_train"
       :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
+      :languages-warnings="repository.languages_warnings"
       @train="train()" />
     <train-response
       v-if="trainResponseData"
@@ -156,10 +152,6 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
-    <warning-modal
-      v-if="repository"
-      :languages-warnings="repository.languages_warnings"
-      :open.sync="warningsModelOpen" />
   </layout>
 </template>
 
@@ -172,7 +164,6 @@ import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
-import WarningModal from '@/components/repository/WarningModal';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -194,7 +185,6 @@ export default {
     TrainResponse,
     AnalyzeTextDrawer,
     RequestAuthorizationModal,
-    WarningModal,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -224,7 +214,6 @@ export default {
       trainResponseOpen: false,
       training: false,
       requestAuthorizationModalOpen: false,
-      warningsModelOpen: false,
     };
   },
   computed: {
@@ -285,8 +274,16 @@ export default {
       this.training = false;
       await this.updateRepository(false);
     },
-    openTrainModal() {
-      this.trainModalOpen = true;
+    barClicked() {
+      if (!this.authenticated) {
+        this.openLoginModal();
+      }
+      if (this.authenticated && this.repository.available_request_authorization) {
+        this.openRequestAuthorizationModal();
+      }
+      if (this.authenticated && this.repository.authorization.can_write) {
+        this.trainModalOpen = true;
+      }
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
@@ -298,9 +295,6 @@ export default {
         type: 'is-success',
       });
       this.updateRepository(false);
-    },
-    openWarningsModal() {
-      this.warningsModelOpen = true;
     },
   },
 };
@@ -330,16 +324,17 @@ export default {
 
   &__status-bar {
     background-color: $color-fake-white;
+    padding: 0 1.5rem;
 
-    &__information {
-      &__text {
-        margin: .5rem;
-      }
-
-      &__icon {
-
-      }
+    &__icons-align {
+      display: flex;
+      align-items: center;
     }
+
+    &__text-information {
+      margin: 0 .25rem;
+    }
+
     &:hover {
       background-color: $color-grey-light;
       transition: 0.4s;
