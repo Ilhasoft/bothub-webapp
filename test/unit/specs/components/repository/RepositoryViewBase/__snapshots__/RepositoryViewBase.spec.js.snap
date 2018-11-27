@@ -10,7 +10,6 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </layout-stub>
 `;
 
@@ -21,7 +20,6 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
       <bhloading-stub></bhloading-stub>
     </div>
   </div>
-  <!---->
   <!---->
   <!---->
   <!---->
@@ -38,7 +36,6 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
   <!---->
   <!---->
   <!---->
-  <!---->
 </layout-stub>
 `;
 
@@ -49,9 +46,8 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
       <bhloading-stub></bhloading-stub>
     </div>
   </div>
-  <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></trainmodal-stub>
+  <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]"></trainmodal-stub>
   <!---->
   <requestauthorizationmodal-stub repositoryuuid="null"></requestauthorizationmodal-stub>
-  <warningmodal-stub languageswarnings="[object Object]"></warningmodal-stub>
 </layout-stub>
 `;
