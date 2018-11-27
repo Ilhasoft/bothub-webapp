@@ -61,9 +61,8 @@ exports[`TrainModal.vue renders correctly 1`] = `
   <div class="train-modal">
     <div class="bh-grid bh-grid--column">
       <!----> <strong class="text-color-primary text-center bh-grid__item">
-        Your bot is ready to be trained!</strong>
-      <!---->
-    </div>
+        Your bot is ready to be trained!</strong> <strong class="text-color-primary text-center bh-grid__item">
+        Your bot don't have sentences yet</strong></div>
   </div>
   <div class="bh-grid__item text-center train-modal__buttons">
     <bhbutton-stub primary="true" type="button">
