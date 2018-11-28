@@ -48,10 +48,6 @@
             </div>
           </div>
         </div>
-        <strong
-          v-else
-          class="text-color-primary text-center bh-grid__item">
-          Your bot don't have sentences yet</strong>
       </div>
     </div>
     <div class="bh-grid__item text-center train-modal__buttons">

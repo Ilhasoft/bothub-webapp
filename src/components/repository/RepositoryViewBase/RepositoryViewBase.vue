@@ -56,7 +56,7 @@
                   v-if="warningsCount > 0"
                   class="text-color-grey-dark bh-grid__item">
                   <div class="rpstr-vw-bs__status-bar__icons-align">
-                    <bh-icon value="warning" />
+                    <bh-icon value="alert" />
                     <span class="rpstr-vw-bs__status-bar__text-information">
                       {{ warningsCount }} warnings</span>
                   </div>
