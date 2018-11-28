@@ -47,21 +47,20 @@
             </div>
             <form @submit.prevent="onSubscribeSubmit()">
               <div class="footer-has-input">
-                <b-field>
-                  <input
-                    v-model="email"
-                    :disabled="submittingNewsletter"
-                    type="email"
-                    class="input footer-input"
-                    placeholder="your@email.com" >
-                  <span class="control">
-                    <button class="button is-secondary">
-                      <b-icon
-                        :icon="submittingNewsletter ? 'refresh' : 'email'"
-                        :custom-class="submittingNewsletter ? 'icon-spin' : null" />
-                    </button>
-                  </span>
-                </b-field>
+                <bh-text
+                  v-model="email"
+                  type="email"
+                  no-border
+                  placeholder="search for bots"
+                >
+                  <div slot="append">
+                    <bh-icon-button
+                      size="small"
+                      class="text-color-grey-dark"
+                      value="magnify"
+                      @click="onSubscribeSubmit()" />
+                  </div>
+                </bh-text>
               </div>
             </form>
           </div>
@@ -131,13 +130,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~bh/src/assets/scss/colors.scss';
+
+
 footer {
   width: 100%;
   overflow: hidden;
 
-  $font-color: #5E5786;
-  $font-color-lighten: #aba8c2;
-  $background-color: #221859;
+  $font-color: $color-white;
+  $font-color-lighten: $color-white;
+  $background-color: $color-primary;
 
   background-color: $background-color;
   color: $font-color;
@@ -149,7 +151,7 @@ footer {
         transition: color .2s ease;
 
         &:hover {
-          color: $font-color-lighten;
+          color: $color-grey-light;
         }
       }
     }
@@ -218,7 +220,7 @@ footer {
           transition: background-color .2s ease;
 
           &:hover {
-            color: $background-color;
+            color: $color-primary-darker;
             background-color: $font-color-lighten;
           }
 
