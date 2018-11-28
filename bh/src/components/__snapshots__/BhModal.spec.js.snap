@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhModal.vue close modal clicking in background renders correctly 1`] = `
-<div class="bh-modal" name="fade">
+<div class="bh-modal" name="bh-modal-fade">
   <bhcard-stub class="bh-modal__content">
     <div class="bh-modal__header">
       <div class="bh-grid">
@@ -15,7 +15,7 @@ exports[`BhModal.vue close modal clicking in background renders correctly 1`] = 
 `;
 
 exports[`BhModal.vue close modal clicking in closeBtn renders correctly 1`] = `
-<div class="bh-modal" name="fade">
+<div class="bh-modal" name="bh-modal-fade">
   <bhcard-stub class="bh-modal__content">
     <div class="bh-modal__header">
       <div class="bh-grid">
@@ -29,7 +29,7 @@ exports[`BhModal.vue close modal clicking in closeBtn renders correctly 1`] = `
 `;
 
 exports[`BhModal.vue close modal pass false via open prop open modal pass true via open prop renders correctly 1`] = `
-<div class="bh-modal" name="fade" style="">
+<div class="bh-modal" name="bh-modal-fade" style="">
   <bhcard-stub class="bh-modal__content">
     <div class="bh-modal__header">
       <div class="bh-grid">
@@ -43,7 +43,7 @@ exports[`BhModal.vue close modal pass false via open prop open modal pass true v
 `;
 
 exports[`BhModal.vue close modal pass false via open prop renders correctly 1`] = `
-<div class="bh-modal" name="fade" style="display: none;">
+<div class="bh-modal" name="bh-modal-fade" style="display: none;">
   <bhcard-stub class="bh-modal__content">
     <div class="bh-modal__header">
       <div class="bh-grid">
@@ -57,7 +57,7 @@ exports[`BhModal.vue close modal pass false via open prop renders correctly 1`] 
 `;
 
 exports[`BhModal.vue renders correctly 1`] = `
-<div class="bh-modal" name="fade">
+<div class="bh-modal" name="bh-modal-fade">
   <bhcard-stub class="bh-modal__content">
     <div class="bh-modal__header">
       <div class="bh-grid">

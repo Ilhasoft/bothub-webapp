@@ -1,6 +1,6 @@
 <template>
   <transition
-    name="fade"
+    name="bh-modal-fade"
   >
     <div
       v-show="open"
@@ -113,16 +113,16 @@ export default {
       max-width: 600px;
       margin: 3rem auto;
     }
-  }
-}
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .5s
-}
 
-.fade-enter,
-.fade-leave-to
-{
-  opacity: 0
+    &-fade-enter-active,
+    &-fade-leave-active {
+      transition: opacity .5s;
+    }
+
+    &-fade-enter,
+    &-fade-leave-to {
+      opacity: 0;
+    }
+  }
 }
 </style>
