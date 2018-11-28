@@ -104,9 +104,9 @@
                 v-else-if="!authenticated"
                 class="bh-grid">
                 <div class="bh-grid__item">
-                  <div class="text-color-primary">
+                  <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                     <bh-icon value="account" />
-                    <span>Sign in</span>
+                    <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
                   </div>
                 </div>
               </div>
