@@ -30,7 +30,7 @@
           <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
           || $attrs.owner__nickname }}</strong>
         </div>
-        <div class="repository-card__flags bh-grid">
+        <div class="repository-card__flags bh-grid bh-grid--row">
           <span
             v-for="language in $attrs.available_languages"
             :key="language"
@@ -104,6 +104,7 @@ export default {
   margin: $repository-card-margin;
   padding: 1rem 0;
   width: calc(100% * 1/3 - 1rem);
+  word-break: break-all;
 
   @media screen and (max-width: $mobile-width) {
     width: calc(100% * 1/2 - 1rem);
@@ -177,7 +178,7 @@ export default {
     &__flag {
       display: inline-block;
       margin: .25rem;
-      padding: 0 .25rem .25rem;
+
     }
   }
 
