@@ -78,6 +78,15 @@
     <bh-icon
       value="lock-reset"
       size="normal"/>
+    <bh-icon
+      value="warning"
+      size="normal"/>
+    <bh-icon
+      value="sentence"
+      size="normal"/>
+    <bh-icon
+      value="language"
+      size="normal"/>
   </div>
 </template>
 
