@@ -26,6 +26,9 @@ import ClipboardAlert from './assets/icons/clipboard-alert.svg';
 import LockReset from './assets/icons/lock-reset.svg';
 import AccountEdit from './assets/icons/account-edit.svg';
 import Alert from './assets/icons/alert.svg';
+import Warning from './assets/icons/warning.svg';
+import Sentence from './assets/icons/sentence.svg';
+import Language from './assets/icons/language.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -67,6 +70,9 @@ export default {
   alert: Alert,
   'lock-reset': LockReset,
   'account-edit': AccountEdit,
+  warning: Warning,
+  sentence: Sentence,
+  language: Language,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
