@@ -1,7 +1,5 @@
 <template>
-  <transition
-    name="bh-modal-fade"
-  >
+  <transition name="bh-modal-fade">
     <div
       v-show="open"
       ref="modal"
@@ -10,7 +8,7 @@
     >
       <bh-card class="bh-modal__content">
         <div class="bh-modal__header">
-          <div class="bh-grid">
+          <div class="bh-grid bh-grid--row">
             <h3 class="bh-modal__header__title bh-grid__item">{{ title }}</h3>
             <button
               ref="closeBtn"
