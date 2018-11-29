@@ -1,13 +1,11 @@
 <template>
   <div class="bh-grid">
     <div class="bh-grid__item">
-      <div>
-        <bh-button
-          secondary
-          @click="openLogModal()">
-          Click here to Open Modal
-        </bh-button>
-      </div>
+      <bh-button
+        secondary
+        @click="openLogModal()">
+        Click here to Open Modal
+      </bh-button>
     </div>
     <bh-modal
       :open.sync="modalOpen"
