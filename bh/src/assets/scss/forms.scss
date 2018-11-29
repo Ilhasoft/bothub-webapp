@@ -72,7 +72,7 @@
     line-height: $font-small;
 
     #{$p}__input {
-      padding: .25rem;
+      padding: .5rem;
       font-size: $font-small;
       line-height: $font-small;
     }
@@ -83,7 +83,7 @@
     line-height: $font-medium;
 
     #{$p}__input {
-      padding: .75rem;
+      padding: 1rem;
       font-size: $font-medium;
       line-height: $font-medium;
     }
@@ -94,7 +94,7 @@
     line-height: $font-large;
 
     #{$p}__input {
-      padding: 1rem;
+      padding: 1.75rem;
       font-size: $font-large;
       line-height: $font-large;
     }
