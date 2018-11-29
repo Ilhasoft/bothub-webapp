@@ -24,7 +24,7 @@ exports[`UpdateList.vue renders correctly 1`] = `
       </div>
     </div>
   </bhcard-stub>
-  <bhmodal-stub backgroundcloses="true">
+  <bhmodal-stub title="Title" backgroundcloses="true">
     <div class="update-item__log">
       <h2 class="title is-2">Training Log</h2> <pre class="update-item__log__content"></pre>
     </div>

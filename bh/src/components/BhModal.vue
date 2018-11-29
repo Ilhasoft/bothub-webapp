@@ -1,26 +1,32 @@
 <template>
-  <div
-    v-show="open"
-    ref="modal"
-    class="bh-modal"
-    @click="backgroundClose($event)"
-  >
-    <div class="bh-modal__close">
-      <button
-        ref="closeBtn"
-        class="bh-modal__close__button"
-        @click="close()"
-      >
-        <bh-icon
-          size="small"
-          value="close"
-        />
-      </button>
+  <transition name="bh-modal-fade">
+    <div
+      v-show="open"
+      ref="modal"
+      class="bh-modal"
+      @click="backgroundClose($event)"
+    >
+      <bh-card class="bh-modal__content">
+        <div class="bh-modal__header">
+          <div class="bh-grid bh-grid--row">
+            <h3 class="bh-modal__header__title bh-grid__item">{{ title }}</h3>
+            <button
+              ref="closeBtn"
+              class="bh-modal__header__close-button clickable"
+              @click="close()"
+            >
+              <bh-icon
+                class="bh-modal__close bh-grid__itembh-grid__item--grow-0"
+                size="small"
+                value="close"
+              />
+            </button>
+          </div>
+        </div>
+        <slot />
+      </bh-card>
     </div>
-    <bh-card class="bh-modal__content">
-      <slot />
-    </bh-card>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -30,6 +36,10 @@ export default {
     open: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      default: 'Title',
     },
     backgroundCloses: {
       type: Boolean,
@@ -68,6 +78,7 @@ export default {
 
 <style lang="scss">
 @import '@scss/variables.scss';
+@import '@scss/colors.scss';
 
 
 .bh {
@@ -82,13 +93,14 @@ export default {
     overflow: auto;
     background-color: rgba(0, 0, 0, .5);
 
-    &__close {
-      text-align: right;
+    &__header {
+      padding: 1rem;
 
-      &__button {
-        padding: .5rem;
-        color: white;
-        cursor: pointer;
+      &__title {
+        text-align: center;
+      }
+
+      &__close-button {
         background: none;
         border: none;
         outline: none;
@@ -98,6 +110,16 @@ export default {
     &__content {
       max-width: 600px;
       margin: 3rem auto;
+    }
+
+    &-fade-enter-active,
+    &-fade-leave-active {
+      transition: opacity .5s;
+    }
+
+    &-fade-enter,
+    &-fade-leave-to {
+      opacity: 0;
     }
   }
 }

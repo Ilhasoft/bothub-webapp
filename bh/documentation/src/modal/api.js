@@ -14,6 +14,13 @@ export default {
       required: false,
       default: 'true',
     },
+    {
+      name: 'title',
+      type: 'String',
+      description: 'Set the title for modal',
+      required: false,
+      default: 'title',
+    },
   ],
   events: [
     {

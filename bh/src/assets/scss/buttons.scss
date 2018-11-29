@@ -29,6 +29,14 @@
     outline: none;
     box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
 
+    svg {
+      width: 125%;
+      max-width: 125%;
+      height: 125%;
+      max-height: 125%;
+      margin: -12.5%;
+    }
+
     > * {
       margin-right: .5rem;
 

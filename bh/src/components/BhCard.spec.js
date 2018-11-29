@@ -37,4 +37,14 @@ describe('BhCard.vue', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
+
+  describe('set no-border props', () => {
+    beforeEach(() => {
+      wrapper.setProps({ noBorder: true });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });
