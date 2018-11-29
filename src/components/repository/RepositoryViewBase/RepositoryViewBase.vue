@@ -32,7 +32,7 @@
         </div>
         <div
           class="rpstr-vw-bs__status-bar clickable"
-          @click="barClicked()">
+          @click="onStatusBarClick()">
           <div class="bh-grid bh-grid--space-between">
             <div class="bh-grid__item">
               <div class="bh-grid text-color-grey-dark">
@@ -56,7 +56,7 @@
                   v-if="warningsCount > 0"
                   class="text-color-grey-dark bh-grid__item">
                   <div class="rpstr-vw-bs__status-bar__icons-align">
-                    <bh-icon value="alert" />
+                    <bh-icon value="warning" />
                     <span class="rpstr-vw-bs__status-bar__text-information">
                       {{ warningsCount }} warnings</span>
                   </div>
@@ -274,7 +274,7 @@ export default {
       this.training = false;
       await this.updateRepository(false);
     },
-    barClicked() {
+    onStatusBarClick() {
       if (!this.authenticated) {
         this.openLoginModal();
       }
