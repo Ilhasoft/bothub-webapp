@@ -44,6 +44,9 @@ export default {
     query() {
       this.updateExamples(true);
     },
+    repository() {
+      this.updateExamples(true);
+    },
   },
   mounted() {
     this.updateExamples();
