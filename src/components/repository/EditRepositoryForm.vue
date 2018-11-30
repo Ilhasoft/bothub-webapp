@@ -74,6 +74,7 @@ export default {
           repositorySlug: this.slug,
         });
         this.$emit('edited', response.data);
+        this.submitting = false;
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
