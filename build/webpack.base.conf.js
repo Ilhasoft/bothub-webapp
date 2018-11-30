@@ -36,7 +36,6 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'bh': resolve('src/bh'),
     }
   },
   module: {
@@ -58,17 +57,22 @@ module.exports = {
       },
       {
         test: /\.s[a|c]ss$/,
-        loader: 'style!css!sass'
+        loader: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
+        ],
       },
       {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader',
-        include: [resolve('src/bh')]
+        test: /\.css$/,
+        loader: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader' },
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
-        exclude: [resolve('src/bh')],
         options: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')

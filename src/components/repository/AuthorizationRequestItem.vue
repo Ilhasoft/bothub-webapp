@@ -1,29 +1,27 @@
 <template>
-  <div class="media">
-    <div class="media-left is-hidden-mobile">
+  <div class="bh-grid authorization-request-item">
+    <div class="bh-grid__item bh-grid__item--grow-0">
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
-    <div class="media-content">
-      <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
-      <p><small>{{ text }}</small></p>
+    <div class="bh-grid__item bh-grid__item--grow-1">
+      <div><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></div>
+      <div><small>{{ text }}</small></div>
     </div>
-    <div
-      ref="approveBtn"
-      class="clickable-icon has-text-success"
-      @click="approve()">
-      <b-icon
-        icon="check"
-        size="is-small" />
+    <div class="bh-grid__item bh-grid__item--grow-0">
+      <bh-icon-button
+        ref="approveBtn"
+        primary
+        value="check"
+        size="small"
+        @click="approve()" />
     </div>
-    <div class="media-right">
-      <div
+    <div class="bh-grid__item bh-grid__item--grow-0">
+      <bh-icon-button
         ref="rejectBtn"
-        class="clickable-icon has-text-danger"
-        @click="reject()">
-        <b-icon
-          icon="close"
-          size="is-small" />
-      </div>
+        class="text-color-danger"
+        value="close"
+        size="small"
+        @click="reject()" />
     </div>
   </div>
 </template>
@@ -31,7 +29,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import UserAvatar from '@/components/shared/UserAvatar';
+import UserAvatar from '@/components/user/UserAvatar';
 
 
 const components = {
@@ -134,8 +132,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.clickable-icon {
-  cursor: pointer;
-  padding: .75rem;
+@import '~bh/src/assets/scss/colors.scss';
+
+
+.authorization-request-item {
+  border-bottom: 1px solid $color-grey;
 }
 </style>

@@ -21,10 +21,14 @@
     <div v-if="listActived === 'intents'">
       <intents-and-labels-item
         v-for="intent in intents"
-        :key="intent"
-        :title="intent"
+        :key="intent.value"
+        :title="intent.value"
+        :sentences-count="intent.examples__count"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', $event)" />
+        @showSentences="$emit('showSentences', { type: 'intent', intent })" />
+      <p
+        v-if="intents.length === 0"
+        class="intents-and-labels-list__empty-message">There is no intents </p>
     </div>
     <div v-else-if="listActived === 'labels'">
       <intents-and-labels-item
@@ -32,8 +36,13 @@
         :key="label.value"
         :title="label.value"
         :label-entities="label.entities"
+        :sentences-count="label.examples__count"
         class="intents-and-labels-list__item"
-        @showSentences="$emit('showSentences', $event)" />
+        @showSentences="$emit('showSentences', { type: 'label', label })"
+        @showEntitySentences="$emit('showSentences', { type: 'entity', label, entity: $event })" />
+      <p
+        v-if="labels.length === 0"
+        class="intents-and-labels-list__empty-message">There is no labels </p>
     </div>
   </div>
 </template>
@@ -72,6 +81,11 @@ export default {
 
 <style lang="scss" scoped>
 .intents-and-labels-list {
+  &__empty-message {
+    margin: 1rem;
+    font-style: italic;
+  }
+
   &__radio {
     margin: 0 -.25rem;
     display: flex;
@@ -84,5 +98,6 @@ export default {
   &__item {
     margin: 1rem 0;
   }
+
 }
 </style>

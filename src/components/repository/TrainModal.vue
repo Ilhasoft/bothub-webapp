@@ -1,58 +1,72 @@
 <template>
-  <bh-modal :open.sync="openValue">
+  <bh-modal
+    :open.sync="openValue"
+    title="Training Status">
     <div class="train-modal">
-      <h1 class="title is-3">Train Status</h1>
-      <div
-        v-for="(requirements, lang) in requirementsToTrain"
-        :key="lang">
-        <table class="table is-fullwidth">
-          <thead>
-            <tr>
-              <th>{{ lang | languageVerbose }} is not ready to train</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(requirement, i) in requirements"
-              :key="i">
-              <td>{{ requirement }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div v-if="Object.keys(requirementsToTrain).length === 0">
-        <p>You don't have any pendency to train.</p>
-      </div>
-      <div class="train-modal__buttons level">
-        <div class="level-left">
-          <div class="train-modal__flags">
-            <div
-              v-for="(langReadyForTrain, lang) in languagesReadyForTrain"
-              :key="lang"
-              class="train-modal__flags__item">
-              <bh-language-flag :language="lang" />
-              <bh-icon
-                :value="langReadyForTrain ? 'check' : 'exclamation'"
-                :class="{
-                  'train-modal__flags__item__status': true,
-                  'train-modal__flags__item__status--ready': langReadyForTrain,
-                }"
-                size="small" />
+      <div class="bh-grid bh-grid--column">
+        <strong
+          v-if="requirementsToTrainStatus"
+          class="text-color-danger text-center bh-grid__item">
+          One or more languages cannot be trained in the moment.</strong>
+        <strong
+          v-if="readyForTrain && !requirementsToTrainStatus"
+          class="text-color-primary text-center bh-grid__item">
+          Your bot is ready to be trained!</strong>
+        <div
+          v-if="requirementsToTrainStatus || languagesWarningsStatus"
+          class="train-modal__wrapper bh-grid__item--nested">
+          <div v-if="requirementsToTrainStatus">
+            <strong>Missing requirements</strong>
+            <div class="train-modal__wrapper__content-requirements">
+              <div
+                v-for="(requirements, lang) in requirementsToTrain"
+                :key="lang"
+                class="train-modal__wrapper__content__item">
+                <p
+                  v-for="(requirement, i) in requirements"
+                  :key="i"> {{ requirement }}
+                  <bh-language-flag
+                    :language="lang"
+                    class="train-modal__wrapper__content__item__flag"/> </p>
+              </div>
+            </div>
+          </div>
+          <div v-if="languagesWarningsStatus">
+            <strong>Warnings</strong>
+            <div class="train-modal__wrapper__content-warnings">
+              <div
+                v-for="(warnings, lang) in languagesWarnings"
+                :key="lang"
+                class="train-modal__wrapper__content__item">
+                <p
+                  v-for="(warning, index) in warnings"
+                  :key="index"> {{ warning }}
+                  <bh-language-flag
+                    :language="lang"
+                    class="train-modal__wrapper__content__item__flag"/> </p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="level-rigth">
-          <bh-button
-            :disabled="!readyForTrain"
-            primary
-            @click="$emit('train')">
-            <bh-icon
-              :value="training ? 'refresh' : 'school'"
-              :class="training && 'icon-spin' || null" />
-            <span>Train</span>
-          </bh-button>
-        </div>
       </div>
+    </div>
+    <div class="bh-grid__item text-center train-modal__buttons">
+      <bh-button
+        v-if="readyForTrain"
+        primary
+        @click="$emit('train')">
+        <bh-icon
+          :value="training ? 'refresh' : 'school'"
+          :class="training && 'icon-spin' || null" />
+        <span>Train</span>
+      </bh-button>
+      <bh-button
+        v-else
+        ref="closeBtn"
+        primary
+        @click="closeModal()">
+        <span>Ok</span>
+      </bh-button>
     </div>
   </bh-modal>
 </template>
@@ -77,6 +91,10 @@ export default {
       type: Object,
       required: true,
     },
+    languagesWarnings: {
+      type: Object,
+      required: true,
+    },
     training: {
       type: Boolean,
       default: false,
@@ -87,6 +105,14 @@ export default {
       openValue: this.open,
     };
   },
+  computed: {
+    requirementsToTrainStatus() {
+      return Object.keys(this.requirementsToTrain).length !== 0;
+    },
+    languagesWarningsStatus() {
+      return Object.keys(this.languagesWarnings).length !== 0;
+    },
+  },
   watch: {
     open(value) {
       this.openValue = value;
@@ -95,38 +121,51 @@ export default {
       this.$emit('update:open', value);
     },
   },
+  methods: {
+    closeModal() {
+      this.$emit('update:open', false);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 
 .train-modal {
-  padding: .5rem;
+  &__wrapper {
+    background-color: $color-fake-white;
+    padding: 1.5rem;
+    margin: 1rem 0;
 
-  &__buttons {
-    margin-top: 1rem;
-  }
+    &__content-requirements {
+      padding: .5rem;
 
-  $flags-margin: .25rem;
-  &__flags {
-    display: inline-flex;
-    margin: -($flags-margin);
+      &__item {
+        margin: .5rem;
 
-    &__item {
-      margin: $flags-margin;
-
-      &__status {
-        vertical-align: middle;
-        margin-left: -.25rem;
-        color: $color-grey;
-
-        &--ready {
-          color: $color-primary;
+        &__flag {
+          margin: .25rem;
         }
       }
     }
+
+    &__content-warnings {
+      padding: .5rem .5rem 0 .5rem;
+
+      &__item {
+        margin: .5rem;
+
+        &__flag {
+          margin: .25rem;
+        }
+      }
+    }
+  }
+
+  &__buttons {
+    margin-bottom: 1.5rem;
   }
 }
 </style>

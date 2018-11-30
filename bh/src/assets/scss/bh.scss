@@ -1,0 +1,148 @@
+@import '~./variables';
+@import '~./colors';
+@import '~./typography';
+@import '~./forms';
+@import '~./grid';
+@import '~./shadow';
+@import '~./notification';
+@import '~./table';
+@import '~./buttons';
+
+@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,600,700');
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @include typography();
+
+  min-height: 100%;
+  background-color: $color-fake-white;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  padding: 0;
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+@for $i from 0 to 4 {
+  $n: $i + 1;
+  $font-size: (2rem - ($i * .25rem));
+  $margin: .75rem 0;
+
+  h#{$n} {
+    margin: $margin;
+    font-size: $font-size;
+    font-weight: $font-weight-medium;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+p {
+  padding: 0;
+  margin: .5rem 0;
+  word-wrap: break-word;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: $font-weight-bolder;
+
+  &.medium {
+    font-weight: $font-weight-medium;
+  }
+}
+
+small {
+  color: $color-grey-dark;
+}
+
+pre {
+  margin: 0;
+}
+
+@each $color in $colors {
+  $color-name: nth($color, 1);
+  $color-value: nth($color, 2);
+  $color-inverted: nth($color, 3);
+
+  .background-color-#{$color-name} {
+    color: $color-inverted;
+    background-color: $color-value;
+  }
+
+  .text-color-#{$color-name} {
+    color: $color-value;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.hide {
+  display: none !important;
+
+  &-mobile {
+    @media screen and (max-width: $mobile-width) {
+      display: none !important;
+    }
+  }
+
+  &-desktop {
+    display: none !important;
+
+    @media screen and (max-width: $mobile-width) {
+      display: block !important;
+    }
+  }
+}
+
+.text {
+  &-left{
+    text-align: left;
+  }
+
+  &-center{
+    text-align: center;
+  }
+
+  &-right{
+    text-align: right;
+  }
+}
+
+img {
+  @each $size in $sizes {
+    $size-name: nth($size, 1);
+    $size-value: nth($size, 2);
+
+    &.#{$size-name} {
+      width: auto !important;
+      max-width: none !important;
+      height: $size-value;
+    }
+  }
+}

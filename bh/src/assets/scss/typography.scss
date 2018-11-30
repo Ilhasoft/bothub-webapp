@@ -1,0 +1,10 @@
+@import '~./variables.scss';
+@import '~./colors.scss';
+
+
+@mixin typography() {
+  font-family: $font-family;
+  font-weight: $font-weight-normal;
+  line-height: 1.25;
+  color: $color-fake-black;
+}

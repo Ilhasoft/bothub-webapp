@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationsStatus.vue renders correctly 1`] = `
+<div class="columns is-multiline">
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>German</span>
+        <flag-stub language="de"></flag-stub>
+      </p>
+    </div>
+  </div>
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>Spanish</span>
+        <flag-stub language="es"></flag-stub>
+      </p>
+    </div>
+  </div>
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>Portuguese</span>
+        <flag-stub language="pt"></flag-stub>
+      </p>
+    </div>
+  </div>
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>French</span>
+        <flag-stub language="fr"></flag-stub>
+      </p>
+    </div>
+  </div>
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>Italian</span>
+        <flag-stub language="it"></flag-stub>
+      </p>
+    </div>
+  </div>
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-percentage">
+        <pie-stub percent="0"></pie-stub>
+      </div>
+      <p class="card-language"><span>Dutch</span>
+        <flag-stub language="nl"></flag-stub>
+      </p>
+    </div>
+  </div>
+</div>
+`;

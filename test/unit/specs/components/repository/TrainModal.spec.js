@@ -20,6 +20,7 @@ describe('TrainModal.vue', () => {
         languagesReadyForTrain: {
           en: true,
         },
+        languagesWarnings: {},
         training: false,
       },
     });
@@ -35,6 +36,22 @@ describe('TrainModal.vue', () => {
         requirementsToTrain: {
           en: [
             'requirement 1',
+          ],
+        },
+      });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('add warning', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        languagesWarnings: {
+          en: [
+            'warning 1',
           ],
         },
       });

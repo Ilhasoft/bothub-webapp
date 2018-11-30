@@ -1,9 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" language="en" categories="1,2" created_at="2018-04-20T17:05:42.035514Z">
-  <div class="card-content">
-    <repositoryinfo-stub slug="repository" name="Repository" owner__nickname="fake" available_languages="en,pt" description="" categories_list="[object Object],[object Object]" votes_sum="0" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]"></repositoryinfo-stub>
+<bhcard-stub shadow="light" noborder="true" class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
+  <div class="bh-grid bh-grid--column repository-card__align-items">
+    <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
+      <div class="repository-card__big-badge">
+        <router-link to="[object Object]">
+          <bhiconbutton-stub type="button" value="botinho" size="medium" class="repository-card__big-badge__icon"></bhiconbutton-stub>
+        </router-link>
+      </div>
+    </div>
+    <div class="bh-grid__item text-center">
+      <div class="repository-card__title"><span class="repository-card__title__bagde"><router-link to="[object Object]"><bhiconbutton-stub type="button" value="botinho" class="repository-card__title__bagde__icon"></bhiconbutton-stub></router-link></span>
+        <router-link to="[object Object]"><span class="text-color-fake-black">Repository</span></router-link>
+      </div>
+      <div class="repository-card__info-item"><span>Created by</span> <strong class="medium text-color-primary">fake</strong></div>
+      <div class="repository-card__flags bh-grid bh-grid--row"><span class="repository-card__flags__flag"><bhlanguageflag-stub language="en" size="small"></bhlanguageflag-stub></span><span class="repository-card__flags__flag"><bhlanguageflag-stub language="pt" size=""></bhlanguageflag-stub></span></div>
+      <div class="repository-card__categories">
+        <router-link to="[object Object]">
+          <bhbadge-stub size="small" color="grey-light" class="repository-card__categories__category">Business</bhbadge-stub>
+        </router-link>
+        <router-link to="[object Object]">
+          <bhbadge-stub size="small" color="grey-light" class="repository-card__categories__category">Technology</bhbadge-stub>
+        </router-link>
+      </div>
+    </div>
   </div>
-</div>
+</bhcard-stub>
 `;

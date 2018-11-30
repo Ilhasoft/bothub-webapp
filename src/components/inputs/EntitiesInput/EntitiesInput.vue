@@ -175,7 +175,7 @@ export default {
     validateEntities(text, oldText) {
       /*
         Entity follow text,
-        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components/TextEditor.js
+        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components-v1/TextEditor.js
       */
       this.entities.forEach((entity, i) => {
         const oldEntityText = oldText.substring(entity.start, entity.end);

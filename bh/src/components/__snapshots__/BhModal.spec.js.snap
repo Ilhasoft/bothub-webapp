@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhModal.vue close modal clicking in background renders correctly 1`] = `
+<div class="bh-modal" name="bh-modal-fade">
+  <bhcard-stub class="bh-modal__content">
+    <div class="bh-modal__header">
+      <div class="bh-grid bh-grid--row">
+        <h3 class="bh-modal__header__title bh-grid__item">Title</h3> <button class="bh-modal__header__close-button clickable">
+          <bhicon-stub value="close" size="small" class="bh-modal__close bh-grid__itembh-grid__item--grow-0"></bhicon-stub>
+        </button>
+      </div>
+    </div>
+  </bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal clicking in closeBtn renders correctly 1`] = `
+<div class="bh-modal" name="bh-modal-fade">
+  <bhcard-stub class="bh-modal__content">
+    <div class="bh-modal__header">
+      <div class="bh-grid bh-grid--row">
+        <h3 class="bh-modal__header__title bh-grid__item">Title</h3> <button class="bh-modal__header__close-button clickable">
+          <bhicon-stub value="close" size="small" class="bh-modal__close bh-grid__itembh-grid__item--grow-0"></bhicon-stub>
+        </button>
+      </div>
+    </div>
+  </bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal pass false via open prop open modal pass true via open prop renders correctly 1`] = `
+<div class="bh-modal" name="bh-modal-fade" style="">
+  <bhcard-stub class="bh-modal__content">
+    <div class="bh-modal__header">
+      <div class="bh-grid bh-grid--row">
+        <h3 class="bh-modal__header__title bh-grid__item">Title</h3> <button class="bh-modal__header__close-button clickable">
+          <bhicon-stub value="close" size="small" class="bh-modal__close bh-grid__itembh-grid__item--grow-0"></bhicon-stub>
+        </button>
+      </div>
+    </div>
+  </bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue close modal pass false via open prop renders correctly 1`] = `
+<div class="bh-modal" name="bh-modal-fade" style="display: none;">
+  <bhcard-stub class="bh-modal__content">
+    <div class="bh-modal__header">
+      <div class="bh-grid bh-grid--row">
+        <h3 class="bh-modal__header__title bh-grid__item">Title</h3> <button class="bh-modal__header__close-button clickable">
+          <bhicon-stub value="close" size="small" class="bh-modal__close bh-grid__itembh-grid__item--grow-0"></bhicon-stub>
+        </button>
+      </div>
+    </div>
+  </bhcard-stub>
+</div>
+`;
+
+exports[`BhModal.vue renders correctly 1`] = `
+<div class="bh-modal" name="bh-modal-fade">
+  <bhcard-stub class="bh-modal__content">
+    <div class="bh-modal__header">
+      <div class="bh-grid bh-grid--row">
+        <h3 class="bh-modal__header__title bh-grid__item">Title</h3> <button class="bh-modal__header__close-button clickable">
+          <bhicon-stub value="close" size="small" class="bh-modal__close bh-grid__itembh-grid__item--grow-0"></bhicon-stub>
+        </button>
+      </div>
+    </div>
+  </bhcard-stub>
+</div>
+`;

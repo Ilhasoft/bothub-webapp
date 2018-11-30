@@ -1,0 +1,101 @@
+@import '~./colors.scss';
+@import '~./typography.scss';
+
+
+.bh {
+  &-button {
+    $parent: &;
+
+    @include typography();
+
+    @mixin size($size-value, $font-size) {
+      $font-size: $font-size;
+      padding: calc(#{($size-value - $font-size) / 2} - #{$form-components-border-size}) ($size-value / 1.6);
+      font-size: $font-size;
+      line-height: $font-size;
+    }
+
+    @include size($size-normal, $font-normal);
+
+    display: inline-flex;
+    align-items: center;
+    font-weight: $font-weight-bolder;
+    color: $color-grey-dark;
+    cursor: pointer;
+    background: none;
+    background-color: $color-white;
+    border: $form-components-border-size solid $color-grey;
+    border-radius: $form-components-border-radius;
+    outline: none;
+    box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
+
+    svg {
+      width: 125%;
+      max-width: 125%;
+      height: 125%;
+      max-height: 125%;
+      margin: -12.5%;
+    }
+
+    > * {
+      margin-right: .5rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
+    &--rounded {
+      border-radius: $size-normal;
+    }
+
+    &--max-content {
+      width: max-content;
+    }
+
+    &:disabled {
+      color: $color-grey;
+      cursor: not-allowed;
+      background-color: $color-grey-dark;
+      border-color: $color-grey-dark;
+    }
+
+    @each $size in $sizes {
+      $size-name: nth($size, 1);
+      $size-value: nth($size, 2);
+      $font-size: nth($size, 3);
+
+      &--#{$size-name} {
+        @include size($size-value, $font-size);
+
+        &#{$parent}--rounded {
+          border-radius: $size-value / 2;
+        }
+      }
+    }
+
+    @each $color in $colors {
+      $color-name: nth($color, 1);
+      $color-value: nth($color, 2);
+      $color-inverted: nth($color, 3);
+
+      &--#{$color-name} {
+        color: $color-inverted;
+        background-color: $color-value;
+        border-color: $color-value;
+
+        &-inverted {
+          color: $color-value;
+          background-color: $color-inverted;
+          border-color: $color-inverted;
+        }
+
+        &-transparent {
+          color: $color-value;
+          background-color: transparent;
+          border-color: $color-value;
+        }
+      }
+    }
+  }
+}

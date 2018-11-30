@@ -1,0 +1,32 @@
+@import '~./colors.scss';
+
+
+$cedule-padding: .75rem;
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    @media screen and (max-width: 430px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: .5rem 0;
+    }
+  }
+
+  th, td {
+    padding: $cedule-padding;
+    background-color: white;
+    border: 0;
+    border-color: $color-grey-light;
+    border-style: solid;
+    border-bottom: 1px;
+  }
+
+  th {
+    text-align: left;
+    background-color: $color-grey-light;
+  }
+}

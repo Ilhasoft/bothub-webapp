@@ -1,23 +1,23 @@
 <template>
-  <bh-dropdown class="example-txt-w-highlighted-entities__input__language">
+  <bh-dropdown class="language-append-select-input">
     <span
       slot="trigger"
-      class="clickable">
+      class="clickable bh-grid language-append-select-input__language-select">
       <bh-language-flag
         v-if="val"
-        :language="val" />
+        :language="val"
+        size="small" />
       <bh-icon
         v-else
         value="earth" />
-      <bh-icon value="menu-down" />
+      <bh-icon
+        class="align"
+        value="menu-down" />
     </span>
     <bh-dropdown-item
       v-for="(verbose, language) in LANGUAGES"
       :key="language"
       @click="setVal(language)">
-      <bh-language-flag
-        :language="language"
-        size="small" />
       <span>{{ verbose }}</span>
     </bh-dropdown-item>
   </bh-dropdown>
@@ -56,3 +56,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.language-append-select-input {
+  &__language-select {
+    align-items: center;
+  }
+}
+</style>
