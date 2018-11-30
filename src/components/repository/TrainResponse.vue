@@ -1,10 +1,11 @@
 <template>
-  <bh-modal :open.sync="openValue">
-    <bh-card v-if="!!trainResponse">
+  <bh-modal
+    :open.sync="openValue"
+    title="Repository Trained!">
+    <bh-card
+      v-if="!!trainResponse"
+      no-border>
       <div class="bh-grid bh-grid--column">
-        <div class="bh-grid__item">
-          <h1>Repository Trained!</h1>
-        </div>
         <div class="bh-grid__item">
           <table>
             <thead>

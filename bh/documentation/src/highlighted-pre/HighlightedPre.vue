@@ -6,6 +6,10 @@
       <example
         :component="SimplePreExample"
         :code="simplePreExampleCode" />
+      <h3>Mutable code</h3>
+      <example
+        :component="MutablePreExample"
+        :code="mutablePreExampleCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -18,6 +22,8 @@ import Example from '@/Example';
 import Api from '@/Api';
 import SimplePreExample from './examples/SimplePre';
 import simplePreExampleCode from '!!raw-loader!./examples/SimplePre';
+import MutablePreExample from './examples/MutablePre';
+import mutablePreExampleCode from '!!raw-loader!./examples/MutablePre';
 import api from './api';
 
 
@@ -31,6 +37,8 @@ export default {
     return {
       SimplePreExample,
       simplePreExampleCode,
+      MutablePreExample,
+      mutablePreExampleCode,
       api,
     };
   },
