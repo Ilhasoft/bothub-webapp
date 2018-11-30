@@ -115,15 +115,15 @@
                 class="bh-grid">
                 <div class="bh-grid__item">&nbsp;</div>
               </div>
-              <analyze-text-drawer
-                v-if="repository && repository.owner__nickname && repository.slug && authenticated"
-                :owner-nickname="repository.owner__nickname"
-                :slug="repository.slug"
-                :default-language="repository.language"
-                :available-languages="repository.available_languages" />
             </div>
           </div>
         </div>
+        <analyze-text-drawer
+          v-if="repository && repository.owner__nickname && repository.slug && authenticated"
+          :owner-nickname="repository.owner__nickname"
+          :slug="repository.slug"
+          :default-language="repository.language"
+          :available-languages="repository.available_languages" />
         <div class="rpstr-vw-bs__card__content">
           <slot />
         </div>
