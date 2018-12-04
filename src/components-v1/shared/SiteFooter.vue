@@ -1,9 +1,14 @@
 <template>
   <footer>
-    <div class="container container-padding">
+    <div class="background-svg">
+      <img
+        :src="svg"
+        alt="footer">
+    </div>
+    <div class="container">
       <div class="footer-content">
-        <div class="columns">
-          <div class="column">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
             <div class="footer-item footer-brand">
               <img
                 src="~@/assets/imgs/logo-white.svg"
@@ -26,8 +31,8 @@
               </li>
             </ul>
           </div>
-          <div class="column">
-            <h4 class="footer-title has-text-white">Contact Us</h4>
+          <div class="bh-grid__item">
+            <h4 class="footer-title">Contact Us</h4>
             <div class="footer-section-item">
               <p>bothub@ilhasoft.com.br</p>
             </div>
@@ -40,8 +45,8 @@
               <p>+55 82 3022.5978</p>
             </div>
           </div>
-          <div class="column">
-            <h4 class="footer-title has-text-white">Subscribe</h4>
+          <div class="bh-grid__item">
+            <h4 class="footer-title">Subscribe</h4>
             <div class="footer-section-item">
               <p>Enter your email to get notified about our new solutions</p>
             </div>
@@ -51,13 +56,13 @@
                   v-model="email"
                   type="email"
                   no-border
-                  placeholder="search for bots"
+                  placeholder="Your best email"
                 >
                   <div slot="append">
                     <bh-icon-button
                       size="small"
                       class="text-color-grey-dark"
-                      value="magnify"
+                      value="chevron-right"
                       @click="onSubscribeSubmit()" />
                   </div>
                 </bh-text>
@@ -77,6 +82,7 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
+import bgFooter from '@/assets/imgs/bg-footer.svg';
 
 
 export default {
@@ -86,6 +92,7 @@ export default {
       email: '',
       submittingNewsletter: false,
       version: process.env.VERSION,
+      svg: bgFooter,
     };
   },
   methods: {
@@ -134,14 +141,18 @@ export default {
 
 
 footer {
+  $margin-top: 12vw;
+  $background-gradient-color: #25b3a1;
+
+  position: relative;
   width: 100%;
-  overflow: hidden;
+  margin-top: $margin-top;
 
   $font-color: $color-white;
   $font-color-lighten: $color-white;
   $background-color: $color-primary;
 
-  background-color: $background-color;
+  background-color: $background-gradient-color;
   color: $font-color;
 
   ul {
@@ -157,13 +168,25 @@ footer {
     }
   }
 
+  .background-svg {
+    position: absolute;
+    width: 100%;
+    top: -($margin-top);
+    z-index: 0;
+
+    img {
+      position: absolute;
+      width: 100%;
+    }
+  }
+
   .footer {
     &-content {
       padding: 64px 0;
     }
 
     &-item {
-      margin-bottom: 32px;
+      margin-bottom: 15px;
 
       &:last-child {
         margin-bottom: 0;

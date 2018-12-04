@@ -2,10 +2,11 @@
 
 exports[`SiteFooter.vue renders correctly 1`] = `
 <footer>
-  <div class="container container-padding">
+  <div class="background-svg"><img src="test-file-stub" alt="footer"></div>
+  <div class="container">
     <div class="footer-content">
-      <div class="columns">
-        <div class="column">
+      <div class="bh-grid">
+        <div class="bh-grid__item">
           <div class="footer-item footer-brand"><img src="~@/assets/imgs/logo-white.svg" alt="bothub">
             <div>Webapp v0.0.0</div>
           </div>
@@ -21,8 +22,8 @@ exports[`SiteFooter.vue renders correctly 1`] = `
               </a></li>
           </ul>
         </div>
-        <div class="column">
-          <h4 class="footer-title has-text-white">Contact Us</h4>
+        <div class="bh-grid__item">
+          <h4 class="footer-title">Contact Us</h4>
           <div class="footer-section-item">
             <p>bothub@ilhasoft.com.br</p>
           </div>
@@ -35,14 +36,18 @@ exports[`SiteFooter.vue renders correctly 1`] = `
             <p>+55 82 3022.5978</p>
           </div>
         </div>
-        <div class="column">
-          <h4 class="footer-title has-text-white">Subscribe</h4>
+        <div class="bh-grid__item">
+          <h4 class="footer-title">Subscribe</h4>
           <div class="footer-section-item">
             <p>Enter your email to get notified about our new solutions</p>
           </div>
           <form>
             <div class="footer-has-input">
-              <bfield-stub addons="true"><input type="email" placeholder="your@email.com" class="input footer-input"> <span class="control"><button class="button is-secondary"><bicon-stub icon="email"></bicon-stub></button></span></bfield-stub>
+              <bh-text type="email" no-border="" placeholder="Your best email">
+                <div slot="append">
+                  <bh-icon-button size="small" value="chevron-right" class="text-color-grey-dark"></bh-icon-button>
+                </div>
+              </bh-text>
             </div>
           </form>
         </div>
