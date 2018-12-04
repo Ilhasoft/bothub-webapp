@@ -39,7 +39,7 @@ export default {
     },
     title: {
       type: String,
-      default: 'Title',
+      default: '',
     },
     backgroundCloses: {
       type: Boolean,
