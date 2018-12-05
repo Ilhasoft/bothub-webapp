@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.6'
 
 services:
   bothub-webapp:
@@ -6,12 +6,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
+        - SUPPORTED_LANGUAGES=${SUPPORTED_LANGUAGES:-en|pt}
+        - MAILCHIMP_LOGIN=${MAILCHIMP_LOGIN}
+        - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
+        - MAILCHIMP_USER_ID=${MAILCHIMP_USER_ID}
+        - MAILCHIMP_LIST_ID=${MAILCHIMP_LIST_ID}
     ports:
       - 80:80
-    environment:
-      - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
-      - SUPPORTED_LANGUAGES=${SUPPORTED_LANGUAGES:-en|pt}
-      - MAILCHIMP_LOGIN=${MAILCHIMP_LOGIN}
-      - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
-      - MAILCHIMP_USER_ID=${MAILCHIMP_USER_ID}
-      - MAILCHIMP_LIST_ID=${MAILCHIMP_LIST_ID}

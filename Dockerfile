@@ -1,11 +1,9 @@
-FROM node:8-alpine
+FROM node:8-alpine as builder
 
 ENV WORKDIR /home/app
 WORKDIR $WORKDIR
 
-RUN apk update && apk add git yarn nginx
-
-RUN adduser -D -g 'www' www
+RUN apk update && apk add git yarn
 
 COPY package.json .
 COPY yarn.lock .
@@ -15,10 +13,22 @@ RUN yarn install
 
 COPY . .
 
-COPY nginx.conf /etc/nginx/nginx.conf
-RUN nginx -t
+ARG API_BASE_URL
+ARG SUPPORTED_LANGUAGES
+ARG MAILCHIMP_LOGIN
+ARG MAILCHIMP_DATACENTER
+ARG MAILCHIMP_USER_ID
+ARG MAILCHIMP_LIST_ID
 
-RUN mkdir -p ./dist/ && chown -R www:www ./dist/
+ENV API_BASE_URL API_BASE_URL
+ENV SUPPORTED_LANGUAGES SUPPORTED_LANGUAGES
+ENV MAILCHIMP_LOGIN MAILCHIMP_LOGIN
+ENV MAILCHIMP_DATACENTER MAILCHIMP_DATACENTER
+ENV MAILCHIMP_USER_ID MAILCHIMP_USER_ID
+ENV MAILCHIMP_LIST_ID MAILCHIMP_LIST_ID
 
-RUN chmod +x entrypoint.sh
-ENTRYPOINT [ "./entrypoint.sh" ]
+RUN yarn build
+
+FROM nginx
+
+COPY --from=builder /home/app/dist /usr/share/nginx/html
