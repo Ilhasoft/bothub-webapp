@@ -2,7 +2,7 @@
 
 exports[`SiteFooter.vue renders correctly 1`] = `
 <footer>
-  <div class="footer__background-svg"><img src="test-file-stub" alt="footer"></div>
+  <div class="footer__background-svg">test-file-stub</div>
   <div class="container">
     <div class="footer-content">
       <div class="bh-grid">
