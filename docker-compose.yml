@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   bothub-webapp:
-    image: ${DOCKER_IMAGE_NAME:-ilha/bothub-webapp}:${TAG:-latest}
+    image: ${BOTHUB_WEBAPP_DOCKER_IMAGE_NAME:-ilha/bothub-webapp}:${BOTHUB_WEBAPP_DOCKER_IMAGE_TAG:-latest}
     build:
       context: .
       dockerfile: Dockerfile
