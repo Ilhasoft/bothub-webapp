@@ -2,7 +2,7 @@
 
 exports[`SiteFooter.vue renders correctly 1`] = `
 <footer>
-  <div class="background-svg"><img src="test-file-stub" alt="footer"></div>
+  <div class="footer__background-svg"><img src="test-file-stub" alt="footer"></div>
   <div class="container">
     <div class="footer-content">
       <div class="bh-grid">
@@ -39,7 +39,7 @@ exports[`SiteFooter.vue renders correctly 1`] = `
         <div class="bh-grid__item">
           <h4 class="footer-title">Subscribe</h4>
           <div class="footer-section-item">
-            <p>Enter your email to get notified about our new solutions</p>
+            <p>Enter your email to get notified about our news:</p>
           </div>
           <form>
             <div class="footer-has-input">
