@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="background-svg">
+    <div class="footer__background-svg">
       <img
         :src="svg"
         alt="footer">
@@ -168,19 +168,20 @@ footer {
     }
   }
 
-  .background-svg {
+
+  .footer {
+    &__background-svg {
     position: absolute;
     width: 100%;
     top: -($margin-top);
     z-index: 0;
 
-    img {
-      position: absolute;
-      width: 100%;
+      img {
+        position: absolute;
+        width: 100%;
+      }
     }
-  }
 
-  .footer {
     &-content {
       padding: 64px 0;
     }
