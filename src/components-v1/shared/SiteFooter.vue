@@ -1,10 +1,9 @@
 <template>
   <footer>
-    <div class="footer__background-svg">
-      <img
-        :src="svg"
-        alt="footer">
-    </div>
+    <div
+      class="footer__background-svg"
+      v-html="BackgroundSvg"
+    />
     <div class="container">
       <div class="footer-content">
         <div class="bh-grid">
@@ -82,7 +81,7 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
-import bgFooter from '@/assets/imgs/bg-footer.svg';
+import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-footer.svg';
 
 
 export default {
@@ -92,7 +91,7 @@ export default {
       email: '',
       submittingNewsletter: false,
       version: process.env.VERSION,
-      svg: bgFooter,
+      BackgroundSvg,
     };
   },
   methods: {
@@ -176,7 +175,7 @@ footer {
     top: -($margin-top);
     z-index: 0;
 
-      img {
+      svg {
         position: absolute;
         width: 100%;
       }

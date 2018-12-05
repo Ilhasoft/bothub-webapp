@@ -44,6 +44,7 @@ module.exports = {
           'VElement[name=bh-highlighted-pre].children',
         ],
       }
-    ]
+    ],
+    'import/no-webpack-loader-syntax': ['never'],
   }
 }
