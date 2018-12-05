@@ -48,7 +48,7 @@
           <div class="bh-grid__item">
             <h4 class="footer-title">Subscribe</h4>
             <div class="footer-section-item">
-              <p>Enter your email to get notified about our new solutions</p>
+              <p>Enter your email to get notified about our news:</p>
             </div>
             <form @submit.prevent="onSubscribeSubmit()">
               <div class="footer-has-input">
