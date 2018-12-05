@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home';
+import LandingPage from '@/views/LandingPage';
 import MyProfile from '@/components-v1/MyProfile';
 import ResetPassword from '@/components-v1/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -19,6 +20,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'landingPage',
+      component: LandingPage,
+    },
+    {
+      path: '/home',
       name: 'home',
       component: Home,
     },
