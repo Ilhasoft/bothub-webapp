@@ -1,9 +1,13 @@
 <template>
   <footer>
-    <div class="container container-padding">
+    <div
+      class="footer__background-svg"
+      v-html="BackgroundSvg"
+    />
+    <div class="container">
       <div class="footer-content">
-        <div class="columns">
-          <div class="column">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
             <div class="footer-item footer-brand">
               <img
                 src="~@/assets/imgs/logo-white.svg"
@@ -26,8 +30,8 @@
               </li>
             </ul>
           </div>
-          <div class="column">
-            <h4 class="footer-title has-text-white">Contact Us</h4>
+          <div class="bh-grid__item">
+            <h4 class="footer-title">Contact Us</h4>
             <div class="footer-section-item">
               <p>bothub@ilhasoft.com.br</p>
             </div>
@@ -40,28 +44,27 @@
               <p>+55 82 3022.5978</p>
             </div>
           </div>
-          <div class="column">
-            <h4 class="footer-title has-text-white">Subscribe</h4>
+          <div class="bh-grid__item">
+            <h4 class="footer-title">Subscribe</h4>
             <div class="footer-section-item">
-              <p>Enter your email to get notified about our new solutions</p>
+              <p>Enter your email to get notified about our news:</p>
             </div>
             <form @submit.prevent="onSubscribeSubmit()">
               <div class="footer-has-input">
-                <b-field>
-                  <input
-                    v-model="email"
-                    :disabled="submittingNewsletter"
-                    type="email"
-                    class="input footer-input"
-                    placeholder="your@email.com" >
-                  <span class="control">
-                    <button class="button is-secondary">
-                      <b-icon
-                        :icon="submittingNewsletter ? 'refresh' : 'email'"
-                        :custom-class="submittingNewsletter ? 'icon-spin' : null" />
-                    </button>
-                  </span>
-                </b-field>
+                <bh-text
+                  v-model="email"
+                  type="email"
+                  no-border
+                  placeholder="Your best email"
+                >
+                  <div slot="append">
+                    <bh-icon-button
+                      size="small"
+                      class="text-color-grey-dark"
+                      value="chevron-right"
+                      @click="onSubscribeSubmit()" />
+                  </div>
+                </bh-text>
               </div>
             </form>
           </div>
@@ -78,6 +81,7 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
+import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-footer.svg';
 
 
 export default {
@@ -87,6 +91,7 @@ export default {
       email: '',
       submittingNewsletter: false,
       version: process.env.VERSION,
+      BackgroundSvg,
     };
   },
   methods: {
@@ -131,15 +136,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~bh/src/assets/scss/colors.scss';
+
+
 footer {
+  $margin-top: 12vw;
+  $background-gradient-color: #12a391;
+
+  position: relative;
   width: 100%;
-  overflow: hidden;
+  margin-top: $margin-top;
 
-  $font-color: #5E5786;
-  $font-color-lighten: #aba8c2;
-  $background-color: #221859;
+  $font-color: $color-white;
+  $font-color-lighten: $color-white;
+  $background-color: $color-primary;
 
-  background-color: $background-color;
+  background-color: $background-gradient-color;
   color: $font-color;
 
   ul {
@@ -149,19 +161,32 @@ footer {
         transition: color .2s ease;
 
         &:hover {
-          color: $font-color-lighten;
+          color: $color-grey-light;
         }
       }
     }
   }
 
+
   .footer {
+    &__background-svg {
+    position: absolute;
+    width: 100%;
+    top: -($margin-top);
+    z-index: 0;
+
+      svg {
+        position: absolute;
+        width: 100%;
+      }
+    }
+
     &-content {
       padding: 64px 0;
     }
 
     &-item {
-      margin-bottom: 32px;
+      margin-bottom: 15px;
 
       &:last-child {
         margin-bottom: 0;
@@ -218,7 +243,7 @@ footer {
           transition: background-color .2s ease;
 
           &:hover {
-            color: $background-color;
+            color: $color-primary-darker;
             background-color: $font-color-lighten;
           }
 
