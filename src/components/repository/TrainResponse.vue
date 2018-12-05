@@ -1,18 +1,41 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Repository Trained!">
+    title="Repository trained successfully!">
     <bh-card
       v-if="!!trainResponse"
       no-border>
-      <div class="bh-grid bh-grid--column">
+      <div class="bh-grid bh-grid--column align">
+        <div class="bh-grid__item bh-grid__item--nested text-center">
+          <div class="bh-grid">
+            <div class="bh-grid__item">
+              <bh-icon
+                class="text-color-primary"
+                value="check"
+                type="is-success"
+                size="is-small" />
+              <span>Trained</span>
+            </div>
+            <div class="bh-grid__item">
+              <bh-icon
+                class="text-color-info"
+                value="dots-horizontal"
+                type="is-info"
+                size="is-small" />
+              <span>No changes</span>
+            </div>
+            <div class="bh-grid__item">
+              <bh-icon
+                class="text-color-danger"
+                value="close"
+                type="is-danger"
+                size="is-small" />
+              <span>Failed</span>
+            </div>
+          </div>
+        </div>
         <div class="bh-grid__item">
           <table>
-            <thead>
-              <tr>
-                <th colspan="2">Languages Report</th>
-              </tr>
-            </thead>
             <tbody>
               <tr
                 v-for="(data, language) in trainResponse.languages_report"
@@ -40,33 +63,13 @@
             </tbody>
           </table>
         </div>
-        <div class="bh-grid__item bh-grid__item--nested">
-          <div class="bh-grid">
-            <div class="bh-grid__item">
-              <bh-icon
-                class="text-color-primary"
-                value="check"
-                type="is-success"
-                size="is-small" />
-              <span>Trained</span>
-            </div>
-            <div class="bh-grid__item">
-              <bh-icon
-                class="text-color-info"
-                value="dots-horizontal"
-                type="is-info"
-                size="is-small" />
-              <span>No changes</span>
-            </div>
-            <div class="bh-grid__item">
-              <bh-icon
-                class="text-color-danger"
-                value="close"
-                type="is-danger"
-                size="is-small" />
-              <span>Failed</span>
-            </div>
-          </div>
+        <div class="bh-grid__item text-center">
+          <bh-button
+            ref="closeBtn"
+            primary
+            @click="closeModal()">
+            <span>Ok</span>
+          </bh-button>
         </div>
       </div>
     </bh-card>
@@ -97,6 +100,11 @@ export default {
     },
     openValue(value) {
       this.$emit('update:open', value);
+    },
+  },
+  methods: {
+    closeModal() {
+      this.$emit('update:open', false);
     },
   },
 };
