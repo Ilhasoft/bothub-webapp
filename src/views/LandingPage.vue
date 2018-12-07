@@ -1,15 +1,15 @@
 <template>
   <div>
-    <nav class="layout__nav">
+    <nav class="landing-page__nav">
       <div class="bh-grid bh-grid--space-between bh-grid--row">
         <router-link
-          class="bh-grid__item layout__nav__logo"
+          class="bh-grid__item landing-page__nav__logo"
           to="/">
           <img
             src="@/assets/imgs/logo.svg"
             alt="Bothub">
         </router-link>
-        <div class="text-color-primary layout__nav__account">
+        <div class="text-color-primary landing-page__nav__login">
           <strong
             class="text-color-primary clickable"
             @click="openLoginModal()">Sign in</strong>
@@ -20,9 +20,9 @@
         </div>
       </div>
     </nav>
-    <header class="layout__header">
-      <div class="layout__header__content bh-grid">
-        <div class="layout__header__content__text bh-grid__item">
+    <header class="landing-page__header">
+      <div class="landing-page__header__content bh-grid">
+        <div class="landing-page__header__content__text bh-grid__item">
           <h1>Build, Optimize and Train</h1>
           <p>Be part of an open source and democratic global community that builds,
           trains and shares data sets.</p>
@@ -31,48 +31,51 @@
             rounded
             primary>Join us for free</bh-button>
         </div>
-        <div class="layout__header__content__animation bh-grid__item" />
+        <div class="landing-page__header__content__animation bh-grid__item" />
       </div>
     </header>
-    <section class="layout__intro">
+    <section class="landing-page__intro">
       <div
-        class="layout__intro__background-svg"
+        class="landing-page__intro__background-svg"
         v-html="BackgroundSvg"/>
-      <div class="layout__intro__background bh-grid bh-grid--space-between">
-        <div class="layout__intro__item bh-grid bh-grid--column">
-          <div class="layout__intro__item__icon"/>
+      <div class="landing-page__intro__background bh-grid bh-grid--space-between">
+        <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
+          <img src="~@/assets/imgs/hand.svg">
           <h2>Create new AI</h2>
           <span>Create repositories with example sentences and improve your bot intelligence.</span>
         </div>
-        <div class="layout__intro__item bh-grid bh-grid--column">
-          <div class="layout__intro__item__icon"/>
+        <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
+          <img src="~@/assets/imgs/cloud.svg">
           <h2>Use existing data sets</h2>
           <span>You can choose from various ready-to-use data sets.</span>
         </div>
-        <div class="layout__intro__item bh-grid bh-grid--column">
-          <div class="layout__intro__item__icon"/>
+        <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
+          <img src="~@/assets/imgs/talk-balloon.svg">
           <h2>Build a community</h2>
           <span>Contribute to existing data sets
           adding more examples or languages quickly and easily.</span>
         </div>
       </div>
     </section>
-    <section class="layout__bots">
-      <div class="layout__bots__content text-center">
+    <section class="landing-page__bots">
+      <div class="landing-page__bots__content text-center">
         <h1>Best bots</h1>
         <repository-card-list/>
       </div>
     </section>
-    <section class="layout__signup">
-      <div class="layout__singup bh-grid text-center">
-        <div class="layout__signup__info bh-grid__item">
+    <section class="landing-page__signup">
+      <div class="landing-page__singup bh-grid text-center">
+        <div class="landing-page__signup__info bh-grid__item">
           <h1>Join the millions of developers already using Bothub</h1>
           <bh-button
             size="medium"
             rounded
             secondary>Sign up for free</bh-button>
         </div>
-        <div class="layout__signup__animation bh-grid__item" />
+        <div class="landing-page__signup__animation bh-grid__item">
+          <div class="landing-page__signup__animation__girl"/>
+          <div class="landing-page__signup__animation__shadow"/>
+        </div>
       </div>
     </section>
     <site-footer />
@@ -112,14 +115,14 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 
-.layout {
+.landing-page {
   $max-width: 1200px;
 
   &__nav {
     padding: .3rem 1rem;
     background-color: $color-white;
 
-    &__account {
+    &__login {
       align-self: center;
     }
 
@@ -148,10 +151,12 @@ export default {
         h1 {
           font-size: 4rem;
         }
+        p {
+          margin: 1rem 0;
+        }
         position: relative;
         width:  calc(100% * 1/2 - 1rem);
         margin-top: 5vh;
-        // float: left;
       }
 
       &__animation {
@@ -193,7 +198,11 @@ export default {
     position: relative;
     z-index: 1;
 
-      &:after {
+    @media screen and (max-width: 400px) {
+      background-color: #16a895;
+    }
+
+    &:after {
       position: absolute;
       content: '';
       width: 100%;
@@ -203,7 +212,7 @@ export default {
 
       @media screen and (max-width: $mobile-width) {
         height: 80%;
-        background-color: #25b3a0;
+        background-color: #16a895;
       }
     }
 
@@ -214,32 +223,31 @@ export default {
     }
 
     &__background {
-      max-width: ($max-width );
+      max-width: $max-width;
       margin: auto;
       position: relative;
-      bottom: 50vw;
+      bottom: 38vw;
       z-index:1;
     }
 
     &__item {
-       align-items: center;
-       align-self: center;
-       width:  calc(100% * 1/3 - 1rem);
+      align-items: center;
+      align-self: center;
+      width:  calc(100% * 1/3 - 1rem);
 
-      @media screen and (max-width: $mobile-width) {
-        width: 100%;
-        margin: 2rem;
+      img {
+        height: 8rem;
+        width: 8rem;
+        border-radius: 50%;
       }
 
       span, h2 {
         color: $color-white;
       }
 
-      &__icon {
-        background: url('~@/assets/imgs/hand.svg') no-repeat;
-        height: 8rem;
-        width: 8rem;
-        border-radius: 50%;
+      @media screen and (max-width: $mobile-width) {
+        width: 100%;
+        margin: 2rem;
       }
     }
   }
@@ -255,23 +263,30 @@ export default {
 
   &__signup {
     padding: 5rem 0;
-    margin: auto;
+    margin: 5rem auto;
     max-width: $max-width - 200px;
-    align-items: center;
 
     &__info {
-      width:  calc(100% * 1/2 - 1rem);
-      margin-top: 10vh;
-      // float: left;
+       margin-top: 10vh;
     }
 
-      &__animation {
-        // position: relative;
+    &__animation {
+      position: relative;
+      align-items: center;
+      max-width: calc(100% * 1/4 - 1rem);
+
+      @media screen and (max-width: $mobile-width) {
+        display: none;
+      }
+
+      &__girl {
+        z-index: 1;
+        position: absolute;
         background-image: url('~@/assets/imgs/girl-with-helmet.svg');
         background-repeat: no-repeat;
-        width:  max-content;
+        width:  300px;
         height: 300px;
-        // display: inline-block;
+        bottom: 0rem;
         animation-name: floating;
         animation-duration: 3s;
         animation-iteration-count: infinite;
@@ -286,27 +301,28 @@ export default {
         @media screen and (max-width: $mobile-width) {
           display: none;
         }
+      }
 
-        &:before {
-          position: absolute;
-          content: '';
-          top: 100%;
-          height: 200px;
-          width: 50%;
-          left: 0rem;
-          background: url('~@/assets/imgs/girl-shadow.svg') no-repeat;
-          animation-name: floating;
-          animation-duration: 4s;
-          animation-iteration-count: infinite;
-          animation-timing-function: ease-in-out;
+      &__shadow {
+        position: relative;
+        content: '';
+        top: 100%;
+        height: 200px;
+        width: 100%;
+        left: 1.5rem;
+        background: url('~@/assets/imgs/girl-shadow.svg') no-repeat;
+        animation-name: floating-shadow;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
 
-          @keyframes floating {
-            from { transform: translate(0,  0px); }
-            65%  { transform: translate(0, 15px); }
-            to   { transform: translate(0, -0px); }
-          }
+        @keyframes floating-shadow {
+          from { transform: scale(1); }
+          65% { transform: scale(.9); }
+          to { transform: scale(1); }
         }
       }
+    }
   }
 }
 </style>
