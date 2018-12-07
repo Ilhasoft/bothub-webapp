@@ -123,7 +123,7 @@ export default {
   $margin: 1rem 0;
 
   &__nav {
-    padding: .3rem 1rem;
+    padding: .25rem 1rem;
     background-color: $color-white;
 
     &__login {
