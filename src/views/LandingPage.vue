@@ -29,7 +29,8 @@
           <bh-button
             size="medium"
             rounded
-            primary>Join us for free</bh-button>
+            primary
+            @click="openSignupModal()">Join us for free</bh-button>
         </div>
         <div class="landing-page__header__content__animation bh-grid__item" />
       </div>
@@ -71,7 +72,8 @@
             class="landing-page__signup__button"
             size="medium"
             rounded
-            secondary>Sign up for free</bh-button>
+            secondary
+            @click="openSignupModal()">Sign up for free</bh-button>
         </div>
         <div class="landing-page__signup__animation bh-grid__item">
           <div class="landing-page__signup__animation__girl"/>
