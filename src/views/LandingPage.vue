@@ -68,6 +68,7 @@
         <div class="bh-grid__item">
           <h1>Join the millions of developers already using Bothub</h1>
           <bh-button
+            class="landing-page__signup__button"
             size="medium"
             rounded
             secondary>Sign up for free</bh-button>
@@ -117,6 +118,7 @@ export default {
 
 .landing-page {
   $max-width: 1200px;
+  $margin: 1rem 0;
 
   &__nav {
     padding: .3rem 1rem;
@@ -152,7 +154,7 @@ export default {
           font-size: 4rem;
         }
         p {
-          margin: 1rem 0;
+          margin: $margin;
         }
         position: relative;
         width:  calc(100% * 1/2 - 1rem);
@@ -265,6 +267,10 @@ export default {
     padding: 5rem 0;
     margin: 5rem auto;
     max-width: $max-width - 200px;
+
+    &__button {
+      margin: $margin;
+    }
 
     &__animation {
       position: relative;
