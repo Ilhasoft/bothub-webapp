@@ -153,7 +153,6 @@ export default {
           });
         } else if (data) {
           this.errors = data;
-          console.log(data.text);
         }
       }
       this.submitting = false;
