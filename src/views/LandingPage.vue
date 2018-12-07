@@ -65,7 +65,7 @@
     </section>
     <section class="landing-page__signup">
       <div class="landing-page__singup bh-grid text-center">
-        <div class="landing-page__signup__info bh-grid__item">
+        <div class="bh-grid__item">
           <h1>Join the millions of developers already using Bothub</h1>
           <bh-button
             size="medium"
@@ -266,10 +266,6 @@ export default {
     margin: 5rem auto;
     max-width: $max-width - 200px;
 
-    &__info {
-       margin-top: 10vh;
-    }
-
     &__animation {
       position: relative;
       align-items: center;
@@ -317,9 +313,9 @@ export default {
         animation-timing-function: ease-in-out;
 
         @keyframes floating-shadow {
-          from { transform: scale(1); }
-          65% { transform: scale(.9); }
-          to { transform: scale(1); }
+          from { transform: scale(1.1); }
+          65% { transform: scale(1.2); }
+          to { transform: scale(1.1); }
         }
       }
     }
