@@ -1,1 +1,3 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 169.141 73.825"><defs><style>.a{fill:#d5d5d5;}</style></defs><ellipse class="a" cx="83.434" cy="34.022" rx="83.434" ry="34.022" transform="translate(0 5.823) rotate(-2)"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 169.141 73.825">
+  <ellipse style="fill:#d5d5d5" cx="83.434" cy="34.022" rx="83.434" ry="34.022" transform="translate(0 5.823) rotate(-2)"/>
+</svg>
