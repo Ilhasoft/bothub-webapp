@@ -66,7 +66,7 @@
     </section>
     <section class="landing-page__signup">
       <div class="landing-page__singup bh-grid text-center">
-        <div class="bh-grid__item">
+        <div class="bh-grid__item bh-grid__item">
           <h1>Join the millions of developers already using Bothub</h1>
           <bh-button
             class="landing-page__signup__button"
@@ -151,16 +151,25 @@ export default {
       max-width: $max-width - 200px;
       align-items: center;
 
+      @media screen and (max-width: $mobile-width) {
+        padding: 2rem 0;
+      }
+
       &__text {
+        position: relative;
+        width:  calc(100% * 1/2 - 1rem);
+        margin-top: 5vh;
+
         h1 {
           font-size: 4rem;
+
+          @media screen and (max-width: $mobile-width) {
+            font-size: 3rem;
+          }
         }
         p {
           margin: $margin;
         }
-        position: relative;
-        width:  calc(100% * 1/2 - 1rem);
-        margin-top: 5vh;
       }
 
       &__animation {
@@ -262,9 +271,10 @@ export default {
   }
 
   &__signup {
+    height: 350px;
     padding: 5rem 0;
-    margin: 5rem auto;
-    max-width: $max-width - 200px;
+    margin: 2rem auto;
+    max-width: $max-width - 500px;
 
     &__button {
       margin: $margin;
@@ -281,12 +291,12 @@ export default {
 
       &__girl {
         z-index: 1;
-        position: absolute;
+        position: relative;
         background-image: url('~@/assets/imgs/girl-with-helmet.svg');
         background-repeat: no-repeat;
         width:  300px;
         height: 300px;
-        bottom: 0rem;
+        bottom: 5rem;
         animation-name: floating;
         animation-duration: 3s;
         animation-iteration-count: infinite;
@@ -306,9 +316,9 @@ export default {
       &__shadow {
         position: relative;
         content: '';
-        top: 100%;
+        top: -5rem;
         height: 200px;
-        width: 100%;
+        width: 100px;
         left: 2rem;
         background: url('~@/assets/imgs/girl-shadow.svg') no-repeat;
         animation-name: floating-shadow;
@@ -317,9 +327,9 @@ export default {
         animation-timing-function: ease-in-out;
 
         @keyframes floating-shadow {
-          from { transform: scale(1.1); }
-          65% { transform: scale(1.2); }
-          to { transform: scale(1.1); }
+          from { transform: scale(1.2); }
+          65% { transform: scale(1.1); }
+          to { transform: scale(1.2); }
         }
       }
     }
