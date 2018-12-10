@@ -8,8 +8,8 @@
         <div class="repository-card__big-badge">
           <router-link :to="repositoryDetailsRouterParams">
             <bh-icon-button
+              :value="repositoryIcon"
               size="medium"
-              value="botinho"
               class="repository-card__big-badge__icon" /></router-link>
         </div>
       </div>
@@ -88,6 +88,9 @@ export default {
         return this.$attrs.categories_list;
       }
       return [];
+    },
+    repositoryIcon() {
+      return this.$attrs.categories[0].icon;
     },
   },
 };
