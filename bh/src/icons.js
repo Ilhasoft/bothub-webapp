@@ -29,6 +29,17 @@ import Alert from './assets/icons/alert.svg';
 import Warning from './assets/icons/warning.svg';
 import Sentence from './assets/icons/sentence.svg';
 import Language from './assets/icons/language.svg';
+import Business from './assets/icons/business.svg';
+import Commercial from './assets/icons/commercial.svg';
+import Culture from './assets/icons/culture.svg';
+import CustomerService from './assets/icons/customer-service.svg';
+import Education from './assets/icons/education.svg';
+import Finances from './assets/icons/finances.svg';
+import Food from './assets/icons/food.svg';
+import Health from './assets/icons/health.svg';
+import Social from './assets/icons/social.svg';
+import Tech from './assets/icons/tech.svg';
+import Config from './assets/icons/config.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -73,6 +84,17 @@ export default {
   warning: Warning,
   sentence: Sentence,
   language: Language,
+  business: Business,
+  commercial: Commercial,
+  culture: Culture,
+  education: Education,
+  finances: Finances,
+  food: Food,
+  health: Health,
+  social: Social,
+  tech: Tech,
+  config: Config,
+  'customer-service': CustomerService,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,
