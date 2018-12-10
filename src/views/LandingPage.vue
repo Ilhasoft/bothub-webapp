@@ -61,7 +61,12 @@
     <section class="landing-page__bots">
       <div class="landing-page__bots__content text-center">
         <h1>Best bots</h1>
-        <repository-card-list/>
+        <repository-card-list
+          :show-more-button="false"
+          limit="6"/>
+        <bh-button
+          primary
+          @click="showAllBots()"> All bots </bh-button>
       </div>
     </section>
     <section class="landing-page__signup">
@@ -108,6 +113,11 @@ export default {
       'openLoginModal',
       'openSignupModal',
     ]),
+    showAllBots() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
   },
 };
 </script>
@@ -227,10 +237,11 @@ export default {
     }
 
     &__background {
-      margin: auto;
+      margin: 0 auto;
       position: absolute;
       top: 20vw;
       z-index:1;
+      width: 100%;
 
       @media screen and (max-width: $mobile-width) {
         position: relative;
