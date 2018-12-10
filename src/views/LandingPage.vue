@@ -202,10 +202,6 @@ export default {
     position: relative;
     z-index: 1;
 
-    @media screen and (max-width: 400px) {
-      background-color: #16a895;
-    }
-
     &:after {
       position: absolute;
       content: '';
@@ -213,11 +209,6 @@ export default {
       height: 50%;
       bottom: 0;
       background-color: $color-fake-white;
-
-      @media screen and (max-width: $mobile-width) {
-        height: 80%;
-        background-color: #16a895;
-      }
     }
 
     &__background-svg {
@@ -227,11 +218,16 @@ export default {
     }
 
     &__background {
-      max-width: $max-width;
       margin: auto;
-      position: relative;
-      bottom: 38vw;
+      position: absolute;
+      top: 20vw;
       z-index:1;
+
+      @media screen and (max-width: $mobile-width) {
+        position: relative;
+        top: -20vw;
+        background-color: #1aac9a;
+      }
     }
 
     &__item {
@@ -313,7 +309,7 @@ export default {
         top: 100%;
         height: 200px;
         width: 100%;
-        left: 1.5rem;
+        left: 2rem;
         background: url('~@/assets/imgs/girl-shadow.svg') no-repeat;
         animation-name: floating-shadow;
         animation-duration: 3s;
