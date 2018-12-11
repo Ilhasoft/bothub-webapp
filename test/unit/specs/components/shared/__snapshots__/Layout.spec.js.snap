@@ -13,6 +13,7 @@ exports[`Layout.vue loading renders correctly 1`] = `
         <div class="bh-grid bh-grid--row">
           <!---->
           <!---->
+          <!---->
           <div class="bh-grid__item">
             <bhbutton-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bhbutton-stub>
           </div>
@@ -26,6 +27,7 @@ exports[`Layout.vue loading renders correctly 1`] = `
   <div class="layout__content"></div>
   <sitefooter-stub></sitefooter-stub>
   <newrepositorymodal-stub></newrepositorymodal-stub>
+  <beginnertutorial-stub></beginnertutorial-stub>
 </div>
 `;
 
@@ -40,6 +42,7 @@ exports[`Layout.vue renders correctly 1`] = `
         <div class="bh-grid bh-grid--row">
           <!---->
           <!---->
+          <!---->
           <div class="bh-grid__item">
             <bhbutton-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bhbutton-stub>
           </div>
@@ -53,5 +56,6 @@ exports[`Layout.vue renders correctly 1`] = `
   <div class="layout__content"></div>
   <sitefooter-stub></sitefooter-stub>
   <newrepositorymodal-stub></newrepositorymodal-stub>
+  <beginnertutorial-stub></beginnertutorial-stub>
 </div>
 `;
