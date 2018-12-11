@@ -90,7 +90,9 @@ export default {
       return [];
     },
     repositoryIcon() {
-      return this.$attrs.categories[0].icon;
+      return this.$attrs.categories[0].icon
+        ? this.$attrs.categories[0].icon
+        : 'botinho';
     },
   },
 };

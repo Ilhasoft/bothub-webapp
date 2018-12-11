@@ -6,7 +6,7 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
     <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
       <div class="repository-card__big-badge">
         <router-link to="[object Object]">
-          <bhiconbutton-stub type="button" value="help-text" size="medium" class="repository-card__big-badge__icon"></bhiconbutton-stub>
+          <bhiconbutton-stub type="button" value="botinho" size="medium" class="repository-card__big-badge__icon"></bhiconbutton-stub>
         </router-link>
       </div>
     </div>
