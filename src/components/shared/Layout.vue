@@ -43,6 +43,16 @@
             <div
               v-if="authenticated"
               class="bh-grid__item">
+              <bh-avatar>
+                <bh-icon
+                  size="small"
+                  value="help-text"
+                  @click="openBeginnerTutorialModal()" />
+              </bh-avatar>
+            </div>
+            <div
+              v-if="authenticated"
+              class="bh-grid__item">
               <bh-dropdown position="left">
                 <user-avatar
                   slot="trigger"
@@ -87,6 +97,8 @@
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal()" />
+    <BeginnerTutorial
+      :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -96,11 +108,13 @@ import { mapGetters, mapActions } from 'vuex';
 import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
+import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 
 const components = {
   NewRepositoryModal,
   SiteFooter,
   UserAvatar,
+  BeginnerTutorial,
 };
 
 export default {
@@ -123,6 +137,7 @@ export default {
   data() {
     return {
       newRepositoryModalOpen: false,
+      beginnerTutorialModalOpen: false,
     };
   },
   computed: {
@@ -155,6 +170,9 @@ export default {
     },
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });
+    },
+    openBeginnerTutorialModal() {
+      this.beginnerTutorialModalOpen = true;
     },
   },
 };
