@@ -42,9 +42,46 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <layout-stub title="null/">
   <div class="rpstr-vw-bs">
-    <div class="rpstr-vw-bs__loading">
-      <bhloading-stub></bhloading-stub>
-    </div>
+    <bhcard-stub shadow="strong" class="rpstr-vw-bs__card">
+      <div class="rpstr-vw-bs__card__header">
+        <div class="bh-grid bh-grid--row">
+          <div class="bh-grid__item">
+            <repositoryinfo-stub repository="<Repository #1>"></repositoryinfo-stub>
+          </div>
+          <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__card__header__mobile-navigation">
+            <repositorynavigation-stub repository="<Repository #1>"></repositorynavigation-stub>
+          </div>
+        </div>
+        <repositorynavigation-stub repository="<Repository #1>" class="rpstr-vw-bs__card__header__navigation"></repositorynavigation-stub>
+      </div>
+      <div class="rpstr-vw-bs__status-bar clickable">
+        <div class="bh-grid bh-grid--space-between">
+          <div class="bh-grid__item">
+            <div class="bh-grid text-color-grey-dark">
+              <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+                <bhicon-stub value="language"></bhicon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+                  0 languages</span>
+              </div>
+              <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+                <bhicon-stub value="sentence"></bhicon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+                  0 sentences</span>
+              </div>
+            </div>
+          </div>
+          <div class="bh-grid__item">
+            <div class="bh-grid">
+              <div class="bh-grid__item">
+                <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
+                  <bhicon-stub value="account"></bhicon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
+      <div class="rpstr-vw-bs__card__content"></div>
+    </bhcard-stub>
   </div>
   <trainmodal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]"></trainmodal-stub>
   <!---->
