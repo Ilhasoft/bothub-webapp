@@ -9,7 +9,6 @@ export default {
     return {
       repository: null,
       errorCode: null,
-      ready: false,
     };
   },
   computed: {
@@ -56,8 +55,14 @@ export default {
 
       return this.repository;
     },
-    onReady() {
-      this.ready = true;
+    onReady({ error }) {
+      if (error) {
+        const { response: { response } } = error;
+        if (response) {
+          const { status } = response;
+          this.errorCode = status;
+        }
+      }
     },
   },
 };
