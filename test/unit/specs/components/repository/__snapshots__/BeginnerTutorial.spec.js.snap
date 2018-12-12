@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BeginnerTutorial.vue renders correctly 1`] = `
+<bhmodal-stub open="true" title="Create your first repository!" backgroundcloses="true">
+  <div class="beginner-tutorial">
+    <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
+      <div class="bh-grid__item">
+        <p>On the top right of the window, click the "New bot" button.</p>
+        <p>Fill in the fields and click on "Creat Bot"</p> <img src="~@/assets/gifs/step1.gif">
+      </div>
+      <!---->
+      <!---->
+      <!---->
+    </div>
+    <div class="beginner-tutorial__wrapper__footer">
+      <bhbutton-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__prev-button--hidden beginner-tutorial__wrapper__footer__prev-button">Previous</bhbutton-stub>
+      <bhbutton-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__next-button">Next</bhbutton-stub>
+      <div class="beginner-tutorial__wrapper__footer__steps"><span class="beginner-tutorial__wrapper__footer__steps__step--active beginner-tutorial__wrapper__footer__steps__step"></span><span class="beginner-tutorial__wrapper__footer__steps__step"></span><span class="beginner-tutorial__wrapper__footer__steps__step"></span><span class="beginner-tutorial__wrapper__footer__steps__step"></span></div>
+    </div>
+  </div>
+</bhmodal-stub>
+`;
