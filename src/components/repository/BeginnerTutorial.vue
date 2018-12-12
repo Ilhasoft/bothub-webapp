@@ -168,9 +168,9 @@ export default {
       }
 
       &__prev-button {
-        margin: 1rem;
         display: inline-block;
         float: left;
+        margin: 1rem;
 
           &--hidden {
            visibility: hidden;
