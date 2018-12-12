@@ -207,9 +207,9 @@ export default {
           animation-timing-function: ease-in-out;
 
           @keyframes floating {
-            from { transform: translate(0,  0px); }
+            0% { transform: translate(0,  0px); }
             65%  { transform: translate(0, 15px); }
-            to   { transform: translate(0, -0px); }
+            100%   { transform: translate(0, -0px); }
           }
         }
       }
@@ -314,9 +314,9 @@ export default {
         animation-timing-function: ease-in-out;
 
         @keyframes floating {
-          from { transform: translate(0,  0px); }
+          0% { transform: translate(0,  0px); }
           65%  { transform: translate(0, 15px); }
-          to   { transform: translate(0, -0px); }
+          100%   { transform: translate(0, -0px); }
         }
 
         @media screen and (max-width: $mobile-width) {
@@ -338,9 +338,9 @@ export default {
         animation-timing-function: ease-in-out;
 
         @keyframes floating-shadow {
-          from { transform: scale(1.2); }
+          0% { transform: scale(1.2); }
           65% { transform: scale(1.1); }
-          to { transform: scale(1.2); }
+          100% { transform: scale(1.2); }
         }
       }
     }
