@@ -49,7 +49,6 @@
         <bh-button
           v-if="currentTab !== 4"
           class="beginner-tutorial__wrapper__footer__next-button"
-          ref="nextButton"
           primary
           @click="next()">Next</bh-button>
         <bh-button
