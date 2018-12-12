@@ -137,8 +137,8 @@ export default {
         margin-top: .5rem;
 
         &__step {
-        height: 15px;
-        width: 15px;
+        height: 1rem;
+        width: 1rem;
         margin: 1rem;
         background-color: #bbbbbb;
         border: none;
@@ -154,9 +154,9 @@ export default {
             animation-iteration-count: infinite;
             animation-timing-function: ease-in-out;
             @keyframes floating {
-              from { transform: translate(0, 0px); }
+              0% { transform: translate(0, 0px); }
               65%  { transform: translate(0, -5px); }
-              to   { transform: translate(0, 00px); }
+              100%   { transform: translate(0, 0px); }
             }
           }
         }
