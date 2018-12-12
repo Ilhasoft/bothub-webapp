@@ -8,7 +8,7 @@
           v-if="currentTab === 1"
           class="bh-grid__item">
           <p>On the top right of the window, click the "New bot" button.</p>
-          <p>Fill in the fields and click on "Creat Bot"</p>
+          <p>Fill in the fields and click on "Create Bot"</p>
           <img src="~@/assets/gifs/step1.gif">
         </div>
         <div
@@ -25,14 +25,14 @@
         <div
           v-if="currentTab === 3"
           class="bh-grid__item">
-          <p>After adding your example, click the status bar to see
+          <p>After adding your examples, click the status bar to see
           the status of your bot and train the sentences</p>
           <img src="~@/assets/gifs/step3.gif">
         </div>
         <div
           v-if="currentTab === 4"
           class="bh-grid__item">
-          <p>That it! Your bot is ready to be used!</p>
+          <p>That's it! Your bot is ready to be used!</p>
           <img
             class="beginner-tutorial__wrapper__botinho"
             src="~@/assets/imgs/mascot.svg">

@@ -6,7 +6,7 @@ exports[`BeginnerTutorial.vue renders correctly 1`] = `
     <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
       <div class="bh-grid__item">
         <p>On the top right of the window, click the "New bot" button.</p>
-        <p>Fill in the fields and click on "Creat Bot"</p> <img src="~@/assets/gifs/step1.gif">
+        <p>Fill in the fields and click on "Create Bot"</p> <img src="~@/assets/gifs/step1.gif">
       </div>
       <!---->
       <!---->
