@@ -9,6 +9,7 @@
           class="bh-grid__item">
           <p>On the top right of the window, click the "New bot" button.</p>
           <p>Fill in the fields and click on "Creat Bot"</p>
+          <img src="~@/assets/gifs/step1.gif">
         </div>
         <div
           v-if="currentTab === 2"
@@ -17,43 +18,44 @@
           by providing example sentences.</p>
           <p>
             Choose "Training" and enter phrases highlighting the entities and
-            relating it to an intention.
-          </p>
-          <p>
-            Don't forget to submit your sentences.
-          </p>
-        </div>
-        <div
-          v-if="currentTab === 3"
-          class="bh-grid__item">
-          <p>After adding your example, click the status bar to see
-          the status of your bot and train the sentences
-          </p>
-        </div>
-        <div
-          v-if="currentTab === 1"
-          class="bh-grid__item">
-          <img src="~@/assets/gifs/step1.gif">
-        </div>
-        <div
-          v-if="currentTab === 2"
-          class="bh-grid__item">
+            relating it to an intention.</p>
+          <p> Don't forget to submit your sentences.</p>
           <img src="~@/assets/gifs/step2.gif">
         </div>
         <div
           v-if="currentTab === 3"
           class="bh-grid__item">
+          <p>After adding your example, click the status bar to see
+          the status of your bot and train the sentences</p>
           <img src="~@/assets/gifs/step3.gif">
+        </div>
+        <div
+          v-if="currentTab === 4"
+          class="bh-grid__item">
+          <p>That it! Your bot is ready to be used!</p>
+          <img
+            class="beginner-tutorial__wrapper__botinho"
+            src="~@/assets/imgs/mascot.svg">
         </div>
       </div>
       <div class="beginner-tutorial__wrapper__footer">
         <bh-button
           :class="{
-            'beginner-tutorial__wrapper__footer__steps__prev-button--hidden': currentTab === 1,
+            'beginner-tutorial__wrapper__footer__prev-button--hidden': currentTab === 1,
             'beginner-tutorial__wrapper__footer__prev-button': true,
           }"
           primary
-          @click="back()">Back</bh-button>
+          @click="back()">Previous</bh-button>
+        <bh-button
+          v-if="currentTab !== 4"
+          class="beginner-tutorial__wrapper__footer__next-button"
+          primary
+          @click="next()">Next</bh-button>
+        <bh-button
+          v-else
+          class="beginner-tutorial__wrapper__footer__next-button"
+          primary
+          @click="closeModal()">Finish</bh-button>
         <div class="beginner-tutorial__wrapper__footer__steps">
           <span
             v-for="value in steps"
@@ -63,11 +65,6 @@
               'beginner-tutorial__wrapper__footer__steps__step': true,
           }"/>
         </div>
-        <bh-button
-          class="beginner-tutorial__wrapper__footer__next-button"
-          primary
-          @click="next()"
-        >Next</bh-button>
       </div>
     </div>
   </bh-modal>
@@ -102,10 +99,14 @@ export default {
       this.$emit('update:open', false);
     },
     next() {
-      this.currentTab = this.currentTab + 1;
+      if (this.currentTab < this.steps) {
+        this.currentTab += 1;
+      }
     },
     back() {
-      this.currentTab = this.currentTab - 1;
+      if (this.currentTab !== 1) {
+        this.currentTab -= 1;
+      }
     },
   },
 };
@@ -121,17 +122,16 @@ export default {
     max-width: 500px;
     height: 500px;
     margin: auto;
-    &__header {
 
-    }
-
-    &__content {
-      height: fit-content;
+    &__botinho {
+      margin-top: 5rem;
+      max-width: 300px;
     }
 
     &__footer {
       width: 100%;
       text-align: center;
+
       &__steps {
         display: inline-block;
         margin-top: .5rem;
@@ -173,45 +173,9 @@ export default {
         float: left;
 
           &--hidden {
-            visibility: hidden;
+           visibility: hidden;
           }
       }
-    }
-  }
-
-   &-next {
-    &-enter-active, &-leave-active {
-      transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
-    }
-
-    &-enter {
-      position: absolute;
-      width: 100%;
-      transform: translate3d(-100%, 0, 0);
-    }
-
-     &-leave-to {
-      position: absolute;
-      width: 100%;
-      transform: translate3d(100%, 0, 0);
-    }
-  }
-
-  &-prev {
-    &-enter-active, &-leave-active {
-      transition: transform $speed-fast cubic-bezier(0.785, 0.135, 0.150, 0.860);
-    }
-
-    &-leave-to {
-      position: absolute;
-      width: 100%;
-      transform: translate3d(-100%, 0, 0);
-    }
-
-    &-enter {
-      position: absolute;
-      width: 100%;
-      transform: translate3d(100%, 0, 0);
     }
   }
 }
