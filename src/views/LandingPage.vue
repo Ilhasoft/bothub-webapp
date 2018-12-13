@@ -60,11 +60,13 @@
     </section>
     <section class="landing-page__bots">
       <div class="landing-page__bots__content text-center">
-        <h1>Best bots</h1>
+        <h1 class="landing-page__bots__content__title">Best bots</h1>
         <repository-card-list
           :show-more-button="false"
           limit="6"/>
         <bh-button
+          class="landing-page__bots__content__button"
+          size="medium"
           primary
           @click="showAllBots()"> All bots </bh-button>
       </div>
@@ -93,7 +95,7 @@
 <script>
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-intro.svg';
 
 
@@ -107,6 +109,19 @@ export default {
     return {
       BackgroundSvg,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+      'myProfile',
+    ]),
+  },
+  watch: {
+    authenticated() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
   },
   methods: {
     ...mapActions([
@@ -129,8 +144,10 @@ export default {
 
 
 .landing-page {
+  $mobile-size: 900px;
   $max-width: 1200px;
   $margin: 1rem 0;
+  $moredate-margin: 3rem 0;
 
   &__nav {
     padding: .25rem 1rem;
@@ -161,7 +178,7 @@ export default {
       max-width: $max-width - 200px;
       align-items: center;
 
-      @media screen and (max-width: $mobile-width) {
+      @media screen and (max-width: $mobile-size) {
         padding: 2rem 0;
       }
 
@@ -173,7 +190,7 @@ export default {
         h1 {
           font-size: 4rem;
 
-          @media screen and (max-width: $mobile-width) {
+          @media screen and (max-width: $mobile-size) {
             font-size: 3rem;
           }
         }
@@ -190,7 +207,7 @@ export default {
         height: 400px;
         display: inline-block;
 
-        @media screen and (max-width: $mobile-width) {
+        @media screen and (max-width: $mobile-size) {
           display: none;
         }
 
@@ -237,13 +254,15 @@ export default {
     }
 
     &__background {
+      max-width: $max-width;
       margin: 0 auto;
-      position: absolute;
-      top: 20vw;
+      position: relative;
+      bottom: 35vw;
       z-index:1;
       width: 100%;
 
-      @media screen and (max-width: $mobile-width) {
+      @media screen and (max-width: $mobile-size) {
+        flex-direction: column;
         position: relative;
         top: -20vw;
         background-color: #1aac9a;
@@ -265,7 +284,7 @@ export default {
         color: $color-white;
       }
 
-      @media screen and (max-width: $mobile-width) {
+      @media screen and (max-width: $mobile-size) {
         width: 100%;
         margin: 2rem;
       }
@@ -278,13 +297,21 @@ export default {
     &__content {
       margin: auto;
       max-width: $max-repository-card-width;
+
+      &__title {
+        margin: $moredate-margin;
+      }
+
+      &__button {
+         margin: $moredate-margin;
+      }
     }
   }
 
   &__signup {
     height: 350px;
     padding: 5rem 0;
-    margin: 2rem auto;
+    margin: 3rem auto;
     max-width: $max-width - 500px;
 
     &__button {
@@ -296,7 +323,7 @@ export default {
       align-items: center;
       max-width: calc(100% * 1/4 - 1rem);
 
-      @media screen and (max-width: $mobile-width) {
+      @media screen and (max-width: $mobile-size) {
         display: none;
       }
 
@@ -319,7 +346,7 @@ export default {
           100%   { transform: translate(0, -0px); }
         }
 
-        @media screen and (max-width: $mobile-width) {
+        @media screen and (max-width: $mobile-size) {
           display: none;
         }
       }
