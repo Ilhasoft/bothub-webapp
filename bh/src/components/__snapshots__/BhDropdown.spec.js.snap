@@ -3,8 +3,8 @@
 exports[`BhDropdown.vue renders correctly 1`] = `
 <div class="bh-dropdown">
   <div>
-    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title"></span>
-      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    <div class="bh-grid bh-grid--row bh-dropdown__default clickable"><span class="bh-grid__item bh-dropdown__default__title"></span>
+      <bhicon-stub value="menu-down" class="bh-grid__item text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
   <div tabindex="2" class="bh-dropdown__content" style="display: none;"></div>
@@ -14,8 +14,8 @@ exports[`BhDropdown.vue renders correctly 1`] = `
 exports[`BhDropdown.vue renders correctly when Dropdown have a title 1`] = `
 <div class="bh-dropdown">
   <div>
-    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
-      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    <div class="bh-grid bh-grid--row bh-dropdown__default clickable"><span class="bh-grid__item bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="bh-grid__item text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
   <div tabindex="17" class="bh-dropdown__content" style="display: none;"></div>
