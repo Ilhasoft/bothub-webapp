@@ -2,7 +2,7 @@
   <div
     :class="{
       'bh-dropdown': true,
-      [`bh-dropdown--${position}`]: !!position,
+      [`bh-dropdown--${position}`]: !!position && $slots.trigger,
     }"
   >
     <div
@@ -15,11 +15,11 @@
       />
       <div
         v-else
-        class="bh-dropdown__default clickable"
+        class="bh-grid bh-grid--row bh-dropdown__default clickable"
       >
-        <span class="bh-dropdown__default__title">{{ title }}</span>
+        <span class="bh-grid__item bh-dropdown__default__title">{{ title }}</span>
         <bh-icon
-          class="text-color-grey-dark bh-dropdown__default__icon"
+          class="bh-grid__item text-color-grey-dark bh-dropdown__default__icon"
           value="menu-down"
         />
       </div>
@@ -28,10 +28,14 @@
       v-show="open"
       ref="dropdown"
       :tabindex="_uid"
-      class="bh-dropdown__content"
+      :class="{
+        'bh-dropdown__content': true,
+        'bh-dropdown__content--slot': $slots.trigger,
+      }"
       @click="closeDropdown()"
       @blur="closeDropdown()"
-    ><slot /></div>
+    > <slot />
+    </div>
   </div>
 </template>
 
@@ -93,27 +97,31 @@ export default {
       border-radius: .5rem;
 
       &__title {
-        float: left;
-        margin-right: 1rem;
+       align-self: center;
       }
 
       &__icon {
-        margin: 2px;
+        align-self: center;
       }
     }
 
     &__content {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      left: 0;
       z-index: $dropdown-z-index;
-      width: max-content;
-      min-width: 100px;
+      width: 100%;
+      min-width: calc(100% + 2rem);
       padding: .5rem 0;
       background-color: white;
       border-radius: 4px;
       outline: none;
       box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
+
+      &--slot {
+        top: 50%;
+        left: 50%;
+        width: max-content;
+      }
     }
 
     &--left {
