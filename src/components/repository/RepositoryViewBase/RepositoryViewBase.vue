@@ -1,15 +1,15 @@
 <template>
   <layout
     :title="currentTitle"
-    :loading="ready && repository && repository.loading">
+    :loading="repository && repository.loading">
     <div class="rpstr-vw-bs">
       <div
-        v-if="!ready"
+        v-if="!repository || (repository && !repository.name && repository.loading)"
         class="rpstr-vw-bs__loading">
         <bh-loading />
       </div>
       <bh-card
-        v-else-if="repository"
+        v-else-if="repository && !repository.fatal"
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
@@ -129,9 +129,14 @@
         </div>
       </bh-card>
       <div
-        v-else-if="errorCode"
+        v-else-if="repository && repository.fatal && errorCode"
         class="rpstr-vw-bs__error">
         <h1>{{ errorCode|errorVerbose }}</h1>
+      </div>
+      <div
+        v-else-if="repository && repository.fatal"
+        class="rpstr-vw-bs__error">
+        <h1>Error to retrieve bot</h1>
       </div>
     </div>
     <train-modal
@@ -190,10 +195,6 @@ export default {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
   },
   props: {
-    ready: {
-      type: Boolean,
-      default: false,
-    },
     repository: {
       type: Object,
       default: null,

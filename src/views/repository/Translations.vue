@@ -1,7 +1,6 @@
 <template>
   <repository-view-base
     :repository="repository"
-    :ready="ready"
     :error-code="errorCode">
     <div v-if="repository">
       <div class="translations__header">
