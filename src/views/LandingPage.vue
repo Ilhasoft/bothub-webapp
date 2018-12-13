@@ -25,7 +25,7 @@
         <div class="landing-page__header__content__text bh-grid__item">
           <h1>Build, Optimize and Train</h1>
           <p>Be part of an open source and democratic global community that builds,
-          trains and shares data sets.</p>
+          trains and shares datasets.</p>
           <bh-button
             size="medium"
             rounded
@@ -42,19 +42,19 @@
       <div class="landing-page__intro__background bh-grid bh-grid--space-between">
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/hand.svg">
-          <h2>Create new AI</h2>
-          <span>Create repositories with example sentences and improve your bot intelligence.</span>
+          <h2>Build your AI</h2>
+          <span>Create repositories with example sentences contextualized.</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/cloud.svg">
-          <h2>Use existing data sets</h2>
-          <span>You can choose from various ready-to-use data sets.</span>
+          <h2>Share datasets</h2>
+          <span>You can choose from various ready-to-use datasets.</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/talk-balloon.svg">
-          <h2>Build a community</h2>
-          <span>Contribute to existing data sets
-          adding more examples or languages quickly and easily.</span>
+          <h2>Join the community</h2>
+          <span>Contribute to existing datasets adding more
+          examples or new language support.</span>
         </div>
       </div>
     </section>
@@ -179,7 +179,7 @@ export default {
       align-items: center;
 
       @media screen and (max-width: $mobile-size) {
-        padding: 2rem 0;
+        padding: 1rem 0;
       }
 
       &__text {
@@ -255,15 +255,19 @@ export default {
 
     &__background {
       max-width: $max-width;
-      margin: 0 auto;
-      position: relative;
-      bottom: 35vw;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: auto;
+      position: absolute;
+      bottom: 50%;
       z-index:1;
-      width: 100%;
 
       @media screen and (max-width: $mobile-size) {
         flex-direction: column;
         position: relative;
+        transform: translateY(0);
         top: -20vw;
         background-color: #1aac9a;
       }
