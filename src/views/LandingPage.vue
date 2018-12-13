@@ -25,7 +25,7 @@
         <div class="landing-page__header__content__text bh-grid__item">
           <h1>Build, Optimize and Train</h1>
           <p>Be part of an open source and democratic global community that builds,
-          trains and shares data sets.</p>
+          trains and shares datasets.</p>
           <bh-button
             size="medium"
             rounded
@@ -42,29 +42,31 @@
       <div class="landing-page__intro__background bh-grid bh-grid--space-between">
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/hand.svg">
-          <h2>Create new AI</h2>
-          <span>Create repositories with example sentences and improve your bot intelligence.</span>
+          <h2>Build your AI</h2>
+          <span>Create repositories with example sentences contextualized.</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/cloud.svg">
-          <h2>Use existing data sets</h2>
-          <span>You can choose from various ready-to-use data sets.</span>
+          <h2>Share datasets</h2>
+          <span>You can choose from various ready-to-use datasets.</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/talk-balloon.svg">
-          <h2>Build a community</h2>
-          <span>Contribute to existing data sets
-          adding more examples or languages quickly and easily.</span>
+          <h2>Join the community</h2>
+          <span>Contribute to existing datasets adding more
+          examples or new language support.</span>
         </div>
       </div>
     </section>
     <section class="landing-page__bots">
       <div class="landing-page__bots__content text-center">
-        <h1>Best bots</h1>
+        <h1 class="landing-page__bots__content__title">Best bots</h1>
         <repository-card-list
           :show-more-button="false"
           limit="6"/>
         <bh-button
+          class="landing-page__bots__content__button"
+          size="medium"
           primary
           @click="showAllBots()"> All bots </bh-button>
       </div>
@@ -93,7 +95,7 @@
 <script>
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-intro.svg';
 
 
@@ -107,6 +109,19 @@ export default {
     return {
       BackgroundSvg,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+      'myProfile',
+    ]),
+  },
+  watch: {
+    authenticated() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
   },
   methods: {
     ...mapActions([
@@ -131,6 +146,7 @@ export default {
 .landing-page {
   $max-width: 1200px;
   $margin: 1rem 0;
+  $moredate-margin: 3rem 0;
 
   &__nav {
     padding: .25rem 1rem;
@@ -162,7 +178,7 @@ export default {
       align-items: center;
 
       @media screen and (max-width: $mobile-width) {
-        padding: 2rem 0;
+        padding: 1rem 0;
       }
 
       &__text {
@@ -237,14 +253,20 @@ export default {
     }
 
     &__background {
-      margin: 0 auto;
+      max-width: $max-width;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: auto;
       position: absolute;
-      top: 20vw;
+      bottom: 50%;
       z-index:1;
-      width: 100%;
 
       @media screen and (max-width: $mobile-width) {
+        flex-direction: column;
         position: relative;
+        transform: translateY(0);
         top: -20vw;
         background-color: #1aac9a;
       }
@@ -277,14 +299,22 @@ export default {
 
     &__content {
       margin: auto;
-      max-width: $max-repository-card-width;
+      max-width: $max-width;
+
+      &__title {
+        margin: $moredate-margin;
+      }
+
+      &__button {
+         margin: $moredate-margin;
+      }
     }
   }
 
   &__signup {
     height: 350px;
     padding: 5rem 0;
-    margin: 2rem auto;
+    margin: 3rem auto;
     max-width: $max-width - 500px;
 
     &__button {

@@ -141,7 +141,7 @@ export default {
 
 footer {
   $margin-top: 12vw;
-  $background-gradient-color: #12a391;
+  $background-gradient-color: #18a997;
 
   position: relative;
   width: 100%;
