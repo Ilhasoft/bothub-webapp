@@ -12,20 +12,22 @@
               :type="errors && errors.language && 'is-danger'"
               :message="errors && errors.language"
               label="Language">
-              <b-select
+              <bh-select
                 v-model="data.language"
                 expanded>
                 <option
                   v-for="(verbose, language) in availableLanguagesList"
                   :key="language"
                   :value="language">{{ verbose }}</option>
-              </b-select>
+              </bh-select>
             </bh-field>
             <bh-field
               :type="errors && errors.text && 'is-danger'"
               :message="errors && errors.text"
+              :errors="errors ? errors.text : []"
               label="Text">
-              <b-input
+              <bh-textarea
+                :rows="8"
                 v-model="data.text"
                 type="textarea" />
             </bh-field>
@@ -67,9 +69,11 @@
             </div>
           </bh-tab-item>
           <bh-tab-item label="raw">
-            <bh-highlighted-pre
-            :code="JSON.stringify(result, null, 2) "
-            code-class="code" />
+            <div class="drawer__analyze-content">
+              <bh-highlighted-pre
+                :code="JSON.stringify(result, null, 2) "
+                code-class="code" />
+            </div>
           </bh-tab-item>
         </bh-tabs>
       </div>
@@ -176,7 +180,6 @@ export default {
   max-height: 90vh;
   z-index: 9;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
-  overflow: auto;
 
   @media screen and (max-width: $tablet) {
     right: 50%;
@@ -210,8 +213,13 @@ export default {
     overflow: hidden;
   }
 
+  &__analyze-content {
+    height: 300px;
+    overflow-y: scroll;
+  }
+
   &--slide-enter, &--slide-leave-to {
-    margin-bottom: -200px;
+    margin-bottom: -100%;
   }
 
   &--slide-enter-to, &--slide-leave {
