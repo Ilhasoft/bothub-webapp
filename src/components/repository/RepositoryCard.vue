@@ -18,7 +18,7 @@
           <span class="repository-card__title__bagde">
             <router-link :to="repositoryDetailsRouterParams">
               <bh-icon-button
-                value="botinho"
+                :value="repositoryIcon"
                 class="repository-card__title__bagde__icon" /></router-link>
           </span>
           <router-link :to="repositoryDetailsRouterParams">
