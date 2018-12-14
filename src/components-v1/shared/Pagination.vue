@@ -16,6 +16,7 @@
         v-if="list.hasNext"
         class="next has-text-centered">
         <button
+          v-if="moreButton"
           :disabled="list.loading"
           class="button is-primary"
           @click="next()">{{ moreText }}</button>
@@ -46,6 +47,10 @@ export default {
     moreText: {
       type: String,
       default: 'More',
+    },
+    moreButton: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
