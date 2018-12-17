@@ -53,6 +53,7 @@ export default {
         animation-duration: 1s;
         animation-timing-function: ease-in-out;
         animation-iteration-count: infinite;
+
         @keyframes floating {
           0% { transform: translate(0, 0px); }
           65%  { transform: translate(0, -5px); }
