@@ -5,7 +5,7 @@ import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import applyFilters from '@/utils/filters';
-import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
+import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

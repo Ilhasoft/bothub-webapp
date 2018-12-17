@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 149.661 149.661">
+  <defs>
+    <clipPath id="cloud">
+      <circle cx="74.83" cy="74.83" r="74.83" transform="translate(0 0)"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(-603 -889)">
+    <g style="clip-path:url(#cloud);" transform="translate(603 889)">
+      <circle style="fill:#fff;" cx="79.71" cy="79.71" r="79.71" transform="translate(-3.253 -4.338)"/>
+    </g>
+    <g transform="translate(630.508 916.508)">
+      <g transform="translate(14.091 55.983)">
+        <rect style="fill:#12a391;" width="3.131" height="30.65" transform="translate(23.485 0.001)"/>
+        <rect style="fill:#12a391;" width="3.131" height="30.65" transform="translate(40.186 0.001)"/>
+        <path style="fill:#12a391;" d="M392.509,326.681h-8.35a1.566,1.566,0,0,1-1.566-1.566V301.771h3.131v21.778h6.785v3.131Z" transform="translate(-325.707 -301.771)"/>
+        <path style="fill:#12a391;" d="M84.306,326.681h-8.35v-3.131h6.785V301.771h3.131v23.344A1.565,1.565,0,0,1,84.306,326.681Z" transform="translate(-75.956 -301.771)"/>
+      </g>
+      <g transform="translate(33.923 74.108)">
+        <circle style="fill:#3dddc8;" cx="5.219" cy="5.219" r="5.219" transform="translate(0 10.438)"/>
+        <circle style="fill:#3dddc8;" cx="5.219" cy="5.219" r="5.219" transform="translate(16.701 10.438)"/>
+        <circle style="fill:#3dddc8;" cx="5.219" cy="5.219" r="5.219" transform="translate(44.883)"/>
+      </g>
+      <path style="fill:#2bbfac;" d="M322.5,27.815A28.071,28.071,0,0,0,294.432,0c-.178,0-.355,0-.532,0L314.792,58.07h4.242A15.326,15.326,0,0,0,322.5,27.815Z" transform="translate(-239.377 0)"/>
+      <path style="fill:#3dddc8;" d="M78.426,27.834C78.309,12.628,67.693.307,54.523.023A28.071,28.071,0,0,0,30.47,14.529a11.967,11.967,0,0,0-16.6,9.417,17.238,17.238,0,0,0,3.371,34.142H75.415c7.348,0,13.306-6.862,13.306-15.327C88.722,35.491,84.323,29.405,78.426,27.834Z" transform="translate(0 -0.019)"/>
+      <circle style="fill:#3dddc8;" cx="5.219" cy="5.219" r="5.219" transform="translate(5.741 74.108)"/>
+    </g>
+  </g>
+</svg>

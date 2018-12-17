@@ -8,8 +8,8 @@
         <div class="repository-card__big-badge">
           <router-link :to="repositoryDetailsRouterParams">
             <bh-icon-button
+              :value="repositoryIcon"
               size="medium"
-              value="botinho"
               class="repository-card__big-badge__icon" /></router-link>
         </div>
       </div>
@@ -18,7 +18,7 @@
           <span class="repository-card__title__bagde">
             <router-link :to="repositoryDetailsRouterParams">
               <bh-icon-button
-                value="botinho"
+                :value="repositoryIcon"
                 class="repository-card__title__bagde__icon" /></router-link>
           </span>
           <router-link :to="repositoryDetailsRouterParams">
@@ -47,7 +47,7 @@
             v-for="category in repositoryCategoryRouterParams"
             :key="category.id"
             :to="{
-              path: '/',
+              path: '/home',
               query: { category: category.id },
           }">
             <bh-badge
@@ -88,6 +88,9 @@ export default {
         return this.$attrs.categories_list;
       }
       return [];
+    },
+    repositoryIcon() {
+      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
     },
   },
 };
