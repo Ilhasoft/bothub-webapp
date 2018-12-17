@@ -15,7 +15,7 @@ describe('BeginnerTutorial.vue', () => {
       },
       data: {
         steps: 4,
-        currentTab: 1,
+        currentValue: 1,
       },
     });
   });
@@ -25,7 +25,7 @@ describe('BeginnerTutorial.vue', () => {
   });
 
   test('Current Tab equal 1', () => {
-    expect(wrapper.vm.currentTab).toEqual(1);
+    expect(wrapper.vm.currentValue).toEqual(1);
   });
 
   test('Steps equal 4', () => {
@@ -35,26 +35,26 @@ describe('BeginnerTutorial.vue', () => {
   describe('Call next step function', () => {
     beforeEach(() => {
       wrapper.setData({
-        currentTab: 2,
+        currentValue: 2,
       });
       wrapper.vm.next();
     });
 
     test('Current tab change', () => {
-      expect(wrapper.vm.currentTab).toEqual(3);
+      expect(wrapper.vm.currentValue).toEqual(3);
     });
   });
 
   describe('Call previous step function', () => {
     beforeEach(() => {
       wrapper.setData({
-        currentTab: 2,
+        currentValue: 2,
       });
       wrapper.vm.previous();
     });
 
     test('Current tab change to', () => {
-      expect(wrapper.vm.currentTab).toEqual(1);
+      expect(wrapper.vm.currentValue).toEqual(1);
     });
   });
 });

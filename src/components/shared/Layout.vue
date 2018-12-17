@@ -43,12 +43,12 @@
             <div
               v-if="authenticated"
               class="bh-grid__item">
-              <bh-avatar>
-                <bh-icon
-                  size="small"
-                  value="help-text"
-                  @click="openBeginnerTutorialModal()" />
-              </bh-avatar>
+              <bh-icon-button
+                class="layout__header__icon-tutorial"
+                size="small"
+                value="question"
+                @click="openBeginnerTutorialModal()"
+              />
             </div>
             <div
               v-if="authenticated"
@@ -240,6 +240,14 @@ export default {
       img {
         display: block;
         height: $size-small;
+      }
+    }
+
+    &__icon-tutorial {
+      color: $color-white;
+
+      &:hover {
+        color: $color-fake-white;
       }
     }
 

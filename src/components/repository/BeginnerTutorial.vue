@@ -5,14 +5,14 @@
     <div class="beginner-tutorial">
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
         <div
-          v-if="currentTab === 1"
+          v-if="currentValue === 1"
           class="bh-grid__item">
           <p>On the top right of the window, click the "New bot" button.</p>
           <p>Fill in the fields and click on "Create Bot"</p>
           <img src="~@/assets/gifs/step1.gif">
         </div>
         <div
-          v-if="currentTab === 2"
+          v-if="currentValue === 2"
           class="bh-grid__item">
           <p>Start adding content to the interpretation mechanism
           by providing example sentences.</p>
@@ -23,14 +23,14 @@
           <img src="~@/assets/gifs/step2.gif">
         </div>
         <div
-          v-if="currentTab === 3"
+          v-if="currentValue === 3"
           class="bh-grid__item">
           <p>After adding your examples, click the status bar to see
           the status of your bot and train the sentences</p>
           <img src="~@/assets/gifs/step3.gif">
         </div>
         <div
-          v-if="currentTab === 4"
+          v-if="currentValue === 4"
           class="bh-grid__item">
           <p>That's it! Your bot is ready to be used!</p>
           <img
@@ -41,13 +41,13 @@
       <div class="beginner-tutorial__wrapper__footer">
         <bh-button
           :class="{
-            'beginner-tutorial__wrapper__footer__prev-button--hidden': currentTab === 1,
+            'beginner-tutorial__wrapper__footer__prev-button--hidden': currentValue === 1,
             'beginner-tutorial__wrapper__footer__prev-button': true,
           }"
           primary
           @click="previous()">Previous</bh-button>
         <bh-button
-          v-if="currentTab !== 4"
+          v-if="currentValue !== 4"
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
           @click="next()">Next</bh-button>
@@ -56,15 +56,10 @@
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
           @click="closeModal()">Finish</bh-button>
-        <div class="beginner-tutorial__wrapper__footer__steps">
-          <span
-            v-for="value in steps"
-            :key="value"
-            :class="{
-              'beginner-tutorial__wrapper__footer__steps__step--active': currentTab === value,
-              'beginner-tutorial__wrapper__footer__steps__step': true,
-          }"/>
-        </div>
+        <bh-stepper
+          :steps="steps"
+          :current-step="currentValue"
+        />
       </div>
     </div>
   </bh-modal>
@@ -83,7 +78,7 @@ export default {
     return {
       openValue: this.open,
       steps: 4,
-      currentTab: 1,
+      currentValue: 1,
     };
   },
   watch: {
@@ -99,13 +94,13 @@ export default {
       this.$emit('update:open', false);
     },
     next() {
-      if (this.currentTab < this.steps) {
-        this.currentTab += 1;
+      if (this.currentValue < this.steps) {
+        this.currentValue += 1;
       }
     },
     previous() {
-      if (this.currentTab !== 1) {
-        this.currentTab -= 1;
+      if (this.currentValue !== 1) {
+        this.currentValue -= 1;
       }
     },
   },
