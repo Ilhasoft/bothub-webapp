@@ -167,7 +167,7 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
-import AnalyzeTextDrawer from '@/components-v1/repository/AnalyzeTextDrawer';
+import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 
 

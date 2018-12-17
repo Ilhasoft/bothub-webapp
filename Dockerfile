@@ -32,4 +32,4 @@ RUN yarn build
 FROM nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /home/app/dist /usr/share/nginx/html
+COPY --from=builder /home/app/dist /usr/share/nginx/html/bothub-webapp
