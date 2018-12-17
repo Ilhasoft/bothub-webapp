@@ -47,7 +47,7 @@
             v-for="category in repositoryCategoryRouterParams"
             :key="category.id"
             :to="{
-              path: '/',
+              path: '/home',
               query: { category: category.id },
           }">
             <bh-badge
