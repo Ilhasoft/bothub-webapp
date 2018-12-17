@@ -29,6 +29,7 @@ import Alert from './assets/icons/alert.svg';
 import Warning from './assets/icons/warning.svg';
 import Sentence from './assets/icons/sentence.svg';
 import Language from './assets/icons/language.svg';
+import Question from './assets/icons/question.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
 import FlagEs from './assets/icons/flag-es.svg';
@@ -73,6 +74,7 @@ export default {
   warning: Warning,
   sentence: Sentence,
   language: Language,
+  question: Question,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
   'flag-es': FlagEs,

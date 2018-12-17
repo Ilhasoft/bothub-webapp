@@ -87,6 +87,9 @@
     <bh-icon
       value="language"
       size="normal"/>
+    <bh-icon
+      value="question"
+      size="normal"/>
   </div>
 </template>
 
