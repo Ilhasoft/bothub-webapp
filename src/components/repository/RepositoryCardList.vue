@@ -4,6 +4,7 @@
       v-if="repositoryList"
       :item-component="exampleItemElem"
       :list="repositoryList"
+      :more-button="showMoreButton"
       class="repository-card-list__item" />
     <p
       v-if="repositoryList && repositoryList.empty"
@@ -36,6 +37,14 @@ export default {
     search: {
       type: '',
       default: null,
+    },
+    limit: {
+      type: '',
+      default: null,
+    },
+    showMoreButton: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -70,12 +79,14 @@ export default {
         this.repositoryList = await this.searchRepositories({
           language: this.language,
           search,
+          limit: this.limit,
         });
       } else if (this.category > 0) {
         this.repositoryList = await this.searchRepositories({
           categories: this.category,
           language: this.language,
           search,
+          limit: this.limit,
         });
       }
     },

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 149.661 149.661">
+  <defs>
+    <clipPath id="hand">
+      <circle cx="74.83" cy="74.83" r="74.83" transform="translate(0 0)"/>
+    </clipPath>
+  </defs>
+  <g transform="translate(-231 -889)">
+    <g class="b" transform="translate(231 889)">
+    <circle style="fill:#fff;" cx="79.71" cy="79.71" r="79.71" transform="translate(-3.253 -4.338)"/>
+  </g>
+  <g transform="translate(266.5 915)">
+    <path style="fill:#e8bd79;" d="M75.583,93.9a5.745,5.745,0,0,0-7.817-2.132L30.5,113.063v13.2l42.951-24.542A5.737,5.737,0,0,0,75.583,93.9Zm0,0" transform="translate(-24.27 -73.631)"/>
+    <path style="fill:#2bbfac;" d="M195.5,286h54.624v5.73H195.5Zm0,0" transform="translate(-157.757 -231.376)"/>
+    <path style="fill:#12a391;" d="M434.34,384.785l4.051,4.051-4.051,4.051-4.051-4.051Zm0,0" transform="translate(-347.703 -311.294)"/>
+    <path style="fill:#3dddc8;" d="M348.689,156.73v5.73h-5.73v5.73h-5.73v-5.73H331.5v-5.73h5.73V151h5.73v5.73Zm0,0" transform="translate(-267.782 -122.16)"/>
+    <path style="fill:#3dddc8;" d="M310.554,424.018v3.018h-3.018v3.018h-3.018v-3.018H301.5v-3.018h3.018V421h3.018v3.018Zm0,0" transform="translate(-249.844 -343.458)"/>
+    <path style="fill:#e8bd79;" d="M56.6,31.919a5.71,5.71,0,0,0-7.946,1.589L30.5,60.736V81.4L58.186,39.864A5.73,5.73,0,0,0,56.6,31.919Zm0,0" transform="translate(-24.27 -25.036)"/>
+    <path style="fill:#e8bd79;" d="M39.749,57.489a5.625,5.625,0,0,0,5.443-7.22A22.9,22.9,0,0,0,11.96,37.663V5.73A5.73,5.73,0,0,0,.5,5.73V97.788H23.419V80.408a22.918,22.918,0,0,0,21.773-15.7A5.607,5.607,0,0,0,39.749,57.489ZM34.306,61.1a11.46,11.46,0,1,1,0-7.219,4.96,4.96,0,0,0,4.584,3.609A4.96,4.96,0,0,0,34.306,61.1Zm0,0"/>
+    </g>
+  </g>
+</svg>
