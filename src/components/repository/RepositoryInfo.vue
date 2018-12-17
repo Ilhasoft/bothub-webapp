@@ -4,8 +4,8 @@
       <div class="repository-info__big-badge">
         <router-link :to="repositoryDetailsRouterParams">
           <bh-icon-button
+            :value="repositoryInfoIcon"
             size="medium"
-            value="botinho"
             class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
@@ -14,7 +14,7 @@
         <span class="repository-info__title__bagde">
           <router-link :to="repositoryDetailsRouterParams">
             <bh-icon-button
-              value="botinho"
+              :value="repositoryInfoIcon"
               class="repository-info__title__bagde__icon" /></router-link>
         </span>
         <router-link :to="repositoryDetailsRouterParams">
@@ -92,6 +92,9 @@ export default {
         return this.repository.categories_list;
       }
       return [];
+    },
+    repositoryInfoIcon() {
+      return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
   },
 };
