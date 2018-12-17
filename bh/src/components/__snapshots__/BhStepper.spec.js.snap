@@ -2,6 +2,6 @@
 
 exports[`BhStepper.vue Set current step Second step render correctlty with active class 1`] = `<div class="bh-stepper"><span class="bh-stepper__step"></span><span class="bh-stepper__step--active bh-stepper__step"></span><span class="bh-stepper__step"></span><span class="bh-stepper__step"></span></div>`;
 
-exports[`BhStepper.vue Set props to more steps renders correctly all steps 1`] = `<div class="bh-stepper"><span class="bh-stepper__step--active bh-stepper__step"></span><span class="bh-stepper__step"></span><span class="bh-stepper__step"></span><span class="bh-stepper__step"></span></div>`;
+exports[`BhStepper.vue Set props to more steps renders correctly 4 steps 1`] = `<div class="bh-stepper"><span class="bh-stepper__step--active bh-stepper__step"></span><span class="bh-stepper__step"></span><span class="bh-stepper__step"></span><span class="bh-stepper__step"></span></div>`;
 
 exports[`BhStepper.vue renders correctly 1`] = `<div class="bh-stepper"><span class="bh-stepper__step--active bh-stepper__step"></span></div>`;
