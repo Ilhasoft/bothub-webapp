@@ -127,35 +127,6 @@ export default {
       width: 100%;
       text-align: center;
 
-      &__steps {
-        display: inline-block;
-        margin-top: .5rem;
-
-        &__step {
-        height: 1rem;
-        width: 1rem;
-        margin: 1rem;
-        background-color: #bbbbbb;
-        border: none;
-        border-radius: 50%;
-        display: inline-block;
-        opacity: 0.5;
-
-          &--active {
-            background-color: $color-primary;
-            opacity: 1;
-            animation-name: floating;
-            animation-duration: 1s;
-            animation-iteration-count: infinite;
-            animation-timing-function: ease-in-out;
-            @keyframes floating {
-              0% { transform: translate(0, 0px); }
-              65%  { transform: translate(0, -5px); }
-              100%   { transform: translate(0, 0px); }
-            }
-          }
-        }
-      }
       &__next-button {
         display: inline-block;
         float: right;
@@ -168,7 +139,7 @@ export default {
         margin: 1rem;
 
           &--hidden {
-           visibility: hidden;
+            visibility: hidden;
           }
       }
     }

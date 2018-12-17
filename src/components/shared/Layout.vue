@@ -97,7 +97,7 @@
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal()" />
-    <BeginnerTutorial
+    <beginner-tutorial
       :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
