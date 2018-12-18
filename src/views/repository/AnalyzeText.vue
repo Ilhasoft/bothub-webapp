@@ -14,7 +14,7 @@
             <div class="repository-analyze-text__item">
               <p><strong>URL:</strong></p>
               <bh-highlighted-pre
-                code="https://nlp.bothub.it/parse/"
+                :code="URL"
                 code-class="plaintext" />
             </div>
             <div class="repository-analyze-text__item">
@@ -110,6 +110,11 @@ export default {
     UpdatesList,
   },
   extends: RepositoryBase,
+  computed: {
+    URL() {
+      return `${process.env.BOTHUB_NLP_BASE_URL}/parse`;
+    },
+  },
 };
 </script>
 
