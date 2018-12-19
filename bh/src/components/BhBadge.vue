@@ -3,7 +3,8 @@
     :class="{
       'bh-badge': true,
       [`bh-badge--${size}`]: !!size,
-      [`bh-badge--${color}`]: !!color
+      [`bh-badge--${color}`]: !!color && !transparent,
+      [`bh-badge--${color}-transparent`]: !!color && transparent,
     }"
     @click="$emit('click', $event)"
   >
@@ -23,6 +24,10 @@ export default {
       type: String,
       default: null,
     },
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -34,35 +39,38 @@ export default {
 
 .bh {
   &-badge {
+    $border-width: 2px;
+
+    @mixin badge-heigth($size-value) {
+      height: $size-value;
+      line-height: calc(#{$size-value} - #{($border-width * 2)});
+      border-radius: ($size-value / 2);
+    }
+
+    @include badge-heigth($size-normal);
     display: inline-flex;
-    height: $size-normal;
-    padding: 0 1rem;
-    font-size: 1rem;
-    line-height: $size-normal;
-    border-radius: ($size-normal / 2);
+    padding: 0 1.5rem;
+    font-size: 1.25rem;
+    border-color: transparent;
+    border-style: solid;
+    border-width: $border-width;
 
     &--small {
-      height: $size-small;
-      padding: 0 .75rem;
+      @include badge-heigth($size-small);
+      padding: 0 1rem;
       font-size: .75rem;
-      line-height: $size-small;
-      border-radius: ($size-small / 2);
     }
 
     &--medium {
-      height: $size-medium;
-      padding: 0 1.25rem;
+      @include badge-heigth($size-medium);
+      padding: 0 1.5rem;
       font-size: 1.25rem;
-      line-height: $size-medium;
-      border-radius: ($size-medium / 2);
     }
 
     &--large {
-      height: $size-large;
-      padding: 0 1.5rem;
+      @include badge-heigth($size-large);
+      padding: 0 1.75rem;
       font-size: 1.5rem;
-      line-height: $size-large;
-      border-radius: ($size-large / 2);
     }
 
     @each $color in $colors {
@@ -73,6 +81,12 @@ export default {
       &--#{$color-name} {
         color: $color-inverted;
         background-color: $color-value;
+        border-color: $color-value;
+
+        &-transparent {
+          color: $color-value;
+          border-color: $color-value;
+        }
       }
     }
 
