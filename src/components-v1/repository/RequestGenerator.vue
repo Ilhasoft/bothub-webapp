@@ -78,7 +78,7 @@ export default {
           `  -H 'Authorization: Bearer ${this.authorizationUuid}' \\`,
           `  -F 'language=${this.language}' \\`,
           `  -F "text=${this.text_escaped.curl}" \\`,
-          `  ${process.env.BOTHUB_NLP_BASE_URL}/parse/`,
+          `  ${process.env.BOTHUB_NLP_BASE_URL}parse/`,
         ].join('\n'),
         python: [
           'import requests',
@@ -89,7 +89,7 @@ export default {
           '}',
           '',
           `headers = { 'Authorization': 'Bearer ${this.authorizationUuid}' }`,
-          `r = requests.post('${process.env.BOTHUB_NLP_BASE_URL}/parse/', headers=headers, data=data)`,
+          `r = requests.post('${process.env.BOTHUB_NLP_BASE_URL}parse/', headers=headers, data=data)`,
           'print(r.json())',
         ].join('\n'),
         javascript: [
@@ -102,7 +102,7 @@ export default {
           '  console.log(JSON.parse(request.response));',
           '};',
           '',
-          `request.open('POST', '${process.env.BOTHUB_NLP_BASE_URL}/parse/');`,
+          `request.open('POST', '${process.env.BOTHUB_NLP_BASE_URL}parse/');`,
           `request.setRequestHeader('Authorization', 'Bearer ${this.authorizationUuid}');`,
           'request.send(data);',
         ].join('\n'),
