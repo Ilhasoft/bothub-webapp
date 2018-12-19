@@ -22,11 +22,13 @@ You can set environment variables in your OS or write on .env file.
 
 | Variable | Type | Default | Description |
 |--|--|--|--|
-| API_BASE_URL | ```string``` | In development mode is ```http://localhost:8000/api``` | [bothub-engine](https://github.com/Ilhasoft/bothub-engine) HTTP service API URL
-| SUPPORTED_LANGUAGES | ```string``` | ```en\|pt``` | Check description and formatation in [bothub-engine SUPPORTED_LANGUAGES environment variable](https://github.com/Ilhasoft/bothub-engine#environment-variables)
-| MAILCHIMP_LOGIN | ```string``` | Empty | Check MailChimp subscribe URL*
-| MAILCHIMP_DATACENTER | ```string``` | Empty | Check MailChimp subscribe URL*
-| MAILCHIMP_USER_ID | ```string``` | Empty | Check MailChimp subscribe URL*
-| MAILCHIMP_LIST_ID | ```string``` | Empty | Check MailChimp subscribe URL*
+| API_BASE_URL | `string` | In development mode is `http://localhost:8000/api` | [bothub-engine](https://github.com/Ilhasoft/bothub-engine) HTTP service API URL
+| BOTHUB_NLP_BASE_URL | `string` | In development mode is `http://localhost:2657/` | Bothub NLP service URL
+| BOTHUB_WEBAPP_BASE_URL | `string` | In development mode is `http://localhost:8080/` | Bothub WEBAPP service URL
+| SUPPORTED_LANGUAGES | `string` | `en\|pt` | Check description and formatation in [bothub-engine SUPPORTED_LANGUAGES environment variable](https://github.com/Ilhasoft/bothub-engine#environment-variables)
+| MAILCHIMP_LOGIN | `string` | Empty | Check MailChimp subscribe URL*
+| MAILCHIMP_DATACENTER | `string` | Empty | Check MailChimp subscribe URL*
+| MAILCHIMP_USER_ID | `string` | Empty | Check MailChimp subscribe URL*
+| MAILCHIMP_LIST_ID | `string` | Empty | Check MailChimp subscribe URL*
 
-\* MailChimp subscribe URL: ```https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]```
+\* MailChimp subscribe URL: `https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]`
