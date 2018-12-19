@@ -37,9 +37,9 @@
             'repository-info__flags__flag': true,
             'repository-info__flags__flag--main': language == repository.language,
         }">
-          <bh-language-flag
+          <language-badge
             :language="language"
-            size="small" />
+            :main="language == repository.language" />
         </span>
       </div>
       <div class="repository-info__categories">
@@ -61,10 +61,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
   name: 'RepositoryInfo',
+  components: {
+    LanguageBadge,
+  },
   props: {
     repository: {
       type: Object,
@@ -159,16 +163,17 @@ export default {
   }
 
   &__flags {
-    margin: .5rem -.25rem;
+    $margin: .25rem;
+
+    display: flex;
+    margin: 1rem ($margin * -1);
 
     &__flag {
-      display: inline-block;
-      margin: .25rem;
-      padding: 0 .25rem .25rem;
-      border-bottom: .25rem solid transparent;
+      margin: 0 $margin;
+      order: 0;
 
       &--main {
-        border-color: $color-primary;
+        order: -1;
       }
     }
   }

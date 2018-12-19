@@ -24,10 +24,12 @@
                 class="train-modal__wrapper__content__item">
                 <p
                   v-for="(requirement, i) in requirements"
-                  :key="i"> {{ requirement }}
-                  <bh-language-flag
+                  :key="i">
+                  <span>{{ requirement }}</span>
+                  <language-badge
                     :language="lang"
-                    class="train-modal__wrapper__content__item__flag"/> </p>
+                    class="train-modal__wrapper__content__item__flag"/>
+                </p>
               </div>
             </div>
           </div>
@@ -40,10 +42,12 @@
                 class="train-modal__wrapper__content__item">
                 <p
                   v-for="(warning, index) in warnings"
-                  :key="index"> {{ warning }}
-                  <bh-language-flag
+                  :key="index">
+                  <span>{{ warning }}</span>
+                  <language-badge
                     :language="lang"
-                    class="train-modal__wrapper__content__item__flag"/> </p>
+                    class="train-modal__wrapper__content__item__flag" />
+                </p>
               </div>
             </div>
           </div>
@@ -72,8 +76,14 @@
 </template>
 
 <script>
+import LanguageBadge from '@/components/shared/LanguageBadge';
+
+
 export default {
   name: 'TrainModal',
+  components: {
+    LanguageBadge,
+  },
   props: {
     open: {
       type: Boolean,
