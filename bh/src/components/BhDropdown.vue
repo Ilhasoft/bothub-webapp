@@ -3,6 +3,7 @@
     :class="{
       'bh-dropdown': true,
       [`bh-dropdown--${position}`]: !!position,
+       [`bh-dropdown--${position}--full-width`]: !!position && fullWidth,
     }"
   >
     <div
@@ -42,6 +43,10 @@ export default {
     position: {
       type: String,
       default: null,
+    },
+    fullWidth: {
+      type: Boolean,
+      default: false,
     },
     title: {
       type: String,
@@ -116,8 +121,42 @@ export default {
       box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
     }
 
+    &--right-top {
+      #{$parent}__content {
+        top: 0;
+        left: 0;
+
+        &--full-width {
+          width: 100%;
+        }
+      }
+    }
+
+    &--right-bottom {
+      #{$parent}__content {
+        top:100%;
+        left: 0;
+      }
+    }
+
     &--left {
       #{$parent}__content {
+        transform: translate(-100%);
+      }
+    }
+
+    &--left-bottom {
+      #{$parent}__content {
+        left:100%;
+        top:100%;
+        transform: translate(-100%);
+      }
+    }
+
+    &--left-top {
+      #{$parent}__content {
+        left:100%;
+        top:0;
         transform: translate(-100%);
       }
     }
