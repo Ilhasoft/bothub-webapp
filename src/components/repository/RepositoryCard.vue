@@ -36,10 +36,11 @@
             :key="language"
             :class="{
               'repository-card__flags__flag': true,
+              'repository-card__flags__flag--main': language == $attrs.language,
           }">
-            <bh-language-flag
+            <language-badge
               :language="language"
-              :size="language == $attrs.language? 'small' : ''" />
+              :main="language == $attrs.language" />
           </span>
         </div>
         <div class="repository-card__categories">
@@ -63,10 +64,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
   name: 'RepositoryCard',
+  components: {
+    LanguageBadge,
+  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -174,14 +179,18 @@ export default {
   }
 
   &__flags {
+    display: flex;
     margin: .5rem -.25rem;
     justify-content: center;
     align-items: center;
 
     &__flag {
-      display: inline-block;
       margin: .25rem;
+      order: 0;
 
+      &--main {
+        order: -1;
+      }
     }
   }
 
