@@ -31,7 +31,7 @@
       :class="{
         'bh-dropdown__content': true,
         'bh-dropdown__content--full-width' : fullWidth,
-        }"
+      }"
       @click="closeDropdown()"
       @blur="closeDropdown()"
     ><slot /></div>
@@ -127,17 +127,27 @@ export default {
       }
     }
 
-    &--right-top {
+    &--top-left {
       #{$parent}__content {
-        top: 0;
-        left: 0;
+        top:0;
+        left:50%;
+        transform: translate(-100%);
       }
     }
 
-    &--right-bottom {
+    &--top-right {
+      #{$parent}__content {
+        top: 0;
+        left: 100%;
+        transform: translate(-100%);
+      }
+    }
+
+    &--bottom-right {
       #{$parent}__content {
         top:100%;
-        left: 0;
+        left: 100%;
+        transform: translate(-100%);
       }
     }
 
@@ -147,19 +157,10 @@ export default {
       }
     }
 
-    &--left-bottom {
+    &--bottom-left {
       #{$parent}__content {
         top:100%;
-        left:100%;
-        transform: translate(-100%);
-      }
-    }
-
-    &--left-top {
-      #{$parent}__content {
-        top:0;
-        left:100%;
-        transform: translate(-100%);
+        left:0;
       }
     }
   }
