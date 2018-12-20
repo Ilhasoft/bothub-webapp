@@ -5,7 +5,7 @@ exports[`UpdateList.vue renders correctly 1`] = `
   <bhcard-stub>
     <div class="update-item__content">
       <div class="update-item__header">
-        <bhlanguageflag-stub language="en"></bhlanguageflag-stub> <span>English</span>
+        <languagebadge-stub language="en" size="small"></languagebadge-stub> <span>English</span>
       </div>
       <div class="level">
         <div class="level-left">
