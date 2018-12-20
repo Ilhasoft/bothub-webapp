@@ -180,6 +180,7 @@ export default {
 
   &__flags {
     display: flex;
+    flex-wrap: wrap;
     margin: .5rem -.25rem;
     justify-content: center;
     align-items: center;
