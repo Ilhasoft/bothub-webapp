@@ -166,6 +166,7 @@ export default {
     $margin: .25rem;
 
     display: flex;
+    flex-wrap: wrap;
     margin: 1rem ($margin * -1);
 
     &__flag {
