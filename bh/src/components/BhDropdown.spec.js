@@ -71,4 +71,69 @@ describe('BhDropdown.vue', () => {
       expect(wrapper).toMatchSnapshot();
     });
   });
+
+  describe('render position correctly', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        title: 'Select Item',
+        position: 'left',
+      });
+    });
+
+    test('when Dropdown have a left position (center)', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('render position correctly', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        title: 'Select Item',
+        position: 'top-right',
+      });
+    });
+
+    test('when Dropdown have a top-right position', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('render position correctly', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        title: 'Select Item',
+        position: 'bottom-right',
+      });
+    });
+
+    test('when Dropdown have a bottom-right position', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('render position correctly', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        title: 'Select Item',
+        position: 'bottom-left',
+      });
+    });
+
+    test('when Dropdown have a bottom-left position', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
+
+  describe('render correctly', () => {
+    beforeEach(() => {
+      wrapper.setProps({
+        title: 'Select Item',
+        fullWidth: true,
+      });
+    });
+
+    test('when props fullWidth is true', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+  });
 });

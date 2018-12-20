@@ -10,7 +10,19 @@
       <h2>Dropdown with slot Example</h2>
       <example
         :component="SlotDropDownExample"
-        :code="slotDropDownExample" />
+        :code="slotDropDownExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h2>Dropdown positions</h2>
+      <example
+        :component="PositionDropDownExample"
+        :code="positionDropDownExampleCode" />
+    </div>
+    <div class="bh-grid__item">
+      <h2>Dropdown content size</h2>
+      <example
+        :component="SizeContentDropDown"
+        :code="sizeContentDropDownCode" />
     </div>
     <div class="bh-grid__item">
       <api :data="api" />
@@ -24,7 +36,11 @@ import Api from '@/Api';
 import DropDownExample from './examples/DropDown';
 import dropDownExampleCode from '!!raw-loader!./examples/DropDown';
 import SlotDropDownExample from './examples/SlotDropDown';
-import slotDropDownExample from '!!raw-loader!./examples/SlotDropDown';
+import slotDropDownExampleCode from '!!raw-loader!./examples/SlotDropDown';
+import PositionDropDownExample from './examples/PositionDropDown';
+import positionDropDownExampleCode from '!!raw-loader!./examples/PositionDropDown';
+import SizeContentDropDown from './examples/SizeContentDropDown';
+import sizeContentDropDownCode from '!!raw-loader!./examples/SizeContentDropDown';
 import api from './api';
 
 
@@ -39,7 +55,11 @@ export default {
       DropDownExample,
       dropDownExampleCode,
       SlotDropDownExample,
-      slotDropDownExample,
+      slotDropDownExampleCode,
+      PositionDropDownExample,
+      positionDropDownExampleCode,
+      SizeContentDropDown,
+      sizeContentDropDownCode,
       api,
     };
   },
