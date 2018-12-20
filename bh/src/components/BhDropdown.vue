@@ -3,7 +3,6 @@
     :class="{
       'bh-dropdown': true,
       [`bh-dropdown--${position}`]: !!position,
-       [`bh-dropdown--${position}--full-width`]: !!position && fullWidth,
     }"
   >
     <div
@@ -29,7 +28,10 @@
       v-show="open"
       ref="dropdown"
       :tabindex="_uid"
-      class="bh-dropdown__content"
+      :class="{
+        'bh-dropdown__content': true,
+        'bh-dropdown__content--full-width' : fullWidth,
+        }"
       @click="closeDropdown()"
       @blur="closeDropdown()"
     ><slot /></div>
@@ -119,16 +121,16 @@ export default {
       border-radius: 4px;
       outline: none;
       box-shadow: 2px 2px 6px rgba(0, 0, 0, .5);
+
+      &--full-width {
+        width: 100%;
+      }
     }
 
     &--right-top {
       #{$parent}__content {
         top: 0;
         left: 0;
-
-        &--full-width {
-          width: 100%;
-        }
       }
     }
 
@@ -147,16 +149,16 @@ export default {
 
     &--left-bottom {
       #{$parent}__content {
-        left:100%;
         top:100%;
+        left:100%;
         transform: translate(-100%);
       }
     }
 
     &--left-top {
       #{$parent}__content {
-        left:100%;
         top:0;
+        left:100%;
         transform: translate(-100%);
       }
     }
