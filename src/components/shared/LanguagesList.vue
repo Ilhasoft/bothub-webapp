@@ -4,7 +4,8 @@
       <div class="bh-grid__item bh-grid__item--nested text-right">
         <bh-dropdown
           :title="dropdownTitle"
-          position="left">
+          full-width
+          position="bottom-left">
           <bh-dropdown-item
             v-for="language in languages"
             :key="language.id"
