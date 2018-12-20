@@ -4,7 +4,7 @@ exports[`CategoriesList.vue renders correctly 1`] = `
 <div>
   <div class="bh-grid categories-list">
     <div class="bh-grid__item bh-grid__item--nested text-right">
-      <bhdropdown-stub position="left" title="All categories">
+      <bhdropdown-stub position="bottom-left" fullwidth="true" title="All categories">
         <bhdropdownitem-stub>All categories</bhdropdownitem-stub>
       </bhdropdown-stub>
     </div>
