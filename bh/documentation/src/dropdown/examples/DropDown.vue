@@ -6,9 +6,8 @@
       <h5>Drop Item to left side of dropdown</h5>
       <div>
         <bh-dropdown
-          full-width
           title="All categories"
-          position="right-bottom">
+          position="left">
           <bh-dropdown-item>Edit</bh-dropdown-item>
           <bh-dropdown-item>Remove</bh-dropdown-item>
         </bh-dropdown>
