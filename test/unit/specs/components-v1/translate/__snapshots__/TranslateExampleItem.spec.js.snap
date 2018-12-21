@@ -3,10 +3,10 @@
 exports[`TranslateExampleItem.vue renders correctly 1`] = `
 <div class="example">
   <div class="example-text">
-    <highlightedtext-stub text="..." entities="[object Object]" allentities=""></highlightedtext-stub>
+    <highlighted-text-stub text="..." entities="[object Object]" allentities=""></highlighted-text-stub>
   </div>
   <div class="example-entities">
-    <btag-stub rounded="true" tabstop="true" class="entity-sunflower">name</btag-stub>
+    <b-tag-stub rounded="true" tabstop="true" class="entity-sunflower">name</b-tag-stub>
   </div>
   <div class="example-infos level is-mobile">
     <div class="level-left">
@@ -17,10 +17,10 @@ exports[`TranslateExampleItem.vue renders correctly 1`] = `
     </div>
     <!---->
   </div>
-  <bcollapse-stub animation="fade">
+  <b-collapse-stub animation="fade">
     <div class="translate-form">
-      <newtranslateform-stub extraentitieslist="name" exampleid="1" translateto="pt" repository="[object Object]"></newtranslateform-stub>
+      <new-translate-form-stub extraentitieslist="name" exampleid="1" translateto="pt" repository="[object Object]"></new-translate-form-stub>
     </div>
-  </bcollapse-stub>
+  </b-collapse-stub>
 </div>
 `;
