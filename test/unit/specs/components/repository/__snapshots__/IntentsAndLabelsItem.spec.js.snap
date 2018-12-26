@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
-<bh-card-stub>
+<bhcard-stub>
   <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
@@ -14,11 +14,11 @@ exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
     </div>
   </div>
   <!---->
-</bh-card-stub>
+</bhcard-stub>
 `;
 
 exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When labelEntities array props have a array. Renders correctly 1`] = `
-<bh-card-stub>
+<bhcard-stub>
   <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
@@ -31,10 +31,10 @@ exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When la
   <div class="i-a-l-item__entities">
     <div class="i-a-l-item__entities__label"><span>Entities</span></div>
     <div class="i-a-l-item__entities__badges">
-      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-sunflower clickable">Dog</bh-badge-stub>
-      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-energos clickable">Cat</bh-badge-stub>
-      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-blue-martina clickable">Buy</bh-badge-stub>
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-sunflower clickable">Dog</bhbadge-stub>
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-energos clickable">Cat</bhbadge-stub>
+      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-blue-martina clickable">Buy</bhbadge-stub>
     </div>
   </div>
-</bh-card-stub>
+</bhcard-stub>
 `;

@@ -3,7 +3,7 @@
 exports[`LoginForm.vue renders correctly 1`] = `
 <form>
   <!---->
-  <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]" class="field"></form-generator-stub>
+  <formgenerator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]" class="field"></formgenerator-stub>
   <div class="field">
     <div class="control has-text-right"><a href="#forgot-password" class="has-text-grey">Forgot password?</a></div>
   </div>

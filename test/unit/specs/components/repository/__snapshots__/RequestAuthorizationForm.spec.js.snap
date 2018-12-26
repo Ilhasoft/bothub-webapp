@@ -3,7 +3,7 @@
 exports[`RequestAuthorizationForm.vue renders correctly 1`] = `
 <form>
   <!---->
-  <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]"></form-generator-stub>
+  <formgenerator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]"></formgenerator-stub>
   <div>
     <bh-button full-width="" type="submit" primary=""> Request </bh-button>
   </div>

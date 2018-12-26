@@ -4,29 +4,29 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
 <div>
   <form class="columns is-variable is-2">
     <div class="column is-three-fifths">
-      <bh-field-stub label="" errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
-          <language-append-select-input-stub class="language-append"></language-append-select-input-stub>
-        </example-text-with-highlighted-entities-input-stub>
-      </bh-field-stub>
+      <bhfield-stub label="" errors="">
+        <exampletextwithhighlightedentitiesinput-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
+          <languageappendselectinput-stub class="language-append"></languageappendselectinput-stub>
+        </exampletextwithhighlightedentitiesinput-stub>
+      </bhfield-stub>
     </div>
     <div class="column">
-      <bh-field-stub label="Intent" helptext="When your bot receives a message, your bot can use a
+      <bhfield-stub label="Intent" helptext="When your bot receives a message, your bot can use a
                   recognizer to examine the message and determine intent." errors="">
-        <bh-autocomplete-stub data="" formatters="intentFormatters" size="medium" placeholder="Intent"></bh-autocomplete-stub>
-      </bh-field-stub>
+        <bhautocomplete-stub data="" formatters="intentFormatters" size="medium" placeholder="Intent"></bhautocomplete-stub>
+      </bhfield-stub>
     </div>
     <div class="column is-narrow">
-      <bh-field-stub label="" errors="">
-        <bh-button-stub disabled="true" size="medium" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">Submit</bh-button-stub>
-      </bh-field-stub>
+      <bhfield-stub label="" errors="">
+        <bhbutton-stub disabled="true" size="medium" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">Submit</bhbutton-stub>
+      </bhfield-stub>
     </div>
   </form>
   <div class="columns is-variable is-1">
     <div class="column">
-      <bh-field-stub errors="">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels=""></entities-input-stub>
-      </bh-field-stub>
+      <bhfield-stub errors="">
+        <entitiesinput-stub value="" repository="[object Object]" text="" availableentities="" availablelabels=""></entitiesinput-stub>
+      </bhfield-stub>
     </div>
   </div>
 </div>

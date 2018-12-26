@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
-<bh-modal-stub open="true" title="Training Status" backgroundcloses="true">
+<bhmodal-stub open="true" title="Training Status" backgroundcloses="true">
   <div class="train-modal">
     <div class="bh-grid bh-grid--column"><strong class="text-color-danger text-center bh-grid__item">
         One or more languages cannot be trained in the moment.</strong>
@@ -11,7 +11,7 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
           <div class="train-modal__wrapper__content-requirements">
             <div class="train-modal__wrapper__content__item">
               <p><span>requirement 1</span>
-                <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                <languagebadge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></languagebadge-stub>
               </p>
             </div>
           </div>
@@ -21,15 +21,15 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
     </div>
   </div>
   <div class="bh-grid__item text-center train-modal__buttons">
-    <bh-button-stub primary="true" type="button">
-      <bh-icon-stub value="school"></bh-icon-stub> <span>Train</span>
-    </bh-button-stub>
+    <bhbutton-stub primary="true" type="button">
+      <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
+    </bhbutton-stub>
   </div>
-</bh-modal-stub>
+</bhmodal-stub>
 `;
 
 exports[`TrainModal.vue add warning renders correctly 1`] = `
-<bh-modal-stub open="true" title="Training Status" backgroundcloses="true">
+<bhmodal-stub open="true" title="Training Status" backgroundcloses="true">
   <div class="train-modal">
     <div class="bh-grid bh-grid--column">
       <!----> <strong class="text-color-primary text-center bh-grid__item">
@@ -40,7 +40,7 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
           <div class="train-modal__wrapper__content-warnings">
             <div class="train-modal__wrapper__content__item">
               <p><span>warning 1</span>
-                <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                <languagebadge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></languagebadge-stub>
               </p>
             </div>
           </div>
@@ -49,15 +49,15 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
     </div>
   </div>
   <div class="bh-grid__item text-center train-modal__buttons">
-    <bh-button-stub primary="true" type="button">
-      <bh-icon-stub value="school"></bh-icon-stub> <span>Train</span>
-    </bh-button-stub>
+    <bhbutton-stub primary="true" type="button">
+      <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
+    </bhbutton-stub>
   </div>
-</bh-modal-stub>
+</bhmodal-stub>
 `;
 
 exports[`TrainModal.vue renders correctly 1`] = `
-<bh-modal-stub open="true" title="Training Status" backgroundcloses="true">
+<bhmodal-stub open="true" title="Training Status" backgroundcloses="true">
   <div class="train-modal">
     <div class="bh-grid bh-grid--column">
       <!----> <strong class="text-color-primary text-center bh-grid__item">
@@ -66,9 +66,9 @@ exports[`TrainModal.vue renders correctly 1`] = `
     </div>
   </div>
   <div class="bh-grid__item text-center train-modal__buttons">
-    <bh-button-stub primary="true" type="button">
-      <bh-icon-stub value="school"></bh-icon-stub> <span>Train</span>
-    </bh-button-stub>
+    <bhbutton-stub primary="true" type="button">
+      <bhicon-stub value="school"></bhicon-stub> <span>Train</span>
+    </bhbutton-stub>
   </div>
-</bh-modal-stub>
+</bhmodal-stub>
 `;

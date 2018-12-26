@@ -2,6 +2,6 @@
 
 exports[`SearchBar.vue renders correctly 1`] = `
 <form class="search"><input type="text" placeholder="the world of robots is here"> <button type="submit">
-    <b-icon-stub icon="magnify"></b-icon-stub>
+    <bicon-stub icon="magnify"></bicon-stub>
   </button></form>
 `;

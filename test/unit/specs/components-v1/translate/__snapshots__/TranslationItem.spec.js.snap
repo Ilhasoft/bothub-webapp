@@ -5,7 +5,7 @@ exports[`TranslationItem.vue renders correctly 1`] = `
   <div class="translation-text">
     <div class="columns is-mobile">
       <div class="column">
-        <highlighted-text-stub text="oi" entities="" allentities=""></highlighted-text-stub>
+        <highlightedtext-stub text="oi" entities="" allentities=""></highlightedtext-stub>
       </div>
       <div class="column is-narrow"><button class="button is-small is-primary"><span>Show Original</span></button></div>
     </div>
