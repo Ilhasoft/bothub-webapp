@@ -6,36 +6,34 @@
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
         <div
           v-if="currentValue === 1"
-          class="bh-grid__item">
-          <p>On the top right of the window, click the "New bot" button.</p>
-          <p>Fill in the fields and click on "Create Bot"</p>
+          class="bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step1.gif">
+          <p>On the top right of the window, click the "New bot" button. Fill in the fields and click on "Create Bot"</p>
+          <p/>
         </div>
         <div
           v-if="currentValue === 2"
-          class="bh-grid__item">
-          <p>Start adding content to the interpretation mechanism
-          by providing example sentences.</p>
-          <p>
-            Choose "Training" and enter phrases highlighting the entities and
-            relating it to an intention.</p>
-          <p> Don't forget to submit your sentences.</p>
+          class="bh-grid__item bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step2.gif">
+          <p>Start adding content to the interpretation mechanism by providing example sentences.
+          Choose "Training" and enter phrases highlighting the entities and
+          relating it to an intention.Don't forget to submit your sentences</p>
+
         </div>
         <div
           v-if="currentValue === 3"
-          class="bh-grid__item">
+          class="bh-grid__item bh-grid__item--nested">
+          <img src="~@/assets/gifs/step3.gif">
           <p>After adding your examples, click the status bar to see
           the status of your bot and train the sentences</p>
-          <img src="~@/assets/gifs/step3.gif">
         </div>
         <div
           v-if="currentValue === 4"
-          class="bh-grid__item">
-          <p>That's it! Your bot is ready to be used!</p>
+          class="bh-grid__item bh-grid__item--nested">
           <img
             class="beginner-tutorial__wrapper__botinho"
             src="~@/assets/imgs/mascot.svg">
+          <p>That's it! Your bot is ready to be used!</p>
         </div>
       </div>
       <div class="beginner-tutorial__wrapper__footer">
@@ -114,12 +112,8 @@ export default {
 
 .beginner-tutorial {
   &__wrapper {
-    max-width: 500px;
-    height: 500px;
-    margin: auto;
-
     &__botinho {
-      margin-top: 5rem;
+      margin-top: 1rem;
       max-width: 300px;
     }
 
