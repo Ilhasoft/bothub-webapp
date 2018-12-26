@@ -4,9 +4,9 @@ exports[`BeginnerTutorial.vue renders correctly 1`] = `
 <bhmodal-stub open="true" title="Create your first repository!" backgroundcloses="true">
   <div class="beginner-tutorial">
     <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
-      <div class="bh-grid__item">
-        <p>On the top right of the window, click the "New bot" button.</p>
-        <p>Fill in the fields and click on "Create Bot"</p> <img src="~@/assets/gifs/step1.gif">
+      <div class="bh-grid__item bh-grid__item--nested"><img src="~@/assets/gifs/step1.gif">
+        <p>On the top right of the window, click the "New bot" button. Fill in the fields and click on "Create Bot"</p>
+        <p></p>
       </div>
       <!---->
       <!---->
