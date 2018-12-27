@@ -3,10 +3,9 @@
     <span
       slot="trigger"
       class="clickable bh-grid language-append-select-input__language-select">
-      <bh-language-flag
+      <language-badge
         v-if="val"
-        :language="val"
-        size="small" />
+        :language="val" />
       <bh-icon
         v-else
         value="earth" />
@@ -25,10 +24,14 @@
 
 <script>
 import { LANGUAGES } from '@/utils';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
   name: 'LanguageAppendSelectInput',
+  components: {
+    LanguageBadge,
+  },
   props: {
     value: {
       type: String,

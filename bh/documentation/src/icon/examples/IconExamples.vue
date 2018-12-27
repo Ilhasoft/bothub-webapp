@@ -90,6 +90,39 @@
     <bh-icon
       value="question"
       size="normal"/>
+    <bh-icon
+      value="business"
+      size="normal"/>
+    <bh-icon
+      value="commercial"
+      size="normal"/>
+    <bh-icon
+      value="culture"
+      size="normal"/>
+    <bh-icon
+      value="customer-service"
+      size="normal"/>
+    <bh-icon
+      value="education"
+      size="normal"/>
+    <bh-icon
+      value="finances"
+      size="normal"/>
+    <bh-icon
+      value="food"
+      size="normal"/>
+    <bh-icon
+      value="health"
+      size="normal"/>
+    <bh-icon
+      value="social"
+      size="normal"/>
+    <bh-icon
+      value="tech"
+      size="normal"/>
+    <bh-icon
+      value="config"
+      size="normal"/>
   </div>
 </template>
 

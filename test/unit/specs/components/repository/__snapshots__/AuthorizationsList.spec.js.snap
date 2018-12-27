@@ -2,7 +2,7 @@
 
 exports[`AuthorizationsList.vue renders correctly 1`] = `
 <div>
-  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More"></pagination-stub>
+  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true"></pagination-stub>
   <p>No users in your team.</p>
 </div>
 `;

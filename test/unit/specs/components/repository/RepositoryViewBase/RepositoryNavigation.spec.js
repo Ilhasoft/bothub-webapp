@@ -28,7 +28,7 @@ describe('RepositoryNavigation.vue', () => {
 
   describe('goTo home', () => {
     beforeEach(() => {
-      wrapper.vm.goTo('home');
+      wrapper.vm.goTo('landingPage');
     });
 
     test('path is "/"', () => {

@@ -10,8 +10,15 @@ export default {
     {
       name: 'title',
       type: 'String',
-      description: 'set the title to show on dropdown',
+      description: 'Set the title to show on dropdown',
       default: 'null',
+      required: false,
+    },
+    {
+      name: 'full-width',
+      type: 'Boolean',
+      description: 'Set behaviour for dropdown content size',
+      default: 'false',
       required: false,
     },
   ],

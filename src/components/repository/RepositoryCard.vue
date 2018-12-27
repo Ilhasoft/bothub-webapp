@@ -8,8 +8,8 @@
         <div class="repository-card__big-badge">
           <router-link :to="repositoryDetailsRouterParams">
             <bh-icon-button
+              :value="repositoryIcon"
               size="medium"
-              value="botinho"
               class="repository-card__big-badge__icon" /></router-link>
         </div>
       </div>
@@ -18,7 +18,7 @@
           <span class="repository-card__title__bagde">
             <router-link :to="repositoryDetailsRouterParams">
               <bh-icon-button
-                value="botinho"
+                :value="repositoryIcon"
                 class="repository-card__title__bagde__icon" /></router-link>
           </span>
           <router-link :to="repositoryDetailsRouterParams">
@@ -36,10 +36,11 @@
             :key="language"
             :class="{
               'repository-card__flags__flag': true,
+              'repository-card__flags__flag--main': language == $attrs.language,
           }">
-            <bh-language-flag
+            <language-badge
               :language="language"
-              :size="language == $attrs.language? 'small' : ''" />
+              :main="language == $attrs.language" />
           </span>
         </div>
         <div class="repository-card__categories">
@@ -47,7 +48,7 @@
             v-for="category in repositoryCategoryRouterParams"
             :key="category.id"
             :to="{
-              path: '/',
+              path: '/home',
               query: { category: category.id },
           }">
             <bh-badge
@@ -63,10 +64,14 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
   name: 'RepositoryCard',
+  components: {
+    LanguageBadge,
+  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -88,6 +93,9 @@ export default {
         return this.$attrs.categories_list;
       }
       return [];
+    },
+    repositoryIcon() {
+      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
     },
   },
 };
@@ -171,14 +179,19 @@ export default {
   }
 
   &__flags {
+    display: flex;
+    flex-wrap: wrap;
     margin: .5rem -.25rem;
     justify-content: center;
     align-items: center;
 
     &__flag {
-      display: inline-block;
       margin: .25rem;
+      order: 0;
 
+      &--main {
+        order: -1;
+      }
     }
   }
 

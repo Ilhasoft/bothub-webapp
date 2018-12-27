@@ -32,6 +32,30 @@ describe('BhBadge.vue', () => {
     });
   });
 
+  describe('set color', () => {
+    beforeEach(async () => {
+      wrapper.setProps({
+        color: 'primary',
+      });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    describe('is transparent', () => {
+      beforeEach(async () => {
+        wrapper.setProps({
+          transparent: true,
+        });
+      });
+
+      test('renders correctly', () => {
+        expect(wrapper).toMatchSnapshot();
+      });
+    });
+  });
+
   describe('click in badge', () => {
     beforeEach(() => {
       wrapper.trigger('click');
