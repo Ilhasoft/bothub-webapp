@@ -19,7 +19,7 @@ exports[`BeginnerTutorial.vue renders correctly 1`] = `
     <div class="beginner-tutorial__wrapper__footer">
       <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__prev-button--hidden beginner-tutorial__wrapper__footer__prev-button">Previous</bh-button-stub>
       <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__next-button">Next</bh-button-stub>
-      <bh-stepper steps="4" current-step="1"></bh-stepper>
+      <bh-stepper-stub steps="4" currentstep="1"></bh-stepper-stub>
     </div>
   </div>
 </bh-modal-stub>
