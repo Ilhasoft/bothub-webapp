@@ -1,31 +1,43 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Create your first repository!">
+    title="Create your first bot!">
     <div class="beginner-tutorial">
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
         <div
           v-if="currentValue === 1"
           class="bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step1.gif">
-          <p>On the top right of the window, click the "New bot" button. Fill in the fields and click on "Create Bot"</p>
-          <p/>
+          <div class="beginner-tutorial__wrapper__text">
+            <div>
+              <p>On the top right of the window, click the "New bot" button.</p>
+              <p>Fill in the fields and click on "Create Bot"</p>
+            </div>
+          </div>
         </div>
         <div
           v-if="currentValue === 2"
           class="bh-grid__item bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step2.gif">
-          <p>Start adding content to the interpretation mechanism by providing example sentences.
-          Choose "Training" and enter phrases highlighting the entities and
-          relating it to an intention.Don't forget to submit your sentences</p>
-
+          <div class="beginner-tutorial__wrapper__text">
+            <div>
+              <p>Start adding content to the interpretation mechanism
+              by providing example sentences.</p>
+              <p>
+                Choose "Training" and enter phrases highlighting the entities and
+                relating it to an intention.</p>
+              <p> Don't forget to submit your sentences.</p>
+            </div>
+          </div>
         </div>
         <div
           v-if="currentValue === 3"
           class="bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step3.gif">
-          <p>After adding your examples, click the status bar to see
-          the status of your bot and train the sentences</p>
+          <div class="beginner-tutorial__wrapper__text">
+            <p>After adding your examples, click the status bar to see
+            the status of your bot and train the sentences</p>
+          </div>
         </div>
         <div
           v-if="currentValue === 4"
@@ -33,7 +45,9 @@
           <img
             class="beginner-tutorial__wrapper__botinho"
             src="~@/assets/imgs/mascot.svg">
-          <p>That's it! Your bot is ready to be used!</p>
+          <div class="beginner-tutorial__wrapper__text">
+            <p>That's it! Your bot is ready to be used!</p>
+          </div>
         </div>
       </div>
       <div class="beginner-tutorial__wrapper__footer">
@@ -112,9 +126,16 @@ export default {
 
 .beginner-tutorial {
   &__wrapper {
+    &__text {
+      display: flex;
+      min-height: 8rem;
+      align-items: center;
+      justify-content: center;
+    }
+
     &__botinho {
-      margin-top: 1rem;
-      max-width: 300px;
+      margin-top: 3rem;
+      width: 50%;
     }
 
     &__footer {
@@ -132,9 +153,9 @@ export default {
         float: left;
         margin: 1rem;
 
-          &--hidden {
-            visibility: hidden;
-          }
+        &--hidden {
+          visibility: hidden;
+        }
       }
     }
   }
