@@ -1,22 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BeginnerTutorial.vue renders correctly 1`] = `
-<bhmodal-stub open="true" title="Create your first repository!" backgroundcloses="true">
+<bh-modal-stub open="true" title="Create your first bot!" backgroundcloses="true">
   <div class="beginner-tutorial">
     <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
       <div class="bh-grid__item bh-grid__item--nested"><img src="~@/assets/gifs/step1.gif">
-        <p>On the top right of the window, click the "New bot" button. Fill in the fields and click on "Create Bot"</p>
-        <p></p>
+        <div class="beginner-tutorial__wrapper__text">
+          <div>
+            <p>On the top right of the window, click the "New bot" button.</p>
+            <p>Fill in the fields and click on "Create Bot"</p>
+          </div>
+        </div>
       </div>
       <!---->
       <!---->
       <!---->
     </div>
     <div class="beginner-tutorial__wrapper__footer">
-      <bhbutton-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__prev-button--hidden beginner-tutorial__wrapper__footer__prev-button">Previous</bhbutton-stub>
-      <bhbutton-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__next-button">Next</bhbutton-stub>
-      <bhstepper-stub steps="4" currentstep="1"></bhstepper-stub>
+      <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__prev-button--hidden beginner-tutorial__wrapper__footer__prev-button">Previous</bh-button-stub>
+      <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__next-button">Next</bh-button-stub>
+      <bh-stepper-stub steps="4" currentstep="1"></bh-stepper-stub>
     </div>
   </div>
-</bhmodal-stub>
+</bh-modal-stub>
 `;
