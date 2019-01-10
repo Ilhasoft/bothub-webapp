@@ -1,27 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <style>.a{fill:none;}</style>
+  </defs>
   <g transform="translate(-362 -434)">
     <g transform="translate(-6 -36)">
       <g transform="translate(149 279)">
-        <rect style="fill:none;" width="24" height="24" transform="translate(219 191)"/>
+        <rect class="a" width="24" height="24" transform="translate(219 191)"/>
       </g>
     </g>
-  <g transform="translate(362 435)">
-    <g transform="translate(9.888 0)">
-      <circle cx="2.111" cy="2.111" r="2.111"/>
-    </g>
-  <g transform="translate(6.37 2.886)">
-    <path d="M144.943,77.346a3.511,3.511,0,0,1-6.853,0,2.817,2.817,0,0,0-2.2,2.744v2.815a1.408,1.408,0,1,0,2.815,0V81.5h5.63v1.408a1.408,1.408,0,1,0,2.815,0V80.09A2.817,2.817,0,0,0,144.943,77.346Z" transform="translate(-135.886 -77.346)"/>
-    </g>
-      <g transform="translate(19.741 16.918)">
+    <g transform="translate(362 434)">
+      <g transform="translate(9.888 0)">
+        <circle cx="2.111" cy="2.111" r="2.111"/>
+      </g>
+      <g transform="translate(6.37 2.886)">
+        <path d="M144.943,77.346a3.511,3.511,0,0,1-6.853,0,2.817,2.817,0,0,0-2.2,2.744v2.815a1.408,1.408,0,1,0,2.815,0V81.5h5.63v1.408a1.408,1.408,0,1,0,2.815,0V80.09A2.817,2.817,0,0,0,144.943,77.346Z" transform="translate(-135.886 -77.346)"/>
+      </g>
+      <g transform="translate(19.741 17.918)">
         <path d="M424.312,376.962a2.111,2.111,0,1,0-2.111,3.657,2.167,2.167,0,0,0,2.931-.773A2.127,2.127,0,0,0,424.312,376.962Z" transform="translate(-421.144 -376.679)"/>
       </g>
-      <g transform="translate(12.849 10.798)">
+      <g transform="translate(12.849 11.798)">
         <path d="M282.877,247.722l-2.438-1.408a1.408,1.408,0,1,0-1.408,2.438l1.219.7-2.815,4.876-1.219-.7a1.408,1.408,0,1,0-1.408,2.438l2.438,1.408a2.817,2.817,0,0,0,3.478-.537A3.511,3.511,0,0,1,284.152,251,2.817,2.817,0,0,0,282.877,247.722Z" transform="translate(-274.105 -246.126)"/>
       </g>
-      <g transform="translate(0 16.918)">
+      <g transform="translate(0 17.918)">
         <path d="M3.976,377.736a2.132,2.132,0,0,0-3.7,2.111,2.167,2.167,0,0,0,2.931.773A2.111,2.111,0,0,0,3.976,377.736Z" transform="translate(0 -376.68)"/>
       </g>
-      <g transform="translate(0.976 10.798)">
+      <g transform="translate(0.976 11.798)">
         <path d="M30.811,254.144a1.409,1.409,0,0,0-1.923-.515l-1.219.7-2.815-4.876,1.219-.7a1.408,1.408,0,0,0-1.408-2.438l-2.438,1.408A2.816,2.816,0,0,0,20.953,251a3.511,3.511,0,0,1,3.427,5.935,2.817,2.817,0,0,0,3.478.537l2.438-1.408A1.409,1.409,0,0,0,30.811,254.144Z" transform="translate(-20.824 -246.127)"/>
       </g>
     </g>
