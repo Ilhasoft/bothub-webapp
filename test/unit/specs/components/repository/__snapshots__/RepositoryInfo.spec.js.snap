@@ -20,13 +20,13 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
     <div class="repository-info__flags"></div>
     <div class="repository-info__categories">
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bh-badge-stub color="grey-light" class="repository-info__categories__category">Business</bh-badge-stub>
+        <bh-badge-stub size="small" color="grey-light" class="repository-info__categories__category">Business</bh-badge-stub>
       </router-link-stub>
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bh-badge-stub color="grey-light" class="repository-info__categories__category">Technology</bh-badge-stub>
+        <bh-badge-stub size="small" color="grey-light" class="repository-info__categories__category">Technology</bh-badge-stub>
       </router-link-stub>
       <router-link-stub to="[object Object]" tag="a" event="click">
-        <bh-badge-stub color="grey-light" class="repository-info__categories__category">Health</bh-badge-stub>
+        <bh-badge-stub size="small" color="grey-light" class="repository-info__categories__category">Health</bh-badge-stub>
       </router-link-stub>
     </div>
   </div>
