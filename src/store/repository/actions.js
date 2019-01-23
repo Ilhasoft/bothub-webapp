@@ -15,11 +15,11 @@ export default {
     categories,
     description,
     is_private: isPrivate,
-    use_language_model_featurizer: useLanguageModelFeaturizer,
+    algorithm,
     use_competing_intents: useCompetingIntents,
   }) {
     const response = await repository.new(name, slug, language, categories, description, isPrivate,
-      useLanguageModelFeaturizer, useCompetingIntents);
+      algorithm, useCompetingIntents);
     return response;
   },
   getAllRepositories() {
@@ -58,7 +58,7 @@ export default {
     categories,
     description,
     is_private: isPrivate,
-    use_language_model_featurizer: useLanguageModelFeaturizer,
+    algorithm,
     use_competing_intents: useCompetingIntents,
   }) {
     return repository.edit(
@@ -70,7 +70,7 @@ export default {
       categories,
       description,
       isPrivate,
-      useLanguageModelFeaturizer,
+      algorithm,
       useCompetingIntents,
     );
   },
