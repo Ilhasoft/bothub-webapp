@@ -88,6 +88,9 @@
       value="language"
       size="normal"/>
     <bh-icon
+      value="question"
+      size="normal"/>
+    <bh-icon
       value="business"
       size="normal"/>
     <bh-icon
