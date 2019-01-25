@@ -12,7 +12,7 @@ exports[`EntitiesInput.vue newEntity emit new event change text to "my name is" 
 exports[`EntitiesInput.vue newEntity emit new event renders correctly 1`] = `
 <bh-input-stub>
   <div class="entities-input__badges">
-    <bh-badge-stub class="entities-input__badges__badge entity-sunflower"><span><span><strong>name</strong></span>
+    <bh-badge-stub size="small" class="entities-input__badges__badge entity-sunflower"><span><span><strong>name</strong></span>
       <!----></span>
       <bh-dropdown-stub>
         <bh-icon-button-stub type="button" value="dots-horizontal" size="small"></bh-icon-button-stub>
