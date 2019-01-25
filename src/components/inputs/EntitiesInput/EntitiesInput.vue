@@ -7,7 +7,8 @@
         :class="[
           'entities-input__badges__badge',
           getEntityClass(entity),
-      ]">
+        ]"
+        size="small">
         <span>
           <span><strong>{{ entity.entity }}</strong></span>
           <span v-if="entity.label">

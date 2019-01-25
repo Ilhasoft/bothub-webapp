@@ -23,6 +23,7 @@ import BhHighlightedPre from './components/BhHighlightedPre';
 import BhTooltipHover from './components/BhTooltipHover';
 import BhTabs from './components/BhTabs';
 import BhTabItem from './components/BhTabItem';
+import BhStepper from './components/BhStepper';
 
 import utils from './utils';
 
@@ -51,6 +52,7 @@ const components = {
   BhTooltipHover,
   BhTabs,
   BhTabItem,
+  BhStepper,
 };
 
 export default {

@@ -29,6 +29,7 @@ import Alert from './assets/icons/alert.svg';
 import Warning from './assets/icons/warning.svg';
 import Sentence from './assets/icons/sentence.svg';
 import Language from './assets/icons/language.svg';
+import Question from './assets/icons/question.svg';
 import Business from './assets/icons/business.svg';
 import Commercial from './assets/icons/commercial.svg';
 import Culture from './assets/icons/culture.svg';
@@ -84,6 +85,7 @@ export default {
   warning: Warning,
   sentence: Sentence,
   language: Language,
+  question: Question,
   business: Business,
   commercial: Commercial,
   culture: Culture,

@@ -51,6 +51,7 @@
             query: { category: category.id },
         }">
           <bh-badge
+            size="small"
             color="grey-light"
             class="repository-info__categories__category">{{ category.name }}</bh-badge>
         </router-link>
