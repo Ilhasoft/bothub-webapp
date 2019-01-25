@@ -89,7 +89,7 @@ export default {
         language,
         description,
         is_private: isPrivate,
-        use_language_model_featurizer: useLanguageModelFeaturizer,
+        algorithm,
         use_competing_intents: useCompetingIntents,
       } = this.repository;
       return {
@@ -101,7 +101,7 @@ export default {
         ),
         description,
         is_private: isPrivate,
-        use_language_model_featurizer: useLanguageModelFeaturizer,
+        algorithm,
         use_competing_intents: useCompetingIntents,
       };
     },
