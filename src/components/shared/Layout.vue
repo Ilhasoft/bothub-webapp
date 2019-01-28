@@ -10,7 +10,7 @@
       <div class="layout__loading__progress" />
     </div>
     <div class="layout__header">
-      <div class="bh-grid bh-grid--space-between bh-grid--row align-center">
+      <div class="bh-grid bh-grid--space-between bh-grid--row">
         <router-link
           class="bh-grid__item layout__header__logo"
           to="/">
