@@ -10,7 +10,7 @@
       <div class="layout__loading__progress" />
     </div>
     <div class="layout__header">
-      <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <div class="bh-grid bh-grid--space-between bh-grid--row align-center">
         <router-link
           class="bh-grid__item layout__header__logo"
           to="/">
@@ -42,7 +42,7 @@
             </div>
             <div
               v-if="authenticated"
-              class="bh-grid__item">
+              class="bh-grid__item layout__header__icon-tutorial--center">
               <bh-icon-button
                 class="layout__header__icon-tutorial"
                 size="small"
@@ -245,6 +245,10 @@ export default {
 
     &__icon-tutorial {
       color: $color-white;
+
+      &--center {
+        align-self: center;
+      }
 
       &:hover {
         color: $color-fake-white;
