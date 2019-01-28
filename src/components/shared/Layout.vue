@@ -42,7 +42,7 @@
             </div>
             <div
               v-if="authenticated"
-              class="bh-grid__item">
+              class="bh-grid__item layout__header__icon-tutorial--center">
               <bh-icon-button
                 class="layout__header__icon-tutorial"
                 size="small"
@@ -245,6 +245,10 @@ export default {
 
     &__icon-tutorial {
       color: $color-white;
+
+      &--center {
+        align-self: center;
+      }
 
       &:hover {
         color: $color-fake-white;
