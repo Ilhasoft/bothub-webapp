@@ -76,9 +76,6 @@ export default {
         validateOnChange: true,
       },
     );
-    console.log(this.drfLoginModel);
-
-    // console.log(this.formSchema);
   },
   methods: {
     ...mapActions([
@@ -88,6 +85,7 @@ export default {
     async onSubmit() {
       const loginAttrs = this.drfLoginModel.defaults();
 
+
       Object.keys(loginAttrs).forEach((attrName) => {
         Object.keys(this.data).forEach((item) => {
           if (attrName === item) {
@@ -95,9 +93,10 @@ export default {
           }
         });
       });
-      console.log(loginAttrs);
       this.drfLoginModel.getSaveData();
       this.drfLoginModel.save();
+      this.errors = this.drfLoginModel.errors;
+
 
       // this.errors = {};
       // this.submitting = true;

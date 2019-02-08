@@ -34,10 +34,6 @@ class Login extends ModelBase {
       },
     );
   }
-
-  onSaveFailure(response) {
-    super.onSaveFailure(response);
-  }
 }
 
 export default Login;

@@ -9,7 +9,6 @@
       :type="field.errors && 'is-danger'"
       :message="field.errors || field.helpText">
       <component
-        :drf-erro="drfModelInstance.errors[field.name]"
         :v-if="field.inputComponent"
         :is="field.InputComponent"
         v-bind="field.inputProps"
@@ -83,6 +82,7 @@ export default {
             name: key,
             description: value,
             InputComponent: relatedInputComponent[value.type] || StringInput,
+            errors: this.drfModelInstance.errors[key],
           }),
         ),
         attr => !attr.description.read_only,
