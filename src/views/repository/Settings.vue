@@ -66,7 +66,7 @@ import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRo
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
-import LoginForm from '@/components-v1/auth/LoginForm';
+import LoginForm from '@/components/auth/LoginForm';
 
 
 export default {
