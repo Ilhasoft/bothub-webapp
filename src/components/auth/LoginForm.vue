@@ -22,6 +22,7 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
+          ref="submit"
           :disabled="submitting"
           type="submit"
           class="button is-primary"
@@ -85,7 +86,6 @@ export default {
     async onSubmit() {
       const loginAttrs = this.drfLoginModel.defaults();
 
-
       Object.keys(loginAttrs).forEach((attrName) => {
         Object.keys(this.data).forEach((item) => {
           if (attrName === item) {
@@ -94,25 +94,15 @@ export default {
         });
       });
       this.drfLoginModel.getSaveData();
-      this.drfLoginModel.save();
-      this.errors = this.drfLoginModel.errors;
-
-
-      // this.errors = {};
-      // this.submitting = true;
-      // try {
-      //   await this.login(this.data);
-      //   this.$emit('authenticated');
-      //   return true;
-      // } catch (error) {
-      //   const data = error.response && error.response.data;
-      //   if (data) {
-      //     this.errors = data;
-      //   }
-      //   this.submitting = false;
-      // }
-
-      // return false;
+      try {
+        await this.drfLoginModel.save();
+        this.$emit('authenticated');
+        return true;
+      } catch (error) {
+        this.errors = this.drfLoginModel.errors;
+        this.submitting = false;
+      }
+      return false;
     },
     forgotPasswordClick() {
       this.$emit('forgotPasswordClick');
