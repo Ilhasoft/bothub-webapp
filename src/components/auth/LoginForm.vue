@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import { updateAttrsValues } from '@/utils/index';
 import LoginModel from '@/models/login';
 import { getModel } from 'vue-mc-drf-model';
 import { mapActions } from 'vuex';
@@ -84,16 +85,10 @@ export default {
       'login',
     ]),
     async onSubmit() {
-      const loginAttrs = this.drfLoginModel.defaults();
-
-      Object.keys(loginAttrs).forEach((attrName) => {
-        Object.keys(this.data).forEach((item) => {
-          if (attrName === item) {
-            this.drfLoginModel[attrName] = this.data[item];
-          }
-        });
-      });
+      this.drfLoginModel = updateAttrsValues(this.drfLoginModel, this.data);
       this.drfLoginModel.getSaveData();
+      this.submitting = true;
+      this.errors = {};
       try {
         await this.drfLoginModel.save();
         this.$emit('authenticated');
