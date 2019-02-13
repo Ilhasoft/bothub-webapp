@@ -3,40 +3,27 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
-      :drf-model-instance="drfLoginModel"
+      :drf-model-instance="drfRegisterModel"
       :schema="formSchema"
       v-model="data"
       :errors="errors"
       class="field" />
-    <div
-      v-if="!hideForgotPassword"
-      class="field">
-      <div class="control has-text-right">
-        <a
-          ref="forgotPassword"
-          href="#forgot-password"
-          class="has-text-grey"
-          @click.prevent="forgotPasswordClick">Forgot password?</a>
-      </div>
-    </div>
     <div class="field">
       <div class="control has-text-centered">
         <button
-          ref="submit"
           :disabled="submitting"
           type="submit"
-          class="button is-primary"
-        >Login</button>
+          class="button is-primary">Register</button>
       </div>
     </div>
   </form>
 </template>
 
 <script>
-import { updateAttrsValues } from '@/utils/index';
-import LoginModel from '@/models/login';
-import { getModel } from 'vue-mc-drf-model';
+import RegisterModel from '@/models/register';
 import { mapActions } from 'vuex';
+import { updateAttrsValues } from '@/utils/index';
+import { getModel } from 'vue-mc-drf-model';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components-v1/shared/Loading';
 
@@ -47,31 +34,25 @@ const components = {
 };
 
 export default {
-  name: 'LoginForm',
+  name: 'RegisterForm',
   components,
-  props: {
-    hideForgotPassword: {
-      type: Boolean,
-      default: false,
-    },
-  },
   data() {
     return {
       formSchema: null,
       data: {},
       submitting: false,
       errors: {},
-      drfLoginModel: {},
+      drfRegisterModel: {},
     };
   },
   async mounted() {
-    this.formSchema = await this.getLoginSchema();
+    this.formSchema = await this.getRegisterSchema();
     const Model = getModel(
       this.formSchema,
-      LoginModel,
+      RegisterModel,
     );
 
-    this.drfLoginModel = new Model(
+    this.drfRegisterModel = new Model(
       {},
       null,
       {
@@ -81,26 +62,25 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getLoginSchema',
-      'login',
+      'register',
+      'getRegisterSchema',
     ]),
     async onSubmit() {
-      this.drfLoginModel = updateAttrsValues(this.drfLoginModel, this.data);
-      this.drfLoginModel.getSaveData();
+      this.drfRegisterModel = updateAttrsValues(this.drfRegisterModel, this.data);
+      this.drfRegisterModel.getSaveData();
+
       this.submitting = true;
       this.errors = {};
+
       try {
-        await this.drfLoginModel.save();
-        this.$emit('authenticated');
+        await this.drfRegisterModel.save();
+        this.$emit('registered');
         return true;
       } catch (error) {
-        this.errors = this.drfLoginModel.errors;
+        this.errors = this.drfRegisterModel.errors;
         this.submitting = false;
       }
       return false;
-    },
-    forgotPasswordClick() {
-      this.$emit('forgotPasswordClick');
     },
   },
 };
