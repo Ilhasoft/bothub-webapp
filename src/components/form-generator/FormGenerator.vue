@@ -5,7 +5,7 @@
       v-for="field in attrs"
       v-show="field.type !== 'hidden'"
       :key="field.name"
-      :label="field.description.label"
+      :label="field.label"
       :type="field.errors && 'is-danger'"
       :message="field.errors || field.helpText">
       <component
@@ -79,9 +79,17 @@ export default {
         _.map(
           this.drfModelInstance.attrsDescription,
           (value, key) => ({
+            type: value.type,
             name: key,
+            label: value.label,
+            helpText: value.help_text,
             description: value,
             InputComponent: relatedInputComponent[value.type] || StringInput,
+            inputProps: {
+              required: value.required,
+              read_only: value.read_only,
+              choices: value.choices,
+            },
             errors: this.drfModelInstance.errors[key],
           }),
         ),
