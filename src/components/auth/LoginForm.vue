@@ -3,9 +3,9 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
+      v-model="data"
       :drf-model-instance="drfLoginModel"
       :schema="formSchema"
-      v-model="data"
       :errors="errors"
       class="field" />
     <div
@@ -34,9 +34,9 @@
 
 <script>
 import { updateAttrsValues } from '@/utils/index';
-import LoginModel from '@/models/login';
-import { getModel } from 'vue-mc-drf-model';
 import { mapActions } from 'vuex';
+import { getModel } from 'vue-mc-drf-model';
+import LoginModel from '@/models/login';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components-v1/shared/Loading';
 
@@ -87,6 +87,7 @@ export default {
     async onSubmit() {
       this.drfLoginModel = updateAttrsValues(this.drfLoginModel, this.data);
       this.drfLoginModel.getSaveData();
+
       this.submitting = true;
       this.errors = {};
       try {
