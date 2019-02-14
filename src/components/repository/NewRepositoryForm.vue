@@ -62,14 +62,12 @@ export default {
     ]),
     async onSubmit() {
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
-      this.drfRepositoryModel.getSaveData();
-
       this.submitting = true;
       this.errors = {};
 
       try {
-        const response = await this.drfRepositoryModel.save();
-        this.$emit('created', response.data);
+        const result = await this.drfRepositoryModel.save();
+        this.$emit('created', result.response.data);
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
