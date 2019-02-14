@@ -1,7 +1,5 @@
 /* eslint-disable class-methods-use-this */
 import ModelBase from './base';
-import store from '@/store';
-
 
 class NewRepositoryModel extends ModelBase {
   defaults() {
@@ -14,6 +12,7 @@ class NewRepositoryModel extends ModelBase {
       is_private: false,
       algorithm: '',
       use_competing_intents: false,
+      use_language_model_featurizer: false,
     };
   }
 
@@ -22,11 +21,12 @@ class NewRepositoryModel extends ModelBase {
       uuid: String,
       slug: String,
       language: String,
-      categories: Array,
+      categories: Object,
       description: String,
       is_private: Boolean,
       algorithm: String,
       use_competing_intents: Boolean,
+      use_language_model_featurizer: Boolean,
     };
   }
 
@@ -36,22 +36,10 @@ class NewRepositoryModel extends ModelBase {
     };
   }
 
-  onSaveSuccess(response) {
-    super.onSaveSuccess(response);
-
-    store.dispatch(
-      'newRepository',
-      {
-        name: this.name,
-        slug: this.slug,
-        language: this.language,
-        categories: this.categories,
-        description: this.description,
-        is_private: this.is_private,
-        algorithm: this.algorithm,
-        use_competing_intents: this.use_competing_intents,
-      },
-    );
+  getSaveData() {
+    const attrsValues = super.getSaveData();
+    attrsValues.categories = attrsValues.categories.split(',');
+    return attrsValues;
   }
 }
 
