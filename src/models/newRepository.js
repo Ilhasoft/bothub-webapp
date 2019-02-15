@@ -38,7 +38,9 @@ class NewRepositoryModel extends ModelBase {
 
   getSaveData() {
     const attrsValues = super.getSaveData();
-    attrsValues.categories = attrsValues.categories.split(',');
+    if (typeof attrsValues.categories === 'string') {
+      attrsValues.categories = attrsValues.categories.split(',');
+    }
     return attrsValues;
   }
 }
