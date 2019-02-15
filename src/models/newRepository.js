@@ -12,7 +12,6 @@ class NewRepositoryModel extends ModelBase {
       is_private: false,
       algorithm: '',
       use_competing_intents: false,
-      use_language_model_featurizer: false,
     };
   }
 
@@ -26,7 +25,6 @@ class NewRepositoryModel extends ModelBase {
       is_private: Boolean,
       algorithm: String,
       use_competing_intents: Boolean,
-      use_language_model_featurizer: Boolean,
     };
   }
 
