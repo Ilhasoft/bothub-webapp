@@ -57,6 +57,7 @@
     <div class="bh-grid__item text-center train-modal__buttons">
       <bh-button
         v-if="readyForTrain"
+        :disabled="training"
         primary
         @click="$emit('train')">
         <bh-icon
