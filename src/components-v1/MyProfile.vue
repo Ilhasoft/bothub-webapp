@@ -99,6 +99,9 @@ export default {
       'myProfile',
       'getProfile',
     ]),
+    repositoryIcon() {
+      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
+    },
   },
   mounted() {
     this.updateMyProfile();
