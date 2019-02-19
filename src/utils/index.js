@@ -90,14 +90,15 @@ export const exampleSearchToString = value => Object.keys(value)
   .join(' ');
 
 
-export const updateAttrsValues = (drfModel, schemData) => {
+export const updateAttrsValues = (drfModel, data) => {
   const attrs = drfModel.defaults();
   Object.keys(attrs).forEach((attrName) => {
-    Object.keys(schemData).forEach((item) => {
+    Object.keys(data).forEach((item) => {
       if (attrName === item) {
-        attrs[attrName] = schemData[item];
+        attrs[attrName] = data[item];
       }
     });
   });
+
   return Object.assign(drfModel, attrs);
 };

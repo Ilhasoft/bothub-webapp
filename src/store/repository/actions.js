@@ -8,20 +8,7 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  async newRepository(store, {
-    name,
-    slug,
-    language,
-    categories,
-    description,
-    is_private: isPrivate,
-    algorithm,
-    use_competing_intents: useCompetingIntents,
-  }) {
-    const response = await repository.new(name, slug, language, categories, description, isPrivate,
-      algorithm, useCompetingIntents);
-    return response;
-  },
+
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();
