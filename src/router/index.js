@@ -34,8 +34,15 @@ export default new Router({
     },
     {
       path: '/signup',
-      name: 'signup',
+      name: 'signUp',
       component: SignUp,
+      beforeEnter: async (to, from, next) => {
+        if (store.getters.authenticated) {
+          next('/home');
+        } else {
+          next();
+        }
+      },
     },
     {
       path: '/home',
