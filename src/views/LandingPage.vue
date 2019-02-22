@@ -16,7 +16,7 @@
           <span>or</span>
           <strong
             class="text-color-primary clickable"
-            @click="openSignupModal()">Sign up</strong>
+            @click="signUpRedirect()">Sign up</strong>
         </div>
       </div>
     </nav>
@@ -80,7 +80,7 @@
             size="medium"
             rounded
             secondary
-            @click="openSignupModal()">Sign up for free</bh-button>
+            @click="signUpRedirect()">Sign up for free</bh-button>
         </div>
         <div class="landing-page__signup__animation bh-grid__item">
           <div class="landing-page__signup__animation__girl"/>
@@ -123,14 +123,23 @@ export default {
       });
     },
   },
+  mounted() {
+    if (this.$route.params.signed) {
+      this.openLoginModal();
+    }
+  },
   methods: {
     ...mapActions([
       'openLoginModal',
-      'openSignupModal',
     ]),
     showAllBots() {
       this.$router.push({
         name: 'home',
+      });
+    },
+    signUpRedirect() {
+      this.$router.push({
+        name: 'signUp',
       });
     },
   },
