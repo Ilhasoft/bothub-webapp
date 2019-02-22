@@ -1,58 +1,65 @@
 <template>
   <div class="sign-up">
-    <div class="sign-up__wrapper-content">
-      <nav class="sign-up__wrapper-content__nav">
-        <div class="bh-grid bh-grid--space-between bh-grid--row">
-          <router-link
-            class="bh-grid__item sign-up__wrapper-content__nav__logo"
-            to="/">
-            <img
-              src="@/assets/imgs/logo.svg"
-              alt="Bothub">
-          </router-link>
-          <div class="sign-up__wrapper-content__nav__login">
-            <span>Already have an account?</span>
-            <bh-button
-              class="sign-up__wrapper-content__nav__login__button"
-              primary
-              size="normal">Sign in</bh-button>
-          </div>
+    <nav class="sign-up__nav">
+      <div class="bh-grid bh-grid--space-between bh-grid--row">
+        <router-link
+          class="bh-grid__item sign-up__nav__logo"
+          to="/">
+          <img
+            src="@/assets/imgs/logo.svg"
+            alt="Bothub">
+        </router-link>
+        <div class="sign-up__nav__login">
+          <span>Already have an account?</span>
+          <bh-button
+            class="sign-up__nav__login__button"
+            primary
+            size="normal"
+            @click="openLoginModal()">Sign in</bh-button>
         </div>
-      </nav>
-      <section class="bh-grid bh-grid--space-between">
-        <div
-          class="bh-grid__item"
-          v-html="botSvg"/>
-        <div class="bh-grid__item">
-          <h2>Get started free</h2>
-          <form @submit.prevent="onSubmit">
-            <loading v-if="!formSchema" />
-            <form-generator
-              v-if="formSchema"
-              :schema="formSchema"
-              v-model="data"
-              :errors="errors"
-              class="field" />
-            <div class="field">
-              <div class="control has-text-centered">
-                <bh-button
-                  :disabled="submitting"
-                  type="submit"
-                  size="medium"
-                  color="info">Get free</bh-button>
-              </div>
+      </div>
+    </nav>
+    <section class="bh-grid bh-grid--half sign-up__wrapper-content">
+      <div class="bh-grid__item sign-up__wrapper-content__image">
+        <img
+          src="@/assets/imgs/computer-bot.png"
+          alt="avatar" >
+      </div>
+      <div class="bh-grid__item sign-up__wrapper-content__form">
+        <div class="sign-up__wrapper-content__form__title">
+          <h1>Get started free</h1>
+        </div>
+        <form @submit.prevent="onSubmit">
+          <loading v-if="!formSchema" />
+          <form-generator
+            v-if="formSchema"
+            :schema="formSchema"
+            v-model="data"
+            :errors="errors"
+            class="field" />
+          <div class="field">
+            <div class="control has-text-centered">
+              <bh-button
+                :disabled="submitting"
+                type="submit"
+                full-width
+                color="info">Get free</bh-button>
             </div>
-          </form>
-        </div>
-      </section>
-    </div>
-    <site-footer />
+            <div class="sign-up__wrapper-content__form__agree-message">
+              <small>
+                By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <site-footer class="sign-up__footer" />
   </div>
 </template>
 
 <script>
-import botSvg from '!!svg-inline-loader!@/assets/imgs/computer-bot.svg';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components-v1/form-generator/FormGenerator';
 import Loading from '@/components-v1/shared/Loading';
 import SiteFooter from '@/components-v1/shared/SiteFooter';
@@ -73,14 +80,26 @@ export default {
       data: {},
       submitting: false,
       errors: {},
-      botSvg,
     };
+  },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
+  },
+  watch: {
+    authenticated() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
   },
   async mounted() {
     this.formSchema = await this.getRegisterSchema();
   },
   methods: {
     ...mapActions([
+      'openLoginModal',
       'register',
       'getRegisterSchema',
     ]),
@@ -90,7 +109,6 @@ export default {
 
       try {
         await this.register(this.data);
-        this.$emit('registered');
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
@@ -111,15 +129,20 @@ export default {
 @import '~bh/src/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
 
+$width: 1085px;
+
+
+.img {
+  background-image: url('~@/assets/imgs/computer-bot.svg');
+  background-repeat: no-repeat;
+  max-width: 100%;
+  height: auto;
+  margin-right: 5rem;
+}
 
 .sign-up {
   background-color: $color-white;
-
-  &__wrapper-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    height: 100%;
+  $max-width: 1200px;
 
     &__nav {
       padding: .25rem 1rem;
@@ -145,9 +168,52 @@ export default {
       }
     }
 
-    &__form-section {
+    &__wrapper-content {
+      max-width: $max-width;
+      margin: 15vh auto;
+      position: relative;
+      height: 100%;
 
+      &__image {
+        max-width: 35rem;
+        margin-right: auto;
+
+        @media screen and (max-width: $width) {
+          display: none;
+        }
+      }
+
+      &__form {
+        max-width: 30rem;
+
+        @media screen and (max-width: $width) {
+          max-width: 100%;
+          margin: 3rem;
+        }
+
+        &__title {
+          position: relative;
+          top: -5vh;
+
+          @media screen and (max-width: $width) {
+           text-align: center;
+          }
+        }
+
+        &__agree-message {
+          position: relative;
+          bottom: -4vh;
+
+          @media screen and (max-width: $width) {
+           text-align: center;
+          }
+        }
+      }
     }
-  }
+
+    &__footer {
+      margin-top: 25rem;
+    }
+
 }
 </style>
