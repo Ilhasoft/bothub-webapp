@@ -86,7 +86,7 @@
                 inverted
                 max-content
                 class="hide-mobile"
-                @click="openSignupModal()">sign up</bh-button>
+                @click="signUp()">sign up</bh-button>
             </div>
           </div>
         </div>
@@ -160,7 +160,6 @@ export default {
       'updateMyProfile',
       'logout',
       'openLoginModal',
-      'openSignupModal',
     ]),
     openNewRepositoryModal() {
       this.newRepositoryModalOpen = true;
@@ -173,6 +172,11 @@ export default {
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
+    },
+    signUp() {
+      this.$router.push({
+        name: 'signUp',
+      });
     },
   },
 };
