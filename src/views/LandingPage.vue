@@ -30,7 +30,7 @@
             size="medium"
             rounded
             primary
-            @click="openSignupModal()">Join us for free</bh-button>
+            @click="signUpRedirect()">Join us for free</bh-button>
         </div>
         <div class="landing-page__header__content__animation bh-grid__item" />
       </div>
