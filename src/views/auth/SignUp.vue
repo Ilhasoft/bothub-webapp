@@ -10,7 +10,7 @@
             alt="Bothub">
         </router-link>
         <div class="sign-up__nav__login">
-          <span>Already have an account?</span>
+          <span class="sign-up__nav__text">Already have an account?</span>
           <bh-button
             class="sign-up__nav__login__button"
             primary
@@ -102,6 +102,7 @@ export default {
       'openLoginModal',
       'register',
       'getRegisterSchema',
+      'login',
     ]),
     async onSubmit() {
       this.submitting = true;
@@ -109,12 +110,30 @@ export default {
 
       try {
         await this.register(this.data);
+        this.loginUser();
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
         if (data) {
           this.errors = data;
         }
+        this.submitting = false;
+      }
+
+      return false;
+    },
+    async loginUser() {
+      const userData = {
+        username: this.data.email,
+        password: this.data.password,
+      };
+
+      try {
+        await this.login(userData);
+        this.$emit('authenticated');
+        return true;
+      } catch (error) {
+        this.openLoginModal();
         this.submitting = false;
       }
 
@@ -131,15 +150,6 @@ export default {
 
 $width: 1085px;
 
-
-.img {
-  background-image: url('~@/assets/imgs/computer-bot.svg');
-  background-repeat: no-repeat;
-  max-width: 100%;
-  height: auto;
-  margin-right: 5rem;
-}
-
 .sign-up {
   background-color: $color-white;
   $max-width: 1200px;
@@ -153,6 +163,12 @@ $width: 1085px;
 
         &__button {
           margin: 0 1rem;
+        }
+      }
+
+      &__text {
+        @media screen and (max-width: 500px) {
+          display: none;
         }
       }
 
