@@ -1,26 +1,29 @@
 <template>
-  <form @submit.prevent="onSubmit()">
+  <form @submit.prevent="onSubmit">
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
-      :drf-model-instance="drfRepositoryModel"
+      :drf-model-instance="drfRegisterModel"
       :schema="formSchema"
       v-model="data"
-      :errors="errors" />
-    <div class="text-center">
-      <bh-button
-        :disabled="submitting"
-        primary
-        type="submit">Create bot</bh-button>
+      :errors="errors"
+      class="field" />
+    <div class="field">
+      <div class="control has-text-centered">
+        <button
+          :disabled="submitting"
+          type="submit"
+          class="button is-primary">Register</button>
+      </div>
     </div>
   </form>
 </template>
 
 <script>
+import RegisterModel from '@/models/register';
 import { mapActions } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
-import RepositoryModel from '@/models/newRepository';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components-v1/shared/Loading';
 
@@ -31,7 +34,7 @@ const components = {
 };
 
 export default {
-  name: 'NewRepositoryForm',
+  name: 'RegisterForm',
   components,
   data() {
     return {
@@ -39,41 +42,44 @@ export default {
       data: {},
       submitting: false,
       errors: {},
-      drfRepositoryModel: {},
+      drfRegisterModel: {},
     };
   },
   async mounted() {
-    this.formSchema = await this.getNewRepositorySchema();
+    this.formSchema = await this.getRegisterSchema();
     const Model = getModel(
       this.formSchema,
-      RepositoryModel,
+      RegisterModel,
     );
 
-    this.drfRepositoryModel = new Model({},
+    this.drfRegisterModel = new Model(
+      {},
       null,
       {
         validateOnChange: true,
-      });
+      },
+    );
   },
   methods: {
     ...mapActions([
-      'getNewRepositorySchema',
-      'newRepository',
+      'register',
+      'getRegisterSchema',
     ]),
     async onSubmit() {
-      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
+      this.drfRegisterModel = updateAttrsValues(this.drfRegisterModel, this.data);
+      this.drfRegisterModel.getSaveData();
+
       this.submitting = true;
       this.errors = {};
 
       try {
-        const result = await this.drfRepositoryModel.save();
-        this.$emit('created', result.response.data);
+        await this.drfRegisterModel.save();
+        this.$emit('registered');
         return true;
       } catch (error) {
-        this.errors = this.drfRepositoryModel.errors;
+        this.errors = this.drfRegisterModel.errors;
         this.submitting = false;
       }
-
       return false;
     },
   },
