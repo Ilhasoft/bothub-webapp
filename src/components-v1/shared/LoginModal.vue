@@ -8,17 +8,14 @@
       <b-tabs
         v-model="activeTab"
         position="is-centered"
-        expanded>
-        <b-tab-item label="Create account">
-          <register-form @registered="onRegistered" />
-        </b-tab-item>
+        expanded >
         <b-tab-item label="Login">
           <login-form
             @authenticated="onAuthenticated"
             @forgotPasswordClick="showForgotPasswordTab" />
         </b-tab-item>
         <b-tab-item
-          :visible="activeTab === 2"
+          :visible="activeTab === 1"
           label="Forgot password">
           <forgot-password-form />
         </b-tab-item>
@@ -29,9 +26,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import LoginForm from '@/components-v1/auth/LoginForm';
+import LoginForm from '@/components/auth/LoginForm';
 import ForgotPasswordForm from '@/components-v1/auth/ForgotPasswordForm';
-import RegisterForm from '@/components-v1/auth/RegisterForm';
+import RegisterForm from '@/components/auth/RegisterForm';
 
 const components = {
   LoginForm,
@@ -50,7 +47,7 @@ export default {
   },
   data() {
     return {
-      activeTab: this.currentTab === 'signin' ? 1 : 0,
+      activeTab: this.currentTab === 'signin' ? 0 : 1,
     };
   },
   computed: {
@@ -59,6 +56,9 @@ export default {
       next: 'loginModalNext',
       redirectToWhenFails: 'loginModalRedirectToWhenFails',
     }),
+  },
+  mounted() {
+    this.activeTab = 0;
   },
   methods: {
     ...mapActions({
@@ -76,7 +76,7 @@ export default {
     },
     showForgotPasswordTab() {
       /* istanbul ignore next */
-      this.activeTab = 2;
+      this.activeTab = 1;
     },
     onClose() {
       if (this.redirectToWhenFails) {

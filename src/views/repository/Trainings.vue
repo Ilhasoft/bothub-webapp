@@ -80,7 +80,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
-import LoginForm from '@/components-v1/auth/LoginForm';
+import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 
 
@@ -122,6 +122,11 @@ export default {
         ? { entity: value }
         : null;
     },
+    currentPath(value) {
+      if (value === 'default') {
+        this.updateRepository();
+      }
+    },
   },
   methods: {
     onShowSentences({
@@ -148,7 +153,7 @@ export default {
       this.updateRepository(true);
     },
     onExampleDeleted() {
-      this.updateRepository(true);
+      this.repository.examples__count -= 1;
     },
   },
 };
