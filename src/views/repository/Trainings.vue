@@ -122,6 +122,11 @@ export default {
         ? { entity: value }
         : null;
     },
+    currentPath(value) {
+      if (value === 'default') {
+        this.updateRepository();
+      }
+    },
   },
   methods: {
     onShowSentences({
@@ -148,7 +153,7 @@ export default {
       this.updateRepository(true);
     },
     onExampleDeleted() {
-      this.updateRepository(true);
+      this.repository.examples__count -= 1;
     },
   },
 };
