@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '@/views/Home';
 import LandingPage from '@/views/LandingPage';
+import SignUp from '@/views/auth/SignUp';
 import MyProfile from '@/components-v1/MyProfile';
 import ResetPassword from '@/components-v1/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -23,6 +24,18 @@ export default new Router({
       path: '/',
       name: 'landingPage',
       component: LandingPage,
+      beforeEnter: async (to, from, next) => {
+        if (store.getters.authenticated) {
+          next('/home');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/signup',
+      name: 'signUp',
+      component: SignUp,
       beforeEnter: async (to, from, next) => {
         if (store.getters.authenticated) {
           next('/home');
