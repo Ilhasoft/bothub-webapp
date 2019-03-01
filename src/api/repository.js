@@ -9,22 +9,6 @@ export default {
     const { data } = await request.$http.options('/repository/new/');
     return data.actions.POST;
   },
-  new(name, slug, language, categories, description = '', isPrivate = false,
-    algorithm = 'statistical_model', useCompetingIntents = false) {
-    return request.$http.post(
-      '/repository/new/',
-      {
-        name,
-        slug,
-        language,
-        categories,
-        description,
-        is_private: isPrivate,
-        algorithm,
-        use_competing_intents: useCompetingIntents,
-      },
-    );
-  },
   getAll() {
     return new utils.List('/repositories/');
   },

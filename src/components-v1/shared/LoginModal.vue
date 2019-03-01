@@ -26,9 +26,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import LoginForm from '@/components-v1/auth/LoginForm';
+import LoginForm from '@/components/auth/LoginForm';
 import ForgotPasswordForm from '@/components-v1/auth/ForgotPasswordForm';
-import RegisterForm from '@/components-v1/auth/RegisterForm';
+import RegisterForm from '@/components/auth/RegisterForm';
 
 const components = {
   LoginForm,
