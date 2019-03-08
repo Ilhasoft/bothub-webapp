@@ -37,6 +37,7 @@ export default {
         ['repository-summary', 'Summary'],
         ['repository-training', 'Training'],
         ['repository-translate', 'Translate'],
+        ['repository-test', 'Test'],
         ['repository-translations-status', 'Translation status'],
         ['repository-integration', 'Integration'],
         ['repository-settings', 'Settings'],
