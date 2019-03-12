@@ -22,10 +22,12 @@
             <div>
               <bh-button
                 class="test__content-header__buttons"
-                primary>Add test sentence</bh-button>
+                primary
+                @click="addTestSentence()">Add test sentence</bh-button>
               <bh-button
                 class="test__content-header__buttons"
-                primary>Run your test</bh-button>
+                primary
+                @click="addTestSentence()">Run your test</bh-button>
             </div>
           </div>
           <hr>
@@ -53,12 +55,16 @@
         </div>
       </div>
     </div>
+    <new-example-form-modal
+      :repository="repository"
+      :open.sync="addTestSentenceModalOpen"/>
   </repository-view-base>
 </template>
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import TestSentences from '@/components/repository/data-test/TestSentences';
+import TestSentences from '@/components/repository/sentences-test/TestSentences';
+import NewExampleFormModal from '@/components/repository/sentences-test/sentences/NewExampleFormModal';
 import RepositoryBase from './Base';
 
 import LoginForm from '@/components/auth/LoginForm';
@@ -70,8 +76,19 @@ export default {
     RepositoryViewBase,
     LoginForm,
     TestSentences,
+    NewExampleFormModal,
   },
   extends: RepositoryBase,
+  data() {
+    return {
+      addTestSentenceModalOpen: false,
+    };
+  },
+  methods: {
+    addTestSentence() {
+      this.addTestSentenceModalOpen = true;
+    },
+  },
 };
 </script>
 
