@@ -108,7 +108,7 @@ export default {
     }
 
     &__content {
-      max-width: 600px;
+      max-width: 800px;
       margin: 3rem auto;
     }
 
