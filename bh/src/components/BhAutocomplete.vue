@@ -10,11 +10,14 @@
         </div>
       </div>
       <input
+        id="autocomplete"
         ref="input"
         v-model="val"
+        autocomplete="off"
         :class="`${className}__input`"
         v-bind="$attrs"
         type="text"
+        @keydown.40="keyDownPressed()"
         @focus="onFocus()"
         @blur="onBlur()"
         @keyup.esc="onEsc()"
@@ -74,6 +77,7 @@ export default {
       selected: null,
       focused: false,
       closeForced: false,
+      currentSelectedItemIndex: -1,
     };
   },
   computed: {
@@ -103,6 +107,9 @@ export default {
 
       return false;
     },
+    itensList() {
+      return document.getElementsByClassName('bh-autocomplete__list__item');
+    },
   },
   watch: {
     selected(item) {
@@ -114,6 +121,27 @@ export default {
     },
     val() {
       this.closeForced = false;
+    },
+    currentSelectedItemIndex(currentValue, previusValue) {
+      // console.log(previusValue, 'previus');
+      // console.log(currentValue, 'current');
+      // console.log(this.itensList);
+
+      if (currentValue !== -1 && currentValue < this.itensList.length) {
+        this.itensList[currentValue].classList.add('bh-autocomplete__list__item__active');
+        console.log(this.itensList[currentValue]);
+
+        // document.addEventListener('keydown', (e) => {
+        //   if (e.keyCode === 13) {
+        //     console.log(e.target);
+        //   }
+        // });
+      }
+
+      if (previusValue !== -1 && previusValue >= 0) {
+        this.itensList[previusValue].style.color = 'black';
+        this.itensList[previusValue].style.backgroundColor = 'transparent';
+      }
     },
   },
   methods: {
@@ -132,6 +160,8 @@ export default {
         : item;
     },
     select(item) {
+      console.log(item);
+
       if (item) {
         this.val = this.verboseItem(item);
         this.selected = item;
@@ -152,14 +182,21 @@ export default {
         }
       }
     },
+    keyDownPressed() {
+      if (this.currentSelectedItemIndex < this.itensList.length - 1) {
+        this.currentSelectedItemIndex = this.currentSelectedItemIndex + 1;
+      }
+    },
     onFocus() {
       this.setFocused(true);
     },
     onBlur() {
+      this.currentSelectedItemIndex = -1;
       this.finish();
       this.setFocused(false);
     },
     onEsc() {
+      this.currentSelectedItemIndex = -1;
       this.finish();
       this.forceClosed();
     },
@@ -210,9 +247,14 @@ export default {
         border: none;
         outline: none;
 
+        &__active {
+          color: white;
+          background-color: $color-primary;
+        }
+
         &:hover {
-          color: $color-primary;
-          background-color: $color-grey;
+          color: white;
+          background-color: $color-primary;
         }
       }
     }
