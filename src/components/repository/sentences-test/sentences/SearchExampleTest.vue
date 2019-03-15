@@ -1,44 +1,57 @@
 <template>
-  <div class="search-example-test">
-    <form @submit.prevent="onSubmit()">
-      <bh-text
-        v-model="toString"
-        :debounce="debounceTime">
-        <div slot="append">
-          <bh-icon-button
-            value="magnify"
-            size="small"
-            type="submit" />
-        </div>
-      </bh-text>
+  <div>
+    <form
+      class="search-example-test bh-grid"
+      @submit.prevent="onSubmit()">
+      <bh-field
+        :errors="errors.intent"
+        class="bh-grid__item">
+        <bh-text
+          v-model="toString"
+          :debounce="debounceTime">
+          <div slot="append">
+            <bh-icon-button
+              value="magnify"
+              size="small"
+              type="submit" />
+          </div>
+        </bh-text>
+      </bh-field>
+      <bh-field
+        :errors="errors.intent"
+        class="bh-grid__item">
+        <bh-autocomplete
+          v-model="intent"
+          :data="intents || []"
+          :formatters="intentFormatters"
+          placeholder="Intent" />
+      </bh-field>
+      <bh-field
+        :errors="errors.label"
+        class="bh-grid__item">
+        <bh-autocomplete
+          v-model="label"
+          :data="labels || []"
+
+          placeholder="All labels" />
+      </bh-field>
+      <bh-field
+        :errors="errors.intent"
+        class="bh-grid__item">
+        <bh-autocomplete
+          v-model="entitie"
+          :data="entities || []"
+          :formatters="intentFormatters"
+          placeholder="All entities" />
+      </bh-field>
     </form>
-    <bh-dropdown
-      full-width
-      position="bottom-left"
-      title="intents">
-      <bh-dropdown-item>Edit</bh-dropdown-item>
-      <bh-dropdown-item>Remove</bh-dropdown-item>
-    </bh-dropdown>
-    <bh-dropdown
-      full-width
-      position="bottom-left"
-      title="All labels">
-      <bh-dropdown-item>Edit</bh-dropdown-item>
-      <bh-dropdown-item>Remove</bh-dropdown-item>
-    </bh-dropdown>
-    <bh-dropdown
-      full-width
-      position="bottom-left"
-      title="All entities">
-      <bh-dropdown-item>Edit</bh-dropdown-item>
-      <bh-dropdown-item>Remove</bh-dropdown-item>
-    </bh-dropdown>
   </div>
 </template>
 
 <script>
 import equal from 'deep-equal';
-import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import { exampleSearchToDicty, exampleSearchToString, formatters } from '@/utils/index';
+import BH from 'bh';
 
 
 export default {
@@ -69,11 +82,31 @@ export default {
     return {
       toString: exampleSearchToString(this.value),
       setTimeoutId: null,
+      intent: '',
+      label: '',
+      entitie: '',
+      errors: {},
     };
   },
   computed: {
     current() {
       return exampleSearchToDicty(this.toString);
+    },
+    textFormatters() {
+      const formattersList = [
+        BH.utils.formatters.trimStart(),
+        BH.utils.formatters.removeBreakLines(),
+        BH.utils.formatters.removeMultipleWhiteSpaces(),
+      ];
+      formattersList.toString = () => 'textFormatters';
+      return formattersList;
+    },
+    intentFormatters() {
+      const formattersList = [
+        formatters.bothubItemKey(),
+      ];
+      formattersList.toString = () => 'intentFormatters';
+      return formattersList;
     },
   },
   watch: {
@@ -96,6 +129,6 @@ export default {
 
 <style lang="scss" scoped>
 .search-example-test {
-  display:flex;
+
 }
 </style>

@@ -226,7 +226,6 @@ export default {
           repository: this.repository.uuid,
           ...this.data,
         });
-
         this.text = '';
         this.intent = '';
         this.entities = [];

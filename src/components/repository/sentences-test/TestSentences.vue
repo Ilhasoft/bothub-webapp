@@ -1,9 +1,13 @@
 <template>
-  <div>
-    <!-- <search-example-test
+  <div class="bh-grid bh-grid--column">
+    <div class="bh-grid">
+      <h1>Test Sentences</h1>
+    </div>
+    <search-example-test
       :intents="repository.intents_list"
       :labels="repository.labels_list"
-    /> -->
+      :entities="repository.entities_list"
+    />
     <examples-test-list
       :repository="repository"/>
   </div>
