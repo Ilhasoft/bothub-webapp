@@ -7,7 +7,7 @@ import User from './user';
 import Repository from './repository';
 import Category from './category';
 import Example from './example';
-import exampleTest from './exampleTest';
+import exampleTest from './example-test';
 import Translate from './translate';
 import CachedFetch from './cached-fetch';
 
