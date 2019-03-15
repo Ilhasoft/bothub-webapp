@@ -7,7 +7,7 @@ import utils from '@/api/utils';
 export default {
   new(repository, text, language, entities, intent) {
     return request.$http.post(
-      'http://localhost:3000/sentence',
+      'http://localhost:3000/sentence/',
       {
         repository,
         text,
@@ -19,17 +19,18 @@ export default {
   },
   all(repositoryUuid) {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid });
-    return new utils.List(`/http://localhost:3000/sentence/?${queryString}`);
+    return new utils.List(`http://localhost:3000/sentence/?${queryString}`);
   },
   delete(exampleId) {
-    return request.$http.delete(`/http://localhost:3000/sentence/${exampleId}/`);
+    return request.$http.delete(`http://localhost:3000/allSentences/${exampleId}/`);
   },
-  search(repositoryUuid, query = {}) {
-    const queryString = qs.stringify({
-      repository_uuid: repositoryUuid,
-      ...query,
-    });
-    return new utils.List('http://localhost:3000/sentence/');
+  search() {
+    // query = {} / repositoryUuid -> add this to parameters
+    // const queryString = qs.stringify({
+    //   repository_uuid: repositoryUuid,
+    //   ...query,
+    // });
+    return new utils.List('http://localhost:3000/allSentences/');
   },
   get(id) {
     return request.$http.get(`/http://localhost:3000/sentence/${id}/`);
