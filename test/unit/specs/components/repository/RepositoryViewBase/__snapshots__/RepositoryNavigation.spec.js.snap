@@ -6,6 +6,7 @@ exports[`RepositoryNavigation.vue renders correctly 1`] = `
     <router-link-stub to="[object Object]" tag="a" event="click">Summary</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Training</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Translate</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Test</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Translation status</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Integration</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Settings</router-link-stub>
@@ -16,6 +17,7 @@ exports[`RepositoryNavigation.vue renders correctly 1`] = `
       <bh-dropdown-item-stub>Summary</bh-dropdown-item-stub>
       <bh-dropdown-item-stub>Training</bh-dropdown-item-stub>
       <bh-dropdown-item-stub>Translate</bh-dropdown-item-stub>
+      <bh-dropdown-item-stub>Test</bh-dropdown-item-stub>
       <bh-dropdown-item-stub>Translation status</bh-dropdown-item-stub>
       <bh-dropdown-item-stub>Integration</bh-dropdown-item-stub>
       <bh-dropdown-item-stub>Settings</bh-dropdown-item-stub>

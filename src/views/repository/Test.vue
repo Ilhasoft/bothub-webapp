@@ -1,0 +1,115 @@
+<template>
+  <repository-view-base
+    :repository="repository"
+    :error-code="errorCode">
+    <div v-if="repository">
+      <div v-if="authenticated">
+        <div
+          v-if="repository.authorization.can_write"
+          class="test">
+          <div class="test__content-header">
+            <h2 class="test__content-header__title">Test your data set</h2>
+            <div class="test__content-header__language-select">
+              <bh-dropdown
+                full-field-size
+                full-width
+                title="Language to run the test"
+                position="bottom-left">
+                <bh-dropdown-item>Brazilian portuguese (30 test sentences)</bh-dropdown-item>
+                <bh-dropdown-item>English (55 test sentences)</bh-dropdown-item>
+              </bh-dropdown>
+            </div>
+            <div>
+              <bh-button
+                class="test__content-header__buttons"
+                primary
+                @click="addTestSentence()">Add test sentence</bh-button>
+              <bh-button
+                class="test__content-header__buttons"
+                primary
+                @click="addTestSentence()">Run your test</bh-button>
+            </div>
+          </div>
+          <hr>
+          <test-sentences :repository="repository"/>
+        </div>
+        <div
+          v-else
+          class="
+                bh-grid">
+          <div class="bh-grid__item">
+            <div class="bh-notification bh-notification--warning">
+              You can not edit this repository
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--info">
+            Sign in to your account to edit this repository.
+          </div>
+          <login-form hide-forgot-password />
+        </div>
+      </div>
+    </div>
+    <new-example-form-modal
+      :repository="repository"
+      :open.sync="addTestSentenceModalOpen"/>
+  </repository-view-base>
+</template>
+
+<script>
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import TestSentences from '@/components/repository/sentences-test/TestSentences';
+import NewExampleFormModal from '@/components/repository/sentences-test/sentences/NewExampleFormModal';
+import RepositoryBase from './Base';
+
+import LoginForm from '@/components/auth/LoginForm';
+
+
+export default {
+  name: 'RepositorySettings',
+  components: {
+    RepositoryViewBase,
+    LoginForm,
+    TestSentences,
+    NewExampleFormModal,
+  },
+  extends: RepositoryBase,
+  data() {
+    return {
+      addTestSentenceModalOpen: false,
+    };
+  },
+  methods: {
+    addTestSentence() {
+      this.addTestSentenceModalOpen = true;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.test {
+  &__content-header {
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+
+    &__title {
+      margin: 2rem;
+    }
+
+    &__language-select {
+
+    }
+
+    &__buttons {
+      margin: 2rem 1rem;
+    }
+  }
+}
+</style>
