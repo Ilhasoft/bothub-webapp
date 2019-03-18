@@ -25,6 +25,19 @@ export default {
       'loginModalTabValue',
     ]),
   },
+  mounted() {
+    this.safariDetected();
+  },
+  methods: {
+    safariDetected() {
+      if (navigator.userAgent.indexOf('Safari') !== -1
+      && navigator.userAgent.indexOf('Chrome') === -1) {
+        this.$router.push({
+          name: 'safari-alert',
+        });
+      }
+    },
+  },
 };
 </script>
 

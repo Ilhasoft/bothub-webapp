@@ -13,6 +13,7 @@ import RepositorySettings from '@/views/repository/Settings';
 import RepositoryAnalyzeText from '@/views/repository/AnalyzeText';
 import RepositoryTest from '@/views/repository/Test';
 import NotFound from '@/views/NotFound';
+import SafariAlert from '@/views/SafariAlert';
 import store from '../store';
 
 
@@ -108,6 +109,11 @@ export default new Router({
       path: '*',
       name: '404',
       component: NotFound,
+    },
+    {
+      path: '/safariAlert/',
+      name: 'safari-alert',
+      component: SafariAlert,
     },
   ],
   scrollBehavior() {

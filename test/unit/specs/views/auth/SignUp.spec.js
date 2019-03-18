@@ -60,8 +60,7 @@ describe('LoginForm.vue', () => {
       });
 
       test('user is authenticated', () => {
-        expect(wrapper.vm.$store.getters.authenticated)
-          .toBeTruthy();
+        expect(wrapper.vm.$store.getters.authenticated).toBeTruthy();
       });
 
       test('path is "/home" after user registered and logged successfully', () => {
