@@ -59,7 +59,6 @@ export default {
           this.query,
         );
       }
-      console.log(this.examplesList);
     },
     onItemDeleted(id) {
       this.$emit('exampleDeleted', id);

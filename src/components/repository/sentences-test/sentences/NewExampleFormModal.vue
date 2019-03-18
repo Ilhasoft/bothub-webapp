@@ -251,7 +251,6 @@ export default {
       // if (submitSuccess) {
       //   this.openValue = false;
       // }
-      console.log(this.repository);
     },
   },
 };
