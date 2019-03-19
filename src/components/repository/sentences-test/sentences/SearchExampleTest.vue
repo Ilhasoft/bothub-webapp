@@ -5,9 +5,10 @@
       @submit.prevent="onSubmit()">
       <bh-field
         :errors="errors.intent"
+        label="Search for text:"
         class="bh-grid__item">
         <bh-text
-          v-model="toString"
+          v-model="text"
           :debounce="debounceTime">
           <div slot="append">
             <bh-icon-button
@@ -19,6 +20,7 @@
       </bh-field>
       <bh-field
         :errors="errors.intent"
+        label="Search for intent:"
         class="bh-grid__item">
         <bh-autocomplete
           v-model="intent"
@@ -28,15 +30,16 @@
       </bh-field>
       <bh-field
         :errors="errors.label"
+        label="Search for labels:"
         class="bh-grid__item">
         <bh-autocomplete
           v-model="label"
           :data="labels || []"
-
           placeholder="All labels" />
       </bh-field>
       <bh-field
         :errors="errors.intent"
+        label="Search for entities:"
         class="bh-grid__item">
         <bh-autocomplete
           v-model="entitie"
@@ -49,18 +52,13 @@
 </template>
 
 <script>
-import equal from 'deep-equal';
-import { exampleSearchToDicty, exampleSearchToString, formatters } from '@/utils/index';
+import { formatters } from '@/utils/index';
 import BH from 'bh';
 
 
 export default {
   name: 'SearchEaxampleTest',
   props: {
-    value: {
-      type: Object,
-      default: () => ({}),
-    },
     debounceTime: {
       type: Number,
       default: 750,
@@ -80,7 +78,7 @@ export default {
   },
   data() {
     return {
-      toString: exampleSearchToString(this.value),
+      text: '',
       setTimeoutId: null,
       intent: '',
       label: '',
@@ -89,9 +87,6 @@ export default {
     };
   },
   computed: {
-    current() {
-      return exampleSearchToDicty(this.toString);
-    },
     textFormatters() {
       const formattersList = [
         BH.utils.formatters.trimStart(),
@@ -109,19 +104,17 @@ export default {
       return formattersList;
     },
   },
-  watch: {
-    value(value) {
-      if (!equal(this.current, value)) {
-        this.toString = exampleSearchToString(value);
-      }
-    },
-    toString() {
-      this.$emit('input', this.current);
-    },
-  },
   methods: {
     onSubmit() {
-      this.$emit('input', this.current);
+      const data = {
+        intent: this.intent,
+        entitie: this.entitie,
+        label: this.label,
+        search: this.text,
+      };
+      console.log(data);
+
+      this.$emit('input', data);
     },
   },
 };
