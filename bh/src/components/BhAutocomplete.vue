@@ -170,11 +170,11 @@ export default {
     keyArrows(direction) {
       const sum = direction === 'down' ? 1 : -1;
       if (this.focused) {
-        let index = this.data.indexOf(this.hovered) + sum;
-        index = index > this.data.length - 1 ? this.data.length : index;
+        let index = this.filteredData.indexOf(this.hovered) + sum;
+        index = index > this.filteredData.length - 1 ? this.filteredData.length : index;
         index = index < 0 ? 0 : index;
 
-        this.setHovered(this.data[index]);
+        this.setHovered(this.filteredData[index]);
 
         const list = document.querySelector('.bh-autocomplete__list');
         const element = list.querySelectorAll('.bh-autocomplete__list__item')[index];
