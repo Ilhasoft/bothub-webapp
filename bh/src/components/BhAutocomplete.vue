@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { get } from 'http';
 import BhText from './BhText';
 
 
@@ -154,6 +155,7 @@ export default {
     enterPressed() {
       if (this.hovered === null) return;
       this.select(this.hovered);
+      document.getElementById('autocomplete').blur();
     },
     finish() {
       if (this.forceSelectFirst) {
