@@ -45,7 +45,6 @@
 </template>
 
 <script>
-import { get } from 'http';
 import BhText from './BhText';
 
 
