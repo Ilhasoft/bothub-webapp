@@ -57,7 +57,8 @@
     </div>
     <new-example-form-modal
       :repository="repository"
-      :open.sync="addTestSentenceModalOpen"/>
+      :open.sync="addTestSentenceModalOpen"
+      @created="onExampleTestCreated()"/>
   </repository-view-base>
 </template>
 
@@ -87,6 +88,9 @@ export default {
   methods: {
     addTestSentence() {
       this.addTestSentenceModalOpen = true;
+    },
+    onExampleTestCreated() {
+      this.updateRepository(true);
     },
   },
 };

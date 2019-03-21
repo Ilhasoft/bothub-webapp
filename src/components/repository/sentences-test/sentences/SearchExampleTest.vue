@@ -1,53 +1,50 @@
 <template>
-  <div>
-    <form
-      class="search-example-test bh-grid"
-      @submit.prevent="onSubmit()">
-      <bh-field
-        :errors="errors.intent"
-        label="Search for text:"
-        class="bh-grid__item">
-        <bh-text
-          v-model="text"
-          :debounce="debounceTime">
-          <div slot="append">
-            <bh-icon-button
-              value="magnify"
-              size="small"
-              type="submit" />
-          </div>
-        </bh-text>
-      </bh-field>
-      <bh-field
-        :errors="errors.intent"
-        label="Search for intent:"
-        class="bh-grid__item">
-        <bh-autocomplete
-          v-model="intent"
-          :data="intents || []"
-          :formatters="intentFormatters"
-          placeholder="Intent" />
-      </bh-field>
-      <bh-field
-        :errors="errors.label"
-        label="Search for labels:"
-        class="bh-grid__item">
-        <bh-autocomplete
-          v-model="label"
-          :data="labels || []"
-          placeholder="All labels" />
-      </bh-field>
-      <bh-field
-        :errors="errors.intent"
-        label="Search for entities:"
-        class="bh-grid__item">
-        <bh-autocomplete
-          v-model="entitie"
-          :data="entities || []"
-          :formatters="intentFormatters"
-          placeholder="All entities" />
-      </bh-field>
-    </form>
+  <div class="search-example-test bh-grid">
+    <bh-field
+      :errors="errors.intent"
+      label="Search for text:"
+      class="bh-grid__item">
+      <bh-text
+        v-model="text"
+        :debounce="debounceTime">
+        <div slot="append">
+          <bh-icon-button
+            value="magnify"
+            size="small"
+            type="submit" />
+        </div>
+      </bh-text>
+    </bh-field>
+    <bh-field
+      :errors="errors.intent"
+      label="Search for intent:"
+      class="bh-grid__item">
+      <bh-autocomplete
+        v-model="intent"
+        :data="intents || []"
+        :formatters="inputFormatters"
+        placeholder="Intent" />
+    </bh-field>
+    <bh-field
+      :errors="errors.label"
+      label="Search for labels:"
+      class="bh-grid__item">
+      <bh-autocomplete
+        v-model="label"
+        :data="labels || []"
+        :formatters="inputFormatters"
+        placeholder="All labels" />
+    </bh-field>
+    <bh-field
+      :errors="errors.intent"
+      label="Search for entities:"
+      class="bh-grid__item">
+      <bh-autocomplete
+        v-model="entitie"
+        :data="entities || []"
+        :formatters="inputFormatters"
+        placeholder="All entities" />
+    </bh-field>
   </div>
 </template>
 
@@ -83,6 +80,8 @@ export default {
       intent: '',
       label: '',
       entitie: '',
+      query: {},
+      queryString: '',
       errors: {},
     };
   },
@@ -96,26 +95,61 @@ export default {
       formattersList.toString = () => 'textFormatters';
       return formattersList;
     },
-    intentFormatters() {
+    inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
       ];
-      formattersList.toString = () => 'intentFormatters';
+      formattersList.toString = () => 'inputFormatters';
       return formattersList;
     },
   },
-  methods: {
-    onSubmit() {
-      const data = {
-        intent: this.intent,
-        entitie: this.entitie,
-        label: this.label,
-        search: this.text,
-      };
-      console.log(data);
-
-      this.$emit('input', data);
+  watch: {
+    query(value) {
+      console.log(value);
+      this.$emit('queryString', 'value here');
     },
+    text(value) {
+      // this.queryString = value;
+      this.$emit('queryStringFormated', { search: value });
+    },
+    intent(value) {
+      // this.queryString = `intent:${value}`;
+      this.$emit('queryStringFormated', { intent: value });
+    },
+    entitie(value) {
+      this.$emit('queryStringFormated', { entitie: value });
+    },
+    label(value) {
+      this.$emit('queryStringFormated', { label: value });
+    },
+  },
+  methods: {
+    // onSubmit() {
+    //   const data = {
+    //     intent: this.intent,
+    //     entitie: this.entitie,
+    //     label: this.label,
+    //     search: this.text,
+    //   };
+    //   console.log(data);
+
+    //   this.$emit('searchQueryString', data);
+    // },
+    // filterByIntent(event) {
+    //   this.queryString.intent = event;
+    // },
+    // filterByLabel(event) {
+    //   this.queryString.label = event;
+    //   console.log(this.data);
+    // },
+    // filterByEntitie(event) {
+    //   console.log(event);
+
+    //   this.queryString.entitie = event;
+    // },
+    // filterByText(value) {
+    //   this.queryString.text = value;
+    // },
   },
 };
 </script>

@@ -222,10 +222,12 @@ export default {
       }
 
       try {
-        await this.newExampleTest({
+        const a = await this.newExampleTest({
           repository: this.repository.uuid,
           ...this.data,
         });
+        console.log(a);
+
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -235,6 +237,8 @@ export default {
         return true;
       } catch (error) {
         /* istanbul ignore next */
+        console.log(error);
+
         const data = error.response && error.response.data;
         /* istanbul ignore next */
         if (data) {
