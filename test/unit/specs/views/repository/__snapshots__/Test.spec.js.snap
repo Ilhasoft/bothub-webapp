@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestView.vue renders correctly 1`] = `
+<repository-view-base-stub>
+  <!---->
+  <new-sentence-test-modal-stub></new-sentence-test-modal-stub>
+</repository-view-base-stub>
+`;
