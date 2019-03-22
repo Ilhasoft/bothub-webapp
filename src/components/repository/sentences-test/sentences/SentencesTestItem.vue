@@ -7,8 +7,33 @@
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
-      <div class="example-text__right">
-        <language-badge :language="language" />
+      <div
+        v-if="repository.authorization && repository.authorization.can_contribute"
+        class="level-right">
+        <div class="level-item">
+          <a
+            :href="`#delete-example-${id}`"
+            class="has-text-danger"
+            @click.prevent="deleteThisExample()">
+            <b-icon
+              icon="pen"
+              class="text-color-grey-dark example__icon" />
+          </a>
+        </div>
+      </div>
+      <div
+        v-if="repository.authorization && repository.authorization.can_contribute"
+        class="level-right">
+        <div class="level-item">
+          <a
+            :href="`#delete-example-${id}`"
+            class="has-text-danger"
+            @click.prevent="deleteThisExample()">
+            <b-icon
+              icon="delete"
+              class="text-color-grey-dark example__icon" />
+          </a>
+        </div>
       </div>
     </div>
     <div
@@ -36,18 +61,6 @@
           {{ created_at | moment('from') }}
         </div>
       </div>
-      <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
-        class="level-right">
-        <div class="level-item">
-          <a
-            :href="`#delete-example-${id}`"
-            class="has-text-danger"
-            @click.prevent="deleteThisExample()">
-            <b-icon icon="delete" />
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -61,7 +74,7 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
-  name: 'ExampleItem',
+  name: 'SentencesTestItem',
   components: {
     HighlightedText,
     LanguageBadge,
@@ -163,6 +176,15 @@ export default {
   background-color: $white-bis;
   border-radius: $radius;
   overflow: visible;
+
+  &__icon {
+    margin: 0 .5rem;
+
+    &:hover {
+      color: black;
+      transition: 1s;
+    }
+  }
 
   &:hover {
     .example-text {

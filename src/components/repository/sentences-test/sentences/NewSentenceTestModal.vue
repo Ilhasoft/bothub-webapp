@@ -41,7 +41,9 @@
             </bh-field>
           </div>
         </div>
-        <bh-field :errors="errors.entities">
+        <bh-field
+          :errors="errors.entities"
+          class="align-space-left">
           <entities-input
             ref="entitiesInput"
             v-model="entities"
@@ -74,7 +76,6 @@
             type="submit">
             <slot v-if="!submitting">Save and add another</slot>
           </bh-button>
-
         </div>
       </form>
     </div>
@@ -85,14 +86,13 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-
 import { mapActions } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
 
 export default {
-  name: 'NewExampleFormModal',
+  name: 'NewSentenceTestModal',
   components: {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
@@ -222,12 +222,10 @@ export default {
       }
 
       try {
-        const a = await this.newExampleTest({
+        await this.newExampleTest({
           repository: this.repository.uuid,
           ...this.data,
         });
-        console.log(a);
-
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -237,8 +235,6 @@ export default {
         return true;
       } catch (error) {
         /* istanbul ignore next */
-        console.log(error);
-
         const data = error.response && error.response.data;
         /* istanbul ignore next */
         if (data) {
@@ -251,10 +247,38 @@ export default {
       return false;
     },
     async submitFormAndClose() {
-      // const submitSuccess = await this.onSubmit();
-      // if (submitSuccess) {
-      //   this.openValue = false;
-      // }
+      this.errors = {};
+      this.submitting = true;
+      if (this.$refs.entitiesInput.clearEntityForm) {
+        this.$refs.entitiesInput.clearEntityForm();
+      }
+
+      try {
+        await this.newExampleTest({
+          repository: this.repository.uuid,
+          ...this.data,
+        });
+
+        this.text = '';
+        this.intent = '';
+        this.entities = [];
+        this.submitting = false;
+
+        this.$emit('created');
+        this.openValue = false;
+        return true;
+      } catch (error) {
+        /* istanbul ignore next */
+        const data = error.response && error.response.data;
+        /* istanbul ignore next */
+        if (data) {
+          /* istanbul ignore next */
+          this.errors = data;
+        }
+        /* istanbul ignore next */
+        this.submitting = false;
+      }
+      return false;
     },
   },
 };
@@ -271,10 +295,12 @@ export default {
     margin: 2rem 1rem;
     }
   }
-
-
 }
 .language-append {
   flex-grow: 0;
+}
+
+.align-space-left {
+  margin-left: .75rem;
 }
 </style>

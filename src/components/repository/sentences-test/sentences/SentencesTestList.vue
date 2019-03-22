@@ -14,7 +14,7 @@
 
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleItem from '@/components/repository/sentences-test/sentences/ExampleItem';
+import ExampleItem from '@/components/repository/sentences-test/sentences/SentencesTestItem';
 
 
 const components = {
@@ -22,7 +22,7 @@ const components = {
 };
 
 export default {
-  name: 'ExamplesTestList',
+  name: 'SentencesTestList',
   components,
   props: {
     repository: {
