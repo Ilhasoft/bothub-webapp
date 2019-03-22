@@ -21,17 +21,17 @@
             </div>
             <div>
               <bh-button
+                ref="addSentenceButton"
                 class="test__content-header__buttons"
                 primary
                 @click="addTestSentence()">Add test sentence</bh-button>
               <bh-button
                 class="test__content-header__buttons"
-                primary
-                @click="addTestSentence()">Run your test</bh-button>
+                primary>Run your test</bh-button>
             </div>
           </div>
           <hr>
-          <test-sentences :repository="repository"/>
+          <sentences-test :repository="repository"/>
         </div>
         <div
           v-else
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-    <new-example-form-modal
+    <new-sentence-test-modal
       :repository="repository"
       :open.sync="addTestSentenceModalOpen"
       @created="onExampleTestCreated()"/>
@@ -64,20 +64,20 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import TestSentences from '@/components/repository/sentences-test/TestSentences';
-import NewExampleFormModal from '@/components/repository/sentences-test/sentences/NewExampleFormModal';
+import SentencesTest from '@/components/repository/sentences-test/SentencesTest';
+import NewSentenceTestModal from '@/components/repository/sentences-test/sentences/NewSentenceTestModal';
 import RepositoryBase from './Base';
 
 import LoginForm from '@/components/auth/LoginForm';
 
 
 export default {
-  name: 'RepositorySettings',
+  name: 'RepositoryTest',
   components: {
     RepositoryViewBase,
     LoginForm,
-    TestSentences,
-    NewExampleFormModal,
+    SentencesTest,
+    NewSentenceTestModal,
   },
   extends: RepositoryBase,
   data() {
@@ -102,14 +102,6 @@ export default {
     text-align: center;
     margin: 0 auto;
     width: 40%;
-
-    &__title {
-      margin: 2rem;
-    }
-
-    &__language-select {
-
-    }
 
     &__buttons {
       margin: 2rem 1rem;

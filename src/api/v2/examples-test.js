@@ -28,8 +28,6 @@ export default {
       repository_uuid: repositoryUuid,
       ...query,
     });
-    console.dir(queryString, 'aq');
-
     return new utils.List(`/v2/validations/?${queryString}`);
   },
   get(id) {
