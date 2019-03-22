@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestView.vue renders correctly 1`] = `
+<div class="search-example-test bh-grid">
+  <bh-field-stub label="Search for text:" errors="" class="bh-grid__item">
+    <bh-text-stub value="" formatters="" debounce="750">
+      <div>
+        <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
+      </div>
+    </bh-text-stub>
+  </bh-field-stub>
+  <bh-field-stub label="Search for intent:" errors="" class="bh-grid__item">
+    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="Intent"></bh-autocomplete-stub>
+  </bh-field-stub>
+  <bh-field-stub label="Search for labels:" errors="" class="bh-grid__item">
+    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All labels"></bh-autocomplete-stub>
+  </bh-field-stub>
+  <bh-field-stub label="Search for entities:" errors="" class="bh-grid__item">
+    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
+  </bh-field-stub>
+</div>
+`;
