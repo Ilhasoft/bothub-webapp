@@ -16,10 +16,9 @@
 </template>
 
 <script>
-
 import Pagination from '@/components-v1/shared/Pagination';
-import FilterSentencesTest from '@/components/repository/sentences-test/sentences/FilterSentencesTest';
-import SentencesTestList from '@/components/repository/sentences-test/sentences/SentencesTestList';
+import FilterSentencesTest from '@/components/repository/test-sentences/sentences/FilterSentencesTest';
+import SentencesTestList from '@/components/repository/test-sentences/sentences/SentencesTestList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 export default {

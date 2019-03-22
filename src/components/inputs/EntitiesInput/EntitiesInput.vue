@@ -82,6 +82,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    entitiesForEdit: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   data() {
     return {
@@ -129,6 +133,9 @@ export default {
     text(text, oldText) {
       this.validateEntities(text, oldText);
     },
+  },
+  mounted() {
+    this.entitiesForEdit.forEach((entity) => { this.addEntity(entity); });
   },
   methods: {
     getEntityClass(entity) {

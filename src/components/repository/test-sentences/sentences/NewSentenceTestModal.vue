@@ -52,6 +52,7 @@
             :text-selected="textSelected"
             :available-entities="availableEntities"
             :available-labels="availableLabels"
+            :entities-for-edit="[]"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>

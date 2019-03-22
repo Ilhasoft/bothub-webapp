@@ -14,7 +14,7 @@
 
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleItem from '@/components/repository/sentences-test/sentences/SentencesTestItem';
+import ExampleItem from '@/components/repository/test-sentences/sentences/SentencesTestItem';
 
 
 const components = {

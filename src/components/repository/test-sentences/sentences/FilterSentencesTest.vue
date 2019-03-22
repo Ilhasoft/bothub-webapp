@@ -50,7 +50,7 @@
 
 <script>
 import { formatters } from '@/utils/index';
-import BH from 'bh';
+// import BH from 'bh';
 
 
 export default {
@@ -79,21 +79,11 @@ export default {
       intent: '',
       label: '',
       entitie: '',
-      queryString: '',
       setTimeoutId: null,
       errors: {},
     };
   },
   computed: {
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
-    },
     inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),

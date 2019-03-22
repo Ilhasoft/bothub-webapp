@@ -64,8 +64,8 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import SentencesTest from '@/components/repository/sentences-test/SentencesTest';
-import NewSentenceTestModal from '@/components/repository/sentences-test/sentences/NewSentenceTestModal';
+import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
+import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
 import RepositoryBase from './Base';
 
 import LoginForm from '@/components/auth/LoginForm';
