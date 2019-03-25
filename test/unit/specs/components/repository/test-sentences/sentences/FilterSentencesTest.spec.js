@@ -1,6 +1,7 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import FilterSentencesTest from '@/components/repository/test-sentences/sentences/FilterSentencesTest';
 import store from '@/store';
+import _ from 'lodash';
 import BH from 'bh';
 
 
@@ -17,7 +18,7 @@ describe('TestView.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('Test intent query string formated', () => {
+  describe('Test intent queryString formated', () => {
     beforeEach(() => {
       wrapper.setData({
         intent: 'like',
@@ -25,7 +26,9 @@ describe('TestView.vue', () => {
     });
 
     test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      _.debounce(() => {
+        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      }, 500);
     });
   });
 
@@ -37,7 +40,9 @@ describe('TestView.vue', () => {
     });
 
     test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      _.debounce(() => {
+        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      }, 500);
     });
   });
 
@@ -49,7 +54,9 @@ describe('TestView.vue', () => {
     });
 
     test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      _.debounce(() => {
+        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      }, 500);
     });
   });
 
