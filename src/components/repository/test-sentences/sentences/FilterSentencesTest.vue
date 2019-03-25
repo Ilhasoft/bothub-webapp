@@ -50,7 +50,7 @@
 
 <script>
 import { formatters } from '@/utils/index';
-// import BH from 'bh';
+import _ from 'lodash';
 
 
 export default {
@@ -96,15 +96,15 @@ export default {
     text(value) {
       this.$emit('queryStringFormated', { search: value });
     },
-    intent(value) {
+    intent: _.debounce(function emitIntent(value) {
       this.$emit('queryStringFormated', { intent: value });
-    },
-    entitie(value) {
+    }, 500),
+    entitie: _.debounce(function emitEntitie(value) {
       this.$emit('queryStringFormated', { entitie: value });
-    },
-    label(value) {
+    }, 500),
+    label: _.debounce(function emitLabel(value) {
       this.$emit('queryStringFormated', { label: value });
-    },
+    }, 500),
   },
 };
 </script>
