@@ -21,7 +21,9 @@
             <categories-list v-model="currentCategory" />
           </div>
           <div class="bh-grid__item bh-grid__item--grow-0">
-            <languages-list v-model="currentLanguage" />
+            <languages-list
+              v-model="currentLanguage"
+              open-position="bottom-left" />
           </div>
         </div>
         <div>

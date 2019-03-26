@@ -10,14 +10,11 @@
           <div class="test__content-header">
             <h2 class="test__content-header__title">Test your data set</h2>
             <div class="test__content-header__language-select">
-              <bh-dropdown
-                full-field-size
-                full-width
-                title="Language to run the test"
-                position="bottom-left">
-                <bh-dropdown-item>Brazilian portuguese (30 test sentences)</bh-dropdown-item>
-                <bh-dropdown-item>English (55 test sentences)</bh-dropdown-item>
-              </bh-dropdown>
+              <languages-list
+                v-model="currentLanguage"
+                title="Select your language"
+                full-size
+                open-position="bottom-left" />
             </div>
             <div>
               <bh-button
@@ -31,7 +28,9 @@
             </div>
           </div>
           <hr>
-          <sentences-test :repository="repository"/>
+          <sentences-test
+            :repository="repository"
+            :filter-by-language="currentLanguage"/>
         </div>
         <div
           v-else
@@ -67,6 +66,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
 import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
 import RepositoryBase from './Base';
+import LanguagesList from '@/components/shared/LanguagesList';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -78,11 +78,13 @@ export default {
     LoginForm,
     SentencesTest,
     NewSentenceTestModal,
+    LanguagesList,
   },
   extends: RepositoryBase,
   data() {
     return {
       addTestSentenceModalOpen: false,
+      currentLanguage: '',
     };
   },
   methods: {
