@@ -33,6 +33,10 @@ export default {
       type: Object,
       required: true,
     },
+    filterByLanguage: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -40,21 +44,12 @@ export default {
       query: {},
     };
   },
-  async mounted() {
-    await this.updateList();
+  watch: {
+    filterByLanguage() {
+      this.onSearch();
+    },
   },
   methods: {
-    async updateList() {
-      this.translateList = null;
-      if (!!this.from && !!this.to) {
-        await this.$nextTick();
-        this.translateList = await this.getExamplesToTranslate({
-          repositoryUuid: this.repository.uuid,
-          from: this.from,
-          to: this.to,
-        });
-      }
-    },
     onSearch(value) {
       Object.assign(this.querySchema, value);
 
@@ -69,6 +64,7 @@ export default {
       }
       const formatedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formatedQueryString);
+      this.query.language = this.filterByLanguage;
     },
   },
 };

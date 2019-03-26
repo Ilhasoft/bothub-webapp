@@ -33,6 +33,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    language: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
