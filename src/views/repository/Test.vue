@@ -22,9 +22,9 @@
                 class="test__content-header__buttons"
                 primary
                 @click="addTestSentence()">Add test sentence</bh-button>
-              <bh-button
+                <!-- <bh-button
                 class="test__content-header__buttons"
-                primary>Run your test</bh-button>
+                primary>Run your test</bh-button> -->
             </div>
           </div>
           <hr>
@@ -107,6 +107,10 @@ export default {
 
     &__buttons {
       margin: 2rem 1rem;
+    }
+
+    &__title {
+      margin-top: 2rem;
     }
   }
 }

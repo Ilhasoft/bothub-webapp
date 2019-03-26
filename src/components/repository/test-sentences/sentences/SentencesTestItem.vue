@@ -14,7 +14,7 @@
           <a
             :href="`#delete-example-${id}`"
             class="has-text-danger"
-            @click.prevent="editThisExample()">
+            @click.prevent="editTestSentenceModalOpen = !editTestSentenceModalOpen">
             <b-icon
               icon="pen"
               class="text-color-grey-dark example__icon" />
@@ -62,6 +62,13 @@
         </div>
       </div>
     </div>
+    <edit-sentence-test-modal
+      :repository="repository"
+      :open.sync="editTestSentenceModalOpen"
+      :text-to-edit="text"
+      :intent-to-edit="intent"
+      :entities-to-edit="entities"
+      :sentence-id="id" />
   </div>
 </template>
 
@@ -71,6 +78,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import EditSentenceTestModal from '@/components/repository/test-sentences/sentences/EditSentenceTestModal';
 
 
 export default {
@@ -78,6 +86,7 @@ export default {
   components: {
     HighlightedText,
     LanguageBadge,
+    EditSentenceTestModal,
   },
   props: {
     id: {
@@ -112,6 +121,7 @@ export default {
   data() {
     return {
       deleteDialog: null,
+      editTestSentenceModalOpen: false,
     };
   },
   computed: {

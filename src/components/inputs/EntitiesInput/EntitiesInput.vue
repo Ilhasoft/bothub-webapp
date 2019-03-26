@@ -134,9 +134,6 @@ export default {
       this.validateEntities(text, oldText);
     },
   },
-  mounted() {
-    this.entitiesForEdit.forEach((entity) => { this.addEntity(entity); });
-  },
   methods: {
     getEntityClass(entity) {
       const color = getEntityColor(
