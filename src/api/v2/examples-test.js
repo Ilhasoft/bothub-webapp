@@ -17,6 +17,18 @@ export default {
       },
     );
   },
+  update(repository, text, language, entities, intent, id) {
+    return request.$http.patch(
+      `/v2/validation/new/${id}/`,
+      {
+        repository,
+        text,
+        language,
+        entities,
+        intent,
+      },
+    );
+  },
   all(repositoryUuid) {
     return this.search(repositoryUuid);
   },
