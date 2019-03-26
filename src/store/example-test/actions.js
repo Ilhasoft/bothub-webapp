@@ -9,6 +9,14 @@ export default {
     const response = await exampleTest.new(repository, text, language, entities, intent);
     return response;
   },
+  async updateExampleTest(store, {
+    repository, text, language, entities, intent, id,
+  }) {
+    console.log(id, 'action');
+
+    const response = await exampleTest.update(repository, text, language, entities, intent, id);
+    return response;
+  },
   async getExamplesTest(store, { repositoryUuid }) {
     const response = await exampleTest.all(repositoryUuid);
     return response;
