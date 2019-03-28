@@ -19,7 +19,7 @@ export default {
   },
   update(repository, text, language, entities, intent, id) {
     return request.$http.patch(
-      `/v2/validation/new/${id}/`,
+      `/v2/validation/${id}/`,
       {
         repository,
         text,
