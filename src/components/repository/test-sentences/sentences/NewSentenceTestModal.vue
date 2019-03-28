@@ -227,6 +227,7 @@ export default {
           repository: this.repository.uuid,
           ...this.data,
         });
+
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -237,6 +238,7 @@ export default {
       } catch (error) {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
+
         /* istanbul ignore next */
         if (data) {
           /* istanbul ignore next */

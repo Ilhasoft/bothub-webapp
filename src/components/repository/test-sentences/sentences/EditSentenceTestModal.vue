@@ -205,6 +205,7 @@ export default {
   methods: {
     ...mapActions([
       'updateExampleTest',
+      'setUpdateRepository',
     ]),
     setTextSelected(value) {
       this.textSelected = value;
@@ -236,12 +237,13 @@ export default {
           repository: this.repository.uuid,
           ...this.data,
         });
+
         this.text = '';
         this.intent = '';
         this.entities = [];
         this.submitting = false;
 
-        this.$emit('updated');
+        this.setUpdateRepository(true);
         return true;
       } catch (error) {
         /* istanbul ignore next */
