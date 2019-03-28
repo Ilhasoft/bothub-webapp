@@ -10,4 +10,7 @@ export default {
       },
     );
   },
+  updateRepository(state, value) {
+    state.updateRepository = value;
+  },
 };

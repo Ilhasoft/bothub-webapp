@@ -12,8 +12,6 @@ export default {
   async updateExampleTest(store, {
     repository, text, language, entities, intent, id,
   }) {
-    console.log(id, 'action');
-
     const response = await exampleTest.update(repository, text, language, entities, intent, id);
     return response;
   },

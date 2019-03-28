@@ -99,6 +99,9 @@ export default {
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
   },
+  setUpdateRepository({ commit }, payload) {
+    commit('updateRepository', payload);
+  },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
