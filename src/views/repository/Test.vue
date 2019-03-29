@@ -22,15 +22,20 @@
                 class="test__content-header__buttons"
                 primary
                 @click="addTestSentence()">Add test sentence</bh-button>
-                <!-- <bh-button
+              <bh-button
                 class="test__content-header__buttons"
-                primary>Run your test</bh-button> -->
+                primary
+                @click="showResults = !showResults" >Check test results</bh-button>
             </div>
           </div>
           <hr>
           <sentences-test
+            v-if="!showResults"
             :repository="repository"
             :filter-by-language="currentLanguage"/>
+          <test-results
+            v-else
+            :repository="repository" />
         </div>
         <div
           v-else
@@ -64,6 +69,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
+import TestResults from '@/components/repository/test-sentences/TestResults';
 import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
@@ -79,12 +85,14 @@ export default {
     SentencesTest,
     NewSentenceTestModal,
     LanguagesList,
+    TestResults,
   },
   extends: RepositoryBase,
   data() {
     return {
       addTestSentenceModalOpen: false,
       currentLanguage: '',
+      showResults: false,
     };
   },
   methods: {
