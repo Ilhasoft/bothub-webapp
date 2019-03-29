@@ -23,19 +23,27 @@
                 primary
                 @click="addTestSentence()">Add test sentence</bh-button>
               <bh-button
+                v-if="!showResults"
                 class="test__content-header__buttons"
                 primary
                 @click="showResults = !showResults" >Check test results</bh-button>
+              <bh-button
+                v-else
+                class="test__content-header__buttons"
+                primary
+                @click="showResults = !showResults" >Back to sentences </bh-button>
             </div>
           </div>
           <hr>
-          <sentences-test
-            v-if="!showResults"
-            :repository="repository"
-            :filter-by-language="currentLanguage"/>
-          <test-results
-            v-else
-            :repository="repository" />
+          <div class="test__content-wrapper">
+            <sentences-test
+              v-if="!showResults"
+              :repository="repository"
+              :filter-by-language="currentLanguage"/>
+            <test-results
+              v-else
+              :repository="repository" />
+          </div>
         </div>
         <div
           v-else
@@ -98,6 +106,7 @@ export default {
   methods: {
     addTestSentence() {
       this.addTestSentenceModalOpen = true;
+      this.showResults = false;
     },
     onExampleTestCreated() {
       this.updateRepository(true);
@@ -120,6 +129,11 @@ export default {
     &__title {
       margin-top: 2rem;
     }
+  }
+
+  &__content-wrapper {
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
 </style>
