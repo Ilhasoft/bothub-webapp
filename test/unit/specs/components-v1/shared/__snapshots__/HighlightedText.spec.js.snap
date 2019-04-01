@@ -2,7 +2,7 @@
 
 exports[`HighlightedText.vue renders correctly 1`] = `
 <div class="highlighted">
-  <div class="highlighted-entity"><span class="highlighted-entity-before"></span> <span class="highlighted-entity-text entity-sunflower"></span></div>
+  <div class="highlighted-entity"><span class="highlighted-entity-before"></span> <span class="highlighted-entity-text entity-sunflower failed"></span></div>
   <div class="highlighted-base">text</div>
   <div class="highlighted-text">text</div>
 </div>

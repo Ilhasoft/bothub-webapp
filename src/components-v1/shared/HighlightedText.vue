@@ -5,7 +5,9 @@
       :key="i"
       class="highlighted-entity">
       <span class="highlighted-entity-before">{{ entity.before }}</span>
-      <span :class="`highlighted-entity-text ${entity.colorClass}`">{{ entity.text }}</span>
+      <span
+        :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed}`"
+      >{{ entity.text }}</span>
     </div>
     <div class="highlighted-base">{{ text }}</div>
     <div class="highlighted-text">{{ text }}</div>
@@ -31,6 +33,10 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    failed: {
+      type: String,
+      default: 'failed',
+    },
   },
   computed: {
     entitiesBlocks() {
@@ -52,6 +58,9 @@ export default {
             text,
           };
         });
+    },
+    entitiesHasFailed() {
+      return 'failed';
     },
   },
 };
@@ -88,5 +97,8 @@ export default {
       border-radius: 4px;
     }
   }
+}
+.failed {
+  border: .120rem solid red;
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="example">
+  <div
+    :class="{ example: true,
+              'example--error': false,
+              'example--success': true,
+  }">
     <div class="example-text">
       <div class="example-text__main">
         <highlighted-text
@@ -36,18 +40,21 @@
         </div>
       </div>
     </div>
-    <div
-      v-if="entitiesList.length > 0"
-      class="example-entities">
-      <b-tag
+    <div v-if="entitiesList.length > 0">
+      <div
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="entity.class"
-        rounded>
-        <strong>{{ entity.value }}</strong>
-        <span v-if="entity.label">is</span>
-        <strong v-if="entity.label">{{ entity.label }}</strong>
-      </b-tag>
+        class="example-entities">
+        <b-tag
+          :class="`${entity.class} ${failed}`"
+          rounded>
+          <strong>{{ entity.value }}</strong>
+          <span v-if="entity.label">is</span>
+          <strong v-if="entity.label">{{ entity.label }}</strong>
+        </b-tag>
+        <span>[ok]</span>
+        <span>[failed]</span>
+      </div>
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -58,8 +65,10 @@
           <span>{{ intent }}</span>
         </div>
         <div class="level-item has-text-grey-light">
-          {{ created_at | moment('from') }}
+          confidence here
         </div>
+        <span>[ok]</span>
+        <span>[failed]</span>
       </div>
     </div>
     <edit-sentence-test-modal
@@ -116,6 +125,10 @@ export default {
     repository: {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
+    },
+    failed: {
+      type: String,
+      default: 'example--success',
     },
   },
   data() {
@@ -186,6 +199,14 @@ export default {
   background-color: $white-bis;
   border-radius: $radius;
   overflow: visible;
+
+  &--error {
+    border: .120rem solid red;
+  }
+
+  &--success {
+    border: .120rem solid green;
+  }
 
   &__icon {
     margin: 0 .5rem;
