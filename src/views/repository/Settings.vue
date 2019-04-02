@@ -91,6 +91,7 @@ export default {
         is_private: isPrivate,
         algorithm,
         use_competing_intents: useCompetingIntents,
+        use_name_entities: useNameEntities,
       } = this.repository;
       return {
         name,
@@ -103,6 +104,7 @@ export default {
         is_private: isPrivate,
         algorithm,
         use_competing_intents: useCompetingIntents,
+        use_name_entities: useNameEntities,
       };
     },
     onEdited(repository) {

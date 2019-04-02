@@ -47,6 +47,7 @@ export default {
     is_private: isPrivate,
     algorithm,
     use_competing_intents: useCompetingIntents,
+    use_name_entities: useNameEntities,
   }) {
     return repository.edit(
       ownerNickname,
@@ -59,6 +60,7 @@ export default {
       isPrivate,
       algorithm,
       useCompetingIntents,
+      useNameEntities,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
