@@ -71,7 +71,7 @@
         <span>[failed]</span>
       </div>
     </div>
-    <edit-sentence-test-modal
+    <edit-example-test-modal
       :repository="repository"
       :open.sync="editTestSentenceModalOpen"
       :text-to-edit="text"
@@ -87,7 +87,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import EditSentenceTestModal from '@/components/repository/test-sentences/sentences/EditSentenceTestModal';
+import EditExampleTestModal from '@/components/repository/repository-test/example/EditExampleTestModal';
 
 
 export default {
@@ -95,7 +95,7 @@ export default {
   components: {
     HighlightedText,
     LanguageBadge,
-    EditSentenceTestModal,
+    EditExampleTestModal,
   },
   props: {
     id: {

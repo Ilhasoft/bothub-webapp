@@ -14,16 +14,14 @@
 
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleItem from '@/components/repository/test-sentences/sentences/SentencesTestItem';
+import ExampleTestItem from '@/components/repository/repository-test/example/ExampleTestItem';
 
-
-const components = {
-  Pagination,
-};
 
 export default {
-  name: 'SentencesTestList',
-  components,
+  name: 'ExampleTestList',
+  components: {
+    Pagination,
+  },
   props: {
     repository: {
       type: Object,
@@ -41,7 +39,7 @@ export default {
   data() {
     return {
       examplesList: null,
-      exampleItemElem: ExampleItem,
+      exampleItemElem: ExampleTestItem,
     };
   },
   watch: {

@@ -3,7 +3,7 @@
     <div>
       <h1>Test output</h1>
       <graphics-result />
-      <sentences-test
+      <base-examples-test
         :repository="repository"
         :filter-by-language="currentLanguage"/>
       <hr>
@@ -12,14 +12,14 @@
 </template>
 
 <script>
-import GraphicsResult from '@/components/repository/test-sentences/sentences/GraphicsResult';
-import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
+import GraphicsResult from '@/components/repository/repository-test/example/GraphicsResult';
+import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
 
 export default {
   name: 'TestResults',
   components: {
     GraphicsResult,
-    SentencesTest,
+    BaseExamplesTest,
   },
   props: {
     repository: {

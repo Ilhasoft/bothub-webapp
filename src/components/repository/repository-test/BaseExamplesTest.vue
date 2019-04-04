@@ -3,13 +3,13 @@
     <div class="bh-grid">
       <h1>Test Sentences</h1>
     </div>
-    <filter-sentences-test
+    <filter-example-test
       :intents="repository.intents_list"
       :labels="repository.labels_list"
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"
     />
-    <sentences-test-list
+    <example-test-list
       :repository="repository"
       :query="query"/>
   </div>
@@ -17,16 +17,16 @@
 
 <script>
 import Pagination from '@/components-v1/shared/Pagination';
-import FilterSentencesTest from '@/components/repository/test-sentences/sentences/FilterSentencesTest';
-import SentencesTestList from '@/components/repository/test-sentences/sentences/SentencesTestList';
+import FilterExampleTest from '@/components/repository/repository-test/example/FilterExampleTest';
+import ExampleTestList from '@/components/repository/repository-test/example/ExampleTestList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 export default {
-  name: 'SentencesTest',
+  name: 'BaseExamplesTest',
   components: {
     Pagination,
-    FilterSentencesTest,
-    SentencesTestList,
+    FilterExampleTest,
+    ExampleTestList,
   },
   props: {
     repository: {

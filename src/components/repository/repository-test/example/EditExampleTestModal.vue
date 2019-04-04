@@ -1,7 +1,7 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Add a new test sentence!">
+    title="Edit sentence!">
     <div class="new-example-form-modal">
       <form
         @submit.prevent="onSubmit()">
@@ -52,7 +52,7 @@
             :text-selected="textSelected"
             :available-entities="availableEntities"
             :available-labels="availableLabels"
-            :entities-for-edit="[]"
+            :entities-for-edit="entities"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -64,18 +64,8 @@
             class="new-example-form-modal__buttons-wrapper__button"
             primary
             size="medium"
-            @click="submitFormAndClose()">
-            <slot v-if="!submitting">Save sentence</slot>
-          </bh-button>
-          <bh-button
-            :disabled="!isValid || submitting "
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            primary
-            class="new-example-form-modal__buttons-wrapper__button"
-            size="medium"
             type="submit">
-            <slot v-if="!submitting">Save and add another</slot>
+            <slot v-if="!submitting">Edit your sentence</slot>
           </bh-button>
         </div>
       </form>
@@ -93,7 +83,7 @@ import { formatters } from '@/utils';
 
 
 export default {
-  name: 'NewSentenceTestModal',
+  name: 'EditExampleTestModal',
   components: {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
@@ -108,15 +98,32 @@ export default {
       type: Boolean,
       default: false,
     },
+    textToEdit: {
+      type: String,
+      default: '',
+    },
+    intentToEdit: {
+      type: String,
+      default: '',
+    },
+    entitiesToEdit: {
+      type: Array,
+      default: /* istanbul ignore next */ () => ([]),
+    },
+    sentenceId: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
       textSelected: null,
-      text: '',
+      text: this.textToEdit,
       language: this.repository.language,
-      intent: '',
-      entities: [],
+      intent: this.intentToEdit,
+      entities: this.entitiesToEdit,
       errors: {},
+      id: this.sentenceId,
       submitting: false,
       openValue: this.open,
     };
@@ -171,6 +178,7 @@ export default {
     },
     data() {
       const {
+        id,
         text,
         language,
         intent,
@@ -178,6 +186,7 @@ export default {
       } = this;
 
       return {
+        id,
         text,
         language,
         intent,
@@ -195,7 +204,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'newExampleTest',
+      'updateExampleTest',
+      'setUpdateRepository',
     ]),
     setTextSelected(value) {
       this.textSelected = value;
@@ -223,7 +233,7 @@ export default {
       }
 
       try {
-        await this.newExampleTest({
+        await this.updateExampleTest({
           repository: this.repository.uuid,
           ...this.data,
         });
@@ -233,42 +243,7 @@ export default {
         this.entities = [];
         this.submitting = false;
 
-        this.$emit('created');
-        return true;
-      } catch (error) {
-        /* istanbul ignore next */
-        const data = error.response && error.response.data;
-
-        /* istanbul ignore next */
-        if (data) {
-          /* istanbul ignore next */
-          this.errors = data;
-        }
-        /* istanbul ignore next */
-        this.submitting = false;
-      }
-      return false;
-    },
-    async submitFormAndClose() {
-      this.errors = {};
-      this.submitting = true;
-      if (this.$refs.entitiesInput.clearEntityForm) {
-        this.$refs.entitiesInput.clearEntityForm();
-      }
-
-      try {
-        await this.newExampleTest({
-          repository: this.repository.uuid,
-          ...this.data,
-        });
-
-        this.text = '';
-        this.intent = '';
-        this.entities = [];
-        this.submitting = false;
-
-        this.$emit('created');
-        this.openValue = false;
+        this.setUpdateRepository(true);
         return true;
       } catch (error) {
         /* istanbul ignore next */

@@ -57,7 +57,7 @@ import _ from 'lodash';
 
 
 export default {
-  name: 'FilterSentencesTest',
+  name: 'FilterExampleTest',
   props: {
     debounceTime: {
       type: Number,

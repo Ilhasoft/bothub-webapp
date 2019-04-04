@@ -36,7 +36,7 @@
           </div>
           <hr>
           <div class="test__content-wrapper">
-            <sentences-test
+            <base-examples-test
               v-if="!showResults"
               :repository="repository"
               :filter-by-language="currentLanguage"/>
@@ -67,18 +67,18 @@
         </div>
       </div>
     </div>
-    <new-sentence-test-modal
+    <new-example-test-modal
       :repository="repository"
       :open.sync="addTestSentenceModalOpen"
-      @created="onExampleTestCreated()"/>
+      @created="onExampleTestCreated()" />
   </repository-view-base>
 </template>
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
-import TestResults from '@/components/repository/test-sentences/TestResults';
-import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
+import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
+import TestResults from '@/components/repository/repository-test/TestResults';
+import NewExampleTestModal from '@/components/repository/repository-test/example/NewExampleTestModal';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 
@@ -90,8 +90,8 @@ export default {
   components: {
     RepositoryViewBase,
     LoginForm,
-    SentencesTest,
-    NewSentenceTestModal,
+    BaseExamplesTest,
+    NewExampleTestModal,
     LanguagesList,
     TestResults,
   },
