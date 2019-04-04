@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
+import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
 import store from '@/store';
 import BH from 'bh';
 
@@ -7,10 +7,10 @@ import BH from 'bh';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('SentencesTest.vue', () => {
+describe('BaseExamplesTest.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SentencesTest, {
+    wrapper = shallowMount(BaseExamplesTest, {
       localVue,
       store,
       propsData: {

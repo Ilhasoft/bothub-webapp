@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import FilterSentencesTest from '@/components/repository/test-sentences/sentences/FilterSentencesTest';
+import FilterExampleTest from '@/components/repository/repository-test/example/FilterExampleTest';
 import store from '@/store';
 import _ from 'lodash';
 import BH from 'bh';
@@ -11,7 +11,7 @@ localVue.use(BH);
 describe('TestView.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(FilterSentencesTest, { localVue, store });
+    wrapper = shallowMount(FilterExampleTest, { localVue, store });
   });
 
   test('renders correctly', () => {
