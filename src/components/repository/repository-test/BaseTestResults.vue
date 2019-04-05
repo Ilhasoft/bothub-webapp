@@ -1,30 +1,34 @@
 <template>
   <div class="bh-grid bh-grid--column">
-    <div class="bh-grid">
-      <h1>Test Sentences</h1>
+    <div>
+      <h1>Test output</h1>
+      <graphics-result />
+      <hr>
+      <filter-result-example-test
+        :intents="repository.intents_list"
+        :labels="repository.labels_list"
+        :entities="repository.entities_list"
+        @queryStringFormated="onSearch($event)"
+      />
+      <result-example-test-list
+        :repository="repository"
+        :query="query"/>
     </div>
-    <filter-example-test
-      :intents="repository.intents_list"
-      :labels="repository.labels_list"
-      :entities="repository.entities_list"
-      @queryStringFormated="onSearch($event)"
-    />
-    <example-test-list
-      :repository="repository"
-      :query="query"/>
   </div>
 </template>
 
 <script>
-import FilterExampleTest from '@/components/repository/repository-test/example/FilterExampleTest';
-import ExampleTestList from '@/components/repository/repository-test/example/ExampleTestList';
+import GraphicsResult from '@/components/repository/repository-test/results/GraphicsResult';
+import FilterResultExampleTest from '@/components/repository/repository-test/results/FilterResultExampleTest';
+import ResultExampleTestList from '@/components/repository/repository-test/results/ResultExampleTestList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 export default {
-  name: 'BaseExamplesTest',
+  name: 'BaseTestResulsts',
   components: {
-    FilterExampleTest,
-    ExampleTestList,
+    GraphicsResult,
+    FilterResultExampleTest,
+    ResultExampleTestList,
   },
   props: {
     repository: {
@@ -40,6 +44,7 @@ export default {
     return {
       querySchema: {},
       query: {},
+
     };
   },
   watch: {
