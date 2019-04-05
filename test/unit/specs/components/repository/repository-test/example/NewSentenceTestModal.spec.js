@@ -11,7 +11,7 @@ import store from '@/store';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('NewExampleForm.vue', () => {
+describe('NewExampleTestForm.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
@@ -75,20 +75,20 @@ describe('NewExampleForm.vue', () => {
       });
     });
 
-    // describe('on submit', () => {
-    //   let r;
-    //   beforeEach(async () => {
-    //     r = await wrapper.vm.onSubmit();
-    //   });
+    describe('on submit', () => {
+      let r;
+      beforeEach(async () => {
+        r = await wrapper.vm.onSubmit();
+      });
 
-    //   test('return is true', () => {
-    //     expect(r).toBeTruthy();
-    //   });
+      test('return is true', () => {
+        expect(r).toBeTruthy();
+      });
 
-    //   test('created event emitted', () => {
-    //     expect(wrapper.emitted('created')).toBeDefined();
-    //   });
-    // });
+      test('created event emitted', () => {
+        expect(wrapper.emitted('created')).toBeDefined();
+      });
+    });
   });
 
   describe('fill with invalid data', () => {
