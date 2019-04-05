@@ -60,7 +60,7 @@ export default {
         });
     },
     entitiesHasFailed() {
-      return 'failed';
+      return 'false';
     },
   },
 };
