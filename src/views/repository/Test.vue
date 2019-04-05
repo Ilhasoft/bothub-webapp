@@ -40,9 +40,10 @@
               v-if="!showResults"
               :repository="repository"
               :filter-by-language="currentLanguage"/>
-            <test-results
+            <base-test-results
               v-else
-              :repository="repository" />
+              :repository="repository"
+              :filter-by-language="currentLanguage" />
           </div>
         </div>
         <div
@@ -77,7 +78,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
-import TestResults from '@/components/repository/repository-test/TestResults';
+import BaseTestResults from '@/components/repository/repository-test/BaseTestResults';
 import NewExampleTestModal from '@/components/repository/repository-test/example/NewExampleTestModal';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
@@ -93,7 +94,7 @@ export default {
     BaseExamplesTest,
     NewExampleTestModal,
     LanguagesList,
-    TestResults,
+    BaseTestResults,
   },
   extends: RepositoryBase,
   data() {
