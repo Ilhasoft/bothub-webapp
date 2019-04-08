@@ -1,8 +1,8 @@
 <template>
   <div
     :class="{ example: true,
-              'example--error': true,
-              'example--success': false,
+              'example--error': !true,
+              'example--success': !false,
   }">
     <div class="example-text">
       <div class="example-text__main">
@@ -26,8 +26,12 @@
           <span v-if="entity.label">is</span>
           <strong v-if="entity.label">{{ entity.label }}</strong>
         </b-tag>
-        <span v-if="true">[ok]</span>
-        <span v-else>[failed]</span>
+        <span
+          v-if="true"
+          class="example__entities__entitie success">[ok]</span>
+        <span
+          v-else
+          class="example__entities__entitie failed">[failed]</span>
       </div>
     </div>
     <div class="example-infos level is-mobile">
@@ -41,8 +45,8 @@
         <div class="level-item has-text-grey-light">
           confidence here
         </div>
-        <span>[ok]</span>
-        <span>[failed]</span>
+        <span class="success">[ok]</span>
+        <span class="failed">[failed]</span>
       </div>
     </div>
   </div>
@@ -92,7 +96,7 @@ export default {
     },
     failed: {
       type: String,
-      default: 'example--success',
+      default: 'example--failed',
     },
   },
   computed: {
@@ -128,6 +132,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 .example {
   $radius: 8px;
@@ -137,12 +142,12 @@ export default {
   border-radius: $radius;
   overflow: visible;
 
-  &--error {
-    border: .120rem solid red;
+  &--failed {
+    border: .120rem solid $color-danger;
   }
 
   &--success {
-    border: .120rem solid green;
+    border: .120rem solid $color-success;
   }
 
   &__entities {
@@ -191,7 +196,7 @@ export default {
   }
 
   &-entities {
-    > * {
+     >* {
       margin: 0 8px 0 0;
 
       &:last-child {
@@ -199,5 +204,13 @@ export default {
       }
     }
   }
+}
+
+.success {
+  color: $color-success;
+}
+
+.failed {
+  color: $color-danger;
 }
 </style>
