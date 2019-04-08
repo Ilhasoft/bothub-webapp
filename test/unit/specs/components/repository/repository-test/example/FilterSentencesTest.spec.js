@@ -27,7 +27,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -41,7 +41,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -55,7 +55,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -68,7 +68,7 @@ describe('TestView.vue', () => {
     });
 
     test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      expect(wrapper.emitted('queryStringFormated')).toBeDefined();
     });
   });
 });
