@@ -6,7 +6,7 @@
       class="highlighted-entity">
       <span class="highlighted-entity-before">{{ entity.before }}</span>
       <span
-        :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed}`"
+        :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
       >{{ entity.text }}</span>
     </div>
     <div class="highlighted-base">{{ text }}</div>
