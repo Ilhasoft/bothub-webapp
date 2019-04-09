@@ -1,34 +1,54 @@
 <template>
-  <layout
-    :title="currentTitle"
-    :loading="repository && repository.loading">
+  <div>
     <div class="rpstr-vw-bs">
       <div
         v-if="!repository || (repository && !repository.name && repository.loading)"
         class="rpstr-vw-bs__loading">
         <bh-loading />
       </div>
-      <bh-card
+      <div
         v-else-if="repository && !repository.fatal"
         shadow="strong"
         class="rpstr-vw-bs__card">
         <div class="rpstr-vw-bs__card__header">
-          <div class="bh-grid bh-grid--row">
-            <div class="bh-grid__item">
-              <repository-info :repository="repository" />
-            </div>
-            <div
-              :class="[
-                'bh-grid__item',
-                'bh-grid__item--grow-0',
-                'rpstr-vw-bs__card__header__mobile-navigation',
-            ]">
-              <repository-navigation :repository="repository" />
-            </div>
-          </div>
+          <router-link
+            to="/">
+            <span> < </span>
+          </router-link>
+          <repository-info
+            :repository="repository"
+            class="bh-grid__item" />
           <repository-navigation
             :repository="repository"
-            class="rpstr-vw-bs__card__header__navigation" />
+            class="rpstr-vw-bs__card__header__navigation bh-grid__item--grow-1" />
+          <div
+            :class="[
+              'bh-grid__item',
+              'bh-grid__item--grow-0',
+              'rpstr-vw-bs__card__header__mobile-navigation',
+          ]">
+            <repository-navigation :repository="repository" />
+          </div>
+          <div
+            v-if="authenticated"
+            class="bh-grid__item bh-grid__item--grow-0">
+            <bh-dropdown position="left">
+              <user-avatar
+                slot="trigger"
+                :profile="myProfile"
+                size="medium" />
+              <bh-dropdown-item @click="openMyProfile()">
+                {{ myProfile.name || '...' }}
+              </bh-dropdown-item>
+              <bh-dropdown-item
+                @click="openNewRepositoryModal()">
+                Start your bot
+              </bh-dropdown-item>
+              <bh-dropdown-item @click="logout()">
+                Logout
+              </bh-dropdown-item>
+            </bh-dropdown>
+          </div>
         </div>
         <div
           class="rpstr-vw-bs__status-bar clickable"
@@ -127,7 +147,7 @@
         <div class="rpstr-vw-bs__card__content">
           <slot />
         </div>
-      </bh-card>
+      </div>
       <div
         v-else-if="repository && repository.fatal && errorCode"
         class="rpstr-vw-bs__error">
@@ -157,12 +177,14 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
-  </layout>
+    <site-footer/>
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import Layout from '@/components/shared/Layout';
+import UserAvatar from '@/components/user/UserAvatar';
+import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import TrainModal from '@/components/repository/TrainModal';
@@ -183,13 +205,14 @@ export default {
     },
   },
   components: {
-    Layout,
+    SiteFooter,
     RepositoryInfo,
     RepositoryNavigation,
     TrainModal,
     TrainResponse,
     AnalyzeTextDrawer,
     RequestAuthorizationModal,
+    UserAvatar,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -220,6 +243,7 @@ export default {
   computed: {
     ...mapGetters([
       'authenticated',
+      'myProfile',
     ]),
     currentTitle() {
       if (this.title) {
@@ -286,6 +310,9 @@ export default {
         this.trainModalOpen = true;
       }
     },
+    openMyProfile() {
+      this.$router.push({ name: 'myProfile' });
+    },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },
@@ -309,19 +336,21 @@ export default {
 .rpstr-vw-bs {
   $navigation-height: 4rem;
   $header-height: (16rem + $navigation-height);
-  $card-width: 1200px;
+  $card-width: 100%;
+  background-color: white;
+  height: 100%;
 
-  &::before {
-    content: "";
-    display: block;
-    height: ($header-height + 4rem);
-    background-color: $color-primary;
-    margin-bottom: -($header-height);
+  // &::before {
+  //   content: "";
+  //   display: block;
+  //   height: ($header-height + 4rem);
+  //   background-color: $color-primary;
+  //   margin-bottom: -($header-height);
 
-    @media screen and (max-width: $card-width) {
-      display: none;
-    }
-  }
+  //   @media screen and (max-width: $card-width) {
+  //     display: none;
+  //   }
+  // }
 
   &__status-bar {
     background-color: $color-fake-white;
@@ -344,16 +373,19 @@ export default {
 
   &__card {
     max-width: $card-width;
-    margin: 0 auto 4rem;
+    margin: 0 auto 6rem;
 
     &__header {
       position: relative;
-      min-height: $header-height;
-      padding: 1rem 1rem $navigation-height;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      // min-height: $header-height;
+      // padding: 1rem 1rem $navigation-height;
 
       &__navigation {
         position: absolute;
-        bottom: 0;
+        bottom: 1rem;
         left: 0;
         width: 100%;
 

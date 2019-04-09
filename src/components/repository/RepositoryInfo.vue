@@ -5,7 +5,7 @@
         <router-link :to="repositoryDetailsRouterParams">
           <bh-icon-button
             :value="repositoryInfoIcon"
-            size="medium"
+            size="small"
             class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
@@ -20,16 +20,18 @@
         <router-link :to="repositoryDetailsRouterParams">
         <span class="text-color-fake-black">{{ repository.name }}</span></router-link>
       </div>
-      <div class="repository-info__info-item">
+      <!-- <div class="repository-info__info-item">
         <router-link :to="repositoryDetailsRouterParams">{{ repository.absolute_url
         || `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
-      </div>
+      </div> -->
       <div class="repository-info__info-item">
         <span>Created by</span>
-        <strong class="medium">{{ getProfile(repository.owner__nickname).name
-        || repository.owner__nickname }}</strong>
+        <strong class="medium text-color-primary-lighter">
+          {{ getProfile(repository.owner__nickname).name
+          || repository.owner__nickname }}
+        </strong>
       </div>
-      <div class="repository-info__flags">
+      <!-- <div class="repository-info__flags">
         <span
           v-for="language in repository.available_languages"
           :key="language"
@@ -41,8 +43,8 @@
             :language="language"
             :main="language == repository.language" />
         </span>
-      </div>
-      <div class="repository-info__categories">
+      </div> -->
+      <!-- <div class="repository-info__categories">
         <router-link
           v-for="category in repositoryCategoryRouterParams"
           :key="category.id"
@@ -55,7 +57,7 @@
             color="grey-light"
             class="repository-info__categories__category">{{ category.name }}</bh-badge>
         </router-link>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -120,7 +122,7 @@ export default {
   }
 
   &__big-badge {
-    $size: 6rem;
+    $size: 4rem;
 
     position: relative;
     display: block;
@@ -142,7 +144,7 @@ export default {
   &__title {
     font-size: 1.25rem;
     font-weight: $font-weight-bolder;
-    margin-bottom: .5rem;
+    margin: .3rem 0;
 
     &__bagde {
       display: none;
