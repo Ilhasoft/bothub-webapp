@@ -71,15 +71,16 @@ export default {
     display: flex;
     justify-content: center;
     overflow: hidden;
-    border-bottom: 1px solid $color-primary;
+    border-bottom: 2px solid $color-primary;
 
     a {
       position: relative;
       display: inline-flex;
-      padding: 0 1.5rem 1.25rem;
+      padding: 0 1rem 2rem;
       color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
+      left: 5rem;
 
       &:hover,
       &.router-link-exact-active {

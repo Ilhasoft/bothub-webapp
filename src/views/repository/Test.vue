@@ -133,7 +133,7 @@ export default {
   }
 
   &__content-wrapper {
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
   }
 }
