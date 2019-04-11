@@ -36,8 +36,8 @@ export default {
       links: [
         ['repository-summary', 'Summary'],
         ['repository-training', 'Training'],
-        ['repository-translate', 'Translate'],
         ['repository-test', 'Test'],
+        ['repository-translate', 'Translate'],
         ['repository-translations-status', 'Translation status'],
         ['repository-integration', 'Integration'],
         ['repository-settings', 'Settings'],
@@ -67,6 +67,8 @@ export default {
 
 
 .repository-nav {
+  $navigation-height: 2.3rem;
+
   &__desktop {
     display: flex;
     justify-content: center;
@@ -76,11 +78,23 @@ export default {
     a {
       position: relative;
       display: inline-flex;
-      padding: 0 1rem 2rem;
+      padding: 0 2em 2.3rem;
       color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
       left: 5rem;
+
+      @media screen and (max-width: 1550px) {
+        padding: 0 2rem $navigation-height;
+      }
+
+      @media screen and (max-width: 1300px) {
+        padding: 0 1.5rem $navigation-height;
+      }
+
+      @media screen and (max-width: 1200px) {
+        padding: 0 .5rem $navigation-height;
+      }
 
       &:hover,
       &.router-link-exact-active {
@@ -111,7 +125,6 @@ export default {
         }
       }
     }
-
     @media screen and (max-width: $mobile-width) {
       display: none;
     }

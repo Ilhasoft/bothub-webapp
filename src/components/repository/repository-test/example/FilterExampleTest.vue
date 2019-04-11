@@ -3,7 +3,7 @@
     <bh-field
       :errors="errors.intent"
       label=""
-      class="bh-grid__item">
+      class="bh-grid__item bh-grid__item--grow-3">
       <bh-text
         v-model="text"
         :debounce="debounceTime">
@@ -26,7 +26,7 @@
         v-model="intent"
         :data="intents || []"
         :formatters="inputFormatters"
-        placeholder="Intent" />
+        placeholder="All Intent" />
     </bh-field>
     <bh-field
       :errors="errors.label"
@@ -114,10 +114,12 @@ export default {
 
 <style lang="scss">
 .filter-sentences-test {
+  text-align: right;
+  align-items: center;
+  justify-content: center;
+
   &__text {
-    width: 5rem;
-    margin: 2rem 0 0 2rem;
-    align-self: center;
+    margin-top: 2.5rem;
   }
 }
 </style>

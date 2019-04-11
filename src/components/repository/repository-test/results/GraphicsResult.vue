@@ -111,7 +111,7 @@ export default {
 
 <style lang="scss" scoped>
 .graphics-results {
-  max-width: 100%;
-  margin:0 auto;
+  max-width: 80%;
+  margin: 0 auto;
 }
 </style>

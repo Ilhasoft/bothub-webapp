@@ -1,11 +1,13 @@
 <template>
   <div class="bh-grid">
-    <span class="repository-info__back-button">
+    <router-link
+      class="repository-info__back-button"
+      to="/home">
       <img
         src="@/assets/imgs/arrow.svg"
-        alt=""
+        alt="arrow-back"
         class="bh-grid__item repository-info__back-button__icon">
-    </span>
+    </router-link>
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
         <router-link :to="repositoryDetailsRouterParams">
@@ -93,7 +95,7 @@ export default {
   &__back-button {
     position: relative;
     align-self: center;
-    font-size: 1rem;
+
 
     &__icon {
       width: 1rem;
@@ -131,7 +133,7 @@ export default {
   &__title {
     font-size: 1.25rem;
     font-weight: $font-weight-bolder;
-    margin: .5rem 0;
+    margin: .30rem 0;
 
     &__bagde {
       display: none;

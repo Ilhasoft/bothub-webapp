@@ -8,25 +8,25 @@
     <div
       v-else-if="repository && !repository.fatal"
       shadow="strong"
-      class="rpstr-vw-bs__card">
-      <div class="rpstr-vw-bs__card__header">
+      class="rpstr-vw-bs__wrapper">
+      <div class="rpstr-vw-bs__wrapper__header">
         <repository-info
           :repository="repository"
-          class="bh-grid__item rpstr-vw-bs__card__header__info" />
+          class="bh-grid__item rpstr-vw-bs__wrapper__header__info" />
         <repository-navigation
           :repository="repository"
-          class="rpstr-vw-bs__card__header__navigation bh-grid__item--grow-1" />
+          class="rpstr-vw-bs__wrapper__header__navigation bh-grid__item--grow-1" />
         <div
           :class="[
             'bh-grid__item',
             'bh-grid__item--grow-0',
-            'rpstr-vw-bs__card__header__mobile-navigation',
+            'rpstr-vw-bs__wrapper__header__mobile-navigation',
         ]">
           <repository-navigation :repository="repository" />
         </div>
         <div
           v-if="authenticated && openMyProfile"
-          class="rpstr-vw-bs__card__header__avatar">
+          class="bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__avatar">
           <bh-dropdown position="left">
             <user-avatar
               slot="trigger"
@@ -139,7 +139,7 @@
         :slug="repository.slug"
         :default-language="repository.language"
         :available-languages="repository.available_languages" />
-      <div class="rpstr-vw-bs__card__content">
+      <div class="rpstr-vw-bs__wrapper__content">
         <slot />
       </div>
     </div>
@@ -171,12 +171,16 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
+    <new-repository-modal
+      :active="newRepositoryModalOpen"
+      @requestClose="openNewRepositoryModal()" />
     <site-footer class="rpstr-vw-bs__footer"/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
@@ -207,6 +211,7 @@ export default {
     AnalyzeTextDrawer,
     RequestAuthorizationModal,
     UserAvatar,
+    NewRepositoryModal,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -232,6 +237,7 @@ export default {
       trainResponseOpen: false,
       training: false,
       requestAuthorizationModalOpen: false,
+      newRepositoryModalOpen: false,
     };
   },
   computed: {
@@ -271,11 +277,15 @@ export default {
         );
     },
   },
+  mounted() {
+    this.updateMyProfile();
+  },
   methods: {
     ...mapActions([
       'trainRepository',
       'openLoginModal',
       'logout',
+      'updateMyProfile',
     ]),
     async train() {
       const { ownerNickname, slug } = this.$route.params;
@@ -311,6 +321,9 @@ export default {
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },
+    openNewRepositoryModal() {
+      this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
+    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$toast.open({
@@ -331,8 +344,8 @@ export default {
 .rpstr-vw-bs {
   $navigation-height: 4rem;
   $header-height: (16rem + $navigation-height);
-  $card-width: 100%;
-  background-color: white;
+  $wrapper-width: 100%;
+  background-color: $color-white;
   height: 100%;
 
   &__status-bar {
@@ -354,24 +367,22 @@ export default {
     }
   }
 
-  &__card {
+  &__wrapper {
     &__header {
       position: relative;
       display: flex;
       justify-content: space-around;
       align-items: center;
 
-    &__avatar {
-      border: .120rem solid $color-primary;
-      border-radius: 50%;
-      margin-right: 3rem;
-      margin-top: 3vh;
+      &__avatar {
+        border: .120rem solid $color-primary;
+        border-radius: 50%;
+        margin-right: 3rem;
+      }
 
-    }
-
-    &__info {
-      margin-left: 2rem;
-    }
+      &__info {
+        margin-left: 2rem;
+      }
 
       &__navigation {
         position: absolute;
@@ -398,7 +409,12 @@ export default {
       }
     }
 
-    @media screen and (max-width: $card-width) {
+    &__content {
+      max-width: 80%;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width: $wrapper-width) {
       border-radius: 0;
     }
   }
@@ -419,12 +435,12 @@ export default {
     }
   }
 
-  @media screen and (max-width: $card-width) {
+  @media screen and (max-width: $wrapper-width) {
     margin: 1rem 0;
   }
 
   &__footer {
-    margin-top: 30rem;
+    margin-top: 60vh;
   }
 }
 </style>
