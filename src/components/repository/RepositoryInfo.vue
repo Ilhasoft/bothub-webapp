@@ -90,8 +90,6 @@ export default {
 
 
 .repository-info {
-
-
   &__back-button {
     position: relative;
     align-self: center;

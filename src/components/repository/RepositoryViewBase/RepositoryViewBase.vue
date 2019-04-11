@@ -382,6 +382,7 @@ export default {
 
       &__info {
         margin-left: 2rem;
+        flex-direction: row;
       }
 
       &__navigation {
