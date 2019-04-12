@@ -94,7 +94,6 @@ export default {
     position: relative;
     align-self: center;
 
-
     &__icon {
       width: 1rem;
     }
