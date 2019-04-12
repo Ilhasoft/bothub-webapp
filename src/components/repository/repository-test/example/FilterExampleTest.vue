@@ -2,7 +2,6 @@
   <div class="filter-sentences-test bh-grid">
     <bh-field
       :errors="errors.intent"
-      label=""
       class="bh-grid__item">
       <bh-text
         v-model="text"
@@ -20,7 +19,6 @@
     </div>
     <bh-field
       :errors="errors.intent"
-      label=""
       class="bh-grid__item">
       <bh-autocomplete
         v-model="intent"
@@ -30,7 +28,6 @@
     </bh-field>
     <bh-field
       :errors="errors.label"
-      label=""
       class="bh-grid__item">
       <bh-autocomplete
         v-model="label"
@@ -40,7 +37,6 @@
     </bh-field>
     <bh-field
       :errors="errors.intent"
-      label=""
       class="bh-grid__item">
       <bh-autocomplete
         v-model="entitie"

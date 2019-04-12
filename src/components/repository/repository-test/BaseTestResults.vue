@@ -8,8 +8,7 @@
         :intents="repository.intents_list"
         :labels="repository.labels_list"
         :entities="repository.entities_list"
-        @queryStringFormated="onSearch($event)"
-      />
+        @queryStringFormated="onSearch($event)"/>
       <result-example-test-list
         :repository="repository"
         :query="query"/>
@@ -44,7 +43,6 @@ export default {
     return {
       querySchema: {},
       query: {},
-
     };
   },
   watch: {
