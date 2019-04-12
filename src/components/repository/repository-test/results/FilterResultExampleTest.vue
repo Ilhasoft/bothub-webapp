@@ -1,8 +1,7 @@
 <template>
-  <div class="search-example-test bh-grid">
+  <div class="filter-sentences-test bh-grid">
     <bh-field
       :errors="errors.intent"
-      label="Search for text:"
       class="bh-grid__item">
       <bh-text
         v-model="text"
@@ -15,9 +14,11 @@
         </div>
       </bh-text>
     </bh-field>
+    <div class="bh-grid__item filter-sentences-test__text">
+      <span>Filter by:</span>
+    </div>
     <bh-field
       :errors="errors.intent"
-      label="Search for intent:"
       class="bh-grid__item">
       <bh-autocomplete
         v-model="intent"
@@ -27,7 +28,6 @@
     </bh-field>
     <bh-field
       :errors="errors.label"
-      label="Search for labels:"
       class="bh-grid__item">
       <bh-autocomplete
         v-model="label"
@@ -37,7 +37,6 @@
     </bh-field>
     <bh-field
       :errors="errors.intent"
-      label="Search for entities:"
       class="bh-grid__item">
       <bh-autocomplete
         v-model="entitie"
@@ -54,7 +53,7 @@ import _ from 'lodash';
 
 
 export default {
-  name: 'FilterSentencesTest',
+  name: 'FilterResultExampleTest',
   props: {
     debounceTime: {
       type: Number,
@@ -108,3 +107,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.filter-sentences-test {
+  &__text {
+    width: 5rem;
+    margin: 2rem 0 0 2rem;
+    align-self: center;
+  }
+}
+</style>

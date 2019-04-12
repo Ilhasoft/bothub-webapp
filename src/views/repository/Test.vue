@@ -22,15 +22,29 @@
                 class="test__content-header__buttons"
                 primary
                 @click="addTestSentence()">Add test sentence</bh-button>
-                <!-- <bh-button
+              <bh-button
+                v-if="!showResults"
                 class="test__content-header__buttons"
-                primary>Run your test</bh-button> -->
+                primary
+                @click="showResults=!showResults">Check test results</bh-button>
+              <bh-button
+                v-else
+                class="test__content-header__buttons"
+                primary
+                @click="showResults=!showResults">Back to sentences</bh-button>
             </div>
           </div>
           <hr>
-          <sentences-test
-            :repository="repository"
-            :filter-by-language="currentLanguage"/>
+          <div class="test__content-wrapper">
+            <base-examples-test
+              v-if="!showResults"
+              :repository="repository"
+              :filter-by-language="currentLanguage"/>
+            <base-test-results
+              v-else
+              :repository="repository"
+              :filter-by-language="currentLanguage" />
+          </div>
         </div>
         <div
           v-else
@@ -54,17 +68,18 @@
         </div>
       </div>
     </div>
-    <new-sentence-test-modal
+    <new-example-test-modal
       :repository="repository"
       :open.sync="addTestSentenceModalOpen"
-      @created="onExampleTestCreated()"/>
+      @created="onExampleTestCreated()" />
   </repository-view-base>
 </template>
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import SentencesTest from '@/components/repository/test-sentences/SentencesTest';
-import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
+import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
+import BaseTestResults from '@/components/repository/repository-test/BaseTestResults';
+import NewExampleTestModal from '@/components/repository/repository-test/example/NewExampleTestModal';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 
@@ -76,20 +91,23 @@ export default {
   components: {
     RepositoryViewBase,
     LoginForm,
-    SentencesTest,
-    NewSentenceTestModal,
+    BaseExamplesTest,
+    NewExampleTestModal,
     LanguagesList,
+    BaseTestResults,
   },
   extends: RepositoryBase,
   data() {
     return {
       addTestSentenceModalOpen: false,
       currentLanguage: '',
+      showResults: false,
     };
   },
   methods: {
     addTestSentence() {
       this.addTestSentenceModalOpen = true;
+      this.showResults = false;
     },
     onExampleTestCreated() {
       this.updateRepository(true);
@@ -112,6 +130,11 @@ export default {
     &__title {
       margin-top: 2rem;
     }
+  }
+
+  &__content-wrapper {
+    max-width: 90%;
+    margin: 0 auto;
   }
 }
 </style>

@@ -1,5 +1,9 @@
 <template>
-  <div class="example">
+  <div
+    :class="{ example: true,
+              'example--error': !true,
+              'example--success': !false,
+  }">
     <div class="example-text">
       <div class="example-text__main">
         <highlighted-text
@@ -7,47 +11,28 @@
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
-      <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
-        class="level-right">
-        <div class="level-item">
-          <a
-            :href="`#delete-example-${id}`"
-            class="has-text-danger"
-            @click.prevent="editTestSentenceModalOpen = !editTestSentenceModalOpen">
-            <b-icon
-              icon="pen"
-              class="text-color-grey-dark example__icon" />
-          </a>
-        </div>
-      </div>
-      <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
-        class="level-right">
-        <div class="level-item">
-          <a
-            :href="`#delete-example-${id}`"
-            class="has-text-danger"
-            @click.prevent="deleteThisExample()">
-            <b-icon
-              icon="delete"
-              class="text-color-grey-dark example__icon" />
-          </a>
-        </div>
-      </div>
     </div>
     <div
       v-if="entitiesList.length > 0"
-      class="example-entities">
-      <b-tag
+      class="bh-grid example__entities">
+      <div
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="entity.class"
-        rounded>
-        <strong>{{ entity.value }}</strong>
-        <span v-if="entity.label">is</span>
-        <strong v-if="entity.label">{{ entity.label }}</strong>
-      </b-tag>
+        class="example__entities__entitie">
+        <b-tag
+          :class="`${entity.class} ${failed}`"
+          rounded>
+          <strong>{{ entity.value }}</strong>
+          <span v-if="entity.label">is</span>
+          <strong v-if="entity.label">{{ entity.label }}</strong>
+        </b-tag>
+        <span
+          v-if="true"
+          class="example__entities__entitie success">[ok]</span>
+        <span
+          v-else
+          class="example__entities__entitie failed">[failed]</span>
+      </div>
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -58,35 +43,27 @@
           <span>{{ intent }}</span>
         </div>
         <div class="level-item has-text-grey-light">
-          {{ created_at | moment('from') }}
+          confidence here
         </div>
+        <span class="success">[ok]</span>
+        <span class="failed">[failed]</span>
       </div>
     </div>
-    <edit-sentence-test-modal
-      :repository="repository"
-      :open.sync="editTestSentenceModalOpen"
-      :text-to-edit="text"
-      :intent-to-edit="intent"
-      :entities-to-edit="entities"
-      :sentence-id="id" />
   </div>
 </template>
 
 <script>
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import { mapActions } from 'vuex';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import EditSentenceTestModal from '@/components/repository/test-sentences/sentences/EditSentenceTestModal';
 
 
 export default {
-  name: 'SentencesTestItem',
+  name: 'ResultExampleTestItem',
   components: {
     HighlightedText,
     LanguageBadge,
-    EditSentenceTestModal,
   },
   props: {
     id: {
@@ -117,12 +94,10 @@ export default {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
     },
-  },
-  data() {
-    return {
-      deleteDialog: null,
-      editTestSentenceModalOpen: false,
-    };
+    failed: {
+      type: String,
+      default: 'example--failed',
+    },
   },
   computed: {
     entitiesList() {
@@ -135,9 +110,6 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'deleteExampleTest',
-    ]),
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
@@ -154,30 +126,13 @@ export default {
         return current;
       }, 'unlabeled');
     },
-    deleteThisExample() {
-      return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$dialog.confirm({
-          message: 'Are you sure? The example will be deleted.',
-          confirmText: 'Delete',
-          type: 'is-danger',
-          onConfirm: async () => {
-            await this.deleteExampleTest({ id: this.id });
-            this.$emit('deleted');
-            resolve();
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
-          },
-        });
-      });
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 .example {
   $radius: 8px;
@@ -186,6 +141,20 @@ export default {
   background-color: $white-bis;
   border-radius: $radius;
   overflow: visible;
+
+  &--failed {
+    border: .120rem solid $color-danger;
+  }
+
+  &--success {
+    border: .120rem solid $color-success;
+  }
+
+  &__entities {
+    &__entitie {
+      margin: 0 .5rem;
+    }
+  }
 
   &__icon {
     margin: 0 .5rem;
@@ -227,7 +196,7 @@ export default {
   }
 
   &-entities {
-    > * {
+     >* {
       margin: 0 8px 0 0;
 
       &:last-child {
@@ -235,5 +204,13 @@ export default {
       }
     }
   }
+}
+
+.success {
+  color: $color-success;
+}
+
+.failed {
+  color: $color-danger;
 }
 </style>

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseExamplesTest.vue renders correctly 1`] = `
+<div class="bh-grid bh-grid--column">
+  <div class="bh-grid">
+    <h1>Test Sentences</h1>
+  </div>
+  <filter-example-test-stub debouncetime="750" intents="" labels=""></filter-example-test-stub>
+  <example-test-list-stub repository="[object Object]" query="[object Object]"></example-test-list-stub>
+</div>
+`;

@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 
-import NewSentenceTestModal from '@/components/repository/test-sentences/sentences/NewSentenceTestModal';
+import EditExampleTestModal from '@/components/repository/repository-test/example/EditExampleTestModal';
 import store from '@/store';
 
 
@@ -17,7 +17,7 @@ describe('NewExampleForm.vue', () => {
     store.replaceState({
       Auth: {},
     });
-    wrapper = shallowMount(NewSentenceTestModal, {
+    wrapper = shallowMount(EditExampleTestModal, {
       localVue,
       propsData: {
         repository: {

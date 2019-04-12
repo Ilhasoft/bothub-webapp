@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import FilterSentencesTest from '@/components/repository/test-sentences/sentences/FilterSentencesTest';
+import FilterExampleTest from '@/components/repository/repository-test/example/FilterExampleTest';
 import store from '@/store';
 import _ from 'lodash';
 import BH from 'bh';
@@ -11,7 +11,7 @@ localVue.use(BH);
 describe('TestView.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(FilterSentencesTest, { localVue, store });
+    wrapper = shallowMount(FilterExampleTest, { localVue, store });
   });
 
   test('renders correctly', () => {
@@ -27,7 +27,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -41,7 +41,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -55,7 +55,7 @@ describe('TestView.vue', () => {
 
     test('valid queryStringFormated emit', () => {
       _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
       }, 500);
     });
   });
@@ -68,7 +68,7 @@ describe('TestView.vue', () => {
     });
 
     test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeTruthy();
+      expect(wrapper.emitted('queryStringFormated')).toBeDefined();
     });
   });
 });
