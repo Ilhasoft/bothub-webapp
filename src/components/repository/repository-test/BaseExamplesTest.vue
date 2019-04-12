@@ -7,8 +7,7 @@
       :intents="repository.intents_list"
       :labels="repository.labels_list"
       :entities="repository.entities_list"
-      @queryStringFormated="onSearch($event)"
-    />
+      @queryStringFormated="onSearch($event)"/>
     <example-test-list
       :repository="repository"
       :query="query"/>

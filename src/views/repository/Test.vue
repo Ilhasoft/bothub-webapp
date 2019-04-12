@@ -26,12 +26,12 @@
                 v-if="!showResults"
                 class="test__content-header__buttons"
                 primary
-                @click="showResults = !showResults" >Check test results</bh-button>
+                @click="showResults=!showResults">Check test results</bh-button>
               <bh-button
                 v-else
                 class="test__content-header__buttons"
                 primary
-                @click="showResults = !showResults" >Back to sentences </bh-button>
+                @click="showResults=!showResults">Back to sentences</bh-button>
             </div>
           </div>
           <hr>
