@@ -112,10 +112,10 @@ export default {
 .filter-sentences-test {
   text-align: right;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   &__text {
-    margin-top: 2.5rem;
+    margin-top: .5rem;
   }
 }
 </style>

@@ -115,7 +115,7 @@ export default {
   justify-content: center;
 
   &__text {
-    margin-top: 2.5rem;
+    margin-top: .5rem;
   }
 }
 </style>
