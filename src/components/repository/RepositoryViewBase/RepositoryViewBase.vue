@@ -1,5 +1,7 @@
 <template>
-  <div class="rpstr-vw-bs">
+  <div
+    id="rpstr-vw-bs"
+    class="rpstr-vw-bs">
     <div
       v-if="!repository || (repository && !repository.name && repository.loading)"
       class="rpstr-vw-bs__loading">

@@ -10,6 +10,7 @@
           <div class="test__content-header">
             <h2 class="test__content-header__title">Test your data set</h2>
             <div class="test__content-header__language-select">
+              <side-bar/>
               <languages-list
                 v-model="currentLanguage"
                 title="Select your language"
@@ -82,6 +83,7 @@ import BaseTestResults from '@/components/repository/repository-test/BaseTestRes
 import NewExampleTestModal from '@/components/repository/repository-test/example/NewExampleTestModal';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
+import SideBar from '@/components/shared/SideBar';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -95,6 +97,7 @@ export default {
     NewExampleTestModal,
     LanguagesList,
     BaseTestResults,
+    SideBar,
   },
   extends: RepositoryBase,
   data() {
