@@ -1,11 +1,19 @@
 <template>
   <div class="bh-grid">
+    <router-link
+      class="repository-info__back-button"
+      to="/home">
+      <img
+        src="@/assets/imgs/arrow.svg"
+        alt="arrow-back"
+        class="bh-grid__item repository-info__back-button__icon">
+    </router-link>
     <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
       <div class="repository-info__big-badge">
         <router-link :to="repositoryDetailsRouterParams">
           <bh-icon-button
             :value="repositoryInfoIcon"
-            size="medium"
+            size="small"
             class="repository-info__big-badge__icon" /></router-link>
       </div>
     </div>
@@ -21,40 +29,11 @@
         <span class="text-color-fake-black">{{ repository.name }}</span></router-link>
       </div>
       <div class="repository-info__info-item">
-        <router-link :to="repositoryDetailsRouterParams">{{ repository.absolute_url
-        || `/${repository.owner__nickname}/${repository.slug}/` }}</router-link>
-      </div>
-      <div class="repository-info__info-item">
         <span>Created by</span>
-        <strong class="medium">{{ getProfile(repository.owner__nickname).name
-        || repository.owner__nickname }}</strong>
-      </div>
-      <div class="repository-info__flags">
-        <span
-          v-for="language in repository.available_languages"
-          :key="language"
-          :class="{
-            'repository-info__flags__flag': true,
-            'repository-info__flags__flag--main': language == repository.language,
-        }">
-          <language-badge
-            :language="language"
-            :main="language == repository.language" />
-        </span>
-      </div>
-      <div class="repository-info__categories">
-        <router-link
-          v-for="category in repositoryCategoryRouterParams"
-          :key="category.id"
-          :to="{
-            path: '/home',
-            query: { category: category.id },
-        }">
-          <bh-badge
-            size="small"
-            color="grey-light"
-            class="repository-info__categories__category">{{ category.name }}</bh-badge>
-        </router-link>
+        <strong class="medium text-color-primary-lighter">
+          {{ getProfile(repository.owner__nickname).name
+          || repository.owner__nickname }}
+        </strong>
       </div>
     </div>
   </div>
@@ -111,6 +90,15 @@ export default {
 
 
 .repository-info {
+  &__back-button {
+    position: relative;
+    align-self: center;
+
+    &__icon {
+      width: 1rem;
+    }
+  }
+
   &__big-badge-wrapper {
     display: block;
 
@@ -120,7 +108,7 @@ export default {
   }
 
   &__big-badge {
-    $size: 6rem;
+    $size: 4rem;
 
     position: relative;
     display: block;
@@ -142,7 +130,7 @@ export default {
   &__title {
     font-size: 1.25rem;
     font-weight: $font-weight-bolder;
-    margin-bottom: .5rem;
+    margin: .30rem 0;
 
     &__bagde {
       display: none;
