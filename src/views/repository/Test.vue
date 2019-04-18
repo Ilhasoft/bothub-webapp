@@ -19,18 +19,18 @@
           </div>
           <div class="test__navigation">
             <a
-              :class="{'active': !showRunTest}"
-              @click="changeNavigatior(false)">Test sentences</a>
-            <a
-              :class="{'active': showRunTest}"
-              @click="changeNavigatior(true)">Run test</a>
+              v-for="(name, i) in links"
+              :key="i"
+              :class="{'active': i === currentTabSelected}"
+              @click="setCurrentTab(i)">{{ name }}</a>
           </div>
           <div class="test__content-wrapper">
             <base-examples-test
-              v-if="!showRunTest"
+              v-if="currentTabSelected === 0"
               :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
+            <base-test-versions v-else-if="currentTabSelected === 1" />
             <base-test-results
               v-else
               :repository="repository"
@@ -66,6 +66,7 @@
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
 import BaseTestResults from '@/components/repository/repository-test/BaseTestResults';
+import BaseTestVersions from '@/components/repository/repository-test/BaseTestVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 
@@ -80,14 +81,15 @@ export default {
     BaseExamplesTest,
     LanguagesList,
     BaseTestResults,
+    BaseTestVersions,
   },
   extends: RepositoryBase,
   data() {
     return {
-
       currentLanguage: '',
       showRunTest: false,
-
+      links: ['Test sentences', 'Tests list', 'Test results'],
+      currentTabSelected: 0,
     };
   },
   methods: {
@@ -97,6 +99,9 @@ export default {
     },
     changeNavigatior(value) {
       this.showRunTest = value;
+    },
+    setCurrentTab(value) {
+      this.currentTabSelected = value;
     },
   },
 };
