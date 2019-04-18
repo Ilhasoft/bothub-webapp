@@ -3,6 +3,5 @@
 exports[`TestView.vue renders correctly 1`] = `
 <repository-view-base-stub>
   <!---->
-  <new-example-test-modal-stub></new-example-test-modal-stub>
 </repository-view-base-stub>
 `;
