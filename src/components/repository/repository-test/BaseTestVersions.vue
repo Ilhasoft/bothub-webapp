@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import VersionTestList from '@/components/repository/repository-test/versions/VersionTestList';
+import VersionTestList from '@/components/repository/repository-test/versions/VersionTestItem';
 
 
 export default {
@@ -28,6 +28,7 @@ export default {
   &__btn {
     align-self: center;
     margin: 1rem;
+    left: .75rem;
   }
 }
 </style>
