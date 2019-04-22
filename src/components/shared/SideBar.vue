@@ -11,19 +11,30 @@
             size="small"
             class="sidenav__repository-info__big-badge__icon" />
         </div>
-        <div>
-          <p>{{ repository.name }}</p>
-          <p>{{ repository.name }}</p>
+        <div class="sidenav__repository-info__text-info">
+          <strong>{{ repository.name }}</strong>
+          <p>
+            created by <strong class="text-color-primary">{{ repository.owner__nickname }}</strong>
+          </p>
         </div>
       </div>
-      <a
-        href="javascript:void(0)"
-        class="sidenav__closebtn"
-        @click="closeNav()">&times;</a>
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <div>
+        <button
+          href="javascript:void(0)"
+          class="sidenav__closebtn"
+          @click="closeNav()">&times;</button>
+        <a href="#">Train</a>
+        <a href="#">Translate</a>
+        <a href="#">Inbox</a>
+        <a href="#">Integrations</a>
+        <a href="#">Settings</a>
+      </div>
+      <div class="sidenav__profile-menu">
+        <a href="#">Inbox</a>
+        <a href="#">Integrations</a>
+        <a href="#">Settings</a>
+      </div>
+
     </div>
   </div>
 </template>
@@ -54,7 +65,7 @@ export default {
   },
   methods: {
     openNav() {
-      document.getElementById('mySidenav').style.width = '250px';
+      document.getElementById('mySidenav').style.width = '280px';
     },
     closeNav() {
       document.getElementById('mySidenav').style.width = '0';
@@ -76,7 +87,7 @@ export default {
   background-color: $color-fake-white;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 5rem;
+  padding-top: 2rem;
 
   &__repository-info {
     display: flex;
@@ -101,18 +112,26 @@ export default {
         color: white;
       }
     }
+
+    &__text-info {
+      p {
+        text-align: left;
+        margin: 0px;
+        font-size: 1rem;
+      }
+    }
   }
 
   a {
-    padding: 8px 8px 8px 32px;
+    padding: 15px 8px 15px 32px;
     text-decoration: none;
     border-bottom: 1px solid $color-grey;
-    color: #818181;
+    color: black;
     display: block;
     transition: 0.3s;
 
-    &:first-child {
-      border-bottom: 0px;
+    &:last-child {
+      border-bottom: 1px solid #009688;
     }
 
     &:hover {
@@ -121,12 +140,21 @@ export default {
   }
 
   &__closebtn {
+      border-bottom: 15px;
       position: absolute;
       top: 0;
       right: 25px;
       font-size: 36px;
       margin-left: 50px;
+      border:none;
+      background-color: $color-fake-white;
     }
+
+  &__profile-menu {
+    a:last-child {
+      border-bottom: 1px solid $color-grey;
+    }
+  }
 }
 
 @media screen and (max-height: 450px) {
