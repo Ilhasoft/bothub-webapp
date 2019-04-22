@@ -228,6 +228,7 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
+
       if (this.$refs.entitiesInput.clearEntityForm) {
         this.$refs.entitiesInput.clearEntityForm();
       }
@@ -238,6 +239,10 @@ export default {
           ...this.data,
         });
 
+        if (!this.repository.intents_list.includes(this.intent)) {
+          throw new Error('Intent MUST match existing intents for training.');
+        }
+
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -246,6 +251,8 @@ export default {
         this.setUpdateRepository(true);
         return true;
       } catch (error) {
+        this.errors.intent = [error.message];
+
         /* istanbul ignore next */
         const data = error.response && error.response.data;
         /* istanbul ignore next */
