@@ -15,9 +15,10 @@
         </div>
         <div class="version-test-item__wrapper__links">
           <a
-            href="">Load results /</a>
+            href="">Load results</a>
+          <span>/</span>
           <a
-            href="">Dowload</a>
+            href="">Download</a>
         </div>
       </div>
     </bh-card>

@@ -147,7 +147,7 @@ export default {
   }
 
   &--success {
-    border: .120rem solid $color-success;
+    border: 2px solid $color-success;
   }
 
   &__entities {
