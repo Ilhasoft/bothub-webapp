@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -14,7 +14,7 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 `;
 
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -27,7 +27,7 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 `;
 
 exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -40,7 +40,7 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 `;
 
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
       <repository-info-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info"></repository-info-stub>
@@ -51,7 +51,8 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
       <!---->
     </div>
     <div class="rpstr-vw-bs__status-bar clickable">
-      <div class="bh-grid bh-grid--space-between">
+      <div class="rpstr-vw-bs__status-bar__responsive bh-grid bh-grid--space-between">
+        <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
         <div class="bh-grid__item">
           <div class="bh-grid text-color-grey-dark">
             <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">

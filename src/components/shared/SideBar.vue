@@ -1,6 +1,13 @@
 <template>
   <div>
-    <button @click="openNav()">activeeeeeee</button>
+    <div class="sidenav__button-open">
+      <bh-icon-button
+        class="sidenav__button-open__icon"
+        value="botinho"
+        size="small"
+        @click="openNav()"
+      />
+    </div>
     <div
       id="mySidenav"
       class="sidenav">
@@ -23,11 +30,11 @@
           href="javascript:void(0)"
           class="sidenav__closebtn"
           @click="closeNav()">&times;</button>
-        <a href="#">Train</a>
-        <a href="#">Translate</a>
-        <a href="#">Inbox</a>
-        <a href="#">Integrations</a>
-        <a href="#">Settings</a>
+        <router-link
+          v-for="([name, label], i) in repositoryLinks"
+          :key="i"
+          :to="name"> {{ label }}
+        </router-link>
       </div>
       <div class="sidenav__profile-menu">
         <a href="#">Inbox</a>
@@ -53,6 +60,19 @@ export default {
       type: Object,
       default: null,
     },
+  },
+  data() {
+    return {
+      repositoryLinks: [
+        ['summary', 'Summary'],
+        ['training', 'Training'],
+        ['test', 'Test'],
+        ['translate', 'Translate'],
+        ['translations', 'Translation status'],
+        ['integration', 'Integration'],
+        ['settings', 'Settings'],
+      ],
+    };
   },
   computed: {
     ...mapGetters([
@@ -87,7 +107,26 @@ export default {
   background-color: $color-fake-white;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 2rem;
+
+  &__button-open {
+    margin: 1rem;
+    $size: 3rem;
+    position: relative;
+    display: block;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: #009688;
+    overflow: hidden;
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+  }
 
   &__repository-info {
     display: flex;
@@ -114,8 +153,8 @@ export default {
     }
 
     &__text-info {
+      text-align: left;
       p {
-        text-align: left;
         margin: 0px;
         font-size: 1rem;
       }
@@ -123,19 +162,20 @@ export default {
   }
 
   a {
-    padding: 15px 8px 15px 32px;
+    padding: 1rem 1rem;
     text-decoration: none;
     border-bottom: 1px solid $color-grey;
     color: black;
     display: block;
     transition: 0.3s;
+    text-align: center;
 
     &:last-child {
       border-bottom: 1px solid #009688;
     }
 
     &:hover {
-      color: #f1f1f1;
+      color: #009688;
     }
   }
 
@@ -143,7 +183,7 @@ export default {
       border-bottom: 15px;
       position: absolute;
       top: 0;
-      right: 25px;
+      right: .05rem;
       font-size: 36px;
       margin-left: 50px;
       border:none;

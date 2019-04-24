@@ -6,19 +6,6 @@
         :key="i"
         :to="toFactory(name)">{{ label }}</router-link>
     </div>
-    <div class="repository-nav__mobile">
-      <bh-dropdown position="left">
-        <bh-icon
-          slot="trigger"
-          value="dots-vertical"
-          class="clickable text-color-primary"
-          size="normal" />
-        <bh-dropdown-item
-          v-for="([name, label], i) in links"
-          :key="i"
-          @click="goTo(name)">{{ label }}</bh-dropdown-item>
-      </bh-dropdown>
-    </div>
   </div>
 </template>
 
@@ -127,14 +114,6 @@ export default {
     }
     @media screen and (max-width: $mobile-width) {
       display: none;
-    }
-  }
-
-  &__mobile {
-    display: none;
-
-    @media screen and (max-width: $mobile-width) {
-      display: block;
     }
   }
 }

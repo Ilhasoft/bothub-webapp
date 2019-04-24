@@ -50,7 +50,10 @@
       <div
         class="rpstr-vw-bs__status-bar clickable"
         @click="onStatusBarClick()">
-        <div class="bh-grid bh-grid--space-between">
+        <div class="rpstr-vw-bs__status-bar__responsive bh-grid bh-grid--space-between">
+          <side-bar-navigation
+            :repository="repository"
+            class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"/>
           <div class="bh-grid__item">
             <div class="bh-grid text-color-grey-dark">
               <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
@@ -191,6 +194,7 @@ import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import SideBarNavigation from '@/components/shared/SideBar';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -214,6 +218,7 @@ export default {
     RequestAuthorizationModal,
     UserAvatar,
     NewRepositoryModal,
+    SideBarNavigation,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -345,6 +350,7 @@ export default {
 
 .rpstr-vw-bs {
   $navigation-height: 4rem;
+  $medium-screen: 1035px;
   $header-height: (16rem + $navigation-height);
   $wrapper-width: 100%;
   background-color: $color-white;
@@ -353,6 +359,12 @@ export default {
   &__status-bar {
     background-color: $color-fake-white;
     padding: 0 1.5rem;
+
+    &__responsive {
+      @media screen and (max-width: $medium-screen) {
+
+      }
+    }
 
     &__icons-align {
       display: flex;
@@ -376,15 +388,35 @@ export default {
       justify-content: space-around;
       align-items: center;
 
+      @media screen and (max-width: $medium-screen) {
+        display: none;
+      }
+
       &__avatar {
         border: .120rem solid $color-primary;
         border-radius: 50%;
         margin-right: 3rem;
+
+        @media screen and (max-width: $medium-screen) {
+          display: none;
+        }
       }
 
       &__info {
         margin-left: 2rem;
         flex-direction: row;
+
+        @media screen and (max-width: $medium-screen) {
+          display: none;
+        }
+
+
+        &--mobile {
+          display: none;
+          @media screen and (max-width: $medium-screen) {
+            display: inline;
+          }
+        }
       }
 
       &__navigation {
@@ -393,7 +425,7 @@ export default {
         left: 0;
         width: 100%;
 
-        @media screen and (max-width: $mobile-width) {
+        @media screen and (max-width: $medium-screen) {
           display: none;
         }
       }
