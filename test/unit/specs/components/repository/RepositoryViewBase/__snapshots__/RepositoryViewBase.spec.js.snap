@@ -51,26 +51,23 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
       <!---->
     </div>
     <div class="rpstr-vw-bs__status-bar clickable">
-      <div class="rpstr-vw-bs__status-bar__responsive bh-grid bh-grid--space-between">
+      <div class="rpstr-vw-bs__status-bar bh-grid">
         <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
-        <div class="bh-grid__item">
-          <div class="bh-grid text-color-grey-dark">
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon-stub value="language"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-                0 languages</span>
-            </div>
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon-stub value="sentence"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-                0 sentences</span>
-            </div>
+        <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
+          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+            <bh-icon-stub value="language" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+              0</span> <span class="hide-mobile">languages</span>
           </div>
+          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+            <bh-icon-stub value="sentence" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+              0</span> <span class="hide-mobile">sentences</span>
+          </div>
+          <div class="gap"></div>
         </div>
-        <div class="bh-grid__item">
-          <div class="bh-grid">
-            <div class="bh-grid__item">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
-              </div>
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
+              <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
             </div>
           </div>
         </div>

@@ -48,93 +48,99 @@
         </div>
       </div>
       <div
-        class="rpstr-vw-bs__status-bar clickable"
-        @click="onStatusBarClick()">
-        <div class="rpstr-vw-bs__status-bar__responsive bh-grid bh-grid--space-between">
+        class="rpstr-vw-bs__status-bar clickable">
+        <div class="rpstr-vw-bs__status-bar bh-grid">
           <side-bar-navigation
             :repository="repository"
             class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"/>
-          <div class="bh-grid__item">
-            <div class="bh-grid text-color-grey-dark">
-              <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-                <bh-icon value="language" />
-                <span class="rpstr-vw-bs__status-bar__text-information">
-                  {{ repository.available_languages.length }} languages</span>
-              </div>
-              <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-                <bh-icon value="sentence" />
-                <span class="rpstr-vw-bs__status-bar__text-information">
-                  {{ repository.examples__count }} sentences</span>
+          <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
+            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+              <bh-icon
+                class="rpstr-vw-bs__status-bar__icons-align--size"
+                value="language" />
+              <span class="rpstr-vw-bs__status-bar__text-information">
+                {{ repository.available_languages.length }}</span>
+              <span class="hide-mobile">languages</span>
+            </div>
+            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+              <bh-icon
+                class="rpstr-vw-bs__status-bar__icons-align--size"
+                value="sentence" />
+              <span class="rpstr-vw-bs__status-bar__text-information">
+                {{ repository.examples__count }}</span>
+              <span class="hide-mobile">sentences</span>
+            </div>
+            <div class="gap"/>
+          </div>
+          <div
+            v-if="authenticated && repository.authorization.can_write"
+            class="bh-grid rpstr-vw-bs__status-bar__repo-info">
+            <div
+              v-if="warningsCount > 0"
+              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
+              <bh-icon
+                class="rpstr-vw-bs__status-bar__icons-align--size"
+                value="warning" />
+              <span class="rpstr-vw-bs__status-bar__text-information">
+                {{ warningsCount }}
+              </span>
+              <span class="hide-mobile">warnings</span>
+            </div>
+
+            <div
+              v-if="requirementsCount > 0"
+              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
+              <bh-icon
+                class="rpstr-vw-bs__status-bar__icons-align--size"
+                value="close-circle" />
+              <span class="rpstr-vw-bs__status-bar__text-information">
+                {{ requirementsCount }}</span>
+              <span class="hide-mobile">requirements missed</span>
+            </div>
+            <div
+              v-if="!repository.ready_for_train"
+              class="text-color-primary bh-grid__item rpstr-vw-bs__status-bar__icons-align">
+              <bh-icon
+                class="rpstr-vw-bs__status-bar__icons-align--size"
+                value="botinho" />
+              <span class="rpstr-vw-bs__status-bar__text-information hide-mobile">
+                Your bot is ready to be trained</span>
+            </div>
+          </div>
+          <div
+            v-else-if="authenticated && repository.available_request_authorization"
+            class="bh-grid">
+            <div class="bh-grid__item">
+              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
+                <bh-icon />
+                <span
+                  class="rpstr-vw-bs__status-bar__text-information">Request Authorization</span>
               </div>
             </div>
           </div>
-          <div class="bh-grid__item">
-            <div
-              v-if="authenticated && repository.authorization.can_write"
-              class="bh-grid">
-              <div
-                v-if="warningsCount > 0"
-                class="text-color-grey-dark bh-grid__item">
-                <div class="rpstr-vw-bs__status-bar__icons-align">
-                  <bh-icon value="warning" />
-                  <span class="rpstr-vw-bs__status-bar__text-information">
-                    {{ warningsCount }} warnings</span>
-                </div>
-              </div>
-              <div
-                v-if="requirementsCount > 0"
-                class="text-color-grey-dark bh-grid__item">
-                <div class="rpstr-vw-bs__status-bar__icons-align">
-                  <bh-icon value="close-circle" />
-                  <span class="rpstr-vw-bs__status-bar__text-information">
-                    {{ requirementsCount }} requirements missed</span>
-                </div>
-              </div>
-              <div
-                v-if="repository.ready_for_train"
-                class="bh-grid__item">
-                <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                  <bh-icon value="botinho" />
-                  <span class="rpstr-vw-bs__status-bar__text-information">
-                    Your bot is ready to be trained</span>
-                </div>
+          <div
+            v-else-if="authenticated
+              && repository.request_authorization
+            && !repository.request_authorization.approved_by"
+            class="bh-grid">
+            <div class="bh-grid__item">
+              <span class="text-color-grey-dark">Authorization Requested</span>
+            </div>
+          </div>
+          <div
+            v-else-if="!authenticated"
+            class="bh-grid">
+            <div class="bh-grid__item">
+              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
+                <bh-icon value="account" />
+                <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
               </div>
             </div>
-            <div
-              v-else-if="authenticated && repository.available_request_authorization"
-              class="bh-grid">
-              <div class="bh-grid__item">
-                <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                  <bh-icon />
-                  <span
-                    class="rpstr-vw-bs__status-bar__text-information">Request Authorization</span>
-                </div>
-              </div>
-            </div>
-            <div
-              v-else-if="authenticated
-                && repository.request_authorization
-              && !repository.request_authorization.approved_by"
-              class="bh-grid">
-              <div class="bh-grid__item">
-                <span class="text-color-grey-dark">Authorization Requested</span>
-              </div>
-            </div>
-            <div
-              v-else-if="!authenticated"
-              class="bh-grid">
-              <div class="bh-grid__item">
-                <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                  <bh-icon value="account" />
-                  <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
-                </div>
-              </div>
-            </div>
-            <div
-              v-else
-              class="bh-grid">
-              <div class="bh-grid__item">&nbsp;</div>
-            </div>
+          </div>
+          <div
+            v-else
+            class="bh-grid">
+            <div class="bh-grid__item">&nbsp;</div>
           </div>
         </div>
       </div>
@@ -311,17 +317,17 @@ export default {
       this.training = false;
       await this.updateRepository(false);
     },
-    onStatusBarClick() {
-      if (!this.authenticated) {
-        this.openLoginModal();
-      }
-      if (this.authenticated && this.repository.available_request_authorization) {
-        this.openRequestAuthorizationModal();
-      }
-      if (this.authenticated && this.repository.authorization.can_write) {
-        this.trainModalOpen = true;
-      }
-    },
+    // onStatusBarClick() {
+    //   if (!this.authenticated) {
+    //     this.openLoginModal();
+    //   }
+    //   if (this.authenticated && this.repository.available_request_authorization) {
+    //     this.openRequestAuthorizationModal();
+    //   }
+    //   if (this.authenticated && this.repository.authorization.can_write) {
+    //     this.trainModalOpen = true;
+    //   }
+    // },
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });
     },
@@ -356,19 +362,37 @@ export default {
   background-color: $color-white;
   height: 100%;
 
+
   &__status-bar {
     background-color: $color-fake-white;
     padding: 0 1.5rem;
+    justify-content: space-between;
+    flex-direction: row;
 
-    &__responsive {
       @media screen and (max-width: $medium-screen) {
+        justify-content: space-around;
+      }
 
+    &__repo-info {
+       @media screen and (max-width: $medium-screen) {
+        flex-grow: 1;
+        justify-content: space-between;
+        flex-direction: row;
       }
     }
 
     &__icons-align {
       display: flex;
       align-items: center;
+      justify-content: center;
+      flex-grow: 0;
+
+      &--size {
+        @media screen and (max-width: $medium-screen) {
+          height: 1.5rem;
+          width: 1.5rem;
+        }
+      }
     }
 
     &__text-information {
@@ -387,6 +411,7 @@ export default {
       display: flex;
       justify-content: space-around;
       align-items: center;
+      margin: 0px;
 
       @media screen and (max-width: $medium-screen) {
         display: none;
@@ -415,6 +440,8 @@ export default {
           display: none;
           @media screen and (max-width: $medium-screen) {
             display: inline;
+            flex-grow: 0;
+            margin:0px;
           }
         }
       }
@@ -476,6 +503,12 @@ export default {
 
   &__footer {
     margin-top: 60vh;
+  }
+}
+
+.hide-mobile {
+  @media screen and (max-width: 1035px) {
+    display: none;
   }
 }
 </style>
