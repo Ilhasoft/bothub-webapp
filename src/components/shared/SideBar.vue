@@ -33,7 +33,7 @@
         <router-link
           v-for="([name, label], i) in repositoryLinks"
           :key="i"
-          :to="name"> {{ label }}
+          :to="toFactory(name)"> {{ label }}
         </router-link>
       </div>
       <div class="sidenav__profile-menu">
@@ -64,13 +64,13 @@ export default {
   data() {
     return {
       repositoryLinks: [
-        ['summary', 'Summary'],
-        ['training', 'Training'],
-        ['test', 'Test'],
-        ['translate', 'Translate'],
-        ['translations', 'Translation status'],
-        ['integration', 'Integration'],
-        ['settings', 'Settings'],
+        ['repository-summary', 'Summary'],
+        ['repository-training', 'Training'],
+        ['repository-test', 'Test'],
+        ['repository-translate', 'Translate'],
+        ['repository-translations-status', 'Translation status'],
+        ['repository-integration', 'Integration'],
+        ['repository-settings', 'Settings'],
       ],
     };
   },
@@ -89,6 +89,15 @@ export default {
     },
     closeNav() {
       document.getElementById('mySidenav').style.width = '0';
+    },
+    toFactory(name) {
+      return {
+        name,
+        params: {
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+        },
+      };
     },
   },
 };
