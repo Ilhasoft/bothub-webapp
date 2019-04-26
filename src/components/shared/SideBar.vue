@@ -138,8 +138,8 @@ export default {
   }
 
   &__repository-info {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 5rem 1fr;
 
     &__big-badge {
       margin: 1rem;
@@ -163,8 +163,10 @@ export default {
 
     &__text-info {
       text-align: left;
+      align-self: center;
+      padding-right: 2rem;
       p {
-        margin: 0px;
+        margin: 0;
         font-size: 1rem;
       }
     }
