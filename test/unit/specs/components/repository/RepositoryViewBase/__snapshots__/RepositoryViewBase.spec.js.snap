@@ -44,12 +44,10 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
       <repository-info-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info"></repository-info-stub>
-      <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__header__navigation bh-grid__item--grow-1"></repository-navigation-stub>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation">
-        <repository-navigation-stub repository="<Repository #1>"></repository-navigation-stub>
-      </div>
+      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
       <!---->
     </div>
+    <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__navigation hide-mobile"></repository-navigation-stub>
     <div class="rpstr-vw-bs__status-bar clickable">
       <div class="rpstr-vw-bs__status-bar bh-grid">
         <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
