@@ -11,7 +11,7 @@ import RepositoryTranslate from '@/views/repository/Translate';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryAnalyzeText from '@/views/repository/AnalyzeText';
-import RepositoryTest from '@/views/repository/Test';
+import RepositoryEvaluate from '@/views/repository/Evaluate';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import store from '../store';
@@ -101,9 +101,9 @@ export default new Router({
       component: RepositorySettings,
     },
     {
-      path: '/:ownerNickname/:slug/test/',
+      path: '/:ownerNickname/:slug/evaluate/',
       name: 'repository-test',
-      component: RepositoryTest,
+      component: RepositoryEvaluate,
     },
     {
       path: '*',

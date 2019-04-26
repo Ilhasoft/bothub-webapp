@@ -6,10 +6,10 @@
       <div v-if="authenticated">
         <div
           v-if="repository.authorization.can_write"
-          class="test">
-          <div class="test__content-header">
-            <h2 class="test__content-header__title">Test your data set</h2>
-            <div class="test__content-header__language-select">
+          class="evaluate">
+          <div class="evaluate__content-header">
+            <h2 class="evaluate__content-header__title">Test your data set</h2>
+            <div class="evaluate__content-header__language-select">
               <languages-list
                 v-model="currentLanguage"
                 title="Select your language"
@@ -17,14 +17,14 @@
                 open-position="bottom-left" />
             </div>
           </div>
-          <div class="test__navigation">
+          <div class="evaluate__navigation">
             <a
               v-for="(name, i) in links"
               :key="i"
               :class="{'active': i === currentTabSelected}"
               @click="setCurrentTab(i)">{{ name }}</a>
           </div>
-          <div class="test__content-wrapper">
+          <div class="evaluate__content-wrapper">
             <base-examples-test
               v-if="currentTabSelected === 0"
               :repository="repository"
@@ -74,7 +74,7 @@ import LoginForm from '@/components/auth/LoginForm';
 
 
 export default {
-  name: 'RepositoryTest',
+  name: 'RepositoryEvaluate',
   components: {
     RepositoryViewBase,
     LoginForm,
@@ -112,7 +112,7 @@ export default {
 @import '~bh/src/assets/scss/variables.scss';
 
 
-.test {
+.evaluate {
   &__navigation {
     display: flex;
     justify-content: center;
