@@ -76,7 +76,7 @@
             v-if="authenticated && repository.authorization.can_write"
             class="bh-grid rpstr-vw-bs__status-bar__repo-info">
             <div
-              v-if="warningsCount > 0"
+              v-if="!warningsCount > 0"
               class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
               <bh-icon
                 class="rpstr-vw-bs__status-bar__icons-align--size"
@@ -101,7 +101,7 @@
               v-if="!repository.ready_for_train"
               class="text-color-primary bh-grid__item rpstr-vw-bs__status-bar__icons-align">
               <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
+                class="rpstr-vw-bs__status-bar__icons-align--size hide-mobile"
                 value="botinho" />
               <span class="rpstr-vw-bs__status-bar__text-information hide-mobile">
                 Your bot is ready to be trained</span>
@@ -365,9 +365,13 @@ export default {
 
   &__status-bar {
     background-color: $color-fake-white;
-    padding: 0 1.5rem;
+    padding: 0 0rem;
     justify-content: space-between;
     flex-direction: row;
+
+    :nth-child(3n) {
+      // margin-right: 8px;
+    }
 
       @media screen and (max-width: $medium-screen) {
         justify-content: space-around;
@@ -375,9 +379,10 @@ export default {
 
     &__repo-info {
        @media screen and (max-width: $medium-screen) {
-        flex-grow: 1;
-        justify-content: space-between;
+        flex-grow: 0;
+        justify-content: flex-end;
         flex-direction: row;
+        padding: 0px;
       }
     }
 
@@ -440,7 +445,7 @@ export default {
           display: none;
           @media screen and (max-width: $medium-screen) {
             display: inline;
-            flex-grow: 0;
+            flex-grow: 1;
             margin:0px;
           }
         }

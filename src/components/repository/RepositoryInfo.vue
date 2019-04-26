@@ -93,6 +93,7 @@ export default {
   &__back-button {
     position: relative;
     align-self: center;
+    z-index: 2;
 
     &__icon {
       width: 1rem;
