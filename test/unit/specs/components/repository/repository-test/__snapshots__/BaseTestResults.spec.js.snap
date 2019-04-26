@@ -3,7 +3,6 @@
 exports[`BaseTestResults.vue renders correctly 1`] = `
 <div class="bh-grid bh-grid--column">
   <div>
-    <h1>Test output</h1>
     <graphics-result-stub></graphics-result-stub>
     <hr>
     <filter-result-example-test-stub debouncetime="750" intents="" labels=""></filter-result-example-test-stub>

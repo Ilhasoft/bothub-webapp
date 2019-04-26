@@ -6,7 +6,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
     <div class="bh-grid bh-grid--space-between bh-grid--row">
       <router-link-stub to="/" tag="a" event="click" class="bh-grid__item sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
       <div class="sign-up__nav__login"><span class="sign-up__nav__text">Already have an account?</span>
-        <bh-button primary="" size="normal" class="sign-up__nav__login__button">Sign in</bh-button>
+        <bh-button-stub size="normal" primary="true" type="button" class="sign-up__nav__login__button">Sign in</bh-button-stub>
       </div>
     </div>
   </nav>
@@ -21,7 +21,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
         <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]" class="field"></form-generator-stub>
         <div class="field">
           <div class="control has-text-centered">
-            <bh-button type="submit" full-width="" color="info">Get free</bh-button>
+            <bh-button-stub color="info" type="submit" fullwidth="true">Get free</bh-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
               By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.

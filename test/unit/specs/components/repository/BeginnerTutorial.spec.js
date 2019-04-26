@@ -13,10 +13,11 @@ describe('BeginnerTutorial.vue', () => {
       propsData: {
         open: true,
       },
-      data: {
-        steps: 4,
-        currentValue: 1,
-      },
+    });
+
+    wrapper.setData({
+      steps: 4,
+      currentValue: 1,
     });
   });
 
