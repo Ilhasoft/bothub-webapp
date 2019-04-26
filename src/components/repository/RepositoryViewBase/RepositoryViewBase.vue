@@ -15,17 +15,12 @@
         <repository-info
           :repository="repository"
           class="bh-grid__item rpstr-vw-bs__wrapper__header__info" />
-        <repository-navigation
-          :repository="repository"
-          class="rpstr-vw-bs__wrapper__header__navigation bh-grid__item--grow-1" />
         <div
           :class="[
             'bh-grid__item',
             'bh-grid__item--grow-0',
             'rpstr-vw-bs__wrapper__header__mobile-navigation',
-        ]">
-          <repository-navigation :repository="repository" />
-        </div>
+        ]"/>
         <div
           v-if="authenticated && openMyProfile"
           class="bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__avatar">
@@ -47,6 +42,9 @@
           </bh-dropdown>
         </div>
       </div>
+      <repository-navigation
+        :repository="repository"
+        class="rpstr-vw-bs__wrapper__navigation hide-mobile" />
       <div
         class="rpstr-vw-bs__status-bar clickable">
         <div class="rpstr-vw-bs__status-bar bh-grid">
@@ -474,6 +472,10 @@ export default {
         min-height: auto;
         padding: 1rem;
       }
+    }
+
+    &__navigation {
+      border-top: .120rem solid whitesmoke
     }
 
     &__content {

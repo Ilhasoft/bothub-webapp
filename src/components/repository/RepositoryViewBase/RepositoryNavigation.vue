@@ -65,23 +65,10 @@ export default {
     a {
       position: relative;
       display: inline-flex;
-      padding: 0 2em 2.3rem;
+      padding: 1rem 1.5rem 1.5rem;
       color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
-      left: 5rem;
-
-      @media screen and (max-width: 1550px) {
-        padding: 0 2rem $navigation-height;
-      }
-
-      @media screen and (max-width: 1300px) {
-        padding: 0 1.5rem $navigation-height;
-      }
-
-      @media screen and (max-width: 1200px) {
-        padding: 0 .5rem $navigation-height;
-      }
 
       &:hover,
       &.router-link-exact-active {
