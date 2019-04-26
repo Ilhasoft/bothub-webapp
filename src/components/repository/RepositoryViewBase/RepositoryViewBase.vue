@@ -109,7 +109,7 @@
           </div>
           <div
             v-else-if="authenticated && repository.available_request_authorization"
-            class="bh-grid">
+            class="bh-grid hide-mobile">
             <div class="bh-grid__item">
               <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                 <bh-icon />
@@ -122,7 +122,7 @@
             v-else-if="authenticated
               && repository.request_authorization
             && !repository.request_authorization.approved_by"
-            class="bh-grid">
+            class="bh-grid hide-mobile">
             <div class="bh-grid__item">
               <span class="text-color-grey-dark">Authorization Requested</span>
             </div>
