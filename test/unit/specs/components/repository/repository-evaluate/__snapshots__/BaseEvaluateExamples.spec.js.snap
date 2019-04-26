@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseEvaluateExamples.vue renders correctly 1`] = `
+<div class="base-example-evaluate bh-grid bh-grid--column">
+  <bh-button-stub primary="true" type="button" class="base-example-evaluate__new-sentence-btn">Add test sentence</bh-button-stub>
+  <filter-evaluate-example-stub debouncetime="750" intents="" labels=""></filter-evaluate-example-stub>
+  <evaluate-example-list-stub repository="[object Object]" query="[object Object]"></evaluate-example-list-stub>
+  <new-evaluate-example-modal-stub repository="[object Object]"></new-evaluate-example-modal-stub>
+</div>
+`;

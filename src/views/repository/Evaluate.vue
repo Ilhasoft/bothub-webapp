@@ -25,13 +25,13 @@
               @click="setCurrentTab(i)">{{ name }}</a>
           </div>
           <div class="evaluate__content-wrapper">
-            <base-examples-test
+            <base-evaluate-examples
               v-if="currentTabSelected === 0"
               :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
-            <base-test-versions v-else-if="currentTabSelected === 1" />
-            <base-test-results
+            <base-evaluate-versions v-else-if="currentTabSelected === 1" />
+            <base-evaluate-results
               v-else
               :repository="repository"
               :filter-by-language="currentLanguage" />
@@ -64,9 +64,9 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
-import BaseTestResults from '@/components/repository/repository-test/BaseTestResults';
-import BaseTestVersions from '@/components/repository/repository-test/BaseTestVersions';
+import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
+import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
+import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 
@@ -78,27 +78,27 @@ export default {
   components: {
     RepositoryViewBase,
     LoginForm,
-    BaseExamplesTest,
+    BaseEvaluateExamples,
     LanguagesList,
-    BaseTestResults,
-    BaseTestVersions,
+    BaseEvaluateResults,
+    BaseEvaluateVersions,
   },
   extends: RepositoryBase,
   data() {
     return {
       currentLanguage: '',
-      showRunTest: false,
+      showRunEvaluate: false,
       links: ['Test sentences', 'Tests list', 'Test results'],
       currentTabSelected: 0,
     };
   },
   methods: {
-    addTestSentence() {
-      this.addTestSentenceModalOpen = true;
-      this.showRunTest = false;
+    addEvaluateSentence() {
+      this.addEvaluateSentenceModalOpen = true;
+      this.showRunEvaluate = false;
     },
     changeNavigatior(value) {
-      this.showRunTest = value;
+      this.showRunEvaluate = value;
     },
     setCurrentTab(value) {
       this.currentTabSelected = value;

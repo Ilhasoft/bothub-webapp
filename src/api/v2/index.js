@@ -1,10 +1,10 @@
 import repository from './repository';
 import examples from './examples';
-import examplesTest from './examples-test';
+import evaluateExample from './evaluate-example';
 
 
 export default {
   repository,
   examples,
-  examplesTest,
+  evaluateExample,
 };
