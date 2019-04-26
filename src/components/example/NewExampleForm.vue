@@ -11,7 +11,7 @@
             ref="textInput"
             v-model="text"
             :entities="entities"
-            :available-entities="availableEntities"
+            :available-entities="dataAvailableEntities"
             :formatters="textFormatters"
             size="medium"
             placeholder="Add a sentence"
@@ -60,7 +60,7 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="availableEntities"
+            :available-entities="dataAvailableEntities"
             :available-labels="availableLabels"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
@@ -102,6 +102,7 @@ export default {
       entities: [],
       errors: {},
       submitting: false,
+      dataAvailableEntities: this.availableEntities || [],
     };
   },
   computed: {
@@ -158,6 +159,7 @@ export default {
         language,
         intent,
         entities,
+        dataAvailableEntities,
       } = this;
 
       return {
@@ -165,6 +167,7 @@ export default {
         language,
         intent,
         entities,
+        dataAvailableEntities,
       };
     },
   },

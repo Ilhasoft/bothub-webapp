@@ -2,6 +2,7 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
+import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
@@ -11,6 +12,7 @@ import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRo
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
+localVue.use(BH);
 HTMLElement.prototype.insertAdjacentElement = jest.fn();
 
 describe('SetAuthorizationRoleForm.vue', () => {

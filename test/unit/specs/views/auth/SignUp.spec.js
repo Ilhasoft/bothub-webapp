@@ -3,11 +3,13 @@ jest.mock('@/api/request');
 
 import store from '@/store';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import BH from 'bh';
 import SignUp from '@/views/auth/SignUp';
 import router from '@/router';
 
 
 const localVue = createLocalVue();
+localVue.use(BH);
 
 describe('LoginForm.vue', () => {
   let wrapper;
