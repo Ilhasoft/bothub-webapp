@@ -5,9 +5,6 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
@@ -18,9 +15,6 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
@@ -31,9 +25,6 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
@@ -48,7 +39,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
       <!---->
     </div>
     <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__navigation hide-mobile"></repository-navigation-stub>
-    <div class="rpstr-vw-bs__status-bar clickable">
+    <div class="rpstr-vw-bs__status-bar">
       <div class="rpstr-vw-bs__status-bar bh-grid">
         <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
         <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
@@ -74,9 +65,6 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
     <!---->
     <div class="rpstr-vw-bs__wrapper__content"></div>
   </div>
-  <train-modal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]"></train-modal-stub>
-  <!---->
-  <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
   <new-repository-modal-stub></new-repository-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
