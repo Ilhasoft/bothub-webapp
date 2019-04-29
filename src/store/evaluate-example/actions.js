@@ -3,13 +3,13 @@ import entity from '@/api/entity';
 
 
 export default {
-  async newevaluateExample(store, {
+  async newEvaluateExample(store, {
     repository, text, language, entities, intent,
   }) {
     const response = await evaluateExample.new(repository, text, language, entities, intent);
     return response;
   },
-  async updateevaluateExample(store, {
+  async updateEvaluateExample(store, {
     repository, text, language, entities, intent, id,
   }) {
     const response = await evaluateExample.update(repository, text, language, entities, intent, id);
@@ -19,12 +19,12 @@ export default {
     const response = await evaluateExample.all(repositoryUuid);
     return response;
   },
-  async deleteevaluateExample(store, { id }) {
+  async deleteEvaluateExample(store, { id }) {
     await evaluateExample.delete(id);
     return true;
   },
 
-  async getevaluateExample(store, { id }) {
+  async getEvaluateExample(store, { id }) {
     const response = await evaluateExample.get(id);
     return response;
   },

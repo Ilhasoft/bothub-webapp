@@ -196,7 +196,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'newExampleTest',
+      'newEvaluateExample',
     ]),
     setTextSelected(value) {
       this.textSelected = value;
@@ -224,7 +224,7 @@ export default {
       }
 
       try {
-        await this.newExampleTest({
+        await this.newEvaluateExample({
           repository: this.repository.uuid,
           ...this.data,
         });

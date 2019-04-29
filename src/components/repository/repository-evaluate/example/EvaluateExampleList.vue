@@ -55,8 +55,10 @@ export default {
   },
   methods: {
     updateExamples(force = false) {
+      console.log(this.$api);
+
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.examplesTest.search(
+        this.examplesList = this.$api.evaluateExample.search(
           this.repository.uuid,
           this.query,
         );

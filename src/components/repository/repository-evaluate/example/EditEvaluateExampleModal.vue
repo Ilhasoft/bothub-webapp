@@ -205,7 +205,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'updateExampleTest',
+      'updateEvaluateExample',
       'setUpdateRepository',
     ]),
     setTextSelected(value) {
@@ -235,7 +235,7 @@ export default {
       }
 
       try {
-        await this.updateExampleTest({
+        await this.updateEvaluateExample({
           repository: this.repository.uuid,
           ...this.data,
         });
