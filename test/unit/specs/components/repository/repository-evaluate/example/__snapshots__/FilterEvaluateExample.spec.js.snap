@@ -17,7 +17,7 @@ exports[`TestView.vue renders correctly 1`] = `
     <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All labels"></bh-autocomplete-stub>
   </bh-field-stub>
   <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
+    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entitys"></bh-autocomplete-stub>
   </bh-field-stub>
 </div>
 `;
