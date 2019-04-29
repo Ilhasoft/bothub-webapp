@@ -228,7 +228,6 @@ export default {
         start,
         end,
       };
-
       if (this.hasCustomizedLabel) {
         data.label = this.currentLabel;
       }

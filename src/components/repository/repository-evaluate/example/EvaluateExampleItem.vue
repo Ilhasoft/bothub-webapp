@@ -136,7 +136,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'deleteExampleTest',
+      'deleteEvaluateExample',
     ]),
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -161,7 +161,7 @@ export default {
           confirmText: 'Delete',
           type: 'is-danger',
           onConfirm: async () => {
-            await this.deleteExampleTest({ id: this.id });
+            await this.deleteEvaluateExample({ id: this.id });
             this.$emit('deleted');
             resolve();
           },

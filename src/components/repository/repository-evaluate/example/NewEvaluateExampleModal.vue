@@ -28,7 +28,7 @@
           </div>
           <div class="bh-grid__item">
             <bh-field
-              :errors="errors.intent"
+              :errors="errors.non_field_errors"
               label="Intent"
               help-text="When your bot receives a message, your bot can use a
                     recognizer to examine the message and determine intent.">
@@ -244,6 +244,7 @@ export default {
         if (data) {
           /* istanbul ignore next */
           this.errors = data;
+          console.log(this.errors);
         }
         /* istanbul ignore next */
         this.submitting = false;
@@ -258,7 +259,7 @@ export default {
       }
 
       try {
-        await this.newExampleTest({
+        await this.newEvaluateExample({
           repository: this.repository.uuid,
           ...this.data,
         });
