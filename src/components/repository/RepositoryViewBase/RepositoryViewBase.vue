@@ -46,7 +46,7 @@
         :repository="repository"
         class="rpstr-vw-bs__wrapper__navigation hide-mobile" />
       <div
-        class="rpstr-vw-bs__status-bar clickable">
+        class="rpstr-vw-bs__status-bar">
         <div class="rpstr-vw-bs__status-bar bh-grid">
           <side-bar-navigation
             :repository="repository"
@@ -162,24 +162,6 @@
       class="rpstr-vw-bs__error">
       <h1>Error to retrieve bot</h1>
     </div>
-    <train-modal
-      v-if="repository"
-      :training="training"
-      :ready-for-train="repository.ready_for_train"
-      :requirements-to-train="repository.requirements_to_train"
-      :languages-ready-for-train="repository.languages_ready_for_train"
-      :open.sync="trainModalOpen"
-      :languages-warnings="repository.languages_warnings"
-      @train="train()" />
-    <train-response
-      v-if="trainResponseData"
-      :train-response="trainResponseData"
-      :open.sync="trainResponseOpen" />
-    <request-authorization-modal
-      v-if="repository"
-      :open.sync="requestAuthorizationModalOpen"
-      :repository-uuid="repository.uuid"
-      @requestDispatched="onAuthorizationRequested()" />
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="openNewRepositoryModal()" />
@@ -194,10 +176,7 @@ import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
-import TrainModal from '@/components/repository/TrainModal';
-import TrainResponse from '@/components/repository/TrainResponse';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import SideBarNavigation from '@/components/shared/SideBar';
 
 
@@ -216,10 +195,7 @@ export default {
     SiteFooter,
     RepositoryInfo,
     RepositoryNavigation,
-    TrainModal,
-    TrainResponse,
     AnalyzeTextDrawer,
-    RequestAuthorizationModal,
     UserAvatar,
     NewRepositoryModal,
     SideBarNavigation,
@@ -243,11 +219,6 @@ export default {
   },
   data() {
     return {
-      trainModalOpen: false,
-      trainResponseData: null,
-      trainResponseOpen: false,
-      training: false,
-      requestAuthorizationModalOpen: false,
       newRepositoryModalOpen: false,
     };
   },
@@ -293,55 +264,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'trainRepository',
-      'openLoginModal',
       'logout',
       'updateMyProfile',
     ]),
-    async train() {
-      const { ownerNickname, slug } = this.$route.params;
-      this.training = true;
-      try {
-        const response = await this.trainRepository({ ownerNickname, slug });
-        this.trainResponseData = response.data;
-        this.trainResponseOpen = true;
-      } catch (e) {
-        this.$toast.open({
-          message: 'Repository not trained :(',
-          type: 'is-danger',
-        });
-      }
-      this.trainModalOpen = false;
-      this.training = false;
-      await this.updateRepository(false);
-    },
-    // onStatusBarClick() {
-    //   if (!this.authenticated) {
-    //     this.openLoginModal();
-    //   }
-    //   if (this.authenticated && this.repository.available_request_authorization) {
-    //     this.openRequestAuthorizationModal();
-    //   }
-    //   if (this.authenticated && this.repository.authorization.can_write) {
-    //     this.trainModalOpen = true;
-    //   }
-    // },
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
     openNewRepositoryModal() {
       this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
-        message: 'Request made! Wait for review of an admin.',
-        type: 'is-success',
-      });
-      this.updateRepository(false);
     },
   },
 };
@@ -400,11 +330,6 @@ export default {
 
     &__text-information {
       margin: 0 .25rem;
-    }
-
-    &:hover {
-      background-color: $color-grey-light;
-      transition: 0.4s;
     }
   }
 
