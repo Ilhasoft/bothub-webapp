@@ -20,9 +20,7 @@ describe('TestView.vue', () => {
 
   describe('Test intent queryString formated', () => {
     beforeEach(() => {
-      wrapper.setData({
-        intent: 'like',
-      });
+      wrapper.vm.intent = 'like';
     });
 
     test('valid queryStringFormated emit', () => {
@@ -34,9 +32,7 @@ describe('TestView.vue', () => {
 
   describe('Test Label query string formated', () => {
     beforeEach(() => {
-      wrapper.setData({
-        label: 'animal',
-      });
+      wrapper.vm.label = 'animal';
     });
 
     test('valid queryStringFormated emit', () => {
@@ -48,9 +44,7 @@ describe('TestView.vue', () => {
 
   describe('Test entitie query string formated', () => {
     beforeEach(() => {
-      wrapper.setData({
-        entitie: 'cat',
-      });
+      wrapper.vm.entitie = 'cat';
     });
 
     test('valid queryStringFormated emit', () => {
