@@ -76,16 +76,23 @@ describe('NewExampleTestForm.vue', () => {
     });
 
     describe('on submit', () => {
-      let r;
       beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
+        wrapper.setMethods({
+          newEvaluateExample() {
+            return new Promise((resolve) => {
+              resolve();
+            });
+          },
+        });
+        Promise.resolve(wrapper.vm.onSubmit());
+        await localVue.nextTick();
       });
 
       test('return is true', () => {
-        expect(r).toBeTruthy();
+        expect(wrapper.vm.onSubmit()).toBeTruthy();
       });
 
-      test('created event emitted', () => {
+      test('created event emitted', async () => {
         expect(wrapper.emitted('created')).toBeDefined();
       });
     });
