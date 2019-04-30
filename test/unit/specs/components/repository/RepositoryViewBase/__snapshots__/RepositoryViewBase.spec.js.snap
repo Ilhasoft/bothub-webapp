@@ -34,13 +34,14 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
-      <repository-info-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info"></repository-info-stub>
+      <router-link to="/home" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link>
+      <repository-info-stub repository="<Repository #1>"></repository-info-stub>
       <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
       <!---->
     </div>
     <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__navigation hide-mobile"></repository-navigation-stub>
     <div class="rpstr-vw-bs__status-bar">
-      <div class="rpstr-vw-bs__status-bar bh-grid">
+      <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
         <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
         <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
           <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
