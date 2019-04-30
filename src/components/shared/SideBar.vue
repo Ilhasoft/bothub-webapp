@@ -49,6 +49,14 @@
           @click.prevent="openLoginModal">
           Sign In
         </a>
+        <a
+          v-if="authenticated
+            && repository.request_authorization
+          && !repository.request_authorization.approved_by">
+          <p class="text-color-grey-dark">
+            Authorization Requested
+          </p>
+        </a>
       </div>
       <div
         v-if="authenticated"
@@ -208,6 +216,7 @@ export default {
   &__repository-info {
     display: grid;
     grid-template-columns: 5rem 1fr;
+    padding: 0.5rem 0;
 
     &__big-badge {
       margin: 1rem;
