@@ -36,24 +36,42 @@
           :to="toFactory(name)"> {{ label }}
         </router-link>
       </div>
-      <div class="sidenav__profile-menu">
-        <a href="#">Inbox</a>
-        <a href="#">Integrations</a>
-        <a href="#">Settings</a>
+      <div
+        v-if="authenticated"
+        class="sidenav__profile-menu">
+        <a
+          href="#"
+          @click.prevent="openMyProfile">
+          {{ myProfile.name || '...' }}
+        </a>
+        <a
+          href="#"
+          @click.prevent="openNewRepositoryModal">
+          Start your bot
+        </a>
+        <a
+          href="#"
+          @click.prevent="logout">
+          Logout
+        </a>
       </div>
-
     </div>
+    <new-repository-modal
+      :active="newRepositoryModalOpen"
+      @requestClose="openNewRepositoryModal()" />
   </div>
 </template>
 <script>
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-import { mapGetters } from 'vuex';
+import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import { mapGetters, mapActions } from 'vuex';
 
 
 export default {
   name: 'VsSidebar',
   components: {
     RepositoryInfo,
+    NewRepositoryModal,
   },
   props: {
     repository: {
@@ -72,11 +90,13 @@ export default {
         ['repository-integration', 'Integration'],
         ['repository-settings', 'Settings'],
       ],
+      newRepositoryModalOpen: false,
     };
   },
   computed: {
     ...mapGetters([
-      'getProfile',
+      'myProfile',
+      'authenticated',
     ]),
 
     repositoryInfoIcon() {
@@ -84,6 +104,9 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'logout',
+    ]),
     openNav() {
       document.getElementById('mySidenav').style.width = '280px';
     },
@@ -98,6 +121,12 @@ export default {
           slug: this.repository.slug,
         },
       };
+    },
+    openMyProfile() {
+      this.$router.push({ name: 'myProfile' });
+    },
+    openNewRepositoryModal() {
+      this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
     },
   },
 };
