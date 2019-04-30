@@ -36,6 +36,14 @@
           :to="toFactory(name)"> {{ label }}
         </router-link>
       </div>
+      <div>
+        <a
+          v-if="authenticated && repository.available_request_authorization"
+          href="#"
+          @click.prevent="openRequestAuthorizationModal">
+          Request Authorization
+        </a>
+      </div>
       <div
         v-if="authenticated"
         class="sidenav__profile-menu">
@@ -59,19 +67,31 @@
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="openNewRepositoryModal()" />
+    <request-authorization-modal
+      v-if="repository"
+      :open.sync="requestAuthorizationModalOpen"
+      :repository-uuid="repository.uuid"
+      @requestDispatched="onAuthorizationRequested()" />
   </div>
 </template>
 <script>
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapGetters, mapActions } from 'vuex';
 
 
 export default {
   name: 'VsSidebar',
+  inject: {
+    updateRepository: {
+      default: null,
+    },
+  },
   components: {
     RepositoryInfo,
     NewRepositoryModal,
+    RequestAuthorizationModal,
   },
   props: {
     repository: {
@@ -91,6 +111,7 @@ export default {
         ['repository-settings', 'Settings'],
       ],
       newRepositoryModalOpen: false,
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -127,6 +148,17 @@ export default {
     },
     openNewRepositoryModal() {
       this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
     },
   },
 };

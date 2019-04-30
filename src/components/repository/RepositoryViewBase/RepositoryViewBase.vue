@@ -119,7 +119,9 @@
           <div
             v-else-if="authenticated && repository.available_request_authorization"
             class="bh-grid hide-mobile">
-            <div class="bh-grid__item">
+            <div
+              class="bh-grid__item clickable"
+              @click.prevent="openRequestAuthorizationModal">
               <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                 <bh-icon />
                 <span
@@ -176,6 +178,11 @@
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="openNewRepositoryModal()" />
+    <request-authorization-modal
+      v-if="repository"
+      :open.sync="requestAuthorizationModalOpen"
+      :repository-uuid="repository.uuid"
+      @requestDispatched="onAuthorizationRequested()" />
     <site-footer class="rpstr-vw-bs__footer"/>
   </div>
 </template>
@@ -183,6 +190,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components-v1/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
@@ -209,6 +217,7 @@ export default {
     AnalyzeTextDrawer,
     UserAvatar,
     NewRepositoryModal,
+    RequestAuthorizationModal,
     SideBarNavigation,
   },
   filters: {
@@ -231,6 +240,7 @@ export default {
   data() {
     return {
       newRepositoryModalOpen: false,
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -283,6 +293,17 @@ export default {
     },
     openNewRepositoryModal() {
       this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
     },
   },
 };
