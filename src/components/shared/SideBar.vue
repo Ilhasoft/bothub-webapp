@@ -36,21 +36,29 @@
           :to="toFactory(name)"> {{ label }}
         </router-link>
       </div>
-      <div>
+      <div class="sidenav__status">
         <a
-          v-if="authenticated && repository.available_request_authorization"
+          v-if="!repository.ready_for_train"
+          href="#">
+          <span class="text-color-primary sidenav__status__info">
+            <bh-icon
+              value="botinho" />
+            Your bot is ready to be trained </span>
+        </a>
+        <a
+          v-else-if="authenticated && repository.available_request_authorization"
           href="#"
           @click.prevent="openRequestAuthorizationModal">
           Request Authorization
         </a>
         <a
-          v-if="!authenticated"
+          v-else-if="!authenticated"
           href="#"
           @click.prevent="openLoginModal">
           Sign In
         </a>
         <a
-          v-if="authenticated
+          v-else-if="authenticated
             && repository.request_authorization
           && !repository.request_authorization.approved_by">
           <p class="text-color-grey-dark">
@@ -281,6 +289,14 @@ export default {
   &__profile-menu {
     a:last-child {
       border-bottom: 1px solid $color-grey;
+    }
+  }
+
+  &__status {
+    &__info {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
     }
   }
 }
