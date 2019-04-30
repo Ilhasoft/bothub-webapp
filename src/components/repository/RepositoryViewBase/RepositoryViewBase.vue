@@ -140,8 +140,10 @@
           </div>
           <div
             v-else-if="!authenticated"
-            class="bh-grid">
-            <div class="bh-grid__item">
+            class="bh-grid hide-mobile">
+            <div
+              class="bh-grid__item clickable"
+              @click.prevent="openLoginModal">
               <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                 <bh-icon value="account" />
                 <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
@@ -287,6 +289,7 @@ export default {
     ...mapActions([
       'logout',
       'updateMyProfile',
+      'openLoginModal',
     ]),
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });

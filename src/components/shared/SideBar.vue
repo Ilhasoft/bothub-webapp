@@ -43,6 +43,12 @@
           @click.prevent="openRequestAuthorizationModal">
           Request Authorization
         </a>
+        <a
+          v-if="!authenticated"
+          href="#"
+          @click.prevent="openLoginModal">
+          Sign In
+        </a>
       </div>
       <div
         v-if="authenticated"
@@ -127,6 +133,7 @@ export default {
   methods: {
     ...mapActions([
       'logout',
+      'openLoginModal',
     ]),
     openNav() {
       document.getElementById('mySidenav').style.width = '280px';
