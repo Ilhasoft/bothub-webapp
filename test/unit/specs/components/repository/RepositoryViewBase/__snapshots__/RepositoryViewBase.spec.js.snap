@@ -6,6 +6,7 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
     <bh-loading-stub></bh-loading-stub>
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
@@ -16,6 +17,7 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
     <bh-loading-stub></bh-loading-stub>
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
@@ -26,6 +28,7 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
     <bh-loading-stub></bh-loading-stub>
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
@@ -54,8 +57,8 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
           </div>
           <div class="gap"></div>
         </div>
-        <div class="bh-grid">
-          <div class="bh-grid__item">
+        <div class="bh-grid hide-mobile">
+          <div class="bh-grid__item clickable">
             <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
               <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
             </div>
@@ -67,6 +70,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
     <div class="rpstr-vw-bs__wrapper__content"></div>
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
+  <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
