@@ -17,8 +17,7 @@ describe('BaseEvaluateResults.vue', () => {
     });
   });
 
-  test('rodar teste', () => {
-    const runNewTestBtn = wrapper.find({ ref: 'runNewTestButton' });
-    expect(runNewTestBtn.exists());
+  it('renders', () => {
+    expect(wrapper).toMatchSnapshot();
   });
 });
