@@ -66,7 +66,7 @@ export default {
   methods: {
     async getResults() {
       if (this.resultId) {
-        const promisse = await this.$api.evaluateExample.getCharts(
+        const promisse = await this.$api.evaluateExample.getResultsData(
           this.repository.uuid,
           this.resultId,
         );

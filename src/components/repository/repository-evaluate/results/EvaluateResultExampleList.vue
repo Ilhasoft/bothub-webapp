@@ -31,11 +31,10 @@ export default {
       resultExampleList: [],
     };
   },
-  mounted() {
-    this.resultExampleList = this.resultsData.log;
-    console.log(this.resultExampleList);
-  },
-  methods: {
+  watch: {
+    resultsData(currentData) {
+      this.resultExampleList = currentData;
+    },
   },
 };
 </script>

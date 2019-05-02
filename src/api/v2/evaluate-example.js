@@ -45,7 +45,11 @@ export default {
   get(id) {
     return request.$http.get(`/http://localhost:3000/evaliate/${id}/`);
   },
-  getCharts(repositoryUuid, resultId) {
+  getResultsData(repositoryUuid, resultId) {
+    return request.$http.get(`/v2/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
+  },
+
+  getAllResultsLog(repositoryUuid, resultId) {
     return request.$http.get(`/v2/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
 

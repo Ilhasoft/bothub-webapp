@@ -12,28 +12,16 @@
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
-    <div
-      v-if="entitiesList.length > 0"
-      class="bh-grid example__entities">
-      <div
-        v-for="(entity, i) in entitiesList"
-        :key="i"
-        class="example__entities__entitie">
-        <b-tag
-          :class="`${entity.class} ${failed}`"
-          rounded>
-          <strong>{{ entity.value }}</strong>
-          <span v-if="entity.label">is</span>
-          <strong v-if="entity.label">{{ entity.label }}</strong>
-        </b-tag>
-      </div>
-    </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
         <div
           v-if="intent"
-          class="level-item has-text-grey">
-          <span><strong>Intent:</strong> {{ intent }} {{ confidence.toFixed(2) }}</span>
+          :class="{'level-item ': true,
+                   'text-color-danger': status=='error'}">
+          <strong
+            :class="{
+            'text-color-danger': status=='error'}">Intent:&nbsp;</strong>
+          <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
         </div>
         <span
           v-if="status === 'success'"
