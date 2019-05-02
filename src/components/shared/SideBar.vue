@@ -38,7 +38,7 @@
       </div>
       <div class="sidenav__status">
         <a
-          v-if="authenticated && repository.authorization.can_write && !repository.ready_for_train"
+          v-if="authenticated && repository.authorization.can_write && repository.ready_for_train"
           href="#">
           <span class="text-color-primary sidenav__status__info">
             <bh-icon

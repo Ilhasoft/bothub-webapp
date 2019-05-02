@@ -38,7 +38,7 @@
             <bh-icon
               slot="trigger"
               value="menu-down"
-              size="normal"
+              size="small"
               class="rpstr-vw-bs__wrapper__header__options__dropdown"/>
             <bh-dropdown-item @click="openMyProfile()">
               {{ myProfile.name || '...' }}
@@ -85,7 +85,7 @@
             v-if="authenticated && repository.authorization.can_write"
             class="bh-grid rpstr-vw-bs__status-bar__repo-info">
             <div
-              v-if="!warningsCount > 0"
+              v-if="warningsCount > 0"
               class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
               <bh-icon
                 class="rpstr-vw-bs__status-bar__icons-align--size"
@@ -107,7 +107,7 @@
               <span class="hide-mobile">requirements missed</span>
             </div>
             <div
-              v-if="!repository.ready_for_train"
+              v-if="repository.ready_for_train"
               class="text-color-primary bh-grid__item rpstr-vw-bs__status-bar__icons-align">
               <bh-icon
                 class="rpstr-vw-bs__status-bar__icons-align--size hide-mobile"
