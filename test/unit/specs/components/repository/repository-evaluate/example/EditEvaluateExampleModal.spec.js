@@ -11,7 +11,7 @@ import store from '@/store';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('NewExampleForm.vue', () => {
+describe('EditEvaluateExampleModal.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
@@ -54,8 +54,8 @@ describe('NewExampleForm.vue', () => {
       expect(wrapper.vm.isValid).toBeTruthy();
     });
 
-    test('name in availableEntities', () => {
-      expect('name').toContain(wrapper.vm.availableEntities);
+    test('availableEntities contains the entity name', () => {
+      expect(wrapper.vm.availableEntities).toContain('name');
     });
 
     describe('entity with label', () => {
