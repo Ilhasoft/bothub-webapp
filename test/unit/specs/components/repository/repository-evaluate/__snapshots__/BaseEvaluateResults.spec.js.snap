@@ -1,12 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BaseEvaluateResults.vue renders correctly 1`] = `
-<div class="bh-grid bh-grid--column">
-  <div>
-    <graphics-result-stub></graphics-result-stub>
-    <hr>
-    <filter-evaluate-result-example-stub debouncetime="750" intents="" labels=""></filter-evaluate-result-example-stub>
-    <evaluate-result-example-list-stub repository="[object Object]" query="[object Object]"></evaluate-result-example-list-stub>
-  </div>
-</div>
-`;
+exports[`BaseEvaluateResults.vue renders correctly 1`] = `<p>You dont have results yet</p>`;

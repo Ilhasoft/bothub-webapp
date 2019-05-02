@@ -1,6 +1,7 @@
 <template>
   <div class="base-evaluate-versions bh-grid bh-grid--column">
     <bh-button
+      ref="runNewTestButton"
       class="base-evaluate-versions__btn"
       primary> Run new test </bh-button>
     <evaluate-version-list

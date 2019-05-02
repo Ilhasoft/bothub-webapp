@@ -19,12 +19,23 @@ describe('BaseEvaluateExamples.vue', () => {
           labels_list: [],
           entities_lis: [],
         },
+        filterByLanguage: 'en',
       },
     });
   });
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  test('open evaluate example modal when add button is clicked', () => {
+    expect(wrapper.vm.addEvaluateExampleModalOpen).toBeFalsy();
+
+    const addSentenceButton = wrapper.find({ ref: 'addSentenceButton' });
+    expect(addSentenceButton.exists()).toBeTruthy();
+
+    addSentenceButton.vm.$emit('click');
+    expect(wrapper.vm.addEvaluateExampleModalOpen).toBeTruthy();
   });
 
   describe('Test filter query', () => {

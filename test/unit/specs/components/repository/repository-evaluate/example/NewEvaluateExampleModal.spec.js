@@ -38,6 +38,7 @@ describe('NewExampleTestForm.vue', () => {
 
   describe('fill with valid data', () => {
     beforeEach(() => {
+      wrapper.vm.submitting = false;
       wrapper.vm.text = 'my name is douglas';
       wrapper.vm.language = 'en';
       wrapper.vm.intent = 'greet';
@@ -56,6 +57,15 @@ describe('NewExampleTestForm.vue', () => {
 
     test('name in availableEntities', () => {
       expect('name').toContain(wrapper.vm.availableEntities);
+    });
+
+    test('submit and close form button', () => {
+      const btn = wrapper.find({ ref: 'saveSentenceButton' });
+      expect(btn.exists()).toBeTruthy();
+
+      btn.vm.$emit('click');
+      expect(wrapper.vm.submitting).toBeTruthy();
+      expect(btn.attributes('disabled')).toBeTruthy();
     });
 
     describe('entity with label', () => {

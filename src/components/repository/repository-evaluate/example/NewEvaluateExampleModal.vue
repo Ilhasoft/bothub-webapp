@@ -58,6 +58,7 @@
         </bh-field>
         <div class="bh-grid new-example-form-modal__buttons-wrapper">
           <bh-button
+            ref="saveSentenceButton"
             :disabled="!isValid || submitting "
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
