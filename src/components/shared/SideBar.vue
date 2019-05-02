@@ -38,7 +38,7 @@
       </div>
       <div class="sidenav__status">
         <a
-          v-if="!repository.ready_for_train"
+          v-if="authenticated && repository.authorization.can_write && !repository.ready_for_train"
           href="#">
           <span class="text-color-primary sidenav__status__info">
             <bh-icon
@@ -46,16 +46,16 @@
             Your bot is ready to be trained </span>
         </a>
         <a
-          v-else-if="authenticated && repository.available_request_authorization"
-          href="#"
-          @click.prevent="openRequestAuthorizationModal">
-          Request Authorization
-        </a>
-        <a
           v-else-if="!authenticated"
           href="#"
           @click.prevent="openLoginModal">
           Sign In
+        </a>
+        <a
+          v-else-if="authenticated && repository.available_request_authorization"
+          href="#"
+          @click.prevent="openRequestAuthorizationModal">
+          Request Authorization
         </a>
         <a
           v-else-if="authenticated
