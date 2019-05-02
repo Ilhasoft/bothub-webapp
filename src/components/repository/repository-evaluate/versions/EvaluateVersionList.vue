@@ -3,7 +3,8 @@
     <pagination
       v-if="versionsList"
       :item-component="evaluateItem"
-      :list="versionsList" />
+      :list="versionsList"
+      @dispatch="goToDetails()" />
     <p
       v-if="versionsList && versionsList.empty"
       class="no-examples">No examples.</p>
@@ -22,6 +23,10 @@ export default {
     Pagination,
   },
   props: {
+    repository: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
@@ -30,20 +35,15 @@ export default {
     };
   },
   mounted() {
-    this.updateVersions();
+    this.updateVersionList();
   },
   methods: {
-    updateVersions() {
-      this.versionsList = {
-        count: 3,
-        next: null,
-        previous: null,
-        results: [{
-          id: 1,
-          language: 'pt-br',
-          created_at: '2 minuts ago',
-        }],
-      };
+    updateVersionList(force = false) {
+      if (!this.resultExampleList || force) {
+        this.versionsList = this.$api.evaluateExample.allVersions(
+          this.repository.uuid,
+        );
+      }
     },
   },
 };

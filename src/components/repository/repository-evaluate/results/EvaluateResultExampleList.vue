@@ -1,13 +1,13 @@
 <template>
   <div>
     <pagination
-      v-if="examplesList"
-      :item-component="exampleItemElem"
-      :list="examplesList"
+      v-if="resultExampleList"
+      :item-component="resultExampleItem"
+      :list="resultExampleList"
       :repository="repository"
       @itemDeleted="onItemDeleted($event)" />
     <p
-      v-if="examplesList && examplesList.empty"
+      v-if="resultExampleList && resultExampleList.empty"
       class="no-examples">No examples.</p>
   </div>
 </template>
@@ -18,7 +18,7 @@ import EvaluateResultExampleItem from '@/components/repository/repository-evalua
 
 
 export default {
-  name: 'ResultExampleTestList',
+  name: 'EvaluateResultExampleList',
   components: {
     Pagination,
   },
@@ -38,8 +38,8 @@ export default {
   },
   data() {
     return {
-      examplesList: null,
-      exampleItemElem: EvaluateResultExampleItem,
+      resultExampleList: null,
+      resultExampleItem: EvaluateResultExampleItem,
     };
   },
   watch: {
@@ -55,11 +55,12 @@ export default {
   },
   methods: {
     updateExamples(force = false) {
-      if (!this.examplesList || force) {
-        this.examplesList = this.$api.examplesTest.search(
+      if (!this.resultExampleList || force) {
+        const a = this.$api.evaluateExample.resultSearch(
           this.repository.uuid,
           this.query,
         );
+        console.log(a);
       }
     },
     onItemDeleted(id) {

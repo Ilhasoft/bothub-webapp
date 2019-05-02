@@ -35,7 +35,7 @@ export default {
     },
     failed: {
       type: String,
-      default: 'failed',
+      default: '',
     },
   },
   computed: {

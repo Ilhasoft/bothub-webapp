@@ -1,10 +1,15 @@
 <template>
-  <div class="graphics-results bh-grid bh-grid--column">
+  <div
+    class="graphics-results bh-grid bh-grid--column">
     <div class="bh-grid__item graphics-results_wrapper">
       <h2 class="graphic-results">Intents</h2>
       <canvas
+        v-if="chartData"
         id="intentsChart"
         class="graphics-results__charts"/>
+      <bh-loading
+        v-else
+        class="text-color-primary"/>
     </div>
     <div class="bh-grid__item">
       <h2>Entities</h2>
@@ -16,7 +21,7 @@
       <h2>Intent confusion matrix</h2>
       <div class="graphics-results__charts">
         <img
-          src="@/assets/imgs/mock-chart1.png"
+          :src="chartData.matrix_chart"
           alt="chart1">
       </div>
     </div>
@@ -24,7 +29,7 @@
       <h2>Intent confidence distribution</h2>
       <div class="graphics-results__charts">
         <img
-          src="@/assets/imgs/mock-chart2.png"
+          :src="chartData.confidence_chart"
           alt="chart2">
       </div>
     </div>
@@ -37,70 +42,108 @@ import Chart from 'chart.js';
 export default {
   name: 'GraphicsResult',
   props: {
-
+    chartData: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
     };
   },
-  mounted() {
-    this.createIntentsChart();
-    this.createEntitiesChart();
+  watch: {
+    chartData() {
+      this.createIntentChart();
+      this.createEntitiesChart();
+    },
   },
   methods: {
-    createIntentsChart() {
+    createIntentChart() {
+      const intentsName = [];
+      const intentsPrecision = [];
+      const intentsRecall = [];
+      if (this.chartData) {
+        this.chartData.intents_list.forEach((element) => {
+          intentsName.push(element.intent);
+          intentsPrecision.push(element.score.precision * 100);
+          intentsRecall.push(element.score.recall * 100);
+        });
+      }
+
       const ctx = document.getElementById('intentsChart');
       // eslint-disable-next-line
       const intentChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['All', 'finances', 'bad_whot', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health'],
+          labels: intentsName,
           datasets: [
             {
-              label: 'Correct',
-              data: [67.8, 55, 5, 8, 55, 20, 40, 80, 60, 50, 70, 50, 70, 80, 50, 40, 50],
+              label: 'Precision',
+              data: intentsPrecision,
               backgroundColor: '#00c853',
             },
             {
-              label: 'Wrong',
-              data: [11.4, 20, 3, 2, 5, 8, 5, 20, 40, 30, 50, 40, 50, 80, 70, 50, 20, 30],
+              label: 'Recal',
+              data: intentsRecall,
               backgroundColor: 'red',
             },
           ],
         },
         options: {
           scales: {
-            xAxes: [{ stacked: true }],
-            yAxes: [{ stacked: true }],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              },
+            }],
+            xAxes: [{
+              barPercentage: 0.6,
+            }],
           },
         },
+
       });
     },
     createEntitiesChart() {
       const ctx = document.getElementById('entitiesChart');
+      const entitiesName = [];
+      const entitiesPrecision = [];
+      const entitiesRecall = [];
+      if (this.chartData) {
+        this.chartData.entities_list.forEach((entity) => {
+          entitiesName.push(entity.entity);
+          entitiesPrecision.push(entity.score.precision * 100);
+          entitiesRecall.push(entity.score.recall * 100);
+        });
+      }
       // eslint-disable-next-line
       const entitieChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['All', 'finances', 'bad_whot', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health', 'health'],
+          labels: entitiesName,
           datasets: [
             {
-              label: 'Correct',
-              data: [50, 70, 20, 80, 5, 20, 40, 80, 60, 50, 70, 50, 20, 20, 50, 40, 50],
+              label: 'Precision',
+              data: entitiesPrecision,
               backgroundColor: '#00c853',
             },
             {
-              label: 'Wrong',
-              data: [50, 20, 30, 20, 95, 80, 60, 20, 30, 30, 20, 40, 50, 30, 10, 20, 20],
+              label: 'Recal',
+              data: entitiesRecall,
               backgroundColor: 'red',
             },
           ],
         },
         options: {
-          max: 100,
           scales: {
-            xAxes: [{ stacked: true }],
-            yAxes: [{ stacked: true }],
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              },
+            }],
+            xAxes: [{
+              barPercentage: 0.6,
+            }],
           },
         },
       });
@@ -111,7 +154,11 @@ export default {
 
 <style lang="scss" scoped>
 .graphics-results {
-  max-width: 80%;
+  width: 80%;
   margin: 0 auto;
+
+  &__charts {
+    text-align: center;
+  }
 }
 </style>

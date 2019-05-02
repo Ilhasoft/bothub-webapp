@@ -1,21 +1,19 @@
 <template>
   <div>
     <bh-card
-      v-for="index in 10"
-      :key="index"
       class="version-test-item">
       <div class="version-test-item__wrapper">
         <div class="version-test-item__wrapper__info">
-          <strong class="version-test-item__wrapper__info__item">Test #{{ index }}</strong>
+          <strong class="version-test-item__wrapper__info__item">Test #{{ id }}</strong>
           <language-badge
+            :language="language"
             class="version-test-item__wrapper__info__item"
-            main
-            language="pt_br"/>
+            main/>
           <small class="version-test-item__wrapper__info__item">2 minutes ago</small>
         </div>
         <div class="version-test-item__wrapper__links">
           <a
-            href="">Load results</a>
+            @click="goToDetail(id)">Load results</a>
           <span>/</span>
           <a
             href="">Download</a>
@@ -27,12 +25,31 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import { mapActions } from 'vuex';
 
 
 export default {
   name: 'EvaluateVersionItem',
   components: {
     LanguageBadge,
+  },
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    language: {
+      type: String,
+      required: true,
+    },
+  },
+  methods: {
+    ...mapActions([
+      'setUpdateEvaluateResultId',
+    ]),
+    goToDetail() {
+      this.setUpdateEvaluateResultId(this.id);
+    },
   },
 };
 </script>

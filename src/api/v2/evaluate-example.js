@@ -45,4 +45,19 @@ export default {
   get(id) {
     return request.$http.get(`/http://localhost:3000/evaliate/${id}/`);
   },
+  getCharts(repositoryUuid, resultId) {
+    return request.$http.get(`/v2/evaluate/results/${resultId}/?${repositoryUuid}`);
+  },
+
+  allVersions(repositoryUuid) {
+    return new utils.List(`/v2/evaluate/results?repository_uuid=${repositoryUuid}`);
+  },
+
+  async resultSearch(repositoryUuid, query = {}) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+      ...query,
+    });
+    return new utils.List(`/v2/evaluate/results/1/?${queryString}`);
+  },
 };

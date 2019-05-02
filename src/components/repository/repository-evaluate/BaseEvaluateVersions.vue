@@ -3,18 +3,26 @@
     <bh-button
       class="base-evaluate-versions__btn"
       primary> Run new test </bh-button>
-    <evaluate-version-item/>
+    <evaluate-version-list
+      :repository="repository"
+    />
   </div>
 </template>
 
 <script>
-import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
+import EvaluateVersionList from '@/components/repository/repository-evaluate/versions/EvaluateVersionList';
 
 
 export default {
   name: 'BaseEvaluateVersions',
   components: {
-    EvaluateVersionItem,
+    EvaluateVersionList,
+  },
+  props: {
+    repository: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {

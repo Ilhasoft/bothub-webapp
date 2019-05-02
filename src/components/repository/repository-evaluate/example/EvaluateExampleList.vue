@@ -63,6 +63,7 @@ export default {
       }
     },
     onItemDeleted(id) {
+      this.updateExamples(true);
       this.$emit('exampleDeleted', id);
     },
   },

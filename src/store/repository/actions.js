@@ -104,6 +104,9 @@ export default {
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);
   },
+  setUpdateEvaluateResultId({ commit }, payload) {
+    commit('updateEvaluateResultId', payload);
+  },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },

@@ -1,7 +1,9 @@
 <template>
-  <div class="bh-grid bh-grid--column">
+  <div
+    v-if="resultId"
+    class="bh-grid bh-grid--column">
     <div>
-      <graphics-result />
+      <graphics-result :chart-data="chartData"/>
       <hr>
       <filter-evaluate-result-example
         :intents="repository.intents_list"
@@ -14,6 +16,7 @@
         :query="query" />
     </div>
   </div>
+  <p v-else>You dont have results yet</p>
 </template>
 
 <script>
@@ -21,6 +24,7 @@ import GraphicsResult from '@/components/repository/repository-evaluate/results/
 import FilterEvaluateResultExample from '@/components/repository/repository-evaluate/results/FilterEvaluateResultExample';
 import EvaluateResultExampleList from '@/components/repository/repository-evaluate/results/EvaluateResultExampleList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+
 
 export default {
   name: 'BaseEvaluateResulsts',
@@ -34,6 +38,10 @@ export default {
       type: Object,
       required: true,
     },
+    resultId: {
+      type: Number,
+      default: null,
+    },
     filterByLanguage: {
       type: String,
       default: '',
@@ -43,6 +51,7 @@ export default {
     return {
       querySchema: {},
       query: {},
+      chartData: {},
     };
   },
   watch: {
@@ -50,7 +59,19 @@ export default {
       this.onSearch();
     },
   },
+  mounted() {
+    this.getResults();
+  },
   methods: {
+    async getResults() {
+      if (this.resultId) {
+        const promisse = await this.$api.evaluateExample.getCharts(
+          this.repository.uuid,
+          this.resultId,
+        );
+        this.chartData = promisse.data;
+      }
+    },
     onSearch(value) {
       Object.assign(this.querySchema, value);
 
