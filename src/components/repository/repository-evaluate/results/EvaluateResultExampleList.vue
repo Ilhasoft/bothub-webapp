@@ -1,71 +1,41 @@
 <template>
-  <div>
-    <pagination
-      v-if="resultExampleList"
-      :item-component="resultExampleItem"
-      :list="resultExampleList"
-      :repository="repository"
-      @itemDeleted="onItemDeleted($event)" />
-    <p
-      v-if="resultExampleList && resultExampleList.empty"
-      class="no-examples">No examples.</p>
+  <div v-if="resultExampleList">
+    <evaluate-result-example-item
+      v-for="(item, i) in resultExampleList"
+      :key="i"
+      :text="item.text"
+      :intent="item.intent"
+      :confidence="item.intent_prediction.confidence"
+      :status="item.status"/>
   </div>
+  <p v-else>Dont log</p>
 </template>
 
 <script>
-import Pagination from '@/components-v1/shared/Pagination';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
 
 
 export default {
   name: 'EvaluateResultExampleList',
   components: {
-    Pagination,
+    EvaluateResultExampleItem,
   },
   props: {
-    repository: {
+    resultsData: {
       type: Object,
       required: true,
-    },
-    query: {
-      type: Object,
-      default: () => ({}),
-    },
-    language: {
-      type: String,
-      default: null,
     },
   },
   data() {
     return {
-      resultExampleList: null,
-      resultExampleItem: EvaluateResultExampleItem,
+      resultExampleList: [],
     };
   },
-  watch: {
-    query() {
-      this.updateExamples(true);
-    },
-    repository() {
-      this.updateExamples(true);
-    },
-  },
   mounted() {
-    this.updateExamples();
+    this.resultExampleList = this.resultsData.log;
+    console.log(this.resultExampleList);
   },
   methods: {
-    updateExamples(force = false) {
-      if (!this.resultExampleList || force) {
-        const a = this.$api.evaluateExample.resultSearch(
-          this.repository.uuid,
-          this.query,
-        );
-        console.log(a);
-      }
-    },
-    onItemDeleted(id) {
-      this.$emit('exampleDeleted', id);
-    },
   },
 };
 </script>

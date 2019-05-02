@@ -1,8 +1,8 @@
 <template>
   <div
     :class="{ example: true,
-              'example--error': !true,
-              'example--success': !false,
+              'example--failed': status == 'error',
+              'example--success': status == 'success',
   }">
     <div class="example-text">
       <div class="example-text__main">
@@ -26,12 +26,6 @@
           <span v-if="entity.label">is</span>
           <strong v-if="entity.label">{{ entity.label }}</strong>
         </b-tag>
-        <span
-          v-if="true"
-          class="example__entities__entitie success">[ok]</span>
-        <span
-          v-else
-          class="example__entities__entitie failed">[failed]</span>
       </div>
     </div>
     <div class="example-infos level is-mobile">
@@ -39,14 +33,14 @@
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <strong>Intent:&nbsp;</strong>
-          <span>{{ intent }}</span>
+          <span><strong>Intent:</strong> {{ intent }} {{ confidence.toFixed(2) }}</span>
         </div>
-        <div class="level-item has-text-grey-light">
-          confidence here
-        </div>
-        <span class="success">[ok]</span>
-        <span class="failed">[failed]</span>
+        <span
+          v-if="status === 'success'"
+          class="success">[ok]</span>
+        <span
+          v-else
+          class="failed">[failed]</span>
       </div>
     </div>
   </div>
@@ -66,17 +60,9 @@ export default {
     LanguageBadge,
   },
   props: {
-    id: {
-      type: Number,
-      required: true,
-    },
     text: {
       type: String,
       default: '...',
-    },
-    language: {
-      type: String,
-      default: null,
     },
     intent: {
       type: String,
@@ -86,7 +72,7 @@ export default {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
     },
-    created_at: {
+    confidence: {
       type: String,
       default: '',
     },
@@ -94,7 +80,7 @@ export default {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
     },
-    failed: {
+    status: {
       type: String,
       default: 'example--failed',
     },

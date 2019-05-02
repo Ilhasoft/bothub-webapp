@@ -46,7 +46,7 @@ export default {
     return request.$http.get(`/http://localhost:3000/evaliate/${id}/`);
   },
   getCharts(repositoryUuid, resultId) {
-    return request.$http.get(`/v2/evaluate/results/${resultId}/?${repositoryUuid}`);
+    return request.$http.get(`/v2/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
 
   allVersions(repositoryUuid) {
@@ -58,6 +58,6 @@ export default {
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return new utils.List(`/v2/evaluate/results/1/?${queryString}`);
+    return request.$http.get(`/v2/evaluate/results/1/?${queryString}`);
   },
 };

@@ -3,7 +3,7 @@
     v-if="resultId"
     class="bh-grid bh-grid--column">
     <div>
-      <graphics-result :chart-data="chartData"/>
+      <graphics-result :chart-data="resultsData"/>
       <hr>
       <filter-evaluate-result-example
         :intents="repository.intents_list"
@@ -13,7 +13,8 @@
 
       <evaluate-result-example-list
         :repository="repository"
-        :query="query" />
+        :query="query"
+        :results-data="resultsData" />
     </div>
   </div>
   <p v-else>You dont have results yet</p>
@@ -51,7 +52,7 @@ export default {
     return {
       querySchema: {},
       query: {},
-      chartData: {},
+      resultsData: {},
     };
   },
   watch: {
@@ -69,7 +70,7 @@ export default {
           this.repository.uuid,
           this.resultId,
         );
-        this.chartData = promisse.data;
+        this.resultsData = promisse.data;
       }
     },
     onSearch(value) {
