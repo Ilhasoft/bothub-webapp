@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseEvaluateResults.vue renders 1`] = `
+<div class="base-evaluate-versions bh-grid bh-grid--column">
+  <bh-button-stub primary="true" type="button" class="base-evaluate-versions__btn"> Run new test </bh-button-stub>
+  <evaluate-version-list-stub repository="[object Object]"></evaluate-version-list-stub>
+</div>
+`;
