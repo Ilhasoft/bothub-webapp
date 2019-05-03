@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCardList.vue renders correctly 1`] = `
+<div class="repository-card-list">
+  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true" class="repository-card-list__item"></pagination-stub>
+  <p class="has-text-centered">Repositories not found.</p>
+</div>
+`;

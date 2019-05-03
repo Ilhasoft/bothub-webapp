@@ -80,6 +80,7 @@
     "sass-loader": "^6.0.7",
     "semver": "^5.5.0",
     "shelljs": "^0.8.2",
+    "sinon": "^7.3.2",
     "stylelint": "^9.4.0",
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-order": "^0.8.1",

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarningModal.vue add warning renders correctly 1`] = `
+<bh-modal-stub open="true" title="" backgroundcloses="true">
+  <div class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Warnings</h2>
+      <div>
+        <div><strong>English</strong></div>
+        <div>warning 1</div>
+      </div>
+    </div>
+  </div>
+</bh-modal-stub>
+`;
+
+exports[`WarningModal.vue renders correctly 1`] = `
+<bh-modal-stub open="true" title="" backgroundcloses="true">
+  <div class="bh-grid">
+    <div class="bh-grid__item">
+      <h2>Warnings</h2>
+    </div>
+  </div>
+</bh-modal-stub>
+`;

@@ -1,68 +1,54 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import store from '@/store';
-import _ from 'lodash';
 import BH from 'bh';
-
+import sinon from 'sinon';
 
 const localVue = createLocalVue();
 localVue.use(BH);
 
 describe('TestView.vue', () => {
   let wrapper;
+  let clock;
   beforeEach(() => {
+    clock = sinon.useFakeTimers();
     wrapper = shallowMount(FilterEvaluateExample, { localVue, store });
+  });
+
+  afterEach(() => {
+    clock.restore();
   });
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('Test intent queryString formated', () => {
-    beforeEach(() => {
-      wrapper.vm.intent = 'like';
-    });
+  test('emits queryStringFormated event when intent data changes', () => {
+    wrapper.vm.intent = 'like';
 
-    test('valid queryStringFormated emit', () => {
-      _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
-      }, 500);
-    });
+    clock.tick(500);
+
+    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
   });
 
-  describe('Test Label query string formated', () => {
-    beforeEach(() => {
-      wrapper.vm.label = 'animal';
-    });
+  test('emits queryStringFormated event when label changes', () => {
+    wrapper.vm.label = 'animal';
 
-    test('valid queryStringFormated emit', () => {
-      _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
-      }, 500);
-    });
+    clock.tick(500);
+
+    expect(wrapper.emitted().queryStringFormated).toBeDefined();
   });
 
-  describe('Test entitie query string formated', () => {
-    beforeEach(() => {
-      wrapper.vm.entitie = 'cat';
-    });
+  test('emits queryStringFormated event when entity changes', () => {
+    wrapper.vm.entity = 'cat';
 
-    test('valid queryStringFormated emit', () => {
-      _.debounce(() => {
-        expect(wrapper.emitted('queryStringFormated')).toBeDefined();
-      }, 500);
-    });
+    clock.tick(500);
+
+    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
   });
 
-  describe('Test text query string formated', () => {
-    beforeEach(() => {
-      wrapper.setData({
-        text: 'i like eat sushi',
-      });
-    });
-
-    test('valid queryStringFormated emit', () => {
-      expect(wrapper.emitted('queryStringFormated')).toBeDefined();
-    });
+  test('emits queryStringFormated event when text changes', () => {
+    wrapper.vm.text = 'i like to eat sushi';
+    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
   });
 });
