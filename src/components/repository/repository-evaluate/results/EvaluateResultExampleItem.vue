@@ -3,6 +3,7 @@
     :class="{ example: true,
               'example--failed': status == 'error',
               'example--success': status == 'success',
+              'slideInUp': true,
   }">
     <div class="example-text">
       <div class="example-text__main">
@@ -21,7 +22,7 @@
           <strong
             :class="{
             'text-color-danger': status=='error'}">Intent:&nbsp;</strong>
-          <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
+          <span>{{ intent }} ({{ confidence }} confidence)</span>
         </div>
         <span
           v-if="status === 'success'"
@@ -61,8 +62,8 @@ export default {
       default: /* istanbul ignore next */ () => ([]),
     },
     confidence: {
-      type: String,
-      default: '',
+      type: Number,
+      default: 0,
     },
     repository: {
       type: Object,
@@ -124,6 +125,12 @@ export default {
     border: 2px solid $color-success;
   }
 
+    &:hover {
+
+      background-color: $white;
+      box-shadow: 0 2px 8px rgba(100, 100, 100, .5);
+  }
+
   &__entities {
     &__entitie {
       margin: 0 .5rem;
@@ -136,13 +143,6 @@ export default {
     &:hover {
       color: black;
       transition: 1s;
-    }
-  }
-
-  &:hover {
-    .example-text {
-      background-color: $white;
-      box-shadow: 0 2px 8px rgba(100, 100, 100, .5);
     }
   }
 
@@ -186,5 +186,42 @@ export default {
 
 .failed {
   color: $color-danger;
+}
+
+.slideInUp  {
+    -webkit-animation: fadein 0.6s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.6s; /* Firefox < 16 */
+        -ms-animation: fadein 0.6s; /* Internet Explorer */
+         -o-animation: fadein 0.6s; /* Opera < 12.1 */
+            animation: fadein 0.6s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 </style>
