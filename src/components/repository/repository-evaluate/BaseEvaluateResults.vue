@@ -24,7 +24,7 @@
 import GraphicsResult from '@/components/repository/repository-evaluate/results/GraphicsResult';
 import FilterEvaluateResultExample from '@/components/repository/repository-evaluate/results/FilterEvaluateResultExample';
 import EvaluateResultExampleList from '@/components/repository/repository-evaluate/results/EvaluateResultExampleList';
-// import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 
 export default {
@@ -73,22 +73,22 @@ export default {
         this.resultsData = promisse.data;
       }
     },
-    // onSearch(value) {
-    //   Object.assign(this.querySchema, value);
+    onSearch(value) {
+      Object.assign(this.querySchema, value);
 
-    //   if (!this.querySchema.intent) {
-    //     delete this.querySchema.intent;
-    //   }
-    //   if (!this.querySchema.entitie) {
-    //     delete this.querySchema.entitie;
-    //   }
-    //   if (!this.querySchema.label) {
-    //     delete this.querySchema.label;
-    //   }
-    //   const formatedQueryString = exampleSearchToString(this.querySchema);
-    //   this.query = exampleSearchToDicty(formatedQueryString);
-    //   this.query.language = this.filterByLanguage;
-    // },
+      if (!this.querySchema.intent) {
+        delete this.querySchema.intent;
+      }
+      if (!this.querySchema.entitie) {
+        delete this.querySchema.entitie;
+      }
+      if (!this.querySchema.label) {
+        delete this.querySchema.label;
+      }
+      const formatedQueryString = exampleSearchToString(this.querySchema);
+      this.query = exampleSearchToDicty(formatedQueryString);
+      this.query.language = this.filterByLanguage;
+    },
   },
 };
 </script>
