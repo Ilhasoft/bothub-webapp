@@ -94,6 +94,9 @@ export default {
             yAxes: [{
               ticks: {
                 beginAtZero: true,
+                callback(value) {
+                  return `${value}%`;
+                },
               },
             }],
             xAxes: [{
@@ -128,7 +131,7 @@ export default {
               backgroundColor: '#00c853',
             },
             {
-              label: 'Recal',
+              label: 'Recall',
               data: entitiesRecall,
               backgroundColor: 'red',
             },
@@ -139,6 +142,9 @@ export default {
             yAxes: [{
               ticks: {
                 beginAtZero: true,
+                callback(value) {
+                  return `${value}%`;
+                },
               },
             }],
             xAxes: [{

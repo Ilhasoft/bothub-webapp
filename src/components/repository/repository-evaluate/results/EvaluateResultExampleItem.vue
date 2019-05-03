@@ -3,7 +3,7 @@
     :class="{ example: true,
               'example--failed': status == 'error',
               'example--success': status == 'success',
-              'slideInUp': true,
+              'fadeIn': true,
   }">
     <div class="example-text">
       <div class="example-text__main">
@@ -188,12 +188,12 @@ export default {
   color: $color-danger;
 }
 
-.slideInUp  {
-    -webkit-animation: fadein 0.6s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 0.6s; /* Firefox < 16 */
-        -ms-animation: fadein 0.6s; /* Internet Explorer */
-         -o-animation: fadein 0.6s; /* Opera < 12.1 */
-            animation: fadein 0.6s;
+.fadeIn  {
+  -webkit-animation: fadein 0.6s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 0.6s; /* Firefox < 16 */
+  -ms-animation: fadein 0.6s; /* Internet Explorer */
+  -o-animation: fadein 0.6s; /* Opera < 12.1 */
+  animation: fadein 0.6s;
 }
 
 @keyframes fadein {
