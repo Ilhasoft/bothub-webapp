@@ -5,11 +5,11 @@
     <div>
       <graphics-result :chart-data="resultsData"/>
       <hr>
-      <filter-evaluate-result-example
+      <!-- <filter-evaluate-result-example
         :intents="repository.intents_list"
         :labels="repository.labels_list"
         :entities="repository.entities_list"
-        @queryStringFormated="onSearch($event)" />
+        @queryStringFormated="onSearch($event)" /> -->
 
       <evaluate-result-example-list
         :id="resultId"
@@ -66,11 +66,11 @@ export default {
   methods: {
     async getResults() {
       if (this.resultId) {
-        const promisse = await this.$api.evaluateExample.getResultsData(
+        const append = await this.$api.evaluateExample.getResultsData(
           this.repository.uuid,
           this.resultId,
         );
-        this.resultsData = promisse.data;
+        this.resultsData = append.data;
       }
     },
     onSearch(value) {
