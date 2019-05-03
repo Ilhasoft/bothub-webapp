@@ -21,19 +21,39 @@ export default {
     EvaluateResultExampleItem,
   },
   props: {
-    resultsData: {
+    repository: {
       type: Object,
+      required: true,
+    },
+    id: {
+      type: Number,
       required: true,
     },
   },
   data() {
     return {
       resultExampleList: [],
+      limit: 10,
+      busy: false,
     };
   },
-  watch: {
-    resultsData(currentData) {
-      this.resultExampleList = currentData;
+  mounted() {
+    this.updateList();
+  },
+  methods: {
+    async updateList() {
+      console.dir(this.$el);
+
+      this.resultExampleList = [];
+      const result = await this.$api.evaluateExample.getAllResultsLog(
+        this.repository.uuid,
+        this.id,
+      );
+      const examplesArray = result.data.log.slice(
+        this.resultExampleList.length,
+        this.resultExampleList + this.limit,
+      );
+      this.resultExampleList = this.resultExampleList.concat(examplesArray);
     },
   },
 };
