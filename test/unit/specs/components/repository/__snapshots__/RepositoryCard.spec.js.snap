@@ -4,11 +4,11 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
 <bh-card-stub shadow="light" noborder="true" class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
   <div class="bh-grid bh-grid--column repository-card__align-items">
     <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
-      <router-link to="[object Object]">
+      <router-link-stub to="[object Object]" tag="a" event="click">
         <div class="repository-card__big-badge">
           <bh-icon-button-stub type="button" value="botinho" size="medium" class="repository-card__big-badge__icon"></bh-icon-button-stub>
         </div>
-      </router-link>
+      </router-link-stub>
     </div>
     <div class="bh-grid__item text-center">
       <div class="repository-card__title"><span class="repository-card__title__bagde"><router-link-stub to="[object Object]" tag="a" event="click"><bh-icon-button-stub type="button" value="botinho" class="repository-card__title__bagde__icon"></bh-icon-button-stub></router-link-stub></span>
