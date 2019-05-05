@@ -14,7 +14,7 @@
                 ref="textInput"
                 v-model="text"
                 :entities="entities"
-                :available-entities="availableEntities"
+                :available-entities="dataAvailableEntities"
                 :formatters="textFormatters"
                 size="medium"
                 placeholder="Add a sentence"
@@ -50,10 +50,10 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="availableEntities"
+            :available-entities="dataAvailableEntities"
             :available-labels="availableLabels"
             :entities-for-edit="[]"
-            @entityAdded="onEntityAdded($event)"
+            @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
         <div class="bh-grid new-example-form-modal__buttons-wrapper">
@@ -119,6 +119,7 @@ export default {
       errors: {},
       submitting: false,
       openValue: this.open,
+      dataAvailableEntities: this.availableEntities || [],
     };
   },
   computed: {

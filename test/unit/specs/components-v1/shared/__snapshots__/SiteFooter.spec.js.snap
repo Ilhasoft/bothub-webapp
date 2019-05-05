@@ -43,11 +43,11 @@ exports[`SiteFooter.vue renders correctly 1`] = `
           </div>
           <form>
             <div class="footer-has-input">
-              <bh-text type="email" no-border="" placeholder="Your best email">
-                <div slot="append">
-                  <bh-icon-button size="small" value="chevron-right" class="text-color-grey-dark"></bh-icon-button>
+              <bh-text-stub value="" formatters="" noborder="true" type="email" placeholder="Your best email">
+                <div>
+                  <bh-icon-button-stub type="button" value="chevron-right" size="small" class="text-color-grey-dark"></bh-icon-button-stub>
                 </div>
-              </bh-text>
+              </bh-text-stub>
             </div>
           </form>
         </div>

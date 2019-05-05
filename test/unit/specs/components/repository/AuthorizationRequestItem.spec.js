@@ -2,6 +2,7 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
+import BH from 'bh';
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
@@ -11,9 +12,20 @@ import AuthorizationRequestItem from '@/components/repository/AuthorizationReque
 const localVue = createLocalVue();
 localVue.use(Buefy);
 localVue.use(Vuex);
+localVue.use(BH);
 
 describe('AuthorizationRequestItem.vue', () => {
   let wrapper;
+  const mountComponent = (options = {}) => shallowMount(AuthorizationRequestItem, {
+    localVue,
+    store,
+    propsData: {
+      id: 1,
+      user__nickname: 'fake',
+      text: 'I can contribute',
+    },
+    ...options,
+  });
   beforeEach(() => {
     store.replaceState({
       Auth: {
@@ -23,15 +35,7 @@ describe('AuthorizationRequestItem.vue', () => {
         profiles: {},
       },
     });
-    wrapper = shallowMount(AuthorizationRequestItem, {
-      localVue,
-      store,
-      propsData: {
-        id: 1,
-        user__nickname: 'fake',
-        text: 'I can contribute',
-      },
-    });
+    wrapper = mountComponent();
   });
 
   test('mount', () => {
@@ -39,26 +43,40 @@ describe('AuthorizationRequestItem.vue', () => {
   });
 
   describe('approve', () => {
-    beforeEach(() => {
-      const approveBtn = wrapper.find({ ref: 'approveBtn' });
-      approveBtn.trigger('click');
-    });
-
-    test('deleted emitted', () => {
+    test('deleted emitted', async () => {
+      wrapper.setMethods({
+        approveRequestAuthorization() {
+          return new Promise((resolve) => {
+            resolve();
+          });
+        },
+      });
+      Promise.resolve(wrapper.vm.approve());
+      await localVue.nextTick();
       expect(wrapper.emitted('deleted')).toBeDefined();
     });
   });
 
   describe('reject', () => {
-    beforeEach(async () => {
-      const rejectBtn = wrapper.find({ ref: 'rejectBtn' });
-      rejectBtn.trigger('click');
+    test('deleted emitted', async () => {
+      wrapper = mountComponent({
+        mocks: {
+          $dialog: {
+            confirm(options) {
+              Promise.resolve(options.onConfirm());
+            },
+          },
+        },
+      });
+      wrapper.setMethods({
+        rejectRequestAuthorization() {
+          return new Promise((resolve) => {
+            resolve();
+          });
+        },
+      });
+      Promise.resolve(wrapper.vm.reject());
       await localVue.nextTick();
-      wrapper.vm.rejectDialog.confirm();
-      await wrapper.vm.rejectDialog;
-    });
-
-    test('deleted emitted', () => {
       expect(wrapper.emitted('deleted')).toBeDefined();
     });
   });

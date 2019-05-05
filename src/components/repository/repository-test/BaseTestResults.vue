@@ -1,7 +1,6 @@
 <template>
   <div class="bh-grid bh-grid--column">
     <div>
-      <h1>Test output</h1>
       <graphics-result />
       <hr>
       <filter-result-example-test

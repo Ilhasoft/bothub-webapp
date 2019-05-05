@@ -16,30 +16,21 @@
                 full-size
                 open-position="bottom-left" />
             </div>
-            <div>
-              <bh-button
-                ref="addSentenceButton"
-                class="test__content-header__buttons"
-                primary
-                @click="addTestSentence()">Add test sentence</bh-button>
-              <bh-button
-                v-if="!showResults"
-                class="test__content-header__buttons"
-                primary
-                @click="showResults=!showResults">Check test results</bh-button>
-              <bh-button
-                v-else
-                class="test__content-header__buttons"
-                primary
-                @click="showResults=!showResults">Back to sentences</bh-button>
-            </div>
           </div>
-          <hr>
+          <div class="test__navigation">
+            <a
+              v-for="(name, i) in links"
+              :key="i"
+              :class="{'active': i === currentTabSelected}"
+              @click="setCurrentTab(i)">{{ name }}</a>
+          </div>
           <div class="test__content-wrapper">
             <base-examples-test
-              v-if="!showResults"
+              v-if="currentTabSelected === 0"
               :repository="repository"
-              :filter-by-language="currentLanguage"/>
+              :filter-by-language="currentLanguage"
+              @created="updateRepository(true)"/>
+            <base-test-versions v-else-if="currentTabSelected === 1" />
             <base-test-results
               v-else
               :repository="repository"
@@ -68,10 +59,6 @@
         </div>
       </div>
     </div>
-    <new-example-test-modal
-      :repository="repository"
-      :open.sync="addTestSentenceModalOpen"
-      @created="onExampleTestCreated()" />
   </repository-view-base>
 </template>
 
@@ -79,7 +66,7 @@
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseExamplesTest from '@/components/repository/repository-test/BaseExamplesTest';
 import BaseTestResults from '@/components/repository/repository-test/BaseTestResults';
-import NewExampleTestModal from '@/components/repository/repository-test/example/NewExampleTestModal';
+import BaseTestVersions from '@/components/repository/repository-test/BaseTestVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 
@@ -92,32 +79,86 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseExamplesTest,
-    NewExampleTestModal,
     LanguagesList,
     BaseTestResults,
+    BaseTestVersions,
   },
   extends: RepositoryBase,
   data() {
     return {
-      addTestSentenceModalOpen: false,
       currentLanguage: '',
-      showResults: false,
+      showRunTest: false,
+      links: ['Test sentences', 'Tests list', 'Test results'],
+      currentTabSelected: 0,
     };
   },
   methods: {
     addTestSentence() {
       this.addTestSentenceModalOpen = true;
-      this.showResults = false;
+      this.showRunTest = false;
     },
-    onExampleTestCreated() {
-      this.updateRepository(true);
+    changeNavigatior(value) {
+      this.showRunTest = value;
+    },
+    setCurrentTab(value) {
+      this.currentTabSelected = value;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '~bh/src/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/variables.scss';
+
+
 .test {
+  &__navigation {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid $color-grey;
+    margin-top: 5rem;
+
+    a {
+      position: relative;
+      display: inline-flex;
+      padding: 0 1.5rem 1rem;
+      color: $color-grey-dark;
+      font-weight: $font-weight-medium;
+      text-align: center;
+
+      &:hover,
+      &.active {
+        color: $color-fake-black;
+
+        &::before {
+          $size: 10rem;
+
+          position: absolute;
+          content: "";
+          width: $size;
+          height: $size;
+          left: 50%;
+          bottom: -($size - .75rem);
+          transform: translateX(-50%);
+          background-color: $color-primary;
+          border-radius: 50%;
+          animation: nav-bubble-animation .25s ease;
+
+          @keyframes nav-bubble-animation {
+            from {
+              bottom: -($size);
+            }
+            to {
+              bottom: -($size - .75rem);
+            }
+          }
+        }
+      }
+    }
+  }
+
   &__content-header {
     text-align: center;
     margin: 0 auto;
