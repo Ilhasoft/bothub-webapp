@@ -34,6 +34,7 @@
             <intents-and-labels-list
               :intents="repository.intents"
               :labels="repository.labels.concat([repository.other_label])"
+              :repository="repository"
               @showSentences="onShowSentences($event)" />
           </div>
           <div

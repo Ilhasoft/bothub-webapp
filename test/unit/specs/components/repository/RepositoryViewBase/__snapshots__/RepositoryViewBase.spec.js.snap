@@ -1,75 +1,66 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
-  <!---->
-  <!---->
-  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
+  <!---->
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
-<div class="rpstr-vw-bs">
+<div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
-      <repository-info-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info"></repository-info-stub>
-      <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__header__navigation bh-grid__item--grow-1"></repository-navigation-stub>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation">
-        <repository-navigation-stub repository="<Repository #1>"></repository-navigation-stub>
-      </div>
+      <router-link to="/home" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link>
+      <repository-info-stub repository="<Repository #1>"></repository-info-stub>
+      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
       <!---->
     </div>
-    <div class="rpstr-vw-bs__status-bar clickable">
-      <div class="bh-grid bh-grid--space-between">
-        <div class="bh-grid__item">
-          <div class="bh-grid text-color-grey-dark">
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon-stub value="language"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-                0 languages</span>
-            </div>
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon-stub value="sentence"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-                0 sentences</span>
-            </div>
+    <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__navigation hide-mobile"></repository-navigation-stub>
+    <div class="rpstr-vw-bs__status-bar">
+      <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
+        <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
+        <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
+          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+            <bh-icon-stub value="language" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+              0</span> <span class="hide-mobile">languages</span>
           </div>
+          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
+            <bh-icon-stub value="sentence" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
+              0</span> <span class="hide-mobile">sentences</span>
+          </div>
+          <div class="gap"></div>
         </div>
-        <div class="bh-grid__item">
-          <div class="bh-grid">
-            <div class="bh-grid__item">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
-              </div>
+        <div class="bh-grid hide-mobile">
+          <div class="bh-grid__item clickable">
+            <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
+              <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
             </div>
           </div>
         </div>
@@ -78,10 +69,8 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
     <!---->
     <div class="rpstr-vw-bs__wrapper__content"></div>
   </div>
-  <train-modal-stub requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]"></train-modal-stub>
-  <!---->
-  <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
   <new-repository-modal-stub></new-repository-modal-stub>
+  <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;

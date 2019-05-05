@@ -1,22 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<div class="bh-grid">
-  <router-link-stub to="/home" tag="a" event="click" class="repository-info__back-button"><img src="@/assets/imgs/arrow.svg" alt="arrow-back" class="bh-grid__item repository-info__back-button__icon"></router-link-stub>
-  <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
-    <div class="repository-info__big-badge">
-      <router-link-stub to="[object Object]" tag="a" event="click">
-        <bh-icon-button-stub type="button" value="botinho" size="small" class="repository-info__big-badge__icon"></bh-icon-button-stub>
-      </router-link-stub>
-    </div>
+<div class="repository-info">
+  <div class="repository-info__title"><span class="repository-info__title__bagde"><router-link-stub to="[object Object]" tag="a" event="click"><bh-icon-button-stub type="button" value="botinho" class="repository-info__title__bagde__icon"></bh-icon-button-stub></router-link-stub></span>
+    <router-link-stub to="[object Object]" tag="a" event="click"><span class="text-color-fake-black"></span></router-link-stub>
   </div>
-  <div class="bh-grid__item">
-    <div class="repository-info__title"><span class="repository-info__title__bagde"><router-link-stub to="[object Object]" tag="a" event="click"><bh-icon-button-stub type="button" value="botinho" class="repository-info__title__bagde__icon"></bh-icon-button-stub></router-link-stub></span>
-      <router-link-stub to="[object Object]" tag="a" event="click"><span class="text-color-fake-black"></span></router-link-stub>
-    </div>
-    <div class="repository-info__info-item"><span>Created by</span> <strong class="medium text-color-primary-lighter">
+  <div class="repository-info__info-item"><span>Created by</span> <strong class="medium text-color-primary-lighter">
 
-      </strong></div>
-  </div>
+    </strong></div>
 </div>
 `;

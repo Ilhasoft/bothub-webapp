@@ -6,19 +6,6 @@
         :key="i"
         :to="toFactory(name)">{{ label }}</router-link>
     </div>
-    <div class="repository-nav__mobile">
-      <bh-dropdown position="left">
-        <bh-icon
-          slot="trigger"
-          value="dots-vertical"
-          class="clickable text-color-primary"
-          size="normal" />
-        <bh-dropdown-item
-          v-for="([name, label], i) in links"
-          :key="i"
-          @click="goTo(name)">{{ label }}</bh-dropdown-item>
-      </bh-dropdown>
-    </div>
   </div>
 </template>
 
@@ -78,23 +65,10 @@ export default {
     a {
       position: relative;
       display: inline-flex;
-      padding: 0 2em 2.3rem;
+      padding: 1rem 1.5rem 1.5rem;
       color: $color-grey-dark;
       font-weight: $font-weight-medium;
       text-align: center;
-      left: 5rem;
-
-      @media screen and (max-width: 1550px) {
-        padding: 0 2rem $navigation-height;
-      }
-
-      @media screen and (max-width: 1300px) {
-        padding: 0 1.5rem $navigation-height;
-      }
-
-      @media screen and (max-width: 1200px) {
-        padding: 0 .5rem $navigation-height;
-      }
 
       &:hover,
       &.router-link-exact-active {
@@ -127,14 +101,6 @@ export default {
     }
     @media screen and (max-width: $mobile-width) {
       display: none;
-    }
-  }
-
-  &__mobile {
-    display: none;
-
-    @media screen and (max-width: $mobile-width) {
-      display: block;
     }
   }
 }
