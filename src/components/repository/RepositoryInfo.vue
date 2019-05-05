@@ -1,40 +1,22 @@
 <template>
-  <div class="bh-grid">
-    <router-link
-      class="repository-info__back-button"
-      to="/home">
-      <img
-        src="@/assets/imgs/arrow.svg"
-        alt="arrow-back"
-        class="bh-grid__item repository-info__back-button__icon">
-    </router-link>
-    <div class="bh-grid__item bh-grid__item--grow-0 repository-info__big-badge-wrapper">
-      <div class="repository-info__big-badge">
+  <div class="repository-info">
+    <div class="repository-info__title">
+      <span class="repository-info__title__bagde">
         <router-link :to="repositoryDetailsRouterParams">
           <bh-icon-button
             :value="repositoryInfoIcon"
-            size="small"
-            class="repository-info__big-badge__icon" /></router-link>
-      </div>
+            class="repository-info__title__bagde__icon" /></router-link>
+      </span>
+      <router-link :to="repositoryDetailsRouterParams">
+        <span class="text-color-fake-black">{{ repository.name }}</span>
+      </router-link>
     </div>
-    <div class="bh-grid__item">
-      <div class="repository-info__title">
-        <span class="repository-info__title__bagde">
-          <router-link :to="repositoryDetailsRouterParams">
-            <bh-icon-button
-              :value="repositoryInfoIcon"
-              class="repository-info__title__bagde__icon" /></router-link>
-        </span>
-        <router-link :to="repositoryDetailsRouterParams">
-        <span class="text-color-fake-black">{{ repository.name }}</span></router-link>
-      </div>
-      <div class="repository-info__info-item">
-        <span>Created by</span>
-        <strong class="medium text-color-primary-lighter">
-          {{ getProfile(repository.owner__nickname).name
-          || repository.owner__nickname }}
-        </strong>
-      </div>
+    <div class="repository-info__info-item">
+      <span>Created by</span>
+      <strong class="medium text-color-primary-lighter">
+        {{ getProfile(repository.owner__nickname).name
+        || repository.owner__nickname }}
+      </strong>
     </div>
   </div>
 </template>
@@ -90,52 +72,16 @@ export default {
 
 
 .repository-info {
-  &__back-button {
-    position: relative;
-    align-self: center;
-
-    &__icon {
-      width: 1rem;
-    }
-  }
-
-  &__big-badge-wrapper {
-    display: block;
-
-    @media screen and (max-width: 800px) {
-      display: none;
-    }
-  }
-
-  &__big-badge {
-    $size: 4rem;
-
-    position: relative;
-    display: block;
-    width: $size;
-    height: $size;
-    border-radius: 50%;
-    background-color: #009688;
-    overflow: hidden;
-
-    &__icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-    }
-  }
+  text-align: center;
 
   &__title {
-    font-size: 1.25rem;
-    font-weight: $font-weight-bolder;
     margin: .30rem 0;
+    font-size: 1.25rem;
 
     &__bagde {
       display: none;
-      vertical-align: middle;
       margin-right: .5rem;
+      vertical-align: middle;
 
       &__icon {
         font-size: 1.5em;
@@ -159,8 +105,8 @@ export default {
     margin: 1rem ($margin * -1);
 
     &__flag {
-      margin: 0 $margin;
       order: 0;
+      margin: 0 $margin;
 
       &--main {
         order: -1;
