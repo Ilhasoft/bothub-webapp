@@ -22,7 +22,7 @@
           <strong
             :class="{
             'text-color-danger': status=='error'}">Intent:&nbsp;</strong>
-          <span>{{ intent }} ({{ confidence }} confidence)</span>
+          <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
         </div>
         <span
           v-if="status === 'success'"
