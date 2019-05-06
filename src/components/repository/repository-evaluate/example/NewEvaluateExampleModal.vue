@@ -246,7 +246,6 @@ export default {
         if (data) {
           /* istanbul ignore next */
           this.errors = data;
-          console.log(this.errors);
         }
         /* istanbul ignore next */
         this.submitting = false;

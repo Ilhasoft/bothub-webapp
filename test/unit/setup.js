@@ -10,6 +10,6 @@ process.env.BOTHUB_WEBAPP_BASE_URL = 'http://localhost:8080/';
 
 MockDate.set(1534341842684);
 
-window.alert = (msg) => { console.log(msg); };
+window.alert = () => {};
 window.matchMedia = () => ({});
 window.scrollTo = () => {};
