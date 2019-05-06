@@ -45,6 +45,7 @@
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
 import NewEntity from './NewEntity';
+import _ from 'lodash';
 
 
 const components = {
@@ -94,7 +95,7 @@ export default {
   },
   data() {
     return {
-      entities: this.value,
+      entities: _.cloneDeep(this.value),
     };
   },
   computed: {
