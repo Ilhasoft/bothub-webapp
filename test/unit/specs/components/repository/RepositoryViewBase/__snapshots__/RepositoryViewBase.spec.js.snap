@@ -37,7 +37,7 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
-      <router-link to="/home" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link>
+      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
       <repository-info-stub repository="<Repository #1>"></repository-info-stub>
       <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
       <!---->
