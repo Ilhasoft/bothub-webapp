@@ -9,7 +9,8 @@
             :language="language"
             class="version-test-item__wrapper__info__item"
             main/>
-          <small class="version-test-item__wrapper__info__item">{{ created_at | moment('from') }}</small>
+          <small class="version-test-item__wrapper__info__item">
+            {{ created_at | moment('from') }}</small>
         </div>
         <div class="version-test-item__wrapper__links">
           <a
