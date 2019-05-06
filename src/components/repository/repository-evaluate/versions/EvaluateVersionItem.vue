@@ -9,7 +9,7 @@
             :language="language"
             class="version-test-item__wrapper__info__item"
             main/>
-          <small class="version-test-item__wrapper__info__item">2 minutes ago</small>
+          <small class="version-test-item__wrapper__info__item">{{ created_at | moment('from') }}</small>
         </div>
         <div class="version-test-item__wrapper__links">
           <a
@@ -41,6 +41,10 @@ export default {
     language: {
       type: String,
       required: true,
+    },
+    created_at: {
+      type: String,
+      default: '',
     },
   },
   methods: {
