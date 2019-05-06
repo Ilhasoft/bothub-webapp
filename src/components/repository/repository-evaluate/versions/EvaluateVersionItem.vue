@@ -4,7 +4,7 @@
       class="version-test-item">
       <div class="version-test-item__wrapper">
         <div class="version-test-item__wrapper__info">
-          <strong class="version-test-item__wrapper__info__item">Test #{{ id }}</strong>
+          <strong class="version-test-item__wrapper__info__item">Test #{{ version }}</strong>
           <language-badge
             :language="language"
             class="version-test-item__wrapper__info__item"
@@ -15,9 +15,6 @@
         <div class="version-test-item__wrapper__links">
           <a
             @click="goToDetail(id)">Load results</a>
-          <span>/</span>
-          <a
-            href="">Download</a>
         </div>
       </div>
     </bh-card>
@@ -36,6 +33,10 @@ export default {
   },
   props: {
     id: {
+      type: Number,
+      required: true,
+    },
+    version: {
       type: Number,
       required: true,
     },
