@@ -7,7 +7,6 @@
       @click="addEvaluateExample()">Add test sentence</bh-button>
     <filter-evaluate-example
       :intents="repository.intents_list"
-      :labels="repository.labels_list"
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
@@ -62,8 +61,8 @@ export default {
       if (!this.querySchema.intent) {
         delete this.querySchema.intent;
       }
-      if (!this.querySchema.entitie) {
-        delete this.querySchema.entitie;
+      if (!this.querySchema.entity) {
+        delete this.querySchema.entity;
       }
       if (!this.querySchema.label) {
         delete this.querySchema.label;
