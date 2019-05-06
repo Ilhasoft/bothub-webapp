@@ -31,14 +31,6 @@ describe('TestView.vue', () => {
     expect(wrapper.emitted('queryStringFormated')).toBeDefined();
   });
 
-  test('emits queryStringFormated event when label changes', () => {
-    wrapper.vm.label = 'animal';
-
-    clock.tick(500);
-
-    expect(wrapper.emitted().queryStringFormated).toBeDefined();
-  });
-
   test('emits queryStringFormated event when entity changes', () => {
     wrapper.vm.entity = 'cat';
 
