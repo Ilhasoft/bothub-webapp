@@ -27,15 +27,6 @@
         placeholder="All Intent" />
     </bh-field>
     <bh-field
-      :errors="errors.label"
-      class="bh-grid__item">
-      <bh-autocomplete
-        v-model="label"
-        :data="labels || []"
-        :formatters="inputFormatters"
-        placeholder="All labels" />
-    </bh-field>
-    <bh-field
       :errors="errors.intent"
       class="bh-grid__item">
       <bh-autocomplete
@@ -67,16 +58,11 @@ export default {
       type: Array,
       default: null,
     },
-    labels: {
-      type: Array,
-      default: null,
-    },
   },
   data() {
     return {
       text: '',
       intent: '',
-      label: '',
       entity: '',
       setTimeoutId: null,
       errors: {},
@@ -100,9 +86,6 @@ export default {
     }, 500),
     entity: _.debounce(function emitEntity(value) {
       this.$emit('queryStringFormated', { entity: value });
-    }, 500),
-    label: _.debounce(function emitLabel(value) {
-      this.$emit('queryStringFormated', { label: value });
     }, 500),
   },
 };

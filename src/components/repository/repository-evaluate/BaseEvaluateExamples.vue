@@ -7,7 +7,6 @@
       @click="addEvaluateExample()">Add test sentence</bh-button>
     <filter-evaluate-example
       :intents="repository.intents_list"
-      :labels="repository.labels_list"
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
