@@ -27,7 +27,7 @@
           </bh-field>
         </div>
         <div
-          v-if="entity && !customLabelDisabled"
+          v-if="entity && !customLabelDisabled && addLabel"
           class="column is-narrow">
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
@@ -100,6 +100,10 @@ export default {
     repository: {
       type: [Object, String],
       required: true,
+    },
+    addLabel: {
+      type: Boolean,
+      default: true,
     },
     availableEntities: {
       type: Array,

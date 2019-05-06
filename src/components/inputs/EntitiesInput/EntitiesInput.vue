@@ -29,6 +29,7 @@
     <div class="entities-input__new-entity">
       <new-entity
         ref="newEntity"
+        :add-label="availableAddLabel"
         :custom-label-disabled="customLabelDisabled"
         :text="text"
         :text-selected="textSelected"
@@ -69,6 +70,10 @@ export default {
     textSelected: {
       type: Object,
       default: null,
+    },
+    availableAddLabel: {
+      type: Boolean,
+      default: true,
     },
     availableEntities: {
       type: Array,

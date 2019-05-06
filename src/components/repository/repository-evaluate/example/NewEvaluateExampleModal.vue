@@ -47,6 +47,7 @@
           <entities-input
             ref="entitiesInput"
             v-model="entities"
+            :available-add-label="false"
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
