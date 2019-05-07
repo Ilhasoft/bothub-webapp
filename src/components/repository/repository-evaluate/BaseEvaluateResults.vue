@@ -17,7 +17,7 @@
         :query="query" />
     </div>
   </div>
-  <p v-else>You dont have results yet</p>
+  <p v-else>You do not have results yet</p>
 </template>
 
 <script>

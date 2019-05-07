@@ -7,7 +7,7 @@
       @dispatch="goToDetails()" />
     <p
       v-if="versionsList && versionsList.empty"
-      class="no-examples">No examples.</p>
+      class="no-examples">No versions</p>
   </div>
 </template>
 

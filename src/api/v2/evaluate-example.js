@@ -59,8 +59,6 @@ export default {
     return request.$http.get(`/v2/evaluate/results/1/?${queryString}`);
   },
   runEvaluate(owner, slug, language) {
-    console.log(owner, slug, language, 'APPPI');
-
     return request.$http.post(
       `/repository/${owner}/${slug}/evaluate/`,
       {

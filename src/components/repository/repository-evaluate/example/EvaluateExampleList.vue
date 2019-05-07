@@ -8,7 +8,7 @@
       @itemDeleted="onItemDeleted($event)" />
     <p
       v-if="examplesList && examplesList.empty"
-      class="no-examples">No examples.</p>
+      class="no-examples">No sentences.</p>
   </div>
 </template>
 

@@ -92,7 +92,7 @@ export default {
     return {
       currentLanguage: '',
       showRunEvaluate: false,
-      links: ['Test sentences', 'Tests list', 'Test results'],
+      links: ['Sentences', 'Versions', 'Results'],
       currentTabSelected: 0,
       currentResultId: null,
     };
