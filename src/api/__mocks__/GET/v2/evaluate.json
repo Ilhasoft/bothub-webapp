@@ -1,0 +1,26 @@
+[
+  {
+    "query_string": {
+      "repository_uuid": "8511fd26-a3bc-4f74-9af1-176abca5401d"
+    },
+    "response": {
+      "status": 200,
+      "data": 
+        { 
+          "count": 2,
+          "next": null,
+          "previous": null,
+          "results": [
+            {
+              "id": 5,
+              "text": "my name is douglas",
+              "language": "en",
+              "intent": "greet",
+              "entities": [],
+              "created_at": "2019-04-29T18:45:50.402002Z"
+            }
+          ]
+        }
+      }
+    }
+  ]

@@ -5,4 +5,7 @@ export default {
   getUpdateRepositoryState(state) {
     return state.updateRepository;
   },
+  getEvaluateResultId(state) {
+    return state.evaluateResultId;
+  },
 };

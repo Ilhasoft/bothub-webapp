@@ -29,6 +29,7 @@
     <div class="entities-input__new-entity">
       <new-entity
         ref="newEntity"
+        :add-label="availableAddLabel"
         :custom-label-disabled="customLabelDisabled"
         :text="text"
         :text-selected="textSelected"
@@ -44,6 +45,7 @@
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
 import NewEntity from './NewEntity';
+import _ from 'lodash';
 
 
 const components = {
@@ -70,6 +72,10 @@ export default {
       type: Object,
       default: null,
     },
+    availableAddLabel: {
+      type: Boolean,
+      default: true,
+    },
     availableEntities: {
       type: Array,
       default: () => ([]),
@@ -89,7 +95,7 @@ export default {
   },
   data() {
     return {
-      entities: this.value,
+      entities: _.cloneDeep(this.value),
     };
   },
   computed: {

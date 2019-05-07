@@ -13,4 +13,7 @@ export default {
   updateRepository(state, value) {
     state.updateRepository = value;
   },
+  updateEvaluateResultId(state, value) {
+    state.evaluateResultId = value;
+  },
 };

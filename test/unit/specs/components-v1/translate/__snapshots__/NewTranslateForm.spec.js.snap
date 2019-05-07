@@ -17,7 +17,7 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
   <div class="columns is-variable is-1">
     <div class="column">
       <bh-field-stub errors="">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" customlabeldisabled="true" entitiesforedit=""></entities-input-stub>
+        <entities-input-stub value="" repository="[object Object]" text="" availableaddlabel="true" availableentities="" availablelabels="" customlabeldisabled="true" entitiesforedit=""></entities-input-stub>
       </bh-field-stub>
     </div>
   </div>
