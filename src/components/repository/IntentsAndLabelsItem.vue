@@ -1,12 +1,14 @@
 <template>
   <bh-card>
-    <div class="i-a-l-item">
+    <div
+      class="i-a-l-item clickable"
+      @click="$emit('showSentences')">
       <div class="i-a-l-item__main">
         <div><strong>{{ title }}</strong></div>
         <div class="i-a-l-item__main__info-wrapper">
           <div class="i-a-l-item__main__info">
-            <span v-if="labelEntities">{{ labelEntities.length }} Entities</span>
-            <span><a @click.prevent="$emit('showSentences')">Show sentences</a></span>
+            <span v-if="sentencesCount !== null">{{ sentencesCount }} sentences</span>
+            <span v-if="labelEntities">{{ labelEntities.length }} entities</span>
           </div>
         </div>
       </div>
@@ -22,15 +24,15 @@
       </div>
       <div class="i-a-l-item__entities__badges">
         <bh-badge
-          v-for="(entities, i) in labelEntities"
+          v-for="(entity, i) in labelEntities"
           :key="i"
           :class="[
             'i-a-l-item__entities__badges__item',
-            getEntityClass(entities),
+            getEntityClass(entity),
+            'clickable',
           ]"
-          size="small">
-          <span>{{ entities }}</span>
-        </bh-badge>
+          size="small"
+          @click="$emit('showEntitySentences', entity)">{{ entity }}</bh-badge>
       </div>
     </div>
   </bh-card>
@@ -51,6 +53,10 @@ export default {
       type: Array,
       default: null,
     },
+    sentencesCount: {
+      type: Number,
+      default: null,
+    },
   },
   methods: {
     getEntityClass(entity) {
@@ -65,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 
 
 .i-a-l-item {
@@ -86,7 +92,7 @@ export default {
       margin: -($margin);
 
       > span {
-        color: $color-grey;
+        color: $color-grey-dark;
         margin: $margin;
       }
     }
@@ -101,8 +107,8 @@ export default {
       display: flex;
       align-items: center;
       padding: 1rem;
-      border-right: 1px solid $color-lighter-grey;
-      color: $color-grey;
+      border-right: 1px solid $color-grey;
+      color: $color-grey-dark;
     }
 
     &__badges {

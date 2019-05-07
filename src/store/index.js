@@ -7,7 +7,9 @@ import User from './user';
 import Repository from './repository';
 import Category from './category';
 import Example from './example';
+import EvaluateExample from './evaluate-example';
 import Translate from './translate';
+import CachedFetch from './cached-fetch';
 
 Vue.use(Vuex);
 
@@ -20,6 +22,8 @@ const store = new Vuex.Store({
     Category,
     Example,
     Translate,
+    CachedFetch,
+    EvaluateExample,
   },
 });
 

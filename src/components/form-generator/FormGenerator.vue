@@ -2,7 +2,7 @@
   <div>
     <messages :msgs="msgs" />
     <b-field
-      v-for="field in fields"
+      v-for="field in attrs"
       v-show="field.type !== 'hidden'"
       :key="field.name"
       :label="field.label"
@@ -10,7 +10,7 @@
       :message="field.errors || field.helpText">
       <component
         :v-if="field.inputComponent"
-        :is="field.inputComponent"
+        :is="field.InputComponent"
         v-bind="field.inputProps"
         v-model="formData[field.name]"
         :initial-data="initialData[field.name]"
@@ -20,7 +20,8 @@
 </template>
 
 <script>
-import Messages from '@/components/shared/Messages';
+import _ from 'lodash';
+import Messages from '@/components-v1/shared/Messages';
 import StringInput from './inputs/StringInput';
 import ChoiceInput from './inputs/ChoiceInput';
 import BooleanInput from './inputs/BooleanInput';
@@ -50,6 +51,10 @@ export default {
   name: 'FormGenerator',
   components,
   props: {
+    drfModelInstance: {
+      type: Object,
+      default: () => ({}),
+    },
     schema: {
       required: true,
       type: Object,
@@ -69,32 +74,27 @@ export default {
     };
   },
   computed: {
-    fields() {
-      return Object.keys(this.schema)
-        .map((name) => {
-          const {
-            type,
-            label,
-            style,
-            help_text: helpText,
-            ...inputProps
-          } = this.schema[name];
-
-          if (style
-            && typeof style.show === 'boolean'
-            && !style.show) return false;
-
-          return {
-            type,
-            name,
-            label,
-            helpText,
-            inputProps,
-            inputComponent: relatedInputComponent[type],
-            errors: this.errors[name],
-          };
-        })
-        .filter(field => !!field);
+    attrs() {
+      return _.filter(
+        _.map(
+          this.drfModelInstance.attrsDescription,
+          (value, key) => ({
+            type: value.type,
+            name: key,
+            label: value.label,
+            helpText: value.help_text,
+            description: value,
+            InputComponent: relatedInputComponent[value.type] || StringInput,
+            inputProps: {
+              required: value.required,
+              read_only: value.read_only,
+              choices: value.choices,
+            },
+            errors: this.drfModelInstance.errors[key],
+          }),
+        ),
+        attr => !attr.description.read_only,
+      );
     },
     msgs() {
       /* istanbul ignore next */

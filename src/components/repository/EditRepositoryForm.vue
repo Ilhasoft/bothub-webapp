@@ -6,23 +6,20 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initial-data="initialData"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Edit</button>
-      </div>
+      :initial-data="initialData" />
+    <div class="text-center">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Save</bh-button>
     </div>
   </form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components/shared/Loading';
+import FormGenerator from '@/components-v1/form-generator/FormGenerator';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const components = {
@@ -77,6 +74,7 @@ export default {
           repositorySlug: this.slug,
         });
         this.$emit('edited', response.data);
+        this.submitting = false;
         return true;
       } catch (error) {
         const data = error.response && error.response.data;

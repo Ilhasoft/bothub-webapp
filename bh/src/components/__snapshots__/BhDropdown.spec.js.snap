@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhDropdown.vue render correctly when props fullWidth is true 1`] = `
+<div class="bh-dropdown">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="32" class="bh-dropdown__content bh-dropdown__content--full-width" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue render position correctly when Dropdown have a bottom-left position 1`] = `
+<div class="bh-dropdown bh-dropdown--bottom-left">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="29" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue render position correctly when Dropdown have a bottom-right position 1`] = `
+<div class="bh-dropdown bh-dropdown--bottom-right">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="26" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue render position correctly when Dropdown have a left position (center) 1`] = `
+<div class="bh-dropdown bh-dropdown--left">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="20" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue render position correctly when Dropdown have a top-right position 1`] = `
+<div class="bh-dropdown bh-dropdown--top-right">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="23" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue renders correctly 1`] = `
+<div class="bh-dropdown">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title"></span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="2" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;
+
+exports[`BhDropdown.vue renders correctly when Dropdown have a title 1`] = `
+<div class="bh-dropdown">
+  <div>
+    <div class="bh-dropdown__default clickable"><span class="bh-dropdown__default__title">Select Item</span>
+      <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
+    </div>
+  </div>
+  <div tabindex="17" class="bh-dropdown__content" style="display: none;"></div>
+</div>
+`;

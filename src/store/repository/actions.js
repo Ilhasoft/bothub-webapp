@@ -1,5 +1,6 @@
 import repository from '@/api/repository';
 import update from '@/api/update';
+import TYPES from '../types';
 
 
 export default {
@@ -7,20 +8,7 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  async newRepository(store, {
-    name,
-    slug,
-    language,
-    categories,
-    description,
-    is_private: isPrivate,
-    use_language_model_featurizer: useLanguageModelFeaturizer,
-    use_competing_intents: useCompetingIntents,
-  }) {
-    const response = await repository.new(name, slug, language, categories, description, isPrivate,
-      useLanguageModelFeaturizer, useCompetingIntents);
-    return response;
-  },
+
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();
@@ -57,8 +45,9 @@ export default {
     categories,
     description,
     is_private: isPrivate,
-    use_language_model_featurizer: useLanguageModelFeaturizer,
+    algorithm,
     use_competing_intents: useCompetingIntents,
+    use_name_entities: useNameEntities,
   }) {
     return repository.edit(
       ownerNickname,
@@ -69,8 +58,9 @@ export default {
       categories,
       description,
       isPrivate,
-      useLanguageModelFeaturizer,
+      algorithm,
       useCompetingIntents,
+      useNameEntities,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
@@ -110,5 +100,14 @@ export default {
   },
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
+  },
+  setUpdateRepository({ commit }, payload) {
+    commit('updateRepository', payload);
+  },
+  setUpdateEvaluateResultId({ commit }, payload) {
+    commit('updateEvaluateResultId', payload);
+  },
+  async setRepositoryRelatedUuid({ commit }, payload) {
+    await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
 };

@@ -1,5 +1,6 @@
 <template>
   <b-input
+    :message="drfErro"
     :maxlength="max_length"
     v-model="value"
     password-reveal
@@ -10,6 +11,10 @@
 <script>
 export default {
   props: {
+    drfErro: {
+      type: String,
+      default: '',
+    },
     max_length: {
       type: Number,
       default: null,

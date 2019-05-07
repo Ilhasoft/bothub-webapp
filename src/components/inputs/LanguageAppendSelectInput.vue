@@ -1,23 +1,22 @@
 <template>
-  <bh-dropdown class="example-txt-w-highlighted-entities__input__language">
+  <bh-dropdown class="language-append-select-input">
     <span
       slot="trigger"
-      class="clickable">
-      <bh-language-flag
+      class="clickable bh-grid language-append-select-input__language-select">
+      <language-badge
         v-if="val"
         :language="val" />
       <bh-icon
         v-else
         value="earth" />
-      <bh-icon value="menu-down" />
+      <bh-icon
+        class="align"
+        value="menu-down" />
     </span>
     <bh-dropdown-item
       v-for="(verbose, language) in LANGUAGES"
       :key="language"
       @click="setVal(language)">
-      <bh-language-flag
-        :language="language"
-        size="small" />
       <span>{{ verbose }}</span>
     </bh-dropdown-item>
   </bh-dropdown>
@@ -25,10 +24,14 @@
 
 <script>
 import { LANGUAGES } from '@/utils';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
 export default {
   name: 'LanguageAppendSelectInput',
+  components: {
+    LanguageBadge,
+  },
   props: {
     value: {
       type: String,
@@ -56,3 +59,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.language-append-select-input {
+  &__language-select {
+    align-items: center;
+  }
+}
+</style>

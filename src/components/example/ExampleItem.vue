@@ -5,10 +5,10 @@
         <highlighted-text
           :text="text"
           :entities="entities"
-          :all-entities="repository.entities" />
+          :all-entities="repository.entities || repository.entities_list" />
       </div>
       <div class="example-text__right">
-        <bh-language-flag :language="language" />
+        <language-badge :language="language" />
       </div>
     </div>
     <div
@@ -56,16 +56,16 @@
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
-import HighlightedText from '@/components/shared/HighlightedText';
+import HighlightedText from '@/components-v1/shared/HighlightedText';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
-
-const components = {
-  HighlightedText,
-};
 
 export default {
   name: 'ExampleItem',
-  components,
+  components: {
+    HighlightedText,
+    LanguageBadge,
+  },
   props: {
     id: {
       type: Number,
@@ -118,7 +118,7 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repository.entities,
+        this.repository.entities || this.repository.entities_list,
         this.entities,
       );
       return `entity-${color}`;

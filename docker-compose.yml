@@ -1,17 +1,19 @@
-version: '3.3'
+version: '3.6'
 
 services:
   bothub-webapp:
-    image: ${DOCKER_IMAGE_NAME:-ilha/bothub-webapp}:${TAG:-latest}
+    image: ${BOTHUB_WEBAPP_DOCKER_IMAGE_NAME:-ilha/bothub-webapp}:${BOTHUB_WEBAPP_DOCKER_IMAGE_TAG:-latest}
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
+        - BOTHUB_NLP_BASE_URL=${BOTHUB_NLP_BASE_URL:-http://localhost:2657/}
+        - BOTHUB_WEBAPP_BASE_URL=${BOTHUB_WEBAPP_BASE_URL:-http://localhost:8080/}
+        - SUPPORTED_LANGUAGES=${SUPPORTED_LANGUAGES:-en|pt}
+        - MAILCHIMP_LOGIN=${MAILCHIMP_LOGIN}
+        - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
+        - MAILCHIMP_USER_ID=${MAILCHIMP_USER_ID}
+        - MAILCHIMP_LIST_ID=${MAILCHIMP_LIST_ID}
     ports:
       - 80:80
-    environment:
-      - API_BASE_URL=${API_BASE_URL:-http://localhost:8000}
-      - SUPPORTED_LANGUAGES=${SUPPORTED_LANGUAGES:-en|pt}
-      - MAILCHIMP_LOGIN=${MAILCHIMP_LOGIN}
-      - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
-      - MAILCHIMP_USER_ID=${MAILCHIMP_USER_ID}
-      - MAILCHIMP_LIST_ID=${MAILCHIMP_LIST_ID}

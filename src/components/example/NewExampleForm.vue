@@ -11,7 +11,7 @@
             ref="textInput"
             v-model="text"
             :entities="entities"
-            :available-entities="availableEntities"
+            :available-entities="dataAvailableEntities"
             :formatters="textFormatters"
             size="medium"
             placeholder="Add a sentence"
@@ -31,7 +31,7 @@
                     recognizer to examine the message and determine intent.">
           <bh-autocomplete
             v-model="intent"
-            :data="repository.intents || []"
+            :data="repository.intents_list || []"
             :formatters="intentFormatters"
             size="medium"
             placeholder="Intent" />
@@ -42,14 +42,11 @@
           <bh-button
             :disabled="!isValid || submitting "
             :tooltip-hover="!isValid ? validationErrors : null"
+            :loading="submitting"
             primary
-            type="submit"
-            size="medium">
+            size="medium"
+            type="submit">
             <slot v-if="!submitting">Submit</slot>
-            <bh-loading
-              v-if="submitting"
-              ref="load"
-              size="small" />
           </bh-button>
         </bh-field>
       </div>
@@ -63,9 +60,9 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="availableEntities"
+            :available-entities="dataAvailableEntities"
             :available-labels="availableLabels"
-            @entityAdded="onEntityAdded($event)"
+            @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
       </div>
@@ -79,22 +76,20 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions } from 'vuex';
-import { formatters as bhFormatters } from 'bh/utils';
+import BH from 'bh';
 import { formatters } from '@/utils';
 
 
-const components = {
-  ExampleTextWithHighlightedEntitiesInput,
-  EntitiesInput,
-  LanguageAppendSelectInput,
-};
-
 export default {
   name: 'NewExampleForm',
-  components,
+  components: {
+    ExampleTextWithHighlightedEntitiesInput,
+    EntitiesInput,
+    LanguageAppendSelectInput,
+  },
   props: {
     repository: {
-      type: [Object, String],
+      type: Object,
       required: true,
     },
   },
@@ -107,6 +102,7 @@ export default {
       entities: [],
       errors: {},
       submitting: false,
+      dataAvailableEntities: this.availableEntities || [],
     };
   },
   computed: {
@@ -128,9 +124,9 @@ export default {
     },
     textFormatters() {
       const formattersList = [
-        bhFormatters.trimStart(),
-        bhFormatters.removeBreakLines(),
-        bhFormatters.removeMultipleWhiteSpaces(),
+        BH.utils.formatters.trimStart(),
+        BH.utils.formatters.removeBreakLines(),
+        BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
       return formattersList;
@@ -143,7 +139,7 @@ export default {
       return formattersList;
     },
     availableEntities() {
-      const repositoryEntities = this.repository.entities || [];
+      const repositoryEntities = this.repository.entities_list || [];
       const entitiesFlat = this.entities.map(e => e.entity);
       return repositoryEntities
         .concat(entitiesFlat)
@@ -163,6 +159,7 @@ export default {
         language,
         intent,
         entities,
+        dataAvailableEntities,
       } = this;
 
       return {
@@ -170,6 +167,7 @@ export default {
         language,
         intent,
         entities,
+        dataAvailableEntities,
       };
     },
   },
@@ -204,7 +202,7 @@ export default {
 
       try {
         await this.newExample({
-          repository: this.repository.uuid || this.repository,
+          repository: this.repository.uuid,
           ...this.data,
         });
 

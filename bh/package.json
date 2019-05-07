@@ -1,0 +1,52 @@
+{
+  "name": "bh",
+  "version": "0.1.0",
+  "main": "dist/bh.js",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "start": "yarn watch",
+    "watch": "webpack --watch",
+    "build": "webpack --mode=production",
+    "test": "jest",
+    "lint:js": "eslint --ext .js,.vue src",
+    "lint:style": "stylelint src/**/*.vue src/**/*.scss --syntax scss",
+    "lint": "yarn lint:js && yarn lint:style"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.25",
+    "babel-eslint": "^10.0.1",
+    "babel-preset-vue": "^2.0.2",
+    "css-loader": "^1.0.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.1",
+    "eslint-plugin-vue": "^5.0.0-beta.3",
+    "jest": "^23.6.0",
+    "jest-serializer-vue": "^2.0.2",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "stylelint": "^9.6.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-order": "^1.0.0",
+    "stylelint-processor-html": "^1.0.0",
+    "stylelint-scss": "^3.3.1",
+    "stylelint-webpack-plugin": "^0.10.5",
+    "svg-inline-loader": "^0.8.0",
+    "vue-jest": "^2.6.0",
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.5.17",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  },
+  "dependencies": {
+    "highlight.js": "^9.13.1",
+    "vue": "^2.5.17",
+    "vue-highlightjs": "^1.3.3"
+  }
+}

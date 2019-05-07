@@ -34,6 +34,17 @@ module.exports = {
       optionalDependencies: ['test/unit/index.js']
     }],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'import/no-cycle': ['never']
+    'import/no-cycle': ['never'],
+    'vue/html-indent': [
+      'error',
+      2,
+      {
+        'ignores': [
+          'VElement[name=pre].children',
+          'VElement[name=bh-highlighted-pre].children',
+        ],
+      }
+    ],
+    'import/no-webpack-loader-syntax': ['never'],
   }
 }

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewExampleTestForm.vue renders correctly 1`] = `
+<bh-modal-stub title="Add a new test sentence!" backgroundcloses="true">
+  <div class="new-example-form-modal">
+    <form>
+      <div class="bh-grid">
+        <div class="bh-grid__item bh-grid__item--grow-3">
+          <bh-field-stub label="" errors="">
+            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
+              <language-append-select-input-stub class="language-append"></language-append-select-input-stub>
+            </example-text-with-highlighted-entities-input-stub>
+          </bh-field-stub>
+        </div>
+        <div class="bh-grid__item">
+          <bh-field-stub label="Intent" helptext="When your bot receives a message, your bot can use a
+                  recognizer to examine the message and determine intent." errors="">
+            <bh-autocomplete-stub data="" formatters="intentFormatters" size="medium" placeholder="Intent"></bh-autocomplete-stub>
+          </bh-field-stub>
+        </div>
+      </div>
+      <bh-field-stub errors="" class="align-space-left">
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
+      </bh-field-stub>
+      <div class="bh-grid new-example-form-modal__buttons-wrapper">
+        <bh-button-stub disabled="true" size="medium" primary="true" type="button" tooltiphover="You need type a text to sentence,Intent is required" class="new-example-form-modal__buttons-wrapper__button">Save sentence</bh-button-stub>
+        <bh-button-stub disabled="true" size="medium" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required" class="new-example-form-modal__buttons-wrapper__button">Save and add another</bh-button-stub>
+      </div>
+    </form>
+  </div>
+</bh-modal-stub>
+`;

@@ -9,28 +9,12 @@ export default {
     const { data } = await request.$http.options('/repository/new/');
     return data.actions.POST;
   },
-  new(name, slug, language, categories, description = '', isPrivate = false,
-    useLanguageModelFeaturizer = true, useCompetingIntents = false) {
-    return request.$http.post(
-      '/repository/new/',
-      {
-        name,
-        slug,
-        language,
-        categories,
-        description,
-        is_private: isPrivate,
-        use_language_model_featurizer: useLanguageModelFeaturizer,
-        use_competing_intents: useCompetingIntents,
-      },
-    );
-  },
   getAll() {
     return new utils.List('/repositories/');
   },
   search(query) {
     const queryString = qs.stringify(query);
-    return new utils.List(`/repositories/?${queryString}`);
+    return new utils.List(`/v2/repositories/?${queryString}`);
   },
   get(ownerNickname, slug) {
     return request.$http.get(`/repository/${ownerNickname}/${slug}/`);
@@ -52,7 +36,7 @@ export default {
     return data.actions.PUT;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
-    useLanguageModelFeaturizer, useCompetingIntents) {
+    algorithm, useCompetingIntents, useNameEntities) {
     return request.$http.patch(
       `/repository/${ownerNickname}/${slug}/`,
       {
@@ -62,8 +46,9 @@ export default {
         categories,
         description,
         is_private: isPrivate,
-        use_language_model_featurizer: useLanguageModelFeaturizer,
+        algorithm,
         use_competing_intents: useCompetingIntents,
+        use_name_entities: useNameEntities,
       },
     );
   },

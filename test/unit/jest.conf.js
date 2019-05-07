@@ -10,8 +10,6 @@ module.exports = {
   moduleNameMapper: {
     '.*\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^bh$': '<rootDir>/src/bh',
-    '^bh/(.*)$': '<rootDir>/src/bh/$1',
   },
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
@@ -22,10 +20,12 @@ module.exports = {
   coverageDirectory: '<rootDir>/test/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.js',
-    'src/bh/*/**/*.vue',
-    'src/components/*/**/*.vue',
+    'src/**/*.vue',
     '!src/main.js',
-    '!src/router/index.js',
+    '!src/App.vue',
+    '!src/api/**',
+    '!src/components-v1/**',
+    '!src/router/**',
     '!**/node_modules/**',
   ],
 };

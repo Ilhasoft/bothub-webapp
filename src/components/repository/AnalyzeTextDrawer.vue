@@ -1,74 +1,83 @@
 <template>
   <div class="drawer">
-    <b-collapse :open="false">
-      <button
-        slot="trigger"
-        class="drawer-title">Analyze Text</button>
-      <div class="drawer-content">
-        <form @submit.prevent="onSubmit()">
-          <b-field
-            :type="errors && errors.language && 'is-danger'"
-            :message="errors && errors.language"
-            label="Language">
-            <b-select
-              v-model="data.language"
-              expanded>
-              <option
-                v-for="(verbose, language) in availableLanguagesList"
-                :key="language"
-                :value="language">{{ verbose }}</option>
-            </b-select>
-          </b-field>
-          <b-field
-            :type="errors && errors.text && 'is-danger'"
-            :message="errors && errors.text"
-            label="Text">
-            <b-input
-              v-model="data.text"
-              type="textarea" />
-          </b-field>
-          <div class="field has-text-right">
-            <button
-              :disabled="submitting"
-              type="submit"
-              class="button is-primary is-small">Analyze</button>
-          </div>
-        </form>
-      </div>
-      <b-tabs
-        v-if="result"
-        v-model="activeTab">
-        <b-tab-item label="To Humans">
-          <div class="item">
-            <strong>Intent:</strong>
-            <div v-if="result.intent">
-              <span>{{ result.intent.name }}</span>
-              <span>({{ result.intent.confidence | percent }})</span>
+    <button
+      slot="trigger"
+      class="drawer-title"
+      @click="openCollapse()">Analyze Text</button>
+    <transition name="drawer--slide">
+      <div v-if="open">
+        <div class="drawer-content">
+          <form @submit.prevent="onSubmit()">
+            <bh-field
+              :type="errors && errors.language && 'is-danger'"
+              :message="errors && errors.language"
+              label="Language">
+              <bh-select
+                v-model="data.language"
+                expanded>
+                <option
+                  v-for="(verbose, language) in availableLanguagesList"
+                  :key="language"
+                  :value="language">{{ verbose }}</option>
+              </bh-select>
+            </bh-field>
+            <bh-field
+              :type="errors && errors.text && 'is-danger'"
+              :message="errors && errors.text"
+              :errors="errors ? errors.text : []"
+              label="Text">
+              <bh-textarea
+                :rows="8"
+                v-model="data.text"
+                type="textarea" />
+            </bh-field>
+            <div class="field has-text-right">
+              <bh-button
+                :disabled="submitting"
+                type="submit"
+                primary>Analyze</bh-button>
             </div>
-            <div v-else>No detected</div>
-          </div>
-          <div
-            v-for="(entities, label) in result.entities"
-            v-if="entities.length > 0"
-            :key="label">
-            <p><strong>{{ label }}:</strong></p>
-            <table class="table is-fullwidth is-striped is-hoverable is-narrow">
-              <tbody>
-                <tr
-                  v-for="(entity, i) in entities"
-                  :key="i">
-                  <td>{{ entity.value }}</td>
-                  <td>{{ entity.entity }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </b-tab-item>
-        <b-tab-item label="raw">
-          <pre class="mh-200">{{ JSON.stringify(result, null, 2) }}</pre>
-        </b-tab-item>
-      </b-tabs>
-    </b-collapse>
+          </form>
+        </div>
+        <bh-tabs
+          v-if="result"
+          v-model="activeTab">
+          <bh-tab-item label="To Humans">
+            <div class="item">
+              <strong>Intent:</strong>
+              <div v-if="result.intent">
+                <span>{{ result.intent.name }}</span>
+                <span>({{ result.intent.confidence | percent }})</span>
+              </div>
+              <div v-else>No detected</div>
+            </div>
+            <div
+              v-for="(entities, label) in result.entities"
+              v-if="entities.length > 0"
+              :key="label">
+              <p><strong>{{ label }}:</strong></p>
+              <table>
+                <tbody>
+                  <tr
+                    v-for="(entity, i) in entities"
+                    :key="i">
+                    <td>{{ entity.value }}</td>
+                    <td>{{ entity.entity }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </bh-tab-item>
+          <bh-tab-item label="raw">
+            <div class="drawer__analyze-content">
+              <bh-highlighted-pre
+                :code="JSON.stringify(result, null, 2) "
+                code-class="code" />
+            </div>
+          </bh-tab-item>
+        </bh-tabs>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -106,6 +115,7 @@ export default {
       result: null,
       activeTab: 0,
       errors: null,
+      open: false,
     };
   },
   computed: {
@@ -117,6 +127,9 @@ export default {
     ...mapActions([
       'analyzeText',
     ]),
+    openCollapse() {
+      this.open = !this.open;
+    },
     async onSubmit() {
       this.submitting = true;
       this.result = null;
@@ -167,7 +180,6 @@ export default {
   max-height: 90vh;
   z-index: 9;
   box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
-  overflow: auto;
 
   @media screen and (max-width: $tablet) {
     right: 50%;
@@ -194,6 +206,24 @@ export default {
 
   &-content {
     padding: 4px 16px 8px;
+  }
+
+  &--slide-enter-active, &--slide-leave-active {
+    transition: margin-bottom .2s ease-out;
+    overflow: hidden;
+  }
+
+  &__analyze-content {
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  &--slide-enter, &--slide-leave-to {
+    margin-bottom: -100%;
+  }
+
+  &--slide-enter-to, &--slide-leave {
+    margin-bottom: 0px;
   }
 }
 </style>

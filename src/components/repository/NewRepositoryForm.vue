@@ -3,25 +3,26 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
+      :drf-model-instance="drfRepositoryModel"
       :schema="formSchema"
       v-model="data"
-      :errors="errors"
-      class="field" />
-    <div class="field">
-      <div class="control has-text-centered">
-        <button
-          :disabled="submitting"
-          type="submit"
-          class="button is-primary">Create bot</button>
-      </div>
+      :errors="errors" />
+    <div class="text-center">
+      <bh-button
+        :disabled="submitting"
+        primary
+        type="submit">Create bot</bh-button>
     </div>
   </form>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import { updateAttrsValues } from '@/utils/index';
+import { getModel } from 'vue-mc-drf-model';
+import RepositoryModel from '@/models/newRepository';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components/shared/Loading';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const components = {
@@ -38,10 +39,21 @@ export default {
       data: {},
       submitting: false,
       errors: {},
+      drfRepositoryModel: {},
     };
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
+    const Model = getModel(
+      this.formSchema,
+      RepositoryModel,
+    );
+
+    this.drfRepositoryModel = new Model({},
+      null,
+      {
+        validateOnChange: true,
+      });
   },
   methods: {
     ...mapActions([
@@ -49,18 +61,16 @@ export default {
       'newRepository',
     ]),
     async onSubmit() {
+      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
       this.submitting = true;
       this.errors = {};
 
       try {
-        const response = await this.newRepository(this.data);
-        this.$emit('created', response.data);
+        const result = await this.drfRepositoryModel.save();
+        this.$emit('created', result.response.data);
         return true;
       } catch (error) {
-        const data = error.response && error.response.data;
-        if (data) {
-          this.errors = data;
-        }
+        this.errors = this.drfRepositoryModel.errors;
         this.submitting = false;
       }
 

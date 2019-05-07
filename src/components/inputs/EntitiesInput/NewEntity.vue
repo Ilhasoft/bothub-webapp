@@ -27,7 +27,7 @@
           </bh-field>
         </div>
         <div
-          v-if="entity && !customLabelDisabled"
+          v-if="entity && !customLabelDisabled && addLabel"
           class="column is-narrow">
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
@@ -36,13 +36,11 @@
               :tooltip-hover="!currentLabel
                 ? ['Categorize their entities.', 'Ex: dog is animal']
               : null"
+              :loading="searchingLabel"
               secondary
               @click="customizeLabel()">
-              <bh-loading
-                v-if="searchingLabel"
-                size="small" />
-              <slot v-else-if="currentLabel">edit {{ currentLabel }} label</slot>
-              <slot v-else>add label</slot>
+              <slot v-if="!searchingLabel && currentLabel">edit {{ currentLabel }} label</slot>
+              <slot v-else-if="!searchingLabel">add label</slot>
             </bh-button>
             <bh-autocomplete
               v-else
@@ -69,7 +67,7 @@
         <div class="column is-narrow">
           <bh-field label>
             <bh-icon-button
-              class="text-color-grey"
+              class="text-color-grey-dark"
               value="close-circle"
               @click="disableAddingMode()" />
           </bh-field>
@@ -102,6 +100,10 @@ export default {
     repository: {
       type: [Object, String],
       required: true,
+    },
+    addLabel: {
+      type: Boolean,
+      default: true,
     },
     availableEntities: {
       type: Array,
@@ -230,7 +232,6 @@ export default {
         start,
         end,
       };
-
       if (this.hasCustomizedLabel) {
         data.label = this.currentLabel;
       }

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserAvatar.vue renders correctly 1`] = `<bh-avatar-stub size="normal"><img src="https://robohash.org/botinho" class="normal"></bh-avatar-stub>`;
+
+exports[`UserAvatar.vue with small size renders correctly 1`] = `<bh-avatar-stub size="small"><img src="https://robohash.org/botinho" class="small"></bh-avatar-stub>`;

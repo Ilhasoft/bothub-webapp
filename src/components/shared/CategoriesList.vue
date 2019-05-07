@@ -1,80 +1,76 @@
 <template>
-  <ul>
-    <li
-      v-for="category in categories"
-      :key="category.id"
-      :class="{ active: current === category.id }"
-      @click="$emit('input', category.id)">{{ category.name }}</li>
-  </ul>
+  <div>
+    <div class="bh-grid categories-list">
+      <div class="bh-grid__item bh-grid__item--nested text-right">
+        <bh-dropdown
+          :title="dropdownTitle"
+          full-width
+          position="bottom-left">
+          <bh-dropdown-item
+            v-for="category in categories"
+            :key="category.id"
+            @click="select(category.id)">{{ category.name }}</bh-dropdown-item>
+        </bh-dropdown>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
+
 export default {
   name: 'CategoriesList',
-  props: {
-    current: {
-      type: Number,
-      default: 0,
-    },
-  },
   data() {
     return {
+      val: 0,
       allCategories: [],
     };
   },
   computed: {
     categories() {
-      return [{ id: 0, name: 'All', active: this.current === 0 }]
+      return [{ id: 0, name: 'All categories', active: this.current === 0 }]
         .concat(this.allCategories);
+    },
+    dropdownTitle() {
+      return this.categories.reduce((current, category) => (
+        this.val > 0 && category.id === this.val
+          ? category.name
+          : current), this.categories[0].name);
+    },
+    queryCategoryId() {
+      return this.$route.query.category
+        ? parseInt(this.$route.query.category || 0, 10)
+        : 0;
+    },
+  },
+  watch: {
+    val(value) {
+      this.$emit('input', value);
+    },
+    $route() {
+      this.val = this.queryCategoryId;
     },
   },
   async mounted() {
     const categoriesResponse = await this.getAllCategories();
     this.allCategories = categoriesResponse.data;
+    this.val = this.queryCategoryId;
   },
   methods: {
     ...mapActions([
       'getAllCategories',
     ]),
+    select(id) {
+      this.val = id;
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  li {
-    margin: 3px;
-    color: #000;
-    font-size: 14px;
-    border: 1px solid #EAE7E6;
-    text-decoration: none;
-    padding: 16px 24px;
-    border-radius: 5px;
-    background-color: transparent;
-    cursor: pointer;
-    transition: color .2s ease, background-color .2s ease;
-
-    &:hover,
-    &.active {
-      border-color: $primary;
-      background-color: $primary;
-      color: $primary-invert;
-    }
-
-    &.active {
-      font-weight: bold;
-    }
-  }
+<style lang="scss">
+.categories-list{
+  margin-top: 1rem;
 }
 </style>

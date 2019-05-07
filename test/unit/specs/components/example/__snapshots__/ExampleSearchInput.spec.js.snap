@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExampleSearchInput.vue renders correctly 1`] = `
+<form>
+  <bh-text-stub value="" formatters="" debounce="750">
+    <div>
+      <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
+    </div>
+  </bh-text-stub>
+</form>
+`;

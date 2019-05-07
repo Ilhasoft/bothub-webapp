@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrainResponse.vue add requirements renders correctly 1`] = `
+<bh-modal-stub open="true" title="Repository trained successfully!" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
+  <bh-card-stub noborder="true">
+    <div class="bh-grid bh-grid--column align">
+      <div class="bh-grid__item bh-grid__item--nested text-center">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>Trained</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>No changes</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>Failed</span>
+          </div>
+        </div>
+      </div>
+      <div class="bh-grid__item">
+        <table>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="bh-grid__item text-center">
+        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
+      </div>
+    </div>
+  </bh-card-stub>
+</bh-modal-stub>
+`;
+
+exports[`TrainResponse.vue add warning renders correctly 1`] = `
+<bh-modal-stub open="true" title="Repository trained successfully!" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
+  <bh-card-stub noborder="true">
+    <div class="bh-grid bh-grid--column align">
+      <div class="bh-grid__item bh-grid__item--nested text-center">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>Trained</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>No changes</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>Failed</span>
+          </div>
+        </div>
+      </div>
+      <div class="bh-grid__item">
+        <table>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="bh-grid__item text-center">
+        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
+      </div>
+    </div>
+  </bh-card-stub>
+</bh-modal-stub>
+`;
+
+exports[`TrainResponse.vue renders correctly 1`] = `
+<bh-modal-stub open="true" title="Repository trained successfully!" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
+  <bh-card-stub noborder="true">
+    <div class="bh-grid bh-grid--column align">
+      <div class="bh-grid__item bh-grid__item--nested text-center">
+        <div class="bh-grid">
+          <div class="bh-grid__item">
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>Trained</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>No changes</span>
+          </div>
+          <div class="bh-grid__item">
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>Failed</span>
+          </div>
+        </div>
+      </div>
+      <div class="bh-grid__item">
+        <table>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="bh-grid__item text-center">
+        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
+      </div>
+    </div>
+  </bh-card-stub>
+</bh-modal-stub>
+`;

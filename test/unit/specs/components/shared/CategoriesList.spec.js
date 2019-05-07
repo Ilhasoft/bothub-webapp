@@ -1,17 +1,15 @@
-/* eslint-disable import/first */
-jest.mock('@/api/request');
-
+import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import store from '@/store';
 import CategoriesList from '@/components/shared/CategoriesList';
 
 
 const localVue = createLocalVue();
+localVue.use(BH);
 
 describe('CategoriesList.vue', () => {
   let wrapper;
-  beforeEach(async () => {
-    wrapper = shallowMount(CategoriesList, { localVue, store });
+  beforeEach(() => {
+    wrapper = shallowMount(CategoriesList, { localVue });
   });
 
   test('renders correctly', () => {

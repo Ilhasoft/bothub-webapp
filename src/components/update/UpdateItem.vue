@@ -3,7 +3,7 @@
     <bh-card>
       <div class="update-item__content">
         <div class="update-item__header">
-          <bh-language-flag :language="language" />
+          <language-badge :language="language" />
           <span>{{ language | languageVerbose }}</span>
         </div>
         <div class="level">
@@ -48,8 +48,14 @@
 </template>
 
 <script>
+import LanguageBadge from '@/components/shared/LanguageBadge';
+
+
 export default {
   name: 'UpdateItem',
+  components: {
+    LanguageBadge,
+  },
   props: {
     repository: {
       type: Object,

@@ -2,10 +2,10 @@
 
 exports[`UpdateList.vue renders correctly 1`] = `
 <div class="update-item">
-  <bhcard-stub>
+  <bh-card-stub>
     <div class="update-item__content">
       <div class="update-item__header">
-        <bhlanguageflag-stub language="en"></bhlanguageflag-stub> <span>English</span>
+        <language-badge-stub language="en" size="small"></language-badge-stub> <span>English</span>
       </div>
       <div class="level">
         <div class="level-left">
@@ -23,11 +23,11 @@ exports[`UpdateList.vue renders correctly 1`] = `
         </div>
       </div>
     </div>
-  </bhcard-stub>
-  <bhmodal-stub backgroundcloses="true">
+  </bh-card-stub>
+  <bh-modal-stub title="" backgroundcloses="true">
     <div class="update-item__log">
       <h2 class="title is-2">Training Log</h2> <pre class="update-item__log__content"></pre>
     </div>
-  </bhmodal-stub>
+  </bh-modal-stub>
 </div>
 `;

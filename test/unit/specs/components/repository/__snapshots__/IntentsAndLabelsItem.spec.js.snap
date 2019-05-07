@@ -1,37 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IntentsAndLabelsItem.vue renders correctly 1`] = `
-<bhcard-stub>
-  <div class="i-a-l-item">
+<bh-card-stub>
+  <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
         <div class="i-a-l-item__main__info">
-          <!----> <span><a>Show sentences</a></span></div>
+          <!---->
+          <!---->
+        </div>
       </div>
     </div>
   </div>
   <!---->
-</bhcard-stub>
+</bh-card-stub>
 `;
 
 exports[`IntentsAndLabelsItem.vue renders correctly with diferents props When labelEntities array props have a array. Renders correctly 1`] = `
-<bhcard-stub>
-  <div class="i-a-l-item">
+<bh-card-stub>
+  <div class="i-a-l-item clickable">
     <div class="i-a-l-item__main">
       <div><strong>dog</strong></div>
       <div class="i-a-l-item__main__info-wrapper">
-        <div class="i-a-l-item__main__info"><span>3 Entities</span> <span><a>Show sentences</a></span></div>
+        <div class="i-a-l-item__main__info">
+          <!----> <span>3 entities</span></div>
       </div>
     </div>
   </div>
   <div class="i-a-l-item__entities">
     <div class="i-a-l-item__entities__label"><span>Entities</span></div>
     <div class="i-a-l-item__entities__badges">
-      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-sunflower"><span>Dog</span></bhbadge-stub>
-      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-energos"><span>Cat</span></bhbadge-stub>
-      <bhbadge-stub size="small" class="i-a-l-item__entities__badges__item entity-blue-martina"><span>Buy</span></bhbadge-stub>
+      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-sunflower clickable">Dog</bh-badge-stub>
+      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-energos clickable">Cat</bh-badge-stub>
+      <bh-badge-stub size="small" class="i-a-l-item__entities__badges__item entity-blue-martina clickable">Buy</bh-badge-stub>
     </div>
   </div>
-</bhcard-stub>
+</bh-card-stub>
 `;

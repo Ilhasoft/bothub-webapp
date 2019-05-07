@@ -2,14 +2,15 @@
   <div id="app">
     <login-modal
       v-if="loginModalOpen"
-      ref="loginModal" />
+      ref="loginModal"
+      :current-tab="loginModalTabValue" />
     <router-view />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import LoginModal from '@/components/shared/LoginModal';
+import LoginModal from '@/components-v1/shared/LoginModal';
 
 const components = {
   LoginModal,
@@ -19,35 +20,35 @@ export default {
   name: 'App',
   components,
   computed: {
-    ...mapGetters(['loginModalOpen']),
+    ...mapGetters([
+      'loginModalOpen',
+      'loginModalTabValue',
+    ]),
+  },
+  mounted() {
+    this.safariDetected();
+  },
+  methods: {
+    safariDetected() {
+      if (navigator.userAgent.indexOf('Safari') !== -1
+      && navigator.userAgent.indexOf('Chrome') === -1) {
+        this.$router.push({
+          name: 'safari-alert',
+        });
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,700|Roboto:300,400,700,900');
 @import '~@/assets/scss/utilities.scss';
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
-@import '~bh/assets/scss/bh.scss';
+@import '~bh/src/assets/scss/bh.scss';
+@import '@mdi/font/css/materialdesignicons.css';
+@import 'highlight.js/styles/github.css';
 
-* {
- box-sizing: border-box;
-}
-
-html,
-body {
-  width: 100%;
-  min-height: 100%;
-}
-
-body {
-  background-image: url('~@/assets/imgs/bg.jpg');
-  background-repeat: no-repeat;
-  background-position: center top;
-  background-size: cover;
-  background-attachment: fixed;
-}
 
 .container-padding {
   padding: 0 8px;
@@ -102,17 +103,6 @@ $entities-colors: (
 
 .item-1-2 {
   margin-bottom: .5rem;
-}
-
-.pre {
-  white-space: pre;
-  word-wrap: break-word;
-  padding: 16px;
-  background-color: $white-ter;
-  max-width: 100%;
-  overflow: auto;
-  font-family: monospace;
-  font-size: .75rem;
 }
 
 .mh-200 {

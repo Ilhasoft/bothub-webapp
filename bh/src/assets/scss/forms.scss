@@ -1,0 +1,205 @@
+@import '~./colors.scss';
+@import '~./variables.scss';
+@import '~./typography.scss';
+
+
+@mixin form-component-sizes() {
+  height: $form-component-height-normal;
+
+  &--small {
+    height: $form-component-height-small;
+  }
+
+  &--medium {
+    height: $form-component-height-medium;
+  }
+
+  &--large {
+    height: $form-component-height-large;
+  }
+}
+
+@mixin form-component-typography() {
+  @include typography();
+
+  font-size: 1rem;
+  font-weight: $font-weight-lighter;
+  line-height: 1rem;
+  color: $color-fake-black;
+  text-decoration: none;
+}
+
+@mixin form-component() {
+  @include form-component-sizes();
+  @include form-component-typography();
+
+  $p: &;
+  $gap: 4px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  > * {
+    flex-grow: 1;
+    margin-right: .25rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &__input {
+    @include form-component-typography();
+
+    display: block;
+    width: 100%;
+    padding: .5rem 1rem;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+
+    &::placeholder {
+      color: $color-grey-dark;
+    }
+  }
+
+  &--small {
+    font-size: $font-small;
+    line-height: $font-small;
+
+    #{$p}__input {
+      padding: .5rem;
+      font-size: $font-small;
+      line-height: $font-small;
+    }
+  }
+
+  &--medium {
+    font-size: $font-medium;
+    line-height: $font-medium;
+
+    #{$p}__input {
+      padding: 1rem;
+      font-size: $font-medium;
+      line-height: $font-medium;
+    }
+  }
+
+  &--large {
+    font-size: $font-large;
+    line-height: $font-large;
+
+    #{$p}__input {
+      padding: 1.75rem;
+      font-size: $font-large;
+      line-height: $font-large;
+    }
+  }
+}
+
+@mixin text() {
+  @include form-component();
+
+  $p: &;
+
+  background-color: white;
+  border: 1px solid $color-grey;
+  border-radius: $form-components-border-radius;
+
+  &__prepend {
+    display: flex;
+    flex-grow: 0;
+    align-items: center;
+    height: 100%;
+    padding: 0 .5rem;
+    background-color: $color-grey;
+
+    &__content {
+      white-space: nowrap;
+    }
+  }
+
+  &--no-border {
+    border-color: transparent;
+  }
+
+  &--small {
+    height: $form-component-height-small;
+
+    #{$p}__prepend-text {
+      height: $form-component-height-normal;
+      padding: 0 .25rem;
+    }
+  }
+
+  &--medium {
+    height: $form-component-height-medium;
+
+    #{$p}__prepend-text {
+      padding: 0 .75rem;
+    }
+  }
+
+  &--large {
+    height: $form-component-height-large;
+    #{$p}__prepend-text {
+      padding: 0 1rem;
+    }
+  }
+}
+
+@mixin textarea() {
+  @include form-component();
+
+  height: auto;
+  background-color: white;
+  border: 1px solid $color-grey;
+  border-radius: $form-components-border-radius;
+
+  textarea {
+    min-height: calc(#{$form-component-height-normal} - 2px);
+    overflow: hidden;
+    resize: none;
+  }
+
+  &--small {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-small} - 2px);
+    }
+  }
+
+  &--medium {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-medium} - 2px);
+    }
+  }
+
+  &--large {
+    height: auto;
+
+    textarea {
+      min-height: calc(#{$form-component-height-large} - 2px);
+    }
+  }
+}
+
+@mixin select() {
+  @include form-component();
+   width: 100%;
+  background-color: white;
+  border: 1px solid $color-grey;
+  border-radius: $form-components-border-radius;
+   &__disabled {
+    cursor: no-drop;
+  }
+   &:focus {
+    outline: none;
+  }
+}

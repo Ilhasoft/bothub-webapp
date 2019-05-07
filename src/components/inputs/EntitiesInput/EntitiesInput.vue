@@ -7,7 +7,8 @@
         :class="[
           'entities-input__badges__badge',
           getEntityClass(entity),
-      ]">
+        ]"
+        size="small">
         <span>
           <span><strong>{{ entity.entity }}</strong></span>
           <span v-if="entity.label">
@@ -28,6 +29,7 @@
     <div class="entities-input__new-entity">
       <new-entity
         ref="newEntity"
+        :add-label="availableAddLabel"
         :custom-label-disabled="customLabelDisabled"
         :text="text"
         :text-selected="textSelected"
@@ -43,6 +45,7 @@
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
 import NewEntity from './NewEntity';
+import _ from 'lodash';
 
 
 const components = {
@@ -69,6 +72,10 @@ export default {
       type: Object,
       default: null,
     },
+    availableAddLabel: {
+      type: Boolean,
+      default: true,
+    },
     availableEntities: {
       type: Array,
       default: () => ([]),
@@ -81,10 +88,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    entitiesForEdit: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   data() {
     return {
-      entities: this.value,
+      entities: _.cloneDeep(this.value),
     };
   },
   computed: {
@@ -175,7 +186,7 @@ export default {
     validateEntities(text, oldText) {
       /*
         Entity follow text,
-        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components/TextEditor.js
+        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components-v1/TextEditor.js
       */
       this.entities.forEach((entity, i) => {
         const oldEntityText = oldText.substring(entity.start, entity.end);

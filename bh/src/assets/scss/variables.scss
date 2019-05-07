@@ -1,0 +1,68 @@
+// Typography
+
+$font-family: 'Encode Sans', sans-serif;
+$font-size: 16px;
+$font-weight-normal: 400;
+$font-weight-medium: 600;
+$font-weight-lighter: 300;
+$font-weight-bolder: 700;
+
+//Font size
+
+$font-normal: .75rem;
+$font-small:  .5rem;
+$font-medium: 1rem;
+$font-large: 1.5rem;
+
+// Sizes
+
+$size-normal: 2.5rem;
+$size-small: 1.75rem;
+$size-medium: 3.25rem;
+$size-large: 4.75rem;
+$sizes: (
+  ('normal', $size-normal, $font-normal),
+  ('small', $size-small, $font-small),
+  ('medium', $size-medium, $font-medium),
+  ('large', $size-large, $font-large),
+);
+
+
+// Forms
+
+$form-components-border-size: 2px;
+$form-components-border-radius: .25rem;
+$form-component-height-normal: $size-normal;
+$form-component-height-small: $size-small;
+$form-component-height-medium: $size-medium;
+$form-component-height-large: $size-large;
+
+
+// z-index
+
+$modal-z-index: 20;
+$tooltip-z-index: 10;
+$dropdown-z-index: 9;
+$autocomplete-z-index: 8;
+
+
+// Responsive
+
+$mobile-width: 800px;
+$small-mobile-width: 450px;
+
+
+// Radius
+
+$radius-normal: .5rem;
+$radius-small: .25rem;
+$radius-medium: .75rem;
+$radius-large: 1rem;
+
+// Animation speed
+
+$speed-very-fast: 150ms;
+$speed-fast: 350ms;
+$espeed-normal: 550ms;
+$speed-slow: 750ms;
+$speed-very-slow: 950ms;

@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout.vue loading renders correctly 1`] = `
+<div class="layout">
+  <div class="layout__loading">
+    <div class="layout__loading__progress"></div>
+  </div>
+  <div class="layout__header">
+    <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <router-link-stub to="/" tag="a" event="click" class="bh-grid__item layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <!---->
+      <div class="bh-grid__item bh-grid__item--nested">
+        <div class="bh-grid bh-grid--row">
+          <!---->
+          <!---->
+          <!---->
+          <div class="bh-grid__item">
+            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bh-button-stub>
+          </div>
+          <div class="bh-grid__item">
+            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">sign up</bh-button-stub>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout__content"></div>
+  <site-footer-stub></site-footer-stub>
+  <new-repository-modal-stub></new-repository-modal-stub>
+  <beginner-tutorial-stub></beginner-tutorial-stub>
+</div>
+`;
+
+exports[`Layout.vue renders correctly 1`] = `
+<div class="layout">
+  <!---->
+  <div class="layout__header">
+    <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <router-link-stub to="/" tag="a" event="click" class="bh-grid__item layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <!---->
+      <div class="bh-grid__item bh-grid__item--nested">
+        <div class="bh-grid bh-grid--row">
+          <!---->
+          <!---->
+          <!---->
+          <div class="bh-grid__item">
+            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bh-button-stub>
+          </div>
+          <div class="bh-grid__item">
+            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">sign up</bh-button-stub>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout__content"></div>
+  <site-footer-stub></site-footer-stub>
+  <new-repository-modal-stub></new-repository-modal-stub>
+  <beginner-tutorial-stub></beginner-tutorial-stub>
+</div>
+`;

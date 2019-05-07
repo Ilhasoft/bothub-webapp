@@ -3,6 +3,7 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
+      :drf-model-instance="drfRegisterModel"
       :schema="formSchema"
       v-model="data"
       :errors="errors"
@@ -19,9 +20,12 @@
 </template>
 
 <script>
+import RegisterModel from '@/models/register';
 import { mapActions } from 'vuex';
+import { updateAttrsValues } from '@/utils/index';
+import { getModel } from 'vue-mc-drf-model';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components/shared/Loading';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const components = {
@@ -38,10 +42,23 @@ export default {
       data: {},
       submitting: false,
       errors: {},
+      drfRegisterModel: {},
     };
   },
   async mounted() {
     this.formSchema = await this.getRegisterSchema();
+    const Model = getModel(
+      this.formSchema,
+      RegisterModel,
+    );
+
+    this.drfRegisterModel = new Model(
+      {},
+      null,
+      {
+        validateOnChange: true,
+      },
+    );
   },
   methods: {
     ...mapActions([
@@ -49,21 +66,20 @@ export default {
       'getRegisterSchema',
     ]),
     async onSubmit() {
+      this.drfRegisterModel = updateAttrsValues(this.drfRegisterModel, this.data);
+      this.drfRegisterModel.getSaveData();
+
       this.submitting = true;
       this.errors = {};
 
       try {
-        await this.register(this.data);
+        await this.drfRegisterModel.save();
         this.$emit('registered');
         return true;
       } catch (error) {
-        const data = error.response && error.response.data;
-        if (data) {
-          this.errors = data;
-        }
+        this.errors = this.drfRegisterModel.errors;
         this.submitting = false;
       }
-
       return false;
     },
   },

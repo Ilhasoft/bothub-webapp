@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhSelect.vue BhSelect Disabled renders correctly Disabled Select input 1`] = `
+<div class="bh-select"><select class="bh-select bh-select__disabled" disabled="disabled">
+    <option value="Milk">Milk</option>
+  </select></div>
+`;
+
+exports[`BhSelect.vue renders correctly 1`] = `
+<div class="bh-select"><select class="bh-select">
+    <option value="Milk">Milk</option>
+  </select></div>
+`;

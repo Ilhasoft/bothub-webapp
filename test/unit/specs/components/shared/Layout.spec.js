@@ -1,59 +1,81 @@
-/* eslint-disable import/first */
-jest.mock('@/api/request');
-
-import Buefy from 'buefy';
+import BH from 'bh';
+import Router from 'vue-router';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Layout from '@/components/shared/Layout';
 import store from '@/store';
 import router from '@/router';
-import Layout from '@/components/shared/Layout';
+
 
 const localVue = createLocalVue();
-localVue.use(Buefy);
+localVue.use(BH);
+localVue.use(Router);
+
 
 describe('Layout.vue', () => {
   let wrapper;
   beforeEach(() => {
     store.replaceState({
-      Auth: {},
-      User: {
-        profiles: {},
-      },
+      Auth: { token: null },
+      User: {},
     });
-    wrapper = shallowMount(Layout, { store, localVue, router });
+    wrapper = shallowMount(Layout, {
+      localVue,
+      store,
+      router,
+    });
   });
 
-  describe('authenticated', () => {
+  test('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  describe('set title to "abc"', () => {
     beforeEach(() => {
-      store.replaceState({
-        Auth: {
-          token: '1f5e7e21d331536b58448595f69eb50a6b5e49b8',
-        },
-        User: {
-          profiles: {},
-        },
-      });
+      wrapper.setProps({ title: 'abc' });
     });
 
-    test('show authenticated', () => {
-      expect(wrapper.find({ ref: 'authenticated' }).exists())
-        .toBeTruthy();
+    test('document title equal "abc"', () => {
+      expect(document.title).toBe('abc');
     });
   });
 
-  describe('not authenticated', () => {
-    test('show not authenticated', () => {
-      expect(wrapper.find({ ref: 'notAuthenticated' }).exists())
-        .toBeTruthy();
+  describe('open new repository modal', () => {
+    beforeEach(() => {
+      wrapper.vm.openNewRepositoryModal();
     });
 
-    describe('do logout', () => {
-      beforeEach(async () => {
-        await wrapper.vm.logout();
+    test('newRepositoryModalOpen is true', () => {
+      expect(wrapper.vm.newRepositoryModalOpen).toBeTruthy();
+    });
+
+    describe('close new repository modal', () => {
+      beforeEach(() => {
+        wrapper.vm.closeNewRepositoryModal();
       });
 
-      test('no auth token', () => {
-        expect(store.getters.authToken).toBeNull();
+      test('newRepositoryModalOpen is false', () => {
+        expect(wrapper.vm.newRepositoryModalOpen).toBeFalsy();
       });
+    });
+  });
+
+  describe('open my profile', () => {
+    beforeEach(async () => {
+      wrapper.vm.openMyProfile();
+    });
+
+    test('router path is "/myprofile/"', () => {
+      expect(router.history.pending.path).toBe('/myprofile');
+    });
+  });
+
+  describe('loading', () => {
+    beforeEach(() => {
+      wrapper.setProps({ loading: true });
+    });
+
+    test('renders correctly', () => {
+      expect(wrapper).toMatchSnapshot();
     });
   });
 });

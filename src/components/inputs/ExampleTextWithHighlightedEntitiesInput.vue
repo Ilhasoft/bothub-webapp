@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import BhTextarea from 'bh/components/BhTextarea';
+import BH from 'bh';
 
-import Flag from '@/components/shared/Flag';
+import Flag from '@/components-v1/shared/Flag';
 
 import { getEntityColor } from '@/utils/entitiesColors';
 
@@ -44,7 +44,7 @@ const components = {
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   components,
-  extends: BhTextarea,
+  extends: BH.components.BhTextarea,
   props: {
     entities: {
       type: Array,
@@ -125,8 +125,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/assets/scss/forms.scss';
-@import '~bh/assets/scss/variables.scss';
+@import '~bh/src/assets/scss/forms.scss';
+@import '~bh/src/assets/scss/variables.scss';
 
 .bh {
   &-textarea {
@@ -171,19 +171,19 @@ export default {
     }
 
     &--small {
-      padding: .25rem;
-      font-size: .75rem;
-      line-height: .75rem;
+      padding: .5rem;
+      font-size: .5rem;
+      line-height: .5rem;
     }
 
     &--medium {
-      padding: .75rem;
-      font-size: 1.25rem;
-      line-height: 1.25rem;
+      padding: 1rem;
+      font-size: 1rem;
+      line-height: 1rem;
     }
 
     &--large {
-      padding: 1rem;
+      padding: 1.75rem;
       font-size: 1.5rem;
       line-height: 1.5rem;
     }

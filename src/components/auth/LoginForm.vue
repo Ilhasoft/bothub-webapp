@@ -3,8 +3,9 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
-      :schema="formSchema"
       v-model="data"
+      :drf-model-instance="drfLoginModel"
+      :schema="formSchema"
       :errors="errors"
       class="field" />
     <div
@@ -21,6 +22,7 @@
     <div class="field">
       <div class="control has-text-centered">
         <button
+          ref="submit"
           :disabled="submitting"
           type="submit"
           class="button is-primary"
@@ -31,9 +33,12 @@
 </template>
 
 <script>
+import { updateAttrsValues } from '@/utils/index';
 import { mapActions } from 'vuex';
+import { getModel } from 'vue-mc-drf-model';
+import LoginModel from '@/models/login';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components/shared/Loading';
+import Loading from '@/components-v1/shared/Loading';
 
 
 const components = {
@@ -56,10 +61,23 @@ export default {
       data: {},
       submitting: false,
       errors: {},
+      drfLoginModel: {},
     };
   },
   async mounted() {
     this.formSchema = await this.getLoginSchema();
+    const Model = getModel(
+      this.formSchema,
+      LoginModel,
+    );
+
+    this.drfLoginModel = new Model(
+      {},
+      null,
+      {
+        validateOnChange: true,
+      },
+    );
   },
   methods: {
     ...mapActions([
@@ -67,21 +85,19 @@ export default {
       'login',
     ]),
     async onSubmit() {
-      this.errors = {};
-      this.submitting = true;
+      this.drfLoginModel = updateAttrsValues(this.drfLoginModel, this.data);
+      this.drfLoginModel.getSaveData();
 
+      this.submitting = true;
+      this.errors = {};
       try {
-        await this.login(this.data);
+        await this.drfLoginModel.save();
         this.$emit('authenticated');
         return true;
       } catch (error) {
-        const data = error.response && error.response.data;
-        if (data) {
-          this.errors = data;
-        }
+        this.errors = this.drfLoginModel.errors;
         this.submitting = false;
       }
-
       return false;
     },
     forgotPasswordClick() {
