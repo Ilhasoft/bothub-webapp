@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
@@ -38,11 +39,15 @@ export default {
     this.updateVersionList();
   },
   methods: {
+    ...mapActions([
+      'getAllVersions',
+    ]),
     updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.versionsList = this.$api.evaluateExample.allVersions(
-          this.repository.uuid,
-        );
+        this.getAllVersions({ repositoryUuid: this.repository.uuid })
+          .then((response) => {
+            this.versionsList = response;
+          });
       }
     },
   },
