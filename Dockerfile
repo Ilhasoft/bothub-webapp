@@ -9,7 +9,7 @@ COPY package.json .
 COPY yarn.lock .
 COPY bh bh
 
-RUN yarn install
+RUN yarn install --network-timeout 1000000
 
 COPY . .
 
