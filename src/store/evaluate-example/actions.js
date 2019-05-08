@@ -39,4 +39,7 @@ export default {
   getAllVersions(store, { repositoryUuid }) {
     return evaluateExample.allVersions(repositoryUuid);
   },
+  getResultsData(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getResultsData(repositoryUuid, resultId);
+  },
 };
