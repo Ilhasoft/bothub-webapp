@@ -42,4 +42,7 @@ export default {
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);
   },
+  getAllResultsLog(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getAllResultsLog(repositoryUuid, resultId);
+  },
 };

@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
 import infiniteScroll from 'vue-infinite-scroll';
 
@@ -55,13 +56,16 @@ export default {
     this.updateList();
   },
   methods: {
+    ...mapActions([
+      'getAllResultsLog',
+    ]),
     updateList() {
       if (this.resultExampleList.length !== this.maxLimit) {
         this.busy = true;
-        this.$api.evaluateExample.getAllResultsLog(
-          this.repository.uuid,
-          this.id,
-        ).then((response) => {
+        this.getAllResultsLog({
+          repositoryUuid: this.repository.uuid,
+          resultId: this.id,
+        }).then((response) => {
           this.maxLimit = response.data.log.length;
           const append = response.data.log.slice(
             this.resultExampleList.length,
