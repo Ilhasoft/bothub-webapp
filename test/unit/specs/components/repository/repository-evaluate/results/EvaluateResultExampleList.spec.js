@@ -1,9 +1,11 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EvaluateResultExampleList from '@/components/repository/repository-evaluate/results/EvaluateResultExampleList';
+import BH from 'bh';
 import store from '@/store';
 
 
 const localVue = createLocalVue();
+localVue.use(BH);
 
 describe('EvaluateResultExampleList.vue', () => {
   let wrapper;
