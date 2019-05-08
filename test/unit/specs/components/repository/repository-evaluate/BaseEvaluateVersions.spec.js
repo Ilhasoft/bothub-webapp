@@ -6,7 +6,7 @@ import BH from 'bh';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('BaseEvaluateResults.vue', () => {
+describe('BaseEvaluateVersions.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(BaseEvaluateVersions, {
@@ -19,5 +19,9 @@ describe('BaseEvaluateResults.vue', () => {
 
   it('renders', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('run new test', () => {
+    expect(wrapper.vm.newEvaluate()).toBeTruthy();
   });
 });
