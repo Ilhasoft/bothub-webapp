@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EvaluateResultExampleItem.vue renders 1`] = `
+<div class="example example--success fadeIn">
+  <div class="example-text">
+    <div class="example-text__main">
+      <highlighted-text-stub text="hey" entities="" allentities="" failed=""></highlighted-text-stub>
+    </div>
+  </div>
+  <div class="example-infos level is-mobile">
+    <div class="level-left">
+      <div class="level-item "><strong class="">Intent:&nbsp;</strong> <span>greet (0.93 confidence)</span></div> <span class="success">[ok]</span>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GraphicsResult.vue renders 1`] = `
+<div class="graphics-results bh-grid bh-grid--column">
+  <div class="bh-grid__item graphics-results_wrapper">
+    <h2 class="graphic-results">Intents</h2> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+  </div>
+  <div class="bh-grid__item">
+    <h2>Entities</h2> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+  </div>
+  <div class="bh-grid__item">
+    <h2>Intent confusion matrix</h2>
+    <div class="graphics-results__charts"><img alt="chart1"></div>
+  </div>
+  <div class="bh-grid__item">
+    <h2>Intent confidence distribution</h2>
+    <div class="graphics-results__charts"><img alt="chart2"></div>
+  </div>
+</div>
+`;
