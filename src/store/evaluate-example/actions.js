@@ -36,4 +36,13 @@ export default {
     const response = await evaluateExample.runEvaluate(owner, slug, language);
     return response;
   },
+  getAllVersions(store, { repositoryUuid }) {
+    return evaluateExample.allVersions(repositoryUuid);
+  },
+  getResultsData(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getResultsData(repositoryUuid, resultId);
+  },
+  getAllResultsLog(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getAllResultsLog(repositoryUuid, resultId);
+  },
 };

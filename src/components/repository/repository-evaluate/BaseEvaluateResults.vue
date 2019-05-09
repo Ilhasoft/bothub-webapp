@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import GraphicsResult from '@/components/repository/repository-evaluate/results/GraphicsResult';
 import FilterEvaluateResultExample from '@/components/repository/repository-evaluate/results/FilterEvaluateResultExample';
 import EvaluateResultExampleList from '@/components/repository/repository-evaluate/results/EvaluateResultExampleList';
@@ -28,7 +29,7 @@ import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 
 export default {
-  name: 'BaseEvaluateResulsts',
+  name: 'BaseEvaluateResults',
   components: {
     GraphicsResult,
     FilterEvaluateResultExample,
@@ -64,12 +65,15 @@ export default {
     this.getResults();
   },
   methods: {
+    ...mapActions([
+      'getResultsData',
+    ]),
     async getResults() {
       if (this.resultId) {
-        const append = await this.$api.evaluateExample.getResultsData(
-          this.repository.uuid,
-          this.resultId,
-        );
+        const append = await this.getResultsData({
+          repositoryUuid: this.repository.uuid,
+          resultId: this.resultId,
+        });
         this.resultsData = append.data;
       }
     },
