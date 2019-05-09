@@ -106,7 +106,6 @@ describe('GraphicsResult.vue', () => {
   });
 
   describe('mocks methods', () => {
-
     it('re-renders intents charts when the chartData prop changes', () => {
       const createIntentChartMethodStub = sinon.stub();
 
