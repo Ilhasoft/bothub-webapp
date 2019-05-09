@@ -3,4 +3,5 @@ export default {
   updateRepository: false,
   evaluateResultId: '',
   evaluateLanguage: '',
+  currentTabSelected: 0,
 };

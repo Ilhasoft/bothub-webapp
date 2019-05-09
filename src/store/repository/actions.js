@@ -110,6 +110,9 @@ export default {
   setEvaluateLanguage({ commit }, payload) {
     commit('updateEvaluateLanguage', payload);
   },
+  updateCurrentTab({ commit }, tab) {
+    commit('updateCurrentTab', tab);
+  },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
