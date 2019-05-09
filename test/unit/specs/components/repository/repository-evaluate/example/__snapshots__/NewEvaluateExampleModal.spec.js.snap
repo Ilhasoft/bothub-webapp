@@ -10,7 +10,6 @@ exports[`NewExampleTestForm.vue renders correctly 1`] = `
             <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
               <language-append-select-input-stub value="en" class="language-append"></language-append-select-input-stub>
             </example-text-with-highlighted-entities-input-stub>
-            aqq
           </bh-field-stub>
         </div>
         <div class="bh-grid__item">
