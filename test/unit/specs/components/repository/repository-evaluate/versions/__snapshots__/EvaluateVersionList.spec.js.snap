@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EvaluateVersionList.vue renders 1`] = `
+<div>
+  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true"></pagination-stub>
+  <p class="no-examples">No versions</p>
+</div>
+`;

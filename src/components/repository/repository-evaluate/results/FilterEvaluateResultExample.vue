@@ -39,7 +39,7 @@
       :errors="errors.intent"
       class="bh-grid__item">
       <bh-autocomplete
-        v-model="entitie"
+        v-model="entity"
         :data="entities || []"
         :formatters="inputFormatters"
         placeholder="All entities" />
@@ -77,7 +77,7 @@ export default {
       text: '',
       intent: '',
       label: '',
-      entitie: '',
+      entity: '',
       setTimeoutId: null,
       errors: {},
     };
@@ -98,11 +98,8 @@ export default {
     intent: _.debounce(function emitIntent(value) {
       this.$emit('queryStringFormated', { intent: value });
     }, 500),
-    entitie: _.debounce(function emitEntitie(value) {
-      this.$emit('queryStringFormated', { entitie: value });
-    }, 500),
-    label: _.debounce(function emitLabel(value) {
-      this.$emit('queryStringFormated', { label: value });
+    entity: _.debounce(function emitEntity(value) {
+      this.$emit('queryStringFormated', { entity: value });
     }, 500),
   },
 };
@@ -110,9 +107,9 @@ export default {
 
 <style lang="scss">
 .filter-evaluate-example {
-  text-align: right;
   align-items: center;
   justify-content: center;
+  text-align: right;
 
   &__text {
     margin-top: .5rem;
