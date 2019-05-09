@@ -21,8 +21,9 @@
                 @textSelected="setTextSelected($event)">
                 <language-append-select-input
                   slot="append"
-                  v-model="language"
-                  class="language-append" />
+                  :value="getEvaluateLanguage"
+                  class="language-append"
+                  @input="setLanguage($event)" />
               </example-text-with-highlighted-entities-input>
             </bh-field>
           </div>
@@ -89,7 +90,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -115,7 +116,7 @@ export default {
     return {
       textSelected: null,
       text: '',
-      language: this.repository.language,
+      language: '',
       intent: '',
       entities: [],
       errors: {},
@@ -125,6 +126,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'getEvaluateLanguage',
+    ]),
     validationErrors() {
       const errors = [];
 
@@ -191,6 +195,7 @@ export default {
   watch: {
     open(value) {
       this.openValue = value;
+      this.language = this.getEvaluateLanguage;
     },
     openValue(value) {
       this.$emit('update:open', value);
@@ -217,6 +222,9 @@ export default {
           selectionEnd: entity.end,
         });
       }
+    },
+    setLanguage(value) {
+      this.language = value;
     },
     async onSubmit() {
       this.errors = {};

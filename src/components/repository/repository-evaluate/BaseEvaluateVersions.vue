@@ -16,7 +16,7 @@
 
 <script>
 import EvaluateVersionList from '@/components/repository/repository-evaluate/versions/EvaluateVersionList';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'BaseEvaluateVersions',
@@ -35,6 +35,11 @@ export default {
       error: {},
     };
   },
+  computed: {
+    ...mapGetters([
+      'getEvaluateLanguage',
+    ]),
+  },
   methods: {
     ...mapActions([
       'runNewEvaluate',
@@ -46,7 +51,7 @@ export default {
         const result = await this.runNewEvaluate({
           owner: this.repository.owner__nickname,
           slug: this.repository.slug,
-          language: this.repository.language,
+          language: this.getEvaluateLanguage,
         });
         this.evaluating = false;
         this.setUpdateEvaluateResultId(result.data.evaluate_id);
@@ -55,7 +60,7 @@ export default {
         this.error = error.response.data;
         this.evaluating = false;
         this.$toast.open({
-          message: `${this.error.detail}`,
+          message: `${this.error.detail || 'sorry, something wrong ;('} `,
           type: 'is-danger',
           duration: 3000,
         });
