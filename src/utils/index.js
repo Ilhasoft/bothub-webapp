@@ -1,15 +1,13 @@
 import BH from 'bh';
 
+export const getEntitiesList = (entities = [], extra = []) => {
+  const parsedEntities = entities
+    .concat(extra || [])
+    .map(e => (e instanceof Object ? e.entity : e));
 
-export const getEntitiesList = (entities, extra = []) => entities
-  .map(e => (
-    e instanceof Object
-      ? e.entity
-      : e))
-  .concat((extra && getEntitiesList(extra, null)) || [])
-  .reduce((result, current) => (result.indexOf(current) === -1
-    ? result.concat([current])
-    : result), []);
+  // Making sure it's unique.
+  return Array.from(new Set(parsedEntities));
+};
 
 export const LEVEL_NOTHING = 0;
 export const LEVEL_READER = 1;

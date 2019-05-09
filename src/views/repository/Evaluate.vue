@@ -21,17 +21,17 @@
             <a
               v-for="(name, i) in links"
               :key="i"
-              :class="{'active': i === currentTabSelected}"
+              :class="{'active': i === getCurrentTab}"
               @click="setCurrentTab(i)">{{ name }}</a>
           </div>
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
-              v-if="currentTabSelected === 0"
+              v-if="getCurrentTab === 0"
               :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
             <base-evaluate-versions
-              v-else-if="currentTabSelected === 1"
+              v-else-if="getCurrentTab === 1"
               :repository="repository" />
             <base-evaluate-results
               v-else
@@ -72,7 +72,7 @@ import BaseEvaluateResults from '@/components/repository/repository-evaluate/Bas
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -93,31 +93,34 @@ export default {
       currentLanguage: '',
       showRunEvaluate: false,
       links: ['Sentences', 'Versions', 'Results'],
-      currentTabSelected: 0,
       currentResultId: null,
     };
   },
   computed: {
     ...mapGetters([
       'getEvaluateResultId',
+      'getCurrentTab',
     ]),
   },
   watch: {
     getEvaluateResultId(id) {
       this.currentResultId = id;
-      this.currentTabSelected = 2;
+    },
+    currentLanguage(language) {
+      this.setEvaluateLanguage(language);
     },
   },
   methods: {
+    ...mapActions([
+      'setEvaluateLanguage',
+      'updateCurrentTab',
+    ]),
     addEvaluateSentence() {
       this.addEvaluateSentenceModalOpen = true;
       this.showRunEvaluate = false;
     },
-    changeNavigatior(value) {
-      this.showRunEvaluate = value;
-    },
     setCurrentTab(value) {
-      this.currentTabSelected = value;
+      this.updateCurrentTab(value);
     },
   },
 };

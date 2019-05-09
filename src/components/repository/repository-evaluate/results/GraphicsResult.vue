@@ -15,6 +15,7 @@
       <h2>Entities</h2>
       <canvas
         id="entitiesChart"
+        ref="entitiesChart"
         class="graphics-results__charts"/>
     </div>
     <div class="bh-grid__item">
@@ -53,12 +54,19 @@ export default {
   },
   watch: {
     chartData() {
-      this.createIntentChart();
-      this.createEntitiesChart();
+      this.updateCharts();
     },
   },
   methods: {
+    updateCharts() {
+      this.createIntentChart();
+      this.createEntitiesChart();
+    },
     createIntentChart() {
+      const ctx = document.getElementById('intentsChart');
+
+      if (!ctx) return;
+
       const intentsName = [];
       const intentsPrecision = [];
       const intentsRecall = [];
@@ -69,8 +77,6 @@ export default {
           intentsRecall.push(element.score.recall * 100);
         });
       }
-
-      const ctx = document.getElementById('intentsChart');
       // eslint-disable-next-line
       const intentChart = new Chart(ctx, {
         type: 'bar',
@@ -109,6 +115,9 @@ export default {
     },
     createEntitiesChart() {
       const ctx = document.getElementById('entitiesChart');
+
+      if (!ctx) return;
+
       const entitiesName = [];
       const entitiesPrecision = [];
       const entitiesRecall = [];

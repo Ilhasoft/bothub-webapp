@@ -94,12 +94,8 @@ export default {
       return `entity-${color}`;
     },
     getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
+      const entity = this.entities.find(e => e.entity === entityName);
+      return entity.label || 'unlabeled';
     },
   },
 };
@@ -152,7 +148,7 @@ export default {
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
-    margin-bottom: 4px;
+    margin: 1px;
 
     &__main {
       flex-grow: 1;

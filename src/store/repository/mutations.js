@@ -15,5 +15,12 @@ export default {
   },
   updateEvaluateResultId(state, value) {
     state.evaluateResultId = value;
+    state.currentTabSelected = 2;
+  },
+  updateEvaluateLanguage(state, value) {
+    state.evaluateLanguage = value;
+  },
+  updateCurrentTab(state, value) {
+    state.currentTabSelected = value;
   },
 };

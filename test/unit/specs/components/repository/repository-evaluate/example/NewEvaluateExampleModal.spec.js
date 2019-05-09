@@ -11,12 +11,16 @@ import store from '@/store';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('NewExampleTestForm.vue', () => {
+describe('NewEvaluateExampleModal.vue', () => {
   let wrapper;
+  let getters;
   beforeEach(() => {
     store.replaceState({
       Auth: {},
     });
+    getters = {
+      getEvaluateLanguage: 'en',
+    };
     wrapper = shallowMount(NewEvaluateExampleModal, {
       localVue,
       propsData: {
@@ -24,7 +28,9 @@ describe('NewExampleTestForm.vue', () => {
           uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
         },
       },
-      store,
+      store: {
+        getters,
+      },
     });
   });
 
@@ -38,7 +44,6 @@ describe('NewExampleTestForm.vue', () => {
 
   describe('fill with valid data', () => {
     beforeEach(() => {
-      wrapper.vm.submitting = false;
       wrapper.vm.text = 'my name is douglas';
       wrapper.vm.language = 'en';
       wrapper.vm.intent = 'greet';
@@ -64,8 +69,7 @@ describe('NewExampleTestForm.vue', () => {
       expect(btn.exists()).toBeTruthy();
 
       btn.vm.$emit('click');
-      expect(wrapper.vm.submitting).toBeTruthy();
-      expect(btn.attributes('disabled')).toBeTruthy();
+      expect(wrapper.vm.openValue).toBeFalsy();
     });
 
     describe('entity with label', () => {
