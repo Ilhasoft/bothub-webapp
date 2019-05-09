@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewExampleTestForm.vue renders correctly 1`] = `
+exports[`NewEvaluateExampleModal.vue renders correctly 1`] = `
 <bh-modal-stub title="Add a new test sentence!" backgroundcloses="true">
   <div class="new-example-form-modal">
     <form>

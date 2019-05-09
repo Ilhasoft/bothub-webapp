@@ -11,7 +11,7 @@ import store from '@/store';
 const localVue = createLocalVue();
 localVue.use(BH);
 
-describe('NewExampleTestForm.vue', () => {
+describe('NewEvaluateExampleModal.vue', () => {
   let wrapper;
   let getters;
   beforeEach(() => {
@@ -44,7 +44,6 @@ describe('NewExampleTestForm.vue', () => {
 
   describe('fill with valid data', () => {
     beforeEach(() => {
-      wrapper.vm.submitting = false;
       wrapper.vm.text = 'my name is douglas';
       wrapper.vm.language = 'en';
       wrapper.vm.intent = 'greet';
@@ -70,8 +69,7 @@ describe('NewExampleTestForm.vue', () => {
       expect(btn.exists()).toBeTruthy();
 
       btn.vm.$emit('click');
-      expect(wrapper.vm.submitting).toBeTruthy();
-      expect(btn.attributes('disabled')).toBeTruthy();
+      expect(wrapper.vm.openValue).toBeFalsy();
     });
 
     describe('entity with label', () => {
