@@ -94,12 +94,8 @@ export default {
       return `entity-${color}`;
     },
     getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
+      const entity = this.entities.find(e => e.entity === entityName);
+      return entity.label || 'unlabeled';
     },
   },
 };

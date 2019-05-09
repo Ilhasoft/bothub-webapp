@@ -12,7 +12,9 @@ describe('EvaluateResultExampleItem.vue', () => {
       propsData: {
         text: 'hey',
         intent: 'greet',
-        entities: [],
+        entities: [
+          { start: 3, end: 7, entity: 'kids' },
+        ],
         confidence: 0.9263743763408538,
         repository: {},
         status: 'success',
@@ -22,5 +24,11 @@ describe('EvaluateResultExampleItem.vue', () => {
 
   it('renders', () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('derives the entitiesList computed from entities props', () => {
+    expect(wrapper.vm.entitiesList).toEqual([
+      { value: 'kids', class: 'entity-sunflower', label: 'unlabeled' },
+    ]);
   });
 });
