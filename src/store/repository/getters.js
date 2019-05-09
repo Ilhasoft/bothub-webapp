@@ -8,4 +8,7 @@ export default {
   getEvaluateResultId(state) {
     return state.evaluateResultId;
   },
+  getEvaluateLanguage(state) {
+    return state.evaluateLanguage ? state.evaluateLanguage : 'en';
+  },
 };

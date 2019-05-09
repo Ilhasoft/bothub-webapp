@@ -16,4 +16,7 @@ export default {
   updateEvaluateResultId(state, value) {
     state.evaluateResultId = value;
   },
+  updateEvaluateLanguage(state, value) {
+    state.evaluateLanguage = value;
+  },
 };

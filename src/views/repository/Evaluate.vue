@@ -72,7 +72,7 @@ import BaseEvaluateResults from '@/components/repository/repository-evaluate/Bas
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -107,8 +107,14 @@ export default {
       this.currentResultId = id;
       this.currentTabSelected = 2;
     },
+    currentLanguage(language) {
+      this.setEvaluateLanguage(language);
+    },
   },
   methods: {
+    ...mapActions([
+      'setEvaluateLanguage',
+    ]),
     addEvaluateSentence() {
       this.addEvaluateSentenceModalOpen = true;
       this.showRunEvaluate = false;

@@ -13,10 +13,14 @@ localVue.use(BH);
 
 describe('NewExampleTestForm.vue', () => {
   let wrapper;
+  let getters;
   beforeEach(() => {
     store.replaceState({
       Auth: {},
     });
+    getters = {
+      getEvaluateLanguage: 'en',
+    };
     wrapper = shallowMount(NewEvaluateExampleModal, {
       localVue,
       propsData: {
@@ -24,7 +28,9 @@ describe('NewExampleTestForm.vue', () => {
           uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
         },
       },
-      store,
+      store: {
+        getters,
+      },
     });
   });
 

@@ -152,7 +152,7 @@ export default {
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
-    margin-bottom: 4px;
+    margin: 1px;
 
     &__main {
       flex-grow: 1;

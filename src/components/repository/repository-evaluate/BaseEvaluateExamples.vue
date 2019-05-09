@@ -54,6 +54,9 @@ export default {
       this.onSearch();
     },
   },
+  mounted() {
+    this.onSearch();
+  },
   methods: {
     onSearch(value) {
       Object.assign(this.querySchema, value);
