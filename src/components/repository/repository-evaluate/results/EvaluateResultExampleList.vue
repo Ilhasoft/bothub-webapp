@@ -48,6 +48,11 @@ export default {
       busy: false,
     };
   },
+  computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
+  },
   mounted() {
     this.updateList();
   },
@@ -55,9 +60,6 @@ export default {
     ...mapActions([
       'getAllResultsLog',
     ]),
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-    }),
     updateList() {
       if (this.resultExampleList.length !== this.maxLimit) {
         this.busy = true;
