@@ -113,6 +113,9 @@ export default {
   updateCurrentTab({ commit }, tab) {
     commit('updateCurrentTab', tab);
   },
+  setRepository({ commit }, payload) {
+    commit('setRepository', payload);
+  },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },

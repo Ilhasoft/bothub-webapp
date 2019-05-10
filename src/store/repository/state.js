@@ -1,5 +1,6 @@
 export default {
   relatedUuid: {},
+  selectedRepository: {},
   updateRepository: false,
   evaluateResultId: '',
   evaluateLanguage: '',

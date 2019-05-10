@@ -10,6 +10,9 @@ export default {
       },
     );
   },
+  setRepository(state, value) {
+    state.selectedRepository = value;
+  },
   updateRepository(state, value) {
     state.updateRepository = value;
   },
