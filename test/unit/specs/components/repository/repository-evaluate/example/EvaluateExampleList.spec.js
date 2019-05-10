@@ -2,23 +2,38 @@
 jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import Vuex from 'vuex';
 import API from '@/utils/plugins/API';
 import EvaluateExampleList from '@/components/repository/repository-evaluate/example/EvaluateExampleList';
 
 
 const localVue = createLocalVue();
 localVue.use(API);
+localVue.use(Vuex);
 
 describe('ExamplesList.vue', () => {
   let wrapper;
+  let state;
+  let store;
+
   beforeEach(() => {
-    wrapper = shallowMount(EvaluateExampleList, {
-      localVue,
-      propsData: {
-        repository: {
-          uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+    state = {
+      selectedRepository: {
+        uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+      },
+    };
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          state,
         },
       },
+    });
+
+    wrapper = shallowMount(EvaluateExampleList, {
+      localVue,
+      store,
     });
   });
 
@@ -42,7 +57,9 @@ describe('ExamplesList.vue', () => {
     });
 
     test('update list when repository changes', () => {
-      wrapper.setProps({ repository: { uuid: '8871fd26-a3bc-4f74-9af1-176abca5971d' } });
+      state.selectedRepository = {
+        id: '8871fd26-a3bc-4f74-9af1-176abca5971d',
+      };
       expect(wrapper.vm.examplesList.items.length).toBe(0);
     });
   });
