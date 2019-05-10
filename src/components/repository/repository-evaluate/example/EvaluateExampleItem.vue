@@ -63,7 +63,6 @@
       </div>
     </div>
     <edit-evaluate-example-modal
-      :repository="repository"
       :open.sync="editEvaluateExampleModalOpen"
       :text-to-edit="text"
       :intent-to-edit="intent"

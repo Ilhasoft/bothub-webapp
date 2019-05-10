@@ -10,10 +10,8 @@
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
-      :repository="repository"
       :query="query"/>
     <new-evaluate-example-modal
-      :repository="repository"
       :open.sync="addEvaluateExampleModalOpen"
       @created="onEvaluateExampleCreated()" />
   </div>
