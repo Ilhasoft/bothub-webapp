@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
 import infiniteScroll from 'vue-infinite-scroll';
 
@@ -35,10 +35,6 @@ export default {
   },
   directives: { infiniteScroll },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     id: {
       type: Number,
       required: true,
@@ -59,6 +55,9 @@ export default {
     ...mapActions([
       'getAllResultsLog',
     ]),
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     updateList() {
       if (this.resultExampleList.length !== this.maxLimit) {
         this.busy = true;
