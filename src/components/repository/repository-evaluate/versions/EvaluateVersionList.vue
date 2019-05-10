@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
@@ -23,17 +23,16 @@ export default {
     EvaluateVersionItem,
     Pagination,
   },
-  props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
-  },
   data() {
     return {
       evaluateItem: EvaluateVersionItem,
       versionsList: null,
     };
+  },
+  computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
   },
   mounted() {
     this.updateVersionList();
