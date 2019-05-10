@@ -79,7 +79,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -92,10 +92,6 @@ export default {
     LanguageAppendSelectInput,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     open: {
       type: Boolean,
       default: false,
@@ -135,6 +131,9 @@ export default {
     ...mapGetters([
       'getEvaluateLanguage',
     ]),
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     validationErrors() {
       const errors = [];
 

@@ -104,7 +104,7 @@ class Repository extends ModelBase {
         uuid: this.uuid,
       },
     );
-    store.dispatch('setRepository', this);
+    store.dispatch('setRepository', this.attributes);
   }
 }
 

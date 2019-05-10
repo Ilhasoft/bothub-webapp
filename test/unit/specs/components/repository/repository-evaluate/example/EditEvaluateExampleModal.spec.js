@@ -3,37 +3,48 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
+import Vuex from 'vuex';
 
 import EditEvaluateExampleModal from '@/components/repository/repository-evaluate/example/EditEvaluateExampleModal';
-import store from '@/store';
-
+import getters from '@/store/repository/getters';
 
 const localVue = createLocalVue();
 localVue.use(BH);
+localVue.use(Vuex);
 
 describe('EditEvaluateExampleModal.vue', () => {
   let wrapper;
-  let getters;
-
+  let state;
+  let store;
+  let actions;
   beforeEach(() => {
-    store.replaceState({
-      Auth: {},
-    });
-    getters = {
-      getEvaluateLanguage: 'en',
+    state = {
+      selectedRepository: {
+        uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+        intents_list: ['affirm', 'cuisine', 'greet'],
+      },
+      evaluateLanguage: 'en',
     };
-    wrapper = shallowMount(EditEvaluateExampleModal, {
-      localVue,
-      propsData: {
-        repository: {
-          uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+
+    actions = {
+      updateEvaluateExample: jest.fn(),
+    };
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          state,
+          getters,
+          actions,
         },
       },
-      store: {
-        getters,
-      },
+    });
+    wrapper = shallowMount(EditEvaluateExampleModal, {
+      localVue,
+      store,
     });
   });
+
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
