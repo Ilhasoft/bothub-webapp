@@ -8,7 +8,7 @@ exports[`EditEvaluateExampleModal.vue renders correctly 1`] = `
         <div class="bh-grid__item bh-grid__item--grow-3">
           <bh-field-stub label="" errors="">
             <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
-              <language-append-select-input-stub value="en" class="language-append"></language-append-select-input-stub>
+              <language-append-select-input-stub value="en" class="language-append" slot="append"></language-append-select-input-stub>
             </example-text-with-highlighted-entities-input-stub>
           </bh-field-stub>
         </div>
