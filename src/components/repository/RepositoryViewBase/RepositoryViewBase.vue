@@ -3,12 +3,6 @@
     id="rpstr-vw-bs"
     class="rpstr-vw-bs">
     <div
-      v-if="!repository || (repository && !repository.name && repository.loading)"
-      class="rpstr-vw-bs__loading">
-      <bh-loading />
-    </div>
-    <div
-      v-else-if="repository && !repository.fatal"
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <div class="rpstr-vw-bs__wrapper__header">
@@ -20,6 +14,7 @@
             alt="bothub">
         </router-link>
         <repository-info
+          v-if="repository && repository.name"
           :repository="repository" />
         <div
           :class="[
@@ -54,9 +49,11 @@
         </div>
       </div>
       <repository-navigation
+        v-if="repository && !repository.fatal && repository.name"
         :repository="repository"
         class="rpstr-vw-bs__wrapper__navigation hide-mobile" />
       <div
+        v-if="repository && !repository.fatal && repository.name"
         class="rpstr-vw-bs__status-bar">
         <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
           <side-bar-navigation
@@ -163,12 +160,14 @@
         :slug="repository.slug"
         :default-language="repository.language"
         :available-languages="repository.available_languages" />
-      <div class="rpstr-vw-bs__wrapper__content">
+      <div
+        v-if="repository && !repository.fatal && repository.name"
+        class="rpstr-vw-bs__wrapper__content">
         <slot />
       </div>
     </div>
     <div
-      v-else-if="repository && repository.fatal && errorCode"
+      v-if="repository && repository.fatal && errorCode"
       class="rpstr-vw-bs__error">
       <h1>{{ errorCode|errorVerbose }}</h1>
     </div>
@@ -176,6 +175,11 @@
       v-else-if="repository && repository.fatal"
       class="rpstr-vw-bs__error">
       <h1>Error to retrieve bot</h1>
+    </div>
+    <div
+      v-else-if="!repository || (repository && !repository.name && repository.loading)"
+      class="rpstr-vw-bs__loading">
+      <bh-loading />
     </div>
     <new-repository-modal
       :active="newRepositoryModalOpen"
@@ -372,22 +376,23 @@ export default {
     &__wrapper {
       &__header {
         position: relative;
-        display: grid;
-        grid-template-columns: 10% 1fr 10%;
-        margin: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-bottom: .120rem solid whitesmoke;
 
         @media screen and (max-width: $medium-screen) {
           display: none;
         }
 
         &__logo {
-          align-self: center;
+          width: 10%;
         }
 
         &__options {
           display: flex;
           align-items: center;
-          justify-content: flex-end;
 
           &__avatar {
             text-align: right;
@@ -451,10 +456,6 @@ export default {
         }
       }
 
-      &__navigation {
-        border-top: .120rem solid whitesmoke
-      }
-
       &__content {
         max-width: 80%;
         margin: 0 auto;
@@ -467,6 +468,7 @@ export default {
 
     &__error,
     &__loading {
+      margin-top: 2rem;
       text-align: center;
     }
 
