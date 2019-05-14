@@ -3,18 +3,30 @@
 exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
 <div class="graphics-results bh-grid bh-grid--column">
   <div class="bh-grid__item graphics-results_wrapper">
-    <h2 class="graphic-results">Intents</h2> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+    <h2 class="graphic-results">Intents</h2>
+    <!----> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
   </div>
   <div class="bh-grid__item">
-    <h2>Entities</h2> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+    <h2>Entities</h2>
+    <!----> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
   </div>
   <div class="bh-grid__item">
     <h2>Intent confusion matrix</h2>
-    <div class="graphics-results__charts"><img alt="chart1"></div>
+    <div class="graphics-results__charts">
+      <div class="graphics-results__charts__loading">
+        <bh-loading-stub></bh-loading-stub>
+      </div>
+      <!---->
+    </div>
   </div>
   <div class="bh-grid__item">
     <h2>Intent confidence distribution</h2>
-    <div class="graphics-results__charts"><img alt="chart2"></div>
+    <div class="graphics-results__charts">
+      <div class="graphics-results__charts__loading">
+        <bh-loading-stub></bh-loading-stub>
+      </div>
+      <!---->
+    </div>
   </div>
 </div>
 `;
@@ -22,18 +34,26 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
 exports[`GraphicsResult.vue renders renders 1`] = `
 <div class="graphics-results bh-grid bh-grid--column">
   <div class="bh-grid__item graphics-results_wrapper">
-    <h2 class="graphic-results">Intents</h2> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+    <h2 class="graphic-results">Intents</h2>
+    <div class="graphics-results__charts__loading">
+      <bh-loading-stub></bh-loading-stub>
+    </div> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
   </div>
   <div class="bh-grid__item">
-    <h2>Entities</h2> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+    <h2>Entities</h2>
+    <div class="graphics-results__charts__loading">
+      <bh-loading-stub></bh-loading-stub>
+    </div> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
   </div>
   <div class="bh-grid__item">
     <h2>Intent confusion matrix</h2>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1"></div>
   </div>
   <div class="bh-grid__item">
     <h2>Intent confidence distribution</h2>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2"></div>
   </div>
 </div>
 `;
