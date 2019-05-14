@@ -35,7 +35,7 @@
               :repository="repository" />
             <base-evaluate-results
               v-else
-              :result-id="currentResultId"
+              :result-id="resultId"
               :repository="repository"
               :filter-by-language="currentLanguage" />
           </div>
@@ -72,7 +72,7 @@ import BaseEvaluateResults from '@/components/repository/repository-evaluate/Bas
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -93,19 +93,17 @@ export default {
       currentLanguage: '',
       showRunEvaluate: false,
       links: ['Sentences', 'Versions', 'Results'],
-      currentResultId: null,
     };
   },
   computed: {
+    ...mapState({
+      resultId: state => state.Repository.evaluateResultId,
+    }),
     ...mapGetters([
-      'getEvaluateResultId',
       'getCurrentTab',
     ]),
   },
   watch: {
-    getEvaluateResultId(id) {
-      this.currentResultId = id;
-    },
     currentLanguage(language) {
       this.setEvaluateLanguage(language);
     },
