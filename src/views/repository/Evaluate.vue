@@ -21,21 +21,21 @@
             <a
               v-for="(name, i) in links"
               :key="i"
-              :class="{'active': i === getCurrentTab}"
+              :class="{'active': i === currentTab}"
               @click="setCurrentTab(i)">{{ name }}</a>
           </div>
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
-              v-if="getCurrentTab === 0"
+              v-if="currentTab === 0"
               :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
             <base-evaluate-versions
-              v-else-if="getCurrentTab === 1"
+              v-else-if="currentTab === 1"
               :repository="repository" />
             <base-evaluate-results
               v-else
-              :result-id="currentResultId"
+              :result-id="resultId"
               :repository="repository"
               :filter-by-language="currentLanguage" />
           </div>
@@ -72,7 +72,7 @@ import BaseEvaluateResults from '@/components/repository/repository-evaluate/Bas
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -90,25 +90,25 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
+      initialTab: 0,
       currentLanguage: '',
       showRunEvaluate: false,
       links: ['Sentences', 'Versions', 'Results'],
-      currentResultId: null,
     };
   },
   computed: {
-    ...mapGetters([
-      'getEvaluateResultId',
-      'getCurrentTab',
-    ]),
+    ...mapState({
+      resultId: state => state.Repository.evaluateResultId,
+      currentTab: state => state.Repository.currentTabSelected,
+    }),
   },
   watch: {
-    getEvaluateResultId(id) {
-      this.currentResultId = id;
-    },
     currentLanguage(language) {
       this.setEvaluateLanguage(language);
     },
+  },
+  mounted() {
+    this.updateCurrentTab(this.initialTab);
   },
   methods: {
     ...mapActions([

@@ -63,7 +63,6 @@
       </div>
     </div>
     <edit-evaluate-example-modal
-      :repository="repository"
       :open.sync="editEvaluateExampleModalOpen"
       :text-to-edit="text"
       :intent-to-edit="intent"
@@ -75,7 +74,7 @@
 <script>
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import EditEvaluateExampleModal from '@/components/repository/repository-evaluate/example/EditEvaluateExampleModal';
@@ -113,10 +112,6 @@ export default {
       type: String,
       default: '',
     },
-    repository: {
-      type: Object,
-      default: /* istanbul ignore next */ () => ({}),
-    },
   },
   data() {
     return {
@@ -125,6 +120,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     entitiesList() {
       return getEntitiesList(this.entities)
         .map(entity => ({

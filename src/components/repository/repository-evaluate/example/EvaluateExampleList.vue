@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
 import EvaluateExampleItem from '@/components/repository/repository-evaluate/example/EvaluateExampleItem';
 
@@ -23,10 +24,6 @@ export default {
     Pagination,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     query: {
       type: Object,
       default: () => ({}),
@@ -41,6 +38,11 @@ export default {
       examplesList: null,
       exampleItemElem: EvaluateExampleItem,
     };
+  },
+  computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
   },
   watch: {
     query() {
