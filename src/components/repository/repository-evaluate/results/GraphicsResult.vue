@@ -99,8 +99,8 @@ export default {
           intentsRecall.push(element.score.recall * 100);
         });
       }
+      new Promise(() => {
       // eslint-disable-next-line
-      new Promise(()=> {
         const intentChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -154,8 +154,8 @@ export default {
           entitiesRecall.push(entity.score.recall * 100);
         });
       }
-      // eslint-disable-next-line
       new Promise(() => {
+      // eslint-disable-next-line
         const entitieChart = new Chart(ctx, {
           type: 'bar',
           data: {
