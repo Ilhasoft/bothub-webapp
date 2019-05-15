@@ -21,7 +21,7 @@
                 @textSelected="setTextSelected($event)">
                 <language-append-select-input
                   slot="append"
-                  :value="getEvaluateLanguage"
+                  :value="languageToEdit"
                   class="language-append"
                   @input="setLanguage($event)" />
               </example-text-with-highlighted-entities-input>
@@ -79,7 +79,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -116,14 +116,18 @@ export default {
       type: Number,
       default: null,
     },
+    languageToEdit: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
       textSelected: null,
       text: this.textToEdit,
-      language: '',
       intent: this.intentToEdit,
       entities: this.entitiesToEdit,
+      language: this.languageToEdit,
       errors: {},
       id: this.sentenceId,
       submitting: false,
@@ -132,9 +136,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
     validationErrors() {
       const errors = [];
 
@@ -203,7 +204,6 @@ export default {
   watch: {
     open(value) {
       this.openValue = value;
-      this.language = this.getEvaluateLanguage;
     },
     openValue(value) {
       this.$emit('update:open', value);

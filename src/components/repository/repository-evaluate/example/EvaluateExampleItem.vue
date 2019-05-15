@@ -68,6 +68,7 @@
       :text-to-edit="text"
       :intent-to-edit="intent"
       :entities-to-edit="entities"
+      :language-to-edit="language"
       :sentence-id="id" />
   </div>
 </template>
