@@ -8,7 +8,7 @@ exports[`EditEvaluateExampleModal.vue renders correctly 1`] = `
         <div class="bh-grid__item bh-grid__item--grow-3">
           <bh-field-stub label="" errors="">
             <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
-              <language-append-select-input-stub class="language-append"></language-append-select-input-stub>
+              <language-append-select-input-stub class="language-append" slot="append"></language-append-select-input-stub>
             </example-text-with-highlighted-entities-input-stub>
           </bh-field-stub>
         </div>
@@ -20,7 +20,7 @@ exports[`EditEvaluateExampleModal.vue renders correctly 1`] = `
         </div>
       </div>
       <bh-field-stub errors="" class="align-space-left">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
       </bh-field-stub>
       <div class="bh-grid new-example-form-modal__buttons-wrapper">
         <bh-button-stub disabled="true" size="medium" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required" class="new-example-form-modal__buttons-wrapper__button">Edit your sentence</bh-button-stub>
