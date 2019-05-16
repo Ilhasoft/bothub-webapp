@@ -9,7 +9,12 @@
 </template>
 
 <script>
+import bInput from 'bh';
+
 export default {
+  components: {
+    bInput,
+  },
   props: {
     drfErro: {
       type: String,
