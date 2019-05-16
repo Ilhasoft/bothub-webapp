@@ -55,6 +55,7 @@
             :available-entities="entitiesList"
             :available-labels="availableLabels"
             :entities-for-edit="entities"
+            :testing="testing"
             @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -129,6 +130,7 @@ export default {
       submitting: false,
       openValue: this.open,
       entitiesList: [],
+      testing: true,
     };
   },
   computed: {
