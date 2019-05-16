@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BooleanInput.vue renders correctly 1`] = `<b-switch-stub>No</b-switch-stub>`;

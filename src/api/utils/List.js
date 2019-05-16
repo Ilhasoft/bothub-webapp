@@ -14,6 +14,7 @@ export default class List {
     return this.itemsList
       .map((data, i) => ({
         id: data.id || data.uuid || data.pk || data.key || i,
+        key: data.id || data.uuid || data.pk || data.key || i,
         data: Object.assign(
           {},
           data,

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChoiceInput.vue renders correctly 1`] = `
+<b-select-stub expanded="">
+  <option value=""></option>
+  <option value=""></option>
+  <option value=""></option>
+</b-select-stub>
+`;

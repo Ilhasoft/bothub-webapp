@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
@@ -65,16 +66,15 @@ export default {
       type: Number,
       default: 0,
     },
-    repository: {
-      type: Object,
-      default: /* istanbul ignore next */ () => ({}),
-    },
     status: {
       type: String,
       default: 'example--failed',
     },
   },
   computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     entitiesList() {
       return getEntitiesList(this.entities)
         .map(entity => ({
