@@ -12,6 +12,6 @@ export default {
     return state.currentTabSelected;
   },
   getEvaluateLanguage(state) {
-    return state.evaluateLanguage ? state.evaluateLanguage : 'en';
+    return state.evaluateLanguage ? state.evaluateLanguage : state.selectedRepository.language;
   },
 };
