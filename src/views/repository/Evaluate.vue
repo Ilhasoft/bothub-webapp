@@ -12,6 +12,7 @@
             <div class="evaluate__content-header__language-select">
               <languages-list
                 v-model="currentLanguage"
+                :custom-languages="languages"
                 title="Select your language"
                 full-size
                 open-position="bottom-left" />
@@ -73,6 +74,7 @@ import BaseEvaluateVersions from '@/components/repository/repository-evaluate/Ba
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
 import { mapActions, mapState } from 'vuex';
+import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
 
@@ -94,17 +96,22 @@ export default {
       currentLanguage: '',
       showRunEvaluate: false,
       links: ['Sentences', 'Versions', 'Results'],
+      languages: [],
     };
   },
   computed: {
     ...mapState({
       resultId: state => state.Repository.evaluateResultId,
       currentTab: state => state.Repository.currentTabSelected,
+      selectedRepository: state => state.Repository.selectedRepository,
     }),
   },
   watch: {
     currentLanguage(language) {
       this.setEvaluateLanguage(language);
+    },
+    selectedRepository() {
+      this.getExamples();
     },
   },
   mounted() {
@@ -114,6 +121,7 @@ export default {
     ...mapActions([
       'setEvaluateLanguage',
       'updateCurrentTab',
+      'getEvaluateExample',
     ]),
     addEvaluateSentence() {
       this.addEvaluateSentenceModalOpen = true;
@@ -121,6 +129,17 @@ export default {
     },
     setCurrentTab(value) {
       this.updateCurrentTab(value);
+    },
+    getExamples() {
+      this.getEvaluateExample({
+        id: this.selectedRepository.uuid,
+      }).then((response) => {
+        this.languages = Object.keys(LANGUAGES).map((lang, index) => ({
+          id: index + 1,
+          value: lang,
+          title: `${LANGUAGES[lang]} (${response.results.filter(r => r.language === lang).length} test sentences)`,
+        }));
+      });
     },
   },
 };

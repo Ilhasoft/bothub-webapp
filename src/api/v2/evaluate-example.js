@@ -32,6 +32,9 @@ export default {
   all(repositoryUuid) {
     return this.search(repositoryUuid);
   },
+  get(repositoryUuid) {
+    return request.$http.get(`/v2/evaluate?repository_uuid=${repositoryUuid}`);
+  },
   delete(exampleId) {
     return request.$http.delete(`/v2/evaluate/${exampleId}/`);
   },

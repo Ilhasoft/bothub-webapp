@@ -26,7 +26,7 @@ export default {
 
   async getEvaluateExample(store, { id }) {
     const response = await evaluateExample.get(id);
-    return response;
+    return response.data;
   },
   async getEntitiesTest(store, { repositoryUuid, value }) {
     const response = await entity.search(repositoryUuid, { value });
