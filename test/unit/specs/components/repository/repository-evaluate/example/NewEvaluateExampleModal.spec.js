@@ -3,34 +3,41 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
+import Vuex from 'vuex';
 
 import NewEvaluateExampleModal from '@/components/repository/repository-evaluate/example/NewEvaluateExampleModal';
-import store from '@/store';
+import getters from '@/store/repository/getters';
+import actions from '@/store/evaluate-example/actions';
 
 
 const localVue = createLocalVue();
 localVue.use(BH);
+localVue.use(Vuex);
 
 describe('NewEvaluateExampleModal.vue', () => {
   let wrapper;
-  let getters;
+  let state;
+  let store;
   beforeEach(() => {
-    store.replaceState({
-      Auth: {},
-    });
-    getters = {
-      getEvaluateLanguage: 'en',
+    state = {
+      selectedRepository: {
+        uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+        intents_list: ['affirm', 'cuisine', 'greet'],
+      },
     };
-    wrapper = shallowMount(NewEvaluateExampleModal, {
-      localVue,
-      propsData: {
-        repository: {
-          uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          state,
+          getters,
+          actions,
         },
       },
-      store: {
-        getters,
-      },
+    });
+    wrapper = shallowMount(NewEvaluateExampleModal, {
+      localVue,
+      store,
     });
   });
 

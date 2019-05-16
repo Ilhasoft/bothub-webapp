@@ -8,9 +8,7 @@
       primary
       @click="newEvaluate()">
     <slot v-if="!evaluating">Run new test</slot> </bh-button>
-    <evaluate-version-list
-      :repository="repository"
-    />
+    <evaluate-version-list />
   </div>
 </template>
 
