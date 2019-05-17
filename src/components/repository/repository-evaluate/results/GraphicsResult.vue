@@ -3,16 +3,22 @@
     class="graphics-results bh-grid bh-grid--column">
     <div class="bh-grid__item graphics-results_wrapper">
       <h2 class="graphic-results">Intents</h2>
+      <div
+        v-if="!loadingIntentsChart"
+        class="graphics-results__charts__loading">
+        <bh-loading />
+      </div>
       <canvas
-        v-if="chartData"
         id="intentsChart"
         class="graphics-results__charts"/>
-      <bh-loading
-        v-else
-        class="text-color-primary"/>
     </div>
     <div class="bh-grid__item">
       <h2>Entities</h2>
+      <div
+        v-if="!loadingEntitiesChart"
+        class="graphics-results__charts__loading">
+        <bh-loading />
+      </div>
       <canvas
         id="entitiesChart"
         ref="entitiesChart"
@@ -21,7 +27,13 @@
     <div class="bh-grid__item">
       <h2>Intent confusion matrix</h2>
       <div class="graphics-results__charts">
+        <div
+          v-if="!chartData.matrix_chart"
+          class="graphics-results__charts__loading">
+          <bh-loading />
+        </div>
         <img
+          v-if="chartData.matrix_chart"
           :src="chartData.matrix_chart"
           alt="chart1">
       </div>
@@ -29,7 +41,13 @@
     <div class="bh-grid__item">
       <h2>Intent confidence distribution</h2>
       <div class="graphics-results__charts">
+        <div
+          v-if="!chartData.confidence_chart"
+          class="graphics-results__charts__loading">
+          <bh-loading />
+        </div>
         <img
+          v-if="chartData.confidence_chart"
           :src="chartData.confidence_chart"
           alt="chart2">
       </div>
@@ -50,6 +68,8 @@ export default {
   },
   data() {
     return {
+      loadingEntitiesChart: false,
+      loadingIntentsChart: false,
     };
   },
   watch: {
@@ -59,6 +79,8 @@ export default {
   },
   methods: {
     updateCharts() {
+      this.loadingIntentsChart = true;
+      this.loadingEntitiesChart = true;
       this.createIntentChart();
       this.createEntitiesChart();
     },
@@ -77,40 +99,44 @@ export default {
           intentsRecall.push(element.score.recall * 100);
         });
       }
+      new Promise(() => {
       // eslint-disable-next-line
-      const intentChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: intentsName,
-          datasets: [
-            {
-              label: 'Precision',
-              data: intentsPrecision,
-              backgroundColor: '#00c853',
-            },
-            {
-              label: 'Recal',
-              data: intentsRecall,
-              backgroundColor: 'red',
-            },
-          ],
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                callback(value) {
-                  return `${value}%`;
-                },
+        const intentChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: intentsName,
+            datasets: [
+              {
+                label: 'Precision',
+                data: intentsPrecision,
+                backgroundColor: '#00c853',
               },
-            }],
-            xAxes: [{
-              barPercentage: 0.6,
-            }],
+              {
+                label: 'Recal',
+                data: intentsRecall,
+                backgroundColor: 'red',
+              },
+            ],
           },
-        },
-
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  callback(value) {
+                    return `${value}%`;
+                  },
+                },
+              }],
+              xAxes: [{
+                barPercentage: 0.6,
+              }],
+            },
+          },
+        });
+      }).then((resolve) => {
+        this.loadingIntentsChart = false;
+        resolve();
       });
     },
     createEntitiesChart() {
@@ -128,39 +154,44 @@ export default {
           entitiesRecall.push(entity.score.recall * 100);
         });
       }
+      new Promise(() => {
       // eslint-disable-next-line
-      const entitieChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: entitiesName,
-          datasets: [
-            {
-              label: 'Precision',
-              data: entitiesPrecision,
-              backgroundColor: '#00c853',
-            },
-            {
-              label: 'Recall',
-              data: entitiesRecall,
-              backgroundColor: 'red',
-            },
-          ],
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero: true,
-                callback(value) {
-                  return `${value}%`;
-                },
+        const entitieChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: entitiesName,
+            datasets: [
+              {
+                label: 'Precision',
+                data: entitiesPrecision,
+                backgroundColor: '#00c853',
               },
-            }],
-            xAxes: [{
-              barPercentage: 0.6,
-            }],
+              {
+                label: 'Recall',
+                data: entitiesRecall,
+                backgroundColor: 'red',
+              },
+            ],
           },
-        },
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  callback(value) {
+                    return `${value}%`;
+                  },
+                },
+              }],
+              xAxes: [{
+                barPercentage: 0.6,
+              }],
+            },
+          },
+        });
+      }).then((resolve) => {
+        this.loadingEntitiesChart = false;
+        resolve();
       });
     },
   },
@@ -174,6 +205,11 @@ export default {
 
   &__charts {
     text-align: center;
+
+    &__loading {
+      width: 100%;
+      text-align: center;
+    }
   }
 }
 </style>

@@ -7,7 +7,12 @@
 </template>
 
 <script>
+import bInput from 'bh';
+
 export default {
+  components: {
+    bInput,
+  },
   props: {
     max_length: {
       type: Number,

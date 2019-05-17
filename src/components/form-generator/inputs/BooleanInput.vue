@@ -5,7 +5,12 @@
 </template>
 
 <script>
+import bSwitch from 'bh';
+
 export default {
+  components: {
+    bSwitch,
+  },
   props: {
     initialData: {
       type: Boolean,

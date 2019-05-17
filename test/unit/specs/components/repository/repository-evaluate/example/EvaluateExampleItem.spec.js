@@ -4,7 +4,7 @@ jest.mock('@/api/request');
 import VueMoment from 'vue-moment';
 import Buefy from 'buefy';
 import BH from 'bh';
-import store from '@/store';
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EvaluateExampleItem from '@/components/repository/repository-evaluate/example/EvaluateExampleItem';
 
@@ -13,13 +13,37 @@ const localVue = createLocalVue();
 localVue.use(VueMoment);
 localVue.use(Buefy);
 localVue.use(BH);
+localVue.use(Vuex);
 
 describe('ExampleItem.vue', () => {
   let wrapper;
+  let state;
+  let actions;
+  let store;
+
   beforeEach(() => {
-    store.replaceState({
-      Auth: {},
+    state = {
+      selectedRepository: {
+        authorization: {
+          can_contribute: true,
+        },
+        entities: [],
+      },
+    };
+
+    actions = {
+      deleteEvaluateExample: jest.fn(),
+    };
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          state,
+          actions,
+        },
+      },
     });
+
     wrapper = shallowMount(EvaluateExampleItem, {
       localVue,
       propsData: {
@@ -28,12 +52,6 @@ describe('ExampleItem.vue', () => {
           { start: 0, end: 0, entity: 'entity' },
         ],
         created_at: '2018-05-11T11:57:40.082934Z',
-        repository: {
-          authorization: {
-            can_contribute: true,
-          },
-          entities: [],
-        },
         language: 'en',
       },
       store,

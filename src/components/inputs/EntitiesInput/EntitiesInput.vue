@@ -36,6 +36,7 @@
         :repository="repository"
         :available-entities="availableEntities"
         :available-labels="availableLabels"
+        :testing="testing"
         class="entities-input__new-entity__wrapper"
         @new="addEntity($event)" />
     </div>
@@ -91,6 +92,10 @@ export default {
     entitiesForEdit: {
       type: Array,
       default: () => ([]),
+    },
+    testing: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

@@ -13,7 +13,6 @@
 
       <evaluate-result-example-list
         :id="resultId"
-        :repository="repository"
         :query="query" />
     </div>
   </div>

@@ -2,6 +2,18 @@
 
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
+  <div shadow="strong" class="rpstr-vw-bs__wrapper">
+    <div class="rpstr-vw-bs__wrapper__header">
+      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
+      <!---->
+      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  </div>
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -13,6 +25,18 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
+  <div shadow="strong" class="rpstr-vw-bs__wrapper">
+    <div class="rpstr-vw-bs__wrapper__header">
+      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
+      <!---->
+      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  </div>
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -24,6 +48,18 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 
 exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
+  <div shadow="strong" class="rpstr-vw-bs__wrapper">
+    <div class="rpstr-vw-bs__wrapper__header">
+      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
+      <!---->
+      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
+      <!---->
+    </div>
+    <!---->
+    <!---->
+    <!---->
+    <!---->
+  </div>
   <div class="rpstr-vw-bs__loading">
     <bh-loading-stub></bh-loading-stub>
   </div>
@@ -38,37 +74,16 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
     <div class="rpstr-vw-bs__wrapper__header">
       <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
-      <repository-info-stub repository="<Repository #1>"></repository-info-stub>
+      <!---->
       <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
       <!---->
     </div>
-    <repository-navigation-stub repository="<Repository #1>" class="rpstr-vw-bs__wrapper__navigation hide-mobile"></repository-navigation-stub>
-    <div class="rpstr-vw-bs__status-bar">
-      <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
-        <side-bar-navigation-stub repository="<Repository #1>" class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"></side-bar-navigation-stub>
-        <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
-          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-            <bh-icon-stub value="language" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-              0</span> <span class="hide-mobile">languages</span>
-          </div>
-          <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-            <bh-icon-stub value="sentence" class="rpstr-vw-bs__status-bar__icons-align--size"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">
-              0</span> <span class="hide-mobile">sentences</span>
-          </div>
-          <div class="gap"></div>
-        </div>
-        <div class="bh-grid hide-mobile">
-          <div class="bh-grid__item clickable">
-            <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-              <bh-icon-stub value="account"></bh-icon-stub> <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <!---->
-    <div class="rpstr-vw-bs__wrapper__content"></div>
+    <!---->
+    <!---->
+    <!---->
   </div>
+  <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
   <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
   <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>

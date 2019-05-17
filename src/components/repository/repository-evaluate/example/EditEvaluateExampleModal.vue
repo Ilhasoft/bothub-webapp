@@ -14,14 +14,14 @@
                 ref="textInput"
                 v-model="text"
                 :entities="entities"
-                :available-entities="dataAvailableEntities"
+                :available-entities="entitiesList"
                 :formatters="textFormatters"
                 size="medium"
                 placeholder="Add a sentence"
                 @textSelected="setTextSelected($event)">
                 <language-append-select-input
                   slot="append"
-                  :value="getEvaluateLanguage"
+                  :value="languageToEdit"
                   class="language-append"
                   @input="setLanguage($event)" />
               </example-text-with-highlighted-entities-input>
@@ -52,9 +52,10 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="dataAvailableEntities"
+            :available-entities="entitiesList"
             :available-labels="availableLabels"
             :entities-for-edit="entities"
+            :testing="testing"
             @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -79,7 +80,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -92,10 +93,6 @@ export default {
     LanguageAppendSelectInput,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     open: {
       type: Boolean,
       default: false,
@@ -116,25 +113,30 @@ export default {
       type: Number,
       default: null,
     },
+    languageToEdit: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
       textSelected: null,
       text: this.textToEdit,
-      language: '',
       intent: this.intentToEdit,
       entities: this.entitiesToEdit,
+      language: this.languageToEdit,
       errors: {},
       id: this.sentenceId,
       submitting: false,
       openValue: this.open,
-      dataAvailableEntities: this.availableEntities || [],
+      entitiesList: [],
+      testing: true,
     };
   },
   computed: {
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     validationErrors() {
       const errors = [];
 
@@ -203,11 +205,13 @@ export default {
   watch: {
     open(value) {
       this.openValue = value;
-      this.language = this.getEvaluateLanguage;
     },
     openValue(value) {
       this.$emit('update:open', value);
     },
+  },
+  mounted() {
+    this.entitiesList = this.availableEntities;
   },
   methods: {
     ...mapActions([

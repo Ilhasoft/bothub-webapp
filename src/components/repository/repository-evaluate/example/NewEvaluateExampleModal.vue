@@ -14,7 +14,7 @@
                 ref="textInput"
                 v-model="text"
                 :entities="entities"
-                :available-entities="dataAvailableEntities"
+                :available-entities="entitiesList"
                 :formatters="textFormatters"
                 size="medium"
                 placeholder="Add a sentence"
@@ -52,9 +52,10 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="dataAvailableEntities"
+            :available-entities="entitiesList"
             :available-labels="availableLabels"
             :entities-for-edit="[]"
+            :testing="testing"
             @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -90,7 +91,7 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -103,10 +104,6 @@ export default {
     LanguageAppendSelectInput,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     open: {
       type: Boolean,
       default: false,
@@ -122,13 +119,17 @@ export default {
       errors: {},
       submitting: false,
       openValue: this.open,
-      dataAvailableEntities: this.availableEntities || [],
+      entitiesList: [],
+      testing: true,
     };
   },
   computed: {
     ...mapGetters([
       'getEvaluateLanguage',
     ]),
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     validationErrors() {
       const errors = [];
 
@@ -201,6 +202,9 @@ export default {
       this.$emit('update:open', value);
     },
   },
+  mounted() {
+    this.entitiesList = this.availableEntities;
+  },
   methods: {
     ...mapActions([
       'newEvaluateExample',
@@ -238,7 +242,6 @@ export default {
           repository: this.repository.uuid,
           ...this.data,
         });
-
         this.text = '';
         this.intent = '';
         this.entities = [];

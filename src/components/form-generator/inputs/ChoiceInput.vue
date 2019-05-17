@@ -11,7 +11,12 @@
 </template>
 
 <script>
+import bSelect from 'bh';
+
 export default {
+  components: {
+    bSelect,
+  },
   props: {
     choices: {
       required: true,
