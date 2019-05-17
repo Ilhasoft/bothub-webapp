@@ -14,13 +14,24 @@
               Are your intents and entities well-designed?
             </p>
             <p>Using our testing feature, you can evaluate your bot's performance easily.</p>
-            <div class="evaluate__content-header__language-select">
-              <p><strong>Select the language to run the test</strong></p>
-              <languages-list
-                v-model="currentLanguage"
-                :custom-languages="languages"
-                full-size
-                open-position="bottom-left" />
+            <div class="evaluate__content-header__wrapper">
+              <div class="evaluate__content-header__wrapper__language-select">
+                <p><strong>Select the language to run the test</strong></p>
+                <languages-list
+                  v-model="currentLanguage"
+                  :custom-languages="languages"
+                  full-size
+                  open-position="bottom-left" />
+              </div>
+              <bh-button
+                ref="runNewTestButton"
+                :loading="evaluating"
+                :disabled="evaluating"
+                class="evaluate__content-header__wrapper__btn"
+                size="medium"
+                secondary
+                @click="newEvaluate()">
+              <slot v-if="!evaluating">Run test</slot></bh-button>
             </div>
           </div>
           <div class="evaluate__navigation">
@@ -78,7 +89,7 @@ import BaseEvaluateResults from '@/components/repository/repository-evaluate/Bas
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
 import LanguagesList from '@/components/shared/LanguagesList';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
@@ -102,6 +113,8 @@ export default {
       showRunEvaluate: false,
       links: ['Sentences', 'Versions', 'Results'],
       languages: [],
+      evaluating: false,
+      error: {},
     };
   },
   computed: {
@@ -110,6 +123,9 @@ export default {
       currentTab: state => state.Repository.currentTabSelected,
       selectedRepository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters([
+      'getEvaluateLanguage',
+    ]),
   },
   watch: {
     currentLanguage(language) {
@@ -127,6 +143,8 @@ export default {
       'setEvaluateLanguage',
       'updateCurrentTab',
       'getEvaluateExample',
+      'runNewEvaluate',
+      'setUpdateEvaluateResultId',
     ]),
     addEvaluateSentence() {
       this.addEvaluateSentenceModalOpen = true;
@@ -145,6 +163,28 @@ export default {
           title: `${LANGUAGES[lang]} (${response.results.filter(r => r.language === lang).length} test sentences)`,
         }));
       });
+    },
+    async newEvaluate() {
+      this.evaluating = true;
+      try {
+        const result = await this.runNewEvaluate({
+          owner: this.repository.owner__nickname,
+          slug: this.repository.slug,
+          language: this.getEvaluateLanguage,
+        });
+        this.evaluating = false;
+        this.setUpdateEvaluateResultId(result.data.evaluate_id);
+        return true;
+      } catch (error) {
+        this.error = error.response.data;
+        this.evaluating = false;
+        this.$toast.open({
+          message: `${this.error.detail || 'sorry, something wrong ;('} `,
+          type: 'is-danger',
+          duration: 3000,
+        });
+      }
+      return false;
     },
   },
 };
@@ -215,9 +255,16 @@ export default {
       margin-top: 2rem;
     }
 
-    &__language-select {
-      margin-top: 2rem;
-      text-align: left;
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 1fr 20%;
+      grid-gap: 0.5rem;
+      align-items: end;
+      margin-top: 1rem;
+
+      &__language-select {
+        text-align: left;
+      }
     }
   }
 

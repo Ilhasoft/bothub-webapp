@@ -45,6 +45,10 @@ describe('TestView.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('run new test', () => {
+    expect(wrapper.vm.newEvaluate()).toBeTruthy();
+  });
+
   describe('Open new test sentence modal', () => {
     beforeEach(() => {
       wrapper.vm.addEvaluateSentence();

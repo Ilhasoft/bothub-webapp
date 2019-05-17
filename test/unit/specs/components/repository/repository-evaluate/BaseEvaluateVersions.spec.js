@@ -20,8 +20,4 @@ describe('BaseEvaluateVersions.vue', () => {
   it('renders', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  it('run new test', () => {
-    expect(wrapper.vm.newEvaluate()).toBeTruthy();
-  });
 });
