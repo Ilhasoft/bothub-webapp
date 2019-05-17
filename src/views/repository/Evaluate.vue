@@ -9,11 +9,16 @@
           class="evaluate">
           <div class="evaluate__content-header">
             <h2 class="evaluate__content-header__title">Test your data set</h2>
+            <p>
+              How is your model performing? Do you have enough data?
+              Are your intents and entities well-designed?
+            </p>
+            <p>Using our testing feature, you can evaluate your bot's performance easily.</p>
             <div class="evaluate__content-header__language-select">
+              <p><strong>Select the language to run the test</strong></p>
               <languages-list
                 v-model="currentLanguage"
                 :custom-languages="languages"
-                title="Select your language"
                 full-size
                 open-position="bottom-left" />
             </div>
@@ -198,9 +203,9 @@ export default {
   }
 
   &__content-header {
+    width: 750px;
     text-align: center;
     margin: 0 auto;
-    width: 40%;
 
     &__buttons {
       margin: 2rem 1rem;
@@ -208,6 +213,11 @@ export default {
 
     &__title {
       margin-top: 2rem;
+    }
+
+    &__language-select {
+      margin-top: 2rem;
+      text-align: left;
     }
   }
 
