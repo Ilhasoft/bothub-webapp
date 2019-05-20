@@ -12,12 +12,8 @@
 </template>
 
 <script>
-import bTaginput from 'bh';
 
 export default {
-  components: {
-    bTaginput,
-  },
   props: {
     choices: {
       required: true,
