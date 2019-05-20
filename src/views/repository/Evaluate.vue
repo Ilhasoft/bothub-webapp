@@ -47,14 +47,14 @@
               :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
-            <base-evaluate-versions
-              v-else-if="currentTab === 1"
-              :repository="repository" />
             <base-evaluate-results
-              v-else
+              v-else-if="currentTab === 1"
               :result-id="resultId"
               :repository="repository"
               :filter-by-language="currentLanguage" />
+            <base-evaluate-versions
+              v-else
+              :repository="repository" />
           </div>
         </div>
         <div
@@ -111,7 +111,7 @@ export default {
       initialTab: 0,
       currentLanguage: '',
       showRunEvaluate: false,
-      links: ['Sentences', 'Versions', 'Results'],
+      links: ['Sentences', 'Results', 'Versions'],
       languages: [],
       evaluating: false,
       error: {},
