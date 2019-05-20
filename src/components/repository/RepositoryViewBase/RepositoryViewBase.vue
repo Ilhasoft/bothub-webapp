@@ -13,9 +13,11 @@
             src="~@/assets/imgs/logo.svg"
             alt="bothub">
         </router-link>
-        <repository-info
-          v-if="repository && repository.name"
-          :repository="repository" />
+        <div>
+          <repository-info
+            v-if="repository && repository.name"
+            :repository="repository" />
+        </div>
         <div
           :class="[
             'bh-grid__item',
@@ -376,9 +378,8 @@ export default {
     &__wrapper {
       &__header {
         position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 10% 1fr 10%;
         padding: 1rem 1.5rem;
         border-bottom: .120rem solid whitesmoke;
 
@@ -386,19 +387,16 @@ export default {
           display: none;
         }
 
-        &__logo {
-          width: 10%;
-        }
-
         &__options {
           display: flex;
           align-items: center;
+          justify-content: flex-end;
 
           &__avatar {
             text-align: right;
+            cursor: auto;
             border: .120rem solid $color-primary;
             border-radius: 50%;
-            cursor: auto;
 
             @media screen and (max-width: $medium-screen) {
               display: none;
