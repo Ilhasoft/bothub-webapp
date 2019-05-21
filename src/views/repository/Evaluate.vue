@@ -17,18 +17,22 @@
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
                 <p><strong>Select the language to run the test</strong></p>
-                <languages-list
-                  v-model="currentLanguage"
-                  :custom-languages="languages"
-                  full-size
-                  open-position="bottom-left" />
+                <bh-select
+                  v-model="currentLanguage">
+                  <option
+                    v-for="language in languages"
+                    :key="language.id"
+                    :selected="language.value === currentLanguage"
+                    :value="language.value">
+                    {{ language.title }}
+                  </option>
+                </bh-select>
               </div>
               <bh-button
                 ref="runNewTestButton"
                 :loading="evaluating"
                 :disabled="evaluating"
                 class="evaluate__content-header__wrapper__btn"
-                size="medium"
                 secondary
                 @click="newEvaluate()">
               <slot v-if="!evaluating">Run test</slot></bh-button>
@@ -88,7 +92,6 @@ import BaseEvaluateExamples from '@/components/repository/repository-evaluate/Ba
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import RepositoryBase from './Base';
-import LanguagesList from '@/components/shared/LanguagesList';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -101,7 +104,6 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
-    LanguagesList,
     BaseEvaluateResults,
     BaseEvaluateVersions,
   },
@@ -133,6 +135,7 @@ export default {
     },
     selectedRepository() {
       this.getExamples();
+      this.currentLanguage = this.selectedRepository.language;
     },
   },
   mounted() {
@@ -257,7 +260,7 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: 1fr 20%;
+      grid-template-columns: 1fr 15%;
       grid-gap: 0.5rem;
       align-items: end;
       margin-top: 1rem;
