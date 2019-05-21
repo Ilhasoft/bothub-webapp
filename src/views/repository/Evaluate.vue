@@ -48,7 +48,6 @@
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
               v-if="currentTab === 0"
-              :repository="repository"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"/>
             <base-evaluate-results
@@ -112,7 +111,6 @@ export default {
     return {
       initialTab: 0,
       currentLanguage: '',
-      showRunEvaluate: false,
       links: ['Sentences', 'Results', 'Versions'],
       languages: [],
       evaluating: false,
@@ -135,7 +133,9 @@ export default {
     },
     selectedRepository() {
       this.getExamples();
-      this.currentLanguage = this.selectedRepository.language;
+      if (this.currentLanguage === '') {
+        this.currentLanguage = this.selectedRepository.language;
+      }
     },
   },
   mounted() {
@@ -149,10 +149,6 @@ export default {
       'runNewEvaluate',
       'setUpdateEvaluateResultId',
     ]),
-    addEvaluateSentence() {
-      this.addEvaluateSentenceModalOpen = true;
-      this.showRunEvaluate = false;
-    },
     setCurrentTab(value) {
       this.updateCurrentTab(value);
     },

@@ -1,40 +1,31 @@
 <template>
   <div class="base-example-evaluate bh-grid bh-grid--column">
-    <bh-button
-      ref="addSentenceButton"
-      class="base-example-evaluate__new-sentence-btn"
-      primary
-      @click="addEvaluateExample()">Add test sentence</bh-button>
+    <new-evaluate-example
+      @created="onEvaluateExampleCreated()"/>
     <filter-evaluate-example
       :intents="repository.intents_list"
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
       :query="query"/>
-    <new-evaluate-example-modal
-      :open.sync="addEvaluateExampleModalOpen"
-      @created="onEvaluateExampleCreated()" />
   </div>
 </template>
 
 <script>
 import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import EvaluateExampleList from '@/components/repository/repository-evaluate/example/EvaluateExampleList';
-import NewEvaluateExampleModal from '@/components/repository/repository-evaluate/example/NewEvaluateExampleModal';
+import NewEvaluateExample from '@/components/repository/repository-evaluate/example/NewEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import { mapState } from 'vuex';
 
 export default {
   name: 'BaseExamplesEvaluate',
   components: {
     FilterEvaluateExample,
     EvaluateExampleList,
-    NewEvaluateExampleModal,
+    NewEvaluateExample,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     filterByLanguage: {
       type: String,
       default: '',
@@ -44,8 +35,12 @@ export default {
     return {
       querySchema: {},
       query: {},
-      addEvaluateExampleModalOpen: false,
     };
+  },
+  computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
   },
   watch: {
     filterByLanguage() {
@@ -72,10 +67,6 @@ export default {
       this.query = exampleSearchToDicty(formatedQueryString);
       this.query.language = this.filterByLanguage;
     },
-    addEvaluateExample() {
-      this.addEvaluateExampleModalOpen = true;
-      this.showResults = false;
-    },
     onEvaluateExampleCreated() {
       this.$emit('created');
     },
@@ -86,11 +77,4 @@ export default {
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
-
-.base-example-evaluate {
-  &__new-sentence-btn {
-    align-self: flex-end;
-    margin: 1.5rem 1rem .5rem 0;
-  }
-}
 </style>
