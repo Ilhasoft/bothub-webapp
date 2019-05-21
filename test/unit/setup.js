@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import MockDate from 'mockdate';
+import Buefy from 'buefy'
 
+Vue.use(Buefy);
 Vue.config.productionTip = false;
 
 process.env.SUPPORTED_LANGUAGES = 'en|pt';
