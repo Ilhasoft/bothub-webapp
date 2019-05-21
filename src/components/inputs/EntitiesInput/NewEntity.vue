@@ -121,6 +121,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    testing: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -215,6 +219,9 @@ export default {
     enableAddingMode() {
       if (this.textSelected) {
         this.addingMode = true;
+      }
+
+      if (!this.testing) {
         this.entity = this.textSelectedValue;
       }
     },

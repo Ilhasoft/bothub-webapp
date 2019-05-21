@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StringInput.vue renders correctly 1`] = `<b-input type="text"></b-input>`;
