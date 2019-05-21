@@ -48,14 +48,4 @@ describe('TestView.vue', () => {
   it('run new test', () => {
     expect(wrapper.vm.newEvaluate()).toBeTruthy();
   });
-
-  describe('Open new test sentence modal', () => {
-    beforeEach(() => {
-      wrapper.vm.addEvaluateSentence();
-    });
-
-    test('Modal open', () => {
-      expect(wrapper.vm.addEvaluateSentenceModalOpen).toBeTruthy();
-    });
-  });
 });

@@ -28,16 +28,6 @@ describe('BaseEvaluateExamples.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('open evaluate example modal when add button is clicked', () => {
-    expect(wrapper.vm.addEvaluateExampleModalOpen).toBeFalsy();
-
-    const addSentenceButton = wrapper.find({ ref: 'addSentenceButton' });
-    expect(addSentenceButton.exists()).toBeTruthy();
-
-    addSentenceButton.vm.$emit('click');
-    expect(wrapper.vm.addEvaluateExampleModalOpen).toBeTruthy();
-  });
-
   describe('Test filter query', () => {
     beforeEach(() => {
       wrapper.vm.onSearch({
