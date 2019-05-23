@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <transition :name="animation">
+    <transition name="fade">
       <div
         v-show="open"
         class="expander__body">
@@ -97,11 +97,6 @@ export default {
     text: {
       type: String,
       default: '',
-    },
-    animation: {
-      type: String,
-      default: 'bottomToTop',
-      validator: prop => ['bottomToTop'].includes(prop),
     },
     entities: {
       type: Array,
@@ -224,30 +219,17 @@ export default {
     }
   }
 
-  .bottomToTop-enter-active {
-    animation: bottomToTop .5s forwards;
-  }
-
-  .bottomToTop-leave-active {
-    animation: bottomToTop .5s reverse;
-    @keyframes bottomToTop {
-    0% {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-    100% {
-      transform: translateY(0)
-    }
-    }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
   }
 
   .example {
     $radius: 8px;
 
     margin: 16px 8px;
+    overflow: visible;
     background-color: $white-bis;
     border-radius: $radius;
-    overflow: visible;
 
     &__icon {
       margin: 0 .5rem;
@@ -261,10 +243,10 @@ export default {
     &-text {
       display: flex;
       padding: 8px 16px;
+      margin-bottom: 4px;
       background-color: $white-ter;
       border-radius: $radius;
       transition: box-shadow .2s ease;
-      margin-bottom: 4px;
 
       &__main {
         flex-grow: 1;
