@@ -199,9 +199,9 @@ export default {
   &__navigation {
     display: flex;
     justify-content: center;
+    margin-top: 2.5rem;
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
-    margin-top: 5rem;
 
     a {
       position: relative;

@@ -9,8 +9,8 @@
     <div class="new-sentence__form">
       <form
         @submit.prevent="submitSentence()">
-        <div class="bh-grid">
-          <div class="bh-grid__item bh-grid__item--grow-3">
+        <div class="new-sentence__form__wrapper">
+          <div>
             <bh-field
               :errors="errors.text || errors.language">
               <example-text-with-highlighted-entities-input
@@ -24,7 +24,7 @@
                 @textSelected="setTextSelected($event)" />
             </bh-field>
           </div>
-          <div class="bh-grid__item">
+          <div>
             <bh-field
               :errors="errors.non_field_errors">
               <bh-autocomplete
@@ -35,7 +35,7 @@
                 placeholder="Intent" />
             </bh-field>
           </div>
-          <div class="bh-grid__item new-sentence__form__submit-btn">
+          <div class="new-sentence__form__wrapper__submit-btn">
             <bh-button
               ref="saveSentenceButton"
               :disabled="!isValid || submitting "
@@ -229,15 +229,24 @@ export default {
 <style lang="scss" scoped>
 .new-sentence {
   width: 80%;
-  margin: 3rem auto;
+  margin: 2rem auto 0;
 
   &__header {
     margin: 0 0.75rem;
   }
 
   &__form {
-    &__submit-btn {
-      align-self: center;
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr .3fr;
+      grid-gap: 1rem;
+      padding: 1rem .8rem 0;
+
+      &__submit-btn {
+        align-self: center;
+        justify-self: flex-end;
+      }
     }
 
     &__entities {

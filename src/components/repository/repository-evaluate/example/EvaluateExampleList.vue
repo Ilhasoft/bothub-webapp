@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="evaluate-example-list">
     <pagination
       v-if="examplesList"
       :item-component="exampleItemElem"
@@ -72,6 +72,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.evaluate-example-list {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .no-examples {
   margin: 8px;
 }

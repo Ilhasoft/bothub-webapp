@@ -19,8 +19,7 @@
       <div class="filter-evaluate-example__filters__wrapper">
         <span class="filter-evaluate-example__filters__wrapper__title">Filter by:</span>
         <bh-field
-          :errors="errors.intent"
-          class="bh-grid__item">
+          :errors="errors.intent">
           <bh-autocomplete
             v-model="intent"
             :data="intents || []"
@@ -28,8 +27,7 @@
             placeholder="All Intent" />
         </bh-field>
         <bh-field
-          :errors="errors.intent"
-          class="bh-grid__item">
+          :errors="errors.intent">
           <bh-autocomplete
             v-model="entity"
             :data="entities || []"
@@ -96,8 +94,8 @@ export default {
 
 <style lang="scss">
 .filter-evaluate-example {
-  width: 80%;
-  margin: 0 auto;
+  width: 78%;
+  margin: 0 auto .5rem;
 
   &__filters {
     display: grid;
@@ -111,6 +109,7 @@ export default {
     &__wrapper {
       display: grid;
       grid-template-columns: 11% 1fr 1fr;
+      grid-gap: .5rem;
 
       &__title {
         align-self: center;

@@ -202,7 +202,7 @@ export default {
       display: flex;
       justify-content: space-between;
       padding: .7rem;
-      margin-top: .5rem;
+      margin: .5rem .8rem 0;
       cursor: pointer;
       border: 1px solid #cfd5d9;
       border-radius: 3px;
@@ -215,6 +215,7 @@ export default {
 
     &__body {
       padding: .7rem 0;
+      margin: 0 .8rem;
       background: #f5f5f5;
     }
   }
