@@ -222,40 +222,6 @@ export default {
       }
       return false;
     },
-    async submitFormAndClose() {
-      this.errors = {};
-      this.submitting = true;
-      if (this.$refs.entitiesInput.clearEntityForm) {
-        this.$refs.entitiesInput.clearEntityForm();
-      }
-
-      try {
-        await this.newEvaluateExample({
-          repository: this.repository.uuid,
-          ...this.data,
-        });
-
-        this.text = '';
-        this.intent = '';
-        this.entities = [];
-        this.submitting = false;
-
-        this.$emit('created');
-        this.openValue = false;
-        return true;
-      } catch (error) {
-        /* istanbul ignore next */
-        const data = error.response && error.response.data;
-        /* istanbul ignore next */
-        if (data) {
-          /* istanbul ignore next */
-          this.errors = data;
-        }
-        /* istanbul ignore next */
-        this.submitting = false;
-      }
-      return false;
-    },
   },
 };
 </script>
