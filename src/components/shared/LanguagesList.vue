@@ -36,17 +36,29 @@ export default {
       type: String,
       default: null,
     },
+    customLanguages: {
+      type: Array,
+      required: false,
+      default: null,
+    },
   },
   data() {
     return {
       val: 0,
       selectedLanguage: '',
-      languages: [{ id: 0, title: `${this.title}`, active: this.current === 0 }]
-        .concat(Object.keys(LANGUAGES)
-          .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang }))),
     };
   },
   computed: {
+    languages() {
+      if (this.customLanguages) {
+        return [{ id: 0, title: `${this.title}`, active: this.current === 0 }]
+          .concat(this.customLanguages);
+      }
+
+      return [{ id: 0, title: `${this.title}`, active: this.current === 0 }]
+        .concat(Object.keys(LANGUAGES)
+          .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang })));
+    },
     dropdownTitle() {
       return this.languages.reduce((current, language) => (
         this.val > 0 && language.id === this.val

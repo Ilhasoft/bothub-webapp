@@ -5,7 +5,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 import Vuex from 'vuex';
 
-import NewEvaluateExampleModal from '@/components/repository/repository-evaluate/example/NewEvaluateExampleModal';
+import NewEvaluateExample from '@/components/repository/repository-evaluate/example/NewEvaluateExample';
 import getters from '@/store/repository/getters';
 import actions from '@/store/evaluate-example/actions';
 
@@ -14,7 +14,7 @@ const localVue = createLocalVue();
 localVue.use(BH);
 localVue.use(Vuex);
 
-describe('NewEvaluateExampleModal.vue', () => {
+describe('NewEvaluateExample.vue', () => {
   let wrapper;
   let state;
   let store;
@@ -24,6 +24,7 @@ describe('NewEvaluateExampleModal.vue', () => {
         uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
         intents_list: ['affirm', 'cuisine', 'greet'],
       },
+      evaluateLanguage: 'en',
     };
 
     store = new Vuex.Store({
@@ -35,7 +36,7 @@ describe('NewEvaluateExampleModal.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(NewEvaluateExampleModal, {
+    wrapper = shallowMount(NewEvaluateExample, {
       localVue,
       store,
     });
@@ -52,7 +53,6 @@ describe('NewEvaluateExampleModal.vue', () => {
   describe('fill with valid data', () => {
     beforeEach(() => {
       wrapper.vm.text = 'my name is douglas';
-      wrapper.vm.language = 'en';
       wrapper.vm.intent = 'greet';
       wrapper.vm.entities = [
         {
@@ -69,14 +69,6 @@ describe('NewEvaluateExampleModal.vue', () => {
 
     test('name in availableEntities', () => {
       expect('name').toContain(wrapper.vm.availableEntities);
-    });
-
-    test('submit and close form button', () => {
-      const btn = wrapper.find({ ref: 'saveSentenceButton' });
-      expect(btn.exists()).toBeTruthy();
-
-      btn.vm.$emit('click');
-      expect(wrapper.vm.openValue).toBeFalsy();
     });
 
     describe('entity with label', () => {
@@ -105,12 +97,12 @@ describe('NewEvaluateExampleModal.vue', () => {
             });
           },
         });
-        Promise.resolve(wrapper.vm.onSubmit());
+        Promise.resolve(wrapper.vm.submitSentence());
         await localVue.nextTick();
       });
 
       test('return is true', () => {
-        expect(wrapper.vm.onSubmit()).toBeTruthy();
+        expect(wrapper.vm.submitSentence()).toBeTruthy();
       });
 
       test('created event emitted', async () => {
@@ -122,7 +114,6 @@ describe('NewEvaluateExampleModal.vue', () => {
   describe('fill with invalid data', () => {
     beforeEach(() => {
       wrapper.vm.text = 'my name is douglas';
-      wrapper.vm.language = 'en';
       wrapper.vm.intent = '';
       wrapper.vm.entities = [];
     });
@@ -134,7 +125,7 @@ describe('NewEvaluateExampleModal.vue', () => {
     describe('on submit', () => {
       let r;
       beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
+        r = await wrapper.vm.submitSentence();
       });
 
       test('return is false', () => {
