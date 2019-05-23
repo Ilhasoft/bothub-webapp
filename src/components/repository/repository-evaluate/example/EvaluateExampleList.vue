@@ -78,6 +78,6 @@ export default {
 }
 
 .no-examples {
-  margin: 8px;
+  margin-left: 14px;
 }
 </style>
