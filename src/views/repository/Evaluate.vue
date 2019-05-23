@@ -49,7 +49,8 @@
             <base-evaluate-examples
               v-if="currentTab === 0"
               :filter-by-language="currentLanguage"
-              @created="updateRepository(true)"/>
+              @created="updateRepository(true)"
+              @deleted="updateRepository(true)"/>
             <base-evaluate-results
               v-else-if="currentTab === 1"
               :result-id="resultId"

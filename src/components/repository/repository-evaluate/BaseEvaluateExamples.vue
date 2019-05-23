@@ -7,7 +7,8 @@
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
-      :query="query"/>
+      :query="query"
+      @deleted="onEvaluateExampleDeleted"/>
   </div>
 </template>
 
@@ -69,6 +70,9 @@ export default {
     },
     onEvaluateExampleCreated() {
       this.$emit('created');
+    },
+    onEvaluateExampleDeleted() {
+      this.$emit('deleted');
     },
   },
 };

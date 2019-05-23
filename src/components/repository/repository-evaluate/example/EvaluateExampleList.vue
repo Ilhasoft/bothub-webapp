@@ -15,7 +15,7 @@
 <script>
 import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
-import EvaluateExampleItem from '@/components/repository/repository-evaluate/example/EvaluateExampleItem';
+import ExampleAccordion from '@/components/shared/ExampleAccordion';
 
 
 export default {
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       examplesList: null,
-      exampleItemElem: EvaluateExampleItem,
+      exampleItemElem: ExampleAccordion,
     };
   },
   computed: {
@@ -64,9 +64,9 @@ export default {
         );
       }
     },
-    onItemDeleted(id) {
+    onItemDeleted() {
       this.updateExamples(true);
-      this.$emit('exampleDeleted', id);
+      this.$emit('deleted');
     },
   },
 };
