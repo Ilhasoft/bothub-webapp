@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ExamplesList.vue renders correctly 1`] = `
-<div>
+<div class="evaluate-example-list">
   <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true" repository="[object Object]"></pagination-stub>
   <p class="no-examples">No sentences.</p>
 </div>
