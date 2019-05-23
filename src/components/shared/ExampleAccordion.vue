@@ -35,7 +35,7 @@
             <a
               :href="`#delete-example-${id}`"
               class="has-text-danger"
-              @click.prevent="deleteThisExample()">
+              @click.prevent.stop="deleteThisExample()">
               <b-icon
                 icon="delete"
                 class="text-color-grey-dark example__icon" />
