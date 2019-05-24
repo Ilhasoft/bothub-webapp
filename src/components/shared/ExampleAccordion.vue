@@ -49,29 +49,9 @@
         v-show="open"
         class="expander__body">
         <slot>
-          <div
-            v-if="entitiesList.length > 0"
-            class="example-entities">
-            <b-tag
-              v-for="(entity, i) in entitiesList"
-              :key="i"
-              :class="entity.class"
-              rounded>
-              <strong>{{ entity.value }}</strong>
-              <span v-if="entity.label">is</span>
-              <strong v-if="entity.label">{{ entity.label }}</strong>
-            </b-tag>
-          </div>
-          <div class="example-infos level is-mobile">
-            <div class="level-left">
-              <div
-                v-if="intent"
-                class="level-item has-text-grey">
-                <strong>Intent:&nbsp;</strong>
-                <span>{{ intent }}</span>
-              </div>
-            </div>
-          </div>
+          <example-info
+            :entities-list="entitiesList"
+            :intent="intent" />
         </slot>
       </div>
     </transition>
@@ -83,11 +63,13 @@ import { mapState, mapActions } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
+import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 
 export default {
   name: 'ExampleAccordion',
   components: {
     HighlightedText,
+    ExampleInfo,
   },
   props: {
     id: {
@@ -225,52 +207,12 @@ export default {
   }
 
   .example {
-    $radius: 8px;
-
-    margin: 16px 8px;
-    overflow: visible;
-    background-color: $white-bis;
-    border-radius: $radius;
-
     &__icon {
       margin: 0 .5rem;
 
       &:hover {
         color: black;
         transition: 1s;
-      }
-    }
-
-    &-text {
-      display: flex;
-      padding: 1rem 2rem;
-      margin-bottom: 4px;
-      background-color: $white-ter;
-      border-radius: $radius;
-      transition: box-shadow .2s ease;
-
-      &__main {
-        flex-grow: 1;
-        font-size: 1.25rem;
-      }
-
-      &__rigth {
-        flex-grow: 0;
-      }
-    }
-
-    &-entities,
-    &-infos {
-      padding: 4px 8px 4px 16px;
-    }
-
-    &-entities {
-      > * {
-        margin: 0 8px 0 0;
-
-        &:last-child {
-          margin: 0;
-        }
       }
     }
   }
