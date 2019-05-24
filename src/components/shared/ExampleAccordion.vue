@@ -21,7 +21,8 @@
           <div class="level-item">
             <a
               :href="`#delete-example-${id}`"
-              class="has-text-danger">
+              class="has-text-danger"
+              @click.prevent="editing = true">
               <b-icon
                 icon="pen"
                 class="text-color-grey-dark example__icon" />
@@ -50,8 +51,18 @@
         class="expander__body">
         <slot>
           <example-info
+            v-if="!editing"
             :entities-list="entitiesList"
             :intent="intent" />
+        </slot>
+        <slot>
+          <edit-example
+            v-if="editing"
+            :entities-to-edit="entities"
+            :entities-list="entitiesList"
+            :intent-to-edit="intent"
+            :text-to-edit="text"
+            @cancel="cancelEditSentence"/>
         </slot>
       </div>
     </transition>
@@ -64,12 +75,14 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
+import EditExample from '@/components/shared/accordion/EditExample';
 
 export default {
   name: 'ExampleAccordion',
   components: {
     HighlightedText,
     ExampleInfo,
+    EditExample,
   },
   props: {
     id: {
@@ -93,6 +106,7 @@ export default {
     return {
       open: false,
       deleteDialog: null,
+      editing: false,
     };
   },
   computed: {
@@ -146,6 +160,11 @@ export default {
         });
       });
     },
+    cancelEditSentence() {
+      this.editing = false;
+    },
+    editSentence() {
+    },
   },
 };
 </script>
@@ -181,7 +200,8 @@ export default {
 
   .expander {
     &__trigger {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 25%;
       justify-content: space-between;
       padding: .7rem;
       margin: .5rem .8rem 0;
@@ -191,12 +211,12 @@ export default {
 
       &__btns-wrapper {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
       }
     }
 
     &__body {
-      padding: .7rem 0;
+      padding: .7rem;
       margin: 0 .8rem;
       background: #f5f5f5;
     }

@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  name: 'ExampleInfo',
   props: {
     entitiesList: {
       type: Array,
