@@ -1,7 +1,7 @@
 <template>
   <div class="expander">
     <div
-      :class="open ? 'active':'beforeBorder'"
+      :class="open ? 'active':'before-border'"
       class="expander__trigger"
       @click="open=!open">
 
@@ -172,7 +172,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../assets/scss/utilities.scss';
 
-  .beforeBorder {
+  .before-border {
     position: relative;
 
     &:before {
@@ -191,7 +191,7 @@ export default {
     }
   }
 
-  .Accordion {
+  .accordion {
     overflow: hidden;
     background: #fff;
     box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
@@ -243,7 +243,7 @@ export default {
 
     &-text {
       display: flex;
-      padding: 8px 16px;
+      padding: 1rem 2rem;
       margin-bottom: 4px;
       background-color: $white-ter;
       border-radius: $radius;

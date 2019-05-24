@@ -243,9 +243,9 @@ export default {
   }
 
   &__content-header {
-    width: 750px;
-    text-align: center;
+    max-width: 45vw;
     margin: 0 auto;
+    text-align: center;
 
     &__buttons {
       margin: 2rem 1rem;
