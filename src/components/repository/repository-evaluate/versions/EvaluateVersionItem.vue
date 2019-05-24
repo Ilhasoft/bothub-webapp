@@ -2,7 +2,9 @@
   <div>
     <bh-card
       class="version-test-item">
-      <div class="version-test-item__wrapper">
+      <div
+        class="version-test-item__wrapper"
+        @click="goToDetail(id)">
         <div class="version-test-item__wrapper__info">
           <strong class="version-test-item__wrapper__info__item">Test #{{ version }}</strong>
           <language-badge
@@ -70,6 +72,7 @@ export default {
     display: flex;
     margin: .5rem;
     align-items: center;
+    cursor: pointer;
 
     &__info {
       flex-grow: 1;
