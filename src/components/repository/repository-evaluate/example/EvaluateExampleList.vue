@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="evaluate-example-list">
     <pagination
       v-if="examplesList"
       :item-component="exampleItemElem"
@@ -15,7 +15,7 @@
 <script>
 import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
-import EvaluateExampleItem from '@/components/repository/repository-evaluate/example/EvaluateExampleItem';
+import ExampleAccordion from '@/components/shared/ExampleAccordion';
 
 
 export default {
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       examplesList: null,
-      exampleItemElem: EvaluateExampleItem,
+      exampleItemElem: ExampleAccordion,
     };
   },
   computed: {
@@ -64,16 +64,20 @@ export default {
         );
       }
     },
-    onItemDeleted(id) {
-      this.updateExamples(true);
-      this.$emit('exampleDeleted', id);
+    onItemDeleted() {
+      this.$emit('deleted');
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.evaluate-example-list {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .no-examples {
-  margin: 8px;
+  margin-left: 14px;
 }
 </style>

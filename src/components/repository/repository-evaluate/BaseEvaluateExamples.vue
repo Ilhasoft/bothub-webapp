@@ -2,12 +2,14 @@
   <div class="base-example-evaluate bh-grid bh-grid--column">
     <new-evaluate-example
       @created="onEvaluateExampleCreated()"/>
+    <hr class="base-example-evaluate__divider">
     <filter-evaluate-example
       :intents="repository.intents_list"
       :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
-      :query="query"/>
+      :query="query"
+      @deleted="onEvaluateExampleDeleted"/>
   </div>
 </template>
 
@@ -70,6 +72,9 @@ export default {
     onEvaluateExampleCreated() {
       this.$emit('created');
     },
+    onEvaluateExampleDeleted() {
+      this.$emit('deleted');
+    },
   },
 };
 </script>
@@ -77,4 +82,11 @@ export default {
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
+
+.base-example-evaluate {
+  &__divider {
+    height: 1px;
+    background-color: #d5d5d5;
+  }
+}
 </style>

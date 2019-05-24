@@ -3,6 +3,7 @@
 exports[`BaseEvaluateExamples.vue renders correctly 1`] = `
 <div class="base-example-evaluate bh-grid bh-grid--column" repository="[object Object]">
   <new-evaluate-example-stub></new-evaluate-example-stub>
+  <hr class="base-example-evaluate__divider">
   <filter-evaluate-example-stub debouncetime="750"></filter-evaluate-example-stub>
   <evaluate-example-list-stub query="[object Object]"></evaluate-example-list-stub>
 </div>

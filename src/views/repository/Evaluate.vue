@@ -49,7 +49,8 @@
             <base-evaluate-examples
               v-if="currentTab === 0"
               :filter-by-language="currentLanguage"
-              @created="updateRepository(true)"/>
+              @created="updateRepository(true)"
+              @deleted="updateRepository(true)"/>
             <base-evaluate-results
               v-else-if="currentTab === 1"
               :result-id="resultId"
@@ -198,9 +199,9 @@ export default {
   &__navigation {
     display: flex;
     justify-content: center;
+    margin-top: 2.5rem;
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
-    margin-top: 5rem;
 
     a {
       position: relative;
@@ -242,9 +243,9 @@ export default {
   }
 
   &__content-header {
-    width: 750px;
-    text-align: center;
+    max-width: 45vw;
     margin: 0 auto;
+    text-align: center;
 
     &__buttons {
       margin: 2rem 1rem;

@@ -1,40 +1,41 @@
 <template>
-  <div class="filter-evaluate-example bh-grid">
-    <bh-field
-      :errors="errors.intent"
-      class="bh-grid__item bh-grid__item--grow-3">
-      <bh-text
-        v-model="text"
-        :debounce="debounceTime">
-        <div slot="append">
-          <bh-icon-button
-            value="magnify"
-            size="small"
-            type="submit" />
-        </div>
-      </bh-text>
-    </bh-field>
-    <div class="bh-grid__item filter-evaluate-example__text">
-      <span>Filter by:</span>
+  <div class="filter-evaluate-example">
+    <h2 class="filter-evaluate-example__title">Sentences List</h2>
+    <div class="filter-evaluate-example__filters">
+      <bh-field
+        :errors="errors.intent"
+        class="filter-evaluate-example__filters__input-text">
+        <bh-text
+          v-model="text"
+          :debounce="debounceTime">
+          <div slot="append">
+            <bh-icon-button
+              value="magnify"
+              size="small"
+              type="submit" />
+          </div>
+        </bh-text>
+      </bh-field>
+      <div class="filter-evaluate-example__filters__wrapper">
+        <span class="filter-evaluate-example__filters__wrapper__title">Filter by:</span>
+        <bh-field
+          :errors="errors.intent">
+          <bh-autocomplete
+            v-model="intent"
+            :data="intents || []"
+            :formatters="inputFormatters"
+            placeholder="All Intent" />
+        </bh-field>
+        <bh-field
+          :errors="errors.intent">
+          <bh-autocomplete
+            v-model="entity"
+            :data="entities || []"
+            :formatters="inputFormatters"
+            placeholder="All entities" />
+        </bh-field>
+      </div>
     </div>
-    <bh-field
-      :errors="errors.intent"
-      class="bh-grid__item">
-      <bh-autocomplete
-        v-model="intent"
-        :data="intents || []"
-        :formatters="inputFormatters"
-        placeholder="All Intent" />
-    </bh-field>
-    <bh-field
-      :errors="errors.intent"
-      class="bh-grid__item">
-      <bh-autocomplete
-        v-model="entity"
-        :data="entities || []"
-        :formatters="inputFormatters"
-        placeholder="All entities" />
-    </bh-field>
   </div>
 </template>
 
@@ -93,9 +94,28 @@ export default {
 
 <style lang="scss">
 .filter-evaluate-example {
-  text-align: right;
-  align-items: center;
-  justify-content: flex-start;
+  width: 78%;
+  margin: 0 auto .5rem;
+
+  &__filters {
+    display: grid;
+    grid-template-columns: 35% 1fr;
+    grid-gap: 3rem;
+
+    &__input-text {
+      align-self: center;
+    }
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 11% 1fr 1fr;
+      grid-gap: .5rem;
+
+      &__title {
+        align-self: center;
+      }
+    }
+  }
 
   &__text {
     margin-top: .5rem;
