@@ -31,17 +31,17 @@
         </div>
       </div>
       <div
-        v-for="(entity, index) in entitiesList"
+        v-for="(entity, index) in entities"
         :key="index"
         class="bh-grid">
         <div class="edit-sentence__input">
           <label for="">
-            <strong>word</strong> is
+            <strong>{{ highlightedText(entity) }}</strong> is
           </label>
           <bh-autocomplete
             :data="repository.intents_list || []"
             :formatters="intentFormatters"
-            :value="entity.value"
+            :value="entity.entity"
             class="edit-sentence-input"
             size="medium"
             placeholder="Intent">
@@ -135,6 +135,12 @@ export default {
       ];
       formattersList.toString = () => 'textFormatters';
       return formattersList;
+    },
+    highlightedText() {
+      return (entity) => {
+        console.log(entity);
+        return this.text.slice(entity.start, entity.end);
+      };
     },
   },
   methods: {
