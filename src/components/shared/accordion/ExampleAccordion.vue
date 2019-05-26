@@ -174,7 +174,7 @@ export default {
     toggleAccordion() {
       this.open = !this.open;
 
-      if (! this.open) {
+      if (!this.open) {
         this.cancelEditSentence();
       }
     },

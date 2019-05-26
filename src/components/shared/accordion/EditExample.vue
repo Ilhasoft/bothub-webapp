@@ -30,12 +30,14 @@
             v-model="intent"
             class="edit-sentence-input"
             size="medium"
-            prepend-text="Type something" />
+            prepend-text="Type something"
+            placeholder="Intent"
+          />
         </div>
       </div>
       <div
         v-for="(entity, index) in entitiesToEdit"
-        :key="index"
+        :key="`entity-${index}`"
         class="bh-grid">
         <div class="edit-sentence__input">
           <label for="">
@@ -44,10 +46,11 @@
           <bh-autocomplete
             :data="repository.intents_list || []"
             :formatters="intentFormatters"
-            :value="entity.entity"
+            v-model="entity.entity"
             class="edit-sentence-input"
             size="medium"
-            placeholder="Intent">
+            placeholder="Entity"
+          >
             <span slot="append">
               <bh-icon-button
                 value="close"
@@ -58,8 +61,41 @@
         </div>
       </div>
       <div
+        v-for="(entity, index) in pendingEntities"
+        :key="`pending-entity-${index}`"
+        class="bh-grid">
+        <div class="edit-sentence__input">
+          <label for="">
+            <strong>{{ highlightedText(entity) }}</strong> is
+          </label>
+          <bh-autocomplete
+            :data="repository.intents_list || []"
+            :formatters="intentFormatters"
+            v-model="entity.entity"
+            class="edit-sentence-input"
+            size="medium"
+            placeholder="Entity"
+            @selected="elevateToEntity(entity, index)"
+          >
+            <span slot="append">
+              <bh-icon-button
+                value="close"
+                size="small"
+                @click.prevent.stop="removePendingEntity(entity, index)"
+              />
+            </span>
+          </bh-autocomplete>
+        </div>
+      </div>
+      <div
         class="edit-sentence__btn-wrapper">
-        <bh-button rounded>Add entity</bh-button>
+        <bh-button
+          :disabled="textSelected === null"
+          rounded
+          @click.prevent.stop="addPendingEntity"
+        >
+          {{ entityButtonText }}
+        </bh-button>
         <div>
           <bh-button
             primary
@@ -84,11 +120,12 @@
 import Vue from 'vue';
 import BH from 'bh';
 import { mapState, mapActions } from 'vuex';
+import { getEntityColor } from '@/utils/entitiesColors';
 import { formatters } from '@/utils';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 
 export default {
-  name: 'EditSentence',
+  name: 'EditExample',
   components: {
     ExampleTextWithHighlightedEntitiesInput,
   },
@@ -113,6 +150,7 @@ export default {
       text: JSON.parse(JSON.stringify(this.textToEdit)),
       intent: JSON.parse(JSON.stringify(this.intentToEdit)),
       entitiesToEdit: JSON.parse(JSON.stringify(this.entities)),
+      pendingEntities: [],
       submitting: false,
     };
   },
@@ -120,6 +158,15 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    entityButtonText() {
+      if (this.textSelected === null) {
+        return 'Add entity';
+      }
+
+      const selected = this.text.slice(this.textSelected.start, this.textSelected.end);
+
+      return `Add entity for "${selected}"`;
+    },
     intentFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
@@ -137,9 +184,7 @@ export default {
       return formattersList;
     },
     highlightedText() {
-      return (entity) => {
-        return this.text.slice(entity.start, entity.end);
-      };
+      return entity => this.text.slice(entity.start, entity.end);
     },
   },
   watch: {
@@ -175,6 +220,40 @@ export default {
     },
     removeEntity(entity, index) {
       Vue.delete(this.entitiesToEdit, index);
+    },
+    removePendingEntity(entity, index) {
+      Vue.delete(this.pendingEntities, index);
+    },
+    addPendingEntity() {
+      // It will be added at the end of the list, so we already know its index.
+      const newEntity = {
+        start: this.textSelected.start,
+        end: this.textSelected.end,
+        entity: '',
+      };
+
+      this.pendingEntities.push({
+        ...newEntity,
+        class: '',
+      });
+
+      this.textSelected = null;
+    },
+    elevateToEntity(entity, index) {
+      Vue.delete(this.pendingEntities, index);
+
+      const color = getEntityColor(
+        entity,
+        [...this.entitiesToEdit, entity],
+        [],
+      );
+
+      this.entitiesToEdit.push({
+        ...entity,
+        class: `entity-${color}`,
+      });
+
+      this.onEntityAdded();
     },
     onEditEntity(entity) {
       if (this.$refs.textInput.emitTextSelected) {
