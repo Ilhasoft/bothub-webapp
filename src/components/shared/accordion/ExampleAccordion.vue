@@ -3,12 +3,13 @@
     <div
       :class="open ? 'active':'before-border'"
       class="expander__trigger"
-      @click="open=!open">
+      @click="toggleAccordion">
 
       <div v-if="!open">{{ text }}</div>
 
       <div v-else>
         <highlighted-text
+          v-if="open && !editing"
           :text="text"
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
@@ -20,9 +21,10 @@
           class="level-right">
           <div class="level-item">
             <a
+              v-show="!editing"
               :href="`#delete-example-${id}`"
               class="has-text-danger"
-              @click.prevent="editing = true">
+              @click.prevent.stop="editSentence">
               <b-icon
                 icon="pen"
                 class="text-color-grey-dark example__icon" />
@@ -164,6 +166,15 @@ export default {
       this.editing = false;
     },
     editSentence() {
+      this.editing = true;
+      this.open = true;
+    },
+    toggleAccordion() {
+      this.open = !this.open;
+
+      if (! this.open) {
+        this.cancelEditSentence();
+      }
     },
   },
 };
