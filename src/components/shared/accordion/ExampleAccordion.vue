@@ -60,8 +60,7 @@
         <slot>
           <edit-example
             v-if="editing"
-            :entities-to-edit="entities"
-            :entities-list="entitiesList"
+            :entities="entitiesList"
             :intent-to-edit="intent"
             :text-to-edit="text"
             @cancel="cancelEditSentence"/>
@@ -116,11 +115,14 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      return getEntitiesList(this.entities)
-        .map(entity => ({
-          value: entity,
-          class: this.getEntityClass(entity),
-          label: this.getEntityLabel(entity),
+      const entitiesList = getEntitiesList(this.entities);
+
+      return this.entities
+        .map((entity, index) => ({
+          value: entitiesList[index],
+          class: this.getEntityClass(entitiesList[index]),
+          label: this.getEntityLabel(entitiesList[index]),
+          ...entity,
         }));
     },
   },

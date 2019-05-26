@@ -63,7 +63,8 @@
             :entities-for-edit="[]"
             :testing="testing"
             @entityAdded="onEntityAdded()"
-            @entityEdited="onEditEntity($event)" />
+            @entityEdited="onEditEntity($event)"
+          />
         </bh-field>
       </form>
     </div>

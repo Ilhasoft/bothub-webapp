@@ -11,12 +11,15 @@
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
-              :entities="entities"
-              :available-entities="entitiesList"
+              :entities="entitiesToEdit"
+              :available-entities="entitiesToEdit"
               :formatters="textFormatters"
               size="medium"
               placeholder="Enter your sentence here"
-              @textSelected="setTextSelected($event)" />
+              @textSelected="setTextSelected($event)"
+              @entityEdited="onEditEntity($event)"
+              @entityAdded="onEntityAdded()"
+            />
           </bh-field>
         </div>
         <div class="bh-grid__item edit-sentence__input">
@@ -31,7 +34,7 @@
         </div>
       </div>
       <div
-        v-for="(entity, index) in entities"
+        v-for="(entity, index) in entitiesToEdit"
         :key="index"
         class="bh-grid">
         <div class="edit-sentence__input">
@@ -94,11 +97,7 @@ export default {
       type: String,
       default: '',
     },
-    entitiesToEdit: {
-      type: Array,
-      default: () => ([]),
-    },
-    entitiesList: {
+    entities: {
       type: Array,
       default: () => ([]),
     },
@@ -113,7 +112,7 @@ export default {
       textSelected: null,
       text: JSON.parse(JSON.stringify(this.textToEdit)),
       intent: JSON.parse(JSON.stringify(this.intentToEdit)),
-      entities: JSON.parse(JSON.stringify(this.entitiesToEdit)),
+      entitiesToEdit: JSON.parse(JSON.stringify(this.entities)),
       submitting: false,
     };
   },
@@ -143,6 +142,13 @@ export default {
       };
     },
   },
+  watch: {
+    text(newText, oldText) {
+      if (newText !== oldText) {
+        this.recomputeEntitiesFor(newText, oldText);
+      }
+    },
+  },
   methods: {
     ...mapActions([
       'updateEvaluateExample',
@@ -168,7 +174,65 @@ export default {
       return errors;
     },
     removeEntity(entity, index) {
-      Vue.delete(this.entities, index);
+      Vue.delete(this.entitiesToEdit, index);
+    },
+    onEditEntity(entity) {
+      if (this.$refs.textInput.emitTextSelected) {
+        /* istanbul ignore next */
+        this.$refs.textInput.emitTextSelected({
+          selectionStart: entity.start,
+          selectionEnd: entity.end,
+        });
+      }
+    },
+    recomputeEntitiesFor(text, oldText) {
+      /*
+        Entity follow text,
+        based in https://github.com/RasaHQ/rasa-nlu-trainer/blob/master/src/components-v1/TextEditor.js
+      */
+      this.entitiesToEdit.forEach((entity, i) => {
+        const oldEntityText = oldText.substring(entity.start, entity.end);
+
+        const findClosestStart = (lastMatch) => {
+          if (lastMatch === undefined) {
+            const index = text.indexOf(oldEntityText);
+            return index === -1
+              ? index
+              : findClosestStart(index);
+          }
+
+          const from = lastMatch + oldEntityText.length;
+          const index = text.indexOf(oldEntityText, from);
+
+          if (index === -1) {
+            return lastMatch;
+          }
+
+          const prevDiff = Math.abs(entity.start - lastMatch);
+          const nextDiff = Math.abs(entity.start - index);
+
+          return prevDiff < nextDiff
+            ? lastMatch
+            : findClosestStart(index);
+        };
+
+        const start = findClosestStart();
+        if (start === -1) {
+          this.entitiesToEdit[i] = false;
+          return false;
+        }
+
+        this.entitiesToEdit[i].start = start;
+        this.entitiesToEdit[i].end = start + oldEntityText.length;
+        return true;
+      });
+      this.entitiesToEdit = this.entitiesToEdit.filter(value => !!value);
+    },
+    onEntityAdded() {
+      if (this.$refs.textInput.clearSelected) {
+        /* istanbul ignore next */
+        this.$refs.textInput.clearSelected();
+      }
     },
     isValid() {
       return this.validationErrors.length === 0;
@@ -193,7 +257,7 @@ export default {
 
         this.text = '';
         this.intent = '';
-        this.entities = [];
+        this.entitiesToEdit = [];
         this.submitting = false;
 
         this.setUpdateRepository(true);
