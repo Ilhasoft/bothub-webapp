@@ -17,7 +17,7 @@
 
 <script>
 import EditEvaluateExampleModal from '@/components/repository/repository-evaluate/example/EditEvaluateExampleModal';
-import ExampleAccordion from '@/components/shared/ExampleAccordion';
+import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 export default {
   name: 'EvaluateExampleItem',

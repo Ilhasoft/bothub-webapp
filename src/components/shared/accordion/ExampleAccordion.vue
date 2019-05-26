@@ -171,7 +171,7 @@ export default {
 
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/utilities.scss';
+  @import '../../../assets/scss/utilities';
 
   .before-border {
     position: relative;

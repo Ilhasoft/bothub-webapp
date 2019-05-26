@@ -15,7 +15,7 @@
 <script>
 import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleAccordion from '@/components/shared/ExampleAccordion';
+import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
 export default {
