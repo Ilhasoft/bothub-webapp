@@ -49,7 +49,7 @@
               <bh-icon-button
                 value="close"
                 size="small"
-                @click="" />
+                @click.prevent.stop="removeEntity(entity, index)" />
             </span>
           </bh-autocomplete>
         </div>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import BH from 'bh';
 import { mapState, mapActions } from 'vuex';
 import { formatters } from '@/utils';
@@ -138,7 +139,6 @@ export default {
     },
     highlightedText() {
       return (entity) => {
-        console.log(entity);
         return this.text.slice(entity.start, entity.end);
       };
     },
@@ -166,6 +166,9 @@ export default {
       }
 
       return errors;
+    },
+    removeEntity(entity, index) {
+      Vue.delete(this.entities, index);
     },
     isValid() {
       return this.validationErrors.length === 0;
