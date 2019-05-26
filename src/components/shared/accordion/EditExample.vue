@@ -111,9 +111,9 @@ export default {
     return {
       errors: {},
       textSelected: null,
-      text: this.textToEdit,
-      intent: this.intentToEdit,
-      entities: this.entitiesToEdit,
+      text: JSON.parse(JSON.stringify(this.textToEdit)),
+      intent: JSON.parse(JSON.stringify(this.intentToEdit)),
+      entities: JSON.parse(JSON.stringify(this.entitiesToEdit)),
       submitting: false,
     };
   },
