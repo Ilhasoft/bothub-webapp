@@ -1,43 +1,70 @@
 <template>
-  <div
-    class="graphics-results bh-grid bh-grid--column">
-    <div class="bh-grid__item graphics-results_wrapper">
-      <h2>Evaluate output (Test #{{ chartData.id }})</h2>
-      <p>For more information about test results, see our <a href="">documentation here</a>.</p>
-      <h3>Precision and recall reports</h3>
-      <p class="graphic-results">A perfect precision score of 1.0
-      means that every test result was positive (but says nothing about whether all
-      positive results were retrieved) whereas a perfect recall score of 1.0 means that
-      all positive results were retrieved by the search (but says nothing
-      about how many false positives were also retrieved).</p>
-      <p> Read
-      more about in <a href="">our documentation</a>.</p>
-      <h4>Intent report</h4>
-      <div
-        v-if="!loadingIntentsChart"
-        class="graphics-results__charts__loading">
-        <bh-loading />
+  <div class="graphics-results">
+    <div class="graphics-results__wrapper">
+      <h2 class="graphics-results__title">
+        Evaluate output (Test #{{ chartData.id }})
+      </h2>
+      <p>
+        For more information about test results, see our <a href="">documentation here</a>.
+      </p>
+
+      <div class="graphics-results__info">
+        <h3 class="graphics-results__title">
+          Precision and recall reports
+        </h3>
+        <p>
+          A perfect precision score of 1.0 means that every test
+          result was positive (but says nothing about whether all
+          positive results were retrieved) whereas a perfect
+          recall score of 1.0 means that all positive results
+          were retrieved by the search (but says nothing about
+          how many false positives were also retrieved).
+        </p>
+        <p>
+          Read more about in
+          <a href="">our documentation</a>.
+        </p>
       </div>
-      <canvas
-        id="intentsChart"
-        class="graphics-results__charts"/>
-    </div>
-    <div class="bh-grid__item">
-      <h4>Entities</h4>
-      <div
-        v-if="!loadingEntitiesChart"
-        class="graphics-results__charts__loading">
-        <bh-loading />
+
+      <div>
+        <h5 class="graphics-results__title">
+          Intent report
+        </h5>
+        <div
+          v-if="!loadingIntentsChart"
+          class="graphics-results__charts__loading">
+          <bh-loading />
+        </div>
+        <canvas
+          id="intentsChart"
+          class="graphics-results__charts"/>
       </div>
-      <canvas
-        id="entitiesChart"
-        ref="entitiesChart"
-        class="graphics-results__charts"/>
+      <div>
+        <h5 class="graphics-results__title">
+          Entities
+        </h5>
+        <div
+          v-if="!loadingEntitiesChart"
+          class="graphics-results__charts__loading">
+          <bh-loading />
+        </div>
+        <canvas
+          id="entitiesChart"
+          ref="entitiesChart"
+          class="graphics-results__charts"/>
+      </div>
     </div>
-    <div class="bh-grid__item">
-      <h4>Entity report</h4>
-      <p>The confusion matrix shows you which intents
-      are mistaken for others. Read more about it in <a href="">our documentation</a>.</p>
+    <div>
+      <div class="graphics-results__info">
+        <h3 class="graphics-results__title">
+          Intent confusion matrix
+        </h3>
+        <p>
+          The confusion matrix shows you which intents
+          are mistaken for others. Read more about it in
+          <a href="">our documentation</a>.
+        </p>
+      </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.matrix_chart"
@@ -50,17 +77,23 @@
           alt="chart1">
       </div>
     </div>
-    <div class="bh-grid__item">
-      <h4>Intent confidence distribution</h4>
-      <p>
-        The histogram allows you to visualize the
-        confidence distribution for all predictions, with the volume of
-        correct and incorrect predictions being displayed by green and red bars respectively.
-        Improving the quality of your training data will move the
-        green histogram bars to the right and
-        the red histogram bars to the left of the plot.
-      </p>
-      <p>Read more about it in <a href="">our documentation</a>.</p>
+    <div>
+      <div class="graphics-results__info">
+        <h3 class="graphics-results__title">
+          Intent confidence distribution
+        </h3>
+        <p>
+          The histogram allows you to visualize the
+          confidence distribution for all predictions, with the volume of
+          correct and incorrect predictions being displayed by green and red bars respectively.
+          Improving the quality of your training data will move the
+          green histogram bars to the right and
+          the red histogram bars to the left of the plot.
+        </p>
+        <p>Read more about it in
+          <a href="">our documentation</a>.
+        </p>
+      </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.confidence_chart"
@@ -222,6 +255,15 @@ export default {
 <style lang="scss" scoped>
 .graphics-results {
   margin: 0 auto;
+
+  &__title {
+    margin: 2rem 0 0.5rem;
+    font-weight: 700;
+  }
+
+  &__info {
+    margin-bottom: 1rem;
+  }
 
   &__charts {
     text-align: center;
