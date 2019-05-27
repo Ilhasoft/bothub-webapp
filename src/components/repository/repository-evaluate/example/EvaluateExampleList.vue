@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .evaluate-example-list {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 

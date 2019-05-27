@@ -1,8 +1,8 @@
 <template>
   <div class="new-sentence">
-    <div class="new-sentence__header">
-      <h2 class="new-sentence__header__title">Add a new test sentence</h2>
-      <span class="new-sentence__header__description">
+    <div>
+      <h2>Add a new test sentence</h2>
+      <span>
         Create a bench of test sentences to measure the accuracy of your training.
       </span>
     </div>
@@ -228,11 +228,11 @@ export default {
 
 <style lang="scss" scoped>
 .new-sentence {
-  width: 80%;
+  width: 100%;
   margin: 2rem auto 0;
 
   &__header {
-    margin: 0 0.75rem;
+    // margin: 0 0.75rem;
   }
 
   &__form {
@@ -241,7 +241,7 @@ export default {
       display: grid;
       grid-template-columns: 1.5fr 1fr .3fr;
       grid-gap: 1rem;
-      padding: 1rem .8rem 0;
+      padding: 1rem 0;
 
       &__submit-btn {
         align-self: center;

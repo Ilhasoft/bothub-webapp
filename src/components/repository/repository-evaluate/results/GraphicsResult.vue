@@ -130,7 +130,7 @@ export default {
               {
                 label: 'Precision',
                 data: intentsPrecision,
-                backgroundColor: '#00c853',
+                backgroundColor: '#2BBFAC',
               },
               {
                 label: 'Recal',
@@ -185,7 +185,7 @@ export default {
               {
                 label: 'Precision',
                 data: entitiesPrecision,
-                backgroundColor: '#00c853',
+                backgroundColor: '#2BBFAC',
               },
               {
                 label: 'Recall',
