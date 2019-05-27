@@ -16,8 +16,9 @@ export default {
   updateRepository(state, value) {
     state.updateRepository = value;
   },
-  updateEvaluateResultId(state, value) {
-    state.evaluateResultId = value;
+  updateEvaluateResultId(state, { id, version }) {
+    state.evaluateResultId = id;
+    state.evaluateResultVersion = version;
     state.currentTabSelected = 1;
   },
   updateEvaluateLanguage(state, value) {

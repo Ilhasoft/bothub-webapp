@@ -173,7 +173,9 @@ export default {
           language: this.getEvaluateLanguage,
         });
         this.evaluating = false;
-        this.setUpdateEvaluateResultId(result.data.evaluate_id);
+        this.setUpdateEvaluateResultId({
+          id: result.data.evaluate_id,
+        });
         return true;
       } catch (error) {
         this.error = error.response.data;

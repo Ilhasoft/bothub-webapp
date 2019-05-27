@@ -2,7 +2,10 @@
   <div class="graphics-results">
     <div class="graphics-results__wrapper">
       <h2 class="graphics-results__title">
-        Evaluate output (Test #{{ chartData.id }})
+        Evaluate output
+        <span v-if="version">
+          (Test #{{ version }})
+        </span>
       </h2>
       <p>
         For more information about test results, see our <a href="">documentation here</a>.
@@ -110,6 +113,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Chart from 'chart.js';
 
 export default {
@@ -125,6 +129,11 @@ export default {
       loadingEntitiesChart: false,
       loadingIntentsChart: false,
     };
+  },
+  computed: {
+    ...mapState({
+      version: state => state.Repository.evaluateResultVersion,
+    }),
   },
   watch: {
     chartData() {
