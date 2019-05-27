@@ -63,6 +63,7 @@
             :entities="entitiesList"
             :intent-to-edit="intent"
             :text-to-edit="text"
+            :sentence-id="id"
             @cancel="cancelEditSentence"/>
         </slot>
       </div>

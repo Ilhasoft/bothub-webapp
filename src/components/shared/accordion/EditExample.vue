@@ -1,13 +1,11 @@
 <template>
   <div class="edit-sentence">
-    <form action="">
+    <form @submit.prevent="onSubmit">
       <div class="bh-grid">
         <div class="bh-grid__item--grow-3 edit-sentence__input">
-          <label for="">
-            <strong>Sentence</strong>
-          </label>
           <bh-field
-            :errors="errors.text || errors.language">
+            :errors="errors.text || errors.language"
+            label="Sentence">
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
@@ -23,16 +21,18 @@
           </bh-field>
         </div>
         <div class="bh-grid__item edit-sentence__input">
-          <label for="">
-            <strong>Intent</strong>
-          </label>
-          <bh-text
-            v-model="intent"
-            class="edit-sentence-input"
-            size="medium"
-            prepend-text="Type something"
-            placeholder="Intent"
-          />
+          <bh-field
+            :errors="errors.non_field_errors"
+            label="Intent"
+            help-text="When your bot receives a message, your bot can use a
+                    recognizer to examine the message and determine intent.">
+            <bh-autocomplete
+              v-model="intent"
+              :data="repository.intents_list || []"
+              :formatters="intentFormatters"
+              size="medium"
+              placeholder="Intent" />
+          </bh-field>
         </div>
       </div>
       <div
@@ -40,24 +40,28 @@
         :key="`entity-${index}`"
         class="bh-grid">
         <div class="edit-sentence__input">
-          <label for="">
-            <strong>{{ highlightedText(entity) }}</strong> is
-          </label>
-          <bh-autocomplete
-            :data="repository.intents_list || []"
-            :formatters="intentFormatters"
-            v-model="entity.entity"
-            class="edit-sentence-input"
-            size="medium"
-            placeholder="Entity"
-          >
-            <span slot="append">
-              <bh-icon-button
-                value="close"
-                size="small"
-                @click.prevent.stop="removeEntity(entity, index)" />
-            </span>
-          </bh-autocomplete>
+          <bh-field
+            :errors="entitiesError(index)">
+            <label for="">
+              <strong>{{ highlightedText(entity) }}</strong> is
+            </label>
+            <bh-autocomplete
+              :data="repository.entities_list || []"
+              :formatters="intentFormatters"
+              v-model="entity.entity"
+              class="edit-sentence-input"
+              size="medium"
+              placeholder="Entity"
+            >
+              <span slot="append">
+                <bh-icon-button
+                  value="close"
+                  size="small"
+                  @click.prevent.stop="removeEntity(entity, index)"
+                />
+              </span>
+            </bh-autocomplete>
+          </bh-field>
         </div>
       </div>
       <div
@@ -69,7 +73,7 @@
             <strong>{{ highlightedText(entity) }}</strong> is
           </label>
           <bh-autocomplete
-            :data="repository.intents_list || []"
+            :data="repository.entities_list || []"
             :formatters="intentFormatters"
             v-model="entity.entity"
             class="edit-sentence-input"
@@ -103,7 +107,7 @@
             Cancel
           </bh-button>
           <bh-button
-            :disabled="!isValid || submitting "
+            :disabled="!isValid || submitting || pendingEntities.length > 0"
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             secondary
@@ -142,6 +146,10 @@ export default {
       type: String,
       default: '',
     },
+    sentenceId: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -157,7 +165,17 @@ export default {
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
+      language: state => state.Repository.evaluateLanguage,
     }),
+    entitiesError() {
+      return (index) => {
+        if (index === this.entitiesToEdit.length - 1) {
+          return this.errors.entities;
+        }
+
+        return [];
+      };
+    },
     entityButtonText() {
       if (this.textSelected === null) {
         return 'Add entity';
@@ -320,24 +338,19 @@ export default {
       this.errors = {};
       this.submitting = true;
 
-      if (this.$refs.entitiesInput.clearEntityForm) {
-        this.$refs.entitiesInput.clearEntityForm();
-      }
-
       try {
         await this.updateEvaluateExample({
           repository: this.repository.uuid,
-          ...this.data,
+          id: this.sentenceId,
+          text: this.text,
+          intent: this.intent,
+          entities: this.entitiesToEdit,
+          language: this.language,
         });
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');
         }
-
-        this.text = '';
-        this.intent = '';
-        this.entitiesToEdit = [];
-        this.submitting = false;
 
         this.setUpdateRepository(true);
         return true;
