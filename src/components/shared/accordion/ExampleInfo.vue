@@ -46,9 +46,9 @@ export default {
 @import '../../../assets/scss/utilities.scss';
 
 .example {
-  $radius: 8px;
+  $radius: .5rem;
 
-  margin: 16px 8px;
+  margin: 1rem .5rem;
   overflow: visible;
   background-color: $white-bis;
   border-radius: $radius;
@@ -73,7 +73,7 @@ export default {
 
   &-entities,
   &-infos {
-    padding: 4px 8px 6px 16px;
+    padding: .25rem .5rem .3rem 1rem;
   }
 
   &-entities {
