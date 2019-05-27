@@ -3,13 +3,13 @@
     <bh-button
       v-if="!addingMode"
       :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
+      :disabled="!textSelectedValue"
       rounded
       @click="enableAddingMode()">
       <span>
-        <span>Add new entity</span>
+        <span>Add entity</span>
         <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
       </span>
-      <bh-icon value="plus-circle" />
     </bh-button>
     <div v-else>
       <div class="columns is-variable is-1">

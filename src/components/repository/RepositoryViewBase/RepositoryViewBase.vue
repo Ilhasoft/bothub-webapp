@@ -457,6 +457,10 @@ export default {
       &__content {
         max-width: 80%;
         margin: 0 auto;
+
+        @media screen and (min-width: 1200px) {
+          width: 62.5rem;
+        }
       }
 
       @media screen and (max-width: $wrapper-width) {

@@ -1,15 +1,18 @@
 <template>
-  <bh-modal
-    :open.sync="openValue"
-    title="Add a new test sentence!">
-    <div class="new-example-form-modal">
+  <div class="new-sentence">
+    <div>
+      <h2>Add a new test sentence</h2>
+      <span>
+        Create a bench of test sentences to measure the accuracy of your training.
+      </span>
+    </div>
+    <div class="new-sentence__form">
       <form
-        @submit.prevent="onSubmit()">
-        <div class="bh-grid">
-          <div class="bh-grid__item bh-grid__item--grow-3">
+        @submit.prevent="submitSentence()">
+        <div class="new-sentence__form__wrapper">
+          <div>
             <bh-field
-              :errors="errors.text || errors.language"
-              label>
+              :errors="errors.text || errors.language">
               <example-text-with-highlighted-entities-input
                 ref="textInput"
                 v-model="text"
@@ -17,22 +20,13 @@
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
                 size="medium"
-                placeholder="Add a sentence"
-                @textSelected="setTextSelected($event)">
-                <language-append-select-input
-                  slot="append"
-                  :value="getEvaluateLanguage"
-                  class="language-append"
-                  @input="setLanguage($event)" />
-              </example-text-with-highlighted-entities-input>
+                placeholder="Enter your sentence here"
+                @textSelected="setTextSelected($event)" />
             </bh-field>
           </div>
-          <div class="bh-grid__item">
+          <div>
             <bh-field
-              :errors="errors.non_field_errors"
-              label="Intent"
-              help-text="When your bot receives a message, your bot can use a
-                    recognizer to examine the message and determine intent.">
+              :errors="errors.non_field_errors">
               <bh-autocomplete
                 v-model="intent"
                 :data="repository.intents_list || []"
@@ -41,10 +35,22 @@
                 placeholder="Intent" />
             </bh-field>
           </div>
+          <div class="new-sentence__form__wrapper__submit-btn">
+            <bh-button
+              ref="saveSentenceButton"
+              :disabled="!isValid || submitting "
+              :tooltip-hover="!isValid ? validationErrors : null"
+              :loading="submitting"
+              primary
+              size="medium"
+              @click="submitSentence()">
+              <slot v-if="!submitting">Submit</slot>
+            </bh-button>
+          </div>
         </div>
         <bh-field
           :errors="errors.entities"
-          class="align-space-left">
+          class="new-sentence__form__entities">
           <entities-input
             ref="entitiesInput"
             v-model="entities"
@@ -57,78 +63,44 @@
             :entities-for-edit="[]"
             :testing="testing"
             @entityAdded="onEntityAdded()"
-            @entityEdited="onEditEntity($event)" />
+            @entityEdited="onEditEntity($event)"
+          />
         </bh-field>
-        <div class="bh-grid new-example-form-modal__buttons-wrapper">
-          <bh-button
-            ref="saveSentenceButton"
-            :disabled="!isValid || submitting "
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            class="new-example-form-modal__buttons-wrapper__button"
-            primary
-            size="medium"
-            @click="submitFormAndClose()">
-            <slot v-if="!submitting">Save sentence</slot>
-          </bh-button>
-          <bh-button
-            :disabled="!isValid || submitting "
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            primary
-            class="new-example-form-modal__buttons-wrapper__button"
-            size="medium"
-            type="submit">
-            <slot v-if="!submitting">Save and add another</slot>
-          </bh-button>
-        </div>
       </form>
     </div>
-  </bh-modal>
+  </div>
 </template>
 
 <script>
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
-import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
-import { mapActions, mapGetters, mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
 
 export default {
-  name: 'NewEvaluateExampleModal',
+  name: 'NewEvaluateExample',
   components: {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
-    LanguageAppendSelectInput,
-  },
-  props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
       textSelected: null,
       text: '',
-      language: '',
       intent: '',
       entities: [],
       errors: {},
       submitting: false,
-      openValue: this.open,
       entitiesList: [],
       testing: true,
     };
   },
   computed: {
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
     ...mapState({
       repository: state => state.Repository.selectedRepository,
+      language: state => state.Repository.evaluateLanguage,
     }),
     validationErrors() {
       const errors = [];
@@ -193,15 +165,6 @@ export default {
       };
     },
   },
-  watch: {
-    open(value) {
-      this.openValue = value;
-      this.language = this.getEvaluateLanguage;
-    },
-    openValue(value) {
-      this.$emit('update:open', value);
-    },
-  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
@@ -227,10 +190,7 @@ export default {
         });
       }
     },
-    setLanguage(value) {
-      this.language = value;
-    },
-    async onSubmit() {
+    async submitSentence() {
       this.errors = {};
       this.submitting = true;
       if (this.$refs.entitiesInput.clearEntityForm) {
@@ -253,40 +213,6 @@ export default {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
 
-        /* istanbul ignore next */
-        if (data) {
-          /* istanbul ignore next */
-          this.errors = data;
-        }
-        /* istanbul ignore next */
-        this.submitting = false;
-      }
-      return false;
-    },
-    async submitFormAndClose() {
-      this.errors = {};
-      this.submitting = true;
-      if (this.$refs.entitiesInput.clearEntityForm) {
-        this.$refs.entitiesInput.clearEntityForm();
-      }
-
-      try {
-        await this.newEvaluateExample({
-          repository: this.repository.uuid,
-          ...this.data,
-        });
-
-        this.text = '';
-        this.intent = '';
-        this.entities = [];
-        this.submitting = false;
-
-        this.$emit('created');
-        this.openValue = false;
-        return true;
-      } catch (error) {
-        /* istanbul ignore next */
-        const data = error.response && error.response.data;
         /* istanbul ignore next */
         if (data) {
           /* istanbul ignore next */
@@ -302,22 +228,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.new-example-form-modal {
-  margin: 0 1rem;
+.new-sentence {
+  width: 100%;
+  margin: 2rem auto 0;
 
-  &__buttons-wrapper {
-    justify-content: center;
+  &__header {
+    // margin: 0 0.75rem;
+  }
 
-    &__button {
-    margin: 2rem 1rem;
+  &__form {
+
+    &__wrapper {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr .3fr;
+      grid-gap: 1rem;
+      padding: 1rem 0;
+
+      &__submit-btn {
+        align-self: center;
+        justify-self: flex-end;
+      }
+    }
+
+    &__entities {
+      margin: 0 0.75rem;
     }
   }
-}
-.language-append {
-  flex-grow: 0;
-}
-
-.align-space-left {
-  margin-left: .75rem;
 }
 </style>

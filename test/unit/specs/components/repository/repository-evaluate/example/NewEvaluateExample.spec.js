@@ -5,18 +5,19 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 import Vuex from 'vuex';
 
-import EditEvaluateExampleModal from '@/components/repository/repository-evaluate/example/EditEvaluateExampleModal';
+import NewEvaluateExample from '@/components/repository/repository-evaluate/example/NewEvaluateExample';
 import getters from '@/store/repository/getters';
+import actions from '@/store/evaluate-example/actions';
+
 
 const localVue = createLocalVue();
 localVue.use(BH);
 localVue.use(Vuex);
 
-describe('EditEvaluateExampleModal.vue', () => {
+describe('NewEvaluateExample.vue', () => {
   let wrapper;
   let state;
   let store;
-  let actions;
   beforeEach(() => {
     state = {
       selectedRepository: {
@@ -24,10 +25,6 @@ describe('EditEvaluateExampleModal.vue', () => {
         intents_list: ['affirm', 'cuisine', 'greet'],
       },
       evaluateLanguage: 'en',
-    };
-
-    actions = {
-      updateEvaluateExample: jest.fn(),
     };
 
     store = new Vuex.Store({
@@ -39,12 +36,11 @@ describe('EditEvaluateExampleModal.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(EditEvaluateExampleModal, {
+    wrapper = shallowMount(NewEvaluateExample, {
       localVue,
       store,
     });
   });
-
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
@@ -57,7 +53,6 @@ describe('EditEvaluateExampleModal.vue', () => {
   describe('fill with valid data', () => {
     beforeEach(() => {
       wrapper.vm.text = 'my name is douglas';
-      wrapper.vm.language = 'en';
       wrapper.vm.intent = 'greet';
       wrapper.vm.entities = [
         {
@@ -72,8 +67,8 @@ describe('EditEvaluateExampleModal.vue', () => {
       expect(wrapper.vm.isValid).toBeTruthy();
     });
 
-    test('availableEntities contains the entity name', () => {
-      expect(wrapper.vm.availableEntities).toContain('name');
+    test('name in availableEntities', () => {
+      expect('name').toContain(wrapper.vm.availableEntities);
     });
 
     describe('entity with label', () => {
@@ -93,26 +88,32 @@ describe('EditEvaluateExampleModal.vue', () => {
       });
     });
 
-    // describe('on submit', () => {
-    //   let r;
-    //   beforeEach(async () => {
-    //     r = await wrapper.vm.onSubmit();
-    //   });
+    describe('on submit', () => {
+      beforeEach(async () => {
+        wrapper.setMethods({
+          newEvaluateExample() {
+            return new Promise((resolve) => {
+              resolve();
+            });
+          },
+        });
+        Promise.resolve(wrapper.vm.submitSentence());
+        await localVue.nextTick();
+      });
 
-    //   test('return is true', () => {
-    //     expect(r).toBeTruthy();
-    //   });
+      test('return is true', () => {
+        expect(wrapper.vm.submitSentence()).toBeTruthy();
+      });
 
-    //   test('created event emitted', () => {
-    //     expect(wrapper.emitted('created')).toBeDefined();
-    //   });
-    // });
+      test('created event emitted', async () => {
+        expect(wrapper.emitted('created')).toBeDefined();
+      });
+    });
   });
 
   describe('fill with invalid data', () => {
     beforeEach(() => {
       wrapper.vm.text = 'my name is douglas';
-      wrapper.vm.language = 'en';
       wrapper.vm.intent = '';
       wrapper.vm.entities = [];
     });
@@ -124,7 +125,7 @@ describe('EditEvaluateExampleModal.vue', () => {
     describe('on submit', () => {
       let r;
       beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
+        r = await wrapper.vm.submitSentence();
       });
 
       test('return is false', () => {

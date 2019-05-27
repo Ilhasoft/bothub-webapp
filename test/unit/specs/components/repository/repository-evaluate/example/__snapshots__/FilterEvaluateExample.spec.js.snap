@@ -1,20 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TestView.vue renders correctly 1`] = `
-<div class="filter-evaluate-example bh-grid">
-  <bh-field-stub errors="" class="bh-grid__item bh-grid__item--grow-3">
-    <bh-text-stub value="" formatters="" debounce="750">
-      <div>
-        <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
-      </div>
-    </bh-text-stub>
-  </bh-field-stub>
-  <div class="bh-grid__item filter-evaluate-example__text"><span>Filter by:</span></div>
-  <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intent"></bh-autocomplete-stub>
-  </bh-field-stub>
-  <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
-  </bh-field-stub>
+<div class="filter-evaluate-example">
+  <h2 class="filter-evaluate-example__title">Sentences List</h2>
+  <div class="filter-evaluate-example__filters">
+    <bh-field-stub errors="" class="filter-evaluate-example__filters__input-text">
+      <bh-text-stub value="" formatters="" debounce="750">
+        <div>
+          <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
+        </div>
+      </bh-text-stub>
+    </bh-field-stub>
+    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__title">Filter by:</span>
+      <bh-field-stub errors="">
+        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intent"></bh-autocomplete-stub>
+      </bh-field-stub>
+      <bh-field-stub errors="">
+        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
+      </bh-field-stub>
+    </div>
+  </div>
 </div>
 `;

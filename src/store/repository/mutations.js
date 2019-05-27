@@ -18,7 +18,7 @@ export default {
   },
   updateEvaluateResultId(state, value) {
     state.evaluateResultId = value;
-    state.currentTabSelected = 2;
+    state.currentTabSelected = 1;
   },
   updateEvaluateLanguage(state, value) {
     state.evaluateLanguage = value;
