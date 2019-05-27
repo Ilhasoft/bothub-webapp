@@ -6,6 +6,12 @@
     infinite-scroll-disabled="busy"
     infinite-scroll-throttle-delay="800"
     infinite-scroll-distance="-20">
+    <h3 class="evaluate-result-example-list__title">
+      Sentence details
+    </h3>
+    <p>
+      Compare the results in every test sentence.
+    </p>
     <evaluate-result-example-item
       v-for="(item, i) in resultExampleList"
       :key="i"
@@ -87,6 +93,11 @@ export default {
 <style lang="scss" scoped>
 .evaluate-result-example-list {
   width: 100%;
+
+  &__title {
+    margin-top: 1rem;
+    font-weight: 700;
+  }
 
   &__loading {
     width: 100%;

@@ -118,16 +118,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
+@import '../../../../assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/colors.scss';
 
 .example {
   $radius: 8px;
 
-  margin: 16px 8px;
+  margin: 1rem 0;
+  overflow: visible;
   background-color: $white-bis;
   border-radius: $radius;
-  overflow: visible;
 
   &--failed {
     border: .120rem solid $color-danger;
