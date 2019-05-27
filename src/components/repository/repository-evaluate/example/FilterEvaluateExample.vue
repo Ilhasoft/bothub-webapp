@@ -94,7 +94,7 @@ export default {
 
 <style lang="scss">
 .filter-evaluate-example {
-  width: 78%;
+  width: 100%;
   margin: 0 auto .5rem;
 
   &__filters {
