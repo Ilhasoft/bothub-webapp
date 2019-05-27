@@ -19,10 +19,22 @@
           v-if="intent"
           :class="{'level-item ': true,
                    'text-color-danger': status=='error'}">
-          <strong
-            :class="{
-            'text-color-danger': status=='error'}">Intent:&nbsp;</strong>
-          <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
+          <div v-if="status =='error'">
+            <strong
+              :class="{
+              'text-color-danger': status=='error'}">Expected intent:&nbsp;</strong>
+            <span>{{ intent }} /</span>
+            <strong
+              :class="{
+              'text-color-danger': status=='error'}">Predicted intent:&nbsp;</strong>
+            <span>{{ intentPrediction.name }}
+              ({{ intentPrediction.confidence.toFixed(2) }} confidence) </span>
+          </div>
+          <div v-else>
+            <strong>Intent:&nbsp;</strong>
+            <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
+          </div>
+
         </div>
         <span
           v-if="status === 'success'"
@@ -69,6 +81,10 @@ export default {
     status: {
       type: String,
       default: 'example--failed',
+    },
+    intentPrediction: {
+      type: Object,
+      default: null,
     },
   },
   computed: {

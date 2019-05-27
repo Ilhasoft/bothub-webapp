@@ -12,7 +12,8 @@
       :text="item.text"
       :intent="item.intent"
       :confidence="item.intent_prediction.confidence"
-      :status="item.status" />
+      :status="item.status"
+      :intent-prediction="item.intent_prediction" />
     <div
       v-if="!busy"
       class="evaluate-result-example-list__loading">
