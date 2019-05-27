@@ -15,7 +15,7 @@
 <script>
 import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
-import ExampleAccordion from '@/components/shared/ExampleAccordion';
+import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
 export default {
@@ -73,7 +73,7 @@ export default {
 
 <style lang="scss" scoped>
 .evaluate-example-list {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 }
 

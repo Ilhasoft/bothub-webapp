@@ -2,8 +2,8 @@
 
 exports[`NewEvaluateExample.vue renders correctly 1`] = `
 <div class="new-sentence">
-  <div class="new-sentence__header">
-    <h2 class="new-sentence__header__title">Add a new test sentence</h2> <span class="new-sentence__header__description">
+  <div>
+    <h2>Add a new test sentence</h2> <span>
       Create a bench of test sentences to measure the accuracy of your training.
     </span>
   </div>

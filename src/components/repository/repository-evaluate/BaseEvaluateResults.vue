@@ -4,7 +4,6 @@
     class="bh-grid bh-grid--column">
     <div>
       <graphics-result :chart-data="resultsData"/>
-      <hr>
       <!-- <filter-evaluate-result-example
         :intents="repository.intents_list"
         :labels="repository.labels_list"
