@@ -16,7 +16,7 @@
               @edited="onEdited($event)" />
           </div>
           <div class="bh-grid__item">
-            <h1>Manager your team</h1>
+            <h1>Manage your team</h1>
             <set-authorization-role-form
               ref="setAuthorizationRoleForm"
               :repository-uuid="repository.uuid"
