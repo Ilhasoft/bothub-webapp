@@ -218,7 +218,7 @@ export default {
       grid-template-columns: 1fr 25%;
       justify-content: space-between;
       padding: .7rem;
-      margin: .5rem 0;
+      margin-top: 0.5rem;
       cursor: pointer;
       border: 1px solid #cfd5d9;
       border-radius: 3px;
