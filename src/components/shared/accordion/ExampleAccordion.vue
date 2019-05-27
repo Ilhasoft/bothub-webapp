@@ -3,12 +3,13 @@
     <div
       :class="open ? 'active':'before-border'"
       class="expander__trigger"
-      @click="open=!open">
+      @click="toggleAccordion">
 
       <div v-if="!open">{{ text }}</div>
 
       <div v-else>
         <highlighted-text
+          v-if="open && !editing"
           :text="text"
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
@@ -20,8 +21,10 @@
           class="level-right">
           <div class="level-item">
             <a
+              v-show="!editing"
               :href="`#delete-example-${id}`"
-              class="has-text-danger">
+              class="has-text-danger"
+              @click.prevent.stop="editSentence">
               <b-icon
                 icon="pen"
                 class="text-color-grey-dark example__icon" />
@@ -49,29 +52,19 @@
         v-show="open"
         class="expander__body">
         <slot>
-          <div
-            v-if="entitiesList.length > 0"
-            class="example-entities">
-            <b-tag
-              v-for="(entity, i) in entitiesList"
-              :key="i"
-              :class="entity.class"
-              rounded>
-              <strong>{{ entity.value }}</strong>
-              <span v-if="entity.label">is</span>
-              <strong v-if="entity.label">{{ entity.label }}</strong>
-            </b-tag>
-          </div>
-          <div class="example-infos level is-mobile">
-            <div class="level-left">
-              <div
-                v-if="intent"
-                class="level-item has-text-grey">
-                <strong>Intent:&nbsp;</strong>
-                <span>{{ intent }}</span>
-              </div>
-            </div>
-          </div>
+          <example-info
+            v-if="!editing"
+            :entities-list="entitiesList"
+            :intent="intent" />
+        </slot>
+        <slot>
+          <edit-example
+            v-if="editing"
+            :entities="entitiesList"
+            :intent-to-edit="intent"
+            :text-to-edit="text"
+            :sentence-id="id"
+            @cancel="cancelEditSentence"/>
         </slot>
       </div>
     </transition>
@@ -83,11 +76,15 @@ import { mapState, mapActions } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
+import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
+import EditExample from '@/components/shared/accordion/EditExample';
 
 export default {
   name: 'ExampleAccordion',
   components: {
     HighlightedText,
+    ExampleInfo,
+    EditExample,
   },
   props: {
     id: {
@@ -111,6 +108,7 @@ export default {
     return {
       open: false,
       deleteDialog: null,
+      editing: false,
     };
   },
   computed: {
@@ -118,11 +116,14 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      return getEntitiesList(this.entities)
-        .map(entity => ({
-          value: entity,
-          class: this.getEntityClass(entity),
-          label: this.getEntityLabel(entity),
+      const entitiesList = getEntitiesList(this.entities);
+
+      return this.entities
+        .map((entity, index) => ({
+          value: entitiesList[index],
+          class: this.getEntityClass(entitiesList[index]),
+          label: this.getEntityLabel(entitiesList[index]),
+          ...entity,
         }));
     },
   },
@@ -164,13 +165,27 @@ export default {
         });
       });
     },
+    cancelEditSentence() {
+      this.editing = false;
+    },
+    editSentence() {
+      this.editing = true;
+      this.open = true;
+    },
+    toggleAccordion() {
+      this.open = !this.open;
+
+      if (!this.open) {
+        this.cancelEditSentence();
+      }
+    },
   },
 };
 </script>
 
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/utilities.scss';
+  @import '../../../assets/scss/utilities';
 
   .before-border {
     position: relative;
@@ -199,17 +214,18 @@ export default {
 
   .expander {
     &__trigger {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 25%;
       justify-content: space-between;
       padding: .7rem;
-      margin: .5rem 0;
+      margin: .5rem .8rem 0;
       cursor: pointer;
       border: 1px solid #cfd5d9;
       border-radius: 3px;
 
       &__btns-wrapper {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
       }
     }
 
@@ -224,52 +240,12 @@ export default {
   }
 
   .example {
-    $radius: 8px;
-
-    margin: 16px 8px;
-    overflow: visible;
-    background-color: $white-bis;
-    border-radius: $radius;
-
     &__icon {
       margin: 0 .5rem;
 
       &:hover {
         color: black;
         transition: 1s;
-      }
-    }
-
-    &-text {
-      display: flex;
-      padding: 1rem 2rem;
-      margin-bottom: 4px;
-      background-color: $white-ter;
-      border-radius: $radius;
-      transition: box-shadow .2s ease;
-
-      &__main {
-        flex-grow: 1;
-        font-size: 1.25rem;
-      }
-
-      &__rigth {
-        flex-grow: 0;
-      }
-    }
-
-    &-entities,
-    &-infos {
-      padding: 4px 8px 4px 16px;
-    }
-
-    &-entities {
-      > * {
-        margin: 0 8px 0 0;
-
-        &:last-child {
-          margin: 0;
-        }
       }
     }
   }

@@ -1,13 +1,8 @@
 import BH from 'bh';
 
-export const getEntitiesList = (entities = [], extra = []) => {
-  const parsedEntities = entities
-    .concat(extra || [])
-    .map(e => (e instanceof Object ? e.entity : e));
-
-  // Making sure it's unique.
-  return Array.from(new Set(parsedEntities));
-};
+export const getEntitiesList = (entities = [], extra = []) => entities
+  .concat(extra || [])
+  .map(e => (e instanceof Object ? e.entity : e));
 
 export const LEVEL_NOTHING = 0;
 export const LEVEL_READER = 1;
