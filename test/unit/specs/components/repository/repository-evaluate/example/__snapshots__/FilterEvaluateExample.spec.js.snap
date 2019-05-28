@@ -11,9 +11,9 @@ exports[`TestView.vue renders correctly 1`] = `
         </div>
       </bh-text-stub>
     </bh-field-stub>
-    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__title">Filter by:</span>
+    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intent"></bh-autocomplete-stub>
+        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intents"></bh-autocomplete-stub>
       </bh-field-stub>
       <bh-field-stub errors="">
         <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>

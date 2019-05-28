@@ -167,6 +167,22 @@ export default {
       repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
     }),
+    validationErrors() {
+      const errors = [];
+
+      if (!this.text) {
+        errors.push('You need type a text to sentence');
+      }
+
+      if (!this.intent) {
+        errors.push('Intent is required');
+      }
+
+      return errors;
+    },
+    isValid() {
+      return this.validationErrors.length === 0;
+    },
     entitiesError() {
       return (index) => {
         if (index === this.entitiesToEdit.length - 1) {
@@ -222,19 +238,6 @@ export default {
     },
     setTextSelected(value) {
       this.textSelected = value;
-    },
-    validationErrors() {
-      const errors = [];
-
-      if (!this.text) {
-        errors.push('You need type a text to sentence');
-      }
-
-      if (!this.intent) {
-        errors.push('Intent is required');
-      }
-
-      return errors;
     },
     removeEntity(entity, index) {
       Vue.delete(this.entitiesToEdit, index);
@@ -330,9 +333,6 @@ export default {
         /* istanbul ignore next */
         this.$refs.textInput.clearSelected();
       }
-    },
-    isValid() {
-      return this.validationErrors.length === 0;
     },
     async onSubmit() {
       this.errors = {};
