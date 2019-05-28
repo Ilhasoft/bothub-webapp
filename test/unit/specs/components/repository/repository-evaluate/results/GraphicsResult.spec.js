@@ -2,15 +2,33 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import GraphicsResult from '@/components/repository/repository-evaluate/results/GraphicsResult';
 import BH from 'bh';
 import sinon from 'sinon';
+import Vuex from 'vuex';
 
 const localVue = createLocalVue();
 localVue.use(BH);
+localVue.use(Vuex);
 
 describe('GraphicsResult.vue', () => {
   let wrapper;
+  let state;
+  let store;
+
   beforeEach(() => {
+    state = {
+      version: 3,
+    };
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          state,
+        },
+      },
+    });
+
     wrapper = shallowMount(GraphicsResult, {
       localVue,
+      store,
       propsData: {
         chartData: {
           id: 2,
