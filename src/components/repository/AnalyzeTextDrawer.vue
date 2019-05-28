@@ -29,6 +29,7 @@
               <bh-textarea
                 :rows="8"
                 v-model="data.text"
+                class="drawer-content__text-area"
                 type="textarea" />
             </bh-field>
             <div class="field has-text-right">
@@ -206,6 +207,11 @@ export default {
 
   &-content {
     padding: 4px 16px 8px;
+
+    &__text-area {
+      max-height: 50vh;
+      overflow: auto;
+    }
   }
 
   &--slide-enter-active, &--slide-leave-active {
