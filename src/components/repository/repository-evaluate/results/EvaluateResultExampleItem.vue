@@ -24,11 +24,19 @@
               :class="{
               'text-color-danger': status=='error'}">Expected intent:&nbsp;</strong>
             <span>{{ intent }} /</span>
+            <div
+              v-if="intentPrediction.name"
+              class="example__align-no-predicted">
+              <strong
+                :class="{
+                'text-color-danger': status=='error'}">Predicted intent:&nbsp;</strong>
+              <span>{{ intentPrediction.name }}
+                ({{ intentPrediction.confidence.toFixed(2) }} confidence) </span>
+            </div>
             <strong
+              v-else
               :class="{
-              'text-color-danger': status=='error'}">Predicted intent:&nbsp;</strong>
-            <span>{{ intentPrediction.name }}
-              ({{ intentPrediction.confidence.toFixed(2) }} confidence) </span>
+              'text-color-danger': status=='error'}">No predicted intent</strong>
           </div>
           <div v-else>
             <strong>Intent:&nbsp;</strong>
@@ -156,6 +164,10 @@ export default {
       color: black;
       transition: 1s;
     }
+  }
+
+  &__align-no-predicted {
+    display: inline-block
   }
 
   &-text {
