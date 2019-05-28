@@ -259,13 +259,13 @@ export default {
     }
 
     &__wrapper {
-      display: grid;
-      grid-template-columns: 1fr 15%;
-      grid-gap: 0.5rem;
-      align-items: end;
+      display: flex;
+      align-items: flex-end;
       margin-top: 1rem;
 
       &__language-select {
+        flex: 1;
+        margin-right: .5rem;
         text-align: left;
       }
     }
