@@ -56,7 +56,10 @@ export default {
       'setUpdateEvaluateResultId',
     ]),
     goToDetail() {
-      this.setUpdateEvaluateResultId(this.id);
+      this.setUpdateEvaluateResultId({
+        id: this.id,
+        version: this.version,
+      });
     },
   },
 };
