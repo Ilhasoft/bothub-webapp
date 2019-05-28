@@ -17,7 +17,7 @@
         </bh-text>
       </bh-field>
       <div class="filter-evaluate-example__filters__wrapper">
-        <span class="filter-evaluate-example__filters__wrapper__title">Filter by:</span>
+        <span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
         <bh-field
           :errors="errors.intent">
           <bh-autocomplete
@@ -97,6 +97,10 @@ export default {
   width: 100%;
   margin: 0 auto .5rem;
 
+  &__title {
+    text-align: left;
+  }
+
   &__filters {
     display: grid;
     grid-template-columns: 35% 1fr;
@@ -111,7 +115,7 @@ export default {
       grid-template-columns: 11% 1fr 1fr;
       grid-gap: .5rem;
 
-      &__title {
+      &__text {
         align-self: center;
       }
     }
