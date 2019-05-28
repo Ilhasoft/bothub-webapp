@@ -24,7 +24,7 @@
             v-model="intent"
             :data="intents || []"
             :formatters="inputFormatters"
-            placeholder="All Intent" />
+            placeholder="All Intents" />
         </bh-field>
         <bh-field
           :errors="errors.intent">
