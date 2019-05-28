@@ -175,6 +175,7 @@ export default {
         this.evaluating = false;
         this.setUpdateEvaluateResultId({
           id: result.data.evaluate_id,
+          version: result.data.version,
         });
         return true;
       } catch (error) {
