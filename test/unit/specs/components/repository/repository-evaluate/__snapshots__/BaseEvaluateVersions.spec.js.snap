@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaseEvaluateVersions.vue renders 1`] = `
+<div class="base-evaluate-versions bh-grid bh-grid--column">
+  <evaluate-version-list-stub></evaluate-version-list-stub>
+</div>
+`;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EvaluateVersionItem.vue renders 1`] = `
+<div>
+  <bh-card-stub class="version-test-item">
+    <div class="version-test-item__wrapper">
+      <div class="version-test-item__wrapper__info"><strong class="version-test-item__wrapper__info__item">Test #2</strong>
+        <language-badge-stub language="pt" main="true" size="small" class="version-test-item__wrapper__info__item"></language-badge-stub> <small class="version-test-item__wrapper__info__item">
+          in 9 months</small></div>
+      <div class="version-test-item__wrapper__links"><a>Load results</a></div>
+    </div>
+  </bh-card-stub>
+</div>
+`;

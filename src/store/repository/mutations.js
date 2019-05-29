@@ -10,4 +10,21 @@ export default {
       },
     );
   },
+  setRepository(state, value) {
+    state.selectedRepository = value;
+  },
+  updateRepository(state, value) {
+    state.updateRepository = value;
+  },
+  updateEvaluateResultId(state, { id, version }) {
+    state.evaluateResultId = id;
+    state.evaluateResultVersion = version;
+    state.currentTabSelected = 1;
+  },
+  updateEvaluateLanguage(state, value) {
+    state.evaluateLanguage = value;
+  },
+  updateCurrentTab(state, value) {
+    state.currentTabSelected = value;
+  },
 };

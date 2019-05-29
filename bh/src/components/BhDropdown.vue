@@ -3,6 +3,7 @@
     :class="{
       'bh-dropdown': true,
       [`bh-dropdown--${position}`]: !!position,
+      'bh-dropdown--full-field': fullFieldSize,
     }"
   >
     <div
@@ -54,6 +55,10 @@ export default {
       type: String,
       default: null,
     },
+    fullFieldSize: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
@@ -92,7 +97,13 @@ export default {
     position: relative;
     display: inline-block;
 
+    &--full-field {
+      width: 100%;
+    }
+
     &__default {
+      display: flex;
+      justify-content: space-between;
       width: 100%;
       padding: .75rem 1rem;
       background-color: $color-white;

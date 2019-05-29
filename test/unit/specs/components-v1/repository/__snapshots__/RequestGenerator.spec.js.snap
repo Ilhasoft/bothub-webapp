@@ -10,14 +10,14 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
   </b-field-stub>
   <b-tabs-stub value="0" animated="true">
     <b-tab-item-stub label="cURL" visible="true">
-      <bh-highlighted-pre code="curl -X POST \\
+      <bh-highlighted-pre-stub code="curl -X POST \\
   -H 'Authorization: Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' \\
   -F 'language=en' \\
   -F &quot;text=&quot; \\
-  http://localhost:2657/parse/" code-class="bash"></bh-highlighted-pre>
+  http://localhost:2657/parse/" codeclass="bash"></bh-highlighted-pre-stub>
     </b-tab-item-stub>
     <b-tab-item-stub label="Python" visible="true">
-      <bh-highlighted-pre code="import requests
+      <bh-highlighted-pre-stub code="import requests
 
 data = {
   'language': 'en',
@@ -26,10 +26,10 @@ data = {
 
 headers = { 'Authorization': 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' }
 r = requests.post('http://localhost:2657/parse/', headers=headers, data=data)
-print(r.json())" code-class="python"></bh-highlighted-pre>
+print(r.json())" codeclass="python"></bh-highlighted-pre-stub>
     </b-tab-item-stub>
     <b-tab-item-stub label="Javascript" visible="true">
-      <bh-highlighted-pre code="var data = new FormData();
+      <bh-highlighted-pre-stub code="var data = new FormData();
 data.append('language', 'en');
 data.append('text', '');
 
@@ -40,7 +40,7 @@ request.onload = function () {
 
 request.open('POST', 'http://localhost:2657/parse/');
 request.setRequestHeader('Authorization', 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d');
-request.send(data);" code-class="javascript"></bh-highlighted-pre>
+request.send(data);" codeclass="javascript"></bh-highlighted-pre-stub>
     </b-tab-item-stub>
   </b-tabs-stub>
 </div>

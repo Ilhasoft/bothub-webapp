@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewEvaluateExample.vue renders correctly 1`] = `
+<div class="new-sentence">
+  <div>
+    <h2>Add a new test sentence</h2> <span>
+      Create a bench of test sentences to measure the accuracy of your training.
+    </span>
+  </div>
+  <div class="new-sentence__form">
+    <form>
+      <div class="new-sentence__form__wrapper">
+        <div>
+          <bh-field-stub errors="">
+            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Enter your sentence here"></example-text-with-highlighted-entities-input-stub>
+          </bh-field-stub>
+        </div>
+        <div>
+          <bh-field-stub errors="">
+            <bh-autocomplete-stub data="affirm,cuisine,greet" formatters="intentFormatters" size="medium" placeholder="Intent"></bh-autocomplete-stub>
+          </bh-field-stub>
+        </div>
+        <div class="new-sentence__form__wrapper__submit-btn">
+          <bh-button-stub disabled="true" size="medium" primary="true" type="button" tooltiphover="You need type a text to sentence,Intent is required">Submit</bh-button-stub>
+        </div>
+      </div>
+      <bh-field-stub errors="" class="new-sentence__form__entities">
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
+      </bh-field-stub>
+    </form>
+  </div>
+</div>
+`;

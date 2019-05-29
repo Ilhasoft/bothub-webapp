@@ -3,10 +3,12 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase/RepositoryViewBase';
 import Repository from '@/models/repository';
 import store from '@/store';
+import Router from 'vue-router';
 
 
 const localVue = createLocalVue();
 localVue.use(BH);
+localVue.use(Router);
 
 
 describe('RepositoryViewBase.vue', () => {

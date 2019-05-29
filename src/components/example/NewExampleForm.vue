@@ -11,7 +11,7 @@
             ref="textInput"
             v-model="text"
             :entities="entities"
-            :available-entities="availableEntities"
+            :available-entities="entitiesList"
             :formatters="textFormatters"
             size="medium"
             placeholder="Add a sentence"
@@ -60,9 +60,9 @@
             :repository="repository"
             :text="text"
             :text-selected="textSelected"
-            :available-entities="availableEntities"
+            :available-entities="entitiesList"
             :available-labels="availableLabels"
-            @entityAdded="onEntityAdded($event)"
+            @entityAdded="onEntityAdded()"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
       </div>
@@ -102,6 +102,7 @@ export default {
       entities: [],
       errors: {},
       submitting: false,
+      entitiesList: [],
     };
   },
   computed: {
@@ -167,6 +168,9 @@ export default {
         entities,
       };
     },
+  },
+  mounted() {
+    this.entitiesList = this.availableEntities;
   },
   methods: {
     ...mapActions([

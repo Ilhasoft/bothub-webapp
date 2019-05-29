@@ -34,6 +34,7 @@
             <intents-and-labels-list
               :intents="repository.intents"
               :labels="repository.labels.concat([repository.other_label])"
+              :repository="repository"
               @showSentences="onShowSentences($event)" />
           </div>
           <div
@@ -165,7 +166,8 @@ export default {
 
 .trainings-repository {
   &__new-example {
-    background-color: $color-fake-white;
+    background-color: $color-white;
+    border-bottom: .120rem solid whitesmoke;
   }
 }
 </style>

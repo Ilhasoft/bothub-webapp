@@ -6,7 +6,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     <div class="column is-three-fifths">
       <bh-field-stub label="" errors="">
         <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="medium" placeholder="Add a sentence">
-          <language-append-select-input-stub class="language-append"></language-append-select-input-stub>
+          <language-append-select-input-stub class="language-append" slot="append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>
@@ -25,7 +25,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <div class="columns is-variable is-1">
     <div class="column">
       <bh-field-stub errors="">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels=""></entities-input-stub>
+        <entities-input-stub value="" repository="[object Object]" text="" availableaddlabel="true" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
       </bh-field-stub>
     </div>
   </div>

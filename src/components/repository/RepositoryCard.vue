@@ -5,13 +5,14 @@
     no-border>
     <div class="bh-grid bh-grid--column repository-card__align-items">
       <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
-        <div class="repository-card__big-badge">
-          <router-link :to="repositoryDetailsRouterParams">
+        <router-link :to="repositoryDetailsRouterParams">
+          <div class="repository-card__big-badge">
             <bh-icon-button
               :value="repositoryIcon"
               size="medium"
-              class="repository-card__big-badge__icon" /></router-link>
-        </div>
+              class="repository-card__big-badge__icon" />
+          </div>
+        </router-link>
       </div>
       <div class="bh-grid__item text-center">
         <div class="repository-card__title">
