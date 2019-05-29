@@ -8,7 +8,10 @@
         </span>
       </h2>
       <p>
-        For more information about test results, see our <a href="">documentation here</a>.
+        For more information about test results, see our
+        <a
+          target="_blank"
+          href="https://docs.ilhasoft.mobi/bothub/testing-process">documentation here</a>.
       </p>
 
       <div class="graphics-results__info">
@@ -25,7 +28,9 @@
         </p>
         <p>
           Read more about in
-          <a href="">our documentation</a>.
+          <a
+            target="_blank"
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">our documentation</a>.
         </p>
       </div>
 
@@ -65,7 +70,9 @@
         <p>
           The confusion matrix shows you which intents
           are mistaken for others. Read more about it in
-          <a href="">our documentation</a>.
+          <a
+            target="_blank"
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">our documentation</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
@@ -94,7 +101,9 @@
           the red histogram bars to the left of the plot.
         </p>
         <p>Read more about it in
-          <a href="">our documentation</a>.
+          <a
+            target="_blank"
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">our documentation</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
