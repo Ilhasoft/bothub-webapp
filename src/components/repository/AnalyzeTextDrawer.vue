@@ -138,7 +138,7 @@ export default {
         const response = await this.analyzeText({
           ownerNickname: this.ownerNickname,
           slug: this.slug,
-          language: this.data.language,
+          language: this.data.language || this.defaultLanguage,
           text: this.data.text,
         });
         this.result = response.data;
