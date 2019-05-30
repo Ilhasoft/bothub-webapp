@@ -143,7 +143,7 @@ export default {
     width: $size;
     height: $size;
     border-radius: 50%;
-    background-color: $color-primary-darker;
+    background-color: $color-primary-dark;
     overflow: hidden;
 
     &__icon {

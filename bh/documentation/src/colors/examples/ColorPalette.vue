@@ -3,11 +3,14 @@
     <div class="background-color-primary-darker">
       <span>primary darker</span>
     </div>
+    <div class="background-color-primary-dark">
+      <span>primary dark</span>
+    </div>
     <div class="background-color-primary">
       <span>primary</span>
     </div>
-    <div class="background-color-primary-lighter">
-      <span>primary lighter</span>
+    <div class="background-color-primary-light">
+      <span>primary light</span>
     </div>
     <div class="background-color-secondary-darker">
       <span>secondary darker</span>
