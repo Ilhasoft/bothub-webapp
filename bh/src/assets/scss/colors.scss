@@ -16,7 +16,7 @@ $color-primary-inverted: $color-fake-white;
 
 $color-secondary-darker: #2C2B39;
 $color-secondary: #312B53;
-$color-secondary-lighter: #4E4871;
+$color-secondary-light: #4E4871;
 $color-secondary-inverted: $color-fake-white;
 
 $color-danger: #F44336;
@@ -38,7 +38,7 @@ $colors: (
   ('primary-light', $color-primary-light, $color-fake-white),
   ('secondary-darker', $color-secondary-darker, $color-fake-white),
   ('secondary', $color-secondary, $color-fake-white),
-  ('secondary-lighter', $color-secondary-lighter, $color-fake-white),
+  ('secondary-light', $color-secondary-light, $color-fake-white),
   ('danger', $color-danger, $color-fake-white),
   ('info', $color-info, $color-fake-white),
   ('warning', $color-warning, $color-fake-black),

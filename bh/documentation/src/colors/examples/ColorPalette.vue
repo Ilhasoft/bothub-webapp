@@ -18,8 +18,8 @@
     <div class="background-color-secondary">
       <span>secondary</span>
     </div>
-    <div class="background-color-secondary-lighter">
-      <span>secondary lighter</span>
+    <div class="background-color-secondary-light">
+      <span>secondary light</span>
     </div>
     <div class="background-color-grey-darker">
       <span>grey darker</span>
@@ -71,6 +71,7 @@ $margin: .5rem;
   & > * {
     padding: 2rem;
     margin: $margin;
+    border-radius: 5rem;
 
     span {
       padding: .5rem;
