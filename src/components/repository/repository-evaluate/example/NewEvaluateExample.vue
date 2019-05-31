@@ -232,10 +232,6 @@ export default {
   width: 100%;
   margin: 2rem auto 0;
 
-  &__header {
-    // margin: 0 0.75rem;
-  }
-
   &__form {
 
     &__wrapper {
@@ -248,10 +244,6 @@ export default {
         align-self: center;
         justify-self: flex-end;
       }
-    }
-
-    &__entities {
-      margin: 0 0.75rem;
     }
   }
 }
