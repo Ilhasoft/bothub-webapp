@@ -74,15 +74,18 @@ export default {
     outline: none;
 
     &--small {
-      width: $form-component-height-small;
+      width: $icon-small;
+      height: $icon-small;
     }
 
     &--medium {
-      width: $form-component-height-medium;
+      width: $icon-medium;
+      height: $icon-medium;
     }
 
     &--large {
-      width: $form-component-height-large;
+      width: $icon-large;
+      height: $icon-large;
     }
 
     &--primary {
