@@ -19,7 +19,7 @@
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
-                size="medium"
+                size="normal"
                 placeholder="Enter your sentence here"
                 @textSelected="setTextSelected($event)" />
             </bh-field>
@@ -31,7 +31,7 @@
                 v-model="intent"
                 :data="repository.intents_list || []"
                 :formatters="intentFormatters"
-                size="medium"
+                size="normal"
                 placeholder="Intent" />
             </bh-field>
           </div>
@@ -42,7 +42,7 @@
               :tooltip-hover="!isValid ? validationErrors : null"
               :loading="submitting"
               primary
-              size="medium"
+              size="normal"
               @click="submitSentence()">
               <slot v-if="!submitting">Submit</slot>
             </bh-button>

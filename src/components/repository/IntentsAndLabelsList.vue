@@ -6,7 +6,7 @@
           ref="intents"
           :primary="listActived === 'intents'"
           class="intents-and-labels-list__radio__button"
-          size="medium"
+          size="normal"
           @click="activeList('intents')" >
           Intents
         </bh-button>
@@ -14,7 +14,7 @@
           ref="labels"
           :primary="listActived === 'labels'"
           class="intents-and-labels-list__radio__button"
-          size="medium"
+          size="normal"
           @click="activeList('labels')">
           Labels
         </bh-button>
@@ -24,7 +24,7 @@
           ref="training"
           primary
           class="intents-and-labels-list__radio__button"
-          size="medium"
+          size="normal"
           @click="openTrainingModal">
           Training
         </bh-button>

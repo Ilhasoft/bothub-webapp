@@ -13,7 +13,7 @@
             :entities="entities"
             :available-entities="entitiesList"
             :formatters="textFormatters"
-            size="medium"
+            size="normal"
             placeholder="Add a sentence"
             @textSelected="setTextSelected($event)">
             <language-append-select-input
@@ -33,7 +33,7 @@
             v-model="intent"
             :data="repository.intents_list || []"
             :formatters="intentFormatters"
-            size="medium"
+            size="normal"
             placeholder="Intent" />
         </bh-field>
       </div>
@@ -44,7 +44,7 @@
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             primary
-            size="medium"
+            size="normal"
             type="submit">
             <slot v-if="!submitting">Submit</slot>
           </bh-button>
