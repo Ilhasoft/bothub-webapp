@@ -387,6 +387,10 @@ export default {
           display: none;
         }
 
+        &__logo {
+          align-self: center;
+        }
+
         &__options {
           display: flex;
           align-items: center;
