@@ -1,38 +1,4 @@
-<template>
-  <div
-    :class="{
-      'bh-badge': true,
-      [`bh-badge--${size}`]: !!size,
-      [`bh-badge--${color}`]: !!color && !transparent,
-      [`bh-badge--${color}-transparent`]: !!color && transparent,
-    }"
-    @click="$emit('click', $event)"
-  >
-    <slot />
-  </div>
-</template>
 
-<script>
-export default {
-  name: 'BhBadge',
-  props: {
-    size: {
-      type: String,
-      default: null,
-    },
-    color: {
-      type: String,
-      default: null,
-    },
-    transparent: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
-</script>
-
-<style lang="scss">
 @import '@scss/variables.scss';
 @import '@scss/colors.scss';
 
@@ -57,9 +23,9 @@ export default {
 
     &--small {
       @include badge-heigth($size-small);
+      height: 1.9rem;
       padding: 0 1rem;
       font-size: .75rem;
-      height: 1.9rem;
       line-height: calc(1.9rem - #{($border-width * 2)});
     }
 
@@ -101,4 +67,3 @@ export default {
     }
   }
 }
-</style>
