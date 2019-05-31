@@ -9,7 +9,7 @@
           <div class="repository-card__big-badge">
             <bh-icon-button
               :value="repositoryIcon"
-              size="normal"
+              size="extra-large"
               class="repository-card__big-badge__icon" />
           </div>
         </router-link>

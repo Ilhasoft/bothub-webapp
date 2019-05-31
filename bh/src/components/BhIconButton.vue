@@ -66,11 +66,11 @@ export default {
 
     display: block;
     width: $form-component-height-normal;
-    padding: 0; 
+    padding: 0;
     margin-right: .5rem;
     cursor: pointer;
     background: none;
-    border: none; 
+    border: none;
     outline: none;
 
     &--small {
@@ -86,6 +86,11 @@ export default {
     &--large {
       width: $icon-large;
       height: $icon-large;
+    }
+
+    &--extra-large {
+      width: $icon-extra-large;
+      height: $icon-extra-large;
     }
 
     &--primary {
