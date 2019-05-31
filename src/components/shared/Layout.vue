@@ -244,7 +244,7 @@ export default {
 
       img {
         display: block;
-        height: $size-small;
+        height: 1.75rem;
       }
     }
 
