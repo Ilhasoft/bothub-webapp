@@ -1,4 +1,38 @@
+<template>
+  <div
+    :class="{
+      'bh-badge': true,
+      [`bh-badge--${size}`]: !!size,
+      [`bh-badge--${color}`]: !!color && !transparent,
+      [`bh-badge--${color}-transparent`]: !!color && transparent,
+    }"
+    @click="$emit('click', $event)"
+  >
+    <slot />
+  </div>
+</template>
 
+<script>
+  export default {
+    name: 'BhBadge',
+    props: {
+      size: {
+        type: String,
+        default: null,
+      },
+      color: {
+        type: String,
+        default: null,
+      },
+      transparent: {
+        type: Boolean,
+        default: false,
+      },
+    },
+  };
+</script>
+
+<style lang="scss">
 @import '@scss/variables.scss';
 @import '@scss/colors.scss';
 
@@ -67,3 +101,4 @@
     }
   }
 }
+</style>
