@@ -29,6 +29,7 @@
               <bh-textarea
                 :rows="8"
                 v-model="data.text"
+                class="drawer-content__text-area"
                 type="textarea" />
             </bh-field>
             <div class="field has-text-right">
