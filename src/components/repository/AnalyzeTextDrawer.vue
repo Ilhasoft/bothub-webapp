@@ -207,11 +207,6 @@ export default {
 
   &-content {
     padding: 4px 16px 8px;
-
-    &__text-area {
-      max-height: 50vh;
-      overflow: auto;
-    }
   }
 
   &--slide-enter-active, &--slide-leave-active {
