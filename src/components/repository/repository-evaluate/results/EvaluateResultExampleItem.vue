@@ -25,7 +25,7 @@
               'text-color-danger': status=='error'}">Expected intent:&nbsp;</strong>
             <span>{{ intent }} /</span>
             <div
-              v-if="intentPrediction.name"
+              v-if="intentPrediction.name !== 'no predicted'"
               class="example__align-no-predicted">
               <strong
                 :class="{
