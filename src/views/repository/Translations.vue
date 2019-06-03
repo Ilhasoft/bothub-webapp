@@ -70,7 +70,8 @@ export default {
 
 .translations {
   &__header {
-    background-color: $color-fake-white;
+    background-color: $color-white;
+    border-bottom: .120rem solid whitesmoke;
   }
 }
 </style>

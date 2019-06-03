@@ -10,11 +10,16 @@
         </div>
       </div>
       <input
+        id="autocomplete"
         ref="input"
         v-model="val"
+        autocomplete="off"
         :class="`${className}__input`"
         v-bind="$attrs"
         type="text"
+        @keydown.38="keyArrows('up')"
+        @keydown.40="keyArrows('down')"
+        @keydown.13="enterPressed()"
         @focus="onFocus()"
         @blur="onBlur()"
         @keyup.esc="onEsc()"
@@ -23,13 +28,15 @@
     </div>
     <div
       v-if="autocompleteOpen"
+      ref="dropdownAutocomplete"
       class="bh-autocomplete__list"
     >
       <button
         v-for="(item, i) in filteredData"
         :key="i"
         type="button"
-        class="bh-autocomplete__list__item"
+        :class="{ 'bh-autocomplete__list__item__active': item === hovered,
+                  'bh-autocomplete__list__item': true }"
         @click="select(item)"
         v-html="highlightVerboseItem(item)"
       />
@@ -73,6 +80,8 @@ export default {
       className: 'bh-autocomplete',
       selected: null,
       focused: false,
+      hovered: null,
+      openOnFocus: Boolean,
       closeForced: false,
     };
   },
@@ -124,7 +133,7 @@ export default {
     },
     highlightVerboseItem(item) {
       const regex = new RegExp(`(${this.val})`, 'gi');
-      return this.verboseItem(item).replace(regex, '<strong>$1</strong>');
+      return this.verboseItem(item).replace(regex, '<b>$1</b>');
     },
     indexItem(item) {
       return this.indexField
@@ -135,10 +144,17 @@ export default {
       if (item) {
         this.val = this.verboseItem(item);
         this.selected = item;
+        this.setHovered(false);
       } else {
         this.val = '';
         this.selected = null;
+        this.setHovered(false);
       }
+    },
+    enterPressed() {
+      if (this.hovered === null) return;
+      this.select(this.hovered);
+      document.getElementById('autocomplete').blur();
     },
     finish() {
       if (this.forceSelectFirst) {
@@ -152,16 +168,52 @@ export default {
         }
       }
     },
+    keyArrows(direction) {
+      const sum = direction === 'down' ? 1 : -1;
+      if (this.focused) {
+        let index = this.filteredData.indexOf(this.hovered) + sum;
+        index = index > this.filteredData.length - 1 ? this.filteredData.length : index;
+        index = index < 0 ? 0 : index;
+
+        this.setHovered(this.filteredData[index]);
+
+        const list = document.querySelector('.bh-autocomplete__list');
+        const element = list.querySelectorAll('.bh-autocomplete__list__item')[index];
+
+        if (!element) return;
+
+        const visMin = list.scrollTop;
+        const visMax = list.scrollTop + list.clientHeight - element.clientHeight;
+
+        if (element.offsetTop < visMin) {
+          list.scrollTop = element.offsetTop;
+          this.currentHeightlist = list.scrollTop;
+        } else if (element.offsetTop >= visMax) {
+          list.scrollTop = (
+            element.offsetTop
+                            - list.clientHeight
+                            + element.clientHeight
+          );
+          this.currentHeightlist = list.scrollTop;
+        }
+      } else {
+        this.focused = true;
+      }
+    },
     onFocus() {
       this.setFocused(true);
     },
     onBlur() {
+      this.currentSelectedItemIndex = -1;
       this.finish();
       this.setFocused(false);
+      this.setHovered(false);
     },
     onEsc() {
+      this.currentSelectedItemIndex = -1;
       this.finish();
       this.forceClosed();
+      this.setHovered(false);
     },
     setFocused(value) {
       setTimeout(() => {
@@ -171,6 +223,11 @@ export default {
     },
     forceClosed() {
       this.closeForced = true;
+    },
+    setHovered(option) {
+      if (option === undefined || false) return;
+
+      this.hovered = option;
     },
   },
 };
@@ -210,9 +267,14 @@ export default {
         border: none;
         outline: none;
 
+        &__active {
+          color: white;
+          background-color: $color-primary;
+        }
+
         &:hover {
-          color: $color-primary;
-          background-color: $color-grey;
+          color: white;
+          background-color: $color-primary;
         }
       }
     }

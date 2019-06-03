@@ -5,21 +5,11 @@ exports[`RepositoryNavigation.vue renders correctly 1`] = `
   <div class="repository-nav__desktop">
     <router-link-stub to="[object Object]" tag="a" event="click">Summary</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Training</router-link-stub>
+    <router-link-stub to="[object Object]" tag="a" event="click">Test</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Translate</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Translation status</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Integration</router-link-stub>
     <router-link-stub to="[object Object]" tag="a" event="click">Settings</router-link-stub>
-  </div>
-  <div class="repository-nav__mobile">
-    <bh-dropdown-stub position="left">
-      <bh-icon-stub value="dots-vertical" size="normal" class="clickable text-color-primary"></bh-icon-stub>
-      <bh-dropdown-item-stub>Summary</bh-dropdown-item-stub>
-      <bh-dropdown-item-stub>Training</bh-dropdown-item-stub>
-      <bh-dropdown-item-stub>Translate</bh-dropdown-item-stub>
-      <bh-dropdown-item-stub>Translation status</bh-dropdown-item-stub>
-      <bh-dropdown-item-stub>Integration</bh-dropdown-item-stub>
-      <bh-dropdown-item-stub>Settings</bh-dropdown-item-stub>
-    </bh-dropdown-stub>
   </div>
 </div>
 `;

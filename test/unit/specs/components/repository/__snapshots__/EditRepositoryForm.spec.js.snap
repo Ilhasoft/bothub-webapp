@@ -5,7 +5,7 @@ exports[`EditRepositoryForm.vue renders correctly 1`] = `
   <!---->
   <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]"></form-generator-stub>
   <div class="text-center">
-    <bh-button primary="" type="submit">Save</bh-button>
+    <bh-button-stub primary="true" type="submit">Save</bh-button-stub>
   </div>
 </form>
 `;

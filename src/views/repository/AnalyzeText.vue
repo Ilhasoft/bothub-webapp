@@ -112,7 +112,7 @@ export default {
   extends: RepositoryBase,
   computed: {
     parseUrl() {
-      return `${process.env.BOTHUB_NLP_BASE_URL}parse`;
+      return `${process.env.BOTHUB_NLP_BASE_URL}parse/`;
     },
   },
 };

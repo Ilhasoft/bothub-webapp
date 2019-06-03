@@ -29,6 +29,7 @@
               <bh-textarea
                 :rows="8"
                 v-model="data.text"
+                class="drawer-content__text-area"
                 type="textarea" />
             </bh-field>
             <div class="field has-text-right">
@@ -108,7 +109,7 @@ export default {
   data() {
     return {
       data: {
-        language: this.defaultLanguage || this.availableLanguages[0],
+        language: this.availableLanguages[0],
         text: '',
       },
       submitting: false,
@@ -138,7 +139,7 @@ export default {
         const response = await this.analyzeText({
           ownerNickname: this.ownerNickname,
           slug: this.slug,
-          language: this.data.language,
+          language: this.data.language || this.availableLanguages[0],
           text: this.data.text,
         });
         this.result = response.data;

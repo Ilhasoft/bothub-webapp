@@ -1,5 +1,5 @@
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import Repository from '@/models/repository';
 
 
@@ -14,6 +14,7 @@ export default {
   computed: {
     ...mapGetters([
       'authenticated',
+      'getUpdateRepositoryState',
     ]),
   },
   watch: {
@@ -22,6 +23,11 @@ export default {
     },
     authenticated() {
       this.updateRepository();
+    },
+    getUpdateRepositoryState(force) {
+      if (force) {
+        this.updateRepository(true);
+      }
     },
   },
   mounted() {
@@ -33,6 +39,9 @@ export default {
     };
   },
   methods: {
+    ...mapActions([
+      'setUpdateRepository',
+    ]),
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
 
@@ -52,7 +61,7 @@ export default {
       this.repository.on('fetch', this.onReady);
 
       await this.repository.fetch();
-
+      this.setUpdateRepository(false);
       return this.repository;
     },
     onReady({ error }) {

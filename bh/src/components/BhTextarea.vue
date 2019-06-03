@@ -61,4 +61,9 @@ export default {
     @include textarea();
   }
 }
+
+textarea {
+  max-height: 50vh;
+  overflow: auto;
+}
 </style>

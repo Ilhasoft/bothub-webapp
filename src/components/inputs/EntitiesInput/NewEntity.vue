@@ -3,13 +3,13 @@
     <bh-button
       v-if="!addingMode"
       :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
+      :disabled="!textSelectedValue"
       rounded
       @click="enableAddingMode()">
       <span>
-        <span>Add new entity</span>
+        <span>Add entity</span>
         <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
       </span>
-      <bh-icon value="plus-circle" />
     </bh-button>
     <div v-else>
       <div class="columns is-variable is-1">
@@ -27,7 +27,7 @@
           </bh-field>
         </div>
         <div
-          v-if="entity && !customLabelDisabled"
+          v-if="entity && !customLabelDisabled && addLabel"
           class="column is-narrow">
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
@@ -101,6 +101,10 @@ export default {
       type: [Object, String],
       required: true,
     },
+    addLabel: {
+      type: Boolean,
+      default: true,
+    },
     availableEntities: {
       type: Array,
       default: () => ([]),
@@ -114,6 +118,10 @@ export default {
       default: () => ([]),
     },
     customLabelDisabled: {
+      type: Boolean,
+      default: false,
+    },
+    testing: {
       type: Boolean,
       default: false,
     },
@@ -211,6 +219,9 @@ export default {
     enableAddingMode() {
       if (this.textSelected) {
         this.addingMode = true;
+      }
+
+      if (!this.testing) {
         this.entity = this.textSelectedValue;
       }
     },
@@ -228,7 +239,6 @@ export default {
         start,
         end,
       };
-
       if (this.hasCustomizedLabel) {
         data.label = this.currentLabel;
       }

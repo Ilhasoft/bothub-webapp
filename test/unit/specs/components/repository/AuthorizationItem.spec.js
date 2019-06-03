@@ -2,6 +2,7 @@
 jest.mock('@/api/request');
 
 import Buefy from 'buefy';
+import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
@@ -12,6 +13,7 @@ import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
+localVue.use(BH);
 applyFilters(localVue);
 
 describe('AuthorizationItem.vue', () => {
