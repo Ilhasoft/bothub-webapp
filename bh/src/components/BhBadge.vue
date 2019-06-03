@@ -13,23 +13,23 @@
 </template>
 
 <script>
-  export default {
-    name: 'BhBadge',
-    props: {
-      size: {
-        type: String,
-        default: null,
-      },
-      color: {
-        type: String,
-        default: null,
-      },
-      transparent: {
-        type: Boolean,
-        default: false,
-      },
+export default {
+  name: 'BhBadge',
+  props: {
+    size: {
+      type: String,
+      default: null,
     },
-  };
+    color: {
+      type: String,
+      default: null,
+    },
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>
 
 <style lang="scss">
