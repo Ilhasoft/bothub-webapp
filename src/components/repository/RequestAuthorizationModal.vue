@@ -23,6 +23,10 @@ export default {
     RequestAuthorizationForm,
   },
   props: {
+    repositoryUuid: {
+      type: String,
+      required: true,
+    },
     open: {
       type: Boolean,
       default: false,
@@ -32,11 +36,6 @@ export default {
     return {
       openValue: this.open,
     };
-  },
-  computed: {
-    ...mapState({
-      repositoryUuid: state => state.Repository.selectedRepository.uuid,
-    }),
   },
   watch: {
     open(value) {

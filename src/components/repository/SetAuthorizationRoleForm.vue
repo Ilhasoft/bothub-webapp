@@ -34,17 +34,18 @@ export default {
     SelectUsersInput,
     RoleSelect,
   },
+  props: {
+    repositoryUuid: {
+      required: true,
+      type: String,
+    },
+  },
   data() {
     return {
       usersProfile: [],
       role: null,
       errors: null,
     };
-  },
-  computed: {
-    ...mapState({
-      repositoryUuid: state => state.Repository.selectedRepository.uuid,
-    }),
   },
   methods: {
     ...mapActions([

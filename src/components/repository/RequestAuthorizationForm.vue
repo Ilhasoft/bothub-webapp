@@ -30,6 +30,12 @@ const components = {
 export default {
   name: 'RequestAuthorizationForm',
   components,
+  props: {
+    repositoryUuid: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       formSchema: null,
@@ -37,11 +43,6 @@ export default {
       errors: {},
       submitting: false,
     };
-  },
-  computed: {
-    ...mapState({
-      repositoryUuid: state => state.Repository.selectedRepository.uuid,
-    }),
   },
   async mounted() {
     await this.updateFormSchema();
