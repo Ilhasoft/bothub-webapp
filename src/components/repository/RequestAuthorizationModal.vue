@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 
 
