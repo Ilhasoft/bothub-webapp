@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import FormGenerator from '@/components-v1/form-generator/FormGenerator';
 import Loading from '@/components-v1/shared/Loading';
 
@@ -30,12 +30,6 @@ const components = {
 export default {
   name: 'RequestAuthorizationForm',
   components,
-  props: {
-    repositoryUuid: {
-      type: String,
-      required: true,
-    },
-  },
   data() {
     return {
       formSchema: null,
@@ -43,6 +37,11 @@ export default {
       errors: {},
       submitting: false,
     };
+  },
+  computed: {
+    ...mapState({
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
+    }),
   },
   async mounted() {
     await this.updateFormSchema();

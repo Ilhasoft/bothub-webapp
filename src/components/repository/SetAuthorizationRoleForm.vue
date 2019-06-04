@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 import SelectUsersInput from '@/components-v1/inputs/SelectUsersInput';
 import RoleSelect from '@/components-v1/inputs/RoleSelect';
@@ -34,18 +34,17 @@ export default {
     SelectUsersInput,
     RoleSelect,
   },
-  props: {
-    repositoryUuid: {
-      required: true,
-      type: String,
-    },
-  },
   data() {
     return {
       usersProfile: [],
       role: null,
       errors: null,
     };
+  },
+  computed: {
+    ...mapState({
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
+    }),
   },
   methods: {
     ...mapActions([

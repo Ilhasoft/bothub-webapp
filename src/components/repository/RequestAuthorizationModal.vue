@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import RequestAuthorizationForm from '@/components/repository/RequestAuthorizationForm';
 
 
@@ -26,15 +27,16 @@ export default {
       type: Boolean,
       default: false,
     },
-    repositoryUuid: {
-      type: String,
-      required: true,
-    },
   },
   data() {
     return {
       openValue: this.open,
     };
+  },
+  computed: {
+    ...mapState({
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
+    }),
   },
   watch: {
     open(value) {
