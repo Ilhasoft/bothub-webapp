@@ -5,8 +5,7 @@
       @submit.prevent="onSubmit()">
       <div class="column is-three-fifths">
         <bh-field
-          :errors="errors.text || errors.language"
-          label>
+          :errors="errors.text || errors.language">
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="text"
@@ -25,10 +24,7 @@
       </div>
       <div class="column">
         <bh-field
-          :errors="errors.intent"
-          label="Intent"
-          help-text="When your bot receives a message, your bot can use a
-                    recognizer to examine the message and determine intent.">
+          :errors="errors.intent">
           <bh-autocomplete
             v-model="intent"
             :data="repository.intents_list || []"
@@ -38,7 +34,7 @@
         </bh-field>
       </div>
       <div class="column is-narrow">
-        <bh-field label>
+        <bh-field>
           <bh-button
             :disabled="!isValid || submitting "
             :tooltip-hover="!isValid ? validationErrors : null"
