@@ -33,47 +33,9 @@
       <div class="bh-grid__item">
         <h2>Sentence list</h2>
         <span>Your bot has -- trained sentences and -- not trained sentences.</span>
-        <bh-navigation :actived.sync="currentPath">
-          <div label="Home">
-            <intents-and-labels-list
-              :intents="repository.intents"
-              :labels="repository.labels.concat([repository.other_label])"
-              :repository="repository"
-              @showSentences="onShowSentences($event)" />
-          </div>
-          <div
-            slot="intent"
-            :label="currentIntent && `Intent: ${currentIntent.value}`">
-            <div v-if="currentIntent">
-              <example-search-input v-model="searchQueryIntent" />
-              <examples-list
-                :repository="repository"
-                :query="searchQueryIntent"
-                @exampleDeleted="onExampleDeleted" />
-            </div>
-          </div>
-          <bh-navigation
-            slot="label"
-            :label="currentLabel && `Label: ${currentLabel.value}`">
-            <div v-if="currentLabel">
-              <h1>Label {{ currentLabel.value }}</h1>
-              <example-search-input v-model="searchQueryLabel" />
-              <examples-list
-                :repository="repository"
-                :query="searchQueryLabel"
-                @exampleDeleted="onExampleDeleted" />
-            </div>
-            <div
-              slot="entity"
-              :label="currentEntity && `Entity: ${currentEntity}`">
-              <example-search-input v-model="searchQueryEntity" />
-              <examples-list
-                :repository="repository"
-                :query="searchQueryEntity"
-                @exampleDeleted="onExampleDeleted" />
-            </div>
-          </bh-navigation>
-        </bh-navigation>
+        <examples-list
+          :query="query"
+          @exampleDeleted="onExampleDeleted" />
       </div>
     </div>
   </repository-view-base>
@@ -106,9 +68,7 @@ export default {
       currentIntent: null,
       currentLabel: null,
       currentEntity: null,
-      searchQueryIntent: {},
-      searchQueryLabel: {},
-      searchQueryEntity: {},
+      query: {},
     };
   },
   watch: {
