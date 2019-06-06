@@ -9,6 +9,8 @@
         <div class="bh-grid trainings-repository__new-example">
           <div class="bh-grid__item">
             <div v-if="authenticated">
+              <h2>Train a new sentence</h2>
+              <span>Add examples to improve your bot intelligence.</span>
               <new-example-form
                 v-if="repository.authorization.can_contribute"
                 :repository="repository"
@@ -29,6 +31,8 @@
         </div>
       </div>
       <div class="bh-grid__item">
+        <h2>Sentence list</h2>
+        <span>Your bot has -- trained sentences and -- not trained sentences.</span>
         <bh-navigation :actived.sync="currentPath">
           <div label="Home">
             <intents-and-labels-list
@@ -166,6 +170,7 @@ export default {
 
 .trainings-repository {
   &__new-example {
+    margin-top: 1rem;
     background-color: $color-white;
     border-bottom: .120rem solid whitesmoke;
   }
