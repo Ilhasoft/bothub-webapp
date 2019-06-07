@@ -34,7 +34,7 @@
       <hr>
       <div class="bh-grid__item">
         <div class="trainings-repository__list-wrapper">
-          <h2>Sentence list</h2>
+          <h2>Sentences list</h2>
           <bh-button
             v-if="repository.examples__count > 0"
             ref="training"
@@ -44,6 +44,10 @@
             Run training
           </bh-button>
         </div>
+        <filter-examples
+          :intents="repository.intents_list"
+          :entities="repository.entities_list"
+          @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
           @exampleDeleted="onExampleDeleted" />
@@ -75,12 +79,14 @@ import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
+import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import ExamplesList from '@/components/example/ExamplesList';
 import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
+import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 
 export default {
@@ -88,6 +94,7 @@ export default {
   components: {
     RepositoryViewBase,
     NewExampleForm,
+    FilterExamples,
     ExamplesList,
     LoginForm,
     ExampleSearchInput,
@@ -102,6 +109,7 @@ export default {
       requestAuthorizationModalOpen: false,
       trainResponseData: null,
       trainResponseOpen: false,
+      querySchema: {},
       query: {},
       training: false,
     };
@@ -116,6 +124,21 @@ export default {
       'openLoginModal',
       'trainRepository',
     ]),
+    onSearch(value) {
+      Object.assign(this.querySchema, value);
+
+      if (!this.querySchema.intent) {
+        delete this.querySchema.intent;
+      }
+      if (!this.querySchema.entity) {
+        delete this.querySchema.entity;
+      }
+      if (!this.querySchema.label) {
+        delete this.querySchema.label;
+      }
+      const formattedQueryString = exampleSearchToString(this.querySchema);
+      this.query = exampleSearchToDicty(formattedQueryString);
+    },
     openTrainingModal() {
       if (!this.authenticated) {
         this.openLoginModal();
@@ -173,6 +196,7 @@ export default {
   &__list-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-bottom: .5rem;
   }
 
   &__new-example {

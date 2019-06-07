@@ -1,6 +1,5 @@
 <template>
   <div class="filter-evaluate-example">
-    <h2 class="filter-evaluate-example__title">Sentences List</h2>
     <div class="filter-evaluate-example__filters">
       <bh-field
         :errors="errors.intent"
@@ -96,10 +95,6 @@ export default {
 .filter-evaluate-example {
   width: 100%;
   margin: 0 auto .5rem;
-
-  &__title {
-    text-align: left;
-  }
 
   &__filters {
     display: grid;
