@@ -36,6 +36,7 @@
         <div class="trainings-repository__list-wrapper">
           <h2>Sentence list</h2>
           <bh-button
+            v-if="repository.examples__count > 0"
             ref="training"
             secondary-light
             size="normal"
