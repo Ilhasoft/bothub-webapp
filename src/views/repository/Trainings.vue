@@ -9,12 +9,13 @@
         <div class="bh-grid trainings-repository__new-example">
           <div class="bh-grid__item">
             <div v-if="authenticated">
-              <h2>Train a new sentence</h2>
-              <span>Add examples to improve your bot intelligence.</span>
-              <new-example-form
-                v-if="repository.authorization.can_contribute"
-                :repository="repository"
-                @created="onExampleCreated()" />
+              <div v-if="repository.authorization.can_contribute">
+                <h2>Train a new sentence</h2>
+                <span>Add examples to improve your bot intelligence.</span>
+                <new-example-form
+                  :repository="repository"
+                  @created="onExampleCreated()" />
+              </div>
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
                   You can not contribute to this repository
@@ -30,95 +31,134 @@
           </div>
         </div>
       </div>
+      <hr>
       <div class="bh-grid__item">
-        <h2>Sentence list</h2>
-        <span>Your bot has -- trained sentences and -- not trained sentences.</span>
+        <div class="trainings-repository__list-wrapper">
+          <h2>Sentence list</h2>
+          <bh-button
+            ref="training"
+            secondary-light
+            size="normal"
+            @click="openTrainingModal">
+            Run training
+          </bh-button>
+        </div>
         <examples-list
           :query="query"
           @exampleDeleted="onExampleDeleted" />
       </div>
     </div>
+    <request-authorization-modal
+      v-if="repository"
+      :open.sync="requestAuthorizationModalOpen"
+      :repository-uuid="repository.uuid"
+      @requestDispatched="onAuthorizationRequested()" />
+    <train-modal
+      v-if="repository"
+      :training="training"
+      :ready-for-train="repository.ready_for_train"
+      :requirements-to-train="repository.requirements_to_train"
+      :languages-ready-for-train="repository.languages_ready_for_train"
+      :open.sync="trainModalOpen"
+      :languages-warnings="repository.languages_warnings"
+      @train="train()" />
+    <train-response
+      v-if="trainResponseData"
+      :train-response="trainResponseData"
+      :open.sync="trainResponseOpen" />
   </repository-view-base>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import IntentsAndLabelsList from '@/components/repository/IntentsAndLabelsList';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import ExamplesList from '@/components/example/ExamplesList';
 import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import TrainModal from '@/components/repository/TrainModal';
+import TrainResponse from '@/components/repository/TrainResponse';
 
 
 export default {
   name: 'RepositoryTrainings',
   components: {
     RepositoryViewBase,
-    IntentsAndLabelsList,
     NewExampleForm,
     ExamplesList,
     LoginForm,
     ExampleSearchInput,
+    RequestAuthorizationModal,
+    TrainModal,
+    TrainResponse,
   },
   extends: RepositoryBase,
   data() {
     return {
-      currentPath: null,
-      currentIntent: null,
-      currentLabel: null,
-      currentEntity: null,
+      trainModalOpen: false,
+      requestAuthorizationModalOpen: false,
+      trainResponseData: null,
+      trainResponseOpen: false,
       query: {},
+      training: false,
     };
   },
-  watch: {
-    currentIntent(value) {
-      this.searchQueryIntent = value
-        ? { intent: value.value }
-        : null;
-    },
-    currentLabel(value) {
-      this.searchQueryLabel = value
-        ? { label: value.value }
-        : null;
-    },
-    currentEntity(value) {
-      this.searchQueryEntity = value
-        ? { entity: value }
-        : null;
-    },
-    currentPath(value) {
-      if (value === 'default') {
-        this.updateRepository();
-      }
-    },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
   },
   methods: {
-    onShowSentences({
-      type, intent, label, entity,
-    }) {
-      this.currentIntent = type === 'intent'
-        ? intent
-        : null;
-      this.currentLabel = ['label', 'entity'].includes(type)
-        ? label
-        : null;
-      this.currentEntity = type === 'entity'
-        ? entity
-        : null;
-      this.currentPath = type === 'entity'
-        ? 'label.entity'
-        : type;
+    ...mapActions([
+      'openLoginModal',
+      'trainRepository',
+    ]),
+    openTrainingModal() {
+      if (!this.authenticated) {
+        this.openLoginModal();
+      }
+      if (this.authenticated && this.repository.available_request_authorization) {
+        this.openRequestAuthorizationModal();
+      }
+      if (this.authenticated && this.repository.authorization.can_write) {
+        this.trainModalOpen = true;
+      }
     },
-    openEntity(entity) {
-      this.currentEntity = entity;
-      this.currentPath = 'label.entity';
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
     },
     onExampleCreated() {
       this.updateRepository(true);
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
+    },
+    async train() {
+      const { ownerNickname, slug } = this.$route.params;
+      this.training = true;
+      try {
+        const response = await this.trainRepository({ ownerNickname, slug });
+        this.trainResponseData = response.data;
+        this.trainResponseOpen = true;
+      } catch (e) {
+        this.$toast.open({
+          message: 'Repository not trained :(',
+          type: 'is-danger',
+        });
+      }
+      this.trainModalOpen = false;
+      this.training = false;
+      await this.updateRepository(false);
     },
   },
 };
@@ -129,10 +169,14 @@ export default {
 
 
 .trainings-repository {
+  &__list-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__new-example {
     margin-top: 1rem;
     background-color: $color-white;
-    border-bottom: .120rem solid whitesmoke;
   }
 }
 </style>
