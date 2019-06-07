@@ -177,7 +177,7 @@ export default {
     }
 
     &--normal {
-      padding: .5rem 1rem;
+      padding: .65rem 1rem;
     }
 
     &--medium {
