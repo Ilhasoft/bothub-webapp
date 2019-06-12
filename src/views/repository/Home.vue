@@ -5,15 +5,47 @@
     <div
       v-if="repository"
       class="repository-home">
-      <div class="bh-grid bh-grid--column">
-        <div class="bh-grid__item">
+      <div class="repository-home__header">
+        <div class="repository-home__header__icon-badge">
+          <bh-icon
+            :value="repositoryIcon"
+            size="small"
+            class="repository-home__header__icon-badge__icon" />
+        </div>
+        <div class="repository-home__header__wrapper">
+          <div class="repository-home__title">
+            {{ repository.name }}
+          </div>
+          <span
+            v-for="language in repository.available_languages"
+            :key="language"
+          >
+            <bh-badge
+              :transparent="language !== repository.language"
+              size="small"
+              color="primary"
+              class="repository-home__header__wrapper__badge"
+            >
+              {{ language }}
+            </bh-badge>
+          </span>
+        </div>
+      </div>
+      <div class="repository-home__description">
+        <div class="repository-home__title">
+          Description
+        </div>
+        <div>
           <p
             v-if="repository.description"
-            class="repository-home__description">{{ repository.description }}</p>
+            class="repository-home__description__text">{{ repository.description }}</p>
           <p v-else>
             <i class="text-color-grey-dark">There is no description for this repository</i>
           </p>
         </div>
+      </div>
+
+      <div class="bh-grid bh-grid--column">
         <div
           v-if="hasIntents || hasLabels"
           class="bh-grid__item bh-grid__item--nested">
@@ -77,6 +109,9 @@ export default {
     hasLabels() {
       return this.repository.labels_list.length > 0;
     },
+    repositoryIcon() {
+      return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
+    },
   },
 };
 </script>
@@ -87,16 +122,70 @@ export default {
 
 
 .repository-home {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  &__header {
+    display: flex;
+    margin: 2rem .5rem 1rem;
+
+    &__icon-badge {
+      $size: 4rem;
+
+      position: relative;
+      display: block;
+      width: $size;
+      height: $size;
+      overflow: hidden;
+      background-color: $color-primary-dark;
+      border-radius: 50%;
+
+      &__icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        color: white;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    &__wrapper {
+      padding: 0 .75rem;
+
+      &__badge {
+        height: 1.5rem;
+        margin: .4rem .5rem 0 0;
+        font-weight: bold;
+        line-height: calc(1.5rem - 4px);
+        border-width: 1px;
+      }
+    }
+  }
+
   &__description {
-    white-space: pre-wrap;
+    padding: 1rem .5rem;
+
+    &__text {
+      white-space: pre-wrap;
+    }
+  }
+
+  &__intents-list {
+    padding: 1rem .5rem;
+  }
+
+  &__entities-list {
+    padding: 1rem .5rem;
   }
 
   &__attribute {
     &__card {
-      background-color: $color-fake-white;
-      border-radius: 6px;
       padding: .75rem;
       margin: -.25rem;
+      background-color: $color-fake-white;
+      border-radius: 6px;
 
       &__badge {
         margin: .25rem;
