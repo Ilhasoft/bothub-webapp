@@ -45,45 +45,54 @@
         </div>
       </div>
 
-      <div class="bh-grid bh-grid--column">
+      <div
+        v-if="hasIntents"
+        class="repository-home__intents-list"
+      >
+        <div class="repository-home__title">
+          Intents List
+        </div>
+        <div class="repository-home__intents-list__card">
+          <div>This bot has <strong>{{ repository.intents_list.length }}</strong> intents</div>
+          <div class="repository-home__intents-list__card__wrapper">
+            <bh-badge
+              v-for="(intent) in repository.intents_list"
+              :key="intent"
+              class="repository-home__intents-list__card__wrapper__badge"
+              size="small"
+              color="grey"
+            >
+              <span>{{ intent }}</span>
+            </bh-badge>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="hasLabels"
+        class="repository-home__entities-list"
+      >
+        <div class="repository-home__title">
+          Entities List
+        </div>
         <div
-          v-if="hasIntents || hasLabels"
-          class="bh-grid__item bh-grid__item--nested">
-          <div class="bh-grid">
-            <div
-              v-if="hasIntents"
-              class="bh-grid__item">
-              <div class="repository-home__attribute">
-                <h4>Intents</h4>
-                <div class="repository-home__attribute__card">
-                  <bh-badge
-                    v-for="(intent) in repository.intents_list"
-                    :key="intent"
-                    size="small"
-                    color="grey"
-                    class="repository-home__attribute__card__badge">
-                    <span>{{ intent }}</span>
-                  </bh-badge>
-                </div>
-              </div>
-            </div>
-            <div
-              v-if="hasLabels"
-              class="bh-grid__item">
-              <div class="repository-home__attribute">
-                <h4>Labels</h4>
-                <div class="repository-home__attribute__card">
-                  <bh-badge
-                    v-for="(label) in repository.labels_list"
-                    :key="label"
-                    size="small"
-                    color="grey"
-                    class="repository-home__attribute__card__badge">
-                    <span>{{ label }}</span>
-                  </bh-badge>
-                </div>
-              </div>
-            </div>
+          v-for="(label, i) in labels"
+          :key="i"
+          class="repository-home__entities-list__card"
+        >
+          <div v-html="formattedLabel(label)" />
+          <div class="repository-home__entities-list__card__wrapper">
+            <bh-badge
+              v-for="(entity, i) in label.entities"
+              :key="i"
+              size="small"
+              color="grey"
+              class="repository-home__entities-list__card__wrapper__badge">
+              <span>{{ entity }}</span>
+            </bh-badge>
+          </div>
+          <div>
+            <strong>{{ label.examples__count }}</strong> sentences
           </div>
         </div>
       </div>
@@ -103,14 +112,35 @@ export default {
   },
   extends: RepositoryBase,
   computed: {
+    labels() {
+      return this.repository.labels.concat([this.repository.other_label]);
+    },
+    unlabeleds() {
+      return this.repository.other_label;
+    },
     hasIntents() {
       return this.repository.intents_list.length > 0;
     },
     hasLabels() {
-      return this.repository.labels_list.length > 0;
+      return this.labels.length > 0;
     },
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
+    },
+  },
+  methods: {
+    formattedLabel(label) {
+      if (label === undefined || label.entities === undefined) {
+        return '';
+      }
+
+      const entity = label.entities.length > 1 ? 'entities' : 'entity';
+
+      if (label.value === 'other') {
+        return `<strong>${label.entities.length}</strong> unlabeled ${entity}`;
+      }
+
+      return `<strong>${label.entities.length}</strong> ${entity} labeled <strong>${label.value}</strong>`;
     },
   },
 };
@@ -153,14 +183,6 @@ export default {
 
     &__wrapper {
       padding: 0 .75rem;
-
-      &__badge {
-        height: 1.5rem;
-        margin: .4rem .5rem 0 0;
-        font-weight: bold;
-        line-height: calc(1.5rem - 4px);
-        border-width: 1px;
-      }
     }
   }
 
@@ -172,24 +194,31 @@ export default {
     }
   }
 
-  &__intents-list {
-    padding: 1rem .5rem;
-  }
-
+  &__intents-list,
   &__entities-list {
     padding: 1rem .5rem;
-  }
 
-  &__attribute {
     &__card {
       padding: .75rem;
-      margin: -.25rem;
-      background-color: $color-fake-white;
+      margin: .75rem 0;
+      border: 1px solid #CFD5D9;
       border-radius: 6px;
 
-      &__badge {
-        margin: .25rem;
+      &__wrapper {
+        margin: .75rem .5rem;
       }
+    }
+  }
+
+  &__intents-list__card__wrapper,
+  &__entities-list__card__wrapper,
+  &__header__wrapper {
+    &__badge {
+      height: 1.5rem;
+      margin: .4rem .5rem 0 0;
+      font-weight: bold;
+      line-height: calc(1.5rem - 4px);
+      border-width: 1px;
     }
   }
 }
