@@ -62,8 +62,8 @@ export default {
         );
       }
     },
-    onItemDeleted(id) {
-      this.$emit('exampleDeleted', id);
+    onItemDeleted() {
+      this.updateExamples(true);
     },
   },
 };
