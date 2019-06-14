@@ -27,7 +27,7 @@
     border: $form-components-border-size solid $color-grey;
     border-radius: $form-components-border-radius;
     outline: none;
-    box-shadow: .2rem .2rem .5rem rgba(200, 200, 200, .5);
+    box-shadow: 0 .1875rem .375rem rgba(200, 200, 200, .5);
 
     svg {
       width: 125%;
@@ -54,10 +54,10 @@
     }
 
     &:disabled {
-      color: $color-grey;
+      color: $color-white;
       cursor: not-allowed;
-      background-color: $color-grey-dark;
-      border-color: $color-grey-dark;
+      background-color: $color-grey;
+      border-color: $color-grey;
     }
 
     @each $size in $sizes {

@@ -38,7 +38,7 @@
       </div>
       <bh-button
         class="safari-alert__content__button"
-        size="medium"
+        size="normal"
         primary
         @click="goToLandingPage()">Keep using Safari</bh-button>
     </div>

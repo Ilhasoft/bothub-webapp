@@ -176,6 +176,10 @@ export default {
       line-height: .5rem;
     }
 
+    &--normal {
+      padding: .65rem 1rem;
+    }
+
     &--medium {
       padding: 1rem;
       font-size: 1rem;

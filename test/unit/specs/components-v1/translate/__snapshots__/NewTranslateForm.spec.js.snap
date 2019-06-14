@@ -5,12 +5,12 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column">
       <bh-field-stub label="" errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" placeholder="Translate sentence" size="medium"></example-text-with-highlighted-entities-input-stub>
+        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" placeholder="Translate sentence" size="normal"></example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">
       <bh-field-stub label="" errors="">
-        <bh-button-stub disabled="true" size="medium" secondary="true" type="submit">Submit Translation</bh-button-stub>
+        <bh-button-stub disabled="true" size="normal" secondary="true" type="submit">Submit Translation</bh-button-stub>
       </bh-field-stub>
     </div>
   </form>

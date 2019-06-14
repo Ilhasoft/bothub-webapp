@@ -22,13 +22,13 @@ export default {
     RequestAuthorizationForm,
   },
   props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
     repositoryUuid: {
       type: String,
       required: true,
+    },
+    open: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

@@ -9,7 +9,7 @@
           <div class="repository-card__big-badge">
             <bh-icon-button
               :value="repositoryIcon"
-              size="medium"
+              size="extra-large"
               class="repository-card__big-badge__icon" />
           </div>
         </router-link>
@@ -143,7 +143,7 @@ export default {
     width: $size;
     height: $size;
     border-radius: 50%;
-    background-color: $color-primary-darker;
+    background-color: $color-primary-dark;
     overflow: hidden;
 
     &__icon {

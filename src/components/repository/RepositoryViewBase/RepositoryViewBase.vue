@@ -29,7 +29,7 @@
           class="bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__options">
           <user-avatar
             :profile="myProfile"
-            size="medium"
+            size="normal"
             class="rpstr-vw-bs__wrapper__header__options__avatar"/>
           <bh-dropdown position="left">
             <bh-icon
@@ -385,6 +385,10 @@ export default {
 
         @media screen and (max-width: $medium-screen) {
           display: none;
+        }
+
+        &__logo {
+          align-self: center;
         }
 
         &__options {

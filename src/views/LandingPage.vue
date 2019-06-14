@@ -27,7 +27,7 @@
           <p>Be part of an open source and democratic global community that builds,
           trains and shares datasets.</p>
           <bh-button
-            size="medium"
+            size="normal"
             rounded
             primary
             @click="signUpRedirect()">Join us for free</bh-button>
@@ -66,7 +66,7 @@
           limit="6"/>
         <bh-button
           class="landing-page__bots__content__button"
-          size="medium"
+          size="normal"
           primary
           @click="showAllBots()"> All bots </bh-button>
       </div>
@@ -77,7 +77,7 @@
           <h1>Join the millions of developers already using Bothub</h1>
           <bh-button
             class="landing-page__signup__button"
-            size="medium"
+            size="normal"
             rounded
             secondary
             @click="signUpRedirect()">Sign up for free</bh-button>

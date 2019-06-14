@@ -243,7 +243,7 @@ footer {
           transition: background-color .2s ease;
 
           &:hover {
-            color: $color-primary-darker;
+            color: $color-primary-dark;
             background-color: $font-color-lighten;
           }
 

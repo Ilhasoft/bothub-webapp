@@ -11,7 +11,7 @@
           <div slot="append">
             <bh-icon-button
               value="magnify"
-              size="small"
+              size="medium"
               type="submit" />
           </div>
         </bh-text>
