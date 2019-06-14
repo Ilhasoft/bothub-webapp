@@ -38,7 +38,7 @@
           <bh-button
             v-if="repository.examples__count > 0"
             ref="training"
-            secondary-light
+            color="secondary-light"
             size="normal"
             @click="openTrainingModal">
             Run training

@@ -64,10 +64,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    secondaryLight: {
-      type: Boolean,
-      default: false,
-    },
     color: {
       type: [String, Boolean],
       default: false,
@@ -110,7 +106,6 @@ export default {
       return this.color
         || (this.primary && 'primary')
         || (this.secondary && 'secondary')
-        || (this.secondaryLight && 'secondary-light')
         || false;
     },
   },
