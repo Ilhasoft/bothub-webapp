@@ -52,20 +52,10 @@
         <div class="repository-home__title">
           Intents List
         </div>
-        <div class="repository-home__intents-list__card">
-          <div>This bot has <strong>{{ repository.intents_list.length }}</strong> intents</div>
-          <div class="repository-home__intents-list__card__wrapper">
-            <bh-badge
-              v-for="(intent) in repository.intents_list"
-              :key="intent"
-              class="repository-home__intents-list__card__wrapper__badge"
-              size="small"
-              color="grey"
-            >
-              <span>{{ intent }}</span>
-            </bh-badge>
-          </div>
-        </div>
+        <badges-card
+          :list="repository.intents_list"
+          :title="formattedEntityTitle()"
+        />
       </div>
 
       <div
@@ -75,25 +65,23 @@
         <div class="repository-home__title">
           Entities List
         </div>
-        <div
-          v-for="(label, i) in labels"
-          :key="i"
-          class="repository-home__entities-list__card"
-        >
-          <div v-html="formattedLabel(label)" />
-          <div class="repository-home__entities-list__card__wrapper">
-            <bh-badge
-              v-for="(entity, i) in label.entities"
-              :key="i"
-              size="small"
-              color="grey"
-              class="repository-home__entities-list__card__wrapper__badge">
-              <span>{{ entity }}</span>
-            </bh-badge>
+        <badges-card
+          v-if="repository.other_label.entities.length > 0"
+          :list="repository.other_label.entities"
+          :title="formattedLabel(repository.other_label)"
+          :examples-count="repository.other_label.examples__count"
+        />
+        <div v-if="repository.labels.length > 0">
+          <div class="repository-home__entities-list__labeled-count">
+            {{ labeledEntitiesCount }} entities grouped by label.
           </div>
-          <div>
-            <strong>{{ label.examples__count }}</strong> sentences
-          </div>
+          <badges-card
+            v-for="(label, i) in repository.labels"
+            :key="i"
+            :list="label.entities"
+            :title="formattedLabel(label)"
+            :examples-count="label.examples__count"
+          />
         </div>
       </div>
     </div>
@@ -102,6 +90,7 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import BadgesCard from '@/components/repository/BadgesCard';
 import RepositoryBase from './Base';
 
 
@@ -109,23 +98,29 @@ export default {
   name: 'RepositoryHome',
   components: {
     RepositoryViewBase,
+    BadgesCard,
   },
   extends: RepositoryBase,
   computed: {
-    labels() {
-      return this.repository.labels.concat([this.repository.other_label]);
-    },
-    unlabeleds() {
-      return this.repository.other_label;
-    },
     hasIntents() {
       return this.repository.intents_list.length > 0;
     },
-    hasLabels() {
-      return this.labels.length > 0;
-    },
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
+    },
+    labeledEntitiesCount() {
+      return this.repository.labels.reduce((acc, label) => acc + label.entities.length, 0);
+    },
+    hasLabels() {
+      if (
+        !this.repository.labels
+        || !this.repository.other_label
+        || !this.repository.other_label.entities
+      ) {
+        return false;
+      }
+
+      return this.repository.labels.length > 0 || this.repository.other_label.entities.length > 0;
     },
   },
   methods: {
@@ -141,6 +136,9 @@ export default {
       }
 
       return `<strong>${label.entities.length}</strong> ${entity} labeled <strong>${label.value}</strong>`;
+    },
+    formattedEntityTitle() {
+      return `This bot has <strong>${this.repository.intents_list.length}</strong> intents`;
     },
   },
 };
@@ -183,6 +181,14 @@ export default {
 
     &__wrapper {
       padding: 0 .75rem;
+
+      &__badge {
+        height: 1.5rem;
+        margin: .4rem .5rem 0 0;
+        font-weight: bold;
+        line-height: calc(1.5rem - 4px);
+        border-width: 1px;
+      }
     }
   }
 
@@ -197,28 +203,11 @@ export default {
   &__intents-list,
   &__entities-list {
     padding: 1rem .5rem;
-
-    &__card {
-      padding: .75rem;
-      margin: .75rem 0;
-      border: 1px solid #CFD5D9;
-      border-radius: 6px;
-
-      &__wrapper {
-        margin: .75rem .5rem;
-      }
-    }
   }
 
-  &__intents-list__card__wrapper,
-  &__entities-list__card__wrapper,
-  &__header__wrapper {
-    &__badge {
-      height: 1.5rem;
-      margin: .4rem .5rem 0 0;
-      font-weight: bold;
-      line-height: calc(1.5rem - 4px);
-      border-width: 1px;
+  &__entities-list {
+    &__labeled-count {
+      margin: 1.5rem 0 1rem;
     }
   }
 }
