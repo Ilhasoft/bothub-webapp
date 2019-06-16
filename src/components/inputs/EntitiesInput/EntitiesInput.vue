@@ -2,14 +2,14 @@
   <div>
     <entity-form
       v-for="entity in entities"
-      :key="entity._id"
+      :key="entity.localId"
       v-model="entity.entity"
       :available-entities="availableEntities"
       :available-labels="availableLabels"
       :entity-class="getEntityClass(entity)"
       :uses-labels="availableAddLabel"
       :label="entity.label"
-      :loading-label="entity._loadingLabel"
+      :loading-label="entity.localLoadingLabel"
 
       @labelChanged="(label) => entity.label = label"
       @removeEntity="() => removeEntity(entity)"
@@ -145,7 +145,7 @@ export default {
       'getEntities',
     ]),
     removeEntity(entity) {
-      this.entities = this.entities.filter(e => e._id !== entity._id);
+      this.entities = this.entities.filter(e => e.localId !== entity.localId);
     },
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -162,8 +162,8 @@ export default {
         ...this.textSelected,
         entity: this.textSelectedValue,
         label: '',
-        _loadingLabel: true,
-        _id: temporaryEntityId,
+        localLoadingLabel: true,
+        localId: temporaryEntityId,
       });
 
       this.loadLabelFor(temporaryEntityId, this.textSelectedValue);
@@ -177,24 +177,25 @@ export default {
       });
       await entities.next();
 
-      const entityIndex = this.entities.findIndex(e => e._id === entityId);
+      const entityIndex = this.entities.findIndex(e => e.localId === entityId);
 
       if (entityIndex === -1) {
         return;
       }
 
       if (entities.items.length === 1) {
+        // eslint-disable-next-line prefer-destructuring
         const label = entities.items[0].data.label;
 
         Vue.set(this.entities, entityIndex, {
           ...this.entities[entityIndex],
           label,
-          _loadingLabel: false,
+          localLoadingLabel: false,
         });
       } else {
         Vue.set(this.entities, entityIndex, {
           ...this.entities[entityIndex],
-          _loadingLabel: false,
+          localLoadingLabel: false,
         });
       }
     },
