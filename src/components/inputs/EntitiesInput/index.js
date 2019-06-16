@@ -1,3 +1,3 @@
-import EntitiesInput from './NewEntitiesInput';
+import EntitiesInput from './EntitiesInput';
 
 export default EntitiesInput;
