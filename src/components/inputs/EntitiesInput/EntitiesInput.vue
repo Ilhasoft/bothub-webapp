@@ -8,6 +8,9 @@
       :available-labels="availableLabels"
       :entity-class="getEntityClass(entity)"
       :uses-labels="availableAddLabel"
+      :text="text"
+      :selected-text-start="entity.start"
+      :selected-text-end="entity.end"
       :label="entity.label"
       :loading-label="entity.localLoadingLabel"
 

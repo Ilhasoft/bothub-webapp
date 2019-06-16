@@ -7,7 +7,7 @@
         <bh-field>
           <label class="entity-form-label"><span
             :class="entityClass"
-            class="is-rounded">{{ entity }}</span> is</label>
+            class="is-rounded">{{ selectedText }}</span> is</label>
           <bh-autocomplete
             :value="entity"
             :data="availableEntities"
@@ -87,6 +87,18 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    text: {
+      type: String,
+      required: true,
+    },
+    selectedTextStart: {
+      type: Number,
+      required: true,
+    },
+    selectedTextEnd: {
+      type: Number,
+      required: true,
+    },
     usesLabels: {
       type: Boolean,
       default: () => false,
@@ -119,6 +131,9 @@ export default {
       return [
         formatters.bothubItemKey(),
       ];
+    },
+    selectedText() {
+      return this.text.substring(this.selectedTextStart, this.selectedTextEnd);
     },
   },
   methods: {
