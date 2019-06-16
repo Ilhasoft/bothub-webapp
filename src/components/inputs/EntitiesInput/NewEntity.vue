@@ -6,7 +6,8 @@
       :disabled="!textSelectedValue"
       size="small"
       rounded
-      @click="enableAddingMode()">
+      @click="enableAddingMode()"
+    >
       <span>
         <span>Add entity</span>
         <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
@@ -19,7 +20,8 @@
             <bh-autocomplete
               v-model="entity"
               :data="availableEntities"
-              :formatters="entityFormatters">
+              :formatters="entityFormatters"
+            >
               <span slot="prepend">
                 <span>{{ textSelectedValue }}</span>
                 <bh-icon value="equal" />
@@ -29,7 +31,8 @@
         </div>
         <div
           v-if="entity && !customLabelDisabled && addLabel"
-          class="column is-narrow">
+          class="column is-narrow"
+        >
           <bh-field :label="hasCustomizedLabel ? 'Label' : ''">
             <bh-button
               v-if="!hasCustomizedLabel"
@@ -39,7 +42,8 @@
               : null"
               :loading="searchingLabel"
               secondary
-              @click="customizeLabel()">
+              @click="customizeLabel()"
+            >
               <slot v-if="!searchingLabel && currentLabel">edit {{ currentLabel }} label</slot>
               <slot v-else-if="!searchingLabel">add label</slot>
             </bh-button>
@@ -47,12 +51,14 @@
               v-else
               v-model="currentLabel"
               :data="availableLabels"
-              :formatters="labelFormatters">
+              :formatters="labelFormatters"
+            >
               <span slot="append">
                 <bh-icon-button
                   value="close"
                   size="small"
-                  @click="cancelCustomizeLabel()" />
+                  @click="cancelCustomizeLabel()"
+                />
               </span>
             </bh-autocomplete>
           </bh-field>
@@ -70,7 +76,8 @@
             <bh-icon-button
               class="text-color-grey-dark"
               value="close-circle"
-              @click="disableAddingMode()" />
+              @click="disableAddingMode()"
+            />
           </bh-field>
         </div>
       </div>

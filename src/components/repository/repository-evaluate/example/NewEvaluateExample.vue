@@ -12,7 +12,8 @@
         <div class="new-sentence__form__wrapper">
           <div>
             <bh-field
-              :errors="errors.text || errors.language">
+              :errors="errors.text || errors.language"
+            >
               <example-text-with-highlighted-entities-input
                 ref="textInput"
                 v-model="text"
@@ -21,18 +22,21 @@
                 :formatters="textFormatters"
                 size="normal"
                 placeholder="Enter your sentence here"
-                @textSelected="setTextSelected($event)" />
+                @textSelected="setTextSelected($event)"
+              />
             </bh-field>
           </div>
           <div>
             <bh-field
-              :errors="errors.non_field_errors">
+              :errors="errors.non_field_errors"
+            >
               <bh-autocomplete
                 v-model="intent"
                 :data="repository.intents_list || []"
                 :formatters="intentFormatters"
                 size="normal"
-                placeholder="Intent" />
+                placeholder="Intent"
+              />
             </bh-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -50,21 +54,26 @@
         </div>
         <bh-field
           :errors="errors.entities"
-          class="new-sentence__form__entities">
-          <entities-input
-            ref="entitiesInput"
-            v-model="entities"
-            :available-add-label="false"
-            :repository="repository"
-            :text="text"
-            :text-selected="textSelected"
-            :available-entities="entitiesList"
-            :available-labels="availableLabels"
-            :entities-for-edit="[]"
-            :testing="testing"
-            @entityAdded="onEntityAdded()"
-            @entityEdited="onEditEntity($event)"
-          />
+          class="new-sentence__form__entities"
+        >
+          <div class="columns">
+            <div class="column is-three-fifths">
+              <entities-input
+                ref="entitiesInput"
+                v-model="entities"
+                :available-add-label="false"
+                :repository="repository"
+                :text="text"
+                :text-selected="textSelected"
+                :available-entities="entitiesList"
+                :available-labels="availableLabels"
+                :entities-for-edit="[]"
+                :testing="testing"
+                @entityAdded="onEntityAdded()"
+                @entityEdited="onEditEntity($event)"
+              />
+            </div>
+          </div>
         </bh-field>
       </form>
     </div>
