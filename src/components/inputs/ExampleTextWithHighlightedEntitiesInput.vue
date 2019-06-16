@@ -16,14 +16,14 @@
           ]">{{ entity.text }}</span>
         </div>
         <textarea
-          v-bind="$attrs"
           ref="input"
+          v-bind="$attrs"
           v-model="val"
           class="bh-textarea__input example-txt-w-highlighted-entities__input"
           @select.stop.prevent="emitTextSelected()"
           @click.stop.prevent="emitTextSelected()"
           @keyup.stop.prevent="emitTextSelected()"
-        ></textarea>
+        />
       </div>
       <slot name="append" />
     </div>

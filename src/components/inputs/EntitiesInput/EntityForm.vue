@@ -1,37 +1,43 @@
 <template>
   <div>
     <div class="columns is-variable is-1">
-      <div class="column" :class="usesLabels ? 'is-half' : ''">
+      <div
+        :class="usesLabels ? 'is-half' : ''"
+        class="column">
         <bh-field>
-          <label class="entity-form-label"><span class="is-rounded" :class="entityClass">{{ entity }}</span> is</label>
+          <label class="entity-form-label"><span
+            :class="entityClass"
+            class="is-rounded">{{ entity }}</span> is</label>
           <bh-autocomplete
             :value="entity"
-            @input="handleChange"
             :data="availableEntities"
             :formatters="entityFormatters"
+            @input="handleChange"
           >
-              <span slot="append">
-                <bh-icon-button
-                  value="close"
-                  size="small"
-                  @click="removeEntity()"
-                />
-              </span>
+            <span slot="append">
+              <bh-icon-button
+                value="close"
+                size="small"
+                @click="removeEntity()"
+              />
+            </span>
           </bh-autocomplete>
         </bh-field>
       </div>
-      <div class="column is-half" v-if="usesLabels">
+      <div
+        v-if="usesLabels"
+        class="column is-half">
         <bh-field>
           <label class="entity-form-label">{{ showingLabelForm ? 'Label' : '&nbsp;' }}</label>
           <div>
             <bh-button
               v-if="!showingLabelForm"
+              :disabled="loadingLabel"
               type="button"
               size="small"
               rounded
               primary
               class="label-button"
-              :disabled="loadingLabel"
               @click.prevent.stop="showLabelForm"
             >
               <span>
@@ -42,9 +48,9 @@
             <bh-autocomplete
               v-else
               :value="label"
-              @input="handleLabelChanged"
               :data="availableLabels"
               :formatters="labelFormatters"
+              @input="handleLabelChanged"
             >
               <span slot="append">
                 <bh-icon-button
@@ -131,9 +137,9 @@ export default {
     },
     showLabelForm() {
       this.showingLabelForm = true;
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>

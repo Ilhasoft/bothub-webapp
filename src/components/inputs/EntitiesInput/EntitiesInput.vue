@@ -1,7 +1,8 @@
 <template>
   <div>
     <entity-form
-      v-for="entity in entities" :key="entity._id"
+      v-for="entity in entities"
+      :key="entity._id"
       v-model="entity.entity"
       :available-entities="availableEntities"
       :available-labels="availableLabels"
@@ -101,11 +102,11 @@ export default {
     preparedEntities() {
       return this.entities
         .map(({
-                label,
-                pristineLabel,
-                entity,
-                ...others
-              }) => (label
+          label,
+          pristineLabel,
+          entity,
+          ...others
+        }) => (label
           ? {
             label,
             entity,
@@ -187,14 +188,14 @@ export default {
 
         Vue.set(this.entities, entityIndex, {
           ...this.entities[entityIndex],
-          label: label,
+          label,
           _loadingLabel: false,
-        })
+        });
       } else {
         Vue.set(this.entities, entityIndex, {
           ...this.entities[entityIndex],
           _loadingLabel: false,
-        })
+        });
       }
     },
     validateEntities(text, oldText) {
@@ -241,5 +242,5 @@ export default {
       this.entities = this.entities.filter(value => !!value);
     },
   },
-}
+};
 </script>
