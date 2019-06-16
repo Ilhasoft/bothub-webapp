@@ -11,6 +11,7 @@
       :label="entity.label"
       :loading-label="entity.localLoadingLabel"
 
+      @removeLabel="() => entity.label = ''"
       @labelChanged="(label) => entity.label = label"
       @removeEntity="() => removeEntity(entity)"
     />
