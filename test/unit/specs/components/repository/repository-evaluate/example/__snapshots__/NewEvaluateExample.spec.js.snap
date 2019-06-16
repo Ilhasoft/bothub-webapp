@@ -25,7 +25,11 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
         </div>
       </div>
       <bh-field-stub errors="" class="new-sentence__form__entities">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
+        <div class="columns">
+          <div class="column is-three-fifths">
+            <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
+          </div>
+        </div>
       </bh-field-stub>
     </form>
   </div>
