@@ -1,4 +1,9 @@
 import BH from 'bh';
+import uuid from 'uuid';
+
+export function generateTemporaryId() {
+  return uuid.v4();
+}
 
 export const getEntitiesList = (entities = [], extra = []) => entities
   .concat(extra || [])
