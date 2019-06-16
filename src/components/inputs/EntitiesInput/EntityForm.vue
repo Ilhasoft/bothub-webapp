@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     handleChange(e) {
-      console.log(e);
+      this.$emit('input', e);
     },
     removeEntity() {
       this.$emit('removeEntity');
