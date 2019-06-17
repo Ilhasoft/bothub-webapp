@@ -26,7 +26,8 @@
       </div>
       <div
         v-if="usesLabels"
-        class="column is-half">
+        class="column is-half"
+      >
         <bh-field>
           <label class="entity-form-label">{{ showingLabelForm ? 'Label' : '&nbsp;' }}</label>
           <div>
@@ -38,6 +39,7 @@
               rounded
               primary
               class="label-button"
+              ref="addLabelButton"
               @click.prevent.stop="showLabelForm"
             >
               <span>
@@ -48,6 +50,7 @@
             <bh-autocomplete
               v-else
               :value="label"
+              ref="entityLabelField"
               :data="availableLabels"
               :formatters="labelFormatters"
               @input="handleLabelChanged"
@@ -102,7 +105,7 @@ export default {
     },
     usesLabels: {
       type: Boolean,
-      default: () => false,
+      default: () => true,
     },
     label: {
       type: String,
