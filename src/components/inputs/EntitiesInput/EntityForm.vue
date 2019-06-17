@@ -71,6 +71,7 @@
 import { formatters } from '@/utils';
 
 export default {
+  name: 'EntityForm',
   model: {
     prop: 'entity',
   },
