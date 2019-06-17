@@ -26,6 +26,7 @@
       rounded
       primary
       @click.prevent.stop="addEntity()"
+      ref="addEntityBtn"
     >
       <span>
         <span>Add entity</span>
