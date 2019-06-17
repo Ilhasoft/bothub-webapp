@@ -20,13 +20,13 @@
     />
 
     <bh-button
+      ref="addEntityBtn"
       :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
       :disabled="!textSelectedValue"
       size="small"
       rounded
       primary
       @click.prevent.stop="addEntity()"
-      ref="addEntityBtn"
     >
       <span>
         <span>Add entity</span>

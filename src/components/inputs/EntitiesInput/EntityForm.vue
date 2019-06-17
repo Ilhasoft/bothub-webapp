@@ -9,6 +9,7 @@
             :class="entityClass"
             class="is-rounded">{{ selectedText }}</span> is</label>
           <bh-autocomplete
+            ref="entityInputField"
             :value="entity"
             :data="availableEntities"
             :formatters="entityFormatters"
@@ -33,13 +34,13 @@
           <div>
             <bh-button
               v-if="!showingLabelForm"
+              ref="addLabelButton"
               :disabled="loadingLabel"
               type="button"
               size="small"
               rounded
               primary
               class="label-button"
-              ref="addLabelButton"
               @click.prevent.stop="showLabelForm"
             >
               <span>
@@ -49,14 +50,15 @@
             </bh-button>
             <bh-autocomplete
               v-else
-              :value="label"
               ref="entityLabelField"
+              :value="label"
               :data="availableLabels"
               :formatters="labelFormatters"
               @input="handleLabelChanged"
             >
               <span slot="append">
                 <bh-icon-button
+                  ref="removeLabelButton"
                   value="close"
                   size="small"
                   @click="removeLabel()"
