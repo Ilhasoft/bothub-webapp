@@ -12,7 +12,7 @@
         <div class="new-sentence__form__wrapper">
           <div>
             <bh-field
-              :errors="errors.text || errors.language"
+              :errors="errors.entities || errors.language"
             >
               <example-text-with-highlighted-entities-input
                 ref="textInput"
