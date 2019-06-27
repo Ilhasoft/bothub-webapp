@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Pagination from '@/components-v1/shared/Pagination';
 import ExampleItem from '@/components/example/ExampleItem';
 
@@ -25,10 +26,6 @@ export default {
   name: 'ExamplesList',
   components,
   props: {
-    repository: {
-      type: Object,
-      required: true,
-    },
     query: {
       type: Object,
       default: () => ({}),
@@ -39,6 +36,11 @@ export default {
       examplesList: null,
       exampleItemElem: ExampleItem,
     };
+  },
+  computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
   },
   watch: {
     query() {
@@ -60,8 +62,8 @@ export default {
         );
       }
     },
-    onItemDeleted(id) {
-      this.$emit('exampleDeleted', id);
+    onItemDeleted() {
+      this.updateExamples(true);
     },
   },
 };

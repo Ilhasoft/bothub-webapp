@@ -2,7 +2,6 @@
 
 exports[`TestView.vue renders correctly 1`] = `
 <div class="filter-evaluate-example">
-  <h2 class="filter-evaluate-example__title">Sentences List</h2>
   <div class="filter-evaluate-example__filters">
     <bh-field-stub errors="" class="filter-evaluate-example__filters__input-text">
       <bh-text-stub value="" formatters="" debounce="750">
