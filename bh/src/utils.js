@@ -46,6 +46,7 @@ const VERBOSE_LANGUAGES = {
   tt: 'Tatar',
   ur: 'Urdu',
   zh: 'Chinese',
+  ha: 'Hausa',
 };
 
 export default {
