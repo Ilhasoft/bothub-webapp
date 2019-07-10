@@ -100,9 +100,6 @@ export default {
   },
   methods: {
     emitTextSelected() {
-      console.log("%c Referencia de input", "color:orange")
-      console.dir(this.$refs.input);
-
       const { selectionStart, selectionEnd } = this.$refs.input;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
