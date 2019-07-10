@@ -34,6 +34,7 @@
 import BH from 'bh';
 import Flag from '@/components-v1/shared/Flag';
 import { getEntityColor } from '@/utils/entitiesColors';
+import { log } from 'util';
 
 const components = {
   Flag,
@@ -99,6 +100,9 @@ export default {
   },
   methods: {
     emitTextSelected() {
+      console.log("%c Referencia de input", "color:orange")
+      console.dir(this.$refs.input);
+
       const { selectionStart, selectionEnd } = this.$refs.input;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
@@ -111,15 +115,24 @@ export default {
       );
     },
     clearSelected() {
+      console.log("%c Clear selected", "color:red")
+      console.log('here')
       this.$nextTick(() => {
         if (this.$refs.input.setSelectionRange) {
+
+          window.getSelection().removeAllRanges();
           this.$refs.input.setSelectionRange(0, 0);
           this.$refs.input.blur();
         } else {
+          console.log('enter here')
           this.$refs.input.focus();
         }
       });
     },
+    teste(e) {
+      console.log(e);
+
+    }
   },
 };
 </script>
