@@ -24,6 +24,7 @@ import BhTooltipHover from './components/BhTooltipHover';
 import BhTabs from './components/BhTabs';
 import BhTabItem from './components/BhTabItem';
 import BhStepper from './components/BhStepper';
+import BhToastNotification from './components/BhToastNotification'
 
 import utils from './utils';
 
@@ -53,6 +54,7 @@ const components = {
   BhTabs,
   BhTabItem,
   BhStepper,
+  BhToastNotification,
 };
 
 export default {
