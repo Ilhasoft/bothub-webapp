@@ -69,8 +69,13 @@
               </table>
             </div>
           </bh-tab-item>
-          <bh-tab-item label="raw">
+          <bh-tab-item label="Raw">
             <div class="drawer__analyze-content">
+              <div class="drawer__analyze-content__clipboard">
+                <bh-icon
+                  value="botinho"
+                  @click="clipBoardTest()" />
+              </div>
               <bh-highlighted-pre
                 :code="JSON.stringify(result, null, 2) "
                 code-class="code" />
@@ -163,6 +168,10 @@ export default {
       this.submitting = false;
       return false;
     },
+    clipBoardTest() {
+      const text = JSON.stringify(this.result, null, 2)
+      navigator.clipboard.writeText(text);
+    }
   },
 };
 </script>
@@ -210,13 +219,20 @@ export default {
   }
 
   &--slide-enter-active, &--slide-leave-active {
-    transition: margin-bottom .2s ease-out;
+    transition: margin-bottom .1s ease-out;
     overflow: hidden;
   }
 
   &__analyze-content {
-    height: 300px;
+    height: 25vh;
     overflow-y: scroll;
+
+    &__clipboard {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 1rem;
+      cursor: pointer;
+    }
   }
 
   &--slide-enter, &--slide-leave-to {
