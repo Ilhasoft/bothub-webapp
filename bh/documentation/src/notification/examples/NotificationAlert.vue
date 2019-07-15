@@ -1,13 +1,10 @@
 <template>
   <div class="bh-grid bh-grid--column">
-    <bh-notification-wrapper>
-      <bh-toast-notification
+    <bh-toast-notification
       :open="openValue"
-      status="success">
-      </bh-toast-notification>
-    </bh-notification-wrapper>
+      status="success"/>
 
-     <!-- <bh-toast-notification
+    <!-- <bh-toast-notification
     :open="openValue"
     status="success">
     </bh-toast-notification>
@@ -21,7 +18,7 @@
     </bh-toast-notification> -->
 
     <bh-button
-    @click="open"
+      @click="open"
     >Show</bh-button>
   </div>
 </template>
@@ -31,15 +28,17 @@ export default {
   name: 'NotificationAlert',
   data() {
     return {
-      openValue: true
+      openValue: true,
     };
   },
   methods: {
     open() {
-      console.log(this);
-
+      this.$bhToastNotification({
+        massage: 'Foi caraleo',
+        type: 'success',
+      });
       this.openValue = !this.openValue;
-    }
-  }
+    },
+  },
 };
 </script>

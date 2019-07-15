@@ -24,9 +24,10 @@ import BhTooltipHover from './components/BhTooltipHover';
 import BhTabs from './components/BhTabs';
 import BhTabItem from './components/BhTabItem';
 import BhStepper from './components/BhStepper';
-import BhToastNotification from './components/BhToastNotification'
+import BhToastNotification from './components/BhToastNotification';
 
 import utils from './utils';
+import { events } from './events';
 
 
 const components = {
@@ -98,8 +99,16 @@ export default {
       },
     });
 
+    const $bhToastNotification = (params) => {
+      console.log(params);
+      events.$emit('add');
+    };
+
     /* eslint-disable no-param-reassign */
+    console.log($bhToastNotification);
+
     Vue.prototype.$bhModal = $bhModal;
+    Vue.prototype.$bhToastNotification = $bhToastNotification;
     /* eslint-enable */
 
     Object.keys(components).forEach((componentName) => {

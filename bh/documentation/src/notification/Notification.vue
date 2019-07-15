@@ -1,21 +1,21 @@
 <template>
-<div>
-  <div class="bh-grid bh-grid--column">
-    <div class="bh-grid__item">
-      <h2>Notifications</h2>
-      <example
-        :component="NotificationExample"
-        :code="notificationExampleCode" />
+  <div>
+    <div class="bh-grid bh-grid--column">
+      <div class="bh-grid__item">
+        <h2>Notifications</h2>
+        <example
+          :component="NotificationExample"
+          :code="notificationExampleCode" />
+      </div>
     </div>
-  </div>
-  <div class="bh-grid bh-grid--column">
-    <div class="bh-grid__item">
-      <h2>Notifications Alert</h2>
-      <example
-        :component="NotificationAlertExample"
-        :code="NotificationAlertExampleCode" />
+    <div class="bh-grid bh-grid--column">
+      <div class="bh-grid__item">
+        <h2>Notifications Alert</h2>
+        <example
+          :component="NotificationAlertExample"
+          :code="NotificationAlertExampleCode" />
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
