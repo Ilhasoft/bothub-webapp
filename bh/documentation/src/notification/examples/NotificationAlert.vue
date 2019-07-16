@@ -34,9 +34,21 @@ export default {
   methods: {
     open() {
       this.$bhToastNotification({
-        massage: 'Foi caraleo',
-        type: 'success',
+        message: ' CuidadoCuidado CuidadoCuidadoCuidadoCuidado',
+        type: 'danger',
+        time: 3000,
       });
+      this.$bhToastNotification({
+        message: ' CuidadoCuidado CuidCuidado',
+        type: 'warning',
+        time: 3000,
+      });
+      this.$bhToastNotification({
+        message: ' CuidadoCuidado ',
+        type: 'success',
+        time: 5000,
+      });
+
       this.openValue = !this.openValue;
     },
   },

@@ -1,4 +1,5 @@
 import VueHighlightJS from 'vue-highlightjs';
+import UUID from 'vue-uuid';
 
 import BhText from './components/BhText';
 import BhField from './components/BhField';
@@ -61,6 +62,7 @@ const components = {
 export default {
   install: (Vue) => {
     Vue.use(VueHighlightJS);
+    Vue.use(UUID);
 
     const $bhModal = new Vue({
       data() {
@@ -100,12 +102,10 @@ export default {
     });
 
     const $bhToastNotification = (params) => {
-      console.log(params);
-      events.$emit('add');
+      events.$emit('add', params);
     };
 
     /* eslint-disable no-param-reassign */
-    console.log($bhToastNotification);
 
     Vue.prototype.$bhModal = $bhModal;
     Vue.prototype.$bhToastNotification = $bhToastNotification;

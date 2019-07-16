@@ -13,6 +13,7 @@
 
 <script>
 import BhText from './BhText';
+import { events } from '../events';
 
 export default {
   name: 'BhTextarea',

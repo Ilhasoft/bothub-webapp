@@ -1,25 +1,29 @@
 <template>
-  <transition name="bh-toast-notification-wrapper__card-fade">
-    <div class="bh-toast-notification-wrapper">
+
+  <div class="bh-toast-notification-wrapper">
+    <transition-group
+      name="bh-toast-notification-wrapper__card-slide"
+    >
       <div
-        v-if="open"
+        v-for="item in list"
+        :key="item.id"
         class="bh-toast-notification-wrapper__card"
       >
-        <div :class="`bh-toast-notification-wrapper__card__info--${status}`">
+        <div :class="`bh-toast-notification-wrapper__card__info--${item.type}`">
           <bh-icon
             class="bh-toast-notification-wrapper__card__info__icon"
             size="small"
-            :value="status"
+            :value="item.type"
           />
         </div>
         <div class="bh-toast-notification-wrapper__card__message">
-          Text coppy
+          {{ item.message }}
         </div>
         <div class="bh-toast-notification-wrapper__card__action">
           <button
             ref="closeBtn"
             class="bh-toast-notification-wrapper__card__action__button"
-            @click="close()"
+            @click="close(item)"
           >
             <bh-icon
               size="small"
@@ -28,54 +32,48 @@
           </button>
         </div>
       </div>
-    </div>
-  </transition>
+    </transition-group>
+  </div>
 </template>
 
 <script>
+import { uuid } from 'vue-uuid';
 import { events } from '../events';
+
+const STATE = {
+  IDLE: 0,
+  DESTROYED: 2,
+};
 
 export default {
   name: 'BhToastNotification',
-  props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
-    status: {
-      type: String,
-      default: 'success',
-    },
-    direction: {
-      type: String,
-      default: null,
-    },
-    message: {
-      type: String,
-      default: null,
-    },
-  },
   data() {
     return {
-      list: [1, 2, 3],
+      list: [],
     };
   },
-  watch: {
-    open(value) {
-      console.log(value);
-
-      this.open = this.open;
-    },
-  },
-  mounted() {
-    console.log(events);
-    events.$on('add', this.close);
+  created() {
+    events.$on('add', (params) => {
+      const { message, type, time } = params;
+      const item = {
+        id: uuid.v1(),
+        message,
+        type,
+        state: STATE.IDLE,
+        time,
+      };
+      this.list.push(item);
+      setTimeout(() => { this.close(item); }, item.time);
+    });
   },
   methods: {
-    close(event) {
+    close(item) {
+      const itemToDestroy = item;
+      itemToDestroy.state = STATE.DESTROYED;
+      this.clean();
     },
-    add(params) {
-      events.$on('teste', this.close);
+    clean() {
+      this.list = this.list.filter(v => v.state !== STATE.DESTROYED);
     },
   },
 };
@@ -96,7 +94,7 @@ export default {
     background-color: $color-fake-white;
     color: #fff;
     text-align: center;
-    font-size: 15px;
+    font-size: .8rem;
     margin: .5rem 0;
     display: flex;
     border-radius: .5rem;
@@ -104,13 +102,13 @@ export default {
     -moz-box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.22);
     box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.22);
 
-    &-fade-enter-active,
-      &-fade-leave-active {
+    &-slide-enter-active,
+      &-slide-leave-active {
         transition: opacity .5s;
       }
 
-      &-fade-enter,
-      &-fade-leave-to {
+      &-slide-enter,
+      &-slide-leave-to {
         opacity: 0;
       }
 
@@ -121,6 +119,11 @@ export default {
         width: 6rem;
         border-bottom-left-radius: .5rem;
         border-top-left-radius: .5rem;
+
+        span {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
 
       &--warning {
@@ -128,6 +131,11 @@ export default {
         width: 6rem;
         border-bottom-left-radius: .5rem;
         border-top-left-radius: .5rem;
+
+        span {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
 
       &--danger {
@@ -135,6 +143,11 @@ export default {
         width: 6rem;
         border-bottom-left-radius: .5rem;
         border-top-left-radius: .5rem;
+
+        span {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
 
       &--info {
@@ -142,6 +155,11 @@ export default {
         width: 6rem;
         border-bottom-left-radius: .5rem;
         border-top-left-radius: .5rem;
+
+        span {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
       }
 
       &__icon {
@@ -168,15 +186,10 @@ export default {
         position: relative;
         top: 50%;
         color: $color-grey-dark;
-        transform: translateY(-65%);
+        transform: translateY(-50%);
         margin: 0 .5rem;
+        cursor: pointer;
       }
-    }
-
-    .visible {
-      visibility: visible;
-      opacity: 1;
-      transition: opacity 2s linear;
     }
   }
 }
