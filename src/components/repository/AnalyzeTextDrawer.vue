@@ -4,6 +4,7 @@
       slot="trigger"
       class="drawer-title"
       @click="openCollapse()">Analyze Text</button>
+    <bh-toast-notification />
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">
@@ -169,9 +170,14 @@ export default {
       return false;
     },
     clipBoardTest() {
-      const text = JSON.stringify(this.result, null, 2)
+      const text = JSON.stringify(this.result, null, 2);
       navigator.clipboard.writeText(text);
-    }
+      this.$bhToastNotification({
+        message: ' CuidadoCuidado ',
+        type: 'success',
+        time: 5000,
+      });
+    },
   },
 };
 </script>
