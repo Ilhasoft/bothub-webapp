@@ -1,4 +1,4 @@
-import evaluateExample from '@/api/v2/evaluate-example';
+import evaluateExample from '@/v2/evaluate-example';
 import entity from '@/api/entity';
 
 

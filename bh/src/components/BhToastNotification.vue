@@ -55,12 +55,13 @@ export default {
   created() {
     events.$on('add', (params) => {
       const { message, type, time } = params;
+
       const item = {
         id: uuid.v1(),
-        message,
-        type,
+        message: message || 'Success',
+        type: type || 'success',
         state: STATE.IDLE,
-        time,
+        time: time || 5000,
       };
       this.list.push(item);
       setTimeout(() => { this.close(item); }, item.time);
@@ -83,20 +84,20 @@ export default {
 @import '@scss/variables.scss';
 @import '@scss/colors.scss';
 .bh-toast-notification-wrapper {
-  right: 1rem;
-  top: 10px;
   position: fixed;
-  max-width: 350px;
+  top: 10px;
+  right: 1rem;
   z-index: 1;
   display: block;
+  max-width: 350px;
 
   &__card {
-    background-color: $color-fake-white;
+    display: flex;
+    margin: .5rem 0;
+    font-size: .8rem;
     color: #fff;
     text-align: center;
-    font-size: .8rem;
-    margin: .5rem 0;
-    display: flex;
+    background-color: $color-fake-white;
     border-radius: .5rem;
     -webkit-box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.22);
     -moz-box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.22);
@@ -115,10 +116,10 @@ export default {
     &__info {
 
       &--success {
-        background-color: $color-success;
         width: 6rem;
-        border-bottom-left-radius: .5rem;
+        background-color: $color-success;
         border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
 
         span {
           width: 1.5rem;
@@ -127,10 +128,10 @@ export default {
       }
 
       &--warning {
-        background-color: $color-warning;
         width: 6rem;
-        border-bottom-left-radius: .5rem;
+        background-color: $color-warning;
         border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
 
         span {
           width: 1.5rem;
@@ -139,10 +140,10 @@ export default {
       }
 
       &--danger {
-        background-color: $color-danger;
         width: 6rem;
-        border-bottom-left-radius: .5rem;
+        background-color: $color-danger;
         border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
 
         span {
           width: 1.5rem;
@@ -150,11 +151,11 @@ export default {
         }
       }
 
-      &--info {
-        background-color: $color-info;
+      &--question {
         width: 6rem;
-        border-bottom-left-radius: .5rem;
+        background-color: $color-info;
         border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
 
         span {
           width: 1.5rem;
@@ -171,24 +172,24 @@ export default {
 
     &__message {
       width: 100%;
-      color: black;
       padding: 1rem;
       overflow: hidden;
-      word-break: break-all;
+      color: black;
       text-align: left;
+      word-break: break-all;
     }
 
     &__action {
       &__button {
+        position: relative;
+        top: 50%;
+        margin: 0 .5rem;
+        color: $color-grey-dark;
+        cursor: pointer;
         background: none;
         border: none;
         outline: none;
-        position: relative;
-        top: 50%;
-        color: $color-grey-dark;
         transform: translateY(-50%);
-        margin: 0 .5rem;
-        cursor: pointer;
       }
     }
   }

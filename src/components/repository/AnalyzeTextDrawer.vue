@@ -173,8 +173,23 @@ export default {
       const text = JSON.stringify(this.result, null, 2);
       navigator.clipboard.writeText(text);
       this.$bhToastNotification({
-        message: ' CuidadoCuidado ',
+        message: 'Json copied',
         type: 'success',
+        time: 5000,
+      });
+      this.$bhToastNotification({
+        message: 'Json copied',
+        type: 'danger',
+        time: 5000,
+      });
+      this.$bhToastNotification({
+        message: 'Json copied',
+        type: 'warning',
+        time: 5000,
+      });
+      this.$bhToastNotification({
+        message: 'Json copied',
+        type: 'question',
         time: 5000,
       });
     },
