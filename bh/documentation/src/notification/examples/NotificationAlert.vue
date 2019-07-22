@@ -3,20 +3,6 @@
     <bh-toast-notification
       :open="openValue"
       status="success"/>
-
-    <!-- <bh-toast-notification
-    :open="openValue"
-    status="success">
-    </bh-toast-notification>
-     <bh-toast-notification
-    :open="openValue"
-    status="info">
-    </bh-toast-notification>
-     <bh-toast-notification
-    :open="openValue"
-    status="danger">
-    </bh-toast-notification> -->
-
     <bh-button
       @click="open"
     >Show</bh-button>
@@ -34,21 +20,25 @@ export default {
   methods: {
     open() {
       this.$bhToastNotification({
-        message: ' CuidadoCuidado CuidadoCuidadoCuidadoCuidado',
+        message: 'Danger Notification',
         type: 'danger',
         time: 3000,
       });
       this.$bhToastNotification({
-        message: ' CuidadoCuidado CuidCuidado',
+        message: 'Warning Notification',
         type: 'warning',
         time: 3000,
       });
       this.$bhToastNotification({
-        message: ' CuidadoCuidado ',
+        message: 'Success notification',
         type: 'success',
         time: 5000,
       });
-
+      this.$bhToastNotification({
+        message: 'Question/Info notification',
+        type: 'question',
+        time: 5000,
+      });
       this.openValue = !this.openValue;
     },
   },
