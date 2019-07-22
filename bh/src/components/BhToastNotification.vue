@@ -54,20 +54,24 @@ export default {
   },
   created() {
     events.$on('add', (params) => {
-      const { message, type, time } = params;
+      this.addNew(params);
+    });
+  },
+  methods: {
+    addNew(event) {
+      const { message, type, time } = event;
 
       const item = {
         id: uuid.v1(),
         message: message || 'Success',
-        type: type || 'success',
+        type: type.toLowerCase() || 'success',
         state: STATE.IDLE,
         time: time || 5000,
       };
+
       this.list.push(item);
       setTimeout(() => { this.close(item); }, item.time);
-    });
-  },
-  methods: {
+    },
     close(item) {
       const itemToDestroy = item;
       itemToDestroy.state = STATE.DESTROYED;
