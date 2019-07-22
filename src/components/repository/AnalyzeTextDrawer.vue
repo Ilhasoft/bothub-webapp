@@ -8,7 +8,9 @@
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">
-          <form @submit.prevent="onSubmit()">
+          <form
+            @keydown.enter.exact.prevent="onSubmit()"
+            @submit.prevent="onSubmit()">
             <bh-field
               :type="errors && errors.language && 'is-danger'"
               :message="errors && errors.language"
@@ -74,7 +76,7 @@
             <div class="drawer__analyze-content">
               <div class="drawer__analyze-content__clipboard">
                 <bh-icon
-                  value="botinho"
+                  value="clipboard-text-outline"
                   @click="clipBoardTest()" />
               </div>
               <bh-highlighted-pre
