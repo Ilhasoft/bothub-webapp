@@ -28,7 +28,7 @@ import BhStepper from './components/BhStepper';
 import BhToastNotification from './components/BhToastNotification';
 
 import utils from './utils';
-import { events } from './events';
+import events from './events';
 
 
 const components = {

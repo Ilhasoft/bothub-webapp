@@ -39,7 +39,7 @@
 
 <script>
 import { uuid } from 'vue-uuid';
-import { events } from '../events';
+import events from '../events';
 
 const STATE = {
   IDLE: 0,
