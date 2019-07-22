@@ -25,7 +25,7 @@ import Api from '@/Api';
 import NotificationAlertExample from './examples/NotificationAlert';
 import NotificationAlertExampleCode from '!!raw-loader!./examples/NotificationAlert';
 import NotificationExample from './examples/NotificationExample';
-import notificationExampleCode from '!!raw-loader!./examples/notificationExample';
+import notificationExampleCode from '!!raw-loader!./examples/NotificationExample';
 
 
 export default {
