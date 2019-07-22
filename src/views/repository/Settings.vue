@@ -119,9 +119,9 @@ export default {
           },
         });
       }
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Repository edited!',
-        type: 'is-success',
+        type: 'success',
       });
     },
     onRoleSetted() {

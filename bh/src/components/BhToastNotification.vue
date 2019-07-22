@@ -1,6 +1,7 @@
 <template>
-
-  <div class="bh-toast-notification-wrapper">
+  <div
+    class="bh-toast-notification-wrapper"
+  >
     <transition-group
       name="bh-toast-notification-wrapper__card-slide"
     >
@@ -91,9 +92,9 @@ export default {
   position: fixed;
   top: 10px;
   right: 1rem;
-  z-index: 1;
+  z-index: 9999;
   display: block;
-  max-width: 350px;
+  width: 350px;
 
   &__card {
     display: flex;
@@ -178,9 +179,13 @@ export default {
       width: 100%;
       padding: 1rem;
       overflow: hidden;
+      // -moz-hyphens: auto;
+      // -webkit-hyphens: auto;
+      // -ms-hyphens: auto;
+      // hyphens: auto;
       color: black;
       text-align: left;
-      word-break: break-all;
+      word-break: break-word;
     }
 
     &__action {

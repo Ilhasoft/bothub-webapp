@@ -308,9 +308,9 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Request made! Wait for review of an admin.',
-        type: 'is-success',
+        type: 'success',
       });
       this.updateRepository(false);
     },

@@ -74,14 +74,14 @@ export default {
       } catch (e) {
         const { data } = e.response || {};
         if (data && data.detail) {
-          this.$toast.open({
+          this.$bhToastNotification({
             message: data.detail,
-            type: 'is-danger',
+            type: 'danger',
           });
         } else {
-          this.$toast.open({
+          this.$bhToastNotification({
             message: 'The vote was not registered.',
-            type: 'is-danger',
+            type: 'danger',
           });
         }
       }

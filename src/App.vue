@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <bh-toast-notification />
     <login-modal
       v-if="loginModalOpen"
       ref="loginModal"

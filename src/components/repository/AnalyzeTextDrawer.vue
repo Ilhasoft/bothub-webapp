@@ -4,7 +4,6 @@
       slot="trigger"
       class="drawer-title"
       @click="openCollapse()">Analyze Text</button>
-    <bh-toast-notification />
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">

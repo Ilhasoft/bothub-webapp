@@ -139,9 +139,9 @@ export default {
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {
-        this.$toast.open({
+        this.$bhToastNotification({
           message: 'Repository not trained :(',
-          type: 'is-danger',
+          type: 'danger',
         });
       }
       this.trainModalOpen = false;
@@ -167,9 +167,9 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Request made! Wait for review of an admin.',
-        type: 'is-success',
+        type: 'success',
       });
       this.updateRepository(false);
     },
