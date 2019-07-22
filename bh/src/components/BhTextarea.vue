@@ -13,7 +13,6 @@
 
 <script>
 import BhText from './BhText';
-import { events } from '../events';
 
 export default {
   name: 'BhTextarea',
@@ -64,7 +63,7 @@ export default {
 }
 
 textarea {
-  max-height: 50vh;
+  max-height: 30vh;
   overflow: auto;
 }
 </style>
