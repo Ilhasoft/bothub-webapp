@@ -179,10 +179,6 @@ export default {
       width: 100%;
       padding: 1rem;
       overflow: hidden;
-      // -moz-hyphens: auto;
-      // -webkit-hyphens: auto;
-      // -ms-hyphens: auto;
-      // hyphens: auto;
       color: black;
       text-align: left;
       word-break: break-word;
