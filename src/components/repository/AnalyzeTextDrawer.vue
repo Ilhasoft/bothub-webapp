@@ -156,11 +156,11 @@ export default {
         const { status, data } = response;
 
         if (!response || status === 500) {
-          this.$toast.open({
+          this.$bhToastNotification({
             message:
               (data && data.detail)
               || 'Something unexpected happened! We couldn’t analyze your text.',
-            type: 'is-danger',
+            type: 'danger',
           });
         } else if (data) {
           this.errors = data;
@@ -175,21 +175,6 @@ export default {
       this.$bhToastNotification({
         message: 'Json copied',
         type: 'success',
-        time: 5000,
-      });
-      this.$bhToastNotification({
-        message: 'Json copied',
-        type: 'danger',
-        time: 5000,
-      });
-      this.$bhToastNotification({
-        message: 'Json copied',
-        type: 'warning',
-        time: 5000,
-      });
-      this.$bhToastNotification({
-        message: 'Json copied',
-        type: 'question',
         time: 5000,
       });
     },
