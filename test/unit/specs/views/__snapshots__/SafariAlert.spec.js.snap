@@ -10,7 +10,7 @@ exports[`SafariAlert.vue renders correctly 1`] = `
       We strongly recommend that you switch to a different browser.
     </h3>
     <div class="bh-grid"><a href="https://www.google.com/intl/pt-BR_ALL/chrome/" class="bh-grid__item"><img src="@/assets/imgs/chrome.svg" alt="chrome" class="safari-alert__content__browser-icon"></a> <a href="https://www.mozilla.org/pt-BR/firefox/new/" class="bh-grid__item"><img src="@/assets/imgs/mozila.svg" alt="mozila" class="safari-alert__content__browser-icon"></a> <a href="https://www.opera.com/pt-br/download" class="bh-grid__item"><img src="@/assets/imgs/opera.svg" alt="opera" class="safari-alert__content__browser-icon"></a></div>
-    <bh-button-stub size="medium" primary="true" type="button" class="safari-alert__content__button">Keep using Safari</bh-button-stub>
+    <bh-button-stub size="normal" primary="true" type="button" class="safari-alert__content__button">Keep using Safari</bh-button-stub>
   </div>
 </div>
 `;

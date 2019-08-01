@@ -14,6 +14,7 @@
         <bh-button
           :disabled="usersProfile.length === 0 || !role"
           type="submit"
+          size="small"
           primary>Invite</bh-button>
       </div>
     </div>

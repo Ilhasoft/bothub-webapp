@@ -79,7 +79,8 @@
                   @click="clipBoardTest()" />
               </div>
               <bh-highlighted-pre
-                :code="JSON.stringify(result, null, 2) "
+              :code="JSON.stringify(result, null, 2) "
+                class="drawer__analyze-json-wrapper"
                 code-class="code" />
             </div>
           </bh-tab-item>

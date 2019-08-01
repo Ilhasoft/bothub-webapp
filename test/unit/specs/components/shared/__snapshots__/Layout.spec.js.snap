@@ -10,7 +10,7 @@ exports[`Layout.vue loading renders correctly 1`] = `
       <router-link-stub to="/" tag="a" event="click" class="bh-grid__item layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
       <!---->
       <div class="bh-grid__item bh-grid__item--nested">
-        <div class="bh-grid bh-grid--row">
+        <div class="bh-grid bh-grid--row layout__header__options">
           <!---->
           <!---->
           <!---->
@@ -39,7 +39,7 @@ exports[`Layout.vue renders correctly 1`] = `
       <router-link-stub to="/" tag="a" event="click" class="bh-grid__item layout__header__logo"><img src="@/assets/imgs/logo-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
       <!---->
       <div class="bh-grid__item bh-grid__item--nested">
-        <div class="bh-grid bh-grid--row">
+        <div class="bh-grid bh-grid--row layout__header__options">
           <!---->
           <!---->
           <!---->

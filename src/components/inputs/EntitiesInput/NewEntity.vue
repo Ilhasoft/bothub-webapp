@@ -4,6 +4,7 @@
       v-if="!addingMode"
       :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
       :disabled="!textSelectedValue"
+      size="small"
       rounded
       @click="enableAddingMode()">
       <span>

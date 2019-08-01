@@ -13,7 +13,7 @@
             :entities="entities"
             :available-entities="repository.entities"
             placeholder="Translate sentence"
-            size="medium"
+            size="normal"
             @textSelected="setTextSelected($event)" />
         </bh-field>
       </div>
@@ -22,7 +22,7 @@
           <bh-button
             :disabled="!isValid || submitting"
             secondary
-            size="medium"
+            size="normal"
             type="submit">Submit Translation</bh-button>
         </bh-field>
       </div>
