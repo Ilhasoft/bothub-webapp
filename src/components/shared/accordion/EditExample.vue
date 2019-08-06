@@ -260,7 +260,6 @@ export default {
 
       this.textSelected = null;
       this.onEntityAdded();
-
     },
     elevateToEntity(entity, index) {
       Vue.delete(this.pendingEntities, index);
@@ -331,8 +330,6 @@ export default {
       this.entitiesToEdit = this.entitiesToEdit.filter(value => !!value);
     },
     onEntityAdded() {
-      console.log("%c onEntityAdded", "color:blue")
-      console.log('here')
       if (this.$refs.textInput.clearSelected) {
         /* istanbul ignore next */
         this.$refs.textInput.clearSelected();

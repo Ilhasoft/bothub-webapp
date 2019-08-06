@@ -94,17 +94,6 @@ export default {
   },
   computed: {
     textSelectedValue() {
-      this.entities.forEach(item => {
-        console.log("%c textSelected", "color:blue");
-        console.log(item.entity)
-
-        if(!this.textSelected && item.entity == this.textSelected) {
-          console.log('ÉIGUAL');
-
-        }
-
-      })
-
       if (!this.textSelected) {
         return null;
       }
@@ -113,10 +102,6 @@ export default {
       return this.text.substring(start, end);
     },
     preparedEntities() {
-      console.log("%c entities", "color:green");
-      console.table(this.entities);
-
-
       return this.entities
         .map(({
           label,
