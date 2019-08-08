@@ -150,9 +150,9 @@ export default {
 
         this.submitting = false;
         if (language) {
-          this.$toast.open({
+          this.$bhToastNotification({
             message: language.join(' '),
-            type: 'is-danger',
+            type: 'danger',
           });
         }
       }

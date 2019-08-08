@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BhToastNotification.vue Danger notification renders correctly 1`] = `
+<div class="bh-toast-notification-wrapper"><span name="bh-toast-notification-wrapper__card-slide"><div class="bh-toast-notification-wrapper__card"><div class="bh-toast-notification-wrapper__card__info--danger"><bhicon-stub value="danger" size="small" class="bh-toast-notification-wrapper__card__info__icon"></bhicon-stub></div> <div class="bh-toast-notification-wrapper__card__message">
+        danger message
+      </div> <div class="bh-toast-notification-wrapper__card__action"><button class="bh-toast-notification-wrapper__card__action__button"><bhicon-stub value="close" size="small"></bhicon-stub></button></div></div></span></div>
+`;
+
+exports[`BhToastNotification.vue Question notification renders correctly 1`] = `
+<div class="bh-toast-notification-wrapper"><span name="bh-toast-notification-wrapper__card-slide"><div class="bh-toast-notification-wrapper__card"><div class="bh-toast-notification-wrapper__card__info--question"><bhicon-stub value="question" size="small" class="bh-toast-notification-wrapper__card__info__icon"></bhicon-stub></div> <div class="bh-toast-notification-wrapper__card__message">
+        question message
+      </div> <div class="bh-toast-notification-wrapper__card__action"><button class="bh-toast-notification-wrapper__card__action__button"><bhicon-stub value="close" size="small"></bhicon-stub></button></div></div></span></div>
+`;
+
+exports[`BhToastNotification.vue Success notification renders correctly 1`] = `
+<div class="bh-toast-notification-wrapper"><span name="bh-toast-notification-wrapper__card-slide"><div class="bh-toast-notification-wrapper__card"><div class="bh-toast-notification-wrapper__card__info--success"><bhicon-stub value="success" size="small" class="bh-toast-notification-wrapper__card__info__icon"></bhicon-stub></div> <div class="bh-toast-notification-wrapper__card__message">
+        success message
+      </div> <div class="bh-toast-notification-wrapper__card__action"><button class="bh-toast-notification-wrapper__card__action__button"><bhicon-stub value="close" size="small"></bhicon-stub></button></div></div></span></div>
+`;
+
+exports[`BhToastNotification.vue Warning notification renders correctly 1`] = `
+<div class="bh-toast-notification-wrapper"><span name="bh-toast-notification-wrapper__card-slide"><div class="bh-toast-notification-wrapper__card"><div class="bh-toast-notification-wrapper__card__info--warning"><bhicon-stub value="warning" size="small" class="bh-toast-notification-wrapper__card__info__icon"></bhicon-stub></div> <div class="bh-toast-notification-wrapper__card__message">
+        warning message
+      </div> <div class="bh-toast-notification-wrapper__card__action"><button class="bh-toast-notification-wrapper__card__action__button"><bhicon-stub value="close" size="small"></bhicon-stub></button></div></div></span></div>
+`;
+
+exports[`BhToastNotification.vue renders default correctly 1`] = `<div class="bh-toast-notification-wrapper"><span name="bh-toast-notification-wrapper__card-slide"></span></div>`;

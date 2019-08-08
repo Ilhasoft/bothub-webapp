@@ -3,11 +3,13 @@ jest.mock('@/api/request');
 
 import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import BH from 'bh';
 import store from '@/store';
 import applyFilters from '@/utils/filters';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 
 const localVue = createLocalVue();
+localVue.use(BH);
 localVue.use(Buefy);
 applyFilters(localVue);
 

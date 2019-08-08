@@ -7,7 +7,7 @@ exports[`BhDropdown.vue render correctly when props fullWidth is true 1`] = `
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="32" class="bh-dropdown__content bh-dropdown__content--full-width" style="display: none;"></div>
+  <div tabindex="33" class="bh-dropdown__content bh-dropdown__content--full-width" style="display: none;"></div>
 </div>
 `;
 
@@ -18,7 +18,7 @@ exports[`BhDropdown.vue render position correctly when Dropdown have a bottom-le
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="29" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="30" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;
 
@@ -29,7 +29,7 @@ exports[`BhDropdown.vue render position correctly when Dropdown have a bottom-ri
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="26" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="27" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;
 
@@ -40,7 +40,7 @@ exports[`BhDropdown.vue render position correctly when Dropdown have a left posi
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="20" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="21" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;
 
@@ -51,7 +51,7 @@ exports[`BhDropdown.vue render position correctly when Dropdown have a top-right
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="23" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="24" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;
 
@@ -62,7 +62,7 @@ exports[`BhDropdown.vue renders correctly 1`] = `
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="2" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="3" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;
 
@@ -73,6 +73,6 @@ exports[`BhDropdown.vue renders correctly when Dropdown have a title 1`] = `
       <bhicon-stub value="menu-down" class="text-color-grey-dark bh-dropdown__default__icon"></bhicon-stub>
     </div>
   </div>
-  <div tabindex="17" class="bh-dropdown__content" style="display: none;"></div>
+  <div tabindex="18" class="bh-dropdown__content" style="display: none;"></div>
 </div>
 `;

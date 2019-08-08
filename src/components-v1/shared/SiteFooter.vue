@@ -126,9 +126,9 @@ export default {
       /* istanbul ignore next */
       this.email = '';
       /* istanbul ignore next */
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Thank you for subscribing!',
-        type: 'is-success',
+        type: 'success',
       });
     },
   },
