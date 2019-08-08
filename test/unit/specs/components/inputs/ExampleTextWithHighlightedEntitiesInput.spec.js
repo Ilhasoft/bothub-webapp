@@ -41,17 +41,6 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
       test('textSelected event emitted', () => {
         expect(wrapper.emitted('textSelected')).toBeDefined();
       });
-
-      describe('clear selected', () => {
-        beforeEach(() => {
-          wrapper.vm.clearSelected();
-        });
-
-        test('textSelected event value is null', () => {
-          const values = wrapper.emitted('textSelected');
-          expect(values.pop()[0]).toBeNull();
-        });
-      });
     });
 
     describe('with entity', () => {

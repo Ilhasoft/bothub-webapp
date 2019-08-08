@@ -259,6 +259,7 @@ export default {
       });
 
       this.textSelected = null;
+      this.onEntityAdded();
     },
     elevateToEntity(entity, index) {
       Vue.delete(this.pendingEntities, index);

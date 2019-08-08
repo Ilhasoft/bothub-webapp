@@ -2,10 +2,12 @@
   <div>
     <form
       class="columns is-variable is-2"
-      @submit.prevent="onSubmit()">
+      @submit.prevent="onSubmit()"
+    >
       <div class="column is-three-fifths">
         <bh-field
-          :errors="errors.text || errors.language">
+          :errors="errors.text || errors.language"
+        >
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="text"
@@ -14,11 +16,13 @@
             :formatters="textFormatters"
             size="normal"
             placeholder="Add a sentence"
-            @textSelected="setTextSelected($event)">
+            @textSelected="setTextSelected($event)"
+          >
             <language-append-select-input
               slot="append"
               v-model="language"
-              class="language-append" />
+              class="language-append"
+            />
           </example-text-with-highlighted-entities-input>
         </bh-field>
       </div>
@@ -41,14 +45,15 @@
             :loading="submitting"
             primary
             size="normal"
-            type="submit">
+            type="submit"
+          >
             <slot v-if="!submitting">Submit</slot>
           </bh-button>
         </bh-field>
       </div>
     </form>
     <div class="columns is-variable is-1">
-      <div class="column">
+      <div class="column is-three-fifths">
         <bh-field :errors="errors.entities">
           <entities-input
             ref="entitiesInput"
@@ -59,7 +64,7 @@
             :available-entities="entitiesList"
             :available-labels="availableLabels"
             @entityAdded="onEntityAdded()"
-            @entityEdited="onEditEntity($event)" />
+          />
         </bh-field>
       </div>
     </div>
@@ -143,9 +148,8 @@ export default {
     },
     availableLabels() {
       const repositoryLabels = this.repository.labels_list || [];
-      const labelsFlat = this.entities.map(e => e.label);
+
       return repositoryLabels
-        .concat(labelsFlat)
         .filter(label => !!label)
         .filter((label, index, current) => (current.indexOf(label) === index));
     },
@@ -181,21 +185,9 @@ export default {
         this.$refs.textInput.clearSelected();
       }
     },
-    onEditEntity(entity) {
-      if (this.$refs.textInput.emitTextSelected) {
-        /* istanbul ignore next */
-        this.$refs.textInput.emitTextSelected({
-          selectionStart: entity.start,
-          selectionEnd: entity.end,
-        });
-      }
-    },
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
-      if (this.$refs.entitiesInput.clearEntityForm) {
-        this.$refs.entitiesInput.clearEntityForm();
-      }
 
       try {
         await this.newExample({

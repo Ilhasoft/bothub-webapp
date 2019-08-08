@@ -37,7 +37,7 @@
             :text="text"
             :text-selected="textSelected"
             :available-entities="repository.entities"
-            custom-label-disabled
+            :available-add-label="false"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>

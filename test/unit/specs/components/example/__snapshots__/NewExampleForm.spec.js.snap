@@ -22,7 +22,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
   </form>
   <div class="columns is-variable is-1">
-    <div class="column">
+    <div class="column is-three-fifths">
       <bh-field-stub errors="">
         <entities-input-stub value="" repository="[object Object]" text="" availableaddlabel="true" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
       </bh-field-stub>
