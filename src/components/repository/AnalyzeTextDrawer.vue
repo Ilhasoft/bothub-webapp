@@ -7,7 +7,9 @@
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">
-          <form @submit.prevent="onSubmit()">
+          <form
+            @keydown.enter.exact.prevent="onSubmit()"
+            @submit.prevent="onSubmit()">
             <bh-field
               :type="errors && errors.language && 'is-danger'"
               :message="errors && errors.language"
@@ -69,10 +71,16 @@
               </table>
             </div>
           </bh-tab-item>
-          <bh-tab-item label="raw">
+          <bh-tab-item label="Raw">
             <div class="drawer__analyze-content">
+              <div class="drawer__analyze-content__clipboard">
+                <bh-icon
+                  value="clipboard-text-outline"
+                  @click="clipBoardTest()" />
+              </div>
               <bh-highlighted-pre
-                :code="JSON.stringify(result, null, 2) "
+              :code="JSON.stringify(result, null, 2) "
+                class="drawer__analyze-json-wrapper"
                 code-class="code" />
             </div>
           </bh-tab-item>
@@ -150,11 +158,11 @@ export default {
         const { status, data } = response;
 
         if (!response || status === 500) {
-          this.$toast.open({
+          this.$bhToastNotification({
             message:
               (data && data.detail)
               || 'Something unexpected happened! We couldn’t analyze your text.',
-            type: 'is-danger',
+            type: 'danger',
           });
         } else if (data) {
           this.errors = data;
@@ -162,6 +170,15 @@ export default {
       }
       this.submitting = false;
       return false;
+    },
+    clipBoardTest() {
+      const text = JSON.stringify(this.result, null, 2);
+      navigator.clipboard.writeText(text);
+      this.$bhToastNotification({
+        message: 'Json copied',
+        type: 'success',
+        time: 5000,
+      });
     },
   },
 };
@@ -210,13 +227,20 @@ export default {
   }
 
   &--slide-enter-active, &--slide-leave-active {
-    transition: margin-bottom .2s ease-out;
+    transition: margin-bottom .1s ease-out;
     overflow: hidden;
   }
 
   &__analyze-content {
-    height: 300px;
+    height: 25vh;
     overflow-y: scroll;
+
+    &__clipboard {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 1rem;
+      cursor: pointer;
+    }
   }
 
   &--slide-enter, &--slide-leave-to {

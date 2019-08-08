@@ -184,10 +184,10 @@ export default {
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$toast.open({
+        this.$bhToastNotification({
           message: `${this.error.detail || 'sorry, something wrong ;('} `,
-          type: 'is-danger',
-          duration: 3000,
+          type: 'danger',
+          time: 5000,
         });
       }
       return false;

@@ -166,9 +166,9 @@ export default {
 
       const { data } = response;
 
-      this.$toast.open({
+      this.$bhToastNotification({
         message: data.detail || 'Something wrong happened...',
-        type: 'is-danger',
+        type: 'danger',
       });
 
       if (!data.detail) {

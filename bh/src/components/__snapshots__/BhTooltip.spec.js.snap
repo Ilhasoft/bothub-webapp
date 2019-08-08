@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BhTooltip.vue renders correctly 1`] = `
-<div tabindex="2" class="bh-tooltip__wrapper" style="display: none;">
+<div tabindex="3" class="bh-tooltip__wrapper" style="display: none;">
   <div class="bh-tooltip"></div>
 </div>
 `;
 
 exports[`BhTooltip.vue when dangers props is true renders correctly 1`] = `
-<div tabindex="10" class="bh-tooltip__wrapper" style="display: none;">
+<div tabindex="11" class="bh-tooltip__wrapper" style="display: none;">
   <div class="bh-tooltip bh-tooltip--danger"></div>
 </div>
 `;
 
 exports[`BhTooltip.vue when direction string is blank and danger boolean is true  renders correctly 1`] = `
-<div tabindex="16" class="bh-tooltip__wrapper" style="display: none;">
+<div tabindex="17" class="bh-tooltip__wrapper" style="display: none;">
   <div class="bh-tooltip bh-tooltip--danger bh-tooltip--test-class"></div>
 </div>
 `;
 
 exports[`BhTooltip.vue when direction string is blank renders correctly 1`] = `
-<div tabindex="14" class="bh-tooltip__wrapper" style="display: none;">
+<div tabindex="15" class="bh-tooltip__wrapper" style="display: none;">
   <div class="bh-tooltip"></div>
 </div>
 `;
 
 exports[`BhTooltip.vue when direction string is true renders correctly 1`] = `
-<div tabindex="12" class="bh-tooltip__wrapper" style="display: none;">
+<div tabindex="13" class="bh-tooltip__wrapper" style="display: none;">
   <div class="bh-tooltip bh-tooltip--test-class "></div>
 </div>
 `;
