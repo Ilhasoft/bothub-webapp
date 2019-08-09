@@ -43,6 +43,12 @@ $icon-small: 1rem;
 $icon-medium: 1.5rem;
 $icon-large: 2rem;
 $icon-extra-large: 3.25rem;
+$icons-sizes: (
+  ('small', $icon-small),
+  ('medium', $icon-medium),
+  ('large', $icon-large),
+  ('extra-large', $icon-extra-large),
+);
 
 // z-index
 
