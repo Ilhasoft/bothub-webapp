@@ -4,7 +4,7 @@
       <bh-icon-button
         class="sidenav__button-open__icon"
         value="botinho"
-        size="small"
+        size="medium"
         @click="openNav()"
       />
     </div>
@@ -15,7 +15,7 @@
         <div class="sidenav__repository-info__big-badge">
           <bh-icon-button
             :value="repositoryInfoIcon"
-            size="small"
+            size="medium"
             class="sidenav__repository-info__big-badge__icon" />
         </div>
         <div class="sidenav__repository-info__text-info">
@@ -283,6 +283,8 @@ export default {
       font-size: 36px;
       margin-left: 50px;
       border:none;
+      outline:none;
+      cursor: pointer;
       background-color: $color-fake-white;
     }
 

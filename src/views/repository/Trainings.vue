@@ -36,7 +36,7 @@
         <div class="trainings-repository__list-wrapper">
           <h2>Sentences list</h2>
           <bh-button
-            v-if="repository.examples__count > 0"
+            v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
             color="secondary-light"
             size="normal"

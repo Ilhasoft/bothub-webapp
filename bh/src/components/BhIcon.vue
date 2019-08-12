@@ -74,7 +74,7 @@ export default {
       }
     }
 
-    @each $size in $sizes {
+    @each $size in $icons-sizes {
       $size-name: nth($size, 1);
       $size-value: nth($size, 2);
 

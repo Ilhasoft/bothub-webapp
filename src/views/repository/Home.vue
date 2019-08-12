@@ -9,7 +9,7 @@
         <div class="repository-home__header__icon-badge">
           <bh-icon
             :value="repositoryIcon"
-            size="small"
+            size="large"
             class="repository-home__header__icon-badge__icon" />
         </div>
         <div class="repository-home__header__wrapper">
