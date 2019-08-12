@@ -56,19 +56,20 @@
             </div>
             <div
               v-for="(entities, label) in result.entities"
-              v-if="entities.length > 0"
               :key="label">
-              <p><strong>{{ label }}:</strong></p>
-              <table>
-                <tbody>
-                  <tr
-                    v-for="(entity, i) in entities"
-                    :key="i">
-                    <td>{{ entity.value }}</td>
-                    <td>{{ entity.entity }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div v-if="entities.length > 0">
+                <p><strong>{{ label }}:</strong></p>
+                <table>
+                  <tbody>
+                    <tr
+                      v-for="(entity, i) in entities"
+                      :key="i">
+                      <td>{{ entity.value }}</td>
+                      <td>{{ entity.entity }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </bh-tab-item>
           <bh-tab-item label="Raw">
@@ -163,6 +164,7 @@ export default {
               (data && data.detail)
               || 'Something unexpected happened! We couldn’t analyze your text.',
             type: 'danger',
+            time: 50000,
           });
         } else if (data) {
           this.errors = data;
@@ -177,7 +179,6 @@ export default {
       this.$bhToastNotification({
         message: 'Json copied',
         type: 'success',
-        time: 5000,
       });
     },
   },
