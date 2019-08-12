@@ -20,9 +20,10 @@
           v-bind="$attrs"
           v-model="val"
           class="bh-textarea__input example-txt-w-highlighted-entities__input"
-          @select="emitTextSelected()"
-          @click="emitTextSelected()"
-          @keyup="emitTextSelected()" />
+          @select.stop.prevent="emitTextSelected()"
+          @click.stop.prevent="emitTextSelected()"
+          @keyup.stop.prevent="emitTextSelected()"
+        />
       </div>
       <slot name="append" />
     </div>
@@ -31,11 +32,8 @@
 
 <script>
 import BH from 'bh';
-
 import Flag from '@/components-v1/shared/Flag';
-
 import { getEntityColor } from '@/utils/entitiesColors';
-
 
 const components = {
   Flag,
@@ -100,10 +98,11 @@ export default {
     },
   },
   methods: {
-    emitTextSelected(value = null) {
-      const { selectionStart, selectionEnd } = value || this.$refs.input;
+    emitTextSelected() {
+      const { selectionStart, selectionEnd } = this.$refs.input;
       this.selectionStart = selectionStart;
       this.selectionEnd = selectionEnd;
+
       this.$emit(
         'textSelected',
         selectionStart === selectionEnd
@@ -111,14 +110,16 @@ export default {
           : { start: selectionStart, end: selectionEnd },
       );
     },
-    async clearSelected() {
-      const { input } = this.$refs;
-      await this.$nextTick();
-      if (input.setSelectionRange) {
-        input.setSelectionRange(0, 0);
-      } else {
-        input.focus();
-      }
+    clearSelected() {
+      this.$nextTick(() => {
+        if (this.$refs.input.setSelectionRange) {
+          window.getSelection().removeAllRanges();
+          this.$refs.input.setSelectionRange(0, 0);
+          this.$refs.input.blur();
+        } else {
+          this.$refs.input.focus();
+        }
+      });
     },
   },
 };
@@ -174,6 +175,10 @@ export default {
       padding: .5rem;
       font-size: .5rem;
       line-height: .5rem;
+    }
+
+    &--normal {
+      padding: .65rem 1rem;
     }
 
     &--medium {

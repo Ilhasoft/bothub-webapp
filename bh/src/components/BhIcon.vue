@@ -56,7 +56,7 @@ export default {
     display: inline-block;
     width: 1em;
     height: 1em;
-    vertical-align: text-top;
+    vertical-align: middle;
 
     svg {
       display: block;
@@ -74,7 +74,7 @@ export default {
       }
     }
 
-    @each $size in $sizes {
+    @each $size in $icons-sizes {
       $size-name: nth($size, 1);
       $size-value: nth($size, 2);
 

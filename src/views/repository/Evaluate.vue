@@ -156,13 +156,16 @@ export default {
     getExamples() {
       this.getEvaluateExample({
         id: this.selectedRepository.uuid,
-      }).then((response) => {
+      }).then(() => {
         this.languages = Object.keys(LANGUAGES).map((lang, index) => ({
           id: index + 1,
           value: lang,
-          title: `${LANGUAGES[lang]} (${response.results.filter(r => r.language === lang).length} test sentences)`,
+          title: `${LANGUAGES[lang]} (${this.getSentencesCountByLang(lang)} test sentences)`,
         }));
       });
+    },
+    getSentencesCountByLang(lang) {
+      return this.selectedRepository.evaluate_languages_count[lang];
     },
     async newEvaluate() {
       this.evaluating = true;
@@ -181,10 +184,10 @@ export default {
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$toast.open({
+        this.$bhToastNotification({
           message: `${this.error.detail || 'sorry, something wrong ;('} `,
-          type: 'is-danger',
-          duration: 3000,
+          type: 'danger',
+          time: 5000,
         });
       }
       return false;

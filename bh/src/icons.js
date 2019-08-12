@@ -40,6 +40,8 @@ import Food from './assets/icons/food.svg';
 import Health from './assets/icons/health.svg';
 import Social from './assets/icons/social.svg';
 import Tech from './assets/icons/tech.svg';
+import Success from './assets/icons/success.svg';
+import Danger from './assets/icons/danger.svg';
 import Config from './assets/icons/config.svg';
 import FlagBr from './assets/icons/flag-br.svg';
 import FlagDe from './assets/icons/flag-de.svg';
@@ -91,6 +93,8 @@ export default {
   culture: Culture,
   education: Education,
   finances: Finances,
+  success: Success,
+  danger: Danger,
   food: Food,
   health: Health,
   social: Social,

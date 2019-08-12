@@ -1,6 +1,6 @@
 {
   "name": "bothub-webapp",
-  "version": "1.17.6",
+  "version": "1.17.7",
   "description": "Bothub web application",
   "author": "Ilhasoft <contato@ilhasoft.com.br>",
   "private": true,
@@ -25,6 +25,7 @@
     "global": "^4.3.2",
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
+    "uuid": "^3.3.2",
     "vue": "^2.5.2",
     "vue-infinite-scroll": "^2.0.2",
     "vue-mc": "^0.4.0",

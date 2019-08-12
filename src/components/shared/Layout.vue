@@ -29,11 +29,12 @@
           <slot name="center" />
         </div>
         <div class="bh-grid__item bh-grid__item--nested">
-          <div class="bh-grid bh-grid--row">
+          <div class="bh-grid bh-grid--row layout__header__options">
             <div
               v-if="authenticated"
               class="bh-grid__item hide-mobile">
               <bh-button
+                size="small"
                 primary
                 inverted
                 rounded
@@ -45,7 +46,7 @@
               class="bh-grid__item layout__header__icon-tutorial--center">
               <bh-icon-button
                 class="layout__header__icon-tutorial"
-                size="small"
+                size="medium"
                 value="question"
                 @click="openBeginnerTutorialModal()"
               />
@@ -243,12 +244,17 @@ export default {
 
       img {
         display: block;
-        height: $size-small;
+        height: 1.75rem;
       }
+    }
+
+    &__options {
+      align-items: center;
     }
 
     &__icon-tutorial {
       color: $color-white;
+      margin: 0;
 
       &--center {
         align-self: center;

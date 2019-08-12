@@ -1,4 +1,5 @@
 import VueHighlightJS from 'vue-highlightjs';
+import UUID from 'vue-uuid';
 
 import BhText from './components/BhText';
 import BhField from './components/BhField';
@@ -24,8 +25,10 @@ import BhTooltipHover from './components/BhTooltipHover';
 import BhTabs from './components/BhTabs';
 import BhTabItem from './components/BhTabItem';
 import BhStepper from './components/BhStepper';
+import BhToastNotification from './components/BhToastNotification';
 
 import utils from './utils';
+import events from './events';
 
 
 const components = {
@@ -53,11 +56,13 @@ const components = {
   BhTabs,
   BhTabItem,
   BhStepper,
+  BhToastNotification,
 };
 
 export default {
   install: (Vue) => {
     Vue.use(VueHighlightJS);
+    Vue.use(UUID);
 
     const $bhModal = new Vue({
       data() {
@@ -96,8 +101,14 @@ export default {
       },
     });
 
+    const $bhToastNotification = (params) => {
+      events.$emit('add', params);
+    };
+
     /* eslint-disable no-param-reassign */
+
     Vue.prototype.$bhModal = $bhModal;
+    Vue.prototype.$bhToastNotification = $bhToastNotification;
     /* eslint-enable */
 
     Object.keys(components).forEach((componentName) => {
