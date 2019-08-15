@@ -18,9 +18,9 @@ export default {
   },
   translations(repositoryUuid, query = {}) {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
-    return new utils.List(`/translations/?${queryString}`);
+    return new utils.List(`/v2/translation/?${queryString}`);
   },
   delete(translationId) {
-    return request.$http.delete(`/translation/${translationId}/`);
+    return request.$http.delete(`/v2/translation/${translationId}/`);
   },
 };

@@ -12,19 +12,19 @@ export default {
   },
   myProfile() {
     return request.$http.get(
-      '/my-profile/',
+      '/v2/account/user-profile/douglas/',
     );
   },
   myRepositories() {
     return new utils.List('/my-repositories/');
   },
   async getMyProfileSchema() {
-    const { data } = await request.$http.options('/my-profile/');
+    const { data } = await request.$http.options('/v2/account/user-profile/');
     return data.actions.PUT;
   },
   updateMyProfile(nickname, email, name, locale) {
     return request.$http.patch(
-      '/my-profile/',
+      '/v2/account/user-profile/',
       {
         nickname,
         email,

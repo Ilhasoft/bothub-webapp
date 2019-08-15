@@ -3,12 +3,12 @@ import request from './request';
 
 export default {
   async getLoginSchema() {
-    const { data } = await request.$http.options('/login/');
+    const { data } = await request.$http.options('/v2/account/login/');
     return data.actions.POST;
   },
   login(username, password) {
     return request.$http.post(
-      '/login/',
+      '/v2/account/login/',
       {
         username,
         password,

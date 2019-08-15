@@ -30,7 +30,7 @@ class NewRepositoryModel extends ModelBase {
 
   routes() {
     return {
-      save: '/repository/new/',
+      save: '/v2/repository/repository/',
     };
   }
 

@@ -6,25 +6,25 @@ import utils from './utils';
 
 export default {
   async getNewSchema() {
-    const { data } = await request.$http.options('/repository/new/');
+    const { data } = await request.$http.options('/v2/repository/repository/');
     return data.actions.POST;
   },
   getAll() {
-    return new utils.List('/repositories/');
+    return new utils.List('/repository/repositories/');
   },
   search(query) {
     const queryString = qs.stringify(query);
-    return new utils.List(`/v2/repositories/?${queryString}`);
+    return new utils.List(`/v2/repository/repositories/?${queryString}`);
   },
   get(ownerNickname, slug) {
-    return request.$http.get(`/repository/${ownerNickname}/${slug}/`);
+    return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
   train(ownerNickname, slug) {
-    return request.$http.get(`/repository/${ownerNickname}/${slug}/train/`);
+    return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/train/`);
   },
   analyze(ownerNickname, slug, language, text) {
     return request.$http.post(
-      `/repository/${ownerNickname}/${slug}/analyze/`,
+      `/v1/repository/${ownerNickname}/${slug}/analyze/`,
       {
         language,
         text,
@@ -32,13 +32,13 @@ export default {
     );
   },
   async getEditSchema(ownerNickname, slug) {
-    const { data } = await request.$http.options(`/repository/${ownerNickname}/${slug}/`);
+    const { data } = await request.$http.options(`/v1/repository/${ownerNickname}/${slug}/`);
     return data.actions.PUT;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
     algorithm, useCompetingIntents, useNameEntities) {
     return request.$http.patch(
-      `/repository/${ownerNickname}/${slug}/`,
+      `/v1/repository/${ownerNickname}/${slug}/`,
       {
         name,
         slug: newSlug,
@@ -54,12 +54,12 @@ export default {
   },
   getLanguagesStatus(ownerNickname, slug) {
     return request.$http.get(
-      `/repository/${ownerNickname}/${slug}/languagesstatus/`,
+      `/v1/repository/${ownerNickname}/${slug}/languagesstatus/`,
     );
   },
   vote(ownerNickname, slug, value) {
     return request.$http.post(
-      `/repository/${ownerNickname}/${slug}/vote/`,
+      `/v1/repository/${ownerNickname}/${slug}/vote/`,
       {
         vote: value,
       },
@@ -79,15 +79,15 @@ export default {
   },
   getAuthorizationList(repositoryUuid) {
     const queryString = qs.stringify({ repository: repositoryUuid });
-    return new utils.List(`/authorizations/?${queryString}`);
+    return new utils.List(`/v2/repository/authorizations/?${queryString}`);
   },
   async getRequestAuthorizationSchema() {
-    const { data } = await request.$http.options('/request-authorization/');
+    const { data } = await request.$http.options('/v2/repository/authorization-requests/');
     return data.actions.POST;
   },
   requestAuthorization(repositoryUuid, text) {
     return request.$http.post(
-      '/request-authorization/',
+      '/v2/repository/authorization-requests/',
       {
         repository: repositoryUuid,
         text,
@@ -98,12 +98,12 @@ export default {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
     });
-    return new utils.List(`/authorization-requests/?${queryString}`);
+    return new utils.List(`/v2/repository/authorization-requests/?${queryString}`);
   },
   approveRequestAuthorization(id) {
-    return request.$http.put(`/review-authorization-request/${id}/`);
+    return request.$http.put(`/v2/repository/authorization-requests/${id}/`);
   },
   rejectRequestAuthorization(id) {
-    return request.$http.delete(`/review-authorization-request/${id}/`);
+    return request.$http.delete(`/v2/repository/authorization-requests/${id}/`);
   },
 };
