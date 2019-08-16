@@ -4,6 +4,7 @@ import VueMoment from 'vue-moment';
 
 import BH from 'bh';
 
+import VueMarkdown from 'vue-markdown';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -14,6 +15,7 @@ Vue.use(Buefy);
 Vue.use(VueMoment);
 Vue.use(BH);
 Vue.use(API);
+Vue.use(VueMarkdown);
 Vue.config.productionTip = false;
 applyFilters(Vue);
 
