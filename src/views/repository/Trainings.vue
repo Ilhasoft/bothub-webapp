@@ -166,6 +166,7 @@ export default {
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
+      this.updateRepository(false);
     },
     async train() {
       const { ownerNickname, slug } = this.$route.params;
