@@ -24,7 +24,6 @@
     "deep-equal": "^1.0.1",
     "global": "^4.3.2",
     "lodash": "^4.17.11",
-    "markdown-it-vue": "^1.0.9",
     "query-string": "^6.1.0",
     "uuid": "^3.3.2",
     "vue": "^2.5.2",

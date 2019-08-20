@@ -36,9 +36,6 @@
           Description
         </div>
         <div>
-          <!-- <markdown-it-vue
-            :content="repository.description"
-            class="repository-home__description__text"/> -->
           <vue-markdown
             :source="repository.description"
             :show="show"
@@ -50,8 +47,6 @@
             :toc="toc"
             toc-id="toc"
             class="repository-home__description__text"
-            @rendered="allRight"
-            @toc-rendered="tocAllRight"
           />
           <p
             v-if="repository.description"
@@ -107,8 +102,6 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import MarkdownItVue from 'markdown-it-vue';
-// import 'markdown-it-vue/dist/markdown-it-vue.css';
 import BadgesCard from '@/components/repository/BadgesCard';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
@@ -120,7 +113,6 @@ export default {
     RepositoryViewBase,
     BadgesCard,
     VueMarkdown,
-    MarkdownItVue,
   },
   extends: RepositoryBase,
   data() {
@@ -129,7 +121,6 @@ export default {
       currentLanguage: '',
       links: ['Sentences', 'Results', 'Versions'],
       languages: [],
-      content: '# oi',
       evaluating: false,
       error: {},
       source: '',
@@ -180,12 +171,6 @@ export default {
     },
     formattedEntityTitle() {
       return `This bot has <strong>${this.repository.intents_list.length}</strong> intents`;
-    },
-    allRight(htmlStr) {
-      console.log('markdown is parsed !');
-    },
-    tocAllRight(tocHtmlStr) {
-      console.log('toc is parsed :', tocHtmlStr);
     },
   },
 };
