@@ -46,7 +46,7 @@
             :typographer="typographer"
             :toc="toc"
             toc-id="toc"
-            class="repository-home__description__text"
+            class="repository-home__description__text markdown-body"
           />
           <p
             v-if="repository.description"
@@ -126,7 +126,7 @@ export default {
       source: '',
       show: true,
       html: true,
-      breaks: true,
+      breaks: false,
       linkify: false,
       emoji: true,
       typographer: true,
@@ -179,7 +179,7 @@ export default {
 <style lang="scss">
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
-
+@import 'github-markdown-css/github-markdown.css';
 
 .repository-home {
   &__title {
@@ -246,4 +246,19 @@ export default {
   }
 }
 
+.markdown-body {
+  a {
+    color: $color-primary;
+    text-decoration: none;
+  }
+
+  hr {
+    background: $color-primary;
+    height: 2px;
+  }
+
+  h1, h2 {
+    border-bottom: 1px solid $color-primary;
+  }
+}
 </style>
