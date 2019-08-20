@@ -36,9 +36,21 @@
           Description
         </div>
         <div>
+          <vue-markdown
+            :source="repository.description"
+            :show="show"
+            :html="html"
+            :breaks="breaks"
+            :linkify="linkify"
+            :emoji="emoji"
+            :typographer="typographer"
+            :toc="toc"
+            toc-id="toc"
+            class="repository-home__description__text markdown-body"
+          />
           <p
             v-if="repository.description"
-            class="repository-home__description__text">{{ repository.description }}</p>
+            class="repository-home__description__text"/>
           <p v-else>
             <i class="text-color-grey-dark">There is no description for this repository</i>
           </p>
@@ -91,6 +103,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesCard from '@/components/repository/BadgesCard';
+import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 
 
@@ -99,8 +112,27 @@ export default {
   components: {
     RepositoryViewBase,
     BadgesCard,
+    VueMarkdown,
   },
   extends: RepositoryBase,
+  data() {
+    return {
+      initialTab: 0,
+      currentLanguage: '',
+      links: ['Sentences', 'Results', 'Versions'],
+      languages: [],
+      evaluating: false,
+      error: {},
+      source: '',
+      show: true,
+      html: true,
+      breaks: false,
+      linkify: false,
+      emoji: true,
+      typographer: true,
+      toc: true,
+    };
+  },
   computed: {
     hasIntents() {
       return this.repository.intents_list.length > 0;
@@ -147,7 +179,7 @@ export default {
 <style lang="scss">
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
-
+@import 'github-markdown-css/github-markdown.css';
 
 .repository-home {
   &__title {
@@ -196,7 +228,9 @@ export default {
     padding: 1rem .5rem;
 
     &__text {
-      white-space: pre-wrap;
+      ul li {
+        list-style-type: disc;
+      }
     }
   }
 
@@ -212,4 +246,19 @@ export default {
   }
 }
 
+.markdown-body {
+  a {
+    color: $color-primary;
+    text-decoration: none;
+  }
+
+  hr {
+    background: $color-primary;
+    height: 2px;
+  }
+
+  h1, h2 {
+    border-bottom: 1px solid $color-primary;
+  }
+}
 </style>
