@@ -7,7 +7,7 @@ import utils from './utils';
 export default {
   new(exampleId, language, text, entities) {
     return request.$http.post(
-      '/translate-example/',
+      '/v2/repository/translation/',
       {
         original_example: exampleId,
         language,
@@ -18,9 +18,9 @@ export default {
   },
   translations(repositoryUuid, query = {}) {
     const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
-    return new utils.List(`/v2/translation/?${queryString}`);
+    return new utils.List(`/v2/repository/translation/?${queryString}`);
   },
   delete(translationId) {
-    return request.$http.delete(`/v2/translation/${translationId}/`);
+    return request.$http.delete(`/v2/repository/translation/${translationId}/`);
   },
 };

@@ -12,11 +12,11 @@ export default {
   },
   myProfile() {
     return request.$http.get(
-      '/v2/account/user-profile/douglas/',
+      '/v2/account/user-profile/user/',
     );
   },
   myRepositories() {
-    return new utils.List('/my-repositories/');
+    return new utils.List('/v2/repository/repositories/');
   },
   async getMyProfileSchema() {
     const { data } = await request.$http.options('/v2/account/user-profile/');
@@ -34,12 +34,12 @@ export default {
     );
   },
   async getChangePasswordSchema() {
-    const { data } = await request.$http.options('/change-password/');
+    const { data } = await request.$http.options('/v2/account/change-password/');
     return data.actions.PUT;
   },
   changePassword(currentPassword, password) {
     return request.$http.put(
-      '/change-password/',
+      '/v2/account/change-password/',
       {
         current_password: currentPassword,
         password,
@@ -48,6 +48,6 @@ export default {
   },
   search(query) {
     const queryString = qs.stringify(query);
-    return request.$http.get(`/search-user/?${queryString}`);
+    return request.$http.get(`/v2/account/search-user/?${queryString}`);
   },
 };

@@ -16,24 +16,24 @@ export default {
     );
   },
   async getForgotPasswordSchema() {
-    const { data } = await request.$http.options('/forgot-password/');
+    const { data } = await request.$http.options('/v2/account/forgot-password/');
     return data.actions.POST;
   },
   forgotPassword(email) {
     return request.$http.post(
-      '/forgot-password/',
+      '/v2/account/forgot-password/',
       {
         email,
       },
     );
   },
   async getResetPasswordSchema(nickname) {
-    const { data } = await request.$http.options(`/reset-password/${nickname}/`);
+    const { data } = await request.$http.options(`/v2/account/reset-password/${nickname}/`);
     return data.actions.PUT;
   },
   resetPassword(nickname, token, password) {
     return request.$http.put(
-      `/reset-password/${nickname}/`,
+      `/v2/account/reset-password/${nickname}/`,
       {
         token,
         password,
@@ -41,12 +41,12 @@ export default {
     );
   },
   async getRegisterSchema() {
-    const { data } = await request.$http.options('/register/');
+    const { data } = await request.$http.options('/v2/account/register/');
     return data.actions.POST;
   },
   register(email, name, nickname, password) {
     return request.$http.post(
-      '/register/',
+      '/v2/account/register/',
       {
         email,
         name,
