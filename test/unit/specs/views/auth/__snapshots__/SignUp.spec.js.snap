@@ -17,8 +17,8 @@ exports[`LoginForm.vue renders correctly 1`] = `
         <h1>Get started free</h1>
       </div>
       <form>
+        <loading-stub></loading-stub>
         <!---->
-        <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]" class="field"></form-generator-stub>
         <div class="field">
           <div class="control has-text-centered">
             <bh-button-stub color="info" type="submit" fullwidth="true">Get free</bh-button-stub>
