@@ -43,17 +43,4 @@ describe('ExampleItem.vue', () => {
   test('mounted', () => {
     expect(wrapper.vm).toBeDefined();
   });
-
-  describe('delete example', () => {
-    beforeEach(async () => {
-      const deletePromise = wrapper.vm.deleteThisExample();
-      await localVue.nextTick();
-      wrapper.vm.deleteDialog.confirm();
-      await deletePromise;
-    });
-
-    test('emit deleted event', () => {
-      expect(wrapper.emitted('deleted')).toBeDefined();
-    });
-  });
 });

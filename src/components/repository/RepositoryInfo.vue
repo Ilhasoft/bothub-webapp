@@ -13,7 +13,7 @@
     </div>
     <div class="repository-info__info-item">
       <span>Created by</span>
-      <strong class="medium text-color-primary-lighter">
+      <strong class="medium text-color-primary-light">
         {{ getProfile(repository.owner__nickname).name
         || repository.owner__nickname }}
       </strong>

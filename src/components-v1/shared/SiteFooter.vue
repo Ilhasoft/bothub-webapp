@@ -126,9 +126,9 @@ export default {
       /* istanbul ignore next */
       this.email = '';
       /* istanbul ignore next */
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Thank you for subscribing!',
-        type: 'is-success',
+        type: 'success',
       });
     },
   },
@@ -243,7 +243,7 @@ footer {
           transition: background-color .2s ease;
 
           &:hover {
-            color: $color-primary-darker;
+            color: $color-primary-dark;
             background-color: $font-color-lighten;
           }
 

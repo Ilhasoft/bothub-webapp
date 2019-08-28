@@ -67,22 +67,30 @@ export default {
     display: block;
     width: $form-component-height-normal;
     padding: 0;
-    margin: 0;
+    margin-right: .5rem;
     cursor: pointer;
     background: none;
     border: none;
     outline: none;
 
     &--small {
-      width: $form-component-height-small;
+      width: $icon-small;
+      height: $icon-small;
     }
 
     &--medium {
-      width: $form-component-height-medium;
+      width: $icon-medium;
+      height: $icon-medium;
     }
 
     &--large {
-      width: $form-component-height-large;
+      width: $icon-large;
+      height: $icon-large;
+    }
+
+    &--extra-large {
+      width: $icon-extra-large;
+      height: $icon-extra-large;
     }
 
     &--primary {

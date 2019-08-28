@@ -12,27 +12,31 @@
         <div class="new-sentence__form__wrapper">
           <div>
             <bh-field
-              :errors="errors.text || errors.language">
+              :errors="errors.entities || errors.language"
+            >
               <example-text-with-highlighted-entities-input
                 ref="textInput"
                 v-model="text"
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
-                size="medium"
+                size="normal"
                 placeholder="Enter your sentence here"
-                @textSelected="setTextSelected($event)" />
+                @textSelected="setTextSelected($event)"
+              />
             </bh-field>
           </div>
           <div>
             <bh-field
-              :errors="errors.non_field_errors">
+              :errors="errors.non_field_errors"
+            >
               <bh-autocomplete
                 v-model="intent"
                 :data="repository.intents_list || []"
                 :formatters="intentFormatters"
-                size="medium"
-                placeholder="Intent" />
+                size="normal"
+                placeholder="Intent"
+              />
             </bh-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -42,7 +46,7 @@
               :tooltip-hover="!isValid ? validationErrors : null"
               :loading="submitting"
               primary
-              size="medium"
+              size="normal"
               @click="submitSentence()">
               <slot v-if="!submitting">Submit</slot>
             </bh-button>
@@ -50,21 +54,26 @@
         </div>
         <bh-field
           :errors="errors.entities"
-          class="new-sentence__form__entities">
-          <entities-input
-            ref="entitiesInput"
-            v-model="entities"
-            :available-add-label="false"
-            :repository="repository"
-            :text="text"
-            :text-selected="textSelected"
-            :available-entities="entitiesList"
-            :available-labels="availableLabels"
-            :entities-for-edit="[]"
-            :testing="testing"
-            @entityAdded="onEntityAdded()"
-            @entityEdited="onEditEntity($event)"
-          />
+          class="new-sentence__form__entities"
+        >
+          <div class="columns">
+            <div class="column is-three-fifths">
+              <entities-input
+                ref="entitiesInput"
+                v-model="entities"
+                :available-add-label="false"
+                :repository="repository"
+                :text="text"
+                :text-selected="textSelected"
+                :available-entities="entitiesList"
+                :available-labels="availableLabels"
+                :entities-for-edit="[]"
+                :testing="testing"
+                @entityAdded="onEntityAdded()"
+                @entityEdited="onEditEntity($event)"
+              />
+            </div>
+          </div>
         </bh-field>
       </form>
     </div>
@@ -232,10 +241,6 @@ export default {
   width: 100%;
   margin: 2rem auto 0;
 
-  &__header {
-    // margin: 0 0.75rem;
-  }
-
   &__form {
 
     &__wrapper {
@@ -248,10 +253,6 @@ export default {
         align-self: center;
         justify-self: flex-end;
       }
-    }
-
-    &__entities {
-      margin: 0 0.75rem;
     }
   }
 }

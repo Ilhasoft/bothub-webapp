@@ -17,7 +17,7 @@
 
       <div class="expander__trigger__btns-wrapper">
         <div
-          v-if="repository.authorization && repository.authorization.can_contribute"
+          v-if="repository.authorization && repository.authorization.can_contribute && !training"
           class="level-right">
           <div class="level-item">
             <a
@@ -103,6 +103,10 @@ export default {
       type: String,
       default: '',
     },
+    training: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -130,6 +134,7 @@ export default {
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
+      'deleteExample',
     ]),
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -154,9 +159,15 @@ export default {
           confirmText: 'Delete',
           type: 'is-danger',
           onConfirm: async () => {
-            await this.deleteEvaluateExample({ id: this.id });
-            this.$emit('deleted');
-            resolve();
+            if (this.training) {
+              await this.deleteExample({ id: this.id });
+              this.$emit('deleted');
+              resolve();
+            } else {
+              await this.deleteEvaluateExample({ id: this.id });
+              this.$emit('deleted');
+              resolve();
+            }
           },
           onCancel: () => {
             /* istanbul ignore next */

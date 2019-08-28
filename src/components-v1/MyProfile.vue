@@ -118,9 +118,9 @@ export default {
     onMyProfileEdited() {
       this.updateMyProfile();
       this.updateMyRepositories();
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Profile edited!',
-        type: 'is-success',
+        type: 'success',
       });
       this.editProfileModalOpen = false;
     },
@@ -128,9 +128,9 @@ export default {
       this.changePasswordModalOpen = true;
     },
     onPasswordChanged() {
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Password changed!',
-        type: 'is-success',
+        type: 'success',
       });
       this.changePasswordModalOpen = false;
     },

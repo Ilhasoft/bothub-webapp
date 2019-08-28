@@ -96,6 +96,7 @@ export default {
 
     position: relative;
     display: inline-block;
+    align-self: center;
 
     &--full-field {
       width: 100%;
