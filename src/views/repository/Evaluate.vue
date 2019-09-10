@@ -156,12 +156,13 @@ export default {
     getExamples() {
       this.getEvaluateExample({
         id: this.selectedRepository.uuid,
-      }).then((response) => {
-        this.languages = Object.keys(LANGUAGES).map((lang, index) => ({
-          id: index + 1,
-          value: lang,
-          title: `${LANGUAGES[lang]} (${response.results.filter(r => r.language === lang).length} test sentences)`,
-        }));
+      }).then(() => {
+        this.languages = Object.keys(this.selectedRepository.evaluate_languages_count)
+          .map((lang, index) => ({
+            id: index + 1,
+            value: lang,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
+          }));
       });
     },
     async newEvaluate() {
