@@ -7,24 +7,24 @@ import utils from './utils';
 export default {
   profile(nickname) {
     return request.$http.get(
-      `/user-profile/${nickname}/`,
+      'v2/account/my-profile/',
     );
   },
   myProfile() {
     return request.$http.get(
-      '/v2/account/user-profile/user/',
+      '/v2/account/my-profile/',
     );
   },
   myRepositories() {
     return new utils.List('/v2/repository/repositories/');
   },
   async getMyProfileSchema() {
-    const { data } = await request.$http.options('/v2/account/user-profile/');
+    const { data } = await request.$http.options('/v2/account/my-profile/');
     return data.actions.PUT;
   },
   updateMyProfile(nickname, email, name, locale) {
-    return request.$http.patch(
-      '/v2/account/user-profile/',
+    return request.$http.put(
+      '/v2/account/my-profile/',
       {
         nickname,
         email,

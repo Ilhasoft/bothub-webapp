@@ -289,7 +289,7 @@ export default {
     },
   },
   mounted() {
-    this.updateMyProfile();
+    this.updateMyProfile('user');
   },
   methods: {
     ...mapActions([

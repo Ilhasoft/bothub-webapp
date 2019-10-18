@@ -41,8 +41,8 @@ export default {
     /* istanbul ignore next */
     return user.myRepositories();
   },
-  async getMyProfileSchema() {
-    const schema = await user.getMyProfileSchema();
+  async getMyProfileSchema(nickname) {
+    const schema = await user.getMyProfileSchema(nickname);
     return schema;
   },
   patchMyProfile(store, {

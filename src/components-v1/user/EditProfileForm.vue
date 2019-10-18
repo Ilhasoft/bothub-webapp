@@ -47,7 +47,7 @@ export default {
     ]),
   },
   async mounted() {
-    this.formSchema = await this.getMyProfileSchema();
+    this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
   },
   methods: {
     ...mapActions([

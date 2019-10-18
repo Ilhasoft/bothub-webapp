@@ -154,7 +154,7 @@ export default {
   },
   mounted() {
     document.title = this.title;
-    this.updateMyProfile();
+    this.updateMyProfile('user');
   },
   methods: {
     ...mapActions([
