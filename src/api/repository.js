@@ -6,7 +6,7 @@ import utils from './utils';
 
 export default {
   async getNewSchema() {
-    const { data } = await request.$http.options('/v2/repository/repository/');
+    const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
   },
   getAll() {
