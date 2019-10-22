@@ -169,7 +169,6 @@ export default {
       this.updateRepository(false);
     },
     async train(repositoryUUID) {
-      const { ownerNickname, slug } = this.$route.params;
       this.training = true;
       try {
         const response = await this.trainRepository({ repositoryUUID });
