@@ -61,9 +61,9 @@ export default {
     });
     return request.$http.get(`/v2/repository/evaluate/results/1/?${queryString}`);
   },
-  runEvaluate(owner, slug, language) {
+  runEvaluate(repositoryUUID, language) {
     return request.$http.post(
-      `/repository/${owner}/${slug}/evaluate/`,
+      `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
       {
         language,
       },

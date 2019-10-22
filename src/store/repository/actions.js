@@ -21,15 +21,15 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { ownerNickname, slug }) {
+  trainRepository(store, { repositoryUUID }) {
     /* istanbul ignore next */
-    return repository.train(ownerNickname, slug);
+    return repository.train(repositoryUUID);
   },
   analyzeText(store, {
-    ownerNickname, slug, language, text,
+    repositoryUUID, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(ownerNickname, slug, language, text);
+    return repository.analyze(repositoryUUID, language, text);
   },
   async getEditRepositorySchema(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
