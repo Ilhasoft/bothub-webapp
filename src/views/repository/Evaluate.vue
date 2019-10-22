@@ -169,8 +169,7 @@ export default {
       this.evaluating = true;
       try {
         const result = await this.runNewEvaluate({
-          owner: this.repository.owner__nickname,
-          slug: this.repository.slug,
+          repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,
         });
         this.evaluating = false;
