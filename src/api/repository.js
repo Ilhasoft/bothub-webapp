@@ -22,9 +22,9 @@ export default {
   train(repositoryUUID) {
     return request.$http.get(`/v2/repository/repository-info/${repositoryUUID}/train/`);
   },
-  analyze(ownerNickname, slug, language, text) {
+  analyze(repositoryUUID, language, text) {
     return request.$http.post(
-      `/v1/repository/${ownerNickname}/${slug}/analyze/`,
+      `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
       {
         language,
         text,
