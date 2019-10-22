@@ -164,7 +164,7 @@ export default {
               (data && data.detail)
               || 'Something unexpected happened! We couldn’t analyze your text.',
             type: 'danger',
-            time: 50000,
+            time: 5000,
           });
         } else if (data) {
           this.errors = data;
