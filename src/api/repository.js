@@ -73,7 +73,7 @@ export default {
   },
   updateAuthorizationRole(repositoryUuid, userNickname, role) {
     return request.$http.patch(
-      `/authorization-role/${repositoryUuid}/${userNickname}/`,
+      `/v2/repository/authorizations/${repositoryUuid}/${userNickname}/`,
       { role },
     );
   },
@@ -100,8 +100,10 @@ export default {
     });
     return new utils.List(`/v2/repository/authorization-requests/?${queryString}`);
   },
-  approveRequestAuthorization(id) {
-    return request.$http.put(`/v2/repository/authorization-requests/${id}/`);
+  approveRequestAuthorization(repositoryUuid, id) {
+    return request.$http.put(`/v2/repository/authorization-requests/${id}/`, {
+      repository: repositoryUuid,
+    });
   },
   rejectRequestAuthorization(id) {
     return request.$http.delete(`/v2/repository/authorization-requests/${id}/`);

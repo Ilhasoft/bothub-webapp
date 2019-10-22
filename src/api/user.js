@@ -5,9 +5,9 @@ import utils from './utils';
 
 
 export default {
-  profile() {
+  profile(nickname) {
     return request.$http.get(
-      'v2/account/my-profile/',
+      `v2/account/user-profile/${nickname}/`,
     );
   },
   myProfile() {
