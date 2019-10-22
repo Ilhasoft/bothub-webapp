@@ -66,7 +66,7 @@
       :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train()" />
+      @train="train(repository.uuid)" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
@@ -168,11 +168,11 @@ export default {
       this.repository.examples__count -= 1;
       this.updateRepository(false);
     },
-    async train() {
+    async train(repositoryUUID) {
       const { ownerNickname, slug } = this.$route.params;
       this.training = true;
       try {
-        const response = await this.trainRepository({ ownerNickname, slug });
+        const response = await this.trainRepository({ repositoryUUID });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {
