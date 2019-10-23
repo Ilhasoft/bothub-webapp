@@ -4,7 +4,7 @@
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
     <div class="bh-grid__item bh-grid__item--grow-1">
-      <div><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></div>
+      <div><strong>{{ getProfile(user__nickname).nickname || user__nickname }}</strong></div>
       <div><small>{{ text }}</small></div>
     </div>
     <div class="bh-grid__item bh-grid__item--grow-0">
@@ -82,7 +82,10 @@ export default {
     },
     async approve() {
       try {
-        await this.approveRequestAuthorization({ id: this.id });
+        await this.approveRequestAuthorization({
+          id: this.id,
+          repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+        });
         this.$emit('deleted');
       } catch (e) {
         this.handlerError(e);
@@ -96,7 +99,10 @@ export default {
           type: 'is-danger',
           onConfirm: async () => {
             try {
-              await this.rejectRequestAuthorization({ id: this.id });
+              await this.removeAuthorization({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
               this.$emit('deleted');
             } catch (e) {
               this.handlerError(e);
