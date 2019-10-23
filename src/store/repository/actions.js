@@ -95,6 +95,9 @@ export default {
   approveRequestAuthorization(store, { repositoryUuid, id }) {
     return repository.approveRequestAuthorization(repositoryUuid, id);
   },
+  removeAuthorization(store, { repositoryUuid, id }) {
+    return repository.removeAuthorization(repositoryUuid, id);
+  },
   rejectRequestAuthorization(store, { id }) {
     return repository.rejectRequestAuthorization(id);
   },

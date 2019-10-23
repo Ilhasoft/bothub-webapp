@@ -99,7 +99,10 @@ export default {
           type: 'is-danger',
           onConfirm: async () => {
             try {
-              await this.rejectRequestAuthorization({ id: this.id });
+              await this.removeAuthorization({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
               this.$emit('deleted');
             } catch (e) {
               this.handlerError(e);

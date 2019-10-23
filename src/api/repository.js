@@ -94,6 +94,11 @@ export default {
       },
     );
   },
+  removeAuthorization(repositoryUuid, id) {
+    return request.$http.delete(`/v2/repository/authorization-requests/${id}/`, {
+      repository: repositoryUuid,
+    });
+  },
   getAuthorizationRequestsList(repositoryUuid) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
