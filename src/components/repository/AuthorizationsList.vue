@@ -49,9 +49,12 @@ export default {
         this.authorizationsList = await this.repositoryAuthorizationList({
           repositoryUuid: this.repositoryUuid,
         });
+        console.log(this.authorizationsList);
       }
     },
     onEdit(value) {
+      console.log(value);
+
       this.$emit('edit', value);
     },
   },

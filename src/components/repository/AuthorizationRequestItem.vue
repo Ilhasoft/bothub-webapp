@@ -71,7 +71,7 @@ export default {
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
       'approveRequestAuthorization',
-      'rejectRequestAuthorization',
+      'removeAuthorization',
     ]),
     async updateUserProfile() {
       try {

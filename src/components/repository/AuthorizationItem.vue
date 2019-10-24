@@ -54,6 +54,10 @@ export default {
     RoleSelect,
   },
   props: {
+    // id: {
+    //   type: Number,
+    //   required: true,
+    // },
     uuid: {
       type: String,
       required: true,
@@ -109,7 +113,7 @@ export default {
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
       'approveRequestAuthorization',
-      'rejectRequestAuthorization',
+      'removeAuthorization',
     ]),
     async remove() {
       return new Promise((resolve, reject) => {
@@ -120,10 +124,9 @@ export default {
           onConfirm: async () => {
             this.submitting = true;
             try {
-              await this.repositoryUpdateAuthorizationRole({
-                repositoryUuid: this.repository,
-                userNickname: this.user__nickname,
-                newRole: ROLE_NOT_SETTED,
+              await this.removeAuthorization({
+                id: this.uuid,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
               });
               this.$emit('deleted');
             } catch (error) {
@@ -145,12 +148,12 @@ export default {
       this.submitting = true;
       this.submitted = false;
       try {
-        await this.repositoryUpdateAuthorizationRole({
-          repositoryUuid: this.repository,
-          userNickname: this.user__nickname,
-          newRole: this.newRole,
-        });
-        this.submitted = true;
+        // await this.repositoryUpdateAuthorizationRole({
+        //   repositoryUuid: this.repository,
+        //   userNickname: this.user__nickname,
+        //   newRole: this.newRole,
+        // });
+        // this.submitted = true;
         this.$emit('roleChanged');
       } catch (error) {
         this.handlerError(error);
