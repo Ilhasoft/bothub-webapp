@@ -54,10 +54,10 @@ export default {
     RoleSelect,
   },
   props: {
-    // id: {
-    //   type: Number,
-    //   required: true,
-    // },
+    id_request_authorizations: {
+      type: Number,
+      required: true,
+    },
     uuid: {
       type: String,
       required: true,
@@ -125,7 +125,7 @@ export default {
             this.submitting = true;
             try {
               await this.removeAuthorization({
-                id: this.uuid,
+                id: this.id_request_authorizations,
                 repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
               });
               this.$emit('deleted');
@@ -148,12 +148,12 @@ export default {
       this.submitting = true;
       this.submitted = false;
       try {
-        // await this.repositoryUpdateAuthorizationRole({
-        //   repositoryUuid: this.repository,
-        //   userNickname: this.user__nickname,
-        //   newRole: this.newRole,
-        // });
-        // this.submitted = true;
+        await this.repositoryUpdateAuthorizationRole({
+          repositoryUuid: this.repository,
+          userNickname: this.user__nickname,
+          newRole: this.newRole,
+        });
+        this.submitted = true;
         this.$emit('roleChanged');
       } catch (error) {
         this.handlerError(error);

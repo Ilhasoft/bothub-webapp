@@ -16,7 +16,7 @@ export default {
     );
   },
   myRepositories() {
-    return new utils.List('/v2/repository/repositories/');
+    return new utils.List('/v2/repository/search-repositories/');
   },
   async getMyProfileSchema() {
     const { data } = await request.$http.options('/v2/account/my-profile/');
