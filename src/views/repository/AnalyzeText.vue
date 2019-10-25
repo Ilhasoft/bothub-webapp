@@ -14,8 +14,8 @@
             <div class="repository-analyze-text__item">
               <p><strong>URL:</strong></p>
               <bh-highlighted-pre
-                :code="parseUrl"
-                code-class="plaintext" />
+                code-class="plaintext">{{
+                  repository.nlp_server }}parse/</bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>Header:</strong></p>
@@ -110,11 +110,7 @@ export default {
     UpdatesList,
   },
   extends: RepositoryBase,
-  computed: {
-    parseUrl() {
-      return `${process.env.BOTHUB_NLP_BASE_URL}parse/`;
-    },
-  },
+  computed: {},
 };
 </script>
 

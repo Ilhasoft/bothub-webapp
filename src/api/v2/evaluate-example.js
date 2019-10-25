@@ -7,7 +7,7 @@ import utils from '@/api/utils';
 export default {
   new(repository, text, language, entities, intent) {
     return request.$http.post(
-      '/v2/evaluate/',
+      '/v2/repository/evaluate/',
       {
         repository,
         text,
@@ -19,7 +19,7 @@ export default {
   },
   update(repository, text, language, entities, intent, id) {
     return request.$http.patch(
-      `/v2/evaluate/${id}/`,
+      `/v2/repository/evaluate/${id}/`,
       {
         repository,
         text,
@@ -33,37 +33,37 @@ export default {
     return this.search(repositoryUuid);
   },
   get(repositoryUuid) {
-    return request.$http.get(`/v2/evaluate?repository_uuid=${repositoryUuid}`);
+    return request.$http.get(`/v2/repository/evaluate?repository_uuid=${repositoryUuid}`);
   },
   delete(exampleId) {
-    return request.$http.delete(`/v2/evaluate/${exampleId}/`);
+    return request.$http.delete(`/v2/repository/evaluate/${exampleId}/`);
   },
   search(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return new utils.List(`/v2/evaluate/?${queryString}`);
+    return new utils.List(`/v2/repository/evaluate/?${queryString}`);
   },
   getResultsData(repositoryUuid, resultId) {
-    return request.$http.get(`/v2/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
+    return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
   getAllResultsLog(repositoryUuid, resultId) {
-    return request.$http.get(`/v2/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
+    return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
   allVersions(repositoryUuid) {
-    return new utils.List(`/v2/evaluate/results?repository_uuid=${repositoryUuid}`);
+    return new utils.List(`/v2/repository/evaluate/results?repository_uuid=${repositoryUuid}`);
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return request.$http.get(`/v2/evaluate/results/1/?${queryString}`);
+    return request.$http.get(`/v2/repository/evaluate/results/1/?${queryString}`);
   },
-  runEvaluate(owner, slug, language) {
+  runEvaluate(repositoryUUID, language) {
     return request.$http.post(
-      `/repository/${owner}/${slug}/evaluate/`,
+      `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
       {
         language,
       },

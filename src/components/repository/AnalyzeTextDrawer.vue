@@ -98,12 +98,9 @@ import { mapActions } from 'vuex';
 export default {
   name: 'AnalyzeTextDrawer',
   props: {
-    ownerNickname: {
+    repositoryUuid: {
       type: String,
-      required: true,
-    },
-    slug: {
-      type: String,
+      default: null,
       required: true,
     },
     defaultLanguage: {
@@ -146,8 +143,7 @@ export default {
       this.errors = null;
       try {
         const response = await this.analyzeText({
-          ownerNickname: this.ownerNickname,
-          slug: this.slug,
+          repositoryUUID: this.repositoryUuid,
           language: this.data.language || this.availableLanguages[0],
           text: this.data.text,
         });
@@ -164,7 +160,7 @@ export default {
               (data && data.detail)
               || 'Something unexpected happened! We couldn’t analyze your text.',
             type: 'danger',
-            time: 50000,
+            time: 5000,
           });
         } else if (data) {
           this.errors = data;

@@ -21,15 +21,15 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { ownerNickname, slug }) {
+  trainRepository(store, { repositoryUUID }) {
     /* istanbul ignore next */
-    return repository.train(ownerNickname, slug);
+    return repository.train(repositoryUUID);
   },
   analyzeText(store, {
-    ownerNickname, slug, language, text,
+    repositoryUUID, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(ownerNickname, slug, language, text);
+    return repository.analyze(repositoryUUID, language, text);
   },
   async getEditRepositorySchema(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
@@ -92,8 +92,11 @@ export default {
   repositoryAuthorizationRequestsList(store, { repositoryUuid }) {
     return repository.getAuthorizationRequestsList(repositoryUuid);
   },
-  approveRequestAuthorization(store, { id }) {
-    return repository.approveRequestAuthorization(id);
+  approveRequestAuthorization(store, { repositoryUuid, id }) {
+    return repository.approveRequestAuthorization(repositoryUuid, id);
+  },
+  removeAuthorization(store, { repositoryUuid, id }) {
+    return repository.removeAuthorization(repositoryUuid, id);
   },
   rejectRequestAuthorization(store, { id }) {
     return repository.rejectRequestAuthorization(id);
