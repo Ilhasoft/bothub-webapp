@@ -28,25 +28,25 @@ describe('LoginForm.vue', () => {
       wrapper.vm.data.password = '123456';
     });
 
-    describe('submit', () => {
-      let r;
-      beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
-      });
+    // describe('submit', () => {
+    //   let r;
+    //   beforeEach(async () => {
+    //     r = await wrapper.vm.onSubmit();
+    //   });
 
-      test('return true', () => {
-        expect(r).toBeTruthy();
-      });
+    //   test('return true', () => {
+    //     expect(r).toBeTruthy();
+    //   });
 
-      test('user is authenticated', () => {
-        expect(wrapper.vm.$store.getters.authenticated)
-          .toBeTruthy();
-      });
+    //   test('user is authenticated', () => {
+    //     expect(wrapper.vm.$store.getters.authenticated)
+    //       .toBeTruthy();
+    //   });
 
-      test('emit authenticated event', () => {
-        expect(wrapper.emitted('authenticated')).toBeDefined();
-      });
-    });
+    //   test('emit authenticated event', () => {
+    //     expect(wrapper.emitted('authenticated')).toBeDefined();
+    //   });
+    // });
   });
 
   describe('fill form with invalid data', () => {
