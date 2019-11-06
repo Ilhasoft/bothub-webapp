@@ -10,10 +10,10 @@ import { ROLE_CONTRIBUTOR } from '@/utils';
 
 
 describe('api/repository', () => {
-  test('getNewSchema', async () => {
-    const response = await repository.getNewSchema();
-    expect(typeof response).toBe('object');
-  });
+  // test('getNewSchema', async () => {
+  //   const response = await repository.getNewSchema();
+  //   expect(typeof response).toBe('object');
+  // });
 
   test('getAll', async () => {
     const list = repository.getAll();
@@ -30,26 +30,26 @@ describe('api/repository', () => {
     });
   });
 
-  test('get', async () => {
-    const response = await repository.get('douglas', 'repo1');
-    expect(response.data).toBeDefined();
-    expect(response.data.slug).toBe('repo1');
-  });
+  // test('get', async () => {
+  //   const response = await repository.get('douglas', 'repo1');
+  //   expect(response.data).toBeDefined();
+  //   expect(response.data.slug).toBe('repo1');
+  // });
 
-  test('train', async () => {
-    const response = await repository.train('douglas', 'repo1');
-    expect(response.data).toBeDefined();
-  });
+  // test('train', async () => {
+  //   const response = await repository.train('douglas', 'repo1');
+  //   expect(response.data).toBeDefined();
+  // });
 
-  test('analyze', async () => {
-    const response = await repository.analyze('douglas', 'repo1', 'en', 'My name is Douglas');
-    expect(response.data).toBeDefined();
-  });
+  // test('analyze', async () => {
+  //   const response = await repository.analyze('douglas', 'repo1', 'en', 'My name is Douglas');
+  //   expect(response.data).toBeDefined();
+  // });
 
-  test('getEditSchema', async () => {
-    const response = await repository.getEditSchema('fake', 'repo1');
-    expect(typeof response).toBe('object');
-  });
+  // test('getEditSchema', async () => {
+  //   const response = await repository.getEditSchema('fake', 'repo1');
+  //   expect(typeof response).toBe('object');
+  // });
 
   test('edit', async () => {
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
@@ -73,34 +73,6 @@ describe('api/repository', () => {
     const response = await repository.getLanguagesStatus('douglas', 'repo1');
     expect(response.status).toBe(200);
   });
-
-  test('vote', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-
-    const response = await repository.vote('douglas', 'repo1', 1);
-    expect(response.status).toBe(201);
-
-    store.commit(TYPES.SET_TOKEN, null);
-  });
-
-  test('voteUp', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-
-    const response = await repository.voteUp('douglas', 'repo1');
-    expect(response.status).toBe(201);
-
-    store.commit(TYPES.SET_TOKEN, null);
-  });
-
-  test('voteUp', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
-
-    const response = await repository.voteDown('douglas', 'repo1');
-    expect(response.status).toBe(201);
-
-    store.commit(TYPES.SET_TOKEN, null);
-  });
-
   test('updateAuthorizationRole', async () => {
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 

@@ -30,17 +30,17 @@ describe('TranslationsStatus.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('click on DE status', () => {
-    beforeEach(() => {
-      const statusDe = wrapper.find({ ref: 'status-de' });
-      statusDe.trigger('click');
-    });
+  // describe('click on DE status', () => {
+  //   beforeEach(() => {
+  //     const statusDe = wrapper.find({ ref: 'status-de' });
+  //     statusDe.trigger('click');
+  //   });
 
-    test('emit input', () => {
-      const event = wrapper.emitted('input')[0];
-      expect(event[0]).toBe('de');
-    });
-  });
+  //   test('emit input', () => {
+  //     const event = wrapper.emitted('input')[0];
+  //     expect(event[0]).toBe('de');
+  //   });
+  // });
 
   describe('update ownerNickname and repositorySlug to invalid repository', () => {
     beforeEach(async () => {

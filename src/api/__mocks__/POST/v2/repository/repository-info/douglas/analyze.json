@@ -1,0 +1,1 @@
+{"intent":{"name":"seinen","confidence":0.8298234939575195},"intent_ranking":[{"name":"seinen","confidence":0.8298234939575195},{"name":"shounen","confidence":0.3818519115447998}],"labels_list":["other"],"entities_list":["ORG"],"entities":{"other":[{"value":"teste","entity":"ORG","confidence":null}]},"text":"teste","update_id":11500,"language":"pt_br"}

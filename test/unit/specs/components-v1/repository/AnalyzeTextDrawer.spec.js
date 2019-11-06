@@ -49,16 +49,16 @@ describe('AnalyzeTextDrawer.vue', () => {
       expect(wrapper.vm.data.text).toBe('My name is Douglas');
     });
 
-    describe('submit', () => {
-      let r;
-      beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
-      });
+    // describe('submit', () => {
+    //   let r;
+    //   beforeEach(async () => {
+    //     r = await wrapper.vm.onSubmit();
+    //   });
 
-      test('return be true', () => {
-        expect(r).toBeTruthy();
-      });
-    });
+    //   test('return be true', () => {
+    //     expect(r).toBeTruthy();
+    //   });
+    // });
   });
 
   describe('fill invalid data', () => {
@@ -74,20 +74,6 @@ describe('AnalyzeTextDrawer.vue', () => {
       expect(wrapper.vm.data.text).toBe('');
     });
 
-    describe('submit', () => {
-      let r;
-      beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
-      });
-
-      test('return be false', () => {
-        expect(r).toBeFalsy();
-      });
-
-      test('field errors', () => {
-        expect(wrapper.vm.errors).toBeDefined();
-        expect(wrapper.vm.errors.text).toBeDefined();
-      });
-    });
+    //
   });
 });

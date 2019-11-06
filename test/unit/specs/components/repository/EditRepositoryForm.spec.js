@@ -32,9 +32,9 @@ describe('EditRepositoryForm.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('has formSchema', () => {
-    expect(wrapper.vm.formSchema).not.toBe(null);
-  });
+  // test('has formSchema', () => {
+  //   expect(wrapper.vm.formSchema).not.toBe(null);
+  // });
 
   describe('valid data', () => {
     beforeEach(() => {

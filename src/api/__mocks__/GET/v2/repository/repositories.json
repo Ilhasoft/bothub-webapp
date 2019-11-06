@@ -1,0 +1,866 @@
+[
+  {
+    "response": {
+      "status": 200,
+      "data": {
+        "count": 45,
+        "next": "http://localhost:8000/api/repositories/?limit=20&offset=20",
+        "previous": null,
+        "results": [
+          {
+            "uuid": "4c49b02a-8c6f-4e99-b758-8b407fe1ee4e",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 1",
+            "slug": "repo1",
+            "language": "en",
+            "available_languages": [
+              "pt",
+              "en"
+            ],
+            "categories": [
+              1,
+              2,
+              4
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              },
+              {
+                "id": 2,
+                "name": "Category 2"
+              },
+              {
+                "id": 4,
+                "name": "Category 4"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.848387Z"
+          },
+          {
+            "uuid": "66767458-be78-48bd-834f-7ba3cf5c1685",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 2",
+            "slug": "repo2",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1,
+              3
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              },
+              {
+                "id": 3,
+                "name": "Category 3"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.862884Z"
+          },
+          {
+            "uuid": "67d1d108-e268-4432-88a1-b0ebec778048",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 3",
+            "slug": "repo3",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              5
+            ],
+            "categories_list": [
+              {
+                "id": 5,
+                "name": "Category 5"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.872037Z"
+          },
+          {
+            "uuid": "880183d3-cf65-48fc-8a9c-8d96acb99cef",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 4",
+            "slug": "repo4",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              2
+            ],
+            "categories_list": [
+              {
+                "id": 2,
+                "name": "Category 2"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.878659Z"
+          },
+          {
+            "uuid": "073708d5-a2d6-419b-9c89-19f1dd50a737",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 5",
+            "slug": "repo5",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              4
+            ],
+            "categories_list": [
+              {
+                "id": 4,
+                "name": "Category 4"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.885470Z"
+          },
+          {
+            "uuid": "b98bec1b-8f70-4934-8c5b-4d78ab753074",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 6",
+            "slug": "repo6",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              4
+            ],
+            "categories_list": [
+              {
+                "id": 4,
+                "name": "Category 4"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.892899Z"
+          },
+          {
+            "uuid": "fee70127-c945-4608-9fa4-13b8a7dc59fc",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 7",
+            "slug": "repo7",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              2
+            ],
+            "categories_list": [
+              {
+                "id": 2,
+                "name": "Category 2"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.900572Z"
+          },
+          {
+            "uuid": "d8232cb7-dc59-481c-ab4b-1c2d578559a3",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 8",
+            "slug": "repo8",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              5
+            ],
+            "categories_list": [
+              {
+                "id": 5,
+                "name": "Category 5"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.907799Z"
+          },
+          {
+            "uuid": "69a1155e-d99b-4c23-834c-11a86a30f30d",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 9",
+            "slug": "repo9",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              5
+            ],
+            "categories_list": [
+              {
+                "id": 5,
+                "name": "Category 5"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.915220Z"
+          },
+          {
+            "uuid": "9b6eb5f6-959c-416f-be2e-ba247da763d5",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 10",
+            "slug": "repo10",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              2
+            ],
+            "categories_list": [
+              {
+                "id": 2,
+                "name": "Category 2"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.921484Z"
+          },
+          {
+            "uuid": "08ef4314-4891-46d7-ab3c-a23d01782352",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 11",
+            "slug": "repo11",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              5
+            ],
+            "categories_list": [
+              {
+                "id": 5,
+                "name": "Category 5"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.928985Z"
+          },
+          {
+            "uuid": "b74df71d-c88c-4963-a7f1-45b688ce1504",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 12",
+            "slug": "repo12",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              4
+            ],
+            "categories_list": [
+              {
+                "id": 4,
+                "name": "Category 4"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.936286Z"
+          },
+          {
+            "uuid": "4cb5a81c-8918-4b74-8425-a7917b02abad",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 13",
+            "slug": "repo13",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.942493Z"
+          },
+          {
+            "uuid": "b56ec366-c6ab-4a09-81f9-8b18d6c7d0cf",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 14",
+            "slug": "repo14",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.965394Z"
+          },
+          {
+            "uuid": "5c629446-d353-4c92-acbc-5fc2d1f97dd7",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 15",
+            "slug": "repo15",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              5
+            ],
+            "categories_list": [
+              {
+                "id": 5,
+                "name": "Category 5"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.973505Z"
+          },
+          {
+            "uuid": "8e42ef85-a099-4e99-9c89-433747a06931",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 16",
+            "slug": "repo16",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.988939Z"
+          },
+          {
+            "uuid": "097cd930-0efe-4921-a76c-d423c9138c8e",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 17",
+            "slug": "repo17",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              3
+            ],
+            "categories_list": [
+              {
+                "id": 3,
+                "name": "Category 3"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.996170Z"
+          },
+          {
+            "uuid": "cd300f93-4f35-4885-8d65-7096fcedc583",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 18",
+            "slug": "repo18",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.001486Z"
+          },
+          {
+            "uuid": "5b89d854-8f86-4f41-a924-53f63c8a74fc",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 19",
+            "slug": "repo19",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.007797Z"
+          },
+          {
+            "uuid": "bd0e7074-6634-49d7-8db8-56bc3e0f0cb8",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 20",
+            "slug": "repo20",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.015236Z"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "query_string": {
+      "categories": "1"
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "count": 15,
+        "next": null,
+        "previous": null,
+        "results": [
+          {
+            "uuid": "4c49b02a-8c6f-4e99-b758-8b407fe1ee4e",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 1",
+            "slug": "repo1",
+            "language": "en",
+            "available_languages": [
+              "pt",
+              "en"
+            ],
+            "categories": [
+              1,
+              2,
+              4
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              },
+              {
+                "id": 2,
+                "name": "Category 2"
+              },
+              {
+                "id": 4,
+                "name": "Category 4"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.848387Z"
+          },
+          {
+            "uuid": "66767458-be78-48bd-834f-7ba3cf5c1685",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 2",
+            "slug": "repo2",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1,
+              3
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              },
+              {
+                "id": 3,
+                "name": "Category 3"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.862884Z"
+          },
+          {
+            "uuid": "4cb5a81c-8918-4b74-8425-a7917b02abad",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 13",
+            "slug": "repo13",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.942493Z"
+          },
+          {
+            "uuid": "b56ec366-c6ab-4a09-81f9-8b18d6c7d0cf",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 14",
+            "slug": "repo14",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.965394Z"
+          },
+          {
+            "uuid": "8e42ef85-a099-4e99-9c89-433747a06931",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 16",
+            "slug": "repo16",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:37.988939Z"
+          },
+          {
+            "uuid": "cd300f93-4f35-4885-8d65-7096fcedc583",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 18",
+            "slug": "repo18",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.001486Z"
+          },
+          {
+            "uuid": "5b89d854-8f86-4f41-a924-53f63c8a74fc",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 19",
+            "slug": "repo19",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.007797Z"
+          },
+          {
+            "uuid": "bd0e7074-6634-49d7-8db8-56bc3e0f0cb8",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 20",
+            "slug": "repo20",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.015236Z"
+          },
+          {
+            "uuid": "56336626-67e1-42b8-a3e1-28083dd25c4a",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 21",
+            "slug": "repo21",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.033723Z"
+          },
+          {
+            "uuid": "3cdc5afd-9e14-420b-851b-854648b5e56a",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 23",
+            "slug": "repo23",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.096827Z"
+          },
+          {
+            "uuid": "37db2835-1189-4c42-8157-d62f4c66493b",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 26",
+            "slug": "repo26",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.121104Z"
+          },
+          {
+            "uuid": "f2e71bf3-2811-413b-bfbb-6b8cd65d7311",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 33",
+            "slug": "repo33",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.233245Z"
+          },
+          {
+            "uuid": "ee4804ae-b581-4129-981a-8509f37dee54",
+            "owner": 3,
+            "owner__nickname": "user",
+            "name": "Repository 34",
+            "slug": "repo34",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.263277Z"
+          },
+          {
+            "uuid": "8a8af331-29e1-46bd-866a-c03c274e3f3a",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 43",
+            "slug": "repo43",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.354302Z"
+          },
+          {
+            "uuid": "152361bf-ef03-42f0-91ce-a59e11aed84f",
+            "owner": 2,
+            "owner__nickname": "fake",
+            "name": "Repository 44",
+            "slug": "repo44",
+            "language": "en",
+            "available_languages": [
+              "en"
+            ],
+            "categories": [
+              1
+            ],
+            "categories_list": [
+              {
+                "id": 1,
+                "name": "Category 1"
+              }
+            ],
+            "description": "",
+            "is_private": false,
+            "created_at": "2018-04-30T12:32:38.360868Z"
+          }
+        ]
+      }
+    }
+  }
+]
