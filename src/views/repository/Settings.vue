@@ -92,6 +92,7 @@ export default {
         algorithm,
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
+        use_analyze_char: useAnalyzeChar,
       } = this.repository;
       return {
         name,
@@ -105,6 +106,7 @@ export default {
         algorithm,
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
+        use_analyze_char: useAnalyzeChar,
       };
     },
     onEdited(repository) {

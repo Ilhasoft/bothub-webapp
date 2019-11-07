@@ -48,6 +48,8 @@ export default {
     algorithm,
     use_competing_intents: useCompetingIntents,
     use_name_entities: useNameEntities,
+    use_analyze_char: useAnalyzeChar,
+    repositoryUuid,
   }) {
     return repository.edit(
       ownerNickname,
@@ -61,6 +63,8 @@ export default {
       algorithm,
       useCompetingIntents,
       useNameEntities,
+      useAnalyzeChar,
+      repositoryUuid,
     );
   },
   getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {

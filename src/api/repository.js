@@ -36,9 +36,9 @@ export default {
     return data.actions.POST;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
-    algorithm, useCompetingIntents, useNameEntities) {
+    algorithm, useCompetingIntents, useNameEntities, useAnalyzeChar, repositoryUuid) {
     return request.$http.patch(
-      `/v1/repository/${ownerNickname}/${slug}/`,
+      `/v2/repository/repository-info/${repositoryUuid}/`,
       {
         name,
         slug: newSlug,
@@ -49,6 +49,7 @@ export default {
         algorithm,
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
+        use_analyze_char: useAnalyzeChar,
       },
     );
   },

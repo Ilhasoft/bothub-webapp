@@ -64,13 +64,9 @@ export default {
           repositoryUuid: this.repositoryUuid,
           ...this.data,
         });
-        console.log(response, 'heree');
-
         this.$emit('requested', response.data);
         return true;
       } catch (error) {
-        console.log(error, 'errrrrrrooooorr');
-
         const data = error.response && error.response.data;
         if (data) {
           this.errors = data;
