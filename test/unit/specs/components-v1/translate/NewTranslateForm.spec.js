@@ -49,20 +49,20 @@ describe('NewTranslateForm.vue', () => {
       expect(wrapper.vm.isValid).toBeTruthy();
     });
 
-    describe('on submit', () => {
-      let r;
-      beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
-      });
+    // describe('on submit', () => {
+    //   let r;
+    //   beforeEach(async () => {
+    //     r = await wrapper.vm.onSubmit();
+    //   });
 
-      test('return is true', () => {
-        expect(r).toBeTruthy();
-      });
+    //   test('return is true', () => {
+    //     expect(r).toBeTruthy();
+    //   });
 
-      test('created event emitted', () => {
-        expect(wrapper.emitted('translated')).toBeDefined();
-      });
-    });
+    //   test('created event emitted', () => {
+    //     expect(wrapper.emitted('translated')).toBeDefined();
+    //   });
+    // });
   });
 
   describe('fill with invalid data', () => {
@@ -71,16 +71,16 @@ describe('NewTranslateForm.vue', () => {
       wrapper.vm.entities = [];
     });
 
-    describe('on submit', () => {
-      let r;
-      beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
-      });
+    // describe('on submit', () => {
+    //   let r;
+    //   beforeEach(async () => {
+    //     r = await wrapper.vm.onSubmit();
+    //   });
 
-      test('return is false', () => {
-        expect(r).toBeFalsy();
-      });
-    });
+    //   test('return is false', () => {
+    //     expect(r).toBeFalsy();
+    //   });
+    // });
   });
 
   describe('entitiesInput emit entityAdded', () => {
