@@ -164,7 +164,10 @@ export default {
               this.$emit('deleted');
               resolve();
             } else {
-              await this.deleteEvaluateExample({ id: this.id });
+              await this.deleteEvaluateExample({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
               this.$emit('deleted');
               resolve();
             }

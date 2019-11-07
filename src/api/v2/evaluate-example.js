@@ -35,8 +35,8 @@ export default {
   get(repositoryUuid) {
     return request.$http.get(`/v2/repository/evaluate?repository_uuid=${repositoryUuid}`);
   },
-  delete(exampleId) {
-    return request.$http.delete(`/v2/repository/evaluate/${exampleId}/`);
+  delete(exampleId, repositoryUuid) {
+    return request.$http.delete(`/v2/repository/evaluate/${exampleId}/?repository_uuid=${repositoryUuid}`);
   },
   search(repositoryUuid, query = {}) {
     const queryString = qs.stringify({

@@ -32,8 +32,8 @@ export default {
     );
   },
   async getEditSchema(ownerNickname, slug) {
-    const { data } = await request.$http.options(`/v1/repository/${ownerNickname}/${slug}/`);
-    return data.actions.PUT;
+    const { data } = await request.$http.options('/v2/repository/repository-info/');
+    return data.actions.POST;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
     algorithm, useCompetingIntents, useNameEntities) {

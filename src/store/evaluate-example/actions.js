@@ -19,8 +19,8 @@ export default {
     const response = await evaluateExample.all(repositoryUuid);
     return response;
   },
-  async deleteEvaluateExample(store, { id }) {
-    await evaluateExample.delete(id);
+  async deleteEvaluateExample(store, { id, repositoryUuid }) {
+    await evaluateExample.delete(id, repositoryUuid);
     return true;
   },
 
