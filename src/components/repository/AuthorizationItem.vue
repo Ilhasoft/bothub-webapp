@@ -44,7 +44,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
 import RoleSelect from '@/components-v1/inputs/RoleSelect';
-import { ROLE_NOT_SETTED } from '@/utils';
 
 
 export default {

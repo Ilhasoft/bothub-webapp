@@ -31,7 +31,7 @@ export default {
       },
     );
   },
-  async getEditSchema(ownerNickname, slug) {
+  async getEditSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
   },
