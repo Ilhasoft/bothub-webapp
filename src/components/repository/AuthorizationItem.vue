@@ -116,7 +116,7 @@ export default {
     ]),
     async remove() {
       return new Promise((resolve, reject) => {
-        this.removeDialog = this.$dialog.confirm({
+        this.removeDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure?',
           confirmText: 'Remove',
           type: 'is-danger',

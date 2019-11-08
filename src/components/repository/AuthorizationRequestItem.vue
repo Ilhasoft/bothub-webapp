@@ -93,7 +93,7 @@ export default {
     },
     reject() {
       return new Promise((resolve, reject) => {
-        this.rejectDialog = this.$dialog.confirm({
+        this.rejectDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure?',
           confirmText: 'Reject',
           type: 'is-danger',
