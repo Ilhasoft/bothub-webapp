@@ -57,9 +57,10 @@ describe('EditProfileForm.vue', () => {
     });
 
     describe('submit', () => {
-      let r;
+      // let r;
       beforeEach(async () => {
-        r = await wrapper.vm.onSubmit();
+        // r = await wrapper.vm.onSubmit();
+        await wrapper.vm.onSubmit();
       });
 
       test('no errors', () => {
