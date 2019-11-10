@@ -44,7 +44,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
 import RoleSelect from '@/components-v1/inputs/RoleSelect';
-import { ROLE_NOT_SETTED } from '@/utils';
 
 
 export default {
@@ -54,6 +53,10 @@ export default {
     RoleSelect,
   },
   props: {
+    id_request_authorizations: {
+      type: Number,
+      required: true,
+    },
     uuid: {
       type: String,
       required: true,
@@ -109,21 +112,20 @@ export default {
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
       'approveRequestAuthorization',
-      'rejectRequestAuthorization',
+      'removeAuthorization',
     ]),
     async remove() {
       return new Promise((resolve, reject) => {
-        this.removeDialog = this.$dialog.confirm({
+        this.removeDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure?',
           confirmText: 'Remove',
           type: 'is-danger',
           onConfirm: async () => {
             this.submitting = true;
             try {
-              await this.repositoryUpdateAuthorizationRole({
-                repositoryUuid: this.repository,
-                userNickname: this.user__nickname,
-                newRole: ROLE_NOT_SETTED,
+              await this.removeAuthorization({
+                id: this.id_request_authorizations,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
               });
               this.$emit('deleted');
             } catch (error) {

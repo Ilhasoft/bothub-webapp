@@ -154,7 +154,7 @@ export default {
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$dialog.confirm({
+        this.deleteDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure? The example will be deleted.',
           confirmText: 'Delete',
           type: 'is-danger',
@@ -164,7 +164,10 @@ export default {
               this.$emit('deleted');
               resolve();
             } else {
-              await this.deleteEvaluateExample({ id: this.id });
+              await this.deleteEvaluateExample({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
               this.$emit('deleted');
               resolve();
             }

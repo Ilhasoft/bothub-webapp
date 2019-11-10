@@ -54,16 +54,16 @@ describe('AuthorizationItem.vue', () => {
     });
   });
 
-  describe('remove', () => {
-    beforeEach(async () => {
-      const removePromise = wrapper.vm.remove();
-      await localVue.nextTick();
-      wrapper.vm.removeDialog.confirm();
-      await removePromise;
-    });
+  // describe('remove', () => {
+  //   beforeEach(async () => {
+  //     const removePromise = wrapper.vm.remove();
+  //     await localVue.nextTick();
+  //     wrapper.vm.removeDialog.confirm();
+  //     await removePromise;
+  //   });
 
-    test('emit deleted event', () => {
-      expect(wrapper.emitted('deleted')).toBeDefined();
-    });
-  });
+  //   test('emit deleted event', () => {
+  //     expect(wrapper.emitted('deleted')).toBeDefined();
+  //   });
+  // });
 });

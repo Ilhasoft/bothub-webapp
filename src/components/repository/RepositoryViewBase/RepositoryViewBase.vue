@@ -157,9 +157,8 @@
         </div>
       </div>
       <analyze-text-drawer
-        v-if="repository && repository.owner__nickname && repository.slug && authenticated"
-        :owner-nickname="repository.owner__nickname"
-        :slug="repository.slug"
+        v-if="repository && repository.uuid && authenticated"
+        :repository-uuid="repository.uuid"
         :default-language="repository.language"
         :available-languages="repository.available_languages" />
       <div
@@ -289,7 +288,7 @@ export default {
     },
   },
   mounted() {
-    this.updateMyProfile();
+    this.updateMyProfile('user');
   },
   methods: {
     ...mapActions([
