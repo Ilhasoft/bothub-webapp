@@ -37,8 +37,8 @@
             </div>
             <div class="footer-section-item">
               <p>Rua José Pontes de Magalhães 70,</p>
-              <p>JTR Ed. Espanha Sala 803,</p>
-              <p>Jatiúca - Maceió AL</p>
+              <p>Empresarial JTR - Ed. Austrália, Sala 07</p>
+              <p>Jatiúca - Maceió/AL</p>
             </div>
             <div class="footer-section-item">
               <p>+55 82 3022.5978</p>
