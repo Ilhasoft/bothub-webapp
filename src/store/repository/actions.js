@@ -31,9 +31,9 @@ export default {
     /* istanbul ignore next */
     return repository.analyze(repositoryUUID, language, text);
   },
-  async getEditRepositorySchema(store, { ownerNickname, slug }) {
+  async getEditRepositorySchema(store, { repositoryUuid }) {
     /* istanbul ignore next */
-    const response = await repository.getEditSchema(ownerNickname, slug);
+    const response = await repository.getEditSchema(repositoryUuid);
     return response;
   },
   editRepository(store, {

@@ -31,9 +31,9 @@ export default {
       },
     );
   },
-  async getEditSchema() {
-    const { data } = await request.$http.options('/v2/repository/repository-info/');
-    return data.actions.POST;
+  async getEditSchema(repositoryUuid) {
+    const { data } = await request.$http.options(`/v2/repository/repository-info/${repositoryUuid}/`);
+    return data.actions.PUT;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
     algorithm, useCompetingIntents, useNameEntities, useAnalyzeChar, repositoryUuid) {
