@@ -13,7 +13,7 @@
             :entities="entities"
             :available-entities="repository.entities"
             placeholder="Translate sentence"
-            size="medium"
+            size="normal"
             @textSelected="setTextSelected($event)" />
         </bh-field>
       </div>
@@ -22,7 +22,7 @@
           <bh-button
             :disabled="!isValid || submitting"
             secondary
-            size="medium"
+            size="normal"
             type="submit">Submit Translation</bh-button>
         </bh-field>
       </div>
@@ -37,7 +37,7 @@
             :text="text"
             :text-selected="textSelected"
             :available-entities="repository.entities"
-            custom-label-disabled
+            :available-add-label="false"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
         </bh-field>
@@ -150,9 +150,9 @@ export default {
 
         this.submitting = false;
         if (language) {
-          this.$toast.open({
+          this.$bhToastNotification({
             message: language.join(' '),
-            type: 'is-danger',
+            type: 'danger',
           });
         }
       }

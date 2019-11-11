@@ -14,6 +14,7 @@
         <bh-button
           :disabled="usersProfile.length === 0 || !role"
           type="submit"
+          size="small"
           primary>Invite</bh-button>
       </div>
     </div>
@@ -66,9 +67,9 @@ export default {
           const { response } = error;
           const { data } = response;
 
-          this.$toast.open({
+          this.$bhToastNotification({
             message: data.detail || 'Something wrong happened...',
-            type: 'is-danger',
+            type: 'danger',
           });
 
           if (!data.detail) {

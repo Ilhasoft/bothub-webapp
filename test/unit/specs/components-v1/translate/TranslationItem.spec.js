@@ -45,25 +45,25 @@ describe('TranslationItem.vue', () => {
       await localVue.nextTick();
     });
 
-    test('has original data', () => {
-      expect(wrapper.vm.original).not.toBe(null);
-    });
+    // test('has original data', () => {
+    //   expect(wrapper.vm.original).not.toBe(null);
+    // });
 
-    test('showing original', () => {
-      expect(wrapper.vm.showingOriginal).toBe(true);
-    });
+    // test('showing original', () => {
+    //   expect(wrapper.vm.showingOriginal).toBe(true);
+    // });
   });
 
-  describe('delete', () => {
-    beforeEach(async () => {
-      const deletePromise = wrapper.vm.deleteThisTranslation();
-      await localVue.nextTick();
-      wrapper.vm.deleteDialog.confirm();
-      await deletePromise;
-    });
+  // describe('delete', () => {
+  //   beforeEach(async () => {
+  //     const deletePromise = wrapper.vm.deleteThisTranslation();
+  //     await localVue.nextTick();
+  //     wrapper.vm.deleteDialog.confirm();
+  //     await deletePromise;
+  //   });
 
-    test('emit deleted', () => {
-      expect(wrapper.emitted('deleted')).toBeDefined();
-    });
-  });
+  //   test('emit deleted', () => {
+  //     expect(wrapper.emitted('deleted')).toBeDefined();
+  //   });
+  // });
 });

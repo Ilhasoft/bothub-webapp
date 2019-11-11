@@ -17,7 +17,7 @@
 
       <div class="expander__trigger__btns-wrapper">
         <div
-          v-if="repository.authorization && repository.authorization.can_contribute"
+          v-if="repository.authorization && repository.authorization.can_contribute && !training"
           class="level-right">
           <div class="level-item">
             <a
@@ -103,6 +103,10 @@ export default {
       type: String,
       default: '',
     },
+    training: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -130,6 +134,7 @@ export default {
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
+      'deleteExample',
     ]),
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -149,14 +154,23 @@ export default {
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$dialog.confirm({
+        this.deleteDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure? The example will be deleted.',
           confirmText: 'Delete',
           type: 'is-danger',
           onConfirm: async () => {
-            await this.deleteEvaluateExample({ id: this.id });
-            this.$emit('deleted');
-            resolve();
+            if (this.training) {
+              await this.deleteExample({ id: this.id });
+              this.$emit('deleted');
+              resolve();
+            } else {
+              await this.deleteEvaluateExample({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
+              this.$emit('deleted');
+              resolve();
+            }
           },
           onCancel: () => {
             /* istanbul ignore next */

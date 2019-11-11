@@ -19,8 +19,8 @@ export default {
     const response = await evaluateExample.all(repositoryUuid);
     return response;
   },
-  async deleteEvaluateExample(store, { id }) {
-    await evaluateExample.delete(id);
+  async deleteEvaluateExample(store, { id, repositoryUuid }) {
+    await evaluateExample.delete(id, repositoryUuid);
     return true;
   },
 
@@ -32,8 +32,8 @@ export default {
     const response = await entity.search(repositoryUuid, { value });
     return response;
   },
-  async runNewEvaluate(store, { owner, slug, language }) {
-    const response = await evaluateExample.runEvaluate(owner, slug, language);
+  async runNewEvaluate(store, { repositoryUUID, language }) {
+    const response = await evaluateExample.runEvaluate(repositoryUUID, language);
     return response;
   },
   getAllVersions(store, { repositoryUuid }) {

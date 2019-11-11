@@ -169,8 +169,7 @@ export default {
       this.evaluating = true;
       try {
         const result = await this.runNewEvaluate({
-          owner: this.repository.owner__nickname,
-          slug: this.repository.slug,
+          repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,
         });
         this.evaluating = false;
@@ -182,10 +181,10 @@ export default {
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$toast.open({
+        this.$bhToastNotification({
           message: `${this.error.detail || 'sorry, something wrong ;('} `,
-          type: 'is-danger',
-          duration: 3000,
+          type: 'danger',
+          time: 5000,
         });
       }
       return false;

@@ -1,0 +1,53 @@
+[
+  {
+    "headers": {
+      "Authorization": "Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+    },
+    "data": {
+      "name": "Repository",
+      "slug": "repo1",
+      "language": "en",
+      "categories": [
+        1
+      ],
+      "description": "New description",
+      "is_private": false
+    },
+    "response": {
+      "status": 200,
+      "data": {
+        "uuid": "4c49b02a-8c6f-4e99-b758-8b407fe1ee4e",
+        "owner": 2,
+        "name": "Repository",
+        "slug": "repo1",
+        "language": "en",
+        "categories": [
+          1
+        ],
+        "description": "New description",
+        "is_private": false
+      }
+    }
+  },
+  {
+    "headers": {
+      "Authorization": "Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8"
+    },
+    "data": {
+      "name": "Repository",
+      "slug": "repo1",
+      "language": "en",
+      "categories": [],
+      "description": "New description",
+      "is_private": false
+    },
+    "response": {
+      "status": 400,
+      "data": {
+        "categories": [
+          "This list may not be empty."
+        ]
+      }
+    }
+  }
+]

@@ -1,61 +1,54 @@
 <template>
-  <bh-input>
-    <div class="entities-input__badges">
-      <bh-badge
-        v-for="(entity, i) in printableEntities"
-        :key="i"
-        :class="[
-          'entities-input__badges__badge',
-          getEntityClass(entity),
-        ]"
-        size="small">
-        <span>
-          <span><strong>{{ entity.entity }}</strong></span>
-          <span v-if="entity.label">
-            <bh-icon value="equal" />
-            <strong>{{ entity.label }}</strong>
-          </span>
-        </span>
-        <bh-dropdown>
-          <bh-icon-button
-            slot="trigger"
-            value="dots-horizontal"
-            size="small" />
-          <bh-dropdown-item @click="editEntity(entity)">Edit</bh-dropdown-item>
-          <bh-dropdown-item @click="removeEntity(entity)">Remove</bh-dropdown-item>
-        </bh-dropdown>
-      </bh-badge>
-    </div>
-    <div class="entities-input__new-entity">
-      <new-entity
-        ref="newEntity"
-        :add-label="availableAddLabel"
-        :custom-label-disabled="customLabelDisabled"
-        :text="text"
-        :text-selected="textSelected"
-        :repository="repository"
-        :available-entities="availableEntities"
-        :available-labels="availableLabels"
-        :testing="testing"
-        class="entities-input__new-entity__wrapper"
-        @new="addEntity($event)" />
-    </div>
-  </bh-input>
+  <div>
+    <entity-form
+      v-for="entity in entities"
+      :key="entity.localId"
+      v-model="entity.entity"
+      :available-entities="availableEntities"
+      :available-labels="availableLabels"
+      :entity-class="getEntityClass(entity)"
+      :uses-labels="availableAddLabel"
+      :text="text"
+      :selected-text-start="entity.start"
+      :selected-text-end="entity.end"
+      :label="entity.label"
+      :loading-label="entity.localLoadingLabel"
+
+      @removeLabel="() => entity.label = ''"
+      @labelChanged="(label) => entity.label = label"
+      @removeEntity="() => removeEntity(entity)"
+    />
+
+    <bh-button
+      ref="addEntityBtn"
+      :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
+      :disabled="!textSelectedValue"
+      size="small"
+      rounded
+      primary
+      @click.prevent.stop="addEntity()"
+    >
+      <span>
+        <span>Add entity</span>
+        <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
+      </span>
+    </bh-button>
+  </div>
 </template>
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import NewEntity from './NewEntity';
+import { generateTemporaryId } from '@/utils';
+import EntityForm from './EntityForm';
+import Vue from 'vue';
+import { mapActions } from 'vuex';
 import _ from 'lodash';
-
-
-const components = {
-  NewEntity,
-};
 
 export default {
   name: 'EntitiesInput',
-  components,
+  components: {
+    EntityForm,
+  },
   props: {
     value: {
       type: Array,
@@ -93,10 +86,6 @@ export default {
       type: Array,
       default: () => ([]),
     },
-    testing: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
@@ -104,6 +93,14 @@ export default {
     };
   },
   computed: {
+    textSelectedValue() {
+      if (!this.textSelected) {
+        return null;
+      }
+
+      const { start, end } = this.textSelected;
+      return this.text.substring(start, end);
+    },
     preparedEntities() {
       return this.entities
         .map(({
@@ -146,6 +143,12 @@ export default {
     },
   },
   methods: {
+    ...mapActions([
+      'getEntities',
+    ]),
+    removeEntity(entity) {
+      this.entities = this.entities.filter(e => e.localId !== entity.localId);
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
@@ -154,39 +157,49 @@ export default {
       );
       return `entity-${color}`;
     },
-    addEntity(entity) {
-      this.entities.push(entity);
+    addEntity() {
+      const temporaryEntityId = generateTemporaryId();
+
+      this.entities.push({
+        ...this.textSelected,
+        entity: this.textSelectedValue,
+        label: '',
+        localLoadingLabel: true,
+        localId: temporaryEntityId,
+      });
+
+      this.loadLabelFor(temporaryEntityId, this.textSelectedValue);
+
       this.$emit('entityAdded');
     },
-    findEntityIndex(entity) {
-      return this.entities.reduce((currentIndex, e, index) => {
-        if (e.start === entity.start
-            && e.end === entity.end
-            && e.entity === entity.entity) {
-          return index;
-        }
-        return currentIndex;
-      }, -1);
-    },
-    removeEntity(entity) {
-      const entityIndex = this.findEntityIndex(entity);
-      this.entities.splice(entityIndex, 1);
-    },
-    async editEntity(entity) {
-      await this.$nextTick();
-      this.$emit('entityEdited', entity);
-      await this.$nextTick();
-      const entityIndex = this.findEntityIndex(entity);
-      const bruteEntity = this.entities[entityIndex];
-      if (this.$refs.newEntity.fillEdit) {
-        this.$refs.newEntity.fillEdit(
-          bruteEntity.entity,
-          (bruteEntity.label || null),
-          bruteEntity.pristineLabel,
-        );
+    async loadLabelFor(entityId, entityText) {
+      const entities = await this.getEntities({
+        repositoryUuid: this.repository.uuid || this.repository,
+        value: entityText,
+      });
+      await entities.next();
+
+      const entityIndex = this.entities.findIndex(e => e.localId === entityId);
+
+      if (entityIndex === -1) {
+        return;
       }
-      await this.$nextTick();
-      this.removeEntity(entity);
+
+      if (entities.items.length === 1) {
+        // eslint-disable-next-line prefer-destructuring
+        const label = entities.items[0].data.label;
+
+        Vue.set(this.entities, entityIndex, {
+          ...this.entities[entityIndex],
+          label,
+          localLoadingLabel: false,
+        });
+      } else {
+        Vue.set(this.entities, entityIndex, {
+          ...this.entities[entityIndex],
+          localLoadingLabel: false,
+        });
+      }
     },
     validateEntities(text, oldText) {
       /*
@@ -231,31 +244,6 @@ export default {
       });
       this.entities = this.entities.filter(value => !!value);
     },
-    clearEntityForm() {
-      this.$refs.newEntity.disableAddingMode();
-    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.entities-input {
-  &__badges {
-    position: relative;
-    margin: -4px;
-
-    &__badge {
-      margin: 4px;
-    }
-  }
-
-  &__new-entity {
-    margin: 16px 0;
-    display: flex;
-
-    &__wrapper {
-      flex-grow: 0;
-    }
-  }
-}
-</style>

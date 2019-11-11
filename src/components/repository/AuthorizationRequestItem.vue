@@ -4,7 +4,7 @@
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
     <div class="bh-grid__item bh-grid__item--grow-1">
-      <div><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></div>
+      <div><strong>{{ getProfile(user__nickname).nickname || user__nickname }}</strong></div>
       <div><small>{{ text }}</small></div>
     </div>
     <div class="bh-grid__item bh-grid__item--grow-0">
@@ -71,7 +71,7 @@ export default {
       'updateProfile',
       'repositoryUpdateAuthorizationRole',
       'approveRequestAuthorization',
-      'rejectRequestAuthorization',
+      'removeAuthorization',
     ]),
     async updateUserProfile() {
       try {
@@ -82,7 +82,10 @@ export default {
     },
     async approve() {
       try {
-        await this.approveRequestAuthorization({ id: this.id });
+        await this.approveRequestAuthorization({
+          id: this.id,
+          repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+        });
         this.$emit('deleted');
       } catch (e) {
         this.handlerError(e);
@@ -90,13 +93,16 @@ export default {
     },
     reject() {
       return new Promise((resolve, reject) => {
-        this.rejectDialog = this.$dialog.confirm({
+        this.rejectDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure?',
           confirmText: 'Reject',
           type: 'is-danger',
           onConfirm: async () => {
             try {
-              await this.rejectRequestAuthorization({ id: this.id });
+              await this.removeAuthorization({
+                id: this.id,
+                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              });
               this.$emit('deleted');
             } catch (e) {
               this.handlerError(e);
@@ -118,9 +124,9 @@ export default {
 
       const { data } = response;
 
-      this.$toast.open({
+      this.$bhToastNotification({
         message: data.detail || 'Something wrong happened...',
-        type: 'is-danger',
+        type: 'danger',
       });
 
       if (!data.detail) {

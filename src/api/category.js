@@ -2,6 +2,6 @@ import request from './request';
 
 export default {
   getAll() {
-    return request.$http.get('/categories/');
+    return request.$http.get('/v2/repository/categories/');
   },
 };

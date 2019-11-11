@@ -20,7 +20,7 @@ class Login extends ModelBase {
 
   routes() {
     return {
-      save: '/login/',
+      save: '/v2/account/login/',
     };
   }
 

@@ -12,7 +12,7 @@
               :entities="entitiesToEdit"
               :available-entities="entitiesToEdit"
               :formatters="textFormatters"
-              size="medium"
+              size="normal"
               placeholder="Enter your sentence here"
               @textSelected="setTextSelected($event)"
               @entityEdited="onEditEntity($event)"
@@ -30,7 +30,7 @@
               v-model="intent"
               :data="repository.intents_list || []"
               :formatters="intentFormatters"
-              size="medium"
+              size="normal"
               placeholder="Intent" />
           </bh-field>
         </div>
@@ -50,7 +50,7 @@
               :formatters="intentFormatters"
               v-model="entity.entity"
               class="edit-sentence-input"
-              size="medium"
+              size="normal"
               placeholder="Entity"
             >
               <span slot="append">
@@ -77,7 +77,7 @@
             :formatters="intentFormatters"
             v-model="entity.entity"
             class="edit-sentence-input"
-            size="medium"
+            size="normal"
             placeholder="Entity"
             @selected="elevateToEntity(entity, index)"
           >
@@ -259,6 +259,7 @@ export default {
       });
 
       this.textSelected = null;
+      this.onEntityAdded();
     },
     elevateToEntity(entity, index) {
       Vue.delete(this.pendingEntities, index);

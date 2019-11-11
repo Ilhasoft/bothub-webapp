@@ -154,7 +154,7 @@ export default {
     },
     deleteThisTranslation() {
       return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$dialog.confirm({
+        this.deleteDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure? The translation will be deleted.',
           confirmText: 'Delete',
           type: 'is-danger',

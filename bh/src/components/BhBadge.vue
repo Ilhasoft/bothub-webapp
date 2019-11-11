@@ -57,8 +57,10 @@ export default {
 
     &--small {
       @include badge-heigth($size-small);
+      height: 1.9rem;
       padding: 0 1rem;
       font-size: .75rem;
+      line-height: calc(1.9rem - #{($border-width * 2)});
     }
 
     &--medium {

@@ -132,9 +132,9 @@ export default {
     },
     onTranslated() {
       /* istanbul ignore next */
-      this.$toast.open({
+      this.$bhToastNotification({
         message: 'Example translated!',
-        type: 'is-success',
+        type: 'success',
       });
       /* istanbul ignore next */
       this.$emit('dispatchEvent', 'translated');

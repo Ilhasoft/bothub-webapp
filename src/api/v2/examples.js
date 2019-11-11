@@ -8,7 +8,7 @@ export default {
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return new utils.List(`/v2/examples/?${queryString}`);
+    return new utils.List(`/v2/repository/examples/?${queryString}`);
   },
   all(repositoryUuid) {
     return this.search(repositoryUuid);

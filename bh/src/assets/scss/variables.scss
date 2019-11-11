@@ -9,17 +9,17 @@ $font-weight-bolder: 700;
 
 //Font size
 
-$font-normal: .75rem;
-$font-small:  .5rem;
-$font-medium: 1rem;
+$font-normal: 1rem;
+$font-small:  .89rem;
+$font-medium: 1.25rem;
 $font-large: 1.5rem;
 
 // Sizes
 
 $size-normal: 2.5rem;
-$size-small: 1.75rem;
-$size-medium: 3.25rem;
-$size-large: 4.75rem;
+$size-small: 2.2rem;
+$size-medium: 3.125rem;
+$size-large: 3.4375rem;
 $sizes: (
   ('normal', $size-normal, $font-normal),
   ('small', $size-small, $font-small),
@@ -37,6 +37,18 @@ $form-component-height-small: $size-small;
 $form-component-height-medium: $size-medium;
 $form-component-height-large: $size-large;
 
+// Icons
+
+$icon-small: 1rem;
+$icon-medium: 1.5rem;
+$icon-large: 2rem;
+$icon-extra-large: 3.25rem;
+$icons-sizes: (
+  ('small', $icon-small),
+  ('medium', $icon-medium),
+  ('large', $icon-large),
+  ('extra-large', $icon-extra-large),
+);
 
 // z-index
 

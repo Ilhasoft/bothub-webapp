@@ -72,6 +72,7 @@ export default {
           ...this.data,
           ownerNickname: this.ownerNickname,
           repositorySlug: this.slug,
+          repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
         });
         this.$emit('edited', response.data);
         this.submitting = false;
