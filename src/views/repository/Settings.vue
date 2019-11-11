@@ -98,7 +98,7 @@ export default {
         name,
         slug,
         language,
-        categories: this.repository.categories.map(
+        categories: this.repository.categories_list.map(
           ({ id, name: n }) => ({ value: id, display_name: n }),
         ),
         description,
