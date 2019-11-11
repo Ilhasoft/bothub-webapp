@@ -54,8 +54,7 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getEditRepositorySchema({
-      ownerNickname: this.ownerNickname,
-      slug: this.slug,
+      repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
     });
   },
   methods: {
