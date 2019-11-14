@@ -208,6 +208,10 @@ export default {
         /* istanbul ignore next */
         if (data) {
           /* istanbul ignore next */
+          this.$bhToastNotification({
+            message: data.non_field_errors[0],
+            type: 'danger',
+          });
           this.errors = data;
         }
         /* istanbul ignore next */
