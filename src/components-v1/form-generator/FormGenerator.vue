@@ -40,6 +40,7 @@ const relatedInputComponent = {
   email: EmailInput,
   password: PasswordInput,
   hidden: StringInput,
+  textarea: TextInput,
 };
 
 const components = {
