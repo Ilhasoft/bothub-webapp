@@ -16,6 +16,9 @@
       </div>
 
       <div class="expander__trigger__btns-wrapper">
+        <div class="level-item">
+          <language-badge :language="language"/>
+        </div>
         <div
           v-if="repository.authorization && repository.authorization.can_contribute && !training"
           class="level-right">
@@ -34,9 +37,6 @@
         <div
           v-if="repository.authorization && repository.authorization.can_contribute"
           class="level-right">
-          <div class="level-item">
-            <language-badge :language="language"/>
-          </div>
           <div class="level-item">
             <a
               :href="`#delete-example-${id}`"
