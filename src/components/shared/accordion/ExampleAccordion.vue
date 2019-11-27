@@ -35,6 +35,9 @@
           v-if="repository.authorization && repository.authorization.can_contribute"
           class="level-right">
           <div class="level-item">
+            <language-badge :language="language"/>
+          </div>
+          <div class="level-item">
             <a
               :href="`#delete-example-${id}`"
               class="has-text-danger"
@@ -78,6 +81,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components-v1/shared/HighlightedText';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
   name: 'ExampleAccordion',
@@ -85,6 +89,7 @@ export default {
     HighlightedText,
     ExampleInfo,
     EditExample,
+    LanguageBadge,
   },
   props: {
     id: {
@@ -106,6 +111,10 @@ export default {
     training: {
       type: Boolean,
       default: false,
+    },
+    language: {
+      type: String,
+      default: '',
     },
   },
   data() {
