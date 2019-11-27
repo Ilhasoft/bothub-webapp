@@ -5,6 +5,7 @@
       :text="text"
       :entities="entities"
       :intent="intent"
+      :language="language"
       training
       @deleted="onExampleDeleted"
     />
