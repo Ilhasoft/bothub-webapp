@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
-import TranslateList from '@/components-v1/translate/TranslateList';
+import TranslateList from '@/components/translate/TranslateList';
 
 
 const localVue = createLocalVue();

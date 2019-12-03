@@ -10,7 +10,7 @@
 
 <script>
 import Layout from '@/components/shared/Layout';
-import ResetPasswordForm from '@/components-v1/auth/ResetPasswordForm';
+import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 
 const components = {
   Layout,

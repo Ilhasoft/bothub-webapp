@@ -66,12 +66,12 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import Layout from '@/components/shared/Layout';
-import UserProfile from '@/components-v1/user/UserProfile';
+import UserProfile from '@/components/user/UserProfile';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Pagination from '@/components-v1/shared/Pagination';
-import EditProfileForm from '@/components-v1/user/EditProfileForm';
-import ChangePasswordForm from '@/components-v1/user/ChangePasswordForm';
-import LoginIsRequired from '@/components-v1/auth/LoginIsRequired';
+import EditProfileForm from '@/components/user/EditProfileForm';
+import ChangePasswordForm from '@/components/user/ChangePasswordForm';
+import LoginIsRequired from '@/components/auth/LoginIsRequired';
 import UserAvatar from '@/components/user/UserAvatar';
 
 
