@@ -1,7 +1,7 @@
 import Buefy from 'buefy';
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import RequestGenerator from '@/components-v1/repository/RequestGenerator';
+import RequestGenerator from '@/components/repository/RequestGenerator';
 
 
 const localVue = createLocalVue();
