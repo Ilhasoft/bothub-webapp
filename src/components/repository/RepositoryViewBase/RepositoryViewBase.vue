@@ -196,10 +196,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
-import SiteFooter from '@/components-v1/shared/SiteFooter';
+import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';

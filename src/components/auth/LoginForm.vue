@@ -38,7 +38,7 @@ import { mapActions } from 'vuex';
 import { getModel } from 'vue-mc-drf-model';
 import LoginModel from '@/models/login';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

@@ -32,7 +32,7 @@
 
 <script>
 import BH from 'bh';
-import Flag from '@/components-v1/shared/Flag';
+import Flag from '@/components/shared/Flag';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 const components = {

@@ -78,7 +78,7 @@
 import { mapState, mapActions } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import HighlightedText from '@/components-v1/shared/HighlightedText';
+import HighlightedText from '@/components/shared/HighlightedText';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
 import LanguageBadge from '@/components/shared/LanguageBadge';

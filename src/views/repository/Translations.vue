@@ -31,8 +31,8 @@
 import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
-import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
-import TranslationsList from '@/components-v1/translate/TranslationsList';
+import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsList from '@/components/translate/TranslationsList';
 
 
 export default {

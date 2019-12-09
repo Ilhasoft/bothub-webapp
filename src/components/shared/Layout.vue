@@ -106,8 +106,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
-import SiteFooter from '@/components-v1/shared/SiteFooter';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
 import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 

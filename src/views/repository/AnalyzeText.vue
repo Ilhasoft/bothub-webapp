@@ -96,7 +96,7 @@ text: [text to analyze]"</bh-highlighted-pre>
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
-import RequestGenerator from '@/components-v1/repository/RequestGenerator';
+import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import UpdatesList from '@/components/update/UpdatesList';
 

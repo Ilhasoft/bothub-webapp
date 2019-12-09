@@ -15,7 +15,7 @@
 <script>
 import { mapActions } from 'vuex';
 
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 
 

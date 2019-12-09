@@ -14,7 +14,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import ExampleItem from '@/components/example/ExampleItem';
 
 

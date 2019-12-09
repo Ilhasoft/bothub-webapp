@@ -18,8 +18,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import FormGenerator from '@/components-v1/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {
