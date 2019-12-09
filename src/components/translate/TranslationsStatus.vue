@@ -21,8 +21,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Pie from '@/components-v1/shared/Pie';
-import Flag from '@/components-v1/shared/Flag';
+import Pie from '@/components/shared/Pie';
+import Flag from '@/components/shared/Flag';
 
 
 const components = {

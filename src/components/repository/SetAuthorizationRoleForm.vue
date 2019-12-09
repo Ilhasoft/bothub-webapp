@@ -24,8 +24,8 @@
 <script>
 import { mapActions } from 'vuex';
 
-import SelectUsersInput from '@/components-v1/inputs/SelectUsersInput';
-import RoleSelect from '@/components-v1/inputs/RoleSelect';
+import SelectUsersInput from '@/components/inputs/SelectUsersInput';
+import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 export default {

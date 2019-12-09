@@ -21,9 +21,9 @@
 
 <script>
 import { mapActions } from 'vuex';
-import FormGenerator from '@/components-v1/form-generator/FormGenerator';
-import Messages from '@/components-v1/shared/Messages';
-import Loading from '@/components-v1/shared/Loading';
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import Messages from '@/components/shared/Messages';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

@@ -98,7 +98,7 @@
 </template>
 <script>
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapGetters, mapActions } from 'vuex';
 

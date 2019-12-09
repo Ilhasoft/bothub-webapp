@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
+import LanguageSelect from '@/components/inputs/LanguageSelect';
 import { LANGUAGES } from '@/utils';
 
 

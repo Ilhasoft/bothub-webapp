@@ -69,7 +69,7 @@
 import { mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from './Base';
-import LanguageSelect from '@/components-v1/inputs/LanguageSelect';
+import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';

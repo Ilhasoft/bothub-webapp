@@ -69,8 +69,8 @@
 <script>
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import HighlightedText from '@/components-v1/shared/HighlightedText';
-import Flag from '@/components-v1/shared/Flag';
+import HighlightedText from '@/components/shared/HighlightedText';
+import Flag from '@/components/shared/Flag';
 import { mapActions } from 'vuex';
 
 

@@ -57,7 +57,7 @@
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
-import HighlightedText from '@/components-v1/shared/HighlightedText';
+import HighlightedText from '@/components/shared/HighlightedText';
 import NewTranslateForm from './NewTranslateForm';
 
 
