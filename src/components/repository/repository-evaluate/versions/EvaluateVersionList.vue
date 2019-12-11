@@ -13,7 +13,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
 

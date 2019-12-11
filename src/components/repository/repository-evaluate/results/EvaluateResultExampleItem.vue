@@ -59,7 +59,7 @@
 import { mapState } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import HighlightedText from '@/components-v1/shared/HighlightedText';
+import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 
 

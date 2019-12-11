@@ -60,9 +60,9 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import FormGenerator from '@/components-v1/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
-import SiteFooter from '@/components-v1/shared/SiteFooter';
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import Loading from '@/components/shared/Loading';
+import SiteFooter from '@/components/shared/SiteFooter';
 
 const components = {
   FormGenerator,

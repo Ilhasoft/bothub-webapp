@@ -22,7 +22,7 @@ import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

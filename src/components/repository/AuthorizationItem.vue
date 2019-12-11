@@ -43,7 +43,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
-import RoleSelect from '@/components-v1/inputs/RoleSelect';
+import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 export default {

@@ -93,7 +93,7 @@
 </template>
 
 <script>
-import SiteFooter from '@/components-v1/shared/SiteFooter';
+import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
 import { mapActions, mapGetters } from 'vuex';
 import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-intro.svg';
