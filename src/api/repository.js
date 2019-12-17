@@ -20,7 +20,10 @@ export default {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
   train(repositoryUUID) {
-    return request.$http.get(`/v2/repository/repository-info/${repositoryUUID}/train/`);
+    return request.$http.post(
+      `/v2/repository/repository-info/${repositoryUUID}/train/`,
+      {},
+    );
   },
   analyze(repositoryUUID, language, text) {
     return request.$http.post(
