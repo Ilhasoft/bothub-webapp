@@ -9,9 +9,9 @@
         <router-link
           class="rpstr-vw-bs__wrapper__header__logo"
           to="/home">
-          <img
+          <!-- <img
             src="~@/assets/imgs/logo.svg"
-            alt="bothub">
+            alt="bothub"> -->
         </router-link>
         <div>
           <repository-info
@@ -50,112 +50,6 @@
           </bh-dropdown>
         </div>
       </div>
-      <repository-navigation
-        v-if="repository && !repository.fatal && repository.name"
-        :repository="repository"
-        class="rpstr-vw-bs__wrapper__navigation hide-mobile" />
-      <div
-        v-if="repository && !repository.fatal && repository.name"
-        class="rpstr-vw-bs__status-bar">
-        <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
-          <side-bar-navigation
-            :repository="repository"
-            class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"/>
-          <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="language" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ repository.available_languages.length }}</span>
-              <span class="hide-mobile">languages</span>
-            </div>
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="sentence" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ repository.examples__count }}</span>
-              <span class="hide-mobile">sentences</span>
-            </div>
-            <div class="gap"/>
-          </div>
-          <div
-            v-if="authenticated && repository.authorization.can_write"
-            class="bh-grid rpstr-vw-bs__status-bar__repo-info">
-            <div
-              v-if="warningsCount > 0"
-              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="warning" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ warningsCount }}
-              </span>
-              <span class="hide-mobile">warnings</span>
-            </div>
-
-            <div
-              v-if="requirementsCount > 0"
-              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="close-circle" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ requirementsCount }}</span>
-              <span class="hide-mobile">requirements missed</span>
-            </div>
-            <div
-              v-if="repository.ready_for_train"
-              class="text-color-primary bh-grid__item rpstr-vw-bs__status-bar__icons-align">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size hide-mobile"
-                value="botinho" />
-              <span class="rpstr-vw-bs__status-bar__text-information hide-mobile">
-                Your bot is ready to be trained</span>
-            </div>
-          </div>
-          <div
-            v-else-if="authenticated && repository.available_request_authorization"
-            class="bh-grid hide-mobile">
-            <div
-              class="bh-grid__item clickable"
-              @click.prevent="openRequestAuthorizationModal">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon />
-                <span
-                  class="rpstr-vw-bs__status-bar__text-information">Request Authorization</span>
-              </div>
-            </div>
-          </div>
-          <div
-            v-else-if="authenticated
-              && repository.request_authorization
-            && !repository.request_authorization.approved_by"
-            class="bh-grid hide-mobile">
-            <div class="bh-grid__item">
-              <span class="text-color-grey-dark">Authorization Requested</span>
-            </div>
-          </div>
-          <div
-            v-else-if="!authenticated"
-            class="bh-grid hide-mobile">
-            <div
-              class="bh-grid__item clickable"
-              @click.prevent="openLoginModal">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon value="account" />
-                <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
-              </div>
-            </div>
-          </div>
-          <div
-            v-else
-            class="bh-grid">
-            <div class="bh-grid__item">&nbsp;</div>
-          </div>
-        </div>
-      </div>
       <analyze-text-drawer
         v-if="repository && repository.uuid && authenticated"
         :repository-uuid="repository.uuid"
@@ -190,7 +84,7 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
-    <site-footer class="rpstr-vw-bs__footer"/>
+      <!-- <site-footer class="rpstr-vw-bs__footer"/> -->
   </div>
 </template>
 
