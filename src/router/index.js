@@ -16,12 +16,17 @@ import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import store from '../store';
 
+import Versions from '@/views/Versions';
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/versions-beta',
+      component: Versions
+    },
     {
       path: '/',
       name: 'landingPage',
