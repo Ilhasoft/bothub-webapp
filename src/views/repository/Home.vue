@@ -182,6 +182,8 @@ export default {
 @import 'github-markdown-css/github-markdown.css';
 
 .repository-home {
+  margin: 2rem .5rem 1rem;
+  
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
@@ -189,7 +191,6 @@ export default {
 
   &__header {
     display: flex;
-    margin: 2rem .5rem 1rem;
 
     &__icon-badge {
       $size: 4rem;
