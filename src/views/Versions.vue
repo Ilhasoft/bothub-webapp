@@ -30,16 +30,20 @@
 		  										'is-size-7', 
 		  										'has-text-white']" 
 		  						rounded 
-		  						:type="version.isMain ? 'is-primary' : 'color-grey-dark' " 
+		  						:type="version.isMain ? 'is-primary' : 'is-light' " 
 		  						v-on:click="makeMain(version.id)"> 
 		  					MAIN 
 		  				</b-button>
-		  					<button class="version__table__small-button" v-on:click="editVersion(version.id)"> 
-		  						<img src="../assets/imgs/flags/br.svg" /> <!-- Placeholder images !--> 
-		  					</button>
-		  					<button class="version__table__small-button" v-on:click="deleteVersion(version.id)"> 
-		  						<img src="../assets/imgs/flags/us.svg" />
-		  					</button>
+		  					<b-button 
+		  						icon-right="border-color" 
+		  						class="version__table__small-button" 
+		  						v-on:click="editVersion(version.id)">
+		  					</b-button> 
+		  					<b-button 
+		  						icon-right="delete" 
+		  						class="version__table__small-button" 
+		  						v-on:click="deleteVersion(version.id)"> 
+		  					</b-button>
 		  				</div>
 		  			</td>
 		  		</tr>
@@ -116,6 +120,8 @@
 	$table-width: 1px;
 	$button-height: 1.5rem;
 	$table-spacing: 1.5rem;
+	$header-spaceing: 0.6rem;
+	$table-margin: 1rem;
 
 	.version {
 		margin: auto;
@@ -153,18 +159,18 @@
 
 				&__header {
 					background-color: white;
-					padding: 0.6rem 1em  0.6rem 5rem;
+					padding: $header-spaceing $table-margin $header-spaceing $table-margin;
 				}
 
 				&__element {
-					padding: $table-spacing 1em  $table-spacing 5rem;
+					padding: $table-spacing $table-margin  $table-spacing $table-margin;
 				}
 			}
 
 			&__button-wrapper {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-between;
+				justify-content: right;
 			}
 
 			&__main-button {
