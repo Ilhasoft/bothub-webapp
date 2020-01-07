@@ -24,9 +24,13 @@
 		  			</td>
 		  			<td class="version__table__row__element">
 		  				<div class="version__table__button-wrapper">
-		  				<b-button class="version__table__main-button" 
+		  				<b-button 
+		  						v-bind:class="[version.isMain ? 'version__table__main-button' : 'version__table__main-button__not-main', 
+		  										'has-text-weight-bold', 
+		  										'is-size-7', 
+		  										'has-text-white']" 
 		  						rounded 
-		  						:type="version.isMain ? 'is-primary' : '' " 
+		  						:type="version.isMain ? 'is-primary' : 'color-grey-dark' " 
 		  						v-on:click="makeMain(version.id)"> 
 		  					MAIN 
 		  				</b-button>
@@ -103,7 +107,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+	
+	@import '~bh/src/assets/scss/colors.scss';
 	@import '~@/assets/scss/utilities.scss';
 	@import '~bh/src/assets/scss/variables.scss';
 
@@ -164,6 +169,11 @@
 
 			&__main-button {
 				height: $button-height;
+
+				&__not-main {
+					height: $button-height;
+					background-color: $color-grey-dark;
+				}
 			}
 
 			&__small-button {
