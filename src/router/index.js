@@ -12,21 +12,17 @@ import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryAnalyzeText from '@/views/repository/AnalyzeText';
 import RepositoryEvaluate from '@/views/repository/Evaluate';
+import RepositoryVersions from '@/views/repository/Versions';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import store from '../store';
 
-import Versions from '@/views/Versions';
 
 Vue.use(Router);
 
 export default new Router({
   mode: 'history',
   routes: [
-    {
-      path: '/versions-beta',
-      component: Versions
-    },
     {
       path: '/',
       name: 'landingPage',
@@ -109,6 +105,10 @@ export default new Router({
       path: '/:ownerNickname/:slug/evaluate/',
       name: 'repository-test',
       component: RepositoryEvaluate,
+    },
+    {
+      path: '/:ownerNickname/:slug/versions/',
+      component: RepositoryVersions
     },
     {
       path: '*',
