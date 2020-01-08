@@ -9,6 +9,10 @@ export default {
     return response;
   },
 
+  getVersions(store, repositoryUUID) {
+    return repository.getVersions(repositoryUUID);
+  },
+
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();

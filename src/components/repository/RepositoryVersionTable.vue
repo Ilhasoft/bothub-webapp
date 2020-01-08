@@ -4,7 +4,7 @@
 				<tr class="version-table__row">
 		    		<th class="version-table__row__header" v-for="column in columns" :key="column.field"> {{ column.label }} </th>
 		  		</tr>
-		  		<tr class="version-table__row" v-for="version in list" :key="version.name"> 
+		  		<tr class="version-table__row" v-for="version in items" :key="version.name"> 
 		  			<td class="version-table__row__element" v-for="column in columns" :key="column.field">
 		  				<a v-if="column.field == 'name'"> {{ version[column.field] }} </a>
 		  				<span v-else>{{ version[column.field] }}</span>
@@ -41,16 +41,31 @@
 <script>
 
 	import { mapActions } from 'vuex';
-	import request from '@/api/request';
-	import store from '@/store';
 		
 	export default {
 
 		name: 'RepositoryVersionTable',
-		props: {
-			list: {
-				type: Array,
-				default: () => ([]),
+		props: ['list'],
+		computed: {
+			items() {
+				if (this.list == null) return [];
+				return this.list.items.map((item) => { return item.data; });
+			}
+		},
+		watch: {
+			async list() {
+      			await this.next();
+      			console.log(this.items)
+      		}
+		}, methods: {
+			async next() {
+		      try {
+		        await this.list.next();
+		      } catch (e) {
+		        this.listStatusErrorCode = e.request
+		          ? e.request.status
+		          : '';
+		      }
     		}
 		},
 		data() {

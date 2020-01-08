@@ -26,6 +26,8 @@
 	import Layout from '@/components/shared/Layout';
 	import RepositoryVersionTable from '@/components/repository/RepositoryVersionTable';
 
+	import { mapActions } from 'vuex';
+
 	export default {
 		name: 'RepositoryVersions',
 		extends: RepositoryBase,
@@ -36,7 +38,7 @@
 
     	data() {
     		return {
-    			versions: []
+    			versions: null
     		}
     	}, 
 
@@ -47,11 +49,12 @@
     	},
 
     	methods: {
+    		 ...mapActions([
+      			'getVersions',
+   			]),
     		//TODO: Move to API, use list, pagination
     		async updateVersions() {
-    			const versions = await request.$http.get(`/v2/repository/version/?repository=${this.repository.uuid}`);
-    			console.log(versions);
-				this.versions = versions.data.results;
+    			this.versions = await this.getVersions(this.repository.uuid)
     		}
     	}
 
