@@ -52,7 +52,7 @@
     		 ...mapActions([
       			'getVersions',
    			]),
-    		//TODO: Move to API, use list, pagination
+    		 
     		async updateVersions() {
     			this.versions = await this.getVersions(this.repository.uuid)
     		}

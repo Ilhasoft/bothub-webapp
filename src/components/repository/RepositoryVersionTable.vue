@@ -1,40 +1,57 @@
 <template>
 	<div class="repository-version-table">
-	<table class="version-table__table">
-				<tr class="version-table__row">
-		    		<th class="version-table__row__header" v-for="column in columns" :key="column.field"> {{ column.label }} </th>
-		  		</tr>
-		  		<tr class="version-table__row" v-for="version in items" :key="version.name"> 
-		  			<td class="version-table__row__element" v-for="column in columns" :key="column.field">
-		  				<a v-if="column.field == 'name'"> {{ version[column.field] }} </a>
-		  				<span v-else>{{ version[column.field] }}</span>
-		  			</td>
-		  			<td class="version-table__row__element">
-		  				<div class="version-table__button-wrapper">
+
+		<b-table :data="items"
+				:loading="this.loading" 
+				:paginated="paginated"
+				:pagination-simple="simple"
+            	:per-page="perPage"
+            	:backend-pagination="backendPagination"
+            	:total="this.total"
+            	v-on:page-change="onPageChange()"
+            	:current-page.sync="currentPage">
+			
+			<template slot-scope="props">
+                <b-table-column v-for="column in columns" 
+                				:key="column.field" 
+                				:field="column.field" 
+                				:label="column.label"
+                				width="40"
+                				class="version-table__row"        		>
+
+                				<a v-if="column.field == 'name'"> {{ props.row[column.field] }} </a>
+		  						<span v-else>{{ props.row[column.field] }}</span>
+                </b-table-column>
+
+				<b-table-column class="version-table__row"
+								label="" 
+								width="40">
+
+                	<div class="version-table__button-wrapper">
 		  				<b-button 
-		  						:class="[version['is_default'] ? 'version-table__main-button' : 'version-table__main-button__not-main', 
+		  						:class="[props.row['is_default'] ? 'version-table__main-button' : 'version-table__main-button__not-main', 
 		  										'has-text-weight-bold', 
 		  										'is-size-7', 
 		  										'has-text-white']" 
 		  						rounded 
-		  						:type="version['is_default'] ? 'is-primary' : 'is-light' " 
-		  						v-on:click="makeMain(version.id)"> 
+		  						:type="props.row['is_default'] ? 'is-primary' : 'is-light' " 
+		  						v-on:click="makeMain(props.row.id)"> 
 		  					MAIN 
 		  				</b-button>
 		  				<b-button 
 		  					icon-right="border-color" 
 		  					class="version-table__small-button" 
-		  					v-on:click="editVersion(version.id)">
+		  					v-on:click="editVersion(props.row.id)">
 		  				</b-button> 
 		  				<b-button 
 		  					icon-right="delete" 
 		  					class="version-table__small-button" 
-		  					v-on:click="deleteVersion(version.id)"> 
+		  					v-on:click="deleteVersion(props.row.id)"> 
 		  				</b-button>
-		  			</div>
-		  		</td>
-		  	</tr>
-		</table>
+		  			</div>	
+                </b-table-column>
+            </template>
+		</b-table>
 	</div>
 </template>
 
@@ -47,6 +64,15 @@
 		name: 'RepositoryVersionTable',
 		props: ['list'],
 		computed: {
+
+			total() {
+				if (this.list == null) return 0;
+				return this.list.total
+			},
+			loading() {
+				if (this.list == null) return true;
+				return this.list.loading
+			},
 			items() {
 				if (this.list == null) return [];
 				return this.list.items.map((item) => { return item.data; });
@@ -55,9 +81,17 @@
 		watch: {
 			async list() {
       			await this.next();
-      			console.log(this.items)
+      			console.log(this.list)
       		}
 		}, methods: {
+
+			async onPageChange() {
+				if (previousPage <= currentPage) {
+					previousPage = currentPage;
+					await next();
+				}
+			},
+
 			async next() {
 		      try {
 		        await this.list.next();
@@ -66,10 +100,19 @@
 		          ? e.request.status
 		          : '';
 		      }
+    		},
+    		rowClass(row, index) {
+    			return 'version-table__row';
     		}
 		},
 		data() {
 			return {
+				previousPage: 1,
+				currentPage: 1,
+				backendPagination: true,
+				simple: true,
+				paginated: true,
+				perPage: 5,
 				columns: [
 						{label: "Version", field: "name"},
 						{label: "Created by", field: "createdBy"},
@@ -82,7 +125,7 @@
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 	@import '~bh/src/assets/scss/colors.scss';
 	@import '~@/assets/scss/utilities.scss';
 	@import '~bh/src/assets/scss/variables.scss';
@@ -94,37 +137,22 @@
 	$header-spaceing: 0.6rem;
 	$table-margin: 1rem;
 
-	.version-table {
-		
-		&__table {
-			padding: 1em;
-			text-align: left;
+	.b-table .table {
+		text-align: left;
+		background-color: white;
+		border: $table-width solid $table-border;
+		border-collapse: collapse;
+
+		th {
 			background-color: white;
-			border: $table-width solid $table-border;
-			border-collapse: collapse;
 		}
+	}
+
+	.version-table {
 
 		&__row {
-
-				background-color: white;
-				text-align: left;
-				border: $table-width solid $table-border;
-
-				&__header {
-					background-color: white;
-					padding: $header-spaceing $table-margin $header-spaceing $table-margin;
-				}
-
-				&__element {
-					padding: $table-spacing $table-margin  $table-spacing $table-margin;
-				}
-			}
-
-			&__button-wrapper {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: right;
-			}
+			padding: $table-spacing $table-margin  $table-spacing $table-margin !important;
+		}
 
 			&__main-button {
 				height: $button-height;
@@ -140,5 +168,5 @@
 				background-color: white;
 				height: $button-height;
 			}
-	}
+		}
 </style>
