@@ -1,5 +1,5 @@
 <template>
-	<div class="repository-version-table">
+	<div class="paginated-table">
 
 		<b-table :data="items"
 				:loading="this.loading" 
@@ -17,38 +17,13 @@
                 				:field="column.field" 
                 				:label="column.label"
                 				width="40"
-                				class="version-table__row"        		>
+                				class="paginated-table__row"        		>
 
-                				<a v-if="column.field == 'name'"> {{ props.row[column.field] }} </a>
-		  						<span v-else>{{ props.row[column.field] }}</span>
-                </b-table-column>
-
-				<b-table-column class="version-table__row"
-								label="" 
-								width="40">
-
-                	<div class="version-table__button-wrapper">
-		  				<b-button 
-		  						:class="[props.row['is_default'] ? 'version-table__main-button' : 'version-table__main-button__not-main', 
-		  										'has-text-weight-bold', 
-		  										'is-size-7', 
-		  										'has-text-white']" 
-		  						rounded 
-		  						:type="props.row['is_default'] ? 'is-primary' : 'is-light' " 
-		  						v-on:click="makeMain(props.row.id)"> 
-		  					MAIN 
-		  				</b-button>
-		  				<b-button 
-		  					icon-right="border-color" 
-		  					class="version-table__small-button" 
-		  					v-on:click="editVersion(props.row.id)">
-		  				</b-button> 
-		  				<b-button 
-		  					icon-right="delete" 
-		  					class="version-table__small-button" 
-		  					v-on:click="deleteVersion(props.row.id)"> 
-		  				</b-button>
-		  			</div>	
+                				<span v-if="column.component == null"> {{ props.row[column.field] }} </span>
+                				<component v-else
+                							:is="column.component"
+                							v-bind="addAttrs(props.row)">
+                							</component>
                 </b-table-column>
             </template>
 		</b-table>
@@ -62,7 +37,19 @@
 	export default {
 
 		name: 'RepositoryVersionTable',
-		props: ['list'],
+		props: {
+			list: {
+				required: true
+			}, 
+
+			columns: {
+				required: true,
+				type: Array
+			},
+			perPage: {
+				required: true,
+			},
+	  },
 		computed: {
 
 			total() {
@@ -92,6 +79,10 @@
 				}
 			},
 
+			addAttrs(data) {
+				return Object.assign({}, {"data": data});
+			},
+
 			async next() {
 		      try {
 		        await this.list.next();
@@ -102,7 +93,7 @@
 		      }
     		},
     		rowClass(row, index) {
-    			return 'version-table__row';
+    			return 'paginated-table__row';
     		}
 		},
 		data() {
@@ -112,13 +103,6 @@
 				backendPagination: true,
 				simple: true,
 				paginated: true,
-				perPage: 5,
-				columns: [
-						{label: "Version", field: "name"},
-						{label: "Created by", field: "createdBy"},
-						{label: "Last modified", field: "lastModified"},
-						{label: "Created at", field: "created_at"},
-				],
 			}
 		}
 	}
@@ -148,25 +132,11 @@
 		}
 	}
 
-	.version-table {
+	.paginated-table {
 
 		&__row {
 			padding: $table-spacing $table-margin  $table-spacing $table-margin !important;
 		}
 
-			&__main-button {
-				height: $button-height;
-
-				&__not-main {
-					height: $button-height;
-					background-color: $color-grey-dark;
-				}
-			}
-
-			&__small-button {
-				border: none;
-				background-color: white;
-				height: $button-height;
-			}
 		}
 </style>

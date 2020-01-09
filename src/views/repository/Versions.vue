@@ -13,8 +13,11 @@
 				</div>
 				<p> Add, edit and choose versions of your bot intelligence. </p>
 			</div>
-			<repository-version-table
-			:list=versions />
+			<paginated-table
+				:list="versions"
+				:columns="columns"
+				:perPage="perPage"
+			/>
 		</div>
 	</layout>
 </template>
@@ -24,7 +27,8 @@
 	import store from '@/store';
 	import RepositoryBase from './Base';
 	import Layout from '@/components/shared/Layout';
-	import RepositoryVersionTable from '@/components/repository/RepositoryVersionTable';
+	import PaginatedTable from '@/components/shared/PaginatedTable';
+	import RepositoryVersionOptions from '@/components/repository/RepositoryVersionOptions';
 
 	import { mapActions } from 'vuex';
 
@@ -33,12 +37,21 @@
 		extends: RepositoryBase,
 		components: {
     		Layout,
-    		RepositoryVersionTable
+    		PaginatedTable,
+    		RepositoryVersionOptions
     	},
 
     	data() {
     		return {
-    			versions: null
+    			perPage: 5,
+    			versions: null,
+    			columns: [
+					{label: "Version", field: "name", component: null},
+					{label: "Created by", field: "created_by", component: null},
+					{label: "Last modification", field: "last_modified", component: null},
+					{label: "Created at", field: "created_at", component: null},
+					{label: "", field: "is_default", component: RepositoryVersionOptions}
+				],
     		}
     	}, 
 
@@ -49,6 +62,11 @@
     	},
 
     	methods: {
+
+    		addNewVersion() {
+    			//TODO:
+    		},
+
     		 ...mapActions([
       			'getVersions',
    			]),
