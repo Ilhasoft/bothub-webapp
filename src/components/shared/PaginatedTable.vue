@@ -19,7 +19,7 @@
                 				width="40"
                 				class="paginated-table__row"        		>
 
-                				<span v-if="column.component == null"> {{ props.row[column.field] }} </span>
+                				<span v-if="column.component == null"> {{ column.transformText(props.row[column.field]) }} </span>
                 				<component v-else
                 							:is="column.component"
                 							v-bind="addAttrs(props.row)">
@@ -68,7 +68,6 @@
 		watch: {
 			async list() {
       			await this.next();
-      			console.log(this.list)
       		}
 		}, methods: {
 
@@ -84,6 +83,7 @@
 			},
 
 			async next() {
+
 		      try {
 		        await this.list.next();
 		      } catch (e) {
@@ -110,27 +110,9 @@
 </script>
 
 <style lang="scss">
-	@import '~bh/src/assets/scss/colors.scss';
-	@import '~@/assets/scss/utilities.scss';
-	@import '~bh/src/assets/scss/variables.scss';
 
-	$table-border: #CFD5D9;
-	$table-width: 1px;
-	$button-height: 1.5rem;
 	$table-spacing: 1.5rem;
-	$header-spaceing: 0.6rem;
 	$table-margin: 1rem;
-
-	.b-table .table {
-		text-align: left;
-		background-color: white;
-		border: $table-width solid $table-border;
-		border-collapse: collapse;
-
-		th {
-			background-color: white;
-		}
-	}
 
 	.paginated-table {
 
@@ -138,5 +120,5 @@
 			padding: $table-spacing $table-margin  $table-spacing $table-margin !important;
 		}
 
-		}
+	}
 </style>

@@ -29,6 +29,8 @@
 	import Layout from '@/components/shared/Layout';
 	import PaginatedTable from '@/components/shared/PaginatedTable';
 	import RepositoryVersionOptions from '@/components/repository/RepositoryVersionOptions';
+	import TableColumn from '@/utils/tableColumn'
+	import { formatDate } from '@/utils/index.js'
 
 	import { mapActions } from 'vuex';
 
@@ -46,11 +48,11 @@
     			perPage: 5,
     			versions: null,
     			columns: [
-					{label: "Version", field: "name", component: null},
-					{label: "Created by", field: "created_by", component: null},
-					{label: "Last modification", field: "last_modified", component: null},
-					{label: "Created at", field: "created_at", component: null},
-					{label: "", field: "is_default", component: RepositoryVersionOptions}
+    				new TableColumn("Version", "name"),
+    				new TableColumn("Created by", "created_by"),
+    				new TableColumn("Date Created", "created_at", null, formatDate),
+    				new TableColumn("Last modification", "last_modified", null, formatDate),
+    				new TableColumn("", "is_default", RepositoryVersionOptions, null),
 				],
     		}
     	}, 

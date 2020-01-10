@@ -108,7 +108,7 @@ export default new Router({
     },
     {
       path: '/:ownerNickname/:slug/versions/',
-      component: RepositoryVersions
+      component: RepositoryVersions,
     },
     {
       path: '*',
