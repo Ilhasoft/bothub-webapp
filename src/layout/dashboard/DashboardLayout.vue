@@ -1,8 +1,47 @@
 <template>
   <div class="dashboard-layout">
     <side-bar @colapse="colapseHandle()" />
-
     <div :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+      <div class="dashboard-layout__main-panel__header">
+        <div class="dashboard-layout__main-panel__header__info">
+          <div class="dashboard-layout__main-panel__header__info__badge">
+            <bh-icon
+              value="botinho"
+              size="large"
+              class="dashboard-layout__main-panel__header__info__badge__icon" />
+          </div>
+           <div class="dashboard-layout__main-panel__header__info__left">
+              <p class="dashboard-layout__main-panel__header__info__left__title">Susana</p>
+              <p>Created by 
+                <b class="has-text-primary">Johncordeiro</b>
+              </p>
+           </div>
+        </div>
+        <div class="dashboard-layout__main-panel__header__right">
+          <div class="dashboard-layout__main-panel__header__right__icons">
+            <bh-icon 
+              size=""
+              value="language" />
+            <span>9 languages</span>
+        </div>
+         <div class="dashboard-layout__main-panel__header__right__icons">
+          <bh-icon 
+            size=""
+            value="sentence" />
+          <span>30 sentences</span>
+        </div>
+         <div class="dashboard-layout__main-panel__header__right__icons">
+          <bh-icon 
+            size=""
+            value="warning" />
+          <span>2 warning</span>
+        </div>
+           <user-avatar
+            :profile="myProfile"
+            size="medium"
+            class="dashboard-layout__main-panel__header__right__user"/>
+        </div>
+      </div>
       <router-view />
     </div>
   </div>
@@ -11,25 +50,27 @@
 </style>
 <script>
 import SideBar from '@/components/repository/sidebar/SideBar.vue';
+import UserAvatar from '@/components/user/UserAvatar';
+import { mapActions, mapGetters } from 'vuex';
 // import ContentFooter from "./ContentFooter.vue";
 // import DashboardContent from "./Content.vue";
 // import MobileMenu from "./MobileMenu";
 export default {
   components: {
     SideBar,
+    UserAvatar
     // ContentFooter,
     // DashboardContent,
     // MobileMenu
   },
+  computed: {
+    ...mapGetters([
+      'authenticated',
+      'myProfile',
+    ]),
+  },
   data() {
     return {
-      linkHeight: 65,
-      activeLinkIndex: 0,
-      windowWidth: 0,
-      isWindows: false,
-      hasAutoHeight: false,
-      links: [],
-      isActive: true,
       colapse: true,
     };
   },
@@ -48,10 +89,73 @@ export default {
     position: relative;
     float: right;
 
+    &__header {
+      width: 100%;
+      height: 6rem;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1rem;
+
+      &__info {
+        display: flex;
+        align-items: center;
+
+        &__badge {
+          position: relative;
+          display: block;
+          width: 3.5rem;
+          height: 3.5rem;
+          border-radius: 50%;
+          background-color: #12a391;
+          overflow: hidden;
+
+          &__icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+          }
+        }
+
+        &__left {
+          margin: 0 .8rem;
+
+          &__title {
+            font-weight: bold;
+            font-size: 1.3rem;
+          }
+        }
+      }
+
+      &__right {
+        display: flex;
+        align-items: center;
+
+        &__icons {
+          margin: 0 .3rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: #9E9E9E;
+          
+          span {
+            margin: 0 .3rem;
+          }
+        }
+
+        &__user {
+          margin-left: 3rem;
+        }
+      }
+    }
+
     &--colapsed {
        position: relative;
        float: right;
-       width: calc( 100% - 80px);
+       width: calc( 100% - 60px);
     }
   }
 }

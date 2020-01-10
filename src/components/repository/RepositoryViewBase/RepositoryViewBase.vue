@@ -5,15 +5,15 @@
     <div
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
-      <div class="rpstr-vw-bs__wrapper__header">
-        <router-link
+      <!-- <div class="rpstr-vw-bs__wrapper__header"> -->
+        <!-- <router-link
           class="rpstr-vw-bs__wrapper__header__logo"
-          to="/home">
+          to="/home"> -->
           <!-- <img
             src="~@/assets/imgs/logo.svg"
             alt="bothub"> -->
-        </router-link>
-        <div>
+        <!-- </router-link> -->
+        <!-- <div>
           <repository-info
             v-if="repository && repository.name"
             :repository="repository" />
@@ -48,8 +48,8 @@
               Logout
             </bh-dropdown-item>
           </bh-dropdown>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <analyze-text-drawer
         v-if="repository && repository.uuid && authenticated"
         :repository-uuid="repository.uuid"
@@ -222,7 +222,7 @@ export default {
     $medium-screen: 1035px;
     $header-height: (16rem + $navigation-height);
     $wrapper-width: 100%;
-    background-color: $color-white;
+    // background-color: grey;
     height: 100%;
 
 
@@ -352,11 +352,11 @@ export default {
       }
 
       &__content {
-        max-width: 80%;
-        margin: 0 auto;
+        // max-width: 80%;
+        // margin: 0 auto;
 
         @media screen and (min-width: 1200px) {
-          width: 62.5rem;
+          // width: 62.5rem;
         }
       }
 

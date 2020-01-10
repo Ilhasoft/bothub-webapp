@@ -13,11 +13,18 @@
             src="~@/assets/imgs/logo.svg"
             alt="bothub">
         </div>
-        <b-menu-list label="Menu">
+        <b-menu-list>
+          
           <b-menu-item
-            icon="home"
+            tag="router-link"
+            :to="{ name: 'repository-summary' }"
+            icon="userSecret"
+            pack="fa"
+            size="is-medium"
             label="Summary"/>
           <b-menu-item
+            tag="router-link"
+            :to="{ name: 'repository-training' }"
             icon="school"
             label="Training"/>
           <b-menu-item
@@ -34,25 +41,37 @@
                 class="is-pulled-right"/>
             </template>
             <b-menu-item
+              tag="router-link"
+              :to="{ name: 'repository-test' }"
               icon="account"
               label="Sentences"/>
             <b-menu-item
+              tag="router-link"
+              :to="{ name: 'repository-test' }"
               icon="account"
               label="Results"/>
             <b-menu-item
-              icon="account"
+              tag="router-link"
+              :to="{ name: 'repository-test' }"
+              icon="botinho"
               label="Versions"/>
           </b-menu-item>
           <b-menu-item
-            icon="information-outline"
+            tag="router-link"
+            :to="{ name: 'repository-translate' }"
+            icon="globe-americas"
             label="Translate"/>
           <b-menu-item
+            tag="router-link"
+            :to="{ name: 'repository-translations-status' }"
             icon="information-outline"
             label="Translation Status"/>
           <b-menu-item
             icon="information-outline"
             label="Integration"/>
           <b-menu-item
+            tag="router-link"
+            :to="{ name: 'repository-settings' }"
             icon="information-outline"
             label="Settings"/>
         </b-menu-list>
@@ -65,13 +84,13 @@
           class="colapse-button icon-list"
           @click="colapseHandle()">
           <b-icon
-            size="is-medium"
+            size=""
             icon="arrow-right"/>
         </div>
         <b-icon
           class="icon-list"
           icon="account"
-          size="is-medium" />
+          size="" />
         <!-- <b-icon
           class="icon-list"
           icon="home"
@@ -84,24 +103,20 @@
           </b-dropdown> -->
         <b-icon
           class="icon-list"
-          icon="plus"
-          size="is-medium" />
+          size="is-medium"
+          icon="checkSquare" />
         <b-icon
           class="icon-list"
-          icon="map"
-          size="is-medium" />
+          icon="map" />
         <b-icon
           class="icon-list"
-          icon="stop"
-          size="is-medium" />
+          icon="stop" />
         <b-icon
           class="icon-list"
-          icon="dog"
-          size="is-medium" />
+          icon="dog" />
         <b-icon
           class="icon-list"
-          icon="cat"
-          size="is-medium" />
+          icon="cat" />
       </div>
       <div/>
     </div>
@@ -109,7 +124,7 @@
 </template>
 <script>
 import SidebarLink from './SideBarLink';
-
+import { botinho } from '../../../../bh/src/icons'
 
 export default {
   name: 'SideBar',
@@ -217,15 +232,14 @@ export default {
 
 .menu-header {
   width: 100%;
-  height: 4.5rem;
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
-  border-bottom: 1px solid grey;
 
   img {
-    height: 2rem;
+    height: 1.5rem;
   }
 }
 
@@ -237,7 +251,7 @@ export default {
   z-index: 1;
 
   .sidebar-wrapper {
-    background: #212120;
+    background: white;
     height: 100%;
     padding: 1rem;
     width: 260px;
@@ -249,8 +263,8 @@ export default {
     width: auto;
     height: auto;
     position: absolute;
-    top: 1rem;
-    right: 0;
+    top: 2rem;
+    left: 0;
     text-align: center;
     vertical-align: center;
     cursor: pointer;
@@ -258,11 +272,11 @@ export default {
 
     &--colapsed {
       transition: width .1s;
-      background: #212120;
+      background: white;
       height: 100%;
       padding: 1rem;
-      width: 80px;
-      color: white;
+      width: 60px;
+      color: grey;
     }
   }
 }
@@ -272,6 +286,6 @@ export default {
   cursor: pointer;
 }
 .icon-list:hover {
-  color: rgb(238, 238, 238);
+  color: #00d1b2;
 }
 </style>

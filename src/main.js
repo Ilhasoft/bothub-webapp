@@ -10,7 +10,23 @@ import store from './store';
 import applyFilters from './utils/filters';
 import API from './utils/plugins/API';
 
-Vue.use(Buefy);
+import { library } from '@fortawesome/fontawesome-svg-core';
+// internal icons
+import { faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+    faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+    faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+
+library.add(faCheck, faCheckCircle, faInfoCircle, faExclamationTriangle, faExclamationCircle,
+  faArrowUp, faAngleRight, faAngleLeft, faAngleDown,
+  faEye, faEyeSlash, faCaretDown, faCaretUp, faUpload, faCheckSquare);
+Vue.component('vue-fontawesome', FontAwesomeIcon);
+
+Vue.use(Buefy,
+  { defaultIconComponent: 'vue-fontawesome',
+  defaultIconPack: 'fas'}
+);
 Vue.use(VueMoment);
 Vue.use(BH);
 Vue.use(API);
