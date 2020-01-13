@@ -1,9 +1,9 @@
 <template>
   <div class="sign-up">
     <nav class="sign-up__nav">
-      <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <div class="sign-up__nav__container">
         <router-link
-          class="bh-grid__item sign-up__nav__logo"
+          class="column sign-up__nav__logo"
           to="/">
           <img
             src="@/assets/imgs/logo.svg"
@@ -19,13 +19,13 @@
         </div>
       </div>
     </nav>
-    <section class="bh-grid bh-grid--half sign-up__wrapper-content">
-      <div class="bh-grid__item sign-up__wrapper-content__image">
+    <section class="columns is-variable is-3 sign-up__wrapper-content">
+      <div class="column is-half sign-up__wrapper-content__image">
         <img
           src="@/assets/imgs/computer-bot.png"
           alt="avatar" >
       </div>
-      <div class="bh-grid__item sign-up__wrapper-content__form">
+      <div class="column sign-up__wrapper-content__form">
         <div class="sign-up__wrapper-content__form__title">
           <h1>Get started free</h1>
         </div>
@@ -158,6 +158,13 @@ $width: 1085px;
       padding: .25rem 1rem;
       background-color: $color-white;
 
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem;
+        margin: 0.5rem;
+      }
+
       &__login {
         align-self: center;
 
@@ -187,6 +194,7 @@ $width: 1085px;
     &__wrapper-content {
       max-width: $max-width;
       margin: 15vh auto;
+      padding: 0.25rem;
       position: relative;
       height: 100%;
 
