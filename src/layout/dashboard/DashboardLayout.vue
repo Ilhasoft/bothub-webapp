@@ -10,33 +10,33 @@
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
-           <div class="dashboard-layout__main-panel__header__info__left">
-              <p class="dashboard-layout__main-panel__header__info__left__title">Susana</p>
-              <p>Created by 
-                <b class="has-text-primary">Johncordeiro</b>
-              </p>
-           </div>
+          <div class="dashboard-layout__main-panel__header__info__left">
+            <p class="dashboard-layout__main-panel__header__info__left__title">Susana</p>
+            <p>Created by
+              <b class="has-text-primary">Johncordeiro</b>
+            </p>
+          </div>
         </div>
         <div class="dashboard-layout__main-panel__header__right">
           <div class="dashboard-layout__main-panel__header__right__icons">
-            <bh-icon 
+            <bh-icon
               size=""
               value="language" />
             <span>9 languages</span>
-        </div>
-         <div class="dashboard-layout__main-panel__header__right__icons">
-          <bh-icon 
-            size=""
-            value="sentence" />
-          <span>30 sentences</span>
-        </div>
-         <div class="dashboard-layout__main-panel__header__right__icons">
-          <bh-icon 
-            size=""
-            value="warning" />
-          <span>2 warning</span>
-        </div>
-           <user-avatar
+          </div>
+          <div class="dashboard-layout__main-panel__header__right__icons">
+            <bh-icon
+              size=""
+              value="sentence" />
+            <span>30 sentences</span>
+          </div>
+          <div class="dashboard-layout__main-panel__header__right__icons">
+            <bh-icon
+              size=""
+              value="warning" />
+            <span>2 warning</span>
+          </div>
+          <user-avatar
             :profile="myProfile"
             size="medium"
             class="dashboard-layout__main-panel__header__right__user"/>
@@ -58,7 +58,7 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   components: {
     SideBar,
-    UserAvatar
+    UserAvatar,
     // ContentFooter,
     // DashboardContent,
     // MobileMenu
@@ -140,7 +140,7 @@ export default {
           justify-content: space-between;
           align-items: center;
           color: #9E9E9E;
-          
+
           span {
             margin: 0 .3rem;
           }

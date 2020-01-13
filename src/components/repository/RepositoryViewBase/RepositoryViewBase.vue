@@ -6,14 +6,14 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <!-- <div class="rpstr-vw-bs__wrapper__header"> -->
-        <!-- <router-link
+      <!-- <router-link
           class="rpstr-vw-bs__wrapper__header__logo"
           to="/home"> -->
-          <!-- <img
+      <!-- <img
             src="~@/assets/imgs/logo.svg"
             alt="bothub"> -->
-        <!-- </router-link> -->
-        <!-- <div>
+      <!-- </router-link> -->
+      <!-- <div>
           <repository-info
             v-if="repository && repository.name"
             :repository="repository" />
