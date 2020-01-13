@@ -146,37 +146,37 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/variables.scss';
 
-.version {
-	margin: auto;
- 	max-width: $max-repository-card-width;
+.versions {
+  margin: auto;
+  max-width: $max-repository-card-width;
 
-	&__header {
-		margin: 3.875rem 0 2.75rem 0;
+  &__header {
+    margin: 3.875rem 0 2.75rem 0;
 
-		&__title {
-			&__wrapper {
-				display: flex;
-				align-items: flex-start;
-			}
-		}
+    &__title {
+      &__wrapper {
+        display: flex;
+        align-items: flex-start;
+      }
+    }
 
-		&__button {
-			font-weight: bold;
-			margin: 0 1rem;
-		}
-	}
+    &__button {
+      font-weight: bold;
+      margin: 0 1rem;
+    }
+  }
 
-	&__table {
-		&__version-number {
-			color: $primary;
-			font-weight: bold;
-		}
+  &__table {
+    &__version-number {
+      color: $primary;
+      font-weight: bold;
+    }
 
-		&__buttons-wrapper {
-			display: flex;
-			justify-content: space-between;
-			color: $color-grey-dark;
-		}
-	}
+    &__buttons-wrapper {
+      display: flex;
+      justify-content: space-between;
+      color: $color-grey-dark;
+    }
+  }
 }
 </style>
