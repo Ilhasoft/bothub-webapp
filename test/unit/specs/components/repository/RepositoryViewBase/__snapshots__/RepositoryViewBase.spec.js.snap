@@ -3,16 +3,6 @@
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <div class="rpstr-vw-bs__wrapper__header">
-      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
-      <div>
-        <!---->
-      </div>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
-      <!---->
-    </div>
-    <!---->
-    <!---->
     <!---->
     <!---->
   </div>
@@ -21,23 +11,12 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
-  <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <div class="rpstr-vw-bs__wrapper__header">
-      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
-      <div>
-        <!---->
-      </div>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
-      <!---->
-    </div>
-    <!---->
-    <!---->
     <!---->
     <!---->
   </div>
@@ -46,23 +25,12 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
-  <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <div class="rpstr-vw-bs__wrapper__header">
-      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
-      <div>
-        <!---->
-      </div>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
-      <!---->
-    </div>
-    <!---->
-    <!---->
     <!---->
     <!---->
   </div>
@@ -71,29 +39,17 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
   </div>
   <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
-  <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
 
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <div class="rpstr-vw-bs__wrapper__header">
-      <router-link-stub to="/home" tag="a" event="click" class="rpstr-vw-bs__wrapper__header__logo"><img src="~@/assets/imgs/logo.svg" alt="bothub"></router-link-stub>
-      <div>
-        <!---->
-      </div>
-      <div class="bh-grid__item bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__mobile-navigation"></div>
-      <!---->
-    </div>
-    <!---->
-    <!---->
     <!---->
     <!---->
   </div>
   <!---->
   <new-repository-modal-stub></new-repository-modal-stub>
   <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
-  <site-footer-stub class="rpstr-vw-bs__footer"></site-footer-stub>
 </div>
 `;
