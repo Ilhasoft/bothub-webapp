@@ -60,5 +60,27 @@ export default {
       login: 'Sign in to your account to edit this repository.',
       get_examples_test_sentences: 'test sentences',
     },
+    home: {
+      description: 'Description',
+      no_description: 'There is no description for this repository',
+      intents_list: 'Intents List',
+      entities_list: 'Entities List',
+      entities_label: 'entities grouped by label.',
+    },
+    settings: {
+      title_edit_repository: 'Edit Repository',
+      manage_your_team: 'Manage your team',
+      authorization_requests: 'Authorization Requests',
+      not_can_edit_repository: 'You can not edit this repository',
+      login: 'Sign in to your account to edit this repository.',
+    },
+    trainings: {
+      grid_text1: 'Train a new sentence',
+      grid_text2: 'Add examples to improve your bot intelligence.',
+      not_can_edit_repository: 'You can not contribute to this repository',
+      login: 'Sign in to your account to contribute to this repository.',
+      sentences_list: 'Sentences list',
+      run_training: 'Run training',
+    },
   },
 };

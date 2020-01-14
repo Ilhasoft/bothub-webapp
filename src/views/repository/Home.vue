@@ -33,7 +33,7 @@
       </div>
       <div class="repository-home__description">
         <div class="repository-home__title">
-          Description
+          {{ this.$i18n.t('$bothub.home.description') }}
         </div>
         <div>
           <vue-markdown
@@ -52,7 +52,7 @@
             v-if="repository.description"
             class="repository-home__description__text"/>
           <p v-else>
-            <i class="text-color-grey-dark">There is no description for this repository</i>
+            <i class="text-color-grey-dark">{{ this.$i18n.t('$bothub.home.no_description') }}</i>
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@
         class="repository-home__intents-list"
       >
         <div class="repository-home__title">
-          Intents List
+          {{ this.$i18n.t('$bothub.home.intents_list') }}
         </div>
         <badges-card
           :list="repository.intents_list"
@@ -75,7 +75,7 @@
         class="repository-home__entities-list"
       >
         <div class="repository-home__title">
-          Entities List
+          {{ this.$i18n.t('$bothub.home.entities_list') }}
         </div>
         <badges-card
           v-if="repository.other_label.entities.length > 0"
@@ -85,7 +85,7 @@
         />
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
-            {{ labeledEntitiesCount }} entities grouped by label.
+            {{ labeledEntitiesCount }} {{ this.$i18n.t('$bothub.home.entities_label') }}
           </div>
           <badges-card
             v-for="(label, i) in repository.labels"

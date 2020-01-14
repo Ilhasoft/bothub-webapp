@@ -8,7 +8,7 @@
           v-if="repository.authorization.can_write"
           class="bh-grid bh-grid--column">
           <div class="bh-grid__item">
-            <h1>Edit Repository</h1>
+            <h1>{{ this.$i18n.t('$bothub.settings.title_edit_repository') }}</h1>
             <edit-repository-form
               :owner-nickname="repository.owner__nickname"
               :slug="repository.slug"
@@ -16,7 +16,7 @@
               @edited="onEdited($event)" />
           </div>
           <div class="bh-grid__item">
-            <h1>Manage your team</h1>
+            <h1>{{ this.$i18n.t('$bothub.settings.manage_your_team') }}</h1>
             <set-authorization-role-form
               ref="setAuthorizationRoleForm"
               :repository-uuid="repository.uuid"
@@ -27,7 +27,7 @@
               @edit="onEditRole($event)" />
           </div>
           <div class="bh-grid__item">
-            <h1>Authorization Requests</h1>
+            <h1>{{ this.$i18n.t('$bothub.settings.authorization_requests') }}</h1>
             <authorization-requests-list
               :repository-uuid="repository.uuid"
               @review="onReviewAuthorizationRequest()" />
@@ -38,7 +38,7 @@
           class="bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not edit this repository
+              {{ this.$i18n.t('$bothub.settings.not_can_edit_repository') }}
             </div>
           </div>
         </div>
@@ -48,7 +48,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to edit this repository.
+            {{ this.$i18n.t('$bothub.settings.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>
