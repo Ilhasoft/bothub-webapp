@@ -39,7 +39,9 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">new bot</bh-button>
+                @click="openNewRepositoryModal()">
+                <!-- {{ this.$lang.t('$buefy.about.firstParagraph') }} -->
+              </bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -181,6 +183,7 @@ export default {
     },
   },
 };
+console.log(this.$router);
 </script>
 
 <style lang="scss" scoped>
