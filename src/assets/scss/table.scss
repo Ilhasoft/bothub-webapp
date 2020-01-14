@@ -3,3 +3,7 @@ $table-body-background-color: white;
 $table-cell-padding: 1rem 1.5rem 1rem 1.5rem;
 $table-border: #CFD5D9;
 $table-width: 1px;
+
+.b-table .table {
+  border: 1px solid rgb(197, 197, 197) !important;
+}

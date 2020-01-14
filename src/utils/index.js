@@ -41,8 +41,8 @@ const strTrueIndexOf = (a, b) => (a
 );
 
 export const formatDate = (text) => {
-  let date = new Date(text);
-  return date.toLocaleDateString("pt-BR");
+  const date = new Date(text);
+  return date.toLocaleDateString('pt-BR');
 };
 
 export const filterAndOrderListByText = (list, text) => (
