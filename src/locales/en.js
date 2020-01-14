@@ -1,8 +1,11 @@
 export default {
-  $buefy: {
-    about: {
-      title: 'Welcome!',
-      firstParagraph: 'P.',
+  $bothub: {
+    layout: {
+      newbot: 'new bot',
+      start_you_bot: 'Start your bot',
+      logout: 'Logout',
+      signin: 'sign in',
+      signup: 'sign up',
     },
   },
 };

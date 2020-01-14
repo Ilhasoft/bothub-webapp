@@ -40,7 +40,7 @@
                 rounded
                 max-content
                 @click="openNewRepositoryModal()">
-                <!-- {{ this.$lang.t('$buefy.about.firstParagraph') }} -->
+                {{ this.$i18n.t('$bothub.layout.newbot') }}
               </bh-button>
             </div>
             <div
@@ -65,10 +65,10 @@
                 </bh-dropdown-item>
                 <bh-dropdown-item
                   @click="openNewRepositoryModal()">
-                  Start your bot
+                  {{ this.$i18n.t('$bothub.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
-                  Logout
+                  {{ this.$i18n.t('$bothub.layout.logout') }}
                 </bh-dropdown-item>
               </bh-dropdown>
             </div>
@@ -79,7 +79,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="openLoginModal()">sign in</bh-button>
+                @click="openLoginModal()">{{ this.$i18n.t('$bothub.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -89,7 +89,7 @@
                 inverted
                 max-content
                 class="hide-mobile"
-                @click="signUp()">sign up</bh-button>
+                @click="signUp()">{{ this.$i18n.t('$bothub.layout.signup') }}</bh-button>
             </div>
           </div>
         </div>
@@ -183,7 +183,6 @@ export default {
     },
   },
 };
-console.log(this);
 </script>
 
 <style lang="scss" scoped>
