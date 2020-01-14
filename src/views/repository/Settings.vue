@@ -6,9 +6,8 @@
       <div v-if="repository">
         <div v-if="authenticated">
           <div
-            v-if="repository.authorization.can_write"
-            class="columns is-row">
-            <div class="column">
+            v-if="repository.authorization.can_write">
+            <div class="tile is-vertical">
               <h1>Edit Repository</h1>
               <edit-repository-form
                 :owner-nickname="repository.owner__nickname"
@@ -16,7 +15,7 @@
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
-            <div class="column">
+            <div class="tile is-vertical">
               <h1>Manage your team</h1>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
@@ -27,7 +26,7 @@
                 :repository-uuid="repository.uuid"
                 @edit="onEditRole($event)" />
             </div>
-            <div class="column">
+            <div class="tile is-vertical">
               <h1>Authorization Requests</h1>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
@@ -35,9 +34,8 @@
             </div>
           </div>
           <div
-            v-else
-            class="columns">
-            <div class="column">
+            v-else>
+            <div class="tile is-vertical">
               <b-notification
                 :closable="false"
                 type="is-warning">
@@ -47,9 +45,8 @@
           </div>
         </div>
         <div
-          v-else
-          class="columns">
-          <div class="column">
+          v-else>
+          <div class="tile is-vertical">
             <b-notification
               :closable="false"
               type="is-info">
