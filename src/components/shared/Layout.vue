@@ -183,7 +183,7 @@ export default {
     },
   },
 };
-console.log(this.$router);
+console.log(this);
 </script>
 
 <style lang="scss" scoped>
