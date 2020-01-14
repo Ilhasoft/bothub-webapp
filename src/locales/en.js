@@ -7,5 +7,9 @@ export default {
       signin: 'sign in',
       signup: 'sign up',
     },
+    login_modal: {
+      login: 'Login',
+      forgot_password: 'Forgot password',
+    },
   },
 };
