@@ -147,8 +147,4 @@ export default {
       @include default-margin
     }
 
-    .is-row {
-      flex-direction: column;
-    }
-
 </style>
