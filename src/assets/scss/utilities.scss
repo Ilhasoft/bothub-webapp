@@ -16,3 +16,8 @@ $link-focus-border: $primary;
 $family-sans-serif: 'Encode Sans', sans-serif;
 
 $max-repository-card-width: 1200px;
+
+@mixin default-margin {
+  padding: 0.25rem;
+  margin: 0.5rem;
+}
