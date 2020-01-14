@@ -12,25 +12,26 @@
         <div class="text-color-primary landing-page__nav__login">
           <strong
             class="text-color-primary clickable"
-            @click="openLoginModal()">Sign in</strong>
+            @click="openLoginModal()">{{ this.$i18n.t('$bothub.landing_page.signin') }}</strong>
           <span>or</span>
           <strong
             class="text-color-primary clickable"
-            @click="signUpRedirect()">Sign up</strong>
+            @click="signUpRedirect()">{{ this.$i18n.t('$bothub.landing_page.signup') }}</strong>
         </div>
       </div>
     </nav>
     <header class="landing-page__header">
       <div class="landing-page__header__content bh-grid">
         <div class="landing-page__header__content__text bh-grid__item">
-          <h1>Build, Optimize and Train</h1>
-          <p>Be part of an open source and democratic global community that builds,
-          trains and shares datasets.</p>
+          <h1>{{ this.$i18n.t('$bothub.landing_page.header_content1') }}</h1>
+          <p>{{ this.$i18n.t('$bothub.landing_page.header_content2') }}</p>
           <bh-button
             size="normal"
             rounded
             primary
-            @click="signUpRedirect()">Join us for free</bh-button>
+            @click="signUpRedirect()">
+            {{ this.$i18n.t('$bothub.landing_page.join_for_free') }}
+          </bh-button>
         </div>
         <div class="landing-page__header__content__animation bh-grid__item" />
       </div>
@@ -42,25 +43,26 @@
       <div class="landing-page__intro__background bh-grid bh-grid--space-between">
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/hand.svg">
-          <h2>Build your AI</h2>
-          <span>Create repositories with example sentences contextualized.</span>
+          <h2>{{ this.$i18n.t('$bothub.landing_page.grid_text1') }}</h2>
+          <span>{{ this.$i18n.t('$bothub.landing_page.grid_text2') }}</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/cloud.svg">
-          <h2>Share datasets</h2>
-          <span>You can choose from various ready-to-use datasets.</span>
+          <h2>{{ this.$i18n.t('$bothub.landing_page.grid_text3') }}</h2>
+          <span>{{ this.$i18n.t('$bothub.landing_page.grid_text4') }}</span>
         </div>
         <div class="landing-page__intro__item bh-grid bh-grid--column text-center">
           <img src="~@/assets/imgs/talk-balloon.svg">
-          <h2>Join the community</h2>
-          <span>Contribute to existing datasets adding more
-          examples or new language support.</span>
+          <h2>{{ this.$i18n.t('$bothub.landing_page.grid_text5') }}</h2>
+          <span>{{ this.$i18n.t('$bothub.landing_page.grid_text6') }}</span>
         </div>
       </div>
     </section>
     <section class="landing-page__bots">
       <div class="landing-page__bots__content text-center">
-        <h1 class="landing-page__bots__content__title">Best bots</h1>
+        <h1 class="landing-page__bots__content__title">
+          {{ this.$i18n.t('$bothub.landing_page.best_bots') }}
+        </h1>
         <repository-card-list
           :show-more-button="false"
           limit="6"/>
@@ -68,19 +70,21 @@
           class="landing-page__bots__content__button"
           size="normal"
           primary
-          @click="showAllBots()"> All bots </bh-button>
+          @click="showAllBots()"> {{ this.$i18n.t('$bothub.landing_page.all_bots') }} </bh-button>
       </div>
     </section>
     <section class="landing-page__signup">
       <div class="landing-page__singup bh-grid text-center">
         <div class="bh-grid__item bh-grid__item">
-          <h1>Join the millions of developers already using Bothub</h1>
+          <h1>{{ this.$i18n.t('$bothub.landing_page.signup_grid') }}</h1>
           <bh-button
             class="landing-page__signup__button"
             size="normal"
             rounded
             secondary
-            @click="signUpRedirect()">Sign up for free</bh-button>
+            @click="signUpRedirect()">
+            {{ this.$i18n.t('$bothub.landing_page.signup_forfree') }}
+          </bh-button>
         </div>
         <div class="landing-page__signup__animation bh-grid__item">
           <div class="landing-page__signup__animation__girl"/>
