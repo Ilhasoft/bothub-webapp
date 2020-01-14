@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="version">
+    <div class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
           <h2>Versions</h2>
@@ -28,7 +28,7 @@
               width="40"
               sortable
               numeric>
-              <span class="version__table__version-number">
+              <span class="versions__table__version-number">
                 {{ props.row.version }}
               </span>
             </b-table-column>
@@ -60,12 +60,12 @@
             <b-table-column
               width="180"
               label="">
-              <div class="version__table__buttons-wrapper">
+              <div class="versions__table__buttons-wrapper">
                 <b-button
-                  :type="props.row.main ? 'is-primary': 'is-light'"
+                  :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
                   rounded>Main</b-button>
-                <b-icon icon="pen"/>
+                <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
               </div>
             </b-table-column>
@@ -83,7 +83,7 @@ import Layout from '@/components/shared/Layout';
 
 const data = [
   {
-    id: 1, version: 'v01549', created_by: 'johncordeiro', date_created: '4 sep 2019', latest_modification: '2 months ago', main: true,
+    id: 1, version: 'v01549', created_by: 'johncordeiro', date_created: '4 sep 2019', latest_modification: '2 months ago', is_default: true,
   },
   {
     id: 2, version: 'v01323', created_by: 'johncordeiro', date_created: '5 sep 2019', latest_modification: '5 months ago',
