@@ -9,14 +9,14 @@
         v-model="activeTab"
         position="is-centered"
         expanded >
-        <b-tab-item :label="this.$i18n.t('$bothub.login_modal.login')">
+        <b-tab-item :label="this.$i18n.t('webapp.login_modal.login')">
           <login-form
             @authenticated="onAuthenticated"
             @forgotPasswordClick="showForgotPasswordTab" />
         </b-tab-item>
         <b-tab-item
           :visible="activeTab === 1"
-          :label="this.$i18n.t('$bothub.login_modal.forgot_password')">
+          :label="this.$i18n.t('webapp.login_modal.forgot_password')">
           <forgot-password-form />
         </b-tab-item>
       </b-tabs>

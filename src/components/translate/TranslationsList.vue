@@ -8,7 +8,7 @@
       @itemDeleted="examplesDeleted()" />
     <p
       v-if="translationsList && translationsList.empty"
-      class="no-examples">{{ this.$i18n.t('$bothub.translate.no_translation') }}</p>
+      class="no-examples">{{ this.$i18n.t('webapp.translate.no_translation') }}</p>
   </div>
 </template>
 

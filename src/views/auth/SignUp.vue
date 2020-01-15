@@ -11,13 +11,13 @@
         </router-link>
         <div class="sign-up__nav__login">
           <span class="sign-up__nav__text">
-            {{ this.$i18n.t('$bothub.register_form.already_have_account') }}
+            {{ this.$i18n.t('webapp.register_form.already_have_account') }}
           </span>
           <bh-button
             class="sign-up__nav__login__button"
             primary
             size="normal"
-            @click="openLoginModal()">{{ this.$i18n.t('$bothub.register_form.signin') }}</bh-button>
+            @click="openLoginModal()">{{ this.$i18n.t('webapp.register_form.signin') }}</bh-button>
         </div>
       </div>
     </nav>
@@ -29,7 +29,7 @@
       </div>
       <div class="bh-grid__item sign-up__wrapper-content__form">
         <div class="sign-up__wrapper-content__form__title">
-          <h1>{{ this.$i18n.t('$bothub.register_form.get_started_free') }}</h1>
+          <h1>{{ this.$i18n.t('webapp.register_form.get_started_free') }}</h1>
         </div>
         <form @submit.prevent="onSubmit">
           <loading v-if="!formSchema" />
@@ -45,11 +45,11 @@
                 :disabled="submitting"
                 type="submit"
                 full-width
-                color="info">{{ this.$i18n.t('$bothub.register_form.get_free') }}</bh-button>
+                color="info">{{ this.$i18n.t('webapp.register_form.get_free') }}</bh-button>
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
-                {{ this.$i18n.t('$bothub.register_form.policy_service') }}
+                {{ this.$i18n.t('webapp.register_form.policy_service') }}
               </small>
             </div>
           </div>

@@ -46,7 +46,7 @@
           class="bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              {{ this.$i18n.t('$bothub.translate.not_can_edit_repository') }}
+              {{ this.$i18n.t('webapp.translate.not_can_edit_repository') }}
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            {{ this.$i18n.t('$bothub.translate.login') }}
+            {{ this.$i18n.t('webapp.translate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>

@@ -5,10 +5,10 @@
         src="@/assets/imgs/botinho.png"
         alt="botinho">
       <h3 class="safari-alert__content__title">
-        {{ this.$i18n.t('$bothub.safari_alert.title1') }}
+        {{ this.$i18n.t('webapp.safari_alert.title1') }}
       </h3>
       <h3 class="safari-alert__content__title">
-        {{ this.$i18n.t('$bothub.safari_alert.title2') }}
+        {{ this.$i18n.t('webapp.safari_alert.title2') }}
       </h3>
       <div class="bh-grid">
         <a
@@ -41,7 +41,7 @@
         size="normal"
         primary
         @click="goToLandingPage()">
-        {{ this.$i18n.t('$bothub.safari_alert.keep_using_safari') }}
+        {{ this.$i18n.t('webapp.safari_alert.keep_using_safari') }}
       </bh-button>
     </div>
   </div>

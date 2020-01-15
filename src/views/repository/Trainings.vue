@@ -10,21 +10,21 @@
           <div class="bh-grid__item">
             <div v-if="authenticated">
               <div v-if="repository.authorization.can_contribute">
-                <h2>{{ this.$i18n.t('$bothub.trainings.grid_text1') }}</h2>
-                <span>{{ this.$i18n.t('$bothub.trainings.grid_text2') }}</span>
+                <h2>{{ this.$i18n.t('webapp.trainings.grid_text1') }}</h2>
+                <span>{{ this.$i18n.t('webapp.trainings.grid_text2') }}</span>
                 <new-example-form
                   :repository="repository"
                   @created="onExampleCreated()" />
               </div>
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
-                  {{ this.$i18n.t('$bothub.trainings.not_can_edit_repository') }}
+                  {{ this.$i18n.t('webapp.trainings.not_can_edit_repository') }}
                 </div>
               </div>
             </div>
             <div v-else>
               <div class="bh-notification bh-notification--info">
-                {{ this.$i18n.t('$bothub.trainings.login') }}
+                {{ this.$i18n.t('webapp.trainings.login') }}
               </div>
               <login-form hide-forgot-password />
             </div>
@@ -34,14 +34,14 @@
       <hr>
       <div class="bh-grid__item">
         <div class="trainings-repository__list-wrapper">
-          <h2>{{ this.$i18n.t('$bothub.trainings.sentences_list') }}</h2>
+          <h2>{{ this.$i18n.t('webapp.trainings.sentences_list') }}</h2>
           <bh-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
             color="secondary-light"
             size="normal"
             @click="openTrainingModal">
-            {{ this.$i18n.t('$bothub.trainings.run_training') }}
+            {{ this.$i18n.t('webapp.trainings.run_training') }}
           </bh-button>
         </div>
         <filter-examples

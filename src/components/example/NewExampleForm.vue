@@ -47,7 +47,7 @@
             size="normal"
             type="submit"
           >
-            <slot v-if="!submitting">{{ this.$i18n.t('$bothub.trainings.submit') }}</slot>
+            <slot v-if="!submitting">{{ this.$i18n.t('webapp.trainings.submit') }}</slot>
           </bh-button>
         </bh-field>
       </div>

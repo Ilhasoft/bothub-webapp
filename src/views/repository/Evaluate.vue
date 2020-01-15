@@ -9,13 +9,13 @@
           class="evaluate">
           <div class="evaluate__content-header">
             <h2 class="evaluate__content-header__title">
-              {{ this.$i18n.t('$bothub.evaluate.header_title') }}
+              {{ this.$i18n.t('webapp.evaluate.header_title') }}
             </h2>
-            <p>{{ this.$i18n.t('$bothub.evaluate.header_title_p') }}</p>
-            <p>{{ this.$i18n.t('$bothub.evaluate.header_title_p2') }}</p>
+            <p>{{ this.$i18n.t('webapp.evaluate.header_title_p') }}</p>
+            <p>{{ this.$i18n.t('webapp.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
-                <p><strong>{{ this.$i18n.t('$bothub.evaluate.header_title_lang') }}</strong></p>
+                <p><strong>{{ this.$i18n.t('webapp.evaluate.header_title_lang') }}</strong></p>
                 <bh-select
                   v-model="currentLanguage">
                   <option
@@ -35,7 +35,7 @@
                 secondary
                 @click="newEvaluate()">
                 <slot v-if="!evaluating">
-                  {{ this.$i18n.t('$bothub.evaluate.run_test') }}
+                  {{ this.$i18n.t('webapp.evaluate.run_test') }}
               </slot></bh-button>
             </div>
           </div>
@@ -68,7 +68,7 @@
                 bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              {{ this.$i18n.t('$bothub.evaluate.you_can_not_edit') }}
+              {{ this.$i18n.t('webapp.evaluate.you_can_not_edit') }}
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            {{ this.$i18n.t('$bothub.evaluate.login') }}
+            {{ this.$i18n.t('webapp.evaluate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>
@@ -162,7 +162,7 @@ export default {
           .map((lang, index) => ({
             id: index + 1,
             value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$i18n.t('$bothub.evaluate.get_examples_test_sentences')})`,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$i18n.t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
     },
