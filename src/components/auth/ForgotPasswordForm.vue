@@ -13,7 +13,9 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">Reset password</button>
+          class="button is-primary">
+          {{ this.$i18n.t('$bothub.landing_page.reset_password') }}
+        </button>
       </div>
     </div>
   </form>
@@ -61,7 +63,7 @@ export default {
         this.success_msgs = [
           {
             class: 'success',
-            text: 'Check your email, we\'ve sent you the instructions to reset your password.',
+            text: this.$i18n.t('$bothub.landing_page.reset_password_success'),
           },
         ];
         return true;

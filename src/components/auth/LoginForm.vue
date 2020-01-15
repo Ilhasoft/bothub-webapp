@@ -16,7 +16,9 @@
           ref="forgotPassword"
           href="#forgot-password"
           class="has-text-grey"
-          @click.prevent="forgotPasswordClick">Forgot password?</a>
+          @click.prevent="forgotPasswordClick">
+          {{ this.$i18n.t('$bothub.landing_page.forgot_password') }}
+        </a>
       </div>
     </div>
     <div class="field">

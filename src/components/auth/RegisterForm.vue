@@ -13,7 +13,7 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">Register</button>
+          class="button is-primary">{{ this.$i18n.t('$bothub.landing_page.register') }}</button>
       </div>
     </div>
   </form>

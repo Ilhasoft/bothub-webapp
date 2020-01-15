@@ -34,6 +34,10 @@ export default {
       all_bots: 'All bots',
       signup_grid: 'Join the millions of developers already using Bothub',
       signup_forfree: 'Sign up for free',
+      reset_password: 'Reset password',
+      reset_password_success: 'Check your email, we\'ve sent you the instructions to reset your password.',
+      forgot_password: 'Forgot password?',
+      register: 'Register',
     },
     safari_alert: {
       title1: 'Sorry, the Safari browser is not compatible with all our features.',
@@ -81,6 +85,7 @@ export default {
       login: 'Sign in to your account to contribute to this repository.',
       sentences_list: 'Sentences list',
       run_training: 'Run training',
+      submit: 'Submit',
     },
     translate: {
       not_can_edit_repository: 'You can not contribute to this repository',
@@ -105,6 +110,11 @@ export default {
       training: 'Training...',
       not_trained: 'Not trained yet.',
       training_log: 'Training Log',
+    },
+    role_selected: {
+      role_user: 'Can read and analyze',
+      role_contributor: 'Can read, analyze and contribute with examples and translations',
+      role_admin: 'Can read, analyze, contribute and write repository config',
     },
   },
 };
