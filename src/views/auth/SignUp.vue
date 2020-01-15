@@ -11,11 +11,10 @@
         </router-link>
         <div class="sign-up__nav__login">
           <span class="sign-up__nav__text">Already have an account?</span>
-          <bh-button
-            class="sign-up__nav__login__button"
-            primary
+          <b-button
+            class="is-primary sign-up__nav__login__button"
             size="normal"
-            @click="openLoginModal()">Sign in</bh-button>
+            @click="openLoginModal()">Sign in</b-button>
         </div>
       </div>
     </nav>
@@ -39,11 +38,13 @@
             class="field" />
           <div class="field">
             <div class="control has-text-centered">
-              <bh-button
+              <b-button
+                expanded
+                class="is-info"
                 :disabled="submitting"
                 type="submit"
                 full-width
-                color="info">Get free</bh-button>
+                color="info">Get free</b-button>
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
@@ -144,8 +145,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
 
 $width: 1085px;
