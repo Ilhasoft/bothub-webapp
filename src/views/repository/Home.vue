@@ -182,7 +182,6 @@ export default {
 @import 'github-markdown-css/github-markdown.css';
 
 .repository-home {
-  background: grey;
   &__title {
     font-size: 1.75rem;
     font-weight: 700;

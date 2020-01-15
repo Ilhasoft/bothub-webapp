@@ -6,9 +6,7 @@
         ref="colapseButton"
         class="sidebar-wrapper__colapse-button"
         @click="colapseHandle()">
-        <b-icon 
-          pack="fas"
-          icon="arrow-right"/>
+        <b-icon icon="arrow-right"/>
       </div>
       <b-menu v-if="colapse">
         <div class="menu-header">
@@ -34,12 +32,12 @@
           <b-menu-item
             :to="{ name: 'repository-training' }"
             tag="router-link"
-            icon="ad"
+            icon="refresh"
             label="Training"/>
           <b-menu-item
             :active="isActive"
             :expanded="isActive"
-            icon="chart-line"
+            icon="wechat"
             @click="isActive = !isActive">
             <template
               slot="label"
@@ -65,15 +63,15 @@
           <b-menu-item
             :to="{ name: 'repository-translate' }"
             tag="router-link"
-            icon="language"
+            icon="translate"
             label="Translation"/>
           <b-menu-item
-            icon="plug"
+            icon="power-plug"
             label="Integration"/>
           <b-menu-item
             :to="{ name: 'repository-settings' }"
             tag="router-link"
-            icon="cog"
+            icon="settings"
             label="Settings"/>
         </b-menu-list>
       </b-menu>
@@ -85,7 +83,7 @@
           class="colapse-button icon-list"
           @click="colapseHandle()">
           <b-icon
-            icon="arrow-right"/>
+            icon="arrow-right-bold"/>
         </div>
         <b-icon
           @click.native="routerHandle('repository-summary')"
@@ -94,10 +92,8 @@
         <b-icon
           @click.native="routerHandle('repository-training')"
           class="icon-list"
-          size="is-medium"
-          icon="ad" />
+          icon="wechat" />
         <b-dropdown 
-          position="is-bottom-right"
           aria-role="list">
           <b-icon
             slot="trigger"
@@ -116,21 +112,20 @@
         <b-icon
           @click.native="routerHandle('repository-translate')"
           class="icon-list"
-          icon="language" />
+          icon="translate" />
         <b-icon
           class="icon-list"
-          icon="plug" />
+          icon="power-plug" />
         <b-icon
           @click.native="routerHandle('repository-settings')"
           class="icon-list"
-          icon="cog" />
+          icon="settings" />
       </div>
       <div/>
     </div>
   </div>
 </template>
 <script>
-import { botinho } from '../../../../bh/src/icons';
 
 export default {
   name: 'SideBar',
@@ -179,7 +174,7 @@ export default {
   z-index: 1;
 
   .sidebar-wrapper {
-    background: white;
+    background: #2F343D;
     height: 100%;
     padding: 1rem;
     width: 260px;
@@ -187,7 +182,7 @@ export default {
 
   &__colapse-button {
     background: #696968;;
-    color:white;
+    color:#FFFFFF;
     width: 2rem;
     height: 2rem;
     position: absolute;
@@ -204,11 +199,11 @@ export default {
 
     &--colapsed {
       transition: width .1s;
-      background: white;
+      background: #2F343D;
       height: 100%;
       padding: 1rem;
       width: 60px;
-      color: grey;
+      color: #FFFFFF;
     }
   }
 }
@@ -218,6 +213,6 @@ export default {
   cursor: pointer;
 }
 .icon-list:hover {
-  color: #00d1b2;
+  color: #12A391;
 }
 </style>

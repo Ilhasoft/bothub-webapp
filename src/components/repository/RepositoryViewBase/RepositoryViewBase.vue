@@ -222,7 +222,6 @@ export default {
     $medium-screen: 1035px;
     $header-height: (16rem + $navigation-height);
     $wrapper-width: 100%;
-    // background-color: grey;
     height: 100%;
 
 
@@ -233,7 +232,7 @@ export default {
       padding: 0;
 
       :nth-child(3n) {
-        // margin-right: 8px;
+        margin-right: 8px;
       }
 
       @media screen and (max-width: $medium-screen) {
@@ -352,11 +351,11 @@ export default {
       }
 
       &__content {
-        // max-width: 80%;
-        // margin: 0 auto;
+        max-width: 80%;
+        margin: 1.5rem auto;
 
         @media screen and (min-width: 1200px) {
-          // width: 62.5rem;
+          width: 62.5rem;
         }
       }
 
@@ -373,6 +372,7 @@ export default {
 
     &__error {
       padding: .5rem;
+
       h1 {
         font-size: 3rem;
         line-height: 4rem;

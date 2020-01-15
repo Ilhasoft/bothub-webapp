@@ -1,7 +1,12 @@
 <template>
   <div class="dashboard-layout">
     <side-bar @colapse="colapseHandle()" />
-    <div :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+    <b-loading 
+     :is-full-page="isFullPage"
+     :active.sync="getCurrentRepository.name ? false : true" />
+    <div
+    v-show="getCurrentRepository.name ? true : false"
+    :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
@@ -11,9 +16,9 @@
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
           <div class="dashboard-layout__main-panel__header__info__left">
-            <p class="dashboard-layout__main-panel__header__info__left__title">Susana</p>
+            <p class="dashboard-layout__main-panel__header__info__left__title">{{getCurrentRepository.name}}</p>
             <p>Created by
-              <b class="has-text-primary">Johncordeiro</b>
+              <b class="has-text-primary">{{getCurrentRepository.owner__nickname}}</b>
             </p>
           </div>
         </div>
@@ -22,13 +27,16 @@
             <bh-icon
               size=""
               value="language" />
-            <span>9 languages</span>
+            <span>{{ 
+              getCurrentRepository.available_languages ? 
+              getCurrentRepository.available_languages.length : 
+              0}} languages</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               size=""
               value="sentence" />
-            <span>30 sentences</span>
+            <span>{{getCurrentRepository.examples__count}} sentences</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
@@ -65,18 +73,20 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'authenticated',
+      'getCurrentRepository',
       'myProfile',
     ]),
   },
   data() {
     return {
       colapse: true,
+      isLoading: false,
+      isFullPage: true
     };
   },
   methods: {
     colapseHandle() {
-      this.colapse = !this.colapse;
+      this.colapse = !this.colapse; 
     },
   },
 };
@@ -92,7 +102,7 @@ export default {
     &__header {
       width: 100%;
       height: 6rem;
-      background: white;
+      background: #2F343D;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -116,12 +126,16 @@ export default {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: white;
+            color: #FFFFFF;
           }
         }
 
         &__left {
           margin: 0 .8rem;
+
+          p {
+            color: #FFFFFF;
+          }
 
           &__title {
             font-weight: bold;
@@ -139,7 +153,7 @@ export default {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          color: #9E9E9E;
+          color: #FFFFFF;
 
           span {
             margin: 0 .3rem;
