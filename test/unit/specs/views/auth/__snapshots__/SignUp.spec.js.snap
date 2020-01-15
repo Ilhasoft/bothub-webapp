@@ -6,7 +6,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
     <div class="sign-up__nav__container">
       <router-link-stub to="/" tag="a" event="click" class="column sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
       <div class="sign-up__nav__login"><span class="sign-up__nav__text">Already have an account?</span>
-        <bh-button-stub size="normal" primary="true" type="button" class="sign-up__nav__login__button">Sign in</bh-button-stub>
+        <b-button-stub size="normal" nativetype="button" tag="button" class="is-primary sign-up__nav__login__button">Sign in</b-button-stub>
       </div>
     </div>
   </nav>
@@ -21,7 +21,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
         <!---->
         <div class="field">
           <div class="control has-text-centered">
-            <bh-button-stub color="info" type="submit" fullwidth="true">Get free</bh-button-stub>
+            <b-button-stub type="submit" expanded="true" nativetype="button" tag="button" full-width="" color="info" class="is-info">Get free</b-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
               By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
