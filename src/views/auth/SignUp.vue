@@ -42,7 +42,7 @@
                 :disabled="submitting"
                 expanded
                 class="is-info"
-                type="submit"
+                native-type="submit"
                 full-width
                 color="info">Get free</b-button>
             </div>
