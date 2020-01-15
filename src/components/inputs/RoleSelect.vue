@@ -23,11 +23,10 @@ import {
   ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN,
 } from '@/utils';
 
-
 const helpTextDict = {
-  [ROLE_USER]: this.$i18n.t('$bothub.role_selected.role_user'),
-  [ROLE_CONTRIBUTOR]: this.$i18n.t('$bothub.role_selected.role_contributor'),
-  [ROLE_ADMIN]: this.$i18n.t('$bothub.role_selected.role_admin'),
+  [ROLE_USER]: 'Can read and analyze',
+  [ROLE_CONTRIBUTOR]: 'Can read, analyze and contribute with examples and translations',
+  [ROLE_ADMIN]: 'Can read, analyze, contribute and write repository config',
 };
 
 export default {

@@ -8,7 +8,9 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">{{ this.$i18n.t('$bothub.evaluate.header_title') }}</h2>
+            <h2 class="evaluate__content-header__title">
+              {{ this.$i18n.t('$bothub.evaluate.header_title') }}
+            </h2>
             <p>{{ this.$i18n.t('$bothub.evaluate.header_title_p') }}</p>
             <p>{{ this.$i18n.t('$bothub.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
@@ -32,7 +34,9 @@
                 class="evaluate__content-header__wrapper__btn"
                 secondary
                 @click="newEvaluate()">
-              <slot v-if="!evaluating">{{ this.$i18n.t('$bothub.evaluate.run_test') }}</slot></bh-button>
+                <slot v-if="!evaluating">
+                  {{ this.$i18n.t('$bothub.evaluate.run_test') }}
+              </slot></bh-button>
             </div>
           </div>
           <div class="evaluate__navigation">

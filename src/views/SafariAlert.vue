@@ -40,7 +40,9 @@
         class="safari-alert__content__button"
         size="normal"
         primary
-        @click="goToLandingPage()">{{ this.$i18n.t('$bothub.safari_alert.keep_using_safari') }}</bh-button>
+        @click="goToLandingPage()">
+        {{ this.$i18n.t('$bothub.safari_alert.keep_using_safari') }}
+      </bh-button>
     </div>
   </div>
 </template>

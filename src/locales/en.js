@@ -53,6 +53,9 @@ export default {
       code_generator: 'Code Generator:',
       code_generator_text: 'Generate code to your respective programming language.',
       notification_info: 'Sign in to your account to contribute to this repository.',
+      analyze_text: 'Analyze Text',
+      analyze: 'Analyze',
+      no_detected: 'No detected',
     },
     evaluate: {
       header_title: 'Test your data set',
@@ -110,11 +113,6 @@ export default {
       training: 'Training...',
       not_trained: 'Not trained yet.',
       training_log: 'Training Log',
-    },
-    role_selected: {
-      role_user: 'Can read and analyze',
-      role_contributor: 'Can read, analyze and contribute with examples and translations',
-      role_admin: 'Can read, analyze, contribute and write repository config',
     },
   },
 };

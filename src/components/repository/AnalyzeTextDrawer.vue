@@ -3,7 +3,7 @@
     <button
       slot="trigger"
       class="drawer-title"
-      @click="openCollapse()">Analyze Text</button>
+      @click="openCollapse()">{{ this.$i18n.t('$bothub.analyze_text.analyze_text') }}</button>
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">
@@ -38,7 +38,7 @@
               <bh-button
                 :disabled="submitting"
                 type="submit"
-                primary>Analyze</bh-button>
+                primary>{{ this.$i18n.t('$bothub.analyze_text.analyze') }}</bh-button>
             </div>
           </form>
         </div>
@@ -52,7 +52,7 @@
                 <span>{{ result.intent.name }}</span>
                 <span>({{ result.intent.confidence | percent }})</span>
               </div>
-              <div v-else>No detected</div>
+              <div v-else>{{ this.$i18n.t('$bothub.analyze_text.no_detected') }}</div>
             </div>
             <div
               v-for="(entities, label) in result.entities"
