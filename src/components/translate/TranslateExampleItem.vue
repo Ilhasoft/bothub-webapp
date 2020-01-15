@@ -20,7 +20,7 @@
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <strong>Intent:&nbsp;</strong>
+          <strong>{{ this.$i18n.t('$bothub.translate.intent') }}&nbsp;</strong>
           <span>{{ intent }}</span>
         </div>
         <div class="level-item has-text-grey-light">
@@ -34,7 +34,7 @@
           <button
             class="button is-primary"
             @click="toggleFormOpen()">
-            <span>Translate</span>
+            <span>{{ this.$i18n.t('$bothub.translate.intent') }}</span>
             <b-icon icon="chevron-down" />
           </button>
         </div>

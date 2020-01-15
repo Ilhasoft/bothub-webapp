@@ -20,8 +20,10 @@
               'is-loading': loadingOriginal,
             }"
             @click="toggleOriginal()">
-            <span v-if="showingOriginal">Show Translated</span>
-            <span v-else>Show Original</span>
+            <span v-if="showingOriginal">
+              {{ this.$i18n.t('$bothub.translate.show_translated') }}
+            </span>
+            <span v-else>{{ this.$i18n.t('$bothub.translate.show_original') }}</span>
           </button>
         </div>
       </div>
@@ -38,7 +40,7 @@
     <div class="translation-infos level is-mobile">
       <div class="level-left">
         <div class="level-item">
-          <strong>Translated from&nbsp;</strong>
+          <strong>{{ this.$i18n.t('$bothub.translate.translated_from') }}&nbsp;</strong>
           <span>{{ from_language | languageVerbose }}&nbsp;</span>
           <flag :language="from_language" />
           <strong>&nbsp;</strong>

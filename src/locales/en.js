@@ -86,6 +86,12 @@ export default {
       not_can_edit_repository: 'You can not contribute to this repository',
       login: 'Sign in to your account to contribute to this repository.',
       submit_translation: 'Submit Translation',
+      intent: 'Intent:',
+      no_examples: 'No examples to translate.',
+      show_translated: 'Show Translated',
+      show_original: 'Show Original',
+      translated_from: 'Translated from',
+      no_translation: 'No translations.',
     },
     my_profile: {
       edit_your_profile: 'Edit Your Profile',
