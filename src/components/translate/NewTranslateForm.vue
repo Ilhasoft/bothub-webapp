@@ -23,7 +23,7 @@
             :disabled="!isValid || submitting"
             secondary
             size="normal"
-            type="submit">Submit Translation</bh-button>
+            type="submit">{{ this.$i18n.t('$bothub.translate.submit_translation') }}</bh-button>
         </bh-field>
       </div>
     </form>

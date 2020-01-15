@@ -13,7 +13,7 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">Edit</button>
+          class="button is-primary">{{ this.$i18n.t('$bothub.my_profile.edit') }}</button>
       </div>
     </div>
   </form>

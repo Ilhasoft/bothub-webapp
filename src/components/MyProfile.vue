@@ -15,21 +15,21 @@
             inverted
             @click="openEditProfileModal()">
             <bh-icon value="account-edit" />
-            <span>Edit Your Profile</span>
+            <span>{{ this.$i18n.t('$bothub.my_profile.edit_your_profile') }}</span>
           </bh-button>
           <bh-button
             primary
             inverted
             @click="openChangePasswordModal()">
             <bh-icon value="lock-reset" />
-            <span>Change Password</span>
+            <span>{{ this.$i18n.t('$bothub.my_profile.change_password') }}</span>
           </bh-button>
         </div>
       </div>
     </div>
     <div class="bh-grid bh-grid--column my-profile__repositories">
       <div class="bh-grid__item">
-        <h1>Repositories</h1>
+        <h1>{{ this.$i18n.t('$bothub.my_profile.repositories') }}</h1>
       </div>
       <div class="bh-grid__item">
         <pagination
@@ -44,7 +44,7 @@
         v-if="editProfileModalOpen"
         class="bh-grid">
         <div class="bh-grid__item">
-          <h1>Edit your profile</h1>
+          <h1>{{ this.$i18n.t('$bothub.my_profile.modal_edit_your_profile') }}</h1>
           <edit-profile-form @edited="onMyProfileEdited()" />
         </div>
       </div>
@@ -54,7 +54,7 @@
         v-if="changePasswordModalOpen"
         class="bh-grid">
         <div class="bh-grid__item">
-          <h1>Change Password</h1>
+          <h1>{{ this.$i18n.t('$bothub.my_profile.modal_change_password') }}</h1>
           <change-password-form @changed="onPasswordChanged()" />
         </div>
       </div>

@@ -13,17 +13,17 @@
               <div class="subtitle is-7">
                 <div v-if="by">
                   <div v-if="trained_at">
-                    Trained at {{ trained_at | moment('from') }} by {{ by__nickname }}
+                    {{ this.$i18n.t('$bothub.my_profile.trained_at', { trained: trained_at | moment('from'), by: by__nickname}) }}
                   </div>
                   <div v-else-if="failed_at">
-                    Train failed at {{ failed_at | moment('from') }}
+                    {{ this.$i18n.t('$bothub.my_profile.trained_at', { failed: failed_at | moment('from')}) }}
                   </div>
                   <div v-else>
-                    Training...
+                    {{ this.$i18n.t('$bothub.my_profile.training') }}
                   </div>
                 </div>
                 <div v-else>
-                  Not trained yet.
+                  {{ this.$i18n.t('$bothub.my_profile.not_trained') }}
                 </div>
               </div>
             </h4>
@@ -40,7 +40,7 @@
     </bh-card>
     <bh-modal :open.sync="logModalOpen">
       <div class="update-item__log">
-        <h2 class="title is-2">Training Log</h2>
+        <h2 class="title is-2">{{ this.$i18n.t('$bothub.my_profile.training_log') }}</h2>
         <pre class="update-item__log__content">{{ training_log }}</pre>
       </div>
     </bh-modal>

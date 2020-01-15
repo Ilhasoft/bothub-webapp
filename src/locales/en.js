@@ -82,5 +82,23 @@ export default {
       sentences_list: 'Sentences list',
       run_training: 'Run training',
     },
+    translate: {
+      not_can_edit_repository: 'You can not contribute to this repository',
+      login: 'Sign in to your account to contribute to this repository.',
+      submit_translation: 'Submit Translation',
+    },
+    my_profile: {
+      edit_your_profile: 'Edit Your Profile',
+      change_password: 'Change Password',
+      repositories: 'Repositories',
+      modal_edit_your_profile: 'Edit your profile',
+      modal_change_password: 'Change Password',
+      edit: 'Edit',
+      trained_at: 'Trained at {trained} by {by}',
+      train_fail: 'Train failed at {failed}',
+      training: 'Training...',
+      not_trained: 'Not trained yet.',
+      training_log: 'Training Log',
+    },
   },
 };
