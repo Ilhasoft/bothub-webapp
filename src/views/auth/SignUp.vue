@@ -39,9 +39,9 @@
           <div class="field">
             <div class="control has-text-centered">
               <b-button
+                :disabled="submitting"
                 expanded
                 class="is-info"
-                :disabled="submitting"
                 type="submit"
                 full-width
                 color="info">Get free</b-button>
