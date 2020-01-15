@@ -19,18 +19,19 @@ export default {
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
-  train(repositoryUUID) {
+  train(repositoryUUID, versionUUID) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/train/`,
-      {},
+      { repository_version: versionUUID },
     );
   },
-  analyze(repositoryUUID, language, text) {
+  analyze(repositoryUUID, versionUUID, language, text) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
       {
         language,
         text,
+        repository_version: versionUUID,
       },
     );
   },

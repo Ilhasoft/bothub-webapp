@@ -171,7 +171,10 @@ export default {
     async train(repositoryUUID) {
       this.training = true;
       try {
-        const response = await this.trainRepository({ repositoryUUID });
+        const response = await this.trainRepository({
+          repositoryUUID,
+          versionUUID: this.$route.params.version,
+        });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {

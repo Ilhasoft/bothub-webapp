@@ -21,9 +21,9 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { repositoryUUID }) {
+  trainRepository(store, { repositoryUUID, versionUUID }) {
     /* istanbul ignore next */
-    return repository.train(repositoryUUID);
+    return repository.train(repositoryUUID, versionUUID);
   },
   analyzeText(store, {
     repositoryUUID, language, text,

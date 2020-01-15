@@ -76,7 +76,7 @@ export default new Router({
       component: RepositoryHome,
     },
     {
-      path: '/:ownerNickname/:slug/training/',
+      path: '/:ownerNickname/:slug/:version/training/',
       name: 'repository-training',
       component: RepositoryTrainings,
     },

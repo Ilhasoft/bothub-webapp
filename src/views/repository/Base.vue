@@ -43,7 +43,7 @@ export default {
       'setUpdateRepository',
     ]),
     async updateRepository(silent = false) {
-      const { ownerNickname, slug } = this.$route.params;
+      const { ownerNickname, slug, version } = this.$route.params;
 
       if (!ownerNickname || !slug) {
         this.repository = null;
@@ -53,8 +53,9 @@ export default {
       if (!this.repository
           || this.repository.ownerNickname !== ownerNickname
           || this.repository.slug !== slug
+          || (version && this.respository.repository_version !== version)
           || !silent) {
-        this.repository = new Repository({ owner__nickname: ownerNickname, slug });
+        this.repository = new Repository({ owner__nickname: ownerNickname, slug, version });
       }
 
       this.repository.on('cache', this.onReady);
