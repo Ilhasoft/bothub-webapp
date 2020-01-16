@@ -101,7 +101,7 @@ export default new Router({
       component: RepositorySettings,
     },
     {
-      path: '/:ownerNickname/:slug/evaluate/',
+      path: '/:ownerNickname/:slug/:version/evaluate/',
       name: 'repository-test',
       component: RepositoryEvaluate,
     },

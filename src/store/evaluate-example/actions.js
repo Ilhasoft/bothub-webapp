@@ -32,12 +32,12 @@ export default {
     const response = await entity.search(repositoryUuid, { value });
     return response;
   },
-  async runNewEvaluate(store, { repositoryUUID, language }) {
-    const response = await evaluateExample.runEvaluate(repositoryUUID, language);
+  async runNewEvaluate(store, { repositoryUUID, repositoryVersion, language }) {
+    const response = await evaluateExample.runEvaluate(repositoryUUID, repositoryVersion, language);
     return response;
   },
-  getAllVersions(store, { repositoryUuid }) {
-    return evaluateExample.allVersions(repositoryUuid);
+  getAllVersions(store, { repositoryUuid, repositoryVersion }) {
+    return evaluateExample.allVersions(repositoryUuid, repositoryVersion);
   },
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);
