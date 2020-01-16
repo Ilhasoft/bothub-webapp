@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Buefy from 'buefy'
+import Buefy from 'buefy';
 import SideBar from '@/components/repository/sidebar/SideBar';
 
 
