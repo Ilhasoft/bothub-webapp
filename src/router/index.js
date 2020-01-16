@@ -81,12 +81,12 @@ export default new Router({
       component: RepositoryTrainings,
     },
     {
-      path: '/:ownerNickname/:slug/translate/',
+      path: '/:ownerNickname/:slug/:version/translate/',
       name: 'repository-translate',
       component: RepositoryTranslate,
     },
     {
-      path: '/:ownerNickname/:slug/translations/',
+      path: '/:ownerNickname/:slug/:version/translations/',
       name: 'repository-translations-status',
       component: RepositoryTranslations,
     },

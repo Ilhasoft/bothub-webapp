@@ -16,8 +16,12 @@ export default {
       },
     );
   },
-  translations(repositoryUuid, query = {}) {
-    const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
+  translations(repositoryUuid, repositoryVersion, query = {}) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+      repository_version: repositoryVersion,
+      ...query,
+    });
     return new utils.List(`/v2/repository/translation/?${queryString}`);
   },
   delete(translationId) {

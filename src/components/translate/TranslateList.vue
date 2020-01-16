@@ -61,6 +61,7 @@ export default {
         await this.$nextTick();
         this.translateList = await this.getExamplesToTranslate({
           repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repository.repository_version,
           from: this.from,
           to: this.to,
         });

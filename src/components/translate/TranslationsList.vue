@@ -55,6 +55,7 @@ export default {
       this.translationsList = null;
       this.translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
+        repositoryVersion: this.repository.repository_version,
         to_language: this.toLanguage,
       });
     },
