@@ -58,6 +58,7 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = this.$api.examples.search(
           this.repository.uuid,
+          this.repository.repository_version,
           this.query,
         );
       }

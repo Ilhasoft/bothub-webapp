@@ -36,6 +36,7 @@ export default {
       return {
         name,
         params: {
+          version: this.repository.repository_version,
           ownerNickname: this.repository.owner__nickname,
           slug: this.repository.slug,
         },
