@@ -1,12 +1,12 @@
 <template>
   <div class="dashboard-layout">
     <side-bar @colapse="colapseHandle()" />
-    <b-loading 
-     :is-full-page="isFullPage"
-     :active.sync="getCurrentRepository.name ? false : true" />
+    <b-loading
+      :is-full-page="isFullPage"
+      :active.sync="getCurrentRepository.name ? false : true" />
     <div
-    v-show="getCurrentRepository.name ? true : false"
-    :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+      v-show="getCurrentRepository.name ? true : false"
+      :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
@@ -16,9 +16,11 @@
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
           <div class="dashboard-layout__main-panel__header__info__left">
-            <p class="dashboard-layout__main-panel__header__info__left__title">{{getCurrentRepository.name}}</p>
+            <p class="dashboard-layout__main-panel__header__info__left__title">
+              {{ getCurrentRepository.name }}
+            </p>
             <p>Created by
-              <b class="has-text-primary">{{getCurrentRepository.owner__nickname}}</b>
+              <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </p>
           </div>
         </div>
@@ -27,16 +29,16 @@
             <bh-icon
               size=""
               value="language" />
-            <span>{{ 
-              getCurrentRepository.available_languages ? 
-              getCurrentRepository.available_languages.length : 
-              0}} languages</span>
+            <span>{{
+              getCurrentRepository.available_languages ?
+                getCurrentRepository.available_languages.length :
+            0 }} languages</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               size=""
               value="sentence" />
-            <span>{{getCurrentRepository.examples__count}} sentences</span>
+            <span>{{ getCurrentRepository.examples__count }} sentences</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
@@ -44,32 +46,57 @@
               value="warning" />
             <span>2 warning</span>
           </div>
-          <user-avatar
-            :profile="myProfile"
-            size="medium"
-            class="dashboard-layout__main-panel__header__right__user"/>
+          <b-dropdown
+            position="is-bottom-left"
+            aria-role="list">
+            <user-avatar
+              slot="trigger"
+              :profile="myProfile"
+              size="medium"
+              class="dashboard-layout__main-panel__header__right__user"/>
+            <b-dropdown-item
+              aria-role="listitem"
+              @click="routerHandle('myProfile')">{{ myProfile.name }}</b-dropdown-item>
+            <b-dropdown-item
+              aria-role="listitem"
+              @click="openNewRepositoryModal()">Start your bot</b-dropdown-item>
+            <b-dropdown-item
+              aria-role="listitem"
+              @click="routerHandle('home')">Exit Inteligence</b-dropdown-item>
+            <b-dropdown-item
+              aria-role="listitem"
+              @click="logout()">Logout</b-dropdown-item>
+          </b-dropdown>
         </div>
       </div>
       <router-view />
     </div>
+    <new-repository-modal
+      :active="isNewRepositoryModalOpen"
+      @requestClose="openNewRepositoryModal()" />
   </div>
 </template>
 <style lang="scss">
 </style>
 <script>
-import SideBar from '@/components/repository/sidebar/SideBar.vue';
+import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import { mapActions, mapGetters } from 'vuex';
-// import ContentFooter from "./ContentFooter.vue";
-// import DashboardContent from "./Content.vue";
-// import MobileMenu from "./MobileMenu";
+
 export default {
   components: {
     SideBar,
     UserAvatar,
-    // ContentFooter,
-    // DashboardContent,
-    // MobileMenu
+    NewRepositoryModal,
+  },
+  data() {
+    return {
+      colapse: true,
+      isLoading: false,
+      isFullPage: true,
+      isNewRepositoryModalOpen: false,
+    };
   },
   computed: {
     ...mapGetters([
@@ -77,16 +104,20 @@ export default {
       'myProfile',
     ]),
   },
-  data() {
-    return {
-      colapse: true,
-      isLoading: false,
-      isFullPage: true
-    };
-  },
   methods: {
+    ...mapActions([
+      'logout',
+    ]),
     colapseHandle() {
-      this.colapse = !this.colapse; 
+      this.colapse = !this.colapse;
+    },
+    routerHandle(path) {
+      this.$router.push({
+        name: `${path}`,
+      });
+    },
+    openNewRepositoryModal() {
+      this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
     },
   },
 };

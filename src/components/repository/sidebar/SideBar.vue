@@ -16,13 +16,13 @@
         </div>
         <b-menu-list>
           <template
-              slot="label"
-              slot-scope="props">
-              Test
-              <b-icon
-                :icon="props.expanded ? 'caret-down' : 'caret-up'"
-                class="is-pulled-right"/>
-            </template>
+            slot="label"
+            slot-scope="props">
+            Test
+            <b-icon
+              :icon="props.expanded ? 'caret-down' : 'caret-up'"
+              class="is-pulled-right"/>
+          </template>
           <b-menu-item
             :to="{ name: 'repository-summary' }"
             tag="router-link"
@@ -42,7 +42,7 @@
             <template
               slot="label"
               slot-scope="props">
-             <span>Test</span>
+              <span>Test</span>
               <b-icon
                 :icon="props.expanded ? 'caret-down' : 'caret-up'"
                 class="is-pulled-right"/>
@@ -86,40 +86,40 @@
             icon="arrow-right-bold"/>
         </div>
         <b-icon
-          @click.native="routerHandle('repository-summary')"
           class="icon-list"
-          icon="home" />
+          icon="home"
+          @click.native="routerHandle('repository-summary')" />
         <b-icon
-          @click.native="routerHandle('repository-training')"
           class="icon-list"
-          icon="wechat" />
-        <b-dropdown 
+          icon="wechat"
+          @click.native="routerHandle('repository-training')" />
+        <b-dropdown
           aria-role="list">
           <b-icon
             slot="trigger"
             class="icon-list"
             icon="chart-line" />
-            <b-dropdown-item 
-              @click="routerHandle('repository-test')"
-              aria-role="listitem">Action</b-dropdown-item>
-            <b-dropdown-item 
-              @click="routerHandle('repository-test')"
-              aria-role="listitem">Another action</b-dropdown-item>
-            <b-dropdown-item 
-              @click="routerHandle('repository-test')"
-              aria-role="listitem">Something else</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-test')">Action</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-test')">Another action</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-test')">Something else</b-dropdown-item>
         </b-dropdown>
         <b-icon
-          @click.native="routerHandle('repository-translate')"
           class="icon-list"
-          icon="translate" />
+          icon="translate"
+          @click.native="routerHandle('repository-translate')" />
         <b-icon
           class="icon-list"
           icon="power-plug" />
         <b-icon
-          @click.native="routerHandle('repository-settings')"
           class="icon-list"
-          icon="settings" />
+          icon="settings"
+          @click.native="routerHandle('repository-settings')" />
       </div>
       <div/>
     </div>
