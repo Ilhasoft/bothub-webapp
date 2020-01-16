@@ -3,6 +3,7 @@ import request from '../request';
 
 export default class List {
   constructor(initial) {
+    this.total = 0;
     this.itemsList = [];
     this.deletions = [];
     this.initial = initial;
@@ -37,6 +38,7 @@ export default class List {
     this.nextEntryPoint = response.data.next;
     this.itemsList = this.itemsList.concat(response.data.results);
     this.loading = false;
+    this.total = response.data.count;
     return this.items;
   }
 

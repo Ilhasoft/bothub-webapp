@@ -12,6 +12,9 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
+  getVersions(repositoryUUID) {
+    return new utils.List(`/v2/repository/version/?repository=${repositoryUUID}`);
+  },
   search(query) {
     const queryString = qs.stringify(query);
     return new utils.List(`/v2/repository/repositories/?${queryString}`);
@@ -20,7 +23,10 @@ export default {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
   train(repositoryUUID) {
-    return request.$http.get(`/v2/repository/repository-info/${repositoryUUID}/train/`);
+    return request.$http.post(
+      `/v2/repository/repository-info/${repositoryUUID}/train/`,
+      {},
+    );
   },
   analyze(repositoryUUID, language, text) {
     return request.$http.post(

@@ -1,4 +1,7 @@
 @import '~bulma/sass/utilities/_all';
+@import './table';
+@import './dropdown.scss';
+@import './menu.scss';
 
 $primary-light: #b3f0be;
 $primary-light-invert: #099081;
@@ -15,12 +18,3 @@ $link-focus-border: $primary;
 
 $family-sans-serif: 'Encode Sans', sans-serif;
 $max-repository-card-width: 1200px;
-
-$menu-item-color: #FFFFFF;
-$menu-item-hover-color: white;
-$menu-item-hover-background-color: #12A391;
-$menu-label-font-size: 1rem;
-
-
-$dropdown-item-hover-background-color: #12A391;
-$dropdown-item-hover-color: #FFFFFF;

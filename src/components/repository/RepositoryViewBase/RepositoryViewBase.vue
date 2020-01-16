@@ -5,51 +5,6 @@
     <div
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
-      <!-- <div class="rpstr-vw-bs__wrapper__header"> -->
-      <!-- <router-link
-          class="rpstr-vw-bs__wrapper__header__logo"
-          to="/home"> -->
-      <!-- <img
-            src="~@/assets/imgs/logo.svg"
-            alt="bothub"> -->
-      <!-- </router-link> -->
-      <!-- <div>
-          <repository-info
-            v-if="repository && repository.name"
-            :repository="repository" />
-        </div>
-        <div
-          :class="[
-            'bh-grid__item',
-            'bh-grid__item--grow-0',
-            'rpstr-vw-bs__wrapper__header__mobile-navigation',
-        ]"/>
-        <div
-          v-if="authenticated && openMyProfile"
-          class="bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__options">
-          <user-avatar
-            :profile="myProfile"
-            size="normal"
-            class="rpstr-vw-bs__wrapper__header__options__avatar"/>
-          <bh-dropdown position="left">
-            <bh-icon
-              slot="trigger"
-              value="menu-down"
-              size="small"
-              class="rpstr-vw-bs__wrapper__header__options__dropdown"/>
-            <bh-dropdown-item @click="openMyProfile()">
-              {{ myProfile.name || '...' }}
-            </bh-dropdown-item>
-            <bh-dropdown-item
-              @click="openNewRepositoryModal()">
-              Start your bot
-            </bh-dropdown-item>
-            <bh-dropdown-item @click="logout()">
-              Logout
-            </bh-dropdown-item>
-          </bh-dropdown>
-        </div> -->
-      <!-- </div> -->
       <analyze-text-drawer
         v-if="repository && repository.uuid && authenticated"
         :repository-uuid="repository.uuid"
@@ -84,7 +39,6 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
-      <!-- <site-footer class="rpstr-vw-bs__footer"/> -->
   </div>
 </template>
 

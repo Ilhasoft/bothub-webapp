@@ -16,18 +16,28 @@
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
           <div class="dashboard-layout__main-panel__header__info__left">
-            <p class="dashboard-layout__main-panel__header__info__left__title">
-              {{ getCurrentRepository.name }}
-            </p>
-            <p>Created by
+            <div class="dashboard-layout__main-panel__header__info__left__wrapper">
+              <p class="dashboard-layout__main-panel__header__info__left__wrapper__title">
+                {{ getCurrentRepository.name }}
+              </p>
+              <div class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
+                <span
+                  class="dashboard-layout__main-panel
+                        __header__info__left__wrapper
+                        __versions__number"> Master </span>
+                <b-icon
+                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
+                  icon="chevron-down"/>
+              </div>
+            </div>
+            <span class="has-text-white">Created by
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
-            </p>
+            </span>
           </div>
         </div>
         <div class="dashboard-layout__main-panel__header__right">
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
-              size=""
               value="language" />
             <span>{{
               getCurrentRepository.available_languages ?
@@ -36,13 +46,11 @@
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
-              size=""
               value="sentence" />
             <span>{{ getCurrentRepository.examples__count }} sentences</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
-              size=""
               value="warning" />
             <span>2 warning</span>
           </div>
@@ -164,13 +172,37 @@ export default {
         &__left {
           margin: 0 .8rem;
 
-          p {
-            color: #FFFFFF;
-          }
+          &__wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-          &__title {
-            font-weight: bold;
-            font-size: 1.3rem;
+            p {
+              color: #FFFFFF;
+            }
+
+            &__title {
+              font-weight: bold;
+              font-size: 1.3rem;
+            }
+
+            &__versions {
+              margin: 0 1rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              &__icon {
+                color: #FFFFFF;
+                margin-top: .2rem;
+              }
+
+              &__number {
+                color: #12a391;
+                font-size: 1.1rem;
+                font-weight: bold;
+              }
+            }
           }
         }
       }

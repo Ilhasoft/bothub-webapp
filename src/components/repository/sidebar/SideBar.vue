@@ -66,6 +66,11 @@
             icon="translate"
             label="Translation"/>
           <b-menu-item
+            :to="{ name: 'repository-versions' }"
+            tag="router-link"
+            icon="translate"
+            label="Versions"/>
+          <b-menu-item
             icon="power-plug"
             label="Integration"/>
           <b-menu-item
