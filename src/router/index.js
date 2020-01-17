@@ -84,22 +84,22 @@ export default new Router({
           component: RepositoryHome,
         },
         {
-          path: ':ownerNickname/:slug/training/',
+          path: ':ownerNickname/:slug/:version/training/',
           name: 'repository-training',
           component: RepositoryTrainings,
         },
         {
-          path: ':ownerNickname/:slug/translate/',
+          path: ':ownerNickname/:slug/:version/translate/',
           name: 'repository-translate',
           component: RepositoryTranslate,
         },
         {
-          path: ':ownerNickname/:slug/translations/',
+          path: ':ownerNickname/:slug/:version/translations/',
           name: 'repository-translations-status',
           component: RepositoryTranslations,
         },
         {
-          path: ':ownerNickname/:slug/Integration/',
+          path: ':ownerNickname/:slug/:version/Integration/',
           name: 'repository-integration',
           component: RepositoryAnalyzeText,
         },
@@ -109,7 +109,7 @@ export default new Router({
           component: RepositorySettings,
         },
         {
-          path: ':ownerNickname/:slug/evaluate/',
+          path: ':ownerNickname/:slug/:version/evaluate/',
           name: 'repository-test',
           component: RepositoryEvaluate,
         },

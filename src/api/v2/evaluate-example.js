@@ -51,8 +51,8 @@ export default {
   getAllResultsLog(repositoryUuid, resultId) {
     return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
-  allVersions(repositoryUuid) {
-    return new utils.List(`/v2/repository/evaluate/results?repository_uuid=${repositoryUuid}`);
+  allVersions(repositoryUuid, repositoryVersion) {
+    return new utils.List(`/v2/repository/evaluate/results?repository_uuid=${repositoryUuid}&repository_version=${repositoryVersion}`);
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
@@ -61,10 +61,11 @@ export default {
     });
     return request.$http.get(`/v2/repository/evaluate/results/1/?${queryString}`);
   },
-  runEvaluate(repositoryUUID, language) {
+  runEvaluate(repositoryUUID, repositoryVersion, language) {
     return request.$http.post(
       `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
       {
+        respository_version: repositoryVersion,
         language,
       },
     );

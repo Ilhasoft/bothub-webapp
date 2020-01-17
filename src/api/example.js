@@ -24,8 +24,9 @@ export default {
   delete(exampleId) {
     return request.$http.delete(`/v2/repository/example/${exampleId}/`);
   },
-  search(repositoryUuid, query = {}) {
+  search(repositoryUuid, repositoryVersion, query = {}) {
     const queryString = qs.stringify({
+      repository_version: repositoryVersion,
       repository_uuid: repositoryUuid,
       ...query,
     });

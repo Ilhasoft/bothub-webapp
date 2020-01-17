@@ -66,7 +66,7 @@
       :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train(repository.uuid)" />
+      @train="train(repository.uuid, repository.repository_version)" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
@@ -136,6 +136,7 @@ export default {
       if (!this.querySchema.label) {
         delete this.querySchema.label;
       }
+
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
@@ -168,10 +169,13 @@ export default {
       this.repository.examples__count -= 1;
       this.updateRepository(false);
     },
-    async train(repositoryUUID) {
+    async train(repositoryUUID, versionUUID) {
       this.training = true;
       try {
-        const response = await this.trainRepository({ repositoryUUID });
+        const response = await this.trainRepository({
+          repositoryUUID,
+          versionUUID,
+        });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {

@@ -170,6 +170,7 @@ export default {
       try {
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
+          repositoryVersion: this.repositoryVersion,
           language: this.getEvaluateLanguage,
         });
         this.evaluating = false;

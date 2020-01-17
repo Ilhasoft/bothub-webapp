@@ -43,7 +43,10 @@ export default {
     ]),
     updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.getAllVersions({ repositoryUuid: this.repository.uuid })
+        this.getAllVersions({
+          repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repository.repository_version,
+        })
           .then((response) => {
             this.versionsList = response;
           });

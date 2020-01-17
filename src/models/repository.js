@@ -52,6 +52,7 @@ class Repository extends ModelBase {
       requirements_to_train: {},
       languages_ready_for_train: null,
       ready_for_train: false,
+      repository_version: null,
     };
   }
 
@@ -85,6 +86,7 @@ class Repository extends ModelBase {
       requirements_to_train: Object,
       languages_ready_for_train: Object,
       ready_for_train: Boolean,
+      repository_version: Number,
     };
   }
 
