@@ -2,7 +2,7 @@
 
 exports[`TranslationsList.vue renders correctly 1`] = `
 <div>
-  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true" repository="[object Object]"></pagination-stub>
-  <p class="no-examples">No translations.</p>
+  <!---->
+  <!---->
 </div>
 `;

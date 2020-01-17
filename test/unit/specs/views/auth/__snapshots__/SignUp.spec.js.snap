@@ -1,35 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginForm.vue renders correctly 1`] = `
-<div class="sign-up">
-  <nav class="sign-up__nav">
-    <div class="bh-grid bh-grid--space-between bh-grid--row">
-      <router-link-stub to="/" tag="a" event="click" class="bh-grid__item sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
-      <div class="sign-up__nav__login"><span class="sign-up__nav__text">Already have an account?</span>
-        <bh-button-stub size="normal" primary="true" type="button" class="sign-up__nav__login__button">Sign in</bh-button-stub>
-      </div>
-    </div>
-  </nav>
-  <section class="bh-grid bh-grid--half sign-up__wrapper-content">
-    <div class="bh-grid__item sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
-    <div class="bh-grid__item sign-up__wrapper-content__form">
-      <div class="sign-up__wrapper-content__form__title">
-        <h1>Get started free</h1>
-      </div>
-      <form>
-        <loading-stub></loading-stub>
-        <!---->
-        <div class="field">
-          <div class="control has-text-centered">
-            <bh-button-stub color="info" type="submit" fullwidth="true">Get free</bh-button-stub>
-          </div>
-          <div class="sign-up__wrapper-content__form__agree-message"><small>
-              By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
-            </small></div>
-        </div>
-      </form>
-    </div>
-  </section>
-  <site-footer-stub class="sign-up__footer"></site-footer-stub>
-</div>
-`;
+exports[`LoginForm.vue renders correctly 1`] = `undefined`;

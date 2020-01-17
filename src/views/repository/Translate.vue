@@ -8,7 +8,7 @@
           <div class="repository-translate">
             <div class="bh-grid">
               <div class="bh-grid__item">
-                <bh-field label="Translate from:">
+                <bh-field :label="this.$i18n.t('webapp.translate.translate_from')">
                   <language-select v-model="translate.from" />
                 </bh-field>
               </div>
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="bh-grid__item">
-                <bh-field label="Translate to:">
+                <bh-field :label="this.$i18n.t('webapp.translate.translate_to')">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />

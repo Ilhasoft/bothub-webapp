@@ -5,7 +5,9 @@
       :item-component="authorizationRequestItem"
       :list="requestsList"
       @itemDeleted="onItemDeleted()" />
-    <p v-if="requestsList && requestsList.empty">No requests.</p>
+    <p v-if="requestsList && requestsList.empty">
+      {{ this.$i18n.t('webapp.settings.no_requests') }}
+    </p>
   </div>
 </template>
 

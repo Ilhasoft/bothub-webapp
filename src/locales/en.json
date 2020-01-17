@@ -5,7 +5,18 @@
 			"start_you_bot": "Start your bot",
 			"logout": "Logout",
 			"signin": "sign in",
-			"signup": "sign up"
+			"signup": "sign up",
+      "terms_conditions": "Terms & conditions",
+      "contact_us": "Contact Us",
+      "subscribe": "Subscribe",
+      "newsletter": "Enter your email to get notified about our news:",
+      "you_best_email": "Your best email",
+      "footer_license": "Bothub is a project by Ilhasoft.\n        &copy; 2018 All rights reserved.",
+      "created_by": "Created by",
+      "read_for_train": "Your bot is ready to be trained",
+      "request_authorization": "Request Authorization",
+      "authorization_requested": "Authorization Requested",
+      "error_to_retrieve_bot": "Error to retrieve bot"
 		},
 		"login_modal": {
 			"login": "Login",
@@ -37,7 +48,8 @@
 			"reset_password": "Reset password",
 			"reset_password_success": "Check your email, we've sent you the instructions to reset your password.",
 			"forgot_password": "Forgot password?",
-			"register": "Register"
+			"register": "Register",
+      "create_bot": "Create bot"
 		},
 		"safari_alert": {
 			"title1": "Sorry, the Safari browser is not compatible with all our features.",
@@ -55,7 +67,9 @@
 			"notification_info": "Sign in to your account to contribute to this repository.",
 			"analyze_text": "Analyze Text",
 			"analyze": "Analyze",
-			"no_detected": "No detected"
+			"no_detected": "No detected",
+      "language": "Language",
+      "message": "Message"
 		},
 		"evaluate": {
 			"header_title": "Test your data set",
@@ -65,7 +79,19 @@
 			"run_test": "Run test",
 			"you_can_not_edit": "You can not edit this repository",
 			"login": "Sign in to your account to edit this repository.",
-			"get_examples_test_sentences": "test sentences"
+			"get_examples_test_sentences": "test sentences",
+      "all_intents": "All Intents",
+      "all_entities": "All Entities",
+      "all_labels": "All Labels",
+      "add_new_test_sentence": "Add a new test sentence",
+      "create_a_bench_of_test": "Create a bench of test sentences to measure the accuracy of your training.",
+      "enter_your_sentence_here": "Enter your sentence here",
+      "intent": "Intent",
+      "submit": "Submit",
+      "you_need_type_a_text": "You need type a text to sentence",
+      "intent_is_required": "Intent is required",
+      "not_have_results": "You do not have results yet",
+      "no_versions": "No versions"
 		},
 		"home": {
 			"description": "Description",
@@ -79,7 +105,10 @@
 			"manage_your_team": "Manage your team",
 			"authorization_requests": "Authorization Requests",
 			"not_can_edit_repository": "You can not edit this repository",
-			"login": "Sign in to your account to edit this repository."
+			"login": "Sign in to your account to edit this repository.",
+      "users": "Users:",
+      "role": "Role:",
+      "no_requests": "No requests."
 		},
 		"trainings": {
 			"grid_text1": "Train a new sentence",
@@ -88,7 +117,11 @@
 			"login": "Sign in to your account to contribute to this repository.",
 			"sentences_list": "Sentences list",
 			"run_training": "Run training",
-			"submit": "Submit"
+			"submit": "Submit",
+      "add_entity": "Add entity",
+      "add_entity_for": "Add entity for \"{entity_selected}\"",
+      "add_a_sentence": "Add a sentence",
+      "intent": "Intent"
 		},
 		"translate": {
 			"not_can_edit_repository": "You can not contribute to this repository",
@@ -99,7 +132,10 @@
 			"show_translated": "Show Translated",
 			"show_original": "Show Original",
 			"translated_from": "Translated from",
-			"no_translation": "No translations."
+			"no_translation": "No translations.",
+      "translate_from": "Translate from:",
+      "translate_to": "Translate to:",
+      "to": "to"
 		},
 		"my_profile": {
 			"edit_your_profile": "Edit Your Profile",
@@ -113,6 +149,27 @@
 			"training": "Training...",
 			"not_trained": "Not trained yet.",
 			"training_log": "Training Log"
-		}
+		},
+    "tutorial": {
+      "create_your_first_bot": "Create your first bot!",
+      "grid1": "On the top right of the window, click the \"New bot\" button.",
+      "grid2": "Fill in the fields and click on \"Create Bot\"",
+      "grid3": "Start adding content to the interpretation mechanism\n              by providing example sentences.",
+      "grid4": "Choose \"Training\" and enter phrases highlighting the entities and\n                relating it to an intention.</p>\n              <p> Don't forget to submit your sentences.,",
+      "grid5": "After adding your examples, click the status bar to see\n            the status of your bot and train the sentences",
+      "grid6": "That's it! Your bot is ready to be used!",
+      "previous": "Previous",
+      "next": "Next",
+      "finish": "Finish"
+    },
+    "menu": {
+      "summary": "Summary",
+      "training": "Training",
+      "test": "Test",
+      "translate": "Translate",
+      "translation_status": "Translation status",
+      "integration": "Integration",
+      "settings": "Settings"
+    }
 	}
 }

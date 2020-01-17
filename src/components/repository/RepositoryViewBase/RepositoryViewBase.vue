@@ -112,7 +112,7 @@
                 class="rpstr-vw-bs__status-bar__icons-align--size hide-mobile"
                 value="botinho" />
               <span class="rpstr-vw-bs__status-bar__text-information hide-mobile">
-                Your bot is ready to be trained</span>
+                {{ this.$i18n.t('webapp.layout.read_for_train') }}</span>
             </div>
           </div>
           <div
@@ -123,8 +123,9 @@
               @click.prevent="openRequestAuthorizationModal">
               <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                 <bh-icon />
-                <span
-                  class="rpstr-vw-bs__status-bar__text-information">Request Authorization</span>
+                <span class="rpstr-vw-bs__status-bar__text-information">
+                  {{ this.$i18n.t('webapp.layout.request_authorization') }}
+                </span>
               </div>
             </div>
           </div>
@@ -134,7 +135,9 @@
             && !repository.request_authorization.approved_by"
             class="bh-grid hide-mobile">
             <div class="bh-grid__item">
-              <span class="text-color-grey-dark">Authorization Requested</span>
+              <span class="text-color-grey-dark">
+                {{ this.$i18n.t('webapp.layout.authorization_requested') }}
+              </span>
             </div>
           </div>
           <div
@@ -145,7 +148,9 @@
               @click.prevent="openLoginModal">
               <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
                 <bh-icon value="account" />
-                <span class="rpstr-vw-bs__status-bar__text-information">Sign in</span>
+                <span class="rpstr-vw-bs__status-bar__text-information">
+                  {{ this.$i18n.t('webapp.register_form.signin') }}
+                </span>
               </div>
             </div>
           </div>
@@ -175,7 +180,7 @@
     <div
       v-else-if="repository && repository.fatal"
       class="rpstr-vw-bs__error">
-      <h1>Error to retrieve bot</h1>
+      <h1>{{ this.$i18n.t('webapp.layout.error_to_retrieve_bot') }}</h1>
     </div>
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"

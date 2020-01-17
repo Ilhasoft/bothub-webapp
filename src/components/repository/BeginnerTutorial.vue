@@ -1,7 +1,7 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Create your first bot!">
+    :title="this.$i18n.t('webapp.tutorial.create_your_first_bot')">
     <div class="beginner-tutorial">
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
         <div
@@ -10,8 +10,8 @@
           <img src="~@/assets/gifs/step1.gif">
           <div class="beginner-tutorial__wrapper__text">
             <div>
-              <p>On the top right of the window, click the "New bot" button.</p>
-              <p>Fill in the fields and click on "Create Bot"</p>
+              <p>{{ this.$i18n.t('webapp.tutorial.grid1') }}</p>
+              <p>{{ this.$i18n.t('webapp.tutorial.grid2') }}</p>
             </div>
           </div>
         </div>
@@ -21,12 +21,9 @@
           <img src="~@/assets/gifs/step2.gif">
           <div class="beginner-tutorial__wrapper__text">
             <div>
-              <p>Start adding content to the interpretation mechanism
-              by providing example sentences.</p>
+              <p>{{ this.$i18n.t('webapp.tutorial.grid3') }}</p>
               <p>
-                Choose "Training" and enter phrases highlighting the entities and
-                relating it to an intention.</p>
-              <p> Don't forget to submit your sentences.</p>
+                {{ this.$i18n.t('webapp.tutorial.grid4') }}</p>
             </div>
           </div>
         </div>
@@ -35,8 +32,7 @@
           class="bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step3.gif">
           <div class="beginner-tutorial__wrapper__text">
-            <p>After adding your examples, click the status bar to see
-            the status of your bot and train the sentences</p>
+            <p>{{ this.$i18n.t('webapp.tutorial.grid5') }}</p>
           </div>
         </div>
         <div
@@ -46,7 +42,7 @@
             class="beginner-tutorial__wrapper__botinho"
             src="~@/assets/imgs/mascot.svg">
           <div class="beginner-tutorial__wrapper__text">
-            <p>That's it! Your bot is ready to be used!</p>
+            <p>{{ this.$i18n.t('webapp.tutorial.grid6') }}</p>
           </div>
         </div>
       </div>
@@ -57,17 +53,17 @@
             'beginner-tutorial__wrapper__footer__prev-button': true,
           }"
           primary
-          @click="previous()">Previous</bh-button>
+          @click="previous()">{{ this.$i18n.t('webapp.tutorial.previous') }}</bh-button>
         <bh-button
           v-if="currentValue !== 4"
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
-          @click="next()">Next</bh-button>
+          @click="next()">{{ this.$i18n.t('webapp.tutorial.next') }}</bh-button>
         <bh-button
           v-else
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
-          @click="closeModal()">Finish</bh-button>
+          @click="closeModal()">{{ this.$i18n.t('webapp.tutorial.finish') }}</bh-button>
         <bh-stepper
           :steps="steps"
           :current-step="currentValue"

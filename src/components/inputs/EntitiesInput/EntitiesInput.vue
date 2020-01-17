@@ -29,7 +29,7 @@
       @click.prevent.stop="addEntity()"
     >
       <span>
-        <span>Add entity</span>
+        <span>{{ this.$i18n.t('webapp.trainings.add_entity') }}</span>
         <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
       </span>
     </bh-button>

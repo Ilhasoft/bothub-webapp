@@ -44,7 +44,7 @@
           <span>{{ from_language | languageVerbose }}&nbsp;</span>
           <flag :language="from_language" />
           <strong>&nbsp;</strong>
-          <strong>to&nbsp;</strong>
+          <strong>{{ this.$i18n.t('webapp.translate.to') }}&nbsp;</strong>
           <span>{{ language | languageVerbose }}&nbsp;</span>
           <flag :language="language" />
         </div>

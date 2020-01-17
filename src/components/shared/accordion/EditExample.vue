@@ -194,12 +194,12 @@ export default {
     },
     entityButtonText() {
       if (this.textSelected === null) {
-        return 'Add entity';
+        return this.$i18n.t('webapp.trainings.add_entity');
       }
 
       const selected = this.text.slice(this.textSelected.start, this.textSelected.end);
 
-      return `Add entity for "${selected}"`;
+      return this.$i18n.t('webapp.trainings.add_entity_for', { entity_selected: selected });
     },
     intentFormatters() {
       const formattersList = [

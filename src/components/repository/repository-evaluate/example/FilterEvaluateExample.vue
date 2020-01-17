@@ -23,7 +23,7 @@
             v-model="intent"
             :data="intents || []"
             :formatters="inputFormatters"
-            placeholder="All Intents" />
+            :placeholder="this.$i18n.t('webapp.evaluate.all_intents')" />
         </bh-field>
         <bh-field
           :errors="errors.intent">
@@ -31,7 +31,7 @@
             v-model="entity"
             :data="entities || []"
             :formatters="inputFormatters"
-            placeholder="All entities" />
+            :placeholder="this.$i18n.t('webapp.evaluate.all_entities')" />
         </bh-field>
       </div>
     </div>

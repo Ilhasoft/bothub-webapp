@@ -2,11 +2,11 @@
   <form @submit.prevent="onSubmit()">
     <div class="bh-grid">
       <div class="bh-grid__item bh-grid__item--grow-2">
-        <p><strong>Users:</strong></p>
+        <p><strong>{{ this.$i18n.t('webapp.settings.users') }}</strong></p>
         <select-users-input v-model="usersProfile" />
       </div>
       <div class="bh-grid__item">
-        <p><strong>Role:</strong></p>
+        <p><strong>{{ this.$i18n.t('webapp.settings.role') }}</strong></p>
         <role-select v-model="role" />
       </div>
       <div class="bh-grid__item bh-grid__item--grow-0">

@@ -7,7 +7,7 @@
       @dispatch="goToDetails()" />
     <p
       v-if="versionsList && versionsList.empty"
-      class="no-examples">No versions</p>
+      class="no-examples">{{ this.$i18n.t('webapp.evaluate.no_versions') }}</p>
   </div>
 </template>
 
