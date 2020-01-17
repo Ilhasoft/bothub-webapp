@@ -5,7 +5,18 @@
       "start_you_bot": "Inicie sua inteligência",
       "logout": "Logout",
       "signin": "entrar",
-      "signup": "cadastrar"
+      "signup": "cadastrar",
+      "terms_conditions": "Termos & condições",
+      "contact_us": "Contate-nos",
+      "subscribe": "Inscreva-se",
+      "newsletter": "Coloque seu email para receber novidades:",
+      "you_best_email": "Seu email principal",
+      "footer_license": "Bothub é um projeto da Ilhasoft\n &copy; 2018 All rights reserved.",
+      "created_by": "Criado por",
+      "read_for_train": "Sua inteligência está pronta para ser treinada",
+      "request_authorization": "Solicitação de Autorização",
+      "authorization_requested": "Autorização Solicitada",
+      "error_to_retrieve_bot": "Erro ao retornar inteligência"
     },
     "login_modal": {
       "login": "Login",
@@ -37,7 +48,8 @@
       "reset_password": "Resetar senha",
       "reset_password_success": "Cheque seu email, nós te enviamos instruções de como resetar sua senha.",
       "forgot_password": "Esqueceu a senha?",
-      "register": "Registrar"
+      "register": "Registrar",
+      "create_bot": "Criar inteligência"
     },
     "safari_alert": {
       "title1": "Desculpa, o navegador Safari não é compatível com todas as nossas funcionalidades.",
@@ -55,7 +67,9 @@
       "notification_info": "Faça o login na sua conta pra contribuir nessa inteligência.",
       "analyze_text": "Analisar Texto",
       "analyze": "Analisar",
-      "no_detected": "Não detectado"
+      "no_detected": "Não detectado",
+      "language": "Idioma",
+      "message": "Mensagem"
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
@@ -65,7 +79,19 @@
       "run_test": "Executar teste",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
-      "get_examples_test_sentences": "testar frases"
+      "get_examples_test_sentences": "testar frases",
+      "all_intents": "Todas as Intenções",
+      "all_entities": "Todas as Entidades",
+      "all_labels": "Todas as Categorias",
+      "add_new_test_sentence": "Adicionar uma nova frase de teste",
+      "create_a_bench_of_test": "Crie um conjunto de frases de teste para medir a precisão de seu treinamento.",
+      "enter_your_sentence_here": "Coloque sua frase aqui",
+      "intent": "Intenção",
+      "submit": "Enviar",
+      "you_need_type_a_text": "Você precisa escrever uma frase",
+      "intent_is_required": "Intenção é obrigatória",
+      "not_have_results": "Você não tem resultados ainda",
+      "no_versions": "Sem versões"
     },
     "home": {
       "description": "Descrição",
@@ -79,7 +105,10 @@
       "manage_your_team": "Gerencie seu time",
       "authorization_requests": "Solicitações de Autorização",
       "not_can_edit_repository": "Você não pode editar essa inteligência",
-      "login": "Faça login em sua conta para editar essa inteligência."
+      "login": "Faça login em sua conta para editar essa inteligência.",
+      "users": "Usuários:",
+      "role": "Papéis:",
+      "no_requests": "Sem solicitações."
     },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
@@ -88,7 +117,11 @@
       "login": "Faça login na sua conta para contribuir nessa inteligência.",
       "sentences_list": "Lista de frases",
       "run_training": "Executar treinamento",
-      "submit": "Enviar"
+      "submit": "Enviar",
+      "add_entity": "Adicionar entidade",
+      "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
+      "add_a_sentence": "Adicionar uma frase",
+      "intent": "Intenção"
     },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir nesse repositório",
@@ -99,7 +132,10 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Sem traduções."
+      "no_translation": "Sem traduções.",
+      "translate_from": "Traduzir de:",
+      "translate_to": "Traduzir para:",
+      "to": "para"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",
@@ -113,6 +149,27 @@
       "training": "Treinando...",
       "not_trained": "Não há treinamento ainda.",
       "training_log": "Log de Treinamento"
+    },
+    "tutorial": {
+      "create_your_first_bot": "Crie sua primeira inteligência!",
+      "grid1": "No canto superior direito da tela, clique em \"Nova inteligência\".",
+      "grid2": "Preencha os campos e clique em \"Criar inteligência\"",
+      "grid3": "Comece adicionando conteúdo para o mecanismo de interpretação\nfornecendo frases de exemplo.",
+      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.</p>\n<p>Não esqueça de enviar suas frases.",
+      "grid5": "Depois de adicionar suas frases, clique na barra de status para ver\no status de sua inteligência e treinar suas frases",
+      "grid6": "É isso! Sua inteligência está pronta para ser usada!",
+      "previous": "Anterior",
+      "next": "Próximo",
+      "finish": "Finalizar"
+    },
+    "menu": {
+      "summary": "Resumo",
+      "training": "Treinar",
+      "test": "Testar",
+      "translate": "Traduzir",
+      "translation_status": "Status tradução",
+      "integration": "Integração",
+      "settings": "Configurações"
     }
   }
 }
