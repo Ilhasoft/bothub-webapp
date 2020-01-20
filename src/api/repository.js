@@ -17,7 +17,6 @@ export default {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
   },
   addNewVersion(repositoryUUID, versionUUID, name) {
-    console.log(repositoryUUID, versionUUID, name)
     return request.$http.post(
       '/v2/repository/version/',
       {

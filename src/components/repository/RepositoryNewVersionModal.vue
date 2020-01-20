@@ -14,7 +14,9 @@
             <div class="control has-text-centered">
             </div>
             <div class="control">
+            	<label class="label">Version</label>
             	<input class="input" type="text" :placeholder="version.name" disabled>
+            	<div class="field repository-new-version-modal__button-container">
 	                <b-button
 					  	type="is-light"
 					  	@click="onClose()"
@@ -23,11 +25,12 @@
 	            	</b-button>
 	                <b-button
 					  	type="is-primary"
+					  	:loading="loading"
 					  	:disabled="!canSubmit"
-					  	@click="onSubmit()"
 		                native-type="submit" >
 		            	Add new
 		        	</b-button>
+		        </div>
 			</div>
           </div>
         </form>
@@ -52,7 +55,7 @@
 		},
 		computed: {
 			canSubmit() {
-				return this.selectedVersion != null;
+				return !(!this.name || /^\s*$/.test(this.name))
 			}
 		},
 		data() {
@@ -70,41 +73,43 @@
     			this.$emit('close');
     		},
     		async onSubmit() {
-    			console.log(this.repository.uuid, this.selectedVersion, this.name)
-    			await this.addNewVersion( 
+    			this.loading = true
+    			await this.addNewVersion(
     				{
     					repositoryUUID: this.repository.uuid, 
-    					versionUUID: this.selectedVersion, 
+    					versionUUID: this.version.id, 
     					name: this.name,
+    				}).then( _ => {
+    					this.loading = false;
+    					this.$emit('addedVersion');
+    				}).catch(error => {
+    					this.$emit('error', error)
+    					this.loading = false;
     				});
-    			this.$emit('addedVersion');
     		}
    		}
 	};
 </script>
 
 <style lang="scss">
+	@import '~@/assets/scss/utilities.scss';
+
 	.repository-new-version-modal {
 
 		&__container {
 			margin: 0 auto;
-			min-width: 600px;
+			max-width: $max-repository-card-width;
+			min-width: 200px;
 			padding: 1.75rem;
 			border-radius: 8px;
-			background-color: red;
-/*			display: flex;
-			flex-wrap: wrap;
-			flex-direction: row;*/
-		}
-
-		&__dropdown {
-			width: 100%;
+			background-color: white;
 		}
 
 		&__button-container {
+			margin: 1.5rem;
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
+			justify-content: space-around;
 		}
 	}
 	

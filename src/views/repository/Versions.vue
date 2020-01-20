@@ -5,28 +5,21 @@
 
       <b-modal class="repository-new-version-modal"
         :active.sync="isNewVersionModalActive"
-        has-modal-card
                  trap-focus
                  aria-role="dialog"
-                 width="1200"
                  aria-modal>
       <repository-new-version-modal
         :repository="repository"
         :version="selectedVersion"
         v-on:close="isNewVersionModalActive = false"
-        v-on:addedVersion="isNewVersionModalActive = false"/>
+        v-on:error="showError"
+        v-on:addedVersion="onAddedVersion()"/>
     </b-modal>
 
     <div class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
           <h2>Versions</h2>
-          <b-button
-            class="version__header__button has-text-weight-bold"
-            type="is-primary"
-            @click="addNewVersion()">
-            Add new
-          </b-button>
         </div>
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
@@ -70,11 +63,10 @@
                   rounded>Main</b-button>
                 <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
-                <b-button 
-                  size="is-small"
-                  icon-left="pencil"
-                  @click="copyVersion(props.row)">
-                </b-button>
+                <b-icon 
+                  icon="content-copy"
+                  @click.native="copyVersion(props.row)">
+                </b-icon>
               </div>
             </b-table-column>
           </template>
@@ -129,13 +121,23 @@ export default {
         name
       });
     },
-    addNewVersion() {
-      this.isNewVersionModalActive = true
-    },
     copyVersion(version) {
       this.selectedVersion = version;
       this.isNewVersionModalActive = true;
-    }
+    },
+    onAddedVersion(version) {
+      this.isNewVersionModalActive = false;
+      this.updateVersions();
+    },
+    showError(error) {
+      //TODO: Treat errors
+      this.$buefy.dialog.alert({
+                    title: 'Error',
+                    message: error.response.data,
+                    type: 'is-danger',
+                    confirmText: 'OK'
+                });
+    },
   },
 };
 </script>
