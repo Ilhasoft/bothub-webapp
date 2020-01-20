@@ -23,7 +23,7 @@
               <div class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
                 <span
                   class="dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
-                   Master
+                   {{$store.state.Repository.repositoryVersionName}}
                  </span>
                 <b-icon
                   class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"

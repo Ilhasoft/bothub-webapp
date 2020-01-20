@@ -12,8 +12,8 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUUID) {
-    return new utils.List(`/v2/repository/version/?repository=${repositoryUUID}`);
+  getVersions(repositoryUuid) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}`);
   },
   search(query) {
     const queryString = qs.stringify(query);

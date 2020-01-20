@@ -29,37 +29,23 @@
               label="version"
               width="40"
               sortable
+              centered
               numeric>
-              <span class="versions__table__version-number">
-                {{ props.row.version }}
+              <span 
+                @click="handleVersion(props.row.id, props.row.name)"
+                class="versions__table__version-number">
+                {{ props.row.name }}
               </span>
             </b-table-column>
-
             <b-table-column
-              field="user.first_name"
-              label="created by"
-              sortable>
-              {{ props.row.created_by }}
-            </b-table-column>
-
-            <b-table-column
+              centered
               field="user.last_name"
               label="Date Created"
               sortable>
-              {{ props.row.date_created }}
+              {{ props.row.created_at | moment('from') }}
             </b-table-column>
-
             <b-table-column
-              field="date"
-              label="Latest Modification"
-              sortable
-              centered>
-              <span>
-                {{ props.row.latest_modification }}
-              </span>
-            </b-table-column>
-
-            <b-table-column
+              centered
               width="180"
               label="">
               <div class="versions__table__buttons-wrapper">
@@ -83,32 +69,6 @@ import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 
-const data = [
-  {
-    id: 1, version: 'v01549', created_by: 'johncordeiro', date_created: '4 sep 2019', latest_modification: '2 months ago', is_default: true,
-  },
-  {
-    id: 2, version: 'v01323', created_by: 'johncordeiro', date_created: '5 sep 2019', latest_modification: '5 months ago',
-  },
-  {
-    id: 3, version: 'v05555', created_by: 'johncordeiro', date_created: '6 sep 2019', latest_modification: '4 months ago',
-  },
-  {
-    id: 4, version: 'v03333', created_by: 'johncordeiro', date_created: '7 sep 2019', latest_modification: '6 months ago',
-  },
-  {
-    id: 5, version: 'v06666', created_by: 'johncordeiro', date_created: '8 sep 2019', latest_modification: '2 months ago',
-  },
-  {
-    id: 6, version: 'v03323', created_by: 'johncordeiro', date_created: '9 sep 2019', latest_modification: '3 months ago',
-  },
-  {
-    id: 7, version: 'v05666', created_by: 'johncordeiro', date_created: '10 sep 2019', latest_modification: '5 months ago',
-  },
-  {
-    id: 8, version: 'v33333', created_by: 'johncordeiro', date_created: '22 sep 2019', latest_modification: '6 months ago',
-  },
-];
 
 export default {
   name: 'RepositoryVersions',
@@ -118,7 +78,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      data,
+      data: [],
       isPaginated: true,
       isPaginationSimple: false,
       currentPage: 1,
@@ -127,18 +87,24 @@ export default {
     };
   },
   mounted() {
-    this.updateRepository().then(() => {
-      this.updateVersions();
-    });
+    this.updateVersions();
   },
   methods: {
     ...mapActions([
       'getVersions',
+      'setRepositoryVersion'
     ]),
 
     async updateVersions() {
-      this.versions = await this.getVersions(this.repository.uuid);
+      const response = await this.getVersions(this.repository.uuid);
+      this.data = response.data.results;
     },
+    handleVersion(id, name) {
+      this.setRepositoryVersion({
+        id,
+        name
+      });
+    }
   },
 };
 </script>
