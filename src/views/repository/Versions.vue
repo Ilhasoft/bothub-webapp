@@ -8,10 +8,11 @@
         has-modal-card
                  trap-focus
                  aria-role="dialog"
+                 width="1200"
                  aria-modal>
       <repository-new-version-modal
         :repository="repository"
-        :versions="data"
+        :version="selectedVersion"
         v-on:close="isNewVersionModalActive = false"
         v-on:addedVersion="isNewVersionModalActive = false"/>
     </b-modal>
@@ -69,6 +70,11 @@
                   rounded>Main</b-button>
                 <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
+                <b-button 
+                  size="is-small"
+                  icon-left="pencil"
+                  @click="copyVersion(props.row)">
+                </b-button>
               </div>
             </b-table-column>
           </template>
@@ -100,7 +106,8 @@ export default {
       currentPage: 1,
       perPage: 5,
       versions: [],
-      isNewVersionModalActive: false
+      isNewVersionModalActive: false,
+      selectedVersion: null,
     };
   },
   mounted() {
@@ -114,7 +121,6 @@ export default {
 
     async updateVersions() {
       const response = await this.getVersions(this.repository.uuid);
-      console.log(this.repository.uuid);
       this.data = response.data.results;
     },
     handleVersion(id, name) {
@@ -125,6 +131,10 @@ export default {
     },
     addNewVersion() {
       this.isNewVersionModalActive = true
+    },
+    copyVersion(version) {
+      this.selectedVersion = version;
+      this.isNewVersionModalActive = true;
     }
   },
 };

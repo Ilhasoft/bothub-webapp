@@ -14,30 +14,20 @@
             <div class="control has-text-centered">
             </div>
             <div class="control">
-			  <div class="select" >
-			    <select v-model="selectedVersion">
-			    <option 
-			    	selected> 
-			    	Source Version
-			    </option>
-			    <option 
-			    	v-for="version in versions"
-			    	v-bind:value="version.id"> {{ version.name }} </option>
-			    </select>
-			  </div>
-                <b-button
-				  	type="is-light"
-				  	@click="onClose()"
-	                >
-            	Cancel
-            	</b-button>
-                <b-button
-				  	type="is-primary"
-				  	@click="onSubmit()"
-	                native-type="submit"
-	                >
-	            	Add new
-	        	</b-button>
+            	<input class="input" type="text" :placeholder="version.name" disabled>
+	                <b-button
+					  	type="is-light"
+					  	@click="onClose()"
+		                >
+	            	Cancel
+	            	</b-button>
+	                <b-button
+					  	type="is-primary"
+					  	:disabled="!canSubmit"
+					  	@click="onSubmit()"
+		                native-type="submit" >
+		            	Add new
+		        	</b-button>
 			</div>
           </div>
         </form>
@@ -56,16 +46,20 @@
 			versions: {
 				type: Array,
 			},
-			// isActive: {
-			// 	type: Boolean,
-			// 	default: false,
-			// },
+			version: {
+				type: Object,
+			}
+		},
+		computed: {
+			canSubmit() {
+				return this.selectedVersion != null;
+			}
 		},
 		data() {
 			return {
 				submitting: false,
 				name: null,
-				selectedVersion: null,
+				loading: false,
 			}
 		},
 		methods: {
@@ -81,7 +75,7 @@
     				{
     					repositoryUUID: this.repository.uuid, 
     					versionUUID: this.selectedVersion, 
-    					name: this.name 
+    					name: this.name,
     				});
     			this.$emit('addedVersion');
     		}
@@ -91,12 +85,26 @@
 
 <style lang="scss">
 	.repository-new-version-modal {
+
 		&__container {
 			margin: 0 auto;
-			width: 600px;
-			padding: 28px;
+			min-width: 600px;
+			padding: 1.75rem;
 			border-radius: 8px;
 			background-color: red;
+/*			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;*/
+		}
+
+		&__dropdown {
+			width: 100%;
+		}
+
+		&__button-container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
 		}
 	}
 	
