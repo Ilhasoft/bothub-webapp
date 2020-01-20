@@ -2,6 +2,19 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
+
+      <b-modal class="repository-new-version-modal"
+        :active.sync="isNewVersionModalActive"
+        has-modal-card
+                 trap-focus
+                 aria-role="dialog"
+                 aria-modal>
+      <repository-new-version-modal
+      :repository="repository"
+      :versions="versions"
+      v-on:close="isNewVersionModalActive = false"/>
+    </b-modal>
+
     <div class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
@@ -68,12 +81,14 @@
 import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import RepositoryNewVersionModal from '@/components/repository/RepositoryNewVersionModal'
 
 
 export default {
   name: 'RepositoryVersions',
   components: {
     RepositoryViewBase,
+    RepositoryNewVersionModal,
   },
   extends: RepositoryBase,
   data() {
@@ -84,6 +99,7 @@ export default {
       currentPage: 1,
       perPage: 5,
       versions: [],
+      isNewVersionModalActive: false
     };
   },
   mounted() {
@@ -96,6 +112,7 @@ export default {
     ]),
 
     async updateVersions() {
+      console.log(this.repository.uuid)
       const response = await this.getVersions(this.repository.uuid);
       this.data = response.data.results;
     },
@@ -104,6 +121,9 @@ export default {
         id,
         name
       });
+    },
+    addNewVersion() {
+      this.isNewVersionModalActive = true
     }
   },
 };

@@ -4,15 +4,18 @@ import TYPES from '../types';
 
 
 export default {
+
   async getNewRepositorySchema() {
     const response = await repository.getNewSchema();
     return response;
   },
-
-  getVersions(store, repositoryUUID) {
-    return repository.getVersions(repositoryUUID);
+  getVersions(store, { repositoryUUID }) {
+    console.log(repositoryUUID);
+    return repository.getVersions("73b836f1-d60d-4e8d-addd-387653c22c27");
   },
-
+  // async addNewVersion(store, { repositoryUuid, versionUuid, name }) {
+  //   return repository.addNewVersion(repositoryUuID, versionUuid, name);
+  // },
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();

@@ -5,6 +5,17 @@ import utils from './utils';
 
 
 export default {
+
+  addNewVersion(repositoryUuid, versionUuid, name) {
+    return request.$http.post(
+      `/v2/repository/version`,
+      {
+        repository: repositoryUuid, 
+        id: versionUuid, 
+        name
+      },
+    );
+  },
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
