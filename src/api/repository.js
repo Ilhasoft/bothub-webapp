@@ -6,16 +6,6 @@ import utils from './utils';
 
 export default {
 
-  addNewVersion(repositoryUuid, versionUuid, name) {
-    return request.$http.post(
-      `/v2/repository/version`,
-      {
-        repository: repositoryUuid, 
-        id: versionUuid, 
-        name
-      },
-    );
-  },
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
@@ -23,8 +13,19 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUuid) {
-    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}`);
+  getVersions(repositoryUUID) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
+  },
+  addNewVersion(repositoryUUID, versionUUID, name) {
+    console.log(repositoryUUID, versionUUID, name)
+    return request.$http.post(
+      '/v2/repository/version/',
+      {
+        id: versionUUID,
+        name,
+        repository: repositoryUUID,
+      },
+    );
   },
   search(query) {
     const queryString = qs.stringify(query);

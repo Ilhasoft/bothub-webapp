@@ -15,12 +15,14 @@
             </div>
             <div class="control">
 			  <div class="select" >
-			    <select v-model="version">
+			    <select v-model="selectedVersion">
 			    <option 
 			    	selected> 
 			    	Source Version
 			    </option>
-			    <option v-for="version in versions"> {{ version.name }} </option>
+			    <option 
+			    	v-for="version in versions"
+			    	v-bind:value="version.id"> {{ version.name }} </option>
 			    </select>
 			  </div>
                 <b-button
@@ -63,7 +65,7 @@
 			return {
 				submitting: false,
 				name: null,
-				version: null,
+				selectedVersion: null,
 			}
 		},
 		methods: {
@@ -74,10 +76,14 @@
     			this.$emit('close');
     		},
     		async onSubmit() {
-    			console.log(this.repository.id, this.version, this.name)
-    			await this.addNewVersion(this.repository.id, this.version, this.name)
+    			console.log(this.repository.uuid, this.selectedVersion, this.name)
+    			await this.addNewVersion( 
+    				{
+    					repositoryUUID: this.repository.uuid, 
+    					versionUUID: this.selectedVersion, 
+    					name: this.name 
+    				});
     			this.$emit('addedVersion');
-    			this.onClose();
     		}
    		}
 	};

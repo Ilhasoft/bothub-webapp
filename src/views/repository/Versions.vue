@@ -10,9 +10,10 @@
                  aria-role="dialog"
                  aria-modal>
       <repository-new-version-modal
-      :repository="repository"
-      :versions="versions"
-      v-on:close="isNewVersionModalActive = false"/>
+        :repository="repository"
+        :versions="data"
+        v-on:close="isNewVersionModalActive = false"
+        v-on:addedVersion="isNewVersionModalActive = false"/>
     </b-modal>
 
     <div class="versions">
@@ -105,9 +106,6 @@ export default {
   mounted() {
     this.updateVersions();
   },
-  watch: {
-    repository: () => { this.updateVersions },
-  },
   methods: {
     ...mapActions([
       'getVersions',
@@ -115,8 +113,8 @@ export default {
     ]),
 
     async updateVersions() {
-      console.log(this.repository.uuid)
       const response = await this.getVersions(this.repository.uuid);
+      console.log(this.repository.uuid);
       this.data = response.data.results;
     },
     handleVersion(id, name) {

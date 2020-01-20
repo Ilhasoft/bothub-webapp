@@ -5,16 +5,17 @@ import TYPES from '../types';
 
 export default {
 
+
   async getNewRepositorySchema() {
     const response = await repository.getNewSchema();
     return response;
   },
-  getVersions(store, { repositoryUUID }) {
+  getVersions(store, repositoryUUID) {
     return repository.getVersions(repositoryUUID);
   },
-  // async addNewVersion(store, { repositoryUuid, versionUuid, name }) {
-  //   return repository.addNewVersion(repositoryUuID, versionUuid, name);
-  // },
+  async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
+    return repository.addNewVersion(repositoryUUID, versionUUID, name);
+  },
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();
