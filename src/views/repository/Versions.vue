@@ -105,6 +105,9 @@ export default {
   mounted() {
     this.updateVersions();
   },
+  watch: {
+    repository: () => { this.updateVersions },
+  },
   methods: {
     ...mapActions([
       'getVersions',

@@ -10,8 +10,7 @@ export default {
     return response;
   },
   getVersions(store, { repositoryUUID }) {
-    console.log(repositoryUUID);
-    return repository.getVersions("73b836f1-d60d-4e8d-addd-387653c22c27");
+    return repository.getVersions(repositoryUUID);
   },
   // async addNewVersion(store, { repositoryUuid, versionUuid, name }) {
   //   return repository.addNewVersion(repositoryUuID, versionUuid, name);

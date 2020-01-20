@@ -31,7 +31,7 @@
             	</b-button>
                 <b-button
 				  	type="is-primary"
-				  	@click="addNewVersion()"
+				  	@click="onSubmit()"
 	                native-type="submit"
 	                >
 	            	Add new
@@ -74,7 +74,10 @@
     			this.$emit('close');
     		},
     		async onSubmit() {
-    			await this.addNewVersion(this.repository.id, this.version, "")
+    			console.log(this.repository.id, this.version, this.name)
+    			await this.addNewVersion(this.repository.id, this.version, this.name)
+    			this.$emit('addedVersion');
+    			this.onClose();
     		}
    		}
 	};
