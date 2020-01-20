@@ -22,9 +22,9 @@
               </p>
               <div class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
                 <span
-                  class="dashboard-layout__main-panel
-                        __header__info__left__wrapper
-                        __versions__number"> Master </span>
+                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
+                   Master
+                 </span>
                 <b-icon
                   class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
                   icon="chevron-down"/>
