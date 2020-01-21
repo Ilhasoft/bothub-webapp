@@ -10,10 +10,12 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  getVersions(store, { repositoryUUID, orderField, asc, limit, offset } ) {
+  getVersions(store, {
+    repositoryUUID, orderField, asc, limit, offset,
+  }) {
     return repository.getVersions(repositoryUUID, orderField, asc, limit, offset);
   },
-  async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
+  addNewVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.addNewVersion(repositoryUUID, versionUUID, name);
   },
   getAllRepositories() {
@@ -135,5 +137,5 @@ export default {
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
-  }
+  },
 };

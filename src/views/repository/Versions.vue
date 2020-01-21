@@ -3,17 +3,18 @@
     :repository="repository"
     :error-code="errorCode">
 
-      <b-modal class="repository-new-version-modal"
-        :active.sync="isNewVersionModalActive"
-                 trap-focus
-                 aria-role="dialog"
-                 aria-modal>
+    <b-modal
+      :active.sync="isNewVersionModalActive"
+      class="repository-new-version-modal"
+      trap-focus
+      aria-role="dialog"
+      aria-modal>
       <repository-new-version-modal
         :repository="repository"
         :version="selectedVersion"
-        v-on:close="isNewVersionModalActive = false"
-        v-on:error="showError"
-        v-on:addedVersion="onAddedVersion()"/>
+        @close="isNewVersionModalActive = false"
+        @error="showError"
+        @addedVersion="onAddedVersion()"/>
     </b-modal>
 
     <div class="versions">
@@ -43,9 +44,9 @@
               sortable
               centered
               numeric>
-              <span 
-                @click="handleVersion(props.row.id, props.row.name)"
-                class="versions__table__version-number">
+              <span
+                class="versions__table__version-number"
+                @click="handleVersion(props.row.id, props.row.name)">
                 {{ props.row.name }}
               </span>
             </b-table-column>
@@ -83,10 +84,9 @@
                   rounded>Main</b-button>
                 <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
-                <b-icon 
+                <b-icon
                   icon="content-copy"
-                  @click.native="copyVersion(props.row)">
-                </b-icon>
+                  @click.native="copyVersion(props.row)" />
               </div>
             </b-table-column>
           </template>
@@ -100,7 +100,7 @@
 import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryNewVersionModal from '@/components/repository/RepositoryNewVersionModal'
+import RepositoryNewVersionModal from '@/components/repository/RepositoryNewVersionModal';
 
 
 export default {
@@ -126,7 +126,7 @@ export default {
     };
   },
   watch: {
-    currentPage(value) { 
+    currentPage() {
       this.updateVersions();
     },
   },
@@ -136,11 +136,11 @@ export default {
   methods: {
     ...mapActions([
       'getVersions',
-      'setRepositoryVersion'
+      'setRepositoryVersion',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
-      this.asc = asc === 'asc' ? true : false;
+      this.asc = asc === 'asc';
       this.updateVersions();
     },
     async updateVersions() {
@@ -150,37 +150,37 @@ export default {
           orderField: this.orderField,
           asc: this.asc,
           limit: this.perPage,
-          offset: this.perPage * (this.currentPage-1),
-        }
+          offset: this.perPage * (this.currentPage - 1),
+        },
       );
       this.data = response.data.results;
-      this.count = response.data.count
+      this.count = response.data.count;
     },
     handleVersion(id, name) {
       this.setRepositoryVersion({
         id,
-        name
+        name,
       });
     },
     copyVersion(version) {
       this.selectedVersion = version;
       this.isNewVersionModalActive = true;
     },
-    onAddedVersion(version) {
+    onAddedVersion() {
       this.isNewVersionModalActive = false;
       this.$buefy.toast.open({
-            message: 'Version was created',
-            type: 'is-success'
-      })
+        message: 'Version was created',
+        type: 'is-success',
+      });
       this.updateVersions();
     },
     showError(error) {
-      //TODO: Treat errors
+      // TODO: Treat errors
       this.$buefy.dialog.alert({
-                    title: 'Error',
-                    message: error.response.data,
-                    type: 'is-danger',
-                });
+        title: 'Error',
+        message: error.response.data,
+        type: 'is-danger',
+      });
     },
   },
 };

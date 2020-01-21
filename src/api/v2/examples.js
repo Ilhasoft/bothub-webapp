@@ -4,8 +4,6 @@ import utils from '../utils';
 
 export default {
   search(repositoryUuid, repositoryVersion, query = {}) {   
-    console.log(repositoryVersion, 'version here');
-     
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
       repository_version: repositoryVersion,
