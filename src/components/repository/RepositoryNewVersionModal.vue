@@ -46,9 +46,6 @@
 			repository: {
 				type: Object,
 			},
-			versions: {
-				type: Array,
-			},
 			version: {
 				type: Object,
 			}
@@ -62,7 +59,6 @@
 			return {
 				submitting: false,
 				name: null,
-				loading: false,
 			}
 		},
 		methods: {

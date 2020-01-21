@@ -127,16 +127,18 @@ export default {
     },
     onAddedVersion(version) {
       this.isNewVersionModalActive = false;
+      this.$buefy.toast.open({
+            message: 'Version was created',
+            type: 'is-success'
+      })
       this.updateVersions();
     },
     showError(error) {
       //TODO: Treat errors
-      this.$buefy.dialog.alert({
-                    title: 'Error',
-                    message: error.response.data,
-                    type: 'is-danger',
-                    confirmText: 'OK'
-                });
+      this.$buefy.toast.open({
+            message: error.response.data,
+            type: 'is-danger'
+      })
     },
   },
 };
