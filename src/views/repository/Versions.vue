@@ -27,6 +27,8 @@
         <b-table
           :data="data"
           :paginated="isPaginated"
+          :backend-pagination="true"
+          :total="count"
           :per-page="perPage"
           :current-page.sync="currentPage"
           :pagination-simple="isPaginationSimple"
@@ -115,12 +117,18 @@ export default {
       isPaginationSimple: false,
       currentPage: 1,
       perPage: 5,
+      count: 0,
       versions: [],
       isNewVersionModalActive: false,
       selectedVersion: null,
       orderField: 'is_default',
       asc: false,
     };
+  },
+  watch: {
+    currentPage(value) { 
+      this.updateVersions();
+    },
   },
   mounted() {
     this.updateVersions();
@@ -141,9 +149,12 @@ export default {
           repositoryUUID: this.repository.uuid,
           orderField: this.orderField,
           asc: this.asc,
+          limit: this.perPage,
+          offset: this.perPage * (this.currentPage-1),
         }
       );
       this.data = response.data.results;
+      this.count = response.data.count
     },
     handleVersion(id, name) {
       this.setRepositoryVersion({

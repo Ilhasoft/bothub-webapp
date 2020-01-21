@@ -1,11 +1,13 @@
 <template>
 	<div class="repository-new-version-modal">
         <div class="repository-new-version-modal__container">
+        	<h1>Add new version</h1>
+        	<p>Clone and turn into a new version</p>
 		<form @submit.prevent="onSubmit">
           <div class="field">
-			  <label class="label">Title</label>
 			  <div class="control">
 			    <input class="input"
+			    placeholder="Title" 
 			    v-model="name"
 			    type="text">
 			  </div>
@@ -14,8 +16,6 @@
             <div class="control has-text-centered">
             </div>
             <div class="control">
-            	<label class="label">Version</label>
-            	<input class="input" type="text" :placeholder="version.name" disabled>
             	<div class="field repository-new-version-modal__button-container">
 	                <b-button
 					  	type="is-light"

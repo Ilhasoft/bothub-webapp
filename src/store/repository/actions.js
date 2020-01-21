@@ -10,8 +10,8 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  getVersions(store, { repositoryUUID, orderField, asc } ) {
-    return repository.getVersions(repositoryUUID, orderField, asc);
+  getVersions(store, { repositoryUUID, orderField, asc, limit, offset } ) {
+    return repository.getVersions(repositoryUUID, orderField, asc, limit, offset);
   },
   async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.addNewVersion(repositoryUUID, versionUUID, name);
