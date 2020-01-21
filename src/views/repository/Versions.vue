@@ -30,10 +30,12 @@
           :per-page="perPage"
           :current-page.sync="currentPage"
           :pagination-simple="isPaginationSimple"
+          backend-sorting
+          @sort="sort"
         >
           <template slot-scope="props">
             <b-table-column
-              field="id"
+              field="name"
               label="version"
               width="40"
               sortable
@@ -47,15 +49,31 @@
             </b-table-column>
             <b-table-column
               centered
-              field="user.last_name"
+              field="created_at"
               label="Date Created"
               sortable>
               {{ props.row.created_at | moment('from') }}
             </b-table-column>
             <b-table-column
               centered
+              field="last_update"
+              label="Last Modified"
+              sortable>
+              {{ props.row.last_update | moment('from') }}
+            </b-table-column>
+            <b-table-column
+              centered
+              field="created_by"
+              label="Created by"
+              sortable>
+              {{ props.row.created_by }}
+            </b-table-column>
+            <b-table-column
+              centered
               width="180"
-              label="">
+              field="is_default"
+              label=""
+              sortable>
               <div class="versions__table__buttons-wrapper">
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
@@ -100,6 +118,8 @@ export default {
       versions: [],
       isNewVersionModalActive: false,
       selectedVersion: null,
+      orderField: 'is_default',
+      asc: false,
     };
   },
   mounted() {
@@ -110,9 +130,19 @@ export default {
       'getVersions',
       'setRepositoryVersion'
     ]),
-
+    sort(orderField, asc) {
+      this.orderField = orderField;
+      this.asc = asc === 'asc' ? true : false;
+      this.updateVersions();
+    },
     async updateVersions() {
-      const response = await this.getVersions(this.repository.uuid);
+      const response = await this.getVersions(
+        {
+          repositoryUUID: this.repository.uuid,
+          orderField: this.orderField,
+          asc: this.asc,
+        }
+      );
       this.data = response.data.results;
     },
     handleVersion(id, name) {
@@ -135,10 +165,11 @@ export default {
     },
     showError(error) {
       //TODO: Treat errors
-      this.$buefy.toast.open({
-            message: error.response.data,
-            type: 'is-danger'
-      })
+      this.$buefy.dialog.alert({
+                    title: 'Error',
+                    message: error.response.data,
+                    type: 'is-danger',
+                });
     },
   },
 };

@@ -57,7 +57,7 @@
 		},
 		data() {
 			return {
-				submitting: false,
+				loading: false,
 				name: null,
 			}
 		},

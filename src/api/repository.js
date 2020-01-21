@@ -13,8 +13,8 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUUID) {
-    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
+  getVersions(repositoryUUID, orderField, asc) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}&ordering=${asc ? '+' : '-'}${orderField}`);
   },
   addNewVersion(repositoryUUID, versionUUID, name) {
     return request.$http.post(
