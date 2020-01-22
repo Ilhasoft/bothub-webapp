@@ -16,6 +16,15 @@ export default {
   getVersions(repositoryUUID, orderField, asc, limit, offset) {
     return request.$http.get(`/v2/repository/version/?limit=${limit}&offset=${offset}&repository=${repositoryUUID}&ordering=${asc ? '+' : '-'}${orderField}`);
   },
+  makeVersionDefault(repositoryUUID, versionUUID) {
+    return request.$http.patch(
+      `/v2/repository/version/${versionUUID}/`,
+      {
+        id: versionUUID,
+        repository: repositoryUUID,
+      },
+    );
+  },
   addNewVersion(repositoryUUID, versionUUID, name) {
     return request.$http.post(
       '/v2/repository/version/',
@@ -25,6 +34,19 @@ export default {
         repository: repositoryUUID,
       },
     );
+  },
+  editVersion(repositoryUUID, versionUUID, name) {
+    return request.$http.patch(
+      `/v2/repository/version/${versionUUID}/`,
+      {
+        id: versionUUID,
+        name,
+        repository: repositoryUUID,
+      },
+    );
+  },
+  deleteVersion(repositoryUUID, versionUUID) {
+    return request.$http.delete(`/v2/repository/version/${versionUUID}`);
   },
   search(query) {
     const queryString = qs.stringify(query);

@@ -81,9 +81,13 @@
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
-                  rounded>Main</b-button>
-                <b-icon icon="pencil"/>
-                <b-icon icon="delete"/>
+                  rounded
+                  @click="makeDefault(props.row)">Main</b-button>
+                <b-icon 
+                  icon="pencil"/>
+                <b-icon 
+                  icon="delete"
+                  @click.native="openDeleteVersion(props.row)"/>
                 <b-icon
                   icon="content-copy"
                   @click.native="copyVersion(props.row)" />
@@ -137,6 +141,8 @@ export default {
     ...mapActions([
       'getVersions',
       'setRepositoryVersion',
+      'deleteVersion',
+      'makeVersionDefault',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
@@ -160,7 +166,44 @@ export default {
       this.setRepositoryVersion({
         id,
         name,
+      }).then(() => { this.updateVersions(); });
+    },
+    makeDefault(version) {
+      if (version.is_default) return;
+
+      this.makeVersionDefault({
+        repositoryUUID: this.repository.uuid,
+        versionUUID: version.id,
+      }).then(() => {
+          this.updateVersions();
       });
+    },
+    onDeletionConfirm(version) {
+      this.deleteVersion({
+                        repositoryUUID: this.repository.uuid,
+                        versionUUID: version.id,
+                      }).then(() => {
+                        this.$buefy.toast.open({
+                          message: 'Version was deleted',
+                          type: 'is-success',
+                        });
+                        this.updateVersions();
+                    }).onError((error) => {
+                      this.$buefy.toast.open({
+                          message: 'An error occurred',
+                          type: 'is-danger',
+                        });
+                    });
+    },
+    openDeleteVersion(version) {
+      this.$buefy.dialog.confirm({
+                    message: 'Are you sure?',
+                    confirmText: 'Delete',
+                    type: 'is-primary',
+                    onConfirm: () => {
+                      this.onDeletionConfirm(version);
+                    }
+                });
     },
     copyVersion(version) {
       this.selectedVersion = version;

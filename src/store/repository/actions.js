@@ -15,8 +15,17 @@ export default {
   }) {
     return repository.getVersions(repositoryUUID, orderField, asc, limit, offset);
   },
+  async makeVersionDefault(store, { repositoryUUID, versionUUID }) {
+    return repository.makeVersionDefault(repositoryUUID, versionUUID);
+  },
+  async editVersion(store, { repositoryUUID, versionUUID, name }) {
+    return repository.editVersion(repositoryUUID, versionUUID, name);
+  },
   addNewVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.addNewVersion(repositoryUUID, versionUUID, name);
+  },
+  deleteVersion(store, { repositoryUUID, versionUUID }) {
+    return repository.deleteVersion(repositoryUUID, versionUUID);
   },
   getAllRepositories() {
     /* istanbul ignore next */
