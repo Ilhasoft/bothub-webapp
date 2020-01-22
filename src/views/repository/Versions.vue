@@ -45,12 +45,17 @@
               centered
               numeric>
               <div v-if="currentEditVersion && currentEditVersion.id==props.row.id" class="field">
-                <div class="control">
+                <div class="control has-icons-right">
                   <input :class="['input', 'is-focused', loadingEdit ? 'is-loading' : '']"
                          v-model="editName"
                          @blur="clearEdit()"
                          @keyup.enter="submitEdit()"
                          type="text">
+                  <span class="icon is-small is-right">
+                    <b-icon 
+                      icon="close"
+                      @click.native.stop.prevent.capture="clearEdit()"/>
+                  </span>
                 </div>
               </div>
               <span v-else
@@ -275,6 +280,10 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/variables.scss';
+
+.icon {
+  pointer-events: initial !important;
+}
 
 .versions {
   margin: auto;
