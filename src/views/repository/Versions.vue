@@ -40,11 +40,20 @@
             <b-table-column
               field="name"
               label="version"
-              width="40"
+              width="100"
               sortable
               centered
               numeric>
-              <span
+              <div v-if="currentEditVersion && currentEditVersion.id==props.row.id" class="field">
+                <div class="control">
+                  <input :class="['input', 'is-focused', loadingEdit ? 'is-loading' : '']"
+                         v-model="editName"
+                         @blur="clearEdit()"
+                         @keyup.enter="submitEdit()"
+                         type="text">
+                </div>
+              </div>
+              <span v-else
                 class="versions__table__version-number"
                 @click="handleVersion(props.row.id, props.row.name)">
                 {{ props.row.name }}
@@ -84,7 +93,8 @@
                   rounded
                   @click="makeDefault(props.row)">Main</b-button>
                 <b-icon 
-                  icon="pencil"/>
+                  icon="pencil"
+                  @click.native="openEditVersion(props.row)"/>
                 <b-icon 
                   icon="delete"
                   @click.native="openDeleteVersion(props.row)"/>
@@ -127,6 +137,9 @@ export default {
       selectedVersion: null,
       orderField: 'is_default',
       asc: false,
+      currentEditVersion: null,
+      editName: null,
+      loadingEdit: false,
     };
   },
   watch: {
@@ -142,6 +155,7 @@ export default {
       'getVersions',
       'setRepositoryVersion',
       'deleteVersion',
+      'editVersion',
       'makeVersionDefault',
     ]),
     sort(orderField, asc) {
@@ -168,6 +182,33 @@ export default {
         name,
       }).then(() => { this.updateVersions(); });
     },
+    openEditVersion(version) {
+      this.editName = version.name;
+      this.currentEditVersion = version;
+    },
+    clearEdit() {
+      this.currentEditVersion = null;
+      this.editName = null;
+      this.loadingEdit = false;
+    },
+    submitEdit() {
+      console.log("Edit!")
+      if (!this.currentEditVersion || !this.editName || this.currentEditVersion.name == this.editName) {
+        this.clearEdit();
+        return;
+      };
+      this.loadingEdit = true;
+      this.editVersion({
+        repositoryUUID: this.repository.uuid,
+        versionUUID: this.currentEditVersion.id,
+        name: this.editName,
+      }).then(() => { 
+        this.updateVersions();
+        this.clearEdit(); 
+      }).onError((error) => {
+        this.clearEdit();
+      });
+    },
     makeDefault(version) {
       if (version.is_default) return;
 
@@ -175,6 +216,7 @@ export default {
         repositoryUUID: this.repository.uuid,
         versionUUID: version.id,
       }).then(() => {
+          this.clearEdit();
           this.updateVersions();
       });
     },
