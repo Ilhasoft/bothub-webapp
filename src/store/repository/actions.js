@@ -15,10 +15,10 @@ export default {
   }) {
     return repository.getVersions(repositoryUUID, orderField, asc, limit, offset);
   },
-  async makeVersionDefault(store, { repositoryUUID, versionUUID }) {
+  makeVersionDefault(store, { repositoryUUID, versionUUID }) {
     return repository.makeVersionDefault(repositoryUUID, versionUUID);
   },
-  async editVersion(store, { repositoryUUID, versionUUID, name }) {
+  editVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.editVersion(repositoryUUID, versionUUID, name);
   },
   addNewVersion(store, { repositoryUUID, versionUUID, name }) {
