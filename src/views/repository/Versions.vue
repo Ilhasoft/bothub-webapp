@@ -39,9 +39,16 @@
             </b-table-column>
             <b-table-column
               centered
-              field="user.last_name"
+              field="last_update"
+              label="Last update"
+              sortable >
+              {{ props.row.last_update | moment('from') }}
+            </b-table-column>
+            <b-table-column
+              centered
+              field="created_at"
               label="Date Created"
-              sortable>
+              sortable >
               {{ props.row.created_at | moment('from') }}
             </b-table-column>
             <b-table-column
@@ -52,6 +59,7 @@
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
+                  @click="handleDefaultVersion(props.row.id, props.row.name)"
                   rounded>Main</b-button>
                 <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
@@ -92,7 +100,8 @@ export default {
   methods: {
     ...mapActions([
       'getVersions',
-      'setRepositoryVersion'
+      'setRepositoryVersion',
+      'setDefaultVersion'
     ]),
 
     async updateVersions() {
@@ -104,6 +113,9 @@ export default {
         id,
         name
       });
+    },
+    handleDefaultVersion(id, name) {
+      this.setDefaultVersion(this.repository.uuid, id, name);
     }
   },
 };
@@ -138,6 +150,7 @@ export default {
     &__version-number {
       color: $primary;
       font-weight: bold;
+      cursor: pointer;
     }
 
     &__buttons-wrapper {

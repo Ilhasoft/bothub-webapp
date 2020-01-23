@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import Repository from '@/models/repository';
 
 
@@ -16,6 +16,9 @@ export default {
       'authenticated',
       'getUpdateRepositoryState',
     ]),
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion
+    }),
   },
   watch: {
     $route() {
@@ -29,6 +32,9 @@ export default {
         this.updateRepository(true);
       }
     },
+    repositoryVersion() {
+      this.updateRepository(true);
+    }
   },
   mounted() {
     this.updateRepository();
