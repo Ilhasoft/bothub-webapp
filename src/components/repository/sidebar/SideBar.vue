@@ -71,8 +71,10 @@
             icon="translate"
             label="Versions"/>
           <b-menu-item
+            :to="{ name: 'repository-integration' }"
+            tag="router-link"
             icon="power-plug"
-            label="Integration"/>
+            label="Inregration"/>
           <b-menu-item
             :to="{ name: 'repository-settings' }"
             tag="router-link"
@@ -119,6 +121,7 @@
           icon="translate"
           @click.native="routerHandle('repository-translate')" />
         <b-icon
+           @click.native="routerHandle('repository-integration')"
           class="icon-list"
           icon="power-plug" />
         <b-icon
