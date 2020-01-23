@@ -70,13 +70,6 @@
             </b-table-column>
             <b-table-column
               centered
-              field="last_update"
-              label="Last update"
-              sortable >
-              {{ props.row.last_update | moment('from') }}
-            </b-table-column>
-            <b-table-column
-              centered
               field="created_at"
               label="Date Created"
               sortable >
