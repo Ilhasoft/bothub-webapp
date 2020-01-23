@@ -12,7 +12,14 @@ export default {
   getVersions(store, repositoryUUID) {
     return repository.getVersions(repositoryUUID);
   },
-
+  getFirstFiveVersions(store, repositoryUuid) {
+    return repository.getFirstFiveVersions(repositoryUuid);
+  },
+  setDefaultVersion(store, repositoryUuid, id, name) {
+    console.log(repositoryUuida, id, name);
+    
+    return repository.setDefaultVersion(repositoryUuid,id, name);
+  },
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();
