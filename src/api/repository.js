@@ -18,12 +18,12 @@ export default {
   getFirstFiveVersions(repositoryUuid) {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
   },
-  setDefaultVersion(repositoryUuid,id, name) {
+  setDefaultVersion(repositoryUuid, id, name) {
     return request.$http.patch(`/v2/repository/version/${id}/`,
-    {
-      repositoryUuid,
-      name
-    });
+      {
+        repositoryUuid,
+        name,
+      });
   },
   search(query) {
     const queryString = qs.stringify(query);

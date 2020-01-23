@@ -17,7 +17,7 @@ export default {
       'getUpdateRepositoryState',
     ]),
     ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {
@@ -34,7 +34,7 @@ export default {
     },
     repositoryVersion() {
       this.updateRepository(true);
-    }
+    },
   },
   mounted() {
     this.updateRepository();

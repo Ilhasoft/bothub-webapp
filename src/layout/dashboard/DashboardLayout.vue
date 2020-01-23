@@ -20,26 +20,32 @@
               <p class="dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <div class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
+              <div
+                class="dashboard-layout__main-panel__header
+              __info__left__wrapper__versions">
                 <span
-                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
-                   {{$store.state.Repository.repositoryVersionName}}
-                 </span>
-                 <b-dropdown
+                  class="dashboard-layout__main-panel
+                  __header__info__left__wrapper__versions__number">
+                  {{ $store.state.Repository.repositoryVersionName }}
+                </span>
+                <b-dropdown
                   aria-role="list">
-                <b-icon
-                  slot="trigger"
-                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
-                  icon="chevron-down"/>
+                  <b-icon
+                    slot="trigger"
+                    class="dashboard-layout__main-panel__header__
+                    info__left__wrapper__versions__icon"
+                    icon="chevron-down"/>
                   <b-dropdown-item
                     v-for="(version, index) in allVersions"
                     :key="index"
                     aria-role="listitem"
-                   @click="handleVersion(version.id, version.name)">{{version.name}}</b-dropdown-item>
-                    <b-dropdown-item
-                      aria-role="listitem"
-                      @click="routerHandle('repository-versions')">See all versions</b-dropdown-item>
-                 </b-dropdown>
+                    @click="handleVersion(version.id, version.name)">
+                    {{ version.name }}
+                  </b-dropdown-item>
+                  <b-dropdown-item
+                    aria-role="listitem"
+                    @click="routerHandle('repository-versions')">See all versions</b-dropdown-item>
+                </b-dropdown>
               </div>
             </div>
             <span class="has-text-white">Created by
@@ -127,14 +133,14 @@ export default {
   },
   watch: {
     getCurrentRepository() {
-      this.getAllVersions()
-    }
+      this.getAllVersions();
+    },
   },
   methods: {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
-      'setRepositoryVersion'
+      'setRepositoryVersion',
     ]),
     colapseHandle() {
       this.colapse = !this.colapse;
@@ -148,15 +154,15 @@ export default {
       this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
     },
     async getAllVersions() {
-      const response = await this.getFirstFiveVersions(this.getCurrentRepository.uuid);      
+      const response = await this.getFirstFiveVersions(this.getCurrentRepository.uuid);
       this.allVersions = response.data.results;
     },
     handleVersion(id, name) {
       this.setRepositoryVersion({
         id,
-        name
+        name,
       });
-    }
+    },
   },
 };
 </script>

@@ -16,6 +16,7 @@
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
       <section>
+        <h1>oi</h1>
         <b-table
           :data="data"
           :paginated="isPaginated"
@@ -31,9 +32,9 @@
               sortable
               centered
               numeric>
-              <span 
-                @click="handleVersion(props.row.id, props.row.name)"
-                class="versions__table__version-number">
+              <span
+                class="versions__table__version-number"
+                @click="handleVersion(props.row.id, props.row.name)">
                 {{ props.row.name }}
               </span>
             </b-table-column>
@@ -59,8 +60,8 @@
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
-                  @click="handleDefaultVersion(props.row.id, props.row.name)"
-                  rounded>Main</b-button>
+                  rounded
+                  @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
                 <b-icon icon="pencil"/>
                 <b-icon icon="delete"/>
               </div>
@@ -101,7 +102,7 @@ export default {
     ...mapActions([
       'getVersions',
       'setRepositoryVersion',
-      'setDefaultVersion'
+      'setDefaultVersion',
     ]),
 
     async updateVersions() {
@@ -111,12 +112,12 @@ export default {
     handleVersion(id, name) {
       this.setRepositoryVersion({
         id,
-        name
+        name,
       });
     },
     handleDefaultVersion(id, name) {
       this.setDefaultVersion(this.repository.uuid, id, name);
-    }
+    },
   },
 };
 </script>

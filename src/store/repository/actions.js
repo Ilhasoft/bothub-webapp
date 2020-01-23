@@ -17,8 +17,8 @@ export default {
   },
   setDefaultVersion(store, repositoryUuid, id, name) {
     console.log(repositoryUuida, id, name);
-    
-    return repository.setDefaultVersion(repositoryUuid,id, name);
+
+    return repository.setDefaultVersion(repositoryUuid, id, name);
   },
   getAllRepositories() {
     /* istanbul ignore next */
@@ -139,5 +139,5 @@ export default {
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
-  }
+  },
 };

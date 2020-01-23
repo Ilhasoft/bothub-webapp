@@ -110,7 +110,7 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
-      repositoryVersion: state => state.Repository.repositoryVersion
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     validationErrors() {
       const errors = [];

@@ -121,9 +121,9 @@
           icon="translate"
           @click.native="routerHandle('repository-translate')" />
         <b-icon
-           @click.native="routerHandle('repository-integration')"
           class="icon-list"
-          icon="power-plug" />
+          icon="power-plug"
+          @click.native="routerHandle('repository-integration')" />
         <b-icon
           class="icon-list"
           icon="settings"

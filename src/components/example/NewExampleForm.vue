@@ -108,7 +108,7 @@ export default {
   },
   computed: {
     ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     validationErrors() {
       const errors = [];
