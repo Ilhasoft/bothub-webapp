@@ -57,7 +57,7 @@
                   <span class="icon is-small is-right">
                     <b-icon
                       icon="close"
-                      @click.native.stop.prevent.capture="clearEdit()"/>
+                      @click.native="clearEdit()"/>
                   </span>
                 </div>
               </div>
@@ -96,14 +96,14 @@
               label=""
               sortable>
               <div class="versions__table__buttons-wrapper">
-                <b-icon
-                  icon="content-copy"
-                  @click.native="copyVersion(props.row)" />
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
                   rounded
                   @click="makeDefault(props.row)">Main</b-button>
+                <b-icon
+                  icon="content-copy"
+                  @click.native="copyVersion(props.row)" />
                 <b-icon
                   icon="pencil"
                   @click.native="openEditVersion(props.row)"/>
@@ -215,8 +215,9 @@ export default {
       }).then(() => {
         this.updateVersions();
         this.clearEdit();
-      }).onError(() => {
+      }).catch((error) => {
         this.clearEdit();
+        this.showError(error);
       });
     },
     makeDefault(version) {
@@ -228,6 +229,8 @@ export default {
       }).then(() => {
         this.clearEdit();
         this.updateVersions();
+      }).catch((error) => {
+        this.showError(error);
       });
     },
     onDeletionConfirm(version) {
@@ -240,11 +243,8 @@ export default {
           type: 'is-success',
         });
         this.updateVersions();
-      }).onError(() => {
-        this.$buefy.toast.open({
-          message: 'An error occurred',
-          type: 'is-danger',
-        });
+      }).catch((error) => {
+        this.showError(error);
       });
     },
     openDeleteVersion(version) {
@@ -270,10 +270,10 @@ export default {
       this.updateVersions();
     },
     showError(error) {
-      // TODO: Treat errors
+      const message = Object.values(error.response.data).map(errors => Array.join(errors, ','));
       this.$buefy.dialog.alert({
         title: 'Error',
-        message: error.response.data,
+        message: Array.join(message, ','),
         type: 'is-danger',
       });
     },

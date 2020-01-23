@@ -59,8 +59,12 @@ export default {
     };
   },
   computed: {
+    trimmedName() {
+      if (!this.name) return null;
+      return this.name.trim();
+    },
     canSubmit() {
-      return !(!this.name || /^\s*$/.test(this.name));
+      return !(!this.trimmedName || /^\s*$/.test(this.trimmedName));
     },
   },
   methods: {
@@ -76,7 +80,7 @@ export default {
         {
           repositoryUUID: this.repository.uuid,
           versionUUID: this.version.id,
-          name: this.name,
+          name: this.trimmedName,
         },
       ).then(() => {
         this.loading = false;
