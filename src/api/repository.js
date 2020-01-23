@@ -15,6 +15,16 @@ export default {
   getVersions(repositoryUuid) {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}`);
   },
+  getFirstFiveVersions(repositoryUuid) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+  },
+  setDefaultVersion(repositoryUuid,id, name) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+    {
+      repositoryUuid,
+      name
+    });
+  },
   search(query) {
     const queryString = qs.stringify(query);
     return new utils.List(`/v2/repository/repositories/?${queryString}`);
