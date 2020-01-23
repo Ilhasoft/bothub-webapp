@@ -110,6 +110,7 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
+      repositoryVersion: state => state.Repository.repositoryVersion
     }),
     validationErrors() {
       const errors = [];
@@ -209,6 +210,7 @@ export default {
       try {
         await this.newEvaluateExample({
           repository: this.repository.uuid,
+          repositoryVersion: this.repositoryVersion,
           ...this.data,
         });
         this.text = '';

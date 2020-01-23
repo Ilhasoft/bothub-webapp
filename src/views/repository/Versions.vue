@@ -40,7 +40,7 @@
             <b-table-column
               field="name"
               label="version"
-              width="100"
+              width="80"
               sortable
               centered
               numeric>
@@ -70,9 +70,16 @@
             </b-table-column>
             <b-table-column
               centered
+              field="last_update"
+              label="Last update"
+              sortable >
+              {{ props.row.last_update | moment('from') }}
+            </b-table-column>
+            <b-table-column
+              centered
               field="created_at"
               label="Date Created"
-              sortable>
+              sortable >
               {{ props.row.created_at | moment('from') }}
             </b-table-column>
             <b-table-column
@@ -222,12 +229,11 @@ export default {
     },
     makeDefault(version) {
       if (version.is_default) return;
-
+      this.clearEdit();
       this.makeVersionDefault({
         repositoryUUID: this.repository.uuid,
         versionUUID: version.id,
       }).then(() => {
-        this.clearEdit();
         this.updateVersions();
       }).catch((error) => {
         this.showError(error);
@@ -314,6 +320,7 @@ export default {
     &__version-number {
       color: $primary;
       font-weight: bold;
+      cursor: pointer;
     }
 
     &__buttons-wrapper {

@@ -48,6 +48,9 @@ export default {
   deleteVersion(repositoryUUID, versionUUID) {
     return request.$http.delete(`/v2/repository/version/${versionUUID}`);
   },
+  getFirstFiveVersions(repositoryUuid) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+  },
   search(query) {
     const queryString = qs.stringify(query);
     return new utils.List(`/v2/repository/repositories/?${queryString}`);

@@ -27,6 +27,9 @@ export default {
   deleteVersion(store, { repositoryUUID, versionUUID }) {
     return repository.deleteVersion(repositoryUUID, versionUUID);
   },
+  getFirstFiveVersions(store, repositoryUuid) {
+    return repository.getFirstFiveVersions(repositoryUuid);
+  },
   getAllRepositories() {
     /* istanbul ignore next */
     return repository.getAll();
