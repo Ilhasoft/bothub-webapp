@@ -21,19 +21,16 @@
                 {{ getCurrentRepository.name }}
               </p>
               <div
-                class="dashboard-layout__main-panel__header
-              __info__left__wrapper__versions">
+                class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
                 <span
-                  class="dashboard-layout__main-panel
-                  __header__info__left__wrapper__versions__number">
+                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
                   {{ $store.state.Repository.repositoryVersionName }}
                 </span>
                 <b-dropdown
                   aria-role="list">
                   <b-icon
                     slot="trigger"
-                    class="dashboard-layout__main-panel__header__
-                    info__left__wrapper__versions__icon"
+                    class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
                     icon="chevron-down"/>
                   <b-dropdown-item
                     v-for="(version, index) in allVersions"

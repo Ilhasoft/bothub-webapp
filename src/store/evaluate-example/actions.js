@@ -5,7 +5,7 @@ import entity from '@/api/entity';
 export default {
   async newEvaluateExample(store, {
     repository, repositoryVersion, text, language, entities, intent,
-  }) {
+  }) {    
     const response = await evaluateExample.new(repository, repositoryVersion, text, language, entities, intent);
     return response;
   },

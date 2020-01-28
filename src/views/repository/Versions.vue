@@ -16,7 +16,6 @@
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
       <section>
-        <h1>oi</h1>
         <b-table
           :data="data"
           :paginated="isPaginated"
