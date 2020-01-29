@@ -5,24 +5,13 @@
     :entities="entities"
     :text="text"
     :training="training"
-    :editing.sync="editing"
-    :should-edit="true"
-    :open.sync="open"
-    @editSentence="editSentence()"
-    @deleteSentence="deleteSentence()"
-    @onToggle="onToggleAccordion()">
-    <example-info
-      v-if="!editing"
-      :entities-list="entitiesList"
-      :intent="intent" />
+    @deleteSentence="deleteSentence()">
 
-    <edit-example
-      v-else
-      :entities="entitiesList"
-      :intent-to-edit="intent"
-      :text-to-edit="text"
-      :sentence-id="id"
-      @cancel="cancelEditSentence"/>
+    <log-info
+      :entities-list="entitiesList"
+      :intent="intent"
+      :confidence="0.9"/>
+
   </sentence-accordion>
 </template>
 
@@ -30,16 +19,14 @@
 import { mapState, mapActions } from 'vuex';
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
-import EditExample from '@/components/shared/accordion/EditExample';
+import LogInfo from '@/components/shared/accordion/LogInfo';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 
 export default {
-  name: 'ExampleAccordion',
+  name: 'LogAccordion',
   components: {
     SentenceAccordion,
-    ExampleInfo,
-    EditExample,
+    LogInfo,
   },
   props: {
     id: {
@@ -69,9 +56,7 @@ export default {
   },
   data() {
     return {
-      open: false,
       deleteDialog: null,
-      editing: false,
     };
   },
   computed: {
@@ -111,45 +96,74 @@ export default {
         return current;
       }, 'unlabeled');
     },
-    deleteThisExample() {
-      return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure? The example will be deleted.',
-          confirmText: 'Delete',
-          type: 'is-danger',
-          onConfirm: async () => {
-            if (this.training) {
-              await this.deleteExample({ id: this.id });
-              this.$emit('deleted');
-              resolve();
-            } else {
-              await this.deleteEvaluateExample({
-                id: this.id,
-                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-              });
-              this.$emit('deleted');
-              resolve();
-            }
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
-          },
-        });
-      });
-    },
-    cancelEditSentence() {
-      this.editing = false;
-    },
-    editSentence() {
-      this.editing = true;
-      this.open = true;
-    },
-    onToggleAccordion() {
-      if (!this.open) {
-        this.cancelEditSentence();
-      }
-    },
   },
 };
 </script>
+
+
+<style lang="scss" scoped>
+  @import '../../../assets/scss/utilities';
+
+  .before-border {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      content: '';
+      border-bottom: 1px solid #2bbfac;
+      transition: opacity .1s linear, transform .5s ease-in-out;
+    }
+
+    &:not(:hover)::before {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+  }
+
+  .accordion {
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
+  }
+
+  .expander {
+    &__trigger {
+      display: grid;
+      grid-template-columns: 1fr 25%;
+      justify-content: space-between;
+      padding: .7rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      border: 1px solid #cfd5d9;
+      border-radius: 3px;
+
+      &__btns-wrapper {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    &__body {
+      padding: .7rem 0;
+      background: #f5f5f5;
+    }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+
+  .example {
+    &__icon {
+      margin: 0 .5rem;
+
+      &:hover {
+        color: black;
+        transition: 1s;
+      }
+    }
+  }
+</style>
