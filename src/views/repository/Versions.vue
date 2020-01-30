@@ -2,16 +2,26 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
+
+      <b-modal 
+        :width="500"
+        class="repository-new-version-modal"
+        :active.sync="isNewVersionModalActive"
+        trap-focus
+        aria-role="dialog"
+        aria-modal>
+      <repository-handle-version-modal
+        :repository="repository"
+        :version="selectedVersion"
+        @close="isNewVersionModalActive = false"
+        @error="showError"
+        @addedVersion="onAddedVersion()"/>
+    </b-modal>
+
     <div class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
           <h2>Versions</h2>
-          <b-button
-            class="version__header__button has-text-weight-bold"
-            type="is-primary"
-            @click="addNewVersion()">
-            Add new
-          </b-button>
         </div>
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
@@ -34,7 +44,7 @@
               <span
                 class="versions__table__version-number"
                 @click="handleVersion(props.row.id, props.row.name)">
-                {{ props.row.name }}
+                {{props.row.name}}
               </span>
             </b-table-column>
             <b-table-column
@@ -61,8 +71,13 @@
                   class="is-small"
                   rounded
                   @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
-                <b-icon icon="pencil"/>
-                <b-icon icon="delete"/>
+                <b-icon 
+                  @click.native="onDeleteVersion(props.row.id, props.row.is_default)"
+                  icon="delete"/>
+                <b-icon 
+                  icon="content-copy"
+                  @click.native="copyVersion(props.row)">
+                </b-icon>
               </div>
             </b-table-column>
           </template>
@@ -76,12 +91,14 @@
 import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal'
 
 
 export default {
   name: 'RepositoryVersions',
   components: {
     RepositoryViewBase,
+    RepositoryHandleVersionModal,
   },
   extends: RepositoryBase,
   data() {
@@ -92,6 +109,8 @@ export default {
       currentPage: 1,
       perPage: 5,
       versions: [],
+      isNewVersionModalActive: false,
+      selectedVersion: null,
     };
   },
   mounted() {
@@ -102,6 +121,7 @@ export default {
       'getVersions',
       'setRepositoryVersion',
       'setDefaultVersion',
+      'deleteVersion',
     ]),
 
     async updateVersions() {
@@ -114,8 +134,59 @@ export default {
         name,
       });
     },
-    handleDefaultVersion(id, name) {
-      this.setDefaultVersion(this.repository.uuid, id, name);
+    handleDefaultVersion(id, name) {      
+      this.$buefy.dialog.confirm({
+        title: 'Change default version',
+        message: 'Are you sure you want to change this default version?',
+        confirmText: 'Change default',
+        type: 'is-warning',
+        hasIcon: true,
+        onConfirm: () => this.setDefaultVersion({
+          repositoryUuid: this.repository.uuid,
+            id,
+            name
+        }).then(e => this.updateVersions())
+      })
+    },
+    copyVersion(version) {
+      this.selectedVersion = version;
+      this.isNewVersionModalActive = true;
+    },
+    onAddedVersion(version) {
+      this.isNewVersionModalActive = false;
+      this.$buefy.toast.open({
+            message: 'Version was created',
+            type: 'is-success'
+      })
+      this.updateVersions();
+    },
+    onDeleteVersion(id, is_default) {
+      console.log(is_default);
+      if (is_default) {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: `You cannot delete the main branch`,
+          position: 'is-top',
+          type: 'is-danger'
+        })
+      } else {
+        this.$buefy.dialog.confirm({
+          title: 'Deleting Version',
+          message: 'Are you sure you want to delete this version? This action cannot be undone.',
+          confirmText: 'Delete Version',
+          type: 'is-danger',
+          hasIcon: true,
+          onConfirm: () => this.deleteVersion(id)
+            .then(e => this.updateVersions())
+        })
+      }
+    },
+    showError(error) {
+      //TODO: Treat errors
+      this.$buefy.toast.open({
+            message: error.response.data,
+            type: 'is-danger'
+      })
     },
   },
 };
@@ -157,6 +228,10 @@ export default {
       display: flex;
       justify-content: space-between;
       color: $color-grey-dark;
+
+      span {
+        cursor: pointer;
+      }
     }
   }
 }

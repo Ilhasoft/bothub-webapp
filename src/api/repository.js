@@ -5,6 +5,7 @@ import utils from './utils';
 
 
 export default {
+
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
@@ -12,18 +13,34 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUuid) {
-    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}`);
+  getVersions(repositoryUUID) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
+  },
+  addNewVersion(repositoryUUID, versionUUID, name) {
+    return request.$http.post(
+      '/v2/repository/version/',
+      {
+        id: versionUUID,
+        name,
+        repository: repositoryUUID,
+      },
+    );
   },
   getFirstFiveVersions(repositoryUuid) {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
   },
   setDefaultVersion(repositoryUuid, id, name) {
+    console.log(repositoryUuid, id, name);
+    
     return request.$http.patch(`/v2/repository/version/${id}/`,
       {
-        repositoryUuid,
+        repository: repositoryUuid,
+        id,
         name,
       });
+  },
+  deleteVersion(id) {
+    return request.$http.delete(`/v2/repository/version/${id}/`)
   },
   search(query) {
     const queryString = qs.stringify(query);

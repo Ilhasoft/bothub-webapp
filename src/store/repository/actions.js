@@ -4,21 +4,28 @@ import TYPES from '../types';
 
 
 export default {
+
+
   async getNewRepositorySchema() {
     const response = await repository.getNewSchema();
     return response;
   },
-
   getVersions(store, repositoryUUID) {
     return repository.getVersions(repositoryUUID);
   },
   getFirstFiveVersions(store, repositoryUuid) {
     return repository.getFirstFiveVersions(repositoryUuid);
   },
-  setDefaultVersion(store, repositoryUuid, id, name) {
-    console.log(repositoryUuida, id, name);
-
+  setDefaultVersion(store, { repositoryUuid, id, name }) {
+    console.log(repositoryUuid, id, name);
+    
     return repository.setDefaultVersion(repositoryUuid, id, name);
+  },
+  deleteVersion(store, id) {
+    return repository.deleteVersion(id);
+  },
+  async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
+    return repository.addNewVersion(repositoryUUID, versionUUID, name);
   },
   getAllRepositories() {
     /* istanbul ignore next */

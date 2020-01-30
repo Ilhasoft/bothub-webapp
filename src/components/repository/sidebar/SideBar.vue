@@ -35,10 +35,10 @@
             icon="refresh"
             label="Training"/>
           <b-menu-item
-            :active="isActive"
-            :expanded="isActive"
+            :active="isTestsActive"
+            :expanded="isTestsActive"
             icon="wechat"
-            @click="isActive = !isActive">
+            @click="isTestsActive = !isTestsActive">
             <template
               slot="label"
               slot-scope="props">
@@ -66,20 +66,32 @@
             icon="translate"
             label="Translation"/>
           <b-menu-item
-            :to="{ name: 'repository-versions' }"
-            tag="router-link"
-            icon="translate"
-            label="Versions"/>
-          <b-menu-item
             :to="{ name: 'repository-integration' }"
             tag="router-link"
             icon="power-plug"
-            label="Inregration"/>
-          <b-menu-item
-            :to="{ name: 'repository-settings' }"
-            tag="router-link"
+            label="Integration"/>
+            <b-menu-item
+            :active="isSettingsActive"
+            :expanded="isSettingsActive"
             icon="settings"
-            label="Settings"/>
+            @click="isSettingsActive = !isSettingsActive">
+            <template
+              slot="label"
+              slot-scope="props">
+              <span>Settings</span>
+              <b-icon
+                :icon="props.expanded ? 'caret-down' : 'caret-up'"
+                class="is-pulled-right"/>
+            </template>
+            <b-menu-item
+              :to="{ name: 'repository-settings' }"
+              tag="router-link"
+              label="Settings"/>
+            <b-menu-item
+              :to="{ name: 'repository-versions' }"
+              tag="router-link"
+              label="Versions"/>
+          </b-menu-item>
         </b-menu-list>
       </b-menu>
       <div
@@ -128,6 +140,8 @@
           class="icon-list"
           icon="settings"
           @click.native="routerHandle('repository-settings')" />
+        
+          
       </div>
       <div/>
     </div>
@@ -139,7 +153,8 @@ export default {
   name: 'SideBar',
   data() {
     return {
-      isActive: true,
+      isSettingsActive: false,
+      isTestsActive: false,
       colapse: true,
     };
   },
