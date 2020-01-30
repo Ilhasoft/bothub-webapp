@@ -25,15 +25,9 @@
 
 <script>
 import { mapState } from 'vuex';
-import HighlightedText from '@/components/shared/HighlightedText';
-import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
   name: 'SentenceAccordion',
-  components: {
-    HighlightedText,
-    LanguageBadge,
-  },
   props: {
     id: {
       type: Number,

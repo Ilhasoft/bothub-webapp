@@ -80,6 +80,8 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
+import HighlightedText from '@/components/shared/HighlightedText';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
   name: 'ExampleAccordion',
@@ -87,6 +89,8 @@ export default {
     SentenceAccordion,
     ExampleInfo,
     EditExample,
+    HighlightedText,
+    LanguageBadge,
   },
   props: {
     id: {

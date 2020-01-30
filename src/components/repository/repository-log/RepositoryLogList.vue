@@ -5,11 +5,13 @@
       :key="item.id"
       :log="item"
     />
-    <b-pagination
-      :total="total"
-      :current.sync="page"
-      :per-page="perPage"
-      @change="updateLogs()"/>
+    <div class="repository-log-list__pagination">
+      <b-pagination
+        :total="total"
+        :current.sync="page"
+        :per-page="perPage"
+        @change="updateLogs()"/>
+    </div>
   </div>
 </template>
 
@@ -427,6 +429,10 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .repository-log-list {
+    &__pagination {
+      margin-top: 1.25rem;
+    }
+  }
 </style>

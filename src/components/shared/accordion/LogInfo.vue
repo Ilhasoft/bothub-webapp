@@ -15,6 +15,19 @@
         </b-tag>
       </div>
     </div>
+    <div class="level-right">
+      <b-button
+        class="repository-log-info__button"
+        rounded
+        size="is-small"
+        icon-right="file-document-outline"> Debug </b-button>
+      <b-button
+        class="repository-log-info__button"
+        rounded
+        size="is-small"
+        icon-right="file-document-outline"
+        @click="showRawInfo()"> Raw </b-button>
+    </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
         <div
@@ -55,10 +68,21 @@ export default {
       type: Object,
       default: null,
     },
+    info: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
     getTimeAgo() {
       return 'yesterday';
+    },
+  },
+  methods: {
+    showRawInfo() {
+      this.$buefy.dialog.alert({
+        message: JSON.stringify(this.info),
+      });
     },
   },
 };
@@ -66,6 +90,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../assets/scss/utilities.scss';
+.repository-log-info {
+  &__button {
+    margin-right: 0.5rem;
+  }
+}
 
 .example {
   $radius: .5rem;

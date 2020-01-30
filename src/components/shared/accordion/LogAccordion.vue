@@ -15,11 +15,11 @@
       </div>
       <div
         v-if="!open"
-        class="column">{{ log.text }}</div>
+        class="column is-two-thirds">{{ log.text }}</div>
 
       <div
         v-else
-        class="column">
+        class="column is-two-thirds">
         <highlighted-text
           v-if="open"
           :text="log.text"
@@ -30,16 +30,26 @@
 
     <div slot="options">
 
-      <b-dropdown aria-role="list">
+      <b-dropdown
+        aria-role="list"
+        @click.native.stop>
         <button
           slot="trigger"
           class="button is-text">
           <b-icon icon="plus"/>
         </button>
 
-        <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
-        <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
-        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+        <p class="log-accordion__menu-title"> Add to </p>
+        <b-dropdown-item
+          aria-role="listitem"
+          @click.native.stop="addToTraining()">
+          Training
+        </b-dropdown-item>
+        <b-dropdown-item
+          aria-role="listitem"
+          @click.native.stop="addToSentences()">
+          Test Sentences
+        </b-dropdown-item>
       </b-dropdown>
     </div>
 
@@ -47,7 +57,8 @@
       <log-info
         :entities-list="entitiesList"
         :intent="log.nlp_log.intent.name"
-        :confidence="log.nlp_log.intent.confidence"/>
+        :confidence="log.nlp_log.intent.confidence"
+        :info="log.nlp_log"/>
     </div>
 
   </sentence-accordion>
@@ -60,6 +71,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import LogInfo from '@/components/shared/accordion/LogInfo';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import HighlightedText from '@/components/shared/HighlightedText';
 
 export default {
   name: 'LogAccordion',
@@ -67,6 +79,7 @@ export default {
     SentenceAccordion,
     LogInfo,
     LanguageBadge,
+    HighlightedText,
   },
   props: {
     log: {
@@ -125,66 +138,9 @@ export default {
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
 
-  .before-border {
-    position: relative;
-
-    &:before {
-      position: absolute;
-      bottom: -1px;
-      left: 0;
-      width: 100%;
-      content: '';
-      border-bottom: 1px solid #2bbfac;
-      transition: opacity .1s linear, transform .5s ease-in-out;
-    }
-
-    &:not(:hover)::before {
-      opacity: 0;
-      transform: scaleX(0);
-    }
+.log-accordion {
+  &__menu-title {
+    margin: 1rem;
   }
-
-  .accordion {
-    overflow: hidden;
-    background: #fff;
-    box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
-  }
-
-  .expander {
-    &__trigger {
-      display: grid;
-      grid-template-columns: 1fr 25%;
-      justify-content: space-between;
-      padding: .7rem;
-      margin-top: 0.5rem;
-      cursor: pointer;
-      border: 1px solid #cfd5d9;
-      border-radius: 3px;
-
-      &__btns-wrapper {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
-
-    &__body {
-      padding: .7rem 0;
-      background: #f5f5f5;
-    }
-  }
-
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s;
-  }
-
-  .example {
-    &__icon {
-      margin: 0 .5rem;
-
-      &:hover {
-        color: black;
-        transition: 1s;
-      }
-    }
-  }
+}
 </style>
