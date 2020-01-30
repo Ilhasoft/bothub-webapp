@@ -13,8 +13,14 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUUID, orderField, asc, limit, offset) {
-    return request.$http.get(`/v2/repository/version/?limit=${limit}&offset=${offset}&repository=${repositoryUUID}&ordering=${asc ? '+' : '-'}${orderField}`);
+  getVersions(query) {
+    const queryString = qs.stringify(query);
+    console.log(queryString);
+    return request.$http.get(`/v2/repository/version/?${queryString}`);
+  },
+  searchLogs(query) {
+    const queryString = qs.stringify(query);
+    return request.$http.get(`/v2/repository/log/?${queryString}`);
   },
   makeVersionDefault(repositoryUUID, versionUUID) {
     return request.$http.patch(

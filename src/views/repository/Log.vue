@@ -15,12 +15,6 @@
           placeholder="Search sentence">
       </div>
       <div class="control">
-        <input
-          class="input"
-          type="text"
-          placeholder="Your intent">
-      </div>
-      <div class="control">
         <span>Filter by: </span>
         <div class="select">
           <select>
@@ -28,6 +22,12 @@
             <option> Option2 </option>
           </select>
         </div>
+      </div>
+      <div class="control">
+        <input
+          class="input"
+          type="text"
+          placeholder="Your intent">
       </div>
       <div class="control">
         <b-field label="Confidence level: 0.3 to 0.7">
@@ -41,19 +41,15 @@
       </div>
     </div>
 
-    <log-accordion
-      :id="3"
-      :text="'I like cats'"
-      :intent="'animal'"
-      :entities="[]"
-      :language="'pt'" > <b-button> Add to Training </b-button> </log-accordion>
+    <repository-log-list
+      :per-page="perPage"
+      :query="query" />
 
   </repository-view-base>
 
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
@@ -67,21 +63,14 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      logs: [],
+      perPage: 10,
+      query: {},
     };
   },
   computed: {
     numbers() {
       return [0.3, 0.4, 0.5, 0.6, 0.7];
     },
-  },
-  methods: {
-    ...mapActions([
-      'getLog',
-    ]),
-  },
-  mounted() {
-    this.logs = this.getLog(this.repository.uuid);
   },
 };
 </script>

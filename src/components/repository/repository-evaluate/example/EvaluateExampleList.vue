@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {

@@ -175,9 +175,8 @@ export default {
     async updateVersions() {
       const response = await this.getVersions(
         {
-          repositoryUUID: this.repository.uuid,
-          orderField: this.orderField,
-          asc: this.asc,
+          repository: this.repository.uuid,
+          ordering: `${this.asc ? '+' : '-'}${this.orderField}`,
           limit: this.perPage,
           offset: this.perPage * (this.currentPage - 1),
         },
