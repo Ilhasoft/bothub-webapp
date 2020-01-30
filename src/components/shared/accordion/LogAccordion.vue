@@ -1,16 +1,54 @@
 <template>
   <sentence-accordion
-    :id="id"
-    :language="language"
-    :entities="entities"
-    :text="text"
-    :training="training"
-    @deleteSentence="deleteSentence()">
+    :id="log.id"
+    :language="log.language"
+    :entities="log.entities"
+    :training="false"
+    :open.sync="open">
 
-    <log-info
-      :entities-list="entitiesList"
-      :intent="intent"
-      :confidence="0.9"/>
+    <div
+      slot="header"
+      class="columns">
+      <a class="column"> {{ log.nlp_log.repository_version }} </a>
+      <div class="column">
+        <language-badge :language="log.nlp_log.language"/>
+      </div>
+      <div
+        v-if="!open"
+        class="column">{{ log.text }}</div>
+
+      <div
+        v-else
+        class="column">
+        <highlighted-text
+          v-if="open"
+          :text="log.text"
+          :entities="log.nlp_log.entities"
+          :all-entities="repository.entities || repository.entities_list" />
+      </div>
+    </div>
+
+    <div slot="options">
+
+      <b-dropdown aria-role="list">
+        <button
+          slot="trigger"
+          class="button is-text">
+          <b-icon icon="plus"/>
+        </button>
+
+        <b-dropdown-item aria-role="listitem">Action</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Another action</b-dropdown-item>
+        <b-dropdown-item aria-role="listitem">Something else</b-dropdown-item>
+      </b-dropdown>
+    </div>
+
+    <div slot="body">
+      <log-info
+        :entities-list="entitiesList"
+        :intent="log.nlp_log.intent.name"
+        :confidence="log.nlp_log.intent.confidence"/>
+    </div>
 
   </sentence-accordion>
 </template>
@@ -21,42 +59,25 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import LogInfo from '@/components/shared/accordion/LogInfo';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
   name: 'LogAccordion',
   components: {
     SentenceAccordion,
     LogInfo,
+    LanguageBadge,
   },
   props: {
-    id: {
-      type: Number,
+    log: {
+      type: Object,
       required: true,
-    },
-    text: {
-      type: String,
-      default: '',
-    },
-    entities: {
-      type: Array,
-      default: /* istanbul ignore next */ () => ([]),
-    },
-    intent: {
-      type: String,
-      default: '',
-    },
-    training: {
-      type: Boolean,
-      default: false,
-    },
-    language: {
-      type: String,
-      default: '',
     },
   },
   data() {
     return {
       deleteDialog: null,
+      open: false,
     };
   },
   computed: {
@@ -64,9 +85,9 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
+      const entitiesList = getEntitiesList(this.log.nlp_log.entities_list);
 
-      return this.entities
+      return this.log.nlp_log.entities_list
         .map((entity, index) => ({
           value: entitiesList[index],
           class: this.getEntityClass(entitiesList[index]),

@@ -4,8 +4,8 @@
     :error-code="errorCode">
 
     <div class="repository-log">
-      <h1> Logs </h1>
-      <p> Search, etc </p>
+      <h1> Log </h1>
+      <p> These are phrases of actual suer interaction with your data set. They can be useful for your training or testing. </p>
     </div>
     <div class="field is-horizontal is-grouped">
       <div class="control">
@@ -17,7 +17,7 @@
       <div class="control">
         <span>Filter by: </span>
         <div class="select">
-          <select>
+          <select v-model="filterOption">
             <option> Option1 </option>
             <option> Option2 </option>
           </select>
@@ -27,22 +27,12 @@
         <input
           class="input"
           type="text"
-          placeholder="Your intent">
-      </div>
-      <div class="control">
-        <b-field label="Confidence level: 0.3 to 0.7">
-          <b-slider
-            v-model="numbers"
-            :min="0.3"
-            :max="0.7"
-            :step="0.1"
-            rounded/>
-        </b-field>
+          :placeholder="`Your ${filterOption}`">
       </div>
     </div>
 
     <repository-log-list
-      :per-page="perPage"
+      :perPage="perPage"
       :query="query" />
 
   </repository-view-base>
@@ -52,25 +42,23 @@
 <script>
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import LogAccordion from '@/components/shared/accordion/LogAccordion';
+import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 
 export default {
   name: 'RepositoryLog',
   components: {
     RepositoryViewBase,
-    LogAccordion,
+    RepositoryLogList,
   },
   extends: RepositoryBase,
   data() {
     return {
       perPage: 10,
       query: {},
+      filterOption: 'filter',
     };
   },
   computed: {
-    numbers() {
-      return [0.3, 0.4, 0.5, 0.6, 0.7];
-    },
   },
 };
 </script>

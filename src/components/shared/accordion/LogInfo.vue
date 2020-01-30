@@ -14,10 +14,6 @@
           <strong v-if="entity.label">{{ entity.label }}</strong>
         </b-tag>
       </div>
-      <div class="level-right">
-        <b-button @click.stop="emit('')"> Add to training </b-button>
-        <b-button @click.stop="emit('')" > Add to coisas </b-button>
-      </div>
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">

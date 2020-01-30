@@ -8,21 +8,68 @@
     :editing.sync="editing"
     :should-edit="true"
     :open.sync="open"
-    @editSentence="editSentence()"
-    @deleteSentence="deleteSentence()"
     @onToggle="onToggleAccordion()">
-    <example-info
-      v-if="!editing"
-      :entities-list="entitiesList"
-      :intent="intent" />
 
-    <edit-example
-      v-else
-      :entities="entitiesList"
-      :intent-to-edit="intent"
-      :text-to-edit="text"
-      :sentence-id="id"
-      @cancel="cancelEditSentence"/>
+    <div slot="header">
+      <div v-if="!open">{{ text }}</div>
+
+      <div v-else>
+        <highlighted-text
+          v-if="open && !editing"
+          :text="text"
+          :entities="entities"
+          :all-entities="repository.entities || repository.entities_list" />
+      </div>
+
+      <div slot="options">
+        <div class="level-item">
+          <language-badge :language="language"/>
+        </div>
+        <div
+          v-if="repository.authorization && repository.authorization.can_contribute && !training"
+          class="level-right">
+          <div class="level-item">
+            <a
+              v-show="shouldEdit && !editing"
+              :href="`#delete-example-${id}`"
+              class="has-text-danger"
+              @click.prevent.stop="editSentence()">
+              <b-icon
+                icon="pen"
+                class="text-color-grey-dark example__icon" />
+            </a>
+          </div>
+        </div>
+        <div
+          v-if="repository.authorization && repository.authorization.can_contribute"
+          class="level-right">
+          <div class="level-item">
+            <a
+              :href="`#delete-example-${id}`"
+              class="has-text-danger"
+              @click.prevent.stop="deleteThisExample()">
+              <b-icon
+                icon="delete"
+                class="text-color-grey-dark example__icon" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div slot="body">
+      <example-info
+        v-if="!editing"
+        :entities-list="entitiesList"
+        :intent="intent" />
+
+      <edit-example
+        v-else
+        :entities="entitiesList"
+        :intent-to-edit="intent"
+        :text-to-edit="text"
+        :sentence-id="id"
+        @cancel="cancelEditSentence"/>
+    </div>
   </sentence-accordion>
 </template>
 

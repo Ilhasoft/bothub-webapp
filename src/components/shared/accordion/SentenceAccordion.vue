@@ -4,57 +4,20 @@
       :class="open ? 'active':'before-border'"
       class="expander__trigger"
       @click="toggleAccordion">
-
-      <div v-if="!open">{{ text }}</div>
-
-      <div v-else>
-        <highlighted-text
-          v-if="open && !editing"
-          :text="text"
-          :entities="entities"
-          :all-entities="repository.entities || repository.entities_list" />
+      
+      <div class="level-left">
+        <slot name="header" />
       </div>
 
-      <div class="expander__trigger__btns-wrapper">
-        <div class="level-item">
-          <language-badge :language="language"/>
-        </div>
-        <div
-          v-if="repository.authorization && repository.authorization.can_contribute && !training"
-          class="level-right">
-          <div class="level-item">
-            <a
-              v-show="shouldEdit && !editing"
-              :href="`#delete-example-${id}`"
-              class="has-text-danger"
-              @click.prevent.stop="this.$emit(editSentence)">
-              <b-icon
-                icon="pen"
-                class="text-color-grey-dark example__icon" />
-            </a>
-          </div>
-        </div>
-        <div
-          v-if="repository.authorization && repository.authorization.can_contribute"
-          class="level-right">
-          <div class="level-item">
-            <a
-              :href="`#delete-example-${id}`"
-              class="has-text-danger"
-              @click.prevent.stop="this.$emit(deleteSentence)">
-              <b-icon
-                icon="delete"
-                class="text-color-grey-dark example__icon" />
-            </a>
-          </div>
-        </div>
+      <div class="level-right expander__trigger__btns-wrapper">
+        <slot name="options" />
       </div>
     </div>
     <transition name="fade">
       <div
         v-show="open"
         class="expander__body">
-        <slot />
+        <slot name="body"/>
       </div>
     </transition>
   </div>
