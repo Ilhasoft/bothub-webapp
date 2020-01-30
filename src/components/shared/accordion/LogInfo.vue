@@ -20,12 +20,12 @@
         class="repository-log-info__button"
         rounded
         size="is-small"
-        icon-right="file-document-outline"> Debug </b-button>
+        icon-left="file-document-outline"> Debug </b-button>
       <b-button
         class="repository-log-info__button"
         rounded
         size="is-small"
-        icon-right="file-document-outline"
+        icon-left="file-document-outline"
         @click="showRawInfo()"> Raw </b-button>
     </div>
     <div class="example-infos level is-mobile">

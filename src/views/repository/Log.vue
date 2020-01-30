@@ -11,8 +11,8 @@
       </div>
     </div>
     <div class="field is-horizontal is-grouped">
-      <div class="field has-addons">
-        <div class="control">
+      <div class="field is-expanded has-addons">
+        <div class="control is-expanded">
           <input
             v-model="name"
             class="input"
