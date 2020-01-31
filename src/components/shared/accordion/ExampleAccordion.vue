@@ -1,19 +1,17 @@
 <template>
   <sentence-accordion
-    :id="id"
-    :language="language"
-    :entities="entities"
-    :text="text"
-    :training="training"
-    :editing.sync="editing"
-    :should-edit="true"
-    :open.sync="open"
-    @onToggle="onToggleAccordion()">
+    :open.sync="open">
 
-    <div slot="header">
-      <div v-if="!open">{{ text }}</div>
+    <div
+      slot="header"
+      class="level">
+      <div
+        v-if="!open"
+        class="level-left">{{ text }}</div>
 
-      <div v-else>
+      <div
+        v-else
+        class="level-left">
         <highlighted-text
           v-if="open && !editing"
           :text="text"
@@ -21,40 +19,43 @@
           :all-entities="repository.entities || repository.entities_list" />
       </div>
 
-      <div slot="options">
+      <div class="example-accordion__tag level-right">
+        <language-badge :language="language"/>
+      </div>
+    </div>
+    <div
+      slot="options"
+      class="level">
+      <div
+        v-if="repository.authorization && repository.authorization.can_contribute && !training"
+        class="level-right">
         <div class="level-item">
-          <language-badge :language="language"/>
-        </div>
-        <div
-          v-if="repository.authorization && repository.authorization.can_contribute && !training"
-          class="level-right">
-          <div class="level-item">
-            <a
-              v-show="shouldEdit && !editing"
-              :href="`#delete-example-${id}`"
-              class="has-text-danger"
-              @click.prevent.stop="editSentence()">
-              <b-icon
-                icon="pen"
-                class="text-color-grey-dark example__icon" />
-            </a>
-          </div>
-        </div>
-        <div
-          v-if="repository.authorization && repository.authorization.can_contribute"
-          class="level-right">
-          <div class="level-item">
-            <a
-              :href="`#delete-example-${id}`"
-              class="has-text-danger"
-              @click.prevent.stop="deleteThisExample()">
-              <b-icon
-                icon="delete"
-                class="text-color-grey-dark example__icon" />
-            </a>
-          </div>
+          <a
+            v-show="!editing"
+            :href="`#delete-example-${id}`"
+            class="has-text-danger"
+            @click.prevent.stop="editSentence()">
+            <b-icon
+              icon="pen"
+              class="text-color-grey-dark example__icon" />
+          </a>
         </div>
       </div>
+      <div
+        v-if="repository.authorization && repository.authorization.can_contribute"
+        class="level-right">
+        <div class="level-item">
+          <a
+            :href="`#delete-example-${id}`"
+            class="has-text-danger"
+            @click.prevent.stop="deleteThisExample()">
+            <b-icon
+              icon="delete"
+              class="text-color-grey-dark example__icon" />
+          </a>
+        </div>
+      </div>
+    </div>
     </div>
     <div slot="body">
       <example-info
@@ -141,6 +142,13 @@ export default {
         }));
     },
   },
+  watch: {
+    open() {
+      if (!this.open) {
+        this.cancelEditSentence();
+      }
+    },
+  },
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
@@ -196,11 +204,14 @@ export default {
       this.editing = true;
       this.open = true;
     },
-    onToggleAccordion() {
-      if (!this.open) {
-        this.cancelEditSentence();
-      }
-    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .example-accordion {
+    &__tag {
+      margin-left: 0.5rem;
+    }
+  }
+</style>

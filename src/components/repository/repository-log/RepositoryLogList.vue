@@ -101,7 +101,18 @@ export default {
                   },
                 ],
                 labels_list: [],
-                entities_list: [],
+                entities_list: [
+                {
+                    "id": 56353,
+                    "repository_example": 61679,
+                    "start": 10,
+                    "end": 14,
+                    "entity": "medo",
+                    "label": "emotion",
+                    "created_at": "2019-09-13T03:59:18.424602Z",
+                    "value": "medo"
+                }
+            ],
                 entities: {},
                 text: 'estou com medo',
                 repository_version: 6647,

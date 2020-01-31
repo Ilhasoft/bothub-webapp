@@ -1,9 +1,5 @@
 <template>
   <sentence-accordion
-    :id="log.id"
-    :language="log.language"
-    :entities="log.entities"
-    :training="false"
     :open.sync="open">
 
     <div
@@ -23,7 +19,7 @@
         <highlighted-text
           v-if="open"
           :text="log.text"
-          :entities="log.nlp_log.entities"
+          :entities="log.nlp_log.entities_list"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -58,7 +54,8 @@
         :entities-list="entitiesList"
         :intent="log.nlp_log.intent.name"
         :confidence="log.nlp_log.intent.confidence"
-        :info="log.nlp_log"/>
+        :info="log.nlp_log"
+        @onShowRawInfo="showRawInfo()"/>
     </div>
 
   </sentence-accordion>
@@ -97,10 +94,13 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    entities() {
+      return this.log.nlp_log.entities_list;
+    },
     entitiesList() {
-      const entitiesList = getEntitiesList(this.log.nlp_log.entities_list);
+      const entitiesList = getEntitiesList(this.entities);
 
-      return this.log.nlp_log.entities_list
+      return this.entities
         .map((entity, index) => ({
           value: entitiesList[index],
           class: this.getEntityClass(entitiesList[index]),
@@ -129,6 +129,11 @@ export default {
         }
         return current;
       }, 'unlabeled');
+    },
+    showRawInfo() {
+      this.$buefy.dialog.alert({
+        message: JSON.stringify(this.log.nlp_log, undefined, 4),
+      });
     },
   },
 };

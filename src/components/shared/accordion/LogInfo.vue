@@ -2,33 +2,34 @@
   <div>
     <div class="level">
       <div
-        v-if="entitiesList.length > 0"
-        class="level-left example-entities">
-        <b-tag
-          v-for="(entity, i) in entitiesList"
-          :key="i"
-          :class="entity.class"
-          rounded>
-          <strong>{{ entity.entity }}</strong>
-          <span v-if="entity.label">is</span>
-          <strong v-if="entity.label">{{ entity.label }}</strong>
-        </b-tag>
+        class="level-left log-entities">
+        <div v-if="entitiesList.length > 0">
+          <b-tag
+            v-for="(entity, i) in entitiesList"
+            :key="i"
+            :class="entity.class"
+            rounded>
+            <strong>{{ entity.entity }}</strong>
+            <span v-if="entity.label">is</span>
+            <strong v-if="entity.label">{{ entity.label }}</strong>
+          </b-tag>
+        </div>
+      </div>
+      <div class="level-right">
+        <b-button
+          class="repository-log-info__button"
+          rounded
+          size="is-small"
+          icon-left="file-document-outline"> Debug </b-button>
+        <b-button
+          class="repository-log-info__button"
+          rounded
+          size="is-small"
+          icon-left="file-document-outline"
+          @click="showRawInfo()"> Raw </b-button>
       </div>
     </div>
-    <div class="level-right">
-      <b-button
-        class="repository-log-info__button"
-        rounded
-        size="is-small"
-        icon-left="file-document-outline"> Debug </b-button>
-      <b-button
-        class="repository-log-info__button"
-        rounded
-        size="is-small"
-        icon-left="file-document-outline"
-        @click="showRawInfo()"> Raw </b-button>
-    </div>
-    <div class="example-infos level is-mobile">
+    <div class="log-infos level is-mobile">
       <div class="level-left">
         <div
           v-if="intent"
@@ -68,10 +69,6 @@ export default {
       type: Object,
       default: null,
     },
-    info: {
-      type: Object,
-      required: true,
-    },
   },
   computed: {
     getTimeAgo() {
@@ -80,9 +77,7 @@ export default {
   },
   methods: {
     showRawInfo() {
-      this.$buefy.dialog.alert({
-        message: JSON.stringify(this.info),
-      });
+      this.$emit('onShowRawInfo');
     },
   },
 };
@@ -96,7 +91,7 @@ export default {
   }
 }
 
-.example {
+.log {
   $radius: .5rem;
 
   margin: 1rem .5rem;

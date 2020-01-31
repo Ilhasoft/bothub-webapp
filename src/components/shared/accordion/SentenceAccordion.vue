@@ -3,8 +3,8 @@
     <div
       :class="open ? 'active':'before-border'"
       class="expander__trigger"
-      @click="toggleAccordion">
-      
+      @click="toggleAccordion()">
+
       <div class="level-left">
         <slot name="header" />
       </div>
@@ -24,58 +24,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
   name: 'SentenceAccordion',
   props: {
-    id: {
-      type: Number,
-      required: true,
-    },
-    text: {
-      type: String,
-      default: '',
-    },
-    training: {
-      type: Boolean,
-      default: false,
-    },
-    entities: {
-      type: Array,
-      default: /* istanbul ignore next */ () => ([]),
-    },
-    language: {
-      type: String,
-      default: '',
-    },
-    editing: {
-      type: Boolean,
-      default: false,
-    },
-    shouldEdit: {
-      type: Boolean,
-      default: false,
-    },
     open: {
       type: Boolean,
       default: false,
     },
   },
-  data() {
-    return {
-      deleteDialog: null,
-    };
-  },
-  computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-    }),
-  },
   methods: {
     toggleAccordion() {
-      this.open = !this.open;
-      this.$emit('onToggle');
+      this.$emit('update:open', !this.open);
     },
   },
 };
