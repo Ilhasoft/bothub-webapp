@@ -19,7 +19,7 @@
         <highlighted-text
           v-if="open"
           :text="log.text"
-          :entities="log.nlp_log.entities_list"
+          :entities="entitiesList"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -54,7 +54,6 @@
         :entities-list="entitiesList"
         :intent="log.nlp_log.intent.name"
         :confidence="log.nlp_log.intent.confidence"
-        :info="log.nlp_log"
         @onShowRawInfo="showRawInfo()"/>
     </div>
 
@@ -63,8 +62,8 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
+import { getWordIndex } from '@/utils';
 import LogInfo from '@/components/shared/accordion/LogInfo';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
@@ -95,16 +94,22 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entities() {
-      return this.log.nlp_log.entities_list;
+      return Object.keys(this.log.nlp_log.entities).map(key => this.log.nlp_log.entities[key].map((entity) => {
+        const { start, end } = getWordIndex(entity.value, this.log.text);
+        return {
+          label: key,
+          start,
+          end,
+          ...entity,
+        };
+      })).flat();
     },
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
-
       return this.entities
         .map((entity, index) => ({
-          value: entitiesList[index],
-          class: this.getEntityClass(entitiesList[index]),
-          label: this.getEntityLabel(entitiesList[index]),
+          value: this.entities[index],
+          class: this.getEntityClass(this.entities[index]),
+          label: this.getEntityLabel(this.entities[index]),
           ...entity,
         }));
     },
@@ -138,7 +143,6 @@ export default {
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';

@@ -4,6 +4,13 @@ import uuid from 'uuid';
 export function generateTemporaryId() {
   return uuid.v4();
 }
+export const getWordIndex = (word, phrase) => {
+  console.log(word, phrase);
+  const regex = new RegExp(`\\b${word}\\b`);
+  const start = phrase.search(regex);
+  const end = start + word.length;
+  return { start, end };
+};
 
 export const getEntitiesList = (entities = [], extra = []) => entities
   .concat(extra || [])

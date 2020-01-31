@@ -54,7 +54,7 @@ export default {
       'searchLogs',
     ]),
     async updateLogs() {
-      const response = this.mockData(); // this.mockData();
+      const response = this.mockData();
 
       // const response = await this.searchLogs({
       //   repositoryUUID: this.repository.uuid,
@@ -69,10 +69,133 @@ export default {
     mockData() {
       return {
         data: {
-          count: 6,
+          count: 7,
           next: null,
           previous: null,
           results: [
+            {
+              id: 8,
+              text: 'cobrança',
+              user_agent: 'PostmanRuntime/7.22.0',
+              nlp_log: {
+                intent: {
+                  name: 'bias',
+                  confidence: 0.9999115467071533,
+                },
+                intent_ranking: [
+                  {
+                    name: 'bias',
+                    confidence: 0.9999115467071533,
+                  },
+                  {
+                    name: 'search',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'reissue',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'negotiation',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'greeting',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'general_statement',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'financial_position',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'estate_broker',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'customer_service',
+                    confidence: 0.0,
+                  },
+                  {
+                    name: 'conversation_exit',
+                    confidence: 0.0,
+                  },
+                ],
+                labels_list: [
+                  'greetings',
+                ],
+                entities_list: [],
+                entities: {
+                  greetings: [
+                    {
+                      value: 'cobrança',
+                      entity: 'greetings',
+                      confidence: 0.7366296968797883,
+                      self: true,
+                    },
+                  ],
+                },
+                text: 'cobrança',
+                repository_version: 6901,
+                language: 'pt_br',
+              },
+              user: 2,
+              log_intent: {
+                35: {
+                  intent: 'bias',
+                  confidence: 0.999911546707153,
+                  is_default: true,
+                },
+                36: {
+                  intent: 'search',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                37: {
+                  intent: 'reissue',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                38: {
+                  intent: 'negotiation',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                39: {
+                  intent: 'greeting',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                40: {
+                  intent: 'general_statement',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                41: {
+                  intent: 'financial_position',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                42: {
+                  intent: 'estate_broker',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                43: {
+                  intent: 'customer_service',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+                44: {
+                  intent: 'conversation_exit',
+                  confidence: 0.0,
+                  is_default: false,
+                },
+              },
+            },
             {
               id: 6,
               text: 'estou com medo',
@@ -101,18 +224,7 @@ export default {
                   },
                 ],
                 labels_list: [],
-                entities_list: [
-                {
-                    "id": 56353,
-                    "repository_example": 61679,
-                    "start": 10,
-                    "end": 14,
-                    "entity": "medo",
-                    "label": "emotion",
-                    "created_at": "2019-09-13T03:59:18.424602Z",
-                    "value": "medo"
-                }
-            ],
+                entities_list: [],
                 entities: {},
                 text: 'estou com medo',
                 repository_version: 6647,
