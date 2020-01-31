@@ -5,7 +5,7 @@
     <div
       slot="header"
       class="columns">
-      <a class="column"> {{ log.nlp_log.repository_version }} </a>
+      <span class="column log-accordion__version-name"> {{ log.nlp_log.repository_version }} </span>
       <div class="column">
         <language-badge :language="log.nlp_log.language"/>
       </div>
@@ -150,6 +150,10 @@ export default {
 .log-accordion {
   &__menu-title {
     margin: 1rem;
+  }
+  &__version-name {
+    color: $primary;
+    font-weight: bold;
   }
 }
 </style>
