@@ -115,7 +115,7 @@ export default {
       const name = this.name.trim();
       const filterSearch = this.filterSearch.trim();
 
-      if (name) {
+      if (name !== '') {
         query.name = name;
       }
 
