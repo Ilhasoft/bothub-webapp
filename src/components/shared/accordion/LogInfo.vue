@@ -9,9 +9,9 @@
             :key="i"
             :class="entity.class"
             rounded>
+            <strong v-if="entity.value">{{ entity.value }}</strong>
+            <span v-if="entity.value">is</span>
             <strong>{{ entity.entity }}</strong>
-            <span v-if="entity.label">is</span>
-            <strong v-if="entity.label">{{ entity.label }}</strong>
           </b-tag>
         </div>
       </div>
