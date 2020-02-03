@@ -82,12 +82,14 @@
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
+import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'RepositoryLog',
   components: {
     RepositoryViewBase,
     RepositoryLogList,
+    LoginForm,
   },
   extends: RepositoryBase,
   data() {
