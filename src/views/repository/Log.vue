@@ -54,26 +54,23 @@
       </div>
 
       <div
-        v-else
-        class="
-                bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--warning">
-            You can not edit this repository
-          </div>
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          class="is-warning">
+          You cannot edit this repository
+        </b-notification>
       </div>
     </div>
 
     <div
-      v-else
-      class="bh-grid">
-      <div class="bh-grid__item">
-        <div class="bh-notification bh-notification--info">
-          Sign in to your account to edit this repository.
-        </div>
-        <login-form hide-forgot-password />
-      </div>
+      v-else>
+      <b-notification
+        :closable="false"
+        class="is-danger">
+        Sign in to your account to edit this repository.
+      </b-notification>
+      <login-form hide-forgot-password />
     </div>
 
 
