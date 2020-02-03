@@ -1,7 +1,7 @@
 <template>
   <div class="expander">
     <div
-      :class="open ? 'active':'before-border'"
+      :class="[open ? 'active':'before-border']"
       class="expander__trigger"
       @click="toggleAccordion()">
 
@@ -80,11 +80,6 @@ export default {
       cursor: pointer;
       border: 1px solid #cfd5d9;
       border-radius: 3px;
-
-      &__btns-wrapper {
-        display: flex;
-        justify-content: flex-end;
-      }
     }
 
     &__body {

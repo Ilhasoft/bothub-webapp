@@ -4,7 +4,7 @@
 
     <div
       slot="header"
-      class="columns">
+      class="columns is-vcentered">
       <span class="column log-accordion__version-name"> {{ log.nlp_log.repository_version }} </span>
       <div class="column">
         <language-badge :language="log.nlp_log.language"/>
@@ -27,6 +27,8 @@
     <div slot="options">
 
       <b-dropdown
+        class="log-accordion__dropdown"
+        :can-cancel="['escape', 'x', 'outside']"
         aria-role="list"
         @click.native.stop>
         <button
@@ -154,6 +156,10 @@ export default {
   &__version-name {
     color: $primary;
     font-weight: bold;
+  }
+  &__dropdown {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 </style>

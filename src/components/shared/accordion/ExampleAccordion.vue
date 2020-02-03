@@ -25,7 +25,7 @@
     </div>
     <div
       slot="options"
-      class="level">
+      class="level example-accordion__btns-wrapper">
       <div
         v-if="repository.authorization && repository.authorization.can_contribute && !training"
         class="level-right">
@@ -55,7 +55,6 @@
           </a>
         </div>
       </div>
-    </div>
     </div>
     <div slot="body">
       <example-info
@@ -213,5 +212,10 @@ export default {
     &__tag {
       margin-left: 0.5rem;
     }
+
+    &__btns-wrapper {
+        display: flex;
+        justify-content: flex-end;
+      }
   }
 </style>

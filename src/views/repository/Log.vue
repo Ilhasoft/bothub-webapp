@@ -3,50 +3,79 @@
     :repository="repository"
     :error-code="errorCode">
 
-    <div class="repository-log">
-      <div class="repository-log__header">
-        <h1> Log </h1>
-        <p> These are phrases of actual suer interaction with your data set.
-        They can be useful for your training or testing. </p>
-      </div>
-    </div>
-    <div class="field is-horizontal is-grouped">
-      <div class="field is-expanded has-addons">
-        <div class="control is-expanded">
-          <input
-            v-model="name"
-            class="input"
-            type="text"
-            placeholder="Search sentence">
+    <div
+      v-if="repository"
+      class="repository-log">
+      <div v-if="authenticated">
+        <div class="repository-log__header">
+          <h1> Log </h1>
+          <p> These are phrases of actual user interaction with your data set.
+          They can be useful for your training or testing. </p>
+        </div>
+        <div class="columns">
+          <div class="column is-tree-fifths">
+            <div class="control is-expanded has-icons-right">
+              <input
+                :class="['input', loading ? 'is-loading' : '']"
+                v-model="query.name"
+                type="text">
+              <span class="icon is-small is-right">
+                <b-icon
+                  class="repository-log__icon"
+                  icon="magnify"
+                  @click.native="search()"/>
+              </span>
+            </div>
+          </div>
+          <div class="column is-narrow">
+            <div class="control">
+              <label>Filter by: </label>
+              <div class="select">
+                <select v-model="filterOption">
+                  <option value="intent"> Intent </option>
+                  <option value="language"> Language </option>
+                  <option value="repository_version"> Version </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="column control">
+            <input
+              v-model="filterSearch"
+              :placeholder="`Your ${filterName[filterOption] || 'filter'}`"
+              class="input"
+              type="text">
+          </div>
         </div>
 
-        <div class="control">
-          <a class="button is-text">
-            <b-icon icon="magnify" />
-          </a>
-        </div>
+        <repository-log-list
+          :per-page="perPage"
+          :query="query" />
       </div>
-      <div class="control">
-        <span>Filter by: </span>
-        <div class="select">
-          <select v-model="filterOption">
-            <option> Option1 </option>
-            <option> Option2 </option>
-          </select>
+
+      <div
+        v-else
+        class="
+                bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--warning">
+            You can not edit this repository
+          </div>
         </div>
-      </div>
-      <div class="control">
-        <input
-          v-model="filterSearch"
-          :placeholder="`Your ${filterOption}`"
-          class="input"
-          type="text">
       </div>
     </div>
 
-    <repository-log-list
-      :per-page="perPage"
-      :query="query" />
+    <div
+      v-else
+      class="bh-grid">
+      <div class="bh-grid__item">
+        <div class="bh-notification bh-notification--info">
+          Sign in to your account to edit this repository.
+        </div>
+        <login-form hide-forgot-password />
+      </div>
+    </div>
+
 
   </repository-view-base>
 
@@ -67,28 +96,52 @@ export default {
   data() {
     return {
       perPage: 10,
-      query: {},
-      filterOption: 'filter',
       name: '',
+      filterOption: null,
+      query: {},
       filterSearch: '',
+      loading: false,
+      filterName: {
+        repository_version: 'version',
+        language: 'language',
+        intent: 'intent',
+      },
     };
   },
   computed: {
   },
-  method: {
+  methods: {
     updateQuery() {
-      this.query = {
-        name: this.name,
-      };
+      const query = {};
+      const name = this.name.trim();
+
+      if (name) {
+        query.name = name;
+      }
+
+      if (this.filterOption) {
+        query[this.filterOption] = this.filterSearch;
+      }
+
+      this.query = query;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+  label {
+    vertical-align: middle;
+  }
+
   .repository-log {
     &__header {
       margin-bottom: 3.5rem;
+    }
+
+    &__icon {
+      pointer-events: initial !important;
+      cursor: pointer;
     }
   }
 </style>
