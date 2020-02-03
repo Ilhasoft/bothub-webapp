@@ -113,13 +113,14 @@ export default {
     updateQuery() {
       const query = {};
       const name = this.name.trim();
+      const filterSearch = this.filterSearch.trim();
 
       if (name) {
         query.name = name;
       }
 
-      if (this.filterOption) {
-        query[this.filterOption] = this.filterSearch;
+      if (this.filterOption && filterSearch !== '') {
+        query[this.filterOption] = filterSearch;
       }
 
       this.query = query;
