@@ -11,7 +11,7 @@ export default class List {
     this.loading = false;
   }
 
-  get items() {    
+  get items() {
     return this.itemsList
       .map((data, i) => ({
         id: data.id || data.uuid || data.pk || data.key || i,
@@ -31,11 +31,11 @@ export default class List {
   async next() {
     if (this.loading) {
       return false;
-    }    
+    }
     this.loading = true;
     const response = await request.$http.get(this.nextEntryPoint);
     console.log('response here', response);
-    
+
     this.nextEntryPoint = response.data.next;
     this.itemsList = this.itemsList.concat(response.data.results);
     this.loading = false;

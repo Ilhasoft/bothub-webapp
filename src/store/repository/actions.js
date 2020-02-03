@@ -13,20 +13,17 @@ export default {
   getVersions(store, query) {
     return repository.getVersions(query);
   },
-  makeVersionDefault(store, { repositoryUUID, versionUUID }) {
-    return repository.makeVersionDefault(repositoryUUID, versionUUID);
-  },
-  editVersion(store, { repositoryUUID, versionUUID, name }) {
-    return repository.editVersion(repositoryUUID, versionUUID, name);
-  },
-  addNewVersion(store, { repositoryUUID, versionUUID, name }) {
-    return repository.addNewVersion(repositoryUUID, versionUUID, name);
-  },
-  deleteVersion(store, { repositoryUUID, versionUUID }) {
-    return repository.deleteVersion(repositoryUUID, versionUUID);
-  },
   getFirstFiveVersions(store, repositoryUuid) {
     return repository.getFirstFiveVersions(repositoryUuid);
+  },
+  setDefaultVersion(store, { repositoryUuid, id, name }) {
+    return repository.setDefaultVersion(repositoryUuid, id, name);
+  },
+  deleteVersion(store, id) {
+    return repository.deleteVersion(id);
+  },
+  async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
+    return repository.addNewVersion(repositoryUUID, versionUUID, name);
   },
   getAllRepositories() {
     /* istanbul ignore next */

@@ -15,7 +15,6 @@ export default {
   },
   getVersions(query) {
     const queryString = qs.stringify(query);
-    console.log(queryString);
     return request.$http.get(`/v2/repository/version/?${queryString}`);
   },
   searchLogs(query) {
@@ -56,6 +55,14 @@ export default {
   },
   getFirstFiveVersions(repositoryUuid) {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+  },
+  setDefaultVersion(repositoryUuid, id, name) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        repository: repositoryUuid,
+        id,
+        name,
+      });
   },
   search(query) {
     const queryString = qs.stringify(query);

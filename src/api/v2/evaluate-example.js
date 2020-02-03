@@ -5,12 +5,14 @@ import utils from '@/api/utils';
 
 
 export default {
-  new(repository,repositoryVersion , text, language, entities, intent) {
+  new(repository, repositoryVersion, text, language, entities, intent) {
+    console.log(repositoryVersion);
+    
     return request.$http.post(
       '/v2/repository/evaluate/',
       {
         repository,
-        repositoryVersion,
+        repository_version: repositoryVersion,
         text,
         language,
         entities,
@@ -36,8 +38,8 @@ export default {
   get(repositoryUuid, repositoryVersion) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
-      repository_version: repositoryVersion
-    })
+      repository_version: repositoryVersion,
+    });
     return request.$http.get(`/v2/repository/evaluate?${queryString}`);
   },
   delete(exampleId, repositoryUuid) {

@@ -28,7 +28,6 @@
 
       <b-dropdown
         class="log-accordion__dropdown"
-        :can-cancel="['escape', 'x', 'outside']"
         aria-role="list"
         @click.native.stop>
         <button
@@ -96,15 +95,17 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entities() {
-      return Object.keys(this.log.nlp_log.entities).map(key => this.log.nlp_log.entities[key].map((entity) => {
-        const { start, end } = getWordIndex(entity.value, this.log.text);
-        return {
-          label: key,
-          start,
-          end,
-          ...entity,
-        };
-      })).flat();
+      return Object.keys(this.log.nlp_log.entities).map(key => this.log.nlp_log.entities[key].map(
+        (entity) => {
+          const { start, end } = getWordIndex(entity.value, this.log.text);
+          return {
+            label: key,
+            start,
+            end,
+            ...entity,
+          };
+        },
+      )).flat();
     },
     entitiesList() {
       return this.entities

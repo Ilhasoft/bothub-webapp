@@ -38,33 +38,31 @@
 </template>
 
 <script>
+
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'RepositoryNewVersionModal',
+  name: 'RepositoryHandleVersionModal',
   props: {
     repository: {
       type: Object,
-      default: null,
+      required: true,
     },
     version: {
       type: Object,
-      default: null,
+      required: true,
     },
   },
   data() {
     return {
-      loading: false,
+      submitting: false,
       name: null,
+      loading: false,
     };
   },
   computed: {
-    trimmedName() {
-      if (!this.name) return null;
-      return this.name.trim();
-    },
     canSubmit() {
-      return !(!this.trimmedName || /^\s*$/.test(this.trimmedName));
+      return !(!this.name || /^\s*$/.test(this.name));
     },
   },
   methods: {
@@ -80,7 +78,7 @@ export default {
         {
           repositoryUUID: this.repository.uuid,
           versionUUID: this.version.id,
-          name: this.trimmedName,
+          name: this.name,
         },
       ).then(() => {
         this.loading = false;

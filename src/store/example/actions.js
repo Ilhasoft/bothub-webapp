@@ -4,7 +4,7 @@ import entity from '@/api/entity';
 
 export default {
   async newExample(store, {
-    repository, repositoryVersion, text, language, entities, intent
+    repository, repositoryVersion, text, language, entities, intent,
   }) {
     const response = await example.new(repository, repositoryVersion, text, language, entities, intent);
     return response;

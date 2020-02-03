@@ -4,12 +4,13 @@
     :error-code="errorCode">
 
     <b-modal
+      :width="500"
       :active.sync="isNewVersionModalActive"
       class="repository-new-version-modal"
       trap-focus
       aria-role="dialog"
       aria-modal>
-      <repository-new-version-modal
+      <repository-handle-version-modal
         :repository="repository"
         :version="selectedVersion"
         @close="isNewVersionModalActive = false"
@@ -44,25 +45,7 @@
               sortable
               centered
               numeric>
-              <div
-                v-if="currentEditVersion && currentEditVersion.id==props.row.id"
-                class="field">
-                <div class="control has-icons-right">
-                  <input
-                    :class="['input', 'is-focused', loadingEdit ? 'is-loading' : '']"
-                    v-model="editName"
-                    type="text"
-                    @blur="clearEdit()"
-                    @keyup.enter="submitEdit()">
-                  <span class="icon is-small is-right">
-                    <b-icon
-                      icon="close"
-                      @click.native="clearEdit()"/>
-                  </span>
-                </div>
-              </div>
               <span
-                v-else
                 class="versions__table__version-number"
                 @click="handleVersion(props.row.id, props.row.name)">
                 {{ props.row.name }}
@@ -100,7 +83,10 @@
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
                   class="is-small"
                   rounded
-                  @click="makeDefault(props.row)">Main</b-button>
+                  @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
+                <b-icon
+                  icon="delete"
+                  @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
                 <b-icon
                   icon="content-copy"
                   @click.native="copyVersion(props.row)" />
@@ -123,14 +109,14 @@
 import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryNewVersionModal from '@/components/repository/RepositoryNewVersionModal';
+import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
 
 
 export default {
   name: 'RepositoryVersions',
   components: {
     RepositoryViewBase,
-    RepositoryNewVersionModal,
+    RepositoryHandleVersionModal,
   },
   extends: RepositoryBase,
   data() {
@@ -163,9 +149,8 @@ export default {
     ...mapActions([
       'getVersions',
       'setRepositoryVersion',
+      'setDefaultVersion',
       'deleteVersion',
-      'editVersion',
-      'makeVersionDefault',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
@@ -188,71 +173,20 @@ export default {
       this.setRepositoryVersion({
         id,
         name,
-      }).then(() => { this.updateVersions(); });
-    },
-    openEditVersion(version) {
-      this.editName = version.name;
-      this.currentEditVersion = version;
-    },
-    clearEdit() {
-      this.currentEditVersion = null;
-      this.editName = null;
-      this.loadingEdit = false;
-    },
-    submitEdit() {
-      if (!this.currentEditVersion
-        || !this.editName
-        || this.currentEditVersion.name === this.editName) {
-        this.clearEdit();
-        return;
-      }
-      this.loadingEdit = true;
-      this.editVersion({
-        repositoryUUID: this.repository.uuid,
-        versionUUID: this.currentEditVersion.id,
-        name: this.editName,
-      }).then(() => {
-        this.updateVersions();
-        this.clearEdit();
-      }).catch((error) => {
-        this.clearEdit();
-        this.showError(error);
       });
     },
-    makeDefault(version) {
-      if (version.is_default) return;
-      this.clearEdit();
-      this.makeVersionDefault({
-        repositoryUUID: this.repository.uuid,
-        versionUUID: version.id,
-      }).then(() => {
-        this.updateVersions();
-      }).catch((error) => {
-        this.showError(error);
-      });
-    },
-    onDeletionConfirm(version) {
-      this.deleteVersion({
-        repositoryUUID: this.repository.uuid,
-        versionUUID: version.id,
-      }).then(() => {
-        this.$buefy.toast.open({
-          message: 'Version was deleted',
-          type: 'is-success',
-        });
-        this.updateVersions();
-      }).catch((error) => {
-        this.showError(error);
-      });
-    },
-    openDeleteVersion(version) {
+    handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
-        message: 'Are you sure?',
-        confirmText: 'Delete',
-        type: 'is-primary',
-        onConfirm: () => {
-          this.onDeletionConfirm(version);
-        },
+        title: 'Change default version',
+        message: 'Are you sure you want to change this default version?',
+        confirmText: 'Change default',
+        type: 'is-warning',
+        hasIcon: true,
+        onConfirm: () => this.setDefaultVersion({
+          repositoryUuid: this.repository.uuid,
+          id,
+          name,
+        }).then(() => this.updateVersions()),
       });
     },
     copyVersion(version) {
@@ -266,6 +200,26 @@ export default {
         type: 'is-success',
       });
       this.updateVersions();
+    },
+    onDeleteVersion(id, isDefault) {
+      if (isDefault) {
+        this.$buefy.toast.open({
+          duration: 5000,
+          message: 'You cannot delete the main branch',
+          position: 'is-top',
+          type: 'is-danger',
+        });
+      } else {
+        this.$buefy.dialog.confirm({
+          title: 'Deleting Version',
+          message: 'Are you sure you want to delete this version? This action cannot be undone.',
+          confirmText: 'Delete Version',
+          type: 'is-danger',
+          hasIcon: true,
+          onConfirm: () => this.deleteVersion(id)
+            .then(() => this.updateVersions()),
+        });
+      }
     },
     showError(error) {
       const message = Object.values(error.response.data).map(errors => Array.join(errors, ','));
@@ -319,6 +273,10 @@ export default {
       display: flex;
       justify-content: space-between;
       color: $color-grey-dark;
+
+      span {
+        cursor: pointer;
+      }
     }
   }
 }
