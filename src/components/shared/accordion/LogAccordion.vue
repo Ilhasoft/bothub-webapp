@@ -1,64 +1,72 @@
 <template>
-  <sentence-accordion
-    :open.sync="open">
+  <div class="log-accordion">
 
-    <div
-      slot="header"
-      class="columns is-vcentered">
-      <span class="column log-accordion__version-name"> {{ log.nlp_log.repository_version }} </span>
-      <div class="column">
-        <language-badge :language="log.nlp_log.language"/>
-      </div>
-      <div
-        v-if="!open"
-        class="column is-two-thirds">{{ log.text }}</div>
+    <b-notification
+      v-if="loading"
+      :closable="false">
+      <b-loading :active.sync="loading"/>
+    </b-notification>
+
+    <sentence-accordion
+      :open.sync="open">
 
       <div
-        v-else
-        class="column is-two-thirds">
-        <highlighted-text
-          v-if="open"
-          :text="log.text"
-          :entities="entitiesList"
-          :all-entities="repository.entities || repository.entities_list" />
+        slot="header"
+        class="columns is-vcentered">
+        <span class="column log-accordion__version-name"> {{ log.nlp_log.repository_version }} </span>
+        <div class="column">
+          <language-badge :language="log.nlp_log.language"/>
+        </div>
+        <div
+          v-if="!open"
+          class="column is-two-thirds">{{ log.text }}</div>
+
+        <div
+          v-else
+          class="column is-two-thirds">
+          <highlighted-text
+            v-if="open"
+            :text="log.text"
+            :entities="entitiesList"
+            :all-entities="repository.entities || repository.entities_list" />
+        </div>
       </div>
-    </div>
 
-    <div slot="options">
+      <div slot="options">
 
-      <b-dropdown
-        class="log-accordion__dropdown"
-        aria-role="list"
-        @click.native.stop>
-        <button
-          slot="trigger"
-          class="button is-text">
-          <b-icon icon="plus"/>
-        </button>
+        <b-dropdown
+          class="log-accordion__dropdown"
+          aria-role="list"
+          @click.native.stop>
+          <button
+            slot="trigger"
+            class="button is-text">
+            <b-icon icon="plus"/>
+          </button>
 
-        <p class="log-accordion__menu-title"> Add to </p>
-        <b-dropdown-item
-          aria-role="listitem"
-          @click.native.stop="addToTraining()">
-          Training
-        </b-dropdown-item>
-        <b-dropdown-item
-          aria-role="listitem"
-          @click.native.stop="addToSentences()">
-          Test Sentences
-        </b-dropdown-item>
-      </b-dropdown>
-    </div>
+          <p class="log-accordion__menu-title"> Add to </p>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click.native.stop="addToTraining()">
+            Training
+          </b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click.native.stop="addToSentences()">
+            Test Sentences
+          </b-dropdown-item>
+        </b-dropdown>
+      </div>
 
-    <div slot="body">
-      <log-info
-        :entities-list="entitiesList"
-        :intent="log.nlp_log.intent.name"
-        :confidence="log.nlp_log.intent.confidence"
-        @onShowRawInfo="showRawInfo()"/>
-    </div>
-
-  </sentence-accordion>
+      <div slot="body">
+        <log-info
+          :entities-list="entitiesList"
+          :intent="log.nlp_log.intent.name"
+          :confidence="log.nlp_log.intent.confidence"
+          @onShowRawInfo="showRawInfo()"/>
+      </div>
+    </sentence-accordion>
+  </div>
 </template>
 
 <script>
@@ -88,6 +96,7 @@ export default {
     return {
       deleteDialog: null,
       open: false,
+      loading: false,
     };
   },
   computed: {
@@ -99,7 +108,6 @@ export default {
         (entity) => {
           const { start, end } = getWordIndex(entity.value, this.log.text);
           return {
-            label: key,
             start,
             end,
             ...entity,
@@ -116,12 +124,51 @@ export default {
           ...entity,
         }));
     },
+    toExample() {
+      return {
+        repository: this.repository.uuid,
+        repository_version: this.log.nlp_log.repository_version,
+        text: this.log.text,
+        language: this.log.nlp_log.language,
+        entities: this.entities.map(entity => ({
+          entity: entity.entity,
+          start: entity.start,
+          end: entity.end,
+        })),
+        intent: this.log.nlp_log.intent.name,
+      };
+    },
   },
   methods: {
     ...mapActions([
-      'deleteEvaluateExample',
-      'deleteExample',
+      'newEvaluateExample',
+      'newExample',
     ]),
+    showError(error) {
+      const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
+      const message = Array.join(messages, ',');
+      this.$buefy.dialog.alert({
+        title: 'Error',
+        message,
+        type: 'is-danger',
+      });
+    },
+    async addToTraining() {
+      this.loading = true;
+      await this.newEvaluateExample(this.toExample).catch((e) => {
+        this.loading = false;
+        this.showError(e);
+      });
+      this.loading = false;
+    },
+    async addToSentences() {
+      this.loading = true;
+      await this.newExample(this.toExample).catch((e) => {
+        this.loading = false;
+        this.showError(e);
+      });
+      this.loading = false;
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
