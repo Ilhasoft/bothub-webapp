@@ -1,6 +1,5 @@
 <template>
   <div class="log-accordion">
-
     <b-notification
       v-if="loading"
       :closable="false">
@@ -77,6 +76,7 @@ import LogInfo from '@/components/shared/accordion/LogInfo';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import HighlightedText from '@/components/shared/HighlightedText';
+import RawInfo from '@/components/shared/RawInfo';
 
 export default {
   name: 'LogAccordion',
@@ -85,6 +85,7 @@ export default {
     LogInfo,
     LanguageBadge,
     HighlightedText,
+    RawInfo,
   },
   props: {
     log: {
@@ -97,6 +98,7 @@ export default {
       deleteDialog: null,
       open: false,
       loading: false,
+      isRawInfoActive: false,
     };
   },
   computed: {
@@ -186,8 +188,13 @@ export default {
       }, 'unlabeled');
     },
     showRawInfo() {
-      this.$buefy.dialog.alert({
-        message: JSON.stringify(this.log.nlp_log, undefined, 4),
+      this.$buefy.modal.open({
+        props: { info: this.log.nlp_log },
+        width: 200,
+        parent: this,
+        component: RawInfo,
+        hasModalCard: false,
+        trapFocus: true,
       });
     },
   },

@@ -1,7 +1,6 @@
 <template>
 
   <div class="repository-log-list">
-
     <b-notification
       v-if="loading"
       :closable="false">
