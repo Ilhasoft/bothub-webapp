@@ -42,7 +42,7 @@
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <span>{{ getTimeAgo }}</span>
+          <span>{{ createdAt | moment('from') }}</span>
         </div>
       </div>
     </div>
@@ -68,11 +68,6 @@ export default {
     createdAt: {
       type: Object,
       default: null,
-    },
-  },
-  computed: {
-    getTimeAgo() {
-      return 'yesterday';
     },
   },
   methods: {

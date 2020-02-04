@@ -3,6 +3,7 @@
     <div class="control column">
       <textarea
         :value="text"
+        rows="1200"
         class="raw-info__text column textarea has-fixed-size"
         readonly/>
     </div>

@@ -62,6 +62,7 @@
           :entities-list="entitiesList"
           :intent="log.nlp_log.intent.name"
           :confidence="log.nlp_log.intent.confidence"
+          :created-at="log.created_at"
           @onShowRawInfo="showRawInfo()"/>
       </div>
     </sentence-accordion>
@@ -190,7 +191,6 @@ export default {
     showRawInfo() {
       this.$buefy.modal.open({
         props: { info: this.log.nlp_log },
-        width: 200,
         parent: this,
         component: RawInfo,
         hasModalCard: false,

@@ -99,6 +99,7 @@ export default {
           {
             id: 8,
             text: 'cobrança',
+            created_at: '2020-02-04T13:39:07.082771Z',
             user_agent: 'PostmanRuntime/7.22.0',
             nlp_log: {
               intent: {
@@ -222,6 +223,7 @@ export default {
           {
             id: 7,
             text: 'estou com medo',
+            created_at: '2020-02-04T13:39:07.082771Z',
             user_agent: 'PostmanRuntime/7.22.0',
             nlp_log: {
               intent: {
