@@ -6,8 +6,6 @@ import utils from '@/api/utils';
 
 export default {
   new(repository, repositoryVersion, text, language, entities, intent) {
-    console.log(repositoryVersion);
-    
     return request.$http.post(
       '/v2/repository/evaluate/',
       {

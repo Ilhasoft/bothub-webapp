@@ -3,13 +3,13 @@
     :repository="repository"
     :error-code="errorCode">
 
-      <b-modal 
-        :width="500"
-        class="repository-new-version-modal"
-        :active.sync="isNewVersionModalActive"
-        trap-focus
-        aria-role="dialog"
-        aria-modal>
+    <b-modal
+      :width="500"
+      :active.sync="isNewVersionModalActive"
+      class="repository-new-version-modal"
+      trap-focus
+      aria-role="dialog"
+      aria-modal>
       <repository-handle-version-modal
         :repository="repository"
         :version="selectedVersion"
@@ -44,7 +44,7 @@
               <span
                 class="versions__table__version-number"
                 @click="handleVersion(props.row.id, props.row.name)">
-                {{props.row.name}}
+                {{ props.row.name }}
               </span>
             </b-table-column>
             <b-table-column
@@ -71,13 +71,12 @@
                   class="is-small"
                   rounded
                   @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
-                <b-icon 
-                  @click.native="onDeleteVersion(props.row.id, props.row.is_default)"
-                  icon="delete"/>
-                <b-icon 
+                <b-icon
+                  icon="delete"
+                  @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
+                <b-icon
                   icon="content-copy"
-                  @click.native="copyVersion(props.row)">
-                </b-icon>
+                  @click.native="copyVersion(props.row)"/>
               </div>
             </b-table-column>
           </template>
@@ -91,7 +90,7 @@
 import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal'
+import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
 
 
 export default {
@@ -129,12 +128,12 @@ export default {
       this.data = response.data.results;
     },
     handleVersion(id, name) {
-      this.setRepositoryVersion({
+      this.updateRepositoryVersion({
         id,
         name,
       });
     },
-    handleDefaultVersion(id, name) {      
+    handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
         title: 'Change default version',
         message: 'Are you sure you want to change this default version?',
@@ -143,10 +142,10 @@ export default {
         hasIcon: true,
         onConfirm: () => this.setDefaultVersion({
           repositoryUuid: this.repository.uuid,
-            id,
-            name
-        }).then(e => this.updateVersions())
-      })
+          id,
+          name,
+        }).then(e => this.updateVersions()),
+      });
     },
     copyVersion(version) {
       this.selectedVersion = version;
@@ -155,20 +154,19 @@ export default {
     onAddedVersion(version) {
       this.isNewVersionModalActive = false;
       this.$buefy.toast.open({
-            message: 'Version was created',
-            type: 'is-success'
-      })
+        message: 'Version was created',
+        type: 'is-success',
+      });
       this.updateVersions();
     },
     onDeleteVersion(id, is_default) {
-      console.log(is_default);
       if (is_default) {
         this.$buefy.toast.open({
           duration: 5000,
-          message: `You cannot delete the main branch`,
+          message: 'You cannot delete the main branch',
           position: 'is-top',
-          type: 'is-danger'
-        })
+          type: 'is-danger',
+        });
       } else {
         this.$buefy.dialog.confirm({
           title: 'Deleting Version',
@@ -177,16 +175,16 @@ export default {
           type: 'is-danger',
           hasIcon: true,
           onConfirm: () => this.deleteVersion(id)
-            .then(e => this.updateVersions())
-        })
+            .then(e => this.updateVersions()),
+        });
       }
     },
     showError(error) {
-      //TODO: Treat errors
+      // TODO: Treat errors
       this.$buefy.toast.open({
-            message: error.response.data,
-            type: 'is-danger'
-      })
+        message: error.response.data,
+        type: 'is-danger',
+      });
     },
   },
 };

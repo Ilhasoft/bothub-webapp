@@ -16,10 +16,8 @@ export default {
   getFirstFiveVersions(store, repositoryUuid) {
     return repository.getFirstFiveVersions(repositoryUuid);
   },
-  setDefaultVersion(store, { repositoryUuid, id, name }) {
-    console.log(repositoryUuid, id, name);
-    
-    return repository.setDefaultVersion(repositoryUuid, id, name);
+  setDefaultVersion(store, { repositoryUuid, id }) {
+    return repository.setDefaultVersion(repositoryUuid, id);
   },
   deleteVersion(store, id) {
     return repository.deleteVersion(id);
@@ -39,15 +37,15 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { repositoryUUID }) {
+  trainRepository(store, { repositoryUuid, repositoryVersion }) {
     /* istanbul ignore next */
-    return repository.train(repositoryUUID);
+    return repository.train(repositoryUuid, repositoryVersion);
   },
   analyzeText(store, {
-    repositoryUUID, language, text,
+    repositoryUUID, repositoryVersion, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(repositoryUUID, language, text);
+    return repository.analyze(repositoryUUID, repositoryVersion ,language, text);
   },
   async getEditRepositorySchema(store, { repositoryUuid }) {
     /* istanbul ignore next */
@@ -144,7 +142,7 @@ export default {
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
-  setRepositoryVersion({ commit }, payload) {
+  setRepositoryVersion({ commit }, payload) {         
     commit('setRepositoryVersion', payload);
   },
 };

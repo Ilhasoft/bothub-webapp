@@ -1,68 +1,73 @@
 <template>
-	<div class="repository-new-version-modal">
-  	<div class="repository-new-version-modal__container">
-			<form @submit.prevent="onSubmit">
-      	<div class="field">
-			  	<label class="label">Title</label>
-			  	<div class="control">
-			    	<input class="input"
-			    	v-model="name"
-			    	type="text">
-			  </div>
-		</div>
-          <div class="field">
-            <div class="control has-text-centered">
-            </div>
-            <div class="control">
-            	<label class="label">Version</label>
-            	<input class="input" type="text" :placeholder="version.name" disabled>
-            	<div class="field repository-new-version-modal__button-container">
-	                <b-button
-					  	type="is-light"
-					  	@click="onClose()"
-		                >
-	            	Cancel
-	            	</b-button>
-	                <b-button
-					  	type="is-primary"
-					  	:loading="loading"
-					  	:disabled="!canSubmit"
-		                native-type="submit" >
-		            	Add new
-		        	</b-button>
-		        </div>
-			</div>
+  <div class="repository-new-version-modal">
+    <div class="repository-new-version-modal__container">
+      <form @submit.prevent="onSubmit">
+        <div class="field">
+          <label class="label">Title</label>
+          <div class="control">
+            <input
+              v-model="name"
+              class="input"
+              type="text">
           </div>
-        </form>
+        </div>
+        <div class="field">
+          <div class="control has-text-centered"/>
+          <div class="control">
+            <label class="label">Version</label>
+            <input
+              :placeholder="version.name"
+              class="input"
+              type="text"
+              disabled>
+            <div class="field repository-new-version-modal__button-container">
+              <b-button
+                type="is-light"
+                @click="onClose()"
+              >
+                Cancel
+              </b-button>
+              <b-button
+                :loading="loading"
+                :disabled="!canSubmit"
+                type="is-primary"
+                native-type="submit" >
+                Add new
+              </b-button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
-	import { mapActions } from 'vuex';
-	export default {
-		name: 'RepositoryHandleVersionModal',
-		props: {
-			repository: {
-				type: Object,
-			},
-			version: {
-				type: Object,
-			},
-		},
-		computed: {
-			canSubmit() {
-				return !(!this.name || /^\s*$/.test(this.name))
-			}
-		},
-		data() {
-			return {
-				submitting: false,
-				name: null,
-				loading: false,
-			}
-		},
-		methods: {
+import { mapActions } from 'vuex';
+
+export default {
+  name: 'RepositoryHandleVersionModal',
+  props: {
+    repository: {
+      type: Object,
+    },
+    version: {
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      submitting: false,
+      name: null,
+      loading: false,
+    };
+  },
+  computed: {
+    canSubmit() {
+      return !(!this.name || /^\s*$/.test(this.name));
+    },
+  },
+  methods: {
     		...mapActions([
 		      'addNewVersion',
     		]),
@@ -70,22 +75,23 @@
     			this.$emit('close');
     		},
     		async onSubmit() {
-    			this.loading = true
+    			this.loading = true;
     			await this.addNewVersion(
     				{
-    					repositoryUUID: this.repository.uuid, 
-    					versionUUID: this.version.id, 
+    					repositoryUUID: this.repository.uuid,
+    					versionUUID: this.version.id,
     					name: this.name,
-    				}).then( _ => {
+    				},
+      ).then((_) => {
     					this.loading = false;
     					this.$emit('addedVersion');
-    				}).catch(error => {
-    					this.$emit('error', error)
+    				}).catch((error) => {
+    					this.$emit('error', error);
     					this.loading = false;
     				});
-    		}
-   		}
-	};
+    		},
+   		},
+};
 </script>
 
 <style lang="scss">
@@ -109,5 +115,5 @@
 			justify-content: space-around;
 		}
 	}
-	
+
 </style>

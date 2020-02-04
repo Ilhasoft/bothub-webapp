@@ -146,7 +146,7 @@ export default {
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();
       }
-      if (this.authenticated && this.repository.authorization.can_write) {
+      if (this.authenticated && this.repository.authorization.can_write) {  
         this.trainModalOpen = true;
       }
     },
@@ -168,10 +168,13 @@ export default {
       this.repository.examples__count -= 1;
       this.updateRepository(false);
     },
-    async train(repositoryUUID) {
+    async train(repositoryUuid) {
       this.training = true;
       try {
-        const response = await this.trainRepository({ repositoryUUID });
+        const response = await this.trainRepository({
+          repositoryUuid,
+          repositoryVersion: this.repositoryVersion
+        });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {

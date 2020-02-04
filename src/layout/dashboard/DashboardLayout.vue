@@ -155,9 +155,12 @@ export default {
       this.allVersions = response.data.results;
     },
     handleVersion(id, name) {
+      const version = {
+        id: id,
+        name: name
+      }
       this.setRepositoryVersion({
-        id,
-        name,
+        version
       });
     },
   },

@@ -206,8 +206,7 @@ export default {
       if (this.$refs.entitiesInput.clearEntityForm) {
         this.$refs.entitiesInput.clearEntityForm();
       }
-      console.log(this.repositoryVersion, 'newevaluateexample');
-      
+
       try {
         await this.newEvaluateExample({
           repository: this.repository.uuid,
