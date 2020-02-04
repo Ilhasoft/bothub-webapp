@@ -17,13 +17,13 @@
             <div class="control is-expanded has-icons-right">
               <input
                 :class="['input', loading ? 'is-loading' : '']"
-                v-model="query.name"
+                v-model="name"
                 type="text">
               <span class="icon is-small is-right">
                 <b-icon
                   class="repository-log__icon"
                   icon="magnify"
-                  @click.native="search()"/>
+                  @click.native="updateQuery()"/>
               </span>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default {
         query.name = name;
       }
 
-      if (this.filterOption && filterSearch !== '') {
+      if (this.filterOption !== null && filterSearch !== '') {
         query[this.filterOption] = filterSearch;
       }
 

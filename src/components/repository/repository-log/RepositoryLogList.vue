@@ -61,6 +61,14 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    searchQuery() {
+      return {
+        repositoryUUID: this.repository.uuid,
+        limit: this.perPage,
+        offset: (this.page - 1) * this.perPage,
+        ...this.query,
+      };
+    },
   },
   watch: {
     query() {
@@ -76,12 +84,7 @@ export default {
     ]),
     async updateLogs() {
       this.loading = true;
-      const response = await this.searchLogs({
-        repositoryUUID: this.repository.uuid,
-        limit: this.perPage,
-        offset: (this.page - 1) * this.perPage,
-        ...this.query,
-      });
+      const response = await this.searchLogs(this.searchQuery);
 
       this.loading = false;
       this.items = response.data.results;
