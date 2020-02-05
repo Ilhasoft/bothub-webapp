@@ -22,9 +22,7 @@
               <span class="icon is-small is-right">
                 <b-icon
                   class="repository-log__icon"
-                  icon="magnify"
-                  @click.native="updateQuery()"/>
-              </span>
+                  icon="magnify"/></span>
             </div>
           </div>
           <div class="column is-narrow">
