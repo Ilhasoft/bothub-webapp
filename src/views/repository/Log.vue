@@ -97,7 +97,6 @@ export default {
       perPage: 10,
       name: '',
       filterOption: null,
-      query: {},
       filterSearch: '',
       loading: false,
       filterName: {
@@ -108,9 +107,7 @@ export default {
     };
   },
   computed: {
-  },
-  methods: {
-    updateQuery() {
+    query() {
       const query = {};
       const name = this.name.trim();
       const filterSearch = this.filterSearch.trim();
@@ -123,7 +120,7 @@ export default {
         query[this.filterOption] = filterSearch;
       }
 
-      this.query = query;
+      return query;
     },
   },
 };
