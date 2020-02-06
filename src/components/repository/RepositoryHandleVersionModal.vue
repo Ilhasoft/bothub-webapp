@@ -5,37 +5,47 @@
       <p>Clone and turn into a new version</p>
       <form @submit.prevent="onSubmit">
         <div class="field">
-          <div class="control">
-            <input
-              v-model="name"
-              class="input"
-              placeholder="Title"
-              type="text">
-          </div>
-        </div>
-        <div class="field">
-          <div class="control">
-            <div class="field repository-new-version-modal__button-container">
-              <b-button
-                type="is-light"
-                @click="onClose()"
-              >
-                Cancel
-              </b-button>
-              <b-button
-                :loading="loading"
-                :disabled="!canSubmit"
-                type="is-primary"
-                native-type="submit" >
-                Add new
-              </b-button>
+          <form @submit.prevent="onSubmit">
+            <div class="field">
+              <label class="label">Title</label>
+              <div class="control">
+                <input
+                  v-model="name"
+                  class="input"
+                  placeholder="Title"
+                  type="text">
+              </div>
             </div>
-          </div>
+            <div class="field">
+              <div class="control has-text-centered"/>
+              <div class="control">
+                <label class="label">Version</label>
+                <input
+                  :placeholder="version.name"
+                  class="input"
+                  type="text"
+                  disabled>
+                <div class="field repository-new-version-modal__button-container">
+                  <b-button
+                    type="is-light"
+                    @click="onClose()"
+                  >
+                    Cancel
+                  </b-button>
+                  <b-button
+                    :loading="loading"
+                    :disabled="!canSubmit"
+                    type="is-primary"
+                    native-type="submit" >
+                    Add new
+                  </b-button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
-</template>
+    </form></div>
+</div></template>
 
 <script>
 

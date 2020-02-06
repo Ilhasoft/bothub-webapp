@@ -36,8 +36,13 @@ export default {
       this.updateRepository(true);
     },
   },
-  mounted() {
-    this.updateRepository();
+  async mounted() {
+    await this.updateRepository();  
+    if (!this.repositoryVersion) {      
+      this.updateRepositoryVersion(
+        this.repository.version_default
+      )
+    }
   },
   provide() {
     return {
@@ -47,6 +52,7 @@ export default {
   methods: {
     ...mapActions([
       'setUpdateRepository',
+      'setRepositoryVersion'
     ]),
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
@@ -69,6 +75,11 @@ export default {
       await this.repository.fetch();
       this.setUpdateRepository(false);
       return this.repository;
+    },
+    updateRepositoryVersion(version) { 
+      this.setRepositoryVersion({
+       version
+      });
     },
     onReady({ error }) {
       if (error) {

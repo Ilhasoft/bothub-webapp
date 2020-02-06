@@ -89,13 +89,7 @@
                   @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
                 <b-icon
                   icon="content-copy"
-                  @click.native="copyVersion(props.row)" />
-                <b-icon
-                  icon="pencil"
-                  @click.native="openEditVersion(props.row)"/>
-                <b-icon
-                  icon="delete"
-                  @click.native="openDeleteVersion(props.row)"/>
+                  @click.native="copyVersion(props.row)"/>
               </div>
             </b-table-column>
           </template>
@@ -170,7 +164,7 @@ export default {
       this.count = response.data.count;
     },
     handleVersion(id, name) {
-      this.setRepositoryVersion({
+      this.updateRepositoryVersion({
         id,
         name,
       });
@@ -222,10 +216,9 @@ export default {
       }
     },
     showError(error) {
-      const message = Object.values(error.response.data).map(errors => Array.join(errors, ','));
-      this.$buefy.dialog.alert({
-        title: 'Error',
-        message: Array.join(message, ','),
+      // TODO: Treat errors
+      this.$buefy.toast.open({
+        message: error.response.data,
         type: 'is-danger',
       });
     },

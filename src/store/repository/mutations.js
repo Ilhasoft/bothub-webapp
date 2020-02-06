@@ -28,7 +28,9 @@ export default {
     state.currentTabSelected = value;
   },
   setRepositoryVersion(state, value) {
-    state.repositoryVersion = value.id;
-    state.repositoryVersionName = value.name;
+    if (state.repositoryVersion !== value.version.id) {
+      state.repositoryVersion = value.version.id;
+      state.repositoryVersionName = value.version.name;
+    }
   },
 };

@@ -70,7 +70,7 @@
             tag="router-link"
             icon="power-plug"
             label="Integration"/>
-            <b-menu-item
+          <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
             icon="settings"
@@ -140,8 +140,8 @@
           class="icon-list"
           icon="settings"
           @click.native="routerHandle('repository-settings')" />
-        
-          
+
+
       </div>
       <div/>
     </div>

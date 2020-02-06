@@ -1,8 +1,8 @@
 export default {
   relatedUuid: {},
   selectedRepository: {},
-  repositoryVersion: 1,
-  repositoryVersionName: 'master',
+  repositoryVersion: null,
+  repositoryVersionName: null,
   updateRepository: false,
   evaluateResultId: 0,
   evaluateResultVersion: 0,

@@ -123,6 +123,7 @@ export default {
       resultId: state => state.Repository.evaluateResultId,
       currentTab: state => state.Repository.currentTabSelected,
       selectedRepository: state => state.Repository.selectedRepository,
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     ...mapGetters([
       'getEvaluateLanguage',
@@ -148,7 +149,6 @@ export default {
       'updateCurrentTab',
       'getEvaluateExample',
       'runNewEvaluate',
-      'setUpdateEvaluateResultId',
     ]),
     setCurrentTab(value) {
       this.updateCurrentTab(value);
