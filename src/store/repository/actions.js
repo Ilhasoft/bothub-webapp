@@ -136,9 +136,6 @@ export default {
   setEvaluateLanguage({ commit }, payload) {
     commit('updateEvaluateLanguage', payload);
   },
-  updateCurrentTab({ commit }, tab) {
-    commit('updateCurrentTab', tab);
-  },
   setRepository({ commit }, payload) {
     commit('setRepository', payload);
   },

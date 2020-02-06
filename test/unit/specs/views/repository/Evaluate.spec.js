@@ -22,7 +22,6 @@ describe('TestView.vue', () => {
     };
     actions = {
       getEvaluateExample: jest.fn(),
-      updateCurrentTab: jest.fn(),
       setEvaluateLanguage: jest.fn(),
     };
     getters = {
