@@ -1,11 +1,10 @@
 <template>
-  <div>
+  <div v-if="list && !list.empty">
     <component
       v-for="item in list.items"
       :key="item.key"
       :is="itemComponent"
-      v-bind="addAttrs(item.data)"
-      @deleted="onItemDeleted(item.id)"
+      v-bind="addAttrs(item)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">
       <loading v-if="list.loading" />
@@ -44,12 +43,16 @@ export default {
       required: true,
     },
     list: {
-      required: true,
       type: Object,
+      default: null,
     },
     perPage: {
       type: Number,
       default: 20,
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -58,13 +61,21 @@ export default {
       page: 1,
     };
   },
+  computed: {
+    isLoading() {
+      return this.list && this.list.loading;
+    },
+  },
   watch: {
     async list() {
       await this.fetch();
     },
+    isLoading() {
+      this.$emit('update:loading');
+    },
   },
   async mounted() {
-    await this.next();
+    await this.fetch();
   },
   methods: {
     async fetch() {
@@ -75,10 +86,6 @@ export default {
           ? e.request.status
           : '';
       }
-    },
-    onItemDeleted(id) {
-      this.fetch();
-      this.$emit('itemDeleted', id);
     },
     onDispatchEvent(arg) {
       const [event, value] = arg instanceof Object

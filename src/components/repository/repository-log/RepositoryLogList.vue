@@ -1,28 +1,16 @@
 <template>
 
   <div class="repository-log-list">
-    <b-notification
-      v-if="loading"
-      :closable="false">
-      <b-loading :active.sync="loading"/>
-    </b-notification>
 
-    <log-accordion
-      v-for="item in items"
-      :key="item.id"
-      :log="item"
+    <paginated-list
+      :per-page="perPage"
+      :item-component="logAccordion"
+      :list="list"
+      :loading.sync="loading"
     />
-    <div
-      v-if="items.count > 0"
-      class="repository-log-list__pagination">
-      <b-pagination
-        :total="total"
-        :current.sync="page"
-        :per-page="perPage"
-        @change="updateLogs()"/>
-    </div>
+
     <h4
-      v-if="items.count === 0 && !loading"
+      v-if="list && list.empty && !loading"
       class="repository-log-list__empty-message">
       No logs found
     </h4>
@@ -31,11 +19,13 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 
 export default {
   name: 'RepositoryLogList',
   components: {
+    PaginatedList,
     LogAccordion,
   },
   props: {
@@ -50,24 +40,15 @@ export default {
   },
   data() {
     return {
-      page: 1,
-      items: [],
-      total: 0,
+      list: null,
       loading: false,
+      logAccordion: LogAccordion,
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    searchQuery() {
-      return {
-        repositoryUUID: this.repository.uuid,
-        limit: this.perPage,
-        offset: (this.page - 1) * this.perPage,
-        ...this.query,
-      };
-    },
   },
   watch: {
     query() {
@@ -82,13 +63,12 @@ export default {
       'searchLogs',
     ]),
     async updateLogs() {
-      this.loading = true;
-      // const response = await this.searchLogs(this.searchQuery);
-      const response = { data: this.mockData() };
+      const response = await this.searchLogs(this.repository.uuid, this.searchQuery, this.perPage);
+      const mockData = this.mockData();
 
-      this.loading = false;
-      this.items = response.data.results;
-      this.total = response.data.count;
+      response.items = mockData.results;
+      response.total = mockData.count;
+      this.list = response;
     },
     mockData() {
       return {

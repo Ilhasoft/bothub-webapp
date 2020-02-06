@@ -66,8 +66,8 @@ export default {
       default: 0,
     },
     createdAt: {
-      type: Object,
-      default: null,
+      type: String,
+      default: '',
     },
   },
   methods: {

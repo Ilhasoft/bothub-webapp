@@ -3,7 +3,6 @@ import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
-
 export default {
 
   async getNewSchema() {
@@ -17,9 +16,8 @@ export default {
     const queryString = qs.stringify(query);
     return request.$http.get(`/v2/repository/version/?${queryString}`);
   },
-  searchLogs(query) {
-    const queryString = qs.stringify(query);
-    return request.$http.get(`/v2/repository/log/?${queryString}`);
+  searchLogs(repositoryUUID, limit, query) {
+    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
   },
   makeVersionDefault(repositoryUUID, versionUUID) {
     return request.$http.patch(

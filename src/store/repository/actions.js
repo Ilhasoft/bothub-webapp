@@ -41,14 +41,14 @@ export default {
     /* istanbul ignore next */
     return repository.train(repositoryUuid, repositoryVersion);
   },
-  searchLogs(store, { repositoryUUID, query }) {
-    return repository.search(repositoryUUID, query);
+  searchLogs(store, { repositoryUUID, limit, query }) {
+    return repository.searchLogs(repositoryUUID, query, limit);
   },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(repositoryUUID, repositoryVersion ,language, text);
+    return repository.analyze(repositoryUUID, repositoryVersion, language, text);
   },
   async getEditRepositorySchema(store, { repositoryUuid }) {
     /* istanbul ignore next */

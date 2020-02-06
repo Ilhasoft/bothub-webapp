@@ -12,20 +12,20 @@
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ log.nlp_log.repository_version }} </span>
+        <span class="column log-accordion__version-name"> {{ nlp_log.repository_version }} </span>
         <div class="column">
-          <language-badge :language="log.nlp_log.language"/>
+          <language-badge :language="nlp_log.language"/>
         </div>
         <div
           v-if="!open"
-          class="column is-two-thirds">{{ log.text }}</div>
+          class="column is-two-thirds">{{ text }}</div>
 
         <div
           v-else
           class="column is-two-thirds">
           <highlighted-text
             v-if="open"
-            :text="log.text"
+            :text="text"
             :entities="entitiesList"
             :all-entities="repository.entities || repository.entities_list" />
         </div>
@@ -60,9 +60,9 @@
       <div slot="body">
         <log-info
           :entities-list="entitiesList"
-          :intent="log.nlp_log.intent.name"
-          :confidence="log.nlp_log.intent.confidence"
-          :created-at="log.created_at"
+          :intent="nlp_log.intent.name"
+          :confidence="nlp_log.intent.confidence"
+          :created-at="created_at"
           @onShowRawInfo="showRawInfo()"/>
       </div>
     </sentence-accordion>
@@ -89,9 +89,17 @@ export default {
     RawInfo,
   },
   props: {
-    log: {
+    text: {
+      type: String,
+      default: '',
+    },
+    nlp_log: {
       type: Object,
       required: true,
+    },
+    created_at: {
+      type: String,
+      default: '',
     },
   },
   data() {
@@ -107,9 +115,9 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entities() {
-      return Object.keys(this.log.nlp_log.entities).map(key => this.log.nlp_log.entities[key].map(
+      return Object.keys(this.nlp_log.entities).map(key => this.nlp_log.entities[key].map(
         (entity) => {
-          const { start, end } = getWordIndex(entity.value, this.log.text);
+          const { start, end } = getWordIndex(entity.value, this.text);
           return {
             start,
             end,
@@ -130,15 +138,15 @@ export default {
     toExample() {
       return {
         repository: this.repository.uuid,
-        repository_version: this.log.nlp_log.repository_version,
-        text: this.log.text,
-        language: this.log.nlp_log.language,
+        repository_version: this.nlp_log.repository_version,
+        text: this.text,
+        language: this.nlp_log.language,
         entities: this.entities.map(entity => ({
           entity: entity.entity,
           start: entity.start,
           end: entity.end,
         })),
-        intent: this.log.nlp_log.intent.name,
+        intent: this.nlp_log.intent.name,
       };
     },
   },
@@ -150,7 +158,7 @@ export default {
     showError(error) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       const message = Array.join(messages, ',');
-      this.$buefy.dialog.alert({
+      this.$buefy.diaalert({
         title: 'Error',
         message,
         type: 'is-danger',
@@ -190,7 +198,7 @@ export default {
     },
     showRawInfo() {
       this.$buefy.modal.open({
-        props: { info: this.log.nlp_log },
+        props: { info: this.nlp_log },
         parent: this,
         component: RawInfo,
         hasModalCard: false,
