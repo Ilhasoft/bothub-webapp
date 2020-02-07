@@ -35,7 +35,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 0,
+      default: 20,
     },
   },
   data() {
@@ -43,6 +43,8 @@ export default {
       list: null,
       loading: false,
       logAccordion: LogAccordion,
+      versionsList: null,
+      versions: [],
     };
   },
   computed: {
@@ -63,7 +65,11 @@ export default {
       'searchLogs',
     ]),
     async updateLogs() {
-      const response = await this.searchLogs(this.repository.uuid, this.searchQuery, this.perPage);
+      const response = await this.searchLogs({
+        repositoryUUID: this.repository.uuid,
+        query: this.searchQuery,
+        limit: this.perPage,
+      });
       const mockData = this.mockData();
 
       response.items = mockData.results;

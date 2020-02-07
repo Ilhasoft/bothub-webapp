@@ -27,10 +27,11 @@
       </div>
       <section>
         <b-table
-          :data="data"
+          v-if="versionsList"
+          :data="versionList.items"
           :paginated="isPaginated"
           :backend-pagination="true"
-          :total="count"
+          :total="versionList.total"
           :per-page="perPage"
           :current-page.sync="currentPage"
           :pagination-simple="isPaginationSimple"
@@ -115,13 +116,11 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      data: [],
       isPaginated: true,
       isPaginationSimple: false,
       currentPage: 1,
       perPage: 5,
-      count: 0,
-      versions: [],
+      versionsList: null,
       isNewVersionModalActive: false,
       selectedVersion: null,
       orderField: 'is_default',
@@ -131,14 +130,30 @@ export default {
       loadingEdit: false,
     };
   },
+  computed: {
+    repositoryUUID() {
+      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      return this.repository.uuid;
+    },
+    query() {
+      return {
+        repository: this.repositoryUUID,
+        ordering: `${this.asc ? '+' : '-'}${this.orderField}`,
+      };
+    },
+  },
   watch: {
+    query() {
+      this.updateParams();
+    },
     currentPage() {
       this.updateVersions();
     },
+    repositoryUUID() {
+      this.updateParams();
+    },
   },
-  mounted() {
-    this.updateVersions();
-  },
+
   methods: {
     ...mapActions([
       'getVersions',
@@ -151,17 +166,16 @@ export default {
       this.asc = asc === 'asc';
       this.updateVersions();
     },
+    async updateParams() {
+      if (!this.repositoryUUID) { return; }
+      this.versionList = await this.getVersions({
+        limit: this.perPage,
+        query: this.query,
+      });
+      this.updateVersions();
+    },
     async updateVersions() {
-      const response = await this.getVersions(
-        {
-          repository: this.repository.uuid,
-          ordering: `${this.asc ? '+' : '-'}${this.orderField}`,
-          limit: this.perPage,
-          offset: this.perPage * (this.currentPage - 1),
-        },
-      );
-      this.data = response.data.results;
-      this.count = response.data.count;
+      await this.versionList.updateItems(this.currentPage);
     },
     handleVersion(id, name) {
       this.updateRepositoryVersion({

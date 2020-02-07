@@ -38,11 +38,30 @@
             </div>
           </div>
           <div class="column control">
-            <input
+            <b-autocomplete
+              v-if="filterOption=='repository_version'"
               v-model="filterSearch"
-              :placeholder="`Your ${filterName[filterOption] || 'filter'}`"
-              class="input"
-              type="text">
+              :loading="versionsList.loading"
+              :data="versions"
+              placeholder="Your Version"/>
+            <b-autocomplete
+              v-else-if="filterOption=='intent'"
+              v-model="filterSearch"
+              placeholder="Your Intent"/>
+            <b-select
+              v-else-if="filterOption=='language'"
+              v-model="filterSearch">
+              <option
+                v-for="language in languages"
+                :key="language.id"
+                :value="language.value">
+                {{ language.title }}
+              </option>
+            </b-select>
+            <b-input
+              v-else
+              :disabled="true"
+              placeholder="Your filter"/>
           </div>
         </div>
 
@@ -77,10 +96,12 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import LoginForm from '@/components/auth/LoginForm';
+import { LANGUAGES } from '@/utils';
 
 export default {
   name: 'RepositoryLog',
@@ -95,16 +116,22 @@ export default {
       perPage: 10,
       name: '',
       filterOption: null,
-      filterSearch: '',
       loading: false,
       filterName: {
         repository_version: 'version',
         language: 'language',
         intent: 'intent',
       },
+      filterSearch: '',
+      languages: [],
+      versionsList: null,
     };
   },
   computed: {
+    repositoryUUID() {
+      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      return this.repository.uuid;
+    },
     query() {
       const query = {};
       const name = this.name.trim();
@@ -120,6 +147,26 @@ export default {
 
       return query;
     },
+    versions() {
+      return this.versionsList.items.map(version => version.name);
+    },
+  },
+  watch: {
+    filterOption() {
+      this.filterSearch = '';
+    },
+    async repositoryUUID() {
+      if (!this.repositoryUUID) { return; }
+      this.versionsList = await this.getVersions({
+        limit: this.perPage,
+        query: { repository: this.repositoryUUID },
+      });
+      this.versionsList = this.versionsList;
+      this.versionsList.getAllItems();
+    },
+  },
+  methods: {
+    ...mapActions(['getVersions']),
   },
 };
 </script>

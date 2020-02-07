@@ -12,11 +12,10 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(query) {
-    const queryString = qs.stringify(query);
-    return request.$http.get(`/v2/repository/version/?${queryString}`);
+  getVersions(limit, query) {
+    return new utils.Page('/v2/repository/version/', limit, query);
   },
-  searchLogs(repositoryUUID, limit, query) {
+  searchLogs(repositoryUUID, query, limit) {
     return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
   },
   makeVersionDefault(repositoryUUID, versionUUID) {

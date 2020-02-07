@@ -10,8 +10,8 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  getVersions(store, query) {
-    return repository.getVersions(query);
+  getVersions(store, { limit, query }) {
+    return repository.getVersions(limit, query);
   },
   getFirstFiveVersions(store, repositoryUuid) {
     return repository.getFirstFiveVersions(repositoryUuid);
@@ -41,7 +41,7 @@ export default {
     /* istanbul ignore next */
     return repository.train(repositoryUuid, repositoryVersion);
   },
-  searchLogs(store, { repositoryUUID, limit, query }) {
+  searchLogs(store, { repositoryUUID, query, limit }) {
     return repository.searchLogs(repositoryUUID, query, limit);
   },
   analyzeText(store, {

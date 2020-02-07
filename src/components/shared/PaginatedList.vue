@@ -7,7 +7,7 @@
       v-bind="addAttrs(item)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">
-      <loading v-if="list.loading" />
+      <loading v-if="loading" />
       <p
         class="text-center"
         else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
@@ -71,7 +71,7 @@ export default {
       await this.fetch();
     },
     isLoading() {
-      this.$emit('update:loading');
+      this.$emit('update:loading', this.isLoading);
     },
   },
   async mounted() {
@@ -80,7 +80,7 @@ export default {
   methods: {
     async fetch() {
       try {
-        await this.list.fetch(this.page);
+        await this.list.updateItems(this.page);
       } catch (e) {
         this.listStatusErrorCode = e.request
           ? e.request.status
