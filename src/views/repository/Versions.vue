@@ -3,6 +3,9 @@
     :repository="repository"
     :error-code="errorCode">
 
+    <quick-test
+      :repository="repository" />
+
     <b-modal
       :width="500"
       :active.sync="isNewVersionModalActive"
@@ -91,6 +94,7 @@ import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
+import QuickTest from '@/components/quick-test/QuickTest';
 
 
 export default {
@@ -98,6 +102,7 @@ export default {
   components: {
     RepositoryViewBase,
     RepositoryHandleVersionModal,
+    QuickTest,
   },
   extends: RepositoryBase,
   data() {
