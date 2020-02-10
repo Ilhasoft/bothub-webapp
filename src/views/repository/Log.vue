@@ -32,20 +32,22 @@
                 <select v-model="filterOption">
                   <option value="intent"> Intent </option>
                   <option value="language"> Language </option>
-                  <option value="repository_version"> Version </option>
+                  <option value="repository_version_name"> Version </option>
                 </select>
               </div>
             </div>
           </div>
           <div class="column control">
             <b-autocomplete
-              v-if="filterOption=='repository_version'"
+              v-if="filterOption=='repository_version_name'"
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
               placeholder="Your Version"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
+              :data="repository.intents_list"
+              :loading="!repository"
               v-model="filterSearch"
               placeholder="Your Intent"/>
             <b-select
@@ -118,16 +120,22 @@ export default {
       filterOption: null,
       loading: false,
       filterName: {
-        repository_version: 'version',
+        repository_version_name: 'version',
         language: 'language',
         intent: 'intent',
       },
       filterSearch: '',
-      languages: [],
       versionsList: null,
     };
   },
   computed: {
+    languages() {
+      return Object.keys(this.repository.evaluate_languages_count)
+        .map(lang => ({
+          value: lang,
+          title: LANGUAGES[lang],
+        }));
+    },
     repositoryUUID() {
       if (!this.repository || this.repository.uuid === 'null') { return null; }
       return this.repository.uuid;

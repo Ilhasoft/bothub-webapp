@@ -31,14 +31,12 @@ export default class Page {
     this.loading = true;
     try {
       this.items = await this.fetchAll([], 1);
-      console.log(this.items);
       this.total = this.items.count;
       this.loading = false;
       this.page = 1;
       return this.items;
     } catch (e) {
       this.loading = false;
-      console.log(e);
       throw e;
     }
   }

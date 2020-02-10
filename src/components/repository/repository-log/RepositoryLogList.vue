@@ -67,7 +67,7 @@ export default {
     async updateLogs() {
       const response = await this.searchLogs({
         repositoryUUID: this.repository.uuid,
-        query: this.searchQuery,
+        query: this.query,
         limit: this.perPage,
       });
       const mockData = this.mockData();
