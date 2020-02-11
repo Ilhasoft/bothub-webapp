@@ -3,10 +3,11 @@
     <div
       class="quick-test__collapse-button"
       @click="toggle()">
-      <p class="quick-test__collapse-button__text"> QUICK TEST {{ collapsed ? '<' : '>' }}</p>
+      <b-icon :icon="expanded ? 'chevron-right' : 'chevron-left'" />
+      <p class="quick-test__collapse-button__text"> QUICK TEST </p>
     </div>
     <div
-      :class="['quick-test__container', collapsed ? 'collapsed' : 'expanded']">
+      :class="['quick-test__container', expanded ? 'expanded' : 'collapsed']">
       <div class="quick-test__inner-container">
         <div class="quick-test__text-area">
           <div
@@ -15,44 +16,54 @@
             <p class="quick-test__message__text">{{ message }}</p>
             <p class="quick-test__message__subtext">
               <span class="quick-test__message__subtext__dot"/>
-              <strong>Intent: </strong>
-              violence(100%)
+              <span> <strong>Intent: </strong>
+                violence(100%) </span>
             </p>
             <p class="quick-test__message__subtext">
               <span class="quick-test__message__subtext__dot"/>
-              <strong>Greetings: </strong>
-              ola, hi
+              <span> <strong>Greetings:  </strong>
+                ola, hi </span>
             </p>
             <div class="field is-grouped is-grouped-centered">
               <b-button
                 class="quick-test__message__button"
-                icon-right="pencil"> Debug </b-button>
+                icon-left="chart-pie"> Debug </b-button>
               <b-button
                 class="quick-test__message__button"
-                icon-right="pencil"> Raw </b-button>
+                icon-left="file-document-outline"> Raw </b-button>
             </div>
           </div>
         </div>
         <div class="quick-test__input field has-addons">
-          <div class="control is-expanded">
+          <div class="control">
             <input
               class="input"
               placeholder="Add a text">
           </div>
           <div class="control">
-            <div class="select">
-              <select>
-                <option
-                  v-for="language in languages">
-                  <language-badge :language="language"/>
-                </option>
-              </select>
-            </div>
+            <b-dropdown
+              position="is-top-left"
+              aria-role="list">
+              <button
+                slot="trigger"
+                class="button is-text">
+                <language-badge
+                  v-if="selectedLanguage"
+                  :language="selectedLanguage"/>
+                <b-icon icon="menu-down"/>
+              </button>
+              <b-dropdown-item
+                v-for="language in languages"
+                :key="language"
+                aria-role="listitem"
+                @click="setLanguage(language)">
+                <language-badge :language="language"/>
+              </b-dropdown-item>
+            </b-dropdown>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -65,10 +76,6 @@ export default {
     LanguageBadge,
   },
   props: {
-    collapsed: {
-      type: Boolean,
-      default: true,
-    },
     repository: {
       type: Object,
       required: true,
@@ -88,14 +95,18 @@ export default {
       languages: [
         'pt-br',
         'en',
-        'simlish',
+        'sim',
       ],
+      selectedLanguage: null,
+      expanded: false,
     };
   },
   methods: {
     toggle() {
-      this.collapsed = !this.collapsed;
-      this.$emit('update:collapsed', this.collapsed);
+      this.expanded = !this.expanded;
+    },
+    setLanguage(language) {
+      this.selectedLanguage = language;
     },
   },
 };
@@ -117,13 +128,13 @@ export default {
         display: flex;
         justify-content: flex-end;
         position: fixed;
-        bottom: 20%;
+        bottom: 10%;
         right: 0;
         z-index: 9;
 
         &__message {
 
-          margin: 0 0 0.6rem 0;
+          margin: 0 0 1.5rem 0;
 
           &__text {
             margin: 0 1.175rem 0 0;
@@ -134,12 +145,18 @@ export default {
           }
 
           &__button {
-            margin: 0 1.6rem 0 0;
+            margin: 0 1rem 0 0;
+            color: #707070;
           }
 
           &__subtext {
-            margin-left: 1.75rem;
+            display: flex;
+            vertical-align: middle;
+            margin: 0.6rem 1.75rem 0.6rem 0;
+            font-size: 0.75rem;
+            color: #707070;
             &__dot {
+              margin-right: 0.5rem;
               height: 1rem;
               width: 1rem;
               background-color: #2BBFAC;
@@ -150,9 +167,10 @@ export default {
         }
 
         &__collapse-button {
+          cursor: pointer;
           background-color: #2BBFAC;
-          border-radius: 1rem 0 0 1rem;
-          height: 2.25rem;
+          border-radius: 30% 0 0 30%;
+          height: 3rem;
           width: 5rem;
           padding: 0.75rem;
           font-weight: bold;
@@ -172,6 +190,7 @@ export default {
         }
 
         &__container {
+          height: 75vh;
           display: flex;
           align-items: stretch;
           width: calc(100% - 16rem);
@@ -187,13 +206,14 @@ export default {
           border-radius: 10px;
           word-wrap: break-word;
           background-color: white;
+          display: flex;
+          flex-direction: column;
         }
 
         &__text-area {
-            border-radius: 10px;
             margin: 1.25rem 0.6rem 0.6rem 1.125rem;
             overflow-y: scroll;
-            height: 400px;
+            height: 90%;
         }
     }
 </style>

@@ -5,11 +5,8 @@
     <div
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
-      <analyze-text-drawer
-        v-if="repository && repository.uuid && authenticated"
-        :repository-uuid="repository.uuid"
-        :default-language="repository.language"
-        :available-languages="repository.available_languages" />
+      <quick-test
+      :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
         class="rpstr-vw-bs__wrapper__content">
@@ -50,7 +47,7 @@ import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import RepositoryNavigation from './RepositoryNavigation';
-import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
+import QuickTest from '@/components/quick-test/QuickTest';
 import SideBarNavigation from '@/components/shared/SideBar';
 
 
@@ -69,7 +66,7 @@ export default {
     SiteFooter,
     RepositoryInfo,
     RepositoryNavigation,
-    AnalyzeTextDrawer,
+    QuickTest,
     UserAvatar,
     NewRepositoryModal,
     RequestAuthorizationModal,
