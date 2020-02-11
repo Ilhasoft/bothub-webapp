@@ -8,32 +8,28 @@
             <input
               v-model="name"
               class="input"
-              type="text">
+              type="text" >
           </div>
         </div>
         <div class="field">
-          <div class="control has-text-centered"/>
+          <div class="control has-text-centered" />
           <div class="control">
             <label class="label">Version</label>
             <input
               :placeholder="version.name"
               class="input"
               type="text"
-              disabled>
+              disabled >
             <div class="field repository-new-version-modal__button-container">
               <b-button
                 type="is-light"
-                @click="onClose()"
-              >
-                Cancel
-              </b-button>
+                @click="onClose()">Cancel</b-button>
               <b-button
                 :loading="loading"
                 :disabled="!canSubmit"
                 type="is-primary"
-                native-type="submit" >
-                Add new
-              </b-button>
+                native-type="submit"
+              >Add new</b-button>
             </div>
           </div>
         </div>
@@ -49,9 +45,11 @@ export default {
   name: 'RepositoryHandleVersionModal',
   props: {
     repository: {
+      default: null,
       type: Object,
     },
     version: {
+      default: null,
       type: Object,
     },
   },
@@ -68,52 +66,48 @@ export default {
     },
   },
   methods: {
-    		...mapActions([
-		      'addNewVersion',
-    		]),
-    		onClose() {
-    			this.$emit('close');
-    		},
-    		async onSubmit() {
-    			this.loading = true;
-    			await this.addNewVersion(
-    				{
-    					repositoryUUID: this.repository.uuid,
-    					versionUUID: this.version.id,
-    					name: this.name,
-    				},
-      ).then((_) => {
-    					this.loading = false;
-    					this.$emit('addedVersion');
-    				}).catch((error) => {
-    					this.$emit('error', error);
-    					this.loading = false;
-    				});
-    		},
-   		},
+    ...mapActions(['addNewVersion']),
+    onClose() {
+      this.$emit('close');
+    },
+    async onSubmit() {
+      this.loading = true;
+      await this.addNewVersion({
+        repositoryUUID: this.repository.uuid,
+        versionUUID: this.version.id,
+        name: this.name,
+      })
+        .then(() => {
+          this.loading = false;
+          this.$emit('addedVersion');
+        })
+        .catch((error) => {
+          this.$emit('error', error);
+          this.loading = false;
+        });
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-	@import '~@/assets/scss/utilities.scss';
+@import "~@/assets/scss/utilities.scss";
 
-	.repository-new-version-modal {
+.repository-new-version-modal {
+  &__container {
+    margin: 0 auto;
+    max-width: $max-repository-card-width;
+    min-width: 200px;
+    padding: 1.75rem;
+    border-radius: 8px;
+    background-color: white;
+  }
 
-		&__container {
-			margin: 0 auto;
-			max-width: $max-repository-card-width;
-			min-width: 200px;
-			padding: 1.75rem;
-			border-radius: 8px;
-			background-color: white;
-		}
-
-		&__button-container {
-			margin: 1.5rem;
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-around;
-		}
-	}
-
+  &__button-container {
+    margin: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
 </style>

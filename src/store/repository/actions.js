@@ -19,6 +19,9 @@ export default {
   setDefaultVersion(store, { repositoryUuid, id }) {
     return repository.setDefaultVersion(repositoryUuid, id);
   },
+  editVersion(store, { repositoryUuid, id, name }) {
+    return repository.editVersion(repositoryUuid, id, name);
+  },
   deleteVersion(store, id) {
     return repository.deleteVersion(id);
   },
@@ -45,7 +48,7 @@ export default {
     repositoryUUID, repositoryVersion, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(repositoryUUID, repositoryVersion ,language, text);
+    return repository.analyze(repositoryUUID, repositoryVersion, language, text);
   },
   async getEditRepositorySchema(store, { repositoryUuid }) {
     /* istanbul ignore next */
@@ -142,7 +145,7 @@ export default {
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
-  setRepositoryVersion({ commit }, payload) {         
+  setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
   },
 };
