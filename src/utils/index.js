@@ -40,6 +40,11 @@ const strTrueIndexOf = (a, b) => (a
   .indexOf(b.toLowerCase())
 );
 
+export const formatDate = (text) => {
+  const date = new Date(text);
+  return date.toLocaleDateString('pt-BR');
+};
+
 export const filterAndOrderListByText = (list, text) => (
   text
     ? list

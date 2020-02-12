@@ -11,6 +11,9 @@ export default {
   getCurrentTab(state) {
     return state.currentTabSelected;
   },
+  getCurrentRepository(state) {
+    return state.selectedRepository;
+  },
   getEvaluateLanguage(state) {
     return state.evaluateLanguage ? state.evaluateLanguage : state.selectedRepository.language;
   },

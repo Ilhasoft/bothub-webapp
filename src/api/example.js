@@ -5,11 +5,12 @@ import utils from './utils';
 
 
 export default {
-  new(repository, text, language, entities, intent) {
+  new(repository, repositoryVersion, text, language, entities, intent) {
     return request.$http.post(
       '/v2/repository/example/',
       {
         repository,
+        repository_version: repositoryVersion,
         text,
         language,
         entities,

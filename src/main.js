@@ -1,9 +1,7 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
 import VueMoment from 'vue-moment';
-
 import BH from 'bh';
-
 import App from './App';
 import router from './router';
 import store from './store';

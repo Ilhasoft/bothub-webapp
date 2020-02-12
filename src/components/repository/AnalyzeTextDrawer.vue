@@ -93,7 +93,7 @@
 
 <script>
 import { languageListToDict } from '@/utils';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'AnalyzeTextDrawer',
@@ -126,6 +126,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
     availableLanguagesList() {
       return languageListToDict(this.availableLanguages);
     },
@@ -144,6 +147,7 @@ export default {
       try {
         const response = await this.analyzeText({
           repositoryUUID: this.repositoryUuid,
+          repositoryVersion: this.repositoryVersion,
           language: this.data.language || this.availableLanguages[0],
           text: this.data.text,
         });
