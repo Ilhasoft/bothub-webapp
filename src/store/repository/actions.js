@@ -145,7 +145,7 @@ export default {
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
-  setRepositoryVersion({ commit }, payload) {         
+  setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
   },
 };
