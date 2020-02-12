@@ -19,6 +19,9 @@ export default {
   setDefaultVersion(store, { repositoryUuid, id }) {
     return repository.setDefaultVersion(repositoryUuid, id);
   },
+  editVersion(store, { repositoryUuid, id, name }) {
+    return repository.editVersion(repositoryUuid, id, name);
+  },
   deleteVersion(store, id) {
     return repository.deleteVersion(id);
   },

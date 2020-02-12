@@ -65,6 +65,13 @@ export default {
     const queryString = qs.stringify(query);
     return new utils.List(`/v2/repository/repositories/?${queryString}`);
   },
+  editVersion(repository, id, name) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        name,
+        repository,
+      });
+  },
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
@@ -74,7 +81,7 @@ export default {
       { repository_version: repositoryVersion },
     );
   },
-  analyze(repositoryUUID, repositoryVersion ,language, text) {
+  analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
       {

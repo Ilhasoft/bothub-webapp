@@ -1,51 +1,42 @@
 <template>
   <div class="repository-new-version-modal">
     <div class="repository-new-version-modal__container">
-      <h1>Add new version</h1>
-      <p>Clone and turn into a new version</p>
       <form @submit.prevent="onSubmit">
         <div class="field">
-          <form @submit.prevent="onSubmit">
-            <div class="field">
-              <label class="label">Title</label>
-              <div class="control">
-                <input
-                  v-model="name"
-                  class="input"
-                  placeholder="Title"
-                  type="text">
-              </div>
-            </div>
-            <div class="field">
-              <div class="control has-text-centered"/>
-              <div class="control">
-                <label class="label">Version</label>
-                <input
-                  :placeholder="version.name"
-                  class="input"
-                  type="text"
-                  disabled>
-                <div class="field repository-new-version-modal__button-container">
-                  <b-button
-                    type="is-light"
-                    @click="onClose()"
-                  >
-                    Cancel
-                  </b-button>
-                  <b-button
-                    :loading="loading"
-                    :disabled="!canSubmit"
-                    type="is-primary"
-                    native-type="submit" >
-                    Add new
-                  </b-button>
-                </div>
-              </div>
-            </div>
-          </form>
+          <label class="label">Title</label>
+          <div class="control">
+            <input
+              v-model="name"
+              class="input"
+              type="text" >
+          </div>
         </div>
-    </form></div>
-</div></template>
+        <div class="field">
+          <div class="control has-text-centered" />
+          <div class="control">
+            <label class="label">Version</label>
+            <input
+              :placeholder="version.name"
+              class="input"
+              type="text"
+              disabled >
+            <div class="field repository-new-version-modal__button-container">
+              <b-button
+                type="is-light"
+                @click="onClose()">Cancel</b-button>
+              <b-button
+                :loading="loading"
+                :disabled="!canSubmit"
+                type="is-primary"
+                native-type="submit"
+              >Add new</b-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
 
 <script>
 
@@ -55,12 +46,12 @@ export default {
   name: 'RepositoryHandleVersionModal',
   props: {
     repository: {
+      default: null,
       type: Object,
-      required: true,
     },
     version: {
+      default: null,
       type: Object,
-      required: true,
     },
   },
   data() {
@@ -76,37 +67,34 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'addNewVersion',
-    ]),
+    ...mapActions(['addNewVersion']),
     onClose() {
       this.$emit('close');
     },
     async onSubmit() {
       this.loading = true;
-      await this.addNewVersion(
-        {
-          repositoryUUID: this.repository.uuid,
-          versionUUID: this.version.id,
-          name: this.name,
-        },
-      ).then(() => {
-        this.loading = false;
-        this.$emit('addedVersion');
-      }).catch((error) => {
-        this.$emit('error', error);
-        this.loading = false;
-      });
+      await this.addNewVersion({
+        repositoryUUID: this.repository.uuid,
+        versionUUID: this.version.id,
+        name: this.name,
+      })
+        .then(() => {
+          this.loading = false;
+          this.$emit('addedVersion');
+        })
+        .catch((error) => {
+          this.$emit('error', error);
+          this.loading = false;
+        });
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import '~@/assets/scss/utilities.scss';
+@import "~@/assets/scss/utilities.scss";
 
 .repository-new-version-modal {
-
   &__container {
     margin: 0 auto;
     max-width: $max-repository-card-width;
@@ -123,5 +111,4 @@ export default {
     justify-content: space-around;
   }
 }
-
 </style>

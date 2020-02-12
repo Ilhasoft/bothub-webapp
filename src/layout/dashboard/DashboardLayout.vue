@@ -6,7 +6,8 @@
       :active.sync="getCurrentRepository.name ? false : true" />
     <div
       v-show="getCurrentRepository.name ? true : false"
-      :class="colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+      :class="
+      colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
@@ -15,22 +16,31 @@
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
-          <div class="dashboard-layout__main-panel__header__info__left">
-            <div class="dashboard-layout__main-panel__header__info__left__wrapper">
-              <p class="dashboard-layout__main-panel__header__info__left__wrapper__title">
+          <div
+            class="
+            dashboard-layout__main-panel__header__info__left">
+            <div
+              class="
+              dashboard-layout__main-panel__header__info__left__wrapper">
+              <p
+                class="
+               dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
               <div
-                class="dashboard-layout__main-panel__header__info__left__wrapper__versions">
+                class="
+                dashboard-layout__main-panel__header__info__left__wrapper__versions">
                 <span
-                  class="dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
+                  class="
+                  dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
                   {{ $store.state.Repository.repositoryVersionName }}
                 </span>
                 <b-dropdown
                   aria-role="list">
                   <b-icon
                     slot="trigger"
-                    class="dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
+                    class="
+                    dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
                     icon="chevron-down"/>
                   <b-dropdown-item
                     v-for="(version, index) in allVersions"
@@ -156,11 +166,11 @@ export default {
     },
     handleVersion(id, name) {
       const version = {
-        id: id,
-        name: name
-      }
+        id,
+        name,
+      };
       this.setRepositoryVersion({
-        version
+        version,
       });
     },
   },

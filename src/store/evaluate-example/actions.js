@@ -6,6 +6,7 @@ export default {
   async newEvaluateExample(store, {
     repository, repositoryVersion, text, language, entities, intent,
   }) {
+    // eslint-disable-next-line
     const response = await evaluateExample.new(repository, repositoryVersion, text, language, entities, intent);
     return response;
   },

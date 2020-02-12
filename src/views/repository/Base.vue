@@ -18,6 +18,7 @@ export default {
     ]),
     ...mapState({
       repositoryVersion: state => state.Repository.repositoryVersion,
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
     }),
   },
   watch: {
@@ -34,6 +35,11 @@ export default {
     },
     repositoryVersion() {
       this.updateRepository(true);
+    },
+    repositoryUuid() {
+      this.updateRepositoryVersion(
+        this.repository.version_default,
+      );
     },
   },
   async mounted() {
