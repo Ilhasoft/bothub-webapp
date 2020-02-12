@@ -55,10 +55,6 @@
               :to="{ name: 'repository-test' }"
               tag="router-link"
               label="Results"/>
-            <b-menu-item
-              :to="{ name: 'repository-test' }"
-              tag="router-link"
-              label="Versions"/>
           </b-menu-item>
           <b-menu-item
             :to="{ name: 'repository-translate' }"
