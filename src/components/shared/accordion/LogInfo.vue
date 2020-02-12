@@ -20,7 +20,7 @@
           class="repository-log-info__button"
           rounded
           size="is-small"
-          icon-left="file-document-outline"> Debug </b-button>
+          icon-left="chart-pie"> Debug </b-button>
         <b-button
           class="repository-log-info__button"
           rounded

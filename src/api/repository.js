@@ -37,16 +37,6 @@ export default {
       },
     );
   },
-  editVersion(repositoryUUID, versionUUID, name) {
-    return request.$http.patch(
-      `/v2/repository/version/${versionUUID}/`,
-      {
-        id: versionUUID,
-        name,
-        repository: repositoryUUID,
-      },
-    );
-  },
   getFirstFiveVersions(repositoryUuid) {
     return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
   },
