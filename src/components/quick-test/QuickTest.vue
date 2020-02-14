@@ -1,5 +1,5 @@
 <template>
-  <div class="quick-test">
+  <div v-if="repository" class="quick-test">
     <div
       class="quick-test__collapse-button"
       @click="toggle()">
@@ -27,7 +27,8 @@
             <div class="field is-grouped is-grouped-centered">
               <b-button
                 class="quick-test__message__button"
-                icon-left="chart-pie"> Debug </b-button>
+                icon-left="chart-pie"
+                @click="debug()"> Debug </b-button>
               <b-button
                 class="quick-test__message__button"
                 icon-left="file-document-outline"> Raw </b-button>
@@ -69,16 +70,18 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import RepositoryDebug from '@/components/repository/debug/Debug';
 
 export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
+    RepositoryDebug,
   },
   props: {
     repository: {
       type: Object,
-      required: true,
+      default: null,
     },
   },
   data() {
@@ -99,6 +102,33 @@ export default {
       ],
       selectedLanguage: null,
       expanded: false,
+
+      data: {
+        a: {
+          relevance: 0.1,
+          intent: 'article',
+        },
+        perfect: {
+          relevance: 0.5,
+          intent: 'quality',
+        },
+        day: {
+          relevance: 0.8,
+          intent: 'subject',
+        },
+        for: {
+          relevance: 0.1,
+          intent: 'article',
+        },
+        banana: {
+          relevance: 1,
+          intent: 'fruit',
+        },
+        fish: {
+          relevance: 0.2,
+          intent: 'animal',
+        },
+      },
     };
   },
   methods: {
@@ -107,6 +137,18 @@ export default {
     },
     setLanguage(language) {
       this.selectedLanguage = language;
+    },
+    debug() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: RepositoryDebug,
+        props: {
+          data: this.data,
+          text: 'a perfect day for banana fish',
+        },
+        hasModalCard: false,
+        trapFocus: true,
+      });
     },
   },
 };
@@ -121,7 +163,7 @@ export default {
 
   .collapsed {
     transition: margin-right .3s ease-out;
-    margin: 0 -50% 0 0;
+    margin: 0 -52% 0 0;
   }
 
     .quick-test {
@@ -193,7 +235,7 @@ export default {
           height: 75vh;
           display: flex;
           align-items: stretch;
-          width: calc(100% - 16rem);
+          min-width: 16rem;
           max-width: calc(100% - 16rem);
           border: 7px solid #2F343D;
           border-radius: 10px;
