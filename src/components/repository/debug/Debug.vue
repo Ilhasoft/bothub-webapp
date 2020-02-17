@@ -2,30 +2,35 @@
   <div class="debug">
     <div class="debug__text__container">
       <div
-        v-for="word in wordList">
-        <span :style="style(word.relevance)" class="debug__text"> {{ word.text }} </span>
+        v-for="word in words">
+        <span
+          :style="style(relevance(word))"
+          class="debug__text"> {{ word }} </span>
       </div>
     </div>
     <div class="debug__table">
       <b-table
         :data="wordList"
+        :mobile-cards="false"
         default-sort="relevance"
         default-sort-direction="desc">
         <template slot-scope="props">
           <b-table-column
+            centered
             field="text"
             label="Word"
             width="40">
             {{ props.row.text }}
           </b-table-column>
           <b-table-column
+            centered
             field="intent"
             label="Intent"
             width="40">
             {{ props.row.intent }}
           </b-table-column>
           <b-table-column
-            sortable
+            centered
             field="relevance"
             label="Relevance"
             width="40"
@@ -61,10 +66,14 @@ export default {
       return Object.entries(this.data).map(entry => ({
         text: entry[0],
         ...entry[1],
-      }));
+      })).sort((a, b) => a.relevance < b.relevance);
     },
   },
   methods: {
+    relevance(word) {
+      const reference = this.wordList.find(object => object.text === word);
+      return reference ? reference.relevance : 0;
+    },
     style(value) {
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
@@ -77,9 +86,9 @@ export default {
 <style lang="scss" scoped>
 
     tr, td, table, th, .table {
-    border: 0
+    border: 0;
+    padding: 0.35rem;
   }
-
 
   .debug {
     margin: 0 auto;
@@ -97,21 +106,21 @@ export default {
     }
 
     &__range {
-      margin: 0 0.6rem 0 1rem;
+      margin: 3.5rem 0.6rem 0 1rem;
       width: 1.25rem;
-      background: rgb(27,126,113);
-      background: linear-gradient(180deg, rgba(27,126,113,1) 0%, rgba(25,222,196,1) 50%, rgba(0,255,221,1) 100%);
+      background: linear-gradient(180deg, #1B7E71 0%, #19DEC4 50%, #00FFDD 100%);
       border-radius: 3px;
     }
 
     &__text {
+      padding: 0.25rem;
       font-weight: bold;
       font-size: 1.5rem;
-      background-color: #2BBFAC;
       margin: 0.25rem;
       border-radius: 5px;
 
       &__container {
+        margin: 1rem;
         padding: 0.5rem;
         display: flex;
         justify-content: center;

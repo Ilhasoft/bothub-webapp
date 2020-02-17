@@ -47,7 +47,7 @@
               aria-role="list">
               <button
                 slot="trigger"
-                class="button is-text">
+                class="button is-light">
                 <language-badge
                   v-if="selectedLanguage"
                   :language="selectedLanguage"/>
