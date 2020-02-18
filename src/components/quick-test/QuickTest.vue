@@ -1,5 +1,7 @@
 <template>
-  <div v-if="repository" class="quick-test">
+  <div
+    v-if="repository"
+    class="quick-test">
     <div
       class="quick-test__collapse-button"
       @click="toggle()">
@@ -11,35 +13,43 @@
       <div class="quick-test__inner-container">
         <div class="quick-test__text-area">
           <div
-            v-for="message in messages"
+            v-for="sentence in sentences"
+            :key="sentence.id"
             class="quick-test__message">
-            <p class="quick-test__message__text">{{ message }}</p>
-            <p class="quick-test__message__subtext">
-              <span class="quick-test__message__subtext__dot"/>
-              <span> <strong>Intent: </strong>
-                violence(100%) </span>
-            </p>
-            <p class="quick-test__message__subtext">
-              <span class="quick-test__message__subtext__dot"/>
-              <span> <strong>Greetings:  </strong>
-                ola, hi </span>
-            </p>
-            <div class="field is-grouped is-grouped-centered">
-              <b-button
-                class="quick-test__message__button"
-                icon-left="chart-pie"
-                @click="debug()"> Debug </b-button>
-              <b-button
-                class="quick-test__message__button"
-                icon-left="file-document-outline"> Raw </b-button>
+            <p class="quick-test__message__text">{{ sentence.text }}</p>
+            <loading v-if="isLoading(sentence)" />
+            <div
+              v-else
+              class="quick-test__message__subtext__container">
+              <p class="quick-test__message__subtext">
+                <span class="quick-test__message__subtext__dot"/>
+                <span> <strong>Intent: </strong>
+                  {{ sentence.intent }}({{ sentence.relevance * 100 }}%) </span>
+              </p>
+              <p class="quick-test__message__subtext">
+                <span class="quick-test__message__subtext__dot"/>
+                <span> <strong>Greetings:  </strong>
+                  ola, hi </span>
+              </p>
+              <div class="field is-grouped is-grouped-centered">
+                <b-button
+                  class="quick-test__message__button"
+                  icon-left="chart-pie"
+                  @click="debug()"> Debug </b-button>
+                <b-button
+                  class="quick-test__message__button"
+                  icon-left="file-document-outline"> Raw </b-button>
+              </div>
             </div>
           </div>
         </div>
         <div class="quick-test__input field has-addons">
           <div class="control">
             <input
+              v-model="sentenceInput"
               class="input"
-              placeholder="Add a text">
+              placeholder="Add a text"
+              @keyup.enter="sendMessage" >
           </div>
           <div class="control">
             <b-dropdown
@@ -71,12 +81,14 @@
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import RepositoryDebug from '@/components/repository/debug/Debug';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
     RepositoryDebug,
+    Loading,
   },
   props: {
     repository: {
@@ -86,20 +98,8 @@ export default {
   },
   data() {
     return {
-      messages: [
-        "Now, more than any life I'd led",
-        'I know that one was the best',
-        "'Cause I spent it on my chest",
-        'Between her knees',
-        'And her rivers, still they run',
-        'When they crash into the sun',
-        'In some life will I be young enough to see?',
-      ],
-      languages: [
-        'pt-br',
-        'en',
-        'sim',
-      ],
+      sentenceInput: '',
+      sentences: [],
       selectedLanguage: null,
       expanded: false,
 
@@ -131,7 +131,29 @@ export default {
       },
     };
   },
+  computed: {
+    languages() {
+      return Object.keys(this.repository.languages_ready_for_train);
+    },
+  },
   methods: {
+    isLoading(sentence) {
+      return sentence.intent === null && sentence.relevance === null;
+    },
+    async sendMessage() {
+      if (this.sentenceInput === '') return;
+      const id = this.sentences.length;
+      this.sentences.push({
+        id,
+        text: this.sentenceInput,
+        intent: null,
+        relevance: null,
+      });
+      this.sentenceInput = '';
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      this.sentences[id].intent = 'intent';
+      this.sentences[id].relevance = 0.5;
+    },
     toggle() {
       this.expanded = !this.expanded;
     },
@@ -163,7 +185,7 @@ export default {
 
   .collapsed {
     transition: margin-right .3s ease-out;
-    margin: 0 -52% 0 0;
+    margin: 0 -16rem 0 0;
   }
 
     .quick-test {
@@ -194,9 +216,10 @@ export default {
           &__subtext {
             display: flex;
             vertical-align: middle;
-            margin: 0.6rem 1.75rem 0.6rem 0;
             font-size: 0.75rem;
             color: #707070;
+            margin: 0.6rem 0.6rem 0.6rem 1.75rem;
+
             &__dot {
               margin-right: 0.5rem;
               height: 1rem;
@@ -236,7 +259,7 @@ export default {
           display: flex;
           align-items: stretch;
           min-width: 16rem;
-          max-width: calc(100% - 16rem);
+          max-width: 16rem;
           border: 7px solid #2F343D;
           border-radius: 10px;
           box-shadow: 0 0 10px 0 rgba(0,0,0,.2);
