@@ -25,7 +25,8 @@
         </div>
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
-      <section>
+      <loading v-if="loadingList" />
+      <section v-else>
         <b-table
           v-if="versionsList"
           :data="versionsList.items"
@@ -124,6 +125,7 @@ import { mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
+import Loading from '@/components/shared/Loading';
 
 
 export default {
@@ -131,6 +133,7 @@ export default {
   components: {
     RepositoryViewBase,
     RepositoryHandleVersionModal,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
@@ -190,17 +193,14 @@ export default {
     },
     async updateParams() {
       if (!this.repositoryUUID) { return; }
-      console.log("update");
       const response = await this.getVersions({
         limit: this.perPage,
         query: this.query,
       });
       this.versionsList = response;
-      console.log(this.versionsList);
       this.updateVersions();
     },
     async updateVersions() {
-      console.log("fetch", this.versionsList);
       this.loadingList = true;
       try {
         await this.versionsList.updateItems(this.currentPage);
