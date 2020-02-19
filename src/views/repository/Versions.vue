@@ -28,10 +28,10 @@
       <section>
         <b-table
           v-if="versionsList"
-          :data="versionList.items"
+          :data="versionsList.items"
           :paginated="isPaginated"
           :backend-pagination="true"
-          :total="versionList.total"
+          :total="versionsList.total"
           :per-page="perPage"
           :current-page.sync="currentPage"
           :pagination-simple="isPaginationSimple"
@@ -94,16 +94,20 @@
               <div class="versions__table__buttons-wrapper">
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
+                  :disabled="!repository.authorization.can_contribute"
                   class="is-small"
                   rounded
                   @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="pencil"
                   @click.native="onEditVersion({id: props.row.id, name: props.row.name})"/>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="delete"
                   @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="content-copy"
                   @click.native="copyVersion(props.row)"/>
               </div>
@@ -144,6 +148,7 @@ export default {
       currentEditVersion: null,
       editName: null,
       loadingEdit: false,
+      loadingList: false,
     };
   },
   computed: {
@@ -185,14 +190,25 @@ export default {
     },
     async updateParams() {
       if (!this.repositoryUUID) { return; }
-      this.versionList = await this.getVersions({
+      console.log("update");
+      const response = await this.getVersions({
         limit: this.perPage,
         query: this.query,
       });
+      this.versionsList = response;
+      console.log(this.versionsList);
       this.updateVersions();
     },
     async updateVersions() {
-      await this.versionList.updateItems(this.currentPage);
+      console.log("fetch", this.versionsList);
+      this.loadingList = true;
+      try {
+        await this.versionsList.updateItems(this.currentPage);
+        this.loadingList = false;
+      } catch (e) {
+        this.loadingList = false;
+        this.showError(e);
+      }
     },
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
