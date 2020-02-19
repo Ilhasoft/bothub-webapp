@@ -41,6 +41,12 @@ export default {
     /* istanbul ignore next */
     return repository.train(repositoryUuid, repositoryVersion);
   },
+  debugParse(store, {
+    repositoryUUID, repositoryVersion, language, text,
+  }) {
+    /* istanbul ignore next */
+    return repository.debugParse(repositoryUUID, repositoryVersion, language, text);
+  },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
   }) {

@@ -82,6 +82,7 @@
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'QuickTest',
@@ -132,16 +133,22 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
     languages() {
       return Object.keys(this.repository.languages_ready_for_train);
     },
   },
   methods: {
+    ...mapActions([
+      'debugParse',
+    ]),
     isLoading(sentence) {
       return sentence.intent === null && sentence.relevance === null;
     },
     async sendMessage() {
-      if (this.sentenceInput === '') return;
+      if (this.sentenceInput === '' || !this.selectedLanguage) return;
       const id = this.sentences.length;
       this.sentences.push({
         id,
@@ -150,9 +157,19 @@ export default {
         relevance: null,
       });
       this.sentenceInput = '';
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      this.sentences[id].intent = 'intent';
-      this.sentences[id].relevance = 0.5;
+
+      const response = await this.debugParse({
+        repositoryUUID: this.repository.uuid,
+        repositoryVersion: this.repositoryVersion,
+        language: this.selectedLanguage,
+        text: this.sentenceInput,
+      });
+
+      this.sentences[id] = response.data;
+
+      // await new Promise(resolve => setTimeout(resolve, 3000));
+      // this.sentences[id].intent = 'intent';
+      // this.sentences[id].relevance = 0.5;
     },
     toggle() {
       this.expanded = !this.expanded;
