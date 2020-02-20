@@ -1,66 +1,94 @@
 <template>
   <div class="debug">
-    <div class="debug__text__container">
-      <div
-        v-for="word in words">
-        <span
-          :style="style(relevance(word))"
-          class="debug__text"> {{ word }} </span>
-      </div>
+    <div v-if="!error">
+      <p> Something unexpected happened! We couldn't debug your text. </p>
+      <b-button @click="load()"> Reload </b-button>
     </div>
-    <div class="debug__table">
-      <b-table
-        :data="wordList"
-        :mobile-cards="false"
-        default-sort="relevance"
-        default-sort-direction="desc">
-        <template slot-scope="props">
-          <b-table-column
-            centered
-            field="text"
-            label="Word"
-            width="40">
-            {{ props.row.text }}
-          </b-table-column>
-          <b-table-column
-            centered
-            field="intent"
-            label="Intent"
-            width="40">
-            {{ props.row.intent }}
-          </b-table-column>
-          <b-table-column
-            centered
-            field="relevance"
-            label="Relevance"
-            width="40"
-            numeric>
-            {{ props.row.relevance }}
-          </b-table-column>
-        </template>
-      </b-table>
+    <loading v-else-if="loading" />
+    <div v-else>
+      <div class="debug__text__container">
+        <div
+          v-for="word in words">
+          <span
+            :style="style(relevance(word))"
+            class="debug__text"> {{ word }} </span>
+        </div>
+      </div>
+      <div class="debug__table">
+        <b-table
+          :data="wordList"
+          :mobile-cards="false"
+          default-sort="relevance"
+          default-sort-direction="desc">
+          <template slot-scope="props">
+            <b-table-column
+              centered
+              field="text"
+              label="Word"
+              width="40">
+              {{ props.row.text }}
+            </b-table-column>
+            <b-table-column
+              centered
+              field="intent"
+              label="Intent"
+              width="40">
+              {{ props.row.intent }}
+            </b-table-column>
+            <b-table-column
+              centered
+              field="relevance"
+              label="Relevance"
+              width="40"
+              numeric>
+              {{ props.row.relevance }}
+            </b-table-column>
+          </template>
+        </b-table>
 
-      <div class="debug__range" />
+        <div class="debug__range" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import Loading from '@/components/shared/Loading';
+
 export default {
   name: 'RepositoryDebug',
+  components: {
+    Loading,
+  },
   props: {
-    data: {
-      type: Object,
+    repositoryUUID: {
+      type: String,
+      required: true,
+    },
+    language: {
+      type: String,
       required: true,
     },
     text: {
       type: String,
       required: true,
     },
+    version: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      data: null,
+      loading: false,
+      error: null,
+    };
   },
   computed: {
     words() {
-      return this.text.split(' ');
+      return this.data.text.split(' ');
     },
     wordList() {
       return Object.entries(this.data).map(entry => ({
@@ -69,7 +97,30 @@ export default {
       })).sort((a, b) => a.relevance < b.relevance);
     },
   },
+  mounted() {
+    this.load();
+  },
   methods: {
+    ...mapActions([
+      'debugParse',
+    ]),
+    async load() {
+      this.error = null;
+      this.loading = true;
+      try {
+        const response = await this.analyzeText({
+          repositoryUUID: this.repositoryUUID,
+          repositoryVersion: this.version,
+          language: this.language,
+          text: this.text,
+        });
+        this.data = response.data;
+        this.loading = false;
+      } catch (error) {
+        this.error = error;
+        this.loading = false;
+      }
+    },
     relevance(word) {
       const reference = this.wordList.find(object => object.text === word);
       return reference ? reference.relevance : 0;

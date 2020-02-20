@@ -35,7 +35,7 @@
                 <b-button
                   class="quick-test__message__button"
                   icon-left="chart-pie"
-                  @click="debug()"> Debug </b-button>
+                  @click="debug(sentence)"> Debug </b-button>
                 <b-button
                   class="quick-test__message__button"
                   icon-left="file-document-outline"> Raw </b-button>
@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'debugParse',
+      'analyzeText',
     ]),
     isLoading(sentence) {
       return sentence.intent === null && sentence.relevance === null;
@@ -158,7 +158,7 @@ export default {
       });
       this.sentenceInput = '';
 
-      const response = await this.debugParse({
+      const response = await this.analyzeText({
         repositoryUUID: this.repository.uuid,
         repositoryVersion: this.repositoryVersion,
         language: this.selectedLanguage,
@@ -166,10 +166,6 @@ export default {
       });
 
       this.sentences[id] = response.data;
-
-      // await new Promise(resolve => setTimeout(resolve, 3000));
-      // this.sentences[id].intent = 'intent';
-      // this.sentences[id].relevance = 0.5;
     },
     toggle() {
       this.expanded = !this.expanded;
@@ -177,13 +173,15 @@ export default {
     setLanguage(language) {
       this.selectedLanguage = language;
     },
-    debug() {
+    debug(sentence) {
       this.$buefy.modal.open({
         parent: this,
         component: RepositoryDebug,
         props: {
-          data: this.data,
-          text: 'a perfect day for banana fish',
+          repositoryUUID: this.repositoryUUID,
+          version: sentence.version,
+          language: sentence.language,
+          text: sentence.text,
         },
         hasModalCard: false,
         trapFocus: true,
