@@ -1,6 +1,6 @@
 <template>
   <div class="debug">
-    <div v-if="!error">
+    <div v-if="error">
       <p> Something unexpected happened! We couldn't debug your text. </p>
       <b-button @click="load()"> Reload </b-button>
     </div>
@@ -8,15 +8,15 @@
     <div v-else>
       <div class="debug__text__container">
         <div
-          v-for="word in words">
+          v-for="word in wordsFromText">
           <span
-            :style="style(relevance(word))"
+            :style="style(word)"
             class="debug__text"> {{ word }} </span>
         </div>
       </div>
       <div class="debug__table">
         <b-table
-          :data="wordList"
+          :data="tableData"
           :mobile-cards="false"
           default-sort="relevance"
           default-sort-direction="desc">
@@ -55,6 +55,7 @@
 <script>
 import { mapActions } from 'vuex';
 import Loading from '@/components/shared/Loading';
+import { normalize } from '@/utils';
 
 export default {
   name: 'RepositoryDebug',
@@ -62,22 +63,22 @@ export default {
     Loading,
   },
   props: {
-    repositoryUUID: {
-      type: String,
-      required: true,
-    },
-    language: {
-      type: String,
-      required: true,
-    },
-    text: {
-      type: String,
-      required: true,
-    },
-    version: {
-      type: Number,
-      required: true,
-    },
+    // repositoryUUID: {
+    //   type: String,
+    //   required: true,
+    // },
+    // language: {
+    //   type: String,
+    //   required: true,
+    // },
+    // text: {
+    //   type: String,
+    //   required: true,
+    // },
+    // version: {
+    //   type: Number,
+    //   required: true,
+    // },
   },
   data() {
     return {
@@ -87,14 +88,31 @@ export default {
     };
   },
   computed: {
-    words() {
+    wordsFromText() {
+      if (!this.data) return [];
       return this.data.text.split(' ');
     },
-    wordList() {
-      return Object.entries(this.data).map(entry => ({
+    relevantData() {
+      if (!this.data) return {};
+      return Object.entries(this.data.words).reduce((relevance, entry) => {
+        // eslint-disable-next-line no-param-reassign
+        relevance[entry[0]] = entry[1]
+          .find(object => object.intent === this.data.intent.name).relevance;
+        return relevance;
+      }, {});
+    },
+    tableData() {
+      if (!this.data) return [];
+      return Object.entries(this.relevantData).map(entry => ({
         text: entry[0],
-        ...entry[1],
+        relevance: entry[1],
       })).sort((a, b) => a.relevance < b.relevance);
+    },
+    maxRelevance() {
+      return this.tableData[0].relevance;
+    },
+    minRelevance() {
+      return this.tableData[this.tableData.length - 1].relevance;
     },
   },
   mounted() {
@@ -105,10 +123,15 @@ export default {
       'debugParse',
     ]),
     async load() {
+      this.loading = true;
+      this.data = this.mockData();
+      this.loading = false;
+      return;
+
       this.error = null;
       this.loading = true;
       try {
-        const response = await this.analyzeText({
+        const response = await this.debugParse({
           repositoryUUID: this.repositoryUUID,
           repositoryVersion: this.version,
           language: this.language,
@@ -121,13 +144,79 @@ export default {
         this.loading = false;
       }
     },
-    relevance(word) {
-      const reference = this.wordList.find(object => object.text === word);
-      return reference ? reference.relevance : 0;
-    },
-    style(value) {
+    style(word) {
+      const value = normalize(this.minRelevance, this.maxRelevance, this.relevantData[word]);
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
+      };
+    },
+    mockData() {
+      return {
+        intent: {
+          name: 'positive',
+          confidence: 0.9930176138877869,
+        },
+        words: {
+          yes: [
+            {
+              intent: 'positive',
+              relevance: 23.235361594496695,
+            },
+            {
+              intent: 'random',
+              relevance: 0.0,
+            },
+            {
+              intent: 'negative',
+              relevance: -15.39845947030392,
+            },
+          ],
+          like: [
+            {
+              intent: 'positive',
+              relevance: 27.020757020636214,
+            },
+            {
+              intent: 'random',
+              relevance: 0.0,
+            },
+            {
+              intent: 'negative',
+              relevance: -14.7882420395994,
+            },
+          ],
+          i: [
+            {
+              intent: 'positive',
+              relevance: 2.8646589484662823,
+            },
+            {
+              intent: 'random',
+              relevance: 0.0,
+            },
+            {
+              intent: 'negative',
+              relevance: -3.917187094992248,
+            },
+          ],
+          this: [
+            {
+              intent: 'positive',
+              relevance: 0.9810086076409634,
+            },
+            {
+              intent: 'random',
+              relevance: 0.0,
+            },
+            {
+              intent: 'negative',
+              relevance: -0.21035066979023082,
+            },
+          ],
+        },
+        text: 'yes i like this',
+        repository_version: 47,
+        language: 'en',
       };
     },
   },

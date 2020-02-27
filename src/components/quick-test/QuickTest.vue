@@ -26,11 +26,6 @@
                 <span> <strong>Intent: </strong>
                   {{ sentence.intent }}({{ sentence.relevance * 100 }}%) </span>
               </p>
-              <p class="quick-test__message__subtext">
-                <span class="quick-test__message__subtext__dot"/>
-                <span> <strong>Greetings:  </strong>
-                  ola, hi </span>
-              </p>
               <div class="field is-grouped is-grouped-centered">
                 <b-button
                   class="quick-test__message__button"
@@ -57,10 +52,13 @@
               aria-role="list">
               <button
                 slot="trigger"
-                class="button is-light">
+                class="button is-text">
                 <language-badge
                   v-if="selectedLanguage"
                   :language="selectedLanguage"/>
+                <span
+                  v-else
+                  class="quick-test__input__placeholder"> Select language </span>
                 <b-icon icon="menu-down"/>
               </button>
               <b-dropdown-item
@@ -145,6 +143,7 @@ export default {
       'analyzeText',
     ]),
     isLoading(sentence) {
+      return false;
       return sentence.intent === null && sentence.relevance === null;
     },
     async sendMessage() {
@@ -192,6 +191,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .is-text {
+    text-decoration: none;
+  }
 
   .expanded {
     transition: margin-right .3s ease-out;
@@ -267,6 +270,10 @@ export default {
 
         &__input {
           margin: 0.5rem;
+
+          &__placeholder {
+            font-size: 0.7rem;
+          }
         }
 
         &__container {
