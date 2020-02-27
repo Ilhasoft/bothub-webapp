@@ -8,7 +8,8 @@
     <div v-else>
       <div class="debug__text__container">
         <div
-          v-for="word in wordsFromText">
+          v-for="(word, index) in wordsFromText"
+          :key="index">
           <span
             :style="style(word)"
             class="debug__text"> {{ word }} </span>
@@ -63,22 +64,22 @@ export default {
     Loading,
   },
   props: {
-    // repositoryUUID: {
-    //   type: String,
-    //   required: true,
-    // },
-    // language: {
-    //   type: String,
-    //   required: true,
-    // },
-    // text: {
-    //   type: String,
-    //   required: true,
-    // },
-    // version: {
-    //   type: Number,
-    //   required: true,
-    // },
+    repositoryUUID: {
+      type: String,
+      required: true,
+    },
+    language: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    version: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -123,11 +124,6 @@ export default {
       'debugParse',
     ]),
     async load() {
-      this.loading = true;
-      this.data = this.mockData();
-      this.loading = false;
-      return;
-
       this.error = null;
       this.loading = true;
       try {
@@ -148,75 +144,6 @@ export default {
       const value = normalize(this.minRelevance, this.maxRelevance, this.relevantData[word]);
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
-      };
-    },
-    mockData() {
-      return {
-        intent: {
-          name: 'positive',
-          confidence: 0.9930176138877869,
-        },
-        words: {
-          yes: [
-            {
-              intent: 'positive',
-              relevance: 23.235361594496695,
-            },
-            {
-              intent: 'random',
-              relevance: 0.0,
-            },
-            {
-              intent: 'negative',
-              relevance: -15.39845947030392,
-            },
-          ],
-          like: [
-            {
-              intent: 'positive',
-              relevance: 27.020757020636214,
-            },
-            {
-              intent: 'random',
-              relevance: 0.0,
-            },
-            {
-              intent: 'negative',
-              relevance: -14.7882420395994,
-            },
-          ],
-          i: [
-            {
-              intent: 'positive',
-              relevance: 2.8646589484662823,
-            },
-            {
-              intent: 'random',
-              relevance: 0.0,
-            },
-            {
-              intent: 'negative',
-              relevance: -3.917187094992248,
-            },
-          ],
-          this: [
-            {
-              intent: 'positive',
-              relevance: 0.9810086076409634,
-            },
-            {
-              intent: 'random',
-              relevance: 0.0,
-            },
-            {
-              intent: 'negative',
-              relevance: -0.21035066979023082,
-            },
-          ],
-        },
-        text: 'yes i like this',
-        repository_version: 47,
-        language: 'en',
       };
     },
   },

@@ -24,7 +24,7 @@
               <p class="quick-test__message__subtext">
                 <span class="quick-test__message__subtext__dot"/>
                 <span> <strong>Intent: </strong>
-                  {{ sentence.intent }}({{ sentence.relevance * 100 }}%) </span>
+                  {{ sentence.intent.name }}({{ sentence.intent.relevance * 100 }}%) </span>
               </p>
               <div class="field is-grouped is-grouped-centered">
                 <b-button
@@ -101,33 +101,6 @@ export default {
       sentences: [],
       selectedLanguage: null,
       expanded: false,
-
-      data: {
-        a: {
-          relevance: 0.1,
-          intent: 'article',
-        },
-        perfect: {
-          relevance: 0.5,
-          intent: 'quality',
-        },
-        day: {
-          relevance: 0.8,
-          intent: 'subject',
-        },
-        for: {
-          relevance: 0.1,
-          intent: 'article',
-        },
-        banana: {
-          relevance: 1,
-          intent: 'fruit',
-        },
-        fish: {
-          relevance: 0.2,
-          intent: 'animal',
-        },
-      },
     };
   },
   computed: {
@@ -143,8 +116,7 @@ export default {
       'analyzeText',
     ]),
     isLoading(sentence) {
-      return false;
-      return sentence.intent === null && sentence.relevance === null;
+      return sentence.intent === null;
     },
     async sendMessage() {
       if (this.sentenceInput === '' || !this.selectedLanguage) return;
@@ -153,18 +125,18 @@ export default {
         id,
         text: this.sentenceInput,
         intent: null,
-        relevance: null,
       });
       this.sentenceInput = '';
 
-      const response = await this.analyzeText({
-        repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
-        language: this.selectedLanguage,
-        text: this.sentenceInput,
-      });
-
-      this.sentences[id] = response.data;
+      try {
+        const response = await this.analyzeText({
+          repositoryUUID: this.repository.uuid,
+          repositoryVersion: this.repositoryVersion,
+          language: this.selectedLanguage,
+          text: this.sentenceInput,
+        });
+        this.sentences[id] = response.data;
+      } catch (e) {}
     },
     toggle() {
       this.expanded = !this.expanded;
