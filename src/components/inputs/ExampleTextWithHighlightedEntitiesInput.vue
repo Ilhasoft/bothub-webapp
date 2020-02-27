@@ -101,10 +101,10 @@ export default {
     emitTextSelected() {
       const { value, selectionStart, selectionEnd } = this.$refs.input;
       const selected = value.slice(selectionStart, selectionEnd);
-      
+
       const startPadding = selected.search(/\S|$/);
       const endPadding = selected.length - selected.trim().length - startPadding;
-      
+
       this.selectionStart = selectionStart + startPadding;
       this.selectionEnd = selectionEnd - endPadding;
 
