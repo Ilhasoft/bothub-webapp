@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-      :repository="repository" />
+        :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
         class="rpstr-vw-bs__wrapper__content">
@@ -46,9 +46,9 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-import RepositoryNavigation from './RepositoryNavigation';
 import QuickTest from '@/components/quick-test/QuickTest';
 import SideBarNavigation from '@/components/shared/SideBar';
+import RepositoryNavigation from './RepositoryNavigation';
 
 
 const ERROR_VERBOSE_LOOKUP = {

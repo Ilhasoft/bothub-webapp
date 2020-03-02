@@ -17,7 +17,13 @@
             :key="sentence.id"
             class="quick-test__message">
             <p class="quick-test__message__text">{{ sentence.text }}</p>
-            <loading v-if="isLoading(sentence)" />
+            <div
+              v-if="hasError(sentence)"
+              class="quick-test__message__subtext__container">
+              <p class="quick-test__message__subtext">
+                An error ocurred, we couldn't analyze your text </p>
+            </div>
+            <loading v-else-if="isLoading(sentence)" />
             <div
               v-else
               class="quick-test__message__subtext__container">
@@ -118,6 +124,9 @@ export default {
     isLoading(sentence) {
       return sentence.intent === null;
     },
+    hasError(sentence) {
+      return !(sentence.error === null || sentence.error === undefined);
+    },
     async sendMessage() {
       if (this.sentenceInput === '' || !this.selectedLanguage) return;
       const id = this.sentences.length;
@@ -125,7 +134,9 @@ export default {
         id,
         text: this.sentenceInput,
         intent: null,
+        error: null,
       });
+      const text = this.sentenceInput;
       this.sentenceInput = '';
 
       try {
@@ -133,10 +144,12 @@ export default {
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
           language: this.selectedLanguage,
-          text: this.sentenceInput,
+          text,
         });
         this.sentences[id] = response.data;
-      } catch (e) {}
+      } catch (e) {
+        this.sentences[id].error = e;
+      }
     },
     toggle() {
       this.expanded = !this.expanded;
