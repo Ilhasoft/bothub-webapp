@@ -15,9 +15,8 @@ import RepositoryEvaluate from '@/views/repository/Evaluate';
 import RepositoryVersions from '@/views/repository/Versions';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
-import store from '../store';
-
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
+import store from '../store';
 
 
 Vue.use(Router);
