@@ -6,6 +6,7 @@ export default {
   async newExample(store, {
     repository, repositoryVersion, text, language, entities, intent,
   }) {
+    // eslint-disable-next-line
     const response = await example.new(repository, repositoryVersion, text, language, entities, intent);
     return response;
   },

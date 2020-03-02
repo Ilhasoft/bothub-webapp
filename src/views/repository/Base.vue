@@ -18,7 +18,7 @@ export default {
     ]),
     ...mapState({
       repositoryVersion: state => state.Repository.repositoryVersion,
-      repositoryUuid: state => state.Repository.selectedRepository.uuid
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
     }),
   },
   watch: {
@@ -38,16 +38,16 @@ export default {
     },
     repositoryUuid() {
       this.updateRepositoryVersion(
-        this.repository.version_default
-      )
-    }
+        this.repository.version_default,
+      );
+    },
   },
   async mounted() {
-    await this.updateRepository();  
-    if (!this.repositoryVersion) {      
+    await this.updateRepository();
+    if (!this.repositoryVersion) {
       this.updateRepositoryVersion(
-        this.repository.version_default
-      )
+        this.repository.version_default,
+      );
     }
   },
   provide() {
@@ -58,7 +58,7 @@ export default {
   methods: {
     ...mapActions([
       'setUpdateRepository',
-      'setRepositoryVersion'
+      'setRepositoryVersion',
     ]),
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
@@ -82,9 +82,9 @@ export default {
       this.setUpdateRepository(false);
       return this.repository;
     },
-    updateRepositoryVersion(version) {       
+    updateRepositoryVersion(version) {
       this.setRepositoryVersion({
-       version
+        version,
       });
     },
     onReady({ error }) {

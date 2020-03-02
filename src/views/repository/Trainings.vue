@@ -146,7 +146,7 @@ export default {
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();
       }
-      if (this.authenticated && this.repository.authorization.can_write) {  
+      if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
     },
@@ -173,7 +173,7 @@ export default {
       try {
         const response = await this.trainRepository({
           repositoryUuid,
-          repositoryVersion: this.repositoryVersion
+          repositoryVersion: this.repositoryVersion,
         });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;

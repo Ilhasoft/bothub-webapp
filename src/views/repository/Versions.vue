@@ -41,9 +41,21 @@
               sortable
               centered
               numeric>
+              <b-field v-if="isEdit.edit === true && isEdit.id === props.row.id">
+                <div class="versions__edit-input">
+                  <b-input
+                    v-model="isEdit.name"
+                    :value="isEdit.name"
+                    @keyup.enter.native="handleEditVersion(isEdit.name, props.row.id)"/>
+                  <b-icon
+                    icon="close"
+                    size="is-small"
+                    @click.native="isEdit.edit = false"/>
+                </div>
+              </b-field>
               <span
-                class="versions__table__version-number"
-                @click="handleVersion(props.row.id, props.row.name)">
+                v-else
+                class="versions__table__version-number">
                 {{ props.row.name }}
               </span>
             </b-table-column>
@@ -71,6 +83,9 @@
                   class="is-small"
                   rounded
                   @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
+                <b-icon
+                  icon="pencil"
+                  @click.native="onEditVersion({id: props.row.id, name: props.row.name})"/>
                 <b-icon
                   icon="delete"
                   @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
@@ -108,6 +123,7 @@ export default {
       currentPage: 1,
       perPage: 5,
       versions: [],
+      isEdit: {},
       isNewVersionModalActive: false,
       selectedVersion: null,
     };
@@ -121,17 +137,12 @@ export default {
       'setRepositoryVersion',
       'setDefaultVersion',
       'deleteVersion',
+      'editVersion',
     ]),
 
     async updateVersions() {
       const response = await this.getVersions(this.repository.uuid);
       this.data = response.data.results;
-    },
-    handleVersion(id, name) {
-      this.updateRepositoryVersion({
-        id,
-        name,
-      });
     },
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
@@ -144,14 +155,41 @@ export default {
           repositoryUuid: this.repository.uuid,
           id,
           name,
-        }).then(e => this.updateVersions()),
+        }).then(() => this.updateVersions()),
+      });
+    },
+    onEditVersion(version) {
+      const { id, name } = version;
+      this.isEdit = {
+        edit: true,
+        id,
+        name,
+      };
+    },
+    handleEditVersion(name, id) {
+      this.editVersion({
+        repositoryUuid: this.repository.uuid,
+        id,
+        name,
+      }).then(() => {
+        this.$buefy.toast.open({
+          message: 'Version was edited',
+          type: 'is-success',
+        });
+        this.isEdit = false;
+        this.updateVersions();
+      }).catch(() => {
+        this.$buefy.toast.open({
+          message: 'Something wrong ):',
+          type: 'is-danger',
+        });
       });
     },
     copyVersion(version) {
       this.selectedVersion = version;
       this.isNewVersionModalActive = true;
     },
-    onAddedVersion(version) {
+    onAddedVersion() {
       this.isNewVersionModalActive = false;
       this.$buefy.toast.open({
         message: 'Version was created',
@@ -159,8 +197,8 @@ export default {
       });
       this.updateVersions();
     },
-    onDeleteVersion(id, is_default) {
-      if (is_default) {
+    onDeleteVersion(id, isDefault) {
+      if (isDefault) {
         this.$buefy.toast.open({
           duration: 5000,
           message: 'You cannot delete the main branch',
@@ -175,7 +213,7 @@ export default {
           type: 'is-danger',
           hasIcon: true,
           onConfirm: () => this.deleteVersion(id)
-            .then(e => this.updateVersions()),
+            .then(() => this.updateVersions()),
         });
       }
     },
@@ -212,6 +250,16 @@ export default {
     &__button {
       font-weight: bold;
       margin: 0 1rem;
+    }
+  }
+
+  &__edit-input {
+    display: flex;
+    align-items: center;
+
+    span {
+      cursor: pointer;
+      margin-left: .5rem;
     }
   }
 
