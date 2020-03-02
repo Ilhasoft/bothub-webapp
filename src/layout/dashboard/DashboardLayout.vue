@@ -38,7 +38,8 @@
                 <b-dropdown
                   aria-role="list">
                   <b-icon
-                    slot="trigger"
+                    v-if="authenticated"
+                    :slot="authenticated ? 'trigger' : ''"
                     class="
                     dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
                     icon="chevron-down"/>
@@ -88,15 +89,26 @@
               size="medium"
               class="dashboard-layout__main-panel__header__right__user"/>
             <b-dropdown-item
+              v-if="!authenticated"
+              aria-role="listitem"
+              @click="openLoginModal()">Sign in</b-dropdown-item>
+            <b-dropdown-item
+              v-if="!authenticated"
+              aria-role="listitem"
+              @click="signUp()">Sign up</b-dropdown-item>
+            <b-dropdown-item
+              v-if="authenticated"
               aria-role="listitem"
               @click="routerHandle('myProfile')">{{ myProfile.name }}</b-dropdown-item>
             <b-dropdown-item
+              v-if="authenticated"
               aria-role="listitem"
               @click="openNewRepositoryModal()">Start your bot</b-dropdown-item>
             <b-dropdown-item
               aria-role="listitem"
               @click="routerHandle('home')">Exit Inteligence</b-dropdown-item>
             <b-dropdown-item
+              v-if="authenticated"
               aria-role="listitem"
               @click="logout()">Logout</b-dropdown-item>
           </b-dropdown>
@@ -136,11 +148,21 @@ export default {
     ...mapGetters([
       'getCurrentRepository',
       'myProfile',
+      'authenticated',
     ]),
   },
   watch: {
     getCurrentRepository() {
-      this.getAllVersions();
+      if (this.authenticated && this.getCurrentRepository) {
+        this.getAllVersions();
+      }
+    },
+    authenticated() {
+      if (this.authenticated && this.getCurrentRepository) {
+        this.getAllVersions();
+      } else {
+        this.allVersions = [];
+      }
     },
   },
   methods: {
@@ -148,6 +170,7 @@ export default {
       'logout',
       'getFirstFiveVersions',
       'setRepositoryVersion',
+      'openLoginModal',
     ]),
     colapseHandle() {
       this.colapse = !this.colapse;
@@ -171,6 +194,11 @@ export default {
       };
       this.setRepositoryVersion({
         version,
+      });
+    },
+    signUp() {
+      this.$router.push({
+        name: 'signUp',
       });
     },
   },
