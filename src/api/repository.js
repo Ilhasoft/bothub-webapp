@@ -81,6 +81,16 @@ export default {
       },
     );
   },
+  debugParse(repositoryUUID, repositoryVersion, language, text) {
+    return request.$http.post(
+      `/v2/repository/repository-info/${repositoryUUID}/debug_parse/`,
+      {
+        repository_version: repositoryVersion,
+        language,
+        text,
+      },
+    );
+  },
   async getEditSchema(repositoryUuid) {
     const { data } = await request.$http.options(`/v2/repository/repository-info/${repositoryUuid}/`);
     return data.actions.PUT;

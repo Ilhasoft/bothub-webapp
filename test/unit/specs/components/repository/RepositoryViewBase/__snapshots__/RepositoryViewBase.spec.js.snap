@@ -3,7 +3,7 @@
 exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <!---->
+    <quick-test-stub></quick-test-stub>
     <!---->
   </div>
   <div class="rpstr-vw-bs__loading">
@@ -17,7 +17,7 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
 exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <!---->
+    <quick-test-stub></quick-test-stub>
     <!---->
   </div>
   <div class="rpstr-vw-bs__loading">
@@ -31,7 +31,7 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
 exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <!---->
+    <quick-test-stub></quick-test-stub>
     <!---->
   </div>
   <div class="rpstr-vw-bs__loading">
@@ -45,7 +45,7 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <!---->
+    <quick-test-stub repository="<Repository #1>"></quick-test-stub>
     <!---->
   </div>
   <!---->
