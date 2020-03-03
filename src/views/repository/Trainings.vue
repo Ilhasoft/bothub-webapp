@@ -76,7 +76,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
@@ -87,6 +86,7 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import RepositoryBase from './Base';
 
 
 export default {

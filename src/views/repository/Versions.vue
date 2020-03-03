@@ -103,9 +103,9 @@
 
 <script>
 import { mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
+import RepositoryBase from './Base';
 
 
 export default {
