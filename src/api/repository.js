@@ -3,7 +3,6 @@ import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
-
 export default {
 
   async getNewSchema() {
@@ -13,8 +12,20 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
-  getVersions(repositoryUUID) {
-    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
+  getVersions(limit, query) {
+    return new utils.Page('/v2/repository/version/', limit, query);
+  },
+  searchLogs(repositoryUUID, query, limit) {
+    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
+  },
+  makeVersionDefault(repositoryUUID, versionUUID) {
+    return request.$http.patch(
+      `/v2/repository/version/${versionUUID}/`,
+      {
+        id: versionUUID,
+        repository: repositoryUUID,
+      },
+    );
   },
   addNewVersion(repositoryUUID, versionUUID, name) {
     return request.$http.post(

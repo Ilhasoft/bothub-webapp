@@ -17,8 +17,9 @@
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
                 <p><strong>Select the language to run the test</strong></p>
-                <bh-select
-                  v-model="currentLanguage">
+                <b-select
+                  v-model="currentLanguage"
+                  expanded>
                   <option
                     v-for="language in languages"
                     :key="language.id"
@@ -26,7 +27,7 @@
                     :value="language.value">
                     {{ language.title }}
                   </option>
-                </bh-select>
+                </b-select>
               </div>
               <bh-button
                 ref="runNewTestButton"
@@ -38,27 +39,12 @@
               <slot v-if="!evaluating">Run test</slot></bh-button>
             </div>
           </div>
-          <div class="evaluate__navigation">
-            <a
-              v-for="(name, i) in links"
-              :key="i"
-              :class="{'active': i === currentTab}"
-              @click="setCurrentTab(i)">{{ name }}</a>
-          </div>
+          <div class="evaluate__divider" />
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
-              v-if="currentTab === 0"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"
               @deleted="updateRepository(true)"/>
-            <base-evaluate-results
-              v-else-if="currentTab === 1"
-              :result-id="resultId"
-              :repository="repository"
-              :filter-by-language="currentLanguage" />
-            <base-evaluate-versions
-              v-else
-              :repository="repository" />
           </div>
         </div>
         <div
@@ -110,9 +96,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      initialTab: 0,
       currentLanguage: '',
-      links: ['Sentences', 'Results', 'Versions'],
       languages: [],
       evaluating: false,
       error: {},
@@ -121,7 +105,6 @@ export default {
   computed: {
     ...mapState({
       resultId: state => state.Repository.evaluateResultId,
-      currentTab: state => state.Repository.currentTabSelected,
       selectedRepository: state => state.Repository.selectedRepository,
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
@@ -140,19 +123,12 @@ export default {
       }
     },
   },
-  mounted() {
-    this.updateCurrentTab(this.initialTab);
-  },
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'updateCurrentTab',
       'getEvaluateExample',
       'runNewEvaluate',
     ]),
-    setCurrentTab(value) {
-      this.updateCurrentTab(value);
-    },
     getExamples() {
       this.getEvaluateExample({
         id: this.selectedRepository.uuid,
@@ -199,6 +175,12 @@ export default {
 
 
 .evaluate {
+  &__divider {
+    height: 1px;
+    background-color: #d5d5d5;
+    margin: 2.5rem 0 0 0;
+  }
+
   &__navigation {
     display: flex;
     justify-content: center;
@@ -246,9 +228,7 @@ export default {
   }
 
   &__content-header {
-    max-width: 45vw;
-    margin: 0 auto;
-    text-align: center;
+    text-align: left;
 
     &__buttons {
       margin: 2rem 1rem;
