@@ -39,7 +39,9 @@
                   @click="debug(sentence)"> Debug </b-button>
                 <b-button
                   class="quick-test__message__button"
-                  icon-left="file-document-outline"> Raw </b-button>
+                  icon-left="file-document-outline"
+                  @click="showRawInfo(sentence)"> Raw
+                </b-button>
               </div>
             </div>
           </div>
@@ -86,6 +88,7 @@
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
+import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
 
 export default {
@@ -158,6 +161,16 @@ export default {
     },
     setLanguage(language) {
       this.selectedLanguage = language;
+    },
+    showRawInfo(sentence) {
+      const { id, ...info } = sentence;
+      this.$buefy.modal.open({
+        props: { info },
+        parent: this,
+        component: RawInfo,
+        hasModalCard: false,
+        trapFocus: true,
+      });
     },
     debug(sentence) {
       this.$buefy.modal.open({

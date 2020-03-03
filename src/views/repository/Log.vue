@@ -99,11 +99,11 @@
 
 <script>
 import { mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
+import RepositoryBase from './Base';
 
 export default {
   name: 'RepositoryLog',
