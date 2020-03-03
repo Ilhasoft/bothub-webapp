@@ -30,7 +30,7 @@
               <p class="quick-test__message__subtext">
                 <span class="quick-test__message__subtext__dot"/>
                 <span> <strong>Intent: </strong>
-                  {{ sentence.intent.name }}({{ sentence.intent.relevance * 100 }}%) </span>
+                  {{ sentence.intent.name }} ({{ sentence.intent.confidence | percent }}) </span>
               </p>
               <div class="field is-grouped is-grouped-centered">
                 <b-button
@@ -129,7 +129,7 @@ export default {
     },
     async sendMessage() {
       if (this.sentenceInput === '' || !this.selectedLanguage) return;
-      const id = this.sentences.length;
+      const id = Date.now();
       this.sentences.push({
         id,
         text: this.sentenceInput,
@@ -146,9 +146,11 @@ export default {
           language: this.selectedLanguage,
           text,
         });
-        this.sentences[id] = response.data;
+        const index = this.sentences.findIndex(entry => entry.id === id);
+        this.$set(this.sentences, index, { id, ...response.data });
       } catch (e) {
-        this.sentences[id].error = e;
+        const index = this.sentences.findIndex(entry => entry.id === id);
+        this.sentences[index].error = e;
       }
     },
     toggle() {
@@ -162,8 +164,8 @@ export default {
         parent: this,
         component: RepositoryDebug,
         props: {
-          repositoryUUID: this.repositoryUUID,
-          version: sentence.version,
+          repositoryUUID: this.repository.uuid,
+          version: sentence.repository_version,
           language: sentence.language,
           text: sentence.text,
         },
