@@ -2,7 +2,7 @@
 
 exports[`ExampleSearchInput.vue renders correctly 1`] = `
 <form>
-  <bh-text-stub debounce="750" value="" formatters="">
+  <bh-text-stub value="" formatters="" debounce="750">
     <div>
       <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
     </div>

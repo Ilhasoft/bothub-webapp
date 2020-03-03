@@ -6,7 +6,7 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
     <language-select-stub value="en" exclude=""></language-select-stub>
   </b-field-stub>
   <b-field-stub label="Message" addons="true">
-    <b-input-stub usehtml5validation="true" value="" type="textarea" hascounter="true" customclass=""></b-input-stub>
+    <b-input-stub value="" type="textarea" hascounter="true" customclass=""></b-input-stub>
   </b-field-stub>
   <b-tabs-stub value="0" animated="true">
     <b-tab-item-stub label="cURL" visible="true">
