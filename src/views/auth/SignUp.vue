@@ -1,9 +1,9 @@
 <template>
   <div class="sign-up">
     <nav class="sign-up__nav">
-      <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <div class="sign-up__nav__container">
         <router-link
-          class="bh-grid__item sign-up__nav__logo"
+          class="column sign-up__nav__logo"
           to="/">
           <img
             src="@/assets/imgs/logo.svg"
@@ -11,21 +11,20 @@
         </router-link>
         <div class="sign-up__nav__login">
           <span class="sign-up__nav__text">Already have an account?</span>
-          <bh-button
-            class="sign-up__nav__login__button"
-            primary
+          <b-button
+            class="is-primary sign-up__nav__login__button"
             size="normal"
-            @click="openLoginModal()">Sign in</bh-button>
+            @click="openLoginModal()">Sign in</b-button>
         </div>
       </div>
     </nav>
-    <section class="bh-grid bh-grid--half sign-up__wrapper-content">
-      <div class="bh-grid__item sign-up__wrapper-content__image">
+    <section class="columns is-variable is-3 sign-up__wrapper-content">
+      <div class="column is-half sign-up__wrapper-content__image">
         <img
           src="@/assets/imgs/computer-bot.png"
           alt="avatar" >
       </div>
-      <div class="bh-grid__item sign-up__wrapper-content__form">
+      <div class="column sign-up__wrapper-content__form">
         <div class="sign-up__wrapper-content__form__title">
           <h1>Get started free</h1>
         </div>
@@ -39,11 +38,13 @@
             class="field" />
           <div class="field">
             <div class="control has-text-centered">
-              <bh-button
+              <b-button
                 :disabled="submitting"
-                type="submit"
+                expanded
+                class="is-info"
+                native-type="submit"
                 full-width
-                color="info">Get free</bh-button>
+                color="info">Get free</b-button>
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
@@ -144,8 +145,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
 
 $width: 1085px;
@@ -157,6 +158,13 @@ $width: 1085px;
     &__nav {
       padding: .25rem 1rem;
       background-color: $color-white;
+
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem;
+        margin: 0.5rem;
+      }
 
       &__login {
         align-self: center;
@@ -187,6 +195,7 @@ $width: 1085px;
     &__wrapper-content {
       max-width: $max-width;
       margin: 15vh auto;
+      padding: 0.25rem;
       position: relative;
       height: 100%;
 

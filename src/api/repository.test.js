@@ -2,11 +2,11 @@
 /* eslint-disable no-console, import/first */
 jest.mock('./request');
 
-import repository from './repository';
 
 import store from '@/store';
 import TYPES from '@/store/types';
 import { ROLE_CONTRIBUTOR } from '@/utils';
+import repository from './repository';
 
 
 describe('api/repository', () => {

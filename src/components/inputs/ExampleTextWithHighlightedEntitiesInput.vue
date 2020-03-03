@@ -99,15 +99,20 @@ export default {
   },
   methods: {
     emitTextSelected() {
-      const { selectionStart, selectionEnd } = this.$refs.input;
-      this.selectionStart = selectionStart;
-      this.selectionEnd = selectionEnd;
+      const { value, selectionStart, selectionEnd } = this.$refs.input;
+      const selected = value.slice(selectionStart, selectionEnd);
+
+      const startPadding = selected.search(/\S|$/);
+      const endPadding = selected.length - selected.trim().length - startPadding;
+
+      this.selectionStart = selectionStart + startPadding;
+      this.selectionEnd = selectionEnd - endPadding;
 
       this.$emit(
         'textSelected',
-        selectionStart === selectionEnd
+        this.selectionStart === this.selectionEnd
           ? null
-          : { start: selectionStart, end: selectionEnd },
+          : { start: this.selectionStart, end: this.selectionEnd },
       );
     },
     clearSelected() {

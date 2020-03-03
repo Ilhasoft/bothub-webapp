@@ -30,9 +30,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryBase from './Base';
 import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import TranslationsList from '@/components/translate/TranslationsList';
+import RepositoryBase from './Base';
 
 
 export default {

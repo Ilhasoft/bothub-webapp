@@ -122,11 +122,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
 import Loading from '@/components/shared/Loading';
-
+import RepositoryBase from './Base';
 
 export default {
   name: 'RepositoryVersions',

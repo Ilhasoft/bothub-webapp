@@ -77,11 +77,11 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
-import RepositoryBase from './Base';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
+import RepositoryBase from './Base';
 
 
 export default {
