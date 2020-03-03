@@ -10,8 +10,8 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
-  getVersions(store, repositoryUUID) {
-    return repository.getVersions(repositoryUUID);
+  getVersions(store, { limit, query }) {
+    return repository.getVersions(limit, query);
   },
   getFirstFiveVersions(store, repositoryUuid) {
     return repository.getFirstFiveVersions(repositoryUuid);
@@ -43,6 +43,9 @@ export default {
   trainRepository(store, { repositoryUuid, repositoryVersion }) {
     /* istanbul ignore next */
     return repository.train(repositoryUuid, repositoryVersion);
+  },
+  searchLogs(store, { repositoryUUID, query, limit }) {
+    return repository.searchLogs(repositoryUUID, query, limit);
   },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
@@ -135,9 +138,6 @@ export default {
   },
   setEvaluateLanguage({ commit }, payload) {
     commit('updateEvaluateLanguage', payload);
-  },
-  updateCurrentTab({ commit }, tab) {
-    commit('updateCurrentTab', tab);
   },
   setRepository({ commit }, payload) {
     commit('setRepository', payload);

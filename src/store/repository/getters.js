@@ -8,9 +8,6 @@ export default {
   getEvaluateResultId(state) {
     return state.evaluateResultId;
   },
-  getCurrentTab(state) {
-    return state.currentTabSelected;
-  },
   getCurrentRepository(state) {
     return state.selectedRepository;
   },

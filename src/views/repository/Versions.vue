@@ -25,19 +25,25 @@
         </div>
         <p> Add, edit and choose versions of your bot intelligence. </p>
       </div>
-      <section>
+      <loading v-if="loadingList" />
+      <section v-else>
         <b-table
-          :data="data"
+          v-if="versionsList"
+          :data="versionsList.items"
           :paginated="isPaginated"
+          :backend-pagination="true"
+          :total="versionsList.total"
           :per-page="perPage"
           :current-page.sync="currentPage"
           :pagination-simple="isPaginationSimple"
+          backend-sorting
+          @sort="sort"
         >
           <template slot-scope="props">
             <b-table-column
-              field="id"
+              field="name"
               label="version"
-              width="40"
+              width="80"
               sortable
               centered
               numeric>
@@ -61,13 +67,6 @@
             </b-table-column>
             <b-table-column
               centered
-              field="last_update"
-              label="Last update"
-              sortable >
-              {{ props.row.last_update | moment('from') }}
-            </b-table-column>
-            <b-table-column
-              centered
               field="created_at"
               label="Date Created"
               sortable >
@@ -75,21 +74,41 @@
             </b-table-column>
             <b-table-column
               centered
+              field="last_update"
+              label="Last Modified"
+              sortable>
+              {{ props.row.last_update | moment('from') }}
+            </b-table-column>
+            <b-table-column
+              centered
+              field="created_by"
+              label="Created by"
+              sortable>
+              {{ props.row.created_by }}
+            </b-table-column>
+            <b-table-column
+              centered
               width="180"
-              label="">
+              field="is_default"
+              label=""
+              sortable>
               <div class="versions__table__buttons-wrapper">
                 <b-button
                   :type="props.row.is_default ? 'is-primary': 'is-light'"
+                  :disabled="!repository.authorization.can_contribute"
                   class="is-small"
                   rounded
                   @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="pencil"
                   @click.native="onEditVersion({id: props.row.id, name: props.row.name})"/>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="delete"
                   @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
                 <b-icon
+                  v-if="repository.authorization.can_contribute"
                   icon="content-copy"
                   @click.native="copyVersion(props.row)"/>
               </div>
@@ -105,32 +124,59 @@
 import { mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
+import Loading from '@/components/shared/Loading';
 import RepositoryBase from './Base';
-
 
 export default {
   name: 'RepositoryVersions',
   components: {
     RepositoryViewBase,
     RepositoryHandleVersionModal,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
     return {
-      data: [],
       isPaginated: true,
       isPaginationSimple: false,
       currentPage: 1,
       perPage: 5,
-      versions: [],
+      versionsList: null,
       isEdit: {},
       isNewVersionModalActive: false,
       selectedVersion: null,
+      orderField: 'is_default',
+      asc: false,
+      currentEditVersion: null,
+      editName: null,
+      loadingEdit: false,
+      loadingList: false,
     };
   },
-  mounted() {
-    this.updateVersions();
+  computed: {
+    repositoryUUID() {
+      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      return this.repository.uuid;
+    },
+    query() {
+      return {
+        repository: this.repositoryUUID,
+        ordering: `${this.asc ? '+' : '-'}${this.orderField}`,
+      };
+    },
   },
+  watch: {
+    query() {
+      this.updateParams();
+    },
+    currentPage() {
+      this.updateVersions();
+    },
+    repositoryUUID() {
+      this.updateParams();
+    },
+  },
+
   methods: {
     ...mapActions([
       'getVersions',
@@ -139,10 +185,29 @@ export default {
       'deleteVersion',
       'editVersion',
     ]),
-
+    sort(orderField, asc) {
+      this.orderField = orderField;
+      this.asc = asc === 'asc';
+      this.updateVersions();
+    },
+    async updateParams() {
+      if (!this.repositoryUUID) { return; }
+      const response = await this.getVersions({
+        limit: this.perPage,
+        query: this.query,
+      });
+      this.versionsList = response;
+      this.updateVersions();
+    },
     async updateVersions() {
-      const response = await this.getVersions(this.repository.uuid);
-      this.data = response.data.results;
+      this.loadingList = true;
+      try {
+        await this.versionsList.updateItems(this.currentPage);
+        this.loadingList = false;
+      } catch (e) {
+        this.loadingList = false;
+        this.showError(e);
+      }
     },
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
@@ -232,6 +297,10 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/variables.scss';
+
+.icon {
+  pointer-events: initial !important;
+}
 
 .versions {
   margin: auto;
