@@ -2,55 +2,58 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div v-if="repository">
-      <div v-if="authenticated">
-        <div
-          v-if="repository.authorization.can_write"
-          class="bh-grid bh-grid--column">
-          <div class="bh-grid__item">
-            <h1>Edit Repository</h1>
-            <edit-repository-form
-              :owner-nickname="repository.owner__nickname"
-              :slug="repository.slug"
-              :initial-data="getEditInitialData()"
-              @edited="onEdited($event)" />
+    <div class="settings">
+      <div v-if="repository">
+        <div v-if="authenticated">
+          <div
+            v-if="repository.authorization.can_write">
+            <div class="tile is-vertical">
+              <h1>Edit Repository</h1>
+              <edit-repository-form
+                :owner-nickname="repository.owner__nickname"
+                :slug="repository.slug"
+                :initial-data="getEditInitialData()"
+                @edited="onEdited($event)" />
+            </div>
+            <div class="tile is-vertical">
+              <h1>Manage your team</h1>
+              <set-authorization-role-form
+                ref="setAuthorizationRoleForm"
+                :repository-uuid="repository.uuid"
+                @roleSetted="onRoleSetted()" />
+              <authorizations-list
+                ref="authorizationsList"
+                :repository-uuid="repository.uuid"
+                @edit="onEditRole($event)" />
+            </div>
+            <div class="tile is-vertical">
+              <h1>Authorization Requests</h1>
+              <authorization-requests-list
+                :repository-uuid="repository.uuid"
+                @review="onReviewAuthorizationRequest()" />
+            </div>
           </div>
-          <div class="bh-grid__item">
-            <h1>Manage your team</h1>
-            <set-authorization-role-form
-              ref="setAuthorizationRoleForm"
-              :repository-uuid="repository.uuid"
-              @roleSetted="onRoleSetted()" />
-            <authorizations-list
-              ref="authorizationsList"
-              :repository-uuid="repository.uuid"
-              @edit="onEditRole($event)" />
-          </div>
-          <div class="bh-grid__item">
-            <h1>Authorization Requests</h1>
-            <authorization-requests-list
-              :repository-uuid="repository.uuid"
-              @review="onReviewAuthorizationRequest()" />
-          </div>
-        </div>
-        <div
-          v-else
-          class="bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              You can not edit this repository
+          <div
+            v-else>
+            <div class="tile is-vertical">
+              <b-notification
+                :closable="false"
+                type="is-warning">
+                You cannot edit this repository
+              </b-notification>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            Sign in to your account to edit this repository.
+        <div
+          v-else>
+          <div class="tile is-vertical">
+            <b-notification
+              :closable="false"
+              type="is-info">
+              Sign in to your account to edit this repository.
+            </b-notification>
+            <login-form hide-forgot-password />
           </div>
-          <login-form hide-forgot-password />
         </div>
       </div>
     </div>
@@ -121,9 +124,9 @@ export default {
           },
         });
       }
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: 'Repository edited!',
-        type: 'success',
+        type: 'is-success',
       });
     },
     onRoleSetted() {
@@ -135,3 +138,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+  @import '~@/assets/scss/utilities.scss';
+
+    .settings {
+      @include default-margin
+    }
+
+</style>
