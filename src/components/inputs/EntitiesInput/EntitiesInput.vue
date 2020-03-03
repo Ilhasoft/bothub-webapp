@@ -39,10 +39,10 @@
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
 import { generateTemporaryId } from '@/utils';
-import EntityForm from './EntityForm';
 import Vue from 'vue';
 import { mapActions } from 'vuex';
 import _ from 'lodash';
+import EntityForm from './EntityForm';
 
 export default {
   name: 'EntitiesInput',
