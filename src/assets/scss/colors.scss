@@ -1,0 +1,53 @@
+$color-white: #fff;
+$color-fake-white: #F5F5F5;
+$color-fake-black: #212121;
+
+$color-grey-light: #EAEAEA;
+$color-grey: #D5D5D5;
+$color-grey-dark: #9E9E9E;
+$color-grey-darker: #5D5D5D;
+
+
+$color-primary-darker: #048172;
+$color-primary-dark: #12A391;
+$color-primary: #2BBFAC;
+$color-primary-light: #3DDDC8;
+$color-primary-inverted: $color-fake-white;
+
+$color-secondary-darker: #2C2B39;
+$color-secondary: #312B53;
+$color-secondary-light: #4E4871;
+$color-secondary-inverted: $color-fake-white;
+
+$color-danger: #F44336;
+$color-info: #209CEE;
+$color-warning: #FFBC20;
+$color-success: #00C853;
+
+$colors: (
+  ('white', $color-white, $color-fake-black),
+  ('fake-white', $color-fake-white, $color-fake-black),
+  ('fake-black', $color-fake-black, $color-fake-white),
+  ('grey-light', $color-grey-light, $color-fake-black),
+  ('grey', $color-grey, $color-fake-black),
+  ('grey-dark', $color-grey-dark, $color-fake-white),
+  ('grey-darker', $color-grey-darker, $color-fake-white),
+  ('primary-darker', $color-primary-darker, $color-fake-white),
+  ('primary-dark', $color-primary-dark, $color-fake-white),
+  ('primary', $color-primary, $color-fake-white),
+  ('primary-light', $color-primary-light, $color-fake-white),
+  ('secondary-darker', $color-secondary-darker, $color-fake-white),
+  ('secondary', $color-secondary, $color-fake-white),
+  ('secondary-light', $color-secondary-light, $color-fake-white),
+  ('danger', $color-danger, $color-fake-white),
+  ('info', $color-info, $color-fake-white),
+  ('warning', $color-warning, $color-fake-black),
+  ('success', $color-success, $color-fake-white),
+);
+
+$notification-colors: (
+  ('danger', $color-danger, $color-fake-white),
+  ('info', $color-info, $color-fake-white),
+  ('warning', $color-warning, $color-fake-black),
+  ('success', $color-success, $color-fake-white),
+);
