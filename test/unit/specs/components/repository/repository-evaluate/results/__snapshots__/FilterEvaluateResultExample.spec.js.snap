@@ -3,7 +3,7 @@
 exports[`FilterEvaluateResultExample.vue renders 1`] = `
 <div class="filter-evaluate-example bh-grid">
   <bh-field-stub errors="" class="bh-grid__item bh-grid__item--grow-3">
-    <bh-text-stub value="" formatters="" debounce="2">
+    <bh-text-stub debounce="2" value="" formatters="">
       <div>
         <bh-icon-button-stub type="submit" value="magnify" size="small"></bh-icon-button-stub>
       </div>
@@ -11,13 +11,13 @@ exports[`FilterEvaluateResultExample.vue renders 1`] = `
   </bh-field-stub>
   <div class="bh-grid__item filter-evaluate-example__text"><span>Filter by:</span></div>
   <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intents"></bh-autocomplete-stub>
+    <bh-autocomplete-stub debounce="0" value="" formatters="inputFormatters" data="" placeholder="All Intents"></bh-autocomplete-stub>
   </bh-field-stub>
   <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All labels"></bh-autocomplete-stub>
+    <bh-autocomplete-stub debounce="0" value="" formatters="inputFormatters" data="" placeholder="All labels"></bh-autocomplete-stub>
   </bh-field-stub>
   <bh-field-stub errors="" class="bh-grid__item">
-    <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
+    <bh-autocomplete-stub debounce="0" value="" formatters="inputFormatters" data="" placeholder="All entities"></bh-autocomplete-stub>
   </bh-field-stub>
 </div>
 `;

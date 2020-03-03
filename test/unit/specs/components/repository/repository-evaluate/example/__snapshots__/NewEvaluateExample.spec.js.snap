@@ -12,12 +12,12 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
       <div class="new-sentence__form__wrapper">
         <div>
           <bh-field-stub errors="">
-            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="normal" placeholder="Enter your sentence here"></example-text-with-highlighted-entities-input-stub>
+            <example-text-with-highlighted-entities-input-stub debounce="0" value="" size="normal" formatters="textFormatters" entities="" availableentities="" placeholder="Enter your sentence here"></example-text-with-highlighted-entities-input-stub>
           </bh-field-stub>
         </div>
         <div>
           <bh-field-stub errors="">
-            <bh-autocomplete-stub data="affirm,cuisine,greet" formatters="intentFormatters" size="normal" placeholder="Intent"></bh-autocomplete-stub>
+            <bh-autocomplete-stub debounce="0" value="" size="normal" formatters="intentFormatters" data="affirm,cuisine,greet" placeholder="Intent"></bh-autocomplete-stub>
           </bh-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">

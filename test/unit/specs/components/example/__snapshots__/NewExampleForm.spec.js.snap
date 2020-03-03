@@ -5,14 +5,14 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column is-three-fifths">
       <bh-field-stub errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="normal" placeholder="Add a sentence">
-          <language-append-select-input-stub class="language-append" slot="append"></language-append-select-input-stub>
+        <example-text-with-highlighted-entities-input-stub debounce="0" value="" size="normal" formatters="textFormatters" entities="" availableentities="" placeholder="Add a sentence">
+          <language-append-select-input-stub class="language-append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>
     <div class="column">
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="intentFormatters" size="normal" placeholder="Intent"></bh-autocomplete-stub>
+        <bh-autocomplete-stub debounce="0" value="" size="normal" formatters="intentFormatters" data="" placeholder="Intent"></bh-autocomplete-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">

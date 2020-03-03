@@ -4,7 +4,7 @@ exports[`TestView.vue renders correctly 1`] = `
 <div class="filter-evaluate-example">
   <div class="filter-evaluate-example__filters">
     <bh-field-stub errors="" class="filter-evaluate-example__filters__input-text">
-      <bh-text-stub value="" formatters="" debounce="750">
+      <bh-text-stub debounce="750" value="" formatters="">
         <div>
           <bh-icon-button-stub type="submit" value="magnify" size="medium"></bh-icon-button-stub>
         </div>
@@ -12,10 +12,10 @@ exports[`TestView.vue renders correctly 1`] = `
     </bh-field-stub>
     <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intents"></bh-autocomplete-stub>
+        <bh-autocomplete-stub debounce="0" value="" formatters="inputFormatters" data="" placeholder="All Intents"></bh-autocomplete-stub>
       </bh-field-stub>
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
+        <bh-autocomplete-stub debounce="0" value="" formatters="inputFormatters" data="" placeholder="All entities"></bh-autocomplete-stub>
       </bh-field-stub>
     </div>
   </div>

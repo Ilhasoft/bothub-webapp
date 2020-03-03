@@ -32,13 +32,17 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       <h5 class="graphics-results__title">
         Intent report
       </h5>
-      <!----> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+      <div class="graphics-results__charts__loading">
+        <bh-loading-stub></bh-loading-stub>
+      </div> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
     </div>
     <div>
       <h5 class="graphics-results__title">
         Entities
       </h5>
-      <!----> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+      <div class="graphics-results__charts__loading">
+        <bh-loading-stub></bh-loading-stub>
+      </div> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
     </div>
   </div>
   <div>
@@ -53,11 +57,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </p>
     </div>
     <div class="graphics-results__charts">
-      <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
-      </div>
-      <!---->
-    </div>
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1"></div>
   </div>
   <div>
     <div class="graphics-results__info">
@@ -77,11 +77,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </p>
     </div>
     <div class="graphics-results__charts">
-      <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
-      </div>
-      <!---->
-    </div>
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2"></div>
   </div>
 </div>
 `;
