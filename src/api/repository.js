@@ -5,6 +5,7 @@ import utils from './utils';
 
 
 export default {
+
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
@@ -12,23 +13,58 @@ export default {
   getAll() {
     return new utils.List('/repository/repositories/');
   },
+  getVersions(repositoryUUID) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUUID}`);
+  },
+  addNewVersion(repositoryUUID, versionUUID, name) {
+    return request.$http.post(
+      '/v2/repository/version/',
+      {
+        id: versionUUID,
+        name,
+        repository: repositoryUUID,
+      },
+    );
+  },
+  getFirstFiveVersions(repositoryUuid) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+  },
+  setDefaultVersion(repositoryUuid, id) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        repository: repositoryUuid,
+        id,
+        is_default: true,
+      });
+  },
+  deleteVersion(id) {
+    return request.$http.delete(`/v2/repository/version/${id}/`);
+  },
   search(query) {
     const queryString = qs.stringify(query);
     return new utils.List(`/v2/repository/repositories/?${queryString}`);
   },
+  editVersion(repository, id, name) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        name,
+        repository,
+      });
+  },
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
-  train(repositoryUUID) {
+  train(repositoryUUID, repositoryVersion) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/train/`,
-      {},
+      { repository_version: repositoryVersion },
     );
   },
-  analyze(repositoryUUID, language, text) {
+  analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
       {
+        repository_version: repositoryVersion,
         language,
         text,
       },

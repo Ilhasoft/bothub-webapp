@@ -91,11 +91,11 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
-import RepositoryBase from './Base';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -123,6 +123,7 @@ export default {
       resultId: state => state.Repository.evaluateResultId,
       currentTab: state => state.Repository.currentTabSelected,
       selectedRepository: state => state.Repository.selectedRepository,
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     ...mapGetters([
       'getEvaluateLanguage',
@@ -148,7 +149,6 @@ export default {
       'updateCurrentTab',
       'getEvaluateExample',
       'runNewEvaluate',
-      'setUpdateEvaluateResultId',
     ]),
     setCurrentTab(value) {
       this.updateCurrentTab(value);

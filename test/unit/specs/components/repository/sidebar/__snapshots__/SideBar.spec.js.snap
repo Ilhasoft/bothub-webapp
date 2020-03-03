@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar.vue renders correctly 1`] = `
+<div class="sidebar">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper__colapse-button">
+      <b-icon-stub icon="arrow-right"></b-icon-stub>
+    </div>
+    <b-menu-stub>
+      <div class="menu-header"><img src="~@/assets/imgs/logo.svg" alt="bothub"></div>
+      <b-menu-list-stub ariarole="">
+        <b-menu-item-stub label="Summary" icon="home" animation="fade" tag="router-link" ariarole="" to="[object Object]" size="is-medium"></b-menu-item-stub>
+        <b-menu-item-stub label="Training" icon="refresh" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="wechat" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="Sentences" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="Results" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="Versions" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub label="Translation" icon="translate" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="Integration" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="settings" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="Settings" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="Versions" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+      </b-menu-list-stub>
+    </b-menu-stub>
+    <div></div>
+  </div>
+</div>
+`;

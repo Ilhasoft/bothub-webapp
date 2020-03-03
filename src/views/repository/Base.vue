@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters, mapActions, mapState } from 'vuex';
 import Repository from '@/models/repository';
 
 
@@ -16,6 +16,10 @@ export default {
       'authenticated',
       'getUpdateRepositoryState',
     ]),
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+      repositoryUuid: state => state.Repository.selectedRepository.uuid,
+    }),
   },
   watch: {
     $route() {
@@ -29,9 +33,22 @@ export default {
         this.updateRepository(true);
       }
     },
+    repositoryVersion() {
+      this.updateRepository(true);
+    },
+    repositoryUuid() {
+      this.updateRepositoryVersion(
+        this.repository.version_default,
+      );
+    },
   },
-  mounted() {
-    this.updateRepository();
+  async mounted() {
+    await this.updateRepository();
+    if (!this.repositoryVersion) {
+      this.updateRepositoryVersion(
+        this.repository.version_default,
+      );
+    }
   },
   provide() {
     return {
@@ -41,6 +58,7 @@ export default {
   methods: {
     ...mapActions([
       'setUpdateRepository',
+      'setRepositoryVersion',
     ]),
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
@@ -63,6 +81,11 @@ export default {
       await this.repository.fetch();
       this.setUpdateRepository(false);
       return this.repository;
+    },
+    updateRepositoryVersion(version) {
+      this.setRepositoryVersion({
+        version,
+      });
     },
     onReady({ error }) {
       if (error) {

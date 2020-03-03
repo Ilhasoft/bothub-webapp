@@ -62,7 +62,6 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryBase from './Base';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
@@ -70,6 +69,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
 import LoginForm from '@/components/auth/LoginForm';
+import RepositoryBase from './Base';
 
 
 export default {

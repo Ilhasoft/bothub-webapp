@@ -40,6 +40,7 @@ export default {
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {
@@ -58,6 +59,7 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = this.$api.examples.search(
           this.repository.uuid,
+          this.repositoryVersion,
           this.query,
         );
       }
