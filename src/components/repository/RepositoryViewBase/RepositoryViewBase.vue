@@ -49,9 +49,9 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-import RepositoryNavigation from './RepositoryNavigation';
 import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
 import SideBarNavigation from '@/components/shared/SideBar';
+import RepositoryNavigation from './RepositoryNavigation';
 
 
 const ERROR_VERBOSE_LOOKUP = {

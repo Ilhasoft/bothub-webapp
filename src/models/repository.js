@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
-import ModelBase from './base';
 import store from '@/store';
+import ModelBase from './base';
 
 
 class Repository extends ModelBase {
