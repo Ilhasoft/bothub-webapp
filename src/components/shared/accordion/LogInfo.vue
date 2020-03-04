@@ -83,6 +83,7 @@ export default {
 .repository-log-info {
   &__button {
     margin-right: 0.5rem;
+    color: #707070;
   }
 }
 
