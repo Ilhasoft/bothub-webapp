@@ -2,14 +2,14 @@
   <div class="sidebar">
     <div :class="colapse ? 'sidebar-wrapper' : 'sidebar-wrapper--colapsed'">
       <div
-        v-if="colapse"
-        ref="colapseButton"
-        class="sidebar-wrapper__colapse-button"
+        class="sidebar-wrapper__collapse-button"
         @click="colapseHandle()">
-        <b-icon icon="arrow-right"/>
+        <b-icon :icon="colapse ? 'chevron-left' : 'chevron-right'" />
       </div>
       <b-menu v-if="colapse">
-        <div class="menu-header">
+        <div
+          class="menu-header"
+          @click="routerHandle('home')">
           <img
             src="~@/assets/imgs/logo.svg"
             alt="bothub">
@@ -93,13 +93,11 @@
       <div
         v-else
         class="icon-list-wrapper">
-        <div
-          v-if="!colapse"
-          class="colapse-button icon-list"
-          @click="colapseHandle()">
-          <b-icon
-            icon="arrow-right-bold"/>
-        </div>
+        <bh-icon
+          value="botinho"
+          size="large"
+          class="icon-list"
+          @click="routerHandle('home')" />
         <b-icon
           class="icon-list"
           icon="home"
@@ -168,6 +166,8 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/scss/utilities.scss';
+
 .icon-list-wrapper {
   text-align: center;
 }
@@ -179,6 +179,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: white;
+  cursor: pointer;
 
   img {
     height: 1.5rem;
@@ -195,9 +196,22 @@ export default {
   .sidebar-wrapper {
     background: #2F343D;
     height: 100%;
-    padding: 1rem;
-    width: 260px;
+    // padding: 1rem;
+    width: $menu-expanded-size + $menu-padding;
     transition: width .1s;
+
+    &__collapse-button {
+      border-radius: 50%;
+      color: white;
+      background-color: #9E9E9E;;
+      width: $menu-collapse-button-size;
+      height: $menu-collapse_button-size;
+      position: absolute;
+      top: 2rem;
+      right: -$menu-collapse_button-size/2;
+      z-index: 2;
+      cursor: pointer;
+    }
 
   &__colapse-button {
     background: #696968;;
@@ -221,7 +235,7 @@ export default {
       background: #2F343D;
       height: 100%;
       padding: 1rem;
-      width: 60px;
+      width: $menu-collapsed-size + $menu-padding;
       color: #FFFFFF;
     }
   }

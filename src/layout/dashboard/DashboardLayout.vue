@@ -205,10 +205,12 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/scss/utilities.scss';
+
 .dashboard-layout {
 
   &__main-panel {
-    width: calc( 100% - 260px);
+    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding} - #{$menu-space});
     position: relative;
     float: right;
 
@@ -307,7 +309,7 @@ export default {
     &--colapsed {
        position: relative;
        float: right;
-       width: calc( 100% - 60px);
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});
     }
   }
 }
