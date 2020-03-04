@@ -6,6 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
+        v-if="authenticated"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"

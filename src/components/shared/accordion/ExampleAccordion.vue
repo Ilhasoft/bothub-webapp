@@ -208,6 +208,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
   .example-accordion {
     &__tag {
       margin-left: 0.5rem;
