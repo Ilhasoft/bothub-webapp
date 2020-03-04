@@ -153,7 +153,6 @@ export default {
       'authenticated',
     ]),
     warningsCount() {
-      return 1;
       return Object
         .keys(this.getCurrentRepository.languages_warnings)
         .reduce(
