@@ -63,7 +63,8 @@
           :intent="nlp_log.intent.name"
           :confidence="nlp_log.intent.confidence"
           :created-at="created_at"
-          @onShowRawInfo="showRawInfo()"/>
+          @onShowRawInfo="showRawInfo()"
+          @debug="debug()"/>
       </div>
     </sentence-accordion>
   </div>
@@ -78,6 +79,7 @@ import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import HighlightedText from '@/components/shared/HighlightedText';
 import RawInfo from '@/components/shared/RawInfo';
+import RepositoryDebug from '@/components/repository/debug/Debug';
 
 export default {
   name: 'LogAccordion',
@@ -205,6 +207,20 @@ export default {
         trapFocus: true,
       });
     },
+    debug() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: RepositoryDebug,
+        props: {
+          repositoryUUID: this.repository.uuid,
+          version: this.nlp_log.repository_version,
+          language: this.nlp_log.language,
+          text: this.text,
+        },
+        hasModalCard: false,
+        trapFocus: true,
+      });
+    }
   },
 };
 </script>

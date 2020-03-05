@@ -6,7 +6,7 @@
     <div
       v-if="repository"
       class="repository-log">
-      <div v-if="authenticated">
+      <div v-if="true || authenticated">
         <div class="repository-log__header">
           <h1> Log </h1>
           <p> These are phrases of actual user interaction with your data set.

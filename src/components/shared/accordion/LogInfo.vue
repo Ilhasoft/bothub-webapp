@@ -20,7 +20,8 @@
           class="repository-log-info__button"
           rounded
           size="is-small"
-          icon-left="chart-pie"> Debug </b-button>
+          icon-left="chart-pie"
+          @click="debug()"> Debug </b-button>
         <b-button
           class="repository-log-info__button"
           rounded
@@ -35,7 +36,7 @@
           v-if="intent"
           class="level-item has-text-grey">
           <strong>Intent:&nbsp;</strong>
-          <span>{{ intent }} ({{ confidence }} confidence)</span>
+          <span>{{ intent }} ({{ confidence | percent }} confidence)</span>
         </div>
       </div>
       <div class="level-right">
@@ -73,6 +74,9 @@ export default {
   methods: {
     showRawInfo() {
       this.$emit('onShowRawInfo');
+    },
+    debug() {
+      this.$emit('debug');
     },
   },
 };
