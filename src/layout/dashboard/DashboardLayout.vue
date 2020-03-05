@@ -88,6 +88,10 @@
               :profile="myProfile"
               size="medium"
               class="dashboard-layout__main-panel__header__right__user"/>
+            <b-icon
+              slot="trigger"
+              icon="chevron-down"
+              class="dashboard-layout__main-panel__header__right__icon"/>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -221,7 +225,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 2.5rem 0 2rem;
 
       &__info {
         display: flex;
@@ -298,6 +302,15 @@ export default {
           span {
             margin: 0 .3rem;
           }
+        }
+
+        &__icon {
+          margin-left: 0.5rem;
+          color: white;
+          width: 1rem;
+          height: 1rem;
+          vertical-align: middle;
+          cursor: pointer;
         }
 
         &__user {

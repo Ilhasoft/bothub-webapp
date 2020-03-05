@@ -297,16 +297,16 @@ export default {
 
         @media screen and (max-width: $mobile-width) {
           min-height: auto;
-          padding: 1rem;
+          margin: 1rem;
         }
       }
 
       &__content {
-        max-width: 80%;
-        margin: 1.5rem auto;
+
+        margin: 1rem;
 
         @media screen and (min-width: 1200px) {
-          width: 62.5rem;
+          margin: 1.5rem  6.25rem 1.5rem 2.5rem;
         }
       }
 
