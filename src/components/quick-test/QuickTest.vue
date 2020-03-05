@@ -48,11 +48,12 @@
         </div>
         <div class="quick-test__input field has-addons">
           <div class="control">
-            <input
+            <textarea
               v-model="sentenceInput"
-              class="input"
+              class="textarea quick-test__textarea has-fixed-size"
               placeholder="Add a text"
-              @keyup.enter="sendMessage" >
+              rows="1"
+              @keyup.enter="sendMessage" />
           </div>
           <div class="control">
             <b-dropdown
@@ -66,7 +67,7 @@
                   :language="selectedLanguage"/>
                 <span
                   v-else
-                  class="quick-test__input__placeholder"> Select language </span>
+                  class="quick-test__input__placeholder"> Language </span>
                 <b-icon icon="menu-down"/>
               </button>
               <b-dropdown-item
@@ -252,7 +253,7 @@ export default {
         &__collapse-button {
           cursor: pointer;
           background-color: #2BBFAC;
-          border-radius: 30% 0 0 30%;
+          border-radius: 1rem 0 0 1rem;
           height: 3rem;
           width: 5rem;
           padding: 0.75rem;
@@ -262,10 +263,15 @@ export default {
           text-align: center;
           display: flex;
           margin-top: 3rem;
+          box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
 
           &__text {
             margin: 0 auto;;
           }
+        }
+
+        &__textarea {
+          font-size: 0.85rem;
         }
 
         &__input {
