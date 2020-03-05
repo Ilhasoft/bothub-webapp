@@ -14,7 +14,7 @@
         value="menu-down" />
     </span>
     <bh-dropdown-item
-      v-for="(verbose, language) in LANGUAGES"
+      v-for="(verbose, language) in languageList"
       :key="language"
       @click="setVal(language)">
       <span>{{ verbose }}</span>
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { LANGUAGES } from '@/utils';
+import { LANGUAGES, languageListToDict } from '@/utils';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 
 
@@ -37,12 +37,22 @@ export default {
       type: String,
       default: null,
     },
+    languages: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
       val: this.value,
       LANGUAGES,
     };
+  },
+  computed: {
+    languageList() {
+      if (!this.languages) return LANGUAGES;
+      return languageListToDict(this.languages);
+    },
   },
   watch: {
     value(value) {

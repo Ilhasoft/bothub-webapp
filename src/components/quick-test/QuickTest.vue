@@ -46,6 +46,24 @@
             </div>
           </div>
         </div>
+
+        <bh-field class="quick-test__input"
+        >
+          <example-text-with-highlighted-entities-input
+            ref="textInput"
+            v-model="sentenceInput"
+            size="normal"
+            placeholder="Add a sentence"
+          >
+            <language-append-select-input
+              slot="append"
+              v-model="selectedLanguage"
+              :languages="languages"
+              class="language-append"
+            />
+          </example-text-with-highlighted-entities-input>
+        </bh-field>
+
         <div class="quick-test__input field has-addons">
           <div class="control">
             <textarea
@@ -91,6 +109,8 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 export default {
   name: 'QuickTest',
@@ -98,6 +118,8 @@ export default {
     LanguageBadge,
     RepositoryDebug,
     Loading,
+    ExampleTextWithHighlightedEntitiesInput,
+    LanguageAppendSelectInput,
   },
   props: {
     repository: {
