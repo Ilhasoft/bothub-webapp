@@ -1,5 +1,7 @@
 <template>
-  <bh-dropdown class="language-append-select-input">
+  <b-dropdown
+    :position="dropdownDirection"
+    class="language-append-select-input">
     <span
       slot="trigger"
       class="clickable bh-grid language-append-select-input__language-select">
@@ -13,13 +15,13 @@
         class="align"
         value="menu-down" />
     </span>
-    <bh-dropdown-item
+    <b-dropdown-item
       v-for="(verbose, language) in languageList"
       :key="language"
       @click="setVal(language)">
       <span>{{ verbose }}</span>
-    </bh-dropdown-item>
-  </bh-dropdown>
+    </b-dropdown-item>
+  </b-dropdown>
 </template>
 
 <script>
@@ -40,6 +42,10 @@ export default {
     languages: {
       type: Array,
       default: null,
+    },
+    dropdownDirection: {
+      type: String,
+      default: 'is-bottom-left',
     },
   },
   data() {

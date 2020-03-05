@@ -47,56 +47,25 @@
           </div>
         </div>
 
-        <bh-field class="quick-test__input"
+        <bh-field
+          class="quick-test__input"
         >
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="sentenceInput"
             size="normal"
             placeholder="Add a sentence"
+            @submit="sendMessage"
           >
             <language-append-select-input
               slot="append"
               v-model="selectedLanguage"
               :languages="languages"
+              dropdown-direction="is-top-left"
               class="language-append"
             />
           </example-text-with-highlighted-entities-input>
         </bh-field>
-
-        <div class="quick-test__input field has-addons">
-          <div class="control">
-            <textarea
-              v-model="sentenceInput"
-              class="textarea quick-test__textarea has-fixed-size"
-              placeholder="Add a text"
-              rows="1"
-              @keyup.enter="sendMessage" />
-          </div>
-          <div class="control">
-            <b-dropdown
-              position="is-top-left"
-              aria-role="list">
-              <button
-                slot="trigger"
-                class="button is-text">
-                <language-badge
-                  v-if="selectedLanguage"
-                  :language="selectedLanguage"/>
-                <span
-                  v-else
-                  class="quick-test__input__placeholder"> Language </span>
-                <b-icon icon="menu-down"/>
-              </button>
-              <b-dropdown-item
-                v-for="language in languages"
-                :key="language"
-                aria-role="listitem"
-                @click="setLanguage(language)">
-                <language-badge :language="language"/>
-              </b-dropdown-item>
-            </b-dropdown>
-          </div>
         </div>
       </div>
     </div>
@@ -154,15 +123,18 @@ export default {
       return !(sentence.error === null || sentence.error === undefined);
     },
     async sendMessage() {
-      if (this.sentenceInput === '' || !this.selectedLanguage) return;
+      const sentenceInput = this.sentenceInput.trim();
+      if (sentenceInput === '' || !this.selectedLanguage) {
+        this.sentenceInput = sentenceInput;
+        return;
+      }
       const id = Date.now();
       this.sentences.push({
         id,
-        text: this.sentenceInput,
+        text: sentenceInput,
         intent: null,
         error: null,
       });
-      const text = this.sentenceInput;
       this.sentenceInput = '';
 
       try {
@@ -170,7 +142,7 @@ export default {
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
           language: this.selectedLanguage,
-          text,
+          sentenceInput,
         });
         const index = this.sentences.findIndex(entry => entry.id === id);
         this.$set(this.sentences, index, { id, ...response.data });
