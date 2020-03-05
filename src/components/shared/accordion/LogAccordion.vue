@@ -220,7 +220,7 @@ export default {
         hasModalCard: false,
         trapFocus: true,
       });
-    }
+    },
   },
 };
 </script>
