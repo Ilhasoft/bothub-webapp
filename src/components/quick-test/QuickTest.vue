@@ -277,6 +277,7 @@ export default {
 
         &__container {
           height: 75vh;
+          min-height: 400px;
           display: flex;
           align-items: stretch;
           min-width: 16rem;

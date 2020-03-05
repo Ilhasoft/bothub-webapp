@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MultipleChoice.vue renders correctly 1`] = `
-<b-taginput-stub value="" data="pt,pt-br,en" hascounter="true" field="display_name" autocomplete="true" openonfocus="true" closable="true" confirmkeycodes="13,188" removeonkeys="8" onpasteseparators="," beforeadding="function _default() {
+<b-taginput-stub value="" data="pt,pt-br,en" hascounter="true" field="display_name" autocomplete="true" closable="true" confirmkeycodes="13,188" removeonkeys="8" onpasteseparators="," beforeadding="function _default() {
         return true;
-      }" expanded="" clear-on-select="" icon="label"></b-taginput-stub>
+      }" expanded="" open-on-focus="" clear-on-select="" icon="label"></b-taginput-stub>
 `;
