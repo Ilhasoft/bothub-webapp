@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <bh-field
+        <div
           class="quick-test__input"
         >
           <example-text-with-highlighted-entities-input
@@ -65,7 +65,6 @@
               class="language-append"
             />
           </example-text-with-highlighted-entities-input>
-        </bh-field>
         </div>
       </div>
     </div>
