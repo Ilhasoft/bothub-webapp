@@ -6,7 +6,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     <div class="column is-three-fifths">
       <bh-field-stub errors="">
         <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="normal" placeholder="Add a sentence">
-          <language-append-select-input-stub class="language-append" slot="append"></language-append-select-input-stub>
+          <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append" slot="append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>

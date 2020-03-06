@@ -75,9 +75,6 @@ text: [text to analyze]"</bh-highlighted-pre>
               :authorization-uuid="repository.authorization.uuid"/>
           </div>
         </div>
-        <hr>
-        <h3>Updates</h3>
-        <updates-list :repository="repository" />
       </div>
       <div
         v-else
@@ -97,17 +94,15 @@ text: [text to analyze]"</bh-highlighted-pre>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
-import UpdatesList from '@/components/update/UpdatesList';
 import RepositoryBase from './Base';
 
 
 export default {
-  name: 'RepositoryAnalyzeText',
+  name: 'RepositoryIntegration',
   components: {
     RepositoryViewBase,
     RequestGenerator,
     LoginForm,
-    UpdatesList,
   },
   extends: RepositoryBase,
   computed: {},
