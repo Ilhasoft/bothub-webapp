@@ -6,7 +6,7 @@ exports[`SideBar.vue renders correctly 1`] = `
     <div class="sidebar-wrapper__colapse-button">
       <b-icon-stub icon="arrow-right"></b-icon-stub>
     </div>
-    <b-menu-stub>
+    <b-menu-stub accordion="true">
       <div class="menu-header"><img src="~@/assets/imgs/logo.svg" alt="bothub"></div>
       <b-menu-list-stub ariarole="">
         <b-menu-item-stub label="Summary" icon="home" animation="fade" tag="router-link" ariarole="" to="[object Object]" size="is-medium"></b-menu-item-stub>
