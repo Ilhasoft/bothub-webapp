@@ -306,7 +306,7 @@ export default {
         margin: 1rem;
 
         @media screen and (min-width: 1200px) {
-          margin: 1.5rem  7.125rem 1.5rem 2rem;
+          margin: 1.5rem  7.125rem 1.5rem 3rem;
         }
       }
 

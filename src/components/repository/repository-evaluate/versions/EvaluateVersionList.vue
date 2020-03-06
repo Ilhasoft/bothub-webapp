@@ -3,11 +3,10 @@
     <pagination
       v-if="versionsList"
       :item-component="evaluateItem"
-      :list="versionsList"
-      @dispatch="goToDetails()" />
+      :list="versionsList" />
     <p
       v-if="versionsList && versionsList.empty"
-      class="no-examples">No versions</p>
+      class="no-examples">No Examples</p>
   </div>
 </template>
 
