@@ -4,7 +4,7 @@ exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
   <div class="sidebar-wrapper">
     <div class="sidebar-wrapper__collapse-button">
-      <b-icon-stub icon="arrow-right"></b-icon-stub>
+      <b-icon-stub icon="chevron-left"></b-icon-stub>
     </div>
     <b-menu-stub>
       <div class="menu-header"><img src="~@/assets/imgs/logo.svg" alt="bothub"></div>
