@@ -140,7 +140,11 @@ export default {
       }
     },
     style(word) {
-      const value = normalize(this.minRelevance, this.maxRelevance, this.relevantData[word].relevance);
+      const value = normalize(
+        this.minRelevance,
+        this.maxRelevance,
+        this.relevantData[word].relevance
+      );
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
       };
