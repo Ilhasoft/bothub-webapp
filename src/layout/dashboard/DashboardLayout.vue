@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-layout">
-    <side-bar @colapse="colapseHandle()" />
+    <side-bar @collapse="collapseHandle()" />
     <b-loading
       :is-full-page="isFullPage"
       :active.sync="getCurrentRepository.name ? false : true" />
     <div
       v-show="getCurrentRepository.name ? true : false"
       :class="
-      colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+      collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
@@ -90,6 +90,10 @@
               :profile="myProfile"
               size="medium"
               class="dashboard-layout__main-panel__header__right__user"/>
+            <b-icon
+              slot="trigger"
+              icon="chevron-down"
+              class="dashboard-layout__main-panel__header__right__icon"/>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -139,7 +143,7 @@ export default {
   },
   data() {
     return {
-      colapse: true,
+      collapse: true,
       isLoading: false,
       isFullPage: true,
       isNewRepositoryModalOpen: false,
@@ -182,8 +186,8 @@ export default {
       'setRepositoryVersion',
       'openLoginModal',
     ]),
-    colapseHandle() {
-      this.colapse = !this.colapse;
+    collapseHandle() {
+      this.collapse = !this.collapse;
     },
     routerHandle(path) {
       this.$router.push({
@@ -215,10 +219,12 @@ export default {
 };
 </script>
 <style lang="scss">
+@import '~@/assets/scss/utilities.scss';
+
 .dashboard-layout {
 
   &__main-panel {
-    width: calc( 100% - 260px);
+    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding} - #{$menu-space});
     position: relative;
     float: right;
 
@@ -229,7 +235,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 1rem;
+      padding: 0 2.5rem 0 2rem;
 
       &__info {
         display: flex;
@@ -308,16 +314,25 @@ export default {
           }
         }
 
+        &__icon {
+          margin-left: 0.5rem;
+          color: white;
+          width: 1rem;
+          height: 1rem;
+          vertical-align: middle;
+          cursor: pointer;
+        }
+
         &__user {
           margin-left: 3rem;
         }
       }
     }
 
-    &--colapsed {
+    &--collapsed {
        position: relative;
        float: right;
-       width: calc( 100% - 60px);
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});
     }
   }
 }

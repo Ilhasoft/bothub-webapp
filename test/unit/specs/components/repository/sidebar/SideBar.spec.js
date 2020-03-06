@@ -16,14 +16,14 @@ describe('SideBar.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('click on colapse button', () => {
+  describe('click on collapse button', () => {
     beforeEach(() => {
       wrapper = shallowMount(SideBar);
-      const colapseButton = wrapper.find({ ref: 'colapseButton' });
-      colapseButton.trigger('click');
+      const collapseButton = wrapper.find({ ref: 'collapseButton' });
+      collapseButton.trigger('click');
     });
-    test('Colapse should be false', () => {
-      expect(wrapper.vm.colapse).toBeFalsy();
+    test('collapse should be false', () => {
+      expect(wrapper.vm.collapse).toBeFalsy();
     });
   });
 });

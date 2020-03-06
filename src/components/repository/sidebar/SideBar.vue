@@ -1,15 +1,16 @@
 <template>
   <div class="sidebar">
-    <div :class="colapse ? 'sidebar-wrapper' : 'sidebar-wrapper--colapsed'">
+    <div :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'">
       <div
-        v-if="colapse"
-        ref="colapseButton"
-        class="sidebar-wrapper__colapse-button"
-        @click="colapseHandle()">
-        <b-icon icon="arrow-right"/>
+        ref="collapseButton"
+        class="sidebar-wrapper__collapse-button"
+        @click="collapseHandle()">
+        <b-icon :icon="collapse ? 'chevron-left' : 'chevron-right'" />
       </div>
-      <b-menu v-if="colapse">
-        <div class="menu-header">
+      <b-menu v-if="collapse">
+        <div
+          class="menu-header"
+          @click="routerHandle('home')">
           <img
             src="~@/assets/imgs/logo.svg"
             alt="bothub">
@@ -98,13 +99,11 @@
       <div
         v-else
         class="icon-list-wrapper">
-        <div
-          v-if="!colapse"
-          class="colapse-button icon-list"
-          @click="colapseHandle()">
-          <b-icon
-            icon="arrow-right-bold"/>
-        </div>
+        <bh-icon
+          value="botinho"
+          size="large"
+          class="icon-list"
+          @click="routerHandle('home')" />
         <b-icon
           class="icon-list"
           icon="home"
@@ -160,7 +159,7 @@ export default {
     return {
       isSettingsActive: false,
       isTestsActive: false,
-      colapse: true,
+      collapse: true,
     };
   },
   methods: {
@@ -169,14 +168,20 @@ export default {
         name: `${path}`,
       });
     },
-    colapseHandle() {
-      this.$emit('colapse');
-      this.colapse = !this.colapse;
+    collapseHandle() {
+      this.$emit('collapse');
+      this.collapse = !this.collapse;
     },
   },
 };
 </script>
 <style lang="scss">
+@import '~@/assets/scss/utilities.scss';
+
+.menu-list a {
+  padding: 0.5em 2rem;
+}
+
 .icon-list-wrapper {
   text-align: center;
 }
@@ -188,6 +193,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: white;
+  cursor: pointer;
 
   img {
     height: 1.5rem;
@@ -204,33 +210,28 @@ export default {
   .sidebar-wrapper {
     background: #2F343D;
     height: 100%;
-    padding: 1rem;
-    width: 260px;
+    width: $menu-expanded-size + $menu-padding;
     transition: width .1s;
 
-  &__colapse-button {
-    background: #696968;;
-    color:#FFFFFF;
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    top: 2rem;
-    left: 0;
-    cursor: pointer;
-
-    span {
-      margin-left: 3px;
+    &__collapse-button {
+      border-radius: 50%;
+      color: white;
+      background-color: #9E9E9E;;
+      width: $menu-collapse-button-size;
+      height: $menu-collapse_button-size;
+      position: absolute;
+      top: 2rem;
+      right: -$menu-collapse_button-size/2;
+      z-index: 2;
+      cursor: pointer;
     }
-  }
 
-    &--colapsed {
+    &--collapsed {
       transition: width .1s;
       background: #2F343D;
       height: 100%;
       padding: 1rem;
-      width: 60px;
+      width: $menu-collapsed-size + $menu-padding;
       color: #FFFFFF;
     }
   }
