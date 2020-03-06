@@ -263,10 +263,6 @@ export default {
           }
         }
 
-        &__textarea {
-          font-size: 0.85rem;
-        }
-
         &__input {
           margin: 0.5rem;
 
