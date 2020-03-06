@@ -141,7 +141,7 @@ export default {
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
           language: this.selectedLanguage,
-          sentenceInput,
+          text: sentenceInput,
         });
         const index = this.sentences.findIndex(entry => entry.id === id);
         this.$set(this.sentences, index, { id, ...response.data });
