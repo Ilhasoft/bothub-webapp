@@ -57,6 +57,11 @@
               label="Results"/>
           </b-menu-item>
           <b-menu-item
+            :to="{ name: 'repository-log' }"
+            tag="router-link"
+            icon="inbox"
+            label="Inbox"/>
+          <b-menu-item
             :to="{ name: 'repository-translate' }"
             tag="router-link"
             icon="translate"
@@ -124,6 +129,10 @@
             aria-role="listitem"
             @click="routerHandle('repository-test')">Something else</b-dropdown-item>
         </b-dropdown>
+        <b-icon
+          class="icon-list"
+          icon="inbox"
+          @click.native="routerHandle('repository-log')" />
         <b-icon
           class="icon-list"
           icon="translate"
