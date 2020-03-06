@@ -75,10 +75,12 @@
               value="sentence" />
             <span>{{ getCurrentRepository.examples__count }} sentences</span>
           </div>
-          <div class="dashboard-layout__main-panel__header__right__icons">
+          <div
+            v-if="warningsCount > 0"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="warning" />
-            <span>2 warning</span>
+            <span>{{ warningsCount }} warning</span>
           </div>
           <b-dropdown
             position="is-bottom-left"
@@ -154,6 +156,11 @@ export default {
       'myProfile',
       'authenticated',
     ]),
+    warningsCount() {
+      if (!this.getCurrentRepository
+        || !this.getCurrentRepository.languages_warnings_count) return 0;
+      return this.getCurrentRepository.languages_warnings_count;
+    },
   },
   watch: {
     getCurrentRepository() {
