@@ -34,7 +34,7 @@
               field="intent"
               label="Intent"
               width="40">
-              {{ props.row.intent }}
+              {{ props.row.relevance.intent }}
             </b-table-column>
             <b-table-column
               centered
@@ -42,7 +42,7 @@
               label="Relevance"
               width="40"
               numeric>
-              {{ props.row.relevance }}
+              {{ props.row.relevance.relevance.toFixed(2) }}
             </b-table-column>
           </template>
         </b-table>
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Loading from '@/components/shared/Loading';
 import { normalize } from '@/utils';
 
@@ -76,10 +76,6 @@ export default {
       type: String,
       required: true,
     },
-    version: {
-      type: Number,
-      required: true,
-    },
   },
   data() {
     return {
@@ -89,6 +85,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
     wordsFromText() {
       if (!this.data) return [];
       return this.data.text.split(' ');
@@ -98,7 +97,7 @@ export default {
       return Object.entries(this.data.words).reduce((relevance, entry) => {
         // eslint-disable-next-line no-param-reassign
         relevance[entry[0]] = entry[1]
-          .find(object => object.intent === this.data.intent.name).relevance;
+          .find(object => object.intent);
         return relevance;
       }, {});
     },
@@ -107,13 +106,13 @@ export default {
       return Object.entries(this.relevantData).map(entry => ({
         text: entry[0],
         relevance: entry[1],
-      })).sort((a, b) => a.relevance < b.relevance);
+      })).sort((a, b) => a.relevance.relevance < b.relevance.relevance);
     },
     maxRelevance() {
-      return this.tableData[0].relevance;
+      return this.tableData[0].relevance.relevance;
     },
     minRelevance() {
-      return this.tableData[this.tableData.length - 1].relevance;
+      return this.tableData[this.tableData.length - 1].relevance.relevance;
     },
   },
   mounted() {
@@ -129,7 +128,7 @@ export default {
       try {
         const response = await this.debugParse({
           repositoryUUID: this.repositoryUUID,
-          repositoryVersion: this.version,
+          repositoryVersion: this.repositoryVersion,
           language: this.language,
           text: this.text,
         });
@@ -141,7 +140,7 @@ export default {
       }
     },
     style(word) {
-      const value = normalize(this.minRelevance, this.maxRelevance, this.relevantData[word]);
+      const value = normalize(this.minRelevance, this.maxRelevance, this.relevantData[word].relevance);
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
       };
