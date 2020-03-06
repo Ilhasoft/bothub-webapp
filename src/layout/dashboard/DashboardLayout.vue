@@ -157,12 +157,9 @@ export default {
       'authenticated',
     ]),
     warningsCount() {
-      return Object
-        .keys(this.getCurrentRepository.languages_warnings)
-        .reduce(
-          (previous, lang) => this.getCurrentRepository.languages_warnings[lang].length + previous,
-          0,
-        );
+      if (!this.getCurrentRepository
+        || !this.getCurrentRepository.languages_warnings_count) return 0;
+      return this.getCurrentRepository.languages_warnings_count;
     },
   },
   watch: {
