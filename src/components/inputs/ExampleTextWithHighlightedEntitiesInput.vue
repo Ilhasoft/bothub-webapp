@@ -23,6 +23,7 @@
           @select.stop.prevent="emitTextSelected()"
           @click.stop.prevent="emitTextSelected()"
           @keyup.stop.prevent="emitTextSelected()"
+          @keyup.enter="submit()"
         />
       </div>
       <slot name="append" />
@@ -98,6 +99,9 @@ export default {
     },
   },
   methods: {
+    submit() {
+      this.$emit('submit');
+    },
     emitTextSelected() {
       const { value, selectionStart, selectionEnd } = this.$refs.input;
       const selected = value.slice(selectionStart, selectionEnd);
