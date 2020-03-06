@@ -1,13 +1,13 @@
 <template>
   <div class="dashboard-layout">
-    <side-bar @colapse="colapseHandle()" />
+    <side-bar @collapse="collapseHandle()" />
     <b-loading
       :is-full-page="isFullPage"
       :active.sync="getCurrentRepository.name ? false : true" />
     <div
       v-show="getCurrentRepository.name ? true : false"
       :class="
-      colapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--colapsed'">
+      collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
@@ -141,7 +141,7 @@ export default {
   },
   data() {
     return {
-      colapse: true,
+      collapse: true,
       isLoading: false,
       isFullPage: true,
       isNewRepositoryModalOpen: false,
@@ -176,8 +176,8 @@ export default {
       'setRepositoryVersion',
       'openLoginModal',
     ]),
-    colapseHandle() {
-      this.colapse = !this.colapse;
+    collapseHandle() {
+      this.collapse = !this.collapse;
     },
     routerHandle(path) {
       this.$router.push({
@@ -319,7 +319,7 @@ export default {
       }
     }
 
-    &--colapsed {
+    &--collapsed {
        position: relative;
        float: right;
        width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});

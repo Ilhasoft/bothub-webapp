@@ -1,12 +1,13 @@
 <template>
   <div class="sidebar">
-    <div :class="colapse ? 'sidebar-wrapper' : 'sidebar-wrapper--colapsed'">
+    <div :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'">
       <div
+        ref="collapseButton"
         class="sidebar-wrapper__collapse-button"
-        @click="colapseHandle()">
-        <b-icon :icon="colapse ? 'chevron-left' : 'chevron-right'" />
+        @click="collapseHandle()">
+        <b-icon :icon="collapse ? 'chevron-left' : 'chevron-right'" />
       </div>
-      <b-menu v-if="colapse">
+      <b-menu v-if="collapse">
         <div
           class="menu-header"
           @click="routerHandle('home')">
@@ -149,7 +150,7 @@ export default {
     return {
       isSettingsActive: false,
       isTestsActive: false,
-      colapse: true,
+      collapse: true,
     };
   },
   methods: {
@@ -158,15 +159,19 @@ export default {
         name: `${path}`,
       });
     },
-    colapseHandle() {
-      this.$emit('colapse');
-      this.colapse = !this.colapse;
+    collapseHandle() {
+      this.$emit('collapse');
+      this.collapse = !this.collapse;
     },
   },
 };
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+
+.menu-list a {
+  padding: 0.5em 2rem;
+}
 
 .icon-list-wrapper {
   text-align: center;
@@ -196,7 +201,6 @@ export default {
   .sidebar-wrapper {
     background: #2F343D;
     height: 100%;
-    // padding: 1rem;
     width: $menu-expanded-size + $menu-padding;
     transition: width .1s;
 
@@ -213,24 +217,7 @@ export default {
       cursor: pointer;
     }
 
-  &__colapse-button {
-    background: #696968;;
-    color:#FFFFFF;
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    display: flex;
-    align-items: center;
-    top: 2rem;
-    left: 0;
-    cursor: pointer;
-
-    span {
-      margin-left: 3px;
-    }
-  }
-
-    &--colapsed {
+    &--collapsed {
       transition: width .1s;
       background: #2F343D;
       height: 100%;

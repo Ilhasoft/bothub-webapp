@@ -3,7 +3,7 @@
 exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
   <div class="sidebar-wrapper">
-    <div class="sidebar-wrapper__colapse-button">
+    <div class="sidebar-wrapper__collapse-button">
       <b-icon-stub icon="arrow-right"></b-icon-stub>
     </div>
     <b-menu-stub>
