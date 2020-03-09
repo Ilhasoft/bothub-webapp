@@ -11,8 +11,7 @@
       <p
         class="text-center"
         else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
-      <div
-        class="next has-text-centered">
+      <div>
         <b-pagination
           :total="list.total"
           :current.sync="page"
@@ -105,12 +104,10 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   &__bottom {
-    width: 100%;
+    min-width: 50%;
     display: block;
+    margin: 1rem auto;
+    max-width: 600px;
   }
-}
-
-.next {
-  margin: 1rem 0;
 }
 </style>
