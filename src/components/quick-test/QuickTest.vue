@@ -1,8 +1,8 @@
 <template>
   <div
-    v-if="repository"
     class="quick-test">
     <div
+      ref="expandQuickTest"
       class="quick-test__collapse-button"
       @click="toggle()">
       <b-icon :icon="expanded ? 'chevron-right' : 'chevron-left'" />
@@ -151,7 +151,9 @@ export default {
       }
     },
     toggle() {
+      this.$emit('expanded');
       this.expanded = !this.expanded;
+      console.log(this.repository.languages_ready_for_train);
     },
     setLanguage(language) {
       this.selectedLanguage = language;
