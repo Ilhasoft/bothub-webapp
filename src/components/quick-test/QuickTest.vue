@@ -46,38 +46,25 @@
             </div>
           </div>
         </div>
-        <div class="quick-test__input field has-addons">
-          <div class="control">
-            <input
-              v-model="sentenceInput"
-              class="input"
-              placeholder="Add a text"
-              @keyup.enter="sendMessage" >
-          </div>
-          <div class="control">
-            <b-dropdown
-              position="is-top-left"
-              aria-role="list">
-              <button
-                slot="trigger"
-                class="button is-text">
-                <language-badge
-                  v-if="selectedLanguage"
-                  :language="selectedLanguage"/>
-                <span
-                  v-else
-                  class="quick-test__input__placeholder"> Select language </span>
-                <b-icon icon="menu-down"/>
-              </button>
-              <b-dropdown-item
-                v-for="language in languages"
-                :key="language"
-                aria-role="listitem"
-                @click="setLanguage(language)">
-                <language-badge :language="language"/>
-              </b-dropdown-item>
-            </b-dropdown>
-          </div>
+
+        <div
+          class="quick-test__input"
+        >
+          <example-text-with-highlighted-entities-input
+            ref="textInput"
+            v-model="sentenceInput"
+            size="normal"
+            placeholder="Add a sentence"
+            @submit="sendMessage"
+          >
+            <language-append-select-input
+              slot="append"
+              v-model="selectedLanguage"
+              :languages="languages"
+              dropdown-direction="is-top-left"
+              class="language-append"
+            />
+          </example-text-with-highlighted-entities-input>
         </div>
       </div>
     </div>
@@ -90,6 +77,8 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
+import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 export default {
   name: 'QuickTest',
@@ -97,6 +86,8 @@ export default {
     LanguageBadge,
     RepositoryDebug,
     Loading,
+    ExampleTextWithHighlightedEntitiesInput,
+    LanguageAppendSelectInput,
   },
   props: {
     repository: {
@@ -131,15 +122,18 @@ export default {
       return !(sentence.error === null || sentence.error === undefined);
     },
     async sendMessage() {
-      if (this.sentenceInput === '' || !this.selectedLanguage) return;
+      const sentenceInput = this.sentenceInput.trim();
+      if (sentenceInput === '' || !this.selectedLanguage) {
+        this.sentenceInput = sentenceInput;
+        return;
+      }
       const id = Date.now();
       this.sentences.push({
         id,
-        text: this.sentenceInput,
+        text: sentenceInput,
         intent: null,
         error: null,
       });
-      const text = this.sentenceInput;
       this.sentenceInput = '';
 
       try {
@@ -147,7 +141,7 @@ export default {
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
           language: this.selectedLanguage,
-          text,
+          text: sentenceInput,
         });
         const index = this.sentences.findIndex(entry => entry.id === id);
         this.$set(this.sentences, index, { id, ...response.data });
@@ -252,7 +246,7 @@ export default {
         &__collapse-button {
           cursor: pointer;
           background-color: #2BBFAC;
-          border-radius: 30% 0 0 30%;
+          border-radius: 1rem 0 0 1rem;
           height: 3rem;
           width: 5rem;
           padding: 0.75rem;
@@ -262,6 +256,7 @@ export default {
           text-align: center;
           display: flex;
           margin-top: 3rem;
+          box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
 
           &__text {
             margin: 0 auto;;
@@ -278,6 +273,7 @@ export default {
 
         &__container {
           height: 75vh;
+          min-height: 400px;
           display: flex;
           align-items: stretch;
           min-width: 16rem;

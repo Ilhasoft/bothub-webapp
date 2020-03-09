@@ -10,7 +10,7 @@ import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
-import RepositoryAnalyzeText from '@/views/repository/AnalyzeText';
+import RepositoryIntegration from '@/views/repository/Integration';
 import RepositoryEvaluate from '@/views/repository/Evaluate';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
@@ -101,7 +101,7 @@ export default new Router({
         {
           path: ':ownerNickname/:slug/Integration/',
           name: 'repository-integration',
-          component: RepositoryAnalyzeText,
+          component: RepositoryIntegration,
         },
         {
           path: ':ownerNickname/:slug/settings/',

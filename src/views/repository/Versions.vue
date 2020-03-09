@@ -41,24 +41,23 @@
         >
           <template slot-scope="props">
             <b-table-column
+              :width="isEdit.edit ? 200 : 60"
               field="name"
               label="version"
-              width="80"
               sortable
               centered
               numeric>
               <b-field v-if="isEdit.edit === true && isEdit.id === props.row.id">
                 <div class="versions__edit-input">
                   <b-input
+                    :expanded="true"
                     v-model="isEdit.name"
                     :value="isEdit.name"
+                    icon-right-clickable="true"
+                    icon-right="close"
+                    @icon-right-click="isEdit.edit = false"
                     @keyup.enter.native="handleEditVersion(isEdit.name, props.row.id)"/>
-                  <b-icon
-                    icon="close"
-                    size="is-small"
-                    @click.native="isEdit.edit = false"/>
-                </div>
-              </b-field>
+              </div></b-field>
               <span
                 v-else
                 class="versions__table__version-number">
