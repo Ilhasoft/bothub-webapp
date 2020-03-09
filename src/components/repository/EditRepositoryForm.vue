@@ -3,6 +3,7 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
+      :settings="true"
       :schema="formSchema"
       v-model="data"
       :errors="errors"
