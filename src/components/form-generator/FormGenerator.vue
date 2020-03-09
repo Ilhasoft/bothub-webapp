@@ -86,7 +86,7 @@ export default {
           } = this.schema[name];
 
           const shouldHide = style && typeof style.show === 'boolean' && !style.show;
-          const shouldShowSettings = this.settings && typeof style.only_settings === 'boolean' && style.only_settings;
+          const shouldShowSettings = this.settings && style && typeof style.only_settings === 'boolean' && style.only_settings;
 
           if (!shouldShowSettings && shouldHide) return false;
 
