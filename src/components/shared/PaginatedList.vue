@@ -20,8 +20,7 @@
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
-          aria-current-label="Current page"
-          @change="fetch()"/>
+          aria-current-label="Current page"/>
       </div>
     </div>
   </div>
@@ -72,6 +71,9 @@ export default {
     },
     isLoading() {
       this.$emit('update:loading', this.isLoading);
+    },
+    async page() {
+      await this.fetch();
     },
   },
   async mounted() {
