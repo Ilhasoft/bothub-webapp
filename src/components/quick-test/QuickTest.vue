@@ -153,7 +153,6 @@ export default {
     toggle() {
       this.$emit('expanded');
       this.expanded = !this.expanded;
-      console.log(this.repository.languages_ready_for_train);
     },
     setLanguage(language) {
       this.selectedLanguage = language;
