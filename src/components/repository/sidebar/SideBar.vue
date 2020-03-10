@@ -110,14 +110,14 @@
           @click.native="routerHandle('repository-summary')" />
         <b-icon
           class="icon-list"
-          icon="wechat"
+          icon="refresh"
           @click.native="routerHandle('repository-training')" />
         <b-dropdown
           aria-role="list">
           <b-icon
             slot="trigger"
             class="icon-list"
-            icon="chart-line" />
+            icon="wechat" />
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-test')">Action</b-dropdown-item>
