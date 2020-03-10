@@ -12,7 +12,7 @@
           class="menu-header"
           @click="routerHandle('home')">
           <img
-            src="~@/assets/imgs/logo.svg"
+            src="~@/assets/imgs/logo-white.svg"
             alt="bothub">
         </div>
         <b-menu-list>
