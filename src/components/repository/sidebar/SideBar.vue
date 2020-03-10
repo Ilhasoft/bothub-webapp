@@ -144,8 +144,6 @@
           class="icon-list"
           icon="settings"
           @click.native="routerHandle('repository-settings')" />
-
-
       </div>
       <div/>
     </div>
