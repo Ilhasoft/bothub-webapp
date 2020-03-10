@@ -9,7 +9,7 @@ export default {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
   },
-  getAll(limit) {
+  getAll(limit = 20) {
     return new utils.Page('/repository/repositories/', limit);
   },
   getVersions(limit, query) {

@@ -56,6 +56,7 @@ export default {
   data() {
     return {
       listStatusErrorCode: null,
+      error: null,
       page: 1,
     };
   },
@@ -82,11 +83,14 @@ export default {
     async fetch() {
       try {
         await this.list.updateItems(this.page);
+        return true;
       } catch (e) {
+        this.error = e;
         this.listStatusErrorCode = e.request
           ? e.request.status
           : '';
       }
+      return false;
     },
     onDispatchEvent(arg) {
       const [event, value] = arg instanceof Object
