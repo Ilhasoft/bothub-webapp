@@ -194,7 +194,6 @@ export default {
   align-items: center;
   color: white;
   cursor: pointer;
-
   img {
     height: 1.5rem;
   }
@@ -206,6 +205,8 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 1;
+  box-shadow: 0px 3px 6px #000000;
+  opacity: 1;
 
   .sidebar-wrapper {
     background: #2F343D;
@@ -216,7 +217,7 @@ export default {
     &__collapse-button {
       border-radius: 50%;
       color: white;
-      background-color: #9E9E9E;;
+      background-color: #9E9E9E;
       width: $menu-collapse-button-size;
       height: $menu-collapse_button-size;
       position: absolute;
@@ -233,6 +234,7 @@ export default {
       padding: 1rem;
       width: $menu-collapsed-size + $menu-padding;
       color: #FFFFFF;
+
     }
   }
 }

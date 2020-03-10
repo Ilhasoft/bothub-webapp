@@ -221,18 +221,19 @@ export default {
 .dashboard-layout {
 
   &__main-panel {
-    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding} - #{$menu-space});
+    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
     float: right;
 
     &__header {
       width: 100%;
       height: 6rem;
-      background: #2F343D;
+      background: #404143;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2.5rem 0 2rem;
+      box-shadow: 0px 3px 6px #00000029;
 
       &__info {
         display: flex;
@@ -329,7 +330,7 @@ export default {
     &--collapsed {
        position: relative;
        float: right;
-       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding});
     }
   }
 }
