@@ -68,7 +68,7 @@ export const formatters = {
     .replace(/[\u0300-\u036f]/g, ''),
 };
 
-const exampleSearchRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
+const exampleSearchRegex = /((intent|label|entity|language):([a-zA-Z0-9_-]+))/g;
 
 const extractGroupsFromRegex = (regularExpression, value) => {
   let match;
