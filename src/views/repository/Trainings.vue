@@ -47,6 +47,7 @@
         <filter-examples
           :intents="repository.intents_list"
           :entities="repository.entities_list"
+          :language-filter="true"
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
@@ -136,6 +137,10 @@ export default {
       if (!this.querySchema.label) {
         delete this.querySchema.label;
       }
+      if (!this.querySchema.language) {
+        delete this.querySchema.language;
+      }
+
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
