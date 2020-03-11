@@ -232,7 +232,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2.5rem 0 2rem;
+      padding: 0 2.5rem 0 3rem;
 
       &__info {
         display: flex;
