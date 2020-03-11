@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="authenticated"
+        v-if="authenticated && repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -307,7 +307,7 @@ export default {
         margin: 1rem;
 
         @media screen and (min-width: 1200px) {
-          margin: 1.5rem  7.125rem 1.5rem 3rem;
+          margin: 1.5rem  7.125rem 1.5rem 5.2rem;
         }
       }
 
