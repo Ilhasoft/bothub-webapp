@@ -7,7 +7,7 @@ exports[`SideBar.vue renders correctly 1`] = `
       <b-icon-stub icon="chevron-left"></b-icon-stub>
     </div>
     <b-menu-stub accordion="true">
-      <div class="menu-header"><img src="~@/assets/imgs/logo.svg" alt="bothub"></div>
+      <div class="menu-header"><img src="~@/assets/imgs/logo-white.svg" alt="bothub"></div>
       <b-menu-list-stub ariarole="">
         <b-menu-item-stub label="Summary" icon="home" animation="fade" tag="router-link" ariarole="" to="[object Object]" size="is-medium"></b-menu-item-stub>
         <b-menu-item-stub label="Training" icon="refresh" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
