@@ -63,6 +63,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    settings: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -81,9 +85,10 @@ export default {
             ...inputProps
           } = this.schema[name];
 
-          if (style
-            && typeof style.show === 'boolean'
-            && !style.show) return false;
+          const shouldHide = style && typeof style.show === 'boolean' && !style.show;
+          const shouldShowSettings = this.settings && style && typeof style.only_settings === 'boolean' && style.only_settings;
+
+          if (!shouldShowSettings && shouldHide) return false;
 
           return {
             type,
