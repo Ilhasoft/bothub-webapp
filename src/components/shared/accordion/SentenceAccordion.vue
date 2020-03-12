@@ -1,7 +1,8 @@
 <template>
   <div class="expander">
     <div
-      :class="[open ? 'active':'before-border']"
+      ref="expander"
+      :class="[isOpen ? 'active':'before-border']"
       class="expander__trigger"
       @click="toggleAccordion()">
 
@@ -33,9 +34,18 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+  mounted() {
+    this.isOpen = this.open;
+  },
   methods: {
     toggleAccordion() {
-      this.$emit('update:open', !this.open);
+      this.isOpen = !this.isOpen;
+      this.$emit('update:open', this.isOpen);
     },
   },
 };
