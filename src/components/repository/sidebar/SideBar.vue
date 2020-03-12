@@ -62,10 +62,27 @@
             icon="inbox"
             label="Inbox"/>
           <b-menu-item
-            :to="{ name: 'repository-translate' }"
-            tag="router-link"
+            :active="isTranslationsActive"
+            :expanded="isTranslationsActive"
             icon="translate"
-            label="Translation"/>
+            @click="isTranslationsActive = !isTranslationsActive">
+            <template
+              slot="label"
+              slot-scope="props">
+              <span class="menu-text">Translations</span>
+              <b-icon
+                :icon="props.expanded ? 'caret-down' : 'caret-up'"
+                class="is-pulled-right"/>
+            </template>
+            <b-menu-item
+              :to="{ name: 'repository-translate' }"
+              tag="router-link"
+              label="Translate"/>
+            <b-menu-item
+              :to="{ name: 'repository-translations-status' }"
+              tag="router-link"
+              label="Translation Status"/>
+          </b-menu-item>
           <b-menu-item
             :to="{ name: 'repository-integration' }"
             tag="router-link"
@@ -128,10 +145,19 @@
           class="icon-list"
           icon="inbox"
           @click.native="routerHandle('repository-log')" />
-        <b-icon
-          class="icon-list"
-          icon="translate"
-          @click.native="routerHandle('repository-translate')" />
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+            icon="translate" />
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-translate')">Translate</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-translations-status')">Translation Status</b-dropdown-item>
+        </b-dropdown>
         <b-icon
           class="icon-list"
           icon="power-plug"
@@ -162,6 +188,7 @@ export default {
     return {
       isSettingsActive: false,
       isTestsActive: false,
+      isTranslationsActive: false,
       collapse: true,
     };
   },
@@ -182,7 +209,7 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 .menu-list a {
-  padding: 0.5em 2rem;
+  padding: 0.5em 1.6rem;
 }
 
 .icon-list-wrapper {
