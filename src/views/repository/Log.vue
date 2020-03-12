@@ -6,7 +6,7 @@
     <div
       v-if="repository"
       class="repository-log">
-      <div v-if="true || authenticated">
+      <div v-if="authenticated">
         <div class="repository-log__header">
           <h1> Inbox </h1>
           <p> These are phrases of actual user interaction with your data set.
@@ -152,7 +152,7 @@ export default {
     },
     filterSearch: _.debounce(function searchUpdated() {
       this.updateQuery();
-    }, this.filterOption !== 'language' ? 500 : 0),
+    }, (this.filterOption && this.filterOption !== 'language') ? 500 : 0),
     name: _.debounce(function nameUpdated() {
       this.updateQuery();
     }, 500),
