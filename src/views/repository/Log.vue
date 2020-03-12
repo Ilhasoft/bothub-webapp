@@ -152,7 +152,7 @@ export default {
     },
     filterSearch: _.debounce(function searchUpdated() {
       this.updateQuery();
-    }, (this.filterOption && this.filterOption !== 'language') ? 500 : 0),
+    }, 500),
     name: _.debounce(function nameUpdated() {
       this.updateQuery();
     }, 500),
