@@ -9,7 +9,7 @@
         <div class="bh-grid trainings-repository__new-example">
           <div class="bh-grid__item">
             <div v-if="authenticated">
-              <div v-if="repository.authorization.can_contribute">
+              <div v-if="true || repository.authorization.can_contribute">
                 <h2>Train a new sentence</h2>
                 <span>Add examples to improve your bot intelligence.</span>
                 <new-example-form

@@ -12,7 +12,7 @@
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ nlp_log.repository_version }} </span>
+        <span class="column log-accordion__version-name"> {{ version_name }} </span>
         <div class="column">
           <language-badge :language="nlp_log.language"/>
         </div>
@@ -100,6 +100,10 @@ export default {
       required: true,
     },
     created_at: {
+      type: String,
+      default: '',
+    },
+    version_name: {
       type: String,
       default: '',
     },
