@@ -11,8 +11,7 @@
       <p
         class="text-center"
         else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
-      <div
-        class="next has-text-centered">
+      <div>
         <b-pagination
           :total="list.total"
           :current.sync="page"
@@ -20,8 +19,7 @@
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
-          aria-current-label="Current page"
-          @change="fetch()"/>
+          aria-current-label="Current page"/>
       </div>
     </div>
   </div>
@@ -58,6 +56,7 @@ export default {
   data() {
     return {
       listStatusErrorCode: null,
+      error: null,
       page: 1,
     };
   },
@@ -73,6 +72,9 @@ export default {
     isLoading() {
       this.$emit('update:loading', this.isLoading);
     },
+    async page() {
+      await this.fetch();
+    },
   },
   async mounted() {
     await this.fetch();
@@ -81,11 +83,14 @@ export default {
     async fetch() {
       try {
         await this.list.updateItems(this.page);
+        return true;
       } catch (e) {
+        this.error = e;
         this.listStatusErrorCode = e.request
           ? e.request.status
           : '';
       }
+      return false;
     },
     onDispatchEvent(arg) {
       const [event, value] = arg instanceof Object
@@ -103,12 +108,10 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   &__bottom {
-    width: 100%;
+    min-width: 50%;
     display: block;
+    margin: 1rem auto;
+    max-width: 600px;
   }
-}
-
-.next {
-  margin: 1rem 0;
 }
 </style>

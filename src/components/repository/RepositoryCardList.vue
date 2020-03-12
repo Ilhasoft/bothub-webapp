@@ -1,10 +1,9 @@
 <template>
   <div class="repository-card-list">
-    <pagination
+    <paginated-list
       v-if="repositoryList"
       :item-component="exampleItemElem"
       :list="repositoryList"
-      :more-button="showMoreButton"
       class="repository-card-list__item" />
     <p
       v-if="repositoryList && repositoryList.empty"
@@ -15,14 +14,13 @@
 <script>
 import { mapActions } from 'vuex';
 
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import RepositoryCard from '@/components/repository/RepositoryCard';
-
 
 export default {
   name: 'RepositoryCardList',
   components: {
-    Pagination,
+    PaginatedList,
     RepositoryCard,
   },
   props: {

@@ -9,8 +9,8 @@ export default {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
   },
-  getAll() {
-    return new utils.List('/repository/repositories/');
+  getAll(limit = 20) {
+    return new utils.Page('/repository/repositories/', limit);
   },
   getVersions(limit, query) {
     return new utils.Page('/v2/repository/version/', limit, query);
@@ -51,9 +51,8 @@ export default {
   deleteVersion(id) {
     return request.$http.delete(`/v2/repository/version/${id}/`);
   },
-  search(query) {
-    const queryString = qs.stringify(query);
-    return new utils.List(`/v2/repository/repositories/?${queryString}`);
+  search(query, limit = 20) {
+    return new utils.Page('/v2/repository/repositories/', limit, query);
   },
   editVersion(repository, id, name) {
     return request.$http.patch(`/v2/repository/version/${id}/`,
