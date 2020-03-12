@@ -12,7 +12,7 @@
           class="menu-header"
           @click="routerHandle('home')">
           <img
-            src="~@/assets/imgs/logo.svg"
+            src="~@/assets/imgs/logo-white.svg"
             alt="bothub">
         </div>
         <b-menu-list>
@@ -28,7 +28,6 @@
             :to="{ name: 'repository-summary' }"
             tag="router-link"
             icon="home"
-            size="is-medium"
             label="Summary"/>
           <b-menu-item
             :to="{ name: 'repository-training' }"
@@ -53,7 +52,7 @@
               tag="router-link"
               label="Sentences"/>
             <b-menu-item
-              :to="{ name: 'repository-test' }"
+              :to="{ name: 'repository-results' }"
               tag="router-link"
               label="Results"/>
           </b-menu-item>
@@ -110,23 +109,20 @@
           @click.native="routerHandle('repository-summary')" />
         <b-icon
           class="icon-list"
-          icon="wechat"
+          icon="refresh"
           @click.native="routerHandle('repository-training')" />
         <b-dropdown
           aria-role="list">
           <b-icon
             slot="trigger"
             class="icon-list"
-            icon="chart-line" />
+            icon="wechat" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Action</b-dropdown-item>
+            @click="routerHandle('repository-test')">Sentences</b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Another action</b-dropdown-item>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click="routerHandle('repository-test')">Something else</b-dropdown-item>
+            @click="routerHandle('repository-results')">Results</b-dropdown-item>
         </b-dropdown>
         <b-icon
           class="icon-list"
@@ -140,12 +136,19 @@
           class="icon-list"
           icon="power-plug"
           @click.native="routerHandle('repository-integration')" />
-        <b-icon
-          class="icon-list"
-          icon="settings"
-          @click.native="routerHandle('repository-settings')" />
-
-
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+            icon="settings" />
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-settings')">Settings</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-versions')">Versions</b-dropdown-item>
+        </b-dropdown>
       </div>
       <div/>
     </div>
@@ -194,7 +197,6 @@ export default {
   align-items: center;
   color: white;
   cursor: pointer;
-
   img {
     height: 1.5rem;
   }
@@ -206,6 +208,8 @@ export default {
   bottom: 0;
   left: 0;
   z-index: 1;
+  box-shadow: 0px 3px 6px #000000;
+  opacity: 1;
 
   .sidebar-wrapper {
     background: #2F343D;
@@ -216,7 +220,7 @@ export default {
     &__collapse-button {
       border-radius: 50%;
       color: white;
-      background-color: #9E9E9E;;
+      background-color: #9E9E9E;
       width: $menu-collapse-button-size;
       height: $menu-collapse_button-size;
       position: absolute;
@@ -233,6 +237,7 @@ export default {
       padding: 1rem;
       width: $menu-collapsed-size + $menu-padding;
       color: #FFFFFF;
+
     }
   }
 }

@@ -2,31 +2,31 @@
   <div>
     <bh-card
       class="version-test-item">
-      <div
-        class="version-test-item__wrapper"
-        @click="goToDetail(id)">
-        <div class="version-test-item__wrapper__info">
-          <strong class="version-test-item__wrapper__info__item">Test #{{ version }}</strong>
-          <language-badge
-            :language="language"
-            class="version-test-item__wrapper__info__item"
-            main/>
-          <small class="version-test-item__wrapper__info__item">
-            {{ created_at | moment('from') }}</small>
+      <router-link :to="resultRouterParams">
+        <div
+          class="version-test-item__wrapper">
+          <div class="version-test-item__wrapper__info">
+            <strong class="version-test-item__wrapper__info__item">Test #{{ version }}</strong>
+            <language-badge
+              :language="language"
+              class="version-test-item__wrapper__info__item"
+              main/>
+            <small class="version-test-item__wrapper__info__item">
+              {{ created_at | moment('from') }}</small>
+          </div>
+          <div class="version-test-item__wrapper__links">
+            <router-link :to="resultRouterParams">
+              <a> Load Results </a>
+            </router-link>
+          </div>
         </div>
-        <div class="version-test-item__wrapper__links">
-          <a
-            @click="goToDetail(id)">Load results</a>
-        </div>
-      </div>
+      </router-link>
     </bh-card>
   </div>
 </template>
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import { mapActions } from 'vuex';
-
 
 export default {
   name: 'EvaluateVersionItem',
@@ -51,15 +51,15 @@ export default {
       default: '',
     },
   },
-  methods: {
-    ...mapActions([
-      'setUpdateEvaluateResultId',
-    ]),
-    goToDetail() {
-      this.setUpdateEvaluateResultId({
-        id: this.id,
-        version: this.version,
-      });
+  computed: {
+    resultRouterParams() {
+      return {
+        name: 'repository-result',
+        params: {
+          version: this.version,
+          resultId: this.id,
+        },
+      };
     },
   },
 };
