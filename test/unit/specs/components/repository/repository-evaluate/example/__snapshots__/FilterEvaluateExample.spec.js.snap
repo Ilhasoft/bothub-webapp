@@ -3,20 +3,21 @@
 exports[`TestView.vue renders correctly 1`] = `
 <div class="filter-evaluate-example">
   <div class="filter-evaluate-example__filters">
-    <bh-field-stub errors="" class="filter-evaluate-example__filters__input-text">
+    <b-field-stub addons="true" class="filter-evaluate-example__filters__input-text">
       <bh-text-stub value="" formatters="" debounce="750">
         <div>
           <bh-icon-button-stub type="submit" value="magnify" size="medium"></bh-icon-button-stub>
         </div>
       </bh-text-stub>
-    </bh-field-stub>
+    </b-field-stub>
     <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
-      <bh-field-stub errors="">
+      <b-field-stub addons="true">
         <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All Intents"></bh-autocomplete-stub>
-      </bh-field-stub>
-      <bh-field-stub errors="">
+      </b-field-stub>
+      <b-field-stub addons="true">
         <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="All entities"></bh-autocomplete-stub>
-      </bh-field-stub>
+      </b-field-stub>
+      <!---->
     </div>
   </div>
 </div>

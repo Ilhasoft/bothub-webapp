@@ -2507,8 +2507,9 @@ date-fns@^2.0.0-alpha.11:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.26.tgz#e46afd73a2b50e0359446309ee7cb631d7467227"
 
 date-fns@^2.0.0-alpha.25:
-  version "2.0.0-alpha.27"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.27.tgz#5ecd4204ef0e7064264039570f6e8afbc014481c"
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.10.0.tgz#abd10604d8bafb0bcbd2ba2e9b0563b922ae4b6b"
+  integrity sha512-EhfEKevYGWhWlZbNeplfhIU/+N+x0iCIx7VzKlXma2EdQyznVlZhCptXUY+BegNpPW2kjdx15Rvq503YcXXrcA==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -9915,6 +9916,7 @@ validate-npm-package-name@^3.0.0, validate-npm-package-name@~3.0.0:
 validator@^10.9.0:
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
+  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
 
 validator@^8.1.0:
   version "8.2.0"
@@ -10040,7 +10042,7 @@ vue-markdown@^2.2.4:
 
 "vue-mc-drf-model@https://github.com/Ilhasoft/vue-mc-drf-model":
   version "0.1.0"
-  resolved "https://github.com/Ilhasoft/vue-mc-drf-model#6fa1426db16527519e2e6379ef72cf7a9df7f73f"
+  resolved "https://github.com/Ilhasoft/vue-mc-drf-model#0d047822c9d852ead65f5e19f62776c4aaef0794"
   dependencies:
     lodash "^4.17.11"
     vue-mc "^0.5.0"
@@ -10058,6 +10060,7 @@ vue-mc@^0.4.0:
 vue-mc@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/vue-mc/-/vue-mc-0.5.0.tgz#9202a191ca2472b951265f1e326dd8772388c672"
+  integrity sha512-04czw1f5jLBHxV/S3tlNjP1NwJ7iXWztnH2y9veWERl3eml5gh67W/KypTRvem/lUJJZPK6THJ8j5oiCMdDL0A==
   dependencies:
     axios "^0.18.0"
     date-fns "^2.0.0-alpha.25"
@@ -10110,6 +10113,7 @@ vue-uuid@^1.1.1:
 vue@2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+  integrity sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
 
 vue@^2.2, vue@^2.5.17, vue@^2.5.2:
   version "2.5.21"

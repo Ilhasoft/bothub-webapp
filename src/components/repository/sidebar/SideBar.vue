@@ -28,7 +28,6 @@
             :to="{ name: 'repository-summary' }"
             tag="router-link"
             icon="home"
-            size="is-medium"
             label="Summary"/>
           <b-menu-item
             :to="{ name: 'repository-training' }"
@@ -53,7 +52,7 @@
               tag="router-link"
               label="Sentences"/>
             <b-menu-item
-              :to="{ name: 'repository-test' }"
+              :to="{ name: 'repository-results' }"
               tag="router-link"
               label="Results"/>
           </b-menu-item>
@@ -120,13 +119,10 @@
             icon="wechat" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Action</b-dropdown-item>
+            @click="routerHandle('repository-test')">Sentences</b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Another action</b-dropdown-item>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click="routerHandle('repository-test')">Something else</b-dropdown-item>
+            @click="routerHandle('repository-results')">Results</b-dropdown-item>
         </b-dropdown>
         <b-icon
           class="icon-list"
@@ -140,10 +136,19 @@
           class="icon-list"
           icon="power-plug"
           @click.native="routerHandle('repository-integration')" />
-        <b-icon
-          class="icon-list"
-          icon="settings"
-          @click.native="routerHandle('repository-settings')" />
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+            icon="settings" />
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-settings')">Settings</b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-versions')">Versions</b-dropdown-item>
+        </b-dropdown>
       </div>
       <div/>
     </div>
