@@ -28,9 +28,9 @@ export default {
   async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.addNewVersion(repositoryUUID, versionUUID, name);
   },
-  getAllRepositories() {
+  getAllRepositories(limit = 20) {
     /* istanbul ignore next */
-    return repository.getAll();
+    return repository.getAll(limit);
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
