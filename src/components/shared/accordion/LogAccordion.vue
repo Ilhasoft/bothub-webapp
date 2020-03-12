@@ -107,7 +107,7 @@ export default {
   data() {
     return {
       deleteDialog: null,
-      open: true,
+      open: false,
       loading: false,
       isRawInfoActive: false,
     };
