@@ -8,15 +8,9 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">Test your data set</h2>
-            <p>
-              How is your model performing? Do you have enough data?
-              Are your intents and entities well-designed?
-            </p>
-            <p>Using our testing feature, you can evaluate your bot's performance easily.</p>
+            <h2 class="evaluate__content-header__title"> Detailed Results</h2>
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
-                <p><strong>Select the language to run the test</strong></p>
                 <b-select
                   v-model="currentLanguage"
                   expanded>
@@ -29,22 +23,14 @@
                   </option>
                 </b-select>
               </div>
-              <bh-button
-                ref="runNewTestButton"
-                :loading="evaluating"
-                :disabled="evaluating"
-                class="evaluate__content-header__wrapper__btn"
-                secondary
-                @click="newEvaluate()">
-              <slot v-if="!evaluating">Run test</slot></bh-button>
             </div>
           </div>
           <div class="evaluate__divider" />
           <div class="evaluate__content-wrapper">
-            <base-evaluate-examples
-              :filter-by-language="currentLanguage"
-              @created="updateRepository(true)"
-              @deleted="updateRepository(true)"/>
+            <base-evaluate-results
+              :result-id="resultId"
+              :repository="repository"
+              :filter-by-language="currentLanguage" />
           </div>
         </div>
         <div
@@ -74,7 +60,7 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
+import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -83,11 +69,11 @@ import RepositoryBase from './Base';
 
 
 export default {
-  name: 'RepositoryEvaluate',
+  name: 'RepositoryResult',
   components: {
     RepositoryViewBase,
     LoginForm,
-    BaseEvaluateExamples,
+    BaseEvaluateResults,
   },
   extends: RepositoryBase,
   data() {
@@ -100,13 +86,18 @@ export default {
   },
   computed: {
     ...mapState({
-      resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     ...mapGetters([
       'getEvaluateLanguage',
     ]),
+    resultId() {
+      return parseInt(this.$route.params.resultId, 10);
+    },
+    version() {
+      return parseInt(this.$route.params.version, 10);
+    },
   },
   watch: {
     currentLanguage(language) {
@@ -123,7 +114,6 @@ export default {
     ...mapActions([
       'setEvaluateLanguage',
       'getEvaluateExample',
-      'runNewEvaluate',
     ]),
     getExamples() {
       this.getEvaluateExample({
@@ -136,30 +126,6 @@ export default {
             title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
           }));
       });
-    },
-    async newEvaluate() {
-      this.evaluating = true;
-      try {
-        const result = await this.runNewEvaluate({
-          repositoryUUID: this.repository.uuid,
-          language: this.getEvaluateLanguage,
-        });
-        this.evaluating = false;
-        this.setUpdateEvaluateResultId({
-          id: result.data.evaluate_id,
-          version: result.data.evaluate_version,
-        });
-        return true;
-      } catch (error) {
-        this.error = error.response.data;
-        this.evaluating = false;
-        this.$bhToastNotification({
-          message: `${this.error.detail || 'sorry, something wrong ;('} `,
-          type: 'danger',
-          time: 5000,
-        });
-      }
-      return false;
     },
   },
 };
