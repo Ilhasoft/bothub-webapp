@@ -1,12 +1,12 @@
 <template>
   <bh-input>
-    <div :class="inputClassAttr.concat(['example-txt-w-highlighted-entities'])">
-      <div class="example-txt-w-highlighted-entities__input-wrapper">
+    <div :class="inputClassAttr.concat(['text-area-entities'])">
+      <div class="text-area-entities__input-wrapper">
         <textarea
           ref="input"
           v-bind="$attrs"
           v-model="val"
-          class="bh-textarea__input example-txt-w-highlighted-entities__input"
+          class="bh-textarea__input text-area-entities__input"
           @keyup.enter="submit()"
         />
       </div>
@@ -35,17 +35,6 @@ export default {
   },
   data() {
     return {};
-  },
-  computed: {
-    entityClassAttr() {
-      const classes = ['example-txt-w-highlighted-entities__entity'];
-
-      if (this.size) {
-        classes.push(`example-txt-w-highlighted-entities__entity--${this.size}`);
-      }
-
-      return classes;
-    },
   },
   watch: {
     updateValue() {
@@ -82,7 +71,7 @@ export default {
   }
 }
 
-.example-txt-w-highlighted-entities {
+.text-area-entities {
   background-color: white;
   border-radius: $form-components-border-radius;
 
