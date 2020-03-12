@@ -42,10 +42,20 @@ export default {
       drfRepositoryModel: {},
     };
   },
+  computed: {
+    filteredSchema() {
+      return Object.entries(this.formSchema).reduce((schema, entry) => {
+      // eslint-disable-next-line no-param-reassign
+        const style = entry[1].style;
+        if (!(style && typeof style.show === 'boolean' && !style.show)) schema[entry[0]] = entry[1];
+        return schema;
+      }, {});
+    },
+  },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(
-      this.formSchema,
+      this.filteredSchema,
       RepositoryModel,
     );
 
@@ -61,6 +71,7 @@ export default {
       'newRepository',
     ]),
     async onSubmit() {
+      console.log(this.drfRepositoryModel.defaults());
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
       this.submitting = true;
       this.errors = {};
