@@ -18,11 +18,11 @@
         </div>
         <div
           v-if="!open"
-          class="column is-two-thirds">{{ text }}</div>
+          class="column is-full">{{ text }}</div>
 
         <div
           v-else
-          class="column is-two-thirds">
+          class="column is-full">
           <highlighted-text
             v-if="open"
             :text="text"
