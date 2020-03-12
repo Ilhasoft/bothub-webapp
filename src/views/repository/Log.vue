@@ -8,7 +8,7 @@
       class="repository-log">
       <div v-if="authenticated">
         <div class="repository-log__header">
-          <h1> Log </h1>
+          <h1> Inbox </h1>
           <p> These are phrases of actual user interaction with your data set.
           They can be useful for your training or testing. </p>
         </div>
@@ -103,6 +103,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
+import _ from 'lodash';
 import RepositoryBase from './Base';
 
 export default {
@@ -126,6 +127,7 @@ export default {
       },
       filterSearch: '',
       versionsList: null,
+      query: {},
     };
   },
   computed: {
@@ -140,21 +142,6 @@ export default {
       if (!this.repository || this.repository.uuid === 'null') { return null; }
       return this.repository.uuid;
     },
-    query() {
-      const query = {};
-      const name = this.name.trim();
-      const filterSearch = this.filterSearch.trim();
-
-      if (name !== '') {
-        query.name = name;
-      }
-
-      if (this.filterOption !== null && filterSearch !== '') {
-        query[this.filterOption] = filterSearch;
-      }
-
-      return query;
-    },
     versions() {
       return this.versionsList.items.map(version => version.name);
     },
@@ -163,6 +150,12 @@ export default {
     filterOption() {
       this.filterSearch = '';
     },
+    filterSearch: _.debounce(function searchUpdated() {
+      this.updateQuery();
+    }, 500),
+    name: _.debounce(function nameUpdated() {
+      this.updateQuery();
+    }, 500),
     async repositoryUUID() {
       if (!this.repositoryUUID) { return; }
       this.versionsList = await this.getVersions({
@@ -175,6 +168,21 @@ export default {
   },
   methods: {
     ...mapActions(['getVersions']),
+    updateQuery() {
+      const query = {};
+      const name = this.name.trim();
+      const filterSearch = this.filterSearch.trim();
+
+      if (name !== '') {
+        query.name = name;
+      }
+
+      if (this.filterOption !== null && filterSearch !== '') {
+        query[this.filterOption] = filterSearch;
+      }
+
+      this.query = query;
+    },
   },
 };
 </script>
