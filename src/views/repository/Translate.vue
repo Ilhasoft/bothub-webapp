@@ -4,7 +4,7 @@
     :error-code="errorCode">
     <div v-if="repository">
       <div v-if="authenticated">
-        <div v-if="true || repository.authorization.can_contribute">
+        <div v-if="repository.authorization.can_contribute">
           <div class="repository-translate">
             <div class="bh-grid">
               <div class="bh-grid__item">
