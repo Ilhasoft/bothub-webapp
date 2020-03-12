@@ -160,7 +160,7 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Request made! Wait for review of an admin.',
         type: 'is-success',
       });
@@ -183,7 +183,7 @@ export default {
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {
-        this.$toast.open({
+        this.$buefy.toast.open({
           message: 'Repository not trained :(',
           type: 'is-danger',
         });

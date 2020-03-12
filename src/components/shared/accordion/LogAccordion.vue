@@ -172,19 +172,37 @@ export default {
     },
     async addToTraining() {
       this.loading = true;
-      await this.newEvaluateExample(this.toExample).catch((e) => {
+      try {
+        await this.newEvaluateExample(this.toExample);
+        this.$buefy.toast.open({
+          message: 'Entry was added to training.',
+          type: 'is-success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     async addToSentences() {
       this.loading = true;
-      await this.newExample(this.toExample).catch((e) => {
+      try {
+        await this.newExample(this.toExample);
+        this.$buefy.toast.open({
+          message: 'Entry was added to sentences.',
+          type: 'is-success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     getEntityClass(entity) {
       const color = getEntityColor(
