@@ -145,7 +145,7 @@ export default {
         this.maxRelevance,
         this.relevantData[word].relevance,
       );
-      
+
       return {
         'background-color': `hsl(172, ${100 - (value * 50)}%, ${65 - (value * 25)}%)`,
       };

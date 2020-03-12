@@ -50,9 +50,10 @@
         <div
           class="quick-test__input"
         >
-          <example-text-with-highlighted-entities-input
+          <text-area-input
             ref="textInput"
             v-model="sentenceInput"
+            :update-value="selectedLanguage"
             size="normal"
             placeholder="Add a sentence"
             @submit="sendMessage"
@@ -64,7 +65,7 @@
               dropdown-direction="is-top-left"
               class="language-append"
             />
-          </example-text-with-highlighted-entities-input>
+          </text-area-input>
         </div>
       </div>
     </div>
@@ -77,7 +78,7 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
-import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 export default {
@@ -86,7 +87,7 @@ export default {
     LanguageBadge,
     RepositoryDebug,
     Loading,
-    ExampleTextWithHighlightedEntitiesInput,
+    TextAreaInput,
     LanguageAppendSelectInput,
   },
   props: {
