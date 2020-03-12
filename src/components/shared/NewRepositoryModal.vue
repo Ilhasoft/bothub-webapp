@@ -15,7 +15,6 @@
 <script>
 import NewRepositoryForm from '@/components/repository/NewRepositoryForm';
 
-
 export default {
   name: 'NewRepositoryModal',
   components: {
