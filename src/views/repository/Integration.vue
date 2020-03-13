@@ -9,7 +9,7 @@
         <div class="bh-grid">
           <div class="bh-grid__item bh-grid__item--1-2">
             <div class="repository-analyze-text__item">
-              <p>{{ this.$i18n.t('webapp.analyze_text.grid1') }}</p>
+              <p>{{ $t('webapp.analyze_text.grid1') }}</p>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>URL:</strong></p>
@@ -24,13 +24,13 @@
                   repository.authorization.uuid }}</bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
-              <p><strong>{{ this.$i18n.t('webapp.analyze_text.method_send') }}</strong></p>
+              <p><strong>{{ $t('webapp.analyze_text.method_send') }}</strong></p>
               <bh-highlighted-pre code-class="plaintext">
-                language: [{{ this.$i18n.t('webapp.analyze_text.language_code') }}]
-text: [{{ this.$i18n.t('webapp.analyze_text.text_to_analyze') }}]"</bh-highlighted-pre>
+                language: [{{ $t('webapp.analyze_text.language_code') }}]
+text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"</bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
-              <p><strong>{{ this.$i18n.t('webapp.analyze_text.response') }}</strong></p>
+              <p><strong>{{ $t('webapp.analyze_text.response') }}</strong></p>
               <bh-highlighted-pre code-class="json">{
   "intent": {
     "name": "love",
@@ -68,8 +68,8 @@ text: [{{ this.$i18n.t('webapp.analyze_text.text_to_analyze') }}]"</bh-highlight
           </div>
           <div class="bh-grid__item bh-grid__item--1-2">
             <div class="repository-analyze-text__item">
-              <div><strong>{{ this.$i18n.t('webapp.analyze_text.code_generator') }}</strong></div>
-              <div>{{ this.$i18n.t('webapp.analyze_text.code_generator_text') }}</div>
+              <div><strong>{{ $t('webapp.analyze_text.code_generator') }}</strong></div>
+              <div>{{ $t('webapp.analyze_text.code_generator_text') }}</div>
             </div>
             <request-generator
               :default-language-field="repository.language"
@@ -82,7 +82,7 @@ text: [{{ this.$i18n.t('webapp.analyze_text.text_to_analyze') }}]"</bh-highlight
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            {{ this.$i18n.t('webapp.analyze_text.notification_info') }}
+            {{ $t('webapp.analyze_text.notification_info') }}
           </div>
           <login-form hide-forgot-password />
         </div>

@@ -15,7 +15,7 @@
               <div>Webapp v{{ version }}</div>
             </div>
             <ul class="footer-item">
-              <li><a href="#">{{ this.$i18n.t('webapp.layout.terms_conditions') }}</a></li>
+              <li><a href="#">{{ $t('webapp.layout.terms_conditions') }}</a></li>
             </ul>
             <ul class="footer-item footer-sociallist">
               <li class="footer-sociallist-item">
@@ -31,7 +31,7 @@
             </ul>
           </div>
           <div class="bh-grid__item">
-            <h4 class="footer-title">{{ this.$i18n.t('webapp.layout.contact_us') }}</h4>
+            <h4 class="footer-title">{{ $t('webapp.layout.contact_us') }}</h4>
             <div class="footer-section-item">
               <p>bothub@ilhasoft.com.br</p>
             </div>
@@ -45,15 +45,15 @@
             </div>
           </div>
           <div class="bh-grid__item">
-            <h4 class="footer-title">{{ this.$i18n.t('webapp.layout.subscribe') }}</h4>
+            <h4 class="footer-title">{{ $t('webapp.layout.subscribe') }}</h4>
             <div class="footer-section-item">
-              <p>{{ this.$i18n.t('webapp.layout.newsletter') }}</p>
+              <p>{{ $t('webapp.layout.newsletter') }}</p>
             </div>
             <form @submit.prevent="onSubscribeSubmit()">
               <div class="footer-has-input">
                 <bh-text
                   v-model="email"
-                  :placeholder="this.$i18n.t('webapp.layout.you_best_email')"
+                  :placeholder="$t('webapp.layout.you_best_email')"
                   type="email"
                   no-border
                 >
@@ -71,7 +71,7 @@
         </div>
       </div>
       <div class="footer-license">
-        <p class="has-text-centered">{{ this.$i18n.t('webapp.layout.footer_license') }}</p>
+        <p class="has-text-centered">{{ $t('webapp.layout.footer_license') }}</p>
       </div>
     </div>
   </footer>

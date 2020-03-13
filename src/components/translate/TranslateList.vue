@@ -8,7 +8,7 @@
       :translate-to="to"
       @translated="onTranslated()" />
     <p v-if="translateList && translateList.empty">
-      {{ this.$i18n.t('webapp.translate.no_examples') }}
+      {{ $t('webapp.translate.no_examples') }}
     </p>
   </div>
 </template>

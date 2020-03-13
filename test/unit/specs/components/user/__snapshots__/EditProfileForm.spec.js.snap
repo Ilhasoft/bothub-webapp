@@ -1,3 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EditProfileForm.vue renders correctly 1`] = `undefined`;
+exports[`EditProfileForm.vue renders correctly 1`] = `
+<form>
+  <loading-stub></loading-stub>
+  <!---->
+  <div class="field">
+    <div class="control has-text-centered"><button type="submit" class="button is-primary">some specific text</button></div>
+  </div>
+</form>
+`;

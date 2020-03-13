@@ -1,9 +1,9 @@
 <template>
   <div>
-    <b-field :label="this.$i18n.t('webapp.analyze_text.language')">
+    <b-field :label="$t('webapp.analyze_text.language')">
       <language-select v-model="language" />
     </b-field>
-    <b-field :label="this.$i18n.t('webapp.analyze_text.message')">
+    <b-field :label="$t('webapp.analyze_text.message')">
       <b-input
         v-model="text"
         type="textarea" />

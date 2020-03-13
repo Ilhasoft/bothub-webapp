@@ -30,6 +30,9 @@ describe('RepositoryViewBase.vue', () => {
 
     wrapper = shallowMount(RepositoryViewBase, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repository,
       },

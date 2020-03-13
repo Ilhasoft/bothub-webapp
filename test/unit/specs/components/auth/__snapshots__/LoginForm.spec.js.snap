@@ -1,3 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoginForm.vue renders correctly 1`] = `undefined`;
+exports[`LoginForm.vue renders correctly 1`] = `
+<form>
+  <loading-stub></loading-stub>
+  <!---->
+  <div class="field">
+    <div class="control has-text-right"><a href="#forgot-password" class="has-text-grey">
+        some specific text
+      </a></div>
+  </div>
+  <div class="field">
+    <div class="control has-text-centered"><button type="submit" class="button is-primary">Login</button></div>
+  </div>
+</form>
+`;

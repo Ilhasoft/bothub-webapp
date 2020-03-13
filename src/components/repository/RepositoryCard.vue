@@ -27,7 +27,7 @@
         </div>
 
         <div class="repository-card__info-item">
-          <span>{{ this.$i18n.t('webapp.layout.created_by') }}</span>
+          <span>{{ $t('webapp.layout.created_by') }}</span>
           <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
           || $attrs.owner__nickname }}</strong>
         </div>

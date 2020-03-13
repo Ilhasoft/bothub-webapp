@@ -11,7 +11,7 @@
       <bh-button
         :disabled="submitting"
         primary
-        type="submit">{{ this.$i18n.t('webapp.landing_page.create_bot') }}</bh-button>
+        type="submit">{{ $t('webapp.landing_page.create_bot') }}</bh-button>
     </div>
   </form>
 </template>

@@ -1,9 +1,9 @@
 <template>
   <div class="new-sentence">
     <div>
-      <h2>{{ this.$i18n.t('webapp.evaluate.add_new_test_sentence') }}</h2>
+      <h2>{{ $t('webapp.evaluate.add_new_test_sentence') }}</h2>
       <span>
-        {{ this.$i18n.t('webapp.evaluate.create_a_bench_of_test') }}
+        {{ $t('webapp.evaluate.create_a_bench_of_test') }}
       </span>
     </div>
     <div class="new-sentence__form">
@@ -20,7 +20,7 @@
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
-                :placeholder="this.$i18n.t('webapp.evaluate.enter_your_sentence_here')"
+                :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
                 size="normal"
                 @textSelected="setTextSelected($event)"
               />
@@ -34,7 +34,7 @@
                 v-model="intent"
                 :data="repository.intents_list || []"
                 :formatters="intentFormatters"
-                :placeholder="this.$i18n.t('webapp.evaluate.intent')"
+                :placeholder="$t('webapp.evaluate.intent')"
                 size="normal"
               />
             </bh-field>
@@ -48,7 +48,7 @@
               primary
               size="normal"
               @click="submitSentence()">
-              <slot v-if="!submitting">{{ this.$i18n.t('webapp.evaluate.submit') }}</slot>
+              <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
             </bh-button>
           </div>
         </div>
@@ -116,11 +116,11 @@ export default {
       const errors = [];
 
       if (!this.text) {
-        errors.push(this.$i18n.t('webapp.evaluate.you_need_type_a_text'));
+        errors.push(this.$t('webapp.evaluate.you_need_type_a_text'));
       }
 
       if (!this.intent) {
-        errors.push(this.$i18n.t('webapp.evaluate.intent_is_required'));
+        errors.push(this.$t('webapp.evaluate.intent_is_required'));
       }
 
       return errors;

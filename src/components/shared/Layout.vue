@@ -40,7 +40,7 @@
                 rounded
                 max-content
                 @click="openNewRepositoryModal()">
-                {{ this.$i18n.t('webapp.layout.newbot') }}
+                {{ $t('webapp.layout.newbot') }}
               </bh-button>
             </div>
             <div
@@ -65,10 +65,10 @@
                 </bh-dropdown-item>
                 <bh-dropdown-item
                   @click="openNewRepositoryModal()">
-                  {{ this.$i18n.t('webapp.layout.start_you_bot') }}
+                  {{ $t('webapp.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
-                  {{ this.$i18n.t('webapp.layout.logout') }}
+                  {{ $t('webapp.layout.logout') }}
                 </bh-dropdown-item>
               </bh-dropdown>
             </div>
@@ -79,7 +79,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="openLoginModal()">{{ this.$i18n.t('webapp.layout.signin') }}</bh-button>
+                @click="openLoginModal()">{{ $t('webapp.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -89,7 +89,7 @@
                 inverted
                 max-content
                 class="hide-mobile"
-                @click="signUp()">{{ this.$i18n.t('webapp.layout.signup') }}</bh-button>
+                @click="signUp()">{{ $t('webapp.layout.signup') }}</bh-button>
             </div>
           </div>
         </div>

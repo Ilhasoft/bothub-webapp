@@ -1,3 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryCard.vue renders correctly 1`] = `undefined`;
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div class="repository-info">
+  <div class="repository-info__title"><span class="repository-info__title__bagde"><router-link-stub to="[object Object]" tag="a" event="click"><bh-icon-button-stub type="button" value="botinho" class="repository-info__title__bagde__icon"></bh-icon-button-stub></router-link-stub></span>
+    <router-link-stub to="[object Object]" tag="a" event="click"><span class="text-color-fake-black"></span></router-link-stub>
+  </div>
+  <div class="repository-info__info-item"><span>some specific text</span> <strong class="medium text-color-primary-light">
+
+    </strong></div>
+</div>
+`;

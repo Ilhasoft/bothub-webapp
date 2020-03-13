@@ -10,7 +10,13 @@ localVue.use(BH);
 describe('SafariAlert.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SafariAlert, { localVue, router });
+    wrapper = shallowMount(SafariAlert, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+      router,
+    });
   });
 
   test('renders correctly', () => {

@@ -1,3 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TestView.vue renders correctly 1`] = `undefined`;
+exports[`TestView.vue renders correctly 1`] = `
+<div class="filter-evaluate-example">
+  <div class="filter-evaluate-example__filters">
+    <b-field-stub addons="true" class="filter-evaluate-example__filters__input-text">
+      <bh-text-stub value="" formatters="" debounce="750">
+        <div>
+          <bh-icon-button-stub type="submit" value="magnify" size="medium"></bh-icon-button-stub>
+        </div>
+      </bh-text-stub>
+    </b-field-stub>
+    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
+      <b-field-stub addons="true">
+        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="some specific text"></bh-autocomplete-stub>
+      </b-field-stub>
+      <b-field-stub addons="true">
+        <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="some specific text"></bh-autocomplete-stub>
+      </b-field-stub>
+      <!---->
+    </div>
+  </div>
+</div>
+`;

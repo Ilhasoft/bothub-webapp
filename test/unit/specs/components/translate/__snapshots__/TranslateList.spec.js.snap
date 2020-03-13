@@ -2,7 +2,9 @@
 
 exports[`TranslateList.vue renders correctly 1`] = `
 <div>
-  <!---->
-  <!---->
+  <paginatedlist-stub itemcomponent="[object Object]" list="[object Object]" perpage="20" repository="[object Object]" translate-to="es"></paginatedlist-stub>
+  <p>
+    some specific text
+  </p>
 </div>
 `;

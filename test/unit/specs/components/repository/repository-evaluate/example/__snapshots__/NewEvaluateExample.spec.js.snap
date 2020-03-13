@@ -1,3 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewEvaluateExample.vue renders correctly 1`] = `undefined`;
+exports[`NewEvaluateExample.vue renders correctly 1`] = `
+<div class="new-sentence">
+  <div>
+    <h2>some specific text</h2> <span>
+      some specific text
+    </span>
+  </div>
+  <div class="new-sentence__form">
+    <form>
+      <div class="new-sentence__form__wrapper">
+        <div>
+          <bh-field-stub errors="">
+            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+          </bh-field-stub>
+        </div>
+        <div>
+          <bh-field-stub errors="">
+            <bh-autocomplete-stub data="affirm,cuisine,greet" formatters="intentFormatters" placeholder="some specific text" size="normal"></bh-autocomplete-stub>
+          </bh-field-stub>
+        </div>
+        <div class="new-sentence__form__wrapper__submit-btn">
+          <bh-button-stub disabled="true" size="normal" primary="true" type="button" tooltiphover="some specific text,some specific text">some specific text</bh-button-stub>
+        </div>
+      </div>
+      <bh-field-stub errors="" class="new-sentence__form__entities">
+        <div class="columns">
+          <div class="column is-three-fifths">
+            <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
+          </div>
+        </div>
+      </bh-field-stub>
+    </form>
+  </div>
+</div>
+`;

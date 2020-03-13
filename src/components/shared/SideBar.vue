@@ -21,7 +21,7 @@
         <div class="sidenav__repository-info__text-info">
           <strong>{{ repository.name }}</strong>
           <p>
-            {{ this.$i18n.t('webapp.layout.created_by') }}
+            {{ $t('webapp.layout.created_by') }}
             <strong class="text-color-primary">{{ repository.owner__nickname }}</strong>
           </p>
         </div>

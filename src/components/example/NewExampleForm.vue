@@ -14,7 +14,7 @@
             :entities="entities"
             :available-entities="entitiesList"
             :formatters="textFormatters"
-            :placeholder="this.$i18n.t('webapp.trainings.add_a_sentence')"
+            :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
           >
@@ -33,7 +33,7 @@
             v-model="intent"
             :data="repository.intents_list || []"
             :formatters="intentFormatters"
-            :placeholder="this.$i18n.t('webapp.trainings.intent')"
+            :placeholder="$t('webapp.trainings.intent')"
             size="normal" />
         </bh-field>
       </div>
@@ -47,7 +47,7 @@
             size="normal"
             type="submit"
           >
-            <slot v-if="!submitting">{{ this.$i18n.t('webapp.trainings.submit') }}</slot>
+            <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
           </bh-button>
         </bh-field>
       </div>

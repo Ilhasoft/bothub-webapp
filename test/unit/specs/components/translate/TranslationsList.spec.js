@@ -16,6 +16,9 @@ describe('TranslationsList.vue', () => {
     wrapper = shallowMount(TranslationsList, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repository: {
           uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',

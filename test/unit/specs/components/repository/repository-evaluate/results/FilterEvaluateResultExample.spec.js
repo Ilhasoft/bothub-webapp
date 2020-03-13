@@ -15,6 +15,9 @@ describe('FilterEvaluateResultExample.vue', () => {
 
     wrapper = shallowMount(FilterEvaluateResultExample, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         debounceTime: 2,
         intents: [],

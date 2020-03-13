@@ -10,7 +10,12 @@ localVue.use(Buefy);
 describe('RoleSelect.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(RoleSelect, { localVue });
+    wrapper = shallowMount(RoleSelect, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('mount', () => {

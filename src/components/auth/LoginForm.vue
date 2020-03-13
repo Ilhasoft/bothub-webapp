@@ -17,7 +17,7 @@
           href="#forgot-password"
           class="has-text-grey"
           @click.prevent="forgotPasswordClick">
-          {{ this.$i18n.t('webapp.landing_page.forgot_password') }}
+          {{ $t('webapp.landing_page.forgot_password') }}
         </a>
       </div>
     </div>

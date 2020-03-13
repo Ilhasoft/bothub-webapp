@@ -15,7 +15,7 @@
         :query="query" />
     </div>
   </div>
-  <p v-else>{{ this.$i18n.t('webapp.evaluate.not_have_results') }}</p>
+  <p v-else>{{ $t('webapp.evaluate.not_have_results') }}</p>
 </template>
 
 <script>

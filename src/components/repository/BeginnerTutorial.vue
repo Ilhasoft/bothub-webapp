@@ -1,7 +1,7 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    :title="this.$i18n.t('webapp.tutorial.create_your_first_bot')">
+    :title="$t('webapp.tutorial.create_your_first_bot')">
     <div class="beginner-tutorial">
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
         <div
@@ -10,8 +10,8 @@
           <img src="~@/assets/gifs/step1.gif">
           <div class="beginner-tutorial__wrapper__text">
             <div>
-              <p>{{ this.$i18n.t('webapp.tutorial.grid1') }}</p>
-              <p>{{ this.$i18n.t('webapp.tutorial.grid2') }}</p>
+              <p>{{ $t('webapp.tutorial.grid1') }}</p>
+              <p>{{ $t('webapp.tutorial.grid2') }}</p>
             </div>
           </div>
         </div>
@@ -21,9 +21,9 @@
           <img src="~@/assets/gifs/step2.gif">
           <div class="beginner-tutorial__wrapper__text">
             <div>
-              <p>{{ this.$i18n.t('webapp.tutorial.grid3') }}</p>
+              <p>{{ $t('webapp.tutorial.grid3') }}</p>
               <p>
-                {{ this.$i18n.t('webapp.tutorial.grid4') }}</p>
+                {{ $t('webapp.tutorial.grid4') }}</p>
             </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
           class="bh-grid__item bh-grid__item--nested">
           <img src="~@/assets/gifs/step3.gif">
           <div class="beginner-tutorial__wrapper__text">
-            <p>{{ this.$i18n.t('webapp.tutorial.grid5') }}</p>
+            <p>{{ $t('webapp.tutorial.grid5') }}</p>
           </div>
         </div>
         <div
@@ -42,7 +42,7 @@
             class="beginner-tutorial__wrapper__botinho"
             src="~@/assets/imgs/mascot.svg">
           <div class="beginner-tutorial__wrapper__text">
-            <p>{{ this.$i18n.t('webapp.tutorial.grid6') }}</p>
+            <p>{{ $t('webapp.tutorial.grid6') }}</p>
           </div>
         </div>
       </div>
@@ -53,17 +53,17 @@
             'beginner-tutorial__wrapper__footer__prev-button': true,
           }"
           primary
-          @click="previous()">{{ this.$i18n.t('webapp.tutorial.previous') }}</bh-button>
+          @click="previous()">{{ $t('webapp.tutorial.previous') }}</bh-button>
         <bh-button
           v-if="currentValue !== 4"
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
-          @click="next()">{{ this.$i18n.t('webapp.tutorial.next') }}</bh-button>
+          @click="next()">{{ $t('webapp.tutorial.next') }}</bh-button>
         <bh-button
           v-else
           class="beginner-tutorial__wrapper__footer__next-button"
           primary
-          @click="closeModal()">{{ this.$i18n.t('webapp.tutorial.finish') }}</bh-button>
+          @click="closeModal()">{{ $t('webapp.tutorial.finish') }}</bh-button>
         <bh-stepper
           :steps="steps"
           :current-step="currentValue"

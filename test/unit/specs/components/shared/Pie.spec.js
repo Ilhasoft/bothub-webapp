@@ -11,6 +11,9 @@ describe('Pie.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(Pie, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         percent: 10,
       },

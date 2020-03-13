@@ -9,6 +9,9 @@ describe('Flag.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(Flag, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: { language: 'en' },
     });
   });

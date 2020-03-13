@@ -12,7 +12,7 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">{{ this.$i18n.t('webapp.my_profile.edit') }}</button>
+          class="button is-primary">{{ $t('webapp.my_profile.edit') }}</button>
       </div>
     </div>
   </form>

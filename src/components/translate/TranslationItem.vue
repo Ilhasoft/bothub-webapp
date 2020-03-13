@@ -21,9 +21,9 @@
             }"
             @click="toggleOriginal()">
             <span v-if="showingOriginal">
-              {{ this.$i18n.t('webapp.translate.show_translated') }}
+              {{ $t('webapp.translate.show_translated') }}
             </span>
-            <span v-else>{{ this.$i18n.t('webapp.translate.show_original') }}</span>
+            <span v-else>{{ $t('webapp.translate.show_original') }}</span>
           </button>
         </div>
       </div>
@@ -40,11 +40,11 @@
     <div class="translation-infos level is-mobile">
       <div class="level-left">
         <div class="level-item">
-          <strong>{{ this.$i18n.t('webapp.translate.translated_from') }}&nbsp;</strong>
+          <strong>{{ $t('webapp.translate.translated_from') }}&nbsp;</strong>
           <span>{{ from_language | languageVerbose }}&nbsp;</span>
           <flag :language="from_language" />
           <strong>&nbsp;</strong>
-          <strong>{{ this.$i18n.t('webapp.translate.to') }}&nbsp;</strong>
+          <strong>{{ $t('webapp.translate.to') }}&nbsp;</strong>
           <span>{{ language | languageVerbose }}&nbsp;</span>
           <flag :language="language" />
         </div>

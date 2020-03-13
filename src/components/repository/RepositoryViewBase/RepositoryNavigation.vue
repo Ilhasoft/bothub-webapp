@@ -21,13 +21,13 @@ export default {
   data() {
     return {
       links: [
-        ['repository-summary', this.$i18n.t('webapp.menu.summary')],
-        ['repository-training', this.$i18n.t('webapp.menu.training')],
-        ['repository-test', this.$i18n.t('webapp.menu.test')],
-        ['repository-translate', this.$i18n.t('webapp.menu.translate')],
-        ['repository-translations-status', this.$i18n.t('webapp.menu.translation_status')],
-        ['repository-integration', this.$i18n.t('webapp.menu.integration')],
-        ['repository-settings', this.$i18n.t('webapp.menu.settings')],
+        ['repository-summary', this.$t('webapp.menu.summary')],
+        ['repository-training', this.$t('webapp.menu.training')],
+        ['repository-test', this.$t('webapp.menu.test')],
+        ['repository-translate', this.$t('webapp.menu.translate')],
+        ['repository-translations-status', this.$t('webapp.menu.translation_status')],
+        ['repository-integration', this.$t('webapp.menu.integration')],
+        ['repository-settings', this.$t('webapp.menu.settings')],
       ],
     };
   },

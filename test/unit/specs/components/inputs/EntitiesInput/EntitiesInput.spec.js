@@ -13,6 +13,9 @@ describe('EntitiesInput.vue', () => {
   beforeEach(() => {
     wrapper = mount(EntitiesInput, {
       localVue,
+      mocks: {
+        $t: () => 'Add entity for',
+      },
       propsData: {
         repository: {},
         text: 'my name is douglas',

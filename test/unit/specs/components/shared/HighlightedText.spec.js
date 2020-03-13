@@ -9,6 +9,9 @@ describe('HighlightedText.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(HighlightedText, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         text: 'text',
         entities: [

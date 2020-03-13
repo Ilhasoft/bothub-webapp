@@ -9,7 +9,11 @@ localVue.use(Buefy);
 describe('SideBar.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SideBar);
+    wrapper = shallowMount(SideBar, {
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

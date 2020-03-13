@@ -11,11 +11,11 @@
         </router-link>
         <div class="sign-up__nav__login">
           <span class="sign-up__nav__text">
-            {{ this.$i18n.t('webapp.register_form.already_have_account') }}</span>
+            {{ $t('webapp.register_form.already_have_account') }}</span>
           <b-button
             class="is-primary sign-up__nav__login__button"
             size="normal"
-            @click="openLoginModal()">{{ this.$i18n.t('webapp.register_form.signin') }}</b-button>
+            @click="openLoginModal()">{{ $t('webapp.register_form.signin') }}</b-button>
         </div>
       </div>
     </nav>
@@ -27,7 +27,7 @@
       </div>
       <div class="column sign-up__wrapper-content__form">
         <div class="sign-up__wrapper-content__form__title">
-          <h1>{{ this.$i18n.t('webapp.register_form.get_started_free') }}</h1>
+          <h1>{{ $t('webapp.register_form.get_started_free') }}</h1>
         </div>
         <form @submit.prevent="onSubmit">
           <loading v-if="!formSchema" />
@@ -45,11 +45,11 @@
                 class="is-info"
                 native-type="submit"
                 full-width
-                color="info">{{ this.$i18n.t('webapp.register_form.get_free') }}</b-button>
+                color="info">{{ $t('webapp.register_form.get_free') }}</b-button>
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
-                {{ this.$i18n.t('webapp.register_form.policy_service') }}
+                {{ $t('webapp.register_form.policy_service') }}
               </small>
             </div>
           </div>

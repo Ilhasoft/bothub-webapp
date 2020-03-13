@@ -13,6 +13,9 @@ describe('WarningModal.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(WarningModal, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         open: true,
         languagesWarnings: {},

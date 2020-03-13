@@ -16,6 +16,9 @@ describe('ResetPasswordForm.vue', () => {
       {
         store,
         localVue,
+        mocks: {
+          $t: () => 'some specific text',
+        },
         propsData: {
           nickname: 'fake',
           token: 'token1',

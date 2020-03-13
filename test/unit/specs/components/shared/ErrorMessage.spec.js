@@ -11,6 +11,9 @@ describe('ErrorMessage.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(ErrorMessage, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         detail: 'Error 1',
       },

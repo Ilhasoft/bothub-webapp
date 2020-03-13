@@ -23,7 +23,7 @@
             v-model="intent"
             :data="intents || []"
             :formatters="inputFormatters"
-            :placeholder="this.$i18n.t('webapp.evaluate.all_intents')" />
+            :placeholder="$t('webapp.evaluate.all_intents')" />
         </b-field>
         <b-field
           :errors="errors.intent">
@@ -31,7 +31,7 @@
             v-model="entity"
             :data="entities || []"
             :formatters="inputFormatters"
-            :placeholder="this.$i18n.t('webapp.evaluate.all_entities')" />
+            :placeholder="$t('webapp.evaluate.all_entities')" />
         </b-field>
         <b-field v-if="languageFilter && languages">
           <b-select
