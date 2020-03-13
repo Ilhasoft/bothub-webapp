@@ -8318,9 +8318,9 @@ replace-ext@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-"request-mockup-json@https://github.com/douglasppaz/request-mockup-json":
+"request-mockup-json@https://github.com/bothub-it/request-mockup-json":
   version "0.1.0"
-  resolved "https://github.com/douglasppaz/request-mockup-json#df6c8e05f65ca0de1ac4e8b41bd732e89873c7dd"
+  resolved "https://github.com/bothub-it/request-mockup-json#df6c8e05f65ca0de1ac4e8b41bd732e89873c7dd"
   dependencies:
     query-string "^6.0.0"
 
