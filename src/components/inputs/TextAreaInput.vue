@@ -69,7 +69,12 @@ export default {
   &-textarea {
     background: none;
   }
+  &-textarea__input {
+    font-size: 0.8rem;
+  }
 }
+
+.bh-textarea__input
 
 .text-area-entities {
   background-color: white;
@@ -105,28 +110,6 @@ export default {
     &__text {
       border-radius: 4px;
       opacity: .5;
-    }
-
-    &--small {
-      padding: .5rem;
-      font-size: .5rem;
-      line-height: .5rem;
-    }
-
-    &--normal {
-      padding: .65rem 1rem;
-    }
-
-    &--medium {
-      padding: 1rem;
-      font-size: 1rem;
-      line-height: 1rem;
-    }
-
-    &--large {
-      padding: 1.75rem;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
     }
   }
 }
