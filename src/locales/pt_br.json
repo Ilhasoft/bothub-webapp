@@ -118,6 +118,7 @@
       "sentences_list": "Lista de frases",
       "run_training": "Executar treinamento",
       "submit": "Enviar",
+      "highlight_word": "Selecione palavras para marcar como entidade",
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
       "add_a_sentence": "Adicionar uma frase",

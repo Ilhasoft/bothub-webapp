@@ -118,6 +118,7 @@
 			"sentences_list": "Sentences list",
 			"run_training": "Run training",
 			"submit": "Submit",
+			"highlight_word": "Highlight words to mark as entity",
       "add_entity": "Add entity",
       "add_entity_for": "Add entity for \"{entity_selected}\"",
       "add_a_sentence": "Add a sentence",
