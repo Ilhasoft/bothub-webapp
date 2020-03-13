@@ -2,55 +2,58 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div v-if="repository">
-      <div v-if="authenticated">
-        <div
-          v-if="repository.authorization.can_write"
-          class="bh-grid bh-grid--column">
-          <div class="bh-grid__item">
-            <h1>{{ this.$i18n.t('webapp.settings.title_edit_repository') }}</h1>
-            <edit-repository-form
-              :owner-nickname="repository.owner__nickname"
-              :slug="repository.slug"
-              :initial-data="getEditInitialData()"
-              @edited="onEdited($event)" />
+    <div class="settings">
+      <div v-if="repository">
+        <div v-if="authenticated">
+          <div
+            v-if="repository.authorization.can_write">
+            <div class="tile is-vertical">
+              <h1>{{ this.$i18n.t('webapp.settings.title_edit_repository') }}</h1>
+              <edit-repository-form
+                :owner-nickname="repository.owner__nickname"
+                :slug="repository.slug"
+                :initial-data="getEditInitialData()"
+                @edited="onEdited($event)" />
+            </div>
+            <div class="tile is-vertical">
+              <h1>{{ this.$i18n.t('webapp.settings.manage_your_team') }}</h1>
+              <set-authorization-role-form
+                ref="setAuthorizationRoleForm"
+                :repository-uuid="repository.uuid"
+                @roleSetted="onRoleSetted()" />
+              <authorizations-list
+                ref="authorizationsList"
+                :repository-uuid="repository.uuid"
+                @edit="onEditRole($event)" />
+            </div>
+            <div class="tile is-vertical">
+              <h1>{{ this.$i18n.t('webapp.settings.authorization_requests') }}</h1>
+              <authorization-requests-list
+                :repository-uuid="repository.uuid"
+                @review="onReviewAuthorizationRequest()" />
+            </div>
           </div>
-          <div class="bh-grid__item">
-            <h1>{{ this.$i18n.t('webapp.settings.manage_your_team') }}</h1>
-            <set-authorization-role-form
-              ref="setAuthorizationRoleForm"
-              :repository-uuid="repository.uuid"
-              @roleSetted="onRoleSetted()" />
-            <authorizations-list
-              ref="authorizationsList"
-              :repository-uuid="repository.uuid"
-              @edit="onEditRole($event)" />
-          </div>
-          <div class="bh-grid__item">
-            <h1>{{ this.$i18n.t('webapp.settings.authorization_requests') }}</h1>
-            <authorization-requests-list
-              :repository-uuid="repository.uuid"
-              @review="onReviewAuthorizationRequest()" />
-          </div>
-        </div>
-        <div
-          v-else
-          class="bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ this.$i18n.t('webapp.settings.not_can_edit_repository') }}
+          <div
+            v-else>
+            <div class="tile is-vertical">
+              <b-notification
+                :closable="false"
+                type="is-warning">
+                {{ this.$i18n.t('webapp.settings.not_can_edit_repository') }}
+              </b-notification>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ this.$i18n.t('webapp.settings.login') }}
+        <div
+          v-else>
+          <div class="tile is-vertical">
+            <b-notification
+              :closable="false"
+              type="is-info">
+              {{ this.$i18n.t('webapp.settings.login') }}
+            </b-notification>
+            <login-form hide-forgot-password />
           </div>
-          <login-form hide-forgot-password />
         </div>
       </div>
     </div>
@@ -59,7 +62,6 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryBase from './Base';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
@@ -67,6 +69,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 
 import LoginForm from '@/components/auth/LoginForm';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -121,9 +124,9 @@ export default {
           },
         });
       }
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: 'Repository edited!',
-        type: 'success',
+        type: 'is-success',
       });
     },
     onRoleSetted() {
@@ -135,3 +138,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+  @import '~@/assets/scss/utilities.scss';
+
+    .settings {
+      @include default-margin
+    }
+
+</style>

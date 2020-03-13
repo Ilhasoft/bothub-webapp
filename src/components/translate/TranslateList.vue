@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginatedList
       v-if="translateList"
       :list="translateList"
       :item-component="translateExampleItem"
@@ -15,17 +15,14 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import TranslateExampleItem from './TranslateExampleItem';
-
-
-const components = {
-  Pagination,
-};
 
 export default {
   name: 'TranslateList',
-  components,
+  components: {
+    PaginatedList,
+  },
   props: {
     repository: {
       type: Object,
@@ -39,6 +36,10 @@ export default {
       type: String,
       required: true,
     },
+    query: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -49,6 +50,7 @@ export default {
   watch: {
     async from() { await this.updateList(); },
     async to() { await this.updateList(); },
+    query() { this.updateList(); },
   },
   async mounted() {
     await this.updateList();
@@ -65,6 +67,7 @@ export default {
           repositoryUuid: this.repository.uuid,
           from: this.from,
           to: this.to,
+          query: this.query,
         });
       }
     },

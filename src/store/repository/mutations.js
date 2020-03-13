@@ -19,12 +19,14 @@ export default {
   updateEvaluateResultId(state, { id, version }) {
     state.evaluateResultId = id;
     state.evaluateResultVersion = version;
-    state.currentTabSelected = 1;
   },
   updateEvaluateLanguage(state, value) {
     state.evaluateLanguage = value;
   },
-  updateCurrentTab(state, value) {
-    state.currentTabSelected = value;
+  setRepositoryVersion(state, value) {
+    if (state.repositoryVersion !== value.version.id) {
+      state.repositoryVersion = value.version.id;
+      state.repositoryVersionName = value.version.name;
+    }
   },
 };

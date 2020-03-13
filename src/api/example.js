@@ -5,11 +5,12 @@ import utils from './utils';
 
 
 export default {
-  new(repository, text, language, entities, intent) {
+  new(repository, repositoryVersion, text, language, entities, intent) {
     return request.$http.post(
       '/v2/repository/example/',
       {
         repository,
+        repository_version: repositoryVersion,
         text,
         language,
         entities,
@@ -24,12 +25,11 @@ export default {
   delete(exampleId) {
     return request.$http.delete(`/v2/repository/example/${exampleId}/`);
   },
-  search(repositoryUuid, query = {}) {
-    const queryString = qs.stringify({
+  search(repositoryUuid, query = {}, limit = 20) {
+    return new utils.Page('/v2/repository/examples/', limit, {
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return new utils.List(`/v2/repository/examples/?${queryString}`);
   },
   get(id) {
     return request.$http.get(`/v2/repository/example/${id}/`);

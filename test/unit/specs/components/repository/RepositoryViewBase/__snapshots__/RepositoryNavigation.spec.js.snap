@@ -1,15 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryNavigation.vue renders correctly 1`] = `
-<div class="repository-nav">
-  <div class="repository-nav__desktop">
-    <router-link-stub to="[object Object]" tag="a" event="click">Summary</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Training</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Test</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Translate</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Translation status</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Integration</router-link-stub>
-    <router-link-stub to="[object Object]" tag="a" event="click">Settings</router-link-stub>
-  </div>
-</div>
-`;
+exports[`RepositoryNavigation.vue renders correctly 1`] = `undefined`;

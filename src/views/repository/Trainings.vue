@@ -47,6 +47,7 @@
         <filter-examples
           :intents="repository.intents_list"
           :entities="repository.entities_list"
+          :language-filter="true"
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
@@ -76,7 +77,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
@@ -87,6 +87,7 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -136,6 +137,10 @@ export default {
       if (!this.querySchema.label) {
         delete this.querySchema.label;
       }
+      if (!this.querySchema.language) {
+        delete this.querySchema.language;
+      }
+
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
@@ -155,7 +160,7 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Request made! Wait for review of an admin.',
         type: 'is-success',
       });
@@ -168,14 +173,17 @@ export default {
       this.repository.examples__count -= 1;
       this.updateRepository(false);
     },
-    async train(repositoryUUID) {
+    async train(repositoryUuid) {
       this.training = true;
       try {
-        const response = await this.trainRepository({ repositoryUUID });
+        const response = await this.trainRepository({
+          repositoryUuid,
+          repositoryVersion: this.repositoryVersion,
+        });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {
-        this.$toast.open({
+        this.$buefy.toast.open({
           message: 'Repository not trained :(',
           type: 'is-danger',
         });

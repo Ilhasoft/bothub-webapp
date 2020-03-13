@@ -1526,10 +1526,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.8.6:
-  version "0.8.6"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.6.tgz#a8d7e570914b95d8d5aadc40f87bcdfbaf552f0e"
-  integrity sha512-7woxrdwANcnJbe7lofPxkJLGRRGIVwFXOo0kzEpiNB6alQj18NV6UrdAKse+LWCOADz+AeHe5gyc6qdgRjG5mw==
+buefy@^0.8.12:
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.12.tgz#416e8d0a6af346f1b5e61ae6145a2077b27ed490"
+  integrity sha512-scKb+0piTAEYk8mopu5HzshlGsT0K9ChlfkGhQgAF7jC9lH3Ta7anYXG+l8uBoSpqgChK0H19jPP55FbeKn1nA==
   dependencies:
     bulma "0.7.5"
 
@@ -2507,8 +2507,9 @@ date-fns@^2.0.0-alpha.11:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.26.tgz#e46afd73a2b50e0359446309ee7cb631d7467227"
 
 date-fns@^2.0.0-alpha.25:
-  version "2.0.0-alpha.27"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.0.0-alpha.27.tgz#5ecd4204ef0e7064264039570f6e8afbc014481c"
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.10.0.tgz#abd10604d8bafb0bcbd2ba2e9b0563b922ae4b6b"
+  integrity sha512-EhfEKevYGWhWlZbNeplfhIU/+N+x0iCIx7VzKlXma2EdQyznVlZhCptXUY+BegNpPW2kjdx15Rvq503YcXXrcA==
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -5704,15 +5705,11 @@ lodash._root@~3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._root/-/lodash._root-3.0.1.tgz#fba1c4524c19ee9a5f8136b4609f017cf4ded692"
   integrity sha1-+6HEUkwZ7ppfgTa0YJ8BfPTe1pI=
 
-lodash.assign@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
-
 lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
-lodash.clonedeep@^4.3.2, lodash.clonedeep@^4.5.0, lodash.clonedeep@~4.5.0:
+lodash.clonedeep@^4.5.0, lodash.clonedeep@~4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
@@ -5724,10 +5721,6 @@ lodash.debounce@^4.0.8:
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
-
-lodash.mergewith@^4.6.0:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.1.tgz#639057e726c3afbdb3e7d42741caa8d6e4335927"
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -5755,6 +5748,11 @@ lodash.without@~4.4.0:
 lodash@4.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.17, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.10:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-driver@^1.2.7:
   version "1.2.7"
@@ -6292,7 +6290,12 @@ mute-stream@~0.0.4:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-nan@^2.10.0, nan@^2.9.2:
+nan@^2.13.2:
+  version "2.14.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.0.tgz#7818f722027b2459a86f0295d434d1fc2336c52c"
+  integrity sha512-INOFj37C7k3AfaNTtX8RhsTw7qRy7eLET14cROi9+5HAVbbHuIWUHEauBv5qT4Av2tWasiTY1Jw6puUNqRJXQg==
+
+nan@^2.9.2:
   version "2.12.1"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.12.1.tgz#7b1aa193e9aa86057e3c7bbd0ac448e770925552"
 
@@ -6469,9 +6472,10 @@ node-releases@^1.1.1:
   dependencies:
     semver "^5.3.0"
 
-node-sass@^4.9.2:
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.11.0.tgz#183faec398e9cbe93ba43362e2768ca988a6369a"
+node-sass@^4.13.1:
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.13.1.tgz#9db5689696bb2eec2c32b98bfea4c7a2e992d0a3"
+  integrity sha512-TTWFx+ZhyDx1Biiez2nB0L3YrCZ/8oHagaDalbuBSlqXgUPsdkUSzJsVxeDO9LtPB49+Fh3WQl3slABo6AotNw==
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -6480,12 +6484,10 @@ node-sass@^4.9.2:
     get-stdin "^4.0.1"
     glob "^7.0.3"
     in-publish "^2.0.0"
-    lodash.assign "^4.2.0"
-    lodash.clonedeep "^4.3.2"
-    lodash.mergewith "^4.6.0"
+    lodash "^4.17.15"
     meow "^3.7.0"
     mkdirp "^0.5.1"
-    nan "^2.10.0"
+    nan "^2.13.2"
     node-gyp "^3.8.0"
     npmlog "^4.0.0"
     request "^2.88.0"
@@ -9914,6 +9916,7 @@ validate-npm-package-name@^3.0.0, validate-npm-package-name@~3.0.0:
 validator@^10.9.0:
   version "10.11.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-10.11.0.tgz#003108ea6e9a9874d31ccc9e5006856ccd76b228"
+  integrity sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
 
 validator@^8.1.0:
   version "8.2.0"
@@ -10044,7 +10047,7 @@ vue-markdown@^2.2.4:
 
 "vue-mc-drf-model@https://github.com/Ilhasoft/vue-mc-drf-model":
   version "0.1.0"
-  resolved "https://github.com/Ilhasoft/vue-mc-drf-model#6fa1426db16527519e2e6379ef72cf7a9df7f73f"
+  resolved "https://github.com/Ilhasoft/vue-mc-drf-model#0d047822c9d852ead65f5e19f62776c4aaef0794"
   dependencies:
     lodash "^4.17.11"
     vue-mc "^0.5.0"
@@ -10062,6 +10065,7 @@ vue-mc@^0.4.0:
 vue-mc@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/vue-mc/-/vue-mc-0.5.0.tgz#9202a191ca2472b951265f1e326dd8772388c672"
+  integrity sha512-04czw1f5jLBHxV/S3tlNjP1NwJ7iXWztnH2y9veWERl3eml5gh67W/KypTRvem/lUJJZPK6THJ8j5oiCMdDL0A==
   dependencies:
     axios "^0.18.0"
     date-fns "^2.0.0-alpha.25"
@@ -10114,6 +10118,7 @@ vue-uuid@^1.1.1:
 vue@2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
+  integrity sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
 
 vue@^2.2, vue@^2.5.17, vue@^2.5.2:
   version "2.5.21"

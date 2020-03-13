@@ -5,167 +5,9 @@
     <div
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
-      <div class="rpstr-vw-bs__wrapper__header">
-        <router-link
-          class="rpstr-vw-bs__wrapper__header__logo"
-          to="/home">
-          <img
-            src="~@/assets/imgs/logo.svg"
-            alt="bothub">
-        </router-link>
-        <div>
-          <repository-info
-            v-if="repository && repository.name"
-            :repository="repository" />
-        </div>
-        <div
-          :class="[
-            'bh-grid__item',
-            'bh-grid__item--grow-0',
-            'rpstr-vw-bs__wrapper__header__mobile-navigation',
-        ]"/>
-        <div
-          v-if="authenticated && openMyProfile"
-          class="bh-grid__item--grow-0 rpstr-vw-bs__wrapper__header__options">
-          <user-avatar
-            :profile="myProfile"
-            size="normal"
-            class="rpstr-vw-bs__wrapper__header__options__avatar"/>
-          <bh-dropdown position="left">
-            <bh-icon
-              slot="trigger"
-              value="menu-down"
-              size="small"
-              class="rpstr-vw-bs__wrapper__header__options__dropdown"/>
-            <bh-dropdown-item @click="openMyProfile()">
-              {{ myProfile.name || '...' }}
-            </bh-dropdown-item>
-            <bh-dropdown-item
-              @click="openNewRepositoryModal()">
-              Start your bot
-            </bh-dropdown-item>
-            <bh-dropdown-item @click="logout()">
-              Logout
-            </bh-dropdown-item>
-          </bh-dropdown>
-        </div>
-      </div>
-      <repository-navigation
-        v-if="repository && !repository.fatal && repository.name"
-        :repository="repository"
-        class="rpstr-vw-bs__wrapper__navigation hide-mobile" />
-      <div
-        v-if="repository && !repository.fatal && repository.name"
-        class="rpstr-vw-bs__status-bar">
-        <div class="rpstr-vw-bs__status-bar rpstr-vw-bs__wrapper__content bh-grid">
-          <side-bar-navigation
-            :repository="repository"
-            class="bh-grid__item rpstr-vw-bs__wrapper__header__info--mobile"/>
-          <div class="rpstr-vw-bs__status-bar__repo-info bh-grid text-color-grey-dark">
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="language" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ repository.available_languages.length }}</span>
-              <span class="hide-mobile">languages</span>
-            </div>
-            <div class="rpstr-vw-bs__status-bar__icons-align bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="sentence" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ repository.examples__count }}</span>
-              <span class="hide-mobile">sentences</span>
-            </div>
-            <div class="gap"/>
-          </div>
-          <div
-            v-if="authenticated && repository.authorization.can_write"
-            class="bh-grid rpstr-vw-bs__status-bar__repo-info">
-            <div
-              v-if="warningsCount > 0"
-              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="warning" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ warningsCount }}
-              </span>
-              <span class="hide-mobile">warnings</span>
-            </div>
-
-            <div
-              v-if="requirementsCount > 0"
-              class="rpstr-vw-bs__status-bar__icons-align text-color-grey-dark bh-grid__item">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size"
-                value="close-circle" />
-              <span class="rpstr-vw-bs__status-bar__text-information">
-                {{ requirementsCount }}</span>
-              <span class="hide-mobile">requirements missed</span>
-            </div>
-            <div
-              v-if="repository.ready_for_train"
-              class="text-color-primary bh-grid__item rpstr-vw-bs__status-bar__icons-align">
-              <bh-icon
-                class="rpstr-vw-bs__status-bar__icons-align--size hide-mobile"
-                value="botinho" />
-              <span class="rpstr-vw-bs__status-bar__text-information hide-mobile">
-                {{ this.$i18n.t('webapp.layout.read_for_train') }}</span>
-            </div>
-          </div>
-          <div
-            v-else-if="authenticated && repository.available_request_authorization"
-            class="bh-grid hide-mobile">
-            <div
-              class="bh-grid__item clickable"
-              @click.prevent="openRequestAuthorizationModal">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon />
-                <span class="rpstr-vw-bs__status-bar__text-information">
-                  {{ this.$i18n.t('webapp.layout.request_authorization') }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            v-else-if="authenticated
-              && repository.request_authorization
-            && !repository.request_authorization.approved_by"
-            class="bh-grid hide-mobile">
-            <div class="bh-grid__item">
-              <span class="text-color-grey-dark">
-                {{ this.$i18n.t('webapp.layout.authorization_requested') }}
-              </span>
-            </div>
-          </div>
-          <div
-            v-else-if="!authenticated"
-            class="bh-grid hide-mobile">
-            <div
-              class="bh-grid__item clickable"
-              @click.prevent="openLoginModal">
-              <div class="text-color-primary rpstr-vw-bs__status-bar__icons-align">
-                <bh-icon value="account" />
-                <span class="rpstr-vw-bs__status-bar__text-information">
-                  {{ this.$i18n.t('webapp.register_form.signin') }}
-                </span>
-              </div>
-            </div>
-          </div>
-          <div
-            v-else
-            class="bh-grid">
-            <div class="bh-grid__item">&nbsp;</div>
-          </div>
-        </div>
-      </div>
-      <analyze-text-drawer
-        v-if="repository && repository.uuid && authenticated"
-        :repository-uuid="repository.uuid"
-        :default-language="repository.language"
-        :available-languages="repository.available_languages" />
+      <quick-test
+        v-if="authenticated && repository"
+        :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
         class="rpstr-vw-bs__wrapper__content">
@@ -195,7 +37,6 @@
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repository.uuid"
       @requestDispatched="onAuthorizationRequested()" />
-    <site-footer class="rpstr-vw-bs__footer"/>
   </div>
 </template>
 
@@ -206,9 +47,9 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
-import RepositoryNavigation from './RepositoryNavigation';
-import AnalyzeTextDrawer from '@/components/repository/AnalyzeTextDrawer';
+import QuickTest from '@/components/quick-test/QuickTest';
 import SideBarNavigation from '@/components/shared/SideBar';
+import RepositoryNavigation from './RepositoryNavigation';
 
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -226,7 +67,7 @@ export default {
     SiteFooter,
     RepositoryInfo,
     RepositoryNavigation,
-    AnalyzeTextDrawer,
+    QuickTest,
     UserAvatar,
     NewRepositoryModal,
     RequestAuthorizationModal,
@@ -333,7 +174,6 @@ export default {
     $medium-screen: 1035px;
     $header-height: (16rem + $navigation-height);
     $wrapper-width: 100%;
-    background-color: $color-white;
     height: 100%;
 
 
@@ -344,7 +184,7 @@ export default {
       padding: 0;
 
       :nth-child(3n) {
-        // margin-right: 8px;
+        margin-right: 8px;
       }
 
       @media screen and (max-width: $medium-screen) {
@@ -458,16 +298,16 @@ export default {
 
         @media screen and (max-width: $mobile-width) {
           min-height: auto;
-          padding: 1rem;
+          margin: 1rem;
         }
       }
 
       &__content {
-        max-width: 80%;
-        margin: 0 auto;
+
+        margin: 1rem;
 
         @media screen and (min-width: 1200px) {
-          width: 62.5rem;
+          margin: 1.5rem  7.125rem 1.5rem 5.2rem;
         }
       }
 
@@ -484,6 +324,7 @@ export default {
 
     &__error {
       padding: .5rem;
+
       h1 {
         font-size: 3rem;
         line-height: 4rem;

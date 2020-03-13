@@ -2,11 +2,11 @@
 /* eslint-disable no-console, import/first */
 jest.mock('./request');
 
-import repository from './repository';
 
 import store from '@/store';
 import TYPES from '@/store/types';
 import { ROLE_CONTRIBUTOR } from '@/utils';
+import repository from './repository';
 
 
 describe('api/repository', () => {
@@ -17,7 +17,7 @@ describe('api/repository', () => {
 
   test('getAll', async () => {
     const list = repository.getAll();
-    await list.next();
+    await list.updateItems(1);
     expect(list.items).toHaveLength(20);
   });
 

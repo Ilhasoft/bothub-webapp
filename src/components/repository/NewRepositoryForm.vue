@@ -42,10 +42,20 @@ export default {
       drfRepositoryModel: {},
     };
   },
+  computed: {
+    filteredSchema() {
+      return Object.entries(this.formSchema).reduce((schema, entry) => {
+        const [key, value] = entry;
+        // eslint-disable-next-line no-param-reassign
+        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
+        return schema;
+      }, {});
+    },
+  },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(
-      this.formSchema,
+      this.filteredSchema,
       RepositoryModel,
     );
 

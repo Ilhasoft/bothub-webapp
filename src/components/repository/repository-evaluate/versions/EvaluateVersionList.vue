@@ -3,8 +3,7 @@
     <pagination
       v-if="versionsList"
       :item-component="evaluateItem"
-      :list="versionsList"
-      @dispatch="goToDetails()" />
+      :list="versionsList" />
     <p
       v-if="versionsList && versionsList.empty"
       class="no-examples">{{ this.$i18n.t('webapp.evaluate.no_versions') }}</p>

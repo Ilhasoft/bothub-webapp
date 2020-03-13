@@ -4,9 +4,10 @@ import entity from '@/api/entity';
 
 export default {
   async newExample(store, {
-    repository, text, language, entities, intent,
+    repository, repositoryVersion, text, language, entities, intent,
   }) {
-    const response = await example.new(repository, text, language, entities, intent);
+    // eslint-disable-next-line
+    const response = await example.new(repository, repositoryVersion, text, language, entities, intent);
     return response;
   },
   async getExamples(store, { repositoryUuid }) {
@@ -17,11 +18,14 @@ export default {
     await example.delete(id);
     return true;
   },
-  async getExamplesToTranslate(store, { repositoryUuid, from, to }) {
+  async getExamplesToTranslate(store, {
+    repositoryUuid, from, to, query,
+  }) {
     const response = await example.search(repositoryUuid, {
       language: from,
       has_not_translation_to: to,
       ordering: 'created_at',
+      ...query,
     });
     return response;
   },
