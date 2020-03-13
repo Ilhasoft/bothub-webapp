@@ -60,7 +60,8 @@
               </div></b-field>
               <span
                 v-else
-                class="versions__table__version-number">
+                class="versions__table__version-number"
+                @click="handleChangeVersion(props.row)">
                 {{ props.row.name }}
               </span>
             </b-table-column>
@@ -183,6 +184,7 @@ export default {
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',
+      'setUpdateVersions',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
@@ -222,6 +224,11 @@ export default {
         }).then(() => this.updateVersions()),
       });
     },
+    handleChangeVersion(version) {
+      this.setRepositoryVersion({
+        version,
+      });
+    },
     onEditVersion(version) {
       const { id, name } = version;
       this.isEdit = {
@@ -259,6 +266,7 @@ export default {
         message: 'Version was created',
         type: 'is-success',
       });
+      this.setUpdateVersions(true);
       this.updateVersions();
     },
     onDeleteVersion(id, isDefault) {
@@ -276,8 +284,18 @@ export default {
           confirmText: 'Delete Version',
           type: 'is-danger',
           hasIcon: true,
-          onConfirm: () => this.deleteVersion(id)
-            .then(() => this.updateVersions()),
+          onConfirm: () => {
+            this.loadingList = true;
+            try {
+              this.deleteVersion(id);
+              this.setUpdateVersions(true);
+              this.updateVersions();
+            } catch (e) {
+              this.showError(e);
+            } finally {
+              this.loadingList = false;
+            }
+          },
         });
       }
     },

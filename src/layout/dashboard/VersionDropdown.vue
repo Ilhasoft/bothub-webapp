@@ -46,6 +46,7 @@ export default {
     ...mapGetters([
       'getCurrentRepository',
       'authenticated',
+      'getUpdateVersionsState',
     ]),
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
@@ -63,6 +64,12 @@ export default {
         this.getAllVersions();
       }
     },
+    getUpdateVersionsState() {
+      if (this.getUpdateVersionsState) {
+        this.getAllVersions();
+        this.setUpdateVersions(false);
+      }
+    },
   },
   mounted() {
     this.getAllVersions();
@@ -71,6 +78,7 @@ export default {
     ...mapActions([
       'getFirstFiveVersions',
       'setRepositoryVersion',
+      'setUpdateVersions',
     ]),
     async getAllVersions() {
       if (!this.repositoryUUID) return;
@@ -78,8 +86,6 @@ export default {
       try {
         const response = await this.getFirstFiveVersions(this.repositoryUUID);
         this.allVersions = response.data.results;
-      } catch (e) {
-        console.log(e);
       } finally {
         this.isLoading = false;
       }
