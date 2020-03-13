@@ -164,13 +164,18 @@ export default {
       const entity = label.entities.length > 1 ? 'entities' : 'entity';
 
       if (label.value === 'other') {
-        return `<strong>${label.entities.length}</strong> unlabeled ${entity}`;
+        return this.$t('webapp.home.unlabeled', { entities_length: label.entities.length, _entity: entity });
       }
 
-      return `<strong>${label.entities.length}</strong> ${entity} labeled <strong>${label.value}</strong>`;
+      return this.$t('webapp.home.labeled',
+        {
+          entities_length: label.entities.length,
+          _entity: entity,
+          label_value: label.value,
+        });
     },
     formattedEntityTitle() {
-      return `This bot has <strong>${this.repository.intents_list.length}</strong> intents`;
+      return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
     },
   },
 };
