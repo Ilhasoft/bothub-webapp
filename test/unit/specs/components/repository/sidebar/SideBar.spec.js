@@ -10,6 +10,7 @@ describe('SideBar.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(SideBar, {
+      localVue,
       mocks: {
         $t: () => 'some specific text',
       },
@@ -22,7 +23,6 @@ describe('SideBar.vue', () => {
 
   describe('click on collapse button', () => {
     beforeEach(() => {
-      wrapper = shallowMount(SideBar);
       const collapseButton = wrapper.find({ ref: 'collapseButton' });
       collapseButton.trigger('click');
     });
