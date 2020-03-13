@@ -27,7 +27,7 @@
 			"signin": "Sign in",
 			"get_started_free": "Get started free",
 			"get_free": "Get free",
-			"policy_service": "By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy."
+			"policy_service": "By clicking “Continue” I agree to Bothub of Service and Privacy Policy."
 		},
 		"landing_page": {
 			"signin": "Sign in",
@@ -71,6 +71,15 @@
       "language": "Language",
       "message": "Message"
 		},
+    "quick_test": {
+      "quick_test": "QUICK TEST",
+      "error_quick_test": "An error ocurred, we couldn't analyze your text",
+      "intent": "Intent",
+      "debug": "Debug",
+      "raw": "Raw",
+      "add_a_sentence": "Add a sentence"
+
+    },
 		"evaluate": {
 			"header_title": "Test your data set",
 			"header_title_p": "How is your model performing? Do you have enough data? Are your intents and entities well-designed?",
@@ -167,10 +176,19 @@
       "summary": "Summary",
       "training": "Training",
       "test": "Test",
-      "translate": "Translate",
-      "translation_status": "Translation status",
+      "sentences": "Sentences",
+      "results": "Results",
+      "inbox": "Inbox",
+      "translation": "Translation",
       "integration": "Integration",
-      "settings": "Settings"
+      "settings": "Settings",
+      "versions": "Versions"
+    },
+    "dashboard": {
+      "sentences": "sentences",
+      "languages": "languages",
+      "warning": "warning",
+      "exit_inteligence": "Exit Inteligence"
     }
 	}
 }

@@ -68,19 +68,21 @@
             <span>{{
               getCurrentRepository.available_languages ?
                 getCurrentRepository.available_languages.length :
-            0 }} languages</span>
+            0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
-            <span>{{ getCurrentRepository.examples__count }} sentences</span>
+            <span>
+              {{ getCurrentRepository.examples__count }} {{ $t('webapp.dashboard.sentences') }}
+            </span>
           </div>
           <div
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="warning" />
-            <span>{{ warningsCount }} warning</span>
+            <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
             position="is-bottom-left"
@@ -97,11 +99,11 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="openLoginModal()">Sign in</b-dropdown-item>
+              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="signUp()">Sign up</b-dropdown-item>
+              @click="signUp()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
@@ -109,14 +111,18 @@
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="openNewRepositoryModal()">Start your bot</b-dropdown-item>
+              @click="openNewRepositoryModal()">
+              {{ $t('webapp.layout.start_you_bot') }}
+            </b-dropdown-item>
             <b-dropdown-item
               aria-role="listitem"
-              @click="routerHandle('home')">Exit Inteligence</b-dropdown-item>
+              @click="routerHandle('home')">
+              {{ $t('webapp.dashboard.exit_inteligence') }}
+            </b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="logout()">Logout</b-dropdown-item>
+              @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
