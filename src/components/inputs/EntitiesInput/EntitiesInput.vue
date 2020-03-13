@@ -30,8 +30,7 @@
     >
       <span>
         <span v-if="textSelectedValue">
-          {{ $t('webapp.trainings.add_entity_for') }}
-          "{{ textSelectedValue }}"
+          {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
         </span>
         <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
       </span>
