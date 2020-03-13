@@ -16,7 +16,9 @@
         </bh-text>
       </b-field>
       <div class="filter-evaluate-example__filters__wrapper">
-        <span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
+        <span class="filter-evaluate-example__filters__wrapper__text">
+          {{ $t('webapp.dashboard.filter_by') }}:
+        </span>
         <b-field
           :errors="errors.intent">
           <bh-autocomplete

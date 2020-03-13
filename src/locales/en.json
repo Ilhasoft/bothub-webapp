@@ -191,7 +191,27 @@
       "sentences": "sentences",
       "languages": "languages",
       "warning": "warning",
-      "exit_inteligence": "Exit Inteligence"
+      "exit_inteligence": "Exit Inteligence",
+      "all_versions": "See all versions",
+      "created_by": "Created by",
+      "filter_by": "Filter by"
+    },
+    "versions": {
+      "edit_choose_version": "Add, edit and choose versions of your bot intelligence.",
+      "date_created": "Date Created",
+      "last_modified": "Last Modified",
+      "created_by": "Created by",
+      "main": "Main",
+      "change_default_version": "Change default version",
+      "message_change_default_version": "Are you sure you want to change this default version?",
+      "confirm_change_default_version": "Change default",
+      "version_has_edited": "Version was edited",
+      "something_wrong": "Something wrong ):",
+      "version_was_created": "Version was created",
+      "you_cannot_delete_main_branch": "You cannot delete the main branch",
+      "deleting_version": "Deleting Version",
+      "message_deleting_version": "Are you sure you want to delete this version? This action cannot be undone.",
+      "confirm_deleting_version": "Delete Version"
     }
 	}
 }

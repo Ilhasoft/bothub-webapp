@@ -52,11 +52,13 @@
                   </b-dropdown-item>
                   <b-dropdown-item
                     aria-role="listitem"
-                    @click="routerHandle('repository-versions')">See all versions</b-dropdown-item>
+                    @click="routerHandle('repository-versions')">
+                    {{ $t('webapp.menu.all_versions') }}
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
-            <span class="has-text-white">Created by
+            <span class="has-text-white">{{ $t('webapp.menu.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>

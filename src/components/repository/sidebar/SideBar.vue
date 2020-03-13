@@ -119,10 +119,14 @@
             icon="wechat" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Sentences</b-dropdown-item>
+            @click="routerHandle('repository-test')">
+            {{ $t('webapp.menu.sentences') }}
+          </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-results')">Results</b-dropdown-item>
+            @click="routerHandle('repository-results')">
+            {{ $t('webapp.menu.results') }}
+          </b-dropdown-item>
         </b-dropdown>
         <b-icon
           class="icon-list"
@@ -144,10 +148,14 @@
             icon="settings" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-settings')">Settings</b-dropdown-item>
+            @click="routerHandle('repository-settings')">
+            {{ $t('webapp.menu.settings') }}
+          </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-versions')">Versions</b-dropdown-item>
+            @click="routerHandle('repository-versions')">
+            {{ $t('webapp.menu.versions') }}
+          </b-dropdown-item>
         </b-dropdown>
       </div>
       <div/>

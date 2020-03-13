@@ -15,7 +15,7 @@
       </bh-text>
     </bh-field>
     <div class="bh-grid__item filter-evaluate-example__text">
-      <span>Filter by:</span>
+      <span>{{ $t('webapp.dashboard.filter_by') }}:</span>
     </div>
     <bh-field
       :errors="errors.intent"
