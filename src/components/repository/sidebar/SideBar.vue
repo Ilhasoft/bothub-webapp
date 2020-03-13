@@ -156,7 +156,9 @@
             @click="routerHandle('repository-translate')">Translate</b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-translations-status')">Translation Status</b-dropdown-item>
+            @click="routerHandle('repository-translations-status')">
+            Translation Status
+          </b-dropdown-item>
         </b-dropdown>
         <b-icon
           class="icon-list"
