@@ -211,7 +211,7 @@ export default {
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
         title: 'Change default version',
-        message: 'Are you sure you want to change this default version?',
+        message: 'Are you sure you want to change the default version?',
         confirmText: 'Change default',
         type: 'is-warning',
         hasIcon: true,
