@@ -111,6 +111,16 @@ export default {
       return Object.keys(this.repository.languages_ready_for_train);
     },
   },
+  watch: {
+    repository() {
+      if (!this.repository) {
+        this.selectedLanguage = null;
+        return;
+      }
+
+      this.selectedLanguage = this.repository.language;
+    },
+  },
   methods: {
     ...mapActions([
       'analyzeText',
