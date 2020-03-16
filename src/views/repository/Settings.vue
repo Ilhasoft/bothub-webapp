@@ -64,7 +64,6 @@
         </div>
       </div>
     </div>
-    </div>
   </repository-view-base>
 </template>
 
