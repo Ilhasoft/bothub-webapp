@@ -35,32 +35,41 @@
           </div>
           <div
             v-else>
-            <div class="tile is-vertical">
-              <b-notification
-                :closable="false"
-                type="is-warning">
+            <div class="bh-grid__item">
+              <div class="bh-notification bh-notification--warning">
                 {{ $t('webapp.settings.not_can_edit_repository') }}
-              </b-notification>
+                <request-authorization-modal
+                  v-if="repository"
+                  :open.sync="requestAuthorizationModalOpen"
+                  :repository-uuid="repository.uuid"
+                  @requestDispatched="onAuthorizationRequested()" />
+                <a
+                  class="requestAuthorization"
+                  @click="openRequestAuthorizationModal">Request authorization</a>
+
+              </div>
             </div>
           </div>
         </div>
-        <div
-          v-else>
-          <div class="tile is-vertical">
-            <b-notification
-              :closable="false"
-              type="is-info">
-              {{ $t('webapp.settings.login') }}
-            </b-notification>
-            <login-form hide-forgot-password />
-          </div>
+      </div>
+      <div
+        v-else>
+        <div class="tile is-vertical">
+          <b-notification
+            :closable="false"
+            type="is-info">
+            {{ $t('webapp.settings.login') }}
+          </b-notification>
+          <login-form hide-forgot-password />
         </div>
       </div>
+    </div>
     </div>
   </repository-view-base>
 </template>
 
 <script>
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
@@ -82,8 +91,14 @@ export default {
     AuthorizationsList,
     AuthorizationRequestsList,
     LoginForm,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
+  data() {
+    return {
+      requestAuthorizationModalOpen: false,
+    };
+  },
   methods: {
     getEditInitialData() {
       const {
@@ -135,6 +150,17 @@ export default {
     onReviewAuthorizationRequest() {
       this.$refs.authorizationsList.updateAuthorizations();
     },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$bhToastNotification({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'success',
+      });
+      this.updateRepository(false);
+    },
   },
 };
 </script>
@@ -142,9 +168,21 @@ export default {
 <style lang="scss" scoped>
 
   @import '~@/assets/scss/utilities.scss';
+  @import '~@/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
     .settings {
-      @include default-margin
+      @include default-margin;
     }
+    .requestAuthorization{
+        color: $color-fake-black;
+        font-weight: $font-weight-medium;
+        text-align: center;
+        float: right
+      }
+    a {
+    text-decoration: none !important;
+    }
+
 
 </style>
