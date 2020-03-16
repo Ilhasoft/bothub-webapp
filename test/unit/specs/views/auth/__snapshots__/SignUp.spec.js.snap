@@ -14,17 +14,17 @@ exports[`LoginForm.vue renders correctly 1`] = `
     <div class="column is-half sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
     <div class="column sign-up__wrapper-content__form">
       <div class="sign-up__wrapper-content__form__title">
-        <h1>Get started free</h1>
+        <h1>Up to 10,000 predictions for free</h1>
       </div>
       <form>
         <loading-stub></loading-stub>
         <!---->
         <div class="field">
           <div class="control has-text-centered">
-            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">Get free</b-button-stub>
+            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">Sign up</b-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
-              By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
+              By clicking “Continue” I agree to Bothub’s Terms of Service and Privacy Policy.
             </small></div>
         </div>
       </form>
