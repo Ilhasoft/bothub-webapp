@@ -58,7 +58,7 @@
                 </b-dropdown>
               </div>
             </div>
-            <span class="has-text-white">{{ $t('webapp.menu.created_by') }}
+            <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>
