@@ -44,26 +44,26 @@
           <span class="text-color-primary sidenav__status__info">
             <bh-icon
               value="botinho" />
-            Your bot is ready to be trained </span>
+            {{ $t('webapp.layout.read_for_train') }} </span>
         </a>
         <a
           v-else-if="!authenticated"
           href="#"
           @click.prevent="openLoginModal">
-          Sign In
+          {{ $t('webapp.layout.signin') }}
         </a>
         <a
           v-else-if="authenticated && repository.available_request_authorization"
           href="#"
           @click.prevent="openRequestAuthorizationModal">
-          Request Authorization
+          {{ $t('webapp.layout.request_authorization') }}
         </a>
         <a
           v-else-if="authenticated
             && repository.request_authorization
           && !repository.request_authorization.approved_by">
           <p class="text-color-grey-dark">
-            Authorization Requested
+            {{ $t('webapp.layout.authorization_requested') }}
           </p>
         </a>
       </div>
@@ -78,12 +78,12 @@
         <a
           href="#"
           @click.prevent="openNewRepositoryModal">
-          Start your bot
+          {{ $t('webapp.layout.start_you_bot') }}
         </a>
         <a
           href="#"
           @click.prevent="logout">
-          Logout
+          {{ $t('webapp.layout.logout') }}
         </a>
       </div>
     </div>

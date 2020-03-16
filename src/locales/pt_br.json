@@ -27,7 +27,7 @@
       "signin": "Entrar",
       "get_started_free": "Começe grátis",
       "get_free": "Começar",
-      "policy_service": "Clicando em \"Continuar\" eu aceito os Termos de Serviço e Política de Privacidade do Bothub."
+      "policy_service": "Clicando em \"Continuar\" eu concordo com as Políticas de Serviço e Privacidade do Bothub."
     },
     "landing_page": {
       "signin": "Entrar",
@@ -71,6 +71,15 @@
       "language": "Idioma",
       "message": "Mensagem"
     },
+    "quick_test": {
+      "quick_test": "TESTE RÁPIDO",
+      "error_quick_test": "Ocorreu um erro, não podemos analisar o seu texto",
+      "intent": "Intenção",
+      "debug": "Debug",
+      "raw": "Raw",
+      "add_a_sentence": "Adicionar uma frase"
+
+    },
     "evaluate": {
       "header_title": "Teste sua inteligência",
       "header_title_p": "Como seu modelo está performando? Você tem dados suficientes? Suas intenções e entidades foram bem desenhadas?",
@@ -91,14 +100,18 @@
       "you_need_type_a_text": "Você precisa escrever uma frase",
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
-      "no_versions": "Sem versões"
+      "no_versions": "Sem versões",
+      "no_sentences": "Não há frases."
     },
     "home": {
       "description": "Descrição",
       "no_description": "Não há descrição para essa inteligência",
       "intents_list": "Lista de Intenções",
       "entities_list": "Lista de Entidades",
-      "entities_label": "entidades agrupadas por categoria."
+      "entities_label": "entidades agrupadas por categoria.",
+      "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
+      "labeled": "<strong>{entities_length}</strong> {_entity} categorizada <strong>{label_value}</strong>",
+      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -118,7 +131,7 @@
       "sentences_list": "Lista de frases",
       "run_training": "Executar treinamento",
       "submit": "Enviar",
-      "highlight_word": "Selecione palavras para marcar como entidade",
+      "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
       "add_a_sentence": "Adicionar uma frase",
@@ -167,10 +180,39 @@
       "summary": "Resumo",
       "training": "Treinar",
       "test": "Testar",
-      "translate": "Traduzir",
-      "translation_status": "Status tradução",
+      "sentences": "Frases",
+      "results": "Resultados",
+      "inbox": "Inbox",
+      "translation": "Tradução",
       "integration": "Integração",
-      "settings": "Configurações"
+      "settings": "Ajustes",
+      "versions": "Versões"
+    },
+    "dashboard": {
+      "sentences": "frases",
+      "languages": "idiomas",
+      "warning": "alerta",
+      "exit_inteligence": "Sair da inteligência",
+      "all_versions": "Ver todas versões",
+      "created_by": "Criado por",
+      "filter_by": "Filtrar por"
+    },
+    "versions": {
+      "edit_choose_version": "Adicionar, editar ou escolher versões da sua inteligência.",
+      "date_created": "Data de Criação",
+      "last_modified": "Última Modificação",
+      "created_by": "Criado por",
+      "main": "Principal",
+      "change_default_version": "Mude a versão padrão",
+      "message_change_default_version": "Você tem certeza que quer mudar a versão padrão?",
+      "confirm_change_default_version": "Mudar padrão",
+      "version_has_edited": "A versão foi editada",
+      "something_wrong": "Algo deu errado ):",
+      "version_was_created": "Versão foi criada",
+      "you_cannot_delete_main_branch": "Você não pode deletar a versão principal",
+      "deleting_version": "Deletar Versão",
+      "message_deleting_version": "Você tem certeza que quer deletar essa versão? Essa ação não pode ser desfeita.",
+      "confirm_deleting_version": "Deletar Versão"
     }
   }
 }
