@@ -89,3 +89,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.animation-content.modal-content {
+    overflow: visible !important;
+  }
+</style>
