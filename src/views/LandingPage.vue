@@ -74,7 +74,7 @@
     <section class="landing-page__signup">
       <div class="landing-page__singup bh-grid text-center">
         <div class="bh-grid__item bh-grid__item">
-          <h1>Join the millions of developers already using Bothub</h1>
+          <h1>Join the developers community already using Bothub</h1>
           <bh-button
             class="landing-page__signup__button"
             size="normal"
