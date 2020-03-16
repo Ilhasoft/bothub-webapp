@@ -50,10 +50,11 @@
         <div
           class="quick-test__input"
         >
-          <example-text-with-highlighted-entities-input
+          <text-area-input
             ref="textInput"
             :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
+            :update-value="selectedLanguage"
             size="normal"
 
             @submit="sendMessage"
@@ -65,7 +66,7 @@
               dropdown-direction="is-top-left"
               class="language-append"
             />
-          </example-text-with-highlighted-entities-input>
+          </text-area-input>
         </div>
       </div>
     </div>
@@ -78,7 +79,7 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
-import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 export default {
@@ -87,7 +88,7 @@ export default {
     LanguageBadge,
     RepositoryDebug,
     Loading,
-    ExampleTextWithHighlightedEntitiesInput,
+    TextAreaInput,
     LanguageAppendSelectInput,
   },
   props: {
@@ -110,6 +111,16 @@ export default {
     }),
     languages() {
       return Object.keys(this.repository.languages_ready_for_train);
+    },
+  },
+  watch: {
+    repository() {
+      if (!this.repository) {
+        this.selectedLanguage = null;
+        return;
+      }
+
+      this.selectedLanguage = this.repository.language;
     },
   },
   methods: {
