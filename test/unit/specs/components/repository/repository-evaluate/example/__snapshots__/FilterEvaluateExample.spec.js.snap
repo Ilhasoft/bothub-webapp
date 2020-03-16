@@ -10,7 +10,9 @@ exports[`TestView.vue renders correctly 1`] = `
         </div>
       </bh-text-stub>
     </b-field-stub>
-    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
+    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">
+        some specific text:
+      </span>
       <b-field-stub addons="true">
         <bh-autocomplete-stub data="" formatters="inputFormatters" placeholder="some specific text"></bh-autocomplete-stub>
       </b-field-stub>
