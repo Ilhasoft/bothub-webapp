@@ -3,7 +3,7 @@
     <div class="repository-new-version-modal__container">
       <form @submit.prevent="onSubmit">
         <div class="field">
-          <label class="label">Title</label>
+          <label class="label">{{ $t('webapp.versions.title') }}</label>
           <div class="control">
             <input
               v-model="name"
@@ -14,7 +14,7 @@
         <div class="field">
           <div class="control has-text-centered" />
           <div class="control">
-            <label class="label">Version</label>
+            <label class="label">{{ $t('webapp.versions.version') }}</label>
             <input
               :placeholder="version.name"
               class="input"
@@ -23,13 +23,13 @@
             <div class="field repository-new-version-modal__button-container">
               <b-button
                 type="is-light"
-                @click="onClose()">Cancel</b-button>
+                @click="onClose()">{{ $t('webapp.versions.cancel') }}</b-button>
               <b-button
                 :loading="loading"
                 :disabled="!canSubmit"
                 type="is-primary"
                 native-type="submit"
-              >Add new</b-button>
+              >{{ $t('webapp.versions.add_new') }}</b-button>
             </div>
           </div>
         </div>

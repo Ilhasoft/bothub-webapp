@@ -1,12 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RepositoryLog.vue renders correctly 1`] = `
-<repository-view-base-stub>
-  <div>
-    <b-notification-stub animation="fade" class="is-danger">
-      Sign in to your account to edit this repository.
-    </b-notification-stub>
-    <login-form-stub hideforgotpassword="true"></login-form-stub>
-  </div>
-</repository-view-base-stub>
-`;
+exports[`RepositoryLog.vue renders correctly 1`] = `undefined`;

@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     categories() {
-      return [{ id: 0, name: 'All categories', active: this.current === 0 }]
+      return [{ id: 0, name: this.$t('webapp.home.all_categories'), active: this.current === 0 }]
         .concat(this.allCategories);
     },
     dropdownTitle() {

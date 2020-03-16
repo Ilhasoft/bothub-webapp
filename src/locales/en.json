@@ -101,7 +101,9 @@
       "intent_is_required": "Intent is required",
       "not_have_results": "You do not have results yet",
       "no_versions": "No versions",
-      "no_sentences": "No sentences."
+      "no_sentences": "No sentences.",
+      "detailed_results": "Detailed Results",
+      "results": "Results"
     },
     "home": {
       "description": "Description",
@@ -111,7 +113,9 @@
       "entities_label": "entities grouped by label.",
       "bot_has_x_intents": "This bot has <strong>{intents}</strong> intents",
       "labeled": "<strong>{entities_length}</strong> {_entity} labeled <strong>{label_value}</strong>",
-      "unlabeled": "<strong>{entities_length}</strong> unlabeled {_entity}"
+      "unlabeled": "<strong>{entities_length}</strong> unlabeled {_entity}",
+      "all_categories": "All categories",
+      "all_languages": "All languages"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -212,7 +216,30 @@
       "you_cannot_delete_main_branch": "You cannot delete the main version",
       "deleting_version": "Deleting Version",
       "message_deleting_version": "Are you sure you want to delete this version? This action cannot be undone.",
-      "confirm_deleting_version": "Delete Version"
+      "confirm_deleting_version": "Delete Version",
+      "title": "Title",
+      "version": "Version",
+      "cancel": "Cancel",
+      "add_new": "Add new"
+    },
+    "inbox": {
+      "description": "These are phrases of actual user interaction with your data set.\n          They can be useful for your training or testing.",
+      "intent": "Intent",
+      "language": "Language",
+      "version": "Version",
+      "cannot_edit_this_repository": "You cannot edit this repository",
+      "signin_you_account": "Sign in to your account to edit this repository.",
+      "your_version": "Your Version",
+      "your_intent": "Your Intent",
+      "your_filter": "Your Filter",
+      "test_sentences": "Test Sentences",
+      "training": "Training",
+      "add_to": "Add to",
+      "debug_description": "Something unexpected happened! We couldn't debug your text.",
+      "reload": "Reload",
+      "entry_has_add_to_train": "Entry was added to training.",
+      "entry_has_add_to_sentence": "Entry was added to sentences.",
+      "add_to_train_error": "An error occured"
     }
   }
 }

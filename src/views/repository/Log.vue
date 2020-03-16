@@ -8,9 +8,8 @@
       class="repository-log">
       <div v-if="authenticated">
         <div class="repository-log__header">
-          <h1> Inbox </h1>
-          <p> These are phrases of actual user interaction with your data set.
-          They can be useful for your training or testing. </p>
+          <h1> {{ $t('webapp.menu.inbox') }} </h1>
+          <p> {{ $t('webapp.inbox.description') }} </p>
         </div>
         <div class="columns">
           <div class="column is-tree-fifths">
@@ -30,9 +29,11 @@
               <label>{{ $t('webapp.dashboard.filter_by') }}: </label>
               <div class="select">
                 <select v-model="filterOption">
-                  <option value="intent"> Intent </option>
-                  <option value="language"> Language </option>
-                  <option value="repository_version_name"> Version </option>
+                  <option value="intent"> {{ $t('webapp.inbox.intent') }} </option>
+                  <option value="language"> {{ $t('webapp.inbox.language') }} </option>
+                  <option value="repository_version_name">
+                    {{ $t('webapp.inbox.version') }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -43,13 +44,13 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              placeholder="Your Version"/>
+              :placeholder="$t('webapp.inbox.your_version')"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              placeholder="Your Intent"/>
+              :placeholder="$t('webapp.inbox.your_intent')"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">
@@ -63,7 +64,7 @@
             <b-input
               v-else
               :disabled="true"
-              placeholder="Your filter"/>
+              :placeholder="$t('webapp.inbox.your_filter')"/>
           </div>
         </div>
 
@@ -77,7 +78,7 @@
         <b-notification
           :closable="false"
           class="is-warning">
-          You cannot edit this repository
+          {{ $t('webapp.inbox.cannot_edit_this_repository') }}
         </b-notification>
       </div>
     </div>
@@ -87,7 +88,7 @@
       <b-notification
         :closable="false"
         class="is-danger">
-        Sign in to your account to edit this repository.
+        {{ $t('webapp.inbox.signin_you_account') }}
       </b-notification>
       <login-form hide-forgot-password />
     </div>

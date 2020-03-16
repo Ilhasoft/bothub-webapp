@@ -1,8 +1,8 @@
 <template>
   <div class="debug">
     <div v-if="error">
-      <p> Something unexpected happened! We couldn't debug your text. </p>
-      <b-button @click="load()"> Reload </b-button>
+      <p> {{ $t('webapp.inbox.debug_description') }} </p>
+      <b-button @click="load()"> {{ $t('webapp.inbox.reload') }} </b-button>
     </div>
     <loading v-else-if="loading" />
     <div v-else>
