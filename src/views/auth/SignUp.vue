@@ -26,7 +26,7 @@
       </div>
       <div class="column sign-up__wrapper-content__form">
         <div class="sign-up__wrapper-content__form__title">
-          <h1>Get started free</h1>
+          <h1>Up to 10,000 predictions for free</h1>
         </div>
         <form @submit.prevent="onSubmit">
           <loading v-if="!formSchema" />
@@ -44,11 +44,11 @@
                 class="is-info"
                 native-type="submit"
                 full-width
-                color="info">Get free</b-button>
+                color="info">Sign up</b-button>
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
-                By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
+                By clicking “Continue” I agree to Bothub’s Terms of Service and Privacy Policy.
               </small>
             </div>
           </div>
