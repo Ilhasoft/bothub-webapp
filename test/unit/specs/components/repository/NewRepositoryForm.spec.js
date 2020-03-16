@@ -18,7 +18,13 @@ describe('NewRepositoryForm.vue', () => {
       Auth: {},
       Repository: {},
     });
-    wrapper = shallowMount(NewRepositoryForm, { localVue, store });
+    wrapper = shallowMount(NewRepositoryForm, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+      store,
+    });
   });
 
   test('mount', () => {

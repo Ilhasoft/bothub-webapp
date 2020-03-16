@@ -21,9 +21,9 @@
     <div class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
-          <h2>Versions</h2>
+          <h2>{{ $t('webapp.menu.versions') }}</h2>
         </div>
-        <p> Add, edit and choose versions of your bot intelligence. </p>
+        <p> {{ $t('webapp.versions.edit_choose_version') }} </p>
       </div>
       <loading v-if="loadingList" />
       <section v-else>
@@ -65,23 +65,23 @@
               </span>
             </b-table-column>
             <b-table-column
+              :label="$t('webapp.versions.date_created')"
               centered
               field="created_at"
-              label="Date Created"
               sortable >
               {{ props.row.created_at | moment('from') }}
             </b-table-column>
             <b-table-column
+              :label="$t('webapp.versions.last_modified')"
               centered
               field="last_update"
-              label="Last Modified"
               sortable>
               {{ props.row.last_update | moment('from') }}
             </b-table-column>
             <b-table-column
+              :label="$t('webapp.versions.created_by')"
               centered
               field="created_by"
-              label="Created by"
               sortable>
               {{ props.row.created_by }}
             </b-table-column>
@@ -97,7 +97,9 @@
                   :disabled="!repository.authorization.can_contribute"
                   class="is-small"
                   rounded
-                  @click="handleDefaultVersion(props.row.id, props.row.name)">Main</b-button>
+                  @click="handleDefaultVersion(props.row.id, props.row.name)">
+                  {{ $t('webapp.versions.main') }}
+                </b-button>
                 <b-icon
                   v-if="repository.authorization.can_contribute"
                   icon="pencil"
@@ -210,9 +212,9 @@ export default {
     },
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
-        title: 'Change default version',
-        message: 'Are you sure you want to change this default version?',
-        confirmText: 'Change default',
+        title: this.$t('webapp.versions.change_default_version'),
+        message: this.$t('webapp.versions.message_change_default_version'),
+        confirmText: this.$t('webapp.versions.confirm_change_default_version'),
         type: 'is-warning',
         hasIcon: true,
         onConfirm: () => this.setDefaultVersion({
@@ -237,14 +239,14 @@ export default {
         name,
       }).then(() => {
         this.$buefy.toast.open({
-          message: 'Version was edited',
+          message: this.$t('webapp.versions.version_has_edited'),
           type: 'is-success',
         });
         this.isEdit = false;
         this.updateVersions();
       }).catch(() => {
         this.$buefy.toast.open({
-          message: 'Something wrong ):',
+          message: this.$t('webapp.versions.something_wrong'),
           type: 'is-danger',
         });
       });
@@ -256,7 +258,7 @@ export default {
     onAddedVersion() {
       this.isNewVersionModalActive = false;
       this.$buefy.toast.open({
-        message: 'Version was created',
+        message: this.$t('webapp.versions.version_was_created'),
         type: 'is-success',
       });
       this.updateVersions();
@@ -265,15 +267,15 @@ export default {
       if (isDefault) {
         this.$buefy.toast.open({
           duration: 5000,
-          message: 'You cannot delete the main branch',
+          message: this.$t('webapp.versions.you_cannot_delete_main_branch'),
           position: 'is-top',
           type: 'is-danger',
         });
       } else {
         this.$buefy.dialog.confirm({
-          title: 'Deleting Version',
-          message: 'Are you sure you want to delete this version? This action cannot be undone.',
-          confirmText: 'Delete Version',
+          title: this.$t('webapp.versions.deleting_version'),
+          message: this.$t('webapp.versions.message_deleting_version'),
+          confirmText: this.$t('webapp.versions.confirm_deleting_version'),
           type: 'is-danger',
           hasIcon: true,
           onConfirm: () => this.deleteVersion(id)

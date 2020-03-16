@@ -39,6 +39,9 @@ describe('NewEvaluateExample.vue', () => {
     wrapper = shallowMount(NewEvaluateExample, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
     });
   });
 

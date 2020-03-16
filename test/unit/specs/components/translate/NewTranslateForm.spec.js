@@ -16,6 +16,9 @@ describe('NewTranslateForm.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(NewTranslateForm, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         exampleId: 1,
         translateTo: 'pt',

@@ -9,7 +9,12 @@ localVue.use(BH);
 describe('LanguageAppendSelectInput.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(LanguageAppendSelectInput, { localVue });
+    wrapper = shallowMount(LanguageAppendSelectInput, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

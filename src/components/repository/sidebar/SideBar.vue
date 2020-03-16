@@ -26,14 +26,14 @@
           </template>
           <b-menu-item
             :to="{ name: 'repository-summary' }"
+            :label="$t('webapp.menu.summary')"
             tag="router-link"
-            icon="home"
-            label="Summary"/>
+            icon="home"/>
           <b-menu-item
             :to="{ name: 'repository-training' }"
+            :label="$t('webapp.menu.training')"
             tag="router-link"
-            icon="refresh"
-            label="Training"/>
+            icon="refresh"/>
           <b-menu-item
             :active="isTestsActive"
             :expanded="isTestsActive"
@@ -42,35 +42,35 @@
             <template
               slot="label"
               slot-scope="props">
-              <span>Test</span>
+              <span>{{ $t('webapp.menu.test') }}</span>
               <b-icon
                 :icon="props.expanded ? 'caret-down' : 'caret-up'"
                 class="is-pulled-right"/>
             </template>
             <b-menu-item
               :to="{ name: 'repository-test' }"
-              tag="router-link"
-              label="Sentences"/>
+              :label="$t('webapp.menu.sentences')"
+              tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-results' }"
-              tag="router-link"
-              label="Results"/>
+              :label="$t('webapp.menu.results')"
+              tag="router-link"/>
           </b-menu-item>
           <b-menu-item
             :to="{ name: 'repository-log' }"
+            :label="$t('webapp.menu.inbox')"
             tag="router-link"
-            icon="inbox"
-            label="Inbox"/>
+            icon="inbox"/>
           <b-menu-item
             :to="{ name: 'repository-translate' }"
+            :label="$t('webapp.menu.translation')"
             tag="router-link"
-            icon="translate"
-            label="Translation"/>
+            icon="translate"/>
           <b-menu-item
             :to="{ name: 'repository-integration' }"
+            :label="$t('webapp.menu.integration')"
             tag="router-link"
-            icon="power-plug"
-            label="Integration"/>
+            icon="power-plug"/>
           <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
@@ -79,19 +79,19 @@
             <template
               slot="label"
               slot-scope="props">
-              <span>Settings</span>
+              <span>{{ $t('webapp.menu.settings') }}</span>
               <b-icon
                 :icon="props.expanded ? 'caret-down' : 'caret-up'"
                 class="is-pulled-right"/>
             </template>
             <b-menu-item
               :to="{ name: 'repository-settings' }"
-              tag="router-link"
-              label="Settings"/>
+              :label="$t('webapp.menu.settings')"
+              tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-versions' }"
-              tag="router-link"
-              label="Versions"/>
+              :label="$t('webapp.menu.versions')"
+              tag="router-link"/>
           </b-menu-item>
         </b-menu-list>
       </b-menu>
@@ -119,10 +119,14 @@
             icon="wechat" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-test')">Sentences</b-dropdown-item>
+            @click="routerHandle('repository-test')">
+            {{ $t('webapp.menu.sentences') }}
+          </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-results')">Results</b-dropdown-item>
+            @click="routerHandle('repository-results')">
+            {{ $t('webapp.menu.results') }}
+          </b-dropdown-item>
         </b-dropdown>
         <b-icon
           class="icon-list"
@@ -144,10 +148,14 @@
             icon="settings" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-settings')">Settings</b-dropdown-item>
+            @click="routerHandle('repository-settings')">
+            {{ $t('webapp.menu.settings') }}
+          </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-versions')">Versions</b-dropdown-item>
+            @click="routerHandle('repository-versions')">
+            {{ $t('webapp.menu.versions') }}
+          </b-dropdown-item>
         </b-dropdown>
       </div>
       <div/>

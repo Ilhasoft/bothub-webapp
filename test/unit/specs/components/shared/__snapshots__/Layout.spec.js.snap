@@ -15,10 +15,10 @@ exports[`Layout.vue loading renders correctly 1`] = `
           <!---->
           <!---->
           <div class="bh-grid__item">
-            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bh-button-stub>
+            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">some specific text</bh-button-stub>
           </div>
           <div class="bh-grid__item">
-            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">sign up</bh-button-stub>
+            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">some specific text</bh-button-stub>
           </div>
         </div>
       </div>
@@ -44,10 +44,10 @@ exports[`Layout.vue renders correctly 1`] = `
           <!---->
           <!---->
           <div class="bh-grid__item">
-            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">sign in</bh-button-stub>
+            <bh-button-stub color="fake-white" transparent="true" type="button" maxcontent="true">some specific text</bh-button-stub>
           </div>
           <div class="bh-grid__item">
-            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">sign up</bh-button-stub>
+            <bh-button-stub primary="true" inverted="true" type="button" maxcontent="true" class="hide-mobile">some specific text</bh-button-stub>
           </div>
         </div>
       </div>

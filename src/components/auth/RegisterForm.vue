@@ -13,7 +13,7 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">Register</button>
+          class="button is-primary">{{ $t('webapp.landing_page.register') }}</button>
       </div>
     </div>
   </form>

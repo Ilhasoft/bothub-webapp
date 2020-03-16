@@ -9,7 +9,12 @@ localVue.use(BH);
 describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ExampleTextWithHighlightedEntitiesInput, { localVue });
+    wrapper = shallowMount(ExampleTextWithHighlightedEntitiesInput, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

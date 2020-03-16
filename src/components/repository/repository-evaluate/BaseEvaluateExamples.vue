@@ -3,7 +3,7 @@
     <new-evaluate-example
       @created="onEvaluateExampleCreated()"/>
     <hr class="base-example-evaluate__divider">
-    <h2 class="base-example-evaluate__title">Sentences List</h2>
+    <h2 class="base-example-evaluate__title">{{ $t('webapp.trainings.sentences_list') }}</h2>
     <filter-evaluate-example
       :intents="repository.intents_list"
       :entities="repository.entities_list"
