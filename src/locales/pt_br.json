@@ -2,7 +2,7 @@
   "webapp": {
     "layout": {
       "newbot": "nova inteligência",
-      "start_you_bot": "Inicie sua inteligência",
+      "start_you_bot": "Comece sua inteligência",
       "logout": "Logout",
       "signin": "entrar",
       "signup": "cadastrar",
@@ -11,12 +11,12 @@
       "subscribe": "Inscreva-se",
       "newsletter": "Coloque seu email para receber novidades:",
       "you_best_email": "Seu email principal",
-      "footer_license": "Bothub é um projeto da Ilhasoft\n &copy; 2018 All rights reserved.",
+      "footer_license": "Bothub é um projeto da Ilhasoft.\n &copy; 2020 Todos os direitos reservados.",
       "created_by": "Criado por",
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
-      "error_to_retrieve_bot": "Erro ao retornar inteligência"
+      "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
     },
     "login_modal": {
       "login": "Login",
@@ -25,8 +25,8 @@
     "register_form": {
       "already_have_account": "Já tem um conta?",
       "signin": "Entrar",
-      "get_started_free": "Começe grátis",
-      "get_free": "Começar",
+      "get_started_free": "Até 10.000 predições de graça",
+      "get_free": "Cadastre-se",
       "policy_service": "Clicando em \"Continuar\" eu concordo com as Políticas de Serviço e Privacidade do Bothub."
     },
     "landing_page": {
@@ -34,16 +34,16 @@
       "signup": "Cadastrar",
       "header_content1": "Construa, Otimize e Treine",
       "header_content2": "Seja parte de uma comunidade global, aberta e democrática que constrói, treina e compartilha dados.",
-      "join_for_free": "Junte-se a nós grátis",
+      "join_for_free": "Junte-se",
       "grid_text1": "Construa sua IA",
-      "grid_text2": "Crie repositórios com exemplos de frases contextualizados.",
+      "grid_text2": "Crie inteligências com exemplos de frases contextualizados.",
       "grid_text3": "Compartilhe dados",
       "grid_text4": "Você pode escolher dentre várias inteligências prontas",
       "grid_text5": "Junte-se a comunidade",
       "grid_text6": "Contribua com inteligências existentes adicionando mais exemplos ou suporte à novos idiomas.",
       "best_bots": "Melhores inteligências",
       "all_bots": "Todas inteligências",
-      "signup_grid": "Junte-se a milhões de desenvolvedores que já usam o Bothub",
+      "signup_grid": "Junte-se a comunidade de desenvolvedores que usam o Bothub",
       "signup_forfree": "Cadastre-se gratuitamente",
       "reset_password": "Resetar senha",
       "reset_password_success": "Cheque seu email, nós te enviamos instruções de como resetar sua senha.",
@@ -57,7 +57,7 @@
       "keep_using_safari": "Continuar usando Safari"
     },
     "analyze_text": {
-      "grid1": "Faça uma requisição HTTP para o serviço NLP, siga o exemplo abaixo.",
+      "grid1": "Faça uma requisição HTTP ao serviço NLP, siga o exemplo abaixo.",
       "method_send": "POST com form-data:",
       "language_code": "código do idioma",
       "text_to_analyze": "texto para análise",
@@ -118,16 +118,16 @@
       "manage_your_team": "Gerencie seu time",
       "authorization_requests": "Solicitações de Autorização",
       "not_can_edit_repository": "Você não pode editar essa inteligência",
-      "login": "Faça login em sua conta para editar essa inteligência.",
+      "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
       "role": "Papéis:",
       "no_requests": "Sem solicitações."
     },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
-      "grid_text2": "Adicione frases para melhorar sua inteligência",
-      "not_can_edit_repository": "Você não pode contribuir nessa inteligência",
-      "login": "Faça login na sua conta para contribuir nessa inteligência.",
+      "grid_text2": "Adicionar exemplos para melhorar sua inteligência.",
+      "not_can_edit_repository": "Você não pode contribuir para essa inteligência",
+      "login": "Entre na sua conta para contribuir com essa inteligência.",
       "sentences_list": "Lista de frases",
       "run_training": "Executar treinamento",
       "submit": "Enviar",
@@ -138,8 +138,8 @@
       "intent": "Intenção"
     },
     "translate": {
-      "not_can_edit_repository": "Você não pode contribuir nesse repositório",
-      "login": "Faça login na sua conta para contribuir nessa inteligência.",
+      "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
+      "login": "Entre na sua conta para contribuir com essa inteligência.",
       "submit_translation": "Enviar Tradução",
       "intent": "Intenção:",
       "no_examples": "Nenhuma frase para traduzir.",
@@ -198,7 +198,7 @@
       "filter_by": "Filtrar por"
     },
     "versions": {
-      "edit_choose_version": "Adicionar, editar ou escolher versões da sua inteligência.",
+      "edit_choose_version": "Adicione, edite e escolha versões da sua inteligência.",
       "date_created": "Data de Criação",
       "last_modified": "Última Modificação",
       "created_by": "Criado por",
