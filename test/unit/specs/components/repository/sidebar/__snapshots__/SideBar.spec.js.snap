@@ -15,18 +15,12 @@ exports[`SideBar.vue renders correctly 1`] = `
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
-<<<<<<< HEAD
-        <b-menu-item-stub label="Inbox" icon="inbox" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="translate" animation="fade" tag="a" ariarole="">
-          <b-menu-item-stub label="Translate" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="Translation Status" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="Integration" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-=======
         <b-menu-item-stub label="some specific text" icon="inbox" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="translate" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="translate" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
         <b-menu-item-stub label="some specific text" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
->>>>>>> e1efb40f7dd057e080889b990381094869c57c60
         <b-menu-item-stub icon="settings" animation="fade" tag="a" ariarole="">
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
