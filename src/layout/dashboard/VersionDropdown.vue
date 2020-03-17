@@ -22,7 +22,9 @@
       </b-dropdown-item>
       <b-dropdown-item
         aria-role="listitem"
-        @click="routerHandle('repository-versions')">{{ $t('webapp.menu.all_versions') }}</b-dropdown-item>
+        @click="routerHandle('repository-versions')">
+        {{ $t('webapp.menu.all_versions') }}
+      </b-dropdown-item>
     </b-dropdown>
   </div>
 </template>
