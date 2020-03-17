@@ -15,7 +15,10 @@
               <div>Webapp v{{ version }}</div>
             </div>
             <ul class="footer-item">
-              <li><router-link to="/terms">{{ $t('webapp.layout.terms_conditions') }}</router-link></li>
+              <li>
+                <router-link to="/terms">{{ $t('webapp.layout.terms_conditions') }}
+                </router-link>
+              </li>
             </ul>
             <ul class="footer-item footer-sociallist">
               <li class="footer-sociallist-item">
