@@ -38,6 +38,9 @@ describe('EvaluateVersionList.vue', () => {
     wrapper = shallowMount(EvaluateVersionList, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
     });
   });
 
@@ -51,6 +54,9 @@ describe('EvaluateVersionList.vue', () => {
     wrapper = shallowMount(EvaluateVersionList, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       methods: {
         updateVersionList: updateVersionListStub,
       },

@@ -15,7 +15,7 @@
           :disabled="submitting"
           type="submit"
           class="button is-primary"
-        >Reset password</button>
+        >{{ $t('webapp.landing_page.reset_password') }}</button>
       </div>
     </div>
   </form>

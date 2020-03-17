@@ -10,7 +10,7 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
     </div>
     <div class="column is-narrow">
       <bh-field-stub label="" errors="">
-        <bh-button-stub disabled="true" size="normal" secondary="true" type="submit">Submit Translation</bh-button-stub>
+        <bh-button-stub disabled="true" size="normal" secondary="true" type="submit">some specific text</bh-button-stub>
       </bh-field-stub>
     </div>
   </form>

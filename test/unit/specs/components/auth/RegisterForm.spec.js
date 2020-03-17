@@ -11,7 +11,13 @@ const localVue = createLocalVue();
 describe('RegisterForm.spec.js', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(RegisterForm, { store, localVue });
+    wrapper = shallowMount(RegisterForm, {
+      store,
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

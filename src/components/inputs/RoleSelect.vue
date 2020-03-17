@@ -23,7 +23,6 @@ import {
   ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN,
 } from '@/utils';
 
-
 const helpTextDict = {
   [ROLE_USER]: 'Can read and analyze',
   [ROLE_CONTRIBUTOR]: 'Can read, analyze and contribute with examples and translations',

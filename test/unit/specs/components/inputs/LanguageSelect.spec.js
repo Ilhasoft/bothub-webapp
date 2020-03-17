@@ -9,7 +9,12 @@ localVue.use(Buefy);
 describe('LanguageSelect.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(LanguageSelect, { localVue });
+    wrapper = shallowMount(LanguageSelect, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('mount', () => {

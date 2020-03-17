@@ -27,7 +27,7 @@
           </div>
           <div class="column is-narrow">
             <div class="control">
-              <label>Filter by: </label>
+              <label>{{ $t('webapp.dashboard.filter_by') }}: </label>
               <div class="select">
                 <select v-model="filterOption">
                   <option value="intent"> Intent </option>

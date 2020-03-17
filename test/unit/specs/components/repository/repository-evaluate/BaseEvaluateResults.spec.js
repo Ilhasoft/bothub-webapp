@@ -13,6 +13,9 @@ describe('BaseEvaluateResults.vue', () => {
     wrapper = shallowMount(BaseEvaluateResults, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repository: {
           intents_list: [],

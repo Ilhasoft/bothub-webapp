@@ -1,9 +1,9 @@
 <template>
   <div class="new-sentence">
     <div>
-      <h2>Add a new test sentence</h2>
+      <h2>{{ $t('webapp.evaluate.add_new_test_sentence') }}</h2>
       <span>
-        Create a bench of test sentences to measure the accuracy of your training.
+        {{ $t('webapp.evaluate.create_a_bench_of_test') }}
       </span>
     </div>
     <div class="new-sentence__form">
@@ -20,8 +20,8 @@
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
+                :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
                 size="normal"
-                placeholder="Enter your sentence here"
                 @textSelected="setTextSelected($event)"
               />
             </bh-field>
@@ -34,8 +34,8 @@
                 v-model="intent"
                 :data="repository.intents_list || []"
                 :formatters="intentFormatters"
+                :placeholder="$t('webapp.evaluate.intent')"
                 size="normal"
-                placeholder="Intent"
               />
             </bh-field>
           </div>
@@ -48,7 +48,7 @@
               primary
               size="normal"
               @click="submitSentence()">
-              <slot v-if="!submitting">Submit</slot>
+              <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
             </bh-button>
           </div>
         </div>
@@ -116,11 +116,11 @@ export default {
       const errors = [];
 
       if (!this.text) {
-        errors.push('You need type a text to sentence');
+        errors.push(this.$t('webapp.evaluate.you_need_type_a_text'));
       }
 
       if (!this.intent) {
-        errors.push('Intent is required');
+        errors.push(this.$t('webapp.evaluate.intent_is_required'));
       }
 
       return errors;

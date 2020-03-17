@@ -8,7 +8,7 @@
           <div class="repository-translate">
             <div class="bh-grid">
               <div class="bh-grid__item">
-                <bh-field label="Translate from:">
+                <bh-field :label="$t('webapp.translate.translate_from')">
                   <language-select v-model="translate.from" />
                 </bh-field>
               </div>
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="bh-grid__item">
-                <bh-field label="Translate to:">
+                <bh-field :label="$t('webapp.translate.translate_to')">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />
@@ -50,7 +50,7 @@
           class="bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not contribute to this repository
+              {{ $t('webapp.translate.not_can_edit_repository') }}
             </div>
           </div>
         </div>
@@ -60,7 +60,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to contribute to this repository.
+            {{ $t('webapp.translate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>

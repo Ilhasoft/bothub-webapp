@@ -23,7 +23,7 @@
             :disabled="!isValid || submitting"
             secondary
             size="normal"
-            type="submit">Submit Translation</bh-button>
+            type="submit">{{ $t('webapp.translate.submit_translation') }}</bh-button>
         </bh-field>
       </div>
     </form>
