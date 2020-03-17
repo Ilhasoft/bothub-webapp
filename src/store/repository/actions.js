@@ -136,8 +136,8 @@ export default {
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
   },
-  setUpdateVersions({ commit }, payload) {
-    commit('updateVersions', payload);
+  setUpdateVersionsState({ commit }, payload) {
+    commit('updateVersionsState', payload);
   },
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);

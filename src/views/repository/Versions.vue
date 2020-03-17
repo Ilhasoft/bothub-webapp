@@ -184,7 +184,7 @@ export default {
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',
-      'setUpdateVersions',
+      'setUpdateVersionsState',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
@@ -266,7 +266,7 @@ export default {
         message: 'Version was created',
         type: 'is-success',
       });
-      this.setUpdateVersions(true);
+      this.setUpdateVersionsState(true);
       this.updateVersions();
     },
     onDeleteVersion(id, isDefault) {
@@ -288,7 +288,7 @@ export default {
             this.loadingList = true;
             try {
               this.deleteVersion(id);
-              this.setUpdateVersions(true);
+              this.setUpdateVersionsState(true);
               this.updateVersions();
             } catch (e) {
               this.showError(e);

@@ -67,7 +67,7 @@ export default {
     getUpdateVersionsState() {
       if (this.getUpdateVersionsState) {
         this.getAllVersions();
-        this.setUpdateVersions(false);
+        this.setUpdateVersionsState(false);
       }
     },
   },
@@ -78,7 +78,7 @@ export default {
     ...mapActions([
       'getFirstFiveVersions',
       'setRepositoryVersion',
-      'setUpdateVersions',
+      'setUpdateVersionsState',
     ]),
     async getAllVersions() {
       if (!this.repositoryUUID) return;
