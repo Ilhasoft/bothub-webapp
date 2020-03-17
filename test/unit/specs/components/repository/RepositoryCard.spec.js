@@ -18,6 +18,9 @@ describe('RepositoryCard.vue', () => {
     wrapper = shallowMount(RepositoryCard, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
         owner: 1,

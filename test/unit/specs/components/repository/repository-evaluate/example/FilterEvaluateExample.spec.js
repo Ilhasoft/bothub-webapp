@@ -12,7 +12,13 @@ describe('TestView.vue', () => {
   let clock;
   beforeEach(() => {
     clock = sinon.useFakeTimers();
-    wrapper = shallowMount(FilterEvaluateExample, { localVue, store });
+    wrapper = shallowMount(FilterEvaluateExample, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+      store,
+    });
   });
 
   afterEach(() => {

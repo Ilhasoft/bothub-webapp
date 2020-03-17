@@ -11,7 +11,7 @@
       <bh-button
         :disabled="submitting"
         primary
-        type="submit">Create bot</bh-button>
+        type="submit">{{ $t('webapp.landing_page.create_bot') }}</bh-button>
     </div>
   </form>
 </template>
@@ -89,3 +89,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.animation-content.modal-content {
+    overflow: visible !important;
+  }
+</style>

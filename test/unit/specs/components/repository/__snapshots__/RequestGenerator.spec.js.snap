@@ -2,10 +2,10 @@
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
 <div>
-  <b-field-stub label="Language" addons="true">
+  <b-field-stub label="some specific text" addons="true">
     <language-select-stub value="en" exclude=""></language-select-stub>
   </b-field-stub>
-  <b-field-stub label="Message" addons="true">
+  <b-field-stub label="some specific text" addons="true">
     <b-input-stub value="" type="textarea" hascounter="true" customclass=""></b-input-stub>
   </b-field-stub>
   <b-tabs-stub value="0" animated="true">

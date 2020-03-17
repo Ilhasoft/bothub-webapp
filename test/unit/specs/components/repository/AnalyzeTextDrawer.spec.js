@@ -23,6 +23,9 @@ describe('AnalyzeTextDrawer.vue', () => {
 
     wrapper = shallowMount(AnalyzeTextDrawer, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         ownerNickname: 'douglas',
         slug: 'repo1',

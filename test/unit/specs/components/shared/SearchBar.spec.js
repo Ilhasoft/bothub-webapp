@@ -12,6 +12,9 @@ describe('SearchBar.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(SearchBar, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         debounceTime,
       },

@@ -13,6 +13,9 @@ describe('TrainModal.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(TrainModal, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         open: true,
         readyForTrain: true,

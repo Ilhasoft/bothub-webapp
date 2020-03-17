@@ -9,7 +9,12 @@ localVue.use(Buefy);
 describe('SideBar.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SideBar);
+    wrapper = shallowMount(SideBar, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {
@@ -18,7 +23,6 @@ describe('SideBar.vue', () => {
 
   describe('click on collapse button', () => {
     beforeEach(() => {
-      wrapper = shallowMount(SideBar);
       const collapseButton = wrapper.find({ ref: 'collapseButton' });
       collapseButton.trigger('click');
     });

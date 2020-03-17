@@ -18,6 +18,9 @@ describe('ChangePasswordForm.vue', () => {
     });
     wrapper = shallowMount(ChangePasswordForm, {
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       localVue,
     });
   });

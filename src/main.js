@@ -7,6 +7,7 @@ import router from './router';
 import store from './store';
 import applyFilters from './utils/filters';
 import API from './utils/plugins/API';
+import i18n from './utils/plugins/i18n';
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
@@ -18,6 +19,7 @@ applyFilters(Vue);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   components: { App },
   template: '<App />',

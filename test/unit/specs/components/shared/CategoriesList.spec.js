@@ -9,7 +9,12 @@ localVue.use(BH);
 describe('CategoriesList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(CategoriesList, { localVue });
+    wrapper = shallowMount(CategoriesList, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

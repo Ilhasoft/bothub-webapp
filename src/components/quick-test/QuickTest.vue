@@ -6,7 +6,7 @@
       class="quick-test__collapse-button"
       @click="toggle()">
       <b-icon :icon="expanded ? 'chevron-right' : 'chevron-left'" />
-      <p class="quick-test__collapse-button__text"> QUICK TEST </p>
+      <p class="quick-test__collapse-button__text"> {{ $t('webapp.quick_test.quick_test') }} </p>
     </div>
     <div
       :class="['quick-test__container', expanded ? 'expanded' : 'collapsed']">
@@ -21,7 +21,7 @@
               v-if="hasError(sentence)"
               class="quick-test__message__subtext__container">
               <p class="quick-test__message__subtext">
-                An error ocurred, we couldn't analyze your text </p>
+                {{ $t('webapp.quick_test.error_quick_test') }} </p>
             </div>
             <loading v-else-if="isLoading(sentence)" />
             <div
@@ -29,18 +29,18 @@
               class="quick-test__message__subtext__container">
               <p class="quick-test__message__subtext">
                 <span class="quick-test__message__subtext__dot"/>
-                <span> <strong>Intent: </strong>
+                <span> <strong>{{ $t('webapp.quick_test.intent') }}: </strong>
                   {{ sentence.intent.name }} ({{ sentence.intent.confidence | percent }}) </span>
               </p>
               <div class="field is-grouped is-grouped-centered">
                 <b-button
                   class="quick-test__message__button"
                   icon-left="chart-pie"
-                  @click="debug(sentence)"> Debug </b-button>
+                  @click="debug(sentence)"> {{ $t('webapp.quick_test.debug') }} </b-button>
                 <b-button
                   class="quick-test__message__button"
                   icon-left="file-document-outline"
-                  @click="showRawInfo(sentence)"> Raw
+                  @click="showRawInfo(sentence)"> {{ $t('webapp.quick_test.raw') }}
                 </b-button>
               </div>
             </div>
@@ -50,11 +50,13 @@
         <div
           class="quick-test__input"
         >
-          <example-text-with-highlighted-entities-input
+          <text-area-input
             ref="textInput"
+            :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
+            :update-value="selectedLanguage"
             size="normal"
-            placeholder="Add a sentence"
+
             @submit="sendMessage"
           >
             <language-append-select-input
@@ -64,7 +66,7 @@
               dropdown-direction="is-top-left"
               class="language-append"
             />
-          </example-text-with-highlighted-entities-input>
+          </text-area-input>
         </div>
       </div>
     </div>
@@ -77,7 +79,7 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
-import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
+import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 export default {
@@ -86,7 +88,7 @@ export default {
     LanguageBadge,
     RepositoryDebug,
     Loading,
-    ExampleTextWithHighlightedEntitiesInput,
+    TextAreaInput,
     LanguageAppendSelectInput,
   },
   props: {
@@ -109,6 +111,16 @@ export default {
     }),
     languages() {
       return Object.keys(this.repository.languages_ready_for_train);
+    },
+  },
+  watch: {
+    repository() {
+      if (!this.repository) {
+        this.selectedLanguage = null;
+        return;
+      }
+
+      this.selectedLanguage = this.repository.language;
     },
   },
   methods: {

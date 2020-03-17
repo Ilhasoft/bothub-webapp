@@ -10,6 +10,10 @@ describe('QuickTest.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(QuickTest, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repository: {
           uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
@@ -23,16 +27,14 @@ describe('QuickTest.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // describe('click on expand button', () => {
-  //   beforeEach(() => {
-  //     wrapper = shallowMount(QuickTest);
-  //     const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
-  //     expandQuickTest.trigger('click');
-  //   });
+  describe('click on expand button', () => {
+    beforeEach(() => {
+      const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
+      expandQuickTest.trigger('click');
+    });
 
-  //   test('expanded should be truth', () => {
-  //     wrapper.vm.toggle();
-  //     expect(wrapper.vm.expanded).toBeTruthy();
-  //   });
-  // });
+    test('expanded should be truth', () => {
+      expect(wrapper.vm.expanded).toBeTruthy();
+    });
+  });
 });

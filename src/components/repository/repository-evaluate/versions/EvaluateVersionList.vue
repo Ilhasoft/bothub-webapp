@@ -6,7 +6,7 @@
       :list="versionsList" />
     <p
       v-if="versionsList && versionsList.empty"
-      class="no-examples">No Examples</p>
+      class="no-examples">{{ $t('webapp.evaluate.no_versions') }}</p>
   </div>
 </template>
 
