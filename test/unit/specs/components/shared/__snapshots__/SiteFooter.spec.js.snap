@@ -12,7 +12,8 @@ exports[`SiteFooter.vue renders correctly 1`] = `
           </div>
           <ul class="footer-item">
             <li>
-              <router-link to="/terms">some specific text</router-link>
+              <router-link to="/terms">some specific text
+              </router-link>
             </li>
           </ul>
           <ul class="footer-item footer-sociallist">
