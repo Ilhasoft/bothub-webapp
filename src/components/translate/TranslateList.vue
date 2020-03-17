@@ -7,7 +7,9 @@
       :repository="repository"
       :translate-to="to"
       @translated="onTranslated()" />
-    <p v-if="translateList && translateList.empty">No examples to translate.</p>
+    <p v-if="translateList && translateList.empty">
+      {{ $t('webapp.translate.no_examples') }}
+    </p>
   </div>
 </template>
 

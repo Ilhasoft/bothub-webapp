@@ -5,8 +5,9 @@ exports[`LoginForm.vue renders correctly 1`] = `
   <nav class="sign-up__nav">
     <div class="sign-up__nav__container">
       <router-link-stub to="/" tag="a" event="click" class="column sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
-      <div class="sign-up__nav__login"><span class="sign-up__nav__text">Already have an account?</span>
-        <b-button-stub size="normal" nativetype="button" tag="button" class="is-primary sign-up__nav__login__button">Sign in</b-button-stub>
+      <div class="sign-up__nav__login"><span class="sign-up__nav__text">
+          some specific text</span>
+        <b-button-stub size="normal" nativetype="button" tag="button" class="is-primary sign-up__nav__login__button">some specific text</b-button-stub>
       </div>
     </div>
   </nav>
@@ -14,17 +15,17 @@ exports[`LoginForm.vue renders correctly 1`] = `
     <div class="column is-half sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
     <div class="column sign-up__wrapper-content__form">
       <div class="sign-up__wrapper-content__form__title">
-        <h1>Get started free</h1>
+        <h1>some specific text</h1>
       </div>
       <form>
         <loading-stub></loading-stub>
         <!---->
         <div class="field">
           <div class="control has-text-centered">
-            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">Get free</b-button-stub>
+            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">some specific text</b-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
-              By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
+              some specific text
             </small></div>
         </div>
       </form>

@@ -18,6 +18,9 @@ describe('TranslationsStatus.vue', () => {
     wrapper = shallowMount(TranslationsStatus, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         ownerNickname: 'douglas',
         repositorySlug: 'repo1',

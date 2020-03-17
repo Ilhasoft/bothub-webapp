@@ -11,6 +11,9 @@ describe('ExampleSearchInput.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(ExampleSearchInput, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
     });
   });
 

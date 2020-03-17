@@ -19,6 +19,9 @@ describe('SelectUsersInput.vue', () => {
     wrapper = mount(SelectUsersInput, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         debounceTime,
       },

@@ -29,6 +29,9 @@ describe('GraphicsResult.vue', () => {
     wrapper = shallowMount(GraphicsResult, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         chartData: {
           id: 2,

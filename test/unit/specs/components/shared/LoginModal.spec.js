@@ -23,6 +23,9 @@ describe('LoginModal.vue', () => {
     });
     wrapper = shallowMount(LoginModal, {
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       router,
       localVue,
     });

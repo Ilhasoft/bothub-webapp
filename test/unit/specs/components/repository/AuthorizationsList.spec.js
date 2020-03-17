@@ -18,6 +18,9 @@ describe('AuthorizationsList.vue', () => {
     });
     wrapper = shallowMount(AuthorizationsList, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repositoryUuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
       },

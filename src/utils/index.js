@@ -98,7 +98,10 @@ export const exampleSearchToString = value => Object.keys(value)
     : `${key}:${value[key]}`))
   .join(' ');
 
-export const normalize = (min, max, value) => (value - min) / (max - min);
+export const normalize = (min, max, value) => {
+  if (min === max) return min === 0 ? 0 : 1;
+  return (value - min) / (max - min);
+};
 
 export const updateAttrsValues = (drfModel, data) => {
   const attrs = drfModel.defaults();

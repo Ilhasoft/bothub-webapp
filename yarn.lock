@@ -8318,9 +8318,9 @@ replace-ext@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-1.0.0.tgz#de63128373fcbf7c3ccfa4de5a480c45a67958eb"
 
-"request-mockup-json@https://github.com/douglasppaz/request-mockup-json":
+"request-mockup-json@https://github.com/bothub-it/request-mockup-json":
   version "0.1.0"
-  resolved "https://github.com/douglasppaz/request-mockup-json#df6c8e05f65ca0de1ac4e8b41bd732e89873c7dd"
+  resolved "https://github.com/bothub-it/request-mockup-json#df6c8e05f65ca0de1ac4e8b41bd732e89873c7dd"
   dependencies:
     query-string "^6.0.0"
 
@@ -9983,6 +9983,11 @@ vue-highlightjs@^1.3.3:
 vue-hot-reload-api@^2.2.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
+
+vue-i18n@^8.15.5:
+  version "8.15.5"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.15.5.tgz#e39e4724c88ec38ef72217de325e8b10a35718cf"
+  integrity sha512-lIej02+w8lP0k1PEN1xtXqKpQ1hDh17zvDF+7Oc2qJi+cTMDlfPM771w4euVaHO67AxEz4WL9MIgkyn3tkeCtQ==
 
 vue-infinite-scroll@^2.0.2:
   version "2.0.2"

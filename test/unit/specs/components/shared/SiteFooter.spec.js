@@ -11,7 +11,12 @@ localVue.use(BH);
 describe('SiteFooter.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SiteFooter, { localVue });
+    wrapper = shallowMount(SiteFooter, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

@@ -8,7 +8,7 @@
           <div
             v-if="repository.authorization.can_write">
             <div class="tile is-vertical">
-              <h1>Edit Repository</h1>
+              <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
               <edit-repository-form
                 :owner-nickname="repository.owner__nickname"
                 :slug="repository.slug"
@@ -16,7 +16,7 @@
                 @edited="onEdited($event)" />
             </div>
             <div class="tile is-vertical">
-              <h1>Manage your team</h1>
+              <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
                 :repository-uuid="repository.uuid"
@@ -27,7 +27,7 @@
                 @edit="onEditRole($event)" />
             </div>
             <div class="tile is-vertical">
-              <h1>Authorization Requests</h1>
+              <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
                 @review="onReviewAuthorizationRequest()" />
@@ -39,7 +39,7 @@
               <b-notification
                 :closable="false"
                 type="is-warning">
-                You cannot edit this repository
+                {{ $t('webapp.settings.not_can_edit_repository') }}
               </b-notification>
             </div>
           </div>
@@ -50,7 +50,7 @@
             <b-notification
               :closable="false"
               type="is-info">
-              Sign in to your account to edit this repository.
+              {{ $t('webapp.settings.login') }}
             </b-notification>
             <login-form hide-forgot-password />
           </div>
