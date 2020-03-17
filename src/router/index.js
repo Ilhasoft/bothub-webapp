@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/views/Home';
 import LandingPage from '@/views/LandingPage';
 import SignUp from '@/views/auth/SignUp';
+import Terms from '@/views/Terms';
 import MyProfile from '@/components/MyProfile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -31,6 +32,18 @@ export default new Router({
       path: '/',
       name: 'landingPage',
       component: LandingPage,
+      beforeEnter: async (to, from, next) => {
+        if (store.getters.authenticated) {
+          next('/home');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/terms',
+      name: 'Terms',
+      component: Terms,
       beforeEnter: async (to, from, next) => {
         if (store.getters.authenticated) {
           next('/home');
