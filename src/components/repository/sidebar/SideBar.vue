@@ -80,8 +80,8 @@
               tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-translations-status' }"
-              tag="router-link"
-              :label="$t('webapp.menu.translation_status')"/>
+              :label="$t('webapp.menu.translation_status')"
+              tag="router-link"/>
           </b-menu-item>
           <b-menu-item
             :to="{ name: 'repository-integration' }"
@@ -157,7 +157,9 @@
             icon="translate" />
           <b-dropdown-item
             aria-role="listitem"
-            @click="routerHandle('repository-translate')">{{ $t('webapp.menu.translate') }}</b-dropdown-item>
+            @click="routerHandle('repository-translate')">
+            {{ $t('webapp.menu.translate') }}
+          </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-translations-status')">
