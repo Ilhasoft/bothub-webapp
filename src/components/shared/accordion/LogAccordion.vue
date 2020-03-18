@@ -46,12 +46,15 @@
           <p class="log-accordion__menu-title"> Add to </p>
           <b-dropdown-item
             aria-role="listitem"
-            @click.native.stop="addToTraining()">
+            @click="showModal('Training')"
+          >
+
             Training
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click.native.stop="addToSentences()">
+            @click="showModal('Test Sentences')"
+          >
             Test Sentences
           </b-dropdown-item>
         </b-dropdown>
@@ -80,6 +83,8 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 import HighlightedText from '@/components/shared/HighlightedText';
 import RawInfo from '@/components/shared/RawInfo';
 import RepositoryDebug from '@/components/repository/debug/Debug';
+import IntentModal from '../../repository/IntentModal';
+
 
 export default {
   name: 'LogAccordion',
@@ -89,6 +94,7 @@ export default {
     LanguageBadge,
     HighlightedText,
     RawInfo,
+    IntentModal,
   },
   props: {
     text: {
@@ -110,6 +116,7 @@ export default {
       open: false,
       loading: false,
       isRawInfoActive: false,
+      intent: '',
     };
   },
   computed: {
@@ -148,9 +155,10 @@ export default {
           start: entity.start,
           end: entity.end,
         })),
-        intent: this.nlp_log.intent.name,
+        intent: this.intent,
       };
     },
+
   },
   methods: {
     ...mapActions([
@@ -166,17 +174,17 @@ export default {
         type: 'is-danger',
       });
     },
-    async addToTraining() {
+    async addToTraining(intent) {
       this.loading = true;
-      await this.newEvaluateExample(this.toExample).catch((e) => {
+      await this.newEvaluateExample({ ...this.toExample, intent }).catch((e) => {
         this.loading = false;
         this.showError(e);
       });
       this.loading = false;
     },
-    async addToSentences() {
+    async addToSentences(intent) {
       this.loading = true;
-      await this.newExample(this.toExample).catch((e) => {
+      await this.newExample({ ...this.toExample, intent }).catch((e) => {
         this.loading = false;
         this.showError(e);
       });
@@ -207,6 +215,28 @@ export default {
         trapFocus: true,
       });
     },
+    showModal(typeSentence) {
+      this.$buefy.modal.open({
+        props: {
+          info: this.nlp_log,
+          repository: this.repository,
+          TitleHeader: typeSentence,
+          intent: '',
+          addToTraining: this.addToTraining,
+          addToSentences: this.addToSentences,
+        },
+        parent: this,
+        component: IntentModal,
+        hasModalCard: false,
+        trapFocus: true,
+        events: {
+          addedIntent: (value) => {
+            this.intent = value;
+          },
+        },
+      });
+    },
+
     debug() {
       this.$buefy.modal.open({
         parent: this,
