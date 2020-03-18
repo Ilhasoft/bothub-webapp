@@ -83,22 +83,22 @@
             <div class="versions__table__buttons-wrapper">
               <b-button
                 :type="props.row.is_default ? 'is-primary': 'is-light'"
-                :disabled="!repository.authorization.can_contribute"
+                :disabled="!canEdit"
                 class="is-small"
                 rounded
                 @click="handleDefaultVersion(props.row.id, props.row.name)">
                 {{ $t('webapp.versions.main') }}
               </b-button>
               <b-icon
-                v-if="repository.authorization.can_contribute"
+                v-if="canEdit"
                 icon="pencil"
                 @click.native="onEditVersion({id: props.row.id, name: props.row.name})"/>
               <b-icon
-                v-if="repository.authorization.can_contribute"
+                v-if="canEdit"
                 icon="delete"
                 @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
               <b-icon
-                v-if="repository.authorization.can_contribute"
+                v-if="canEdit"
                 icon="content-copy"
                 @click.native="copyVersion(props.row)"/>
             </div>
@@ -128,6 +128,10 @@ export default {
     perPage: {
       type: Number,
       default: 5,
+    },
+    canEdit: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

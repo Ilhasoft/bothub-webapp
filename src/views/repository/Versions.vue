@@ -11,7 +11,8 @@
         <p> {{ $t('webapp.versions.edit_choose_version') }} </p>
       </div>
       <RepositoryVersionList
-        :repository="repository"/>
+        :repository="repository"
+        :can-edit="repository.authorization.can_contribute"/>
     </div>
   </repository-view-base>
 </template>
