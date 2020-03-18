@@ -274,9 +274,19 @@ export default {
           confirmText: this.$t('webapp.versions.confirm_deleting_version'),
           type: 'is-danger',
           hasIcon: true,
-          onConfirm: () => this.deleteVersion(id)
-            .then(() => this.updateVersions()),
+          onConfirm: () => this.onDeleteVersionConfirm(id),
         });
+      }
+    },
+    async onDeleteVersionConfirm(id) {
+      try {
+        this.loadingList = true;
+        await this.deleteVersion(id);
+        this.updateVersions();
+      } catch (e) {
+        this.showError(e);
+      } finally {
+        this.loadingList = false;
       }
     },
     showError(error) {

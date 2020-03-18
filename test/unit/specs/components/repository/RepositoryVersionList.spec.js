@@ -14,7 +14,7 @@ const methods = {
   onDeleteVersion: jest.fn(),
 };
 
-describe('RepositoryCard.vue', () => {
+describe('RepositoryVersionList.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(RepositoryVersionList, {
