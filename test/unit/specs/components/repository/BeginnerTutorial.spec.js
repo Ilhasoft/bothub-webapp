@@ -10,6 +10,9 @@ describe('BeginnerTutorial.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(BeginnerTutorial, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         open: true,
       },

@@ -39,7 +39,9 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">new bot</bh-button>
+                @click="openNewRepositoryModal()">
+                {{ $t('webapp.layout.newbot') }}
+              </bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -63,10 +65,10 @@
                 </bh-dropdown-item>
                 <bh-dropdown-item
                   @click="openNewRepositoryModal()">
-                  Start your bot
+                  {{ $t('webapp.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
-                  Logout
+                  {{ $t('webapp.layout.logout') }}
                 </bh-dropdown-item>
               </bh-dropdown>
             </div>
@@ -77,7 +79,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="openLoginModal()">sign in</bh-button>
+                @click="openLoginModal()">{{ $t('webapp.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -87,7 +89,7 @@
                 inverted
                 max-content
                 class="hide-mobile"
-                @click="signUp()">sign up</bh-button>
+                @click="signUp()">{{ $t('webapp.layout.signup') }}</bh-button>
             </div>
           </div>
         </div>

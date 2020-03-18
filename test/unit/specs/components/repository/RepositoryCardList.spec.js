@@ -18,6 +18,9 @@ describe('RepositoryCardList.vue', () => {
     wrapper = shallowMount(RepositoryCardList, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
     });
   });
 

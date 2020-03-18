@@ -15,7 +15,7 @@
       </bh-text>
     </bh-field>
     <div class="bh-grid__item filter-evaluate-example__text">
-      <span>Filter by:</span>
+      <span>{{ $t('webapp.dashboard.filter_by') }}:</span>
     </div>
     <bh-field
       :errors="errors.intent"
@@ -24,7 +24,7 @@
         v-model="intent"
         :data="intents || []"
         :formatters="inputFormatters"
-        placeholder="All Intents" />
+        :placeholder="$t('webapp.evaluate.all_intents')" />
     </bh-field>
     <bh-field
       :errors="errors.label"
@@ -33,7 +33,7 @@
         v-model="label"
         :data="labels || []"
         :formatters="inputFormatters"
-        placeholder="All labels" />
+        :placeholder="$t('webapp.evaluate.all_labels')" />
     </bh-field>
     <bh-field
       :errors="errors.intent"
@@ -42,7 +42,7 @@
         v-model="entity"
         :data="entities || []"
         :formatters="inputFormatters"
-        placeholder="All entities" />
+        :placeholder="$t('webapp.evaluate.all_entities')" />
     </bh-field>
   </div>
 </template>

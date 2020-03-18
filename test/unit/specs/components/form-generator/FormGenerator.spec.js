@@ -9,6 +9,9 @@ describe('FormGenerator.vue', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(FormGenerator, {
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         schema: {},
       },

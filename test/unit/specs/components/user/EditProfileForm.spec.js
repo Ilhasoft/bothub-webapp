@@ -21,6 +21,9 @@ describe('EditProfileForm.vue', () => {
     });
     wrapper = shallowMount(EditProfileForm, {
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       localVue,
     });
   });

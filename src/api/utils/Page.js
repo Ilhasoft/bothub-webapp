@@ -2,7 +2,7 @@ import qs from 'query-string';
 import request from '../request';
 
 export default class Page {
-  constructor(baseUrl, perPage, params) {
+  constructor(baseUrl, perPage, params = {}) {
     this.total = 0;
     this.baseUrl = baseUrl;
     this.perPage = perPage;

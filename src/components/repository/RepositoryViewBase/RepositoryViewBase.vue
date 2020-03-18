@@ -22,7 +22,7 @@
     <div
       v-else-if="repository && repository.fatal"
       class="rpstr-vw-bs__error">
-      <h1>Error to retrieve bot</h1>
+      <h1>{{ $t('webapp.layout.error_to_retrieve_bot') }}</h1>
     </div>
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"

@@ -12,17 +12,17 @@
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ nlp_log.repository_version }} </span>
+        <span class="column log-accordion__version-name"> {{ version_name }} </span>
         <div class="column">
           <language-badge :language="nlp_log.language"/>
         </div>
         <div
           v-if="!open"
-          class="column is-two-thirds">{{ text }}</div>
+          class="column is-full">{{ text }}</div>
 
         <div
           v-else
-          class="column is-two-thirds">
+          class="column is-full">
           <highlighted-text
             v-if="open"
             :text="text"
@@ -109,6 +109,10 @@ export default {
       type: String,
       default: '',
     },
+    version_name: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -176,19 +180,37 @@ export default {
     },
     async addToTraining(intent) {
       this.loading = true;
-      await this.newEvaluateExample({ ...this.toExample, intent }).catch((e) => {
+      try {
+        await this.newEvaluateExample({ ...this.toExample, intent });
+        this.$buefy.toast.open({
+          message: 'Entry was added to training.',
+          type: 'is-success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     async addToSentences(intent) {
       this.loading = true;
-      await this.newExample({ ...this.toExample, intent }).catch((e) => {
+      try {
+        await this.newExample({ ...this.toExample, intent });
+        this.$buefy.toast.open({
+          message: 'Entry was added to sentences.',
+          type: 'is-success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     getEntityClass(entity) {
       const color = getEntityColor(

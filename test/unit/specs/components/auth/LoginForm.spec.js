@@ -15,7 +15,13 @@ describe('LoginForm.vue', () => {
       Auth: { token: null },
       User: {},
     });
-    wrapper = shallowMount(LoginForm, { store, localVue });
+    wrapper = shallowMount(LoginForm, {
+      store,
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

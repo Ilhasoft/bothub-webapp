@@ -8,7 +8,7 @@
           <div class="repository-translate">
             <div class="bh-grid">
               <div class="bh-grid__item">
-                <bh-field label="Translate from:">
+                <bh-field :label="$t('webapp.translate.translate_from')">
                   <language-select v-model="translate.from" />
                 </bh-field>
               </div>
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="bh-grid__item">
-                <bh-field label="Translate to:">
+                <bh-field :label="$t('webapp.translate.translate_to')">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />
@@ -30,15 +30,19 @@
             </div>
           </div>
           <div
-            v-if="!!translate.from && !!translate.to"
-            class="bh-grid">
-            <div class="bh-grid__item">
-              <translate-list
-                :repository="repository"
-                :from="translate.from"
-                :to="translate.to"
-                @translated="examplesTransleted()" />
+            v-if="!!translate.from && !!translate.to">
+            <div class="repository-translate__search">
+              <filter-examples
+                :intents="repository.intents_list"
+                :entities="repository.entities_list"
+                @queryStringFormated="onSearch($event)"/>
             </div>
+            <translate-list
+              :repository="repository"
+              :query="query"
+              :from="translate.from"
+              :to="translate.to"
+              @translated="examplesTranslated()" />
           </div>
         </div>
         <div
@@ -46,7 +50,7 @@
           class="bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not contribute to this repository
+              {{ $t('webapp.translate.not_can_edit_repository') }}
             </div>
           </div>
         </div>
@@ -56,7 +60,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to contribute to this repository.
+            {{ $t('webapp.translate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>
@@ -73,11 +77,13 @@ import TranslateList from '@/components/translate/TranslateList';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
-
+import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
+import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
 export default {
   name: 'RepositoryTranslate',
   components: {
+    FilterExamples,
     RepositoryViewBase,
     LanguageSelect,
     TranslateList,
@@ -93,14 +99,31 @@ export default {
         to: null,
       },
       toLanguage: null,
+      query: {},
+      querySchema: {},
     };
   },
   methods: {
     ...mapActions([
       'getRepository',
     ]),
-    examplesTransleted() {
+    examplesTranslated() {
       this.updateRepository(true);
+    },
+    onSearch(value) {
+      Object.assign(this.querySchema, value);
+
+      if (!this.querySchema.intent) {
+        delete this.querySchema.intent;
+      }
+      if (!this.querySchema.entity) {
+        delete this.querySchema.entity;
+      }
+      if (!this.querySchema.label) {
+        delete this.querySchema.label;
+      }
+      const formattedQueryString = exampleSearchToString(this.querySchema);
+      this.query = exampleSearchToDicty(formattedQueryString);
     },
   },
 };
@@ -109,13 +132,16 @@ export default {
 <style lang="scss">
 @import '~bh/src/assets/scss/colors.scss';
 
-
 .repository-translate {
   background-color: $color-white;
   border-bottom: .120rem solid whitesmoke;
 
   &__translate-arrow-icon {
     align-self: center;
+  }
+
+  &__search {
+    margin: 0.5rem;
   }
 }
 </style>

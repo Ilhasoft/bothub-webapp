@@ -3,9 +3,8 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
-import repository from '@/api/repository';
 import Pagination from '@/components/shared/Pagination';
-
+import utils from '@/api/utils';
 
 const localVue = createLocalVue();
 localVue.use(applyFilters);
@@ -19,7 +18,7 @@ describe('Pagination.vue', () => {
       localVue,
       propsData: {
         itemComponent: Foo,
-        list: repository.getAll(),
+        list: new utils.List('/repository/repositories/'),
       },
     });
   });

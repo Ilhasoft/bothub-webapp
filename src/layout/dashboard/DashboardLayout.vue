@@ -52,11 +52,13 @@
                   </b-dropdown-item>
                   <b-dropdown-item
                     aria-role="listitem"
-                    @click="routerHandle('repository-versions')">See all versions</b-dropdown-item>
+                    @click="routerHandle('repository-versions')">
+                    {{ $t('webapp.menu.all_versions') }}
+                  </b-dropdown-item>
                 </b-dropdown>
               </div>
             </div>
-            <span class="has-text-white">Created by
+            <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>
@@ -68,19 +70,21 @@
             <span>{{
               getCurrentRepository.available_languages ?
                 getCurrentRepository.available_languages.length :
-            0 }} languages</span>
+            0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
-            <span>{{ getCurrentRepository.examples__count }} sentences</span>
+            <span>
+              {{ getCurrentRepository.examples__count }} {{ $t('webapp.dashboard.sentences') }}
+            </span>
           </div>
           <div
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="warning" />
-            <span>{{ warningsCount }} warning</span>
+            <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
             position="is-bottom-left"
@@ -97,11 +101,11 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="openLoginModal()">Sign in</b-dropdown-item>
+              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="signUp()">Sign up</b-dropdown-item>
+              @click="signUp()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
@@ -109,14 +113,18 @@
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="openNewRepositoryModal()">Start your bot</b-dropdown-item>
+              @click="openNewRepositoryModal()">
+              {{ $t('webapp.layout.start_you_bot') }}
+            </b-dropdown-item>
             <b-dropdown-item
               aria-role="listitem"
-              @click="routerHandle('home')">Exit Inteligence</b-dropdown-item>
+              @click="routerHandle('home')">
+              {{ $t('webapp.dashboard.exit_inteligence') }}
+            </b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="logout()">Logout</b-dropdown-item>
+              @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
@@ -221,18 +229,19 @@ export default {
 .dashboard-layout {
 
   &__main-panel {
-    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding} - #{$menu-space});
+    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
     float: right;
 
     &__header {
       width: 100%;
       height: 6rem;
-      background: #2F343D;
+      background: #404143;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2.5rem 0 3rem;
+      padding: 0 2.5rem 0 2rem;
+      box-shadow: 0px 3px 6px #00000029;
 
       &__info {
         display: flex;
@@ -329,7 +338,7 @@ export default {
     &--collapsed {
        position: relative;
        float: right;
-       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding});
     }
   }
 }

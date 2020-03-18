@@ -21,6 +21,9 @@ describe('Layout.vue', () => {
     wrapper = shallowMount(Layout, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       router,
     });
   });

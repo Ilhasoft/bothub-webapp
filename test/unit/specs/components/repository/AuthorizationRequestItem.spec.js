@@ -18,6 +18,9 @@ describe('AuthorizationRequestItem.vue', () => {
   let wrapper;
   const mountComponent = (options = {}) => shallowMount(AuthorizationRequestItem, {
     localVue,
+    mocks: {
+      $t: () => 'some specific text',
+    },
     store,
     propsData: {
       id: 1,
