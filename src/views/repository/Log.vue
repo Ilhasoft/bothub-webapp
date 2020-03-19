@@ -4,13 +4,13 @@
     :error-code="errorCode">
 
     <div
-      v-if="repository"
+      v-if="authenticated"
       class="repository-log">
-      <div v-if="authenticated">
+      <div v-if="repository">
         <div class="repository-log__header">
           <h1> Inbox </h1>
-          <p> These are phrases of actual user interaction with your data set.
-          They can be useful for your training or testing. </p>
+          <p> {{ $t('webapp.log.subtitle1') }}
+            {{ $t('webapp.log.subtitle2') }} </p>
         </div>
         <div class="columns">
           <div class="column is-tree-fifths">
@@ -30,9 +30,9 @@
               <label>{{ $t('webapp.dashboard.filter_by') }}: </label>
               <div class="select">
                 <select v-model="filterOption">
-                  <option value="intent"> Intent </option>
-                  <option value="language"> Language </option>
-                  <option value="repository_version_name"> Version </option>
+                  <option value="intent"> {{ $t('webapp.log.intent') }} </option>
+                  <option value="language"> {{ $t('webapp.log.language') }} </option>
+                  <option value="repository_version_name"> {{ $t('webapp.log.version') }} </option>
                 </select>
               </div>
             </div>
@@ -43,13 +43,13 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              placeholder="Your Version"/>
+              :placeholder="$t('webapp.log.your_version')"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              placeholder="Your Intent"/>
+              :placeholder="$t('webapp.log.your_intent')"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">
@@ -63,22 +63,14 @@
             <b-input
               v-else
               :disabled="true"
-              placeholder="Your filter"/>
+              :placeholder="$t('webapp.log.your_filter')"/>
           </div>
         </div>
 
         <repository-log-list
           :per-page="perPage"
-          :query="query" />
-      </div>
-
-      <div
-        v-else>
-        <b-notification
-          :closable="false"
-          class="is-warning">
-          You cannot edit this repository
-        </b-notification>
+          :query="query"
+          :editable="repository.authorization.can_contribute" />
       </div>
     </div>
 
@@ -87,7 +79,7 @@
       <b-notification
         :closable="false"
         class="is-danger">
-        Sign in to your account to edit this repository.
+        {{ $t("webapp.log.login") }}.
       </b-notification>
       <login-form hide-forgot-password />
     </div>

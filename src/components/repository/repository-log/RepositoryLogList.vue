@@ -7,12 +7,13 @@
       :item-component="logAccordion"
       :list="list"
       :loading.sync="loading"
+      :editable="editable"
     />
 
     <h4
       v-if="list && list.empty && !loading"
       class="repository-log-list__empty-message">
-      No logs found
+      {{ $t('webapp.log.list_empty') }}
     </h4>
   </div>
 </template>
@@ -36,6 +37,10 @@ export default {
     perPage: {
       type: Number,
       default: 20,
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

@@ -34,6 +34,7 @@
       <div slot="options">
 
         <b-dropdown
+          v-if="editable"
           class="log-accordion__dropdown"
           aria-role="list"
           @click.native.stop>
@@ -43,16 +44,16 @@
             <b-icon icon="plus"/>
           </button>
 
-          <p class="log-accordion__menu-title"> Add to </p>
+          <p class="log-accordion__menu-title"> {{ $t('webapp.log.add_to') }} </p>
           <b-dropdown-item
             aria-role="listitem"
             @click.native.stop="addToTraining()">
-            Training
+            {{ $t('webapp.log.training') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
             @click.native.stop="addToSentences()">
-            Test Sentences
+            {{ $t('webapp.log.sentences') }}
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -106,6 +107,10 @@ export default {
     version_name: {
       type: String,
       default: '',
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
