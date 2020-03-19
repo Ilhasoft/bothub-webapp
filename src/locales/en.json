@@ -184,6 +184,8 @@
       "results": "Results",
       "inbox": "Inbox",
       "translation": "Translation",
+      "translation_status": "Translation Status",
+      "translate": "Translate",
       "integration": "Integration",
       "settings": "Settings",
       "versions": "Versions"

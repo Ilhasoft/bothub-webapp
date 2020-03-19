@@ -19,6 +19,14 @@
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
                   {{ $t('webapp.trainings.not_can_edit_repository') }}
+                  <request-authorization-modal
+                    v-if="repository"
+                    :open.sync="requestAuthorizationModalOpen"
+                    :repository-uuid="repository.uuid"
+                    @requestDispatched="onAuthorizationRequested()" />
+                  <a
+                    class="requestAuthorization"
+                    @click="openRequestAuthorizationModal">Request authorization</a>
                 </div>
               </div>
             </div>
@@ -54,11 +62,6 @@
           @exampleDeleted="onExampleDeleted" />
       </div>
     </div>
-    <request-authorization-modal
-      v-if="repository"
-      :open.sync="requestAuthorizationModalOpen"
-      :repository-uuid="repository.uuid"
-      @requestDispatched="onAuthorizationRequested()" />
     <train-modal
       v-if="repository"
       :training="training"
@@ -198,7 +201,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
-
+@import '~bh/src/assets/scss/variables.scss';
 
 .trainings-repository {
   &__list-wrapper {
@@ -212,4 +215,21 @@ export default {
     background-color: $color-white;
   }
 }
+
+  .requestAuthorization{
+        color: $color-fake-black;
+        font-weight: $font-weight-medium;
+        text-align: center;
+        float: right;
+  }
+
+   @media screen and (max-width: 50em) {
+        .bh-notification--warning{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
 </style>
