@@ -181,6 +181,7 @@ export default {
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',
+      'setUpdateVersionsState',
     ]),
     sort(orderField, asc) {
       this.orderField = orderField;
@@ -234,6 +235,7 @@ export default {
         id,
         name,
       }).then(() => {
+        this.setUpdateVersionsState(true);
         this.$buefy.toast.open({
           message: this.$t('webapp.versions.version_has_edited'),
           type: 'is-success',
@@ -257,6 +259,7 @@ export default {
         message: this.$t('webapp.versions.version_was_created'),
         type: 'is-success',
       });
+      this.setUpdateVersionsState(true);
       this.updateVersions();
     },
     onDeleteVersion(id, isDefault) {
@@ -282,6 +285,7 @@ export default {
       try {
         this.loadingList = true;
         await this.deleteVersion(id);
+        this.setUpdateVersionsState(true);
         this.updateVersions();
       } catch (e) {
         this.showError(e);
@@ -301,7 +305,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    @import '~bh/src/assets/scss/colors.scss';
+@import '~bh/src/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/variables.scss';
 

@@ -7,4 +7,5 @@ export default {
   evaluateResultId: 0,
   evaluateResultVersion: 0,
   evaluateLanguage: '',
+  updateVersions: false,
 };
