@@ -44,13 +44,6 @@ export default new Router({
       path: '/terms',
       name: 'Terms',
       component: Terms,
-      beforeEnter: async (to, from, next) => {
-        if (store.getters.authenticated) {
-          next('/home');
-        } else {
-          next();
-        }
-      },
     },
     {
       path: '/signup',
