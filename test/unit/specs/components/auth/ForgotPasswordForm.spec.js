@@ -15,7 +15,13 @@ describe('ForgotPasswordForm.vue', () => {
     store.replaceState({
       Auth: {},
     });
-    wrapper = shallowMount(ForgotPasswordForm, { store, localVue });
+    wrapper = shallowMount(ForgotPasswordForm, {
+      store,
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

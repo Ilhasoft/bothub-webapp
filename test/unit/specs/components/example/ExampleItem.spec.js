@@ -22,6 +22,9 @@ describe('ExampleItem.vue', () => {
     });
     wrapper = shallowMount(ExampleItem, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         id: 1,
         entities: [

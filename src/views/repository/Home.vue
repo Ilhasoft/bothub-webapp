@@ -33,7 +33,7 @@
       </div>
       <div class="repository-home__description">
         <div class="repository-home__title">
-          Description
+          {{ $t('webapp.home.description') }}
         </div>
         <div>
           <vue-markdown
@@ -52,7 +52,7 @@
             v-if="repository.description"
             class="repository-home__description__text"/>
           <p v-else>
-            <i class="text-color-grey-dark">There is no description for this repository</i>
+            <i class="text-color-grey-dark">{{ $t('webapp.home.no_description') }}</i>
           </p>
         </div>
       </div>
@@ -62,7 +62,7 @@
         class="repository-home__intents-list"
       >
         <div class="repository-home__title">
-          Intents List
+          {{ $t('webapp.home.intents_list') }}
         </div>
         <badges-card
           :list="repository.intents_list"
@@ -75,7 +75,7 @@
         class="repository-home__entities-list"
       >
         <div class="repository-home__title">
-          Entities List
+          {{ $t('webapp.home.entities_list') }}
         </div>
         <badges-card
           v-if="repository.other_label.entities.length > 0"
@@ -85,7 +85,7 @@
         />
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
-            {{ labeledEntitiesCount }} entities grouped by label.
+            {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
           </div>
           <badges-card
             v-for="(label, i) in repository.labels"
@@ -164,13 +164,18 @@ export default {
       const entity = label.entities.length > 1 ? 'entities' : 'entity';
 
       if (label.value === 'other') {
-        return `<strong>${label.entities.length}</strong> unlabeled ${entity}`;
+        return this.$t('webapp.home.unlabeled', { entities_length: label.entities.length, _entity: entity });
       }
 
-      return `<strong>${label.entities.length}</strong> ${entity} labeled <strong>${label.value}</strong>`;
+      return this.$t('webapp.home.labeled',
+        {
+          entities_length: label.entities.length,
+          _entity: entity,
+          label_value: label.value,
+        });
     },
     formattedEntityTitle() {
-      return `This bot has <strong>${this.repository.intents_list.length}</strong> intents`;
+      return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
     },
   },
 };

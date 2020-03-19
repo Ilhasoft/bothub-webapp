@@ -8,7 +8,7 @@
       @itemDeleted="onItemDeleted($event)" />
     <p
       v-if="examplesList && examplesList.empty"
-      class="no-examples">No sentences.</p>
+      class="no-examples">{{ $t('webapp.evaluate.no_sentences') }}</p>
   </div>
 </template>
 

@@ -17,7 +17,7 @@ describe('api/repository', () => {
 
   test('getAll', async () => {
     const list = repository.getAll();
-    await list.next();
+    await list.updateItems(1);
     expect(list.items).toHaveLength(20);
   });
 

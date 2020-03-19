@@ -21,7 +21,7 @@
 
     <bh-button
       ref="addEntityBtn"
-      :tooltip-hover="!textSelectedValue ? 'Highlight words to mark as entity' : null"
+      :tooltip-hover="!textSelectedValue ? $t('highlight_word') : null"
       :disabled="!textSelectedValue"
       size="small"
       rounded
@@ -29,8 +29,10 @@
       @click.prevent.stop="addEntity()"
     >
       <span>
-        <span>Add entity</span>
-        <span v-if="textSelectedValue">for "{{ textSelectedValue }}"</span>
+        <span v-if="textSelectedValue">
+          {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
+        </span>
+        <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
       </span>
     </bh-button>
   </div>

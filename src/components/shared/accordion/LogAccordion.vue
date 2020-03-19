@@ -12,17 +12,17 @@
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ nlp_log.repository_version }} </span>
+        <span class="column log-accordion__version-name"> {{ version_name }} </span>
         <div class="column">
           <language-badge :language="nlp_log.language"/>
         </div>
         <div
           v-if="!open"
-          class="column is-two-thirds">{{ text }}</div>
+          class="column is-full">{{ text }}</div>
 
         <div
           v-else
-          class="column is-two-thirds">
+          class="column is-full">
           <highlighted-text
             v-if="open"
             :text="text"
@@ -34,6 +34,7 @@
       <div slot="options">
 
         <b-dropdown
+          v-if="editable"
           class="log-accordion__dropdown"
           aria-role="list"
           @click.native.stop>
@@ -43,7 +44,7 @@
             <b-icon icon="plus"/>
           </button>
 
-          <p class="log-accordion__menu-title"> Add to </p>
+          <p class="log-accordion__menu-title"> {{ $t('webapp.log.add_to') }} </p>
           <b-dropdown-item
             aria-role="listitem"
             @click="showModal('Training')"
@@ -55,6 +56,7 @@
             @click="showModal('Test Sentences')"
           >
             Test Sentences
+
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -107,6 +109,14 @@ export default {
     created_at: {
       type: String,
       default: '',
+    },
+    version_name: {
+      type: String,
+      default: '',
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -183,11 +193,11 @@ export default {
           intent,
           is_corrected: this.isCorrected,
         });
+
         this.$buefy.toast.open({
           message: 'Entry was added to training.',
           type: 'is-success',
         });
-        this.$parent.close();
       } catch (error) {
         this.$buefy.toast.open({
           message: 'An error occured',
@@ -203,6 +213,7 @@ export default {
         await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
         this.$buefy.toast.open({
           message: 'Entry was added to training.',
+
           type: 'is-success',
         });
       } catch (error) {

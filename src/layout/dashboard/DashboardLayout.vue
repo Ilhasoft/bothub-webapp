@@ -27,36 +27,9 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <div
-                class="
-                dashboard-layout__main-panel__header__info__left__wrapper__versions">
-                <span
-                  class="
-                  dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
-                  {{ $store.state.Repository.repositoryVersionName }}
-                </span>
-                <b-dropdown
-                  aria-role="list">
-                  <b-icon
-                    v-if="authenticated"
-                    :slot="authenticated ? 'trigger' : ''"
-                    class="
-                    dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
-                    icon="chevron-down"/>
-                  <b-dropdown-item
-                    v-for="(version, index) in allVersions"
-                    :key="index"
-                    aria-role="listitem"
-                    @click="handleVersion(version.id, version.name)">
-                    {{ version.name }}
-                  </b-dropdown-item>
-                  <b-dropdown-item
-                    aria-role="listitem"
-                    @click="routerHandle('repository-versions')">See all versions</b-dropdown-item>
-                </b-dropdown>
-              </div>
+              <VersionDropdown />
             </div>
-            <span class="has-text-white">Created by
+            <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>
@@ -68,19 +41,21 @@
             <span>{{
               getCurrentRepository.available_languages ?
                 getCurrentRepository.available_languages.length :
-            0 }} languages</span>
+            0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
-            <span>{{ getCurrentRepository.examples__count }} sentences</span>
+            <span>
+              {{ getCurrentRepository.examples__count }} {{ $t('webapp.dashboard.sentences') }}
+            </span>
           </div>
           <div
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="warning" />
-            <span>{{ warningsCount }} warning</span>
+            <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
             position="is-bottom-left"
@@ -97,11 +72,11 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="openLoginModal()">Sign in</b-dropdown-item>
+              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="signUp()">Sign up</b-dropdown-item>
+              @click="signUp()">{{ $t('webapp.landing_page.signup') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
@@ -109,14 +84,18 @@
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="openNewRepositoryModal()">Start your bot</b-dropdown-item>
+              @click="openNewRepositoryModal()">
+              {{ $t('webapp.layout.start_you_bot') }}
+            </b-dropdown-item>
             <b-dropdown-item
               aria-role="listitem"
-              @click="routerHandle('home')">Exit Inteligence</b-dropdown-item>
+              @click="routerHandle('home')">
+              {{ $t('webapp.dashboard.exit_inteligence') }}
+            </b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="logout()">Logout</b-dropdown-item>
+              @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
         </div>
       </div>
@@ -133,6 +112,7 @@
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -140,6 +120,7 @@ export default {
     SideBar,
     UserAvatar,
     NewRepositoryModal,
+    VersionDropdown,
   },
   data() {
     return {
@@ -147,7 +128,6 @@ export default {
       isLoading: false,
       isFullPage: true,
       isNewRepositoryModalOpen: false,
-      allVersions: [],
     };
   },
   computed: {
@@ -160,20 +140,6 @@ export default {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.languages_warnings_count) return 0;
       return this.getCurrentRepository.languages_warnings_count;
-    },
-  },
-  watch: {
-    getCurrentRepository() {
-      if (this.authenticated && this.getCurrentRepository) {
-        this.getAllVersions();
-      }
-    },
-    authenticated() {
-      if (this.authenticated && this.getCurrentRepository) {
-        this.getAllVersions();
-      } else {
-        this.allVersions = [];
-      }
     },
   },
   methods: {
@@ -194,19 +160,6 @@ export default {
     openNewRepositoryModal() {
       this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
     },
-    async getAllVersions() {
-      const response = await this.getFirstFiveVersions(this.getCurrentRepository.uuid);
-      this.allVersions = response.data.results;
-    },
-    handleVersion(id, name) {
-      const version = {
-        id,
-        name,
-      };
-      this.setRepositoryVersion({
-        version,
-      });
-    },
     signUp() {
       this.$router.push({
         name: 'signUp',
@@ -221,18 +174,19 @@ export default {
 .dashboard-layout {
 
   &__main-panel {
-    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding} - #{$menu-space});
+    width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
     float: right;
 
     &__header {
       width: 100%;
       height: 6rem;
-      background: #2F343D;
+      background: #404143;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2.5rem 0 3rem;
+      padding: 0 2.5rem 0 2rem;
+      box-shadow: 0px 3px 6px #00000029;
 
       &__info {
         display: flex;
@@ -272,25 +226,6 @@ export default {
               font-weight: bold;
               font-size: 1.3rem;
             }
-
-            &__versions {
-              margin: 0 1rem;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              &__icon {
-                color: #FFFFFF;
-                margin-top: .2rem;
-                cursor: pointer;
-              }
-
-              &__number {
-                color: #12a391;
-                font-size: 1.1rem;
-                font-weight: bold;
-              }
-            }
           }
         }
       }
@@ -329,7 +264,7 @@ export default {
     &--collapsed {
        position: relative;
        float: right;
-       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding} - #{$menu-space});
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding});
     }
   }
 }

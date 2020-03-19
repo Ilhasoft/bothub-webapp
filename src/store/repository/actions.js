@@ -28,9 +28,9 @@ export default {
   async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
     return repository.addNewVersion(repositoryUUID, versionUUID, name);
   },
-  getAllRepositories() {
+  getAllRepositories(limit = 20) {
     /* istanbul ignore next */
-    return repository.getAll();
+    return repository.getAll(limit);
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
@@ -135,6 +135,9 @@ export default {
   },
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
+  },
+  setUpdateVersionsState({ commit }, payload) {
+    commit('updateVersionsState', payload);
   },
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);

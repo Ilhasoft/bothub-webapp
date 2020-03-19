@@ -15,15 +15,18 @@
           </div>
         </bh-text>
       </b-field>
-      <div class="filter-evaluate-example__filters__wrapper">
-        <span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
+      <div
+        :class="wrapperClasses">
+        <span class="filter-evaluate-example__filters__wrapper__text">
+          {{ $t('webapp.dashboard.filter_by') }}:
+        </span>
         <b-field
           :errors="errors.intent">
           <bh-autocomplete
             v-model="intent"
             :data="intents || []"
             :formatters="inputFormatters"
-            placeholder="All Intents" />
+            :placeholder="$t('webapp.evaluate.all_intents')" />
         </b-field>
         <b-field
           :errors="errors.intent">
@@ -31,12 +34,12 @@
             v-model="entity"
             :data="entities || []"
             :formatters="inputFormatters"
-            placeholder="All entities" />
+            :placeholder="$t('webapp.evaluate.all_entities')" />
         </b-field>
         <b-field v-if="languageFilter && languages">
           <b-select
             v-model="language"
-            placeholder="Language"
+            placeholder="All languages"
             expanded>
             <option
               v-for="language in languages"
@@ -93,6 +96,10 @@ export default {
     };
   },
   computed: {
+    wrapperClasses() {
+      return ['filter-evaluate-example__filters__wrapper',
+        this.languageFilter ? 'filter-evaluate-example__filters__wrapper__has-language-filter' : ''];
+    },
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
@@ -145,10 +152,15 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: 11% 1fr 1fr 1fr;
       grid-gap: .5rem;
+      grid-template-columns: 1fr 2fr 2fr;
+
+      &__has-language-filter {
+        grid-template-columns: 1fr 2fr 2fr 2fr;
+      }
 
       &__text {
+        white-space: nowrap;
         align-self: center;
       }
     }

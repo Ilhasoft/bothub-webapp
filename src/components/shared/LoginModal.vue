@@ -9,14 +9,14 @@
         v-model="activeTab"
         position="is-centered"
         expanded >
-        <b-tab-item label="Login">
+        <b-tab-item :label="$t('webapp.login_modal.login')">
           <login-form
             @authenticated="onAuthenticated"
             @forgotPasswordClick="showForgotPasswordTab" />
         </b-tab-item>
         <b-tab-item
           :visible="activeTab === 1"
-          label="Forgot password">
+          :label="$t('webapp.login_modal.forgot_password')">
           <forgot-password-form />
         </b-tab-item>
       </b-tabs>

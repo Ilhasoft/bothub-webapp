@@ -22,6 +22,9 @@ describe('TranslationItem.vue', () => {
     wrapper = shallowMount(TranslationItem, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         id: 1,
         original_example: 1,

@@ -1,29 +1,28 @@
 <template>
   <div>
-    <pagination
+    <paginatedList
       v-if="translateList"
       :list="translateList"
       :item-component="translateExampleItem"
       :repository="repository"
       :translate-to="to"
       @translated="onTranslated()" />
-    <p v-if="translateList && translateList.empty">No examples to translate.</p>
+    <p v-if="translateList && translateList.empty">
+      {{ $t('webapp.translate.no_examples') }}
+    </p>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import TranslateExampleItem from './TranslateExampleItem';
-
-
-const components = {
-  Pagination,
-};
 
 export default {
   name: 'TranslateList',
-  components,
+  components: {
+    PaginatedList,
+  },
   props: {
     repository: {
       type: Object,
@@ -37,6 +36,10 @@ export default {
       type: String,
       required: true,
     },
+    query: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -47,6 +50,7 @@ export default {
   watch: {
     async from() { await this.updateList(); },
     async to() { await this.updateList(); },
+    query() { this.updateList(); },
   },
   async mounted() {
     await this.updateList();
@@ -63,6 +67,7 @@ export default {
           repositoryUuid: this.repository.uuid,
           from: this.from,
           to: this.to,
+          query: this.query,
         });
       }
     },

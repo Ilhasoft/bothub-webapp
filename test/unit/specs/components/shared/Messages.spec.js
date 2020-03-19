@@ -9,6 +9,9 @@ describe('Messages.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(Messages, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         msgs: [],
       },

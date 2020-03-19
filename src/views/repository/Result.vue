@@ -40,6 +40,14 @@
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
               You can not edit this repository
+              <request-authorization-modal
+                v-if="repository"
+                :open.sync="requestAuthorizationModalOpen"
+                :repository-uuid="repository.uuid"
+                @requestDispatched="onAuthorizationRequested()" />
+              <a
+                class="evaluate__navigation__requestAuthorization"
+                @click="openRequestAuthorizationModal">Request authorization</a>
             </div>
           </div>
         </div>
@@ -59,6 +67,7 @@
 </template>
 
 <script>
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import { mapActions, mapState, mapGetters } from 'vuex';
@@ -74,6 +83,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateResults,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
   data() {
@@ -82,6 +92,7 @@ export default {
       languages: [],
       evaluating: false,
       error: {},
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -127,6 +138,17 @@ export default {
           }));
       });
     },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$bhToastNotification({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'success',
+      });
+      this.updateRepository(false);
+    },
   },
 };
 </script>
@@ -150,6 +172,12 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
+    &__requestAuthorization{
+       color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      float: right
+    }
     a {
       position: relative;
       display: inline-flex;

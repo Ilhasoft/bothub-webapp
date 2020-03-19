@@ -8,15 +8,14 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">Test your data set</h2>
-            <p>
-              How is your model performing? Do you have enough data?
-              Are your intents and entities well-designed?
-            </p>
-            <p>Using our testing feature, you can evaluate your bot's performance easily.</p>
+            <h2 class="evaluate__content-header__title">
+              {{ $t('webapp.evaluate.header_title') }}
+            </h2>
+            <p>{{ $t('webapp.evaluate.header_title_p') }}</p>
+            <p>{{ $t('webapp.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
-                <p><strong>Select the language to run the test</strong></p>
+                <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
                 <b-select
                   v-model="currentLanguage"
                   expanded>
@@ -36,7 +35,9 @@
                 class="evaluate__content-header__wrapper__btn"
                 secondary
                 @click="newEvaluate()">
-              <slot v-if="!evaluating">Run test</slot></bh-button>
+                <slot v-if="!evaluating">
+                  {{ $t('webapp.evaluate.run_test') }}
+              </slot></bh-button>
             </div>
           </div>
           <div class="evaluate__divider" />
@@ -53,7 +54,15 @@
                 bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not edit this repository
+              {{ $t('webapp.evaluate.you_can_not_edit') }}
+              <request-authorization-modal
+                v-if="repository"
+                :open.sync="requestAuthorizationModalOpen"
+                :repository-uuid="repository.uuid"
+                @requestDispatched="onAuthorizationRequested()" />
+              <a
+                class="evaluate__navigation__requestAuthorization"
+                @click="openRequestAuthorizationModal">Request authorization</a>
             </div>
           </div>
         </div>
@@ -63,7 +72,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to edit this repository.
+            {{ $t('webapp.evaluate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>
@@ -75,6 +84,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -88,6 +98,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
   data() {
@@ -96,6 +107,7 @@ export default {
       languages: [],
       evaluating: false,
       error: {},
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -133,9 +145,20 @@ export default {
           .map((lang, index) => ({
             id: index + 1,
             value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$bhToastNotification({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'success',
+      });
+      this.updateRepository(false);
     },
     async newEvaluate() {
       this.evaluating = true;
@@ -184,6 +207,12 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
+    &__requestAuthorization{
+       color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      float: right
+    }
     a {
       position: relative;
       display: inline-flex;
