@@ -25,7 +25,9 @@ exports[`LoginForm.vue renders correctly 1`] = `
             <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">some specific text</b-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
-              some specific text
+              <router-link-stub to="/terms" tag="a" event="click">
+                some specific text
+              </router-link-stub>
             </small></div>
         </div>
       </form>
