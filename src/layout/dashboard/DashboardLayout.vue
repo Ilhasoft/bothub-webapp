@@ -27,36 +27,7 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <div
-                class="
-                dashboard-layout__main-panel__header__info__left__wrapper__versions">
-                <span
-                  class="
-                  dashboard-layout__main-panel__header__info__left__wrapper__versions__number">
-                  {{ $store.state.Repository.repositoryVersionName }}
-                </span>
-                <b-dropdown
-                  aria-role="list">
-                  <b-icon
-                    v-if="authenticated"
-                    :slot="authenticated ? 'trigger' : ''"
-                    class="
-                    dashboard-layout__main-panel__header__info__left__wrapper__versions__icon"
-                    icon="chevron-down"/>
-                  <b-dropdown-item
-                    v-for="(version, index) in allVersions"
-                    :key="index"
-                    aria-role="listitem"
-                    @click="handleVersion(version.id, version.name)">
-                    {{ version.name }}
-                  </b-dropdown-item>
-                  <b-dropdown-item
-                    aria-role="listitem"
-                    @click="routerHandle('repository-versions')">
-                    {{ $t('webapp.menu.all_versions') }}
-                  </b-dropdown-item>
-                </b-dropdown>
-              </div>
+              <VersionDropdown />
             </div>
             <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
@@ -141,6 +112,7 @@
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
@@ -148,6 +120,7 @@ export default {
     SideBar,
     UserAvatar,
     NewRepositoryModal,
+    VersionDropdown,
   },
   data() {
     return {
@@ -155,7 +128,6 @@ export default {
       isLoading: false,
       isFullPage: true,
       isNewRepositoryModalOpen: false,
-      allVersions: [],
     };
   },
   computed: {
@@ -168,20 +140,6 @@ export default {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.languages_warnings_count) return 0;
       return this.getCurrentRepository.languages_warnings_count;
-    },
-  },
-  watch: {
-    getCurrentRepository() {
-      if (this.authenticated && this.getCurrentRepository) {
-        this.getAllVersions();
-      }
-    },
-    authenticated() {
-      if (this.authenticated && this.getCurrentRepository) {
-        this.getAllVersions();
-      } else {
-        this.allVersions = [];
-      }
     },
   },
   methods: {
@@ -201,19 +159,6 @@ export default {
     },
     openNewRepositoryModal() {
       this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
-    },
-    async getAllVersions() {
-      const response = await this.getFirstFiveVersions(this.getCurrentRepository.uuid);
-      this.allVersions = response.data.results;
-    },
-    handleVersion(id, name) {
-      const version = {
-        id,
-        name,
-      };
-      this.setRepositoryVersion({
-        version,
-      });
     },
     signUp() {
       this.$router.push({
@@ -280,25 +225,6 @@ export default {
             &__title {
               font-weight: bold;
               font-size: 1.3rem;
-            }
-
-            &__versions {
-              margin: 0 1rem;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-
-              &__icon {
-                color: #FFFFFF;
-                margin-top: .2rem;
-                cursor: pointer;
-              }
-
-              &__number {
-                color: #12a391;
-                font-size: 1.1rem;
-                font-weight: bold;
-              }
             }
           }
         }
