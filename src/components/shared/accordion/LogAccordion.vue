@@ -212,8 +212,7 @@ export default {
       try {
         await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
         this.$buefy.toast.open({
-          message: 'Entry was added to training.',
-
+          message: 'Entry was added to sentences.',
           type: 'is-success',
         });
       } catch (error) {
