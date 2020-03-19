@@ -11,7 +11,10 @@ exports[`SiteFooter.vue renders correctly 1`] = `
             <div>Webapp v0.0.0</div>
           </div>
           <ul class="footer-item">
-            <li><a href="#">some specific text</a></li>
+            <li>
+              <router-link to="/terms">some specific text
+              </router-link>
+            </li>
           </ul>
           <ul class="footer-item footer-sociallist">
             <li class="footer-sociallist-item"><a href="https://www.facebook.com/bothub.it" target="_blank">

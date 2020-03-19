@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import LoginForm from '@/components/auth/LoginForm';
@@ -131,6 +131,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
     languages() {
       return Object.keys(this.repository.evaluate_languages_count)
         .map(lang => ({
