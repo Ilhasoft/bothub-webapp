@@ -5,7 +5,7 @@ import utils from './utils';
 
 
 export default {
-  new(repository, repositoryVersion, text, language, entities, intent) {
+  new(repository, repositoryVersion, text, language, entities, intent, isCorrected) {
     return request.$http.post(
       '/v2/repository/example/',
       {
@@ -15,6 +15,7 @@ export default {
         language,
         entities,
         intent,
+        is_corrected: isCorrected,
       },
     );
   },

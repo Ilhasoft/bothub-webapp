@@ -48,7 +48,6 @@
             aria-role="listitem"
             @click="showModal('Training')"
           >
-
             Training
           </b-dropdown-item>
           <b-dropdown-item
@@ -83,7 +82,7 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 import HighlightedText from '@/components/shared/HighlightedText';
 import RawInfo from '@/components/shared/RawInfo';
 import RepositoryDebug from '@/components/repository/debug/Debug';
-import IntentModal from '../../repository/IntentModal';
+import IntentModal from '@/components/repository/IntentModal';
 
 
 export default {
@@ -117,6 +116,7 @@ export default {
       loading: false,
       isRawInfoActive: false,
       intent: '',
+      isCorrected: Boolean,
     };
   },
   computed: {
@@ -156,6 +156,7 @@ export default {
           end: entity.end,
         })),
         intent: this.intent,
+        is_corrected: this.isCorrected,
       };
     },
 
@@ -176,19 +177,42 @@ export default {
     },
     async addToTraining(intent) {
       this.loading = true;
-      await this.newEvaluateExample({ ...this.toExample, intent }).catch((e) => {
+      try {
+        await this.newEvaluateExample({
+          ...this.toExample,
+          intent,
+          is_corrected: this.isCorrected,
+        });
+        this.$buefy.toast.open({
+          message: 'Entry was added to training.',
+          type: 'is-success',
+        });
+        this.$parent.close();
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     async addToSentences(intent) {
       this.loading = true;
-      await this.newExample({ ...this.toExample, intent }).catch((e) => {
+      try {
+        await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
+        this.$buefy.toast.open({
+          message: 'Entry was added to training.',
+          type: 'is-success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: 'An error occured',
+          type: 'is-danger',
+        });
+      } finally {
         this.loading = false;
-        this.showError(e);
-      });
-      this.loading = false;
+      }
     },
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -220,17 +244,29 @@ export default {
         props: {
           info: this.nlp_log,
           repository: this.repository,
-          TitleHeader: typeSentence,
-          intent: '',
-          addToTraining: this.addToTraining,
-          addToSentences: this.addToSentences,
+          titleHeader: typeSentence,
         },
         parent: this,
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
         events: {
-          addedIntent: (value) => {
+          addedIntent: (value, type) => {
+            if (type === 'Training') {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToTraining(value);
+            } else {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToSentences(value);
+            }
             this.intent = value;
           },
         },
