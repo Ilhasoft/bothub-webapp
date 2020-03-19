@@ -4,7 +4,7 @@ exports[`RepositoryLog.vue renders correctly 1`] = `
 <repository-view-base-stub>
   <div>
     <b-notification-stub animation="fade" class="is-danger">
-      Sign in to your account to edit this repository.
+      some specific text.
     </b-notification-stub>
     <login-form-stub hideforgotpassword="true"></login-form-stub>
   </div>

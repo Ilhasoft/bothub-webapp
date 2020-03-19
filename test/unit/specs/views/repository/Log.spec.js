@@ -10,7 +10,13 @@ localVue.use(BH);
 describe('RepositoryLog.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(RepositoryLog, { localVue, store });
+    wrapper = shallowMount(RepositoryLog, {
+      localVue,
+      store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {
