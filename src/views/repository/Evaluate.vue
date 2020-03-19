@@ -55,6 +55,14 @@
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
               {{ $t('webapp.evaluate.you_can_not_edit') }}
+              <request-authorization-modal
+                v-if="repository"
+                :open.sync="requestAuthorizationModalOpen"
+                :repository-uuid="repository.uuid"
+                @requestDispatched="onAuthorizationRequested()" />
+              <a
+                class="evaluate__navigation__requestAuthorization"
+                @click="openRequestAuthorizationModal">Request authorization</a>
             </div>
           </div>
         </div>
@@ -76,6 +84,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -89,6 +98,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
   data() {
@@ -97,6 +107,7 @@ export default {
       languages: [],
       evaluating: false,
       error: {},
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -137,6 +148,17 @@ export default {
             title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$bhToastNotification({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'success',
+      });
+      this.updateRepository(false);
     },
     async newEvaluate() {
       this.evaluating = true;
@@ -185,6 +207,12 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
+    &__requestAuthorization{
+       color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      float: right
+    }
     a {
       position: relative;
       display: inline-flex;
