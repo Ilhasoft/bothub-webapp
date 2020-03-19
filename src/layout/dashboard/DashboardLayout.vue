@@ -105,7 +105,7 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="signUp()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
+              @click="signUp()">{{ $t('webapp.landing_page.signup') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"

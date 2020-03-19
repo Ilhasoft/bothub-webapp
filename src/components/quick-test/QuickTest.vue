@@ -199,6 +199,10 @@ export default {
 
 <style lang="scss" scoped>
 
+  :not(.quick-test) {
+    pointer-events: visible;
+  }
+
   .is-text {
     text-decoration: none;
   }
@@ -220,6 +224,7 @@ export default {
         bottom: 10%;
         right: 0;
         z-index: 9;
+        pointer-events: none;
 
         &__message {
 
