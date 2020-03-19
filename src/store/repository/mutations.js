@@ -13,6 +13,9 @@ export default {
   setRepository(state, value) {
     state.selectedRepository = value;
   },
+  updateVersionsState(state, value) {
+    state.updateVersions = value;
+  },
   updateRepository(state, value) {
     state.updateRepository = value;
   },
