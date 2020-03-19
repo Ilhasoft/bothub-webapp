@@ -7,6 +7,7 @@
       :item-component="logAccordion"
       :list="list"
       :loading.sync="loading"
+      :editable="editable"
     />
 
     <h4
@@ -36,6 +37,10 @@ export default {
     perPage: {
       type: Number,
       default: 20,
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

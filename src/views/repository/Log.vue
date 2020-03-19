@@ -4,9 +4,9 @@
     :error-code="errorCode">
 
     <div
-      v-if="repository"
+      v-if="authenticated"
       class="repository-log">
-      <div v-if="authenticated">
+      <div v-if="repository">
         <div class="repository-log__header">
           <h1> Inbox </h1>
           <p> These are phrases of actual user interaction with your data set.
@@ -69,16 +69,8 @@
 
         <repository-log-list
           :per-page="perPage"
-          :query="query" />
-      </div>
-
-      <div
-        v-else>
-        <b-notification
-          :closable="false"
-          class="is-warning">
-          You cannot edit this repository
-        </b-notification>
+          :query="query"
+          :editable="repository.authorization.can_contribute" />
       </div>
     </div>
 

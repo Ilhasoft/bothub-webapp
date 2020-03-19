@@ -34,6 +34,7 @@
       <div slot="options">
 
         <b-dropdown
+        v-if="editable"
           class="log-accordion__dropdown"
           aria-role="list"
           @click.native.stop>
@@ -106,6 +107,10 @@ export default {
     version_name: {
       type: String,
       default: '',
+    },
+    editable: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
