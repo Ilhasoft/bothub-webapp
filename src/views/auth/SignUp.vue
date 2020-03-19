@@ -49,7 +49,10 @@
             </div>
             <div class="sign-up__wrapper-content__form__agree-message">
               <small>
-                {{ $t('webapp.register_form.policy_service') }}
+                <router-link to="/terms">
+                  {{ $t('webapp.register_form.policy_service') }}
+                </router-link>
+
               </small>
             </div>
           </div>
