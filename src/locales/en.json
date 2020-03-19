@@ -133,7 +133,7 @@
       "submit": "Submit",
       "highlight_word": "Highlight words to mark as entity",
       "add_entity": "Add entity",
-      "add_entity_for": "Add entity for \"{entity_selected}\"",
+      "add_entity_for": "Add entity for",
       "add_a_sentence": "Add a sentence",
       "intent": "Intent"
     },
@@ -215,6 +215,23 @@
       "deleting_version": "Deleting Version",
       "message_deleting_version": "Are you sure you want to delete this version? This action cannot be undone.",
       "confirm_deleting_version": "Delete Version"
+    },
+    "log": {
+      "title": "Inbox",
+      "subtitle1": "These are phrases of actual user interaction with your data set.",
+      "subtitle2": "They can be useful for your training or testing.",
+      "login": "Sign in to your account to edit this repository.",
+      "intent": "Intent",
+      "your_intent": "Your intent",
+      "language": "Language",
+      "your_language": "Your Language",
+      "version": "Version",
+      "your_version": "Your Version",
+      "your_filter": "Your filter",
+      "list_empty": "No logs found.",
+      "add_to": "Add to",
+      "training": "Training",
+      "sentences": "Test Sentences"
     }
   }
 }

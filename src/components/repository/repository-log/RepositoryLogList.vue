@@ -13,7 +13,7 @@
     <h4
       v-if="list && list.empty && !loading"
       class="repository-log-list__empty-message">
-      No logs found
+      {{ $t('webapp.log.list_empty') }}
     </h4>
   </div>
 </template>

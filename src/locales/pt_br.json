@@ -133,7 +133,7 @@
       "submit": "Enviar",
       "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
-      "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
+      "add_entity_for": "Adicionar entidade para",
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção"
     },
@@ -215,6 +215,23 @@
       "deleting_version": "Deletar Versão",
       "message_deleting_version": "Você tem certeza que quer deletar essa versão? Essa ação não pode ser desfeita.",
       "confirm_deleting_version": "Deletar Versão"
+    },
+    "log": {
+      "title": "Inbox",
+      "subtitle1": "Estas são frases vindas de interações de usuários reais com o seu conjunto de dados.",
+      "subtitle2": "Podem ser úteis para o seu treinamento ou teste.",
+      "login": "Faça o login na sua conta pra contribuir nessa inteligência.",
+      "intent": "Intenção",
+      "your_intent": "Sua intenção",
+      "language": "Idioma",
+      "your_language": "Seu idioma",
+      "version": "Versão",
+      "your_version": "Sua versão",
+      "your_filter": "Seu filtro",
+      "list_empty": "No logs found.",
+      "add_to": "Adicionar a",
+      "training": "Treinamento",
+      "sentences": "Frases de teste"
     }
   }
 }
