@@ -34,7 +34,7 @@
       <div slot="options">
 
         <b-dropdown
-        v-if="editable"
+          v-if="editable"
           class="log-accordion__dropdown"
           aria-role="list"
           @click.native.stop>
