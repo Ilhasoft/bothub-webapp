@@ -12,8 +12,8 @@
               :entities="entitiesToEdit"
               :available-entities="entitiesToEdit"
               :formatters="textFormatters"
+              :placeholder="$t('webapp.example.enter_sentence')"
               size="normal"
-              placeholder="Enter your sentence here"
               @textSelected="setTextSelected($event)"
               @entityEdited="onEditEntity($event)"
               @entityAdded="onEntityAdded()"
@@ -30,8 +30,8 @@
               v-model="intent"
               :data="repository.intents_list || []"
               :formatters="intentFormatters"
-              size="normal"
-              placeholder="Intent" />
+              :placeholder="$t('webapp.example.intent')"
+              size="normal" />
           </bh-field>
         </div>
       </div>
@@ -49,9 +49,9 @@
               :data="repository.entities_list || []"
               :formatters="intentFormatters"
               v-model="entity.entity"
+              :placeholder="$t('webapp.example.entity')"
               class="edit-sentence-input"
               size="normal"
-              placeholder="Entity"
             >
               <span slot="append">
                 <bh-icon-button
@@ -76,9 +76,9 @@
             :data="repository.entities_list || []"
             :formatters="intentFormatters"
             v-model="entity.entity"
+            :placeholder="$t('webapp.example.entity')"
             class="edit-sentence-input"
             size="normal"
-            placeholder="Entity"
             @selected="elevateToEntity(entity, index)"
           >
             <span slot="append">

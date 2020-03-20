@@ -78,7 +78,13 @@
       "debug": "Debug",
       "raw": "Raw",
       "add_a_sentence": "Add a sentence"
-
+    },
+    "debug": {
+      "word": "Word",
+      "intent": "Intent",
+      "relevance": "Relevance",
+      "debug_description": "Something unexpected happened! We couldn't debug your text.",
+      "reload": "Reload"
     },
     "evaluate": {
       "header_title": "Test your data set",
@@ -91,6 +97,7 @@
       "get_examples_test_sentences": "test sentences",
       "all_intents": "All Intents",
       "all_entities": "All Entities",
+      "all_languages": "All languages",
       "all_labels": "All Labels",
       "add_new_test_sentence": "Add a new test sentence",
       "create_a_bench_of_test": "Create a bench of test sentences to measure the accuracy of your training.",
@@ -127,6 +134,12 @@
       "role": "Role:",
       "no_requests": "No requests."
     },
+    "example": {
+      "enter_sentence": "Enter your sentence here",
+      "intent": "Intent",
+      "entity": "Entity",
+      "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent."
+    },
     "trainings": {
       "grid_text1": "Train a new sentence",
       "grid_text2": "Add examples to improve your intelligence.",
@@ -153,7 +166,8 @@
       "no_translation": "No translations.",
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
-      "to": "to"
+      "to": "to",
+      "translate_sentence": "Translate sentence"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
@@ -239,8 +253,6 @@
       "training": "Training",
       "add_to": "Add to",
       "list_empty": "No logs found.",
-      "debug_description": "Something unexpected happened! We couldn't debug your text.",
-      "reload": "Reload",
       "entry_has_add_to_train": "Entry was added to training.",
       "entry_has_add_to_sentence": "Entry was added to sentences.",
       "add_to_train_error": "An error occured",
