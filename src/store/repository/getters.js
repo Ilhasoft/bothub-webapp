@@ -14,4 +14,7 @@ export default {
   getEvaluateLanguage(state) {
     return state.evaluateLanguage ? state.evaluateLanguage : state.selectedRepository.language;
   },
+  getUpdateVersionsState(state) {
+    return state.updateVersions;
+  },
 };

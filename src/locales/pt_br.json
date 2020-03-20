@@ -101,7 +101,9 @@
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
       "no_versions": "Sem versões",
-      "no_sentences": "Não há frases."
+      "no_sentences": "Não há frases.",
+      "detailed_results": "Resultados Detalhados",
+      "results": "Resultados"
     },
     "home": {
       "description": "Descrição",
@@ -111,7 +113,9 @@
       "entities_label": "entidades agrupadas por categoria.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
       "labeled": "<strong>{entities_length}</strong> {_entity} categorizada <strong>{label_value}</strong>",
-      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}"
+      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}",
+      "all_categories": "Todas as categorias",
+      "all_languages": "Todos os idiomas"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -133,7 +137,7 @@
       "submit": "Enviar",
       "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
-      "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
+      "add_entity_for": "Adicionar entidade para",
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção"
     },
@@ -184,10 +188,11 @@
       "results": "Resultados",
       "inbox": "Inbox",
       "translation": "Tradução",
-      "translation_status": "Status das traduções",
-      "translate": "Tranduzir",
+      "translation_status": "Status",
+      "translate": "Traduzir",
       "integration": "Integração",
       "settings": "Ajustes",
+      "general":"Geral",
       "versions": "Versões"
     },
     "dashboard": {
@@ -214,7 +219,38 @@
       "you_cannot_delete_main_branch": "Você não pode deletar a versão principal",
       "deleting_version": "Deletar Versão",
       "message_deleting_version": "Você tem certeza que quer deletar essa versão? Essa ação não pode ser desfeita.",
-      "confirm_deleting_version": "Deletar Versão"
+      "confirm_deleting_version": "Deletar Versão",
+      "title": "Título",
+      "version": "Versão",
+      "cancel": "Cancelar",
+      "add_new": "Adicionar novo"
+    },
+    "inbox": {
+      "description": "Essas são as frases das interações de usuário com a sua inteligência.\nPodem ser úteis para seu treinamento ou teste. ",
+      "intent": "Intenção",
+      "language": "Idioma",
+      "version": "Versão",
+      "cannot_edit_this_repository": "Você não pode editar essa inteligência",
+      "signin_you_account": "Entre na sua conta para editar essa inteligência.",
+      "your_version": "Sua Versão",
+      "your_intent": "Sua Intenção",
+      "your_filter": "Seu Filtro",
+      "test_sentences": "Frases de Teste",
+      "training": "Treinamento",
+      "add_to": "Adicionar à",
+      "list_empty": "Nenhuma frase.",
+      "debug_description": "Algo inesperado aconteceu! Nos nós pudemos debugar seu texto.",
+      "reload": "Recarregar",
+      "entry_has_add_to_train": "Entrada adicionada ao treinamento.",
+      "entry_has_add_to_sentence": "Entrada adicionada às frases.",
+      "add_to_train_error": "Aconteceu um erro",
+      "add_to_sentences_error": "Um erro ocorreu.",
+      "error": "Erro",
+      "add_log": {
+        "add": "Adicionar",
+        "close": "Fechar"
+      },
+      "confirm_deleting_version": "Deletar versão"
     }
   }
 }

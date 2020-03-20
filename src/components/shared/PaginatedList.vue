@@ -52,6 +52,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    editable: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -99,7 +103,7 @@ export default {
       this.$emit(event, value);
     },
     addAttrs(obj) {
-      return Object.assign({}, obj, this.$attrs);
+      return Object.assign({ editable: this.editable }, obj, this.$attrs);
     },
   },
 };
@@ -112,6 +116,9 @@ export default {
     display: block;
     margin: 1rem auto;
     max-width: 600px;
+    display: flex;
+    justify-content: center;
   }
+
 }
 </style>
