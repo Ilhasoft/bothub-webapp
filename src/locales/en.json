@@ -188,6 +188,7 @@
       "translate": "Translate",
       "integration": "Integration",
       "settings": "Settings",
+      "general":"General",
       "versions": "Versions"
     },
     "dashboard": {
