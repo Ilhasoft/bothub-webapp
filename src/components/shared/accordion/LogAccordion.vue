@@ -47,13 +47,16 @@
           <p class="log-accordion__menu-title"> {{ $t('webapp.log.add_to') }} </p>
           <b-dropdown-item
             aria-role="listitem"
-            @click.native.stop="addToTraining()">
-            {{ $t('webapp.log.training') }}
+            @click="showModal('Training')"
+          >
+            Training
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click.native.stop="addToSentences()">
-            {{ $t('webapp.log.sentences') }}
+            @click="showModal('Test Sentences')"
+          >
+            Test Sentences
+
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -81,6 +84,8 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 import HighlightedText from '@/components/shared/HighlightedText';
 import RawInfo from '@/components/shared/RawInfo';
 import RepositoryDebug from '@/components/repository/debug/Debug';
+import IntentModal from '@/components/repository/IntentModal';
+
 
 export default {
   name: 'LogAccordion',
@@ -90,6 +95,7 @@ export default {
     LanguageBadge,
     HighlightedText,
     RawInfo,
+    IntentModal,
   },
   props: {
     text: {
@@ -119,6 +125,8 @@ export default {
       open: false,
       loading: false,
       isRawInfoActive: false,
+      intent: '',
+      isCorrected: Boolean,
     };
   },
   computed: {
@@ -157,9 +165,11 @@ export default {
           start: entity.start,
           end: entity.end,
         })),
-        intent: this.nlp_log.intent.name,
+        intent: this.intent,
+        is_corrected: this.isCorrected,
       };
     },
+
   },
   methods: {
     ...mapActions([
@@ -169,40 +179,44 @@ export default {
     showError(error) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       const message = Array.join(messages, ',');
-      this.$buefy.diaalert({
-        title: 'Error',
+      this.$buefy.toast.open({
         message,
         type: 'is-danger',
       });
     },
-    async addToTraining() {
+    async addToTraining(intent) {
       this.loading = true;
       try {
-        await this.newEvaluateExample(this.toExample);
+        await this.newEvaluateExample({
+          ...this.toExample,
+          intent,
+          is_corrected: this.isCorrected,
+        });
+
         this.$buefy.toast.open({
-          message: 'Entry was added to training.',
+          message: this.$t('webapp.log.add_training_success'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: 'An error occured',
+          message: this.$t('webapp.log.on_error'),
           type: 'is-danger',
         });
       } finally {
         this.loading = false;
       }
     },
-    async addToSentences() {
+    async addToSentences(intent) {
       this.loading = true;
       try {
-        await this.newExample(this.toExample);
+        await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
         this.$buefy.toast.open({
-          message: 'Entry was added to sentences.',
+          message: this.$t('webapp.log.add_sentences_success'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: 'An error occured',
+          message: this.$t('webapp.log.on_error'),
           type: 'is-danger',
         });
       } finally {
@@ -234,6 +248,40 @@ export default {
         trapFocus: true,
       });
     },
+    showModal(typeSentence) {
+      this.$buefy.modal.open({
+        props: {
+          info: this.nlp_log,
+          repository: this.repository,
+          titleHeader: typeSentence,
+        },
+        parent: this,
+        component: IntentModal,
+        hasModalCard: false,
+        trapFocus: true,
+        events: {
+          addedIntent: (value, type) => {
+            if (type === 'Training') {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToTraining(value);
+            } else {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToSentences(value);
+            }
+            this.intent = value;
+          },
+        },
+      });
+    },
+
     debug() {
       this.$buefy.modal.open({
         parent: this,
