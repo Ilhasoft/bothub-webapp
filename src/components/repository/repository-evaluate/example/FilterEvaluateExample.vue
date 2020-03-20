@@ -39,7 +39,7 @@
         <b-field v-if="languageFilter && languages">
           <b-select
             v-model="language"
-            placeholder="All languages"
+            :placeholder="$t('webapp.evaluate.all_languages')"
             expanded>
             <option
               v-for="language in languages"

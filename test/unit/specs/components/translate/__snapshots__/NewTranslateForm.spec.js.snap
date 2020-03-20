@@ -5,7 +5,7 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column">
       <bh-field-stub label="" errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" placeholder="Translate sentence" size="normal"></example-text-with-highlighted-entities-input-stub>
+        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">
