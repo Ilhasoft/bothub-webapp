@@ -8,7 +8,7 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">Results</h2>
+            <h2 class="evaluate__content-header__title">{{ $t('webapp.evaluate.results') }}</h2>
           </div>
           <div class="evaluate__divider" />
           <div class="evaluate__content-wrapper">
@@ -22,7 +22,7 @@
                 bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not edit this repository
+              {{ $t('webapp.evaluate.you_can_not_edit') }}
               <request-authorization-modal
                 v-if="repository"
                 :open.sync="requestAuthorizationModalOpen"
@@ -30,7 +30,9 @@
                 @requestDispatched="onAuthorizationRequested()" />
               <a
                 class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">Request authorization</a>
+                @click="openRequestAuthorizationModal">
+                {{ $t('webapp.layout.request_authorization') }}
+              </a>
             </div>
           </div>
         </div>
@@ -40,7 +42,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to edit this repository.
+            {{ $t('webapp.evaluate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>

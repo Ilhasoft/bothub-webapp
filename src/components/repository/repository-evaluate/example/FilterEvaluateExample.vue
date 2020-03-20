@@ -50,7 +50,7 @@
             </option>
             <option
               :value="null">
-              All languages
+              {{ $t('webapp.home.all_languages') }}
             </option>
           </b-select>
         </b-field>

@@ -101,7 +101,9 @@
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
       "no_versions": "Sem versões",
-      "no_sentences": "Não há frases."
+      "no_sentences": "Não há frases.",
+      "detailed_results": "Resultados Detalhados",
+      "results": "Resultados"
     },
     "home": {
       "description": "Descrição",
@@ -111,7 +113,9 @@
       "entities_label": "entidades agrupadas por categoria.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
       "labeled": "<strong>{entities_length}</strong> {_entity} categorizada <strong>{label_value}</strong>",
-      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}"
+      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}",
+      "all_categories": "Todas as categorias",
+      "all_languages": "Todos os idiomas"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -215,32 +219,38 @@
       "you_cannot_delete_main_branch": "Você não pode deletar a versão principal",
       "deleting_version": "Deletar Versão",
       "message_deleting_version": "Você tem certeza que quer deletar essa versão? Essa ação não pode ser desfeita.",
-      "confirm_deleting_version": "Deletar Versão"
-    },
-    "log": {
-      "title": "Inbox",
-      "subtitle1": "Estas são frases vindas de interações de usuários reais com o seu conjunto de dados.",
-      "subtitle2": "Podem ser úteis para o seu treinamento ou teste.",
-      "login": "Faça o login na sua conta pra contribuir nessa inteligência.",
-      "intent": "Intenção",
-      "your_intent": "Sua intenção",
-      "language": "Idioma",
-      "your_language": "Seu idioma",
+      "confirm_deleting_version": "Deletar Versão",
+      "title": "Título",
       "version": "Versão",
-      "your_version": "Sua versão",
-      "your_filter": "Seu filtro",
-      "list_empty": "Nenhuma frase.",
-      "add_to": "Adicionar a",
+      "cancel": "Cancelar",
+      "add_new": "Adicionar novo"
+    },
+    "inbox": {
+      "description": "Essas são as frases das interações de usuário com a sua inteligência.\nPodem ser úteis para seu treinamento ou teste. ",
+      "intent": "Intenção",
+      "language": "Idioma",
+      "version": "Versão",
+      "cannot_edit_this_repository": "Você não pode editar essa inteligência",
+      "signin_you_account": "Entre na sua conta para editar essa inteligência.",
+      "your_version": "Sua Versão",
+      "your_intent": "Sua Intenção",
+      "your_filter": "Seu Filtro",
+      "test_sentences": "Frases de Teste",
       "training": "Treinamento",
-      "sentences": "Frases de teste",
+      "add_to": "Adicionar à",
+      "list_empty": "Nenhuma frase.",
+      "debug_description": "Algo inesperado aconteceu! Nos nós pudemos debugar seu texto.",
+      "reload": "Recarregar",
+      "entry_has_add_to_train": "Entrada adicionada ao treinamento.",
+      "entry_has_add_to_sentence": "Entrada adicionada às frases.",
+      "add_to_train_error": "Aconteceu um erro",
+      "add_to_sentences_error": "Um erro ocorreu.",
       "error": "Erro",
-      "add_training_success": "A frase foi adicionada ao treinamento.",
-      "add_sentences_success": "A frase foi adicionada aos testes.",
-      "on_error": "Um erro ocorreu.",
       "add_log": {
         "add": "Adicionar",
         "close": "Fechar"
-      }
+      },
+      "confirm_deleting_version": "Deletar versão"
     }
   }
 }
