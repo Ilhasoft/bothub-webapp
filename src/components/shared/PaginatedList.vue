@@ -112,12 +112,12 @@ export default {
 <style lang="scss" scoped>
 .pagination {
   &__bottom {
-    min-width: 50%;
+    min-width: 100%;
     display: block;
     margin: 1rem auto;
     max-width: 600px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
 }

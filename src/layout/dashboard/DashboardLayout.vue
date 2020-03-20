@@ -171,9 +171,10 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
-
+html{
+  overflow-y:auto
+}
 .dashboard-layout {
-
   &__main-panel {
     width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
