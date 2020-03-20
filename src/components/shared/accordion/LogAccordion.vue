@@ -47,12 +47,12 @@
           <p class="log-accordion__menu-title"> {{ $t('webapp.inbox.add_to') }} </p>
           <b-dropdown-item
             aria-role="listitem"
-            @click.stop="showModal('Training')">
+            @click.native.stop="showModal('Training')">
             {{ $t('webapp.inbox.training') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click.stop="showModal('Test Sentences')">
+            @click.native.stop="showModal('Test Sentences')">
             {{ $t('webapp.inbox.test_sentences') }}
           </b-dropdown-item>
         </b-dropdown>
