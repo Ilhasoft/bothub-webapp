@@ -17,6 +17,7 @@
       </div>
       <div class="debug__table">
         <b-table
+          v-if="tableData.length > 0"
           :data="tableData"
           :mobile-cards="false"
           default-sort="relevance"
@@ -93,12 +94,21 @@ export default {
       return this.data.text.split(' ');
     },
     relevantData() {
-      if (!this.data) return {};
-      return Object.entries(this.data.words).reduce((relevance, entry) => {
-        // eslint-disable-next-line no-param-reassign
-        relevance[entry[0]] = entry[1]
-          .find(object => object.intent);
-        return relevance;
+      return this.wordsFromText.reduce((relevanceObject, untreatedWord) => {
+        const word = this.treat(untreatedWord);
+        if (word === '' || word in relevanceObject) return relevanceObject;
+        const relevance = this.data.words[word];
+        if (relevance && relevance.length > 0) {
+          // eslint-disable-next-line no-param-reassign
+          relevanceObject[word] = relevance.find(object => object.intent);
+        } else {
+          // eslint-disable-next-line no-param-reassign
+          relevanceObject[word] = {
+            intent: '-',
+            relevance: 0,
+          };
+        }
+        return relevanceObject;
       }, {});
     },
     tableData() {
@@ -109,9 +119,11 @@ export default {
       })).sort((a, b) => a.relevance.relevance < b.relevance.relevance);
     },
     maxRelevance() {
+      if (this.tableData.length === 0) return 0;
       return this.tableData[0].relevance.relevance;
     },
     minRelevance() {
+      if (this.tableData.length === 0) return 0;
       return this.tableData[this.tableData.length - 1].relevance.relevance;
     },
   },
@@ -122,6 +134,10 @@ export default {
     ...mapActions([
       'debugParse',
     ]),
+    treat(word) {
+      // eslint-disable-next-line no-useless-escape
+      return word.replace(/[.,\/#!$%\^&\*;:?/(/){}=\-_`~()]/g, '');
+    },
     async load() {
       this.error = null;
       this.loading = true;
@@ -140,10 +156,13 @@ export default {
       }
     },
     style(word) {
+      const treatedWord = this.treat(word);
+      const relevance = treatedWord === '' ? 0 : this.relevantData[treatedWord].relevance;
+
       const value = normalize(
         this.minRelevance,
         this.maxRelevance,
-        this.relevantData[word].relevance,
+        relevance,
       );
 
       return {
@@ -194,6 +213,8 @@ export default {
         margin: 1rem;
         padding: 0.5rem;
         display: flex;
+        flex-wrap: wrap;
+        row-gap: 1rem;
         justify-content: center;
         border: 1px solid #CFD5D9;
       }
