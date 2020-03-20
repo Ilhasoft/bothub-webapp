@@ -181,7 +181,7 @@ export default {
         type: 'is-danger',
       });
     },
-    async addToTraining(intent) {
+    async addToSentences(intent) {
       this.loading = true;
       try {
         await this.newEvaluateExample({
@@ -195,15 +195,16 @@ export default {
           type: 'is-success',
         });
       } catch (error) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.add_to_train_error'),
-          type: 'is-danger',
-        });
+        this.showError(error);
+        // this.$buefy.toast.open({
+        //   message: this.$t('webapp.inbox.add_to_train_error'),
+        //   type: 'is-danger',
+        // });
       } finally {
         this.loading = false;
       }
     },
-    async addToSentences(intent) {
+    async addToTraining(intent) {
       this.loading = true;
       try {
         await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
@@ -212,10 +213,11 @@ export default {
           type: 'is-success',
         });
       } catch (error) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.add_to_sentences_error'),
-          type: 'is-danger',
-        });
+        this.showError(error);
+        // this.$buefy.toast.open({
+        //   message: this.$t('webapp.inbox.add_to_sentences_error'),
+        //   type: 'is-danger',
+        // });
       } finally {
         this.loading = false;
       }

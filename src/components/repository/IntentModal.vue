@@ -76,6 +76,7 @@ export default {
   methods: {
     addIntent() {
       this.$emit('addedIntent', this.selectedOptions, this.titleHeader);
+      this.$parent.close();
     },
   },
 };
