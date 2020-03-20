@@ -17,4 +17,7 @@ export default {
   getUpdateVersionsState(state) {
     return state.updateVersions;
   },
+  getSelectedVersion(state) {
+    return state.repositoryVersion;
+  },
 };
