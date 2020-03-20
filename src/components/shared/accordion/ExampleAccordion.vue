@@ -16,7 +16,7 @@
 
       <div
         v-else
-        class="level-right">
+        class="level-right example-accordion__text">
         <highlighted-text
           v-if="open && !editing"
           :text="text"
