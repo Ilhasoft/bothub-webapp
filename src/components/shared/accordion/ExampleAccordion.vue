@@ -5,22 +5,23 @@
     <div
       slot="header"
       class="level">
+
+      <div class="example-accordion__tag level-left">
+        <language-badge :language="language"/>
+      </div>
+
       <div
         v-if="!open"
-        class="level-left">{{ text }}</div>
+        class="level-right example-accordion__text">{{ text }}</div>
 
       <div
         v-else
-        class="level-left">
+        class="level-right example-accordion__text">
         <highlighted-text
           v-if="open && !editing"
           :text="text"
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
-      </div>
-
-      <div class="example-accordion__tag level-right">
-        <language-badge :language="language"/>
       </div>
     </div>
     <div
@@ -210,8 +211,13 @@ export default {
 <style lang="scss" scoped>
 
   .example-accordion {
+
+    &__text {
+      max-width: 100%;
+    }
+
     &__tag {
-      margin-left: 0.5rem;
+      margin-right: 0.5rem;
     }
 
     &__btns-wrapper {
