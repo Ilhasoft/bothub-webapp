@@ -103,7 +103,7 @@
             </template>
             <b-menu-item
               :to="{ name: 'repository-settings' }"
-              :label="$t('webapp.menu.settings')"
+              :label="$t('webapp.menu.general')"
               tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-versions' }"
