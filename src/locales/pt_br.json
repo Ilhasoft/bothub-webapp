@@ -101,7 +101,8 @@
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
       "no_versions": "Sem versões",
-      "no_sentences": "Não há frases."
+      "no_sentences": "Não há frases.",
+      "results": "Resultados"
     },
     "home": {
       "description": "Descrição",
