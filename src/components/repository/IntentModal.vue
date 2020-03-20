@@ -25,7 +25,7 @@
             <option
               v-for="info in info.intent_ranking"
               :key="info.confidence"
-              :value="info.name">
+              :value="{name: info.name, percent: info.confidence }">
               {{ info.name }} {{ info.confidence | percent }}
             </option>
 
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     addIntent() {
-      this.$emit('addedIntent', this.selectedOptions, this.titleHeader);
+      this.$emit('addedIntent', this.selectedOptions.name, this.titleHeader);
       this.$parent.close();
     },
   },
