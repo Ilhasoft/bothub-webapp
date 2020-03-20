@@ -1,8 +1,8 @@
 <template>
   <div class="debug">
     <div v-if="error">
-      <p> {{ $t('webapp.inbox.debug_description') }} </p>
-      <b-button @click="load()"> {{ $t('webapp.inbox.reload') }} </b-button>
+      <p> {{ $t('webapp.debug.debug_description') }} </p>
+      <b-button @click="load()"> {{ $t('webapp.debug.reload') }} </b-button>
     </div>
     <loading v-else-if="loading" />
     <div v-else>
@@ -23,23 +23,23 @@
           default-sort-direction="desc">
           <template slot-scope="props">
             <b-table-column
+              :label="$t('webapp.debug.word')"
               centered
               field="text"
-              label="Word"
               width="40">
               {{ props.row.text }}
             </b-table-column>
             <b-table-column
+              :label="$t('webapp.debug.intent')"
               centered
               field="intent"
-              label="Intent"
               width="40">
               {{ props.row.relevance.intent }}
             </b-table-column>
             <b-table-column
+              :label="$t('webapp.debug.relevance')"
               centered
               field="relevance"
-              label="Relevance"
               width="40"
               numeric>
               {{ props.row.relevance.relevance.toFixed(2) }}
