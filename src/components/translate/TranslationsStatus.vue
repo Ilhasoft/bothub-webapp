@@ -34,11 +34,7 @@ export default {
   name: 'TranslationsStatus',
   components,
   props: {
-    ownerNickname: {
-      type: String,
-      required: true,
-    },
-    repositorySlug: {
+    repositoryUuid: {
       type: String,
       required: true,
     },
@@ -85,12 +81,10 @@ export default {
       'getRepositoryLanguagesStatus',
     ]),
     async updateTranslationsStatus() {
-      const { ownerNickname, repositorySlug: slug } = this;
       this.languagesStatus = null;
       try {
         const response = await this.getRepositoryLanguagesStatus({
-          ownerNickname,
-          slug,
+          repositoryUUID: this.repositoryUuid,
         });
         this.languagesStatus = response.data.languages_status;
       } catch (e) {
