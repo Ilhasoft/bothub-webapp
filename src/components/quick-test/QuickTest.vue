@@ -115,6 +115,17 @@ export default {
   },
   watch: {
     repository() {
+      this.updateRepositoryLanguage();
+    },
+  },
+  mounted() {
+    this.updateRepositoryLanguage();
+  },
+  methods: {
+    ...mapActions([
+      'analyzeText',
+    ]),
+    updateRepositoryLanguage() {
       if (!this.repository) {
         this.selectedLanguage = null;
         return;
@@ -122,11 +133,6 @@ export default {
 
       this.selectedLanguage = this.repository.language;
     },
-  },
-  methods: {
-    ...mapActions([
-      'analyzeText',
-    ]),
     isLoading(sentence) {
       return sentence.intent === null;
     },
