@@ -190,7 +190,7 @@ export default {
         await this.newEvaluateExample({
           ...this.toExample,
           intent,
-          is_corrected: this.isCorrected,
+          isCorrected: this.isCorrected,
         });
 
         this.$buefy.toast.open({
@@ -209,7 +209,7 @@ export default {
     async addToSentences(intent) {
       this.loading = true;
       try {
-        await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
+        await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
         this.$buefy.toast.open({
           message: this.$t('webapp.log.add_sentences_success'),
           type: 'is-success',
