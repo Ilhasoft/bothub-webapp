@@ -103,10 +103,10 @@
               :to="{ name: 'repository-settings' }"
               :label="$t('webapp.menu.general')"
               tag="router-link"/>
-            <b-menu-item
+              <!-- <b-menu-item
               :to="{ name: 'repository-versions' }"
               :label="$t('webapp.menu.versions')"
-              tag="router-link"/>
+              tag="router-link"/> -->
           </b-menu-item>
         </b-menu-list>
       </b-menu>
@@ -179,11 +179,11 @@
             @click="routerHandle('repository-settings')">
             {{ $t('webapp.menu.settings') }}
           </b-dropdown-item>
-          <b-dropdown-item
+          <!-- <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-versions')">
             {{ $t('webapp.menu.versions') }}
-          </b-dropdown-item>
+          </b-dropdown-item> -->
         </b-dropdown>
       </div>
       <div/>
