@@ -49,10 +49,9 @@
               :data="repository.entities_list || []"
               :formatters="intentFormatters"
               v-model="entity.entity"
-              :placeholder=""
+              :placeholder="$t('webapp.example.entity')"
               class="edit-sentence-input"
               size="normal"
-              $t('webapp.example.entity')""
             >
               <span slot="append">
                 <bh-icon-button
@@ -77,10 +76,9 @@
             :data="repository.entities_list || []"
             :formatters="intentFormatters"
             v-model="entity.entity"
-            :placeholder=""
+            :placeholder="$t('webapp.example.entity')"
             class="edit-sentence-input"
             size="normal"
-            $t('webapp.example.entity')""
             @selected="elevateToEntity(entity, index)"
           >
             <span slot="append">
