@@ -96,9 +96,10 @@ export default {
       return this.wordsFromText.reduce((relevanceObject, word) => {
         if (word in relevanceObject) return relevanceObject;
         const relevance = this.data.words[word];
-        // eslint-disable-next-line no-param-reassign
-        if (relevance && relevance.length > 0) relevanceObject[word] = relevance.find(object => object.intent);
-        else {
+        if (relevance && relevance.length > 0) {
+          // eslint-disable-next-line no-param-reassign
+          relevanceObject[word] = relevance.find(object => object.intent);
+        } else {
           // eslint-disable-next-line no-param-reassign
           relevanceObject[word] = {
             intent: '-',
@@ -149,7 +150,6 @@ export default {
       }
     },
     style(word) {
-
       const value = normalize(
         this.minRelevance,
         this.maxRelevance,
