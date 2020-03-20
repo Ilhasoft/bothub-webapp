@@ -236,7 +236,7 @@ export default {
   cursor: pointer;
     &__logo{
     background: url(~@/assets/imgs/bothub_white.svg) no-repeat;
-    width: 7rem;
+    width: 8rem;
     height: 1.5rem;
   }
   &__logo:hover{
