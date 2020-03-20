@@ -199,7 +199,7 @@ export default {
 
       const selected = this.text.slice(this.textSelected.start, this.textSelected.end);
 
-      return this.$t('webapp.trainings.add_entity_for', { entity_selected: selected });
+      return `${this.$t('webapp.trainings.add_entity_for')} "${selected}"`;
     },
     intentFormatters() {
       const formattersList = [

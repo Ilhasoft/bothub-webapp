@@ -133,7 +133,7 @@
       "submit": "Enviar",
       "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
-      "add_entity_for": "Adicionar entidade para \"{entity_selected}\"",
+      "add_entity_for": "Adicionar entidade para",
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção"
     },
@@ -184,8 +184,11 @@
       "results": "Resultados",
       "inbox": "Inbox",
       "translation": "Tradução",
+      "translation_status": "Status",
+      "translate": "Traduzir",
       "integration": "Integração",
       "settings": "Ajustes",
+      "general":"Geral",
       "versions": "Versões"
     },
     "dashboard": {
@@ -213,6 +216,32 @@
       "deleting_version": "Deletar Versão",
       "message_deleting_version": "Você tem certeza que quer deletar essa versão? Essa ação não pode ser desfeita.",
       "confirm_deleting_version": "Deletar Versão"
+    },
+    "inbox": {
+      "description": "Estas são frases vindas de interações de usuários reais com o seu conjunto de dados.\n          Podem ser úteis para o seu treinamento ou teste.",
+      "intent": "Intenção",
+      "language": "Idioma",
+      "version": "Versão",
+      "signin_you_account": "Faça o login na sua conta pra contribuir nessa inteligência.",
+      "your_version": "Sua versão",
+      "your_intent": "Sua intenção",
+      "your_filter": "Seu filtro",
+      "test_sentences": "Frases de teste",
+      "training": "Treinamento",
+      "add_to": "Adicionar a",
+      "list_empty": "Nenhuma frase.",
+      "debug_description": "Um erro inesperado ocorreu, não pudemos analisar o texto.",
+      "reload": "Reload",
+      "entry_has_add_to_train": "A frase foi adicionada ao treinamento.",
+      "entry_has_add_to_sentence": "A frase foi adicionada aos testes.",
+      "add_to_train_error": "Um erro ocorreu.",
+      "add_to_sentences_error": "Um erro ocorreu.",
+      "error": "Erro",
+      "add_log": {
+        "add": "Adicionar",
+        "close": "Fechar"
+      },
+      "confirm_deleting_version": "Deletar versão"
     }
   }
 }

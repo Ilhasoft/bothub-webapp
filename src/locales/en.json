@@ -137,7 +137,7 @@
       "submit": "Submit",
       "highlight_word": "Highlight words to mark as entity",
       "add_entity": "Add entity",
-      "add_entity_for": "Add entity for \"{entity_selected}\"",
+      "add_entity_for": "Add entity for",
       "add_a_sentence": "Add a sentence",
       "intent": "Intent"
     },
@@ -188,8 +188,11 @@
       "results": "Results",
       "inbox": "Inbox",
       "translation": "Translation",
+      "translation_status": "Translation Status",
+      "translate": "Translate",
       "integration": "Integration",
       "settings": "Settings",
+      "general":"General",
       "versions": "Versions"
     },
     "dashboard": {
@@ -235,11 +238,19 @@
       "test_sentences": "Test Sentences",
       "training": "Training",
       "add_to": "Add to",
+      "list_empty": "No logs found.",
       "debug_description": "Something unexpected happened! We couldn't debug your text.",
       "reload": "Reload",
       "entry_has_add_to_train": "Entry was added to training.",
       "entry_has_add_to_sentence": "Entry was added to sentences.",
-      "add_to_train_error": "An error occured"
+      "add_to_train_error": "An error occured",
+      "add_to_sentences_error": "An error occured",
+      "error": "Error",
+      "add_log": {
+        "add": "Add",
+        "close": "Close"
+      },
+      "confirm_deleting_version": "Delete Version"
     }
   }
 }

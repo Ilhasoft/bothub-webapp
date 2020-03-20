@@ -62,10 +62,27 @@
             tag="router-link"
             icon="inbox"/>
           <b-menu-item
-            :to="{ name: 'repository-translate' }"
-            :label="$t('webapp.menu.translation')"
-            tag="router-link"
-            icon="translate"/>
+            :active="isTranslationsActive"
+            :expanded="isTranslationsActive"
+            icon="translate"
+            @click="isTranslationsActive = !isTranslationsActive">
+            <template
+              slot="label"
+              slot-scope="props">
+              <span class="menu-text">{{ $t('webapp.menu.translation') }}</span>
+              <b-icon
+                :icon="props.expanded ? 'caret-down' : 'caret-up'"
+                class="is-pulled-right"/>
+            </template>
+            <b-menu-item
+              :to="{ name: 'repository-translate' }"
+              :label="$t('webapp.menu.translate')"
+              tag="router-link"/>
+            <b-menu-item
+              :to="{ name: 'repository-translations-status' }"
+              :label="$t('webapp.menu.translation_status')"
+              tag="router-link"/>
+          </b-menu-item>
           <b-menu-item
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
@@ -86,7 +103,7 @@
             </template>
             <b-menu-item
               :to="{ name: 'repository-settings' }"
-              :label="$t('webapp.menu.settings')"
+              :label="$t('webapp.menu.general')"
               tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-versions' }"
@@ -132,10 +149,23 @@
           class="icon-list"
           icon="inbox"
           @click.native="routerHandle('repository-log')" />
-        <b-icon
-          class="icon-list"
-          icon="translate"
-          @click.native="routerHandle('repository-translate')" />
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+            icon="translate" />
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-translate')">
+            {{ $t('webapp.menu.translate') }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-translations-status')">
+            {{ $t('webapp.menu.translation_status') }}
+          </b-dropdown-item>
+        </b-dropdown>
         <b-icon
           class="icon-list"
           icon="power-plug"
@@ -170,6 +200,7 @@ export default {
     return {
       isSettingsActive: false,
       isTestsActive: false,
+      isTranslationsActive: false,
       collapse: true,
     };
   },
@@ -190,7 +221,7 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 .menu-list a {
-  padding: 0.5em 2rem;
+  padding: 0.5em 1.6rem;
 }
 
 .icon-list-wrapper {

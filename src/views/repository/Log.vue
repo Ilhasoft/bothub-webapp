@@ -4,9 +4,9 @@
     :error-code="errorCode">
 
     <div
-      v-if="repository"
+      v-if="authenticated"
       class="repository-log">
-      <div v-if="authenticated">
+      <div v-if="repository">
         <div class="repository-log__header">
           <h1> {{ $t('webapp.menu.inbox') }} </h1>
           <p> {{ $t('webapp.inbox.description') }} </p>
@@ -70,7 +70,8 @@
 
         <repository-log-list
           :per-page="perPage"
-          :query="query" />
+          :query="query"
+          :editable="repository.authorization.can_contribute" />
       </div>
 
       <div
@@ -99,7 +100,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import LoginForm from '@/components/auth/LoginForm';
@@ -132,6 +133,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'authenticated',
+    ]),
     languages() {
       return Object.keys(this.repository.evaluate_languages_count)
         .map(lang => ({
