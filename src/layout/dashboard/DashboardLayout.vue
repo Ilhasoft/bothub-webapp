@@ -144,6 +144,7 @@ import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
+  name: 'DashboardLayout',
   components: {
     SideBar,
     UserAvatar,
@@ -234,7 +235,9 @@ export default {
     float: right;
 
     &__header {
-      width: 100%;
+      position: fixed;
+      width: inherit;
+      z-index: 9;
       height: 6rem;
       background: #404143;
       display: flex;
