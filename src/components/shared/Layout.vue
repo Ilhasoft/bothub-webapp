@@ -60,6 +60,10 @@
                 <user-avatar
                   slot="trigger"
                   :profile="myProfile" />
+                <b-icon
+                  slot="trigger"
+                  icon="chevron-down"
+                  class="layout__header__icon"/>
                 <bh-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
@@ -265,7 +269,14 @@ export default {
         color: $color-fake-white;
       }
     }
-
+      &__icon {
+      margin-left: 0.5rem;
+      color: white;
+      width: 1rem;
+      height: 3rem;
+      cursor: pointer;
+      float: right;
+    }
     &__center {
       width: 50%;
     }
