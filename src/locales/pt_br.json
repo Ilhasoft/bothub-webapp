@@ -82,7 +82,7 @@
     "debug": {
       "word": "Palavra",
       "intent": "Intenção",
-      "relevance": "Relevancância",
+      "relevance": "Relevância",
       "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
       "reload": "Recarregar"
     },
