@@ -179,8 +179,7 @@ export default {
     showError(error) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       const message = Array.join(messages, ',');
-      this.$buefy.diaalert({
-        title: 'Error',
+      this.$buefy.toast.open({
         message,
         type: 'is-danger',
       });
@@ -195,12 +194,12 @@ export default {
         });
 
         this.$buefy.toast.open({
-          message: 'Entry was added to training.',
+          message: this.$t('webapp.log.add_training_success'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: 'An error occured',
+          message: this.$t('webapp.log.on_error'),
           type: 'is-danger',
         });
       } finally {
@@ -212,12 +211,12 @@ export default {
       try {
         await this.newExample({ ...this.toExample, intent, is_corrected: this.isCorrected });
         this.$buefy.toast.open({
-          message: 'Entry was added to sentences.',
+          message: this.$t('webapp.log.add_sentences_success'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: 'An error occured',
+          message: this.$t('webapp.log.on_error'),
           type: 'is-danger',
         });
       } finally {

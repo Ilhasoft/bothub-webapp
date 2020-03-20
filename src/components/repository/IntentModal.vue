@@ -9,8 +9,8 @@
         <b-field>
           <b-select
             v-model="selectedOptions"
+            :placeholder="$t('webapp.log.intent')"
             size="is-medium"
-            placeholder="Intent"
             expanded>
 
             <option
@@ -37,10 +37,11 @@
         <button
           class="button"
           type="button"
-          @click="$parent.close()">Close</button>
+          @click="$parent.close()">{{ $t('webapp.log.add_log.close') }}</button>
         <button
+          :disabled="!selectedOptions"
           class="button is-primary"
-          @click="addIntent">Add</button>
+          @click="addIntent"> {{ $t('webapp.log.add_log.add') }}</button>
 
       </footer>
     </div>
