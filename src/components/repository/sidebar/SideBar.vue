@@ -246,11 +246,12 @@ export default {
   top: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
 
   .sidebar-wrapper {
+    z-index: 10;
     background: #2F343D;
     height: 100%;
     width: $menu-expanded-size + $menu-padding;
