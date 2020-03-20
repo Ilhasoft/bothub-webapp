@@ -243,6 +243,7 @@ export default {
 
           span {
             margin: 0 .3rem;
+
           }
         }
 
@@ -250,9 +251,10 @@ export default {
           margin-left: 0.5rem;
           color: white;
           width: 1rem;
-          height: 1rem;
-          vertical-align: middle;
+          height: 3rem;
           cursor: pointer;
+          float: right;
+
         }
 
         &__user {
