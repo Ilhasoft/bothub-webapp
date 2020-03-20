@@ -68,11 +68,12 @@ export default {
     });
     return request.$http.get(`/v2/repository/evaluate/results/1/?${queryString}`);
   },
-  runEvaluate(repositoryUUID, language) {
+  runEvaluate(repositoryUUID, language, version) {
     return request.$http.post(
       `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
       {
         language,
+        repository_version: version,
       },
     );
   },
