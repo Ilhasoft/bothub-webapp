@@ -78,7 +78,13 @@
       "debug": "Debug",
       "raw": "Raw",
       "add_a_sentence": "Adicionar uma frase"
-
+    },
+    "debug": {
+      "word": "Palavra",
+      "intent": "Intenção",
+      "relevance": "Relevancância",
+      "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
+      "reload": "Recarregar"
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
@@ -92,6 +98,7 @@
       "all_intents": "Todas as Intenções",
       "all_entities": "Todas as Entidades",
       "all_labels": "Todas as Categorias",
+      "all_languages": "Todos os idiomas",
       "add_new_test_sentence": "Adicionar uma nova frase de teste",
       "create_a_bench_of_test": "Crie um conjunto de frases de teste para medir a precisão de seu treinamento.",
       "enter_your_sentence_here": "Coloque sua frase aqui",
@@ -127,6 +134,12 @@
       "role": "Papéis:",
       "no_requests": "Sem solicitações."
     },
+    "example": {
+      "enter_sentence": "Digite sua frase aqui",
+      "intent": "Intenção",
+      "entity": "Entidade",
+      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção."
+    },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
       "grid_text2": "Adicionar exemplos para melhorar sua inteligência.",
@@ -153,7 +166,8 @@
       "no_translation": "Sem traduções.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
-      "to": "para"
+      "to": "para",
+      "translate_sentence": "Traduzir frase"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",
@@ -200,7 +214,7 @@
       "languages": "idiomas",
       "warning": "alerta",
       "exit_inteligence": "Sair da inteligência",
-      "all_versions": "Ver todas versões",
+      "all_versions": "Ver todas as versões",
       "created_by": "Criado por",
       "filter_by": "Filtrar por"
     },
@@ -239,8 +253,6 @@
       "training": "Treinamento",
       "add_to": "Adicionar à",
       "list_empty": "Nenhuma frase.",
-      "debug_description": "Algo inesperado aconteceu! Nos nós pudemos debugar seu texto.",
-      "reload": "Recarregar",
       "entry_has_add_to_train": "Entrada adicionada ao treinamento.",
       "entry_has_add_to_sentence": "Entrada adicionada às frases.",
       "add_to_train_error": "Aconteceu um erro",
