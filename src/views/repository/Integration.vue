@@ -26,8 +26,9 @@
             <div class="repository-analyze-text__item">
               <p><strong>{{ $t('webapp.analyze_text.method_send') }}</strong></p>
               <bh-highlighted-pre code-class="plaintext">
-                language: [{{ $t('webapp.analyze_text.language_code') }}]
-text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"</bh-highlighted-pre>
+language: [{{ $t('webapp.analyze_text.language_code') }}]
+text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
+              </bh-highlighted-pre>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>{{ $t('webapp.analyze_text.response') }}</strong></p>
