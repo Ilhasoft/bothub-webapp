@@ -184,10 +184,11 @@
       "results": "Resultados",
       "inbox": "Inbox",
       "translation": "Tradução",
-      "translation_status": "Status das traduções",
-      "translate": "Tranduzir",
+      "translation_status": "Status",
+      "translate": "Traduzir",
       "integration": "Integração",
       "settings": "Ajustes",
+      "general":"Geral",
       "versions": "Versões"
     },
     "dashboard": {
