@@ -184,10 +184,11 @@
       "results": "Resultados",
       "inbox": "Inbox",
       "translation": "Tradução",
-      "translation_status": "Status das traduções",
-      "translate": "Tranduzir",
+      "translation_status": "Status",
+      "translate": "Traduzir",
       "integration": "Integração",
       "settings": "Ajustes",
+      "general":"Geral",
       "versions": "Versões"
     },
     "dashboard": {
@@ -228,10 +229,18 @@
       "version": "Versão",
       "your_version": "Sua versão",
       "your_filter": "Seu filtro",
-      "list_empty": "No logs found.",
+      "list_empty": "Nenhuma frase.",
       "add_to": "Adicionar a",
       "training": "Treinamento",
-      "sentences": "Frases de teste"
+      "sentences": "Frases de teste",
+      "error": "Erro",
+      "add_training_success": "A frase foi adicionada ao treinamento.",
+      "add_sentences_success": "A frase foi adicionada aos testes.",
+      "on_error": "Um erro ocorreu.",
+      "add_log": {
+        "add": "Adicionar",
+        "close": "Fechar"
+      }
     }
   }
 }

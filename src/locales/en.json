@@ -188,6 +188,7 @@
       "translate": "Translate",
       "integration": "Integration",
       "settings": "Settings",
+      "general":"General",
       "versions": "Versions"
     },
     "dashboard": {
@@ -231,7 +232,15 @@
       "list_empty": "No logs found.",
       "add_to": "Add to",
       "training": "Training",
-      "sentences": "Test Sentences"
+      "sentences": "Test Sentences",
+      "error": "Error",
+      "add_training_success": "Entry was added to training.",
+      "add_sentences_success": "Entry was added to sentences.",
+      "on_error": "An error occured",
+      "add_log": {
+        "add": "Add",
+        "close": "Close"
+      }
     }
   }
 }
