@@ -58,7 +58,9 @@
                 @requestDispatched="onAuthorizationRequested()" />
               <a
                 class="repository-translate__requestAuthorization"
-                @click="openRequestAuthorizationModal">Request authorization</a>
+                @click="openRequestAuthorizationModal">
+                {{ $t('webapp.layout.request_authorization') }}
+              </a>
             </div>
           </div>
         </div>
