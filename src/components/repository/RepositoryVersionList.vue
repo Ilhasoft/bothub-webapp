@@ -92,14 +92,20 @@
               <b-icon
                 v-if="canEdit"
                 icon="pencil"
+                size="is-small"
+                class="versions__table__buttons-wrapper__icon"
                 @click.native="onEditVersion({id: props.row.id, name: props.row.name})"/>
               <b-icon
                 v-if="canEdit"
                 icon="delete"
+                size="is-small"
+                class="versions__table__buttons-wrapper__icon"
                 @click.native="onDeleteVersion(props.row.id, props.row.is_default)"/>
               <b-icon
                 v-if="canEdit"
                 icon="content-copy"
+                size="is-small"
+                class="versions__table__buttons-wrapper__icon"
                 @click.native="copyVersion(props.row)"/>
             </div>
           </b-table-column>
@@ -353,8 +359,12 @@ export default {
     &__buttons-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       color: $color-grey-dark;
 
+      &__icon{
+        margin-left: .6rem;
+      }
       span {
         cursor: pointer;
       }
