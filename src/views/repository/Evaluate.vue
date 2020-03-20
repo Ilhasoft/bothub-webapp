@@ -168,6 +168,7 @@ export default {
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,
+          version: this.repositoryVersion,
         });
         this.evaluating = false;
         this.setUpdateEvaluateResultId({

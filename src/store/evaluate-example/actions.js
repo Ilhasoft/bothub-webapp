@@ -33,8 +33,8 @@ export default {
     const response = await entity.search(repositoryUuid, { value });
     return response;
   },
-  async runNewEvaluate(store, { repositoryUUID, language }) {
-    const response = await evaluateExample.runEvaluate(repositoryUUID, language);
+  async runNewEvaluate(store, { repositoryUUID, language, version }) {
+    const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
   getAllVersions(store, { repositoryUuid }) {
