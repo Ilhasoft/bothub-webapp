@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RequestAuthorizationModal.vue renders correctly 1`] = `
-<bh-modal-stub title="Request Authorization" backgroundcloses="true">
+<bh-modal-stub title="some specific text" backgroundcloses="true">
   <div class="bh-grid">
     <div class="bh-grid__item">
       <request-authorization-form-stub repositoryuuid="8511fd26-a3bc-4f74-9af1-176abca5401d"></request-authorization-form-stub>

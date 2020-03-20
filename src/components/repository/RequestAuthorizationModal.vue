@@ -1,7 +1,7 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Request Authorization">
+    :title="$t('webapp.layout.request_authorization')">
     <div class="bh-grid">
       <div class="bh-grid__item">
         <request-authorization-form
