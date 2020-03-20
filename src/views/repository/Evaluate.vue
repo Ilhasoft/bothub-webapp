@@ -62,7 +62,9 @@
                 @requestDispatched="onAuthorizationRequested()" />
               <a
                 class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">{{ $t('webapp.layout.request_authorization') }}</a>
+                @click="openRequestAuthorizationModal">
+                {{ $t('webapp.layout.request_authorization') }}
+              </a>
             </div>
           </div>
         </div>
