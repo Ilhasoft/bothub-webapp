@@ -44,19 +44,16 @@
             <b-icon icon="plus"/>
           </button>
 
-          <p class="log-accordion__menu-title"> {{ $t('webapp.log.add_to') }} </p>
+          <p class="log-accordion__menu-title"> {{ $t('webapp.inbox.add_to') }} </p>
           <b-dropdown-item
             aria-role="listitem"
-            @click="showModal('Training')"
-          >
-            Training
+            @click.native.stop="showModal('Training')">
+            {{ $t('webapp.inbox.training') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
-            @click="showModal('Test Sentences')"
-          >
-            Test Sentences
-
+            @click.native.stop="showModal('Test Sentences')">
+            {{ $t('webapp.inbox.test_sentences') }}
           </b-dropdown-item>
         </b-dropdown>
       </div>
@@ -194,12 +191,12 @@ export default {
         });
 
         this.$buefy.toast.open({
-          message: this.$t('webapp.log.add_training_success'),
+          message: this.$t('webapp.inbox.entry_has_add_to_train'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: this.$t('webapp.log.on_error'),
+          message: this.$t('webapp.inbox.add_to_train_error'),
           type: 'is-danger',
         });
       } finally {
@@ -211,12 +208,12 @@ export default {
       try {
         await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
         this.$buefy.toast.open({
-          message: this.$t('webapp.log.add_sentences_success'),
+          message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
           type: 'is-success',
         });
       } catch (error) {
         this.$buefy.toast.open({
-          message: this.$t('webapp.log.on_error'),
+          message: this.$t('webapp.inbox.add_to_sentences_error'),
           type: 'is-danger',
         });
       } finally {

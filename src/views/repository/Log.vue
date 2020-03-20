@@ -8,9 +8,8 @@
       class="repository-log">
       <div v-if="repository">
         <div class="repository-log__header">
-          <h1> Inbox </h1>
-          <p> {{ $t('webapp.log.subtitle1') }}
-            {{ $t('webapp.log.subtitle2') }} </p>
+          <h1> {{ $t('webapp.menu.inbox') }} </h1>
+          <p> {{ $t('webapp.inbox.description') }} </p>
         </div>
         <div class="columns">
           <div class="column is-tree-fifths">
@@ -30,9 +29,11 @@
               <label>{{ $t('webapp.dashboard.filter_by') }}: </label>
               <div class="select">
                 <select v-model="filterOption">
-                  <option value="intent"> {{ $t('webapp.log.intent') }} </option>
-                  <option value="language"> {{ $t('webapp.log.language') }} </option>
-                  <option value="repository_version_name"> {{ $t('webapp.log.version') }} </option>
+                  <option value="intent"> {{ $t('webapp.inbox.intent') }} </option>
+                  <option value="language"> {{ $t('webapp.inbox.language') }} </option>
+                  <option value="repository_version_name">
+                    {{ $t('webapp.inbox.version') }}
+                  </option>
                 </select>
               </div>
             </div>
@@ -43,13 +44,13 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              :placeholder="$t('webapp.log.your_version')"/>
+              :placeholder="$t('webapp.inbox.your_version')"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              :placeholder="$t('webapp.log.your_intent')"/>
+              :placeholder="$t('webapp.inbox.your_intent')"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">
@@ -63,7 +64,7 @@
             <b-input
               v-else
               :disabled="true"
-              :placeholder="$t('webapp.log.your_filter')"/>
+              :placeholder="$t('webapp.inbox.your_filter')"/>
           </div>
         </div>
 
@@ -72,6 +73,15 @@
           :query="query"
           :editable="repository.authorization.can_contribute" />
       </div>
+
+      <div
+        v-else>
+        <b-notification
+          :closable="false"
+          class="is-warning">
+          {{ $t('webapp.inbox.cannot_edit_this_repository') }}
+        </b-notification>
+      </div>
     </div>
 
     <div
@@ -79,7 +89,7 @@
       <b-notification
         :closable="false"
         class="is-danger">
-        {{ $t("webapp.log.login") }}.
+        {{ $t('webapp.inbox.signin_you_account') }}
       </b-notification>
       <login-form hide-forgot-password />
     </div>
