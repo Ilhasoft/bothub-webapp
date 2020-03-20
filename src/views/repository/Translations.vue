@@ -8,8 +8,7 @@
           <div class="bh-grid__item">
             <translations-status
               ref="translationsStatus"
-              :owner-nickname="repository.owner__nickname"
-              :repository-slug="repository.slug"
+              :repository-uuid="repository.uuid"
               v-model="toLanguage" />
           </div>
         </div>

@@ -12,7 +12,7 @@
             v-model="text"
             :entities="entities"
             :available-entities="repository.entities"
-            placeholder="Translate sentence"
+            :placeholder="$t('webapp.translate.translate_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)" />
         </bh-field>
