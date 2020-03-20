@@ -149,16 +149,11 @@ export default {
       }
     },
     style(word) {
-      let relevance = 0;
-
-      if (this.relevantData[word] && this.relevantData[word].relevance) {
-        relevance = this.relevantData[word].relevance;
-      }
 
       const value = normalize(
         this.minRelevance,
         this.maxRelevance,
-        relevance,
+        this.relevantData[word].relevance,
       );
 
       return {
