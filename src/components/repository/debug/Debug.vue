@@ -93,8 +93,9 @@ export default {
       return this.data.text.split(' ');
     },
     relevantData() {
-      return this.wordsFromText.reduce((relevanceObject, word) => {
-        if (word in relevanceObject) return relevanceObject;
+      return this.wordsFromText.reduce((relevanceObject, untreatedWord) => {
+        const word = this.treat(untreatedWord);
+        if (word === '' || word in relevanceObject) return relevanceObject;
         const relevance = this.data.words[word];
         if (relevance && relevance.length > 0) {
           // eslint-disable-next-line no-param-reassign
@@ -132,6 +133,10 @@ export default {
     ...mapActions([
       'debugParse',
     ]),
+    treat(word) {
+      // eslint-disable-next-line no-useless-escape
+      return word.replace(/[.,\/#!$%\^&\*;:?/(/){}=\-_`~()]/g, '');
+    },
     async load() {
       this.error = null;
       this.loading = true;
@@ -150,10 +155,13 @@ export default {
       }
     },
     style(word) {
+      const treatedWord = this.treat(word);
+      const relevance = treatedWord === '' ? 0 : this.relevantData[treatedWord].relevance;
+
       const value = normalize(
         this.minRelevance,
         this.maxRelevance,
-        this.relevantData[word].relevance,
+        relevance,
       );
 
       return {
