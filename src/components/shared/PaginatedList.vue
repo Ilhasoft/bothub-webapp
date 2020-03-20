@@ -116,6 +116,9 @@ export default {
     display: block;
     margin: 1rem auto;
     max-width: 600px;
+    display: flex;
+    justify-content: center;
   }
+
 }
 </style>
