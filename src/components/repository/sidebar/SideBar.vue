@@ -11,9 +11,7 @@
         <div
           class="menu-header"
           @click="routerHandle('home')">
-          <img
-            src="~@/assets/imgs/logo-white.svg"
-            alt="bothub">
+          <div class="menu-header__logo"/>
         </div>
         <b-menu-list>
           <template
@@ -236,8 +234,14 @@ export default {
   align-items: center;
   color: white;
   cursor: pointer;
-  img {
+    &__logo{
+    background: url(~@/assets/imgs/bothub_white.svg) no-repeat;
+    width: 8rem;
     height: 1.5rem;
+  }
+  &__logo:hover{
+    background: url(~@/assets/imgs/bothub_green.svg) no-repeat;
+
   }
 }
 
