@@ -17,6 +17,7 @@
       </div>
       <div class="debug__table">
         <b-table
+          v-if="tableData.length > 0"
           :data="tableData"
           :mobile-cards="false"
           default-sort="relevance"
