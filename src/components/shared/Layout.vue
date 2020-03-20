@@ -186,10 +186,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
-
+@import '~@/assets/scss/colors.scss';
 
 @keyframes layout-loading-progress {
   1% {
@@ -238,7 +237,7 @@ export default {
 
   &__header {
     padding: $loading-height 1rem;
-    background-color: $color-primary;
+    background-color: $color-fake-grey;
 
     &__logo {
       min-width: ($size-normal * .75);
