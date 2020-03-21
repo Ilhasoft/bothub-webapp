@@ -3,29 +3,88 @@ import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
-
 export default {
+
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-info/');
     return data.actions.POST;
   },
-  getAll() {
-    return new utils.List('/repository/repositories/');
+  getAll(limit = 20) {
+    return new utils.Page('/repository/repositories/', limit);
   },
-  search(query) {
-    const queryString = qs.stringify(query);
-    return new utils.List(`/v2/repository/repositories/?${queryString}`);
+  getVersions(limit, query) {
+    return new utils.Page('/v2/repository/version/', limit, query);
+  },
+  searchLogs(repositoryUUID, query, limit) {
+    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
+  },
+  makeVersionDefault(repositoryUUID, versionUUID) {
+    return request.$http.patch(
+      `/v2/repository/version/${versionUUID}/`,
+      {
+        id: versionUUID,
+        repository: repositoryUUID,
+      },
+    );
+  },
+  addNewVersion(repositoryUUID, versionUUID, name) {
+    return request.$http.post(
+      '/v2/repository/version/',
+      {
+        id: versionUUID,
+        name,
+        repository: repositoryUUID,
+      },
+    );
+  },
+  getFirstFiveVersions(repositoryUuid) {
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+  },
+  setDefaultVersion(repositoryUuid, id) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        repository: repositoryUuid,
+        id,
+        is_default: true,
+      });
+  },
+  deleteVersion(id) {
+    return request.$http.delete(`/v2/repository/version/${id}/`);
+  },
+  search(query, limit = 20) {
+    return new utils.Page('/v2/repository/repositories/', limit, query);
+  },
+  editVersion(repository, id, name) {
+    return request.$http.patch(`/v2/repository/version/${id}/`,
+      {
+        name,
+        repository,
+      });
   },
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
-  train(repositoryUUID) {
-    return request.$http.get(`/v2/repository/repository-info/${repositoryUUID}/train/`);
+  train(repositoryUUID, repositoryVersion) {
+    return request.$http.post(
+      `/v2/repository/repository-info/${repositoryUUID}/train/`,
+      { repository_version: repositoryVersion },
+    );
   },
-  analyze(repositoryUUID, language, text) {
+  analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
       `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
       {
+        repository_version: repositoryVersion,
+        language,
+        text,
+      },
+    );
+  },
+  debugParse(repositoryUUID, repositoryVersion, language, text) {
+    return request.$http.post(
+      `/v2/repository/repository-info/${repositoryUUID}/debug_parse/`,
+      {
+        repository_version: repositoryVersion,
         language,
         text,
       },
@@ -53,9 +112,9 @@ export default {
       },
     );
   },
-  getLanguagesStatus(ownerNickname, slug) {
+  getLanguagesStatus(repositoryUUID) {
     return request.$http.get(
-      `/v1/repository/${ownerNickname}/${slug}/languagesstatus/`,
+      `/v2/repository/repository-info/${repositoryUUID}/languagesstatus/`,
     );
   },
   vote(ownerNickname, slug, value) {

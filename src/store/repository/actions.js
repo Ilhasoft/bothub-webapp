@@ -4,14 +4,33 @@ import TYPES from '../types';
 
 
 export default {
+
+
   async getNewRepositorySchema() {
     const response = await repository.getNewSchema();
     return response;
   },
-
-  getAllRepositories() {
+  getVersions(store, { limit, query }) {
+    return repository.getVersions(limit, query);
+  },
+  getFirstFiveVersions(store, repositoryUuid) {
+    return repository.getFirstFiveVersions(repositoryUuid);
+  },
+  setDefaultVersion(store, { repositoryUuid, id }) {
+    return repository.setDefaultVersion(repositoryUuid, id);
+  },
+  editVersion(store, { repositoryUuid, id, name }) {
+    return repository.editVersion(repositoryUuid, id, name);
+  },
+  deleteVersion(store, id) {
+    return repository.deleteVersion(id);
+  },
+  async addNewVersion(store, { repositoryUUID, versionUUID, name }) {
+    return repository.addNewVersion(repositoryUUID, versionUUID, name);
+  },
+  getAllRepositories(limit = 20) {
     /* istanbul ignore next */
-    return repository.getAll();
+    return repository.getAll(limit);
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
@@ -21,15 +40,24 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { repositoryUUID }) {
+  trainRepository(store, { repositoryUuid, repositoryVersion }) {
     /* istanbul ignore next */
-    return repository.train(repositoryUUID);
+    return repository.train(repositoryUuid, repositoryVersion);
   },
-  analyzeText(store, {
-    repositoryUUID, language, text,
+  debugParse(store, {
+    repositoryUUID, repositoryVersion, language, text,
   }) {
     /* istanbul ignore next */
-    return repository.analyze(repositoryUUID, language, text);
+    return repository.debugParse(repositoryUUID, repositoryVersion, language, text);
+  },
+  searchLogs(store, { repositoryUUID, query, limit }) {
+    return repository.searchLogs(repositoryUUID, query, limit);
+  },
+  analyzeText(store, {
+    repositoryUUID, repositoryVersion, language, text,
+  }) {
+    /* istanbul ignore next */
+    return repository.analyze(repositoryUUID, repositoryVersion, language, text);
   },
   async getEditRepositorySchema(store, { repositoryUuid }) {
     /* istanbul ignore next */
@@ -67,8 +95,8 @@ export default {
       repositoryUuid,
     );
   },
-  getRepositoryLanguagesStatus(store, { ownerNickname, slug }) {
-    return repository.getLanguagesStatus(ownerNickname, slug);
+  getRepositoryLanguagesStatus(store, { repositoryUUID }) {
+    return repository.getLanguagesStatus(repositoryUUID);
   },
   repositoryVoteUp(store, { ownerNickname, slug }) {
     return repository.voteUp(ownerNickname, slug);
@@ -108,6 +136,9 @@ export default {
   getUpdatesList(store, { repositoryUuid }) {
     return update.search(repositoryUuid);
   },
+  setUpdateVersionsState({ commit }, payload) {
+    commit('updateVersionsState', payload);
+  },
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);
   },
@@ -117,13 +148,13 @@ export default {
   setEvaluateLanguage({ commit }, payload) {
     commit('updateEvaluateLanguage', payload);
   },
-  updateCurrentTab({ commit }, tab) {
-    commit('updateCurrentTab', tab);
-  },
   setRepository({ commit }, payload) {
     commit('setRepository', payload);
   },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
+  },
+  setRepositoryVersion({ commit }, payload) {
+    commit('setRepositoryVersion', payload);
   },
 };

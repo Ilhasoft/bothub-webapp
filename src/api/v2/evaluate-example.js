@@ -5,15 +5,17 @@ import utils from '@/api/utils';
 
 
 export default {
-  new(repository, text, language, entities, intent) {
+  new(repository, repositoryVersion, text, language, entities, intent, isCorrected) {
     return request.$http.post(
       '/v2/repository/evaluate/',
       {
         repository,
+        repository_version: repositoryVersion,
         text,
         language,
         entities,
         intent,
+        is_corrected: isCorrected,
       },
     );
   },
@@ -32,15 +34,20 @@ export default {
   all(repositoryUuid) {
     return this.search(repositoryUuid);
   },
-  get(repositoryUuid) {
-    return request.$http.get(`/v2/repository/evaluate?repository_uuid=${repositoryUuid}`);
+  get(repositoryUuid, repositoryVersion) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+      repository_version: repositoryVersion,
+    });
+    return request.$http.get(`/v2/repository/evaluate?${queryString}`);
   },
   delete(exampleId, repositoryUuid) {
     return request.$http.delete(`/v2/repository/evaluate/${exampleId}/?repository_uuid=${repositoryUuid}`);
   },
-  search(repositoryUuid, query = {}) {
+  search(repositoryUuid, repositoryVersion, query = {}) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
+      repository_version: repositoryVersion,
       ...query,
     });
     return new utils.List(`/v2/repository/evaluate/?${queryString}`);
@@ -61,11 +68,12 @@ export default {
     });
     return request.$http.get(`/v2/repository/evaluate/results/1/?${queryString}`);
   },
-  runEvaluate(repositoryUUID, language) {
+  runEvaluate(repositoryUUID, language, version) {
     return request.$http.post(
       `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
       {
         language,
+        repository_version: version,
       },
     );
   },

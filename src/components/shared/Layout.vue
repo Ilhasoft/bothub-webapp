@@ -39,7 +39,9 @@
                 inverted
                 rounded
                 max-content
-                @click="openNewRepositoryModal()">new bot</bh-button>
+                @click="openNewRepositoryModal()">
+                {{ $t('webapp.layout.newbot') }}
+              </bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -58,15 +60,19 @@
                 <user-avatar
                   slot="trigger"
                   :profile="myProfile" />
+                <b-icon
+                  slot="trigger"
+                  icon="chevron-down"
+                  class="layout__header__icon"/>
                 <bh-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
                 <bh-dropdown-item
                   @click="openNewRepositoryModal()">
-                  Start your bot
+                  {{ $t('webapp.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
-                  Logout
+                  {{ $t('webapp.layout.logout') }}
                 </bh-dropdown-item>
               </bh-dropdown>
             </div>
@@ -77,7 +83,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="openLoginModal()">sign in</bh-button>
+                @click="openLoginModal()">{{ $t('webapp.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -87,7 +93,7 @@
                 inverted
                 max-content
                 class="hide-mobile"
-                @click="signUp()">sign up</bh-button>
+                @click="signUp()">{{ $t('webapp.layout.signup') }}</bh-button>
             </div>
           </div>
         </div>
@@ -106,8 +112,8 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import NewRepositoryModal from '@/components-v1/shared/NewRepositoryModal';
-import SiteFooter from '@/components-v1/shared/SiteFooter';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
+import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
 import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 
@@ -184,10 +190,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
-
+@import '~@/assets/scss/colors.scss';
 
 @keyframes layout-loading-progress {
   1% {
@@ -236,7 +241,7 @@ export default {
 
   &__header {
     padding: $loading-height 1rem;
-    background-color: $color-primary;
+    background-color: $color-fake-grey;
 
     &__logo {
       min-width: ($size-normal * .75);
@@ -264,7 +269,14 @@ export default {
         color: $color-fake-white;
       }
     }
-
+      &__icon {
+      margin-left: 0.5rem;
+      color: white;
+      width: 1rem;
+      height: 3rem;
+      cursor: pointer;
+      float: right;
+    }
     &__center {
       width: 50%;
     }

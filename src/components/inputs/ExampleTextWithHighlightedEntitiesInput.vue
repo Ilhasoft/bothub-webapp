@@ -23,6 +23,7 @@
           @select.stop.prevent="emitTextSelected()"
           @click.stop.prevent="emitTextSelected()"
           @keyup.stop.prevent="emitTextSelected()"
+          @keyup.enter="submit()"
         />
       </div>
       <slot name="append" />
@@ -32,7 +33,7 @@
 
 <script>
 import BH from 'bh';
-import Flag from '@/components-v1/shared/Flag';
+import Flag from '@/components/shared/Flag';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 const components = {
@@ -98,16 +99,24 @@ export default {
     },
   },
   methods: {
+    submit() {
+      this.$emit('submit');
+    },
     emitTextSelected() {
-      const { selectionStart, selectionEnd } = this.$refs.input;
-      this.selectionStart = selectionStart;
-      this.selectionEnd = selectionEnd;
+      const { value, selectionStart, selectionEnd } = this.$refs.input;
+      const selected = value.slice(selectionStart, selectionEnd);
+
+      const startPadding = selected.search(/\S|$/);
+      const endPadding = selected.length - selected.trim().length - startPadding;
+
+      this.selectionStart = selectionStart + startPadding;
+      this.selectionEnd = selectionEnd - endPadding;
 
       this.$emit(
         'textSelected',
-        selectionStart === selectionEnd
+        this.selectionStart === this.selectionEnd
           ? null
-          : { start: selectionStart, end: selectionEnd },
+          : { start: this.selectionStart, end: this.selectionEnd },
       );
     },
     clearSelected() {

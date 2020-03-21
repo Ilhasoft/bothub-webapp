@@ -4,9 +4,10 @@ import entity from '@/api/entity';
 
 export default {
   async newEvaluateExample(store, {
-    repository, text, language, entities, intent,
+    repository, repositoryVersion, text, language, entities, intent, isCorrected = false,
   }) {
-    const response = await evaluateExample.new(repository, text, language, entities, intent);
+    // eslint-disable-next-line
+    const response = await evaluateExample.new(repository, repositoryVersion, text, language, entities, intent, isCorrected);
     return response;
   },
   async updateEvaluateExample(store, {
@@ -32,8 +33,8 @@ export default {
     const response = await entity.search(repositoryUuid, { value });
     return response;
   },
-  async runNewEvaluate(store, { repositoryUUID, language }) {
-    const response = await evaluateExample.runEvaluate(repositoryUUID, language);
+  async runNewEvaluate(store, { repositoryUUID, language, version }) {
+    const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
   getAllVersions(store, { repositoryUuid }) {

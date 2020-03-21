@@ -5,19 +5,19 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column is-three-fifths">
       <bh-field-stub errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" size="normal" placeholder="Add a sentence">
-          <language-append-select-input-stub class="language-append" slot="append"></language-append-select-input-stub>
+        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal">
+          <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append" slot="append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </bh-field-stub>
     </div>
     <div class="column">
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="intentFormatters" size="normal" placeholder="Intent"></bh-autocomplete-stub>
+        <bh-autocomplete-stub data="" formatters="intentFormatters" placeholder="some specific text" size="normal"></bh-autocomplete-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">
       <bh-field-stub errors="">
-        <bh-button-stub disabled="true" size="normal" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">Submit</bh-button-stub>
+        <bh-button-stub disabled="true" size="normal" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">some specific text</bh-button-stub>
       </bh-field-stub>
     </div>
   </form>

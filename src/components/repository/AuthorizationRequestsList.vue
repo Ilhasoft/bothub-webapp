@@ -5,14 +5,16 @@
       :item-component="authorizationRequestItem"
       :list="requestsList"
       @itemDeleted="onItemDeleted()" />
-    <p v-if="requestsList && requestsList.empty">No requests.</p>
+    <p v-if="requestsList && requestsList.empty">
+      {{ $t('webapp.settings.no_requests') }}
+    </p>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import AuthorizationRequestItem from '@/components/repository/AuthorizationRequestItem';
 
 

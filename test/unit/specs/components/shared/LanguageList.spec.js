@@ -9,7 +9,12 @@ localVue.use(BH);
 describe('LanguageList.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(LanguageList, { localVue });
+    wrapper = shallowMount(LanguageList, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

@@ -11,7 +11,7 @@
       <bh-button
         :disabled="submitting"
         primary
-        type="submit">Create bot</bh-button>
+        type="submit">{{ $t('webapp.landing_page.create_bot') }}</bh-button>
     </div>
   </form>
 </template>
@@ -22,7 +22,7 @@ import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {
@@ -42,10 +42,20 @@ export default {
       drfRepositoryModel: {},
     };
   },
+  computed: {
+    filteredSchema() {
+      return Object.entries(this.formSchema).reduce((schema, entry) => {
+        const [key, value] = entry;
+        // eslint-disable-next-line no-param-reassign
+        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
+        return schema;
+      }, {});
+    },
+  },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(
-      this.formSchema,
+      this.filteredSchema,
       RepositoryModel,
     );
 
@@ -79,3 +89,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.animation-content.modal-content {
+    overflow: visible !important;
+  }
+</style>

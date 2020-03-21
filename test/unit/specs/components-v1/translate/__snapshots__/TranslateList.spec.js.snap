@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`TranslateList.vue renders correctly 1`] = `
-<div>
-  <pagination-stub itemcomponent="[object Object]" list="[object Object]" moretext="More" morebutton="true" repository="[object Object]" translate-to="es"></pagination-stub>
-  <p>No examples to translate.</p>
-</div>
-`;

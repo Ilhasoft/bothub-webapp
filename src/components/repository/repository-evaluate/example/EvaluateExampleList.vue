@@ -8,13 +8,13 @@
       @itemDeleted="onItemDeleted($event)" />
     <p
       v-if="examplesList && examplesList.empty"
-      class="no-examples">No sentences.</p>
+      class="no-examples">{{ $t('webapp.evaluate.no_sentences') }}</p>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
@@ -42,6 +42,7 @@ export default {
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {
@@ -60,6 +61,7 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = this.$api.evaluateExample.search(
           this.repository.uuid,
+          this.repositoryVersion,
           this.query,
         );
       }

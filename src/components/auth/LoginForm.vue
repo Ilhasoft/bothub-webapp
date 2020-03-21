@@ -16,7 +16,9 @@
           ref="forgotPassword"
           href="#forgot-password"
           class="has-text-grey"
-          @click.prevent="forgotPasswordClick">Forgot password?</a>
+          @click.prevent="forgotPasswordClick">
+          {{ $t('webapp.landing_page.forgot_password') }}
+        </a>
       </div>
     </div>
     <div class="field">
@@ -38,7 +40,7 @@ import { mapActions } from 'vuex';
 import { getModel } from 'vue-mc-drf-model';
 import LoginModel from '@/models/login';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

@@ -8,8 +8,7 @@
           <div class="bh-grid__item">
             <translations-status
               ref="translationsStatus"
-              :owner-nickname="repository.owner__nickname"
-              :repository-slug="repository.slug"
+              :repository-uuid="repository.uuid"
               v-model="toLanguage" />
           </div>
         </div>
@@ -30,9 +29,9 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsList from '@/components/translate/TranslationsList';
 import RepositoryBase from './Base';
-import TranslationsStatus from '@/components-v1/translate/TranslationsStatus';
-import TranslationsList from '@/components-v1/translate/TranslationsList';
 
 
 export default {
