@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QuickTest.vue renders correctly 1`] = `
+<div class="quick-test">
+  <div class="quick-test__collapse-button">
+    <b-icon-stub icon="chevron-left"></b-icon-stub>
+    <p class="quick-test__collapse-button__text"> some specific text </p>
+  </div>
+  <div class="quick-test__container collapsed">
+    <div class="quick-test__inner-container">
+      <div class="quick-test__text-area"></div>
+      <div class="quick-test__input">
+        <text-area-input-stub placeholder="some specific text" size="normal">
+          <language-append-select-input-stub languages="0,1" dropdowndirection="is-top-left" class="language-append"></language-append-select-input-stub>
+        </text-area-input-stub>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -13,7 +13,7 @@
         <button
           :disabled="submitting"
           type="submit"
-          class="button is-primary">Register</button>
+          class="button is-primary">{{ $t('webapp.landing_page.register') }}</button>
       </div>
     </div>
   </form>
@@ -25,7 +25,7 @@ import { mapActions } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import FormGenerator from '@/components/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

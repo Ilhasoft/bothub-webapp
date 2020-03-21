@@ -21,6 +21,9 @@ describe('EditRepositoryForm.vue', () => {
     wrapper = shallowMount(EditRepositoryForm, {
       localVue,
       store,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         ownerNickname: 'fake',
         slug: 'repo1',

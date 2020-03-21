@@ -10,21 +10,31 @@
           <div class="bh-grid__item">
             <div v-if="authenticated">
               <div v-if="repository.authorization.can_contribute">
-                <h2>Train a new sentence</h2>
-                <span>Add examples to improve your bot intelligence.</span>
+                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
                 <new-example-form
                   :repository="repository"
                   @created="onExampleCreated()" />
               </div>
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
-                  You can not contribute to this repository
+                  {{ $t('webapp.trainings.not_can_edit_repository') }}
+                  <request-authorization-modal
+                    v-if="repository"
+                    :open.sync="requestAuthorizationModalOpen"
+                    :repository-uuid="repository.uuid"
+                    @requestDispatched="onAuthorizationRequested()" />
+                  <a
+                    class="requestAuthorization"
+                    @click="openRequestAuthorizationModal">
+                    {{ $t('webapp.layout.request_authorization') }}
+                  </a>
                 </div>
               </div>
             </div>
             <div v-else>
               <div class="bh-notification bh-notification--info">
-                Sign in to your account to contribute to this repository.
+                {{ $t('webapp.trainings.login') }}
               </div>
               <login-form hide-forgot-password />
             </div>
@@ -34,30 +44,26 @@
       <hr>
       <div class="bh-grid__item">
         <div class="trainings-repository__list-wrapper">
-          <h2>Sentences list</h2>
+          <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
           <bh-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
             color="secondary-light"
             size="normal"
             @click="openTrainingModal">
-            Run training
+            {{ $t('webapp.trainings.run_training') }}
           </bh-button>
         </div>
         <filter-examples
           :intents="repository.intents_list"
           :entities="repository.entities_list"
+          :language-filter="true"
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
           @exampleDeleted="onExampleDeleted" />
       </div>
     </div>
-    <request-authorization-modal
-      v-if="repository"
-      :open.sync="requestAuthorizationModalOpen"
-      :repository-uuid="repository.uuid"
-      @requestDispatched="onAuthorizationRequested()" />
     <train-modal
       v-if="repository"
       :training="training"
@@ -76,7 +82,6 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
@@ -87,6 +92,7 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -136,6 +142,10 @@ export default {
       if (!this.querySchema.label) {
         delete this.querySchema.label;
       }
+      if (!this.querySchema.language) {
+        delete this.querySchema.language;
+      }
+
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
@@ -155,7 +165,7 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$toast.open({
+      this.$buefy.toast.open({
         message: 'Request made! Wait for review of an admin.',
         type: 'is-success',
       });
@@ -168,14 +178,17 @@ export default {
       this.repository.examples__count -= 1;
       this.updateRepository(false);
     },
-    async train(repositoryUUID) {
+    async train(repositoryUuid) {
       this.training = true;
       try {
-        const response = await this.trainRepository({ repositoryUUID });
+        const response = await this.trainRepository({
+          repositoryUuid,
+          repositoryVersion: this.repositoryVersion,
+        });
         this.trainResponseData = response.data;
         this.trainResponseOpen = true;
       } catch (e) {
-        this.$toast.open({
+        this.$buefy.toast.open({
           message: 'Repository not trained :(',
           type: 'is-danger',
         });
@@ -190,7 +203,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
-
+@import '~bh/src/assets/scss/variables.scss';
 
 .trainings-repository {
   &__list-wrapper {
@@ -204,4 +217,21 @@ export default {
     background-color: $color-white;
   }
 }
+
+  .requestAuthorization{
+        color: $color-fake-black;
+        font-weight: $font-weight-medium;
+        text-align: center;
+        float: right;
+  }
+
+   @media screen and (max-width: 50em) {
+        .bh-notification--warning{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
+
 </style>

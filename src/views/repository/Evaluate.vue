@@ -8,17 +8,17 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">Test your data set</h2>
-            <p>
-              How is your model performing? Do you have enough data?
-              Are your intents and entities well-designed?
-            </p>
-            <p>Using our testing feature, you can evaluate your bot's performance easily.</p>
+            <h2 class="evaluate__content-header__title">
+              {{ $t('webapp.evaluate.header_title') }}
+            </h2>
+            <p>{{ $t('webapp.evaluate.header_title_p') }}</p>
+            <p>{{ $t('webapp.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
-                <p><strong>Select the language to run the test</strong></p>
-                <bh-select
-                  v-model="currentLanguage">
+                <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
+                <b-select
+                  v-model="currentLanguage"
+                  expanded>
                   <option
                     v-for="language in languages"
                     :key="language.id"
@@ -26,7 +26,7 @@
                     :value="language.value">
                     {{ language.title }}
                   </option>
-                </bh-select>
+                </b-select>
               </div>
               <bh-button
                 ref="runNewTestButton"
@@ -35,30 +35,17 @@
                 class="evaluate__content-header__wrapper__btn"
                 secondary
                 @click="newEvaluate()">
-              <slot v-if="!evaluating">Run test</slot></bh-button>
+                <slot v-if="!evaluating">
+                  {{ $t('webapp.evaluate.run_test') }}
+              </slot></bh-button>
             </div>
           </div>
-          <div class="evaluate__navigation">
-            <a
-              v-for="(name, i) in links"
-              :key="i"
-              :class="{'active': i === currentTab}"
-              @click="setCurrentTab(i)">{{ name }}</a>
-          </div>
+          <div class="evaluate__divider" />
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
-              v-if="currentTab === 0"
               :filter-by-language="currentLanguage"
               @created="updateRepository(true)"
               @deleted="updateRepository(true)"/>
-            <base-evaluate-results
-              v-else-if="currentTab === 1"
-              :result-id="resultId"
-              :repository="repository"
-              :filter-by-language="currentLanguage" />
-            <base-evaluate-versions
-              v-else
-              :repository="repository" />
           </div>
         </div>
         <div
@@ -67,7 +54,17 @@
                 bh-grid">
           <div class="bh-grid__item">
             <div class="bh-notification bh-notification--warning">
-              You can not edit this repository
+              {{ $t('webapp.evaluate.you_can_not_edit') }}
+              <request-authorization-modal
+                v-if="repository"
+                :open.sync="requestAuthorizationModalOpen"
+                :repository-uuid="repository.uuid"
+                @requestDispatched="onAuthorizationRequested()" />
+              <a
+                class="evaluate__navigation__requestAuthorization"
+                @click="openRequestAuthorizationModal">
+                {{ $t('webapp.layout.request_authorization') }}
+              </a>
             </div>
           </div>
         </div>
@@ -77,7 +74,7 @@
         class="bh-grid">
         <div class="bh-grid__item">
           <div class="bh-notification bh-notification--info">
-            Sign in to your account to edit this repository.
+            {{ $t('webapp.evaluate.login') }}
           </div>
           <login-form hide-forgot-password />
         </div>
@@ -89,13 +86,12 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
-import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
-import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
-import RepositoryBase from './Base';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -104,25 +100,23 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
-    BaseEvaluateResults,
-    BaseEvaluateVersions,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
   data() {
     return {
-      initialTab: 0,
       currentLanguage: '',
-      links: ['Sentences', 'Results', 'Versions'],
       languages: [],
       evaluating: false,
       error: {},
+      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
     ...mapState({
       resultId: state => state.Repository.evaluateResultId,
-      currentTab: state => state.Repository.currentTabSelected,
       selectedRepository: state => state.Repository.selectedRepository,
+      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     ...mapGetters([
       'getEvaluateLanguage',
@@ -139,20 +133,12 @@ export default {
       }
     },
   },
-  mounted() {
-    this.updateCurrentTab(this.initialTab);
-  },
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'updateCurrentTab',
       'getEvaluateExample',
       'runNewEvaluate',
-      'setUpdateEvaluateResultId',
     ]),
-    setCurrentTab(value) {
-      this.updateCurrentTab(value);
-    },
     getExamples() {
       this.getEvaluateExample({
         id: this.selectedRepository.uuid,
@@ -161,9 +147,20 @@ export default {
           .map((lang, index) => ({
             id: index + 1,
             value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
+    },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$bhToastNotification({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'success',
+      });
+      this.updateRepository(false);
     },
     async newEvaluate() {
       this.evaluating = true;
@@ -171,6 +168,7 @@ export default {
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,
+          version: this.repositoryVersion,
         });
         this.evaluating = false;
         this.setUpdateEvaluateResultId({
@@ -199,6 +197,12 @@ export default {
 
 
 .evaluate {
+  &__divider {
+    height: 1px;
+    background-color: #d5d5d5;
+    margin: 2.5rem 0 0 0;
+  }
+
   &__navigation {
     display: flex;
     justify-content: center;
@@ -206,6 +210,12 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
+    &__requestAuthorization{
+       color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      float: right
+    }
     a {
       position: relative;
       display: inline-flex;
@@ -246,9 +256,7 @@ export default {
   }
 
   &__content-header {
-    max-width: 45vw;
-    margin: 0 auto;
-    text-align: center;
+    text-align: left;
 
     &__buttons {
       margin: 2rem 1rem;

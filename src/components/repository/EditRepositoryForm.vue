@@ -3,6 +3,7 @@
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
+      :settings="true"
       :schema="formSchema"
       v-model="data"
       :errors="errors"
@@ -18,8 +19,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import FormGenerator from '@/components-v1/form-generator/FormGenerator';
-import Loading from '@/components-v1/shared/Loading';
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import Loading from '@/components/shared/Loading';
 
 
 const components = {

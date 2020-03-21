@@ -3,28 +3,31 @@
 exports[`LoginForm.vue renders correctly 1`] = `
 <div class="sign-up">
   <nav class="sign-up__nav">
-    <div class="bh-grid bh-grid--space-between bh-grid--row">
-      <router-link-stub to="/" tag="a" event="click" class="bh-grid__item sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
-      <div class="sign-up__nav__login"><span class="sign-up__nav__text">Already have an account?</span>
-        <bh-button-stub size="normal" primary="true" type="button" class="sign-up__nav__login__button">Sign in</bh-button-stub>
+    <div class="sign-up__nav__container">
+      <router-link-stub to="/" tag="a" event="click" class="column sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
+      <div class="sign-up__nav__login"><span class="sign-up__nav__text">
+          some specific text</span>
+        <b-button-stub size="normal" nativetype="button" tag="button" class="is-primary sign-up__nav__login__button">some specific text</b-button-stub>
       </div>
     </div>
   </nav>
-  <section class="bh-grid bh-grid--half sign-up__wrapper-content">
-    <div class="bh-grid__item sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
-    <div class="bh-grid__item sign-up__wrapper-content__form">
+  <section class="columns is-variable is-3 sign-up__wrapper-content">
+    <div class="column is-half sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
+    <div class="column sign-up__wrapper-content__form">
       <div class="sign-up__wrapper-content__form__title">
-        <h1>Get started free</h1>
+        <h1>some specific text</h1>
       </div>
       <form>
         <loading-stub></loading-stub>
         <!---->
         <div class="field">
           <div class="control has-text-centered">
-            <bh-button-stub color="info" type="submit" fullwidth="true">Get free</bh-button-stub>
+            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">some specific text</b-button-stub>
           </div>
           <div class="sign-up__wrapper-content__form__agree-message"><small>
-              By clicking “Continue” I agree to InVision’s Terms of Service and Privacy Policy.
+              <router-link-stub to="/terms" tag="a" event="click">
+                some specific text
+              </router-link-stub>
             </small></div>
         </div>
       </form>

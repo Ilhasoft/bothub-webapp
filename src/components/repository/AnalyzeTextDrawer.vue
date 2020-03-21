@@ -3,7 +3,7 @@
     <button
       slot="trigger"
       class="drawer-title"
-      @click="openCollapse()">Analyze Text</button>
+      @click="openCollapse()">{{ $t('webapp.analyze_text.analyze_text') }}</button>
     <transition name="drawer--slide">
       <div v-if="open">
         <div class="drawer-content">
@@ -38,7 +38,7 @@
               <bh-button
                 :disabled="submitting"
                 type="submit"
-                primary>Analyze</bh-button>
+                primary>{{ $t('webapp.analyze_text.analyze') }}</bh-button>
             </div>
           </form>
         </div>
@@ -52,7 +52,7 @@
                 <span>{{ result.intent.name }}</span>
                 <span>({{ result.intent.confidence | percent }})</span>
               </div>
-              <div v-else>No detected</div>
+              <div v-else>{{ $t('webapp.analyze_text.no_detected') }}</div>
             </div>
             <div
               v-for="(entities, label) in result.entities"
@@ -93,7 +93,7 @@
 
 <script>
 import { languageListToDict } from '@/utils';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'AnalyzeTextDrawer',
@@ -126,6 +126,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
     availableLanguagesList() {
       return languageListToDict(this.availableLanguages);
     },
@@ -144,6 +147,7 @@ export default {
       try {
         const response = await this.analyzeText({
           repositoryUUID: this.repositoryUuid,
+          repositoryVersion: this.repositoryVersion,
           language: this.data.language || this.availableLanguages[0],
           text: this.data.text,
         });

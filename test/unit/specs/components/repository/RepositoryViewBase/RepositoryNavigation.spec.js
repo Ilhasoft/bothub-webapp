@@ -15,6 +15,9 @@ describe('RepositoryNavigation.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(RepositoryNavigation, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         repository: {},
       },

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar.vue renders correctly 1`] = `
+<div class="sidebar">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper__collapse-button">
+      <b-icon-stub icon="chevron-left"></b-icon-stub>
+    </div>
+    <b-menu-stub accordion="true">
+      <div class="menu-header">
+        <div class="menu-header__logo"></div>
+      </div>
+      <b-menu-list-stub ariarole="">
+        <b-menu-item-stub label="some specific text" icon="home" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="refresh" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="wechat" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="inbox" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="translate" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="settings" animation="fade" tag="a" ariarole="">
+          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+      </b-menu-list-stub>
+    </b-menu-stub>
+    <div></div>
+  </div>
+</div>
+`;

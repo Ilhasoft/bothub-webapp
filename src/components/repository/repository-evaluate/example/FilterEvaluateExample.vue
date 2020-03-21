@@ -1,7 +1,7 @@
 <template>
   <div class="filter-evaluate-example">
     <div class="filter-evaluate-example__filters">
-      <bh-field
+      <b-field
         :errors="errors.intent"
         class="filter-evaluate-example__filters__input-text">
         <bh-text
@@ -14,32 +14,54 @@
               type="submit" />
           </div>
         </bh-text>
-      </bh-field>
-      <div class="filter-evaluate-example__filters__wrapper">
-        <span class="filter-evaluate-example__filters__wrapper__text">Filter by:</span>
-        <bh-field
+      </b-field>
+      <div
+        :class="wrapperClasses">
+        <span class="filter-evaluate-example__filters__wrapper__text">
+          {{ $t('webapp.dashboard.filter_by') }}:
+        </span>
+        <b-field
           :errors="errors.intent">
           <bh-autocomplete
             v-model="intent"
             :data="intents || []"
             :formatters="inputFormatters"
-            placeholder="All Intents" />
-        </bh-field>
-        <bh-field
+            :placeholder="$t('webapp.evaluate.all_intents')" />
+        </b-field>
+        <b-field
           :errors="errors.intent">
           <bh-autocomplete
             v-model="entity"
             :data="entities || []"
             :formatters="inputFormatters"
-            placeholder="All entities" />
-        </bh-field>
+            :placeholder="$t('webapp.evaluate.all_entities')" />
+        </b-field>
+        <b-field v-if="languageFilter && languages">
+          <b-select
+            v-model="language"
+            :placeholder="$t('webapp.evaluate.all_languages')"
+            expanded>
+            <option
+              v-for="language in languages"
+              :key="language.id"
+              :selected="language.value === language"
+              :value="language.value">
+              {{ language.title }}
+            </option>
+            <option
+              :value="null">
+              {{ $t('webapp.home.all_languages') }}
+            </option>
+          </b-select>
+        </b-field>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { formatters } from '@/utils/index';
+import { formatters, LANGUAGES } from '@/utils/index';
+import { mapState } from 'vuex';
 import _ from 'lodash';
 
 
@@ -58,17 +80,37 @@ export default {
       type: Array,
       default: null,
     },
+    languageFilter: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       text: '',
       intent: '',
       entity: '',
+      language: null,
       setTimeoutId: null,
       errors: {},
     };
   },
   computed: {
+    wrapperClasses() {
+      return ['filter-evaluate-example__filters__wrapper',
+        this.languageFilter ? 'filter-evaluate-example__filters__wrapper__has-language-filter' : ''];
+    },
+    ...mapState({
+      selectedRepository: state => state.Repository.selectedRepository,
+    }),
+    languages() {
+      return Object.keys(this.selectedRepository.evaluate_languages_count)
+        .map((lang, index) => ({
+          id: index + 1,
+          value: lang,
+          title: `${LANGUAGES[lang]}`,
+        }));
+    },
     inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
@@ -86,6 +128,9 @@ export default {
     }, 500),
     entity: _.debounce(function emitEntity(value) {
       this.$emit('queryStringFormated', { entity: value });
+    }, 500),
+    language: _.debounce(function emitLanguage(value) {
+      this.$emit('queryStringFormated', { language: value });
     }, 500),
   },
 };
@@ -107,10 +152,15 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: 11% 1fr 1fr;
       grid-gap: .5rem;
+      grid-template-columns: 1fr 2fr 2fr;
+
+      &__has-language-filter {
+        grid-template-columns: 1fr 2fr 2fr 2fr;
+      }
 
       &__text {
+        white-space: nowrap;
         align-self: center;
       }
     }

@@ -4,6 +4,12 @@ import uuid from 'uuid';
 export function generateTemporaryId() {
   return uuid.v4();
 }
+export const getWordIndex = (word, phrase) => {
+  const regex = new RegExp(`\\b${word}\\b`);
+  const start = phrase.search(regex);
+  const end = start + word.length;
+  return { start, end };
+};
 
 export const getEntitiesList = (entities = [], extra = []) => entities
   .concat(extra || [])
@@ -40,6 +46,11 @@ const strTrueIndexOf = (a, b) => (a
   .indexOf(b.toLowerCase())
 );
 
+export const formatDate = (text) => {
+  const date = new Date(text);
+  return date.toLocaleDateString('pt-BR');
+};
+
 export const filterAndOrderListByText = (list, text) => (
   text
     ? list
@@ -57,7 +68,7 @@ export const formatters = {
     .replace(/[\u0300-\u036f]/g, ''),
 };
 
-const exampleSearchRegex = /((intent|label|entity):([a-zA-Z0-9_-]+))/g;
+const exampleSearchRegex = /((intent|label|entity|language):([a-zA-Z0-9_-]+))/g;
 
 const extractGroupsFromRegex = (regularExpression, value) => {
   let match;
@@ -87,6 +98,10 @@ export const exampleSearchToString = value => Object.keys(value)
     : `${key}:${value[key]}`))
   .join(' ');
 
+export const normalize = (min, max, value) => {
+  if (min === max) return min === 0 ? 0 : 1;
+  return (value - min) / (max - min);
+};
 
 export const updateAttrsValues = (drfModel, data) => {
   const attrs = drfModel.defaults();

@@ -26,6 +26,9 @@ describe('AuthorizationItem.vue', () => {
     store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
     wrapper = shallowMount(AuthorizationItem, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         uuid: 'de6e3f36-833f-4ef8-a3da-c576ea606139',
         user__nickname: 'douglas',

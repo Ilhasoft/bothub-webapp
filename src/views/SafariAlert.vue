@@ -5,10 +5,10 @@
         src="@/assets/imgs/botinho.png"
         alt="botinho">
       <h3 class="safari-alert__content__title">
-        Sorry, the Safari browser is not compatible with all our features.
+        {{ $t('webapp.safari_alert.title1') }}
       </h3>
       <h3 class="safari-alert__content__title">
-        We strongly recommend that you switch to a different browser.
+        {{ $t('webapp.safari_alert.title2') }}
       </h3>
       <div class="bh-grid">
         <a
@@ -40,7 +40,9 @@
         class="safari-alert__content__button"
         size="normal"
         primary
-        @click="goToLandingPage()">Keep using Safari</bh-button>
+        @click="goToLandingPage()">
+        {{ $t('webapp.safari_alert.keep_using_safari') }}
+      </bh-button>
     </div>
   </div>
 </template>

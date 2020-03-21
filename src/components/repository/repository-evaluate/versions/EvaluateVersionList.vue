@@ -3,17 +3,16 @@
     <pagination
       v-if="versionsList"
       :item-component="evaluateItem"
-      :list="versionsList"
-      @dispatch="goToDetails()" />
+      :list="versionsList" />
     <p
       v-if="versionsList && versionsList.empty"
-      class="no-examples">No versions</p>
+      class="no-examples">{{ $t('webapp.evaluate.no_versions') }}</p>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Pagination from '@/components-v1/shared/Pagination';
+import Pagination from '@/components/shared/Pagination';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
 
