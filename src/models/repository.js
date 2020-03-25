@@ -24,6 +24,7 @@ class Repository extends ModelBase {
 
   defaults() {
     return {
+
       uuid: null,
       owner: null,
       owner__nickname: null,
@@ -52,6 +53,7 @@ class Repository extends ModelBase {
       requirements_to_train: {},
       languages_ready_for_train: null,
       ready_for_train: false,
+      repository_version: 466,
     };
   }
 
@@ -85,12 +87,13 @@ class Repository extends ModelBase {
       requirements_to_train: Object,
       languages_ready_for_train: Object,
       ready_for_train: Boolean,
+      repository_version: String,
     };
   }
 
   routes() {
     return {
-      fetch: '/v2/repository-shortcut/{owner__nickname}/{slug}/',
+      fetch: '/v2/repository-shortcut/{owner__nickname}/{slug}/?repository_version={repository_version}',
     };
   }
 
@@ -102,6 +105,7 @@ class Repository extends ModelBase {
         ownerNickname: this.owner__nickname,
         slug: this.slug,
         uuid: this.uuid,
+
       },
     );
     store.dispatch('setRepository', this.attributes);

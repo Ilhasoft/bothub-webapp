@@ -63,6 +63,9 @@ export default {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
   },
+  mounted() {
+    console.log(this.$store.getters.getProfile);
+  },
 };
 </script>
 
