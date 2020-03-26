@@ -2,7 +2,6 @@
 import store from '@/store';
 import ModelBase from './base';
 
-
 class Repository extends ModelBase {
   constructor(attributes, ...args) {
     super(attributes, ...args);
@@ -12,6 +11,11 @@ class Repository extends ModelBase {
       const related = store.getters.relatedUuid[`${ownerNickname}/${slug}`];
       if (related) {
         this.set('uuid', related);
+      }
+      const versionNumber = store.getters.getSelectedVersion;
+      const versionName = store.getters.getNameVersion;
+      if (versionName !== 'master' && versionName !== null) {
+        this.set('repository_version', `?repository_version=${versionNumber}`);
       }
     }
   }
@@ -24,7 +28,6 @@ class Repository extends ModelBase {
 
   defaults() {
     return {
-
       uuid: null,
       owner: null,
       owner__nickname: null,
@@ -51,9 +54,8 @@ class Repository extends ModelBase {
       request_authorization: null,
       languages_warnings: null,
       requirements_to_train: {},
-      languages_ready_for_train: null,
       ready_for_train: false,
-      repository_version: 466,
+      repository_version: '',
     };
   }
 
@@ -85,7 +87,6 @@ class Repository extends ModelBase {
       request_authorization: Object,
       languages_warnings: Object,
       requirements_to_train: Object,
-      languages_ready_for_train: Object,
       ready_for_train: Boolean,
       repository_version: String,
     };
@@ -93,21 +94,19 @@ class Repository extends ModelBase {
 
   routes() {
     return {
-      fetch: '/v2/repository-shortcut/{owner__nickname}/{slug}/?repository_version={repository_version}',
+      fetch:
+        '/v2/repository-shortcut/{owner__nickname}/{slug}/{repository_version}',
     };
   }
 
   onFetchSuccess(response) {
     super.onFetchSuccess(response);
-    store.dispatch(
-      'setRepositoryRelatedUuid',
-      {
-        ownerNickname: this.owner__nickname,
-        slug: this.slug,
-        uuid: this.uuid,
-
-      },
-    );
+    store.dispatch('setRepositoryRelatedUuid', {
+      ownerNickname: this.owner__nickname,
+      slug: this.slug,
+      uuid: this.uuid,
+      version: store.getters.getSelectedVersion,
+    });
     store.dispatch('setRepository', this.attributes);
   }
 }
