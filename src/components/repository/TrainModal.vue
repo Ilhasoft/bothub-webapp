@@ -98,10 +98,6 @@ export default {
       type: Object,
       required: true,
     },
-    languagesReadyForTrain: {
-      type: Object,
-      required: true,
-    },
     languagesWarnings: {
       type: Object,
       required: true,
