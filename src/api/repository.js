@@ -16,7 +16,7 @@ export default {
     return new utils.Page('/v2/repository/version/', limit, query);
   },
   searchLogs(repositoryUUID, query, limit) {
-    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
+    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, search: query.name });
   },
   makeVersionDefault(repositoryUUID, versionUUID) {
     return request.$http.patch(
