@@ -20,4 +20,7 @@ export default {
   getSelectedVersion(state) {
     return state.repositoryVersion;
   },
+  getNameVersion(state) {
+    return state.repositoryVersionName;
+  },
 };
