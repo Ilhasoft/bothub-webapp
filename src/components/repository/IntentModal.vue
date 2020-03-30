@@ -17,7 +17,7 @@
               v-for="intent in repository.intents_list"
               v-show="info.intent_ranking.length == 0"
               :key="intent"
-              :value="intent"
+              :value="{name: intent}"
             >
               {{ intent }}
             </option>
