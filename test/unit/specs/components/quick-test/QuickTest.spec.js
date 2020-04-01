@@ -17,7 +17,7 @@ describe('QuickTest.vue', () => {
       propsData: {
         repository: {
           uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
-          languages_ready_for_train: 'en',
+          available_languages: 'en',
         },
       },
     });
