@@ -110,7 +110,7 @@ export default {
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     languages() {
-      return Object.keys(this.repository.languages_ready_for_train);
+      return this.repository.available_languages;
     },
   },
   watch: {

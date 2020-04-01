@@ -21,8 +21,8 @@ export default {
   text-align: center;
 
   .bounce {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     background-color: $grey-light;
 
     border-radius: 100%;
@@ -41,11 +41,9 @@ export default {
 
 @keyframes sk-bouncedelay {
   0%, 80%, 100% {
-    -webkit-transform: scale(0);
-    transform: scale(0);
+    opacity: 0
   } 40% {
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
+    opacity: 1
   }
 }
 </style>
