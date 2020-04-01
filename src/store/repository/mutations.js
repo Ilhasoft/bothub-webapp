@@ -1,12 +1,14 @@
 import TYPES from '../types';
 
 export default {
-  [TYPES.SET_REPOSITORY_RELATED_UUID](state, { ownerNickname, slug, uuid }) {
+  [TYPES.SET_REPOSITORY_RELATED_UUID](state, {
+    ownerNickname, slug, uuid, version,
+  }) {
     state.relatedUuid = Object.assign(
       {},
       state.relatedUuid,
       {
-        [`${ownerNickname}/${slug}`]: uuid,
+        [`${ownerNickname}/${slug}/${version}/`]: uuid,
       },
     );
   },

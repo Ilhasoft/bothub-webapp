@@ -69,7 +69,6 @@
       :training="training"
       :ready-for-train="repository.ready_for_train"
       :requirements-to-train="repository.requirements_to_train"
-      :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
       @train="train(repository.uuid)" />
