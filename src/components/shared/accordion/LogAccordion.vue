@@ -191,7 +191,7 @@ export default {
         });
 
         this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_train'),
+          message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
           type: 'is-success',
         });
       } catch (error) {
@@ -209,7 +209,7 @@ export default {
       try {
         await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
         this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
+          message: this.$t('webapp.inbox.entry_has_add_to_train'),
           type: 'is-success',
         });
       } catch (error) {
