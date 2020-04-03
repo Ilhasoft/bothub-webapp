@@ -2,7 +2,6 @@
 
 exports[`RepositoryLog.vue renders correctly 1`] = `
 <repository-view-base-stub>
-  <!---->
   <div>
     <b-notification-stub animation="fade" class="is-danger">
       some specific text
