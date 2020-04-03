@@ -20,13 +20,14 @@
 
 <script>
 import {
-  ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN,
+  ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN, ROLE_TRANSLATE,
 } from '@/utils';
 
 const helpTextDict = {
   [ROLE_USER]: 'Can read and analyze',
   [ROLE_CONTRIBUTOR]: 'Can read, analyze and contribute with examples and translations',
   [ROLE_ADMIN]: 'Can read, analyze, contribute and write repository config',
+  [ROLE_TRANSLATE]: 'Can read, analyze and create translations for intelligence',
 };
 
 export default {
