@@ -2,29 +2,11 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div
-      v-if="authenticated && !repository.authorization.can_contribute"
-      class="bh-grid">
-      <div class="bh-grid__item">
-        <div class="bh-notification bh-notification--warning">
-          {{ $t('webapp.evaluate.you_can_not_edit') }}
-          <request-authorization-modal
-            v-if="repository"
-            :open.sync="requestAuthorizationModalOpen"
-            :repository-uuid="repository.uuid"
-            @requestDispatched="onAuthorizationRequested()" />
-          <a
-            class="requestAuthorization"
-            @click="openRequestAuthorizationModal">
-            {{ $t('webapp.layout.request_authorization') }}
-          </a>
-        </div>
-      </div>
-    </div>
+
     <div
       v-if="authenticated"
       class="repository-log">
-      <div v-if="repository">
+      <div v-if="repository && repository.authorization.can_contribute">
         <div class="repository-log__header">
           <h1> {{ $t('webapp.menu.inbox') }} </h1>
           <p> {{ $t('webapp.inbox.description') }} </p>
@@ -90,14 +72,24 @@
           :query="query"
           :editable="repository.authorization.can_contribute" />
       </div>
-
       <div
-        v-else>
-        <b-notification
-          :closable="false"
-          class="is-warning">
-          {{ $t('webapp.inbox.cannot_edit_this_repository') }}
-        </b-notification>
+        v-else
+        class="bh-grid">
+        <div class="bh-grid__item">
+          <div class="bh-notification bh-notification--warning">
+            {{ $t('webapp.evaluate.you_can_not_edit') }}
+            <request-authorization-modal
+              v-if="repository"
+              :open.sync="requestAuthorizationModalOpen"
+              :repository-uuid="repository.uuid"
+              @requestDispatched="onAuthorizationRequested()" />
+            <a
+              class="requestAuthorization"
+              @click="openRequestAuthorizationModal">
+              {{ $t('webapp.layout.request_authorization') }}
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
