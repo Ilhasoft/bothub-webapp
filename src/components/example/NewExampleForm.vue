@@ -213,7 +213,7 @@ export default {
         if (data) {
           /* istanbul ignore next */
           this.$buefy.toast.open({
-            message: data.detail,
+            message: this.$t('webapp.trainings.intention_or_sentence_already_exist'),
             type: 'is-danger',
           });
           this.errors = data;
