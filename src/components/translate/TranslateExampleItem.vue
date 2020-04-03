@@ -28,7 +28,9 @@
         </div>
       </div>
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
+        v-if="repository.authorization && (
+          repository.authorization.can_contribute || repository.authorization.can_translate
+        )"
         class="level-right">
         <div class="level-item">
           <button
