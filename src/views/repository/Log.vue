@@ -2,7 +2,25 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-
+    <div
+      v-if="authenticated && !repository.authorization.can_contribute"
+      class="bh-grid">
+      <div class="bh-grid__item">
+        <div class="bh-notification bh-notification--warning">
+          {{ $t('webapp.evaluate.you_can_not_edit') }}
+          <request-authorization-modal
+            v-if="repository"
+            :open.sync="requestAuthorizationModalOpen"
+            :repository-uuid="repository.uuid"
+            @requestDispatched="onAuthorizationRequested()" />
+          <a
+            class="requestAuthorization"
+            @click="openRequestAuthorizationModal">
+            {{ $t('webapp.layout.request_authorization') }}
+          </a>
+        </div>
+      </div>
+    </div>
     <div
       v-if="authenticated"
       class="repository-log">
@@ -67,7 +85,6 @@
               :placeholder="$t('webapp.inbox.your_filter')"/>
           </div>
         </div>
-
         <repository-log-list
           :per-page="perPage"
           :query="query"
@@ -103,6 +120,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
@@ -114,6 +132,7 @@ export default {
     RepositoryViewBase,
     RepositoryLogList,
     LoginForm,
+    RequestAuthorizationModal,
   },
   extends: RepositoryBase,
   data() {
@@ -121,6 +140,7 @@ export default {
       perPage: 10,
       name: '',
       filterOption: null,
+      requestAuthorizationModalOpen: false,
       loading: false,
       filterName: {
         repository_version_name: 'version',
@@ -188,15 +208,33 @@ export default {
 
       this.query = query;
     },
+    openRequestAuthorizationModal() {
+      this.requestAuthorizationModalOpen = true;
+    },
+    onAuthorizationRequested() {
+      this.requestAuthorizationModalOpen = false;
+      this.$buefy.toast.open({
+        message: 'Request made! Wait for review of an admin.',
+        type: 'is-success',
+      });
+      this.updateRepository(false);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
   label {
     vertical-align: middle;
   }
-
+  .requestAuthorization{
+       color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      float: right
+    }
   .repository-log {
     &__header {
       margin-bottom: 3.5rem;
@@ -207,4 +245,13 @@ export default {
       cursor: pointer;
     }
   }
+
+   @media screen and (max-width: 50em) {
+        .bh-notification--warning{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
 </style>
