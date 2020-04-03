@@ -33,11 +33,13 @@ export const ROLE_NOT_SETTED = 0;
 export const ROLE_USER = 1;
 export const ROLE_CONTRIBUTOR = 2;
 export const ROLE_ADMIN = 3;
+export const ROLE_TRANSLATE = 4;
 
 export const ROLES = {
   [ROLE_USER]: 'User',
   [ROLE_CONTRIBUTOR]: 'Contributor',
   [ROLE_ADMIN]: 'Admin',
+  [ROLE_TRANSLATE]: 'Translator',
 };
 
 const strTrueIndexOf = (a, b) => (a
