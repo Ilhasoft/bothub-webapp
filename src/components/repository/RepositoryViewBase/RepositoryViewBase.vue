@@ -27,7 +27,7 @@
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"
       class="rpstr-vw-bs__loading">
-      <bh-loading />
+      <Loading/>
     </div>
     <new-repository-modal
       :active="newRepositoryModalOpen"
@@ -50,7 +50,7 @@ import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import QuickTest from '@/components/quick-test/QuickTest';
 import SideBarNavigation from '@/components/shared/SideBar';
 import RepositoryNavigation from './RepositoryNavigation';
-
+import Loading from '@/components/shared/Loading';
 
 const ERROR_VERBOSE_LOOKUP = {
   404: 'Bot not found',
@@ -72,6 +72,7 @@ export default {
     NewRepositoryModal,
     RequestAuthorizationModal,
     SideBarNavigation,
+    Loading,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
