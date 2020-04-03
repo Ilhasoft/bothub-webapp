@@ -88,7 +88,7 @@
       v-else>
       <b-notification
         :closable="false"
-        class="is-danger">
+        class="is-info">
         {{ $t('webapp.inbox.signin_you_account') }}
       </b-notification>
       <login-form hide-forgot-password />
