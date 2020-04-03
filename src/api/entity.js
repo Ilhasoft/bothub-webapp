@@ -9,6 +9,6 @@ export default {
       repository_uuid: repositoryUuid,
       ...query,
     });
-    return new utils.List(`/v1/entities/?${queryString}`);
+    return new utils.List(`/v2/repository/entities?${queryString}`);
   },
 };
