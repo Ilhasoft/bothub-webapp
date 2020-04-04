@@ -179,7 +179,7 @@ export default {
       const filterSearch = this.filterSearch.trim();
 
       if (name !== '') {
-        query.name = name;
+        query.search = name;
       }
 
       if (this.filterOption !== null && filterSearch !== '') {

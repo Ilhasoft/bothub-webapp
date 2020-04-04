@@ -103,10 +103,10 @@
               :to="{ name: 'repository-settings' }"
               :label="$t('webapp.menu.general')"
               tag="router-link"/>
-              <!-- <b-menu-item
+            <b-menu-item
               :to="{ name: 'repository-versions' }"
               :label="$t('webapp.menu.versions')"
-              tag="router-link"/> -->
+              tag="router-link"/>
           </b-menu-item>
         </b-menu-list>
       </b-menu>

@@ -139,13 +139,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
 
 
 .my-profile {
   &__header {
-    background-color: $color-primary;
+    background-color: $color-fake-grey;
   }
 
   &__repositories {

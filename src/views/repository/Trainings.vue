@@ -41,8 +41,10 @@
           </div>
         </div>
       </div>
-      <hr>
-      <div class="bh-grid__item">
+      <div
+        v-if="authenticated && repository.authorization.can_contribute"
+        class="bh-grid__item">
+        <hr>
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
           <bh-button
@@ -69,7 +71,6 @@
       :training="training"
       :ready-for-train="repository.ready_for_train"
       :requirements-to-train="repository.requirements_to_train"
-      :languages-ready-for-train="repository.languages_ready_for_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
       @train="train(repository.uuid)" />
