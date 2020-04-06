@@ -152,7 +152,11 @@
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para",
       "add_a_sentence": "Adicionar uma frase",
-      "intent": "Intenção"
+      "intent": "Intenção",
+      "train_response_title": "Repositório treinado com sucesso!",
+      "trained": "Treinado",
+      "no_changes": "Sem alterações",
+      "failed": "Falhou"
     },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",

@@ -1,7 +1,7 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Repository trained successfully!">
+    :title="$t('webapp.trainings.train_response_title')">
     <bh-card
       v-if="!!trainResponse"
       no-border>
@@ -14,7 +14,7 @@
                 value="check"
                 type="is-success"
                 size="is-small" />
-              <span>Trained</span>
+              <span>{{ $t('webapp.trainings.trained') }}</span>
             </div>
             <div class="bh-grid__item">
               <bh-icon
@@ -22,7 +22,7 @@
                 value="dots-horizontal"
                 type="is-info"
                 size="is-small" />
-              <span>No changes</span>
+              <span>{{ $t('webapp.trainings.no_changes') }}</span>
             </div>
             <div class="bh-grid__item">
               <bh-icon
@@ -30,7 +30,7 @@
                 value="close"
                 type="is-danger"
                 size="is-small" />
-              <span>Failed</span>
+              <span>{{ $t('webapp.trainings.failed') }}</span>
             </div>
           </div>
         </div>
