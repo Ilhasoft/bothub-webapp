@@ -12,7 +12,7 @@
       <bh-button
         :disabled="submitting"
         primary
-        type="submit">Save</bh-button>
+        type="submit">{{ $t('webapp.settings.save') }}</bh-button>
     </div>
   </form>
 </template>

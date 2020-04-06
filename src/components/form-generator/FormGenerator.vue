@@ -5,9 +5,9 @@
       v-for="field in fields"
       v-show="field.type !== 'hidden'"
       :key="field.name"
-      :label="field.label"
+      :label="labelFor(field.name) || field.label"
       :type="field.errors && 'is-danger'"
-      :message="field.errors || field.helpText">
+      :message="field.errors || (helpTextFor(field.name) || field.helpText)">
       <component
         :v-if="field.inputComponent"
         :is="field.inputComponent"
@@ -114,6 +114,14 @@ export default {
   methods: {
     update() {
       this.$emit('input', this.formData);
+    },
+    labelFor(key) {
+      if (!this.$te(`webapp.form.${key}`)) return null;
+      return this.$t(`webapp.form.${key}`);
+    },
+    helpTextFor(key) {
+      if (!this.$te(`webapp.form.help.${key}`)) return null;
+      return this.$t(`webapp.form.help.${key}`);
     },
   },
 };

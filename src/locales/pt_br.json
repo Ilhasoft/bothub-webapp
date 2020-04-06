@@ -132,7 +132,8 @@
       "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
       "role": "Papéis:",
-      "no_requests": "Sem solicitações."
+      "no_requests": "Sem solicitações.",
+      "save": "Salvar"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -267,6 +268,24 @@
         "close": "Fechar"
       },
       "confirm_deleting_version": "Deletar versão"
+    },
+    "form": {
+      "name": "Nome",
+      "description": "Descrição",
+      "language": "Idioma",
+      "categories": "Categorias",
+      "algorithm": "Algorítimo",
+      "use_competing_intents": "Usar intenções que competem",
+      "use_name_entities": "Usar nomes de entidades",
+      "use_analyze_char": "Usar análise de caractere",
+      "help": {
+        "name": "Nome a ser mostrado do repositório",
+        "description": "Diga o que o seu bot faz!",
+        "categories": "Categorias para encontrar repositórios com o mesmo objetivo",
+        "use_name_entities": "Ao ativar os nomes de entidades, você receberá nomes de pessoas, empresas e lugares como resultados das suas predições.",
+        "use_competing_intents": "Ao usar intenções que competem, a confiança da predição é distribuída entre todas as intenções.",
+        "use_analyze_char": "Quando selecionado, o algorítimo aprenderá os padrões de caracteres individuais em vez de palavras completas. Esta abordagem funciona melhor para alguns idiomas."
+      }
     }
   }
 }

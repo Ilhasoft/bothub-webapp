@@ -132,7 +132,8 @@
       "login": "Sign in to your account to edit this intelligence.",
       "users": "Users:",
       "role": "Role:",
-      "no_requests": "No requests."
+      "no_requests": "No requests.",
+      "save": "Save"
     },
     "example": {
       "enter_sentence": "Enter your sentence here",
@@ -267,6 +268,24 @@
         "close": "Close"
       },
       "confirm_deleting_version": "Delete Version"
+    },
+    "forms": {
+      "name": "Name",
+      "description": "Description",
+      "language": "Language",
+      "categories": "Categories",
+      "algorithm": "Algorithm",
+      "use_competing_intents": "Use competing intents",
+      "use_name_entities": "Use name entities",
+      "use_analyze_char": "Use analyze char",
+      "help": {
+        "name": "Repository display name",
+        "description": "Tell what your bot do!",
+        "categories": "Categories for approaching repositories with the same purpose",
+        "use_name_entities": "When enabling name entities you will receive name of people, companies and places as results of your predictions.",
+        "use_competing_intents": "When using competing intents the confidence of the prediction is distributed in all the intents.",
+        "use_analyze_char": "When selected, the algorithm will learn the patterns of individual characters instead of whole words. This approach works better for some languages."
+      }
     }
   }
 }
