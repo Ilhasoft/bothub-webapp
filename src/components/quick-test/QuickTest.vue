@@ -12,39 +12,13 @@
       :class="['quick-test__container', expanded ? 'expanded' : 'collapsed']">
       <div class="quick-test__inner-container">
         <div class="quick-test__text-area">
-          <div
+          <quick-test-text
             v-for="sentence in sentences"
             :key="sentence.id"
-            class="quick-test__message">
-            <p class="quick-test__message__text">{{ sentence.text }}</p>
-            <div
-              v-if="hasError(sentence)"
-              class="quick-test__message__subtext__container">
-              <p class="quick-test__message__subtext">
-                {{ $t('webapp.quick_test.error_quick_test') }} </p>
-            </div>
-            <loading v-else-if="isLoading(sentence)" />
-            <div
-              v-else
-              class="quick-test__message__subtext__container">
-              <p class="quick-test__message__subtext">
-                <span class="quick-test__message__subtext__dot"/>
-                <span> <strong>{{ $t('webapp.quick_test.intent') }}: </strong>
-                  {{ sentence.intent.name }} ({{ sentence.intent.confidence | percent }}) </span>
-              </p>
-              <div class="field is-grouped is-grouped-centered">
-                <b-button
-                  class="quick-test__message__button"
-                  icon-left="chart-pie"
-                  @click="debug(sentence)"> {{ $t('webapp.quick_test.debug') }} </b-button>
-                <b-button
-                  class="quick-test__message__button"
-                  icon-left="file-document-outline"
-                  @click="showRawInfo(sentence)"> {{ $t('webapp.quick_test.raw') }}
-                </b-button>
-              </div>
-            </div>
-          </div>
+            :text="sentence.text"
+            :language="sentence.language"
+            :version="repositoryVersion"
+            :repository-uuid="repository.uuid" />
         </div>
 
         <div
@@ -75,21 +49,18 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import RepositoryDebug from '@/components/repository/debug/Debug';
-import Loading from '@/components/shared/Loading';
-import RawInfo from '@/components/shared/RawInfo';
 import { mapActions, mapState } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
+import QuickTestText from '@/components/quick-test/QuickTestText';
 
 export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
-    RepositoryDebug,
-    Loading,
     TextAreaInput,
     LanguageAppendSelectInput,
+    QuickTestText,
   },
   props: {
     repository: {
@@ -139,34 +110,20 @@ export default {
     hasError(sentence) {
       return !(sentence.error === null || sentence.error === undefined);
     },
-    async sendMessage() {
+    sendMessage() {
       const sentenceInput = this.sentenceInput.trim();
       if (sentenceInput === '' || !this.selectedLanguage) {
         this.sentenceInput = sentenceInput;
         return;
       }
       const id = Date.now();
+
       this.sentences.push({
         id,
         text: sentenceInput,
-        intent: null,
-        error: null,
+        language: this.selectedLanguage,
       });
       this.sentenceInput = '';
-
-      try {
-        const response = await this.analyzeText({
-          repositoryUUID: this.repository.uuid,
-          repositoryVersion: this.repositoryVersion,
-          language: this.selectedLanguage,
-          text: sentenceInput,
-        });
-        const index = this.sentences.findIndex(entry => entry.id === id);
-        this.$set(this.sentences, index, { id, ...response.data });
-      } catch (e) {
-        const index = this.sentences.findIndex(entry => entry.id === id);
-        this.sentences[index].error = e;
-      }
     },
     toggle() {
       this.$emit('expanded');
@@ -174,30 +131,6 @@ export default {
     },
     setLanguage(language) {
       this.selectedLanguage = language;
-    },
-    showRawInfo(sentence) {
-      const { id, ...info } = sentence;
-      this.$buefy.modal.open({
-        props: { info },
-        parent: this,
-        component: RawInfo,
-        hasModalCard: false,
-        trapFocus: true,
-      });
-    },
-    debug(sentence) {
-      this.$buefy.modal.open({
-        parent: this,
-        component: RepositoryDebug,
-        props: {
-          repositoryUUID: this.repository.uuid,
-          version: sentence.repository_version,
-          language: sentence.language,
-          text: sentence.text,
-        },
-        hasModalCard: false,
-        trapFocus: true,
-      });
     },
   },
 };
@@ -231,41 +164,6 @@ export default {
         right: 0;
         z-index: 9;
         pointer-events: none;
-
-        &__message {
-
-          margin: 0 0 1.5rem 0;
-
-          &__text {
-            margin: 0 1.175rem 0 0;
-            color: #707070;
-            text-align: left;
-            font-weight: bold;
-            font-size: 18px;
-          }
-
-          &__button {
-            margin: 0 1rem 0 0;
-            color: #707070;
-          }
-
-          &__subtext {
-            display: flex;
-            vertical-align: middle;
-            font-size: 0.75rem;
-            color: #707070;
-            margin: 0.6rem 0.6rem 0.6rem 1.75rem;
-
-            &__dot {
-              margin-right: 0.5rem;
-              height: 1rem;
-              width: 1rem;
-              background-color: #2BBFAC;
-              border-radius: 50%;
-              display: inline-block;
-            }
-          }
-        }
 
         &__collapse-button {
           cursor: pointer;
