@@ -74,9 +74,6 @@ export default {
     onItemDeleted() {
       this.$emit('exampleDeleted');
     },
-    show() {
-      this.$emit('updated', this.updateExamples);
-    },
   },
 };
 </script>
