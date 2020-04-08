@@ -83,9 +83,13 @@ export default {
     languages() {
       return this.repository.available_languages;
     },
+    defaultLanguage() {
+      if (!this.repository) return null;
+      return this.repository.language;
+    },
   },
   watch: {
-    repository() {
+    defaultLanguage() {
       this.updateRepositoryLanguage();
     },
   },
@@ -97,12 +101,7 @@ export default {
       'analyzeText',
     ]),
     updateRepositoryLanguage() {
-      if (!this.repository) {
-        this.selectedLanguage = null;
-        return;
-      }
-
-      this.selectedLanguage = this.repository.language;
+      this.selectedLanguage = this.defaultLanguage;
     },
     isLoading(sentence) {
       return sentence.intent === null;

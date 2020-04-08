@@ -35,7 +35,7 @@
             <p
               v-for="entity in entitiesList"
               :key="entity.entity"
-              class="quick-test-text__subtext">
+              class="quick-test-text__subtext quick-test-text__entity-item">
               <span :class="['quick-test-text__subtext__dot', colorClasses[entity.entity]]"/>
               {{ entity.entity }}
             </p>
@@ -145,21 +145,20 @@ export default {
       'analyzeText',
     ]),
     async load() {
-      this.data = this.test();
-    //   this.loading = true;
-    //   try {
-    //     const response = await this.analyzeText({
-    //       repositoryUUID: this.repositoryUuid,
-    //       repositoryVersion: this.version,
-    //       language: this.language,
-    //       text: this.text,
-    //     });
-    //     this.data = response.data;
-    //   } catch (e) {
-    //     this.error = e;
-    //   } finally {
-    //     this.loading = false;
-    //   }
+      this.loading = true;
+      try {
+        const response = await this.analyzeText({
+          repositoryUUID: this.repositoryUuid,
+          repositoryVersion: this.version,
+          language: this.language,
+          text: this.text,
+        });
+        this.data = response.data;
+      } catch (e) {
+        this.error = e;
+      } finally {
+        this.loading = false;
+      }
     },
     showRawInfo() {
       this.$buefy.modal.open({
@@ -183,42 +182,6 @@ export default {
         hasModalCard: false,
         trapFocus: true,
       });
-    },
-    test() {
-      return {
-        intent: {
-          name: 'true',
-          confidence: 0.9539737105369568,
-        },
-        intent_ranking: [
-          {
-            name: 'true',
-            confidence: 0.9539737105369568,
-          },
-          {
-            name: 'false',
-            confidence: 0,
-          },
-        ],
-        labels_list: [
-          'other',
-        ],
-        entities_list: [
-          'possum',
-        ],
-        entities: {
-          other: [
-            {
-              value: 'possum',
-              entity: 'possum',
-              confidence: 0.952185173891061,
-            },
-          ],
-        },
-        text: 'possum is good',
-        repository_version: 9893,
-        language: 'en',
-      };
     },
   },
 };
@@ -244,9 +207,13 @@ export default {
     &__entities {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: flex-start;
       justify-content: flex-start;
-      column-gap: 0.3rem;
+      column-gap: 0.8rem;
+    }
+
+    &__entity-item {
+      margin: 0 0 0.3rem;
     }
 
     &__content {
