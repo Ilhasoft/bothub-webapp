@@ -40,8 +40,6 @@ export default {
   },
   computed: {
     entitiesBlocks() {
-      console.log(this.entities[0].start);
-
       return this.entities
         .map(({ start, end, entity }) => {
           const color = getEntityColor(

@@ -20,11 +20,28 @@
     <div
       v-else-if="data"
       class="quick-test-text__subtext__container">
-      <p class="quick-test-text__subtext">
-        <span class="quick-test-text__subtext__dot"/>
-        <span> <strong>{{ $t('webapp.quick_test.intent') }}: </strong>
-          {{ data.intent.name }} ({{ data.intent.confidence | percent }}) </span>
-      </p>
+      <div class="quick-test-text__content">
+        <p class="quick-test-text__subtext">
+          <span> <strong>{{ $t('webapp.quick_test.intent') }}: </strong>
+            {{ data.intent.name }} ({{ data.intent.confidence | percent }}) </span>
+        </p>
+        <div class = "quick-test-text__entities">
+          <span class="quick-test-text__subtext">
+            <strong>
+              {{ $t('webapp.quick_test.entities') }}:
+            </strong>
+          </span>
+          <div>
+            <p
+              v-for="entity in entitiesList"
+              :key="entity.entity"
+              class="quick-test-text__subtext">
+              <span :class="['quick-test-text__subtext__dot', colorClasses[entity.entity]]"/>
+              {{ entity.entity }}
+            </p>
+          </div>
+        </div>
+      </div>
       <div class="field is-grouped is-grouped-centered">
         <b-button
           class="quick-test-text__button"
@@ -47,6 +64,7 @@ import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import HighlightedText from '@/components/shared/HighlightedText';
 import { getWordIndex } from '@/utils';
+import { getEntityColor } from '@/utils/entitiesColors';
 
 export default {
   name: 'QuickTestText',
@@ -105,6 +123,18 @@ export default {
           };
         });
       });
+    },
+    colorClasses() {
+      return this.entitiesList.reduce((list, entity) => {
+        const color = getEntityColor(
+          entity.entity,
+          this.allEntities,
+          this.entitiesList,
+        );
+        // eslint-disable-next-line no-param-reassign
+        list[entity.entity] = `entity-${color}`;
+        return list;
+      }, {});
     },
   },
   mounted() {
@@ -211,18 +241,29 @@ export default {
         color: #707070;
     }
 
+    &__entities {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      column-gap: 0.3rem;
+    }
+
+    &__content {
+      margin: 0.6rem 0.6rem 0.6rem 1.75rem;
+    }
+
     &__subtext {
         display: flex;
         vertical-align: middle;
         font-size: 0.75rem;
         color: #707070;
-        margin: 0.6rem 0.6rem 0.6rem 1.75rem;
 
             &__dot {
               margin-right: 0.5rem;
               height: 1rem;
               width: 1rem;
-              background-color: #2BBFAC;
+              // background-color: #2BBFAC;
               border-radius: 50%;
               display: inline-block;
             }
