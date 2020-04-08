@@ -18,7 +18,8 @@
             :text="sentence.text"
             :language="sentence.language"
             :version="sentence.version"
-            :repository-uuid="sentence.repositoryUUID" />
+            :repository-uuid="sentence.repositoryUUID"
+            :all-entities="repository.entities" />
         </div>
 
         <div

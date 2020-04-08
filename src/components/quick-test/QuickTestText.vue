@@ -2,11 +2,11 @@
   <div
     class="quick-test-text">
     <p
-      v-if="!data"
-      class="quick-test-text__text">{{ text }}</p>
+      v-if="!data || entitiesList.length === 0"
+      class="quick-test-text__text">{{ displayText }}</p>
     <highlighted-text
       v-else
-      :text="data.text"
+      :text="displayText"
       :entities="entitiesList"
       :all-entities="allEntities"
       class="quick-test-text__text" />
@@ -25,7 +25,9 @@
           <span> <strong>{{ $t('webapp.quick_test.intent') }}: </strong>
             {{ data.intent.name }} ({{ data.intent.confidence | percent }}) </span>
         </p>
-        <div class = "quick-test-text__entities">
+        <div
+          v-if="entitiesList.length > 0"
+          class = "quick-test-text__entities">
           <span class="quick-test-text__subtext">
             <strong>
               {{ $t('webapp.quick_test.entities') }}:
@@ -89,6 +91,10 @@ export default {
       type: String,
       required: true,
     },
+    allEntities: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -105,11 +111,8 @@ export default {
       if (this.data) return this.data.text;
       return this.text;
     },
-    allEntities() {
-      if (!this.data || !this.data.entities_list) return [];
-      return this.data.entities_list.map((entity, index) => ({ id: index, value: entity }));
-    },
     entitiesList() {
+      if (!this.data) return [];
       return Object.entries(this.data.entities).flatMap((entry) => {
         const [label, entities] = entry;
         return entities.map((entity) => {
