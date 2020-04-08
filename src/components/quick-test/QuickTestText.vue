@@ -1,7 +1,15 @@
 <template>
   <div
     class="quick-test-text">
-    <p class="quick-test-text__text">{{ displayText }}</p>
+    <p
+      v-if="!data"
+      class="quick-test-text__text">{{ text }}</p>
+    <highlighted-text
+      v-else
+      :text="data.text"
+      :entities="entitiesList"
+      :all-entities="allEntities"
+      class="quick-test-text__text" />
     <div
       v-if="error"
       class="quick-test-text__subtext__container">
@@ -37,11 +45,14 @@ import { mapActions, mapState } from 'vuex';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
+import HighlightedText from '@/components/shared/HighlightedText';
+import { getWordIndex } from '@/utils';
 
 export default {
   name: 'QuickTestText',
   components: {
     Loading,
+    HighlightedText,
   },
   props: {
     text: {
@@ -75,6 +86,25 @@ export default {
     displayText() {
       if (this.data) return this.data.text;
       return this.text;
+    },
+    allEntities() {
+      if (!this.data || !this.data.entities_list) return [];
+      return this.data.entities_list.map((entity, index) => ({ id: index, value: entity }));
+    },
+    entitiesList() {
+      return Object.entries(this.data.entities).flatMap((entry) => {
+        const [label, entities] = entry;
+        return entities.map((entity) => {
+          const { start, end } = getWordIndex(entity.value, this.displayText);
+          return {
+            label,
+            start,
+            end,
+            entity: entity.entity,
+            value: entity.value,
+          };
+        });
+      });
     },
   },
   mounted() {
