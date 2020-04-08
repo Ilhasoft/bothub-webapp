@@ -17,8 +17,8 @@
             :key="sentence.id"
             :text="sentence.text"
             :language="sentence.language"
-            :version="repositoryVersion"
-            :repository-uuid="repository.uuid" />
+            :version="sentence.version"
+            :repository-uuid="sentence.repositoryUUID" />
         </div>
 
         <div
@@ -49,7 +49,7 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
@@ -81,6 +81,7 @@ export default {
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
     languages() {
+      if (!this.repository) return [];
       return this.repository.available_languages;
     },
     defaultLanguage() {
@@ -97,17 +98,8 @@ export default {
     this.updateRepositoryLanguage();
   },
   methods: {
-    ...mapActions([
-      'analyzeText',
-    ]),
     updateRepositoryLanguage() {
       this.selectedLanguage = this.defaultLanguage;
-    },
-    isLoading(sentence) {
-      return sentence.intent === null;
-    },
-    hasError(sentence) {
-      return !(sentence.error === null || sentence.error === undefined);
     },
     sendMessage() {
       const sentenceInput = this.sentenceInput.trim();
@@ -121,6 +113,8 @@ export default {
         id,
         text: sentenceInput,
         language: this.selectedLanguage,
+        version: this.repositoryVersion,
+        repositoryUUID: this.repositoryUUID,
       });
       this.sentenceInput = '';
     },
