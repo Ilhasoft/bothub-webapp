@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="authorizationsList"
       ref="list"
       :item-component="authorizationItemElem"
@@ -13,12 +13,12 @@
 <script>
 import { mapActions } from 'vuex';
 
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
 
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {

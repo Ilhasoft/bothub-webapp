@@ -7,8 +7,8 @@ export default {
     const response = await translate.new(exampleId, language, text, entities);
     return response;
   },
-  async getTranslations(store, { repositoryUuid, ...query }) {
-    return translate.translations(repositoryUuid, query);
+  async getTranslations(store, { limit = 20, repositoryUuid, ...query }) {
+    return translate.translations(repositoryUuid, query, limit);
   },
   async deleteTranslation(store, { translationId }) {
     return translate.delete(translationId);

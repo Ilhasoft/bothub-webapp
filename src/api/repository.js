@@ -137,9 +137,8 @@ export default {
       { role },
     );
   },
-  getAuthorizationList(repositoryUuid) {
-    const queryString = qs.stringify({ repository: repositoryUuid });
-    return new utils.List(`/v2/repository/authorizations/?${queryString}`);
+  getAuthorizationList(repositoryUuid, limit) {
+    return new utils.Page('/v2/repository/authorizations/', limit, { repository: repositoryUuid });
   },
   async getRequestAuthorizationSchema() {
     const { data } = await request.$http.options('/v2/repository/authorization-requests/');

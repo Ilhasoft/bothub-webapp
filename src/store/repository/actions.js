@@ -111,8 +111,8 @@ export default {
       newRole,
     );
   },
-  repositoryAuthorizationList(store, { repositoryUuid }) {
-    return repository.getAuthorizationList(repositoryUuid);
+  repositoryAuthorizationList(store, { repositoryUuid, limit = 20 }) {
+    return repository.getAuthorizationList(repositoryUuid, limit);
   },
   async getRequestRepositoryAuthorizationSchema() {
     const response = await repository.getRequestAuthorizationSchema();
