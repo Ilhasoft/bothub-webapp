@@ -92,7 +92,7 @@ export default {
     repositoryUUID() {
       if (!this.repository) return null;
       return this.repository.uuid;
-    }
+    },
   },
   watch: {
     defaultLanguage() {
