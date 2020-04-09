@@ -152,6 +152,7 @@
       "add_entity": "Add entity",
       "add_entity_for": "Add entity for",
       "add_a_sentence": "Add a sentence",
+      "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "intent": "Intent"
     },
     "translate": {
