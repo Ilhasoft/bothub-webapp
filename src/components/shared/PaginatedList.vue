@@ -5,6 +5,7 @@
       :key="item.key"
       :is="itemComponent"
       v-bind="addAttrs(item)"
+      @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">
       <loading v-if="loading" />
@@ -104,6 +105,9 @@ export default {
     },
     addAttrs(obj) {
       return Object.assign({ editable: this.editable }, obj, this.$attrs);
+    },
+    onItemDeleted(id) {
+      this.$emit('itemDeleted', id);
     },
   },
 };
