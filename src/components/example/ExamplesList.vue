@@ -30,6 +30,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -45,6 +49,9 @@ export default {
   },
   watch: {
     query() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
     repository() {
