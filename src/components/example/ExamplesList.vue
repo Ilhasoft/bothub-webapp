@@ -35,6 +35,10 @@ export default {
       type: Number,
       default: 20,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -50,6 +54,9 @@ export default {
   },
   watch: {
     query() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
     repository() {

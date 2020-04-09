@@ -14,7 +14,7 @@
                 <span>{{ $t('webapp.trainings.grid_text2') }}</span>
                 <new-example-form
                   :repository="repository"
-                  @created="onExampleCreated()" />
+                  @created="updatedExampleList()" />
               </div>
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
@@ -63,7 +63,9 @@
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
-          @exampleDeleted="onExampleDeleted" />
+          :update="update"
+          @exampleDeleted="onExampleDeleted"
+        />
       </div>
     </div>
     <train-modal
@@ -118,6 +120,7 @@ export default {
       trainResponseOpen: false,
       querySchema: {},
       query: {},
+      update: false,
       training: false,
     };
   },
@@ -172,8 +175,8 @@ export default {
       });
       this.updateRepository(false);
     },
-    onExampleCreated() {
-      this.updateRepository(true);
+    updatedExampleList() {
+      this.update = !this.update;
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;

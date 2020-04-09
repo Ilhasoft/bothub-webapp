@@ -41,7 +41,7 @@
         <div
           v-if="!loadingIntentsChart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <canvas
           id="intentsChart"
@@ -54,7 +54,7 @@
         <div
           v-if="!loadingEntitiesChart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <canvas
           id="entitiesChart"
@@ -79,7 +79,7 @@
         <div
           v-if="!chartData.matrix_chart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <img
           v-if="chartData.matrix_chart"
@@ -110,7 +110,7 @@
         <div
           v-if="!chartData.confidence_chart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <img
           v-if="chartData.confidence_chart"
@@ -124,9 +124,13 @@
 <script>
 import { mapState } from 'vuex';
 import Chart from 'chart.js';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'GraphicsResult',
+  components: {
+    Loading,
+  },
   props: {
     chartData: {
       type: Object,
