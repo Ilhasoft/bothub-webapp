@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="translationsList"
       :item-component="translationItemElem"
       :list="translationsList"
@@ -14,12 +14,12 @@
 
 <script>
 import { mapActions } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import TranslationItem from './TranslationItem';
 
 
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {
