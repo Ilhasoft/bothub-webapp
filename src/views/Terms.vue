@@ -23,7 +23,6 @@
       or incapable in any respect, you will need permission from your parents
       or guardians who must also agree to this term and conditions.
     </p>
-
     <p class="termsStyle__content__bold">
       BY USING BOTHUB, YOU AUTOMATICALLY AGREE TO THESE TERMS OF USE, BE RESPONSIBLE FOR COMPLETELY BY ALL AND ANY ACTS PRACTICED BY YOU IN BOTHUB OR IN RELATED SERVICES. YOU ALSO AGREE TO BE BOUND BY THE TERMS DESCRIBED IN OUR PRIVACY POLICY. TO ACCESS IT, CLICK HERE <a href="/terms">(https://bothub.it/terms).</a>
     </p>
