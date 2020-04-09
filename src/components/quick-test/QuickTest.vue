@@ -89,6 +89,10 @@ export default {
       if (!this.repository) return null;
       return this.repository.language;
     },
+    repositoryUUID() {
+      if (!this.repository) return null;
+      return this.repository.uuid;
+    }
   },
   watch: {
     defaultLanguage() {
