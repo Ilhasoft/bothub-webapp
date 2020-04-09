@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`AuthorizationsList.vue renders correctly 1`] = `
-<div>
-  <paginated-list-stub itemcomponent="[object Object]" list="[object Object]" perpage="20"></paginated-list-stub>
-  <p>No users in your team.</p>
-</div>
-`;
