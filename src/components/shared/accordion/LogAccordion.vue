@@ -5,14 +5,18 @@
       :closable="false">
       <b-loading :active.sync="loading"/>
     </b-notification>
-
     <sentence-accordion
       :open.sync="open">
+
+      <div slot="check">
+        <b-checkbox
+          v-model="data"
+          :native-value="toExample"/>
+      </div>
 
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ version_name }} </span>
         <div class="column">
           <language-badge :language="nlp_log.language"/>
         </div>
@@ -29,33 +33,11 @@
             :entities="entitiesList"
             :all-entities="repository.entities || repository.entities_list" />
         </div>
+
       </div>
-
-      <div slot="options">
-
-        <b-dropdown
-          v-if="editable"
-          class="log-accordion__dropdown"
-          aria-role="list"
-          @click.native.stop>
-          <button
-            slot="trigger"
-            class="button is-text">
-            <b-icon icon="plus"/>
-          </button>
-
-          <p class="log-accordion__menu-title"> {{ $t('webapp.inbox.add_to') }} </p>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click.native.stop="showModal('Training')">
-            {{ $t('webapp.inbox.training') }}
-          </b-dropdown-item>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click.native.stop="showModal('Test Sentences')">
-            {{ $t('webapp.inbox.test_sentences') }}
-          </b-dropdown-item>
-        </b-dropdown>
+      <div
+        slot="options">
+        <span class="column log-accordion__version-name"> {{ version_name }} </span>
       </div>
 
       <div slot="body">
@@ -124,6 +106,7 @@ export default {
       isRawInfoActive: false,
       intent: '',
       isCorrected: Boolean,
+      data: [],
     };
   },
   computed: {
@@ -166,7 +149,11 @@ export default {
         is_corrected: this.isCorrected,
       };
     },
-
+  },
+  watch: {
+    data() {
+      return this.$root.$emit('selected', this.data);
+    },
   },
   methods: {
     ...mapActions([
@@ -301,7 +288,6 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
-
 .log-accordion {
   &__menu-title {
     margin: 1rem;
