@@ -3,13 +3,13 @@
     <div
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
-      <div class="dashboard-layout__main-panel__header" >
-        <div class="dashboard-layout__main-panel__header__info" >
+      <div class="dashboard-layout__main-panel__header">
+        <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
             <bh-icon
               value="botinho"
               size="large"
-              class="dashboard-layout__main-panel__header__info__badge__icon" />
+              class="dashboard-layout__main-panel__header__info__badge__icon"/>
           </div>
           <div
             v-show="hasLoaded"
@@ -31,9 +31,10 @@
           </div>
         </div>
         <div
-          v-show="hasLoaded"
           class="dashboard-layout__main-panel__header__right">
-          <div class="dashboard-layout__main-panel__header__right__icons">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="language" />
             <span>{{
@@ -41,7 +42,9 @@
                 getCurrentRepository.available_languages.length :
             0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
-          <div class="dashboard-layout__main-panel__header__right__icons">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
             <span>
@@ -49,6 +52,7 @@
             </span>
           </div>
           <div
+            v-show="hasLoaded"
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
@@ -56,19 +60,18 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
+            v-show="hasLoaded"
             position="is-bottom-left"
             aria-role="list">
-            <div
+            <user-avatar
               slot="trigger"
-              class="dashboard-layout__main-panel__profile">
-              <user-avatar
-                :profile="myProfile"
-                size="medium"
-                class="dashboard-layout__main-panel__header__right__user"/>
-              <b-icon
-                icon="chevron-down"
-                class="dashboard-layout__main-panel__header__right__icon"/>
-            </div>
+              :profile="myProfile"
+              size="medium"
+              class="dashboard-layout__main-panel__header__right__user"/>
+            <b-icon
+              slot="trigger"
+              icon="chevron-down"
+              class="dashboard-layout__main-panel__header__right__icon"/>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -97,8 +100,8 @@
               aria-role="listitem"
               @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
+          <side-bar @collapse="collapseHandle()" />
         </div>
-        <side-bar @collapse="collapseHandle()" />
       </div>
       <router-view />
     </div>
@@ -176,9 +179,6 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
-@import '~bh/src/assets/scss/variables.scss';
-
-$medium-screen: 1035px;
 
 html{
   overflow-y:auto
@@ -188,13 +188,6 @@ html{
     width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
     float: right;
-
-    &__profile {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-    }
 
     &__header {
       position: fixed;
@@ -278,11 +271,7 @@ html{
         }
 
         &__user {
-          margin: 0 0 0 3rem;
-
-          @media screen and (max-width: $medium-screen) {
-            margin: 1.3rem  0 0 0;
-          }
+          margin-left: 3rem;
         }
       }
     }
