@@ -1,15 +1,13 @@
 <template>
   <div class="dashboard-layout">
-    <side-bar @collapse="collapseHandle()" />
     <b-loading
       :is-full-page="isFullPage"
-      :active.sync="getCurrentRepository.name ? false : true" />
+      :active="!hasLoaded"/>
     <div
-      v-show="getCurrentRepository.name ? true : false"
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
-      <div class="dashboard-layout__main-panel__header">
-        <div class="dashboard-layout__main-panel__header__info">
+      <div class="dashboard-layout__main-panel__header" >
+        <div class="dashboard-layout__main-panel__header__info" >
           <div class="dashboard-layout__main-panel__header__info__badge">
             <bh-icon
               value="botinho"
@@ -17,6 +15,7 @@
               class="dashboard-layout__main-panel__header__info__badge__icon" />
           </div>
           <div
+            v-show="hasLoaded"
             class="
             dashboard-layout__main-panel__header__info__left">
             <div
@@ -34,7 +33,9 @@
             </span>
           </div>
         </div>
-        <div class="dashboard-layout__main-panel__header__right">
+        <div
+          v-show="hasLoaded"
+          class="dashboard-layout__main-panel__header__right">
           <div class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="language" />
@@ -60,15 +61,17 @@
           <b-dropdown
             position="is-bottom-left"
             aria-role="list">
-            <user-avatar
+            <div
               slot="trigger"
-              :profile="myProfile"
-              size="medium"
-              class="dashboard-layout__main-panel__header__right__user"/>
-            <b-icon
-              slot="trigger"
-              icon="chevron-down"
-              class="dashboard-layout__main-panel__header__right__icon"/>
+              class="dashboard-layout__main-panel__profile">
+              <user-avatar
+                :profile="myProfile"
+                size="medium"
+                class="dashboard-layout__main-panel__header__right__user"/>
+              <b-icon
+                icon="chevron-down"
+                class="dashboard-layout__main-panel__header__right__icon"/>
+            </div>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -98,8 +101,8 @@
               @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
         </div>
+        <side-bar @collapse="collapseHandle()" />
       </div>
-      <router-view />
     </div>
     <new-repository-modal
       :active="isNewRepositoryModalOpen"
@@ -137,6 +140,10 @@ export default {
       'myProfile',
       'authenticated',
     ]),
+    hasLoaded() {
+      if (this.getCurrentRepository.name) return true;
+      return false;
+    },
     warningsCount() {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.languages_warnings_count) return 0;
@@ -171,6 +178,10 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+@import '~bh/src/assets/scss/variables.scss';
+
+$medium-screen: 1035px;
+
 html{
   overflow-y:auto
 }
@@ -179,6 +190,13 @@ html{
     width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
     float: right;
+
+    &__profile {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
 
     &__header {
       position: fixed;
@@ -262,7 +280,11 @@ html{
         }
 
         &__user {
-          margin-left: 3rem;
+          margin: 0 0 0 3rem;
+
+          @media screen and (max-width: $medium-screen) {
+            margin: 1.3rem  0 0 0;
+          }
         }
       }
     }
