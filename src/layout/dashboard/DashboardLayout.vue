@@ -1,8 +1,5 @@
 <template>
   <div class="dashboard-layout">
-    <b-loading
-      :is-full-page="isFullPage"
-      :active="!hasLoaded"/>
     <div
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
@@ -103,6 +100,7 @@
         </div>
         <side-bar @collapse="collapseHandle()" />
       </div>
+      <router-view />
     </div>
     <new-repository-modal
       :active="isNewRepositoryModalOpen"
