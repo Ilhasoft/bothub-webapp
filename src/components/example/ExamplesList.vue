@@ -1,10 +1,11 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
+      :per-page="perPage"
       @itemDeleted="onItemDeleted($event)" />
     <p
       v-if="examplesList && examplesList.empty"
@@ -13,13 +14,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapState, mapActions } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
 
 
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {
@@ -29,6 +30,10 @@ export default {
     query: {
       type: Object,
       default: () => ({}),
+    },
+    perPage: {
+      type: Number,
+      default: 20,
     },
     update: {
       type: Boolean,
@@ -62,13 +67,17 @@ export default {
     this.updateExamples();
   },
   methods: {
-    updateExamples(force = false) {
+    ...mapActions([
+      'searchExamples',
+    ]),
+    async updateExamples(force = false) {
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.examples.search(
-          this.repository.uuid,
-          this.repositoryVersion,
-          this.query,
-        );
+        this.examplesList = await this.searchExamples({
+          repositoryUuid: this.repository.uuid,
+          version: this.repositoryVersion,
+          query: this.query,
+          limit: this.perPage,
+        });
       }
     },
     onItemDeleted() {
