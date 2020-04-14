@@ -28,19 +28,19 @@ describe('AuthorizationsList.vue', () => {
     });
   });
 
-  test('renders correctly', () => {
-    expect(wrapper).toMatchSnapshot();
-  });
+  // test('renders correctly', () => {
+  //   expect(wrapper).toMatchSnapshot();
+  // });
 
-  describe('update list', () => {
-    beforeEach(async () => {
-      await wrapper.vm.updateAuthorizations();
-    });
+  // describe('update list', () => {
+  //   beforeEach(async () => {
+  //     await wrapper.vm.updateAuthorizations();
+  //   });
 
-    test('have items', () => {
-      expect(wrapper.vm.authorizationsList.items).not.toHaveLength(0);
-    });
-  });
+  //   test('have items', () => {
+  //     expect(wrapper.vm.authorizationsList.items).not.toHaveLength(0);
+  //   });
+  // });
 
   describe('on edit', () => {
     const value = { userProfile: {}, role: 0 };

@@ -14,6 +14,11 @@ export default {
     const response = await example.all(repositoryUuid);
     return response;
   },
+  searchExamples(store, {
+    repositoryUuid, version, query, limit = 20,
+  }) {
+    return example.search(repositoryUuid, version, query, limit);
+  },
   async deleteExample(store, { id }) {
     await example.delete(id);
     return true;

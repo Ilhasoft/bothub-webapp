@@ -1,5 +1,3 @@
-import qs from 'query-string';
-
 import request from './request';
 import utils from './utils';
 
@@ -16,9 +14,8 @@ export default {
       },
     );
   },
-  translations(repositoryUuid, query = {}) {
-    const queryString = qs.stringify({ repository_uuid: repositoryUuid, ...query });
-    return new utils.List(`/v2/repository/translation/?${queryString}`);
+  translations(repositoryUuid, query = {}, limit) {
+    return new utils.Page('/v2/repository/translation/', limit, { repository_uuid: repositoryUuid, ...query });
   },
   delete(translationId) {
     return request.$http.delete(`/v2/repository/translation/${translationId}/`);
