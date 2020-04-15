@@ -151,15 +151,30 @@ export default {
     },
   },
   watch: {
-    data() {
-      return this.$root.$emit('selected', this.data);
+    data(newValue, oldValue) {
+      if (this.data.length !== 0) {
+        return this.$store.dispatch('newLogSentence', this.data);
+      }
+      return this.$store.dispatch('removeLogSentence', oldValue);
     },
+  },
+  created() {
+    this.$root.$on('selectAll', value => this.selectAll(value));
   },
   methods: {
     ...mapActions([
       'newEvaluateExample',
       'newExample',
+      'newLogSentence',
+      'removeLogSentence',
     ]),
+    selectAll(value) {
+      if (value === true) {
+        this.data.push(this.toExample);
+      } else {
+        this.data = [];
+      }
+    },
     showError(error) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       const message = Array.join(messages, ',');

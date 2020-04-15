@@ -1,7 +1,29 @@
 <template>
 
   <div class="repository-log-list">
+    {{ getLogSentence }}
+    <div class="repository-log-list__buttons">
 
+      <div>
+        <b-checkbox
+          v-model="select"
+          :native-value="selectAll">
+          Select all
+        </b-checkbox>
+      </div>
+
+      <div>
+        <b-icon
+          icon="refresh"
+          class="repository-log-list__buttons__icons"/>
+        <b-icon
+          icon="chat-processing"
+          class="repository-log-list__buttons__icons"/>
+        <b-icon
+          icon="delete"
+          class="repository-log-list__buttons__icons"/>
+      </div>
+    </div>
     <paginated-list
       :per-page="perPage"
       :item-component="logAccordion"
@@ -19,7 +41,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 
@@ -50,21 +72,28 @@ export default {
       logAccordion: LogAccordion,
       versionsList: null,
       versions: [],
+      select: '',
+      selectAll: false,
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters(['getLogSentence']),
   },
   watch: {
     query() {
       this.updateLogs();
     },
+    select() {
+      this.$root.$emit('selectAll', this.select);
+    },
   },
   mounted() {
     this.updateLogs();
   },
+
   methods: {
     ...mapActions([
       'searchLogs',
@@ -81,6 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;
@@ -90,5 +120,20 @@ export default {
       margin: 2rem;
       text-align: center;
     }
+
+    &__buttons{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: $color-grey-dark;
+      font-size: 1.1rem;
+      font-weight: bold;
+      &__icons{
+      color: $color-grey-dark;
+      margin-right: 0.7rem;
+    }
+    }
+
+
   }
 </style>
