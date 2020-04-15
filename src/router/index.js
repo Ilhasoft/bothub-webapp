@@ -122,11 +122,6 @@ export default new Router({
           component: RepositoryEvaluate,
         },
         {
-          path: ':ownerNickname/:slug/versions/',
-          name: 'repository-versions',
-          component: RepositoryVersions,
-        },
-        {
           path: ':ownerNickname/:slug/log/',
           name: 'repository-log',
           component: RepositoryLog,
@@ -141,6 +136,12 @@ export default new Router({
           name: 'repository-result',
           component: RepositoryResult,
         },
+        ...(process.env.VERSION_ENABLED
+          ? [{
+            path: ':ownerNickname/:slug/versions/',
+            name: 'repository-versions',
+            component: RepositoryVersions,
+          }] : []),
       ],
     },
     {

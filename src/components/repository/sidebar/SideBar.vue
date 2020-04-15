@@ -104,6 +104,7 @@
               :label="$t('webapp.menu.general')"
               tag="router-link"/>
             <b-menu-item
+              v-if="versionEnabled"
               :to="{ name: 'repository-versions' }"
               :label="$t('webapp.menu.versions')"
               tag="router-link"/>
@@ -179,11 +180,12 @@
             @click="routerHandle('repository-settings')">
             {{ $t('webapp.menu.settings') }}
           </b-dropdown-item>
-          <!-- <b-dropdown-item
+          <b-dropdown-item
+            v-if="versionEnabled"
             aria-role="listitem"
             @click="routerHandle('repository-versions')">
             {{ $t('webapp.menu.versions') }}
-          </b-dropdown-item> -->
+          </b-dropdown-item>
         </b-dropdown>
       </div>
       <div/>
@@ -191,6 +193,7 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'SideBar',
@@ -201,6 +204,9 @@ export default {
       isTranslationsActive: false,
       collapse: true,
     };
+  },
+  computed: {
+    ...mapGetters(['versionEnabled']),
   },
   methods: {
     routerHandle(path) {
