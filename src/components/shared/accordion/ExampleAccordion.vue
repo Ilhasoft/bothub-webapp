@@ -173,8 +173,9 @@ export default {
     deleteThisExample() {
       return new Promise((resolve, reject) => {
         this.deleteDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure? The example will be deleted.',
-          confirmText: 'Delete',
+          message: this.$t('webapp.example.delete_text'),
+          confirmText: this.$t('webapp.example.delete'),
+          cancelText: this.$t('webapp.example.cancel'),
           type: 'is-danger',
           onConfirm: async () => {
             if (this.training) {
