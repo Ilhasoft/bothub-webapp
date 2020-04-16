@@ -16,6 +16,7 @@
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
+      "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
     },
     "login_modal": {

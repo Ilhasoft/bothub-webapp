@@ -16,6 +16,7 @@
       "read_for_train": "Your intelligence is ready to be trained",
       "request_authorization": "Request Authorization",
       "authorization_requested": "Authorization Requested",
+      "authorization_success": "Request made! Wait for review of an admin.",
       "error_to_retrieve_bot": "Error retrieving intelligence"
     },
     "login_modal": {
