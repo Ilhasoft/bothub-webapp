@@ -180,7 +180,7 @@ export default {
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
-      this.updateRepository(false);
+      this.update = !this.update;
     },
     async train(repositoryUuid) {
       this.training = true;
