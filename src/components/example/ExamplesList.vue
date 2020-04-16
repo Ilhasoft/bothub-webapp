@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loading v-if="examplesList.loading"/>
     <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
@@ -7,6 +8,7 @@
       :repository="repository"
       :per-page="perPage"
       @itemDeleted="onItemDeleted($event)" />
+
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -17,10 +19,11 @@
 import { mapState, mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
-
+import Loading from '@/components/shared/Loading';
 
 const components = {
   PaginatedList,
+  Loading,
 };
 
 export default {
@@ -44,6 +47,7 @@ export default {
     return {
       examplesList: null,
       exampleItemElem: ExampleItem,
+      loadingList: false,
     };
   },
   computed: {
