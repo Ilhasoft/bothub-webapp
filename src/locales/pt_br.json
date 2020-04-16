@@ -158,7 +158,10 @@
       "trained": "Treinado",
       "no_changes": "Sem alterações",
       "failed": "Falhou",
-      "intention_or_sentence_already_exist": "Intenção ou frase já existe"
+      "intention_or_sentence_already_exist": "Intenção ou frase já existe",
+      "delete_phrase_modal":"Tem certeza que deseja deletar essa frase?",
+      "delete_button":"Deletar",
+      "cancel_button":"Cancelar"
     },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
