@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Loading v-if="examplesList.loading"/>
+    <Loading v-if="initLoading || examplesList.loading"/>
     <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
@@ -47,7 +47,7 @@ export default {
     return {
       examplesList: null,
       exampleItemElem: ExampleItem,
-      loadingList: false,
+      initLoading: true,
     };
   },
   computed: {
@@ -83,6 +83,7 @@ export default {
           limit: this.perPage,
         });
       }
+      this.initLoading = false;
     },
     onItemDeleted() {
       this.$emit('exampleDeleted');
