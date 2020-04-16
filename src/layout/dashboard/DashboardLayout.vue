@@ -1,11 +1,6 @@
 <template>
   <div class="dashboard-layout">
-    <side-bar @collapse="collapseHandle()" />
-    <b-loading
-      :is-full-page="isFullPage"
-      :active.sync="getCurrentRepository.name ? false : true" />
     <div
-      v-show="getCurrentRepository.name ? true : false"
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
       <div class="dashboard-layout__main-panel__header">
@@ -14,9 +9,10 @@
             <bh-icon
               value="botinho"
               size="large"
-              class="dashboard-layout__main-panel__header__info__badge__icon" />
+              class="dashboard-layout__main-panel__header__info__badge__icon"/>
           </div>
           <div
+            v-show="hasLoaded"
             class="
             dashboard-layout__main-panel__header__info__left">
             <div
@@ -34,8 +30,11 @@
             </span>
           </div>
         </div>
-        <div class="dashboard-layout__main-panel__header__right">
-          <div class="dashboard-layout__main-panel__header__right__icons">
+        <div
+          class="dashboard-layout__main-panel__header__right">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="language" />
             <span>{{
@@ -43,7 +42,9 @@
                 getCurrentRepository.available_languages.length :
             0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
-          <div class="dashboard-layout__main-panel__header__right__icons">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
             <span>
@@ -51,6 +52,7 @@
             </span>
           </div>
           <div
+            v-show="hasLoaded"
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
@@ -58,6 +60,7 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
+            v-show="hasLoaded"
             position="is-bottom-left"
             aria-role="list">
             <user-avatar
@@ -97,6 +100,7 @@
               aria-role="listitem"
               @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
+          <side-bar @collapse="collapseHandle()" />
         </div>
       </div>
       <router-view />
@@ -137,6 +141,10 @@ export default {
       'myProfile',
       'authenticated',
     ]),
+    hasLoaded() {
+      if (this.getCurrentRepository.name) return true;
+      return false;
+    },
     warningsCount() {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.languages_warnings_count) return 0;
@@ -171,6 +179,7 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+
 html{
   overflow-y:auto
 }
