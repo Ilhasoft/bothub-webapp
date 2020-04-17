@@ -23,7 +23,7 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <VersionDropdown />
+              <VersionDropdown v-if="versionEnabled" />
             </div>
             <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
@@ -140,6 +140,7 @@ export default {
       'getCurrentRepository',
       'myProfile',
       'authenticated',
+      'versionEnabled',
     ]),
     hasLoaded() {
       if (this.getCurrentRepository.name) return true;

@@ -14,7 +14,7 @@
     </div>
 
     <div
-      v-else
+      v-else-if="repository"
       class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
