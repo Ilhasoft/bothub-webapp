@@ -39,7 +39,6 @@
         slot="options">
         <span class="column log-accordion__version-name"> {{ version_name }} </span>
       </div>
-
       <div slot="body">
         <log-info
           :entities-list="entitiesList"
@@ -54,7 +53,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { getWordIndex } from '@/utils';
 import LogInfo from '@/components/shared/accordion/LogInfo';
@@ -113,6 +112,7 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters(['getLogSentence']),
     entities() {
       return Object.keys(this.nlp_log.entities).map(key => this.nlp_log.entities[key].map(
         (entity) => {
@@ -156,6 +156,9 @@ export default {
         return this.$store.dispatch('newLogSentence', this.data);
       }
       return this.$store.dispatch('removeLogSentence', oldValue);
+    },
+    nlp_log() {
+      return this.$root.$emit('nlp_values', this.nlp_log);
     },
   },
   created() {
@@ -247,39 +250,6 @@ export default {
         component: RawInfo,
         hasModalCard: false,
         trapFocus: true,
-      });
-    },
-    showModal(typeSentence) {
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp_log,
-          repository: this.repository,
-          titleHeader: typeSentence,
-        },
-        parent: this,
-        component: IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        events: {
-          addedIntent: (value, type) => {
-            if (type === 'Training') {
-              if (value === this.nlp_log.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToTraining(value);
-            } else {
-              if (value === this.nlp_log.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToSentences(value);
-            }
-            this.intent = value;
-          },
-        },
       });
     },
 

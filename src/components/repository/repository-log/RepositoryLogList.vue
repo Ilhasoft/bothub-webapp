@@ -2,7 +2,7 @@
 
   <div class="repository-log-list">
     {{ getLogSentence }}
-    <div class="repository-log-list__buttons">
+    <div class="repository-log-list__section">
 
       <div>
         <b-checkbox
@@ -12,16 +12,23 @@
         </b-checkbox>
       </div>
 
-      <div>
-        <b-icon
-          icon="refresh"
-          class="repository-log-list__buttons__icons"/>
-        <b-icon
-          icon="chat-processing"
-          class="repository-log-list__buttons__icons"/>
-        <b-icon
-          icon="delete"
-          class="repository-log-list__buttons__icons"/>
+      <div class="repository-log-list__section__buttonsIcon">
+        <div @click="showModal('Training')">
+          <b-icon
+            icon="refresh"
+            class="repository-log-list__section__icons"/>
+        </div>
+        <div @click="show">
+          <b-icon
+            icon="chat-processing"
+            class="repository-log-list__section__icons"/>
+        </div>
+        <div @click="show">
+          <b-icon
+            icon="delete"
+            class="repository-log-list__section__icons"/>
+        </div>
+
       </div>
     </div>
     <paginated-list
@@ -44,12 +51,14 @@
 import { mapState, mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
+import IntentModal from '@/components/repository/IntentModal';
 
 export default {
   name: 'RepositoryLogList',
   components: {
     PaginatedList,
     LogAccordion,
+    IntentModal,
   },
   props: {
     query: {
@@ -80,7 +89,7 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    ...mapGetters(['getLogSentence']),
+    ...mapGetters(['getLogSentence', 'getCurrentRepository']),
   },
   watch: {
     query() {
@@ -90,6 +99,9 @@ export default {
       this.$root.$emit('selectAll', this.select);
     },
   },
+  created() {
+    this.$root.$on('nlp_values', value => console.log(value));
+  },
   mounted() {
     this.updateLogs();
   },
@@ -98,6 +110,39 @@ export default {
     ...mapActions([
       'searchLogs',
     ]),
+    showModal(typeSentence) {
+      this.$buefy.modal.open({
+        props: {
+          info: this.nlp_log,
+          repository: this.repository,
+          titleHeader: typeSentence,
+        },
+        parent: this,
+        component: IntentModal,
+        hasModalCard: false,
+        trapFocus: true,
+        events: {
+          addedIntent: (value, type) => {
+            if (type === 'Training') {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToTraining(value);
+            } else {
+              if (value === this.nlp_log.intent.name) {
+                this.isCorrected = false;
+              } else {
+                this.isCorrected = true;
+              }
+              this.addToSentences(value);
+            }
+            this.intent = value;
+          },
+        },
+      });
+    },
     async updateLogs() {
       this.list = await this.searchLogs({
         repositoryUUID: this.repository.uuid,
@@ -121,19 +166,25 @@ export default {
       text-align: center;
     }
 
-    &__buttons{
+      &__section{
       display: flex;
       justify-content: space-between;
       align-items: center;
       color: $color-grey-dark;
       font-size: 1.1rem;
       font-weight: bold;
+
+      &__buttonsIcon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+    }
       &__icons{
       color: $color-grey-dark;
       margin-right: 0.7rem;
     }
     }
-
 
   }
 </style>
