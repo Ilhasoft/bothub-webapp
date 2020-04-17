@@ -7,5 +7,5 @@ module.exports = merge(prodEnv, {
   API_BASE_URL: JSON.stringify(process.env.API_BASE_URL || 'http://localhost:8000/'),
   BOTHUB_NLP_BASE_URL: JSON.stringify(process.env.BOTHUB_NLP_BASE_URL || 'http://localhost:2657/'),
   BOTHUB_WEBAPP_BASE_URL: JSON.stringify(process.env.BOTHUB_WEBAPP_BASE_URL || 'http://localhost:8080/'),
-  VERSION_ENABLED: false,
+  VERSION_ENABLED: JSON.stringify(process.env.VERSION_ENABLED || false),
 })
