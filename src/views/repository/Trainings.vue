@@ -170,7 +170,7 @@ export default {
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
-        message: 'Request made! Wait for review of an admin.',
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'is-success',
       });
       this.updateRepository(false);
@@ -180,7 +180,7 @@ export default {
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
-      this.updateRepository(false);
+      this.update = !this.update;
     },
     async train(repositoryUuid) {
       this.training = true;

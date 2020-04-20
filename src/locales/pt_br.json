@@ -16,6 +16,7 @@
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
+      "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
     },
     "login_modal": {
@@ -139,7 +140,10 @@
       "enter_sentence": "Digite sua frase aqui",
       "intent": "Intenção",
       "entity": "Entidade",
-      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção."
+      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
+      "delete_text": "Tem certeza? Este exemplo será deletado.",
+      "delete": "Deletar",
+      "cancel": "Cancelar"
     },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
