@@ -203,7 +203,7 @@ export default {
     }
 
     &__button {
-        margin: 0 1rem 0 0;
+        margin: 0 0.3rem 0 0;
         color: #707070;
     }
 
@@ -217,6 +217,7 @@ export default {
 
     &__entity-item {
       margin: 0 0 0.3rem;
+      display: flex;
     }
 
     &__content {
@@ -224,7 +225,7 @@ export default {
     }
 
     &__subtext {
-        display: flex;
+        margin-bottom: 0.3rem;
         vertical-align: middle;
         font-size: 0.75rem;
         color: #707070;

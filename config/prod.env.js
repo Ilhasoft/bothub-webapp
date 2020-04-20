@@ -12,5 +12,5 @@ module.exports = {
   MAILCHIMP_USER_ID: JSON.stringify(process.env.MAILCHIMP_USER_ID),
   MAILCHIMP_LIST_ID: JSON.stringify(process.env.MAILCHIMP_LIST_ID),
   VERSION: JSON.stringify(packageDict.version),
-  VERSION_ENABLED: false,
+  VERSION_ENABLED: JSON.stringify(process.env.VERSION_ENABLED || false),
 }
