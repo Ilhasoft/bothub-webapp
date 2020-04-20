@@ -215,7 +215,7 @@ export default {
 
         &__text-area {
             margin: 1.25rem 0.6rem 0.6rem 1.125rem;
-            overflow-y: scroll;
+            overflow-y: auto;
             height: 90%;
         }
     }
