@@ -29,8 +29,7 @@ class Repository extends ModelBase {
   defaults() {
     return {
       uuid: null,
-      owner: null,
-      owner__nickname: null,
+      owner: {},
       slug: '',
       name: '',
       description: '',
@@ -62,8 +61,7 @@ class Repository extends ModelBase {
   mutations() {
     return {
       uuid: String,
-      owner: Number,
-      owner__nickname: String,
+      owner: Object,
       slug: String,
       name: String,
       description: String,
@@ -102,7 +100,7 @@ class Repository extends ModelBase {
   onFetchSuccess(response) {
     super.onFetchSuccess(response);
     store.dispatch('setRepositoryRelatedUuid', {
-      ownerNickname: this.owner__nickname,
+      ownerNickname: this.owner.nickname,
       slug: this.slug,
       uuid: this.uuid,
       version: store.getters.getSelectedVersion,

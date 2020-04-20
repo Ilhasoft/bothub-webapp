@@ -148,8 +148,8 @@ export default {
     },
     warningsCount() {
       if (!this.getCurrentRepository
-        || !this.getCurrentRepository.languages_warnings_count) return 0;
-      return this.getCurrentRepository.languages_warnings_count;
+        || !this.getCurrentRepository.selectedRepositoryselectedRepository) return 0;
+      return Object.keys(this.getCurrentRepository.languages_warnings).length;
     },
   },
   methods: {

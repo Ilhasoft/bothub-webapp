@@ -14,8 +14,8 @@
     <div class="repository-info__info-item">
       <span>{{ $t('webapp.layout.created_by') }}</span>
       <strong class="medium text-color-primary-light">
-        {{ getProfile(repository.owner__nickname).name
-        || repository.owner__nickname }}
+        {{ getProfile(repository.owner.nickname).name
+        || repository.owner.nickname }}
       </strong>
     </div>
   </div>

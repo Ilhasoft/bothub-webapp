@@ -36,7 +36,7 @@ export default {
       return {
         name,
         params: {
-          ownerNickname: this.repository.owner__nickname,
+          ownerNickname: this.repository.owner.nickname,
           slug: this.repository.slug,
         },
       };
