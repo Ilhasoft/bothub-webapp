@@ -100,7 +100,7 @@ class Repository extends ModelBase {
   onFetchSuccess(response) {
     super.onFetchSuccess(response);
     store.dispatch('setRepositoryRelatedUuid', {
-      ownerNickname: this.owner.nickname,
+      ownerNickname: this.owner__nickname,
       slug: this.slug,
       uuid: this.uuid,
       version: store.getters.getSelectedVersion,
