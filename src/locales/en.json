@@ -163,9 +163,9 @@
       "no_changes": "No Changes",
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
-      "delete_phrase_modal":"Tem certeza que deseja deletar essa frase?",
-      "delete_button":"Deletar",
-      "cancel_button":"Cancelar"
+      "delete_phrase_modal":"Are you sure? The example will be deleted",
+      "delete_button":"Delete",
+      "cancel_button":"Cancel"
     },
     "translate": {
       "not_can_edit_repository": "You can not contribute to this intelligence",
