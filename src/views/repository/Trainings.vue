@@ -96,7 +96,7 @@ import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RepositoryBase from './Base';
-
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'RepositoryTrainings',
@@ -110,6 +110,7 @@ export default {
     RequestAuthorizationModal,
     TrainModal,
     TrainResponse,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
@@ -180,7 +181,7 @@ export default {
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
-      this.update = !this.update;
+      this.updatedExampleList();
     },
     async train(repositoryUuid) {
       this.training = true;
