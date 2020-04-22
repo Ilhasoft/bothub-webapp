@@ -180,7 +180,6 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
-
 html{
   overflow-y:auto
 }
@@ -260,7 +259,6 @@ html{
 
           }
         }
-
         &__icon {
           margin-left: 0.5rem;
           color: white;
@@ -268,12 +266,28 @@ html{
           height: 3rem;
           cursor: pointer;
           float: right;
-
         }
 
         &__user {
           margin-left: 3rem;
+          @media screen and (max-width: 52rem) {
+          margin-left: 2rem;
+          margin-bottom: 0.4rem;
+          }
         }
+
+        @media screen and (max-width: 52rem) {
+            display: flex;
+            flex-direction: column-reverse;
+            font-size: 13px;
+            margin-top: 0.5rem;
+            width: 20rem;
+        }
+      }
+
+      @media screen and (max-width: 52rem) {
+            padding: 0 0 0 2rem;
+            height: 7rem;
       }
     }
 

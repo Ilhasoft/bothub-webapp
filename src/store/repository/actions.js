@@ -34,7 +34,7 @@ export default {
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
-    return repository.search(querys);
+    return repository.search({ ...querys, limit: 21 });
   },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
