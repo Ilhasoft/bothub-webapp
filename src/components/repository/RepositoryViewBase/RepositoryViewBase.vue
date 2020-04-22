@@ -112,7 +112,7 @@ export default {
           return this.repository.name;
         }
 
-        return `${this.repository.owner__nickname}/${this.repository.slug}`;
+        return `${this.repository.owner.nickname}/${this.repository.slug}`;
       }
 
       return undefined;
