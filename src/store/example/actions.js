@@ -24,9 +24,9 @@ export default {
     return true;
   },
   async getExamplesToTranslate(store, {
-    repositoryUuid, from, to, query,
+    repositoryUuid, version, from, to, query,
   }) {
-    const response = await example.search(repositoryUuid, {
+    const response = await example.search(repositoryUuid, version, {
       language: from,
       has_not_translation_to: to,
       ordering: 'created_at',
