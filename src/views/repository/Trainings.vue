@@ -48,17 +48,10 @@
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
           <bh-button
-            v-if="loadingStatus"
+            v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
-            disabled
-            loading
-            color="secondary-light"
-            size="normal">
-            {{ $t('webapp.trainings.run_training') }}
-          </bh-button>
-          <bh-button
-            v-else-if="repository.examples__count > 0 && repository.authorization.can_write "
-            ref="training"
+            :disabled="loadingStatus"
+            :loading="loadingStatus"
             color="secondary-light"
             size="normal"
             @click="openTrainingModal">
