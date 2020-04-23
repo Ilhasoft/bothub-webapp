@@ -2,12 +2,13 @@
 import { mapGetters, mapActions, mapState } from 'vuex';
 import Repository from '@/models/repository';
 
-
+// eslint-disable-next-line prefer-const
+let repository = null;
 export default {
   name: 'RepositoryBase',
   data() {
     return {
-      repository: null,
+      repository,
       errorCode: null,
     };
   },
