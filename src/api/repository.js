@@ -81,6 +81,11 @@ export default {
       },
     );
   },
+  getRepositoryInfo(repositoryUUID) {
+    return request.$http.get(
+      `/v2/repository/repository-details/${repositoryUUID}/`,
+    );
+  },
   debugParse(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
       `/v2/repository/repository-details/${repositoryUUID}/debug_parse/`,

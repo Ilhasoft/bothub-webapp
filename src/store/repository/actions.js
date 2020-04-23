@@ -64,6 +64,13 @@ export default {
     const response = await repository.getEditSchema(repositoryUuid, repositoryVersion);
     return response;
   },
+  async getTrainingStatus(store, repositoryUUID) {
+    const response = await repository.getRepositoryInfo(repositoryUUID);
+    if (!response.data) return null;
+    // eslint-disable-next-line camelcase
+    const { ready_for_train, requirements_to_train, languages_warnings } = response.data;
+    return { ready_for_train, requirements_to_train, languages_warnings };
+  },
   editRepository(store, {
     ownerNickname,
     repositorySlug,
