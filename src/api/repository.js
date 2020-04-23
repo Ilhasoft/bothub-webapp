@@ -83,7 +83,7 @@ export default {
   },
   getRepositoryInfo(repositoryUUID) {
     return request.$http.get(
-      `/v2/repository/repository-details/${repositoryUUID}/`,
+      `/v2/repository/repository-info/${repositoryUUID}/`,
     );
   },
   debugParse(repositoryUUID, repositoryVersion, language, text) {
