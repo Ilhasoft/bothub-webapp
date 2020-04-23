@@ -1,6 +1,6 @@
 <template>
   <div class="evaluate-example-list">
-    <pagination
+    <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
       :list="examplesList"
@@ -13,15 +13,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapState, mapActions } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
 export default {
   name: 'EvaluateExampleList',
   components: {
-    Pagination,
+    PaginatedList,
   },
   props: {
     query: {
@@ -57,13 +57,16 @@ export default {
     this.updateExamples();
   },
   methods: {
-    updateExamples(force = false) {
+    ...mapActions([
+      'searchEvaluateExamples',
+    ]),
+    async updateExamples(force = false) {
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.evaluateExample.search(
-          this.repository.uuid,
-          this.repositoryVersion,
-          this.query,
-        );
+        this.examplesList = await this.searchEvaluateExamples({
+          repositoryUUID: this.repository.uuid,
+          version: this.repositoryVersion,
+          query: this.query,
+        });
       }
     },
     onItemDeleted() {

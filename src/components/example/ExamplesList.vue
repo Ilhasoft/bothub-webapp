@@ -1,11 +1,14 @@
 <template>
   <div>
-    <pagination
+    <Loading v-if="initLoading || examplesList.loading"/>
+    <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
+      :per-page="perPage"
       @itemDeleted="onItemDeleted($event)" />
+
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -13,13 +16,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapState, mapActions } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
-
+import Loading from '@/components/shared/Loading';
 
 const components = {
-  Pagination,
+  PaginatedList,
+  Loading,
 };
 
 export default {
@@ -30,11 +34,20 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    perPage: {
+      type: Number,
+      default: 20,
+    },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       examplesList: null,
       exampleItemElem: ExampleItem,
+      initLoading: true,
     };
   },
   computed: {
@@ -47,6 +60,9 @@ export default {
     query() {
       this.updateExamples(true);
     },
+    update() {
+      this.updateExamples(true);
+    },
     repository() {
       this.updateExamples(true);
     },
@@ -55,14 +71,19 @@ export default {
     this.updateExamples();
   },
   methods: {
-    updateExamples(force = false) {
+    ...mapActions([
+      'searchExamples',
+    ]),
+    async updateExamples(force = false) {
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.examples.search(
-          this.repository.uuid,
-          this.repositoryVersion,
-          this.query,
-        );
+        this.examplesList = await this.searchExamples({
+          repositoryUuid: this.repository.uuid,
+          version: this.repositoryVersion,
+          query: this.query,
+          limit: this.perPage,
+        });
       }
+      this.initLoading = false;
     },
     onItemDeleted() {
       this.$emit('exampleDeleted');

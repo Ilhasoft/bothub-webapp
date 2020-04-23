@@ -14,7 +14,7 @@
                 <span>{{ $t('webapp.trainings.grid_text2') }}</span>
                 <new-example-form
                   :repository="repository"
-                  @created="onExampleCreated()" />
+                  @created="updatedExampleList()" />
               </div>
               <div v-else>
                 <div class="bh-notification bh-notification--warning">
@@ -50,6 +50,8 @@
           <bh-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
+            :disabled="loadingStatus"
+            :loading="loadingStatus"
             color="secondary-light"
             size="normal"
             @click="openTrainingModal">
@@ -63,7 +65,9 @@
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
-          @exampleDeleted="onExampleDeleted" />
+          :update="update"
+          @exampleDeleted="onExampleDeleted"
+        />
       </div>
     </div>
     <train-modal
@@ -94,7 +98,7 @@ import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RepositoryBase from './Base';
-
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'RepositoryTrainings',
@@ -108,6 +112,7 @@ export default {
     RequestAuthorizationModal,
     TrainModal,
     TrainResponse,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
@@ -118,7 +123,9 @@ export default {
       trainResponseOpen: false,
       querySchema: {},
       query: {},
+      update: false,
       training: false,
+      loadingStatus: false,
     };
   },
   computed: {
@@ -130,6 +137,7 @@ export default {
     ...mapActions([
       'openLoginModal',
       'trainRepository',
+      'getTrainingStatus',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -150,6 +158,17 @@ export default {
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
+    async updateTrainingStatus() {
+      this.loadingStatus = true;
+      try {
+        const trainStatus = await this.getTrainingStatus(this.repository.uuid);
+        if (trainStatus) {
+          Object.assign(this.repository, trainStatus);
+        }
+      } finally {
+        this.loadingStatus = false;
+      }
+    },
     openTrainingModal() {
       if (!this.authenticated) {
         this.openLoginModal();
@@ -167,17 +186,19 @@ export default {
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
-        message: 'Request made! Wait for review of an admin.',
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'is-success',
       });
       this.updateRepository(false);
     },
-    onExampleCreated() {
-      this.updateRepository(true);
+    updatedExampleList() {
+      this.updateTrainingStatus();
+      this.update = !this.update;
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
-      this.updateRepository(false);
+      this.updateTrainingStatus();
+      this.updatedExampleList();
     },
     async train(repositoryUuid) {
       this.training = true;

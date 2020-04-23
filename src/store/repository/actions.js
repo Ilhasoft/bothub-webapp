@@ -34,7 +34,7 @@ export default {
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
-    return repository.search(querys);
+    return repository.search({ ...querys, limit: 21 });
   },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
@@ -59,10 +59,17 @@ export default {
     /* istanbul ignore next */
     return repository.analyze(repositoryUUID, repositoryVersion, language, text);
   },
-  async getEditRepositorySchema(store, { repositoryUuid }) {
+  async getEditRepositorySchema(store, { repositoryUuid, repositoryVersion }) {
     /* istanbul ignore next */
-    const response = await repository.getEditSchema(repositoryUuid);
+    const response = await repository.getEditSchema(repositoryUuid, repositoryVersion);
     return response;
+  },
+  async getTrainingStatus(store, repositoryUUID) {
+    const response = await repository.getRepositoryInfo(repositoryUUID);
+    if (!response.data) return null;
+    // eslint-disable-next-line camelcase
+    const { ready_for_train, requirements_to_train, languages_warnings } = response.data;
+    return { ready_for_train, requirements_to_train, languages_warnings };
   },
   editRepository(store, {
     ownerNickname,
@@ -111,8 +118,8 @@ export default {
       newRole,
     );
   },
-  repositoryAuthorizationList(store, { repositoryUuid }) {
-    return repository.getAuthorizationList(repositoryUuid);
+  repositoryAuthorizationList(store, { repositoryUuid, limit = 20 }) {
+    return repository.getAuthorizationList(repositoryUuid, limit);
   },
   async getRequestRepositoryAuthorizationSchema() {
     const response = await repository.getRequestAuthorizationSchema();
