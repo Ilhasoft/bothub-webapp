@@ -50,6 +50,8 @@
           <bh-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
+            :disabled="loadingStatus"
+            :loading="loadingStatus"
             color="secondary-light"
             size="normal"
             @click="openTrainingModal">
@@ -123,6 +125,7 @@ export default {
       query: {},
       update: false,
       training: false,
+      loadingStatus: false,
     };
   },
   computed: {
@@ -134,6 +137,7 @@ export default {
     ...mapActions([
       'openLoginModal',
       'trainRepository',
+      'getTrainingStatus',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -153,6 +157,17 @@ export default {
 
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
+    },
+    async updateTrainingStatus() {
+      this.loadingStatus = true;
+      try {
+        const trainStatus = await this.getTrainingStatus(this.repository.uuid);
+        if (trainStatus) {
+          Object.assign(this.repository, trainStatus);
+        }
+      } finally {
+        this.loadingStatus = false;
+      }
     },
     openTrainingModal() {
       if (!this.authenticated) {
@@ -177,10 +192,12 @@ export default {
       this.updateRepository(false);
     },
     updatedExampleList() {
+      this.updateTrainingStatus();
       this.update = !this.update;
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
+      this.updateTrainingStatus();
       this.updatedExampleList();
     },
     async train(repositoryUuid) {
