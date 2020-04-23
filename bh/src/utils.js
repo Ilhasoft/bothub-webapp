@@ -47,6 +47,8 @@ const VERBOSE_LANGUAGES = {
   ur: 'Urdu',
   zh: 'Chinese',
   ha: 'Hausa',
+  ka: 'Georgian',
+  kk: 'Kazakh',
 };
 
 export default {
