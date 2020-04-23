@@ -81,9 +81,9 @@ export default {
       },
     );
   },
-  getRepositoryInfo(repositoryUUID) {
+  getRepositoryInfo(repositoryUUID, version) {
     return request.$http.get(
-      `/v2/repository/repository-details/${repositoryUUID}/`,
+      `/v2/repository/info/${repositoryUUID}/${version}`,
     );
   },
   debugParse(repositoryUUID, repositoryVersion, language, text) {
