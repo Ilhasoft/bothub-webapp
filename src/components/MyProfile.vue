@@ -32,7 +32,7 @@
         <h1>{{ $t('webapp.my_profile.repositories') }}</h1>
       </div>
       <div class="bh-grid__item">
-        <pagination
+        <paginated-list
           v-if="repositoryList"
           :item-component="repositoryItemElem"
           :list="repositoryList"
@@ -68,7 +68,7 @@ import { mapGetters, mapActions } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import UserProfile from '@/components/user/UserProfile';
 import RepositoryCard from '@/components/repository/RepositoryCard';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import ChangePasswordForm from '@/components/user/ChangePasswordForm';
 import LoginIsRequired from '@/components/auth/LoginIsRequired';
@@ -80,7 +80,7 @@ export default {
   components: {
     Layout,
     UserProfile,
-    Pagination,
+    PaginatedList,
     EditProfileForm,
     ChangePasswordForm,
     UserAvatar,

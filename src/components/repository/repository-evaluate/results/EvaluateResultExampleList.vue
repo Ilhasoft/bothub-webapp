@@ -23,7 +23,7 @@
     <div
       v-if="!busy"
       class="evaluate-result-example-list__loading">
-      <bh-loading />
+      <Loading/>
     </div>
   </div>
   <p v-else>Dont log</p>
@@ -33,12 +33,13 @@
 import { mapActions, mapState } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
 import infiniteScroll from 'vue-infinite-scroll';
-
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'EvaluateResultExampleList',
   components: {
     EvaluateResultExampleItem,
+    Loading,
   },
   directives: { infiniteScroll },
   props: {

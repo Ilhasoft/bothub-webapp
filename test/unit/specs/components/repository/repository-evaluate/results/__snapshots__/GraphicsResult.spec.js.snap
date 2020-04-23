@@ -54,7 +54,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
     </div>
     <div class="graphics-results__charts">
       <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
+        <loading-stub></loading-stub>
       </div>
       <!---->
     </div>
@@ -78,7 +78,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
     </div>
     <div class="graphics-results__charts">
       <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
+        <loading-stub></loading-stub>
       </div>
       <!---->
     </div>
@@ -119,7 +119,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
         Intent report
       </h5>
       <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
+        <loading-stub></loading-stub>
       </div> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
     </div>
     <div>
@@ -127,7 +127,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
         Entities
       </h5>
       <div class="graphics-results__charts__loading">
-        <bh-loading-stub></bh-loading-stub>
+        <loading-stub></loading-stub>
       </div> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
     </div>
   </div>

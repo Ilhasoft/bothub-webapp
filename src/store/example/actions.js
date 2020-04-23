@@ -14,14 +14,19 @@ export default {
     const response = await example.all(repositoryUuid);
     return response;
   },
+  searchExamples(store, {
+    repositoryUuid, version, query, limit = 20,
+  }) {
+    return example.search(repositoryUuid, version, query, limit);
+  },
   async deleteExample(store, { id }) {
     await example.delete(id);
     return true;
   },
   async getExamplesToTranslate(store, {
-    repositoryUuid, from, to, query,
+    repositoryUuid, version, from, to, query,
   }) {
-    const response = await example.search(repositoryUuid, {
+    const response = await example.search(repositoryUuid, version, {
       language: from,
       has_not_translation_to: to,
       ordering: 'created_at',

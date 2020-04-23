@@ -10,6 +10,11 @@ export default {
     const response = await evaluateExample.new(repository, repositoryVersion, text, language, entities, intent, isCorrected);
     return response;
   },
+  searchEvaluateExamples(store, {
+    repositoryUUID, version, query, limit = 20,
+  }) {
+    return evaluateExample.search(repositoryUUID, version, query, limit);
+  },
   async updateEvaluateExample(store, {
     repository, text, language, entities, intent, id,
   }) {

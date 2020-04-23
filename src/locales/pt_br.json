@@ -16,6 +16,7 @@
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
+      "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
     },
     "login_modal": {
@@ -77,7 +78,8 @@
       "intent": "Intenção",
       "debug": "Debug",
       "raw": "Raw",
-      "add_a_sentence": "Adicionar uma frase"
+      "add_a_sentence": "Adicionar uma frase",
+      "entities": "Entidades"
     },
     "debug": {
       "word": "Palavra",
@@ -138,7 +140,10 @@
       "enter_sentence": "Digite sua frase aqui",
       "intent": "Intenção",
       "entity": "Entidade",
-      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção."
+      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
+      "delete_text": "Tem certeza? Este exemplo será deletado.",
+      "delete": "Deletar",
+      "cancel": "Cancelar"
     },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
@@ -152,7 +157,15 @@
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para",
       "add_a_sentence": "Adicionar uma frase",
-      "intent": "Intenção"
+      "intent": "Intenção",
+      "train_response_title": "Repositório treinado com sucesso!",
+      "trained": "Treinado",
+      "no_changes": "Sem alterações",
+      "failed": "Falhou",
+      "intention_or_sentence_already_exist": "Intenção ou frase já existe",
+      "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
+      "delete_button":"Deletar",
+      "cancel_button":"Cancelar"
     },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
@@ -254,7 +267,7 @@
       "add_to": "Adicionar à",
       "list_empty": "Nenhuma frase.",
       "entry_has_add_to_train": "Entrada adicionada ao treinamento.",
-      "entry_has_add_to_sentence": "Entrada adicionada às frases.",
+      "entry_has_add_to_sentence": "Entrada adicionada às frases de teste",
       "add_to_train_error": "Aconteceu um erro",
       "add_to_sentences_error": "Um erro ocorreu.",
       "error": "Erro",

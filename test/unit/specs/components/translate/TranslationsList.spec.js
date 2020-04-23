@@ -31,20 +31,20 @@ describe('TranslationsList.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('update translations', () => {
-    beforeEach(async () => {
-      await wrapper.vm.updateTranslations();
-      await wrapper.vm.translationsList.next();
-    });
+  // describe('update translations', () => {
+  //   beforeEach(async () => {
+  //     await wrapper.vm.updateTranslations();
+  //     await wrapper.vm.translationsList.next();
+  //   });
 
-    test('has translations list', () => {
-      expect(wrapper.vm.translationsList).not.toBe(null);
-    });
+  //   test('has translations list', () => {
+  //     expect(wrapper.vm.translationsList).not.toBe(null);
+  //   });
 
-    test('translationsList has one items', () => {
-      expect(wrapper.vm.translationsList.items).toHaveLength(1);
-    });
-  });
+  //   test('translationsList has one items', () => {
+  //     expect(wrapper.vm.translationsList.items).toHaveLength(1);
+  //   });
+  // });
 
   describe('set toLanguage prop', () => {
     beforeEach(async () => {
