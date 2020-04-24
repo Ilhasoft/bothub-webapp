@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import repository from '@/api/repository';
 import update from '@/api/update';
 import TYPES from '../types';
@@ -68,11 +69,18 @@ export default {
     const response = await repository.getRepositoryInfo(repositoryUUID, version);
     if (!response.data) return null;
     const {
-      // eslint-disable-next-line camelcase
-      ready_for_train, requirements_to_train, languages_warnings, examples__count, evaluate_languages_count,
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
     } = response.data;
     return {
-      ready_for_train, requirements_to_train, languages_warnings, examples__count, evaluate_languages_count,
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
     };
   },
   editRepository(store, {
