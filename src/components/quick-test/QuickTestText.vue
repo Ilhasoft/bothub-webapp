@@ -35,7 +35,7 @@
           </span>
           <div>
             <p
-              v-for="entity in data.entities_list"
+              v-for="entity in entitiesNames"
               :key="entity"
               class="quick-test-text__subtext quick-test-text__entity-item">
               <span :class="['quick-test-text__subtext__dot', colorClasses[entity]]"/>
@@ -107,6 +107,10 @@ export default {
     ...mapState({
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
+    entitiesNames() {
+      if (!this.data || !this.data.entities_list) return [];
+      return this.data.entities_list;
+    },
     displayText() {
       if (this.data) return this.data.text;
       return this.text;
