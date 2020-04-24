@@ -189,7 +189,8 @@
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
-      "translate_sentence": "Translate sentence"
+      "translate_sentence": "Translate sentence",
+      "example_translated": "Example translated!"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
