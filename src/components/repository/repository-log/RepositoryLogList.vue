@@ -3,9 +3,9 @@
   <div class="repository-log-list">
     <div class="repository-log-list__section">
       <b-notification
-        v-if="loading"
+        v-if="loadingLogs"
         :closable="false">
-        <b-loading :active.sync="loading"/>
+        <b-loading :active.sync="loadingLogs"/>
       </b-notification>
       <div>
         <b-checkbox
@@ -90,6 +90,7 @@ export default {
       logData: [],
       selectAll: false,
       nlp: {},
+      loadingLogs: false,
     };
   },
   computed: {
@@ -172,7 +173,7 @@ export default {
       });
     },
     addToTraining(intent) {
-      this.loading = true;
+      this.loadingLogs = true;
       this.logData.map(async (log) => {
         try {
           await this.newExample({ ...log, intent, isCorrected: this.isCorrected });
@@ -183,13 +184,13 @@ export default {
         } catch (error) {
           this.showError(error);
         } finally {
-          this.loading = false;
+          this.loadingLogs = false;
         }
       });
       console.log(this.repository);
     },
     addToSentences(intent) {
-      this.loading = true;
+      this.loadingLogs = true;
       this.logData.map(async (log) => {
         try {
           await this.newEvaluateExample({
@@ -204,7 +205,7 @@ export default {
         } catch (error) {
           this.showError(error);
         } finally {
-          this.loading = false;
+          this.loadingLogs = false;
         }
       });
     },

@@ -1,10 +1,5 @@
 <template>
   <div class="log-accordion">
-    <b-notification
-      v-if="loading"
-      :closable="false">
-      <b-loading :active.sync="loading"/>
-    </b-notification>
     <sentence-accordion
       :open.sync="open">
 
