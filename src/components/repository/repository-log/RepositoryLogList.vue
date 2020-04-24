@@ -178,16 +178,15 @@ export default {
         try {
           await this.newExample({ ...log, intent, isCorrected: this.isCorrected });
           this.$buefy.toast.open({
-            message: `${log.text} - ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error);
+          this.showError(error, log);
         } finally {
           this.loadingLogs = false;
         }
       });
-      console.log(this.repository);
     },
     addToSentences(intent) {
       this.loadingLogs = true;
@@ -199,11 +198,11 @@ export default {
             isCorrected: this.isCorrected,
           });
           this.$buefy.toast.open({
-            message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
+            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error);
+          this.showError(error, log);
         } finally {
           this.loadingLogs = false;
         }
@@ -218,9 +217,14 @@ export default {
         },
       });
     },
-    showError(error) {
+    showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
-      const message = Array.join(messages, ',');
+      let message = '';
+
+      if (Array.join(messages, ',') === 'Intention and Sentence already exists') {
+        message = `${log.text.bold()} ${this.$t('webapp.inbox.entry_error')}`;
+      }
+
       this.$buefy.toast.open({
         message,
         type: 'is-danger',
