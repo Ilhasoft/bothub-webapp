@@ -43,7 +43,7 @@ export default {
     update: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   data() {
     return {
