@@ -39,6 +39,7 @@
                 @queryStringFormated="onSearch($event)"/>
             </div>
             <translate-list
+              :update="update"
               :repository="repository"
               :query="query"
               :from="translate.from"

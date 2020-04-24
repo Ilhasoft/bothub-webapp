@@ -189,7 +189,8 @@
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
-      "translate_sentence": "Traduzir frase"
+      "translate_sentence": "Traduzir frase",
+      "example_translated": "Exemplo traduzido!"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",
