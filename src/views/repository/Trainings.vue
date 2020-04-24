@@ -161,7 +161,10 @@ export default {
     async updateTrainingStatus() {
       this.loadingStatus = true;
       try {
-        const trainStatus = await this.getTrainingStatus(this.repository.uuid);
+        const trainStatus = await this.getTrainingStatus({
+          repositoryUUID: this.repository.uuid,
+          version: this.repositoryVersion,
+        });
         if (trainStatus) {
           Object.assign(this.repository, trainStatus);
         }
