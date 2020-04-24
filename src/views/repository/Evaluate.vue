@@ -186,12 +186,19 @@ export default {
           id: result.data.evaluate_id,
           version: result.data.evaluate_version,
         });
+        this.$router.push({
+          name: 'repository-result',
+          params: {
+            resultId: result.data.evaluate_id,
+            version: result.data.evaluate_version,
+          },
+        });
         return true;
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
         this.$bhToastNotification({
-          message: `${this.error.detail || 'sorry, something wrong ;('} `,
+          message: `${this.error.detail || this.$t('webapp.evaluate.default_error')} `,
           type: 'danger',
           time: 5000,
         });

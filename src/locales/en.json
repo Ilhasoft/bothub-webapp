@@ -112,7 +112,8 @@
       "no_versions": "No versions",
       "no_sentences": "No sentences.",
       "detailed_results": "Detailed Results",
-      "results": "Results"
+      "results": "Results",
+      "default_error": "Something went wrong while testing"
     },
     "home": {
       "description": "Description",
