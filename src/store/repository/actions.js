@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import repository from '@/api/repository';
 import update from '@/api/update';
 import TYPES from '../types';
@@ -67,9 +68,20 @@ export default {
   async getTrainingStatus(store, { repositoryUUID, version }) {
     const response = await repository.getRepositoryInfo(repositoryUUID, version);
     if (!response.data) return null;
-    // eslint-disable-next-line camelcase
-    const { ready_for_train, requirements_to_train, languages_warnings } = response.data;
-    return { ready_for_train, requirements_to_train, languages_warnings };
+    const {
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
+    } = response.data;
+    return {
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
+    };
   },
   editRepository(store, {
     ownerNickname,
