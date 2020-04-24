@@ -32,6 +32,10 @@ export default {
       type: String,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -50,6 +54,9 @@ export default {
       this.updateExamples(true);
     },
     repository() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
   },

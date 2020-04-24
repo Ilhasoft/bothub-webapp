@@ -10,7 +10,7 @@
             <div class="tile is-vertical">
               <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
               <edit-repository-form
-                :owner-nickname="repository.owner__nickname"
+                :owner-nickname="repository.owner.nickname"
                 :slug="repository.slug"
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
@@ -134,7 +134,7 @@ export default {
         this.$router.push({
           name: 'repository-settings',
           params: {
-            ownerNickname: this.repository.owner__nickname,
+            ownerNickname: this.repository.owner.nickname,
             slug: repository.slug,
           },
         });
@@ -155,8 +155,8 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);

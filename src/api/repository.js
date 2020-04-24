@@ -6,7 +6,7 @@ import utils from './utils';
 export default {
 
   async getNewSchema() {
-    const { data } = await request.$http.options('/v2/repository/repository-info/');
+    const { data } = await request.$http.options('/v2/repository/repository-details');
     return data.actions.POST;
   },
   getAll(limit = 20) {
@@ -61,18 +61,19 @@ export default {
         repository,
       });
   },
+  // Verificar
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
   train(repositoryUUID, repositoryVersion) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/train/`,
+      `/v2/repository/repository-details/${repositoryUUID}/train/`,
       { repository_version: repositoryVersion },
     );
   },
   analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
+      `/v2/repository/repository-details/${repositoryUUID}/analyze/`,
       {
         repository_version: repositoryVersion,
         language,
@@ -80,9 +81,14 @@ export default {
       },
     );
   },
+  getRepositoryInfo(repositoryUUID, version) {
+    return request.$http.get(
+      `/v2/repository/info/${repositoryUUID}/${version}`,
+    );
+  },
   debugParse(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/debug_parse/`,
+      `/v2/repository/repository-details/${repositoryUUID}/debug_parse/`,
       {
         repository_version: repositoryVersion,
         language,
@@ -91,13 +97,13 @@ export default {
     );
   },
   async getEditSchema(repositoryUuid) {
-    const { data } = await request.$http.options(`/v2/repository/repository-info/${repositoryUuid}/`);
+    const { data } = await request.$http.options(`/v2/repository/repository-details/${repositoryUuid}/`);
     return data.actions.PUT;
   },
   edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
     algorithm, useCompetingIntents, useNameEntities, useAnalyzeChar, repositoryUuid) {
     return request.$http.patch(
-      `/v2/repository/repository-info/${repositoryUuid}/`,
+      `/v2/repository/repository-details/${repositoryUuid}/`,
       {
         name,
         slug: newSlug,
@@ -114,7 +120,7 @@ export default {
   },
   getLanguagesStatus(repositoryUUID) {
     return request.$http.get(
-      `/v2/repository/repository-info/${repositoryUUID}/languagesstatus/`,
+      `/v2/repository/repository-details/${repositoryUUID}/languagesstatus/`,
     );
   },
   vote(ownerNickname, slug, value) {

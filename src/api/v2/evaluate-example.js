@@ -70,7 +70,7 @@ export default {
   },
   runEvaluate(repositoryUUID, language, version) {
     return request.$http.post(
-      `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
+      `v2/repository/repository-details/${repositoryUUID}/evaluate/`,
       {
         language,
         repository_version: version,

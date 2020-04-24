@@ -112,7 +112,7 @@ export default {
           return this.repository.name;
         }
 
-        return `${this.repository.owner__nickname}/${this.repository.slug}`;
+        return `${this.repository.owner.nickname}/${this.repository.slug}`;
       }
 
       return undefined;
@@ -154,8 +154,8 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);

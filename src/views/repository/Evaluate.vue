@@ -44,8 +44,8 @@
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
               :filter-by-language="currentLanguage"
-              @created="updateRepository(true)"
-              @deleted="updateRepository(true)"/>
+              @created="updateTrainingStatus()"
+              @deleted="updateTrainingStatus()"/>
           </div>
         </div>
         <div
@@ -106,7 +106,6 @@ export default {
   data() {
     return {
       currentLanguage: '',
-      languages: [],
       evaluating: false,
       error: {},
       requestAuthorizationModalOpen: false,
@@ -121,6 +120,15 @@ export default {
     ...mapGetters([
       'getEvaluateLanguage',
     ]),
+    languages() {
+      if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
+      return Object.keys(this.selectedRepository.evaluate_languages_count)
+        .map((lang, index) => ({
+          id: index + 1,
+          value: lang,
+          title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
+        }));
+    },
   },
   watch: {
     currentLanguage(language) {
@@ -138,17 +146,11 @@ export default {
       'setEvaluateLanguage',
       'getEvaluateExample',
       'runNewEvaluate',
+      'getTrainingStatus',
     ]),
     getExamples() {
       this.getEvaluateExample({
         id: this.selectedRepository.uuid,
-      }).then(() => {
-        this.languages = Object.keys(this.selectedRepository.evaluate_languages_count)
-          .map((lang, index) => ({
-            id: index + 1,
-            value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
-          }));
       });
     },
     openRequestAuthorizationModal() {
@@ -156,11 +158,20 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);
+    },
+    async updateTrainingStatus() {
+      const trainStatus = await this.getTrainingStatus({
+        repositoryUUID: this.repository.uuid,
+        version: this.repositoryVersion,
+      });
+      if (trainStatus) {
+        Object.assign(this.repository, trainStatus);
+      }
     },
     async newEvaluate() {
       this.evaluating = true;

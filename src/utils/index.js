@@ -5,8 +5,8 @@ export function generateTemporaryId() {
   return uuid.v4();
 }
 export const getWordIndex = (word, phrase) => {
-  const regex = new RegExp(`\\b${word}\\b`);
-  const start = phrase.search(regex);
+  const regex = new RegExp(`\\b${word.toLowerCase()}\\b`);
+  const start = phrase.toLowerCase().search(regex);
   const end = start + word.length;
   return { start, end };
 };

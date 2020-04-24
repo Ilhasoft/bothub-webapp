@@ -35,11 +35,11 @@
           </span>
           <div>
             <p
-              v-for="entity in entitiesList"
-              :key="entity.entity"
+              v-for="entity in entitiesNames"
+              :key="entity"
               class="quick-test-text__subtext quick-test-text__entity-item">
-              <span :class="['quick-test-text__subtext__dot', colorClasses[entity.entity]]"/>
-              {{ entity.entity }}
+              <span :class="['quick-test-text__subtext__dot', colorClasses[entity]]"/>
+              {{ entity }}
             </p>
           </div>
         </div>
@@ -107,6 +107,10 @@ export default {
     ...mapState({
       repositoryVersion: state => state.Repository.repositoryVersion,
     }),
+    entitiesNames() {
+      if (!this.data || !this.data.entities_list) return [];
+      return this.data.entities_list;
+    },
     displayText() {
       if (this.data) return this.data.text;
       return this.text;
@@ -177,7 +181,7 @@ export default {
         parent: this,
         component: RepositoryDebug,
         props: {
-          repositoryUUID: this.repositoryUUID,
+          repositoryUUID: this.repositoryUuid,
           version: this.version,
           language: this.language,
           text: this.text,
@@ -203,20 +207,13 @@ export default {
     }
 
     &__button {
-        margin: 0 1rem 0 0;
+        margin: 0 0.3rem 0 0;
         color: #707070;
-    }
-
-    &__entities {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: flex-start;
-      column-gap: 0.8rem;
     }
 
     &__entity-item {
       margin: 0 0 0.3rem;
+      display: flex;
     }
 
     &__content {
@@ -224,7 +221,7 @@ export default {
     }
 
     &__subtext {
-        display: flex;
+        margin: 0.3rem 0;
         vertical-align: middle;
         font-size: 0.75rem;
         color: #707070;
