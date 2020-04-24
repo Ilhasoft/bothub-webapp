@@ -40,6 +40,10 @@ export default {
       type: Object,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -56,6 +60,7 @@ export default {
     async from() { await this.updateList(); },
     async to() { await this.updateList(); },
     query() { this.updateList(); },
+    update() { this.updateList(); },
   },
   async mounted() {
     await this.updateList();

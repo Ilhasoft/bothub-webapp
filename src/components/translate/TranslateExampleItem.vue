@@ -36,7 +36,7 @@
           <button
             class="button is-primary"
             @click="toggleFormOpen()">
-            <span>{{ $t('webapp.translate.intent') }}</span>
+            <span>{{ $t('webapp.translate.translate_sentence') }}</span>
             <b-icon icon="chevron-down" />
           </button>
         </div>
@@ -135,7 +135,7 @@ export default {
     onTranslated() {
       /* istanbul ignore next */
       this.$bhToastNotification({
-        message: 'Example translated!',
+        message: this.$t('webapp.translate.example_translated'),
         type: 'success',
       });
       /* istanbul ignore next */
