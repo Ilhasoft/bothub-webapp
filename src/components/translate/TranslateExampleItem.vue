@@ -36,7 +36,7 @@
           <button
             class="button is-primary"
             @click="toggleFormOpen()">
-            <span>{{ $t('webapp.translate.intent') }}</span>
+            <span>{{ $t('webapp.translate.translate_sentence') }}</span>
             <b-icon icon="chevron-down" />
           </button>
         </div>
