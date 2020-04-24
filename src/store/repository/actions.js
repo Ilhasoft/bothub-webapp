@@ -67,9 +67,13 @@ export default {
   async getTrainingStatus(store, { repositoryUUID, version }) {
     const response = await repository.getRepositoryInfo(repositoryUUID, version);
     if (!response.data) return null;
-    // eslint-disable-next-line camelcase
-    const { ready_for_train, requirements_to_train, languages_warnings } = response.data;
-    return { ready_for_train, requirements_to_train, languages_warnings };
+    const {
+      // eslint-disable-next-line camelcase
+      ready_for_train, requirements_to_train, languages_warnings, examples__count,
+    } = response.data;
+    return {
+      ready_for_train, requirements_to_train, languages_warnings, examples__count,
+    };
   },
   editRepository(store, {
     ownerNickname,
