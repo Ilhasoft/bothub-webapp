@@ -35,11 +35,11 @@
           </span>
           <div>
             <p
-              v-for="entity in entitiesList"
-              :key="entity.entity"
+              v-for="entity in data.entities_list"
+              :key="entity"
               class="quick-test-text__subtext quick-test-text__entity-item">
-              <span :class="['quick-test-text__subtext__dot', colorClasses[entity.entity]]"/>
-              {{ entity.entity }}
+              <span :class="['quick-test-text__subtext__dot', colorClasses[entity]]"/>
+              {{ entity }}
             </p>
           </div>
         </div>
