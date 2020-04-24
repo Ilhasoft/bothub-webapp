@@ -96,7 +96,7 @@
       "run_test": "Executar teste",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
-      "get_examples_test_sentences": "testar frases",
+      "get_examples_test_sentences": "frases de teste",
       "all_intents": "Todas as Intenções",
       "all_entities": "Todas as Entidades",
       "all_labels": "Todas as Categorias",
