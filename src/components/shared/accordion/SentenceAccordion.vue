@@ -1,7 +1,6 @@
 <template>
   <div class="expander">
     <div
-      ref="expander"
       :class="[isOpen ? 'active':'before-border']"
       class="expander__trigger">
 
@@ -11,12 +10,14 @@
       </div>
 
       <div
+        ref="expander"
         class="expander__trigger__header"
         @click="toggleAccordion()">
         <slot name="header" />
       </div>
 
       <div
+        ref="expander"
         class="expander__trigger__options"
         @click="toggleAccordion()">
         <slot name="options" />
