@@ -185,6 +185,7 @@ export default {
           this.showError(error, log);
         } finally {
           this.loadingLogs = false;
+          this.select = false;
         }
       });
     },
@@ -205,6 +206,7 @@ export default {
           this.showError(error, log);
         } finally {
           this.loadingLogs = false;
+          this.select = false;
         }
       });
     },
