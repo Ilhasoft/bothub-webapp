@@ -207,14 +207,6 @@ export default {
         color: #707070;
     }
 
-    &__entities {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      justify-content: flex-start;
-      column-gap: 0.8rem;
-    }
-
     &__entity-item {
       margin: 0 0 0.3rem;
       display: flex;
@@ -225,7 +217,7 @@ export default {
     }
 
     &__subtext {
-        margin-bottom: 0.3rem;
+        margin: 0.3rem 0;
         vertical-align: middle;
         font-size: 0.75rem;
         color: #707070;
