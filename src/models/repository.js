@@ -93,7 +93,7 @@ class Repository extends ModelBase {
   routes() {
     return {
       fetch:
-        '/v2/repository-shortcut/{owner__nickname}/{slug}/{repository_version}',
+        '/v2/repository-shortcut/{owner__nickname}/{slug}/',
     };
   }
 
