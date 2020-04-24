@@ -96,7 +96,7 @@
       "run_test": "Executar teste",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
-      "get_examples_test_sentences": "testar frases",
+      "get_examples_test_sentences": "frases de teste",
       "all_intents": "Todas as Intenções",
       "all_entities": "Todas as Entidades",
       "all_labels": "Todas as Categorias",
@@ -167,6 +167,15 @@
       "delete_button":"Deletar",
       "cancel_button":"Cancelar"
     },
+    "train_modal": {
+      "training_status": "Status do Treinamento",
+      "status_ok": "Seu bot está pronto para ser treinado!",
+      "language_warning": "Um ou mais idiomas não podem ser treinados no momento.",
+      "missing_requirements": "Requisitos não cumpridos",
+      "warnings": "Alertas",
+      "train": "Treinar",
+      "ok": "Ok"
+    },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
@@ -180,7 +189,8 @@
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
-      "translate_sentence": "Traduzir frase"
+      "translate_sentence": "Traduzir frase",
+      "example_translated": "Exemplo traduzido!"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",

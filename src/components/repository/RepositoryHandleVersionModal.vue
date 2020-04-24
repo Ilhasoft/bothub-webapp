@@ -5,10 +5,11 @@
         <div class="field">
           <label class="label">{{ $t('webapp.versions.title') }}</label>
           <div class="control">
-            <input
+            <b-input
               v-model="name"
-              class="input"
-              type="text" >
+              :maxlength="maxLength"
+              :has-counter="false"
+            />
           </div>
         </div>
         <div class="field">
@@ -56,6 +57,7 @@ export default {
   },
   data() {
     return {
+      maxLength: 40,
       submitting: false,
       name: null,
       loading: false,

@@ -167,6 +167,15 @@
       "delete_button":"Delete",
       "cancel_button":"Cancel"
     },
+    "train_modal": {
+      "training_status": "Training Status",
+      "status_ok": "Your bot is ready to be trained!",
+      "language_warning": "One or more languages cannot be trained in the moment.",
+      "missing_requirements": "Missing requirements",
+      "warnings": "Warnings",
+      "train": "Train",
+      "ok": "Ok"
+    },
     "translate": {
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
@@ -180,7 +189,8 @@
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
-      "translate_sentence": "Translate sentence"
+      "translate_sentence": "Translate sentence",
+      "example_translated": "Example translated!"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
