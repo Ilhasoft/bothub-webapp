@@ -2,7 +2,11 @@
 
   <div class="repository-log-list">
     <div class="repository-log-list__section">
-
+      <b-notification
+        v-if="loading"
+        :closable="false">
+        <b-loading :active.sync="loading"/>
+      </b-notification>
       <div>
         <b-checkbox
           v-model="select"
@@ -21,7 +25,7 @@
             icon="chat-processing"
             class="repository-log-list__section__icons"/>
         </div>
-        <div>
+        <div @click="showDeleteModal">
           <b-icon
             icon="delete"
             class="repository-log-list__section__icons"/>
@@ -112,6 +116,7 @@ export default {
       'searchLogs',
       'newEvaluateExample',
       'newExample',
+      'deleteExample',
     ]),
     addLogStructure(logValue) {
       if (logValue.length !== 0) {
@@ -172,7 +177,7 @@ export default {
         try {
           await this.newExample({ ...log, intent, isCorrected: this.isCorrected });
           this.$buefy.toast.open({
-            message: this.$t('webapp.inbox.entry_has_add_to_train'),
+            message: `${log.text} - ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
@@ -181,8 +186,9 @@ export default {
           this.loading = false;
         }
       });
+      console.log(this.repository);
     },
-    async addToSentences(intent) {
+    addToSentences(intent) {
       this.loading = true;
       this.logData.map(async (log) => {
         try {
@@ -200,6 +206,15 @@ export default {
         } finally {
           this.loading = false;
         }
+      });
+    },
+    showDeleteModal() {
+      console.log(this.logData);
+      this.$buefy.dialog.confirm({
+        message: 'Você tem certeza que deseja deletar as frases ?',
+        onConfirm: () => {
+          this.$buefy.toast.open('User confirmed');
+        },
       });
     },
     showError(error) {
