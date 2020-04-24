@@ -69,10 +69,10 @@ export default {
     if (!response.data) return null;
     const {
       // eslint-disable-next-line camelcase
-      ready_for_train, requirements_to_train, languages_warnings, examples__count,
+      ready_for_train, requirements_to_train, languages_warnings, examples__count, evaluate_languages_count,
     } = response.data;
     return {
-      ready_for_train, requirements_to_train, languages_warnings, examples__count,
+      ready_for_train, requirements_to_train, languages_warnings, examples__count, evaluate_languages_count,
     };
   },
   editRepository(store, {
