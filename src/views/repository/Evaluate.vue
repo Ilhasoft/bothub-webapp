@@ -121,7 +121,6 @@ export default {
       'getEvaluateLanguage',
     ]),
     languages() {
-      console.log(this.selectedRepository);
       if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
       return Object.keys(this.selectedRepository.evaluate_languages_count)
         .map((lang, index) => ({
