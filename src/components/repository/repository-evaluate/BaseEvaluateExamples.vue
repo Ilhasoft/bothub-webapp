@@ -10,6 +10,7 @@
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
       :query="query"
+      :update="update"
       @deleted="onEvaluateExampleDeleted"/>
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
     return {
       querySchema: {},
       query: {},
+      update: false,
     };
   },
   computed: {
@@ -71,9 +73,11 @@ export default {
       this.query.language = this.filterByLanguage;
     },
     onEvaluateExampleCreated() {
+      this.update = !this.update;
       this.$emit('created');
     },
     onEvaluateExampleDeleted() {
+      this.update = !this.update;
       this.$emit('deleted');
     },
   },
