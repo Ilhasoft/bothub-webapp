@@ -1,7 +1,6 @@
 <template>
 
   <div class="repository-log-list">
-    {{ getLogSentence }}
     <div class="repository-log-list__section">
 
       <div>
@@ -11,19 +10,18 @@
           Select all
         </b-checkbox>
       </div>
-
       <div class="repository-log-list__section__buttonsIcon">
         <div @click="showModal('Training')">
           <b-icon
             icon="refresh"
             class="repository-log-list__section__icons"/>
         </div>
-        <div @click="show">
+        <div @click="showModal('Test Sentences')">
           <b-icon
             icon="chat-processing"
             class="repository-log-list__section__icons"/>
         </div>
-        <div @click="show">
+        <div>
           <b-icon
             icon="delete"
             class="repository-log-list__section__icons"/>
@@ -37,6 +35,9 @@
       :list="list"
       :loading.sync="loading"
       :editable="editable"
+      @event_nlp="nlp = $event"
+      @event_addLog="addLogStructure($event)"
+      @event_removeLog="removeLogStructure($event)"
     />
 
     <h4
@@ -48,7 +49,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 import IntentModal from '@/components/repository/IntentModal';
@@ -82,40 +83,62 @@ export default {
       versionsList: null,
       versions: [],
       select: '',
+      logData: [],
       selectAll: false,
+      nlp: {},
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    ...mapGetters(['getLogSentence', 'getCurrentRepository']),
   },
   watch: {
     query() {
       this.updateLogs();
     },
     select() {
+      if (this.select === true) {
+        this.logData = [];
+      }
       this.$root.$emit('selectAll', this.select);
     },
-  },
-  created() {
-    this.$root.$on('nlp_values', value => console.log(value));
   },
   mounted() {
     this.updateLogs();
   },
-
   methods: {
     ...mapActions([
       'searchLogs',
+      'newEvaluateExample',
+      'newExample',
     ]),
-    showModal(typeSentence) {
+    addLogStructure(logValue) {
+      if (logValue.length !== 0) {
+        this.logData.push(logValue[0]);
+      }
+    },
+    removeLogStructure(logValue) {
+      // eslint-disable-next-line array-callback-return
+      this.logData.map((log, i) => {
+        if (log.text === logValue[0].text) {
+          this.logData.splice(i, 1);
+        }
+      });
+    },
+    showModal(typeModal) {
+      if (this.logData.length === 0) {
+        this.$buefy.toast.open({
+          message: 'Primeiro selecione o log',
+          type: 'is-danger',
+        });
+        return;
+      }
       this.$buefy.modal.open({
         props: {
-          info: this.nlp_log,
+          info: this.nlp,
           repository: this.repository,
-          titleHeader: typeSentence,
+          titleHeader: typeModal,
         },
         parent: this,
         component: IntentModal,
@@ -124,14 +147,14 @@ export default {
         events: {
           addedIntent: (value, type) => {
             if (type === 'Training') {
-              if (value === this.nlp_log.intent.name) {
+              if (value === this.nlp.intent.name) {
                 this.isCorrected = false;
               } else {
                 this.isCorrected = true;
               }
               this.addToTraining(value);
             } else {
-              if (value === this.nlp_log.intent.name) {
+              if (value === this.nlp.intent.name) {
                 this.isCorrected = false;
               } else {
                 this.isCorrected = true;
@@ -141,6 +164,50 @@ export default {
             this.intent = value;
           },
         },
+      });
+    },
+    addToTraining(intent) {
+      this.loading = true;
+      this.logData.map(async (log) => {
+        try {
+          await this.newExample({ ...log, intent, isCorrected: this.isCorrected });
+          this.$buefy.toast.open({
+            message: this.$t('webapp.inbox.entry_has_add_to_train'),
+            type: 'is-success',
+          });
+        } catch (error) {
+          this.showError(error);
+        } finally {
+          this.loading = false;
+        }
+      });
+    },
+    async addToSentences(intent) {
+      this.loading = true;
+      this.logData.map(async (log) => {
+        try {
+          await this.newEvaluateExample({
+            ...log,
+            intent,
+            isCorrected: this.isCorrected,
+          });
+          this.$buefy.toast.open({
+            message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
+            type: 'is-success',
+          });
+        } catch (error) {
+          this.showError(error);
+        } finally {
+          this.loading = false;
+        }
+      });
+    },
+    showError(error) {
+      const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
+      const message = Array.join(messages, ',');
+      this.$buefy.toast.open({
+        message,
+        type: 'is-danger',
       });
     },
     async updateLogs() {

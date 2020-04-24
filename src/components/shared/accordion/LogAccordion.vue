@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { getWordIndex } from '@/utils';
 import LogInfo from '@/components/shared/accordion/LogInfo';
@@ -153,78 +153,22 @@ export default {
   watch: {
     data(newValue, oldValue) {
       if (this.data.length !== 0) {
-        return this.$store.dispatch('newLogSentence', this.data);
+        this.$emit('dispatchEvent', { event: 'event_nlp', value: this.nlp_log });
+        this.$emit('dispatchEvent', { event: 'event_addLog', value: this.data });
+        return '';
       }
-      return this.$store.dispatch('removeLogSentence', oldValue);
-    },
-    nlp_log() {
-      return this.$root.$emit('nlp_values', this.nlp_log);
+      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: oldValue });
     },
   },
   created() {
     this.$root.$on('selectAll', value => this.selectAll(value));
   },
   methods: {
-    ...mapActions([
-      'newEvaluateExample',
-      'newExample',
-      'newLogSentence',
-      'removeLogSentence',
-    ]),
     selectAll(value) {
       if (value === true) {
         this.data.push(this.toExample);
       } else {
         this.data = [];
-      }
-    },
-    showError(error) {
-      const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
-      const message = Array.join(messages, ',');
-      this.$buefy.toast.open({
-        message,
-        type: 'is-danger',
-      });
-    },
-    async addToSentences(intent) {
-      this.loading = true;
-      try {
-        await this.newEvaluateExample({
-          ...this.toExample,
-          intent,
-          isCorrected: this.isCorrected,
-        });
-
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
-          type: 'is-success',
-        });
-      } catch (error) {
-        this.showError(error);
-        // this.$buefy.toast.open({
-        //   message: this.$t('webapp.inbox.add_to_train_error'),
-        //   type: 'is-danger',
-        // });
-      } finally {
-        this.loading = false;
-      }
-    },
-    async addToTraining(intent) {
-      this.loading = true;
-      try {
-        await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_train'),
-          type: 'is-success',
-        });
-      } catch (error) {
-        this.showError(error);
-        // this.$buefy.toast.open({
-        //   message: this.$t('webapp.inbox.add_to_sentences_error'),
-        //   type: 'is-danger',
-        // });
-      } finally {
-        this.loading = false;
       }
     },
     getEntityClass(entity) {
@@ -252,7 +196,6 @@ export default {
         trapFocus: true,
       });
     },
-
     debug() {
       this.$buefy.modal.open({
         parent: this,
