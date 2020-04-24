@@ -177,7 +177,7 @@ export default {
         parent: this,
         component: RepositoryDebug,
         props: {
-          repositoryUUID: this.repositoryUUID,
+          repositoryUUID: this.repositoryUuid,
           version: this.version,
           language: this.language,
           text: this.text,
