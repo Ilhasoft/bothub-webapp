@@ -167,6 +167,15 @@
       "delete_button":"Deletar",
       "cancel_button":"Cancelar"
     },
+    "train_modal": {
+      "training_status": "Status do Treinamento",
+      "status_ok": "Seu bot está pronto para ser treinado!",
+      "language_warning": "Um ou mais idiomas não podem ser treinados no momento.",
+      "missing_requirements": "Requisitos não cumpridos",
+      "warnings": "Alertas",
+      "train": "Treinar",
+      "ok": "Ok"
+    },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
