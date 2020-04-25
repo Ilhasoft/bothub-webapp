@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import repository from '@/api/repository';
 import update from '@/api/update';
 import TYPES from '../types';
@@ -34,7 +35,7 @@ export default {
   },
   searchRepositories(store, querys) {
     /* istanbul ignore next */
-    return repository.search(querys);
+    return repository.search({ ...querys, limit: 21 });
   },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
@@ -59,10 +60,28 @@ export default {
     /* istanbul ignore next */
     return repository.analyze(repositoryUUID, repositoryVersion, language, text);
   },
-  async getEditRepositorySchema(store, { repositoryUuid }) {
+  async getEditRepositorySchema(store, { repositoryUuid, repositoryVersion }) {
     /* istanbul ignore next */
-    const response = await repository.getEditSchema(repositoryUuid);
+    const response = await repository.getEditSchema(repositoryUuid, repositoryVersion);
     return response;
+  },
+  async getTrainingStatus(store, { repositoryUUID, version }) {
+    const response = await repository.getRepositoryInfo(repositoryUUID, version);
+    if (!response.data) return null;
+    const {
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
+    } = response.data;
+    return {
+      ready_for_train,
+      requirements_to_train,
+      languages_warnings,
+      examples__count,
+      evaluate_languages_count,
+    };
   },
   editRepository(store, {
     ownerNickname,
@@ -111,8 +130,8 @@ export default {
       newRole,
     );
   },
-  repositoryAuthorizationList(store, { repositoryUuid }) {
-    return repository.getAuthorizationList(repositoryUuid);
+  repositoryAuthorizationList(store, { repositoryUuid, limit = 20 }) {
+    return repository.getAuthorizationList(repositoryUuid, limit);
   },
   async getRequestRepositoryAuthorizationSchema() {
     const response = await repository.getRequestAuthorizationSchema();

@@ -23,4 +23,7 @@ export default {
   getNameVersion(state) {
     return state.repositoryVersionName;
   },
+  versionEnabled() {
+    return process.env.VERSION_ENABLED;
+  },
 };

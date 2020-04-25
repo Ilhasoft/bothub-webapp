@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import TranslateExampleItem from './TranslateExampleItem';
 
@@ -40,6 +40,10 @@ export default {
       type: Object,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -47,10 +51,16 @@ export default {
       translateExampleItem: TranslateExampleItem,
     };
   },
+  computed: {
+    ...mapState({
+      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
+  },
   watch: {
     async from() { await this.updateList(); },
     async to() { await this.updateList(); },
     query() { this.updateList(); },
+    update() { this.updateList(); },
   },
   async mounted() {
     await this.updateList();
@@ -65,6 +75,7 @@ export default {
         await this.$nextTick();
         this.translateList = await this.getExamplesToTranslate({
           repositoryUuid: this.repository.uuid,
+          version: this.repositoryVersion,
           from: this.from,
           to: this.to,
           query: this.query,

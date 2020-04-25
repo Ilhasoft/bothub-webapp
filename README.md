@@ -26,6 +26,7 @@ You can set environment variables in your OS or write on .env file.
 | BOTHUB_NLP_BASE_URL | `string` | In development mode is `http://localhost:2657/` | Bothub NLP service URL
 | BOTHUB_WEBAPP_BASE_URL | `string` | In development mode is `http://localhost:8080/` | Bothub Webapp service URL
 | SUPPORTED_LANGUAGES | `string` | `en\|pt` | Check description and formatation in [bothub-engine SUPPORTED_LANGUAGES environment variable](https://github.com/bothub-it/bothub-engine#environment-variables)
+| VERSION_ENABLED | `boolean` | In development mode is `false` | Should Bothub show version options*
 | MAILCHIMP_LOGIN | `string` | Empty | Check MailChimp subscribe URL*
 | MAILCHIMP_DATACENTER | `string` | Empty | Check MailChimp subscribe URL*
 | MAILCHIMP_USER_ID | `string` | Empty | Check MailChimp subscribe URL*
