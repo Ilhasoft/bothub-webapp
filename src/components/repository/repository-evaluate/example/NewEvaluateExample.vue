@@ -108,11 +108,11 @@ export default {
   },
   computed: {
     ...mapState({
-      repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
     }),
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
     validationErrors() {
       const errors = [];

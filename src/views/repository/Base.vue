@@ -13,16 +13,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'getUpdateRepositoryState',
-      'getRepositoryVersion',
-    ]),
+    ...mapGetters({
+      authenticated: 'authenticated',
+      getUpdateRepositoryState: 'getUpdateRepositoryState',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     ...mapState({
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
-    }),
-    ...mapGetters({
-      repositoryVersion: 'getSelectedVersion',
     }),
   },
   watch: {
