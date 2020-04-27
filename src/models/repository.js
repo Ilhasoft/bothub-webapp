@@ -7,14 +7,15 @@ class Repository extends ModelBase {
     super(attributes, ...args);
     const { uuid, owner__nickname: ownerNickname, slug } = attributes;
 
+    const savedUuid = store.getters.relatedUuid[`${ownerNickname}/${slug}/null/`];
     if (!uuid && ownerNickname && slug) {
-      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}`];
+      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}/${store.getters.getSelectedVersion}/`];
       if (related) {
         this.set('uuid', related);
       }
       const versionNumber = store.getters.getSelectedVersion;
       const versionName = store.getters.getNameVersion;
-      if (versionName !== 'master' && versionName !== null) {
+      if (store.getters.getSelectedVersionRepository === savedUuid && versionName !== 'master' && versionName !== null) {
         this.set('repository_version', `?repository_version=${versionNumber}`);
       }
     }
@@ -93,7 +94,7 @@ class Repository extends ModelBase {
   routes() {
     return {
       fetch:
-        '/v2/repository-shortcut/{owner__nickname}/{slug}/',
+        '/v2/repository-shortcut/{owner__nickname}/{slug}/{repository_version}',
     };
   }
 

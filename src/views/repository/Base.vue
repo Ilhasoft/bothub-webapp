@@ -16,10 +16,13 @@ export default {
     ...mapGetters([
       'authenticated',
       'getUpdateRepositoryState',
+      'getRepositoryVersion',
     ]),
     ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
+    }),
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
     }),
   },
   watch: {
@@ -86,6 +89,7 @@ export default {
     updateRepositoryVersion(version) {
       this.setRepositoryVersion({
         version,
+        repositoryUUID: this.repository.uuid,
       });
     },
     onReady({ error }) {

@@ -30,7 +30,10 @@ export default {
   },
   setRepositoryVersion(state, value) {
     if (state.repositoryVersion !== value.version.id) {
-      state.repositoryVersion = value.version.id;
+      state.repositoryVersion = {
+        id: value.version.id,
+        repositoryUUID: value.repositoryUUID,
+      };
       state.repositoryVersionName = value.version.name;
     }
   },

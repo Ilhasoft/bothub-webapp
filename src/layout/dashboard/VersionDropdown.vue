@@ -104,6 +104,7 @@ export default {
       };
       this.setRepositoryVersion({
         version,
+        repositoryUUID: this.repositoryUUID,
       });
     },
   },
