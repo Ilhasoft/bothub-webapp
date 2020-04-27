@@ -56,6 +56,9 @@ export default {
     repsoitory() {
       this.updateExamples(true);
     },
+    repositoryVersion() {
+      this.updateExamples(true);
+    },
     update() {
       this.updateExamples(true);
     },
