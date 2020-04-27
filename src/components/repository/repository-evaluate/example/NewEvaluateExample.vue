@@ -83,7 +83,7 @@
 <script>
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -108,9 +108,11 @@ export default {
   },
   computed: {
     ...mapState({
-      repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    }),
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
     validationErrors() {
       const errors = [];

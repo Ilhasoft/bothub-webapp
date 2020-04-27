@@ -115,11 +115,11 @@ export default {
     ...mapState({
       resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapGetters({
+      getEvaluateLanguage: 'getEvaluateLanguage',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     languages() {
       if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
       return Object.keys(this.selectedRepository.evaluate_languages_count)
