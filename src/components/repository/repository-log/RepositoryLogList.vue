@@ -15,21 +15,27 @@
         </b-checkbox>
       </div>
       <div class="repository-log-list__section__buttonsIcon">
-        <div @click="showModal('Training')">
-          <b-icon
-            icon="refresh"
-            class="repository-log-list__section__icons"/>
-        </div>
-        <div @click="showModal('Test Sentences')">
-          <b-icon
-            icon="chat-processing"
-            class="repository-log-list__section__icons"/>
-        </div>
-        <!-- <div @click="showDeleteModal">
+        <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
+          <div @click="showModal('Training')">
+            <b-icon
+              icon="refresh"
+              class="repository-log-list__section__icons"/>
+          </div>
+        </b-tooltip>
+        <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
+          <div @click="showModal('Test Sentences')">
+            <b-icon
+              icon="chat-processing"
+              class="repository-log-list__section__icons"/>
+          </div>
+        </b-tooltip>
+        <!--   <b-tooltip :label="$t('webapp.inbox.remove_log_button')">
+          <div @click="showDeleteModal">
           <b-icon
             icon="delete"
             class="repository-log-list__section__icons"/>
-        </div> -->
+        </div>
+        </b-tooltip>-->
 
       </div>
     </div>
@@ -224,7 +230,7 @@ export default {
       let message = '';
 
       if (Array.join(messages, ',') === 'Intention and Sentence already exists') {
-        message = `${log.text.bold()} ${this.$t('webapp.inbox.entry_error')}`;
+        message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
       }
 
       this.$buefy.toast.open({

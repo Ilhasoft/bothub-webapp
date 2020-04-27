@@ -261,9 +261,12 @@
       "list_empty": "No logs found.",
       "entry_has_add_to_train": "was added to training.",
       "entry_has_add_to_sentence": "was added to sentences.",
-      "entry_error": "and Intention already exists.",
+      "entry_error": "Intention and Sentence already exists",
       "add_to_train_error": "An error occured",
       "add_to_sentences_error": "An error occured",
+      "add_to_train_button": "Add to Train",
+      "add_to_sentence_button": "Add to Sentence",
+      "remove_log_button": "Delete Sentece",
       "error": "Error",
       "add_log": {
         "add": "Add",

@@ -261,9 +261,12 @@
       "list_empty": "Nenhuma frase.",
       "entry_has_add_to_train": "adicionada ao treinamento.",
       "entry_has_add_to_sentence": "adicionada às frases de teste.",
-      "entry_error": "e Intenção já existem.",
+      "entry_error": "Intenção e Sentença já existem.",
       "add_to_train_error": "Aconteceu um erro",
       "add_to_sentences_error": "Um erro ocorreu.",
+      "add_to_train_button": "Adicionar ao treinamento",
+      "add_to_sentence_button": "Adicionar às frases de teste",
+      "remove_log_button": "Deletar senteça",
       "error": "Erro",
       "add_log": {
         "add": "Adicionar",
