@@ -7,7 +7,7 @@ class Repository extends ModelBase {
     super(attributes, ...args);
     const { uuid, owner__nickname: ownerNickname, slug } = attributes;
 
-    const savedUuid = store.getters.relatedUuid[`${ownerNickname}/${slug}/null/`];
+    const savedUuid = store.getters.relatedUuid[`${ownerNickname}/${slug}/`];
     if (!uuid && ownerNickname && slug) {
       const related = store.getters.relatedUuid[`${ownerNickname}/${slug}/${store.getters.getSelectedVersion}/`];
       if (related) {

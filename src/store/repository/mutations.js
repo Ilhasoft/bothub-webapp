@@ -8,7 +8,7 @@ export default {
       {},
       state.relatedUuid,
       {
-        [`${ownerNickname}/${slug}/${version}/`]: uuid,
+        [version ? `${ownerNickname}/${slug}/${version}/` : `${ownerNickname}/${slug}/`]: uuid,
       },
     );
   },
