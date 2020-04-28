@@ -34,7 +34,8 @@ export default {
         this.updateRepository(true);
       }
     },
-    repositoryVersion() {
+    repositoryVersion(newVersion, oldVersion) {
+      if (!oldVersion) return;
       this.updateRepository(true);
     },
     repositoryUuid() {
