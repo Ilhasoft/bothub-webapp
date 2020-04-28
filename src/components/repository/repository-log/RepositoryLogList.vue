@@ -16,14 +16,14 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div @click="showModal('Training')">
+          <div @click="showModal($t('webapp.inbox.training'))">
             <b-icon
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div @click="showModal('Test Sentences')">
+          <div @click="showModal($t('webapp.inbox.test_sentences'))">
             <b-icon
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
@@ -281,6 +281,7 @@ export default {
       &__icons{
       color: $color-grey-dark;
       margin-right: 0.7rem;
+      cursor: pointer;
     }
     }
 
