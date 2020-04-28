@@ -141,7 +141,7 @@ export default {
     showModal(typeModal) {
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
-          message: 'Primeiro selecione o log',
+          message: this.$t('webapp.inbox.select_phrase'),
           type: 'is-danger',
         });
         return;
