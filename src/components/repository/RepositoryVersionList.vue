@@ -186,7 +186,6 @@ export default {
   methods: {
     ...mapActions([
       'getVersions',
-      'setRepositoryVersion',
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',
