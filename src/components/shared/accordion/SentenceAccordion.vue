@@ -1,16 +1,25 @@
 <template>
   <div class="expander">
     <div
-      ref="expander"
       :class="[isOpen ? 'active':'before-border']"
-      class="expander__trigger"
-      @click="toggleAccordion()">
+      class="expander__trigger">
 
-      <div class="level-left">
+
+      <div class="expander__trigger__check">
+        <slot name="check" />
+      </div>
+
+      <div
+        ref="expander"
+        class="expander__trigger__header"
+        @click="toggleAccordion()">
         <slot name="header" />
       </div>
 
-      <div class="level-right expander__trigger__btns-wrapper">
+      <div
+        ref="expander"
+        class="expander__trigger__options"
+        @click="toggleAccordion()">
         <slot name="options" />
       </div>
     </div>
@@ -82,14 +91,26 @@ export default {
 
   .expander {
     &__trigger {
-      display: grid;
-      grid-template-columns: 1fr 25%;
-      justify-content: space-between;
+      display: flex;
+      align-items: center;
       padding: .7rem;
       margin-top: 0.5rem;
       cursor: pointer;
       border: 1px solid #cfd5d9;
       border-radius: 3px;
+    &__check{
+      margin-right: 1rem;
+    }
+    &__header{
+      display: flex;
+      width: 80%;
+      align-items: center;
+    }
+    &__options{
+      width: 30%;
+      display: flex;
+      justify-content: flex-end;
+    }
     }
 
     &__body {

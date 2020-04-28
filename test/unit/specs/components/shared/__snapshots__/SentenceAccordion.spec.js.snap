@@ -3,8 +3,9 @@
 exports[`SentenceAccordion.vue renders correctly 1`] = `
 <div class="expander">
   <div class="expander__trigger before-border">
-    <div class="level-left"></div>
-    <div class="level-right expander__trigger__btns-wrapper"></div>
+    <div class="expander__trigger__check"></div>
+    <div class="expander__trigger__header"></div>
+    <div class="expander__trigger__options"></div>
   </div>
   <div class="expander__body" style="display: none;" name="fade"></div>
 </div>

@@ -4,6 +4,7 @@
       <div
         class="level-left log-entities">
         <div v-if="entitiesList.length > 0">
+          <strong>Entity:</strong>
           <b-tag
             v-for="(entity, i) in entitiesList"
             :key="i"

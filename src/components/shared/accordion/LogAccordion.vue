@@ -1,18 +1,17 @@
 <template>
   <div class="log-accordion">
-    <b-notification
-      v-if="loading"
-      :closable="false">
-      <b-loading :active.sync="loading"/>
-    </b-notification>
-
     <sentence-accordion
       :open.sync="open">
+
+      <div slot="check">
+        <b-checkbox
+          v-model="data"
+          :native-value="toExample"/>
+      </div>
 
       <div
         slot="header"
         class="columns is-vcentered">
-        <span class="column log-accordion__version-name"> {{ version_name }} </span>
         <div class="column">
           <language-badge :language="nlp_log.language"/>
         </div>
@@ -29,35 +28,12 @@
             :entities="entitiesList"
             :all-entities="repository.entities || repository.entities_list" />
         </div>
+
       </div>
-
-      <div slot="options">
-
-        <b-dropdown
-          v-if="editable"
-          class="log-accordion__dropdown"
-          aria-role="list"
-          @click.native.stop>
-          <button
-            slot="trigger"
-            class="button is-text">
-            <b-icon icon="plus"/>
-          </button>
-
-          <p class="log-accordion__menu-title"> {{ $t('webapp.inbox.add_to') }} </p>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click.native.stop="showModal('Training')">
-            {{ $t('webapp.inbox.training') }}
-          </b-dropdown-item>
-          <b-dropdown-item
-            aria-role="listitem"
-            @click.native.stop="showModal('Test Sentences')">
-            {{ $t('webapp.inbox.test_sentences') }}
-          </b-dropdown-item>
-        </b-dropdown>
+      <div
+        slot="options">
+        <span class="column log-accordion__version-name"> {{ version_name }} </span>
       </div>
-
       <div slot="body">
         <log-info
           :entities-list="entitiesList"
@@ -72,7 +48,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { getWordIndex } from '@/utils';
 import LogInfo from '@/components/shared/accordion/LogInfo';
@@ -124,12 +100,14 @@ export default {
       isRawInfoActive: false,
       intent: '',
       isCorrected: Boolean,
+      data: [],
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters(['getLogSentence']),
     entities() {
       return Object.keys(this.nlp_log.entities).map(key => this.nlp_log.entities[key].map(
         (entity) => {
@@ -166,60 +144,26 @@ export default {
         is_corrected: this.isCorrected,
       };
     },
-
+  },
+  watch: {
+    data(newValue, oldValue) {
+      if (this.data.length !== 0) {
+        this.$emit('dispatchEvent', { event: 'event_nlp', value: this.nlp_log });
+        this.$emit('dispatchEvent', { event: 'event_addLog', value: this.data });
+        return '';
+      }
+      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: oldValue });
+    },
+  },
+  created() {
+    this.$root.$on('selectAll', value => this.selectAll(value));
   },
   methods: {
-    ...mapActions([
-      'newEvaluateExample',
-      'newExample',
-    ]),
-    showError(error) {
-      const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
-      const message = Array.join(messages, ',');
-      this.$buefy.toast.open({
-        message,
-        type: 'is-danger',
-      });
-    },
-    async addToSentences(intent) {
-      this.loading = true;
-      try {
-        await this.newEvaluateExample({
-          ...this.toExample,
-          intent,
-          isCorrected: this.isCorrected,
-        });
-
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_sentence'),
-          type: 'is-success',
-        });
-      } catch (error) {
-        this.showError(error);
-        // this.$buefy.toast.open({
-        //   message: this.$t('webapp.inbox.add_to_train_error'),
-        //   type: 'is-danger',
-        // });
-      } finally {
-        this.loading = false;
-      }
-    },
-    async addToTraining(intent) {
-      this.loading = true;
-      try {
-        await this.newExample({ ...this.toExample, intent, isCorrected: this.isCorrected });
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.entry_has_add_to_train'),
-          type: 'is-success',
-        });
-      } catch (error) {
-        this.showError(error);
-        // this.$buefy.toast.open({
-        //   message: this.$t('webapp.inbox.add_to_sentences_error'),
-        //   type: 'is-danger',
-        // });
-      } finally {
-        this.loading = false;
+    selectAll(value) {
+      if (value === true) {
+        this.data.push(this.toExample);
+      } else {
+        this.data = [];
       }
     },
     getEntityClass(entity) {
@@ -247,40 +191,6 @@ export default {
         trapFocus: true,
       });
     },
-    showModal(typeSentence) {
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp_log,
-          repository: this.repository,
-          titleHeader: typeSentence,
-        },
-        parent: this,
-        component: IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        events: {
-          addedIntent: (value, type) => {
-            if (type === 'Training') {
-              if (value === this.nlp_log.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToTraining(value);
-            } else {
-              if (value === this.nlp_log.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToSentences(value);
-            }
-            this.intent = value;
-          },
-        },
-      });
-    },
-
     debug() {
       this.$buefy.modal.open({
         parent: this,
@@ -301,7 +211,6 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
-
 .log-accordion {
   &__menu-title {
     margin: 1rem;
