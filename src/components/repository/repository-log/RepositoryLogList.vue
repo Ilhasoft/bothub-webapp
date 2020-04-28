@@ -281,6 +281,7 @@ export default {
       &__icons{
       color: $color-grey-dark;
       margin-right: 0.7rem;
+      cursor: pointer;
     }
     }
 
