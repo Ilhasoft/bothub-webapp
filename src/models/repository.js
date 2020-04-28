@@ -98,6 +98,10 @@ class Repository extends ModelBase {
     };
   }
 
+  onFetch() {
+    return super.onFetchNoCache();
+  }
+
   onFetchSuccess(response) {
     super.onFetchSuccess(response);
     store.dispatch('setRepositoryRelatedUuid', {
