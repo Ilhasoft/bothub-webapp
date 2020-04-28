@@ -285,6 +285,7 @@
       "add_to_sentence_button": "Adicionar às frases de teste",
       "remove_log_button": "Deletar senteça",
       "select_phrase":"Selecione uma frase",
+      "select_all":"Selecionar todos",
       "error": "Erro",
       "add_log": {
         "add": "Adicionar",

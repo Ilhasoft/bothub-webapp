@@ -285,6 +285,7 @@
       "add_to_sentence_button": "Add to Sentence",
       "remove_log_button": "Delete Sentece",
       "select_phrase":"Select a phrase",
+      "select_all":"Select all",
       "error": "Error",
       "add_log": {
         "add": "Add",

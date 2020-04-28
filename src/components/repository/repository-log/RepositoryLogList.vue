@@ -11,7 +11,7 @@
         <b-checkbox
           v-model="select"
           :native-value="selectAll">
-          Select all
+          {{ $t('webapp.inbox.select_all') }}
         </b-checkbox>
       </div>
       <div class="repository-log-list__section__buttonsIcon">
