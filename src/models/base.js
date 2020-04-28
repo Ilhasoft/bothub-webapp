@@ -22,6 +22,10 @@ class ModelBase extends Model {
     return super.onFetch();
   }
 
+  onFetchSuccessNoCache(response) {
+    return super.onFetchSuccess(response);
+  }
+
   onFetch() {
     const cache = store.getters.cachedFetch[`${this.$class}/${this.identifier()}`];
 

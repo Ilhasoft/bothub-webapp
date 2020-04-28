@@ -7,7 +7,6 @@ class Repository extends ModelBase {
     super(attributes, ...args);
     const { uuid, owner__nickname: ownerNickname, slug } = attributes;
 
-    const savedUuid = store.getters.relatedUuid[`${ownerNickname}/${slug}/`];
     if (!uuid && ownerNickname && slug) {
       const related = store.getters.relatedUuid[`${ownerNickname}/${slug}/`];
       if (related) {
@@ -15,7 +14,7 @@ class Repository extends ModelBase {
       }
       const versionNumber = store.getters.getSelectedVersion;
       const versionName = store.getters.getNameVersion;
-      if (store.getters.getSelectedVersionRepository === savedUuid && versionName !== 'master' && versionName !== null) {
+      if (store.getters.getSelectedVersionRepository === related && versionName !== 'master' && versionName !== null) {
         this.set('repository_version', `?repository_version=${versionNumber}`);
       }
     }
@@ -103,12 +102,12 @@ class Repository extends ModelBase {
   }
 
   onFetchSuccess(response) {
-    super.onFetchSuccess(response);
+    super.onFetchSuccessNoCache(response);
+
     store.dispatch('setRepositoryRelatedUuid', {
       ownerNickname: this.owner__nickname,
       slug: this.slug,
       uuid: this.uuid,
-      version: store.getters.getSelectedVersion,
     });
     store.dispatch('setRepository', this.attributes);
   }
