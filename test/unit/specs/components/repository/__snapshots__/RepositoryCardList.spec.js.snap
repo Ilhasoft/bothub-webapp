@@ -2,7 +2,7 @@
 
 exports[`RepositoryCardList.vue renders correctly 1`] = `
 <div class="repository-card-list">
-  <paginated-list-stub itemcomponent="[object Object]" list="[object Object]" perpage="20" class="repository-card-list__item"></paginated-list-stub>
+  <paginated-list-stub itemcomponent="[object Object]" list="[object Object]" perpage="20" reference="" class="repository-card-list__item"></paginated-list-stub>
   <p class="has-text-centered">Repositories not found.</p>
 </div>
 `;

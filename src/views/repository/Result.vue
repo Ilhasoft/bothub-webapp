@@ -102,11 +102,11 @@ export default {
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapGetters({
+      getEvaluateLanguage: 'getEvaluateLanguage',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
     },

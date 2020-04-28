@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions } from 'vuex';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
@@ -104,9 +104,6 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
-    }),
     entitiesNames() {
       if (!this.data || !this.data.entities_list) return [];
       return this.data.entities_list;

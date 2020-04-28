@@ -156,7 +156,6 @@ export default {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
-      'setRepositoryVersion',
       'openLoginModal',
     ]),
     collapseHandle() {
