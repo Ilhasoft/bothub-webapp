@@ -162,7 +162,7 @@ export default {
         trapFocus: true,
         events: {
           addedIntent: (value, type) => {
-            if (type === 'Training') {
+            if (type === 'Training' || 'Treinamento') {
               if (value === this.nlp.intent.name) {
                 this.isCorrected = false;
               } else {
