@@ -16,6 +16,7 @@
       "read_for_train": "Your intelligence is ready to be trained",
       "request_authorization": "Request Authorization",
       "authorization_requested": "Authorization Requested",
+      "authorization_success": "Request made! Wait for review of an admin.",
       "error_to_retrieve_bot": "Error retrieving intelligence"
     },
     "login_modal": {
@@ -139,7 +140,10 @@
       "enter_sentence": "Enter your sentence here",
       "intent": "Intent",
       "entity": "Entity",
-      "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent."
+      "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent.",
+      "delete_text": "Are you sure? The example will be deleted.",
+      "delete": "Delete",
+      "cancel": "Cancel"
     },
     "trainings": {
       "grid_text1": "Train a new sentence",
@@ -158,7 +162,19 @@
       "trained": "Trained",
       "no_changes": "No Changes",
       "failed": "Failed",
-      "intention_or_sentence_already_exist": "Intention and Sentence already exists"
+      "intention_or_sentence_already_exist": "Intention and Sentence already exists",
+      "delete_phrase_modal":"Are you sure? The example will be deleted",
+      "delete_button":"Delete",
+      "cancel_button":"Cancel"
+    },
+    "train_modal": {
+      "training_status": "Training Status",
+      "status_ok": "Your bot is ready to be trained!",
+      "language_warning": "One or more languages cannot be trained in the moment.",
+      "missing_requirements": "Missing requirements",
+      "warnings": "Warnings",
+      "train": "Train",
+      "ok": "Ok"
     },
     "translate": {
       "not_can_edit_repository": "You can not contribute to this intelligence",
@@ -173,7 +189,8 @@
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
-      "translate_sentence": "Translate sentence"
+      "translate_sentence": "Translate sentence",
+      "example_translated": "Example translated!"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",

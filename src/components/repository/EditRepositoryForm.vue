@@ -56,6 +56,7 @@ export default {
   async mounted() {
     this.formSchema = await this.getEditRepositorySchema({
       repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+      repositoryVersion: this.$store.state.Repository.repositoryVersion,
     });
   },
   methods: {

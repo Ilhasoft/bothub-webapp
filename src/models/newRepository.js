@@ -24,7 +24,7 @@ class NewRepositoryModel extends ModelBase {
 
   routes() {
     return {
-      save: '/v2/repository/repository-info/',
+      save: '/v2/repository/repository-details/',
     };
   }
 

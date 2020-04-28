@@ -232,7 +232,6 @@ export default {
       if (Array.join(messages, ',') === 'Intention and Sentence already exists') {
         message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
       }
-
       this.$buefy.toast.open({
         message,
         type: 'is-danger',

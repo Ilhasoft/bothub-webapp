@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
@@ -32,6 +32,10 @@ export default {
       type: String,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -40,16 +44,22 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
   },
   watch: {
     query() {
       this.updateExamples(true);
     },
-    repository() {
+    repsoitory() {
+      this.updateExamples(true);
+    },
+    repositoryVersion() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
   },

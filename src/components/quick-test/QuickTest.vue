@@ -50,7 +50,7 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import { mapState } from 'vuex';
+import { mapGetters } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
@@ -78,8 +78,8 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
     }),
     languages() {
       if (!this.repository) return [];
@@ -215,7 +215,7 @@ export default {
 
         &__text-area {
             margin: 1.25rem 0.6rem 0.6rem 1.125rem;
-            overflow-y: scroll;
+            overflow-y: auto;
             height: 90%;
         }
     }

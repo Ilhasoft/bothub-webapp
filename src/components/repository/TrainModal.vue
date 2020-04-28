@@ -1,22 +1,22 @@
 <template>
   <bh-modal
     :open.sync="openValue"
-    title="Training Status">
+    :title="$t('webapp.train_modal.training_status')">
     <div class="train-modal">
       <div class="bh-grid bh-grid--column">
         <strong
           v-if="requirementsToTrainStatus"
           class="text-color-danger text-center bh-grid__item">
-          One or more languages cannot be trained in the moment.</strong>
+          {{ $t('webapp.train_modal.language_warning') }}</strong>
         <strong
           v-if="readyForTrain && !requirementsToTrainStatus"
           class="text-color-primary text-center bh-grid__item">
-          Your bot is ready to be trained!</strong>
+          {{ $t('webapp.train_modal.status_ok') }}</strong>
         <div
           v-if="requirementsToTrainStatus || languagesWarningsStatus"
           class="train-modal__wrapper bh-grid__item--nested">
           <div v-if="requirementsToTrainStatus">
-            <strong>Missing requirements</strong>
+            <strong>{{ $t('webapp.train_modal.missing_requirements') }}</strong>
             <div class="train-modal__wrapper__content-requirements">
               <div
                 v-for="(requirements, lang) in requirementsToTrain"
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div v-if="languagesWarningsStatus">
-            <strong>Warnings</strong>
+            <strong>{{ $t('webapp.train_modal.warnings') }}</strong>
             <div class="train-modal__wrapper__content-warnings">
               <div
                 v-for="(warnings, lang) in languagesWarnings"
@@ -63,14 +63,14 @@
         <bh-icon
           :value="training ? 'refresh' : 'school'"
           :class="training && 'icon-spin' || null" />
-        <span>Train</span>
+        <span>{{ $t('webapp.train_modal.train') }}</span>
       </bh-button>
       <bh-button
         v-else
         ref="closeBtn"
         primary
         @click="closeModal()">
-        <span>Ok</span>
+        <span>{{ $t('webapp.train_modal.ok') }}</span>
       </bh-button>
     </div>
   </bh-modal>

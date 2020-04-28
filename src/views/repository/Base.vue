@@ -2,22 +2,23 @@
 import { mapGetters, mapActions, mapState } from 'vuex';
 import Repository from '@/models/repository';
 
-
+// eslint-disable-next-line prefer-const
+let repository = null;
 export default {
   name: 'RepositoryBase',
   data() {
     return {
-      repository: null,
+      repository,
       errorCode: null,
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'getUpdateRepositoryState',
-    ]),
+    ...mapGetters({
+      authenticated: 'authenticated',
+      getUpdateRepositoryState: 'getUpdateRepositoryState',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
     }),
   },
@@ -85,6 +86,7 @@ export default {
     updateRepositoryVersion(version) {
       this.setRepositoryVersion({
         version,
+        repositoryUUID: this.repository.uuid,
       });
     },
     onReady({ error }) {

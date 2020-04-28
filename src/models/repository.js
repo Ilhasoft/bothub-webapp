@@ -7,14 +7,15 @@ class Repository extends ModelBase {
     super(attributes, ...args);
     const { uuid, owner__nickname: ownerNickname, slug } = attributes;
 
+    const savedUuid = store.getters.relatedUuid[`${ownerNickname}/${slug}/`];
     if (!uuid && ownerNickname && slug) {
-      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}`];
+      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}/${store.getters.getSelectedVersion}/`];
       if (related) {
         this.set('uuid', related);
       }
       const versionNumber = store.getters.getSelectedVersion;
       const versionName = store.getters.getNameVersion;
-      if (versionName !== 'master' && versionName !== null) {
+      if (store.getters.getSelectedVersionRepository === savedUuid && versionName !== 'master' && versionName !== null) {
         this.set('repository_version', `?repository_version=${versionNumber}`);
       }
     }
@@ -29,8 +30,7 @@ class Repository extends ModelBase {
   defaults() {
     return {
       uuid: null,
-      owner: null,
-      owner__nickname: null,
+      owner: {},
       slug: '',
       name: '',
       description: '',
@@ -62,8 +62,7 @@ class Repository extends ModelBase {
   mutations() {
     return {
       uuid: String,
-      owner: Number,
-      owner__nickname: String,
+      owner: Object,
       slug: String,
       name: String,
       description: String,

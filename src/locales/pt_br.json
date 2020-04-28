@@ -16,6 +16,7 @@
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
+      "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
     },
     "login_modal": {
@@ -95,7 +96,7 @@
       "run_test": "Executar teste",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
-      "get_examples_test_sentences": "testar frases",
+      "get_examples_test_sentences": "frases de teste",
       "all_intents": "Todas as Intenções",
       "all_entities": "Todas as Entidades",
       "all_labels": "Todas as Categorias",
@@ -139,7 +140,10 @@
       "enter_sentence": "Digite sua frase aqui",
       "intent": "Intenção",
       "entity": "Entidade",
-      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção."
+      "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
+      "delete_text": "Tem certeza? Este exemplo será deletado.",
+      "delete": "Deletar",
+      "cancel": "Cancelar"
     },
     "trainings": {
       "grid_text1": "Treine uma nova frase",
@@ -158,7 +162,19 @@
       "trained": "Treinado",
       "no_changes": "Sem alterações",
       "failed": "Falhou",
-      "intention_or_sentence_already_exist": "Intenção ou frase já existe"
+      "intention_or_sentence_already_exist": "Intenção ou frase já existe",
+      "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
+      "delete_button":"Deletar",
+      "cancel_button":"Cancelar"
+    },
+    "train_modal": {
+      "training_status": "Status do Treinamento",
+      "status_ok": "Seu bot está pronto para ser treinado!",
+      "language_warning": "Um ou mais idiomas não podem ser treinados no momento.",
+      "missing_requirements": "Requisitos não cumpridos",
+      "warnings": "Alertas",
+      "train": "Treinar",
+      "ok": "Ok"
     },
     "translate": {
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
@@ -173,7 +189,8 @@
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
-      "translate_sentence": "Traduzir frase"
+      "translate_sentence": "Traduzir frase",
+      "example_translated": "Exemplo traduzido!"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",

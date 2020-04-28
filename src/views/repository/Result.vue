@@ -102,11 +102,11 @@ export default {
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapGetters({
+      getEvaluateLanguage: 'getEvaluateLanguage',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
     },
@@ -147,8 +147,8 @@ export default {
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);
