@@ -105,6 +105,9 @@ export default {
     }),
   },
   watch: {
+    loading() {
+      this.logData = [];
+    },
     query() {
       this.updateLogs();
     },
