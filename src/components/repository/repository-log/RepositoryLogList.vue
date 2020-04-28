@@ -107,6 +107,7 @@ export default {
   watch: {
     loading() {
       this.logData = [];
+      this.select = '';
     },
     query() {
       this.updateLogs();
