@@ -3,10 +3,10 @@
     v-if="resultExampleList"
     class="evaluate-result-example-list">
     <h3 class="evaluate-result-example-list__title">
-      Sentence details
+      {{ $t('webapp.result.sentence_details') }}
     </h3>
     <p>
-      Compare the results in every test sentence.
+      {{ $t('webapp.result.sentence_details_text') }}
     </p>
     <div v-if="!busy">
       <evaluate-result-example-item
@@ -34,7 +34,7 @@
         aria-current-label="Current page"/>
     </div>
   </div>
-  <p v-else>Dont log</p>
+  <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
 </template>
 
 <script>
