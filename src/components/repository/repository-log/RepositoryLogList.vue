@@ -278,6 +278,7 @@ export default {
       color: $color-grey-dark;
       font-size: 1.1rem;
       font-weight: bold;
+      padding: 0 0.6rem;
 
       &__buttonsIcon{
       display: flex;
