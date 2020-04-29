@@ -41,7 +41,6 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
-import infiniteScroll from 'vue-infinite-scroll';
 import Loading from '@/components/shared/Loading';
 
 export default {
@@ -50,7 +49,6 @@ export default {
     EvaluateResultExampleItem,
     Loading,
   },
-  directives: { infiniteScroll },
   props: {
     id: {
       type: Number,
