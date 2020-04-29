@@ -97,6 +97,7 @@ export default {
       selectAll: false,
       nlp: {},
       loadingLogs: false,
+      confidenceVerify: false,
     };
   },
   computed: {
@@ -118,6 +119,13 @@ export default {
         this.logData = [];
       }
       this.$root.$emit('selectAll', this.select);
+    },
+    logData() {
+      if (this.logData.length > 1) {
+        this.confidenceVerify = true;
+      } else {
+        this.confidenceVerify = false;
+      }
     },
   },
   mounted() {
@@ -156,6 +164,7 @@ export default {
           info: this.nlp,
           repository: this.repository,
           titleHeader: typeModal,
+          confidenceVerify: this.confidenceVerify,
         },
         parent: this,
         component: IntentModal,
@@ -179,6 +188,11 @@ export default {
               this.addToSentences(value);
             }
             this.intent = value;
+          },
+          closeModal: () => {
+            this.logData = [];
+            this.select = '';
+            this.$root.$emit('selectAll', false);
           },
         },
       });
