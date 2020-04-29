@@ -42,8 +42,8 @@ export default {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
-  getAllVersions(store, { repositoryUuid }) {
-    return evaluateExample.allVersions(repositoryUuid);
+  getAllVersions(store, { repositoryUuid, limit = 20 }) {
+    return evaluateExample.allVersions(repositoryUuid, limit);
   },
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);
