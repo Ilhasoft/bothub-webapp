@@ -112,7 +112,8 @@
       "no_versions": "Sem versões",
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
-      "results": "Resultados"
+      "results": "Resultados",
+      "default_error": "Houve um erro ao testar"
     },
     "home": {
       "description": "Descrição",
