@@ -15,7 +15,8 @@
 
             <option
               v-for="intent in repository.intents_list"
-              v-show="info.intent_ranking.length == 0 ||info.intent_ranking.length !== 0 && confidenceVerify"
+              v-show="info.intent_ranking.length == 0 ||
+              info.intent_ranking.length !== 0 && confidenceVerify"
               :key="intent"
               :value="{name: intent}"
             >
