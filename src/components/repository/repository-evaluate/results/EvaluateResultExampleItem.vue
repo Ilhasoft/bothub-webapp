@@ -22,34 +22,34 @@
           <div v-if="status =='error'">
             <strong
               :class="{
-              'text-color-danger': status=='error'}">Expected intent:&nbsp;</strong>
+              'text-color-danger': status=='error'}">{{ $t('webapp.result.expected_intent') }}:&nbsp;</strong>
             <span>{{ intent }} /</span>
             <div
               v-if="intentPrediction.name !== 'no predicted'"
               class="example__align-no-predicted">
               <strong
                 :class="{
-                'text-color-danger': status=='error'}">Predicted intent:&nbsp;</strong>
+                'text-color-danger': status=='error'}">{{ $t('webapp.result.predicted_intent') }}:&nbsp;</strong>
               <span>{{ intentPrediction.name }}
-                ({{ intentPrediction.confidence.toFixed(2) }} confidence) </span>
+                ({{ intentPrediction.confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }}) </span>
             </div>
             <strong
               v-else
               :class="{
-              'text-color-danger': status=='error'}">No predicted intent</strong>
+              'text-color-danger': status=='error'}">{{ $t('webapp.result.no_expected_intent') }}</strong>
           </div>
           <div v-else>
-            <strong>Intent:&nbsp;</strong>
-            <span>{{ intent }} ({{ confidence.toFixed(2) }} confidence)</span>
+            <strong>{{ $t('webapp.result.intent') }}:&nbsp;</strong>
+            <span>{{ intent }} ({{ confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})</span>
           </div>
 
         </div>
         <span
           v-if="status === 'success'"
-          class="success">[ok]</span>
+          class="success">[{{ $t('webapp.result.ok') }}]</span>
         <span
           v-else
-          class="failed">[failed]</span>
+          class="failed">[{{ $t('webapp.result.failed') }}]</span>
       </div>
     </div>
   </div>

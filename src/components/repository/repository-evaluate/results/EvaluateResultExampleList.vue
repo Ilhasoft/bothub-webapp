@@ -7,10 +7,10 @@
     infinite-scroll-throttle-delay="800"
     infinite-scroll-distance="-20">
     <h3 class="evaluate-result-example-list__title">
-      Sentence details
+      {{ $t('webapp.result.sentence_details') }}
     </h3>
     <p>
-      Compare the results in every test sentence.
+      {{ $t('webapp.result.sentence_details_text') }}
     </p>
     <evaluate-result-example-item
       v-for="(item, i) in resultExampleList"
@@ -26,7 +26,7 @@
       <Loading/>
     </div>
   </div>
-  <p v-else>Dont log</p>
+  <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
 </template>
 
 <script>
