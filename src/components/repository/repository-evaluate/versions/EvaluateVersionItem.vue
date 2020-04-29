@@ -6,7 +6,9 @@
         <div
           class="version-test-item__wrapper">
           <div class="version-test-item__wrapper__info">
-            <strong class="version-test-item__wrapper__info__item">{{ $t('webapp.result.test') }} #{{ version }}</strong>
+            <strong class="version-test-item__wrapper__info__item">
+              {{ $t('webapp.result.test') }} #{{ version }}
+            </strong>
             <language-badge
               :language="language"
               class="version-test-item__wrapper__info__item"
