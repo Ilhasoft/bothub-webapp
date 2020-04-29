@@ -76,7 +76,7 @@ import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/Example
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -107,8 +107,8 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
     }),
     validationErrors() {
       const errors = [];
