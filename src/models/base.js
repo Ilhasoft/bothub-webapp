@@ -18,6 +18,14 @@ class ModelBase extends Model {
     );
   }
 
+  onFetchNoCache() {
+    return super.onFetch();
+  }
+
+  onFetchSuccessNoCache(response) {
+    return super.onFetchSuccess(response);
+  }
+
   onFetch() {
     const cache = store.getters.cachedFetch[`${this.$class}/${this.identifier()}`];
 
