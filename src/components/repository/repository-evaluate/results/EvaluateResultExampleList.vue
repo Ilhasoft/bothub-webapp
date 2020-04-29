@@ -25,6 +25,7 @@
     </div>
     <div class="evaluate-result-example-list__pagination">
       <b-pagination
+        v-if="resultExampleList.length > 0"
         :total="resultExampleList.length"
         :current.sync="page"
         :per-page="limit"
@@ -60,7 +61,6 @@ export default {
     return {
       resultExampleList: [],
       limit: 20,
-      maxLimit: null,
       busy: false,
       page: 1,
     };
@@ -87,7 +87,6 @@ export default {
         repositoryUuid: this.repository.uuid,
         resultId: this.id,
       }).then((response) => {
-        this.maxLimit = response.data.log.length;
         this.resultExampleList = response.data.log;
         this.busy = false;
       });

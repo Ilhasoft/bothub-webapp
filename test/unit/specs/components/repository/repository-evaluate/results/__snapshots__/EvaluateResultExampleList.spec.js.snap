@@ -12,7 +12,7 @@ exports[`EvaluateResultExampleList.vue renders correctly 1`] = `
     <loading-stub></loading-stub>
   </div>
   <div class="evaluate-result-example-list__pagination">
-    <b-pagination-stub total="0" perpage="20" current="1" rangebefore="1" rangeafter="1" iconprev="chevron-left" iconnext="chevron-right" arianextlabel="Next page" ariapreviouslabel="Previous page" ariapagelabel="Page" ariacurrentlabel="Current page"></b-pagination-stub>
+    <!---->
   </div>
 </div>
 `;
