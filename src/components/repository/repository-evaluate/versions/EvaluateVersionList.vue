@@ -40,12 +40,9 @@ export default {
     ...mapActions([
       'getAllVersions',
     ]),
-    updateVersionList(force = false) {
+    async updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.getAllVersions({ repositoryUuid: this.repository.uuid })
-          .then((response) => {
-            this.versionsList = response;
-          });
+        this.versionsList = await this.getAllVersions({ repositoryUuid: this.repository.uuid });
       }
     },
   },
