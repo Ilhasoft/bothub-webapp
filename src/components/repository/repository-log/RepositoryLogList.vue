@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 import IntentModal from '@/components/repository/IntentModal';
@@ -100,8 +100,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
+    ...mapGetters({
+      repository: 'getCurrentRepository',
+      version: 'getSelectedVersion',
     }),
   },
   watch: {
@@ -186,7 +187,12 @@ export default {
       this.loadingLogs = true;
       this.logData.map(async (log) => {
         try {
-          await this.newExample({ ...log, intent, isCorrected: this.isCorrected });
+          await this.newExample({
+            ...log,
+            intent,
+            isCorrected: this.isCorrected,
+            repositoryVersion: this.version,
+          });
           this.$buefy.toast.open({
             message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
@@ -207,6 +213,7 @@ export default {
             ...log,
             intent,
             isCorrected: this.isCorrected,
+            repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
             message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
