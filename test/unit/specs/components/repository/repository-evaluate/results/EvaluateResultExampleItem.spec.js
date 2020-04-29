@@ -30,6 +30,9 @@ describe('EvaluateResultExampleItem.vue', () => {
     });
     wrapper = shallowMount(EvaluateResultExampleItem, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         text: 'hey',
         intent: 'greet',

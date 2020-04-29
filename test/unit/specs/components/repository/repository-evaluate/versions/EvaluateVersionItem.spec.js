@@ -14,6 +14,9 @@ describe('EvaluateVersionItem.vue', () => {
   beforeEach(() => {
     wrapper = shallowMount(EvaluateVersionItem, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         id: 2,
         version: 2,
