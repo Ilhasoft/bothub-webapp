@@ -10,7 +10,8 @@ exports[`EvaluateResultExampleItem.vue renders 1`] = `
   <div class="example-infos level is-mobile">
     <div class="level-left">
       <div class="level-item ">
-        <div><strong>some specific text:&nbsp;</strong> <span>greet (0.93 some specific text)</span></div>
+        <div><strong>some specific text:&nbsp;</strong> <span>greet (0.93 some specific text)
+          </span></div>
       </div> <span class="success">[some specific text]</span>
     </div>
   </div>
