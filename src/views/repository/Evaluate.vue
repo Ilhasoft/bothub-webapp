@@ -182,13 +182,11 @@ export default {
           version: this.repositoryVersion,
         });
         this.evaluating = false;
-        this.setUpdateEvaluateResultId({
-          id: result.data.evaluate_id,
-          version: result.data.evaluate_version,
-        });
         this.$router.push({
           name: 'repository-result',
           params: {
+            ownerNickname: this.repository.owner.nickname,
+            slug: this.repository.slug,
             resultId: result.data.evaluate_id,
             version: result.data.evaluate_version,
           },
