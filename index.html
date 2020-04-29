@@ -30,11 +30,39 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="/static/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+  <link rel="stylesheet" href="https://ilhasoft.com.br/newcodes/bothub/pushwidget-bothub.css">
   <title>Bothub</title>
 </head>
 
 <body>
   <div id="app"></div>
+  <div id="webchat"/>
+  <script src="https://storage.googleapis.com/push-webchat/webchat-latest.js"></script>
+  <script>
+    WebChat.default.init({
+      selector: "#webchat",
+      initPayload: "bothub",
+      channelUuid: '951c09db-0545-474b-a181-3a16c9e8d6ed',
+      host: 'https://new.push.al',
+      socketUrl: "https://socket.push.al",
+      title: "Bothub Support",
+      showFullScreenButton: true,
+      inputTextFieldHint: "Type here...",
+      openLauncherImage: 'https://ilhasoft.com.br/newcodes/bothub/avatar-bothub.png',
+      profileAvatar: 'https://ilhasoft.com.br/newcodes/bothub/avatar-bothub.png',
+      tooltipPayload: "bothub",
+      tooltipDelay: 200,
+      params: {
+        images: {
+            dims: {
+                width: 300,
+                height: 200
+            }
+        },
+        storage: "local"
+      }
+    })
+  </script>
 </body>
 
 </html>
