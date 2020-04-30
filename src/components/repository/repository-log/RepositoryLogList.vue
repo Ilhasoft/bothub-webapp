@@ -97,7 +97,6 @@ export default {
       selectAll: false,
       nlp: {},
       loadingLogs: false,
-      confidenceVerify: false,
     };
   },
   computed: {
@@ -105,6 +104,12 @@ export default {
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
     }),
+    confidenceVerify() {
+      if (this.logData.length > 1) {
+        return true;
+      }
+      return false;
+    },
   },
   watch: {
     loading() {
@@ -119,13 +124,6 @@ export default {
         this.logData = [];
       }
       this.$root.$emit('selectAll', this.select);
-    },
-    logData() {
-      if (this.logData.length > 1) {
-        this.confidenceVerify = true;
-      } else {
-        this.confidenceVerify = false;
-      }
     },
   },
   mounted() {
