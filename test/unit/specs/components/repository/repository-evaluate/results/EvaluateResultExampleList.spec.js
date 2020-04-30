@@ -37,6 +37,9 @@ describe('EvaluateResultExampleList.vue', () => {
 
     wrapper = shallowMount(EvaluateResultExampleList, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         id: 2,
       },
@@ -53,6 +56,9 @@ describe('EvaluateResultExampleList.vue', () => {
 
     wrapper = shallowMount(EvaluateResultExampleList, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         id: 2,
       },

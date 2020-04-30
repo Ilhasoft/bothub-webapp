@@ -4,39 +4,32 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
 <div class="graphics-results">
   <div class="graphics-results__wrapper">
     <h2 class="graphics-results__title">
-      Evaluate output
+      some specific text
       <!---->
     </h2>
     <p>
-      For more information about test results, see our
-      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">documentation here</a>.
+      some specific text
+      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">some specific text</a>.
     </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Precision and recall reports
+        some specific text
       </h3>
+      <p> some specific text </p>
       <p>
-        A perfect precision score of 1.0 means that every test
-        result was positive (but says nothing about whether all
-        positive results were retrieved) whereas a perfect
-        recall score of 1.0 means that all positive results
-        were retrieved by the search (but says nothing about
-        how many false positives were also retrieved).
-      </p>
-      <p>
-        Read more about in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">our documentation</a>.
+        some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">some specific text</a>.
       </p>
     </div>
     <div>
       <h5 class="graphics-results__title">
-        Intent report
+        some specific text
       </h5>
       <!----> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
     </div>
     <div>
       <h5 class="graphics-results__title">
-        Entities
+        some specific text
       </h5>
       <!----> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
     </div>
@@ -44,12 +37,11 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
   <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Intent confusion matrix
+        some specific text
       </h3>
       <p>
-        The confusion matrix shows you which intents
-        are mistaken for others. Read more about it in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">our documentation</a>.
+        some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -62,18 +54,11 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
   <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Intent confidence distribution
+        some specific text
       </h3>
-      <p>
-        The histogram allows you to visualize the
-        confidence distribution for all predictions, with the volume of
-        correct and incorrect predictions being displayed by green and red bars respectively.
-        Improving the quality of your training data will move the
-        green histogram bars to the right and
-        the red histogram bars to the left of the plot.
-      </p>
-      <p>Read more about it in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">our documentation</a>.
+      <p>some specific text</p>
+      <p>some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -90,33 +75,26 @@ exports[`GraphicsResult.vue renders renders 1`] = `
 <div class="graphics-results">
   <div class="graphics-results__wrapper">
     <h2 class="graphics-results__title">
-      Evaluate output
+      some specific text
       <!---->
     </h2>
     <p>
-      For more information about test results, see our
-      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">documentation here</a>.
+      some specific text
+      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">some specific text</a>.
     </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Precision and recall reports
+        some specific text
       </h3>
+      <p> some specific text </p>
       <p>
-        A perfect precision score of 1.0 means that every test
-        result was positive (but says nothing about whether all
-        positive results were retrieved) whereas a perfect
-        recall score of 1.0 means that all positive results
-        were retrieved by the search (but says nothing about
-        how many false positives were also retrieved).
-      </p>
-      <p>
-        Read more about in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">our documentation</a>.
+        some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">some specific text</a>.
       </p>
     </div>
     <div>
       <h5 class="graphics-results__title">
-        Intent report
+        some specific text
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
@@ -124,7 +102,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
     </div>
     <div>
       <h5 class="graphics-results__title">
-        Entities
+        some specific text
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
@@ -134,12 +112,11 @@ exports[`GraphicsResult.vue renders renders 1`] = `
   <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Intent confusion matrix
+        some specific text
       </h3>
       <p>
-        The confusion matrix shows you which intents
-        are mistaken for others. Read more about it in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">our documentation</a>.
+        some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -148,18 +125,11 @@ exports[`GraphicsResult.vue renders renders 1`] = `
   <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
-        Intent confidence distribution
+        some specific text
       </h3>
-      <p>
-        The histogram allows you to visualize the
-        confidence distribution for all predictions, with the volume of
-        correct and incorrect predictions being displayed by green and red bars respectively.
-        Improving the quality of your training data will move the
-        green histogram bars to the right and
-        the red histogram bars to the left of the plot.
-      </p>
-      <p>Read more about it in
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">our documentation</a>.
+      <p>some specific text</p>
+      <p>some specific text
+        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">

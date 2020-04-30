@@ -74,6 +74,7 @@ export default {
       languages_warnings,
       examples__count,
       evaluate_languages_count,
+      intents_list,
     } = response.data;
     return {
       ready_for_train,
@@ -81,6 +82,7 @@ export default {
       languages_warnings,
       examples__count,
       evaluate_languages_count,
+      intents_list,
     };
   },
   editRepository(store, {
