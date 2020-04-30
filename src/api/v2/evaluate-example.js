@@ -58,8 +58,8 @@ export default {
   getAllResultsLog(repositoryUuid, resultId) {
     return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
-  allVersions(repositoryUuid) {
-    return new utils.List(`/v2/repository/evaluate/results?repository_uuid=${repositoryUuid}`);
+  allVersions(repositoryUuid, perPage = 20) {
+    return new utils.Page('/v2/repository/evaluate/results/', perPage, { repository_uuid: repositoryUuid });
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
