@@ -16,14 +16,14 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div @click="showModal($t('webapp.inbox.training'))">
+          <div @click="showModalTraining($t('webapp.inbox.training'))">
             <b-icon
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div @click="showModal($t('webapp.inbox.test_sentences'))">
+          <div @click="showModalSentence($t('webapp.inbox.test_sentences'))">
             <b-icon
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
@@ -142,7 +142,7 @@ export default {
         }
       });
     },
-    showModal(typeModal) {
+    showModalTraining(typeModal) {
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -161,26 +161,47 @@ export default {
         hasModalCard: false,
         trapFocus: true,
         events: {
-          addedIntent: (value, type) => {
-            if (type === 'Training' || 'Treinamento') {
-              if (value === this.nlp.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToTraining(value);
-            } else {
-              if (value === this.nlp.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToSentences(value);
-            }
+          addedIntent: (value) => {
+            this.verifyIsCorrected(value);
+            this.addToTraining(value);
             this.intent = value;
           },
         },
       });
+    },
+    showModalSentence(typeModal) {
+      if (this.logData.length === 0) {
+        this.$buefy.toast.open({
+          message: this.$t('webapp.inbox.select_phrase'),
+          type: 'is-danger',
+        });
+        return;
+      }
+      this.$buefy.modal.open({
+        props: {
+          info: this.nlp,
+          repository: this.repository,
+          titleHeader: typeModal,
+        },
+        parent: this,
+        component: IntentModal,
+        hasModalCard: false,
+        trapFocus: true,
+        events: {
+          addedIntent: (value) => {
+            this.verifyIsCorrected(value);
+            this.addToSentences(value);
+            this.intent = value;
+          },
+        },
+      });
+    },
+    verifyIsCorrected(value) {
+      if (value === this.nlp.intent.name) {
+        this.isCorrected = false;
+      } else {
+        this.isCorrected = true;
+      }
     },
     addToTraining(intent) {
       this.loadingLogs = true;
