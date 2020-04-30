@@ -148,8 +148,8 @@
       "entities_list": "Lista de Entidades",
       "entities_label": "entidades agrupadas por categoria.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
-      "labeled": "<strong>{entities_length}</strong> {_entity} categorizada <strong>{label_value}</strong>",
-      "unlabeled": "<strong>{entities_length}</strong> não categorizadas {_entity}",
+      "labeled": "<strong>{entities_length}</strong> entidades categorizadas <strong>{label_value}</strong>",
+      "unlabeled": "<strong>{entities_length}</strong> entidades não categorizadas ",
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas"
     },
