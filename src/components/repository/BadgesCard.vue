@@ -15,7 +15,7 @@
       </bh-badge>
     </div>
     <div v-if="examplesCount">
-      <strong>{{ examplesCount }}</strong> sentences
+      <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
     </div>
   </div>
 </template>
