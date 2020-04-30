@@ -20,6 +20,7 @@ export default {
     }),
     ...mapState({
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
+      repositoryVersionObject: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {
@@ -34,7 +35,11 @@ export default {
         this.updateRepository(true);
       }
     },
-    repositoryVersion() {
+    repositoryVersionObject(newVersion, oldVersion) {
+      if (!oldVersion
+      || !oldVersion.id
+      || oldVersion.repositoryUUID !== newVersion.repositoryUUID
+      || oldVersion.id === newVersion.id) return;
       this.updateRepository(true);
     },
     repositoryUuid() {

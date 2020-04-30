@@ -114,7 +114,7 @@ export default {
           .map((lang, index) => ({
             id: index + 1,
             value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
     },
