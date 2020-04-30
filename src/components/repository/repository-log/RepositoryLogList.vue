@@ -261,7 +261,8 @@ export default {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = '';
 
-      if (Array.join(messages, ',') === 'Intention and Sentence already exists') {
+      if (Array.join(messages, ',')
+      === 'Intention and Sentence already exists' || 'Intenção e frase já existem') {
         message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
       }
       this.$buefy.toast.open({
