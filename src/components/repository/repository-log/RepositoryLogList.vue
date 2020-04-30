@@ -104,6 +104,12 @@ export default {
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
     }),
+    confidenceVerify() {
+      if (this.logData.length > 1) {
+        return true;
+      }
+      return false;
+    },
   },
   watch: {
     loading() {
@@ -156,6 +162,7 @@ export default {
           info: this.nlp,
           repository: this.repository,
           titleHeader: typeModal,
+          confidenceVerify: this.confidenceVerify,
         },
         parent: this,
         component: IntentModal,
@@ -166,6 +173,11 @@ export default {
             this.verifyIsCorrected(value);
             this.addToTraining(value);
             this.intent = value;
+          },
+          closeModal: () => {
+            this.logData = [];
+            this.select = '';
+            this.$root.$emit('selectAll', false);
           },
         },
       });
