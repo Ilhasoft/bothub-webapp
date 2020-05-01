@@ -14,8 +14,8 @@ class Repository extends ModelBase {
       }
       const versionNumber = store.getters.getSelectedVersion;
       const versionName = store.getters.getNameVersion;
-      if (store.getters.getSelectedVersionRepository === related && versionName !== 'master' && versionName !== null) {
-        this.set('repository_version', `?repository_version=${versionNumber}`);
+      if (store.getters.getSelectedVersionRepository === related && versionName !== null) {
+        this.set('repository_version', `${versionNumber}`);
       }
     }
   }
@@ -91,9 +91,20 @@ class Repository extends ModelBase {
   }
 
   routes() {
+    const uuid = this.get('uuid');
+    const version = this.get('repository_version');
+
+    const route = uuid
+    && uuid !== 'null'
+    && uuid.length > 0
+    && version
+    && version !== 'null'
+    && version.length > 0
+      ? '/v2/repository/info/{uuid}/{repository_version}/'
+      : '/v2/repository-shortcut/{owner__nickname}/{slug}/';
+
     return {
-      fetch:
-        '/v2/repository-shortcut/{owner__nickname}/{slug}/{repository_version}',
+      fetch: route,
     };
   }
 

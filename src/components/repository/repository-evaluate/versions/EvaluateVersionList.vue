@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="versionsList"
       :item-component="evaluateItem"
       :list="versionsList" />
@@ -12,7 +12,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
 
@@ -20,7 +20,7 @@ export default {
   name: 'EvaluateVersionList',
   components: {
     EvaluateVersionItem,
-    Pagination,
+    PaginatedList,
   },
   data() {
     return {
@@ -40,12 +40,9 @@ export default {
     ...mapActions([
       'getAllVersions',
     ]),
-    updateVersionList(force = false) {
+    async updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.getAllVersions({ repositoryUuid: this.repository.uuid })
-          .then((response) => {
-            this.versionsList = response;
-          });
+        this.versionsList = await this.getAllVersions({ repositoryUuid: this.repository.uuid });
       }
     },
   },

@@ -16,14 +16,14 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div @click="showModal('Training')">
+          <div @click="showModalTraining($t('webapp.inbox.training'))">
             <b-icon
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div @click="showModal('Test Sentences')">
+          <div @click="showModalSentence($t('webapp.inbox.test_sentences'))">
             <b-icon
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
@@ -104,6 +104,12 @@ export default {
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
     }),
+    confidenceVerify() {
+      if (this.logData.length > 1) {
+        return true;
+      }
+      return false;
+    },
   },
   watch: {
     loading() {
@@ -143,7 +149,40 @@ export default {
         }
       });
     },
-    showModal(typeModal) {
+    showModalTraining(typeModal) {
+      if (this.logData.length === 0) {
+        this.$buefy.toast.open({
+          message: this.$t('webapp.inbox.select_phrase'),
+          type: 'is-danger',
+        });
+        return;
+      }
+      this.$buefy.modal.open({
+        props: {
+          info: this.nlp,
+          repository: this.repository,
+          titleHeader: typeModal,
+          confidenceVerify: this.confidenceVerify,
+        },
+        parent: this,
+        component: IntentModal,
+        hasModalCard: false,
+        trapFocus: true,
+        events: {
+          addedIntent: (value) => {
+            this.verifyIsCorrected(value);
+            this.addToTraining(value);
+            this.intent = value;
+          },
+          closeModal: () => {
+            this.logData = [];
+            this.select = '';
+            this.$root.$emit('selectAll', false);
+          },
+        },
+      });
+    },
+    showModalSentence(typeModal) {
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -162,26 +201,20 @@ export default {
         hasModalCard: false,
         trapFocus: true,
         events: {
-          addedIntent: (value, type) => {
-            if (type === 'Training') {
-              if (value === this.nlp.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToTraining(value);
-            } else {
-              if (value === this.nlp.intent.name) {
-                this.isCorrected = false;
-              } else {
-                this.isCorrected = true;
-              }
-              this.addToSentences(value);
-            }
+          addedIntent: (value) => {
+            this.verifyIsCorrected(value);
+            this.addToSentences(value);
             this.intent = value;
           },
         },
       });
+    },
+    verifyIsCorrected(value) {
+      if (value === this.nlp.intent.name) {
+        this.isCorrected = false;
+      } else {
+        this.isCorrected = true;
+      }
     },
     addToTraining(intent) {
       this.loadingLogs = true;
@@ -240,7 +273,8 @@ export default {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = '';
 
-      if (Array.join(messages, ',') === 'Intention and Sentence already exists') {
+      if (Array.join(messages, ',')
+      === 'Intention and Sentence already exists' || 'Intenção e frase já existem') {
         message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
       }
       this.$buefy.toast.open({
@@ -278,6 +312,7 @@ export default {
       color: $color-grey-dark;
       font-size: 1.1rem;
       font-weight: bold;
+      padding: 0 0.6rem;
 
       &__buttonsIcon{
       display: flex;

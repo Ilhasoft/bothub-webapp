@@ -1,38 +1,46 @@
 <template>
   <div
-    v-infinite-scroll="updateList"
     v-if="resultExampleList"
-    class="evaluate-result-example-list"
-    infinite-scroll-disabled="busy"
-    infinite-scroll-throttle-delay="800"
-    infinite-scroll-distance="-20">
+    class="evaluate-result-example-list">
     <h3 class="evaluate-result-example-list__title">
-      Sentence details
+      {{ $t('webapp.result.sentence_details') }}
     </h3>
     <p>
-      Compare the results in every test sentence.
+      {{ $t('webapp.result.sentence_details_text') }}
     </p>
-    <evaluate-result-example-item
-      v-for="(item, i) in resultExampleList"
-      :key="i"
-      :text="item.text"
-      :intent="item.intent"
-      :confidence="item.intent_prediction.confidence"
-      :status="item.status"
-      :intent-prediction="item.intent_prediction" />
+    <div v-if="!busy">
+      <evaluate-result-example-item
+        v-for="(item, i) in paginatedList"
+        :key="i"
+        :text="item.text"
+        :intent="item.intent"
+        :confidence="item.intent_prediction.confidence"
+        :status="item.status"
+        :intent-prediction="item.intent_prediction" />
+    </div>
     <div
-      v-if="!busy"
+      v-else
       class="evaluate-result-example-list__loading">
       <Loading/>
     </div>
+    <div class="evaluate-result-example-list__pagination">
+      <b-pagination
+        v-if="resultExampleList.length > 0"
+        :total="resultExampleList.length"
+        :current.sync="page"
+        :per-page="limit"
+        aria-next-label="Next page"
+        aria-previous-label="Previous page"
+        aria-page-label="Page"
+        aria-current-label="Current page"/>
+    </div>
   </div>
-  <p v-else>Dont log</p>
+  <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
-import infiniteScroll from 'vue-infinite-scroll';
 import Loading from '@/components/shared/Loading';
 
 export default {
@@ -41,7 +49,6 @@ export default {
     EvaluateResultExampleItem,
     Loading,
   },
-  directives: { infiniteScroll },
   props: {
     id: {
       type: Number,
@@ -51,15 +58,19 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      limit: 5,
-      maxLimit: null,
+      limit: 20,
       busy: false,
+      page: 1,
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    paginatedList() {
+      const offset = this.limit * (this.page - 1);
+      return this.resultExampleList.slice(offset, offset + this.limit);
+    },
   },
   mounted() {
     this.updateList();
@@ -69,23 +80,14 @@ export default {
       'getAllResultsLog',
     ]),
     updateList() {
-      if (this.resultExampleList.length !== this.maxLimit) {
-        this.busy = true;
-        this.getAllResultsLog({
-          repositoryUuid: this.repository.uuid,
-          resultId: this.id,
-        }).then((response) => {
-          this.maxLimit = response.data.log.length;
-          const append = response.data.log.slice(
-            this.resultExampleList.length,
-            this.resultExampleList.length + this.limit,
-          );
-          this.resultExampleList = this.resultExampleList.concat(append);
-          this.busy = false;
-        });
-      } else {
-        this.busy = true;
-      }
+      this.busy = true;
+      this.getAllResultsLog({
+        repositoryUuid: this.repository.uuid,
+        resultId: this.id,
+      }).then((response) => {
+        this.resultExampleList = response.data.log;
+        this.busy = false;
+      });
     },
   },
 };
@@ -103,6 +105,15 @@ export default {
   &__loading {
     width: 100%;
     text-align: center;
+  }
+
+  &__pagination {
+    min-width: 100%;
+    display: block;
+    margin: 1rem auto;
+    max-width: 600px;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 .no-examples {
