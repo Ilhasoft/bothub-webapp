@@ -5,11 +5,13 @@ exports[`EvaluateVersionItem.vue renders 1`] = `
   <bh-card-stub class="version-test-item">
     <router-link to="[object Object]">
       <div class="version-test-item__wrapper">
-        <div class="version-test-item__wrapper__info"><strong class="version-test-item__wrapper__info__item">Test #2</strong>
+        <div class="version-test-item__wrapper__info"><strong class="version-test-item__wrapper__info__item">
+            some specific text #2
+          </strong>
           <language-badge-stub language="pt" main="true" size="small" class="version-test-item__wrapper__info__item"></language-badge-stub> <small class="version-test-item__wrapper__info__item">
             in 9 months</small></div>
         <div class="version-test-item__wrapper__links">
-          <router-link to="[object Object]"><a> Load Results </a></router-link>
+          <router-link to="[object Object]"><a> some specific text </a></router-link>
         </div>
       </div>
     </router-link>

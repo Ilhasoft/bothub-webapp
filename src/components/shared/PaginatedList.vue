@@ -57,6 +57,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    reference: {
+      type: String,
+      default: () => '',
+    },
   },
   data() {
     return {

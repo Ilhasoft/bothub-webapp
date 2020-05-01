@@ -102,11 +102,11 @@ export default {
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapGetters({
+      getEvaluateLanguage: 'getEvaluateLanguage',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
     },
@@ -138,7 +138,7 @@ export default {
           .map((lang, index) => ({
             id: index + 1,
             value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} test sentences)`,
+            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
           }));
       });
     },

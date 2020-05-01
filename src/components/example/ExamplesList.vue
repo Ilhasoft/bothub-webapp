@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
 import Loading from '@/components/shared/Loading';
@@ -51,9 +51,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
   },
   watch: {

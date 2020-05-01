@@ -13,13 +13,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'getUpdateRepositoryState',
-    ]),
+    ...mapGetters({
+      authenticated: 'authenticated',
+      getUpdateRepositoryState: 'getUpdateRepositoryState',
+      repositoryVersion: 'getSelectedVersion',
+    }),
     ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
+      repositoryVersionObject: state => state.Repository.repositoryVersion,
     }),
   },
   watch: {
@@ -34,7 +35,11 @@ export default {
         this.updateRepository(true);
       }
     },
-    repositoryVersion() {
+    repositoryVersionObject(newVersion, oldVersion) {
+      if (!oldVersion
+      || !oldVersion.id
+      || oldVersion.repositoryUUID !== newVersion.repositoryUUID
+      || oldVersion.id === newVersion.id) return;
       this.updateRepository(true);
     },
     repositoryUuid() {
@@ -86,6 +91,7 @@ export default {
     updateRepositoryVersion(version) {
       this.setRepositoryVersion({
         version,
+        repositoryUUID: this.repository.uuid,
       });
     },
     onReady({ error }) {

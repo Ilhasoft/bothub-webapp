@@ -15,7 +15,7 @@
 
             <option
               v-for="intent in repository.intents_list"
-              v-show="info.intent_ranking.length == 0"
+              v-show="info.intent_ranking.length == 0 || confidenceVerify"
               :key="intent"
               :value="{name: intent}"
             >
@@ -24,6 +24,7 @@
 
             <option
               v-for="info in info.intent_ranking"
+              v-show="!confidenceVerify"
               :key="info.confidence"
               :value="{name: info.name, percent: info.confidence }">
               {{ info.name }} {{ info.confidence | percent }}
@@ -37,7 +38,7 @@
         <button
           class="button"
           type="button"
-          @click="$parent.close()">{{ $t('webapp.inbox.add_log.close') }}</button>
+          @click="closeModal">{{ $t('webapp.inbox.add_log.close') }}</button>
         <button
           :disabled="!selectedOptions"
           class="button is-primary"
@@ -66,6 +67,10 @@ export default {
       type: String,
       default: '',
     },
+    confidenceVerify: {
+      type: Boolean,
+      default: false,
+    },
 
   },
   data() {
@@ -76,6 +81,10 @@ export default {
   methods: {
     addIntent() {
       this.$emit('addedIntent', this.selectedOptions.name, this.titleHeader);
+      this.$parent.close();
+    },
+    closeModal() {
+      this.$emit('closeModal');
       this.$parent.close();
     },
   },

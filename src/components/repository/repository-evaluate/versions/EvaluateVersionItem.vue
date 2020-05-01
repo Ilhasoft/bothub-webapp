@@ -6,7 +6,9 @@
         <div
           class="version-test-item__wrapper">
           <div class="version-test-item__wrapper__info">
-            <strong class="version-test-item__wrapper__info__item">Test #{{ version }}</strong>
+            <strong class="version-test-item__wrapper__info__item">
+              {{ $t('webapp.result.test') }} #{{ version }}
+            </strong>
             <language-badge
               :language="language"
               class="version-test-item__wrapper__info__item"
@@ -16,7 +18,7 @@
           </div>
           <div class="version-test-item__wrapper__links">
             <router-link :to="resultRouterParams">
-              <a> Load Results </a>
+              <a> {{ $t('webapp.result.load_result') }} </a>
             </router-link>
           </div>
         </div>
