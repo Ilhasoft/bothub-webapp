@@ -42,13 +42,13 @@ export default {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
-  getAllVersions(store, { repositoryUuid, version, limit = 20 }) {
+  getAllResults(store, { repositoryUuid, version, limit = 20 }) {
     return evaluateExample.allVersions(repositoryUuid, version, limit);
   },
-  getResultsData(store, { repositoryUuid, resultId }) {
-    return evaluateExample.getResultsData(repositoryUuid, resultId);
+  getResultsData(store, { repositoryUuid, resultId, version }) {
+    return evaluateExample.getResultsData(repositoryUuid, resultId, version);
   },
-  getAllResultsLog(store, { repositoryUuid, resultId }) {
-    return evaluateExample.getAllResultsLog(repositoryUuid, resultId);
+  getAllResultsLog(store, { repositoryUuid, resultId, version }) {
+    return evaluateExample.getAllResultsLog(repositoryUuid, resultId, version);
   },
 };
