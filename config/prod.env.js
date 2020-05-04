@@ -14,6 +14,6 @@ module.exports = {
   VERSION: JSON.stringify(packageDict.version),
   VERSION_ENABLED: JSON.stringify(process.env.VERSION_ENABLED || false),
   BOTHUB_WEBAPP_USE_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_USE_SENTRY || true),
-  BOTHUB_WEBAPP_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_SENTRY || true),
+  BOTHUB_WEBAPP_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_SENTRY || null),
   BOTHUB_WEBAPP_ENVIRONMENT: JSON.stringify(process.env.BOTHUB_WEBAPP_ENVIRONMENT || 'PROD'),
 }

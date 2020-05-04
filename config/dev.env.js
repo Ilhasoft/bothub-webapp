@@ -9,6 +9,6 @@ module.exports = merge(prodEnv, {
   BOTHUB_WEBAPP_BASE_URL: JSON.stringify(process.env.BOTHUB_WEBAPP_BASE_URL || 'http://localhost:8080/'),
   VERSION_ENABLED: JSON.stringify(process.env.VERSION_ENABLED || true),
   BOTHUB_WEBAPP_USE_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_USE_SENTRY || false),
-  BOTHUB_WEBAPP_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_SENTRY || ''),
+  BOTHUB_WEBAPP_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_SENTRY || null),
   BOTHUB_WEBAPP_ENVIRONMENT: JSON.stringify(process.env.BOTHUB_WEBAPP_ENVIRONMENT || 'STAGING'),
 })
