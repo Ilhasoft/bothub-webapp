@@ -85,6 +85,7 @@ export default {
         repositoryUuid: this.repository.uuid,
         resultId: this.id,
       }).then((response) => {
+        console.log(response.data);
         this.resultExampleList = response.data.log;
         this.busy = false;
       });
