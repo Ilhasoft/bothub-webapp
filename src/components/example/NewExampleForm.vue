@@ -17,6 +17,7 @@
             :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
+            @submit="onEnter()"
           >
             <language-append-select-input
               slot="append"
@@ -34,15 +35,9 @@
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
             :open-on-focus="true"
-            size="is-medium"
+            :custom-formatter="intentFormatters"
             @keyup.enter.native="onEnter()"
           />
-          <!-- <bh-autocomplete
-            v-model="intent"
-            :data="repository.intents_list || []"
-            :formatters="intentFormatters"
-            :placeholder="$t('webapp.trainings.intent')"
-            size="normal" /> -->
         </bh-field>
       </div>
       <div class="column is-narrow">
@@ -150,11 +145,7 @@ export default {
       return formattersList;
     },
     intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
-      return formattersList;
+      return formatters.bothubItemKey();
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];
