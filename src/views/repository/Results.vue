@@ -56,7 +56,6 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import { mapActions, mapState, mapGetters } from 'vuex';
-import { LANGUAGES } from '@/utils';
 
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
@@ -74,7 +73,6 @@ export default {
   data() {
     return {
       currentLanguage: '',
-      languages: [],
       evaluating: false,
       error: {},
       requestAuthorizationModalOpen: false,
@@ -95,7 +93,6 @@ export default {
       this.setEvaluateLanguage(language);
     },
     selectedRepository() {
-      this.getExamples();
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
@@ -104,20 +101,7 @@ export default {
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'getEvaluateExample',
     ]),
-    getExamples() {
-      this.getEvaluateExample({
-        id: this.selectedRepository.uuid,
-      }).then(() => {
-        this.languages = Object.keys(this.selectedRepository.evaluate_languages_count)
-          .map((lang, index) => ({
-            id: index + 1,
-            value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
-          }));
-      });
-    },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },

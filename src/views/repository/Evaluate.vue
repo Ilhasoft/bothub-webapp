@@ -135,7 +135,6 @@ export default {
       this.setEvaluateLanguage(language);
     },
     selectedRepository() {
-      this.getExamples();
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
@@ -144,15 +143,9 @@ export default {
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'getEvaluateExample',
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
-    getExamples() {
-      this.getEvaluateExample({
-        id: this.selectedRepository.uuid,
-      });
-    },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },

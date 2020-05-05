@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
@@ -29,8 +29,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
+    ...mapGetters({
+      repository: 'getCurrentRepository',
+      version: 'getSelectedVersion',
     }),
   },
   mounted() {
@@ -38,11 +39,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getAllVersions',
+      'getAllResults',
     ]),
     async updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.versionsList = await this.getAllVersions({ repositoryUuid: this.repository.uuid });
+        this.versionsList = await this.getAllResults({
+          repositoryUuid: this.repository.uuid,
+          version: this.version,
+        });
       }
     },
   },
