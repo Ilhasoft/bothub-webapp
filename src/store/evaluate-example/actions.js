@@ -30,8 +30,8 @@ export default {
     return true;
   },
 
-  async getEvaluateExample(store, { id }) {
-    const response = await evaluateExample.get(id);
+  async getEvaluateExample(store, { id, version }) {
+    const response = await evaluateExample.get(id, version);
     return response.data;
   },
   async getEntitiesTest(store, { repositoryUuid, value }) {
@@ -42,8 +42,8 @@ export default {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
-  getAllVersions(store, { repositoryUuid, limit = 20 }) {
-    return evaluateExample.allVersions(repositoryUuid, limit);
+  getAllResults(store, { repositoryUuid, version, limit = 20 }) {
+    return evaluateExample.allVersions(repositoryUuid, version, limit);
   },
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);

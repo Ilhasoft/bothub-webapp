@@ -23,7 +23,7 @@ describe('EvaluateVersionList.vue', () => {
     };
 
     actions = {
-      getAllVersions: jest.fn(),
+      getAllResults: jest.fn(),
     };
 
     store = new Vuex.Store({
