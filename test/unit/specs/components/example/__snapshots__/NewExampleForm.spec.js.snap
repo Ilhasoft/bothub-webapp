@@ -12,12 +12,16 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
     <div class="column">
       <bh-field-stub errors="">
-        <bh-autocomplete-stub data="" formatters="intentFormatters" placeholder="some specific text" size="normal"></bh-autocomplete-stub>
+        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" customformatter="function (v) {
+      /* istanbul ignore next */cov_149zffm9s2.f[13]++;
+      cov_149zffm9s2.s[36]++;
+      return v.toLowerCase().replace(/[\\s]/g, '_').replace(/[,./\\\\;+=!?@#$%¨&amp;*()[\\]^&quot;'~{}ç:<>|]/g, '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
+    }" placeholder="some specific text"></b-autocomplete-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">
       <bh-field-stub errors="">
-        <bh-button-stub disabled="true" size="normal" primary="true" type="submit" tooltiphover="You need type a text to sentence,Intent is required">some specific text</bh-button-stub>
+        <bh-button-stub disabled="true" size="normal" primary="true" type="submit" tooltiphover="some specific text,some specific text">some specific text</bh-button-stub>
       </bh-field-stub>
     </div>
   </form>
