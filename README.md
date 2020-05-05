@@ -36,3 +36,4 @@ You can set environment variables in your OS or write on .env file.
 | BOTHUB_WEBAPP_ENVIRONMENT | `string` | In development mode is `'DEVELOPMENT'`, in production mode is `'PRODUCTION'` | Running environment for sentry.io*
 
 \* MailChimp subscribe URL: `https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]`
+
