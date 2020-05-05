@@ -22,6 +22,7 @@
                 :formatters="textFormatters"
                 :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
                 size="normal"
+                @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
             </bh-field>
@@ -30,19 +31,20 @@
             <bh-field
               :errors="errors.non_field_errors"
             >
-              <bh-autocomplete
+              <b-autocomplete
                 v-model="intent"
-                :data="repository.intents_list || []"
-                :formatters="intentFormatters"
                 :placeholder="$t('webapp.evaluate.intent')"
-                size="normal"
+                :data="filteredData"
+                :open-on-focus="true"
+                :custom-formatter="intentFormatters"
+                @keyup.enter.native="onEnter()"
               />
             </bh-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
             <bh-button
               ref="saveSentenceButton"
-              :disabled="!isValid || submitting "
+              :disabled="!shouldSubmit"
               :tooltip-hover="!isValid ? validationErrors : null"
               :loading="submitting"
               primary
@@ -114,6 +116,12 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',
     }),
+    shouldSubmit() {
+      return this.isValid && !this.submitting;
+    },
+    filteredData() {
+      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+    },
     validationErrors() {
       const errors = [];
 
@@ -140,11 +148,7 @@ export default {
       return formattersList;
     },
     intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
-      return formattersList;
+      return formatters.bothubItemKey();
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];
@@ -184,6 +188,9 @@ export default {
     ...mapActions([
       'newEvaluateExample',
     ]),
+    onEnter() {
+      if (this.shouldSubmit) this.submitSentence();
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },
