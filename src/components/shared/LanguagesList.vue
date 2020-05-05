@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     select(option) {
-      this.languages.filter((language) => {
+      this.languages.find((language) => {
         if (language.title === option) {
           this.selected = language.value;
           this.val = language.id;
