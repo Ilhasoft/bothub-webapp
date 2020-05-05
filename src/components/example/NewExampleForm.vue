@@ -35,7 +35,6 @@
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
             :open-on-focus="true"
-            :custom-formatter="intentFormatters"
             @keyup.enter.native="onEnter()"
           />
         </bh-field>
@@ -143,9 +142,6 @@ export default {
       ];
       formattersList.toString = () => 'textFormatters';
       return formattersList;
-    },
-    intentFormatters() {
-      return formatters.bothubItemKey();
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];

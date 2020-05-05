@@ -12,11 +12,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
     <div class="column">
       <bh-field-stub errors="">
-        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" customformatter="function (v) {
-      /* istanbul ignore next */cov_149zffm9s2.f[13]++;
-      cov_149zffm9s2.s[36]++;
-      return v.toLowerCase().replace(/[\\s]/g, '_').replace(/[,./\\\\;+=!?@#$%¨&amp;*()[\\]^&quot;'~{}ç:<>|]/g, '').normalize('NFD').replace(/[\\u0300-\\u036f]/g, '');
-    }" placeholder="some specific text"></b-autocomplete-stub>
+        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
       </bh-field-stub>
     </div>
     <div class="column is-narrow">
