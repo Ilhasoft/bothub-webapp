@@ -93,7 +93,6 @@ export default {
       this.setEvaluateLanguage(language);
     },
     selectedRepository() {
-      this.getExamples();
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
