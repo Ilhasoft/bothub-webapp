@@ -31,5 +31,8 @@ You can set environment variables in your OS or write on .env file.
 | MAILCHIMP_DATACENTER | `string` | Empty | Check MailChimp subscribe URL*
 | MAILCHIMP_USER_ID | `string` | Empty | Check MailChimp subscribe URL*
 | MAILCHIMP_LIST_ID | `string` | Empty | Check MailChimp subscribe URL*
+| BOTHUB_WEBAPP_USE_SENTRY | `boolean` | In development mode is `false`, in production mode is `true` | Enable [sentri.io](https://sentry.io/welcome/) tracking*
+| BOTHUB_WEBAPP_SENTRY | `string` | Empty | Sentry.io DNS*
+| BOTHUB_WEBAPP_ENVIRONMENT | `string` | In development mode is `'DEVELOPMENT'`, in production mode is `'PRODUCTION'` | Running environment for sentry.io*
 
 \* MailChimp subscribe URL: `https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]`
