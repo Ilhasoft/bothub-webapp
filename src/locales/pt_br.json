@@ -109,7 +109,7 @@
       "you_need_type_a_text": "Você precisa escrever uma frase",
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
-      "no_versions": "Sem versões",
+      "no_versions": "Sem resultados para esta versão",
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
@@ -132,14 +132,15 @@
       "intent_confidence_distribution_text": "O histograma permite visualizar a disttribuição da confiança de todas as predições, com o volume de predições with the volume de predições corretas e incorretas sendo mostradas nas barras verdes e vermelhas, respectivamente. Melhorar a qualidade do conjunto de teste moverá as barras verdes do histograma para a direita e as vermelhas para a esquerda do gráfico.",
       "sentence_details": "Detalhes das frases",
       "sentence_details_text": "Compare os resultados de cada frase",
-      "do_not_log": "Não guardar",
+      "do_not_log": "Nenhuma frase para mostrar",
       "expected_intent": "Intenção esperada",
       "predicted_intent": "Intenção predita",
       "no_expected_intent": "Nenhuma intenção esperada",
       "confidence": "confiança",
       "ok": "ok",
       "failed": "falhou",
-      "intent": "Intenção"
+      "intent": "Intenção",
+      "error": "Houve um erro ao buscar as frases"
     },
     "home": {
       "description": "Descrição",
