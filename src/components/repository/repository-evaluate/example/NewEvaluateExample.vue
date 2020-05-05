@@ -181,6 +181,12 @@ export default {
       };
     },
   },
+  watch: {
+    intent() {
+      if (!this.intent || this.intent.length <= 0) return;
+      this.intent = formatters.bothubItemKey()(this.intent);
+    },
+  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },

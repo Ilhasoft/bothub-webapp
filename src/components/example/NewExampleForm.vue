@@ -177,6 +177,12 @@ export default {
       };
     },
   },
+  watch: {
+    intent() {
+      if (!this.intent || this.intent.length <= 0) return;
+      this.intent = formatters.bothubItemKey()(this.intent);
+    },
+  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
@@ -185,8 +191,7 @@ export default {
       'newExample',
     ]),
     onEnter() {
-      console.log(this.intent);
-      if(this.shouldSubmit) this.onSubmit();
+      if (this.shouldSubmit) this.onSubmit();
     },
     setTextSelected(value) {
       this.textSelected = value;
