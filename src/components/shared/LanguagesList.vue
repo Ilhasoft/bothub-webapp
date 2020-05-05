@@ -49,11 +49,10 @@ export default {
   computed: {
     languages() {
       if (this.customLanguages) {
-        return [].concat(this.customLanguages);
+        return this.customLanguages;
       }
-      return []
-        .concat(Object.keys(LANGUAGES)
-          .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang })));
+      return Object.keys(LANGUAGES)
+        .map((lang, index) => ({ id: index + 1, title: LANGUAGES[lang], value: lang }));
     },
     filterLanguages() {
       return this.languages.filter(option => option.title
