@@ -29,18 +29,26 @@
       <div class="column">
         <bh-field
           :errors="errors.intent">
-          <bh-autocomplete
+          <b-autocomplete
+            v-model="intent"
+            :placeholder="$t('webapp.trainings.intent')"
+            :data="filteredData"
+            :open-on-focus="true"
+            size="is-medium"
+            @keyup.enter.native="onEnter()"
+          />
+          <!-- <bh-autocomplete
             v-model="intent"
             :data="repository.intents_list || []"
             :formatters="intentFormatters"
             :placeholder="$t('webapp.trainings.intent')"
-            size="normal" />
+            size="normal" /> -->
         </bh-field>
       </div>
       <div class="column is-narrow">
         <bh-field>
           <bh-button
-            :disabled="!isValid || submitting "
+            :disabled="!shouldSubmit "
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             primary
@@ -110,6 +118,12 @@ export default {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
     }),
+    shouldSubmit() {
+      return this.isValid && !this.submitting;
+    },
+    filteredData() {
+      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+    },
     validationErrors() {
       const errors = [];
 
@@ -179,6 +193,10 @@ export default {
     ...mapActions([
       'newExample',
     ]),
+    onEnter() {
+      console.log(this.intent);
+      if(this.shouldSubmit) this.onSubmit();
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },
