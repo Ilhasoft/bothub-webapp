@@ -19,7 +19,7 @@
             ref="translationsList"
             :repository="repository"
             :to-language="toLanguage"
-            @itemDeleted="examplesTransleted()" />
+            @exampleUpdated="exampleUpdated()" />
         </div>
       </div>
     </div>
@@ -56,7 +56,7 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
-    examplesTransleted() {
+    exampleUpdated() {
       this.updateRepository(false);
     },
   },
