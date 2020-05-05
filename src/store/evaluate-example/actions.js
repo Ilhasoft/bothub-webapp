@@ -45,10 +45,10 @@ export default {
   getAllResults(store, { repositoryUuid, version, limit = 20 }) {
     return evaluateExample.allVersions(repositoryUuid, version, limit);
   },
-  getResultsData(store, { repositoryUuid, resultId, version }) {
-    return evaluateExample.getResultsData(repositoryUuid, resultId, version);
+  getResultsData(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getResultsData(repositoryUuid, resultId);
   },
-  getAllResultsLog(store, { repositoryUuid, resultId, version }) {
-    return evaluateExample.getAllResultsLog(repositoryUuid, resultId, version);
+  getAllResultsLog(store, { repositoryUuid, resultId }) {
+    return evaluateExample.getAllResultsLog(repositoryUuid, resultId);
   },
 };
