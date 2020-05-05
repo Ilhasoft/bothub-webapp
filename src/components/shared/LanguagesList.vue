@@ -77,13 +77,11 @@ export default {
   },
   methods: {
     select(option) {
-      this.languages.find((language) => {
-        if (language.title === option) {
-          this.selected = language.value;
-          this.val = language.id;
-        }
-        return '';
-      });
+      const languageResult = this.languages.find(language => language.title === option);
+      if (languageResult !== undefined) {
+        this.selected = languageResult.value;
+        this.val = languageResult.id;
+      }
     },
   },
 };
