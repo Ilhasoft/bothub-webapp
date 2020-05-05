@@ -193,7 +193,9 @@
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "delete_phrase_modal":"Are you sure? The example will be deleted",
       "delete_button":"Delete",
-      "cancel_button":"Cancel"
+      "cancel_button":"Cancel",
+      "empty_text_error": "You need type a text to sentence",
+      "intent_error": "Intent is required"
     },
     "train_modal": {
       "training_status": "Training Status",
