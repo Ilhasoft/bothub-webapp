@@ -30,12 +30,8 @@ export default {
     };
   },
   computed: {
-    categories() {
-      return [{ id: 0, name: this.$t('webapp.home.all_categories'), active: this.current === 0 }]
-        .concat(this.allCategories);
-    },
     filterCategories() {
-      return this.categories.filter(option => option.name
+      return this.allCategories.filter(option => option.name
         .toString()
         .toLowerCase()
         .indexOf(this.category.toLowerCase()) >= 0);
@@ -72,7 +68,7 @@ export default {
       'getAllCategories',
     ]),
     select(option) {
-      this.categories.filter((item) => {
+      this.allCategories.filter((item) => {
         if (item.name === option) {
           this.selected = option;
           this.val = item.id;
