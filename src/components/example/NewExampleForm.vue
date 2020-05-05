@@ -17,6 +17,7 @@
             :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
+            @submit="onEnter()"
           >
             <language-append-select-input
               slot="append"
@@ -29,18 +30,19 @@
       <div class="column">
         <bh-field
           :errors="errors.intent">
-          <bh-autocomplete
+          <b-autocomplete
             v-model="intent"
-            :data="repository.intents_list || []"
-            :formatters="intentFormatters"
             :placeholder="$t('webapp.trainings.intent')"
-            size="normal" />
+            :data="filteredData"
+            :open-on-focus="true"
+            @keyup.enter.native="onEnter()"
+          />
         </bh-field>
       </div>
       <div class="column is-narrow">
         <bh-field>
           <bh-button
-            :disabled="!isValid || submitting "
+            :disabled="!shouldSubmit "
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             primary
@@ -110,15 +112,21 @@ export default {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
     }),
+    shouldSubmit() {
+      return this.isValid && !this.submitting;
+    },
+    filteredData() {
+      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+    },
     validationErrors() {
       const errors = [];
 
       if (!this.text) {
-        errors.push('You need type a text to sentence');
+        errors.push(this.$t('webapp.trainings.empty_text_error'));
       }
 
       if (!this.intent) {
-        errors.push('Intent is required');
+        errors.push(this.$t('webapp.trainings.intent_error'));
       }
 
       return errors;
@@ -133,13 +141,6 @@ export default {
         BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
-      return formattersList;
-    },
-    intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
       return formattersList;
     },
     availableEntities() {
@@ -172,6 +173,12 @@ export default {
       };
     },
   },
+  watch: {
+    intent() {
+      if (!this.intent || this.intent.length <= 0) return;
+      this.intent = formatters.bothubItemKey()(this.intent);
+    },
+  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
@@ -179,6 +186,9 @@ export default {
     ...mapActions([
       'newExample',
     ]),
+    onEnter() {
+      if (this.shouldSubmit) this.onSubmit();
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },

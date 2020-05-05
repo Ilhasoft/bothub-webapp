@@ -17,7 +17,7 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
         </div>
         <div>
           <bh-field-stub errors="">
-            <bh-autocomplete-stub data="affirm,cuisine,greet" formatters="intentFormatters" placeholder="some specific text" size="normal"></bh-autocomplete-stub>
+            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
           </bh-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
