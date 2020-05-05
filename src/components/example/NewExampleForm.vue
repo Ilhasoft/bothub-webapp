@@ -123,11 +123,11 @@ export default {
       const errors = [];
 
       if (!this.text) {
-        errors.push('You need type a text to sentence');
+        errors.push(this.$t('webapp.trainings.empty_text_error'));
       }
 
       if (!this.intent) {
-        errors.push('Intent is required');
+        errors.push(this.$t('webapp.trainings.intent_error'));
       }
 
       return errors;
