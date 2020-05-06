@@ -139,47 +139,16 @@ export default {
 
   &__requestAuthorization{
     color: $color-fake-black;
-        font-weight: $font-weight-medium;
-        text-align: center;
-        float: right;
-      }
-    a {
-      position: relative;
-      display: inline-flex;
-      padding: 0 1.5rem 1rem;
-      color: $color-grey-dark;
-      font-weight: $font-weight-medium;
-      text-align: center;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    float: right;
+    text-decoration: none !important;
 
-      &:hover,
-      &.active {
-        color: $color-fake-black;
-
-        &::before {
-          $size: 10rem;
-
-          position: absolute;
-          content: "";
-          width: $size;
-          height: $size;
-          left: 50%;
-          bottom: -($size - .75rem);
-          transform: translateX(-50%);
-          background-color: $color-primary;
-          border-radius: 50%;
-          animation: nav-bubble-animation .25s ease;
-
-          @keyframes nav-bubble-animation {
-            from {
-              bottom: -($size);
-            }
-            to {
-              bottom: -($size - .75rem);
-            }
-          }
-        }
-      }
+     &:hover{
+      color: $color-grey-darker !important;
     }
+  }
+
   }
     &__notification{
     @media screen and (max-width: 50em) {
