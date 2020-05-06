@@ -65,15 +65,15 @@
           </b-notification>
         </div>
       </div>
-    </div>
-    <div v-if="!authenticated">
-      <b-notification
-        :closable="false"
-        class="is-info"
-        role="alert">
-        {{ $t('webapp.translate.login') }}
-      </b-notification>
-      <login-form hide-forgot-password />
+      <div v-else>
+        <b-notification
+          :closable="false"
+          class="is-info"
+          role="alert">
+          {{ $t('webapp.translate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
+      </div>
     </div>
   </repository-view-base>
 </template>
