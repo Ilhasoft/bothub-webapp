@@ -2,61 +2,61 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div
-      v-if="repository"
-      class="bh-grid bh-grid--column">
-      <div class="bh-grid__item bh-grid__item--nested">
-        <div class="bh-grid trainings-repository__new-example">
-          <div class="bh-grid__item">
-            <div v-if="authenticated">
-              <div v-if="repository.authorization.can_contribute">
-                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
-                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
-                <new-example-form
-                  :repository="repository"
-                  @created="updatedExampleList()" />
-              </div>
-              <div v-else>
-                <div class="bh-notification bh-notification--warning">
-                  {{ $t('webapp.trainings.not_can_edit_repository') }}
-                  <request-authorization-modal
-                    v-if="repository"
-                    :open.sync="requestAuthorizationModalOpen"
-                    :repository-uuid="repository.uuid"
-                    @requestDispatched="onAuthorizationRequested()" />
-                  <a
-                    class="requestAuthorization"
-                    @click="openRequestAuthorizationModal">
-                    {{ $t('webapp.layout.request_authorization') }}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div v-else>
-              <div class="bh-notification bh-notification--info">
-                {{ $t('webapp.trainings.login') }}
-              </div>
-              <login-form hide-forgot-password />
-            </div>
+    <div v-if="repository">
+      <div class="trainings-repository__new-example">
+        <div v-if="authenticated">
+          <div v-if="repository.authorization.can_contribute">
+            <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+            <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+            <new-example-form
+              :repository="repository"
+              @created="updatedExampleList()" />
           </div>
+          <div v-else>
+            <b-notification
+              :closable="false"
+              type="is-warning"
+              role="alert">
+              <div class="trainings-repository__requestAuthorization">
+                {{ $t('webapp.trainings.not_can_edit_repository') }}
+                <request-authorization-modal
+                  v-if="repository"
+                  :open.sync="requestAuthorizationModalOpen"
+                  :repository-uuid="repository.uuid"
+                  @requestDispatched="onAuthorizationRequested()" />
+                <a
+                  @click="openRequestAuthorizationModal">
+                  {{ $t('webapp.layout.request_authorization') }}
+                </a>
+              </div>
+
+            </b-notification>
+          </div>
+        </div>
+        <div v-else>
+          <b-notification
+            :closable="false"
+            type="is-info">
+            {{ $t('webapp.trainings.login') }}
+          </b-notification>
+          <login-form hide-forgot-password />
         </div>
       </div>
       <div
-        v-if="authenticated && repository.authorization.can_contribute"
-        class="bh-grid__item">
+        v-if="authenticated && repository.authorization.can_contribute">
         <hr>
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <bh-button
+          <b-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
             :disabled="loadingStatus"
             :loading="loadingStatus"
-            color="secondary-light"
-            size="normal"
+            type="is-secondary"
+            class="trainings-repository__list-wrapper__button"
             @click="openTrainingModal">
             {{ $t('webapp.trainings.run_training') }}
-          </bh-button>
+          </b-button>
         </div>
         <filter-examples
           :intents="repository.intents_list"
@@ -227,36 +227,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+  @import '~@/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
 .trainings-repository {
   &__list-wrapper {
     display: flex;
     justify-content: space-between;
     margin-bottom: .5rem;
+
+    &__button{
+      color: $color-white;
+      width: 14rem;
+
+      &:hover{
+        color: $color-white;
+      }
+    }
   }
 
   &__new-example {
     margin-top: 1rem;
     background-color: $color-white;
   }
-}
+  &__requestAuthorization{
+      color: $color-fake-black;
+      text-align: center;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
 
-  .requestAuthorization{
-        color: $color-fake-black;
+      a{
         font-weight: $font-weight-medium;
-        text-align: center;
-        float: right;
+        text-decoration: none !important;
+
+        &:hover{
+        color: $color-grey-darker !important;
+       }
+      }
+
+      @media screen and (max-width: 50em) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
   }
 
-   @media screen and (max-width: 50em) {
-        .bh-notification--warning{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
+}
+
 
 </style>
