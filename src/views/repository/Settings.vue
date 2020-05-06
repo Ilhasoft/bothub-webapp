@@ -193,15 +193,12 @@ export default {
 
         a{
           font-weight: $font-weight-medium;
-          text-decoration:none !important
-
-        }
-        a:hover{
+          text-decoration:none !important;
+          &:hover{
           color: $color-grey-darker;
+          }
         }
       }
-
-
     }
 
 
