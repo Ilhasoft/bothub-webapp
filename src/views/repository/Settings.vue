@@ -35,8 +35,11 @@
           </div>
           <div
             v-else>
-            <div class="bh-grid__item">
-              <div class="bh-notification bh-notification--warning">
+            <b-notification
+              :closable="false"
+              type="is-warning"
+              role="alert">
+              <div class="settings__requestAuthorization">
                 {{ $t('webapp.settings.not_can_edit_repository') }}
                 <request-authorization-modal
                   v-if="repository"
@@ -44,17 +47,16 @@
                   :repository-uuid="repository.uuid"
                   @requestDispatched="onAuthorizationRequested()" />
                 <a
-                  class="requestAuthorization"
                   @click="openRequestAuthorizationModal">
                   {{ $t('webapp.layout.request_authorization') }}
                 </a>
               </div>
-            </div>
+            </b-notification>
           </div>
         </div>
       </div>
       <div
-        v-else>
+        v-if="!authenticated">
         <div class="tile is-vertical">
           <b-notification
             :closable="false"
@@ -173,15 +175,33 @@ export default {
 
     .settings {
       @include default-margin;
-    }
-    .requestAuthorization{
+
+      &__requestAuthorization{
         color: $color-fake-black;
-        font-weight: $font-weight-medium;
         text-align: center;
-        float: right
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+      @media screen and (max-width: 50em) {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        a{
+          font-weight: $font-weight-medium;
+          text-decoration:none !important
+
+        }
+        a:hover{
+          color: $color-grey-darker;
+        }
       }
-    a {
-    text-decoration: none !important;
+
+
     }
 
 
