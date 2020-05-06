@@ -17,11 +17,13 @@
           </div>
         </div>
         <div
-          v-else
-          class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
+          v-else>
+          <b-notification
+            :closable="false"
+            type="is-warning"
+            role="alert">
+            <div
+              class="evaluate__notification">
               {{ $t('webapp.evaluate.you_can_not_edit') }}
               <request-authorization-modal
                 v-if="repository"
@@ -34,18 +36,18 @@
                 {{ $t('webapp.layout.request_authorization') }}
               </a>
             </div>
-          </div>
+          </b-notification>
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          class="is-info"
+          role="alert">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -118,9 +120,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
-
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .evaluate {
   &__divider {
@@ -137,10 +138,10 @@ export default {
     border-bottom: 1px solid $color-grey;
 
   &__requestAuthorization{
-        color: $color-fake-black;
+    color: $color-fake-black;
         font-weight: $font-weight-medium;
         text-align: center;
-        float: right
+        float: right;
       }
     a {
       position: relative;
@@ -180,7 +181,15 @@ export default {
       }
     }
   }
-
+    &__notification{
+    @media screen and (max-width: 50em) {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+    }
+  }
   &__content-header {
     text-align: left;
 
@@ -209,13 +218,6 @@ export default {
     max-width: 100%;
     margin: 0 auto;
   }
-    @media screen and (max-width: 50em) {
-        .bh-notification--warning{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
+
 }
 </style>
