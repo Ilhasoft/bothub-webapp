@@ -4,23 +4,18 @@
     :error-code="errorCode">
     <div v-if="repository">
       <div class="translations__header">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <translations-status
-              ref="translationsStatus"
-              :repository-uuid="repository.uuid"
-              v-model="toLanguage" />
-          </div>
-        </div>
+        <translations-status
+          ref="translationsStatus"
+          :repository-uuid="repository.uuid"
+          v-model="toLanguage" />
       </div>
-      <div class="bh-grid">
-        <div class="bh-grid__item">
-          <translations-list
-            ref="translationsList"
-            :repository="repository"
-            :to-language="toLanguage"
-            @exampleUpdated="exampleUpdated()" />
-        </div>
+      <hr>
+      <div class="translations__list">
+        <translations-list
+          ref="translationsList"
+          :repository="repository"
+          :to-language="toLanguage"
+          @exampleUpdated="exampleUpdated()" />
       </div>
     </div>
   </repository-view-base>
@@ -62,15 +57,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-
-
-.translations {
-  &__header {
-    background-color: $color-white;
-    border-bottom: .120rem solid whitesmoke;
-  }
-}
-</style>
