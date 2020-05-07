@@ -98,7 +98,6 @@
   </div>
 </template>
 <script>
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import { mapGetters, mapActions } from 'vuex';
@@ -112,7 +111,6 @@ export default {
     },
   },
   components: {
-    RepositoryInfo,
     NewRepositoryModal,
     RequestAuthorizationModal,
   },

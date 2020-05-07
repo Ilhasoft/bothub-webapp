@@ -7,11 +7,11 @@
       v-model="data"
       :errors="errors" />
     <div>
-      <bh-button
+      <b-button
         :disabled="submitting"
-        full-width
-        type="submit"
-        primary> Request </bh-button>
+        :expanded="true"
+        native-type="submit"
+        type="is-primary"> {{ $t('webapp.settings.request') }} </b-button>
     </div>
   </form>
 </template>
