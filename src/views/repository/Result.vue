@@ -36,35 +36,32 @@
           </div>
         </div>
         <div
-          v-else
-          class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
-          </div>
+          v-else>
+          <b-notification
+            :closable="false"
+            type="is-warning">
+            {{ $t('webapp.evaluate.you_can_not_edit') }}
+            <request-authorization-modal
+              v-if="repository"
+              :open.sync="requestAuthorizationModalOpen"
+              :repository-uuid="repository.uuid"
+              @requestDispatched="onAuthorizationRequested()" />
+            <a
+              class="evaluate__navigation__requestAuthorization"
+              @click="openRequestAuthorizationModal">
+              {{ $t('webapp.layout.request_authorization') }}
+            </a>
+          </b-notification>
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
