@@ -72,25 +72,23 @@
           :query="query"
           :editable="repository.authorization.can_contribute" />
       </div>
-      <div
+      <b-notification
         v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--warning">
-            {{ $t('webapp.evaluate.you_can_not_edit') }}
-            <request-authorization-modal
-              v-if="repository"
-              :open.sync="requestAuthorizationModalOpen"
-              :repository-uuid="repository.uuid"
-              @requestDispatched="onAuthorizationRequested()" />
-            <a
-              class="requestAuthorization"
-              @click="openRequestAuthorizationModal">
-              {{ $t('webapp.layout.request_authorization') }}
-            </a>
-          </div>
-        </div>
-      </div>
+        :closable="false"
+        class="repository-log__notification"
+        type="is-warning">
+        {{ $t('webapp.evaluate.you_can_not_edit') }}
+        <request-authorization-modal
+          v-if="repository"
+          :open.sync="requestAuthorizationModalOpen"
+          :repository-uuid="repository.uuid"
+          @requestDispatched="onAuthorizationRequested()" />
+        <a
+          class="requestAuthorization"
+          @click="openRequestAuthorizationModal">
+          {{ $t('webapp.layout.request_authorization') }}
+        </a>
+      </b-notification>
     </div>
 
     <div
@@ -236,14 +234,19 @@ export default {
       pointer-events: initial !important;
       cursor: pointer;
     }
-  }
 
-   @media screen and (max-width: 50em) {
-        .bh-notification--warning{
+    &__notification {
+
+      margin: 0.5rem;
+
+         @media screen and (max-width: 50em) {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
-        }
       }
+    }
+  }
+
+
 </style>
