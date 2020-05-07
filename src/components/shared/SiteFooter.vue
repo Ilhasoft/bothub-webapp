@@ -6,71 +6,63 @@
     />
     <div class="container">
       <div class="footer-content">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <div class="footer-item footer-brand">
-              <img
-                src="~@/assets/imgs/logo-white.svg"
-                alt="bothub">
-              <div>Webapp v{{ version }}</div>
-            </div>
-            <ul class="footer-item">
-              <li>
-                <router-link to="/terms">{{ $t('webapp.layout.terms_conditions') }}
-                </router-link>
-              </li>
-            </ul>
-            <ul class="footer-item footer-sociallist">
-              <li class="footer-sociallist-item">
-                <a
-                  href="https://www.facebook.com/bothub.it"
-                  target="_blank"><b-icon icon="facebook" /></a>
-              </li>
-              <li class="footer-sociallist-item">
-                <a
-                  href="https://github.com/Ilhasoft/bothub/"
-                  target="_blank"><b-icon icon="github-circle" /></a>
-              </li>
-            </ul>
+        <div class="footer-items">
+          <div class="footer-item footer-brand">
+            <img
+              src="~@/assets/imgs/logo-white.svg"
+              alt="bothub">
+            <div>Webapp v{{ version }}</div>
           </div>
-          <div class="bh-grid__item">
-            <h4 class="footer-title">{{ $t('webapp.layout.contact_us') }}</h4>
-            <div class="footer-section-item">
-              <p>bothub@ilhasoft.com.br</p>
-            </div>
-            <div class="footer-section-item">
-              <p>Rua José Pontes de Magalhães 70,</p>
-              <p>Empresarial JTR - Ed. Austrália, Sala 07</p>
-              <p>Jatiúca - Maceió/AL</p>
-            </div>
-            <div class="footer-section-item">
-              <p>+55 82 3022.5978</p>
-            </div>
+          <ul class="footer-item">
+            <li>
+              <router-link to="/terms">{{ $t('webapp.layout.terms_conditions') }}
+              </router-link>
+            </li>
+          </ul>
+          <ul class="footer-item footer-sociallist">
+            <li class="footer-sociallist-item">
+              <a
+                href="https://www.facebook.com/bothub.it"
+                target="_blank"><b-icon icon="facebook" /></a>
+            </li>
+            <li class="footer-sociallist-item">
+              <a
+                href="https://github.com/Ilhasoft/bothub/"
+                target="_blank"><b-icon icon="github-circle" /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-items">
+          <h4 class="footer-title">{{ $t('webapp.layout.contact_us') }}</h4>
+          <div class="footer-section-item">
+            <p>bothub@ilhasoft.com.br</p>
           </div>
-          <div class="bh-grid__item">
-            <h4 class="footer-title">{{ $t('webapp.layout.subscribe') }}</h4>
-            <div class="footer-section-item">
-              <p>{{ $t('webapp.layout.newsletter') }}</p>
-            </div>
-            <form @submit.prevent="onSubscribeSubmit()">
-              <div class="footer-has-input">
-                <bh-text
-                  v-model="email"
-                  :placeholder="$t('webapp.layout.you_best_email')"
-                  type="email"
-                  no-border
-                >
-                  <div slot="append">
-                    <bh-icon-button
-                      size="small"
-                      class="text-color-grey-dark"
-                      value="chevron-right"
-                      @click="onSubscribeSubmit()" />
-                  </div>
-                </bh-text>
-              </div>
-            </form>
+          <div class="footer-section-item">
+            <p>Rua José Pontes de Magalhães 70,</p>
+            <p>Empresarial JTR - Ed. Austrália, Sala 07</p>
+            <p>Jatiúca - Maceió/AL</p>
           </div>
+          <div class="footer-section-item">
+            <p>+55 82 3022.5978</p>
+          </div>
+        </div>
+        <div class="footer-items">
+          <h4 class="footer-title">{{ $t('webapp.layout.subscribe') }}</h4>
+          <div class="footer-section-item">
+            <p>{{ $t('webapp.layout.newsletter') }}</p>
+          </div>
+          <form @submit.prevent="onSubscribeSubmit()">
+            <div class="footer-has-input">
+              <b-input
+                v-model="email"
+                :placeholder="$t('webapp.layout.you_best_email')"
+                type="email"
+                icon-right="chevron-right"
+                icon-right-clickable
+                @icon-right-click="onSubscribeSubmit()"
+              />
+            </div>
+          </form>
         </div>
       </div>
       <div class="footer-license">
@@ -128,9 +120,9 @@ export default {
       /* istanbul ignore next */
       this.email = '';
       /* istanbul ignore next */
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: 'Thank you for subscribing!',
-        type: 'success',
+        type: 'is-success',
       });
     },
   },
@@ -138,7 +130,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 
 
 footer {
@@ -185,6 +177,17 @@ footer {
 
     &-content {
       padding: 64px 0;
+      display: flex;
+      justify-content: space-around;
+       @media screen and (max-width: 50em) {
+        flex-direction: column;
+        justify-content: space-around;
+        margin: 1rem;
+      }
+    }
+
+    &-items{
+      margin-top: 1rem;
     }
 
     &-item {
