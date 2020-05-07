@@ -60,7 +60,7 @@
         </div>
         <filter-examples
           :intents="repository.intents_list"
-          :entities="repository.entities_list"
+          :entities="repository.entities"
           :language-filter="true"
           @queryStringFormated="onSearch($event)"/>
         <examples-list
