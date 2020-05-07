@@ -20,7 +20,7 @@
           <b-autocomplete
             v-model="intent"
             :open-on-focus="true"
-            :data="optionsIntents || []"
+            :data="optionsIntents"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_intents')" />
         </b-field>
@@ -29,7 +29,7 @@
           <b-autocomplete
             v-model="entity"
             :open-on-focus="true"
-            :data="optionsEntities || []"
+            :data="optionsEntities"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_entities')" />
         </b-field>
