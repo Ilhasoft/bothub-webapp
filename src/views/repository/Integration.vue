@@ -79,14 +79,13 @@ text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.analyze_text.notification_info') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.analyze_text.notification_info') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
