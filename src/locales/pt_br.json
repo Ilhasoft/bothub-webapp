@@ -193,7 +193,9 @@
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
       "delete_button":"Deletar",
-      "cancel_button":"Cancelar"
+      "cancel_button":"Cancelar",
+      "empty_text_error": "Digite uma frase",
+      "intent_error": "Digite uma intenção"
     },
     "train_modal": {
       "training_status": "Status do Treinamento",

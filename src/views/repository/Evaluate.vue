@@ -28,16 +28,15 @@
                   </option>
                 </b-select>
               </div>
-              <bh-button
+              <b-button
                 ref="runNewTestButton"
                 :loading="evaluating"
                 :disabled="evaluating"
+                type="is-secondary"
                 class="evaluate__content-header__wrapper__btn"
-                secondary
                 @click="newEvaluate()">
-                <slot v-if="!evaluating">
-                  {{ $t('webapp.evaluate.run_test') }}
-              </slot></bh-button>
+                {{ $t('webapp.evaluate.run_test') }}
+              </b-button>
             </div>
           </div>
           <div class="evaluate__divider" />
@@ -49,11 +48,12 @@
           </div>
         </div>
         <div
-          v-else
           class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
+                evaluate__container">
+          <div class="evaluate__item">
+            <b-notification
+              :closable="false"
+              type="is-warning">
               {{ $t('webapp.evaluate.you_can_not_edit') }}
               <request-authorization-modal
                 v-if="repository"
@@ -65,19 +65,18 @@
                 @click="openRequestAuthorizationModal">
                 {{ $t('webapp.layout.request_authorization') }}
               </a>
-            </div>
+            </b-notification>
           </div>
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -188,10 +187,10 @@ export default {
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$bhToastNotification({
+        this.$buefy.toast.open({
           message: `${this.error.detail || this.$t('webapp.evaluate.default_error')} `,
-          type: 'danger',
-          time: 5000,
+          type: 'is-danger',
+          duration: 5000,
         });
       }
       return false;
@@ -206,6 +205,7 @@ export default {
 
 
 .evaluate {
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;
