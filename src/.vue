@@ -12,7 +12,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import LoginModal from '@/components/shared/LoginModal';
-import hotjar from '@/utils/plugins/hotjar';
 
 const components = {
   LoginModal,
@@ -28,7 +27,7 @@ export default {
     ]),
   },
   mounted() {
-    hotjar.addHotjar();
+    // Hotjar.addHotjar();
     this.safariDetected();
   },
   methods: {
