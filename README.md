@@ -37,3 +37,4 @@ You can set environment variables in your OS or write on .env file.
 | BOTHUB_WEBAPP_HOTJAR_ID | `string` | Empty | Hotjar ID*
 
 \* MailChimp subscribe URL: `https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]`
+
