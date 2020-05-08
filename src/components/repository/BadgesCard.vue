@@ -1,10 +1,11 @@
 <template>
-  <div class="badges-card">
+  <drop
+    class="badges-card"
+    mode="cut"
+    @drop="paste">
     <div v-html="title" />
-    <drop
-      class="badges-card__wrapper"
-      mode="cut"
-      @drop="paste">
+    <div
+      class="badges-card__wrapper">
       <drag
         v-for="(item, i) in list"
         :key="i"
@@ -21,22 +22,21 @@
           <span>{{ item }}</span>
         </b-tag>
       </drag>
-    </drop>
+    </div>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
     </div>
-  </div>
+  </drop>
 </template>
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import { Drag, Drop, DropList } from 'vue-easy-dnd';
+import { Drag, Drop } from 'vue-easy-dnd';
 
 export default {
   name: 'BadgesCard',
   components: {
     Drag,
-    DropList,
     Drop,
   },
   props: {
@@ -80,6 +80,8 @@ export default {
 
     &__wrapper {
       margin: .75rem .5rem;
+      display: flex;
+      flex-wrap: wrap;
 
       &__badge {
         height: 1.5rem;

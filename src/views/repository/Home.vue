@@ -86,8 +86,8 @@
             :list="label.entities"
             :title="formattedLabel(label)"
             :examples-count="label.examples__count"
-            @onRemove="removeFromLabel"
-            @onAdd="addToLabel"
+            @onRemove="removeFromLabel($event, i)"
+            @onAdd="addToLabel($event, i)"
           />
         </div>
       </div>
@@ -151,17 +151,19 @@ export default {
     },
   },
   methods: {
-    removeFromLabel(i) {
-      this.repository.labels[0].entities.splice(i, 1);
+    removeFromLabel(event, i) {
+      console.log(event, i);
+      this.repository.labels[i].entities.splice(event, 1);
     },
     removeFromLabel2(i) {
       this.repository.other_label.entities.splice(i, 1);
     },
-    addToLabel(data) {
-      this.repository.labels[0].entities.push(data);
+    addToLabel(event, i) {
+      // console.log({ event, i });
+      this.repository.labels[i].entities.push(event);
     },
-    addToLabel2(data) {
-      this.repository.other_label.entities.push(data);
+    addToLabel2(event) {
+      this.repository.other_label.entities.push(event);
     },
     formattedLabel(label) {
       if (label === undefined || label.entities === undefined) {
