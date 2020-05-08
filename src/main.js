@@ -22,7 +22,7 @@ if (process.env.BOTHUB_WEBAPP_USE_SENTRY && process.env.BOTHUB_WEBAPP_SENTRY) {
   Sentry.init({
     dsn: process.env.BOTHUB_WEBAPP_SENTRY,
     integrations: [new VueIntegration({ Vue, attachProps: true })],
-    environment: process.env.BOTHUB_WEBAPP_ENVIRONMENT,
+    environment: process.env.NODE_ENV,
     logErrors: true,
   });
 }
