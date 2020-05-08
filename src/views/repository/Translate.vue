@@ -7,27 +7,25 @@
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
           <div class="repository-translate">
-            <div class="bh-grid">
-              <div class="bh-grid__item">
-                <bh-field :label="$t('webapp.translate.translate_from')">
-                  <language-select v-model="translate.from" />
-                </bh-field>
+            <div class="repository-translate__fields">
+              <b-field :label="$t('webapp.translate.translate_from')">
+                <language-select v-model="translate.from" />
+              </b-field>
+            </div>
+            <div class="repository-translate__translate-arrow-icon">
+              <div class="field">
+                <label class="label">&nbsp;</label>
+                <b-icon
+                  icon="chevron-right"
+                  size="is-small" />
               </div>
-              <div class="repository-translate__translate-arrow-icon">
-                <div class="field">
-                  <label class="label">&nbsp;</label>
-                  <bh-icon
-                    value="chevron-right"
-                    size="small" />
-                </div>
-              </div>
-              <div class="bh-grid__item">
-                <bh-field :label="$t('webapp.translate.translate_to')">
-                  <language-select
-                    v-model="translate.to"
-                    :exclude="[translate.from]" />
-                </bh-field>
-              </div>
+            </div>
+            <div class="repository-translate__fields">
+              <b-field :label="$t('webapp.translate.translate_to')">
+                <language-select
+                  v-model="translate.to"
+                  :exclude="[translate.from]" />
+              </b-field>
             </div>
           </div>
           <div
@@ -47,35 +45,34 @@
               @translated="examplesTranslated()" />
           </div>
         </div>
-        <div
-          v-else
-          class="bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.translate.not_can_edit_repository') }}
+        <div v-else>
+          <b-notification
+            :closable="false"
+            type="is-warning"
+            role="alert">
+            <div class="repository-translate__requestAuthorization">
+              {{ $t('webapp.trainings.not_can_edit_repository') }}
               <request-authorization-modal
                 v-if="repository"
                 :open.sync="requestAuthorizationModalOpen"
                 :repository-uuid="repository.uuid"
                 @requestDispatched="onAuthorizationRequested()" />
               <a
-                class="repository-translate__requestAuthorization"
                 @click="openRequestAuthorizationModal">
                 {{ $t('webapp.layout.request_authorization') }}
               </a>
             </div>
-          </div>
+          </b-notification>
         </div>
       </div>
-      <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.translate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+      <div v-else>
+        <b-notification
+          :closable="false"
+          class="is-info"
+          role="alert">
+          {{ $t('webapp.translate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -157,11 +154,18 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .repository-translate {
   background-color: $color-white;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__fields{
+    width: 50%
+  }
 
   &__translate-arrow-icon {
     align-self: center;
@@ -172,17 +176,26 @@ export default {
   }
   &__requestAuthorization{
         color: $color-fake-black;
-        font-weight: $font-weight-medium;
         text-align: center;
-        float: right
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+
+        a{
+          font-weight: $font-weight-medium;
+          text-decoration: none !important;
+          &:hover{
+           color: $color-grey-darker !important;
+       }
       }
-}
-  @media screen and (max-width: 50em) {
-        .bh-notification--warning{
+
+        @media screen and (max-width: 50em) {
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
         }
-      }
+    }
+}
+
 </style>
