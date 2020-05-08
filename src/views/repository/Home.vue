@@ -73,6 +73,8 @@
           :list="repository.other_label.entities"
           :title="formattedLabel(repository.other_label)"
           :examples-count="repository.other_label.examples__count"
+          @onRemove="removeFromLabel2"
+          @onAdd="addToLabel2"
         />
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
@@ -84,6 +86,8 @@
             :list="label.entities"
             :title="formattedLabel(label)"
             :examples-count="label.examples__count"
+            @onRemove="removeFromLabel"
+            @onAdd="addToLabel"
           />
         </div>
       </div>
@@ -147,6 +151,18 @@ export default {
     },
   },
   methods: {
+    removeFromLabel(i) {
+      this.repository.labels[0].entities.splice(i, 1);
+    },
+    removeFromLabel2(i) {
+      this.repository.other_label.entities.splice(i, 1);
+    },
+    addToLabel(data) {
+      this.repository.labels[0].entities.push(data);
+    },
+    addToLabel2(data) {
+      this.repository.other_label.entities.push(data);
+    },
     formattedLabel(label) {
       if (label === undefined || label.entities === undefined) {
         return '';

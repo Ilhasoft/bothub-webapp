@@ -1,19 +1,27 @@
 <template>
   <div class="badges-card">
     <div v-html="title" />
-    <div class="badges-card__wrapper">
-      <bh-badge
+    <drop
+      class="badges-card__wrapper"
+      mode="cut"
+      @drop="paste">
+      <drag
         v-for="(item, i) in list"
         :key="i"
-        :class="[
-          'badges-card__wrapper__badge',
-          getEntityClass(item),
-        ]"
-        size="small"
-      >
-        <span>{{ item }}</span>
-      </bh-badge>
-    </div>
+        :data="item"
+        @cut="remove(i)">
+        <b-tag
+          :class="[
+            'badges-card__wrapper__badge',
+            getEntityClass(item),
+          ]"
+          rounded
+          size="small"
+        >
+          <span>{{ item }}</span>
+        </b-tag>
+      </drag>
+    </drop>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
     </div>
@@ -22,9 +30,15 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
+import { Drag, Drop, DropList } from 'vue-easy-dnd';
 
 export default {
   name: 'BadgesCard',
+  components: {
+    Drag,
+    DropList,
+    Drop,
+  },
   props: {
     title: {
       type: String,
@@ -46,6 +60,12 @@ export default {
         this.list,
       );
       return `entity-${color}`;
+    },
+    remove(i) {
+      this.$emit('onRemove', i);
+    },
+    paste(event) {
+      this.$emit('onAdd', event.data);
     },
   },
 };
