@@ -87,6 +87,8 @@
             closable
             @onRemove="removeFromLabel($event, i)"
             @onAdd="addToLabel($event, i)"
+            @onRemoveCard="onRemoveCard"
+            @onCloseTag="onCloseTag"
           />
         </div>
         <badges-card
@@ -160,6 +162,24 @@ export default {
     },
   },
   methods: {
+    onCloseTag() {
+      this.$buefy.dialog.alert({
+        title: 'Delete Entity',
+        message: 'Are you sure you want to delete this entity?',
+        confirmText: 'Ok',
+        cancelText: 'Cancel',
+        canCancel: true,
+      });
+    },
+    onRemoveCard() {
+      this.$buefy.dialog.alert({
+        title: 'Delete Group',
+        message: 'Are you sure you want to delete this entity group?',
+        confirmText: 'Ok',
+        cancelText: 'Cancel',
+        canCancel: true,
+      });
+    },
     removeFromLabel(event, i) {
       this.repository.labels[i].entities.splice(event, 1);
     },

@@ -9,7 +9,8 @@
         v-if="closable && edit"
         class="badges-card__icon"
         icon="close"
-        size="is-medium" />
+        size="is-medium"
+        @click.native="onRemoveCard" />
     </div>
     <div
       class="badges-card__wrapper">
@@ -26,6 +27,7 @@
           :closable="edit"
           rounded
           size="small"
+          @close="close(item)"
         >
           <span>{{ item }}</span>
         </b-tag>
@@ -89,6 +91,9 @@ export default {
     },
     onRemoveCard() {
       this.$emit('onRemoveCard');
+    },
+    close(item) {
+      this.$emit('onCloseTag', item);
     },
   },
 };
