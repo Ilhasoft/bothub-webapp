@@ -65,17 +65,14 @@
         v-if="hasLabels"
         class="repository-home__entities-list"
       >
-        <div class="repository-home__title">
-          {{ $t('webapp.home.entities_list') }}
+        <div class="repository-home__title repository-home__entities-list__header">
+          <p>{{ $t('webapp.home.entities_list') }}</p>
+          <b-button
+            type="is-primary"
+            @click="edit=!edit">
+            Edit Groups
+          </b-button>
         </div>
-        <badges-card
-          v-if="repository.other_label.entities.length > 0"
-          :list="repository.other_label.entities"
-          :title="formattedLabel(repository.other_label)"
-          :examples-count="repository.other_label.examples__count"
-          @onRemove="removeFromLabel2"
-          @onAdd="addToLabel2"
-        />
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
             {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
@@ -86,10 +83,21 @@
             :list="label.entities"
             :title="formattedLabel(label)"
             :examples-count="label.examples__count"
+            :edit="edit"
+            closable
             @onRemove="removeFromLabel($event, i)"
             @onAdd="addToLabel($event, i)"
           />
         </div>
+        <badges-card
+          :list="repository.other_label.entities"
+          :title="formattedLabel(repository.other_label)"
+          :examples-count="repository.other_label.examples__count"
+          :edit="edit"
+          dark
+          @onRemove="removeFromUnlabeled"
+          @onAdd="addToUnlabeled"
+        />
       </div>
     </div>
   </repository-view-base>
@@ -126,6 +134,7 @@ export default {
       emoji: true,
       typographer: true,
       toc: true,
+      edit: false,
     };
   },
   computed: {
@@ -152,17 +161,15 @@ export default {
   },
   methods: {
     removeFromLabel(event, i) {
-      console.log(event, i);
       this.repository.labels[i].entities.splice(event, 1);
     },
-    removeFromLabel2(i) {
-      this.repository.other_label.entities.splice(i, 1);
+    removeFromUnlabeled(index) {
+      this.repository.other_label.entities.splice(index, 1);
     },
-    addToLabel(event, i) {
-      // console.log({ event, i });
-      this.repository.labels[i].entities.push(event);
+    addToLabel(event, index) {
+      this.repository.labels[index].entities.push(event);
     },
-    addToLabel2(event) {
+    addToUnlabeled(event) {
       this.repository.other_label.entities.push(event);
     },
     formattedLabel(label) {
@@ -251,6 +258,12 @@ export default {
   &__intents-list,
   &__entities-list {
     padding: 1rem .5rem;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
   }
 
   &__entities-list {
