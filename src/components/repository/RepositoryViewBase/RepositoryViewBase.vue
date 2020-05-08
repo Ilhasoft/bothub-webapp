@@ -48,7 +48,6 @@ import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import QuickTest from '@/components/quick-test/QuickTest';
-import SideBarNavigation from '@/components/shared/SideBar';
 import RepositoryNavigation from './RepositoryNavigation';
 import Loading from '@/components/shared/Loading';
 
@@ -71,7 +70,6 @@ export default {
     UserAvatar,
     NewRepositoryModal,
     RequestAuthorizationModal,
-    SideBarNavigation,
     Loading,
   },
   filters: {
