@@ -33,9 +33,9 @@ export default {
   methods: {
     copyText() {
       navigator.clipboard.writeText(this.text);
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: 'Json copied',
-        type: 'success',
+        type: 'is-success',
       });
     },
   },
