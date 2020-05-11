@@ -12,7 +12,6 @@ let store;
 describe('QuickTest.vue', () => {
   let wrapper;
   beforeEach(() => {
-
     store = new Vuex.Store({
       modules: {
         Repository: {
