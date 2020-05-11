@@ -17,6 +17,8 @@
           :total="list.total"
           :current.sync="page"
           :per-page="perPage"
+          :range-before="4"
+          :range-after="4"
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
