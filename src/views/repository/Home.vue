@@ -196,9 +196,13 @@ export default {
       return this.repository.labels.length > 0 || this.repository.other_label.entities.length > 0;
     },
   },
+  watch: {
+    edit() {
+      if (!this.edit) this.creating = false;
+    },
+  },
   methods: {
     createLabel(text) {
-      console.log({ text });
       if (text && text.length > 0) {
         this.newLabels.push({
           value: text,
