@@ -11,7 +11,29 @@
     <div
       :class="['quick-test__container', expanded ? 'expanded' : 'collapsed']">
       <div class="quick-test__inner-container">
-        <div class="quick-test__text-area">
+        <div
+          v-if="!authenticated"
+          class="quick-test__login">
+          Login or sign up to use Quick Test!
+          <b-field
+            grouped
+            class="quick-test__login__buttons">
+            <b-button
+              type="is-primary"
+              @click="openLoginModal()">
+              Login
+            </b-button>
+            <b-button
+              type="is-primary"
+              outlined
+              @click="signUp()">
+              Sign up
+            </b-button>
+          </b-field>
+        </div>
+        <div
+          v-if="authenticated"
+          class="quick-test__text-area">
           <quick-test-text
             v-for="sentence in sentences"
             :key="sentence.id"
@@ -21,16 +43,15 @@
             :repository-uuid="sentence.repositoryUUID"
             :all-entities="repository.entities" />
         </div>
-
         <div
-          class="quick-test__input"
-        >
+          v-if="authenticated"
+          class="quick-test__input">
           <text-area-input
             ref="textInput"
             :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
             :update-value="selectedLanguage"
-            size="normal"
+            size="small"
 
             @submit="sendMessage"
           >
@@ -50,7 +71,7 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
@@ -80,6 +101,7 @@ export default {
   computed: {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
+      authenticated: 'authenticated',
     }),
     languages() {
       if (!this.repository) return [];
@@ -103,6 +125,14 @@ export default {
     this.updateRepositoryLanguage();
   },
   methods: {
+    ...mapActions([
+      'openLoginModal',
+    ]),
+    signUp() {
+      this.$router.push({
+        name: 'signUp',
+      });
+    },
     updateRepositoryLanguage() {
       this.selectedLanguage = this.defaultLanguage;
     },
@@ -180,6 +210,20 @@ export default {
 
           &__text {
             margin: 0 auto;;
+          }
+        }
+
+        &__login {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          margin: 50% 25%;
+          flex-direction: column;
+          row-gap: 0.5rem;
+
+          &__buttons {
+            column-gap: 0.5rem;
           }
         }
 
