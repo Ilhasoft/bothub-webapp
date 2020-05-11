@@ -290,7 +290,8 @@
       "title": "Title",
       "version": "Version",
       "cancel": "Cancel",
-      "add_new": "Add new"
+      "add_new": "Add new",
+      "signin": "Sign in to your account to edit this repository."
     },
     "inbox": {
       "description": "These are phrases of actual user interaction with your data set.\n          They can be useful for your training or testing.",

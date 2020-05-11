@@ -35,24 +35,10 @@
               :filter-by-language="currentLanguage" />
           </div>
         </div>
-        <div
-          v-else>
-          <b-notification
-            :closable="false"
-            type="is-warning">
-            {{ $t('webapp.evaluate.you_can_not_edit') }}
-            <request-authorization-modal
-              v-if="repository"
-              :open.sync="requestAuthorizationModalOpen"
-              :repository-uuid="repository.uuid"
-              @requestDispatched="onAuthorizationRequested()" />
-            <a
-              class="evaluate__navigation__requestAuthorization"
-              @click="openRequestAuthorizationModal">
-              {{ $t('webapp.layout.request_authorization') }}
-            </a>
-          </b-notification>
-        </div>
+        <authorization-request-notification
+          v-else
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
       <div
         v-else>
@@ -68,7 +54,7 @@
 </template>
 
 <script>
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import { mapActions, mapState, mapGetters } from 'vuex';
@@ -84,7 +70,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateResults,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -93,7 +79,6 @@ export default {
       languages: [],
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -103,6 +88,7 @@ export default {
     ...mapGetters({
       getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
+      authenticated: 'authenticated',
     }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
@@ -139,17 +125,6 @@ export default {
           }));
       });
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
@@ -173,12 +148,6 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
-    &__requestAuthorization{
-       color: $color-fake-black;
-      font-weight: $font-weight-medium;
-      text-align: center;
-      float: right
-    }
     a {
       position: relative;
       display: inline-flex;

@@ -12,26 +12,10 @@
               :repository="repository"
               @created="updatedExampleList()" />
           </div>
-          <div v-else>
-            <b-notification
-              :closable="false"
-              type="is-warning"
-              role="alert">
-              <div class="trainings-repository__requestAuthorization">
-                {{ $t('webapp.trainings.not_can_edit_repository') }}
-                <request-authorization-modal
-                  v-if="repository"
-                  :open.sync="requestAuthorizationModalOpen"
-                  :repository-uuid="repository.uuid"
-                  @requestDispatched="onAuthorizationRequested()" />
-                <a
-                  @click="openRequestAuthorizationModal">
-                  {{ $t('webapp.layout.request_authorization') }}
-                </a>
-              </div>
-
-            </b-notification>
-          </div>
+          <authorization-request-notification
+            v-else
+            :repository-uuid="repository.uuid"
+            @onAuthorizationRequested="updateRepository(false)" />
         </div>
         <div v-else>
           <b-notification
@@ -93,7 +77,7 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import ExamplesList from '@/components/example/ExamplesList';
 import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
@@ -109,7 +93,7 @@ export default {
     ExamplesList,
     LoginForm,
     ExampleSearchInput,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
     TrainModal,
     TrainResponse,
     Loading,
@@ -118,7 +102,6 @@ export default {
   data() {
     return {
       trainModalOpen: false,
-      requestAuthorizationModalOpen: false,
       trainResponseData: null,
       trainResponseOpen: false,
       querySchema: {},
@@ -183,17 +166,6 @@ export default {
         this.trainModalOpen = true;
       }
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'is-success',
-      });
-      this.updateRepository(false);
-    },
     updatedExampleList() {
       this.updateTrainingStatus();
       this.update = !this.update;
@@ -250,30 +222,6 @@ export default {
     margin-top: 1rem;
     background-color: $color-white;
   }
-  &__requestAuthorization{
-      color: $color-fake-black;
-      text-align: center;
-      display:flex;
-      justify-content: space-between;
-      align-items: center;
-
-      a{
-        font-weight: $font-weight-medium;
-        text-decoration: none !important;
-
-        &:hover{
-        color: $color-grey-darker !important;
-       }
-      }
-
-      @media screen and (max-width: 50em) {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
-      }
-  }
-
 }
 
 

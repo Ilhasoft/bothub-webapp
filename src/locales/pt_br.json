@@ -290,7 +290,8 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo"
+      "add_new": "Adicionar novo",
+      "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
       "description": "Essas são as frases das interações de usuário com a sua inteligência.\nPodem ser úteis para seu treinamento ou teste. ",

@@ -8,7 +8,7 @@
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">
-      <loading v-if="loading" />
+      <loading v-if="isLoading" />
       <p
         class="text-center"
         else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
@@ -48,10 +48,6 @@ export default {
     perPage: {
       type: Number,
       default: 20,
-    },
-    loading: {
-      type: Boolean,
-      default: false,
     },
     editable: {
       type: Boolean,

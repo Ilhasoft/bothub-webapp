@@ -33,26 +33,10 @@
                 @review="onReviewAuthorizationRequest()" />
             </div>
           </div>
-          <div
-            v-else>
-            <b-notification
-              :closable="false"
-              type="is-warning"
-              role="alert">
-              <div class="settings__requestAuthorization">
-                {{ $t('webapp.settings.not_can_edit_repository') }}
-                <request-authorization-modal
-                  v-if="repository"
-                  :open.sync="requestAuthorizationModalOpen"
-                  :repository-uuid="repository.uuid"
-                  @requestDispatched="onAuthorizationRequested()" />
-                <a
-                  @click="openRequestAuthorizationModal">
-                  {{ $t('webapp.layout.request_authorization') }}
-                </a>
-              </div>
-            </b-notification>
-          </div>
+          <authorization-request-notification
+            v-else
+            :repository-uuid="repository.uuid"
+            @onAuthorizationRequested="updateRepository(false)" />
         </div>
       </div>
       <div
@@ -71,7 +55,7 @@
 </template>
 
 <script>
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
@@ -93,14 +77,9 @@ export default {
     AuthorizationsList,
     AuthorizationRequestsList,
     LoginForm,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
-  data() {
-    return {
-      requestAuthorizationModalOpen: false,
-    };
-  },
   methods: {
     getEditInitialData() {
       const {
@@ -152,54 +131,6 @@ export default {
     onReviewAuthorizationRequest() {
       this.$refs.authorizationsList.updateAuthorizations();
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-  @import '~@/assets/scss/utilities.scss';
-  @import '~@/assets/scss/colors.scss';
-  @import '~@/assets/scss/variables.scss';
-
-    .settings {
-      @include default-margin;
-
-      &__requestAuthorization{
-        color: $color-fake-black;
-        text-align: center;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-      @media screen and (max-width: 50em) {
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        a{
-          font-weight: $font-weight-medium;
-          text-decoration:none !important;
-          &:hover{
-          color: $color-grey-darker;
-          }
-        }
-      }
-    }
-
-
-</style>
