@@ -15,7 +15,7 @@ describe('QuickTest.vue', () => {
     store = new Vuex.Store({
       modules: {
         Repository: {
-          actions: {
+          getters: {
             authenticated: jest.fn(),
           },
         },
