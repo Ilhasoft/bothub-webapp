@@ -14,20 +14,20 @@
         <div
           v-if="!authenticated"
           class="quick-test__login">
-          Login or sign up to use Quick Test!
+          {{ $t('webapp.quick_test.login_text') }}
           <b-field
             grouped
             class="quick-test__login__buttons">
             <b-button
               type="is-primary"
               @click="openLoginModal()">
-              Login
+              {{ $t('webapp.register_form.signin') }}
             </b-button>
             <b-button
               type="is-primary"
               outlined
               @click="signUp()">
-              Sign up
+              {{ $t('webapp.landing_page.signup') }}
             </b-button>
           </b-field>
         </div>
@@ -218,9 +218,9 @@ export default {
           align-items: center;
           justify-content: center;
           text-align: center;
-          margin: 50% 25%;
+          margin: 50% 15%;
           flex-direction: column;
-          row-gap: 0.5rem;
+          row-gap: 1rem;
 
           &__buttons {
             column-gap: 0.5rem;
