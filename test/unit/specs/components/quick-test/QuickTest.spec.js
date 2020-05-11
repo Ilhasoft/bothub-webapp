@@ -1,16 +1,31 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Buefy from 'buefy';
 import QuickTest from '@/components/quick-test/QuickTest';
+import Vuex from 'vuex';
 
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
+localVue.use(Vuex);
+let store;
 
 describe('QuickTest.vue', () => {
   let wrapper;
   beforeEach(() => {
+
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          actions: {
+            authenticated: jest.fn(),
+          },
+        },
+      },
+    });
+
     wrapper = shallowMount(QuickTest, {
       localVue,
+      store,
       mocks: {
         $t: () => 'some specific text',
       },
