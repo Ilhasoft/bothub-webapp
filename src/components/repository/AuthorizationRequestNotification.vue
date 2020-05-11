@@ -44,7 +44,7 @@ export default {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
         message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
+        type: 'is-success',
       });
       this.$emit('onAuthorizationRequested');
     },
