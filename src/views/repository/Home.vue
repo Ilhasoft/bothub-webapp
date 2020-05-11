@@ -67,16 +67,47 @@
       >
         <div class="repository-home__title repository-home__entities-list__header">
           <p>{{ $t('webapp.home.entities_list') }}</p>
-          <b-button
-            type="is-primary"
-            @click="edit=!edit">
-            Edit Groups
-          </b-button>
-        </div>
+          <b-field
+            class="repository-home__button-group"
+            grouped>
+            <b-button
+              class="repository-home__button"
+              type="is-primary"
+              @click="edit=!edit">
+              {{ edit ? 'Finish Editing' : 'Edit Groups' }}
+            </b-button>
+            <b-button
+              v-if="edit"
+              :disabled="creating"
+              class="repository-home__button"
+              type="is-secondary"
+              @click="creating = !creating"
+              @finished="createLabel">
+              Create new group
+            </b-button>
+        </b-field></div>
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
             {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
           </div>
+          <create-badges-card
+            v-if="creating"
+            title="New Label named"
+            @finished="createLabel"
+          />
+          <badges-card
+            v-for="(label, i) in newLabels"
+            :key="i"
+            :list="label.entities"
+            :title="formattedLabel(label)"
+            :examples-count="0"
+            :edit="edit"
+            closable
+            @onRemove="removeFromNewLabel($event, i)"
+            @onAdd="addToNewLabel($event, i)"
+            @onRemoveCard="onRemoveCard"
+            @onCloseTag="onCloseTag"
+          />
           <badges-card
             v-for="(label, i) in repository.labels"
             :key="i"
@@ -108,6 +139,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesCard from '@/components/repository/BadgesCard';
+import CreateBadgesCard from '@/components/repository/CreateBadgesCard';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 
@@ -118,6 +150,7 @@ export default {
     RepositoryViewBase,
     BadgesCard,
     VueMarkdown,
+    CreateBadgesCard,
   },
   extends: RepositoryBase,
   data() {
@@ -137,6 +170,8 @@ export default {
       typographer: true,
       toc: true,
       edit: false,
+      creating: false,
+      newLabels: [],
     };
   },
   computed: {
@@ -162,6 +197,16 @@ export default {
     },
   },
   methods: {
+    createLabel(text) {
+      console.log({ text });
+      if (text && text.length > 0) {
+        this.newLabels.push({
+          value: text,
+          entities: [],
+        });
+      }
+      this.creating = false;
+    },
     onCloseTag() {
       this.$buefy.dialog.alert({
         title: 'Delete Entity',
@@ -179,6 +224,12 @@ export default {
         cancelText: 'Cancel',
         canCancel: true,
       });
+    },
+    removeFromNewLabel(event, index) {
+      this.newLabels[index].entities.splice(event, 1);
+    },
+    addToNewLabel(event, index) {
+      this.newLabels[index].entities.push(event);
     },
     removeFromLabel(event, i) {
       this.repository.labels[i].entities.splice(event, 1);
@@ -226,6 +277,14 @@ export default {
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
+  }
+
+  &__button {
+    color: white;
+  }
+
+  &__button-group {
+    column-gap: 0.5rem;
   }
 
   &__header {
