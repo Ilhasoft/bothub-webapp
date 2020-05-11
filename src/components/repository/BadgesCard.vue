@@ -1,5 +1,6 @@
 <template>
-  <drop
+  <component
+    :is="edit ? 'drop' : 'div'"
     :class="['badges-card', dark ? 'badges-card__dark' : '' ]"
     mode="cut"
     @drop="paste">
@@ -14,8 +15,9 @@
     </div>
     <div
       class="badges-card__wrapper">
-      <drag
+      <component
         v-for="(item, i) in list"
+        :is="edit ? 'drag' : 'div'"
         :key="i"
         :data="item"
         @cut="remove(i)">
@@ -31,12 +33,11 @@
         >
           <span>{{ item }}</span>
         </b-tag>
-      </drag>
-    </div>
+    </component></div>
     <div v-if="examplesCount">
-      <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
+      <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
     </div>
-  </drop>
+  </component>
 </template>
 
 <script>
@@ -84,16 +85,16 @@ export default {
       return `entity-${color}`;
     },
     remove(i) {
-      this.$emit('onRemove', i);
+      if (this.edit) this.$emit('onRemove', i);
     },
     paste(event) {
-      this.$emit('onAdd', event.data);
+      if (this.edit) this.$emit('onAdd', event.data);
     },
     onRemoveCard() {
-      this.$emit('onRemoveCard');
+      if (this.edit) this.$emit('onRemoveCard');
     },
     close(item) {
-      this.$emit('onCloseTag', item);
+      if (this.edit) this.$emit('onCloseTag', item);
     },
   },
 };
