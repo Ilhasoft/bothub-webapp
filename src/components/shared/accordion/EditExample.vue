@@ -123,7 +123,7 @@
 <script>
 import Vue from 'vue';
 import BH from 'bh';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { formatters } from '@/utils';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
@@ -166,6 +166,9 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
+    }),
+    ...mapGetters({
+      version: 'getSelectedVersion',
     }),
     validationErrors() {
       const errors = [];
@@ -343,6 +346,7 @@ export default {
         await this.updateEvaluateExample({
           repository: this.repository.uuid,
           id: this.sentenceId,
+          version: this.version,
           text: this.text,
           intent: this.intent,
           entities: this.entitiesToEdit,

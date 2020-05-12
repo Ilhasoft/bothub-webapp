@@ -19,11 +19,12 @@ export default {
       },
     );
   },
-  update(repository, text, language, entities, intent, id) {
+  update(repository, version, text, language, entities, intent, id) {
     return request.$http.patch(
       `/v2/repository/evaluate/${id}/`,
       {
         repository,
+        repository_version: version,
         text,
         language,
         entities,
