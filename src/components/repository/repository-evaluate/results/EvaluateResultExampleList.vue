@@ -57,9 +57,9 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      limit: 20,
       busy: false,
       error: null,
+      total: 0,
       page: 1,
     };
   },
@@ -70,6 +70,14 @@ export default {
     paginatedList() {
       const offset = this.limit * (this.page - 1);
       return this.resultExampleList.slice(offset, offset + this.limit);
+    },
+    limit() {
+      return this.resultExampleList.count;
+    },
+  },
+  watch: {
+    page() {
+      this.updateList();
     },
   },
   mounted() {
@@ -85,8 +93,10 @@ export default {
         const response = await this.getAllResultsLog({
           repositoryUuid: this.repository.uuid,
           resultId: this.id,
+          page: this.page,
         });
-        this.resultExampleList = response.data.log;
+        this.resultExampleList = response.data.results;
+        this.total = response.data.count;
         this.error = null;
       } catch (error) {
         this.error = error;
