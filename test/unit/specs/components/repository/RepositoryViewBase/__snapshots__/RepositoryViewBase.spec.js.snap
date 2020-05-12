@@ -45,7 +45,7 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
 exports[`RepositoryViewBase.vue renders correctly 1`] = `
 <div id="rpstr-vw-bs" class="rpstr-vw-bs">
   <div shadow="strong" class="rpstr-vw-bs__wrapper">
-    <!---->
+    <quick-test-stub repository="<Repository #1>"></quick-test-stub>
     <!---->
   </div>
   <!---->

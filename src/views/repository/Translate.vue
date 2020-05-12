@@ -45,25 +45,10 @@
               @translated="examplesTranslated()" />
           </div>
         </div>
-        <div v-else>
-          <b-notification
-            :closable="false"
-            type="is-warning"
-            role="alert">
-            <div class="repository-translate__requestAuthorization">
-              {{ $t('webapp.trainings.not_can_edit_repository') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
-          </b-notification>
-        </div>
+        <authorization-request-notification
+          v-else
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
       <div v-else>
         <b-notification
@@ -88,7 +73,7 @@ import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 
 export default {
   name: 'RepositoryTranslate',
@@ -99,7 +84,7 @@ export default {
     TranslateList,
     TranslationsList,
     LoginForm,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -113,7 +98,6 @@ export default {
       toLanguage: null,
       query: {},
       querySchema: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   methods: {
@@ -137,17 +121,6 @@ export default {
       }
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
-    },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
     },
   },
 };
@@ -174,28 +147,6 @@ export default {
   &__search {
     margin: 0.5rem;
   }
-  &__requestAuthorization{
-        color: $color-fake-black;
-        text-align: center;
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-
-        a{
-          font-weight: $font-weight-medium;
-          text-decoration: none !important;
-          &:hover{
-           color: $color-grey-darker !important;
-       }
-      }
-
-        @media screen and (max-width: 50em) {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-    }
 }
 
 </style>
