@@ -79,7 +79,8 @@
       "debug": "Debug",
       "raw": "Raw",
       "add_a_sentence": "Add a sentence",
-      "entities": "Entities"
+      "entities": "Entities",
+      "login_text": "Login or sign up to use Quick Test!"
     },
     "debug": {
       "word": "Word",

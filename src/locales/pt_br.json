@@ -79,7 +79,8 @@
       "debug": "Debug",
       "raw": "Raw",
       "add_a_sentence": "Adicionar uma frase",
-      "entities": "Entidades"
+      "entities": "Entidades",
+      "login_text": "Faça login ou cadastre-se para utilizar o Teste Rápido!"
     },
     "debug": {
       "word": "Palavra",
