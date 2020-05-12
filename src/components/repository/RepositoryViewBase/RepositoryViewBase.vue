@@ -46,7 +46,6 @@ import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import QuickTest from '@/components/quick-test/QuickTest';
 import RepositoryNavigation from './RepositoryNavigation';
 import Loading from '@/components/shared/Loading';
@@ -64,7 +63,6 @@ export default {
   },
   components: {
     SiteFooter,
-    RepositoryInfo,
     RepositoryNavigation,
     QuickTest,
     UserAvatar,
@@ -191,15 +189,6 @@ export default {
         justify-content: space-around;
       }
 
-      &__repo-info {
-        @media screen and (max-width: $medium-screen) {
-          flex-grow: 0;
-          flex-direction: row;
-          justify-content: flex-end;
-          padding: 0px;
-        }
-      }
-
       &__icons-align {
         display: flex;
         align-items: center;
@@ -212,10 +201,6 @@ export default {
             width: 1.5rem;
           }
         }
-      }
-
-      &__text-information {
-        margin: 0 .25rem;
       }
     }
 
@@ -253,27 +238,6 @@ export default {
 
           &__dropdown {
             cursor: pointer;
-          }
-        }
-
-        &__info {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin-left: 2rem;
-
-          @media screen and (max-width: $medium-screen) {
-            display: none;
-          }
-
-
-          &--mobile {
-            display: none;
-            @media screen and (max-width: $medium-screen) {
-              display: inline;
-              flex-grow: 1;
-              margin:0px;
-            }
           }
         }
 

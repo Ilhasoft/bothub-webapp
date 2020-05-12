@@ -153,7 +153,8 @@
       "labeled": "<strong>{entities_length}</strong> entidades categorizadas <strong>{label_value}</strong>",
       "unlabeled": "<strong>{entities_length}</strong> entidades não categorizadas ",
       "all_categories": "Todas as categorias",
-      "all_languages": "Todos os idiomas"
+      "all_languages": "Todos os idiomas",
+      "no_repo": "Nenhum repositório encontrado."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -163,7 +164,9 @@
       "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
       "role": "Papéis:",
-      "no_requests": "Sem solicitações."
+      "no_requests": "Sem solicitações.",
+      "save": "Salvar",
+      "request": "Fazer pedido"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -241,7 +244,7 @@
       "grid1": "No canto superior direito da tela, clique em \"Nova inteligência\".",
       "grid2": "Preencha os campos e clique em \"Criar inteligência\"",
       "grid3": "Comece adicionando conteúdo para o mecanismo de interpretação\nfornecendo frases de exemplo.",
-      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.</p>\n<p>Não esqueça de enviar suas frases.",
+      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.\n Não esqueça de enviar suas frases.",
       "grid5": "Depois de adicionar suas frases, clique na barra de status para ver\no status de sua inteligência e treinar suas frases",
       "grid6": "É isso! Sua inteligência está pronta para ser usada!",
       "previous": "Anterior",
