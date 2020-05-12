@@ -153,7 +153,8 @@
       "labeled": "<strong>{entities_length}</strong> {_entity} labeled <strong>{label_value}</strong>",
       "unlabeled": "<strong>{entities_length}</strong> unlabeled {_entity}",
       "all_categories": "All categories",
-      "all_languages": "All languages"
+      "all_languages": "All languages",
+      "no_repo": "Repositories not found."
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",

@@ -153,7 +153,8 @@
       "labeled": "<strong>{entities_length}</strong> entidades categorizadas <strong>{label_value}</strong>",
       "unlabeled": "<strong>{entities_length}</strong> entidades não categorizadas ",
       "all_categories": "Todas as categorias",
-      "all_languages": "Todos os idiomas"
+      "all_languages": "Todos os idiomas",
+      "no_repo": "Nenhum repositório encontrado."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
