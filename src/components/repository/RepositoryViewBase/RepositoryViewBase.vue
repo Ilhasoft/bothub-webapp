@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="authenticated && repository"
+        v-if="repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -47,7 +47,6 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import QuickTest from '@/components/quick-test/QuickTest';
-import SideBarNavigation from '@/components/shared/SideBar';
 import RepositoryNavigation from './RepositoryNavigation';
 import Loading from '@/components/shared/Loading';
 
@@ -69,7 +68,6 @@ export default {
     UserAvatar,
     NewRepositoryModal,
     RequestAuthorizationModal,
-    SideBarNavigation,
     Loading,
   },
   filters: {

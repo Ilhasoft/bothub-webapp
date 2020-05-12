@@ -16,43 +16,27 @@
               :repository="repository" />
           </div>
         </div>
-        <div
+        <authorization-request-notification
           v-else
-          class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
-          </div>
-        </div>
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          class="is-info"
+          role="alert">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
 </template>
 
 <script>
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import { mapActions, mapState, mapGetters } from 'vuex';
@@ -67,7 +51,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateVersions,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -75,7 +59,6 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -102,25 +85,13 @@ export default {
     ...mapActions([
       'setEvaluateLanguage',
     ]),
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
-
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .evaluate {
   &__divider {
@@ -137,48 +108,17 @@ export default {
     border-bottom: 1px solid $color-grey;
 
   &__requestAuthorization{
-        color: $color-fake-black;
-        font-weight: $font-weight-medium;
-        text-align: center;
-        float: right
-      }
-    a {
-      position: relative;
-      display: inline-flex;
-      padding: 0 1.5rem 1rem;
-      color: $color-grey-dark;
-      font-weight: $font-weight-medium;
-      text-align: center;
+    color: $color-fake-black;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    float: right;
+    text-decoration: none !important;
 
-      &:hover,
-      &.active {
-        color: $color-fake-black;
-
-        &::before {
-          $size: 10rem;
-
-          position: absolute;
-          content: "";
-          width: $size;
-          height: $size;
-          left: 50%;
-          bottom: -($size - .75rem);
-          transform: translateX(-50%);
-          background-color: $color-primary;
-          border-radius: 50%;
-          animation: nav-bubble-animation .25s ease;
-
-          @keyframes nav-bubble-animation {
-            from {
-              bottom: -($size);
-            }
-            to {
-              bottom: -($size - .75rem);
-            }
-          }
-        }
-      }
+     &:hover{
+      color: $color-grey-darker !important;
     }
+  }
+
   }
 
   &__content-header {
@@ -209,13 +149,6 @@ export default {
     max-width: 100%;
     margin: 0 auto;
   }
-    @media screen and (max-width: 50em) {
-        .bh-notification--warning{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
+
 }
 </style>
