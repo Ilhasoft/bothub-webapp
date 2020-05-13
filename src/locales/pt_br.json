@@ -142,6 +142,7 @@
       "no_expected_intent": "Nenhuma intenção esperada",
       "confidence": "confiança",
       "ok": "ok",
+      "is": "é",
       "failed": "falhou",
       "intent": "Intenção",
       "error": "Houve um erro ao buscar as frases"

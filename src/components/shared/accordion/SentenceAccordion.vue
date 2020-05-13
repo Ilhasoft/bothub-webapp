@@ -114,6 +114,7 @@ export default {
     border-color: #cfd5d9;
     border-width: 1px;
     border-style: solid;
+    border-radius: 6px;
 
     &-success {
       border-color: $color-success;
@@ -126,6 +127,7 @@ export default {
     &-thick {
       border-width: 2px;
       border-style: solid;
+      border-radius: 6px;
     }
   }
 
@@ -152,8 +154,9 @@ export default {
     }
 
     &__body {
-      padding: .7rem 0;
+      padding: .5rem 0;
       background: #f5f5f5;
+      border-radius: 4px;
     }
   }
 

@@ -87,14 +87,10 @@ export default {
     }),
     ...mapGetters({
       getEvaluateLanguage: 'getEvaluateLanguage',
-      repositoryVersion: 'getSelectedVersion',
       authenticated: 'authenticated',
     }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
-    },
-    version() {
-      return parseInt(this.$route.params.version, 10);
     },
   },
   watch: {

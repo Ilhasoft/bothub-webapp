@@ -1,65 +1,4 @@
 <template>
-  <!-- <div
-    :class="{ example: true,
-              'example--failed': !success,
-              'example--success': success,
-              'fadeIn': true,
-  }">
-    <div class="example-text">
-      <div class="example-text__main">
-        <highlighted-text
-          :text="text"
-          :entities="entities"
-          :all-entities="repository.entities || repository.entities_list" />
-      </div>
-    </div>
-    <div class="example-infos level is-mobile">
-      <div class="level-left">
-        <div
-          v-if="intent"
-          :class="{'level-item ': true,
-                   'text-color-danger': !success}">
-          <div v-if="!success">
-            <strong
-              :class="{
-              'text-color-danger': !success}">
-              {{ $t('webapp.result.expected_intent') }}:&nbsp;
-            </strong>
-            <span>{{ intent }} /</span>
-            <div
-              v-if="intentPrediction.name !== 'no predicted'"
-              class="example__align-no-predicted">
-              <strong
-                :class="{
-                'text-color-danger': !success}">
-                {{ $t('webapp.result.predicted_intent') }}:&nbsp;
-              </strong>
-              <span>{{ intentPrediction.name }}
-                ({{ intentPrediction.confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})
-              </span>
-            </div>
-            <strong
-              v-else
-              :class="{
-              'text-color-danger': !success}">
-              {{ $t('webapp.result.no_expected_intent') }}
-            </strong>
-          </div>
-          <div v-else>
-            <strong>{{ $t('webapp.result.intent') }}:&nbsp;</strong>
-            <span>{{ intent }} ({{ confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})
-            </span>
-          </div>
-        </div>
-        <span
-          v-if="success"
-          class="success">[{{ $t('webapp.result.ok') }}]</span>
-        <span
-          v-else
-          class="failed">[{{ $t('webapp.result.failed') }}]</span>
-      </div>
-    </div> -->
-
   <sentence-accordion
     :open.sync="open"
     :type="success ? 'is-success' : 'is-danger'"
@@ -72,13 +11,11 @@
       <highlighted-text
         v-if="open"
         :text="text"
-        :entities="entities"
+        :entities="allEntities"
         :all-entities="repository.entities || repository.entities_list" />
-      <div
+      <p
         v-else
-        class="level">
-        <p class="level-left"> {{ text }}</p>
-      </div>
+        class="example-text"> {{ text }}</p>
     </div>
 
     <b-icon
@@ -86,10 +23,14 @@
       :class="['level-right', success ? 'success' : 'failed']"
       :icon="success ? 'check-bold' : 'close-thick'" />
 
-    <div slot="body">
+    <div
+      slot="body"
+      class="example-infos">
       <div v-if="intentSuccess">
         <strong> {{ $t('webapp.result.intent') }}: </strong>
-        <span> {{ intent }} </span>
+        <span> {{ intent }}
+          ({{ intentPrediction.confidence.toFixed(2) }}
+          {{ $t('webapp.result.confidence') }}) </span>
         <strong
           class="success">[{{ $t('webapp.result.ok') }}]</strong>
       </div>
@@ -105,12 +46,35 @@
       </div>
 
       <div
-        v-for="(entity, i) in entities"
+        v-for="(entity, i) in allEntities"
         :key="i">
-        <p><strong> {{ $t('webapp.result.entity') }}: </strong>
-          <span> {{ entity.value }} is
-            <b-tag :class="getEntityClass(entity)">{{ entity.entity }}</b-tag>
+
+        <p v-if="entity.predicted_entity">
+          <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
+          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+            <span :class="['entity', getEntityClass(entity)]">
+              {{ entity.entity }}
+          </span>/ </span>
+          <strong> {{ $t('webapp.result.predicted_entity') }}:</strong>
+          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+            <span :class="['entity', getEntityClass(toEntity(entity))]">
+              {{ entity.predicted_entity }}
+            </span>
+            <span v-if="entity.confidence">
+              ({{ entity.confidence.toFixed(2) }}
+              {{ $t('webapp.result.confidence') }})
+          </span> </span>
+        </p>
+
+        <p v-else><strong> {{ $t('webapp.result.entity') }}: </strong>
+          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+            <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+            <span v-if="entity.confidence">
+              ({{ entity.confidence.toFixed(2) }}
+              {{ $t('webapp.result.confidence') }})
+            </span>
           </span>
+
           <strong
             v-if="entity.status === 'success'"
             class="success">[{{ $t('webapp.result.ok') }}]</strong>
@@ -118,19 +82,6 @@
             v-else
             class="failed">[{{ $t('webapp.result.failed') }}]</strong>
         </p>
-      </div>
-
-      <div
-        v-for="(entity, i) in swappedEntities"
-        :key="i">
-        <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
-        <span> {{ entity.value }} is {{ entity.true_entity }} / </span>
-        <strong> {{ $t('webapp.result.predicted_entity') }}:</strong>
-        <span> {{ entity.value }} is {{ entity.predicted_entity }}
-          ({{ entity.confidence.toFixed(2) }}
-          {{ $t('webapp.result.confidence') }}) </span>
-        <strong
-          class="failed">[{{ $t('webapp.result.failed') }}]</strong>
       </div>
 
     </div>
@@ -192,11 +143,15 @@ export default {
     };
   },
   computed: {
+    allEntities() {
+      return [...this.entities,
+        ...this.swappedEntities];
+    },
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      return getEntitiesList(this.entities)
+      return getEntitiesList(this.allEntities)
         .map(entity => ({
           value: entity,
           class: this.getEntityClass(entity),
@@ -205,11 +160,21 @@ export default {
     },
   },
   methods: {
+    toEntity(predicted) {
+      const object = {
+        entity: predicted.predicted_entity,
+        start: predicted.start,
+        end: predicted.end,
+        value: predicted.value,
+      };
+      console.log(object);
+      return object;
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
         this.repository.entities || this.repository.entities_list,
-        this.entities,
+        this.allEntities,
       );
       return `entity-${color}`;
     },
@@ -224,6 +189,11 @@ export default {
 <style lang="scss" scoped>
 @import '../../../../assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/colors.scss';
+
+.entity {
+  border-radius: 12px;
+  padding: 0 0.35rem;
+}
 
 .example {
   $radius: 8px;
@@ -267,21 +237,7 @@ export default {
   }
 
   &-text {
-    display: flex;
-    padding: 8px 16px;
-    background-color: $white-ter;
-    border-radius: $radius;
-    transition: box-shadow .2s ease;
-    margin: 1px;
-
-    &__main {
-      flex-grow: 1;
-      font-size: 1.25rem;
-    }
-
-    &__rigth {
-      flex-grow: 0;
-    }
+    margin: 0;
   }
 
   &-entities,

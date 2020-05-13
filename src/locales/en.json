@@ -140,6 +140,7 @@
       "no_expected_intent": "No expected intent",
       "confidence": "Confidence",
       "ok": "ok",
+      "is": "is",
       "failed": "failed",
       "intent": "Intent",
       "error": "There was an error retrieving the sentences"

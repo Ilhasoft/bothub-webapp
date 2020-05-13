@@ -132,7 +132,7 @@ export default new Router({
           component: RepositoryResults,
         },
         {
-          path: ':ownerNickname/:slug/result/:resultId/:version',
+          path: ':ownerNickname/:slug/result/:resultId/',
           name: 'repository-result',
           component: RepositoryResult,
         },

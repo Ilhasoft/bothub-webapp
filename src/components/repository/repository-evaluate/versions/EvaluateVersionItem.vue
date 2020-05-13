@@ -58,7 +58,6 @@ export default {
       return {
         name: 'repository-result',
         params: {
-          version: this.version,
           resultId: this.id,
         },
       };

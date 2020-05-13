@@ -119,7 +119,7 @@ export default {
               value: 'japanese',
               confidence: 0.8567371151062296,
               extractor: 'CRFEntityExtractor',
-              true_entity: 'feeling',
+              entity: 'feeling',
               predicted_entity: 'cuisine',
             },
           ],
