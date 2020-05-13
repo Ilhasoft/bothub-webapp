@@ -127,6 +127,7 @@
       "see_more_in": "Read more about in our",
       "intent_report": "Intent Report",
       "entities": "Entities",
+      "entity": "Entity",
       "intent_confusion_matrix": "Intent Confusion Matrix",
       "intent_confusion_matrix_text": "The confusion matrix shows you which intents are mistaken for others. Read more about it in our",
       "intent_confidence_distribution": "Intent confidence distribution",

@@ -1,8 +1,8 @@
 <template>
-  <div
+  <!-- <div
     :class="{ example: true,
-              'example--failed': status == 'error',
-              'example--success': status == 'success',
+              'example--failed': !success,
+              'example--success': success,
               'fadeIn': true,
   }">
     <div class="example-text">
@@ -18,11 +18,11 @@
         <div
           v-if="intent"
           :class="{'level-item ': true,
-                   'text-color-danger': status=='error'}">
-          <div v-if="status =='error'">
+                   'text-color-danger': !success}">
+          <div v-if="!success">
             <strong
               :class="{
-              'text-color-danger': status=='error'}">
+              'text-color-danger': !success}">
               {{ $t('webapp.result.expected_intent') }}:&nbsp;
             </strong>
             <span>{{ intent }} /</span>
@@ -31,7 +31,7 @@
               class="example__align-no-predicted">
               <strong
                 :class="{
-                'text-color-danger': status=='error'}">
+                'text-color-danger': !success}">
                 {{ $t('webapp.result.predicted_intent') }}:&nbsp;
               </strong>
               <span>{{ intentPrediction.name }}
@@ -41,7 +41,7 @@
             <strong
               v-else
               :class="{
-              'text-color-danger': status=='error'}">
+              'text-color-danger': !success}">
               {{ $t('webapp.result.no_expected_intent') }}
             </strong>
           </div>
@@ -50,17 +50,91 @@
             <span>{{ intent }} ({{ confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})
             </span>
           </div>
-
         </div>
         <span
-          v-if="status === 'success'"
+          v-if="success"
           class="success">[{{ $t('webapp.result.ok') }}]</span>
         <span
           v-else
           class="failed">[{{ $t('webapp.result.failed') }}]</span>
       </div>
+    </div> -->
+
+  <sentence-accordion
+    :open.sync="open"
+    :type="success ? 'is-success' : 'is-danger'"
+    :class="{ example: true,
+              'fadeIn': true,
+    }"
+    thick-border
+    is-light>
+    <div slot="header">
+      <highlighted-text
+        v-if="open"
+        :text="text"
+        :entities="entities"
+        :all-entities="repository.entities || repository.entities_list" />
+      <div
+        v-else
+        class="level">
+        <p class="level-left"> {{ text }}</p>
+      </div>
     </div>
-  </div>
+
+    <b-icon
+      slot="options"
+      :class="['level-right', success ? 'success' : 'failed']"
+      :icon="success ? 'check-bold' : 'close-thick'" />
+
+    <div slot="body">
+      <div v-if="intentSuccess">
+        <strong> {{ $t('webapp.result.intent') }}: </strong>
+        <span> {{ intent }} </span>
+        <strong
+          class="success">[{{ $t('webapp.result.ok') }}]</strong>
+      </div>
+      <div v-else>
+        <strong> {{ $t('webapp.result.expected_intent') }}: </strong>
+        <span> {{ intent }} / </span>
+        <strong> {{ $t('webapp.result.predicted_intent') }}:</strong>
+        <span> {{ intentPrediction.name }}
+          ({{ intentPrediction.confidence.toFixed(2) }}
+          {{ $t('webapp.result.confidence') }}) </span>
+        <strong
+          class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+      </div>
+
+      <div
+        v-for="(entity, i) in entities"
+        :key="i">
+        <p><strong> {{ $t('webapp.result.entity') }}: </strong>
+          <span> {{ entity.value }} is
+            <b-tag :class="getEntityClass(entity)">{{ entity.entity }}</b-tag>
+          </span>
+          <strong
+            v-if="entity.status === 'success'"
+            class="success">[{{ $t('webapp.result.ok') }}]</strong>
+          <strong
+            v-else
+            class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+        </p>
+      </div>
+
+      <div
+        v-for="(entity, i) in swappedEntities"
+        :key="i">
+        <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
+        <span> {{ entity.value }} is {{ entity.true_entity }} / </span>
+        <strong> {{ $t('webapp.result.predicted_entity') }}:</strong>
+        <span> {{ entity.value }} is {{ entity.predicted_entity }}
+          ({{ entity.confidence.toFixed(2) }}
+          {{ $t('webapp.result.confidence') }}) </span>
+        <strong
+          class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+      </div>
+
+    </div>
+  </sentence-accordion>
 </template>
 
 <script>
@@ -69,13 +143,14 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-
+import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 
 export default {
   name: 'EvaluateResultExampleItem',
   components: {
     HighlightedText,
     LanguageBadge,
+    SentenceAccordion,
   },
   props: {
     text: {
@@ -90,18 +165,31 @@ export default {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
     },
+    swappedEntities: {
+      type: Array,
+      default: /* istanbul ignore next */ () => ([]),
+    },
     confidence: {
       type: Number,
       default: 0,
     },
-    status: {
-      type: String,
-      default: 'example--failed',
+    success: {
+      type: Boolean,
+      default: true,
+    },
+    intentSuccess: {
+      type: Boolean,
+      default: true,
     },
     intentPrediction: {
       type: Object,
       default: null,
     },
+  },
+  data() {
+    return {
+      open: false,
+    };
   },
   computed: {
     ...mapState({

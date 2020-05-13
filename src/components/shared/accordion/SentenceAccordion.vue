@@ -1,8 +1,16 @@
 <template>
   <div class="expander">
     <div
-      :class="[isOpen ? 'active':'before-border']"
-      class="expander__trigger">
+      :class="{
+        'expander__trigger': true,
+        'active': isOpen,
+        'before-border': !isOpen,
+        'border-thick': thickBorder,
+        'border-success': type === 'is-success',
+        'border-danger': type === 'is-danger',
+        'is-light': isLight,
+        'border': !type,
+    }">
 
 
       <div class="expander__trigger__check">
@@ -42,6 +50,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    isLight: {
+      type: Boolean,
+      default: null,
+    },
+    type: {
+      type: String,
+      default: null,
+    },
+    thickBorder: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
@@ -63,6 +83,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
+  @import '~bh/src/assets/scss/colors.scss';
 
   .before-border {
     position: relative;
@@ -89,6 +110,25 @@ export default {
     box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
   }
 
+  .border {
+    border-color: #cfd5d9;
+    border-width: 1px;
+    border-style: solid;
+
+    &-success {
+      border-color: $color-success;
+    }
+
+    &-danger {
+      border-color: $color-danger
+    }
+
+    &-thick {
+      border-width: 2px;
+      border-style: solid;
+    }
+  }
+
   .expander {
     &__trigger {
       display: flex;
@@ -96,8 +136,6 @@ export default {
       padding: .7rem;
       margin-top: 0.5rem;
       cursor: pointer;
-      border: 1px solid #cfd5d9;
-      border-radius: 3px;
     &__check{
       margin-right: 1rem;
     }
@@ -117,6 +155,10 @@ export default {
       padding: .7rem 0;
       background: #f5f5f5;
     }
+  }
+
+  .is-light {
+    background-color: white;
   }
 
   .fade-enter-active, .fade-leave-active {
