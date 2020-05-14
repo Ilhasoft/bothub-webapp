@@ -16,28 +16,10 @@
               :repository="repository" />
           </div>
         </div>
-        <div
-          v-else>
-          <b-notification
-            :closable="false"
-            type="is-warning"
-            role="alert">
-            <div
-              class="evaluate__notification">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
-          </b-notification>
-        </div>
+        <authorization-request-notification
+          v-else
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
       <div
         v-else>
@@ -54,7 +36,7 @@
 </template>
 
 <script>
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
 import { mapActions, mapState, mapGetters } from 'vuex';
@@ -69,7 +51,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateVersions,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -77,7 +59,6 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -104,17 +85,6 @@ export default {
     ...mapActions([
       'setEvaluateLanguage',
     ]),
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
@@ -150,15 +120,7 @@ export default {
   }
 
   }
-    &__notification{
-    @media screen and (max-width: 50em) {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-    }
-  }
+
   &__content-header {
     text-align: left;
 

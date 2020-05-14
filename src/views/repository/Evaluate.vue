@@ -51,21 +51,10 @@
           class="
                 evaluate__container">
           <div class="evaluate__item">
-            <b-notification
-              :closable="false"
-              type="is-warning">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </b-notification>
+            <authorization-request-notification
+              v-if="repository && !repository.authorization.can_write"
+              :repository-uuid="repository.uuid"
+              @onAuthorizationRequested="updateRepository(false)" />
           </div>
         </div>
       </div>
@@ -85,7 +74,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -99,7 +88,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -107,7 +96,6 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -145,9 +133,6 @@ export default {
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({

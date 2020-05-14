@@ -1,9 +1,9 @@
 <template>
-  <bh-modal
-    :open.sync="openValue"
-    :title="$t('webapp.tutorial.create_your_first_bot')">
+  <b-modal
+    :active.sync="openValue">
     <div class="beginner-tutorial">
       <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
+        <h1>{{ $t('webapp.tutorial.create_your_first_bot') }}</h1>
         <div
           v-if="currentValue === 1"
           class="bh-grid__item bh-grid__item--nested">
@@ -54,23 +54,23 @@
           }"
           primary
           @click="previous()">{{ $t('webapp.tutorial.previous') }}</bh-button>
-        <bh-button
+        <b-button
           v-if="currentValue !== 4"
           class="beginner-tutorial__wrapper__footer__next-button"
-          primary
-          @click="next()">{{ $t('webapp.tutorial.next') }}</bh-button>
-        <bh-button
+          type="is-primary"
+          @click="next()">{{ $t('webapp.tutorial.next') }}</b-button>
+        <b-button
           v-else
           class="beginner-tutorial__wrapper__footer__next-button"
-          primary
-          @click="closeModal()">{{ $t('webapp.tutorial.finish') }}</bh-button>
+          type="is-primary"
+          @click="closeModal()">{{ $t('webapp.tutorial.finish') }}</b-button>
         <bh-stepper
           :steps="steps"
           :current-step="currentValue"
         />
       </div>
     </div>
-  </bh-modal>
+  </b-modal>
 </template>
 
 <script>
@@ -121,6 +121,10 @@ export default {
 
 
 .beginner-tutorial {
+
+  background-color: white;
+  padding: 0.5rem;
+
   &__wrapper {
     &__text {
       display: flex;

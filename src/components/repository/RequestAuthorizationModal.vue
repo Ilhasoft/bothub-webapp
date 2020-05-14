@@ -1,15 +1,14 @@
 <template>
-  <bh-modal
-    :open.sync="openValue"
-    :title="$t('webapp.layout.request_authorization')">
-    <div class="bh-grid">
-      <div class="bh-grid__item">
-        <request-authorization-form
-          :repository-uuid="repositoryUuid"
-          @requested="onAuthorizationRequested()" />
-      </div>
+  <b-modal
+    :active.sync="openValue"
+    :width="700">
+    <div class="request-authorization">
+      <h1 class="request-authorization__item">{{ $t('webapp.layout.request_authorization') }}</h1>
+      <request-authorization-form
+        :repository-uuid="repositoryUuid"
+        @requested="onAuthorizationRequested()" />
     </div>
-  </bh-modal>
+  </b-modal>
 </template>
 
 <script>
@@ -51,3 +50,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .request-authorization {
+    background-color: white;
+    padding: 2rem;
+
+    &__item {
+      margin: 1rem 0;
+    }
+  }
+</style>
