@@ -46,10 +46,36 @@
       </div>
 
       <div
-        v-for="(entity, i) in allEntities"
+        v-if="entities.length > 0"
+        class="example__entities">
+        <strong> {{ $tc('webapp.result.entity', entities.length) }}: </strong>
+        <div>
+          <p
+            v-for="(entity, i) in entities"
+            :key="i"
+            class="entity__text">
+            <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <span v-if="entity.confidence">
+                ({{ entity.confidence.toFixed(2) }}
+                {{ $t('webapp.result.confidence') }})
+              </span>
+            </span>
+            <strong
+              v-if="entity.status === 'success'"
+              class="success">[{{ $t('webapp.result.ok') }}]</strong>
+            <strong
+              v-else
+              class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-for="(entity, i) in swappedEntities"
         :key="i">
 
-        <p v-if="entity.predicted_entity">
+        <p>
           <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
           <span> {{ entity.value }} {{ $t('webapp.result.is') }}
             <span :class="['entity', getEntityClass(entity)]">
@@ -64,28 +90,11 @@
               ({{ entity.confidence.toFixed(2) }}
               {{ $t('webapp.result.confidence') }})
           </span> </span>
-        </p>
-
-        <p v-else><strong> {{ $t('webapp.result.entity') }}: </strong>
-          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
-            <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
-            <span v-if="entity.confidence">
-              ({{ entity.confidence.toFixed(2) }}
-              {{ $t('webapp.result.confidence') }})
-            </span>
-          </span>
-
           <strong
-            v-if="entity.status === 'success'"
-            class="success">[{{ $t('webapp.result.ok') }}]</strong>
-          <strong
-            v-else
             class="failed">[{{ $t('webapp.result.failed') }}]</strong>
         </p>
       </div>
-
-    </div>
-  </sentence-accordion>
+  </div></sentence-accordion>
 </template>
 
 <script>
@@ -161,14 +170,12 @@ export default {
   },
   methods: {
     toEntity(predicted) {
-      const object = {
+      return {
         entity: predicted.predicted_entity,
         start: predicted.start,
         end: predicted.end,
         value: predicted.value,
       };
-      console.log(object);
-      return object;
     },
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -193,6 +200,10 @@ export default {
 .entity {
   border-radius: 12px;
   padding: 0 0.35rem;
+
+  &__text {
+    margin: 0 0 0.5rem 0;
+  }
 }
 
 .example {
@@ -218,10 +229,11 @@ export default {
   }
 
   &__entities {
-    &__entitie {
-      margin: 0 .5rem;
-    }
-  }
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 0.5rem;
+  };
 
   &__icon {
     margin: 0 .5rem;
@@ -243,16 +255,6 @@ export default {
   &-entities,
   &-infos {
     padding: 4px 8px 4px 16px;
-  }
-
-  &-entities {
-     >* {
-      margin: 0 8px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
   }
 }
 
