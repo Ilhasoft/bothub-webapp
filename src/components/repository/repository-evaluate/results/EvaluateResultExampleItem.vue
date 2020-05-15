@@ -129,10 +129,6 @@ export default {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
     },
-    confidence: {
-      type: Number,
-      default: 0,
-    },
     success: {
       type: Boolean,
       default: true,
