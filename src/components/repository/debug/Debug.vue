@@ -214,9 +214,12 @@ export default {
         padding: 0.5rem;
         display: flex;
         flex-wrap: wrap;
-        row-gap: 1rem;
         justify-content: center;
         border: 1px solid #CFD5D9;
+
+        > * {
+          margin: 1rem 0;
+        }
       }
     }
   }
