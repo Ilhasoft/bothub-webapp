@@ -16,9 +16,17 @@ export default {
     return evaluateExample.search(repositoryUUID, version, query, limit);
   },
   async updateEvaluateExample(store, {
-    repository, text, language, entities, intent, id,
+    repository, version, text, language, entities, intent, id,
   }) {
-    const response = await evaluateExample.update(repository, text, language, entities, intent, id);
+    const response = await evaluateExample.update(
+      repository,
+      version,
+      text,
+      language,
+      entities,
+      intent,
+      id,
+    );
     return response;
   },
   async getExamplesTest(store, { repositoryUuid }) {
@@ -30,8 +38,8 @@ export default {
     return true;
   },
 
-  async getEvaluateExample(store, { id }) {
-    const response = await evaluateExample.get(id);
+  async getEvaluateExample(store, { id, version }) {
+    const response = await evaluateExample.get(id, version);
     return response.data;
   },
   async getEntitiesTest(store, { repositoryUuid, value }) {
@@ -42,8 +50,8 @@ export default {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
-  getAllVersions(store, { repositoryUuid, limit = 20 }) {
-    return evaluateExample.allVersions(repositoryUuid, limit);
+  getAllResults(store, { repositoryUuid, version, limit = 20 }) {
+    return evaluateExample.allVersions(repositoryUuid, version, limit);
   },
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);

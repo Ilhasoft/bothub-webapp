@@ -59,7 +59,7 @@ export default {
       });
     },
     examplesDeleted() {
-      this.$emit('exampleTranslated');
+      this.$emit('exampleUpdated');
     },
   },
 };

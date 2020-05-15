@@ -5,35 +5,26 @@
     <div
       v-if="repository"
       class="repository-home">
-      <div class="repository-home__header">
-        <div class="repository-home__header__icon-badge">
-          <bh-icon
-            :value="repositoryIcon"
-            size="large"
-            class="repository-home__header__icon-badge__icon" />
-        </div>
-        <div class="repository-home__header__wrapper">
-          <div class="repository-home__title">
-            {{ repository.name }}
-          </div>
-          <span
-            v-for="language in repository.available_languages"
-            :key="language"
-          >
-            <bh-badge
-              :transparent="language !== repository.language"
-              size="small"
-              color="primary"
-              class="repository-home__header__wrapper__badge"
-            >
-              {{ language }}
-            </bh-badge>
-          </span>
-        </div>
-      </div>
       <div class="repository-home__description">
         <div class="repository-home__title">
           {{ $t('webapp.home.description') }}
+        </div>
+        <div class="repository-home__header">
+          <div class="repository-home__header__wrapper">
+            <span
+              v-for="language in repository.available_languages"
+              :key="language"
+            >
+              <bh-badge
+                :transparent="language !== repository.language"
+                size="small"
+                color="primary"
+                class="repository-home__header__wrapper__badge"
+              >
+                {{ language }}
+              </bh-badge>
+            </span>
+          </div>
         </div>
         <div>
           <vue-markdown
@@ -194,7 +185,8 @@ export default {
 
   &__header {
     display: flex;
-    margin: 2rem .5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     &__icon-badge {
       $size: 4rem;
@@ -217,7 +209,6 @@ export default {
     }
 
     &__wrapper {
-      padding: 0 .75rem;
 
       &__badge {
         height: 1.5rem;

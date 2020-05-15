@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@mdi/font": "^3.0.39",
+    "@sentry/browser": "^5.15.5",
+    "@sentry/integrations": "^5.15.5",
     "axios": "^0.18.0",
     "bh": "./bh/",
     "buefy": "^0.8.12",
