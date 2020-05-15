@@ -4,20 +4,44 @@
     :error-code="errorCode">
     <div v-if="repository">
       <div v-if="authenticated">
+
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
+
           <div class="repository-translate">
-            <div class="repository-translate__fields">
-              <b-field :label="$t('webapp.translate.translate_from')">
-                <language-select v-model="translate.from" />
-              </b-field>
+            <div class="repository-translate__translateButtons">
+
+              <b-button
+                :class="{'is-primary':!!translate.from && !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToImport()">Import</b-button>
+
+              <b-button
+                :class="{'is-primary':!!translate.from && !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToExport()">Export</b-button>
+
             </div>
-            <div class="repository-translate__translate-arrow-icon">
-              <div class="field">
-                <label class="label">&nbsp;</label>
-                <b-icon
-                  icon="chevron-right"
-                  size="is-small" />
+            <div class="repository-translate__field">
+              <div class="repository-translate__field__item">
+                <b-field :label="$t('webapp.translate.translate_from')">
+                  <language-select v-model="translate.from" />
+                </b-field>
+              </div>
+              <div class="repository-translate__translate-arrow-icon">
+                <div class="field">
+                  <label class="label">&nbsp;</label>
+                  <b-icon
+                    icon="chevron-right"
+                    size="is-small" />
+                </div>
+              </div>
+              <div class="repository-translate__field__item">
+                <b-field :label="$t('webapp.translate.translate_to')">
+                  <language-select
+                    v-model="translate.to"
+                    :exclude="[translate.from]" />
+                </b-field>
               </div>
             </div>
             <div class="repository-translate__fields">
@@ -30,6 +54,54 @@
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
+
+            <b-modal
+              :active.sync="isImportFileVisible"
+              class="repository-translate__fileModal">
+              <div class="repository-translate__fileModal__file">
+                <b-field
+                  label="Select a file to import"
+                  class="custom-file-upload">
+                  <input
+                    ref="inputFile"
+                    type="file"
+                    class="custom-file-upload__input"
+                    @change="onFileSelected">
+                  <p>Choose the file containing the sentences you want
+                  import it translations. Use the following <a>format</a></p>
+
+                  <div class="repository-translate__styleButton">
+                    <b-button
+                      class="repository-translate__buttons"
+                      type="is-primary"
+                      @click="importTranslation()">Import</b-button>
+                  </div>
+                </b-field>
+
+              </div>
+            </b-modal>
+
+            <b-modal
+              :active.sync="isExportFileVisible"
+              class="repository-translate__switchModal">
+              <div class="repository-translate__switchModal__switch">
+                <b-field
+                  label="Export only not translated sentences"/>
+                <b-switch v-model="isSwitched">
+                  {{ checkSwitch }}
+                </b-switch>
+                <p>When enabling this option, the export file will contain
+                just not translated sentences</p>
+                <div class="repository-translate__styleButton">
+                  <b-button
+                    type="is-primary"
+                    class="repository-translate__buttons"
+                    @click="exportTranslation()">Export</b-button>
+                </div>
+              </div>
+
+            </b-modal>
+            <hr>
             <div class="repository-translate__search">
               <filter-examples
                 :intents="repository.intents_list"
@@ -64,7 +136,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
@@ -90,6 +162,10 @@ export default {
   data() {
     return {
       trainResponse: null,
+      translationFile: null,
+      isSwitched: false,
+      isExportFileVisible: false,
+      isImportFileVisible: false,
       translate: {
         from: null,
         to: null,
@@ -100,10 +176,91 @@ export default {
       querySchema: {},
     };
   },
+  computed: {
+    ...mapState({
+      selectedRepository: state => state.Repository.selectedRepository,
+    }),
+
+    checkSwitch() {
+      if (this.isSwitched === true) {
+        return 'Yes';
+      }
+      return 'No';
+    },
+  },
   methods: {
     ...mapActions([
       'getRepository',
+      'exportTranslations',
+      'importTranslations',
     ]),
+    async exportTranslation() {
+      try {
+        const xlsFile = await this.exportTranslations({
+          repositoryUuid: this.selectedRepository.uuid,
+          versionUUID: this.selectedRepository.repository_version_id,
+          fromLanguage: this.translate.from,
+          toLanguagem: this.translate.to,
+          statusTranslation: this.isSwitched,
+        });
+        this.forceFileDownload(xlsFile);
+        this.$buefy.toast.open({
+          message: 'Downloading File',
+          type: 'success',
+        });
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: error,
+          type: 'danger',
+        });
+      }
+      return false;
+    },
+    onFileSelected(event) {
+      // eslint-disable-next-line prefer-destructuring
+      this.translationFile = event.target.files[0];
+    },
+
+    async importTranslation() {
+      const formData = new FormData();
+      formData.append('file', this.translationFile);
+      formData.append('language', this.translate.to);
+
+      try {
+        const importDownload = await this.importTranslations({
+          repositoryUuid: this.selectedRepository.uuid,
+          versionUUID: this.selectedRepository.repository_version_id,
+          formData,
+        });
+        this.forceFileDownload(importDownload);
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: error,
+          type: 'danger',
+        });
+      }
+      return false;
+    },
+    forceFileDownload(response) {
+      const blob = new Blob([response.data], { type: response.headers['content-type'] });
+      const result = document.createElement('a');
+      result.href = window.URL.createObjectURL(blob);
+      result.download = 'bothub.xlsx';
+      result.click();
+    },
+    checkLanguageToImport() {
+      if (this.translate.from && this.translate.to) {
+        this.isImportFileVisible = true;
+      }
+    },
+    checkLanguageToExport() {
+      if (this.translate.from && this.translate.to) {
+        this.isExportFileVisible = true;
+      }
+    },
+    clearIconClick() {
+      this.translationFile = null;
+    },
     examplesTranslated() {
       this.update = !this.update;
     },
@@ -136,6 +293,15 @@ export default {
   justify-content: space-around;
   align-items: center;
 
+  &__field {
+    display: flex;
+    padding: 0.25rem;
+
+    &__item {
+      margin: 0.5rem;
+    }
+  }
+
   &__fields{
     width: 50%
   }
@@ -147,6 +313,97 @@ export default {
   &__search {
     margin: 0.5rem;
   }
+  &__requestAuthorization{
+        color: $color-fake-black;
+        font-weight: $font-weight-medium;
+        text-align: center;
+        float: right
+  }
+
+&__fileModal{
+   display: flex;
+    justify-content: center;
+    align-items: center;
+ &__file{
+    background-color: $color-white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 13rem;
+
+    p{
+      font-size: $font-small;
+    }
+  }
+}
+
+&__switchModal{
+   display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__switch{
+      background-color: $color-white;
+      justify-content: center;
+      align-items: center;
+      height: 11rem;
+      padding: 1rem;
+        p{
+        font-size: $font-small;
+        }
+    }
+}
+  &__styleButton{
+    width:100%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__buttons{
+    min-width: 18%;
+    margin: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__translateButtons{
+    display: flex;
+    justify-content: flex-end
+  }
+  &__unableButton{
+    background-color:$color-grey;
+    color: $color-white;
+    border: 2px solid #D5D5D5;
+    font-weight: $font-weight-medium;
+    box-shadow: 0 0.1875rem 0.375rem rgba(200, 200, 200, 0.5);
+
+     &:hover{
+      color: $color-white;
+      border: 2px solid #D5D5D5;
+      cursor:default
+    }
+    &:focus{
+      color: $color-white;
+      border: 2px solid #D5D5D5;
+      cursor:default
+    }
+  }
+}
+
+.custom-file-upload {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem;
+
+  &__input{
+   border: 1px solid #D5D5D5;
+  }
+
 }
 
 </style>
