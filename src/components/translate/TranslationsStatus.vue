@@ -1,10 +1,14 @@
 <template>
-  <div class="columns is-multiline">
+  <transition-group
+    name="list"
+    mode="out-in"
+    class="columns is-multiline"
+    tag="div">
     <div
       v-for="{ status, language, selected } in filteredLanguagesStatus"
       :key="language"
       :ref="`status-${language}`"
-      class="column is-3"
+      class="list-item column is-3"
       @click="select(language)">
       <div :class="{ card: true, selected }">
         <div class="card-percentage">
@@ -16,7 +20,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </transition-group>
 </template>
 
 <script>
@@ -41,6 +45,10 @@ export default {
     value: {
       type: String,
       default: null,
+    },
+    update: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -72,6 +80,9 @@ export default {
     selected() {
       this.$emit('input', this.selected);
     },
+    update() {
+      this.updateTranslationsStatus();
+    },
   },
   async mounted() {
     await this.updateTranslationsStatus();
@@ -81,6 +92,7 @@ export default {
       'getRepositoryLanguagesStatus',
     ]),
     async updateTranslationsStatus() {
+      console.log('updated');
       this.languagesStatus = null;
       try {
         const response = await this.getRepositoryLanguagesStatus({
@@ -100,6 +112,19 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0.4;
+  float: bottom;
+  transform: translateY(5%);
+}
+
+.list-item:not(:last-child) {
+    border-bottom: none;
+}
 
 .card {
   background-color: $white-ter;

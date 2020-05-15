@@ -1,5 +1,6 @@
 <template>
   <div>
+    <b-button @click="examplesDeleted()"> TEST </b-button>
     <paginated-list
       v-if="translationsList"
       :item-component="translationItemElem"
@@ -59,6 +60,7 @@ export default {
       });
     },
     examplesDeleted() {
+      this.updateTranslations();
       this.$emit('exampleUpdated');
     },
   },
