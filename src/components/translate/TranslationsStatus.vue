@@ -1,26 +1,32 @@
 <template>
-  <transition-group
-    name="list"
-    mode="out-in"
-    class="columns is-multiline"
-    tag="div">
-    <div
-      v-for="{ status, language, selected } in filteredLanguagesStatus"
-      :key="language"
-      :ref="`status-${language}`"
-      class="list-item column is-3"
-      @click="select(language)">
-      <div :class="{ card: true, selected }">
-        <div class="card-percentage">
-          <pie :percent="status.base_translations.percentage" />
+  <div>
+    <b-loading
+      :is-full-page="false"
+      :active="loading"
+      :can-cancel="false" />
+    <transition-group
+      name="list"
+      mode="out-in"
+      class="columns is-multiline"
+      tag="div">
+      <div
+        v-for="{ status, language, selected } in filteredLanguagesStatus"
+        :key="language"
+        :ref="`status-${language}`"
+        class="list-item column is-3"
+        @click="select(language)">
+        <div :class="{ card: true, selected }">
+          <div class="card-percentage">
+            <pie :percent="status.base_translations.percentage" />
+          </div>
+          <p class="card-language">
+            <span>{{ language|languageVerbose }}</span>
+            <flag :language="language" />
+          </p>
         </div>
-        <p class="card-language">
-          <span>{{ language|languageVerbose }}</span>
-          <flag :language="language" />
-        </p>
       </div>
-    </div>
-  </transition-group>
+    </transition-group>
+  </div>
 </template>
 
 <script>
@@ -55,6 +61,7 @@ export default {
     return {
       languagesStatus: null,
       selected: this.value,
+      loading: false,
     };
   },
   computed: {
@@ -92,7 +99,7 @@ export default {
       'getRepositoryLanguagesStatus',
     ]),
     async updateTranslationsStatus() {
-      console.log('updated');
+      this.loading = true;
       this.languagesStatus = null;
       try {
         const response = await this.getRepositoryLanguagesStatus({
@@ -101,6 +108,8 @@ export default {
         this.languagesStatus = response.data.languages_status;
       } catch (e) {
         this.languagesStatus = null;
+      } finally {
+        this.loading = false;
       }
     },
     select(language) {
@@ -119,7 +128,7 @@ export default {
 .list-enter, .list-leave-to {
   opacity: 0.4;
   float: bottom;
-  transform: translateY(5%);
+  transform: translateY(-5%);
 }
 
 .list-item:not(:last-child) {
