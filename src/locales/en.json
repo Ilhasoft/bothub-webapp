@@ -127,6 +127,7 @@
       "see_more_in": "Read more about in our",
       "intent_report": "Intent Report",
       "entity": "Entities | Entity | Entities",
+      "added_entity": "Added entities | Added entity | Added entities",
       "intent_confusion_matrix": "Intent Confusion Matrix",
       "intent_confusion_matrix_text": "The confusion matrix shows you which intents are mistaken for others. Read more about it in our",
       "intent_confidence_distribution": "Intent confidence distribution",
@@ -141,6 +142,8 @@
       "ok": "ok",
       "is": "is",
       "failed": "failed",
+      "not_predicted": "not predicted",
+      "false_positive": "false positive",
       "intent": "Intent",
       "error": "There was an error retrieving the sentences"
     },

@@ -12,7 +12,7 @@
         v-if="open"
         :text="text"
         :entities="allEntities"
-        :all-entities="repository.entities || repository.entities_list" />
+        :all-entities="repoEnts" />
       <p
         v-else
         class="example-text"> {{ text }}</p>
@@ -26,15 +26,15 @@
     <div
       slot="body"
       class="example-infos">
-      <div v-if="intentSuccess">
+      <p v-if="intentSuccess">
         <strong> {{ $t('webapp.result.intent') }}: </strong>
         <span> {{ intent }}
           ({{ intentPrediction.confidence.toFixed(2) }}
           {{ $t('webapp.result.confidence') }}) </span>
         <strong
           class="success">[{{ $t('webapp.result.ok') }}]</strong>
-      </div>
-      <div v-else>
+      </p>
+      <p v-else>
         <strong> {{ $t('webapp.result.expected_intent') }}: </strong>
         <span> {{ intent }} / </span>
         <strong> {{ $t('webapp.result.predicted_intent') }}:</strong>
@@ -43,7 +43,7 @@
           {{ $t('webapp.result.confidence') }}) </span>
         <strong
           class="failed">[{{ $t('webapp.result.failed') }}]</strong>
-      </div>
+      </p>
 
       <div
         v-if="entities.length > 0"
@@ -66,7 +66,29 @@
               class="success">[{{ $t('webapp.result.ok') }}]</strong>
             <strong
               v-else
-              class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+              class="failed">[{{ $t('webapp.result.not_predicted') }}]</strong>
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-if="addedEntities.length > 0"
+        class="example__entities">
+        <strong> {{ $tc('webapp.result.added_entity', addedEntities.length) }}: </strong>
+        <div>
+          <p
+            v-for="(entity, i) in addedEntities"
+            :key="i"
+            class="entity__text">
+            <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <span v-if="entity.confidence">
+                ({{ entity.confidence.toFixed(2) }}
+                {{ $t('webapp.result.confidence') }})
+              </span>
+            </span>
+            <strong
+              class="failed">[{{ $t('webapp.result.false_positive') }}]</strong>
           </p>
         </div>
       </div>
@@ -74,7 +96,6 @@
       <div
         v-for="(entity, i) in swappedEntities"
         :key="i">
-
         <p>
           <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
           <span> {{ entity.value }} {{ $t('webapp.result.is') }}
@@ -129,6 +150,10 @@ export default {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
     },
+    addedEntities: {
+      type: Array,
+      default: /* istanbul ignore next */ () => ([]),
+    },
     success: {
       type: Boolean,
       default: true,
@@ -148,9 +173,44 @@ export default {
     };
   },
   computed: {
+    // TODO: test only
+    repoEnts() {
+      // return repository.entities || repository.entities_list;
+      return [
+        {
+          id: 1,
+          value: 'cuisine',
+        },
+        {
+          id: 2,
+          value: 'feeling',
+        },
+      ];
+    },
+    markEntities() {
+      return this.allEntities.filter(entity => !entity.ignore);
+    },
     allEntities() {
-      return [...this.entities,
-        ...this.swappedEntities];
+      const swappedEntities = this.swappedEntities.reduce((entities, entity) => {
+        // eslint-disable-next-line no-param-reassign
+        entities = [...entities,
+          {
+            entity: entity.entity,
+            start: 0,
+            end: 0,
+            value: entity.value,
+          },
+          this.toEntity(entity)];
+        return entities;
+      }, []);
+      const trueEntities = this.entities.map(entity => ({
+        entity: entity.entity,
+        value: entity.value,
+        status: entity.status,
+        start: entity.status === 'success' ? entity.start : 0,
+        end: entity.status === 'success' ? entity.end : 0,
+      }));
+      return [...trueEntities, ...swappedEntities, ...this.addedEntities];
     },
     ...mapState({
       repository: state => state.Repository.selectedRepository,
@@ -176,13 +236,13 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
+        this.repoEnts,
         this.allEntities,
       );
       return `entity-${color}`;
     },
     getEntityLabel(entityName) {
-      const entity = this.entities.find(e => e.entity === entityName);
+      const entity = this.repoEnts.find(e => e.entity === entityName);
       return entity.label || 'unlabeled';
     },
   },
@@ -196,6 +256,10 @@ export default {
 .entity {
   border-radius: 12px;
   padding: 0 0.35rem;
+
+  &__success {
+    border: 1px solid $color-success;
+  }
 
   &__text {
     margin: 0 0 0.5rem 0;
@@ -225,7 +289,6 @@ export default {
   }
 
   &__entities {
-    margin-top: 0.5rem;
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.5rem;

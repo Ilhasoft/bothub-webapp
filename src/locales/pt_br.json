@@ -127,6 +127,7 @@
       "see_more_in": "Leia mais na nossa ",
       "intent_report": "Relatório das Intenções",
       "entity": "Entidades | Entidade | Entidades",
+      "added_entity": "Entidades adiconadas | Entidade adiconada | Entidades adiconadas",
       "intent_confusion_matrix": "Matriz de confusão de intenções",
       "intent_confusion_matrix_text": "A Matriz de confusão de intenções mostra quais intenções foram confudidas por outras. Leia mais na nossa",
       "intent_confidence_distribution": "Distribuição de confiança das intenções",
@@ -143,6 +144,8 @@
       "ok": "ok",
       "is": "é",
       "failed": "falhou",
+      "not_predicted": "não predito",
+      "false_positive": "falso positivo",
       "intent": "Intenção",
       "error": "Houve um erro ao buscar as frases"
     },
