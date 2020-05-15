@@ -220,10 +220,18 @@ export default {
           text-align: center;
           margin: 50% 15%;
           flex-direction: column;
-          row-gap: 1rem;
 
           &__buttons {
-            column-gap: 0.5rem;
+
+            margin: 1rem 0;
+
+            > * {
+              margin: 0 0.5rem 0 0;
+            }
+
+            :last-child {
+              margin: 0;
+            }
           }
         }
 
