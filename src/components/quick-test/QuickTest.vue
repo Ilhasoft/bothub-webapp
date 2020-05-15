@@ -220,7 +220,7 @@ export default {
           text-align: center;
           margin: 50% 15%;
           flex-direction: column;
-          
+
           &__buttons {
 
             margin: 1rem 0;
