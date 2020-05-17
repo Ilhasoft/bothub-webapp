@@ -69,25 +69,27 @@ export default {
     }),
     paginatedList() {
       const offset = this.limit * (this.page - 1);
-      return this.resultExampleList.slice(offset, offset + this.limit);
+      if (this.resultExampleList.results !== undefined) {
+        return this.resultExampleList.results.slice(offset, offset + this.limit);
+      }
+      return '';
     },
   },
-  mounted() {
+  created() {
     this.updateList();
   },
   methods: {
     ...mapActions([
       'getAllResultsLog',
     ]),
-    updateList() {
+    async updateList() {
       this.busy = true;
-      this.getAllResultsLog({
+      const resultLogs = await this.getAllResultsLog({
         repositoryUuid: this.repository.uuid,
         resultId: this.id,
-      }).then((response) => {
-        this.resultExampleList = response.data.log;
-        this.busy = false;
       });
+      this.resultExampleList = resultLogs.data.log;
+      this.busy = false;
     },
   },
 };
