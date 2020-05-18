@@ -100,6 +100,8 @@ export default {
   &__item {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 1rem;
   }
 
    @media screen and (max-width: $mobile-width) {

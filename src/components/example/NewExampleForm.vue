@@ -1,12 +1,12 @@
 <template>
   <div>
     <form
-      class="columns is-variable is-2"
+      class="columns wrapper is-vcentered is-variable is-2"
       @submit.prevent="onSubmit()"
     >
       <div class="column is-three-fifths">
-        <bh-field
-          :errors="errors.text || errors.language"
+        <b-field
+          :message="errors.text || errors.language"
         >
           <example-text-with-highlighted-entities-input
             ref="textInput"
@@ -25,11 +25,11 @@
               class="language-append"
             />
           </example-text-with-highlighted-entities-input>
-        </bh-field>
+        </b-field>
       </div>
       <div class="column">
-        <bh-field
-          :errors="errors.intent">
+        <b-field
+          :message="errors.intent">
           <b-autocomplete
             v-model="intent"
             :placeholder="$t('webapp.trainings.intent')"
@@ -37,26 +37,25 @@
             :open-on-focus="true"
             @keyup.enter.native="onEnter()"
           />
-        </bh-field>
+        </b-field>
       </div>
       <div class="column is-narrow">
-        <bh-field>
-          <bh-button
+        <b-field>
+          <b-button
             :disabled="!shouldSubmit "
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
-            primary
-            size="normal"
-            type="submit"
+            type="is-primary"
+            native-type="submit"
           >
             <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
-          </bh-button>
-        </bh-field>
+          </b-button>
+        </b-field>
       </div>
     </form>
     <div class="columns is-variable is-1">
       <div class="column is-three-fifths">
-        <bh-field :errors="errors.entities">
+        <b-field :message="errors.entities">
           <entities-input
             ref="entitiesInput"
             v-model="entities"
@@ -67,7 +66,7 @@
             :available-labels="availableLabels"
             @entityAdded="onEntityAdded()"
           />
-        </bh-field>
+        </b-field>
       </div>
     </div>
   </div>
@@ -241,4 +240,17 @@ export default {
 .language-append {
   flex-grow: 0;
 }
+
+.wrapper {
+  margin: 1rem 0;
+}
+
+.columns.is-variable .column {
+  padding-left: 0;
+}
+
+.columns.is-variable .column:last-child {
+  padding-right: 0;
+}
+
 </style>
