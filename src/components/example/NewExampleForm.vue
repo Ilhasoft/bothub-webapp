@@ -41,15 +41,18 @@
       </div>
       <div class="column is-narrow">
         <b-field>
-          <b-button
-            :disabled="!shouldSubmit "
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            type="is-primary"
-            native-type="submit"
-          >
-            <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
-          </b-button>
+          <b-tooltip
+            :is-active="!isValid && validationErrors.length > 0"
+            :label="validationErrors.join(', ')"
+            type="is-dark">
+            <b-button
+              :disabled="!shouldSubmit "
+              :loading="submitting"
+              type="is-primary"
+              native-type="submit">
+              <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
+            </b-button>
+          </b-tooltip>
         </b-field>
       </div>
     </form>
