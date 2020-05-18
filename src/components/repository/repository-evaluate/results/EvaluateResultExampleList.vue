@@ -69,10 +69,13 @@ export default {
     }),
     paginatedList() {
       const offset = this.limit * (this.page - 1);
-      return this.resultExampleList.slice(offset, offset + this.limit);
+      if (this.resultExampleList.results !== undefined) {
+        return this.resultExampleList.results.slice(offset, offset + this.limit);
+      }
+      return '';
     },
   },
-  mounted() {
+  created() {
     this.updateList();
   },
   methods: {
