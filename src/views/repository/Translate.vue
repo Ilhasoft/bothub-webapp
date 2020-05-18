@@ -44,13 +44,6 @@
                 </b-field>
               </div>
             </div>
-            <div class="repository-translate__fields">
-              <b-field :label="$t('webapp.translate.translate_to')">
-                <language-select
-                  v-model="translate.to"
-                  :exclude="[translate.from]" />
-              </b-field>
-            </div>
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
@@ -290,20 +283,18 @@ export default {
 .repository-translate {
   background-color: $color-white;
   display:flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   &__field {
     display: flex;
     padding: 0.25rem;
-
+    width: 100%;
     &__item {
       margin: 0.5rem;
+       width: 50%
     }
-  }
-
-  &__fields{
-    width: 50%
   }
 
   &__translate-arrow-icon {
@@ -372,6 +363,7 @@ export default {
 
   &__translateButtons{
     display: flex;
+    width: 100%;
     justify-content: flex-end
   }
   &__unableButton{
