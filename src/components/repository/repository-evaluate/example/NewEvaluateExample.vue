@@ -41,15 +41,20 @@
             </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
-            <b-button
-              ref="saveSentenceButton"
-              :disabled="!shouldSubmit"
-              :tooltip-hover="!isValid ? validationErrors : null"
-              :loading="submitting"
-              type="is-primary"
-              @click="submitSentence()">
-              <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
-            </b-button>
+            <b-tooltip
+              :label="validationErrors.join(', ')"
+              :is-active="!isValid && validationErrors.length > 0"
+              multilined
+              type="is-dark">
+              <b-button
+                ref="saveSentenceButton"
+                :disabled="!shouldSubmit"
+                :loading="submitting"
+                type="is-primary"
+                @click="submitSentence()">
+                <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
+              </b-button>
+            </b-tooltip>
           </div>
         </div>
         <bh-field

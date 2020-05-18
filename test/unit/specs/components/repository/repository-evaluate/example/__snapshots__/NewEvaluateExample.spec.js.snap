@@ -21,7 +21,9 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
           </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
-          <b-button-stub type="is-primary" nativetype="button" tag="button" disabled="true" tooltip-hover="some specific text,some specific text">some specific text</b-button-stub>
+          <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" multilined="true" size="is-medium" is-active="true">
+            <b-button-stub type="is-primary" nativetype="button" tag="button" disabled="true">some specific text</b-button-stub>
+          </b-tooltip-stub>
         </div>
       </div>
       <bh-field-stub errors="" class="new-sentence__form__entities">
