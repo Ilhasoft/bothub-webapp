@@ -108,9 +108,9 @@ export default {
 
 
 .repository-card {
-  $repository-card-margin: .7rem;
+  $repository-card-margin: .5rem;
 
-  margin: $repository-card-margin 0;
+  margin: $repository-card-margin 0 $repository-card-margin auto;
   padding: 1rem 0;
   width: calc(100% * 1/3 - 1rem);
   word-break: break-all;
@@ -121,7 +121,6 @@ export default {
 
   @media screen and (max-width: $small-mobile-width) {
     width: calc(100% - 1rem);
-    margin: $repository-card-margin auto;
   }
 
   &__align-items {
