@@ -12,7 +12,7 @@
         v-if="open"
         :text="text"
         :entities="allEntities"
-        :all-entities="repoEnts" />
+        :all-entities="repositoryEntities" />
       <p
         v-else
         class="example-text"> {{ text }}</p>
@@ -174,7 +174,7 @@ export default {
   },
   computed: {
     // TODO: test only
-    repoEnts() {
+    repositoryEntities() {
       return this.repository.entities || this.repository.entities_list;
     },
     markEntities() {
@@ -226,13 +226,13 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repoEnts,
+        this.repositoryEntities,
         this.allEntities,
       );
       return `entity-${color}`;
     },
     getEntityLabel(entityName) {
-      const entity = this.repoEnts.find(e => e.entity === entityName);
+      const entity = this.repositoryEntities.find(e => e.entity === entityName);
       return entity.label || 'unlabeled';
     },
   },

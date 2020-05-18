@@ -7,18 +7,19 @@ exports[`EvaluateResultExampleItem.vue renders 1`] = `
   </div>
   <b-icon-stub icon="check-bold" class="level-right success"></b-icon-stub>
   <div class="example-infos">
-    <div><strong> some specific text: </strong> <span> greet
+    <p><strong> some specific text: </strong> <span> greet
         (1.00
-        some specific text) </span> <strong class="success">[some specific text]</strong></div>
+        some specific text) </span> <strong class="success">[some specific text]</strong></p>
     <div class="example__entities"><strong> some specific text: </strong>
       <div>
-        <p class="entity__text"><span> graça some specific text
+        <p class="entity__text"><span> grassa some specific text
             <span class="entity entity-sunflower">kids</span> <span>
               (0.80
               some specific text)
             </span></span> <strong class="failed">[some specific text]</strong></p>
       </div>
     </div>
+    <!---->
   </div>
 </sentence-accordion-stub>
 `;
