@@ -11,17 +11,17 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
     <form>
       <div class="new-sentence__form__wrapper">
         <div>
-          <bh-field-stub errors="">
+          <b-field-stub addons="true">
             <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
-          </bh-field-stub>
+          </b-field-stub>
         </div>
         <div>
-          <bh-field-stub errors="">
+          <b-field-stub addons="true">
             <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
-          </bh-field-stub>
+          </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
-          <bh-button-stub disabled="true" size="normal" primary="true" type="button" tooltiphover="some specific text,some specific text">some specific text</bh-button-stub>
+          <b-button-stub type="is-primary" nativetype="button" tag="button" disabled="true" tooltip-hover="some specific text,some specific text">some specific text</b-button-stub>
         </div>
       </div>
       <bh-field-stub errors="" class="new-sentence__form__entities">
