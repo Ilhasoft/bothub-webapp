@@ -44,13 +44,6 @@
                 </b-field>
               </div>
             </div>
-            <div class="repository-translate__fields">
-              <b-field :label="$t('webapp.translate.translate_to')">
-                <language-select
-                  v-model="translate.to"
-                  :exclude="[translate.from]" />
-              </b-field>
-            </div>
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
@@ -72,6 +65,7 @@
 
                   <div class="repository-translate__styleButton">
                     <b-button
+                      :loading="waitDownloadFile"
                       class="repository-translate__buttons"
                       type="is-primary"
                       @click="importTranslation()">Import</b-button>
@@ -94,6 +88,7 @@
                 just not translated sentences</p>
                 <div class="repository-translate__styleButton">
                   <b-button
+                    :loading="waitDownloadFile"
                     type="is-primary"
                     class="repository-translate__buttons"
                     @click="exportTranslation()">Export</b-button>
@@ -166,6 +161,7 @@ export default {
       isSwitched: false,
       isExportFileVisible: false,
       isImportFileVisible: false,
+      waitDownloadFile: false,
       translate: {
         from: null,
         to: null,
@@ -195,6 +191,7 @@ export default {
       'importTranslations',
     ]),
     async exportTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
           repositoryUuid: this.selectedRepository.uuid,
@@ -214,6 +211,7 @@ export default {
           type: 'danger',
         });
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
     onFileSelected(event) {
@@ -222,6 +220,7 @@ export default {
     },
 
     async importTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       const formData = new FormData();
       formData.append('file', this.translationFile);
       formData.append('language', this.translate.to);
@@ -239,6 +238,7 @@ export default {
           type: 'danger',
         });
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
     forceFileDownload(response) {
@@ -290,20 +290,18 @@ export default {
 .repository-translate {
   background-color: $color-white;
   display:flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   &__field {
     display: flex;
     padding: 0.25rem;
-
+    width: 100%;
     &__item {
       margin: 0.5rem;
+       width: 50%
     }
-  }
-
-  &__fields{
-    width: 50%
   }
 
   &__translate-arrow-icon {
@@ -372,6 +370,7 @@ export default {
 
   &__translateButtons{
     display: flex;
+    width: 100%;
     justify-content: flex-end
   }
   &__unableButton{
