@@ -13,4 +13,16 @@ export default {
   async deleteTranslation(store, { translationId }) {
     return translate.delete(translationId);
   },
+  async exportTranslations(store, {
+    repositoryUuid, versionUUID, fromLanguage, toLanguagem, statusTranslation,
+  }) {
+    return translate.exportTranslate(repositoryUuid, versionUUID, fromLanguage,
+      toLanguagem, statusTranslation);
+  },
+  async importTranslations(store, {
+    repositoryUuid, versionUUID, formData,
+  }) {
+    return translate.importTranslate(repositoryUuid, versionUUID, formData);
+  },
+
 };

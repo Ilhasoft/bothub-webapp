@@ -2,7 +2,6 @@
 
 exports[`ExamplesList.vue renders correctly 1`] = `
 <div>
-  <loading-stub></loading-stub>
   <!---->
   <!---->
 </div>
