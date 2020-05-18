@@ -65,6 +65,7 @@
 
                   <div class="repository-translate__styleButton">
                     <b-button
+                      :loading="waitDownloadFile"
                       class="repository-translate__buttons"
                       type="is-primary"
                       @click="importTranslation()">Import</b-button>
@@ -87,6 +88,7 @@
                 just not translated sentences</p>
                 <div class="repository-translate__styleButton">
                   <b-button
+                    :loading="waitDownloadFile"
                     type="is-primary"
                     class="repository-translate__buttons"
                     @click="exportTranslation()">Export</b-button>
@@ -159,6 +161,7 @@ export default {
       isSwitched: false,
       isExportFileVisible: false,
       isImportFileVisible: false,
+      waitDownloadFile: false,
       translate: {
         from: null,
         to: null,
@@ -188,6 +191,7 @@ export default {
       'importTranslations',
     ]),
     async exportTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
           repositoryUuid: this.selectedRepository.uuid,
@@ -207,6 +211,7 @@ export default {
           type: 'danger',
         });
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
     onFileSelected(event) {
@@ -215,6 +220,7 @@ export default {
     },
 
     async importTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       const formData = new FormData();
       formData.append('file', this.translationFile);
       formData.append('language', this.translate.to);
@@ -232,6 +238,7 @@ export default {
           type: 'danger',
         });
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
     forceFileDownload(response) {
