@@ -8,7 +8,7 @@
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">
-      <loading v-if="loading" />
+      <loading v-if="isLoading" />
       <p
         class="text-center"
         else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
@@ -17,6 +17,8 @@
           :total="list.total"
           :current.sync="page"
           :per-page="perPage"
+          :range-before="4"
+          :range-after="4"
           aria-next-label="Next page"
           aria-previous-label="Previous page"
           aria-page-label="Page"
@@ -48,10 +50,6 @@ export default {
     perPage: {
       type: Number,
       default: 20,
-    },
-    loading: {
-      type: Boolean,
-      default: false,
     },
     editable: {
       type: Boolean,

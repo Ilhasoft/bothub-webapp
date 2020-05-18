@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BeginnerTutorial.vue renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true">
+<b-modal-stub active="true" width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip">
   <div class="beginner-tutorial">
     <div class="beginner-tutorial__wrapper bh-grid bh-grid--column text-center">
+      <h1>some specific text</h1>
       <div class="bh-grid__item bh-grid__item--nested"><img src="~@/assets/gifs/step1.gif">
         <div class="beginner-tutorial__wrapper__text">
           <div>
@@ -18,9 +19,9 @@ exports[`BeginnerTutorial.vue renders correctly 1`] = `
     </div>
     <div class="beginner-tutorial__wrapper__footer">
       <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__prev-button--hidden beginner-tutorial__wrapper__footer__prev-button">some specific text</bh-button-stub>
-      <bh-button-stub primary="true" type="button" class="beginner-tutorial__wrapper__footer__next-button">some specific text</bh-button-stub>
+      <b-button-stub type="is-primary" nativetype="button" tag="button" class="beginner-tutorial__wrapper__footer__next-button">some specific text</b-button-stub>
       <bh-stepper-stub steps="4" currentstep="1"></bh-stepper-stub>
     </div>
   </div>
-</bh-modal-stub>
+</b-modal-stub>
 `;

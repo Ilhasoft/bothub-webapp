@@ -1,18 +1,15 @@
 <template>
-  <div>
-    <div class="bh-grid categories-list">
-      <div class="bh-grid__item bh-grid__item--nested text-right">
-        <bh-dropdown
-          :title="dropdownTitle"
-          full-width
-          position="bottom-left">
-          <bh-dropdown-item
-            v-for="category in categories"
-            :key="category.id"
-            @click="select(category.id)">{{ category.name }}</bh-dropdown-item>
-        </bh-dropdown>
-      </div>
-    </div>
+  <div class="categories-list">
+    <b-field class="categories-list__field">
+      <b-autocomplete
+        v-model="category"
+        :keep-first="keepFirst"
+        :open-on-focus="openOnFocus"
+        :data="optionsCategories"
+        :placeholder="$t('webapp.home.all_categories')"
+        size="normal"
+        @select="option => select(option)" />
+    </b-field>
   </div>
 </template>
 
@@ -26,18 +23,21 @@ export default {
     return {
       val: 0,
       allCategories: [],
+      keepFirst: true,
+      openOnFocus: true,
+      category: '',
+      selected: null,
     };
   },
   computed: {
-    categories() {
-      return [{ id: 0, name: this.$t('webapp.home.all_categories'), active: this.current === 0 }]
-        .concat(this.allCategories);
+    filterCategories() {
+      return this.allCategories.filter(option => option.name
+        .toString()
+        .toLowerCase()
+        .indexOf(this.category.toLowerCase()) >= 0);
     },
-    dropdownTitle() {
-      return this.categories.reduce((current, category) => (
-        this.val > 0 && category.id === this.val
-          ? category.name
-          : current), this.categories[0].name);
+    optionsCategories() {
+      return this.filterCategories.map(option => option.name);
     },
     queryCategoryId() {
       return this.$route.query.category
@@ -52,6 +52,11 @@ export default {
     $route() {
       this.val = this.queryCategoryId;
     },
+    category() {
+      if (this.category === '') {
+        this.val = 0;
+      }
+    },
   },
   async mounted() {
     const categoriesResponse = await this.getAllCategories();
@@ -62,8 +67,14 @@ export default {
     ...mapActions([
       'getAllCategories',
     ]),
-    select(id) {
-      this.val = id;
+    select(option) {
+      this.allCategories.filter((item) => {
+        if (item.name === option) {
+          this.selected = option;
+          this.val = item.id;
+        }
+        return '';
+      });
     },
   },
 };
@@ -72,5 +83,13 @@ export default {
 <style lang="scss">
 .categories-list{
   margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  &__field{
+    width: 12.5rem;
+  }
 }
+
 </style>

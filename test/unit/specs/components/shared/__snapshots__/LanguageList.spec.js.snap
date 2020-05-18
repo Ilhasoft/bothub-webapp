@@ -1,15 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LanguageList.vue renders correctly 1`] = `
-<div>
-  <div class="bh-grid categories-list">
-    <div class="bh-grid__item bh-grid__item--nested text-right">
-      <bh-dropdown-stub fullwidth="true" title="All languages">
-        <bh-dropdown-item-stub>All languages</bh-dropdown-item-stub>
-        <bh-dropdown-item-stub>English</bh-dropdown-item-stub>
-        <bh-dropdown-item-stub>Portuguese</bh-dropdown-item-stub>
-      </bh-dropdown-stub>
-    </div>
-  </div>
+<div class="languages-list">
+  <b-field-stub addons="true" class="languages-list__field">
+    <b-autocomplete-stub value="" data="English,Portuguese" field="value" keepfirst="true" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
+  </b-field-stub>
 </div>
 `;

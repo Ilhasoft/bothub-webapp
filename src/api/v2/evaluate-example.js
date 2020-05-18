@@ -19,11 +19,12 @@ export default {
       },
     );
   },
-  update(repository, text, language, entities, intent, id) {
+  update(repository, version, text, language, entities, intent, id) {
     return request.$http.patch(
       `/v2/repository/evaluate/${id}/`,
       {
         repository,
+        repository_version: version,
         text,
         language,
         entities,
@@ -58,8 +59,8 @@ export default {
   getAllResultsLog(repositoryUuid, resultId) {
     return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
-  allVersions(repositoryUuid, perPage = 20) {
-    return new utils.Page('/v2/repository/evaluate/results/', perPage, { repository_uuid: repositoryUuid });
+  allVersions(repositoryUuid, version, perPage = 20) {
+    return new utils.Page('/v2/repository/evaluate/results/', perPage, { repository_uuid: repositoryUuid, repository_version: version });
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({

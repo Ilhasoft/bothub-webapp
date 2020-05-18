@@ -79,7 +79,8 @@
       "debug": "Debug",
       "raw": "Raw",
       "add_a_sentence": "Adicionar uma frase",
-      "entities": "Entidades"
+      "entities": "Entidades",
+      "login_text": "Faça login ou cadastre-se para utilizar o Teste Rápido!"
     },
     "debug": {
       "word": "Palavra",
@@ -109,7 +110,7 @@
       "you_need_type_a_text": "Você precisa escrever uma frase",
       "intent_is_required": "Intenção é obrigatória",
       "not_have_results": "Você não tem resultados ainda",
-      "no_versions": "Sem versões",
+      "no_versions": "Sem resultados para esta versão",
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
@@ -132,14 +133,15 @@
       "intent_confidence_distribution_text": "O histograma permite visualizar a disttribuição da confiança de todas as predições, com o volume de predições with the volume de predições corretas e incorretas sendo mostradas nas barras verdes e vermelhas, respectivamente. Melhorar a qualidade do conjunto de teste moverá as barras verdes do histograma para a direita e as vermelhas para a esquerda do gráfico.",
       "sentence_details": "Detalhes das frases",
       "sentence_details_text": "Compare os resultados de cada frase",
-      "do_not_log": "Não guardar",
+      "do_not_log": "Nenhuma frase para mostrar",
       "expected_intent": "Intenção esperada",
       "predicted_intent": "Intenção predita",
       "no_expected_intent": "Nenhuma intenção esperada",
       "confidence": "confiança",
       "ok": "ok",
       "failed": "falhou",
-      "intent": "Intenção"
+      "intent": "Intenção",
+      "error": "Houve um erro ao buscar as frases"
     },
     "home": {
       "description": "Descrição",
@@ -151,7 +153,8 @@
       "labeled": "<strong>{entities_length}</strong> entidades categorizadas <strong>{label_value}</strong>",
       "unlabeled": "<strong>{entities_length}</strong> entidades não categorizadas ",
       "all_categories": "Todas as categorias",
-      "all_languages": "Todos os idiomas"
+      "all_languages": "Todos os idiomas",
+      "no_repo": "Nenhum repositório encontrado."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -161,7 +164,9 @@
       "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
       "role": "Papéis:",
-      "no_requests": "Sem solicitações."
+      "no_requests": "Sem solicitações.",
+      "save": "Salvar",
+      "request": "Fazer pedido"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -192,7 +197,9 @@
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
       "delete_button":"Deletar",
-      "cancel_button":"Cancelar"
+      "cancel_button":"Cancelar",
+      "empty_text_error": "Digite uma frase",
+      "intent_error": "Digite uma intenção"
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
@@ -237,7 +244,7 @@
       "grid1": "No canto superior direito da tela, clique em \"Nova inteligência\".",
       "grid2": "Preencha os campos e clique em \"Criar inteligência\"",
       "grid3": "Comece adicionando conteúdo para o mecanismo de interpretação\nfornecendo frases de exemplo.",
-      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.</p>\n<p>Não esqueça de enviar suas frases.",
+      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.\n Não esqueça de enviar suas frases.",
       "grid5": "Depois de adicionar suas frases, clique na barra de status para ver\no status de sua inteligência e treinar suas frases",
       "grid6": "É isso! Sua inteligência está pronta para ser usada!",
       "previous": "Anterior",
@@ -287,7 +294,8 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo"
+      "add_new": "Adicionar novo",
+      "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
       "description": "Essas são as frases das interações de usuário com a sua inteligência.\nPodem ser úteis para seu treinamento ou teste. ",

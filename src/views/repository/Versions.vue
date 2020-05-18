@@ -8,7 +8,7 @@
       <b-notification
         :closable="false"
         class="is-danger">
-        Sign in to your account to edit this repository.
+        {{ $t('webapp.versions.signin') }}
       </b-notification>
       <login-form hide-forgot-password />
     </div>
@@ -56,7 +56,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

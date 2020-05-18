@@ -22,27 +22,34 @@
                 @click="checkLanguageToExport()">Export</b-button>
 
             </div>
-            <div class="bh-grid">
-              <div class="bh-grid__item">
-                <bh-field :label="$t('webapp.translate.translate_from')">
+            <div class="repository-translate__field">
+              <div class="repository-translate__field__item">
+                <b-field :label="$t('webapp.translate.translate_from')">
                   <language-select v-model="translate.from" />
-                </bh-field>
+                </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
                 <div class="field">
                   <label class="label">&nbsp;</label>
-                  <bh-icon
-                    value="chevron-right"
-                    size="small" />
+                  <b-icon
+                    icon="chevron-right"
+                    size="is-small" />
                 </div>
               </div>
-              <div class="bh-grid__item">
-                <bh-field :label="$t('webapp.translate.translate_to')">
+              <div class="repository-translate__field__item">
+                <b-field :label="$t('webapp.translate.translate_to')">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />
-                </bh-field>
+                </b-field>
               </div>
+            </div>
+            <div class="repository-translate__fields">
+              <b-field :label="$t('webapp.translate.translate_to')">
+                <language-select
+                  v-model="translate.to"
+                  :exclude="[translate.from]" />
+              </b-field>
             </div>
           </div>
           <div
@@ -110,35 +117,19 @@
               @translated="examplesTranslated()" />
           </div>
         </div>
-        <div
+        <authorization-request-notification
           v-else
-          class="bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.translate.not_can_edit_repository') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="repository-translate__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
-          </div>
-        </div>
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
-      <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.translate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+      <div v-else>
+        <b-notification
+          :closable="false"
+          class="is-info"
+          role="alert">
+          {{ $t('webapp.translate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -154,7 +145,7 @@ import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 
 export default {
   name: 'RepositoryTranslate',
@@ -165,7 +156,7 @@ export default {
     TranslateList,
     TranslationsList,
     LoginForm,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -183,7 +174,6 @@ export default {
       toLanguage: null,
       query: {},
       querySchema: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -289,27 +279,32 @@ export default {
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: this.$t('webapp.layout.authorization_success'),
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
 
 <style lang="scss">
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .repository-translate {
   background-color: $color-white;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__field {
+    display: flex;
+    padding: 0.25rem;
+
+    &__item {
+      margin: 0.5rem;
+    }
+  }
+
+  &__fields{
+    width: 50%
+  }
 
   &__translate-arrow-icon {
     align-self: center;
@@ -368,7 +363,7 @@ export default {
   }
 
   &__buttons{
-    width: 18%;
+    min-width: 18%;
     margin: 0.5rem;
     display: flex;
     justify-content: center;
@@ -410,12 +405,5 @@ export default {
   }
 
 }
-  @media screen and (max-width: 50em) {
-        .bh-notification--warning{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
+
 </style>
