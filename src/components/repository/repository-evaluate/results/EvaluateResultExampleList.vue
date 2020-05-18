@@ -14,7 +14,7 @@
         {{ $t('webapp.result.sentence_details_text') }}
       </p>
       <evaluate-result-example-item
-        v-for="(item, i) in paginatedList"
+        v-for="(item, i) in resultExampleList"
         :key="i"
         :text="item.text"
         :intent="item.intent"
@@ -22,13 +22,13 @@
         :intent-success="item.intent_status === 'success'"
         :success="item.intent_status === 'success' && item.entity_status === 'success'"
         :intent-prediction="item.intent_prediction"
-        :entities="item.true_entities"
-        :added-entities="item.false_positive_entities"
-        :swapped-entities="item.swapped_error_entities"/>
+        :entities="item.true_entities || []"
+        :added-entities="item.false_positive_entities || []"
+        :swapped-entities="item.swapped_error_entities || []"/>
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
           v-if="resultExampleList.length > 0"
-          :total="resultExampleList.length"
+          :total="total"
           :current.sync="page"
           :per-page="limit"
           aria-next-label="Next page"
@@ -61,10 +61,10 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      list: [],
-      limit: 20,
+      limit: 10,
       busy: false,
       error: null,
+      pages: 0,
       page: 1,
     };
   },
@@ -72,9 +72,13 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    paginatedList() {
-      const offset = this.limit * (this.page - 1);
-      return this.resultExampleList.slice(offset, offset + this.limit);
+    total() {
+      return this.limit * this.pages;
+    },
+  },
+  watch: {
+    page() {
+      this.updateList();
     },
   },
   mounted() {
@@ -85,197 +89,25 @@ export default {
       'getAllResultsLog',
     ]),
     async updateList() {
-      this.resultExampleList = this.testResults();
       this.busy = true;
       try {
         const response = await this.getAllResultsLog({
           repositoryUuid: this.repository.uuid,
           resultId: this.id,
+          page: this.page,
         });
-        this.list = response.data.log;
+        const data = response.data.log;
+        this.resultExampleList = data.results;
+        this.pages = data.total_pages;
         this.error = null;
       } catch (error) {
+        console.log(error);
         this.error = error;
       } finally {
         this.busy = false;
       }
     },
-    testResults() {
-      return [
-        {
-          text: 'i hate japanese food',
-          intent: 'negative',
-          intent_prediction: {
-            name: 'food',
-            confidence: 0.9992955923080444,
-          },
-          intent_status: 'success',
-          entity_status: 'error',
-          true_entities: [],
-          false_positive_entities: [],
-          swapped_error_entities: [
-            {
-              start: 7,
-              end: 15,
-              value: 'japanese',
-              confidence: 0.8567371151062296,
-              extractor: 'CRFEntityExtractor',
-              entity: 'feeling',
-              predicted_entity: 'cuisine',
-            },
-          ],
-        },
-        {
-          text: 'i like japanese, italian and chinese cuisine',
-          intent: 'food',
-          intent_prediction: {
-            name: 'food',
-            confidence: 0.8951312303543091,
-          },
-          intent_status: 'success',
-          entity_status: 'error',
-          true_entities: [
-            {
-              start: 7,
-              end: 15,
-              value: 'japanese',
-              entity: 'cuisine',
-              status: 'success',
-              confidence: 0.5984418480535343,
-            },
-            {
-              start: 17,
-              end: 24,
-              value: 'italian',
-              entity: 'cuisine',
-              status: 'error',
-            },
-            {
-              start: 29,
-              end: 36,
-              value: 'chinese',
-              entity: 'cuisine',
-              status: 'success',
-              confidence: 0.48506775911100536,
-            },
-          ],
-          false_positive_entities: [],
-          swapped_error_entities: [],
-        },
-        {
-          text: 'i like japanese food',
-          intent: 'food',
-          intent_prediction: {
-            name: 'cuisine',
-            confidence: 0.9926878213882446,
-          },
-          intent_status: 'error',
-          entity_status: 'error',
-          true_entities: [],
-          false_positive_entities: [
-            {
-              start: 7,
-              end: 15,
-              value: 'japanese',
-              entity: 'cuisine',
-              confidence: 0.8883434111355147,
-              extractor: 'CRFEntityExtractor',
-            },
-          ],
-          swapped_error_entities: [],
-        },
-        {
-          text: 'i hate italian and love mexican food',
-          intent: 'food',
-          intent_prediction: {
-            name: 'cuisine',
-            confidence: 0.9909083843231201,
-          },
-          intent_status: 'success',
-          entity_status: 'error',
-          true_entities: [
-            {
-              start: 7,
-              end: 14,
-              value: 'italian',
-              entity: 'cuisine',
-              status: 'error',
-            },
-            {
-              start: 24,
-              end: 31,
-              value: 'mexican',
-              entity: 'cuisine',
-              status: 'success',
-              confidence: 0.6894595541022857,
-            },
-          ],
-          false_positive_entities: [],
-          swapped_error_entities: [],
-        },
-        {
-          text: 'i hate very much',
-          intent: 'negative',
-          intent_prediction: {
-            name: 'negative',
-            confidence: 0.9990888833999634,
-          },
-          intent_status: 'success',
-        },
-        {
-          text: 'i love italian food',
-          intent: 'food',
-          intent_prediction: {
-            name: 'food',
-            confidence: 0.8277877569198608,
-          },
-          intent_status: 'success',
-          entity_status: 'error',
-          true_entities: [
-            {
-              start: 7,
-              end: 14,
-              value: 'italian',
-              entity: 'cuisine',
-              status: 'error',
-            },
-          ],
-          false_positive_entities: [
-            {
-              start: 2,
-              end: 6,
-              value: 'love',
-              entity: 'feeling',
-              confidence: 0.6751853374379837,
-              extractor: 'CRFEntityExtractor',
-            },
-          ],
-          swapped_error_entities: [],
-        },
-        {
-          text: 'i hate mexican food',
-          intent: 'food',
-          intent_prediction: {
-            name: 'food',
-            confidence: 0.9681663513183594,
-          },
-          intent_status: 'success',
-          entity_status: 'success',
-          true_entities: [
-            {
-              start: 7,
-              end: 14,
-              value: 'mexican',
-              entity: 'cuisine',
-              status: 'success',
-              confidence: 0.7918899487915584,
-            },
-          ],
-          false_positive_entities: [],
-          swapped_error_entities: [],
-        },
-      ];
-    },
+
   },
 };
 </script>

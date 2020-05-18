@@ -175,17 +175,7 @@ export default {
   computed: {
     // TODO: test only
     repoEnts() {
-      // return repository.entities || repository.entities_list;
-      return [
-        {
-          id: 1,
-          value: 'cuisine',
-        },
-        {
-          id: 2,
-          value: 'feeling',
-        },
-      ];
+      return this.repository.entities || this.repository.entities_list;
     },
     markEntities() {
       return this.allEntities.filter(entity => !entity.ignore);
@@ -195,7 +185,7 @@ export default {
         // eslint-disable-next-line no-param-reassign
         entities = [...entities,
           {
-            entity: entity.entity,
+            entity: entity.entity || '',
             start: 0,
             end: 0,
             value: entity.value,

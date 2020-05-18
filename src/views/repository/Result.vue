@@ -13,7 +13,7 @@
             </h2>
             <div class="evaluate__content-header__wrapper">
               <div class="evaluate__content-header__wrapper__language-select">
-                <b-select
+                <!-- <b-select
                   v-model="currentLanguage"
                   expanded>
                   <option
@@ -23,11 +23,11 @@
                     :value="language.value">
                     {{ language.title }}
                   </option>
-                </b-select>
+                </b-select> -->
               </div>
             </div>
           </div>
-          <div class="evaluate__divider" />
+          <!-- <div class="evaluate__divider" /> -->
           <div class="evaluate__content-wrapper">
             <base-evaluate-results
               :result-id="resultId"
