@@ -173,7 +173,6 @@ export default {
     };
   },
   computed: {
-    // TODO: test only
     repositoryEntities() {
       return this.repository.entities || this.repository.entities_list;
     },
@@ -281,7 +280,10 @@ export default {
   &__entities {
     display: flex;
     flex-wrap: wrap;
-    column-gap: 0.5rem;
+
+    > * {
+      margin-right: 0.5rem;
+    }
   };
 
   &__icon {

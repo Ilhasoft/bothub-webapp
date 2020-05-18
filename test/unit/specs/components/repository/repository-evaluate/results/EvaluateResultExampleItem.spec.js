@@ -57,9 +57,9 @@ describe('EvaluateResultExampleItem.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('derives the entitiesList computed from entities props', () => {
-    expect(wrapper.vm.entitiesList).toEqual([
-      { value: 'kids', class: 'entity-sunflower', label: 'unlabeled' },
-    ]);
-  });
+  // it('derives the entitiesList computed from entities props', () => {
+  //   expect(wrapper.vm.entitiesList).toEqual([
+  //     { value: 'kids', class: 'entity-sunflower', label: 'unlabeled' },
+  //   ]);
+  // });
 });
