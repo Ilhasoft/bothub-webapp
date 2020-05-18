@@ -22,6 +22,7 @@
     <b-tooltip
       :is-active="!textSelectedValue"
       :label="$t('webapp.trainings.highlight_word')"
+      multilined
       type="is-dark">
       <b-button
         ref="addEntityBtn"
