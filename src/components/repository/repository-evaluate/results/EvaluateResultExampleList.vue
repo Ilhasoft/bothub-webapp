@@ -20,7 +20,7 @@
         :intent="item.intent"
         :confidence="item.intent_prediction.confidence"
         :intent-success="item.intent_status === 'success'"
-        :success="item.intent_status === 'success' && (!item.entity_status || item.entity_status === 'success')"
+        :success="isSuccess(item)"
         :intent-prediction="item.intent_prediction"
         :entities="item.true_entities || []"
         :added-entities="item.false_positive_entities || []"
@@ -85,6 +85,9 @@ export default {
     this.updateList();
   },
   methods: {
+    isSuccess(item) {
+      return item.intent_status === 'success' && (!item.entity_status || item.entity_status === 'success');
+    },
     ...mapActions([
       'getAllResultsLog',
     ]),
@@ -101,7 +104,6 @@ export default {
         this.pages = data.total_pages;
         this.error = null;
       } catch (error) {
-        console.log(error);
         this.error = error;
       } finally {
         this.busy = false;
