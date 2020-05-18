@@ -1,14 +1,18 @@
 <template>
-  <div
-    v-if="resultExampleList"
-    class="evaluate-result-example-list">
+  <div>
     <h3 class="evaluate-result-example-list__title">
       {{ $t('webapp.result.sentence_details') }}
     </h3>
-    <p>
-      {{ $t('webapp.result.sentence_details_text') }}
-    </p>
-    <div v-if="!busy">
+    <div
+      v-if="busy"
+      class="evaluate-result-example-list__loading">
+      <Loading/>
+    </div>
+    <p v-else-if="error">{{ $t('webapp.result.error') }}</p>
+    <div v-else-if="resultExampleList && resultExampleList.length > 0">
+      <p>
+        {{ $t('webapp.result.sentence_details_text') }}
+      </p>
       <evaluate-result-example-item
         v-for="(item, i) in paginatedList"
         :key="i"
@@ -17,25 +21,20 @@
         :confidence="item.intent_prediction.confidence"
         :status="item.status"
         :intent-prediction="item.intent_prediction" />
+      <div class="evaluate-result-example-list__pagination">
+        <b-pagination
+          v-if="resultExampleList.length > 0"
+          :total="resultExampleList.length"
+          :current.sync="page"
+          :per-page="limit"
+          aria-next-label="Next page"
+          aria-previous-label="Previous page"
+          aria-page-label="Page"
+          aria-current-label="Current page"/>
+      </div>
     </div>
-    <div
-      v-else
-      class="evaluate-result-example-list__loading">
-      <Loading/>
-    </div>
-    <div class="evaluate-result-example-list__pagination">
-      <b-pagination
-        v-if="resultExampleList.length > 0"
-        :total="resultExampleList.length"
-        :current.sync="page"
-        :per-page="limit"
-        aria-next-label="Next page"
-        aria-previous-label="Previous page"
-        aria-page-label="Page"
-        aria-current-label="Current page"/>
-    </div>
+    <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
   </div>
-  <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
 </template>
 
 <script>
@@ -60,6 +59,7 @@ export default {
       resultExampleList: [],
       limit: 20,
       busy: false,
+      error: null,
       page: 1,
     };
   },
@@ -84,12 +84,18 @@ export default {
     ]),
     async updateList() {
       this.busy = true;
-      const resultLogs = await this.getAllResultsLog({
-        repositoryUuid: this.repository.uuid,
-        resultId: this.id,
-      });
-      this.resultExampleList = resultLogs.data.log;
-      this.busy = false;
+      try {
+        const response = await this.getAllResultsLog({
+          repositoryUuid: this.repository.uuid,
+          resultId: this.id,
+        });
+        this.resultExampleList = response.data.log;
+        this.error = null;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.busy = false;
+      }
     },
   },
 };

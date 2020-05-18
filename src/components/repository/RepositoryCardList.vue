@@ -7,7 +7,7 @@
       class="repository-card-list__item" />
     <p
       v-if="repositoryList && repositoryList.empty"
-      class="has-text-centered">Repositories not found.</p>
+      class="has-text-centered">{{ $t('webapp.home.no_repo') }}</p>
   </div>
 </template>
 

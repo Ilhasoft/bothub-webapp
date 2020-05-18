@@ -11,11 +11,11 @@
       </div>
       <div class="bh-grid__item bh-grid__item--grow-0">
         <p>&nbsp;</p>
-        <bh-button
+        <b-button
           :disabled="usersProfile.length === 0 || !role"
-          type="submit"
-          size="small"
-          primary>Invite</bh-button>
+          native-type="submit"
+          size="is-small"
+          primary>Invite</b-button>
       </div>
     </div>
   </form>

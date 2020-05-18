@@ -28,16 +28,15 @@
                   </option>
                 </b-select>
               </div>
-              <bh-button
+              <b-button
                 ref="runNewTestButton"
                 :loading="evaluating"
                 :disabled="evaluating"
+                type="is-secondary"
                 class="evaluate__content-header__wrapper__btn"
-                secondary
                 @click="newEvaluate()">
-                <slot v-if="!evaluating">
-                  {{ $t('webapp.evaluate.run_test') }}
-              </slot></bh-button>
+                {{ $t('webapp.evaluate.run_test') }}
+              </b-button>
             </div>
           </div>
           <div class="evaluate__divider" />
@@ -49,35 +48,24 @@
           </div>
         </div>
         <div
-          v-else
           class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
+                evaluate__container">
+          <div class="evaluate__item">
+            <authorization-request-notification
+              v-if="repository && !repository.authorization.can_write"
+              :repository-uuid="repository.uuid"
+              @onAuthorizationRequested="updateRepository(false)" />
           </div>
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -86,7 +74,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -100,7 +88,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -108,7 +96,6 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
@@ -135,7 +122,6 @@ export default {
       this.setEvaluateLanguage(language);
     },
     selectedRepository() {
-      this.getExamples();
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
@@ -144,18 +130,9 @@ export default {
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'getEvaluateExample',
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
-    getExamples() {
-      this.getEvaluateExample({
-        id: this.selectedRepository.uuid,
-      });
-    },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
@@ -195,10 +172,10 @@ export default {
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$bhToastNotification({
+        this.$buefy.toast.open({
           message: `${this.error.detail || this.$t('webapp.evaluate.default_error')} `,
-          type: 'danger',
-          time: 5000,
+          type: 'is-danger',
+          duration: 5000,
         });
       }
       return false;
@@ -213,6 +190,7 @@ export default {
 
 
 .evaluate {
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;
