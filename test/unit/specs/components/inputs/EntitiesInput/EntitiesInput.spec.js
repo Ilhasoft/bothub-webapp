@@ -1,12 +1,14 @@
 import { mount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
 import sinon from 'sinon';
+import Buefy from 'buefy';
 
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import EntityForm from '@/components/inputs/EntitiesInput/EntityForm';
 
 const localVue = createLocalVue();
 localVue.use(BH);
+localVue.use(Buefy);
 
 describe('EntitiesInput.vue', () => {
   let wrapper;
@@ -37,7 +39,7 @@ describe('EntitiesInput.vue', () => {
 
     expect(btn.exists()).toBe(true);
     expect(btn.text().includes('Add entity')).toBe(true);
-    expect(btn.props('disabled')).toBe(true);
+    expect(btn.attributes('disabled')).toBe('disabled');
   });
 
   it('add entity button enables when some text is selected', () => {
@@ -52,7 +54,7 @@ describe('EntitiesInput.vue', () => {
     const btn = findAddEntityButton();
 
     expect(btn.text()).toBe('Add entity for "aaaa"');
-    expect(btn.props('disabled')).toBe(false);
+    expect(btn.attributes('disabled')).not.toBe('disabled');
   });
 
   it('adds an entity', () => {

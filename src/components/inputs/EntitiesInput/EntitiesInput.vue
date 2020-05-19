@@ -19,22 +19,26 @@
       @removeEntity="() => removeEntity(entity)"
     />
 
-    <bh-button
-      ref="addEntityBtn"
-      :tooltip-hover="!textSelectedValue ? $t('highlight_word') : null"
-      :disabled="!textSelectedValue"
-      size="small"
-      rounded
-      primary
-      @click.prevent.stop="addEntity()"
-    >
-      <span>
-        <span v-if="textSelectedValue">
-          {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
+    <b-tooltip
+      :is-active="!textSelectedValue"
+      :label="$t('webapp.trainings.highlight_word')"
+      multilined
+      type="is-dark">
+      <b-button
+        ref="addEntityBtn"
+        :disabled="!textSelectedValue"
+        rounded
+        type="is-primary"
+        @click.prevent.stop="addEntity()"
+      >
+        <span>
+          <span v-if="textSelectedValue">
+            {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
+          </span>
+          <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
         </span>
-        <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
-      </span>
-    </bh-button>
+      </b-button>
+    </b-tooltip>
   </div>
 </template>
 
