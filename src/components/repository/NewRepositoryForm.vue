@@ -10,7 +10,7 @@
     <div class="text-center">
       <b-button
         :disabled="submitting"
-        :type="is-primary"
+        type="is-primary"
         native-type="submit">{{ $t('webapp.landing_page.create_bot') }}</b-button>
     </div>
   </form>

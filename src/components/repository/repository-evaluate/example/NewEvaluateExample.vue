@@ -11,8 +11,8 @@
         @submit.prevent="submitSentence()">
         <div class="new-sentence__form__wrapper">
           <div>
-            <bh-field
-              :errors="errors.entities || errors.language"
+            <b-field
+              :message="errors.entities || errors.language"
             >
               <example-text-with-highlighted-entities-input
                 ref="textInput"
@@ -25,11 +25,11 @@
                 @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
-            </bh-field>
+            </b-field>
           </div>
           <div>
-            <bh-field
-              :errors="errors.non_field_errors"
+            <b-field
+              :message="errors.non_field_errors"
             >
               <b-autocomplete
                 v-model="intent"
@@ -38,19 +38,23 @@
                 :open-on-focus="true"
                 @keyup.enter.native="onEnter()"
               />
-            </bh-field>
+            </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
-            <bh-button
-              ref="saveSentenceButton"
-              :disabled="!shouldSubmit"
-              :tooltip-hover="!isValid ? validationErrors : null"
-              :loading="submitting"
-              primary
-              size="normal"
-              @click="submitSentence()">
-              <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
-            </bh-button>
+            <b-tooltip
+              :label="validationErrors.join(', ')"
+              :is-active="!isValid && validationErrors.length > 0"
+              multilined
+              type="is-dark">
+              <b-button
+                ref="saveSentenceButton"
+                :disabled="!shouldSubmit"
+                :loading="submitting"
+                type="is-primary"
+                @click="submitSentence()">
+                <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
+              </b-button>
+            </b-tooltip>
           </div>
         </div>
         <bh-field
@@ -250,6 +254,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
 .new-sentence {
   width: 100%;
   margin: 2rem auto 0;
@@ -258,9 +264,14 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: 1.5fr 1fr .3fr;
+      grid-template-columns: 1.5fr 1fr .1fr;
+      align-items: center;
       grid-gap: 1rem;
       padding: 1rem 0;
+
+      @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
+      }
 
       &__submit-btn {
         align-self: center;
