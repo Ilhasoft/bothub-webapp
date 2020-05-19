@@ -18,6 +18,7 @@
       <div class="translations__header">
         <translations-status
           ref="translationsStatus"
+          :update="updateStatus"
           :repository-uuid="repository.uuid"
           v-model="toLanguage" />
       </div>
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       toLanguage: null,
+      updateStatus: false,
       translate: {
         from: null,
         to: null,
@@ -73,7 +75,7 @@ export default {
       'getRepository',
     ]),
     exampleUpdated() {
-      this.updateRepository(false);
+      this.updateStatus = !this.updateStatus;
     },
   },
 };
