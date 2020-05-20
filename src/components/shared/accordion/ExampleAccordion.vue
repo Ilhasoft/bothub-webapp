@@ -52,6 +52,7 @@
             @click.prevent.stop="deleteThisExample()">
             <b-icon
               icon="delete"
+              size="is-small"
               class="text-color-grey-dark example__icon" />
           </a>
         </div>
