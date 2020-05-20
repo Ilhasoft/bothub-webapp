@@ -19,7 +19,7 @@
         :text="item.text"
         :intent="item.intent"
         :confidence="item.intent_prediction.confidence"
-        :status="item.intent_status"
+        :status="item.intent_status || item.status"
         :intent-prediction="item.intent_prediction" />
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
