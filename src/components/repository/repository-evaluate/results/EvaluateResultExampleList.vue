@@ -14,12 +14,12 @@
         {{ $t('webapp.result.sentence_details_text') }}
       </p>
       <evaluate-result-example-item
-        v-for="(item, i) in paginatedList"
+        v-for="(item, i) in resultExampleList"
         :key="i"
         :text="item.text"
         :intent="item.intent"
         :confidence="item.intent_prediction.confidence"
-        :status="item.status"
+        :status="item.intent_status"
         :intent-prediction="item.intent_prediction" />
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
@@ -57,9 +57,10 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      limit: 20,
+      limit: 10,
       busy: false,
       error: null,
+      pages: 0,
       page: 1,
     };
   },
@@ -67,15 +68,16 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    paginatedList() {
-      const offset = this.limit * (this.page - 1);
-      if (this.resultExampleList.results !== undefined) {
-        return this.resultExampleList.results.slice(offset, offset + this.limit);
-      }
-      return '';
+    total() {
+      return this.limit * this.pages;
     },
   },
-  created() {
+  watch: {
+    page() {
+      this.updateList();
+    },
+  },
+  mounted() {
     this.updateList();
   },
   methods: {
@@ -88,8 +90,11 @@ export default {
         const response = await this.getAllResultsLog({
           repositoryUuid: this.repository.uuid,
           resultId: this.id,
+          page: this.page,
         });
-        this.resultExampleList = response.data.log;
+        const data = response.data.log;
+        this.resultExampleList = data.results;
+        this.pages = data.total_pages;
         this.error = null;
       } catch (error) {
         this.error = error;
