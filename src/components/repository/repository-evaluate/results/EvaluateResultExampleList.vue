@@ -24,7 +24,7 @@
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
           v-if="resultExampleList.length > 0"
-          :total="resultExampleList.length"
+          :total="total"
           :current.sync="page"
           :per-page="limit"
           aria-next-label="Next page"
