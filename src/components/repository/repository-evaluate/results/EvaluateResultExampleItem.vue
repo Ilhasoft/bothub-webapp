@@ -1,66 +1,121 @@
 <template>
-  <div
+  <sentence-accordion
+    :open.sync="open"
+    :type="success ? 'is-success' : 'is-danger'"
     :class="{ example: true,
-              'example--failed': status == 'error',
-              'example--success': status == 'success',
               'fadeIn': true,
-  }">
-    <div class="example-text">
-      <div class="example-text__main">
-        <highlighted-text
-          :text="text"
-          :entities="entities"
-          :all-entities="repository.entities || repository.entities_list" />
-      </div>
+    }"
+    thick-border
+    is-light>
+    <div slot="header">
+      <highlighted-text
+        v-if="open"
+        :text="text"
+        :entities="allEntities"
+        :all-entities="repositoryEntities" />
+      <p
+        v-else
+        class="example-text"> {{ text }}</p>
     </div>
-    <div class="example-infos level is-mobile">
-      <div class="level-left">
-        <div
-          v-if="intent"
-          :class="{'level-item ': true,
-                   'text-color-danger': status=='error'}">
-          <div v-if="status =='error'">
-            <strong
-              :class="{
-              'text-color-danger': status=='error'}">
-              {{ $t('webapp.result.expected_intent') }}:&nbsp;
-            </strong>
-            <span>{{ intent }} /</span>
-            <div
-              v-if="intentPrediction.name !== 'no predicted'"
-              class="example__align-no-predicted">
-              <strong
-                :class="{
-                'text-color-danger': status=='error'}">
-                {{ $t('webapp.result.predicted_intent') }}:&nbsp;
-              </strong>
-              <span>{{ intentPrediction.name }}
-                ({{ intentPrediction.confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})
+
+    <b-icon
+      slot="options"
+      :class="['level-right', success ? 'success' : 'failed']"
+      :icon="success ? 'check-bold' : 'close-thick'" />
+
+    <div
+      slot="body"
+      class="example-infos">
+      <p v-if="intentSuccess">
+        <strong> {{ $t('webapp.result.intent') }}: </strong>
+        <span> {{ intent }}
+          ({{ intentPrediction.confidence.toFixed(2) }}
+          {{ $t('webapp.result.confidence') }}) </span>
+        <strong
+          class="success">[{{ $t('webapp.result.ok') }}]</strong>
+      </p>
+      <p v-else>
+        <strong> {{ $t('webapp.result.expected_intent') }}: </strong>
+        <span> {{ intent }} / </span>
+        <strong> {{ $t('webapp.result.predicted_intent') }}:</strong>
+        <span> {{ intentPrediction.name }}
+          ({{ intentPrediction.confidence.toFixed(2) }}
+          {{ $t('webapp.result.confidence') }}) </span>
+        <strong
+          class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+      </p>
+
+      <div
+        v-if="entities.length > 0"
+        class="example__entities">
+        <strong> {{ $tc('webapp.result.entity', entities.length) }}: </strong>
+        <div>
+          <p
+            v-for="(entity, i) in entities"
+            :key="i"
+            class="entity__text">
+            <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <span v-if="entity.confidence">
+                ({{ entity.confidence.toFixed(2) }}
+                {{ $t('webapp.result.confidence') }})
               </span>
-            </div>
+            </span>
+            <strong
+              v-if="entity.status === 'success'"
+              class="success">[{{ $t('webapp.result.ok') }}]</strong>
             <strong
               v-else
-              :class="{
-              'text-color-danger': status=='error'}">
-              {{ $t('webapp.result.no_expected_intent') }}
-            </strong>
-          </div>
-          <div v-else>
-            <strong>{{ $t('webapp.result.intent') }}:&nbsp;</strong>
-            <span>{{ intent }} ({{ confidence.toFixed(2) }} {{ $t('webapp.result.confidence') }})
-            </span>
-          </div>
-
+              class="failed">[{{ $t('webapp.result.not_predicted') }}]</strong>
+          </p>
         </div>
-        <span
-          v-if="status === 'success'"
-          class="success">[{{ $t('webapp.result.ok') }}]</span>
-        <span
-          v-else
-          class="failed">[{{ $t('webapp.result.failed') }}]</span>
       </div>
-    </div>
-  </div>
+
+      <div
+        v-if="addedEntities.length > 0"
+        class="example__entities">
+        <strong> {{ $tc('webapp.result.added_entity', addedEntities.length) }}: </strong>
+        <div>
+          <p
+            v-for="(entity, i) in addedEntities"
+            :key="i"
+            class="entity__text">
+            <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <span v-if="entity.confidence">
+                ({{ entity.confidence.toFixed(2) }}
+                {{ $t('webapp.result.confidence') }})
+              </span>
+            </span>
+            <strong
+              class="failed">[{{ $t('webapp.result.false_positive') }}]</strong>
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-for="(entity, i) in swappedEntities"
+        :key="i">
+        <p>
+          <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
+          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+            <span :class="['entity', getEntityClass(entity)]">
+              {{ entity.entity }}
+          </span>/ </span>
+          <strong> {{ $t('webapp.result.predicted_entity') }}:</strong>
+          <span> {{ entity.value }} {{ $t('webapp.result.is') }}
+            <span :class="['entity', getEntityClass(toEntity(entity))]">
+              {{ entity.predicted_entity }}
+            </span>
+            <span v-if="entity.confidence">
+              ({{ entity.confidence.toFixed(2) }}
+              {{ $t('webapp.result.confidence') }})
+          </span> </span>
+          <strong
+            class="failed">[{{ $t('webapp.result.failed') }}]</strong>
+        </p>
+      </div>
+  </div></sentence-accordion>
 </template>
 
 <script>
@@ -69,13 +124,14 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-
+import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 
 export default {
   name: 'EvaluateResultExampleItem',
   components: {
     HighlightedText,
     LanguageBadge,
+    SentenceAccordion,
   },
   props: {
     text: {
@@ -90,25 +146,66 @@ export default {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
     },
-    confidence: {
-      type: Number,
-      default: 0,
+    swappedEntities: {
+      type: Array,
+      default: /* istanbul ignore next */ () => ([]),
     },
-    status: {
-      type: String,
-      default: 'example--failed',
+    addedEntities: {
+      type: Array,
+      default: /* istanbul ignore next */ () => ([]),
+    },
+    success: {
+      type: Boolean,
+      default: true,
+    },
+    intentSuccess: {
+      type: Boolean,
+      default: true,
     },
     intentPrediction: {
       type: Object,
       default: null,
     },
   },
+  data() {
+    return {
+      open: false,
+    };
+  },
   computed: {
+    repositoryEntities() {
+      return this.repository.entities || this.repository.entities_list;
+    },
+    markEntities() {
+      return this.allEntities.filter(entity => !entity.ignore);
+    },
+    allEntities() {
+      const swappedEntities = this.swappedEntities.reduce((entities, entity) => {
+        // eslint-disable-next-line no-param-reassign
+        entities = [...entities,
+          {
+            entity: entity.entity || '',
+            start: 0,
+            end: 0,
+            value: entity.value,
+          },
+          this.toEntity(entity)];
+        return entities;
+      }, []);
+      const trueEntities = this.entities.map(entity => ({
+        entity: entity.entity,
+        value: entity.value,
+        status: entity.status,
+        start: entity.status === 'success' ? entity.start : 0,
+        end: entity.status === 'success' ? entity.end : 0,
+      }));
+      return [...trueEntities, ...swappedEntities, ...this.addedEntities];
+    },
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      return getEntitiesList(this.entities)
+      return getEntitiesList(this.allEntities)
         .map(entity => ({
           value: entity,
           class: this.getEntityClass(entity),
@@ -117,16 +214,24 @@ export default {
     },
   },
   methods: {
+    toEntity(predicted) {
+      return {
+        entity: predicted.predicted_entity,
+        start: predicted.start,
+        end: predicted.end,
+        value: predicted.value,
+      };
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
+        this.repositoryEntities,
+        this.allEntities,
       );
       return `entity-${color}`;
     },
     getEntityLabel(entityName) {
-      const entity = this.entities.find(e => e.entity === entityName);
+      const entity = this.repositoryEntities.find(e => e.entity === entityName);
       return entity.label || 'unlabeled';
     },
   },
@@ -136,6 +241,19 @@ export default {
 <style lang="scss" scoped>
 @import '../../../../assets/scss/utilities.scss';
 @import '~bh/src/assets/scss/colors.scss';
+
+.entity {
+  border-radius: 12px;
+  padding: 0 0.35rem;
+
+  &__success {
+    border: 1px solid $color-success;
+  }
+
+  &__text {
+    margin: 0 0 0.5rem 0;
+  }
+}
 
 .example {
   $radius: 8px;
@@ -160,10 +278,13 @@ export default {
   }
 
   &__entities {
-    &__entitie {
-      margin: 0 .5rem;
+    display: flex;
+    flex-wrap: wrap;
+
+    > * {
+      margin-right: 0.5rem;
     }
-  }
+  };
 
   &__icon {
     margin: 0 .5rem;
@@ -179,36 +300,12 @@ export default {
   }
 
   &-text {
-    display: flex;
-    padding: 8px 16px;
-    background-color: $white-ter;
-    border-radius: $radius;
-    transition: box-shadow .2s ease;
-    margin: 1px;
-
-    &__main {
-      flex-grow: 1;
-      font-size: 1.25rem;
-    }
-
-    &__rigth {
-      flex-grow: 0;
-    }
+    margin: 0;
   }
 
   &-entities,
   &-infos {
     padding: 4px 8px 4px 16px;
-  }
-
-  &-entities {
-     >* {
-      margin: 0 8px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
   }
 }
 
