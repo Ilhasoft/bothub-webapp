@@ -109,6 +109,10 @@ export default {
     }),
     ...mapGetters(['getLogSentence']),
     entities() {
+      if (this.nlp_log.entities instanceof Array) {
+        return this.nlp_log.entities;
+      }
+
       return Object.keys(this.nlp_log.entities).map(key => this.nlp_log.entities[key].map(
         (entity) => {
           const { start, end } = getWordIndex(entity.value, this.text);

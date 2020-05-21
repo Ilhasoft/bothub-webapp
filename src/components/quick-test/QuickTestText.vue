@@ -65,7 +65,6 @@ import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
 import HighlightedText from '@/components/shared/HighlightedText';
-import { getWordIndex } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 export default {
@@ -114,19 +113,7 @@ export default {
     },
     entitiesList() {
       if (!this.data) return [];
-      return Object.entries(this.data.entities).flatMap((entry) => {
-        const [label, entities] = entry;
-        return entities.map((entity) => {
-          const { start, end } = getWordIndex(entity.value, this.displayText);
-          return {
-            label,
-            start,
-            end,
-            entity: entity.entity,
-            value: entity.value,
-          };
-        });
-      });
+      return this.data.entities;
     },
     colorClasses() {
       return this.entitiesList.reduce((list, entity) => {
