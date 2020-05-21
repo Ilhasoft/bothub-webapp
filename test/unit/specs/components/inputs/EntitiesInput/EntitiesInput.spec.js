@@ -32,7 +32,8 @@ describe('EntitiesInput.vue', () => {
   const findAddEntityButton = () => wrapper.find({ ref: 'addEntityBtn' });
   const addEntity = () => findAddEntityButton().find('button').trigger('click');
   const findEntityForm = index => wrapper.findAll(EntityForm).at(index);
-  // const findAddLabelButtonForEntityFormOnIndex = index => findEntityForm(index).find({ ref: 'addLabelButton' });
+  // const findAddLabelButtonForEntityFormOnIndex = index =>
+  // findEntityForm(index).find({ ref: 'addLabelButton' });
 
   it('add entity button is disabled when nothing is selected', () => {
     const btn = findAddEntityButton();
