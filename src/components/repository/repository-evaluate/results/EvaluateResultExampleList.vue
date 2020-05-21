@@ -14,17 +14,23 @@
         {{ $t('webapp.result.sentence_details_text') }}
       </p>
       <evaluate-result-example-item
-        v-for="(item, i) in paginatedList"
+        v-for="(item, i) in resultExampleList"
         :key="i"
         :text="item.text"
         :intent="item.intent"
         :confidence="item.intent_prediction.confidence"
-        :status="item.status"
-        :intent-prediction="item.intent_prediction" />
+        :intent-success="(item.intent_status || item.status) === 'success'"
+        :success="isSuccess(item)"
+        :intent-prediction="item.intent_prediction"
+        :entities="item.true_entities || []"
+        :added-entities="item.false_positive_entities || []"
+        :swapped-entities="item.swapped_error_entities || []"/>
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
           v-if="resultExampleList.length > 0"
-          :total="resultExampleList.length"
+          :range-before="4"
+          :range-after="4"
+          :total="total"
           :current.sync="page"
           :per-page="limit"
           aria-next-label="Next page"
@@ -57,9 +63,10 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      limit: 20,
+      limit: 10,
       busy: false,
       error: null,
+      pages: 0,
       page: 1,
     };
   },
@@ -67,18 +74,22 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
-    paginatedList() {
-      const offset = this.limit * (this.page - 1);
-      if (this.resultExampleList.results !== undefined) {
-        return this.resultExampleList.results.slice(offset, offset + this.limit);
-      }
-      return '';
+    total() {
+      return this.limit * this.pages;
     },
   },
-  created() {
+  watch: {
+    page() {
+      this.updateList();
+    },
+  },
+  mounted() {
     this.updateList();
   },
   methods: {
+    isSuccess(item) {
+      return (item.intent_status || item.status) === 'success' && (!item.entity_status || item.entity_status === 'success');
+    },
     ...mapActions([
       'getAllResultsLog',
     ]),
@@ -88,8 +99,11 @@ export default {
         const response = await this.getAllResultsLog({
           repositoryUuid: this.repository.uuid,
           resultId: this.id,
+          page: this.page,
         });
-        this.resultExampleList = response.data.log;
+        const data = response.data.log;
+        this.resultExampleList = data.results;
+        this.pages = data.total_pages;
         this.error = null;
       } catch (error) {
         this.error = error;

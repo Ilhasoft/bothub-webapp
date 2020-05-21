@@ -2,30 +2,32 @@
 
 exports[`NewExampleForm.vue renders correctly 1`] = `
 <div>
-  <form class="columns is-variable is-2">
+  <form class="columns wrapper is-vcentered is-variable is-2">
     <div class="column is-three-fifths">
-      <bh-field-stub errors="">
+      <b-field-stub addons="true">
         <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal">
           <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append" slot="append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
-      </bh-field-stub>
+      </b-field-stub>
     </div>
     <div class="column">
-      <bh-field-stub errors="">
+      <b-field-stub addons="true">
         <b-autocomplete-stub value="" data="" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
-      </bh-field-stub>
+      </b-field-stub>
     </div>
     <div class="column is-narrow">
-      <bh-field-stub errors="">
-        <bh-button-stub disabled="true" size="normal" primary="true" type="submit" tooltiphover="some specific text,some specific text">some specific text</bh-button-stub>
-      </bh-field-stub>
+      <b-field-stub addons="true">
+        <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" size="is-medium" is-active="true">
+          <b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true">some specific text</b-button-stub>
+        </b-tooltip-stub>
+      </b-field-stub>
     </div>
   </form>
   <div class="columns is-variable is-1">
     <div class="column is-three-fifths">
-      <bh-field-stub errors="">
+      <b-field-stub addons="true">
         <entities-input-stub value="" repository="[object Object]" text="" availableaddlabel="true" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
-      </bh-field-stub>
+      </b-field-stub>
     </div>
   </div>
 </div>

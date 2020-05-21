@@ -16,7 +16,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@mdi/font": "^3.0.39",
+    "@mdi/font": "^5.2.45",
     "@sentry/browser": "^5.15.5",
     "@sentry/integrations": "^5.15.5",
     "axios": "^0.18.0",

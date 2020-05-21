@@ -29,7 +29,7 @@
         v-if="usesLabels"
         class="column is-half"
       >
-        <bh-field>
+        <!-- <bh-field>
           <label class="entity-form-label">{{ showingLabelForm ? 'Label' : '&nbsp;' }}</label>
           <div>
             <bh-button
@@ -66,7 +66,7 @@
               </span>
             </bh-autocomplete>
           </div>
-        </bh-field>
+        </bh-field> -->
       </div>
     </div>
   </div>
