@@ -44,13 +44,6 @@
                 </b-field>
               </div>
             </div>
-            <div class="repository-translate__fields">
-              <b-field :label="$t('webapp.translate.translate_to')">
-                <language-select
-                  v-model="translate.to"
-                  :exclude="[translate.from]" />
-              </b-field>
-            </div>
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
@@ -59,19 +52,30 @@
               :active.sync="isImportFileVisible"
               class="repository-translate__fileModal">
               <div class="repository-translate__fileModal__file">
+
                 <b-field
                   label="Select a file to import"
                   class="custom-file-upload">
-                  <input
-                    ref="inputFile"
-                    type="file"
-                    class="custom-file-upload__input"
-                    @change="onFileSelected">
+                  <div class="custom-file-upload__input">
+                    <b-upload v-model="translationFile">
+                      <a class="button is-primary">
+                        <b-icon icon="upload"/>
+                        <span>Click to upload</span>
+                      </a>
+                    </b-upload>
+                    <span
+                      v-if="translationFile"
+                      class="file-name">
+                      {{ translationFile.name }}
+                    </span>
+                  </div>
                   <p>Choose the file containing the sentences you want
                   import it translations. Use the following <a>format</a></p>
 
                   <div class="repository-translate__styleButton">
                     <b-button
+                      :loading="waitDownloadFile"
+                      :disabled="translationFile === null"
                       class="repository-translate__buttons"
                       type="is-primary"
                       @click="importTranslation()">Import</b-button>
@@ -94,6 +98,7 @@
                 just not translated sentences</p>
                 <div class="repository-translate__styleButton">
                   <b-button
+                    :loading="waitDownloadFile"
                     type="is-primary"
                     class="repository-translate__buttons"
                     @click="exportTranslation()">Export</b-button>
@@ -166,6 +171,7 @@ export default {
       isSwitched: false,
       isExportFileVisible: false,
       isImportFileVisible: false,
+      waitDownloadFile: false,
       translate: {
         from: null,
         to: null,
@@ -174,13 +180,13 @@ export default {
       toLanguage: null,
       query: {},
       querySchema: {},
+      errors: '',
     };
   },
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
-
     checkSwitch() {
       if (this.isSwitched === true) {
         return 'Yes';
@@ -195,6 +201,7 @@ export default {
       'importTranslations',
     ]),
     async exportTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
           repositoryUuid: this.selectedRepository.uuid,
@@ -209,19 +216,14 @@ export default {
           type: 'success',
         });
       } catch (error) {
-        this.$buefy.toast.open({
-          message: error,
-          type: 'danger',
-        });
+        this.errors = error;
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
       return false;
-    },
-    onFileSelected(event) {
-      // eslint-disable-next-line prefer-destructuring
-      this.translationFile = event.target.files[0];
     },
 
     async importTranslation() {
+      this.waitDownloadFile = !this.waitDownloadFile;
       const formData = new FormData();
       formData.append('file', this.translationFile);
       formData.append('language', this.translate.to);
@@ -234,11 +236,11 @@ export default {
         });
         this.forceFileDownload(importDownload);
       } catch (error) {
-        this.$buefy.toast.open({
-          message: error,
-          type: 'danger',
-        });
+        this.errors = error;
       }
+      this.waitDownloadFile = !this.waitDownloadFile;
+      this.translationFile = null;
+      this.$refs.inputFile.value = '';
       return false;
     },
     forceFileDownload(response) {
@@ -290,20 +292,18 @@ export default {
 .repository-translate {
   background-color: $color-white;
   display:flex;
+   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
   &__field {
     display: flex;
     padding: 0.25rem;
-
+    width: 100%;
     &__item {
       margin: 0.5rem;
+         width: 50%
     }
-  }
-
-  &__fields{
-    width: 50%
   }
 
   &__translate-arrow-icon {
@@ -372,6 +372,7 @@ export default {
 
   &__translateButtons{
     display: flex;
+    width: 100%;
     justify-content: flex-end
   }
   &__unableButton{
@@ -401,7 +402,7 @@ export default {
   margin: 1rem;
 
   &__input{
-   border: 1px solid #D5D5D5;
+   display: flex;
   }
 
 }
