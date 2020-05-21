@@ -37,10 +37,13 @@
       <p v-else>
         <strong> {{ $t('webapp.result.expected_intent') }}: </strong>
         <span> {{ intent }} / </span>
-        <strong> {{ $t('webapp.result.predicted_intent') }}:</strong>
-        <span> {{ intentPrediction.name }}
-          ({{ intentPrediction.confidence.toFixed(2) }}
-          {{ $t('webapp.result.confidence') }}) </span>
+        <span v-if="intentPrediction.name && intentPrediction.name.length > 0">
+          <strong> {{ $t('webapp.result.predicted_intent') }}:</strong>
+          {{ intentPrediction.name }}
+        </span>
+        <strong v-else>{{ $t('webapp.result.no_intent_predicted') }}</strong>
+        ({{ intentPrediction.confidence.toFixed(2) }}
+        {{ $t('webapp.result.confidence') }})
         <strong
           class="failed">[{{ $t('webapp.result.failed') }}]</strong>
       </p>
