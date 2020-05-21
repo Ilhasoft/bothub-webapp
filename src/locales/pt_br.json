@@ -140,6 +140,7 @@
       "expected_entity": "Entidade esperada",
       "predicted_entity": "Entidade predita",
       "no_expected_intent": "Nenhuma intenção esperada",
+      "no_intent_predicted": "Nenhuma intenção predita",
       "confidence": "confiança",
       "ok": "ok",
       "is": "é",
