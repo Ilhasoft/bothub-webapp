@@ -63,11 +63,28 @@
                         <span>Click to upload</span>
                       </a>
                     </b-upload>
-                    <span
+                    <div
                       v-if="translationFile"
-                      class="file-name">
+                      class="custom-file-upload__input__file">
                       {{ translationFile.name }}
-                    </span>
+
+                      <div
+                        class="custom-file-upload__input__icon"
+                        @click="removeSelectedFile">
+                        <b-icon
+                          icon="close-circle"
+
+                        />
+                      </div>
+
+
+                    </div>
+
+                    <div
+                      v-else
+                      class="custom-file-upload__input__file">
+                      <span>No file chosen</span>
+                    </div>
                   </div>
                   <p>Choose the file containing the sentences you want
                   import it translations. Use the following <a>format</a></p>
@@ -183,6 +200,7 @@ export default {
       errors: '',
     };
   },
+
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
@@ -192,6 +210,14 @@ export default {
         return 'Yes';
       }
       return 'No';
+    },
+  },
+  watch: {
+    isImportFileVisible() {
+      if (this.isImportFileVisible === false) {
+        return this.removeSelectedFile();
+      }
+      return '';
     },
   },
   methods: {
@@ -240,7 +266,6 @@ export default {
       }
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
-      this.$refs.inputFile.value = '';
       return false;
     },
     forceFileDownload(response) {
@@ -260,7 +285,7 @@ export default {
         this.isExportFileVisible = true;
       }
     },
-    clearIconClick() {
+    removeSelectedFile() {
       this.translationFile = null;
     },
     examplesTranslated() {
@@ -403,6 +428,27 @@ export default {
 
   &__input{
    display: flex;
+
+   &__file{
+     width: 15rem;
+     border: 1px solid #D5D5D5;
+     display: flex;
+     justify-content:space-between;
+     padding-left: 0.5rem;
+     padding-right: 1rem;
+     align-items:center;
+     border-top-right-radius: 0.4rem;
+     border-bottom-right-radius: 0.4rem;
+   }
+   &__icon{
+     cursor: pointer;
+     color:#D5D5D5;
+     display:flex;
+     align-items: center;
+     &:hover{
+      color: $color-grey-dark;
+    }
+   }
   }
 
 }
