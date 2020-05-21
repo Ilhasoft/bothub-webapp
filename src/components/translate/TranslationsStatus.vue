@@ -1,21 +1,31 @@
 <template>
-  <div class="columns is-multiline">
-    <div
-      v-for="{ status, language, selected } in filteredLanguagesStatus"
-      :key="language"
-      :ref="`status-${language}`"
-      class="column is-3"
-      @click="select(language)">
-      <div :class="{ card: true, selected }">
-        <div class="card-percentage">
-          <pie :percent="status.base_translations.percentage" />
+  <div>
+    <b-loading
+      :is-full-page="false"
+      :active="loading"
+      :can-cancel="false" />
+    <transition-group
+      name="list"
+      mode="out-in"
+      class="columns is-multiline"
+      tag="div">
+      <div
+        v-for="{ status, language, selected } in filteredLanguagesStatus"
+        :key="language"
+        :ref="`status-${language}`"
+        class="list-item column is-3"
+        @click="select(language)">
+        <div :class="{ card: true, selected }">
+          <div class="card-percentage">
+            <pie :percent="status.base_translations.percentage" />
+          </div>
+          <p class="card-language">
+            <span>{{ language|languageVerbose }}</span>
+            <flag :language="language" />
+          </p>
         </div>
-        <p class="card-language">
-          <span>{{ language|languageVerbose }}</span>
-          <flag :language="language" />
-        </p>
       </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -42,11 +52,16 @@ export default {
       type: String,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       languagesStatus: null,
       selected: this.value,
+      loading: false,
     };
   },
   computed: {
@@ -72,6 +87,9 @@ export default {
     selected() {
       this.$emit('input', this.selected);
     },
+    update() {
+      this.updateTranslationsStatus();
+    },
   },
   async mounted() {
     await this.updateTranslationsStatus();
@@ -81,6 +99,7 @@ export default {
       'getRepositoryLanguagesStatus',
     ]),
     async updateTranslationsStatus() {
+      this.loading = true;
       this.languagesStatus = null;
       try {
         const response = await this.getRepositoryLanguagesStatus({
@@ -89,6 +108,8 @@ export default {
         this.languagesStatus = response.data.languages_status;
       } catch (e) {
         this.languagesStatus = null;
+      } finally {
+        this.loading = false;
       }
     },
     select(language) {
@@ -100,6 +121,19 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to {
+  opacity: 0.4;
+  float: bottom;
+  transform: translateY(-5%);
+}
+
+.list-item:not(:last-child) {
+    border-bottom: none;
+}
 
 .card {
   background-color: $white-ter;

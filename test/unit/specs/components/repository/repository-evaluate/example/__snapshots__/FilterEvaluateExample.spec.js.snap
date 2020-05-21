@@ -6,9 +6,10 @@ exports[`TestView.vue renders correctly 1`] = `
     <b-field-stub addons="true" class="filter-evaluate-example__filters__input-text">
       <b-input-stub value="" type="text" hascounter="true" customclass="" iconright="magnify" debounce="750"></b-input-stub>
     </b-field-stub>
-    <div class="filter-evaluate-example__filters__wrapper"><span class="filter-evaluate-example__filters__wrapper__text">
+    <div class="filter-evaluate-example__filters__wrapper">
+      <div class="filter-evaluate-example__filters__wrapper__text">
         some specific text:
-      </span>
+      </div>
       <b-field-stub addons="true">
         <b-autocomplete-stub value="" data="" field="value" openonfocus="true" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
       </b-field-stub>

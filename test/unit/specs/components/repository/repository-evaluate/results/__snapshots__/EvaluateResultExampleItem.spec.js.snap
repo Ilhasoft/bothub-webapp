@@ -1,19 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EvaluateResultExampleItem.vue renders 1`] = `
-<div class="example example--success fadeIn">
-  <div class="example-text">
-    <div class="example-text__main">
-      <highlighted-text-stub text="hey" entities="[object Object]" allentities="" failed=""></highlighted-text-stub>
-    </div>
+<sentence-accordion-stub islight="true" type="is-success" thickborder="true" class="example fadeIn">
+  <div>
+    <p class="example-text"> hey</p>
   </div>
-  <div class="example-infos level is-mobile">
-    <div class="level-left">
-      <div class="level-item ">
-        <div><strong>some specific text:&nbsp;</strong> <span>greet (0.93 some specific text)
-          </span></div>
-      </div> <span class="success">[some specific text]</span>
+  <b-icon-stub icon="check-bold" class="level-right success"></b-icon-stub>
+  <div class="example-infos">
+    <p><strong> some specific text: </strong> <span> greet
+        (1.00
+        some specific text) </span> <strong class="success">[some specific text]</strong></p>
+    <div class="example__entities"><strong> some specific text: </strong>
+      <div>
+        <p class="entity__text"><span> grassa some specific text
+            <span class="entity entity-sunflower">kids</span> <span>
+              (0.80
+              some specific text)
+            </span></span> <strong class="failed">[some specific text]</strong></p>
+      </div>
     </div>
+    <!---->
   </div>
-</div>
+</sentence-accordion-stub>
 `;

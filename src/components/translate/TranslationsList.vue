@@ -59,6 +59,7 @@ export default {
       });
     },
     examplesDeleted() {
+      this.updateTranslations();
       this.$emit('exampleUpdated');
     },
   },
