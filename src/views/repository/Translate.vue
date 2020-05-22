@@ -52,20 +52,47 @@
               :active.sync="isImportFileVisible"
               class="repository-translate__fileModal">
               <div class="repository-translate__fileModal__file">
+
                 <b-field
                   label="Select a file to import"
                   class="custom-file-upload">
-                  <input
-                    ref="inputFile"
-                    type="file"
-                    class="custom-file-upload__input"
-                    @change="onFileSelected">
+                  <div class="custom-file-upload__input">
+                    <b-upload v-model="translationFile">
+                      <a class="button is-primary">
+                        <b-icon icon="upload"/>
+                        <span>Click to upload</span>
+                      </a>
+                    </b-upload>
+                    <div
+                      v-if="translationFile"
+                      class="custom-file-upload__input__file">
+                      {{ translationFile.name }}
+
+                      <div
+                        class="custom-file-upload__input__icon"
+                        @click="removeSelectedFile">
+                        <b-icon
+                          icon="close-circle"
+
+                        />
+                      </div>
+
+
+                    </div>
+
+                    <div
+                      v-else
+                      class="custom-file-upload__input__file">
+                      <span>No file chosen</span>
+                    </div>
+                  </div>
                   <p>Choose the file containing the sentences you want
                   import it translations. Use the following <a>format</a></p>
 
                   <div class="repository-translate__styleButton">
                     <b-button
                       :loading="waitDownloadFile"
+                      :disabled="translationFile === null"
                       class="repository-translate__buttons"
                       type="is-primary"
                       @click="importTranslation()">Import</b-button>
@@ -170,18 +197,27 @@ export default {
       toLanguage: null,
       query: {},
       querySchema: {},
+      errors: '',
     };
   },
+
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
-
     checkSwitch() {
       if (this.isSwitched === true) {
         return 'Yes';
       }
       return 'No';
+    },
+  },
+  watch: {
+    isImportFileVisible() {
+      if (this.isImportFileVisible === false) {
+        return this.removeSelectedFile();
+      }
+      return '';
     },
   },
   methods: {
@@ -206,17 +242,10 @@ export default {
           type: 'success',
         });
       } catch (error) {
-        this.$buefy.toast.open({
-          message: error,
-          type: 'danger',
-        });
+        this.errors = error;
       }
       this.waitDownloadFile = !this.waitDownloadFile;
       return false;
-    },
-    onFileSelected(event) {
-      // eslint-disable-next-line prefer-destructuring
-      this.translationFile = event.target.files[0];
     },
 
     async importTranslation() {
@@ -233,12 +262,10 @@ export default {
         });
         this.forceFileDownload(importDownload);
       } catch (error) {
-        this.$buefy.toast.open({
-          message: error,
-          type: 'danger',
-        });
+        this.errors = error;
       }
       this.waitDownloadFile = !this.waitDownloadFile;
+      this.translationFile = null;
       return false;
     },
     forceFileDownload(response) {
@@ -258,7 +285,7 @@ export default {
         this.isExportFileVisible = true;
       }
     },
-    clearIconClick() {
+    removeSelectedFile() {
       this.translationFile = null;
     },
     examplesTranslated() {
@@ -290,7 +317,7 @@ export default {
 .repository-translate {
   background-color: $color-white;
   display:flex;
-  flex-direction: column;
+   flex-direction: column;
   justify-content: space-around;
   align-items: center;
 
@@ -300,7 +327,7 @@ export default {
     width: 100%;
     &__item {
       margin: 0.5rem;
-       width: 50%
+         width: 50%
     }
   }
 
@@ -400,7 +427,28 @@ export default {
   margin: 1rem;
 
   &__input{
-   border: 1px solid #D5D5D5;
+   display: flex;
+
+   &__file{
+     width: 15rem;
+     border: 1px solid #D5D5D5;
+     display: flex;
+     justify-content:space-between;
+     padding-left: 0.5rem;
+     padding-right: 1rem;
+     align-items:center;
+     border-top-right-radius: 0.4rem;
+     border-bottom-right-radius: 0.4rem;
+   }
+   &__icon{
+     cursor: pointer;
+     color:#D5D5D5;
+     display:flex;
+     align-items: center;
+     &:hover{
+      color: $color-grey-dark;
+    }
+   }
   }
 
 }
