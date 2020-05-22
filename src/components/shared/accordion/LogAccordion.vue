@@ -111,6 +111,7 @@ export default {
     entities() {
       return Object.keys(this.nlp_log.entities).map(key => this.nlp_log.entities[key].map(
         (entity) => {
+          if (entity.start && entity.end) return entity;
           const { start, end } = getWordIndex(entity.value, this.text);
           return {
             start,

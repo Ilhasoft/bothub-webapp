@@ -58,7 +58,6 @@ export default {
       return {
         name: 'repository-result',
         params: {
-          version: this.version,
           resultId: this.id,
         },
       };
@@ -71,7 +70,7 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 .version-test-item {
-  margin: 1rem;
+  margin: 1rem 0;
 
   &__wrapper {
     display: flex;

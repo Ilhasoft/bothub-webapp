@@ -19,11 +19,17 @@
         :text="item.text"
         :intent="item.intent"
         :confidence="item.intent_prediction.confidence"
-        :status="item.intent_status || item.status"
-        :intent-prediction="item.intent_prediction" />
+        :intent-success="(item.intent_status || item.status) === 'success'"
+        :success="isSuccess(item)"
+        :intent-prediction="item.intent_prediction"
+        :entities="item.true_entities || []"
+        :added-entities="item.false_positive_entities || []"
+        :swapped-entities="item.swapped_error_entities || []"/>
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
           v-if="resultExampleList.length > 0"
+          :range-before="4"
+          :range-after="4"
           :total="total"
           :current.sync="page"
           :per-page="limit"
@@ -81,6 +87,9 @@ export default {
     this.updateList();
   },
   methods: {
+    isSuccess(item) {
+      return (item.intent_status || item.status) === 'success' && (!item.entity_status || item.entity_status === 'success');
+    },
     ...mapActions([
       'getAllResultsLog',
     ]),
