@@ -10,24 +10,27 @@
         'border-danger': type === 'is-danger',
         'is-light': isLight,
         'border': !type,
-    }">
+      }"
+      @click="toggleAccordion()">
 
 
-      <div class="expander__trigger__check">
+      <div
+        class="expander__trigger__check"
+        @click.stop>
         <slot name="check" />
       </div>
 
       <div
         ref="expander"
         class="expander__trigger__header"
-        @click="toggleAccordion()">
+      >
         <slot name="header" />
       </div>
 
       <div
         ref="expander"
         class="expander__trigger__options"
-        @click="toggleAccordion()">
+      >
         <slot name="options" />
       </div>
     </div>
