@@ -161,12 +161,10 @@ export default {
     &__options{
       min-width: 20%;
       display: flex;
-      align-self: flex-end;
       justify-content: flex-end;
 
       @media screen and (max-width: $mobile-width) {
         margin: 0.3rem 0;
-        min-width: 0;
       }
     }
     }
