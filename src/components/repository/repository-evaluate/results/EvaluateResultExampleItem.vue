@@ -58,7 +58,9 @@
             :key="i"
             class="entity__text">
             <span> {{ entity.value }} {{ $t('webapp.result.is') }}
-              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <b-tag
+                :class="['entity', getEntityClass(entity)]"
+                rounded>{{ entity.entity }}</b-tag>
               <span v-if="entity.confidence">
                 ({{ entity.confidence.toFixed(2) }}
                 {{ $t('webapp.result.confidence') }})
@@ -84,7 +86,9 @@
             :key="i"
             class="entity__text">
             <span> {{ entity.value }} {{ $t('webapp.result.is') }}
-              <span :class="['entity', getEntityClass(entity)]">{{ entity.entity }}</span>
+              <b-tag
+                :class="['entity', getEntityClass(entity)]"
+                rounded>{{ entity.entity }}</b-tag>
               <span v-if="entity.confidence">
                 ({{ entity.confidence.toFixed(2) }}
                 {{ $t('webapp.result.confidence') }})
@@ -102,14 +106,18 @@
         <p>
           <strong> {{ $t('webapp.result.expected_entity') }}: </strong>
           <span> {{ entity.value }} {{ $t('webapp.result.is') }}
-            <span :class="['entity', getEntityClass(entity)]">
+            <b-tag
+              :class="['entity', getEntityClass(entity)]"
+              rounded>
               {{ entity.entity }}
-          </span>/ </span>
+          </b-tag>/ </span>
           <strong> {{ $t('webapp.result.predicted_entity') }}:</strong>
           <span> {{ entity.value }} {{ $t('webapp.result.is') }}
-            <span :class="['entity', getEntityClass(toEntity(entity))]">
+            <b-tag
+              :class="['entity', getEntityClass(toEntity(entity))]"
+              rounded>
               {{ entity.predicted_entity }}
-            </span>
+            </b-tag>
             <span v-if="entity.confidence">
               ({{ entity.confidence.toFixed(2) }}
               {{ $t('webapp.result.confidence') }})
@@ -246,8 +254,8 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 
 .entity {
-  border-radius: 12px;
-  padding: 0 0.35rem;
+  color: black;
+  font-weight: bold;
 
   &__success {
     border: 1px solid $color-success;
