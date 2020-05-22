@@ -1,6 +1,7 @@
 <template>
   <div class="expander">
     <div
+      ref="expander"
       :class="{
         'expander__trigger': true,
         'active': isOpen,
@@ -10,24 +11,26 @@
         'border-danger': type === 'is-danger',
         'is-light': isLight,
         'border': !type,
-    }">
+      }"
+      @click="toggleAccordion()">
 
 
-      <div class="expander__trigger__check">
+      <div
+        ref="check"
+        class="expander__trigger__check"
+        @click.stop>
         <slot name="check" />
       </div>
 
       <div
-        ref="expander"
         class="expander__trigger__header"
-        @click="toggleAccordion()">
+      >
         <slot name="header" />
       </div>
 
       <div
-        ref="expander"
         class="expander__trigger__options"
-        @click="toggleAccordion()">
+      >
         <slot name="options" />
       </div>
     </div>
@@ -84,6 +87,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
   @import '~bh/src/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
   .before-border {
     position: relative;
@@ -138,8 +142,16 @@ export default {
       padding: .7rem;
       margin-top: 0.5rem;
       cursor: pointer;
+
+      @media screen and (max-width: $mobile-width) {
+        flex-wrap: wrap;
+      }
     &__check{
-      margin-right: 1rem;
+      margin: 0 1rem 0 0;
+
+      @media screen and (max-width: $mobile-width) {
+        margin: 1rem 0;
+      }
     }
     &__header{
       display: flex;
@@ -147,9 +159,13 @@ export default {
       align-items: center;
     }
     &__options{
-      width: 30%;
+      min-width: 20%;
       display: flex;
       justify-content: flex-end;
+
+      @media screen and (max-width: $mobile-width) {
+        margin: 0.3rem 0;
+      }
     }
     }
 

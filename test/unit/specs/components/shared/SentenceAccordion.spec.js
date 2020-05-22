@@ -16,6 +16,21 @@ describe('SentenceAccordion.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  describe('check click should ignore accordion', () => {
+    beforeEach(() => {
+      wrapper = shallowMount(SentenceAccordion, {
+        propsData: {
+          open: false,
+        },
+      });
+      const check = wrapper.find({ ref: 'check' });
+      check.trigger('click');
+    });
+    test('expand should be false', () => {
+      expect(wrapper.vm.isOpen).toBeFalsy();
+    });
+  });
+
   describe('open accordion header', () => {
     beforeEach(() => {
       wrapper = shallowMount(SentenceAccordion, {

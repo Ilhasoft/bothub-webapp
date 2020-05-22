@@ -13,7 +13,7 @@ exports[`EvaluateResultExampleItem.vue renders 1`] = `
     <div class="example__entities"><strong> some specific text: </strong>
       <div>
         <p class="entity__text"><span> grassa some specific text
-            <span class="entity entity-sunflower">kids</span> <span>
+            <b-tag-stub rounded="true" tabstop="true" class="entity entity-sunflower">kids</b-tag-stub> <span>
               (0.80
               some specific text)
             </span></span> <strong class="failed">[some specific text]</strong></p>
