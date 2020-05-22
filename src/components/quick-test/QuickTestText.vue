@@ -112,8 +112,13 @@ export default {
       return this.text;
     },
     entitiesList() {
-      if (!this.data) return [];
-      return this.data.entities;
+      return Object.entries(this.data.entities).flatMap((entry) => {
+        const [label, entities] = entry;
+        return entities.map(entity => ({
+          label,
+          ...entity,
+        }));
+      });
     },
     colorClasses() {
       return this.entitiesList.reduce((list, entity) => {
