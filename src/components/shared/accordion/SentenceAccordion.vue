@@ -1,6 +1,7 @@
 <template>
   <div class="expander">
     <div
+      ref="expander"
       :class="{
         'expander__trigger': true,
         'active': isOpen,
@@ -15,20 +16,19 @@
 
 
       <div
+        ref="check"
         class="expander__trigger__check"
         @click.stop>
         <slot name="check" />
       </div>
 
       <div
-        ref="expander"
         class="expander__trigger__header"
       >
         <slot name="header" />
       </div>
 
       <div
-        ref="expander"
         class="expander__trigger__options"
       >
         <slot name="options" />
