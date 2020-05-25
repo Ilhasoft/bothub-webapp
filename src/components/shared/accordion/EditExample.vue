@@ -146,6 +146,14 @@ export default {
       type: String,
       default: '',
     },
+    languageEdit: {
+      type: String,
+      default: '',
+    },
+    editExampleEntityList: {
+      type: Boolean,
+      default: false,
+    },
     sentenceId: {
       type: Number,
       required: true,
@@ -235,6 +243,7 @@ export default {
     ...mapActions([
       'updateEvaluateExample',
       'setUpdateRepository',
+      'editSentence',
     ]),
     cancelEditSentence() {
       this.$emit('cancel');
@@ -342,16 +351,34 @@ export default {
       this.errors = {};
       this.submitting = true;
 
+      const entitiesResponse = this.entitiesToEdit.map((entityValue) => {
+        const { start, end, entity } = entityValue;
+        return { start, end, entity };
+      });
+
       try {
-        await this.updateEvaluateExample({
-          repository: this.repository.uuid,
-          id: this.sentenceId,
-          version: this.version,
-          text: this.text,
-          intent: this.intent,
-          entities: this.entitiesToEdit,
-          language: this.language,
-        });
+        if (this.editExampleEntityList) {
+          await this.editSentence({
+            repository: this.repository.uuid,
+            id: this.sentenceId,
+            version: this.version,
+            text: this.text,
+            intent: this.intent,
+            entities: entitiesResponse,
+            language: this.languageEdit,
+          });
+        } else {
+          await this.updateEvaluateExample({
+            repository: this.repository.uuid,
+            id: this.sentenceId,
+            version: this.version,
+            text: this.text,
+            intent: this.intent,
+            entities: this.entitiesToEdit,
+            language: this.language,
+          });
+        }
+
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');

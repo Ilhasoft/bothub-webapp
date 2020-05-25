@@ -60,7 +60,6 @@
           :title="formattedEntityTitle()"
         />
       </div>
-
       <div
         v-if="hasLabels"
         class="repository-home__entities-list"
@@ -71,8 +70,11 @@
         <badges-card
           v-if="repository.other_label.entities.length > 0"
           :list="repository.other_label.entities"
+          :clickable="true"
+          :repository="repository"
           :title="formattedLabel(repository.other_label)"
           :examples-count="repository.other_label.examples__count"
+          class="label"
         />
         <div v-if="repository.labels.length > 0">
           <div class="repository-home__entities-list__labeled-count">
@@ -82,6 +84,8 @@
             v-for="(label, i) in repository.labels"
             :key="i"
             :list="label.entities"
+            :clickable="true"
+            :repository="repository"
             :title="formattedLabel(label)"
             :examples-count="label.examples__count"
           />

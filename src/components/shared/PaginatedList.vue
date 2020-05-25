@@ -5,6 +5,7 @@
       :key="item.key"
       :is="itemComponent"
       v-bind="addAttrs(item)"
+      :editing="editable"
       @deleted="onItemDeleted(item.id)"
       @dispatchEvent="onDispatchEvent($event)" />
     <div class="pagination__bottom">

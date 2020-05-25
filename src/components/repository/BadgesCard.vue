@@ -2,7 +2,7 @@
   <div class="badges-card">
     <div v-html="title" />
     <div class="badges-card__wrapper">
-      <bh-badge
+      <b-tag
         v-for="(item, i) in list"
         :key="i"
         :class="[
@@ -11,8 +11,18 @@
         ]"
         size="small"
       >
-        <span>{{ item }}</span>
-      </bh-badge>
+        <div
+          v-if="clickable"
+          class="badges-card__wrapper__badge__entity"
+          @click="entityList(item)">
+          <span>{{ item }}</span>
+        </div>
+
+        <div v-else>
+          <span>{{ item }}</span>
+        </div>
+
+      </b-tag>
     </div>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
@@ -30,6 +40,18 @@ export default {
       type: String,
       default: '',
     },
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
+    repository: {
+      type: Object,
+      default: null,
+    },
+    entityId: {
+      type: Number,
+      default: null,
+    },
     list: {
       type: Array,
       default: () => ([]),
@@ -40,6 +62,9 @@ export default {
     },
   },
   methods: {
+    entityList(entity) {
+      this.$router.push({ name: 'repository-entitylist', params: { entity } });
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
@@ -64,9 +89,15 @@ export default {
       &__badge {
         height: 1.5rem;
         margin: .4rem .5rem 0 0;
+        padding: 0 1rem 0 1rem;
         font-weight: bold;
         line-height: calc(1.5rem - 4px);
         border-width: 1px;
+        border-radius: 1rem;
+
+        &__entity{
+          cursor: pointer;
+        }
       }
     }
   }

@@ -4,7 +4,7 @@ exports[`EvaluateResultExampleItem.vue renders 1`] = `
 <div class="example example--success fadeIn">
   <div class="example-text">
     <div class="example-text__main">
-      <highlighted-text-stub text="hey" entities="[object Object]" allentities="" failed=""></highlighted-text-stub>
+      <highlighted-text-stub text="hey" entities="[object Object]" allentities="" prefixcolor="" failed=""></highlighted-text-stub>
     </div>
   </div>
   <div class="example-infos level is-mobile">
