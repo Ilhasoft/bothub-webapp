@@ -126,7 +126,8 @@
       "recall_reports_text": "Um pontuação de precisão perfeita de 1.0 significa que todos os resultados dos testes foram positivos (mas não diz nada sobre se todos os resultados positivos foram encontrados), enquanto uma pontuação de revocação de 1.0 significa que todos os resultados positivos foram encontrados pela busca (mas não informa quantos falsos positivos foram trazidos).",
       "see_more_in": "Leia mais na nossa ",
       "intent_report": "Relatório das Intenções",
-      "entities": "Entidades",
+      "entity": "Entidades | Entidade | Entidades",
+      "added_entity": "Entidades adiconadas | Entidade adiconada | Entidades adiconadas",
       "intent_confusion_matrix": "Matriz de confusão de intenções",
       "intent_confusion_matrix_text": "A Matriz de confusão de intenções mostra quais intenções foram confudidas por outras. Leia mais na nossa",
       "intent_confidence_distribution": "Distribuição de confiança das intenções",
@@ -136,10 +137,16 @@
       "do_not_log": "Nenhuma frase para mostrar",
       "expected_intent": "Intenção esperada",
       "predicted_intent": "Intenção predita",
+      "expected_entity": "Entidade esperada",
+      "predicted_entity": "Entidade predita",
       "no_expected_intent": "Nenhuma intenção esperada",
+      "no_intent_predicted": "Nenhuma intenção predita",
       "confidence": "confiança",
       "ok": "ok",
+      "is": "é",
       "failed": "falhou",
+      "not_predicted": "não predito",
+      "false_positive": "falso positivo",
       "intent": "Intenção",
       "error": "Houve um erro ao buscar as frases"
     },
@@ -153,7 +160,8 @@
       "labeled": "<strong>{entities_length}</strong> entidades categorizadas <strong>{label_value}</strong>",
       "unlabeled": "<strong>{entities_length}</strong> entidades não categorizadas ",
       "all_categories": "Todas as categorias",
-      "all_languages": "Todos os idiomas"
+      "all_languages": "Todos os idiomas",
+      "no_repo": "Nenhum repositório encontrado."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -163,7 +171,9 @@
       "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
       "role": "Papéis:",
-      "no_requests": "Sem solicitações."
+      "no_requests": "Sem solicitações.",
+      "save": "Salvar",
+      "request": "Fazer pedido"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -241,7 +251,7 @@
       "grid1": "No canto superior direito da tela, clique em \"Nova inteligência\".",
       "grid2": "Preencha os campos e clique em \"Criar inteligência\"",
       "grid3": "Comece adicionando conteúdo para o mecanismo de interpretação\nfornecendo frases de exemplo.",
-      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.</p>\n<p>Não esqueça de enviar suas frases.",
+      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.\n Não esqueça de enviar suas frases.",
       "grid5": "Depois de adicionar suas frases, clique na barra de status para ver\no status de sua inteligência e treinar suas frases",
       "grid6": "É isso! Sua inteligência está pronta para ser usada!",
       "previous": "Anterior",

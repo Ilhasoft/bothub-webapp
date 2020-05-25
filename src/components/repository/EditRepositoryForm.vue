@@ -9,10 +9,10 @@
       :errors="errors"
       :initial-data="initialData" />
     <div class="text-center">
-      <bh-button
+      <b-button
         :disabled="submitting"
-        primary
-        type="submit">Save</bh-button>
+        type="is-primary"
+        native-type="submit">{{ $t('webapp.settings.save') }}</b-button>
     </div>
   </form>
 </template>

@@ -3,8 +3,8 @@
     shadow="light"
     class="repository-card"
     no-border>
-    <div class="bh-grid bh-grid--column repository-card__align-items">
-      <div class="bh-grid__item bh-grid__item--grow-0 repository-card__big-badge-wrapper">
+    <div class="repository-card__align-items">
+      <div class="repository-card__big-badge-wrapper">
         <router-link :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
             <bh-icon-button
@@ -14,7 +14,7 @@
           </div>
         </router-link>
       </div>
-      <div class="bh-grid__item text-center">
+      <div class="repository-card__details">
         <div class="repository-card__title">
           <span class="repository-card__title__bagde">
             <router-link :to="repositoryDetailsRouterParams">
@@ -110,7 +110,7 @@ export default {
 .repository-card {
   $repository-card-margin: .5rem;
 
-  margin: $repository-card-margin;
+  margin: $repository-card-margin 0 $repository-card-margin 2*$repository-card-margin;
   padding: 1rem 0;
   width: calc(100% * 1/3 - 1rem);
   word-break: break-all;
@@ -121,14 +121,27 @@ export default {
 
   @media screen and (max-width: $small-mobile-width) {
     width: calc(100% - 1rem);
+    margin: $repository-card-margin auto;
   }
 
   &__align-items {
     align-items: center;
+    display: flex;
+    padding: 0.25rem;
+    flex-direction: column;
+  }
+
+  &__details {
+    text-align: center;
+    padding: 0.5rem;
   }
 
   &__big-badge-wrapper {
     display: block;
+    margin: 0.5rem;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
 
     @media screen and (max-width: 800px) {
       display: none;

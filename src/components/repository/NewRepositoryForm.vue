@@ -8,10 +8,10 @@
       v-model="data"
       :errors="errors" />
     <div class="text-center">
-      <bh-button
+      <b-button
         :disabled="submitting"
-        primary
-        type="submit">{{ $t('webapp.landing_page.create_bot') }}</bh-button>
+        type="is-primary"
+        native-type="submit">{{ $t('webapp.landing_page.create_bot') }}</b-button>
     </div>
   </form>
 </template>
