@@ -36,7 +36,7 @@
         v-for="(label, i) in editingLabels"
         :key="i"
         :list="label.entities"
-        :title="label.value"
+        :title="$tc('webapp.home.labeled', label.entities.length, { label_value: label.value })"
         :examples-count="0"
         :edit="editing"
         closable
@@ -50,7 +50,7 @@
       :list="editingUnlabeled"
       :examples-count="0"
       :edit="editing"
-      title="unlabeled entities"
+      :title="$tc('webapp.home.unlabeled', editingUnlabeled.length)"
       dark
       @onRemove="moving.fromEntity = $event; moving.from = 'unlabeled'"
       @onAdd="moving.toEntity = $event; moving.to = 'unlabeled'"
@@ -131,15 +131,15 @@ export default {
     this.updateLocalData();
   },
   methods: {
-    updateLocalData() {
-      this.editingLabels = [...this.labels];
-      this.editingUnlabeled = [...this.unlabeled];
-    },
     ...mapActions([
       'editEntity',
       'addLabel',
       'deleteEntity',
     ]),
+    updateLocalData() {
+      this.editingLabels = [...this.labels];
+      this.editingUnlabeled = [...this.unlabeled];
+    },
     clearNewLabel() {
       this.newLabel = {
         creating: false,
@@ -174,7 +174,6 @@ export default {
       }
     },
     async moveEntity(entity, fromLabelIndex = null, toLabelIndex = null) {
-      console.log({ entity, fromLabelIndex, toLabelIndex });
       await this.editEntity({
         entityId: entity.id,
         version: this.version,
@@ -193,7 +192,8 @@ export default {
           .findIndex(listEntity => listEntity.id === entity.id);
         if (removeIndex >= 0) this.editingLabels[fromLabelIndex].entities.splice(removeIndex, 1);
       } else {
-        const removeIndex = this.editingUnlabeled.findIndex(listEntity => listEntity.id === entity.id);
+        const removeIndex = this.editingUnlabeled
+          .findIndex(listEntity => listEntity.id === entity.id);
         if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
       }
     },

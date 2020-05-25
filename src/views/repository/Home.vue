@@ -146,24 +146,6 @@ export default {
         { id: 78, value: 'car' }, { id: 54, value: 'hobo' }, { id: 55, value: 'my_leg' },
       ];
     },
-    formattedLabel(label) {
-      if (label === undefined || label.entities === undefined) {
-        return '';
-      }
-
-      const entity = label.entities.length > 1 ? 'entities' : 'entity';
-
-      if (label.value === 'other') {
-        return this.$t('webapp.home.unlabeled', { entities_length: label.entities.length, _entity: entity });
-      }
-
-      return this.$t('webapp.home.labeled',
-        {
-          entities_length: label.entities.length,
-          _entity: entity,
-          label_value: label.value,
-        });
-    },
     formattedEntityTitle() {
       return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
     },
