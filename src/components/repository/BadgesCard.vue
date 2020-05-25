@@ -20,18 +20,18 @@
         :is="edit ? 'drag' : 'div'"
         :key="i"
         :data="item"
-        @cut="remove(i)">
+        @cut="remove">
         <b-tag
           :class="[
             'badges-card__wrapper__badge',
-            getEntityClass(item),
+            getEntityClass(item.value || item),
           ]"
           :closable="edit"
           rounded
           size="small"
           @close="close(item)"
         >
-          <span>{{ item }}</span>
+          <span>{{ item.value || item }}</span>
         </b-tag>
     </component></div>
     <div v-if="examplesCount">
@@ -76,16 +76,21 @@ export default {
       default: null,
     },
   },
+  computed: {
+    nameList() {
+      return this.list.map(item => item.value || item);
+    },
+  },
   methods: {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.list,
+        this.nameList,
       );
       return `entity-${color}`;
     },
-    remove(i) {
-      if (this.edit) this.$emit('onRemove', i);
+    remove(event) {
+      if (this.edit) this.$emit('onRemove', event.data);
     },
     paste(event) {
       if (this.edit) this.$emit('onAdd', event.data);

@@ -61,77 +61,10 @@
         />
       </div>
 
-      <div
-        v-if="hasLabels"
-        class="repository-home__entities-list"
-      >
-        <div class="repository-home__title repository-home__entities-list__header">
-          <p>{{ $t('webapp.home.entities_list') }}</p>
-          <b-field
-            class="repository-home__button-group"
-            grouped>
-            <b-button
-              class="repository-home__button"
-              type="is-primary"
-              @click="edit=!edit">
-              {{ edit ? 'Finish Editing' : 'Edit Groups' }}
-            </b-button>
-            <b-button
-              v-if="edit"
-              :disabled="creating"
-              class="repository-home__button"
-              type="is-secondary"
-              @click="creating = !creating"
-              @finished="createLabel">
-              Create new group
-            </b-button>
-        </b-field></div>
-        <div v-if="repository.labels.length > 0">
-          <div class="repository-home__entities-list__labeled-count">
-            {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
-          </div>
-          <create-badges-card
-            v-if="creating"
-            title="New Label named"
-            @finished="createLabel"
-          />
-          <badges-card
-            v-for="(label, i) in newLabels"
-            :key="i"
-            :list="label.entities"
-            :title="formattedLabel(label)"
-            :examples-count="0"
-            :edit="edit"
-            closable
-            @onRemove="removeFromNewLabel($event, i)"
-            @onAdd="addToNewLabel($event, i)"
-            @onRemoveCard="onRemoveCard"
-            @onCloseTag="onCloseTag"
-          />
-          <badges-card
-            v-for="(label, i) in repository.labels"
-            :key="i"
-            :list="label.entities"
-            :title="formattedLabel(label)"
-            :examples-count="label.examples__count"
-            :edit="edit"
-            closable
-            @onRemove="removeFromLabel($event, i)"
-            @onAdd="addToLabel($event, i)"
-            @onRemoveCard="onRemoveCard"
-            @onCloseTag="onCloseTag"
-          />
-        </div>
-        <badges-card
-          :list="repository.other_label.entities"
-          :title="formattedLabel(repository.other_label)"
-          :examples-count="repository.other_label.examples__count"
-          :edit="edit"
-          dark
-          @onRemove="removeFromUnlabeled"
-          @onAdd="addToUnlabeled"
-        />
-      </div>
+      <entity-edit
+        :labels="testLabels()"
+        :unlabeled="testUnlabeled()"
+        :repository-uuid="repository.uuid"/>
     </div>
   </repository-view-base>
 </template>
@@ -139,9 +72,9 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesCard from '@/components/repository/BadgesCard';
-import CreateBadgesCard from '@/components/repository/CreateBadgesCard';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
+import EntityEdit from '@/components/repository/EntityEdit';
 
 
 export default {
@@ -150,7 +83,7 @@ export default {
     RepositoryViewBase,
     BadgesCard,
     VueMarkdown,
-    CreateBadgesCard,
+    EntityEdit,
   },
   extends: RepositoryBase,
   data() {
@@ -202,50 +135,16 @@ export default {
     },
   },
   methods: {
-    createLabel(text) {
-      if (text && text.length > 0) {
-        this.newLabels.push({
-          value: text,
-          entities: [],
-        });
-      }
-      this.creating = false;
+    testLabels() {
+      return [
+        { id: 25, value: 'Animal', entities: [{ id: 33, value: 'cat' }, { id: 36, value: 'badger' }, { id: 43, value: 'possum' }] },
+        { id: 66, value: 'Flower', entities: [{ id: 64, value: 'amelia' }, { id: 69, value: 'daisy' }, { id: 24, value: 'dandelion' }] },
+      ];
     },
-    onCloseTag() {
-      this.$buefy.dialog.alert({
-        title: 'Delete Entity',
-        message: 'Are you sure you want to delete this entity?',
-        confirmText: 'Ok',
-        cancelText: 'Cancel',
-        canCancel: true,
-      });
-    },
-    onRemoveCard() {
-      this.$buefy.dialog.alert({
-        title: 'Delete Group',
-        message: 'Are you sure you want to delete this entity group?',
-        confirmText: 'Ok',
-        cancelText: 'Cancel',
-        canCancel: true,
-      });
-    },
-    removeFromNewLabel(event, index) {
-      this.newLabels[index].entities.splice(event, 1);
-    },
-    addToNewLabel(event, index) {
-      this.newLabels[index].entities.push(event);
-    },
-    removeFromLabel(event, i) {
-      this.repository.labels[i].entities.splice(event, 1);
-    },
-    removeFromUnlabeled(index) {
-      this.repository.other_label.entities.splice(index, 1);
-    },
-    addToLabel(event, index) {
-      this.repository.labels[index].entities.push(event);
-    },
-    addToUnlabeled(event) {
-      this.repository.other_label.entities.push(event);
+    testUnlabeled() {
+      return [
+        { id: 78, value: 'car' }, { id: 54, value: 'hobo' }, { id: 55, value: 'my_leg' },
+      ];
     },
     formattedLabel(label) {
       if (label === undefined || label.entities === undefined) {

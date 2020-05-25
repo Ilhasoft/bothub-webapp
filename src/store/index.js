@@ -10,6 +10,7 @@ import Example from './example';
 import EvaluateExample from './evaluate-example';
 import Translate from './translate';
 import CachedFetch from './cached-fetch';
+import Entity from './entity';
 
 Vue.use(Vuex);
 
@@ -24,6 +25,7 @@ const store = new Vuex.Store({
     Translate,
     CachedFetch,
     EvaluateExample,
+    Entity,
   },
 });
 
