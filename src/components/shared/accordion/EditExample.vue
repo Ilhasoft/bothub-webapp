@@ -96,6 +96,7 @@
         <bh-button
           :disabled="textSelected === null"
           rounded
+          primary
           @click.prevent.stop="addPendingEntity"
         >
           {{ entityButtonText }}
@@ -107,7 +108,7 @@
             Cancel
           </bh-button>
           <bh-button
-            :disabled="!isValid || submitting || pendingEntities.length > 0"
+            :disabled="!isValid || submitting"
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             secondary
@@ -339,6 +340,8 @@ export default {
       }
     },
     async onSubmit() {
+      const entitiesSave = [...this.pendingEntities, ...this.entitiesToEdit];
+
       this.errors = {};
       this.submitting = true;
 
@@ -349,14 +352,13 @@ export default {
           version: this.version,
           text: this.text,
           intent: this.intent,
-          entities: this.entitiesToEdit,
+          entities: entitiesSave,
           language: this.language,
         });
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');
         }
-
         this.setUpdateRepository(true);
         return true;
       } catch (error) {
