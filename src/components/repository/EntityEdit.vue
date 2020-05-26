@@ -1,17 +1,18 @@
 <template>
   <div
-    class="repository-home__entities-list"
+    class="entity-edit__entities-list"
   >
-    <div class="repository-home__title repository-home__entities-list__header">
+    <div class="entity-edit__title entity-edit__entities-list__header">
       <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-loading
         :is-full-page="false"
         :active="loading" />
       <b-field
-        class="repository-home__button-group"
+        class="entity-edit__button-group"
         grouped>
         <b-button
-          class="repository-home__button"
+          v-if="canEdit"
+          class="entity-edit__button"
           type="is-primary"
           @click="editing=!editing">
           {{ editing ? 'Finish Editing' : 'Edit Groups' }}
@@ -19,7 +20,7 @@
         <b-button
           v-if="editing"
           :disabled="newLabel.creating"
-          class="repository-home__button"
+          class="entity-edit__button"
           type="is-secondary"
           @click="newLabel.creating = !newLabel.creating"
           @finished="createLabel">
@@ -27,11 +28,12 @@
         </b-button>
     </b-field></div>
     <div v-if="editingLabels.length > 0">
-      <div class="repository-home__entities-list__labeled-count">
-        {{ $t('webapp.home.entities_label') }}
+      <div class="entity-edit__entities-list__labeled-count">
+        {{ $tc('webapp.home.entities_label', editingLabels.length) }}
       </div>
       <create-badges-card
         v-if="newLabel.creating"
+        format
         title="New Label named"
         @finished="createLabel"
       />
@@ -86,6 +88,10 @@ export default {
     repositoryUuid: {
       type: String,
       required: true,
+    },
+    canEdit: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -271,4 +277,31 @@ export default {
 
 <style lang="scss" scoped>
 
+  .entity-edit {
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+  }
+
+  &__button {
+    color: white;
+    margin-left: 0.5rem;
+  }
+
+  &__entities-list {
+    padding: 1rem .5rem;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+
+  &__entities-list {
+    &__labeled-count {
+      margin: 1.5rem 0 1rem;
+    }
+  }
+}
 </style>

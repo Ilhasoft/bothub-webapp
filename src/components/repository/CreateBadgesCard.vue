@@ -10,6 +10,10 @@
           v-model="text"
           @blur="finished"
           @keyup.enter.native="finished"/>
+        <b-button
+          :disabled="!canSubmit"
+          type="is-primary"
+          @click="finished"> Enter </b-button>
       </b-field>
       <b-icon
         class="badges-card__icon"
@@ -21,6 +25,7 @@
 </template>
 
 <script>
+import { formatters } from '@/utils';
 
 export default {
   name: 'CreateBadgesCard',
@@ -33,18 +38,33 @@ export default {
       type: Boolean,
       default: null,
     },
+    format: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       text: '',
     };
   },
+  computed: {
+    canSubmit() {
+      return this.text && this.text.length > 0;
+    },
+  },
+  watch: {
+    text() {
+      if (!this.format || !this.text || this.text.length <= 0) return;
+      this.text = formatters.bothubItemKey()(this.text);
+    },
+  },
   methods: {
     close() {
       this.$emit('finished', null);
     },
     finished() {
-      this.$emit('finished', this.text);
+      if (this.canSubmit) this.$emit('finished', this.text);
     },
   },
 };

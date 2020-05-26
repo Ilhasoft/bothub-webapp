@@ -14,12 +14,12 @@
             <span
               v-for="language in repository.available_languages"
               :key="language"
+              class="repository-home__header__wrapper__badge"
             >
               <bh-badge
                 :transparent="language !== repository.language"
                 size="small"
                 color="primary"
-                class="repository-home__header__wrapper__badge"
               >
                 {{ language }}
               </bh-badge>
@@ -63,6 +63,7 @@
 
       <entity-edit
         :labels="testLabels()"
+        :can-edit="repository.authorization.can_contribute"
         :unlabeled="testUnlabeled()"
         :repository-uuid="repository.uuid"/>
     </div>
@@ -153,7 +154,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
 @import 'github-markdown-css/github-markdown.css';
@@ -162,14 +163,6 @@ export default {
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
-  }
-
-  &__button {
-    color: white;
-  }
-
-  &__button-group {
-    column-gap: 0.5rem;
   }
 
   &__header {
@@ -219,20 +212,13 @@ export default {
     }
   }
 
-  &__intents-list,
-  &__entities-list {
+  &__intents-list {
     padding: 1rem .5rem;
     &__header {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
-    }
-  }
-
-  &__entities-list {
-    &__labeled-count {
-      margin: 1.5rem 0 1rem;
     }
   }
 }
