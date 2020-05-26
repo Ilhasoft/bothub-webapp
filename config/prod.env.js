@@ -17,4 +17,5 @@ module.exports = {
   BOTHUB_WEBAPP_SENTRY: JSON.stringify(process.env.BOTHUB_WEBAPP_SENTRY),
   BOTHUB_WEBAPP_USE_HOTJAR: JSON.stringify(process.env.BOTHUB_USE_HOTJAR || true),
   BOTHUB_WEBAPP_HOTJAR_ID: JSON.stringify(process.env.BOTHUB_HOTJAR_ID),
+  BOTHUB_WEBAPP_LIGHTHOUSE_KEY: JSON.stringify(process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY),
 }

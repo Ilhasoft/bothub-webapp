@@ -8,13 +8,20 @@
       :label="field.label"
       :type="field.errors && 'is-danger'"
       :message="field.errors || field.helpText">
-      <component
-        :v-if="field.inputComponent"
-        :is="field.inputComponent"
-        v-bind="field.inputProps"
-        v-model="formData[field.name]"
-        :initial-data="initialData[field.name]"
-        @input="update()" />
+      <b-field
+        :grouped="hasHelpIcon(field)"
+        :group-multiline="hasHelpIcon(field)">
+        <component
+          :v-if="field.inputComponent"
+          :is="field.inputComponent"
+          v-bind="field.inputProps"
+          v-model="formData[field.name]"
+          :initial-data="initialData[field.name]"
+          @input="update()" />
+        <div
+          v-if="hasHelpIcon(field)"
+          class="control form__add-on"> <help-widget /> </div>
+      </b-field>
     </b-field>
   </div>
 </template>
@@ -28,6 +35,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -45,6 +53,7 @@ const relatedInputComponent = {
 
 const components = {
   Messages,
+  HelpWidget,
 };
 
 export default {
@@ -114,6 +123,9 @@ export default {
   methods: {
     update() {
       this.$emit('input', this.formData);
+    },
+    hasHelpIcon(field) {
+      return field.name === 'algorithm';
     },
   },
 };
