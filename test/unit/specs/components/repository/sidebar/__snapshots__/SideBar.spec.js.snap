@@ -23,7 +23,7 @@ exports[`SideBar.vue renders correctly 1`] = `
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
         <b-menu-item-stub label="some specific text" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="settings" animation="fade" tag="a" ariarole="">
+        <b-menu-item-stub icon="cog" animation="fade" tag="a" ariarole="">
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
