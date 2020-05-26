@@ -4,7 +4,7 @@
   >
     <div class="repository-home__title repository-home__entities-list__header">
       <b-loading
-        :is-full-screen="false"
+        :is-full-page="false"
         :active="loading" />
       <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-field
@@ -46,7 +46,7 @@
         @onRemove="moving.fromEntity = $event; moving.from = i"
         @onAdd="moving.toEntity = $event; moving.to = i"
         @onRemoveCard="onRemoveEntityGroup(i)"
-        @onCloseTag="onRemoveEntity"
+        @onCloseTag="onRemoveEntity($event, i)"
       />
     </div>
     <badges-card
@@ -57,6 +57,7 @@
       dark
       @onRemove="moving.fromEntity = $event; moving.from = 'unlabeled'"
       @onAdd="moving.toEntity = $event; moving.to = 'unlabeled'"
+      @onCloseTag="onRemoveEntity($event, null)"
     />
   </div>
 
@@ -143,6 +144,7 @@ export default {
       'editEntity',
       'addLabel',
       'deleteEntity',
+      'deleteLabel',
     ]),
     updateLocalData() {
       this.editingLabels = [...this.labels];
@@ -172,13 +174,6 @@ export default {
         this.clearNewLabel();
       } finally {
         this.loading = false;
-      }
-    },
-    async removeEntity(entityId, labelIndex = null) {
-      if (labelIndex) {
-        this.editingLabels[labelIndex].entities.filter(entity => entity.id !== entityId);
-      } else {
-        this.editingUnlabeled.filter(entity => entity.id !== entityId);
       }
     },
     moveEntityLocal(entity, fromLabelIndex = null, toLabelIndex = null) {
@@ -213,6 +208,18 @@ export default {
         this.loading = false;
       }
     },
+    async removeEntity(entity, labelIndex) {
+      console.log({entity, labelIndex})
+      if (labelIndex != null) {
+        const removeIndex = this.editingLabels[labelIndex].entities
+          .findIndex(listEntity => listEntity.id === entity.id);
+        if (removeIndex >= 0) this.editingLabels[labelIndex].entities.splice(removeIndex, 1);
+      } else {
+        const removeIndex = this.editingUnlabeled
+          .findIndex(listEntity => listEntity.id === entity.id);
+        if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
+      }
+    },
     onRemoveEntity(entity, labelIndex = null) {
       this.$buefy.dialog.alert({
         title: 'Delete Entity',
@@ -229,7 +236,7 @@ export default {
               version: this.version,
               repositoryId: this.repositoryUuid,
             });
-            this.editingLabels.splice(labelIndex, 1);
+            this.removeEntity(entity, labelIndex);
           } finally {
             this.loading = false;
           }
@@ -247,7 +254,7 @@ export default {
         onConfirm: async () => {
           this.loading = true;
           try {
-            await this.deleteEntity({
+            await this.deleteLabel({
               labelid: this.editingLabels[labelIndex].id,
               version: this.version,
               repositoryId: this.repositoryUuid,

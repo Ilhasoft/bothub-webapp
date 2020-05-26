@@ -11,6 +11,10 @@ export default {
     return new Promise(resolve => setTimeout(resolve, 3000));
   },
 
+  async deleteLabel(store, { entityId, version }) {
+    return new Promise(resolve => setTimeout(resolve, 3000));
+  },
+
   async deleteEntity(store, { entityId, version, repositoryId }) {
     return new Promise(resolve => setTimeout(resolve, 2000));
   },
