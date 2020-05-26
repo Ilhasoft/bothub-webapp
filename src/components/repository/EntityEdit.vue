@@ -3,10 +3,10 @@
     class="repository-home__entities-list"
   >
     <div class="repository-home__title repository-home__entities-list__header">
+      <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-loading
         :is-full-page="false"
         :active="loading" />
-      <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-field
         class="repository-home__button-group"
         grouped>
@@ -209,7 +209,6 @@ export default {
       }
     },
     async removeEntity(entity, labelIndex) {
-      console.log({entity, labelIndex})
       if (labelIndex != null) {
         const removeIndex = this.editingLabels[labelIndex].entities
           .findIndex(listEntity => listEntity.id === entity.id);
