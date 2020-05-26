@@ -136,3 +136,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .field.is-grouped.is-grouped-multiline {
+    align-items: center;
+  }
+</style>
