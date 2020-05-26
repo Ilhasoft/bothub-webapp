@@ -15,7 +15,7 @@
           class="entity-edit__button"
           type="is-primary"
           @click="editing=!editing">
-          {{ editing ? 'Finish Editing' : 'Edit Groups' }}
+          {{ editing ? $t('webapp.home.finish_editing') : $t('webapp.home.edit_groups') }}
         </b-button>
         <b-button
           v-if="editing"
@@ -24,7 +24,7 @@
           type="is-secondary"
           @click="newLabel.creating = !newLabel.creating"
           @finished="createLabel">
-          Create new group
+          {{ $t('webapp.home.create_new_group') }}
         </b-button>
     </b-field></div>
     <div v-if="editingLabels.length > 0">
@@ -33,8 +33,8 @@
       </div>
       <create-badges-card
         v-if="newLabel.creating"
+        :title="$t('webapp.home.new_group_named', {})"
         format
-        title="New Label named"
         @finished="createLabel"
       />
       <badges-card

@@ -8,12 +8,14 @@
         <span>{{ title }}</span>
         <b-input
           v-model="text"
+          class="badges-card__input"
           @blur="finished"
-          @keyup.enter.native="finished"/>
+          @keyup.enter.native.prevent.stop="finished"/>
         <b-button
           :disabled="!canSubmit"
+          class="badges-card__button"
           type="is-primary"
-          @click="finished"> Enter </b-button>
+          @click.prevent.stop="finished"> {{ $t('webapp.home.enter') }} </b-button>
       </b-field>
       <b-icon
         class="badges-card__icon"
@@ -97,6 +99,10 @@ export default {
     &__icon {
       color: #CFD5D9;
       cursor: pointer;
+    }
+
+    &__input {
+      margin-left: 0.5rem;
     }
   }
 </style>

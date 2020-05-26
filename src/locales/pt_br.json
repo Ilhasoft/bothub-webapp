@@ -161,7 +161,12 @@
       "unlabeled": "<strong>{n}</strong> entidades não agrupadas | <strong>{n}</strong> entidade não agrupadas | <strong>{n}</strong> entidades não agrupadas",
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
-      "no_repo": "Nenhum repositório encontrado."
+      "no_repo": "Nenhum repositório encontrado.",
+      "edit_groups": "Editar grupos",
+      "finish_editing": "Concluir edição",
+      "enter": "Enviar",
+      "create_new_group": "Criar grupo",
+      "new_group_named": "Novo grupo de entidades: {name}"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",

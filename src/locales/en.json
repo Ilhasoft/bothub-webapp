@@ -159,7 +159,12 @@
       "unlabeled": "<strong>{n}</strong> unlabeled entities | <strong>{n}</strong> unlabeled entity | <strong>{h}</strong> unlabeled entities",
       "all_categories": "All categories",
       "all_languages": "All languages",
-      "no_repo": "Repositories not found."
+      "no_repo": "Repositories not found.",
+      "edit_groups": "Edit groups",
+      "finish_editing": "Finish editing",
+      "enter": "Enter",
+      "create_new_group": "Create new group",
+      "new_group_named": "New entity group named {name}"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
