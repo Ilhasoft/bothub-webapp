@@ -3,6 +3,9 @@
     class="repository-home__entities-list"
   >
     <div class="repository-home__title repository-home__entities-list__header">
+      <b-loading
+        :is-full-screen="false"
+        :active="loading" />
       <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-field
         class="repository-home__button-group"
@@ -42,7 +45,7 @@
         closable
         @onRemove="moving.fromEntity = $event; moving.from = i"
         @onAdd="moving.toEntity = $event; moving.to = i"
-        @onRemoveCard="onRemoveEntityGroup"
+        @onRemoveCard="onRemoveEntityGroup(i)"
         @onCloseTag="onRemoveEntity"
       />
     </div>
@@ -107,7 +110,12 @@ export default {
       version: 'getSelectedVersion',
     }),
     isMoveReady() {
-      return this.moving.to !== null && this.moving.from !== null && (this.moving.toEntity && this.moving.fromEntity && this.moving.toEntity.id === this.moving.fromEntity.id);
+      return this.moving.to !== null
+      && this.moving.from !== null
+      && this.moving.to !== this.moving.from
+      && this.moving.toEntity
+      && this.moving.fromEntity
+      && this.moving.toEntity.id === this.moving.fromEntity.id;
     },
   },
   watch: {
@@ -173,14 +181,7 @@ export default {
         this.editingUnlabeled.filter(entity => entity.id !== entityId);
       }
     },
-    async moveEntity(entity, fromLabelIndex = null, toLabelIndex = null) {
-      await this.editEntity({
-        entityId: entity.id,
-        version: this.version,
-        repositoryId: this.repositoryUuid,
-        labelId: toLabelIndex ? this.editingLabels[toLabelIndex].id : null,
-      });
-
+    moveEntityLocal(entity, fromLabelIndex = null, toLabelIndex = null) {
       if (toLabelIndex != null) {
         this.editingLabels[toLabelIndex].entities.push(entity);
       } else {
@@ -195,6 +196,21 @@ export default {
         const removeIndex = this.editingUnlabeled
           .findIndex(listEntity => listEntity.id === entity.id);
         if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
+      }
+    },
+    async moveEntity(entity, fromLabelIndex = null, toLabelIndex = null) {
+      this.loading = true;
+      try {
+        await this.editEntity({
+          entityId: entity.id,
+          version: this.version,
+          repositoryId: this.repositoryUuid,
+          labelId: toLabelIndex ? this.editingLabels[toLabelIndex].id : null,
+        });
+
+        this.moveEntityLocal(entity, fromLabelIndex, toLabelIndex);
+      } finally {
+        this.loading = false;
       }
     },
     onRemoveEntity(entity, labelIndex = null) {
@@ -236,7 +252,7 @@ export default {
               version: this.version,
               repositoryId: this.repositoryUuid,
             });
-            this.removeLabel(labelIndex);
+            this.editingLabels.splice(labelIndex, 1);
           } finally {
             this.loading = false;
           }
