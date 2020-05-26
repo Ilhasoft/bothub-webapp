@@ -20,7 +20,10 @@
           @input="update()" />
         <div
           v-if="hasHelpIcon(field)"
-          class="control form__add-on"> <help-widget /> </div>
+          class="control">
+          <help-widget
+            :article-id="helpArticleId" />
+        </div>
       </b-field>
     </b-field>
   </div>
@@ -115,6 +118,9 @@ export default {
       /* istanbul ignore next */
       return (this.errors.non_field_errors
         && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
+    },
+    helpArticleId() {
+      return process.env.BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID;
     },
   },
   mounted() {

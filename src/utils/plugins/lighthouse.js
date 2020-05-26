@@ -1,9 +1,12 @@
 /* eslint-disable func-names */
 export default {
   addLighthouse() {
-    if (!process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY) return;
+    if (window.hdlh || !process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY) return;
     window.hdlh = {
       widget_key: process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY,
+      primary_color: '#2BBFAC',
+      brand: 'Bothub',
+      disable_contact_button: true,
       onLoad: () => { window.Lighthouse.hideButton(); },
       onHide: () => { window.Lighthouse.hideButton(); },
       onShow: () => { window.Lighthouse.showButton(); },
@@ -20,5 +23,10 @@ export default {
     } else {
       window.Lighthouse.show();
     }
+  },
+
+  navigateToArticle(id) {
+    if (!window.Lighthouse || id) return;
+    window.Lighthouse.navigate('article', id);
   },
 };

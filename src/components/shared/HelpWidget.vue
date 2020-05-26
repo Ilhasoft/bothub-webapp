@@ -9,12 +9,23 @@
 import lighthouse from '@/utils/plugins/lighthouse';
 
 export default {
+  name: 'HelpWidget',
+  props: {
+    articleId: {
+      type: String,
+      default: null,
+    },
+  },
   mounted() {
     lighthouse.addLighthouse();
+  },
+  beforeDestroy() {
+    lighthouse.setPanelHidden(true);
   },
   methods: {
     open() {
       lighthouse.setPanelHidden(false);
+      lighthouse.navigateToArticle(this.articleId);
     },
   },
 };
