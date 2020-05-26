@@ -26,7 +26,7 @@ export default {
   },
 
   navigateToArticle(id) {
-    if (!window.Lighthouse || id) return;
+    if (!window.Lighthouse || !id) return;
     window.Lighthouse.navigate('article', id);
   },
 };
