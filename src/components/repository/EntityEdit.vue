@@ -181,7 +181,6 @@ export default {
       }
     },
     moveEntityLocal(entity, fromLabelIndex = null, toLabelIndex = null) {
-      console.log({fromLabelIndex, toLabelIndex})
       if (toLabelIndex != null) {
         this.editingLabels[toLabelIndex].entities.push(entity);
       } else {
@@ -203,9 +202,9 @@ export default {
       try {
         await this.editEntity({
           entityId: entity.entity_id,
-          version: this.version,
+          name: entity.value,
           repositoryId: this.repositoryUuid,
-          labelId: toLabelIndex ? this.editingLabels[toLabelIndex].group_id : null,
+          groupId: toLabelIndex != null ? this.editingLabels[toLabelIndex].group_id : null,
         });
 
         this.moveEntityLocal(entity, fromLabelIndex, toLabelIndex);
@@ -248,7 +247,6 @@ export default {
       });
     },
     onRemoveEntityGroup(labelIndex) {
-      console.log({labelIndex, label: this.editingLabels[labelIndex], id: this.editingLabels[labelIndex].group_id})
       this.$buefy.dialog.alert({
         title: 'Delete Group',
         message: 'Are you sure you want to delete this entity group?',

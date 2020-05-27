@@ -21,6 +21,18 @@ export default {
     return request.$http.delete(`v2/repository/entity/group/${groupUuid}`);
   },
 
+  editEntity(entityId, name, repositoryUUID, groupId) {
+    return request.$http.put(
+      `v2/repository/entities/${entityId}/`,
+      {
+        id: entityId,
+        value: name,
+        repository: repositoryUUID,
+        group_id: groupId,
+      },
+    );
+  },
+
   search(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,

@@ -2,9 +2,9 @@ import entity from '@/api/entity';
 
 export default {
   async editEntity(store, {
-    entityId, name, version, repositoryId, labelId,
+    entityId, name, repositoryUUID, groupId = null,
   }) {
-    return new Promise(resolve => setTimeout(resolve, 3000));
+    return entity.editEntity(entityId, name, repositoryUUID, groupId);
   },
 
   async addLabel(store, { name, repositoryId, version }) {
