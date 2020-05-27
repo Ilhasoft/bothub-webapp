@@ -22,19 +22,19 @@
           :disabled="newLabel.creating"
           class="entity-edit__button"
           type="is-secondary"
-          @click="newLabel.creating = !newLabel.creating"
-          @finished="createLabel">
+          @click="newLabel.creating = !newLabel.creating">
           {{ $t('webapp.home.create_new_group') }}
         </b-button>
     </b-field></div>
-    <div v-if="editingLabels.length > 0">
-      <div class="entity-edit__entities-list__labeled-count">
+    <div>
+      <div v-if="editingLabels.length > 0" class="entity-edit__entities-list__labeled-count">
         {{ $tc('webapp.home.entities_label', editingLabels.length) }}
       </div>
       <create-badges-card
         v-if="newLabel.creating"
         :title="$t('webapp.home.new_group_named', {})"
         format
+        @close="clearNewLabel"
         @finished="createLabel"
       />
       <badges-card
@@ -166,17 +166,12 @@ export default {
       if (!text || text.length === 0) return;
       this.loading = true;
       try {
-        await this.addLabel({
+        const newLabel = await this.addLabel({
           name: text,
           repositoryId: this.repositoryUuid,
           version: this.version,
         });
-        // TODO: get new label id
-        this.editingLabels.push({
-          id: this.editingLabels.length,
-          value: text,
-          entities: [],
-        });
+        this.editingLabels.push({ ...newLabel.data, entities: [] });
         this.clearNewLabel();
       } finally {
         this.loading = false;

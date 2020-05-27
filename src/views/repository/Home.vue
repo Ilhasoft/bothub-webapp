@@ -62,9 +62,9 @@
       </div>
 
       <entity-edit
-        :labels="testLabels()"
+        :labels="repository.groups || []"
         :can-edit="repository.authorization.can_contribute"
-        :unlabeled="testUnlabeled()"
+        :unlabeled="unlabeled"
         :repository-uuid="repository.uuid"/>
     </div>
   </repository-view-base>
@@ -109,6 +109,10 @@ export default {
     };
   },
   computed: {
+    unlabeled() {
+      if (!this.repository || !this.repository.other_group) return [];
+      return this.repository.other_group.entities;
+    },
     hasIntents() {
       return this.repository.intents_list.length > 0;
     },

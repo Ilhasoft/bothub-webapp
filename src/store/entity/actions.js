@@ -8,7 +8,7 @@ export default {
   },
 
   async addLabel(store, { name, repositoryId, version }) {
-    return new Promise(resolve => setTimeout(resolve, 3000));
+    return entity.addGroup(name, repositoryId, version);
   },
 
   async deleteLabel(store, { entityId, version }) {

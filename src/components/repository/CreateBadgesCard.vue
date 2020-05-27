@@ -4,12 +4,12 @@
     <div class="badges-card__header">
       <b-field
         class="badges-card__title"
-        grouped>
+        grouped
+        group-multiline>
         <span>{{ title }}</span>
         <b-input
           v-model="text"
           class="badges-card__input"
-          @blur="finished"
           @keyup.enter.native.prevent.stop="finished"/>
         <b-button
           :disabled="!canSubmit"
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     close() {
-      this.$emit('finished', null);
+      this.$emit('close');
     },
     finished() {
       if (this.canSubmit) this.$emit('finished', this.text);
@@ -102,6 +102,7 @@ export default {
     }
 
     &__input {
+      max-width: 80%;
       margin-left: 0.5rem;
     }
   }
