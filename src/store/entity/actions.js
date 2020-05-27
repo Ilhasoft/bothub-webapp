@@ -11,8 +11,8 @@ export default {
     return entity.addGroup(name, repositoryId, version);
   },
 
-  async deleteLabel(store, { entityId, version }) {
-    return new Promise(resolve => setTimeout(resolve, 3000));
+  async deleteLabel(store, { groupUuid }) {
+    return entity.deleteGroup(groupUuid);
   },
 
   async deleteEntity(store, { entityId, version, repositoryId }) {

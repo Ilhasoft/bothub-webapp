@@ -17,6 +17,10 @@ export default {
     );
   },
 
+  deleteGroup(groupUuid) {
+    return request.$http.delete(`v2/repository/entity/group/${groupUuid}`);
+  },
+
   search(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,

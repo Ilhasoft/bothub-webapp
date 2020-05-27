@@ -126,6 +126,9 @@ export default {
     },
   },
   watch: {
+    unlabeled() {
+      this.updateLocalData();
+    },
     editing() {
       this.clearNewLabel();
     },
@@ -201,7 +204,7 @@ export default {
           entityId: entity.id,
           version: this.version,
           repositoryId: this.repositoryUuid,
-          labelId: toLabelIndex ? this.editingLabels[toLabelIndex].id : null,
+          labelId: toLabelIndex ? this.editingLabels[toLabelIndex].group_id : null,
         });
 
         this.moveEntityLocal(entity, fromLabelIndex, toLabelIndex);
@@ -244,6 +247,7 @@ export default {
       });
     },
     onRemoveEntityGroup(labelIndex) {
+      console.log({labelIndex, label: this.editingLabels[labelIndex], id: this.editingLabels[labelIndex].group_id})
       this.$buefy.dialog.alert({
         title: 'Delete Group',
         message: 'Are you sure you want to delete this entity group?',
@@ -255,9 +259,7 @@ export default {
           this.loading = true;
           try {
             await this.deleteLabel({
-              labelid: this.editingLabels[labelIndex].id,
-              version: this.version,
-              repositoryId: this.repositoryUuid,
+              groupUuid: this.editingLabels[labelIndex].group_id,
             });
             this.editingLabels.splice(labelIndex, 1);
           } finally {
