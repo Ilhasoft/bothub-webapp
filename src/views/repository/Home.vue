@@ -110,8 +110,9 @@ export default {
   },
   computed: {
     unlabeled() {
-      if (!this.repository || !this.repository.other_group) return [];
-      return this.repository.other_group.entities;
+      console.log(this.repository.attributes.other_group);
+      if (!this.repository || !this.repository.attributes.other_group) return [];
+      return this.repository.attributes.other_group.entities;
     },
     hasIntents() {
       return this.repository.intents_list.length > 0;

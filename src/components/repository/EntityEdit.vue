@@ -122,7 +122,7 @@ export default {
       && this.moving.to !== this.moving.from
       && this.moving.toEntity
       && this.moving.fromEntity
-      && this.moving.toEntity.id === this.moving.fromEntity.id;
+      && this.moving.toEntity.entity_id === this.moving.fromEntity.entity_id;
     },
   },
   watch: {
@@ -181,6 +181,7 @@ export default {
       }
     },
     moveEntityLocal(entity, fromLabelIndex = null, toLabelIndex = null) {
+      console.log({fromLabelIndex, toLabelIndex})
       if (toLabelIndex != null) {
         this.editingLabels[toLabelIndex].entities.push(entity);
       } else {
@@ -189,11 +190,11 @@ export default {
 
       if (fromLabelIndex != null) {
         const removeIndex = this.editingLabels[fromLabelIndex].entities
-          .findIndex(listEntity => listEntity.id === entity.id);
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex >= 0) this.editingLabels[fromLabelIndex].entities.splice(removeIndex, 1);
       } else {
         const removeIndex = this.editingUnlabeled
-          .findIndex(listEntity => listEntity.id === entity.id);
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
       }
     },
@@ -201,7 +202,7 @@ export default {
       this.loading = true;
       try {
         await this.editEntity({
-          entityId: entity.id,
+          entityId: entity.entity_id,
           version: this.version,
           repositoryId: this.repositoryUuid,
           labelId: toLabelIndex ? this.editingLabels[toLabelIndex].group_id : null,
@@ -215,11 +216,11 @@ export default {
     async removeEntity(entity, labelIndex) {
       if (labelIndex != null) {
         const removeIndex = this.editingLabels[labelIndex].entities
-          .findIndex(listEntity => listEntity.id === entity.id);
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex >= 0) this.editingLabels[labelIndex].entities.splice(removeIndex, 1);
       } else {
         const removeIndex = this.editingUnlabeled
-          .findIndex(listEntity => listEntity.id === entity.id);
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
       }
     },
@@ -235,7 +236,7 @@ export default {
           this.loading = true;
           try {
             await this.deleteEntity({
-              entityId: entity.id,
+              entityId: entity.entity_id,
               version: this.version,
               repositoryId: this.repositoryUuid,
             });
