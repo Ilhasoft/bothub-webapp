@@ -27,7 +27,9 @@
         </b-button>
     </b-field></div>
     <div>
-      <div v-if="editingLabels.length > 0" class="entity-edit__entities-list__labeled-count">
+      <div
+        v-if="editingLabels.length > 0"
+        class="entity-edit__entities-list__labeled-count">
         {{ $tc('webapp.home.entities_label', editingLabels.length) }}
       </div>
       <create-badges-card
@@ -39,6 +41,7 @@
       />
       <badges-card
         v-for="(label, i) in editingLabels"
+        :identifier="label.group_id"
         :key="i"
         :list="label.entities"
         :title="$tc('webapp.home.labeled', label.entities.length, { label_value: label.value })"
@@ -56,6 +59,7 @@
       :examples-count="0"
       :edit="editing"
       :title="$tc('webapp.home.unlabeled', editingUnlabeled.length)"
+      identifier="unlabeled"
       dark
       @onRemove="moving.fromEntity = $event; moving.from = 'unlabeled'"
       @onAdd="moving.toEntity = $event; moving.to = 'unlabeled'"

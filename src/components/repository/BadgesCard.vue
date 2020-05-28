@@ -1,9 +1,6 @@
 <template>
-  <component
-    :is="edit ? 'drop' : 'div'"
-    :class="['badges-card', dark ? 'badges-card__dark' : '' ]"
-    mode="cut"
-    @drop="paste">
+  <div
+    :class="['badges-card', dark ? 'badges-card__dark' : '' ]">
     <div class="badges-card__header">
       <div v-html="title" />
       <b-icon
@@ -13,42 +10,43 @@
         size="is-medium"
         @click.native="onRemoveCard" />
     </div>
-    <div
-      class="badges-card__wrapper">
-      <component
+    <draggable
+      :disabled="!edit"
+      v-model="list"
+      :sort="false"
+      :data-id-attr="identifier"
+      :move="onMove"
+      group="entities"
+      class="badges-card__wrapper"
+      @end="onEnd">
+      <b-tag
         v-for="(item, i) in list"
-        :is="edit ? 'drag' : 'div'"
         :key="i"
-        :data="item"
-        @cut="remove">
-        <b-tag
-          :class="[
-            'badges-card__wrapper__badge',
-            getEntityClass(item.value || item),
-          ]"
-          :closable="edit"
-          rounded
-          size="small"
-          @close="close(item)"
-        >
-          <span>{{ item.value || item }}</span>
-        </b-tag>
-    </component></div>
+        :class="[
+          'badges-card__wrapper__badge',
+          getEntityClass(item.value || item),
+        ]"
+        :closable="edit"
+        rounded
+        size="small"
+        @close="close(item)"
+      >
+        <span>{{ item.value || item }}</span>
+    </b-tag></draggable>
     <div v-if="examplesCount">
       <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
     </div>
-  </component>
+  </div>
 </template>
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import { Drag, Drop } from 'vue-easy-dnd';
+import draggable from 'vuedraggable';
 
 export default {
   name: 'BadgesCard',
   components: {
-    Drag,
-    Drop,
+    draggable,
   },
   props: {
     title: {
@@ -75,6 +73,16 @@ export default {
       type: Boolean,
       default: null,
     },
+    identifier: {
+      type: null,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      entity: null,
+      to: null,
+    };
   },
   computed: {
     nameList() {
@@ -88,6 +96,20 @@ export default {
         this.nameList,
       );
       return `entity-${color}`;
+    },
+    onEnd() {
+      console.log('ended');
+      if (this.entity != null && this.to != null) {
+        this.$emit('onMove', { to: this.to, entity: this.entity });
+        this.entity = null;
+        this.to = null;
+      }
+    },
+    onMove({ draggedContext, relatedContext }) {
+      this.to = relatedContext.component.$attrs['data-id-attr'];
+      this.entity = draggedContext.element;
+      console.log('moved');
+      return false;
     },
     remove(event) {
       if (this.edit) this.$emit('onRemove', event.data);
