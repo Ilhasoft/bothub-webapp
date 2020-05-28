@@ -104,6 +104,12 @@ export default {
     &__input {
       max-width: 80%;
       margin-left: 0.5rem;
+      margin-bottom: 0;
     }
+  }
+
+  .field.is-grouped.is-grouped-multiline > .control:last-child,
+  .field.is-grouped.is-grouped-multiline > .control:not(:last-child) {
+    margin-bottom: 0;
   }
 </style>
