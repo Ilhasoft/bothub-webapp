@@ -158,7 +158,7 @@
       "entities_label": "Esta inteligência possui {n} grupos de entidade. | Esta inteligência possui {n} grupo de entidade. | Esta inteligência possui {n} grupos de entidade.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
       "labeled": "<strong>{n}</strong> entidades agrupadas sobre <strong>{label_value}</strong> | <strong>{n}</strong> entidade agrupada sobre <strong>{label_value}</strong> | <strong>{n}</strong> entidades agrupadas sobre <strong>{label_value}</strong>",
-      "unlabeled": "<strong>{n}</strong> entidades não agrupadas | <strong>{n}</strong> entidade não agrupadas | <strong>{n}</strong> entidades não agrupadas",
+      "unlabeled": "<strong>{n}</strong> entidades não agrupadas | <strong>{n}</strong> entidade não agrupada | <strong>{n}</strong> entidades não agrupadas",
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
       "no_repo": "Nenhum repositório encontrado.",

@@ -62,9 +62,9 @@
       </div>
 
       <entity-edit
-        :labels="repository.groups || []"
+        :groups="repository.groups || []"
         :can-edit="repository.authorization.can_contribute"
-        :unlabeled="unlabeled"
+        :ungrouped="unlabeled"
         :repository-uuid="repository.uuid"/>
     </div>
   </repository-view-base>
@@ -122,17 +122,6 @@ export default {
     labeledEntitiesCount() {
       return this.repository.labels.reduce((acc, label) => acc + label.entities.length, 0);
     },
-    hasLabels() {
-      if (
-        !this.repository.labels
-        || !this.repository.other_label
-        || !this.repository.other_label.entities
-      ) {
-        return false;
-      }
-
-      return this.repository.labels.length > 0 || this.repository.other_label.entities.length > 0;
-    },
   },
   watch: {
     edit() {
@@ -140,17 +129,6 @@ export default {
     },
   },
   methods: {
-    testLabels() {
-      return [
-        { id: 25, value: 'Animal', entities: [{ id: 33, value: 'cat' }, { id: 36, value: 'badger' }, { id: 43, value: 'possum' }] },
-        { id: 66, value: 'Flower', entities: [{ id: 64, value: 'amelia' }, { id: 69, value: 'daisy' }, { id: 24, value: 'dandelion' }] },
-      ];
-    },
-    testUnlabeled() {
-      return [
-        { id: 78, value: 'car' }, { id: 54, value: 'hobo' }, { id: 55, value: 'my_leg' },
-      ];
-    },
     formattedEntityTitle() {
       return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
     },

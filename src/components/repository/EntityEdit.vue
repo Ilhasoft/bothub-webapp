@@ -39,7 +39,7 @@
         @close="clearNewGroup"
         @finished="createGroup"
       />
-      <badges-card
+      <badges-card-drag-drop
         v-for="(label, i) in editingGroups"
         :identifier="label.group_id"
         :key="i"
@@ -53,11 +53,11 @@
         @onCloseTag="onRemoveEntity($event, i)"
       />
     </div>
-    <badges-card
-      :list="editingUnlabeled"
+    <badges-card-drag-drop
+      :list="editingUngrouped"
       :examples-count="0"
       :edit="editing"
-      :title="$tc('webapp.home.unlabeled', editingUnlabeled.length)"
+      :title="$tc('webapp.home.unlabeled', editingUngrouped.length)"
       identifier="ungrouped"
       dark
       @onCloseTag="onRemoveEntity($event, null)"
@@ -68,14 +68,14 @@
 </template>
 
 <script>
-import BadgesCard from '@/components/repository/BadgesCard';
+import BadgesCardDragDrop from '@/components/repository/BadgesCardDragDrop';
 import CreateBadgesCard from '@/components/repository/CreateBadgesCard';
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'EntityEdit',
   components: {
-    BadgesCard,
+    BadgesCardDragDrop,
     CreateBadgesCard,
   },
   props: {
@@ -83,7 +83,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    unlabeled: {
+    ungrouped: {
       type: Array,
       default: () => [],
     },
@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       editingGroups: [],
-      editingUnlabeled: [],
+      editingUngrouped: [],
       newGroup: {
         creating: false,
         text: '',
@@ -115,10 +115,10 @@ export default {
   },
   watch: {
     groups() {
-      this.updateLocalData();
+      if (this.groups) this.editingGroups = [...this.groups];
     },
     unlabeled() {
-      this.updateLocalData();
+      if (this.ungrouped) this.editingUngrouped = [...this.unlabeled];
     },
     editing() {
       this.clearNewGroup();
@@ -135,8 +135,8 @@ export default {
       'deleteGroup',
     ]),
     updateLocalData() {
-      this.editingGroups = [...this.groups];
-      this.editingUnlabeled = [...this.unlabeled];
+      if (this.groups) this.editingGroups = [...this.groups];
+      if (this.ungrouped) this.editingUngrouped = [...this.ungrouped];
     },
     clearNewGroup() {
       this.newGroup = {
@@ -165,7 +165,7 @@ export default {
           .findIndex(group => group.group_id === from);
         if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = sourceList;
       } else {
-        this.editingUnlabeled.entities = sourceList;
+        this.editingUngrouped.entities = sourceList;
       }
 
       if (to !== 'ungrouped') {
@@ -173,7 +173,7 @@ export default {
           .findIndex(group => group.group_id === to);
         if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = targetList;
       } else {
-        this.editingUnlabeled.entities = targetList;
+        this.editingUngrouped.entities = targetList;
       }
     },
     async moveEntity(event) {
@@ -200,9 +200,9 @@ export default {
           .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex >= 0) this.editingGroups[labelIndex].entities.splice(removeIndex, 1);
       } else {
-        const removeIndex = this.editingUnlabeled
+        const removeIndex = this.editingUngrouped
           .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
+        if (removeIndex >= 0) this.editingUngrouped.splice(removeIndex, 1);
       }
     },
     onRemoveEntity(entity, labelIndex = null) {
@@ -242,8 +242,8 @@ export default {
             await this.deleteGroup({
               groupUuid: this.editingGroups[labelIndex].group_id,
             });
-            this.editingUnlabeled = [
-              ...this.editingUnlabeled,
+            this.editingUngrouped = [
+              ...this.editingUngrouped,
               ...this.editingGroups[labelIndex].entities];
             this.editingGroups.splice(labelIndex, 1);
           } finally {

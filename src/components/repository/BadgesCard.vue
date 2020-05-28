@@ -1,53 +1,31 @@
 <template>
-  <div
-    :class="['badges-card', dark ? 'badges-card__dark' : '' ]">
-    <div class="badges-card__header">
-      <div v-html="title" />
-      <b-icon
-        v-if="closable && edit"
-        class="badges-card__icon"
-        icon="close"
-        size="is-medium"
-        @click.native="onRemoveCard" />
-    </div>
-    <draggable
-      :disabled="!edit"
-      v-model="localList"
-      :sort="false"
-      :data-id-attr="identifier"
-      :move="onMove"
-      group="entities"
-      class="badges-card__wrapper"
-      @end="onEnd">
+  <div class="badges-card">
+    <div v-html="title" />
+    <div class="badges-card__wrapper">
       <b-tag
-        v-for="(item, i) in localList"
+        v-for="(item, i) in list"
         :key="i"
         :class="[
           'badges-card__wrapper__badge',
-          getEntityClass(item.value || item),
+          getEntityClass(item),
         ]"
-        :closable="edit"
         rounded
         size="small"
-        @close="close(item)"
       >
-        <span>{{ item.value || item }}</span>
-    </b-tag></draggable>
+        <span>{{ item || item.value }}</span>
+      </b-tag>
+    </div>
     <div v-if="examplesCount">
-      <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
+      <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
     </div>
   </div>
 </template>
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import draggable from 'vuedraggable';
 
 export default {
   name: 'BadgesCard',
-  components: {
-    draggable,
-  },
   props: {
     title: {
       type: String,
@@ -61,43 +39,11 @@ export default {
       type: Number,
       default: null,
     },
-    dark: {
-      type: Boolean,
-      default: null,
-    },
-    edit: {
-      type: Boolean,
-      default: false,
-    },
-    closable: {
-      type: Boolean,
-      default: null,
-    },
-    identifier: {
-      type: null,
-      default: null,
-    },
-  },
-  data() {
-    return {
-      entity: null,
-      to: null,
-      localList: [],
-      targetList: [],
-    };
   },
   computed: {
     nameList() {
-      return this.localList.map(item => item.value || item);
+      return this.list.map(item => item.value || item);
     },
-  },
-  watch: {
-    list() {
-      this.updateLocalList();
-    },
-  },
-  mounted() {
-    this.updateLocalList();
   },
   methods: {
     getEntityClass(entity) {
@@ -106,33 +52,6 @@ export default {
         this.nameList,
       );
       return `entity-${color}`;
-    },
-    onRemoveCard() {
-      this.$emit('onRemoveCard');
-    },
-    close(entity) {
-      this.$emit('onCloseTag', entity);
-    },
-    onEnd() {
-      if (this.entity == null || this.to == null) return;
-      this.$emit('onMove', {
-        from: this.identifier,
-        to: this.to,
-        entity: this.entity,
-        targetList: this.targetList,
-        sourceList: this.localList,
-      });
-      this.entity = null;
-      this.to = null;
-      this.targetList = [];
-    },
-    onMove({ draggedContext, relatedContext }) {
-      this.to = relatedContext.component.$attrs['data-id-attr'];
-      this.entity = draggedContext.element;
-      this.targetList = [...relatedContext.list, this.entity];
-    },
-    updateLocalList() {
-      this.localList = [...this.list];
     },
   },
 };
@@ -145,27 +64,8 @@ export default {
     border: 1px solid #CFD5D9;
     border-radius: 6px;
 
-    &__dark {
-      background-color: #F5F5F5;
-      border: 1px solid #F5F5F5;
-    }
-
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    &__icon {
-      color: #CFD5D9;
-      cursor: pointer;
-    }
-
     &__wrapper {
       margin: .75rem .5rem;
-      display: flex;
-      flex-wrap: wrap;
 
       &__badge {
         height: 1.5rem;
