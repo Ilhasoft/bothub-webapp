@@ -12,9 +12,10 @@
         grouped>
         <b-button
           v-if="canEdit"
+          ref="editButton"
           class="entity-edit__button"
           type="is-primary"
-          @click="editing=!editing">
+          @click.native="editing=!editing">
           {{ editing ? $t('webapp.home.finish_editing') : $t('webapp.home.edit_groups') }}
         </b-button>
         <b-button
