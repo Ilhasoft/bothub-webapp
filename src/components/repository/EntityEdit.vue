@@ -19,28 +19,28 @@
         </b-button>
         <b-button
           v-if="editing"
-          :disabled="newLabel.creating"
+          :disabled="newGroup.creating"
           class="entity-edit__button"
           type="is-secondary"
-          @click="newLabel.creating = !newLabel.creating">
+          @click="newGroup.creating = !newGroup.creating">
           {{ $t('webapp.home.create_new_group') }}
         </b-button>
     </b-field></div>
     <div>
       <div
-        v-if="editingLabels.length > 0"
+        v-if="editingGroups.length > 0"
         class="entity-edit__entities-list__labeled-count">
-        {{ $tc('webapp.home.entities_label', editingLabels.length) }}
+        {{ $tc('webapp.home.entities_label', editingGroups.length) }}
       </div>
       <create-badges-card
-        v-if="newLabel.creating"
+        v-if="newGroup.creating"
         :title="$t('webapp.home.new_group_named', {})"
         format
-        @close="clearNewLabel"
-        @finished="createLabel"
+        @close="clearNewGroup"
+        @finished="createGroup"
       />
       <badges-card
-        v-for="(label, i) in editingLabels"
+        v-for="(label, i) in editingGroups"
         :identifier="label.group_id"
         :key="i"
         :list="label.entities"
@@ -79,7 +79,7 @@ export default {
     CreateBadgesCard,
   },
   props: {
-    labels: {
+    groups: {
       type: Array,
       default: () => [],
     },
@@ -98,9 +98,9 @@ export default {
   },
   data() {
     return {
-      editingLabels: [],
+      editingGroups: [],
       editingUnlabeled: [],
-      newLabel: {
+      newGroup: {
         creating: false,
         text: '',
       },
@@ -114,11 +114,14 @@ export default {
     }),
   },
   watch: {
+    groups() {
+      this.updateLocalData();
+    },
     unlabeled() {
       this.updateLocalData();
     },
     editing() {
-      this.clearNewLabel();
+      this.clearNewGroup();
     },
   },
   mounted() {
@@ -127,49 +130,48 @@ export default {
   methods: {
     ...mapActions([
       'editEntity',
-      'addLabel',
+      'addGroup',
       'deleteEntity',
-      'deleteLabel',
+      'deleteGroup',
     ]),
     updateLocalData() {
-      this.editingLabels = [...this.labels];
+      this.editingGroups = [...this.groups];
       this.editingUnlabeled = [...this.unlabeled];
     },
-    clearNewLabel() {
-      this.newLabel = {
+    clearNewGroup() {
+      this.newGroup = {
         creating: false,
         name: '',
       };
     },
-    async createLabel(text) {
+    async createGroup(text) {
       if (!text || text.length === 0) return;
       this.loading = true;
       try {
-        const newLabel = await this.addLabel({
+        const newGroup = await this.addGroup({
           name: text,
           repositoryId: this.repositoryUuid,
           version: this.version,
         });
-        this.editingLabels.push({ ...newLabel.data, entities: [] });
-        this.clearNewLabel();
+        this.editingGroups.push({ ...newGroup.data, entities: [] });
+        this.clearNewGroup();
       } finally {
         this.loading = false;
       }
     },
     moveEntityLocal(from, to, targetList, sourceList) {
-
       if (from !== 'ungrouped') {
-        const replaceIndex = this.editingLabels
+        const replaceIndex = this.editingGroups
           .findIndex(group => group.group_id === from);
-        if (replaceIndex >= 0) this.editingLabels[replaceIndex].entities = sourceList;
+        if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = sourceList;
       } else {
         this.editingUnlabeled.entities = sourceList;
       }
 
       if (to !== 'ungrouped') {
-        const replaceIndex = this.editingLabels
+        const replaceIndex = this.editingGroups
           .findIndex(group => group.group_id === to);
-        if (replaceIndex >= 0) this.editingLabels[replaceIndex].entities = targetList;
+        if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = targetList;
       } else {
         this.editingUnlabeled.entities = targetList;
       }
@@ -194,9 +196,9 @@ export default {
     },
     async removeEntity(entity, labelIndex) {
       if (labelIndex != null) {
-        const removeIndex = this.editingLabels[labelIndex].entities
+        const removeIndex = this.editingGroups[labelIndex].entities
           .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingLabels[labelIndex].entities.splice(removeIndex, 1);
+        if (removeIndex >= 0) this.editingGroups[labelIndex].entities.splice(removeIndex, 1);
       } else {
         const removeIndex = this.editingUnlabeled
           .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
@@ -237,10 +239,13 @@ export default {
         onConfirm: async () => {
           this.loading = true;
           try {
-            await this.deleteLabel({
-              groupUuid: this.editingLabels[labelIndex].group_id,
+            await this.deleteGroup({
+              groupUuid: this.editingGroups[labelIndex].group_id,
             });
-            this.editingLabels.splice(labelIndex, 1);
+            this.editingUnlabeled = [
+              ...this.editingUnlabeled,
+              ...this.editingGroups[labelIndex].entities];
+            this.editingGroups.splice(labelIndex, 1);
           } finally {
             this.loading = false;
           }

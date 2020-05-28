@@ -7,11 +7,11 @@ export default {
     return entity.editEntity(entityId, name, repositoryUUID, groupId);
   },
 
-  async addLabel(store, { name, repositoryId, version }) {
+  async addGroup(store, { name, repositoryId, version }) {
     return entity.addGroup(name, repositoryId, version);
   },
 
-  async deleteLabel(store, { groupUuid }) {
+  async deleteGroup(store, { groupUuid }) {
     return entity.deleteGroup(groupUuid);
   },
 

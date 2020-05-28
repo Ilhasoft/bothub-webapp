@@ -107,6 +107,12 @@ export default {
       );
       return `entity-${color}`;
     },
+    onRemoveCard() {
+      this.$emit('onRemoveCard');
+    },
+    close(entity) {
+      this.$emit('onCloseTag', entity);
+    },
     onEnd() {
       if (this.entity == null || this.to == null) return;
       this.$emit('onMove', {
