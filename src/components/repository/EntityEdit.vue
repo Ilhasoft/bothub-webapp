@@ -29,9 +29,9 @@
     </b-field></div>
     <div>
       <div
-        v-if="editingGroups.length > 0"
+        v-if="groups.length > 0"
         class="entity-edit__entities-list__labeled-count">
-        {{ $tc('webapp.home.entities_label', editingGroups.length) }}
+        {{ $tc('webapp.home.entities_label', groups.length) }}
       </div>
       <create-badges-card
         v-if="newGroup.creating"
@@ -41,24 +41,24 @@
         @finished="createGroup"
       />
       <badges-card-drag-drop
-        v-for="(label, i) in editingGroups"
-        :identifier="label.group_id"
+        v-for="(group, i) in groups"
+        :identifier="group.group_id"
         :key="i"
-        :list="label.entities"
-        :title="$tc('webapp.home.labeled', label.entities.length, { label_value: label.value })"
+        :list="group.entities"
+        :title="$tc('webapp.home.labeled', group.entities.length, { label_value: group.value })"
         :examples-count="0"
         :edit="editing"
         closable
         @onMove="moveEntity"
-        @onRemoveCard="onRemoveEntityGroup(i)"
-        @onCloseTag="onRemoveEntity($event, i)"
+        @onRemoveCard="onRemoveGroup(group.group_id)"
+        @onCloseTag="onRemoveEntity($event, group.group_id)"
       />
     </div>
     <badges-card-drag-drop
-      :list="editingUngrouped"
+      :list="ungrouped"
       :examples-count="0"
       :edit="editing"
-      :title="$tc('webapp.home.unlabeled', editingUngrouped.length)"
+      :title="$tc('webapp.home.unlabeled', ungrouped.length)"
       identifier="ungrouped"
       dark
       @onCloseTag="onRemoveEntity($event, null)"
@@ -99,8 +99,6 @@ export default {
   },
   data() {
     return {
-      editingGroups: [],
-      editingUngrouped: [],
       newGroup: {
         creating: false,
         text: '',
@@ -115,18 +113,9 @@ export default {
     }),
   },
   watch: {
-    groups() {
-      if (this.groups) this.editingGroups = [...this.groups];
-    },
-    unlabeled() {
-      if (this.ungrouped) this.editingUngrouped = [...this.unlabeled];
-    },
     editing() {
       this.clearNewGroup();
     },
-  },
-  mounted() {
-    this.updateLocalData();
   },
   methods: {
     ...mapActions([
@@ -135,10 +124,6 @@ export default {
       'deleteEntity',
       'deleteGroup',
     ]),
-    updateLocalData() {
-      if (this.groups) this.editingGroups = [...this.groups];
-      if (this.ungrouped) this.editingUngrouped = [...this.ungrouped];
-    },
     clearNewGroup() {
       this.newGroup = {
         creating: false,
@@ -154,27 +139,23 @@ export default {
           repositoryId: this.repositoryUuid,
           version: this.version,
         });
-        this.editingGroups.push({ ...newGroup.data, entities: [] });
+        this.$emit('createdGroup', { ...newGroup.data, entities: [], group_id: newGroup.data.id });
         this.clearNewGroup();
       } finally {
         this.loading = false;
       }
     },
-    moveEntityLocal(from, to, targetList, sourceList) {
+    updateGroups(from, to, targetList, sourceList) {
       if (from !== 'ungrouped') {
-        const replaceIndex = this.editingGroups
-          .findIndex(group => group.group_id === from);
-        if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = sourceList;
+        this.$emit('updateGroup', { entities: sourceList, groupId: from });
       } else {
-        this.editingUngrouped.entities = sourceList;
+        this.$emit('updateUngrouped', { entities: sourceList });
       }
 
       if (to !== 'ungrouped') {
-        const replaceIndex = this.editingGroups
-          .findIndex(group => group.group_id === to);
-        if (replaceIndex >= 0) this.editingGroups[replaceIndex].entities = targetList;
+        this.$emit('updateGroup', { entities: targetList, groupId: to });
       } else {
-        this.editingUngrouped.entities = targetList;
+        this.$emit('updateUngrouped', { entities: targetList });
       }
     },
     async moveEntity(event) {
@@ -190,23 +171,12 @@ export default {
           groupId: to === 'ungrouped' ? null : to,
         });
 
-        this.moveEntityLocal(from, to, targetList, sourceList);
+        this.updateGroups(from, to, targetList, sourceList);
       } finally {
         this.loading = false;
       }
     },
-    async removeEntity(entity, labelIndex) {
-      if (labelIndex != null) {
-        const removeIndex = this.editingGroups[labelIndex].entities
-          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingGroups[labelIndex].entities.splice(removeIndex, 1);
-      } else {
-        const removeIndex = this.editingUngrouped
-          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingUngrouped.splice(removeIndex, 1);
-      }
-    },
-    onRemoveEntity(entity, labelIndex = null) {
+    onRemoveEntity(entity, groupId) {
       this.$buefy.dialog.alert({
         title: 'Delete Entity',
         message: 'Are you sure you want to delete this entity?',
@@ -219,17 +189,15 @@ export default {
           try {
             await this.deleteEntity({
               entityId: entity.entity_id,
-              version: this.version,
-              repositoryId: this.repositoryUuid,
             });
-            this.removeEntity(entity, labelIndex);
+            this.$emit('removeEntity', { entity, groupId });
           } finally {
             this.loading = false;
           }
         },
       });
     },
-    onRemoveEntityGroup(labelIndex) {
+    onRemoveGroup(groupId) {
       this.$buefy.dialog.alert({
         title: 'Delete Group',
         message: 'Are you sure you want to delete this entity group?',
@@ -241,12 +209,9 @@ export default {
           this.loading = true;
           try {
             await this.deleteGroup({
-              groupUuid: this.editingGroups[labelIndex].group_id,
+              groupUuid: groupId,
             });
-            this.editingUngrouped = [
-              ...this.editingUngrouped,
-              ...this.editingGroups[labelIndex].entities];
-            this.editingGroups.splice(labelIndex, 1);
+            this.$emit('removeGroup', groupId);
           } finally {
             this.loading = false;
           }

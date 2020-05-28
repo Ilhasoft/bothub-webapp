@@ -18,7 +18,11 @@ export default {
   },
 
   deleteGroup(groupUuid) {
-    return request.$http.delete(`v2/repository/entity/group/${groupUuid}`);
+    return request.$http.delete(`v2/repository/entity/group/${groupUuid}/`);
+  },
+
+  deleteEntity(entityId) {
+    return request.$http.delete(`v2/repository/entities/${entityId}/`);
   },
 
   editEntity(entityId, name, repositoryUUID, groupId) {

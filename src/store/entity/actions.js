@@ -15,7 +15,7 @@ export default {
     return entity.deleteGroup(groupUuid);
   },
 
-  async deleteEntity(store, { entityId, version, repositoryId }) {
-    return new Promise(resolve => setTimeout(resolve, 2000));
+  async deleteEntity(store, { entityId }) {
+    return entity.deleteEntity(entityId);
   },
 };

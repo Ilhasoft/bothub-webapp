@@ -65,7 +65,12 @@
         :groups="repository.groups || []"
         :can-edit="repository.authorization.can_contribute"
         :ungrouped="unlabeled"
-        :repository-uuid="repository.uuid"/>
+        :repository-uuid="repository.uuid"
+        @updateGroup="updatedGroup"
+        @updateUngrouped="updateUngrouped"
+        @removeGroup="removeGroup"
+        @removeEntity="removeEntity"
+        @createdGroup="addedGroup"/>
     </div>
   </repository-view-base>
 </template>
@@ -131,6 +136,46 @@ export default {
   methods: {
     formattedEntityTitle() {
       return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
+    },
+    async updatedGroup({ groupId, entities }) {
+      const replaceIndex = this.repository.groups
+        .findIndex(group => group.group_id === groupId);
+      if (replaceIndex >= 0) this.repository.groups.entities = entities;
+    },
+    async updateUngrouped({ entities }) {
+      this.repository.other_group.entities = entities;
+    },
+    async removeEntity({ entity, groupId }) {
+      if (groupId != null) {
+        const groupIndex = this.repository.groups
+          .findIndex(group => group.group_id === groupId);
+
+        if (groupIndex < 0) return;
+
+        const removeIndex = this.repository.groups[groupIndex].entities
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
+
+        if (removeIndex < 0) return;
+
+        this.repository.groups[groupIndex].entities.splice(removeIndex, 1);
+      } else {
+        const removeIndex = this.repository.attributes.other_group.entities
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
+        if (removeIndex < 0) return;
+        this.repository.attributes.other_group.entities.splice(removeIndex, 1);
+      }
+    },
+    async removeGroup(groupId) {
+      const groupIndex = this.repository.groups
+        .findIndex(group => group.group_id === groupId);
+      if (groupIndex < 0) return;
+
+      this.repository.other_group.entities
+        .push.apply(this.repository.groups[groupIndex].entities);
+      this.repository.groups.splice(groupIndex, 1);
+    },
+    async addedGroup(group) {
+      this.repository.groups.push(group);
     },
   },
 };
