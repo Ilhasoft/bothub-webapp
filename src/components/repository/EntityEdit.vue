@@ -48,8 +48,7 @@
         :examples-count="0"
         :edit="editing"
         closable
-        @onRemove="moving.fromEntity = $event; moving.from = i"
-        @onAdd="moving.toEntity = $event; moving.to = i"
+        @onMove="moveEntity"
         @onRemoveCard="onRemoveEntityGroup(i)"
         @onCloseTag="onRemoveEntity($event, i)"
       />
@@ -59,11 +58,10 @@
       :examples-count="0"
       :edit="editing"
       :title="$tc('webapp.home.unlabeled', editingUnlabeled.length)"
-      identifier="unlabeled"
+      identifier="ungrouped"
       dark
-      @onRemove="moving.fromEntity = $event; moving.from = 'unlabeled'"
-      @onAdd="moving.toEntity = $event; moving.to = 'unlabeled'"
       @onCloseTag="onRemoveEntity($event, null)"
+      @onMove="moveEntity"
     />
   </div>
 
@@ -106,12 +104,6 @@ export default {
         creating: false,
         text: '',
       },
-      moving: {
-        fromEntity: null,
-        toEntity: null,
-        from: null,
-        to: null,
-      },
       editing: false,
       loading: false,
     };
@@ -120,14 +112,6 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
-    isMoveReady() {
-      return this.moving.to !== null
-      && this.moving.from !== null
-      && this.moving.to !== this.moving.from
-      && this.moving.toEntity
-      && this.moving.fromEntity
-      && this.moving.toEntity.entity_id === this.moving.fromEntity.entity_id;
-    },
   },
   watch: {
     unlabeled() {
@@ -135,18 +119,6 @@ export default {
     },
     editing() {
       this.clearNewLabel();
-    },
-    isMoveReady() {
-      if (!this.isMoveReady) return;
-      const from = this.moving.from === 'unlabeled' ? null : this.moving.from;
-      const to = this.moving.to === 'unlabeled' ? null : this.moving.to;
-      this.moveEntity(this.moving.toEntity, from, to);
-      this.moving = {
-        fromEntity: null,
-        toEntity: null,
-        from: null,
-        to: null,
-      };
     },
   },
   mounted() {
@@ -184,34 +156,38 @@ export default {
         this.loading = false;
       }
     },
-    moveEntityLocal(entity, fromLabelIndex = null, toLabelIndex = null) {
-      if (toLabelIndex != null) {
-        this.editingLabels[toLabelIndex].entities.push(entity);
+    moveEntityLocal(from, to, targetList, sourceList) {
+
+      if (from !== 'ungrouped') {
+        const replaceIndex = this.editingLabels
+          .findIndex(group => group.group_id === from);
+        if (replaceIndex >= 0) this.editingLabels[replaceIndex].entities = sourceList;
       } else {
-        this.editingUnlabeled.push(entity);
+        this.editingUnlabeled.entities = sourceList;
       }
 
-      if (fromLabelIndex != null) {
-        const removeIndex = this.editingLabels[fromLabelIndex].entities
-          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingLabels[fromLabelIndex].entities.splice(removeIndex, 1);
+      if (to !== 'ungrouped') {
+        const replaceIndex = this.editingLabels
+          .findIndex(group => group.group_id === to);
+        if (replaceIndex >= 0) this.editingLabels[replaceIndex].entities = targetList;
       } else {
-        const removeIndex = this.editingUnlabeled
-          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
-        if (removeIndex >= 0) this.editingUnlabeled.splice(removeIndex, 1);
+        this.editingUnlabeled.entities = targetList;
       }
     },
-    async moveEntity(entity, fromLabelIndex = null, toLabelIndex = null) {
+    async moveEntity(event) {
+      const {
+        entity, from, to, targetList, sourceList,
+      } = event;
       this.loading = true;
       try {
         await this.editEntity({
           entityId: entity.entity_id,
           name: entity.value,
           repositoryId: this.repositoryUuid,
-          groupId: toLabelIndex != null ? this.editingLabels[toLabelIndex].group_id : null,
+          groupId: to === 'ungrouped' ? null : to,
         });
 
-        this.moveEntityLocal(entity, fromLabelIndex, toLabelIndex);
+        this.moveEntityLocal(from, to, targetList, sourceList);
       } finally {
         this.loading = false;
       }

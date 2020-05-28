@@ -12,7 +12,7 @@
     </div>
     <draggable
       :disabled="!edit"
-      v-model="list"
+      v-model="localList"
       :sort="false"
       :data-id-attr="identifier"
       :move="onMove"
@@ -20,7 +20,7 @@
       class="badges-card__wrapper"
       @end="onEnd">
       <b-tag
-        v-for="(item, i) in list"
+        v-for="(item, i) in localList"
         :key="i"
         :class="[
           'badges-card__wrapper__badge',
@@ -82,12 +82,22 @@ export default {
     return {
       entity: null,
       to: null,
+      localList: [],
+      targetList: [],
     };
   },
   computed: {
     nameList() {
-      return this.list.map(item => item.value || item);
+      return this.localList.map(item => item.value || item);
     },
+  },
+  watch: {
+    list() {
+      this.updateLocalList();
+    },
+  },
+  mounted() {
+    this.updateLocalList();
   },
   methods: {
     getEntityClass(entity) {
@@ -98,30 +108,25 @@ export default {
       return `entity-${color}`;
     },
     onEnd() {
-      console.log('ended');
-      if (this.entity != null && this.to != null) {
-        this.$emit('onMove', { to: this.to, entity: this.entity });
-        this.entity = null;
-        this.to = null;
-      }
+      if (this.entity == null || this.to == null) return;
+      this.$emit('onMove', {
+        from: this.identifier,
+        to: this.to,
+        entity: this.entity,
+        targetList: this.targetList,
+        sourceList: this.localList,
+      });
+      this.entity = null;
+      this.to = null;
+      this.targetList = [];
     },
     onMove({ draggedContext, relatedContext }) {
       this.to = relatedContext.component.$attrs['data-id-attr'];
       this.entity = draggedContext.element;
-      console.log('moved');
-      return false;
+      this.targetList = [...relatedContext.list, this.entity];
     },
-    remove(event) {
-      if (this.edit) this.$emit('onRemove', event.data);
-    },
-    paste(event) {
-      if (this.edit) this.$emit('onAdd', event.data);
-    },
-    onRemoveCard() {
-      if (this.edit) this.$emit('onRemoveCard');
-    },
-    close(item) {
-      if (this.edit) this.$emit('onCloseTag', item);
+    updateLocalList() {
+      this.localList = [...this.list];
     },
   },
 };

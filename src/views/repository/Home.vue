@@ -110,7 +110,6 @@ export default {
   },
   computed: {
     unlabeled() {
-      console.log(this.repository.attributes.other_group);
       if (!this.repository || !this.repository.attributes.other_group) return [];
       return this.repository.attributes.other_group.entities;
     },
