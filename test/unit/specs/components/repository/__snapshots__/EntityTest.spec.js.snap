@@ -9,7 +9,9 @@ exports[`EntityEdit renders correctly 1`] = `
       <b-button-stub type="is-primary" nativetype="button" tag="button" class="entity-edit__button">
         some specific text
       </b-button-stub>
-      <!---->
+      <b-button-stub type="is-secondary" nativetype="button" tag="button" class="entity-edit__button" style="display: none;">
+        some specific text
+      </b-button-stub>
     </b-field-stub>
   </div>
   <div>

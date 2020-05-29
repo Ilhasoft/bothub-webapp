@@ -115,8 +115,8 @@ export default {
   },
   computed: {
     unlabeled() {
-      if (!this.repository || !this.repository.attributes.other_group) return [];
-      return this.repository.attributes.other_group.entities;
+      if (!this.repository || !this.repository.other_group) return [];
+      return this.repository.other_group.entities;
     },
     hasIntents() {
       return this.repository.intents_list.length > 0;
@@ -157,10 +157,10 @@ export default {
 
         this.repository.groups[groupIndex].entities.splice(removeIndex, 1);
       } else {
-        const removeIndex = this.repository.attributes.other_group.entities
+        const removeIndex = this.repository.other_group.entities
           .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
         if (removeIndex < 0) return;
-        this.repository.attributes.other_group.entities.splice(removeIndex, 1);
+        this.repository.other_group.entities.splice(removeIndex, 1);
       }
     },
     removeGroup(groupId) {
