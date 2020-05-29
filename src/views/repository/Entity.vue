@@ -6,46 +6,21 @@
       v-if="authenticated"
       class="entity-list">
       <div v-if="repository && repository.authorization.can_contribute">
-        <div class="entity-list__header">
-          <div class="entity-list__content">
-            <h1> <strong>Entity</strong> </h1>
-            <b-tag
-              v-if="!entitiesEditable"
-              :class="[
-                'entity-list__content__tag',
-                getEntityClass(entitySearch.entity),
-              ]"
-              size="is-medium">
-              {{ entitySearch.entity }}
-            </b-tag>
-            <b-field
-              v-else
-              class="entity-list__content__editEntityName">
-              <b-input v-model="entitySearch.entity"/>
-            </b-field>
-          </div>
-          <div class="entity-list__header__options">
-            <p> This entity contain in {{ examplesList.total }} sentences.</p>
-            <b-button
-              v-if="!entitiesEditable"
-              ref="editEntityEvent"
-              class="entity-list__header__options__buttonEdit"
-              @click="editEntity">Edit Entity</b-button>
-            <b-button
-              v-if="entitiesEditable"
-              class="entity-list__header__options__buttonSave"
-              @click="saveEdition">Save Edit</b-button>
-          </div>
-
-        </div>
+        <entities-list
+          :entities-list="examplesList"
+          :entity-name="entitySearch"
+          :repository="repository"
+          @ableEditEntities="editEntity($event)"
+          @saveEdition="onItemSave()"/>
         <paginated-list
           v-if="examplesList"
-          :item-component="entitiesList"
+          :item-component="sentencesEntities"
           :list="examplesList"
           :repository="repository"
           :per-page="perPage"
           :editable="entitiesEditable"
-          @itemDeleted="onItemDeleted()" />
+          @itemDeleted="onItemDeleted()"
+          @itemSave="onItemSave()"/>
 
         <p
           v-if="examplesList && examplesList.empty"
@@ -85,22 +60,23 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
-import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
-import LoginForm from '@/components/auth/LoginForm';
-import PaginatedList from '@/components/shared/PaginatedList';
-import SentencesEntityList from '@/components/repository/SentencesEntityList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
-import { getEntityColor } from '@/utils/entitiesColors';
+import LoginForm from '@/components/auth/LoginForm';
+import EntitiesList from '@/components/repository/EntitiesList';
+import PaginatedList from '@/components/shared/PaginatedList';
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import SentencesEntityList from '@/components/repository/SentencesEntityList';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 
 export default {
-  name: 'RepositoryLog',
+  name: 'Entity',
   components: {
     RepositoryViewBase,
     LoginForm,
     RequestAuthorizationModal,
     PaginatedList,
     SentencesEntityList,
+    EntitiesList,
   },
   extends: RepositoryBase,
   props: {
@@ -122,7 +98,7 @@ export default {
       },
       entitiesEditable: false,
       query: {},
-      entitiesList: SentencesEntityList,
+      sentencesEntities: SentencesEntityList,
       requestAuthorizationModalOpen: false,
       querySchema: {},
     };
@@ -130,7 +106,7 @@ export default {
   computed: {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
-      repository: 'getCurrentRepository',
+      repositoryList: 'getCurrentRepository',
     }),
   },
   watch: {
@@ -149,13 +125,29 @@ export default {
   },
   mounted() {
     this.updateExamples();
+    this.findEntityById();
     this.onSearch(this.entitySearch);
   },
   methods: {
     ...mapActions([
       'searchExamples',
     ]),
+    findEntityById() {
+      const entityGroup = this.repositoryList.groups.find(
+        entityId => entityId.entities[0].entity_id === this.$route.params.entity,
+      );
+      const entityOtherGroup = this.repositoryList.other_group.entities.find(
+        entityId => entityId.entity_id === this.$route.params.entity,
+      );
+      if (entityGroup) {
+        this.entitySearch.entity = entityGroup.entities[0].value;
+        return '';
+      }
+      this.entitySearch.entity = entityOtherGroup.value;
+      return '';
+    },
     onSearch(value) {
+      // console.log(value);
       Object.assign(this.querySchema, value);
 
       if (!this.querySchema.entity) {
@@ -178,6 +170,9 @@ export default {
     onItemDeleted() {
       this.onSearch(this.entitySearch);
     },
+    onItemSave() {
+      this.onSearch(this.entitySearch);
+    },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },
@@ -189,22 +184,8 @@ export default {
       });
       this.updateRepository(false);
     },
-    editEntity() {
-      this.entitiesEditable = !this.entitiesEditable;
-    },
-    saveEdition() {
-      const { entity } = this.entitySearch;
-      this.$router.push(
-        { name: 'repository-entitylist', params: { entity } },
-      );
-      this.entitiesEditable = !this.entitiesEditable;
-    },
-    getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.repository.other_label.entities || this.repository.labels,
-      );
-      return `entity-${color}`;
+    editEntity(editValue) {
+      this.entitiesEditable = editValue;
     },
   },
 };

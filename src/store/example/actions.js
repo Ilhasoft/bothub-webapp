@@ -57,4 +57,14 @@ export default {
     const response = await entity.search(repositoryUuid, { value });
     return response;
   },
+  async editEntityName(store, {
+    group, entityId, value,
+  }) {
+    const response = await entity.edit(
+      group,
+      entityId,
+      value,
+    );
+    return response;
+  },
 };

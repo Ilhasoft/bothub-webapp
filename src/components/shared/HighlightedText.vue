@@ -84,11 +84,19 @@ export default {
         });
     },
     prefixEntities() {
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
+
       return this.entities
         .map(({ start, end, entity }) => {
           const color = getEntityColor(
             entity,
-            this.repository.other_label.entities,
+            allEntitiesName,
           );
           const colorClass = `entity-${color}`;
           const before = this.text.substring(0, start);

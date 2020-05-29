@@ -1,17 +1,16 @@
 <template>
   <sentence-accordion
     :open.sync="open">
-
     <div
       slot="header"
       class="level">
-
       <div class="example-accordion__tag level-left">
         <language-badge :language="language"/>
       </div>
       <div
         class="level-right example-accordion__text">
         <highlighted-text
+          v-if="!editing || !open"
           :text="text"
           :prefix-color-available="true"
           :prefix-color="entitiesList[0].class"
@@ -68,6 +67,7 @@
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
+        @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
   </sentence-accordion>
@@ -144,18 +144,24 @@ export default {
         }));
     },
   },
-  created() {
-    this.$root.$on('editableEntities', value => this.editableEntity(value));
-  },
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
       'deleteExample',
     ]),
     getEntityClass(entity) {
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
       const color = getEntityColor(
         entity,
-        this.repository.other_label.entities,
+        allEntitiesName,
       );
       return `entity-${color}`;
     },
@@ -169,9 +175,13 @@ export default {
     },
     deleteThisExample() {
       this.deleteDialog = this.$buefy.dialog.confirm({
+        title: this.$t('webapp.trainings.delete_title'),
         message: this.$t('webapp.trainings.delete_phrase_modal'),
         confirmText: this.$t('webapp.trainings.delete_button'),
         cancelText: this.$t('webapp.trainings.cancel_button'),
+        inputAttrs: {
+          textAlign: 'center',
+        },
         type: 'is-danger',
         onConfirm: async () => {
           await this.deleteExample({ id: this.id });
@@ -184,6 +194,9 @@ export default {
     },
     editSentence() {
       this.open = !this.open;
+    },
+    updateList() {
+      this.$emit('updateList');
     },
   },
 };

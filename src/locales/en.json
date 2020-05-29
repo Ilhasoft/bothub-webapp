@@ -195,6 +195,7 @@
       "no_changes": "No Changes",
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
+      "delete_title": "Delete sentence entity",
       "delete_phrase_modal":"Are you sure? The example will be deleted",
       "delete_button":"Delete",
       "cancel_button":"Cancel",

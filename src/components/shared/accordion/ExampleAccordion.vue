@@ -69,7 +69,8 @@
         :intent-to-edit="intent"
         :text-to-edit="text"
         :sentence-id="id"
-        @cancel="cancelEditSentence"/>
+        @cancel="cancelEditSentence"
+        @saveList="updateList"/>
     </div>
   </sentence-accordion>
 </template>
@@ -204,6 +205,9 @@ export default {
     editSentence() {
       this.editing = true;
       this.open = true;
+    },
+    updateList() {
+      this.$emit('updateList');
     },
   },
 };

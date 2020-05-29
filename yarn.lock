@@ -183,9 +183,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@mdi/font@^3.0.39":
-  version "3.2.89"
-  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.2.89.tgz#91790717881c8839729286e516436e7b9f3d96ea"
+"@mdi/font@^5.2.45":
+  version "5.3.45"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.3.45.tgz#086d3ef77dee260c04dd5a593af602c250e5b315"
+  integrity sha512-SD5d2vHEKRvDCInZQFXOwiFpBlzpuZOiqwxKf6E+zCt7UDc52TUSrL0+TXqY57VQh/SnTpZVXM+Uvs21OdPFWg==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

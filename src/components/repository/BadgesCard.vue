@@ -2,27 +2,38 @@
   <div class="badges-card">
     <div v-html="title" />
     <div class="badges-card__wrapper">
-      <b-tag
-        v-for="(item, i) in list"
-        :key="i"
-        :class="[
-          'badges-card__wrapper__badge',
-          getEntityClass(item),
-        ]"
-        size="small"
-      >
-        <div
-          v-if="clickable"
-          class="badges-card__wrapper__badge__entity"
-          @click="entityList(item)">
-          <span>{{ item }}</span>
-        </div>
+      <div v-if="clickable">
+        <b-tag
+          v-for="(item, i) in list"
+          :key="i"
+          :class="[
+            'badges-card__wrapper__badge badges-card__wrapper__clickable',
+            getEntityClass(item),
+          ]"
+          size="small"
+          @click.native="entityList(item.entity_id)">
 
-        <div v-else>
-          <span>{{ item }}</span>
-        </div>
+          <span>{{ item.value }}</span>
 
-      </b-tag>
+        </b-tag>
+      </div>
+      <div v-else>
+        <b-tag
+          v-for="(item, i) in list"
+          :key="i"
+          :class="[
+            'badges-card__wrapper__badge',
+            getEntityClass(item),
+          ]"
+          size="small">
+
+          <span>{{ item }}</span>
+
+
+        </b-tag>
+      </div>
+
+
     </div>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
@@ -77,6 +88,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -95,10 +108,16 @@ export default {
         border-width: 1px;
         border-radius: 1rem;
 
-        &__entity{
-          cursor: pointer;
+        span{
+          font-size: $font-small;
+          font-family: $font-family;
+          font-weight: $font-weight-normal;
         }
       }
+
+    &__clickable{
+      cursor: pointer;
     }
   }
+}
 </style>
