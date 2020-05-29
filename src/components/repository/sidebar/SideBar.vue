@@ -89,7 +89,7 @@
           <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
-            icon="settings"
+            icon="cog"
             @click="isSettingsActive = !isSettingsActive">
             <template
               slot="label"
@@ -174,7 +174,7 @@
           <b-icon
             slot="trigger"
             class="icon-list"
-            icon="settings" />
+            icon="cog" />
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-settings')">

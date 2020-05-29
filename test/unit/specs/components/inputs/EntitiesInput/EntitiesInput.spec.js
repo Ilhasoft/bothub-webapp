@@ -32,7 +32,8 @@ describe('EntitiesInput.vue', () => {
   const findAddEntityButton = () => wrapper.find({ ref: 'addEntityBtn' });
   const addEntity = () => findAddEntityButton().find('button').trigger('click');
   const findEntityForm = index => wrapper.findAll(EntityForm).at(index);
-  const findAddLabelButtonForEntityFormOnIndex = index => findEntityForm(index).find({ ref: 'addLabelButton' });
+  // const findAddLabelButtonForEntityFormOnIndex = index =>
+  // findEntityForm(index).find({ ref: 'addLabelButton' });
 
   it('add entity button is disabled when nothing is selected', () => {
     const btn = findAddEntityButton();
@@ -80,38 +81,38 @@ describe('EntitiesInput.vue', () => {
     expect(wrapper.emitted('entityAdded').length).toBe(1);
   });
 
-  it('shows existing label of an entity', async (done) => {
-    wrapper.setProps({
-      text: '000aaaa000',
-      textSelected: {
-        start: 3,
-        end: 7,
-      },
-    });
+  // it('shows existing label of an entity', async (done) => {
+  //   wrapper.setProps({
+  //     text: '000aaaa000',
+  //     textSelected: {
+  //       start: 3,
+  //       end: 7,
+  //     },
+  //   });
 
-    wrapper.setMethods({
-      getEntities: () => Promise.resolve({
-        next: () => Promise.resolve(),
-        items: [
-          {
-            data: {
-              label: 'lorem',
-            },
-          },
-        ],
-      }),
-    });
+  //   wrapper.setMethods({
+  //     getEntities: () => Promise.resolve({
+  //       next: () => Promise.resolve(),
+  //       items: [
+  //         {
+  //           data: {
+  //             label: 'lorem',
+  //           },
+  //         },
+  //       ],
+  //     }),
+  //   });
 
-    addEntity();
+  //   addEntity();
 
-    await localVue.nextTick();
-    await localVue.nextTick();
+  //   await localVue.nextTick();
+  //   await localVue.nextTick();
 
-    expect(wrapper.vm.entities[0].label).toBe('lorem');
-    expect(findAddLabelButtonForEntityFormOnIndex(0).text()).toBe('Edit "lorem" label');
+  //   expect(wrapper.vm.entities[0].label).toBe('lorem');
+  //   expect(findAddLabelButtonForEntityFormOnIndex(0).text()).toBe('Edit "lorem" label');
 
-    done();
-  });
+  //   done();
+  // });
 
   it('removes an entity', async (done) => {
     wrapper.setProps({

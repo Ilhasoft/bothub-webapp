@@ -37,7 +37,8 @@
             class="has-text-danger"
             @click.prevent.stop="editSentence()">
             <b-icon
-              icon="pen"
+              icon="pencil"
+              size="is-small"
               class="text-color-grey-dark example__icon" />
           </a>
         </div>
@@ -52,6 +53,7 @@
             @click.prevent.stop="deleteThisExample()">
             <b-icon
               icon="delete"
+              size="is-small"
               class="text-color-grey-dark example__icon" />
           </a>
         </div>

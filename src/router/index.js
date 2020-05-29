@@ -138,7 +138,7 @@ export default new Router({
           component: Entity,
         },
         {
-          path: ':ownerNickname/:slug/result/:resultId/:version',
+          path: ':ownerNickname/:slug/result/:resultId/',
           name: 'repository-result',
           component: RepositoryResult,
         },

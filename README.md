@@ -35,6 +35,8 @@ You can set environment variables in your OS or write on .env file.
 | BOTHUB_WEBAPP_SENTRY | `string` | Empty | Sentry.io DNS*
 | BOTHUB_WEBAPP_USE_HOTJAR | `boolean` | In development mode is `false`, in production mode is `true` | Enable [Hotjar](https://www.hotjar.com/) tracking*
 | BOTHUB_WEBAPP_HOTJAR_ID | `string` | Empty | Hotjar ID*
+| BOTHUB_WEBAPP_LIGHTHOUSE_KEY | `string` | Empty | [Helpdocs Lighthouse widget](https://support.helpdocs.io/article/ykv7l5jthy-lighthouse-widget-api) API key*
+| BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID | `string` | Empty | Helpdocs algorithm article id *
 
 \* MailChimp subscribe URL: `https://[MAILCHIMP_LOGIN].[MAILCHIMP_DATACENTER].list-manage.com/subscribe/post?u=[MAILCHIMP_USER_ID]&id=[MAILCHIMP_LIST_ID]`
 
