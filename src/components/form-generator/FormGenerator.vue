@@ -8,9 +8,14 @@
       :label="field.label"
       :type="field.errors && 'is-danger'"
       :message="field.errors || field.helpText">
-      <b-field
-        :grouped="hasHelpIcon(field)"
-        :group-multiline="hasHelpIcon(field)">
+      <div
+        slot="label"
+        class="field-label">
+        {{ field.label }} <help-widget
+          v-if="hasHelpIcon(field)"
+          :article-id="helpArticleId" />
+      </div>
+      <b-field>
         <component
           :v-if="field.inputComponent"
           :is="field.inputComponent"
@@ -18,12 +23,6 @@
           v-model="formData[field.name]"
           :initial-data="initialData[field.name]"
           @input="update()" />
-        <div
-          v-if="hasHelpIcon(field)"
-          class="control">
-          <help-widget
-            :article-id="helpArticleId" />
-        </div>
       </b-field>
     </b-field>
   </div>
@@ -138,7 +137,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .field.is-grouped.is-grouped-multiline {
+  .field-label {
+    display: flex;
     align-items: center;
   }
 </style>
