@@ -166,9 +166,8 @@ export default {
     removeGroup(groupId) {
       const groupIndex = this.getGroupIndex(groupId);
       if (groupIndex < 0) return;
-
-      this.repository.other_group.entities
-        .push.apply(this.repository.groups[groupIndex].entities);
+      this.repository.other_group.entities = this.repository.other_group.entities
+        .concat(this.repository.groups[groupIndex].entities);
       this.repository.groups.splice(groupIndex, 1);
     },
     addedGroup(group) {

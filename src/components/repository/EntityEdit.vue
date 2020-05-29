@@ -19,26 +19,25 @@
           {{ editing ? $t('webapp.home.finish_editing') : $t('webapp.home.edit_groups') }}
         </b-button>
         <b-button
-          v-if="editing"
-          :disabled="newGroup.creating"
+          v-show="editing"
+          :disabled="creating"
           class="entity-edit__button"
           type="is-secondary"
-          @click="newGroup.creating = !newGroup.creating">
+          @click="creating = true">
           {{ $t('webapp.home.create_new_group') }}
         </b-button>
     </b-field></div>
     <div>
       <div
-        v-if="groups.length > 0"
-        :key="needsUpdate"
+        v-show="groups.length > 0"
         class="entity-edit__entities-list__labeled-count">
         {{ $tc('webapp.home.entities_label', groups.length) }}
       </div>
       <create-badges-card
-        v-if="newGroup.creating"
+        v-if="creating"
         :title="$t('webapp.home.new_group_named', {})"
         format
-        @close="clearNewGroup"
+        @close="creating = false"
         @finished="createGroup"
       />
       <badges-card-drag-drop
@@ -101,10 +100,7 @@ export default {
   },
   data() {
     return {
-      newGroup: {
-        creating: false,
-        text: '',
-      },
+      creating: false,
       editing: false,
       loading: false,
       needsUpdate: false,
@@ -117,7 +113,7 @@ export default {
   },
   watch: {
     editing() {
-      this.clearNewGroup();
+      this.creating = false;
     },
   },
   methods: {
@@ -127,12 +123,6 @@ export default {
       'deleteEntity',
       'deleteGroup',
     ]),
-    clearNewGroup() {
-      this.newGroup = {
-        creating: false,
-        name: '',
-      };
-    },
     showError(error) {
       let message = this.$t('webapp.home.default_error');
 
@@ -156,7 +146,7 @@ export default {
           version: this.version,
         });
         this.$emit('createdGroup', { ...newGroup.data, entities: [], group_id: newGroup.data.id });
-        this.clearNewGroup();
+        this.creating = false;
       } catch (e) {
         this.showError(e);
       } finally {

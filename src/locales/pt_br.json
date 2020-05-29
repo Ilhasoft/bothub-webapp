@@ -154,7 +154,7 @@
       "description": "Descrição",
       "no_description": "Não há descrição para essa inteligência",
       "intents_list": "Lista de Intenções",
-      "entities_list": "Lista de Entidades",
+      "entities_list": "Grupos de entidades",
       "entities_label": "Esta inteligência possui {n} grupos de entidade. | Esta inteligência possui {n} grupo de entidade. | Esta inteligência possui {n} grupos de entidade.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
       "labeled": "<strong>{n}</strong> entidades agrupadas sob <strong>{label_value}</strong> | <strong>{n}</strong> entidade agrupada sob <strong>{label_value}</strong> | <strong>{n}</strong> entidades agrupadas sob <strong>{label_value}</strong>",
