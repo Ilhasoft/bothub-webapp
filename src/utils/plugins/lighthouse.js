@@ -7,7 +7,6 @@ export default {
     window.hdlh = {
       widget_key: process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY,
       primary_color: '#2BBFAC',
-      color_mode: 'dark',
       logo: img,
       brand: 'BotHub',
       disable_contact_button: true,
