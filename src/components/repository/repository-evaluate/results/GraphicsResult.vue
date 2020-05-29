@@ -42,7 +42,7 @@
       </div>
       <div>
         <h5 class="graphics-results__title">
-          {{ $t('webapp.result.entities') }}
+          {{ $tc('webapp.result.entity', 2) }}
         </h5>
         <div
           v-if="!loadingEntitiesChart"

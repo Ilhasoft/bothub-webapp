@@ -8,13 +8,23 @@
       :label="field.label"
       :type="field.errors && 'is-danger'"
       :message="field.errors || field.helpText">
-      <component
-        :v-if="field.inputComponent"
-        :is="field.inputComponent"
-        v-bind="field.inputProps"
-        v-model="formData[field.name]"
-        :initial-data="initialData[field.name]"
-        @input="update()" />
+      <b-field
+        :grouped="hasHelpIcon(field)"
+        :group-multiline="hasHelpIcon(field)">
+        <component
+          :v-if="field.inputComponent"
+          :is="field.inputComponent"
+          v-bind="field.inputProps"
+          v-model="formData[field.name]"
+          :initial-data="initialData[field.name]"
+          @input="update()" />
+        <div
+          v-if="hasHelpIcon(field)"
+          class="control">
+          <help-widget
+            :article-id="helpArticleId" />
+        </div>
+      </b-field>
     </b-field>
   </div>
 </template>
@@ -28,6 +38,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -45,6 +56,7 @@ const relatedInputComponent = {
 
 const components = {
   Messages,
+  HelpWidget,
 };
 
 export default {
@@ -107,6 +119,9 @@ export default {
       return (this.errors.non_field_errors
         && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
+    helpArticleId() {
+      return process.env.BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID;
+    },
   },
   mounted() {
     this.update();
@@ -115,6 +130,15 @@ export default {
     update() {
       this.$emit('input', this.formData);
     },
+    hasHelpIcon(field) {
+      return field.name === 'algorithm';
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .field.is-grouped.is-grouped-multiline {
+    align-items: center;
+  }
+</style>
