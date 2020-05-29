@@ -137,18 +137,16 @@ export default {
     formattedEntityTitle() {
       return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
     },
-    async updatedGroup({ groupId, entities }) {
-      const replaceIndex = this.repository.groups
-        .findIndex(group => group.group_id === groupId);
-      if (replaceIndex >= 0) this.repository.groups.entities = entities;
+    updatedGroup({ groupId, entities }) {
+      const groupIndex = this.getGroupIndex(groupId);
+      if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
     },
-    async updateUngrouped({ entities }) {
+    updateUngrouped({ entities }) {
       this.repository.other_group.entities = entities;
     },
-    async removeEntity({ entity, groupId }) {
+    removeEntity({ entity, groupId }) {
       if (groupId != null) {
-        const groupIndex = this.repository.groups
-          .findIndex(group => group.group_id === groupId);
+        const groupIndex = this.getGroupIndex(groupId);
 
         if (groupIndex < 0) return;
 
@@ -165,17 +163,20 @@ export default {
         this.repository.attributes.other_group.entities.splice(removeIndex, 1);
       }
     },
-    async removeGroup(groupId) {
-      const groupIndex = this.repository.groups
-        .findIndex(group => group.group_id === groupId);
+    removeGroup(groupId) {
+      const groupIndex = this.getGroupIndex(groupId);
       if (groupIndex < 0) return;
 
       this.repository.other_group.entities
         .push.apply(this.repository.groups[groupIndex].entities);
       this.repository.groups.splice(groupIndex, 1);
     },
-    async addedGroup(group) {
+    addedGroup(group) {
       this.repository.groups.push(group);
+    },
+    getGroupIndex(groupId) {
+      return this.repository.groups
+        .findIndex(group => group.group_id === groupId);
     },
   },
 };

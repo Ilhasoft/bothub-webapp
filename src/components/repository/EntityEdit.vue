@@ -30,6 +30,7 @@
     <div>
       <div
         v-if="groups.length > 0"
+        :key="needsUpdate"
         class="entity-edit__entities-list__labeled-count">
         {{ $tc('webapp.home.entities_label', groups.length) }}
       </div>
@@ -41,20 +42,21 @@
         @finished="createGroup"
       />
       <badges-card-drag-drop
-        v-for="(group, i) in groups"
+        v-for="group in groups"
         :identifier="group.group_id"
-        :key="i"
+        :key="`${group.group_id}-${needsUpdate}`"
         :list="group.entities"
         :title="$tc('webapp.home.labeled', group.entities.length, { label_value: group.value })"
         :examples-count="0"
         :edit="editing"
         closable
         @onMove="moveEntity"
-        @onRemoveCard="onRemoveGroup(group.group_id)"
+        @onRemoveCard="onRemoveGroup(group)"
         @onCloseTag="onRemoveEntity($event, group.group_id)"
       />
     </div>
     <badges-card-drag-drop
+      :key="needsUpdate"
       :list="ungrouped"
       :examples-count="0"
       :edit="editing"
@@ -105,6 +107,7 @@ export default {
       },
       editing: false,
       loading: false,
+      needsUpdate: false,
     };
   },
   computed: {
@@ -130,6 +133,19 @@ export default {
         name: '',
       };
     },
+    showError(error) {
+      let message = this.$t('webapp.home.default_error');
+
+      if (error.response
+      && error.response.data
+      && error.response.data.non_field_errors
+      && error.response.data.non_field_errors.length > 0) message = error.response.data.non_field_errors.join(', ');
+
+      this.$buefy.toast.open({
+        message,
+        type: 'is-danger',
+      });
+    },
     async createGroup(text) {
       if (!text || text.length === 0) return;
       this.loading = true;
@@ -141,6 +157,8 @@ export default {
         });
         this.$emit('createdGroup', { ...newGroup.data, entities: [], group_id: newGroup.data.id });
         this.clearNewGroup();
+      } catch (e) {
+        this.showError(e);
       } finally {
         this.loading = false;
       }
@@ -158,6 +176,32 @@ export default {
         this.$emit('updateUngrouped', { entities: targetList });
       }
     },
+    async removeEntity(entity, groupId) {
+      this.loading = true;
+      try {
+        await this.deleteEntity({
+          entityId: entity.entity_id,
+        });
+        this.$emit('removeEntity', { entity, groupId });
+      } catch (e) {
+        this.showError(e);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async removeGroup(groupId) {
+      this.loading = true;
+      try {
+        await this.deleteGroup({
+          groupUuid: groupId,
+        });
+        this.$emit('removeGroup', groupId);
+      } catch (e) {
+        this.showError(e);
+      } finally {
+        this.loading = false;
+      }
+    },
     async moveEntity(event) {
       const {
         entity, from, to, targetList, sourceList,
@@ -170,51 +214,37 @@ export default {
           repositoryId: this.repositoryUuid,
           groupId: to === 'ungrouped' ? null : to,
         });
-
         this.updateGroups(from, to, targetList, sourceList);
+      } catch (e) {
+        this.showError(e);
+        this.needsUpdate = !this.needsUpdate;
       } finally {
         this.loading = false;
       }
     },
     onRemoveEntity(entity, groupId) {
       this.$buefy.dialog.alert({
-        title: 'Delete Entity',
-        message: 'Are you sure you want to delete this entity?',
-        confirmText: 'Ok',
-        cancelText: 'Cancel',
+        title: this.$t('webapp.home.delete_entity'),
+        message: this.$t('webapp.home.delete_entity_message', { entity: entity.value }),
+        confirmText: this.$t('webapp.home.ok'),
+        cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
         onConfirm: async () => {
-          this.loading = true;
-          try {
-            await this.deleteEntity({
-              entityId: entity.entity_id,
-            });
-            this.$emit('removeEntity', { entity, groupId });
-          } finally {
-            this.loading = false;
-          }
+          this.removeEntity(entity, groupId);
         },
       });
     },
-    onRemoveGroup(groupId) {
+    onRemoveGroup(group) {
       this.$buefy.dialog.alert({
-        title: 'Delete Group',
-        message: 'Are you sure you want to delete this entity group?',
-        confirmText: 'Ok',
-        cancelText: 'Cancel',
+        title: this.$t('webapp.home.delete_group'),
+        message: this.$t('webapp.home.delete_group_message', { group: group.value }),
+        confirmText: this.$t('webapp.home.ok'),
+        cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
         onConfirm: async () => {
-          this.loading = true;
-          try {
-            await this.deleteGroup({
-              groupUuid: groupId,
-            });
-            this.$emit('removeGroup', groupId);
-          } finally {
-            this.loading = false;
-          }
+          this.removeGroup(group.group_id);
         },
       });
     },

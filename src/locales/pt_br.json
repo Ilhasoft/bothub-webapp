@@ -162,11 +162,18 @@
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
       "no_repo": "Nenhum repositório encontrado.",
+      "default_error": "Um erro ocorreu",
       "edit_groups": "Editar grupos",
       "finish_editing": "Concluir edição",
       "enter": "Enviar",
       "create_new_group": "Criar grupo",
-      "new_group_named": "Novo grupo de entidades: {name}"
+      "new_group_named": "Novo grupo de entidades: {name}",
+      "delete_entity": "Deletar entidade",
+      "delete_entity_message": "Tem certeza que deseja remover a entidade \"{entity}\"?",
+      "delete_group": "Deletar grupo de entidades",
+      "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
+      "ok": "ok",
+      "cancel": "cancel"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
