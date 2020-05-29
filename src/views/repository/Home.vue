@@ -124,9 +124,6 @@ export default {
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
-    labeledEntitiesCount() {
-      return this.repository.labels.reduce((acc, label) => acc + label.entities.length, 0);
-    },
   },
   watch: {
     edit() {

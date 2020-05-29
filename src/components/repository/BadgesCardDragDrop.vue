@@ -25,11 +25,13 @@
         :class="[
           'badges-card__wrapper__badge',
           getEntityClass(item.value),
+          `badges-card__wrapper__badge--${edit ? 'moving' : 'locked'}`,
         ]"
         :closable="edit"
         rounded
         size="small"
         @close="close(item)"
+        @click.native="goToEntity(item.entity_id)"
       >
         <span>{{ item.value }}</span>
     </b-tag></draggable>
@@ -100,6 +102,10 @@ export default {
     this.updateLocalList();
   },
   methods: {
+    goToEntity(entityId) {
+      if (this.edit) return;
+      this.$router.push({ name: 'repository-entitylist', params: { entity: entityId } });
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
@@ -159,7 +165,7 @@ export default {
 
     &__icon {
       color: #CFD5D9;
-      cursor: pointer;
+        cursor: pointer;
     }
 
     &__wrapper {
@@ -173,6 +179,14 @@ export default {
         font-weight: bold;
         line-height: calc(1.5rem - 4px);
         border-width: 1px;
+
+        &--moving {
+          cursor: move
+        }
+
+        &--locked {
+          cursor: pointer;
+        }
       }
     }
   }

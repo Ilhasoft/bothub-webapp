@@ -96,6 +96,7 @@
         <bh-button
           :disabled="textSelected === null"
           rounded
+          primary
           @click.prevent.stop="addPendingEntity"
         >
           {{ entityButtonText }}
@@ -107,7 +108,7 @@
             Cancel
           </bh-button>
           <bh-button
-            :disabled="!isValid || submitting || pendingEntities.length > 0"
+            :disabled="!isValid || submitting"
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
             secondary
@@ -145,6 +146,14 @@ export default {
     intentToEdit: {
       type: String,
       default: '',
+    },
+    languageEdit: {
+      type: String,
+      default: '',
+    },
+    editExampleEntityList: {
+      type: Boolean,
+      default: false,
     },
     sentenceId: {
       type: Number,
@@ -234,7 +243,7 @@ export default {
   methods: {
     ...mapActions([
       'updateEvaluateExample',
-      'setUpdateRepository',
+      'editSentence',
     ]),
     cancelEditSentence() {
       this.$emit('cancel');
@@ -339,25 +348,45 @@ export default {
       }
     },
     async onSubmit() {
+      const entitiesSave = [...this.pendingEntities, ...this.entitiesToEdit];
+
       this.errors = {};
       this.submitting = true;
 
+      const entitiesResponse = entitiesSave.map((entityValue) => {
+        const { start, end, entity } = entityValue;
+        return { start, end, entity };
+      });
+
       try {
-        await this.updateEvaluateExample({
-          repository: this.repository.uuid,
-          id: this.sentenceId,
-          version: this.version,
-          text: this.text,
-          intent: this.intent,
-          entities: this.entitiesToEdit,
-          language: this.language,
-        });
+        if (this.editExampleEntityList) {
+          await this.editSentence({
+            repository: this.repository.uuid,
+            id: this.sentenceId,
+            version: this.version,
+            text: this.text,
+            intent: this.intent,
+            entities: entitiesResponse,
+            language: this.languageEdit,
+          });
+        } else {
+          await this.updateEvaluateExample({
+            repository: this.repository.uuid,
+            id: this.sentenceId,
+            version: this.version,
+            text: this.text,
+            intent: this.intent,
+            entities: entitiesSave,
+            language: this.language,
+          });
+        }
+
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');
         }
 
-        this.setUpdateRepository(true);
+        this.$emit('saveList');
         return true;
       } catch (error) {
         this.errors.intent = [error.message];
