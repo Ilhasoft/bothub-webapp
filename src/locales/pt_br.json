@@ -350,7 +350,7 @@
     },
     "entity":{
       "title": "Entidade",
-      "description": "Essa entidade contém {n} sentenças.",
+      "description": "Essa entidade contém {n} sentença | Essa entidade contém {n} sentenças.",
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
