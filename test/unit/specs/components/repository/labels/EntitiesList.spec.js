@@ -31,6 +31,7 @@ describe('EntitiesList.vue', () => {
       store,
       mocks: {
         $t: () => 'some specific text',
+        $tc: () => 'some specific text',
         $route: {
           params: { entity },
         },
