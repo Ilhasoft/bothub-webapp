@@ -1,38 +1,32 @@
 <template>
   <sentence-accordion
     :open.sync="open">
-
     <div
       slot="header"
       class="level">
-
       <div class="example-accordion__tag level-left">
         <language-badge :language="language"/>
       </div>
-
       <div
-        v-if="!open"
-        class="level-right example-accordion__text">{{ text }}</div>
-
-      <div
-        v-else
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="open && !editing"
+          v-if="!editing || !open"
           :text="text"
+          :prefix-color-available="true"
+          :prefix-color="entitiesList[0].class"
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
     <div
+      v-if="editing"
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute && !training"
+        v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
           <a
-            v-show="!editing"
             :href="`#delete-example-${id}`"
             class="has-text-danger"
             @click.prevent.stop="editSentence()">
@@ -69,10 +63,12 @@
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
+        :edit-example-entity-list="true"
         :text-to-edit="text"
         :sentence-id="id"
-        @cancel="cancelEditSentence"
-        @saveList="updateList"/>
+        :language-edit="language"
+        @saveList="updateList"
+        @cancel="cancelEditSentence"/>
     </div>
   </sentence-accordion>
 </template>
@@ -86,15 +82,17 @@ import EditExample from '@/components/shared/accordion/EditExample';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import BadgesCard from '@/components/repository/BadgesCard';
 
 export default {
-  name: 'ExampleAccordion',
+  name: 'SentencesEntityList',
   components: {
     SentenceAccordion,
     ExampleInfo,
     EditExample,
     HighlightedText,
     LanguageBadge,
+    BadgesCard,
   },
   props: {
     id: {
@@ -113,22 +111,23 @@ export default {
       type: String,
       default: '',
     },
-    training: {
-      type: Boolean,
-      default: false,
-    },
     language: {
       type: String,
       default: '',
+    },
+    editing: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
     return {
       open: false,
       deleteDialog: null,
-      editing: false,
+      remove: true,
     };
   },
+
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
@@ -145,23 +144,24 @@ export default {
         }));
     },
   },
-  watch: {
-    open() {
-      if (!this.open) {
-        this.cancelEditSentence();
-      }
-    },
-  },
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
       'deleteExample',
     ]),
     getEntityClass(entity) {
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
+        allEntitiesName,
       );
       return `entity-${color}`;
     },
@@ -174,39 +174,26 @@ export default {
       }, 'unlabeled');
     },
     deleteThisExample() {
-      return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$buefy.dialog.confirm({
-          message: this.$t('webapp.trainings.delete_phrase_modal'),
-          confirmText: this.$t('webapp.trainings.delete_button'),
-          cancelText: this.$t('webapp.trainings.cancel_button'),
-          type: 'is-danger',
-          onConfirm: async () => {
-            if (this.training) {
-              await this.deleteExample({ id: this.id });
-              this.$emit('deleted');
-              resolve();
-            } else {
-              await this.deleteEvaluateExample({
-                id: this.id,
-                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-              });
-              this.$emit('deleted');
-              resolve();
-            }
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
-          },
-        });
+      this.deleteDialog = this.$buefy.dialog.confirm({
+        title: this.$t('webapp.trainings.delete_title'),
+        message: this.$t('webapp.trainings.delete_phrase_modal'),
+        confirmText: this.$t('webapp.trainings.delete_button'),
+        cancelText: this.$t('webapp.trainings.cancel_button'),
+        inputAttrs: {
+          textAlign: 'center',
+        },
+        type: 'is-danger',
+        onConfirm: async () => {
+          await this.deleteExample({ id: this.id });
+          this.$emit('dispatchEvent', { event: 'itemDeleted' });
+        },
       });
     },
     cancelEditSentence() {
-      this.editing = false;
+      this.open = !this.open;
     },
     editSentence() {
-      this.editing = true;
-      this.open = true;
+      this.open = !this.open;
     },
     updateList() {
       this.$emit('updateList');

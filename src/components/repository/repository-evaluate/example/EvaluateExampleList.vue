@@ -5,7 +5,8 @@
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
-      @itemDeleted="onItemDeleted($event)" />
+      @itemDeleted="onItemDeleted($event)"
+      @itemSave="onItemSave()" />
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">{{ $t('webapp.evaluate.no_sentences') }}</p>
@@ -81,6 +82,9 @@ export default {
     },
     onItemDeleted() {
       this.$emit('deleted');
+    },
+    onItemSave() {
+      this.updateExamples(true);
     },
   },
 };

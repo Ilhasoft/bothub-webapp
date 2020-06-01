@@ -33,6 +33,20 @@ export default {
       ...query,
     });
   },
+  edit(repository, version, text, language, entities, intent, id, isCorrected) {
+    return request.$http.patch(
+      `/v2/repository/example/${id}/`,
+      {
+        repository,
+        repository_version: version,
+        text,
+        language,
+        entities,
+        intent,
+        is_corrected: isCorrected,
+      },
+    );
+  },
   get(id) {
     return request.$http.get(`/v2/repository/example/${id}/`);
   },
