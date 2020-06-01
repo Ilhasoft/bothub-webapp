@@ -72,6 +72,11 @@ export default {
       default: null,
     },
   },
+  computed: {
+    nameList() {
+      return this.list.map(item => item.value || item);
+    },
+  },
   methods: {
     entityList(entity) {
       this.$router.push({ name: 'repository-entitylist', params: { entity } });
@@ -79,7 +84,7 @@ export default {
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
-        this.list,
+        this.nameList,
       );
       return `entity-${color}`;
     },
