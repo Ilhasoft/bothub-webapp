@@ -76,8 +76,6 @@
 
                         />
                       </div>
-
-
                     </div>
 
                     <div
@@ -86,14 +84,13 @@
                       <span>No file chosen</span>
                     </div>
                   </div>
-                  <p>Choose the file containing the sentences you want
-                  import it translations. Use the following <a>format</a></p>
+                  <p>{{ errorMessage }}</p>
 
                   <div class="repository-translate__styleButton">
                     <b-button
                       :loading="waitDownloadFile"
                       :disabled="translationFile === null"
-                      class="repository-translate__buttons"
+                      class="repository-translate__buttons modalButton"
                       type="is-primary"
                       @click="importTranslation()">Import</b-button>
                   </div>
@@ -108,7 +105,9 @@
               <div class="repository-translate__switchModal__switch">
                 <b-field
                   label="Export only not translated sentences"/>
-                <b-switch v-model="isSwitched">
+                <b-switch
+                  v-model="isSwitched"
+                  class="repository-translate__switchModal__switch__button">
                   {{ checkSwitch }}
                 </b-switch>
                 <p>When enabling this option, the export file will contain
@@ -117,7 +116,7 @@
                   <b-button
                     :loading="waitDownloadFile"
                     type="is-primary"
-                    class="repository-translate__buttons"
+                    class="repository-translate__buttons modalButton"
                     @click="exportTranslation()">Export</b-button>
                 </div>
               </div>
@@ -198,6 +197,7 @@ export default {
       query: {},
       querySchema: {},
       errors: '',
+      errorMessage: '',
     };
   },
 
@@ -215,6 +215,7 @@ export default {
   watch: {
     isImportFileVisible() {
       if (this.isImportFileVisible === false) {
+        this.errorMessage = '';
         return this.removeSelectedFile();
       }
       return '';
@@ -234,7 +235,7 @@ export default {
           versionUUID: this.selectedRepository.repository_version_id,
           fromLanguage: this.translate.from,
           toLanguagem: this.translate.to,
-          statusTranslation: this.isSwitched,
+          statusTranslation: !this.isSwitched,
         });
         this.forceFileDownload(xlsFile);
         this.$buefy.toast.open({
@@ -262,7 +263,7 @@ export default {
         });
         this.forceFileDownload(importDownload);
       } catch (error) {
-        this.errors = error;
+        this.errorMessage = 'There was an error with the file';
       }
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
@@ -349,15 +350,21 @@ export default {
    display: flex;
     justify-content: center;
     align-items: center;
+
  &__file{
     background-color: $color-white;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 13rem;
+    margin: 0 15rem;
+    padding-left: 0.7rem;
+    border-radius: 0.5rem;
 
     p{
       font-size: $font-small;
+      color: red;
+      font-weight: $font-weight-medium;
     }
   }
 }
@@ -372,8 +379,15 @@ export default {
       background-color: $color-white;
       justify-content: center;
       align-items: center;
-      height: 11rem;
+      height: 11.5rem;
       padding: 1rem;
+      margin: 0 15rem;
+      padding-left: 1.2rem;
+      border-radius: 0.5rem;
+
+      &__button{
+        margin-top:0.4rem;
+      }
         p{
         font-size: $font-small;
         }
@@ -385,6 +399,10 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .modalButton{
+      width: 10rem;
+    }
   }
 
   &__buttons{

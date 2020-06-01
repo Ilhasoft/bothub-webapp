@@ -8,6 +8,7 @@
       :language="language"
       training
       @deleted="onExampleDeleted"
+      @updateList="onExampleSave"
     />
   </div>
 </template>
@@ -54,6 +55,9 @@ export default {
   methods: {
     onExampleDeleted() {
       this.$emit('deleted');
+    },
+    onExampleSave() {
+      this.$emit('saveExamples');
     },
   },
 };
