@@ -25,7 +25,6 @@ export default {
   },
 
   editEntity(entityId, name, groupId) {
-    console.log({entityId, name, groupId})
     return request.$http.patch(
       `v2/repository/entities/${entityId}/`,
       {
