@@ -252,7 +252,7 @@
       "export_title": "Export only not translated sentences",
       "export_switch_no": "No",
       "export_switch_yes": "Yes",
-      "export_field_text": "When enabling this option, the export file will contain just not translated sentences"
+      "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
