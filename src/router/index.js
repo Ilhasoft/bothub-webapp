@@ -17,6 +17,7 @@ import RepositoryResults from '@/views/repository/Results';
 import RepositoryResult from '@/views/repository/Result';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
+import Entity from '@/views/repository/Entity';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
@@ -130,6 +131,11 @@ export default new Router({
           path: ':ownerNickname/:slug/results/',
           name: 'repository-results',
           component: RepositoryResults,
+        },
+        {
+          path: ':ownerNickname/:slug/entitylist/:entity',
+          name: 'repository-entitylist',
+          component: Entity,
         },
         {
           path: ':ownerNickname/:slug/result/:resultId/',
