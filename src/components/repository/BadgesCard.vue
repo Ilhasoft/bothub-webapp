@@ -2,17 +2,38 @@
   <div class="badges-card">
     <div v-html="title" />
     <div class="badges-card__wrapper">
-      <bh-badge
-        v-for="(item, i) in list"
-        :key="i"
-        :class="[
-          'badges-card__wrapper__badge',
-          getEntityClass(item),
-        ]"
-        size="small"
-      >
-        <span>{{ item }}</span>
-      </bh-badge>
+      <div v-if="clickable">
+        <b-tag
+          v-for="(item, i) in list"
+          :key="i"
+          :class="[
+            'badges-card__wrapper__badge badges-card__wrapper__clickable',
+            getEntityClass(item),
+          ]"
+          size="small"
+          @click.native="entityList(item.entity_id)">
+
+          <span>{{ item.value }}</span>
+
+        </b-tag>
+      </div>
+      <div v-else>
+        <b-tag
+          v-for="(item, i) in list"
+          :key="i"
+          :class="[
+            'badges-card__wrapper__badge',
+            getEntityClass(item),
+          ]"
+          size="small">
+
+          <span>{{ item }}</span>
+
+
+        </b-tag>
+      </div>
+
+
     </div>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
@@ -30,6 +51,18 @@ export default {
       type: String,
       default: '',
     },
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
+    repository: {
+      type: Object,
+      default: null,
+    },
+    entityId: {
+      type: Number,
+      default: null,
+    },
     list: {
       type: Array,
       default: () => ([]),
@@ -40,6 +73,9 @@ export default {
     },
   },
   methods: {
+    entityList(entity) {
+      this.$router.push({ name: 'repository-entitylist', params: { entity } });
+    },
     getEntityClass(entity) {
       const color = getEntityColor(
         entity,
@@ -52,6 +88,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -64,10 +102,22 @@ export default {
       &__badge {
         height: 1.5rem;
         margin: .4rem .5rem 0 0;
+        padding: 0 1rem 0 1rem;
         font-weight: bold;
         line-height: calc(1.5rem - 4px);
         border-width: 1px;
+        border-radius: 1rem;
+
+        span{
+          font-size: $font-small;
+          font-family: $font-family;
+          font-weight: $font-weight-normal;
+        }
       }
+
+    &__clickable{
+      cursor: pointer;
     }
   }
+}
 </style>

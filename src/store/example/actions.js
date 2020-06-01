@@ -10,6 +10,21 @@ export default {
     const response = await example.new(repository, repositoryVersion, text, language, entities, intent, isCorrected);
     return response;
   },
+  async editSentence(store, {
+    repository, version, text, language, entities, intent, id, isCorrected = false,
+  }) {
+    const response = await example.edit(
+      repository,
+      version,
+      text,
+      language,
+      entities,
+      intent,
+      id,
+      isCorrected,
+    );
+    return response;
+  },
   async getExamples(store, { repositoryUuid }) {
     const response = await example.all(repositoryUuid);
     return response;
@@ -40,6 +55,16 @@ export default {
   },
   async getEntities(store, { repositoryUuid, value }) {
     const response = await entity.search(repositoryUuid, { value });
+    return response;
+  },
+  async editEntityName(store, {
+    group, entityId, value,
+  }) {
+    const response = await entity.edit(
+      group,
+      entityId,
+      value,
+    );
     return response;
   },
 };

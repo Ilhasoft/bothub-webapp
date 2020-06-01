@@ -60,30 +60,35 @@
           :title="formattedEntityTitle()"
         />
       </div>
-
       <div
-        v-if="hasLabels"
+        v-if="hasGroups"
         class="repository-home__entities-list"
       >
         <div class="repository-home__title">
           {{ $t('webapp.home.entities_list') }}
         </div>
+
         <badges-card
-          v-if="repository.other_label.entities.length > 0"
-          :list="repository.other_label.entities"
-          :title="formattedLabel(repository.other_label)"
-          :examples-count="repository.other_label.examples__count"
+          v-if="repository.other_group.entities.length > 0"
+          :list="repository.other_group.entities"
+          :clickable="true"
+          :repository="repository"
+          :title="formattedLabel(repository.other_group)"
+          :examples-count="repository.other_group.examples__count"
+          class="label"
         />
-        <div v-if="repository.labels.length > 0">
+        <div v-if="repository.groups.length > 0">
           <div class="repository-home__entities-list__labeled-count">
             {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
           </div>
           <badges-card
-            v-for="(label, i) in repository.labels"
+            v-for="(group, i) in repository.groups"
             :key="i"
-            :list="label.entities"
-            :title="formattedLabel(label)"
-            :examples-count="label.examples__count"
+            :list="group.entities"
+            :clickable="true"
+            :repository="repository"
+            :title="formattedLabel(group)"
+            :examples-count="group.examples__count"
           />
         </div>
       </div>
@@ -125,6 +130,16 @@ export default {
     };
   },
   computed: {
+    hasGroups() {
+      if (
+        !this.repository.attributes.groups
+        || !this.repository.attributes.other_group
+        || !this.repository.attributes.other_group.entities
+      ) {
+        return false;
+      }
+      return this.repository.groups.length > 0 || this.repository.other_group.entities.length > 0;
+    },
     hasIntents() {
       return this.repository.intents_list.length > 0;
     },
@@ -132,37 +147,26 @@ export default {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
     labeledEntitiesCount() {
-      return this.repository.labels.reduce((acc, label) => acc + label.entities.length, 0);
-    },
-    hasLabels() {
-      if (
-        !this.repository.labels
-        || !this.repository.other_label
-        || !this.repository.other_label.entities
-      ) {
-        return false;
-      }
-
-      return this.repository.labels.length > 0 || this.repository.other_label.entities.length > 0;
+      return this.repository.groups.reduce((acc, group) => acc + group.entities.length, 0);
     },
   },
   methods: {
-    formattedLabel(label) {
-      if (label === undefined || label.entities === undefined) {
+    formattedLabel(group) {
+      if (group === undefined || group.entities === undefined) {
         return '';
       }
 
-      const entity = label.entities.length > 1 ? 'entities' : 'entity';
+      const entity = group.entities.length > 1 ? 'entities' : 'entity';
 
-      if (label.value === 'other') {
-        return this.$t('webapp.home.unlabeled', { entities_length: label.entities.length, _entity: entity });
+      if (group.value === 'other') {
+        return this.$t('webapp.home.unlabeled', { entities_length: group.entities.length, _entity: entity });
       }
 
       return this.$t('webapp.home.labeled',
         {
-          entities_length: label.entities.length,
+          entities_length: group.entities.length,
           _entity: entity,
-          label_value: label.value,
+          group_value: group.value,
         });
     },
     formattedEntityTitle() {

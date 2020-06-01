@@ -1,11 +1,14 @@
+/* eslint-disable global-require */
 /* eslint-disable func-names */
 export default {
   addLighthouse() {
     if (window.hdlh || !process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY) return;
+    const img = require('../../assets/imgs/mascot.svg');
     window.hdlh = {
       widget_key: process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY,
       primary_color: '#2BBFAC',
-      brand: 'Bothub',
+      logo: img,
+      brand: 'BotHub',
       disable_contact_button: true,
       onLoad: () => { window.Lighthouse.hideButton(); },
       onHide: () => { window.Lighthouse.hideButton(); },

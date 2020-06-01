@@ -1,13 +1,26 @@
 <template>
   <div class="highlighted">
-    <div
-      v-for="(entity, i) in entitiesBlocks"
-      :key="i"
-      class="highlighted-entity">
-      <span class="highlighted-entity-before">{{ entity.before }}</span>
-      <span
-        :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
-      >{{ entity.text }}</span>
+    <div v-if="prefixColorAvailable">
+      <div
+        v-for="(entity, i) in prefixEntities"
+        :key="i"
+        class="highlighted-entity">
+        <span class="highlighted-entity-before">{{ entity.before }}</span>
+        <span
+          :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
+        >{{ entity.text }}</span>
+      </div>
+    </div>
+    <div v-else>
+      <div
+        v-for="(entity, i) in entitiesBlocks"
+        :key="i"
+        class="highlighted-entity">
+        <span class="highlighted-entity-before">{{ entity.before }}</span>
+        <span
+          :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
+        >{{ entity.text }}</span>
+      </div>
     </div>
     <div class="highlighted-base">{{ text }}</div>
     <div class="highlighted-text">{{ text }}</div>
@@ -16,7 +29,7 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-
+import { mapState } from 'vuex';
 
 export default {
   name: 'HighlightedText',
@@ -33,12 +46,23 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    prefixColor: {
+      type: String,
+      default: '',
+    },
+    prefixColorAvailable: {
+      type: Boolean,
+      default: false,
+    },
     failed: {
       type: String,
       default: '',
     },
   },
   computed: {
+    ...mapState({
+      repository: state => state.Repository.selectedRepository,
+    }),
     entitiesBlocks() {
       return this.entities
         .map(({ start, end, entity }) => {
@@ -46,6 +70,33 @@ export default {
             entity,
             this.allEntities,
             this.entities,
+          );
+          const colorClass = `entity-${color}`;
+          const before = this.text.substring(0, start);
+          const text = this.text.substring(start, end);
+          return {
+            start,
+            end,
+            colorClass,
+            before,
+            text,
+          };
+        });
+    },
+    prefixEntities() {
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
+
+      return this.entities
+        .map(({ start, end, entity }) => {
+          const color = getEntityColor(
+            entity,
+            allEntitiesName,
           );
           const colorClass = `entity-${color}`;
           const before = this.text.substring(0, start);
