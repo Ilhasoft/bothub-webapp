@@ -24,13 +24,12 @@ export default {
     return request.$http.delete(`v2/repository/entities/${entityId}/`);
   },
 
-  editEntity(entityId, name, repositoryUUID, groupId) {
-    return request.$http.put(
+  editEntity(entityId, name, groupId) {
+    console.log({entityId, name, groupId})
+    return request.$http.patch(
       `v2/repository/entities/${entityId}/`,
       {
-        id: entityId,
         value: name,
-        repository: repositoryUUID,
         group_id: groupId,
       },
     );
@@ -43,11 +42,10 @@ export default {
     });
     return new utils.List(`/v2/repository/entities?${queryString}`);
   },
-  edit(group, entityId, value) {
+  editEntityName(entityId, value) {
     return request.$http.patch(
       `/v2/repository/entities/${entityId}/`,
       {
-        group,
         value,
       },
     );
