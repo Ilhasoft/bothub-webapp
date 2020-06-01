@@ -109,7 +109,7 @@ export default {
         this.$emit('saveEdition');
       } catch (error) {
         this.$buefy.toast.open({
-          message: 'Something\'s not good, my bad!',
+          message: this.$t('webapp.entity.error_entity'),
           type: 'is-danger',
         });
       }

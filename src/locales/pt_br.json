@@ -353,7 +353,8 @@
       "description": "Essa entidade contém {n} sentenças.",
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
-      "no_sentences": "Nenhuma senteça."
+      "no_sentences": "Nenhuma senteça.",
+      "error_entity": "Aconteceu um erro."
     }
   }
 }
