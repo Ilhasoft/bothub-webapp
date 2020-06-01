@@ -1,7 +1,7 @@
 <template>
   <div class="entity-list__header">
     <div class="entity-list__content">
-      <h1> <strong>Entity</strong> </h1>
+      <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
       <b-tag
         v-if="!EditSentences"
         :class="[
@@ -18,17 +18,17 @@
       </b-field>
     </div>
     <div class="entity-list__header__options">
-      <p> This entity contain in {{ entitiesList.total }} sentences.</p>
+      <p> {{ $tc('webapp.entity.description', entitiesList.total) }}</p>
       <b-button
         v-if="!EditSentences"
         ref="editEntityEvent"
         class="entity-list__header__options__buttonEdit"
-        @click.native="editOptionsEntity()">Edit Entity</b-button>
+        @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
       <b-button
         v-else
         ref="saveEntityEvent"
         class="entity-list__header__options__buttonSave"
-        @click.native="saveEdition()">Save Edit</b-button>
+        @click.native="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
     </div>
   </div>
 </template>

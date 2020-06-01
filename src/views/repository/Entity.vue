@@ -24,7 +24,7 @@
 
         <p
           v-if="examplesList && examplesList.empty"
-          class="no-examples">No examples.</p>
+          class="no-examples">{{ $t('webapp.entity.no_sentences') }}</p>
       </div>
       <b-notification
         v-else

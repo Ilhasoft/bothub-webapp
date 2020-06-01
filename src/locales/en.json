@@ -345,6 +345,13 @@
         "close": "Close"
       },
       "confirm_deleting_version": "Delete Version"
+    },
+    "entity":{
+      "title": "Entity",
+      "description": "This entity contain in {n} sentences.",
+      "edit_button": "Edit Entity",
+      "save_button": "Save",
+      "no_sentences": "No sentence."
     }
   }
 }
