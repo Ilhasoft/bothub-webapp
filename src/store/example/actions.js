@@ -58,10 +58,9 @@ export default {
     return response;
   },
   async editEntityName(store, {
-    group, entityId, value,
+    entityId, value,
   }) {
-    const response = await entity.edit(
-      group,
+    const response = await entity.editEntityName(
       entityId,
       value,
     );
