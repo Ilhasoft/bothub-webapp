@@ -8,9 +8,11 @@
         :key="i"
         :class="entity.class"
         rounded>
-        <strong>{{ entity.entity }}</strong>
-        <span v-if="entity.label">is</span>
-        <strong v-if="entity.label">{{ entity.label }}</strong>
+        <span
+          v-if="entity.label"
+          v-html="$t('webapp.evaluate.entity_is_group',
+                     { entity: entity.entity, group: entity.label })" />
+        <strong v-else>{{ entity.entity }}</strong>
       </b-tag>
     </div>
     <div class="example-infos level is-mobile">
@@ -18,7 +20,7 @@
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <strong>Intent:&nbsp;</strong>
+          <strong>{{ $t('webapp.evaluate.intent') }}:&nbsp;</strong>
           <span>{{ intent }}</span>
         </div>
       </div>
