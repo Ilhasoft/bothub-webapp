@@ -103,6 +103,7 @@ export default {
             repository: this.repositoryList.uuid,
           },
           entityId: this.entityId,
+          repositoryVersion: this.repositoryVersion,
           value: this.entityName.entity,
         });
         this.setUpdateRepository(true);

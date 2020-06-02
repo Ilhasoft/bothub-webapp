@@ -58,11 +58,12 @@ export default {
     return response;
   },
   async editEntityName(store, {
-    entityId, value,
+    entityId, value, repositoryVersion,
   }) {
     const response = await entity.editEntityName(
       entityId,
       value,
+      repositoryVersion,
     );
     return response;
   },
