@@ -11,7 +11,7 @@
           :entity-name="entitySearch"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
-          @saveEdition="onItemSave()"/>
+          @saveEdition="onItemSave($event)"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
@@ -147,7 +147,6 @@ export default {
       return '';
     },
     onSearch(value) {
-      // console.log(value);
       Object.assign(this.querySchema, value);
 
       if (!this.querySchema.entity) {
@@ -170,8 +169,14 @@ export default {
     onItemDeleted() {
       this.onSearch(this.entitySearch);
     },
-    onItemSave() {
-      this.onSearch(this.entitySearch);
+    onItemSave(entityName) {
+      if (entityName === undefined) {
+        return this.onSearch(this.entitySearch);
+      }
+      const newEntity = {
+        entity: entityName,
+      };
+      return this.onSearch(newEntity);
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;

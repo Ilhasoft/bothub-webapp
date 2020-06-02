@@ -2,6 +2,7 @@
   <div class="entity-list__header">
     <div class="entity-list__content">
       <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
+      <button @click="show">s</button>
       <b-tag
         v-if="!EditSentences"
         :class="[
@@ -14,7 +15,7 @@
       <b-field
         v-else
         class="entity-list__content__editEntityName">
-        <b-input v-model="entityName.entity"/>
+        <b-input v-model="entityFormatted"/>
       </b-field>
     </div>
     <div class="entity-list__header__options">
@@ -36,6 +37,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
+import { formatters } from '@/utils';
 
 export default {
   name: 'EntitiesList',
@@ -57,6 +59,7 @@ export default {
     return {
       EditSentences: false,
       entityId: this.$route.params.entity,
+      entityFormatted: this.entityName.entity,
     };
   },
   computed: {
@@ -64,12 +67,25 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repositoryList: 'getCurrentRepository',
     }),
+    entityFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
+    },
+  },
+  watch: {
+    entityFormatted() {
+      this.entityFormatted = (formatters.bothubItemKey()(this.entityFormatted));
+    },
   },
   methods: {
     ...mapActions([
       'editEntityName',
       'setUpdateRepository',
     ]),
+    show() {
+      return formatters.bothubItemKey();
+    },
     getEntityClass(entity) {
       const entitiesName = this.repository.other_group.entities.map(
         entityValue => entityValue.value,
@@ -103,11 +119,14 @@ export default {
             repository: this.repositoryList.uuid,
           },
           entityId: this.entityId,
-          value: this.entityName.entity,
+          value: this.entityFormatted,
         });
+        this.entityName.entity = this.entityFormatted;
         this.setUpdateRepository(true);
-        this.$emit('saveEdition');
+        this.$emit('saveEdition', this.entityFormatted);
       } catch (error) {
+        this.entityName.entity = this.entityName.entity;
+        this.entityFormatted = this.entityName.entity;
         this.$buefy.toast.open({
           message: this.$t('webapp.entity.error_entity'),
           type: 'is-danger',
