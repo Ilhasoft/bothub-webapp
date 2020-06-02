@@ -14,12 +14,16 @@
               <b-button
                 :class="{'is-primary':!!translate.from && !!translate.to}"
                 class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToImport()">Import</b-button>
+                @click="checkLanguageToImport()">
+                {{ $t('webapp.translate.import_button') }}
+              </b-button>
 
               <b-button
                 :class="{'is-primary':!!translate.from && !!translate.to}"
                 class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToExport()">Export</b-button>
+                @click="checkLanguageToExport()">
+                {{ $t('webapp.translate.export_button') }}
+              </b-button>
 
             </div>
             <div class="repository-translate__field">
@@ -54,13 +58,13 @@
               <div class="repository-translate__fileModal__file">
 
                 <b-field
-                  label="Select a file to import"
+                  :label="$t('webapp.translate.import_title')"
                   class="custom-file-upload">
                   <div class="custom-file-upload__input">
                     <b-upload v-model="translationFile">
                       <a class="button is-primary">
                         <b-icon icon="upload"/>
-                        <span>Click to upload</span>
+                        <span>{{ $t('webapp.translate.import_select_button') }}</span>
                       </a>
                     </b-upload>
                     <div
@@ -81,7 +85,7 @@
                     <div
                       v-else
                       class="custom-file-upload__input__file">
-                      <span>No file chosen</span>
+                      <span>{{ $t('webapp.translate.import_field_text') }}</span>
                     </div>
                   </div>
                   <p>{{ errorMessage }}</p>
@@ -92,7 +96,9 @@
                       :disabled="translationFile === null"
                       class="repository-translate__buttons modalButton"
                       type="is-primary"
-                      @click="importTranslation()">Import</b-button>
+                      @click="importTranslation()">
+                      {{ $t('webapp.translate.import_button') }}
+                    </b-button>
                   </div>
                 </b-field>
 
@@ -104,20 +110,21 @@
               class="repository-translate__switchModal">
               <div class="repository-translate__switchModal__switch">
                 <b-field
-                  label="Export only not translated sentences"/>
+                  :label="$t('webapp.translate.export_title')"/>
                 <b-switch
                   v-model="isSwitched"
                   class="repository-translate__switchModal__switch__button">
                   {{ checkSwitch }}
                 </b-switch>
-                <p>When enabling this option, the export file will contain
-                just not translated sentences</p>
+                <p> {{ $t('webapp.translate.export_field_text') }}</p>
                 <div class="repository-translate__styleButton">
                   <b-button
                     :loading="waitDownloadFile"
                     type="is-primary"
                     class="repository-translate__buttons modalButton"
-                    @click="exportTranslation()">Export</b-button>
+                    @click="exportTranslation()">
+                    {{ $t('webapp.translate.export_button') }}
+                  </b-button>
                 </div>
               </div>
 
@@ -207,9 +214,9 @@ export default {
     }),
     checkSwitch() {
       if (this.isSwitched === true) {
-        return 'Yes';
+        return this.$t('webapp.translate.export_switch_yes');
       }
-      return 'No';
+      return this.$t('webapp.translate.export_switch_no');
     },
   },
   watch: {
@@ -263,7 +270,7 @@ export default {
         });
         this.forceFileDownload(importDownload);
       } catch (error) {
-        this.errorMessage = 'There was an error with the file';
+        this.errorMessage = this.$t('webapp.translate.import_select_error');
       }
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
@@ -457,6 +464,10 @@ export default {
      align-items:center;
      border-top-right-radius: 0.4rem;
      border-bottom-right-radius: 0.4rem;
+
+     span{
+       font-size:13px;
+     }
    }
    &__icon{
      cursor: pointer;
