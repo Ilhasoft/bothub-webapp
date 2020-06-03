@@ -255,5 +255,4 @@ export default {
 .columns.is-variable .column:last-child {
   padding-right: 0;
 }
-
 </style>

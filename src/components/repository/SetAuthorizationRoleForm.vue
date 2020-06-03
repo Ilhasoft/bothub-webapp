@@ -13,9 +13,9 @@
         <p>&nbsp;</p>
         <b-button
           :disabled="usersProfile.length === 0 || !role"
+          type="is-primary"
           native-type="submit"
-          size="is-small"
-          primary>Invite</b-button>
+          primary>{{ $t('webapp.settings.invite') }}</b-button>
       </div>
     </div>
   </form>

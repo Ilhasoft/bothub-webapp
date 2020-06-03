@@ -185,7 +185,8 @@
       "role": "Papéis:",
       "no_requests": "Sem solicitações.",
       "save": "Salvar",
-      "request": "Fazer pedido"
+      "request": "Fazer pedido",
+      "invite": "Enviar convite"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
