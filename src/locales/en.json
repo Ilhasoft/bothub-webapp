@@ -17,7 +17,9 @@
       "request_authorization": "Request Authorization",
       "authorization_requested": "Authorization Requested",
       "authorization_success": "Request made! Wait for review of an admin.",
-      "error_to_retrieve_bot": "Error retrieving intelligence"
+      "error_to_retrieve_bot": "Error retrieving intelligence",
+      "yes": "Yes",
+      "no": "No"
     },
     "login_modal": {
       "login": "Login",
@@ -183,7 +185,9 @@
       "role": "Role:",
       "no_requests": "No requests.",
       "save": "Save",
-      "request": "Request"
+      "request": "Request",
+      "invite": "Send Invite",
+      "no_users": "No users in your team."
     },
     "example": {
       "enter_sentence": "Enter your sentence here",
