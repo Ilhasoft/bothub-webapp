@@ -4,14 +4,12 @@
       <div
         class="level-left log-entities">
         <div v-if="entitiesList.length > 0">
-          <strong>Entity:</strong>
+          <strong>{{ $tc('webapp.inbox.entities', entitiesList.length) }}:</strong>
           <b-tag
             v-for="(entity, i) in entitiesList"
             :key="i"
             :class="entity.class"
             rounded>
-            <strong v-if="entity.value">{{ entity.value }}</strong>
-            <span v-if="entity.value">is</span>
             <strong>{{ entity.entity }}</strong>
           </b-tag>
         </div>
@@ -22,13 +20,13 @@
           rounded
           size="is-small"
           icon-left="chart-pie"
-          @click="debug()"> Debug </b-button>
+          @click="debug()"> {{ $t('webapp.inbox.debug') }} </b-button>
         <b-button
           class="repository-log-info__button"
           rounded
           size="is-small"
           icon-left="file-document-outline"
-          @click="showRawInfo()"> Raw </b-button>
+          @click="showRawInfo()"> {{ $t('webapp.inbox.raw') }} </b-button>
       </div>
     </div>
     <div class="log-infos level is-mobile">
@@ -36,8 +34,8 @@
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <strong>Intent:&nbsp;</strong>
-          <span>{{ intent }} ({{ confidence | percent }} confidence)</span>
+          <strong>{{ $t('webapp.inbox.intent') }}:&nbsp;</strong>
+          <span>{{ intent }} ({{ confidence | percent }} {{ $t('webapp.inbox.confidence') }})</span>
         </div>
       </div>
       <div class="level-right">

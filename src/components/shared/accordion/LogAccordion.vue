@@ -126,7 +126,6 @@ export default {
         .map((entity, index) => ({
           value: this.entities[index],
           class: this.getEntityClass(this.entities[index]),
-          label: this.getEntityLabel(this.entities[index]),
           ...entity,
         }));
     },
@@ -174,14 +173,6 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
-    },
-    getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
     },
     showRawInfo() {
       this.$buefy.modal.open({

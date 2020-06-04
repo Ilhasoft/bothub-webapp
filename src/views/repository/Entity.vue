@@ -5,13 +5,14 @@
     <div
       v-if="authenticated"
       class="entity-list">
+
       <div v-if="repository && repository.authorization.can_contribute">
         <entities-list
           :entities-list="examplesList"
           :entity-name="entitySearch"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
-          @saveEdition="onItemSave()"/>
+          @saveEdition="onItemSave($event)"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
@@ -21,7 +22,6 @@
           :editable="entitiesEditable"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
-
         <p
           v-if="examplesList && examplesList.empty"
           class="no-examples">{{ $t('webapp.entity.no_sentences') }}</p>
@@ -44,7 +44,6 @@
         </a>
       </b-notification>
     </div>
-
     <div
       v-else>
       <b-notification
@@ -67,6 +66,7 @@ import PaginatedList from '@/components/shared/PaginatedList';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import SentencesEntityList from '@/components/repository/SentencesEntityList';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'Entity',
@@ -77,6 +77,7 @@ export default {
     PaginatedList,
     SentencesEntityList,
     EntitiesList,
+    Loading,
   },
   extends: RepositoryBase,
   props: {
@@ -93,8 +94,9 @@ export default {
     return {
       name: '',
       examplesList: null,
+      totalList: 0,
       entitySearch: {
-        entity: this.$route.params.entity,
+        entity: this.$route.params.value,
       },
       entitiesEditable: false,
       query: {},
@@ -116,8 +118,8 @@ export default {
     update() {
       this.updateExamples(true);
     },
-    repository() {
-      this.updateExamples(true);
+    repositoryList() {
+      this.updateExamples();
     },
     entitySearch() {
       this.onSearch(this.entitySearch);
@@ -125,53 +127,43 @@ export default {
   },
   mounted() {
     this.updateExamples();
-    this.findEntityById();
     this.onSearch(this.entitySearch);
   },
   methods: {
     ...mapActions([
       'searchExamples',
     ]),
-    findEntityById() {
-      const entityGroup = this.repositoryList.groups.find(
-        entityId => entityId.entities[0].entity_id === this.$route.params.entity,
-      );
-      const entityOtherGroup = this.repositoryList.other_group.entities.find(
-        entityId => entityId.entity_id === this.$route.params.entity,
-      );
-      if (entityGroup) {
-        this.entitySearch.entity = entityGroup.entities[0].value;
-        return '';
-      }
-      this.entitySearch.entity = entityOtherGroup.value;
-      return '';
-    },
     onSearch(value) {
-      // console.log(value);
       Object.assign(this.querySchema, value);
-
       if (!this.querySchema.entity) {
         delete this.querySchema.entity;
       }
-
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
     async updateExamples(force = false) {
-      if (!this.examplesList || force) {
-        this.examplesList = await this.searchExamples({
-          repositoryUuid: this.repository.uuid,
-          version: this.repositoryVersion,
-          query: this.query,
-          limit: this.perPage,
-        });
+      if (this.repositoryList.uuid !== undefined) {
+        if (!this.examplesList || force) {
+          this.examplesList = await this.searchExamples({
+            repositoryUuid: this.repositoryList.uuid,
+            version: this.repositoryVersion,
+            query: this.query,
+            limit: this.perPage,
+          });
+        }
       }
     },
     onItemDeleted() {
       this.onSearch(this.entitySearch);
     },
-    onItemSave() {
-      this.onSearch(this.entitySearch);
+    onItemSave(entityName) {
+      if (entityName === undefined) {
+        return this.onSearch(this.entitySearch);
+      }
+      const newEntity = {
+        entity: entityName,
+      };
+      return this.onSearch(newEntity);
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;

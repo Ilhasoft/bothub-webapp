@@ -73,7 +73,7 @@
             <strong>{{ highlightedText(entity) }}</strong> is
           </label>
           <bh-autocomplete
-            :data="repository.entities_list || []"
+            :data="entitiesOptions || []"
             :formatters="intentFormatters"
             v-model="entity.entity"
             :placeholder="$t('webapp.example.entity')"
@@ -179,6 +179,16 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
+    entitiesOptions() {
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
+      return allEntitiesName;
+    },
     validationErrors() {
       const errors = [];
 

@@ -116,7 +116,8 @@
       "no_sentences": "No sentences.",
       "detailed_results": "Detailed Results",
       "results": "Results",
-      "default_error": "Something went wrong while testing"
+      "default_error": "Something went wrong while testing",
+      "entity_is_group": "<strong>{entity}</strong> is <strong>{group}</strong>"
     },
     "result": {
       "load_result": "Load Results",
@@ -358,7 +359,11 @@
         "add": "Add",
         "close": "Close"
       },
-      "confirm_deleting_version": "Delete Version"
+      "confirm_deleting_version": "Delete Version",
+      "debug": "Debug",
+      "raw": "Raw",
+      "confidence": "Confidence",
+      "entities": "Entity | Entities"
     },
     "entity":{
       "title": "Entity",
@@ -366,7 +371,8 @@
       "edit_button": "Edit Entity",
       "save_button": "Save",
       "no_sentences": "No sentence.",
-      "error_entity": "An error occured."
+      "error_entity": "An error occured.",
+      "error_entity_exists": "Entity already exists"
     }
   }
 }
