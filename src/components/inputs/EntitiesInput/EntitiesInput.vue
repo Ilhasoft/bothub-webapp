@@ -4,7 +4,7 @@
       v-for="entity in entities"
       :key="entity.localId"
       v-model="entity.entity"
-      :available-entities="availableEntities"
+      :available-entities="entitiesOptions"
       :available-labels="availableLabels"
       :entity-class="getEntityClass(entity)"
       :uses-labels="availableAddLabel"
@@ -96,12 +96,19 @@ export default {
   data() {
     return {
       entities: _.cloneDeep(this.value),
+      allEntities: [],
     };
   },
   computed: {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
     }),
+    entitiesOptions() {
+      if (this.allEntities !== undefined) {
+        return this.allEntities;
+      }
+      return [];
+    },
     textSelectedValue() {
       if (!this.textSelected) {
         return null;
@@ -151,10 +158,21 @@ export default {
       this.validateEntities(text, oldText);
     },
   },
+  mounted() {
+    this.getEntitiesName();
+  },
   methods: {
     ...mapActions([
       'getEntities',
+      'getAllEntities',
     ]),
+    async getEntitiesName() {
+      const entities = await this.getAllEntities({
+        repositoryUuid: this.repository.uuid,
+        repositoryVersion: this.repository.version_default.id,
+      });
+      this.allEntities = entities.data.results.map(entity => entity.value);
+    },
     removeEntity(entity) {
       this.entities = this.entities.filter(e => e.localId !== entity.localId);
     },
