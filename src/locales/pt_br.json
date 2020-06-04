@@ -17,7 +17,9 @@
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
       "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
-      "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
+      "error_to_retrieve_bot": "Erro ao trazer sua inteligência",
+      "yes": "Sim",
+      "no": "Não"
     },
     "login_modal": {
       "login": "Login",
@@ -185,7 +187,9 @@
       "role": "Papéis:",
       "no_requests": "Sem solicitações.",
       "save": "Salvar",
-      "request": "Fazer pedido"
+      "request": "Fazer pedido",
+      "invite": "Enviar convite",
+      "no_users": "Sem usuários no time."
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",

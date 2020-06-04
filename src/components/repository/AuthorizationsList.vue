@@ -6,7 +6,9 @@
       :item-component="authorizationItemElem"
       :list="authorizationsList"
       @edit="onEdit($event)" />
-    <p v-if="authorizationsList && authorizationsList.empty">No users in your team.</p>
+    <p v-if="authorizationsList && authorizationsList.empty">
+      {{ $t('webapp.settings.no_users' ) }}
+    </p>
   </div>
 </template>
 
