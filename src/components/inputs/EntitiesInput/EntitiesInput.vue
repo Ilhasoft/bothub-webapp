@@ -46,7 +46,7 @@
 import { getEntityColor } from '@/utils/entitiesColors';
 import { generateTemporaryId } from '@/utils';
 import Vue from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
 import EntityForm from './EntityForm';
 
@@ -99,6 +99,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
     textSelectedValue() {
       if (!this.textSelected) {
         return null;
@@ -182,6 +185,7 @@ export default {
       const entities = await this.getEntities({
         repositoryUuid: this.repository.uuid || this.repository,
         value: entityText,
+        repositoryVersion: this.repositoryVersion,
       });
       await entities.next();
 
