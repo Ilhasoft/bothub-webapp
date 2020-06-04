@@ -368,7 +368,8 @@
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
-      "error_entity": "Aconteceu um erro."
+      "error_entity": "Aconteceu um erro.",
+      "error_entity_exists": "Entidade já existe"
     }
   }
 }
