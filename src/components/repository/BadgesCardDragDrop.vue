@@ -31,7 +31,7 @@
         rounded
         size="small"
         @close="close(item)"
-        @click.native="goToEntity(item.entity_id)"
+        @click.native="goToEntity(item)"
       >
         <span>{{ item.value }}</span>
     </b-tag></draggable>
@@ -102,9 +102,12 @@ export default {
     this.updateLocalList();
   },
   methods: {
-    goToEntity(entityId) {
+    goToEntity(entity) {
       if (this.edit) return;
-      this.$router.push({ name: 'repository-entitylist', params: { entity: entityId } });
+      // eslint-disable-next-line camelcase
+      const { entity_id } = entity;
+      const { value } = entity;
+      this.$router.push({ name: 'repository-entitylist', params: { entityid: entity_id, value } });
     },
     getEntityClass(entity) {
       const color = getEntityColor(
