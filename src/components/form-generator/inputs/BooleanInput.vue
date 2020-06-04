@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     verboseValue() {
-      return this.value ? 'Yes' : 'No';
+      return this.value ? this.$t('webapp.layout.yes') : this.$t('webapp.layout.no');
     },
   },
   mounted() {

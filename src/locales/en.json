@@ -17,7 +17,9 @@
       "request_authorization": "Request Authorization",
       "authorization_requested": "Authorization Requested",
       "authorization_success": "Request made! Wait for review of an admin.",
-      "error_to_retrieve_bot": "Error retrieving intelligence"
+      "error_to_retrieve_bot": "Error retrieving intelligence",
+      "yes": "Yes",
+      "no": "No"
     },
     "login_modal": {
       "login": "Login",
@@ -184,7 +186,9 @@
       "role": "Role:",
       "no_requests": "No requests.",
       "save": "Save",
-      "request": "Request"
+      "request": "Request",
+      "invite": "Send Invite",
+      "no_users": "No users in your team."
     },
     "example": {
       "enter_sentence": "Enter your sentence here",
@@ -243,7 +247,17 @@
       "translate_to": "Translate to:",
       "to": "to",
       "translate_sentence": "Translate sentence",
-      "example_translated": "Example translated!"
+      "example_translated": "Example translated!",
+      "import_button": "Import",
+      "export_button": "Export",
+      "import_title": "Select a file to import",
+      "import_field_text": "No file chosen",
+      "import_select_button": "Click to upload",
+      "import_select_error": "There was an error with the file.",
+      "export_title": "Export only not translated sentences",
+      "export_switch_no": "No",
+      "export_switch_yes": "Yes",
+      "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
