@@ -116,7 +116,8 @@
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
-      "default_error": "Houve um erro ao testar"
+      "default_error": "Houve um erro ao testar",
+      "entity_is_group": "<strong>{entity}</strong> é <strong>{group}</strong>"
     },
     "result": {
       "load_result": "Carregar Resultados",
@@ -360,7 +361,11 @@
         "add": "Adicionar",
         "close": "Fechar"
       },
-      "confirm_deleting_version": "Deletar versão"
+      "confirm_deleting_version": "Deletar versão",
+      "debug": "Debug",
+      "raw": "Raw",
+      "confidence": "Confiança",
+      "entities": "Entidade | Entidades"
     },
     "entity":{
       "title": "Entidade",

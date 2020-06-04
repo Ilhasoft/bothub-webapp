@@ -140,7 +140,7 @@ export default {
         .map((entity, index) => ({
           value: entitiesList[index],
           class: this.getEntityClass(entitiesList[index]),
-          label: this.getEntityLabel(entitiesList[index]),
+          label: entity.group,
           ...entity,
         }));
     },
@@ -164,14 +164,6 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
-    },
-    getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {
