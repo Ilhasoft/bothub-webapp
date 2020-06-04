@@ -67,4 +67,13 @@ export default {
     );
     return response;
   },
+  async getAllEntities(store, {
+    repositoryUuid, repositoryVersion,
+  }) {
+    const response = await entity.getEntities(
+      repositoryUuid,
+      repositoryVersion,
+    );
+    return response;
+  },
 };

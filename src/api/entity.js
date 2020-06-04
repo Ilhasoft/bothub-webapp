@@ -52,4 +52,11 @@ export default {
       },
     );
   },
+  getEntities(repositoryUuid, repositoryVersion) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+      repository_version: repositoryVersion,
+    });
+    return request.$http.get(`/v2/repository/entities?${queryString}`);
+  },
 };
