@@ -97,6 +97,7 @@ export default {
     return {
       entities: _.cloneDeep(this.value),
       allEntities: [],
+      errors: '',
     };
   },
   computed: {
@@ -167,11 +168,15 @@ export default {
       'getAllEntities',
     ]),
     async getEntitiesName() {
-      const entities = await this.getAllEntities({
-        repositoryUuid: this.repository.uuid,
-        repositoryVersion: this.repository.version_default.id,
-      });
-      this.allEntities = entities.data.results.map(entity => entity.value);
+      try {
+        const entities = await this.getAllEntities({
+          repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repository.version_default.id,
+        });
+        this.allEntities = entities.data.results.map(entity => entity.value);
+      } catch (error) {
+        this.errors = error;
+      }
     },
     removeEntity(entity) {
       this.entities = this.entities.filter(e => e.localId !== entity.localId);
@@ -200,11 +205,16 @@ export default {
       this.$emit('entityAdded');
     },
     async loadLabelFor(entityId, entityText) {
-      const entities = await this.getEntities({
-        repositoryUuid: this.repository.uuid || this.repository,
-        value: entityText,
-        repositoryVersion: this.repositoryVersion,
-      });
+      let entities = [];
+      try {
+        entities = await this.getEntities({
+          repositoryUuid: this.repository.uuid || this.repository,
+          value: entityText,
+          repositoryVersion: this.repositoryVersion,
+        });
+      } catch (error) {
+        this.errors = error;
+      }
       await entities.next();
 
       const entityIndex = this.entities.findIndex(e => e.localId === entityId);
