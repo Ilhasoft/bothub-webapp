@@ -6,7 +6,7 @@
       <b-tag
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="entity.class"
+        :class="[entity.class, 'modifier']"
         rounded>
         <strong>{{ entity.entity }}</strong>
         <span v-if="entity.label">is</span>

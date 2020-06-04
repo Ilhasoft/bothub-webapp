@@ -17,9 +17,11 @@
         :key="i"
         class="highlighted-entity">
         <span class="highlighted-entity-before">{{ entity.before }}</span>
+        <b-tooltip label="entity.value" :active="true">
         <span
           :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
         >{{ entity.text }}</span>
+        </b-tooltip>
       </div>
     </div>
     <div class="highlighted-base">{{ text }}</div>
