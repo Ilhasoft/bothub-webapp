@@ -180,7 +180,14 @@ export default {
       version: 'getSelectedVersion',
     }),
     entitiesOptions() {
-      return this.entities.map(entities => entities.entity);
+      const entitiesName = this.repository.other_group.entities.map(
+        entityValue => entityValue.value,
+      );
+      const entitiesGroup = this.repository.groups.map(
+        entityValue => entityValue.entities[0].value,
+      );
+      const allEntitiesName = [...entitiesName, ...entitiesGroup];
+      return allEntitiesName;
     },
     validationErrors() {
       const errors = [];
