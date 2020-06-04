@@ -47,6 +47,9 @@ describe('EntitiesList.vue', () => {
           other_group: {
             entities: ['robot', 'greenRobot'],
           },
+          groups: {
+            entities: ['robot', 'greenRobot'],
+          },
         },
       },
     });

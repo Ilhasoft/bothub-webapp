@@ -2,7 +2,6 @@
   <div class="entity-list__header">
     <div class="entity-list__content">
       <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
-      <button @click="show">s</button>
       <b-tag
         v-if="!EditSentences"
         :class="[
@@ -19,7 +18,7 @@
       </b-field>
     </div>
     <div class="entity-list__header__options">
-      <p> {{ $tc('webapp.entity.description', entitiesList.total) }}</p>
+      <p> {{ $tc('webapp.entity.description', totalSentences) }}</p>
       <b-button
         v-if="!EditSentences"
         ref="editEntityEvent"
@@ -58,7 +57,7 @@ export default {
   data() {
     return {
       EditSentences: false,
-      entityId: this.$route.params.entity,
+      entityId: this.$route.params.entityid,
       entityFormatted: this.entityName.entity,
     };
   },
@@ -72,6 +71,12 @@ export default {
         formatters.bothubItemKey(),
       ];
     },
+    totalSentences() {
+      if (this.entitiesList !== null) {
+        return this.entitiesList.total;
+      }
+      return 0;
+    },
   },
   watch: {
     entityFormatted() {
@@ -83,9 +88,6 @@ export default {
       'editEntityName',
       'setUpdateRepository',
     ]),
-    show() {
-      return formatters.bothubItemKey();
-    },
     getEntityClass(entity) {
       const entitiesName = this.repository.other_group.entities.map(
         entityValue => entityValue.value,
@@ -120,19 +122,29 @@ export default {
           },
           entityId: this.entityId,
           value: this.entityFormatted,
+          repositoryVersion: this.repositoryVersion,
         });
         this.entityName.entity = this.entityFormatted;
         this.setUpdateRepository(true);
         this.$emit('saveEdition', this.entityFormatted);
       } catch (error) {
+        if (error.response.data.non_field_errors !== undefined) {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.entity.error_entity_exists'),
+            type: 'is-danger',
+          });
+        } else {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.entity.error_entity'),
+            type: 'is-danger',
+          });
+        }
         this.entityName.entity = this.entityName.entity;
         this.entityFormatted = this.entityName.entity;
-        this.$buefy.toast.open({
-          message: this.$t('webapp.entity.error_entity'),
-          type: 'is-danger',
-        });
       }
       this.editOptionsEntity();
+      const value = this.entityName.entity;
+      this.$router.push({ name: 'repository-entitylist', params: { value } });
     },
   },
 };

@@ -201,6 +201,7 @@ export default {
         await this.editEntity({
           entityId: entity.entity_id,
           name: entity.value,
+          repositoryVersion: this.version,
           repositoryId: this.repositoryUuid,
           groupId: to === 'ungrouped' ? null : to,
         });
