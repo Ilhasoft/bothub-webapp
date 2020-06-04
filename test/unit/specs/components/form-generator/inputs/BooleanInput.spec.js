@@ -8,7 +8,12 @@ localVue.use(BH);
 describe('BooleanInput.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(BooleanInput);
+    wrapper = shallowMount(BooleanInput, {
+      localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
+    });
   });
 
   test('renders correctly', () => {

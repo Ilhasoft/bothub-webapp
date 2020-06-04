@@ -133,7 +133,7 @@ export default new Router({
           component: RepositoryResults,
         },
         {
-          path: ':ownerNickname/:slug/entitylist/:entity',
+          path: ':ownerNickname/:slug/entitylist/:value/:entityid',
           name: 'repository-entitylist',
           component: Entity,
         },

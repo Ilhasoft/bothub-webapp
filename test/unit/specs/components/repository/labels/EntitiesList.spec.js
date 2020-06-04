@@ -31,6 +31,7 @@ describe('EntitiesList.vue', () => {
       store,
       mocks: {
         $t: () => 'some specific text',
+        $tc: () => 'some specific text',
         $route: {
           params: { entity },
         },
@@ -44,6 +45,9 @@ describe('EntitiesList.vue', () => {
         },
         repository: {
           other_group: {
+            entities: ['robot', 'greenRobot'],
+          },
+          groups: {
             entities: ['robot', 'greenRobot'],
           },
         },

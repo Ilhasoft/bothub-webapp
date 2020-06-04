@@ -7,7 +7,7 @@
         <div v-if="authenticated">
           <div
             v-if="repository.authorization.can_write">
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
               <edit-repository-form
                 :owner-nickname="repository.owner.nickname"
@@ -15,7 +15,7 @@
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
@@ -26,7 +26,7 @@
                 :repository-uuid="repository.uuid"
                 @edit="onEditRole($event)" />
             </div>
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
@@ -41,7 +41,7 @@
       </div>
       <div
         v-if="!authenticated">
-        <div class="tile is-vertical">
+        <div class="settings__section">
           <b-notification
             :closable="false"
             type="is-info">
@@ -134,3 +134,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .settings {
+    &__section {
+      margin-bottom: 2rem;
+    }
+  }
+</style>

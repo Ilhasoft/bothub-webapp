@@ -1,7 +1,7 @@
 <template>
   <div class="entity-list__header">
     <div class="entity-list__content">
-      <h1> <strong>Entity</strong> </h1>
+      <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
       <b-tag
         v-if="!EditSentences"
         :class="[
@@ -14,21 +14,21 @@
       <b-field
         v-else
         class="entity-list__content__editEntityName">
-        <b-input v-model="entityName.entity"/>
+        <b-input v-model="entityFormatted"/>
       </b-field>
     </div>
     <div class="entity-list__header__options">
-      <p> This entity contain in {{ entitiesList.total }} sentences.</p>
+      <p> {{ $tc('webapp.entity.description', totalSentences) }}</p>
       <b-button
         v-if="!EditSentences"
         ref="editEntityEvent"
         class="entity-list__header__options__buttonEdit"
-        @click.native="editOptionsEntity()">Edit Entity</b-button>
+        @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
       <b-button
         v-else
         ref="saveEntityEvent"
         class="entity-list__header__options__buttonSave"
-        @click.native="saveEdition()">Save Edit</b-button>
+        @click.native="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
     </div>
   </div>
 </template>
@@ -36,6 +36,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
+import { formatters } from '@/utils';
 
 export default {
   name: 'EntitiesList',
@@ -56,7 +57,8 @@ export default {
   data() {
     return {
       EditSentences: false,
-      entityId: this.$route.params.entity,
+      entityId: this.$route.params.entityid,
+      entityFormatted: this.entityName.entity,
     };
   },
   computed: {
@@ -64,6 +66,22 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repositoryList: 'getCurrentRepository',
     }),
+    entityFormatters() {
+      return [
+        formatters.bothubItemKey(),
+      ];
+    },
+    totalSentences() {
+      if (this.entitiesList !== null) {
+        return this.entitiesList.total;
+      }
+      return 0;
+    },
+  },
+  watch: {
+    entityFormatted() {
+      this.entityFormatted = (formatters.bothubItemKey()(this.entityFormatted));
+    },
   },
   methods: {
     ...mapActions([
@@ -103,17 +121,30 @@ export default {
             repository: this.repositoryList.uuid,
           },
           entityId: this.entityId,
-          value: this.entityName.entity,
+          value: this.entityFormatted,
+          repositoryVersion: this.repositoryVersion,
         });
+        this.entityName.entity = this.entityFormatted;
         this.setUpdateRepository(true);
-        this.$emit('saveEdition');
+        this.$emit('saveEdition', this.entityFormatted);
       } catch (error) {
-        this.$buefy.toast.open({
-          message: 'Something\'s not good, my bad!',
-          type: 'is-danger',
-        });
+        if (error.response.data.non_field_errors !== undefined) {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.entity.error_entity_exists'),
+            type: 'is-danger',
+          });
+        } else {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.entity.error_entity'),
+            type: 'is-danger',
+          });
+        }
+        this.entityName.entity = this.entityName.entity;
+        this.entityFormatted = this.entityName.entity;
       }
       this.editOptionsEntity();
+      const value = this.entityName.entity;
+      this.$router.push({ name: 'repository-entitylist', params: { value } });
     },
   },
 };

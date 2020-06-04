@@ -17,7 +17,9 @@
       "request_authorization": "Solicitação de Autorização",
       "authorization_requested": "Autorização Solicitada",
       "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
-      "error_to_retrieve_bot": "Erro ao trazer sua inteligência"
+      "error_to_retrieve_bot": "Erro ao trazer sua inteligência",
+      "yes": "Sim",
+      "no": "Não"
     },
     "login_modal": {
       "login": "Login",
@@ -114,7 +116,8 @@
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
-      "default_error": "Houve um erro ao testar"
+      "default_error": "Houve um erro ao testar",
+      "entity_is_group": "<strong>{entity}</strong> é <strong>{group}</strong>"
     },
     "result": {
       "load_result": "Carregar Resultados",
@@ -185,7 +188,9 @@
       "role": "Papéis:",
       "no_requests": "Sem solicitações.",
       "save": "Salvar",
-      "request": "Fazer pedido"
+      "request": "Fazer pedido",
+      "invite": "Enviar convite",
+      "no_users": "Sem usuários no time."
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -244,7 +249,17 @@
       "translate_to": "Traduzir para:",
       "to": "para",
       "translate_sentence": "Traduzir frase",
-      "example_translated": "Exemplo traduzido!"
+      "example_translated": "Exemplo traduzido!",
+      "import_button": "Importar",
+      "export_button": "Exportar",
+      "import_title": "Selecione um arquivo para importar",
+      "import_field_text": "Nenhum arquivo selecionado",
+      "import_select_button": "Clique para selecionar",
+      "import_select_error": "Ocorreu um erro com o arquivo.",
+      "export_title": "Exportar apenas sentenças não traduzidas",
+      "export_switch_no": "Não",
+      "export_switch_yes": "Sim",
+      "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",
@@ -346,7 +361,20 @@
         "add": "Adicionar",
         "close": "Fechar"
       },
-      "confirm_deleting_version": "Deletar versão"
+      "confirm_deleting_version": "Deletar versão",
+      "debug": "Debug",
+      "raw": "Raw",
+      "confidence": "Confiança",
+      "entities": "Entidade | Entidades"
+    },
+    "entity":{
+      "title": "Entidade",
+      "description": "Essa entidade contém {n} sentença | Essa entidade contém {n} sentenças.",
+      "edit_button": "Editar Entidade",
+      "save_button": "Salvar",
+      "no_sentences": "Nenhuma senteça.",
+      "error_entity": "Aconteceu um erro.",
+      "error_entity_exists": "Entidade já existe"
     }
   }
 }
