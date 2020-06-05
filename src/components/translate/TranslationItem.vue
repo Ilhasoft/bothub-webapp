@@ -6,6 +6,7 @@
           <highlighted-text
             :text="currentText"
             :entities="currentEntities"
+            :highlighted="highlighted"
             :all-entities="repository.entities || repository.entities_list" />
         </div>
         <div class="column is-narrow">
@@ -31,11 +32,14 @@
     <div
       v-if="entitiesList.length > 0"
       class="translation-entities">
-      <b-tag
+      <entity-tag
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)"
-        rounded>{{ entity }}</b-tag>
+        :entity-name="entity"
+        :highlighted="highlighted === entity"
+        @mouseenter.native.stop="highlighted = entity"
+        @mouseleave.native.stop="highlighted = null"
+      />
     </div>
     <div class="translation-infos level is-mobile">
       <div class="level-left">
@@ -72,18 +76,17 @@
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import Flag from '@/components/shared/Flag';
 import { mapActions } from 'vuex';
 
-
-const components = {
-  HighlightedText,
-  Flag,
-};
-
 export default {
   name: 'TranslationItem',
-  components,
+  components: {
+    HighlightedText,
+    EntityTag,
+    Flag,
+  },
   props: {
     id: {
       type: Number,
@@ -124,6 +127,7 @@ export default {
       original: null,
       showingOriginal: false,
       deleteDialog: null,
+      highlighted: null,
     };
   },
   computed: {

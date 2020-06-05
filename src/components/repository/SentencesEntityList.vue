@@ -12,8 +12,7 @@
         <highlighted-text
           v-if="!editing || !open"
           :text="text"
-          :prefix-color-available="true"
-          :prefix-color="entitiesList[0].class"
+          :highlighted="highlighted"
           :entities="entities"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
@@ -57,6 +56,7 @@
       <example-info
         v-if="!editing"
         :entities-list="entitiesList"
+        :highlighted.sync="highlighted"
         :intent="intent" />
 
       <edit-example
@@ -75,7 +75,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
@@ -125,6 +124,7 @@ export default {
       open: false,
       deleteDialog: null,
       remove: true,
+      highlighted: null,
     };
   },
 
@@ -133,13 +133,11 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
-
       return this.entities
-        .map((entity, index) => ({
-          value: entitiesList[index],
-          class: this.getEntityClass(entitiesList[index]),
-          label: this.getEntityLabel(entitiesList[index]),
+        .map(entity => ({
+          value: entity.value,
+          class: this.getEntityClass(entity.value),
+          group: entity.group,
           ...entity,
         }));
     },
@@ -164,14 +162,6 @@ export default {
         allEntitiesName,
       );
       return `entity-${color}`;
-    },
-    getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
     },
     deleteThisExample() {
       this.deleteDialog = this.$buefy.dialog.confirm({
