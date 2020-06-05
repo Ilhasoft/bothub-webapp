@@ -3,17 +3,16 @@
     <div
       v-if="entitiesList.length > 0"
       class="example-entities">
-      <b-tag
-        v-for="(entity, i) in entitiesList"
-        :key="i"
-        :class="entity.class"
-        rounded>
-        <span
-          v-if="entity.label"
-          v-html="$t('webapp.evaluate.entity_is_group',
-                     { entity: entity.entity, group: entity.label })" />
-        <strong v-else>{{ entity.entity }}</strong>
-      </b-tag>
+      <entity-tag
+        v-for="entity in entitiesList"
+        :key="entity.entity"
+        :color-class="entity.class"
+        :group="entity.group"
+        :highlighted="entity.entity === highlighted"
+        :entity-name="entity.entity"
+        @mouseenter.native.stop="$emit('update:highlighted', entity.entity)"
+        @mouseleave.native.stop="$emit('update:highlighted', null)"
+      />
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -29,8 +28,13 @@
 </template>
 
 <script>
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+
 export default {
   name: 'ExampleInfo',
+  components: {
+    EntityTag,
+  },
   props: {
     entitiesList: {
       type: Array,
@@ -39,6 +43,10 @@ export default {
     intent: {
       type: String,
       default: '',
+    },
+    highlighted: {
+      type: String,
+      default: null,
     },
   },
 };
