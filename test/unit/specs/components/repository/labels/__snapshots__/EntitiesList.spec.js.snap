@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EntitiesList.vue renders correctly 1`] = `
-<div class="entity-list__header">
+<div class="entity-list">
   <div class="entity-list__content">
-    <h1><strong>some specific text</strong></h1>
-    <b-tag-stub size="is-medium" tabstop="true" class="entity-list__content__tag entity-undefined">
-      <div>health</div>
-    </b-tag-stub>
+    <div class="entity-list__content__descriptions">
+      <h1><strong>some specific text</strong></h1>
+      <b-tag-stub size="is-medium" tabstop="true" class="entity-list__content__descriptions__tag entity-undefined">
+        <div>health</div>
+      </b-tag-stub>
+    </div>
+    <div>
+      <b-button-stub nativetype="button" tag="button" class="entity-list__content__buttonEdit">some specific text</b-button-stub>
+    </div>
   </div>
   <div class="entity-list__header__options">
     <p> some specific text</p>
-    <b-button-stub nativetype="button" tag="button" class="entity-list__header__options__buttonEdit">some specific text</b-button-stub>
   </div>
 </div>
 `;

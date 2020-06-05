@@ -15,9 +15,11 @@ exports[`EntityEdit renders correctly 1`] = `
     </b-field-stub>
   </div>
   <div>
-    <div class="entity-edit__entities-list__labeled-count">
-      some specific text
-    </div>
+    <div class="entity-edit__entities-list__labeled-count"><span>
+        some specific text
+      </span> <span><span>
+          some specific text
+        </span></span></div>
     <!---->
     <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="25"></badges-card-drag-drop-stub>
     <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="66"></badges-card-drag-drop-stub>
