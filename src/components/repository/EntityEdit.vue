@@ -243,6 +243,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
 
   .entity-edit {
   &__title {
@@ -253,7 +254,7 @@ export default {
   &__button {
     color: white;
     margin-left: 0.5rem;
-    margin-top:0.5rem;
+    margin-top:0.6rem;
   }
 
   &__entities-list {
@@ -268,7 +269,7 @@ export default {
 
   &__entities-list {
     &__labeled-count {
-      margin: 1.5rem 0 1rem;
+      margin-bottom: $between-subtitle-content;
     }
   }
 }
