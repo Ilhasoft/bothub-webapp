@@ -28,9 +28,18 @@
     </div>
     <div>
       <div
-        v-show="groups.length > 0"
         class="entity-edit__entities-list__labeled-count">
-        {{ $tc('webapp.home.entities_label', groups.length) }}
+        <span v-show="groups.length > 0">
+          {{ $tc('webapp.home.entities_label', groups.length, ungrouped.length) }}
+        </span>
+        <span v-show="ungrouped.length > 0">
+          <span v-if="groups.length > 0">
+            {{ $tc('webapp.home.non-grouped_entities', ungrouped.length) }}
+          </span>
+          <span v-else>
+            {{ $tc('webapp.home.only_non-grouped_entities', ungrouped.length) }}
+          </span>
+        </span>
       </div>
       <create-badges-card
         v-if="creating"
@@ -216,7 +225,7 @@ export default {
       this.$buefy.dialog.alert({
         title: this.$t('webapp.home.delete_entity'),
         message: this.$t('webapp.home.delete_entity_message', { entity: entity.value }),
-        confirmText: this.$t('webapp.home.ok'),
+        confirmText: this.$t('webapp.home.delete'),
         cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
