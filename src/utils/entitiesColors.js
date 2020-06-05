@@ -31,7 +31,6 @@ const getStringHash = (text) => {
 export const getEntityColor = (entity) => {
   const hash = getStringHash(entity.entity || entity);
   const i = Math.abs(hash) % colorsList.length;
-  console.log({entity, value: colorsList[i]});
   return colorsList[i];
 };
 

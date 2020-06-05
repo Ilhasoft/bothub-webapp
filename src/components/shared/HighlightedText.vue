@@ -163,8 +163,7 @@ export default {
     }
   }
   &-selected {
-    outline: 2px dotted red;
-    opacity: 1;
+    box-shadow:0px 0px 0px 2px red inset;
   }
 }
 .failed {

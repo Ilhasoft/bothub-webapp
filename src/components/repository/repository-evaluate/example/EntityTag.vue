@@ -3,11 +3,13 @@
     :class="classes"
     :closable="closable"
     rounded
-    @close="$emit('close')" > <span
+    @close="$emit('close')" >
+    <span
       v-if="group"
       v-html="$t('webapp.evaluate.entity_is_group',
                  { entity: entityName, group })" />
-  <strong v-else>{{ entityName }}</strong> </b-tag>
+    <strong v-else>{{ entityName }} </strong>
+  </b-tag>
 </template>
 
 <script>
@@ -52,6 +54,6 @@ export default {
 
 <style scoped>
     .highlighted {
-        border: 2px dotted red;
+        border: 2px solid red;
     }
 </style>
