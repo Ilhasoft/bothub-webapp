@@ -156,7 +156,7 @@
       "no_description": "There is no description for this repository",
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
-      "entities_label": "This intelligence has {n} group of entity | This intelligence has {n} groups of entity",
+      "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
       "non-grouped_entities":"and {n} non-grouped entitie. | and {n} non-grouped entities.",
       "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
       "bot_has_x_intents": "This bot has <strong>{intents}</strong> intents",
