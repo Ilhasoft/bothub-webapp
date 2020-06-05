@@ -257,6 +257,17 @@ export default {
       'updateEvaluateExample',
       'editSentence',
     ]),
+    async allEntitiesAvailable() {
+      try {
+        const entities = await this.getAllEntities({
+          repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repository.version_default.id,
+        });
+        this.allEntities = entities.data.results.map(entity => entity.value);
+      } catch (error) {
+        this.errors = error;
+      }
+    },
     cancelEditSentence() {
       this.$emit('cancel');
     },
