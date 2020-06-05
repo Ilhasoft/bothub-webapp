@@ -21,6 +21,7 @@
           v-if="open && !editing"
           :text="text"
           :entities="entities"
+          :highlighted="highlighted"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -62,7 +63,8 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="entitiesList"
+        :entities-list="uniqueEntities"
+        :highlighted.sync="highlighted"
         :intent="intent" />
 
       <edit-example
@@ -79,7 +81,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
@@ -127,6 +128,7 @@ export default {
       open: false,
       deleteDialog: null,
       editing: false,
+      highlighted: null,
     };
   },
   computed: {
@@ -134,15 +136,25 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
-
       return this.entities
-        .map((entity, index) => ({
-          value: entitiesList[index],
-          class: this.getEntityClass(entitiesList[index]),
-          label: entity.group,
+        .map(entity => ({
+          class: this.getEntityClass(entity.entity),
           ...entity,
         }));
+    },
+    uniqueEntities() {
+      const entityDict = this.entitiesList.reduce((dict, entity) => {
+        if (!dict[entity.entity]) {
+          // eslint-disable-next-line no-param-reassign
+          dict[entity.entity] = {
+            entity: entity.entity,
+            class: entity.class,
+            group: entity.group,
+          };
+        }
+        return dict;
+      }, {});
+      return Object.values(entityDict);
     },
   },
   watch: {
