@@ -138,7 +138,7 @@ export default {
     entitiesList() {
       return this.entities
         .map(entity => ({
-          class: this.getEntityClass(entity.value),
+          class: this.getEntityClass(entity.entity),
           ...entity,
         }));
     },
