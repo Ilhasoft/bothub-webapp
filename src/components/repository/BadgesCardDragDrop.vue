@@ -19,7 +19,7 @@
       group="entities"
       class="badges-card__wrapper"
       @end="onEnd">
-      <b-tag
+      <entity-tag
         v-for="(item, i) in localList"
         :key="i"
         :class="[
@@ -27,14 +27,11 @@
           getEntityClass(item.value),
           `badges-card__wrapper__badge--${edit ? 'moving' : 'locked'}`,
         ]"
+        :entity-name="item.value"
         :closable="edit"
-        rounded
-        size="small"
         @close="close(item)"
-        @click.native="goToEntity(item)"
-      >
-        <span>{{ item.value }}</span>
-    </b-tag></draggable>
+        @click.native="goToEntity(item)"/>
+    </draggable>
     <div v-if="examplesCount">
       <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
     </div>
@@ -43,12 +40,14 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import draggable from 'vuedraggable';
 
 export default {
   name: 'BadgesCardDragDrop',
   components: {
     draggable,
+    EntityTag,
   },
   props: {
     title: {

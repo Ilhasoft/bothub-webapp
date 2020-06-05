@@ -5,13 +5,14 @@
         class="level-left log-entities">
         <div v-if="entitiesList.length > 0">
           <strong>{{ $tc('webapp.inbox.entities', entitiesList.length) }}:</strong>
-          <b-tag
+          <entity-tag
             v-for="(entity, i) in entitiesList"
             :key="i"
-            :class="entity.class"
-            rounded>
-            <strong>{{ entity.entity }}</strong>
-          </b-tag>
+            :highlighted="entity.entity === highlighted"
+            :color-class="entity.class"
+            :entity-name="entity.entity"
+            @mouseenter.native.stop="$emit('update:highlighted', entity.entity)"
+            @mouseleave.native.stop="$emit('update:highlighted', null)"/>
         </div>
       </div>
       <div class="level-right">
@@ -50,8 +51,13 @@
 </template>
 
 <script>
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+
 export default {
   name: 'LogInfo',
+  components: {
+    EntityTag,
+  },
   props: {
     entitiesList: {
       type: Array,
@@ -68,6 +74,10 @@ export default {
     createdAt: {
       type: String,
       default: '',
+    },
+    highlighted: {
+      type: String,
+      default: null,
     },
   },
   methods: {
