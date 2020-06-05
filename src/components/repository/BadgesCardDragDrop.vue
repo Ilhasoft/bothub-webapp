@@ -7,7 +7,7 @@
         v-if="closable && edit"
         class="badges-card__icon"
         icon="close"
-        size="is-medium"
+        size="is-small"
         @click.native="onRemoveCard" />
     </div>
     <draggable
@@ -18,8 +18,8 @@
       :move="onMove"
       group="entities"
       class="badges-card__wrapper"
-      @end="onEnd">
-      <b-tag
+      @change="onChange">
+      <entity-tag
         v-for="(item, i) in localList"
         :key="i"
         :class="[
@@ -27,14 +27,11 @@
           getEntityClass(item.value),
           `badges-card__wrapper__badge--${edit ? 'moving' : 'locked'}`,
         ]"
+        :entity-name="item.value"
         :closable="edit"
-        rounded
-        size="small"
         @close="close(item)"
-        @click.native="goToEntity(item)"
-      >
-        <span>{{ item.value }}</span>
-    </b-tag></draggable>
+        @click.native="goToEntity(item)"/>
+    </draggable>
     <div v-if="examplesCount">
       <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
     </div>
@@ -43,12 +40,14 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import draggable from 'vuedraggable';
 
 export default {
   name: 'BadgesCardDragDrop',
   components: {
     draggable,
+    EntityTag,
   },
   props: {
     title: {
@@ -122,7 +121,12 @@ export default {
     close(entity) {
       this.$emit('onCloseTag', entity);
     },
-    onEnd() {
+    onMove({ draggedContext, relatedContext }) {
+      this.to = relatedContext.component.$attrs['data-id-attr'];
+      this.entity = draggedContext.element;
+      this.targetList = [...relatedContext.list, this.entity];
+    },
+    onChange() {
       if (this.entity == null || this.to == null) return;
       this.$emit('onMove', {
         from: this.identifier,
@@ -135,11 +139,6 @@ export default {
       this.to = null;
       this.targetList = [];
     },
-    onMove({ draggedContext, relatedContext }) {
-      this.to = relatedContext.component.$attrs['data-id-attr'];
-      this.entity = draggedContext.element;
-      this.targetList = [...relatedContext.list, this.entity];
-    },
     updateLocalList() {
       this.localList = [...this.list];
     },
@@ -148,6 +147,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -167,8 +167,8 @@ export default {
     }
 
     &__icon {
-      color: #CFD5D9;
-        cursor: pointer;
+      color: $color-grey-dark;
+      cursor: pointer;
     }
 
     &__wrapper {
