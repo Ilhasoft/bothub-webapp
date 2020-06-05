@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="entity-edit__entities-list"
-  >
+  <div class="entity-edit__entities-list">
     <div class="entity-edit__title entity-edit__entities-list__header">
       <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-loading
@@ -26,7 +24,8 @@
           @click="creating = true">
           {{ $t('webapp.home.create_new_group') }}
         </b-button>
-    </b-field></div>
+      </b-field>
+    </div>
     <div>
       <div
         v-show="groups.length > 0"
@@ -254,6 +253,7 @@ export default {
   &__button {
     color: white;
     margin-left: 0.5rem;
+    margin-top:0.5rem;
   }
 
   &__entities-list {
