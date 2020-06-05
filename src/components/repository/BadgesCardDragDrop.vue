@@ -18,7 +18,7 @@
       :move="onMove"
       group="entities"
       class="badges-card__wrapper"
-      @end="onEnd">
+      @change="onChange">
       <entity-tag
         v-for="(item, i) in localList"
         :key="i"
@@ -121,7 +121,12 @@ export default {
     close(entity) {
       this.$emit('onCloseTag', entity);
     },
-    onEnd() {
+    onMove({ draggedContext, relatedContext }) {
+      this.to = relatedContext.component.$attrs['data-id-attr'];
+      this.entity = draggedContext.element;
+      this.targetList = [...relatedContext.list, this.entity];
+    },
+    onChange() {
       if (this.entity == null || this.to == null) return;
       this.$emit('onMove', {
         from: this.identifier,
@@ -133,11 +138,6 @@ export default {
       this.entity = null;
       this.to = null;
       this.targetList = [];
-    },
-    onMove({ draggedContext, relatedContext }) {
-      this.to = relatedContext.component.$attrs['data-id-attr'];
-      this.entity = draggedContext.element;
-      this.targetList = [...relatedContext.list, this.entity];
     },
     updateLocalList() {
       this.localList = [...this.list];
