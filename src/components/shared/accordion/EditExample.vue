@@ -73,7 +73,7 @@
             <strong>{{ highlightedText(entity) }}</strong> is
           </label>
           <bh-autocomplete
-            :data="entitiesOptions || []"
+            :data="entitiesOptions"
             :formatters="intentFormatters"
             v-model="entity.entity"
             :placeholder="$t('webapp.example.entity')"
@@ -169,6 +169,7 @@ export default {
       entitiesToEdit: JSON.parse(JSON.stringify(this.entities)),
       pendingEntities: [],
       submitting: false,
+      allEntities: [],
     };
   },
   computed: {
@@ -180,14 +181,10 @@ export default {
       version: 'getSelectedVersion',
     }),
     entitiesOptions() {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
-      return allEntitiesName;
+      if (this.allEntities !== undefined) {
+        return this.allEntities;
+      }
+      return [];
     },
     validationErrors() {
       const errors = [];
@@ -250,11 +247,22 @@ export default {
       }
     },
   },
+  mounted() {
+    this.allEntitiesAvailable();
+  },
   methods: {
     ...mapActions([
       'updateEvaluateExample',
       'editSentence',
+      'getAllEntities',
     ]),
+    async allEntitiesAvailable() {
+      const entities = await this.getAllEntities({
+        repositoryUuid: this.repository.uuid,
+        repositoryVersion: this.repository.version_default.id,
+      });
+      this.allEntities = entities.data.results.map(entity => entity.value);
+    },
     cancelEditSentence() {
       this.$emit('cancel');
     },
