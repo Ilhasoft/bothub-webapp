@@ -6,8 +6,11 @@
       <b-tag
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="[entity.class, 'modifier']"
-        rounded>
+        :class="[`${entity.class}`,
+                 entity.entity === highlighted ? 'highlighted': '']"
+        rounded
+        @mouseenter.native.stop="$emit('update:highlighted', entity.entity)"
+        @mouseleave.native.stop="$emit('update:highlighted', null)">
         <span
           v-if="entity.label"
           v-html="$t('webapp.evaluate.entity_is_group',
@@ -40,12 +43,20 @@ export default {
       type: String,
       default: '',
     },
+    highlighted: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../../../assets/scss/utilities.scss';
+
+.highlighted {
+  border: 2px dotted red;
+}
 
 .example {
   $radius: .5rem;

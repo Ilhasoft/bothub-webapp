@@ -14,7 +14,6 @@ export const colorsList = [
 ];
 
 const getStringHash = (text) => {
-  console.log({text});
   let hash = 0;
   if (text.length === 0) {
     return hash;
@@ -34,19 +33,6 @@ export const getEntityColor = (entity, entities, flexibleEntities) => {
   const i = Math.abs(hash) % colorsList.length;
   return colorsList[i];
 };
-
-export const getColorHex = (entity) => {
-  const hash = getStringHash(entity.value || entity);
-  return `#${hash.toString(16)}`;
-};
-
-
-// export const getEntityColor = (entity, entities, flexibleEntities) => {
-//   const hash = getStringHash(entity.value || entity);
-//   const i = Math.abs(hash) % colorsList.length;
-//   console.log({hash, i});
-//   return colorsList[i];
-// };
 
 // export const getEntityColor = (entity, entities, flexibleEntities) => {
 //   const entitiesList = getEntitiesList(entities, flexibleEntities);

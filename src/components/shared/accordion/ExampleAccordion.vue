@@ -21,6 +21,7 @@
           v-if="open && !editing"
           :text="text"
           :entities="entities"
+          :highlighted="highlighted"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -62,7 +63,8 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="entitiesList"
+        :entities-list="uniqueEntities"
+        :highlighted.sync="highlighted"
         :intent="intent" />
 
       <edit-example
@@ -127,6 +129,7 @@ export default {
       open: false,
       deleteDialog: null,
       editing: false,
+      highlighted: null,
     };
   },
   computed: {
@@ -143,6 +146,19 @@ export default {
           label: entity.group,
           ...entity,
         }));
+    },
+    uniqueEntities() {
+      const entityDict = this.entitiesList.reduce((dict, entity) => {
+        if (!dict[entity.entity]) {
+          dict[entity.entity] = {
+            entity: entity.entity,
+            class: entity.class,
+            label: entity.label,
+          };
+        }
+        return dict;
+      }, {});
+      return Object.values(entityDict);
     },
   },
   watch: {

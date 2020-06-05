@@ -1,5 +1,7 @@
 <template>
   <div class="highlighted">
+    <div class="highlighted-base">{{ text }}</div>
+    <div class="highlighted-text">{{ text }}</div>
     <div v-if="prefixColorAvailable">
       <div
         v-for="(entity, i) in prefixEntities"
@@ -17,15 +19,16 @@
         :key="i"
         class="highlighted-entity">
         <span class="highlighted-entity-before">{{ entity.before }}</span>
-        <b-tooltip label="entity.value" :active="true">
         <span
-          :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
-        >{{ entity.text }}</span>
-        </b-tooltip>
+          :class="['highlighted-entity-text',
+                   entity.colorClass,
+                   entitiesHasFailed,
+                   failed,
+                   entity.entity === highlighted ? 'highlighted-selected' : '']">
+          {{ entity.text }}
+        </span>
       </div>
     </div>
-    <div class="highlighted-base">{{ text }}</div>
-    <div class="highlighted-text">{{ text }}</div>
   </div>
 </template>
 
@@ -60,6 +63,10 @@ export default {
       type: String,
       default: '',
     },
+    highlighted: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     ...mapState({
@@ -81,6 +88,7 @@ export default {
             end,
             colorClass,
             before,
+            entity,
             text,
           };
         });
@@ -120,11 +128,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .highlighted {
   position: relative;
 
   &-base {
     opacity: 0;
+    pointer-events: none;
   }
 
   &-text {
@@ -132,6 +142,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 1;
+    pointer-events: none;
   }
 
   &-entity {
@@ -146,9 +157,14 @@ export default {
     }
 
     &-text {
+      display: inline-block;
       opacity: .5;
       border-radius: 4px;
     }
+  }
+  &-selected {
+    outline: 2px dotted red;
+    opacity: 1;
   }
 }
 .failed {
