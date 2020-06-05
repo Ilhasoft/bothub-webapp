@@ -67,10 +67,10 @@ export default {
     );
     return response;
   },
-  async getAllEntities(store, {
+  getAllEntities(store, {
     repositoryUuid, repositoryVersion,
   }) {
-    const response = await entity.getEntities(
+    const response = entity.getEntities(
       repositoryUuid,
       repositoryVersion,
     );
