@@ -194,7 +194,8 @@ export default {
     margin: 0 0 1.5rem 0;
 
     &__selected {
-      border: 1px red dotted;
+      text-decoration: underline;
+      text-decoration-color: red;
     }
 
     &__text {
@@ -229,7 +230,6 @@ export default {
               margin-right: 0.5rem;
               height: 1rem;
               width: 1rem;
-              // background-color: #2BBFAC;
               border-radius: 50%;
               display: inline-block;
             }

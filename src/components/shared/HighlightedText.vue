@@ -164,6 +164,7 @@ export default {
   }
   &-selected {
     box-shadow:0px 0px 0px 2px red inset;
+    opacity: .8;
   }
 }
 .failed {
