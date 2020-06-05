@@ -23,9 +23,7 @@
         <div class="bh-grid__item edit-sentence__input">
           <bh-field
             :errors="errors.non_field_errors"
-            label="Intent"
-            help-text="When your bot receives a message, your bot can use a
-                    recognizer to examine the message and determine intent.">
+            label="Intent">
             <bh-autocomplete
               v-model="intent"
               :data="repository.intents_list || []"
@@ -35,60 +33,79 @@
           </bh-field>
         </div>
       </div>
-      <div
-        v-for="(entity, index) in entitiesToEdit"
-        :key="`entity-${index}`"
-        class="bh-grid">
-        <div class="edit-sentence__input">
-          <bh-field
-            :errors="entitiesError(index)">
-            <label for="">
-              <strong>{{ highlightedText(entity) }}</strong> is
-            </label>
-            <bh-autocomplete
-              :data="repository.entities_list || []"
-              :formatters="intentFormatters"
-              v-model="entity.entity"
-              :placeholder="$t('webapp.example.entity')"
-              class="edit-sentence-input"
-              size="normal"
-            >
-              <span slot="append">
-                <bh-icon-button
-                  value="close"
-                  size="small"
-                  @click.prevent.stop="removeEntity(entity, index)"
-                />
-              </span>
-            </bh-autocomplete>
-          </bh-field>
+      <div class="edit-sentence__fields">
+        <div>
+          <div
+            v-for="(entity, index) in entitiesToEdit"
+            :key="`entity-${index}`"
+            class="bh-grid">
+            <div class="edit-sentence__input">
+              <bh-field
+                :errors="entitiesError(index)">
+                <label for="">
+                  <strong>{{ highlightedText(entity) }}</strong> is
+                </label>
+                <bh-autocomplete
+                  :data="repository.entities_list || []"
+                  :formatters="intentFormatters"
+                  v-model="entity.entity"
+                  :placeholder="$t('webapp.example.entity')"
+                  class="edit-sentence-input"
+                  size="normal"
+                >
+                  <span slot="append">
+                    <bh-icon-button
+                      value="close"
+                      size="small"
+                      @click.prevent.stop="removeEntity(entity, index)"
+                    />
+                  </span>
+                </bh-autocomplete>
+              </bh-field>
+            </div>
+          </div>
+          <div
+            v-for="(entity, index) in pendingEntities"
+            :key="`pending-entity-${index}`"
+            class="bh-grid">
+            <div class="edit-sentence__input">
+              <label for="">
+                <strong>{{ highlightedText(entity) }}</strong> is
+              </label>
+              <bh-autocomplete
+                :data="entitiesOptions || []"
+                :formatters="intentFormatters"
+                v-model="entity.entity"
+                :placeholder="$t('webapp.example.entity')"
+                class="edit-sentence-input"
+                size="normal"
+                @selected="elevateToEntity(entity, index)"
+              >
+                <span slot="append">
+                  <bh-icon-button
+                    value="close"
+                    size="small"
+                    @click.prevent.stop="removePendingEntity(entity, index)"
+                  />
+                </span>
+              </bh-autocomplete>
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        v-for="(entity, index) in pendingEntities"
-        :key="`pending-entity-${index}`"
-        class="bh-grid">
-        <div class="edit-sentence__input">
-          <label for="">
-            <strong>{{ highlightedText(entity) }}</strong> is
-          </label>
-          <bh-autocomplete
-            :data="entitiesOptions || []"
-            :formatters="intentFormatters"
-            v-model="entity.entity"
-            :placeholder="$t('webapp.example.entity')"
-            class="edit-sentence-input"
-            size="normal"
-            @selected="elevateToEntity(entity, index)"
-          >
-            <span slot="append">
-              <bh-icon-button
-                value="close"
-                size="small"
-                @click.prevent.stop="removePendingEntity(entity, index)"
-              />
-            </span>
-          </bh-autocomplete>
+        <div class="edit-sentence__fields__buttons">
+          <bh-button
+            primary
+            @click="cancelEditSentence">
+            {{ $t('webapp.trainings.cancel_button') }}
+          </bh-button>
+          <bh-button
+            :disabled="!isValid || submitting"
+            :tooltip-hover="!isValid ? validationErrors : null"
+            :loading="submitting"
+            secondary
+            type="submit">
+            <slot v-if="!submitting">{{ $t('webapp.trainings.save_button') }}</slot>
+          </bh-button>
         </div>
       </div>
       <div
@@ -101,21 +118,6 @@
         >
           {{ entityButtonText }}
         </bh-button>
-        <div>
-          <bh-button
-            primary
-            @click="cancelEditSentence">
-            Cancel
-          </bh-button>
-          <bh-button
-            :disabled="!isValid || submitting"
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            secondary
-            type="submit">
-            <slot v-if="!submitting">Save</slot>
-          </bh-button>
-        </div>
       </div>
     </form>
   </div>
@@ -419,6 +421,21 @@ export default {
 
 <style lang="scss" scoped>
 .edit-sentence {
+  &__fields{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    width:55%;
+
+      &__buttons{
+      width: 45%;
+      display:flex;
+      justify-content:space-around;
+      align-items: flex-end;
+      padding-bottom: 0.82rem;
+      }
+  }
+
   &__input {
      margin: 0 .5rem;
   }
