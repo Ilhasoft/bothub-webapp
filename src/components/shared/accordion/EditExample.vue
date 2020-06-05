@@ -96,7 +96,7 @@
           <bh-button
             primary
             @click="cancelEditSentence">
-            {{ $t('webapp.trainings.cancel_button') }}
+            Cancel
           </bh-button>
           <bh-button
             :disabled="!isValid || submitting"
@@ -104,7 +104,7 @@
             :loading="submitting"
             secondary
             type="submit">
-            <slot v-if="!submitting">{{ $t('webapp.trainings.save_button') }}</slot>
+            <slot v-if="!submitting">Save</slot>
           </bh-button>
         </div>
       </div>

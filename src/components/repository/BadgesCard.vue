@@ -2,38 +2,14 @@
   <div class="badges-card">
     <div v-html="title" />
     <div class="badges-card__wrapper">
-      <div v-if="clickable">
-        <b-tag
-          v-for="(item, i) in list"
-          :key="i"
-          :class="[
-            'badges-card__wrapper__badge badges-card__wrapper__clickable',
-            getEntityClass(item),
-          ]"
-          size="small"
-          @click.native="entityList(item.entity_id)">
-
-          <span>{{ item.value }}</span>
-
-        </b-tag>
+      <div>
+        <entity-tag
+          v-for="item in list"
+          :key="item"
+          :entity-name="item.value || item"
+          :class="['badges-card__wrapper__badge', clickable ? 'badges-card__clickable' : '']"
+          @click.native="entityList(item.entity_id)"/>
       </div>
-      <div v-else>
-        <b-tag
-          v-for="(item, i) in list"
-          :key="i"
-          :class="[
-            'badges-card__wrapper__badge',
-            getEntityClass(item),
-          ]"
-          size="small">
-
-          <span>{{ item }}</span>
-
-
-        </b-tag>
-      </div>
-
-
     </div>
     <div v-if="examplesCount">
       <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }}
@@ -43,9 +19,13 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 
 export default {
   name: 'BadgesCard',
+  components: {
+    EntityTag,
+  },
   props: {
     title: {
       type: String,
@@ -79,6 +59,7 @@ export default {
   },
   methods: {
     entityList(entity) {
+      if (!this.clickable) return;
       this.$router.push({ name: 'repository-entitylist', params: { entity } });
     },
     getEntityClass(entity) {
@@ -101,6 +82,10 @@ export default {
     border: 1px solid #CFD5D9;
     border-radius: 6px;
 
+    &__clickable{
+      cursor: pointer;
+    }
+
     &__wrapper {
       margin: .75rem .5rem;
 
@@ -119,10 +104,6 @@ export default {
           font-weight: $font-weight-normal;
         }
       }
-
-    &__clickable{
-      cursor: pointer;
-    }
   }
 }
 </style>
