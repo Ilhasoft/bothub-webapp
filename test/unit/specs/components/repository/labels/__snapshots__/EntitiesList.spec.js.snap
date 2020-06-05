@@ -4,7 +4,7 @@ exports[`EntitiesList.vue renders correctly 1`] = `
 <div class="entity-list__header">
   <div class="entity-list__content">
     <h1><strong>some specific text</strong></h1>
-    <b-tag-stub size="is-medium" tabstop="true" class="entity-list__content__tag entity-undefined">
+    <b-tag-stub size="is-medium" tabstop="true" class="entity-list__content__tag entity-android-green">
       <div>health</div>
     </b-tag-stub>
   </div>

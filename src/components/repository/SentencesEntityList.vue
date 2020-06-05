@@ -75,7 +75,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';

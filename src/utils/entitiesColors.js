@@ -1,4 +1,4 @@
-import { getEntitiesList } from '.';
+// import { getEntitiesList } from '.';
 
 export const colorsList = [
   'sunflower',
@@ -28,7 +28,7 @@ const getStringHash = (text) => {
   return hash;
 };
 
-export const getEntityColor = (entity, entities, flexibleEntities) => {
+export const getEntityColor = (entity) => {
   const hash = getStringHash(entity.value || entity);
   const i = Math.abs(hash) % colorsList.length;
   return colorsList[i];
