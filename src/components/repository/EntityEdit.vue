@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="entity-edit__entities-list"
-  >
+  <div class="entity-edit__entities-list">
     <div class="entity-edit__title entity-edit__entities-list__header">
       <p>{{ $t('webapp.home.entities_list') }}</p>
       <b-loading
@@ -26,12 +24,22 @@
           @click="creating = true">
           {{ $t('webapp.home.create_new_group') }}
         </b-button>
-    </b-field></div>
+      </b-field>
+    </div>
     <div>
       <div
-        v-show="groups.length > 0"
         class="entity-edit__entities-list__labeled-count">
-        {{ $tc('webapp.home.entities_label', groups.length) }}
+        <span v-show="groups.length > 0">
+          {{ $tc('webapp.home.entities_label', groups.length, ungrouped.length) }}
+        </span>
+        <span v-show="ungrouped.length > 0">
+          <span v-if="groups.length > 0">
+            {{ $tc('webapp.home.non-grouped_entities', ungrouped.length) }}
+          </span>
+          <span v-else>
+            {{ $tc('webapp.home.only_non-grouped_entities', ungrouped.length) }}
+          </span>
+        </span>
       </div>
       <create-badges-card
         v-if="creating"
@@ -217,7 +225,7 @@ export default {
       this.$buefy.dialog.alert({
         title: this.$t('webapp.home.delete_entity'),
         message: this.$t('webapp.home.delete_entity_message', { entity: entity.value }),
-        confirmText: this.$t('webapp.home.ok'),
+        confirmText: this.$t('webapp.home.delete'),
         cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
@@ -230,10 +238,11 @@ export default {
       this.$buefy.dialog.alert({
         title: this.$t('webapp.home.delete_group'),
         message: this.$t('webapp.home.delete_group_message', { group: group.value }),
-        confirmText: this.$t('webapp.home.ok'),
+        confirmText: this.$t('webapp.home.delete'),
         cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
+        type: 'is-danger',
         onConfirm: async () => {
           this.removeGroup(group.group_id);
         },
@@ -244,6 +253,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
 
   .entity-edit {
   &__title {
@@ -254,6 +264,7 @@ export default {
   &__button {
     color: white;
     margin-left: 0.5rem;
+    margin-top:0.6rem;
   }
 
   &__entities-list {
@@ -268,7 +279,7 @@ export default {
 
   &__entities-list {
     &__labeled-count {
-      margin: 1.5rem 0 1rem;
+      margin-bottom: $between-subtitle-content;
     }
   }
 }
