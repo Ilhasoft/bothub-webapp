@@ -229,10 +229,11 @@ export default {
       this.$buefy.dialog.alert({
         title: this.$t('webapp.home.delete_group'),
         message: this.$t('webapp.home.delete_group_message', { group: group.value }),
-        confirmText: this.$t('webapp.home.ok'),
+        confirmText: this.$t('webapp.home.delete'),
         cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
+        type: 'is-danger',
         onConfirm: async () => {
           this.removeGroup(group.group_id);
         },

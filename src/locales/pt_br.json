@@ -175,8 +175,8 @@
       "delete_entity_message": "Tem certeza que deseja remover a entidade \"{entity}\"?",
       "delete_group": "Deletar grupo de entidades",
       "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
-      "ok": "ok",
-      "cancel": "cancel"
+      "delete": "Deletar",
+      "cancel": "Cancelar"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",

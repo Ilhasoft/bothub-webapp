@@ -173,7 +173,7 @@
       "delete_entity_message": "Are you sure you want to delete entity named \"{entity}\"?",
       "delete_group": "Delete Group",
       "delete_group_message": "Are you sure you want to delete entity group named \"{group}\"?",
-      "ok": "Ok",
+      "delete": "Delete",
       "cancel": "Cancel"
     },
     "settings": {
