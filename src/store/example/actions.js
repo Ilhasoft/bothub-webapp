@@ -53,8 +53,8 @@ export default {
     const response = await example.get(id);
     return response;
   },
-  async getEntities(store, { repositoryUuid, value }) {
-    const response = await entity.search(repositoryUuid, { value });
+  async getEntities(store, { repositoryUuid, repositoryVersion, value }) {
+    const response = await entity.search(repositoryUuid, repositoryVersion, { value });
     return response;
   },
   async editEntityName(store, {
@@ -63,6 +63,15 @@ export default {
     const response = await entity.editEntityName(
       entityId,
       value,
+      repositoryVersion,
+    );
+    return response;
+  },
+  async getAllEntities(store, {
+    repositoryUuid, repositoryVersion,
+  }) {
+    const response = await entity.getEntities(
+      repositoryUuid,
       repositoryVersion,
     );
     return response;
