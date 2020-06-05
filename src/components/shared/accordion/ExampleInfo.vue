@@ -7,7 +7,7 @@
         v-for="entity in entitiesList"
         :key="entity.entity"
         :color-class="entity.class"
-        :group="entity.label"
+        :group="entity.group"
         :highlighted="entity.entity === highlighted"
         :entity-name="entity.entity"
         @mouseenter.native.stop="$emit('update:highlighted', entity.entity)"

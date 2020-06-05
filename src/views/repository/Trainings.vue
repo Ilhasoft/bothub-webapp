@@ -6,9 +6,6 @@
       <div class="trainings-repository__new-example">
         <div v-if="authenticated">
           <div v-if="repository.authorization.can_contribute">
-            <span
-              @mouseenter="$emit('testmouseenter')"
-              @mouseleave="$emit('testmouseleave')" > test </span>
             <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
             <span>{{ $t('webapp.trainings.grid_text2') }}</span>
             <new-example-form
@@ -125,10 +122,6 @@ export default {
       'trainRepository',
       'getTrainingStatus',
     ]),
-    mouse() {
-      console.log('mouseover');
-      this.$emit('mouseevent');
-    },
     onSearch(value) {
       Object.assign(this.querySchema, value);
 

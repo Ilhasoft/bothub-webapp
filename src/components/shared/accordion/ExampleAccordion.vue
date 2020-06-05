@@ -81,7 +81,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
@@ -137,23 +136,20 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
-
       return this.entities
-        .map((entity, index) => ({
-          value: entitiesList[index],
-          class: this.getEntityClass(entitiesList[index]),
-          label: entity.group,
+        .map(entity => ({
+          class: this.getEntityClass(entity.value),
           ...entity,
         }));
     },
     uniqueEntities() {
       const entityDict = this.entitiesList.reduce((dict, entity) => {
         if (!dict[entity.entity]) {
+          // eslint-disable-next-line no-param-reassign
           dict[entity.entity] = {
             entity: entity.entity,
             class: entity.class,
-            label: entity.label,
+            group: entity.group,
           };
         }
         return dict;

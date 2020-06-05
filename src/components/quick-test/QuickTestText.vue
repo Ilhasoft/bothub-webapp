@@ -7,6 +7,7 @@
     <highlighted-text
       v-else
       :text="displayText"
+      :highlighted="highlighted"
       :entities="entitiesList"
       :all-entities="allEntities"
       class="quick-test-text__text" />
@@ -37,7 +38,11 @@
             <p
               v-for="entity in entitiesNames"
               :key="entity"
-              class="quick-test-text__subtext quick-test-text__entity-item">
+              :class="['quick-test-text__subtext',
+                       'quick-test-text__entity-item',
+                       entity === highlighted ? 'quick-test-text__selected' : '']"
+              @mouseenter.stop="highlighted = entity"
+              @mouseleave.stop="highlighted = null">
               <span :class="['quick-test-text__subtext__dot', colorClasses[entity]]"/>
               {{ entity }}
             </p>
@@ -100,6 +105,7 @@ export default {
       loading: false,
       data: null,
       error: null,
+      highlighted: null,
     };
   },
   computed: {
@@ -186,6 +192,10 @@ export default {
 <style lang="scss" scoped>
 .quick-test-text {
     margin: 0 0 1.5rem 0;
+
+    &__selected {
+      border: 1px red dotted;
+    }
 
     &__text {
         margin: 0 1.175rem 0 0;
