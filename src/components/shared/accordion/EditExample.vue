@@ -179,15 +179,20 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
+    filterEntities() {
+      if (this.allEntities !== undefined) {
+        return this.allEntities.filter(entity => entity.value
+          .toString()
+          .toLowerCase()
+          .indexOf(this.entity.toLowerCase()) >= 0);
+      }
+      return [];
+    },
     entitiesOptions() {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
-      return allEntitiesName;
+      if (this.allEntities !== undefined) {
+        return this.allEntities;
+      }
+      return [];
     },
     validationErrors() {
       const errors = [];
@@ -250,10 +255,14 @@ export default {
       }
     },
   },
+  mounted() {
+    this.allEntitiesAvailable();
+  },
   methods: {
     ...mapActions([
       'updateEvaluateExample',
       'editSentence',
+      'getAllEntities',
     ]),
     async allEntitiesAvailable() {
       try {
