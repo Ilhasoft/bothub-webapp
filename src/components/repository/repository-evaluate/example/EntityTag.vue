@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style scoped>
+    strong {
+      color: inherit;
+    }
+
     .highlighted {
         border: 2px solid red;
     }

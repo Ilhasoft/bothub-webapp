@@ -229,6 +229,7 @@ export default {
         cancelText: this.$t('webapp.home.cancel'),
         canCancel: true,
         closeOnConfirm: true,
+        type: 'is-danger',
         onConfirm: async () => {
           this.removeEntity(entity, groupId);
         },
