@@ -13,7 +13,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import LoginModal from '@/components/shared/LoginModal';
-import NewsModal from '@/components/shared/NewsModal';
+import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 
 const components = {

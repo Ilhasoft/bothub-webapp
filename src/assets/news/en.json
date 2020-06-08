@@ -1,0 +1,22 @@
+{ 
+    "1": {
+        "title": "Bothub has Changed!",
+        "text": "We're building a new experience inspired by you! Now, you can manage your intelligence entities.",
+        "image": ""
+    },
+    "2": {
+        "title": "View sentences!",
+        "text": "View the sentences of each entity with one click..",
+        "image": ""
+    },
+        "3": {
+        "title": "Edit sentences!",
+        "text": "And edit the sentences of an entity!",
+        "image": ""
+    },
+    "4": {
+        "title": "Create and edit groups of entities!",
+        "text": "Or create groups and delete entities more easily.",
+         "image": ""
+    }
+}

@@ -4,13 +4,13 @@
     :width="740"
     @close="onClose">
     <div
-      v-if="info.length"
+      v-if="info.count"
       class="news-modal">
-      <h2> {{ info[current].title }} </h2>
-      <p> {{ info[current].text }} </p>
+      <h2> {{ $t(`${current}.title`) }} </h2>
+      <p> {{ $t(`${current}.text`) }} </p>
       <div class="news-modal__image__wrapper">
         <img
-          :src="info[current].img"
+          :src="$t(`${current}.img`)"
           class="news-modal__image">
       </div>
       <div class="news-modal__controls">
@@ -21,7 +21,7 @@
           @click="previous()"> Back </b-button>
         <div class="news-modal__indicator__wrapper">
           <div
-            v-for="(item, index) in info"
+            v-for="index in info.count"
             :key="index"
             :class="{'news-modal__indicator': true,
                      'news-modal__indicator--active': current === index}"
@@ -40,14 +40,26 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
+const en = require('../assets/news/en.json');
+const ptBr = require('../assets/news/pt_br.json');
+const info = require('../assets/news/info.json');
+
 export default {
   name: 'NewsModal',
   data() {
     return {
       active: true,
-      current: 0,
-      info: [],
+      current: 1,
+      info,
+      en,
+      ptBr,
     };
+  },
+  i18n: {
+    messages: {
+      'en-US': en,
+      'pt-BR': ptBr,
+    },
   },
   computed: {
     ...mapGetters([
@@ -57,33 +69,21 @@ export default {
       return this.lastVersionSeen !== process.env.VERSION;
     },
     hasNext() {
-      return this.current < this.info.length - 1;
+      return this.current < this.info.count;
     },
     hasPrevious() {
-      return this.current > 0;
+      return this.current > 1;
     },
-  },
-  mounted() {
-    this.info = new Array(5).fill([{
-      title: 'Possum is awesome',
-      text: 'Don\'t you agree?',
-      img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Opossum_2.jpg/730px-Opossum_2.jpg',
-    },
-    {
-      title: 'Possum is cute',
-      text: 'Isn\'t it?',
-      img: 'https://mdc.mo.gov/sites/default/files/styles/detail/public/opossum%20with%20young38RGB.jpg?itok=yoCULeB9',
-    }]).flat();
   },
   methods: {
     ...mapActions([
       'setLastVersionSeen',
     ]),
     next() {
-      this.current = Math.min(this.current + 1, this.info.length - 1);
+      this.current = Math.min(this.current + 1, this.info.count);
     },
     previous() {
-      this.current = Math.max(this.current - 1, 0);
+      this.current = Math.max(this.current - 1, 1);
     },
     onClose() {
       this.active = false;
