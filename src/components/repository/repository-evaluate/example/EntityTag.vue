@@ -52,7 +52,11 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  /deep/ strong {
+      color: inherit;
+    }
+
     .highlighted {
         border: 2px solid red;
     }
