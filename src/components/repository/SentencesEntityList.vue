@@ -136,7 +136,7 @@ export default {
       return this.entities
         .map(entity => ({
           value: entity.value,
-          class: this.getEntityClass(entity.value),
+          class: this.getEntityClass(entity.entity),
           group: entity.group,
           ...entity,
         }));
