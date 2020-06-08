@@ -254,7 +254,6 @@ export default {
     ...mapActions([
       'updateEvaluateExample',
       'editSentence',
-      'getAllEntities',
     ]),
     cancelEditSentence() {
       this.$emit('cancel');
