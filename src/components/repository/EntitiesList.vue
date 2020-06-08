@@ -1,34 +1,38 @@
 <template>
-  <div class="entity-list__header">
+  <div class="entity-list">
     <div class="entity-list__content">
-      <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
-      <b-tag
-        v-if="!EditSentences"
-        :class="[
-          'entity-list__content__tag',
-          getEntityClass(entityName.entity),
-        ]"
-        size="is-medium">
-        <div>{{ entityName.entity }}</div>
-      </b-tag>
-      <b-field
-        v-else
-        class="entity-list__content__editEntityName">
-        <b-input v-model="entityFormatted"/>
-      </b-field>
+      <div class="entity-list__content__descriptions">
+        <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
+        <b-tag
+          v-if="!EditSentences"
+          :class="[
+            'entity-list__content__descriptions__tag',
+            getEntityClass(entityName.entity),
+          ]"
+          size="is-medium">
+          <div>{{ entityName.entity }}</div>
+        </b-tag>
+        <b-field
+          v-else
+          class="entity-list__content__descriptions__editEntityName">
+          <b-input v-model="entityFormatted"/>
+        </b-field>
+      </div>
+      <div>
+        <b-button
+          v-if="!EditSentences"
+          ref="editEntityEvent"
+          class="entity-list__content__buttonEdit"
+          @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
+        <b-button
+          v-else
+          ref="saveEntityEvent"
+          class="entity-list__content__buttonSave"
+          @click.native="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
+      </div>
     </div>
     <div class="entity-list__header__options">
       <p> {{ $tc('webapp.entity.description', totalSentences) }}</p>
-      <b-button
-        v-if="!EditSentences"
-        ref="editEntityEvent"
-        class="entity-list__header__options__buttonEdit"
-        @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
-      <b-button
-        v-else
-        ref="saveEntityEvent"
-        class="entity-list__header__options__buttonSave"
-        @click.native="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
     </div>
   </div>
 </template>
@@ -155,57 +159,54 @@ export default {
 @import '~@/assets/scss/variables.scss';
 .entity-list {
     margin: 0.4rem;
-
-    &__header {
-      margin-bottom: 3.5rem;
-
+    margin-bottom: $between-subtitle-content;
       &__options{
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-
         p{
           font-size: $font-size
         }
-
-        &__buttonEdit{
-          width: 9.9rem;
-          background-color: $color-primary;
-          color: #FFFFFF;
-        }
-        &__buttonSave{
-          width: 9.9rem;
-          background-color: $color-secondary-light;
-          color: #FFFFFF;
-        }
       }
-    }
 
     &__content {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
+
+      &__descriptions{
+        display: flex;
+
+        &__tag{
+        margin: 0.2rem 0.5rem;
+        border-radius: 1rem;
+        padding: 0 1.1rem;
+
+          div {
+            font-size: 1.12rem;
+            font-family: $font-family;
+            margin-bottom: .1rem;
+          }
+        }
+        &__editEntityName{
+          margin: 0.2rem 0.5rem;
+          width: 10rem;
+        }
+      }
 
       h1{
         font-size: 1.75rem;
       }
 
-      &__editEntityName{
-        margin: 1rem;
-        width: 10rem;
-      }
-      &__tag{
-        margin-left: 0.5rem;
-        border-radius: 1rem;
-        margin-bottom: 0.5rem;
-        padding: 0 1.1rem;
-
-        div {
-          font-size: 1.12rem;
-          font-family: $font-family;
-          margin-bottom: .1rem;
+        &__buttonEdit{
+          width: 9.9rem;
+          margin-bottom:0.5rem;
+          background-color: $color-primary;
+          color: #FFFFFF;
         }
-      }
+        &__buttonSave{
+          width: 9.9rem;
+          margin-bottom:0.5rem;
+          background-color: $color-secondary-light;
+          color: #FFFFFF;
+        }
     }
 
     &__notification {

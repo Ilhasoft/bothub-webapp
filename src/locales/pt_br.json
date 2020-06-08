@@ -158,7 +158,9 @@
       "no_description": "Não há descrição para essa inteligência",
       "intents_list": "Lista de Intenções",
       "entities_list": "Grupos de entidades",
-      "entities_label": "Esta inteligência possui {n} grupos de entidade. | Esta inteligência possui {n} grupo de entidade. | Esta inteligência possui {n} grupos de entidade.",
+      "entities_label": "Esta inteligência possui {n} grupo de entidade | Esta inteligência possui {n} grupos de entidade",
+      "non-grouped_entities":"e {n} entidade não agrupada. | e {n} entidades não agrupadas.",
+      "only_non-grouped_entities":"Esta inteligência possui {n} entidade não agrupada. | Esta inteligência possui {n} entidades não agrupadas.",
       "bot_has_x_intents": "Essa inteligência tem <strong>{intents}</strong> intenções",
       "labeled": "<strong>{n}</strong> entidades agrupadas sob <strong>{label_value}</strong> | <strong>{n}</strong> entidade agrupada sob <strong>{label_value}</strong> | <strong>{n}</strong> entidades agrupadas sob <strong>{label_value}</strong>",
       "unlabeled": "<strong>{n}</strong> entidades não agrupadas | <strong>{n}</strong> entidade não agrupada | <strong>{n}</strong> entidades não agrupadas",
@@ -175,8 +177,8 @@
       "delete_entity_message": "Tem certeza que deseja remover a entidade \"{entity}\"?",
       "delete_group": "Deletar grupo de entidades",
       "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
-      "ok": "ok",
-      "cancel": "cancel"
+      "delete": "Deletar",
+      "cancel": "Cancelar"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -223,6 +225,7 @@
       "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
       "delete_button":"Deletar",
       "cancel_button":"Cancelar",
+      "save_button":"Salvar",
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção"
     },

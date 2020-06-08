@@ -7,7 +7,7 @@
         v-if="closable && edit"
         class="badges-card__icon"
         icon="close"
-        size="is-medium"
+        size="is-small"
         @click.native="onRemoveCard" />
     </div>
     <draggable
@@ -147,6 +147,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -166,8 +167,8 @@ export default {
     }
 
     &__icon {
-      color: #CFD5D9;
-        cursor: pointer;
+      color: $color-grey-dark;
+      cursor: pointer;
     }
 
     &__wrapper {

@@ -190,61 +190,13 @@ export default {
     vertical-align: middle;
   }
   .requestAuthorization{
-       color: $color-fake-black;
+      color: $color-fake-black;
       font-weight: $font-weight-medium;
       text-align: center;
       float: right
     }
   .entity-list {
     margin: 0.4rem;
-
-    &__header {
-      margin-bottom: 3.5rem;
-
-      &__options{
-        display:flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &__buttonEdit{
-          width: 9.9rem;
-          background-color: $color-primary;
-          color: #FFFFFF;
-        }
-        &__buttonSave{
-          width: 9.9rem;
-          background-color: $color-secondary-light;
-          color: #FFFFFF;
-        }
-      }
-    }
-
-    &__content {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-
-      &__editEntityName{
-        margin: 1rem;
-        width: 10rem;
-      }
-      &__tag{
-        margin-left: 1rem;
-        border-radius: 1rem;
-      }
-    }
-
-    &__notification {
-
-      margin: 0.5rem;
-
-         @media screen and (max-width: 50em) {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-      }
-    }
   }
 
 

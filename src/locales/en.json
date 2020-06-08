@@ -156,7 +156,9 @@
       "no_description": "There is no description for this repository",
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
-      "entities_label": "entities grouped by label.",
+      "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
+      "non-grouped_entities":"and {n} non-grouped entity. | and {n} non-grouped entities.",
+      "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
       "bot_has_x_intents": "This bot has <strong>{intents}</strong> intents",
       "labeled": "<strong>{n}</strong> entities grouped as <strong>{label_value}</strong> | <strong>{n}</strong> entity grouped as <strong>{label_value}</strong> | <strong>{n}</strong> entities grouped as <strong>{label_value}</strong>",
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
@@ -173,7 +175,7 @@
       "delete_entity_message": "Are you sure you want to delete entity named \"{entity}\"?",
       "delete_group": "Delete Group",
       "delete_group_message": "Are you sure you want to delete entity group named \"{group}\"?",
-      "ok": "Ok",
+      "delete": "Delete",
       "cancel": "Cancel"
     },
     "settings": {
@@ -221,6 +223,7 @@
       "delete_phrase_modal":"Are you sure? The example will be deleted",
       "delete_button":"Delete",
       "cancel_button":"Cancel",
+      "save_button":"Save",
       "empty_text_error": "You need type a text to sentence",
       "intent_error": "Intent is required"
     },

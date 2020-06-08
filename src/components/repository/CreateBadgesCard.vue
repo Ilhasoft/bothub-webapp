@@ -20,7 +20,7 @@
       <b-icon
         class="badges-card__icon"
         icon="close"
-        size="is-medium"
+        size="is-small"
         @click.native="close" />
     </div>
   </div>
@@ -73,6 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -97,7 +98,7 @@ export default {
     }
 
     &__icon {
-      color: #CFD5D9;
+      color: $color-grey-dark;
       cursor: pointer;
     }
 
