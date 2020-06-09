@@ -6,6 +6,7 @@
       :entities="entities"
       :intent="intent"
       :language="language"
+      :all-entities="allEntities"
       training
       @deleted="onExampleDeleted"
       @updateList="onExampleSave"
@@ -35,6 +36,10 @@ export default {
       type: String,
       default: null,
     },
+    getAllEntities: {
+      type: Array,
+      default: () => [],
+    },
     intent: {
       type: String,
       default: '',
@@ -52,12 +57,26 @@ export default {
       default: /* istanbul ignore next */ () => ({}),
     },
   },
+  data() {
+    return {
+      allEntities: [],
+    };
+  },
+  mounted() {
+    this.getEntitiesName();
+  },
   methods: {
+    async getEntitiesName() {
+      const allEntitiesName = await this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      this.allEntities = allEntitiesName;
+    },
     onExampleDeleted() {
       this.$emit('deleted');
     },
     onExampleSave() {
-      this.$emit('saveExamples');
+      this.$emit('updateList');
     },
   },
 };

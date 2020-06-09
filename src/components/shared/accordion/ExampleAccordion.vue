@@ -29,7 +29,7 @@
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute && !training"
+        v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
           <a
@@ -71,8 +71,11 @@
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
+        :edit-example-entity-list="true"
         :text-to-edit="text"
         :sentence-id="id"
+        :language-edit="language"
+        :get-all-entities="allEntities"
         @cancel="cancelEditSentence"
         @saveList="updateList"/>
     </div>
@@ -105,6 +108,10 @@ export default {
     text: {
       type: String,
       default: '',
+    },
+    allEntities: {
+      type: Array,
+      default: () => [],
     },
     entities: {
       type: Array,
@@ -156,10 +163,12 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
+        allEntitiesName,
       );
       return `entity-${color}`;
     },
