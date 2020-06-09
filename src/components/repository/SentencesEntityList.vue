@@ -67,6 +67,7 @@
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
+        :get-all-entities="allEntities"
         @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
@@ -101,6 +102,10 @@ export default {
     text: {
       type: String,
       default: '',
+    },
+    allEntities: {
+      type: Array,
+      default: () => [],
     },
     entities: {
       type: Array,
