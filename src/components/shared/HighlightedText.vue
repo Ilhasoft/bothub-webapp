@@ -21,7 +21,7 @@
         <span class="highlighted-entity-before">{{ entity.before }}</span>
         <span
           :class="['highlighted-entity-text',
-                   entity.colorClass,
+                   colorOnly && entity.entity !== colorOnly ? 'entity-selected' : entity.colorClass,
                    entitiesHasFailed,
                    failed,
                    entity.entity === highlighted ? 'highlighted-selected' : '']">
@@ -64,6 +64,10 @@ export default {
       default: '',
     },
     highlighted: {
+      type: String,
+      default: null,
+    },
+    colorOnly: {
       type: String,
       default: null,
     },

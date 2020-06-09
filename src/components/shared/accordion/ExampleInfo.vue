@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="example-entities__wrapper">
     <div
       v-if="entitiesList.length > 0"
       class="example-entities">
       <entity-tag
-        v-for="entity in entitiesList"
+        v-for="entity in uniqueEntities"
         :key="entity.entity"
-        :color-class="entity.class"
+        :color-class="colorOnly && colorOnly !== entity.entity ? 'entity-selected' : entity.class"
         :group="entity.group"
         :highlighted="entity.entity === highlighted"
         :entity-name="entity.entity"
@@ -48,6 +48,26 @@ export default {
       type: String,
       default: null,
     },
+    colorOnly: {
+      type: String,
+      default: null,
+    },
+  },
+  computed: {
+    uniqueEntities() {
+      const entityDict = this.entitiesList.reduce((dict, entity) => {
+        if (!dict[entity.entity]) {
+          // eslint-disable-next-line no-param-reassign
+          dict[entity.entity] = {
+            entity: entity.entity,
+            class: entity.class,
+            group: entity.group,
+          };
+        }
+        return dict;
+      }, {});
+      return Object.values(entityDict);
+    },
   },
 };
 </script>
@@ -87,6 +107,11 @@ export default {
   }
 
   &-entities {
+
+    &__wrapper {
+      margin: 0 0 0 0.8rem;
+    }
+
     > * {
       margin: 0 .5rem 0 0;
 
