@@ -96,7 +96,6 @@ export default {
     ...mapActions([
       'editEntityName',
       'setUpdateRepository',
-      'getAllEntities',
     ]),
     getEntityClass(entity) {
       const color = getEntityColor(
