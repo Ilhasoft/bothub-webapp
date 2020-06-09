@@ -52,8 +52,8 @@ export default {
 };
 </script>
 
-<style scoped>
-    strong {
+<style lang="scss" scoped>
+  /deep/ strong {
       color: inherit;
     }
 
