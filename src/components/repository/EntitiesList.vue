@@ -96,40 +96,19 @@ export default {
     ...mapActions([
       'editEntityName',
       'setUpdateRepository',
-      'getAllEntities',
     ]),
     getEntityClass(entity) {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entityGroup = this.repositoryList.groups.map(
-        entitiesValue => entitiesValue.entities[0].value,
-      );
-
-      if (entitiesName.indexOf(entity) !== -1) {
-        const color = getEntityColor(
-          entity,
-          entitiesName,
-        );
-        return `entity-${color}`;
-      }
-
       const color = getEntityColor(
         entity,
-        entityGroup,
+        this.allEntities,
       );
       return `entity-${color}`;
     },
     async getEntitiesName() {
-      try {
-        const entities = await this.getAllEntities({
-          repositoryUuid: this.repository.uuid,
-          repositoryVersion: this.repository.version_default.id,
-        });
-        this.allEntities = entities.data.results.map(entity => entity.value);
-      } catch (error) {
-        this.errors = error;
-      }
+      const allEntitiesName = await this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      this.allEntities = allEntitiesName;
     },
     editOptionsEntity() {
       this.EditSentences = !this.EditSentences;

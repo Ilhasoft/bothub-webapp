@@ -159,15 +159,9 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
-      const entitiesName = this.repository.other_group.entities.map(
+      const allEntitiesName = this.repository.entities.map(
         entityValue => entityValue.value,
       );
-
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
       const color = getEntityColor(
         entity,
         allEntitiesName,
