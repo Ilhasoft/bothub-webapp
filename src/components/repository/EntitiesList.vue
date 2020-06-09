@@ -64,6 +64,7 @@ export default {
       entityId: this.$route.params.entityid,
       entityFormatted: this.entityName.entity,
       allEntities: [],
+      errors: {},
     };
   },
   computed: {
