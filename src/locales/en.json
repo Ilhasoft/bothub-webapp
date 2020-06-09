@@ -117,7 +117,7 @@
       "detailed_results": "Detailed Results",
       "results": "Results",
       "default_error": "Something went wrong while testing",
-      "entity_is_group": "<strong>{entity}</strong> is <strong>{group}</strong>"
+      "entity_is_group": "<strong>{entity}</strong> grouped as <strong>{group}</strong>"
     },
     "result": {
       "load_result": "Load Results",
