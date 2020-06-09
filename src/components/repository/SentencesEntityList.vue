@@ -14,6 +14,7 @@
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
+          :color-only="entitySelected"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -57,6 +58,7 @@
         v-if="!editing"
         :entities-list="entitiesList"
         :highlighted.sync="highlighted"
+        :color-only="entitySelected"
         :intent="intent" />
 
       <edit-example
@@ -122,6 +124,10 @@ export default {
     editing: {
       type: Boolean,
       default: false,
+    },
+    entitySelected: {
+      type: String,
+      default: null,
     },
   },
   data() {

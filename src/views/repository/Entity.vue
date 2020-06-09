@@ -21,6 +21,7 @@
           :per-page="perPage"
           :editable="entitiesEditable"
           :all-entities="allEntities"
+          :add-attributes="{ entitySelected: entitySearch.entity }"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
         <p

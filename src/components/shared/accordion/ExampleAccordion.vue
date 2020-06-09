@@ -63,7 +63,7 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="uniqueEntities"
+        :entities-list="entitiesList"
         :highlighted.sync="highlighted"
         :intent="intent" />
 
@@ -141,20 +141,6 @@ export default {
           class: this.getEntityClass(entity.entity),
           ...entity,
         }));
-    },
-    uniqueEntities() {
-      const entityDict = this.entitiesList.reduce((dict, entity) => {
-        if (!dict[entity.entity]) {
-          // eslint-disable-next-line no-param-reassign
-          dict[entity.entity] = {
-            entity: entity.entity,
-            class: entity.class,
-            group: entity.group,
-          };
-        }
-        return dict;
-      }, {});
-      return Object.values(entityDict);
     },
   },
   watch: {
