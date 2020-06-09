@@ -5,13 +5,13 @@
     <div
       v-if="authenticated"
       class="entity-list">
-
       <div v-if="repository && repository.authorization.can_contribute">
         <entities-list
           :entities-list="examplesList"
           :entity-name="entitySearch"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
+          @setAllEntities="getAllEntities($event)"
           @saveEdition="onItemSave($event)"/>
         <paginated-list
           v-if="examplesList"
@@ -20,6 +20,7 @@
           :repository="repository"
           :per-page="perPage"
           :editable="entitiesEditable"
+          :all-entities="allEntities"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
         <p
@@ -103,6 +104,7 @@ export default {
       sentencesEntities: SentencesEntityList,
       requestAuthorizationModalOpen: false,
       querySchema: {},
+      allEntities: [],
     };
   },
   computed: {
@@ -133,6 +135,9 @@ export default {
     ...mapActions([
       'searchExamples',
     ]),
+    getAllEntities(value) {
+      this.allEntities = value;
+    },
     onSearch(value) {
       Object.assign(this.querySchema, value);
       if (!this.querySchema.entity) {
