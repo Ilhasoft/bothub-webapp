@@ -45,7 +45,7 @@
                 <strong>{{ highlightedText(entity) }}</strong> is
               </label>
               <bh-autocomplete
-                :data="entitiesOptions || []"
+                :data="getAllEntities || []"
                 :formatters="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
@@ -72,7 +72,7 @@
               <strong>{{ highlightedText(entity) }}</strong> is
             </label>
             <bh-autocomplete
-              :data="entitiesOptions || []"
+              :data="getAllEntities || []"
               :formatters="intentFormatters"
               v-model="entity.entity"
               :placeholder="$t('webapp.example.entity')"
@@ -139,6 +139,10 @@ export default {
       type: String,
       default: '',
     },
+    getAllEntities: {
+      type: Array,
+      default: () => ([]),
+    },
     entities: {
       type: Array,
       default: () => ([]),
@@ -179,16 +183,6 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
-    entitiesOptions() {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
-      return allEntitiesName;
-    },
     validationErrors() {
       const errors = [];
 
