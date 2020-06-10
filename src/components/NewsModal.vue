@@ -10,7 +10,8 @@
       <p> {{ $t(`${current}.text`) }} </p>
       <div class="news-modal__image__wrapper">
         <img
-          :src="$t(`${current}.img`)"
+          v-show="imageFor(current)"
+          :src="imageFor(current)"
           class="news-modal__image">
       </div>
       <div class="news-modal__controls">
@@ -18,7 +19,7 @@
           :class="{'news-modal__controls__button': true,
                    'news-modal__controls__hidden': !hasPrevious}"
           type="is-primary"
-          @click="previous()"> Back </b-button>
+          @click="previous()"> {{ $t('back') }} </b-button>
         <div class="news-modal__indicator__wrapper">
           <div
             v-for="index in info.count"
@@ -31,7 +32,7 @@
           :class="{'news-modal__controls__button': true,
                    'news-modal__controls__hidden': !hasNext}"
           type="is-primary"
-          @click="next()"> Next </b-button>
+          @click="next()"> {{ $t('next') }}  </b-button>
       </div>
     </div>
   </b-modal>
@@ -40,8 +41,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-const en = require('../assets/news/en.json');
-const ptBr = require('../assets/news/pt_br.json');
 const info = require('../assets/news/info.json');
 
 export default {
@@ -51,22 +50,26 @@ export default {
       active: true,
       current: 1,
       info,
-      en,
-      ptBr,
+      en: info.en,
+      ptBr: info.pt_br,
     };
   },
   i18n: {
     messages: {
-      'en-US': en,
-      'pt-BR': ptBr,
+      'en-US': this.en,
+      'pt-BR': this.ptBr,
     },
   },
   computed: {
     ...mapGetters([
       'lastVersionSeen',
     ]),
+    currentVersion() {
+      return process.env.VERSION;
+    },
     shouldShow() {
-      return this.lastVersionSeen !== process.env.VERSION;
+      return this.lastVersionSeen < this.currentVersion
+      && this.currentVersion <= this.info.max_version;
     },
     hasNext() {
       return this.current < this.info.count;
@@ -79,6 +82,10 @@ export default {
     ...mapActions([
       'setLastVersionSeen',
     ]),
+    imageFor(index) {
+      if (index >= this.info.images.length || !this.info.images[index]) return null;
+      return `~@/assets/news/imgs/${this.info.images[index]}`;
+    },
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
     },
@@ -87,7 +94,7 @@ export default {
     },
     onClose() {
       this.active = false;
-      this.setLastVersionSeen(process.env.VERSION);
+      this.setLastVersionSeen(this.currentVersion);
     },
   },
 };
@@ -96,7 +103,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
     .news-modal {
-
+        border-radius: 10px;
         background-color: white;
         padding: 3rem;
         text-align: center;
@@ -118,7 +125,7 @@ export default {
             justify-content: space-between;
 
             &__button {
-                padding: 2rem 3rem;
+                padding: 1.5rem 3rem;
             }
 
             &__hidden {
