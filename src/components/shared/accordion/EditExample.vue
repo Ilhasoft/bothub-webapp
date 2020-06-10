@@ -363,6 +363,7 @@ export default {
       });
 
       try {
+
         if (this.editExampleEntityList) {
           await this.editSentence({
             repository: this.repository.uuid,
@@ -384,7 +385,6 @@ export default {
             language: this.language,
           });
         }
-
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');
