@@ -1,7 +1,7 @@
 <template>
   <bh-card
+    :class="[ single ? 'repositoy-card__single' : 'repository-card']"
     shadow="light"
-    class="repository-card"
     no-border>
     <div class="repository-card__align-items">
       <div class="repository-card__big-badge-wrapper">
@@ -73,6 +73,12 @@ export default {
   components: {
     LanguageBadge,
   },
+  props: {
+    single: {
+      type: Boolean,
+      default: null,
+    },
+  },
   computed: {
     ...mapGetters([
       'getProfile',
@@ -122,6 +128,11 @@ export default {
   @media screen and (max-width: $small-mobile-width) {
     width: calc(100% - 1rem);
     margin: $repository-card-margin auto;
+  }
+
+  &__single {
+    width: 100%;
+    height: 100%;
   }
 
   &__align-items {
