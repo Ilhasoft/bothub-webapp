@@ -6,6 +6,7 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      @itemSave="show"
       @itemDeleted="onItemDeleted($event)" />
 
     <p
@@ -70,6 +71,9 @@ export default {
     ...mapActions([
       'searchExamples',
     ]),
+    show() {
+      this.updateExamples(true);
+    },
     async updateExamples(force = false) {
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({

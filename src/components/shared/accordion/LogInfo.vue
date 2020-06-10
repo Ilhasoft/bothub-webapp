@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="log-entities__wrapper">
     <div class="level">
       <div
         class="level-left log-entities">
@@ -132,6 +132,11 @@ export default {
   }
 
   &-entities {
+
+    &__wrapper {
+      margin: 0 0 0 2.5rem;
+    }
+
     > * {
       margin: 0 .5rem 0 0;
 

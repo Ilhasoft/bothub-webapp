@@ -63,6 +63,8 @@ export default {
       EditSentences: false,
       entityId: this.$route.params.entityid,
       entityFormatted: this.entityName.entity,
+      allEntities: [],
+      errors: {},
     };
   },
   computed: {
@@ -87,36 +89,31 @@ export default {
       this.entityFormatted = (formatters.bothubItemKey()(this.entityFormatted));
     },
   },
+  mounted() {
+    this.getEntitiesName();
+  },
   methods: {
     ...mapActions([
       'editEntityName',
       'setUpdateRepository',
     ]),
     getEntityClass(entity) {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entityGroup = this.repositoryList.groups.map(
-        entitiesValue => entitiesValue.entities[0].value,
-      );
-
-      if (entitiesName.indexOf(entity) !== -1) {
-        const color = getEntityColor(
-          entity,
-          entitiesName,
-        );
-        return `entity-${color}`;
-      }
-
       const color = getEntityColor(
         entity,
-        entityGroup,
+        this.allEntities,
       );
       return `entity-${color}`;
+    },
+    async getEntitiesName() {
+      const allEntitiesName = await this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      this.allEntities = allEntitiesName;
     },
     editOptionsEntity() {
       this.EditSentences = !this.EditSentences;
       this.$emit('ableEditEntities', this.EditSentences);
+      this.$emit('setAllEntities', this.allEntities);
     },
     async saveEdition() {
       try {
