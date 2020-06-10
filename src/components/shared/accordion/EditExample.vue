@@ -1,6 +1,6 @@
 <template>
   <div class="edit-sentence">
-    <form @submit.prevent="onSubmit">
+    <form>
       <div class="bh-grid">
         <div class="bh-grid__item--grow-3 edit-sentence__input">
           <bh-field
@@ -102,19 +102,19 @@
           {{ entityButtonText }}
         </bh-button>
         <div>
-          <bh-button
-            primary
+          <b-button
+            class="edit-sentence__btn-wrapper__cancelButton"
             @click="cancelEditSentence">
             Cancel
-          </bh-button>
-          <bh-button
+          </b-button>
+          <b-button
             :disabled="!isValid || submitting"
             :tooltip-hover="!isValid ? validationErrors : null"
             :loading="submitting"
-            secondary
-            type="submit">
+            class="edit-sentence__btn-wrapper__saveButton"
+            @click="onSubmit">
             <slot v-if="!submitting">Save</slot>
-          </bh-button>
+          </b-button>
         </div>
       </div>
     </form>
@@ -412,6 +412,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
 .edit-sentence {
   &__fields{
     display:flex;
@@ -430,6 +432,21 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: .7rem;
+    margin-top: 1rem;
+
+    &__cancelButton{
+      height: 2.25rem;
+      width: 6rem;
+      background-color:$color-primary;
+      color: $color-white;
+    }
+
+    &__saveButton{
+      height: 2.25rem;
+      width: 6rem;
+      background-color:$color-secondary;
+      color: $color-white;
+    }
   }
 }
 

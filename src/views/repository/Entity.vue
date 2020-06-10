@@ -8,11 +8,10 @@
       <div v-if="repository && repository.authorization.can_contribute">
         <entities-list
           :entities-list="examplesList"
-          :entity-name="entitySearch"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
           @setAllEntities="getAllEntities($event)"
-          @saveEdition="onItemSave($event)"/>
+          @saveEdition="onItemSave()"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
@@ -61,7 +60,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
-import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import LoginForm from '@/components/auth/LoginForm';
 import EntitiesList from '@/components/repository/EntitiesList';
 import PaginatedList from '@/components/shared/PaginatedList';
@@ -98,7 +96,7 @@ export default {
       examplesList: null,
       totalList: 0,
       entitySearch: {
-        entity: this.$route.params.value,
+        entity_id: this.$route.params.entity_id,
       },
       entitiesEditable: false,
       query: {},
@@ -125,12 +123,11 @@ export default {
       this.updateExamples();
     },
     entitySearch() {
-      this.onSearch(this.entitySearch);
+      this.updateExamples(true);
     },
   },
   mounted() {
     this.updateExamples();
-    this.onSearch(this.entitySearch);
   },
   methods: {
     ...mapActions([
@@ -139,37 +136,23 @@ export default {
     getAllEntities(value) {
       this.allEntities = value;
     },
-    onSearch(value) {
-      Object.assign(this.querySchema, value);
-      if (!this.querySchema.entity) {
-        delete this.querySchema.entity;
-      }
-      const formattedQueryString = exampleSearchToString(this.querySchema);
-      this.query = exampleSearchToDicty(formattedQueryString);
-    },
     async updateExamples(force = false) {
       if (this.repositoryList.uuid !== undefined) {
         if (!this.examplesList || force) {
           this.examplesList = await this.searchExamples({
             repositoryUuid: this.repositoryList.uuid,
             version: this.repositoryVersion,
-            query: this.query,
+            query: this.entitySearch,
             limit: this.perPage,
           });
         }
       }
     },
     onItemDeleted() {
-      this.onSearch(this.entitySearch);
+      this.updateExamples(true);
     },
-    onItemSave(entityName) {
-      if (entityName === undefined) {
-        return this.onSearch(this.entitySearch);
-      }
-      const newEntity = {
-        entity: entityName,
-      };
-      return this.onSearch(newEntity);
+    onItemSave() {
+      this.updateExamples(true);
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
