@@ -105,8 +105,7 @@ export default {
       if (this.edit) return;
       // eslint-disable-next-line camelcase
       const { entity_id } = entity;
-      const { value } = entity;
-      this.$router.push({ name: 'repository-entitylist', params: { entityid: entity_id, value } });
+      this.$router.push({ name: 'repository-entitylist', params: { entity_id } });
     },
     getEntityClass(entity) {
       const color = getEntityColor(
