@@ -117,7 +117,6 @@ export default {
         &__image {
             width: auto;
             max-height: 100%;
-            object-fit: cover;
             &__wrapper {
                 width: 100%;
                 height: 18rem;

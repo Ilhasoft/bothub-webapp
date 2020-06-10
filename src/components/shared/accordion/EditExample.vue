@@ -363,7 +363,6 @@ export default {
       });
 
       try {
-
         if (this.editExampleEntityList) {
           await this.editSentence({
             repository: this.repository.uuid,
