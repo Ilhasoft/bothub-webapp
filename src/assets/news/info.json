@@ -1,10 +1,12 @@
 {
     "max_version": "1.18.0",
     "count": 4,
-    "images": [null, null, null, null],
+    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif"],
     "en": { 
         "back": "Back",
         "next": "Next",
+        "cancel": "Cancel",
+        "finish": "Finish",
         "1": {
             "title": "Bothub has Changed!",
             "text": "We're building a new experience inspired by you! Now, you can manage your intelligence entities."
@@ -25,6 +27,8 @@
     "pt_br": { 
         "back": "Anterior",
         "next": "Próximo",
+        "cancel": "Cancelar",
+        "finish": "Finalizar",
         "1": {
             "title": "Bothub tem novidades!",
             "text": "Estamos construindo uma nova experiência inspirada por você! Agora você pode gerenciar as entidades da sua inteligência."

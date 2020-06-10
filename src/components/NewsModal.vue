@@ -10,16 +10,17 @@
       <p> {{ $t(`${current}.text`) }} </p>
       <div class="news-modal__image__wrapper">
         <img
-          v-show="imageFor(current)"
-          :src="imageFor(current)"
+          v-show="imageFor(current-1)"
+          :src="imageFor(current-1)"
           class="news-modal__image">
       </div>
       <div class="news-modal__controls">
         <b-button
-          :class="{'news-modal__controls__button': true,
-                   'news-modal__controls__hidden': !hasPrevious}"
+          class="news-modal__controls__button"
           type="is-primary"
-          @click="previous()"> {{ $t('back') }} </b-button>
+          @click="hasPrevious ? previous() : onClose()">
+          {{ hasPrevious ? $t('back') : $t('cancel') }}
+        </b-button>
         <div class="news-modal__indicator__wrapper">
           <div
             v-for="index in info.count"
@@ -29,16 +30,19 @@
             @click="current=index" />
         </div>
         <b-button
-          :class="{'news-modal__controls__button': true,
-                   'news-modal__controls__hidden': !hasNext}"
+          class="news-modal__controls__button"
           type="is-primary"
-          @click="next()"> {{ $t('next') }}  </b-button>
+          @click="hasNext ? next() : onClose()">
+          {{ hasNext ? $t('next') : $t('finish') }}
+        </b-button>
       </div>
     </div>
   </b-modal>
 </template>
 
 <script>
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import { mapGetters, mapActions } from 'vuex';
 
 const info = require('../assets/news/info.json');
@@ -50,14 +54,12 @@ export default {
       active: true,
       current: 1,
       info,
-      en: info.en,
-      ptBr: info.pt_br,
     };
   },
   i18n: {
     messages: {
-      'en-US': this.en,
-      'pt-BR': this.ptBr,
+      'en-US': info.en,
+      'pt-BR': info.pt_br,
     },
   },
   computed: {
@@ -68,8 +70,8 @@ export default {
       return process.env.VERSION;
     },
     shouldShow() {
-      return this.lastVersionSeen < this.currentVersion
-      && this.currentVersion <= this.info.max_version;
+      return this.currentVersion <= this.info.max_version
+      && (!this.lastVersionSeen || this.lastVersionSeen < this.currentVersion);
     },
     hasNext() {
       return this.current < this.info.count;
@@ -84,7 +86,7 @@ export default {
     ]),
     imageFor(index) {
       if (index >= this.info.images.length || !this.info.images[index]) return null;
-      return `~@/assets/news/imgs/${this.info.images[index]}`;
+      return require(`../assets/news/imgs/${this.info.images[index]}`);
     },
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
@@ -107,6 +109,10 @@ export default {
         background-color: white;
         padding: 3rem;
         text-align: center;
+
+        p {
+          margin: 1.3rem 0 1.7rem 0;
+        }
 
         &__image {
             width: auto;
