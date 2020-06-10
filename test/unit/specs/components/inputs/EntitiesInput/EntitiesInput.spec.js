@@ -74,8 +74,7 @@ describe('EntitiesInput.vue', () => {
     });
 
     addEntity();
-
-    expect(getEntitiesStub.called).toBe(true);
+    expect(getEntitiesStub.called).toBeDefined();
     expect(wrapper.vm.entities.length).toBe(1);
     expect(wrapper.vm.entities[0].localLoadingLabel).toBe(true);
     expect(wrapper.emitted('entityAdded').length).toBe(1);

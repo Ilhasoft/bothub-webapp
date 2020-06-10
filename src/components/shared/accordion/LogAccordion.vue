@@ -26,6 +26,7 @@
             v-if="open"
             :text="text"
             :entities="entitiesList"
+            :highlighted="highlighted"
             :all-entities="repository.entities || repository.entities_list" />
         </div>
 
@@ -40,6 +41,7 @@
           :intent="nlp_log.intent.name"
           :confidence="nlp_log.intent.confidence"
           :created-at="created_at"
+          :highlighted.sync="highlighted"
           @onShowRawInfo="showRawInfo()"
           @debug="debug()"/>
       </div>
@@ -101,6 +103,7 @@ export default {
       intent: '',
       isCorrected: Boolean,
       data: [],
+      highlighted: null,
     };
   },
   computed: {
@@ -126,7 +129,6 @@ export default {
         .map((entity, index) => ({
           value: this.entities[index],
           class: this.getEntityClass(this.entities[index]),
-          label: this.getEntityLabel(this.entities[index]),
           ...entity,
         }));
     },
@@ -174,14 +176,6 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
-    },
-    getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
     },
     showRawInfo() {
       this.$buefy.modal.open({
