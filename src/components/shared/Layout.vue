@@ -33,15 +33,16 @@
             <div
               v-if="authenticated"
               class="bh-grid__item hide-mobile">
-              <bh-button
-                size="small"
-                primary
-                inverted
-                rounded
-                max-content
-                @click="openNewRepositoryModal()">
-                {{ $t('webapp.layout.newbot') }}
-              </bh-button>
+              <router-link :to="'new'">
+                <bh-button
+                  size="small"
+                  primary
+                  inverted
+                  rounded
+                  max-content>
+                  {{ $t('webapp.layout.newbot') }}
+                </bh-button>
+              </router-link>
             </div>
             <div
               v-if="authenticated"

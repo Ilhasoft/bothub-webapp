@@ -66,6 +66,7 @@ export default new Router({
     },
     {
       path: '/new/',
+      name: 'new',
       component: CreateRepository,
     },
     {

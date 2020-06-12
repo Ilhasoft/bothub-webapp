@@ -1,6 +1,12 @@
 <template>
   <layout>
-    <div class="create-repository">
+    <login-form
+      v-if="!authenticated"
+      class="login-form"
+      hide-forgot-password />
+    <div
+      v-else
+      class="create-repository">
       <div
         v-show="current==0"
         class="create-repository__form__wrapper">
@@ -21,7 +27,9 @@
       <div
         v-show="current==1"
         class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.choose_category') }} </h1>
+        <h1 class="create-repository__title">
+          {{ $t('webapp.create_repository.choose_category') }}
+        </h1>
         <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
         <category-list
@@ -70,6 +78,7 @@ import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategoryList from '@/components/repository/CategoryList';
+import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'CreateRepository',
@@ -80,6 +89,7 @@ export default {
     RepositoryCard,
     NewRepositoryForm,
     CategoryList,
+    LoginForm,
   },
   data() {
     return {
@@ -96,6 +106,7 @@ export default {
   computed: {
     ...mapGetters([
       'myProfile',
+      'authenticated',
     ]),
     computedSchema() {
       return Object.entries(this.formSchema).reduce((schema, entry) => {
@@ -188,6 +199,10 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+
+    .login-form {
+      margin: 5rem 5rem;
+    }
 
     .create-repository {
         display: flex;
