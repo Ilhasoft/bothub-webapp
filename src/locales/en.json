@@ -25,6 +25,21 @@
       "login": "Login",
       "forgot_password": "Forgot password"
     },
+    "create_repository": {
+      "create_repo": "Create an intelligence",
+      "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then choose the language in which he will be trained. Finally, determine whether it will be open to the public or private.",
+      "choose_category": "Repository categories",
+      "choose_category_text": "Choose the categories your repository fits into. <br> Don't worry, you can change them later.",
+      "repository_created": "We're all ready!",
+      "repository_created_text": "Your repository is ready to use. You can change these and other information on the settings tab. <br><br> You can now start training your bot!",
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit",
+      "start": "Start",
+      "language": "laguage",
+      "category": "Category",
+      "new_repo": "NEW INTELLIGENCE"
+    },
     "register_form": {
       "already_have_account": "Already have an account?",
       "signin": "Sign in",

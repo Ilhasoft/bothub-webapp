@@ -25,6 +25,21 @@
       "login": "Login",
       "forgot_password": "Esqueci a senha"
     },
+    "create_repository": {
+      "create_repo": "Crie uma inteligência",
+      "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
+      "choose_category": "Categorias",
+      "choose_category_text": "Escolha as categorias nas quais seu bot se encaixa. <br> Não se preocupe, isso poderá ser mudado depois.",
+      "repository_created": "Tudo pronto!",
+      "repository_created_text": "Sua inteligência está pronta para o uso. Você pode mudar essas e outras informações na seção de configurações. <br><br> Você pode começar a treinar seu bot agora!",
+      "next": "Próximo",
+      "previous": "Anterior",
+      "submit": "Enviar",
+      "start": "Começar",
+      "language": "idioma",
+      "category": "Categoria",
+      "new_repo": "NOVA INTELIGÊNCIA"
+    },
     "register_form": {
       "already_have_account": "Já tem um conta?",
       "signin": "Entrar",

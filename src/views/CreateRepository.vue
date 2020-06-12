@@ -4,11 +4,8 @@
       <div
         v-show="current==0"
         class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> Create an intelligence </h1>
-        <p> Now you can create intelligence quickly and easily.
-        Let's start now? First, give your repository a name. <br>
-          Then choose the language in which he will be trained.
-          Finally, determine whether it will be open to the public or private. </p>
+        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
+        <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
         <form-generator
           v-if="formSchema"
@@ -19,14 +16,13 @@
           class="create-repository__form" />
         <b-button
           type="is-primary"
-          @click="current = 1"> Next </b-button>
+          @click="current = 1"> {{ $t('webapp.create_repository.next') }} </b-button>
       </div>
       <div
         v-show="current==1"
         class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> Repository categories </h1>
-        <p> Choose the categories your repository fits into. <br>
-          Don't worry, you can change them later. </p>
+        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.choose_category') }} </h1>
+        <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
         <category-list
           v-if="formSchema"
@@ -35,21 +31,21 @@
           class="create-repository__form"/>
         <b-button
           type="is-primary"
-          @click="current = 0"> Previous </b-button>
+          @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
         <b-button
           type="is-primary"
-          @click="onSubmit"> Submit </b-button>
+          @click="onSubmit"> {{ $t('webapp.create_repository.submit') }} </b-button>
       </div>
       <div
         v-if="current==2"
         class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> We're all ready! </h1>
-        <p> Your repository is ready to use. You can change this
-        and other information on the settings tab. <br>
-          You can now start training your bot! </p>
+        <h1 class="create-repository__title">
+          {{ $t('webapp.create_repository.repository_created') }}
+        </h1>
+        <p v-html="$t('webapp.create_repository.repository_created_text')" />
         <router-link :to="repositoryDetailsRouterParams()">
           <b-button
-            type="is-primary"> Start </b-button>
+            type="is-primary"> {{ $t('webapp.create_repository.start') }} </b-button>
         </router-link>
       </div>
       <div class="create-repository__card__wrapper">
@@ -146,16 +142,22 @@ export default {
       };
     },
     cardAttributes() {
-      const categoryNames = this.categories.length > 0 ? this.categories.map(category => category.display_name) : ['Category'];
+      const categoryNames = this.categories.length > 0
+        ? this.categories.map(category => category.display_name)
+        : [this.$t('webapp.create_repository.category')];
+
+      const categories = this.categories.length > 0
+        ? this.categories.map(category => ({ name: category.display_name }))
+        : [{ name: this.$t('webapp.create_repository.category') }];
 
       return {
-        name: this.data.name || 'Name',
-        available_languages: [this.data.language || 'language'],
-        language: this.data.language || 'language',
+        name: this.data.name || this.$t('webapp.create_repository.new_repo'),
+        available_languages: [this.data.language || this.$t('webapp.create_repository.language')],
+        language: this.data.language || this.$t('webapp.create_repository.language'),
         owner__nickname: this.myProfile.name,
-        categories: this.categories.map(category => ({ name: category.display_name, ...category })),
+        categories,
         categories_list: categoryNames,
-        slug: 'name',
+        slug: this.$t('webapp.create_repository.new_repo'),
       };
     },
     async onSubmit() {
