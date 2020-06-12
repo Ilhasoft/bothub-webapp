@@ -1,9 +1,11 @@
 <template>
-  <div class="category-item">
+  <div
+    class="category-item">
     <p> {{ title }} </p>
-    <bh-icon-button
-      :value="repositoryIcon"
-      size="extra-large"/>
+    <bh-icon
+      :class="{selected}"
+      :value="icon"
+      size="large"/>
   </div>
 </template>
 
@@ -15,9 +17,17 @@ export default {
       type: String,
       default: 'botinho',
     },
+    value: {
+      type: String,
+      default: null,
+    },
     title: {
       type: String,
       default: '',
+    },
+    selected: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -28,5 +38,9 @@ export default {
         border-radius: 10px;
         background-color: white;
         width: 7rem;
+
+        &__selected {
+          border: 2px black solid;
+        }
     }
 </style>

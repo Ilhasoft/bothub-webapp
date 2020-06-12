@@ -8,20 +8,21 @@
           Then choose the language in which he will be trained.
           Finally, determine whether it will be open to the public or private. </p>
         <loading v-if="!formSchema" />
-        <!-- <form-generator
+        <form-generator
           v-if="formSchema"
           :drf-model-instance="drfRepositoryModel"
           :schema="formSchema"
           v-model="data"
           :errors="errors"
-          class="create-repository__form" /> -->
+          class="create-repository__form" />
         <category-list
           v-if="formSchema"
-          :list="categories"/>
+          v-model="categories"
+          :list="categoriesList"/>
       </div>
       <div class="create-repository__card">
         <repository-card
-          v-bind="cardAttributes"
+          v-bind="cardAttributes()"
           single/>
       </div>
   </div></layout>
@@ -56,6 +57,7 @@ export default {
       submitting: false,
       errors: {},
       drfRepositoryModel: {},
+      categories: [],
     };
   },
   computed: {
@@ -67,24 +69,10 @@ export default {
         return schema;
       }, {});
     },
-    categories() {
+    categoriesList() {
       return this.filteredSchema.categories.choices;
     },
-    cardAttributes() {
-      return {
-        name: 'Name',
-        available_languages: ['en'],
-        language: 'en',
-        owner__nickname: 'User',
-        categories: [{
-          icon: 'botinho',
-          id: 12,
-          name: 'Other',
-        }],
-        categories_list: ['other'],
-        slug: 'name',
-      };
-    },
+
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
@@ -104,6 +92,26 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
     ]),
+    cardAttributes() {
+      const categoryNames = this.categories.length > 0 ? this.categories.map(category => category.display_name) : ['Category'];
+      const categories = this.categories.length > 0
+        ? { name: this.categories[0].display_name, ...this.categories[0] }
+        : {
+          icon: 'botinho',
+          id: 0,
+          name: 'Category',
+        };
+
+      return {
+        name: this.data.name || 'Name',
+        available_languages: [this.data.language || 'language'],
+        language: this.data.language || 'language',
+        owner__nickname: 'User',
+        categories,
+        categories_list: categoryNames,
+        slug: 'name',
+      };
+    },
     async onSubmit() {
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
       this.submitting = true;

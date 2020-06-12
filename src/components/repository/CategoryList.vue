@@ -1,10 +1,12 @@
 <template>
   <div class="category-list">
     <category-item
-      v-for="(category, index) in list"
-      :key="index"
+      v-for="category in categoryList"
+      :class="{ 'category-list__selected': selectedCategories[category.value] }"
+      :key="category.value"
       :icon="category.icon"
-      :title="category.display_name"/>
+      :title="category.display_name"
+      @click.native="select(category)"/>
   </div>
 </template>
 
@@ -21,6 +23,33 @@ export default {
       type: Array,
       default: () => {},
     },
+    value: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  data() {
+    return {
+      selectedCategories: {},
+    };
+  },
+  computed: {
+    categoryList() {
+      return this.list.map(category => ({
+        ...category,
+        icon: category.display_name.toLowerCase(),
+      }));
+    },
+  },
+  methods: {
+    select(category) {
+      if (this.selectedCategories[category.value]) {
+        this.selectedCategories[category.value] = !this.selectedCategories[category.value];
+      } else {
+        this.$set(this.selectedCategories, category.value, true);
+      }
+      this.$emit('input', this.categoryList.filter(listCategory => this.selectedCategories[listCategory.value]));
+    },
   },
 };
 </script>
@@ -29,6 +58,10 @@ export default {
     .category-list {
         display: flex;
         flex-wrap: wrap;
+
+        &__selected {
+          border: 2px black solid;
+        }
 
         > * {
             margin: 0 0.6rem 0.6rem 0;
