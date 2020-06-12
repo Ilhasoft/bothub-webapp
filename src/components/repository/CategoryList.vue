@@ -2,7 +2,7 @@
   <div class="category-list">
     <category-item
       v-for="category in categoryList"
-      :class="{ 'category-list__selected': selectedCategories[category.value] }"
+      :selected="selectedCategories[category.value]"
       :key="category.value"
       :icon="category.icon"
       :title="category.display_name"
@@ -58,10 +58,6 @@ export default {
     .category-list {
         display: flex;
         flex-wrap: wrap;
-
-        &__selected {
-          border: 2px black solid;
-        }
 
         > * {
             margin: 0 0.6rem 0.6rem 0;

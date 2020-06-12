@@ -1,10 +1,13 @@
 <template>
   <div
+    :class="{'category-item': true,
+             'category-item__selected': selected}"
     class="category-item">
     <p> {{ title }} </p>
+    <div class="category-item__separator" />
     <bh-icon
-      :class="{selected}"
       :value="icon"
+      class="category-item__icon"
       size="large"/>
   </div>
 </template>
@@ -34,13 +37,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
     .category-item {
+      text-align: center;
         border-radius: 10px;
         background-color: white;
+        padding: 0.5rem 0.5rem 1rem 0.5rem;
         width: 7rem;
 
+        &__icon {
+          color: $color-primary;
+        }
+
+        &__separator {
+          height: 1px;
+          margin: 0.5rem 1rem;
+          background-color: $color-grey;
+        }
+
         &__selected {
-          border: 2px black solid;
+          box-shadow:0px 0px 0px 2px $color-primary inset;
         }
     }
 </style>

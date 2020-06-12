@@ -1,8 +1,10 @@
 <template>
   <layout>
     <div class="create-repository">
-      <div class="create-repository__form__wrapper">
-        <h1> Create an intelligence </h1>
+      <div
+        v-show="current==0"
+        class="create-repository__form__wrapper">
+        <h1 class="create-repository__title"> Create an intelligence </h1>
         <p> Now you can create intelligence quickly and easily.
         Let's start now? First, give your repository a name. <br>
           Then choose the language in which he will be trained.
@@ -11,19 +13,52 @@
         <form-generator
           v-if="formSchema"
           :drf-model-instance="drfRepositoryModel"
-          :schema="formSchema"
+          :schema="filteredSchema"
           v-model="data"
           :errors="errors"
           class="create-repository__form" />
+        <b-button
+          type="is-primary"
+          @click="current = 1"> Next </b-button>
+      </div>
+      <div
+        v-show="current==1"
+        class="create-repository__form__wrapper">
+        <h1 class="create-repository__title"> Repository categories </h1>
+        <p> Choose the categories your repository fits into. <br>
+          Don't worry, you can change them later. </p>
+        <loading v-if="!formSchema" />
         <category-list
           v-if="formSchema"
           v-model="categories"
-          :list="categoriesList"/>
+          :list="categoriesList.choices"
+          class="create-repository__form"/>
+        <b-button
+          type="is-primary"
+          @click="current = 0"> Previous </b-button>
+        <b-button
+          type="is-primary"
+          @click="onSubmit"> Submit </b-button>
       </div>
-      <div class="create-repository__card">
-        <repository-card
-          v-bind="cardAttributes()"
-          single/>
+      <div
+        v-if="current==2"
+        class="create-repository__form__wrapper">
+        <h1 class="create-repository__title"> We're all ready! </h1>
+        <p> Your repository is ready to use. You can change this
+        and other information on the settings tab. <br>
+          You can now start training your bot! </p>
+        <router-link :to="repositoryDetailsRouterParams()">
+          <b-button
+            type="is-primary"> Start </b-button>
+        </router-link>
+      </div>
+      <div class="create-repository__card__wrapper">
+        <div class="create-repository__card">
+          <repository-card
+            v-bind="cardAttributes()"
+            :clickable="false"
+            single/>
+        </div>
       </div>
   </div></layout>
 </template>
@@ -34,7 +69,7 @@ import RepositoryCard from '@/components/repository/RepositoryCard';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
 import NewRepositoryForm from '@/components/repository/NewRepositoryForm';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
@@ -58,10 +93,15 @@ export default {
       errors: {},
       drfRepositoryModel: {},
       categories: [],
+      current: 0,
+      resultParams: {},
     };
   },
   computed: {
-    filteredSchema() {
+    ...mapGetters([
+      'myProfile',
+    ]),
+    computedSchema() {
       return Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
         // eslint-disable-next-line no-param-reassign
@@ -69,15 +109,19 @@ export default {
         return schema;
       }, {});
     },
-    categoriesList() {
-      return this.filteredSchema.categories.choices;
+    filteredSchema() {
+      const { categories, ...schema } = this.computedSchema;
+      return schema;
     },
-
+    categoriesList() {
+      const { categories } = this.computedSchema;
+      return categories;
+    },
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(
-      this.filteredSchema,
+      this.computedSchema,
       RepositoryModel,
     );
 
@@ -92,34 +136,41 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
     ]),
+    repositoryDetailsRouterParams() {
+      return {
+        name: 'repository-summary',
+        params: {
+          ownerNickname: this.resultParams.ownerNickname,
+          slug: this.resultParams.slug,
+        },
+      };
+    },
     cardAttributes() {
       const categoryNames = this.categories.length > 0 ? this.categories.map(category => category.display_name) : ['Category'];
-      const categories = this.categories.length > 0
-        ? { name: this.categories[0].display_name, ...this.categories[0] }
-        : {
-          icon: 'botinho',
-          id: 0,
-          name: 'Category',
-        };
 
       return {
         name: this.data.name || 'Name',
         available_languages: [this.data.language || 'language'],
         language: this.data.language || 'language',
-        owner__nickname: 'User',
-        categories,
+        owner__nickname: this.myProfile.name,
+        categories: this.categories.map(category => ({ name: category.display_name, ...category })),
         categories_list: categoryNames,
         slug: 'name',
       };
     },
     async onSubmit() {
-      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel, this.data);
+      const categoryValues = this.categories.map(category => category.value);
+      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
+        { ...this.data, categories: categoryValues });
       this.submitting = true;
       this.errors = {};
 
       try {
-        const result = await this.drfRepositoryModel.save();
-        this.$emit('created', result.response.data);
+        const response = await this.drfRepositoryModel.save();
+        // eslint-disable-next-line camelcase
+        const { owner__nickname, slug } = response.response.data;
+        this.current = 2;
+        this.resultParams = { ownerNickname: owner__nickname, slug };
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
@@ -133,6 +184,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
     .create-repository {
         display: flex;
         flex-wrap: wrap;
@@ -141,8 +194,14 @@ export default {
         text-align: center;
         margin: 4rem 8rem;
 
+        &__title {
+          color: $color-primary;
+          font-size: 3rem;
+        }
+
         &__form {
             text-align: left;
+            margin: 1.5rem 0;
             &__wrapper {
                 width: 31rem;
                 margin: 0 1rem 3rem 0;
@@ -152,6 +211,12 @@ export default {
         &__card {
             width: 23.3rem;
             height: 23.3rem;
+
+            &__wrapper {
+              height: 100%;
+              display: flex;
+              align-items: center;
+            }
         }
     }
 </style>

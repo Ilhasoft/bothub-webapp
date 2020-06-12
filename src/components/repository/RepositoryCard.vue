@@ -5,25 +5,33 @@
     no-border>
     <div class="repository-card__align-items">
       <div class="repository-card__big-badge-wrapper">
-        <router-link :to="repositoryDetailsRouterParams">
+        <component
+          :is="clickable ? 'router-link' : 'span'"
+          :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
-            <bh-icon-button
+            <component
+              :is="clickable ? 'bh-icon-button' : 'bh-icon'"
               :value="repositoryIcon"
               size="extra-large"
               class="repository-card__big-badge__icon" />
           </div>
-        </router-link>
+        </component>
       </div>
       <div class="repository-card__details">
         <div class="repository-card__title">
           <span class="repository-card__title__bagde">
-            <router-link :to="repositoryDetailsRouterParams">
-              <bh-icon-button
+            <component
+              :is="clickable ? 'router-link' : 'span'"
+              :to="repositoryDetailsRouterParams">
+              <component
+                :is="clickable ? 'bh-icon-button' : 'bh-icon'"
                 :value="repositoryIcon"
-                class="repository-card__title__bagde__icon" /></router-link>
+                class="repository-card__title__bagde__icon" /></component>
           </span>
-          <router-link :to="repositoryDetailsRouterParams">
-          <span class="text-color-fake-black">{{ $attrs.name }}</span></router-link>
+          <component
+            :is="clickable ? 'router-link' : 'span'"
+            :to="repositoryDetailsRouterParams">
+          <span class="text-color-fake-black">{{ $attrs.name }}</span></component>
         </div>
 
         <div class="repository-card__info-item">
@@ -45,8 +53,9 @@
           </span>
         </div>
         <div class="repository-card__categories">
-          <router-link
+          <component
             v-for="category in repositoryCategoryRouterParams"
+            :is="clickable ? 'router-link' : 'span'"
             :key="category.id"
             :to="{
               path: '/home',
@@ -56,7 +65,7 @@
               color="grey-light"
               size="small"
               class="repository-card__categories__category">{{ category.name }}</bh-badge>
-          </router-link>
+          </component>
         </div>
       </div>
     </div>
@@ -77,6 +86,10 @@ export default {
     single: {
       type: Boolean,
       default: null,
+    },
+    clickable: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {
