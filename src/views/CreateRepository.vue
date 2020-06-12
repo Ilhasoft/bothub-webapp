@@ -187,14 +187,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
     .create-repository {
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         text-align: center;
         margin: 4rem 8rem;
+
+        @media (max-width: $mobile-width) {
+          flex-direction: row;
+        }
 
         &__title {
           color: $color-primary;
@@ -204,21 +208,21 @@ export default {
         &__form {
             text-align: left;
             margin: 1.5rem 0;
+
             &__wrapper {
                 width: 31rem;
-                margin: 0 1rem 3rem 0;
+                margin: 0 8rem 0 0;
+
+                @media (max-width: $mobile-width*1.2) {
+                  margin: 3rem 0 0 0;
+                }
             }
         }
 
         &__card {
+            margin: 25% 0 0 0;
             width: 23.3rem;
             height: 23.3rem;
-
-            &__wrapper {
-              height: 100%;
-              display: flex;
-              align-items: center;
-            }
         }
     }
 </style>
