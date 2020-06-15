@@ -42,6 +42,7 @@ export default {
     .category-item {
       text-align: center;
         border-radius: 10px;
+        font-size: 0.875rem;
         background-color: white;
         padding: 0.5rem 0.5rem 1rem 0.5rem;
         width: 7rem;

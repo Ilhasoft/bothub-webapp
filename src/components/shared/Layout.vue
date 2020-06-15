@@ -34,14 +34,12 @@
               v-if="authenticated"
               class="bh-grid__item hide-mobile">
               <router-link :to="'new'">
-                <bh-button
-                  size="small"
-                  primary
+                <b-button
+                  type="is-primary"
                   inverted
-                  rounded
-                  max-content>
-                  {{ $t('webapp.layout.newbot') }}
-                </bh-button>
+                  rounded>
+                  <strong>{{ $t('webapp.layout.newbot') }}</strong>
+                </b-button>
               </router-link>
             </div>
             <div
