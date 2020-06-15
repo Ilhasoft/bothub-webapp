@@ -1,7 +1,7 @@
 <template>
   <layout>
     <login-form
-      v-if="false"
+      v-if="!authenticated"
       class="login-form"
       hide-forgot-password />
     <create-repository-form

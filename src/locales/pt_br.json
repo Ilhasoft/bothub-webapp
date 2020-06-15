@@ -38,7 +38,8 @@
       "start": "Começar",
       "language": "idioma",
       "category": "Categoria",
-      "new_repo": "NOVA INTELIGÊNCIA"
+      "new_repo": "NOVA INTELIGÊNCIA",
+      "default_error": "Existem erros no formulário"
     },
     "register_form": {
       "already_have_account": "Já tem um conta?",

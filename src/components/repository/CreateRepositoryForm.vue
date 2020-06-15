@@ -113,6 +113,17 @@ export default {
       return schema;
     },
   },
+  watch: {
+    errors() {
+      if (Object.keys(this.errors).length > 0) {
+        this.current = 0;
+        this.$buefy.toast.open({
+          message: this.$t('webapp.create_repository.default_error'),
+          type: 'is-danger',
+        });
+      }
+    },
+  },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(

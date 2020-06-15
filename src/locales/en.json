@@ -38,7 +38,8 @@
       "start": "Start",
       "language": "laguage",
       "category": "Category",
-      "new_repo": "NEW INTELLIGENCE"
+      "new_repo": "NEW INTELLIGENCE",
+      "default_error": "There were errors while submitting"
     },
     "register_form": {
       "already_have_account": "Already have an account?",
