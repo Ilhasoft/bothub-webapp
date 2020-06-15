@@ -65,7 +65,6 @@
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import NewRepositoryForm from '@/components/repository/NewRepositoryForm';
 import { mapActions } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
@@ -78,7 +77,6 @@ export default {
     Loading,
     FormGenerator,
     RepositoryCard,
-    NewRepositoryForm,
     CategorySelect,
   },
   props: {
