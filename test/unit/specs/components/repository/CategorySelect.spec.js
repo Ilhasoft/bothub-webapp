@@ -30,22 +30,15 @@ describe('CreateRepositoryForm', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('valid data', () => {
+  describe('selects correctly', () => {
     beforeEach(() => {
       wrapper.vm.list = [{ id: 1, name: 'Category1' }, { id: 2, name: 'Category2' }, { id: 3, name: 'Category3' }];
       const cards = wrapper.findAll({ ref: 'items' });
-      cards.at(0).trigger('click');
-      cards.at(2).trigger('click');
-    });
-
-    test('saved', () => {
-      expect(wrapper.vm.selectedCategories[1]).toBeDefined();
-      expect(wrapper.vm.selectedCategories[3]).toBeDefined();
-      expect(wrapper.vm.selectedCategories[2]).not.toBeDefined();
+      cards.at(1).trigger('click');
     });
 
     test('triggers correctly', () => {
-      expect(wrapper.emitted('input')).toBeDefined();
+      expect(wrapper.emitted('input')[0]).toEqual([[{ id: 2, name: 'Category2' }]]);
     });
   });
 });
