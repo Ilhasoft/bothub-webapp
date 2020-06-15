@@ -27,10 +27,9 @@
       </h1>
       <p v-html="$t('webapp.create_repository.choose_category_text')" />
       <loading v-if="!formSchema" />
-      <category-list
+      <category-select
         v-if="formSchema"
         v-model="categories"
-        :list="categoriesList.choices"
         class="create-repository__form"/>
       <b-button
         type="is-primary"
@@ -71,7 +70,7 @@ import { mapActions } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
-import CategoryList from '@/components/repository/CategoryList';
+import CategorySelect from '@/components/repository/CategorySelect';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -80,7 +79,7 @@ export default {
     FormGenerator,
     RepositoryCard,
     NewRepositoryForm,
-    CategoryList,
+    CategorySelect,
   },
   props: {
     userName: {
@@ -113,10 +112,6 @@ export default {
       const { categories, ...schema } = this.computedSchema;
       return schema;
     },
-    categoriesList() {
-      const { categories } = this.computedSchema;
-      return categories;
-    },
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
@@ -147,11 +142,11 @@ export default {
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
-        ? this.categories.map(category => category.display_name)
+        ? this.categories.map(category => category.name)
         : [this.$t('webapp.create_repository.category')];
 
       const categories = this.categories.length > 0
-        ? this.categories.map(category => ({ name: category.display_name }))
+        ? this.categories.map(category => ({ name: category.name }))
         : [{ name: this.$t('webapp.create_repository.category') }];
 
       return {
@@ -165,7 +160,7 @@ export default {
       };
     },
     async onSubmit() {
-      const categoryValues = this.categories.map(category => category.value);
+      const categoryValues = this.categories.map(category => category.id);
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
         { ...this.data, categories: categoryValues });
       this.submitting = true;
