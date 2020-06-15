@@ -157,7 +157,7 @@ export default {
         : [this.$t('webapp.create_repository.category')];
 
       const categories = this.categories.length > 0
-        ? this.categories.map(category => ({ name: category.name }))
+        ? this.categories
         : [{ name: this.$t('webapp.create_repository.category') }];
 
       return {
