@@ -75,7 +75,6 @@ export default {
       'searchEvaluateExamples',
     ]),
     async getEntitiesName() {
-      console.log('chegou');
       const allEntitiesName = await this.repository.entities.map(
         entityValue => entityValue.value,
       );
