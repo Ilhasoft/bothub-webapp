@@ -7,15 +7,15 @@
           v-if="!EditSentences"
           :class="[
             'entity-list__content__descriptions__tag',
-            getEntityClass(entityName.entity),
+            getEntityClass(),
           ]"
           size="is-medium">
-          <div>{{ entityName.entity }}</div>
+          <div>{{ entitySelected }}</div>
         </b-tag>
         <b-field
           v-else
           class="entity-list__content__descriptions__editEntityName">
-          <b-input v-model="entityFormatted"/>
+          <b-input v-model="entitySelected"/>
         </b-field>
       </div>
       <div>
@@ -50,8 +50,8 @@ export default {
       default: null,
     },
     entityName: {
-      type: Object,
-      default: () => {},
+      type: String,
+      default: '',
     },
     repository: {
       type: Object,
@@ -61,10 +61,10 @@ export default {
   data() {
     return {
       EditSentences: false,
-      entityId: this.$route.params.entityid,
-      entityFormatted: this.entityName.entity,
+      entityId: this.$route.params.entity_id,
       allEntities: [],
       errors: {},
+      entitySelected: '',
     };
   },
   computed: {
@@ -85,21 +85,22 @@ export default {
     },
   },
   watch: {
-    entityFormatted() {
-      this.entityFormatted = (formatters.bothubItemKey()(this.entityFormatted));
+    entitySelected() {
+      this.entitySelected = (formatters.bothubItemKey()(this.entitySelected));
     },
   },
   mounted() {
     this.getEntitiesName();
+    this.getSelectedEntity();
   },
   methods: {
     ...mapActions([
       'editEntityName',
       'setUpdateRepository',
     ]),
-    getEntityClass(entity) {
+    getEntityClass() {
       const color = getEntityColor(
-        entity,
+        this.entitySelected,
         this.allEntities,
       );
       return `entity-${color}`;
@@ -109,6 +110,12 @@ export default {
         entityValue => entityValue.value,
       );
       this.allEntities = allEntitiesName;
+    },
+    async getSelectedEntity() {
+      const entity = await this.repositoryList.entities.find(
+        entityValue => entityValue.id === Number(this.entityId),
+      );
+      this.entitySelected = entity.value;
     },
     editOptionsEntity() {
       this.EditSentences = !this.EditSentences;
@@ -122,12 +129,11 @@ export default {
             repository: this.repositoryList.uuid,
           },
           entityId: this.entityId,
-          value: this.entityFormatted,
+          value: this.entitySelected,
           repositoryVersion: this.repositoryVersion,
         });
-        this.entityName.entity = this.entityFormatted;
         this.setUpdateRepository(true);
-        this.$emit('saveEdition', this.entityFormatted);
+        this.$emit('saveEdition');
       } catch (error) {
         if (error.response.data.non_field_errors !== undefined) {
           this.$buefy.toast.open({
@@ -140,12 +146,8 @@ export default {
             type: 'is-danger',
           });
         }
-        this.entityName.entity = this.entityName.entity;
-        this.entityFormatted = this.entityName.entity;
       }
       this.editOptionsEntity();
-      const value = this.entityName.entity;
-      this.$router.push({ name: 'repository-entitylist', params: { value } });
     },
   },
 };
