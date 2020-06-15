@@ -7,7 +7,7 @@
       :intent="intent"
       :language="language"
       :all-entities="allEntities"
-      :able-to-example="true"
+      :available-to-example="true"
       training
       @deleted="onExampleDeleted"
       @updateList="onExampleSave"
