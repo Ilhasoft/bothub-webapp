@@ -6,6 +6,7 @@
       class="category-select">
       <category-item
         v-for="category in list"
+        ref="items"
         :selected="selectedCategories[category.id]"
         :key="category.id"
         :icon="category.icon"
