@@ -2,12 +2,15 @@
   <b-modal
     :active="open"
     :width="width"
+    :can-cancel="false"
     @close="$emit('update:open', false)">
     <div class="tutorial">
-      <h1> Welcome to Bothub </h1>
-      <p> Bothub is an open platform for forecasting,
-      training and share NLP data sets in multiple languages.
-      <br><br> Follow these steps to be part of our community </p>
+      <div class="tutorial__title">
+        <h1> Welcome to Bothub </h1>
+        <p> Bothub is an open platform for forecasting,
+        training and share NLP data sets in multiple languages.
+        <br><br> Follow these steps to be part of our community </p>
+      </div>
       <div class="tutorial__steps">
         <div
           v-for="(item, index) in list"
@@ -28,7 +31,7 @@
         </div>
       </div>
 
-      <a> Skip for now </a>
+      <a @click="$emit('update:open', false)"> Skip for now </a>
     </div>
   </b-modal>
 </template>
@@ -58,11 +61,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
+a {
+    color: inherit;
+    text-decoration: underline;
+}
 .tutorial {
     background-color: white;
     border-radius: 10px;
     padding: 2.5rem 3rem;
 
+    &__title {
+        text-align: center;
+        h1 {
+            color: $color-primary;
+            font-size: 2.6rem;
+        }
+    }
+
+    &__steps {
+        margin: 2rem 0 2.5rem 0;
+    }
 
     &__item {
         &:hover {
@@ -76,21 +96,21 @@ export default {
         &__wrapper {
             display: flex;
             align-items: center;
-            margin-bottom: 0.12rem;
+            margin-bottom: 0.5rem;
         }
 
         &__marker {
             color: white;
             text-align: center;
             border-radius: 50%;
-            border: 1px #5D5D5D solid;
+            border: 1px $color-grey-darker solid;
             width: 1.5rem;
             height: 1.5rem;
             display: inline-block;
             margin-right: 1rem;
             &--active {
-                background-color: #00C853;
-                border: 1px #00C853 solid;
+                background-color: $color-success;
+                border: 1px $color-success solid;
             }
         }
     }
