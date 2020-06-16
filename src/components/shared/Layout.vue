@@ -104,8 +104,7 @@
     <new-repository-modal
       :active="newRepositoryModalOpen"
       @requestClose="closeNewRepositoryModal()" />
-    <beginner-tutorial
-      :open.sync="beginnerTutorialModalOpen"/>
+    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -115,13 +114,13 @@ import { mapGetters, mapActions } from 'vuex';
 import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
+import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   NewRepositoryModal,
   SiteFooter,
   UserAvatar,
-  BeginnerTutorial,
+  TutorialModal,
 };
 
 export default {
