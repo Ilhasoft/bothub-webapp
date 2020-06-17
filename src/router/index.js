@@ -4,6 +4,7 @@ import Home from '@/views/Home';
 import LandingPage from '@/views/LandingPage';
 import SignUp from '@/views/auth/SignUp';
 import Terms from '@/views/Terms';
+import CreateRepository from '@/views/CreateRepository';
 import MyProfile from '@/components/MyProfile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -62,6 +63,11 @@ export default new Router({
       path: '/home',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/new/',
+      name: 'new',
+      component: CreateRepository,
     },
     {
       path: '/reset-password/:nickname/:token/',
