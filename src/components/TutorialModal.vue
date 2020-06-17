@@ -6,14 +6,12 @@
     @close="$emit('update:open', false)">
     <div class="tutorial">
       <div class="tutorial__title">
-        <h1> Welcome to Bothub </h1>
-        <p> Bothub is an open platform for forecasting,
-        training and share NLP data sets in multiple languages.
-        <br><br> Follow these steps to be part of our community </p>
+        <h1> {{ $t('webapp.tutorial.title') }} </h1>
+        <p v-html="$t('webapp.tutorial.description')" />
       </div>
       <div class="tutorial__steps">
         <div
-          v-for="(item, index) in list"
+          v-for="(item, index) in computedList"
           :key="index"
           class="tutorial__item__wrapper">
 
@@ -27,11 +25,13 @@
           </span>
           <span
             :class="{'tutorial__item': true,
-                     'tutorial__item--finished': item.active}">{{ item.label }}</span>
+                     'tutorial__item--finished': item.active}">
+            {{ $t(`webapp.tutorial.items.${item.label}`) }}
+          </span>
         </div>
       </div>
 
-      <a @click="$emit('update:open', false)"> Skip for now </a>
+      <a @click="$emit('update:open', false)"> {{ $t('webapp.tutorial.skip') }} </a>
     </div>
   </b-modal>
 </template>
@@ -48,14 +48,22 @@ export default {
   data() {
     return {
       width: 443,
-      list: [],
+      list: [
+        { label: 'create_account', route: 'home' },
+        { label: 'create_intelligence', route: 'home' },
+        { label: 'training', route: 'home' },
+        { label: 'quick_test', route: 'home' },
+        { label: 'test', route: 'home' },
+        { label: 'inbox', route: 'home' },
+        { label: 'translate', route: 'home' },
+        { label: 'integrate', route: 'home' },
+      ],
     };
   },
-  mounted() {
-    let i;
-    for (i = 0; i < 7; i++) {
-      this.list.push({ label: `Tutorial item number ${i}`, active: Math.random() > 0.5 });
-    }
+  computed: {
+    computedList() {
+      return this.list.map(item => ({ active: Math.random() >= 0.5, ...item }));
+    },
   },
 };
 </script>
@@ -85,6 +93,7 @@ a {
     }
 
     &__item {
+        cursor: pointer;
         &:hover {
             font-weight: bold;
         }

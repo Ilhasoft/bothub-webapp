@@ -275,18 +275,6 @@
       "not_trained": "Not trained yet.",
       "training_log": "Training Log"
     },
-    "tutorial": {
-      "create_your_first_bot": "Create your first bot!",
-      "grid1": "On the top right of the window, click the \"New bot\" button.",
-      "grid2": "Fill in the fields and click on \"Create Bot\"",
-      "grid3": "Start adding content to the interpretation mechanism\n              by providing example sentences.",
-      "grid4": "Choose \"Training\" and enter phrases highlighting the entities and\n                relating it to an intention.</p>\n              <p> Don't forget to submit your sentences.,",
-      "grid5": "After adding your examples, click the status bar to see\n            the status of your bot and train the sentences",
-      "grid6": "That's it! Your bot is ready to be used!",
-      "previous": "Previous",
-      "next": "Next",
-      "finish": "Finish"
-    },
     "menu": {
       "summary": "Summary",
       "training": "Training",
@@ -376,6 +364,37 @@
       "no_sentences": "No sentence.",
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
+    },
+    "tutorial": {
+      "title": "Welcome to Bothub",
+      "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
+      "skip": "Skip for now",
+      "previous": "Previous",
+      "next": "Next",
+      "finish": "Finish",
+      "items": {
+          "create_account": "Create account",
+          "create_intelligence": "Create your first intelligence",
+          "training": "Training this intelligence",
+          "quick_test": "Make a quick test",
+          "test": "Test this intelligence",
+          "inbox": "Add sentences with inbox",
+          "translate": "Translate to another language",
+          "integrate": "Integrate your intelligence with a platform"
+      },
+      "create_intelligence": {
+          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+          "step_1": "Or create your own intelligence by clicking here."
+      },
+      "training": {
+          "step_0": "<strong>Go to the feature training!<strong> <br> Here you will add sentences and sort words to train your intelligence",
+          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Ex.: I want a pizza",
+          "step_2": "If you can, also add some custom entity to your sentence. Just select the desired word and click here. <br> Ex word.: pizza",
+          "step_3": "Now, write the entity. <br> Ex entity.: food",
+          "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
+          "step_5": "Finally, submit your sentence.",
+          "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
+      }
     }
   }
 }

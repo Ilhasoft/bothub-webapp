@@ -7,6 +7,9 @@
       ref="loginModal"
       :current-tab="loginModalTabValue" />
     <router-view />
+    <v-tour
+      :steps="steps"
+      name="my-tour"/>
   </div>
 </template>
 
@@ -24,6 +27,20 @@ const components = {
 export default {
   name: 'App',
   components,
+  data() {
+    return {
+      steps: [
+        {
+          target: '.sidebar-wrapper', // We're using document.querySelector() under the hood
+          content: 'Discover <strong>Vue Tour</strong>!',
+        },
+        {
+          target: '#training-step-1',
+          content: 'An awesome plugin made with Vue.js!',
+        },
+      ],
+    };
+  },
   computed: {
     ...mapGetters([
       'loginModalOpen',
@@ -33,6 +50,8 @@ export default {
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
+    console.log(this.$tours);
+    this.$tours['my-tour'].start();
   },
   methods: {
     safariDetected() {
@@ -54,7 +73,6 @@ export default {
 @import '~bh/src/assets/scss/bh.scss';
 @import '@mdi/font/css/materialdesignicons.css';
 @import 'highlight.js/styles/github.css';
-
 
 .container-padding {
   padding: 0 8px;

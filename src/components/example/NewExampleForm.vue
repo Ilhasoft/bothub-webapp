@@ -9,6 +9,7 @@
           :message="errors.text || errors.language"
         >
           <example-text-with-highlighted-entities-input
+          id="training-step-1"
             ref="textInput"
             v-model="text"
             :entities="entities"
