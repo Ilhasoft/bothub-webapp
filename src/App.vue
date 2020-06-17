@@ -7,9 +7,6 @@
       ref="loginModal"
       :current-tab="loginModalTabValue" />
     <router-view />
-    <v-tour
-      :steps="steps"
-      name="my-tour"/>
   </div>
 </template>
 
@@ -18,29 +15,17 @@ import { mapGetters } from 'vuex';
 import LoginModal from '@/components/shared/LoginModal';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+import Tour from '@/components/Tour';
 
 const components = {
   LoginModal,
   NewsModal,
+  Tour,
 };
 
 export default {
   name: 'App',
   components,
-  data() {
-    return {
-      steps: [
-        {
-          target: '.sidebar-wrapper', // We're using document.querySelector() under the hood
-          content: 'Discover <strong>Vue Tour</strong>!',
-        },
-        {
-          target: '#training-step-1',
-          content: 'An awesome plugin made with Vue.js!',
-        },
-      ],
-    };
-  },
   computed: {
     ...mapGetters([
       'loginModalOpen',
@@ -50,8 +35,8 @@ export default {
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
-    console.log(this.$tours);
-    this.$tours['my-tour'].start();
+    // console.log(this.$tours);
+    // this.$tours['tour'].start();
   },
   methods: {
     safariDetected() {

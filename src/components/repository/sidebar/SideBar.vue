@@ -3,7 +3,6 @@
     <div :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'">
       <div
         ref="collapseButton"
-        data-v-step="0"
         class="sidebar-wrapper__collapse-button"
         @click="collapseHandle()">
         <b-icon :icon="collapse ? 'chevron-left' : 'chevron-right'" />
@@ -29,6 +28,7 @@
             tag="router-link"
             icon="home"/>
           <b-menu-item
+            id="tour-training-step-0"
             :to="{ name: 'repository-training' }"
             :label="$t('webapp.menu.training')"
             tag="router-link"

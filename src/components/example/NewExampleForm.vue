@@ -9,7 +9,7 @@
           :message="errors.text || errors.language"
         >
           <example-text-with-highlighted-entities-input
-          id="training-step-1"
+            id="tour-training-step-1"
             ref="textInput"
             v-model="text"
             :entities="entities"
@@ -32,6 +32,7 @@
         <b-field
           :message="errors.intent">
           <b-autocomplete
+            id="tour-training-step-3"
             v-model="intent"
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
