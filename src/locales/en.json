@@ -237,6 +237,8 @@
       "ok": "Ok"
     },
     "translate": {
+      "title_translate": "Translate a sentence",
+      "subtitle_translate": "Click on a sentence to translate from your base language into other languages ​​supported by Bothub.",
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
       "submit_translation": "Submit Translation",
@@ -249,10 +251,11 @@
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
+      "languages_select": "Search language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
-      "import_button": "Import",
-      "export_button": "Export",
+      "import_button": "Import sentences",
+      "export_button": "Export sentences",
       "import_title": "Select a file to import",
       "import_field_text": "No file chosen",
       "import_select_button": "Click to upload",
