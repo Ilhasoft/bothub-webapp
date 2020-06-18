@@ -1,6 +1,6 @@
 <template>
   <div class="recover-password">
-    <boarding/>
+    <boarding-header/>
     <div class="recover-password__content">
       <div class="recover-password__content__field">
         <div class="recover-password__content__field__forms">
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Boarding from '@/components/user/Boarding';
+import BoardingHeader from '@/components/user/BoardingHeader';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
 import LoginForm from '@/components/auth/LoginForm';
@@ -21,7 +21,7 @@ import LoginForm from '@/components/auth/LoginForm';
 export default {
   name: 'SignIn',
   components: {
-    Boarding,
+    BoardingHeader,
     FormGenerator,
     LoginForm,
     ForgotPasswordForm,

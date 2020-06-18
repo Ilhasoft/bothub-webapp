@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <boarding/>
+    <boarding-header/>
     <div class="login__content">
       <div class="login__content__field">
         <div class="login__content__field__header">
@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import Boarding from '@/components/user/Boarding';
+import BoardingHeader from '@/components/user/BoardingHeader';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'SignIn',
   components: {
-    Boarding,
+    BoardingHeader,
     FormGenerator,
     LoginForm,
   },

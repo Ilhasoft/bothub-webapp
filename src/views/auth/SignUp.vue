@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <boarding/>
+    <boarding-header/>
     <div class="signup__content">
 
       <div class="signup__content__field">
@@ -59,12 +59,12 @@
 import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import Boarding from '@/components/user/Boarding';
+import BoardingHeader from '@/components/user/BoardingHeader';
 
 const components = {
   FormGenerator,
   Loading,
-  Boarding,
+  BoardingHeader,
 };
 export default {
   name: 'SignUp',

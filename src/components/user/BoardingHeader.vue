@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'Boarding',
+  name: 'BoardingHeader',
   methods: {
     goToLandingPage() {
       this.$router.push({

@@ -5,7 +5,6 @@ import Layout from '@/components/shared/Layout';
 import store from '@/store';
 import router from '@/router';
 
-
 const localVue = createLocalVue();
 localVue.use(BH);
 localVue.use(Router);
@@ -62,17 +61,13 @@ describe('Layout.vue', () => {
     });
   });
 
-  describe('open my profile', () => {
+  describe('open my profile without being logged', () => {
     beforeEach(async () => {
-      store.replaceState({
-        Auth: { token: '12332125151' },
-        User: 'greenRobot',
-      });
       wrapper.vm.openMyProfile();
     });
 
-    test('router path is "/myprofile/"', () => {
-      expect(router.history.current.path).toBe('/myprofile');
+    test('router path is "/signin"', () => {
+      expect(router.history.current.path).toBe('/signin');
     });
   });
 

@@ -1,6 +1,6 @@
 <template>
   <div class="recover-password">
-    <boarding/>
+    <boarding-header/>
     <div class="recover-password__content">
       <div class="recover-password__content__field">
         <div class="recover-password__content__field__header">
@@ -24,11 +24,11 @@
 
 <script>
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import Boarding from '@/components/user/Boarding';
+import BoardingHeader from '@/components/user/BoardingHeader';
 
 const components = {
   ResetPasswordForm,
-  Boarding,
+  BoardingHeader,
 };
 
 export default {
