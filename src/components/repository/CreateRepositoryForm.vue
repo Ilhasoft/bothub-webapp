@@ -14,6 +14,7 @@
         :schema="filteredSchema"
         v-model="data"
         :errors="errors"
+        :show-labels="false"
         class="create-repository__form" />
       <b-button
         type="is-primary"

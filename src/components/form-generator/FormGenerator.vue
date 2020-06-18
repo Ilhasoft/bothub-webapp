@@ -28,6 +28,7 @@
           :show-max-lenght="availableMaxLenght"
           v-model="formData[field.name]"
           :initial-data="initialData[field.name]"
+          :compact="!showLabels"
           @input="update()"/>
       </b-field>
     </b-field>
