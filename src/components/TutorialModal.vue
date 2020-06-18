@@ -25,7 +25,8 @@
           </span>
           <span
             :class="{'tutorial__item': true,
-                     'tutorial__item--finished': item.active}">
+                     'tutorial__item--finished': item.active}"
+            @click="startTutorial(item.label)">
             {{ $t(`webapp.tutorial.items.${item.label}`) }}
           </span>
         </div>
@@ -37,6 +38,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'TutorialModal',
   props: {
@@ -61,8 +64,22 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'finishedTutorials',
+      'activeTutorial',
+    ]),
     computedList() {
-      return this.list.map(item => ({ active: Math.random() >= 0.5, ...item }));
+      const finished = this.finishedTutorials;
+      return this.list.map(item => ({ ...item, active: finished[item.label] === 'finished' }));
+    },
+  },
+  methods: {
+    ...mapActions([
+      'setTutorialActive',
+    ]),
+    startTutorial(name, target) {
+      this.setTutorialActive(name);
+      // TODO: push target route (which repo?)
     },
   },
 };

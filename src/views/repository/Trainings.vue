@@ -31,7 +31,7 @@
         <hr>
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <b-button @click="$tours['training'].start()"> test </b-button>
+          <!-- <b-button @click="$tours['training'].start()"> test </b-button> -->
           <b-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
@@ -68,7 +68,7 @@
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
     <tour
-      :step-count="6"
+      :step-count="7"
       name="training" />
   </repository-view-base>
 </template>

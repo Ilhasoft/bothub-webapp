@@ -35,8 +35,6 @@ export default {
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
-    // console.log(this.$tours);
-    // this.$tours['tour'].start();
   },
   methods: {
     safariDetected() {

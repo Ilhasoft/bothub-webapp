@@ -12,6 +12,7 @@ import Translate from './translate';
 import CachedFetch from './cached-fetch';
 import Entity from './entity';
 import News from './news';
+import Tutorial from './tutorial';
 
 Vue.use(Vuex);
 
@@ -28,6 +29,7 @@ const store = new Vuex.Store({
     EvaluateExample,
     Entity,
     News,
+    Tutorial,
   },
 });
 

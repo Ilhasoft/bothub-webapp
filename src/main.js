@@ -12,7 +12,9 @@ import applyFilters from './utils/filters';
 import API from './utils/plugins/API';
 import i18n from './utils/plugins/i18n';
 
-// require('vue-tour/dist/vue-tour.css');
+// import 'vue-tour/dist/vue-tour.css';
+// import '@/assets/scss/tour.css';
+
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
