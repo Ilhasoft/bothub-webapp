@@ -1,12 +1,20 @@
 <template>
   <div id="app">
     <bh-toast-notification />
+    <news-modal />
     <router-view />
   </div>
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex';
+import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+
+const components = {
+  NewsModal,
+};
 
 export default {
   name: 'App',
