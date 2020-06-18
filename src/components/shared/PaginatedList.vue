@@ -57,9 +57,9 @@ export default {
       type: Boolean,
       default: false,
     },
-    reference: {
-      type: String,
-      default: () => '',
+    addAttributes: {
+      type: Object,
+      default: () => {},
     },
   },
   data() {
@@ -108,7 +108,9 @@ export default {
       this.$emit(event, value);
     },
     addAttrs(obj) {
-      return Object.assign({ editable: this.editable }, obj, this.$attrs);
+      return {
+        editable: this.editable, ...this.addAttributes, ...obj, ...this.$attrs,
+      };
     },
     onItemDeleted(id) {
       this.$emit('itemDeleted', id);

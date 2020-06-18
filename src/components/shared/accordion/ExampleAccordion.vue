@@ -29,7 +29,7 @@
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute && !training"
+        v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
           <a
@@ -63,7 +63,7 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="uniqueEntities"
+        :entities-list="entitiesList"
         :highlighted.sync="highlighted"
         :intent="intent" />
 
@@ -71,8 +71,11 @@
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
+        :edit-example="availableToExample"
         :text-to-edit="text"
         :sentence-id="id"
+        :language-edit="language"
+        :get-all-entities="allEntities"
         @cancel="cancelEditSentence"
         @saveList="updateList"/>
     </div>
@@ -105,6 +108,14 @@ export default {
     text: {
       type: String,
       default: '',
+    },
+    allEntities: {
+      type: Array,
+      default: () => [],
+    },
+    availableToExample: {
+      type: Boolean,
+      default: false,
     },
     entities: {
       type: Array,
@@ -142,20 +153,6 @@ export default {
           ...entity,
         }));
     },
-    uniqueEntities() {
-      const entityDict = this.entitiesList.reduce((dict, entity) => {
-        if (!dict[entity.entity]) {
-          // eslint-disable-next-line no-param-reassign
-          dict[entity.entity] = {
-            entity: entity.entity,
-            class: entity.class,
-            group: entity.group,
-          };
-        }
-        return dict;
-      }, {});
-      return Object.values(entityDict);
-    },
   },
   watch: {
     open() {
@@ -170,10 +167,12 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
+        allEntitiesName,
       );
       return `entity-${color}`;
     },

@@ -6,6 +6,7 @@ import SignUp from '@/views/auth/SignUp';
 import SignIn from '@/views/auth/SignIn';
 import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
+import CreateRepository from '@/views/CreateRepository';
 import MyProfile from '@/components/MyProfile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -89,6 +90,11 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/new/',
+      name: 'new',
+      component: CreateRepository,
+    },
+    {
       path: '/reset-password/:nickname/:token/',
       component: ResetPassword,
     },
@@ -155,7 +161,7 @@ export default new Router({
           component: RepositoryResults,
         },
         {
-          path: ':ownerNickname/:slug/entitylist/:value/:entityid',
+          path: ':ownerNickname/:slug/entitylist/:entity_id',
           name: 'repository-entitylist',
           component: Entity,
         },

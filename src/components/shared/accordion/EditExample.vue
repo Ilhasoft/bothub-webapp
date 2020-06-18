@@ -1,6 +1,6 @@
 <template>
   <div class="edit-sentence">
-    <form @submit.prevent="onSubmit">
+    <form>
       <div class="bh-grid">
         <div class="bh-grid__item--grow-3 edit-sentence__input">
           <bh-field
@@ -34,78 +34,61 @@
         </div>
       </div>
       <div class="edit-sentence__fields">
-        <div>
-          <div
-            v-for="(entity, index) in entitiesToEdit"
-            :key="`entity-${index}`"
-            class="bh-grid">
-            <div class="edit-sentence__input">
-              <bh-field
-                :errors="entitiesError(index)">
-                <label for="">
-                  <strong>{{ highlightedText(entity) }}</strong> is
-                </label>
-                <bh-autocomplete
-                  :data="repository.entities_list || []"
-                  :formatters="intentFormatters"
-                  v-model="entity.entity"
-                  :placeholder="$t('webapp.example.entity')"
-                  class="edit-sentence-input"
-                  size="normal"
-                >
-                  <span slot="append">
-                    <bh-icon-button
-                      value="close"
-                      size="small"
-                      @click.prevent.stop="removeEntity(entity, index)"
-                    />
-                  </span>
-                </bh-autocomplete>
-              </bh-field>
-            </div>
-          </div>
-          <div
-            v-for="(entity, index) in pendingEntities"
-            :key="`pending-entity-${index}`"
-            class="bh-grid">
-            <div class="edit-sentence__input">
+        <div
+          v-for="(entity, index) in entitiesToEdit"
+          :key="`entity-${index}`"
+          class="bh-grid">
+          <div class="edit-sentence__input">
+            <bh-field
+              :errors="entitiesError(index)">
               <label for="">
                 <strong>{{ highlightedText(entity) }}</strong> is
               </label>
               <bh-autocomplete
-                :data="entitiesOptions || []"
+                :data="getAllEntities || []"
                 :formatters="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
                 class="edit-sentence-input"
                 size="normal"
-                @selected="elevateToEntity(entity, index)"
               >
                 <span slot="append">
                   <bh-icon-button
                     value="close"
                     size="small"
-                    @click.prevent.stop="removePendingEntity(entity, index)"
+                    @click.prevent.stop="removeEntity(entity, index)"
                   />
                 </span>
               </bh-autocomplete>
-            </div>
+            </bh-field>
           </div>
         </div>
-        <div class="edit-sentence__fields__buttons">
-          <bh-button
-            primary
-            @click="cancelEditSentence">
-            Cancel
-          </bh-button>
-          <bh-button
-            :disabled="!isValid || submitting"
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            secondary
-            type="submit">
-            <slot v-if="!submitting">Save</slot>
-          </bh-button>
+        <div
+          v-for="(entity, index) in pendingEntities"
+          :key="`pending-entity-${index}`"
+          class="bh-grid">
+          <div class="edit-sentence__input">
+            <label for="">
+              <strong>{{ highlightedText(entity) }}</strong> is
+            </label>
+            <bh-autocomplete
+              :data="getAllEntities || []"
+              :formatters="intentFormatters"
+              v-model="entity.entity"
+              :placeholder="$t('webapp.example.entity')"
+              class="edit-sentence-input"
+              size="normal"
+              @selected="elevateToEntity(entity, index)"
+            >
+              <span slot="append">
+                <bh-icon-button
+                  value="close"
+                  size="small"
+                  @click.prevent.stop="removePendingEntity(entity, index)"
+                />
+              </span>
+            </bh-autocomplete>
+          </div>
         </div>
       </div>
       <div
@@ -118,6 +101,21 @@
         >
           {{ entityButtonText }}
         </bh-button>
+        <div>
+          <b-button
+            class="edit-sentence__btn-wrapper__cancelButton"
+            @click="cancelEditSentence">
+            Cancel
+          </b-button>
+          <b-button
+            :disabled="!isValid || submitting"
+            :tooltip-hover="!isValid ? validationErrors : null"
+            :loading="submitting"
+            class="edit-sentence__btn-wrapper__saveButton"
+            @click="onSubmit">
+            <slot v-if="!submitting">Save</slot>
+          </b-button>
+        </div>
       </div>
     </form>
   </div>
@@ -141,6 +139,10 @@ export default {
       type: String,
       default: '',
     },
+    getAllEntities: {
+      type: Array,
+      default: () => ([]),
+    },
     entities: {
       type: Array,
       default: () => ([]),
@@ -153,7 +155,7 @@ export default {
       type: String,
       default: '',
     },
-    editExampleEntityList: {
+    editExample: {
       type: Boolean,
       default: false,
     },
@@ -181,16 +183,6 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
-    entitiesOptions() {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
-      return allEntitiesName;
-    },
     validationErrors() {
       const errors = [];
 
@@ -257,17 +249,6 @@ export default {
       'updateEvaluateExample',
       'editSentence',
     ]),
-    async allEntitiesAvailable() {
-      try {
-        const entities = await this.getAllEntities({
-          repositoryUuid: this.repository.uuid,
-          repositoryVersion: this.repository.version_default.id,
-        });
-        this.allEntities = entities.data.results.map(entity => entity.value);
-      } catch (error) {
-        this.errors = error;
-      }
-    },
     cancelEditSentence() {
       this.$emit('cancel');
     },
@@ -382,7 +363,7 @@ export default {
       });
 
       try {
-        if (this.editExampleEntityList) {
+        if (this.editExample) {
           await this.editSentence({
             repository: this.repository.uuid,
             id: this.sentenceId,
@@ -403,7 +384,6 @@ export default {
             language: this.language,
           });
         }
-
 
         if (!this.repository.intents_list.includes(this.intent)) {
           throw new Error('Intent MUST match existing intents for training.');
@@ -431,20 +411,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
 .edit-sentence {
   &__fields{
     display:flex;
-    flex-direction:row;
-    justify-content: space-between;
-    width:55%;
-
-      &__buttons{
-      width: 45%;
-      display:flex;
-      justify-content:space-around;
-      align-items: flex-end;
-      padding-bottom: 0.82rem;
-      }
+    flex-direction:column;
   }
 
   &__input {
@@ -459,6 +431,21 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: .7rem;
+    margin-top: 1rem;
+
+    &__cancelButton{
+      height: 2.25rem;
+      width: 6rem;
+      background-color:$color-primary;
+      color: $color-white;
+    }
+
+    &__saveButton{
+      height: 2.25rem;
+      width: 6rem;
+      background-color:$color-secondary;
+      color: $color-white;
+    }
   }
 }
 

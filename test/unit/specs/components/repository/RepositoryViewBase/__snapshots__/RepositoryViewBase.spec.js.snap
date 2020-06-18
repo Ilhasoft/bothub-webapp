@@ -9,7 +9,6 @@ exports[`RepositoryViewBase.vue error -1 renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <loading-stub></loading-stub>
   </div>
-  <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
 </div>
 `;
@@ -23,7 +22,6 @@ exports[`RepositoryViewBase.vue error 404 renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <loading-stub></loading-stub>
   </div>
-  <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
 </div>
 `;
@@ -37,7 +35,6 @@ exports[`RepositoryViewBase.vue loading renders correctly 1`] = `
   <div class="rpstr-vw-bs__loading">
     <loading-stub></loading-stub>
   </div>
-  <new-repository-modal-stub></new-repository-modal-stub>
   <!---->
 </div>
 `;
@@ -49,7 +46,6 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
     <!---->
   </div>
   <!---->
-  <new-repository-modal-stub></new-repository-modal-stub>
   <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
 </div>
 `;

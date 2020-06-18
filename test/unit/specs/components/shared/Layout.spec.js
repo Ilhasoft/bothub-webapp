@@ -41,25 +41,25 @@ describe('Layout.vue', () => {
     });
   });
 
-  describe('open new repository modal', () => {
-    beforeEach(() => {
-      wrapper.vm.openNewRepositoryModal();
-    });
+  // describe('open new repository modal', () => {
+  //   beforeEach(() => {
+  //     wrapper.vm.openNewRepositoryModal();
+  //   });
 
-    test('newRepositoryModalOpen is true', () => {
-      expect(wrapper.vm.newRepositoryModalOpen).toBeTruthy();
-    });
+  //   test('newRepositoryModalOpen is true', () => {
+  //     expect(wrapper.vm.newRepositoryModalOpen).toBeTruthy();
+  //   });
 
-    describe('close new repository modal', () => {
-      beforeEach(() => {
-        wrapper.vm.closeNewRepositoryModal();
-      });
+  //   describe('close new repository modal', () => {
+  //     beforeEach(() => {
+  //       wrapper.vm.closeNewRepositoryModal();
+  //     });
 
-      test('newRepositoryModalOpen is false', () => {
-        expect(wrapper.vm.newRepositoryModalOpen).toBeFalsy();
-      });
-    });
-  });
+  //     test('newRepositoryModalOpen is false', () => {
+  //       expect(wrapper.vm.newRepositoryModalOpen).toBeFalsy();
+  //     });
+  //   });
+  // });
 
   describe('open my profile without being logged', () => {
     beforeEach(async () => {

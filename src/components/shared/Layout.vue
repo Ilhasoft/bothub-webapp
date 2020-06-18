@@ -33,15 +33,14 @@
             <div
               v-if="authenticated"
               class="bh-grid__item hide-mobile">
-              <bh-button
-                size="small"
-                primary
-                inverted
-                rounded
-                max-content
-                @click="openNewRepositoryModal()">
-                {{ $t('webapp.layout.newbot') }}
-              </bh-button>
+              <router-link :to="'new'">
+                <b-button
+                  type="is-primary"
+                  inverted
+                  rounded>
+                  <strong>{{ $t('webapp.layout.newbot') }}</strong>
+                </b-button>
+              </router-link>
             </div>
             <div
               v-if="authenticated"
@@ -68,7 +67,7 @@
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
                 <bh-dropdown-item
-                  @click="openNewRepositoryModal()">
+                  @click="openNewRepository()">
                   {{ $t('webapp.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
@@ -101,9 +100,6 @@
     </div>
     <div class="layout__content"><slot /></div>
     <site-footer />
-    <new-repository-modal
-      :active="newRepositoryModalOpen"
-      @requestClose="closeNewRepositoryModal()" />
     <beginner-tutorial
       :open.sync="beginnerTutorialModalOpen"/>
   </div>
@@ -112,13 +108,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
 import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 
 const components = {
-  NewRepositoryModal,
   SiteFooter,
   UserAvatar,
   BeginnerTutorial,
@@ -143,7 +137,6 @@ export default {
   },
   data() {
     return {
-      newRepositoryModalOpen: false,
       beginnerTutorialModalOpen: false,
     };
   },
@@ -167,11 +160,10 @@ export default {
       'updateMyProfile',
       'logout',
     ]),
-    openNewRepositoryModal() {
-      this.newRepositoryModalOpen = true;
-    },
-    closeNewRepositoryModal() {
-      this.newRepositoryModalOpen = false;
+    openNewRepository() {
+      this.$router.push({
+        name: 'new',
+      });
     },
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });

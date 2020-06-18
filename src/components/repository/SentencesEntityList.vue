@@ -14,6 +14,7 @@
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
+          :color-only="entitySelected"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -57,16 +58,18 @@
         v-if="!editing"
         :entities-list="entitiesList"
         :highlighted.sync="highlighted"
+        :color-only="entitySelected"
         :intent="intent" />
 
       <edit-example
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
-        :edit-example-entity-list="true"
+        :edit-example="true"
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
+        :get-all-entities="allEntities"
         @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
@@ -102,6 +105,10 @@ export default {
       type: String,
       default: '',
     },
+    allEntities: {
+      type: Array,
+      default: () => [],
+    },
     entities: {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
@@ -117,6 +124,10 @@ export default {
     editing: {
       type: Boolean,
       default: false,
+    },
+    entitySelected: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -148,15 +159,9 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
-      const entitiesName = this.repository.other_group.entities.map(
+      const allEntitiesName = this.repository.entities.map(
         entityValue => entityValue.value,
       );
-
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
       const color = getEntityColor(
         entity,
         allEntitiesName,
