@@ -100,7 +100,7 @@ export default {
   },
   computed: {
     computedSchema() {
-      const computed =  Object.entries(this.formSchema).reduce((schema, entry) => {
+      const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
         // eslint-disable-next-line no-param-reassign
         if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
