@@ -7,9 +7,16 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      class="field" />
+      :show-labels="false"
+      class="field"/>
     <div class="field">
       <div class="control">
+        <button
+          type="button"
+          class="button is-primary"
+          @click="goToLoginPage">
+          {{ $t('webapp.recover_form.cancel_button') }}
+        </button>
         <button
           :disabled="submitting"
           type="submit"
@@ -54,6 +61,11 @@ export default {
       'getForgotPasswordSchema',
       'forgotPassword',
     ]),
+    goToLoginPage() {
+      this.$router.push({
+        name: 'signIn',
+      });
+    },
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
@@ -80,3 +92,23 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
+.control{
+  margin-top: 1.5rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.button{
+  width: 157px;
+  height: 35px;
+  margin: 0 0.6rem;
+  font-family: $font-family;
+  font-weight: $font-weight-bolder;
+  border-radius: 6px;
+  box-shadow: 0px 3px 6px #00000029;
+}
+</style>

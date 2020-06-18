@@ -21,16 +21,28 @@
       "yes": "Yes",
       "no": "No"
     },
-    "login_modal": {
-      "login": "Login",
-      "forgot_password": "Forgot password"
+    "login_form": {
+      "login": "Log in to your account",
+      "forgot_password": "Forgot password",
+      "signin": "Sign in",
+      "get_free": "Sign up",
+      "dont_have_account": "Don't have an account yet?"
+    },
+    "recover_form": {
+      "recover": "Recover password",
+      "cancel_button": "Cancel",
+      "confirm_password": "Confirm Password",
+      "changed_password": "Password changed"
     },
     "register_form": {
       "already_have_account": "Already have an account?",
       "signin": "Sign in",
-      "get_started_free": "Up to 10,000 predictions for free",
+      "create_account_title": "Create your account",
       "get_free": "Sign up",
-      "policy_service": "By clicking “Continue” I agree to Bothub of Service and Privacy Policy."
+      "policy_service": "By clicking “Create” I agree to Bothub of Service and Privacy Policy.",
+      "confirm_password_empty": "This field may not be blank.",
+      "password_didnt_match": "Those passwords didn't match. Try again.",
+      "confirm_password": "Confirm Password"
     },
     "landing_page": {
       "signin": "Sign in",

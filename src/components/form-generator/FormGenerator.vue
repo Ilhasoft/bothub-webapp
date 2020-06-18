@@ -7,22 +7,28 @@
       :key="field.name"
       :label="field.label"
       :type="field.errors && 'is-danger'"
-      :message="field.errors || field.helpText">
+      :message="!showLabels ? field.errors : field.errors || field.helpText"
+      :class="!showLabels ? 'field-content' : ''">
       <div
         slot="label"
         class="field-label">
-        {{ field.label }} <help-widget
+        <span v-if="showLabels">
+          {{ field.label }}
+        </span>
+        <help-widget
           v-if="hasHelpIcon(field)"
           :article-id="helpArticleId" />
       </div>
-      <b-field>
+      <b-field :class="!showLabels ? 'input-content' : ''">
         <component
           :v-if="field.inputComponent"
           :is="field.inputComponent"
           v-bind="field.inputProps"
+          :label-placeholder="field.label"
+          :show-max-lenght="availableMaxLenght"
           v-model="formData[field.name]"
           :initial-data="initialData[field.name]"
-          @input="update()" />
+          @input="update()"/>
       </b-field>
     </b-field>
   </div>
@@ -66,9 +72,17 @@ export default {
       required: true,
       type: Object,
     },
+    availableMaxLenght: {
+      type: Boolean,
+      default: true,
+    },
     errors: {
       type: Object,
       default: () => ({}),
+    },
+    showLabels: {
+      type: Boolean,
+      default: true,
     },
     initialData: {
       type: Object,
@@ -137,8 +151,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .field-label {
+.field-content{
+height: 58px;
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+.input-content{
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+.field-label {
     display: flex;
     align-items: center;
-  }
+}
 </style>

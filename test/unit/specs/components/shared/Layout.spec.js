@@ -64,11 +64,15 @@ describe('Layout.vue', () => {
 
   describe('open my profile', () => {
     beforeEach(async () => {
+      store.replaceState({
+        Auth: { token: '12332125151' },
+        User: 'greenRobot',
+      });
       wrapper.vm.openMyProfile();
     });
 
     test('router path is "/myprofile/"', () => {
-      expect(router.history.pending.path).toBe('/myprofile');
+      expect(router.history.current.path).toBe('/myprofile');
     });
   });
 

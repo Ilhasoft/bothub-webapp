@@ -1,21 +1,23 @@
 <template>
-  <div class="recover-password">
+  <div class="login">
     <boarding/>
-    <div class="recover-password__content">
-      <div class="recover-password__content__field">
-        <div class="recover-password__content__field__header">
-          <p>{{ $t('webapp.register_form.already_have_account') }}</p>
+    <div class="login__content">
+      <div class="login__content__field">
+        <div class="login__content__field__header">
+          <p>{{ $t('webapp.login_form.dont_have_account') }}</p>
           <b-button
             type="is-primary"
-            class="recover-password__content__field__header__createButton"
-            @click="goToLoginPage">
-            {{ $t('webapp.register_form.signin') }}</b-button>
+            class="login__content__field__header__createButton"
+            @click="goToCreate">
+            {{ $t('webapp.login_form.get_free') }}
+          </b-button>
         </div>
-        <div class="recover-password__content__field__forms">
-          <h1>{{ $t('webapp.recover_form.recover') }}</h1>
-          <reset-password-form
-            :nickname="$route.params.nickname"
-            :token="$route.params.token" />
+
+        <div class="login__content__field__forms">
+          <h1>{{ $t('webapp.login_form.login') }}</h1>
+          <login-form
+            @authenticated="onAuthenticated"
+            @forgotPasswordClick="showForgotPasswordTab" />
         </div>
       </div>
     </div>
@@ -23,32 +25,43 @@
 </template>
 
 <script>
-import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 import Boarding from '@/components/user/Boarding';
-
-const components = {
-  ResetPasswordForm,
-  Boarding,
-};
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import LoginForm from '@/components/auth/LoginForm';
 
 export default {
-  name: 'ResetPassword',
-  components,
+  name: 'SignIn',
+  components: {
+    Boarding,
+    FormGenerator,
+    LoginForm,
+  },
   methods: {
-    goToLoginPage() {
+    onAuthenticated() {
       this.$router.push({
-        name: 'signIn',
+        name: 'home',
+      });
+    },
+    goToCreate() {
+      this.$router.push({
+        name: 'signUp',
+      });
+    },
+    showForgotPasswordTab() {
+      this.$router.push({
+        name: 'recoverpassword',
       });
     },
   },
 };
+
 </script>
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.recover-password{
+.login{
 
   &__content{
   display: flex;
@@ -61,7 +74,7 @@ export default {
 
     &__field{
       width: 36rem;
-      max-height: 25.938rem;
+      height: 25.25rem;
 
       &__header{
         display:flex;
@@ -74,7 +87,6 @@ export default {
           color:$color-fake-black;
           margin-right: 1rem;
         }
-
         &__createButton{
           width: 6.875rem;
           height: 2.188rem;
@@ -84,11 +96,11 @@ export default {
           font-weight: $font-weight-bolder;
           font-family: $font-family;
           font-size: $font-size;
-        }
+    }
       }
 
       &__forms{
-
+        max-height: 27rem;
         padding: 2rem 4.5rem;
         background-color: $color-white;
         box-shadow: 0px 3px 6px #00000029;
@@ -98,6 +110,9 @@ export default {
           font-family: $font-family;
           font-size: 2.563rem;
           text-align: center;
+            @media screen and (max-width: 40em) {
+            font-size: 2rem;
+            }
         }
 
       }
