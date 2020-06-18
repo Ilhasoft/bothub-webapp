@@ -100,12 +100,17 @@ export default {
   },
   computed: {
     computedSchema() {
-      return Object.entries(this.formSchema).reduce((schema, entry) => {
+      const computed =  Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
         // eslint-disable-next-line no-param-reassign
         if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
         return schema;
       }, {});
+      // eslint-disable-next-line camelcase
+      const { is_private, ...schema } = computed;
+      // eslint-disable-next-line camelcase
+      if (is_private) { return { ...schema, is_private }; }
+      return computed;
     },
     filteredSchema() {
       const { categories, ...schema } = this.computedSchema;
