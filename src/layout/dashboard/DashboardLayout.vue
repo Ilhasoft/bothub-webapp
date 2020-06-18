@@ -75,7 +75,7 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
+              @click="signIn()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -150,7 +150,6 @@ export default {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
-      'openLoginModal',
     ]),
     collapseHandle() {
       this.collapse = !this.collapse;
@@ -163,6 +162,11 @@ export default {
     openNewRepository() {
       this.$router.push({
         name: 'new',
+      });
+    },
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
       });
     },
     signUp() {

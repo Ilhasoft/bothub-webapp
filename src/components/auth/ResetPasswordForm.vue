@@ -8,9 +8,14 @@
       v-model="data"
       :initial-data="initialData"
       :errors="errors"
-      class="field" />
+      :show-labels="false"
+      class="field"/>
     <div class="field">
-      <div class="control">
+      <p
+        class="passwordError">
+        {{ confirmError }}
+      </p>
+      <div class="control buttonStyle">
         <button
           :disabled="submitting"
           type="submit"
@@ -57,6 +62,7 @@ export default {
       submitting: false,
       errors: {},
       success_msgs: [],
+      confirmError: '',
     };
   },
   computed: {
@@ -86,12 +92,32 @@ export default {
       this.submitting = true;
 
       try {
+        if (this.data.confirmPassword !== this.data.password) {
+        // eslint-disable-next-line no-unused-expressions
+          this.data.confirmPassword === ''
+            ? this.confirmError = this.$t('webapp.register_form.confirm_password_empty')
+            : this.confirmError = this.$t('webapp.register_form.password_didnt_match');
+          this.submitting = false;
+          return '';
+        // eslint-disable-next-line no-else-return
+        } else {
+          this.confirmError = '';
+        }
+
+        if (this.data.confirmPassword === '') {
+          this.confirmError = this.$t('webapp.register_form.confirm_password_empty');
+          this.submitting = false;
+        } else {
+          this.confirmError = '';
+        }
+
+        delete this.data.confirmPassword;
         await this.resetPassword({
           nickname: this.nickname,
           token: this.token,
           password: this.data.password,
         });
-        this.success_msgs = ['Password changed'];
+        this.success_msgs = [this.$t('webapp.recover_form.changed_password')];
         this.$emit('reseted');
         return true;
       } catch (error) {
@@ -105,10 +131,42 @@ export default {
       return false;
     },
     async updateFormSchema() {
-      this.formSchema = await this.getResetPasswordSchema({
+      const recoverSchema = await this.getResetPasswordSchema({
         nickname: this.nickname,
       });
+      const { password } = recoverSchema;
+      const confirmPassword = {
+        ...password, label: this.$t('webapp.recover_form.confirm_password'),
+      };
+      this.formSchema = { ...recoverSchema, confirmPassword };
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
+.passwordError{
+  color: #ff3860;
+  font-size: 0.75rem;
+  margin: -1.4rem 0px;
+}
+.buttonStyle{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button{
+  margin-top: 2rem;
+  width: 9.813rem;
+  height: 2.188rem;
+  border-radius: 6px;
+  box-shadow: 0px 3px 6px #00000029;
+  font-weight: $font-weight-bolder;
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+</style>

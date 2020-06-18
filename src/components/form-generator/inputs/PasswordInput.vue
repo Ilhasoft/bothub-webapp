@@ -3,6 +3,7 @@
     :message="drfErro"
     :maxlength="max_length"
     v-model="value"
+    :placeholder="labelPlaceholder"
     password-reveal
     type="password"
     @input="update()" />
@@ -19,6 +20,10 @@ export default {
     max_length: {
       type: Number,
       default: null,
+    },
+    labelPlaceholder: {
+      type: String,
+      default: '',
     },
     initialData: {
       type: String,

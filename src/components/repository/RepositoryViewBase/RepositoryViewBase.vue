@@ -131,7 +131,6 @@ export default {
     ...mapActions([
       'logout',
       'updateMyProfile',
-      'openLoginModal',
     ]),
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });

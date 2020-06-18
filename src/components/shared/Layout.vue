@@ -82,7 +82,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="openLoginModal()">{{ $t('webapp.layout.signin') }}</bh-button>
+                @click="signIn()">{{ $t('webapp.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -159,7 +159,6 @@ export default {
     ...mapActions([
       'updateMyProfile',
       'logout',
-      'openLoginModal',
     ]),
     openNewRepository() {
       this.$router.push({
@@ -171,6 +170,11 @@ export default {
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
+    },
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
+      });
     },
     signUp() {
       this.$router.push({

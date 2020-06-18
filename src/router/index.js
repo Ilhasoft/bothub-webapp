@@ -3,6 +3,8 @@ import Router from 'vue-router';
 import Home from '@/views/Home';
 import LandingPage from '@/views/LandingPage';
 import SignUp from '@/views/auth/SignUp';
+import SignIn from '@/views/auth/SignIn';
+import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
 import MyProfile from '@/components/MyProfile';
@@ -23,7 +25,6 @@ import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import store from '../store';
-
 
 Vue.use(Router);
 
@@ -46,6 +47,30 @@ export default new Router({
       path: '/terms',
       name: 'Terms',
       component: Terms,
+    },
+    {
+      path: '/signin',
+      name: 'signIn',
+      component: SignIn,
+      beforeEnter: async (to, from, next) => {
+        if (store.getters.authenticated) {
+          next('/home');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/recoverpassword',
+      name: 'recoverpassword',
+      component: RecoverPassword,
+      beforeEnter: async (to, from, next) => {
+        if (store.getters.authenticated) {
+          next('/home');
+        } else {
+          next();
+        }
+      },
     },
     {
       path: '/signup',
@@ -79,10 +104,7 @@ export default new Router({
       component: MyProfile,
       beforeEnter: async (to, from, next) => {
         if (!store.getters.authenticated) {
-          store.dispatch('openLoginModal', {
-            next: to,
-            redirectToWhenFails: { name: 'home' },
-          });
+          next('/signin');
         } else {
           next();
         }
