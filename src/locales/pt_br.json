@@ -21,16 +21,44 @@
       "yes": "Sim",
       "no": "Não"
     },
-    "login_modal": {
-      "login": "Login",
-      "forgot_password": "Esqueci a senha"
+    "login_form": {
+      "login": "Entre na sua conta",
+      "forgot_password": "Forgot password",
+      "signin": "Entrar",
+      "get_free": "Cadastre-se",
+      "dont_have_account": "Ainda não tem uma conta?"
+    },
+     "recover_form": {
+      "recover": "Recuperar senha",
+      "cancel_button": "Cancelar",
+      "confirm_password": "Confirme a senha",
+      "changed_password": "Senha alterada"
+    },
+    "create_repository": {
+      "create_repo": "Crie uma inteligência",
+      "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
+      "choose_category": "Categorias",
+      "choose_category_text": "Escolha as categorias nas quais seu bot se encaixa. <br> Não se preocupe, isso poderá ser mudado depois.",
+      "repository_created": "Tudo pronto!",
+      "repository_created_text": "Sua inteligência está pronta para o uso. Você pode mudar essas e outras informações na seção de configurações. <br><br> Você pode começar a treinar seu bot agora!",
+      "next": "Próximo",
+      "previous": "Anterior",
+      "submit": "Enviar",
+      "start": "Começar",
+      "language": "idioma",
+      "category": "Categoria",
+      "new_repo": "NOVA INTELIGÊNCIA",
+      "default_error": "Existem erros no formulário"
     },
     "register_form": {
-      "already_have_account": "Já tem um conta?",
+      "already_have_account": "Já tem uma conta?",
       "signin": "Entrar",
-      "get_started_free": "Até 10.000 predições de graça",
+      "create_account_title": "Crie sua conta",
       "get_free": "Cadastre-se",
-      "policy_service": "Clicando em \"Continuar\" eu concordo com as Políticas de Serviço e Privacidade do Bothub."
+      "policy_service": "Clicando em \"Cadastre-se\" eu concordo com as Políticas de Serviço e Privacidade do Bothub.",
+      "confirm_password_empty": "Este campo não pode ser em branco.",
+      "password_didnt_match": "As senhas não coincidem. Tente novamente.",
+      "confirm_password": "Confirme a senha"
     },
     "landing_page": {
       "signin": "Entrar",
