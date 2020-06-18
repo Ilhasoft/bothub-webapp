@@ -2,33 +2,22 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
+
+    <div class="translate-description">
+      <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+      <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+    </div>
     <div v-if="repository">
       <div v-if="authenticated">
-
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
 
           <div class="repository-translate">
-            <div class="repository-translate__translateButtons">
-
-              <b-button
-                :class="{'is-primary':!!translate.from && !!translate.to}"
-                class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToImport()">
-                {{ $t('webapp.translate.import_button') }}
-              </b-button>
-
-              <b-button
-                :class="{'is-primary':!!translate.from && !!translate.to}"
-                class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToExport()">
-                {{ $t('webapp.translate.export_button') }}
-              </b-button>
-
-            </div>
             <div class="repository-translate__field">
               <div class="repository-translate__field__item">
-                <b-field :label="$t('webapp.translate.translate_from')">
+                <b-field
+                  :label="$t('webapp.translate.translate_from')"
+                  custom-class="repository-translate__field__item__label">
                   <language-select v-model="translate.from" />
                 </b-field>
               </div>
@@ -37,17 +26,36 @@
                   <label class="label">&nbsp;</label>
                   <b-icon
                     icon="chevron-right"
-                    size="is-small" />
+                    size="is-medium" />
                 </div>
               </div>
               <div class="repository-translate__field__item">
-                <b-field :label="$t('webapp.translate.translate_to')">
+                <b-field
+                  :label="$t('webapp.translate.translate_to')"
+                  custom-class="repository-translate__field__item__label">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />
                 </b-field>
               </div>
             </div>
+          </div>
+          <div class="repository-translate__translateButtons">
+
+            <b-button
+              :class="{'is-primary':!!translate.from && !!translate.to}"
+              class="repository-translate__buttons repository-translate__unableButton"
+              @click="checkLanguageToImport()">
+              {{ $t('webapp.translate.import_button') }}
+            </b-button>
+
+            <b-button
+              :class="{'is-primary':!!translate.from && !!translate.to}"
+              class="repository-translate__buttons repository-translate__unableButton"
+              @click="checkLanguageToExport()">
+              {{ $t('webapp.translate.export_button') }}
+            </b-button>
+
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
@@ -130,19 +138,22 @@
 
             </b-modal>
             <hr>
-            <div class="repository-translate__search">
-              <filter-examples
-                :intents="repository.intents_list"
-                :entities="repository.entities_list"
-                @queryStringFormated="onSearch($event)"/>
+            <div class="repository-translate__list">
+              <div class="repository-translate__list__search">
+                <filter-examples
+                  :intents="repository.intents_list"
+                  :entities="repository.entities_list"
+                  @queryStringFormated="onSearch($event)"/>
+              </div>
+              <translate-list
+                :update="update"
+                :repository="repository"
+                :query="query"
+                :from="translate.from"
+                :to="translate.to"
+                @translated="examplesTranslated()" />
             </div>
-            <translate-list
-              :update="update"
-              :repository="repository"
-              :query="query"
-              :from="translate.from"
-              :to="translate.to"
-              @translated="examplesTranslated()" />
+
           </div>
         </div>
         <authorization-request-notification
@@ -322,6 +333,22 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
+.translate-description{
+  margin-left: 0.8rem;
+  h1{
+    font-size: 28px;
+    margin-bottom: $between-title-subtitle;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-weight: $font-weight-bolder;
+  }
+  p{
+    margin-bottom: $between-subtitle-content;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-size: $font-size
+  }
+}
 .repository-translate {
   background-color: $color-white;
   display:flex;
@@ -335,17 +362,24 @@ export default {
     width: 100%;
     &__item {
       margin: 0.5rem;
-         width: 50%
+      width: 50%;
+        &__label{
+        font-weight: $font-weight-normal;
+        }
     }
   }
 
   &__translate-arrow-icon {
     align-self: center;
+    color: $color-grey-dark;
   }
-
+  &__list{
+    margin-left: 0.3rem;
   &__search {
     margin: 0.5rem;
   }
+  }
+
   &__requestAuthorization{
         color: $color-fake-black;
         font-weight: $font-weight-medium;
@@ -408,13 +442,22 @@ export default {
     align-items: center;
 
     .modalButton{
-      width: 10rem;
+      width: 179px;
+      height: 40px;
     }
   }
 
   &__buttons{
-    min-width: 18%;
+    width: 179px;
+    height: 40px;
     margin: 0.5rem;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight-bolder;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 6px;
+    background-color: $color-primary;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -423,13 +466,13 @@ export default {
   &__translateButtons{
     display: flex;
     width: 100%;
-    justify-content: flex-end
+    margin: 1rem 0.3rem;
+    justify-content: flex-start
   }
   &__unableButton{
     background-color:$color-grey;
     color: $color-white;
     border: 2px solid #D5D5D5;
-    font-weight: $font-weight-medium;
     box-shadow: 0 0.1875rem 0.375rem rgba(200, 200, 200, 0.5);
 
      &:hover{

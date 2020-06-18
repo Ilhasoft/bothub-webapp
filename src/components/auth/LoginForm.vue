@@ -7,11 +7,12 @@
       :drf-model-instance="drfLoginModel"
       :schema="formSchema"
       :errors="errors"
-      class="field" />
+      :show-labels="false"
+      class="field"/>
     <div
       v-if="!hideForgotPassword"
       class="field">
-      <div class="control has-text-right">
+      <div class="control has-text-right forgot-password">
         <a
           ref="forgotPassword"
           href="#forgot-password"
@@ -28,7 +29,7 @@
           :disabled="submitting"
           type="submit"
           class="button is-primary"
-        >Login</button>
+        >{{ $t('webapp.login_form.signin') }}</button>
       </div>
     </div>
   </form>
@@ -108,3 +109,20 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
+.forgot-password{
+  margin-bottom: 1.5rem;
+}
+.button{
+    width: 9.813rem;
+    height: 2.188rem;
+    border-radius: 6px;
+    box-shadow: 0px 3px 6px #00000029;
+    font-weight: $font-weight-bolder;
+    font-family: $font-family;
+    font-size: $font-size;
+}
+</style>
