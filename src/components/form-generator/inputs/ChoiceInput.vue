@@ -6,6 +6,7 @@
     :custom-formatter="formatter"
     :data="filteredChoices"
     expanded
+    open-on-focus
     @input="updateInput"
     @select="selectOption"/>
   <b-select
