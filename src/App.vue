@@ -8,7 +8,6 @@
 
 <script>
 
-import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 
@@ -18,6 +17,7 @@ const components = {
 
 export default {
   name: 'App',
+  components,
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
