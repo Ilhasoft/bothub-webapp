@@ -14,6 +14,7 @@
         :schema="filteredSchema"
         v-model="data"
         :errors="errors"
+        :show-labels="false"
         class="create-repository__form" />
       <b-button
         type="is-primary"
@@ -99,12 +100,17 @@ export default {
   },
   computed: {
     computedSchema() {
-      return Object.entries(this.formSchema).reduce((schema, entry) => {
+      const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
         // eslint-disable-next-line no-param-reassign
         if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
         return schema;
       }, {});
+      // eslint-disable-next-line camelcase
+      const { is_private, ...schema } = computed;
+      // eslint-disable-next-line camelcase
+      if (is_private) { return { ...schema, is_private }; }
+      return computed;
     },
     filteredSchema() {
       const { categories, ...schema } = this.computedSchema;
@@ -215,11 +221,11 @@ export default {
 
         &__form {
             text-align: left;
-            margin: 1.5rem 0;
+            margin: 3rem 0;
 
             &__wrapper {
                 width: 31rem;
-                margin: 0 8rem 0 0;
+                margin: 0 12rem 0 0;
 
                 @media (max-width: $mobile-width*1.2) {
                   margin: 3rem 0 0 0;
