@@ -221,11 +221,11 @@ export default {
 
         &__form {
             text-align: left;
-            margin: 1.5rem 0;
+            margin: 3rem 0;
 
             &__wrapper {
                 width: 31rem;
-                margin: 0 8rem 0 0;
+                margin: 0 12rem 0 0;
 
                 @media (max-width: $mobile-width*1.2) {
                   margin: 3rem 0 0 0;

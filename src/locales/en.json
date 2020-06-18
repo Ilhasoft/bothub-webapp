@@ -36,7 +36,7 @@
     },
     "create_repository": {
       "create_repo": "Create an intelligence",
-      "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
+      "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then, choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
       "choose_category": "Repository categories",
       "choose_category_text": "Choose the categories your repository fits into. <br> Don't worry, you can change them later.",
       "repository_created": "We're all ready!",
