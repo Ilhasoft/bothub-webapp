@@ -128,7 +128,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'openLoginModal',
       'trainRepository',
       'getTrainingStatus',
     ]),
@@ -167,7 +166,7 @@ export default {
     },
     openTrainingModal() {
       if (!this.authenticated) {
-        this.openLoginModal();
+        this.signIn();
       }
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();
@@ -175,6 +174,11 @@ export default {
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
+    },
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
+      });
     },
     updatedExampleList() {
       this.updateTrainingStatus();
