@@ -111,6 +111,18 @@ export default new Router({
       },
     },
     {
+      path: '/tutorial',
+      name: 'Tutorial',
+      component: DashboardLayout,
+      children: [
+        {
+          path: 'training/',
+          name: 'tutorial-training',
+          component: RepositoryTrainings,
+        },
+      ],
+    },
+    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardLayout,

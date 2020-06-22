@@ -26,7 +26,7 @@
           <span
             :class="{'tutorial__item': true,
                      'tutorial__item--finished': item.active}"
-            @click="startTutorial(item.label)">
+            @click="startTutorial(item.label, item.route)">
             {{ $t(`webapp.tutorial.items.${item.label}`) }}
           </span>
         </div>
@@ -54,7 +54,7 @@ export default {
       list: [
         { label: 'create_account', route: 'home' },
         { label: 'create_intelligence', route: 'home' },
-        { label: 'training', route: 'home' },
+        { label: 'training', route: 'tutorial/training' },
         { label: 'quick_test', route: 'home' },
         { label: 'test', route: 'home' },
         { label: 'inbox', route: 'home' },
@@ -79,6 +79,7 @@ export default {
     ]),
     startTutorial(name, target) {
       this.setTutorialActive(name);
+      this.$router.push(target);
       // TODO: push target route (which repo?)
     },
   },

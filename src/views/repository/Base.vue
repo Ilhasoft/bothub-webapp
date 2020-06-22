@@ -67,11 +67,13 @@ export default {
       'setRepositoryVersion',
     ]),
     async updateRepository(silent = false) {
-      const { ownerNickname, slug } = this.$route.params;
+      let { ownerNickname, slug } = this.$route.params;
 
       if (!ownerNickname || !slug) {
-        this.repository = null;
-        return this.repository;
+        ownerNickname = 'alexazv';
+        slug = 'tutorial-staging-test';
+        // this.repository = null;
+        // return this.repository;
       }
 
       if (!this.repository
