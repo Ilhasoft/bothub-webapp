@@ -234,7 +234,7 @@ export default {
         }
 
         &__card {
-            margin: 25% 0 0 0;
+            margin: 4.5rem 0 0 0;
             width: 23.3rem;
             height: 23.3rem;
         }
