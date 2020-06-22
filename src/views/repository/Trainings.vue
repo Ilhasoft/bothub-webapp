@@ -122,10 +122,6 @@ export default {
       'authenticated',
     ]),
   },
-  mounted() {
-    console.log(this.$tours);
-    // this.$tours['my-tour'].start();
-  },
   methods: {
     ...mapActions([
       'trainRepository',

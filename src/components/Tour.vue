@@ -1,10 +1,48 @@
 <template>
   <v-tour
-    :steps="steps"
-    :options="myOptions"
     :name="name"
-    :callbacks="callbacks"
-    class="caption"/>
+    :steps="steps"
+    :options="options">
+    <template slot-scope="tour">
+      <div
+        v-for="(step, index) of tour.steps"
+        :key="index">
+        <transition name="fade">
+          <v-step
+            v-if="tour.currentStep === index"
+            :highlight="true"
+            :step="step"
+            :previous-step="tour.previousStep"
+            :next-step="tour.nextStep"
+            :stop="tour.stop"
+            :skip="tour.skip"
+            :is-first="tour.isFirst"
+            :is-last="tour.isLast"
+            :labels="tour.labels"
+          >
+            <template>
+              <div slot="actions">
+                <button
+                  v-if="!isLast"
+                  class="v-step__button v-step__button-previous"
+                  @click="tour.previousStep">{{ options.labels.buttonPrevious }}</button>
+                <button
+                  class="v-step__button v-step__button-next"
+                  @click="nextStep()">{{ options.labels.buttonNext }} </button>
+                <button
+                  class="v-step__button v-step__button-skip"
+                  @click="tour.skip">{{ options.labels.buttonSkip }}</button>
+                <button
+                  v-if="isLast"
+                  class="v-step__button v-step__button-stop"
+                  @click="tour.skip">{{ options.labels.buttonStop }}</button>
+              </div>
+            </template>
+          </v-step>
+        </transition>
+      </div>
+    </template>
+  </v-tour>
 </template>
 
 <script>
@@ -24,7 +62,7 @@ export default {
   },
   data() {
     return {
-      myOptions: {
+      options: {
         labels: {
           buttonSkip: this.$t('webapp.tutorial.skip'),
           buttonPrevious: this.$t('webapp.tutorial.previous'),
@@ -42,6 +80,12 @@ export default {
     ...mapGetters([
       'activeTutorial',
     ]),
+    currentStep() {
+      return this.$tours[this.name].currentStep;
+    },
+    isLast() {
+      return this.currentStep === this.stepCount - 1;
+    },
     steps() {
       if (!this.name) return [];
       let index = 0;
@@ -59,6 +103,12 @@ export default {
     },
   },
   mounted() {
+    // A dynamically added onStop callback
+    // this.callbacks.onStop = () => {
+    //   document
+    //     .querySelector(`#tour-${this.name}-step_0`)
+    //     .scrollIntoView({ behavior: 'smooth' });
+    // };
     this.startTutorial();
   },
   methods: {
@@ -74,10 +124,20 @@ export default {
       this.finishTutorial(this.name);
     },
     nextStep() {
-      this.$tours[this.name].nextStep();
+      // TODO: Show error message
+      if (!this.isBlocked()) this.$tours[this.name].nextStep();
     },
     showLastStep() {
       this.$tours[this.name].currentStep = this.steps.length - 1;
+    },
+    isBlocked() {
+      const element = document.querySelector(this.steps[this.currentStep].target).attributes;
+      try {
+        const { value } = element.getNamedItem('is-step-blocked');
+        return value === 'true';
+      } catch (_) {
+        return false;
+      }
     },
   },
 };

@@ -11,6 +11,7 @@
           <example-text-with-highlighted-entities-input
             id="tour-training-step-1"
             ref="textInput"
+            :is-step-blocked="text.length === 0"
             v-model="text"
             :entities="entities"
             :available-entities="entitiesList"
