@@ -193,13 +193,14 @@ export default {
       &__header{
         display:flex;
         justify-content: flex-end;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
 
         p{
           font-family: $font-family;
           font-size: 1rem;
           color:$color-fake-black;
           margin-right: 1rem;
+          margin-top:1rem;
         }
 
         &__createButton{
