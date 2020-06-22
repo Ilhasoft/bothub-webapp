@@ -59,12 +59,6 @@ export default {
     },
   },
   mounted() {
-    // A dynamically added onStop callback
-    this.callbacks.onStop = () => {
-      document
-        .querySelector(`#tour-${this.name}-step_0`)
-        .scrollIntoView({ behavior: 'smooth' });
-    };
     this.startTutorial();
   },
   methods: {
