@@ -16,8 +16,10 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
     <p>some specific text</p>
     <loading-stub></loading-stub>
     <!---->
-    <b-button-stub type="is-primary" nativetype="button" tag="button"> some specific text </b-button-stub>
-    <b-button-stub type="is-primary" nativetype="submit" tag="button"> some specific text </b-button-stub>
+    <div class="create-repository__buttons">
+      <b-button-stub type="is-primary" nativetype="button" tag="button"> some specific text </b-button-stub>
+      <b-button-stub type="is-primary" nativetype="submit" tag="button"> some specific text </b-button-stub>
+    </div>
   </div>
   <!---->
   <div class="create-repository__card__wrapper">
