@@ -7,6 +7,7 @@
         :open-on-focus="openOnFocus"
         :data="optionsCategories"
         :placeholder="$t('webapp.home.all_categories')"
+        dropdown-position="bottom"
         size="normal"
         @select="option => select(option)" />
     </b-field>
