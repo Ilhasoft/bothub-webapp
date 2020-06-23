@@ -4,10 +4,11 @@
     v-model="value"
     :placeholder="labelPlaceholder"
     :custom-formatter="formatter"
-    :data="choices"
+    :data="filteredChoices"
     expanded
+    open-on-focus
     @input="updateInput"
-    @select.stop="selectOption"/>
+    @select="selectOption"/>
   <b-select
     v-else
     v-model="value"
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import { formatters } from '@/utils';
+
 export default {
   props: {
     choices: {
@@ -46,13 +49,23 @@ export default {
       formatter: choice => choice.display_name,
     };
   },
+  computed: {
+    filteredChoices() {
+      if (!this.value || this.value.length === 0) { return this.choices; }
+      const search = new RegExp(formatters.bothubItemKey()(this.value));
+      return this.choices
+        .filter(choice => search.test(formatters.bothubItemKey()(choice.display_name)));
+    },
+  },
   mounted() {
     this.update();
   },
   methods: {
     updateInput() {
+      const search = formatters.bothubItemKey()(this.value);
       const option = this.choices.find(
-        choice => choice.display_name.toLowerCase() === this.value.toLowerCase(),
+        choice => formatters.bothubItemKey()(choice.display_name)
+                    === search,
       );
       if (option) {
         this.$emit('input', option.value);
