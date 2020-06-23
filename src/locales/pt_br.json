@@ -32,7 +32,8 @@
       "recover": "Recuperar senha",
       "cancel_button": "Cancelar",
       "confirm_password": "Confirme a senha",
-      "changed_password": "Senha alterada"
+      "changed_password": "Senha alterada",
+      "save_password": "Salvar senha"
     },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
@@ -76,7 +77,7 @@
       "all_bots": "Todas inteligências",
       "signup_grid": "Encante seu público com chatbots inteligentes e assertivos",
       "signup_forfree": "Comece agora",
-      "reset_password": "Resetar senha",
+      "reset_password": "Enviar e-mail",
       "reset_password_success": "Cheque seu email, nós te enviamos instruções de como resetar sua senha.",
       "forgot_password": "Esqueceu a senha?",
       "register": "Registrar",
