@@ -32,12 +32,14 @@
         v-if="formSchema"
         v-model="categories"
         class="create-repository__form"/>
-      <b-button
-        type="is-primary"
-        @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
-      <b-button
-        native-type="submit"
-        type="is-primary"> {{ $t('webapp.create_repository.submit') }} </b-button>
+      <div class="create-repository__buttons">
+        <b-button
+          type="is-primary"
+          @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
+        <b-button
+          native-type="submit"
+          type="is-primary"> {{ $t('webapp.create_repository.submit') }} </b-button>
+      </div>
     </div>
     <div
       v-if="current==2"
@@ -50,7 +52,7 @@
         <router-link :to="repositoryDetailsRouterParams()">
           <b-button
             class="create-repository__form__final--message__button"
-            type="is-primary"> 
+            type="is-primary">
             {{ $t('webapp.create_repository.start') }}
           </b-button>
         </router-link>
@@ -217,6 +219,16 @@ export default {
 
         @media (max-width: $mobile-width) {
           flex-direction: row;
+        }
+
+        &__buttons {
+          margin-right: 1.1rem;
+          > * {
+            margin-right: 0.75rem;
+             &:last-child {
+              margin-right: 0;
+            }
+          }
         }
 
         &__title {
