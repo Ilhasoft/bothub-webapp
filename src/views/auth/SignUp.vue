@@ -1,70 +1,71 @@
 <template>
-  <div class="signup">
-    <boarding-header/>
-    <div class="signup__content">
+  <boarding-layout>
+    <div class="signup">
+      <div class="signup__content">
 
-      <div class="signup__content__field">
-        <div class="signup__content__field__header">
-          <p>{{ $t('webapp.register_form.already_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="signup__content__field__header__createButton"
-            @click="goToLoginPage">
-            {{ $t('webapp.register_form.signin') }}</b-button>
-        </div>
+        <div class="signup__content__field">
+          <div class="signup__content__field__header">
+            <p>{{ $t('webapp.register_form.already_have_account') }}</p>
+            <b-button
+              type="is-primary"
+              class="signup__content__field__header__createButton"
+              @click="goToLoginPage">
+              {{ $t('webapp.register_form.signin') }}</b-button>
+          </div>
 
-        <div class="signup__content__field__forms">
-          <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
-          <form @submit.prevent="onSubmit">
-            <loading v-if="!formSchema" />
-            <form-generator
-              v-if="formSchema"
-              :schema="formSchema"
-              v-model="data"
-              :errors="errors"
-              :show-labels="false"
-              :available-max-lenght="false"
-              class="field"/>
-            <p
-              class="signup__content__field__forms__passwordError">
-              {{ confirmError }}
-            </p>
-            <div class="field">
-              <div class="control has-text-centered">
-                <b-button
-                  :disabled="submitting"
-                  expanded
-                  class="signup__content__field__forms__button is-primary"
-                  native-type="submit"
-                >{{ $t('webapp.register_form.get_free') }}</b-button>
+          <div class="signup__content__field__forms">
+            <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
+            <form @submit.prevent="onSubmit">
+              <loading v-if="!formSchema" />
+              <form-generator
+                v-if="formSchema"
+                :schema="formSchema"
+                v-model="data"
+                :errors="errors"
+                :show-labels="false"
+                :available-max-lenght="false"
+                class="field"/>
+              <p
+                class="signup__content__field__forms__passwordError">
+                {{ confirmError }}
+              </p>
+              <div class="field">
+                <div class="control has-text-centered">
+                  <b-button
+                    :disabled="submitting"
+                    expanded
+                    class="signup__content__field__forms__button is-primary"
+                    native-type="submit"
+                  >{{ $t('webapp.register_form.get_free') }}</b-button>
+                </div>
+                <div class="signup__content__field__forms__agree-message">
+                  <small>
+                    <router-link
+                      to="/terms"
+                      class="signup__content__field__forms__terms">
+                      {{ $t('webapp.register_form.policy_service') }}
+                    </router-link>
+                  </small>
+                </div>
               </div>
-              <div class="signup__content__field__forms__agree-message">
-                <small>
-                  <router-link
-                    to="/terms"
-                    class="signup__content__field__forms__terms">
-                    {{ $t('webapp.register_form.policy_service') }}
-                  </router-link>
-                </small>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 
 const components = {
   FormGenerator,
   Loading,
-  BoardingHeader,
+  BoardingLayout,
 };
 export default {
   name: 'SignUp',
@@ -176,7 +177,6 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 
 .signup{
-  background-color: $color-fake-white;
 
   &__content{
   display: flex;
@@ -184,7 +184,6 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 5.5rem);
-  background-color: $color-fake-white;
 
     &__field{
       width: 36rem;

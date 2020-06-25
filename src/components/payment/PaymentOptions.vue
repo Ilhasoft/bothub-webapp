@@ -1,50 +1,74 @@
 <template>
-  <div class="payment-options">
-    <h2> {{ title }} </h2>
-    <h1 class="payment-options__primary payment-options__header"> {{ text }} </h1>
-    <div class="payment-options__card__container">
-      <div
-        v-for="(option, index) in content"
-        :key="index"
-        class="payment-options__card">
-        <h2 class="payment-options__primary payment-options__card__title"> {{ option.title }} </h2>
-        <div class="payment-options__card__content">
-          <p> {{ cardText }} </p>
-          <div class="payment-options__primary payment-options__card__price__container">
-            <p class="payment-options__card__symbol"> {{ option.symbol }} </p>
-            <div class="payment-options__card__price">
-              {{ option.price }}
-              <p class="payment-options__card__price__subtitle"> {{ option.price_subtitle }} </p>
+  <boarding-layout>
+    <div class="payment-options">
+      <p> {{ this.$t('webapp.payment.options.title') }} </p>
+      <h1 class="payment-options__primary payment-options__header">
+        {{ this.$t('webapp.payment.options.slogan') }}
+      </h1>
+      <div class="payment-options__card__container">
+        <div
+          v-for="(option, index) in content"
+          :key="index"
+          class="payment-options__card">
+          <h2 class="payment-options__primary payment-options__card__title">
+            {{ option.title }}
+          </h2>
+          <div class="payment-options__card__content">
+            <p
+              class="payment-options__card__text"
+              v-html="option.text" />
+            <div class="payment-options__primary payment-options__card__price__container">
+              <p class="payment-options__card__symbol"> {{ option.symbol }} </p>
+              <div class="payment-options__card__price">
+                {{ option.price }}
+                <p class="payment-options__card__price__subtitle"> {{ option.price_subtitle }} </p>
+              </div>
             </div>
           </div>
+          <b-button
+            type="is-primary"
+            class="payment-options__card__button"> {{ option.button_text }} </b-button>
         </div>
-        <b-button
-          type="is-primary"
-          class="payment-options__card__button"> {{ option.button_text }} </b-button>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
+import BoardingLayout from '@/components/user/BoardingLayout';
+
 export default {
   name: 'PaymentOptions',
+  components: {
+    BoardingLayout,
+  },
   data() {
     return {
       title: 'Bothub Pricing',
       text: 'Bothub hosts intelligences that work for you',
       content: [
         {
-          title: 'Free', text: '', button_text: 'Get free', symbol: '$', price: '0',
+          title: this.$t('webapp.payment.options.free'),
+          text: this.$t('webapp.payment.options.free_text'),
+          button_text: this.$t('webapp.payment.options.get_free'),
+          symbol: '$',
+          price: '0',
         },
         {
-          title: 'Professional', text: '', button_text: 'Get started', symbol: '$', price: '0.02', price_subtitle: 'per prediction',
+          title: this.$t('webapp.payment.options.professional'),
+          text: this.$t('webapp.payment.options.professional_text'),
+          button_text: this.$t('webapp.payment.options.get_started'),
+          symbol: '$',
+          price: '0.02',
+          price_subtitle: this.$t('webapp.payment.options.per_prediction'),
         },
         {
-          title: 'Custom Plan', text: '', button_text: 'Contact us', symbol: 'Contact Sales', price: '',
+          title: this.$t('webapp.payment.options.custom'),
+          text: this.$t('webapp.payment.options.custom_text'),
+          button_text: this.$t('webapp.payment.options.contact_us'),
+          symbol: this.$t('webapp.payment.options.contact'),
         },
       ],
-      cardText: 'Lorem ipsum dolor sit amet consectetur adipiscing elit, pellentesque vulputate quam morbi sem leo. Quis blandit torquent magnis fusce',
     };
   },
 };
@@ -54,30 +78,34 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
     .payment-options {
-        background-color: white;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 4rem 0 0 0;
 
         &__primary {
             color: $color-primary
         }
 
         &__header {
-          font-size: 2rem;
-          font-weight: bold;
-          max-width: 25rem;
+          font-size: 2.5rem;
+          max-width: 31rem;
         }
 
         &__card {
-            width: 14.625rem;
-            background-color: #F5F5F5;
+            width: 16.438rem;
+            background-color: $color-white;
             padding: 2.125rem 1.875rem 1.625rem 1.875rem;
             box-shadow: 0px 3px 6px #00000029;
 
+            /deep/ &__text {
+              min-height: 10rem;
+              display: block;
+            }
+
             &__content {
-              min-height: 14.5rem;
+              min-height: 17rem;
             }
 
             &__title {
@@ -86,12 +114,13 @@ export default {
 
             &__button {
                 margin-top: 2.625rem;
+                padding: 0 3rem;
             }
 
             &__price {
                 font-size: 3rem;
                 font-weight: bold;
-                margin-top: 0.5rem;
+                margin-top: 1rem;
 
                 &__subtitle {
                     font-size: 0.75rem;
@@ -112,9 +141,10 @@ export default {
 
             &__container {
                 display: flex;
+                flex-wrap: wrap;
                 justify-content: center;
                  > * {
-                     margin: 1.6rem;
+                     margin: 1.4rem;
                  }
 
                  &:last-child {

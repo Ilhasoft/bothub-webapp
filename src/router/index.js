@@ -24,6 +24,7 @@ import Entity from '@/views/repository/Entity';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
+import PaymentOptions from '@/views/payment/PaymentOptions';
 import store from '../store';
 
 Vue.use(Router);
@@ -177,6 +178,11 @@ export default new Router({
             component: RepositoryVersions,
           }] : []),
       ],
+    },
+    {
+      path: '/payment-options',
+      name: 'payment-options',
+      component: PaymentOptions,
     },
     {
       path: '*',
