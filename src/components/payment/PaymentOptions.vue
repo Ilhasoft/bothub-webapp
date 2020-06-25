@@ -115,6 +115,7 @@ export default {
             &__button {
                 margin-top: 2.625rem;
                 padding: 0 3rem;
+                font-weight: bold;
             }
 
             &__price {
