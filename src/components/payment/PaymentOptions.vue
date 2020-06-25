@@ -22,6 +22,7 @@
               <div class="payment-options__card__price">
                 {{ option.price }}
                 <p class="payment-options__card__price__subtitle"> {{ option.price_subtitle }} </p>
+                <p class="payment-options__card__title"> {{ option.price_text }} </p>
               </div>
             </div>
           </div>
@@ -66,7 +67,7 @@ export default {
           title: this.$t('webapp.payment.options.custom'),
           text: this.$t('webapp.payment.options.custom_text'),
           button_text: this.$t('webapp.payment.options.contact_us'),
-          symbol: this.$t('webapp.payment.options.contact'),
+          price_text: this.$t('webapp.payment.options.contact'),
         },
       ],
     };
