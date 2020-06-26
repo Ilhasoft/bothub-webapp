@@ -3,7 +3,6 @@
     :maxlength="!showMaxLenght ? '' : max_length"
     v-model="value"
     :placeholder="labelPlaceholder"
-    icon="credit-card"
     type="text" />
 </template>
 

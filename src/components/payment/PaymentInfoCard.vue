@@ -1,6 +1,12 @@
 <template>
   <div class="payment-info-card">
-    <form-generator :schema="schema"/>
+    <form>
+      <form-generator
+        :schema="schema"
+        :show-labels="false"/>
+      <b-button type="is-primary"> Back </b-button>
+      <b-button type="is-primary"> Save </b-button>
+    </form>
   </div>
 </template>
 
@@ -37,7 +43,7 @@ export default {
           label: 'CVC',
           read_only: false,
           required: true,
-          type: 'Number',
+          type: 'number',
         },
       },
     };
@@ -46,5 +52,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
 
+  .payment-info-card {
+    padding: 0 4.7rem 3.5rem 4.7rem;
+    background-color: $color-white;
+    box-shadow: 0px 3px 6px #00000029;
+    margin: 4rem calc(60vw - 500px);
+  }
 </style>
