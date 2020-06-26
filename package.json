@@ -31,6 +31,7 @@
     "uuid": "^3.3.2",
     "vue": "^2.5.2",
     "vue-i18n": "^8.15.5",
+    "vue-interactive-paycard": "^1.0.0",
     "vue-markdown": "^2.2.4",
     "vue-mc": "^0.4.0",
     "vue-mc-drf-model": "https://github.com/Ilhasoft/vue-mc-drf-model",

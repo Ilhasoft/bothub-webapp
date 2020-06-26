@@ -31,7 +31,6 @@
       </div>
     </div>
   </div>
-  </boarding-layout>
 </template>
 
 <script>

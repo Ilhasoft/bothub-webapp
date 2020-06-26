@@ -3,12 +3,20 @@
     <div class="payment-info-card">
       <h1> {{ $t('webapp.payment.info.title') }} </h1>
       <p> {{ $t('webapp.payment.info.subtitle') }} </p>
+      <payment-card
+        :card="data.card"
+        :name="data.card_name"
+        :code="data.card_code"
+        :date="data.card_date"/>
       <form>
         <form-generator
+          v-model="data"
           :schema="schema"
           :show-labels="false"/>
         <b-button type="is-primary"> {{ $t('webapp.payment.info.back') }} </b-button>
-        <b-button type="is-primary"> {{ $t('webapp.payment.info.save') }} </b-button>
+        <b-button
+          native-type="submit"
+          type="is-primary"> {{ $t('webapp.payment.info.save') }} </b-button>
       </form>
     </div>
   </div>
@@ -16,14 +24,17 @@
 
 <script>
 import FormGenerator from '@/components/form-generator/FormGenerator';
+import PaymentCard from '@/components/payment/PaymentCard';
 
 export default {
   name: 'PaymentInfoCard',
   components: {
     FormGenerator,
+    PaymentCard,
   },
   data() {
     return {
+      data: {},
       schema: {
         card: {
           label: 'Card number',
