@@ -71,7 +71,6 @@ export default {
   min-height: calc(100vh - 5.5rem);
   background-color: $color-fake-white;
 
-
     &__field{
       width: 36rem;
       height: 25.25rem;

@@ -27,7 +27,9 @@ export default {
 @import '~@/assets/scss/variables.scss';
 
 .boarding{
+
   &__header{
+    box-shadow: inset 2px -3px 6px#0000001e;
     height: 5.5rem;
     width: 100%;
     background-color: $color-white;
