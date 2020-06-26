@@ -1,0 +1,46 @@
+<template>
+  <b-input
+    :maxlength="!showMaxLenght ? '' : max_length"
+    v-model="value"
+    :placeholder="labelPlaceholder"
+    icon="credit-card"
+    type="text"
+    @input="update()" />
+</template>
+
+<script>
+
+export default {
+  props: {
+    max_length: {
+      type: Number,
+      default: null,
+    },
+    showMaxLenght: {
+      type: Boolean,
+      default: true,
+    },
+    labelPlaceholder: {
+      type: String,
+      default: '',
+    },
+    initialData: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      value: this.initialData,
+    };
+  },
+  mounted() {
+    this.update();
+  },
+  methods: {
+    update() {
+      this.$emit('input', this.value);
+    },
+  },
+};
+</script>
