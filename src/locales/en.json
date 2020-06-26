@@ -424,6 +424,12 @@
         "per_prediction": "per prediction",
         "get_free": "Get free",
         "get_started": "Get started"
+      },
+      "info": {
+        "title": "Payment information",
+        "subtitle": "Input your credit or debit card information",
+        "back": "Back",
+        "save": "Save"
       }
     }
   }
