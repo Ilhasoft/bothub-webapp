@@ -1,48 +1,44 @@
 <template>
-  <boarding-layout>
-    <div class="payment-options">
-      <p> {{ this.$t('webapp.payment.options.title') }} </p>
-      <h1 class="payment-options__primary payment-options__header">
-        {{ this.$t('webapp.payment.options.slogan') }}
-      </h1>
-      <div class="payment-options__card__container">
-        <div
-          v-for="(option, index) in content"
-          :key="index"
-          class="payment-options__card">
-          <h2 class="payment-options__primary payment-options__card__title">
-            {{ option.title }}
-          </h2>
-          <div class="payment-options__card__content">
-            <p
-              class="payment-options__card__text"
-              v-html="option.text" />
-            <div class="payment-options__primary payment-options__card__price__container">
-              <p class="payment-options__card__symbol"> {{ option.symbol }} </p>
-              <div class="payment-options__card__price">
-                {{ option.price }}
-                <p class="payment-options__card__price__subtitle"> {{ option.price_subtitle }} </p>
-                <p class="payment-options__card__title"> {{ option.price_text }} </p>
-              </div>
+  <div class="payment-options">
+    <p> {{ this.$t('webapp.payment.options.title') }} </p>
+    <h1 class="payment-options__primary payment-options__header">
+      {{ this.$t('webapp.payment.options.slogan') }}
+    </h1>
+    <div class="payment-options__card__container">
+      <div
+        v-for="(option, index) in content"
+        :key="index"
+        class="payment-options__card">
+        <h2 class="payment-options__primary payment-options__card__title">
+          {{ option.title }}
+        </h2>
+        <div class="payment-options__card__content">
+          <p
+            class="payment-options__card__text"
+            v-html="option.text" />
+          <div class="payment-options__primary payment-options__card__price__container">
+            <p class="payment-options__card__symbol"> {{ option.symbol }} </p>
+            <div class="payment-options__card__price">
+              {{ option.price }}
+              <p class="payment-options__card__price__subtitle"> {{ option.price_subtitle }} </p>
+              <p class="payment-options__card__title"> {{ option.price_text }} </p>
             </div>
           </div>
-          <b-button
-            type="is-primary"
-            class="payment-options__card__button"> {{ option.button_text }} </b-button>
         </div>
+        <b-button
+          type="is-primary"
+          class="payment-options__card__button"> {{ option.button_text }} </b-button>
       </div>
     </div>
+  </div>
   </boarding-layout>
 </template>
 
 <script>
-import BoardingLayout from '@/components/user/BoardingLayout';
+
 
 export default {
   name: 'PaymentOptions',
-  components: {
-    BoardingLayout,
-  },
   data() {
     return {
       title: 'Bothub Pricing',
@@ -79,11 +75,6 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
     .payment-options {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 4rem 0 0 0;
 
         &__primary {
             color: $color-primary
