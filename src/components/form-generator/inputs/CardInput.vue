@@ -57,7 +57,7 @@ export default {
   methods: {
     update(value) {
       this.value = value.replace(/\s/g, '');
-      this.$emit('input', value);
+      this.$emit('input', this.value);
     },
   },
 };
