@@ -100,8 +100,17 @@ export default {
     const { data } = await request.$http.options(`/v2/repository/repository-details/${repositoryUuid}/`);
     return data.actions.PUT;
   },
-  edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
-    algorithm, useCompetingIntents, useNameEntities, useAnalyzeChar, repositoryUuid) {
+  edit(ownerNickname,
+    slug,
+    name,
+    newSlug,
+    language,
+    categories,
+    description,
+    isPrivate,
+    algorithm,
+    useCompetingIntents, useNameEntities, useAnalyzeChar, useTransformerEntities,
+    repositoryUuid) {
     return request.$http.patch(
       `/v2/repository/repository-details/${repositoryUuid}/`,
       {
@@ -115,6 +124,7 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       },
     );
   },
