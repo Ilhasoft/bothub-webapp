@@ -8,6 +8,7 @@ import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
 import MyProfile from '@/components/MyProfile';
+import Profile from '@/views/Profile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
@@ -102,6 +103,18 @@ export default new Router({
       path: '/myprofile/',
       name: 'myProfile',
       component: MyProfile,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/profile/',
+      name: 'profile',
+      component: Profile,
       beforeEnter: async (to, from, next) => {
         if (!store.getters.authenticated) {
           next('/signin');
