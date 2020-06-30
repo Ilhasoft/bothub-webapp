@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Buefy from 'buefy';
-import VueInteractivePaycard from 'vue-interactive-paycard';
 import VueMoment from 'vue-moment';
 import BH from 'bh';
 import * as Sentry from '@sentry/browser';
@@ -16,7 +15,6 @@ Vue.use(Buefy);
 Vue.use(VueMoment);
 Vue.use(BH);
 Vue.use(API);
-Vue.use(VueInteractivePaycard);
 Vue.config.productionTip = false;
 applyFilters(Vue);
 

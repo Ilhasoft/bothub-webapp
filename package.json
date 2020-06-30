@@ -23,6 +23,7 @@
     "bh": "./bh/",
     "buefy": "^0.8.12",
     "chart.js": "^2.8.0",
+    "cleave.js": "^1.6.0",
     "deep-equal": "^1.0.1",
     "github-markdown-css": "^3.0.1",
     "global": "^4.3.2",

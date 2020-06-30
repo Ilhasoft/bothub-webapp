@@ -1,15 +1,32 @@
 <template>
   <b-input
+    v-cleave="masks.creditCard"
     :maxlength="!showMaxLenght ? '' : max_length"
-    v-model="value"
     :placeholder="labelPlaceholder"
     icon="credit-card"
-    type="text" />
+    type="text"
+    @input="update" />
 </template>
 
 <script>
+import Cleave from 'cleave.js';
+
+const cleave = {
+  name: 'cleave',
+  bind(el, binding) {
+    const input = el.querySelector('input');
+    // eslint-disable-next-line no-underscore-dangle
+    input._vCleave = new Cleave(input, binding.value);
+  },
+  unbind(el) {
+    const input = el.querySelector('input');
+    // eslint-disable-next-line no-underscore-dangle
+    input._vCleave.destroy();
+  },
+};
 
 export default {
+  directives: { cleave },
   props: {
     max_length: {
       type: Number,
@@ -23,47 +40,47 @@ export default {
       type: String,
       default: '',
     },
-    initialData: {
-      type: Number,
-      default: null,
-    },
   },
   data() {
     return {
       value: null,
+      masks: {
+        creditCard: {
+          creditCard: true,
+          onCreditCardTypeChanged(type) {
+            console.log(type);
+          },
+        },
+      },
     };
-  },
-  computed: {
-    numberValue() {
-      let numberValue = '';
-      if (this.value) numberValue = this.value.replace(/[^\d]/, '');
-      if (numberValue.length === 0) numberValue = null;
-      this.$emit('input', numberValue);
-      return numberValue;
-    },
-  },
-  watch: {
-    value() {
-      this.$nextTick(() => {
-        this.value = this.format(this.value);
-        this.$emit('input', parseInt(this.value, 10));
-      });
-    },
-  },
-  mounted() {
-    this.value = this.initialData;
   },
   methods: {
     update(value) {
-      this.value = value;
-    },
-    format(value) {
-      let numberValue = '';
-      if (value) numberValue = value.replace(/[^\d]/, '');
-      if (numberValue.length === 0) numberValue = null;
-      this.$emit('input', numberValue);
-      return numberValue;
+      this.value = value.replace(/\s/g, '');
+      this.$emit('input', value);
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+ .card-number {
+   box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+max-width: 100%;
+width: 100%;
+border-color: #b5b5b5;
+background-color: white;
+border-radius: 4px;
+color: #363636;
+font-size: 1rem;
+height: 2.25em;
+line-height: 1.5;
+padding-bottom: calc(0.375em - 1px);
+padding-left: calc(0.625em - 1px);
+padding-right: calc(0.625em - 1px);
+padding-top: calc(0.375em - 1px);
+position: relative;
+vertical-align: top;
+border: 1px solid transparent;
+ }
+</style>

@@ -47,6 +47,7 @@ export default {
     align-items: center;
     box-shadow: 0px 3px 6px #00000029;
     position: fixed;
+    z-index: 999;
     top: 0;
 
     &__image{
