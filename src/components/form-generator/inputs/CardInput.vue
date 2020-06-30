@@ -1,7 +1,7 @@
 <template>
   <b-input
     v-cleave="masks.creditCard"
-    :maxlength="!showMaxLenght ? '' : max_length"
+    :maxlength="!showMaxLength ? '' : max_length"
     :placeholder="labelPlaceholder"
     icon="credit-card"
     type="text"
@@ -32,7 +32,7 @@ export default {
       type: Number,
       default: null,
     },
-    showMaxLenght: {
+    showMaxLength: {
       type: Boolean,
       default: true,
     },

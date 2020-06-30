@@ -14,7 +14,7 @@ export default {
       type: Number,
       default: null,
     },
-    showMaxLenght: {
+    showMaxLength: {
       type: Boolean,
       default: true,
     },

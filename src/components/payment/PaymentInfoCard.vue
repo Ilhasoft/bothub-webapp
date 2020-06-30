@@ -53,6 +53,8 @@ export default {
           read_only: false,
           required: true,
           type: 'number',
+          max_length: 3,
+          showMaxLength: false,
         },
       },
     };
