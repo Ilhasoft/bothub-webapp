@@ -12,10 +12,19 @@
           <div class="profile__plan"> FREE USER </div>
         </div>
       </div>
-      <div class="profile__content">
-        <edit-profile />
-      </div>
-  </div></layout>
+    </div>
+    <div class="profile__tabs">
+      <div
+        v-for="tab in tabs"
+        :key="tab"
+        :class="{'profile__tabs__item': true, 'profile__tabs__item__selected': selected==tab}"
+        @click="selected=tab"> {{ tab }} </div>
+    </div>
+    <div class="profile__content">
+      <h1> Personal information </h1>
+      <edit-profile />
+    </div>
+  </layout>
 </template>
 
 <script>
@@ -31,6 +40,12 @@ export default {
     UserAvatar,
     EditProfile,
   },
+  data() {
+    return {
+      selected: 'Profile',
+      tabs: ['Profile', 'Intelligences', 'Activities', 'Reports', 'Payments'],
+    };
+  },
   computed: {
     ...mapGetters([
       'authenticated',
@@ -42,6 +57,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+$shadow-color: #00000029;
+
     .profile {
         &__avatar {
             width: 90px;
@@ -62,10 +79,36 @@ export default {
         }
 
         &__header {
+            background-color: $color-white;
+            padding: 4rem 0;
             &__content {
                 display: flex;
                 justify-content: center;
-                margin: 4rem 1rem;
+                margin: 1rem;
+            }
+        }
+
+        &__tabs {
+            display: flex;
+            background-color: $color-white;
+            padding: 0 2rem;
+            justify-content: center;
+            width: 100%;
+            > * {
+                margin-right: 2rem;
+            }
+
+            &__item {
+                padding: 0.8rem 2.5rem;
+                background-color: $color-fake-white;
+            //    box-shadow: 0px 3px 6px $shadow-color;
+               box-shadow: 5px 0 5px -5px $shadow-color, -5px 0 5px -5px $shadow-color, inset 0 -5px 5px -5px $shadow-color;
+               cursor: pointer;
+
+               &__selected {
+                   background-color: $color-primary;
+                   color: $color-white;
+               }
             }
         }
     }
