@@ -1,6 +1,6 @@
 <template>
   <bh-card
-    :class="[ single ? 'repositoy-card__single' : 'repository-card']"
+    :class="[ single ? 'repository-card__single' : 'repository-card']"
     shadow="light"
     no-border>
     <div class="repository-card__align-items">
@@ -146,6 +146,8 @@ export default {
   &__single {
     width: 100%;
     height: 100%;
+    padding: 1rem 0;
+    word-break: break-all;
   }
 
   &__align-items {
