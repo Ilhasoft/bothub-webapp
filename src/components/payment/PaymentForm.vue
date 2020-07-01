@@ -5,7 +5,9 @@
       :placeholder="$t('webapp.payment.info.card_name')"
       class="card-number__field" />
     <card
-      :options="{hidePostalCode:true, classes:{base: 'card-number__input', empty: 'card-number__input__empty'}}"
+      :options="{hidePostalCode: true,
+                 classes:{base: 'card-number__input',
+                          empty: 'card-number__input__empty'}}"
       class="card-number card-number__field"
       stripe="pk_test_XXXXXXXXXXXXXXXXXXXXXXXX"
       @change="onChange"

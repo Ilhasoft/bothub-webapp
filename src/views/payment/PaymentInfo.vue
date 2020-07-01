@@ -6,7 +6,7 @@
           <h1> {{ $t('webapp.payment.info.title') }} </h1>
           <p> {{ $t('webapp.payment.info.subtitle') }} </p>
           <payment-form
-          class="payment-info-card__form"
+            class="payment-info-card__form"
             show-back-button
             @back="onBack" />
         </div>
