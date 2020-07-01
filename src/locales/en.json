@@ -429,7 +429,8 @@
         "title": "Payment information",
         "subtitle": "Input your credit or debit card information",
         "back": "Back",
-        "save": "Save"
+        "save": "Save",
+        "card_name": "Card name"
       }
     }
   }
