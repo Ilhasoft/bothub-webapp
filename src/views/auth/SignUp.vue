@@ -2,7 +2,6 @@
   <boarding-layout>
     <div class="signup">
       <div class="signup__content">
-
         <div class="signup__content__field">
           <div class="signup__content__field__header">
             <p>{{ $t('webapp.register_form.already_have_account') }}</p>
@@ -12,7 +11,6 @@
               @click="goToLoginPage">
               {{ $t('webapp.register_form.signin') }}</b-button>
           </div>
-
           <div class="signup__content__field__forms">
             <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
             <form @submit.prevent="onSubmit">
@@ -175,15 +173,22 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
+.header{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
 
 .signup{
+  background-color: $color-fake-white;
 
   &__content{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 5.5rem);
+  min-height: 100vh;
+  background-color: $color-fake-white;
 
     &__field{
       width: 36rem;
@@ -192,7 +197,7 @@ export default {
       &__header{
         display:flex;
         justify-content: flex-end;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
 
         p{
           font-family: $font-family;
@@ -215,7 +220,7 @@ export default {
       }
 
       &__forms{
-        height: 31.5rem;
+        height: 33rem;
         width: 576px;
         padding: 2rem 4rem;
         background-color: $color-white;
@@ -236,6 +241,7 @@ export default {
 
         &__agree-message {
           margin: auto;
+          margin-top:1rem;
           width: 16rem;
           line-height: 0.8;
           color: #707070;
@@ -251,7 +257,7 @@ export default {
           }
         }
         &__button{
-          margin: 1.5rem auto 0.8rem ;
+          margin: 3rem auto 0.8rem ;
           width: 9.813rem;
           height: 2.188rem;
           border-radius: 6px;

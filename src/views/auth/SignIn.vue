@@ -70,6 +70,7 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 5.5rem);
+  background-color: $color-fake-white;
 
     &__field{
       width: 36rem;

@@ -39,6 +39,7 @@ export default {
   }
 
   &__header{
+    box-shadow: inset 1px -3px 6px#0000001e;
     height: 5.5rem;
     width: 100%;
     background-color: $color-white;

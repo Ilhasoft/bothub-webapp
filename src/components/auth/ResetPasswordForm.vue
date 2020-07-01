@@ -119,6 +119,13 @@ export default {
         });
         this.success_msgs = [this.$t('webapp.recover_form.changed_password')];
         this.$emit('reseted');
+
+        setTimeout(() => {
+          this.$router.push({
+            name: 'signIn',
+          });
+        }, 4000);
+
         return true;
       } catch (error) {
         const data = error.response && error.response.data;

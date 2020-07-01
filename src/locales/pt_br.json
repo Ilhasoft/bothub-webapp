@@ -247,6 +247,7 @@
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
       "trained": "Treinado",
+      "processing": "Processando",
       "no_changes": "Sem alterações",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",

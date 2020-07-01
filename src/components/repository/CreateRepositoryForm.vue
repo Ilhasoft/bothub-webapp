@@ -17,7 +17,9 @@
         :show-labels="false"
         class="create-repository__form" />
       <b-button
+        :disabled="!checkFormData"
         type="is-primary"
+        class="create-repository__form__buttons"
         @click="current = 1"> {{ $t('webapp.create_repository.next') }} </b-button>
     </div>
     <div
@@ -32,24 +34,34 @@
         v-if="formSchema"
         v-model="categories"
         class="create-repository__form"/>
-      <b-button
-        type="is-primary"
-        @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
-      <b-button
-        native-type="submit"
-        type="is-primary"> {{ $t('webapp.create_repository.submit') }} </b-button>
+      <div class="create-repository__buttons">
+        <b-button
+          type="is-primary"
+          class="create-repository__form__buttons"
+          @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
+        <b-button
+          native-type="submit"
+          type="is-primary"
+          class="create-repository__form__buttons"
+        > {{ $t('webapp.create_repository.submit') }} </b-button>
+      </div>
     </div>
     <div
       v-if="current==2"
-      class="create-repository__form__wrapper">
-      <h1 class="create-repository__title">
-        {{ $t('webapp.create_repository.repository_created') }}
-      </h1>
-      <p v-html="$t('webapp.create_repository.repository_created_text')" />
-      <router-link :to="repositoryDetailsRouterParams()">
-        <b-button
-          type="is-primary"> {{ $t('webapp.create_repository.start') }} </b-button>
-      </router-link>
+      class="create-repository__form__wrapper create-repository__form__final--message">
+      <div class="create-repository__form__final--message__wrapper">
+        <h1 class="create-repository__title">
+          {{ $t('webapp.create_repository.repository_created') }}
+        </h1>
+        <p v-html="$t('webapp.create_repository.repository_created_text')" />
+        <router-link :to="repositoryDetailsRouterParams()">
+          <b-button
+            class="create-repository__form__final--message__button"
+            type="is-primary">
+            {{ $t('webapp.create_repository.start') }}
+          </b-button>
+        </router-link>
+      </div>
     </div>
     <div class="create-repository__card__wrapper">
       <div class="create-repository__card">
@@ -115,6 +127,13 @@ export default {
     filteredSchema() {
       const { categories, ...schema } = this.computedSchema;
       return schema;
+    },
+    checkFormData() {
+      if (this.data.name === '' || this.data.description === ''
+        || this.data.language === null || this.data.language === '') {
+        return false;
+      }
+      return true;
     },
   },
   watch: {
@@ -214,6 +233,16 @@ export default {
           flex-direction: row;
         }
 
+        &__buttons {
+          margin-right: 1.1rem;
+          > * {
+            margin-right: 0.75rem;
+             &:last-child {
+              margin-right: 0;
+            }
+          }
+        }
+
         &__title {
           color: $color-primary;
           font-size: 3rem;
@@ -223,6 +252,19 @@ export default {
             text-align: left;
             margin: 3rem 0;
 
+            &__final--message {
+              display: flex;
+              align-items: center;
+
+              &__wrapper {
+                margin: 4rem 0 0 0;
+              }
+
+              &__button {
+                margin-top: 2rem;
+              }
+            }
+
             &__wrapper {
                 width: 31rem;
                 margin: 0 12rem 0 0;
@@ -231,12 +273,19 @@ export default {
                   margin: 3rem 0 0 0;
                 }
             }
+
+            &__buttons{
+              box-shadow: 0px 3px 6px #00000029;
+              border-radius: 6px;
+              width: 6.875rem;
+              height: 2.188rem;
+            }
         }
 
         &__card {
             margin: 4.5rem 0 0 0;
-            width: 23.3rem;
-            height: 23.3rem;
+            width: 23.167rem;
+            height: 20.668rem;
         }
     }
 </style>
