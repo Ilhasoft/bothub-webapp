@@ -3,14 +3,6 @@
     <boarding-header/>
     <div class="recover-password__content">
       <div class="recover-password__content__field">
-        <div class="recover-password__content__field__header">
-          <p>{{ $t('webapp.register_form.already_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="recover-password__content__field__header__createButton"
-            @click="goToLoginPage">
-            {{ $t('webapp.register_form.signin') }}</b-button>
-        </div>
         <div class="recover-password__content__field__forms">
           <h1>{{ $t('webapp.recover_form.recover') }}</h1>
           <reset-password-form
@@ -34,13 +26,6 @@ const components = {
 export default {
   name: 'ResetPassword',
   components,
-  methods: {
-    goToLoginPage() {
-      this.$router.push({
-        name: 'signIn',
-      });
-    },
-  },
 };
 </script>
 

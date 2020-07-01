@@ -1,34 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginForm.vue renders correctly 1`] = `
-<div class="signup">
-  <boarding-header-stub></boarding-header-stub>
-  <div class="signup__content">
-    <div class="signup__content__field">
-      <div class="signup__content__field__header">
-        <p>some specific text</p>
-        <b-button-stub type="is-primary" nativetype="button" tag="button" class="signup__content__field__header__createButton">
-          some specific text</b-button-stub>
-      </div>
-      <div class="signup__content__field__forms">
-        <h1>some specific text</h1>
-        <form>
-          <loading-stub></loading-stub>
-          <!---->
-          <p class="signup__content__field__forms__passwordError">
+<div>
+  <boarding-header-stub class="header"></boarding-header-stub>
+  <div class="signup">
+    <div class="signup__content">
+      <div class="signup__content__field">
+        <div class="signup__content__field__header">
+          <p>some specific text</p>
+          <b-button-stub type="is-primary" nativetype="button" tag="button" class="signup__content__field__header__createButton">
+            some specific text</b-button-stub>
+        </div>
+        <div class="signup__content__field__forms">
+          <h1>some specific text</h1>
+          <form>
+            <loading-stub></loading-stub>
+            <!---->
+            <p class="signup__content__field__forms__passwordError">
 
-          </p>
-          <div class="field">
-            <div class="control has-text-centered">
-              <b-button-stub expanded="true" nativetype="submit" tag="button" class="signup__content__field__forms__button is-primary">some specific text</b-button-stub>
+            </p>
+            <div class="field">
+              <div class="control has-text-centered">
+                <b-button-stub expanded="true" nativetype="submit" tag="button" class="signup__content__field__forms__button is-primary">some specific text</b-button-stub>
+              </div>
+              <div class="signup__content__field__forms__agree-message"><small>
+                  <router-link-stub to="/terms" tag="a" event="click" class="signup__content__field__forms__terms">
+                    some specific text
+                  </router-link-stub>
+                </small></div>
             </div>
-            <div class="signup__content__field__forms__agree-message"><small>
-                <router-link-stub to="/terms" tag="a" event="click" class="signup__content__field__forms__terms">
-                  some specific text
-                </router-link-stub>
-              </small></div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   </div>
