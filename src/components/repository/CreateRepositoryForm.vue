@@ -17,7 +17,9 @@
         :show-labels="false"
         class="create-repository__form" />
       <b-button
+        :disabled="!checkFormData"
         type="is-primary"
+        class="create-repository__form__buttons"
         @click="current = 1"> {{ $t('webapp.create_repository.next') }} </b-button>
     </div>
     <div
@@ -35,10 +37,13 @@
       <div class="create-repository__buttons">
         <b-button
           type="is-primary"
+          class="create-repository__form__buttons"
           @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
         <b-button
           native-type="submit"
-          type="is-primary"> {{ $t('webapp.create_repository.submit') }} </b-button>
+          type="is-primary"
+          class="create-repository__form__buttons"
+        > {{ $t('webapp.create_repository.submit') }} </b-button>
       </div>
     </div>
     <div
@@ -122,6 +127,13 @@ export default {
     filteredSchema() {
       const { categories, ...schema } = this.computedSchema;
       return schema;
+    },
+    checkFormData() {
+      if (this.data.name === '' || this.data.description === ''
+        || this.data.language === null || this.data.language === '') {
+        return false;
+      }
+      return true;
     },
   },
   watch: {
@@ -260,6 +272,13 @@ export default {
                 @media (max-width: $mobile-width*1.2) {
                   margin: 3rem 0 0 0;
                 }
+            }
+
+            &__buttons{
+              box-shadow: 0px 3px 6px #00000029;
+              border-radius: 6px;
+              width: 6.875rem;
+              height: 2.188rem;
             }
         }
 
