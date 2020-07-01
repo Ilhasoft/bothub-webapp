@@ -1,54 +1,55 @@
 <template>
-  <div class="signup">
-    <boarding-header/>
-    <div class="signup__content">
+  <div>
+    <boarding-header class="header"/>
+    <div class="signup">
+      <div class="signup__content">
+        <div class="signup__content__field">
+          <div class="signup__content__field__header">
+            <p>{{ $t('webapp.register_form.already_have_account') }}</p>
+            <b-button
+              type="is-primary"
+              class="signup__content__field__header__createButton"
+              @click="goToLoginPage">
+              {{ $t('webapp.register_form.signin') }}</b-button>
+          </div>
 
-      <div class="signup__content__field">
-        <div class="signup__content__field__header">
-          <p>{{ $t('webapp.register_form.already_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="signup__content__field__header__createButton"
-            @click="goToLoginPage">
-            {{ $t('webapp.register_form.signin') }}</b-button>
-        </div>
-
-        <div class="signup__content__field__forms">
-          <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
-          <form @submit.prevent="onSubmit">
-            <loading v-if="!formSchema" />
-            <form-generator
-              v-if="formSchema"
-              :schema="formSchema"
-              v-model="data"
-              :errors="errors"
-              :show-labels="false"
-              :available-max-lenght="false"
-              class="field"/>
-            <p
-              class="signup__content__field__forms__passwordError">
-              {{ confirmError }}
-            </p>
-            <div class="field">
-              <div class="control has-text-centered">
-                <b-button
-                  :disabled="submitting"
-                  expanded
-                  class="signup__content__field__forms__button is-primary"
-                  native-type="submit"
-                >{{ $t('webapp.register_form.get_free') }}</b-button>
+          <div class="signup__content__field__forms">
+            <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
+            <form @submit.prevent="onSubmit">
+              <loading v-if="!formSchema" />
+              <form-generator
+                v-if="formSchema"
+                :schema="formSchema"
+                v-model="data"
+                :errors="errors"
+                :show-labels="false"
+                :available-max-lenght="false"
+                class="field"/>
+              <p
+                class="signup__content__field__forms__passwordError">
+                {{ confirmError }}
+              </p>
+              <div class="field">
+                <div class="control has-text-centered">
+                  <b-button
+                    :disabled="submitting"
+                    expanded
+                    class="signup__content__field__forms__button is-primary"
+                    native-type="submit"
+                  >{{ $t('webapp.register_form.get_free') }}</b-button>
+                </div>
+                <div class="signup__content__field__forms__agree-message">
+                  <small>
+                    <router-link
+                      to="/terms"
+                      class="signup__content__field__forms__terms">
+                      {{ $t('webapp.register_form.policy_service') }}
+                    </router-link>
+                  </small>
+                </div>
               </div>
-              <div class="signup__content__field__forms__agree-message">
-                <small>
-                  <router-link
-                    to="/terms"
-                    class="signup__content__field__forms__terms">
-                    {{ $t('webapp.register_form.policy_service') }}
-                  </router-link>
-                </small>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -174,8 +175,14 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
+.header{
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
 
 .signup{
+  padding-top: 5.5rem;
   background-color: $color-fake-white;
 
   &__content{
@@ -183,7 +190,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 5.5rem);
+  min-height: 100vh;
   background-color: $color-fake-white;
 
     &__field{
@@ -193,7 +200,7 @@ export default {
       &__header{
         display:flex;
         justify-content: flex-end;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
 
         p{
           font-family: $font-family;
@@ -216,7 +223,7 @@ export default {
       }
 
       &__forms{
-        height: 31.5rem;
+        height: 33rem;
         width: 576px;
         padding: 2rem 4rem;
         background-color: $color-white;
@@ -237,6 +244,7 @@ export default {
 
         &__agree-message {
           margin: auto;
+          margin-top:1rem;
           width: 16rem;
           line-height: 0.8;
           color: #707070;
@@ -252,7 +260,7 @@ export default {
           }
         }
         &__button{
-          margin: 1.5rem auto 0.8rem ;
+          margin: 3rem auto 0.8rem ;
           width: 9.813rem;
           height: 2.188rem;
           border-radius: 6px;
