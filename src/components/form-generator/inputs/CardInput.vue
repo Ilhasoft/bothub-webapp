@@ -44,11 +44,12 @@ export default {
   data() {
     return {
       value: null,
+      cardType: null,
       masks: {
         creditCard: {
           creditCard: true,
-          onCreditCardTypeChanged(type) {
-            console.log(type);
+          onCreditCardTypeChanged: (type) => {
+            this.cardType = type === 'unknown' ? null : type;
           },
         },
       },
