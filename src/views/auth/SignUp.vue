@@ -51,6 +51,7 @@
         </div>
       </div>
     </div>
+    <div class="footer"/>
   </boarding-layout>
 </template>
 
@@ -173,10 +174,9 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
-.header{
-  position: fixed;
-  width: 100%;
-  z-index: 1;
+
+.footer{
+  background-color: $color-fake-white;
 }
 
 .signup{
