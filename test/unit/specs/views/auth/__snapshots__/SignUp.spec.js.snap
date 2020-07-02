@@ -33,6 +33,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
         </div>
       </div>
     </div>
+    <div class="footer"></div>
   </div>
 </div>
 `;

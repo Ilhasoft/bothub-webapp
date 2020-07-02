@@ -48,7 +48,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 5.5rem);
+  min-height: 100vh;
   background-color: $color-fake-white;
 
 

@@ -52,6 +52,7 @@
           </div>
         </div>
       </div>
+      <div class="footer"/>
     </div>
   </div>
 </template>
@@ -180,7 +181,9 @@ export default {
   width: 100%;
   z-index: 1;
 }
-
+.footer{
+  background-color: $color-fake-white;
+}
 .signup{
   padding-top: 5.5rem;
   background-color: $color-fake-white;

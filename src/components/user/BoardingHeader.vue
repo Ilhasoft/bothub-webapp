@@ -29,13 +29,16 @@ export default {
 .boarding{
 
   &__header{
-    box-shadow: inset 1px -3px 6px#0000001e;
+    box-shadow: 0px 3px 6px#00000029;
     height: 5.5rem;
     width: 100%;
     background-color: $color-white;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
 
     &__image{
       width: 12rem;
