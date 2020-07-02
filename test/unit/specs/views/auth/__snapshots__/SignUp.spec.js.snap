@@ -2,7 +2,7 @@
 
 exports[`LoginForm.vue renders correctly 1`] = `
 <div>
-  <boarding-header-stub class="header"></boarding-header-stub>
+  <boarding-header-stub></boarding-header-stub>
   <div class="signup">
     <div class="signup__content">
       <div class="signup__content__field">
