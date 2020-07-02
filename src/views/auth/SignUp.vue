@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <boarding-header class="header"/>
+  <boarding-layout>
     <div class="signup">
       <div class="signup__content">
         <div class="signup__content__field">
@@ -12,7 +11,6 @@
               @click="goToLoginPage">
               {{ $t('webapp.register_form.signin') }}</b-button>
           </div>
-
           <div class="signup__content__field__forms">
             <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
             <form @submit.prevent="onSubmit">
@@ -53,19 +51,19 @@
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 
 const components = {
   FormGenerator,
   Loading,
-  BoardingHeader,
+  BoardingLayout,
 };
 export default {
   name: 'SignUp',
@@ -182,7 +180,6 @@ export default {
 }
 
 .signup{
-  padding-top: 5.5rem;
   background-color: $color-fake-white;
 
   &__content{

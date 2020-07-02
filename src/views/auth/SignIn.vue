@@ -1,38 +1,39 @@
 <template>
-  <div class="login">
-    <boarding-header/>
-    <div class="login__content">
-      <div class="login__content__field">
-        <div class="login__content__field__header">
-          <p>{{ $t('webapp.login_form.dont_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="login__content__field__header__createButton"
-            @click="goToCreate">
-            {{ $t('webapp.login_form.get_free') }}
-          </b-button>
-        </div>
+  <boarding-layout>
+    <div class="login">
+      <div class="login__content">
+        <div class="login__content__field">
+          <div class="login__content__field__header">
+            <p>{{ $t('webapp.login_form.dont_have_account') }}</p>
+            <b-button
+              type="is-primary"
+              class="login__content__field__header__createButton"
+              @click="goToCreate">
+              {{ $t('webapp.login_form.get_free') }}
+            </b-button>
+          </div>
 
-        <div class="login__content__field__forms">
-          <h1>{{ $t('webapp.login_form.login') }}</h1>
-          <login-form
-            @authenticated="onAuthenticated"
-            @forgotPasswordClick="showForgotPasswordTab" />
+          <div class="login__content__field__forms">
+            <h1>{{ $t('webapp.login_form.login') }}</h1>
+            <login-form
+              @authenticated="onAuthenticated"
+              @forgotPasswordClick="showForgotPasswordTab" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'SignIn',
   components: {
-    BoardingHeader,
+    BoardingLayout,
     FormGenerator,
     LoginForm,
   },
