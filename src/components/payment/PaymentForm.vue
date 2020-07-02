@@ -43,9 +43,7 @@ export default {
     };
   },
   methods: {
-    onChange(event) {
-      console.log(event);
-    },
+    onChange() {},
   },
 };
 </script>

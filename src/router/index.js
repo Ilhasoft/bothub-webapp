@@ -180,16 +180,24 @@ export default new Router({
           }] : []),
       ],
     },
-    {
-      path: '/payment-options',
-      name: 'payment-options',
-      component: PaymentOptions,
-    },
-    {
-      path: '/payment-info',
-      name: 'payment-info',
-      component: PaymentInfo,
-    },
+    ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
+      ? [{
+        path: '/payment-options',
+        name: 'payment-options',
+        component: PaymentOptions,
+      },
+      {
+        path: '/payment-info',
+        name: 'payment-info',
+        component: PaymentInfo,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      }] : []),
     {
       path: '*',
       name: '404',
