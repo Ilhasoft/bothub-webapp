@@ -14,17 +14,16 @@
       </div>
     </div>
     <div class="profile__tabs__container">
-      <div class="profile__tabs">
-        <div
-          v-for="tab in tabs"
-          :key="tab"
-          :class="{'profile__tabs__item': true, 'profile__tabs__item__selected': selected==tab}"
-          @click="selected=tab"> {{ tab }} </div>
-      </div>
+      <tab-select
+        :options="tabs"
+        :selected.sync="selected"
+        class="profile__tabs" />
     </div>
     <div class="profile__content">
-      <h1> Personal information </h1>
-      <edit-profile-form />
+      <div class="profile__content">
+        <h1> Personal information </h1>
+        <edit-profile-form />
+      </div>
     </div>
   </layout>
 </template>
@@ -33,6 +32,7 @@
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
 import EditProfileForm from '@/components/user/EditProfileForm';
+import TabSelect from '@/components/shared/TabSelect';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -41,10 +41,11 @@ export default {
     Layout,
     UserAvatar,
     EditProfileForm,
+    TabSelect,
   },
   data() {
     return {
-      selected: 'Profile',
+      selected: 0,
       tabs: ['Profile', 'Intelligences', 'Activities', 'Reports', 'Payments'],
     };
   },
@@ -97,33 +98,10 @@ $shadow-color: #00000029;
         }
 
         &__tabs {
-            display: flex;
-            margin: auto;
-            justify-content: center;
-            max-width: 50rem;
-
-            &__container {
-              background-color: $color-white;
-              width: 100%;
-            }
-
-            > * {
-                margin-right: 2rem;
-            }
-
-            &__item {
-                padding: 0.8rem 2.5rem;
-                background-color: $color-fake-white;
-               box-shadow: 5px 0 5px -5px $shadow-color,
-                          -5px 0 5px -5px $shadow-color,
-                          inset 0 -5px 5px -5px $shadow-color;
-               cursor: pointer;
-
-               &__selected {
-                   background-color: $color-primary;
-                   color: $color-white;
-               }
-            }
+          &__container {
+            background-color: $color-white;
+            width: 100%;
+          }
         }
     }
 </style>

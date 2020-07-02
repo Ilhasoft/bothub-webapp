@@ -3,10 +3,7 @@
     <div class="image-input">
       <div
         :style="image"
-        class="image-input__image__container">
-        <img
-          class="image-input__image">
-      </div>
+        class="image-input__image__container"/>
       <input
         ref="imageInput"
         :hidden="true"

@@ -57,6 +57,7 @@ export default {
     border-color: transparent;
     border-radius: 50%;
     outline: none;
+    display: inline-block;
 
     @each $size in $sizes {
       $size-name: nth($size, 1);
