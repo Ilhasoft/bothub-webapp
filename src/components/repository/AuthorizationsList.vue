@@ -5,7 +5,8 @@
       ref="list"
       :item-component="authorizationItemElem"
       :list="authorizationsList"
-      @edit="onEdit($event)" />
+      @itemSave="onEdit"
+      @itemDeleted="updateAuthorizations"/>
     <p v-if="authorizationsList && authorizationsList.empty">
       {{ $t('webapp.settings.no_users' ) }}
     </p>
