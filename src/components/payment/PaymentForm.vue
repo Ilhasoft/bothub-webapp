@@ -7,9 +7,14 @@
     <card
       :options="{hidePostalCode: true,
                  classes:{base: 'card-number__input',
-                          empty: 'card-number__input__empty'}}"
-      class="card-number card-number__field"
+                          empty: 'card-number__input__empty'}
+      }"
+      :class="{'card-number': true,
+               'card-number__field': true,
+               'card-number--focus': cardIsFocused}"
       stripe="pk_test_XXXXXXXXXXXXXXXXXXXXXXXX"
+      @focus="cardIsFocused = true"
+      @blur="cardIsFocused = false"
       @change="onChange"
     />
     <div
@@ -40,6 +45,7 @@ export default {
   data() {
     return {
       name: null,
+      cardIsFocused: false,
     };
   },
   methods: {
@@ -49,6 +55,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
  /deep/ .card-number {
     box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
     max-width: 100%;
@@ -68,6 +75,10 @@ export default {
     vertical-align: top;
     border: 1px solid transparent;
     font-style: inherit;
+
+    &--focus {
+      box-shadow: 0 0 0 0.125em lighten( $color-primary, 25% );
+    }
 
     &:hover {
         border-color: #b5b5b5 !important;
