@@ -1,6 +1,7 @@
 <template>
   <b-input
     :maxlength="max_length"
+    expanded
     v-model="value"
     type="textarea"
     @input="update()" />

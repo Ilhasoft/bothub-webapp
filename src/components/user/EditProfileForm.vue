@@ -10,7 +10,7 @@
       :initial-data="myProfile"
       class="field" />
     <div class="field">
-      <router-link to="recoverpassword"> 
+      <router-link to="recoverpassword">
         {{ $t('webapp.my_profile.change_password') }}
       </router-link>
       <div class="control has-text-centered">
@@ -56,12 +56,13 @@ export default {
       biography: {
         label: 'Biography',
         read_only: false,
-        style: {},
+        style: { grouped: true },
         type: 'textarea',
       },
       image: {
+        label: 'Avatar',
         read_only: false,
-        style: {},
+        style: { grouped: true },
         type: 'image',
       },
     };

@@ -66,7 +66,7 @@ $shadow-color: #00000029;
             width: 90px;
             height: 90px;
             margin-right: 1.15rem;
-            box-shadow: 0px 3px 6px #00000029;
+            box-shadow: 0px 3px 6px $shadow-color;
             background-color: $color-white;
         }
 

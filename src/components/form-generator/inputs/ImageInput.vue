@@ -1,24 +1,26 @@
 <template>
-  <div class="image-input">
-    <div
-      :style="image"
-      class="image-input__image__container">
-      <img
-        class="image-input__image">
+  <b-field>
+    <div class="image-input">
+      <div
+        :style="image"
+        class="image-input__image__container">
+        <img
+          class="image-input__image">
+      </div>
+      <input
+        ref="imageInput"
+        :hidden="true"
+        type="file"
+        accept="image/*"
+        @change="onChange">
+      <span
+        class="image-input__icon"
+        @click="onFileUpload">
+        <b-icon
+          icon="camera" />
+      </span>
     </div>
-    <input
-      ref="imageInput"
-      :hidden="true"
-      type="file"
-      accept="image/*"
-      @change="onChange">
-    <span
-      class="image-input__icon"
-      @click="onFileUpload">
-      <b-icon
-        icon="camera" />
-    </span>
-  </div>
+  </b-field>
 </template>
 
 <script>
@@ -59,6 +61,7 @@ export default {
         background-color: $color-white;
         height: 8.5rem;
         width: 8.5rem;
+        box-shadow: 0px 3px 6px #00000029;
 
         &__image {
             &__container {
@@ -77,7 +80,7 @@ export default {
             color: $color-white;
             padding: 0.5rem;
             position: relative;
-            bottom: 30%;
+            bottom: 40%;
             left: 75%;
             display: inline-flex;
             align-items: center;

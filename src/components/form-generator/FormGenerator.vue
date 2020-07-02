@@ -1,39 +1,45 @@
 <template>
   <div>
     <messages :msgs="msgs" />
-    <b-field
-      v-for="field in fields"
-      v-show="field.type !== 'hidden'"
-      :key="field.name"
-      :label="field.label"
-      :type="field.errors && 'is-danger'"
-      :message="!showLabels ? field.errors : field.errors || field.helpText"
-      :class="!showLabels ? 'field-content' : ''">
-      <div
-        slot="label"
-        class="field-label">
-        <span v-if="showLabels">
-          {{ field.label }}
-        </span>
-        <help-widget
-          v-if="hasHelpIcon(field)"
-          :article-id="helpArticleId" />
-      </div>
-      <b-field :class="!showLabels ? 'input-content' : ''">
-        <component
-          :v-if="field.inputComponent"
-          :is="field.inputComponent"
-          v-bind="field.inputProps"
-          :label-placeholder="field.label"
-          :show-max-lenght="availableMaxLenght"
-          v-model="formData[field.name]"
-          :initial-data="initialData[field.name]"
-          :label="field.label"
-          :help-text="field.helpText"
-          :compact="!showLabels"
-          @input="update()"/>
+    <component
+      v-for="(group, index) in [ungrouped, grouped]"
+      :is="index === 1 ? 'b-field' : 'div'"
+      :key="index"
+      :grouped="index === 1">
+      <b-field
+        v-for="field in group"
+        v-show="field.type !== 'hidden'"
+        :key="field.name"
+        :label="field.label"
+        :type="field.errors && 'is-danger'"
+        :message="!showLabels ? field.errors : field.errors || field.helpText"
+        :class="!showLabels ? 'field-content' : ''">
+        <div
+          slot="label"
+          class="field-label">
+          <span v-if="showLabels">
+            {{ field.label }}
+          </span>
+          <help-widget
+            v-if="hasHelpIcon(field)"
+            :article-id="helpArticleId" />
+        </div>
+        <b-field :class="!showLabels ? 'input-content' : ''">
+          <component
+            :v-if="field.inputComponent"
+            :is="field.inputComponent"
+            v-bind="field.inputProps"
+            :label-placeholder="field.label"
+            :show-max-lenght="availableMaxLenght"
+            v-model="formData[field.name]"
+            :initial-data="initialData[field.name]"
+            :label="field.label"
+            :help-text="field.helpText"
+            :compact="!showLabels"
+            @input="update()"/>
+        </b-field>
       </b-field>
-    </b-field>
+    </component>
   </div>
 </template>
 
@@ -117,6 +123,7 @@ export default {
 
           const shouldHide = style && typeof style.show === 'boolean' && !style.show;
           const shouldShowSettings = this.settings && style && typeof style.only_settings === 'boolean' && style.only_settings;
+          const grouped = style && typeof style.grouped === 'boolean' && style.grouped;
 
           if (!shouldShowSettings && shouldHide) return false;
 
@@ -127,10 +134,17 @@ export default {
             helpText,
             inputProps,
             inputComponent: relatedInputComponent[type],
+            grouped,
             errors: this.errors[name],
           };
         })
         .filter(field => !!field);
+    },
+    ungrouped() {
+      return this.fields.filter(field => !field.grouped);
+    },
+    grouped() {
+      return this.fields.filter(field => field.grouped);
     },
     msgs() {
       /* istanbul ignore next */
