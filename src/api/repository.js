@@ -1,5 +1,3 @@
-import qs from 'query-string';
-
 import request from './request';
 import utils from './utils';
 
