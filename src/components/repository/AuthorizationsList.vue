@@ -44,14 +44,9 @@ export default {
   methods: {
     ...mapActions(['repositoryAuthorizationList']),
     async updateAuthorizations() {
-      if (this.authorizationsList) {
-        this.authorizationsList.reset();
-        await this.authorizationsList.next();
-      } else {
-        this.authorizationsList = await this.repositoryAuthorizationList({
-          repositoryUuid: this.repositoryUuid,
-        });
-      }
+      this.authorizationsList = await this.repositoryAuthorizationList({
+        repositoryUuid: this.repositoryUuid,
+      });
     },
     onEdit(value) {
       this.$emit('edit', value);
