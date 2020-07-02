@@ -1,19 +1,20 @@
 <template>
-  <div class="recover-password">
-    <boarding-header/>
-    <div class="recover-password__content">
-      <div class="recover-password__content__field">
-        <div class="recover-password__content__field__forms">
-          <h1>{{ $t('webapp.recover_form.recover') }}</h1>
-          <forgot-password-form />
+  <boarding-layout>
+    <div class="recover-password">
+      <div class="recover-password__content">
+        <div class="recover-password__content__field">
+          <div class="recover-password__content__field__forms">
+            <h1>{{ $t('webapp.recover_form.recover') }}</h1>
+            <forgot-password-form />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
 import LoginForm from '@/components/auth/LoginForm';
@@ -21,7 +22,7 @@ import LoginForm from '@/components/auth/LoginForm';
 export default {
   name: 'SignIn',
   components: {
-    BoardingHeader,
+    BoardingLayout,
     FormGenerator,
     LoginForm,
     ForgotPasswordForm,
@@ -49,8 +50,6 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 5.5rem);
-  background-color: $color-fake-white;
-
 
     &__field{
       width: 36rem;
