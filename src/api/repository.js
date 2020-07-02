@@ -1,5 +1,3 @@
-import qs from 'query-string';
-
 import request from './request';
 import utils from './utils';
 
@@ -154,7 +152,7 @@ export default {
     );
   },
   getAuthorizationList(repositoryUuid, limit) {
-    return new utils.Page('/v2/repository/authorization-requests/', limit, { repository_uuid: repositoryUuid });
+    return new utils.Page('/v2/repository/authorizations/', limit, { repository_uuid: repositoryUuid });
   },
   async getRequestAuthorizationSchema() {
     const { data } = await request.$http.options('/v2/repository/authorization-requests/');
@@ -174,11 +172,8 @@ export default {
       repository: repositoryUuid,
     });
   },
-  getAuthorizationRequestsList(repositoryUuid) {
-    const queryString = qs.stringify({
-      repository_uuid: repositoryUuid,
-    });
-    return new utils.List(`/v2/repository/authorization-requests/?${queryString}`);
+  getAuthorizationRequestsList(repositoryUuid, limit = 20) {
+    return new utils.Page('/v2/repository/authorization-requests/', limit, { repository_uuid: repositoryUuid });
   },
   approveRequestAuthorization(repositoryUuid, id) {
     return request.$http.put(`/v2/repository/authorization-requests/${id}/`, {
