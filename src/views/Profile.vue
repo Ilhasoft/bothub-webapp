@@ -9,7 +9,7 @@
         <div class="profile__header__info">
           <h1> {{ myProfile.name }} </h1>
           <h3 v-if="myProfile.locale"> {{ myProfile.locale }} </h3>
-          <div class="profile__plan"> FREE USER </div>
+          <span class="profile__plan"> FREE USER </span>
         </div>
       </div>
     </div>
@@ -71,11 +71,13 @@ $shadow-color: #00000029;
         }
 
         &__plan {
-            background-color: $color-primary;
+            background-color: $color-primary-dark;
             color: $color-white;
             text-align: center;
             border-radius: 12px;
-            padding: 0.3rem 0;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: bold;
         }
 
         &__content {

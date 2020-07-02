@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <loading v-if="!formSchema" />
+    <b-loading :active="submitting" />
     <form-generator
       v-if="formSchema && myProfile"
       :schema="formSchema"
@@ -9,7 +10,9 @@
       :initial-data="myProfile"
       class="field" />
     <div class="field">
-      <router-link to="recoverpassword"> {{ $t('webapp.my_profile.change_password') }} </router-link>
+      <router-link to="recoverpassword"> 
+        {{ $t('webapp.my_profile.change_password') }}
+      </router-link>
       <div class="control has-text-centered">
         <button
           :disabled="submitting"
@@ -49,13 +52,20 @@ export default {
   },
   async mounted() {
     const formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    const imageSchema = {
-      label: 'Image',
-      read_only: false,
-      style: {},
-      type: 'image',
+    const additionalSchema = {
+      biography: {
+        label: 'Biography',
+        read_only: false,
+        style: {},
+        type: 'textarea',
+      },
+      image: {
+        read_only: false,
+        style: {},
+        type: 'image',
+      },
     };
-    this.formSchema = { ...formSchema, imageSchema };
+    this.formSchema = { ...formSchema, ...additionalSchema };
   },
   methods: {
     ...mapActions([
