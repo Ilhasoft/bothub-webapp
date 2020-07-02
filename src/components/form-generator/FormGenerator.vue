@@ -46,6 +46,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import ImageInput from './inputs/ImageInput';
 import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
@@ -60,6 +61,7 @@ const relatedInputComponent = {
   password: PasswordInput,
   hidden: StringInput,
   textarea: TextInput,
+  image: ImageInput,
 };
 
 const components = {

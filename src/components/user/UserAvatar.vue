@@ -1,15 +1,25 @@
 <template>
-  <bh-avatar
-    :size="size">
-    <img
-      v-if="profile.nickname"
-      :class="size"
-      :src="`https://robohash.org/${profile.nickname}`">
-    <bh-icon
-      v-else
-      size="small"
-      value="account" />
-  </bh-avatar>
+  <div
+    :class="{
+      'avatar': true,
+      [`avatar--${size}`]: !!size,
+      'avatar--clickable': clickable,
+    }"
+    @click="$emit('click', $event)"
+  >
+    <div
+      :class="{avatar__content: true,
+               [`avatar--${size}`]: !!size}">
+      <img
+        v-if="profile.nickname"
+        :class="size"
+        :src="`https://robohash.org/${profile.nickname}`">
+      <b-icon
+        v-else
+        size="small"
+        icon="account" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +34,54 @@ export default {
       type: String,
       default: 'normal',
     },
+    clickable: {
+      type: Boolean,
+      default: true,
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+
+  .avatar {
+    position: relative;
+    width: $size-normal;
+    height: $size-normal;
+    overflow: hidden;
+    color: $color-fake-black;
+    cursor: pointer;
+    background-color: $color-fake-white;
+    border-color: transparent;
+    border-radius: 50%;
+    outline: none;
+
+    @each $size in $sizes {
+      $size-name: nth($size, 1);
+      $size-value: nth($size, 2);
+
+      &--#{$size-name} {
+        width: $size-value;
+        height: $size-value;
+      }
+
+      &--full {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &--clickable {
+      cursor: pointer;
+    }
+
+    &__content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+</style>

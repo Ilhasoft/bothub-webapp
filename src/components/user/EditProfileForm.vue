@@ -9,6 +9,7 @@
       :initial-data="myProfile"
       class="field" />
     <div class="field">
+      <router-link to="recoverpassword"> {{ $t('webapp.my_profile.change_password') }} </router-link>
       <div class="control has-text-centered">
         <button
           :disabled="submitting"
@@ -47,7 +48,14 @@ export default {
     ]),
   },
   async mounted() {
-    this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
+    const formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
+    const imageSchema = {
+      label: 'Image',
+      read_only: false,
+      style: {},
+      type: 'image',
+    };
+    this.formSchema = { ...formSchema, imageSchema };
   },
   methods: {
     ...mapActions([

@@ -4,25 +4,27 @@
       <div class="profile__header__content">
         <user-avatar
           :profile="myProfile"
-          size="large"
+          size="full"
           class="profile__avatar" />
         <div class="profile__header__info">
-          <h1> Name </h1>
-          <h2> Location </h2>
+          <h1> {{ myProfile.name }} </h1>
+          <h3 v-if="myProfile.locale"> {{ myProfile.locale }} </h3>
           <div class="profile__plan"> FREE USER </div>
         </div>
       </div>
     </div>
-    <div class="profile__tabs">
-      <div
-        v-for="tab in tabs"
-        :key="tab"
-        :class="{'profile__tabs__item': true, 'profile__tabs__item__selected': selected==tab}"
-        @click="selected=tab"> {{ tab }} </div>
+    <div class="profile__tabs__container">
+      <div class="profile__tabs">
+        <div
+          v-for="tab in tabs"
+          :key="tab"
+          :class="{'profile__tabs__item': true, 'profile__tabs__item__selected': selected==tab}"
+          @click="selected=tab"> {{ tab }} </div>
+      </div>
     </div>
     <div class="profile__content">
       <h1> Personal information </h1>
-      <edit-profile />
+      <edit-profile-form />
     </div>
   </layout>
 </template>
@@ -30,7 +32,7 @@
 <script>
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
-import EditProfile from '@/components/profile/EditProfile';
+import EditProfileForm from '@/components/user/EditProfileForm';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -38,7 +40,7 @@ export default {
   components: {
     Layout,
     UserAvatar,
-    EditProfile,
+    EditProfileForm,
   },
   data() {
     return {
@@ -64,6 +66,8 @@ $shadow-color: #00000029;
             width: 90px;
             height: 90px;
             margin-right: 1.15rem;
+            box-shadow: 0px 3px 6px #00000029;
+            background-color: $color-white;
         }
 
         &__plan {
@@ -76,10 +80,12 @@ $shadow-color: #00000029;
 
         &__content {
             max-width: 40rem;
+            margin: 4.5rem 1rem auto 5rem;
         }
 
         &__header {
             background-color: $color-white;
+            width: 100%;
             padding: 4rem 0;
             &__content {
                 display: flex;
@@ -90,10 +96,15 @@ $shadow-color: #00000029;
 
         &__tabs {
             display: flex;
-            background-color: $color-white;
-            padding: 0 2rem;
+            margin: auto;
             justify-content: center;
-            width: 100%;
+            max-width: 50rem;
+
+            &__container {
+              background-color: $color-white;
+              width: 100%;
+            }
+
             > * {
                 margin-right: 2rem;
             }
@@ -101,8 +112,9 @@ $shadow-color: #00000029;
             &__item {
                 padding: 0.8rem 2.5rem;
                 background-color: $color-fake-white;
-            //    box-shadow: 0px 3px 6px $shadow-color;
-               box-shadow: 5px 0 5px -5px $shadow-color, -5px 0 5px -5px $shadow-color, inset 0 -5px 5px -5px $shadow-color;
+               box-shadow: 5px 0 5px -5px $shadow-color,
+                          -5px 0 5px -5px $shadow-color,
+                          inset 0 -5px 5px -5px $shadow-color;
                cursor: pointer;
 
                &__selected {
