@@ -20,7 +20,7 @@
           :disabled="submitting"
           type="submit"
           class="button is-primary"
-        >{{ $t('webapp.landing_page.reset_password') }}</button>
+        >{{ $t('webapp.recover_form.save_password') }}</button>
       </div>
     </div>
   </form>
@@ -119,6 +119,13 @@ export default {
         });
         this.success_msgs = [this.$t('webapp.recover_form.changed_password')];
         this.$emit('reseted');
+
+        setTimeout(() => {
+          this.$router.push({
+            name: 'signIn',
+          });
+        }, 4000);
+
         return true;
       } catch (error) {
         const data = error.response && error.response.data;

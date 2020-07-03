@@ -23,8 +23,7 @@
                 @roleSetted="onRoleSetted()" />
               <authorizations-list
                 ref="authorizationsList"
-                :repository-uuid="repository.uuid"
-                @edit="onEditRole($event)" />
+                :repository-uuid="repository.uuid" />
             </div>
             <div class="settings__section">
               <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
@@ -57,7 +56,6 @@
 <script>
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
@@ -71,7 +69,6 @@ export default {
   name: 'RepositorySettings',
   components: {
     RepositoryViewBase,
-    EditProfileForm,
     EditRepositoryForm,
     SetAuthorizationRoleForm,
     AuthorizationsList,
@@ -92,6 +89,7 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       } = this.repository;
       return {
         name,
@@ -106,6 +104,7 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       };
     },
     onEdited(repository) {

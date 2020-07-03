@@ -1,38 +1,39 @@
 <template>
-  <div class="login">
-    <boarding-header/>
-    <div class="login__content">
-      <div class="login__content__field">
-        <div class="login__content__field__header">
-          <p>{{ $t('webapp.login_form.dont_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="login__content__field__header__createButton"
-            @click="goToCreate">
-            {{ $t('webapp.login_form.get_free') }}
-          </b-button>
-        </div>
+  <boarding-layout>
+    <div class="login">
+      <div class="login__content">
+        <div class="login__content__field">
+          <div class="login__content__field__header">
+            <p>{{ $t('webapp.login_form.dont_have_account') }}</p>
+            <b-button
+              type="is-primary"
+              class="login__content__field__header__createButton"
+              @click="goToCreate">
+              {{ $t('webapp.login_form.get_free') }}
+            </b-button>
+          </div>
 
-        <div class="login__content__field__forms">
-          <h1>{{ $t('webapp.login_form.login') }}</h1>
-          <login-form
-            @authenticated="onAuthenticated"
-            @forgotPasswordClick="showForgotPasswordTab" />
+          <div class="login__content__field__forms">
+            <h1>{{ $t('webapp.login_form.login') }}</h1>
+            <login-form
+              @authenticated="onAuthenticated"
+              @forgotPasswordClick="showForgotPasswordTab" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'SignIn',
   components: {
-    BoardingHeader,
+    BoardingLayout,
     FormGenerator,
     LoginForm,
   },
@@ -71,7 +72,6 @@ export default {
   min-height: calc(100vh - 5.5rem);
   background-color: $color-fake-white;
 
-
     &__field{
       width: 36rem;
       height: 25.25rem;
@@ -79,13 +79,14 @@ export default {
       &__header{
         display:flex;
         justify-content: flex-end;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
 
         p{
           font-family: $font-family;
           font-size: 1rem;
           color:$color-fake-black;
           margin-right: 1rem;
+          margin-top:1rem;
         }
         &__createButton{
           width: 6.875rem;

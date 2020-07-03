@@ -1,46 +1,33 @@
 <template>
-  <div class="recover-password">
-    <boarding-header/>
-    <div class="recover-password__content">
-      <div class="recover-password__content__field">
-        <div class="recover-password__content__field__header">
-          <p>{{ $t('webapp.register_form.already_have_account') }}</p>
-          <b-button
-            type="is-primary"
-            class="recover-password__content__field__header__createButton"
-            @click="goToLoginPage">
-            {{ $t('webapp.register_form.signin') }}</b-button>
-        </div>
-        <div class="recover-password__content__field__forms">
-          <h1>{{ $t('webapp.recover_form.recover') }}</h1>
-          <reset-password-form
-            :nickname="$route.params.nickname"
-            :token="$route.params.token" />
+  <boarding-layout>
+    <div class="recover-password">
+      <boarding-header/>
+      <div class="recover-password__content">
+        <div class="recover-password__content__field">
+          <div class="recover-password__content__field__forms">
+            <h1>{{ $t('webapp.recover_form.recover') }}</h1>
+            <reset-password-form
+              :nickname="$route.params.nickname"
+              :token="$route.params.token" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </boarding-layout>
 </template>
 
 <script>
 import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
-import BoardingHeader from '@/components/user/BoardingHeader';
+import BoardingLayout from '@/components/user/BoardingLayout';
 
 const components = {
   ResetPasswordForm,
-  BoardingHeader,
+  BoardingLayout,
 };
 
 export default {
   name: 'ResetPassword',
   components,
-  methods: {
-    goToLoginPage() {
-      this.$router.push({
-        name: 'signIn',
-      });
-    },
-  },
 };
 </script>
 
@@ -66,13 +53,14 @@ export default {
       &__header{
         display:flex;
         justify-content: flex-end;
-        margin-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
 
         p{
           font-family: $font-family;
           font-size: 1rem;
           color:$color-fake-black;
           margin-right: 1rem;
+          margin-top:1rem;
         }
 
         &__createButton{

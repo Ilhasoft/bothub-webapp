@@ -153,7 +153,7 @@ export default {
           newRole: this.newRole,
         });
         this.submitted = true;
-        this.$emit('roleChanged');
+        this.$emit('updateList');
       } catch (error) {
         this.handlerError(error);
       }

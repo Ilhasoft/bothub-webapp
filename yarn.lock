@@ -10166,6 +10166,13 @@ vue-router@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
 
+vue-stripe-elements-plus@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/vue-stripe-elements-plus/-/vue-stripe-elements-plus-0.3.2.tgz#9b3835e1c61048a1405798ded66abe09f9d38084"
+  integrity sha512-Cuo+guUye1bHrwgQyU4Yb9mIEH+IKiz/QKNW7I70z1BWSIU0OjCgDHWcdBUDIgzLGip4/8FQqSa8IICKT+Lzmg==
+  dependencies:
+    lodash "^4.17.11"
+
 vue-style-loader@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-3.1.2.tgz#6b66ad34998fc9520c2f1e4d5fa4091641c1597a"

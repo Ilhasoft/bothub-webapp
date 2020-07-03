@@ -32,7 +32,8 @@
       "recover": "Recuperar senha",
       "cancel_button": "Cancelar",
       "confirm_password": "Confirme a senha",
-      "changed_password": "Senha alterada"
+      "changed_password": "Senha alterada",
+      "save_password": "Salvar senha"
     },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
@@ -76,7 +77,7 @@
       "all_bots": "Todas inteligências",
       "signup_grid": "Encante seu público com chatbots inteligentes e assertivos",
       "signup_forfree": "Comece agora",
-      "reset_password": "Resetar senha",
+      "reset_password": "Enviar e-mail",
       "reset_password_success": "Cheque seu email, nós te enviamos instruções de como resetar sua senha.",
       "forgot_password": "Esqueceu a senha?",
       "register": "Registrar",
@@ -246,6 +247,7 @@
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
       "trained": "Treinado",
+      "processing": "Processando",
       "no_changes": "Sem alterações",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
@@ -306,7 +308,14 @@
       "train_fail": "Treinamento falhou às {failed}",
       "training": "Treinando...",
       "not_trained": "Não há treinamento ainda.",
-      "training_log": "Log de Treinamento"
+      "training_log": "Log de Treinamento",
+      "personal_info": "Informações Pessoais",
+      "free_user": "USUÁRIO GRÁTIS",
+      "profile": "Perfil",
+      "intelligences": "Inteligências",
+      "activities": "Atividades",
+      "reports": "Relatórios",
+      "payments": "Pagamentos"
     },
     "tutorial": {
       "create_your_first_bot": "Crie sua primeira inteligência!",
@@ -409,6 +418,30 @@
       "no_sentences": "Nenhuma senteça.",
       "error_entity": "Aconteceu um erro.",
       "error_entity_exists": "Entidade já existe"
+    },
+    "payment": {
+      "options": {
+        "title": "Planos do Bothub",
+        "slogan": "Bothub hospeda inteligências que funcionam para você",
+        "free": "Grátis",
+        "professional": "Profissional",
+        "custom": "Plano customizado",
+        "contact_us": "Entre em contato",
+        "contact": "Fale conosco",
+        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
+        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
+        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Informações de pagamento",
+        "subtitle": "Insira as informações do seu cartão de crédito ou débito",
+        "back": "Voltar",
+        "save": "Salvar",
+        "card_name": "Nome do cartão"
+      }
     }
   }
 }

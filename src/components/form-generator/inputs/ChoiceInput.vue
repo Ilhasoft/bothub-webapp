@@ -5,6 +5,7 @@
     :placeholder="labelPlaceholder"
     :custom-formatter="formatter"
     :data="filteredChoices"
+    dropdown-position="bottom"
     expanded
     open-on-focus
     @input="updateInput"

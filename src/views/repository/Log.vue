@@ -44,13 +44,15 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              :placeholder="$t('webapp.inbox.your_version')"/>
+              :placeholder="$t('webapp.inbox.your_version')"
+              dropdown-position="bottom"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              :placeholder="$t('webapp.inbox.your_intent')"/>
+              :placeholder="$t('webapp.inbox.your_intent')"
+              dropdown-position="bottom"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">

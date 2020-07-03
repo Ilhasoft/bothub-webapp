@@ -99,7 +99,7 @@
       </div>
     </div>
     <div class="layout__content"><slot /></div>
-    <site-footer />
+    <site-footer v-if="showFooter"  />
     <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
@@ -132,6 +132,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    showFooter: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
