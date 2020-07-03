@@ -7,5 +7,6 @@ exports[`Translate.vue renders correctly 1`] = `
     <p>some specific text</p>
   </div>
   <!---->
+  <tour-stub name="translate" stepcount="7"></tour-stub>
 </repository-view-base-stub>
 `;
