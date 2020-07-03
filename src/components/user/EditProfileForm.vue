@@ -13,10 +13,11 @@
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
       <div class="control has-text-centered">
-        <button
+        <b-button
           :disabled="submitting"
-          type="submit"
-          class="button is-primary">{{ $t('webapp.my_profile.edit') }}</button>
+          native-type="submit"
+          type="is-primary"
+          class="submit-button">{{ $t('webapp.my_profile.edit') }}</b-button>
       </div>
     </div>
     <b-modal
@@ -120,5 +121,10 @@ export default {
     background-color: white;
     padding: 3rem;
     border-radius: 8px;
+  }
+
+  .submit-button {
+    margin-top: 3.1rem;
+    padding: 0 3rem
   }
 </style>

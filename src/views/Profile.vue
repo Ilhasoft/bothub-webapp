@@ -19,8 +19,10 @@
         :selected.sync="selected"
         class="profile__tabs" />
     </div>
-    <div class="profile__content">
-      <div class="profile__content">
+    <div
+      v-show="selected==0"
+      class="profile__content">
+      <div>
         <h1> Personal information </h1>
         <edit-profile-form />
       </div>
