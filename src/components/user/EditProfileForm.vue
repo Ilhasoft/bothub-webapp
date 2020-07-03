@@ -10,9 +10,8 @@
       :initial-data="myProfile"
       class="field" />
     <div class="field">
-      <router-link to="recoverpassword">
-        {{ $t('webapp.my_profile.change_password') }}
-      </router-link>
+      <a @click="openChangePasswordModal()">
+        {{ $t('webapp.my_profile.change_password') }} </a>
       <div class="control has-text-centered">
         <button
           :disabled="submitting"
@@ -20,6 +19,14 @@
           class="button is-primary">{{ $t('webapp.my_profile.edit') }}</button>
       </div>
     </div>
+    <b-modal
+      :width="489"
+      :active.sync="changePasswordModalOpen">
+      <div class="change-password">
+        <h1>{{ $t('webapp.my_profile.modal_change_password') }}</h1>
+        <change-password-form @changed="onPasswordChanged()" />
+      </div>
+    </b-modal>
   </form>
 </template>
 
@@ -27,11 +34,12 @@
 import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-
+import ChangePasswordForm from '@/components/user/ChangePasswordForm';
 
 const components = {
   FormGenerator,
   Loading,
+  ChangePasswordForm,
 };
 
 export default {
@@ -43,6 +51,7 @@ export default {
       data: {},
       submitting: false,
       errors: {},
+      changePasswordModalOpen: false,
     };
   },
   computed: {
@@ -92,6 +101,24 @@ export default {
       this.submitting = false;
       return false;
     },
+    openChangePasswordModal() {
+      this.changePasswordModalOpen = true;
+    },
+    onPasswordChanged() {
+      this.$bhToastNotification({
+        message: 'Password changed!',
+        type: 'success',
+      });
+      this.changePasswordModalOpen = false;
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .change-password {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 8px;
+  }
+</style>
