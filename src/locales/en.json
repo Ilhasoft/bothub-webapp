@@ -464,6 +464,7 @@
       "integration": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
+    },
     "payment": {
       "options": {
         "title": "Bothub Pricing",
@@ -489,4 +490,5 @@
       }
     }
   }
+}
 }

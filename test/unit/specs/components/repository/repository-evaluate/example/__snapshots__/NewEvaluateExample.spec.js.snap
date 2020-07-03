@@ -17,7 +17,7 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
         </div>
         <div>
           <b-field-stub addons="true" id="tour-test-step-3" is-step-blocked="true">
-            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
+            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
           </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
