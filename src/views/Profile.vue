@@ -7,8 +7,10 @@
           size="full"
           class="profile__avatar" />
         <div class="profile__header__info">
-          <h1> {{ myProfile.name }} </h1>
-          <h3 v-if="myProfile.locale"> {{ myProfile.locale }} </h3>
+          <h1 class="profile__header__title"> {{ myProfile.name }} </h1>
+          <p
+            v-if="myProfile.locale"
+            class="profile__header__subtitle"> {{ myProfile.locale }} </p>
           <span class="profile__plan"> FREE USER </span>
         </div>
       </div>
@@ -19,12 +21,13 @@
         :selected.sync="selected"
         class="profile__tabs" />
     </div>
-    <div
-      v-show="selected==0"
-      class="profile__content">
-      <div>
-        <h1> Personal information </h1>
-        <edit-profile-form />
+    <div class="profile__content">
+      <div
+        v-show="selected==0">
+        <h1 class="profile__title"> Personal information </h1>
+        <div class="profile__edit__content">
+          <edit-profile-form class="profile__edit" />
+        </div>
       </div>
     </div>
   </layout>
@@ -83,10 +86,14 @@ $shadow-color: #00000029;
             font-weight: bold;
         }
 
-        &__content {
-            max-width: 40rem;
+        &__title {
+            max-width: 58.25rem;
             padding: 0 1rem;
-            margin: 4.5rem auto auto auto;
+            margin: 0 auto;
+        }
+
+        &__content {
+          margin-top: 3.875rem;
         }
 
         &__header {
@@ -98,12 +105,30 @@ $shadow-color: #00000029;
                 justify-content: center;
                 margin: 1rem;
             }
+            &__title {
+              font-size: 1.5rem;
+              margin-bottom: 0.625;
+            }
+            &__subtitle {
+              font-size: 1.125rem;
+              margin-bottom: 1rem;
+            }
         }
 
         &__tabs {
           &__container {
             background-color: $color-white;
             width: 100%;
+          }
+        }
+
+        &__edit {
+          max-width: 40rem;
+          margin-top: 1.563rem;
+          &__content {
+            max-width: 58.25rem;
+            padding: 0 1rem;
+            margin: 0 auto;
           }
         }
     }
