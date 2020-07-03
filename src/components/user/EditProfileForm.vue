@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'updateMyProfile',
       'getMyProfileSchema',
       'patchMyProfile',
     ]),
@@ -79,6 +80,7 @@ export default {
       try {
         await this.patchMyProfile(this.data);
         this.$emit('edited');
+        this.updateMyProfile();
         this.submitting = false;
         return true;
       } catch (error) {

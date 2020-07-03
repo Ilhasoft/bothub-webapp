@@ -5,7 +5,8 @@
       v-for="(group, index) in [ungrouped, grouped]"
       :is="index === 1 ? 'b-field' : 'div'"
       :key="index"
-      :grouped="index === 1">
+      :grouped="index === 1"
+      :group-multiline="index === 1">
       <b-field
         v-for="field in group"
         v-show="field.type !== 'hidden'"

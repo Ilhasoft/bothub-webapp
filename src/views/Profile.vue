@@ -83,7 +83,8 @@ $shadow-color: #00000029;
 
         &__content {
             max-width: 40rem;
-            margin: 4.5rem 1rem auto 5rem;
+            padding: 0 1rem;
+            margin: 4.5rem auto auto auto;
         }
 
         &__header {
