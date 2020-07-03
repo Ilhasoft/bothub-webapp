@@ -104,10 +104,6 @@ export default {
       type: Object,
       required: true,
     },
-    eventStep: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {

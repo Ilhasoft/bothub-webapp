@@ -85,7 +85,6 @@ export default {
   data() {
     return {
       requestAuthorizationModalOpen: false,
-      checkIsQuickTest: 'tutorial-quick-test',
     };
   },
   computed: {
