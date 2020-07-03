@@ -39,6 +39,8 @@
           :list="repositoryList"
           class="profile__repositories__cards" />
 
+        <div class="profile__repositories__separator" />
+
         <h1 class="profile__title"> Contribution intelligences </h1>
         <paginated-list
           v-if="repositoryList"
@@ -46,6 +48,8 @@
           :per-page="repositoriesLimit"
           :list="repositoryList"
           class="profile__repositories__cards" />
+
+        <div class="profile__repositories__separator" />
 
         <h1 class="profile__title"> Use intelligences </h1>
         <paginated-list
@@ -182,6 +186,13 @@ h1 {
         }
 
         &__repositories {
+
+          &__separator {
+            background-color: $color-grey;
+            max-width: 50rem;
+            height: 2px;
+            margin: 0 auto;
+          }
 
           &__cards {
             display: flex;
