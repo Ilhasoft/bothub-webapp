@@ -12,7 +12,8 @@
           </div>
         </div>
       </div>
-  </div></boarding-layout>
+    </div>
+  </boarding-layout>
 </template>
 
 <script>
