@@ -14,11 +14,12 @@
         :label="field.label"
         :type="field.errors && 'is-danger'"
         :message="!showLabels ? field.errors : field.errors || field.helpText"
-        :class="!showLabels ? 'field-content' : ''">
+        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
         <div
           slot="label"
-          class="field-label">
-          <span v-if="showLabels">
+          :class="{'field-label': true, [`field-${field.type}__title`]: true}">
+          <span
+            v-if="showLabels">
             {{ field.label }}
           </span>
           <help-widget
@@ -183,5 +184,17 @@ margin-bottom: 0px;
 .field-label {
     display: flex;
     align-items: center;
+}
+
+.field-image {
+  margin-left: 1.563rem;
+  &__title {
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+.field-textarea {
+  min-width: 70%;
 }
 </style>
