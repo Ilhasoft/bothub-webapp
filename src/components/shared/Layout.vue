@@ -99,7 +99,7 @@
       </div>
     </div>
     <div class="layout__content"><slot /></div>
-    <site-footer v-if="showFooter"  />
+    <site-footer v-if="showFooter" />
     <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
