@@ -55,7 +55,6 @@ export default {
     height: $size-normal;
     overflow: hidden;
     color: $color-fake-black;
-    cursor: pointer;
     background-color: $color-fake-white;
     border-color: transparent;
     border-radius: 50%;

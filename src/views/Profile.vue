@@ -4,6 +4,7 @@
       <div class="profile__header__content">
         <user-avatar
           :profile="myProfile"
+          :clickable="false"
           size="full"
           class="profile__avatar" />
         <div class="profile__header__info">
