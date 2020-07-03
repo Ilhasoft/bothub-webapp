@@ -36,6 +36,7 @@
     "vue-mc-drf-model": "https://github.com/Ilhasoft/vue-mc-drf-model",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
+    "vue-stripe-elements-plus": "^0.3.2",
     "vuedraggable": "^2.23.2",
     "vuex": "^3.0.1"
   },

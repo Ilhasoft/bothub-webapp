@@ -24,6 +24,8 @@ import Entity from '@/views/repository/Entity';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
+import PaymentOptions from '@/views/payment/PaymentOptions';
+import PaymentInfo from '@/views/payment/PaymentInfo';
 import store from '../store';
 
 Vue.use(Router);
@@ -178,6 +180,24 @@ export default new Router({
           }] : []),
       ],
     },
+    ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
+      ? [{
+        path: '/payment-options',
+        name: 'payment-options',
+        component: PaymentOptions,
+      },
+      {
+        path: '/payment-info',
+        name: 'payment-info',
+        component: PaymentInfo,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      }] : []),
     {
       path: '*',
       name: '404',
