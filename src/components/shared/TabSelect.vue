@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/colors.scss';
 
 $shadow-color: #00000029;
@@ -49,11 +50,22 @@ $shadow-color: #00000029;
     justify-content: center;
 
     > * {
-        margin-right: 2rem;
+        margin-right: 1.313rem;
+
+        @media screen and (max-width: $mobile-width) {
+          margin-right: 0.4rem;
+        }
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
 
     &__item {
         padding: 0.8rem 2.5rem;
+        @media screen and (max-width: $mobile-width) {
+          padding: 0.8rem 1.2rem;
+        }
         background-color: $color-fake-white;
         box-shadow: 5px 0 5px -5px $shadow-color,
                     -5px 0 5px -5px $shadow-color,

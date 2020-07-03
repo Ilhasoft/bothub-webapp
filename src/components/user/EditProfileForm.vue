@@ -7,9 +7,10 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initial-data="myProfile"
-      class="field" />
-    <div class="field">
+      :initial-data="initialData"
+      :available-max-length="false"
+      class="edit-field" />
+    <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
       <div class="control has-text-centered">
@@ -59,6 +60,15 @@ export default {
     ...mapGetters([
       'myProfile',
     ]),
+    initialData() {
+      const additional = this.myProfile && this.myProfile.nickname
+        ? { image: `https://robohash.org/${this.myProfile.nickname}` }
+        : {};
+      return {
+        ...additional,
+        ...this.myProfile,
+      };
+    },
   },
   async mounted() {
     const formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
@@ -117,6 +127,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .edit-field {
+    margin-bottom: 2.313rem;
+  }
+
   .change-password {
     background-color: white;
     padding: 3rem;

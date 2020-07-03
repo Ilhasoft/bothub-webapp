@@ -3,5 +3,7 @@
 exports[`FormGenerator.vue renders correctly 1`] = `
 <div>
   <messages-stub msgs=""></messages-stub>
+  <div></div>
+  <b-field-stub grouped="true" groupmultiline="true" addons="true"></b-field-stub>
 </div>
 `;

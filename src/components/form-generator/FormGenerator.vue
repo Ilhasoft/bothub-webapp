@@ -14,11 +14,12 @@
         :label="field.label"
         :type="field.errors && 'is-danger'"
         :message="!showLabels ? field.errors : field.errors || field.helpText"
-        :class="!showLabels ? 'field-content' : ''">
+        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
         <div
           slot="label"
-          class="field-label">
-          <span v-if="showLabels">
+          :class="{'field-label': true, [`field-${field.type}__title`]: true}">
+          <span
+            v-if="showLabels">
             {{ field.label }}
           </span>
           <help-widget
@@ -31,7 +32,7 @@
             :is="field.inputComponent"
             v-bind="field.inputProps"
             :label-placeholder="field.label"
-            :show-max-lenght="availableMaxLenght"
+            :show-max-length="availableMaxLength"
             v-model="formData[field.name]"
             :initial-data="initialData[field.name]"
             :label="field.label"
@@ -84,7 +85,7 @@ export default {
       required: true,
       type: Object,
     },
-    availableMaxLenght: {
+    availableMaxLength: {
       type: Boolean,
       default: true,
     },
@@ -183,5 +184,17 @@ margin-bottom: 0px;
 .field-label {
     display: flex;
     align-items: center;
+}
+
+.field-image {
+  margin-left: 1.563rem;
+  &__title {
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+.field-textarea {
+  min-width: 70%;
 }
 </style>

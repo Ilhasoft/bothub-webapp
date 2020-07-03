@@ -1,15 +1,18 @@
 <template>
-  <layout>
+  <layout :show-footer="false">
     <div class="profile__header">
       <div class="profile__header__content">
         <user-avatar
           :profile="myProfile"
+          :clickable="false"
           size="full"
           class="profile__avatar" />
         <div class="profile__header__info">
-          <h1> {{ myProfile.name }} </h1>
-          <h3 v-if="myProfile.locale"> {{ myProfile.locale }} </h3>
-          <span class="profile__plan"> FREE USER </span>
+          <h1 class="profile__header__title"> {{ myProfile.name }} </h1>
+          <p
+            v-if="myProfile.locale"
+            class="profile__header__subtitle"> {{ myProfile.locale }} </p>
+          <span class="profile__plan"> {{ $t('webapp.my_profile.free_user' ) }} </span>
         </div>
       </div>
     </div>
@@ -19,15 +22,16 @@
         :selected.sync="selected"
         class="profile__tabs" />
     </div>
-    <div>
+    <div class="profile__content">
       <div
-        v-show="selected==0"
-        class="profile__content">
-        <h1> Personal information </h1>
-        <edit-profile-form />
+        v-show="selected==0">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.personal_info' ) }} </h1>
+        <div class="profile__edit__content">
+          <edit-profile-form class="profile__edit" />
+        </div>
       </div>
       <div v-show="selected==1">
-        <h1> My Intelligences </h1>
+        <h1 class="profile__title"> My Intelligences </h1>
         <paginated-list
           v-if="repositoryList"
           :item-component="repositoryItemElem"
@@ -35,7 +39,7 @@
           :list="repositoryList"
           class="profile__repositories__cards" />
 
-        <h1> Contribution intelligences </h1>
+        <h1 class="profile__title"> Contribution intelligences </h1>
         <paginated-list
           v-if="repositoryList"
           :item-component="repositoryItemElem"
@@ -43,7 +47,7 @@
           :list="repositoryList"
           class="profile__repositories__cards" />
 
-        <h1> Use intelligences </h1>
+        <h1 class="profile__title"> Use intelligences </h1>
         <paginated-list
           v-if="repositoryList"
           :item-component="repositoryItemElem"
@@ -78,8 +82,13 @@ export default {
       selected: 0,
       repositoryItemElem: RepositoryCard,
       repositoryList: null,
-      tabs: ['Profile', 'Intelligences', 'Activities', 'Reports', 'Payments'],
       repositoriesLimit: 3,
+      tabs: [
+        this.$t('webapp.my_profile.profile'),
+        this.$t('webapp.my_profile.intelligences'),
+        this.$t('webapp.my_profile.activities'),
+        this.$t('webapp.my_profile.reports'),
+        this.$t('webapp.my_profile.payments')],
     };
   },
   computed: {
@@ -134,10 +143,14 @@ h1 {
             font-weight: bold;
         }
 
-        &__content {
-            max-width: 40rem;
+        &__title {
+            max-width: 56.25rem;
             padding: 0 1rem;
-            margin: 4.5rem auto auto auto;
+            margin: 0 auto;
+        }
+
+        &__content {
+          padding: 3.875rem 0 6.563rem 0;
         }
 
         &__header {
@@ -148,6 +161,14 @@ h1 {
                 display: flex;
                 justify-content: center;
                 margin: 1rem;
+            }
+            &__title {
+              font-size: 1.5rem;
+              margin-bottom: 0.625;
+            }
+            &__subtitle {
+              font-size: 1.125rem;
+              margin-bottom: 1rem;
             }
         }
 
@@ -167,6 +188,15 @@ h1 {
             min-height: 31.25rem;
             padding: 1rem;
             margin: auto;
+          }
+        }
+        &__edit {
+          max-width: 40rem;
+          margin-top: 1.563rem;
+          &__content {
+            max-width: 56.25rem;
+            padding: 0 1rem;
+            margin: 0 auto;
           }
         }
     }
