@@ -8,7 +8,7 @@ export default {
   async finishTutorial({ commit }, name) {
     commit('updateActiveTutorial', null);
     const finishedString = localStorage.getItem('finishedTutorials') || '{}';
-    console.log(finishedString);
+    // console.log(finishedString);
     const finished = JSON.parse(finishedString);
     finished[name] = 'finished';
     localStorage.setItem('finishedTutorials', JSON.stringify(finished));

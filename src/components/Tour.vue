@@ -29,27 +29,32 @@
                 <button
                   class="v-step__button v-step__button-next"
                   @click="nextStep()">{{ options.labels.buttonNext }} </button>
-                <button
+                <!-- <button
                   class="v-step__button v-step__button-skip"
-                  @click="tour.skip">{{ options.labels.buttonSkip }}</button>
+                  @click="tour.skip">{{ options.labels.buttonSkip }}</button> -->
                 <button
                   v-if="isLast"
                   class="v-step__button v-step__button-stop"
-                  @click="tour.skip">{{ options.labels.buttonStop }}</button>
+                  @click="onFinishTutorial()">{{ options.labels.buttonStop }}</button>
               </div>
             </template>
           </v-step>
         </transition>
       </div>
+      <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
     </template>
   </v-tour>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'Tour',
+  components: {
+    TutorialModal,
+  },
   props: {
     name: {
       type: String,
@@ -59,12 +64,20 @@ export default {
       type: Number,
       default: 0,
     },
+    nextEvent: {
+      type: Boolean,
+      default: false,
+    },
+    finishEvent: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       options: {
         labels: {
-          buttonSkip: this.$t('webapp.tutorial.skip'),
+          // buttonSkip: this.$t('webapp.tutorial.skip'),
           buttonPrevious: this.$t('webapp.tutorial.previous'),
           buttonNext: this.$t('webapp.tutorial.next'),
           buttonStop: this.$t('webapp.tutorial.finish'),
@@ -74,6 +87,7 @@ export default {
       callbacks: {
         onFinish: this.onFinishTutorial,
       },
+      beginnerTutorialModalOpen: false,
     };
   },
   computed: {
@@ -96,10 +110,19 @@ export default {
           content: this.$t(`webapp.tutorial.${this.name}.step_${index}`),
           params: {
             placement: 'left',
+            enableScrolling: false,
           },
         });
       }
       return steps;
+    },
+  },
+  watch: {
+    nextEvent() {
+      this.nextStep();
+    },
+    finishEvent() {
+      this.onFinishTutorial();
     },
   },
   mounted() {
@@ -115,13 +138,18 @@ export default {
     ...mapActions([
       'finishTutorial',
     ]),
+    openBeginnerTutorialModal() {
+      this.beginnerTutorialModalOpen = true;
+    },
     startTutorial() {
       if (/* this.activeTutorial === this.name && */ this.$tours[this.name]) {
         this.$tours[this.name].start();
       }
     },
-    onFinishTutorial() {
-      this.finishTutorial(this.name);
+    async onFinishTutorial() {
+      await this.finishTutorial(this.name);
+      this.$tours[this.name].skip();
+      this.openBeginnerTutorialModal();
     },
     nextStep() {
       // TODO: Show error message
@@ -150,10 +178,17 @@ body.v-tour--active{
 .v-tour{
     pointer-events:auto;
 }
-.v-tour__target--highlighted{
+/* .v-tour__target--highlighted{
     -webkit-box-shadow:0 0 0 4px rgba(0,0,0,.4);
     box-shadow:0 0 0 4px rgba(0,0,0,.4);
-    pointer-events:auto;z-index:9999;
+    pointer-events:auto;
+    z-index:9999;
+} */
+.v-tour__target--highlighted {
+  box-shadow: 0 0 0 99999px rgba(0,0,0,.4);
+  -webkit-box-shadow:0 0 0 99999px rgba(0,0,0,.4);
+  pointer-events:auto;
+    z-index:9999;
 }
 .v-tour__target--relative{
     position:relative
@@ -161,7 +196,7 @@ body.v-tour--active{
 .v-step[data-v-7c9c03f0]{
     background:#12A391;
     color:#fff;
-    max-width:320px;
+    width:320px;
     border-radius:3px;
     -webkit-filter:drop-shadow(0 0 2px rgba(0,0,0,.5));
     filter:drop-shadow(0 0 2px rgba(0,0,0,.5));
@@ -258,9 +293,5 @@ body.v-tour--active{
 .v-step__button[data-v-7c9c03f0]:hover{
     background-color:hsla(0,0%,100%,.95);
     color:#50596c;
-}
-
-.v-tour__target--highlighted {
-  box-shadow: 0 0 0 99999px rgba(0,0,0,.4);
 }
 </style>

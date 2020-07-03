@@ -17,6 +17,7 @@ export default {
       authenticated: 'authenticated',
       getUpdateRepositoryState: 'getUpdateRepositoryState',
       repositoryVersion: 'getSelectedVersion',
+      getProfileAuth: 'myProfile',
     }),
     ...mapState({
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
@@ -70,8 +71,8 @@ export default {
       let { ownerNickname, slug } = this.$route.params;
 
       if (!ownerNickname || !slug) {
-        ownerNickname = 'alexazv';
-        slug = 'tutorial-staging-test';
+        ownerNickname = this.getProfileAuth.nickname;
+        slug = 'tutorial';
         // this.repository = null;
         // return this.repository;
       }

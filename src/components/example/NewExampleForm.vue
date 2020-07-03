@@ -8,10 +8,11 @@
         <b-field
           :message="errors.text || errors.language"
         >
+          <!-- <button @click="mostra">show</button> -->
           <example-text-with-highlighted-entities-input
             id="tour-training-step-1"
             ref="textInput"
-            :is-step-blocked="text.length === 0"
+            :is-step-blocked="textSelected === null"
             v-model="text"
             :entities="entities"
             :available-entities="entitiesList"
@@ -31,9 +32,9 @@
       </div>
       <div class="column">
         <b-field
+          id="tour-training-step-4"
           :message="errors.intent">
           <b-autocomplete
-            id="tour-training-step-3"
             v-model="intent"
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
@@ -49,8 +50,10 @@
             :label="validationErrors.join(', ')"
             type="is-dark">
             <b-button
+              id="tour-training-step-5"
               :disabled="!shouldSubmit "
               :loading="submitting"
+              :is-step-blocked="!nextStepTour"
               type="is-primary"
               native-type="submit">
               <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
@@ -100,6 +103,10 @@ export default {
       type: Object,
       required: true,
     },
+    eventStep: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -111,6 +118,7 @@ export default {
       errors: {},
       submitting: false,
       entitiesList: [],
+      nextStepTour: false,
     };
   },
   computed: {
@@ -202,6 +210,7 @@ export default {
         /* istanbul ignore next */
         this.$refs.textInput.clearSelected();
       }
+      this.$emit('eventStep');
     },
     async onSubmit() {
       this.errors = {};
@@ -220,6 +229,8 @@ export default {
         this.submitting = false;
 
         this.$emit('created');
+        this.$emit('eventStep');
+        this.nextStepTour = !this.nextStepTour;
         return true;
       } catch (error) {
         /* istanbul ignore next */

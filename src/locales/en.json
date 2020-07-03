@@ -418,13 +418,43 @@
           "step_1": "Or create your own intelligence by clicking here."
       },
       "training": {
-          "step_0": "<strong>Go to the feature training!<strong> <br> Here you will add sentences and sort words to train your intelligence",
+          "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
           "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Ex.: I want a pizza",
           "step_2": "If you can, also add some custom entity to your sentence. Just select the desired word and click here. <br> Ex word.: pizza",
           "step_3": "Now, write the entity. <br> Ex entity.: food",
           "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
           "step_5": "Finally, submit your sentence.",
           "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
+      },
+      "test": {
+        "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
+        "step_1": "Select a language to test.",
+        "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
+        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex .: affirmative",
+        "step_4": "And finally, submit your sentence.",
+        "step_5": "Click here to run your test. <br> Tip: To test you must have add at least two intentions with two sentences each."
+    },
+      "quick_test": {
+        "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
+        "step_1": "Enter your test phrase and confirm.",
+        "step_2": "Click here to find out each word's relevance in the sentence within the chosen intention",
+        "step_3": "Click here to see the Raw."
+        },
+      "inbox": {
+        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test."
+      },
+      "translate": {
+        "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
+        "step_1": "Select the trained language.",
+        "step_2": "Select the language for translation and enter.",
+        "step_3": "Choose one sentence and click in translate.",
+        "step_4": "Enter a sentence translation here.",
+        "step_5": "Finally, submit your sentence translate.",
+        "step_6": "If you prefer, you can also export and import excel sentences for translation by clicking here"
+      },
+      "integration": {
+        "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
+        "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
       }
     }
   }
