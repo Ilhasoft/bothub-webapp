@@ -1,39 +1,47 @@
 <template>
   <div>
     <messages :msgs="msgs" />
-    <b-field
-      v-for="field in fields"
-      v-show="field.type !== 'hidden'"
-      :key="field.name"
-      :label="field.label"
-      :type="field.errors && 'is-danger'"
-      :message="!showLabels ? field.errors : field.errors || field.helpText"
-      :class="!showLabels ? 'field-content' : ''">
-      <div
-        slot="label"
-        class="field-label">
-        <span v-if="showLabels">
-          {{ field.label }}
-        </span>
-        <help-widget
-          v-if="hasHelpIcon(field)"
-          :article-id="helpArticleId" />
-      </div>
-      <b-field :class="!showLabels ? 'input-content' : ''">
-        <component
-          :v-if="field.inputComponent"
-          :is="field.inputComponent"
-          v-bind="field.inputProps"
-          :label-placeholder="field.label"
-          :show-max-lenght="availableMaxLenght"
-          v-model="formData[field.name]"
-          :initial-data="initialData[field.name]"
-          :label="field.label"
-          :help-text="field.helpText"
-          :compact="!showLabels"
-          @input="update()"/>
+    <component
+      v-for="(group, index) in [ungrouped, grouped]"
+      :is="index === 1 ? 'b-field' : 'div'"
+      :key="index"
+      :grouped="index === 1"
+      :group-multiline="index === 1">
+      <b-field
+        v-for="field in group"
+        v-show="field.type !== 'hidden'"
+        :key="field.name"
+        :label="field.label"
+        :type="field.errors && 'is-danger'"
+        :message="!showLabels ? field.errors : field.errors || field.helpText"
+        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
+        <div
+          slot="label"
+          :class="{'field-label': true, [`field-${field.type}__title`]: true}">
+          <span
+            v-if="showLabels">
+            {{ field.label }}
+          </span>
+          <help-widget
+            v-if="hasHelpIcon(field)"
+            :article-id="helpArticleId" />
+        </div>
+        <b-field :class="!showLabels ? 'input-content' : ''">
+          <component
+            :v-if="field.inputComponent"
+            :is="field.inputComponent"
+            v-bind="field.inputProps"
+            :label-placeholder="field.label"
+            :show-max-length="availableMaxLength"
+            v-model="formData[field.name]"
+            :initial-data="initialData[field.name]"
+            :label="field.label"
+            :help-text="field.helpText"
+            :compact="!showLabels"
+            @input="update()"/>
+        </b-field>
       </b-field>
-    </b-field>
+    </component>
   </div>
 </template>
 
@@ -46,6 +54,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import ImageInput from './inputs/ImageInput';
 import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
@@ -60,6 +69,7 @@ const relatedInputComponent = {
   password: PasswordInput,
   hidden: StringInput,
   textarea: TextInput,
+  image: ImageInput,
 };
 
 const components = {
@@ -75,7 +85,7 @@ export default {
       required: true,
       type: Object,
     },
-    availableMaxLenght: {
+    availableMaxLength: {
       type: Boolean,
       default: true,
     },
@@ -115,6 +125,7 @@ export default {
 
           const shouldHide = style && typeof style.show === 'boolean' && !style.show;
           const shouldShowSettings = this.settings && style && typeof style.only_settings === 'boolean' && style.only_settings;
+          const grouped = style && typeof style.grouped === 'boolean' && style.grouped;
 
           if (!shouldShowSettings && shouldHide) return false;
 
@@ -125,10 +136,17 @@ export default {
             helpText,
             inputProps,
             inputComponent: relatedInputComponent[type],
+            grouped,
             errors: this.errors[name],
           };
         })
         .filter(field => !!field);
+    },
+    ungrouped() {
+      return this.fields.filter(field => !field.grouped);
+    },
+    grouped() {
+      return this.fields.filter(field => field.grouped);
     },
     msgs() {
       /* istanbul ignore next */
@@ -166,5 +184,17 @@ margin-bottom: 0px;
 .field-label {
     display: flex;
     align-items: center;
+}
+
+.field-image {
+  margin-left: 1.563rem;
+  &__title {
+    justify-content: center;
+    margin: 0;
+  }
+}
+
+.field-textarea {
+  min-width: 70%;
 }
 </style>

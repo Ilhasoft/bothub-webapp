@@ -306,7 +306,14 @@
       "train_fail": "Train failed at {failed}",
       "training": "Training...",
       "not_trained": "Not trained yet.",
-      "training_log": "Training Log"
+      "training_log": "Training Log",
+      "personal_info": "Personal Information",
+      "free_user": "FREE USER",
+      "profile": "Profile",
+      "intelligences": "Intelligences",
+      "activities": "Activities",
+      "reports": "Reports",
+      "payments": "Payments"
     },
     "tutorial": {
       "create_your_first_bot": "Create your first bot!",

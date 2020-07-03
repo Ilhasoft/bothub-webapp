@@ -308,7 +308,14 @@
       "train_fail": "Treinamento falhou às {failed}",
       "training": "Treinando...",
       "not_trained": "Não há treinamento ainda.",
-      "training_log": "Log de Treinamento"
+      "training_log": "Log de Treinamento",
+      "personal_info": "Informações Pessoais",
+      "free_user": "USUÁRIO GRÁTIS",
+      "profile": "Perfil",
+      "intelligences": "Inteligências",
+      "activities": "Atividades",
+      "reports": "Relatórios",
+      "payments": "Pagamentos"
     },
     "tutorial": {
       "create_your_first_bot": "Crie sua primeira inteligência!",
