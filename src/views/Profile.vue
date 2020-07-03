@@ -145,6 +145,8 @@ h1 {
 
         &__title {
             max-width: 56.25rem;
+            font-size: 1.75rem;
+            font-weight: bold;
             padding: 0 1rem;
             margin: 0 auto;
         }
