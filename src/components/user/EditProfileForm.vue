@@ -8,8 +8,9 @@
       v-model="data"
       :errors="errors"
       :initial-data="myProfile"
-      class="field" />
-    <div class="field">
+      :available-max-length="false"
+      class="edit-field" />
+    <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
       <div class="control has-text-centered">
@@ -117,6 +118,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .edit-field {
+    margin-bottom: 2.313rem;
+  }
+
   .change-password {
     background-color: white;
     padding: 3rem;

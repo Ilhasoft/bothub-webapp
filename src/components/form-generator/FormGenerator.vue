@@ -32,7 +32,7 @@
             :is="field.inputComponent"
             v-bind="field.inputProps"
             :label-placeholder="field.label"
-            :show-max-lenght="availableMaxLenght"
+            :show-max-length="availableMaxLength"
             v-model="formData[field.name]"
             :initial-data="initialData[field.name]"
             :label="field.label"
@@ -85,7 +85,7 @@ export default {
       required: true,
       type: Object,
     },
-    availableMaxLenght: {
+    availableMaxLength: {
       type: Boolean,
       default: true,
     },

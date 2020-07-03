@@ -1,5 +1,5 @@
 <template>
-  <layout>
+  <layout :show-footer="false">
     <div class="profile__header">
       <div class="profile__header__content">
         <user-avatar
@@ -11,7 +11,7 @@
           <p
             v-if="myProfile.locale"
             class="profile__header__subtitle"> {{ myProfile.locale }} </p>
-          <span class="profile__plan"> FREE USER </span>
+          <span class="profile__plan"> {{ $t('webapp.my_profile.free_user' ) }} </span>
         </div>
       </div>
     </div>
@@ -24,7 +24,7 @@
     <div class="profile__content">
       <div
         v-show="selected==0">
-        <h1 class="profile__title"> Personal information </h1>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.personal_info' ) }} </h1>
         <div class="profile__edit__content">
           <edit-profile-form class="profile__edit" />
         </div>
@@ -51,7 +51,12 @@ export default {
   data() {
     return {
       selected: 0,
-      tabs: ['Profile', 'Intelligences', 'Activities', 'Reports', 'Payments'],
+      tabs: [
+        this.$t('webapp.my_profile.profile'),
+        this.$t('webapp.my_profile.intelligences'),
+        this.$t('webapp.my_profile.activities'),
+        this.$t('webapp.my_profile.reports'),
+        this.$t('webapp.my_profile.payments')],
     };
   },
   computed: {
@@ -87,13 +92,13 @@ $shadow-color: #00000029;
         }
 
         &__title {
-            max-width: 58.25rem;
+            max-width: 56.25rem;
             padding: 0 1rem;
             margin: 0 auto;
         }
 
         &__content {
-          margin-top: 3.875rem;
+          padding: 3.875rem 0 6.563rem 0;
         }
 
         &__header {
@@ -126,7 +131,7 @@ $shadow-color: #00000029;
           max-width: 40rem;
           margin-top: 1.563rem;
           &__content {
-            max-width: 58.25rem;
+            max-width: 56.25rem;
             padding: 0 1rem;
             margin: 0 auto;
           }
