@@ -7,7 +7,7 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :initial-data="myProfile"
+      :initial-data="initialData"
       :available-max-length="false"
       class="edit-field" />
     <div>
@@ -60,6 +60,15 @@ export default {
     ...mapGetters([
       'myProfile',
     ]),
+    initialData() {
+      const additional = this.myProfile && this.myProfile.nickname
+        ? { image: `https://robohash.org/${this.myProfile.nickname}` }
+        : {};
+      return {
+        ...additional,
+        ...this.myProfile,
+      };
+    },
   },
   async mounted() {
     const formSchema = await this.getMyProfileSchema(this.myProfile.nickname);

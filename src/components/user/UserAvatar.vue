@@ -14,10 +14,13 @@
         v-if="profile.nickname"
         :class="size"
         :src="`https://robohash.org/${profile.nickname}`">
-      <b-icon
+      <div
         v-else
-        size="small"
-        icon="account" />
+        class="avatar__icon">
+        <b-icon
+          size="small"
+          icon="account" />
+      </div>
     </div>
   </div>
 </template>
@@ -72,6 +75,14 @@ export default {
         width: 100%;
         height: 100%;
       }
+    }
+
+    &__icon {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     &--clickable {

@@ -3,7 +3,11 @@
     <div class="image-input">
       <div
         :style="image"
-        class="image-input__image__container"/>
+        :class="{'image-input__image__container': true, 'image-input__image__default': !src}">
+        <b-icon
+          v-if="!src"
+          icon="account" />
+      </div>
       <input
         ref="imageInput"
         :hidden="true"
@@ -22,10 +26,16 @@
 
 <script>
 export default {
+  props: {
+    initialData: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
       value: null,
-      src: 'https://robohash.org/alexazv',
+      src: null,
     };
   },
   computed: {
@@ -37,6 +47,12 @@ export default {
     value() {
       this.$emit('input', this.value);
     },
+    initialData() {
+      this.src = this.initialData;
+    },
+  },
+  mounted() {
+    this.src = this.initialData;
   },
   methods: {
     onChange(element) {
@@ -68,6 +84,12 @@ export default {
                 border-radius: 50%;
                 background-size: cover;
                 background-position: center;
+            }
+
+            &__default {
+              display: flex;
+              justify-content: center;
+              align-items: center;
             }
         }
 
