@@ -114,18 +114,6 @@ export default new Router({
       },
     },
     {
-      path: '/profile/',
-      name: 'profile',
-      component: Profile,
-      beforeEnter: async (to, from, next) => {
-        if (!store.getters.authenticated) {
-          next('/signin');
-        } else {
-          next();
-        }
-      },
-    },
-    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardLayout,
@@ -203,6 +191,18 @@ export default new Router({
         path: '/payment-info',
         name: 'payment-info',
         component: PaymentInfo,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      },
+      {
+        path: '/profile/',
+        name: 'profile',
+        component: Profile,
         beforeEnter: async (to, from, next) => {
           if (!store.getters.authenticated) {
             next('/signin');
