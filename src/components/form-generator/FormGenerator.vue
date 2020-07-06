@@ -2,13 +2,11 @@
   <div>
     <messages :msgs="msgs" />
     <component
-      v-for="(group, index) in [ungrouped, grouped]"
-      :is="index === 1 ? 'b-field' : 'div'"
-      :key="index"
-      :grouped="index === 1"
-      :group-multiline="index === 1">
+      :is="grouped ? 'b-field' : 'div'"
+      :grouped="grouped"
+      :group-multiline="grouped">
       <b-field
-        v-for="field in group"
+        v-for="field in fields"
         v-show="field.type !== 'hidden'"
         :key="field.name"
         :label="field.label"
@@ -101,6 +99,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    grouped: {
+      type: Boolean,
+      default: false,
+    },
     settings: {
       type: Boolean,
       default: false,
@@ -125,7 +127,6 @@ export default {
 
           const shouldHide = style && typeof style.show === 'boolean' && !style.show;
           const shouldShowSettings = this.settings && style && typeof style.only_settings === 'boolean' && style.only_settings;
-          const grouped = style && typeof style.grouped === 'boolean' && style.grouped;
 
           if (!shouldShowSettings && shouldHide) return false;
 
@@ -136,17 +137,10 @@ export default {
             helpText,
             inputProps,
             inputComponent: relatedInputComponent[type],
-            grouped,
             errors: this.errors[name],
           };
         })
         .filter(field => !!field);
-    },
-    ungrouped() {
-      return this.fields.filter(field => !field.grouped);
-    },
-    grouped() {
-      return this.fields.filter(field => field.grouped);
     },
     msgs() {
       /* istanbul ignore next */
