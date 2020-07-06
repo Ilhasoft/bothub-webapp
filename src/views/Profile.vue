@@ -112,12 +112,14 @@ export default {
   methods: {
     ...mapActions([
       'getMyRepositories',
+      'getContributingRepositories',
+      'getUsingRepositories',
       'updateMyProfile',
     ]),
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
-      this.repositoryLists.using = await this.getMyRepositories(this.repositoriesLimit);
-      this.repositoryLists.contributing = await this.getMyRepositories(this.repositoriesLimit);
+      this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
+      this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
     },
   },
 };
