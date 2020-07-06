@@ -33,30 +33,30 @@
       <div v-show="selected==1">
         <h1 class="profile__title"> My Intelligences </h1>
         <paginated-list
-          v-if="repositoryList"
+          v-if="repositoryLists.mine"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryList"
+          :list="repositoryLists.mine"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
 
         <h1 class="profile__title"> Contribution intelligences </h1>
         <paginated-list
-          v-if="repositoryList"
+          v-if="repositoryLists.contributing"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryList"
+          :list="repositoryLists.contributing"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
 
         <h1 class="profile__title"> Use intelligences </h1>
         <paginated-list
-          v-if="repositoryList"
+          v-if="repositoryLists.using"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryList"
+          :list="repositoryLists.using"
           class="profile__repositories__cards" />
       </div>
     </div>
@@ -85,7 +85,11 @@ export default {
     return {
       selected: 0,
       repositoryItemElem: RepositoryCard,
-      repositoryList: null,
+      repositoryLists: {
+        mine: null,
+        contributing: null,
+        using: null,
+      },
       repositoriesLimit: 3,
       tabs: [
         this.$t('webapp.my_profile.profile'),
@@ -111,7 +115,9 @@ export default {
       'updateMyProfile',
     ]),
     async updateMyRepositories() {
-      this.repositoryList = await this.getMyRepositories(this.repositoriesLimit);
+      this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
+      this.repositoryLists.using = await this.getMyRepositories(this.repositoriesLimit);
+      this.repositoryLists.contributing = await this.getMyRepositories(this.repositoriesLimit);
     },
   },
 };
@@ -191,7 +197,7 @@ h1 {
             background-color: $color-grey;
             max-width: 50rem;
             height: 2px;
-            margin: 0 auto;
+            margin: 1rem auto 5rem auto;
           }
 
           &__cards {
