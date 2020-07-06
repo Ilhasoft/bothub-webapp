@@ -10,6 +10,15 @@
       :initial-data="initialData"
       :available-max-length="false"
       class="edit-field" />
+    <form-generator
+      v-if="groupSchema && myProfile"
+      :schema="groupSchema"
+      v-model="groupData"
+      :errors="groupErrors"
+      :grouped="true"
+      :initial-data="initialData"
+      :available-max-length="false"
+      class="edit-field" />
     <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
@@ -50,9 +59,12 @@ export default {
   data() {
     return {
       formSchema: null,
+      groupSchema: null,
       data: {},
+      groupData: {},
       submitting: false,
       errors: {},
+      groupErrors: {},
       changePasswordModalOpen: false,
     };
   },
@@ -69,10 +81,13 @@ export default {
         ...this.myProfile,
       };
     },
+    allData() {
+      return { ...this.data, ...this.groupData };
+    },
   },
   async mounted() {
-    const formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    const additionalSchema = {
+    this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
+    this.groupSchema = {
       biography: {
         label: 'Biography',
         read_only: false,
@@ -86,7 +101,6 @@ export default {
         type: 'image',
       },
     };
-    this.formSchema = { ...formSchema, ...additionalSchema };
   },
   methods: {
     ...mapActions([
@@ -98,7 +112,7 @@ export default {
       this.submitting = true;
       this.errors = {};
       try {
-        await this.patchMyProfile(this.data);
+        await this.patchMyProfile(this.allData);
         this.$emit('edited');
         this.updateMyProfile();
         this.submitting = false;

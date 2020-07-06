@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: 'TabSelect',
   props: {
     options: {
       type: Array,

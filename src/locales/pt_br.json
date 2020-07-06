@@ -312,10 +312,15 @@
       "personal_info": "Informações Pessoais",
       "free_user": "USUÁRIO GRÁTIS",
       "profile": "Perfil",
-      "intelligences": "Inteligências",
       "activities": "Atividades",
       "reports": "Relatórios",
-      "payments": "Pagamentos"
+      "payments": "Pagamentos",
+      "intelligences": {
+        "title": "Inteligências",
+        "mine": "Minhas inteligências",
+        "contributing": "Inteligências que eu contribuo",
+        "using": "Inteligências que eu uso"
+      }
     },
     "tutorial": {
       "create_your_first_bot": "Crie sua primeira inteligência!",
