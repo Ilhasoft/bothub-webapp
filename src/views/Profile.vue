@@ -149,7 +149,6 @@ h1 {
         &__avatar {
             width: 90px;
             height: 90px;
-            margin-right: 1.15rem;
             box-shadow: 0px 3px 6px $shadow-color;
             background-color: $color-white;
         }
@@ -162,6 +161,7 @@ h1 {
             padding: 0.3rem 0.75rem;
             font-size: 0.75rem;
             font-weight: bold;
+            margin: 0 1rem;
         }
 
         &__title {
@@ -183,6 +183,7 @@ h1 {
             &__content {
                 display: flex;
                 justify-content: center;
+                flex-wrap: wrap;
                 margin: 1rem;
             }
             &__title {
