@@ -405,6 +405,30 @@
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
     },
+    "payment": {
+      "options": {
+        "title": "Bothub Pricing",
+        "slogan": "Bothub hosts intelligences that work for you",
+        "free": "Free",
+        "professional": "Professional",
+        "custom": "Custom Plan",
+        "contact_us": "Contact Us",
+        "contact": "Contact Sales",
+        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
+        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
+        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Payment information",
+        "subtitle": "Input your credit or debit card information",
+        "back": "Back",
+        "save": "Save",
+        "card_name": "Card name"
+      }
+    },
     "tutorial": {
       "title": "Welcome to Bothub",
       "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
@@ -464,30 +488,6 @@
       "integration": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
-    },
-    "payment": {
-      "options": {
-        "title": "Bothub Pricing",
-        "slogan": "Bothub hosts intelligences that work for you",
-        "free": "Free",
-        "professional": "Professional",
-        "custom": "Custom Plan",
-        "contact_us": "Contact Us",
-        "contact": "Contact Sales",
-        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
-        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
-        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
-        "per_prediction": "per prediction",
-        "get_free": "Get free",
-        "get_started": "Get started"
-      },
-      "info": {
-        "title": "Payment information",
-        "subtitle": "Input your credit or debit card information",
-        "back": "Back",
-        "save": "Save",
-        "card_name": "Card name"
-      }
     }
   }
 }

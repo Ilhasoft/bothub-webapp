@@ -9,7 +9,7 @@
         v-for="(option, index) in content"
         :key="index"
         class="payment-options__card">
-        <div>
+        <div >
           <h2 class="payment-options__primary payment-options__card__title">
             {{ option.title }}
           </h2>
@@ -85,7 +85,8 @@ export default {
 
         &__header {
           font-size: 2.5rem;
-          max-width: 31rem;
+          max-width: 35rem;
+          margin: auto auto 3.188rem auto;
         }
 
         &__card {
@@ -100,13 +101,20 @@ export default {
               display: block;
             }
 
+            &__content {
+              min-height: 17rem;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-around;
+            }
+
             &__title {
                 font-size: 1.813rem;
             }
 
             &__button {
                 margin-top: 2.625rem;
-                align-self: end;
+                align-self: flex-end;
                 width: 90%;
                 font-weight: bold;
                 white-space: break-spaces;
@@ -117,7 +125,6 @@ export default {
                   width: 100%;
                   flex-grow: 1;
                   display: flex;
-                  align-items: baseline;
                   justify-content: center;
                 }
             }
