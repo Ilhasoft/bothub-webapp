@@ -24,5 +24,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 0 7.313rem 0;
 }
 </style>
