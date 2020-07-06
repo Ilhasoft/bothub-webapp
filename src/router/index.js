@@ -212,6 +212,43 @@ export default new Router({
         },
       }] : []),
     {
+      path: '/tutorial',
+      name: 'Tutorial',
+      component: DashboardLayout,
+      children: [
+        {
+          path: 'training/',
+          name: 'tutorial-training',
+          component: RepositoryTrainings,
+        },
+        {
+          path: 'quick-test/',
+          name: 'tutorial-quick-test',
+          component: RepositoryHome,
+        },
+        {
+          path: 'evaluate/',
+          name: 'tutorial-evaluate',
+          component: RepositoryEvaluate,
+        },
+        {
+          path: 'inbox/',
+          name: 'tutorial-inbox',
+          component: RepositoryLog,
+        },
+        {
+          path: 'translate/',
+          name: 'tutorial-translate',
+          component: RepositoryTranslate,
+        },
+        {
+          path: 'integrate/',
+          name: 'tutorial-integrate',
+          component: RepositoryIntegration,
+        },
+      ],
+    },
+    {
       path: '*',
       name: '404',
       component: NotFound,

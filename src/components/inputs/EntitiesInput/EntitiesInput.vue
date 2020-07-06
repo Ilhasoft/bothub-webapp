@@ -25,8 +25,10 @@
       multilined
       type="is-dark">
       <b-button
+        id="tour-training-step-2"
         ref="addEntityBtn"
         :disabled="!textSelectedValue"
+        :is-step-blocked="!nextStepTour"
         rounded
         type="is-primary"
         @click.prevent.stop="addEntity()"
@@ -98,6 +100,7 @@ export default {
       entities: _.cloneDeep(this.value),
       allEntities: [],
       errors: '',
+      nextStepTour: false,
     };
   },
   computed: {
@@ -201,7 +204,7 @@ export default {
       });
 
       this.loadLabelFor(temporaryEntityId, this.textSelectedValue);
-
+      this.nextStepTour = !this.nextStepTour;
       this.$emit('entityAdded');
     },
     async loadLabelFor(entityId, entityText) {

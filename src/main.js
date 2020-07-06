@@ -4,6 +4,7 @@ import VueMoment from 'vue-moment';
 import BH from 'bh';
 import * as Sentry from '@sentry/browser';
 import { Vue as VueIntegration } from '@sentry/integrations';
+import VueTour from 'vue-tour';
 import App from './App';
 import router from './router';
 import store from './store';
@@ -11,11 +12,18 @@ import applyFilters from './utils/filters';
 import API from './utils/plugins/API';
 import i18n from './utils/plugins/i18n';
 
+// import 'vue-tour/dist/vue-tour.css';
+// import '@/assets/scss/tour.css';
+
+
 Vue.use(Buefy);
 Vue.use(VueMoment);
 Vue.use(BH);
 Vue.use(API);
+Vue.use(VueTour);
+
 Vue.config.productionTip = false;
+
 applyFilters(Vue);
 
 if (process.env.BOTHUB_WEBAPP_USE_SENTRY && process.env.BOTHUB_WEBAPP_SENTRY) {

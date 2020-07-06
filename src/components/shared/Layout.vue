@@ -100,8 +100,7 @@
     </div>
     <div class="layout__content"><slot /></div>
     <site-footer v-if="showFooter" />
-    <beginner-tutorial
-      :open.sync="beginnerTutorialModalOpen"/>
+    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -110,12 +109,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
+import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  BeginnerTutorial,
+  TutorialModal,
 };
 
 export default {
