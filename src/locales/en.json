@@ -310,10 +310,15 @@
       "personal_info": "Personal Information",
       "free_user": "FREE USER",
       "profile": "Profile",
-      "intelligences": "Intelligences",
       "activities": "Activities",
       "reports": "Reports",
-      "payments": "Payments"
+      "payments": "Payments",
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "My Intelligences",
+        "contributing": "Contribution intelligences",
+        "using": "Use intelligences"
+      }
     },
     "tutorial": {
       "create_your_first_bot": "Create your first bot!",

@@ -31,7 +31,7 @@
         </div>
       </div>
       <div v-show="selected==1">
-        <h1 class="profile__title"> My Intelligences </h1>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
         <paginated-list
           v-if="repositoryLists.mine"
           :item-component="repositoryItemElem"
@@ -41,7 +41,7 @@
 
         <div class="profile__repositories__separator" />
 
-        <h1 class="profile__title"> Contribution intelligences </h1>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
         <paginated-list
           v-if="repositoryLists.contributing"
           :item-component="repositoryItemElem"
@@ -51,7 +51,7 @@
 
         <div class="profile__repositories__separator" />
 
-        <h1 class="profile__title"> Use intelligences </h1>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
         <paginated-list
           v-if="repositoryLists.using"
           :item-component="repositoryItemElem"
@@ -93,7 +93,7 @@ export default {
       repositoriesLimit: 3,
       tabs: [
         this.$t('webapp.my_profile.profile'),
-        this.$t('webapp.my_profile.intelligences'),
+        this.$t('webapp.my_profile.intelligences.title'),
         this.$t('webapp.my_profile.activities'),
         this.$t('webapp.my_profile.reports'),
         this.$t('webapp.my_profile.payments')],
