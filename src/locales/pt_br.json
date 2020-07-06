@@ -312,7 +312,11 @@
       "personal_info": "Informações Pessoais",
       "free_user": "USUÁRIO GRÁTIS",
       "profile": "Perfil",
-      "activities": "Atividades",
+      "activities": {
+        "title": "Atividades",
+        "recent": "Atividades Recentes",
+        "activity_complement": "na inteligência <strong> {intelligence} </strong> da organização <strong> {org} </strong>"
+      },
       "reports": "Relatórios",
       "payments": "Pagamentos",
       "intelligences": {

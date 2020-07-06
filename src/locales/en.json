@@ -310,7 +310,11 @@
       "personal_info": "Personal Information",
       "free_user": "FREE USER",
       "profile": "Profile",
-      "activities": "Activities",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities",
+        "activity_complement": "in intelligence <strong> {intelligence} </strong> of organization <strong> {org} </strong>"
+      },
       "reports": "Reports",
       "payments": "Payments",
       "intelligences": {
