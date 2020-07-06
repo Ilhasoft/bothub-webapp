@@ -90,7 +90,9 @@
       <login-form hide-forgot-password />
     </div>
 
-
+    <tour
+      :step-count="1"
+      name="inbox" />
   </repository-view-base>
 
 </template>
@@ -104,6 +106,7 @@ import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
 import RepositoryBase from './Base';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryLog',
@@ -112,6 +115,7 @@ export default {
     RepositoryLogList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
   },
   extends: RepositoryBase,
   data() {

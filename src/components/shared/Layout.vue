@@ -99,9 +99,8 @@
       </div>
     </div>
     <div class="layout__content"><slot /></div>
-    <site-footer />
-    <beginner-tutorial
-      :open.sync="beginnerTutorialModalOpen"/>
+    <site-footer v-if="showFooter" />
+    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -110,12 +109,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
+import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  BeginnerTutorial,
+  TutorialModal,
 };
 
 export default {
@@ -133,6 +132,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    showFooter: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -166,7 +169,7 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: 'myProfile' });
+      this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;

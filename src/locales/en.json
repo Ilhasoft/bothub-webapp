@@ -306,19 +306,19 @@
       "train_fail": "Train failed at {failed}",
       "training": "Training...",
       "not_trained": "Not trained yet.",
-      "training_log": "Training Log"
-    },
-    "tutorial": {
-      "create_your_first_bot": "Create your first bot!",
-      "grid1": "On the top right of the window, click the \"New bot\" button.",
-      "grid2": "Fill in the fields and click on \"Create Bot\"",
-      "grid3": "Start adding content to the interpretation mechanism\n              by providing example sentences.",
-      "grid4": "Choose \"Training\" and enter phrases highlighting the entities and\n                relating it to an intention.</p>\n              <p> Don't forget to submit your sentences.,",
-      "grid5": "After adding your examples, click the status bar to see\n            the status of your bot and train the sentences",
-      "grid6": "That's it! Your bot is ready to be used!",
-      "previous": "Previous",
-      "next": "Next",
-      "finish": "Finish"
+      "training_log": "Training Log",
+      "personal_info": "Personal Information",
+      "free_user": "FREE USER",
+      "profile": "Profile",
+      "activities": "Activities",
+      "reports": "Reports",
+      "payments": "Payments",
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "My Intelligences",
+        "contributing": "Contribution intelligences",
+        "using": "Use intelligences"
+      }
     },
     "menu": {
       "summary": "Summary",
@@ -409,6 +409,91 @@
       "no_sentences": "No sentence.",
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
+    },
+    "payment": {
+      "options": {
+        "title": "Bothub Pricing",
+        "slogan": "Bothub hosts intelligences that work for you",
+        "free": "Free",
+        "professional": "Professional",
+        "custom": "Custom Plan",
+        "contact_us": "Contact Us",
+        "contact": "Contact Sales",
+        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
+        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
+        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Payment information",
+        "subtitle": "Input your credit or debit card information",
+        "back": "Back",
+        "save": "Save",
+        "card_name": "Card name"
+      }
+    },
+    "tutorial": {
+      "title": "Welcome to Bothub",
+      "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
+      "skip": "Skip for now",
+      "previous": "Previous",
+      "next": "Next",
+      "finish": "Finish",
+      "items": {
+          "create_account": "Create account",
+          "create_intelligence": "Create your first intelligence",
+          "training": "Training this intelligence",
+          "quick_test": "Make a quick test",
+          "test": "Test this intelligence",
+          "inbox": "Add sentences with inbox",
+          "translate": "Translate to another language",
+          "integrate": "Integrate your intelligence with a platform"
+      },
+      "create_intelligence": {
+          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+          "step_1": "Or create your own intelligence by clicking here."
+      },
+      "training": {
+          "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
+          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Ex.: I want a pizza",
+          "step_2": "If you can, also add some custom entity to your sentence. Just select the desired word and click here. <br> Ex word.: pizza",
+          "step_3": "Now, write the entity. <br> Ex entity.: food",
+          "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
+          "step_5": "Finally, submit your sentence.",
+          "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
+      },
+      "test": {
+        "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
+        "step_1": "Select a language to test.",
+        "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
+        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex .: affirmative",
+        "step_4": "And finally, submit your sentence.",
+        "step_5": "Click here to run your test. <br> Tip: To test you must have add at least two intentions with two sentences each."
+    },
+      "quick_test": {
+        "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
+        "step_1": "Enter your test phrase and confirm.",
+        "step_2": "Click here to find out each word's relevance in the sentence within the chosen intention",
+        "step_3": "Click here to see the Raw."
+        },
+      "inbox": {
+        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test."
+      },
+      "translate": {
+        "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
+        "step_1": "Select the trained language.",
+        "step_2": "Select the language for translation and enter.",
+        "step_3": "Choose one sentence and click in translate.",
+        "step_4": "Enter a sentence translation here.",
+        "step_5": "Finally, submit your sentence translate.",
+        "step_6": "If you prefer, you can also export and import excel sentences for translation by clicking here"
+      },
+      "integration": {
+        "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
+        "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
     }
   }
+}
 }
