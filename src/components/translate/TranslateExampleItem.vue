@@ -38,6 +38,7 @@
         class="level-right">
         <div class="level-item">
           <button
+            id="tour-translate-step-3"
             class="button is-primary"
             @click="toggleFormOpen()">
             <span>{{ $t('webapp.translate.translate_sentence') }}</span>
@@ -53,7 +54,8 @@
           :translate-to="translateTo"
           :extra-entities-list="entitiesList"
           :repository="repository"
-          @translated="onTranslated()" />
+          @translated="onTranslated()"
+          @eventStep="dispatchStep()" />
       </div>
     </b-collapse>
   </div>
@@ -135,6 +137,10 @@ export default {
     toggleFormOpen() {
       /* istanbul ignore next */
       this.formOpen = !this.formOpen;
+      this.$emit('dispatchEvent', { event: 'eventStep' });
+    },
+    dispatchStep() {
+      this.$emit('dispatchEvent', { event: 'dispatchStep' });
     },
     onTranslated() {
       /* istanbul ignore next */

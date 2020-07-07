@@ -7,6 +7,7 @@
         :open-on-focus="openOnFocus"
         :data="optionsLanguages"
         :placeholder="$t('webapp.home.all_languages')"
+        dropdown-position="bottom"
         @select="option => select(option)" />
     </b-field>
   </div>

@@ -2,34 +2,24 @@
   <div id="app">
     <bh-toast-notification />
     <news-modal />
-    <login-modal
-      v-if="loginModalOpen"
-      ref="loginModal"
-      :current-tab="loginModalTabValue" />
     <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import LoginModal from '@/components/shared/LoginModal';
+
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+import Tour from '@/components/Tour';
 
 const components = {
-  LoginModal,
   NewsModal,
+  Tour,
 };
 
 export default {
   name: 'App',
   components,
-  computed: {
-    ...mapGetters([
-      'loginModalOpen',
-      'loginModalTabValue',
-    ]),
-  },
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
@@ -54,7 +44,6 @@ export default {
 @import '~bh/src/assets/scss/bh.scss';
 @import '@mdi/font/css/materialdesignicons.css';
 @import 'highlight.js/styles/github.css';
-
 
 .container-padding {
   padding: 0 8px;
@@ -118,4 +107,5 @@ $entities-colors: (
 .align-items-center {
   align-items: center;
 }
+
 </style>

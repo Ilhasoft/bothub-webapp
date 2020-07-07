@@ -1,7 +1,9 @@
 <template>
   <b-input
     :maxlength="max_length"
+    :has-counter="showMaxLength"
     v-model="value"
+    :placeholder="labelPlaceholder"
     type="email"
     @input="update()" />
 </template>
@@ -13,6 +15,14 @@ export default {
     max_length: {
       type: Number,
       default: null,
+    },
+    labelPlaceholder: {
+      type: String,
+      default: '',
+    },
+    showMaxLength: {
+      type: Boolean,
+      default: true,
     },
     initialData: {
       type: String,

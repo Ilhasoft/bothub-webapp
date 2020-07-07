@@ -12,17 +12,17 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
       <div class="new-sentence__form__wrapper">
         <div>
           <b-field-stub addons="true">
-            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" id="tour-test-step-2" is-step-blocked="true" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
           </b-field-stub>
         </div>
         <div>
-          <b-field-stub addons="true">
-            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
+          <b-field-stub addons="true" id="tour-test-step-3" is-step-blocked="true">
+            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
           </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
           <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" multilined="true" size="is-medium" is-active="true">
-            <b-button-stub type="is-primary" nativetype="button" tag="button" disabled="true">some specific text</b-button-stub>
+            <b-button-stub type="is-primary" nativetype="button" tag="button" id="tour-test-step-4" disabled="true" is-step-blocked="true">some specific text</b-button-stub>
           </b-tooltip-stub>
         </div>
       </div>

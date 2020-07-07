@@ -44,13 +44,15 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              :placeholder="$t('webapp.inbox.your_version')"/>
+              :placeholder="$t('webapp.inbox.your_version')"
+              dropdown-position="bottom"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              :placeholder="$t('webapp.inbox.your_intent')"/>
+              :placeholder="$t('webapp.inbox.your_intent')"
+              dropdown-position="bottom"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">
@@ -74,7 +76,7 @@
       </div>
       <authorization-request-notification
         v-else
-        :repository-uuid="repository.uuid"
+        :repository-uuid="repositoryUUID"
         @onAuthorizationRequested="updateRepository(false)" />
     </div>
 
@@ -88,7 +90,9 @@
       <login-form hide-forgot-password />
     </div>
 
-
+    <tour
+      :step-count="1"
+      name="inbox" />
   </repository-view-base>
 
 </template>
@@ -102,6 +106,7 @@ import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
 import RepositoryBase from './Base';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryLog',
@@ -110,6 +115,7 @@ export default {
     RepositoryLogList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
   },
   extends: RepositoryBase,
   data() {
