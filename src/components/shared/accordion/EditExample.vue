@@ -155,7 +155,7 @@ export default {
       type: String,
       default: '',
     },
-    editExample: {
+    editExampleEntityList: {
       type: Boolean,
       default: false,
     },
@@ -363,7 +363,7 @@ export default {
       });
 
       try {
-        if (this.editExample) {
+        if (this.editExampleEntityList) {
           await this.editSentence({
             repository: this.repository.uuid,
             id: this.sentenceId,

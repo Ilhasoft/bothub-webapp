@@ -93,13 +93,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-
-.repository-translate{
-  &__list{
-    margin-left: 0.5rem;
-  }
-}
-
-
-</style>

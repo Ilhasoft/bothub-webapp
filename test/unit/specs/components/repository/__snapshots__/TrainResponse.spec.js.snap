@@ -7,16 +7,13 @@ exports[`TrainResponse.vue add requirements renders correctly 1`] = `
       <div class="bh-grid__item bh-grid__item--nested text-center">
         <div class="bh-grid">
           <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>some specific text</span>
           </div>
         </div>
       </div>
@@ -40,16 +37,13 @@ exports[`TrainResponse.vue add warning renders correctly 1`] = `
       <div class="bh-grid__item bh-grid__item--nested text-center">
         <div class="bh-grid">
           <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>some specific text</span>
           </div>
         </div>
       </div>
@@ -73,16 +67,13 @@ exports[`TrainResponse.vue renders correctly 1`] = `
       <div class="bh-grid__item bh-grid__item--nested text-center">
         <div class="bh-grid">
           <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="check" size="is-small" type="is-success" class="text-color-primary"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="dots-horizontal" size="is-small" type="is-info" class="text-color-info"></bh-icon-stub> <span>some specific text</span>
           </div>
           <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
+            <bh-icon-stub value="close" size="is-small" type="is-danger" class="text-color-danger"></bh-icon-stub> <span>some specific text</span>
           </div>
         </div>
       </div>

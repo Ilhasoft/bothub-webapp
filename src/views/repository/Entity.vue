@@ -9,7 +9,6 @@
         <entities-list
           :entities-list="examplesList"
           :repository="repository"
-          :entity-name.sync="entitySelected"
           @ableEditEntities="editEntity($event)"
           @setAllEntities="getAllEntities($event)"
           @saveEdition="onItemSave()"/>
@@ -21,7 +20,7 @@
           :per-page="perPage"
           :editable="entitiesEditable"
           :all-entities="allEntities"
-          :add-attributes="{ entitySelected }"
+          :add-attributes="{ entitySelected: entitySearch.entity }"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
         <p
@@ -93,13 +92,12 @@ export default {
   },
   data() {
     return {
-      name: 'Entity',
+      name: '',
       examplesList: null,
       totalList: 0,
       entitySearch: {
         entity_id: this.$route.params.entity_id,
       },
-      entitySelected: '',
       entitiesEditable: false,
       query: {},
       sentencesEntities: SentencesEntityList,

@@ -21,45 +21,16 @@
       "yes": "Sim",
       "no": "Não"
     },
-    "login_form": {
-      "login": "Entre na sua conta",
-      "forgot_password": "Forgot password",
-      "signin": "Entrar",
-      "get_free": "Cadastre-se",
-      "dont_have_account": "Ainda não tem uma conta?"
-    },
-     "recover_form": {
-      "recover": "Recuperar senha",
-      "cancel_button": "Cancelar",
-      "confirm_password": "Confirme a senha",
-      "changed_password": "Senha alterada",
-      "save_password": "Salvar senha"
-    },
-    "create_repository": {
-      "create_repo": "Crie uma inteligência",
-      "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
-      "choose_category": "Categorias",
-      "choose_category_text": "Escolha as categorias nas quais seu bot se encaixa. <br> Não se preocupe, isso poderá ser mudado depois.",
-      "repository_created": "Tudo pronto!",
-      "repository_created_text": "Sua inteligência está pronta para o uso. Você pode mudar essas e outras informações na seção de configurações. <br><br> Você pode começar a treinar seu bot agora!",
-      "next": "Próximo",
-      "previous": "Anterior",
-      "submit": "Enviar",
-      "start": "Começar",
-      "language": "idioma",
-      "category": "Categoria",
-      "new_repo": "NOVA INTELIGÊNCIA",
-      "default_error": "Existem erros no formulário"
+    "login_modal": {
+      "login": "Login",
+      "forgot_password": "Esqueci a senha"
     },
     "register_form": {
-      "already_have_account": "Já tem uma conta?",
+      "already_have_account": "Já tem um conta?",
       "signin": "Entrar",
-      "create_account_title": "Crie sua conta",
+      "get_started_free": "Até 10.000 predições de graça",
       "get_free": "Cadastre-se",
-      "policy_service": "Clicando em \"Cadastre-se\" eu concordo com as Políticas de Serviço e Privacidade do Bothub.",
-      "confirm_password_empty": "Este campo não pode ser em branco.",
-      "password_didnt_match": "As senhas não coincidem. Tente novamente.",
-      "confirm_password": "Confirme a senha"
+      "policy_service": "Clicando em \"Continuar\" eu concordo com as Políticas de Serviço e Privacidade do Bothub."
     },
     "landing_page": {
       "signin": "Entrar",
@@ -77,7 +48,7 @@
       "all_bots": "Todas inteligências",
       "signup_grid": "Encante seu público com chatbots inteligentes e assertivos",
       "signup_forfree": "Comece agora",
-      "reset_password": "Enviar e-mail",
+      "reset_password": "Resetar senha",
       "reset_password_success": "Cheque seu email, nós te enviamos instruções de como resetar sua senha.",
       "forgot_password": "Esqueceu a senha?",
       "register": "Registrar",
@@ -247,7 +218,6 @@
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
       "trained": "Treinado",
-      "processing": "Processando",
       "no_changes": "Sem alterações",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
@@ -269,8 +239,6 @@
       "ok": "Ok"
     },
     "translate": {
-      "title_translate": "Traduzir uma frase",
-      "subtitle_translate": "Clique em uma frase para traduzir do seu idioma base para outros idiomas suportados pelo Bothub.",
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
       "submit_translation": "Enviar Tradução",
@@ -283,11 +251,10 @@
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
-      "languages_select": "Buscar idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
-      "import_button": "Importar sentenças",
-      "export_button": "Exportar sentenças",
+      "import_button": "Importar",
+      "export_button": "Exportar",
       "import_title": "Selecione um arquivo para importar",
       "import_field_text": "Nenhum arquivo selecionado",
       "import_select_button": "Clique para selecionar",

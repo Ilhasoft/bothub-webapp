@@ -20,7 +20,7 @@
             class="quick-test__login__buttons">
             <b-button
               type="is-primary"
-              @click="signIn()">
+              @click="openLoginModal()">
               {{ $t('webapp.register_form.signin') }}
             </b-button>
             <b-button
@@ -71,7 +71,7 @@
 
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
@@ -125,11 +125,9 @@ export default {
     this.updateRepositoryLanguage();
   },
   methods: {
-    signIn() {
-      this.$router.push({
-        name: 'signIn',
-      });
-    },
+    ...mapActions([
+      'openLoginModal',
+    ]),
     signUp() {
       this.$router.push({
         name: 'signUp',

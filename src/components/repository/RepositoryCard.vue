@@ -1,37 +1,29 @@
 <template>
   <bh-card
-    :class="[ single ? 'repository-card__single' : 'repository-card']"
     shadow="light"
+    class="repository-card"
     no-border>
     <div class="repository-card__align-items">
       <div class="repository-card__big-badge-wrapper">
-        <component
-          :is="clickable ? 'router-link' : 'span'"
-          :to="repositoryDetailsRouterParams">
+        <router-link :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
-            <component
-              :is="clickable ? 'bh-icon-button' : 'bh-icon'"
+            <bh-icon-button
               :value="repositoryIcon"
               size="extra-large"
               class="repository-card__big-badge__icon" />
           </div>
-        </component>
+        </router-link>
       </div>
       <div class="repository-card__details">
         <div class="repository-card__title">
           <span class="repository-card__title__bagde">
-            <component
-              :is="clickable ? 'router-link' : 'span'"
-              :to="repositoryDetailsRouterParams">
-              <component
-                :is="clickable ? 'bh-icon-button' : 'bh-icon'"
+            <router-link :to="repositoryDetailsRouterParams">
+              <bh-icon-button
                 :value="repositoryIcon"
-                class="repository-card__title__bagde__icon" /></component>
+                class="repository-card__title__bagde__icon" /></router-link>
           </span>
-          <component
-            :is="clickable ? 'router-link' : 'span'"
-            :to="repositoryDetailsRouterParams">
-          <span class="text-color-fake-black">{{ $attrs.name }}</span></component>
+          <router-link :to="repositoryDetailsRouterParams">
+          <span class="text-color-fake-black">{{ $attrs.name }}</span></router-link>
         </div>
 
         <div class="repository-card__info-item">
@@ -53,9 +45,8 @@
           </span>
         </div>
         <div class="repository-card__categories">
-          <component
+          <router-link
             v-for="category in repositoryCategoryRouterParams"
-            :is="clickable ? 'router-link' : 'span'"
             :key="category.id"
             :to="{
               path: '/home',
@@ -65,7 +56,7 @@
               color="grey-light"
               size="small"
               class="repository-card__categories__category">{{ category.name }}</bh-badge>
-          </component>
+          </router-link>
         </div>
       </div>
     </div>
@@ -81,16 +72,6 @@ export default {
   name: 'RepositoryCard',
   components: {
     LanguageBadge,
-  },
-  props: {
-    single: {
-      type: Boolean,
-      default: null,
-    },
-    clickable: {
-      type: Boolean,
-      default: true,
-    },
   },
   computed: {
     ...mapGetters([
@@ -141,13 +122,6 @@ export default {
   @media screen and (max-width: $small-mobile-width) {
     width: calc(100% - 1rem);
     margin: $repository-card-margin auto;
-  }
-
-  &__single {
-    width: 100%;
-    height: 100%;
-    padding: 1rem 0;
-    word-break: break-all;
   }
 
   &__align-items {

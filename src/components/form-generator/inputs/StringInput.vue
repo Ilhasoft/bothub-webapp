@@ -2,7 +2,6 @@
   <b-input
     :maxlength="!showMaxLenght ? '' : max_length"
     v-model="value"
-    :placeholder="labelPlaceholder"
     type="text"
     @input="update()" />
 </template>

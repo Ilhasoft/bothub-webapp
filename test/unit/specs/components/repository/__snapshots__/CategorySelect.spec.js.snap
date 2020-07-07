@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CreateRepositoryForm renders correctly 1`] = `
-<div>
-  <div class="category-select"></div>
-</div>
-`;

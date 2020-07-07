@@ -118,6 +118,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'openLoginModal',
       'trainRepository',
       'getTrainingStatus',
     ]),
@@ -156,7 +157,7 @@ export default {
     },
     openTrainingModal() {
       if (!this.authenticated) {
-        this.signIn();
+        this.openLoginModal();
       }
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();

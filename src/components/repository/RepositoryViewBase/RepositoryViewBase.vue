@@ -29,6 +29,9 @@
       class="rpstr-vw-bs__loading">
       <Loading/>
     </div>
+    <new-repository-modal
+      :active="newRepositoryModalOpen"
+      @requestClose="openNewRepositoryModal()" />
     <request-authorization-modal
       v-if="repository"
       :open.sync="requestAuthorizationModalOpen"
@@ -39,6 +42,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
@@ -62,6 +66,7 @@ export default {
     RepositoryNavigation,
     QuickTest,
     UserAvatar,
+    NewRepositoryModal,
     RequestAuthorizationModal,
     Loading,
   },
@@ -84,6 +89,7 @@ export default {
   },
   data() {
     return {
+      newRepositoryModalOpen: false,
       requestAuthorizationModalOpen: false,
     };
   },
@@ -131,9 +137,13 @@ export default {
     ...mapActions([
       'logout',
       'updateMyProfile',
+      'openLoginModal',
     ]),
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });
+    },
+    openNewRepositoryModal() {
+      this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;

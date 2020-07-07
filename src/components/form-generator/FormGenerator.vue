@@ -83,10 +83,6 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    showLabels: {
-      type: Boolean,
-      default: true,
-    },
     initialData: {
       type: Object,
       default: () => ({}),
@@ -154,16 +150,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.field-content{
-height: 58px;
-padding-bottom: 0px;
-margin-bottom: 0px;
-}
-.input-content{
-padding-bottom: 0px;
-margin-bottom: 0px;
-}
-.field-label {
+  .field-label {
     display: flex;
     align-items: center;
 }

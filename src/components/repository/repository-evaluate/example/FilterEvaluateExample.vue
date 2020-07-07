@@ -22,8 +22,7 @@
             :open-on-focus="true"
             :data="optionsIntents"
             :formatters="inputFormatters"
-            :placeholder="$t('webapp.evaluate.all_intents')"
-            dropdown-position="bottom" />
+            :placeholder="$t('webapp.evaluate.all_intents')" />
         </b-field>
         <b-field
           :message="errors.intent">
@@ -32,8 +31,7 @@
             :open-on-focus="true"
             :data="optionsEntities"
             :formatters="inputFormatters"
-            :placeholder="$t('webapp.evaluate.all_entities')"
-            dropdown-position="bottom" />
+            :placeholder="$t('webapp.evaluate.all_entities')" />
         </b-field>
         <b-field v-if="languageFilter && languages">
           <b-select

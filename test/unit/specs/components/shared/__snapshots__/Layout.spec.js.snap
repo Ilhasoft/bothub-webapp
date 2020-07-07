@@ -26,6 +26,10 @@ exports[`Layout.vue loading renders correctly 1`] = `
   </div>
   <div class="layout__content"></div>
   <site-footer-stub></site-footer-stub>
+<<<<<<< HEAD
+=======
+  <new-repository-modal-stub></new-repository-modal-stub>
+>>>>>>> c8765bb15c4e812a7c25fc9efd2fa5bff7c276f3
   <beginner-tutorial-stub></beginner-tutorial-stub>
 </div>
 `;
@@ -54,6 +58,10 @@ exports[`Layout.vue renders correctly 1`] = `
   </div>
   <div class="layout__content"></div>
   <site-footer-stub></site-footer-stub>
+<<<<<<< HEAD
+=======
+  <new-repository-modal-stub></new-repository-modal-stub>
+>>>>>>> c8765bb15c4e812a7c25fc9efd2fa5bff7c276f3
   <beginner-tutorial-stub></beginner-tutorial-stub>
 </div>
 `;

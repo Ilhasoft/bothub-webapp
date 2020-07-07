@@ -14,10 +14,8 @@ export default {
       },
     );
   },
-  translations(repositoryUuid, repositoryVersion, query = {}, limit) {
-    return new utils.Page('/v2/repository/translation/', limit, {
-      repository_uuid: repositoryUuid, repository_version: repositoryVersion, ...query,
-    });
+  translations(repositoryUuid, query = {}, limit) {
+    return new utils.Page('/v2/repository/translation/', limit, { repository_uuid: repositoryUuid, ...query });
   },
   delete(translationId) {
     return request.$http.delete(`/v2/repository/translation/${translationId}/`);

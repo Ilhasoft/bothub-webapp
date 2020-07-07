@@ -2,10 +2,6 @@
 
 exports[`Translate.vue renders correctly 1`] = `
 <repository-view-base-stub>
-  <div class="translate-description">
-    <h1>some specific text</h1>
-    <p>some specific text</p>
-  </div>
   <!---->
 </repository-view-base-stub>
 `;
