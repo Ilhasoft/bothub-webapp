@@ -12,8 +12,8 @@
       </div>
       <div class="news-modal__image__wrapper">
         <img
-          v-show="images[current-1]"
-          :src="images[current-1]"
+          v-show="imageFor(current-1)"
+          :src="imageFor(current-1)"
           class="news-modal__image">
       </div>
       <div class="news-modal__controls">
@@ -56,7 +56,6 @@ export default {
       active: true,
       current: 1,
       info,
-      images: [],
     };
   },
   i18n: {
@@ -68,15 +67,13 @@ export default {
   computed: {
     ...mapGetters([
       'lastVersionSeen',
-      'authenticated',
     ]),
     currentVersion() {
       return process.env.VERSION;
     },
     shouldShow() {
-      return this.authenticated
-      && (!this.lastVersionSeen || this.lastVersionSeen < this.currentVersion)
-      && this.currentVersion <= this.info.max_version;
+      return this.currentVersion <= this.info.max_version
+      && (!this.lastVersionSeen || this.lastVersionSeen < this.currentVersion);
     },
     hasNext() {
       return this.current < this.info.count;
@@ -85,17 +82,14 @@ export default {
       return this.current > 1;
     },
   },
-  mounted() {
-    this.images = Array(this.info.count).fill(null);
-    this.images = this.images.map((_, index) => {
-      if (index >= this.info.images.length || !this.info.images[index]) return null;
-      return require(`../assets/news/imgs/${this.info.images[index]}`);
-    });
-  },
   methods: {
     ...mapActions([
       'setLastVersionSeen',
     ]),
+    imageFor(index) {
+      if (index >= this.info.images.length || !this.info.images[index]) return null;
+      return require(`../assets/news/imgs/${this.info.images[index]}`);
+    },
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
     },

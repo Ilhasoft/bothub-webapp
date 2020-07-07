@@ -1,7 +1,6 @@
 <template>
   <b-input
-    :maxlength="max_length"
-    :has-counter="showMaxLength"
+    :maxlength="!showMaxLenght ? '' : max_length"
     v-model="value"
     :placeholder="labelPlaceholder"
     type="text"
@@ -16,7 +15,7 @@ export default {
       type: Number,
       default: null,
     },
-    showMaxLength: {
+    showMaxLenght: {
       type: Boolean,
       default: true,
     },

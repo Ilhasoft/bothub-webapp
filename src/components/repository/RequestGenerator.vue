@@ -8,9 +8,7 @@
         v-model="text"
         type="textarea" />
     </b-field>
-    <b-tabs
-      id="tour-integration-step-1"
-      v-model="activeTab">
+    <b-tabs v-model="activeTab">
       <b-tab-item label="cURL">
         <bh-highlighted-pre
           :code="codes.curl"

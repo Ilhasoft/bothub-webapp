@@ -15,10 +15,8 @@
               :message="errors.entities || errors.language"
             >
               <example-text-with-highlighted-entities-input
-                id="tour-test-step-2"
                 ref="textInput"
                 v-model="text"
-                :is-step-blocked="text.length === 0"
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
@@ -31,9 +29,7 @@
           </div>
           <div>
             <b-field
-              id="tour-test-step-3"
               :message="errors.non_field_errors"
-              :is-step-blocked="intent.length === 0"
             >
               <b-autocomplete
                 v-model="intent"
@@ -52,11 +48,9 @@
               multilined
               type="is-dark">
               <b-button
-                id="tour-test-step-4"
                 ref="saveSentenceButton"
                 :disabled="!shouldSubmit"
                 :loading="submitting"
-                :is-step-blocked="!nextStepTour"
                 type="is-primary"
                 @click="submitSentence()">
                 <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
@@ -116,7 +110,6 @@ export default {
       submitting: false,
       entitiesList: [],
       testing: true,
-      nextStepTour: false,
     };
   },
   computed: {
@@ -242,8 +235,6 @@ export default {
         this.submitting = false;
 
         this.$emit('created');
-        this.$emit('eventStep');
-        this.nextStepTour = !this.nextStepTour;
         return true;
       } catch (error) {
         /* istanbul ignore next */

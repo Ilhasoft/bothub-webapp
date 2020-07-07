@@ -6,9 +6,7 @@
       :item-component="translateExampleItem"
       :repository="repository"
       :translate-to="to"
-      @translated="onTranslated()"
-      @eventStep="dispatchStep()"
-      @dispatchStep="dispatchStep()" />
+      @translated="onTranslated()" />
     <p
       v-if="translateList && translateList.empty"
       class="repository-translate__list">
@@ -91,9 +89,6 @@ export default {
       this.$emit('translated');
       /* istanbul ignore next */
       await this.updateList();
-    },
-    dispatchStep() {
-      this.$emit('eventStep');
     },
   },
 };

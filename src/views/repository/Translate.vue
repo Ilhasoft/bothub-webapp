@@ -18,10 +18,7 @@
                 <b-field
                   :label="$t('webapp.translate.translate_from')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select
-                    id="tour-translate-step-1"
-                    :is-step-blocked="translate.from === null"
-                    v-model="translate.from" />
+                  <language-select v-model="translate.from" />
                 </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
@@ -37,17 +34,13 @@
                   :label="$t('webapp.translate.translate_to')"
                   custom-class="repository-translate__field__item__label">
                   <language-select
-                    id="tour-translate-step-2"
                     v-model="translate.to"
-                    :is-step-blocked="translate.to === null"
-                    :exclude="[translate.from]"/>
+                    :exclude="[translate.from]" />
                 </b-field>
               </div>
             </div>
           </div>
-          <div
-            id="tour-translate-step-6"
-            class="repository-translate__translateButtons">
+          <div class="repository-translate__translateButtons">
 
             <b-button
               :class="{'is-primary':!!translate.from && !!translate.to}"
@@ -158,8 +151,7 @@
                 :query="query"
                 :from="translate.from"
                 :to="translate.to"
-                @translated="examplesTranslated()"
-                @eventStep="dispatchClick()"/>
+                @translated="examplesTranslated()" />
             </div>
 
           </div>
@@ -179,11 +171,6 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
-      :step-count="7"
-      :next-event="eventClick"
-      :finish-event="eventClickFinish"
-      name="translate" />
   </repository-view-base>
 </template>
 
@@ -198,7 +185,6 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
-import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryTranslate',
@@ -210,7 +196,6 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
-    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -231,8 +216,6 @@ export default {
       querySchema: {},
       errors: '',
       errorMessage: '',
-      eventClick: false,
-      eventClickFinish: false,
     };
   },
 
@@ -303,12 +286,6 @@ export default {
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
       return false;
-    },
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
     },
     forceFileDownload(response) {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });

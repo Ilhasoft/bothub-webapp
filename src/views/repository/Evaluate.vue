@@ -14,25 +14,21 @@
             <p>{{ $t('webapp.evaluate.header_title_p') }}</p>
             <p>{{ $t('webapp.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
-              <div
-                class="evaluate__content-header__wrapper__language-select">
+              <div class="evaluate__content-header__wrapper__language-select">
                 <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
-                <div id="tour-test-step-1">
-                  <b-select
-                    v-model="currentLanguage"
-                    expanded>
-                    <option
-                      v-for="language in languages"
-                      :key="language.id"
-                      :selected="language.value === currentLanguage"
-                      :value="language.value">
-                      {{ language.title }}
-                    </option>
-                  </b-select>
-                </div>
+                <b-select
+                  v-model="currentLanguage"
+                  expanded>
+                  <option
+                    v-for="language in languages"
+                    :key="language.id"
+                    :selected="language.value === currentLanguage"
+                    :value="language.value">
+                    {{ language.title }}
+                  </option>
+                </b-select>
               </div>
               <b-button
-                id="tour-test-step-5"
                 ref="runNewTestButton"
                 :loading="evaluating"
                 :disabled="evaluating"
@@ -48,11 +44,12 @@
             <base-evaluate-examples
               :filter-by-language="currentLanguage"
               @created="updateTrainingStatus()"
-              @deleted="updateTrainingStatus()"
-              @eventStep="dispatchClick()"/>
+              @deleted="updateTrainingStatus()"/>
           </div>
         </div>
-        <div class="evaluate__container">
+        <div
+          class="
+                evaluate__container">
           <div class="evaluate__item">
             <authorization-request-notification
               v-if="repository && !repository.authorization.can_write"
@@ -71,11 +68,6 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
-      :step-count="6"
-      :next-event="eventClick"
-      :finish-event="eventClickFinish"
-      name="test"/>
   </repository-view-base>
 </template>
 
@@ -85,7 +77,7 @@ import BaseEvaluateExamples from '@/components/repository/repository-evaluate/Ba
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
-import Tour from '@/components/Tour';
+
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -97,7 +89,6 @@ export default {
     LoginForm,
     BaseEvaluateExamples,
     AuthorizationRequestNotification,
-    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -105,8 +96,6 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
-      eventClick: false,
-      eventClickFinish: false,
     };
   },
   computed: {
@@ -144,12 +133,6 @@ export default {
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
-    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
@@ -170,7 +153,6 @@ export default {
     async newEvaluate() {
       this.evaluating = true;
       try {
-        this.dispatchFinish();
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,

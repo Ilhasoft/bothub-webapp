@@ -41,14 +41,6 @@ export default {
     /* istanbul ignore next */
     return user.myRepositories(limit);
   },
-  getContributingRepositories(store, limit = 20) {
-    /* istanbul ignore next */
-    return user.myRepositories(limit);
-  },
-  getUsingRepositories(store, limit = 20) {
-    /* istanbul ignore next */
-    return user.myRepositories(limit);
-  },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);
     return schema;

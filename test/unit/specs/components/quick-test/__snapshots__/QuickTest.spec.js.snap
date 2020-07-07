@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`QuickTest.vue renders correctly 1`] = `
-<div class="quick-test" currentroute="[object Object]">
+<div class="quick-test">
   <div class="quick-test__collapse-button">
-    <div id="tour-quick_test-step-0" class="quick-test__collapse-button__content">
-      <b-icon-stub icon="chevron-left"></b-icon-stub>
-      <p class="quick-test__collapse-button__text">
-        some specific text
-      </p>
-    </div>
+    <b-icon-stub icon="chevron-left"></b-icon-stub>
+    <p class="quick-test__collapse-button__text"> some specific text </p>
   </div>
   <div class="quick-test__container collapsed">
     <div class="quick-test__inner-container">
@@ -27,6 +23,5 @@ exports[`QuickTest.vue renders correctly 1`] = `
       <!---->
     </div>
   </div>
-  <tour-stub name="quick_test" stepcount="4"></tour-stub>
 </div>
 `;
