@@ -1,12 +1,10 @@
 <template>
   <div>
-    <b-loading :active="!loaded" />
     <b-input
       v-model="name"
       :placeholder="$t('webapp.payment.info.card_name')"
       class="card-number__field" />
     <card
-      v-if="loaded"
       :options="{hidePostalCode: true,
                  classes:{base: 'card-number__input',
                           empty: 'card-number__input__empty'}
@@ -33,7 +31,6 @@
 
 <script>
 import { Card } from 'vue-stripe-elements-plus';
-import stripe from '@/utils/plugins/stripe';
 
 export default {
   components: {
@@ -49,11 +46,7 @@ export default {
     return {
       name: null,
       cardIsFocused: false,
-      loaded: false,
     };
-  },
-  async mounted() {
-    stripe.addStripe(() => { this.loaded = true; });
   },
   methods: {
     onChange() {},
