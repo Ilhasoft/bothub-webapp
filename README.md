@@ -1,3 +1,10 @@
+
+![foto](https://i.imgur.com/PKrSNGY.png)
+## BLACK LIVES MATTER
+
+- [Black Lives Matter](https://blacklivesmatter.com/)
+- [Supporting the cause](https://act.unicefusa.org/blm)
+
 # Bothub Webapp
 
 [![Build Status](https://travis-ci.org/bothub-it/bothub-webapp.svg?branch=master)](https://travis-ci.org/bothub-it/bothub-webapp) [![Coverage Status](https://coveralls.io/repos/github/push-flow/bothub-webapp/badge.svg?branch=master)](https://coveralls.io/github/push-flow/bothub-webapp?branch=master) [![node>=6.9](https://img.shields.io/badge/node-%3E%3D6.9-blue.svg)](https://nodejs.org/en/download/releases/) [![License AGPL-3.0](https://img.shields.io/badge/license-%20AGPL--3.0-yellow.svg)](https://github.com/bothub-it/bothub-webapp/blob/master/LICENSE)
