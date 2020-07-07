@@ -5,7 +5,6 @@
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
-      :all-entities="allEntities"
       @itemDeleted="onItemDeleted($event)"
       @itemSave="onItemSave()" />
     <p
@@ -43,7 +42,6 @@ export default {
     return {
       examplesList: null,
       exampleItemElem: ExampleAccordion,
-      allEntities: [],
     };
   },
   computed: {
@@ -68,18 +66,11 @@ export default {
   },
   mounted() {
     this.updateExamples();
-    this.getEntitiesName();
   },
   methods: {
     ...mapActions([
       'searchEvaluateExamples',
     ]),
-    async getEntitiesName() {
-      const allEntitiesName = await this.repository.entities.map(
-        entityValue => entityValue.value,
-      );
-      this.allEntities = allEntitiesName;
-    },
     async updateExamples(force = false) {
       if (!this.examplesList || force) {
         this.examplesList = await this.searchEvaluateExamples({

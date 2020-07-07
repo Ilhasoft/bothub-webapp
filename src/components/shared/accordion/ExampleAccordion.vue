@@ -71,7 +71,7 @@
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
-        :edit-example="availableToExample"
+        :edit-example-entity-list="true"
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
@@ -112,10 +112,6 @@ export default {
     allEntities: {
       type: Array,
       default: () => [],
-    },
-    availableToExample: {
-      type: Boolean,
-      default: false,
     },
     entities: {
       type: Array,

@@ -10,13 +10,7 @@ localVue.use(BH);
 describe('Translate.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Translate, {
-      localVue,
-      store,
-      mocks: {
-        $t: () => 'some specific text',
-      },
-    });
+    wrapper = shallowMount(Translate, { localVue, store });
   });
 
   test('renders correctly', () => {

@@ -9,7 +9,6 @@
             :class="entityClass"
             class="is-rounded">{{ selectedText }}</span> is</label>
           <bh-autocomplete
-            id="tour-training-step-3"
             ref="entityInputField"
             :value="entity"
             :data="availableEntities"

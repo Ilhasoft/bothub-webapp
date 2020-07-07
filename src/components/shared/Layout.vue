@@ -33,14 +33,15 @@
             <div
               v-if="authenticated"
               class="bh-grid__item hide-mobile">
-              <router-link :to="'new'">
-                <b-button
-                  type="is-primary"
-                  inverted
-                  rounded>
-                  <strong>{{ $t('webapp.layout.newbot') }}</strong>
-                </b-button>
-              </router-link>
+              <bh-button
+                size="small"
+                primary
+                inverted
+                rounded
+                max-content
+                @click="openNewRepositoryModal()">
+                {{ $t('webapp.layout.newbot') }}
+              </bh-button>
             </div>
             <div
               v-if="authenticated"
@@ -67,7 +68,7 @@
                   {{ myProfile.name || '...' }}
                 </bh-dropdown-item>
                 <bh-dropdown-item
-                  @click="openNewRepository()">
+                  @click="openNewRepositoryModal()">
                   {{ $t('webapp.layout.start_you_bot') }}
                 </bh-dropdown-item>
                 <bh-dropdown-item @click="logout()">
@@ -82,7 +83,7 @@
                 color="fake-white"
                 transparent
                 max-content
-                @click="signIn()">{{ $t('webapp.layout.signin') }}</bh-button>
+                @click="openLoginModal()">{{ $t('webapp.layout.signin') }}</bh-button>
             </div>
             <div
               v-if="!authenticated"
@@ -99,22 +100,28 @@
       </div>
     </div>
     <div class="layout__content"><slot /></div>
-    <site-footer v-if="showFooter" />
-    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
+    <site-footer />
+    <new-repository-modal
+      :active="newRepositoryModalOpen"
+      @requestClose="closeNewRepositoryModal()" />
+    <beginner-tutorial
+      :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import TutorialModal from '@/components/TutorialModal';
+import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 
 const components = {
+  NewRepositoryModal,
   SiteFooter,
   UserAvatar,
-  TutorialModal,
+  BeginnerTutorial,
 };
 
 export default {
@@ -133,13 +140,10 @@ export default {
       type: Boolean,
       default: false,
     },
-    showFooter: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
     return {
+      newRepositoryModalOpen: false,
       beginnerTutorialModalOpen: false,
     };
   },
@@ -162,22 +166,19 @@ export default {
     ...mapActions([
       'updateMyProfile',
       'logout',
+      'openLoginModal',
     ]),
-    openNewRepository() {
-      this.$router.push({
-        name: 'new',
-      });
+    openNewRepositoryModal() {
+      this.newRepositoryModalOpen = true;
+    },
+    closeNewRepositoryModal() {
+      this.newRepositoryModalOpen = false;
     },
     openMyProfile() {
-      this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
+      this.$router.push({ name: 'myProfile' });
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
-    },
-    signIn() {
-      this.$router.push({
-        name: 'signIn',
-      });
     },
     signUp() {
       this.$router.push({

@@ -75,7 +75,7 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="signIn()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
+              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -87,7 +87,7 @@
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="openNewRepository()">
+              @click="openNewRepositoryModal()">
               {{ $t('webapp.layout.start_you_bot') }}
             </b-dropdown-item>
             <b-dropdown-item
@@ -105,6 +105,9 @@
       </div>
       <router-view />
     </div>
+    <new-repository-modal
+      :active="isNewRepositoryModalOpen"
+      @requestClose="openNewRepositoryModal()" />
   </div>
 </template>
 <style lang="scss">
@@ -112,6 +115,7 @@
 <script>
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
+import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import { mapActions, mapGetters } from 'vuex';
 
@@ -120,6 +124,7 @@ export default {
   components: {
     SideBar,
     UserAvatar,
+    NewRepositoryModal,
     VersionDropdown,
   },
   data() {
@@ -127,6 +132,7 @@ export default {
       collapse: true,
       isLoading: false,
       isFullPage: true,
+      isNewRepositoryModalOpen: false,
     };
   },
   computed: {
@@ -150,6 +156,7 @@ export default {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
+      'openLoginModal',
     ]),
     collapseHandle() {
       this.collapse = !this.collapse;
@@ -159,15 +166,8 @@ export default {
         name: `${path}`,
       });
     },
-    openNewRepository() {
-      this.$router.push({
-        name: 'new',
-      });
-    },
-    signIn() {
-      this.$router.push({
-        name: 'signIn',
-      });
+    openNewRepositoryModal() {
+      this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
     },
     signUp() {
       this.$router.push({

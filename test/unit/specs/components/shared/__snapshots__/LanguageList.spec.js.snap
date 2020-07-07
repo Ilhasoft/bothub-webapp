@@ -3,7 +3,7 @@
 exports[`LanguageList.vue renders correctly 1`] = `
 <div class="languages-list">
   <b-field-stub addons="true" class="languages-list__field">
-    <b-autocomplete-stub value="" data="English,Portuguese" field="value" keepfirst="true" openonfocus="true" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
+    <b-autocomplete-stub value="" data="English,Portuguese" field="value" keepfirst="true" openonfocus="true" placeholder="some specific text"></b-autocomplete-stub>
   </b-field-stub>
 </div>
 `;

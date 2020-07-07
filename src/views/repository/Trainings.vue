@@ -10,8 +10,7 @@
             <span>{{ $t('webapp.trainings.grid_text2') }}</span>
             <new-example-form
               :repository="repository"
-              @created="updatedExampleList()"
-              @eventStep="dispatchClick()" />
+              @created="updatedExampleList()" />
           </div>
           <authorization-request-notification
             v-else
@@ -32,21 +31,16 @@
         <hr>
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <!-- <b-button @click="$tours['training'].start()"> test </b-button> -->
-          <div
-            id="tour-training-step-6"
-            class="trainings-repository__list-wrapper__tutorialStep">
-            <b-button
-              v-if="repository.examples__count > 0 && repository.authorization.can_write "
-              ref="training"
-              :disabled="loadingStatus"
-              :loading="loadingStatus"
-              type="is-secondary"
-              class="trainings-repository__list-wrapper__button"
-              @click="openTrainingModal">
-              {{ $t('webapp.trainings.run_training') }}
-            </b-button>
-          </div>
+          <b-button
+            v-if="repository.examples__count > 0 && repository.authorization.can_write "
+            ref="training"
+            :disabled="loadingStatus"
+            :loading="loadingStatus"
+            type="is-secondary"
+            class="trainings-repository__list-wrapper__button"
+            @click="openTrainingModal">
+            {{ $t('webapp.trainings.run_training') }}
+          </b-button>
         </div>
         <filter-examples
           :intents="repository.intents_list"
@@ -72,11 +66,6 @@
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
-    <tour
-      :step-count="7"
-      :next-event="eventClick"
-      :finish-event="eventClickFinish"
-      name="training"/>
   </repository-view-base>
 </template>
 
@@ -94,7 +83,6 @@ import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
-import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryTrainings',
@@ -109,7 +97,6 @@ export default {
     TrainModal,
     TrainResponse,
     Loading,
-    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -122,8 +109,6 @@ export default {
       update: false,
       training: false,
       loadingStatus: false,
-      eventClick: false,
-      eventClickFinish: false,
     };
   },
   computed: {
@@ -133,6 +118,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'openLoginModal',
       'trainRepository',
       'getTrainingStatus',
     ]),
@@ -171,7 +157,7 @@ export default {
     },
     openTrainingModal() {
       if (!this.authenticated) {
-        this.signIn();
+        this.openLoginModal();
       }
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();
@@ -179,18 +165,6 @@ export default {
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
-      this.dispatchFinish();
-    },
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
-    },
-    signIn() {
-      this.$router.push({
-        name: 'signIn',
-      });
     },
     updatedExampleList() {
       this.updateTrainingStatus();
@@ -241,10 +215,6 @@ export default {
       &:hover{
         color: $color-white;
       }
-    }
-
-    &__tutorialStep{
-      height:2.2rem;
     }
   }
 

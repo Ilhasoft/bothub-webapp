@@ -9,8 +9,8 @@ export default {
       /* istanbul ignore next */
       if (!this.authenticated) {
         /* istanbul ignore next */
-        this.$router.push({
-          name: 'signIn',
+        this.$store.dispatch('openLoginModal', {
+          redirectToWhenFails: { name: 'home' },
         });
       }
     },

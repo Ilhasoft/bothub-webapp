@@ -46,9 +46,14 @@ export default {
     ]),
     async updateRequests() {
       const { repositoryUuid } = this;
-      this.requestsList = await this.repositoryAuthorizationRequestsList(
-        { repositoryUuid },
-      );
+      if (this.requestsList) {
+        this.requestsList.reset();
+        await this.requestsList.next();
+      } else {
+        this.requestsList = await this.repositoryAuthorizationRequestsList(
+          { repositoryUuid },
+        );
+      }
     },
     async onItemDeleted() {
       await this.updateRequests();

@@ -30,8 +30,7 @@ language: [{{ $t('webapp.analyze_text.language_code') }}]
 text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
               </bh-highlighted-pre>
             </div>
-            <div
-              class="repository-analyze-text__item">
+            <div class="repository-analyze-text__item">
               <p><strong>{{ $t('webapp.analyze_text.response') }}</strong></p>
               <bh-highlighted-pre code-class="json">{
   "intent": {
@@ -89,9 +88,6 @@ text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
-      :step-count="2"
-      name="integration" />
   </repository-view-base>
 </template>
 
@@ -100,7 +96,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
-import Tour from '@/components/Tour';
+
 
 export default {
   name: 'RepositoryIntegration',
@@ -108,7 +104,6 @@ export default {
     RepositoryViewBase,
     RequestGenerator,
     LoginForm,
-    Tour,
   },
   extends: RepositoryBase,
   computed: {},
