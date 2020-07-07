@@ -3,12 +3,8 @@ import Router from 'vue-router';
 import Home from '@/views/Home';
 import LandingPage from '@/views/LandingPage';
 import SignUp from '@/views/auth/SignUp';
-import SignIn from '@/views/auth/SignIn';
-import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
-import CreateRepository from '@/views/CreateRepository';
 import MyProfile from '@/components/MyProfile';
-import Profile from '@/views/Profile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
@@ -25,9 +21,8 @@ import Entity from '@/views/repository/Entity';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
-import PaymentOptions from '@/views/payment/PaymentOptions';
-import PaymentInfo from '@/views/payment/PaymentInfo';
 import store from '../store';
+
 
 Vue.use(Router);
 
@@ -52,30 +47,6 @@ export default new Router({
       component: Terms,
     },
     {
-      path: '/signin',
-      name: 'signIn',
-      component: SignIn,
-      beforeEnter: async (to, from, next) => {
-        if (store.getters.authenticated) {
-          next('/home');
-        } else {
-          next();
-        }
-      },
-    },
-    {
-      path: '/recoverpassword',
-      name: 'recoverpassword',
-      component: RecoverPassword,
-      beforeEnter: async (to, from, next) => {
-        if (store.getters.authenticated) {
-          next('/home');
-        } else {
-          next();
-        }
-      },
-    },
-    {
       path: '/signup',
       name: 'signUp',
       component: SignUp,
@@ -93,11 +64,6 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/new/',
-      name: 'new',
-      component: CreateRepository,
-    },
-    {
       path: '/reset-password/:nickname/:token/',
       component: ResetPassword,
     },
@@ -107,7 +73,10 @@ export default new Router({
       component: MyProfile,
       beforeEnter: async (to, from, next) => {
         if (!store.getters.authenticated) {
-          next('/signin');
+          store.dispatch('openLoginModal', {
+            next: to,
+            redirectToWhenFails: { name: 'home' },
+          });
         } else {
           next();
         }
@@ -179,73 +148,6 @@ export default new Router({
             name: 'repository-versions',
             component: RepositoryVersions,
           }] : []),
-      ],
-    },
-    ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
-      ? [{
-        path: '/payment-options',
-        name: 'payment-options',
-        component: PaymentOptions,
-      },
-      {
-        path: '/payment-info',
-        name: 'payment-info',
-        component: PaymentInfo,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      },
-      {
-        path: '/profile/',
-        name: 'profile',
-        component: Profile,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      }] : []),
-    {
-      path: '/tutorial',
-      name: 'Tutorial',
-      component: DashboardLayout,
-      children: [
-        {
-          path: 'training/',
-          name: 'tutorial-training',
-          component: RepositoryTrainings,
-        },
-        {
-          path: 'quick-test/',
-          name: 'tutorial-quick-test',
-          component: RepositoryHome,
-        },
-        {
-          path: 'evaluate/',
-          name: 'tutorial-evaluate',
-          component: RepositoryEvaluate,
-        },
-        {
-          path: 'inbox/',
-          name: 'tutorial-inbox',
-          component: RepositoryLog,
-        },
-        {
-          path: 'translate/',
-          name: 'tutorial-translate',
-          component: RepositoryTranslate,
-        },
-        {
-          path: 'integrate/',
-          name: 'tutorial-integrate',
-          component: RepositoryIntegration,
-        },
       ],
     },
     {

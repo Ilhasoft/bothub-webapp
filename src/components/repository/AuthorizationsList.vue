@@ -5,8 +5,7 @@
       ref="list"
       :item-component="authorizationItemElem"
       :list="authorizationsList"
-      @itemSave="onEdit"
-      @itemDeleted="updateAuthorizations"/>
+      @edit="onEdit($event)" />
     <p v-if="authorizationsList && authorizationsList.empty">
       {{ $t('webapp.settings.no_users' ) }}
     </p>
@@ -45,9 +44,14 @@ export default {
   methods: {
     ...mapActions(['repositoryAuthorizationList']),
     async updateAuthorizations() {
-      this.authorizationsList = await this.repositoryAuthorizationList({
-        repositoryUuid: this.repositoryUuid,
-      });
+      if (this.authorizationsList) {
+        this.authorizationsList.reset();
+        await this.authorizationsList.next();
+      } else {
+        this.authorizationsList = await this.repositoryAuthorizationList({
+          repositoryUuid: this.repositoryUuid,
+        });
+      }
     },
     onEdit(value) {
       this.$emit('edit', value);

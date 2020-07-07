@@ -1,71 +1,81 @@
 <template>
-  <boarding-layout>
-    <div class="signup">
-      <div class="signup__content">
-        <div class="signup__content__field">
-          <div class="signup__content__field__header">
-            <p>{{ $t('webapp.register_form.already_have_account') }}</p>
-            <b-button
-              type="is-primary"
-              class="signup__content__field__header__createButton"
-              @click="goToLoginPage">
-              {{ $t('webapp.register_form.signin') }}</b-button>
-          </div>
-          <div class="signup__content__field__forms">
-            <h1>{{ $t('webapp.register_form.create_account_title') }}</h1>
-            <form @submit.prevent="onSubmit">
-              <loading v-if="!formSchema" />
-              <form-generator
-                v-if="formSchema"
-                :schema="formSchema"
-                v-model="data"
-                :errors="errors"
-                :show-labels="false"
-                :available-max-lenght="false"
-                class="field"/>
-              <p
-                class="signup__content__field__forms__passwordError">
-                {{ confirmError }}
-              </p>
-              <div class="field">
-                <div class="control has-text-centered">
-                  <b-button
-                    :disabled="submitting"
-                    expanded
-                    class="signup__content__field__forms__button is-primary"
-                    native-type="submit"
-                  >{{ $t('webapp.register_form.get_free') }}</b-button>
-                </div>
-                <div class="signup__content__field__forms__agree-message">
-                  <small>
-                    <router-link
-                      to="/terms"
-                      class="signup__content__field__forms__terms">
-                      {{ $t('webapp.register_form.policy_service') }}
-                    </router-link>
-                  </small>
-                </div>
-              </div>
-            </form>
-          </div>
+  <div class="sign-up">
+    <nav class="sign-up__nav">
+      <div class="sign-up__nav__container">
+        <router-link
+          class="column sign-up__nav__logo"
+          to="/">
+          <img
+            src="@/assets/imgs/logo.svg"
+            alt="Bothub">
+        </router-link>
+        <div class="sign-up__nav__login">
+          <span class="sign-up__nav__text">
+            {{ $t('webapp.register_form.already_have_account') }}</span>
+          <b-button
+            class="is-primary sign-up__nav__login__button"
+            size="normal"
+            @click="openLoginModal()">{{ $t('webapp.register_form.signin') }}</b-button>
         </div>
       </div>
-    </div>
-    <div class="footer"/>
-  </boarding-layout>
+    </nav>
+    <section class="columns is-variable is-3 sign-up__wrapper-content">
+      <div class="column is-half sign-up__wrapper-content__image">
+        <img
+          src="@/assets/imgs/computer-bot.png"
+          alt="avatar" >
+      </div>
+      <div class="column sign-up__wrapper-content__form">
+        <div class="sign-up__wrapper-content__form__title">
+          <h1>{{ $t('webapp.register_form.get_started_free') }}</h1>
+        </div>
+        <form @submit.prevent="onSubmit">
+          <loading v-if="!formSchema" />
+          <form-generator
+            v-if="formSchema"
+            :schema="formSchema"
+            v-model="data"
+            :errors="errors"
+            class="field" />
+          <div class="field">
+            <div class="control has-text-centered">
+              <b-button
+                :disabled="submitting"
+                expanded
+                class="is-info"
+                native-type="submit"
+                full-width
+                color="info">{{ $t('webapp.register_form.get_free') }}</b-button>
+            </div>
+            <div class="sign-up__wrapper-content__form__agree-message">
+              <small>
+                <router-link to="/terms">
+                  {{ $t('webapp.register_form.policy_service') }}
+                </router-link>
+
+              </small>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <site-footer class="sign-up__footer" />
+  </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import BoardingLayout from '@/components/user/BoardingLayout';
+import SiteFooter from '@/components/shared/SiteFooter';
 
 const components = {
   FormGenerator,
   Loading,
-  BoardingLayout,
+  SiteFooter,
 };
+
+
 export default {
   name: 'SignUp',
   components,
@@ -75,7 +85,6 @@ export default {
       data: {},
       submitting: false,
       errors: {},
-      confirmError: '',
     };
   },
   computed: {
@@ -90,52 +99,21 @@ export default {
       });
     },
   },
-  mounted() {
-    this.getAllRegisterSchema();
+  async mounted() {
+    this.formSchema = await this.getRegisterSchema();
   },
   methods: {
     ...mapActions([
+      'openLoginModal',
       'register',
       'getRegisterSchema',
       'login',
     ]),
-    goToLoginPage() {
-      this.$router.push({
-        name: 'signIn',
-      });
-    },
-    async getAllRegisterSchema() {
-      const registerSchema = await this.getRegisterSchema();
-      const { password } = registerSchema;
-      const confirmPassword = {
-        ...password, label: this.$t('webapp.register_form.confirm_password'),
-      };
-      this.formSchema = { ...registerSchema, confirmPassword };
-    },
     async onSubmit() {
       this.submitting = true;
       this.errors = {};
+
       try {
-        if (this.data.confirmPassword !== this.data.password) {
-        // eslint-disable-next-line no-unused-expressions
-          this.data.confirmPassword === ''
-            ? this.confirmError = this.$t('webapp.register_form.confirm_password_empty')
-            : this.confirmError = this.$t('webapp.register_form.password_didnt_match');
-          this.submitting = false;
-          return '';
-        // eslint-disable-next-line no-else-return
-        } else {
-          this.confirmError = '';
-        }
-
-        if (this.data.confirmPassword === '') {
-          this.confirmError = this.$t('webapp.register_form.confirm_password_empty');
-          this.submitting = false;
-        } else {
-          this.confirmError = '';
-        }
-
-        delete this.data.confirmPassword;
         await this.register(this.data);
         this.loginUser();
         return true;
@@ -160,7 +138,7 @@ export default {
         this.$emit('authenticated');
         return true;
       } catch (error) {
-        this.goToLoginPage();
+        this.openLoginModal();
         this.submitting = false;
       }
 
@@ -175,107 +153,96 @@ export default {
 @import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
 
-.footer{
-  background-color: $color-fake-white;
-}
+$width: 1085px;
 
-.signup{
-  background-color: $color-fake-white;
+.sign-up {
+  background-color: $color-white;
+  $max-width: 1200px;
 
-  &__content{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: $color-fake-white;
+    &__nav {
+      padding: .25rem 1rem;
+      background-color: $color-white;
 
-    &__field{
-      width: 36rem;
-      height: 35.125rem;
+      &__container {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem;
+        margin: 0.5rem;
+      }
 
-      &__header{
-        display:flex;
-        justify-content: flex-end;
-        margin-bottom: 1rem;
+      &__login {
+        align-self: center;
 
-        p{
-          font-family: $font-family;
-          font-size: 1rem;
-          color:$color-fake-black;
-          margin-right: 1rem;
-          margin-top:1rem;
-        }
-
-        &__createButton{
-          width: 6.875rem;
-          height: 2.188rem;
-          margin-top: 0.15rem;
-          border-radius: 6px;
-          box-shadow: 0px 3px 6px #00000029;
-          font-weight: $font-weight-bolder;
-          font-family: $font-family;
-          font-size: $font-size;
+        &__button {
+          margin: 0 1rem;
         }
       }
 
-      &__forms{
-        height: 33rem;
-        width: 576px;
-        padding: 2rem 4rem;
-        background-color: $color-white;
-        box-shadow: 0px 3px 6px #00000029;
+      &__text {
+        @media screen and (max-width: 500px) {
+          display: none;
+        }
+      }
 
-        h1{
-          color:$color-primary;
-          font-family: $font-family;
-          font-size: 2.563rem;
-          text-align: center;
+      &__logo {
+        min-width: ($size-normal * .75);
+        padding: ($size-normal * .125) 0;
+        align-self: center;
+
+        img {
+          display: block;
+          height: $size-small;
+        }
+      }
+    }
+
+    &__wrapper-content {
+      max-width: $max-width;
+      margin: 15vh auto;
+      padding: 0.25rem;
+      position: relative;
+      height: 100%;
+
+      &__image {
+        max-width: 35rem;
+        margin-right: auto;
+
+        @media screen and (max-width: $width) {
+          display: none;
+        }
+      }
+
+      &__form {
+        max-width: 30rem;
+
+        @media screen and (max-width: $width) {
+          max-width: 100%;
+          margin: 3rem;
         }
 
-        &__passwordError{
-          color: #ff3860;
-          font-size: 0.75rem;
-          margin: -1.4rem 0px;
+        &__title {
+          position: relative;
+          top: -5vh;
+
+          @media screen and (max-width: $width) {
+           text-align: center;
+          }
         }
 
         &__agree-message {
-          margin: auto;
-          margin-top:1rem;
-          width: 16rem;
-          line-height: 0.8;
-          color: #707070;
-          text-align: center;
-        }
-        &__terms{
-          color: #707070;
-          font-size: 12px;
-          font-family: $font-family;
-          text-align: center;
-          &:hover{
-            color: #2BBFAC;
+          position: relative;
+          bottom: -4vh;
+
+          @media screen and (max-width: $width) {
+           text-align: center;
           }
         }
-        &__button{
-          margin: 3rem auto 0.8rem ;
-          width: 9.813rem;
-          height: 2.188rem;
-          border-radius: 6px;
-          box-shadow: 0px 3px 6px #00000029;
-          font-weight: $font-weight-bolder;
-          font-family: $font-family;
-          font-size: $font-size;
-        }
-        @media screen and (max-width: 40em) {
-           width: 30rem;
-      }
-
-      }
-        @media screen and (max-width: 40em) {
-           width: 30rem;
       }
     }
-  }
-}
 
+    &__footer {
+      margin-top: 25rem;
+    }
+
+}
 </style>

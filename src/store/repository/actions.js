@@ -98,7 +98,6 @@ export default {
     use_competing_intents: useCompetingIntents,
     use_name_entities: useNameEntities,
     use_analyze_char: useAnalyzeChar,
-    use_transformer_entities: useTransformerEntities,
     repositoryUuid,
   }) {
     return repository.edit(
@@ -114,7 +113,6 @@ export default {
       useCompetingIntents,
       useNameEntities,
       useAnalyzeChar,
-      useTransformerEntities,
       repositoryUuid,
     );
   },

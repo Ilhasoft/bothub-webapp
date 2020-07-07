@@ -6,12 +6,8 @@
       :item-component="translateExampleItem"
       :repository="repository"
       :translate-to="to"
-      @translated="onTranslated()"
-      @eventStep="dispatchStep()"
-      @dispatchStep="dispatchStep()" />
-    <p
-      v-if="translateList && translateList.empty"
-      class="repository-translate__list">
+      @translated="onTranslated()" />
+    <p v-if="translateList && translateList.empty">
       {{ $t('webapp.translate.no_examples') }}
     </p>
   </div>
@@ -92,19 +88,6 @@ export default {
       /* istanbul ignore next */
       await this.updateList();
     },
-    dispatchStep() {
-      this.$emit('eventStep');
-    },
   },
 };
 </script>
-<style lang="scss" scoped>
-
-.repository-translate{
-  &__list{
-    margin-left: 0.5rem;
-  }
-}
-
-
-</style>

@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EmailInput.vue renders correctly 1`] = `<b-input-stub value="" type="email" hascounter="true" customclass="" placeholder=""></b-input-stub>`;
+exports[`EmailInput.vue renders correctly 1`] = `<b-input-stub value="" type="email" hascounter="true" customclass=""></b-input-stub>`;

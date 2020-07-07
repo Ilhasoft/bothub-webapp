@@ -8,10 +8,8 @@
           :errors="errors.text"
           label>
           <example-text-with-highlighted-entities-input
-            id="tour-translate-step-4"
             ref="textInput"
             v-model="text"
-            :is-step-blocked="text.length === 0"
             :entities="entities"
             :available-entities="repository.entities"
             :placeholder="$t('webapp.translate.translate_sentence')"
@@ -22,9 +20,7 @@
       <div class="column is-narrow">
         <bh-field label>
           <bh-button
-            id="tour-translate-step-5"
             :disabled="!isValid || submitting"
-            :is-step-blocked="!nextStepTour"
             secondary
             size="normal"
             type="submit">{{ $t('webapp.translate.submit_translation') }}</bh-button>
@@ -89,7 +85,6 @@ export default {
       textSelected: null,
       errors: {},
       submitting: false,
-      nextStepTour: false,
     };
   },
   computed: {
@@ -131,7 +126,7 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
-      this.nextStepTour = !this.nextStepTour;
+
       try {
         await this.newTranslation({
           exampleId: this.exampleId,
@@ -145,7 +140,6 @@ export default {
 
         this.submitting = false;
         this.$emit('translated');
-        this.$emit('eventStep');
         return true;
       } catch (error) {
         const { language, ...data } = error.response && error.response.data;

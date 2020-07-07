@@ -65,7 +65,7 @@
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
-        :edit-example="true"
+        :edit-example-entity-list="true"
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"

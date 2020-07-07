@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserAvatar.vue renders correctly 1`] = `
-<div class="avatar avatar--clickable avatar--normal">
-  <div class="avatar__content avatar--normal"><img src="https://robohash.org/botinho" class="normal"></div>
-</div>
-`;
+exports[`UserAvatar.vue renders correctly 1`] = `<bh-avatar-stub size="normal"><img src="https://robohash.org/botinho" class="normal"></bh-avatar-stub>`;
 
-exports[`UserAvatar.vue with small size renders correctly 1`] = `
-<div class="avatar avatar--clickable avatar--small">
-  <div class="avatar__content avatar--small"><img src="https://robohash.org/botinho" class="small"></div>
-</div>
-`;
+exports[`UserAvatar.vue with small size renders correctly 1`] = `<bh-avatar-stub size="small"><img src="https://robohash.org/botinho" class="small"></bh-avatar-stub>`;
