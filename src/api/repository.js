@@ -152,7 +152,7 @@ export default {
     );
   },
   getAuthorizationList(repositoryUuid, limit) {
-    return new utils.Page('/v2/repository/authorizations/', limit, { repository_uuid: repositoryUuid });
+    return new utils.Page('/v2/repository/authorizations/', limit, { repository: repositoryUuid });
   },
   async getRequestAuthorizationSchema() {
     const { data } = await request.$http.options('/v2/repository/authorization-requests/');
