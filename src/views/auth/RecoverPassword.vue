@@ -1,14 +1,11 @@
 <template>
   <boarding-layout>
     <div class="recover-password">
-      <boarding-header/>
       <div class="recover-password__content">
         <div class="recover-password__content__field">
           <div class="recover-password__content__field__forms">
             <h1>{{ $t('webapp.recover_form.recover') }}</h1>
-            <reset-password-form
-              :nickname="$route.params.nickname"
-              :token="$route.params.token" />
+            <forgot-password-form />
           </div>
         </div>
       </div>
@@ -17,18 +14,28 @@
 </template>
 
 <script>
-import ResetPasswordForm from '@/components/auth/ResetPasswordForm';
 import BoardingLayout from '@/components/user/BoardingLayout';
-
-const components = {
-  ResetPasswordForm,
-  BoardingLayout,
-};
+import FormGenerator from '@/components/form-generator/FormGenerator';
+import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
+import LoginForm from '@/components/auth/LoginForm';
 
 export default {
-  name: 'ResetPassword',
-  components,
+  name: 'SignIn',
+  components: {
+    BoardingLayout,
+    FormGenerator,
+    LoginForm,
+    ForgotPasswordForm,
+  },
+  methods: {
+    onAuthenticated() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+  },
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -43,40 +50,12 @@ export default {
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 5.5rem);
-  background-color: $color-fake-white;
-
 
     &__field{
       width: 36rem;
-      max-height: 25.938rem;
-
-      &__header{
-        display:flex;
-        justify-content: flex-end;
-        margin-bottom: 1.5rem;
-
-        p{
-          font-family: $font-family;
-          font-size: 1rem;
-          color:$color-fake-black;
-          margin-right: 1rem;
-          margin-top:1rem;
-        }
-
-        &__createButton{
-          width: 6.875rem;
-          height: 2.188rem;
-          margin-top: 0.15rem;
-          border-radius: 6px;
-          box-shadow: 0px 3px 6px #00000029;
-          font-weight: $font-weight-bolder;
-          font-family: $font-family;
-          font-size: $font-size;
-        }
-      }
+      max-height: 20.938rem;
 
       &__forms{
-
         padding: 2rem 4.5rem;
         background-color: $color-white;
         box-shadow: 0px 3px 6px #00000029;

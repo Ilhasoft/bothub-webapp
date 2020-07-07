@@ -87,6 +87,7 @@ export default {
   watch: {
     entitySelected() {
       this.entitySelected = (formatters.bothubItemKey()(this.entitySelected));
+      this.$emit('update:entityName', this.entitySelected);
     },
   },
   mounted() {

@@ -1,6 +1,7 @@
 <template>
   <b-select
     :value="value"
+    :placeholder="$t('webapp.translate.languages_select')"
     expanded
     @input="$emit('input', $event)">
     <option :value="null">-</option>

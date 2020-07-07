@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import TranslationItem from './TranslationItem';
 
@@ -41,6 +41,11 @@ export default {
       translationItemElem: TranslationItem,
     };
   },
+  computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
+  },
   watch: {
     async toLanguage() { await this.updateTranslations(); },
   },
@@ -56,6 +61,7 @@ export default {
       this.translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         to_language: this.toLanguage,
+        repositoryVersion: this.repositoryVersion,
       });
     },
     examplesDeleted() {
