@@ -29,7 +29,7 @@
             size="normal"
             rounded
             primary
-            @click="signUpRedirect()">
+            @click="signUp()">
             {{ $t('webapp.landing_page.join_for_free') }}
           </bh-button>
         </div>
@@ -82,7 +82,7 @@
             size="normal"
             rounded
             secondary
-            @click="signUpRedirect()">
+            @click="signUp()">
             {{ $t('webapp.landing_page.signup_forfree') }}
           </bh-button>
         </div>

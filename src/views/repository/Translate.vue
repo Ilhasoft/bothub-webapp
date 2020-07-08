@@ -153,7 +153,7 @@
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :update="update"
+                :update="training.update"
                 :repository="repository"
                 :query="query"
                 :from="translate.from"
@@ -331,7 +331,7 @@ export default {
       this.translationFile = null;
     },
     examplesTranslated() {
-      this.update = !this.update;
+      this.translate.update = !this.translate.update;
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
