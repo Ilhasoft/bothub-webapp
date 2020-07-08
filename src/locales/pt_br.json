@@ -308,7 +308,23 @@
       "train_fail": "Treinamento falhou às {failed}",
       "training": "Treinando...",
       "not_trained": "Não há treinamento ainda.",
-      "training_log": "Log de Treinamento"
+      "training_log": "Log de Treinamento",
+      "personal_info": "Informações Pessoais",
+      "free_user": "USUÁRIO GRÁTIS",
+      "profile": "Perfil",
+      "activities": {
+        "title": "Atividades",
+        "recent": "Atividades Recentes",
+        "activity_complement": "na inteligência <strong> {intelligence} </strong> da organização <strong> {org} </strong>"
+      },
+      "reports": "Relatórios",
+      "payments": "Pagamentos",
+      "intelligences": {
+        "title": "Inteligências",
+        "mine": "Minhas inteligências",
+        "contributing": "Inteligências que eu contribuo",
+        "using": "Inteligências que eu uso"
+      }
     },
     "tutorial": {
       "create_your_first_bot": "Crie sua primeira inteligência!",
@@ -411,6 +427,30 @@
       "no_sentences": "Nenhuma senteça.",
       "error_entity": "Aconteceu um erro.",
       "error_entity_exists": "Entidade já existe"
+    },
+    "payment": {
+      "options": {
+        "title": "Planos do Bothub",
+        "slogan": "Bothub hospeda inteligências que funcionam para você",
+        "free": "Grátis",
+        "professional": "Profissional",
+        "custom": "Plano customizado",
+        "contact_us": "Entre em contato",
+        "contact": "Fale conosco",
+        "free_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano oferece até <strong>1000 predições grátis</strong>.",
+        "professional_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano é pago, <strong>após alcançar 1,000 predições.</strong>",
+        "custom_text": "Superpoderes! Leve sua inteligência para o próximo níveis com soluções personalizadas, suporte impecável, e um grande número de predições.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Informações de pagamento",
+        "subtitle": "Insira as informações do seu cartão de crédito ou débito",
+        "back": "Voltar",
+        "save": "Salvar",
+        "card_name": "Nome do cartão"
+      }
     }
   }
 }

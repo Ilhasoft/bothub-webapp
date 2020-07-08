@@ -3,9 +3,20 @@
 exports[`EditProfileForm.vue renders correctly 1`] = `
 <form>
   <loading-stub></loading-stub>
+  <b-loading-stub isfullpage="true" animation="fade" oncancel="function _default() {}"></b-loading-stub>
   <!---->
-  <div class="field">
-    <div class="control has-text-centered"><button type="submit" class="button is-primary">some specific text</button></div>
+  <!---->
+  <div><a>
+      some specific text </a>
+    <div class="control has-text-centered">
+      <b-button-stub type="is-primary" nativetype="submit" tag="button" class="submit-button">some specific text</b-button-stub>
+    </div>
   </div>
+  <b-modal-stub width="489" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip">
+    <div class="change-password">
+      <h1>some specific text</h1>
+      <change-password-form-stub></change-password-form-stub>
+    </div>
+  </b-modal-stub>
 </form>
 `;
