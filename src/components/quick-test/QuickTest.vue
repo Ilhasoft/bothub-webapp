@@ -5,8 +5,16 @@
       ref="expandQuickTest"
       class="quick-test__collapse-button"
       @click="toggle()">
-      <b-icon :icon="expanded ? 'chevron-right' : 'chevron-left'" />
-      <p class="quick-test__collapse-button__text"> {{ $t('webapp.quick_test.quick_test') }} </p>
+      <div
+        id="tour-quick_test-step-0"
+        class="quick-test__collapse-button__content">
+        <b-icon
+          :icon="expanded ? 'chevron-right' : 'chevron-left'"/>
+        <p class="quick-test__collapse-button__text">
+          {{ $t('webapp.quick_test.quick_test') }}
+        </p>
+      </div>
+
     </div>
     <div
       :class="['quick-test__container', expanded ? 'expanded' : 'collapsed']">
@@ -45,6 +53,7 @@
         </div>
         <div
           v-if="authenticated"
+          id="tour-quick_test-step-1"
           class="quick-test__input">
           <text-area-input
             ref="textInput"
@@ -66,6 +75,10 @@
         </div>
       </div>
     </div>
+    <tour
+      v-if="this.$router.currentRoute.name === 'tutorial-quick-test'"
+      :step-count="4"
+      name="quick_test" />
   </div>
 </template>
 
@@ -75,6 +88,7 @@ import { mapGetters } from 'vuex';
 import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'QuickTest',
@@ -83,6 +97,7 @@ export default {
     TextAreaInput,
     LanguageAppendSelectInput,
     QuickTestText,
+    Tour,
   },
   props: {
     repository: {
@@ -210,6 +225,10 @@ export default {
           margin-top: 3rem;
           box-shadow: 0 0 3px 0 rgba(0,0,0,.2);
 
+
+          &__content{
+            display:flex;
+          }
           &__text {
             margin: 0 auto;;
           }

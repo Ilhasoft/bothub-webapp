@@ -17,6 +17,7 @@ export default {
       authenticated: 'authenticated',
       getUpdateRepositoryState: 'getUpdateRepositoryState',
       repositoryVersion: 'getSelectedVersion',
+      getProfileAuth: 'myProfile',
     }),
     ...mapState({
       repositoryUuid: state => state.Repository.selectedRepository.uuid,
@@ -67,11 +68,13 @@ export default {
       'setRepositoryVersion',
     ]),
     async updateRepository(silent = false) {
-      const { ownerNickname, slug } = this.$route.params;
+      let { ownerNickname, slug } = this.$route.params;
 
       if (!ownerNickname || !slug) {
-        this.repository = null;
-        return this.repository;
+        ownerNickname = this.getProfileAuth.nickname;
+        slug = 'tutorial';
+        // this.repository = null;
+        // return this.repository;
       }
 
       if (!this.repository

@@ -18,7 +18,10 @@
                 <b-field
                   :label="$t('webapp.translate.translate_from')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select v-model="translate.from" />
+                  <language-select
+                    id="tour-translate-step-1"
+                    :is-step-blocked="translate.from === null"
+                    v-model="translate.from" />
                 </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
@@ -34,13 +37,17 @@
                   :label="$t('webapp.translate.translate_to')"
                   custom-class="repository-translate__field__item__label">
                   <language-select
+                    id="tour-translate-step-2"
                     v-model="translate.to"
-                    :exclude="[translate.from]" />
+                    :is-step-blocked="translate.to === null"
+                    :exclude="[translate.from]"/>
                 </b-field>
               </div>
             </div>
           </div>
-          <div class="repository-translate__translateButtons">
+          <div
+            id="tour-translate-step-6"
+            class="repository-translate__translateButtons">
 
             <b-button
               :class="{'is-primary':!!translate.from && !!translate.to}"
@@ -146,12 +153,13 @@
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :update="update"
+                :update="translate.update"
                 :repository="repository"
                 :query="query"
                 :from="translate.from"
                 :to="translate.to"
-                @translated="examplesTranslated()" />
+                @translated="examplesTranslated()"
+                @eventStep="dispatchClick()"/>
             </div>
 
           </div>
@@ -171,6 +179,11 @@
         <login-form hide-forgot-password />
       </div>
     </div>
+    <tour
+      :step-count="7"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      name="translate" />
   </repository-view-base>
 </template>
 
@@ -185,6 +198,7 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryTranslate',
@@ -196,6 +210,7 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -216,6 +231,8 @@ export default {
       querySchema: {},
       errors: '',
       errorMessage: '',
+      eventClick: false,
+      eventClickFinish: false,
     };
   },
 
@@ -287,6 +304,12 @@ export default {
       this.translationFile = null;
       return false;
     },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
     forceFileDownload(response) {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });
       const result = document.createElement('a');
@@ -308,7 +331,7 @@ export default {
       this.translationFile = null;
     },
     examplesTranslated() {
-      this.update = !this.update;
+      this.translate.update = !this.translate.update;
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
