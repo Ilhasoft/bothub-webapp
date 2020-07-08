@@ -59,6 +59,13 @@
           :list="repositoryLists.using"
           class="profile__repositories__cards" />
       </div>
+      <div
+        v-show="selected==2">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.activities.recent' ) }} </h1>
+        <div class="profile__edit__content">
+          <activities class="profile__activities" />
+        </div>
+      </div>
     </div>
   </layout>
 </template>
@@ -68,6 +75,7 @@ import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
+import Activities from '@/components/user/Activities';
 import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import { mapGetters, mapActions } from 'vuex';
@@ -80,6 +88,7 @@ export default {
     EditProfileForm,
     TabSelect,
     PaginatedList,
+    Activities,
   },
   data() {
     return {
@@ -94,7 +103,7 @@ export default {
       tabs: [
         this.$t('webapp.my_profile.profile'),
         this.$t('webapp.my_profile.intelligences.title'),
-        this.$t('webapp.my_profile.activities'),
+        this.$t('webapp.my_profile.activities.title'),
         this.$t('webapp.my_profile.reports'),
         this.$t('webapp.my_profile.payments')],
     };
@@ -140,7 +149,6 @@ h1 {
         &__avatar {
             width: 90px;
             height: 90px;
-            margin-right: 1.15rem;
             box-shadow: 0px 3px 6px $shadow-color;
             background-color: $color-white;
         }
@@ -153,6 +161,7 @@ h1 {
             padding: 0.3rem 0.75rem;
             font-size: 0.75rem;
             font-weight: bold;
+            margin: 0 1rem;
         }
 
         &__title {
@@ -174,6 +183,7 @@ h1 {
             &__content {
                 display: flex;
                 justify-content: center;
+                flex-wrap: wrap;
                 margin: 1rem;
             }
             &__title {
@@ -219,6 +229,10 @@ h1 {
             padding: 0 1rem;
             margin: 0 auto;
           }
+        }
+
+        &__activities {
+          margin-top: 2.5rem;
         }
     }
 </style>
