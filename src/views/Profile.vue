@@ -185,14 +185,15 @@ h1 {
                 justify-content: center;
                 flex-wrap: wrap;
                 margin: 1rem;
+                align-items: center;
             }
             &__title {
               font-size: 1.5rem;
-              margin-bottom: 0.625;
+              margin: 0 0 0.625rem 0;
             }
             &__subtitle {
               font-size: 1.125rem;
-              margin-bottom: 1rem;
+              margin: 0 1rem 0.625rem 1rem;
             }
         }
 
