@@ -28,13 +28,11 @@
             tag="router-link"
             icon="home"/>
           <b-menu-item
-            id="tour-training-step-0"
             :to="{ name: 'repository-training' }"
             :label="$t('webapp.menu.training')"
             tag="router-link"
             icon="refresh"/>
           <b-menu-item
-            id="tour-test-step-0"
             :active="isTestsActive"
             :expanded="isTestsActive"
             icon="wechat"
@@ -57,13 +55,11 @@
               tag="router-link"/>
           </b-menu-item>
           <b-menu-item
-            id="tour-inbox-step-0"
             :to="{ name: 'repository-log' }"
             :label="$t('webapp.menu.inbox')"
             tag="router-link"
             icon="inbox"/>
           <b-menu-item
-            id="tour-translate-step-0"
             :active="isTranslationsActive"
             :expanded="isTranslationsActive"
             icon="translate"
@@ -86,7 +82,6 @@
               tag="router-link"/>
           </b-menu-item>
           <b-menu-item
-            id="tour-integration-step-0"
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
             tag="router-link"

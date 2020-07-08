@@ -6,14 +6,12 @@
     <div
       v-if="info.count"
       class="news-modal">
-      <div class="news-modal__texts">
-        <h2> {{ $t(`${current}.title`) }} </h2>
-        <p> {{ $t(`${current}.text`) }} </p>
-      </div>
+      <h2> {{ $t(`${current}.title`) }} </h2>
+      <p> {{ $t(`${current}.text`) }} </p>
       <div class="news-modal__image__wrapper">
         <img
-          v-show="imageFor(current-1)"
-          :src="imageFor(current-1)"
+          v-show="images[current-1]"
+          :src="images[current-1]"
           class="news-modal__image">
       </div>
       <div class="news-modal__controls">
@@ -56,6 +54,7 @@ export default {
       active: true,
       current: 1,
       info,
+      images: [],
     };
   },
   i18n: {
@@ -67,13 +66,15 @@ export default {
   computed: {
     ...mapGetters([
       'lastVersionSeen',
+      'authenticated',
     ]),
     currentVersion() {
       return process.env.VERSION;
     },
     shouldShow() {
-      return this.currentVersion <= this.info.max_version
-      && (!this.lastVersionSeen || this.lastVersionSeen < this.currentVersion);
+      return this.authenticated
+      && (!this.lastVersionSeen || this.lastVersionSeen < this.currentVersion)
+      && this.currentVersion <= this.info.max_version;
     },
     hasNext() {
       return this.current < this.info.count;
@@ -82,14 +83,17 @@ export default {
       return this.current > 1;
     },
   },
+  mounted() {
+    this.images = Array(this.info.count).fill(null);
+    this.images = this.images.map((_, index) => {
+      if (index >= this.info.images.length || !this.info.images[index]) return null;
+      return require(`../assets/news/imgs/${this.info.images[index]}`);
+    });
+  },
   methods: {
     ...mapActions([
       'setLastVersionSeen',
     ]),
-    imageFor(index) {
-      if (index >= this.info.images.length || !this.info.images[index]) return null;
-      return require(`../assets/news/imgs/${this.info.images[index]}`);
-    },
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
     },
@@ -109,18 +113,11 @@ export default {
     .news-modal {
         border-radius: 10px;
         background-color: white;
-        padding: 2rem;
+        padding: 3rem;
         text-align: center;
-        width: 42.5rem;
-        height: 30.625rem;
-
-        &__texts{
-          margin-left: 4rem;
-          margin-right: 4rem;
-        }
 
         p {
-          margin: 0.8rem 0 1.7rem ;
+          margin: 1.3rem 0 1.7rem 0;
         }
 
         &__image {
@@ -128,23 +125,18 @@ export default {
             max-height: 100%;
             &__wrapper {
                 width: 100%;
-                height: 15rem;
+                height: 18rem;
             }
         }
 
         &__controls {
-            margin:1rem 2rem;
+            margin: 2.2rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
 
             &__button {
                 padding: 1.5rem 3rem;
-                width: 119px;
-                height: 43px;
-                box-shadow: 0px 3px 6px #00000029;
-                border-radius: 6px;
-                font-weight: bold;
             }
 
             &__hidden {
