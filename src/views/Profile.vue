@@ -37,6 +37,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.mine"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
@@ -47,6 +48,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.contributing"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
@@ -57,6 +59,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.using"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
       </div>
       <div
@@ -113,6 +116,15 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+  },
+  watch: {
+    authenticated() {
+      if (!this.authenticated) {
+        this.$router.push({
+          name: 'signIn',
+        });
+      }
+    },
   },
   mounted() {
     this.updateMyProfile();
@@ -185,14 +197,15 @@ h1 {
                 justify-content: center;
                 flex-wrap: wrap;
                 margin: 1rem;
+                align-items: center;
             }
             &__title {
               font-size: 1.5rem;
-              margin-bottom: 0.625;
+              margin: 0 0 0.625rem 0;
             }
             &__subtitle {
               font-size: 1.125rem;
-              margin-bottom: 1rem;
+              margin: 0 1rem 0.625rem 1rem;
             }
         }
 
@@ -216,7 +229,7 @@ h1 {
             display: flex;
             flex-wrap: wrap;
             max-width: 72.875rem;
-            min-height: 31.25rem;
+            // min-height: 31.25rem;
             padding: 1rem;
             margin: auto;
           }
