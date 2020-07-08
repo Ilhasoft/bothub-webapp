@@ -26,7 +26,11 @@ export default {
     BoardingLayout,
   },
   methods: {
-    onBack() {},
+    onBack() {
+      this.$router.push({
+        name: 'payment-options',
+      });
+    },
   },
 };
 </script>
