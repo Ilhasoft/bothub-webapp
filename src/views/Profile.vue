@@ -117,6 +117,15 @@ export default {
       'myProfile',
     ]),
   },
+  watch: {
+    authenticated() {
+      if (!this.authenticated) {
+        this.$router.push({
+          name: 'signIn',
+        });
+      }
+    },
+  },
   mounted() {
     this.updateMyProfile();
     this.updateMyRepositories();
