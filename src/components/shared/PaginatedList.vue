@@ -12,8 +12,10 @@
     <div class="pagination__bottom">
       <loading v-if="isLoading" />
       <p
-        class="text-center"
-        else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
+        v-else
+        class="text-center">
+        {{ listStatusErrorCode | statusCodeVerbose }}
+      </p>
       <div>
         <b-pagination
           :total="list.total"
@@ -27,6 +29,10 @@
           aria-current-label="Current page"/>
       </div>
     </div>
+  </div>
+  <div v-else-if="list && list.empty">
+    <p
+      class="pagination__message"> {{ emptyMessage }} </p>
   </div>
 </template>
 
@@ -60,6 +66,10 @@ export default {
     addAttributes: {
       type: Object,
       default: () => {},
+    },
+    emptyMessage: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -131,6 +141,11 @@ export default {
     max-width: 600px;
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__message {
+    text-align: center;
+    width: 100%;
   }
 
 }

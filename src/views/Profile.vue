@@ -37,6 +37,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.mine"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
@@ -47,6 +48,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.contributing"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
 
         <div class="profile__repositories__separator" />
@@ -57,6 +59,7 @@
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.using"
+          :empty-message="$t('webapp.home.no_repo')"
           class="profile__repositories__cards" />
       </div>
       <div
@@ -217,7 +220,7 @@ h1 {
             display: flex;
             flex-wrap: wrap;
             max-width: 72.875rem;
-            min-height: 31.25rem;
+            // min-height: 31.25rem;
             padding: 1rem;
             margin: auto;
           }

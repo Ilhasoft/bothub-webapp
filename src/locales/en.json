@@ -193,7 +193,7 @@
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
       "all_categories": "All categories",
       "all_languages": "All languages",
-      "no_repo": "Repositories not found.",
+      "no_repo": "No repositories found.",
       "default_error": "Something went wrong",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",

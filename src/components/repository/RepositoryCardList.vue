@@ -40,10 +40,6 @@ export default {
       type: '',
       default: null,
     },
-    showMoreButton: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
     return {
