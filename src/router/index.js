@@ -186,6 +186,13 @@ export default new Router({
         path: '/payment-options',
         name: 'payment-options',
         component: PaymentOptions,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
       },
       {
         path: '/payment-info',

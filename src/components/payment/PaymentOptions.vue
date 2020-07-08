@@ -30,7 +30,8 @@
         <div class="payment-options__card__button__container">
           <b-button
             type="is-primary"
-            class="payment-options__card__button"> {{ option.button_text }} </b-button>
+            class="payment-options__card__button"
+            @click="option.action"> {{ option.button_text }} </b-button>
         </div>
       </div>
     </div>
@@ -53,6 +54,7 @@ export default {
           button_text: this.$t('webapp.payment.options.get_free'),
           symbol: '$',
           price: '0',
+          action: this.goToHome,
         },
         {
           title: this.$t('webapp.payment.options.professional'),
@@ -61,15 +63,29 @@ export default {
           symbol: '$',
           price: '0.02',
           price_subtitle: this.$t('webapp.payment.options.per_prediction'),
+          action: this.goToPayment,
         },
         {
           title: this.$t('webapp.payment.options.custom'),
           text: this.$t('webapp.payment.options.custom_text'),
           button_text: this.$t('webapp.payment.options.contact_us'),
           price_text: this.$t('webapp.payment.options.contact'),
+          action: () => {},
         },
       ],
     };
+  },
+  methods: {
+    goToHome() {
+      this.$router.push({
+        name: 'home',
+      });
+    },
+    goToPayment() {
+      this.$router.push({
+        name: 'payment-info',
+      });
+    },
   },
 };
 </script>
