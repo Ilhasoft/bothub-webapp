@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="repository"
-    class="user-report-item level">
-    <div class="level-left">
+    class="user-report-item level is-mobile">
+    <div class="level-left user-report-item__info">
       <div class="user-report-item__category__container">
         <bh-icon
           :value="repository.categories[0].icon"
@@ -16,7 +16,11 @@
       </div>
     </div>
     <div class="level-right">
-      <b-button type="is-primary"> {{ $tc('webapp.my_profile.reports.predictions', predictions) }} </b-button>
+      <b-button
+        class="user-report-item__button"
+        type="is-primary">
+        {{ $tc('webapp.my_profile.reports.predictions', predictions) }}
+      </b-button>
     </div>
   </div>
 </template>
@@ -44,7 +48,12 @@ export default {
   background-color: $color-white;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
-  padding: 1.25rem 1.875rem;
+  padding: 1.25rem 1.875rem 0.25rem 1.875rem;
+  flex-wrap: wrap;
+
+  &__info {
+    margin: 0 1rem 1rem 0;
+  }
 
     &__category {
 
@@ -68,6 +77,12 @@ export default {
     &__user {
       font-size: 0.875rem;
       margin: 0;
+    }
+
+    &__button {
+      margin: 1rem 0;
+      padding: 0 1.8rem;
+      border-radius: 50px;
     }
 }
 
