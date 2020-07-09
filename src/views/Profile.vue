@@ -75,6 +75,29 @@
           <user-report-list />
         </div>
       </div>
+      <div
+        v-show="selected==4">
+        <h1 class="profile__title"> Payment History </h1>
+        <div class="profile__edit__content">
+          <payment-history />
+        </div>
+        <div class="profile__repositories__separator" />
+        <h1 class="profile__title"> Payment Information </h1>
+        <div class="profile__edit__content">
+          <payment-form class="profile__payment__form" />
+        </div>
+        <h1 class="profile__title"> By Credit coupon </h1>
+        <div class="profile__edit__content">
+          <b-field>
+            <b-input
+              v-model="coupon"
+              expanded/>
+            <b-button
+              type="is-primary"
+              @click="submitCoupon"> Submit </b-button>
+          </b-field>
+        </div>
+      </div>
     </div>
   </layout>
 </template>
@@ -88,6 +111,8 @@ import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
 import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
+import PaymentForm from '@/components/payment/PaymentForm';
+import PaymentHistory from '@/components/payment/PaymentHistory';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -100,6 +125,8 @@ export default {
     PaginatedList,
     Activities,
     UserReportList,
+    PaymentForm,
+    PaymentHistory,
   },
   data() {
     return {
@@ -117,6 +144,7 @@ export default {
         this.$t('webapp.my_profile.activities.title'),
         this.$t('webapp.my_profile.reports.title'),
         this.$t('webapp.my_profile.payments')],
+      coupon: null,
     };
   },
   computed: {
@@ -145,6 +173,7 @@ export default {
       'getUsingRepositories',
       'updateMyProfile',
     ]),
+    submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
       this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
@@ -254,6 +283,14 @@ h1 {
 
         &__activities {
           margin-top: 2.5rem;
+        }
+
+        &__payment {
+          &__form {
+            max-width: 30rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+          }
         }
     }
 </style>

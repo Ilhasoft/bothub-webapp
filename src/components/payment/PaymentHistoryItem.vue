@@ -1,0 +1,155 @@
+<template>
+  <div
+    v-if="current"
+    class="history history--current" >
+    <div class="history__period">
+      <p class="history__period__title"> {{ period }} payment </p>
+      <b-button type="is-primary"> {{ predictions }} predictions </b-button>
+    </div>
+    <div class="history__total">
+      <p class="history__total__title"> Total: {{ currency }} {{ total }} </p>
+      <p
+        class="history__details"
+        @click="showDetails = !showDetails">
+        {{ showDetails ? 'Hide Details' : 'Show Details' }}
+      </p>
+    </div>
+    <div v-if="showDetails && values.length > 0">
+      <div
+        v-for="(value, index) in values"
+        :key="index"
+        class="history__values">
+        <p> {{ value.repository }} </p>
+        <div class="history__values__separator"/>
+        <p> {{ currency }} {{ value.value }} </p>
+      </div>
+    </div>
+  </div>
+
+  <div
+    v-else
+    class="history history--past" >
+    <div class="history__period">
+      <p class="history__period__title"> {{ period }} payment </p>
+      <p class="history__total__title"> {{ currency }} {{ total }}
+        <b-icon
+          :class="paid? 'success' : 'danger' "
+          :icon="paid ? 'check' : 'close'" />
+      </p>
+    </div>
+    <p/>
+  </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'PaymentHistoryItem',
+  props: {
+    period: {
+      type: String,
+      default: null,
+    },
+    current: {
+      type: Boolean,
+      default: false,
+    },
+    total: {
+      type: Number,
+      default: 0,
+    },
+    values: {
+      type: Array,
+      default: () => [],
+    },
+    currency: {
+      type: String,
+      default: '',
+    },
+    predictions: {
+      type: Number,
+      default: 0,
+    },
+    paid: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return { showDetails: false };
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+    .success {
+        color: $color-success;
+    }
+
+    .danger {
+        color: $color-danger;
+    }
+
+    .history {
+        background-color: $color-white;
+        border-radius: 10px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0px 10px 30px #98989838;
+
+        &--current {
+            padding: 2.75rem 5.313rem 3.563rem 3.25rem;
+        }
+
+        &--past {
+            padding: 1.25rem 5.313rem 1.25rem 3.25rem;
+        }
+
+        &__period {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 100%;
+
+            &__title {
+                font-size: 1.813rem;
+            }
+
+            > * {
+                margin-right: 1rem;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+
+        &__values {
+            display: flex;
+            align-items: flex-end;
+            &__separator {
+                margin: 0 1rem 0.5rem 1rem;
+                flex-grow: 1;
+                height: 1px;
+                background-color: $color-grey;
+            }
+        }
+
+        &__details {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        &__total {
+
+            &__title {
+                font-size: 1.5rem;
+                font-weight: bold;
+            }
+
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+    }
+</style>

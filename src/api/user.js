@@ -33,6 +33,10 @@ export default {
       },
     );
   },
+  // TODO
+  getPaymentHistory(limit = 10) {
+    return new utils.Page('', limit);
+  },
   async getChangePasswordSchema() {
     const { data } = await request.$http.options('/v2/account/change-password/');
     return data.actions.PUT;
