@@ -69,6 +69,12 @@
           <activities class="profile__activities" />
         </div>
       </div>
+      <div
+        v-show="selected==3">
+        <div class="profile__edit__content">
+          <user-report-list />
+        </div>
+      </div>
     </div>
   </layout>
 </template>
@@ -79,6 +85,7 @@ import UserAvatar from '@/components/user/UserAvatar';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Activities from '@/components/user/Activities';
+import UserReportList from '@/components/user/UserReportList';
 import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import { mapGetters, mapActions } from 'vuex';
@@ -92,6 +99,7 @@ export default {
     TabSelect,
     PaginatedList,
     Activities,
+    UserReportList,
   },
   data() {
     return {
