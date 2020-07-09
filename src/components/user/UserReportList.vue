@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div class="user-reports__filter">
+    <div
+      v-show="list && !list.empty"
+      class="user-reports__filter">
       <b-select
+        :disabled="list && list.loading"
         v-model="filter"
         class="user-reports__select">
         <option
@@ -16,6 +19,7 @@
       :item-component="item"
       :per-page="perPage"
       :list="list"
+      :empty-message="$t('webapp.my_profile.reports.no_reports')"
       @updated="mock"/>
   </div>
 </template>
