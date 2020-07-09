@@ -11,7 +11,8 @@
       </b-button>
     </div>
     <div class="history__total">
-      <p class="history__total__title"> Total: {{ currency }} {{ total }} </p>
+      <p class="history__total__title">
+        {{ $t('webapp.my_profile.payment.total') }} {{ $n(total, 'currency') }} </p>
       <p
         class="history__details"
         @click="showDetails = !showDetails">
@@ -25,7 +26,7 @@
         class="history__values">
         <p> {{ value.repository }} </p>
         <div class="history__values__separator"/>
-        <p> {{ currency }} {{ value.value }} </p>
+        <p> {{ value.value }} </p>
       </div>
     </div>
   </div>
@@ -37,7 +38,7 @@
       <p class="history__period__title">
         {{ $t('webapp.my_profile.payment.payment', { period }) }}
       </p>
-      <p class="history__total__title"> {{ currency }} {{ total }}
+      <p class="history__total__title"> {{ $n(total, 'currency') }}
         <b-icon
           :class="paid? 'success' : 'danger' "
           :icon="paid ? 'check' : 'close'" />

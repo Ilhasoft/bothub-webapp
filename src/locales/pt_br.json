@@ -337,7 +337,8 @@
         "payment": "Pagamento de {period}",
         "credit_payment": "Com cartão de crédito",
         "coupon_payment": "Com cupom",
-        "submit": "Enviar"
+        "submit": "Enviar",
+        "total": "Total:"
       },
       "intelligences": {
         "title": "Inteligências",
