@@ -3,7 +3,9 @@
     v-if="repository"
     class="user-report-item level is-mobile">
     <div class="level-left user-report-item__info">
-      <div class="user-report-item__category__container">
+      <div
+        v-if="repository.categories && repository.categories.length > 0"
+        class="user-report-item__category__container">
         <bh-icon
           :value="repository.categories[0].icon"
           class="user-report-item__category"
@@ -11,8 +13,13 @@
       </div>
       <div>
         <p class="user-report-item__name"> {{ repository.name || '' }} </p>
-        <p class="user-report-item__user"> {{ $t('webapp.my_profile.reports.created_by') }}
+        <p
+          v-if="repository.owner"
+          class="user-report-item__user"> {{ $t('webapp.my_profile.reports.created_by') }}
         <a> {{ repository.owner.nickname || '' }} </a> </p>
+        <p
+          v-if="time"
+          class="user-report-item__user"> {{ time }} </p>
       </div>
     </div>
     <div class="level-right">
@@ -37,6 +44,10 @@ export default {
       type: Number,
       default: 0,
     },
+    time: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
@@ -48,11 +59,11 @@ export default {
   background-color: $color-white;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
-  padding: 1.25rem 1.875rem 0.25rem 1.875rem;
+  padding: 1.25rem 1.875rem 1.25rem 1.875rem;
   flex-wrap: wrap;
 
   &__info {
-    margin: 0 1rem 1rem 0;
+    margin: 0 1rem 0 0;
   }
 
     &__category {
@@ -80,7 +91,7 @@ export default {
     }
 
     &__button {
-      margin: 1rem 0;
+      margin: 0.5rem 0 0 0;
       padding: 0 1.8rem;
       border-radius: 50px;
     }

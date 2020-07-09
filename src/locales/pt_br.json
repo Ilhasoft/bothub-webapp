@@ -327,7 +327,8 @@
           "last_three_months": "Últimos três meses",
           "all_time": "Desde o começo",
           "filter_by": "Filtrar por",
-          "no_reports": "Nenhum relatório"
+          "no_reports": "Nenhum relatório",
+          "total": "Total de predições:"
       },
       "payments": "Pagamentos",
       "intelligences": {

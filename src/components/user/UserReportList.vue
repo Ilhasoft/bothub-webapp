@@ -14,6 +14,10 @@
       </b-select>
       {{ $t('webapp.my_profile.reports.filter_by') }}
     </div>
+    <user-report-item
+      :repository="total.repository"
+      :predictions="total.predictions"
+      :time="time.label"/>
     <paginated-list
       v-if="list"
       :item-component="item"
@@ -33,6 +37,7 @@ export default {
   name: 'UserReportList',
   components: {
     PaginatedList,
+    UserReportItem,
   },
   data() {
     return {
@@ -41,25 +46,44 @@ export default {
       query: {},
       item: UserReportItem,
       options: [
-        { label: this.$t('webapp.my_profile.reports.today'), value: '' },
-        { label: this.$t('webapp.my_profile.reports.this_week'), value: '' },
-        { label: this.$t('webapp.my_profile.reports.this_month'), value: '' },
-        { label: this.$t('webapp.my_profile.reports.last_three_months'), value: '' },
-        { label: this.$t('webapp.my_profile.reports.all_time'), value: null },
+        { label: this.$t('webapp.my_profile.reports.today'), value: 'today' },
+        { label: this.$t('webapp.my_profile.reports.this_week'), value: 'this_week' },
+        { label: this.$t('webapp.my_profile.reports.this_month'), value: 'this_month' },
+        { label: this.$t('webapp.my_profile.reports.last_three_months'), value: 'last_three' },
+        { label: this.$t('webapp.my_profile.reports.all_time'), value: null, selected: true },
       ],
       filter: null,
+      total: {
+        repository: {
+          name: this.$t('webapp.my_profile.reports.total'),
+        },
+        predictions: 800,
+      },
     };
   },
-  async mounted() {
-    this.list = await this.getUserReports({
-      limit: this.perPage,
-      query: this.query,
-    });
+  computed: {
+    time() {
+      return this.options.find(option => option.value === this.filter);
+    },
+  },
+  watch: {
+    filter() {
+      this.getList();
+    },
+  },
+  mounted() {
+    this.getList();
   },
   methods: {
     ...mapActions([
       'getUserReports',
     ]),
+    async getList() {
+      this.list = await this.getUserReports({
+        limit: this.perPage,
+        query: this.query,
+      });
+    },
     mock() {
       this.list.total = 10;
       this.list.items = new Array(10).fill(
