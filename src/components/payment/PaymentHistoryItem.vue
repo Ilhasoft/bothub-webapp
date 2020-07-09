@@ -19,14 +19,17 @@
         {{ showDetails ? 'Hide Details' : 'Show Details' }}
       </p>
     </div>
-    <div v-if="showDetails && values.length > 0">
+    <div
+      :class="{
+        'history__values__container': true,
+        'history__values__container--closed': !(showDetails && values.length > 0)}">
       <div
         v-for="(value, index) in values"
         :key="index"
         class="history__values">
         <p> {{ value.repository }} </p>
         <div class="history__values__separator"/>
-        <p> {{ value.value }} </p>
+        <p> {{ $n(value.value, 'currency') }} </p>
       </div>
     </div>
   </div>
@@ -45,7 +48,6 @@
       </p>
     </div>
     <p/>
-  </div>
   </div>
 </template>
 
@@ -133,10 +135,22 @@ export default {
         &__values {
             display: flex;
             align-items: flex-end;
+
+            &__container {
+                max-height: 800px;
+                overflow: hidden;
+                transition: max-height 0.5s linear;
+
+               &--closed {
+                   max-height: 0;
+                }
+            }
+
             &__separator {
                 margin: 0 1rem 0.5rem 1rem;
                 flex-grow: 1;
                 height: 1px;
+                transition: max-height 2s linear;
                 background-color: $color-grey;
             }
         }

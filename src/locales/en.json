@@ -328,7 +328,7 @@
         "no_reports": "Nenhum relatório",
         "total": "Predictions total:"
     },
-      "payments": {
+      "payment": {
         "title": "Payments",
         "history": "Payment History",
         "info": "Payment Information",
