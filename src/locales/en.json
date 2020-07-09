@@ -169,6 +169,8 @@
       "do_not_log": "No logs",
       "expected_intent": "Expected intent",
       "predicted_intent": "Predicted intent",
+      "expected_entity": "Expected entity",
+      "predicted_entity": "Predicted entity",
       "no_expected_intent": "No expected intent",
       "no_intent_predicted": "No intention predicted",
       "confidence": "Confidence",
