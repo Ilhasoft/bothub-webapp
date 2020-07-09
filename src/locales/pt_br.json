@@ -338,7 +338,8 @@
         "credit_payment": "Com cartão de crédito",
         "coupon_payment": "Com cupom",
         "submit": "Enviar",
-        "total": "Total:"
+        "total": "Total:",
+        "no_payments": "Sem pagamentos"
       },
       "intelligences": {
         "title": "Inteligências",

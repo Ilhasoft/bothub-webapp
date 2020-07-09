@@ -336,7 +336,8 @@
         "credit_payment": "By credit card",
         "coupon_payment": "By credit coupon",
         "submit": "Submit",
-        "total": "Total:"
+        "total": "Total:",
+        "no_payments": "No payments"
       },
       "intelligences": {
         "title": "Intelligences",

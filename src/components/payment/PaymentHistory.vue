@@ -3,6 +3,7 @@
     v-if="list"
     :list="list"
     :item-component="item"
+    :empty-message="$t('webapp.my_profile.payment.no_payments')"
     @updated="mock"/>
 </template>
 
