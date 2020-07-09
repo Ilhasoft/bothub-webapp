@@ -315,7 +315,17 @@
         "recent": "Recent Activities",
         "activity_complement": "in intelligence <strong> {intelligence} </strong> of organization <strong> {org} </strong>"
       },
-      "reports": "Reports",
+      "reports": {
+        "title": "Reports",
+        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "created_by": "Created by",
+        "today": "Today",
+        "this_week": "This week",
+        "this_month": "This month",
+        "last_three_months": "Last three months",
+        "all_time": "All time",
+        "filter_by": "Filter by"
+    },
       "payments": "Payments",
       "intelligences": {
         "title": "Intelligences",

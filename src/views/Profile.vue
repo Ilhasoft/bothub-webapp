@@ -115,7 +115,7 @@ export default {
         this.$t('webapp.my_profile.profile'),
         this.$t('webapp.my_profile.intelligences.title'),
         this.$t('webapp.my_profile.activities.title'),
-        this.$t('webapp.my_profile.reports'),
+        this.$t('webapp.my_profile.reports.title'),
         this.$t('webapp.my_profile.payments')],
     };
   },

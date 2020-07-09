@@ -1,10 +1,23 @@
 <template>
-  <paginated-list
-    v-if="list"
-    :item-component="item"
-    :per-page="perPage"
-    :list="list"
-    @updated="mock"/>
+  <div>
+    <div class="user-reports__filter">
+      {{ $t('webapp.my_profile.reports.filter_by') }}
+      <b-select
+        v-model="filter"
+        class="user-reports__select">
+        <option
+          v-for="(option, index) in options"
+          :key="index"
+          :value="option.value"> {{ option.label }} </option>
+      </b-select>
+    </div>
+    <paginated-list
+      v-if="list"
+      :item-component="item"
+      :per-page="perPage"
+      :list="list"
+      @updated="mock"/>
+  </div>
 </template>
 
 <script>
@@ -23,6 +36,14 @@ export default {
       perPage: 10,
       query: {},
       item: UserReportItem,
+      options: [
+        { label: this.$t('webapp.my_profile.reports.today'), value: '' },
+        { label: this.$t('webapp.my_profile.reports.this_week'), value: '' },
+        { label: this.$t('webapp.my_profile.reports.this_month'), value: '' },
+        { label: this.$t('webapp.my_profile.reports.last_three_months'), value: '' },
+        { label: this.$t('webapp.my_profile.reports.all_time'), value: null },
+      ],
+      filter: null,
     };
   },
   async mounted() {
@@ -61,5 +82,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .user-reports {
+    &__filter {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      margin-bottom: 1.875rem;
+    }
 
+    &__select {
+      margin-left: 1rem;
+    }
+  }
 </style>
