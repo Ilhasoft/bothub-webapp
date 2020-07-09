@@ -59,7 +59,8 @@ export default {
   background-color: $color-white;
   border-radius: 10px;
   box-shadow: 0px 3px 6px #00000029;
-  padding: 1.25rem 1.875rem 1.25rem 1.875rem;
+  padding: 0.75rem 1.875rem 0.75rem 1.875rem;
+  min-height: 5rem;
   flex-wrap: wrap;
 
   &__info {
