@@ -3,8 +3,12 @@
     v-if="current"
     class="history history--current" >
     <div class="history__period">
-      <p class="history__period__title"> {{ period }} payment </p>
-      <b-button type="is-primary"> {{ predictions }} predictions </b-button>
+      <p class="history__period__title">
+        {{ $t('webapp.my_profile.payment.payment', { period }) }}
+      </p>
+      <b-button type="is-primary">
+        {{ $tc('webapp.my_profile.reports.predictions', predictions) }}
+      </b-button>
     </div>
     <div class="history__total">
       <p class="history__total__title"> Total: {{ currency }} {{ total }} </p>
@@ -30,7 +34,9 @@
     v-else
     class="history history--past" >
     <div class="history__period">
-      <p class="history__period__title"> {{ period }} payment </p>
+      <p class="history__period__title">
+        {{ $t('webapp.my_profile.payment.payment', { period }) }}
+      </p>
       <p class="history__total__title"> {{ currency }} {{ total }}
         <b-icon
           :class="paid? 'success' : 'danger' "
@@ -102,7 +108,7 @@ export default {
         }
 
         &--past {
-            padding: 1.25rem 5.313rem 1.25rem 3.25rem;
+            padding: 1.25rem 1.875rem 1.25rem 3.25rem;
         }
 
         &__period {

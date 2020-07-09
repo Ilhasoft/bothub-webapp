@@ -77,24 +77,25 @@
       </div>
       <div
         v-show="selected==4">
-        <h1 class="profile__title"> Payment History </h1>
-        <div class="profile__edit__content">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
           <payment-history />
         </div>
         <div class="profile__repositories__separator" />
-        <h1 class="profile__title"> Payment Information </h1>
-        <div class="profile__edit__content">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.info') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
           <payment-form class="profile__payment__form" />
         </div>
-        <h1 class="profile__title"> By Credit coupon </h1>
-        <div class="profile__edit__content">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.coupon_payment') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
           <b-field>
             <b-input
               v-model="coupon"
               expanded/>
             <b-button
+              class="profile__payment__button"
               type="is-primary"
-              @click="submitCoupon"> Submit </b-button>
+              @click="submitCoupon"> {{ $t('webapp.my_profile.payment.submit') }} </b-button>
           </b-field>
         </div>
       </div>
@@ -143,7 +144,7 @@ export default {
         this.$t('webapp.my_profile.intelligences.title'),
         this.$t('webapp.my_profile.activities.title'),
         this.$t('webapp.my_profile.reports.title'),
-        this.$t('webapp.my_profile.payments')],
+        this.$t('webapp.my_profile.payment.title')],
       coupon: null,
     };
   },
@@ -266,7 +267,6 @@ h1 {
             display: flex;
             flex-wrap: wrap;
             max-width: 72.875rem;
-            // min-height: 31.25rem;
             padding: 1rem;
             margin: auto;
           }
@@ -286,6 +286,15 @@ h1 {
         }
 
         &__payment {
+
+          &__content {
+            margin-top: 2.313rem;
+          }
+
+          &__button {
+            margin-left: 0.625rem;
+          }
+
           &__form {
             max-width: 30rem;
             margin: 0 auto;
