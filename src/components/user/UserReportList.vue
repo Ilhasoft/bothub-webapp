@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="user-reports__filter">
-      {{ $t('webapp.my_profile.reports.filter_by') }}
       <b-select
         v-model="filter"
         class="user-reports__select">
@@ -10,6 +9,7 @@
           :key="index"
           :value="option.value"> {{ option.label }} </option>
       </b-select>
+      {{ $t('webapp.my_profile.reports.filter_by') }}
     </div>
     <paginated-list
       v-if="list"
@@ -85,7 +85,7 @@ export default {
   .user-reports {
     &__filter {
       display: flex;
-      justify-content: end;
+      flex-direction: row-reverse;
       align-items: center;
       margin-bottom: 1.875rem;
     }
