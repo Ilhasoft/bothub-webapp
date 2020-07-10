@@ -215,7 +215,6 @@ export default {
         this.errors = this.drfRepositoryModel.errors;
         this.submitting = false;
       }
-
       return false;
     },
   },
