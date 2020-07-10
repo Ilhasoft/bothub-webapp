@@ -50,4 +50,8 @@ export default {
     const queryString = qs.stringify(query);
     return request.$http.get(`/v2/account/search-user/?${queryString}`);
   },
+  // TODO
+  getReports(limit, query) {
+    return new utils.Page('', limit, query);
+  },
 };

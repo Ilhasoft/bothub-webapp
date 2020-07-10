@@ -104,12 +104,14 @@ export default {
     async fetch() {
       try {
         await this.list.updateItems(this.page);
+        this.$emit('updated');
         return true;
       } catch (e) {
         this.error = e;
         this.listStatusErrorCode = e.request
           ? e.request.status
           : '';
+        this.$emit('error', this.error);
       }
       return false;
     },
