@@ -16,14 +16,14 @@
           <p class="org-card__attrs__line"> <b-icon
             size="is-medium"
             class="org-card__icon"
-            icon="brain"/> {{ repository_count }} repositories </p>
+            icon="brain"/> {{ $tc('webapp.orgs.repositories', repository_count) }} </p>
           <p class="org-card__attrs__line"> <b-icon
             size="is-medium"
             class="org-card__icon"
-            icon="account-multiple"/> {{ member_count }} members </p>
+            icon="account-multiple"/> {{ $tc('webapp.orgs.members', member_count) }} </p>
         </div>
         <div class="org-card__time">
-          <p> Created {{ created_at | moment('from') }} </p>
+          <p> {{ $t('webapp.orgs.created') }} {{ created_at | moment('from') }} </p>
         </div>
       </div>
     </div>
@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'OrgListItem',

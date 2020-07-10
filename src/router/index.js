@@ -185,7 +185,7 @@ export default new Router({
     ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
       ? [{
         path: '/orgs',
-        name: 'Orgs',
+        name: 'orgs',
         component: Orgs,
         beforeEnter: async (to, from, next) => {
           if (!store.getters.authenticated) {

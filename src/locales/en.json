@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "sign in",
       "signup": "sign up",
+      "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
@@ -294,6 +295,13 @@
       "export_switch_no": "No",
       "export_switch_yes": "Yes",
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
+    },
+    "orgs": {
+      "created_by": "Created by",
+      "created": "Created",
+      "repositories": "{n} repositories | {n} repository | {n} repositories",
+      "members": "{n} members | {n} member | {n} members",
+      "create": "Create organization"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",

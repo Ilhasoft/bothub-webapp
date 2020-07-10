@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "entrar",
       "signup": "cadastrar",
+      "orgs": "Organizações",
       "terms_conditions": "Termos & condições",
       "contact_us": "Contate-nos",
       "subscribe": "Inscreva-se",
@@ -296,6 +297,13 @@
       "export_switch_no": "Não",
       "export_switch_yes": "Sim",
       "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
+    },
+    "orgs": {
+      "created_by": "Criado por",
+      "created": "Criado",
+      "repositories": "{n} inteligências | {n} inteligência | {n} inteligências",
+      "memebers": "{n} membros | {n} membro | {n} membros",
+      "create": "Criar Organização"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",
