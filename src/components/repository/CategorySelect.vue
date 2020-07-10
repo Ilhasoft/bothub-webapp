@@ -50,8 +50,9 @@ export default {
     async getCategories() {
       this.loading = true;
       try {
-        const response = await this.getAllCategories();
-        this.list = response.data;
+        const { data } = await this.getAllCategories();
+        const otherCategory = data.splice(8, 1);
+        this.list = [...data, otherCategory[0]];
       } catch (error) {
         this.$buefy.toast.open({
           message: error,

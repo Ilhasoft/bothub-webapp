@@ -15,6 +15,7 @@
         v-model="data"
         :errors="errors"
         :show-labels="false"
+        :new-intelligence-forms="true"
         class="create-repository__form" />
       <b-button
         :disabled="!checkFormData"
@@ -126,7 +127,10 @@ export default {
     },
     filteredSchema() {
       const { categories, ...schema } = this.computedSchema;
-      return schema;
+      const { description } = schema;
+      description.type = 'textarea';
+      const formattedSchema = { ...schema, description };
+      return formattedSchema;
     },
     checkFormData() {
       if (this.data.name === '' || this.data.description === ''
@@ -224,13 +228,13 @@ export default {
 
     .create-repository {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-around;
         text-align: center;
         margin: 4rem 8rem;
 
-        @media (max-width: $mobile-width) {
-          flex-direction: row;
+        @media (max-width: $mobile-width * 1.5) {
+          flex-direction: column;
+          align-items: center;
         }
 
         &__buttons {
@@ -266,19 +270,21 @@ export default {
             }
 
             &__wrapper {
-                width: 31rem;
-                margin: 0 12rem 0 0;
-
+                width: 32rem;
                 @media (max-width: $mobile-width*1.2) {
-                  margin: 3rem 0 0 0;
+                    padding: 0 3rem ;
                 }
             }
 
             &__buttons{
+              margin-top: 4rem;
               box-shadow: 0px 3px 6px #00000029;
               border-radius: 6px;
               width: 6.875rem;
               height: 2.188rem;
+              @media (max-width: $mobile-width*1.2) {
+                 margin-top: 7rem;
+                }
             }
         }
 
