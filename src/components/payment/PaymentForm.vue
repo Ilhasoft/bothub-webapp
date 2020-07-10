@@ -20,9 +20,9 @@
       @change="onChange"
     />
     <div
-      v-if="showBackButton"
       class="payment-buttons">
       <b-button
+        v-if="showBackButton"
         type="is-primary"
         @click="$emit('back')"> {{ $t('webapp.payment.info.back') }} </b-button>
       <b-button
@@ -36,6 +36,7 @@ import { Card } from 'vue-stripe-elements-plus';
 import stripe from '@/utils/plugins/stripe';
 
 export default {
+  name: 'PaymentForm',
   components: {
     Card,
   },

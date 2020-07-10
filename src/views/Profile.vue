@@ -75,6 +75,30 @@
           <user-report-list />
         </div>
       </div>
+      <div
+        v-show="selected==4">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
+          <payment-history />
+        </div>
+        <div class="profile__repositories__separator" />
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.info') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
+          <payment-form class="profile__payment__form" />
+        </div>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.coupon_payment') }} </h1>
+        <div class="profile__edit__content profile__payment__content">
+          <b-field>
+            <b-input
+              v-model="coupon"
+              expanded/>
+            <b-button
+              class="profile__payment__button"
+              type="is-primary"
+              @click="submitCoupon"> {{ $t('webapp.my_profile.payment.submit') }} </b-button>
+          </b-field>
+        </div>
+      </div>
     </div>
   </layout>
 </template>
@@ -88,6 +112,8 @@ import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
 import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
+import PaymentForm from '@/components/payment/PaymentForm';
+import PaymentHistory from '@/components/payment/PaymentHistory';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -100,6 +126,8 @@ export default {
     PaginatedList,
     Activities,
     UserReportList,
+    PaymentForm,
+    PaymentHistory,
   },
   data() {
     return {
@@ -116,7 +144,8 @@ export default {
         this.$t('webapp.my_profile.intelligences.title'),
         this.$t('webapp.my_profile.activities.title'),
         this.$t('webapp.my_profile.reports.title'),
-        this.$t('webapp.my_profile.payments')],
+        this.$t('webapp.my_profile.payment.title')],
+      coupon: null,
     };
   },
   computed: {
@@ -145,6 +174,7 @@ export default {
       'getUsingRepositories',
       'updateMyProfile',
     ]),
+    submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
       this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
@@ -237,7 +267,6 @@ h1 {
             display: flex;
             flex-wrap: wrap;
             max-width: 72.875rem;
-            // min-height: 31.25rem;
             padding: 1rem;
             margin: auto;
           }
@@ -254,6 +283,23 @@ h1 {
 
         &__activities {
           margin-top: 2.5rem;
+        }
+
+        &__payment {
+
+          &__content {
+            margin-top: 2.313rem;
+          }
+
+          &__button {
+            margin-left: 0.625rem;
+          }
+
+          &__form {
+            max-width: 30rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+          }
         }
     }
 </style>
