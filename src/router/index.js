@@ -27,6 +27,7 @@ import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import PaymentOptions from '@/views/payment/PaymentOptions';
 import PaymentInfo from '@/views/payment/PaymentInfo';
+import Orgs from '@/views/Orgs';
 import store from '../store';
 
 Vue.use(Router);
@@ -183,6 +184,18 @@ export default new Router({
     },
     ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
       ? [{
+        path: '/orgs',
+        name: 'Orgs',
+        component: Orgs,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      },
+      {
         path: '/payment-options',
         name: 'payment-options',
         component: PaymentOptions,
