@@ -5,7 +5,9 @@
         <div class="org__header__info">
           <h1 class="org__header__title"> Org </h1>
           <p
-            class="org__header__subtitle"> Created by User </p>
+            class="org__header__subtitle">
+            {{ $t('webapp.org.created_by') }} User
+          </p>
         </div>
       </div>
     </div>
@@ -20,8 +22,23 @@
         v-show="selected==0">
         <h1 class="org__title"> {{ $t('webapp.org.org_info' ) }} </h1>
         <div class="org__edit__content">
-          <edit-profile-form class="org__edit" />
+          <edit-org-form class="org__edit" />
+
+          <div class="org__repositories__separator" />
         </div>
+
+        <h1 class="org__title"> {{ $t('webapp.org.manage_contributors') }} </h1>
+        <div class="org__edit__content">
+          <p> {{ $t('webapp.org.manage_subtitle' ) }} </p>
+          <set-authorization-role-form
+            ref="setAuthorizationRoleForm"
+            repository-uuid=""
+            @roleSetted="onRoleSetted()" />
+          <authorizations-list
+            ref="authorizationsList"
+            repository-uuid="" />
+        </div>
+
       </div>
       <div v-show="selected==1">
         <h1 class="org__title"> {{ $t('webapp.org.intelligences.mine') }} </h1>
@@ -88,7 +105,7 @@
 <script>
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
-import EditProfileForm from '@/components/user/EditProfileForm';
+import EditOrgForm from '@/components/user/EditOrgForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
@@ -96,6 +113,9 @@ import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
+
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -103,13 +123,15 @@ export default {
   components: {
     Layout,
     UserAvatar,
-    EditProfileForm,
+    EditOrgForm,
     TabSelect,
     PaginatedList,
     Activities,
     UserReportList,
     PaymentForm,
     PaymentHistory,
+    SetAuthorizationRoleForm,
+    AuthorizationsList,
   },
   data() {
     return {
@@ -158,6 +180,9 @@ export default {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
       this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
       this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
+    },
+    onRoleSetted() {
+      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };

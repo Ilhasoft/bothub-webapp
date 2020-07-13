@@ -76,4 +76,33 @@ export default {
   searchUser(store, query) {
     return user.search(query);
   },
+  async getOrgSchema() {
+    // TODO: Unmock
+    return {
+      name: {
+        label: 'Name',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'string',
+      },
+      email: {
+        label: 'Email',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'email',
+      },
+      description: {
+        label: 'Description',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'textarea',
+      },
+    };
+  },
 };

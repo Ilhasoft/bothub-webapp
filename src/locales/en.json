@@ -356,6 +356,9 @@
     },
     "org": {
       "repositories": "Intelligences",
+      "created_by": "Created by",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
       "edit": "Edit",
       "information": "Information",
       "org_info": "Organization Information",
