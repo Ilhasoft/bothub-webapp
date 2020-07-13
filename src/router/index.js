@@ -28,6 +28,7 @@ import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import PaymentOptions from '@/views/payment/PaymentOptions';
 import PaymentInfo from '@/views/payment/PaymentInfo';
 import Orgs from '@/views/Orgs';
+import Org from '@/views/Org';
 import store from '../store';
 
 Vue.use(Router);
@@ -223,6 +224,18 @@ export default new Router({
         path: '/profile/',
         name: 'profile',
         component: Profile,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      },
+      {
+        path: '/org/',
+        name: 'org',
+        component: Org,
         beforeEnter: async (to, from, next) => {
           if (!store.getters.authenticated) {
             next('/signin');

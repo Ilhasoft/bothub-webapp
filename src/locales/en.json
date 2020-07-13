@@ -354,6 +354,36 @@
         "using": "Use intelligences"
       }
     },
+    "org": {
+      "repositories": "Intelligences",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      }
+    },
     "menu": {
       "summary": "Summary",
       "training": "Training",
