@@ -51,8 +51,8 @@ export default {
       this.loading = true;
       try {
         const { data } = await this.getAllCategories();
-        const otherCategory = data.sort((previous, next) => previous.id - next.id);
-        this.list = otherCategory;
+        const sortedData = data.sort((previous, next) => previous.id - next.id);
+        this.list = sortedData;
       } catch (error) {
         this.$buefy.toast.open({
           message: error,
