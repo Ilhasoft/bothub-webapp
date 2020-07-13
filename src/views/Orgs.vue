@@ -6,7 +6,9 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <div v-else>
+    <div
+      v-else
+      class="orgs">
       <div class="orgs__buttons">
         <b-button type="is-primary"> {{ $t('webapp.orgs.create') }} </b-button>
       </div>
@@ -38,10 +40,13 @@ export default {
 
 <style lang="scss" scoped>
     .orgs {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 1rem;
         &__buttons {
             display: flex;
             flex-direction: row-reverse;
-            margin: 3rem 4rem 3rem 0;
+            margin-bottom: 3rem;
         }
 
         &__login {

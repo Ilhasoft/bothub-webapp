@@ -49,7 +49,6 @@ export default {
     .org-list {
         display: flex;
         flex-wrap: wrap;
-        margin: 0 4rem 0 3rem;
 
         @media screen and (max-width: $mobile-width) {
             margin: 0 1rem 0 1rem;
