@@ -6,7 +6,7 @@
           <h1 class="org__header__title"> Org </h1>
           <p
             class="org__header__subtitle">
-            {{ $t('webapp.org.created_by') }} User
+            {{ $t('webapp.orgs.created_by') }} <a> User </a>
           </p>
         </div>
       </div>
@@ -20,16 +20,16 @@
     <div class="org__content">
       <div
         v-show="selected==0">
-        <h1 class="org__title"> {{ $t('webapp.org.org_info' ) }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
         <div class="org__edit__content">
           <edit-org-form class="org__edit" />
 
           <div class="org__repositories__separator" />
         </div>
 
-        <h1 class="org__title"> {{ $t('webapp.org.manage_contributors') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
         <div class="org__edit__content">
-          <p> {{ $t('webapp.org.manage_subtitle' ) }} </p>
+          <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
           <set-authorization-role-form
             ref="setAuthorizationRoleForm"
             repository-uuid=""
@@ -41,7 +41,7 @@
 
       </div>
       <div v-show="selected==1">
-        <h1 class="org__title"> {{ $t('webapp.org.intelligences.mine') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
         <paginated-list
           v-if="repositoryLists.mine"
           :item-component="repositoryItemElem"
@@ -52,7 +52,7 @@
 
         <div class="org__repositories__separator" />
 
-        <h1 class="org__title"> {{ $t('webapp.org.intelligences.using') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
         <paginated-list
           v-if="repositoryLists.using"
           :item-component="repositoryItemElem"
@@ -63,7 +63,7 @@
       </div>
       <div
         v-show="selected==2">
-        <h1 class="org__title"> {{ $t('webapp.org.activities.recent' ) }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.activities.recent' ) }} </h1>
         <div class="org__edit__content">
           <activities class="org__activities" />
         </div>
@@ -76,16 +76,16 @@
       </div>
       <div
         v-show="selected==4">
-        <h1 class="org__title"> {{ $t('webapp.org.payment.history') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.history') }} </h1>
         <div class="org__edit__content org__payment__content">
           <payment-history />
         </div>
         <div class="org__repositories__separator" />
-        <h1 class="org__title"> {{ $t('webapp.org.payment.info') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.info') }} </h1>
         <div class="org__edit__content org__payment__content">
           <payment-form class="org__payment__form" />
         </div>
-        <h1 class="org__title"> {{ $t('webapp.org.payment.coupon_payment') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.coupon_payment') }} </h1>
         <div class="org__edit__content org__payment__content">
           <b-field>
             <b-input
@@ -94,7 +94,7 @@
             <b-button
               class="org__payment__button"
               type="is-primary"
-              @click="submitCoupon"> {{ $t('webapp.my_profile.payment.submit') }} </b-button>
+              @click="submitCoupon"> {{ $t('webapp.orgs.payment.submit') }} </b-button>
           </b-field>
         </div>
       </div>
@@ -144,11 +144,11 @@ export default {
       },
       repositoriesLimit: 3,
       tabs: [
-        this.$t('webapp.org.information'),
-        this.$t('webapp.org.intelligences.title'),
-        this.$t('webapp.org.activities.title'),
-        this.$t('webapp.org.reports.title'),
-        this.$t('webapp.org.payment.title')],
+        this.$t('webapp.orgs.information'),
+        this.$t('webapp.orgs.intelligences.title'),
+        this.$t('webapp.orgs.activities.title'),
+        this.$t('webapp.orgs.reports.title'),
+        this.$t('webapp.orgs.payment.title')],
       coupon: null,
     };
   },
@@ -263,6 +263,7 @@ h1 {
         &__edit {
           max-width: 40rem;
           margin-top: 1.563rem;
+          padding: 0 0 4rem 0;
           &__content {
             max-width: 56.25rem;
             padding: 0 1rem;

@@ -8,6 +8,7 @@
         :schema="formSchema"
         v-model="data"
         :initial-data="initialData"
+        :show-labels="false"
         :errors="errors"
         class="field"/>
       <div class="control has-text-centered">
@@ -15,7 +16,7 @@
           :disabled="submitting"
           native-type="submit"
           type="is-primary"
-          class="submit-button">{{ $t('webapp.orgs.edit') }}</b-button>
+          class="submit-button">{{ $t('webapp.orgs.create') }}</b-button>
       </div>
     </form>
   </div>
@@ -27,7 +28,7 @@ import Loading from '@/components/shared/Loading';
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'EditOrgForm',
+  name: 'CreateOrgForm',
   components: {
     FormGenerator,
     Loading,
