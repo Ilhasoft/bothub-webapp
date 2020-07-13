@@ -17,10 +17,10 @@
       <org-list />
       <b-modal
         :active.sync="createOrgOpen"
-        width="440px">
+        width="460px">
         <div class="form__wrapper">
-          <h1 class="form__title"> Let's create an organization </h1>
-          <p> Increase your team's productivity by creating all intelligence in one place. </p>
+          <h1 class="form__title"> {{ $t('webapp.orgs.create_org_title') }} </h1>
+          <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
           <create-org-form class="form"/>
         </div>
       </b-modal>

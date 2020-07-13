@@ -5,13 +5,23 @@
       <b-loading :active="submitting" />
       <form-generator
         v-if="formSchema"
-        :schema="formSchema"
+        :schema="filteredSchema"
         v-model="data"
         :initial-data="initialData"
         :show-labels="false"
         :errors="errors"
         class="field"/>
       <div class="control has-text-centered">
+        <b-field>
+          <b-input
+            expanded
+            placeholder="Invite to Organization" />
+          <b-button
+            class="submit-button--secondary"
+            type="is-secondary"> {{ $t('webapp.orgs.send_email') }} </b-button>
+        </b-field>
+      </div>
+      <div class="control submit-button__wrapper has-text-centered">
         <b-button
           :disabled="submitting"
           native-type="submit"
@@ -37,13 +47,17 @@ export default {
     return {
       data: null,
       formSchema: null,
-      errors: [],
+      errors: {},
       submitting: false,
     };
   },
   computed: {
     initialData() {
       return {};
+    },
+    filteredSchema() {
+      const { email, ...schema } = this.formSchema;
+      return schema;
     },
   },
   async mounted() {
@@ -59,5 +73,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .submit-button {
 
+        &__wrapper {
+            margin-top: 3.5rem;
+        }
+
+        &--secondary {
+            margin-left: 0.625rem;
+        }
+    }
 </style>

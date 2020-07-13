@@ -2,7 +2,8 @@
   <bh-card
     class="org-card"
     shadow="light"
-    no-border>
+    no-border
+    @click.native="goToOrg">
     <div class="org-card__align-items">
       <div class="org-card__details">
         <div class="org-card__title">
@@ -56,6 +57,13 @@ export default {
       default: null,
     },
   },
+  methods: {
+    goToOrg() {
+      this.$router.push({
+        name: 'org',
+      });
+    },
+  },
 };
 </script>
 
@@ -66,6 +74,7 @@ export default {
 
 .org-card {
   $org-card-margin: 1rem;
+  cursor: pointer;
 
   margin: $org-card-margin 0 $org-card-margin 2*$org-card-margin;
   padding: 1rem 0;

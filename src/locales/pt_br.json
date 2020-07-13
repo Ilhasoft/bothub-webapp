@@ -331,7 +331,8 @@
         "using": "Intelgências que eu uso"
       },
       "create_org_title": "Vamos criar uma organização",
-      "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar"
+      "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
+      "send_email": "Enviar um e-mail"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",

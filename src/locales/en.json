@@ -333,7 +333,8 @@
         "using": "Using intelligences"
       },
       "create_org_title": "Let's create an organization",
-      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place."
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",

@@ -36,7 +36,7 @@ export default {
     return {
       data: null,
       formSchema: null,
-      errors: [],
+      errors: {},
       submitting: false,
     };
   },
