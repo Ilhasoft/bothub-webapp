@@ -37,6 +37,9 @@ export default {
       });
     }
   },
+  getPaymentHistory(store, limit = 20) {
+    return user.getPaymentHistory(limit);
+  },
   getMyRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.myRepositories(limit);
