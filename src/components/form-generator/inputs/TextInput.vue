@@ -2,6 +2,7 @@
   <b-input
     :maxlength="max_length"
     v-model="value"
+    :placeholder="labelPlaceholder"
     type="textarea"
     @input="update()" />
 </template>
@@ -13,6 +14,10 @@ export default {
     max_length: {
       type: Number,
       default: null,
+    },
+    labelPlaceholder: {
+      type: String,
+      default: '',
     },
     initialData: {
       type: String,

@@ -129,6 +129,7 @@ export default {
       const { categories, ...schema } = this.computedSchema;
       const { description } = schema;
       description.type = 'textarea';
+      description.label = this.$t('webapp.create_repository.description_form');
       const formattedSchema = { ...schema, description };
       return formattedSchema;
     },
