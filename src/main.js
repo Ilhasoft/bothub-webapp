@@ -5,13 +5,13 @@ import BH from 'bh';
 import * as Sentry from '@sentry/browser';
 import { Vue as VueIntegration } from '@sentry/integrations';
 import VueTour from 'vue-tour';
+import VueConfetti from 'vue-confetti';
 import App from './App';
 import router from './router';
 import store from './store';
 import applyFilters from './utils/filters';
 import API from './utils/plugins/API';
 import i18n from './utils/plugins/i18n';
-
 // import 'vue-tour/dist/vue-tour.css';
 // import '@/assets/scss/tour.css';
 
@@ -21,6 +21,7 @@ Vue.use(VueMoment);
 Vue.use(BH);
 Vue.use(API);
 Vue.use(VueTour);
+Vue.use(VueConfetti);
 
 Vue.config.productionTip = false;
 

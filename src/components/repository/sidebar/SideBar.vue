@@ -34,7 +34,7 @@
             tag="router-link"
             icon="refresh"/>
           <b-menu-item
-            id="tour-test-step-0"
+            id="tour-evaluate-step-0"
             :active="isTestsActive"
             :expanded="isTestsActive"
             icon="wechat"

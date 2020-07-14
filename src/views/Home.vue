@@ -35,15 +35,20 @@
         </div>
       </div>
     </div>
+    <tour
+      v-if="activeTutorial === 'create_intelligence'"
+      :step-count="3"
+      name="create_intelligence"/>
   </layout>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Layout from '@/components/shared/Layout';
 import CategoriesList from '@/components/shared/CategoriesList';
 import LanguagesList from '@/components/shared/LanguagesList';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
-
+import Tour from '@/components/Tour';
 
 export default {
   name: 'Home',
@@ -52,6 +57,7 @@ export default {
     CategoriesList,
     LanguagesList,
     RepositoryCardList,
+    Tour,
   },
   data() {
     return {
@@ -60,6 +66,15 @@ export default {
       repositoryList: null,
       search: '',
     };
+  },
+  computed: {
+    ...mapGetters([
+      'activeTutorial',
+      'activeMenu',
+    ]),
+  },
+  created() {
+    console.log('quicksss', this.activeTutorial);
   },
 };
 </script>

@@ -9,6 +9,7 @@
       </b-notification>
       <div>
         <b-checkbox
+          id="tour-inbox-step-1"
           v-model="select"
           :native-value="selectAll">
           {{ $t('webapp.inbox.select_all') }}
@@ -16,15 +17,19 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div @click="showModalTraining($t('webapp.inbox.training'))">
+          <div
+            @click="showModalTraining($t('webapp.inbox.training'))">
             <b-icon
+              id="tour-inbox-step-2"
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div @click="showModalSentence($t('webapp.inbox.test_sentences'))">
+          <div
+            @click="showModalSentence($t('webapp.inbox.test_sentences'))">
             <b-icon
+              id="tour-inbox-step-3"
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
           </div>

@@ -417,14 +417,21 @@
           "create_intelligence": "Create your first intelligence",
           "training": "Training this intelligence",
           "quick_test": "Make a quick test",
-          "test": "Test this intelligence",
+          "evaluate": "Test this intelligence",
           "inbox": "Add sentences with inbox",
           "translate": "Translate to another language",
           "integrate": "Integrate your intelligence with a platform"
       },
       "create_intelligence": {
-          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+          "step_0": "<strong>Go to the feature create intelligence !</strong> <br> Here you will create your first intelligence",
           "step_1": "Or create your own intelligence by clicking here."
+      },
+      "create_intelligence_forms": {
+          "step_0": "Enter with all intelligence data",
+          "step_1": "And go forward",
+          "step_2": "Choose categories for your intelligence, based on the area in which it will be used, and submit.",
+          "step_3": "And go forward",
+          "step_4": "Your intelligence is ready to be trained. Just get started."
       },
       "training": {
           "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
@@ -435,7 +442,7 @@
           "step_5": "Finally, submit your sentence.",
           "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
       },
-      "test": {
+      "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
         "step_1": "Select a language to test.",
         "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
@@ -450,7 +457,10 @@
         "step_3": "Click here to see the Raw."
         },
       "inbox": {
-        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test."
+        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test.",
+        "step_1": "Select the sentences you want to add",
+        "step_2": "Add to train",
+        "step_3": "Add to test phrases"
       },
       "translate": {
         "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",

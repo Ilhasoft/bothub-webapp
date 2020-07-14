@@ -32,12 +32,15 @@
           <div class="bh-grid bh-grid--row layout__header__options">
             <div
               v-if="authenticated"
+              id="tour-create_intelligence-step-1"
+              :is-step-blocked="!nextStepTour"
               class="bh-grid__item hide-mobile">
               <router-link :to="'new'">
                 <b-button
                   type="is-primary"
                   inverted
-                  rounded>
+                  rounded
+                  @click="nextStepTour = true">
                   <strong>{{ $t('webapp.layout.newbot') }}</strong>
                 </b-button>
               </router-link>
@@ -141,6 +144,7 @@ export default {
   data() {
     return {
       beginnerTutorialModalOpen: false,
+      nextStepTour: false,
     };
   },
   computed: {
