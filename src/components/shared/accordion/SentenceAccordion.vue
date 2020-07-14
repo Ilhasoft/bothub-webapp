@@ -14,7 +14,6 @@
       }"
       @click="toggleAccordion()">
 
-
       <div
         ref="check"
         class="expander__trigger__check"

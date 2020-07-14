@@ -21,6 +21,7 @@
           v-if="open && !editing"
           :text="text"
           :entities="entities"
+          :highlighted="highlighted"
           :all-entities="repository.entities || repository.entities_list" />
       </div>
     </div>
@@ -28,7 +29,7 @@
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute && !training"
+        v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
           <a
@@ -63,22 +64,26 @@
       <example-info
         v-if="!editing"
         :entities-list="entitiesList"
+        :highlighted.sync="highlighted"
         :intent="intent" />
 
       <edit-example
         v-else
         :entities="entitiesList"
         :intent-to-edit="intent"
+        :edit-example="availableToExample"
         :text-to-edit="text"
         :sentence-id="id"
-        @cancel="cancelEditSentence"/>
+        :language-edit="language"
+        :get-all-entities="allEntities"
+        @cancel="cancelEditSentence"
+        @saveList="updateList"/>
     </div>
   </sentence-accordion>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex';
-import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import ExampleInfo from '@/components/shared/accordion/ExampleInfo';
 import EditExample from '@/components/shared/accordion/EditExample';
@@ -104,6 +109,14 @@ export default {
       type: String,
       default: '',
     },
+    allEntities: {
+      type: Array,
+      default: () => [],
+    },
+    availableToExample: {
+      type: Boolean,
+      default: false,
+    },
     entities: {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
@@ -126,6 +139,7 @@ export default {
       open: false,
       deleteDialog: null,
       editing: false,
+      highlighted: null,
     };
   },
   computed: {
@@ -133,13 +147,9 @@ export default {
       repository: state => state.Repository.selectedRepository,
     }),
     entitiesList() {
-      const entitiesList = getEntitiesList(this.entities);
-
       return this.entities
-        .map((entity, index) => ({
-          value: entitiesList[index],
-          class: this.getEntityClass(entitiesList[index]),
-          label: this.getEntityLabel(entitiesList[index]),
+        .map(entity => ({
+          class: this.getEntityClass(entity.entity),
           ...entity,
         }));
     },
@@ -157,20 +167,14 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
       const color = getEntityColor(
         entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
+        allEntitiesName,
       );
       return `entity-${color}`;
-    },
-    getEntityLabel(entityName) {
-      return this.entities.reduce((current, e) => {
-        if (e.entity === entityName) {
-          return e.label;
-        }
-        return current;
-      }, 'unlabeled');
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {
@@ -206,6 +210,9 @@ export default {
     editSentence() {
       this.editing = true;
       this.open = true;
+    },
+    updateList() {
+      this.$emit('updateList');
     },
   },
 };

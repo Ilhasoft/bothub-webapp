@@ -53,7 +53,7 @@ describe('AuthorizationItem.vue', () => {
     });
 
     test('emit roleChanged event', () => {
-      expect(wrapper.emitted('roleChanged')).toBeDefined();
+      expect(wrapper.emitted('updateList')).toBeDefined();
     });
   });
 

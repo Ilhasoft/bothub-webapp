@@ -3,10 +3,10 @@
 exports[`TranslateExampleItem.vue renders correctly 1`] = `
 <div class="example">
   <div class="example-text">
-    <highlighted-text-stub text="..." entities="[object Object]" allentities="" failed=""></highlighted-text-stub>
+    <highlighted-text-stub text="..." entities="[object Object]" allentities="" prefixcolor="" failed=""></highlighted-text-stub>
   </div>
   <div class="example-entities">
-    <b-tag-stub rounded="true" tabstop="true" class="entity-sunflower">name</b-tag-stub>
+    <entity-tag-stub entityname="name"></entity-tag-stub>
   </div>
   <div class="example-infos level is-mobile">
     <div class="level-left">

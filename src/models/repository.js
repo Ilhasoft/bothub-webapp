@@ -45,9 +45,9 @@ class Repository extends ModelBase {
       intents: [],
       intents_list: [],
       entities_list: [],
-      labels: [],
-      labels_list: [],
-      other_label: {},
+      groups: [],
+      groups_list: [],
+      other_group: {},
       authorization: null,
       available_request_authorization: null,
       request_authorization: null,
@@ -55,6 +55,7 @@ class Repository extends ModelBase {
       requirements_to_train: {},
       ready_for_train: false,
       repository_version: '',
+      use_transformer_entities: false,
     };
   }
 
@@ -77,9 +78,9 @@ class Repository extends ModelBase {
       intents: Object,
       intents_list: Object,
       entities_list: Object,
-      labels: Object,
-      labels_list: Object,
-      other_label: Object,
+      groups: Object,
+      groups_list: Object,
+      other_group: Object,
       authorization: Object,
       available_request_authorization: Boolean,
       request_authorization: Object,
@@ -87,6 +88,7 @@ class Repository extends ModelBase {
       requirements_to_train: Object,
       ready_for_train: Boolean,
       repository_version: String,
+      use_transformer_entities: Boolean,
     };
   }
 

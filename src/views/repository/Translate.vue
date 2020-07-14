@@ -2,29 +2,22 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
+
+    <div class="translate-description">
+      <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+      <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+    </div>
     <div v-if="repository">
       <div v-if="authenticated">
-
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
 
           <div class="repository-translate">
-            <div class="repository-translate__translateButtons">
-
-              <b-button
-                :class="{'is-primary':!!translate.from && !!translate.to}"
-                class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToImport()">Import</b-button>
-
-              <b-button
-                :class="{'is-primary':!!translate.from && !!translate.to}"
-                class="repository-translate__buttons repository-translate__unableButton"
-                @click="checkLanguageToExport()">Export</b-button>
-
-            </div>
             <div class="repository-translate__field">
               <div class="repository-translate__field__item">
-                <b-field :label="$t('webapp.translate.translate_from')">
+                <b-field
+                  :label="$t('webapp.translate.translate_from')"
+                  custom-class="repository-translate__field__item__label">
                   <language-select v-model="translate.from" />
                 </b-field>
               </div>
@@ -33,17 +26,36 @@
                   <label class="label">&nbsp;</label>
                   <b-icon
                     icon="chevron-right"
-                    size="is-small" />
+                    size="is-medium" />
                 </div>
               </div>
               <div class="repository-translate__field__item">
-                <b-field :label="$t('webapp.translate.translate_to')">
+                <b-field
+                  :label="$t('webapp.translate.translate_to')"
+                  custom-class="repository-translate__field__item__label">
                   <language-select
                     v-model="translate.to"
                     :exclude="[translate.from]" />
                 </b-field>
               </div>
             </div>
+          </div>
+          <div class="repository-translate__translateButtons">
+
+            <b-button
+              :class="{'is-primary':!!translate.from && !!translate.to}"
+              class="repository-translate__buttons repository-translate__unableButton"
+              @click="checkLanguageToImport()">
+              {{ $t('webapp.translate.import_button') }}
+            </b-button>
+
+            <b-button
+              :class="{'is-primary':!!translate.from && !!translate.to}"
+              class="repository-translate__buttons repository-translate__unableButton"
+              @click="checkLanguageToExport()">
+              {{ $t('webapp.translate.export_button') }}
+            </b-button>
+
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
@@ -54,13 +66,13 @@
               <div class="repository-translate__fileModal__file">
 
                 <b-field
-                  label="Select a file to import"
+                  :label="$t('webapp.translate.import_title')"
                   class="custom-file-upload">
                   <div class="custom-file-upload__input">
                     <b-upload v-model="translationFile">
                       <a class="button is-primary">
                         <b-icon icon="upload"/>
-                        <span>Click to upload</span>
+                        <span>{{ $t('webapp.translate.import_select_button') }}</span>
                       </a>
                     </b-upload>
                     <div
@@ -76,26 +88,25 @@
 
                         />
                       </div>
-
-
                     </div>
 
                     <div
                       v-else
                       class="custom-file-upload__input__file">
-                      <span>No file chosen</span>
+                      <span>{{ $t('webapp.translate.import_field_text') }}</span>
                     </div>
                   </div>
-                  <p>Choose the file containing the sentences you want
-                  import it translations. Use the following <a>format</a></p>
+                  <p>{{ errorMessage }}</p>
 
                   <div class="repository-translate__styleButton">
                     <b-button
                       :loading="waitDownloadFile"
                       :disabled="translationFile === null"
-                      class="repository-translate__buttons"
+                      class="repository-translate__buttons modalButton"
                       type="is-primary"
-                      @click="importTranslation()">Import</b-button>
+                      @click="importTranslation()">
+                      {{ $t('webapp.translate.import_button') }}
+                    </b-button>
                   </div>
                 </b-field>
 
@@ -107,36 +118,42 @@
               class="repository-translate__switchModal">
               <div class="repository-translate__switchModal__switch">
                 <b-field
-                  label="Export only not translated sentences"/>
-                <b-switch v-model="isSwitched">
+                  :label="$t('webapp.translate.export_title')"/>
+                <b-switch
+                  v-model="isSwitched"
+                  class="repository-translate__switchModal__switch__button">
                   {{ checkSwitch }}
                 </b-switch>
-                <p>When enabling this option, the export file will contain
-                just not translated sentences</p>
+                <p> {{ $t('webapp.translate.export_field_text') }}</p>
                 <div class="repository-translate__styleButton">
                   <b-button
                     :loading="waitDownloadFile"
                     type="is-primary"
-                    class="repository-translate__buttons"
-                    @click="exportTranslation()">Export</b-button>
+                    class="repository-translate__buttons modalButton"
+                    @click="exportTranslation()">
+                    {{ $t('webapp.translate.export_button') }}
+                  </b-button>
                 </div>
               </div>
 
             </b-modal>
             <hr>
-            <div class="repository-translate__search">
-              <filter-examples
-                :intents="repository.intents_list"
-                :entities="repository.entities_list"
-                @queryStringFormated="onSearch($event)"/>
+            <div class="repository-translate__list">
+              <div class="repository-translate__list__search">
+                <filter-examples
+                  :intents="repository.intents_list"
+                  :entities="repository.entities_list"
+                  @queryStringFormated="onSearch($event)"/>
+              </div>
+              <translate-list
+                :update="translate.update"
+                :repository="repository"
+                :query="query"
+                :from="translate.from"
+                :to="translate.to"
+                @translated="examplesTranslated()" />
             </div>
-            <translate-list
-              :update="update"
-              :repository="repository"
-              :query="query"
-              :from="translate.from"
-              :to="translate.to"
-              @translated="examplesTranslated()" />
+
           </div>
         </div>
         <authorization-request-notification
@@ -198,6 +215,7 @@ export default {
       query: {},
       querySchema: {},
       errors: '',
+      errorMessage: '',
     };
   },
 
@@ -207,14 +225,15 @@ export default {
     }),
     checkSwitch() {
       if (this.isSwitched === true) {
-        return 'Yes';
+        return this.$t('webapp.translate.export_switch_yes');
       }
-      return 'No';
+      return this.$t('webapp.translate.export_switch_no');
     },
   },
   watch: {
     isImportFileVisible() {
       if (this.isImportFileVisible === false) {
+        this.errorMessage = '';
         return this.removeSelectedFile();
       }
       return '';
@@ -234,7 +253,7 @@ export default {
           versionUUID: this.selectedRepository.repository_version_id,
           fromLanguage: this.translate.from,
           toLanguagem: this.translate.to,
-          statusTranslation: this.isSwitched,
+          statusTranslation: !this.isSwitched,
         });
         this.forceFileDownload(xlsFile);
         this.$buefy.toast.open({
@@ -262,7 +281,7 @@ export default {
         });
         this.forceFileDownload(importDownload);
       } catch (error) {
-        this.errors = error;
+        this.errorMessage = this.$t('webapp.translate.import_select_error');
       }
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
@@ -289,7 +308,7 @@ export default {
       this.translationFile = null;
     },
     examplesTranslated() {
-      this.update = !this.update;
+      this.translate.update = !this.translate.update;
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -314,6 +333,22 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
+.translate-description{
+  margin-left: 0.8rem;
+  h1{
+    font-size: 28px;
+    margin-bottom: $between-title-subtitle;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-weight: $font-weight-bolder;
+  }
+  p{
+    margin-bottom: $between-subtitle-content;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-size: $font-size
+  }
+}
 .repository-translate {
   background-color: $color-white;
   display:flex;
@@ -327,17 +362,24 @@ export default {
     width: 100%;
     &__item {
       margin: 0.5rem;
-         width: 50%
+      width: 50%;
+        &__label{
+        font-weight: $font-weight-normal;
+        }
     }
   }
 
   &__translate-arrow-icon {
     align-self: center;
+    color: $color-grey-dark;
   }
-
+  &__list{
+    margin-left: 0.3rem;
   &__search {
     margin: 0.5rem;
   }
+  }
+
   &__requestAuthorization{
         color: $color-fake-black;
         font-weight: $font-weight-medium;
@@ -349,15 +391,21 @@ export default {
    display: flex;
     justify-content: center;
     align-items: center;
+
  &__file{
     background-color: $color-white;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 13rem;
+    margin: 0 15rem;
+    padding-left: 0.7rem;
+    border-radius: 0.5rem;
 
     p{
       font-size: $font-small;
+      color: red;
+      font-weight: $font-weight-medium;
     }
   }
 }
@@ -372,8 +420,15 @@ export default {
       background-color: $color-white;
       justify-content: center;
       align-items: center;
-      height: 11rem;
+      height: 11.5rem;
       padding: 1rem;
+      margin: 0 15rem;
+      padding-left: 1.2rem;
+      border-radius: 0.5rem;
+
+      &__button{
+        margin-top:0.4rem;
+      }
         p{
         font-size: $font-small;
         }
@@ -385,11 +440,24 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    .modalButton{
+      width: 179px;
+      height: 40px;
+    }
   }
 
   &__buttons{
-    min-width: 18%;
+    width: 179px;
+    height: 40px;
     margin: 0.5rem;
+    font-family: $font-family;
+    font-size: $font-size;
+    font-weight: $font-weight-bolder;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 6px;
+    background-color: $color-primary;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -398,13 +466,13 @@ export default {
   &__translateButtons{
     display: flex;
     width: 100%;
-    justify-content: flex-end
+    margin: 1rem 0.3rem;
+    justify-content: flex-start
   }
   &__unableButton{
     background-color:$color-grey;
     color: $color-white;
     border: 2px solid #D5D5D5;
-    font-weight: $font-weight-medium;
     box-shadow: 0 0.1875rem 0.375rem rgba(200, 200, 200, 0.5);
 
      &:hover{
@@ -439,6 +507,10 @@ export default {
      align-items:center;
      border-top-right-radius: 0.4rem;
      border-bottom-right-radius: 0.4rem;
+
+     span{
+       font-size:13px;
+     }
    }
    &__icon{
      cursor: pointer;

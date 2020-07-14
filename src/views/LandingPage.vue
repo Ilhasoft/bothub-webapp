@@ -12,11 +12,11 @@
         <div class="text-color-primary landing-page__nav__login">
           <strong
             class="text-color-primary clickable"
-            @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</strong>
+            @click="signIn()">{{ $t('webapp.landing_page.signin') }}</strong>
           <span>or</span>
           <strong
             class="text-color-primary clickable"
-            @click="signUpRedirect()">{{ $t('webapp.landing_page.signup') }}</strong>
+            @click="signUp()">{{ $t('webapp.landing_page.signup') }}</strong>
         </div>
       </div>
     </nav>
@@ -29,7 +29,7 @@
             size="normal"
             rounded
             primary
-            @click="signUpRedirect()">
+            @click="signUp()">
             {{ $t('webapp.landing_page.join_for_free') }}
           </bh-button>
         </div>
@@ -82,7 +82,7 @@
             size="normal"
             rounded
             secondary
-            @click="signUpRedirect()">
+            @click="signUp()">
             {{ $t('webapp.landing_page.signup_forfree') }}
           </bh-button>
         </div>
@@ -99,7 +99,7 @@
 <script>
 import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-intro.svg';
 
 
@@ -129,19 +129,21 @@ export default {
   },
   mounted() {
     if (this.$route.params.signed) {
-      this.openLoginModal();
+      this.signIn();
     }
   },
   methods: {
-    ...mapActions([
-      'openLoginModal',
-    ]),
     showAllBots() {
       this.$router.push({
         name: 'home',
       });
     },
-    signUpRedirect() {
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
+      });
+    },
+    signUp() {
       this.$router.push({
         name: 'signUp',
       });

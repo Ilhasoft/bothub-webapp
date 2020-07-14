@@ -35,6 +35,7 @@
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
             :open-on-focus="true"
+            dropdown-position="bottom"
             @keyup.enter.native="onEnter()"
           />
         </b-field>
@@ -255,5 +256,4 @@ export default {
 .columns.is-variable .column:last-child {
   padding-right: 0;
 }
-
 </style>

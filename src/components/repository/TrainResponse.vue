@@ -9,25 +9,32 @@
         <div class="bh-grid__item bh-grid__item--nested text-center">
           <div class="bh-grid">
             <div class="bh-grid__item">
-              <bh-icon
+              <b-icon
                 class="text-color-primary"
-                value="check"
+                icon="check"
                 type="is-success"
                 size="is-small" />
               <span>{{ $t('webapp.trainings.trained') }}</span>
             </div>
             <div class="bh-grid__item">
-              <bh-icon
+              <b-icon
+                class="text-color-warning loading"
+                icon="sync"
+                size="is-small" />
+              <span>{{ $t('webapp.trainings.processing') }}</span>
+            </div>
+            <div class="bh-grid__item">
+              <b-icon
                 class="text-color-info"
-                value="dots-horizontal"
+                icon="dots-horizontal"
                 type="is-info"
                 size="is-small" />
               <span>{{ $t('webapp.trainings.no_changes') }}</span>
             </div>
             <div class="bh-grid__item">
-              <bh-icon
+              <b-icon
                 class="text-color-danger"
-                value="close"
+                icon="close"
                 type="is-danger"
                 size="is-small" />
               <span>{{ $t('webapp.trainings.failed') }}</span>
@@ -42,18 +49,27 @@
                 :key="language">
                 <td>{{ language | languageVerbose }}</td>
                 <td class="text-right">
-                  <bh-icon
+                  <b-icon
                     v-if="data.status === 'trained'"
                     class="text-color-primary"
-                    value="check" />
-                  <bh-icon
+                    icon="check"
+                    size="is-small" />
+                  <b-icon
                     v-else-if="data.status === 'not_ready_for_train'"
                     class="text-color-info"
-                    value="dots-horizontal" />
+                    icon="dots-horizontal"
+                    size="is-small" />
+                  <b-icon
+                    v-else-if="data.status === 'processing'"
+                    class="text-color-warning loading"
+                    icon="sync"
+                    size="is-small" />
                   <div v-else-if="data.status === 'failed'">
                     <div>
-                      <bh-icon
-                        value="close" />
+                      <b-icon
+                        icon="close"
+                        class="text-color-danger"
+                        size="is-small" />
                     </div>
                     <small>{{ data.error }}</small>
                   </div>
@@ -77,6 +93,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'TrainResponse',
   props: {
@@ -114,5 +131,17 @@ export default {
 table {
   width: 70%;
   margin: 1rem auto;
+}
+
+.loading {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
 }
 </style>

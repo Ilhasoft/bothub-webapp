@@ -1,38 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginForm.vue renders correctly 1`] = `
-<div class="sign-up">
-  <nav class="sign-up__nav">
-    <div class="sign-up__nav__container">
-      <router-link-stub to="/" tag="a" event="click" class="column sign-up__nav__logo"><img src="@/assets/imgs/logo.svg" alt="Bothub"></router-link-stub>
-      <div class="sign-up__nav__login"><span class="sign-up__nav__text">
-          some specific text</span>
-        <b-button-stub size="normal" nativetype="button" tag="button" class="is-primary sign-up__nav__login__button">some specific text</b-button-stub>
-      </div>
-    </div>
-  </nav>
-  <section class="columns is-variable is-3 sign-up__wrapper-content">
-    <div class="column is-half sign-up__wrapper-content__image"><img src="@/assets/imgs/computer-bot.png" alt="avatar"></div>
-    <div class="column sign-up__wrapper-content__form">
-      <div class="sign-up__wrapper-content__form__title">
-        <h1>some specific text</h1>
-      </div>
-      <form>
-        <loading-stub></loading-stub>
-        <!---->
-        <div class="field">
-          <div class="control has-text-centered">
-            <b-button-stub expanded="true" nativetype="submit" tag="button" full-width="" color="info" class="is-info">some specific text</b-button-stub>
-          </div>
-          <div class="sign-up__wrapper-content__form__agree-message"><small>
-              <router-link-stub to="/terms" tag="a" event="click">
-                some specific text
-              </router-link-stub>
-            </small></div>
+<boarding-layout-stub>
+  <div class="signup">
+    <div class="signup__content">
+      <div class="signup__content__field">
+        <div class="signup__content__field__header">
+          <p>some specific text</p>
+          <b-button-stub type="is-primary" nativetype="button" tag="button" class="signup__content__field__header__createButton">
+            some specific text</b-button-stub>
         </div>
-      </form>
+        <div class="signup__content__field__forms">
+          <h1>some specific text</h1>
+          <form>
+            <loading-stub></loading-stub>
+            <!---->
+            <p class="signup__content__field__forms__passwordError">
+
+            </p>
+            <div class="field">
+              <div class="control has-text-centered">
+                <b-button-stub expanded="true" nativetype="submit" tag="button" class="signup__content__field__forms__button is-primary">some specific text</b-button-stub>
+              </div>
+              <div class="signup__content__field__forms__agree-message"><small>
+                  <router-link-stub to="/terms" tag="a" event="click" class="signup__content__field__forms__terms">
+                    some specific text
+                  </router-link-stub>
+                </small></div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </section>
-  <site-footer-stub class="sign-up__footer"></site-footer-stub>
-</div>
+  </div>
+  <div class="footer"></div>
+</boarding-layout-stub>
 `;
