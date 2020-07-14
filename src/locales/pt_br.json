@@ -338,7 +338,17 @@
           "no_reports": "Nenhum relatório",
           "total": "Total de predições:"
       },
-      "payments": "Pagamentos",
+      "payment": {
+        "title": "Pagamentos",
+        "history": "Histórico de pagamentos",
+        "info": "Informações de pagamento",
+        "payment": "Pagamento de {period}",
+        "credit_payment": "Com cartão de crédito",
+        "coupon_payment": "Com cupom",
+        "submit": "Enviar",
+        "total": "Total:",
+        "no_payments": "Sem pagamentos"
+      },
       "intelligences": {
         "title": "Inteligências",
         "mine": "Minhas inteligências",
