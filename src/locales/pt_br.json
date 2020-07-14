@@ -301,9 +301,38 @@
     "orgs": {
       "created_by": "Criado por",
       "created": "Criado",
-      "repositories": "{n} inteligências | {n} inteligência | {n} inteligências",
-      "memebers": "{n} membros | {n} membro | {n} membros",
-      "create": "Criar Organização"
+      "repositories": "{n} repositórios | {n} repositório | {n} repositórios",
+      "members": "{n} membros | {n} membro | {n} membros",
+      "create_org": "Criar organização",
+      "create": "Criar",
+      "manage_contributors": "Gerenciar contribuidores",
+      "manage_subtitle": "Gerencie quem pode contribuir para o seu dataset.",
+      "edit": "Editar",
+      "information": "Informações",
+      "org_info": "Informações da organização",
+      "activities": {
+        "title": "Atividades",
+        "recent": "Atividades Recentes"
+      },
+      "reports": {
+        "title": "Relatórios",
+        "reports": "Relatórios da organização"
+    },
+      "payment": {
+        "title": "Pagamentos",
+        "history": "Histórico ",
+        "info": "Informações de Pagamento",
+        "credit_payment": "Por cartão de crédito",
+        "coupon_payment": "Por cupom de crédito"
+      },
+      "intelligences": {
+        "title": "Intelligências",
+        "mine": "Inteligências da organização",
+        "using": "Intelgências que eu uso"
+      },
+      "create_org_title": "Vamos criar uma organização",
+      "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
+      "send_email": "Enviar um e-mail"
     },
     "my_profile": {
       "edit_your_profile": "Edite seu Perfil",

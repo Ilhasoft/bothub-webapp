@@ -1,5 +1,7 @@
 <template>
-  <div class="org-card">
+  <div
+    class="org-card"
+    @click="goToOrg">
     <div class="org-card__append">
       <div class="org-card__align-items">
         <div class="org-card__details">
@@ -53,6 +55,13 @@ export default {
     created_at: {
       type: String,
       default: null,
+    },
+  },
+  methods: {
+    goToOrg() {
+      this.$router.push({
+        name: 'org',
+      });
     },
   },
 };

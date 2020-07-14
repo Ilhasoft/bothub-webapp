@@ -301,7 +301,40 @@
       "created": "Created",
       "repositories": "{n} repositories | {n} repository | {n} repositories",
       "members": "{n} members | {n} member | {n} members",
-      "create": "Create organization"
+      "create_org": "Create organization",
+      "create": "Create",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      },
+      "create_org_title": "Let's create an organization",
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
     },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",

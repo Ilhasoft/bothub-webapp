@@ -10,9 +10,20 @@
       v-else
       class="orgs">
       <div class="orgs__buttons">
-        <b-button type="is-primary"> {{ $t('webapp.orgs.create') }} </b-button>
+        <b-button
+          type="is-primary"
+          @click="createOrgOpen = true"> {{ $t('webapp.orgs.create_org') }} </b-button>
       </div>
       <org-list />
+      <b-modal
+        :active.sync="createOrgOpen"
+        width="460px">
+        <div class="form__wrapper">
+          <h1 class="form__title"> {{ $t('webapp.orgs.create_org_title') }} </h1>
+          <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
+          <create-org-form class="form"/>
+        </div>
+      </b-modal>
     </div>
   </layout>
 </template>
@@ -21,6 +32,7 @@
 import Layout from '@/components/shared/Layout';
 import OrgList from '@/components/user/OrgList';
 import LoginForm from '@/components/auth/LoginForm';
+import CreateOrgForm from '@/components/user/CreateOrgForm';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -29,6 +41,12 @@ export default {
     Layout,
     OrgList,
     LoginForm,
+    CreateOrgForm,
+  },
+  data() {
+    return {
+      createOrgOpen: false,
+    };
   },
   computed: {
     ...mapGetters([
@@ -39,6 +57,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+    .form {
+      margin-top: 1rem;
+
+      &__title {
+        color: $color-primary;
+        font-size: 1.813rem;
+      }
+
+      &__wrapper {
+      background-color: white;
+      border-radius: 10px;
+      padding: 4rem 2rem 2rem 2rem;
+      }
+    }
+
     .orgs {
       max-width: 1200px;
       margin: 3rem auto;
