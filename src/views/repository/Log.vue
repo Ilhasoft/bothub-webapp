@@ -6,7 +6,7 @@
     <div
       v-if="authenticated"
       class="repository-log">
-      <div v-if="repository">
+      <div v-if="repository && repository.authorization.can_contribute">
         <div class="repository-log__header">
           <h1> {{ $t('webapp.menu.inbox') }} </h1>
           <p> {{ $t('webapp.inbox.description') }} </p>
@@ -44,13 +44,15 @@
               v-model="filterSearch"
               :loading="versionsList.loading"
               :data="versions"
-              :placeholder="$t('webapp.inbox.your_version')"/>
+              :placeholder="$t('webapp.inbox.your_version')"
+              dropdown-position="bottom"/>
             <b-autocomplete
               v-else-if="filterOption=='intent'"
               :data="repository.intents_list"
               :loading="!repository"
               v-model="filterSearch"
-              :placeholder="$t('webapp.inbox.your_intent')"/>
+              :placeholder="$t('webapp.inbox.your_intent')"
+              dropdown-position="bottom"/>
             <b-select
               v-else-if="filterOption=='language'"
               v-model="filterSearch">
@@ -67,28 +69,22 @@
               :placeholder="$t('webapp.inbox.your_filter')"/>
           </div>
         </div>
-
         <repository-log-list
           :per-page="perPage"
           :query="query"
           :editable="repository.authorization.can_contribute" />
       </div>
-
-      <div
-        v-else>
-        <b-notification
-          :closable="false"
-          class="is-warning">
-          {{ $t('webapp.inbox.cannot_edit_this_repository') }}
-        </b-notification>
-      </div>
+      <authorization-request-notification
+        v-else
+        :repository-uuid="repositoryUUID"
+        @onAuthorizationRequested="updateRepository(false)" />
     </div>
 
     <div
       v-else>
       <b-notification
         :closable="false"
-        class="is-danger">
+        class="is-info">
         {{ $t('webapp.inbox.signin_you_account') }}
       </b-notification>
       <login-form hide-forgot-password />
@@ -103,6 +99,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
@@ -114,6 +111,7 @@ export default {
     RepositoryViewBase,
     RepositoryLogList,
     LoginForm,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
@@ -193,10 +191,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
   label {
     vertical-align: middle;
   }
-
   .repository-log {
     &__header {
       margin-bottom: 3.5rem;
@@ -207,4 +206,6 @@ export default {
       cursor: pointer;
     }
   }
+
+
 </style>

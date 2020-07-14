@@ -1,46 +1,59 @@
 <template>
-  <div
-    v-infinite-scroll="updateList"
-    v-if="resultExampleList"
-    class="evaluate-result-example-list"
-    infinite-scroll-disabled="busy"
-    infinite-scroll-throttle-delay="800"
-    infinite-scroll-distance="-20">
+  <div>
     <h3 class="evaluate-result-example-list__title">
-      Sentence details
+      {{ $t('webapp.result.sentence_details') }}
     </h3>
-    <p>
-      Compare the results in every test sentence.
-    </p>
-    <evaluate-result-example-item
-      v-for="(item, i) in resultExampleList"
-      :key="i"
-      :text="item.text"
-      :intent="item.intent"
-      :confidence="item.intent_prediction.confidence"
-      :status="item.status"
-      :intent-prediction="item.intent_prediction" />
     <div
-      v-if="!busy"
+      v-if="busy"
       class="evaluate-result-example-list__loading">
-      <bh-loading />
+      <Loading/>
     </div>
+    <p v-else-if="error">{{ $t('webapp.result.error') }}</p>
+    <div v-else-if="resultExampleList && resultExampleList.length > 0">
+      <p>
+        {{ $t('webapp.result.sentence_details_text') }}
+      </p>
+      <evaluate-result-example-item
+        v-for="(item, i) in resultExampleList"
+        :key="i"
+        :text="item.text"
+        :intent="item.intent"
+        :confidence="item.intent_prediction.confidence"
+        :intent-success="(item.intent_status || item.status) === 'success'"
+        :success="isSuccess(item)"
+        :intent-prediction="item.intent_prediction"
+        :entities="item.true_entities || []"
+        :added-entities="item.false_positive_entities || []"
+        :swapped-entities="item.swapped_error_entities || []"/>
+      <div class="evaluate-result-example-list__pagination">
+        <b-pagination
+          v-if="resultExampleList.length > 0"
+          :range-before="4"
+          :range-after="4"
+          :total="total"
+          :current.sync="page"
+          :per-page="limit"
+          aria-next-label="Next page"
+          aria-previous-label="Previous page"
+          aria-page-label="Page"
+          aria-current-label="Current page"/>
+      </div>
+    </div>
+    <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
   </div>
-  <p v-else>Dont log</p>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
-import infiniteScroll from 'vue-infinite-scroll';
-
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'EvaluateResultExampleList',
   components: {
     EvaluateResultExampleItem,
+    Loading,
   },
-  directives: { infiniteScroll },
   props: {
     id: {
       type: Number,
@@ -50,40 +63,52 @@ export default {
   data() {
     return {
       resultExampleList: [],
-      limit: 5,
-      maxLimit: null,
+      limit: 10,
       busy: false,
+      error: null,
+      pages: 0,
+      page: 1,
     };
   },
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    total() {
+      return this.limit * this.pages;
+    },
+  },
+  watch: {
+    page() {
+      this.updateList();
+    },
   },
   mounted() {
     this.updateList();
   },
   methods: {
+    isSuccess(item) {
+      return (item.intent_status || item.status) === 'success' && (!item.entity_status || item.entity_status === 'success');
+    },
     ...mapActions([
       'getAllResultsLog',
     ]),
-    updateList() {
-      if (this.resultExampleList.length !== this.maxLimit) {
-        this.busy = true;
-        this.getAllResultsLog({
+    async updateList() {
+      this.busy = true;
+      try {
+        const response = await this.getAllResultsLog({
           repositoryUuid: this.repository.uuid,
           resultId: this.id,
-        }).then((response) => {
-          this.maxLimit = response.data.log.length;
-          const append = response.data.log.slice(
-            this.resultExampleList.length,
-            this.resultExampleList.length + this.limit,
-          );
-          this.resultExampleList = this.resultExampleList.concat(append);
-          this.busy = false;
+          page: this.page,
         });
-      } else {
-        this.busy = true;
+        const data = response.data.log;
+        this.resultExampleList = data.results;
+        this.pages = data.total_pages;
+        this.error = null;
+      } catch (error) {
+        this.error = error;
+      } finally {
+        this.busy = false;
       }
     },
   },
@@ -102,6 +127,15 @@ export default {
   &__loading {
     width: 100%;
     text-align: center;
+  }
+
+  &__pagination {
+    min-width: 100%;
+    display: block;
+    margin: 1rem auto;
+    max-width: 600px;
+    display: flex;
+    justify-content: flex-end;
   }
 }
 .no-examples {

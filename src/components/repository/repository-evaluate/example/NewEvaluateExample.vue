@@ -11,8 +11,8 @@
         @submit.prevent="submitSentence()">
         <div class="new-sentence__form__wrapper">
           <div>
-            <bh-field
-              :errors="errors.entities || errors.language"
+            <b-field
+              :message="errors.entities || errors.language"
             >
               <example-text-with-highlighted-entities-input
                 ref="textInput"
@@ -22,34 +22,40 @@
                 :formatters="textFormatters"
                 :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
                 size="normal"
+                @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
-            </bh-field>
+            </b-field>
           </div>
           <div>
-            <bh-field
-              :errors="errors.non_field_errors"
+            <b-field
+              :message="errors.non_field_errors"
             >
-              <bh-autocomplete
+              <b-autocomplete
                 v-model="intent"
-                :data="repository.intents_list || []"
-                :formatters="intentFormatters"
                 :placeholder="$t('webapp.evaluate.intent')"
-                size="normal"
+                :data="filteredData"
+                :open-on-focus="true"
+                dropdown-position="bottom"
+                @keyup.enter.native="onEnter()"
               />
-            </bh-field>
+            </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
-            <bh-button
-              ref="saveSentenceButton"
-              :disabled="!isValid || submitting "
-              :tooltip-hover="!isValid ? validationErrors : null"
-              :loading="submitting"
-              primary
-              size="normal"
-              @click="submitSentence()">
-              <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
-            </bh-button>
+            <b-tooltip
+              :label="validationErrors.join(', ')"
+              :is-active="!isValid && validationErrors.length > 0"
+              multilined
+              type="is-dark">
+              <b-button
+                ref="saveSentenceButton"
+                :disabled="!shouldSubmit"
+                :loading="submitting"
+                type="is-primary"
+                @click="submitSentence()">
+                <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
+              </b-button>
+            </b-tooltip>
           </div>
         </div>
         <bh-field
@@ -83,7 +89,7 @@
 <script>
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -108,10 +114,18 @@ export default {
   },
   computed: {
     ...mapState({
-      repository: state => state.Repository.selectedRepository,
       language: state => state.Repository.evaluateLanguage,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
+    }),
+    shouldSubmit() {
+      return this.isValid && !this.submitting;
+    },
+    filteredData() {
+      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+    },
     validationErrors() {
       const errors = [];
 
@@ -135,13 +149,6 @@ export default {
         BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
-      return formattersList;
-    },
-    intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
       return formattersList;
     },
     availableEntities() {
@@ -175,6 +182,12 @@ export default {
       };
     },
   },
+  watch: {
+    intent() {
+      if (!this.intent || this.intent.length <= 0) return;
+      this.intent = formatters.bothubItemKey()(this.intent);
+    },
+  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
@@ -182,6 +195,9 @@ export default {
     ...mapActions([
       'newEvaluateExample',
     ]),
+    onEnter() {
+      if (this.shouldSubmit) this.submitSentence();
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },
@@ -239,6 +255,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
 .new-sentence {
   width: 100%;
   margin: 2rem auto 0;
@@ -247,9 +265,14 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-template-columns: 1.5fr 1fr .3fr;
+      grid-template-columns: 1.5fr 1fr .1fr;
+      align-items: center;
       grid-gap: 1rem;
       padding: 1rem 0;
+
+      @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
+      }
 
       &__submit-btn {
         align-self: center;

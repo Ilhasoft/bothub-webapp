@@ -30,14 +30,24 @@ describe('EvaluateResultExampleItem.vue', () => {
     });
     wrapper = shallowMount(EvaluateResultExampleItem, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+        $tc: () => 'some specific text',
+      },
       propsData: {
         text: 'hey',
         intent: 'greet',
         entities: [
-          { start: 3, end: 7, entity: 'kids' },
+          {
+            start: 3, end: 7, entity: 'kids', value: 'grassa', confidence: 0.8,
+          },
         ],
-        confidence: 0.9263743763408538,
-        status: 'success',
+        success: true,
+        intentPrediction: {
+          name: 'greet',
+          confidence: 1.0,
+        },
+        intentSuccess: true,
       },
       store,
     });
@@ -47,9 +57,9 @@ describe('EvaluateResultExampleItem.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('derives the entitiesList computed from entities props', () => {
-    expect(wrapper.vm.entitiesList).toEqual([
-      { value: 'kids', class: 'entity-sunflower', label: 'unlabeled' },
-    ]);
-  });
+  // it('derives the entitiesList computed from entities props', () => {
+  //   expect(wrapper.vm.entitiesList).toEqual([
+  //     { value: 'kids', class: 'entity-sunflower', label: 'unlabeled' },
+  //   ]);
+  // });
 });

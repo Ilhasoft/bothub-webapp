@@ -1,13 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EvaluateResultExampleList.vue renders correctly 1`] = `
-<div infinite-scroll-disabled="busy" infinite-scroll-throttle-delay="800" infinite-scroll-distance="-20" class="evaluate-result-example-list">
+<div>
   <h3 class="evaluate-result-example-list__title">
-    Sentence details
+    some specific text
   </h3>
-  <p>
-    Compare the results in every test sentence.
-  </p>
-  <!---->
+  <p>some specific text</p>
 </div>
 `;

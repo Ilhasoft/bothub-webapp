@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="translationsList"
       :item-component="translationItemElem"
       :list="translationsList"
@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapActions, mapGetters } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import TranslationItem from './TranslationItem';
 
 
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {
@@ -41,6 +41,11 @@ export default {
       translationItemElem: TranslationItem,
     };
   },
+  computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
+  },
   watch: {
     async toLanguage() { await this.updateTranslations(); },
   },
@@ -56,10 +61,12 @@ export default {
       this.translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         to_language: this.toLanguage,
+        repositoryVersion: this.repositoryVersion,
       });
     },
     examplesDeleted() {
-      this.$emit('exampleTranslated');
+      this.updateTranslations();
+      this.$emit('exampleUpdated');
     },
   },
 };

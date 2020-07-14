@@ -5,35 +5,26 @@
     <div
       v-if="repository"
       class="repository-home">
-      <div class="repository-home__header">
-        <div class="repository-home__header__icon-badge">
-          <bh-icon
-            :value="repositoryIcon"
-            size="large"
-            class="repository-home__header__icon-badge__icon" />
-        </div>
-        <div class="repository-home__header__wrapper">
-          <div class="repository-home__title">
-            {{ repository.name }}
-          </div>
-          <span
-            v-for="language in repository.available_languages"
-            :key="language"
-          >
-            <bh-badge
-              :transparent="language !== repository.language"
-              size="small"
-              color="primary"
-              class="repository-home__header__wrapper__badge"
-            >
-              {{ language }}
-            </bh-badge>
-          </span>
-        </div>
-      </div>
       <div class="repository-home__description">
         <div class="repository-home__title">
           {{ $t('webapp.home.description') }}
+        </div>
+        <div class="repository-home__header">
+          <div class="repository-home__header__wrapper">
+            <span
+              v-for="language in repository.available_languages"
+              :key="language"
+              class="repository-home__header__wrapper__badge"
+            >
+              <bh-badge
+                :transparent="language !== repository.language"
+                size="small"
+                color="primary"
+              >
+                {{ language }}
+              </bh-badge>
+            </span>
+          </div>
         </div>
         <div>
           <vue-markdown
@@ -70,32 +61,16 @@
         />
       </div>
 
-      <div
-        v-if="hasLabels"
-        class="repository-home__entities-list"
-      >
-        <div class="repository-home__title">
-          {{ $t('webapp.home.entities_list') }}
-        </div>
-        <badges-card
-          v-if="repository.other_label.entities.length > 0"
-          :list="repository.other_label.entities"
-          :title="formattedLabel(repository.other_label)"
-          :examples-count="repository.other_label.examples__count"
-        />
-        <div v-if="repository.labels.length > 0">
-          <div class="repository-home__entities-list__labeled-count">
-            {{ labeledEntitiesCount }} {{ $t('webapp.home.entities_label') }}
-          </div>
-          <badges-card
-            v-for="(label, i) in repository.labels"
-            :key="i"
-            :list="label.entities"
-            :title="formattedLabel(label)"
-            :examples-count="label.examples__count"
-          />
-        </div>
-      </div>
+      <entity-edit
+        :groups="repository.groups || []"
+        :can-edit="repository.authorization.can_contribute"
+        :ungrouped="unlabeled"
+        :repository-uuid="repository.uuid"
+        @updateGroup="updatedGroup"
+        @updateUngrouped="updateUngrouped"
+        @removeGroup="removeGroup"
+        @removeEntity="removeEntity"
+        @createdGroup="addedGroup"/>
     </div>
   </repository-view-base>
 </template>
@@ -105,6 +80,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesCard from '@/components/repository/BadgesCard';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
+import EntityEdit from '@/components/repository/EntityEdit';
 
 
 export default {
@@ -113,6 +89,7 @@ export default {
     RepositoryViewBase,
     BadgesCard,
     VueMarkdown,
+    EntityEdit,
   },
   extends: RepositoryBase,
   data() {
@@ -131,57 +108,77 @@ export default {
       emoji: true,
       typographer: true,
       toc: true,
+      edit: false,
+      creating: false,
+      newLabels: [],
     };
   },
   computed: {
+    unlabeled() {
+      if (!this.repository || !this.repository.other_group) return [];
+      return this.repository.other_group.entities;
+    },
     hasIntents() {
       return this.repository.intents_list.length > 0;
     },
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
-    labeledEntitiesCount() {
-      return this.repository.labels.reduce((acc, label) => acc + label.entities.length, 0);
-    },
-    hasLabels() {
-      if (
-        !this.repository.labels
-        || !this.repository.other_label
-        || !this.repository.other_label.entities
-      ) {
-        return false;
-      }
-
-      return this.repository.labels.length > 0 || this.repository.other_label.entities.length > 0;
+  },
+  watch: {
+    edit() {
+      if (!this.edit) this.creating = false;
     },
   },
   methods: {
-    formattedLabel(label) {
-      if (label === undefined || label.entities === undefined) {
-        return '';
-      }
-
-      const entity = label.entities.length > 1 ? 'entities' : 'entity';
-
-      if (label.value === 'other') {
-        return this.$t('webapp.home.unlabeled', { entities_length: label.entities.length, _entity: entity });
-      }
-
-      return this.$t('webapp.home.labeled',
-        {
-          entities_length: label.entities.length,
-          _entity: entity,
-          label_value: label.value,
-        });
-    },
     formattedEntityTitle() {
       return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
+    },
+    updatedGroup({ groupId, entities }) {
+      const groupIndex = this.getGroupIndex(groupId);
+      if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
+    },
+    updateUngrouped({ entities }) {
+      this.repository.other_group.entities = entities;
+    },
+    removeEntity({ entity, groupId }) {
+      if (groupId != null) {
+        const groupIndex = this.getGroupIndex(groupId);
+
+        if (groupIndex < 0) return;
+
+        const removeIndex = this.repository.groups[groupIndex].entities
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
+
+        if (removeIndex < 0) return;
+
+        this.repository.groups[groupIndex].entities.splice(removeIndex, 1);
+      } else {
+        const removeIndex = this.repository.other_group.entities
+          .findIndex(listEntity => listEntity.entity_id === entity.entity_id);
+        if (removeIndex < 0) return;
+        this.repository.other_group.entities.splice(removeIndex, 1);
+      }
+    },
+    removeGroup(groupId) {
+      const groupIndex = this.getGroupIndex(groupId);
+      if (groupIndex < 0) return;
+      this.repository.other_group.entities = this.repository.other_group.entities
+        .concat(this.repository.groups[groupIndex].entities);
+      this.repository.groups.splice(groupIndex, 1);
+    },
+    addedGroup(group) {
+      this.repository.groups.push(group);
+    },
+    getGroupIndex(groupId) {
+      return this.repository.groups
+        .findIndex(group => group.group_id === groupId);
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~bh/src/assets/scss/colors.scss';
 @import '~bh/src/assets/scss/variables.scss';
 @import 'github-markdown-css/github-markdown.css';
@@ -194,7 +191,8 @@ export default {
 
   &__header {
     display: flex;
-    margin: 2rem .5rem 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     &__icon-badge {
       $size: 4rem;
@@ -217,7 +215,6 @@ export default {
     }
 
     &__wrapper {
-      padding: 0 .75rem;
 
       &__badge {
         height: 1.5rem;
@@ -239,14 +236,13 @@ export default {
     }
   }
 
-  &__intents-list,
-  &__entities-list {
+  &__intents-list {
     padding: 1rem .5rem;
-  }
-
-  &__entities-list {
-    &__labeled-count {
-      margin: 1.5rem 0 1rem;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
     }
   }
 }

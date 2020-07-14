@@ -7,14 +7,16 @@
       :repository="repository"
       :translate-to="to"
       @translated="onTranslated()" />
-    <p v-if="translateList && translateList.empty">
+    <p
+      v-if="translateList && translateList.empty"
+      class="repository-translate__list">
       {{ $t('webapp.translate.no_examples') }}
     </p>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import TranslateExampleItem from './TranslateExampleItem';
 
@@ -40,6 +42,10 @@ export default {
       type: Object,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -47,10 +53,16 @@ export default {
       translateExampleItem: TranslateExampleItem,
     };
   },
+  computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
+  },
   watch: {
     async from() { await this.updateList(); },
     async to() { await this.updateList(); },
     query() { this.updateList(); },
+    update() { this.updateList(); },
   },
   async mounted() {
     await this.updateList();
@@ -65,6 +77,7 @@ export default {
         await this.$nextTick();
         this.translateList = await this.getExamplesToTranslate({
           repositoryUuid: this.repository.uuid,
+          version: this.repositoryVersion,
           from: this.from,
           to: this.to,
           query: this.query,
@@ -80,3 +93,13 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+
+.repository-translate{
+  &__list{
+    margin-left: 0.5rem;
+  }
+}
+
+
+</style>

@@ -1,32 +1,25 @@
 <template>
   <div id="app">
     <bh-toast-notification />
-    <login-modal
-      v-if="loginModalOpen"
-      ref="loginModal"
-      :current-tab="loginModalTabValue" />
+    <news-modal />
     <router-view />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import LoginModal from '@/components/shared/LoginModal';
+
+import NewsModal from '@/components/NewsModal';
+import hotjar from '@/utils/plugins/hotjar';
 
 const components = {
-  LoginModal,
+  NewsModal,
 };
 
 export default {
   name: 'App',
   components,
-  computed: {
-    ...mapGetters([
-      'loginModalOpen',
-      'loginModalTabValue',
-    ]),
-  },
   mounted() {
+    hotjar.addHotjar();
     this.safariDetected();
   },
   methods: {

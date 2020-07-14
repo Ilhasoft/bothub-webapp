@@ -7,7 +7,7 @@
       class="repository-card-list__item" />
     <p
       v-if="repositoryList && repositoryList.empty"
-      class="has-text-centered">Repositories not found.</p>
+      class="has-text-centered">{{ $t('webapp.home.no_repo') }}</p>
   </div>
 </template>
 
@@ -100,10 +100,11 @@ export default {
   &__item {
     display: flex;
     flex-wrap: wrap;
-  }
+    margin: 0 1rem;
 
-   @media screen and (max-width: $mobile-width) {
-    width: 100%;
+    > * {
+      margin: 4rem;
+    }
   }
 
   &__align-items {

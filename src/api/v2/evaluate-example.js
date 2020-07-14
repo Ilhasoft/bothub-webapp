@@ -19,11 +19,12 @@ export default {
       },
     );
   },
-  update(repository, text, language, entities, intent, id) {
+  update(repository, version, text, language, entities, intent, id) {
     return request.$http.patch(
       `/v2/repository/evaluate/${id}/`,
       {
         repository,
+        repository_version: version,
         text,
         language,
         entities,
@@ -44,22 +45,22 @@ export default {
   delete(exampleId, repositoryUuid) {
     return request.$http.delete(`/v2/repository/evaluate/${exampleId}/?repository_uuid=${repositoryUuid}`);
   },
-  search(repositoryUuid, repositoryVersion, query = {}) {
-    const queryString = qs.stringify({
+  search(repositoryUuid, repositoryVersion, query = {}, limit = 20) {
+    const searchQuery = {
       repository_uuid: repositoryUuid,
       repository_version: repositoryVersion,
       ...query,
-    });
-    return new utils.List(`/v2/repository/evaluate/?${queryString}`);
+    };
+    return new utils.Page('/v2/repository/evaluate/', limit, searchQuery);
   },
   getResultsData(repositoryUuid, resultId) {
     return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
   },
-  getAllResultsLog(repositoryUuid, resultId) {
-    return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}`);
+  getAllResultsLog(repositoryUuid, resultId, page = 1) {
+    return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}&page_intent=${page}`);
   },
-  allVersions(repositoryUuid) {
-    return new utils.List(`/v2/repository/evaluate/results?repository_uuid=${repositoryUuid}`);
+  allVersions(repositoryUuid, version, perPage = 20) {
+    return new utils.Page('/v2/repository/evaluate/results/', perPage, { repository_uuid: repositoryUuid, repository_version: version });
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
@@ -70,7 +71,7 @@ export default {
   },
   runEvaluate(repositoryUUID, language, version) {
     return request.$http.post(
-      `v2/repository/repository-info/${repositoryUUID}/evaluate/`,
+      `v2/repository/repository-details/${repositoryUUID}/evaluate/`,
       {
         language,
         repository_version: version,

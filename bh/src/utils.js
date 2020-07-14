@@ -47,6 +47,20 @@ const VERBOSE_LANGUAGES = {
   ur: 'Urdu',
   zh: 'Chinese',
   ha: 'Hausa',
+  ka: 'Georgian',
+  kk: 'Kazakh',
+  sq: 'Albanian',
+  hy: 'Armenian',
+  az: 'Azerbaijani',
+  be: 'Belarusian',
+  bs: 'Bosnian',
+  bg: 'Bulgarian',
+  cs: 'Czech',
+  ky: 'Kyrgyz',
+  mk: 'Macedonian',
+  sr: 'Serbian',
+  uk: 'Ukrainian',
+  uz: 'Uzbek',
 };
 
 export default {

@@ -10,10 +10,23 @@ export default {
     const response = await evaluateExample.new(repository, repositoryVersion, text, language, entities, intent, isCorrected);
     return response;
   },
-  async updateEvaluateExample(store, {
-    repository, text, language, entities, intent, id,
+  searchEvaluateExamples(store, {
+    repositoryUUID, version, query, limit = 20,
   }) {
-    const response = await evaluateExample.update(repository, text, language, entities, intent, id);
+    return evaluateExample.search(repositoryUUID, version, query, limit);
+  },
+  async updateEvaluateExample(store, {
+    repository, version, text, language, entities, intent, id,
+  }) {
+    const response = await evaluateExample.update(
+      repository,
+      version,
+      text,
+      language,
+      entities,
+      intent,
+      id,
+    );
     return response;
   },
   async getExamplesTest(store, { repositoryUuid }) {
@@ -25,8 +38,8 @@ export default {
     return true;
   },
 
-  async getEvaluateExample(store, { id }) {
-    const response = await evaluateExample.get(id);
+  async getEvaluateExample(store, { id, version }) {
+    const response = await evaluateExample.get(id, version);
     return response.data;
   },
   async getEntitiesTest(store, { repositoryUuid, value }) {
@@ -37,13 +50,13 @@ export default {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
     return response;
   },
-  getAllVersions(store, { repositoryUuid }) {
-    return evaluateExample.allVersions(repositoryUuid);
+  getAllResults(store, { repositoryUuid, version, limit = 20 }) {
+    return evaluateExample.allVersions(repositoryUuid, version, limit);
   },
   getResultsData(store, { repositoryUuid, resultId }) {
     return evaluateExample.getResultsData(repositoryUuid, resultId);
   },
-  getAllResultsLog(store, { repositoryUuid, resultId }) {
-    return evaluateExample.getAllResultsLog(repositoryUuid, resultId);
+  getAllResultsLog(store, { repositoryUuid, resultId, page = 1 }) {
+    return evaluateExample.getAllResultsLog(repositoryUuid, resultId, page);
   },
 };

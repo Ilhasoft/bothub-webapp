@@ -1,11 +1,6 @@
 <template>
   <div class="dashboard-layout">
-    <side-bar @collapse="collapseHandle()" />
-    <b-loading
-      :is-full-page="isFullPage"
-      :active.sync="getCurrentRepository.name ? false : true" />
     <div
-      v-show="getCurrentRepository.name ? true : false"
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
       <div class="dashboard-layout__main-panel__header">
@@ -14,9 +9,10 @@
             <bh-icon
               value="botinho"
               size="large"
-              class="dashboard-layout__main-panel__header__info__badge__icon" />
+              class="dashboard-layout__main-panel__header__info__badge__icon"/>
           </div>
           <div
+            v-show="hasLoaded"
             class="
             dashboard-layout__main-panel__header__info__left">
             <div
@@ -27,15 +23,18 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <VersionDropdown />
+              <VersionDropdown v-if="versionEnabled" />
             </div>
             <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
               <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>
         </div>
-        <div class="dashboard-layout__main-panel__header__right">
-          <div class="dashboard-layout__main-panel__header__right__icons">
+        <div
+          class="dashboard-layout__main-panel__header__right">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="language" />
             <span>{{
@@ -43,7 +42,9 @@
                 getCurrentRepository.available_languages.length :
             0 }} {{ $t('webapp.dashboard.languages') }}</span>
           </div>
-          <div class="dashboard-layout__main-panel__header__right__icons">
+          <div
+            v-show="hasLoaded"
+            class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
               value="sentence" />
             <span>
@@ -51,6 +52,7 @@
             </span>
           </div>
           <div
+            v-show="hasLoaded"
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <bh-icon
@@ -58,6 +60,7 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <b-dropdown
+            v-show="hasLoaded"
             position="is-bottom-left"
             aria-role="list">
             <user-avatar
@@ -72,7 +75,7 @@
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
-              @click="openLoginModal()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
+              @click="signIn()">{{ $t('webapp.landing_page.signin') }}</b-dropdown-item>
             <b-dropdown-item
               v-if="!authenticated"
               aria-role="listitem"
@@ -84,7 +87,7 @@
             <b-dropdown-item
               v-if="authenticated"
               aria-role="listitem"
-              @click="openNewRepositoryModal()">
+              @click="openNewRepository()">
               {{ $t('webapp.layout.start_you_bot') }}
             </b-dropdown-item>
             <b-dropdown-item
@@ -97,13 +100,11 @@
               aria-role="listitem"
               @click="logout()">{{ $t('webapp.layout.logout') }}</b-dropdown-item>
           </b-dropdown>
+          <side-bar @collapse="collapseHandle()" />
         </div>
       </div>
       <router-view />
     </div>
-    <new-repository-modal
-      :active="isNewRepositoryModalOpen"
-      @requestClose="openNewRepositoryModal()" />
   </div>
 </template>
 <style lang="scss">
@@ -111,7 +112,6 @@
 <script>
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
-import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import { mapActions, mapGetters } from 'vuex';
 
@@ -120,7 +120,6 @@ export default {
   components: {
     SideBar,
     UserAvatar,
-    NewRepositoryModal,
     VersionDropdown,
   },
   data() {
@@ -128,7 +127,6 @@ export default {
       collapse: true,
       isLoading: false,
       isFullPage: true,
-      isNewRepositoryModalOpen: false,
     };
   },
   computed: {
@@ -136,19 +134,22 @@ export default {
       'getCurrentRepository',
       'myProfile',
       'authenticated',
+      'versionEnabled',
     ]),
+    hasLoaded() {
+      if (this.getCurrentRepository.name) return true;
+      return false;
+    },
     warningsCount() {
       if (!this.getCurrentRepository
-        || !this.getCurrentRepository.languages_warnings_count) return 0;
-      return this.getCurrentRepository.languages_warnings_count;
+        || !this.getCurrentRepository.selectedRepositoryselectedRepository) return 0;
+      return Object.keys(this.getCurrentRepository.languages_warnings).length;
     },
   },
   methods: {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
-      'setRepositoryVersion',
-      'openLoginModal',
     ]),
     collapseHandle() {
       this.collapse = !this.collapse;
@@ -158,8 +159,15 @@ export default {
         name: `${path}`,
       });
     },
-    openNewRepositoryModal() {
-      this.isNewRepositoryModalOpen = !this.isNewRepositoryModalOpen;
+    openNewRepository() {
+      this.$router.push({
+        name: 'new',
+      });
+    },
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
+      });
     },
     signUp() {
       this.$router.push({
@@ -250,7 +258,6 @@ html{
 
           }
         }
-
         &__icon {
           margin-left: 0.5rem;
           color: white;
@@ -258,12 +265,28 @@ html{
           height: 3rem;
           cursor: pointer;
           float: right;
-
         }
 
         &__user {
           margin-left: 3rem;
+          @media screen and (max-width: 52rem) {
+          margin-left: 2rem;
+          margin-bottom: 0.4rem;
+          }
         }
+
+        @media screen and (max-width: 52rem) {
+            display: flex;
+            flex-direction: column-reverse;
+            font-size: 13px;
+            margin-top: 0.5rem;
+            width: 20rem;
+        }
+      }
+
+      @media screen and (max-width: 52rem) {
+            padding: 0 0 0 2rem;
+            height: 7rem;
       }
     }
 

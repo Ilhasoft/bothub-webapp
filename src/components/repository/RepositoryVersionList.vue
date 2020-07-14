@@ -42,6 +42,8 @@
                   :expanded="true"
                   v-model="isEdit.name"
                   :value="isEdit.name"
+                  :maxlength="maxEditLength"
+                  :has-counter="false"
                   icon-right-clickable="true"
                   icon-right="close"
                   @icon-right-click="isEdit.edit = false"
@@ -142,6 +144,7 @@ export default {
   },
   data() {
     return {
+      maxEditLength: 40,
       versionsList: null,
       asc: false,
       isEdit: {},
@@ -183,7 +186,6 @@ export default {
   methods: {
     ...mapActions([
       'getVersions',
-      'setRepositoryVersion',
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',

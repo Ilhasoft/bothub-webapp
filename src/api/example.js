@@ -26,11 +26,26 @@ export default {
   delete(exampleId) {
     return request.$http.delete(`/v2/repository/example/${exampleId}/`);
   },
-  search(repositoryUuid, query = {}, limit = 20) {
+  search(repositoryUuid, version, query = {}, limit = 20) {
     return new utils.Page('/v2/repository/examples/', limit, {
       repository_uuid: repositoryUuid,
+      repository_version: version,
       ...query,
     });
+  },
+  edit(repository, version, text, language, entities, intent, id, isCorrected) {
+    return request.$http.patch(
+      `/v2/repository/example/${id}/`,
+      {
+        repository,
+        repository_version: version,
+        text,
+        language,
+        entities,
+        intent,
+        is_corrected: isCorrected,
+      },
+    );
   },
   get(id) {
     return request.$http.get(`/v2/repository/example/${id}/`);

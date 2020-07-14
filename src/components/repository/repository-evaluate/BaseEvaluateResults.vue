@@ -3,16 +3,15 @@
     v-if="resultId"
     class="bh-grid bh-grid--column">
     <div>
+      <evaluate-result-example-list
+        :id="resultId"
+        :query="query" />
       <graphics-result :chart-data="resultsData"/>
       <!-- <filter-evaluate-result-example
         :intents="repository.intents_list"
         :labels="repository.labels_list"
         :entities="repository.entities_list"
         @queryStringFormated="onSearch($event)" /> -->
-
-      <evaluate-result-example-list
-        :id="resultId"
-        :query="query" />
     </div>
   </div>
   <p v-else>{{ $t('webapp.evaluate.not_have_results') }}</p>

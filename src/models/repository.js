@@ -8,14 +8,14 @@ class Repository extends ModelBase {
     const { uuid, owner__nickname: ownerNickname, slug } = attributes;
 
     if (!uuid && ownerNickname && slug) {
-      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}`];
+      const related = store.getters.relatedUuid[`${ownerNickname}/${slug}/`];
       if (related) {
         this.set('uuid', related);
       }
       const versionNumber = store.getters.getSelectedVersion;
       const versionName = store.getters.getNameVersion;
-      if (versionName !== 'master' && versionName !== null) {
-        this.set('repository_version', `?repository_version=${versionNumber}`);
+      if (store.getters.getSelectedVersionRepository === related && versionName !== null) {
+        this.set('repository_version', `${versionNumber}`);
       }
     }
   }
@@ -29,8 +29,7 @@ class Repository extends ModelBase {
   defaults() {
     return {
       uuid: null,
-      owner: null,
-      owner__nickname: null,
+      owner: {},
       slug: '',
       name: '',
       description: '',
@@ -46,9 +45,9 @@ class Repository extends ModelBase {
       intents: [],
       intents_list: [],
       entities_list: [],
-      labels: [],
-      labels_list: [],
-      other_label: {},
+      groups: [],
+      groups_list: [],
+      other_group: {},
       authorization: null,
       available_request_authorization: null,
       request_authorization: null,
@@ -56,14 +55,14 @@ class Repository extends ModelBase {
       requirements_to_train: {},
       ready_for_train: false,
       repository_version: '',
+      use_transformer_entities: false,
     };
   }
 
   mutations() {
     return {
       uuid: String,
-      owner: Number,
-      owner__nickname: String,
+      owner: Object,
       slug: String,
       name: String,
       description: String,
@@ -79,9 +78,9 @@ class Repository extends ModelBase {
       intents: Object,
       intents_list: Object,
       entities_list: Object,
-      labels: Object,
-      labels_list: Object,
-      other_label: Object,
+      groups: Object,
+      groups_list: Object,
+      other_group: Object,
       authorization: Object,
       available_request_authorization: Boolean,
       request_authorization: Object,
@@ -89,23 +88,39 @@ class Repository extends ModelBase {
       requirements_to_train: Object,
       ready_for_train: Boolean,
       repository_version: String,
+      use_transformer_entities: Boolean,
     };
   }
 
   routes() {
+    const uuid = this.get('uuid');
+    const version = this.get('repository_version');
+
+    const route = uuid
+    && uuid !== 'null'
+    && uuid.length > 0
+    && version
+    && version !== 'null'
+    && version.length > 0
+      ? '/v2/repository/info/{uuid}/{repository_version}/'
+      : '/v2/repository-shortcut/{owner__nickname}/{slug}/';
+
     return {
-      fetch:
-        '/v2/repository-shortcut/{owner__nickname}/{slug}/{repository_version}',
+      fetch: route,
     };
   }
 
+  onFetch() {
+    return super.onFetchNoCache();
+  }
+
   onFetchSuccess(response) {
-    super.onFetchSuccess(response);
+    super.onFetchSuccessNoCache(response);
+
     store.dispatch('setRepositoryRelatedUuid', {
       ownerNickname: this.owner__nickname,
       slug: this.slug,
       uuid: this.uuid,
-      version: store.getters.getSelectedVersion,
     });
     store.dispatch('setRepository', this.attributes);
   }

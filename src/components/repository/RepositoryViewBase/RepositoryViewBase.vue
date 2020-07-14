@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="authenticated && repository"
+        v-if="repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -27,11 +27,8 @@
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"
       class="rpstr-vw-bs__loading">
-      <bh-loading />
+      <Loading/>
     </div>
-    <new-repository-modal
-      :active="newRepositoryModalOpen"
-      @requestClose="openNewRepositoryModal()" />
     <request-authorization-modal
       v-if="repository"
       :open.sync="requestAuthorizationModalOpen"
@@ -42,15 +39,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import NewRepositoryModal from '@/components/shared/NewRepositoryModal';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
-import RepositoryInfo from '@/components/repository/RepositoryInfo';
 import QuickTest from '@/components/quick-test/QuickTest';
-import SideBarNavigation from '@/components/shared/SideBar';
 import RepositoryNavigation from './RepositoryNavigation';
-
+import Loading from '@/components/shared/Loading';
 
 const ERROR_VERBOSE_LOOKUP = {
   404: 'Bot not found',
@@ -65,13 +59,11 @@ export default {
   },
   components: {
     SiteFooter,
-    RepositoryInfo,
     RepositoryNavigation,
     QuickTest,
     UserAvatar,
-    NewRepositoryModal,
     RequestAuthorizationModal,
-    SideBarNavigation,
+    Loading,
   },
   filters: {
     errorVerbose: code => (ERROR_VERBOSE_LOOKUP[code] || code),
@@ -92,7 +84,6 @@ export default {
   },
   data() {
     return {
-      newRepositoryModalOpen: false,
       requestAuthorizationModalOpen: false,
     };
   },
@@ -111,7 +102,7 @@ export default {
           return this.repository.name;
         }
 
-        return `${this.repository.owner__nickname}/${this.repository.slug}`;
+        return `${this.repository.owner.nickname}/${this.repository.slug}`;
       }
 
       return undefined;
@@ -140,21 +131,17 @@ export default {
     ...mapActions([
       'logout',
       'updateMyProfile',
-      'openLoginModal',
     ]),
     openMyProfile() {
       this.$router.push({ name: 'myProfile' });
-    },
-    openNewRepositoryModal() {
-      this.newRepositoryModalOpen = !this.newRepositoryModalOpen;
     },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);
@@ -192,15 +179,6 @@ export default {
         justify-content: space-around;
       }
 
-      &__repo-info {
-        @media screen and (max-width: $medium-screen) {
-          flex-grow: 0;
-          flex-direction: row;
-          justify-content: flex-end;
-          padding: 0px;
-        }
-      }
-
       &__icons-align {
         display: flex;
         align-items: center;
@@ -213,10 +191,6 @@ export default {
             width: 1.5rem;
           }
         }
-      }
-
-      &__text-information {
-        margin: 0 .25rem;
       }
     }
 
@@ -254,27 +228,6 @@ export default {
 
           &__dropdown {
             cursor: pointer;
-          }
-        }
-
-        &__info {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin-left: 2rem;
-
-          @media screen and (max-width: $medium-screen) {
-            display: none;
-          }
-
-
-          &--mobile {
-            display: none;
-            @media screen and (max-width: $medium-screen) {
-              display: inline;
-              flex-grow: 1;
-              margin:0px;
-            }
           }
         }
 

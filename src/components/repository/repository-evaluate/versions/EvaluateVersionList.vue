@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="versionsList"
       :item-component="evaluateItem"
       :list="versionsList" />
@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapActions, mapGetters } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import EvaluateVersionItem from '@/components/repository/repository-evaluate/versions/EvaluateVersionItem';
 
 
@@ -20,7 +20,7 @@ export default {
   name: 'EvaluateVersionList',
   components: {
     EvaluateVersionItem,
-    Pagination,
+    PaginatedList,
   },
   data() {
     return {
@@ -29,8 +29,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
+    ...mapGetters({
+      repository: 'getCurrentRepository',
+      version: 'getSelectedVersion',
     }),
   },
   mounted() {
@@ -38,14 +39,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getAllVersions',
+      'getAllResults',
     ]),
-    updateVersionList(force = false) {
+    async updateVersionList(force = false) {
       if (!this.resultExampleList || force) {
-        this.getAllVersions({ repositoryUuid: this.repository.uuid })
-          .then((response) => {
-            this.versionsList = response;
-          });
+        this.versionsList = await this.getAllResults({
+          repositoryUuid: this.repository.uuid,
+          version: this.version,
+        });
       }
     },
   },

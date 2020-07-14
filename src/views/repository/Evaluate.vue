@@ -28,56 +28,44 @@
                   </option>
                 </b-select>
               </div>
-              <bh-button
+              <b-button
                 ref="runNewTestButton"
                 :loading="evaluating"
                 :disabled="evaluating"
+                type="is-secondary"
                 class="evaluate__content-header__wrapper__btn"
-                secondary
                 @click="newEvaluate()">
-                <slot v-if="!evaluating">
-                  {{ $t('webapp.evaluate.run_test') }}
-              </slot></bh-button>
+                {{ $t('webapp.evaluate.run_test') }}
+              </b-button>
             </div>
           </div>
           <div class="evaluate__divider" />
           <div class="evaluate__content-wrapper">
             <base-evaluate-examples
               :filter-by-language="currentLanguage"
-              @created="updateRepository(true)"
-              @deleted="updateRepository(true)"/>
+              @created="updateTrainingStatus()"
+              @deleted="updateTrainingStatus()"/>
           </div>
         </div>
         <div
-          v-else
           class="
-                bh-grid">
-          <div class="bh-grid__item">
-            <div class="bh-notification bh-notification--warning">
-              {{ $t('webapp.evaluate.you_can_not_edit') }}
-              <request-authorization-modal
-                v-if="repository"
-                :open.sync="requestAuthorizationModalOpen"
-                :repository-uuid="repository.uuid"
-                @requestDispatched="onAuthorizationRequested()" />
-              <a
-                class="evaluate__navigation__requestAuthorization"
-                @click="openRequestAuthorizationModal">
-                {{ $t('webapp.layout.request_authorization') }}
-              </a>
-            </div>
+                evaluate__container">
+          <div class="evaluate__item">
+            <authorization-request-notification
+              v-if="repository && !repository.authorization.can_write"
+              :repository-uuid="repository.uuid"
+              @onAuthorizationRequested="updateRepository(false)" />
           </div>
         </div>
       </div>
       <div
-        v-else
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <div class="bh-notification bh-notification--info">
-            {{ $t('webapp.evaluate.login') }}
-          </div>
-          <login-form hide-forgot-password />
-        </div>
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.evaluate.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
       </div>
     </div>
   </repository-view-base>
@@ -86,7 +74,7 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateExamples from '@/components/repository/repository-evaluate/BaseEvaluateExamples';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
 
@@ -100,34 +88,40 @@ export default {
     RepositoryViewBase,
     LoginForm,
     BaseEvaluateExamples,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
     return {
       currentLanguage: '',
-      languages: [],
       evaluating: false,
       error: {},
-      requestAuthorizationModalOpen: false,
     };
   },
   computed: {
     ...mapState({
       resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
     }),
-    ...mapGetters([
-      'getEvaluateLanguage',
-    ]),
+    ...mapGetters({
+      getEvaluateLanguage: 'getEvaluateLanguage',
+      repositoryVersion: 'getSelectedVersion',
+    }),
+    languages() {
+      if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
+      return Object.keys(this.selectedRepository.evaluate_languages_count)
+        .map((lang, index) => ({
+          id: index + 1,
+          value: lang,
+          title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
+        }));
+    },
   },
   watch: {
     currentLanguage(language) {
       this.setEvaluateLanguage(language);
     },
     selectedRepository() {
-      this.getExamples();
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
@@ -136,31 +130,25 @@ export default {
   methods: {
     ...mapActions([
       'setEvaluateLanguage',
-      'getEvaluateExample',
       'runNewEvaluate',
+      'getTrainingStatus',
     ]),
-    getExamples() {
-      this.getEvaluateExample({
-        id: this.selectedRepository.uuid,
-      }).then(() => {
-        this.languages = Object.keys(this.selectedRepository.evaluate_languages_count)
-          .map((lang, index) => ({
-            id: index + 1,
-            value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
-          }));
-      });
-    },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
+      this.$buefy.toast.open({
+        message: this.$t('webapp.layout.authorization_success'),
         type: 'success',
       });
       this.updateRepository(false);
+    },
+    async updateTrainingStatus() {
+      const trainStatus = await this.getTrainingStatus({
+        repositoryUUID: this.repository.uuid,
+        version: this.repositoryVersion,
+      });
+      if (trainStatus) {
+        Object.assign(this.repository, trainStatus);
+      }
     },
     async newEvaluate() {
       this.evaluating = true;
@@ -171,18 +159,23 @@ export default {
           version: this.repositoryVersion,
         });
         this.evaluating = false;
-        this.setUpdateEvaluateResultId({
-          id: result.data.evaluate_id,
-          version: result.data.evaluate_version,
+        this.$router.push({
+          name: 'repository-result',
+          params: {
+            ownerNickname: this.repository.owner.nickname,
+            slug: this.repository.slug,
+            resultId: result.data.evaluate_id,
+            version: result.data.evaluate_version,
+          },
         });
         return true;
       } catch (error) {
         this.error = error.response.data;
         this.evaluating = false;
-        this.$bhToastNotification({
-          message: `${this.error.detail || 'sorry, something wrong ;('} `,
-          type: 'danger',
-          time: 5000,
+        this.$buefy.toast.open({
+          message: `${this.error.detail || this.$t('webapp.evaluate.default_error')} `,
+          type: 'is-danger',
+          duration: 5000,
         });
       }
       return false;
@@ -197,6 +190,7 @@ export default {
 
 
 .evaluate {
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;

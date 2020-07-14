@@ -1,24 +1,27 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="authorizationsList"
       ref="list"
       :item-component="authorizationItemElem"
       :list="authorizationsList"
-      @edit="onEdit($event)" />
-    <p v-if="authorizationsList && authorizationsList.empty">No users in your team.</p>
+      @itemSave="onEdit"
+      @itemDeleted="updateAuthorizations"/>
+    <p v-if="authorizationsList && authorizationsList.empty">
+      {{ $t('webapp.settings.no_users' ) }}
+    </p>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 
-import Pagination from '@/components/shared/Pagination';
+import PaginatedList from '@/components/shared/PaginatedList';
 import AuthorizationItem from '@/components/repository/AuthorizationItem';
 
 
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {
@@ -42,14 +45,9 @@ export default {
   methods: {
     ...mapActions(['repositoryAuthorizationList']),
     async updateAuthorizations() {
-      if (this.authorizationsList) {
-        this.authorizationsList.reset();
-        await this.authorizationsList.next();
-      } else {
-        this.authorizationsList = await this.repositoryAuthorizationList({
-          repositoryUuid: this.repositoryUuid,
-        });
-      }
+      this.authorizationsList = await this.repositoryAuthorizationList({
+        repositoryUuid: this.repositoryUuid,
+      });
     },
     onEdit(value) {
       this.$emit('edit', value);

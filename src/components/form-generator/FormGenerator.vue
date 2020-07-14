@@ -7,14 +7,32 @@
       :key="field.name"
       :label="field.label"
       :type="field.errors && 'is-danger'"
-      :message="field.errors || field.helpText">
-      <component
-        :v-if="field.inputComponent"
-        :is="field.inputComponent"
-        v-bind="field.inputProps"
-        v-model="formData[field.name]"
-        :initial-data="initialData[field.name]"
-        @input="update()" />
+      :message="!showLabels ? field.errors : field.errors || field.helpText"
+      :class="!showLabels ? 'field-content' : ''">
+      <div
+        slot="label"
+        class="field-label">
+        <span v-if="showLabels">
+          {{ field.label }}
+        </span>
+        <help-widget
+          v-if="hasHelpIcon(field)"
+          :article-id="helpArticleId" />
+      </div>
+      <b-field :class="!showLabels ? 'input-content' : ''">
+        <component
+          :v-if="field.inputComponent"
+          :is="field.inputComponent"
+          v-bind="field.inputProps"
+          :label-placeholder="field.label"
+          :show-max-lenght="availableMaxLenght"
+          v-model="formData[field.name]"
+          :initial-data="initialData[field.name]"
+          :label="field.label"
+          :help-text="field.helpText"
+          :compact="!showLabels"
+          @input="update()"/>
+      </b-field>
     </b-field>
   </div>
 </template>
@@ -28,6 +46,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -45,6 +64,7 @@ const relatedInputComponent = {
 
 const components = {
   Messages,
+  HelpWidget,
 };
 
 export default {
@@ -55,9 +75,17 @@ export default {
       required: true,
       type: Object,
     },
+    availableMaxLenght: {
+      type: Boolean,
+      default: true,
+    },
     errors: {
       type: Object,
       default: () => ({}),
+    },
+    showLabels: {
+      type: Boolean,
+      default: true,
     },
     initialData: {
       type: Object,
@@ -107,6 +135,9 @@ export default {
       return (this.errors.non_field_errors
         && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
+    helpArticleId() {
+      return process.env.BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID;
+    },
   },
   mounted() {
     this.update();
@@ -115,6 +146,25 @@ export default {
     update() {
       this.$emit('input', this.formData);
     },
+    hasHelpIcon(field) {
+      return field.name === 'algorithm';
+    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.field-content{
+height: 58px;
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+.input-content{
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+.field-label {
+    display: flex;
+    align-items: center;
+}
+</style>

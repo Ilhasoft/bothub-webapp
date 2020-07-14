@@ -1,11 +1,14 @@
 <template>
   <div>
-    <pagination
+    <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
+      :per-page="perPage"
+      @itemSave="show"
       @itemDeleted="onItemDeleted($event)" />
+
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">No examples.</p>
@@ -13,13 +16,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapActions, mapGetters } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
 
-
 const components = {
-  Pagination,
+  PaginatedList,
 };
 
 export default {
@@ -30,6 +32,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    perPage: {
+      type: Number,
+      default: 20,
+    },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -38,13 +48,16 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
   },
   watch: {
     query() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
     repository() {
@@ -55,13 +68,20 @@ export default {
     this.updateExamples();
   },
   methods: {
-    updateExamples(force = false) {
+    ...mapActions([
+      'searchExamples',
+    ]),
+    show() {
+      this.updateExamples(true);
+    },
+    async updateExamples(force = false) {
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.examples.search(
-          this.repository.uuid,
-          this.repositoryVersion,
-          this.query,
-        );
+        this.examplesList = await this.searchExamples({
+          repositoryUuid: this.repository.uuid,
+          version: this.repositoryVersion,
+          query: this.query,
+          limit: this.perPage,
+        });
       }
     },
     onItemDeleted() {

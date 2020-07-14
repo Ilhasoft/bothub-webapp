@@ -2,46 +2,39 @@
   <div class="graphics-results">
     <div class="graphics-results__wrapper">
       <h2 class="graphics-results__title">
-        Evaluate output
+        {{ $t('webapp.result.evaluate_output') }}
         <span v-if="version">
-          (Test #{{ version }})
+          ({{ $t('webapp.result.test') }} #{{ version }})
         </span>
       </h2>
       <p>
-        For more information about test results, see our
+        {{ $t('webapp.result.evaluate_output_text') }}
         <a
           target="_blank"
-          href="https://docs.ilhasoft.mobi/bothub/testing-process">documentation here</a>.
+          href="https://docs.ilhasoft.mobi/bothub/testing-process">{{ $t('webapp.result.documentation') }}</a>.
       </p>
 
       <div class="graphics-results__info">
         <h3 class="graphics-results__title">
-          Precision and recall reports
+          {{ $t('webapp.result.recall_reports') }}
         </h3>
+        <p> {{ $t('webapp.result.recall_reports_text') }} </p>
         <p>
-          A perfect precision score of 1.0 means that every test
-          result was positive (but says nothing about whether all
-          positive results were retrieved) whereas a perfect
-          recall score of 1.0 means that all positive results
-          were retrieved by the search (but says nothing about
-          how many false positives were also retrieved).
-        </p>
-        <p>
-          Read more about in
+          {{ $t('webapp.result.see_more_in') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">our documentation</a>.
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
 
       <div>
         <h5 class="graphics-results__title">
-          Intent report
+          {{ $t('webapp.result.intent_report') }}
         </h5>
         <div
           v-if="!loadingIntentsChart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <canvas
           id="intentsChart"
@@ -49,12 +42,12 @@
       </div>
       <div>
         <h5 class="graphics-results__title">
-          Entities
+          {{ $tc('webapp.result.entity', 2) }}
         </h5>
         <div
           v-if="!loadingEntitiesChart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <canvas
           id="entitiesChart"
@@ -65,21 +58,20 @@
     <div>
       <div class="graphics-results__info">
         <h3 class="graphics-results__title">
-          Intent confusion matrix
+          {{ $t('webapp.result.intent_confusion_matrix') }}
         </h3>
         <p>
-          The confusion matrix shows you which intents
-          are mistaken for others. Read more about it in
+          {{ $t('webapp.result.intent_confusion_matrix_text') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">our documentation</a>.
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.matrix_chart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <img
           v-if="chartData.matrix_chart"
@@ -90,27 +82,20 @@
     <div>
       <div class="graphics-results__info">
         <h3 class="graphics-results__title">
-          Intent confidence distribution
+          {{ $t('webapp.result.intent_confidence_distribution') }}
         </h3>
-        <p>
-          The histogram allows you to visualize the
-          confidence distribution for all predictions, with the volume of
-          correct and incorrect predictions being displayed by green and red bars respectively.
-          Improving the quality of your training data will move the
-          green histogram bars to the right and
-          the red histogram bars to the left of the plot.
-        </p>
-        <p>Read more about it in
+        <p>{{ $t('webapp.result.intent_confidence_distribution_text') }}</p>
+        <p>{{ $t('webapp.result.see_more_in') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">our documentation</a>.
+            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.confidence_chart"
           class="graphics-results__charts__loading">
-          <bh-loading />
+          <Loading/>
         </div>
         <img
           v-if="chartData.confidence_chart"
@@ -124,9 +109,13 @@
 <script>
 import { mapState } from 'vuex';
 import Chart from 'chart.js';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'GraphicsResult',
+  components: {
+    Loading,
+  },
   props: {
     chartData: {
       type: Object,

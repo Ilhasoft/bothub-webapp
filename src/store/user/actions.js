@@ -37,9 +37,9 @@ export default {
       });
     }
   },
-  getMyRepositories() {
+  getMyRepositories(store, limit = 20) {
     /* istanbul ignore next */
-    return user.myRepositories();
+    return user.myRepositories(limit);
   },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);

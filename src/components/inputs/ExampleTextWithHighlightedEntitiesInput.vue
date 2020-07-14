@@ -147,6 +147,7 @@ export default {
 .example-txt-w-highlighted-entities {
   background-color: white;
   border-radius: $form-components-border-radius;
+  height: 2.2rem;
 
   &__input-wrapper {
     position: relative;

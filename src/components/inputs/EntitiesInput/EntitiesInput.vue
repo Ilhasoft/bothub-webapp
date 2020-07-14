@@ -4,7 +4,7 @@
       v-for="entity in entities"
       :key="entity.localId"
       v-model="entity.entity"
-      :available-entities="availableEntities"
+      :available-entities="entitiesOptions"
       :available-labels="availableLabels"
       :entity-class="getEntityClass(entity)"
       :uses-labels="availableAddLabel"
@@ -19,22 +19,26 @@
       @removeEntity="() => removeEntity(entity)"
     />
 
-    <bh-button
-      ref="addEntityBtn"
-      :tooltip-hover="!textSelectedValue ? $t('highlight_word') : null"
-      :disabled="!textSelectedValue"
-      size="small"
-      rounded
-      primary
-      @click.prevent.stop="addEntity()"
-    >
-      <span>
-        <span v-if="textSelectedValue">
-          {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
+    <b-tooltip
+      :is-active="!textSelectedValue"
+      :label="$t('webapp.trainings.highlight_word')"
+      multilined
+      type="is-dark">
+      <b-button
+        ref="addEntityBtn"
+        :disabled="!textSelectedValue"
+        rounded
+        type="is-primary"
+        @click.prevent.stop="addEntity()"
+      >
+        <span>
+          <span v-if="textSelectedValue">
+            {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
+          </span>
+          <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
         </span>
-        <span v-else>{{ $t('webapp.trainings.add_entity') }}</span>
-      </span>
-    </bh-button>
+      </b-button>
+    </b-tooltip>
   </div>
 </template>
 
@@ -42,7 +46,7 @@
 import { getEntityColor } from '@/utils/entitiesColors';
 import { generateTemporaryId } from '@/utils';
 import Vue from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
 import EntityForm from './EntityForm';
 
@@ -92,9 +96,20 @@ export default {
   data() {
     return {
       entities: _.cloneDeep(this.value),
+      allEntities: [],
+      errors: '',
     };
   },
   computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
+    entitiesOptions() {
+      if (this.allEntities !== undefined) {
+        return this.allEntities;
+      }
+      return [];
+    },
     textSelectedValue() {
       if (!this.textSelected) {
         return null;
@@ -144,10 +159,25 @@ export default {
       this.validateEntities(text, oldText);
     },
   },
+  mounted() {
+    this.getEntitiesName();
+  },
   methods: {
     ...mapActions([
       'getEntities',
+      'getAllEntities',
     ]),
+    async getEntitiesName() {
+      try {
+        const entities = await this.getAllEntities({
+          repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repository.version_default.id,
+        });
+        this.allEntities = entities.data.results.map(entity => entity.value);
+      } catch (error) {
+        this.errors = error;
+      }
+    },
     removeEntity(entity) {
       this.entities = this.entities.filter(e => e.localId !== entity.localId);
     },
@@ -175,10 +205,16 @@ export default {
       this.$emit('entityAdded');
     },
     async loadLabelFor(entityId, entityText) {
-      const entities = await this.getEntities({
-        repositoryUuid: this.repository.uuid || this.repository,
-        value: entityText,
-      });
+      let entities = [];
+      try {
+        entities = await this.getEntities({
+          repositoryUuid: this.repository.uuid || this.repository,
+          value: entityText,
+          repositoryVersion: this.repositoryVersion,
+        });
+      } catch (error) {
+        this.errors = error;
+      }
       await entities.next();
 
       const entityIndex = this.entities.findIndex(e => e.localId === entityId);

@@ -1,12 +1,12 @@
 <template>
   <div>
     <form
-      class="columns is-variable is-2"
+      class="columns wrapper is-vcentered is-variable is-2"
       @submit.prevent="onSubmit()"
     >
       <div class="column is-three-fifths">
-        <bh-field
-          :errors="errors.text || errors.language"
+        <b-field
+          :message="errors.text || errors.language"
         >
           <example-text-with-highlighted-entities-input
             ref="textInput"
@@ -17,6 +17,7 @@
             :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
+            @submit="onEnter()"
           >
             <language-append-select-input
               slot="append"
@@ -24,37 +25,41 @@
               class="language-append"
             />
           </example-text-with-highlighted-entities-input>
-        </bh-field>
+        </b-field>
       </div>
       <div class="column">
-        <bh-field
-          :errors="errors.intent">
-          <bh-autocomplete
+        <b-field
+          :message="errors.intent">
+          <b-autocomplete
             v-model="intent"
-            :data="repository.intents_list || []"
-            :formatters="intentFormatters"
             :placeholder="$t('webapp.trainings.intent')"
-            size="normal" />
-        </bh-field>
+            :data="filteredData"
+            :open-on-focus="true"
+            dropdown-position="bottom"
+            @keyup.enter.native="onEnter()"
+          />
+        </b-field>
       </div>
       <div class="column is-narrow">
-        <bh-field>
-          <bh-button
-            :disabled="!isValid || submitting "
-            :tooltip-hover="!isValid ? validationErrors : null"
-            :loading="submitting"
-            primary
-            size="normal"
-            type="submit"
-          >
-            <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
-          </bh-button>
-        </bh-field>
+        <b-field>
+          <b-tooltip
+            :is-active="!isValid && validationErrors.length > 0"
+            :label="validationErrors.join(', ')"
+            type="is-dark">
+            <b-button
+              :disabled="!shouldSubmit "
+              :loading="submitting"
+              type="is-primary"
+              native-type="submit">
+              <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
+            </b-button>
+          </b-tooltip>
+        </b-field>
       </div>
     </form>
     <div class="columns is-variable is-1">
       <div class="column is-three-fifths">
-        <bh-field :errors="errors.entities">
+        <b-field :message="errors.entities">
           <entities-input
             ref="entitiesInput"
             v-model="entities"
@@ -65,7 +70,7 @@
             :available-labels="availableLabels"
             @entityAdded="onEntityAdded()"
           />
-        </bh-field>
+        </b-field>
       </div>
     </div>
   </div>
@@ -76,7 +81,7 @@ import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/Example
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import BH from 'bh';
 import { formatters } from '@/utils';
 
@@ -107,18 +112,24 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
     }),
+    shouldSubmit() {
+      return this.isValid && !this.submitting;
+    },
+    filteredData() {
+      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+    },
     validationErrors() {
       const errors = [];
 
       if (!this.text) {
-        errors.push('You need type a text to sentence');
+        errors.push(this.$t('webapp.trainings.empty_text_error'));
       }
 
       if (!this.intent) {
-        errors.push('Intent is required');
+        errors.push(this.$t('webapp.trainings.intent_error'));
       }
 
       return errors;
@@ -133,13 +144,6 @@ export default {
         BH.utils.formatters.removeMultipleWhiteSpaces(),
       ];
       formattersList.toString = () => 'textFormatters';
-      return formattersList;
-    },
-    intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
       return formattersList;
     },
     availableEntities() {
@@ -172,6 +176,12 @@ export default {
       };
     },
   },
+  watch: {
+    intent() {
+      if (!this.intent || this.intent.length <= 0) return;
+      this.intent = formatters.bothubItemKey()(this.intent);
+    },
+  },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
@@ -179,6 +189,9 @@ export default {
     ...mapActions([
       'newExample',
     ]),
+    onEnter() {
+      if (this.shouldSubmit) this.onSubmit();
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },
@@ -213,7 +226,7 @@ export default {
         if (data) {
           /* istanbul ignore next */
           this.$buefy.toast.open({
-            message: data.detail,
+            message: this.$t('webapp.trainings.intention_or_sentence_already_exist'),
             type: 'is-danger',
           });
           this.errors = data;
@@ -230,5 +243,17 @@ export default {
 <style lang="scss" scoped>
 .language-append {
   flex-grow: 0;
+}
+
+.wrapper {
+  margin: 1rem 0;
+}
+
+.columns.is-variable .column {
+  padding-left: 0;
+}
+
+.columns.is-variable .column:last-child {
+  padding-right: 0;
 }
 </style>

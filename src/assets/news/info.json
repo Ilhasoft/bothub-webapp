@@ -1,0 +1,49 @@
+{
+    "max_version": "1.18.0",
+    "count": 4,
+    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif"],
+    "en": { 
+        "back": "Back",
+        "next": "Next",
+        "cancel": "Cancel",
+        "finish": "Finish",
+        "1": {
+            "title": "Bothub has Changed!",
+            "text": "We're building a new experience inspired by you! Now, you can manage your intelligence entities."
+        },
+        "2": {
+            "title": "View sentences!",
+            "text": "View the sentences of each entity with one click.."
+        },
+            "3": {
+            "title": "Edit sentences!",
+            "text": "And edit the sentences of an entity!"
+        },
+        "4": {
+            "title": "Create and edit groups of entities!",
+            "text": "Or create groups and delete entities more easily."
+        }
+    },
+    "pt_br": { 
+        "back": "Anterior",
+        "next": "Próximo",
+        "cancel": "Cancelar",
+        "finish": "Finalizar",
+        "1": {
+            "title": "Bothub tem novidades!",
+            "text": "Estamos construindo uma nova experiência inspirada por você! Agora você pode gerenciar as entidades da sua inteligência."
+        },
+        "2": {
+            "title": "Visualize suas frases!",
+            "text": "Veja as frases com uma entidade com um clique"
+        },
+        "3": {
+            "title": "Edite frases!",
+            "text": "Edite as frases pertencentes a uma entidade!"
+        },
+        "4": {
+            "title": "Crie ou edite grupos de entidades!",
+            "text": "Ficou mais fácil agrupar entidades."
+        }
+    }
+}

@@ -3,9 +3,9 @@
 exports[`RequestAuthorizationForm.vue renders correctly 1`] = `
 <form>
   <!---->
-  <form-generator-stub schema="[object Object]" errors="[object Object]" initialdata="[object Object]"></form-generator-stub>
+  <form-generator-stub schema="[object Object]" availablemaxlenght="true" errors="[object Object]" showlabels="true" initialdata="[object Object]"></form-generator-stub>
   <div>
-    <bh-button-stub primary="true" type="submit" fullwidth="true"> Request </bh-button-stub>
+    <b-button-stub type="is-primary" expanded="true" nativetype="submit" tag="button"> some specific text </b-button-stub>
   </div>
 </form>
 `;

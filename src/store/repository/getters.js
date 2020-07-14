@@ -18,9 +18,17 @@ export default {
     return state.updateVersions;
   },
   getSelectedVersion(state) {
-    return state.repositoryVersion;
+    if (!state.repositoryVersion) return null;
+    return state.repositoryVersion.id;
+  },
+  getSelectedVersionRepository(state) {
+    if (!state.repositoryVersion) return null;
+    return state.repositoryVersion.repositoryUUID;
   },
   getNameVersion(state) {
     return state.repositoryVersionName;
+  },
+  versionEnabled() {
+    return process.env.VERSION_ENABLED;
   },
 };

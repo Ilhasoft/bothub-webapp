@@ -2,68 +2,56 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div
-      v-if="repository"
-      class="bh-grid bh-grid--column">
-      <div class="bh-grid__item bh-grid__item--nested">
-        <div class="bh-grid trainings-repository__new-example">
-          <div class="bh-grid__item">
-            <div v-if="authenticated">
-              <div v-if="repository.authorization.can_contribute">
-                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
-                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
-                <new-example-form
-                  :repository="repository"
-                  @created="onExampleCreated()" />
-              </div>
-              <div v-else>
-                <div class="bh-notification bh-notification--warning">
-                  {{ $t('webapp.trainings.not_can_edit_repository') }}
-                  <request-authorization-modal
-                    v-if="repository"
-                    :open.sync="requestAuthorizationModalOpen"
-                    :repository-uuid="repository.uuid"
-                    @requestDispatched="onAuthorizationRequested()" />
-                  <a
-                    class="requestAuthorization"
-                    @click="openRequestAuthorizationModal">
-                    {{ $t('webapp.layout.request_authorization') }}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div v-else>
-              <div class="bh-notification bh-notification--info">
-                {{ $t('webapp.trainings.login') }}
-              </div>
-              <login-form hide-forgot-password />
-            </div>
+    <div v-if="repository">
+      <div class="trainings-repository__new-example">
+        <div v-if="authenticated">
+          <div v-if="repository.authorization.can_contribute">
+            <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+            <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+            <new-example-form
+              :repository="repository"
+              @created="updatedExampleList()" />
           </div>
+          <authorization-request-notification
+            v-else
+            :repository-uuid="repository.uuid"
+            @onAuthorizationRequested="updateRepository(false)" />
+        </div>
+        <div v-else>
+          <b-notification
+            :closable="false"
+            type="is-info">
+            {{ $t('webapp.trainings.login') }}
+          </b-notification>
+          <login-form hide-forgot-password />
         </div>
       </div>
       <div
-        v-if="authenticated && repository.authorization.can_contribute"
-        class="bh-grid__item">
+        v-if="authenticated && repository.authorization.can_contribute">
         <hr>
         <div class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <bh-button
+          <b-button
             v-if="repository.examples__count > 0 && repository.authorization.can_write "
             ref="training"
-            color="secondary-light"
-            size="normal"
+            :disabled="loadingStatus"
+            :loading="loadingStatus"
+            type="is-secondary"
+            class="trainings-repository__list-wrapper__button"
             @click="openTrainingModal">
             {{ $t('webapp.trainings.run_training') }}
-          </bh-button>
+          </b-button>
         </div>
         <filter-examples
           :intents="repository.intents_list"
-          :entities="repository.entities_list"
+          :entities="repository.entities"
           :language-filter="true"
           @queryStringFormated="onSearch($event)"/>
         <examples-list
           :query="query"
-          @exampleDeleted="onExampleDeleted" />
+          :update="update"
+          @exampleDeleted="onExampleDeleted"
+        />
       </div>
     </div>
     <train-modal
@@ -89,12 +77,12 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import ExamplesList from '@/components/example/ExamplesList';
 import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RepositoryBase from './Base';
-
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'RepositoryTrainings',
@@ -105,20 +93,22 @@ export default {
     ExamplesList,
     LoginForm,
     ExampleSearchInput,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
     TrainModal,
     TrainResponse,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
     return {
       trainModalOpen: false,
-      requestAuthorizationModalOpen: false,
       trainResponseData: null,
       trainResponseOpen: false,
       querySchema: {},
       query: {},
+      update: false,
       training: false,
+      loadingStatus: false,
     };
   },
   computed: {
@@ -128,8 +118,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'openLoginModal',
       'trainRepository',
+      'getTrainingStatus',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -150,9 +140,23 @@ export default {
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
+    async updateTrainingStatus() {
+      this.loadingStatus = true;
+      try {
+        const trainStatus = await this.getTrainingStatus({
+          repositoryUUID: this.repository.uuid,
+          version: this.repositoryVersion,
+        });
+        if (trainStatus) {
+          Object.assign(this.repository, trainStatus);
+        }
+      } finally {
+        this.loadingStatus = false;
+      }
+    },
     openTrainingModal() {
       if (!this.authenticated) {
-        this.openLoginModal();
+        this.signIn();
       }
       if (this.authenticated && this.repository.available_request_authorization) {
         this.openRequestAuthorizationModal();
@@ -161,23 +165,19 @@ export default {
         this.trainModalOpen = true;
       }
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$buefy.toast.open({
-        message: 'Request made! Wait for review of an admin.',
-        type: 'is-success',
+    signIn() {
+      this.$router.push({
+        name: 'signIn',
       });
-      this.updateRepository(false);
     },
-    onExampleCreated() {
-      this.updateRepository(true);
+    updatedExampleList() {
+      this.updateTrainingStatus();
+      this.update = !this.update;
     },
     onExampleDeleted() {
       this.repository.examples__count -= 1;
-      this.updateRepository(false);
+      this.updateTrainingStatus();
+      this.updatedExampleList();
     },
     async train(repositoryUuid) {
       this.training = true;
@@ -203,14 +203,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+  @import '~@/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
 .trainings-repository {
   &__list-wrapper {
     display: flex;
     justify-content: space-between;
     margin-bottom: .5rem;
+
+    &__button{
+      color: $color-white;
+      width: 14rem;
+
+      &:hover{
+        color: $color-white;
+      }
+    }
   }
 
   &__new-example {
@@ -219,20 +228,5 @@ export default {
   }
 }
 
-  .requestAuthorization{
-        color: $color-fake-black;
-        font-weight: $font-weight-medium;
-        text-align: center;
-        float: right;
-  }
-
-   @media screen and (max-width: 50em) {
-        .bh-notification--warning{
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
 
 </style>

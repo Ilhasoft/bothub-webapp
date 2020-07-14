@@ -4,16 +4,20 @@
       <highlighted-text
         :text="text"
         :entities="entities"
+        :highlighted="highlighted"
         :all-entities="repository.entities || repository.entities_list" />
     </div>
     <div
       v-if="entitiesList.length > 0"
       class="example-entities">
-      <b-tag
+      <entity-tag
         v-for="(entity, i) in entitiesList"
         :key="i"
-        :class="getEntityClass(entity)"
-        rounded>{{ entity }}</b-tag>
+        :entity-name="entity"
+        :highlighted="highlighted === entity"
+        @mouseenter.native.stop="highlighted = entity"
+        @mouseleave.native.stop="highlighted = null"
+      />
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
@@ -36,7 +40,7 @@
           <button
             class="button is-primary"
             @click="toggleFormOpen()">
-            <span>{{ $t('webapp.translate.intent') }}</span>
+            <span>{{ $t('webapp.translate.translate_sentence') }}</span>
             <b-icon icon="chevron-down" />
           </button>
         </div>
@@ -61,16 +65,15 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions } from 'vuex';
 import HighlightedText from '@/components/shared/HighlightedText';
 import NewTranslateForm from './NewTranslateForm';
-
-
-const components = {
-  HighlightedText,
-  NewTranslateForm,
-};
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 
 export default {
   name: 'TranslateExample',
-  components,
+  components: {
+    HighlightedText,
+    NewTranslateForm,
+    EntityTag,
+  },
   props: {
     id: {
       type: Number,
@@ -109,6 +112,7 @@ export default {
     return {
       deleteDialog: null,
       formOpen: false,
+      highlighted: null,
     };
   },
   computed: {
@@ -135,7 +139,7 @@ export default {
     onTranslated() {
       /* istanbul ignore next */
       this.$bhToastNotification({
-        message: 'Example translated!',
+        message: this.$t('webapp.translate.example_translated'),
         type: 'success',
       });
       /* istanbul ignore next */

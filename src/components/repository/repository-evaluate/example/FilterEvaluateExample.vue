@@ -4,37 +4,36 @@
       <b-field
         :errors="errors.intent"
         class="filter-evaluate-example__filters__input-text">
-        <bh-text
+        <b-input
           v-model="text"
-          :debounce="debounceTime">
-          <div slot="append">
-            <bh-icon-button
-              value="magnify"
-              size="medium"
-              type="submit" />
-          </div>
-        </bh-text>
+          :debounce="debounceTime"
+          icon-right="magnify"
+        />
       </b-field>
       <div
         :class="wrapperClasses">
-        <span class="filter-evaluate-example__filters__wrapper__text">
+        <div class="filter-evaluate-example__filters__wrapper__text">
           {{ $t('webapp.dashboard.filter_by') }}:
-        </span>
+        </div>
         <b-field
-          :errors="errors.intent">
-          <bh-autocomplete
+          :message="errors.intent">
+          <b-autocomplete
             v-model="intent"
-            :data="intents || []"
+            :open-on-focus="true"
+            :data="optionsIntents"
             :formatters="inputFormatters"
-            :placeholder="$t('webapp.evaluate.all_intents')" />
+            :placeholder="$t('webapp.evaluate.all_intents')"
+            dropdown-position="bottom" />
         </b-field>
         <b-field
-          :errors="errors.intent">
-          <bh-autocomplete
+          :message="errors.intent">
+          <b-autocomplete
             v-model="entity"
-            :data="entities || []"
+            :open-on-focus="true"
+            :data="optionsEntities"
             :formatters="inputFormatters"
-            :placeholder="$t('webapp.evaluate.all_entities')" />
+            :placeholder="$t('webapp.evaluate.all_entities')"
+            dropdown-position="bottom" />
         </b-field>
         <b-field v-if="languageFilter && languages">
           <b-select
@@ -111,6 +110,30 @@ export default {
           title: `${LANGUAGES[lang]}`,
         }));
     },
+    filterIntents() {
+      if (this.intents !== null) {
+        return this.intents.filter(intent => intent
+          .toString()
+          .toLowerCase()
+          .indexOf(this.intent.toLowerCase()) >= 0);
+      }
+      return [];
+    },
+    optionsIntents() {
+      return this.filterIntents.map(intent => intent);
+    },
+    filterEntities() {
+      if (this.entities !== null) {
+        return this.entities.filter(entity => entity.value
+          .toString()
+          .toLowerCase()
+          .indexOf(this.entity.toLowerCase()) >= 0);
+      }
+      return [];
+    },
+    optionsEntities() {
+      return this.filterEntities.map(entity => entity);
+    },
     inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
@@ -137,14 +160,26 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import '~@/assets/scss/variables.scss';
+
+.field:not(:last-child) {
+  margin-bottom: 0;
+}
+
 .filter-evaluate-example {
   width: 100%;
   margin: 0 auto .5rem;
 
   &__filters {
+    margin: 1.5rem 0;
     display: grid;
     grid-template-columns: 35% 1fr;
     grid-gap: 3rem;
+
+    @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
+    }
 
     &__input-text {
       align-self: center;
@@ -155,8 +190,16 @@ export default {
       grid-gap: .5rem;
       grid-template-columns: 1fr 2fr 2fr;
 
+      @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
+      }
+
       &__has-language-filter {
         grid-template-columns: 1fr 2fr 2fr 2fr;
+
+        @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
+      }
       }
 
       &__text {

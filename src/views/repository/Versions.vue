@@ -8,13 +8,13 @@
       <b-notification
         :closable="false"
         class="is-danger">
-        Sign in to your account to edit this repository.
+        {{ $t('webapp.versions.signin') }}
       </b-notification>
       <login-form hide-forgot-password />
     </div>
 
     <div
-      v-else
+      v-else-if="repository"
       class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
@@ -56,7 +56,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-
-</style>

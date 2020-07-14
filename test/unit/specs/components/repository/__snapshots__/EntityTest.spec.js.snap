@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityEdit renders correctly 1`] = `
+<div class="entity-edit__entities-list">
+  <div class="entity-edit__title entity-edit__entities-list__header">
+    <p>some specific text</p>
+    <b-loading-stub animation="fade" oncancel="function _default() {}"></b-loading-stub>
+    <b-field-stub grouped="true" addons="true" class="entity-edit__button-group">
+      <b-button-stub type="is-primary" nativetype="button" tag="button" class="entity-edit__button">
+        some specific text
+      </b-button-stub>
+      <b-button-stub type="is-secondary" nativetype="button" tag="button" class="entity-edit__button" style="display: none;">
+        some specific text
+      </b-button-stub>
+    </b-field-stub>
+  </div>
+  <div>
+    <div class="entity-edit__entities-list__labeled-count"><span>
+        some specific text
+      </span> <span><span>
+          some specific text
+        </span></span></div>
+    <!---->
+    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="25"></badges-card-drag-drop-stub>
+    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="66"></badges-card-drag-drop-stub>
+  </div>
+  <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" dark="true" identifier="ungrouped"></badges-card-drag-drop-stub>
+</div>
+`;

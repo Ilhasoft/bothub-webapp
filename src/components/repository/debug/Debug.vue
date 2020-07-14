@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Loading from '@/components/shared/Loading';
 import { normalize } from '@/utils';
 
@@ -86,8 +86,8 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
     }),
     wordsFromText() {
       if (!this.data) return [];
@@ -214,9 +214,12 @@ export default {
         padding: 0.5rem;
         display: flex;
         flex-wrap: wrap;
-        row-gap: 1rem;
         justify-content: center;
         border: 1px solid #CFD5D9;
+
+        > * {
+          margin: 1rem 0;
+        }
       }
     }
   }

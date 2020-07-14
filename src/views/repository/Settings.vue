@@ -7,15 +7,15 @@
         <div v-if="authenticated">
           <div
             v-if="repository.authorization.can_write">
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
               <edit-repository-form
-                :owner-nickname="repository.owner__nickname"
+                :owner-nickname="repository.owner.nickname"
                 :slug="repository.slug"
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
@@ -23,39 +23,24 @@
                 @roleSetted="onRoleSetted()" />
               <authorizations-list
                 ref="authorizationsList"
-                :repository-uuid="repository.uuid"
-                @edit="onEditRole($event)" />
+                :repository-uuid="repository.uuid" />
             </div>
-            <div class="tile is-vertical">
+            <div class="settings__section">
               <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
                 @review="onReviewAuthorizationRequest()" />
             </div>
           </div>
-          <div
-            v-else>
-            <div class="bh-grid__item">
-              <div class="bh-notification bh-notification--warning">
-                {{ $t('webapp.settings.not_can_edit_repository') }}
-                <request-authorization-modal
-                  v-if="repository"
-                  :open.sync="requestAuthorizationModalOpen"
-                  :repository-uuid="repository.uuid"
-                  @requestDispatched="onAuthorizationRequested()" />
-                <a
-                  class="requestAuthorization"
-                  @click="openRequestAuthorizationModal">
-                  {{ $t('webapp.layout.request_authorization') }}
-                </a>
-              </div>
-            </div>
-          </div>
+          <authorization-request-notification
+            v-else
+            :repository-uuid="repository.uuid"
+            @onAuthorizationRequested="updateRepository(false)" />
         </div>
       </div>
       <div
-        v-else>
-        <div class="tile is-vertical">
+        v-if="!authenticated">
+        <div class="settings__section">
           <b-notification
             :closable="false"
             type="is-info">
@@ -69,7 +54,7 @@
 </template>
 
 <script>
-import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
@@ -91,14 +76,9 @@ export default {
     AuthorizationsList,
     AuthorizationRequestsList,
     LoginForm,
-    RequestAuthorizationModal,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
-  data() {
-    return {
-      requestAuthorizationModalOpen: false,
-    };
-  },
   methods: {
     getEditInitialData() {
       const {
@@ -111,6 +91,7 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       } = this.repository;
       return {
         name,
@@ -125,6 +106,7 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       };
     },
     onEdited(repository) {
@@ -134,7 +116,7 @@ export default {
         this.$router.push({
           name: 'repository-settings',
           params: {
-            ownerNickname: this.repository.owner__nickname,
+            ownerNickname: this.repository.owner.nickname,
             slug: repository.slug,
           },
         });
@@ -150,39 +132,14 @@ export default {
     onReviewAuthorizationRequest() {
       this.$refs.authorizationsList.updateAuthorizations();
     },
-    openRequestAuthorizationModal() {
-      this.requestAuthorizationModalOpen = true;
-    },
-    onAuthorizationRequested() {
-      this.requestAuthorizationModalOpen = false;
-      this.$bhToastNotification({
-        message: 'Request made! Wait for review of an admin.',
-        type: 'success',
-      });
-      this.updateRepository(false);
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-  @import '~@/assets/scss/utilities.scss';
-  @import '~@/assets/scss/colors.scss';
-  @import '~@/assets/scss/variables.scss';
-
-    .settings {
-      @include default-margin;
+  .settings {
+    &__section {
+      margin-bottom: 2rem;
     }
-    .requestAuthorization{
-        color: $color-fake-black;
-        font-weight: $font-weight-medium;
-        text-align: center;
-        float: right
-      }
-    a {
-    text-decoration: none !important;
-    }
-
-
+  }
 </style>

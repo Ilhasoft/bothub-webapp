@@ -16,7 +16,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "@mdi/font": "^3.0.39",
+    "@mdi/font": "^5.2.45",
+    "@sentry/browser": "^5.15.5",
+    "@sentry/integrations": "^5.15.5",
     "axios": "^0.18.0",
     "bh": "./bh/",
     "buefy": "^0.8.12",
@@ -29,12 +31,12 @@
     "uuid": "^3.3.2",
     "vue": "^2.5.2",
     "vue-i18n": "^8.15.5",
-    "vue-infinite-scroll": "^2.0.2",
     "vue-markdown": "^2.2.4",
     "vue-mc": "^0.4.0",
     "vue-mc-drf-model": "https://github.com/Ilhasoft/vue-mc-drf-model",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
+    "vuedraggable": "^2.23.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

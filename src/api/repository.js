@@ -1,12 +1,10 @@
-import qs from 'query-string';
-
 import request from './request';
 import utils from './utils';
 
 export default {
 
   async getNewSchema() {
-    const { data } = await request.$http.options('/v2/repository/repository-info/');
+    const { data } = await request.$http.options('/v2/repository/repository-details');
     return data.actions.POST;
   },
   getAll(limit = 20) {
@@ -61,18 +59,19 @@ export default {
         repository,
       });
   },
+  // Verificar
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
   train(repositoryUUID, repositoryVersion) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/train/`,
+      `/v2/repository/repository-details/${repositoryUUID}/train/`,
       { repository_version: repositoryVersion },
     );
   },
   analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/analyze/`,
+      `/v2/repository/repository-details/${repositoryUUID}/analyze/`,
       {
         repository_version: repositoryVersion,
         language,
@@ -80,9 +79,14 @@ export default {
       },
     );
   },
+  getRepositoryInfo(repositoryUUID, version) {
+    return request.$http.get(
+      `/v2/repository/info/${repositoryUUID}/${version}`,
+    );
+  },
   debugParse(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
-      `/v2/repository/repository-info/${repositoryUUID}/debug_parse/`,
+      `/v2/repository/repository-details/${repositoryUUID}/debug_parse/`,
       {
         repository_version: repositoryVersion,
         language,
@@ -91,13 +95,22 @@ export default {
     );
   },
   async getEditSchema(repositoryUuid) {
-    const { data } = await request.$http.options(`/v2/repository/repository-info/${repositoryUuid}/`);
+    const { data } = await request.$http.options(`/v2/repository/repository-details/${repositoryUuid}/`);
     return data.actions.PUT;
   },
-  edit(ownerNickname, slug, name, newSlug, language, categories, description, isPrivate,
-    algorithm, useCompetingIntents, useNameEntities, useAnalyzeChar, repositoryUuid) {
+  edit(ownerNickname,
+    slug,
+    name,
+    newSlug,
+    language,
+    categories,
+    description,
+    isPrivate,
+    algorithm,
+    useCompetingIntents, useNameEntities, useAnalyzeChar, useTransformerEntities,
+    repositoryUuid) {
     return request.$http.patch(
-      `/v2/repository/repository-info/${repositoryUuid}/`,
+      `/v2/repository/repository-details/${repositoryUuid}/`,
       {
         name,
         slug: newSlug,
@@ -109,12 +122,13 @@ export default {
         use_competing_intents: useCompetingIntents,
         use_name_entities: useNameEntities,
         use_analyze_char: useAnalyzeChar,
+        use_transformer_entities: useTransformerEntities,
       },
     );
   },
   getLanguagesStatus(repositoryUUID) {
     return request.$http.get(
-      `/v2/repository/repository-info/${repositoryUUID}/languagesstatus/`,
+      `/v2/repository/repository-details/${repositoryUUID}/languagesstatus/`,
     );
   },
   vote(ownerNickname, slug, value) {
@@ -137,9 +151,8 @@ export default {
       { role },
     );
   },
-  getAuthorizationList(repositoryUuid) {
-    const queryString = qs.stringify({ repository: repositoryUuid });
-    return new utils.List(`/v2/repository/authorizations/?${queryString}`);
+  getAuthorizationList(repositoryUuid, limit) {
+    return new utils.Page('/v2/repository/authorizations/', limit, { repository: repositoryUuid });
   },
   async getRequestAuthorizationSchema() {
     const { data } = await request.$http.options('/v2/repository/authorization-requests/');
@@ -159,11 +172,8 @@ export default {
       repository: repositoryUuid,
     });
   },
-  getAuthorizationRequestsList(repositoryUuid) {
-    const queryString = qs.stringify({
-      repository_uuid: repositoryUuid,
-    });
-    return new utils.List(`/v2/repository/authorization-requests/?${queryString}`);
+  getAuthorizationRequestsList(repositoryUuid, limit = 20) {
+    return new utils.Page('/v2/repository/authorization-requests/', limit, { repository_uuid: repositoryUuid });
   },
   approveRequestAuthorization(repositoryUuid, id) {
     return request.$http.put(`/v2/repository/authorization-requests/${id}/`, {

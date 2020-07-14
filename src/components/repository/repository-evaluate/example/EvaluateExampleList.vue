@@ -1,11 +1,13 @@
 <template>
   <div class="evaluate-example-list">
-    <pagination
+    <paginated-list
       v-if="examplesList"
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
-      @itemDeleted="onItemDeleted($event)" />
+      :all-entities="allEntities"
+      @itemDeleted="onItemDeleted($event)"
+      @itemSave="onItemSave()" />
     <p
       v-if="examplesList && examplesList.empty"
       class="no-examples">{{ $t('webapp.evaluate.no_sentences') }}</p>
@@ -13,15 +15,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import Pagination from '@/components/shared/Pagination';
+import { mapActions, mapGetters } from 'vuex';
+import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
 export default {
   name: 'EvaluateExampleList',
   components: {
-    Pagination,
+    PaginatedList,
   },
   props: {
     query: {
@@ -32,42 +34,66 @@ export default {
       type: String,
       default: null,
     },
+    update: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       examplesList: null,
       exampleItemElem: ExampleAccordion,
+      allEntities: [],
     };
   },
   computed: {
-    ...mapState({
-      repository: state => state.Repository.selectedRepository,
-      repositoryVersion: state => state.Repository.repositoryVersion,
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+      repository: 'getCurrentRepository',
     }),
   },
   watch: {
     query() {
       this.updateExamples(true);
     },
-    repository() {
+    repsoitory() {
+      this.updateExamples(true);
+    },
+    repositoryVersion() {
+      this.updateExamples(true);
+    },
+    update() {
       this.updateExamples(true);
     },
   },
   mounted() {
     this.updateExamples();
+    this.getEntitiesName();
   },
   methods: {
-    updateExamples(force = false) {
+    ...mapActions([
+      'searchEvaluateExamples',
+    ]),
+    async getEntitiesName() {
+      const allEntitiesName = await this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      this.allEntities = allEntitiesName;
+    },
+    async updateExamples(force = false) {
       if (!this.examplesList || force) {
-        this.examplesList = this.$api.evaluateExample.search(
-          this.repository.uuid,
-          this.repositoryVersion,
-          this.query,
-        );
+        this.examplesList = await this.searchEvaluateExamples({
+          repositoryUUID: this.repository.uuid,
+          version: this.repositoryVersion,
+          query: this.query,
+        });
       }
     },
     onItemDeleted() {
       this.$emit('deleted');
+    },
+    onItemSave() {
+      this.updateExamples(true);
     },
   },
 };

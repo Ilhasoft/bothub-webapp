@@ -1,24 +1,25 @@
 <template>
-  <div>
+  <div class="example-entities__wrapper">
     <div
       v-if="entitiesList.length > 0"
       class="example-entities">
-      <b-tag
-        v-for="(entity, i) in entitiesList"
-        :key="i"
-        :class="entity.class"
-        rounded>
-        <strong>{{ entity.entity }}</strong>
-        <span v-if="entity.label">is</span>
-        <strong v-if="entity.label">{{ entity.label }}</strong>
-      </b-tag>
+      <entity-tag
+        v-for="entity in uniqueEntities"
+        :key="entity.entity"
+        :color-class="colorOnly && colorOnly !== entity.entity ? 'entity-selected' : entity.class"
+        :group="entity.group"
+        :highlighted="entity.entity === highlighted"
+        :entity-name="entity.entity"
+        @mouseenter.native.stop="$emit('update:highlighted', entity.entity)"
+        @mouseleave.native.stop="$emit('update:highlighted', null)"
+      />
     </div>
     <div class="example-infos level is-mobile">
       <div class="level-left">
         <div
           v-if="intent"
           class="level-item has-text-grey">
-          <strong>Intent:&nbsp;</strong>
+          <strong>{{ $t('webapp.evaluate.intent') }}:&nbsp;</strong>
           <span>{{ intent }}</span>
         </div>
       </div>
@@ -27,8 +28,13 @@
 </template>
 
 <script>
+import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+
 export default {
   name: 'ExampleInfo',
+  components: {
+    EntityTag,
+  },
   props: {
     entitiesList: {
       type: Array,
@@ -37,6 +43,30 @@ export default {
     intent: {
       type: String,
       default: '',
+    },
+    highlighted: {
+      type: String,
+      default: null,
+    },
+    colorOnly: {
+      type: String,
+      default: null,
+    },
+  },
+  computed: {
+    uniqueEntities() {
+      const entityDict = this.entitiesList.reduce((dict, entity) => {
+        if (!dict[entity.entity]) {
+          // eslint-disable-next-line no-param-reassign
+          dict[entity.entity] = {
+            entity: entity.entity,
+            class: entity.class,
+            group: entity.group,
+          };
+        }
+        return dict;
+      }, {});
+      return Object.values(entityDict);
     },
   },
 };
@@ -77,6 +107,11 @@ export default {
   }
 
   &-entities {
+
+    &__wrapper {
+      margin: 0 0 0 0.8rem;
+    }
+
     > * {
       margin: 0 .5rem 0 0;
 

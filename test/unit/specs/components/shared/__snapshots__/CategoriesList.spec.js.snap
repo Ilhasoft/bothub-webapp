@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CategoriesList.vue renders correctly 1`] = `
-<div>
-  <div class="bh-grid categories-list">
-    <div class="bh-grid__item bh-grid__item--nested text-right">
-      <bh-dropdown-stub position="bottom-left" fullwidth="true" title="some specific text">
-        <bh-dropdown-item-stub>some specific text</bh-dropdown-item-stub>
-      </bh-dropdown-stub>
-    </div>
-  </div>
+<div class="categories-list">
+  <b-field-stub addons="true" class="categories-list__field">
+    <b-autocomplete-stub value="" data="" field="value" keepfirst="true" openonfocus="true" placeholder="some specific text" dropdown-position="bottom" size="normal"></b-autocomplete-stub>
+  </b-field-stub>
 </div>
 `;

@@ -2,15 +2,34 @@
   <div class="expander">
     <div
       ref="expander"
-      :class="[isOpen ? 'active':'before-border']"
-      class="expander__trigger"
+      :class="{
+        'expander__trigger': true,
+        'active': isOpen,
+        'before-border': !isOpen,
+        'border-thick': thickBorder,
+        'border-success': type === 'is-success',
+        'border-danger': type === 'is-danger',
+        'is-light': isLight,
+        'border': !type,
+      }"
       @click="toggleAccordion()">
 
-      <div class="level-left">
+      <div
+        ref="check"
+        class="expander__trigger__check"
+        @click.stop>
+        <slot name="check" />
+      </div>
+
+      <div
+        class="expander__trigger__header"
+      >
         <slot name="header" />
       </div>
 
-      <div class="level-right expander__trigger__btns-wrapper">
+      <div
+        class="expander__trigger__options"
+      >
         <slot name="options" />
       </div>
     </div>
@@ -33,6 +52,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    isLight: {
+      type: Boolean,
+      default: null,
+    },
+    type: {
+      type: String,
+      default: null,
+    },
+    thickBorder: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
@@ -54,6 +85,8 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../../assets/scss/utilities';
+  @import '~bh/src/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
   .before-border {
     position: relative;
@@ -80,22 +113,70 @@ export default {
     box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
   }
 
+  .border {
+    border-color: #cfd5d9;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+
+    &-success {
+      border-color: $color-success;
+    }
+
+    &-danger {
+      border-color: $color-danger
+    }
+
+    &-thick {
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 6px;
+    }
+  }
+
   .expander {
     &__trigger {
-      display: grid;
-      grid-template-columns: 1fr 25%;
-      justify-content: space-between;
+      display: flex;
+      align-items: center;
       padding: .7rem;
       margin-top: 0.5rem;
       cursor: pointer;
-      border: 1px solid #cfd5d9;
-      border-radius: 3px;
+
+      @media screen and (max-width: $mobile-width) {
+        flex-wrap: wrap;
+      }
+    &__check{
+      margin: 0 1rem 0 0;
+
+      @media screen and (max-width: $mobile-width) {
+        margin: 1rem 0;
+      }
+    }
+    &__header{
+      display: flex;
+      width: 80%;
+      align-items: center;
+    }
+    &__options{
+      min-width: 20%;
+      display: flex;
+      justify-content: flex-end;
+
+      @media screen and (max-width: $mobile-width) {
+        margin: 0.3rem 0;
+      }
+    }
     }
 
     &__body {
-      padding: .7rem 0;
+      padding: .5rem 0;
       background: #f5f5f5;
+      border-radius: 4px;
     }
+  }
+
+  .is-light {
+    background-color: white;
   }
 
   .fade-enter-active, .fade-leave-active {

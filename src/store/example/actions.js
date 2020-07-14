@@ -10,18 +10,38 @@ export default {
     const response = await example.new(repository, repositoryVersion, text, language, entities, intent, isCorrected);
     return response;
   },
+  async editSentence(store, {
+    repository, version, text, language, entities, intent, id, isCorrected = false,
+  }) {
+    const response = await example.edit(
+      repository,
+      version,
+      text,
+      language,
+      entities,
+      intent,
+      id,
+      isCorrected,
+    );
+    return response;
+  },
   async getExamples(store, { repositoryUuid }) {
     const response = await example.all(repositoryUuid);
     return response;
+  },
+  searchExamples(store, {
+    repositoryUuid, version, query, limit = 20,
+  }) {
+    return example.search(repositoryUuid, version, query, limit);
   },
   async deleteExample(store, { id }) {
     await example.delete(id);
     return true;
   },
   async getExamplesToTranslate(store, {
-    repositoryUuid, from, to, query,
+    repositoryUuid, version, from, to, query,
   }) {
-    const response = await example.search(repositoryUuid, {
+    const response = await example.search(repositoryUuid, version, {
       language: from,
       has_not_translation_to: to,
       ordering: 'created_at',
@@ -33,8 +53,27 @@ export default {
     const response = await example.get(id);
     return response;
   },
-  async getEntities(store, { repositoryUuid, value }) {
-    const response = await entity.search(repositoryUuid, { value });
+  async getEntities(store, { repositoryUuid, repositoryVersion, value }) {
+    const response = await entity.search(repositoryUuid, repositoryVersion, { value });
+    return response;
+  },
+  async editEntityName(store, {
+    entityId, value, repositoryVersion,
+  }) {
+    const response = await entity.editEntityName(
+      entityId,
+      value,
+      repositoryVersion,
+    );
+    return response;
+  },
+  getAllEntities(store, {
+    repositoryUuid, repositoryVersion,
+  }) {
+    const response = entity.getEntities(
+      repositoryUuid,
+      repositoryVersion,
+    );
     return response;
   },
 };

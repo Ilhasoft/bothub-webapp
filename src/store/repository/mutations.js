@@ -2,13 +2,13 @@ import TYPES from '../types';
 
 export default {
   [TYPES.SET_REPOSITORY_RELATED_UUID](state, {
-    ownerNickname, slug, uuid, version,
+    ownerNickname, slug, uuid,
   }) {
     state.relatedUuid = Object.assign(
       {},
       state.relatedUuid,
       {
-        [`${ownerNickname}/${slug}/${version}/`]: uuid,
+        [`${ownerNickname}/${slug}/`]: uuid,
       },
     );
   },
@@ -30,7 +30,10 @@ export default {
   },
   setRepositoryVersion(state, value) {
     if (state.repositoryVersion !== value.version.id) {
-      state.repositoryVersion = value.version.id;
+      state.repositoryVersion = {
+        id: value.version.id,
+        repositoryUUID: value.repositoryUUID,
+      };
       state.repositoryVersionName = value.version.name;
     }
   },
