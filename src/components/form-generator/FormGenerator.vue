@@ -24,7 +24,8 @@
             v-if="hasHelpIcon(field)"
             :article-id="helpArticleId" />
         </div>
-        <b-field :class="!showLabels ? 'input-content' : ''">
+        <b-field
+          :class="!showLabels ? 'input-content' : ''">
           <component
             :v-if="field.inputComponent"
             :is="field.inputComponent"
@@ -36,7 +37,12 @@
             :label="field.label"
             :help-text="field.helpText"
             :compact="!showLabels"
-            @input="update()"/>
+            :class="[
+              field.name === 'language' && newIntelligenceForms ? 'languageNewIntelligence' : '',
+              field.name === 'is_private' && newIntelligenceForms ? 'switchNewIntelligence' : '',
+            ]"
+            @input="update()"
+          />
         </b-field>
       </b-field>
     </component>
@@ -107,6 +113,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    newIntelligenceForms: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -166,6 +176,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.languageNewIntelligence{
+  margin-top: 5.5rem;
+}
+.switchNewIntelligence{
+  padding-top: 5.2rem;
+}
 .field-content{
 height: 58px;
 padding-bottom: 0px;
@@ -179,7 +196,6 @@ margin-bottom: 0px;
     display: flex;
     align-items: center;
 }
-
 .field-image {
   margin-left: 1.563rem;
   &__title {
@@ -187,7 +203,6 @@ margin-bottom: 0px;
     margin: 0;
   }
 }
-
 .field-textarea {
   min-width: 70%;
 }

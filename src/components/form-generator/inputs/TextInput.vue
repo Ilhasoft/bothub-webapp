@@ -17,7 +17,7 @@ export default {
     },
     labelPlaceholder: {
       type: String,
-      default: null,
+      default: '',
     },
     initialData: {
       type: String,
