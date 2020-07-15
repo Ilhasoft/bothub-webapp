@@ -132,8 +132,7 @@ export default {
         if (data.results.length === 0) {
           return;
         }
-        // this.repositoryTutorial = data.results[0].slug;
-        this.repositoryTutorial = 'DrJorge';
+        this.repositoryTutorial = data.results[0].slug;
       } catch (error) {
         this.error = error;
       }
