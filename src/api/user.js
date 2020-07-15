@@ -33,6 +33,10 @@ export default {
       },
     );
   },
+  // TODO
+  getPaymentHistory(limit = 10) {
+    return new utils.Page('', limit);
+  },
   async getChangePasswordSchema() {
     const { data } = await request.$http.options('/v2/account/change-password/');
     return data.actions.PUT;
@@ -49,5 +53,9 @@ export default {
   search(query) {
     const queryString = qs.stringify(query);
     return request.$http.get(`/v2/account/search-user/?${queryString}`);
+  },
+  // TODO
+  getReports(limit, query) {
+    return new utils.Page('', limit, query);
   },
 };

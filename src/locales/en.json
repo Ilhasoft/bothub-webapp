@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "sign in",
       "signup": "sign up",
+      "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
@@ -49,7 +50,8 @@
       "language": "laguage",
       "category": "Category",
       "new_repo": "NEW INTELLIGENCE",
-      "default_error": "There were errors while submitting"
+      "default_error": "There were errors while submitting",
+      "description_form": "Description"
     },
     "register_form": {
       "already_have_account": "Already have an account?",
@@ -193,7 +195,7 @@
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
       "all_categories": "All categories",
       "all_languages": "All languages",
-      "no_repo": "Repositories not found.",
+      "no_repo": "No repositories found.",
       "default_error": "Something went wrong",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",
@@ -295,6 +297,46 @@
       "export_switch_yes": "Yes",
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
+    "orgs": {
+      "created_by": "Created by",
+      "created": "Created",
+      "repositories": "{n} repositories | {n} repository | {n} repositories",
+      "members": "{n} members | {n} member | {n} members",
+      "create_org": "Create organization",
+      "create": "Create",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      },
+      "create_org_title": "Let's create an organization",
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
+    },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
       "change_password": "Change Password",
@@ -310,10 +352,41 @@
       "personal_info": "Personal Information",
       "free_user": "FREE USER",
       "profile": "Profile",
-      "intelligences": "Intelligences",
-      "activities": "Activities",
-      "reports": "Reports",
-      "payments": "Payments"
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities",
+        "activity_complement": "in intelligence <strong> {intelligence} </strong> of organization <strong> {org} </strong>"
+      },
+      "reports": {
+        "title": "Reports",
+        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "created_by": "Created by",
+        "today": "Today",
+        "this_week": "This week",
+        "this_month": "This month",
+        "last_three_months": "Last three months",
+        "all_time": "All time",
+        "filter_by": "Filter by",
+        "no_reports": "Nenhum relatório",
+        "total": "Predictions total:"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "My Intelligences",
+        "contributing": "Contribution intelligences",
+        "using": "Use intelligences"
+      }
     },
     "menu": {
       "summary": "Summary",
@@ -405,6 +478,30 @@
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
     },
+    "payment": {
+      "options": {
+        "title": "Bothub Pricing",
+        "slogan": "Bothub hosts intelligences that work for you",
+        "free": "Free",
+        "professional": "Professional",
+        "custom": "Custom Plan",
+        "contact_us": "Contact Us",
+        "contact": "Contact Sales",
+        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
+        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
+        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Payment information",
+        "subtitle": "Input your credit or debit card information",
+        "back": "Back",
+        "save": "Save",
+        "card_name": "Card name"
+      }
+    },
     "tutorial": {
       "title": "Welcome to Bothub",
       "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
@@ -474,30 +571,6 @@
       "integrate": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
-    },
-    "payment": {
-      "options": {
-        "title": "Bothub Pricing",
-        "slogan": "Bothub hosts intelligences that work for you",
-        "free": "Free",
-        "professional": "Professional",
-        "custom": "Custom Plan",
-        "contact_us": "Contact Us",
-        "contact": "Contact Sales",
-        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
-        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
-        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
-        "per_prediction": "per prediction",
-        "get_free": "Get free",
-        "get_started": "Get started"
-      },
-      "info": {
-        "title": "Payment information",
-        "subtitle": "Input your credit or debit card information",
-        "back": "Back",
-        "save": "Save",
-        "card_name": "Card name"
-      }
     }
   }
 }

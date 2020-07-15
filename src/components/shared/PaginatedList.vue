@@ -9,11 +9,15 @@
       @deleted="onItemDeleted(item.id)"
       @updateList="onSaveUpdate"
       @dispatchEvent="onDispatchEvent($event)" />
+    <loading
+      v-if="isLoading"
+      class="pagination__message" />
     <div class="pagination__bottom">
-      <loading v-if="isLoading" />
       <p
-        class="text-center"
-        else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
+        v-if="!isLoading"
+        class="text-center">
+        {{ listStatusErrorCode | statusCodeVerbose }}
+      </p>
       <div>
         <b-pagination
           :total="list.total"
@@ -27,6 +31,10 @@
           aria-current-label="Current page"/>
       </div>
     </div>
+  </div>
+  <div v-else-if="list && list.empty">
+    <p
+      class="pagination__message"> {{ emptyMessage }} </p>
   </div>
 </template>
 
@@ -61,6 +69,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    emptyMessage: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -92,12 +104,14 @@ export default {
     async fetch() {
       try {
         await this.list.updateItems(this.page);
+        this.$emit('updated');
         return true;
       } catch (e) {
         this.error = e;
         this.listStatusErrorCode = e.request
           ? e.request.status
           : '';
+        this.$emit('error', this.error);
       }
       return false;
     },
@@ -131,6 +145,11 @@ export default {
     max-width: 600px;
     display: flex;
     justify-content: flex-end;
+  }
+
+  &__message {
+    text-align: center;
+    width: 100%;
   }
 
 }

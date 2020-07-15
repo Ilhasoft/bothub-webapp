@@ -58,7 +58,7 @@
             <div
               v-if="authenticated"
               class="bh-grid__item">
-              <bh-dropdown position="left">
+              <b-dropdown position="is-bottom-left">
                 <user-avatar
                   slot="trigger"
                   :profile="myProfile" />
@@ -66,17 +66,22 @@
                   slot="trigger"
                   icon="chevron-down"
                   class="layout__header__icon"/>
-                <bh-dropdown-item @click="openMyProfile()">
+                <b-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
-                </bh-dropdown-item>
-                <bh-dropdown-item
+                </b-dropdown-item>
+                <b-dropdown-item
+                  v-if="paymentEnabled"
+                  @click="orgs()">
+                  {{ $t('webapp.layout.orgs') }}
+                </b-dropdown-item>
+                <b-dropdown-item
                   @click="openNewRepository()">
                   {{ $t('webapp.layout.start_you_bot') }}
-                </bh-dropdown-item>
-                <bh-dropdown-item @click="logout()">
+                </b-dropdown-item>
+                <b-dropdown-item @click="logout()">
                   {{ $t('webapp.layout.logout') }}
-                </bh-dropdown-item>
-              </bh-dropdown>
+                </b-dropdown-item>
+              </b-dropdown>
             </div>
             <div
               v-if="!authenticated"
@@ -152,6 +157,9 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    paymentEnabled() {
+      return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED;
+    },
   },
   watch: {
     title() {
@@ -173,10 +181,15 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: 'myProfile' });
+      this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
+    },
+    orgs() {
+      this.$router.push({
+        name: 'orgs',
+      });
     },
     signIn() {
       this.$router.push({

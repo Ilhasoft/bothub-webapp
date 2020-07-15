@@ -1,10 +1,12 @@
 <template>
   <div>
+    <b-loading :active="loading" />
     <b-input
       v-model="name"
       :placeholder="$t('webapp.payment.info.card_name')"
       class="card-number__field" />
     <card
+      v-if="!loading"
       :options="{hidePostalCode: true,
                  classes:{base: 'card-number__input',
                           empty: 'card-number__input__empty'}
@@ -18,9 +20,9 @@
       @change="onChange"
     />
     <div
-      v-if="showBackButton"
       class="payment-buttons">
       <b-button
+        v-if="showBackButton"
         type="is-primary"
         @click="$emit('back')"> {{ $t('webapp.payment.info.back') }} </b-button>
       <b-button
@@ -31,8 +33,10 @@
 
 <script>
 import { Card } from 'vue-stripe-elements-plus';
+import stripe from '@/utils/plugins/stripe';
 
 export default {
+  name: 'PaymentForm',
   components: {
     Card,
   },
@@ -46,7 +50,11 @@ export default {
     return {
       name: null,
       cardIsFocused: false,
+      loading: true,
     };
+  },
+  async mounted() {
+    stripe.addStripe(() => { this.loading = false; });
   },
   methods: {
     onChange() {},
