@@ -115,6 +115,8 @@ export default {
       deleteDialog: null,
       formOpen: false,
       highlighted: null,
+      eventClick: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -133,6 +135,9 @@ export default {
         this.entities,
       );
       return `entity-${color}`;
+    },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
     },
     toggleFormOpen() {
       /* istanbul ignore next */

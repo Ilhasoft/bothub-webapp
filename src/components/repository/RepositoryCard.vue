@@ -1,9 +1,11 @@
 <template>
   <bh-card
+    id="tour-create_intelligence-step-0"
     :class="[ single ? 'repository-card__single' : 'repository-card']"
     shadow="light"
     no-border>
-    <div class="repository-card__align-items">
+    <div
+      class="repository-card__align-items">
       <div class="repository-card__big-badge-wrapper">
         <component
           :is="clickable ? 'router-link' : 'span'"

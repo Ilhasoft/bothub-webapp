@@ -7,6 +7,7 @@
       @click="toggle()">
       <div
         id="tour-quick_test-step-0"
+        :is-step-blocked="!blockedNextStepTutorial"
         class="quick-test__collapse-button__content">
         <b-icon
           :icon="expanded ? 'chevron-right' : 'chevron-left'"/>
@@ -41,6 +42,7 @@
         </div>
         <div
           v-if="authenticated"
+          id="tour-quick_test-step-2"
           class="quick-test__text-area">
           <quick-test-text
             v-for="sentence in sentences"
@@ -54,6 +56,7 @@
         <div
           v-if="authenticated"
           id="tour-quick_test-step-1"
+          :is-step-blocked="sentences.length === 0"
           class="quick-test__input">
           <text-area-input
             ref="textInput"
@@ -76,9 +79,13 @@
       </div>
     </div>
     <tour
-      v-if="this.$router.currentRoute.name === 'tutorial-quick-test'"
-      :step-count="4"
+      v-if="activeTutorial === 'quick_test'
+      && this.$router.currentRoute.name === 'repository-summary'"
+      :step-count="3"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
       name="quick_test" />
+    <tutorial-modal :open="activeMenu"/>
   </div>
 </template>
 
@@ -89,6 +96,7 @@ import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
 import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'QuickTest',
@@ -98,6 +106,7 @@ export default {
     LanguageAppendSelectInput,
     QuickTestText,
     Tour,
+    TutorialModal,
   },
   props: {
     repository: {
@@ -111,12 +120,17 @@ export default {
       sentences: [],
       selectedLanguage: null,
       expanded: false,
+      eventClick: false,
+      eventClickFinish: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
       authenticated: 'authenticated',
+      activeTutorial: 'activeTutorial',
+      activeMenu: 'activeMenu',
     }),
     languages() {
       if (!this.repository) return [];
@@ -150,6 +164,12 @@ export default {
         name: 'signUp',
       });
     },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
     updateRepositoryLanguage() {
       this.selectedLanguage = this.defaultLanguage;
     },
@@ -172,7 +192,9 @@ export default {
     },
     toggle() {
       this.$emit('expanded');
+      this.dispatchClick();
       this.expanded = !this.expanded;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     setLanguage(language) {
       this.selectedLanguage = language;

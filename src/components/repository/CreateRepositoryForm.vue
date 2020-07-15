@@ -1,89 +1,117 @@
 <template>
-  <form
-    class="create-repository"
-    @submit.prevent="onSubmit()">
-    <div
-      v-show="current==0"
-      class="create-repository__form__wrapper">
-      <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
-      <p v-html="$t('webapp.create_repository.create_repo_text')" />
-      <loading v-if="!formSchema" />
-      <form-generator
-        v-if="formSchema"
-        :drf-model-instance="drfRepositoryModel"
-        :schema="filteredSchema"
-        v-model="data"
-        :errors="errors"
-        :show-labels="false"
-        :new-intelligence-forms="true"
-        class="create-repository__form" />
-      <b-button
-        :disabled="!checkFormData"
-        type="is-primary"
-        class="create-repository__form__buttons"
-        @click="current = 1"> {{ $t('webapp.create_repository.next') }} </b-button>
-    </div>
-    <div
-      v-show="current==1"
-      class="create-repository__form__wrapper">
-      <h1 class="create-repository__title">
-        {{ $t('webapp.create_repository.choose_category') }}
-      </h1>
-      <p v-html="$t('webapp.create_repository.choose_category_text')" />
-      <loading v-if="!formSchema" />
-      <category-select
-        v-if="formSchema"
-        v-model="categories"
-        class="create-repository__form"/>
-      <div class="create-repository__buttons">
-        <b-button
-          type="is-primary"
-          class="create-repository__form__buttons"
-          @click="current = 0"> {{ $t('webapp.create_repository.previous') }} </b-button>
-        <b-button
-          native-type="submit"
-          type="is-primary"
-          class="create-repository__form__buttons"
-        > {{ $t('webapp.create_repository.submit') }} </b-button>
-      </div>
-    </div>
-    <div
-      v-if="current==2"
-      class="create-repository__form__wrapper create-repository__form__final--message">
-      <div class="create-repository__form__final--message__wrapper">
-        <h1 class="create-repository__title">
-          {{ $t('webapp.create_repository.repository_created') }}
-        </h1>
-        <p v-html="$t('webapp.create_repository.repository_created_text')" />
-        <router-link :to="repositoryDetailsRouterParams()">
+  <div>
+    <form
+      class="create-repository"
+      @submit.prevent="onSubmit()">
+      <div
+        v-show="current==0"
+        class="create-repository__form__wrapper">
+        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
+        <p v-html="$t('webapp.create_repository.create_repo_text')" />
+        <loading v-if="!formSchema" />
+        <form-generator
+          v-if="formSchema"
+          id="tour-create_intelligence_forms-step-0"
+          :drf-model-instance="drfRepositoryModel"
+          :is-step-blocked="!checkFormData"
+          :schema="filteredSchema"
+          v-model="data"
+          :errors="errors"
+          :show-labels="false"
+          class="create-repository__form"/>
+        <span
+          id="tour-create_intelligence_forms-step-1"
+          :is-step-blocked="!blockedNextStepTutorial">
           <b-button
-            class="create-repository__form__final--message__button"
-            type="is-primary">
-            {{ $t('webapp.create_repository.start') }}
+            :disabled="!checkFormData"
+            type="is-primary"
+            class="create-repository__form__buttons"
+            @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
           </b-button>
-        </router-link>
+        </span>
       </div>
-    </div>
-    <div class="create-repository__card__wrapper">
-      <div class="create-repository__card">
-        <repository-card
-          v-bind="cardAttributes()"
-          :clickable="false"
-          single/>
+      <div
+        v-show="current==1"
+        class="create-repository__form__wrapper">
+        <h1 class="create-repository__title">
+          {{ $t('webapp.create_repository.choose_category') }}
+        </h1>
+        <p v-html="$t('webapp.create_repository.choose_category_text')" />
+        <loading v-if="!formSchema" />
+        <category-select
+          v-if="formSchema"
+          id="tour-create_intelligence_forms-step-2"
+          :is-previus-blocked="true"
+          v-model="categories"
+          :is-step-blocked="categories.length === 0"
+          class="create-repository__form"/>
+        <div class="create-repository__buttons">
+          <b-button
+            type="is-primary"
+            class="create-repository__form__buttons"
+            @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
+          </b-button>
+          <span
+            id="tour-create_intelligence_forms-step-3"
+            :is-step-blocked="blockedNextStepTutorial">
+            <b-button
+              native-type="submit"
+              type="is-primary"
+              class="create-repository__form__buttons"
+            > {{ $t('webapp.create_repository.submit') }}
+            </b-button>
+          </span>
+        </div>
       </div>
-    </div>
-  </form>
+      <div
+        v-if="current==2"
+        class="create-repository__form__wrapper create-repository__form__final--message">
+        <div class="create-repository__form__final--message__wrapper">
+          <h1 class="create-repository__title">
+            {{ $t('webapp.create_repository.repository_created') }}
+          </h1>
+          <p v-html="$t('webapp.create_repository.repository_created_text')" />
+          <router-link
+            :to="repositoryDetailsRouterParams()"
+          >
+            <b-button
+              class="create-repository__form__final--message__button"
+              type="is-primary">
+              {{ $t('webapp.create_repository.start') }}
+            </b-button>
+          </router-link>
+        </div>
+      </div>
+      <div class="create-repository__card__wrapper">
+        <div class="create-repository__card">
+          <repository-card
+            v-bind="cardAttributes()"
+            :clickable="false"
+            single/>
+        </div>
+      </div>
+    </form>
+    <tour
+      v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
+      :step-count="4"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      name="create_intelligence_forms"/>
+    <tutorial-modal :open="activeMenu"/>
+  </div>
 </template>
 
 <script>
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
+import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -92,6 +120,8 @@ export default {
     FormGenerator,
     RepositoryCard,
     CategorySelect,
+    Tour,
+    TutorialModal,
   },
   props: {
     userName: {
@@ -109,9 +139,16 @@ export default {
       categories: [],
       current: 0,
       resultParams: {},
+      eventClick: false,
+      eventClickFinish: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
+    ...mapGetters([
+      'activeTutorial',
+      'activeMenu',
+    ]),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
@@ -158,7 +195,6 @@ export default {
       this.computedSchema,
       RepositoryModel,
     );
-
     this.drfRepositoryModel = new Model({},
       null,
       {
@@ -170,6 +206,13 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
     ]),
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
     repositoryDetailsRouterParams() {
       return {
         name: 'repository-summary',
@@ -211,6 +254,7 @@ export default {
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
+        this.dispatchFinish();
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
@@ -226,6 +270,10 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
+.teste{
+  border: 1px solid red;
+  z-index: 10
+}
     .create-repository {
         display: flex;
         justify-content: space-around;
