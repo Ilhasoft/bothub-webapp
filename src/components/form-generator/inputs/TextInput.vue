@@ -3,7 +3,6 @@
     :maxlength="max_length"
     :placeholder="labelPlaceholder"
     v-model="value"
-    :placeholder="labelPlaceholder"
     type="textarea"
     @input="update()" />
 </template>
