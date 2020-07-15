@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "sign in",
       "signup": "sign up",
+      "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
@@ -49,7 +50,8 @@
       "language": "laguage",
       "category": "Category",
       "new_repo": "NEW INTELLIGENCE",
-      "default_error": "There were errors while submitting"
+      "default_error": "There were errors while submitting",
+      "description_form": "Description"
     },
     "register_form": {
       "already_have_account": "Already have an account?",
@@ -193,7 +195,7 @@
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
       "all_categories": "All categories",
       "all_languages": "All languages",
-      "no_repo": "Repositories not found.",
+      "no_repo": "No repositories found.",
       "default_error": "Something went wrong",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",
@@ -295,6 +297,46 @@
       "export_switch_yes": "Yes",
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
+    "orgs": {
+      "created_by": "Created by",
+      "created": "Created",
+      "repositories": "{n} repositories | {n} repository | {n} repositories",
+      "members": "{n} members | {n} member | {n} members",
+      "create_org": "Create organization",
+      "create": "Create",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      },
+      "create_org_title": "Let's create an organization",
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
+    },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
       "change_password": "Change Password",
@@ -315,8 +357,30 @@
         "recent": "Recent Activities",
         "activity_complement": "in intelligence <strong> {intelligence} </strong> of organization <strong> {org} </strong>"
       },
-      "reports": "Reports",
-      "payments": "Payments",
+      "reports": {
+        "title": "Reports",
+        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "created_by": "Created by",
+        "today": "Today",
+        "this_week": "This week",
+        "this_month": "This month",
+        "last_three_months": "Last three months",
+        "all_time": "All time",
+        "filter_by": "Filter by",
+        "no_reports": "Nenhum relatório",
+        "total": "Predictions total:"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
       "intelligences": {
         "title": "Intelligences",
         "mine": "My Intelligences",
@@ -450,14 +514,21 @@
           "create_intelligence": "Create your first intelligence",
           "training": "Training this intelligence",
           "quick_test": "Make a quick test",
-          "test": "Test this intelligence",
+          "evaluate": "Test this intelligence",
           "inbox": "Add sentences with inbox",
           "translate": "Translate to another language",
           "integrate": "Integrate your intelligence with a platform"
       },
       "create_intelligence": {
-          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+          "step_0": "<strong>Go to the feature create intelligence !</strong> <br> Here you will create your first intelligence",
           "step_1": "Or create your own intelligence by clicking here."
+      },
+      "create_intelligence_forms": {
+          "step_0": "Enter with all intelligence data",
+          "step_1": "And go forward",
+          "step_2": "Choose categories for your intelligence, based on the area in which it will be used, and submit.",
+          "step_3": "And go forward",
+          "step_4": "Your intelligence is ready to be trained. Just get started."
       },
       "training": {
           "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
@@ -468,7 +539,7 @@
           "step_5": "Finally, submit your sentence.",
           "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
       },
-      "test": {
+      "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
         "step_1": "Select a language to test.",
         "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
@@ -483,7 +554,10 @@
         "step_3": "Click here to see the Raw."
         },
       "inbox": {
-        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test."
+        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test.",
+        "step_1": "Select the sentences you want to add",
+        "step_2": "Add to train",
+        "step_3": "Add to test phrases"
       },
       "translate": {
         "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
@@ -494,7 +568,7 @@
         "step_5": "Finally, submit your sentence translate.",
         "step_6": "If you prefer, you can also export and import excel sentences for translation by clicking here"
       },
-      "integration": {
+      "integrate": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
     }

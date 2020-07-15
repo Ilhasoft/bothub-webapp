@@ -28,7 +28,7 @@
         id="tour-training-step-2"
         ref="addEntityBtn"
         :disabled="!textSelectedValue"
-        :is-step-blocked="!nextStepTour"
+        :is-step-blocked="!blockedNextStepTutorial"
         rounded
         type="is-primary"
         @click.prevent.stop="addEntity()"
@@ -100,7 +100,7 @@ export default {
       entities: _.cloneDeep(this.value),
       allEntities: [],
       errors: '',
-      nextStepTour: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -204,7 +204,7 @@ export default {
       });
 
       this.loadLabelFor(temporaryEntityId, this.textSelectedValue);
-      this.nextStepTour = !this.nextStepTour;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
       this.$emit('entityAdded');
     },
     async loadLabelFor(entityId, entityText) {

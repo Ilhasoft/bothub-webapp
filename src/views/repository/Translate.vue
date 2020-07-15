@@ -180,15 +180,17 @@
       </div>
     </div>
     <tour
+      v-if="activeTutorial === 'translate'"
       :step-count="7"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="translate" />
+    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
@@ -199,6 +201,7 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryTranslate',
@@ -211,6 +214,7 @@ export default {
     LoginForm,
     AuthorizationRequestNotification,
     Tour,
+    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -240,6 +244,10 @@ export default {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters([
+      'activeTutorial',
+      'activeMenu',
+    ]),
     checkSwitch() {
       if (this.isSwitched === true) {
         return this.$t('webapp.translate.export_switch_yes');

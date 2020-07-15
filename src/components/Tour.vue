@@ -2,36 +2,36 @@
   <v-tour
     :name="name"
     :steps="steps"
-    :options="options">
-    <template slot-scope="tour">
+    :options="options"
+    :callbacks="callbacksTour">
+    <template
+      slot-scope="tour">
       <div
         v-for="(step, index) of tour.steps"
-        :key="index">
+        :key="index"
+      >
         <transition name="fade">
           <v-step
             v-if="tour.currentStep === index"
             :highlight="true"
             :step="step"
-            :previous-step="tour.previousStep"
-            :next-step="tour.nextStep"
             :stop="tour.stop"
             :skip="tour.skip"
+            :previous-step="tour.previousStep"
+            :next-step="tour.nextStep"
             :is-first="tour.isFirst"
             :is-last="tour.isLast"
-            :labels="tour.labels"
-          >
+            :labels="tour.labels">
             <template>
-              <div slot="actions">
+              <div
+                slot="actions">
                 <button
                   v-if="!isLast"
                   class="v-step__button v-step__button-previous"
-                  @click="tour.previousStep">{{ options.labels.buttonPrevious }}</button>
+                  @click="prevStep()">{{ options.labels.buttonPrevious }}</button>
                 <button
                   class="v-step__button v-step__button-next"
                   @click="nextStep()">{{ options.labels.buttonNext }} </button>
-                <!-- <button
-                  class="v-step__button v-step__button-skip"
-                  @click="tour.skip">{{ options.labels.buttonSkip }}</button> -->
                 <button
                   v-if="isLast"
                   class="v-step__button v-step__button-stop"
@@ -41,20 +41,15 @@
           </v-step>
         </transition>
       </div>
-      <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
     </template>
   </v-tour>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'Tour',
-  components: {
-    TutorialModal,
-  },
   props: {
     name: {
       type: String,
@@ -77,15 +72,14 @@ export default {
     return {
       options: {
         labels: {
-          // buttonSkip: this.$t('webapp.tutorial.skip'),
           buttonPrevious: this.$t('webapp.tutorial.previous'),
           buttonNext: this.$t('webapp.tutorial.next'),
           buttonStop: this.$t('webapp.tutorial.finish'),
         },
         highlight: true,
       },
-      callbacks: {
-        onFinish: this.onFinishTutorial,
+      callbacksTour: {
+        onStop: this.stopTutorial,
       },
       beginnerTutorialModalOpen: false,
     };
@@ -116,6 +110,11 @@ export default {
       }
       return steps;
     },
+    checkIntelligence() {
+      if (this.name !== 'create_intelligence_forms') return this.name;
+
+      return 'create_intelligence';
+    },
   },
   watch: {
     nextEvent() {
@@ -123,6 +122,11 @@ export default {
     },
     finishEvent() {
       this.onFinishTutorial();
+    },
+    beginnerTutorialModalOpen() {
+      if (this.beginnerTutorialModalOpen === true) {
+        this.openBeginnerTutorialModal();
+      }
     },
   },
   mounted() {
@@ -137,7 +141,15 @@ export default {
   methods: {
     ...mapActions([
       'finishTutorial',
+      'setTutorialInactive',
+      'setTutorialMenuActive',
     ]),
+    async stopTutorial() {
+      await this.setTutorialInactive();
+    },
+    async setMenuActive() {
+      await this.setTutorialMenuActive();
+    },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
     },
@@ -147,13 +159,16 @@ export default {
       }
     },
     async onFinishTutorial() {
-      await this.finishTutorial(this.name);
+      await this.finishTutorial(this.checkIntelligence);
+      this.setMenuActive();
       this.$tours[this.name].skip();
-      this.openBeginnerTutorialModal();
     },
     nextStep() {
       // TODO: Show error message
       if (!this.isBlocked()) this.$tours[this.name].nextStep();
+    },
+    prevStep() {
+      if (!this.previusBlocked()) this.$tours[this.name].previousStep();
     },
     showLastStep() {
       this.$tours[this.name].currentStep = this.steps.length - 1;
@@ -167,11 +182,21 @@ export default {
         return false;
       }
     },
+    previusBlocked() {
+      const element = document.querySelector(this.steps[this.currentStep].target).attributes;
+      try {
+        const { value } = element.getNamedItem('is-previus-blocked');
+        return value === 'true';
+      } catch (_) {
+        return false;
+      }
+    },
   },
 };
 </script>
 
 <style>
+
 body.v-tour--active{
     pointer-events:none;
 }

@@ -1,101 +1,100 @@
 <template>
   <layout :show-footer="false">
-    <div class="profile__header">
-      <div class="profile__header__content">
-        <user-avatar
-          :profile="myProfile"
-          :clickable="false"
-          size="full"
-          class="profile__avatar" />
-        <div class="profile__header__info">
-          <h1 class="profile__header__title"> {{ myProfile.name }} </h1>
+    <div class="org__header">
+      <div class="org__header__content">
+        <div class="org__header__info">
+          <h1 class="org__header__title"> Org </h1>
           <p
-            v-if="myProfile.locale"
-            class="profile__header__subtitle"> {{ myProfile.locale }} </p>
-          <span class="profile__plan"> {{ $t('webapp.my_profile.free_user' ) }} </span>
+            class="org__header__subtitle">
+            {{ $t('webapp.orgs.created_by') }} <a> User </a>
+          </p>
         </div>
       </div>
     </div>
-    <div class="profile__tabs__container">
+    <div class="org__tabs__container">
       <tab-select
         :options="tabs"
         :selected.sync="selected"
-        class="profile__tabs" />
+        class="org__tabs" />
     </div>
-    <div class="profile__content">
+    <div class="org__content">
       <div
         v-show="selected==0">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.personal_info' ) }} </h1>
-        <div class="profile__edit__content">
-          <edit-profile-form class="profile__edit" />
+        <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
+        <div class="org__edit__content">
+          <edit-org-form class="org__edit" />
+
+          <div class="org__repositories__separator" />
         </div>
+
+        <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
+        <div class="org__edit__content">
+          <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
+          <set-authorization-role-form
+            ref="setAuthorizationRoleForm"
+            repository-uuid=""
+            @roleSetted="onRoleSetted()" />
+          <authorizations-list
+            ref="authorizationsList"
+            repository-uuid="" />
+        </div>
+
       </div>
       <div v-show="selected==1">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
         <paginated-list
           v-if="repositoryLists.mine"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.mine"
           :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
+          class="org__repositories__cards" />
 
-        <div class="profile__repositories__separator" />
+        <div class="org__repositories__separator" />
 
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
-        <paginated-list
-          v-if="repositoryLists.contributing"
-          :item-component="repositoryItemElem"
-          :per-page="repositoriesLimit"
-          :list="repositoryLists.contributing"
-          :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
-
-        <div class="profile__repositories__separator" />
-
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
+        <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
         <paginated-list
           v-if="repositoryLists.using"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
           :list="repositoryLists.using"
           :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
+          class="org__repositories__cards" />
       </div>
       <div
         v-show="selected==2">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.activities.recent' ) }} </h1>
-        <div class="profile__edit__content">
-          <activities class="profile__activities" />
+        <h1 class="org__title"> {{ $t('webapp.orgs.activities.recent' ) }} </h1>
+        <div class="org__edit__content">
+          <activities class="org__activities" />
         </div>
       </div>
       <div
         v-show="selected==3">
-        <div class="profile__edit__content">
+        <div class="org__edit__content">
           <user-report-list />
         </div>
       </div>
       <div
         v-show="selected==4">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
-        <div class="profile__edit__content profile__payment__content">
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.history') }} </h1>
+        <div class="org__edit__content org__payment__content">
           <payment-history />
         </div>
-        <div class="profile__repositories__separator" />
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.info') }} </h1>
-        <div class="profile__edit__content profile__payment__content">
-          <payment-form class="profile__payment__form" />
+        <div class="org__repositories__separator" />
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.info') }} </h1>
+        <div class="org__edit__content org__payment__content">
+          <payment-form class="org__payment__form" />
         </div>
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.coupon_payment') }} </h1>
-        <div class="profile__edit__content profile__payment__content">
+        <h1 class="org__title"> {{ $t('webapp.orgs.payment.coupon_payment') }} </h1>
+        <div class="org__edit__content org__payment__content">
           <b-field>
             <b-input
               v-model="coupon"
               expanded/>
             <b-button
-              class="profile__payment__button"
+              class="org__payment__button"
               type="is-primary"
-              @click="submitCoupon"> {{ $t('webapp.my_profile.payment.submit') }} </b-button>
+              @click="submitCoupon"> {{ $t('webapp.orgs.payment.submit') }} </b-button>
           </b-field>
         </div>
       </div>
@@ -106,7 +105,7 @@
 <script>
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
-import EditProfileForm from '@/components/user/EditProfileForm';
+import EditOrgForm from '@/components/user/EditOrgForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
@@ -114,6 +113,9 @@ import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
+import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import AuthorizationsList from '@/components/repository/AuthorizationsList';
+
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
@@ -121,13 +123,15 @@ export default {
   components: {
     Layout,
     UserAvatar,
-    EditProfileForm,
+    EditOrgForm,
     TabSelect,
     PaginatedList,
     Activities,
     UserReportList,
     PaymentForm,
     PaymentHistory,
+    SetAuthorizationRoleForm,
+    AuthorizationsList,
   },
   data() {
     return {
@@ -140,18 +144,17 @@ export default {
       },
       repositoriesLimit: 3,
       tabs: [
-        this.$t('webapp.my_profile.profile'),
-        this.$t('webapp.my_profile.intelligences.title'),
-        this.$t('webapp.my_profile.activities.title'),
-        this.$t('webapp.my_profile.reports.title'),
-        this.$t('webapp.my_profile.payment.title')],
+        this.$t('webapp.orgs.information'),
+        this.$t('webapp.orgs.intelligences.title'),
+        this.$t('webapp.orgs.activities.title'),
+        this.$t('webapp.orgs.reports.title'),
+        this.$t('webapp.orgs.payment.title')],
       coupon: null,
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
-      'myProfile',
     ]),
   },
   watch: {
@@ -164,7 +167,6 @@ export default {
     },
   },
   mounted() {
-    this.updateMyProfile();
     this.updateMyRepositories();
   },
   methods: {
@@ -172,13 +174,15 @@ export default {
       'getMyRepositories',
       'getContributingRepositories',
       'getUsingRepositories',
-      'updateMyProfile',
     ]),
     submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
       this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
       this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
+    },
+    onRoleSetted() {
+      this.$refs.authorizationsList.updateAuthorizations();
     },
   },
 };
@@ -194,25 +198,7 @@ h1 {
         display: block;
       }
 
-    .profile {
-
-        &__avatar {
-            width: 90px;
-            height: 90px;
-            box-shadow: 0px 3px 6px $shadow-color;
-            background-color: $color-white;
-        }
-
-        &__plan {
-            background-color: $color-primary-dark;
-            color: $color-white;
-            text-align: center;
-            border-radius: 12px;
-            padding: 0.3rem 0.75rem;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin: 0 1rem;
-        }
+    .org {
 
         &__title {
             max-width: 56.25rem;
@@ -228,6 +214,7 @@ h1 {
 
         &__header {
             background-color: $color-white;
+            text-align: center;
             width: 100%;
             padding: 4rem 0;
             &__content {
@@ -239,11 +226,13 @@ h1 {
             }
             &__title {
               font-size: 1.5rem;
+              font-weight: bold;
               margin: 0 0 0.625rem 0;
             }
             &__subtitle {
-              font-size: 1.125rem;
+              font-size: 0.875rem;
               margin: 0 1rem 0.625rem 1rem;
+              color: $color-grey-darker;
             }
         }
 
@@ -274,6 +263,7 @@ h1 {
         &__edit {
           max-width: 40rem;
           margin-top: 1.563rem;
+          padding: 0 0 4rem 0;
           &__content {
             max-width: 56.25rem;
             padding: 0 1rem;

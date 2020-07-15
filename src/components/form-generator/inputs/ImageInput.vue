@@ -1,25 +1,27 @@
 <template>
   <b-field>
     <div class="image-input">
-      <div
-        :style="image"
-        :class="{'image-input__image__container': true, 'image-input__image__default': !src}">
-        <b-icon
-          v-if="!src"
-          icon="account" />
+      <div class="image-input__container">
+        <div
+          :style="image"
+          :class="{'image-input__image__container': true, 'image-input__image__default': !src}">
+          <b-icon
+            v-if="!src"
+            icon="account" />
+        </div>
+        <input
+          ref="imageInput"
+          :hidden="true"
+          type="file"
+          accept="image/*"
+          @change="onChange">
+        <span
+          class="image-input__icon"
+          @click="onFileUpload">
+          <b-icon
+            icon="camera" />
+        </span>
       </div>
-      <input
-        ref="imageInput"
-        :hidden="true"
-        type="file"
-        accept="image/*"
-        @change="onChange">
-      <span
-        class="image-input__icon"
-        @click="onFileUpload">
-        <b-icon
-          icon="camera" />
-      </span>
     </div>
   </b-field>
 </template>
@@ -76,6 +78,11 @@ export default {
         width: 8.5rem;
         box-shadow: 0px 3px 6px #00000029;
 
+        &__container {
+          width: 100%;
+          height: 100%;
+        }
+
         &__image {
             &__container {
                 width: 100%;
@@ -99,8 +106,8 @@ export default {
             color: $color-white;
             padding: 0.5rem;
             position: relative;
-            bottom: 40%;
-            left: 75%;
+            bottom: 3.5rem;
+            left: 6.5rem;
             display: inline-flex;
             align-items: center;
             cursor: pointer;

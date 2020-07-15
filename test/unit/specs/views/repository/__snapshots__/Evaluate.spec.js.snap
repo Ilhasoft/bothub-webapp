@@ -3,6 +3,7 @@
 exports[`TestView.vue renders correctly 1`] = `
 <repository-view-base-stub>
   <!---->
-  <tour-stub name="test" stepcount="6"></tour-stub>
+  <!---->
+  <tutorial-modal-stub></tutorial-modal-stub>
 </repository-view-base-stub>
 `;

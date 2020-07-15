@@ -34,7 +34,7 @@
             tag="router-link"
             icon="refresh"/>
           <b-menu-item
-            id="tour-test-step-0"
+            id="tour-evaluate-step-0"
             :active="isTestsActive"
             :expanded="isTestsActive"
             icon="wechat"
@@ -86,7 +86,7 @@
               tag="router-link"/>
           </b-menu-item>
           <b-menu-item
-            id="tour-integration-step-0"
+            id="tour-integrate-step-0"
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
             tag="router-link"

@@ -51,12 +51,11 @@
       </div>
       <div class="field is-grouped is-grouped-centered">
         <b-button
-          id="tour-quick_test-step-2"
           class="quick-test-text__button"
           icon-left="chart-pie"
           @click="debug()"> {{ $t('webapp.quick_test.debug') }} </b-button>
+
         <b-button
-          id="tour-quick_test-step-3"
           class="quick-test-text__button"
           icon-left="file-document-outline"
           @click="showRawInfo()"> {{ $t('webapp.quick_test.raw') }}
@@ -194,7 +193,6 @@ export default {
 <style lang="scss" scoped>
 .quick-test-text {
     margin: 0 0 1.5rem 0;
-
     &__selected {
       text-decoration: underline;
       text-decoration-color: red;
