@@ -1,34 +1,34 @@
 <template>
-  <bh-card
+  <div
     class="org-card"
-    shadow="light"
-    no-border
-    @click.native="goToOrg">
-    <div class="org-card__align-items">
-      <div class="org-card__details">
-        <div class="org-card__title">
-          <span class="text-color-fake-black">{{ name }}</span>
-        </div>
-        <div class="org-card__info-item">
-          <span>{{ $t('webapp.layout.created_by') }}</span>
-          <strong class="medium text-color-primary">{{ owner.nickname }}</strong>
-        </div>
-        <div class="org-card__attrs">
-          <p class="org-card__attrs__line"> <b-icon
-            size="is-medium"
-            class="org-card__icon"
-            icon="brain"/> {{ $tc('webapp.orgs.repositories', repository_count) }} </p>
-          <p class="org-card__attrs__line"> <b-icon
-            size="is-medium"
-            class="org-card__icon"
-            icon="account-multiple"/> {{ $tc('webapp.orgs.members', member_count) }} </p>
-        </div>
-        <div class="org-card__time">
-          <p> {{ $t('webapp.orgs.created') }} {{ created_at | moment('from') }} </p>
+    @click="goToOrg">
+    <div class="org-card__append">
+      <div class="org-card__align-items">
+        <div class="org-card__details">
+          <div class="org-card__title">
+            <span class="text-color-fake-black">{{ name }}</span>
+          </div>
+          <div class="org-card__info-item">
+            <span>{{ $t('webapp.layout.created_by') }}</span>
+            <strong class="medium text-color-primary">{{ owner.nickname }}</strong>
+          </div>
+          <div class="org-card__attrs">
+            <p class="org-card__attrs__line"> <b-icon
+              size="is-medium"
+              class="org-card__icon"
+              icon="brain"/> {{ $tc('webapp.orgs.repositories', repository_count) }} </p>
+            <p class="org-card__attrs__line"> <b-icon
+              size="is-medium"
+              class="org-card__icon"
+              icon="account-multiple"/> {{ $tc('webapp.orgs.members', member_count) }} </p>
+          </div>
+          <div class="org-card__time">
+            <p> {{ $t('webapp.orgs.created') }} {{ created_at | moment('from') }} </p>
+          </div>
         </div>
       </div>
     </div>
-  </bh-card>
+  </div>
 </template>
 
 <script>
@@ -68,8 +68,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
 
 .org-card {
@@ -81,6 +81,16 @@ export default {
   width: calc(100% * 1/3 - 2rem);
   word-break: break-all;
 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: white;
+  border: 1px solid $color-grey;
+  border-radius: $radius-normal;
+  border: 1px solid transparent;
+  box-shadow: 0rem 0rem .5rem .2rem rgba(0, 0, 0, 0.1);
+  flex-grow: 0;
+
   @media screen and (max-width: $mobile-width) {
     width: calc(100% * 1/2 - 1rem);
     margin: $org-card-margin 0 $org-card-margin 0.5*$org-card-margin;
@@ -89,6 +99,10 @@ export default {
   @media screen and (max-width: $small-mobile-width) {
     width: calc(100% - 1rem);
     margin: 1rem auto;
+  }
+
+  &__append {
+    flex-grow: 0;
   }
 
   &__align-items {
