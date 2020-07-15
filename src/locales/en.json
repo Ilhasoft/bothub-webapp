@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "sign in",
       "signup": "sign up",
+      "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
@@ -296,6 +297,46 @@
       "export_switch_yes": "Yes",
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
+    "orgs": {
+      "created_by": "Created by",
+      "created": "Created",
+      "repositories": "{n} repositories | {n} repository | {n} repositories",
+      "members": "{n} members | {n} member | {n} members",
+      "create_org": "Create organization",
+      "create": "Create",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      },
+      "create_org_title": "Let's create an organization",
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
+    },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
       "change_password": "Change Password",
@@ -329,7 +370,17 @@
         "no_reports": "Nenhum relatório",
         "total": "Predictions total:"
     },
-      "payments": "Payments",
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
       "intelligences": {
         "title": "Intelligences",
         "mine": "My Intelligences",

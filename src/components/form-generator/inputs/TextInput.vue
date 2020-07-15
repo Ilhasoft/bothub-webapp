@@ -1,6 +1,7 @@
 <template>
   <b-input
     :maxlength="max_length"
+    :placeholder="labelPlaceholder"
     v-model="value"
     :placeholder="labelPlaceholder"
     type="textarea"
