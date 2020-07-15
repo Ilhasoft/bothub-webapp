@@ -159,7 +159,6 @@ export default {
       }
     },
     async onFinishTutorial() {
-      console.log('name', this.name);
       await this.finishTutorial(this.checkIntelligence);
       this.setMenuActive();
       this.$tours[this.name].skip();

@@ -56,7 +56,7 @@
                 ref="saveSentenceButton"
                 :disabled="!shouldSubmit"
                 :loading="submitting"
-                :is-step-blocked="!nextStepTour"
+                :is-step-blocked="!blockedNextStepTutorial"
                 type="is-primary"
                 @click="submitSentence()">
                 <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
@@ -116,7 +116,7 @@ export default {
       submitting: false,
       entitiesList: [],
       testing: true,
-      nextStepTour: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -243,7 +243,7 @@ export default {
 
         this.$emit('created');
         this.$emit('eventStep');
-        this.nextStepTour = !this.nextStepTour;
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
         return true;
       } catch (error) {
         /* istanbul ignore next */

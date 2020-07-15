@@ -7,7 +7,7 @@
       @click="toggle()">
       <div
         id="tour-quick_test-step-0"
-        :is-step-blocked="!nextStepTour"
+        :is-step-blocked="!blockedNextStepTutorial"
         class="quick-test__collapse-button__content">
         <b-icon
           :icon="expanded ? 'chevron-right' : 'chevron-left'"/>
@@ -122,7 +122,7 @@ export default {
       expanded: false,
       eventClick: false,
       eventClickFinish: false,
-      nextStepTour: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -152,7 +152,6 @@ export default {
   },
   mounted() {
     this.updateRepositoryLanguage();
-    console.log('quick', this.activeTutorial);
   },
   methods: {
     signIn() {
@@ -195,7 +194,7 @@ export default {
       this.$emit('expanded');
       this.dispatchClick();
       this.expanded = !this.expanded;
-      this.nextStepTour = !this.nextStepTour;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     setLanguage(language) {
       this.selectedLanguage = language;

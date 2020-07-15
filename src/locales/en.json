@@ -471,7 +471,7 @@
         "step_5": "Finally, submit your sentence translate.",
         "step_6": "If you prefer, you can also export and import excel sentences for translation by clicking here"
       },
-      "integration": {
+      "integrate": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
     },

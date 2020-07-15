@@ -21,7 +21,7 @@
           class="create-repository__form"/>
         <span
           id="tour-create_intelligence_forms-step-1"
-          :is-step-blocked="!nextStepTour">
+          :is-step-blocked="!blockedNextStepTutorial">
           <b-button
             :disabled="!checkFormData"
             type="is-primary"
@@ -53,7 +53,7 @@
           </b-button>
           <span
             id="tour-create_intelligence_forms-step-3"
-            :is-step-blocked="nextStepTour">
+            :is-step-blocked="blockedNextStepTutorial">
             <b-button
               native-type="submit"
               type="is-primary"
@@ -72,7 +72,6 @@
           </h1>
           <p v-html="$t('webapp.create_repository.repository_created_text')" />
           <router-link
-            id="tour-create_intelligence_forms-step-4"
             :to="repositoryDetailsRouterParams()"
           >
             <b-button
@@ -94,7 +93,7 @@
     </form>
     <tour
       v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
-      :step-count="5"
+      :step-count="4"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="create_intelligence_forms"/>
@@ -142,7 +141,7 @@ export default {
       resultParams: {},
       eventClick: false,
       eventClickFinish: false,
-      nextStepTour: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -187,7 +186,6 @@ export default {
     },
   },
   async mounted() {
-    console.log();
     this.formSchema = await this.getNewRepositorySchema();
     const Model = getModel(
       this.computedSchema,
@@ -206,7 +204,7 @@ export default {
     ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
-      this.nextStepTour = !this.nextStepTour;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
@@ -240,7 +238,6 @@ export default {
       };
     },
     async onSubmit() {
-      this.dispatchFinish();
       const categoryValues = this.categories.map(category => category.id);
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
         { ...this.data, categories: categoryValues });
@@ -253,12 +250,12 @@ export default {
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
+        this.dispatchFinish();
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
         this.submitting = false;
       }
-
       return false;
     },
   },

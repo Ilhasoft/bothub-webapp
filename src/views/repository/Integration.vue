@@ -92,7 +92,7 @@ text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
     <tour
       v-if="activeTutorial === 'integrate'"
       :step-count="2"
-      name="integration" />
+      name="integrate" />
     <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>

@@ -73,9 +73,6 @@ export default {
       'activeMenu',
     ]),
   },
-  created() {
-    console.log('quicksss', this.activeTutorial);
-  },
 };
 </script>
 

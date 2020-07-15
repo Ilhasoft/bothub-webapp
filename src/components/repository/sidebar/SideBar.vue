@@ -86,7 +86,7 @@
               tag="router-link"/>
           </b-menu-item>
           <b-menu-item
-            id="tour-integration-step-0"
+            id="tour-integrate-step-0"
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
             tag="router-link"

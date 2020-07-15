@@ -42,7 +42,7 @@
           </span>
         </div>
       </div>
-      <a @click="closeTutorialMenu(), stop();"> {{ $t('webapp.tutorial.skip') }} </a>
+      <a @click="closeTutorialMenu()"> {{ $t('webapp.tutorial.skip') }} </a>
     </div>
 
   </b-modal>
@@ -91,10 +91,6 @@ export default {
       'myProfile',
     ]),
     computedList() {
-      // const finished = this.finishedTutorials;
-
-      console.log('last', this.finished);
-      // console.log('tutorialsChecked', this.tutorialsChecked);
       return this.list.map(item => ({
         ...item,
         active: item.label === 'create_account'
@@ -116,7 +112,6 @@ export default {
         this.updateMyRepositories();
         this.updateTutorialsDone();
         this.finished = { ...this.finishedTutorials };
-        console.log('final checked', { ...this.finishedTutorials });
         this.nickname = this.myProfile.nickname;
       }
     },
@@ -137,7 +132,8 @@ export default {
         if (data.results.length === 0) {
           return;
         }
-        this.repositoryTutorial = data.results[0].slug;
+        // this.repositoryTutorial = data.results[0].slug;
+        this.repositoryTutorial = 'DrJorge';
       } catch (error) {
         this.error = error;
       }
@@ -145,6 +141,7 @@ export default {
     closeTutorialMenu() {
       this.$emit('update:open', false);
       this.setTutorialMenuInactive();
+      this.stop();
     },
     start() {
       this.$confetti.start({
@@ -160,7 +157,6 @@ export default {
       this.$confetti.stop();
     },
     startTutorial(name, target) {
-      console.log('target foi', target);
       this.setTutorialActive(name);
       if (target === 'home' || target === 'new') {
         if (target === 'home') return '';

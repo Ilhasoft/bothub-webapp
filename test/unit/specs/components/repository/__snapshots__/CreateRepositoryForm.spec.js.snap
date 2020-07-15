@@ -1,31 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateRepositoryForm renders correctly 1`] = `
-<form class="create-repository">
-  <div class="create-repository__form__wrapper">
-    <h1 class="create-repository__title"> some specific text </h1>
-    <p>some specific text</p>
-    <loading-stub></loading-stub>
-    <!---->
-    <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text </b-button-stub>
-  </div>
-  <div class="create-repository__form__wrapper" style="display: none;">
-    <h1 class="create-repository__title">
-      some specific text
-    </h1>
-    <p>some specific text</p>
-    <loading-stub></loading-stub>
-    <!---->
-    <div class="create-repository__buttons">
-      <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text </b-button-stub>
-      <b-button-stub type="is-primary" nativetype="submit" tag="button" class="create-repository__form__buttons"> some specific text </b-button-stub>
+<div>
+  <form class="create-repository">
+    <div class="create-repository__form__wrapper">
+      <h1 class="create-repository__title"> some specific text </h1>
+      <p>some specific text</p>
+      <loading-stub></loading-stub>
+      <!----> <span id="tour-create_intelligence_forms-step-1" is-step-blocked="true"><b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
+        </b-button-stub></span>
     </div>
-  </div>
+    <div class="create-repository__form__wrapper" style="display: none;">
+      <h1 class="create-repository__title">
+        some specific text
+      </h1>
+      <p>some specific text</p>
+      <loading-stub></loading-stub>
+      <!---->
+      <div class="create-repository__buttons">
+        <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
+        </b-button-stub> <span id="tour-create_intelligence_forms-step-3"><b-button-stub type="is-primary" nativetype="submit" tag="button" class="create-repository__form__buttons"> some specific text
+          </b-button-stub></span>
+      </div>
+    </div>
+    <!---->
+    <div class="create-repository__card__wrapper">
+      <div class="create-repository__card">
+        <repository-card-stub single="true" name="some specific text" available_languages="some specific text" language="some specific text" owner__nickname="" categories="[object Object]" categories_list="some specific text" slug="some specific text"></repository-card-stub>
+      </div>
+    </div>
+  </form>
   <!---->
-  <div class="create-repository__card__wrapper">
-    <div class="create-repository__card">
-      <repository-card-stub single="true" name="some specific text" available_languages="some specific text" language="some specific text" owner__nickname="" categories="[object Object]" categories_list="some specific text" slug="some specific text"></repository-card-stub>
-    </div>
-  </div>
-</form>
+  <tutorial-modal-stub></tutorial-modal-stub>
+</div>
 `;
