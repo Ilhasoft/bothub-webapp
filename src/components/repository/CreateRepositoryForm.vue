@@ -18,6 +18,7 @@
           v-model="data"
           :errors="errors"
           :show-labels="false"
+          :new-intelligence-forms="true"
           class="create-repository__form"/>
         <span
           id="tour-create_intelligence_forms-step-1"
@@ -25,7 +26,7 @@
           <b-button
             :disabled="!checkFormData"
             type="is-primary"
-            class="create-repository__form__buttons"
+            class="create-repository__form__firstButtonNext"
             @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
           </b-button>
         </span>
@@ -325,6 +326,17 @@ export default {
             }
 
             &__buttons{
+              margin-top: 0.5rem;
+              box-shadow: 0px 3px 6px #00000029;
+              border-radius: 6px;
+              width: 6.875rem;
+              height: 2.188rem;
+              @media (max-width: $mobile-width*1.2) {
+                 margin-top: 7rem;
+                }
+            }
+
+            &__firstButtonNext{
               margin-top: 4rem;
               box-shadow: 0px 3px 6px #00000029;
               border-radius: 6px;

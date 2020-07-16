@@ -7,7 +7,7 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <h1 class="create-repository__title"> some specific text </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <!----> <span id="tour-create_intelligence_forms-step-1" is-step-blocked="true"><b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
+      <!----> <span id="tour-create_intelligence_forms-step-1" is-step-blocked="true"><b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__firstButtonNext"> some specific text
         </b-button-stub></span>
     </div>
     <div class="create-repository__form__wrapper" style="display: none;">
