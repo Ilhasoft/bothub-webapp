@@ -21,7 +21,9 @@
         <div class="form__wrapper">
           <h1 class="form__title"> {{ $t('webapp.orgs.create_org_title') }} </h1>
           <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
-          <create-org-form class="form"/>
+          <create-org-form
+            class="form"
+            @created="createOrgOpen=false"/>
         </div>
       </b-modal>
     </div>

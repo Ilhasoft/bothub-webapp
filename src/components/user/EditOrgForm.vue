@@ -4,10 +4,10 @@
       <loading v-if="!formSchema" />
       <b-loading :active="submitting" />
       <form-generator
-        v-if="formSchema"
+        v-if="formSchema && !submitting"
         :schema="formSchema"
         v-model="data"
-        :initial-data="initialData"
+        :initial-data="org"
         :errors="errors"
         class="field"/>
       <div class="control has-text-centered">
@@ -32,6 +32,12 @@ export default {
     FormGenerator,
     Loading,
   },
+  props: {
+    org: {
+      type: Object,
+      default: null,
+    },
+  },
   data() {
     return {
       data: null,
@@ -46,13 +52,29 @@ export default {
     },
   },
   async mounted() {
-    this.formSchema = await this.getOrgSchema();
+    const response = await this.getNewOrgSchema();
+    console.log({ response });
+    this.formSchema = response;
   },
   methods: {
     ...mapActions([
-      'getOrgSchema',
+      'getNewOrgSchema',
+      'editOrg',
     ]),
-    onSubmit() {},
+    async onSubmit() {
+      this.submitting = true;
+      try {
+        await this.editOrg({ data: this.data, nickname: this.org.nickname });
+        this.$emit('edited');
+      } catch (error) {
+        const data = error.response && error.response.data;
+        if (data) {
+          this.errors = data;
+        }
+      } finally {
+        this.submitting = false;
+      }
+    },
   },
 };
 </script>

@@ -11,7 +11,7 @@
         :show-labels="false"
         :errors="errors"
         class="field"/>
-      <div class="control has-text-centered">
+      <!-- <div class="control has-text-centered">
         <b-field>
           <b-input
             expanded
@@ -20,7 +20,7 @@
             class="submit-button--secondary"
             type="is-secondary"> {{ $t('webapp.orgs.send_email') }} </b-button>
         </b-field>
-      </div>
+      </div> -->
       <div class="control submit-button__wrapper has-text-centered">
         <b-button
           :disabled="submitting"
@@ -61,13 +61,27 @@ export default {
     },
   },
   async mounted() {
-    this.formSchema = await this.getOrgSchema();
+    this.formSchema = await this.getNewOrgSchema();
   },
   methods: {
     ...mapActions([
-      'getOrgSchema',
+      'getNewOrgSchema',
+      'createOrg',
     ]),
-    onSubmit() {},
+    async onSubmit() {
+      this.submitting = true;
+      try {
+        await this.createOrg(this.data);
+        this.$emit('created');
+      } catch (error) {
+        const data = error.response && error.response.data;
+        if (data) {
+          this.errors = data;
+        }
+      } finally {
+        this.submitting = false;
+      }
+    },
   },
 };
 </script>

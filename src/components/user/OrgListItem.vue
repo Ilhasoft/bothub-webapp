@@ -56,11 +56,16 @@ export default {
       type: String,
       default: null,
     },
+    nickname: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     goToOrg() {
       this.$router.push({
         name: 'org',
+        params: { org_nickname: this.nickname },
       });
     },
   },

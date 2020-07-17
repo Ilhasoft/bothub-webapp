@@ -3,7 +3,7 @@
     <div class="org__header">
       <div class="org__header__content">
         <div class="org__header__info">
-          <h1 class="org__header__title"> Org </h1>
+          <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
           <p
             class="org__header__subtitle">
             {{ $t('webapp.orgs.created_by') }} <a> User </a>
@@ -17,12 +17,18 @@
         :selected.sync="selected"
         class="org__tabs" />
     </div>
-    <div class="org__content">
+    <b-loading :active="loading" />
+    <div
+      v-if="!loading"
+      class="org__content">
       <div
         v-show="selected==0">
         <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
         <div class="org__edit__content">
-          <edit-org-form class="org__edit" />
+          <edit-org-form
+            :org="org"
+            class="org__edit"
+            @edited="loadOrg" />
 
           <div class="org__repositories__separator" />
         </div>
@@ -119,7 +125,7 @@ import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'Profile',
+  name: 'Org',
   components: {
     Layout,
     UserAvatar,
@@ -135,6 +141,8 @@ export default {
   },
   data() {
     return {
+      org: null,
+      loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
       repositoryLists: {
@@ -165,16 +173,30 @@ export default {
         });
       }
     },
+    org() {
+      this.updateMyRepositories();
+    },
   },
   mounted() {
-    this.updateMyRepositories();
+    this.loadOrg();
   },
   methods: {
     ...mapActions([
       'getMyRepositories',
       'getContributingRepositories',
       'getUsingRepositories',
+      'getOrg',
     ]),
+    async loadOrg() {
+      const nickname = this.$route.params.org_nickname;
+      this.loading = true;
+      try {
+        const response = await this.getOrg({ nickname });
+        this.org = response.data;
+      } finally {
+        this.loading = false;
+      }
+    },
     submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
