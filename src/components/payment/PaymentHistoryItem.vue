@@ -44,7 +44,7 @@
       <p class="history__total__title"> {{ $n(total, 'currency') }}
         <b-icon
           :class="paid? 'success' : 'danger' "
-          :icon="paid ? 'check' : 'close'" />
+          :icon="paid ? 'check-bold' : 'close-thick'" />
       </p>
     </div>
     <p/>
@@ -107,7 +107,7 @@ export default {
         box-shadow: 0px 10px 30px #98989838;
 
         &--current {
-            padding: 2.75rem 5.313rem 3.563rem 3.25rem;
+            padding: 2.75rem 3.75rem 3.563rem 3.25rem;
         }
 
         &--past {
