@@ -1,7 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <loading v-if="!formSchema" />
+      <loading v-if="!org || !formSchema" />
       <b-loading :active="submitting" />
       <form-generator
         v-if="formSchema && !submitting"
@@ -53,7 +53,6 @@ export default {
   },
   async mounted() {
     const response = await this.getNewOrgSchema();
-    console.log({ response });
     this.formSchema = response;
   },
   methods: {
