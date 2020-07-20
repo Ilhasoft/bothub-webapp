@@ -27,4 +27,8 @@ export default {
   async createOrg(data) {
     return request.$http.post('/v2/org/organization/', data);
   },
+
+  getAuthorizationList(orgNickname, limit) {
+    return new utils.Page('/v2/repository/authorizations/', limit, { org_nickname: orgNickname });
+  },
 };

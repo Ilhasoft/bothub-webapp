@@ -24,6 +24,10 @@ export default {
     return repository.searchByOrg(nickname, limit);
   },
 
+  orgAuthorizationList(store, { orgNickname, limit = 20 }) {
+    return org.getAuthorizationList(orgNickname, limit);
+  },
+
   getOrgRepositories(store, { nickname, limit = 20 }) {
     return repository.searchByOrg(nickname, limit);
   },

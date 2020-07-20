@@ -41,9 +41,9 @@
             ref="setAuthorizationRoleForm"
             repository-uuid=""
             @roleSetted="onRoleSetted()" />
-          <authorizations-list
+          <org-authorizations-list
             ref="authorizationsList"
-            repository-uuid="" />
+            :org-nickname="nickname" />
         </div>
 
       </div>
@@ -121,7 +121,7 @@ import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
-import AuthorizationsList from '@/components/repository/AuthorizationsList';
+import OrgAuthorizationsList from '@/components/org/OrgAuthorizationsList';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -138,7 +138,7 @@ export default {
     PaymentForm,
     PaymentHistory,
     SetAuthorizationRoleForm,
-    AuthorizationsList,
+    OrgAuthorizationsList,
   },
   data() {
     return {
@@ -198,7 +198,6 @@ export default {
     },
     submitCoupon() {},
     async updateRepositories() {
-      console.log('updatingrepos');
       this.repositoryLists.org = await this.getOrgRepositories(
         { nickname: this.nickname, limit: this.repositoriesLimit },
       );
