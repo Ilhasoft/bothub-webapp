@@ -1,4 +1,5 @@
 import org from '@/api/org';
+import repository from '@/api/repository';
 
 export default {
   async getAllOrgs() {
@@ -19,7 +20,15 @@ export default {
     return org.getNewOrgSchema();
   },
 
-  async getEditOrgSchema({ nickname }) {
+  getOrgContributingRepositories(store, { nickname, limit = 20 }) {
+    return repository.searchByOrg(nickname, limit);
+  },
+
+  getOrgRepositories(store, { nickname, limit = 20 }) {
+    return repository.searchByOrg(nickname, limit);
+  },
+
+  async getEditOrgSchema(store, { nickname }) {
     return org.getEditOrgSchema(nickname);
   },
 

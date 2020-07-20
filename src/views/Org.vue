@@ -50,10 +50,10 @@
       <div v-show="selected==1">
         <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
         <paginated-list
-          v-if="repositoryLists.mine"
+          v-if="repositoryLists.org"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryLists.mine"
+          :list="repositoryLists.org"
           :empty-message="$t('webapp.home.no_repo')"
           class="org__repositories__cards" />
 
@@ -61,10 +61,10 @@
 
         <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
         <paginated-list
-          v-if="repositoryLists.using"
+          v-if="repositoryLists.contributing"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryLists.using"
+          :list="repositoryLists.contributing"
           :empty-message="$t('webapp.home.no_repo')"
           class="org__repositories__cards" />
       </div>
@@ -147,9 +147,8 @@ export default {
       selected: 0,
       repositoryItemElem: RepositoryCard,
       repositoryLists: {
-        mine: null,
+        org: null,
         contributing: null,
-        using: null,
       },
       repositoriesLimit: 3,
       tabs: [
@@ -177,18 +176,15 @@ export default {
         });
       }
     },
-    org() {
-      this.updateMyRepositories();
-    },
   },
   mounted() {
     this.loadOrg();
+    this.updateRepositories();
   },
   methods: {
     ...mapActions([
-      'getMyRepositories',
-      'getContributingRepositories',
-      'getUsingRepositories',
+      'getOrgContributingRepositories',
+      'getOrgRepositories',
       'getOrg',
     ]),
     async loadOrg() {
@@ -201,10 +197,14 @@ export default {
       }
     },
     submitCoupon() {},
-    async updateMyRepositories() {
-      this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
-      this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
-      this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
+    async updateRepositories() {
+      console.log('updatingrepos');
+      this.repositoryLists.org = await this.getOrgRepositories(
+        { nickname: this.nickname, limit: this.repositoriesLimit },
+      );
+      this.repositoryLists.contributing = await this.getOrgContributingRepositories(
+        { nickname: this.nickname, limit: this.repositoriesLimit },
+      );
     },
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();
