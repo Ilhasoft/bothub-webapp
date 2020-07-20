@@ -19,8 +19,8 @@ export default {
     return data.actions.POST;
   },
 
-  async getEditOrgSchema() {
-    const { data } = await request.$http.options('/v2/org/organization/');
+  async getEditOrgSchema(nickname) {
+    const { data } = await request.$http.options(`/v2/org/organization/${nickname}/`);
     return data.actions.PATCH;
   },
 

@@ -51,15 +51,24 @@ export default {
       return {};
     },
   },
-  async mounted() {
-    const response = await this.getNewOrgSchema();
-    this.formSchema = response;
+  watch: {
+    org() {
+      this.getSchema();
+    },
+  },
+  mounted() {
+    this.getSchema();
   },
   methods: {
     ...mapActions([
       'getNewOrgSchema',
       'editOrg',
     ]),
+    async getSchema() {
+      if (!this.org) return;
+      const response = await this.getNewOrgSchema({ nickname: this.org.nickname });
+      this.formSchema = response;
+    },
     async onSubmit() {
       this.submitting = true;
       try {
