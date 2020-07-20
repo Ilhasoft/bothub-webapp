@@ -324,12 +324,12 @@
         "history": "Histórico ",
         "info": "Informações de Pagamento",
         "credit_payment": "Por cartão de crédito",
-        "coupon_payment": "Por cupom de crédito"
+        "coupon_payment": "Com cupom"
       },
       "intelligences": {
         "title": "Intelligências",
         "mine": "Inteligências da organização",
-        "using": "Intelgências que eu uso"
+        "using": "Intelgências com integração"
       },
       "create_org_title": "Vamos criar uma organização",
       "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
@@ -341,7 +341,7 @@
       "repositories": "Inteligências",
       "modal_edit_your_profile": "Edite seu perfil",
       "modal_change_password": "Mudar Senha",
-      "edit": "Editar",
+      "edit": "Salvar",
       "trained_at": "Treinado às {trained} por {by}",
       "train_fail": "Treinamento falhou às {failed}",
       "training": "Treinando...",
@@ -382,8 +382,8 @@
       "intelligences": {
         "title": "Inteligências",
         "mine": "Minhas inteligências",
-        "contributing": "Inteligências que eu contribuo",
-        "using": "Inteligências que eu uso"
+        "contributing": "inteligências com permissão",
+        "using": "inteligências com integração"
       }
     },
     "tutorial": {

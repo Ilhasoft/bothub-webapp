@@ -9,6 +9,7 @@
         v-model="data"
         :initial-data="initialData"
         :errors="errors"
+        hide-help
         class="field"/>
       <div class="control has-text-centered">
         <b-button

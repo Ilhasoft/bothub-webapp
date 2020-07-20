@@ -215,7 +215,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-$shadow-color: #00000029;
 h1 {
         max-width: 58.25rem;
         padding: 0 1rem;
@@ -312,8 +311,7 @@ h1 {
 
           &__form {
             max-width: 30rem;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin-bottom: 2rem
           }
         }
     }
