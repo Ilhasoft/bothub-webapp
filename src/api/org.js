@@ -29,6 +29,6 @@ export default {
   },
 
   getAuthorizationList(orgNickname, limit) {
-    return new utils.Page('/v2/repository/authorizations/', limit, { org_nickname: orgNickname });
+    return new utils.Page('/v2/org/authorizations/', limit, { org_nickname: orgNickname });
   },
 };
