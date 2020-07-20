@@ -8,7 +8,7 @@
 
 <script>
 import PaginatedList from '@/components/shared/PaginatedList';
-import OrgListItem from '@/components/user/OrgListItem';
+import OrgListItem from '@/components/org/OrgListItem';
 import { mapActions } from 'vuex';
 
 export default {

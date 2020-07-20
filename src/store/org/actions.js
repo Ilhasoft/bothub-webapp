@@ -15,12 +15,12 @@ export default {
     return org.editOrg(data, nickname);
   },
 
-  async getNewOrgSchema(store, { nickname }) {
-    return org.getNewOrgSchema(nickname);
+  async getNewOrgSchema() {
+    return org.getNewOrgSchema();
   },
 
-  async getEditOrgSchema() {
-    return org.getEditOrgSchema();
+  async getEditOrgSchema({ nickname }) {
+    return org.getEditOrgSchema(nickname);
   },
 
   async createOrg(store, data) {

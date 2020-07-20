@@ -21,7 +21,7 @@ export default {
 
   async getEditOrgSchema(nickname) {
     const { data } = await request.$http.options(`/v2/org/organization/${nickname}/`);
-    return data.actions.PATCH;
+    return data.actions.PUT;
   },
 
   async createOrg(data) {

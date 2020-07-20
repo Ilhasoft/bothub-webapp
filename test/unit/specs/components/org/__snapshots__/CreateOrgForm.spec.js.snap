@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateOrgForm renders correctly 1`] = `
+<div>
+  <form>
+    <loading-stub></loading-stub>
+    <b-loading-stub isfullpage="true" animation="fade" oncancel="function _default() {}"></b-loading-stub>
+    <!---->
+    <div class="control submit-button__wrapper has-text-centered">
+      <b-button-stub type="is-primary" nativetype="submit" tag="button" class="submit-button">some specific text</b-button-stub>
+    </div>
+  </form>
+</div>
+`;

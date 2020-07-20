@@ -26,7 +26,8 @@
         <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
         <div class="org__edit__content">
           <edit-org-form
-            :org="org"
+            :nickname="nickname"
+            :initial-data="org"
             class="org__edit"
             @edited="loadOrg" />
 
@@ -111,7 +112,7 @@
 <script>
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
-import EditOrgForm from '@/components/user/EditOrgForm';
+import EditOrgForm from '@/components/org/EditOrgForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
@@ -164,6 +165,9 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    nickname() {
+      return this.$route.params.org_nickname;
+    },
   },
   watch: {
     authenticated() {
@@ -188,10 +192,9 @@ export default {
       'getOrg',
     ]),
     async loadOrg() {
-      const nickname = this.$route.params.org_nickname;
       this.loading = true;
       try {
-        const response = await this.getOrg({ nickname });
+        const response = await this.getOrg({ nickname: this.nickname });
         this.org = response.data;
       } finally {
         this.loading = false;

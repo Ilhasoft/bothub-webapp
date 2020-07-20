@@ -32,9 +32,9 @@
 
 <script>
 import Layout from '@/components/shared/Layout';
-import OrgList from '@/components/user/OrgList';
+import OrgList from '@/components/org/OrgList';
 import LoginForm from '@/components/auth/LoginForm';
-import CreateOrgForm from '@/components/user/CreateOrgForm';
+import CreateOrgForm from '@/components/org/CreateOrgForm';
 import { mapGetters } from 'vuex';
 
 export default {

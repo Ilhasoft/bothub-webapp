@@ -4,29 +4,18 @@
       <loading v-if="!formSchema" />
       <b-loading :active="submitting" />
       <form-generator
-        v-if="formSchema"
-        :schema="filteredSchema"
+        v-if="formSchema && !submitting"
+        :schema="formSchema"
         v-model="data"
         :initial-data="initialData"
-        :show-labels="false"
         :errors="errors"
         class="field"/>
-      <!-- <div class="control has-text-centered">
-        <b-field>
-          <b-input
-            expanded
-            placeholder="Invite to Organization" />
-          <b-button
-            class="submit-button--secondary"
-            type="is-secondary"> {{ $t('webapp.orgs.send_email') }} </b-button>
-        </b-field>
-      </div> -->
-      <div class="control submit-button__wrapper has-text-centered">
+      <div class="control has-text-centered">
         <b-button
           :disabled="submitting"
           native-type="submit"
           type="is-primary"
-          class="submit-button">{{ $t('webapp.orgs.create') }}</b-button>
+          class="submit-button">{{ $t('webapp.orgs.edit') }}</b-button>
       </div>
     </form>
   </div>
@@ -38,10 +27,20 @@ import Loading from '@/components/shared/Loading';
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'CreateOrgForm',
+  name: 'EditOrgForm',
   components: {
     FormGenerator,
     Loading,
+  },
+  props: {
+    nickname: {
+      type: String,
+      required: true,
+    },
+    initialData: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -51,28 +50,23 @@ export default {
       submitting: false,
     };
   },
-  computed: {
-    initialData() {
-      return {};
-    },
-    filteredSchema() {
-      const { email, ...schema } = this.formSchema;
-      return schema;
-    },
-  },
-  async mounted() {
-    this.formSchema = await this.getNewOrgSchema();
+  mounted() {
+    this.getSchema();
   },
   methods: {
     ...mapActions([
-      'getNewOrgSchema',
-      'createOrg',
+      'getEditOrgSchema',
+      'editOrg',
     ]),
+    async getSchema() {
+      const response = await this.getEditOrgSchema({ nickname: this.nickname });
+      this.formSchema = response;
+    },
     async onSubmit() {
       this.submitting = true;
       try {
-        await this.createOrg(this.data);
-        this.$emit('created');
+        await this.editOrg({ data: this.data, nickname: this.nickname });
+        this.$emit('edited');
       } catch (error) {
         const data = error.response && error.response.data;
         if (data) {
@@ -87,14 +81,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .submit-button {
 
-        &__wrapper {
-            margin-top: 3.5rem;
-        }
-
-        &--secondary {
-            margin-left: 0.625rem;
-        }
-    }
 </style>
