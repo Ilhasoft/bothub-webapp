@@ -73,8 +73,8 @@ export default {
     async onSubmit() {
       this.submitting = true;
       try {
-        await this.createOrg(this.data);
-        this.$emit('created');
+        const response = await this.createOrg(this.data);
+        this.$emit('created', response.data.nickname);
       } catch (error) {
         const data = error.response && error.response.data;
         if (data) {

@@ -23,7 +23,7 @@
           <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
           <create-org-form
             class="form"
-            @created="createOrgOpen=false"/>
+            @created="onCreated"/>
         </div>
       </b-modal>
     </div>
@@ -54,6 +54,15 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+  },
+  methods: {
+    onCreated(nickname) {
+      this.getNewOrgSchema = false;
+      this.$router.push({
+        name: 'org',
+        params: { org_nickname: nickname },
+      });
+    },
   },
 };
 </script>
