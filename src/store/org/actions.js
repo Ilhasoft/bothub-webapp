@@ -12,11 +12,11 @@ export default {
     return response;
   },
 
-  async editOrg(store, { data, nickname }) {
+  editOrg(store, { data, nickname }) {
     return org.editOrg(data, nickname);
   },
 
-  async getNewOrgSchema() {
+  getNewOrgSchema() {
     return org.getNewOrgSchema();
   },
 
@@ -32,11 +32,19 @@ export default {
     return repository.searchByOrg(nickname, limit);
   },
 
-  async getEditOrgSchema(store, { nickname }) {
+  getEditOrgSchema(store, { nickname }) {
     return org.getEditOrgSchema(nickname);
   },
 
-  async createOrg(store, data) {
+  createOrg(store, data) {
     return org.createOrg(data);
+  },
+
+  updateAuthorizationRole(store, { orgNickname, userNickname, newRole }) {
+    return org.updateAuthorizationRole(
+      orgNickname,
+      userNickname,
+      newRole,
+    );
   },
 };

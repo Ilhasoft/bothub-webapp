@@ -17,7 +17,7 @@
 import { mapActions } from 'vuex';
 
 import PaginatedList from '@/components/shared/PaginatedList';
-import AuthorizationItem from '@/components/repository/AuthorizationItem';
+import OrgAuthorizationItem from '@/components/org/OrgAuthorizationItem';
 
 
 const components = {
@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       authorizationsList: null,
-      authorizationItemElem: AuthorizationItem,
+      authorizationItemElem: OrgAuthorizationItem,
     };
   },
   async mounted() {

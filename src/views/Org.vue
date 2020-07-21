@@ -37,9 +37,9 @@
         <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
         <div class="org__edit__content">
           <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
-          <set-authorization-role-form
+          <org-set-authorization-role-form
             ref="setAuthorizationRoleForm"
-            repository-uuid=""
+            :org-nickname="nickname"
             @roleSetted="onRoleSetted()" />
           <org-authorizations-list
             ref="authorizationsList"
@@ -120,7 +120,7 @@ import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
-import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
+import OrgSetAuthorizationRoleForm from '@/components/org/OrgSetAuthorizationRoleForm';
 import OrgAuthorizationsList from '@/components/org/OrgAuthorizationsList';
 
 import { mapGetters, mapActions } from 'vuex';
@@ -137,7 +137,7 @@ export default {
     UserReportList,
     PaymentForm,
     PaymentHistory,
-    SetAuthorizationRoleForm,
+    OrgSetAuthorizationRoleForm,
     OrgAuthorizationsList,
   },
   data() {

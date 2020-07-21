@@ -24,11 +24,18 @@ export default {
     return data.actions.PUT;
   },
 
-  async createOrg(data) {
+  createOrg(data) {
     return request.$http.post('/v2/org/organization/', data);
   },
 
   getAuthorizationList(orgNickname, limit) {
     return new utils.Page('/v2/org/authorizations/', limit, { org_nickname: orgNickname });
+  },
+
+  updateAuthorizationRole(orgNickname, userNickname, role) {
+    return request.$http.patch(
+      `/v2/org/authorizations/${orgNickname}/${userNickname}/`,
+      { role },
+    );
   },
 };
