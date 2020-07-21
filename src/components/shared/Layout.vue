@@ -74,10 +74,6 @@
                   @click="orgs()">
                   {{ $t('webapp.layout.orgs') }}
                 </b-dropdown-item>
-                <b-dropdown-item
-                  @click="openNewRepository()">
-                  {{ $t('webapp.layout.start_you_bot') }}
-                </b-dropdown-item>
                 <b-dropdown-item @click="logout()">
                   {{ $t('webapp.layout.logout') }}
                 </b-dropdown-item>
