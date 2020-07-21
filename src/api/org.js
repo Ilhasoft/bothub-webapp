@@ -38,4 +38,10 @@ export default {
       { role },
     );
   },
+
+  removeAuthorization(userNickname, orgNickname) {
+    return request.$http.delete(
+      `/v2/org/authorizations/${orgNickname}/${userNickname}/`,
+    );
+  },
 };

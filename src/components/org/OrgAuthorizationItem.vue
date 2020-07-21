@@ -1,38 +1,39 @@
 <template>
-  <div class="bh-grid">
-    <div class="bh-grid__item bh-grid__item--grow-0">
+  <div class="columns is-vcentered">
+    <div class="column is-1">
       <user-avatar :profile="getProfile(user__nickname)" />
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-1">
+    <div class="column is-one-fifth">
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
       <p><small>{{ user__nickname }}</small></p>
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
+    <div class="column">
       <div
         v-if="submitted || submitted || true"
-        class="bh-grid">
-        <div class="bh-grid__item">
+        class="columns is-vcentered">
+        <div class="column is-3 is-offset-3">
           <role-select
             v-model="newRole"
             size="is-small" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon
+        <div class="column is-2">
+          <b-icon
             v-if="submitting"
-            value="refresh" />
+            icon="refresh" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
+        <div class="column is-2">
+          <b-icon
             v-if="submitted"
-            size="small"
+            size="is-small"
             class="text-color-primary"
-            value="check" />
+            icon="check" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            value="close"
-            size="small"
-            @click="remove()"/>
+        <div class="column is-2">
+          <b-icon
+            icon="close"
+            class="icon-button"
+            size="is-small"
+            @click.native="remove()"/>
         </div>
       </div>
     </div>
@@ -129,7 +130,7 @@ export default {
             this.submitting = true;
             try {
               await this.removeOrgAuthorization({
-                id: this.id_request_authorizations,
+                userNickname: this.user__nickname,
                 orgNickname: this.organization__nickname,
               });
               this.$emit('deleted');
@@ -185,3 +186,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+    .icon-button {
+        cursor: pointer;
+    }
+</style>

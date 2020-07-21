@@ -47,4 +47,12 @@ export default {
       newRole,
     );
   },
+
+  approveOrgRequestAuthorization(store, { userNickname, orgNickname }) {
+
+  },
+
+  removeOrgAuthorization(store, { userNickname, orgNickname }) {
+    return org.removeAuthorization(userNickname, orgNickname);
+  },
 };
