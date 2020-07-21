@@ -75,6 +75,8 @@ export default {
 <style lang="scss" scoped>
     .submit-button {
 
+      padding: 0 2rem;
+
         &__wrapper {
             margin-top: 3.5rem;
         }
