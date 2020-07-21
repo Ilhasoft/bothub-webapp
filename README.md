@@ -93,7 +93,7 @@ You can set environment variables in your OS or write on .env file.
 
 ### Guidelines
 
-If you want to contribute with bothub's projects we made a guideline to help you. see here [contributing guidelines](https://github.com/bothub-it/bothub-webapp/blob/master/CONTRIBUTING.md)) for the appropriate contribution.
+If you want to contribute with bothub's projects we made a guideline to help you. see here [contributing guidelines](https://github.com/bothub-it/bothub-webapp/blob/master/CONTRIBUTING.md) for the appropriate contribution.
 
 ## License
 
