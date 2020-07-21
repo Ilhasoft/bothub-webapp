@@ -19,7 +19,8 @@
       "authorization_success": "Request made! Wait for review of an admin.",
       "error_to_retrieve_bot": "Error retrieving intelligence",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "items_total": "{n} item total | {n} items total"
     },
     "login_form": {
       "login": "Log in to your account",

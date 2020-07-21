@@ -9,12 +9,21 @@
       @deleted="onItemDeleted(item.id)"
       @updateList="onSaveUpdate"
       @dispatchEvent="onDispatchEvent($event)" />
+    <loading
+      v-if="isLoading"
+      class="pagination__message" />
     <div class="pagination__bottom">
-      <loading v-if="isLoading" />
       <p
-        class="text-center"
-        else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
-      <div>
+        v-if="!isLoading"
+        class="text-center">
+        {{ listStatusErrorCode | statusCodeVerbose }}
+      </p>
+      <div class="pagination__bottom__controls">
+        <div
+          v-if="list && list.total > 0"
+          class="pagination__bottom__controls__message">
+          {{ $tc('webapp.layout.items_total', list.total) }}
+        </div>
         <b-pagination
           :total="list.total"
           :current.sync="page"
@@ -27,6 +36,10 @@
           aria-current-label="Current page"/>
       </div>
     </div>
+  </div>
+  <div v-else-if="list && list.empty">
+    <p
+      class="pagination__message"> {{ emptyMessage }} </p>
   </div>
 </template>
 
@@ -61,6 +74,10 @@ export default {
       type: Object,
       default: () => {},
     },
+    emptyMessage: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -92,12 +109,14 @@ export default {
     async fetch() {
       try {
         await this.list.updateItems(this.page);
+        this.$emit('updated');
         return true;
       } catch (e) {
         this.error = e;
         this.listStatusErrorCode = e.request
           ? e.request.status
           : '';
+        this.$emit('error', this.error);
       }
       return false;
     },
@@ -123,6 +142,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
 .pagination {
   &__bottom {
     min-width: 100%;
@@ -131,6 +152,26 @@ export default {
     max-width: 600px;
     display: flex;
     justify-content: flex-end;
+
+    &__controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      width: 100%;
+      align-items: center;
+
+      &__message {
+        color: $color-grey-dark;
+        padding: 1rem 1rem 1rem 0;
+      }
+    }
+  }
+
+  &
+
+  &__message {
+    text-align: center;
+    width: 100%;
   }
 
 }
