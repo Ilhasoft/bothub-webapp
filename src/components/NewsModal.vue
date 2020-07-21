@@ -93,6 +93,7 @@ export default {
   methods: {
     ...mapActions([
       'setLastVersionSeen',
+      'setTutorialMenuActive',
     ]),
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
@@ -103,6 +104,7 @@ export default {
     onClose() {
       this.active = false;
       this.setLastVersionSeen(this.currentVersion);
+      this.setTutorialMenuActive();
     },
   },
 };

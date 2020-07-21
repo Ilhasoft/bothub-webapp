@@ -8,7 +8,6 @@
         <b-field
           :message="errors.text || errors.language"
         >
-          <!-- <button @click="mostra">show</button> -->
           <example-text-with-highlighted-entities-input
             id="tour-training-step-1"
             ref="textInput"

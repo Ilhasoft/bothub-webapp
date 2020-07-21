@@ -48,11 +48,11 @@
             <div
               v-if="authenticated"
               class="bh-grid__item layout__header__icon-tutorial--center">
-              <bh-icon-button
+              <b-icon
                 class="layout__header__icon-tutorial"
-                size="medium"
-                value="question"
-                @click="openBeginnerTutorialModal()"
+                type="is-white"
+                icon="help-circle"
+                @click.native="openBeginnerTutorialModal()"
               />
             </div>
             <div
@@ -184,7 +184,9 @@ export default {
       this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
     },
     openBeginnerTutorialModal() {
-      this.beginnerTutorialModalOpen = true;
+      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+        this.beginnerTutorialModalOpen = true;
+      }
     },
     orgs() {
       this.$router.push({
@@ -276,6 +278,7 @@ export default {
     &__icon-tutorial {
       color: $color-white;
       margin: 0;
+      cursor: pointer;
 
       &--center {
         align-self: center;

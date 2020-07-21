@@ -8,7 +8,8 @@
       :translate-to="to"
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
-      @dispatchStep="dispatchStep()" />
+      @dispatchStep="dispatchStep()"
+      @update:loading="onLoading($event)"/>
     <p
       v-if="translateList && translateList.empty"
       class="repository-translate__list">
@@ -85,6 +86,10 @@ export default {
           query: this.query,
         });
       }
+      this.$emit('listPhrase', this.translateList);
+    },
+    onLoading(value) {
+      this.$emit('isLoadingContent', value);
     },
     async onTranslated() {
       /* istanbul ignore next */

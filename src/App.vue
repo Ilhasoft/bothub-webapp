@@ -3,23 +3,31 @@
     <bh-toast-notification />
     <news-modal />
     <router-view />
+    <tutorial-modal
+      v-if="process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED"
+      :open="activeMenu"/>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
-import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   NewsModal,
-  Tour,
+  TutorialModal,
 };
 
 export default {
   name: 'App',
   components,
+  computed: {
+    ...mapGetters([
+      'activeMenu',
+    ]),
+  },
   mounted() {
     hotjar.addHotjar();
     this.safariDetected();
