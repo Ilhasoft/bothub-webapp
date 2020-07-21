@@ -86,7 +86,7 @@ export default {
   watch: {
     authenticated() {
       this.$router.push({
-        name: 'home',
+        name: this.authenticated && process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'payment-options' : 'home',
       });
     },
   },
@@ -117,16 +117,13 @@ export default {
       this.errors = {};
       try {
         if (this.data.confirmPassword !== this.data.password) {
-        // eslint-disable-next-line no-unused-expressions
-          this.data.confirmPassword === ''
-            ? this.confirmError = this.$t('webapp.register_form.confirm_password_empty')
-            : this.confirmError = this.$t('webapp.register_form.password_didnt_match');
+          this.confirmError = this.$t(this.data.confirmPassword === ''
+            ? 'webapp.register_form.confirm_password_empty' : 'webapp.register_form.password_didnt_match');
           this.submitting = false;
-          return '';
-        // eslint-disable-next-line no-else-return
-        } else {
-          this.confirmError = '';
+          return false;
         }
+
+        this.confirmError = '';
 
         if (this.data.confirmPassword === '') {
           this.confirmError = this.$t('webapp.register_form.confirm_password_empty');

@@ -174,5 +174,10 @@ export default {
     width: 100%;
   }
 
+  &__message {
+    text-align: center;
+    width: 100%;
+  }
+
 }
 </style>

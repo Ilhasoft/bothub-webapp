@@ -1,10 +1,10 @@
 /* eslint-disable import/first */
 jest.mock('@/api/request');
-
+import Vuex from 'vuex';
 import Buefy from 'buefy';
 import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import store from '@/store';
+// import store from '@/store';
 import CreateRepositoryForm from '@/components/repository/CreateRepositoryForm';
 
 const localVue = createLocalVue();
@@ -13,11 +13,26 @@ localVue.use(BH);
 
 describe('CreateRepositoryForm', () => {
   let wrapper;
+  let getters;
+  let state;
+  let store;
   beforeEach(() => {
-    store.replaceState({
+    state = {
       Auth: {},
       Repository: {},
+    };
+    getters = {
+      activeTutorial: jest.fn(() => ''),
+    };
+    store = new Vuex.Store({
+      modules: {
+        Tutorial: {
+          getters,
+          state,
+        },
+      },
     });
+
     wrapper = shallowMount(CreateRepositoryForm, {
       localVue,
       mocks: {

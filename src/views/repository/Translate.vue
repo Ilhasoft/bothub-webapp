@@ -18,7 +18,10 @@
                 <b-field
                   :label="$t('webapp.translate.translate_from')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select v-model="translate.from" />
+                  <language-select
+                    id="tour-translate-step-1"
+                    :is-step-blocked="translate.from === null"
+                    v-model="translate.from" />
                 </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
@@ -34,13 +37,17 @@
                   :label="$t('webapp.translate.translate_to')"
                   custom-class="repository-translate__field__item__label">
                   <language-select
+                    id="tour-translate-step-2"
                     v-model="translate.to"
-                    :exclude="[translate.from]" />
+                    :is-step-blocked="translate.to === null"
+                    :exclude="[translate.from]"/>
                 </b-field>
               </div>
             </div>
           </div>
-          <div class="repository-translate__translateButtons">
+          <div
+            id="tour-translate-step-6"
+            class="repository-translate__translateButtons">
 
             <b-button
               :class="{'is-primary':!!translate.from && !!translate.to}"
@@ -151,7 +158,8 @@
                 :query="query"
                 :from="translate.from"
                 :to="translate.to"
-                @translated="examplesTranslated()" />
+                @translated="examplesTranslated()"
+                @eventStep="dispatchClick()"/>
             </div>
 
           </div>
@@ -171,11 +179,18 @@
         <login-form hide-forgot-password />
       </div>
     </div>
+    <tour
+      v-if="activeTutorial === 'translate'"
+      :step-count="7"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      name="translate" />
+    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
@@ -185,6 +200,8 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryTranslate',
@@ -196,6 +213,8 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
+    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -216,6 +235,8 @@ export default {
       querySchema: {},
       errors: '',
       errorMessage: '',
+      eventClick: false,
+      eventClickFinish: false,
     };
   },
 
@@ -223,6 +244,10 @@ export default {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters([
+      'activeTutorial',
+      'activeMenu',
+    ]),
     checkSwitch() {
       if (this.isSwitched === true) {
         return this.$t('webapp.translate.export_switch_yes');
@@ -286,6 +311,12 @@ export default {
       this.waitDownloadFile = !this.waitDownloadFile;
       this.translationFile = null;
       return false;
+    },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
     },
     forceFileDownload(response) {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });

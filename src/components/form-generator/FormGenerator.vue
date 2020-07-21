@@ -1,39 +1,51 @@
 <template>
   <div>
     <messages :msgs="msgs" />
-    <b-field
-      v-for="field in fields"
-      v-show="field.type !== 'hidden'"
-      :key="field.name"
-      :label="field.label"
-      :type="field.errors && 'is-danger'"
-      :message="!showLabels ? field.errors : field.errors || field.helpText"
-      :class="!showLabels ? 'field-content' : ''">
-      <div
-        slot="label"
-        class="field-label">
-        <span v-if="showLabels">
-          {{ field.label }}
-        </span>
-        <help-widget
-          v-if="hasHelpIcon(field)"
-          :article-id="helpArticleId" />
-      </div>
-      <b-field :class="!showLabels ? 'input-content' : ''">
-        <component
-          :v-if="field.inputComponent"
-          :is="field.inputComponent"
-          v-bind="field.inputProps"
-          :label-placeholder="field.label"
-          :show-max-lenght="availableMaxLenght"
-          v-model="formData[field.name]"
-          :initial-data="initialData[field.name]"
-          :label="field.label"
-          :help-text="field.helpText"
-          :compact="!showLabels"
-          @input="update()"/>
+    <component
+      :is="grouped ? 'b-field' : 'div'"
+      :grouped="grouped"
+      :group-multiline="grouped">
+      <b-field
+        v-for="field in fields"
+        v-show="field.type !== 'hidden'"
+        :key="field.name"
+        :label="field.label"
+        :type="field.errors && 'is-danger'"
+        :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
+        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
+        <div
+          slot="label"
+          :class="{'field-label': true, [`field-${field.type}__title`]: true}">
+          <span
+            v-if="showLabels">
+            {{ field.label }}
+          </span>
+          <help-widget
+            v-if="hasHelpIcon(field)"
+            :article-id="helpArticleId" />
+        </div>
+        <b-field
+          :class="!showLabels ? 'input-content' : ''">
+          <component
+            :v-if="field.inputComponent"
+            :is="field.inputComponent"
+            v-bind="field.inputProps"
+            :label-placeholder="showLabels ? '' : field.label"
+            :show-max-length="availableMaxLength"
+            v-model="formData[field.name]"
+            :initial-data="initialData[field.name]"
+            :label="field.label"
+            :help-text="hideHelp ? '' : field.helpText"
+            :compact="!showLabels"
+            :class="[
+              field.name === 'language' && newIntelligenceForms ? 'languageNewIntelligence' : '',
+              field.name === 'is_private' && newIntelligenceForms ? 'switchNewIntelligence' : '',
+            ]"
+            @input="update()"
+          />
+        </b-field>
       </b-field>
-    </b-field>
+    </component>
   </div>
 </template>
 
@@ -46,6 +58,7 @@ import MultipleChoice from './inputs/MultipleChoice';
 import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
+import ImageInput from './inputs/ImageInput';
 import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
@@ -60,6 +73,7 @@ const relatedInputComponent = {
   password: PasswordInput,
   hidden: StringInput,
   textarea: TextInput,
+  image: ImageInput,
 };
 
 const components = {
@@ -75,7 +89,7 @@ export default {
       required: true,
       type: Object,
     },
-    availableMaxLenght: {
+    availableMaxLength: {
       type: Boolean,
       default: true,
     },
@@ -91,7 +105,19 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    grouped: {
+      type: Boolean,
+      default: false,
+    },
     settings: {
+      type: Boolean,
+      default: false,
+    },
+    hideHelp: {
+      type: Boolean,
+      default: null,
+    },
+    newIntelligenceForms: {
       type: Boolean,
       default: false,
     },
@@ -154,6 +180,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.languageNewIntelligence{
+  margin-top: 5.5rem;
+}
+.switchNewIntelligence{
+  padding-top: 5.2rem;
+}
 .field-content{
 height: 58px;
 padding-bottom: 0px;
@@ -166,5 +199,15 @@ margin-bottom: 0px;
 .field-label {
     display: flex;
     align-items: center;
+}
+.field-image {
+  margin-left: 1.563rem;
+  &__title {
+    justify-content: center;
+    margin: 0;
+  }
+}
+.field-textarea {
+  min-width: 70%;
 }
 </style>

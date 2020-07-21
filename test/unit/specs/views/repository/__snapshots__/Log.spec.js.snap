@@ -8,5 +8,7 @@ exports[`RepositoryLog.vue renders correctly 1`] = `
     </b-notification-stub>
     <login-form-stub hideforgotpassword="true"></login-form-stub>
   </div>
+  <!---->
+  <tutorial-modal-stub></tutorial-modal-stub>
 </repository-view-base-stub>
 `;

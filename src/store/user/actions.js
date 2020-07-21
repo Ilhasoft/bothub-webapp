@@ -37,9 +37,25 @@ export default {
       });
     }
   },
+  getPaymentHistory(store, limit = 20) {
+    return user.getPaymentHistory(limit);
+  },
   getMyRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.myRepositories(limit);
+  },
+  // TODO
+  getContributingRepositories(store, limit = 20) {
+    /* istanbul ignore next */
+    return user.myRepositories(limit);
+  },
+  // TODO
+  getUsingRepositories(store, limit = 20) {
+    /* istanbul ignore next */
+    return user.myRepositories(limit);
+  },
+  getUserReports(store, { query = {}, limit = 20 }) {
+    return user.getReports(limit, query);
   },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);
@@ -59,5 +75,34 @@ export default {
   },
   searchUser(store, query) {
     return user.search(query);
+  },
+  async getOrgSchema() {
+    // TODO: Unmock
+    return {
+      name: {
+        label: 'Name',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'string',
+      },
+      email: {
+        label: 'Email',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'email',
+      },
+      description: {
+        label: 'Description',
+        max_length: 48,
+        read_only: false,
+        required: true,
+        style: {},
+        type: 'textarea',
+      },
+    };
   },
 };

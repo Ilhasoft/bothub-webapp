@@ -8,8 +8,11 @@
         <b-field
           :message="errors.text || errors.language"
         >
+          <!-- <button @click="mostra">show</button> -->
           <example-text-with-highlighted-entities-input
+            id="tour-training-step-1"
             ref="textInput"
+            :is-step-blocked="textSelected === null"
             v-model="text"
             :entities="entities"
             :available-entities="entitiesList"
@@ -29,6 +32,7 @@
       </div>
       <div class="column">
         <b-field
+          id="tour-training-step-4"
           :message="errors.intent">
           <b-autocomplete
             v-model="intent"
@@ -47,8 +51,10 @@
             :label="validationErrors.join(', ')"
             type="is-dark">
             <b-button
+              id="tour-training-step-5"
               :disabled="!shouldSubmit "
               :loading="submitting"
+              :is-step-blocked="!blockedNextStepTutorial"
               type="is-primary"
               native-type="submit">
               <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
@@ -109,6 +115,7 @@ export default {
       errors: {},
       submitting: false,
       entitiesList: [],
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -200,6 +207,7 @@ export default {
         /* istanbul ignore next */
         this.$refs.textInput.clearSelected();
       }
+      this.$emit('eventStep');
     },
     async onSubmit() {
       this.errors = {};
@@ -218,6 +226,8 @@ export default {
         this.submitting = false;
 
         this.$emit('created');
+        this.$emit('eventStep');
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
         return true;
       } catch (error) {
         /* istanbul ignore next */

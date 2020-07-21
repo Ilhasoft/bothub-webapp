@@ -90,7 +90,11 @@
       <login-form hide-forgot-password />
     </div>
 
-
+    <tour
+      v-if="activeTutorial === 'inbox'"
+      :step-count="4"
+      name="inbox" />
+    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 
 </template>
@@ -104,6 +108,8 @@ import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
 import RepositoryBase from './Base';
+import Tour from '@/components/Tour';
+import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryLog',
@@ -112,6 +118,8 @@ export default {
     RepositoryLogList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
+    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -133,6 +141,8 @@ export default {
   computed: {
     ...mapGetters([
       'authenticated',
+      'activeTutorial',
+      'activeMenu',
     ]),
     languages() {
       return Object.keys(this.repository.evaluate_languages_count)

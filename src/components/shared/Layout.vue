@@ -32,12 +32,15 @@
           <div class="bh-grid bh-grid--row layout__header__options">
             <div
               v-if="authenticated"
+              id="tour-create_intelligence-step-1"
+              :is-step-blocked="!blockedNextStepTutorial"
               class="bh-grid__item hide-mobile">
               <router-link :to="'new'">
                 <b-button
                   type="is-primary"
                   inverted
-                  rounded>
+                  rounded
+                  @click="blockedNextStepTutorial = true">
                   <strong>{{ $t('webapp.layout.newbot') }}</strong>
                 </b-button>
               </router-link>
@@ -55,7 +58,7 @@
             <div
               v-if="authenticated"
               class="bh-grid__item">
-              <bh-dropdown position="left">
+              <b-dropdown position="is-bottom-left">
                 <user-avatar
                   slot="trigger"
                   :profile="myProfile" />
@@ -63,17 +66,18 @@
                   slot="trigger"
                   icon="chevron-down"
                   class="layout__header__icon"/>
-                <bh-dropdown-item @click="openMyProfile()">
+                <b-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
-                </bh-dropdown-item>
-                <bh-dropdown-item
-                  @click="openNewRepository()">
-                  {{ $t('webapp.layout.start_you_bot') }}
-                </bh-dropdown-item>
-                <bh-dropdown-item @click="logout()">
+                </b-dropdown-item>
+                <b-dropdown-item
+                  v-if="paymentEnabled"
+                  @click="orgs()">
+                  {{ $t('webapp.layout.orgs') }}
+                </b-dropdown-item>
+                <b-dropdown-item @click="logout()">
                   {{ $t('webapp.layout.logout') }}
-                </bh-dropdown-item>
-              </bh-dropdown>
+                </b-dropdown-item>
+              </b-dropdown>
             </div>
             <div
               v-if="!authenticated"
@@ -99,9 +103,8 @@
       </div>
     </div>
     <div class="layout__content"><slot /></div>
-    <site-footer />
-    <beginner-tutorial
-      :open.sync="beginnerTutorialModalOpen"/>
+    <site-footer v-if="showFooter" />
+    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -110,12 +113,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
+import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  BeginnerTutorial,
+  TutorialModal,
 };
 
 export default {
@@ -134,10 +137,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    showFooter: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
       beginnerTutorialModalOpen: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -145,6 +153,9 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    paymentEnabled() {
+      return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED;
+    },
   },
   watch: {
     title() {
@@ -166,10 +177,15 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: 'myProfile' });
+      this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
     },
     openBeginnerTutorialModal() {
       this.beginnerTutorialModalOpen = true;
+    },
+    orgs() {
+      this.$router.push({
+        name: 'orgs',
+      });
     },
     signIn() {
       this.$router.push({

@@ -10,9 +10,11 @@
 
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+import Tour from '@/components/Tour';
 
 const components = {
   NewsModal,
+  Tour,
 };
 
 export default {
@@ -42,7 +44,6 @@ export default {
 @import '~bh/src/assets/scss/bh.scss';
 @import '@mdi/font/css/materialdesignicons.css';
 @import 'highlight.js/styles/github.css';
-
 
 .container-padding {
   padding: 0 8px;
@@ -106,4 +107,5 @@ $entities-colors: (
 .align-items-center {
   align-items: center;
 }
+
 </style>
