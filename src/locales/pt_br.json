@@ -19,7 +19,8 @@
       "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência",
       "yes": "Sim",
-      "no": "Não"
+      "no": "Não",
+      "items_total": "{n} item no total | {n} itens no total"
     },
     "login_form": {
       "login": "Entre na sua conta",
