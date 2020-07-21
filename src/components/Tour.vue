@@ -183,7 +183,7 @@ export default {
       if (!this.isBlocked()) this.$tours[this.name].nextStep();
     },
     prevStep() {
-      if (!this.previusBlocked()) this.$tours[this.name].previousStep();
+      if (!this.previousBlocked()) this.$tours[this.name].previousStep();
     },
     skipTutorial() {
       this.$tours[this.name].skip();
@@ -200,10 +200,10 @@ export default {
         return false;
       }
     },
-    previusBlocked() {
+    previousBlocked() {
       const element = document.querySelector(this.steps[this.currentStep].target).attributes;
       try {
-        const { value } = element.getNamedItem('is-previus-blocked');
+        const { value } = element.getNamedItem('is-previous-blocked');
         return value === 'true';
       } catch (_) {
         return false;

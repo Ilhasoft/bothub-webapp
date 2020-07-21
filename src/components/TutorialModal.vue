@@ -37,7 +37,7 @@
           <span
             :class="{'tutorial__item': true,
                      'tutorial__item--finished': item.active}"
-            @click="startTutorial(item.label, item.route, item.previus)">
+            @click="startTutorial(item.label, item.route, item.previous)">
             {{ $t(`webapp.tutorial.items.${item.label}`) }}
           </span>
         </div>
@@ -81,14 +81,14 @@ export default {
     return {
       width: 493,
       list: [
-        { label: 'create_account', route: 'home', previus: '' },
-        { label: 'create_intelligence', route: 'new', previus: 'create_account' },
-        { label: 'training', route: 'training', previus: 'create_intelligence' },
-        { label: 'quick_test', route: '', previus: 'training' },
-        { label: 'evaluate', route: 'evaluate', previus: 'quick_test' },
-        { label: 'inbox', route: 'log', previus: 'evaluate' },
-        { label: 'translate', route: 'translate', previus: 'inbox' },
-        { label: 'integrate', route: 'Integration', previus: 'translate' },
+        { label: 'create_account', route: 'home', previous: '' },
+        { label: 'create_intelligence', route: 'new', previous: 'create_account' },
+        { label: 'training', route: 'training', previous: 'create_intelligence' },
+        { label: 'quick_test', route: '', previous: 'training' },
+        { label: 'evaluate', route: 'evaluate', previous: 'quick_test' },
+        { label: 'inbox', route: 'log', previous: 'evaluate' },
+        { label: 'translate', route: 'translate', previous: 'inbox' },
+        { label: 'integrate', route: 'Integration', previous: 'translate' },
       ],
       repositoryTutorial: null,
       nickname: '',
@@ -191,7 +191,7 @@ export default {
         this.setFinalModal(true);
       }
     },
-    startTutorial(name, target, previus) {
+    startTutorial(name, target, previous) {
       this.setTutorialActive(name);
       if (target === 'home' || target === 'new') {
         if (target === 'home') return '';
@@ -201,8 +201,8 @@ export default {
         }
         this.closeTutorialMenu();
       } else {
-        if (Object.keys(this.finished).includes(previus)
-        || (previus === 'create_intelligence' && this.repositoryTutorial !== null)) {
+        if (Object.keys(this.finished).includes(previous)
+        || (previous === 'create_intelligence' && this.repositoryTutorial !== null)) {
           this.$router.push(`/dashboard/${this.nickname}/${this.repositoryTutorial}/${target}`);
           this.createIntelligenceAlert = false;
           this.closeTutorialMenu();

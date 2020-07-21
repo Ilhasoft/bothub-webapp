@@ -43,7 +43,7 @@
         <category-select
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-2"
-          :is-previus-blocked="true"
+          :is-previous-blocked="true"
           v-model="categories"
           :is-step-blocked="categories.length === 0"
           class="create-repository__form"/>
