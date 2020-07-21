@@ -104,7 +104,9 @@ export default {
     onClose() {
       this.active = false;
       this.setLastVersionSeen(this.currentVersion);
-      this.setTutorialMenuActive();
+      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+        this.setTutorialMenuActive();
+      }
     },
   },
 };

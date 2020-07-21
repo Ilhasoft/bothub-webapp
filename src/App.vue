@@ -4,7 +4,6 @@
     <news-modal />
     <router-view />
     <tutorial-modal
-      v-if="process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED"
       :open="activeMenu"/>
   </div>
 </template>

@@ -6,27 +6,24 @@
       <div class="trainings-repository__new-example">
         <div v-if="authenticated">
           <div v-if="repository.authorization.can_contribute">
-            <div
-              v-if="authenticated && repository.authorization.can_contribute">
-              <div class="trainings-repository__list-wrapper">
-                <div>
-                  <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
-                  <span>{{ $t('webapp.trainings.grid_text2') }}</span>
-                </div>
-                <div
-                  id="tour-training-step-6"
-                  class="trainings-repository__list-wrapper__tutorialStep">
-                  <b-button
-                    v-if="repository.examples__count > 0 && repository.authorization.can_write "
-                    ref="training"
-                    :disabled="loadingStatus"
-                    :loading="loadingStatus"
-                    type="is-secondary"
-                    class="trainings-repository__list-wrapper__button"
-                    @click="openTrainingModal">
-                    {{ $t('webapp.trainings.run_training') }}
-                  </b-button>
-                </div>
+            <div class="trainings-repository__list-wrapper">
+              <div>
+                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+              </div>
+              <div
+                id="tour-training-step-6"
+                class="trainings-repository__list-wrapper__tutorialStep">
+                <b-button
+                  v-if="repository.examples__count > 0 && repository.authorization.can_write "
+                  ref="training"
+                  :disabled="loadingStatus"
+                  :loading="loadingStatus"
+                  type="is-secondary"
+                  class="trainings-repository__list-wrapper__button"
+                  @click="openTrainingModal">
+                  {{ $t('webapp.trainings.run_training') }}
+                </b-button>
               </div>
             </div>
             <new-example-form
