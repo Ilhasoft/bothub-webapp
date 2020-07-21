@@ -170,9 +170,9 @@ export default {
 
       const { data } = response;
 
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: data.detail || 'Something wrong happened...',
-        type: 'danger',
+        type: 'is-danger',
       });
 
       if (!data.detail) {
