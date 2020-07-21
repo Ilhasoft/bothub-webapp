@@ -18,7 +18,7 @@ You can submit all changes to the `staging branch`, where we do whole our tests 
 To keep the `staging branch` in a releasable state, breaking changes and experimental features must be gated behind a feature flag.
 
 #### New Feature
-Use this flag to create a branch for news features
+Use this flag to create a branch for new features
  - `feature/feature_name`
 
 #### Bug fix
