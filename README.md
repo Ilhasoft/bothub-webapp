@@ -23,7 +23,7 @@ These collaboration methods + integration options makes it easier for the user t
 # Bothub Webapp
 
 
-![bothub GIF](https://i.imgur.com/CJU75RB.png)
+![bothub IMG](https://i.imgur.com/CJU75RB.png)
 
 ## What's here
 

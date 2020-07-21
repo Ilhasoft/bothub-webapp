@@ -8,10 +8,10 @@ BotHub is an open platform for predicting, training and sharing NLU (Natural Lan
 
 # How to Contribute
 
-Bothub is an open source project, so we made this document to make de the process for contributing clear and answers some questions that you may have.
+Bothub is an open source project, so we made this document to make the process for contributing clear and answers some questions that you may have.
 
 ## Branch Organization
-You can  submit all changes to the `staging branch`, where we do whole our tests for new features
+You can submit all changes to the `staging branch`, where we do whole our tests for new features
 
 ## Flags for your branch
 
