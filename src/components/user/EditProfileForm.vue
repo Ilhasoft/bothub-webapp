@@ -9,6 +9,7 @@
       :errors="errors"
       :initial-data="initialData"
       :available-max-length="false"
+      hide-help
       class="edit-field" />
     <form-generator
       v-if="groupSchema && myProfile"
@@ -18,6 +19,7 @@
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
+      hide-help
       class="edit-field" />
     <div>
       <a @click="openChangePasswordModal()">

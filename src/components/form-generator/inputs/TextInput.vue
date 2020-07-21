@@ -29,6 +29,12 @@ export default {
       value: this.initialData,
     };
   },
+  watch: {
+    initialData() {
+      if (this.value && this.value.length > 0) return;
+      this.value = this.initialData;
+    },
+  },
   mounted() {
     this.update();
   },

@@ -20,7 +20,8 @@
       "authorization_success": "Request made! Wait for review of an admin.",
       "error_to_retrieve_bot": "Error retrieving intelligence",
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "items_total": "{n} item total | {n} items total"
     },
     "login_form": {
       "login": "Log in to your account",
@@ -171,6 +172,8 @@
       "do_not_log": "No logs",
       "expected_intent": "Expected intent",
       "predicted_intent": "Predicted intent",
+      "expected_entity": "Expected entity",
+      "predicted_entity": "Predicted entity",
       "no_expected_intent": "No expected intent",
       "no_intent_predicted": "No intention predicted",
       "confidence": "Confidence",
@@ -343,7 +346,7 @@
       "repositories": "Intelligences",
       "modal_edit_your_profile": "Edit your profile",
       "modal_change_password": "Change Password",
-      "edit": "Edit",
+      "edit": "Save",
       "trained_at": "Trained at {trained} by {by}",
       "train_fail": "Train failed at {failed}",
       "training": "Training...",
