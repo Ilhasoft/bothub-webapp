@@ -11,7 +11,7 @@
         :key="field.name"
         :type="field.errors && 'is-danger'"
         :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
-        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
+        :class="{[`field-${field.type}`]: true}">
         <div
           v-if="showLabels"
           slot="label"
@@ -28,7 +28,7 @@
           :is="field.inputComponent"
           v-bind="field.inputProps"
           :label-placeholder="showLabels ? '' : field.label"
-          :show-max-length="availableMaxLength"
+          :show-max-length="showLabels"
           v-model="formData[field.name]"
           :initial-data="initialData[field.name]"
           :label="field.label"
@@ -36,10 +36,10 @@
           :help-text="hideHelp ? '' : field.helpText"
           :compact="!showLabels"
           :class="{
-            'languageNewIntelligence': field.name === 'language' && newIntelligenceForms,
             'switchNewIntelligence': field.name === 'is_private' && newIntelligenceForms,
-            'input-content': !showLabels,
-            'field-generator-field': true,
+            [`field--${showLabels ? 'labeled' : 'unlabeled'}`]: !field.inputProps.max_length,
+            [`field--${showLabels ? 'labeled' : 'unlabeled'}__maxLength`]:
+              field.inputProps.max_length,
           }"
           @input="update()"
         />
@@ -184,25 +184,27 @@ export default {
 
 <style lang="scss" scoped>
 
-// .languageNewIntelligence{
-//   margin-top: 5.5rem;
-// }
-// .switchNewIntelligence{
-//   padding-top: 5.2rem;
-// }
-.field-generator-field {
-  margin-bottom: 1rem;
+.switchNewIntelligence{
+  padding-top: calc(5.2rem - 0.625rem);
+}
+.field {
+  &--labeled {
+    margin-bottom: 1.563rem;
+
+    &__maxLength {
+      margin-bottom: calc(1.563rem - 15px);
+    }
+  }
+
+  &--unlabled {
+    margin-bottom: 0.625rem;
+
+    &__maxLength {
+      margin-bottom: calc(0.625rem - 15px);
+    }
+  }
 }
 
-.field-content {
-height: 58px;
-padding-bottom: 0px;
-margin-bottom: 0px;
-}
-.input-content{
-padding-bottom: 0px;
-margin-bottom: 0px;
-}
 .field-label {
     display: flex;
     align-items: center;
