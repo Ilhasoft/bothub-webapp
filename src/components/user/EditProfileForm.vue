@@ -89,20 +89,22 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    this.groupSchema = {
-      biography: {
-        label: 'Biography',
-        read_only: false,
-        style: { grouped: true },
-        type: 'textarea',
-      },
-      image: {
-        label: 'Avatar',
-        read_only: false,
-        style: { grouped: true },
-        type: 'image',
-      },
-    };
+    if (process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) {
+      this.groupSchema = {
+        biography: {
+          label: 'Biography',
+          read_only: false,
+          style: { grouped: true },
+          type: 'textarea',
+        },
+        image: {
+          label: 'Avatar',
+          read_only: false,
+          style: { grouped: true },
+          type: 'image',
+        },
+      };
+    }
   },
   methods: {
     ...mapActions([

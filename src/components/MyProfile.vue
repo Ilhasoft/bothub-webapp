@@ -74,7 +74,6 @@ import ChangePasswordForm from '@/components/user/ChangePasswordForm';
 import LoginIsRequired from '@/components/auth/LoginIsRequired';
 import UserAvatar from '@/components/user/UserAvatar';
 
-
 export default {
   name: 'MyProfile',
   components: {

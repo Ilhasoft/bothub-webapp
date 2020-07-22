@@ -9,15 +9,14 @@
         v-for="field in fields"
         v-show="field.type !== 'hidden'"
         :key="field.name"
-        :label="field.label"
         :type="field.errors && 'is-danger'"
         :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
         :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
         <div
+          v-if="showLabels"
           slot="label"
           :class="{'field-label': true, [`field-${field.type}__title`]: true}">
-          <span
-            v-if="showLabels">
+          <span>
             {{ field.label }}
           </span>
           <help-widget
