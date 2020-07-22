@@ -9,7 +9,6 @@
       </b-notification>
       <div>
         <b-checkbox
-          id="tour-inbox-step-1"
           v-model="select"
           :native-value="selectAll">
           {{ $t('webapp.inbox.select_all') }}
@@ -108,6 +107,7 @@ export default {
     ...mapGetters({
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
+      activeTutorial: 'activeTutorial',
     }),
     confidenceVerify() {
       if (this.logData.length > 1) {
@@ -155,12 +155,14 @@ export default {
       });
     },
     showModalTraining(typeModal) {
+      if (this.activeTutorial === 'inbox') return '';
+
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
           type: 'is-danger',
         });
-        return;
+        return '';
       }
       this.$buefy.modal.open({
         props: {
@@ -186,14 +188,17 @@ export default {
           },
         },
       });
+      return '';
     },
     showModalSentence(typeModal) {
+      if (this.activeTutorial === 'inbox') return '';
+
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
           type: 'is-danger',
         });
-        return;
+        return '';
       }
       this.$buefy.modal.open({
         props: {
@@ -205,6 +210,7 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
+        width: 400,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -213,6 +219,7 @@ export default {
           },
         },
       });
+      return '';
     },
     verifyIsCorrected(value) {
       if (value === this.nlp.intent.name) {
@@ -302,6 +309,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+.teste{
+  border: 1px solid red;
+}
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;

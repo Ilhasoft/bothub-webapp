@@ -72,7 +72,7 @@
         <repository-log-list
           :per-page="perPage"
           :query="query"
-          :editable="repository.authorization.can_contribute" />
+          :editable="repository.authorization.can_contribute"/>
       </div>
       <authorization-request-notification
         v-else
