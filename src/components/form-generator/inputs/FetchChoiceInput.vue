@@ -41,7 +41,7 @@ export default {
     },
   },
   watch: {
-    org() {
+    input() {
       this.$emit('input', this.input.value);
     },
   },

@@ -169,7 +169,7 @@ export default {
         org: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
           label: this.$t('webapp.orgs.owner'),
           fetch: this.getOrgs,
-          type: 'fetch choice',
+          type: 'multiple choice',
         } : {},
       };
       // eslint-disable-next-line camelcase

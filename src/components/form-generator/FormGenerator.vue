@@ -74,7 +74,7 @@ const relatedInputComponent = {
   hidden: StringInput,
   textarea: TextInput,
   image: ImageInput,
-  'fetch choice': FetchChoiceInput,
+  'multiple choice fetch': FetchChoiceInput,
 };
 
 const components = {
@@ -152,7 +152,7 @@ export default {
             label,
             helpText,
             inputProps,
-            inputComponent: relatedInputComponent[type],
+            inputComponent: relatedInputComponent[fetch ? `${type} fetch` : type],
             errors: this.errors[name],
             fetch,
           };
