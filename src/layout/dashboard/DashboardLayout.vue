@@ -68,6 +68,7 @@
             <div
               class="dashboard-layout__main-panel__header__right__container__tutorial">
               <b-icon
+                v-if="authenticated && tutorialEnabled"
                 id="tour-tutorial_button-step-0"
                 type="is-white"
                 icon="help-circle"
@@ -175,6 +176,9 @@ export default {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.selectedRepositoryselectedRepository) return 0;
       return Object.keys(this.getCurrentRepository.languages_warnings).length;
+    },
+    tutorialEnabled() {
+      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
   },
   methods: {

@@ -46,7 +46,7 @@
               </router-link>
             </div>
             <div
-              v-if="authenticated"
+              v-if="authenticated && tutorialEnabled"
               class="bh-grid__item layout__header__icon-tutorial--center">
               <b-icon
                 class="layout__header__icon-tutorial"
@@ -155,6 +155,9 @@ export default {
     ]),
     paymentEnabled() {
       return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED;
+    },
+    tutorialEnabled() {
+      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
   },
   watch: {
