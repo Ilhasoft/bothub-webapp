@@ -7,7 +7,8 @@
         :closable="false">
         <b-loading :active.sync="loadingLogs"/>
       </b-notification>
-      <div>
+      <div
+        id="tour-inbox-step-1">
         <b-checkbox
           v-model="select"
           :native-value="selectAll">
@@ -155,14 +156,14 @@ export default {
       });
     },
     showModalTraining(typeModal) {
-      if (this.activeTutorial === 'inbox') return '';
+      if (this.activeTutorial === 'inbox') return;
 
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
           type: 'is-danger',
         });
-        return '';
+        return;
       }
       this.$buefy.modal.open({
         props: {
@@ -188,17 +189,16 @@ export default {
           },
         },
       });
-      return '';
     },
     showModalSentence(typeModal) {
-      if (this.activeTutorial === 'inbox') return '';
+      if (this.activeTutorial === 'inbox') return;
 
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
           type: 'is-danger',
         });
-        return '';
+        return;
       }
       this.$buefy.modal.open({
         props: {
@@ -218,7 +218,6 @@ export default {
           },
         },
       });
-      return '';
     },
     verifyIsCorrected(value) {
       if (value === this.nlp.intent.name) {

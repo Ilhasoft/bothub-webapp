@@ -2,7 +2,6 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-
     <div
       v-if="authenticated"
       class="repository-log">
