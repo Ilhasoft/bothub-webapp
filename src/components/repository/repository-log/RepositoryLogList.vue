@@ -271,15 +271,6 @@ export default {
         }
       });
     },
-    // showDeleteModal() {
-    //   console.log(this.logData);
-    //   this.$buefy.dialog.confirm({
-    //     message: 'Você tem certeza que deseja deletar as frases ?',
-    //     onConfirm: () => {
-    //       this.$buefy.toast.open('User confirmed');
-    //     },
-    //   });
-    // },
     showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = Array.join(messages, ',');
