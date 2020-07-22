@@ -51,14 +51,14 @@ describe('QuickTest.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  // describe('click on expand button', () => {
-  //   beforeEach(() => {
-  //     const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
-  //     expandQuickTest.trigger('click');
-  //   });
+  describe('click on expand button', () => {
+    beforeEach(() => {
+      const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
+      expandQuickTest.trigger('click');
+    });
 
-  //   test('expanded should be truth', () => {
-  //     expect(wrapper.vm.expanded).toBeTruthy();
-  //   });
-  // });
+    test('expanded should be truth', () => {
+      expect(wrapper.vm.expanded).toBeTruthy();
+    });
+  });
 });

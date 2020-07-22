@@ -509,9 +509,12 @@
       "title": "Welcome to Bothub",
       "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
       "skip": "Skip for now",
-      "previous": "Previous",
-      "next": "Next",
-      "finish": "Finish",
+      "previous_step": "Previous",
+      "next_step": "Next",
+      "finish_step": "Finish",
+      "confirm_step":"Confirm",
+      "finish_tutorial": "Finish",
+      "alert_message": "You need to follow the sequence of steps",
       "items": {
           "create_account": "Create account",
           "create_intelligence": "Create your first intelligence",
@@ -527,20 +530,20 @@
           "step_1": "Or create your own intelligence by clicking here."
       },
       "create_intelligence_forms": {
-          "step_0": "Enter with all intelligence data",
+          "step_0": "Fill in the form with your intelligence data like name, description and language",
           "step_1": "And go forward",
           "step_2": "Choose categories for your intelligence, based on the area in which it will be used, and submit.",
           "step_3": "And go forward",
-          "step_4": "Your intelligence is ready to be trained. Just get started."
+          "step_4": "Your intelligence is ready to be created. Just send."
       },
       "training": {
           "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
-          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Ex.: I want a pizza",
-          "step_2": "If you can, also add some custom entity to your sentence. Just select the desired word and click here. <br> Ex word.: pizza",
+          "step_1": "Enter a sentence here that you would like your intelligence to understand and select it. <br> Ex.: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
+          "step_2": "Now, also add some custom entity to your selected sentence. Just click here and type your entidade. <br> <strong>Tip</strong>: If you selected pizza the entity is food",
           "step_3": "Now, write the entity. <br> Ex entity.: food",
           "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
           "step_5": "Finally, submit your sentence.",
-          "step_6": "Click here to run your training. <br> Tip: To train, you must have add at least two intentions with two sentences each."
+          "step_6": "Click here to run your training. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
@@ -548,7 +551,7 @@
         "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
         "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex .: affirmative",
         "step_4": "And finally, submit your sentence.",
-        "step_5": "Click here to run your test. <br> Tip: To test you must have add at least two intentions with two sentences each."
+        "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
     },
       "quick_test": {
         "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
@@ -564,7 +567,7 @@
       },
       "translate": {
         "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
-        "step_1": "Select the trained language.",
+        "step_1": "Select the trained language. <br> <strong>Tip</strong>: You need to have phrases trained in that language.",
         "step_2": "Select the language for translation and enter.",
         "step_3": "Choose one sentence and click in translate.",
         "step_4": "Enter a sentence translation here.",
@@ -574,6 +577,9 @@
       "integrate": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
+    },
+    "tutorial_button":{
+      "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
   }
 }
