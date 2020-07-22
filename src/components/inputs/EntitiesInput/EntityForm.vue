@@ -11,7 +11,6 @@
           <bh-autocomplete
             id="tour-training-step-3"
             ref="entityInputField"
-            :value="entity"
             :data="availableEntities"
             :formatters="entityFormatters"
             @input="handleChange"
@@ -83,10 +82,6 @@ export default {
   },
   props: {
     entityClass: {
-      type: String,
-      required: true,
-    },
-    entity: {
       type: String,
       required: true,
     },

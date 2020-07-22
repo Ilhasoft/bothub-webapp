@@ -20,16 +20,17 @@
           :show-labels="false"
           :new-intelligence-forms="true"
           class="create-repository__form"/>
-        <span
+        <div
           id="tour-create_intelligence_forms-step-1"
-          :is-step-blocked="!blockedNextStepTutorial">
+          :is-step-blocked="!blockedNextStepTutorial"
+          class="create-repository__form__style">
           <b-button
             :disabled="!checkFormData"
             type="is-primary"
-            class="create-repository__form__firstButtonNext"
+            class="create-repository__form__style__button"
             @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
           </b-button>
-        </span>
+        </div>
       </div>
       <div
         v-show="current==1"
@@ -42,7 +43,7 @@
         <category-select
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-2"
-          :is-previus-blocked="true"
+          :is-previous-blocked="true"
           v-model="categories"
           :is-step-blocked="categories.length === 0"
           class="create-repository__form"/>
@@ -54,7 +55,9 @@
           </b-button>
           <span
             id="tour-create_intelligence_forms-step-3"
-            :is-step-blocked="blockedNextStepTutorial">
+            :is-step-blocked="blockedNextStepTutorial"
+            :class="activeTutorial === 'create_intelligence'
+            ? 'create-repository__form__finishButton' : ''">
             <b-button
               native-type="submit"
               type="is-primary"
@@ -97,6 +100,7 @@
       :step-count="4"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
+      :skip-if-back-page="eventClickBackPage"
       name="create_intelligence_forms"/>
     <tutorial-modal :open="activeMenu"/>
   </div>
@@ -143,6 +147,7 @@ export default {
       eventClick: false,
       eventClickFinish: false,
       blockedNextStepTutorial: false,
+      eventClickBackPage: false,
     };
   },
   computed: {
@@ -202,10 +207,14 @@ export default {
         validateOnChange: true,
       });
   },
+  beforeDestroy() {
+    this.checkIfIsTutorial();
+  },
   methods: {
     ...mapActions([
       'getNewRepositorySchema',
       'newRepository',
+      'setTutorialInactive',
     ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
@@ -213,6 +222,11 @@ export default {
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
+    },
+    checkIfIsTutorial() {
+      if (this.activeTutorial === 'create_intelligence') {
+        this.setTutorialInactive();
+      }
     },
     repositoryDetailsRouterParams() {
       return {
@@ -271,10 +285,6 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.teste{
-  border: 1px solid red;
-  z-index: 10
-}
     .create-repository {
         display: flex;
         justify-content: space-around;
@@ -304,7 +314,7 @@ export default {
         &__form {
             text-align: left;
             margin: 3rem 0;
-
+            width: 30.400rem;
             &__final--message {
               display: flex;
               align-items: center;
@@ -324,9 +334,10 @@ export default {
                     padding: 0 3rem ;
                 }
             }
-
+            &__finishButton{
+              border-radius: 6px;
+            }
             &__buttons{
-              margin-top: 0.5rem;
               box-shadow: 0px 3px 6px #00000029;
               border-radius: 6px;
               width: 6.875rem;
@@ -336,15 +347,20 @@ export default {
                 }
             }
 
-            &__firstButtonNext{
-              margin-top: 4rem;
-              box-shadow: 0px 3px 6px #00000029;
-              border-radius: 6px;
+            &__style{
+              margin: 7rem auto 0;
               width: 6.875rem;
               height: 2.188rem;
+              border-radius: 6px;
               @media (max-width: $mobile-width*1.2) {
-                 margin-top: 7rem;
-                }
+                   margin-top: 10rem;
+              }
+              &__button{
+                box-shadow: 0px 3px 6px #00000029;
+                border-radius: 6px;
+                width: 6.875rem;
+                height: 2.188rem;
+              }
             }
         }
 

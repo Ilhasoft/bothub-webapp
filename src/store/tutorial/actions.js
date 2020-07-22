@@ -13,6 +13,13 @@ export default {
   async setTutorialMenuInactive({ commit }) {
     commit('updateActiveMenu', false);
   },
+  async setFinalModal({ commit }, value) {
+    commit('updateFinalModal', value);
+    localStorage.setItem('finalizationMessage', true);
+  },
+  async setFinalizationMessage({ commit }) {
+    commit('finalizationMessage', localStorage.getItem('finalizationMessage'));
+  },
   async finishTutorial({ commit }, name) {
     commit('updateActiveTutorial', null);
     const finishedString = localStorage.getItem('finishedTutorials') || '{}';
@@ -22,6 +29,20 @@ export default {
   },
   async updateTutorialsDone({ commit }) {
     commit('tutorialsDone', JSON.parse(localStorage.getItem('finishedTutorials')));
+  },
+  // eslint-disable-next-line no-unused-vars
+  async setCreateIntelligence({ commit }, name) {
+    const finishedString = localStorage.getItem('finishedTutorials') || '{}';
+    const finished = JSON.parse(finishedString);
+    finished[name] = 'finished';
+    localStorage.setItem('finishedTutorials', JSON.stringify(finished));
+  },
+  // eslint-disable-next-line no-unused-vars
+  async clearTutorial() {
+    localStorage.removeItem('finishedTutorials');
+  },
+  async clearFinalizatioMessage() {
+    localStorage.removeItem('finalizationMessage');
   },
   getUserRepositories(store, limit, offset) {
     return tutorial.myRepositories(limit, offset);

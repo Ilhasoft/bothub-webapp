@@ -18,7 +18,12 @@
         class="text-center">
         {{ listStatusErrorCode | statusCodeVerbose }}
       </p>
-      <div>
+      <div class="pagination__bottom__controls">
+        <div
+          v-if="list && list.total > 0"
+          class="pagination__bottom__controls__message">
+          {{ $tc('webapp.layout.items_total', list.total) }}
+        </div>
         <b-pagination
           :total="list.total"
           :current.sync="page"
@@ -137,6 +142,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
 .pagination {
   &__bottom {
     min-width: 100%;
@@ -145,6 +152,26 @@ export default {
     max-width: 600px;
     display: flex;
     justify-content: flex-end;
+
+    &__controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      width: 100%;
+      align-items: center;
+
+      &__message {
+        color: $color-grey-dark;
+        padding: 1rem 1rem 1rem 0;
+      }
+    }
+  }
+
+  &
+
+  &__message {
+    text-align: center;
+    width: 100%;
   }
 
   &__message {
