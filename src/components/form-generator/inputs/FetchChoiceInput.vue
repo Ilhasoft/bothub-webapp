@@ -8,10 +8,8 @@
       expanded>
       <option
         v-for="option in options"
-        :key="option.id"
-        :value="option.id"> {{ option.name }} </option>
-      <option
-        :value="null"> You </option>
+        :key="option.label"
+        :value="option"> {{ option.label }} </option>
     </b-select>
   </b-field>
 </template>
@@ -44,7 +42,7 @@ export default {
   },
   watch: {
     org() {
-      this.$emit('input', this.input);
+      this.$emit('input', this.input.value);
     },
   },
   mounted() {
@@ -55,7 +53,6 @@ export default {
       'getAllOrgs',
     ]),
     async getOptions() {
-      console.log('getting orgs');
       this.loading = true;
       try {
         const list = await this.fetch();

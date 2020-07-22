@@ -9,8 +9,7 @@
       :errors="errors"
       :initial-data="initialData"
       :available-max-length="false"
-      hide-help
-      class="edit-field" />
+      hide-help />
     <form-generator
       v-if="groupSchema && myProfile"
       :schema="groupSchema"
@@ -19,8 +18,7 @@
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
-      hide-help
-      class="edit-field" />
+      hide-help />
     <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
@@ -145,10 +143,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-  .edit-field {
-    margin-bottom: 2.313rem;
-  }
 
   .change-password {
     background-color: white;

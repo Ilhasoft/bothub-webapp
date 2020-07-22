@@ -301,6 +301,8 @@
       "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
     },
     "orgs": {
+      "owner": "Pertence a",
+      "my_user": "Meu usuário",
       "created_by": "Criado por",
       "created": "Criado",
       "repositories": "{n} repositórios | {n} repositório | {n} repositórios",

@@ -154,6 +154,7 @@ export default {
     ...mapGetters([
       'activeTutorial',
       'activeMenu',
+      'myProfile',
     ]),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
@@ -166,7 +167,7 @@ export default {
       const { is_private, ...schema } = computed;
       const orgField = {
         org: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
-          label: 'Owner Intelligence',
+          label: this.$t('webapp.orgs.owner'),
           fetch: this.getOrgs,
           type: 'fetch choice',
         } : {},
@@ -249,7 +250,14 @@ export default {
       this.loading = true;
       const list = await this.getAllOrgs();
       await list.getAllItems();
-      return list.items;
+      const options = list.items.map(org => ({
+        label: org.name,
+        value: org.id,
+      }));
+      return [
+        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
+        ...options,
+      ];
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
