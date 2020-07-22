@@ -146,7 +146,6 @@ export default {
       this.onFinishTutorial();
     },
   },
-
   mounted() {
     this.startTutorial();
   },
