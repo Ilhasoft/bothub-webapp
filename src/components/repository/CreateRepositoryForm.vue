@@ -9,6 +9,7 @@
         <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
+        <org-select v-model="org" />
         <form-generator
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-0"
@@ -117,6 +118,7 @@ import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
 import Tour from '@/components/Tour';
 import TutorialModal from '@/components/TutorialModal';
+import OrgSelect from '@/components/org/OrgSelect';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -127,6 +129,7 @@ export default {
     CategorySelect,
     Tour,
     TutorialModal,
+    OrgSelect,
   },
   props: {
     userName: {
@@ -148,6 +151,7 @@ export default {
       eventClickFinish: false,
       blockedNextStepTutorial: false,
       eventClickBackPage: false,
+      orgId: null,
     };
   },
   computed: {
@@ -259,7 +263,7 @@ export default {
     async onSubmit() {
       const categoryValues = this.categories.map(category => category.id);
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
-        { ...this.data, categories: categoryValues });
+        { ...this.data, categories: categoryValues, owner: this.orgId });
       this.submitting = true;
       this.errors = {};
 
