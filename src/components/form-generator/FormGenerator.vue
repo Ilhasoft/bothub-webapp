@@ -24,26 +24,26 @@
             v-if="hasHelpIcon(field)"
             :article-id="helpArticleId" />
         </div>
-        <b-field
-          :class="!showLabels ? 'input-content' : ''">
-          <component
-            :v-if="field.inputComponent"
-            :is="field.inputComponent"
-            v-bind="field.inputProps"
-            :label-placeholder="showLabels ? '' : field.label"
-            :show-max-length="availableMaxLength"
-            v-model="formData[field.name]"
-            :initial-data="initialData[field.name]"
-            :label="field.label"
-            :help-text="hideHelp ? '' : field.helpText"
-            :compact="!showLabels"
-            :class="[
-              field.name === 'language' && newIntelligenceForms ? 'languageNewIntelligence' : '',
-              field.name === 'is_private' && newIntelligenceForms ? 'switchNewIntelligence' : '',
-            ]"
-            @input="update()"
-          />
-        </b-field>
+        <component
+          :v-if="field.inputComponent"
+          :is="field.inputComponent"
+          v-bind="field.inputProps"
+          :label-placeholder="showLabels ? '' : field.label"
+          :show-max-length="availableMaxLength"
+          v-model="formData[field.name]"
+          :initial-data="initialData[field.name]"
+          :label="field.label"
+          :fetch="field.fetch"
+          :help-text="hideHelp ? '' : field.helpText"
+          :compact="!showLabels"
+          :class="{
+            'languageNewIntelligence': field.name === 'language' && newIntelligenceForms,
+            'switchNewIntelligence': field.name === 'is_private' && newIntelligenceForms,
+            'input-content': !showLabels,
+            'field-generator-field': true,
+          }"
+          @input="update()"
+        />
       </b-field>
     </component>
   </div>
@@ -59,6 +59,7 @@ import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
 import ImageInput from './inputs/ImageInput';
+import FetchChoiceInput from './inputs/FetchChoiceInput';
 import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
@@ -74,6 +75,7 @@ const relatedInputComponent = {
   hidden: StringInput,
   textarea: TextInput,
   image: ImageInput,
+  'fetch choice': FetchChoiceInput,
 };
 
 const components = {
@@ -136,6 +138,7 @@ export default {
             label,
             style,
             help_text: helpText,
+            fetch,
             ...inputProps
           } = this.schema[name];
 
@@ -152,6 +155,7 @@ export default {
             inputProps,
             inputComponent: relatedInputComponent[type],
             errors: this.errors[name],
+            fetch,
           };
         })
         .filter(field => !!field);
@@ -181,13 +185,17 @@ export default {
 
 <style lang="scss" scoped>
 
-.languageNewIntelligence{
-  margin-top: 5.5rem;
+// .languageNewIntelligence{
+//   margin-top: 5.5rem;
+// }
+// .switchNewIntelligence{
+//   padding-top: 5.2rem;
+// }
+.field-generator-field {
+  margin-bottom: 1rem;
 }
-.switchNewIntelligence{
-  padding-top: 5.2rem;
-}
-.field-content{
+
+.field-content {
 height: 58px;
 padding-bottom: 0px;
 margin-bottom: 0px;

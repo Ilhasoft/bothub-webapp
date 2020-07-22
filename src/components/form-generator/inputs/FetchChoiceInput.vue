@@ -3,7 +3,9 @@
     <b-select
       :loading="loading"
       :disabled="isDisabled"
-      v-model="org">
+      :placeholder="labelPlaceholder"
+      v-model="input"
+      expanded>
       <option
         v-for="option in options"
         :key="option.id"
@@ -18,10 +20,19 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'OrgSelect',
+  props: {
+    fetch: {
+      type: Function,
+      default: async () => [],
+    },
+    labelPlaceholder: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
-      org: null,
+      input: null,
       options: [],
       loading: false,
     };
@@ -33,23 +44,22 @@ export default {
   },
   watch: {
     org() {
-      this.$emit('input', this.org);
+      this.$emit('input', this.input);
     },
   },
   mounted() {
-    this.getOrgs();
+    this.getOptions();
   },
   methods: {
     ...mapActions([
       'getAllOrgs',
     ]),
-    async getOrgs() {
+    async getOptions() {
       console.log('getting orgs');
       this.loading = true;
       try {
-        const response = await this.getAllOrgs();
-        await response.updateItems(1);
-        this.options = response.items;
+        const list = await this.fetch();
+        this.options = list;
       } catch (e) {
         console.log(e);
       } finally {

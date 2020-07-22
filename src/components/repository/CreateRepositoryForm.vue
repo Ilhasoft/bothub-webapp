@@ -9,7 +9,6 @@
         <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
-        <org-select v-model="org" />
         <form-generator
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-0"
@@ -118,7 +117,6 @@ import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
 import Tour from '@/components/Tour';
 import TutorialModal from '@/components/TutorialModal';
-import OrgSelect from '@/components/org/OrgSelect';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -129,7 +127,6 @@ export default {
     CategorySelect,
     Tour,
     TutorialModal,
-    OrgSelect,
   },
   props: {
     userName: {
@@ -151,7 +148,6 @@ export default {
       eventClickFinish: false,
       blockedNextStepTutorial: false,
       eventClickBackPage: false,
-      orgId: null,
     };
   },
   computed: {
@@ -168,8 +164,13 @@ export default {
       }, {});
       // eslint-disable-next-line camelcase
       const { is_private, ...schema } = computed;
+      const owner = {
+        label: 'Owner Intelligence',
+        fetch: this.getOrgs,
+        type: 'fetch choice',
+      };
       // eslint-disable-next-line camelcase
-      if (is_private) { return { ...schema, is_private }; }
+      if (is_private) { return { ...schema, owner, is_private }; }
       return computed;
     },
     filteredSchema() {
@@ -219,6 +220,7 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
       'setTutorialInactive',
+      'getAllOrgs',
     ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
@@ -240,6 +242,12 @@ export default {
           slug: this.resultParams.slug,
         },
       };
+    },
+    async getOrgs() {
+      this.loading = true;
+      const list = await this.getAllOrgs();
+      await list.getAllItems();
+      return list.items;
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
@@ -263,7 +271,7 @@ export default {
     async onSubmit() {
       const categoryValues = this.categories.map(category => category.id);
       this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
-        { ...this.data, categories: categoryValues, owner: this.orgId });
+        { ...this.data, categories: categoryValues });
       this.submitting = true;
       this.errors = {};
 
