@@ -210,7 +210,6 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
-        width: 400,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -309,9 +308,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-.teste{
-  border: 1px solid red;
-}
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;
