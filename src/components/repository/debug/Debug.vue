@@ -116,7 +116,7 @@ export default {
       return Object.entries(this.relevantData).map(entry => ({
         text: entry[0],
         relevance: entry[1],
-      })).sort((a, b) => a.relevance.relevance < b.relevance.relevance);
+      })).sort((a, b) => (a.relevance.relevance < b.relevance.relevance ? 1 : -1));
     },
     maxRelevance() {
       if (this.tableData.length === 0) return 0;

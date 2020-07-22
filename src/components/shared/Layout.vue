@@ -46,13 +46,13 @@
               </router-link>
             </div>
             <div
-              v-if="authenticated"
+              v-if="authenticated && tutorialEnabled"
               class="bh-grid__item layout__header__icon-tutorial--center">
-              <bh-icon-button
+              <b-icon
                 class="layout__header__icon-tutorial"
-                size="medium"
-                value="question"
-                @click="openBeginnerTutorialModal()"
+                type="is-white"
+                icon="help-circle"
+                @click.native="openBeginnerTutorialModal()"
               />
             </div>
             <div
@@ -73,10 +73,6 @@
                   v-if="paymentEnabled"
                   @click="orgs()">
                   {{ $t('webapp.layout.orgs') }}
-                </b-dropdown-item>
-                <b-dropdown-item
-                  @click="openNewRepository()">
-                  {{ $t('webapp.layout.start_you_bot') }}
                 </b-dropdown-item>
                 <b-dropdown-item @click="logout()">
                   {{ $t('webapp.layout.logout') }}
@@ -160,6 +156,9 @@ export default {
     paymentEnabled() {
       return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED;
     },
+    tutorialEnabled() {
+      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+    },
   },
   watch: {
     title() {
@@ -184,7 +183,9 @@ export default {
       this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
     },
     openBeginnerTutorialModal() {
-      this.beginnerTutorialModalOpen = true;
+      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+        this.beginnerTutorialModalOpen = true;
+      }
     },
     orgs() {
       this.$router.push({
@@ -276,6 +277,7 @@ export default {
     &__icon-tutorial {
       color: $color-white;
       margin: 0;
+      cursor: pointer;
 
       &--center {
         align-self: center;

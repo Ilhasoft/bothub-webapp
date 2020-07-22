@@ -11,7 +11,7 @@
         :key="field.name"
         :label="field.label"
         :type="field.errors && 'is-danger'"
-        :message="!showLabels ? field.errors : field.errors || field.helpText"
+        :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
         :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
         <div
           slot="label"
@@ -30,12 +30,12 @@
             :v-if="field.inputComponent"
             :is="field.inputComponent"
             v-bind="field.inputProps"
-            :label-placeholder="field.label"
+            :label-placeholder="showLabels ? '' : field.label"
             :show-max-length="availableMaxLength"
             v-model="formData[field.name]"
             :initial-data="initialData[field.name]"
             :label="field.label"
-            :help-text="field.helpText"
+            :help-text="hideHelp ? '' : field.helpText"
             :compact="!showLabels"
             :class="[
               field.name === 'language' && newIntelligenceForms ? 'languageNewIntelligence' : '',
@@ -112,6 +112,10 @@ export default {
     settings: {
       type: Boolean,
       default: false,
+    },
+    hideHelp: {
+      type: Boolean,
+      default: null,
     },
     newIntelligenceForms: {
       type: Boolean,

@@ -39,7 +39,7 @@
                   <language-select
                     id="tour-translate-step-2"
                     v-model="translate.to"
-                    :is-step-blocked="translate.to === null"
+                    :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases"
                     :exclude="[translate.from]"/>
                 </b-field>
               </div>
@@ -159,7 +159,9 @@
                 :from="translate.from"
                 :to="translate.to"
                 @translated="examplesTranslated()"
-                @eventStep="dispatchClick()"/>
+                @eventStep="dispatchClick()"
+                @isLoadingContent="loadingList = $event"
+                @listPhrase="checkPhraseList($event)"/>
             </div>
 
           </div>
@@ -237,6 +239,8 @@ export default {
       errorMessage: '',
       eventClick: false,
       eventClickFinish: false,
+      loadingList: true,
+      hasPhrases: false,
     };
   },
 
@@ -291,7 +295,6 @@ export default {
       this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
-
     async importTranslation() {
       this.waitDownloadFile = !this.waitDownloadFile;
       const formData = new FormData();
@@ -340,6 +343,16 @@ export default {
     },
     examplesTranslated() {
       this.translate.update = !this.translate.update;
+    },
+    async checkPhraseList(list) {
+      if (this.activeTutorial === 'translate') {
+        const checkList = await list.getAllItems();
+        if (checkList.length === 0) {
+          this.hasPhrases = false;
+          return;
+        }
+        this.hasPhrases = true;
+      }
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -496,15 +509,18 @@ export default {
 
   &__translateButtons{
     display: flex;
-    width: 100%;
+    width: 385px;
     margin: 1rem 0.3rem;
-    justify-content: flex-start
+    margin-left: 0.8rem;
+    border-radius: 5px;
+    justify-content: space-between;
   }
   &__unableButton{
     background-color:$color-grey;
     color: $color-white;
     border: 2px solid #D5D5D5;
     box-shadow: 0 0.1875rem 0.375rem rgba(200, 200, 200, 0.5);
+    margin:0;
 
      &:hover{
       color: $color-white;

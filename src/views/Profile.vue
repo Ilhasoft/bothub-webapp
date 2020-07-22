@@ -297,8 +297,7 @@ h1 {
 
           &__form {
             max-width: 30rem;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin-bottom: 2rem
           }
         }
     }

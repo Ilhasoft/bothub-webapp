@@ -22,20 +22,33 @@
             :is-first="tour.isFirst"
             :is-last="tour.isLast"
             :labels="tour.labels">
+            <div
+              slot="header"
+              class="v-step__header">
+              <b-icon
+                icon="close"
+                size="is-small"
+                @click.native="skipTutorial()"/>
+            </div>
             <template>
               <div
                 slot="actions">
                 <button
-                  v-if="!isLast"
+                  v-if="!isFirst"
                   class="v-step__button v-step__button-previous"
                   @click="prevStep()">{{ options.labels.buttonPrevious }}</button>
                 <button
+                  v-if="!isLast"
                   class="v-step__button v-step__button-next"
                   @click="nextStep()">{{ options.labels.buttonNext }} </button>
                 <button
-                  v-if="isLast"
+                  v-if="isLast && !checkName"
                   class="v-step__button v-step__button-stop"
                   @click="onFinishTutorial()">{{ options.labels.buttonStop }}</button>
+                <button
+                  v-if="name === 'tutorial_button'"
+                  class="v-step__button v-step__button-stop"
+                  @click="finishedMessage()">{{ options.labels.buttonDone }}</button>
               </div>
             </template>
           </v-step>
@@ -72,27 +85,36 @@ export default {
     return {
       options: {
         labels: {
-          buttonPrevious: this.$t('webapp.tutorial.previous'),
-          buttonNext: this.$t('webapp.tutorial.next'),
-          buttonStop: this.$t('webapp.tutorial.finish'),
+          buttonPrevious: this.$t('webapp.tutorial.previous_step'),
+          buttonNext: this.$t('webapp.tutorial.next_step'),
+          buttonStop: this.$t('webapp.tutorial.finish_step'),
+          buttonDone: this.$t('webapp.tutorial.confirm_step'),
         },
         highlight: true,
       },
       callbacksTour: {
         onStop: this.stopTutorial,
       },
-      beginnerTutorialModalOpen: false,
     };
   },
   computed: {
     ...mapGetters([
       'activeTutorial',
+      'getFinalModal',
     ]),
     currentStep() {
       return this.$tours[this.name].currentStep;
     },
+    checkName() {
+      if (this.name === 'tutorial_button') return true;
+
+      return false;
+    },
     isLast() {
       return this.currentStep === this.stepCount - 1;
+    },
+    isFirst() {
+      return this.currentStep === 0;
     },
     steps() {
       if (!this.name) return [];
@@ -123,19 +145,9 @@ export default {
     finishEvent() {
       this.onFinishTutorial();
     },
-    beginnerTutorialModalOpen() {
-      if (this.beginnerTutorialModalOpen === true) {
-        this.openBeginnerTutorialModal();
-      }
-    },
   },
+
   mounted() {
-    // A dynamically added onStop callback
-    // this.callbacks.onStop = () => {
-    //   document
-    //     .querySelector(`#tour-${this.name}-step_0`)
-    //     .scrollIntoView({ behavior: 'smooth' });
-    // };
     this.startTutorial();
   },
   methods: {
@@ -143,18 +155,22 @@ export default {
       'finishTutorial',
       'setTutorialInactive',
       'setTutorialMenuActive',
+      'setFinalModal',
+      'setFinalizationMessage',
     ]),
+    finishedMessage() {
+      this.setFinalModal(false);
+      this.setFinalizationMessage();
+      this.$tours[this.name].skip();
+    },
     async stopTutorial() {
       await this.setTutorialInactive();
     },
     async setMenuActive() {
       await this.setTutorialMenuActive();
     },
-    openBeginnerTutorialModal() {
-      this.beginnerTutorialModalOpen = true;
-    },
     startTutorial() {
-      if (/* this.activeTutorial === this.name && */ this.$tours[this.name]) {
+      if (this.$tours[this.name]) {
         this.$tours[this.name].start();
       }
     },
@@ -164,11 +180,13 @@ export default {
       this.$tours[this.name].skip();
     },
     nextStep() {
-      // TODO: Show error message
       if (!this.isBlocked()) this.$tours[this.name].nextStep();
     },
     prevStep() {
-      if (!this.previusBlocked()) this.$tours[this.name].previousStep();
+      if (!this.previousBlocked()) this.$tours[this.name].previousStep();
+    },
+    skipTutorial() {
+      this.$tours[this.name].skip();
     },
     showLastStep() {
       this.$tours[this.name].currentStep = this.steps.length - 1;
@@ -182,10 +200,10 @@ export default {
         return false;
       }
     },
-    previusBlocked() {
+    previousBlocked() {
       const element = document.querySelector(this.steps[this.currentStep].target).attributes;
       try {
-        const { value } = element.getNamedItem('is-previus-blocked');
+        const { value } = element.getNamedItem('is-previous-blocked');
         return value === 'true';
       } catch (_) {
         return false;
@@ -203,17 +221,11 @@ body.v-tour--active{
 .v-tour{
     pointer-events:auto;
 }
-/* .v-tour__target--highlighted{
-    -webkit-box-shadow:0 0 0 4px rgba(0,0,0,.4);
-    box-shadow:0 0 0 4px rgba(0,0,0,.4);
-    pointer-events:auto;
-    z-index:9999;
-} */
 .v-tour__target--highlighted {
   box-shadow: 0 0 0 99999px rgba(0,0,0,.4);
   -webkit-box-shadow:0 0 0 99999px rgba(0,0,0,.4);
   pointer-events:auto;
-    z-index:9999;
+  z-index:9999;
 }
 .v-tour__target--relative{
     position:relative
@@ -225,8 +237,12 @@ body.v-tour--active{
     border-radius:3px;
     -webkit-filter:drop-shadow(0 0 2px rgba(0,0,0,.5));
     filter:drop-shadow(0 0 2px rgba(0,0,0,.5));
-    padding:1rem;text-align:center;
+    padding:1rem;
+    text-align:center;
     z-index:10000;
+}
+.v-step[data-v-7c9c03f0] strong{
+ color:#fff;
 }
 .v-step .v-step__arrow[data-v-7c9c03f0]{
     width:0;
@@ -288,32 +304,34 @@ body.v-tour--active{
     margin-left:0;margin-right:0;
 }
 .v-step__header[data-v-7c9c03f0]{
-    margin:-1rem -1rem .5rem;
+    margin:-1rem -1rem ;
     padding:.5rem;
-    background-color:#454d5d;
-    border-top-left-radius:3px;
-    border-top-right-radius:3px
+    float: right;
+    cursor: pointer
 }
 .v-step__content[data-v-7c9c03f0]{
     margin:0 0 1rem 0;
 }
 .v-step__button[data-v-7c9c03f0]{
     background:transparent;
-    border:.05rem solid #fff;
-    border-radius:.1rem;
+    border: 0.125rem solid #FFFFFF;
+    border-radius: 0.375rem;
     color:#fff;
     cursor:pointer;
     display:inline-block;
-    font-size:.8rem;height:1.8rem;
+    font-size:.8rem;
+    height:1.8rem;
     line-height:1rem;
     outline:none;
-    margin:0 .2rem;
-    padding:.35rem .4rem;
+    margin:0 2rem;
     text-align:center;
     text-decoration:none;
     -webkit-transition:all .2s ease;transition:all .2s ease;
     vertical-align:middle;
-    white-space:nowrap
+    white-space:nowrap;
+    font-family: 'Muli', sans-serif;
+    font-weight: bold;
+
 }
 .v-step__button[data-v-7c9c03f0]:hover{
     background-color:hsla(0,0%,100%,.95);
