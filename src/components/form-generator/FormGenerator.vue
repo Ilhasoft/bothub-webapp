@@ -193,7 +193,7 @@ $default-spacing: 0.5rem;
 $max-length-height: 0.938rem;
 
 .switchNewIntelligence{
-  padding-top: calc(5.2rem - 0.625rem);
+  padding-top: calc(4.2rem - #{$unlabeled-spacing});
 }
 .field-message {
 
