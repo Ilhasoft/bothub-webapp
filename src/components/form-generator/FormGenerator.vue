@@ -10,7 +10,6 @@
         v-show="field.type !== 'hidden'"
         :key="field.name"
         :type="field.errors && 'is-danger'"
-        :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
         :class="{[`field-${field.type}`]: true}">
         <div
           v-if="showLabels"
@@ -22,6 +21,15 @@
           <help-widget
             v-if="hasHelpIcon(field)"
             :article-id="helpArticleId" />
+        </div>
+        <div
+          slot="message"
+          :class="{[`field-message--${showLabels ? 'labeled' : 'unlabeled'}`]:
+                     true,
+                   [`field-message--${showLabels ? 'labeled' : 'unlabeled'}__maxLength`]:
+          field.inputProps.max_length}">
+          <span v-if="field.errors"> {{ field.errors.join(' ') }} </span>
+          <span v-else> {{ showLabels && !hideHelp ? field.helpText : '' }} </span>
         </div>
         <component
           :v-if="field.inputComponent"
@@ -37,9 +45,6 @@
           :compact="!showLabels"
           :class="{
             'switchNewIntelligence': field.name === 'is_private' && newIntelligenceForms,
-            [`field--${showLabels ? 'labeled' : 'unlabeled'}`]: !field.inputProps.max_length,
-            [`field--${showLabels ? 'labeled' : 'unlabeled'}__maxLength`]:
-              field.inputProps.max_length,
           }"
           @input="update()"
         />
@@ -182,25 +187,35 @@ export default {
 
 <style lang="scss" scoped>
 
+$labeled-spacing: 1.563rem;
+$unlabeled-spacing: 0.625rem;
+$default-spacing: 0.5rem;
+$max-length-height: 0.938rem;
+
 .switchNewIntelligence{
-  padding-top: calc(5.2rem - 0.625rem);
+  padding-top: calc(4.2rem - #{$unlabeled-spacing});
 }
-.field {
+.field-message {
+
   &--labeled {
-    margin-bottom: 1.563rem;
+    margin-bottom: calc(#{$labeled-spacing} - #{$default-spacing});
 
     &__maxLength {
-      margin-bottom: calc(1.563rem - 15px);
+      max-width: 90%;
     }
   }
 
-  &--unlabled {
-    margin-bottom: 0.625rem;
+  &--unlabeled {
+    margin-bottom: $unlabeled-spacing;
 
     &__maxLength {
-      margin-bottom: calc(0.625rem - 15px);
+      max-width: 90%;
     }
   }
+}
+
+.field {
+  margin-bottom: 0;
 }
 
 .field-label {

@@ -540,7 +540,9 @@
             "step_3": "Agora, escreva a entidade. <br> Ex .: alimentos",
             "step_4": "E aqui, identifique a intenção da frase que você digitou ao que ela corresponde. <br> Ex.: afirmativo",
             "step_5": "Por fim, envie sua sentença.",
-            "step_6": "Clique aqui para executar seu treinamento. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada."
+            "step_6": "Clique aqui para executar seu treinamento. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
+            "step_7": "Verifique se sua inteligência está pronta para treinar",
+            "step_8": "Clique no botão para confirmar."
         },
         "evaluate": {
           "step_0": "<strong> Vamos para o teste de sentenças! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
@@ -564,7 +566,7 @@
         },
         "translate": {
           "step_0": "<strong> Vamos traduzir! </strong> <br> Clique aqui para traduzir as frases da sua inteligência em outro idioma.",
-          "step_1": "Selecione o idioma treinado. <br> <strong>Dica</strong>: Você precisa ter frases treinadas nesse idioma.",
+          "step_1": "Selecione o idioma treinado. <br> <strong>Dica</strong>: Você precisa ter frases adicionadas nesse idioma.",
           "step_2": "Selecione o idioma para qual será feita a tradução.",
           "step_3": "Escolha uma frase e clique em traduzir.",
           "step_4": "Digite uma tradução de frase aqui.",

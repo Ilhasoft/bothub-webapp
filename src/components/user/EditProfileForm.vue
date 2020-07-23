@@ -9,7 +9,8 @@
       :errors="errors"
       :initial-data="initialData"
       :available-max-length="false"
-      hide-help />
+      hide-help
+      class="edit-field" />
     <form-generator
       v-if="groupSchema && myProfile"
       :schema="groupSchema"
@@ -87,22 +88,20 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    if (process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) {
-      this.groupSchema = {
-        biography: {
-          label: 'Biography',
-          read_only: false,
-          style: { grouped: true },
-          type: 'textarea',
-        },
-        image: {
-          label: 'Avatar',
-          read_only: false,
-          style: { grouped: true },
-          type: 'image',
-        },
-      };
-    }
+    this.groupSchema = process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
+      biography: {
+        label: 'Biography',
+        read_only: false,
+        style: { grouped: true },
+        type: 'textarea',
+      },
+      image: {
+        label: 'Avatar',
+        read_only: false,
+        style: { grouped: true },
+        type: 'image',
+      },
+    } : {};
   },
   methods: {
     ...mapActions([
@@ -143,6 +142,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .edit-field {
+    margin-bottom: 1.313rem;
+  }
 
   .change-password {
     background-color: white;
