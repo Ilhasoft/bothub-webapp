@@ -1586,10 +1586,10 @@ bser@^2.0.0:
   dependencies:
     node-int64 "^0.4.0"
 
-buefy@^0.8.12:
-  version "0.8.12"
-  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.12.tgz#416e8d0a6af346f1b5e61ae6145a2077b27ed490"
-  integrity sha512-scKb+0piTAEYk8mopu5HzshlGsT0K9ChlfkGhQgAF7jC9lH3Ta7anYXG+l8uBoSpqgChK0H19jPP55FbeKn1nA==
+buefy@^0.8.20:
+  version "0.8.20"
+  resolved "https://registry.yarnpkg.com/buefy/-/buefy-0.8.20.tgz#75708800548220654575903d031a81fc8575b7f3"
+  integrity sha512-pg8Cn0m9cjqp2/vaKT4VIfU8KIumuX/gAT1GtearXRs56+kKqAPx3j9O8cm9W6P4jPUCHajKX6H8AqD0ram2Bg==
   dependencies:
     bulma "0.7.5"
 
@@ -10164,11 +10164,6 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
-
-vue-confetti@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/vue-confetti/-/vue-confetti-2.0.8.tgz#30026592c4dfa47d660e1b6ed1caa85584ea6a91"
-  integrity sha512-WJftcoXqBqpqgbi9upb9zA943xq4evwNltz8hS/fmNjbaiga38ob3yxw3YyHnAZmlayIYGYuR+k9stVcNfiinw==
 
 vue-eslint-parser@^2.0.3:
   version "2.0.3"

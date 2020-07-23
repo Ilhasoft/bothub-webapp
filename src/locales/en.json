@@ -533,8 +533,7 @@
           "step_0": "Fill in the form with your intelligence data like name, description and language",
           "step_1": "And go forward",
           "step_2": "Choose categories for your intelligence, based on the area in which it will be used, and submit.",
-          "step_3": "And go forward",
-          "step_4": "Your intelligence is ready to be created. Just send."
+          "step_3": "Your intelligence is ready to be created. Just send."
       },
       "training": {
           "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
@@ -543,7 +542,9 @@
           "step_3": "Now, write the entity. <br> Ex entity.: food",
           "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
           "step_5": "Finally, submit your sentence.",
-          "step_6": "Click here to run your training. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each."
+          "step_6": "Click here to run your training. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
+          "step_7": "Make sure your intelligence is ready to train.",
+          "step_8": "Click on the button to confirm."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
@@ -567,7 +568,7 @@
       },
       "translate": {
         "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
-        "step_1": "Select the trained language. <br> <strong>Tip</strong>: You need to have phrases trained in that language.",
+        "step_1": "Select the trained language. <br> <strong>Tip</strong>: You need to have phrases added in that language.",
         "step_2": "Select the language for translation and enter.",
         "step_3": "Choose one sentence and click in translate.",
         "step_4": "Enter a sentence translation here.",

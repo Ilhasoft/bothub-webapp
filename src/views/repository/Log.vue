@@ -2,7 +2,6 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-
     <div
       v-if="authenticated"
       class="repository-log">
@@ -72,7 +71,7 @@
         <repository-log-list
           :per-page="perPage"
           :query="query"
-          :editable="repository.authorization.can_contribute" />
+          :editable="repository.authorization.can_contribute"/>
       </div>
       <authorization-request-notification
         v-else

@@ -222,6 +222,7 @@ export default {
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     checkIfIsTutorial() {
       if (this.activeTutorial === 'create_intelligence') {
@@ -348,7 +349,7 @@ export default {
             }
 
             &__style{
-              margin: 7rem auto 0;
+              margin: 3rem auto 0;
               width: 6.875rem;
               height: 2.188rem;
               border-radius: 6px;

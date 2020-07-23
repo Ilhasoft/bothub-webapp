@@ -1,6 +1,7 @@
 <template>
-  <div class="log-accordion">
+  <div class="log-accordion" >
     <sentence-accordion
+      :is-step-blocked="data.length === 0"
       :open.sync="open">
 
       <div slot="check">

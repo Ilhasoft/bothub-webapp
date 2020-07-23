@@ -13,11 +13,12 @@
               </div>
               <div
                 id="tour-training-step-6"
+                :is-step-blocked="!blockedNextStepTutorial"
                 class="trainings-repository__list-wrapper__tutorialStep">
                 <b-button
-                  v-if="repository.examples__count > 0 && repository.authorization.can_write "
+                  v-if="repository.authorization.can_write"
                   ref="training"
-                  :disabled="loadingStatus"
+                  :disabled="loadingStatus || repository.examples__count === 0"
                   :loading="loadingStatus"
                   type="is-secondary"
                   class="trainings-repository__list-wrapper__button"
@@ -70,14 +71,15 @@
       :requirements-to-train="repository.requirements_to_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train(repository.uuid)" />
+      @train="train(repository.uuid)"
+      @finishedTutorial="dispatchFinish()" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
     <tour
       v-if="activeTutorial === 'training'"
-      :step-count="7"
+      :step-count="9"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="training"/>
@@ -131,6 +133,7 @@ export default {
       loadingStatus: false,
       eventClick: false,
       eventClickFinish: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -188,9 +191,10 @@ export default {
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
-      this.dispatchFinish();
+      this.dispatchClick();
     },
     dispatchClick() {
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
       this.eventClick = !this.eventClick;
     },
     dispatchFinish() {
@@ -212,6 +216,7 @@ export default {
     },
     async train(repositoryUuid) {
       this.training = true;
+      this.dispatchFinish();
       try {
         const response = await this.trainRepository({
           repositoryUuid,
