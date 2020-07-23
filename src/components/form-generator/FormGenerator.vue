@@ -58,7 +58,6 @@ import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
 import ImageInput from './inputs/ImageInput';
-import FetchChoiceInput from './inputs/FetchChoiceInput';
 import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
@@ -74,7 +73,6 @@ const relatedInputComponent = {
   hidden: StringInput,
   textarea: TextInput,
   image: ImageInput,
-  'multiple choice fetch': FetchChoiceInput,
 };
 
 const components = {
@@ -152,7 +150,7 @@ export default {
             label,
             helpText,
             inputProps,
-            inputComponent: relatedInputComponent[fetch ? `${type} fetch` : type],
+            inputComponent: relatedInputComponent[type],
             errors: this.errors[name],
             fetch,
           };
