@@ -89,7 +89,7 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    this.groupSchema = {
+    this.groupSchema = process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
       biography: {
         label: 'Biography',
         read_only: false,
@@ -102,7 +102,7 @@ export default {
         style: { grouped: true },
         type: 'image',
       },
-    };
+    } : {};
   },
   methods: {
     ...mapActions([
