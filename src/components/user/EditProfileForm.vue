@@ -7,7 +7,6 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
-      :show-labels="false"
       :initial-data="initialData"
       :available-max-length="false"
       hide-help
@@ -146,7 +145,7 @@ export default {
 <style lang="scss" scoped>
 
   .edit-field {
-    margin-bottom: 2.313rem;
+    margin-bottom: 1.313rem;
   }
 
   .change-password {
