@@ -174,9 +174,11 @@ export default {
       }
     },
     async onFinishTutorial() {
-      await this.finishTutorial(this.checkIntelligence);
-      this.setMenuActive();
-      this.$tours[this.name].skip();
+      if (!this.isBlocked()) {
+        await this.finishTutorial(this.checkIntelligence);
+        this.setMenuActive();
+        this.$tours[this.name].skip();
+      }
     },
     nextStep() {
       if (!this.isBlocked()) this.$tours[this.name].nextStep();

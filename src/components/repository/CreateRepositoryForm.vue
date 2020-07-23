@@ -222,6 +222,7 @@ export default {
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     checkIfIsTutorial() {
       if (this.activeTutorial === 'create_intelligence') {
