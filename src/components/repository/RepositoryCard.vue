@@ -153,6 +153,10 @@ export default {
     height: 100%;
     padding: 1rem 0;
     word-break: break-all;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    box-shadow:0rem 0rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
   }
 
   &__align-items {
