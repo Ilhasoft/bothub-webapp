@@ -99,7 +99,7 @@
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
-                @click="routerHandle('myProfile')">{{ myProfile.name }}</b-dropdown-item>
+                @click="routerHandle(profilePath)">{{ myProfile.name }}</b-dropdown-item>
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
@@ -179,6 +179,9 @@ export default {
     },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+    },
+    profilePath() {
+      return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile';
     },
   },
   methods: {

@@ -21,7 +21,7 @@
     "@sentry/integrations": "^5.15.5",
     "axios": "^0.18.0",
     "bh": "./bh/",
-    "buefy": "^0.8.12",
+    "buefy": "^0.8.20",
     "chart.js": "^2.8.0",
     "deep-equal": "^1.0.1",
     "github-markdown-css": "^3.0.1",
