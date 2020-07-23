@@ -7,6 +7,7 @@
       :schema="formSchema"
       v-model="data"
       :errors="errors"
+      :show-labels="false"
       :initial-data="initialData"
       :available-max-length="false"
       hide-help
