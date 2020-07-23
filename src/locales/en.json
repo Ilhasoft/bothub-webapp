@@ -301,6 +301,8 @@
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
     "orgs": {
+      "owner": "Owned by",
+      "my_user": "My User",
       "created_by": "Created by",
       "created": "Created",
       "repositories": "{n} repositories | {n} repository | {n} repositories",

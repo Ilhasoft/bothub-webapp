@@ -154,6 +154,7 @@ export default {
     ...mapGetters([
       'activeTutorial',
       'activeMenu',
+      'myProfile',
     ]),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
@@ -164,8 +165,15 @@ export default {
       }, {});
       // eslint-disable-next-line camelcase
       const { is_private, ...schema } = computed;
+      const orgField = {
+        org: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
+          label: this.$t('webapp.orgs.owner'),
+          fetch: this.getOrgs,
+          type: 'choice',
+        } : {},
+      };
       // eslint-disable-next-line camelcase
-      if (is_private) { return { ...schema, is_private }; }
+      if (is_private) { return { ...schema, ...orgField, is_private }; }
       return computed;
     },
     filteredSchema() {
@@ -215,6 +223,7 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
       'setTutorialInactive',
+      'getAllOrgs',
     ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
@@ -237,6 +246,19 @@ export default {
           slug: this.resultParams.slug,
         },
       };
+    },
+    async getOrgs() {
+      this.loading = true;
+      const list = await this.getAllOrgs();
+      await list.getAllItems();
+      const options = list.items.map(org => ({
+        label: org.name,
+        value: org.id,
+      }));
+      return [
+        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
+        ...options,
+      ];
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
