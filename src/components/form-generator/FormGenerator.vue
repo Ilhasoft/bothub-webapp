@@ -9,41 +9,40 @@
         v-for="field in fields"
         v-show="field.type !== 'hidden'"
         :key="field.name"
-        :label="field.label"
         :type="field.errors && 'is-danger'"
         :message="!showLabels ? field.errors : field.errors || (hideHelp ? '' : field.helpText)"
-        :class="{'field-content' : !showLabels, [`field-${field.type}`]: true}">
+        :class="{[`field-${field.type}`]: true}">
         <div
+          v-if="showLabels"
           slot="label"
           :class="{'field-label': true, [`field-${field.type}__title`]: true}">
-          <span
-            v-if="showLabels">
+          <span>
             {{ field.label }}
           </span>
           <help-widget
             v-if="hasHelpIcon(field)"
             :article-id="helpArticleId" />
         </div>
-        <b-field
-          :class="!showLabels ? 'input-content' : ''">
-          <component
-            :v-if="field.inputComponent"
-            :is="field.inputComponent"
-            v-bind="field.inputProps"
-            :label-placeholder="showLabels ? '' : field.label"
-            :show-max-length="availableMaxLength"
-            v-model="formData[field.name]"
-            :initial-data="initialData[field.name]"
-            :label="field.label"
-            :help-text="hideHelp ? '' : field.helpText"
-            :compact="!showLabels"
-            :class="[
-              field.name === 'language' && newIntelligenceForms ? 'languageNewIntelligence' : '',
-              field.name === 'is_private' && newIntelligenceForms ? 'switchNewIntelligence' : '',
-            ]"
-            @input="update()"
-          />
-        </b-field>
+        <component
+          :v-if="field.inputComponent"
+          :is="field.inputComponent"
+          v-bind="field.inputProps"
+          :label-placeholder="showLabels ? '' : field.label"
+          :show-max-length="showLabels"
+          v-model="formData[field.name]"
+          :initial-data="initialData[field.name]"
+          :label="field.label"
+          :fetch="field.fetch"
+          :help-text="hideHelp ? '' : field.helpText"
+          :compact="!showLabels"
+          :class="{
+            'switchNewIntelligence': field.name === 'is_private' && newIntelligenceForms,
+            [`field--${showLabels ? 'labeled' : 'unlabeled'}`]: !field.inputProps.max_length,
+            [`field--${showLabels ? 'labeled' : 'unlabeled'}__maxLength`]:
+              field.inputProps.max_length,
+          }"
+          @input="update()"
+        />
       </b-field>
     </component>
   </div>
@@ -136,6 +135,7 @@ export default {
             label,
             style,
             help_text: helpText,
+            fetch,
             ...inputProps
           } = this.schema[name];
 
@@ -152,6 +152,7 @@ export default {
             inputProps,
             inputComponent: relatedInputComponent[type],
             errors: this.errors[name],
+            fetch,
           };
         })
         .filter(field => !!field);
@@ -181,21 +182,27 @@ export default {
 
 <style lang="scss" scoped>
 
-.languageNewIntelligence{
-  margin-top: 5.5rem;
-}
 .switchNewIntelligence{
-  padding-top: 5.2rem;
+  padding-top: calc(5.2rem - 0.625rem);
 }
-.field-content{
-height: 58px;
-padding-bottom: 0px;
-margin-bottom: 0px;
+.field {
+  &--labeled {
+    margin-bottom: 1.563rem;
+
+    &__maxLength {
+      margin-bottom: calc(1.563rem - 15px);
+    }
+  }
+
+  &--unlabled {
+    margin-bottom: 0.625rem;
+
+    &__maxLength {
+      margin-bottom: calc(0.625rem - 15px);
+    }
+  }
 }
-.input-content{
-padding-bottom: 0px;
-margin-bottom: 0px;
-}
+
 .field-label {
     display: flex;
     align-items: center;
