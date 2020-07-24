@@ -57,8 +57,9 @@ export default {
       return {};
     },
     filteredSchema() {
-      const { email, ...schema } = this.formSchema;
-      return schema;
+      const { description, ...schema } = this.formSchema;
+      description.type = 'text';
+      return { ...schema, description };
     },
   },
   async mounted() {
