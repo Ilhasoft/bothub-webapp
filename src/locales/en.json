@@ -226,6 +226,7 @@
       "invite": "Send Invite",
       "no_users": "No users in your team.",
       "search_user": "Search User",
+      "search_user_org": "Search for user/organization",
       "no_locale": "No locale"
     },
     "roles": {

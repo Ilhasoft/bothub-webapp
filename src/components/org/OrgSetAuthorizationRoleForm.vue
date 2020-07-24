@@ -3,7 +3,9 @@
     <div class="bh-grid">
       <div class="bh-grid__item bh-grid__item--grow-2">
         <p><strong>{{ $t('webapp.settings.users') }}</strong></p>
-        <select-users-input v-model="usersProfile" />
+        <select-users-input
+          v-model="usersProfile"
+          no-orgs />
       </div>
       <div class="bh-grid__item">
         <p><strong>{{ $t('webapp.settings.role') }}</strong></p>

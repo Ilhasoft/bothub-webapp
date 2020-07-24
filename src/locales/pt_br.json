@@ -226,6 +226,7 @@
       "invite": "Enviar convite",
       "no_users": "Sem usuários no time.",
       "search_user": "Procurar usuário",
+      "search_user_org": "Procurar usuário/organização",
       "no_locale": "Sem local"
     },
     "roles": {

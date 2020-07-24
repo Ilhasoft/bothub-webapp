@@ -3,7 +3,7 @@
     ref="taginput"
     v-model="newValue"
     :data="data"
-    :placeholder="$t('webapp.settings.search_user')"
+    :placeholder="$t(`webapp.settings.${ noOrgs ? 'search_user' : 'search_user_org'}`)"
     autocomplete
     field="name"
     @typing="updateData($event)">
@@ -45,6 +45,10 @@ export default {
     debounceTime: {
       type: Number,
       default: 750,
+    },
+    noOrgs: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -91,8 +95,9 @@ export default {
           });
           const { data } = response;
           const results = data.filter((user) => {
-            const existsOnNewValue = this.newValue.reduce((previus, u) => {
-              if (previus) return previus;
+            if (this.noOrgs && user.is_organization) return false;
+            const existsOnNewValue = this.newValue.reduce((previous, u) => {
+              if (previous) return previous;
               return user.nickname === u.nickname;
             }, false);
             return !existsOnNewValue;
