@@ -224,7 +224,19 @@
       "save": "Salvar",
       "request": "Fazer pedido",
       "invite": "Enviar convite",
-      "no_users": "Sem usuários no time."
+      "no_users": "Sem usuários no time.",
+      "search_user": "Procurar usuário",
+      "no_locale": "Sem local"
+    },
+    "roles": {
+      "user": "Usuário",
+      "contributor": "Contribuidor",
+      "admin": "Administrador",
+      "translator": "Tradutor",
+      "user_description": "Pode ver e analisar",
+      "contributor_description": "Pode ver, analisar e contribuir com exemplos e traduções",
+      "admin_description": "Pode ver, analisar, contribuir e mudar as configurações",
+      "translator_description": "Pode ver, analisar e criar traduções"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -309,6 +321,7 @@
       "members": "{n} membros | {n} membro | {n} membros",
       "create_org": "Criar organização",
       "create": "Criar",
+      "no_orgs": "Você ainda não é membro de nenhuma organização.",
       "manage_contributors": "Gerenciar contribuidores",
       "manage_subtitle": "Gerencie quem pode contribuir para o seu dataset.",
       "edit": "Editar",
@@ -491,9 +504,9 @@
         "free_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano oferece até <strong>1000 predições grátis</strong>.",
         "professional_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano é pago, <strong>após alcançar 1,000 predições.</strong>",
         "custom_text": "Superpoderes! Leve sua inteligência para o próximo níveis com soluções personalizadas, suporte impecável, e um grande número de predições.",
-        "per_prediction": "per prediction",
-        "get_free": "Get free",
-        "get_started": "Get started"
+        "per_prediction": "por predição",
+        "get_free": "Começar gratuitamente",
+        "get_started": "Começar"
       },
       "info": {
         "title": "Informações de pagamento",

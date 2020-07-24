@@ -3,9 +3,9 @@
     ref="taginput"
     v-model="newValue"
     :data="data"
+    :placeholder="$t('webapp.settings.search_user')"
     autocomplete
     field="name"
-    placeholder="Search user"
     @typing="updateData($event)">
     <template slot-scope="props">
       <div class="media">
@@ -14,7 +14,7 @@
           <div>{{ props.option.name }}</div>
           <div><small>
             <span>{{ props.option.nickname }}</span> /
-            <span>{{ props.option.locale || 'No locale' }}</span>
+            <span>{{ props.option.locale || $t('webapp.settings.no_locale') }}</span>
           </small></div>
         </div>
       </div>

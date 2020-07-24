@@ -3,6 +3,7 @@
     :list="list"
     :item-component="item"
     :per-page="perPage"
+    :empty-message="$t('webapp.orgs.no_orgs')"
     class="org-list"/>
 </template>
 
