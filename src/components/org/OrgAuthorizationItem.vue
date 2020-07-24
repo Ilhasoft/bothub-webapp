@@ -66,6 +66,10 @@ export default {
       type: String,
       required: true,
     },
+    is_organization: {
+      type: Boolean,
+      default: true,
+    },
     organization: {
       type: Number,
       required: true,

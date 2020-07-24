@@ -9,7 +9,9 @@
     @typing="updateData($event)">
     <template slot-scope="props">
       <div class="media">
-        <div class="media-left"><user-avatar :profile="props.option" /></div>
+        <div class="media-left"><user-avatar
+          :is-organization="props.option.is_organization"
+          :profile="props.option" /></div>
         <div class="media-content">
           <div>{{ props.option.name }}</div>
           <div><small>

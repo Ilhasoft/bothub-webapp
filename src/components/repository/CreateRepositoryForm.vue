@@ -266,7 +266,7 @@ export default {
       await list.getAllItems();
       const options = list.items.map(org => ({
         label: org.name,
-        value: org.id,
+        value: org,
       }));
       return [
         { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
@@ -282,11 +282,13 @@ export default {
         ? this.categories
         : [{ name: this.$t('webapp.create_repository.category') }];
 
+      const organization = this.data.organization ? this.data.organization.name : null;
+
       return {
         name: this.data.name || this.$t('webapp.create_repository.new_repo'),
         available_languages: [this.data.language || this.$t('webapp.create_repository.language')],
         language: this.data.language || this.$t('webapp.create_repository.language'),
-        owner__nickname: this.userName,
+        owner__nickname: organization || this.userName,
         categories,
         categories_list: categoryNames,
         slug: this.$t('webapp.create_repository.new_repo'),
@@ -297,9 +299,11 @@ export default {
     },
     async submit(model) {
       const categoryValues = this.categories.map(category => category.id);
+      const { organization, ...data } = this.data;
       const updatedModel = updateAttrsValues(model,
         {
-          ...this.data,
+          ...data,
+          organization: organization ? organization.id : null,
           categories: categoryValues,
         });
       this.submitting = true;

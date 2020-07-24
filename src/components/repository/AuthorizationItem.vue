@@ -1,7 +1,9 @@
 <template>
   <div class="columns is-vcentered">
     <div class="column is-1">
-      <user-avatar :profile="getProfile(user__nickname)" />
+      <user-avatar
+        :is-organization="user__is_organization"
+        :profile="getProfile(user__nickname)" />
     </div>
     <div class="column is-one-fifth">
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
@@ -84,6 +86,10 @@ export default {
       required: true,
     },
     can_write: {
+      type: Boolean,
+      required: true,
+    },
+    user__is_organization: {
       type: Boolean,
       required: true,
     },

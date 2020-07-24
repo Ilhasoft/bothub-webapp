@@ -11,15 +11,15 @@
       :class="{avatar__content: true,
                [`avatar--${size}`]: !!size}">
       <img
-        v-if="profile.nickname"
+        v-if="!isOrganization && profile.nickname"
         :class="size"
         :src="`https://robohash.org/${profile.nickname}`">
       <div
         v-else
         class="avatar__icon">
         <b-icon
-          size="small"
-          icon="account" />
+          :icon="isOrganization ? 'account-multiple' : 'account'"
+          size="small" />
       </div>
     </div>
   </div>
@@ -32,6 +32,10 @@ export default {
     profile: {
       required: true,
       type: Object,
+    },
+    isOrganization: {
+      type: Boolean,
+      default: false,
     },
     size: {
       type: String,
