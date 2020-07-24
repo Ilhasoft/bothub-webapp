@@ -40,7 +40,8 @@ export default {
     return org.createOrg(data);
   },
 
-  updateAuthorizationRole(store, { orgNickname, userNickname, newRole }) {
+  orgUpdateAuthorizationRole(store, { orgNickname, userNickname, newRole }) {
+    console.log({ orgNickname, userNickname, newRole });
     return org.updateAuthorizationRole(
       orgNickname,
       userNickname,

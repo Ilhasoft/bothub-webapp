@@ -148,7 +148,7 @@ export default {
       this.submitted = false;
       try {
         await this.orgUpdateAuthorizationRole({
-          org: this.organization,
+          orgNickname: this.organization__nickname,
           userNickname: this.user__nickname,
           newRole: this.newRole,
         });
