@@ -5,7 +5,8 @@
       :disabled="isDisabled"
       :placeholder="labelPlaceholder"
       v-model="input"
-      expanded>
+      expanded
+      @input="optionSelected">
       <option
         v-for="option in options"
         :key="option.label"
@@ -52,6 +53,9 @@ export default {
     ...mapActions([
       'getAllOrgs',
     ]),
+    optionSelected(option) {
+      this.$emit('input', option);
+    },
     async getOptions() {
       this.loading = true;
       try {

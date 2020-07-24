@@ -3,7 +3,8 @@
     v-if="fetch"
     :fetch="fetch"
     :label-placeholder="labelPlaceholder"
-    v-model="value"/>
+    v-model="value"
+    @input="update()"/>
   <b-autocomplete
     v-else-if="compact"
     v-model="value"

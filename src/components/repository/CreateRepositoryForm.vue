@@ -12,7 +12,6 @@
         <form-generator
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-0"
-          :drf-model-instance="drfRepositoryModel"
           :is-step-blocked="!checkFormData"
           :schema="filteredSchema"
           v-model="data"
@@ -141,6 +140,7 @@ export default {
       submitting: false,
       errors: {},
       drfRepositoryModel: {},
+      noOrgModel: {},
       categories: [],
       current: 0,
       resultParams: {},
@@ -166,7 +166,7 @@ export default {
       // eslint-disable-next-line camelcase
       const { is_private, ...schema } = computed;
       const orgField = {
-        org: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
+        organization: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
           label: this.$t('webapp.orgs.owner'),
           fetch: this.getOrgs,
           type: 'choice',
@@ -205,15 +205,7 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
-    const Model = getModel(
-      this.computedSchema,
-      RepositoryModel,
-    );
-    this.drfRepositoryModel = new Model({},
-      null,
-      {
-        validateOnChange: true,
-      });
+    this.constructModels();
   },
   beforeDestroy() {
     this.checkIfIsTutorial();
@@ -225,6 +217,27 @@ export default {
       'setTutorialInactive',
       'getAllOrgs',
     ]),
+    constructModels() {
+      const Model = getModel(
+        this.computedSchema,
+        RepositoryModel,
+      );
+      this.drfRepositoryModel = new Model({},
+        null,
+        {
+          validateOnChange: true,
+        });
+      const { organization, ...schema } = this.computedSchema;
+      const NoOrgModel = getModel(
+        schema,
+        RepositoryModel,
+      );
+      this.noOrgModel = new NoOrgModel({},
+        null,
+        {
+          validateOnChange: true,
+        });
+    },
     dispatchClick() {
       this.eventClick = !this.eventClick;
       this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
@@ -279,15 +292,21 @@ export default {
         slug: this.$t('webapp.create_repository.new_repo'),
       };
     },
-    async onSubmit() {
+    onSubmit() {
+      this.submit(this.data.organization ? this.drfRepositoryModel : this.noOrgModel);
+    },
+    async submit(model) {
       const categoryValues = this.categories.map(category => category.id);
-      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
-        { ...this.data, categories: categoryValues });
+      const updatedModel = updateAttrsValues(model,
+        {
+          ...this.data,
+          categories: categoryValues,
+        });
       this.submitting = true;
       this.errors = {};
 
       try {
-        const response = await this.drfRepositoryModel.save();
+        const response = await updatedModel.save();
         // eslint-disable-next-line camelcase
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;

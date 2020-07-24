@@ -112,7 +112,6 @@ export default {
     ...mapActions([
       'updateProfile',
       'orgUpdateAuthorizationRole',
-      'approveOrgRequestAuthorization',
       'removeOrgAuthorization',
     ]),
     async remove() {
