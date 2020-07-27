@@ -227,7 +227,11 @@
       "no_users": "Sem usuários no time.",
       "search_user": "Procurar usuário",
       "search_user_org": "Procurar usuário/organização",
-      "no_locale": "Sem local"
+      "no_locale": "Sem local",
+      "remove_user_confirm": "Remover todas as permissões para {user}?",
+      "remove": "Remover",
+      "cancel": "Cancelar",
+      "default_error": "Algo deu errado. Não foi possível realizar essa ação."
     },
     "roles": {
       "user": "Usuário",

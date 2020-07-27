@@ -18,22 +18,25 @@
             v-model="newRole"
             size="is-small" />
         </div>
-        <div class="column is-2">
+        <div class="column is-2 icon__container">
           <b-icon
-            v-if="submitting"
+            v-show="submitting"
+            class="icon-spin"
+            size="is-small"
             icon="refresh" />
         </div>
-        <div class="column is-2">
+        <div class="column is-2 icon__container">
           <b-icon
-            v-if="submitted"
+            v-show="submitted"
             size="is-small"
             class="text-color-primary"
             icon="check" />
         </div>
-        <div class="column is-2">
+        <div class="column is-2 icon__container">
           <b-icon
+            v-show="!submitting"
             icon="close"
-            class="icon-button"
+            class="icon--button"
             size="is-small"
             @click.native="remove()"/>
         </div>
@@ -125,8 +128,9 @@ export default {
     async remove() {
       return new Promise((resolve, reject) => {
         this.removeDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure?',
-          confirmText: 'Remove',
+          message: this.$t('webapp.settings.remove_user_confirm', { user: this.user__nickname }),
+          confirmText: this.$t('webapp.settings.remove'),
+          cancelText: this.$t('webapp.settings.cancel'),
           type: 'is-danger',
           onConfirm: async () => {
             this.submitting = true;
@@ -177,7 +181,7 @@ export default {
       const { data } = response;
 
       this.$buefy.toast.open({
-        message: data.detail || 'Something wrong happened...',
+        message: data.detail || this.$t('webapp.settings.default_error'),
         type: 'is-danger',
       });
 
@@ -190,7 +194,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .icon-button {
+    .icon {
+      &--button {
         cursor: pointer;
+      }
+
+      &__container {
+        display: flex;
+        justify-content: center;
+      }
     }
 </style>
