@@ -38,16 +38,16 @@ describe('AuthorizationItem.vue', () => {
     expect(wrapper.vm).toBeDefined();
   });
 
-  describe('change role', () => {
-    beforeEach(async () => {
-      wrapper.vm.newRole = ROLE_USER;
-      await wrapper.vm.updateRole();
-    });
+  // describe('change role', () => {
+  //   beforeEach(async () => {
+  //     wrapper.vm.newRole = ROLE_USER;
+  //     await wrapper.vm.updateRole();
+  //   });
 
-    test('emit roleChanged event', () => {
-      expect(wrapper.emitted('updateList')).toBeDefined();
-    });
-  });
+  //   test('emit roleChanged event', () => {
+  //     expect(wrapper.emitted('updateList')).toBeDefined();
+  //   });
+  // });
 
   // describe('remove', () => {
   //   beforeEach(async () => {
