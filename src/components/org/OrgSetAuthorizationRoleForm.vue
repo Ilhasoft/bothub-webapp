@@ -1,17 +1,17 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <div class="bh-grid">
-      <div class="bh-grid__item bh-grid__item--grow-2">
+    <div class="columns">
+      <div class="column is-three-fifths">
         <p><strong>{{ $t('webapp.settings.users') }}</strong></p>
         <select-users-input
           v-model="usersProfile"
           no-orgs />
       </div>
-      <div class="bh-grid__item">
+      <div class="column is-one-fifth">
         <p><strong>{{ $t('webapp.settings.role') }}</strong></p>
         <role-select v-model="role" />
       </div>
-      <div class="bh-grid__item bh-grid__item--grow-0">
+      <div class="column is-one-fifth">
         <p>&nbsp;</p>
         <b-button
           :disabled="usersProfile.length === 0 || !role"
