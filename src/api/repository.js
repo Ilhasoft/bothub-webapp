@@ -52,6 +52,10 @@ export default {
   search(query, limit = 20) {
     return new utils.Page('/v2/repository/repositories/', limit, query);
   },
+
+  searchByOrg(orgNickname, limit = 20) {
+    return new utils.Page('/v2/repository/search-repositories/', limit, { nickname: orgNickname });
+  },
   editVersion(repository, id, name) {
     return request.$http.patch(`/v2/repository/version/${id}/`,
       {

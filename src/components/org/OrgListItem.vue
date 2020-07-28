@@ -8,23 +8,23 @@
           <div class="org-card__title">
             <span class="text-color-fake-black">{{ name }}</span>
           </div>
-          <div class="org-card__info-item">
+          <!-- <div class="org-card__info-item">
             <span>{{ $t('webapp.layout.created_by') }}</span>
             <strong class="medium text-color-primary">{{ owner.nickname }}</strong>
-          </div>
+          </div> -->
           <div class="org-card__attrs">
             <p class="org-card__attrs__line"> <b-icon
               size="is-medium"
               class="org-card__icon"
-              icon="brain"/> {{ $tc('webapp.orgs.repositories', repository_count) }} </p>
+              icon="brain"/> {{ $tc('webapp.orgs.repositories', count_repositories) }} </p>
             <p class="org-card__attrs__line"> <b-icon
               size="is-medium"
               class="org-card__icon"
-              icon="account-multiple"/> {{ $tc('webapp.orgs.members', member_count) }} </p>
+              icon="account-multiple"/> {{ $tc('webapp.orgs.members', count_members) }} </p>
           </div>
-          <div class="org-card__time">
+          <!-- <div class="org-card__time">
             <p> {{ $t('webapp.orgs.created') }} {{ created_at | moment('from') }} </p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -44,11 +44,11 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    member_count: {
+    count_members: {
       type: Number,
       default: 0,
     },
-    repository_count: {
+    count_repositories: {
       type: Number,
       default: 0,
     },
@@ -56,11 +56,16 @@ export default {
       type: String,
       default: null,
     },
+    nickname: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     goToOrg() {
       this.$router.push({
         name: 'org',
+        params: { org_nickname: this.nickname },
       });
     },
   },

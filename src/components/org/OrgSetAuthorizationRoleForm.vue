@@ -3,7 +3,9 @@
     <div class="columns">
       <div class="column is-three-fifths">
         <p><strong>{{ $t('webapp.settings.users') }}</strong></p>
-        <select-users-input v-model="usersProfile" />
+        <select-users-input
+          v-model="usersProfile"
+          no-orgs />
       </div>
       <div class="column is-one-fifth">
         <p><strong>{{ $t('webapp.settings.role') }}</strong></p>
@@ -29,13 +31,13 @@ import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 export default {
-  name: 'SetAuthorizationRoleForm',
+  name: 'OrgSetAuthorizationRoleForm',
   components: {
     SelectUsersInput,
     RoleSelect,
   },
   props: {
-    repositoryUuid: {
+    orgNickname: {
       required: true,
       type: String,
     },
@@ -49,7 +51,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'repositoryUpdateAuthorizationRole',
+      'orgUpdateAuthorizationRole',
     ]),
     async onSubmit() {
       this.errors = null;
@@ -57,8 +59,8 @@ export default {
 
       await Promise.all(this.usersProfile.map(async (userProfile) => {
         try {
-          await this.repositoryUpdateAuthorizationRole({
-            repositoryUuid: this.repositoryUuid,
+          await this.orgUpdateAuthorizationRole({
+            orgNickname: this.orgNickname,
             userNickname: userProfile.nickname,
             newRole: this.role,
           });

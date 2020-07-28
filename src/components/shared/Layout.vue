@@ -35,7 +35,7 @@
               id="tour-create_intelligence-step-1"
               :is-step-blocked="!blockedNextStepTutorial"
               class="bh-grid__item hide-mobile">
-              <router-link :to="'new'">
+              <router-link :to="'/new'">
                 <b-button
                   type="is-primary"
                   inverted

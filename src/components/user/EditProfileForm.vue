@@ -19,8 +19,7 @@
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
-      hide-help
-      class="edit-field" />
+      hide-help />
     <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>

@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import Auth from './auth';
 import User from './user';
+import Org from './org';
 import Repository from './repository';
 import Category from './category';
 import Example from './example';
@@ -19,6 +20,7 @@ const store = new Vuex.Store({
   modules: {
     Auth,
     User,
+    Org,
     Repository,
     Category,
     Example,

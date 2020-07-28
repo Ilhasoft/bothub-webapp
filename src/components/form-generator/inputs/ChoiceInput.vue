@@ -1,6 +1,12 @@
 <template>
+  <fetch-choice-input
+    v-if="fetch"
+    :fetch="fetch"
+    :label-placeholder="labelPlaceholder"
+    v-model="value"
+    @input="update()"/>
   <b-autocomplete
-    v-if="compact"
+    v-else-if="compact"
     v-model="value"
     :placeholder="labelPlaceholder"
     :custom-formatter="formatter"
@@ -24,12 +30,20 @@
 
 <script>
 import { formatters } from '@/utils';
+import FetchChoiceInput from './FetchChoiceInput';
 
 export default {
+  components: {
+    FetchChoiceInput,
+  },
   props: {
     choices: {
-      required: true,
       type: Array,
+      default: () => [],
+    },
+    fetch: {
+      type: Function,
+      default: null,
     },
     initialData: {
       type: [Array, String],

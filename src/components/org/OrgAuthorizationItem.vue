@@ -1,9 +1,7 @@
 <template>
   <div class="columns is-vcentered">
     <div class="column is-1">
-      <user-avatar
-        :is-organization="user__is_organization"
-        :profile="getProfile(user__nickname)" />
+      <user-avatar :profile="getProfile(user__nickname)" />
     </div>
     <div class="column is-one-fifth">
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
@@ -45,7 +43,6 @@
   </div>
 </template>
 
-
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
@@ -54,16 +51,12 @@ import RoleSelect from '@/components/inputs/RoleSelect';
 
 
 export default {
-  name: 'AuthorizationItem',
+  name: 'OrgAuthorizationItem',
   components: {
     UserAvatar,
     RoleSelect,
   },
   props: {
-    id_request_authorizations: {
-      type: Number,
-      required: true,
-    },
     uuid: {
       type: String,
       required: true,
@@ -72,8 +65,16 @@ export default {
       type: String,
       required: true,
     },
-    repository: {
+    organization__nickname: {
       type: String,
+      required: true,
+    },
+    is_organization: {
+      type: Boolean,
+      default: true,
+    },
+    organization: {
+      type: Number,
       required: true,
     },
     role: {
@@ -89,10 +90,6 @@ export default {
       required: true,
     },
     can_write: {
-      type: Boolean,
-      required: true,
-    },
-    user__is_organization: {
       type: Boolean,
       required: true,
     },
@@ -121,9 +118,8 @@ export default {
   methods: {
     ...mapActions([
       'updateProfile',
-      'repositoryUpdateAuthorizationRole',
-      'approveRequestAuthorization',
-      'removeAuthorization',
+      'orgUpdateAuthorizationRole',
+      'removeOrgAuthorization',
     ]),
     async remove() {
       return new Promise((resolve, reject) => {
@@ -135,9 +131,9 @@ export default {
           onConfirm: async () => {
             this.submitting = true;
             try {
-              await this.removeAuthorization({
-                id: this.id_request_authorizations,
-                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+              await this.removeOrgAuthorization({
+                userNickname: this.user__nickname,
+                orgNickname: this.organization__nickname,
               });
               this.$emit('deleted');
             } catch (error) {
@@ -159,8 +155,8 @@ export default {
       this.submitting = true;
       this.submitted = false;
       try {
-        await this.repositoryUpdateAuthorizationRole({
-          repositoryUuid: this.repository,
+        await this.orgUpdateAuthorizationRole({
+          orgNickname: this.organization__nickname,
           userNickname: this.user__nickname,
           newRole: this.newRole,
         });
