@@ -41,7 +41,6 @@ export default {
   },
 
   orgUpdateAuthorizationRole(store, { orgNickname, userNickname, newRole }) {
-    console.log({ orgNickname, userNickname, newRole });
     return org.updateAuthorizationRole(
       orgNickname,
       userNickname,

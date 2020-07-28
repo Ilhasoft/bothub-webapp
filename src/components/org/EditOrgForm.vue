@@ -1,11 +1,11 @@
 <template>
   <div>
     <form @submit.prevent="onSubmit">
-      <loading v-if="!formSchema" />
+      <loading v-if="!filteredSchema" />
       <b-loading :active="submitting" />
       <form-generator
-        v-if="formSchema && !submitting"
-        :schema="formSchema"
+        v-if="filteredSchema && !submitting"
+        :schema="filteredSchema"
         v-model="data"
         :initial-data="initialData"
         :errors="errors"
@@ -50,6 +50,14 @@ export default {
       errors: {},
       submitting: false,
     };
+  },
+  computed: {
+    filteredSchema() {
+      if (!this.formSchema) return null;
+      const { description, ...schema } = this.formSchema;
+      description.type = 'text';
+      return { ...schema, description };
+    },
   },
   mounted() {
     this.getSchema();
