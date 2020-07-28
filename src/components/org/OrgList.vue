@@ -3,14 +3,14 @@
     :list="list"
     :item-component="item"
     :per-page="perPage"
-    class="org-list"
-    @updated="mock"/>
+    :empty-message="$t('webapp.orgs.no_orgs')"
+    class="org-list"/>
 </template>
 
 <script>
 import PaginatedList from '@/components/shared/PaginatedList';
-import OrgListItem from '@/components/user/OrgListItem';
-import utils from '@/api/utils';
+import OrgListItem from '@/components/org/OrgListItem';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'OrgList',
@@ -25,20 +25,14 @@ export default {
     };
   },
   mounted() {
-    this.list = new utils.Page('');
+    this.loadOrgs();
   },
   methods: {
-    mock() {
-      this.list.items = Array(this.perPage).fill(null);
-      this.list.items = this.list.items.map((_, index) => ({
-        name: `Org ${index + 1}`,
-        owner: {
-          nickname: 'User',
-        },
-        member_count: 50,
-        repository_count: 100,
-        created_at: '2020-06-12T18:02:29.743854Z',
-      }));
+    ...mapActions([
+      'getAllOrgs',
+    ]),
+    async loadOrgs() {
+      this.list = await this.getAllOrgs();
     },
   },
 };

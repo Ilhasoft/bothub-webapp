@@ -21,7 +21,9 @@
         <div class="form__wrapper">
           <h1 class="form__title"> {{ $t('webapp.orgs.create_org_title') }} </h1>
           <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
-          <create-org-form class="form"/>
+          <create-org-form
+            class="form"
+            @created="onCreated"/>
         </div>
       </b-modal>
     </div>
@@ -30,9 +32,9 @@
 
 <script>
 import Layout from '@/components/shared/Layout';
-import OrgList from '@/components/user/OrgList';
+import OrgList from '@/components/org/OrgList';
 import LoginForm from '@/components/auth/LoginForm';
-import CreateOrgForm from '@/components/user/CreateOrgForm';
+import CreateOrgForm from '@/components/org/CreateOrgForm';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -52,6 +54,15 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+  },
+  methods: {
+    onCreated(nickname) {
+      this.getNewOrgSchema = false;
+      this.$router.push({
+        name: 'org',
+        params: { org_nickname: nickname },
+      });
+    },
   },
 };
 </script>
