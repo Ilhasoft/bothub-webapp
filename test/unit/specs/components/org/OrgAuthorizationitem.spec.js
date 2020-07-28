@@ -5,7 +5,7 @@ import Buefy from 'buefy';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import applyFilters from '@/utils/filters';
-import { ROLE_USER } from '@/utils';
+// import { ROLE_USER } from '@/utils';
 import OrgAuthorizationItem from '@/components/org/OrgAuthorizationItem';
 
 
