@@ -70,7 +70,6 @@ export default {
   computed: {
     ...mapGetters([
       'activeTutorial',
-      'activeMenu',
     ]),
   },
 };

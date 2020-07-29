@@ -185,7 +185,7 @@ export default {
   margin-top: 5.5rem;
 }
 .switchNewIntelligence{
-  padding-top: 5.2rem;
+  padding-top: 2rem;
 }
 .field-content{
 height: 58px;

@@ -10,15 +10,21 @@
         <p v-html="$t('webapp.tutorial.description')" />
       </div>
       <b-notification
-        :active.sync="createIntelligenceAlert"
+        :active.sync="openNotification"
         :duration="4000"
         :closable="false"
-        class="tutorial__createIntelligenceAlert"
-        type="is-danger"
-        auto-close
+        :auto-close="autoCloseNotification"
+        :type="typeNotification"
+        class="tutorial__notificationAlert"
         animation="fade"
         role="alert">
-        <p>{{ notificationMessage }}</p>
+        <div class="tutorial__notificationAlert__container">
+          <p>{{ notificationMessage }}</p>
+          <b-icon
+            v-if="typeNotification === 'is-warning'"
+            class="loading"
+            icon="sync" />
+        </div>
       </b-notification>
       <div class="tutorial__steps">
         <div
@@ -79,7 +85,7 @@ export default {
   },
   data() {
     return {
-      width: 493,
+      width: 520,
       list: [
         { label: 'create_account', route: 'home', previous: '' },
         { label: 'create_intelligence', route: 'new', previous: 'create_account' },
@@ -92,19 +98,23 @@ export default {
       ],
       repositoryTutorial: null,
       nickname: '',
-      createIntelligenceAlert: false,
+      openNotification: false,
       error: null,
       finished: {},
       notificationMessage: '',
       finisheButton: false,
+      repositoryStatus: {},
+      typeNotification: '',
+      autoCloseNotification: false,
+      refreshStatus: null,
       confettiConfig: {
         angle: 90,
-        spread: 150,
-        startVelocity: 50,
-        elementCount: 110,
+        spread: 200,
+        startVelocity: 45,
+        elementCount: 80,
         dragFriction: 0.1,
-        duration: 8000,
-        stagger: 26,
+        duration: 4000,
+        stagger: 0,
         width: '15px',
         height: '30px',
         colors: ['#A182BA', '#00ACEA', '#8AC13E', '#E81B26', '#FFEE00'],
@@ -120,6 +130,9 @@ export default {
       'myProfile',
       'getFinalModal',
       'getFinalMessage',
+      'getSelectedVersion',
+      'getSelectedVersionRepository',
+      'getRepositoryTraining',
     ]),
     computedList() {
       return this.list.map(item => ({
@@ -138,6 +151,10 @@ export default {
         this.finished = { ...this.finishedTutorials };
         this.nickname = this.myProfile.nickname;
         this.checkIfDoneTutorial();
+        if (this.getRepositoryTraining) {
+          this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
+          this.checkWhichStatus();
+        }
       }
     },
   },
@@ -149,8 +166,11 @@ export default {
       'updateTutorialsDone',
       'setCreateIntelligence',
       'setFinalModal',
-      'setFinalizationMessage',
+      'updateFinalizationMessage',
       'setTutorialInactive',
+      'getRepositoryStatus',
+      'setRepositoryTraining',
+      'setFinalizationMessage',
     ]),
     async updateMyRepositories() {
       try {
@@ -177,7 +197,7 @@ export default {
     },
     checkIfDoneTutorial() {
       if (Object.keys(this.finished).length === 7) {
-        this.setFinalizationMessage();
+        this.updateFinalizationMessage();
         this.finisheButton = true;
         return '';
       }
@@ -185,33 +205,91 @@ export default {
       return '';
     },
     closeTutorialMenu() {
-      this.$emit('update:open', false);
-      this.setTutorialMenuInactive();
       if (Object.keys(this.finished).length === 7) {
         this.setFinalModal(true);
+        this.setFinalizationMessage();
+      }
+      this.openNotification = false;
+      this.typeNotification = '';
+      this.autoCloseNotification = false;
+      this.notificationMessage = '';
+      this.$emit('update:open', false);
+      this.setTutorialMenuInactive();
+    },
+    async getTrainingStatus() {
+      const { data } = await this.getRepositoryStatus({
+        repositoryUUID: this.getSelectedVersionRepository,
+        repositoryVersion: this.getSelectedVersion,
+      });
+      this.repositoryStatus = data;
+      return this.repositoryStatus;
+    },
+    checkWhichStatus() {
+      try {
+        this.refreshStatus = setInterval(async () => {
+          if (this.repositoryStatus.count !== 0) {
+            await this.getTrainingStatus();
+            if (this.repositoryStatus.results[0].status === 2) {
+              clearInterval(this.refreshStatus);
+              await this.setRepositoryTraining(false);
+              this.setNotificationAlert('is-success', true, this.$t('webapp.tutorial.training_success'));
+              return;
+            }
+            if (this.repositoryStatus.results[0].status === 3) {
+              clearInterval(this.refreshStatus);
+              await this.setRepositoryTraining(false);
+              this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            }
+          }
+        }, 100000);
+      } catch (error) {
+        this.error = error;
+        clearInterval(this.refreshStatus);
       }
     },
-    startTutorial(name, target, previous) {
+    setNotificationAlert(type, autoClose, title) {
+      this.openNotification = true;
+      this.autoCloseNotification = autoClose;
+      this.typeNotification = type;
+      this.notificationMessage = title;
+    },
+    goToTutorial(name, target) {
       this.setTutorialActive(name);
-      if (target === 'home' || target === 'new') {
-        if (target === 'home') return '';
-        if (this.$router.currentRoute.name !== 'home') {
-          this.setTutorialInactive();
-          return '';
-        }
-        this.closeTutorialMenu();
-      } else {
-        if (Object.keys(this.finished).includes(previous)
-        || (previous === 'create_intelligence' && this.repositoryTutorial !== null)) {
-          this.$router.push(`/dashboard/${this.nickname}/${this.repositoryTutorial}/${target}`);
-          this.createIntelligenceAlert = false;
+      this.$router.push(`/dashboard/${this.nickname}/${this.repositoryTutorial}/${target}`);
+      this.openNotification = false;
+      this.closeTutorialMenu();
+    },
+    async startTutorial(name, target, previous) {
+      try {
+        if (target === 'home' || target === 'new') {
+          if (target === 'home') return;
+          this.setTutorialActive(name);
+          if (this.$router.currentRoute.name !== 'home') {
+            this.setTutorialInactive();
+            return;
+          }
           this.closeTutorialMenu();
-          return '';
+        } else if (Object.keys(this.finished).includes(previous)
+        || (previous === 'create_intelligence' && this.repositoryTutorial !== null)) {
+          if (target === 'training') {
+            this.goToTutorial(name, target);
+            return;
+          }
+          await this.getTrainingStatus();
+          if (this.repositoryStatus.length !== 0 && this.repositoryStatus.results[0].status === 2) {
+            this.goToTutorial(name, target);
+            return;
+          }
+        } else {
+          if (this.getRepositoryTraining) {
+            this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
+            return;
+          }
+          this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.alert_message'));
         }
-        this.createIntelligenceAlert = true;
-        this.notificationMessage = this.$t('webapp.tutorial.alert_message');
+      } catch (error) {
+        this.error = error;
       }
-      return '';
     },
   },
 };
@@ -219,11 +297,23 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+
+.loading {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(360deg);}
+    to {transform:rotate(0deg);}
+}
 .tutorial {
     background-color: white;
     border-radius: 10px;
     padding: 1.5rem 3rem;
-    width: 30.813rem;
+    width: 32.5rem;
 
     &__title {
         text-align: center;
@@ -237,7 +327,7 @@ export default {
     }
 
     &__steps {
-        margin: 2rem 0 2.5rem 0;
+        margin: 1.5rem 0 1.5rem 1.5rem;
     }
 
     &__item {
@@ -271,10 +361,15 @@ export default {
             }
         }
     }
-    &__createIntelligenceAlert{
-      p{
-        margin:0;
-        text-align: center;
+    &__notificationAlert{
+      &__container{
+      display:flex;
+      justify-content: space-around;
+      align-items: center;
+        p{
+          margin:0;
+          text-align: center;
+        }
       }
     }
     &__skip{
@@ -282,8 +377,9 @@ export default {
         cursor: pointer;
         margin: auto;
         display:inline-block;
-        border-bottom:2px solid rgba(117, 117, 117, 0.363);
-        padding-bottom:2px;
+        border-bottom: 2px solid rgba(117, 117, 117, 0.363);
+        margin-left: 1.2rem;
+        padding-bottom: 2px;
         &:hover{
           color : rgba(83, 83, 83, 0.884)
         }

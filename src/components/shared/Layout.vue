@@ -33,6 +33,8 @@
             <div
               v-if="authenticated"
               id="tour-create_intelligence-step-1"
+              :is-next-disabled="true"
+              :is-previous-disabled="true"
               :is-step-blocked="!blockedNextStepTutorial"
               class="bh-grid__item hide-mobile">
               <router-link :to="'new'">
@@ -102,9 +104,10 @@
         </div>
       </div>
     </div>
-    <div class="layout__content"><slot /></div>
+    <div class="layout__content">
+      <slot/>
+    </div>
     <site-footer v-if="showFooter" />
-    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 </template>
 
@@ -113,12 +116,10 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import TutorialModal from '@/components/TutorialModal';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  TutorialModal,
 };
 
 export default {
@@ -173,6 +174,7 @@ export default {
     ...mapActions([
       'updateMyProfile',
       'logout',
+      'setTutorialMenuActive',
     ]),
     openNewRepository() {
       this.$router.push({
@@ -184,7 +186,7 @@ export default {
     },
     openBeginnerTutorialModal() {
       if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
-        this.beginnerTutorialModalOpen = true;
+        this.setTutorialMenuActive();
       }
     },
     orgs() {

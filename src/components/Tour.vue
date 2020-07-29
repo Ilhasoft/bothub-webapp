@@ -2,8 +2,7 @@
   <v-tour
     :name="name"
     :steps="steps"
-    :options="options"
-    :callbacks="callbacksTour">
+    :options="options">
     <template
       slot-scope="tour">
       <div
@@ -34,15 +33,15 @@
               <div
                 slot="actions">
                 <button
-                  v-if="!isFirst"
+                  v-if="!previousButtonDisabled && !isFirst"
                   class="v-step__button v-step__button-previous"
                   @click="prevStep()">{{ options.labels.buttonPrevious }}</button>
                 <button
-                  v-if="!isLast"
+                  v-if="!nextButtonDisabled && !isLast"
                   class="v-step__button v-step__button-next"
                   @click="nextStep()">{{ options.labels.buttonNext }} </button>
                 <button
-                  v-if="isLast && !checkName"
+                  v-if="isLast && !checkName && !finishButtonDisabled"
                   class="v-step__button v-step__button-stop"
                   @click="onFinishTutorial()">{{ options.labels.buttonStop }}</button>
                 <button
@@ -80,10 +79,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    skipEvent: {
+      type: Boolean,
+      default: false,
+    },
+    resetTutorial: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       options: {
+        useKeyboardNavigation: false,
         labels: {
           buttonPrevious: this.$t('webapp.tutorial.previous_step'),
           buttonNext: this.$t('webapp.tutorial.next_step'),
@@ -92,9 +100,7 @@ export default {
         },
         highlight: true,
       },
-      callbacksTour: {
-        onStop: this.stopTutorial,
-      },
+      nextDisabled: false,
     };
   },
   computed: {
@@ -137,6 +143,36 @@ export default {
 
       return 'create_intelligence';
     },
+    nextButtonDisabled() {
+      const element = document.querySelector(this.steps[this.currentStep].target).attributes;
+      try {
+        const { value } = element.getNamedItem('is-next-disabled');
+        if (value === 'true') return true;
+      } catch (_) {
+        return false;
+      }
+      return false;
+    },
+    previousButtonDisabled() {
+      const element = document.querySelector(this.steps[this.currentStep].target).attributes;
+      try {
+        const { value } = element.getNamedItem('is-previous-disabled');
+        if (value === 'true') return true;
+      } catch (_) {
+        return false;
+      }
+      return false;
+    },
+    finishButtonDisabled() {
+      const element = document.querySelector(this.steps[this.currentStep].target).attributes;
+      try {
+        const { value } = element.getNamedItem('is-finish-disabled');
+        if (value === 'true') return true;
+      } catch (_) {
+        return false;
+      }
+      return false;
+    },
   },
   watch: {
     nextEvent() {
@@ -144,6 +180,12 @@ export default {
     },
     finishEvent() {
       this.onFinishTutorial();
+    },
+    skipEvent() {
+      this.skipTutorial();
+    },
+    resetTutorial() {
+      this.restartTutorial();
     },
   },
   mounted() {
@@ -155,18 +197,17 @@ export default {
       'setTutorialInactive',
       'setTutorialMenuActive',
       'setFinalModal',
-      'setFinalizationMessage',
+      'updateFinalizationMessage',
+      'setTutorialActive',
+      'setUpdateRepository',
     ]),
     finishedMessage() {
       this.setFinalModal(false);
-      this.setFinalizationMessage();
+      this.updateFinalizationMessage();
       this.$tours[this.name].skip();
     },
-    async stopTutorial() {
-      await this.setTutorialInactive();
-    },
-    async setMenuActive() {
-      await this.setTutorialMenuActive();
+    setMenuActive() {
+      this.setTutorialMenuActive();
     },
     startTutorial() {
       if (this.$tours[this.name]) {
@@ -187,7 +228,13 @@ export default {
       if (!this.previousBlocked()) this.$tours[this.name].previousStep();
     },
     skipTutorial() {
+      this.setTutorialInactive();
+      this.setUpdateRepository(true);
       this.$tours[this.name].skip();
+    },
+    restartTutorial() {
+      this.setUpdateRepository(true);
+      this.$tours[this.name].start();
     },
     showLastStep() {
       this.$tours[this.name].currentStep = this.steps.length - 1;
