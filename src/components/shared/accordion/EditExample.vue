@@ -5,7 +5,7 @@
         <div class="bh-grid__item--grow-3 edit-sentence__input">
           <bh-field
             :errors="errors.text || errors.language"
-            label="Sentence">
+            :label="$t('webapp.example.sentence')">
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
@@ -23,7 +23,7 @@
         <div class="bh-grid__item edit-sentence__input">
           <bh-field
             :errors="errors.non_field_errors"
-            label="Intent">
+            :label="$t('webapp.example.intent')">
             <bh-autocomplete
               v-model="intent"
               :data="repository.intents_list || []"
@@ -105,7 +105,7 @@
           <b-button
             class="edit-sentence__btn-wrapper__cancelButton"
             @click="cancelEditSentence">
-            Cancel
+            {{ $t('webapp.trainings.cancel_button') }}
           </b-button>
           <b-button
             :disabled="!isValid || submitting"
@@ -113,7 +113,7 @@
             :loading="submitting"
             class="edit-sentence__btn-wrapper__saveButton"
             @click="onSubmit">
-            <slot v-if="!submitting">Save</slot>
+            <slot v-if="!submitting">{{ $t('webapp.trainings.save_button') }}</slot>
           </b-button>
         </div>
       </div>
@@ -266,7 +266,7 @@ export default {
       const newEntity = {
         start: this.textSelected.start,
         end: this.textSelected.end,
-        entity: '',
+        entity: this.text.substring(this.textSelected.start, this.textSelected.end),
       };
 
       this.pendingEntities.push({
