@@ -27,9 +27,9 @@
             <b-autocomplete
               v-model="intent"
               :data="repository.intents_list || []"
-              :custom-formatter="intentFormatters"
               :placeholder="$t('webapp.example.intent')"
-              size="normal" />
+              size="normal"
+              @input="intent = intentFormatters(intent)" />
           </b-field>
         </div>
       </div>
@@ -46,13 +46,12 @@
                 v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
               <b-autocomplete
                 :data="getAllEntities || []"
-                :custom-formatter="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
                 icon-right="close"
                 icon-right-clickable
                 class="edit-sentence-input"
-                size="normal"
+                @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
                 @icon-right-click="removeEntity(entity, index)"
               />
             </b-field>
@@ -77,6 +76,7 @@
                 class="edit-sentence-input"
                 size="normal"
                 icon-right-clickable
+                @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
                 @select="elevateToEntity(entity, index)"
                 @icon-right-click="removePendingEntity(entity, index)"
               />
@@ -194,7 +194,6 @@ export default {
     },
     entitiesError() {
       return (index) => {
-        console.log(index, this.entitiesToEdit.length - 1);
         if (index === this.entitiesToEdit.length - 1) {
           return this.errors.entities;
         }
@@ -260,7 +259,9 @@ export default {
       const newEntity = {
         start: this.textSelected.start,
         end: this.textSelected.end,
-        entity: this.text.substring(this.textSelected.start, this.textSelected.end),
+        entity: this.intentFormatters(
+          this.text.substring(this.textSelected.start, this.textSelected.end)
+        ),
       };
 
       this.pendingEntities.push({
