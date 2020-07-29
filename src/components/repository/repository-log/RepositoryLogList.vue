@@ -7,9 +7,9 @@
         :closable="false">
         <b-loading :active.sync="loadingLogs"/>
       </b-notification>
-      <div>
+      <div
+        id="tour-inbox-step-1">
         <b-checkbox
-          id="tour-inbox-step-1"
           v-model="select"
           :native-value="selectAll">
           {{ $t('webapp.inbox.select_all') }}
@@ -108,6 +108,7 @@ export default {
     ...mapGetters({
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
+      activeTutorial: 'activeTutorial',
     }),
     confidenceVerify() {
       if (this.logData.length > 1) {
@@ -155,6 +156,8 @@ export default {
       });
     },
     showModalTraining(typeModal) {
+      if (this.activeTutorial === 'inbox') return;
+
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -188,6 +191,8 @@ export default {
       });
     },
     showModalSentence(typeModal) {
+      if (this.activeTutorial === 'inbox') return;
+
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -265,15 +270,6 @@ export default {
         }
       });
     },
-    // showDeleteModal() {
-    //   console.log(this.logData);
-    //   this.$buefy.dialog.confirm({
-    //     message: 'Você tem certeza que deseja deletar as frases ?',
-    //     onConfirm: () => {
-    //       this.$buefy.toast.open('User confirmed');
-    //     },
-    //   });
-    // },
     showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = Array.join(messages, ',');

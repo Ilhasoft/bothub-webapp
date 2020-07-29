@@ -12,7 +12,6 @@
         <form-generator
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-0"
-          :drf-model-instance="drfRepositoryModel"
           :is-step-blocked="!checkFormData"
           :schema="filteredSchema"
           v-model="data"
@@ -20,16 +19,17 @@
           :show-labels="false"
           :new-intelligence-forms="true"
           class="create-repository__form"/>
-        <span
+        <div
           id="tour-create_intelligence_forms-step-1"
-          :is-step-blocked="!blockedNextStepTutorial">
+          :is-step-blocked="!blockedNextStepTutorial"
+          class="create-repository__form__style">
           <b-button
             :disabled="!checkFormData"
             type="is-primary"
-            class="create-repository__form__firstButtonNext"
+            class="create-repository__form__style__button"
             @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
           </b-button>
-        </span>
+        </div>
       </div>
       <div
         v-show="current==1"
@@ -42,7 +42,7 @@
         <category-select
           v-if="formSchema"
           id="tour-create_intelligence_forms-step-2"
-          :is-previus-blocked="true"
+          :is-previous-blocked="true"
           v-model="categories"
           :is-step-blocked="categories.length === 0"
           class="create-repository__form"/>
@@ -54,7 +54,9 @@
           </b-button>
           <span
             id="tour-create_intelligence_forms-step-3"
-            :is-step-blocked="blockedNextStepTutorial">
+            :is-step-blocked="blockedNextStepTutorial"
+            :class="activeTutorial === 'create_intelligence'
+            ? 'create-repository__form__finishButton' : ''">
             <b-button
               native-type="submit"
               type="is-primary"
@@ -97,6 +99,7 @@
       :step-count="4"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
+      :skip-if-back-page="eventClickBackPage"
       name="create_intelligence_forms"/>
     <tutorial-modal :open="activeMenu"/>
   </div>
@@ -137,18 +140,21 @@ export default {
       submitting: false,
       errors: {},
       drfRepositoryModel: {},
+      noOrgModel: {},
       categories: [],
       current: 0,
       resultParams: {},
       eventClick: false,
       eventClickFinish: false,
       blockedNextStepTutorial: false,
+      eventClickBackPage: false,
     };
   },
   computed: {
     ...mapGetters([
       'activeTutorial',
       'activeMenu',
+      'myProfile',
     ]),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
@@ -159,8 +165,15 @@ export default {
       }, {});
       // eslint-disable-next-line camelcase
       const { is_private, ...schema } = computed;
+      const orgField = {
+        organization: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
+          label: this.$t('webapp.orgs.owner'),
+          fetch: this.getOrgs,
+          type: 'choice',
+        } : {},
+      };
       // eslint-disable-next-line camelcase
-      if (is_private) { return { ...schema, is_private }; }
+      if (is_private) { return { ...schema, ...orgField, is_private }; }
       return computed;
     },
     filteredSchema() {
@@ -192,27 +205,51 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
-    const Model = getModel(
-      this.computedSchema,
-      RepositoryModel,
-    );
-    this.drfRepositoryModel = new Model({},
-      null,
-      {
-        validateOnChange: true,
-      });
+    this.constructModels();
+  },
+  beforeDestroy() {
+    this.checkIfIsTutorial();
   },
   methods: {
     ...mapActions([
       'getNewRepositorySchema',
       'newRepository',
+      'setTutorialInactive',
+      'getAllOrgs',
     ]),
+    constructModels() {
+      const Model = getModel(
+        this.computedSchema,
+        RepositoryModel,
+      );
+      this.drfRepositoryModel = new Model({},
+        null,
+        {
+          validateOnChange: true,
+        });
+      const { organization, ...schema } = this.computedSchema;
+      const NoOrgModel = getModel(
+        schema,
+        RepositoryModel,
+      );
+      this.noOrgModel = new NoOrgModel({},
+        null,
+        {
+          validateOnChange: true,
+        });
+    },
     dispatchClick() {
       this.eventClick = !this.eventClick;
       this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+    },
+    checkIfIsTutorial() {
+      if (this.activeTutorial === 'create_intelligence') {
+        this.setTutorialInactive();
+      }
     },
     repositoryDetailsRouterParams() {
       return {
@@ -223,6 +260,19 @@ export default {
         },
       };
     },
+    async getOrgs() {
+      this.loading = true;
+      const list = await this.getAllOrgs();
+      await list.getAllItems();
+      const options = list.items.map(org => ({
+        label: org.name,
+        value: org,
+      }));
+      return [
+        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
+        ...options,
+      ];
+    },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
         ? this.categories.map(category => category.name)
@@ -232,25 +282,35 @@ export default {
         ? this.categories
         : [{ name: this.$t('webapp.create_repository.category') }];
 
+      const organization = this.data.organization ? this.data.organization.name : null;
+
       return {
         name: this.data.name || this.$t('webapp.create_repository.new_repo'),
         available_languages: [this.data.language || this.$t('webapp.create_repository.language')],
         language: this.data.language || this.$t('webapp.create_repository.language'),
-        owner__nickname: this.userName,
+        owner__nickname: organization || this.userName,
         categories,
         categories_list: categoryNames,
         slug: this.$t('webapp.create_repository.new_repo'),
       };
     },
-    async onSubmit() {
+    onSubmit() {
+      this.submit(this.data.organization ? this.drfRepositoryModel : this.noOrgModel);
+    },
+    async submit(model) {
       const categoryValues = this.categories.map(category => category.id);
-      this.drfRepositoryModel = updateAttrsValues(this.drfRepositoryModel,
-        { ...this.data, categories: categoryValues });
+      const { organization, ...data } = this.data;
+      const updatedModel = updateAttrsValues(model,
+        {
+          ...data,
+          organization: organization ? organization.id : null,
+          categories: categoryValues,
+        });
       this.submitting = true;
       this.errors = {};
 
       try {
-        const response = await this.drfRepositoryModel.save();
+        const response = await updatedModel.save();
         // eslint-disable-next-line camelcase
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
@@ -271,10 +331,6 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.teste{
-  border: 1px solid red;
-  z-index: 10
-}
     .create-repository {
         display: flex;
         justify-content: space-around;
@@ -304,7 +360,7 @@ export default {
         &__form {
             text-align: left;
             margin: 3rem 0;
-
+            width: 30.400rem;
             &__final--message {
               display: flex;
               align-items: center;
@@ -324,9 +380,10 @@ export default {
                     padding: 0 3rem ;
                 }
             }
-
+            &__finishButton{
+              border-radius: 6px;
+            }
             &__buttons{
-              margin-top: 0.5rem;
               box-shadow: 0px 3px 6px #00000029;
               border-radius: 6px;
               width: 6.875rem;
@@ -336,15 +393,20 @@ export default {
                 }
             }
 
-            &__firstButtonNext{
-              margin-top: 4rem;
-              box-shadow: 0px 3px 6px #00000029;
-              border-radius: 6px;
+            &__style{
+              margin: 3rem auto 0;
               width: 6.875rem;
               height: 2.188rem;
+              border-radius: 6px;
               @media (max-width: $mobile-width*1.2) {
-                 margin-top: 7rem;
-                }
+                   margin-top: 10rem;
+              }
+              &__button{
+                box-shadow: 0px 3px 6px #00000029;
+                border-radius: 6px;
+                width: 6.875rem;
+                height: 2.188rem;
+              }
             }
         }
 

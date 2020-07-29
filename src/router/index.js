@@ -239,7 +239,7 @@ export default new Router({
         },
       },
       {
-        path: '/org/',
+        path: '/org/:org_nickname/',
         name: 'org',
         component: Org,
         beforeEnter: async (to, from, next) => {

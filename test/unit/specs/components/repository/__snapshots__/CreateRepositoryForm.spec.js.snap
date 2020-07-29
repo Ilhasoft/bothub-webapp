@@ -7,8 +7,11 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <h1 class="create-repository__title"> some specific text </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <!----> <span id="tour-create_intelligence_forms-step-1" is-step-blocked="true"><b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__firstButtonNext"> some specific text
-        </b-button-stub></span>
+      <!---->
+      <div id="tour-create_intelligence_forms-step-1" is-step-blocked="true" class="create-repository__form__style">
+        <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__style__button"> some specific text
+        </b-button-stub>
+      </div>
     </div>
     <div class="create-repository__form__wrapper" style="display: none;">
       <h1 class="create-repository__title">
@@ -19,7 +22,7 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <!---->
       <div class="create-repository__buttons">
         <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
-        </b-button-stub> <span id="tour-create_intelligence_forms-step-3"><b-button-stub type="is-primary" nativetype="submit" tag="button" class="create-repository__form__buttons"> some specific text
+        </b-button-stub> <span id="tour-create_intelligence_forms-step-3" class=""><b-button-stub type="is-primary" nativetype="submit" tag="button" class="create-repository__form__buttons"> some specific text
           </b-button-stub></span>
       </div>
     </div>

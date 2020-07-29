@@ -2,7 +2,9 @@
   <bh-modal
     :open.sync="openValue"
     :title="$t('webapp.train_modal.training_status')">
-    <div class="train-modal">
+    <div
+      id="tour-training-step-7"
+      class="train-modal">
       <div class="bh-grid bh-grid--column">
         <strong
           v-if="requirementsToTrainStatus"
@@ -57,9 +59,11 @@
     <div class="bh-grid__item text-center train-modal__buttons">
       <bh-button
         v-if="readyForTrain"
+        id="tour-training-step-8"
         :disabled="training"
+        :is-step-blocked="!blockedNextStepTutorial"
         primary
-        @click="$emit('train')">
+        @click="train()">
         <bh-icon
           :value="training ? 'refresh' : 'school'"
           :class="training && 'icon-spin' || null" />
@@ -67,18 +71,20 @@
       </bh-button>
       <bh-button
         v-else
+        id="tour-training-step-8"
         ref="closeBtn"
+        :is-step-blocked="!blockedNextStepTutorial"
         primary
         @click="closeModal()">
         <span>{{ $t('webapp.train_modal.ok') }}</span>
-      </bh-button>
+      </bh-button >
     </div>
   </bh-modal>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-
 
 export default {
   name: 'TrainModal',
@@ -110,9 +116,13 @@ export default {
   data() {
     return {
       openValue: this.open,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     requirementsToTrainStatus() {
       return Object.keys(this.requirementsToTrain).length !== 0;
     },
@@ -129,7 +139,17 @@ export default {
     },
   },
   methods: {
+    train() {
+      if (this.activeTutorial === 'training') {
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+      }
+      this.$emit('train');
+    },
     closeModal() {
+      if (this.activeTutorial === 'training') {
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+        this.$emit('finishedTutorial');
+      }
       this.$emit('update:open', false);
     },
   },
