@@ -43,6 +43,7 @@
               :errors="entitiesError(index)">
               <span
                 slot="label"
+                class="edit-sentence__input__label"
                 v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
               <b-autocomplete
                 :data="getAllEntities || []"
@@ -66,6 +67,7 @@
               :errors="entitiesError(index)">
               <span
                 slot="label"
+                class="edit-sentence__input__label"
                 v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
               <b-autocomplete
                 :data="getAllEntities || []"
@@ -260,7 +262,7 @@ export default {
         start: this.textSelected.start,
         end: this.textSelected.end,
         entity: this.intentFormatters(
-          this.text.substring(this.textSelected.start, this.textSelected.end)
+          this.text.substring(this.textSelected.start, this.textSelected.end),
         ),
       };
 
@@ -409,13 +411,17 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
 .edit-sentence {
-  &__fields{
+  &__fields {
     display:flex;
     flex-direction:column;
   }
 
   &__input {
      margin: 0 .5rem;
+
+     &__label /deep/ {
+       font-weight: normal;
+     }
   }
 
   &-input {
