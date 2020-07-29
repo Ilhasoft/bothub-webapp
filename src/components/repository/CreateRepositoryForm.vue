@@ -9,16 +9,6 @@
         <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
-        <form-generator
-          v-if="formSchema"
-          id="tour-create_intelligence_forms-step-0"
-          :is-step-blocked="!checkFormData"
-          :schema="filteredSchema"
-          v-model="data"
-          :errors="errors"
-          :show-labels="false"
-          :new-intelligence-forms="true"
-          class="create-repository__form"/>
         <div
           id="tour-create_intelligence_forms-step-0"
           :is-next-disabled="true"
@@ -380,10 +370,8 @@ export default {
 
         &__container{
           margin: 0;
-          padding: 0;
-          width:490px;
-          height: 400px;
-
+          padding: 0 0 1rem 0;
+          width: 30.625rem;
         }
         &__form {
             text-align: left;
