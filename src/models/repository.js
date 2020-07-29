@@ -56,6 +56,7 @@ class Repository extends ModelBase {
       ready_for_train: false,
       repository_version: '',
       use_transformer_entities: false,
+      organization: null,
     };
   }
 
@@ -89,6 +90,7 @@ class Repository extends ModelBase {
       ready_for_train: Boolean,
       repository_version: String,
       use_transformer_entities: Boolean,
+      organization: Number,
     };
   }
 

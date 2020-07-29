@@ -19,8 +19,7 @@
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
-      hide-help
-      class="edit-field" />
+      hide-help />
     <div>
       <a @click="openChangePasswordModal()">
         {{ $t('webapp.my_profile.change_password') }} </a>
@@ -89,7 +88,7 @@ export default {
   },
   async mounted() {
     this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    this.groupSchema = {
+    this.groupSchema = process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
       biography: {
         label: 'Biography',
         read_only: false,
@@ -102,7 +101,7 @@ export default {
         style: { grouped: true },
         type: 'image',
       },
-    };
+    } : {};
   },
   methods: {
     ...mapActions([
@@ -145,7 +144,7 @@ export default {
 <style lang="scss" scoped>
 
   .edit-field {
-    margin-bottom: 2.313rem;
+    margin-bottom: 1.313rem;
   }
 
   .change-password {

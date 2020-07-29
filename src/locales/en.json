@@ -224,7 +224,22 @@
       "save": "Save",
       "request": "Request",
       "invite": "Send Invite",
-      "no_users": "No users in your team."
+      "no_users": "No users in your team.",
+      "search_user": "Search User",
+      "search_user_org": "Search for user/organization",
+      "no_locale": "No locale",
+      "remove_user_confirm": "Are you sure you want to remove permissions for {user}?",
+      "remove": "Remove"
+    },
+    "roles": {
+      "user": "User",
+      "contributor": "Contributor",
+      "admin": "Admin",
+      "translator": "Trandutor",
+      "user_description": "Can read and analyze",
+      "contributor_description": "Can read, analyze and contribute with examples and translations",
+      "admin_description": "Can read, analyze, contribute and write repository config",
+      "translator_description": "Can read, analyze and create translations for intelligence"
     },
     "example": {
       "enter_sentence": "Enter your sentence here",
@@ -301,12 +316,15 @@
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
     "orgs": {
+      "owner": "Owned by",
+      "my_user": "My User",
       "created_by": "Created by",
       "created": "Created",
       "repositories": "{n} repositories | {n} repository | {n} repositories",
       "members": "{n} members | {n} member | {n} members",
       "create_org": "Create organization",
       "create": "Create",
+      "no_orgs": "You are not yet a member of any organizations.",
       "manage_contributors": "Manage contributors",
       "manage_subtitle": "Manage who can contribute to your data set.",
       "edit": "Edit",
