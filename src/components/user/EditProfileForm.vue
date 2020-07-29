@@ -15,7 +15,7 @@
       v-if="groupSchema && myProfile"
       :schema="groupSchema"
       v-model="groupData"
-      :errors="groupErrors"
+      :errors="errors"
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
@@ -65,7 +65,6 @@ export default {
       groupData: {},
       submitting: false,
       errors: {},
-      groupErrors: {},
       changePasswordModalOpen: false,
     };
   },
