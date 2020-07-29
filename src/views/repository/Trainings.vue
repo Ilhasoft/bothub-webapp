@@ -30,7 +30,8 @@
       <div
         v-if="authenticated && repository.authorization.can_contribute">
         <hr>
-        <div class="trainings-repository__list-wrapper">
+        <div
+          class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
           <!-- <b-button @click="$tours['training'].start()"> test </b-button> -->
           <div

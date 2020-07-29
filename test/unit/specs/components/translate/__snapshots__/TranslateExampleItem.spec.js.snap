@@ -6,7 +6,7 @@ exports[`TranslateExampleItem.vue renders correctly 1`] = `
     <highlighted-text-stub text="..." entities="[object Object]" allentities="" prefixcolor="" failed=""></highlighted-text-stub>
   </div>
   <div class="example-entities">
-    <entity-tag-stub entityname="name"></entity-tag-stub>
+    <entity-tag-stub entityname="name" count="0"></entity-tag-stub>
   </div>
   <div class="example-infos level is-mobile">
     <div class="level-left">

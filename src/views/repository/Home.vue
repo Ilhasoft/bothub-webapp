@@ -10,21 +10,9 @@
           {{ $t('webapp.home.description') }}
         </div>
         <div class="repository-home__header">
-          <div class="repository-home__header__wrapper">
-            <span
-              v-for="language in repository.available_languages"
-              :key="language"
-              class="repository-home__header__wrapper__badge"
-            >
-              <bh-badge
-                :transparent="language !== repository.language"
-                size="small"
-                color="primary"
-              >
-                {{ language }}
-              </bh-badge>
-            </span>
-          </div>
+          <p
+            v-html="$t('webapp.home.categories_repository', {getAllCategories} ) "
+          />
         </div>
         <div>
           <vue-markdown
@@ -48,20 +36,43 @@
         </div>
       </div>
 
+      <summary-informations/>
+
       <div
         v-if="hasIntents"
-        class="repository-home__intents-list"
-      >
-        <div class="repository-home__title">
-          {{ $t('webapp.home.intents_list') }}
+        class="repository-home__intents-list">
+        <div
+          id="intent-container"
+          class="repository-home__title">
+          <p>
+            {{ $t('webapp.home.intents_list') }}
+          </p>
+          <div>
+            <b-tooltip
+              :label="$t('webapp.summary.intent_question')"
+              multilined
+              type="is-dark"
+              position="is-right">
+              <b-icon
+                custom-size="mdi-18px"
+                type="is-dark"
+                icon="help-circle"
+              />
+            </b-tooltip>
+          </div>
+
         </div>
+
         <badges-card
-          :list="repository.intents_list"
-          :title="formattedEntityTitle()"
+          :list="repository.intents"
+          :clickable="true"
+          :home-intenties="true"
+          :intents-list="getAllIntentiesCount"
         />
       </div>
 
       <entity-edit
+        id="entity-container"
         :groups="repository.groups || []"
         :can-edit="repository.authorization.can_contribute"
         :ungrouped="unlabeled"
@@ -81,7 +92,7 @@ import BadgesCard from '@/components/repository/BadgesCard';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 import EntityEdit from '@/components/repository/EntityEdit';
-
+import SummaryInformations from '@/components/repository/SummaryInformations';
 
 export default {
   name: 'RepositoryHome',
@@ -90,6 +101,7 @@ export default {
     BadgesCard,
     VueMarkdown,
     EntityEdit,
+    SummaryInformations,
   },
   extends: RepositoryBase,
   data() {
@@ -124,6 +136,14 @@ export default {
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
+    getAllCategories() {
+      const categories = this.repository.categories_list.map(category => category.name);
+      return categories.join(', ');
+    },
+    getAllIntentiesCount() {
+      const intenties = this.repository.intents.map(intent => intent.examples__count);
+      return intenties;
+    },
   },
   watch: {
     edit() {
@@ -131,9 +151,6 @@ export default {
     },
   },
   methods: {
-    formattedEntityTitle() {
-      return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
-    },
     updatedGroup({ groupId, entities }) {
       const groupIndex = this.getGroupIndex(groupId);
       if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
@@ -179,19 +196,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 @import 'github-markdown-css/github-markdown.css';
 
 .repository-home {
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    div{
+      margin: 0 0 0.2rem 0.2rem;
+    }
   }
 
   &__header {
     display: flex;
-    margin-top: 1rem;
     margin-bottom: 1rem;
 
     &__icon-badge {
@@ -214,16 +236,6 @@ export default {
       }
     }
 
-    &__wrapper {
-
-      &__badge {
-        height: 1.5rem;
-        margin: .4rem .5rem 0 0;
-        font-weight: bold;
-        line-height: calc(1.5rem - 4px);
-        border-width: 1px;
-      }
-    }
   }
 
   &__description {
