@@ -35,10 +35,11 @@
       </div>
       <div class="edit-sentence__fields">
         <div
-          v-for="(entity, index) in entitiesToEdit"
-          :key="`entity-${index}`"
-          class="bh-grid">
-          <div class="edit-sentence__input">
+          class="edit-sentence__input__wrapper">
+          <div
+            v-for="(entity, index) in entitiesToEdit"
+            :key="`entity-${index}`"
+            class="edit-sentence__input">
             <b-field
               :errors="entitiesError(index)">
               <span
@@ -59,12 +60,12 @@
           </div>
         </div>
         <div
-          v-for="(entity, index) in pendingEntities"
-          :key="`pending-entity-${index}`"
-          class="bh-grid">
-          <div class="edit-sentence__input">
-            <b-field
-              :errors="entitiesError(index)">
+          class="edit-sentence__input__wrapper">
+          <div
+            v-for="(entity, index) in pendingEntities"
+            :key="`pending-entity-${index}`"
+            class="edit-sentence__input">
+            <b-field :errors="entitiesError(index)">
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -418,6 +419,12 @@ export default {
 
   &__input {
      margin: 0 .5rem;
+
+     &__wrapper {
+       display: flex;
+       flex-wrap: wrap;
+       padding: 0.25rem;
+     }
 
      &__label /deep/ {
        font-weight: normal;
