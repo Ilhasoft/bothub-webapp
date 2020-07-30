@@ -190,6 +190,7 @@
       "no_description": "Não há descrição para essa inteligência",
       "intents_list": "Lista de Intenções",
       "entities_list": "Grupos de entidades",
+      "categories_repository": "Inteligência para fins de <strong> {getAllCategories} </strong>",
       "entities_label": "Esta inteligência possui {n} grupo de entidade | Esta inteligência possui {n} grupos de entidade",
       "non-grouped_entities":"e {n} entidade não agrupada. | e {n} entidades não agrupadas.",
       "only_non-grouped_entities":"Esta inteligência possui {n} entidade não agrupada. | Esta inteligência possui {n} entidades não agrupadas.",
@@ -211,6 +212,26 @@
       "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
       "delete": "Deletar",
       "cancel": "Cancelar"
+    },
+    "summary": {
+      "training_informations": "Informações do Treinamento",
+      "information_sentences": "Sentenças",
+      "information_intents": "Intenções",
+      "information_entities": "Entidades",
+      "general_informations": "Informações Gerais",
+      "information_language": "Idiomas",
+      "information_contributors": "Contribuidores",
+      "information_integrations": "Integrações",
+      "intent_question": "INTENÇÃO é o desejo que o chatbot perceberá que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\", a intenção do usuário é agradecer. Portanto, a intenção da frase pode ser \"obrigado\".",
+      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pelo chatbot. Por exemplo: se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade poderá ser \"relatório\" ou \"novo relatório\""
+    },
+    "intent":{
+      "title": "Intenção",
+      "description": "Essa intenção contém {n} sentença | Essa intenção contém {n} sentenças.",
+      "edit_button": "Editar intenção",
+      "save_button": "Salvar",
+      "no_sentences": "Nenhuma senteça.",
+      "error_entity": "Aconteceu um erro."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -247,6 +268,8 @@
       "enter_sentence": "Digite sua frase aqui",
       "intent": "Intenção",
       "entity": "Entidade",
+      "sentence": "Frase",
+      "text_is": " <strong> {text} </strong> é",
       "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
       "delete_text": "Tem certeza? Este exemplo será deletado.",
       "delete": "Deletar",
@@ -403,8 +426,8 @@
       "intelligences": {
         "title": "Inteligências",
         "mine": "Minhas inteligências",
-        "contributing": "inteligências com permissão",
-        "using": "inteligências com integração"
+        "contributing": "Inteligências com permissão",
+        "using": "Inteligências com integração"
       }
     },
     "menu": {
@@ -531,6 +554,9 @@
         "confirm_step":"Confirmar",
         "finish_tutorial": "Finalizar",
         "alert_message": "Você precisa seguir a sequência de passos",
+        "training_wait": "Sua inteligência está sendo treinada!",
+        "training_error": "Ocorreu um erro no treinamento da sua inteligência.",
+        "training_success": "Sua inteligência foi treinada com sucesso!",
         "items": {
             "create_account": "Criar conta",
             "create_intelligence": "Criar sua primeira inteligência",
@@ -542,45 +568,42 @@
             "integrate": "Integrar sua inteligência em uma plataforma"
         },
         "create_intelligence": {
-            "step_0": "<strong> Vamos para criação da inteligência! </strong> <br> Aqui você criará sua primeira inteligência.",
-            "step_1": "Crie sua própria inteligência clicando aqui."
+            "step_0": "Você pode usar uma das inteligências do repositório escolhendo e clicando em uma delas.",
+            "step_1": "Ou crie sua própria inteligência clicando aqui."
         },
         "create_intelligence_forms": {
             "step_0": "Preencha o formulário com os dados da sua inteligencia como nome, descrição e idioma.",
-            "step_1": "Seguir para o próximo passo.",
-            "step_2": "Escolha as categorias para sua inteligência, com base na área em que será usada, e envie.",
-            "step_3": "Sua inteligência está pronta para ser criada, só basta enviar."
+            "step_1": "Escolha as categorias para sua inteligência, com base na área em que será usada, e envie."
         },
         "training": {
             "step_0": "<strong> Vamos para o treinamento! </strong> <br> Aqui você vai adicionar frases e classificar palavras para treinar sua inteligência",
-            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> E, selecione uma das palavra para classificar. Ex.: quero uma <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>" ,
-            "step_2": "Agora, adicione também alguma entidade personalizada à sua frase selecionada. Basta clicar aqui. <br> <strong>Dica</strong>: Se você selecionou pizza, a entidade é alimento",
-            "step_3": "Agora, escreva a entidade. <br> Ex .: alimentos",
-            "step_4": "E aqui, identifique a intenção da frase que você digitou ao que ela corresponde. <br> Ex.: afirmativo",
+            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> Depois selecione uma das palavra para classificar. Ex: quero uma <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>" ,
+            "step_2": "Agora clique aqui passa classificar a palavra que você selecionou.",
+            "step_3": "E escreva a classificação Ex: Se você selecionou ''pizza'' a classificação pode ser ''alimento''",
+            "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",
             "step_5": "Por fim, envie sua sentença.",
-            "step_6": "Clique aqui para executar seu treinamento. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
-            "step_7": "Verifique se sua inteligência está pronta para treinar",
-            "step_8": "Clique no botão para confirmar."
+            "step_6": "Após adicionar as frases, clique aqui. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
+            "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Treinar\" para prosseguir. <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, cliquem em \"Ok\" para repetir."
         },
         "evaluate": {
           "step_0": "<strong> Vamos para o teste de sentenças! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
           "step_1": "Selecione um idioma para testar.",
-          "step_2": "Digite aqui uma frase que você gostaria de testar. <br> Ex .: quero uma pizza",
-          "step_3": "E aqui, adicione a intenção que mais se identifica com a frase que você digitou. Ex .: afirmativa.",
+          "step_2": "Digite aqui uma frase que você gostaria de testar. <br> Ex: quero uma pizza",
+          "step_3": "E aqui, adicione a intenção que mais se identifica com a frase que você digitou. Ex: afirmativa.",
           "step_4": "Por fim, envie sua sentença.",
           "step_5": "Clique aqui para executar seu teste. <br> <strong>Dica</strong>: Para testar, você deve adicionar pelo menos duas intenções com duas frases cada."
       },
         "quick_test": {
           "step_0": "<strong> Esse é o teste rápido! </strong> <br> Aqui você pode testar rapidamente as frases adicionadas ao treinamento.",
           "step_1": "Digite sua frase de teste e confirme.",
-          "step_2": "Clique aqui para descobrir a relevância de cada palavra na frase dentro da intenção escolhida.",
-          "step_3": "Clique aqui para ver o Raw."
+          "step_2": "Clique aqui para descobrir a relevância de cada palavra na frase dentro da intenção escolhida."
           },
         "inbox": {
           "step_0": "<strong> Esta é a caixa de entrada! </strong> <br> Aqui você pode adicionar frases das interações do usuário com sua inteligência em treinamento ou teste.",
           "step_1": "Selecione as frases que você deseja adicionar.",
           "step_2": "Adicionar ao treinamento.",
-          "step_3": "Adicionar a frases de teste."
+          "step_3": "Adicionar a frases de teste.",
+          "step_4": "Selecione a intenção que você deseja atribuir à frase e adicione."
         },
         "translate": {
           "step_0": "<strong> Vamos traduzir! </strong> <br> Clique aqui para traduzir as frases da sua inteligência em outro idioma.",

@@ -17,7 +17,9 @@
               <div
                 class="evaluate__content-header__wrapper__language-select">
                 <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
-                <div id="tour-evaluate-step-1">
+                <div
+                  id="tour-evaluate-step-1"
+                  :is-previous-disabled="true">
                   <b-select
                     v-model="currentLanguage"
                     expanded>
@@ -34,6 +36,8 @@
               <b-button
                 id="tour-evaluate-step-5"
                 ref="runNewTestButton"
+                :is-finish-disabled="true"
+                :is-previous-disabled="true"
                 :loading="evaluating"
                 :disabled="evaluating"
                 type="is-secondary"
@@ -77,7 +81,6 @@
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="evaluate"/>
-    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
@@ -90,7 +93,6 @@ import { LANGUAGES } from '@/utils';
 import Tour from '@/components/Tour';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryEvaluate',
@@ -100,7 +102,6 @@ export default {
     BaseEvaluateExamples,
     AuthorizationRequestNotification,
     Tour,
-    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -121,7 +122,6 @@ export default {
       getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
       activeTutorial: 'activeTutorial',
-      activeMenu: 'activeMenu',
     }),
     languages() {
       if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];

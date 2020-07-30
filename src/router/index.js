@@ -22,6 +22,7 @@ import RepositoryResult from '@/views/repository/Result';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
 import Entity from '@/views/repository/Entity';
+import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
@@ -169,6 +170,11 @@ export default new Router({
           path: ':ownerNickname/:slug/entitylist/:entity_id',
           name: 'repository-entitylist',
           component: Entity,
+        },
+        {
+          path: ':ownerNickname/:slug/intentlist/:intent',
+          name: 'repository-intentlist',
+          component: Intent,
         },
         {
           path: ':ownerNickname/:slug/result/:resultId/',
