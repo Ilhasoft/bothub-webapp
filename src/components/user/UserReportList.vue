@@ -10,14 +10,14 @@
         <option
           v-for="(option, index) in options"
           :key="index"
-          :value="option.value"> {{ option.label }} </option>
+          :value="option"> {{ option.label }} </option>
       </b-select>
       {{ $t('webapp.my_profile.reports.filter_by') }}
     </div>
     <user-report-item
       :repository="total.repository"
       :predictions="total.predictions"
-      :time="time.label"/>
+      :time="filter.label"/>
     <paginated-list
       v-if="list"
       :item-component="item"
@@ -50,9 +50,8 @@ export default {
         { label: this.$t('webapp.my_profile.reports.this_week'), value: 'this_week' },
         { label: this.$t('webapp.my_profile.reports.this_month'), value: 'this_month' },
         { label: this.$t('webapp.my_profile.reports.last_three_months'), value: 'last_three' },
-        { label: this.$t('webapp.my_profile.reports.all_time'), value: null, selected: true },
       ],
-      filter: null,
+      filter: { label: '', value: '' },
       total: {
         repository: {
           name: this.$t('webapp.my_profile.reports.total'),
@@ -61,18 +60,14 @@ export default {
       },
     };
   },
-  computed: {
-    time() {
-      return this.options.find(option => option.value === this.filter);
-    },
-  },
   watch: {
     filter() {
       this.getList();
     },
   },
   mounted() {
-    this.getList();
+    const [filter] = this.options;
+    this.filter = filter;
   },
   methods: {
     ...mapActions([

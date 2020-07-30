@@ -20,7 +20,8 @@
       "authorization_success": "Seu pedido foi enviado! Espere a resposta de um administrador.",
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência",
       "yes": "Sim",
-      "no": "Não"
+      "no": "Não",
+      "items_total": "{n} item no total | {n} itens no total"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -244,7 +245,24 @@
       "save": "Salvar",
       "request": "Fazer pedido",
       "invite": "Enviar convite",
-      "no_users": "Sem usuários no time."
+      "no_users": "Sem usuários no time.",
+      "search_user": "Procurar usuário",
+      "search_user_org": "Procurar usuário/organização",
+      "no_locale": "Sem local",
+      "remove_user_confirm": "Remover todas as permissões para {user}?",
+      "remove": "Remover",
+      "cancel": "Cancelar",
+      "default_error": "Algo deu errado. Não foi possível realizar essa ação."
+    },
+    "roles": {
+      "user": "Usuário",
+      "contributor": "Contribuidor",
+      "admin": "Administrador",
+      "translator": "Tradutor",
+      "user_description": "Pode ver e analisar",
+      "contributor_description": "Pode ver, analisar e contribuir com exemplos e traduções",
+      "admin_description": "Pode ver, analisar, contribuir e mudar as configurações",
+      "translator_description": "Pode ver, analisar e criar traduções"
     },
     "example": {
       "enter_sentence": "Digite sua frase aqui",
@@ -321,12 +339,15 @@
       "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
     },
     "orgs": {
+      "owner": "Pertence a",
+      "my_user": "Meu usuário",
       "created_by": "Criado por",
       "created": "Criado",
       "repositories": "{n} repositórios | {n} repositório | {n} repositórios",
       "members": "{n} membros | {n} membro | {n} membros",
       "create_org": "Criar organização",
       "create": "Criar",
+      "no_orgs": "Você ainda não é membro de nenhuma organização.",
       "manage_contributors": "Gerenciar contribuidores",
       "manage_subtitle": "Gerencie quem pode contribuir para o seu dataset.",
       "edit": "Editar",
@@ -345,12 +366,12 @@
         "history": "Histórico ",
         "info": "Informações de Pagamento",
         "credit_payment": "Por cartão de crédito",
-        "coupon_payment": "Por cupom de crédito"
+        "coupon_payment": "Com cupom"
       },
       "intelligences": {
         "title": "Intelligências",
         "mine": "Inteligências da organização",
-        "using": "Intelgências que eu uso"
+        "using": "Intelgências com integração"
       },
       "create_org_title": "Vamos criar uma organização",
       "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
@@ -362,7 +383,7 @@
       "repositories": "Inteligências",
       "modal_edit_your_profile": "Edite seu perfil",
       "modal_change_password": "Mudar Senha",
-      "edit": "Editar",
+      "edit": "Salvar",
       "trained_at": "Treinado às {trained} por {by}",
       "train_fail": "Treinamento falhou às {failed}",
       "training": "Treinando...",
@@ -403,21 +424,9 @@
       "intelligences": {
         "title": "Inteligências",
         "mine": "Minhas inteligências",
-        "contributing": "Inteligências que eu contribuo",
-        "using": "Inteligências que eu uso"
+        "contributing": "inteligências com permissão",
+        "using": "inteligências com integração"
       }
-    },
-    "tutorial": {
-      "create_your_first_bot": "Crie sua primeira inteligência!",
-      "grid1": "No canto superior direito da tela, clique em \"Nova inteligência\".",
-      "grid2": "Preencha os campos e clique em \"Criar inteligência\"",
-      "grid3": "Comece adicionando conteúdo para o mecanismo de interpretação\nfornecendo frases de exemplo.",
-      "grid4": "Escolha \"Treinar\" e coloque frases destacando as entidades e\nas intenções relacionadas.\n Não esqueça de enviar suas frases.",
-      "grid5": "Depois de adicionar suas frases, clique na barra de status para ver\no status de sua inteligência e treinar suas frases",
-      "grid6": "É isso! Sua inteligência está pronta para ser usada!",
-      "previous": "Anterior",
-      "next": "Próximo",
-      "finish": "Finalizar"
     },
     "menu": {
       "summary": "Resumo",
@@ -521,9 +530,9 @@
         "free_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano oferece até <strong>1000 predições grátis</strong>.",
         "professional_text": "Ganhe acesso à nossa comunidade de repositórios de inteligência, crie inteligências, convide pessoas para contribuir no seu projeto. Este plano é pago, <strong>após alcançar 1,000 predições.</strong>",
         "custom_text": "Superpoderes! Leve sua inteligência para o próximo níveis com soluções personalizadas, suporte impecável, e um grande número de predições.",
-        "per_prediction": "per prediction",
-        "get_free": "Get free",
-        "get_started": "Get started"
+        "per_prediction": "por predição",
+        "get_free": "Começar gratuitamente",
+        "get_started": "Começar"
       },
       "info": {
         "title": "Informações de pagamento",
@@ -531,6 +540,84 @@
         "back": "Voltar",
         "save": "Salvar",
         "card_name": "Nome do cartão"
+      }
+    },
+      "tutorial": {
+        "title": "Bem vindo ao Bothub",
+        "description": "Bothub é uma plataforma aberta para predizer, treinar e compartilhar conjuntos de dados de PNL em vários idiomas. <br> <br> Siga as etapas para fazer parte da nossa comunidade",
+        "skip": "Pular por agora",
+        "previous_step": "Anterior",
+        "next_step": "Próximo",
+        "finish_step": "Finalizar",
+        "confirm_step":"Confirmar",
+        "finish_tutorial": "Finalizar",
+        "alert_message": "Você precisa seguir a sequência de passos",
+        "items": {
+            "create_account": "Criar conta",
+            "create_intelligence": "Criar sua primeira inteligência",
+            "training": "Treinar sua inteligência",
+            "quick_test": "Faça um teste rápido",
+            "evaluate": "Teste sua inteligência",
+            "inbox": "Adicionar sentença ao inbox",
+            "translate": "Traduzir para outro idioma",
+            "integrate": "Integrar sua inteligência em uma plataforma"
+        },
+        "create_intelligence": {
+            "step_0": "<strong> Vamos para criação da inteligência! </strong> <br> Aqui você criará sua primeira inteligência.",
+            "step_1": "Crie sua própria inteligência clicando aqui."
+        },
+        "create_intelligence_forms": {
+            "step_0": "Preencha o formulário com os dados da sua inteligencia como nome, descrição e idioma.",
+            "step_1": "Seguir para o próximo passo.",
+            "step_2": "Escolha as categorias para sua inteligência, com base na área em que será usada, e envie.",
+            "step_3": "Sua inteligência está pronta para ser criada, só basta enviar."
+        },
+        "training": {
+            "step_0": "<strong> Vamos para o treinamento! </strong> <br> Aqui você vai adicionar frases e classificar palavras para treinar sua inteligência",
+            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> E, selecione uma das palavra para classificar. Ex.: quero uma <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>" ,
+            "step_2": "Agora, adicione também alguma entidade personalizada à sua frase selecionada. Basta clicar aqui. <br> <strong>Dica</strong>: Se você selecionou pizza, a entidade é alimento",
+            "step_3": "Agora, escreva a entidade. <br> Ex .: alimentos",
+            "step_4": "E aqui, identifique a intenção da frase que você digitou ao que ela corresponde. <br> Ex.: afirmativo",
+            "step_5": "Por fim, envie sua sentença.",
+            "step_6": "Clique aqui para executar seu treinamento. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
+            "step_7": "Verifique se sua inteligência está pronta para treinar",
+            "step_8": "Clique no botão para confirmar."
+        },
+        "evaluate": {
+          "step_0": "<strong> Vamos para o teste de sentenças! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
+          "step_1": "Selecione um idioma para testar.",
+          "step_2": "Digite aqui uma frase que você gostaria de testar. <br> Ex .: quero uma pizza",
+          "step_3": "E aqui, adicione a intenção que mais se identifica com a frase que você digitou. Ex .: afirmativa.",
+          "step_4": "Por fim, envie sua sentença.",
+          "step_5": "Clique aqui para executar seu teste. <br> <strong>Dica</strong>: Para testar, você deve adicionar pelo menos duas intenções com duas frases cada."
+      },
+        "quick_test": {
+          "step_0": "<strong> Esse é o teste rápido! </strong> <br> Aqui você pode testar rapidamente as frases adicionadas ao treinamento.",
+          "step_1": "Digite sua frase de teste e confirme.",
+          "step_2": "Clique aqui para descobrir a relevância de cada palavra na frase dentro da intenção escolhida.",
+          "step_3": "Clique aqui para ver o Raw."
+          },
+        "inbox": {
+          "step_0": "<strong> Esta é a caixa de entrada! </strong> <br> Aqui você pode adicionar frases das interações do usuário com sua inteligência em treinamento ou teste.",
+          "step_1": "Selecione as frases que você deseja adicionar.",
+          "step_2": "Adicionar ao treinamento.",
+          "step_3": "Adicionar a frases de teste."
+        },
+        "translate": {
+          "step_0": "<strong> Vamos traduzir! </strong> <br> Clique aqui para traduzir as frases da sua inteligência em outro idioma.",
+          "step_1": "Selecione o idioma treinado. <br> <strong>Dica</strong>: Você precisa ter frases adicionadas nesse idioma.",
+          "step_2": "Selecione o idioma para qual será feita a tradução.",
+          "step_3": "Escolha uma frase e clique em traduzir.",
+          "step_4": "Digite uma tradução de frase aqui.",
+          "step_5": "Por fim, envie sua frase para traduzir.",
+          "step_6": "Se preferir, também é possível exportar e importar frases do Excel para tradução clicando aqui"
+        },
+        "integrate": {
+          "step_0": "<strong> Esta é integração! </strong> <br> Com esse recurso, você poderá integrar sua inteligência em uma plataforma.",
+          "step_1": "Copie este modelo no formato CURL, Python ou Javascript para integração."
+      },
+      "tutorial_button":{
+        "step_0": "<strong> Você terminou! </strong> <br> Se você quiser pode assistir o tutorial novamente clicando aqui."
       }
     }
   }

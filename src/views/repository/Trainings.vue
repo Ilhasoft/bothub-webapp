@@ -6,8 +6,27 @@
       <div class="trainings-repository__new-example">
         <div v-if="authenticated">
           <div v-if="repository.authorization.can_contribute">
-            <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
-            <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+            <div class="trainings-repository__list-wrapper">
+              <div>
+                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+              </div>
+              <div
+                id="tour-training-step-6"
+                :is-step-blocked="!blockedNextStepTutorial"
+                class="trainings-repository__list-wrapper__tutorialStep">
+                <b-button
+                  v-if="repository.authorization.can_write"
+                  ref="training"
+                  :disabled="loadingStatus || repository.examples__count === 0"
+                  :loading="loadingStatus"
+                  type="is-secondary"
+                  class="trainings-repository__list-wrapper__button"
+                  @click="openTrainingModal">
+                  {{ $t('webapp.trainings.run_training') }}
+                </b-button>
+              </div>
+            </div>
             <new-example-form
               :repository="repository"
               @created="updatedExampleList()"
@@ -33,21 +52,6 @@
         <div
           class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <!-- <b-button @click="$tours['training'].start()"> test </b-button> -->
-          <div
-            id="tour-training-step-6"
-            class="trainings-repository__list-wrapper__tutorialStep">
-            <b-button
-              v-if="repository.examples__count > 0 && repository.authorization.can_write "
-              ref="training"
-              :disabled="loadingStatus"
-              :loading="loadingStatus"
-              type="is-secondary"
-              class="trainings-repository__list-wrapper__button"
-              @click="openTrainingModal">
-              {{ $t('webapp.trainings.run_training') }}
-            </b-button>
-          </div>
         </div>
         <filter-examples
           :intents="repository.intents_list"
@@ -68,14 +72,15 @@
       :requirements-to-train="repository.requirements_to_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train(repository.uuid)" />
+      @train="train(repository.uuid)"
+      @finishedTutorial="dispatchFinish()" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
     <tour
       v-if="activeTutorial === 'training'"
-      :step-count="7"
+      :step-count="9"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="training"/>
@@ -129,6 +134,7 @@ export default {
       loadingStatus: false,
       eventClick: false,
       eventClickFinish: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -186,9 +192,10 @@ export default {
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
-      this.dispatchFinish();
+      this.dispatchClick();
     },
     dispatchClick() {
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
       this.eventClick = !this.eventClick;
     },
     dispatchFinish() {
@@ -210,6 +217,7 @@ export default {
     },
     async train(repositoryUuid) {
       this.training = true;
+      this.dispatchFinish();
       try {
         const response = await this.trainRepository({
           repositoryUuid,

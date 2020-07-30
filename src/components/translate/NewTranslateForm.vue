@@ -24,7 +24,6 @@
           <bh-button
             id="tour-translate-step-5"
             :disabled="!isValid || submitting"
-            :is-step-blocked="!blockedNextStepTutorial"
             secondary
             size="normal"
             type="submit">{{ $t('webapp.translate.submit_translation') }}</bh-button>
@@ -89,7 +88,7 @@ export default {
       textSelected: null,
       errors: {},
       submitting: false,
-      blockedNextStepTutorial: false,
+      blockedNextStepTutorial: true,
     };
   },
   computed: {
@@ -131,7 +130,6 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
-      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
       try {
         await this.newTranslation({
           exampleId: this.exampleId,
@@ -145,7 +143,6 @@ export default {
 
         this.submitting = false;
         this.$emit('translated');
-        this.$emit('eventStep');
         return true;
       } catch (error) {
         const { language, ...data } = error.response && error.response.data;
@@ -162,6 +159,9 @@ export default {
           });
         }
       }
+
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+      this.$emit('eventStep');
 
       return false;
     },

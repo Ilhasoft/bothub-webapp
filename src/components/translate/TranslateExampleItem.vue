@@ -39,6 +39,7 @@
         <div class="level-item">
           <button
             id="tour-translate-step-3"
+            :is-step-blocked="blockedNextStepTutorial"
             class="button is-primary"
             @click="toggleFormOpen()">
             <span>{{ $t('webapp.translate.translate_sentence') }}</span>
@@ -64,7 +65,7 @@
 <script>
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import HighlightedText from '@/components/shared/HighlightedText';
 import NewTranslateForm from './NewTranslateForm';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
@@ -116,12 +117,24 @@ export default {
       formOpen: false,
       highlighted: null,
       eventClick: false,
-      blockedNextStepTutorial: false,
+      blockedNextStepTutorial: true,
     };
   },
   computed: {
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     entitiesList() {
       return getEntitiesList(this.entities);
+    },
+  },
+  watch: {
+    formOpen() {
+      if (this.formOpen === true && this.activeTutorial === 'translate') {
+        this.$nextTick(() => {
+          this.dispatchStep();
+        });
+      }
     },
   },
   methods: {
@@ -142,7 +155,7 @@ export default {
     toggleFormOpen() {
       /* istanbul ignore next */
       this.formOpen = !this.formOpen;
-      this.$emit('dispatchEvent', { event: 'eventStep' });
+      this.blockedNextStepTutorial = false;
     },
     dispatchStep() {
       this.$emit('dispatchEvent', { event: 'dispatchStep' });

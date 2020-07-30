@@ -1,43 +1,50 @@
 <template>
-  <div class="bh-grid">
-    <div class="bh-grid__item bh-grid__item--grow-0">
-      <user-avatar :profile="getProfile(user__nickname)" />
+  <div class="columns is-vcentered">
+    <div class="column is-1">
+      <user-avatar
+        :is-organization="user__is_organization"
+        :profile="getProfile(user__nickname)" />
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-1">
+    <div class="column is-one-fifth">
       <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
       <p><small>{{ user__nickname }}</small></p>
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
+    <div class="column">
       <div
         v-if="submitted || submitted || true"
-        class="bh-grid">
-        <div class="bh-grid__item">
+        class="columns is-vcentered">
+        <div class="column is-3 is-offset-3">
           <role-select
             v-model="newRole"
             size="is-small" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon
-            v-if="submitting"
-            value="refresh" />
+        <div class="column is-2 icon__container">
+          <b-icon
+            v-show="submitting"
+            class="icon-spin"
+            size="is-small"
+            icon="refresh" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            v-if="submitted"
-            size="small"
+        <div class="column is-2 icon__container">
+          <b-icon
+            v-show="submitted"
+            size="is-small"
             class="text-color-primary"
-            value="check" />
+            icon="check" />
         </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            value="close"
-            size="small"
-            @click="remove()"/>
+        <div class="column is-2 icon__container">
+          <b-icon
+            v-show="!submitting"
+            icon="close"
+            class="icon--button"
+            size="is-small"
+            @click.native="remove()"/>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
@@ -85,6 +92,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    user__is_organization: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
@@ -117,8 +128,9 @@ export default {
     async remove() {
       return new Promise((resolve, reject) => {
         this.removeDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure?',
-          confirmText: 'Remove',
+          message: this.$t('webapp.settings.remove_user_confirm', { user: this.user__nickname }),
+          confirmText: this.$t('webapp.settings.remove'),
+          cancelText: this.$t('webapp.settings.cancel'),
           type: 'is-danger',
           onConfirm: async () => {
             this.submitting = true;
@@ -168,9 +180,9 @@ export default {
 
       const { data } = response;
 
-      this.$bhToastNotification({
-        message: data.detail || 'Something wrong happened...',
-        type: 'danger',
+      this.$buefy.toast.open({
+        message: data.detail || this.$t('webapp.settings.default_error'),
+        type: 'is-danger',
       });
 
       if (!data.detail) {
@@ -180,3 +192,16 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+    .icon {
+      &--button {
+        cursor: pointer;
+      }
+
+      &__container {
+        display: flex;
+        justify-content: center;
+      }
+    }
+</style>

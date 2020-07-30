@@ -67,15 +67,14 @@ $shadow-color: #00000029;
           padding: 0.8rem 1.2rem;
         }
         background-color: $color-fake-white;
-        box-shadow: 5px 0 5px -5px $shadow-color,
-                    -5px 0 5px -5px $shadow-color,
-                    inset 0 -5px 5px -5px $shadow-color;
+        box-shadow: inset 0 -5px 3px -5px lighten($shadow-color, 10%),
+                    0px 3px 6px $shadow-color;
         cursor: pointer;
 
         &__selected {
             background-color: $color-primary;
             color: $color-white;
-            }
+          }
         }
     }
 </style>

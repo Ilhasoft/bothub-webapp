@@ -11,7 +11,7 @@
         :show-labels="false"
         :errors="errors"
         class="field"/>
-      <div class="control has-text-centered">
+      <!-- <div class="control has-text-centered">
         <b-field>
           <b-input
             expanded
@@ -20,9 +20,10 @@
             class="submit-button--secondary"
             type="is-secondary"> {{ $t('webapp.orgs.send_email') }} </b-button>
         </b-field>
-      </div>
+      </div> -->
       <div class="control submit-button__wrapper has-text-centered">
         <b-button
+          ref="submit"
           :disabled="submitting"
           native-type="submit"
           type="is-primary"
@@ -56,24 +57,43 @@ export default {
       return {};
     },
     filteredSchema() {
-      const { email, ...schema } = this.formSchema;
-      return schema;
+      if (!this.formSchema) return null;
+      const { description, ...schema } = this.formSchema;
+      description.type = 'text';
+      return { ...schema, description };
     },
   },
   async mounted() {
-    this.formSchema = await this.getOrgSchema();
+    const response = await this.getNewOrgSchema();
+    this.formSchema = response;
   },
   methods: {
     ...mapActions([
-      'getOrgSchema',
+      'getNewOrgSchema',
+      'createOrg',
     ]),
-    onSubmit() {},
+    async onSubmit() {
+      this.submitting = true;
+      try {
+        const response = await this.createOrg(this.data);
+        this.$emit('created', response.data.nickname);
+      } catch (error) {
+        const data = error.response && error.response.data;
+        if (data) {
+          this.errors = data;
+        }
+      } finally {
+        this.submitting = false;
+      }
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
     .submit-button {
+
+      padding: 0 2rem;
 
         &__wrapper {
             margin-top: 3.5rem;

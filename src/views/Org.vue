@@ -3,7 +3,7 @@
     <div class="org__header">
       <div class="org__header__content">
         <div class="org__header__info">
-          <h1 class="org__header__title"> Org </h1>
+          <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
           <p
             class="org__header__subtitle">
             {{ $t('webapp.orgs.created_by') }} <a> User </a>
@@ -17,12 +17,19 @@
         :selected.sync="selected"
         class="org__tabs" />
     </div>
-    <div class="org__content">
+    <b-loading :active="loading" />
+    <div
+      v-if="!loading"
+      class="org__content">
       <div
         v-show="selected==0">
         <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
         <div class="org__edit__content">
-          <edit-org-form class="org__edit" />
+          <edit-org-form
+            :nickname="nickname"
+            :initial-data="org"
+            class="org__edit"
+            @edited="loadOrg" />
 
           <div class="org__repositories__separator" />
         </div>
@@ -30,23 +37,23 @@
         <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
         <div class="org__edit__content">
           <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
-          <set-authorization-role-form
+          <org-set-authorization-role-form
             ref="setAuthorizationRoleForm"
-            repository-uuid=""
+            :org-nickname="nickname"
             @roleSetted="onRoleSetted()" />
-          <authorizations-list
+          <org-authorizations-list
             ref="authorizationsList"
-            repository-uuid="" />
+            :org-nickname="nickname" />
         </div>
 
       </div>
       <div v-show="selected==1">
         <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
         <paginated-list
-          v-if="repositoryLists.mine"
+          v-if="repositoryLists.org"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryLists.mine"
+          :list="repositoryLists.org"
           :empty-message="$t('webapp.home.no_repo')"
           class="org__repositories__cards" />
 
@@ -54,10 +61,10 @@
 
         <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
         <paginated-list
-          v-if="repositoryLists.using"
+          v-if="repositoryLists.contributing"
           :item-component="repositoryItemElem"
           :per-page="repositoriesLimit"
-          :list="repositoryLists.using"
+          :list="repositoryLists.contributing"
           :empty-message="$t('webapp.home.no_repo')"
           class="org__repositories__cards" />
       </div>
@@ -105,7 +112,7 @@
 <script>
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
-import EditOrgForm from '@/components/user/EditOrgForm';
+import EditOrgForm from '@/components/org/EditOrgForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
@@ -113,13 +120,13 @@ import TabSelect from '@/components/shared/TabSelect';
 import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
-import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
-import AuthorizationsList from '@/components/repository/AuthorizationsList';
+import OrgSetAuthorizationRoleForm from '@/components/org/OrgSetAuthorizationRoleForm';
+import OrgAuthorizationsList from '@/components/org/OrgAuthorizationsList';
 
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'Profile',
+  name: 'Org',
   components: {
     Layout,
     UserAvatar,
@@ -130,17 +137,18 @@ export default {
     UserReportList,
     PaymentForm,
     PaymentHistory,
-    SetAuthorizationRoleForm,
-    AuthorizationsList,
+    OrgSetAuthorizationRoleForm,
+    OrgAuthorizationsList,
   },
   data() {
     return {
+      org: null,
+      loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
       repositoryLists: {
-        mine: null,
+        org: null,
         contributing: null,
-        using: null,
       },
       repositoriesLimit: 3,
       tabs: [
@@ -156,6 +164,9 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    nickname() {
+      return this.$route.params.org_nickname;
+    },
   },
   watch: {
     authenticated() {
@@ -167,19 +178,32 @@ export default {
     },
   },
   mounted() {
-    this.updateMyRepositories();
+    this.loadOrg();
+    this.updateRepositories();
   },
   methods: {
     ...mapActions([
-      'getMyRepositories',
-      'getContributingRepositories',
-      'getUsingRepositories',
+      'getOrgContributingRepositories',
+      'getOrgRepositories',
+      'getOrg',
     ]),
+    async loadOrg() {
+      this.loading = true;
+      try {
+        const response = await this.getOrg({ nickname: this.nickname });
+        this.org = response.data;
+      } finally {
+        this.loading = false;
+      }
+    },
     submitCoupon() {},
-    async updateMyRepositories() {
-      this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
-      this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
-      this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
+    async updateRepositories() {
+      this.repositoryLists.org = await this.getOrgRepositories(
+        { nickname: this.nickname, limit: this.repositoriesLimit },
+      );
+      this.repositoryLists.contributing = await this.getOrgContributingRepositories(
+        { nickname: this.nickname, limit: this.repositoriesLimit },
+      );
     },
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();
@@ -190,7 +214,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-$shadow-color: #00000029;
 h1 {
         max-width: 58.25rem;
         padding: 0 1rem;
@@ -287,8 +310,7 @@ h1 {
 
           &__form {
             max-width: 30rem;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin-bottom: 2rem
           }
         }
     }

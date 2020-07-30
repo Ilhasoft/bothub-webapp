@@ -2,11 +2,13 @@
   <layout :show-footer="false">
     <div class="profile__header">
       <div class="profile__header__content">
-        <user-avatar
-          :profile="myProfile"
-          :clickable="false"
-          size="full"
-          class="profile__avatar" />
+        <div class="profile__avatar__container">
+          <user-avatar
+            :profile="myProfile"
+            :clickable="false"
+            size="full"
+            class="profile__avatar" />
+        </div>
         <div class="profile__header__info">
           <h1 class="profile__header__title"> {{ myProfile.name }} </h1>
           <p
@@ -197,10 +199,13 @@ h1 {
     .profile {
 
         &__avatar {
-            width: 90px;
-            height: 90px;
             box-shadow: 0px 3px 6px $shadow-color;
-            background-color: $color-white;
+            background-color: $color-white !important;
+
+            &__container {
+              width: 5.625rem;
+              height: 5.625rem;
+            }
         }
 
         &__plan {
@@ -297,8 +302,7 @@ h1 {
 
           &__form {
             max-width: 30rem;
-            margin: 0 auto;
-            padding: 0 1rem;
+            margin-bottom: 2rem
           }
         }
     }
