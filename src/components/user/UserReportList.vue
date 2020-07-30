@@ -67,9 +67,9 @@ export default {
   },
   computed: {
     timeFrame() {
-      const startDate = new Date();
       const endDate = new Date();
-      endDate.setDate(startDate.getDate() - this.filter.value);
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - this.filter.value);
       return {
         startDate: startDate.toISOString().split('T')[0],
         endDate: endDate.toISOString().split('T')[0],
