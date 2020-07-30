@@ -17,6 +17,7 @@
               <example-text-with-highlighted-entities-input
                 id="tour-evaluate-step-2"
                 ref="textInput"
+                :is-previous-disabled="true"
                 v-model="text"
                 :is-step-blocked="text.length === 0"
                 :entities="entities"
@@ -32,6 +33,7 @@
           <div>
             <b-field
               id="tour-evaluate-step-3"
+              :is-previous-disabled="true"
               :message="errors.non_field_errors"
               :is-step-blocked="intent.length === 0"
             >
@@ -54,6 +56,8 @@
               <b-button
                 id="tour-evaluate-step-4"
                 ref="saveSentenceButton"
+                :is-next-disabled="true"
+                :is-previous-disabled="true"
                 :disabled="!shouldSubmit"
                 :loading="submitting"
                 :is-step-blocked="!blockedNextStepTutorial"

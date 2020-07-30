@@ -10,6 +10,7 @@
     </b-field>
     <b-tabs
       id="tour-integrate-step-1"
+      :is-previous-disabled="true"
       v-model="activeTab">
       <b-tab-item label="cURL">
         <bh-highlighted-pre

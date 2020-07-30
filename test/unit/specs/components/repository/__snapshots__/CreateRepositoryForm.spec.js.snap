@@ -7,10 +7,12 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <h1 class="create-repository__title"> some specific text </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <!---->
-      <div id="tour-create_intelligence_forms-step-1" is-step-blocked="true" class="create-repository__form__style">
-        <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__style__button"> some specific text
-        </b-button-stub>
+      <div id="tour-create_intelligence_forms-step-0" is-next-disabled="true" class="create-repository__container">
+        <!---->
+        <div class="create-repository__form__style">
+          <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__style__button"> some specific text
+          </b-button-stub>
+        </div>
       </div>
     </div>
     <div class="create-repository__form__wrapper" style="display: none;">
@@ -19,11 +21,13 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <!---->
-      <div class="create-repository__buttons">
-        <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
-        </b-button-stub> <span id="tour-create_intelligence_forms-step-3" class=""><b-button-stub type="is-primary" nativetype="submit" tag="button" class="create-repository__form__buttons"> some specific text
-          </b-button-stub></span>
+      <div id="tour-create_intelligence_forms-step-1" is-finish-disabled="true" is-previous-disabled="true" class="">
+        <!---->
+        <div class="create-repository__buttons">
+          <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
+          </b-button-stub> <span class=""><b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true" class="create-repository__form__buttons"> some specific text
+            </b-button-stub></span>
+        </div>
       </div>
     </div>
     <!---->
@@ -34,6 +38,5 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
     </div>
   </form>
   <!---->
-  <tutorial-modal-stub></tutorial-modal-stub>
 </div>
 `;

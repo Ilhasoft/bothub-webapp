@@ -14,4 +14,7 @@ export default {
   finishedTutorials(state) {
     return state.finishedTutorial;
   },
+  getRepositoryTraining(state) {
+    return state.repositoryIsTraining;
+  },
 };

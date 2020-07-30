@@ -93,7 +93,6 @@ text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
       v-if="activeTutorial === 'integrate'"
       :step-count="2"
       name="integrate" />
-    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
@@ -104,7 +103,6 @@ import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryIntegration',
@@ -113,13 +111,11 @@ export default {
     RequestGenerator,
     LoginForm,
     Tour,
-    TutorialModal,
   },
   extends: RepositoryBase,
   computed: {
     ...mapGetters([
       'activeTutorial',
-      'activeMenu',
     ]),
   },
 };
