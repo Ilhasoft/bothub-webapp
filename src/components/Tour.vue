@@ -2,8 +2,7 @@
   <v-tour
     :name="name"
     :steps="steps"
-    :options="options"
-    :callbacks="callbacksTour">
+    :options="options">
     <template
       slot-scope="tour">
       <div
@@ -34,15 +33,15 @@
               <div
                 slot="actions">
                 <button
-                  v-if="!isFirst"
+                  v-if="!buttonDisabled('is-previous-disabled') && !isFirst"
                   class="v-step__button v-step__button-previous"
                   @click="prevStep()">{{ options.labels.buttonPrevious }}</button>
                 <button
-                  v-if="!isLast"
+                  v-if="!buttonDisabled('is-next-disabled') && !isLast"
                   class="v-step__button v-step__button-next"
                   @click="nextStep()">{{ options.labels.buttonNext }} </button>
                 <button
-                  v-if="isLast && !checkName"
+                  v-if="isLast && !checkName && !buttonDisabled('is-finish-disabled')"
                   class="v-step__button v-step__button-stop"
                   @click="onFinishTutorial()">{{ options.labels.buttonStop }}</button>
                 <button
@@ -80,10 +79,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    skipEvent: {
+      type: Boolean,
+      default: false,
+    },
+    resetTutorial: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       options: {
+        useKeyboardNavigation: false,
         labels: {
           buttonPrevious: this.$t('webapp.tutorial.previous_step'),
           buttonNext: this.$t('webapp.tutorial.next_step'),
@@ -92,9 +100,7 @@ export default {
         },
         highlight: true,
       },
-      callbacksTour: {
-        onStop: this.stopTutorial,
-      },
+      nextDisabled: false,
     };
   },
   computed: {
@@ -137,6 +143,9 @@ export default {
 
       return 'create_intelligence';
     },
+    getElementName(name) {
+      return name;
+    },
   },
   watch: {
     nextEvent() {
@@ -144,6 +153,12 @@ export default {
     },
     finishEvent() {
       this.onFinishTutorial();
+    },
+    skipEvent() {
+      this.skipTutorial();
+    },
+    resetTutorial() {
+      this.restartTutorial();
     },
   },
   mounted() {
@@ -155,18 +170,17 @@ export default {
       'setTutorialInactive',
       'setTutorialMenuActive',
       'setFinalModal',
-      'setFinalizationMessage',
+      'updateFinalizationMessage',
+      'setTutorialActive',
+      'setUpdateRepository',
     ]),
     finishedMessage() {
       this.setFinalModal(false);
-      this.setFinalizationMessage();
+      this.updateFinalizationMessage();
       this.$tours[this.name].skip();
     },
-    async stopTutorial() {
-      await this.setTutorialInactive();
-    },
-    async setMenuActive() {
-      await this.setTutorialMenuActive();
+    setMenuActive() {
+      this.setTutorialMenuActive();
     },
     startTutorial() {
       if (this.$tours[this.name]) {
@@ -174,37 +188,44 @@ export default {
       }
     },
     async onFinishTutorial() {
-      if (!this.isBlocked()) {
+      if (!this.isBlocked('is-step-blocked')) {
         await this.finishTutorial(this.checkIntelligence);
         this.setMenuActive();
         this.$tours[this.name].skip();
       }
     },
     nextStep() {
-      if (!this.isBlocked()) this.$tours[this.name].nextStep();
+      if (!this.isBlocked('is-step-blocked')) this.$tours[this.name].nextStep();
     },
     prevStep() {
-      if (!this.previousBlocked()) this.$tours[this.name].previousStep();
+      if (!this.isBlocked('is-previous-blocked')) this.$tours[this.name].previousStep();
     },
     skipTutorial() {
+      this.setTutorialInactive();
+      this.setUpdateRepository(true);
       this.$tours[this.name].skip();
+    },
+    restartTutorial() {
+      this.setUpdateRepository(true);
+      this.$tours[this.name].start();
     },
     showLastStep() {
       this.$tours[this.name].currentStep = this.steps.length - 1;
     },
-    isBlocked() {
+    buttonDisabled(name) {
       const element = document.querySelector(this.steps[this.currentStep].target).attributes;
       try {
-        const { value } = element.getNamedItem('is-step-blocked');
-        return value === 'true';
+        const { value } = element.getNamedItem(name);
+        if (value === 'true') return true;
       } catch (_) {
         return false;
       }
+      return false;
     },
-    previousBlocked() {
+    isBlocked(name) {
       const element = document.querySelector(this.steps[this.currentStep].target).attributes;
       try {
-        const { value } = element.getNamedItem('is-previous-blocked');
+        const { value } = element.getNamedItem(name);
         return value === 'true';
       } catch (_) {
         return false;

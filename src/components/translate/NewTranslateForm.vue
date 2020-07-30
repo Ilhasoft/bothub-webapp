@@ -10,6 +10,7 @@
           <example-text-with-highlighted-entities-input
             id="tour-translate-step-4"
             ref="textInput"
+            :is-previous-disabled="true"
             v-model="text"
             :is-step-blocked="text.length === 0"
             :entities="entities"
@@ -23,6 +24,8 @@
         <bh-field label>
           <bh-button
             id="tour-translate-step-5"
+            :is-next-disabled="true"
+            :is-previous-disabled="true"
             :disabled="!isValid || submitting"
             secondary
             size="normal"

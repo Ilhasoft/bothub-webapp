@@ -190,6 +190,7 @@
       "no_description": "There is no description for this repository",
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
+      "categories_repository": "Intelligence for <strong> {getAllCategories} </strong> purpose",
       "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
       "non-grouped_entities":"and {n} non-grouped entity. | and {n} non-grouped entities.",
       "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
@@ -211,6 +212,26 @@
       "delete_group_message": "Are you sure you want to delete entity group named \"{group}\"?",
       "delete": "Delete",
       "cancel": "Cancel"
+    },
+    "summary": {
+      "training_informations": "Traning informations",
+      "information_sentences": "Sentences",
+      "information_intents": "Intents",
+      "information_entities": "Entities",
+      "general_informations": "General informations",
+      "information_language": "Languages",
+      "information_contributors": "Contributors",
+      "information_integrations": "Integrations",
+      "intent_question": "INTENT is the desire that the chatbot will realize that the user has when sending a specific message. For example: when sending a \"thank you\" the user's intention is to thank. So the intention for the phrase could be \"thanks\".",
+      "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
+    },
+    "intent":{
+      "title": "Entity",
+      "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
+      "edit_button": "Edit Intent",
+      "save_button": "Save",
+      "no_sentences": "No sentence.",
+      "error_entity": "An error occured."
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -246,6 +267,7 @@
       "intent": "Intent",
       "entity": "Entity",
       "sentence": "Sentence",
+      "text_is": " <strong> {text} </strong> is",
       "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent.",
       "delete_text": "Are you sure? The example will be deleted.",
       "delete": "Delete",
@@ -534,6 +556,9 @@
       "confirm_step":"Confirm",
       "finish_tutorial": "Finish",
       "alert_message": "You need to follow the sequence of steps",
+      "training_wait": "Your intelligence is being trained!",
+      "training_error": "There was an error in training your intelligence.",
+      "training_success": "Your intelligence has been successfully trained!",
       "items": {
           "create_account": "Create account",
           "create_intelligence": "Create your first intelligence",
@@ -545,31 +570,28 @@
           "integrate": "Integrate your intelligence with a platform"
       },
       "create_intelligence": {
-          "step_0": "<strong>Go to the feature create intelligence !</strong> <br> Here you will create your first intelligence",
+          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
           "step_1": "Or create your own intelligence by clicking here."
       },
       "create_intelligence_forms": {
           "step_0": "Fill in the form with your intelligence data like name, description and language",
-          "step_1": "And go forward",
-          "step_2": "Choose categories for your intelligence, based on the area in which it will be used, and submit.",
-          "step_3": "Your intelligence is ready to be created. Just send."
+          "step_1": "Choose categories for your intelligence, based on the area in which it will be used, and submit."
       },
       "training": {
           "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
-          "step_1": "Enter a sentence here that you would like your intelligence to understand and select it. <br> Ex.: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
-          "step_2": "Now, also add some custom entity to your selected sentence. Just click here and type your entidade. <br> <strong>Tip</strong>: If you selected pizza the entity is food",
-          "step_3": "Now, write the entity. <br> Ex entity.: food",
-          "step_4": "And here, identify that the intent of the sentence you typed matches. <br> Ex .: affirmative",
+          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Then select one of the words to classify. Ex: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
+          "step_2": "Now click here to sort the word you selected.",
+          "step_3": "And write the rating Ex: If you selected ''pizza'' the rating could be ''food''",
+          "step_4": "Identify the intention of the phrase you typed. Ex: order",
           "step_5": "Finally, submit your sentence.",
-          "step_6": "Click here to run your training. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
-          "step_7": "Make sure your intelligence is ready to train.",
-          "step_8": "Click on the button to confirm."
+          "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
+          "step_7": "Make sure your intelligence is ready to train and click \" Train \" to proceed. <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Ok \" to repeat."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
         "step_1": "Select a language to test.",
-        "step_2": "Enter a sentence here that you would like to test. <br> Ex.: I want a pizza",
-        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex .: affirmative",
+        "step_2": "Enter a sentence here that you would like to test. <br> Ex: I want a pizza",
+        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
     },
@@ -583,7 +605,8 @@
         "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test.",
         "step_1": "Select the sentences you want to add",
         "step_2": "Add to train",
-        "step_3": "Add to test phrases"
+        "step_3": "Add to test phrases",
+        "step_4": "Select the intent that you want to assign the sentence and add."
       },
       "translate": {
         "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",

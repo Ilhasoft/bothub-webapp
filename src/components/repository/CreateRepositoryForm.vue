@@ -9,26 +9,29 @@
         <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
-        <form-generator
-          v-if="formSchema"
-          id="tour-create_intelligence_forms-step-0"
-          :is-step-blocked="!checkFormData"
-          :schema="filteredSchema"
-          v-model="data"
-          :errors="errors"
-          :show-labels="false"
-          :new-intelligence-forms="true"
-          class="create-repository__form"/>
         <div
-          id="tour-create_intelligence_forms-step-1"
-          :is-step-blocked="!blockedNextStepTutorial"
-          class="create-repository__form__style">
-          <b-button
-            :disabled="!checkFormData"
-            type="is-primary"
-            class="create-repository__form__style__button"
-            @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
-          </b-button>
+          id="tour-create_intelligence_forms-step-0"
+          :is-next-disabled="true"
+          class="create-repository__container">
+          <form-generator
+            v-if="formSchema"
+            :drf-model-instance="drfRepositoryModel"
+            :is-step-blocked="!checkFormData"
+            :schema="filteredSchema"
+            v-model="data"
+            :errors="errors"
+            :show-labels="false"
+            :new-intelligence-forms="true"
+            class="create-repository__form"/>
+          <div
+            class="create-repository__form__style">
+            <b-button
+              :disabled="!checkFormData"
+              type="is-primary"
+              class="create-repository__form__style__button"
+              @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
+            </b-button>
+          </div>
         </div>
       </div>
       <div
@@ -39,31 +42,36 @@
         </h1>
         <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
-        <category-select
-          v-if="formSchema"
-          id="tour-create_intelligence_forms-step-2"
-          :is-previous-blocked="true"
-          v-model="categories"
-          :is-step-blocked="categories.length === 0"
-          class="create-repository__form"/>
-        <div class="create-repository__buttons">
-          <b-button
-            type="is-primary"
-            class="create-repository__form__buttons"
-            @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
-          </b-button>
-          <span
-            id="tour-create_intelligence_forms-step-3"
-            :is-step-blocked="blockedNextStepTutorial"
-            :class="activeTutorial === 'create_intelligence'
-            ? 'create-repository__form__finishButton' : ''">
+        <div
+          id="tour-create_intelligence_forms-step-1"
+          :is-finish-disabled="true"
+          :is-previous-disabled="true"
+          :class="activeTutorial === 'create_intelligence'
+          ? 'create-repository__form__tutorial' : ''">
+          <category-select
+            v-if="formSchema"
+            v-model="categories"
+            :is-step-blocked="categories.length === 0"
+            class="create-repository__form"/>
+          <div class="create-repository__buttons">
             <b-button
-              native-type="submit"
+              :disabled="activeTutorial === 'create_intelligence'"
               type="is-primary"
               class="create-repository__form__buttons"
-            > {{ $t('webapp.create_repository.submit') }}
+              @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
             </b-button>
-          </span>
+            <span
+              :class="activeTutorial === 'create_intelligence'
+              ? 'create-repository__form__finishButton' : ''">
+              <b-button
+                :disabled="categories.length === 0"
+                native-type="submit"
+                type="is-primary"
+                class="create-repository__form__buttons"
+              > {{ $t('webapp.create_repository.submit') }}
+              </b-button>
+            </span>
+          </div>
         </div>
       </div>
       <div
@@ -96,12 +104,11 @@
     </form>
     <tour
       v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
-      :step-count="4"
+      :step-count="2"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       :skip-if-back-page="eventClickBackPage"
       name="create_intelligence_forms"/>
-    <tutorial-modal :open="activeMenu"/>
   </div>
 </template>
 
@@ -115,7 +122,6 @@ import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -125,7 +131,6 @@ export default {
     RepositoryCard,
     CategorySelect,
     Tour,
-    TutorialModal,
   },
   props: {
     userName: {
@@ -215,6 +220,9 @@ export default {
       'getNewRepositorySchema',
       'newRepository',
       'setTutorialInactive',
+      'clearTutorial',
+      'clearFinalizatioMessage',
+      'setFinalModal',
       'getAllOrgs',
     ]),
     constructModels() {
@@ -240,11 +248,9 @@ export default {
     },
     dispatchClick() {
       this.eventClick = !this.eventClick;
-      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
-      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
     },
     checkIfIsTutorial() {
       if (this.activeTutorial === 'create_intelligence') {
@@ -315,7 +321,12 @@ export default {
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
-        this.dispatchFinish();
+        await this.clearTutorial();
+        await this.clearFinalizatioMessage();
+        await this.setFinalModal(false);
+        if (this.activeTutorial === 'create_intelligence') {
+          this.dispatchFinish();
+        }
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
@@ -357,6 +368,11 @@ export default {
           font-size: 3rem;
         }
 
+        &__container{
+          margin: 0;
+          padding: 0 0 1rem 0;
+          width: 30.625rem;
+        }
         &__form {
             text-align: left;
             margin: 3rem 0;
@@ -374,6 +390,12 @@ export default {
               }
             }
 
+            &__tutorial{
+              margin: 0;
+              padding: 0;
+              height: 430px;
+              width: 480px;
+            }
             &__wrapper {
                 width: 32rem;
                 @media (max-width: $mobile-width*1.2) {
@@ -399,7 +421,7 @@ export default {
               height: 2.188rem;
               border-radius: 6px;
               @media (max-width: $mobile-width*1.2) {
-                   margin-top: 10rem;
+                   margin-top: 6rem;
               }
               &__button{
                 box-shadow: 0px 3px 6px #00000029;
