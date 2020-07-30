@@ -66,7 +66,7 @@ describe('EntitiesList.vue', () => {
     });
 
     test('expanded should be truth', () => {
-      expect(wrapper.vm.EditSentences).toBeTruthy();
+      expect(wrapper.vm.editSentences).toBeTruthy();
     });
 
     test('total of sentences should be greater than 0', () => {
