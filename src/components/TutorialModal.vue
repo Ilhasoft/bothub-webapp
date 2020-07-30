@@ -277,6 +277,10 @@ export default {
             this.goToTutorial(name, target);
             return;
           }
+          if (this.repositoryStatus.length !== 0 && this.repositoryStatus.results[0].status === 3) {
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            return;
+          }
         } else {
           if (this.getRepositoryTraining) {
             this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
