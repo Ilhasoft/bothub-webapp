@@ -54,8 +54,8 @@ export default {
     /* istanbul ignore next */
     return user.permissionRepositories(limit);
   },
-  getUserReports(store, { query = {}, limit = 20 }) {
-    return user.getReports(limit, query);
+  getUserReports(store, { startDate, endDate, limit = 20 }) {
+    return user.getReports(startDate, endDate, limit);
   },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);

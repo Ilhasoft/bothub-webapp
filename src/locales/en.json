@@ -381,7 +381,7 @@
       },
       "reports": {
         "title": "Reports",
-        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "predictions": "No predictions | {n} prediction | {n} predictions",
         "created_by": "Created by",
         "today": "Today",
         "this_week": "This week",
