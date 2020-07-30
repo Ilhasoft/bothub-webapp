@@ -4,7 +4,7 @@
       <img
         src="@/assets/imgs/mascot.png"
         class="bothub-logo"
-        alt="">
+        alt="bothub-loading">
       <div class="triple-spinner"/>
     </div>
   </div>
