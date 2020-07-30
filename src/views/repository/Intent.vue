@@ -6,7 +6,7 @@
       v-if="authenticated"
       class="entity-list">
       <div v-if="repository && repository.authorization.can_contribute">
-        <IntentiesList
+        <intents-list
           :intenties-list="examplesList"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
@@ -59,7 +59,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import LoginForm from '@/components/auth/LoginForm';
-import IntentiesList from '@/components/repository/IntentiesList';
+import IntentsList from '@/components/repository/IntentsList';
 import PaginatedList from '@/components/shared/PaginatedList';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import SentencesIntentList from '@/components/repository/SentencesIntentList';
@@ -74,7 +74,7 @@ export default {
     RequestAuthorizationModal,
     PaginatedList,
     SentencesIntentList,
-    IntentiesList,
+    IntentsList,
     Loading,
   },
   extends: RepositoryBase,

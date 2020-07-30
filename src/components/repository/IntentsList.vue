@@ -28,9 +28,9 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'IntentiesList',
+  name: 'IntentsList',
   props: {
-    intentiesList: {
+    IntentsList: {
       type: Object,
       default: null,
     },
@@ -53,8 +53,8 @@ export default {
       repositoryList: 'getCurrentRepository',
     }),
     totalSentences() {
-      if (this.intentiesList !== null) {
-        return this.intentiesList.total;
+      if (this.IntentsList !== null) {
+        return this.IntentsList.total;
       }
       return 0;
     },
