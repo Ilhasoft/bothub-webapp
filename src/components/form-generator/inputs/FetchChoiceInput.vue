@@ -34,6 +34,7 @@ export default {
       input: null,
       options: [],
       loading: false,
+      error: null,
     };
   },
   computed: {
@@ -62,7 +63,7 @@ export default {
         const list = await this.fetch();
         this.options = list;
       } catch (e) {
-        console.log(e);
+        this.error = e;
       } finally {
         this.loading = false;
       }
