@@ -38,6 +38,7 @@ export default {
     initialData() {
       if (this.value && this.value.length > 0) return;
       this.value = this.initialData;
+      this.update();
     },
   },
   mounted() {

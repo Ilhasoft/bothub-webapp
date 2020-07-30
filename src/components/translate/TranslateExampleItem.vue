@@ -39,6 +39,8 @@
         <div class="level-item">
           <button
             id="tour-translate-step-3"
+            :is-next-disabled="true"
+            :is-previous-disabled="true"
             :is-step-blocked="blockedNextStepTutorial"
             class="button is-primary"
             @click="toggleFormOpen()">

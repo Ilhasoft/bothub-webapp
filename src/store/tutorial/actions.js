@@ -15,9 +15,12 @@ export default {
   },
   async setFinalModal({ commit }, value) {
     commit('updateFinalModal', value);
+  },
+  // eslint-disable-next-line no-unused-vars
+  async setFinalizationMessage({ commit }) {
     localStorage.setItem('finalizationMessage', true);
   },
-  async setFinalizationMessage({ commit }) {
+  async updateFinalizationMessage({ commit }) {
     commit('finalizationMessage', localStorage.getItem('finalizationMessage'));
   },
   async finishTutorial({ commit }, name) {
@@ -46,5 +49,11 @@ export default {
   },
   getUserRepositories(store, limit, offset) {
     return tutorial.myRepositories(limit, offset);
+  },
+  getRepositoryStatus(store, { repositoryUUID, repositoryVersion }) {
+    return tutorial.trainingStatus(repositoryUUID, repositoryVersion);
+  },
+  async setRepositoryTraining({ commit }, value) {
+    commit('updateRepositoryTraining', value);
   },
 };

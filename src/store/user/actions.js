@@ -52,7 +52,7 @@ export default {
   // TODO
   getUsingRepositories(store, limit = 20) {
     /* istanbul ignore next */
-    return user.myRepositories(limit);
+    return user.permissionRepositories(limit);
   },
   getUserReports(store, { query = {}, limit = 20 }) {
     return user.getReports(limit, query);
@@ -62,9 +62,9 @@ export default {
     return schema;
   },
   patchMyProfile(store, {
-    nickname, email, name, locale,
+    nickname, email, name, locale, biography,
   }) {
-    return user.updateMyProfile(nickname, email, name, locale);
+    return user.updateMyProfile(nickname, email, name, locale, biography);
   },
   async getChangePasswordSchema() {
     const schema = await user.getChangePasswordSchema();

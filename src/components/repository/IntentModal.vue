@@ -1,5 +1,9 @@
 <template>
-  <section class="modalStyle">
+  <section
+    id="tour-inbox-step-4"
+    :is-previous-disabled="true"
+    :is-finish-disabled="true"
+    class="modalStyle">
     <div
       class="modal-card modalStyle__content">
       <header class="modal-card-head">
@@ -43,14 +47,12 @@
           :disabled="!selectedOptions"
           class="button is-primary"
           @click="addIntent"> {{ $t('webapp.inbox.add_log.add') }}</button>
-
       </footer>
     </div>
   </section>
 </template>
 
 <script>
-
 
 export default {
   name: 'IntentModal',

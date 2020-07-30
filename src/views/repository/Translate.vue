@@ -20,6 +20,7 @@
                   custom-class="repository-translate__field__item__label">
                   <language-select
                     id="tour-translate-step-1"
+                    :is-previous-disabled="true"
                     :is-step-blocked="translate.from === null"
                     v-model="translate.from" />
                 </b-field>
@@ -47,6 +48,7 @@
           </div>
           <div
             id="tour-translate-step-6"
+            :is-previous-disabled="true"
             class="repository-translate__translateButtons">
 
             <b-button
@@ -187,7 +189,6 @@
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="translate" />
-    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
@@ -203,7 +204,6 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryTranslate',
@@ -216,7 +216,6 @@ export default {
     LoginForm,
     AuthorizationRequestNotification,
     Tour,
-    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -250,7 +249,6 @@ export default {
     }),
     ...mapGetters([
       'activeTutorial',
-      'activeMenu',
     ]),
     checkSwitch() {
       if (this.isSwitched === true) {
@@ -330,11 +328,17 @@ export default {
     },
     checkLanguageToImport() {
       if (this.translate.from && this.translate.to) {
+        if (this.activeTutorial === 'translate') {
+          return;
+        }
         this.isImportFileVisible = true;
       }
     },
     checkLanguageToExport() {
       if (this.translate.from && this.translate.to) {
+        if (this.activeTutorial === 'translate') {
+          return;
+        }
         this.isExportFileVisible = true;
       }
     },
