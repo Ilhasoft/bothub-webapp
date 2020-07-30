@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LanguageAppendSelectInput.vue renders correctly 1`] = `
-<b-dropdown-stub maxheight="200" position="is-bottom-left" mobilemodal="true" animation="fade" closeonclick="true" canclose="true" class="language-append-select-input"><span class="clickable bh-grid language-append-select-input__language-select"><bh-icon-stub value="earth"></bh-icon-stub> <bh-icon-stub value="menu-down" class="align"></bh-icon-stub></span>
+<b-dropdown-stub position="is-bottom-left" mobilemodal="true" ariarole="" animation="fade" closeonclick="true" canclose="true" class="language-append-select-input"><span class="clickable bh-grid language-append-select-input__language-select"><bh-icon-stub value="earth"></bh-icon-stub> <bh-icon-stub value="menu-down" class="align"></bh-icon-stub></span>
   <b-dropdown-item-stub focusable="true" ariarole=""><span>English</span></b-dropdown-item-stub>
   <b-dropdown-item-stub focusable="true" ariarole=""><span>Portuguese</span></b-dropdown-item-stub>
 </b-dropdown-stub>

@@ -12,7 +12,7 @@ exports[`EditProfileForm.vue renders correctly 1`] = `
       <b-button-stub type="is-primary" nativetype="submit" tag="button" class="submit-button">some specific text</b-button-stub>
     </div>
   </div>
-  <b-modal-stub width="489" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true">
+  <b-modal-stub width="489" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip">
     <div class="change-password">
       <h1>some specific text</h1>
       <change-password-form-stub></change-password-form-stub>
