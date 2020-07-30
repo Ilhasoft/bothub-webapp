@@ -190,6 +190,7 @@
       "no_description": "There is no description for this repository",
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
+      "categories_repository": "Intelligence for <strong> {getAllCategories} </strong> purpose",
       "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
       "non-grouped_entities":"and {n} non-grouped entity. | and {n} non-grouped entities.",
       "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
@@ -211,6 +212,26 @@
       "delete_group_message": "Are you sure you want to delete entity group named \"{group}\"?",
       "delete": "Delete",
       "cancel": "Cancel"
+    },
+    "summary": {
+      "training_informations": "Traning informations",
+      "information_sentences": "Sentences",
+      "information_intents": "Intents",
+      "information_entities": "Entities",
+      "general_informations": "General informations",
+      "information_language": "Languages",
+      "information_contributors": "Contributors",
+      "information_integrations": "Integrations",
+      "intent_question": "INTENT is the desire that the chatbot will realize that the user has when sending a specific message. For example: when sending a \"thank you\" the user's intention is to thank. So the intention for the phrase could be \"thanks\".",
+      "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
+    },
+    "intent":{
+      "title": "Entity",
+      "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
+      "edit_button": "Edit Intent",
+      "save_button": "Save",
+      "no_sentences": "No sentence.",
+      "error_entity": "An error occured."
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",

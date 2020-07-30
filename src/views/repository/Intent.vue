@@ -6,22 +6,21 @@
       v-if="authenticated"
       class="entity-list">
       <div v-if="repository && repository.authorization.can_contribute">
-        <entities-list
-          :entities-list="examplesList"
+        <intents-list
+          :intenties-list="examplesList"
           :repository="repository"
-          :entity-name.sync="entitySelected"
           @ableEditEntities="editEntity($event)"
           @setAllEntities="getAllEntities($event)"/>
         <paginated-list
           v-if="examplesList"
-          :item-component="sentencesEntities"
+          :item-component="sentencesIntenties"
           :list="examplesList"
           :repository="repository"
           :per-page="perPage"
           :editable="entitiesEditable"
           :all-entities="allEntities"
-          :add-attributes="{ entitySelected }"
-          @itemDeleted="onItemDeleted()"/>
+          @itemDeleted="onItemDeleted()"
+          @itemSave="onItemSave()"/>
         <p
           v-if="examplesList && examplesList.empty"
           class="no-examples">{{ $t('webapp.entity.no_sentences') }}</p>
@@ -60,22 +59,22 @@
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryBase from './Base';
 import LoginForm from '@/components/auth/LoginForm';
-import EntitiesList from '@/components/repository/EntitiesList';
+import IntentsList from '@/components/repository/IntentsList';
 import PaginatedList from '@/components/shared/PaginatedList';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import SentencesEntityList from '@/components/repository/SentencesEntityList';
+import SentencesIntentList from '@/components/repository/SentencesIntentList';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import Loading from '@/components/shared/Loading';
 
 export default {
-  name: 'Entity',
+  name: 'Intent',
   components: {
     RepositoryViewBase,
     LoginForm,
     RequestAuthorizationModal,
     PaginatedList,
-    SentencesEntityList,
-    EntitiesList,
+    SentencesIntentList,
+    IntentsList,
     Loading,
   },
   extends: RepositoryBase,
@@ -94,13 +93,12 @@ export default {
       name: 'Entity',
       examplesList: null,
       totalList: 0,
-      entitySearch: {
-        entity_id: this.$route.params.entity_id,
+      intentSearch: {
+        intent: this.$route.params.intent,
       },
-      entitySelected: '',
       entitiesEditable: false,
       query: {},
-      sentencesEntities: SentencesEntityList,
+      sentencesIntenties: SentencesIntentList,
       requestAuthorizationModalOpen: false,
       querySchema: {},
       allEntities: [],
@@ -122,7 +120,7 @@ export default {
     repositoryList() {
       this.updateExamples();
     },
-    entitySearch() {
+    intentSearch() {
       this.updateExamples(true);
     },
   },
@@ -142,13 +140,16 @@ export default {
           this.examplesList = await this.searchExamples({
             repositoryUuid: this.repositoryList.uuid,
             version: this.repositoryVersion,
-            query: this.entitySearch,
+            query: this.intentSearch,
             limit: this.perPage,
           });
         }
       }
     },
     onItemDeleted() {
+      this.updateExamples(true);
+    },
+    onItemSave() {
       this.updateExamples(true);
     },
     openRequestAuthorizationModal() {
