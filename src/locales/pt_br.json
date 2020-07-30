@@ -247,6 +247,7 @@
       "enter_sentence": "Digite sua frase aqui",
       "intent": "Intenção",
       "entity": "Entidade",
+      "sentence": "Frase",
       "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
       "delete_text": "Tem certeza? Este exemplo será deletado.",
       "delete": "Deletar",
@@ -403,8 +404,8 @@
       "intelligences": {
         "title": "Inteligências",
         "mine": "Minhas inteligências",
-        "contributing": "inteligências com permissão",
-        "using": "inteligências com integração"
+        "contributing": "Inteligências com permissão",
+        "using": "Inteligências com integração"
       }
     },
     "menu": {
