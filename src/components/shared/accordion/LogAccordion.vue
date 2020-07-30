@@ -1,6 +1,8 @@
 <template>
   <div class="log-accordion" >
     <sentence-accordion
+      id="tour-inbox-step-1"
+      :is-previous-disabled="true"
       :is-step-blocked="data.length === 0"
       :open.sync="open">
 

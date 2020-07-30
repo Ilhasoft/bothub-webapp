@@ -6,4 +6,11 @@ export default {
     const queryString = qs.stringify(limit, offset);
     return request.$http.get(`/v2/repository/search-repositories/?${queryString}`);
   },
+  trainingStatus(repositoryUUID, repositoryVersion) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUUID,
+      repository_version: repositoryVersion,
+    });
+    return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
+  },
 };
