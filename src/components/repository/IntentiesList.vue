@@ -7,7 +7,7 @@
       </div>
       <div>
         <b-button
-          v-if="!EditSentences"
+          v-if="!editSentences"
           ref="editEntityEvent"
           class="intent-list__content__buttonEdit"
           @click.native="editOptionsEntity()">{{ $t('webapp.intent.edit_button') }}</b-button>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'IntentiesList',
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      EditSentences: false,
+      editSentences: false,
       intent: this.$route.params.intent,
       allEntities: [],
       errors: {},
@@ -63,9 +63,6 @@ export default {
     this.getEntitiesName();
   },
   methods: {
-    ...mapActions([
-      'setUpdateRepository',
-    ]),
     async getEntitiesName() {
       const allEntitiesName = await this.repository.entities.map(
         entityValue => entityValue.value,
@@ -73,27 +70,11 @@ export default {
       this.allEntities = allEntitiesName;
     },
     editOptionsEntity() {
-      this.EditSentences = !this.EditSentences;
-      this.$emit('ableEditEntities', this.EditSentences);
+      this.editSentences = !this.editSentences;
+      this.$emit('ableEditEntities', this.editSentences);
       this.$emit('setAllEntities', this.allEntities);
     },
-    async saveEdition() {
-      try {
-        this.setUpdateRepository(true);
-        this.$emit('saveEdition');
-      } catch (error) {
-        if (error.response.data.non_field_errors !== undefined) {
-          this.$buefy.toast.open({
-            message: this.$t('webapp.entity.error_entity_exists'),
-            type: 'is-danger',
-          });
-        } else {
-          this.$buefy.toast.open({
-            message: this.$t('webapp.entity.error_entity'),
-            type: 'is-danger',
-          });
-        }
-      }
+    saveEdition() {
       this.editOptionsEntity();
     },
   },

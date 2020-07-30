@@ -1,14 +1,15 @@
 <template>
-  <div class="badges-card">
+  <div class="badges-without-styles">
     <div v-html="title" />
     <div class="badges-card__wrapper">
       <div>
-        <entity-tag
+        <intent-tag
           v-for="item in list"
-          :key="item"
-          :entity-name="item.value || item"
-          :class="['badges-card__wrapper__badge', clickable ? 'badges-card__clickable' : '']"
-          @click.native="entityList(item.entity_id)"/>
+          :key="item.value"
+          :entity-name="item.value"
+          :count="item.examples__count"
+          class="badges-card__wrapper__badge"
+          @click.native="goToList(item.value)"/>
       </div>
     </div>
     <div v-if="examplesCount">
@@ -18,29 +19,20 @@
 </template>
 
 <script>
-import { getEntityColor } from '@/utils/entitiesColors';
-import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+import IntentTag from '@/components/repository/repository-evaluate/example/IntentTag';
 
 export default {
-  name: 'BadgesCard',
+  name: 'BadgesIntents',
   components: {
-    EntityTag,
+    IntentTag,
   },
   props: {
     title: {
       type: String,
       default: '',
     },
-    clickable: {
-      type: Boolean,
-      default: false,
-    },
     repository: {
       type: Object,
-      default: null,
-    },
-    entityId: {
-      type: Number,
       default: null,
     },
     list: {
@@ -52,22 +44,9 @@ export default {
       default: null,
     },
   },
-  computed: {
-    nameList() {
-      return this.list.map(item => item.value || item);
-    },
-  },
   methods: {
-    entityList(entity) {
-      if (!this.clickable) return;
-      this.$router.push({ name: 'repository-entitylist', params: { entity } });
-    },
-    getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.nameList,
-      );
-      return `entity-${color}`;
+    goToList(intent) {
+      this.$router.push({ name: 'repository-intentlist', params: { intent } });
     },
   },
 };
@@ -76,15 +55,17 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/variables.scss';
 
+.badges-without-styles{
+    padding-top: .75rem;
+    margin: .75rem -0.4rem;
+    margin-bottom: 3rem;
+}
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
     border: 1px solid #CFD5D9;
     border-radius: 6px;
-
-    &__clickable{
-      cursor: pointer;
-    }
+    font-weight: bold;
 
     &__wrapper {
       margin: .75rem .5rem;
@@ -93,10 +74,10 @@ export default {
         height: 1.5rem;
         margin: .4rem .5rem 0 0;
         padding: 0 1rem 0 1rem;
-        font-weight: bold;
         line-height: calc(1.5rem - 4px);
         border-width: 1px;
         border-radius: 1rem;
+        cursor: pointer;
 
         span{
           font-size: $font-small;

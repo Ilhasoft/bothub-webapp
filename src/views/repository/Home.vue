@@ -60,15 +60,9 @@
               />
             </b-tooltip>
           </div>
-
         </div>
 
-        <badges-card
-          :list="repository.intents"
-          :clickable="true"
-          :home-intenties="true"
-          :intents-list="getAllIntentiesCount"
-        />
+        <badges-intents :list="repository.intents"/>
       </div>
 
       <entity-edit
@@ -88,7 +82,7 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BadgesCard from '@/components/repository/BadgesCard';
+import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 import EntityEdit from '@/components/repository/EntityEdit';
@@ -98,7 +92,7 @@ export default {
   name: 'RepositoryHome',
   components: {
     RepositoryViewBase,
-    BadgesCard,
+    BadgesIntents,
     VueMarkdown,
     EntityEdit,
     SummaryInformations,
@@ -139,10 +133,6 @@ export default {
     getAllCategories() {
       const categories = this.repository.categories_list.map(category => category.name);
       return categories.join(', ');
-    },
-    getAllIntentiesCount() {
-      const intenties = this.repository.intents.map(intent => intent.examples__count);
-      return intenties;
     },
   },
   watch: {
@@ -249,6 +239,7 @@ export default {
   }
 
   &__intents-list {
+    margin-top:2rem;
     padding: 1rem .5rem;
     &__header {
       display: flex;

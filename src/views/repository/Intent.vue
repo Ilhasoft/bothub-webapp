@@ -10,8 +10,7 @@
           :intenties-list="examplesList"
           :repository="repository"
           @ableEditEntities="editEntity($event)"
-          @setAllEntities="getAllEntities($event)"
-          @saveEdition="onItemSave()"/>
+          @setAllEntities="getAllEntities($event)"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesIntenties"

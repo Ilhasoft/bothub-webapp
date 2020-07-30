@@ -11,8 +11,7 @@
           :repository="repository"
           :entity-name.sync="entitySelected"
           @ableEditEntities="editEntity($event)"
-          @setAllEntities="getAllEntities($event)"
-          @saveEdition="onItemSave()"/>
+          @setAllEntities="getAllEntities($event)"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
@@ -22,8 +21,7 @@
           :editable="entitiesEditable"
           :all-entities="allEntities"
           :add-attributes="{ entitySelected }"
-          @itemDeleted="onItemDeleted()"
-          @itemSave="onItemSave()"/>
+          @itemDeleted="onItemDeleted()"/>
         <p
           v-if="examplesList && examplesList.empty"
           class="no-examples">{{ $t('webapp.entity.no_sentences') }}</p>
@@ -151,9 +149,6 @@ export default {
       }
     },
     onItemDeleted() {
-      this.updateExamples(true);
-    },
-    onItemSave() {
       this.updateExamples(true);
     },
     openRequestAuthorizationModal() {
