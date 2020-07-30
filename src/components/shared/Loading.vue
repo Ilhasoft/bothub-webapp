@@ -70,7 +70,6 @@ export default {
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
 }
-
 @-webkit-keyframes spin {
     from {
       -webkit-transform: rotate(0deg);
