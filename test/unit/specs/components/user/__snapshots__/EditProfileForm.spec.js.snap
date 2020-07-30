@@ -5,7 +5,7 @@ exports[`EditProfileForm.vue renders correctly 1`] = `
   <loading-stub></loading-stub>
   <b-loading-stub isfullpage="true" animation="fade" oncancel="function _default() {}"></b-loading-stub>
   <!---->
-  <!---->
+  <form-generator-stub schema="[object Object]" errors="[object Object]" showlabels="true" initialdata="[object Object]" grouped="true" hidehelp="true"></form-generator-stub>
   <div><a>
       some specific text </a>
     <div class="control has-text-centered">

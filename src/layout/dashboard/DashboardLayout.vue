@@ -126,7 +126,6 @@
       v-if="getFinalModal && getFinalMessage !== 'true'"
       :step-count="1"
       name="tutorial_button" />
-    <tutorial-modal :open.sync="beginnerTutorialModalOpen"/>
   </div>
 
 </template>
@@ -139,7 +138,6 @@ import UserAvatar from '@/components/user/UserAvatar';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'DashboardLayout',
@@ -148,7 +146,6 @@ export default {
     UserAvatar,
     VersionDropdown,
     Tour,
-    TutorialModal,
   },
   data() {
     return {
@@ -188,10 +185,11 @@ export default {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
+      'setTutorialMenuActive',
     ]),
     openBeginnerTutorialModal() {
       if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
-        this.beginnerTutorialModalOpen = true;
+        this.setTutorialMenuActive();
       }
     },
     collapseHandle() {

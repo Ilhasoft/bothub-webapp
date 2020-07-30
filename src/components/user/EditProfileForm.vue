@@ -4,7 +4,7 @@
     <b-loading :active="submitting" />
     <form-generator
       v-if="formSchema && myProfile"
-      :schema="formSchema"
+      :schema="filteredSchema"
       v-model="data"
       :errors="errors"
       :initial-data="initialData"
@@ -15,7 +15,7 @@
       v-if="groupSchema && myProfile"
       :schema="groupSchema"
       v-model="groupData"
-      :errors="groupErrors"
+      :errors="errors"
       :grouped="true"
       :initial-data="initialData"
       :available-max-length="false"
@@ -60,12 +60,10 @@ export default {
   data() {
     return {
       formSchema: null,
-      groupSchema: null,
       data: {},
       groupData: {},
       submitting: false,
       errors: {},
-      groupErrors: {},
       changePasswordModalOpen: false,
     };
   },
@@ -85,23 +83,27 @@ export default {
     allData() {
       return { ...this.data, ...this.groupData };
     },
+    filteredSchema() {
+      if (!this.formSchema) return {};
+      const { biography, ...schema } = this.formSchema;
+      return schema;
+    },
+    groupSchema() {
+      if (!this.formSchema || !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) return {};
+      const { biography } = this.formSchema;
+      return {
+        biography,
+        image: {
+          label: 'Avatar',
+          read_only: false,
+          style: { grouped: true },
+          type: 'image',
+        },
+      };
+    },
   },
   async mounted() {
     this.formSchema = await this.getMyProfileSchema(this.myProfile.nickname);
-    this.groupSchema = process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
-      biography: {
-        label: 'Biography',
-        read_only: false,
-        style: { grouped: true },
-        type: 'textarea',
-      },
-      image: {
-        label: 'Avatar',
-        read_only: false,
-        style: { grouped: true },
-        type: 'image',
-      },
-    } : {};
   },
   methods: {
     ...mapActions([

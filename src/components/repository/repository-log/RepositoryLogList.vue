@@ -7,8 +7,7 @@
         :closable="false">
         <b-loading :active.sync="loadingLogs"/>
       </b-notification>
-      <div
-        id="tour-inbox-step-1">
+      <div>
         <b-checkbox
           v-model="select"
           :native-value="selectAll">
@@ -21,6 +20,7 @@
             @click="showModalTraining($t('webapp.inbox.training'))">
             <b-icon
               id="tour-inbox-step-2"
+              :is-previous-disabled="true"
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
@@ -30,6 +30,8 @@
             @click="showModalSentence($t('webapp.inbox.test_sentences'))">
             <b-icon
               id="tour-inbox-step-3"
+              :is-previous-disabled="true"
+              :is-next-disabled="true"
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
           </div>
@@ -176,6 +178,8 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
+        canCancel: false,
+        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -191,8 +195,6 @@ export default {
       });
     },
     showModalSentence(typeModal) {
-      if (this.activeTutorial === 'inbox') return;
-
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -210,13 +212,29 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
+        canCancel: false,
+        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
             this.addToSentences(value);
             this.intent = value;
+            if (this.activeTutorial === 'inbox') {
+              this.$emit('finishedTutorial');
+            }
+          },
+          closeModal: () => {
+            this.logData = [];
+            this.select = '';
+            this.$root.$emit('selectAll', false);
+            if (this.activeTutorial === 'inbox') {
+              this.$emit('dispatchSkip');
+            }
           },
         },
+      });
+      this.$nextTick(() => {
+        this.$emit('dispatchNext');
       });
     },
     verifyIsCorrected(value) {

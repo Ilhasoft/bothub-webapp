@@ -13,7 +13,8 @@
               </div>
               <div
                 id="tour-training-step-6"
-                :is-step-blocked="!blockedNextStepTutorial"
+                :is-next-disabled="true"
+                :is-previous-disabled="true"
                 class="trainings-repository__list-wrapper__tutorialStep">
                 <b-button
                   v-if="repository.authorization.can_write"
@@ -73,18 +74,19 @@
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
       @train="train(repository.uuid)"
-      @finishedTutorial="dispatchFinish()" />
+      @finishedTutorial="dispatchFinish()"
+      @resetTutorial="dispatchReset()" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
     <tour
       v-if="activeTutorial === 'training'"
-      :step-count="9"
+      :step-count="8"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
+      :reset-tutorial="eventReset"
       name="training"/>
-    <tutorial-modal :open="activeMenu"/>
   </repository-view-base>
 </template>
 
@@ -103,7 +105,6 @@ import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'RepositoryTrainings',
@@ -119,7 +120,6 @@ export default {
     TrainResponse,
     Loading,
     Tour,
-    TutorialModal,
   },
   extends: RepositoryBase,
   data() {
@@ -134,6 +134,7 @@ export default {
       loadingStatus: false,
       eventClick: false,
       eventClickFinish: false,
+      eventReset: false,
       blockedNextStepTutorial: false,
     };
   },
@@ -141,7 +142,6 @@ export default {
     ...mapGetters([
       'authenticated',
       'activeTutorial',
-      'activeMenu',
     ]),
   },
   methods: {
@@ -200,6 +200,9 @@ export default {
     },
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
+    },
+    dispatchReset() {
+      this.eventReset = !this.eventReset;
     },
     signIn() {
       this.$router.push({

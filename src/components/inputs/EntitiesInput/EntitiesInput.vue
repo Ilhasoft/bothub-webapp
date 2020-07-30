@@ -27,6 +27,8 @@
       <b-button
         id="tour-training-step-2"
         ref="addEntityBtn"
+        :is-next-disabled="true"
+        :is-previous-disabled="true"
         :disabled="!textSelectedValue"
         :is-step-blocked="!blockedNextStepTutorial"
         rounded

@@ -18,11 +18,14 @@ export default {
   myRepositories(limit) {
     return new utils.Page('/v2/repository/search-repositories/', limit);
   },
+  permissionRepositories(limit) {
+    return new utils.Page('/v2/repository/repositories-permissions/', limit);
+  },
   async getMyProfileSchema() {
     const { data } = await request.$http.options('/v2/account/my-profile/');
     return data.actions.PUT;
   },
-  updateMyProfile(nickname, email, name, locale) {
+  updateMyProfile(nickname, email, name, locale, biography = '') {
     return request.$http.put(
       '/v2/account/my-profile/',
       {
@@ -30,6 +33,7 @@ export default {
         email,
         name,
         locale,
+        biography,
       },
     );
   },
