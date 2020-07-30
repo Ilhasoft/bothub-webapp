@@ -267,6 +267,7 @@
       "intent": "Intent",
       "entity": "Entity",
       "sentence": "Sentence",
+      "text_is": " <strong> {text} </strong> is",
       "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent.",
       "delete_text": "Are you sure? The example will be deleted.",
       "delete": "Delete",

@@ -269,6 +269,7 @@
       "intent": "Intenção",
       "entity": "Entidade",
       "sentence": "Frase",
+      "text_is": " <strong> {text} </strong> é",
       "help_text": "Quando seu bot recebe uma mensaem, ele pode usar um reconhecedor para examiná-la e identificar a intenção.",
       "delete_text": "Tem certeza? Este exemplo será deletado.",
       "delete": "Deletar",

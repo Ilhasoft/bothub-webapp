@@ -3,7 +3,7 @@
     <form>
       <div class="bh-grid">
         <div class="bh-grid__item--grow-3 edit-sentence__input">
-          <bh-field
+          <b-field
             :errors="errors.text || errors.language"
             :label="$t('webapp.example.sentence')">
             <example-text-with-highlighted-entities-input
@@ -18,76 +18,72 @@
               @entityEdited="onEditEntity($event)"
               @entityAdded="onEntityAdded()"
             />
-          </bh-field>
+          </b-field>
         </div>
         <div class="bh-grid__item edit-sentence__input">
-          <bh-field
+          <b-field
             :errors="errors.non_field_errors"
             :label="$t('webapp.example.intent')">
-            <bh-autocomplete
+            <b-autocomplete
               v-model="intent"
               :data="repository.intents_list || []"
-              :formatters="intentFormatters"
               :placeholder="$t('webapp.example.intent')"
-              size="normal" />
-          </bh-field>
+              size="normal"
+              @input="intent = intentFormatters(intent)" />
+          </b-field>
         </div>
       </div>
       <div class="edit-sentence__fields">
         <div
-          v-for="(entity, index) in entitiesToEdit"
-          :key="`entity-${index}`"
-          class="bh-grid">
-          <div class="edit-sentence__input">
-            <bh-field
+          class="edit-sentence__input__wrapper">
+          <div
+            v-for="(entity, index) in entitiesToEdit"
+            :key="`entity-${index}`"
+            class="edit-sentence__input">
+            <b-field
               :errors="entitiesError(index)">
-              <label for="">
-                <strong>{{ highlightedText(entity) }}</strong> is
-              </label>
-              <bh-autocomplete
+              <span
+                slot="label"
+                class="edit-sentence__input__label"
+                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
+              <b-autocomplete
                 :data="getAllEntities || []"
-                :formatters="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
+                icon-right="close"
+                icon-right-clickable
                 class="edit-sentence-input"
-                size="normal"
-              >
-                <span slot="append">
-                  <bh-icon-button
-                    value="close"
-                    size="small"
-                    @click.prevent.stop="removeEntity(entity, index)"
-                  />
-                </span>
-              </bh-autocomplete>
-            </bh-field>
+                @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
+                @icon-right-click="removeEntity(entity, index)"
+              />
+            </b-field>
           </div>
         </div>
         <div
-          v-for="(entity, index) in pendingEntities"
-          :key="`pending-entity-${index}`"
-          class="bh-grid">
-          <div class="edit-sentence__input">
-            <label for="">
-              <strong>{{ highlightedText(entity) }}</strong> is
-            </label>
-            <bh-autocomplete
-              :data="getAllEntities || []"
-              :formatters="intentFormatters"
-              v-model="entity.entity"
-              :placeholder="$t('webapp.example.entity')"
-              class="edit-sentence-input"
-              size="normal"
-              @selected="elevateToEntity(entity, index)"
-            >
-              <span slot="append">
-                <bh-icon-button
-                  value="close"
-                  size="small"
-                  @click.prevent.stop="removePendingEntity(entity, index)"
-                />
-              </span>
-            </bh-autocomplete>
+          class="edit-sentence__input__wrapper">
+          <div
+            v-for="(entity, index) in pendingEntities"
+            :key="`pending-entity-${index}`"
+            class="edit-sentence__input">
+            <b-field :errors="entitiesError(index)">
+              <span
+                slot="label"
+                class="edit-sentence__input__label"
+                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
+              <b-autocomplete
+                :data="getAllEntities || []"
+                :custom-formatter="intentFormatters"
+                v-model="entity.entity"
+                :placeholder="$t('webapp.example.entity')"
+                icon-right="close"
+                class="edit-sentence-input"
+                size="normal"
+                icon-right-clickable
+                @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
+                @select="elevateToEntity(entity, index)"
+                @icon-right-click="removePendingEntity(entity, index)"
+              />
+            </b-field>
           </div>
         </div>
       </div>
@@ -218,11 +214,7 @@ export default {
       return `${this.$t('webapp.trainings.add_entity_for')} "${selected}"`;
     },
     intentFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'intentFormatters';
-      return formattersList;
+      return formatters.bothubItemKey();
     },
     textFormatters() {
       const formattersList = [
@@ -256,17 +248,23 @@ export default {
       this.textSelected = value;
     },
     removeEntity(entity, index) {
-      Vue.delete(this.entitiesToEdit, index);
+      this.$nextTick(() => {
+        Vue.delete(this.entitiesToEdit, index);
+      });
     },
     removePendingEntity(entity, index) {
-      Vue.delete(this.pendingEntities, index);
+      this.$nextTick(() => {
+        Vue.delete(this.pendingEntities, index);
+      });
     },
     addPendingEntity() {
       // It will be added at the end of the list, so we already know its index.
       const newEntity = {
         start: this.textSelected.start,
         end: this.textSelected.end,
-        entity: this.text.substring(this.textSelected.start, this.textSelected.end),
+        entity: this.intentFormatters(
+          this.text.substring(this.textSelected.start, this.textSelected.end),
+        ),
       };
 
       this.pendingEntities.push({
@@ -414,13 +412,23 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
 .edit-sentence {
-  &__fields{
+  &__fields {
     display:flex;
     flex-direction:column;
   }
 
   &__input {
      margin: 0 .5rem;
+
+     &__wrapper {
+       display: flex;
+       flex-wrap: wrap;
+       padding: 0.25rem;
+     }
+
+     &__label /deep/ {
+       font-weight: normal;
+     }
   }
 
   &-input {
