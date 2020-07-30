@@ -2,7 +2,7 @@
 
 exports[`RepositoryVersionList.vue renders correctly 1`] = `
 <div class="version-list">
-  <b-modal-stub width="500" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" trapfocus="true" ariarole="dialog" ariamodal="true" destroyonhide="true" class="repository-new-version-modal">
+  <b-modal-stub width="500" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" trapfocus="true" ariarole="dialog" ariamodal="true" class="repository-new-version-modal">
     <repository-handle-version-modal-stub repository="[object Object]"></repository-handle-version-modal-stub>
   </b-modal-stub>
   <section>
