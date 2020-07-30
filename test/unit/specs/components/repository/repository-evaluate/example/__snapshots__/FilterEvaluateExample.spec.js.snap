@@ -11,10 +11,10 @@ exports[`TestView.vue renders correctly 1`] = `
         some specific text:
       </div>
       <b-field-stub addons="true">
-        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
+        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" formatters="inputFormatters" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
       </b-field-stub>
       <b-field-stub addons="true">
-        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
+        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" formatters="inputFormatters" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
       </b-field-stub>
       <!---->
     </div>
