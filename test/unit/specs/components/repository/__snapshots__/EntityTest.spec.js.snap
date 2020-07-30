@@ -3,7 +3,14 @@
 exports[`EntityEdit renders correctly 1`] = `
 <div class="entity-edit__entities-list">
   <div class="entity-edit__title entity-edit__entities-list__header">
-    <p>some specific text</p>
+    <div class="entity-edit__title entity-edit__entities-list__header__container">
+      some specific text
+      <div class="entity-edit__title entity-edit__entities-list__header__question">
+        <b-tooltip-stub active="true" type="is-dark" label="some specific text" position="is-right" multilined="true" size="is-medium">
+          <b-icon-stub type="is-dark" icon="help-circle" customsize="mdi-18px"></b-icon-stub>
+        </b-tooltip-stub>
+      </div>
+    </div>
     <b-loading-stub animation="fade" oncancel="function _default() {}"></b-loading-stub>
     <b-field-stub grouped="true" addons="true" class="entity-edit__button-group">
       <b-button-stub type="is-primary" nativetype="button" tag="button" class="entity-edit__button">
