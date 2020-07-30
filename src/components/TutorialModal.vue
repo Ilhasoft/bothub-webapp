@@ -106,7 +106,6 @@ export default {
       repositoryStatus: {},
       typeNotification: '',
       autoCloseNotification: false,
-      refreshStatus: null,
       confettiConfig: {
         angle: 90,
         spread: 200,
@@ -199,10 +198,9 @@ export default {
       if (Object.keys(this.finished).length === 7) {
         this.updateFinalizationMessage();
         this.finisheButton = true;
-        return '';
+        return;
       }
       this.finisheButton = false;
-      return '';
     },
     closeTutorialMenu() {
       if (Object.keys(this.finished).length === 7) {
@@ -226,17 +224,17 @@ export default {
     },
     checkWhichStatus() {
       try {
-        this.refreshStatus = setInterval(async () => {
+        const refreshStatus = setInterval(async () => {
           if (this.repositoryStatus.count !== 0) {
             await this.getTrainingStatus();
             if (this.repositoryStatus.results[0].status === 2) {
-              clearInterval(this.refreshStatus);
+              clearInterval(refreshStatus);
               await this.setRepositoryTraining(false);
               this.setNotificationAlert('is-success', true, this.$t('webapp.tutorial.training_success'));
               return;
             }
             if (this.repositoryStatus.results[0].status === 3) {
-              clearInterval(this.refreshStatus);
+              clearInterval(refreshStatus);
               await this.setRepositoryTraining(false);
               this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
             }
@@ -244,7 +242,6 @@ export default {
         }, 100000);
       } catch (error) {
         this.error = error;
-        clearInterval(this.refreshStatus);
       }
     },
     setNotificationAlert(type, autoClose, title) {
