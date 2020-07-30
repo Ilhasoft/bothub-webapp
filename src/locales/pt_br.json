@@ -190,6 +190,7 @@
       "no_description": "Não há descrição para essa inteligência",
       "intents_list": "Lista de Intenções",
       "entities_list": "Grupos de entidades",
+      "categories_repository": "Inteligência para fins de <strong> {getAllCategories} </strong>",
       "entities_label": "Esta inteligência possui {n} grupo de entidade | Esta inteligência possui {n} grupos de entidade",
       "non-grouped_entities":"e {n} entidade não agrupada. | e {n} entidades não agrupadas.",
       "only_non-grouped_entities":"Esta inteligência possui {n} entidade não agrupada. | Esta inteligência possui {n} entidades não agrupadas.",
@@ -211,6 +212,26 @@
       "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
       "delete": "Deletar",
       "cancel": "Cancelar"
+    },
+    "summary": {
+      "training_informations": "Informações do Treinamento",
+      "information_sentences": "Sentenças",
+      "information_intents": "Intenções",
+      "information_entities": "Entidades",
+      "general_informations": "Informações Gerais",
+      "information_language": "Idiomas",
+      "information_contributors": "Contribuidores",
+      "information_integrations": "Integrações",
+      "intent_question": "INTENÇÃO é o desejo que o chatbot perceberá que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\", a intenção do usuário é agradecer. Portanto, a intenção da frase pode ser \"obrigado\".",
+      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pelo chatbot. Por exemplo: se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade poderá ser \"relatório\" ou \"novo relatório\""
+    },
+    "intent":{
+      "title": "Intenção",
+      "description": "Essa intenção contém {n} sentença | Essa intenção contém {n} sentenças.",
+      "edit_button": "Editar intenção",
+      "save_button": "Salvar",
+      "no_sentences": "Nenhuma senteça.",
+      "error_entity": "Aconteceu um erro."
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
