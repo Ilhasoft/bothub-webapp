@@ -1,9 +1,9 @@
 <template>
-  <div class="summary-informations">
-    <div class="summary-informations__info">
-      <div class="summary-informations__info__container">
-        <h2>{{ $t('webapp.summary.training_informations') }}</h2>
-        <div class="summary-informations__info__container__training">
+  <div class="summary-information">
+    <div class="summary-information__info">
+      <div class="summary-information__info__container">
+        <h2>{{ $t('webapp.summary.training_information') }}</h2>
+        <div class="summary-information__info__container__training">
           <div @click="navigateToSentences">
             <h1>{{ getCurrentRepository.examples__count }}</h1>
             <p>
@@ -27,34 +27,34 @@
           </div>
         </div>
       </div>
-      <div class="summary-informations__info__container">
-        <h2>{{ $t('webapp.summary.general_informations') }}</h2>
-        <div class="summary-informations__info__container__general">
-          <div class="summary-informations__info__container__general__data">
+      <div class="summary-information__info__container">
+        <h2>{{ $t('webapp.summary.general_information') }}</h2>
+        <div class="summary-information__info__container__general">
+          <div class="summary-information__info__container__general__data">
             <h1>{{ getCurrentRepository.available_languages.length }}</h1>
             <p>{{ $tc('webapp.summary.information_language',
                       getCurrentRepository.available_languages.length) }} </p>
           </div>
-          <div class="summary-informations__info__container__general__data">
+          <div class="summary-information__info__container__general__data">
             <h1>0</h1>
             <p>{{ $tc('webapp.summary.information_contributors', 0) }}</p>
           </div>
-          <div class="summary-informations__info__container__general__data">
+          <div class="summary-information__info__container__general__data">
             <h1>0</h1>
             <p>{{ $tc('webapp.summary.information_integrations', 0) }}</p>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="summary-informations__intelligence-force">
+    <!-- <div class="summary-information__intelligence-force">
       <h2>Intelligence force: Regular</h2>
-      <div class="summary-informations__intelligence-force__relevance__progress">
-        <div class="summary-informations__intelligence-force__relevance__progress__division">
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
+      <div class="summary-information__intelligence-force__relevance__progress">
+        <div class="summary-information__intelligence-force__relevance__progress__division">
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
         </div>
       </div>
     </div> -->
@@ -114,7 +114,7 @@ export default {
 .teste{
   display:flex;
 }
-.summary-informations{
+.summary-information{
 
     &__info{
         display: flex;
