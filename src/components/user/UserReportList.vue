@@ -48,7 +48,6 @@ export default {
     return {
       list: null,
       perPage: 10,
-      query: {},
       item: UserReportItem,
       options: [
         { label: this.$t('webapp.my_profile.reports.today'), value: 0 },
@@ -95,13 +94,11 @@ export default {
         this.list = await this.getOrgReports({
           orgNickname: this.orgNickname,
           limit: this.perPage,
-          query: this.query,
           ...this.timeFrame,
         });
       } else {
         this.list = await this.getUserReports({
           limit: this.perPage,
-          query: this.query,
           ...this.timeFrame,
         });
       }
