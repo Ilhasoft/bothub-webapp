@@ -29,7 +29,6 @@
               v-model="intent"
               :data="repository.intents_list || []"
               :placeholder="$t('webapp.example.intent')"
-              size="normal"
               @input="intent = intentFormatters(intent)" />
           </b-field>
         </div>
@@ -77,7 +76,6 @@
                 :placeholder="$t('webapp.example.entity')"
                 icon-right="close"
                 class="edit-sentence-input"
-                size="normal"
                 icon-right-clickable
                 @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
                 @select="elevateToEntity(entity, index)"
