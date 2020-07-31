@@ -1,8 +1,8 @@
 <template>
   <div class="edit-sentence">
     <form>
-      <div class="bh-grid">
-        <div class="bh-grid__item--grow-3 edit-sentence__input">
+      <div class="columns edit-sentence__wrapper">
+        <div class="column is-7">
           <b-field
             :errors="errors.text || errors.language"
             :label="$t('webapp.example.sentence')">
@@ -20,9 +20,10 @@
             />
           </b-field>
         </div>
-        <div class="bh-grid__item edit-sentence__input">
+        <div class="column is-5">
           <b-field
-            :errors="errors.non_field_errors"
+            :message="errors.non_field_errors"
+            :type="{ 'is-danger': errors.non_field_errors && errors.non_field_errors.length > 0 }"
             :label="$t('webapp.example.intent')">
             <b-autocomplete
               v-model="intent"
@@ -33,7 +34,7 @@
           </b-field>
         </div>
       </div>
-      <div class="edit-sentence__fields">
+      <div class="columns edit-sentence__wrapper">
         <div
           class="edit-sentence__input__wrapper">
           <div
@@ -383,10 +384,6 @@ export default {
           });
         }
 
-        if (!this.repository.intents_list.includes(this.intent)) {
-          throw new Error('Intent MUST match existing intents for training.');
-        }
-
         this.$emit('saveList');
         return true;
       } catch (error) {
@@ -412,6 +409,12 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
 .edit-sentence {
+
+  &__wrapper {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+
   &__fields {
     display:flex;
     flex-direction:column;
