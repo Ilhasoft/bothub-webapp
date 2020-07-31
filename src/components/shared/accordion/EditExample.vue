@@ -29,6 +29,8 @@
               v-model="intent"
               :data="repository.intents_list || []"
               :placeholder="$t('webapp.example.intent')"
+              dropdown-position="bottom"
+              open-on-focus
               @input="intent = intentFormatters(intent)" />
           </b-field>
         </div>
@@ -49,8 +51,10 @@
                 :data="getAllEntities || []"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
                 icon-right="close"
                 icon-right-clickable
+                open-on-focus
                 class="edit-sentence-input"
                 @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
                 @icon-right-click="removeEntity(entity, index)"
@@ -74,9 +78,11 @@
                 :custom-formatter="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
                 icon-right="close"
                 class="edit-sentence-input"
                 icon-right-clickable
+                open-on-focus
                 @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
                 @select="elevateToEntity(entity, index)"
                 @icon-right-click="removePendingEntity(entity, index)"
