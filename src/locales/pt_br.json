@@ -355,6 +355,8 @@
       "edit": "Editar",
       "information": "Informações",
       "org_info": "Informações da organização",
+      "no_repo": "Esta organização ainda não possui inteligências.",
+      "add_repo": "Criar inteligência",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes"
@@ -394,6 +396,8 @@
       "personal_info": "Informações Pessoais",
       "free_user": "USUÁRIO GRÁTIS",
       "profile": "Perfil",
+      "no_repo": "Você ainda não possui nenhuma inteligência.",
+      "add_repo": "Criar inteligência",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes",
