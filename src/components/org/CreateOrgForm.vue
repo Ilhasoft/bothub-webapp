@@ -93,7 +93,7 @@ export default {
 <style lang="scss" scoped>
     .submit-button {
 
-      padding: 0 2rem;
+      padding: 0 3rem;
 
         &__wrapper {
             margin-top: 3.5rem;

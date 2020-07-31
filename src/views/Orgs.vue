@@ -17,7 +17,7 @@
       <org-list />
       <b-modal
         :active.sync="createOrgOpen"
-        width="460px">
+        width="568px">
         <div class="form__wrapper">
           <h1 class="form__title"> {{ $t('webapp.orgs.create_org_title') }} </h1>
           <p> {{ $t('webapp.orgs.create_org_subtitle') }} </p>
@@ -70,9 +70,10 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
     .form {
-      margin-top: 1rem;
+      margin-top: 2.188rem;
 
       &__title {
+        margin-bottom: 0;
         color: $color-primary;
         font-size: 1.813rem;
       }
@@ -80,7 +81,7 @@ export default {
       &__wrapper {
       background-color: white;
       border-radius: 10px;
-      padding: 4rem 2rem 2rem 2rem;
+      padding: 4rem 3.75rem 3.625rem 4rem;
       }
     }
 
