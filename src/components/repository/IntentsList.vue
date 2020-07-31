@@ -5,7 +5,7 @@
         <h1> <strong>{{ $t('webapp.intent.title') }}</strong> </h1>
         <p> <strong>"</strong> {{ intent }} <strong>"</strong> </p>
       </div>
-      <div>
+      <!-- <div>
         <b-button
           v-if="!editSentences"
           ref="editEntityEvent"
@@ -16,7 +16,7 @@
           ref="saveEntityEvent"
           class="intent-list__content__buttonSave"
           @click.native="saveEdition()">{{ $t('webapp.intent.save_button') }}</b-button>
-      </div>
+      </div> -->
     </div>
     <div class="intent-list__header__options">
       <p> {{ $tc('webapp.intent.description', totalSentences) }}</p>
@@ -43,7 +43,6 @@ export default {
     return {
       editSentences: false,
       intent: this.$route.params.intent,
-      allEntities: [],
       errors: {},
     };
   },
@@ -60,23 +59,16 @@ export default {
     },
   },
   mounted() {
-    this.getEntitiesName();
+    // this.getEntitiesName();
   },
   methods: {
-    async getEntitiesName() {
-      const allEntitiesName = await this.repository.entities.map(
-        entityValue => entityValue.value,
-      );
-      this.allEntities = allEntitiesName;
-    },
-    editOptionsEntity() {
-      this.editSentences = !this.editSentences;
-      this.$emit('ableEditEntities', this.editSentences);
-      this.$emit('setAllEntities', this.allEntities);
-    },
-    saveEdition() {
-      this.editOptionsEntity();
-    },
+    // editOptionsEntity() {
+    //   this.editSentences = !this.editSentences;
+    //   this.$emit('setAllEntities', this.allEntities);
+    // },
+    // saveEdition() {
+    //   this.editOptionsEntity();
+    // },
   },
 };
 </script>

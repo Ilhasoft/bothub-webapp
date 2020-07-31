@@ -104,10 +104,6 @@ export default {
       type: String,
       default: '',
     },
-    allEntities: {
-      type: Array,
-      default: () => [],
-    },
     entities: {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
@@ -135,6 +131,7 @@ export default {
       deleteDialog: null,
       remove: true,
       highlighted: null,
+      allEntities: [],
     };
   },
 
@@ -152,6 +149,9 @@ export default {
         }));
     },
   },
+  mounted() {
+    this.getEntitiesName();
+  },
   methods: {
     ...mapActions([
       'deleteEvaluateExample',
@@ -166,6 +166,12 @@ export default {
         allEntitiesName,
       );
       return `entity-${color}`;
+    },
+    async getEntitiesName() {
+      const allEntitiesName = await this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      this.allEntities = allEntitiesName;
     },
     deleteThisExample() {
       this.deleteDialog = this.$buefy.dialog.confirm({

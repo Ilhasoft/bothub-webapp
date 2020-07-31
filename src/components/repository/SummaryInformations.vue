@@ -19,7 +19,9 @@
         </div>
       </div>
       <div class="summary-informations__info__container">
-        <h2>{{ $t('webapp.summary.general_informations') }}</h2>
+        <h2 class="summary-informations__info__container__title">
+          {{ $t('webapp.summary.general_informations') }}
+        </h2>
         <div class="summary-informations__info__container__general">
           <div class="summary-informations__info__container__general__data">
             <h1>{{ getCurrentRepository.available_languages.length }}</h1>
@@ -119,6 +121,10 @@ export default {
                 color: $color-fake-black;
                 font-weight: $font-weight-bolder;
                 font-family: $font-family;
+                margin-bottom: 1.2rem;
+                font-size: 1.75rem;
+            }
+            &__title{
                 margin-left: 0.2rem;
             }
 
@@ -141,6 +147,7 @@ export default {
 
                   &:hover{
                     cursor:pointer;
+                    color: $color-primary;
                   }
                 }
                   @media screen and (max-width: 60em) {
