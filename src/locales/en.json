@@ -20,7 +20,9 @@
       "error_to_retrieve_bot": "Error retrieving intelligence",
       "yes": "Yes",
       "no": "No",
-      "items_total": "{n} item total | {n} items total"
+      "items_total": "{n} item total | {n} items total",
+      "type_here": "Type here...",
+      "support": "Bothub Support"
     },
     "login_form": {
       "login": "Log in to your account",

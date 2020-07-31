@@ -21,7 +21,7 @@ export default {
   components,
   mounted() {
     hotjar.addHotjar();
-    webchat.addWebchat();
+    webchat.addWebchat({ title: this.$t('webapp.layout.support'), typeMessage: this.$t('webapp.layout.type_here') });
     this.safariDetected();
   },
   methods: {

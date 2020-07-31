@@ -1,5 +1,5 @@
 export default {
-  addWebchat: () => {
+  addWebchat: ({ title, typeMessage }) => {
     const script = document.createElement('script');
     script.src = 'https://storage.googleapis.com/push-webchat/widget-latest.js';
     script.async = true;
@@ -11,9 +11,9 @@ export default {
         channelUuid: '951c09db-0545-474b-a181-3a16c9e8d6ed',
         host: 'https://new.push.al',
         socketUrl: 'https://socket.push.al',
-        title: 'Bothub Support',
+        title: title || 'Bothub Support',
         showFullScreenButton: true,
-        inputTextFieldHint: 'Type here...',
+        inputTextFieldHint: typeMessage || 'Type here...',
         openLauncherImage: 'https://ilhasoft.com.br/newcodes/bothub/avatar-bothub.png',
         profileAvatar: 'https://ilhasoft.com.br/newcodes/bothub/avatar-bothub.png',
         tooltipPayload: 'bothub',

@@ -20,7 +20,9 @@
       "error_to_retrieve_bot": "Erro ao trazer sua inteligência",
       "yes": "Sim",
       "no": "Não",
-      "items_total": "{n} item no total | {n} itens no total"
+      "items_total": "{n} item no total | {n} itens no total",
+      "type_here": "Digite aqui...",
+      "support": "Ajuda do Bothub"
     },
     "login_form": {
       "login": "Entre na sua conta",
