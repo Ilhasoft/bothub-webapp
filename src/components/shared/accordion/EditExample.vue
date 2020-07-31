@@ -432,8 +432,7 @@ export default {
   &__btn-wrapper{
     display: flex;
     justify-content: space-between;
-    margin: .7rem;
-    margin-top: 1rem;
+    margin: 1rem 1.7rem 0.7rem 1.7rem;
 
     &__cancelButton{
       height: 2.25rem;
