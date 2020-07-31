@@ -90,14 +90,14 @@
       </div>
       <div
         class="edit-sentence__btn-wrapper">
-        <bh-button
+        <b-button
           :disabled="textSelected === null"
           rounded
-          primary
+          type="is-primary"
           @click.prevent.stop="addPendingEntity"
         >
           {{ entityButtonText }}
-        </bh-button>
+        </b-button>
         <div>
           <b-button
             class="edit-sentence__btn-wrapper__cancelButton"
