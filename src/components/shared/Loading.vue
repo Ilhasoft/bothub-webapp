@@ -1,8 +1,14 @@
 <template>
-  <div class="spinner">
-    <div class="bounce"/>
-    <div class="bounce"/>
-    <div class="bounce"/>
+  <div class="loading">
+    <div class="spin">
+      <div class="spinner-loading">
+        <img
+          src="@/assets/imgs/mascot.png"
+          class="bothub-logo"
+          alt="bothub-loading">
+        <div class="triple-spinner"/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,35 +21,82 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
 
-.spinner {
-  margin: 1.5rem auto;
-  width: 70px;
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+.spin{
+  margin: auto;
+  width: 7.1rem;
   text-align: center;
-
-  .bounce {
-    width: 16px;
-    height: 16px;
-    background-color: $grey-light;
-
-    border-radius: 100%;
-    display: inline-block;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-
-    &:nth-child(1) {
-      animation-delay: -0.32s;
-    }
-
-    &:nth-child(2) {
-      animation-delay: -0.16s;
-    }
-  }
+}
+.bothub-logo{
+  width: 2.25rem;
+  position: absolute;
 }
 
-@keyframes sk-bouncedelay {
-  0%, 80%, 100% {
-    opacity: 0
-  } 40% {
-    opacity: 1
-  }
+.triple-spinner {
+  display: block;
+  position: relative;
+  width: 5.625rem;
+  height: 5.625rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
 }
+.spinner-loading{
+  display:flex;
+  width: 6.25rem;
+  justify-content:center;
+  align-items:center;
+}
+.triple-spinner::before,
+.triple-spinner::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+.triple-spinner::before {
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-top-color: #2bbfac;
+  -webkit-animation: spin2 0.6s linear infinite;
+  animation: spin2 0.6s linear infinite;
+}
+.triple-spinner::after {
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border-top-color: #2bbfac;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+@keyframes spin2 {
+    from {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+    to {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+  }
 </style>
