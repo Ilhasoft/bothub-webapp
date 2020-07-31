@@ -10,6 +10,7 @@
 
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+import webchat from '@/utils/plugins/webchat';
 
 const components = {
   NewsModal,
@@ -20,6 +21,7 @@ export default {
   components,
   mounted() {
     hotjar.addHotjar();
+    webchat.addWebchat({ title: this.$t('webapp.layout.support'), typeMessage: this.$t('webapp.layout.type_here') });
     this.safariDetected();
   },
   methods: {
@@ -42,7 +44,6 @@ export default {
 @import '~bh/src/assets/scss/bh.scss';
 @import '@mdi/font/css/materialdesignicons.css';
 @import 'highlight.js/styles/github.css';
-
 
 .container-padding {
   padding: 0 8px;
