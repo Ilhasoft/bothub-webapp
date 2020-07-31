@@ -1,11 +1,13 @@
 <template>
-  <div class="spin">
-    <div class="spinner-loading">
-      <img
-        src="@/assets/imgs/mascot.png"
-        class="bothub-logo"
-        alt="bothub-loading">
-      <div class="triple-spinner"/>
+  <div class="loading">
+    <div class="spin">
+      <div class="spinner-loading">
+        <img
+          src="@/assets/imgs/mascot.png"
+          class="bothub-logo"
+          alt="bothub-loading">
+        <div class="triple-spinner"/>
+      </div>
     </div>
   </div>
 </template>
@@ -18,6 +20,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
 
 .spin{
   margin: auto;

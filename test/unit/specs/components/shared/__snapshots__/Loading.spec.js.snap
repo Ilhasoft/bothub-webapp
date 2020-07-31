@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Loading.vue renders correctly 1`] = `
-<div class="spin">
-  <div class="spinner-loading"><img src="@/assets/imgs/mascot.png" alt="bothub-loading" class="bothub-logo">
-    <div class="triple-spinner"></div>
+<div class="loading">
+  <div class="spin">
+    <div class="spinner-loading"><img src="@/assets/imgs/mascot.png" alt="bothub-loading" class="bothub-logo">
+      <div class="triple-spinner"></div>
+    </div>
   </div>
 </div>
 `;
