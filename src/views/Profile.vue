@@ -33,36 +33,50 @@
         </div>
       </div>
       <div v-show="selected==1">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
-        <paginated-list
-          v-if="repositoryLists.mine"
-          :item-component="repositoryItemElem"
-          :per-page="repositoriesLimit"
-          :list="repositoryLists.mine"
-          :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
+        <div
+          v-show="noRepositories"
+          class="profile__add-repo profile__edit__content">
+          <p> {{ $t('webapp.my_profile.no_repo') }} </p>
+          <router-link to="/new">
+            <b-button type="is-primary"> {{ $t('webapp.my_profile.add_repo') }} </b-button>
+          </router-link>
+        </div>
+        <div v-show="!repositoryLists.mine.empty">
+          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
+          <paginated-list
+            v-if="repositoryLists.mine"
+            :item-component="repositoryItemElem"
+            :per-page="repositoriesLimit"
+            :list="repositoryLists.mine"
+            :empty-message="$t('webapp.home.no_repo')"
+            class="profile__repositories__cards" />
 
-        <div class="profile__repositories__separator" />
+          <div class="profile__repositories__separator" />
+        </div>
 
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
-        <paginated-list
-          v-if="repositoryLists.contributing"
-          :item-component="repositoryItemElem"
-          :per-page="repositoriesLimit"
-          :list="repositoryLists.contributing"
-          :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
+        <div v-show="!repositoryLists.contributing.empty">
+          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
+          <paginated-list
+            v-if="repositoryLists.contributing"
+            :item-component="repositoryItemElem"
+            :per-page="repositoriesLimit"
+            :list="repositoryLists.contributing"
+            :empty-message="$t('webapp.home.no_repo')"
+            class="profile__repositories__cards" />
 
-        <div class="profile__repositories__separator" />
+          <div class="profile__repositories__separator" />
+        </div>
 
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
-        <paginated-list
-          v-if="repositoryLists.using"
-          :item-component="repositoryItemElem"
-          :per-page="repositoriesLimit"
-          :list="repositoryLists.using"
-          :empty-message="$t('webapp.home.no_repo')"
-          class="profile__repositories__cards" />
+        <div v-show="!repositoryLists.using.empty">
+          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
+          <paginated-list
+            v-if="repositoryLists.using"
+            :item-component="repositoryItemElem"
+            :per-page="repositoriesLimit"
+            :list="repositoryLists.using"
+            :empty-message="$t('webapp.home.no_repo')"
+            class="profile__repositories__cards" />
+        </div>
       </div>
       <div
         v-show="selected==2">
@@ -136,9 +150,9 @@ export default {
       selected: 0,
       repositoryItemElem: RepositoryCard,
       repositoryLists: {
-        mine: null,
-        contributing: null,
-        using: null,
+        mine: { empty: false },
+        contributing: { empty: false },
+        using: { empty: false },
       },
       repositoriesLimit: 3,
       tabs: [
@@ -155,6 +169,9 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    noRepositories() {
+      return Object.values(this.repositoryLists).every(value => value.empty);
+    },
   },
   watch: {
     authenticated() {
@@ -256,6 +273,14 @@ h1 {
           &__container {
             background-color: $color-white;
             width: 100%;
+          }
+        }
+
+        &__add-repo {
+          display: flex;
+          justify-content: center;
+          > * {
+            margin-right: 1rem;
           }
         }
 
