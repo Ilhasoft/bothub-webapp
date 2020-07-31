@@ -8,6 +8,5 @@ exports[`Translate.vue renders correctly 1`] = `
   </div>
   <!---->
   <!---->
-  <tutorial-modal-stub></tutorial-modal-stub>
 </repository-view-base-stub>
 `;

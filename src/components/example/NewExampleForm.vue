@@ -11,6 +11,7 @@
           <example-text-with-highlighted-entities-input
             id="tour-training-step-1"
             ref="textInput"
+            :is-previous-disabled="true"
             :is-step-blocked="textSelected === null"
             v-model="text"
             :entities="entities"
@@ -32,6 +33,7 @@
       <div class="column">
         <b-field
           id="tour-training-step-4"
+          :is-previous-disabled="true"
           :message="errors.intent">
           <b-autocomplete
             v-model="intent"
@@ -51,7 +53,9 @@
             type="is-dark">
             <b-button
               id="tour-training-step-5"
-              :disabled="!shouldSubmit "
+              :is-previous-disabled="true"
+              :is-next-disabled="true"
+              :disabled="!shouldSubmit"
               :loading="submitting"
               :is-step-blocked="!blockedNextStepTutorial"
               type="is-primary"

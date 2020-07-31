@@ -7,6 +7,7 @@
       @click="toggle()">
       <div
         id="tour-quick_test-step-0"
+        :is-next-disabled="true"
         :is-step-blocked="!blockedNextStepTutorial"
         class="quick-test__collapse-button__content">
         <b-icon
@@ -43,6 +44,7 @@
         <div
           v-if="authenticated"
           id="tour-quick_test-step-2"
+          :is-previous-disabled="true"
           class="quick-test__text-area">
           <quick-test-text
             v-for="sentence in sentences"
@@ -56,6 +58,8 @@
         <div
           v-if="authenticated"
           id="tour-quick_test-step-1"
+          :is-previous-disabled="true"
+          :is-next-disabled="true"
           :is-step-blocked="sentences.length === 0"
           class="quick-test__input">
           <text-area-input
@@ -85,7 +89,6 @@
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="quick_test" />
-    <tutorial-modal :open="activeMenu"/>
   </div>
 </template>
 
@@ -96,7 +99,6 @@ import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
 import Tour from '@/components/Tour';
-import TutorialModal from '@/components/TutorialModal';
 
 export default {
   name: 'QuickTest',
@@ -106,7 +108,6 @@ export default {
     LanguageAppendSelectInput,
     QuickTestText,
     Tour,
-    TutorialModal,
   },
   props: {
     repository: {
@@ -130,7 +131,6 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       authenticated: 'authenticated',
       activeTutorial: 'activeTutorial',
-      activeMenu: 'activeMenu',
     }),
     languages() {
       if (!this.repository) return [];
@@ -189,6 +189,10 @@ export default {
         repositoryUUID: this.repositoryUUID,
       });
       this.sentenceInput = '';
+
+      if (this.activeTutorial === 'quick_test') {
+        this.dispatchClick();
+      }
     },
     toggle() {
       this.$emit('expanded');
