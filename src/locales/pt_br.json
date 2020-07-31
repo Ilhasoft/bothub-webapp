@@ -214,14 +214,14 @@
       "cancel": "Cancelar"
     },
     "summary": {
-      "training_informations": "Informações do Treinamento",
-      "information_sentences": "Sentenças",
-      "information_intents": "Intenções",
-      "information_entities": "Entidades",
-      "general_informations": "Informações Gerais",
-      "information_language": "Idiomas",
-      "information_contributors": "Contribuidores",
-      "information_integrations": "Integrações",
+      "training_information": "Informações do Treinamento",
+      "information_sentences": "Frases | Frase | Frases",
+      "information_intents": "Intenções | Intenção | Intenções",
+      "information_entities": "Entidades | Entidade | Entidades",
+      "general_information": "Informações Gerais",
+      "information_language": "Idiomas | Idioma | Idiomas",
+      "information_contributors": "Contribuidores | Contribuidor | Contribuidores",
+      "information_integrations": "Integrações | Integração | Integrações",
       "intent_question": "INTENÇÃO é o desejo que o chatbot perceberá que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\", a intenção do usuário é agradecer. Portanto, a intenção da frase pode ser \"obrigado\".",
       "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pelo chatbot. Por exemplo: se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade poderá ser \"relatório\" ou \"novo relatório\""
     },
@@ -355,6 +355,8 @@
       "edit": "Editar",
       "information": "Informações",
       "org_info": "Informações da organização",
+      "no_repo": "Esta organização ainda não possui inteligências.",
+      "add_repo": "Criar inteligência",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes"
@@ -394,6 +396,8 @@
       "personal_info": "Informações Pessoais",
       "free_user": "USUÁRIO GRÁTIS",
       "profile": "Perfil",
+      "no_repo": "Você ainda não possui nenhuma inteligência.",
+      "add_repo": "Criar inteligência",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes",
