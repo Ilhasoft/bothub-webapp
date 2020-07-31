@@ -56,6 +56,10 @@ export default {
   padding: 0 8px;
 }
 
+.button[disabled] {
+  background-color: $color-grey-dark !important;
+}
+
 // based on https://flatuicolors.com/palette/nl
 $entities-colors: (
   ('selected', $grey-lighter, black),
