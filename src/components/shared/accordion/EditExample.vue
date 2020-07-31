@@ -406,11 +406,6 @@ export default {
     margin: 0 1rem;
   }
 
-  &__fields {
-    display:flex;
-    flex-direction:column;
-  }
-
   &__input {
      margin: 0 .5rem;
 
