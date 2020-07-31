@@ -34,15 +34,14 @@
           </b-field>
         </div>
       </div>
-      <div class="columns edit-sentence__wrapper">
+      <div class="edit-sentence__wrapper">
         <div
           class="edit-sentence__input__wrapper">
           <div
             v-for="(entity, index) in entitiesToEdit"
             :key="`entity-${index}`"
             class="edit-sentence__input">
-            <b-field
-              :errors="entitiesError(index)">
+            <b-field>
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -66,7 +65,7 @@
             v-for="(entity, index) in pendingEntities"
             :key="`pending-entity-${index}`"
             class="edit-sentence__input">
-            <b-field :errors="entitiesError(index)">
+            <b-field>
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -87,6 +86,9 @@
             </b-field>
           </div>
         </div>
+        <b-field
+          :message="errors.entities"
+          type="is-danger" />
       </div>
       <div
         class="edit-sentence__btn-wrapper">
@@ -195,15 +197,6 @@ export default {
     },
     isValid() {
       return this.validationErrors.length === 0;
-    },
-    entitiesError() {
-      return (index) => {
-        if (index === this.entitiesToEdit.length - 1) {
-          return this.errors.entities;
-        }
-
-        return [];
-      };
     },
     entityButtonText() {
       if (this.textSelected === null) {
