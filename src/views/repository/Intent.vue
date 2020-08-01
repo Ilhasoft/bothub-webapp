@@ -15,7 +15,6 @@
           :list="examplesList"
           :repository="repository"
           :per-page="perPage"
-          :editable="entitiesEditable"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
         <p
@@ -93,7 +92,6 @@ export default {
       intentSearch: {
         intent: this.$route.params.intent,
       },
-      entitiesEditable: true,
       query: {},
       sentencesIntenties: SentencesIntentList,
       requestAuthorizationModalOpen: false,
@@ -155,9 +153,6 @@ export default {
         type: 'success',
       });
       this.updateRepository(false);
-    },
-    editEntity(editValue) {
-      this.entitiesEditable = editValue;
     },
   },
 };

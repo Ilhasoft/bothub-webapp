@@ -32,7 +32,11 @@
           {{ $t('webapp.summary.general_informations') }}
         </h2>
         <div class="summary-information__info__container__general">
-          <div class="summary-information__info__container__general__data">
+          <h1>{{ getCurrentRepository.available_languages.length }}</h1>
+          <p>{{ $tc('webapp.summary.information_language',
+                    getCurrentRepository.available_languages.length) }}
+          </p>
+          <!-- <div class="summary-information__info__container__general__data">
             <h1>{{ getCurrentRepository.available_languages.length }}</h1>
             <p>{{ $tc('webapp.summary.information_language',
                       getCurrentRepository.available_languages.length) }} </p>
@@ -44,7 +48,7 @@
           <div class="summary-information__info__container__general__data">
             <h1>0</h1>
             <p>{{ $tc('webapp.summary.information_integrations', 0) }}</p>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -170,9 +174,12 @@ export default {
             }
             &__general{
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             text-align: center;
+            height: 156px;
+            border: 1px solid #CFD5D9;
 
                 h2{
                     color: $color-fake-black;
