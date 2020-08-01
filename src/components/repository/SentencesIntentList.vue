@@ -68,7 +68,7 @@
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
-        :get-all-entities="allEntities"
+        :get-all-entities="getEntitiesName"
         @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
@@ -131,7 +131,6 @@ export default {
       deleteDialog: null,
       remove: true,
       highlighted: null,
-      allEntities: [],
     };
   },
 
@@ -148,9 +147,12 @@ export default {
           ...entity,
         }));
     },
-  },
-  mounted() {
-    this.getEntitiesName();
+    getEntitiesName() {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      return allEntitiesName;
+    },
   },
   methods: {
     ...mapActions([
@@ -166,12 +168,6 @@ export default {
         allEntitiesName,
       );
       return `entity-${color}`;
-    },
-    async getEntitiesName() {
-      const allEntitiesName = await this.repository.entities.map(
-        entityValue => entityValue.value,
-      );
-      this.allEntities = allEntitiesName;
     },
     deleteThisExample() {
       this.deleteDialog = this.$buefy.dialog.confirm({

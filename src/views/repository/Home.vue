@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <summary-informations/>
+      <summary-information/>
 
       <div
         v-if="hasIntents"
@@ -91,7 +91,7 @@ import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 import EntityEdit from '@/components/repository/EntityEdit';
-import SummaryInformations from '@/components/repository/SummaryInformations';
+import SummaryInformation from '@/components/repository/SummaryInformation';
 
 export default {
   name: 'RepositoryHome',
@@ -100,7 +100,7 @@ export default {
     BadgesIntents,
     VueMarkdown,
     EntityEdit,
-    SummaryInformations,
+    SummaryInformation,
   },
   extends: RepositoryBase,
   data() {

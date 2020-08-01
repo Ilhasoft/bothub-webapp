@@ -1,52 +1,62 @@
 <template>
-  <div class="summary-informations">
-    <div class="summary-informations__info">
-      <div class="summary-informations__info__container">
+  <div class="summary-information">
+    <div class="summary-information__info">
+      <div class="summary-information__info__container">
         <h2>{{ $t('webapp.summary.training_informations') }}</h2>
-        <div class="summary-informations__info__container__training">
+        <div class="summary-information__info__container__training">
           <div @click="navigateToSentences">
             <h1>{{ getCurrentRepository.examples__count }}</h1>
-            <p>{{ $t('webapp.summary.information_sentences') }}</p>
+            <p>
+              {{ $tc('webapp.summary.information_sentences',
+                     getCurrentRepository.examples__count) }}
+            </p>
           </div>
           <div @click="scrollToIntent">
             <h1>{{ getCurrentRepository.intents_list.length }}</h1>
-            <p>{{ $t('webapp.summary.information_intents') }}</p>
+            <p>
+              {{ $tc('webapp.summary.information_intents',
+                     getCurrentRepository.intents_list.length) }}
+            </p>
           </div>
           <div @click="scrollToEntity">
             <h1>{{ getCurrentRepository.entities.length }}</h1>
-            <p>{{ $t('webapp.summary.information_entities') }}</p>
+            <p>
+              {{ $tc('webapp.summary.information_entities',
+                     getCurrentRepository.entities.length) }}
+            </p>
           </div>
         </div>
       </div>
-      <div class="summary-informations__info__container">
-        <h2 class="summary-informations__info__container__title">
+      <div class="summary-information__info__container">
+        <h2 class="summary-information__info__container__title">
           {{ $t('webapp.summary.general_informations') }}
         </h2>
-        <div class="summary-informations__info__container__general">
-          <div class="summary-informations__info__container__general__data">
+        <div class="summary-information__info__container__general">
+          <div class="summary-information__info__container__general__data">
             <h1>{{ getCurrentRepository.available_languages.length }}</h1>
-            <p>{{ $t('webapp.summary.information_language') }}</p>
+            <p>{{ $tc('webapp.summary.information_language',
+                      getCurrentRepository.available_languages.length) }} </p>
           </div>
-          <div class="summary-informations__info__container__general__data">
+          <div class="summary-information__info__container__general__data">
             <h1>0</h1>
-            <p>{{ $t('webapp.summary.information_contributors') }}</p>
+            <p>{{ $tc('webapp.summary.information_contributors', 0) }}</p>
           </div>
-          <div class="summary-informations__info__container__general__data">
+          <div class="summary-information__info__container__general__data">
             <h1>0</h1>
-            <p>{{ $t('webapp.summary.information_integrations') }}</p>
+            <p>{{ $tc('webapp.summary.information_integrations', 0) }}</p>
           </div>
         </div>
       </div>
     </div>
-    <!-- <div class="summary-informations__intelligence-force">
+    <!-- <div class="summary-information__intelligence-force">
       <h2>Intelligence force: Regular</h2>
-      <div class="summary-informations__intelligence-force__relevance__progress">
-        <div class="summary-informations__intelligence-force__relevance__progress__division">
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-informations__intelligence-force__relevance__progress__division__bar"/>
+      <div class="summary-information__intelligence-force__relevance__progress">
+        <div class="summary-information__intelligence-force__relevance__progress__division">
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
+        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
         </div>
       </div>
     </div> -->
@@ -57,7 +67,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'SummaryInformations',
+  name: 'SummaryInformation',
   data() {
     return {
       collapse: true,
@@ -106,7 +116,7 @@ export default {
 .teste{
   display:flex;
 }
-.summary-informations{
+.summary-information{
 
     &__info{
         display: flex;
