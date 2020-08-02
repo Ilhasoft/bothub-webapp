@@ -5,7 +5,6 @@
       :key="item.key"
       :is="itemComponent"
       v-bind="addAttrs(item)"
-      :editing="editable"
       @deleted="onItemDeleted(item.id)"
       @updateList="onSaveUpdate"
       @dispatchEvent="onDispatchEvent($event)" />
@@ -66,10 +65,6 @@ export default {
       type: Number,
       default: 20,
     },
-    editable: {
-      type: Boolean,
-      default: false,
-    },
     addAttributes: {
       type: Object,
       default: () => {},
@@ -84,6 +79,7 @@ export default {
       listStatusErrorCode: null,
       error: null,
       page: 1,
+      data: false,
     };
   },
   computed: {
@@ -128,7 +124,7 @@ export default {
     },
     addAttrs(obj) {
       return {
-        editable: this.editable, ...this.addAttributes, ...obj, ...this.$attrs,
+        data: this.data, ...this.addAttributes, ...obj, ...this.$attrs,
       };
     },
     onItemDeleted(id) {
