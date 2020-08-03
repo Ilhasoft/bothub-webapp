@@ -245,8 +245,8 @@
       "request": "Fazer pedido",
       "invite": "Enviar convite",
       "no_users": "Sem usuários no time.",
-      "search_user": "Procurar usuário",
-      "search_user_org": "Procurar usuário/organização",
+      "search_user": "Digite um nome ou username",
+      "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
       "remove_user_confirm": "Remover todas as permissões para {user}?",
       "remove": "Remover",
@@ -344,7 +344,7 @@
       "my_user": "Meu usuário",
       "created_by": "Criado por",
       "created": "Criado",
-      "repositories": "{n} repositórios | {n} repositório | {n} repositórios",
+      "repositories": "{n} inteligências | {n} inteligência | {n} inteligências",
       "members": "{n} membros | {n} membro | {n} membros",
       "create_org": "Criar organização",
       "create": "Criar",
@@ -372,9 +372,9 @@
         "coupon_payment": "Com cupom"
       },
       "intelligences": {
-        "title": "Intelligências",
+        "title": "Inteligências",
         "mine": "Inteligências da organização",
-        "using": "Intelgências com integração"
+        "using": "Inteligências com integração"
       },
       "create_org_title": "Vamos criar uma organização",
       "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
