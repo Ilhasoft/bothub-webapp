@@ -10,7 +10,7 @@
       <div
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="!editing || !open"
+          v-if="editing || !open"
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
@@ -55,7 +55,7 @@
     </div>
     <div slot="body">
       <example-info
-        v-if="!editing"
+        v-if="!open"
         :entities-list="entitiesList"
         :highlighted.sync="highlighted"
         :intent="intent" />
@@ -68,7 +68,7 @@
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
-        :get-all-entities="allEntities"
+        :get-all-entities="getEntitiesName"
         @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
@@ -104,10 +104,6 @@ export default {
       type: String,
       default: '',
     },
-    allEntities: {
-      type: Array,
-      default: () => [],
-    },
     entities: {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
@@ -120,10 +116,6 @@ export default {
       type: String,
       default: '',
     },
-    editing: {
-      type: Boolean,
-      default: false,
-    },
     entitySelected: {
       type: String,
       default: null,
@@ -135,6 +127,7 @@ export default {
       deleteDialog: null,
       remove: true,
       highlighted: null,
+      editing: true,
     };
   },
 
@@ -150,6 +143,12 @@ export default {
           group: entity.group,
           ...entity,
         }));
+    },
+    getEntitiesName() {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      return allEntitiesName;
     },
   },
   methods: {
@@ -187,7 +186,7 @@ export default {
       this.open = !this.open;
     },
     editSentence() {
-      this.open = !this.open;
+      this.open = true;
     },
     updateList() {
       this.$emit('updateList');

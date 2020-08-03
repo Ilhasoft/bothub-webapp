@@ -42,7 +42,7 @@
             v-for="(entity, index) in entitiesToEdit"
             :key="`entity-${index}`"
             class="edit-sentence__input">
-            <b-field>
+            <b-field >
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -61,9 +61,6 @@
               />
             </b-field>
           </div>
-        </div>
-        <div
-          class="edit-sentence__input__wrapper">
           <div
             v-for="(entity, index) in pendingEntities"
             :key="`pending-entity-${index}`"
@@ -419,6 +416,7 @@ export default {
        display: flex;
        flex-wrap: wrap;
        padding: 0.25rem;
+       width: 70%;
      }
 
      &__label /deep/ {

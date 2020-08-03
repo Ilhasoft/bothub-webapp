@@ -9,10 +9,14 @@
         <div class="repository-home__title">
           {{ $t('webapp.home.description') }}
         </div>
-        <div class="repository-home__header">
-          <p
-            v-html="$t('webapp.home.categories_repository', {getAllCategories} ) "
-          />
+        <div >
+          <b-tag
+            v-for="(category, index) in getAllCategories"
+            :key="index"
+            class="repository-home__header__tag"
+            rounded>
+            {{ category }}
+          </b-tag>
         </div>
         <div>
           <vue-markdown
@@ -50,6 +54,7 @@
           <div>
             <b-tooltip
               :label="$t('webapp.summary.intent_question')"
+              class="tooltipStyle"
               multilined
               type="is-dark"
               position="is-right">
@@ -132,7 +137,7 @@ export default {
     },
     getAllCategories() {
       const categories = this.repository.categories_list.map(category => category.name);
-      return categories.join(', ');
+      return categories;
     },
   },
   watch: {
@@ -189,7 +194,6 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 @import 'github-markdown-css/github-markdown.css';
-
 .repository-home {
   &__title {
     font-size: 1.75rem;
@@ -206,24 +210,10 @@ export default {
     display: flex;
     margin-bottom: 1rem;
 
-    &__icon-badge {
-      $size: 4rem;
-
-      position: relative;
-      display: block;
-      width: $size;
-      height: $size;
-      overflow: hidden;
-      background-color: $color-primary-dark;
-      border-radius: 50%;
-
-      &__icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: white;
-        transform: translate(-50%, -50%);
-      }
+    &__tag {
+      margin: 0.8rem 0.5rem 2.188rem 0;
+      padding: 0 2rem;
+      font-size: 15px;
     }
 
   }
@@ -249,7 +239,11 @@ export default {
     }
   }
 }
-
+.tooltipStyle::after {
+  font-size: 12px;
+  line-height: 13px;
+  padding: 1rem 0.5rem;
+}
 .markdown-body {
   a {
     color: $color-primary;
