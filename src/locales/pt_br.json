@@ -580,7 +580,7 @@
         },
         "training": {
             "step_0": "<strong> Vamos para o treinamento! </strong> <br> Aqui você vai adicionar frases e classificar palavras para treinar sua inteligência",
-            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> Depois selecione uma das palavra para classificar. Ex: quero uma <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>" ,
+            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> Depois selecione uma das palavra para classificar. <br> Ex: quero uma <mark style='background-color: #1E30EF; color: #fff; padding:2px'>pizza</mark>" ,
             "step_2": "Agora clique aqui passa classificar a palavra que você selecionou.",
             "step_3": "E escreva a classificação Ex: Se você selecionou ''pizza'' a classificação pode ser ''alimento''",
             "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",
