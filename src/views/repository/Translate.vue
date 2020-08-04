@@ -3,14 +3,14 @@
     :repository="repository"
     :error-code="errorCode">
 
-    <div class="translate-description">
-      <h1>{{ $t('webapp.translate.title_translate') }}</h1>
-      <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
-    </div>
     <div v-if="repository">
       <div v-if="authenticated">
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
+          <div class="translate-description">
+            <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+            <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+          </div>
 
           <div class="repository-translate">
             <div class="repository-translate__field">
