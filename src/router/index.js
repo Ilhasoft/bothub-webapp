@@ -7,7 +7,6 @@ import SignIn from '@/views/auth/SignIn';
 import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
-import MyProfile from '@/components/MyProfile';
 import Profile from '@/views/Profile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
@@ -105,18 +104,6 @@ export default new Router({
       component: ResetPassword,
     },
     {
-      path: '/myprofile/',
-      name: 'myProfile',
-      component: MyProfile,
-      beforeEnter: async (to, from, next) => {
-        if (!store.getters.authenticated) {
-          next('/signin');
-        } else {
-          next();
-        }
-      },
-    },
-    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardLayout,
@@ -189,20 +176,44 @@ export default new Router({
           }] : []),
       ],
     },
+    {
+      path: '/profile/',
+      name: 'profile',
+      component: Profile,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/org/:org_nickname/',
+      name: 'org',
+      component: Org,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/orgs',
+      name: 'orgs',
+      component: Orgs,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
     ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
       ? [{
-        path: '/orgs',
-        name: 'orgs',
-        component: Orgs,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      },
-      {
         path: '/payment-options',
         name: 'payment-options',
         component: PaymentOptions,
@@ -226,30 +237,7 @@ export default new Router({
           }
         },
       },
-      {
-        path: '/profile/',
-        name: 'profile',
-        component: Profile,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      },
-      {
-        path: '/org/:org_nickname/',
-        name: 'org',
-        component: Org,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      }] : []),
+      ] : []),
     {
       path: '/tutorial',
       name: 'Tutorial',

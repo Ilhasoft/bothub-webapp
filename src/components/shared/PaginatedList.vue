@@ -24,6 +24,7 @@
           {{ $tc('webapp.layout.items_total', list.total) }}
         </div>
         <b-pagination
+          v-show="list.total > perPage"
           :total="list.total"
           :current.sync="page"
           :per-page="perPage"

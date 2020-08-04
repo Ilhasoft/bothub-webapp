@@ -11,7 +11,7 @@
         :errors="errors"
         hide-help
         class="field"/>
-      <div class="control has-text-centered">
+      <div>
         <b-button
           :disabled="submitting"
           native-type="submit"
@@ -90,5 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .submit-button {
+    padding: 0 3rem;
+  }
 </style>
