@@ -1,8 +1,8 @@
 <template>
   <div class="summary-information">
     <div class="summary-information__info">
+      <h2>{{ $t('webapp.summary.general_informations') }}</h2>
       <div class="summary-information__info__container">
-        <h2>{{ $t('webapp.summary.training_informations') }}</h2>
         <div class="summary-information__info__container__training">
           <div @click="navigateToSentences">
             <h1>{{ getCurrentRepository.examples__count }}</h1>
@@ -26,29 +26,31 @@
             </p>
           </div>
         </div>
-      </div>
-      <div class="summary-information__info__container">
-        <h2 class="summary-information__info__container__title">
-          {{ $t('webapp.summary.general_informations') }}
-        </h2>
         <div class="summary-information__info__container__general">
-          <h1>{{ getCurrentRepository.available_languages.length }}</h1>
-          <p>{{ $tc('webapp.summary.information_language',
-                    getCurrentRepository.available_languages.length) }}
-          </p>
-          <!-- <div class="summary-information__info__container__general__data">
-            <h1>{{ getCurrentRepository.available_languages.length }}</h1>
-            <p>{{ $tc('webapp.summary.information_language',
-                      getCurrentRepository.available_languages.length) }} </p>
+          <div class="summary-information__info__container__general__data">
+            <b-tooltip
+              :label="languagesList"
+              class="summary-information__info__container__tooltip"
+              multilined
+              type="is-dark"
+              position="is-bottom">
+              <h1>{{ getCurrentRepository.available_languages.length }}</h1>
+              <p>{{ $tc('webapp.summary.information_language',
+                        getCurrentRepository.available_languages.length) }} </p>
+            </b-tooltip>
           </div>
           <div class="summary-information__info__container__general__data">
-            <h1>0</h1>
-            <p>{{ $tc('webapp.summary.information_contributors', 0) }}</p>
+            <b-tooltip
+              :label="contributorsList"
+              class="summary-information__info__container__tooltip"
+              multilined
+              type="is-dark"
+              position="is-bottom">
+              <h1>{{ getCurrentRepository.authorizations.count }}</h1>
+              <p>{{ $tc('webapp.summary.information_contributors',
+                        getCurrentRepository.authorizations.count) }} </p>
+            </b-tooltip>
           </div>
-          <div class="summary-information__info__container__general__data">
-            <h1>0</h1>
-            <p>{{ $tc('webapp.summary.information_integrations', 0) }}</p>
-          </div> -->
         </div>
       </div>
     </div>
@@ -68,32 +70,33 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
+import { languageListToDict } from '@/utils';
 
 export default {
   name: 'SummaryInformation',
   data() {
     return {
       collapse: true,
-      authorizationsList: [],
     };
   },
   computed: {
     ...mapGetters([
       'getCurrentRepository',
     ]),
-  },
-  mounted() {
-    // this.updateAuthorizations();
+    languagesList() {
+      const languageObject = Object.values(
+        languageListToDict(this.getCurrentRepository.available_languages),
+      );
+      return languageObject.join(', ');
+    },
+    contributorsList() {
+      const { users } = this.getCurrentRepository.authorizations;
+      const usersList = users.map(user => user.nickname);
+      return usersList.join(', ');
+    },
   },
   methods: {
-    ...mapActions(['repositoryAuthorizationList']),
-    async updateAuthorizations() {
-      const users = await this.repositoryAuthorizationList({
-        repositoryUuid: this.getCurrentRepository.uuid,
-      });
-      this.authorizationsList = await users.getAllItems();
-    },
     scrollToEntity() {
       const el = document.querySelector('#entity-container');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -117,29 +120,27 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-.teste{
-  display:flex;
-}
+
 .summary-information{
 
     &__info{
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        margin-left: 0.2rem;
+      margin-left: 0.5rem;
+        h2{
+          color: $color-fake-black;
+          font-weight: $font-weight-bolder;
+          font-family: $font-family;
+          margin-bottom: 1.2rem;
+          font-size: 1.75rem;
+        }
 
         &__container{
-            width: 49%;
+            width: 100%;
+            display: flex;
 
-            h2{
-                color: $color-fake-black;
-                font-weight: $font-weight-bolder;
-                font-family: $font-family;
-                margin-bottom: 1.2rem;
-                font-size: 1.75rem;
-            }
-            &__title{
-                margin-left: 0.2rem;
+            &__tooltip{
+                    display: flex;
+                    flex-direction: column;
+                    cursor: pointer;
             }
 
             &__training{
@@ -148,78 +149,92 @@ export default {
             justify-content: space-around;
             align-items: center;
             text-align: center;
+            margin-right: 10px;
+            width: 50%;
             border: 1px solid #CFD5D9;
 
-                h1{
-                    font-size: 47px;
-                    font-weight: $font-weight-bolder;
-                    font-family: $font-family;
-                    margin:0;
-                }
+              h1{
+                font-size: 47px;
+                font-weight: $font-weight-bolder;
+                font-family: $font-family;
+                margin:0;
+              }
 
-                div{
+              div{
 
-                  &:hover{
-                    cursor:pointer;
-                    color: $color-primary;
-                  }
+                &:hover{
+                  cursor:pointer;
+                  color: $color-primary;
                 }
-                  @media screen and (max-width: 60em) {
-                      height: 156 * 3px;
-                      width: 250px;
-                      display: flex;
-                      flex-direction: column;
-                      align-items: center;
-                    }
+              }
+
+              @media screen and (max-width: 60em) {
+                width: 80%;
+              }
+              @media screen and (max-width: 45em) {
+                height: 140px * 3;
+                flex-direction: column;
+              }
             }
+
             &__general{
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             text-align: center;
             height: 156px;
-            border: 1px solid #CFD5D9;
+            width: 50%;
 
-                h2{
-                    color: $color-fake-black;
-                    font-weight: $font-weight-bolder;
-                    font-family: $font-family;
-                }
+            @media screen and (max-width: 60em) {
+              width: 80%;
+              margin-top: 10px;
+            }
+            @media screen and (max-width: 40em) {
+              flex-direction: column;
+              margin-bottom: 2rem;
+            }
 
-                h1{
-                    font-size: 47px;
-                    font-weight: $font-weight-bolder;
-                    font-family: $font-family;
-                    margin:0;
-                }
+            h2{
+              color: $color-fake-black;
+              font-weight: $font-weight-bolder;
+              font-family: $font-family;
+            }
 
-                &__data{
+            h1{
+              font-size: 47px;
+              font-weight: $font-weight-bolder;
+              font-family: $font-family;
+              margin:0;
+            }
+
+              &__data{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 height: 156px;
-                width: 250px;
-                margin: 0 0.2rem;
+                width: 49%;
                 border: 1px solid #CFD5D9;
 
-                }
-                @media screen and (max-width: 60em) {
-                      display: flex;
-                      flex-direction: column;
-                      align-items: center;
-                      width: 250px;
-                    }
+                  @media screen and (max-width: 40em) {
+                    width:100%;
+                    height: 156px * 2;
+                    margin-top: 10px;
+                  }
+              }
             }
-
+              @media screen and (max-width: 60em) {
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+              }
         }
 
-         @media screen and (max-width: 70em) {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
+      @media screen and (max-width: 70em) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     &__intelligence-force{

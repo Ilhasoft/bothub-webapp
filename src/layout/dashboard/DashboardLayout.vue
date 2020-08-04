@@ -35,27 +35,6 @@
           class="dashboard-layout__main-panel__header__right">
           <div
             v-show="hasLoaded"
-            class="dashboard-layout__main-panel__header__right__icons">
-            <bh-icon
-              value="language" />
-            <span>{{
-              getCurrentRepository.available_languages ?
-                getCurrentRepository.available_languages.length :
-            0 }} {{ $t('webapp.dashboard.languages') }}</span>
-          </div>
-          <div
-            v-show="hasLoaded"
-            class="dashboard-layout__main-panel__header__right__icons">
-            <b-icon
-              icon="chat-processing"
-              size="is-small"
-              type="is-white"/>
-            <span>
-              {{ getCurrentRepository.examples__count }} {{ $t('webapp.dashboard.sentences') }}
-            </span>
-          </div>
-          <div
-            v-show="hasLoaded"
             v-if="warningsCount > 0"
             class="dashboard-layout__main-panel__header__right__icons">
             <b-icon
