@@ -72,7 +72,6 @@
                   {{ myProfile.name || '...' }}
                 </b-dropdown-item>
                 <b-dropdown-item
-                  v-if="paymentEnabled"
                   @click="orgs()">
                   {{ $t('webapp.layout.orgs') }}
                 </b-dropdown-item>
@@ -154,9 +153,6 @@ export default {
       'authenticated',
       'myProfile',
     ]),
-    paymentEnabled() {
-      return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED;
-    },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
@@ -182,7 +178,7 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile' });
+      this.$router.push({ name: 'profile' });
     },
     openBeginnerTutorialModal() {
       if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {

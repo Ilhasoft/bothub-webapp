@@ -5,6 +5,7 @@
         <div class="org__header__info">
           <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
           <p
+            v-if="paymentEnabled"
             class="org__header__subtitle">
             {{ $t('webapp.orgs.created_by') }} <a> User </a>
           </p>
@@ -66,16 +67,18 @@
             :empty-message="$t('webapp.home.no_repo')"
             class="org__repositories__cards" />
 
-          <div class="org__repositories__separator" />
+          <div
+            v-if="!repositoryLists.using.empty"
+            class="org__repositories__separator" />
         </div>
 
-        <div v-show="!repositoryLists.contributing.empty">
+        <div v-show="!repositoryLists.using.empty">
           <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
           <paginated-list
-            v-if="repositoryLists.contributing"
+            v-if="repositoryLists.using"
             :item-component="repositoryItemElem"
             :per-page="repositoriesLimit"
-            :list="repositoryLists.contributing"
+            :list="repositoryLists.using"
             :empty-message="$t('webapp.home.no_repo')"
             class="org__repositories__cards" />
         </div>
@@ -94,7 +97,7 @@
         </div>
       </div>
       <div
-        v-show="selected==4">
+        v-if="selected==4">
         <h1 class="org__title"> {{ $t('webapp.orgs.payment.history') }} </h1>
         <div class="org__edit__content org__payment__content">
           <payment-history />
@@ -158,17 +161,19 @@ export default {
       loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
+      paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        contributing: { empty: false },
+        using: { empty: !this.paymentEnabled },
       },
-      repositoriesLimit: 3,
+      repositoriesLimit: 6,
       tabs: [
-        this.$t('webapp.orgs.information'),
-        this.$t('webapp.orgs.intelligences.title'),
-        this.$t('webapp.orgs.activities.title'),
-        this.$t('webapp.orgs.reports.title'),
-        this.$t('webapp.orgs.payment.title')],
+        { label: this.$t('webapp.orgs.information'), value: 0 },
+        { label: this.$t('webapp.orgs.intelligences.title'), value: 1 },
+        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !this.paymentEnabled },
+        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: !this.paymentEnabled },
+        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !this.paymentEnabled },
+      ],
       coupon: null,
     };
   },
@@ -198,7 +203,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getOrgContributingRepositories',
+      'getOrgUsingRepositories',
       'getOrgRepositories',
       'getOrg',
     ]),
@@ -216,9 +221,11 @@ export default {
       this.repositoryLists.org = await this.getOrgRepositories(
         { nickname: this.nickname, limit: this.repositoriesLimit },
       );
-      this.repositoryLists.contributing = await this.getOrgContributingRepositories(
-        { nickname: this.nickname, limit: this.repositoriesLimit },
-      );
+      if (this.paymentEnabled) {
+        this.repositoryLists.using = await this.getOrgUsingRepositories(
+          { nickname: this.nickname, limit: this.repositoriesLimit },
+        );
+      }
     },
     onRoleSetted() {
       this.$refs.authorizationsList.updateAuthorizations();

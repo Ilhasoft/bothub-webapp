@@ -84,6 +84,8 @@ export default {
       return { ...this.data, ...this.groupData };
     },
     filteredSchema() {
+      if (!process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) return this.formSchema;
+
       if (!this.formSchema) return {};
       const { biography, ...schema } = this.formSchema;
       return schema;

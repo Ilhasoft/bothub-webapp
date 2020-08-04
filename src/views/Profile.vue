@@ -51,7 +51,9 @@
             :empty-message="$t('webapp.home.no_repo')"
             class="profile__repositories__cards" />
 
-          <div class="profile__repositories__separator" />
+          <div
+            v-if="!repositoryLists.contributing.empty || !repositoryLists.contributing.empty"
+            class="profile__repositories__separator" />
         </div>
 
         <div v-show="!repositoryLists.contributing.empty">
@@ -64,7 +66,9 @@
             :empty-message="$t('webapp.home.no_repo')"
             class="profile__repositories__cards" />
 
-          <div class="profile__repositories__separator" />
+          <div
+            v-if="!repositoryLists.using.empty"
+            class="profile__repositories__separator" />
         </div>
 
         <div v-show="!repositoryLists.using.empty">
@@ -92,7 +96,7 @@
         </div>
       </div>
       <div
-        v-show="selected==4">
+        v-if="selected==4">
         <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
         <div class="profile__edit__content profile__payment__content">
           <payment-history />
@@ -152,15 +156,16 @@ export default {
       repositoryLists: {
         mine: { empty: false },
         contributing: { empty: false },
-        using: { empty: false },
+        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
-      repositoriesLimit: 3,
+      repositoriesLimit: 6,
       tabs: [
-        this.$t('webapp.my_profile.profile'),
-        this.$t('webapp.my_profile.intelligences.title'),
-        this.$t('webapp.my_profile.activities.title'),
-        this.$t('webapp.my_profile.reports.title'),
-        this.$t('webapp.my_profile.payment.title')],
+        { label: this.$t('webapp.my_profile.profile'), value: 0 },
+        { label: this.$t('webapp.my_profile.intelligences.title'), value: 1 },
+        { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.reports.title'), value: 3, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+      ],
       coupon: null,
     };
   },
@@ -196,8 +201,12 @@ export default {
     submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
-      this.repositoryLists.using = await this.getContributingRepositories(this.repositoriesLimit);
-      this.repositoryLists.contributing = await this.getUsingRepositories(this.repositoriesLimit);
+      this.repositoryLists.contributing = await this.getContributingRepositories(
+        this.repositoriesLimit,
+      );
+      if (process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) {
+        this.repositoryLists.using = await this.getUsingRepositories(this.repositoriesLimit);
+      }
     },
   },
 };
