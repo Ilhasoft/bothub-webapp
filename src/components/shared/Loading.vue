@@ -52,22 +52,30 @@ export default {
   justify-content:center;
   align-items:center;
 }
-.triple-spinner::before,
+.triple-spinner::before{
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
 .triple-spinner::after {
   content: "";
   position: absolute;
   border-radius: 50%;
   border: 2px solid transparent;
 }
+
 .triple-spinner::before {
   top: 10px;
   left: 10px;
   right: 10px;
   bottom: 10px;
   border-top-color: #2bbfac;
-  -webkit-animation: spin2 0.6s linear infinite;
-  animation: spin2 0.6s linear infinite;
+  -webkit-animation: spin2 0.5s linear infinite;
+  animation: spin2 0.5s linear infinite;
 }
+
 .triple-spinner::after {
   top: 15px;
   left: 15px;
