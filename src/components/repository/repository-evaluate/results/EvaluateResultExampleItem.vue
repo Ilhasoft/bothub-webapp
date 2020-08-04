@@ -126,7 +126,8 @@
             class="failed">[{{ $t('webapp.result.failed') }}]</strong>
         </p>
       </div>
-  </div></sentence-accordion>
+    </div>
+  </sentence-accordion>
 </template>
 
 <script>

@@ -56,4 +56,7 @@ export default {
   async setRepositoryTraining({ commit }, value) {
     commit('updateRepositoryTraining', value);
   },
+  getRepositoryVersion(store, { query }) {
+    return tutorial.repositoryVersion(query);
+  },
 };

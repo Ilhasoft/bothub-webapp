@@ -6,5 +6,6 @@ exports[`EvaluateResultExampleList.vue renders correctly 1`] = `
     some specific text
   </h3>
   <p>some specific text</p>
+  <!---->
 </div>
 `;

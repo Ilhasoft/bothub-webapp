@@ -149,10 +149,8 @@ export default {
       'getRepositoryStatus',
     ]),
     async train() {
-      if (this.activeTutorial === 'training') {
-        await this.getTrainingStatus();
-        await this.setRepositoryTraining(true);
-      }
+      await this.getTrainingStatus();
+      await this.setRepositoryTraining(true);
       this.$emit('train');
     },
     async getTrainingStatus() {
