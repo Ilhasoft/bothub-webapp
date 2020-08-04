@@ -594,10 +594,13 @@
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
         "step_1": "Select a language to test.",
         "step_2": "Enter a sentence here that you would like to test. <br> Ex: I want a pizza",
-        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex: affirmative",
+        "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
-    },
+    }, 
+     "evaluate_result": {
+      "step_0": "Here you can see the result of your intelligence test."
+      },
       "quick_test": {
         "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
         "step_1": "Enter your test phrase and confirm.",

@@ -35,16 +35,18 @@
               id="tour-evaluate-step-3"
               :is-previous-disabled="true"
               :message="errors.non_field_errors"
-              :is-step-blocked="intent.length === 0"
-            >
-              <b-autocomplete
+              :is-step-blocked="intent.length === 0">
+              <b-select
                 v-model="intent"
                 :placeholder="$t('webapp.evaluate.intent')"
-                :data="filteredData"
-                :open-on-focus="true"
-                dropdown-position="bottom"
-                @keyup.enter.native="onEnter()"
-              />
+                expanded>
+                <option
+                  v-for="(intent, index) in repository.intents_list"
+                  :value="intent"
+                  :key="index">
+                  {{ intent }}
+                </option>
+              </b-select>
             </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -68,12 +70,12 @@
             </b-tooltip>
           </div>
         </div>
-        <bh-field
+        <b-field
           :errors="errors.entities"
           class="new-sentence__form__entities"
         >
           <div class="columns">
-            <div class="column is-three-fifths">
+            <div class="column is-one-third">
               <entities-input
                 ref="entitiesInput"
                 v-model="entities"
@@ -90,7 +92,7 @@
               />
             </div>
           </div>
-        </bh-field>
+        </b-field>
       </form>
     </div>
   </div>
@@ -121,6 +123,7 @@ export default {
       entitiesList: [],
       testing: true,
       blockedNextStepTutorial: false,
+      intentError: {},
     };
   },
   computed: {
@@ -252,11 +255,15 @@ export default {
       } catch (error) {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
-
         /* istanbul ignore next */
         if (data) {
           /* istanbul ignore next */
-          this.errors = data;
+          this.intentError = data;
+          this.$buefy.toast.open({
+            message: `${this.intentError.non_field_errors[0]}`,
+            type: 'is-danger',
+            duration: 5000,
+          });
         }
         /* istanbul ignore next */
         this.submitting = false;

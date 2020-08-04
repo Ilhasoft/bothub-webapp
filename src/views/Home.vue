@@ -31,12 +31,13 @@
             :category="currentCategory"
             :language="currentLanguage"
             :search="search"
+            @cardList="getCardList($event)"
           />
         </div>
       </div>
     </div>
     <tour
-      v-if="activeTutorial === 'create_intelligence'"
+      v-if="activeTutorial === 'create_intelligence' && repositoryList !== null"
       :step-count="3"
       name="create_intelligence"/>
   </layout>
@@ -71,6 +72,11 @@ export default {
     ...mapGetters([
       'activeTutorial',
     ]),
+  },
+  methods: {
+    async getCardList(value) {
+      this.repositoryList = await value.updateItems(1);
+    },
   },
 };
 </script>

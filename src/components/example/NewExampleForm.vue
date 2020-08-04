@@ -34,6 +34,7 @@
         <b-field
           id="tour-training-step-4"
           :is-previous-disabled="true"
+          :is-step-blocked="intent === ''"
           :message="errors.intent">
           <b-autocomplete
             v-model="intent"

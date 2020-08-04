@@ -592,9 +592,12 @@
           "step_0": "<strong> Vamos para o teste de sentenças! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
           "step_1": "Selecione um idioma para testar.",
           "step_2": "Digite aqui uma frase que você gostaria de testar. <br> Ex: quero uma pizza",
-          "step_3": "E aqui, adicione a intenção que mais se identifica com a frase que você digitou. Ex: afirmativa.",
+          "step_3": "E aqui, selecione a intenção que mais se identifica com a frase que você digitou. Ex: afirmativa.",
           "step_4": "Por fim, envie sua sentença.",
           "step_5": "Clique aqui para executar seu teste. <br> <strong>Dica</strong>: Para testar, você deve adicionar pelo menos duas intenções com duas frases cada."
+      },
+        "evaluate_result": {
+          "step_0": "Aqui você poderá ver o resultado do teste da sua inteligência."
       },
         "quick_test": {
           "step_0": "<strong> Esse é o teste rápido! </strong> <br> Aqui você pode testar rapidamente as frases adicionadas ao treinamento.",
