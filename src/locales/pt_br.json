@@ -214,22 +214,22 @@
     },
     "summary": {
       "training_informations": "Informações do Treinamento",
-      "information_sentences": "Sentenças",
-      "information_intents": "Intenções",
-      "information_entities": "Entidades",
+      "information_sentences": "Frases | Frase | Frases",
+      "information_intents": "Intenções | Intenção | Intenções",
+      "information_entities": "Entidades | Entidade | Entidades",
       "general_informations": "Informações Gerais",
-      "information_language": "Idiomas",
-      "information_contributors": "Contribuidores",
-      "information_integrations": "Integrações",
+      "information_language": "Idiomas | Idioma | Idiomas",
+      "information_contributors": "Contribuidores | Contribuidor | Contribuidores",
+      "information_integrations": "Integrações | Integração | Integrações",
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
       "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
     },
     "intent":{
       "title": "Intenção",
-      "description": "Essa intenção contém {n} sentença | Essa intenção contém {n} sentenças.",
+      "description": "Essa intenção contém {n} frase | Essa intenção contém {n} frases.",
       "edit_button": "Editar intenção",
       "save_button": "Salvar",
-      "no_sentences": "Nenhuma senteça.",
+      "no_sentences": "Nenhuma frase.",
       "error_entity": "Aconteceu um erro."
     },
     "settings": {
@@ -245,8 +245,8 @@
       "request": "Fazer pedido",
       "invite": "Enviar convite",
       "no_users": "Sem usuários no time.",
-      "search_user": "Procurar usuário",
-      "search_user_org": "Procurar usuário/organização",
+      "search_user": "Digite um nome ou username",
+      "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
       "remove_user_confirm": "Remover todas as permissões para {user}?",
       "remove": "Remover",
@@ -344,7 +344,7 @@
       "my_user": "Meu usuário",
       "created_by": "Criado por",
       "created": "Criado",
-      "repositories": "{n} repositórios | {n} repositório | {n} repositórios",
+      "repositories": "{n} inteligências | {n} inteligência | {n} inteligências",
       "members": "{n} membros | {n} membro | {n} membros",
       "create_org": "Criar organização",
       "create": "Criar",
@@ -372,9 +372,9 @@
         "coupon_payment": "Com cupom"
       },
       "intelligences": {
-        "title": "Intelligências",
+        "title": "Inteligências",
         "mine": "Inteligências da organização",
-        "using": "Intelgências com integração"
+        "using": "Inteligências com integração"
       },
       "create_org_title": "Vamos criar uma organização",
       "create_org_subtitle": "Aumente a produtividade do seu time criando suas inteligências em um só lugar",
@@ -580,7 +580,7 @@
         },
         "training": {
             "step_0": "<strong> Vamos para o treinamento! </strong> <br> Aqui você vai adicionar frases e classificar palavras para treinar sua inteligência",
-            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> Depois selecione uma das palavra para classificar. Ex: quero uma <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>" ,
+            "step_1": "Adicione a frase que você quer que sua inteligência entenda. <br> Depois selecione uma das palavra para classificar. <br> Ex: quero uma <mark style='background-color: #1E30EF; color: #fff; padding:2px'>pizza</mark>" ,
             "step_2": "Agora clique aqui passa classificar a palavra que você selecionou.",
             "step_3": "E escreva a classificação Ex: Se você selecionou ''pizza'' a classificação pode ser ''alimento''",
             "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",

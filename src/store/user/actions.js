@@ -47,12 +47,12 @@ export default {
   // TODO
   getContributingRepositories(store, limit = 20) {
     /* istanbul ignore next */
-    return user.myRepositories(limit);
+    return user.permissionRepositories(limit);
   },
   // TODO
   getUsingRepositories(store, limit = 20) {
     /* istanbul ignore next */
-    return user.permissionRepositories(limit);
+    return user.myRepositories(limit);
   },
   getUserReports(store, { query = {}, limit = 20 }) {
     return user.getReports(limit, query);

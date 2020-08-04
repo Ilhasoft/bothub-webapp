@@ -201,7 +201,7 @@ export default {
 
       &__container {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
       }
     }
 </style>
