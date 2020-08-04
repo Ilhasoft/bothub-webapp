@@ -190,7 +190,6 @@
       "no_description": "There is no description for this repository",
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
-      "categories_repository": "Intelligence for <strong> {getAllCategories} </strong> purpose",
       "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
       "non-grouped_entities":"and {n} non-grouped entity. | and {n} non-grouped entities.",
       "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
@@ -214,15 +213,15 @@
       "cancel": "Cancel"
     },
     "summary": {
-      "training_informations": "Traning informations",
-      "information_sentences": "Sentences",
-      "information_intents": "Intents",
-      "information_entities": "Entities",
-      "general_informations": "General informations",
-      "information_language": "Languages",
-      "information_contributors": "Contributors",
-      "information_integrations": "Integrations",
-      "intent_question": "INTENT is the desire that the chatbot will realize that the user has when sending a specific message. For example: when sending a \"thank you\" the user's intention is to thank. So the intention for the phrase could be \"thanks\".",
+      "training_information": "Traning information",
+      "information_sentences": "Sentences | Sentence | Sentences",
+      "information_intents": "Intents | Intent | Intents",
+      "information_entities": "Entities | Entity | Entities",
+      "general_information": "General information",
+      "information_language": "Languages | Language | Languages",
+      "information_contributors": "Contributors | Contributor | Contributors",
+      "information_integrations": "Integrations | Integration | Integrations",
+      "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
     },
     "intent":{
@@ -246,8 +245,8 @@
       "request": "Request",
       "invite": "Send Invite",
       "no_users": "No users in your team.",
-      "search_user": "Search User",
-      "search_user_org": "Search for user/organization",
+      "search_user": "Enter a name or username",
+      "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
       "remove_user_confirm": "Are you sure you want to remove permissions for {user}?",
       "remove": "Remove"
@@ -353,6 +352,8 @@
       "edit": "Edit",
       "information": "Information",
       "org_info": "Organization Information",
+      "no_repo": "This org does not yet have any repositories.",
+      "add_repo": "Add repository",
       "activities": {
         "title": "Activities",
         "recent": "Recent Activities"
@@ -396,6 +397,8 @@
       "personal_info": "Personal Information",
       "free_user": "FREE USER",
       "profile": "Profile",
+      "no_repo": "You don't have any bots yet",
+      "add_repo": "Create bot",
       "activities": {
         "title": "Activities",
         "recent": "Recent Activities",
@@ -591,10 +594,13 @@
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
         "step_1": "Select a language to test.",
         "step_2": "Enter a sentence here that you would like to test. <br> Ex: I want a pizza",
-        "step_3": "And here, add the intent that most identifies with the phrase you typed. Ex: affirmative",
+        "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
-    },
+    }, 
+     "evaluate_result": {
+      "step_0": "Here you can see the result of your intelligence test."
+      },
       "quick_test": {
         "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
         "step_1": "Enter your test phrase and confirm.",

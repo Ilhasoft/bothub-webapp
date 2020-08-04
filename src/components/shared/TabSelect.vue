@@ -1,11 +1,11 @@
 <template>
   <div class="tabs">
     <div
-      v-for="(tab, index) in options"
+      v-for="(item, index) in filteredOptions"
       :key="index"
       :class="{'tabs__item': true,
-               'tabs__item__selected': indexSelected === index}"
-      @click="indexSelected = index"> {{ tab }} </div>
+               'tabs__item__selected': selected === item.value}"
+      @click="selected = item.value"> {{ item.label }} </div>
   </div>
 </template>
 
@@ -17,23 +17,29 @@ export default {
       type: Array,
       default: () => [],
     },
-    selected: {
-      type: Number,
+    initialSelected: {
+      type: null,
       default: null,
     },
   },
   data() {
     return {
-      indexSelected: null,
+      selected: null,
     };
   },
+  computed: {
+    filteredOptions() {
+      return this.options.filter(option => !option.hide);
+    },
+  },
   watch: {
-    indexSelected() {
-      this.$emit('update:selected', this.indexSelected);
+    selected() {
+      this.$emit('update:selected', this.selected);
     },
   },
   mounted() {
-    this.indexSelected = this.selected;
+    this.selected = this.initialSelected
+    || (this.filteredOptions.length > 0 ? this.filteredOptions[0].value : null);
   },
 };
 </script>

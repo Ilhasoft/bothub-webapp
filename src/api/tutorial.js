@@ -13,4 +13,8 @@ export default {
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
+  repositoryVersion(limit = 1, query) {
+    const queryString = qs.stringify(limit, query);
+    return request.$http.get(`/v2/repository/version/?${queryString}`);
+  },
 };

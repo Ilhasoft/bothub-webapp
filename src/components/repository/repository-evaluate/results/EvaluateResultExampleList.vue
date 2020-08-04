@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h3 class="evaluate-result-example-list__title">
+    <h3
+      class="evaluate-result-example-list__title">
       {{ $t('webapp.result.sentence_details') }}
     </h3>
     <div
@@ -15,6 +16,7 @@
       </p>
       <evaluate-result-example-item
         v-for="(item, i) in resultExampleList"
+        id="tour-evaluate_result-step-0"
         :key="i"
         :text="item.text"
         :intent="item.intent"
@@ -40,19 +42,25 @@
       </div>
     </div>
     <p v-else>{{ $t('webapp.result.do_not_log') }}</p>
+    <tour
+      v-if="activeTutorial === 'evaluate' && resultExampleList.length > 0"
+      :step-count="1"
+      name="evaluate_result"/>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import EvaluateResultExampleItem from '@/components/repository/repository-evaluate/results/EvaluateResultExampleItem';
 import Loading from '@/components/shared/Loading';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'EvaluateResultExampleList',
   components: {
     EvaluateResultExampleItem,
     Loading,
+    Tour,
   },
   props: {
     id: {
@@ -74,6 +82,9 @@ export default {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     total() {
       return this.limit * this.pages;
     },

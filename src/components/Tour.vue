@@ -139,9 +139,10 @@ export default {
       return steps;
     },
     checkIntelligence() {
-      if (this.name !== 'create_intelligence_forms') return this.name;
+      if (this.name === 'create_intelligence_forms') return 'create_intelligence';
+      if (this.name === 'evaluate_result') return 'evaluate';
 
-      return 'create_intelligence';
+      return this.name;
     },
     getElementName(name) {
       return name;

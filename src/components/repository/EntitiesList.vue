@@ -120,8 +120,6 @@ export default {
     },
     editOptionsEntity() {
       this.editSentences = !this.editSentences;
-      this.$emit('ableEditEntities', this.editSentences);
-      this.$emit('setAllEntities', this.allEntities);
     },
     async saveEdition() {
       try {

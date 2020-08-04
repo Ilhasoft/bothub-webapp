@@ -38,6 +38,7 @@
                 ref="runNewTestButton"
                 :is-finish-disabled="true"
                 :is-previous-disabled="true"
+                :is-next-disabled="true"
                 :loading="evaluating"
                 :disabled="evaluating"
                 type="is-secondary"
@@ -53,7 +54,8 @@
               :filter-by-language="currentLanguage"
               @created="updateTrainingStatus()"
               @deleted="updateTrainingStatus()"
-              @eventStep="dispatchClick()"/>
+              @eventStep="dispatchClick()"
+              @eventError="dispatchSkip()"/>
           </div>
         </div>
         <div class="evaluate__container">
@@ -77,9 +79,11 @@
     </div>
     <tour
       v-if="activeTutorial === 'evaluate'"
-      :step-count="6"
+      :step-count="7"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
+      :reset-tutorial="eventReset"
+      :skip-event="eventSkip"
       name="evaluate"/>
   </repository-view-base>
 </template>
@@ -111,6 +115,8 @@ export default {
       error: {},
       eventClick: false,
       eventClickFinish: false,
+      eventReset: false,
+      eventSkip: false,
     };
   },
   computed: {
@@ -155,6 +161,12 @@ export default {
     dispatchFinish() {
       this.eventClickFinish = !this.eventClickFinish;
     },
+    dispatchReset() {
+      this.eventReset = !this.eventReset;
+    },
+    dispatchSkip() {
+      this.eventSkip = !this.eventSkip;
+    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
@@ -175,7 +187,6 @@ export default {
     async newEvaluate() {
       this.evaluating = true;
       try {
-        this.dispatchFinish();
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
           language: this.getEvaluateLanguage,
@@ -193,6 +204,7 @@ export default {
         });
         return true;
       } catch (error) {
+        this.dispatchReset();
         this.error = error.response.data;
         this.evaluating = false;
         this.$buefy.toast.open({

@@ -5,16 +5,15 @@
       :key="item.key"
       :is="itemComponent"
       v-bind="addAttrs(item)"
-      :editing="editable"
       @deleted="onItemDeleted(item.id)"
       @updateList="onSaveUpdate"
       @dispatchEvent="onDispatchEvent($event)" />
     <loading
-      v-if="isLoading"
+      v-show="isLoading"
       class="pagination__message" />
     <div class="pagination__bottom">
       <p
-        v-if="!isLoading"
+        v-show="!isLoading"
         class="text-center">
         {{ listStatusErrorCode | statusCodeVerbose }}
       </p>
@@ -25,6 +24,7 @@
           {{ $tc('webapp.layout.items_total', list.total) }}
         </div>
         <b-pagination
+          v-show="list.total > perPage"
           :total="list.total"
           :current.sync="page"
           :per-page="perPage"
@@ -66,10 +66,6 @@ export default {
       type: Number,
       default: 20,
     },
-    editable: {
-      type: Boolean,
-      default: false,
-    },
     addAttributes: {
       type: Object,
       default: () => {},
@@ -84,6 +80,7 @@ export default {
       listStatusErrorCode: null,
       error: null,
       page: 1,
+      data: false,
     };
   },
   computed: {
@@ -128,7 +125,7 @@ export default {
     },
     addAttrs(obj) {
       return {
-        editable: this.editable, ...this.addAttributes, ...obj, ...this.$attrs,
+        data: this.data, ...this.addAttributes, ...obj, ...this.$attrs,
       };
     },
     onItemDeleted(id) {

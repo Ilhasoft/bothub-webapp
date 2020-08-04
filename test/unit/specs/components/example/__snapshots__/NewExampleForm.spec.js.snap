@@ -11,7 +11,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
       </b-field-stub>
     </div>
     <div class="column">
-      <b-field-stub addons="true" id="tour-training-step-4" is-previous-disabled="true">
+      <b-field-stub addons="true" id="tour-training-step-4" is-previous-disabled="true" is-step-blocked="true">
         <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" placeholder="some specific text"></b-autocomplete-stub>
       </b-field-stub>
     </div>

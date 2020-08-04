@@ -20,7 +20,7 @@ export default {
     return org.getNewOrgSchema();
   },
 
-  getOrgContributingRepositories(store, { nickname, limit = 20 }) {
+  getOrgUsingRepositories(store, { nickname, limit = 20 }) {
     return repository.searchByOrg(nickname, limit);
   },
 
