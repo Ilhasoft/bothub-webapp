@@ -62,6 +62,7 @@
           <div class="evaluate__item">
             <authorization-request-notification
               v-if="repository && !repository.authorization.can_write"
+              :available="!repository.available_request_authorization"
               :repository-uuid="repository.uuid"
               @onAuthorizationRequested="updateRepository(false)" />
           </div>

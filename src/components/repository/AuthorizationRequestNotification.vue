@@ -6,6 +6,7 @@
       v-if="repositoryUuid"
       :open.sync="requestAuthorizationModalOpen"
       :repository-uuid="repositoryUuid"
+      :available="available"
       @requestDispatched="onAuthorizationRequested()" />
     <div class="level">
       <p class="level-left">{{ $t('webapp.evaluate.you_can_not_edit') }}</p>
@@ -30,6 +31,10 @@ export default {
       type: String,
       default: null,
     },
+    available: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -53,8 +58,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
     .request-authorization{
        color: $color-fake-black;
