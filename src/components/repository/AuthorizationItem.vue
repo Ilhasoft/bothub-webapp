@@ -53,7 +53,7 @@ export default {
   props: {
     id_request_authorizations: {
       type: Number,
-      required: true,
+      default: null,
     },
     uuid: {
       type: String,
