@@ -19,7 +19,6 @@ import { mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import OrgAuthorizationItem from '@/components/org/OrgAuthorizationItem';
 
-
 const components = {
   PaginatedList,
 };
