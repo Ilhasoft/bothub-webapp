@@ -3,7 +3,12 @@
     <div class="org__header">
       <div class="org__header__content">
         <div class="org__header__info">
-          <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
+          <h1 class="org__header__title"> {{ org ? org.name : '' }}
+            <b-icon
+              v-if="org.verificated"
+              type="is-success"
+              icon="check-decagram"/>
+          </h1>
           <p
             v-if="paymentEnabled"
             class="org__header__subtitle">
