@@ -198,6 +198,7 @@ export default {
     },
   },
   mounted() {
+    console.log({ paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED });
     this.loadOrg();
     this.updateRepositories();
   },
