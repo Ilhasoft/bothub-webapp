@@ -4,7 +4,9 @@
     :width="700">
     <div class="request-authorization">
       <h1 class="request-authorization__item">{{ $t('webapp.layout.request_authorization') }}</h1>
+      <p v-if="available"> {{ $t('webapp.settings.request_available') }} </p>
       <request-authorization-form
+        v-else
         :repository-uuid="repositoryUuid"
         @requested="onAuthorizationRequested()" />
     </div>
@@ -24,6 +26,10 @@ export default {
     repositoryUuid: {
       type: String,
       required: true,
+    },
+    available: {
+      type: Boolean,
+      default: false,
     },
     open: {
       type: Boolean,

@@ -3,7 +3,12 @@
     <div class="org__header">
       <div class="org__header__content">
         <div class="org__header__info">
-          <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
+          <h1 class="org__header__title"> {{ org ? org.name : '' }}
+            <b-icon
+              v-if="org && org.verificated"
+              type="is-success"
+              icon="check-decagram"/>
+          </h1>
           <p
             v-if="paymentEnabled"
             class="org__header__subtitle">
@@ -165,15 +170,15 @@ export default {
       paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        using: { empty: !this.paymentEnabled },
+        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
         { label: this.$t('webapp.orgs.information'), value: 0 },
         { label: this.$t('webapp.orgs.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !this.paymentEnabled },
-        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: !this.paymentEnabled },
-        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !this.paymentEnabled },
+        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
