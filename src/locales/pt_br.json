@@ -238,6 +238,7 @@
       "title_edit_repository": "Editar Inteligência",
       "manage_your_team": "Gerencie seu time",
       "authorization_requests": "Solicitações de Autorização",
+      "request_available": "Você já tem uma solicitação pendente. Espere a resposta de um administrador",
       "not_can_edit_repository": "Você não pode editar essa inteligência",
       "login": "Entre na sua conta para editar essa inteligência.",
       "users": "Usuários:",
