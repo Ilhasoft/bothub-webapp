@@ -3,7 +3,12 @@
     <div class="org__header">
       <div class="org__header__content">
         <div class="org__header__info">
-          <h1 class="org__header__title"> {{ org ? org.name : '' }} </h1>
+          <h1 class="org__header__title"> {{ org ? org.name : '' }}
+            <b-icon
+              v-if="org && org.verificated"
+              type="is-success"
+              icon="check-decagram"/>
+          </h1>
           <p
             v-if="paymentEnabled"
             class="org__header__subtitle">
@@ -164,7 +169,7 @@ export default {
       paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        using: { empty: !this.paymentEnabled },
+        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
@@ -198,7 +203,6 @@ export default {
     },
   },
   mounted() {
-    console.log({ paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED });
     this.loadOrg();
     this.updateRepositories();
   },
