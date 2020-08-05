@@ -5,7 +5,7 @@
         <div class="org__header__info">
           <h1 class="org__header__title"> {{ org ? org.name : '' }}
             <b-icon
-              v-if="org.verificated"
+              v-if="org && org.verificated"
               type="is-success"
               icon="check-decagram"/>
           </h1>
