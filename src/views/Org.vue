@@ -169,7 +169,7 @@ export default {
       paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        using: { empty: !this.paymentEnabled },
+        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
