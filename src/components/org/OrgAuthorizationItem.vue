@@ -1,17 +1,13 @@
 <template>
   <div class="authorization-item columns is-vcentered">
-    <div class="column is-1">
+    <div class="authorization-item__info column">
       <user-avatar
         :profile="getProfile(user__nickname)"
         :clickable="false"
         class="authorization-item__avatar" />
-    </div>
-    <div class="column">
       <p><strong>
         {{ getProfile(user__nickname).name || user__nickname }} ({{ user__nickname }})
       </strong></p>
-    </div>
-    <div class="column is-3">
       <role-select
         :editable="editable"
         v-model="newRole"
@@ -22,22 +18,18 @@
         v-show="!submitting"
         icon="delete"
         class="authorization-item__icon authorization-item__icon--button"
-        size="is-small"
         @click.native="remove()"/>
       <b-icon
         v-show="!submitting"
         icon="pencil"
         class="authorization-item__icon authorization-item__icon--button"
-        size="is-small"
         @click.native="editable = !editable"/>
       <b-icon
         v-show="submitting"
         class="authorization-item__icon icon-spin"
-        size="is-small"
         icon="refresh" />
       <b-icon
         v-show="submitted"
-        size="is-small"
         class="text-color-primary"
         icon="check" />
     </div>
@@ -202,6 +194,15 @@ export default {
     border: 1px solid $color-border;
     margin: 0.625rem 0;
     border-radius: 5px;
+
+    &__info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      > * {
+        margin-right: 1rem;
+      }
+    }
 
     &__avatar {
         box-shadow: 0px 3px 6px #00000029;
