@@ -170,9 +170,9 @@ export default {
       tabs: [
         { label: this.$t('webapp.orgs.information'), value: 0 },
         { label: this.$t('webapp.orgs.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !this.paymentEnabled },
-        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: !this.paymentEnabled },
-        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !this.paymentEnabled },
+        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
