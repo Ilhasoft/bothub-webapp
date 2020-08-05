@@ -3,6 +3,7 @@
     <div class="column is-1">
       <user-avatar
         :profile="getProfile(user__nickname)"
+        :clickable="false"
         class="authorization-item__avatar" />
     </div>
     <div class="column">
@@ -164,6 +165,7 @@ export default {
         this.submitted = true;
         this.$emit('updateList');
       } catch (error) {
+        this.newRole = this.role;
         this.handlerError(error);
       }
       this.submitting = false;

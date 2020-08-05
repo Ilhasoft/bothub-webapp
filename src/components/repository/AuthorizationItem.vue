@@ -1,46 +1,46 @@
 <template>
-  <div class="columns is-vcentered">
+  <div class="authorization-item columns is-vcentered">
     <div class="column is-1">
       <user-avatar
+        :profile="getProfile(user__nickname)"
+        :clickable="false"
         :is-organization="user__is_organization"
-        :profile="getProfile(user__nickname)" />
-    </div>
-    <div class="column is-one-fifth">
-      <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
-      <p><small>{{ user__nickname }}</small></p>
+        class="authorization-item__avatar" />
     </div>
     <div class="column">
-      <div
-        v-if="submitted || submitted || true"
-        class="columns is-vcentered">
-        <div class="column is-3 is-offset-3">
-          <role-select
-            v-model="newRole"
-            size="is-small" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="submitting"
-            class="icon-spin"
-            size="is-small"
-            icon="refresh" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="submitted"
-            size="is-small"
-            class="text-color-primary"
-            icon="check" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="!submitting"
-            icon="close"
-            class="icon--button"
-            size="is-small"
-            @click.native="remove()"/>
-        </div>
-      </div>
+      <p><strong>
+        {{ getProfile(user__nickname).name || user__nickname }} ({{ user__nickname }})
+      </strong></p>
+    </div>
+    <div class="column is-3">
+      <role-select
+        :editable="editable"
+        v-model="newRole"
+        size="is-small" />
+    </div>
+    <div class="column authorization-item__icon__container">
+      <b-icon
+        v-show="!submitting"
+        icon="delete"
+        class="authorization-item__icon authorization-item__icon--button"
+        size="is-small"
+        @click.native="remove()"/>
+      <b-icon
+        v-show="!submitting"
+        icon="pencil"
+        class="authorization-item__icon authorization-item__icon--button"
+        size="is-small"
+        @click.native="editable = !editable"/>
+      <b-icon
+        v-show="submitting"
+        class="authorization-item__icon icon-spin"
+        size="is-small"
+        icon="refresh" />
+      <b-icon
+        v-show="submitted"
+        size="is-small"
+        class="text-color-primary"
+        icon="check" />
     </div>
   </div>
 </template>
@@ -51,7 +51,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
 import RoleSelect from '@/components/inputs/RoleSelect';
-
 
 export default {
   name: 'AuthorizationItem',
@@ -103,6 +102,7 @@ export default {
       submitting: false,
       submitted: false,
       removeDialog: null,
+      editable: false,
     };
   },
   computed: {
@@ -172,6 +172,7 @@ export default {
       this.submitting = false;
     },
     handlerError(error) {
+      this.newRole = this.role;
       const { response } = error;
 
       if (!response) {
@@ -194,14 +195,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .icon {
+
+@import '~@/assets/scss/colors.scss';
+
+.authorization-item {
+    padding: 0 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    margin: 0.625rem 0;
+    border-radius: 5px;
+
+    &__avatar {
+        box-shadow: 0px 3px 6px #00000029;
+    }
+
+    &__icon {
+      color: $color-grey-dark;
+
       &--button {
         cursor: pointer;
       }
 
       &__container {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: row-reverse;
+
+        > * {
+            margin-left: 1rem;
+        }
       }
     }
+}
 </style>
+
