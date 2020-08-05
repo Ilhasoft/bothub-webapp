@@ -151,7 +151,7 @@ export default {
             text-align: center;
             margin-right: 10px;
             width: 50%;
-            border: 1px solid #CFD5D9;
+            border: 1px solid $color-border;
 
               h1{
                 font-size: 47px;
@@ -214,7 +214,7 @@ export default {
                 align-items: center;
                 height: 156px;
                 width: 49%;
-                border: 1px solid #CFD5D9;
+                border: 1px solid $color-border;
 
                   @media screen and (max-width: 40em) {
                     width:100%;
@@ -245,7 +245,7 @@ export default {
         width: 98.5%;
         margin-top: .8rem;
         margin-left: 0.5rem;
-        border: 1px solid #CFD5D9;
+        border: 1px solid $color-border;
         height: 147px;
 
       &__relevance{

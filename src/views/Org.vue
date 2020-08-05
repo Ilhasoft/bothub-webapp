@@ -41,6 +41,7 @@
           <org-set-authorization-role-form
             ref="setAuthorizationRoleForm"
             :org-nickname="nickname"
+            class="org__permissions"
             @roleSetted="onRoleSetted()" />
           <org-authorizations-list
             ref="authorizationsList"
@@ -326,6 +327,10 @@ h1 {
 
         &__activities {
           margin-top: 2.5rem;
+        }
+
+        &__permissions {
+          margin-top: 2.813rem;
         }
 
         &__payment {
