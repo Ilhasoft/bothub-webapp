@@ -13,7 +13,7 @@
         v-model="newRole"
         size="is-small" />
     </div>
-    <div class="column authorization-item__icon__container">
+    <div class="column is-2 authorization-item__icon__container">
       <b-icon
         v-show="!submitting"
         icon="delete"
@@ -200,7 +200,7 @@ export default {
       flex-wrap: wrap;
       align-items: center;
       > * {
-        margin-right: 1rem;
+        margin: 0.5rem 1rem 0.5rem 0;
       }
     }
 
@@ -220,7 +220,7 @@ export default {
         flex-direction: row-reverse;
 
         > * {
-            margin-left: 1rem;
+            margin: 0 0 0.5rem 1rem;
         }
       }
     }
