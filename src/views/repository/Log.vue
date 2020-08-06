@@ -78,7 +78,7 @@
       </div>
       <authorization-request-notification
         v-else-if="repository"
-        :available="repository.available_request_authorization"
+        :available="!repository.available_request_authorization"
         :repository-uuid="repositoryUUID"
         @onAuthorizationRequested="updateRepository(false)" />
     </div>
