@@ -116,7 +116,9 @@ export default {
       return [];
     },
     repositoryIcon() {
-      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
+      return ((this.$attrs.categories[0] && this.$attrs.categories[0].icon)
+      || (this.$attrs.categories_list[0] && this.$attrs.categories_list[0].icon))
+      || 'botinho';
     },
   },
 };
