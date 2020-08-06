@@ -202,7 +202,7 @@ export default {
       flex-wrap: wrap;
       align-items: center;
       > * {
-        margin: 0 1rem 0.5rem 0;
+        margin: 0.5rem 1rem 0.5rem 0;
       }
     }
 
