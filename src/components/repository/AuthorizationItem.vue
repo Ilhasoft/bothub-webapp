@@ -14,7 +14,7 @@
         v-model="newRole"
         size="is-small" />
     </div>
-    <div class="column is-3 authorization-item__icon__container">
+    <div class="column is-2 authorization-item__icon__container">
       <b-icon
         v-show="!submitting"
         icon="delete"
