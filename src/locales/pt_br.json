@@ -359,7 +359,7 @@
       "org_info": "Informações da organização",
       "no_repo": "Esta organização ainda não possui inteligências.",
       "add_repo": "Criar inteligência",
-      "no_access": "Você não pode editar esta organização",
+      "from": "De <strong> {locale} </strong>",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes"

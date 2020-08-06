@@ -29,8 +29,8 @@
       class="org__content">
       <div
         v-show="selected==0">
+        <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
         <div v-if="isMember">
-          <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
           <div class="org__edit__content">
             <edit-org-form
               :nickname="nickname"
@@ -54,11 +54,18 @@
           </div>
         </div>
 
-        <b-notification
-          v-else
-          :closable="false"
-          class="org__notification"
-          type="is-warning"> {{ $t('webapp.orgs.no_access') }} </b-notification>
+        <div
+          v-else-if="org"
+          class="org__edit__content">
+          <br>
+          <p
+            v-if="org.locale && org.locale.length > 0"
+            v-html="$t('webapp.orgs.from', {locale: org.locale})"/>
+          <br>
+          <br>
+          {{ org.description }}
+          <br>
+        </div>
 
       </div>
       <div v-show="selected==1">
@@ -201,7 +208,7 @@ export default {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
     isMember() {
-      return true;
+      return false;
     },
   },
   watch: {
