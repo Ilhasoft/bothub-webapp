@@ -1,128 +1,151 @@
 <template>
   <layout :show-footer="false">
-    <div class="org__header">
-      <div class="org__header__content">
-        <div class="org__header__info">
-          <h1 class="org__header__title"> {{ org ? org.name : '' }}
-            <b-icon
-              v-if="org && org.verificated"
-              type="is-success"
-              icon="check-decagram"/>
-          </h1>
-          <p
-            v-if="paymentEnabled"
-            class="org__header__subtitle">
-            {{ $t('webapp.orgs.created_by') }} <a> User </a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="org__tabs__container">
-      <tab-select
-        :options="tabs"
-        :selected.sync="selected"
-        class="org__tabs" />
-    </div>
-    <b-loading :active="loading" />
-    <div
-      v-if="!loading"
-      class="org__content">
+    <h1
+      v-if="errorMessage"
+      class="has-text-centered"> {{ errorMessage }} </h1>
+    <div v-else>
       <div
-        v-show="selected==0">
-        <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
-        <div class="org__edit__content">
-          <edit-org-form
-            :nickname="nickname"
-            :initial-data="org"
-            class="org__edit"
-            @edited="loadOrg" />
-
-          <div class="org__repositories__separator" />
+        class="org__header">
+        <div class="org__header__content">
+          <div class="org__header__info">
+            <h1 class="org__header__title"> {{ org ? org.name : '' }}
+              <b-icon
+                v-if="org && org.verificated"
+                type="is-success"
+                icon="check-decagram"/>
+            </h1>
+            <p
+              v-if="paymentEnabled"
+              class="org__header__subtitle">
+              {{ $t('webapp.orgs.created_by') }} <a> User </a>
+            </p>
+          </div>
         </div>
-
-        <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
-        <div class="org__edit__content">
-          <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
-          <org-set-authorization-role-form
-            ref="setAuthorizationRoleForm"
-            :org-nickname="nickname"
-            @roleSetted="onRoleSetted()" />
-          <org-authorizations-list
-            ref="authorizationsList"
-            :org-nickname="nickname" />
-        </div>
-
       </div>
-      <div v-show="selected==1">
+      <div class="org__tabs__container">
+        <tab-select
+          :options="tabs"
+          :selected.sync="selected"
+          class="org__tabs" />
+      </div>
+      <b-loading :active="loading" />
+      <div
+        v-if="!loading"
+        class="org__content">
         <div
-          v-show="noRepositories"
-          class="org__add-repo org__edit__content">
-          <p> {{ $t('webapp.orgs.no_repo') }} </p>
-          <router-link to="/new">
-            <b-button type="is-primary"> {{ $t('webapp.orgs.add_repo') }} </b-button>
-          </router-link>
-        </div>
-        <div v-show="!repositoryLists.org.empty">
-          <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
-          <paginated-list
-            v-if="repositoryLists.org"
-            :item-component="repositoryItemElem"
-            :per-page="repositoriesLimit"
-            :list="repositoryLists.org"
-            :empty-message="$t('webapp.home.no_repo')"
-            class="org__repositories__cards" />
+          v-show="selected==0">
+          <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
+          <div v-if="isMember">
+            <div class="org__edit__content">
+              <edit-org-form
+                :nickname="nickname"
+                :initial-data="org"
+                class="org__edit"
+                @edited="loadOrg" />
 
+              <div class="org__repositories__separator" />
+            </div>
+
+            <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
+            <div class="org__edit__content">
+              <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
+              <org-set-authorization-role-form
+                ref="setAuthorizationRoleForm"
+                :org-nickname="nickname"
+                class="org__permissions"
+                @roleSetted="onRoleSetted()" />
+              <org-authorizations-list
+                ref="authorizationsList"
+                :org-nickname="nickname" />
+            </div>
+          </div>
           <div
-            v-if="!repositoryLists.using.empty"
-            class="org__repositories__separator" />
-        </div>
+            v-else-if="org"
+            class="org__edit__content">
+            <br>
+            <p
+              v-if="org.locale && org.locale.length > 0"
+              v-html="$t('webapp.orgs.from', {locale: org.locale})"/>
+            <br>
+            <br>
+            {{ org.description }}
+            <br>
+          </div>
 
-        <div v-show="!repositoryLists.using.empty">
-          <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
-          <paginated-list
-            v-if="repositoryLists.using"
-            :item-component="repositoryItemElem"
-            :per-page="repositoriesLimit"
-            :list="repositoryLists.using"
-            :empty-message="$t('webapp.home.no_repo')"
-            class="org__repositories__cards" />
         </div>
-      </div>
-      <div
-        v-show="selected==2">
-        <h1 class="org__title"> {{ $t('webapp.orgs.activities.recent' ) }} </h1>
-        <div class="org__edit__content">
-          <activities class="org__activities" />
+        <div v-show="selected==1">
+          <div
+            v-show="noRepositories"
+            class="org__add-repo org__edit__content">
+            <p> {{ $t('webapp.orgs.no_repo') }} </p>
+            <router-link to="/new">
+              <b-button
+                v-if="isMember"
+                type="is-primary"> {{ $t('webapp.orgs.add_repo') }} </b-button>
+            </router-link>
+          </div>
+          <div v-show="!repositoryLists.org.empty">
+            <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
+            <paginated-list
+              v-if="repositoryLists.org"
+              :item-component="repositoryItemElem"
+              :per-page="repositoriesLimit"
+              :list="repositoryLists.org"
+              :empty-message="$t('webapp.home.no_repo')"
+              class="org__repositories__cards" />
+
+            <div
+              v-if="!repositoryLists.using.empty"
+              class="org__repositories__separator" />
+          </div>
+
+          <div v-show="!repositoryLists.using.empty">
+            <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
+            <paginated-list
+              v-if="repositoryLists.using"
+              :item-component="repositoryItemElem"
+              :per-page="repositoriesLimit"
+              :list="repositoryLists.using"
+              :empty-message="$t('webapp.home.no_repo')"
+              class="org__repositories__cards" />
+          </div>
         </div>
-      </div>
-      <div
-        v-show="selected==3">
-        <div class="org__edit__content">
-          <user-report-list />
+        <div
+          v-show="selected==2">
+          <h1 class="org__title"> {{ $t('webapp.orgs.activities.recent' ) }} </h1>
+          <div class="org__edit__content">
+            <activities class="org__activities" />
+          </div>
         </div>
-      </div>
-      <div
-        v-if="selected==4">
-        <h1 class="org__title"> {{ $t('webapp.orgs.payment.history') }} </h1>
-        <div class="org__edit__content org__payment__content">
-          <payment-history />
+        <div
+          v-show="selected==3">
+          <div class="org__edit__content">
+            <user-report-list />
+          </div>
         </div>
-        <div class="org__repositories__separator" />
-        <h1 class="org__title"> {{ $t('webapp.orgs.payment.info') }} </h1>
-        <div class="org__edit__content org__payment__content">
-          <payment-form class="org__payment__form" />
-        </div>
-        <h1 class="org__title"> {{ $t('webapp.orgs.payment.coupon_payment') }} </h1>
-        <div class="org__edit__content org__payment__content">
-          <b-field>
-            <b-input
-              v-model="coupon"
-              expanded/>
-            <b-button
-              class="org__payment__button"
-              type="is-primary"
-              @click="submitCoupon"> {{ $t('webapp.orgs.payment.submit') }} </b-button>
-          </b-field>
+        <div
+          v-if="selected==4">
+          <h1 class="org__title"> {{ $t('webapp.orgs.payment.history') }} </h1>
+          <div class="org__edit__content org__payment__content">
+            <payment-history />
+          </div>
+          <div class="org__repositories__separator" />
+          <h1 class="org__title"> {{ $t('webapp.orgs.payment.info') }} </h1>
+          <div class="org__edit__content org__payment__content">
+            <payment-form class="org__payment__form" />
+          </div>
+          <h1 class="org__title"> {{ $t('webapp.orgs.payment.coupon_payment') }} </h1>
+          <div class="org__edit__content org__payment__content">
+            <b-field>
+              <b-input
+                v-model="coupon"
+                expanded/>
+              <b-button
+                class="org__payment__button"
+                type="is-primary"
+                @click="submitCoupon"> {{ $t('webapp.orgs.payment.submit') }} </b-button>
+            </b-field>
+          </div>
         </div>
       </div>
     </div>
@@ -163,6 +186,7 @@ export default {
   data() {
     return {
       org: null,
+      errorMessage: null,
       loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
@@ -192,6 +216,10 @@ export default {
     noRepositories() {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
+    isMember() {
+      if (!this.org || !this.org.authorization) return false;
+      return this.org.authorization.can_write;
+    },
   },
   watch: {
     authenticated() {
@@ -217,6 +245,9 @@ export default {
       try {
         const response = await this.getOrg({ nickname: this.nickname });
         this.org = response.data;
+        this.errorMessage = null;
+      } catch (e) {
+        this.errorMessage = e.response.data.detail || this.$t('webapp.orgs.default_error');
       } finally {
         this.loading = false;
       }
@@ -331,6 +362,10 @@ h1 {
 
         &__activities {
           margin-top: 2.5rem;
+        }
+
+        &__permissions {
+          margin-top: 2.813rem;
         }
 
         &__payment {

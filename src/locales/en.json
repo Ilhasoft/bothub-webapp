@@ -238,6 +238,7 @@
       "title_edit_repository": "Edit Intelligence",
       "manage_your_team": "Manage your team",
       "authorization_requests": "Authorization Requests",
+      "request_available": "You already have a pending request. Wait for an admin to process it",
       "not_can_edit_repository": "You can not edit this intelligence",
       "login": "Sign in to your account to edit this intelligence.",
       "users": "Users:",
@@ -356,6 +357,8 @@
       "org_info": "Organization Information",
       "no_repo": "This org does not yet have any repositories.",
       "add_repo": "Add repository",
+      "from": "From <strong> {locale} </strong>",
+      "default_error": "Could not retrieve organization",
       "activities": {
         "title": "Activities",
         "recent": "Recent Activities"

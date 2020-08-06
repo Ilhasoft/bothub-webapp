@@ -54,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
 .badges-without-styles{
     padding-top: .75rem;
@@ -63,7 +64,7 @@ export default {
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
-    border: 1px solid #CFD5D9;
+    border: 1px solid $color-border;
     border-radius: 6px;
     font-weight: bold;
 

@@ -35,6 +35,7 @@
           </div>
           <authorization-request-notification
             v-else
+            :available="!repository.available_request_authorization"
             :repository-uuid="repository.uuid"
             @onAuthorizationRequested="updateRepository(false)" />
         </div>
@@ -102,6 +103,7 @@ import AuthorizationRequestNotification from '@/components/repository/Authorizat
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
 import Tour from '@/components/Tour';
@@ -116,6 +118,7 @@ export default {
     LoginForm,
     ExampleSearchInput,
     AuthorizationRequestNotification,
+    RequestAuthorizationModal,
     TrainModal,
     TrainResponse,
     Loading,
@@ -185,9 +188,6 @@ export default {
     openTrainingModal() {
       if (!this.authenticated) {
         this.signIn();
-      }
-      if (this.authenticated && this.repository.available_request_authorization) {
-        this.openRequestAuthorizationModal();
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;

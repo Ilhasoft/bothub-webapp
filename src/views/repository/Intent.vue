@@ -30,6 +30,7 @@
         <request-authorization-modal
           v-if="repository"
           :open.sync="requestAuthorizationModalOpen"
+          :available="!repository.available_request_authorization"
           :repository-uuid="repository.uuid"
           @requestDispatched="onAuthorizationRequested()" />
         <a
