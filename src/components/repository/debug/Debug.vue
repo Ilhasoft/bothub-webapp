@@ -175,6 +175,8 @@ export default {
 
 <style lang="scss" scoped>
 
+@import '~@/assets/scss/colors.scss';
+
     tr, td, table, th, .table {
     border: 0;
     padding: 0.35rem;
@@ -215,7 +217,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        border: 1px solid #CFD5D9;
+        border: 1px solid $color-border;
 
         > * {
           margin: 1rem 0;

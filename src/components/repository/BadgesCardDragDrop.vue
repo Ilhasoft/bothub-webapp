@@ -150,7 +150,7 @@ export default {
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
-    border: 1px solid #CFD5D9;
+    border: 1px solid $color-border;
     border-radius: 6px;
 
     &__dark {

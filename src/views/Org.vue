@@ -47,13 +47,13 @@
             <org-set-authorization-role-form
               ref="setAuthorizationRoleForm"
               :org-nickname="nickname"
+              class="org__permissions"
               @roleSetted="onRoleSetted()" />
             <org-authorizations-list
               ref="authorizationsList"
               :org-nickname="nickname" />
           </div>
         </div>
-
         <div
           v-else-if="org"
           class="org__edit__content">
@@ -180,6 +180,7 @@ export default {
   data() {
     return {
       org: null,
+      notFound: false,
       loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
@@ -238,6 +239,9 @@ export default {
       try {
         const response = await this.getOrg({ nickname: this.nickname });
         this.org = response.data;
+      } catch (e) {
+        console.log(e.response);
+        this.notFound = true;
       } finally {
         this.loading = false;
       }
@@ -357,6 +361,10 @@ h1 {
 
         &__activities {
           margin-top: 2.5rem;
+        }
+
+        &__permissions {
+          margin-top: 2.813rem;
         }
 
         &__payment {
