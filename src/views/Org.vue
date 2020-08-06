@@ -74,7 +74,9 @@
           class="org__add-repo org__edit__content">
           <p> {{ $t('webapp.orgs.no_repo') }} </p>
           <router-link to="/new">
-            <b-button type="is-primary"> {{ $t('webapp.orgs.add_repo') }} </b-button>
+            <b-button
+              v-if="isMember"
+              type="is-primary"> {{ $t('webapp.orgs.add_repo') }} </b-button>
           </router-link>
         </div>
         <div v-show="!repositoryLists.org.empty">
@@ -208,7 +210,8 @@ export default {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
     isMember() {
-      return false;
+      if (!this.org || !this.org.authorization) return false;
+      return this.org.authorization.can_write;
     },
   },
   watch: {
