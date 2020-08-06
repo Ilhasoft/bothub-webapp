@@ -21,7 +21,7 @@
     "@sentry/integrations": "^5.15.5",
     "axios": "^0.18.0",
     "bh": "./bh/",
-    "buefy": "^0.8.12",
+    "buefy": "^0.8.20",
     "chart.js": "^2.8.0",
     "deep-equal": "^1.0.1",
     "github-markdown-css": "^3.0.1",
@@ -36,6 +36,8 @@
     "vue-mc-drf-model": "https://github.com/Ilhasoft/vue-mc-drf-model",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.1",
+    "vue-stripe-elements-plus": "^0.3.2",
+    "vue-tour": "^1.4.0",
     "vuedraggable": "^2.23.2",
     "vuex": "^3.0.1"
   },

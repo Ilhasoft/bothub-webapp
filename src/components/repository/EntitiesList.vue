@@ -4,7 +4,7 @@
       <div class="entity-list__content__descriptions">
         <h1> <strong>{{ $t('webapp.entity.title') }}</strong> </h1>
         <b-tag
-          v-if="!EditSentences"
+          v-if="!editSentences"
           :class="[
             'entity-list__content__descriptions__tag',
             getEntityClass(),
@@ -20,7 +20,7 @@
       </div>
       <div>
         <b-button
-          v-if="!EditSentences"
+          v-if="!editSentences"
           ref="editEntityEvent"
           class="entity-list__content__buttonEdit"
           @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
@@ -60,7 +60,7 @@ export default {
   },
   data() {
     return {
-      EditSentences: false,
+      editSentences: false,
       entityId: this.$route.params.entity_id,
       allEntities: [],
       errors: {},
@@ -119,9 +119,7 @@ export default {
       this.entitySelected = entity.value;
     },
     editOptionsEntity() {
-      this.EditSentences = !this.EditSentences;
-      this.$emit('ableEditEntities', this.EditSentences);
-      this.$emit('setAllEntities', this.allEntities);
+      this.editSentences = !this.editSentences;
     },
     async saveEdition() {
       try {

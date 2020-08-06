@@ -1,7 +1,8 @@
 <template>
   <div class="base-example-evaluate bh-grid bh-grid--column">
     <new-evaluate-example
-      @created="onEvaluateExampleCreated()"/>
+      @created="onEvaluateExampleCreated()"
+      @eventStep="dispatchNextEvent()"/>
     <hr class="base-example-evaluate__divider">
     <h2 class="base-example-evaluate__title">{{ $t('webapp.trainings.sentences_list') }}</h2>
     <filter-evaluate-example
@@ -71,6 +72,9 @@ export default {
       const formatedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formatedQueryString);
       this.query.language = this.filterByLanguage;
+    },
+    dispatchNextEvent() {
+      this.$emit('eventStep');
     },
     onEvaluateExampleCreated() {
       this.update = !this.update;

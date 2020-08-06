@@ -5,20 +5,20 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <form class="columns wrapper is-vcentered is-variable is-2">
     <div class="column is-three-fifths">
       <b-field-stub addons="true">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal">
+        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" id="tour-training-step-1" is-previous-disabled="true" is-step-blocked="true" formatters="textFormatters" placeholder="some specific text" size="normal">
           <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append" slot="append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </b-field-stub>
     </div>
     <div class="column">
-      <b-field-stub addons="true">
-        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
+      <b-field-stub addons="true" id="tour-training-step-4" is-previous-disabled="true" is-step-blocked="true">
+        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" placeholder="some specific text"></b-autocomplete-stub>
       </b-field-stub>
     </div>
     <div class="column is-narrow">
       <b-field-stub addons="true">
         <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" size="is-medium" is-active="true">
-          <b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true">some specific text</b-button-stub>
+          <b-button-stub type="is-primary" nativetype="submit" tag="button" id="tour-training-step-5" is-previous-disabled="true" is-next-disabled="true" disabled="true" is-step-blocked="true">some specific text</b-button-stub>
         </b-tooltip-stub>
       </b-field-stub>
     </div>

@@ -2,7 +2,6 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-
     <div
       v-if="authenticated"
       class="repository-log">
@@ -72,10 +71,14 @@
         <repository-log-list
           :per-page="perPage"
           :query="query"
-          :editable="repository.authorization.can_contribute" />
+          :editable="repository.authorization.can_contribute"
+          @dispatchNext="dispatchClick()"
+          @dispatchSkip="dispatchClickSkip()"
+          @finishedTutorial="dispatchClickFinish()"/>
       </div>
       <authorization-request-notification
-        v-else
+        v-else-if="repository"
+        :available="!repository.available_request_authorization"
         :repository-uuid="repositoryUUID"
         @onAuthorizationRequested="updateRepository(false)" />
     </div>
@@ -90,7 +93,13 @@
       <login-form hide-forgot-password />
     </div>
 
-
+    <tour
+      v-if="activeTutorial === 'inbox'"
+      :step-count="5"
+      :next-event="eventClick"
+      :skip-event="eventSkip"
+      :finish-event="eventClickFinish"
+      name="inbox" />
   </repository-view-base>
 
 </template>
@@ -104,6 +113,9 @@ import LoginForm from '@/components/auth/LoginForm';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
 import RepositoryBase from './Base';
+import Tour from '@/components/Tour';
+
+import IntentModal from '@/components/repository/IntentModal';
 
 export default {
   name: 'RepositoryLog',
@@ -112,6 +124,8 @@ export default {
     RepositoryLogList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
+    IntentModal,
   },
   extends: RepositoryBase,
   data() {
@@ -128,11 +142,15 @@ export default {
       filterSearch: '',
       versionsList: null,
       query: {},
+      eventClick: false,
+      eventSkip: false,
+      eventClickFinish: false,
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
+      'activeTutorial',
     ]),
     languages() {
       return Object.keys(this.repository.evaluate_languages_count)
@@ -185,6 +203,15 @@ export default {
       }
 
       this.query = query;
+    },
+    dispatchClickSkip() {
+      this.eventSkip = !this.eventSkip;
+    },
+    dispatchClickFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
     },
   },
 };

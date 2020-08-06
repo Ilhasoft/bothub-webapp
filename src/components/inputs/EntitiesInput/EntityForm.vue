@@ -9,8 +9,9 @@
             :class="entityClass"
             class="is-rounded">{{ selectedText }}</span> is</label>
           <bh-autocomplete
+            id="tour-training-step-3"
             ref="entityInputField"
-            :value="entity"
+            :is-previous-disabled="true"
             :data="availableEntities"
             :formatters="entityFormatters"
             @input="handleChange"
@@ -73,6 +74,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { formatters } from '@/utils';
 
 export default {
@@ -82,10 +84,6 @@ export default {
   },
   props: {
     entityClass: {
-      type: String,
-      required: true,
-    },
-    entity: {
       type: String,
       required: true,
     },
@@ -128,6 +126,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     entityFormatters() {
       return [
         formatters.bothubItemKey(),
@@ -147,6 +148,8 @@ export default {
       this.$emit('input', e);
     },
     removeEntity() {
+      if (this.activeTutorial === 'training') return;
+
       this.$emit('removeEntity');
     },
     handleLabelChanged(newLabel) {

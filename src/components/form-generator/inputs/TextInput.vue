@@ -1,6 +1,7 @@
 <template>
   <b-input
     :maxlength="max_length"
+    :placeholder="labelPlaceholder"
     v-model="value"
     type="textarea"
     @input="update()" />
@@ -14,6 +15,10 @@ export default {
       type: Number,
       default: null,
     },
+    labelPlaceholder: {
+      type: String,
+      default: '',
+    },
     initialData: {
       type: String,
       default: '',
@@ -23,6 +28,12 @@ export default {
     return {
       value: this.initialData,
     };
+  },
+  watch: {
+    initialData() {
+      if (this.value && this.value.length > 0) return;
+      this.value = this.initialData;
+    },
   },
   mounted() {
     this.update();

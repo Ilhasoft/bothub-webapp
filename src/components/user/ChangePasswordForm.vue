@@ -9,10 +9,11 @@
       class="field" />
     <div class="field">
       <div class="control has-text-centered">
-        <button
+        <b-button
           :disabled="submitting"
-          type="submit"
-          class="button is-primary">{{ $t('webapp.my_profile.edit') }}</button>
+          native-type="submit"
+          type="is-primary"
+          class="submit">{{ $t('webapp.my_profile.edit') }}</b-button>
       </div>
     </div>
   </form>
@@ -68,3 +69,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .submit {
+    margin-top: 2rem;
+  }
+</style>

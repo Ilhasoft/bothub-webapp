@@ -18,8 +18,8 @@ export default class Page {
     try {
       const response = await this.fetchItems(page);
       this.loading = false;
-      this.total = response.data.count;
-      this.items = response.data.results;
+      this.total = response.data.count || 0;
+      this.items = response.data.results || [];
       return this.items;
     } catch (e) {
       this.loading = false;

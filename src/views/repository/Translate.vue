@@ -3,14 +3,14 @@
     :repository="repository"
     :error-code="errorCode">
 
-    <div class="translate-description">
-      <h1>{{ $t('webapp.translate.title_translate') }}</h1>
-      <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
-    </div>
     <div v-if="repository">
       <div v-if="authenticated">
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
+          <div class="translate-description">
+            <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+            <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+          </div>
 
           <div class="repository-translate">
             <div class="repository-translate__field">
@@ -18,7 +18,11 @@
                 <b-field
                   :label="$t('webapp.translate.translate_from')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select v-model="translate.from" />
+                  <language-select
+                    id="tour-translate-step-1"
+                    :is-previous-disabled="true"
+                    :is-step-blocked="translate.from === null"
+                    v-model="translate.from" />
                 </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
@@ -34,13 +38,18 @@
                   :label="$t('webapp.translate.translate_to')"
                   custom-class="repository-translate__field__item__label">
                   <language-select
+                    id="tour-translate-step-2"
                     v-model="translate.to"
-                    :exclude="[translate.from]" />
+                    :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases"
+                    :exclude="[translate.from]"/>
                 </b-field>
               </div>
             </div>
           </div>
-          <div class="repository-translate__translateButtons">
+          <div
+            id="tour-translate-step-6"
+            :is-previous-disabled="true"
+            class="repository-translate__translateButtons">
 
             <b-button
               :class="{'is-primary':!!translate.from && !!translate.to}"
@@ -151,13 +160,17 @@
                 :query="query"
                 :from="translate.from"
                 :to="translate.to"
-                @translated="examplesTranslated()" />
+                @translated="examplesTranslated()"
+                @eventStep="dispatchClick()"
+                @isLoadingContent="loadingList = $event"
+                @listPhrase="checkPhraseList($event)"/>
             </div>
 
           </div>
         </div>
         <authorization-request-notification
-          v-else
+          v-else-if="repository"
+          :available="!repository.available_request_authorization"
           :repository-uuid="repository.uuid"
           @onAuthorizationRequested="updateRepository(false)" />
       </div>
@@ -171,11 +184,17 @@
         <login-form hide-forgot-password />
       </div>
     </div>
+    <tour
+      v-if="activeTutorial === 'translate'"
+      :step-count="7"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      name="translate" />
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelect from '@/components/inputs/LanguageSelect';
 import TranslateList from '@/components/translate/TranslateList';
@@ -185,6 +204,7 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryTranslate',
@@ -196,6 +216,7 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -216,6 +237,10 @@ export default {
       querySchema: {},
       errors: '',
       errorMessage: '',
+      eventClick: false,
+      eventClickFinish: false,
+      loadingList: true,
+      hasPhrases: false,
     };
   },
 
@@ -223,6 +248,9 @@ export default {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
     }),
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     checkSwitch() {
       if (this.isSwitched === true) {
         return this.$t('webapp.translate.export_switch_yes');
@@ -266,7 +294,6 @@ export default {
       this.waitDownloadFile = !this.waitDownloadFile;
       return false;
     },
-
     async importTranslation() {
       this.waitDownloadFile = !this.waitDownloadFile;
       const formData = new FormData();
@@ -287,6 +314,12 @@ export default {
       this.translationFile = null;
       return false;
     },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
     forceFileDownload(response) {
       const blob = new Blob([response.data], { type: response.headers['content-type'] });
       const result = document.createElement('a');
@@ -296,11 +329,17 @@ export default {
     },
     checkLanguageToImport() {
       if (this.translate.from && this.translate.to) {
+        if (this.activeTutorial === 'translate') {
+          return;
+        }
         this.isImportFileVisible = true;
       }
     },
     checkLanguageToExport() {
       if (this.translate.from && this.translate.to) {
+        if (this.activeTutorial === 'translate') {
+          return;
+        }
         this.isExportFileVisible = true;
       }
     },
@@ -309,6 +348,16 @@ export default {
     },
     examplesTranslated() {
       this.translate.update = !this.translate.update;
+    },
+    async checkPhraseList(list) {
+      if (this.activeTutorial === 'translate') {
+        const checkList = await list.getAllItems();
+        if (checkList.length === 0) {
+          this.hasPhrases = false;
+          return;
+        }
+        this.hasPhrases = true;
+      }
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -465,15 +514,18 @@ export default {
 
   &__translateButtons{
     display: flex;
-    width: 100%;
+    width: 385px;
     margin: 1rem 0.3rem;
-    justify-content: flex-start
+    margin-left: 0.8rem;
+    border-radius: 5px;
+    justify-content: space-between;
   }
   &__unableButton{
     background-color:$color-grey;
     color: $color-white;
     border: 2px solid #D5D5D5;
     box-shadow: 0 0.1875rem 0.375rem rgba(200, 200, 200, 0.5);
+    margin:0;
 
      &:hover{
       color: $color-white;

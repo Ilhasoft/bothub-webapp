@@ -3,18 +3,20 @@
     ref="taginput"
     v-model="newValue"
     :data="data"
+    :placeholder="$t(`webapp.settings.${ noOrgs ? 'search_user' : 'search_user_org'}`)"
     autocomplete
     field="name"
-    placeholder="Search user"
     @typing="updateData($event)">
     <template slot-scope="props">
       <div class="media">
-        <div class="media-left"><user-avatar :profile="props.option" /></div>
+        <div class="media-left"><user-avatar
+          :is-organization="props.option.is_organization"
+          :profile="props.option" /></div>
         <div class="media-content">
           <div>{{ props.option.name }}</div>
           <div><small>
             <span>{{ props.option.nickname }}</span> /
-            <span>{{ props.option.locale || 'No locale' }}</span>
+            <span>{{ props.option.locale || $t('webapp.settings.no_locale') }}</span>
           </small></div>
         </div>
       </div>
@@ -43,6 +45,10 @@ export default {
     debounceTime: {
       type: Number,
       default: 750,
+    },
+    noOrgs: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -89,8 +95,9 @@ export default {
           });
           const { data } = response;
           const results = data.filter((user) => {
-            const existsOnNewValue = this.newValue.reduce((previus, u) => {
-              if (previus) return previus;
+            if (this.noOrgs && user.is_organization) return false;
+            const existsOnNewValue = this.newValue.reduce((previous, u) => {
+              if (previous) return previous;
               return user.nickname === u.nickname;
             }, false);
             return !existsOnNewValue;

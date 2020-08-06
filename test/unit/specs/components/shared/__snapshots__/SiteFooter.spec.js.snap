@@ -20,7 +20,7 @@ exports[`SiteFooter.vue renders correctly 1`] = `
               <b-icon-stub icon="facebook"></b-icon-stub>
             </a></li>
           <li class="footer-sociallist-item"><a href="https://github.com/Ilhasoft/bothub/" target="_blank">
-              <b-icon-stub icon="github-circle"></b-icon-stub>
+              <b-icon-stub icon="github"></b-icon-stub>
             </a></li>
         </ul>
       </div>

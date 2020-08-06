@@ -26,7 +26,6 @@ exports[`Layout.vue loading renders correctly 1`] = `
   </div>
   <div class="layout__content"></div>
   <site-footer-stub></site-footer-stub>
-  <beginner-tutorial-stub></beginner-tutorial-stub>
 </div>
 `;
 
@@ -54,6 +53,5 @@ exports[`Layout.vue renders correctly 1`] = `
   </div>
   <div class="layout__content"></div>
   <site-footer-stub></site-footer-stub>
-  <beginner-tutorial-stub></beginner-tutorial-stub>
 </div>
 `;

@@ -9,22 +9,14 @@
         <div class="repository-home__title">
           {{ $t('webapp.home.description') }}
         </div>
-        <div class="repository-home__header">
-          <div class="repository-home__header__wrapper">
-            <span
-              v-for="language in repository.available_languages"
-              :key="language"
-              class="repository-home__header__wrapper__badge"
-            >
-              <bh-badge
-                :transparent="language !== repository.language"
-                size="small"
-                color="primary"
-              >
-                {{ language }}
-              </bh-badge>
-            </span>
-          </div>
+        <div >
+          <b-tag
+            v-for="(category, index) in getAllCategories"
+            :key="index"
+            class="repository-home__header__tag"
+            rounded>
+            {{ category }}
+          </b-tag>
         </div>
         <div>
           <vue-markdown
@@ -48,20 +40,38 @@
         </div>
       </div>
 
+      <summary-information/>
+
       <div
         v-if="hasIntents"
-        class="repository-home__intents-list"
-      >
-        <div class="repository-home__title">
-          {{ $t('webapp.home.intents_list') }}
+        class="repository-home__intents-list">
+        <div
+          id="intent-container"
+          class="repository-home__title">
+          <p>
+            {{ $t('webapp.home.intents_list') }}
+          </p>
+          <div>
+            <b-tooltip
+              :label="$t('webapp.summary.intent_question')"
+              class="tooltipStyle"
+              multilined
+              type="is-dark"
+              position="is-right">
+              <b-icon
+                custom-size="mdi-18px"
+                type="is-dark"
+                icon="help-circle"
+              />
+            </b-tooltip>
+          </div>
         </div>
-        <badges-card
-          :list="repository.intents_list"
-          :title="formattedEntityTitle()"
-        />
+
+        <badges-intents :list="repository.intents"/>
       </div>
 
       <entity-edit
+        id="entity-container"
         :groups="repository.groups || []"
         :can-edit="repository.authorization.can_contribute"
         :ungrouped="unlabeled"
@@ -77,19 +87,20 @@
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BadgesCard from '@/components/repository/BadgesCard';
+import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
 import RepositoryBase from './Base';
 import EntityEdit from '@/components/repository/EntityEdit';
-
+import SummaryInformation from '@/components/repository/SummaryInformation';
 
 export default {
   name: 'RepositoryHome',
   components: {
     RepositoryViewBase,
-    BadgesCard,
+    BadgesIntents,
     VueMarkdown,
     EntityEdit,
+    SummaryInformation,
   },
   extends: RepositoryBase,
   data() {
@@ -124,6 +135,10 @@ export default {
     repositoryIcon() {
       return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
     },
+    getAllCategories() {
+      const categories = this.repository.categories_list.map(category => category.name);
+      return categories;
+    },
   },
   watch: {
     edit() {
@@ -131,9 +146,6 @@ export default {
     },
   },
   methods: {
-    formattedEntityTitle() {
-      return this.$t('webapp.home.bot_has_x_intents', { intents: this.repository.intents_list.length });
-    },
     updatedGroup({ groupId, entities }) {
       const groupIndex = this.getGroupIndex(groupId);
       if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
@@ -179,51 +191,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 @import 'github-markdown-css/github-markdown.css';
-
 .repository-home {
   &__title {
     font-size: 1.75rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+
+    div{
+      margin: 0 0 0.2rem 0.2rem;
+    }
   }
 
   &__header {
     display: flex;
-    margin-top: 1rem;
     margin-bottom: 1rem;
 
-    &__icon-badge {
-      $size: 4rem;
-
-      position: relative;
-      display: block;
-      width: $size;
-      height: $size;
-      overflow: hidden;
-      background-color: $color-primary-dark;
-      border-radius: 50%;
-
-      &__icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        color: white;
-        transform: translate(-50%, -50%);
-      }
+    &__tag {
+      margin: 0.8rem 0.5rem 2.188rem 0;
+      padding: 0 2rem;
+      font-size: 15px;
     }
 
-    &__wrapper {
-
-      &__badge {
-        height: 1.5rem;
-        margin: .4rem .5rem 0 0;
-        font-weight: bold;
-        line-height: calc(1.5rem - 4px);
-        border-width: 1px;
-      }
-    }
   }
 
   &__description {
@@ -237,6 +229,7 @@ export default {
   }
 
   &__intents-list {
+    margin-top:2rem;
     padding: 1rem .5rem;
     &__header {
       display: flex;
@@ -246,7 +239,11 @@ export default {
     }
   }
 }
-
+.tooltipStyle::after {
+  font-size: 12px;
+  line-height: 13px;
+  padding: 1rem 0.5rem;
+}
 .markdown-body {
   a {
     color: $color-primary;

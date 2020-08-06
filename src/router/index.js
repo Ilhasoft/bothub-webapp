@@ -7,7 +7,7 @@ import SignIn from '@/views/auth/SignIn';
 import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
-import MyProfile from '@/components/MyProfile';
+import Profile from '@/views/Profile';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
@@ -21,9 +21,14 @@ import RepositoryResult from '@/views/repository/Result';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
 import Entity from '@/views/repository/Entity';
+import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
+import PaymentOptions from '@/views/payment/PaymentOptions';
+import PaymentInfo from '@/views/payment/PaymentInfo';
+import Orgs from '@/views/Orgs';
+import Org from '@/views/Org';
 import store from '../store';
 
 Vue.use(Router);
@@ -99,18 +104,6 @@ export default new Router({
       component: ResetPassword,
     },
     {
-      path: '/myprofile/',
-      name: 'myProfile',
-      component: MyProfile,
-      beforeEnter: async (to, from, next) => {
-        if (!store.getters.authenticated) {
-          next('/signin');
-        } else {
-          next();
-        }
-      },
-    },
-    {
       path: '/dashboard',
       name: 'dashboard',
       component: DashboardLayout,
@@ -166,6 +159,11 @@ export default new Router({
           component: Entity,
         },
         {
+          path: ':ownerNickname/:slug/intentlist/:intent',
+          name: 'repository-intentlist',
+          component: Intent,
+        },
+        {
           path: ':ownerNickname/:slug/result/:resultId/',
           name: 'repository-result',
           component: RepositoryResult,
@@ -176,6 +174,105 @@ export default new Router({
             name: 'repository-versions',
             component: RepositoryVersions,
           }] : []),
+      ],
+    },
+    {
+      path: '/profile/',
+      name: 'profile',
+      component: Profile,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/org/:org_nickname/',
+      name: 'org',
+      component: Org,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '/orgs',
+      name: 'orgs',
+      component: Orgs,
+      beforeEnter: async (to, from, next) => {
+        if (!store.getters.authenticated) {
+          next('/signin');
+        } else {
+          next();
+        }
+      },
+    },
+    ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
+      ? [{
+        path: '/payment-options',
+        name: 'payment-options',
+        component: PaymentOptions,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      },
+      {
+        path: '/payment-info',
+        name: 'payment-info',
+        component: PaymentInfo,
+        beforeEnter: async (to, from, next) => {
+          if (!store.getters.authenticated) {
+            next('/signin');
+          } else {
+            next();
+          }
+        },
+      },
+      ] : []),
+    {
+      path: '/tutorial',
+      name: 'Tutorial',
+      component: DashboardLayout,
+      children: [
+        {
+          path: 'training/',
+          name: 'tutorial-training',
+          component: RepositoryTrainings,
+        },
+        {
+          path: 'quick-test/',
+          name: 'tutorial-quick-test',
+          component: RepositoryHome,
+        },
+        {
+          path: 'evaluate/',
+          name: 'tutorial-evaluate',
+          component: RepositoryEvaluate,
+        },
+        {
+          path: 'inbox/',
+          name: 'tutorial-inbox',
+          component: RepositoryLog,
+        },
+        {
+          path: 'translate/',
+          name: 'tutorial-translate',
+          component: RepositoryTranslate,
+        },
+        {
+          path: 'integrate/',
+          name: 'tutorial-integrate',
+          component: RepositoryIntegration,
+        },
       ],
     },
     {

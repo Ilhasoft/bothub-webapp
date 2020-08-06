@@ -54,6 +54,7 @@
           class="quick-test-text__button"
           icon-left="chart-pie"
           @click="debug()"> {{ $t('webapp.quick_test.debug') }} </b-button>
+
         <b-button
           class="quick-test-text__button"
           icon-left="file-document-outline"
@@ -192,7 +193,6 @@ export default {
 <style lang="scss" scoped>
 .quick-test-text {
     margin: 0 0 1.5rem 0;
-
     &__selected {
       text-decoration: underline;
       text-decoration-color: red;

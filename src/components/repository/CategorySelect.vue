@@ -50,8 +50,9 @@ export default {
     async getCategories() {
       this.loading = true;
       try {
-        const response = await this.getAllCategories();
-        this.list = response.data;
+        const { data } = await this.getAllCategories();
+        const sortedData = data.sort((previous, next) => previous.id - next.id);
+        this.list = sortedData;
       } catch (error) {
         this.$buefy.toast.open({
           message: error,

@@ -33,7 +33,8 @@
             </div>
           </div>
           <authorization-request-notification
-            v-else
+            v-else-if="repository"
+            :available="!repository.available_request_authorization"
             :repository-uuid="repository.uuid"
             @onAuthorizationRequested="updateRepository(false)" />
         </div>
@@ -56,7 +57,6 @@
 <script>
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import EditProfileForm from '@/components/user/EditProfileForm';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
@@ -70,7 +70,6 @@ export default {
   name: 'RepositorySettings',
   components: {
     RepositoryViewBase,
-    EditProfileForm,
     EditRepositoryForm,
     SetAuthorizationRoleForm,
     AuthorizationsList,

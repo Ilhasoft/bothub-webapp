@@ -4,7 +4,11 @@
     :label="helpText"
     multilined
     class="blocked">
+    <p
+      v-show="!editable"
+      class="has-text-centered"><small> {{ roleLabel }} </small></p>
     <b-select
+      v-show="editable"
       v-model="role"
       v-bind="$attrs"
       expanded>
@@ -12,7 +16,7 @@
         v-for="(label, value) in roles"
         :value="value"
         :key="value">
-        {{ label }}
+        {{ $t(`webapp.roles.${label.toLowerCase()}`) }}
       </option>
     </b-select>
   </b-tooltip>
@@ -20,15 +24,8 @@
 
 <script>
 import {
-  ROLES, ROLE_USER, ROLE_CONTRIBUTOR, ROLE_ADMIN, ROLE_TRANSLATE,
+  ROLES,
 } from '@/utils';
-
-const helpTextDict = {
-  [ROLE_USER]: 'Can read and analyze',
-  [ROLE_CONTRIBUTOR]: 'Can read, analyze and contribute with examples and translations',
-  [ROLE_ADMIN]: 'Can read, analyze, contribute and write repository config',
-  [ROLE_TRANSLATE]: 'Can read, analyze and create translations for intelligence',
-};
 
 export default {
   name: 'RoleSelect',
@@ -36,6 +33,10 @@ export default {
     value: {
       type: [Number, String],
       default: null,
+    },
+    editable: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -50,7 +51,14 @@ export default {
         return null;
       }
 
-      return helpTextDict[this.role];
+      return this.$t(`webapp.roles.${this.roles[this.role].toLowerCase()}_description`);
+    },
+    roleLabel() {
+      if (this.role === null) {
+        return null;
+      }
+
+      return this.$t(`webapp.roles.${this.roles[this.role].toLowerCase()}`);
     },
   },
   watch: {

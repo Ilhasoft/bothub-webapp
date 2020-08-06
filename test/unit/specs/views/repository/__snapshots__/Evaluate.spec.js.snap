@@ -3,5 +3,6 @@
 exports[`TestView.vue renders correctly 1`] = `
 <repository-view-base-stub>
   <!---->
+  <!---->
 </repository-view-base-stub>
 `;

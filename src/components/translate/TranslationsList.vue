@@ -5,7 +5,7 @@
       :item-component="translationItemElem"
       :list="translationsList"
       :repository="repository"
-      @itemDeleted="examplesDeleted()" />
+      @itemDeleted="examplesDeleted()"/>
     <p
       v-if="translationsList && translationsList.empty"
       class="no-examples">{{ $t('webapp.translate.no_translation') }}</p>
