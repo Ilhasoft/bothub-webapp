@@ -104,6 +104,7 @@ export default {
   },
   methods: {
     async fetch() {
+      if (!(this.list && this.list.updateItems)) return false;
       try {
         await this.list.updateItems(this.page);
         this.$emit('updated');

@@ -11,7 +11,7 @@
           :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
             <component
-              :is="clickable ? 'bh-icon-button' : 'bh-icon'"
+              :is="clickable || true ? 'bh-icon-button' : 'bh-icon'"
               :value="repositoryIcon"
               size="extra-large"
               class="repository-card__big-badge__icon" />
@@ -116,7 +116,9 @@ export default {
       return [];
     },
     repositoryIcon() {
-      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
+      return ((this.$attrs.categories[0] && this.$attrs.categories[0].icon)
+      || (this.$attrs.categories_list[0] && this.$attrs.categories_list[0].icon))
+      || 'botinho';
     },
   },
 };
