@@ -1,8 +1,8 @@
 <template>
   <layout :show-footer="false">
     <h1
-      v-if="notFound"
-      class="has-text-centered"> 404 </h1>
+      v-if="errorMessage"
+      class="has-text-centered"> {{ errorMessage }} </h1>
     <div v-else>
       <div
         class="org__header">
@@ -186,7 +186,7 @@ export default {
   data() {
     return {
       org: null,
-      notFound: false,
+      errorMessage: null,
       loading: false,
       selected: 0,
       repositoryItemElem: RepositoryCard,
@@ -245,8 +245,9 @@ export default {
       try {
         const response = await this.getOrg({ nickname: this.nickname });
         this.org = response.data;
+        this.errorMessage = null;
       } catch (e) {
-        this.notFound = e.response.status === 404;
+        this.errorMessage = e.response.data.detail || this.$t('webapp.orgs.default_error');
       } finally {
         this.loading = false;
       }
@@ -279,11 +280,6 @@ h1 {
       }
 
     .org {
-
-      &__notification {
-        max-width: 56.25rem;
-        margin: 0 auto;
-      }
 
         &__title {
             max-width: 56.25rem;

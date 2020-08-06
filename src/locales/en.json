@@ -358,6 +358,7 @@
       "no_repo": "This org does not yet have any repositories.",
       "add_repo": "Add repository",
       "from": "From <strong> {locale} </strong>",
+      "default_error": "Could not retrieve organization",
       "activities": {
         "title": "Activities",
         "recent": "Recent Activities"
