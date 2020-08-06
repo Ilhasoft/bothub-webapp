@@ -359,6 +359,8 @@
       "org_info": "Informações da organização",
       "no_repo": "Esta organização ainda não possui inteligências.",
       "add_repo": "Criar inteligência",
+      "from": "De <strong> {locale} </strong>",
+      "default_error": "Erro ao carregar organização",
       "activities": {
         "title": "Atividades",
         "recent": "Atividades Recentes"

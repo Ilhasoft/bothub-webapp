@@ -54,7 +54,7 @@ export default {
   computed: {
     filteredSchema() {
       if (!this.formSchema) return null;
-      const { description, ...schema } = this.formSchema;
+      const { nickname, description, ...schema } = this.formSchema;
       description.type = 'text';
       return { ...schema, description };
     },
