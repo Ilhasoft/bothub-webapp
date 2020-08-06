@@ -7,7 +7,7 @@
       <div
         class="repository-card__big-badge-wrapper">
         <component
-          :is="clickable ? 'router-link' : 'span'"
+          :is="clickable hh ? 'router-link' : 'span'"
           :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
             <component
