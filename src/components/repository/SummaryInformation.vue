@@ -1,7 +1,7 @@
 <template>
   <div class="summary-information">
     <div class="summary-information__info">
-      <h2>{{ $t('webapp.summary.general_informations') }}</h2>
+      <h2>{{ $t('webapp.summary.general_information') }}</h2>
       <div class="summary-information__info__container">
         <div class="summary-information__info__container__training">
           <div @click="navigateToSentences">
