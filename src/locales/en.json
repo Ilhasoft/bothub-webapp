@@ -357,6 +357,7 @@
       "org_info": "Organization Information",
       "no_repo": "This org does not yet have any repositories.",
       "add_repo": "Add repository",
+      "no_access": "You cannot edit this organization",
       "activities": {
         "title": "Activities",
         "recent": "Recent Activities"

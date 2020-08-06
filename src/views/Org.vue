@@ -29,28 +29,36 @@
       class="org__content">
       <div
         v-show="selected==0">
-        <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
-        <div class="org__edit__content">
-          <edit-org-form
-            :nickname="nickname"
-            :initial-data="org"
-            class="org__edit"
-            @edited="loadOrg" />
+        <div v-if="isMember">
+          <h1 class="org__title"> {{ $t('webapp.orgs.org_info' ) }} </h1>
+          <div class="org__edit__content">
+            <edit-org-form
+              :nickname="nickname"
+              :initial-data="org"
+              class="org__edit"
+              @edited="loadOrg" />
 
-          <div class="org__repositories__separator" />
+            <div class="org__repositories__separator" />
+          </div>
+
+          <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
+          <div class="org__edit__content">
+            <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
+            <org-set-authorization-role-form
+              ref="setAuthorizationRoleForm"
+              :org-nickname="nickname"
+              @roleSetted="onRoleSetted()" />
+            <org-authorizations-list
+              ref="authorizationsList"
+              :org-nickname="nickname" />
+          </div>
         </div>
 
-        <h1 class="org__title"> {{ $t('webapp.orgs.manage_contributors') }} </h1>
-        <div class="org__edit__content">
-          <p> {{ $t('webapp.orgs.manage_subtitle' ) }} </p>
-          <org-set-authorization-role-form
-            ref="setAuthorizationRoleForm"
-            :org-nickname="nickname"
-            @roleSetted="onRoleSetted()" />
-          <org-authorizations-list
-            ref="authorizationsList"
-            :org-nickname="nickname" />
-        </div>
+        <b-notification
+          v-else
+          :closable="false"
+          class="org__notification"
+          type="is-warning"> {{ $t('webapp.orgs.no_access') }} </b-notification>
 
       </div>
       <div v-show="selected==1">
@@ -192,6 +200,9 @@ export default {
     noRepositories() {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
+    isMember() {
+      return true;
+    },
   },
   watch: {
     authenticated() {
@@ -249,6 +260,11 @@ h1 {
       }
 
     .org {
+
+      &__notification {
+        max-width: 56.25rem;
+        margin: 0 auto;
+      }
 
         &__title {
             max-width: 56.25rem;
