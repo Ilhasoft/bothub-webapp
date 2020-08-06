@@ -215,11 +215,11 @@
       "cancel": "Cancelar"
     },
     "summary": {
-      "training_informations": "Informações do Treinamento",
+      "training_information": "Informações do Treinamento",
       "information_sentences": "Frases | Frase | Frases",
       "information_intents": "Intenções | Intenção | Intenções",
       "information_entities": "Entidades | Entidade | Entidades",
-      "general_informations": "Informações Gerais",
+      "general_information": "Informações Gerais",
       "information_language": "Idiomas | Idioma | Idiomas",
       "information_contributors": "Contribuidores | Contribuidor | Contribuidores",
       "information_integrations": "Integrações | Integração | Integrações",
