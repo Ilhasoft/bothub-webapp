@@ -110,7 +110,9 @@
     },
     "quick_test": {
       "quick_test": "TESTE RÁPIDO",
-      "error_quick_test": "Ocorreu um erro, não podemos analisar o seu texto",
+      "internet_off_quick_test": "Você está offline, verifique sua conexão",
+      "without_train_quick_test": "Você ainda não adicionou frases ao treinamento, adicione para testar.",
+      "error_quick_test": "Algo de errado aconteceu, tente novamente mais tarde",
       "intent": "Intenção",
       "debug": "Debug",
       "raw": "Raw",

@@ -110,7 +110,9 @@
     },
     "quick_test": {
       "quick_test": "QUICK TEST",
-      "error_quick_test": "An error ocurred, we couldn't analyze your text",
+      "internet_off_quick_test": "You are offline, check your connection",
+      "without_train_quick_test": "You haven't added phrases to the training yet, add to test.",
+      "error_quick_test": "Something went wrong, try again later",
       "intent": "Intent",
       "debug": "Debug",
       "raw": "Raw",
