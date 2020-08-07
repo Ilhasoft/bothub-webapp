@@ -214,7 +214,7 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px rgba(219, 217, 217, 0.9);
+  background: #e9e9ec;
   border-radius: 10px;
 }
 
