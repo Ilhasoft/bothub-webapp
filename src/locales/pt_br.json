@@ -253,7 +253,7 @@
       "search_user": "Digite um nome ou username",
       "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
-      "remove_user_confirm": "Remover todas as permissões para {user}?",
+      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
       "remove": "Remover",
       "cancel": "Cancelar",
       "default_error": "Algo deu errado. Não foi possível realizar essa ação."
