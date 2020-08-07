@@ -53,7 +53,7 @@
       "language": "idioma",
       "category": "Categoria",
       "new_repo": "NOVA INTELIGÊNCIA",
-      "default_error": "Existem erros no formulário",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "description_form": "Descrição"
     },
     "register_form": {
@@ -203,7 +203,7 @@
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
       "no_repo": "Nenhum repositório encontrado.",
-      "default_error": "Um erro ocorreu",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "edit_groups": "Editar grupos",
       "finish_editing": "Concluir edição",
       "enter": "Enviar",
@@ -256,7 +256,7 @@
       "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
       "remove": "Remover",
       "cancel": "Cancelar",
-      "default_error": "Algo deu errado. Não foi possível realizar essa ação."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "roles": {
       "user": "Usuário",

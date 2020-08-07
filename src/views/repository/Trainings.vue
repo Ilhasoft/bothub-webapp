@@ -31,7 +31,8 @@
             <new-example-form
               :repository="repository"
               @created="updatedExampleList()"
-              @eventStep="dispatchClick()"/></new-example-form></div>
+              @eventStep="dispatchClick()"/>
+          </div>
           <authorization-request-notification
             v-else-if="repository"
             :available="!repository.available_request_authorization"

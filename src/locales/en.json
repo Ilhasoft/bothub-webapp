@@ -53,7 +53,7 @@
       "language": "laguage",
       "category": "Category",
       "new_repo": "NEW INTELLIGENCE",
-      "default_error": "There were errors while submitting",
+      "default_error": "Something went wrong, try again later.",
       "description_form": "Description"
     },
     "register_form": {
@@ -203,7 +203,7 @@
       "all_categories": "All categories",
       "all_languages": "All languages",
       "no_repo": "No repositories found.",
-      "default_error": "Something went wrong",
+      "default_error": "Something went wrong, try again later.",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",
       "enter": "Enter",
