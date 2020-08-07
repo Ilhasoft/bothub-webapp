@@ -21,7 +21,8 @@
           ref="translationsStatus"
           :update="updateStatus"
           :repository-uuid="repository.uuid"
-          v-model="toLanguage" />
+          v-model="toLanguage"
+          :tranlation-list="isListEmpty"/>
       </div>
       <hr>
       <div class="translations__list">
@@ -29,7 +30,8 @@
           ref="translationsList"
           :repository="repository"
           :to-language="toLanguage"
-          @exampleUpdated="exampleUpdated()" />
+          @exampleUpdated="exampleUpdated()"
+          @listNoEmpty="checkList()"/>
       </div>
     </div>
   </repository-view-base>
@@ -64,6 +66,7 @@ export default {
         from: null,
         to: null,
       },
+      isListEmpty: true,
     };
   },
   computed: {
@@ -75,6 +78,9 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
+    checkList() {
+      this.isListEmpty = false;
+    },
     exampleUpdated() {
       this.updateStatus = !this.updateStatus;
     },
