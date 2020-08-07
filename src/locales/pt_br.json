@@ -152,7 +152,7 @@
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
-      "default_error": "Houve um erro ao testar",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "entity_is_group": "<strong>{entity}</strong> pertence a <strong>{group}</strong>"
     },
     "result": {

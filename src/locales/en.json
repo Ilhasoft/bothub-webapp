@@ -152,7 +152,7 @@
       "no_sentences": "No sentences.",
       "detailed_results": "Detailed Results",
       "results": "Results",
-      "default_error": "Something went wrong while testing",
+      "default_error": "Something went wrong, try again later.",
       "entity_is_group": "<strong>{entity}</strong> grouped as <strong>{group}</strong>"
     },
     "result": {
