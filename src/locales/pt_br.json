@@ -296,6 +296,8 @@
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
+      "no_sentences": "Não há frases.",
+      "no_train_sentence": "Essa sentença ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",

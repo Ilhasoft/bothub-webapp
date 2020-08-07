@@ -31,8 +31,7 @@
             <new-example-form
               :repository="repository"
               @created="updatedExampleList()"
-              @eventStep="dispatchClick()" />
-          </div>
+              @eventStep="dispatchClick()"/></new-example-form></div>
           <authorization-request-notification
             v-else-if="repository"
             :available="!repository.available_request_authorization"
@@ -59,10 +58,12 @@
           :intents="repository.intents_list"
           :entities="repository.entities"
           :language-filter="true"
-          @queryStringFormated="onSearch($event)"/>
+          @queryStringFormated="onSearch($event)"
+          @textData="changedText($event)"/>
         <examples-list
           :query="query"
           :update="update"
+          :text-data="textExample"
           @exampleDeleted="onExampleDeleted"
         />
       </div>
@@ -139,6 +140,7 @@ export default {
       eventClickFinish: false,
       eventReset: false,
       blockedNextStepTutorial: false,
+      textExample: '',
     };
   },
   computed: {
@@ -193,6 +195,9 @@ export default {
         this.trainModalOpen = true;
       }
       this.dispatchClick();
+    },
+    changedText(newText) {
+      this.textExample = newText;
     },
     dispatchClick() {
       this.blockedNextStepTutorial = !this.blockedNextStepTutorial;

@@ -233,7 +233,7 @@
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
       "save_button": "Save",
-      "no_sentences": "No sentence.",
+      "no_sentences": "No sentences.",
       "error_entity": "An error occured."
     },
     "settings": {
@@ -294,6 +294,8 @@
       "trained": "Trained",
       "processing": "Processing",
       "no_changes": "No Changes",
+      "no_sentences": "No sentences.",
+      "no_train_sentence": "This sentence has not yet been added to the training.",
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "delete_title": "Delete sentence entity",
@@ -528,7 +530,7 @@
       "description": "This entity contains {n} sentence. | This entity contains {n} sentences.",
       "edit_button": "Edit Entity",
       "save_button": "Save",
-      "no_sentences": "No sentence.",
+      "no_sentences": "No sentences.",
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
     },

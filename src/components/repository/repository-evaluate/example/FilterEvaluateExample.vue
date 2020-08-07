@@ -145,6 +145,7 @@ export default {
   watch: {
     text(value) {
       this.$emit('queryStringFormated', { search: value });
+      this.$emit('textData', this.text);
     },
     intent: _.debounce(function emitIntent(value) {
       this.$emit('queryStringFormated', { intent: value });
