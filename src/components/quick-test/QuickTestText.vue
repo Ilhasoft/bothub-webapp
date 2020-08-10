@@ -14,8 +14,7 @@
     <div
       v-if="error"
       class="quick-test-text__subtext__container">
-      <p class="quick-test-text__subtext">
-        {{ $t('webapp.quick_test.error_quick_test') }} </p>
+      <p class="quick-test-text__subtext"> {{ checkQuickError }} </p>
     </div>
     <loading v-else-if="loading" />
     <div
@@ -66,7 +65,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
@@ -107,9 +106,14 @@ export default {
       data: null,
       error: null,
       highlighted: null,
+      repositoryStatus: {},
     };
   },
   computed: {
+    ...mapGetters([
+      'getSelectedVersionRepository',
+      'getSelectedVersion',
+    ]),
     entitiesNames() {
       if (!this.data || !this.data.entities_list) return [];
       return this.data.entities_list;
@@ -139,13 +143,25 @@ export default {
         return list;
       }, {});
     },
+    checkQuickError() {
+      const online = navigator.onLine;
+      if (!online) return this.$t('webapp.quick_test.internet_off_quick_test');
+
+      if (this.repositoryStatus.count === 0) {
+        return this.$t('webapp.quick_test.without_train_quick_test');
+      }
+
+      return this.$t('webapp.quick_test.default_error');
+    },
   },
   mounted() {
     this.load();
+    this.trainingStatus();
   },
   methods: {
     ...mapActions([
       'analyzeText',
+      'getRepositoryStatusTraining',
     ]),
     async load() {
       this.loading = true;
@@ -171,6 +187,13 @@ export default {
         hasModalCard: false,
         trapFocus: true,
       });
+    },
+    async trainingStatus() {
+      const { data } = await this.getRepositoryStatusTraining({
+        repositoryUUID: this.getSelectedVersionRepository,
+        repositoryVersion: this.getSelectedVersion,
+      });
+      this.repositoryStatus = data;
     },
     debug() {
       this.$buefy.modal.open({
