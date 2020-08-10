@@ -82,6 +82,10 @@
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
+                @click="routerHandle('orgs')">{{ $t('webapp.layout.orgs') }}</b-dropdown-item>
+              <b-dropdown-item
+                v-if="authenticated"
+                aria-role="listitem"
                 @click="openNewRepository()">
                 {{ $t('webapp.layout.start_you_bot') }}
               </b-dropdown-item>
