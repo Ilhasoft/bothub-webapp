@@ -7,7 +7,7 @@
     <h2 class="base-example-evaluate__title">{{ $t('webapp.trainings.sentences_list') }}</h2>
     <filter-evaluate-example
       :intents="repository.intents_list"
-      :entities="repository.entities"
+      :entities="repository.entities_list"
       @queryStringFormated="onSearch($event)"/>
     <evaluate-example-list
       :query="query"

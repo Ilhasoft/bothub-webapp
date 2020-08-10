@@ -19,21 +19,20 @@
           :message="errors.intent">
           <b-autocomplete
             v-model="intent"
+            :open-on-focus="true"
             :data="optionsIntents"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_intents')"
-            open-on-focus
             dropdown-position="bottom" />
         </b-field>
         <b-field
-          v-if="entities"
-          :message="errors.entity">
+          :message="errors.intent">
           <b-autocomplete
             v-model="entity"
+            :open-on-focus="true"
             :data="optionsEntities"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_entities')"
-            open-on-focus
             dropdown-position="bottom" />
         </b-field>
         <b-field v-if="languageFilter && languages">
@@ -54,21 +53,11 @@
             </option>
           </b-select>
         </b-field>
-        <b-field
-          :message="errors.repository_version_name">
-          <b-autocomplete
-            v-if="versions"
-            v-model="versionName"
-            :loading="false && versionsList.loading"
-            :data="optionsVersions"
-            :placeholder="$t('webapp.inbox.all_versions')"
-            open-on-focus
-            dropdown-position="bottom"/>
-        </b-field>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 import { formatters, LANGUAGES } from '@/utils/index';
 import { mapState } from 'vuex';
@@ -90,13 +79,9 @@ export default {
       type: Array,
       default: null,
     },
-    versions: {
-      type: Array,
-      default: null,
-    },
     languageFilter: {
       type: Boolean,
-      default: null,
+      default: false,
     },
   },
   data() {
@@ -104,7 +89,6 @@ export default {
       text: '',
       intent: '',
       entity: '',
-      versionName: '',
       language: null,
       setTimeoutId: null,
       errors: {},
@@ -112,11 +96,8 @@ export default {
   },
   computed: {
     wrapperClasses() {
-      const fieldCount = [this.languageFilter, this.entities, this.versions]
-        .reduce((counter, condition) => (condition ? counter + 1 : counter), 1);
-
       return ['filter-evaluate-example__filters__wrapper',
-        `filter-evaluate-example__filters__wrapper__has-${fieldCount}-fields`];
+        this.languageFilter ? 'filter-evaluate-example__filters__wrapper__has-language-filter' : ''];
     },
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
@@ -153,10 +134,6 @@ export default {
     optionsEntities() {
       return this.filterEntities.map(entity => entity);
     },
-    optionsVersions() {
-      if (!this.versions) return null;
-      return this.versions.map(version => version.name);
-    },
     inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
@@ -177,9 +154,6 @@ export default {
     }, 500),
     language: _.debounce(function emitLanguage(value) {
       this.$emit('queryStringFormated', { language: value });
-    }, 500),
-    versionName: _.debounce(function emitVersion(value) {
-      this.$emit('queryStringFormated', { repository_version_name: value });
     }, 500),
   },
 };
@@ -214,29 +188,18 @@ export default {
     &__wrapper {
       display: grid;
       grid-gap: .5rem;
+      grid-template-columns: 1fr 2fr 2fr;
 
-      &__has-2-fields {
-        grid-template-columns: 1fr 2fr 2fr;
-
-        @media (max-width: $mobile-width) {
-          grid-template-columns: 1fr;
-        }
+      @media (max-width: $mobile-width) {
+        grid-template-columns: 1fr;
       }
 
-      &__has-3-fields {
+      &__has-language-filter {
         grid-template-columns: 1fr 2fr 2fr 2fr;
 
         @media (max-width: $mobile-width) {
-          grid-template-columns: 1fr;
-        }
+        grid-template-columns: 1fr;
       }
-
-      &__has-4-fields {
-        grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
-
-        @media (max-width: $mobile-width) {
-          grid-template-columns: 1fr;
-        }
       }
 
       &__text {
