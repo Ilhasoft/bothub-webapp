@@ -102,6 +102,7 @@ export default {
   data() {
     return {
       text: '',
+      lastSearch: '',
       intent: '',
       entity: '',
       versionName: '',
@@ -167,19 +168,40 @@ export default {
   },
   watch: {
     text(value) {
-      this.$emit('queryStringFormated', { search: value });
+      const text = value.trim();
+      if (this.lastSearch === text) return;
+      this.lastSearch = text;
+      this.$emit('queryStringFormated', { search: text });
     },
-    intent: _.debounce(function emitIntent(value) {
-      this.$emit('queryStringFormated', { intent: value });
-    }, 500),
-    entity: _.debounce(function emitEntity(value) {
-      this.$emit('queryStringFormated', { entity: value });
-    }, 500),
+    intent(value) {
+      const intent = formatters.bothubItemKey()(value);
+      this.intent = intent;
+      this.emitIntent(this.intent);
+    },
+    entity(value) {
+      const entity = formatters.bothubItemKey()(value);
+      this.entity = entity;
+      this.emitEntity(this.entity);
+    },
     language: _.debounce(function emitLanguage(value) {
       this.$emit('queryStringFormated', { language: value });
     }, 500),
-    versionName: _.debounce(function emitVersion(value) {
-      this.$emit('queryStringFormated', { repository_version_name: value });
+    versionName(value) {
+      const versionName = formatters.bothubItemKey()(value);
+      if (this.versionName === versionName) return;
+      this.versionName = versionName;
+      this.emitVersion(this.versionName);
+    },
+  },
+  methods: {
+    emitIntent: _.debounce(function emitIntentF(intent) {
+      this.$emit('queryStringFormated', { intent });
+    }, 500),
+    emitEntity: _.debounce(function emitEntityF(entity) {
+      this.$emit('queryStringFormated', { entity });
+    }, 500),
+    emitVersion: _.debounce(function emitVersionF(version) {
+      this.$emit('queryStringFormated', { repository_version_name: version });
     }, 500),
   },
 };
