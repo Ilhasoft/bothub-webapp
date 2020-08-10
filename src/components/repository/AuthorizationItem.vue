@@ -18,19 +18,23 @@
       <b-icon
         v-show="!submitting"
         icon="delete"
+        size="is-small"
         class="authorization-item__icon authorization-item__icon--button"
         @click.native="remove()"/>
       <b-icon
         v-show="!submitting"
         icon="pencil"
+        size="is-small"
         class="authorization-item__icon authorization-item__icon--button"
         @click.native="editable = !editable"/>
       <b-icon
         v-show="submitting"
+        size="is-small"
         class="authorization-item__icon icon-spin"
         icon="refresh" />
       <b-icon
         v-show="submitted"
+        size="is-small"
         class="text-color-primary"
         icon="check" />
     </div>
@@ -43,6 +47,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
 import RoleSelect from '@/components/inputs/RoleSelect';
+import { ROLES } from '@/utils';
 
 export default {
   name: 'AuthorizationItem',
@@ -95,12 +100,20 @@ export default {
       submitted: false,
       removeDialog: null,
       editable: false,
+      roles: ROLES,
     };
   },
   computed: {
     ...mapGetters([
       'getProfile',
     ]),
+    roleLabel() {
+      if (this.newRole === null) {
+        return null;
+      }
+
+      return this.$t(`webapp.roles.${this.roles[Number(this.newRole)].toLowerCase()}`);
+    },
   },
   watch: {
     newRole() {
@@ -120,7 +133,8 @@ export default {
     async remove() {
       return new Promise((resolve, reject) => {
         this.removeDialog = this.$buefy.dialog.confirm({
-          message: this.$t('webapp.settings.remove_user_confirm', { user: this.user__nickname }),
+          message: this.$t('webapp.settings.remove_user_confirm',
+            { user: this.user__nickname, role: this.roleLabel }),
           confirmText: this.$t('webapp.settings.remove'),
           cancelText: this.$t('webapp.settings.cancel'),
           type: 'is-danger',

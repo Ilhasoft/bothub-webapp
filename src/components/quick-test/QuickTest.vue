@@ -208,10 +208,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
 
-  :not(.quick-test) {
-    pointer-events: visible;
-  }
+::-webkit-scrollbar-track {
+  background: #e9e9ec;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $color-primary-dark;
+}
+
+:not(.quick-test) {
+  pointer-events: visible;
+}
 
   .is-text {
     text-decoration: none;

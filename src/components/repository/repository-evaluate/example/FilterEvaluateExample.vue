@@ -171,6 +171,7 @@ export default {
       const text = value.trim();
       if (this.lastSearch === text) return;
       this.lastSearch = text;
+      this.$emit('textData', this.text);
       this.$emit('queryStringFormated', { search: text });
     },
     intent(value) {
