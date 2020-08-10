@@ -331,16 +331,16 @@
       "languages_select": "Buscar idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
-      "import_button": "Importar sentenças",
-      "export_button": "Exportar sentenças",
-      "import_title": "Selecione um arquivo para importar",
+      "import_title": "Importar sentenças",
+      "export_title": "Exportar sentenças",
+      "import_button": "Importar",
+      "export_button": "Exportar",
       "import_field_text": "Nenhum arquivo selecionado",
       "import_select_button": "Clique para selecionar",
       "import_select_error": "Ocorreu um erro com o arquivo.",
-      "export_title": "Exportar apenas sentenças não traduzidas",
-      "export_switch_no": "Não",
-      "export_switch_yes": "Sim",
-      "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
+      "import_button_cancel": "Cancelar",
+      "export_all_sentences": "Todas as senteças",
+      "export_only_translated": "Senteças não traduzidas"
     },
     "orgs": {
       "owner": "Pertence a",
