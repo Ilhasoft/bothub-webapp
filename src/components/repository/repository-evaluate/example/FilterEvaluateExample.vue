@@ -194,13 +194,13 @@ export default {
     },
   },
   methods: {
-    emitIntent: _.debounce(function emitIntentF(intent) {
+    emitIntent: _.debounce(function emitIntent(intent) {
       this.$emit('queryStringFormated', { intent });
     }, 500),
-    emitEntity: _.debounce(function emitEntityF(entity) {
+    emitEntity: _.debounce(function emitEntity(entity) {
       this.$emit('queryStringFormated', { entity });
     }, 500),
-    emitVersion: _.debounce(function emitVersionF(version) {
+    emitVersion: _.debounce(function emitVersion(version) {
       this.$emit('queryStringFormated', { repository_version_name: version });
     }, 500),
   },
