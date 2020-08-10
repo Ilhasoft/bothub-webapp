@@ -10,64 +10,12 @@
           <h1> {{ $t('webapp.menu.inbox') }} </h1>
           <p> {{ $t('webapp.inbox.description') }} </p>
         </div>
-        <div class="columns">
-          <div class="column is-tree-fifths">
-            <div class="control is-expanded has-icons-right">
-              <input
-                :class="['input', loading ? 'is-loading' : '']"
-                v-model="name"
-                type="text">
-              <span class="icon is-small is-right">
-                <b-icon
-                  class="repository-log__icon"
-                  icon="magnify"/></span>
-            </div>
-          </div>
-          <div class="column is-narrow">
-            <div class="control">
-              <label>{{ $t('webapp.dashboard.filter_by') }}: </label>
-              <div class="select">
-                <select v-model="filterOption">
-                  <option value="intent"> {{ $t('webapp.inbox.intent') }} </option>
-                  <option value="language"> {{ $t('webapp.inbox.language') }} </option>
-                  <option value="repository_version_name">
-                    {{ $t('webapp.inbox.version') }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="column control">
-            <b-autocomplete
-              v-if="filterOption=='repository_version_name'"
-              v-model="filterSearch"
-              :loading="versionsList.loading"
-              :data="versions"
-              :placeholder="$t('webapp.inbox.your_version')"
-              dropdown-position="bottom"/>
-            <b-autocomplete
-              v-else-if="filterOption=='intent'"
-              :data="repository.intents_list"
-              :loading="!repository"
-              v-model="filterSearch"
-              :placeholder="$t('webapp.inbox.your_intent')"
-              dropdown-position="bottom"/>
-            <b-select
-              v-else-if="filterOption=='language'"
-              v-model="filterSearch">
-              <option
-                v-for="language in languages"
-                :key="language.id"
-                :value="language.value">
-                {{ language.title }}
-              </option>
-            </b-select>
-            <b-input
-              v-else
-              :disabled="true"
-              :placeholder="$t('webapp.inbox.your_filter')"/>
-          </div>
-        </div>
+        <filter-evaluate-example
+          v-if="repository"
+          :intents="repository.intents_list"
+          :versions="versions"
+          language-filter
+          @queryStringFormated="onSearch($event)"/>
         <repository-log-list
           :per-page="perPage"
           :query="query"
@@ -110,6 +58,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import LoginForm from '@/components/auth/LoginForm';
+import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { LANGUAGES } from '@/utils';
 import _ from 'lodash';
 import RepositoryBase from './Base';
@@ -124,6 +73,7 @@ export default {
     RepositoryLogList,
     LoginForm,
     AuthorizationRequestNotification,
+    FilterEvaluateExample,
     Tour,
     IntentModal,
   },
@@ -132,14 +82,7 @@ export default {
     return {
       perPage: 10,
       name: '',
-      filterOption: null,
       loading: false,
-      filterName: {
-        repository_version_name: 'version',
-        language: 'language',
-        intent: 'intent',
-      },
-      filterSearch: '',
       versionsList: null,
       query: {},
       eventClick: false,
@@ -164,19 +107,11 @@ export default {
       return this.repository.uuid;
     },
     versions() {
-      return this.versionsList.items.map(version => version.name);
+      if (!this.versionsList) return [];
+      return this.versionsList.items;
     },
   },
   watch: {
-    filterOption() {
-      this.filterSearch = '';
-    },
-    filterSearch: _.debounce(function searchUpdated() {
-      this.updateQuery();
-    }, 500),
-    name: _.debounce(function nameUpdated() {
-      this.updateQuery();
-    }, 500),
     async repositoryUUID() {
       if (!this.repositoryUUID) { return; }
       this.versionsList = await this.getVersions({
@@ -189,20 +124,12 @@ export default {
   },
   methods: {
     ...mapActions(['getVersions']),
-    updateQuery() {
-      const query = {};
-      const name = this.name.trim();
-      const filterSearch = this.filterSearch.trim();
-
-      if (name !== '') {
-        query.search = name;
-      }
-
-      if (this.filterOption !== null && filterSearch !== '') {
-        query[this.filterOption] = filterSearch;
-      }
-
-      this.query = query;
+    onSearch(query) {
+      const filteredQuery = {};
+      Object.entries({ ...this.query, ...query }).forEach(([key, value]) => {
+        if (value && value.length > 0) filteredQuery[key] = value;
+      });
+      this.query = filteredQuery;
     },
     dispatchClickSkip() {
       this.eventSkip = !this.eventSkip;
