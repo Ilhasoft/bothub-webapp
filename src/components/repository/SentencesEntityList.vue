@@ -10,7 +10,7 @@
       <div
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="editing || !open"
+          v-if="!editing || !open"
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
@@ -19,7 +19,6 @@
       </div>
     </div>
     <div
-      v-if="editing"
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
@@ -27,6 +26,7 @@
         class="level-right">
         <div class="level-item">
           <a
+            v-if="!editing || !open"
             :href="`#delete-example-${id}`"
             class="has-text-danger"
             @click.prevent.stop="editSentence()">
@@ -55,7 +55,7 @@
     </div>
     <div slot="body">
       <example-info
-        v-if="!open"
+        v-if="!editing"
         :entities-list="entitiesList"
         :highlighted.sync="highlighted"
         :color-only="entitySelected"
@@ -128,7 +128,7 @@ export default {
       deleteDialog: null,
       remove: true,
       highlighted: null,
-      editing: true,
+      editing: false,
     };
   },
 
@@ -185,9 +185,11 @@ export default {
     },
     cancelEditSentence() {
       this.open = !this.open;
+      this.editing = false;
     },
     editSentence() {
       this.open = true;
+      this.editing = true;
     },
     updateList() {
       this.$emit('updateList');
