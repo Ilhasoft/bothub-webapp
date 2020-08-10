@@ -127,6 +127,9 @@ export default {
   repositoryVoteDown(store, { ownerNickname, slug }) {
     return repository.voteDown(ownerNickname, slug);
   },
+  getRepositoryStatusTraining(store, { repositoryUUID, repositoryVersion }) {
+    return repository.repositoryStatusTraining(repositoryUUID, repositoryVersion);
+  },
   repositoryUpdateAuthorizationRole(store, { repositoryUuid, userNickname, newRole }) {
     return repository.updateAuthorizationRole(
       repositoryUuid,

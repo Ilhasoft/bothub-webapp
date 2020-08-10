@@ -53,7 +53,7 @@
       "language": "idioma",
       "category": "Categoria",
       "new_repo": "NOVA INTELIGÊNCIA",
-      "default_error": "Existem erros no formulário",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "description_form": "Descrição"
     },
     "register_form": {
@@ -110,7 +110,9 @@
     },
     "quick_test": {
       "quick_test": "TESTE RÁPIDO",
-      "error_quick_test": "Ocorreu um erro, não podemos analisar o seu texto",
+      "internet_off_quick_test": "Você está offline, verifique sua conexão",
+      "without_train_quick_test": "Você ainda não adicionou frases ao treinamento, adicione para testar.",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde",
       "intent": "Intenção",
       "debug": "Debug",
       "raw": "Raw",
@@ -150,7 +152,7 @@
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
-      "default_error": "Houve um erro ao testar",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "entity_is_group": "<strong>{entity}</strong> pertence a <strong>{group}</strong>"
     },
     "result": {
@@ -201,7 +203,7 @@
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
       "no_repo": "Nenhum repositório encontrado.",
-      "default_error": "Um erro ocorreu",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "edit_groups": "Editar grupos",
       "finish_editing": "Concluir edição",
       "enter": "Enviar",
@@ -251,10 +253,10 @@
       "search_user": "Digite um nome ou username",
       "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
-      "remove_user_confirm": "Remover todas as permissões para {user}?",
+      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
       "remove": "Remover",
       "cancel": "Cancelar",
-      "default_error": "Algo deu errado. Não foi possível realizar essa ação."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "roles": {
       "user": "Usuário",
@@ -294,6 +296,8 @@
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
+      "no_sentences": "Não há frases.",
+      "no_train_sentence": "Essa sentença ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",
@@ -324,7 +328,8 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Sem traduções.",
+      "no_translation": "Você não tem sentenças traduzidas,",
+      "click_here": "clique aqui para traduzir.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",

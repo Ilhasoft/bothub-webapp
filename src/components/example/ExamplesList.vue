@@ -9,9 +9,15 @@
       @itemSave="show"
       @itemDeleted="onItemDeleted($event)" />
 
+    <br>
+
     <p
-      v-if="examplesList && examplesList.empty"
-      class="no-examples">No examples.</p>
+      v-if="examplesList && examplesList.empty && textData === ''"
+      class="no-examples"
+      v-html="$t('webapp.trainings.no_sentences')"/>
+    <p
+      v-if="textData !== '' && examplesList.empty"
+      v-html="$t('webapp.trainings.no_train_sentence')"/>
   </div>
 </template>
 
@@ -39,6 +45,10 @@ export default {
     update: {
       type: Boolean,
       default: false,
+    },
+    textData: {
+      type: String,
+      default: '',
     },
   },
   data() {
