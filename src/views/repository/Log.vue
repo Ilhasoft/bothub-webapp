@@ -60,7 +60,6 @@ import AuthorizationRequestNotification from '@/components/repository/Authorizat
 import LoginForm from '@/components/auth/LoginForm';
 import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { LANGUAGES } from '@/utils';
-import _ from 'lodash';
 import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
 
