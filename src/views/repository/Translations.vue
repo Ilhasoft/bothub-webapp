@@ -22,7 +22,7 @@
           :update="updateStatus"
           :repository-uuid="repository.uuid"
           v-model="toLanguage"
-          :tranlation-list="isListEmpty"/>
+          :translation-list="isListEmpty"/>
       </div>
       <hr>
       <div class="translations__list">

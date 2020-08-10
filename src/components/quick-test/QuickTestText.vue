@@ -99,16 +99,12 @@ export default {
       type: Array,
       default: () => [],
     },
-    isExpanded: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
       loading: false,
       data: null,
-      error: true,
+      error: null,
       highlighted: null,
       repositoryStatus: {},
     };

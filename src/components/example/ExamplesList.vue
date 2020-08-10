@@ -16,7 +16,7 @@
       class="no-examples"
       v-html="$t('webapp.trainings.no_sentences')"/>
     <p
-      v-if="textData !== ''"
+      v-if="textData !== '' && examplesList.empty"
       v-html="$t('webapp.trainings.no_train_sentence')"/>
   </div>
 </template>

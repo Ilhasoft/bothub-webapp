@@ -5,7 +5,7 @@
       :active="loading"
       :can-cancel="false" />
     <transition-group
-      v-if="!tranlationList"
+      v-if="!translationList"
       name="list"
       mode="out-in"
       class="columns is-multiline"
@@ -57,7 +57,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    tranlationList: {
+    translationList: {
       type: Boolean,
       default: true,
     },
