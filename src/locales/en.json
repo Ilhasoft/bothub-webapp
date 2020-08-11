@@ -334,16 +334,16 @@
       "languages_select": "Search language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
-      "import_button": "Import sentences",
-      "export_button": "Export sentences",
-      "import_title": "Select a file to import",
+      "import_title": "Import sentences",
+      "export_title": "Export sentences",
+      "import_button": "Import",
+      "export_button": "Export",
       "import_field_text": "No file chosen",
       "import_select_button": "Click to upload",
       "import_select_error": "There was an error with the file.",
-      "export_title": "Export only not translated sentences",
-      "export_switch_no": "No",
-      "export_switch_yes": "Yes",
-      "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
+      "import_button_cancel": "Cancel",
+      "export_all_sentences": "All Sentences",
+      "export_only_translated": "Untranslated sentences"
     },
     "orgs": {
       "owner": "Owned by",
