@@ -183,6 +183,8 @@ export default {
       this.$buefy.modal.open({
         props: { info: this.data },
         parent: this,
+        width: 562,
+        canCancel: false,
         component: RawInfo,
         hasModalCard: false,
         trapFocus: true,
@@ -198,6 +200,7 @@ export default {
     debug() {
       this.$buefy.modal.open({
         parent: this,
+        canCancel: false,
         component: RepositoryDebug,
         props: {
           repositoryUUID: this.repositoryUuid,

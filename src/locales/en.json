@@ -125,7 +125,13 @@
       "intent": "Intent",
       "relevance": "Relevance",
       "debug_description": "Something unexpected happened! We couldn't debug your text.",
-      "reload": "Reload"
+      "reload": "Reload",
+      "debug": "Debug",
+      "debug_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
     },
     "evaluate": {
       "header_title": "Test your data set",
