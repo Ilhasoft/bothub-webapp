@@ -492,7 +492,7 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo",
+      "add_new": "Adicionar nova",
       "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
@@ -502,9 +502,7 @@
       "version": "Versão",
       "cannot_edit_this_repository": "Você não pode editar essa inteligência",
       "signin_you_account": "Entre na sua conta para editar essa inteligência.",
-      "your_version": "Sua Versão",
-      "your_intent": "Sua Intenção",
-      "your_filter": "Seu Filtro",
+      "all_versions": "Todas as versões",
       "test_sentences": "Frases de Teste",
       "training": "Treinamento",
       "add_to": "Adicionar à",

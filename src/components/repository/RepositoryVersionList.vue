@@ -47,6 +47,7 @@
                   icon-right-clickable="true"
                   icon-right="close"
                   @icon-right-click="isEdit.edit = false"
+                  @input="onEditNameChange"
                   @keyup.enter.native="handleEditVersion(isEdit.name, props.row.id)"/>
             </div></b-field>
             <span
@@ -119,6 +120,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { formatters } from '@/utils/index';
 import RepositoryHandleVersionModal from '@/components/repository/RepositoryHandleVersionModal';
 import Loading from '@/components/shared/Loading';
 
@@ -151,7 +153,6 @@ export default {
       currentPage: 1,
       isNewVersionModalActive: false,
       selectedVersion: null,
-      editName: null,
       loadingEdit: false,
       loadingList: false,
       currentEditVersion: null,
@@ -196,6 +197,11 @@ export default {
       this.asc = asc === 'asc';
       this.updateVersions();
     },
+    onEditNameChange(value) {
+      this.$nextTick(() => {
+        this.isEdit.name = formatters.versionItemKey()(value);
+      });
+    },
     async updateParams() {
       if (!this.repositoryUUID) { return; }
       const response = await this.getVersions({
@@ -238,6 +244,10 @@ export default {
       };
     },
     handleEditVersion(name, id) {
+      if (!name || !(name.length > 0)) {
+        this.isEdit = false;
+        return;
+      }
       this.editVersion({
         repositoryUuid: this.repository.uuid,
         id,
