@@ -68,6 +68,11 @@ export const formatters = {
     .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
+  versionItemKey: () => v => v
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>`´|]/g, '')
+    .replace(/[\s]/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ''),
 };
 
 const exampleSearchRegex = /((intent|label|entity|language):([a-zA-Z0-9_-]+))/g;
