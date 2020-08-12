@@ -188,10 +188,12 @@ export default {
       this.$emit('queryStringFormated', { language: value });
     }, 500),
     versionName(value) {
-      const versionName = formatters.bothubItemKey()(value);
+      const versionName = formatters.versionItemKey()(value);
       if (this.versionName === versionName) return;
-      this.versionName = versionName;
-      this.emitVersion(this.versionName);
+      this.$nextTick(() => {
+        this.versionName = versionName;
+      });
+      this.emitVersion(versionName);
     },
   },
   methods: {
