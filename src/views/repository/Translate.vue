@@ -55,59 +55,80 @@
               :class="{'is-primary':!!translate.from && !!translate.to}"
               class="repository-translate__buttons repository-translate__unableButton"
               @click="checkLanguageToImport()">
-              {{ $t('webapp.translate.import_button') }}
+              {{ $t('webapp.translate.import_title') }}
             </b-button>
 
             <b-button
               :class="{'is-primary':!!translate.from && !!translate.to}"
               class="repository-translate__buttons repository-translate__unableButton"
               @click="checkLanguageToExport()">
-              {{ $t('webapp.translate.export_button') }}
+              {{ $t('webapp.translate.export_title') }}
             </b-button>
 
           </div>
           <div
             v-if="!!translate.from && !!translate.to">
-
             <b-modal
               :active.sync="isImportFileVisible"
-              class="repository-translate__fileModal">
-              <div class="repository-translate__fileModal__file">
-
-                <b-field
-                  :label="$t('webapp.translate.import_title')"
-                  class="custom-file-upload">
-                  <div class="custom-file-upload__input">
-                    <b-upload v-model="translationFile">
-                      <a class="button is-primary">
-                        <b-icon icon="upload"/>
-                        <span>{{ $t('webapp.translate.import_select_button') }}</span>
-                      </a>
-                    </b-upload>
-                    <div
-                      v-if="translationFile"
-                      class="custom-file-upload__input__file">
-                      {{ translationFile.name }}
+              :destroy-on-hide="false"
+              :can-cancel="false"
+              has-modal-card
+              trap-focus
+              aria-role="dialog"
+              aria-modal>
+              <div
+                class="modal-card repository-translate__modalStyle">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">{{ $t('webapp.translate.import_title') }}</p>
+                </header>
+                <section class="modal-card-body">
+                  <b-field
+                    class="custom-file-upload">
+                    <div class="custom-file-upload__input">
+                      <b-upload
+                        v-model="translationFile"
+                      >
+                        <a class="button custom-file-upload__input__button">
+                          <b-icon
+                            icon="upload"
+                            type="is-white"/>
+                        </a>
+                      </b-upload>
 
                       <div
-                        class="custom-file-upload__input__icon"
-                        @click="removeSelectedFile">
-                        <b-icon
-                          icon="close-circle"
+                        v-if="translationFile"
+                        class="custom-file-upload__input__file">
+                        {{ translationFile.name }}
 
-                        />
+                        <div
+                          class="custom-file-upload__input__icon"
+                          @click="removeSelectedFile">
+                          <b-icon
+                            icon="close-circle"
+                            custom-size="mdi-18px"
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        v-else
+                        class="custom-file-upload__input__file">
+                        <span>{{ $t('webapp.translate.import_field_text') }}</span>
                       </div>
                     </div>
+                    <p>{{ errorMessage }}</p>
 
-                    <div
-                      v-else
-                      class="custom-file-upload__input__file">
-                      <span>{{ $t('webapp.translate.import_field_text') }}</span>
-                    </div>
-                  </div>
-                  <p>{{ errorMessage }}</p>
+                  </b-field>
+                </section>
+                <footer class="modal-card-foot">
+                  <div class="repository-translate__modalStyle__styleButton">
+                    <b-button
+                      class="repository-translate__buttons modalButton"
+                      type="is-white"
+                      @click="closeImportModal()">
+                      {{ $t('webapp.translate.import_button_cancel') }}
+                    </b-button>
 
-                  <div class="repository-translate__styleButton">
                     <b-button
                       :loading="waitDownloadFile"
                       :disabled="translationFile === null"
@@ -117,34 +138,61 @@
                       {{ $t('webapp.translate.import_button') }}
                     </b-button>
                   </div>
-                </b-field>
-
+                </footer>
               </div>
             </b-modal>
 
             <b-modal
               :active.sync="isExportFileVisible"
-              class="repository-translate__switchModal">
-              <div class="repository-translate__switchModal__switch">
-                <b-field
-                  :label="$t('webapp.translate.export_title')"/>
-                <b-switch
-                  v-model="isSwitched"
-                  class="repository-translate__switchModal__switch__button">
-                  {{ checkSwitch }}
-                </b-switch>
-                <p> {{ $t('webapp.translate.export_field_text') }}</p>
-                <div class="repository-translate__styleButton">
-                  <b-button
-                    :loading="waitDownloadFile"
-                    type="is-primary"
-                    class="repository-translate__buttons modalButton"
-                    @click="exportTranslation()">
-                    {{ $t('webapp.translate.export_button') }}
-                  </b-button>
-                </div>
-              </div>
+              :destroy-on-hide="false"
+              :can-cancel="false"
+              has-modal-card
+              trap-focus
+              aria-role="dialog"
+              aria-modal>
+              <div
+                class="modal-card repository-translate__modalStyle">
+                <header class="modal-card-head">
+                  <p class="modal-card-title">{{ $t('webapp.translate.export_title') }}</p>
+                </header>
+                <section class="modal-card-body">
+                  <div class="repository-translate__selection__section">
+                    <b-field>
+                      <b-select
+                        v-model="allTranslations"
+                        expanded
+                        size="is-medium"
+                        class="repository-translate__selection__section__expanded"
+                        placeholder="Select a name">
+                        <option
+                          v-for="option in exportOption"
+                          :value="option.value"
+                          :key="option.id">
+                          {{ option.label }}
+                        </option>
+                      </b-select>
+                    </b-field>
+                  </div>
+                </section>
 
+                <footer class="modal-card-foot">
+                  <div class="repository-translate__modalStyle__styleButton">
+                    <b-button
+                      class="repository-translate__buttons modalButton"
+                      type="is-white"
+                      @click="closeExportModal()">
+                      {{ $t('webapp.translate.import_button_cancel') }}
+                    </b-button>
+                    <b-button
+                      :loading="waitDownloadFile"
+                      type="is-primary"
+                      class="repository-translate__buttons modalButton"
+                      @click="exportTranslation()">
+                      {{ $t('webapp.translate.export_button') }}
+                    </b-button>
+                  </div>
+                </footer>
+              </div>
             </b-modal>
             <hr>
             <div class="repository-translate__list">
@@ -221,9 +269,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      trainResponse: null,
       translationFile: null,
-      isSwitched: false,
       isExportFileVisible: false,
       isImportFileVisible: false,
       waitDownloadFile: false,
@@ -241,9 +287,13 @@ export default {
       eventClickFinish: false,
       loadingList: true,
       hasPhrases: false,
+      allTranslations: false,
+      exportOption: [
+        { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
+        { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
+      ],
     };
   },
-
   computed: {
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
@@ -251,12 +301,6 @@ export default {
     ...mapGetters([
       'activeTutorial',
     ]),
-    checkSwitch() {
-      if (this.isSwitched === true) {
-        return this.$t('webapp.translate.export_switch_yes');
-      }
-      return this.$t('webapp.translate.export_switch_no');
-    },
   },
   watch: {
     isImportFileVisible() {
@@ -281,7 +325,7 @@ export default {
           versionUUID: this.selectedRepository.repository_version_id,
           fromLanguage: this.translate.from,
           toLanguagem: this.translate.to,
-          statusTranslation: !this.isSwitched,
+          statusTranslation: !this.allTranslations,
         });
         this.forceFileDownload(xlsFile);
         this.$buefy.toast.open({
@@ -358,6 +402,14 @@ export default {
         }
         this.hasPhrases = true;
       }
+    },
+    closeImportModal() {
+      this.isImportFileVisible = false;
+      this.errorMessage = '';
+      this.removeSelectedFile();
+    },
+    closeExportModal() {
+      this.isExportFileVisible = false;
     },
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -436,65 +488,38 @@ export default {
         float: right
   }
 
-&__fileModal{
-   display: flex;
-    justify-content: center;
-    align-items: center;
+&__selection{
 
- &__file{
-    background-color: $color-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 13rem;
-    margin: 0 15rem;
-    padding-left: 0.7rem;
-    border-radius: 0.5rem;
-
-    p{
-      font-size: $font-small;
-      color: red;
-      font-weight: $font-weight-medium;
-    }
-  }
-}
-
-&__switchModal{
-   display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    &__switch{
-      background-color: $color-white;
-      justify-content: center;
+    &__section{
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin: auto;
       align-items: center;
-      height: 11.5rem;
-      padding: 1rem;
-      margin: 0 15rem;
-      padding-left: 1.2rem;
-      border-radius: 0.5rem;
 
-      &__button{
-        margin-top:0.4rem;
+      p{
+        margin-left: 1rem;
       }
-        p{
-        font-size: $font-small;
-        }
+
+      &__expanded{
+        width: 22rem;
+      }
     }
 }
+&__modalStyle{
+  width: 26.5rem;
   &__styleButton{
     width:100%;
-    margin-top: 0.5rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 
     .modalButton{
-      width: 179px;
-      height: 40px;
+      width: $button-width;
+      height: $button-height;
     }
   }
+}
 
   &__buttons{
     width: 179px;
@@ -543,25 +568,30 @@ export default {
 .custom-file-upload {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  margin: 1rem;
 
   &__input{
    display: flex;
+   width: 100%;
+
+   &__button{
+     background-color: #9E9E9E;
+     padding: 0 2rem;
+   }
 
    &__file{
-     width: 15rem;
      border: 1px solid #D5D5D5;
+     color: #BABABA;
+     font-size: $font-size;
+     font-family: $font-family;
      display: flex;
-     justify-content:space-between;
-     padding-left: 0.5rem;
-     padding-right: 1rem;
+     width: 100%;
+     justify-content:center;
      align-items:center;
      border-top-right-radius: 0.4rem;
      border-bottom-right-radius: 0.4rem;
 
      span{
-       font-size:13px;
+       font-size: 1rem;
      }
    }
    &__icon{
