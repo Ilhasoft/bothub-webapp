@@ -125,7 +125,13 @@
       "intent": "Intenção",
       "relevance": "Relevância",
       "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
-      "reload": "Recarregar"
+      "reload": "Recarregar",
+      "debug": "Debug",
+      "debug_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
