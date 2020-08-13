@@ -7,6 +7,7 @@
                  'self-adjust': true,
                  'self-adjust__appended': hasAppend,
                  'self-adjust--transparent': transparent,
+                 'self-adjust__contained': contained,
                  [`self-adjust--${size}`]: true}"
         v-bind="$attrs"
         v-model="val"
@@ -41,6 +42,10 @@ export default {
     size: {
       type: String,
       default: 'normal',
+    },
+    contained: {
+      type: Boolean,
+      default: null,
     },
   },
   data() {
@@ -110,6 +115,10 @@ export default {
         min-height: 36px;
         padding: 0.3rem 1rem;
         max-height: 900vh;
+
+        &__contained {
+          max-height: 50vh;
+        }
 
         &__appended {
             padding: 0.3rem 4rem 0.3rem 1rem;

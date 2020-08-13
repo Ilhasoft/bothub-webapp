@@ -67,6 +67,7 @@
             :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
             :update-value="selectedLanguage"
+            contained
             size="small"
             @keyup.enter="sendMessage"
           >
