@@ -53,7 +53,7 @@
       "language": "laguage",
       "category": "Category",
       "new_repo": "NEW INTELLIGENCE",
-      "default_error": "There were errors while submitting",
+      "default_error": "Something went wrong, try again later.",
       "description_form": "Description"
     },
     "register_form": {
@@ -110,7 +110,9 @@
     },
     "quick_test": {
       "quick_test": "QUICK TEST",
-      "error_quick_test": "An error ocurred, we couldn't analyze your text",
+      "internet_off_quick_test": "You are offline, check your connection",
+      "without_train_quick_test": "You haven't added phrases to the training yet, add to test.",
+      "error_quick_test": "Something went wrong, try again later",
       "intent": "Intent",
       "debug": "Debug",
       "raw": "Raw",
@@ -123,7 +125,13 @@
       "intent": "Intent",
       "relevance": "Relevance",
       "debug_description": "Something unexpected happened! We couldn't debug your text.",
-      "reload": "Reload"
+      "reload": "Reload",
+      "debug": "Debug",
+      "debug_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
     },
     "evaluate": {
       "header_title": "Test your data set",
@@ -150,7 +158,7 @@
       "no_sentences": "No sentences.",
       "detailed_results": "Detailed Results",
       "results": "Results",
-      "default_error": "Something went wrong while testing",
+      "default_error": "Something went wrong, try again later.",
       "entity_is_group": "<strong>{entity}</strong> grouped as <strong>{group}</strong>"
     },
     "result": {
@@ -201,7 +209,7 @@
       "all_categories": "All categories",
       "all_languages": "All languages",
       "no_repo": "No repositories found.",
-      "default_error": "Something went wrong",
+      "default_error": "Something went wrong, try again later.",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",
       "enter": "Enter",
@@ -231,7 +239,7 @@
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
       "save_button": "Save",
-      "no_sentences": "No sentence.",
+      "no_sentences": "No sentences.",
       "error_entity": "An error occured."
     },
     "settings": {
@@ -251,14 +259,14 @@
       "search_user": "Enter a name or username",
       "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
-      "remove_user_confirm": "Are you sure you want to remove permissions for {user}?",
+      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?", 
       "remove": "Remove"
     },
     "roles": {
       "user": "User",
       "contributor": "Contributor",
       "admin": "Admin",
-      "translator": "Trandutor",
+      "translator": "Translator",
       "user_description": "Can read and analyze",
       "contributor_description": "Can read, analyze and contribute with examples and translations",
       "admin_description": "Can read, analyze, contribute and write repository config",
@@ -292,6 +300,8 @@
       "trained": "Trained",
       "processing": "Processing",
       "no_changes": "No Changes",
+      "no_sentences": "No sentences.",
+      "no_train_sentence": "This sentence has not yet been added to the training.",
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "delete_title": "Delete sentence entity",
@@ -322,23 +332,24 @@
       "show_translated": "Show Translated",
       "show_original": "Show Original",
       "translated_from": "Translated from",
-      "no_translation": "No translations.",
+      "no_translation": "You have no translated sentences,",
+      "click_here": "click here to translate.",
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
       "languages_select": "Search language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
-      "import_button": "Import sentences",
-      "export_button": "Export sentences",
-      "import_title": "Select a file to import",
+      "import_title": "Import sentences",
+      "export_title": "Export sentences",
+      "import_button": "Import",
+      "export_button": "Export",
       "import_field_text": "No file chosen",
       "import_select_button": "Click to upload",
       "import_select_error": "There was an error with the file.",
-      "export_title": "Export only not translated sentences",
-      "export_switch_no": "No",
-      "export_switch_yes": "Yes",
-      "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
+      "import_button_cancel": "Cancel",
+      "export_all_sentences": "All Sentences",
+      "export_only_translated": "Untranslated sentences"
     },
     "orgs": {
       "owner": "Owned by",
@@ -493,9 +504,7 @@
       "version": "Version",
       "cannot_edit_this_repository": "You cannot edit this repository",
       "signin_you_account": "Sign in to your account to edit this repository.",
-      "your_version": "Your Version",
-      "your_intent": "Your Intent",
-      "your_filter": "Your Filter",
+      "all_versions": "All Versions",
       "test_sentences": "Test Sentences",
       "training": "Training",
       "add_to": "Add to",
@@ -526,7 +535,7 @@
       "description": "This entity contains {n} sentence. | This entity contains {n} sentences.",
       "edit_button": "Edit Entity",
       "save_button": "Save",
-      "no_sentences": "No sentence.",
+      "no_sentences": "No sentences.",
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
     },

@@ -8,7 +8,11 @@
       @itemDeleted="examplesDeleted()"/>
     <p
       v-if="translationsList && translationsList.empty"
-      class="no-examples">{{ $t('webapp.translate.no_translation') }}</p>
+      class="no-examples">{{ $t('webapp.translate.no_translation') }}
+      <a
+        class="outline-text"
+        @click="goToTranslate()">{{ $t('webapp.translate.click_here') }}</a>
+    </p>
   </div>
 </template>
 
@@ -48,6 +52,10 @@ export default {
   },
   watch: {
     async toLanguage() { await this.updateTranslations(); },
+    async translationsList() {
+      const list = await this.translationsList.updateItems();
+      if (list.length !== 0) this.$emit('listNoEmpty');
+    },
   },
   async mounted() {
     await this.updateTranslations();
@@ -62,6 +70,11 @@ export default {
         repositoryUuid: this.repository.uuid,
         to_language: this.toLanguage,
         repositoryVersion: this.repositoryVersion,
+      });
+    },
+    goToTranslate() {
+      this.$router.push({
+        name: 'repository-translate',
       });
     },
     examplesDeleted() {

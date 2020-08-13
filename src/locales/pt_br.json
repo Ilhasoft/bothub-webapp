@@ -53,7 +53,7 @@
       "language": "idioma",
       "category": "Categoria",
       "new_repo": "NOVA INTELIGÊNCIA",
-      "default_error": "Existem erros no formulário",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "description_form": "Descrição"
     },
     "register_form": {
@@ -110,7 +110,9 @@
     },
     "quick_test": {
       "quick_test": "TESTE RÁPIDO",
-      "error_quick_test": "Ocorreu um erro, não podemos analisar o seu texto",
+      "internet_off_quick_test": "Você está offline, verifique sua conexão",
+      "without_train_quick_test": "Você ainda não adicionou frases ao treinamento, adicione para testar.",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde",
       "intent": "Intenção",
       "debug": "Debug",
       "raw": "Raw",
@@ -123,7 +125,13 @@
       "intent": "Intenção",
       "relevance": "Relevância",
       "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
-      "reload": "Recarregar"
+      "reload": "Recarregar",
+      "debug": "Debug",
+      "debug_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
@@ -150,7 +158,7 @@
       "no_sentences": "Não há frases.",
       "detailed_results": "Resultados Detalhados",
       "results": "Resultados",
-      "default_error": "Houve um erro ao testar",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "entity_is_group": "<strong>{entity}</strong> pertence a <strong>{group}</strong>"
     },
     "result": {
@@ -201,7 +209,7 @@
       "all_categories": "Todas as categorias",
       "all_languages": "Todos os idiomas",
       "no_repo": "Nenhum repositório encontrado.",
-      "default_error": "Um erro ocorreu",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "edit_groups": "Editar grupos",
       "finish_editing": "Concluir edição",
       "enter": "Enviar",
@@ -251,10 +259,10 @@
       "search_user": "Digite um nome ou username",
       "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
-      "remove_user_confirm": "Remover todas as permissões para {user}?",
+      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
       "remove": "Remover",
       "cancel": "Cancelar",
-      "default_error": "Algo deu errado. Não foi possível realizar essa ação."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "roles": {
       "user": "Usuário",
@@ -294,6 +302,8 @@
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
+      "no_sentences": "Não há frases.",
+      "no_train_sentence": "Essa sentença ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",
@@ -324,23 +334,24 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Sem traduções.",
+      "no_translation": "Você não tem sentenças traduzidas,",
+      "click_here": "clique aqui para traduzir.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
       "languages_select": "Buscar idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
-      "import_button": "Importar sentenças",
-      "export_button": "Exportar sentenças",
-      "import_title": "Selecione um arquivo para importar",
+      "import_title": "Importar sentenças",
+      "export_title": "Exportar sentenças",
+      "import_button": "Importar",
+      "export_button": "Exportar",
       "import_field_text": "Nenhum arquivo selecionado",
       "import_select_button": "Clique para selecionar",
       "import_select_error": "Ocorreu um erro com o arquivo.",
-      "export_title": "Exportar apenas sentenças não traduzidas",
-      "export_switch_no": "Não",
-      "export_switch_yes": "Sim",
-      "export_field_text": "Quando essa opção está habilitada, o arquivo exportado conterá apenas sentenças não traduzidas"
+      "import_button_cancel": "Cancelar",
+      "export_all_sentences": "Todas as senteças",
+      "export_only_translated": "Senteças não traduzidas"
     },
     "orgs": {
       "owner": "Pertence a",
@@ -481,7 +492,7 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo",
+      "add_new": "Adicionar nova",
       "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
@@ -491,9 +502,7 @@
       "version": "Versão",
       "cannot_edit_this_repository": "Você não pode editar essa inteligência",
       "signin_you_account": "Entre na sua conta para editar essa inteligência.",
-      "your_version": "Sua Versão",
-      "your_intent": "Sua Intenção",
-      "your_filter": "Seu Filtro",
+      "all_versions": "Todas as versões",
       "test_sentences": "Frases de Teste",
       "training": "Treinamento",
       "add_to": "Adicionar à",

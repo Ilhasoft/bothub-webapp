@@ -1,6 +1,8 @@
 <template>
   <b-dropdown
+    :scrollable="true"
     :position="dropdownDirection"
+    :max-height="175"
     class="language-append-select-input">
     <span
       slot="trigger"
@@ -8,12 +10,14 @@
       <language-badge
         v-if="val"
         :language="val" />
-      <bh-icon
+      <b-icon
         v-else
-        value="earth" />
-      <bh-icon
+        size="is-small"
+        icon="earth" />
+      <b-icon
         class="align"
-        value="menu-down" />
+        size="is-small"
+        icon="menu-down" />
     </span>
     <b-dropdown-item
       v-for="(verbose, language) in languageList"

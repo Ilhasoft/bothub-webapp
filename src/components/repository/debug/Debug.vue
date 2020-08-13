@@ -4,8 +4,19 @@
       <p> {{ $t('webapp.debug.debug_description') }} </p>
       <b-button @click="load()"> {{ $t('webapp.debug.reload') }} </b-button>
     </div>
-    <loading v-else-if="loading" />
+    <loading
+      v-else-if="loading"
+      class="debug__loading"/>
     <div v-else>
+      <div class="debug__close">
+        <b-icon
+          icon="close"
+          @click.native="closeModal()"/>
+      </div>
+      <div class="debug__title">
+        <h1>{{ $t('webapp.debug.debug') }}</h1>
+        <p>{{ $t('webapp.debug.debug_subtitle') }}</p>
+      </div>
       <div class="debug__text__container">
         <div
           v-for="(word, index) in wordsFromText"
@@ -138,6 +149,9 @@ export default {
       // eslint-disable-next-line no-useless-escape
       return word.replace(/[.,\/#!$%\^&\*;:?/(/){}=\-_`~()]/g, '');
     },
+    closeModal() {
+      this.$parent.close();
+    },
     async load() {
       this.error = null;
       this.loading = true;
@@ -174,8 +188,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
     tr, td, table, th, .table {
     border: 0;
@@ -189,6 +203,27 @@ export default {
     border-radius: 10px;
     padding: 1rem;
     background-color: white;
+
+    &__close{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: $color-grey-dark;
+      cursor: pointer;
+    }
+
+    &__title{
+      margin: 0 1rem;
+
+      h1{
+        font-size: 1.75rem;
+        font-weight: $font-weight-bolder;
+      }
+    }
+    &__loading{
+      padding: 1rem 0;
+    }
 
     &__table {
       text-align:center;
