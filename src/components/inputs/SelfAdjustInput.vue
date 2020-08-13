@@ -109,6 +109,7 @@ export default {
         resize: none;
         min-height: 36px;
         padding: 0.3rem 1rem;
+        max-height: 900vh;
 
         &__appended {
             padding: 0.3rem 4rem 0.3rem 1rem;

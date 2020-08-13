@@ -296,7 +296,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: inline-block;
+    display: block;
     max-width: 40vw;
   }
 </style>
