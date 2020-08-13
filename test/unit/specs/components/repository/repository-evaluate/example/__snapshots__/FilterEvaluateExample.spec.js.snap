@@ -6,17 +6,18 @@ exports[`TestView.vue renders correctly 1`] = `
     <b-field-stub addons="true" class="filter-evaluate-example__filters__input-text">
       <b-input-stub value="" type="text" hascounter="true" customclass="" iconright="magnify" debounce="750"></b-input-stub>
     </b-field-stub>
-    <div class="filter-evaluate-example__filters__wrapper">
+    <div class="filter-evaluate-example__filters__wrapper filter-evaluate-example__filters__wrapper__has-1-fields">
       <div class="filter-evaluate-example__filters__wrapper__text">
         some specific text:
       </div>
       <b-field-stub addons="true">
         <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
       </b-field-stub>
-      <b-field-stub addons="true">
-        <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
-      </b-field-stub>
       <!---->
+      <!---->
+      <b-field-stub addons="true">
+        <!---->
+      </b-field-stub>
     </div>
   </div>
 </div>

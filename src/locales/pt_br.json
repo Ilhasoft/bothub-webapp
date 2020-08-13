@@ -125,7 +125,13 @@
       "intent": "Intenção",
       "relevance": "Relevância",
       "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
-      "reload": "Recarregar"
+      "reload": "Recarregar",
+      "debug": "Debug",
+      "debug_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analise a relevância de cada palavra da sentença e entenda o resultado do seu quick test."
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
@@ -486,7 +492,7 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo",
+      "add_new": "Adicionar nova",
       "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
@@ -496,9 +502,7 @@
       "version": "Versão",
       "cannot_edit_this_repository": "Você não pode editar essa inteligência",
       "signin_you_account": "Entre na sua conta para editar essa inteligência.",
-      "your_version": "Sua Versão",
-      "your_intent": "Sua Intenção",
-      "your_filter": "Seu Filtro",
+      "all_versions": "Todas as versões",
       "test_sentences": "Frases de Teste",
       "training": "Treinamento",
       "add_to": "Adicionar à",

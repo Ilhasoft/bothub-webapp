@@ -125,7 +125,13 @@
       "intent": "Intent",
       "relevance": "Relevance",
       "debug_description": "Something unexpected happened! We couldn't debug your text.",
-      "reload": "Reload"
+      "reload": "Reload",
+      "debug": "Debug",
+      "debug_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
     },
     "evaluate": {
       "header_title": "Test your data set",
@@ -260,7 +266,7 @@
       "user": "User",
       "contributor": "Contributor",
       "admin": "Admin",
-      "translator": "Trandutor",
+      "translator": "Translator",
       "user_description": "Can read and analyze",
       "contributor_description": "Can read, analyze and contribute with examples and translations",
       "admin_description": "Can read, analyze, contribute and write repository config",
@@ -498,9 +504,7 @@
       "version": "Version",
       "cannot_edit_this_repository": "You cannot edit this repository",
       "signin_you_account": "Sign in to your account to edit this repository.",
-      "your_version": "Your Version",
-      "your_intent": "Your Intent",
-      "your_filter": "Your Filter",
+      "all_versions": "All Versions",
       "test_sentences": "Test Sentences",
       "training": "Training",
       "add_to": "Add to",
