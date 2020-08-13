@@ -1,7 +1,22 @@
 <template>
-  <bh-input>
-    <div :class="inputClassAttr.concat(['example-txt-w-highlighted-entities'])">
+  <div class="field">
+    <div class="example-txt-w-highlighted-entities">
       <div class="example-txt-w-highlighted-entities__input-wrapper">
+        <div class="field">
+          <div class="control has-icons-right">
+            <input
+              ref="input"
+              v-model="val"
+              :placeholder="$t('webapp.trainings.add_a_sentence')"
+              class="input"
+              @select.stop.prevent="emitTextSelected"
+              @keyup.enter="submit()"
+            >
+            <span class="icon is-right example-txt-w-highlighted-entities__append">
+              <slot name="append" />
+            </span>
+          </div>
+        </div>
         <div
           v-for="(entity, i) in entitiesBlocks"
           :key="i"
@@ -15,24 +30,12 @@
               'example-txt-w-highlighted-entities__entity__text'
           ]">{{ entity.text }}</span>
         </div>
-        <textarea
-          ref="input"
-          v-bind="$attrs"
-          v-model="val"
-          class="bh-textarea__input example-txt-w-highlighted-entities__input"
-          @select.stop.prevent="emitTextSelected()"
-          @click.stop.prevent="emitTextSelected()"
-          @keyup.stop.prevent="emitTextSelected()"
-          @keyup.enter="submit()"
-        />
       </div>
-      <slot name="append" />
     </div>
-  </bh-input>
+  </div>
 </template>
 
 <script>
-import BH from 'bh';
 import Flag from '@/components/shared/Flag';
 import { getEntityColor } from '@/utils/entitiesColors';
 
@@ -43,19 +46,19 @@ const components = {
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   components,
-  extends: BH.components.BhTextarea,
   props: {
-    entities: {
-      type: Array,
-      default: () => ([]),
+    value: {
+      type: String,
+      default: '',
     },
-    availableEntities: {
+    entities: {
       type: Array,
       default: () => ([]),
     },
   },
   data() {
     return {
+      val: this.value,
       selectionStart: 0,
       selectionEnd: 0,
     };
@@ -75,12 +78,10 @@ export default {
         .map(({ start, end, entity }) => {
           const color = getEntityColor(
             entity,
-            this.availableEntities,
-            this.entities,
           );
           const colorClass = `entity-${color}`;
-          const before = this.val.substring(0, start);
-          const text = this.val.substring(start, end);
+          const before = this.value.substring(0, start);
+          const text = this.value.substring(start, end);
           return {
             start,
             end,
@@ -93,17 +94,22 @@ export default {
           start: this.selectionStart,
           end: this.selectionEnd,
           colorClass: 'entity-selected',
-          before: this.val.substring(0, this.selectionStart),
-          text: this.val.substring(this.selectionStart, this.selectionEnd),
+          before: this.value.substring(0, this.selectionStart),
+          text: this.value.substring(this.selectionStart, this.selectionEnd),
         }]);
+    },
+  },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
     },
   },
   methods: {
     submit() {
       this.$emit('submit');
     },
-    emitTextSelected() {
-      const { value, selectionStart, selectionEnd } = this.$refs.input;
+    emitTextSelected(event) {
+      const { value, selectionStart, selectionEnd } = event.target;
       const selected = value.slice(selectionStart, selectionEnd);
 
       const startPadding = selected.search(/\S|$/);
@@ -145,9 +151,11 @@ export default {
 }
 
 .example-txt-w-highlighted-entities {
-  background-color: white;
-  border-radius: $form-components-border-radius;
-  height: 2.2rem;
+
+  &__append {
+    pointer-events: all !important;
+    width: 5.2rem !important;
+  }
 
   &__input-wrapper {
     position: relative;
@@ -163,17 +171,19 @@ export default {
 
     position: absolute;
     top: 0;
-    left: 0;
+    left: 3px;
     z-index: 0;
     height: max-content !important;
     padding: .5rem;
     background: none;
     border-color: transparent;
+    pointer-events: none;
 
     &__before,
     &__text {
       color: rgba(0, 0, 0, 0);
       white-space: pre-line;
+      pointer-events: none;
     }
 
     &__text {
