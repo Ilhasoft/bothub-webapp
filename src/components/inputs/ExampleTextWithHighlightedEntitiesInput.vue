@@ -186,22 +186,21 @@ export default {
     z-index: 0;
     height: max-content !important;
     word-wrap: break-word;
-    padding: 0.3rem 1rem;
+    padding: 0.3rem 0.9rem;
     font: inherit;
     line-height: 1.5;
     max-width: 100%;
     background: none;
-    border-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0);
     pointer-events: none;
 
     &__with-append {
-      padding: 0.3rem 4rem 0.3rem 1rem;
+      padding: 0.3rem 4rem 0.3rem 0.9rem;
     }
 
     &__before,
     &__text {
       color: rgba(0, 0, 0, 0);
-      color: red;
       max-width: 100%;
       white-space: pre-line;
       pointer-events: none;
