@@ -4,31 +4,34 @@
       <div class="example-txt-w-highlighted-entities__input-wrapper">
         <div class="field">
           <div class="control has-icons-right">
-            <input
-              ref="input"
-              v-model="val"
+            <div
+              v-for="(entity, i) in entitiesBlocks"
+              :key="i"
+              :class="entityClassAttr">
+              <span
+                :class="[
+                  'example-txt-w-highlighted-entities__entity__before',
+              ]">{{ entity.before }}</span><span
+                :class="[
+                  entity.colorClass,
+                  'example-txt-w-highlighted-entities__entity__text'
+              ]">{{ entity.text }}</span>
+            </div>
+            <self-adjust-input
               :placeholder="$t('webapp.trainings.add_a_sentence')"
-              class="input"
-              @select.stop.prevent="emitTextSelected"
-              @keyup.enter="submit()"
-            >
-            <span class="icon is-right example-txt-w-highlighted-entities__append">
-              <slot name="append" />
-            </span>
+              v-model="val"
+              transparent
+              @select="emitTextSelected"
+              @click.stop.prevent="emitTextSelected"
+              @keyup.stop.prevent="emitTextSelected"
+              @keyup.enter="submit()">
+              <span
+                v-if="hasAppend"
+                slot="append">
+                <slot name="append" />
+              </span>
+            </self-adjust-input>
           </div>
-        </div>
-        <div
-          v-for="(entity, i) in entitiesBlocks"
-          :key="i"
-          :class="entityClassAttr">
-          <span
-            :class="[
-              'example-txt-w-highlighted-entities__entity__before',
-          ]">{{ entity.before }}</span><span
-            :class="[
-              entity.colorClass,
-              'example-txt-w-highlighted-entities__entity__text'
-          ]">{{ entity.text }}</span>
         </div>
       </div>
     </div>
@@ -36,11 +39,11 @@
 </template>
 
 <script>
-import Flag from '@/components/shared/Flag';
+import SelfAdjustInput from '@/components/inputs/SelfAdjustInput';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 const components = {
-  Flag,
+  SelfAdjustInput,
 };
 
 export default {
@@ -64,11 +67,18 @@ export default {
     };
   },
   computed: {
+    hasAppend() {
+      return this.$slots.append;
+    },
     entityClassAttr() {
       const classes = ['example-txt-w-highlighted-entities__entity'];
 
       if (this.size) {
         classes.push(`example-txt-w-highlighted-entities__entity--${this.size}`);
+      }
+
+      if (this.hasAppend) {
+        classes.push('example-txt-w-highlighted-entities__entity__with-append');
       }
 
       return classes;
@@ -159,6 +169,7 @@ export default {
 
   &__input-wrapper {
     position: relative;
+    background-color: white;
   }
 
   &__input {
@@ -171,17 +182,27 @@ export default {
 
     position: absolute;
     top: 0;
-    left: 3px;
+    left: 0;
     z-index: 0;
     height: max-content !important;
-    padding: .5rem;
+    word-wrap: break-word;
+    padding: 0.3rem 1rem;
+    font: inherit;
+    line-height: 1.5;
+    max-width: 100%;
     background: none;
     border-color: transparent;
     pointer-events: none;
 
+    &__with-append {
+      padding: 0.3rem 4rem 0.3rem 1rem;
+    }
+
     &__before,
     &__text {
       color: rgba(0, 0, 0, 0);
+      color: red;
+      max-width: 100%;
       white-space: pre-line;
       pointer-events: none;
     }
@@ -192,7 +213,7 @@ export default {
     }
 
     &--small {
-      padding: .5rem;
+      padding: .3rem 1rem;
       font-size: .5rem;
       line-height: .5rem;
     }

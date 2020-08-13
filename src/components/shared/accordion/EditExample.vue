@@ -9,8 +9,7 @@
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
-              :entities="entitiesToEdit"
-              :available-entities="entitiesToEdit"
+              :entities="allEntities"
               :formatters="textFormatters"
               :placeholder="$t('webapp.example.enter_sentence')"
               size="normal"
@@ -183,6 +182,9 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
+    allEntities() {
+      return [...this.entitiesToEdit, ...this.pendingEntities];
+    },
     validationErrors() {
       const errors = [];
 
