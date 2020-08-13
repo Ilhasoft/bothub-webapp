@@ -2,17 +2,17 @@
   <div>
     <div class="columns is-variable is-1">
       <div
-        class="column is-half">
-        <b-field>
-          <span
-            slot="label"
-            class="entity-form-label"><span
-              :class="entityClass"
-              class="is-rounded">{{ selectedText }}</span> is</span>
+        class="column is-half entity-form">
+        <span
+          slot="label"
+          class="entity-form__label"><span
+            :class="entityClass"
+            class="is-rounded">{{ selectedText }}</span> is</span>
+        <b-field
+          id="tour-training-step-3"
+          :is-previous-disabled="true">
           <b-autocomplete
-            id="tour-training-step-3"
             ref="entityInputField"
-            :is-previous-disabled="true"
             :data="availableEntities"
             expanded
             open-on-focus
@@ -120,9 +120,15 @@ export default {
 };
 </script>
 
-<style scoped>
-  .entity-form-label {
-    margin-bottom: 6px;
-    display: block;
+<style lang="scss" scoped>
+
+  .entity-form{
+    margin-left: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    &__label{
+      margin-bottom: 6px;
+      display: block;
+    }
   }
 </style>
