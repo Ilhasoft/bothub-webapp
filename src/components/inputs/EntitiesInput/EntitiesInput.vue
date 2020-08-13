@@ -35,7 +35,7 @@
         type="is-primary"
         @click.prevent.stop="addEntity()"
       >
-        <span>
+        <span class="add-entity-button-text">
           <span v-if="textSelectedValue">
             {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
           </span>
@@ -290,3 +290,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .add-entity-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 40vw;
+  }
+</style>

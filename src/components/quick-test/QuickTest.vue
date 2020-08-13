@@ -94,7 +94,6 @@
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import { mapGetters } from 'vuex';
-import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
 import SelfAdjustInput from '@/components/inputs/SelfAdjustInput';
@@ -104,7 +103,6 @@ export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
-    TextAreaInput,
     LanguageAppendSelectInput,
     QuickTestText,
     SelfAdjustInput,

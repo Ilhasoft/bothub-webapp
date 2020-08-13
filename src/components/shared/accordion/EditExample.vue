@@ -10,7 +10,6 @@
               ref="textInput"
               v-model="text"
               :entities="allEntities"
-              :formatters="textFormatters"
               :placeholder="$t('webapp.example.enter_sentence')"
               size="normal"
               @textSelected="setTextSelected($event)"
@@ -98,7 +97,7 @@
           type="is-primary"
           @click.prevent.stop="addPendingEntity"
         >
-          {{ entityButtonText }}
+          <span class="edit-sentence__add-entity-button-text">{{ entityButtonText }} </span>
         </b-button>
         <div>
           <b-button
@@ -424,6 +423,14 @@ export default {
      &__label /deep/ {
        font-weight: normal;
      }
+  }
+
+  &__add-entity-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 50vw;
   }
 
   &-input {

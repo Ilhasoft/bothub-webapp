@@ -138,12 +138,8 @@ export default {
     },
     clearSelected() {
       this.$nextTick(() => {
-        if (this.$refs.input.setSelectionRange) {
-          this.$refs.input.deselect();
-          this.$refs.input.inputAction('blur');
-        } else {
-          this.$refs.input.inputAction('focus');
-        }
+        this.$refs.input.deselect();
+        this.$refs.input.inputAction('blur');
       });
     },
   },
