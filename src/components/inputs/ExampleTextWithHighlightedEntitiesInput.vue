@@ -18,6 +18,7 @@
               ]">{{ entity.text }}</span>
             </div>
             <self-adjust-input
+              ref="input"
               :placeholder="$t('webapp.trainings.add_a_sentence')"
               v-model="val"
               transparent
@@ -138,11 +139,10 @@ export default {
     clearSelected() {
       this.$nextTick(() => {
         if (this.$refs.input.setSelectionRange) {
-          window.getSelection().removeAllRanges();
-          this.$refs.input.setSelectionRange(0, 0);
-          this.$refs.input.blur();
+          this.$refs.input.deselect();
+          this.$refs.input.inputAction('blur');
         } else {
-          this.$refs.input.focus();
+          this.$refs.input.inputAction('focus');
         }
       });
     },

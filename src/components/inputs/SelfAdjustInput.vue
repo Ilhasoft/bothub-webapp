@@ -3,12 +3,13 @@
     <div :class="{control: true, 'has-icons-right': hasAppend}">
       <textarea
         ref="input"
-        v-model="val"
         :class="{textarea: true,
                  'self-adjust': true,
                  'self-adjust__appended': hasAppend,
-                 'self-adjust--transparent': transparent}"
+                 'self-adjust--transparent': transparent,
+                 [`self-adjust--${size}`]: true}"
         v-bind="$attrs"
+        v-model="val"
         v-on="inputListeners"/>
       <span
         v-if="hasAppend"
@@ -20,6 +21,8 @@
 </template>
 
 <script>
+import { formatters } from '@/utils';
+
 export default {
   name: 'SelfAdjustInput',
   props: {
@@ -35,51 +38,64 @@ export default {
       type: Boolean,
       default: null,
     },
+    size: {
+      type: String,
+      default: 'normal',
+    },
   },
   data() {
     return {
-      rows: 1,
       val: this.value,
+      rows: 1,
     };
   },
   computed: {
+    fontSize() {
+      if (this.size === 'small') return 14;
+      return 16;
+    },
     hasAppend() {
-      return this.$slots.append !== undefined;
+      return this.$slots.append;
     },
     inputListeners() {
-      const vm = this;
       return Object.assign({},
         this.$listeners,
         {
-          input(event) {
-            vm.$emit('input', event.target.value);
-          },
+          input: () => {},
         });
     },
   },
   watch: {
+    value() {
+      this.val = this.value;
+    },
     val() {
+      this.val = formatters.sentenceItemKey()(this.val);
+      this.$emit('input', this.val);
       this.updateTextareaHeight();
     },
-    updateValue() {
+    async updateValue() {
       this.updateTextareaHeight();
     },
   },
   async mounted() {
-    await this.$nextTick();
     this.updateTextareaHeight();
   },
   methods: {
-    printEvent(event) {
-      this.$emit('selected');
-      console.log(event);
+    deselect() {
+      window.getSelection().removeAllRanges();
+      this.$refs.input.setSelectionRange(0, 0);
     },
-    updateTextareaHeight() {
+    inputAction(action) {
+      this.$refs.input[action]();
+    },
+    async updateTextareaHeight() {
+      await this.$nextTick();
       const { input } = this.$refs;
       const offset = (input.offsetHeight - input.clientHeight);
       const computedStyle = window.getComputedStyle(input);
       input.style.minHeight = this.rows
-        ? `${offset + (this.rows * 16)}px`
+        ? `${offset + (this.rows * this.fontSize)}px`
         : '';
       input.style.height = computedStyle.getPropertyValue('min-height');
       input.style.height = `${offset + input.scrollHeight}px`;
@@ -91,7 +107,7 @@ export default {
 <style lang="scss" scoped>
     .self-adjust {
         resize: none;
-        height: 36px;
+        min-height: 36px;
         padding: 0.3rem 1rem;
 
         &__appended {
@@ -100,6 +116,10 @@ export default {
 
         &--transparent {
             background-color: transparent;
+        }
+
+        &--small {
+            font-size: 14px;
         }
     }
 
