@@ -10,6 +10,11 @@ export default {
       `v2/account/user-profile/${nickname}/`,
     );
   },
+  org_profile(nickname) {
+    return request.$http.get(
+      `v2/org/profile/${nickname}/`,
+    );
+  },
   myProfile() {
     return request.$http.get(
       '/v2/account/my-profile/',

@@ -159,7 +159,7 @@ export default {
       });
     },
     updateUserProfile() {
-      this.updateProfile({ nickname: this.user__nickname });
+      this.updateProfile({ nickname: this.user__nickname, isOrg: this.user__is_organization });
     },
     async updateRole() {
       this.submitting = true;
