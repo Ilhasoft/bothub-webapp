@@ -5,17 +5,14 @@ import Equal from '!!svg-inline-loader!@/assets/icons/equal.svg';
 import Botinho from '!!svg-inline-loader!@/assets/icons/botinho.svg';
 import DotsVertical from '!!svg-inline-loader!@/assets/icons/dots-vertical.svg';
 import FlagVariant from '!!svg-inline-loader!@/assets/icons/flag-variant.svg';
-import ChevronRight from '!!svg-inline-loader!@/assets/icons/chevron-right.svg';
 import Minus from '!!svg-inline-loader!@/assets/icons/minus.svg';
 import CodeTags from '!!svg-inline-loader!@/assets/icons/code-tags.svg';
 import ClipboardTextOutline from '!!svg-inline-loader!@/assets/icons/clipboard-text-outline.svg';
 import InvertColors from '!!svg-inline-loader!@/assets/icons/invert-colors.svg';
 import ClipboardAlert from '!!svg-inline-loader!@/assets/icons/clipboard-alert.svg';
 import LockReset from '!!svg-inline-loader!@/assets/icons/lock-reset.svg';
-import AccountEdit from '!!svg-inline-loader!@/assets/icons/account-edit.svg';
 import Sentence from '!!svg-inline-loader!@/assets/icons/sentence.svg';
 import Language from '!!svg-inline-loader!@/assets/icons/language.svg';
-import Question from '!!svg-inline-loader!@/assets/icons/question.svg';
 import Business from '!!svg-inline-loader!@/assets/icons/business.svg';
 import Commercial from '!!svg-inline-loader!@/assets/icons/commercial.svg';
 import Culture from '!!svg-inline-loader!@/assets/icons/culture.svg';
@@ -26,9 +23,6 @@ import Food from '!!svg-inline-loader!@/assets/icons/food.svg';
 import Health from '!!svg-inline-loader!@/assets/icons/health.svg';
 import Social from '!!svg-inline-loader!@/assets/icons/social.svg';
 import Tech from '!!svg-inline-loader!@/assets/icons/tech.svg';
-import Success from '!!svg-inline-loader!@/assets/icons/success.svg';
-import Danger from '!!svg-inline-loader!@/assets/icons/danger.svg';
-import Config from '!!svg-inline-loader!@/assets/icons/config.svg';
 import FlagBr from '!!svg-inline-loader!@/assets/icons/flag-br.svg';
 import FlagDe from '!!svg-inline-loader!@/assets/icons/flag-de.svg';
 import FlagEs from '!!svg-inline-loader!@/assets/icons/flag-es.svg';
@@ -48,7 +42,6 @@ export default {
   botinho: Botinho,
   'dots-vertical': DotsVertical,
   'flag-variant': FlagVariant,
-  'chevron-right': ChevronRight,
   minus: Minus,
   information: Information,
   'code-tags': CodeTags,
@@ -56,22 +49,17 @@ export default {
   'invert-colors': InvertColors,
   'clipboard-alert': ClipboardAlert,
   'lock-reset': LockReset,
-  'account-edit': AccountEdit,
   sentence: Sentence,
   language: Language,
-  question: Question,
   business: Business,
   commercial: Commercial,
   culture: Culture,
   education: Education,
   finances: Finances,
-  success: Success,
-  danger: Danger,
   food: Food,
   health: Health,
   social: Social,
   tech: Tech,
-  config: Config,
   'customer-service': CustomerService,
   'flag-br': FlagBr,
   'flag-de': FlagDe,
