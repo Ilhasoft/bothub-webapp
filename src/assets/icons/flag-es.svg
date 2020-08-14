@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>ES@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="8.24609375" cy="8.31542969" r="7.5"></circle>
+        <rect id="path-3" x="0" y="0" width="21.0737075" height="15.0526482" rx="2"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-8" transform="translate(-11.000000, -20.000000)">
+            <g id="ES" transform="translate(10.449219, 19.379883)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(-2.394531, 0.815430)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="Mask" stroke="none" fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <rect id="Rectangle-2" stroke="none" fill="#DD172C" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="0" width="21.0737075" height="4.01403952"></rect>
+                        <rect id="Rectangle-2" stroke="none" fill="#DD172C" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="11.0386087" width="21.0737075" height="4.01403952"></rect>
+                        <rect id="Rectangle-2" stroke="none" fill="#FFD133" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="4.01403952" width="21.0737075" height="7.02456916"></rect>
+                        <path d="M7.06688047,9.16551323 C6.98485826,9.18797843 6.89974396,9.20001053 6.81329385,9.20001053 L6.81329385,9.86667719 L7.32563345,9.86667719 L7.32563345,9.20001053 C7.23698147,9.20001053 7.15016977,9.18800739 7.06688047,9.16551323 Z" id="Rectangle-137" stroke="#A41517" stroke-width="0.666666667" fill="none" mask="url(#mask-4)"></path>
+                        <rect id="Rectangle-135" stroke="none" fill="#A41517" fill-rule="evenodd" mask="url(#mask-4)" x="4.56068895" y="6.02105928" width="1.00350988" height="3.51228458"></rect>
+                        <rect id="Rectangle-135-Copy" stroke="none" fill="#A41517" fill-rule="evenodd" mask="url(#mask-4)" x="8.57472847" y="6.02105928" width="1.00350988" height="3.51228458"></rect>
+                        <path d="M6.06595377,5.51930434 C6.06595377,5.24219274 6.28074004,5.0175494 6.5724096,5.0175494 L7.5665177,5.0175494 C7.84622553,5.0175494 8.07297353,5.25029705 8.07297353,5.51930434 L8.07297353,5.68131661 C8.07297353,5.86895131 7.91548606,6.02105928 7.74155504,6.02105928 L6.39737226,6.02105928 C6.21433488,6.02105928 6.06595377,5.86426086 6.06595377,5.68131661 L6.06595377,5.51930434 Z" id="Rectangle-138" stroke="none" fill="#A41517" fill-rule="evenodd" mask="url(#mask-4)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

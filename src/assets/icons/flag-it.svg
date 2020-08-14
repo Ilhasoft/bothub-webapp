@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>IT Copy@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="8.23828125" cy="8.31542969" r="7.5"></circle>
+        <rect id="path-3" x="0" y="0" width="22.5625" height="16.1160714" rx="2"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-8" transform="translate(-131.000000, -20.000000)">
+            <g id="IT-Copy" transform="translate(130.976074, 19.379883)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(-3.042969, 0.257394)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <rect stroke="#F5F5F5" stroke-width="0.5" x="0.25" y="0.25" width="22.0625" height="15.6160714" rx="2"></rect>
+                        <rect id="Mask" stroke="none" fill="#E43D4C" fill-rule="evenodd" mask="url(#mask-4)" x="15.0416667" y="0" width="7.52083333" height="16.1160714"></rect>
+                        <rect id="Rectangle-2" stroke="none" fill="#1BB65D" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="0" width="7.52083333" height="16.1160714"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

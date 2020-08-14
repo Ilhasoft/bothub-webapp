@@ -8,19 +8,21 @@
       <div><small>{{ text }}</small></div>
     </div>
     <div class="bh-grid__item bh-grid__item--grow-0">
-      <bh-icon-button
+      <b-icon
         ref="approveBtn"
-        primary
-        value="check"
-        size="small"
+        class="clickable"
+        type="is-primary"
+        icon="check"
+        size="is-small"
         @click="approve()" />
     </div>
     <div class="bh-grid__item bh-grid__item--grow-0">
-      <bh-icon-button
+      <b-icon
         ref="rejectBtn"
-        class="text-color-danger"
-        value="close"
-        size="small"
+        class="clickable"
+        type="is-danger"
+        icon="close"
+        size="is-small"
         @click="reject()" />
     </div>
   </div>
