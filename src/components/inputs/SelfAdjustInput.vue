@@ -51,7 +51,6 @@ export default {
   data() {
     return {
       val: this.value,
-      rows: 1,
     };
   },
   computed: {
@@ -99,9 +98,7 @@ export default {
       const { input } = this.$refs;
       const offset = (input.offsetHeight - input.clientHeight);
       const computedStyle = window.getComputedStyle(input);
-      input.style.minHeight = this.rows
-        ? `${offset + (this.rows * this.fontSize)}px`
-        : '';
+      input.style.minHeight = `${Math.max(36, offset + this.fontSize)}px`;
       input.style.height = computedStyle.getPropertyValue('min-height');
       input.style.height = `${offset + input.scrollHeight}px`;
     },
