@@ -5,7 +5,7 @@
     class="category-item">
     <p> {{ title }} </p>
     <div class="category-item__separator" />
-    <bh-icon
+    <custom-icon
       :value="icon"
       class="category-item__icon"
       size="large"/>
@@ -13,8 +13,11 @@
 </template>
 
 <script>
+import CustomIcon from '@/components/shared/CustomIcon';
+
 export default {
   name: 'CategoryItem',
+  components: { CustomIcon },
   props: {
     icon: {
       type: String,

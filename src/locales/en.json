@@ -23,7 +23,8 @@
       "no": "No",
       "items_total": "{n} item total | {n} items total",
       "type_here": "Type here...",
-      "support": "Bothub Support"
+      "support": "Bothub Support",
+      "search_bots": "Search for bots"
     },
     "login_form": {
       "login": "Log in to your account",

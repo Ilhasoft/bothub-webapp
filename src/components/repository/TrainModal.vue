@@ -61,23 +61,23 @@
         </div>
       </div>
       <div class="bh-grid__item text-center train-modal__buttons">
-        <bh-button
+        <b-button
           v-if="readyForTrain"
           :disabled="training"
-          primary
+          type="is-primary"
           @click="train()">
-          <bh-icon
-            :value="training ? 'refresh' : 'school'"
+          <b-icon
+            :icon="training ? 'refresh' : 'school'"
             :class="training && 'icon-spin' || null" />
           <span>{{ $t('webapp.train_modal.train') }}</span>
-        </bh-button>
-        <bh-button
+        </b-button>
+        <b-button
           v-else
           ref="closeBtn"
-          primary
+          type="is-primary"
           @click="closeModal()">
           <span>{{ $t('webapp.train_modal.ok') }}</span>
-        </bh-button >
+        </b-button >
       </div>
     </div>
   </bh-modal>
