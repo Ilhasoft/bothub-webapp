@@ -147,14 +147,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/forms.scss';
-@import '~bh/src/assets/scss/variables.scss';
-
-.bh {
-  &-textarea {
-    background: none;
-  }
-}
+@import '~@/assets/scss/variables.scss';
 
 .example-txt-w-highlighted-entities {
 
@@ -174,8 +167,6 @@ export default {
   }
 
   &__entity {
-    @include form-component-typography();
-
     position: absolute;
     top: 0;
     left: 0;
@@ -205,28 +196,6 @@ export default {
     &__text {
       border-radius: 4px;
       opacity: .5;
-    }
-
-    &--small {
-      padding: .3rem 1rem;
-      font-size: .5rem;
-      line-height: .5rem;
-    }
-
-    &--normal {
-      padding: .65rem 1rem;
-    }
-
-    &--medium {
-      padding: 1rem;
-      font-size: 1rem;
-      line-height: 1rem;
-    }
-
-    &--large {
-      padding: 1.75rem;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
     }
   }
 }

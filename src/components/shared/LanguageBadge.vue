@@ -23,16 +23,18 @@ export default {
 
 <style lang="scss" scoped>
 
+@import '~@/assets/scss/colors.scss';
+
   .badge {
-    border: 2px #2BBFAC solid !important;
-    background-color: #2BBFAC;
-    color: white;
+    border: 2px $color-primary-dark solid !important;
+    background-color: $color-primary-dark;
+    color: $color-white;
     padding: 0.8rem 1rem;
   }
 
   .transparent {
-    color: #2BBFAC !important;
-    background-color: white !important;
+    color: $color-primary-dark !important;
+    background-color: $color-white !important;
   }
 
 </style>
