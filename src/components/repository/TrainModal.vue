@@ -1,5 +1,5 @@
 <template>
-  <bh-modal
+  <b-modal
     :open.sync="openValue"
     :title="$t('webapp.train_modal.training_status')">
     <div
@@ -80,7 +80,7 @@
         </b-button >
       </div>
     </div>
-  </bh-modal>
+  </b-modal>
 </template>
 
 <script>
@@ -174,6 +174,8 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 .container{
   padding-bottom: 0.5rem;
+  background-color: $color-fake-white;
+  border-radius: 0.5rem;
 }
 
 .train-modal {
