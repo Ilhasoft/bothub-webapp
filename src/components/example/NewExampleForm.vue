@@ -15,8 +15,6 @@
             :is-step-blocked="textSelected === null"
             v-model="text"
             :entities="entities"
-            :available-entities="entitiesList"
-            :formatters="textFormatters"
             :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
@@ -92,7 +90,6 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions, mapGetters } from 'vuex';
-import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -147,15 +144,6 @@ export default {
     },
     isValid() {
       return this.validationErrors.length === 0;
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];

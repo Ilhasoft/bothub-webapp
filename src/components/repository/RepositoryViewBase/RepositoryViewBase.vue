@@ -44,7 +44,6 @@ import RequestAuthorizationModal from '@/components/repository/RequestAuthorizat
 import UserAvatar from '@/components/user/UserAvatar';
 import SiteFooter from '@/components/shared/SiteFooter';
 import QuickTest from '@/components/quick-test/QuickTest';
-import RepositoryNavigation from './RepositoryNavigation';
 import Loading from '@/components/shared/Loading';
 
 const ERROR_VERBOSE_LOOKUP = {
@@ -60,7 +59,6 @@ export default {
   },
   components: {
     SiteFooter,
-    RepositoryNavigation,
     QuickTest,
     UserAvatar,
     RequestAuthorizationModal,
@@ -153,8 +151,8 @@ export default {
 
 
 <style lang="scss" scoped>
-  @import '~bh/src/assets/scss/colors.scss';
-  @import '~bh/src/assets/scss/variables.scss';
+  @import '~@/assets/scss/colors.scss';
+  @import '~@/assets/scss/variables.scss';
 
 
   .rpstr-vw-bs {

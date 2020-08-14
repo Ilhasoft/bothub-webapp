@@ -403,6 +403,7 @@
       "repositories": "Inteligências",
       "modal_edit_your_profile": "Edite seu perfil",
       "modal_change_password": "Mudar Senha",
+      "password_change_success": "Senha alterada!",
       "edit": "Salvar",
       "trained_at": "Treinado às {trained} por {by}",
       "train_fail": "Treinamento falhou às {failed}",
