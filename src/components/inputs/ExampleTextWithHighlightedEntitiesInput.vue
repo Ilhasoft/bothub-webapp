@@ -65,6 +65,7 @@ export default {
       val: this.value,
       selectionStart: 0,
       selectionEnd: 0,
+      testVal: {},
     };
   },
   computed: {
@@ -121,6 +122,7 @@ export default {
     },
     emitTextSelected(event) {
       const { value, selectionStart, selectionEnd } = event.target;
+      this.testVal = { value, selectionStart, selectionEnd };
       const selected = value.slice(selectionStart, selectionEnd);
 
       const startPadding = selected.search(/\S|$/);
