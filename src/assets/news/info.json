@@ -1,7 +1,7 @@
 {
     "max_version": "1.18.0",
-    "count": 4,
-    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif"],
+    "count": 5,
+    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif", "4.gif"],
     "en": { 
         "back": "Back",
         "next": "Next",
@@ -23,7 +23,12 @@
             "subtext": " "
         },
         "4": {
-            "title": "Novo algoritmo!",
+            "title": "Create an organization!",
+            "text": "You can now create an organization and group all your company information into it.",
+            "subtext": " "
+        },
+        "5": {
+            "title": "New algorithm!",
             "text": "We added a new algorithm with the state-of-the-art model BERT, providing even greater accuracy of intelligence.",
             "subtext": " "
         }
@@ -49,6 +54,11 @@
             "subtext": " "
         },
         "4": {
+            "title": "Crie uma organização!",
+            "text": "Agora você pode criar uma organização e agrupar todas as informações da sua empresa nela.",
+            "subtext": " "
+        },
+        "5": {
             "title": "Novo algoritmo!",
             "text": "Adicionamos um novo algoritimo com o modelo de estado da arte BERT, provendo uma acuracia ainda maior da inteligência.",
             "subtext": " "
