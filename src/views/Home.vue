@@ -1,39 +1,27 @@
 <template>
   <layout>
     <div slot="center">
-      <bh-text
+      <b-input
         v-model="search"
+        :placeholder="$t('webapp.layout.search_bots')"
         no-border
-        placeholder="search for bots"
-      >
-        <div slot="append">
-          <bh-icon-button
-            size="small"
-            class="text-color-grey-dark"
-            value="magnify" />
-        </div>
-      </bh-text>
+        icon-right="magnify"
+      />
     </div>
     <div class="home">
-      <div class="bh-grid bh-grid--column">
-        <div class="bh-grid home__keep-inline ">
-          <div class="bh-grid__item">
-            <categories-list v-model="currentCategory" />
-          </div>
-          <div class="bh-grid__item bh-grid__item--grow-0">
-            <languages-list
-              v-model="currentLanguage"
-              open-position="bottom-left" />
-          </div>
-        </div>
-        <div>
-          <repository-card-list
-            :category="currentCategory"
-            :language="currentLanguage"
-            :search="search"
-            @cardList="getCardList($event)"
-          />
-        </div>
+      <div class=" home__search">
+        <categories-list v-model="currentCategory" />
+        <languages-list
+          v-model="currentLanguage"
+          open-position="bottom-left" />
+      </div>
+      <div>
+        <repository-card-list
+          :category="currentCategory"
+          :language="currentLanguage"
+          :search="search"
+          @cardList="getCardList($event)"
+        />
       </div>
     </div>
     <tour
@@ -83,16 +71,27 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/variables.scss';
 
 
 .home {
   margin: auto;
   max-width: $max-repository-card-width;
 
-  &__keep-inline {
+  &__search {
+    display: flex;
+    justify-content: flex-end;
+    max-width: $max-repository-card-width;
+    padding: 1.2rem 1rem;
+    margin: auto;
+
+    > * {
+      margin-left: 0.625rem;
+    }
+
     @media screen and (max-width: $mobile-width) {
-      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
     }
   }
 }

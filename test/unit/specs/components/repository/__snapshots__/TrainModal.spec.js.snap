@@ -22,9 +22,9 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
       </div>
     </div>
     <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
+      <b-button-stub type="is-primary" nativetype="button" tag="button">
+        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+      </b-button-stub>
     </div>
   </div>
 </bh-modal-stub>
@@ -52,9 +52,9 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
       </div>
     </div>
     <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
+      <b-button-stub type="is-primary" nativetype="button" tag="button">
+        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+      </b-button-stub>
     </div>
   </div>
 </bh-modal-stub>
@@ -71,9 +71,9 @@ exports[`TrainModal.vue renders correctly 1`] = `
       </div>
     </div>
     <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
+      <b-button-stub type="is-primary" nativetype="button" tag="button">
+        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+      </b-button-stub>
     </div>
   </div>
 </bh-modal-stub>

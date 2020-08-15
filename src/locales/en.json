@@ -23,7 +23,8 @@
       "no": "No",
       "items_total": "{n} item total | {n} items total",
       "type_here": "Type here...",
-      "support": "Bothub Support"
+      "support": "Bothub Support",
+      "search_bots": "Search for bots"
     },
     "login_form": {
       "login": "Log in to your account",
@@ -131,7 +132,7 @@
     },
     "raw": {
       "raw": "Raw",
-      "raw_subtitle": "Analyze the relevance of each word of the sentence and understand the result of your quick test."
+      "raw_subtitle": "Analyze the confidentiality on each intention identified to understand the result of the quick test"
     },
     "evaluate": {
       "header_title": "Test your data set",
