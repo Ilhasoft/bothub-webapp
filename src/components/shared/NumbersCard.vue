@@ -9,7 +9,7 @@
       :class="{ 'number-card': true, 'number-card--clickable': clickable }"
       @click="onClick">
       <h1 :class="['has-text-centered', `number-card__title--size-${size}`]">{{ count }}</h1>
-      <p :class="[has-text-centered, `number-card__subtitle--size-${size}`]">{{ label }} </p>
+      <p :class="['has-text-centered', `number-card__subtitle--size-${size}`]">{{ label }} </p>
     </div>
   </b-tooltip>
 </template>
