@@ -4,7 +4,7 @@
       v-if="loading" />
     <h3
       v-else-if="filteredLanguagesStatus.length === 0"
-      class="has-text-centered"> No translated languages </h3>
+      class="has-text-centered"> {{ $t('webapp.translate.no_translated') }} </h3>
     <transition-group
       name="list"
       mode="out-in"
@@ -34,9 +34,11 @@
         </div>
       </div>
     </transition-group>
-    <p class="card-count" v-show="!loading && filteredLanguagesStatus.length > 0">
+    <p
+      v-show="!loading && filteredLanguagesStatus.length > 0"
+      class="card-count">
       {{ $t('webapp.translate.showing',
-            { available: languageList.length, count: filteredLanguagesStatus.length }) }}
+            { available: languageCount, count: filteredLanguagesStatus.length }) }}
     </p>
   </div>
 </template>
@@ -87,8 +89,17 @@ export default {
       if (!this.languagesStatus) return {};
       return languageListToDict(Object.keys(this.languagesStatus));
     },
-    languageList() {
-      return Object.values(this.languages);
+    languageCount() {
+      if (!this.languagesStatus) return 0;
+      return Object.keys(this.languagesStatus).length;
+    },
+    completed() {
+      if (!this.languagesStatus) return [];
+      const completed = Object.entries(this.languagesStatus)
+        .filter(([, value]) => value.base_translations.percentage >= 100)
+        .map(([key]) => this.languages[key]);
+      this.$emit('updated', { completed });
+      return completed;
     },
     filteredLanguagesStatus() {
       if (!this.languagesStatus) {

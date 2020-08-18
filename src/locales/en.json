@@ -357,7 +357,8 @@
       "less_than_half": "Less than 50% translated",
       "all": "All languages",
       "search": "Search",
-      "showing": "Showing {count} of {available} available languages"
+      "showing": "Showing {count} of {available} available languages",
+      "no_translated": "No translated languages"
     },
     "orgs": {
       "owner": "Owned by",

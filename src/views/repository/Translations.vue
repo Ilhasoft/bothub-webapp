@@ -50,7 +50,8 @@
         :query="statusQuery"
         :repository-uuid="repository.uuid"
         v-model="toLanguage"
-        :translation-list="isListEmpty"/>
+        :translation-list="isListEmpty"
+        @updated="statusUpdated"/>
       <hr>
       <div class="translations__list">
         <translations-list
@@ -95,6 +96,7 @@ export default {
       toLanguage: null,
       statusQuery: null,
       updateStatus: false,
+      completedLanguages: [],
       translate: {
         from: null,
         to: null,
@@ -111,9 +113,6 @@ export default {
         languageListToDict(this.repository.available_languages),
       );
     },
-    completedLanguages() {
-      return this.languagesList;
-    },
     translatorsList() {
       const { users } = this.repository.authorizations;
       return users.map(user => user.nickname);
@@ -123,6 +122,9 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
+    statusUpdated({ completed }) {
+      this.completedLanguages = completed;
+    },
     checkList() {
       this.isListEmpty = false;
     },
@@ -144,7 +146,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        padding: 0.2rem 1.5rem;
+        padding: 0.1rem 1.5rem;
         border: 1px solid $color-border;
 
         > * {
