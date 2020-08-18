@@ -8,14 +8,15 @@
     <div
       :class="{ 'number-card': true, 'number-card--clickable': clickable }"
       @click="onClick">
-      <h1 :class="['has-text-centered', `number-card--size-${size}`]">{{ count }}</h1>
-      <p class="has-text-centered">{{ label }} </p>
+      <h1 :class="['has-text-centered', `number-card__title--size-${size}`]">{{ count }}</h1>
+      <p :class="[has-text-centered, `number-card__subtitle--size-${size}`]">{{ label }} </p>
     </div>
   </b-tooltip>
 </template>
 
 <script>
 export default {
+  name: 'NumbersCard',
   props: {
     clickable: {
       type: Boolean,
@@ -61,12 +62,24 @@ export default {
             }
         }
 
-        &--size-normal {
+        &__title {
+          &--size-normal {
             font-size: 2.938rem;
-        }
+          }
 
          &--size-medium {
             font-size: 2.188rem;
+          }
+        }
+
+        &__subtitle {
+          &--size-normal {
+            margin: 0.5rem 0;
+          }
+
+         &--size-medium {
+            margin: 0.25rem 0;
+          }
         }
     }
 

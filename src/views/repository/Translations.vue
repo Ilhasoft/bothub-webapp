@@ -152,7 +152,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        padding: 0.1rem 1.5rem;
+        padding: 0.25rem 1.5rem;
         border: 1px solid $color-border;
 
         > * {
