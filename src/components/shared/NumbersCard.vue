@@ -1,6 +1,6 @@
 <template>
   <b-tooltip
-    :active="helpText"
+    :active="helpText && helpText.length > 0"
     :label="helpText"
     multilined
     type="is-dark"
@@ -8,7 +8,7 @@
     <div
       :class="{ 'number-card': true, 'number-card--clickable': clickable }"
       @click="onClick">
-      <h1 class="has-text-centered">{{ count }}</h1>
+      <h1 :class="['has-text-centered', `number-card--size-${size}`]">{{ count }}</h1>
       <p class="has-text-centered">{{ label }} </p>
     </div>
   </b-tooltip>
@@ -33,10 +33,14 @@ export default {
       type: String,
       default: null,
     },
+    size: {
+      type: String,
+      default: 'normal',
+    },
   },
   methods: {
     onClick() {
-      this.$emit('click');
+      if (this.clickable) this.$emit('click');
     },
   },
 };
@@ -47,11 +51,22 @@ export default {
 @import '~@/assets/scss/variables.scss';
 
     .number-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         &--clickable {
             &:hover{
                 cursor: pointer;
                 color: $color-primary;
             }
+        }
+
+        &-size--normal {
+            font-size: 2.938rem;
+        }
+
+         &-size--medium {
+            font-size: 2.188rem;
         }
     }
 
@@ -62,10 +77,9 @@ export default {
     }
 
     h1 {
-        font-size: 47px;
         font-weight: $font-weight-bolder;
         font-family: $font-family;
-        margin:0;
+        margin: 0;
     }
 
 </style>

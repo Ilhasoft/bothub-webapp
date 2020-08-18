@@ -17,22 +17,30 @@
       @onAuthorizationRequested="updateRepository(false)" />
     <div v-else-if="repository">
       <div class="columns">
-        <translation-status-search
-          v-model="statusQuery"
-          class="column is-3" />
-        <div class="column translations__header__info">
-          <numbers-card
-            :count="4"
-            label="languages"
-            clickable />
-          <numbers-card
-            :count="2"
-            label="completed"
-            clickable />
-          <numbers-card
-            :count="4"
-            label="translators"
-            clickable />
+        <div class="column is-3">
+          <translation-status-search
+            v-model="statusQuery" />
+        </div>
+        <div class="column">
+          <div class="translations__header__info">
+            <numbers-card
+              :count="repository.available_languages.length"
+              :help-text="languagesList"
+              :label="$tc('webapp.summary.information_language',
+                          repository.available_languages.length)"
+              size="medium" />
+            <numbers-card
+              :help-text="completedLanguages.join(', ')"
+              :count="completedLanguages.length"
+              size="medium"
+              label="completed" />
+            <numbers-card
+              :help-text="translatorsList.join(', ')"
+              :count="translatorsList.length"
+              size="medium"
+              label="Translators"
+              clickable />
+          </div>
         </div>
       </div>
       <translations-status
@@ -57,6 +65,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { languageListToDict } from '@/utils';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import TranslationsStatus from '@/components/translate/NewTranslationsStatus';
@@ -96,6 +105,18 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
+    languagesList() {
+      return Object.values(
+        languageListToDict(this.repository.available_languages),
+      );
+    },
+    completedLanguages() {
+      return this.languagesList;
+    },
+    translatorsList() {
+      const { users } = this.repository.authorizations;
+      return users.map(user => user.nickname);
+    },
   },
   methods: {
     ...mapActions([
@@ -122,6 +143,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+        padding: 0.2rem;
         border: 1px solid $color-border;
 
         > * {

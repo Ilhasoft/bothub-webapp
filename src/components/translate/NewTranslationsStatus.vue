@@ -11,23 +11,25 @@
         v-for="{ status, language, selected } in filteredLanguagesStatus"
         :key="language"
         :ref="`status-${language}`"
-        class="card list-item  columns is-vcentered"
+        class="card list-item"
         @click="select(language)">
-        <p class="card-language column is-3">
-          <span>{{ language|languageVerbose }}</span>
-        </p>
-        <div
-          :class="{ selected }"
-          class="column is-8">
-          <div class="card-percentage__wrapper">
-            <div
-              :style="percentageStyle(status.base_translations.percentage)"
-              class="card-percentage" />
+        <div class="columns is-vcentered">
+          <p class="card-language column is-3">
+            <span>{{ language|languageVerbose }}</span>
+          </p>
+          <div
+            :class="{ selected }"
+            class="column is-8">
+            <div class="card-percentage__wrapper">
+              <div
+                :style="percentageStyle(status.base_translations.percentage)"
+                class="card-percentage" />
+            </div>
           </div>
+          <strong class="column is-1">
+            {{ Number(status.base_translations.percentage.toFixed(2)) }}%
+          </strong>
         </div>
-        <strong class="column is-1 has-text-centered">
-          {{ Number(status.base_translations.percentage.toFixed(2)) }}%
-        </strong>
       </div>
     </transition-group>
   </div>
@@ -36,7 +38,6 @@
 <script>
 import { mapActions } from 'vuex';
 import { formatters } from '@/utils';
-import { languageListToDict } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 const components = {
@@ -91,9 +92,9 @@ export default {
         }))
         .filter(languageStatus => (!languageStatus.status.is_base_language))
         .filter((language) => {
-          if (!this.query) return true;
-
           if (language.status.base_translations.percentage === 0) return false;
+
+          if (!this.query) return true;
 
           if (this.query.search && this.query.search.length > 0) {
             const search = new RegExp(formatters.bothubItemKey()(this.query.search));
@@ -114,9 +115,6 @@ export default {
   watch: {
     async ownerNickname() { await this.updateTranslationsStatus(); },
     async repositorySlug() { await this.updateTranslationsStatus(); },
-    query() {
-      console.log(this.query);
-    },
     selected() {
       this.$emit('input', this.selected);
     },
