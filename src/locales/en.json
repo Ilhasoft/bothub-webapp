@@ -352,7 +352,12 @@
       "export_all_sentences": "All Sentences",
       "export_only_translated": "Untranslated sentences",
       "translators": "Translators | Translator | Translators",
-      "completed": "Completed translations | Completed translation | Completed translations"
+      "completed": "Completed translations | Completed translation | Completed translations",
+      "more_than_half": "More than 50% translated",
+      "less_than_half": "Less than 50% translated",
+      "all": "All languages",
+      "search": "Search",
+      "showing": "Showing {count} of {available} available languages"
     },
     "orgs": {
       "owner": "Owned by",

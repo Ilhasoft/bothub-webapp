@@ -6,7 +6,6 @@
       v-else-if="filteredLanguagesStatus.length === 0"
       class="has-text-centered"> No translated languages </h3>
     <transition-group
-      v-else-if="!translationList"
       name="list"
       mode="out-in"
       tag="div">
@@ -35,6 +34,10 @@
         </div>
       </div>
     </transition-group>
+    <p class="card-count" v-show="!loading && filteredLanguagesStatus.length > 0">
+      {{ $t('webapp.translate.showing',
+            { available: languageList.length, count: filteredLanguagesStatus.length }) }}
+    </p>
   </div>
 </template>
 
@@ -81,6 +84,7 @@ export default {
   },
   computed: {
     languages() {
+      if (!this.languagesStatus) return {};
       return languageListToDict(Object.keys(this.languagesStatus));
     },
     languageList() {
@@ -203,6 +207,11 @@ export default {
       width: 100%;
       height: 1.563rem;
     }
+  }
+
+  &-count {
+    text-align: right;
+    color: $color-grey-dark;
   }
 
   &-language {

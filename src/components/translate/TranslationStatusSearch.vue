@@ -3,14 +3,14 @@
     <b-field>
       <b-input
         v-model="search"
-        icon-right="magnify"
-        placeholder="Search" />
+        :placeholder="$t('webapp.translate.search')"
+        icon-right="magnify" />
     </b-field>
     <b-field>
       <b-select
         v-model="percentage"
-        expanded
-        placeholder="All languages">
+        :placeholder="$t('webapp.translate.all')"
+        expanded>
         <option
           v-for="option in options"
           :key="option.label"
@@ -28,9 +28,9 @@ export default {
       percentage: { 'min-percentage': 0, 'max-percentage': 100 },
       search: '',
       options: [
-        { label: 'All languages', value: { 'min-percentage': 0, 'max-percentage': 100 } },
-        { label: 'More than 50%', value: { 'min-percentage': 50, 'max-percentage': 100 } },
-        { label: 'Less than 50%', value: { 'min-percentage': 0, 'max-percentage': 50 } },
+        { label: this.$t('webapp.translate.all'), value: { 'min-percentage': 0, 'max-percentage': 100 } },
+        { label: this.$t('webapp.translate.more_than_half'), value: { 'min-percentage': 50, 'max-percentage': 100 } },
+        { label: this.$t('webapp.translate.less_than_half'), value: { 'min-percentage': 0, 'max-percentage': 50 } },
       ],
     };
   },

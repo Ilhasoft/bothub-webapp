@@ -354,7 +354,12 @@
       "export_all_sentences": "Todas as senteças",
       "export_only_translated": "Senteças não traduzidas",
       "translators": "Tradutores | Tradutor | Tradutores",
-      "completed": "Traduções completas | Tradução completas | Traduções completas"
+      "completed": "Traduções completas | Tradução completas | Traduções completas",
+      "more_than_half": "Mais que 50% traduzidas",
+      "less_than_half": "Menos que 50% traduzidas",
+      "all": "Todos os idiomas",
+      "search": "Pesquisar",
+      "showing": "Mostrando {count} de {available} idiomas disponíveis"
     },
     "orgs": {
       "owner": "Pertence a",
