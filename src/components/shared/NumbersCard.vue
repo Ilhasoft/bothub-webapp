@@ -61,11 +61,11 @@ export default {
             }
         }
 
-        &-size--normal {
+        &--size-normal {
             font-size: 2.938rem;
         }
 
-         &-size--medium {
+         &--size-medium {
             font-size: 2.188rem;
         }
     }

@@ -2,20 +2,23 @@
   <div>
     <loading
       v-if="loading" />
+    <h3
+      v-else-if="filteredLanguagesStatus.length === 0"
+      class="has-text-centered"> No translated languages </h3>
     <transition-group
       v-else-if="!translationList"
       name="list"
       mode="out-in"
       tag="div">
       <div
-        v-for="{ status, language, selected } in filteredLanguagesStatus"
+        v-for="{ status, language, verbose, selected } in filteredLanguagesStatus"
         :key="language"
         :ref="`status-${language}`"
         class="card list-item"
         @click="select(language)">
         <div class="columns is-vcentered">
           <p class="card-language column is-3">
-            <span>{{ language|languageVerbose }}</span>
+            <span>{{ verbose }}</span>
           </p>
           <div
             :class="{ selected }"
@@ -37,7 +40,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { formatters } from '@/utils';
+import { formatters, languageListToDict } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 const components = {
@@ -77,9 +80,12 @@ export default {
     };
   },
   computed: {
-    // languages() {
-    //   return languageListToDict(this.languages);
-    // },
+    languages() {
+      return languageListToDict(Object.keys(this.languagesStatus));
+    },
+    languageList() {
+      return Object.values(this.languages);
+    },
     filteredLanguagesStatus() {
       if (!this.languagesStatus) {
         return [];
@@ -88,6 +94,7 @@ export default {
         .map(language => ({
           language,
           status: this.languagesStatus[language],
+          verbose: this.languages[language],
           selected: this.selected === language,
         }))
         .filter(languageStatus => (!languageStatus.status.is_base_language))
@@ -98,7 +105,7 @@ export default {
 
           if (this.query.search && this.query.search.length > 0) {
             const search = new RegExp(formatters.bothubItemKey()(this.query.search));
-            if (!search.test(formatters.bothubItemKey()(language.language))) return false;
+            if (!search.test(formatters.bothubItemKey()(language.verbose))) return false;
           }
 
           if (this.query['max-percentage']

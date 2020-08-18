@@ -25,21 +25,22 @@
           <div class="translations__header__info">
             <numbers-card
               :count="repository.available_languages.length"
-              :help-text="languagesList"
+              :help-text="languagesList.join(', ')"
               :label="$tc('webapp.summary.information_language',
                           repository.available_languages.length)"
               size="medium" />
             <numbers-card
               :help-text="completedLanguages.join(', ')"
               :count="completedLanguages.length"
-              size="medium"
-              label="completed" />
+              :label="$tc('webapp.translate.completed',
+                          completedLanguages.length)"
+              size="medium" />
             <numbers-card
               :help-text="translatorsList.join(', ')"
               :count="translatorsList.length"
-              size="medium"
-              label="Translators"
-              clickable />
+              :label="$tc('webapp.translate.translators',
+                          translatorsList.length)"
+              size="medium" />
           </div>
         </div>
       </div>
@@ -143,7 +144,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        padding: 0.2rem;
+        padding: 0.2rem 1.5rem;
         border: 1px solid $color-border;
 
         > * {

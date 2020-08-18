@@ -350,7 +350,9 @@
       "import_select_error": "There was an error with the file.",
       "import_button_cancel": "Cancel",
       "export_all_sentences": "All Sentences",
-      "export_only_translated": "Untranslated sentences"
+      "export_only_translated": "Untranslated sentences",
+      "translators": "Translators | Translator | Translators",
+      "completed": "Completed translations | Completed translation | Completed translations"
     },
     "orgs": {
       "owner": "Owned by",

@@ -352,7 +352,9 @@
       "import_select_error": "Ocorreu um erro com o arquivo.",
       "import_button_cancel": "Cancelar",
       "export_all_sentences": "Todas as senteças",
-      "export_only_translated": "Senteças não traduzidas"
+      "export_only_translated": "Senteças não traduzidas",
+      "translators": "Tradutores | Tradutor | Tradutores",
+      "completed": "Traduções completas | Tradução completas | Traduções completas"
     },
     "orgs": {
       "owner": "Pertence a",
