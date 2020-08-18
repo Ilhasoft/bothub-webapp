@@ -16,14 +16,32 @@
       :repository-uuid="repository.uuid"
       @onAuthorizationRequested="updateRepository(false)" />
     <div v-else-if="repository">
-      <div class="translations__header">
-        <translations-status
-          ref="translationsStatus"
-          :update="updateStatus"
-          :repository-uuid="repository.uuid"
-          v-model="toLanguage"
-          :translation-list="isListEmpty"/>
+      <div class="columns">
+        <translation-status-search
+          v-model="statusQuery"
+          class="column is-3" />
+        <div class="column translations__header__info">
+          <numbers-card
+            :count="4"
+            label="languages"
+            clickable />
+          <numbers-card
+            :count="2"
+            label="completed"
+            clickable />
+          <numbers-card
+            :count="4"
+            label="translators"
+            clickable />
+        </div>
       </div>
+      <translations-status
+        ref="translationsStatus"
+        :update="updateStatus"
+        :query="statusQuery"
+        :repository-uuid="repository.uuid"
+        v-model="toLanguage"
+        :translation-list="isListEmpty"/>
       <hr>
       <div class="translations__list">
         <translations-list
@@ -41,8 +59,10 @@
 import { mapActions, mapGetters } from 'vuex';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsStatus from '@/components/translate/NewTranslationsStatus';
+import TranslationStatusSearch from '@/components/translate/TranslationStatusSearch';
 import TranslationsList from '@/components/translate/TranslationsList';
+import NumbersCard from '@/components/shared/NumbersCard';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -55,12 +75,15 @@ export default {
     TranslationsList,
     mapGetters,
     AuthorizationRequestNotification,
+    TranslationStatusSearch,
+    NumbersCard,
     LoginForm,
   },
   extends: RepositoryBase,
   data() {
     return {
       toLanguage: null,
+      statusQuery: null,
       updateStatus: false,
       translate: {
         from: null,
@@ -87,3 +110,24 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
+  .translations {
+    &__header {
+      display: flex;
+
+      &__info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        border: 1px solid $color-border;
+
+        > * {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+</style>
