@@ -51,6 +51,7 @@
         :repository-uuid="repository.uuid"
         v-model="toLanguage"
         :translation-list="isListEmpty"
+        class="translations__status"
         @updated="statusUpdated"/>
       <hr>
       <div class="translations__list">
@@ -139,6 +140,11 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
   .translations {
+
+    &__status {
+      margin-top: 2.75rem;
+    }
+
     &__header {
       display: flex;
 
