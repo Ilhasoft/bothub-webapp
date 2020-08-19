@@ -1,6 +1,6 @@
 <template>
-  <bh-input>
-    <div :class="inputClassAttr.concat(['example-txt-w-highlighted-entities'])">
+  <div class="field">
+    <div :class="['example-txt-w-highlighted-entities']">
       <div class="example-txt-w-highlighted-entities__input-wrapper">
         <div
           v-for="(entity, i) in entitiesBlocks"
@@ -15,20 +15,20 @@
               'example-txt-w-highlighted-entities__entity__text'
           ]">{{ entity.text }}</span>
         </div>
-        <textarea
+        <b-input
           ref="input"
           v-bind="$attrs"
           v-model="val"
           class="bh-textarea__input example-txt-w-highlighted-entities__input"
-          @select.stop.prevent="emitTextSelected()"
-          @click.stop.prevent="emitTextSelected()"
-          @keyup.stop.prevent="emitTextSelected()"
-          @keyup.enter="submit()"
+          @select.native.stop="emitTextSelected()"
+          @click.native.stop.prevent="emitTextSelected()"
+          @keyup.native.stop.prevent="emitTextSelected()"
+          @keyup.native.enter="submit()"
         />
       </div>
       <slot name="append" />
     </div>
-  </bh-input>
+  </div>
 </template>
 
 <script>
@@ -43,7 +43,6 @@ const components = {
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   components,
-  extends: BH.components.BhTextarea,
   props: {
     entities: {
       type: Array,
@@ -56,6 +55,7 @@ export default {
   },
   data() {
     return {
+      val: '',
       selectionStart: 0,
       selectionEnd: 0,
     };

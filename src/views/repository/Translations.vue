@@ -22,26 +22,10 @@
             v-model="statusQuery" />
         </div>
         <div class="column">
-          <div class="translations__header__info">
-            <numbers-card
-              :count="repository.available_languages.length"
-              :help-text="languagesList.join(', ')"
-              :label="$tc('webapp.summary.information_language',
-                          repository.available_languages.length)"
-              size="medium" />
-            <numbers-card
-              :help-text="completedLanguages.join(', ')"
-              :count="completedLanguages.length"
-              :label="$tc('webapp.translate.completed',
-                          completedLanguages.length)"
-              size="medium" />
-            <numbers-card
-              :help-text="translatorsList.join(', ')"
-              :count="translatorsList.length"
-              :label="$tc('webapp.translate.translators',
-                          translatorsList.length)"
-              size="medium" />
-          </div>
+          <translation-status-info
+            :completed="completedLanguages"
+            :languages="languagesList"
+            :repository-uuid="repository.uuid" />
         </div>
       </div>
       <translations-status
@@ -72,9 +56,9 @@ import { languageListToDict } from '@/utils';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import TranslationsStatus from '@/components/translate/NewTranslationsStatus';
+import TranslationStatusInfo from '@/components/translate/TranslationStatusInfo';
 import TranslationStatusSearch from '@/components/translate/TranslationStatusSearch';
 import TranslationsList from '@/components/translate/TranslationsList';
-import NumbersCard from '@/components/shared/NumbersCard';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -85,10 +69,9 @@ export default {
     RepositoryViewBase,
     TranslationsStatus,
     TranslationsList,
-    mapGetters,
+    TranslationStatusInfo,
     AuthorizationRequestNotification,
     TranslationStatusSearch,
-    NumbersCard,
     LoginForm,
   },
   extends: RepositoryBase,
@@ -137,7 +120,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
 
   .translations {
 
@@ -147,18 +129,6 @@ export default {
 
     &__header {
       display: flex;
-
-      &__info {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 0.25rem 1.5rem;
-        border: 1px solid $color-border;
-
-        > * {
-          margin-right: 1rem;
-        }
-      }
     }
   }
 </style>
