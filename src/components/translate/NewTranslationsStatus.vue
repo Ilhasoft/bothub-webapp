@@ -105,11 +105,13 @@ export default {
           verbose: this.languages[language],
           selected: this.selected === language,
         }))
-        .filter(languageStatus => (!languageStatus.status.is_base_language
-        && languageStatus.status.base_translations.percentage > 0));
+        .filter(languageStatus => (languageStatus.status.is_base_language
+        || languageStatus.status.base_translations.percentage > 0));
     },
     filteredLanguagesStatus() {
       return this.computedLanguagesStatus.filter((language) => {
+        if (language.status.is_base_language) return false;
+
         if (!this.query) return true;
 
         if (this.query.search && this.query.search.length > 0) {
@@ -133,9 +135,13 @@ export default {
     async repositorySlug() { await this.updateTranslationsStatus(); },
     computedLanguagesStatus() {
       const completed = this.computedLanguagesStatus
-        .filter(status => status.status.base_translations.percentage >= 100)
+        .filter(status => !status.status.is_base_language
+          && status.status.base_translations.percentage >= 100)
         .map(status => status.verbose);
-      this.$emit('updated', { completed });
+      this.$emit('updated', {
+        completed,
+        available: this.computedLanguagesStatus.map(language => language.verbose),
+      });
       return completed;
     },
     selected() {

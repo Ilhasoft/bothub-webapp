@@ -24,7 +24,7 @@
         <div class="column">
           <translation-status-info
             :completed-languages="completedLanguages"
-            :languages="languagesList"
+            :languages="availableLanguages"
             :repository-uuid="repository.uuid" />
         </div>
       </div>
@@ -52,7 +52,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import { languageListToDict } from '@/utils';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import TranslationsStatus from '@/components/translate/NewTranslationsStatus';
@@ -80,6 +79,7 @@ export default {
       toLanguage: null,
       statusQuery: null,
       updateStatus: false,
+      availableLanguages: null,
       completedLanguages: null,
       translate: {
         from: null,
@@ -92,22 +92,14 @@ export default {
     ...mapGetters([
       'authenticated',
     ]),
-    languagesList() {
-      return Object.values(
-        languageListToDict(this.repository.available_languages),
-      );
-    },
-    translatorsList() {
-      const { users } = this.repository.authorizations;
-      return users.map(user => user.nickname);
-    },
   },
   methods: {
     ...mapActions([
       'getRepository',
     ]),
-    statusUpdated({ completed }) {
+    statusUpdated({ completed, available }) {
       this.completedLanguages = completed;
+      this.availableLanguages = available;
     },
     checkList() {
       this.isListEmpty = false;
