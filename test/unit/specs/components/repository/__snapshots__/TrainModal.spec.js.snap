@@ -1,79 +1,92 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
-<b-modal-stub width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" open="true" title="some specific text" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
-    <div class="train-modal">
-      <div class="bh-grid bh-grid--column"><strong class="text-color-danger text-center bh-grid__item">
-          some specific text</strong>
-        <!---->
-        <div class="train-modal__wrapper bh-grid__item--nested">
-          <div><strong>some specific text</strong>
-            <div class="train-modal__wrapper__content-requirements">
-              <div class="train-modal__wrapper__content__item">
-                <p><span>requirement 1</span>
-                  <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
-                </p>
+<b-modal-stub active="true" width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" languagesreadyfortrain="[object Object]">
+  <div class="wrapper">
+    <h1 class="has-text-centered"> some specific text </h1>
+    <p class="has-text-centered"><strong class="text-color-danger">
+        some specific text</strong>
+      <!---->
+    </p>
+    <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+      <div class="train-modal">
+        <div class="bh-grid bh-grid--column">
+          <div class="train-modal__wrapper bh-grid__item--nested">
+            <div><strong>some specific text</strong>
+              <div class="train-modal__wrapper__content-requirements">
+                <div class="train-modal__wrapper__content__item">
+                  <p><span>requirement 1</span>
+                    <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                  </p>
+                </div>
               </div>
             </div>
+            <!---->
           </div>
-          <!---->
         </div>
       </div>
-    </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <b-button-stub type="is-primary" nativetype="button" tag="button">
-        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
-      </b-button-stub>
+      <div class="bh-grid__item text-center train-modal__buttons">
+        <b-button-stub type="is-primary" nativetype="button" tag="button">
+          <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+        </b-button-stub>
+      </div>
     </div>
   </div>
 </b-modal-stub>
 `;
 
 exports[`TrainModal.vue add warning renders correctly 1`] = `
-<b-modal-stub width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" open="true" title="some specific text" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
-    <div class="train-modal">
-      <div class="bh-grid bh-grid--column">
-        <!----> <strong class="text-color-primary text-center bh-grid__item">
-          some specific text</strong>
-        <div class="train-modal__wrapper bh-grid__item--nested">
-          <!---->
-          <div><strong>some specific text</strong>
-            <div class="train-modal__wrapper__content-warnings">
-              <div class="train-modal__wrapper__content__item">
-                <p><span>warning 1</span>
-                  <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
-                </p>
+<b-modal-stub active="true" width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" languagesreadyfortrain="[object Object]">
+  <div class="wrapper">
+    <h1 class="has-text-centered"> some specific text </h1>
+    <p class="has-text-centered">
+      <!----> <strong class="text-color-primary">
+        some specific text</strong></p>
+    <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+      <div class="train-modal">
+        <div class="bh-grid bh-grid--column">
+          <div class="train-modal__wrapper bh-grid__item--nested">
+            <!---->
+            <div><strong>some specific text</strong>
+              <div class="train-modal__wrapper__content-warnings">
+                <div class="train-modal__wrapper__content__item">
+                  <p><span>warning 1</span>
+                    <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <b-button-stub type="is-primary" nativetype="button" tag="button">
-        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
-      </b-button-stub>
+      <div class="bh-grid__item text-center train-modal__buttons">
+        <b-button-stub type="is-primary" nativetype="button" tag="button">
+          <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+        </b-button-stub>
+      </div>
     </div>
   </div>
 </b-modal-stub>
 `;
 
 exports[`TrainModal.vue renders correctly 1`] = `
-<b-modal-stub width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" open="true" title="some specific text" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
-    <div class="train-modal">
-      <div class="bh-grid bh-grid--column">
-        <!----> <strong class="text-color-primary text-center bh-grid__item">
-          some specific text</strong>
-        <!---->
+<b-modal-stub active="true" width="960" animation="zoom-out" cancancel="escape,x,outside,button" oncancel="function _default() {}" scroll="clip" destroyonhide="true" languagesreadyfortrain="[object Object]">
+  <div class="wrapper">
+    <h1 class="has-text-centered"> some specific text </h1>
+    <p class="has-text-centered">
+      <!----> <strong class="text-color-primary">
+        some specific text</strong></p>
+    <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+      <div class="train-modal">
+        <div class="bh-grid bh-grid--column">
+          <!---->
+        </div>
       </div>
-    </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <b-button-stub type="is-primary" nativetype="button" tag="button">
-        <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
-      </b-button-stub>
+      <div class="bh-grid__item text-center train-modal__buttons">
+        <b-button-stub type="is-primary" nativetype="button" tag="button">
+          <b-icon-stub icon="school"></b-icon-stub> <span>some specific text</span>
+        </b-button-stub>
+      </div>
     </div>
   </div>
 </b-modal-stub>
