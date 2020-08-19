@@ -23,7 +23,7 @@
         </div>
         <div class="column">
           <translation-status-info
-            :completed="completedLanguages"
+            :completed-languages="completedLanguages"
             :languages="languagesList"
             :repository-uuid="repository.uuid" />
         </div>
@@ -80,7 +80,7 @@ export default {
       toLanguage: null,
       statusQuery: null,
       updateStatus: false,
-      completedLanguages: [],
+      completedLanguages: null,
       translate: {
         from: null,
         to: null,

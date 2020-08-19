@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import BH from 'bh';
 import Flag from '@/components/shared/Flag';
 import { getEntityColor } from '@/utils/entitiesColors';
 

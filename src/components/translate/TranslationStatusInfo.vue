@@ -2,21 +2,24 @@
   <div class="translation-status-info">
     <numbers-card
       :count="languages.length"
-      :help-text="languages.join(', ')"
+      :disabled="!languages"
+      :help-text="(languages || []).join(', ')"
       :label="$tc('webapp.summary.information_language',
-                  languages.length)"
+                  (languages || []).length)"
       size="medium" />
     <numbers-card
-      :help-text="completedLanguages.join(', ')"
-      :count="completedLanguages.length"
+      :disabled="!completedLanguages"
+      :help-text="(completedLanguages || []).join(', ')"
+      :count="(completedLanguages || []).length"
       :label="$tc('webapp.translate.completed',
-                  completedLanguages.length)"
+                  (completedLanguages || []).length)"
       size="medium" />
     <numbers-card
-      :help-text="translatorsList.join(', ')"
-      :count="translatorsList.length"
+      :disabled="!translatorsList"
+      :help-text="(translatorsList || []).join(', ')"
+      :count="(translatorsList || []).length"
       :label="$tc('webapp.translate.translators',
-                  translatorsList.length)"
+                  (translatorsList || []).length)"
       size="medium" />
   </div>
 </template>
@@ -37,16 +40,16 @@ export default {
     },
     completedLanguages: {
       type: Array,
-      default: () => [],
+      default: null,
     },
     languages: {
       type: Array,
-      default: () => [],
+      default: null,
     },
   },
   data() {
     return {
-      translatorsList: [],
+      translatorsList: null,
     };
   },
   watch: {
@@ -72,7 +75,7 @@ export default {
           .filter(user => user.level >= 2)
           .map(user => user.user__nickname);
       } catch (e) {
-        this.translatorsList = [];
+        this.translatorsList = null;
       }
     },
   },

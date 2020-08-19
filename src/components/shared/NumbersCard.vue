@@ -1,12 +1,14 @@
 <template>
   <b-tooltip
-    :active="helpText && helpText.length > 0"
+    :active="!disabled && helpText && helpText.length > 0"
     :label="helpText"
     multilined
     type="is-dark"
     position="is-bottom">
     <div
-      :class="{ 'number-card': true, 'number-card--clickable': clickable }"
+      :class="{ 'number-card': true,
+                'number-card--disabled': disabled,
+                'number-card--clickable': clickable && !disabled }"
       @click="onClick">
       <h1 :class="['has-text-centered', `number-card__title--size-${size}`]">{{ count }}</h1>
       <p :class="['has-text-centered', `number-card__subtitle--size-${size}`]">{{ label }} </p>
@@ -19,6 +21,10 @@ export default {
   name: 'NumbersCard',
   props: {
     clickable: {
+      type: Boolean,
+      default: null,
+    },
+    disabled: {
       type: Boolean,
       default: null,
     },
@@ -60,6 +66,10 @@ export default {
                 cursor: pointer;
                 color: $color-primary;
             }
+        }
+
+        &--disabled {
+          opacity: 0.3;
         }
 
         &__title {

@@ -94,14 +94,6 @@ export default {
       if (!this.languagesStatus) return 0;
       return Object.keys(this.languagesStatus).length;
     },
-    completed() {
-      if (!this.languagesStatus) return [];
-      const completed = this.computedLanguagesStatus
-        .filter(status => status.status.base_translations.percentage >= 100)
-        .map(status => status.verbose);
-      this.$emit('updated', { completed });
-      return completed;
-    },
     computedLanguagesStatus() {
       if (!this.languagesStatus) {
         return [];
@@ -141,6 +133,13 @@ export default {
   watch: {
     async ownerNickname() { await this.updateTranslationsStatus(); },
     async repositorySlug() { await this.updateTranslationsStatus(); },
+    computedLanguagesStatus() {
+      const completed = this.computedLanguagesStatus
+        .filter(status => status.status.base_translations.percentage >= 100)
+        .map(status => status.verbose);
+      this.$emit('updated', { completed });
+      return completed;
+    },
     selected() {
       this.$emit('input', this.selected);
     },
