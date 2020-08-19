@@ -352,7 +352,15 @@
       "import_select_error": "Ocorreu um erro com o arquivo.",
       "import_button_cancel": "Cancelar",
       "export_all_sentences": "Todas as senteças",
-      "export_only_translated": "Senteças não traduzidas"
+      "export_only_translated": "Senteças não traduzidas",
+      "translators": "Tradutores | Tradutor | Tradutores",
+      "completed": "Traduções completas | Tradução completa | Traduções completas",
+      "more_than_half": "Mais que 50% traduzidas",
+      "less_than_half": "Menos que 50% traduzidas",
+      "all": "Todos os idiomas",
+      "search": "Pesquisar",
+      "showing": "Mostrando {count} de {available} idiomas disponíveis",
+      "no_translated": "Nenhum idioma traduzido"
     },
     "orgs": {
       "owner": "Pertence a",

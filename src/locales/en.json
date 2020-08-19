@@ -350,7 +350,15 @@
       "import_select_error": "There was an error with the file.",
       "import_button_cancel": "Cancel",
       "export_all_sentences": "All Sentences",
-      "export_only_translated": "Untranslated sentences"
+      "export_only_translated": "Untranslated sentences",
+      "translators": "Translators | Translator | Translators",
+      "completed": "Completed translations | Completed translation | Completed translations",
+      "more_than_half": "More than 50% translated",
+      "less_than_half": "Less than 50% translated",
+      "all": "All languages",
+      "search": "Search",
+      "showing": "Showing {count} of {available} available languages",
+      "no_translated": "No translated languages"
     },
     "orgs": {
       "owner": "Owned by",
