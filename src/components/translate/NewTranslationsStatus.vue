@@ -17,7 +17,7 @@
         class="card list-item"
         @click="select(language)">
         <div class="columns is-vcentered">
-          <p class="card-language column is-2">
+          <p class="card-language has-text-centered column is-2">
             <span>{{ verbose }}</span>
           </p>
           <div
@@ -110,8 +110,6 @@ export default {
     },
     filteredLanguagesStatus() {
       return this.computedLanguagesStatus.filter((language) => {
-        if (language.status.base_translations.percentage === 0) return false;
-
         if (!this.query) return true;
 
         if (this.query.search && this.query.search.length > 0) {
