@@ -8,7 +8,7 @@ exports[`EvaluateVersionItem.vue renders 1`] = `
         <div class="version-test-item__wrapper__info"><strong class="version-test-item__wrapper__info__item">
             some specific text #2
           </strong>
-          <language-badge-stub language="pt" main="true" size="small" class="version-test-item__wrapper__info__item"></language-badge-stub> <small class="version-test-item__wrapper__info__item">
+          <language-badge-stub language="pt" main="true" class="version-test-item__wrapper__info__item"></language-badge-stub> <small class="version-test-item__wrapper__info__item">
             in 9 months</small></div>
         <div class="version-test-item__wrapper__links">
           <router-link to="[object Object]"><a> some specific text </a></router-link>

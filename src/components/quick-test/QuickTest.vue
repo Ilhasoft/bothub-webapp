@@ -62,14 +62,14 @@
           :is-next-disabled="true"
           :is-step-blocked="sentences.length === 0"
           class="quick-test__input">
-          <text-area-input
+          <self-adjust-input
             ref="textInput"
             :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
             :update-value="selectedLanguage"
+            contained
             size="small"
-
-            @submit="sendMessage"
+            @keyup.enter="sendMessage"
           >
             <language-append-select-input
               slot="append"
@@ -78,7 +78,7 @@
               dropdown-direction="is-top-left"
               class="language-append"
             />
-          </text-area-input>
+          </self-adjust-input>
         </div>
       </div>
     </div>
@@ -95,18 +95,18 @@
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import { mapGetters } from 'vuex';
-import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
+import SelfAdjustInput from '@/components/inputs/SelfAdjustInput';
 import Tour from '@/components/Tour';
 
 export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
-    TextAreaInput,
     LanguageAppendSelectInput,
     QuickTestText,
+    SelfAdjustInput,
     Tour,
   },
   props: {

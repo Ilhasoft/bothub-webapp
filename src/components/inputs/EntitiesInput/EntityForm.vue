@@ -57,38 +57,12 @@ export default {
       type: Number,
       required: true,
     },
-    usesLabels: {
-      type: Boolean,
-      default: () => true,
-    },
-    label: {
-      type: String,
-      default: () => '',
-    },
-    loadingLabel: {
-      type: Boolean,
-      default: false,
-    },
-    availableLabels: {
-      type: Array,
-      default: () => ([]),
-    },
-  },
-  data() {
-    return {
-      showingLabelForm: false,
-    };
   },
   computed: {
     ...mapGetters([
       'activeTutorial',
     ]),
     entityFormatters() {
-      return [
-        formatters.bothubItemKey(),
-      ];
-    },
-    labelFormatters() {
       return [
         formatters.bothubItemKey(),
       ];
@@ -101,20 +75,10 @@ export default {
     handleChange(e) {
       this.$emit('input', e);
     },
-    removeEntity() {
+    async removeEntity() {
       if (this.activeTutorial === 'training') return;
-
+      await this.$nextTick;
       this.$emit('removeEntity');
-    },
-    handleLabelChanged(newLabel) {
-      this.$emit('labelChanged', newLabel);
-    },
-    removeLabel() {
-      this.$emit('removeLabel');
-      this.showingLabelForm = false;
-    },
-    showLabelForm() {
-      this.showingLabelForm = true;
     },
   },
 };

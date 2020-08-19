@@ -5,7 +5,7 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
   <form class="columns is-variable is-2">
     <div class="column">
       <b-field-stub label="" addons="true">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" id="tour-translate-step-4" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+        <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-translate-step-4" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
       </b-field-stub>
     </div>
     <div class="column is-narrow">
