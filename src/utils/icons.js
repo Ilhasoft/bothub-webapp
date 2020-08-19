@@ -23,6 +23,7 @@ import Food from '!!svg-inline-loader!@/assets/icons/food.svg';
 import Health from '!!svg-inline-loader!@/assets/icons/health.svg';
 import Social from '!!svg-inline-loader!@/assets/icons/social.svg';
 import Tech from '!!svg-inline-loader!@/assets/icons/tech.svg';
+import Config from '!!svg-inline-loader!@/assets/icons/config.svg';
 import FlagBr from '!!svg-inline-loader!@/assets/icons/flag-br.svg';
 import FlagDe from '!!svg-inline-loader!@/assets/icons/flag-de.svg';
 import FlagEs from '!!svg-inline-loader!@/assets/icons/flag-es.svg';
@@ -59,6 +60,7 @@ export default {
   food: Food,
   health: Health,
   social: Social,
+  config: Config,
   tech: Tech,
   'customer-service': CustomerService,
   'flag-br': FlagBr,
