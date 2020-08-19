@@ -90,8 +90,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
-
 
 .repository-card-list {
   &__item {

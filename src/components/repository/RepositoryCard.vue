@@ -38,7 +38,7 @@
           <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
           || $attrs.owner__nickname }}</strong>
         </div>
-        <div class="repository-card__flags bh-grid bh-grid--row">
+        <div class="repository-card__flags">
           <span
             v-for="language in $attrs.available_languages"
             :key="language"

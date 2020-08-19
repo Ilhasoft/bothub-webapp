@@ -323,9 +323,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/variables.scss';
 
 .icon {
   pointer-events: initial !important;

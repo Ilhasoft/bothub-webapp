@@ -1,86 +1,90 @@
 <template>
-  <bh-modal
-    :open.sync="openValue"
-    :title="$t('webapp.train_modal.training_status')">
-    <div
-      id="tour-training-step-7"
-      :is-previous-disabled="true"
-      :is-finish-disabled="true"
-      class="container">
+  <b-modal
+    :active.sync="openValue">
+    <div class="wrapper">
+      <h1 class="has-text-centered"> {{ $t('webapp.train_modal.training_status') }} </h1>
+      <p class="has-text-centered">
+        <strong
+          v-if="requirementsToTrainStatus"
+          class="text-color-danger">
+          {{ $t('webapp.train_modal.language_warning') }}</strong>
+        <strong
+          v-if="readyForTrain && !requirementsToTrainStatus"
+          class="text-color-primary">
+          {{ $t('webapp.train_modal.status_ok') }}</strong>
+      </p>
       <div
-        class="train-modal">
-        <div class="bh-grid bh-grid--column">
-          <strong
-            v-if="requirementsToTrainStatus"
-            class="text-color-danger text-center bh-grid__item">
-            {{ $t('webapp.train_modal.language_warning') }}</strong>
-          <strong
-            v-if="readyForTrain && !requirementsToTrainStatus"
-            class="text-color-primary text-center bh-grid__item">
-            {{ $t('webapp.train_modal.status_ok') }}</strong>
-          <div
-            v-if="requirementsToTrainStatus || languagesWarningsStatus"
-            class="train-modal__wrapper bh-grid__item--nested">
-            <div v-if="requirementsToTrainStatus">
-              <strong>{{ $t('webapp.train_modal.missing_requirements') }}</strong>
-              <div class="train-modal__wrapper__content-requirements">
-                <div
-                  v-for="(requirements, lang) in requirementsToTrain"
-                  :key="lang"
-                  class="train-modal__wrapper__content__item">
-                  <p
-                    v-for="(requirement, i) in requirements"
-                    :key="i">
-                    <span>{{ requirement }}</span>
-                    <language-badge
-                      :language="lang"
-                      class="train-modal__wrapper__content__item__flag"/>
-                  </p>
+        id="tour-training-step-7"
+        :is-previous-disabled="true"
+        :is-finish-disabled="true"
+        class="container">
+        <div
+          class="train-modal">
+          <div class="bh-grid bh-grid--column">
+            <div
+              v-if="requirementsToTrainStatus || languagesWarningsStatus"
+              class="train-modal__wrapper bh-grid__item--nested">
+              <div v-if="requirementsToTrainStatus">
+                <strong>{{ $t('webapp.train_modal.missing_requirements') }}</strong>
+                <div class="train-modal__wrapper__content-requirements">
+                  <div
+                    v-for="(requirements, lang) in requirementsToTrain"
+                    :key="lang"
+                    class="train-modal__wrapper__content__item">
+                    <p
+                      v-for="(requirement, i) in requirements"
+                      :key="i">
+                      <span>{{ requirement }}</span>
+                      <language-badge
+                        :language="lang"
+                        class="train-modal__wrapper__content__item__flag"/>
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div v-if="languagesWarningsStatus">
-              <strong>{{ $t('webapp.train_modal.warnings') }}</strong>
-              <div class="train-modal__wrapper__content-warnings">
-                <div
-                  v-for="(warnings, lang) in languagesWarnings"
-                  :key="lang"
-                  class="train-modal__wrapper__content__item">
-                  <p
-                    v-for="(warning, index) in warnings"
-                    :key="index">
-                    <span>{{ warning }}</span>
-                    <language-badge
-                      :language="lang"
-                      class="train-modal__wrapper__content__item__flag" />
-                  </p>
+              <div v-if="languagesWarningsStatus">
+                <strong>{{ $t('webapp.train_modal.warnings') }}</strong>
+                <div class="train-modal__wrapper__content-warnings">
+                  <div
+                    v-for="(warnings, lang) in languagesWarnings"
+                    :key="lang"
+                    class="train-modal__wrapper__content__item">
+                    <p
+                      v-for="(warning, index) in warnings"
+                      :key="index">
+                      <span>{{ warning }}</span>
+                      <language-badge
+                        :language="lang"
+                        class="train-modal__wrapper__content__item__flag" />
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="bh-grid__item text-center train-modal__buttons">
-        <b-button
-          v-if="readyForTrain"
-          :disabled="training"
-          type="is-primary"
-          @click="train()">
-          <b-icon
-            :icon="training ? 'refresh' : 'school'"
-            :class="training && 'icon-spin' || null" />
-          <span>{{ $t('webapp.train_modal.train') }}</span>
-        </b-button>
-        <b-button
-          v-else
-          ref="closeBtn"
-          type="is-primary"
-          @click="closeModal()">
-          <span>{{ $t('webapp.train_modal.ok') }}</span>
-        </b-button >
+        <div class="bh-grid__item text-center train-modal__buttons">
+          <b-button
+            v-if="readyForTrain"
+            :disabled="training"
+            type="is-primary"
+            @click="train()">
+            <b-icon
+              :icon="training ? 'refresh' : 'school'"
+              :class="training && 'icon-spin' || null" />
+            <span>{{ $t('webapp.train_modal.train') }}</span>
+          </b-button>
+          <b-button
+            v-else
+            ref="closeBtn"
+            type="is-primary"
+            @click="closeModal()">
+            <span>{{ $t('webapp.train_modal.ok') }}</span>
+          </b-button >
+        </div>
       </div>
     </div>
-  </bh-modal>
+  </b-modal>
 </template>
 
 <script>
@@ -174,6 +178,13 @@ export default {
 @import '~bh/src/assets/scss/colors.scss';
 .container{
   padding-bottom: 0.5rem;
+  background-color: $color-fake-white;
+  border-radius: 0.5rem;
+}
+
+.wrapper {
+  border-radius: 0.5rem;
+  background-color: $color-white;
 }
 
 .train-modal {

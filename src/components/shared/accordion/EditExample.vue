@@ -121,7 +121,6 @@
 
 <script>
 import Vue from 'vue';
-import BH from 'bh';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { formatters } from '@/utils';
@@ -211,15 +210,6 @@ export default {
     },
     intentFormatters() {
       return formatters.bothubItemKey();
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     highlightedText() {
       return entity => this.text.slice(entity.start, entity.end);

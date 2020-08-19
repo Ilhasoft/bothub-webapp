@@ -7,11 +7,6 @@
         :id="resultId"
         :query="query" />
       <graphics-result :chart-data="resultsData"/>
-      <!-- <filter-evaluate-result-example
-        :intents="repository.intents_list"
-        :labels="repository.labels_list"
-        :entities="repository.entities_list"
-        @queryStringFormated="onSearch($event)" /> -->
     </div>
   </div>
   <p v-else>{{ $t('webapp.evaluate.not_have_results') }}</p>
@@ -20,7 +15,6 @@
 <script>
 import { mapActions } from 'vuex';
 import GraphicsResult from '@/components/repository/repository-evaluate/results/GraphicsResult';
-import FilterEvaluateResultExample from '@/components/repository/repository-evaluate/results/FilterEvaluateResultExample';
 import EvaluateResultExampleList from '@/components/repository/repository-evaluate/results/EvaluateResultExampleList';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 
@@ -29,7 +23,6 @@ export default {
   name: 'BaseEvaluateResults',
   components: {
     GraphicsResult,
-    FilterEvaluateResultExample,
     EvaluateResultExampleList,
   },
   props: {
