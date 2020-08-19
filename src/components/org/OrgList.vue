@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/variables.scss';
     .org-list {
         display: flex;
         flex-wrap: wrap;

@@ -413,6 +413,7 @@
       "repositories": "Intelligences",
       "modal_edit_your_profile": "Edit your profile",
       "modal_change_password": "Change Password",
+      "password_change_success": "Password changed!",
       "edit": "Save",
       "trained_at": "Trained at {trained} by {by}",
       "train_fail": "Train failed at {failed}",
