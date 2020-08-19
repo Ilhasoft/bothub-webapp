@@ -7,6 +7,8 @@
     position="is-bottom">
     <div
       :class="{ 'number-card': true,
+                'number-card--hoverable': !disabled
+                  && (clickable || (helpText && helpText.length > 0)),
                 'number-card--disabled': disabled,
                 'number-card--clickable': clickable && !disabled }"
       @click="onClick">
@@ -63,8 +65,13 @@ export default {
         justify-content: center;
         &--clickable {
             &:hover{
-                cursor: pointer;
                 color: $color-primary;
+            }
+        }
+
+        &--hoverable {
+           &:hover{
+                cursor: pointer;
             }
         }
 
