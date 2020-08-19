@@ -17,19 +17,19 @@
         class="card list-item"
         @click="select(language)">
         <div class="columns is-vcentered">
-          <p class="card-language column is-3">
+          <p class="card-language column is-2">
             <span>{{ verbose }}</span>
           </p>
           <div
             :class="{ selected }"
-            class="column is-8">
+            class="column is-9">
             <div class="card-percentage__wrapper">
               <div
                 :style="percentageStyle(status.base_translations.percentage)"
                 class="card-percentage" />
             </div>
           </div>
-          <strong class="column is-1">
+          <strong class="column has-text-centered is-1">
             {{ Number(status.base_translations.percentage.toFixed(2)) }}%
           </strong>
         </div>
@@ -96,13 +96,13 @@ export default {
     },
     completed() {
       if (!this.languagesStatus) return [];
-      const completed = Object.entries(this.languagesStatus)
-        .filter(([, value]) => value.base_translations.percentage >= 100)
-        .map(([key]) => this.languages[key]);
+      const completed = this.computedLanguagesStatus
+        .filter(status => status.status.base_translations.percentage >= 100)
+        .map(status => status.verbose);
       this.$emit('updated', { completed });
       return completed;
     },
-    filteredLanguagesStatus() {
+    computedLanguagesStatus() {
       if (!this.languagesStatus) {
         return [];
       }
@@ -113,23 +113,26 @@ export default {
           verbose: this.languages[language],
           selected: this.selected === language,
         }))
-        .filter(languageStatus => (!languageStatus.status.is_base_language))
-        .filter((language) => {
-          if (language.status.base_translations.percentage === 0) return false;
+        .filter(languageStatus => (!languageStatus.status.is_base_language
+        && languageStatus.status.base_translations.percentage > 0));
+    },
+    filteredLanguagesStatus() {
+      return this.computedLanguagesStatus.filter((language) => {
+        if (language.status.base_translations.percentage === 0) return false;
 
-          if (!this.query) return true;
+        if (!this.query) return true;
 
-          if (this.query.search && this.query.search.length > 0) {
-            const search = new RegExp(formatters.bothubItemKey()(this.query.search));
-            if (!search.test(formatters.bothubItemKey()(language.verbose))) return false;
-          }
+        if (this.query.search && this.query.search.length > 0) {
+          const search = new RegExp(formatters.bothubItemKey()(this.query.search));
+          if (!search.test(formatters.bothubItemKey()(language.verbose))) return false;
+        }
 
-          if (this.query['max-percentage']
+        if (this.query['max-percentage']
           && language.status.base_translations.percentage > this.query['max-percentage']) return false;
-          if (this.query['min-percentage']
+        if (this.query['min-percentage']
           && language.status.base_translations.percentage < this.query['min-percentage']) return false;
-          return true;
-        })
+        return true;
+      })
         .sort((a, b) => (
           a.status.base_translations.percentage
           < b.status.base_translations.percentage ? 1 : -1));
