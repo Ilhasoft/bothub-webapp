@@ -12,7 +12,7 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
             <div class="train-modal__wrapper__content-requirements">
               <div class="train-modal__wrapper__content__item">
                 <p><span>requirement 1</span>
-                  <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                  <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
                 </p>
               </div>
             </div>
@@ -43,7 +43,7 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
             <div class="train-modal__wrapper__content-warnings">
               <div class="train-modal__wrapper__content__item">
                 <p><span>warning 1</span>
-                  <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
+                  <language-badge-stub language="en" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
                 </p>
               </div>
             </div>

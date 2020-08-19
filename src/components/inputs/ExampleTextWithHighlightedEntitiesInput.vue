@@ -1,71 +1,85 @@
 <template>
-  <bh-input>
-    <div :class="inputClassAttr.concat(['example-txt-w-highlighted-entities'])">
+  <div class="field">
+    <div class="example-txt-w-highlighted-entities">
       <div class="example-txt-w-highlighted-entities__input-wrapper">
-        <div
-          v-for="(entity, i) in entitiesBlocks"
-          :key="i"
-          :class="entityClassAttr">
-          <span
-            :class="[
-              'example-txt-w-highlighted-entities__entity__before',
-          ]">{{ entity.before }}</span><span
-            :class="[
-              entity.colorClass,
-              'example-txt-w-highlighted-entities__entity__text'
-          ]">{{ entity.text }}</span>
+        <div class="field">
+          <div class="control has-icons-right">
+            <div
+              v-for="(entity, i) in entitiesBlocks"
+              :key="i"
+              :class="entityClassAttr">
+              <span
+                :class="[
+                  'example-txt-w-highlighted-entities__entity__before',
+              ]">{{ entity.before }}</span><span
+                :class="[
+                  entity.colorClass,
+                  'example-txt-w-highlighted-entities__entity__text'
+              ]">{{ entity.text }}</span>
+            </div>
+            <self-adjust-input
+              ref="input"
+              :placeholder="$t('webapp.trainings.add_a_sentence')"
+              v-model="val"
+              transparent
+              @select="emitTextSelected"
+              @click.stop.prevent="emitTextSelected"
+              @keyup.stop.prevent="emitTextSelected"
+              @keyup.enter="submit()">
+              <span
+                v-if="hasAppend"
+                slot="append">
+                <slot name="append" />
+              </span>
+            </self-adjust-input>
+          </div>
         </div>
-        <textarea
-          ref="input"
-          v-bind="$attrs"
-          v-model="val"
-          class="bh-textarea__input example-txt-w-highlighted-entities__input"
-          @select.stop.prevent="emitTextSelected()"
-          @click.stop.prevent="emitTextSelected()"
-          @keyup.stop.prevent="emitTextSelected()"
-          @keyup.enter="submit()"
-        />
       </div>
-      <slot name="append" />
     </div>
-  </bh-input>
+  </div>
 </template>
 
 <script>
-import BH from 'bh';
-import Flag from '@/components/shared/Flag';
+import SelfAdjustInput from '@/components/inputs/SelfAdjustInput';
 import { getEntityColor } from '@/utils/entitiesColors';
 
 const components = {
-  Flag,
+  SelfAdjustInput,
 };
 
 export default {
   name: 'ExampleTextWithHighlightedEntitiesInput',
   components,
-  extends: BH.components.BhTextarea,
   props: {
-    entities: {
-      type: Array,
-      default: () => ([]),
+    value: {
+      type: String,
+      default: '',
     },
-    availableEntities: {
+    entities: {
       type: Array,
       default: () => ([]),
     },
   },
   data() {
     return {
+      val: this.value,
       selectionStart: 0,
       selectionEnd: 0,
     };
   },
   computed: {
+    hasAppend() {
+      return this.$slots.append;
+    },
     entityClassAttr() {
       const classes = ['example-txt-w-highlighted-entities__entity'];
 
       if (this.size) {
         classes.push(`example-txt-w-highlighted-entities__entity--${this.size}`);
+      }
+
+      if (this.hasAppend) {
+        classes.push('example-txt-w-highlighted-entities__entity__with-append');
       }
 
       return classes;
@@ -75,12 +89,10 @@ export default {
         .map(({ start, end, entity }) => {
           const color = getEntityColor(
             entity,
-            this.availableEntities,
-            this.entities,
           );
           const colorClass = `entity-${color}`;
-          const before = this.val.substring(0, start);
-          const text = this.val.substring(start, end);
+          const before = this.value.substring(0, start);
+          const text = this.value.substring(start, end);
           return {
             start,
             end,
@@ -93,17 +105,22 @@ export default {
           start: this.selectionStart,
           end: this.selectionEnd,
           colorClass: 'entity-selected',
-          before: this.val.substring(0, this.selectionStart),
-          text: this.val.substring(this.selectionStart, this.selectionEnd),
+          before: this.value.substring(0, this.selectionStart),
+          text: this.value.substring(this.selectionStart, this.selectionEnd),
         }]);
+    },
+  },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
     },
   },
   methods: {
     submit() {
       this.$emit('submit');
     },
-    emitTextSelected() {
-      const { value, selectionStart, selectionEnd } = this.$refs.input;
+    emitTextSelected(event) {
+      const { value, selectionStart, selectionEnd } = event.target;
       const selected = value.slice(selectionStart, selectionEnd);
 
       const startPadding = selected.search(/\S|$/);
@@ -121,13 +138,8 @@ export default {
     },
     clearSelected() {
       this.$nextTick(() => {
-        if (this.$refs.input.setSelectionRange) {
-          window.getSelection().removeAllRanges();
-          this.$refs.input.setSelectionRange(0, 0);
-          this.$refs.input.blur();
-        } else {
-          this.$refs.input.focus();
-        }
+        this.$refs.input.deselect();
+        this.$refs.input.inputAction('blur');
       });
     },
   },
@@ -135,22 +147,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/forms.scss';
-@import '~bh/src/assets/scss/variables.scss';
-
-.bh {
-  &-textarea {
-    background: none;
-  }
-}
+@import '~@/assets/scss/variables.scss';
 
 .example-txt-w-highlighted-entities {
-  background-color: white;
-  border-radius: $form-components-border-radius;
-  height: 2.2rem;
+
+  &__append {
+    pointer-events: all !important;
+    width: 5.2rem !important;
+  }
 
   &__input-wrapper {
     position: relative;
+    background-color: white;
   }
 
   &__input {
@@ -159,48 +167,35 @@ export default {
   }
 
   &__entity {
-    @include form-component-typography();
-
     position: absolute;
     top: 0;
     left: 0;
     z-index: 0;
     height: max-content !important;
-    padding: .5rem;
+    word-wrap: break-word;
+    padding: 0.3rem 0.9rem;
+    font: inherit;
+    line-height: 1.5;
+    max-width: 100%;
     background: none;
-    border-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0);
+    pointer-events: none;
+
+    &__with-append {
+      padding: 0.3rem 4rem 0.3rem 0.9rem;
+    }
 
     &__before,
     &__text {
       color: rgba(0, 0, 0, 0);
+      max-width: 100%;
       white-space: pre-line;
+      pointer-events: none;
     }
 
     &__text {
       border-radius: 4px;
       opacity: .5;
-    }
-
-    &--small {
-      padding: .5rem;
-      font-size: .5rem;
-      line-height: .5rem;
-    }
-
-    &--normal {
-      padding: .65rem 1rem;
-    }
-
-    &--medium {
-      padding: 1rem;
-      font-size: 1rem;
-      line-height: 1rem;
-    }
-
-    &--large {
-      padding: 1.75rem;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
     }
   }
 }
