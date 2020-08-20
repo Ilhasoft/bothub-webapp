@@ -145,17 +145,11 @@ export default {
       'deleteExample',
     ]),
     addLogStructure(logValue) {
-      if (logValue.length !== 0) {
-        this.logData.push(logValue[0]);
-      }
+      this.logData.push(logValue);
     },
-    removeLogStructure(logValue) {
+    removeLogStructure(logId) {
       // eslint-disable-next-line array-callback-return
-      this.logData.map((log, i) => {
-        if (log.text === logValue[0].text) {
-          this.logData.splice(i, 1);
-        }
-      });
+      this.logData = this.logData.filter(log => log.id !== logId);
     },
     showModalTraining(typeModal) {
       if (this.activeTutorial === 'inbox') return;
@@ -249,7 +243,7 @@ export default {
       this.logData.map(async (log) => {
         try {
           await this.newExample({
-            ...log,
+            ...log.data,
             intent,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,

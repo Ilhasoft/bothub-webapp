@@ -3,12 +3,12 @@
     <sentence-accordion
       id="tour-inbox-step-1"
       :is-previous-disabled="true"
-      :is-step-blocked="data.length === 0"
+      :is-step-blocked="!checked"
       :open.sync="open">
 
       <div slot="check">
         <b-checkbox
-          v-model="data"
+          v-model="checked"
           :native-value="toExample"/>
       </div>
 
@@ -76,6 +76,10 @@ export default {
     IntentModal,
   },
   props: {
+    id: {
+      type: [String, Number],
+      required: true,
+    },
     text: {
       type: String,
       default: '',
@@ -105,7 +109,7 @@ export default {
       isRawInfoActive: false,
       intent: '',
       isCorrected: Boolean,
-      data: [],
+      checked: false,
       highlighted: null,
     };
   },
@@ -152,13 +156,13 @@ export default {
     },
   },
   watch: {
-    data(newValue, oldValue) {
-      if (this.data.length !== 0) {
+    checked() {
+      if (this.checked) {
         this.$emit('dispatchEvent', { event: 'event_nlp', value: this.nlp_log });
-        this.$emit('dispatchEvent', { event: 'event_addLog', value: this.data });
+        this.$emit('dispatchEvent', { event: 'event_addLog', value: { id: this.id, data: this.toExample } });
         return '';
       }
-      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: oldValue });
+      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: this.id });
     },
   },
   created() {
@@ -166,19 +170,10 @@ export default {
   },
   methods: {
     selectAll(value) {
-      if (value === true) {
-        this.data.push(this.toExample);
-      } else {
-        this.data = [];
-      }
+      this.checked = value;
     },
     getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
-      );
-      return `entity-${color}`;
+      return `entity-${getEntityColor(entity)}`;
     },
     showRawInfo() {
       this.$buefy.modal.open({
