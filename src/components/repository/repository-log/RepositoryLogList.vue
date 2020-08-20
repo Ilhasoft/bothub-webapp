@@ -240,20 +240,20 @@ export default {
     },
     addToTraining(intent) {
       this.loadingLogs = true;
-      this.logData.map(async (log) => {
+      this.logData.map(async ({ data }) => {
         try {
           await this.newExample({
-            ...log.data,
+            ...data,
             intent,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error, log);
+          this.showError(error, data);
         } finally {
           this.loadingLogs = false;
           this.select = false;
@@ -262,20 +262,20 @@ export default {
     },
     addToSentences(intent) {
       this.loadingLogs = true;
-      this.logData.map(async (log) => {
+      this.logData.map(async ({ data }) => {
         try {
           await this.newEvaluateExample({
-            ...log,
+            ...data,
             intent,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error, log);
+          this.showError(error, data);
         } finally {
           this.loadingLogs = false;
           this.select = false;
@@ -285,13 +285,7 @@ export default {
     showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = Array.join(messages, ',');
-
-      if (message
-      === 'Intention and Sentence already exists' || 'Intenção e frase já existem') {
-        message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
-      } else {
-        message = `${log.text.bold()}, ${message}`;
-      }
+      message = `${log.text.bold()}, ${message}`;
       this.$buefy.toast.open({
         message,
         type: 'is-danger',
