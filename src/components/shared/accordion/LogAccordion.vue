@@ -160,9 +160,9 @@ export default {
       if (this.checked) {
         this.$emit('dispatchEvent', { event: 'event_nlp', value: this.nlp_log });
         this.$emit('dispatchEvent', { event: 'event_addLog', value: { id: this.id, data: this.toExample } });
-        return '';
+      } else {
+        this.$emit('dispatchEvent', { event: 'event_removeLog', value: this.id });
       }
-      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: this.id });
     },
   },
   created() {
@@ -203,18 +203,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/utilities';
+  @import '~@/assets/scss/colors.scss';
 .log-accordion {
   &__menu-title {
     margin: 1rem;
   }
   &__version-name {
-    color: $primary;
+    color: $color-primary;
     font-weight: bold;
-  }
-  &__dropdown {
-    display: flex;
-    flex-wrap: wrap;
   }
 }
 </style>

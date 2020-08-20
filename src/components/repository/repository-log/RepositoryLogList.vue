@@ -313,26 +313,26 @@ export default {
       text-align: center;
     }
 
-      &__section{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: $color-grey-dark;
-      font-size: 1.1rem;
-      font-weight: bold;
-      padding: 0 0.6rem;
+      &__section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $color-grey-dark;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 0 0.6rem;
 
-      &__buttonsIcon{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row;
-    }
-      &__icons{
-      color: $color-grey-dark;
-      margin-right: 0.7rem;
-      cursor: pointer;
-    }
+        &__buttonsIcon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+        }
+        &__icons {
+          color: $color-grey-dark;
+          margin-right: 0.7rem;
+          cursor: pointer;
+        }
     }
 
   }
