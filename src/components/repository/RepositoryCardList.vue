@@ -40,10 +40,6 @@ export default {
       type: '',
       default: null,
     },
-    showMoreButton: {
-      type: Boolean,
-      default: true,
-    },
   },
   data() {
     return {
@@ -87,6 +83,7 @@ export default {
           limit: this.limit,
         });
       }
+      this.$emit('cardList', this.repositoryList);
     },
   },
 };

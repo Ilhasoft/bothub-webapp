@@ -6,14 +6,36 @@
       <div class="trainings-repository__new-example">
         <div v-if="authenticated">
           <div v-if="repository.authorization.can_contribute">
-            <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
-            <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+            <div class="trainings-repository__list-wrapper">
+              <div>
+                <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
+                <span>{{ $t('webapp.trainings.grid_text2') }}</span>
+              </div>
+              <div
+                id="tour-training-step-6"
+                :is-next-disabled="true"
+                :is-previous-disabled="true"
+                class="trainings-repository__list-wrapper__tutorialStep">
+                <b-button
+                  v-if="repository.authorization.can_write"
+                  ref="training"
+                  :disabled="loadingStatus || repository.examples__count === 0"
+                  :loading="loadingStatus"
+                  type="is-secondary"
+                  class="trainings-repository__list-wrapper__button"
+                  @click="openTrainingModal">
+                  {{ $t('webapp.trainings.run_training') }}
+                </b-button>
+              </div>
+            </div>
             <new-example-form
               :repository="repository"
-              @created="updatedExampleList()" />
+              @created="updatedExampleList()"
+              @eventStep="dispatchClick()" />
           </div>
           <authorization-request-notification
-            v-else
+            v-else-if="repository"
+            :available="!repository.available_request_authorization"
             :repository-uuid="repository.uuid"
             @onAuthorizationRequested="updateRepository(false)" />
         </div>
@@ -29,18 +51,9 @@
       <div
         v-if="authenticated && repository.authorization.can_contribute">
         <hr>
-        <div class="trainings-repository__list-wrapper">
+        <div
+          class="trainings-repository__list-wrapper">
           <h2>{{ $t('webapp.trainings.sentences_list') }}</h2>
-          <b-button
-            v-if="repository.examples__count > 0 && repository.authorization.can_write "
-            ref="training"
-            :disabled="loadingStatus"
-            :loading="loadingStatus"
-            type="is-secondary"
-            class="trainings-repository__list-wrapper__button"
-            @click="openTrainingModal">
-            {{ $t('webapp.trainings.run_training') }}
-          </b-button>
         </div>
         <filter-examples
           :intents="repository.intents_list"
@@ -61,11 +74,20 @@
       :requirements-to-train="repository.requirements_to_train"
       :open.sync="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train(repository.uuid)" />
+      @train="train(repository.uuid)"
+      @finishedTutorial="dispatchFinish()"
+      @resetTutorial="dispatchReset()" />
     <train-response
       v-if="trainResponseData"
       :train-response="trainResponseData"
       :open.sync="trainResponseOpen" />
+    <tour
+      v-if="activeTutorial === 'training'"
+      :step-count="8"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      :reset-tutorial="eventReset"
+      name="training"/>
   </repository-view-base>
 </template>
 
@@ -81,8 +103,10 @@ import AuthorizationRequestNotification from '@/components/repository/Authorizat
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
+import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
+import Tour from '@/components/Tour';
 
 export default {
   name: 'RepositoryTrainings',
@@ -94,9 +118,11 @@ export default {
     LoginForm,
     ExampleSearchInput,
     AuthorizationRequestNotification,
+    RequestAuthorizationModal,
     TrainModal,
     TrainResponse,
     Loading,
+    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -109,11 +135,16 @@ export default {
       update: false,
       training: false,
       loadingStatus: false,
+      eventClick: false,
+      eventClickFinish: false,
+      eventReset: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
+      'activeTutorial',
     ]),
   },
   methods: {
@@ -158,12 +189,20 @@ export default {
       if (!this.authenticated) {
         this.signIn();
       }
-      if (this.authenticated && this.repository.available_request_authorization) {
-        this.openRequestAuthorizationModal();
-      }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.trainModalOpen = true;
       }
+      this.dispatchClick();
+    },
+    dispatchClick() {
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
+    dispatchReset() {
+      this.eventReset = !this.eventReset;
     },
     signIn() {
       this.$router.push({
@@ -181,6 +220,7 @@ export default {
     },
     async train(repositoryUuid) {
       this.training = true;
+      this.dispatchFinish();
       try {
         const response = await this.trainRepository({
           repositoryUuid,
@@ -219,6 +259,10 @@ export default {
       &:hover{
         color: $color-white;
       }
+    }
+
+    &__tutorialStep{
+      height:2.2rem;
     }
   }
 

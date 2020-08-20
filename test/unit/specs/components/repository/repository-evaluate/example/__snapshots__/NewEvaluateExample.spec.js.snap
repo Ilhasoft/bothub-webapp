@@ -12,27 +12,37 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
       <div class="new-sentence__form__wrapper">
         <div>
           <b-field-stub addons="true">
-            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+            <example-text-with-highlighted-entities-input-stub entities="" availableentities="" id="tour-evaluate-step-2" is-previous-disabled="true" is-step-blocked="true" formatters="textFormatters" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
           </b-field-stub>
         </div>
         <div>
-          <b-field-stub addons="true">
-            <b-autocomplete-stub value="" data="affirm,cuisine,greet" field="value" openonfocus="true" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete-stub>
+          <b-field-stub addons="true" id="tour-evaluate-step-3" is-previous-disabled="true" is-step-blocked="true">
+            <b-select-stub value="" placeholder="some specific text" expanded="">
+              <option value="affirm">
+                affirm
+              </option>
+              <option value="cuisine">
+                cuisine
+              </option>
+              <option value="greet">
+                greet
+              </option>
+            </b-select-stub>
           </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
           <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" multilined="true" size="is-medium" is-active="true">
-            <b-button-stub type="is-primary" nativetype="button" tag="button" disabled="true">some specific text</b-button-stub>
+            <b-button-stub type="is-primary" nativetype="button" tag="button" id="tour-evaluate-step-4" is-next-disabled="true" is-previous-disabled="true" disabled="true" is-step-blocked="true">some specific text</b-button-stub>
           </b-tooltip-stub>
         </div>
       </div>
-      <bh-field-stub errors="" class="new-sentence__form__entities">
+      <b-field-stub addons="true" class="new-sentence__form__entities">
         <div class="columns">
-          <div class="column is-three-fifths">
+          <div class="column is-one-third">
             <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit="" testing="true"></entities-input-stub>
           </div>
         </div>
-      </bh-field-stub>
+      </b-field-stub>
     </form>
   </div>
 </div>

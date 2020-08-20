@@ -14,22 +14,31 @@
             <p>{{ $t('webapp.evaluate.header_title_p') }}</p>
             <p>{{ $t('webapp.evaluate.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
-              <div class="evaluate__content-header__wrapper__language-select">
+              <div
+                class="evaluate__content-header__wrapper__language-select">
                 <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
-                <b-select
-                  v-model="currentLanguage"
-                  expanded>
-                  <option
-                    v-for="language in languages"
-                    :key="language.id"
-                    :selected="language.value === currentLanguage"
-                    :value="language.value">
-                    {{ language.title }}
-                  </option>
-                </b-select>
+                <div
+                  id="tour-evaluate-step-1"
+                  :is-previous-disabled="true">
+                  <b-select
+                    v-model="currentLanguage"
+                    expanded>
+                    <option
+                      v-for="language in languages"
+                      :key="language.id"
+                      :selected="language.value === currentLanguage"
+                      :value="language.value">
+                      {{ language.title }}
+                    </option>
+                  </b-select>
+                </div>
               </div>
               <b-button
+                id="tour-evaluate-step-5"
                 ref="runNewTestButton"
+                :is-finish-disabled="true"
+                :is-previous-disabled="true"
+                :is-next-disabled="true"
                 :loading="evaluating"
                 :disabled="evaluating"
                 type="is-secondary"
@@ -44,15 +53,16 @@
             <base-evaluate-examples
               :filter-by-language="currentLanguage"
               @created="updateTrainingStatus()"
-              @deleted="updateTrainingStatus()"/>
+              @deleted="updateTrainingStatus()"
+              @eventStep="dispatchClick()"
+              @eventError="dispatchSkip()"/>
           </div>
         </div>
-        <div
-          class="
-                evaluate__container">
+        <div class="evaluate__container">
           <div class="evaluate__item">
             <authorization-request-notification
               v-if="repository && !repository.authorization.can_write"
+              :available="!repository.available_request_authorization"
               :repository-uuid="repository.uuid"
               @onAuthorizationRequested="updateRepository(false)" />
           </div>
@@ -68,6 +78,14 @@
         <login-form hide-forgot-password />
       </div>
     </div>
+    <tour
+      v-if="activeTutorial === 'evaluate'"
+      :step-count="7"
+      :next-event="eventClick"
+      :finish-event="eventClickFinish"
+      :reset-tutorial="eventReset"
+      :skip-event="eventSkip"
+      name="evaluate"/>
   </repository-view-base>
 </template>
 
@@ -77,10 +95,9 @@ import BaseEvaluateExamples from '@/components/repository/repository-evaluate/Ba
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import { mapActions, mapState, mapGetters } from 'vuex';
 import { LANGUAGES } from '@/utils';
-
+import Tour from '@/components/Tour';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
-
 
 export default {
   name: 'RepositoryEvaluate',
@@ -89,6 +106,7 @@ export default {
     LoginForm,
     BaseEvaluateExamples,
     AuthorizationRequestNotification,
+    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -96,6 +114,10 @@ export default {
       currentLanguage: '',
       evaluating: false,
       error: {},
+      eventClick: false,
+      eventClickFinish: false,
+      eventReset: false,
+      eventSkip: false,
     };
   },
   computed: {
@@ -106,6 +128,7 @@ export default {
     ...mapGetters({
       getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
+      activeTutorial: 'activeTutorial',
     }),
     languages() {
       if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
@@ -133,6 +156,18 @@ export default {
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
+    dispatchFinish() {
+      this.eventClickFinish = !this.eventClickFinish;
+    },
+    dispatchReset() {
+      this.eventReset = !this.eventReset;
+    },
+    dispatchSkip() {
+      this.eventSkip = !this.eventSkip;
+    },
     onAuthorizationRequested() {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
@@ -170,6 +205,7 @@ export default {
         });
         return true;
       } catch (error) {
+        this.dispatchReset();
         this.error = error.response.data;
         this.evaluating = false;
         this.$buefy.toast.open({

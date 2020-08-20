@@ -15,8 +15,11 @@
               :message="errors.entities || errors.language"
             >
               <example-text-with-highlighted-entities-input
+                id="tour-evaluate-step-2"
                 ref="textInput"
+                :is-previous-disabled="true"
                 v-model="text"
+                :is-step-blocked="text.length === 0"
                 :entities="entities"
                 :available-entities="entitiesList"
                 :formatters="textFormatters"
@@ -29,16 +32,21 @@
           </div>
           <div>
             <b-field
+              id="tour-evaluate-step-3"
+              :is-previous-disabled="true"
               :message="errors.non_field_errors"
-            >
-              <b-autocomplete
+              :is-step-blocked="intent.length === 0">
+              <b-select
                 v-model="intent"
                 :placeholder="$t('webapp.evaluate.intent')"
-                :data="filteredData"
-                :open-on-focus="true"
-                dropdown-position="bottom"
-                @keyup.enter.native="onEnter()"
-              />
+                expanded>
+                <option
+                  v-for="(intent, index) in repository.intents_list"
+                  :value="intent"
+                  :key="index">
+                  {{ intent }}
+                </option>
+              </b-select>
             </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -48,9 +56,13 @@
               multilined
               type="is-dark">
               <b-button
+                id="tour-evaluate-step-4"
                 ref="saveSentenceButton"
+                :is-next-disabled="true"
+                :is-previous-disabled="true"
                 :disabled="!shouldSubmit"
                 :loading="submitting"
+                :is-step-blocked="!blockedNextStepTutorial"
                 type="is-primary"
                 @click="submitSentence()">
                 <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
@@ -58,12 +70,12 @@
             </b-tooltip>
           </div>
         </div>
-        <bh-field
+        <b-field
           :errors="errors.entities"
           class="new-sentence__form__entities"
         >
           <div class="columns">
-            <div class="column is-three-fifths">
+            <div class="column is-one-third">
               <entities-input
                 ref="entitiesInput"
                 v-model="entities"
@@ -80,7 +92,7 @@
               />
             </div>
           </div>
-        </bh-field>
+        </b-field>
       </form>
     </div>
   </div>
@@ -110,6 +122,8 @@ export default {
       submitting: false,
       entitiesList: [],
       testing: true,
+      blockedNextStepTutorial: false,
+      intentError: {},
     };
   },
   computed: {
@@ -235,15 +249,21 @@ export default {
         this.submitting = false;
 
         this.$emit('created');
+        this.$emit('eventStep');
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
         return true;
       } catch (error) {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
-
         /* istanbul ignore next */
         if (data) {
           /* istanbul ignore next */
-          this.errors = data;
+          this.intentError = data;
+          this.$buefy.toast.open({
+            message: `${this.intentError.non_field_errors[0]}`,
+            type: 'is-danger',
+            duration: 5000,
+          });
         }
         /* istanbul ignore next */
         this.submitting = false;

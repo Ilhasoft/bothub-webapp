@@ -22,16 +22,26 @@ describe('QuickTest.vue', () => {
       },
     });
 
+    const $router = {
+      currentRoute: {
+        name: 'tutorial-quick-test',
+      },
+    };
+
     wrapper = shallowMount(QuickTest, {
       localVue,
       store,
       mocks: {
         $t: () => 'some specific text',
+        $router,
       },
       propsData: {
         repository: {
           uuid: 'dbe1539c-88ba-43e0-bed5-54729218cec9',
           available_languages: 'en',
+        },
+        currentRoute: {
+          name: 'tutorial-quick-test',
         },
       },
     });

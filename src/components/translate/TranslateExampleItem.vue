@@ -38,6 +38,10 @@
         class="level-right">
         <div class="level-item">
           <button
+            id="tour-translate-step-3"
+            :is-next-disabled="true"
+            :is-previous-disabled="true"
+            :is-step-blocked="blockedNextStepTutorial"
             class="button is-primary"
             @click="toggleFormOpen()">
             <span>{{ $t('webapp.translate.translate_sentence') }}</span>
@@ -53,7 +57,8 @@
           :translate-to="translateTo"
           :extra-entities-list="entitiesList"
           :repository="repository"
-          @translated="onTranslated()" />
+          @translated="onTranslated()"
+          @eventStep="dispatchStep()" />
       </div>
     </b-collapse>
   </div>
@@ -62,7 +67,7 @@
 <script>
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import HighlightedText from '@/components/shared/HighlightedText';
 import NewTranslateForm from './NewTranslateForm';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
@@ -113,11 +118,25 @@ export default {
       deleteDialog: null,
       formOpen: false,
       highlighted: null,
+      eventClick: false,
+      blockedNextStepTutorial: true,
     };
   },
   computed: {
+    ...mapGetters([
+      'activeTutorial',
+    ]),
     entitiesList() {
       return getEntitiesList(this.entities);
+    },
+  },
+  watch: {
+    formOpen() {
+      if (this.formOpen === true && this.activeTutorial === 'translate') {
+        this.$nextTick(() => {
+          this.dispatchStep();
+        });
+      }
     },
   },
   methods: {
@@ -132,9 +151,16 @@ export default {
       );
       return `entity-${color}`;
     },
+    dispatchClick() {
+      this.eventClick = !this.eventClick;
+    },
     toggleFormOpen() {
       /* istanbul ignore next */
       this.formOpen = !this.formOpen;
+      this.blockedNextStepTutorial = false;
+    },
+    dispatchStep() {
+      this.$emit('dispatchEvent', { event: 'dispatchStep' });
     },
     onTranslated() {
       /* istanbul ignore next */

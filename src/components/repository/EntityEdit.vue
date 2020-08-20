@@ -1,7 +1,24 @@
 <template>
   <div class="entity-edit__entities-list">
     <div class="entity-edit__title entity-edit__entities-list__header">
-      <p>{{ $t('webapp.home.entities_list') }}</p>
+      <div class="entity-edit__title entity-edit__entities-list__header__container">
+        {{ $t('webapp.home.entities_list') }}
+        <div
+          class="entity-edit__title entity-edit__entities-list__header__question">
+          <b-tooltip
+            :label="$t('webapp.summary.entity_question')"
+            class="tooltipStyle"
+            multilined
+            type="is-dark"
+            position="is-right">
+            <b-icon
+              custom-size="mdi-18px"
+              type="is-dark"
+              icon="help-circle"
+            />
+          </b-tooltip>
+        </div>
+      </div>
       <b-loading
         :is-full-page="false"
         :active="loading" />
@@ -275,13 +292,26 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
+
+      &__container{
+      display: flex;
+      }
+      &__question{
+      margin: -0.1rem 0 0 0.2rem;
+      }
     }
   }
 
   &__entities-list {
     &__labeled-count {
+      margin-top: $between-title-subtitle;
       margin-bottom: $between-subtitle-content;
     }
   }
+}
+.tooltipStyle::after {
+  font-size: 12px;
+  line-height: 13px;
+  padding: 1rem 0.5rem;
 }
 </style>

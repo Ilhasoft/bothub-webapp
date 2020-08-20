@@ -6,26 +6,26 @@ exports[`SideBar.vue renders correctly 1`] = `
     <div class="sidebar-wrapper__collapse-button">
       <b-icon-stub icon="chevron-left"></b-icon-stub>
     </div>
-    <b-menu-stub accordion="true">
+    <b-menu-stub accordion="true" activable="true">
       <div class="menu-header">
         <div class="menu-header__logo"></div>
       </div>
       <b-menu-list-stub ariarole="">
-        <b-menu-item-stub label="some specific text" icon="home" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="refresh" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="wechat" animation="fade" tag="a" ariarole="">
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="refresh" animation="slide" tag="router-link" ariarole="" id="tour-training-step-0" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" id="tour-evaluate-step-0">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="inbox" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="translate" animation="fade" tag="a" ariarole="">
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="inbox" animation="slide" tag="router-link" ariarole="" id="tour-inbox-step-0" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="translate" animation="slide" tag="a" ariarole="" id="tour-translate-step-0">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="power-plug" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="cog" animation="fade" tag="a" ariarole="">
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="fade" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="power-plug" animation="slide" tag="router-link" ariarole="" id="tour-integrate-step-0" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="cog" animation="slide" tag="a" ariarole="">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
       </b-menu-list-stub>
     </b-menu-stub>

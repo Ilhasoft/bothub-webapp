@@ -6,6 +6,7 @@
       "logout": "Logout",
       "signin": "sign in",
       "signup": "sign up",
+      "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
@@ -20,7 +21,9 @@
       "error_to_retrieve_bot": "Error retrieving intelligence",
       "yes": "Yes",
       "no": "No",
-      "items_total": "{n} item total | {n} items total"
+      "items_total": "{n} item total | {n} items total",
+      "type_here": "Type here...",
+      "support": "Bothub Support"
     },
     "login_form": {
       "login": "Log in to your account",
@@ -50,7 +53,8 @@
       "language": "laguage",
       "category": "Category",
       "new_repo": "NEW INTELLIGENCE",
-      "default_error": "There were errors while submitting"
+      "default_error": "There were errors while submitting",
+      "description_form": "Description"
     },
     "register_form": {
       "already_have_account": "Already have an account?",
@@ -196,7 +200,7 @@
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
       "all_categories": "All categories",
       "all_languages": "All languages",
-      "no_repo": "Repositories not found.",
+      "no_repo": "No repositories found.",
       "default_error": "Something went wrong",
       "edit_groups": "Edit groups",
       "finish_editing": "Finish editing",
@@ -210,10 +214,31 @@
       "delete": "Delete",
       "cancel": "Cancel"
     },
+    "summary": {
+      "training_information": "Traning information",
+      "information_sentences": "Sentences | Sentence | Sentences",
+      "information_intents": "Intents | Intent | Intents",
+      "information_entities": "Entities | Entity | Entities",
+      "general_information": "General information",
+      "information_language": "Languages | Language | Languages",
+      "information_contributors": "Contributors | Contributor | Contributors",
+      "information_integrations": "Integrations | Integration | Integrations",
+      "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
+      "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
+    },
+    "intent":{
+      "title": "Entity",
+      "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
+      "edit_button": "Edit Intent",
+      "save_button": "Save",
+      "no_sentences": "No sentence.",
+      "error_entity": "An error occured."
+    },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
       "manage_your_team": "Manage your team",
       "authorization_requests": "Authorization Requests",
+      "request_available": "You already have a pending request. Wait for an admin to process it",
       "not_can_edit_repository": "You can not edit this intelligence",
       "login": "Sign in to your account to edit this intelligence.",
       "users": "Users:",
@@ -222,12 +247,29 @@
       "save": "Save",
       "request": "Request",
       "invite": "Send Invite",
-      "no_users": "No users in your team."
+      "no_users": "No users in your team.",
+      "search_user": "Enter a name or username",
+      "search_user_org": "Enter a name or username",
+      "no_locale": "No locale",
+      "remove_user_confirm": "Are you sure you want to remove permissions for {user}?",
+      "remove": "Remove"
+    },
+    "roles": {
+      "user": "User",
+      "contributor": "Contributor",
+      "admin": "Admin",
+      "translator": "Trandutor",
+      "user_description": "Can read and analyze",
+      "contributor_description": "Can read, analyze and contribute with examples and translations",
+      "admin_description": "Can read, analyze, contribute and write repository config",
+      "translator_description": "Can read, analyze and create translations for intelligence"
     },
     "example": {
       "enter_sentence": "Enter your sentence here",
       "intent": "Intent",
       "entity": "Entity",
+      "sentence": "Sentence",
+      "text_is": " <strong> {text} </strong> is",
       "help_text": "When your bot receives a message, your bot can use a recognizer to examine the message and determine intent.",
       "delete_text": "Are you sure? The example will be deleted.",
       "delete": "Delete",
@@ -298,30 +340,105 @@
       "export_switch_yes": "Yes",
       "export_field_text": "When enabling this option, the export file will contain only untranslated sentences"
     },
+    "orgs": {
+      "owner": "Owned by",
+      "my_user": "My User",
+      "created_by": "Created by",
+      "created": "Created",
+      "repositories": "{n} repositories | {n} repository | {n} repositories",
+      "members": "{n} members | {n} member | {n} members",
+      "create_org": "Create organization",
+      "create": "Create",
+      "no_orgs": "You are not yet a member of any organizations.",
+      "manage_contributors": "Manage contributors",
+      "manage_subtitle": "Manage who can contribute to your data set.",
+      "edit": "Edit",
+      "information": "Information",
+      "org_info": "Organization Information",
+      "no_repo": "This org does not yet have any repositories.",
+      "add_repo": "Add repository",
+      "from": "From <strong> {locale} </strong>",
+      "default_error": "Could not retrieve organization",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities"
+      },
+      "reports": {
+        "title": "Reports",
+        "reports": "Organization Reports"
+    },
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "Organization Intelligences",
+        "using": "Using intelligences"
+      },
+      "create_org_title": "Let's create an organization",
+      "create_org_subtitle": "Increase your team's productivity by creating all intelligence in one place.",
+      "send_email": "Send e-mail"
+    },
     "my_profile": {
       "edit_your_profile": "Edit Your Profile",
       "change_password": "Change Password",
       "repositories": "Intelligences",
       "modal_edit_your_profile": "Edit your profile",
       "modal_change_password": "Change Password",
-      "edit": "Edit",
+      "edit": "Save",
       "trained_at": "Trained at {trained} by {by}",
       "train_fail": "Train failed at {failed}",
       "training": "Training...",
       "not_trained": "Not trained yet.",
-      "training_log": "Training Log"
+      "training_log": "Training Log",
+      "personal_info": "Personal Information",
+      "free_user": "FREE USER",
+      "profile": "Profile",
+      "no_repo": "You don't have any bots yet",
+      "add_repo": "Create bot",
+      "activities": {
+        "title": "Activities",
+        "recent": "Recent Activities",
+        "activity_complement": "in intelligence <strong> {intelligence} </strong> of organization <strong> {org} </strong>"
+      },
+      "reports": {
+        "title": "Reports",
+        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "created_by": "Created by",
+        "today": "Today",
+        "this_week": "This week",
+        "this_month": "This month",
+        "last_three_months": "Last three months",
+        "all_time": "All time",
+        "filter_by": "Filter by",
+        "no_reports": "Nenhum relatório",
+        "total": "Predictions total:"
     },
-    "tutorial": {
-      "create_your_first_bot": "Create your first bot!",
-      "grid1": "On the top right of the window, click the \"New bot\" button.",
-      "grid2": "Fill in the fields and click on \"Create Bot\"",
-      "grid3": "Start adding content to the interpretation mechanism\n              by providing example sentences.",
-      "grid4": "Choose \"Training\" and enter phrases highlighting the entities and\n                relating it to an intention.</p>\n              <p> Don't forget to submit your sentences.,",
-      "grid5": "After adding your examples, click the status bar to see\n            the status of your bot and train the sentences",
-      "grid6": "That's it! Your bot is ready to be used!",
-      "previous": "Previous",
-      "next": "Next",
-      "finish": "Finish"
+      "payment": {
+        "title": "Payments",
+        "history": "Payment History",
+        "info": "Payment Information",
+        "payment": "{period} payment",
+        "credit_payment": "By credit card",
+        "coupon_payment": "By credit coupon",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
+      },
+      "intelligences": {
+        "title": "Intelligences",
+        "mine": "My Intelligences",
+        "contributing": "Contribution intelligences",
+        "using": "Use intelligences"
+      }
     },
     "menu": {
       "summary": "Summary",
@@ -412,6 +529,112 @@
       "no_sentences": "No sentence.",
       "error_entity": "An error occured.",
       "error_entity_exists": "Entity already exists"
+    },
+    "payment": {
+      "options": {
+        "title": "Bothub Pricing",
+        "slogan": "Bothub hosts intelligences that work for you",
+        "free": "Free",
+        "professional": "Professional",
+        "custom": "Custom Plan",
+        "contact_us": "Contact Us",
+        "contact": "Contact Sales",
+        "free_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you have up to <strong>1000 free predictions</strong>.",
+        "professional_text": "Gain access to the community intelligence repository, create intelligence, and invite people to collaborate on your project. In this mode you pay, <strong>after reaching 1,000 predictions.</strong>",
+        "custom_text": "Real superpowers! Take your wits to the next level with personalized solutions, impeccable support, and a large number of predictions.",
+        "per_prediction": "per prediction",
+        "get_free": "Get free",
+        "get_started": "Get started"
+      },
+      "info": {
+        "title": "Payment information",
+        "subtitle": "Input your credit or debit card information",
+        "back": "Back",
+        "save": "Save",
+        "card_name": "Card name"
+      }
+    },
+    "tutorial": {
+      "title": "Welcome to Bothub",
+      "description": "Bothub is an open platform for forecasting, training and share NLP data sets in multiple languages. <br><br> Follow these steps to be part of our community",
+      "skip": "Skip for now",
+      "previous_step": "Previous",
+      "next_step": "Next",
+      "finish_step": "Finish",
+      "confirm_step":"Confirm",
+      "finish_tutorial": "Finish",
+      "alert_message": "You need to follow the sequence of steps",
+      "training_wait": "Your intelligence is being trained!",
+      "training_error": "There was an error in training your intelligence.",
+      "training_success": "Your intelligence has been successfully trained!",
+      "items": {
+          "create_account": "Create account",
+          "create_intelligence": "Create your first intelligence",
+          "training": "Training this intelligence",
+          "quick_test": "Make a quick test",
+          "evaluate": "Test this intelligence",
+          "inbox": "Add sentences with inbox",
+          "translate": "Translate to another language",
+          "integrate": "Integrate your intelligence with a platform"
+      },
+      "create_intelligence": {
+          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+          "step_1": "Or create your own intelligence by clicking here."
+      },
+      "create_intelligence_forms": {
+          "step_0": "Fill in the form with your intelligence data like name, description and language",
+          "step_1": "Choose categories for your intelligence, based on the area in which it will be used, and submit."
+      },
+      "training": {
+          "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
+          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Then select one of the words to classify. Ex: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
+          "step_2": "Now click here to sort the word you selected.",
+          "step_3": "And write the rating Ex: If you selected ''pizza'' the rating could be ''food''",
+          "step_4": "Identify the intention of the phrase you typed. Ex: order",
+          "step_5": "Finally, submit your sentence.",
+          "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
+          "step_7": "Make sure your intelligence is ready to train and click \" Train \" to proceed. <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Ok \" to repeat."
+      },
+      "evaluate": {
+        "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
+        "step_1": "Select a language to test.",
+        "step_2": "Enter a sentence here that you would like to test. <br> Ex: I want a pizza",
+        "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
+        "step_4": "And finally, submit your sentence.",
+        "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
+    }, 
+     "evaluate_result": {
+      "step_0": "Here you can see the result of your intelligence test."
+      },
+      "quick_test": {
+        "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
+        "step_1": "Enter your test phrase and confirm.",
+        "step_2": "Click here to find out each word's relevance in the sentence within the chosen intention",
+        "step_3": "Click here to see the Raw."
+        },
+      "inbox": {
+        "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test.",
+        "step_1": "Select the sentences you want to add",
+        "step_2": "Add to train",
+        "step_3": "Add to test phrases",
+        "step_4": "Select the intent that you want to assign the sentence and add."
+      },
+      "translate": {
+        "step_0": "<strong>Let's to translate!</strong>  <br> Click here to translate the sentences of your intelligence into another language.",
+        "step_1": "Select the trained language. <br> <strong>Tip</strong>: You need to have phrases added in that language.",
+        "step_2": "Select the language for translation and enter.",
+        "step_3": "Choose one sentence and click in translate.",
+        "step_4": "Enter a sentence translation here.",
+        "step_5": "Finally, submit your sentence translate.",
+        "step_6": "If you prefer, you can also export and import excel sentences for translation by clicking here"
+      },
+      "integrate": {
+        "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
+        "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
+    },
+    "tutorial_button":{
+      "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
   }
+}
 }

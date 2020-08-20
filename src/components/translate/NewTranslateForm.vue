@@ -8,8 +8,11 @@
           :errors="errors.text"
           label>
           <example-text-with-highlighted-entities-input
+            id="tour-translate-step-4"
             ref="textInput"
+            :is-previous-disabled="true"
             v-model="text"
+            :is-step-blocked="text.length === 0"
             :entities="entities"
             :available-entities="repository.entities"
             :placeholder="$t('webapp.translate.translate_sentence')"
@@ -20,6 +23,9 @@
       <div class="column is-narrow">
         <bh-field label>
           <bh-button
+            id="tour-translate-step-5"
+            :is-next-disabled="true"
+            :is-previous-disabled="true"
             :disabled="!isValid || submitting"
             secondary
             size="normal"
@@ -85,6 +91,7 @@ export default {
       textSelected: null,
       errors: {},
       submitting: false,
+      blockedNextStepTutorial: true,
     };
   },
   computed: {
@@ -126,7 +133,6 @@ export default {
     async onSubmit() {
       this.errors = {};
       this.submitting = true;
-
       try {
         await this.newTranslation({
           exampleId: this.exampleId,
@@ -156,6 +162,9 @@ export default {
           });
         }
       }
+
+      this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+      this.$emit('eventStep');
 
       return false;
     },

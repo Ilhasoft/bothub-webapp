@@ -32,30 +32,35 @@
           <div class="bh-grid bh-grid--row layout__header__options">
             <div
               v-if="authenticated"
+              id="tour-create_intelligence-step-1"
+              :is-next-disabled="true"
+              :is-previous-disabled="true"
+              :is-step-blocked="!blockedNextStepTutorial"
               class="bh-grid__item hide-mobile">
-              <router-link :to="'new'">
+              <router-link :to="'/new'">
                 <b-button
                   type="is-primary"
                   inverted
-                  rounded>
+                  rounded
+                  @click="blockedNextStepTutorial = true">
                   <strong>{{ $t('webapp.layout.newbot') }}</strong>
                 </b-button>
               </router-link>
             </div>
             <div
-              v-if="authenticated"
+              v-if="authenticated && tutorialEnabled"
               class="bh-grid__item layout__header__icon-tutorial--center">
-              <bh-icon-button
+              <b-icon
                 class="layout__header__icon-tutorial"
-                size="medium"
-                value="question"
-                @click="openBeginnerTutorialModal()"
+                type="is-white"
+                icon="help-circle"
+                @click.native="openBeginnerTutorialModal()"
               />
             </div>
             <div
               v-if="authenticated"
               class="bh-grid__item">
-              <bh-dropdown position="left">
+              <b-dropdown position="is-bottom-left">
                 <user-avatar
                   slot="trigger"
                   :profile="myProfile" />
@@ -63,17 +68,17 @@
                   slot="trigger"
                   icon="chevron-down"
                   class="layout__header__icon"/>
-                <bh-dropdown-item @click="openMyProfile()">
+                <b-dropdown-item @click="openMyProfile()">
                   {{ myProfile.name || '...' }}
-                </bh-dropdown-item>
-                <bh-dropdown-item
-                  @click="openNewRepository()">
-                  {{ $t('webapp.layout.start_you_bot') }}
-                </bh-dropdown-item>
-                <bh-dropdown-item @click="logout()">
+                </b-dropdown-item>
+                <b-dropdown-item
+                  @click="orgs()">
+                  {{ $t('webapp.layout.orgs') }}
+                </b-dropdown-item>
+                <b-dropdown-item @click="logout()">
                   {{ $t('webapp.layout.logout') }}
-                </bh-dropdown-item>
-              </bh-dropdown>
+                </b-dropdown-item>
+              </b-dropdown>
             </div>
             <div
               v-if="!authenticated"
@@ -98,10 +103,10 @@
         </div>
       </div>
     </div>
-    <div class="layout__content"><slot /></div>
-    <site-footer />
-    <beginner-tutorial
-      :open.sync="beginnerTutorialModalOpen"/>
+    <div class="layout__content">
+      <slot/>
+    </div>
+    <site-footer v-if="showFooter" />
   </div>
 </template>
 
@@ -110,12 +115,10 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import BeginnerTutorial from '@/components/repository/BeginnerTutorial';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  BeginnerTutorial,
 };
 
 export default {
@@ -134,10 +137,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    showFooter: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
       beginnerTutorialModalOpen: false,
+      blockedNextStepTutorial: false,
     };
   },
   computed: {
@@ -145,6 +153,9 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    tutorialEnabled() {
+      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+    },
   },
   watch: {
     title() {
@@ -159,6 +170,7 @@ export default {
     ...mapActions([
       'updateMyProfile',
       'logout',
+      'setTutorialMenuActive',
     ]),
     openNewRepository() {
       this.$router.push({
@@ -166,10 +178,17 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: 'myProfile' });
+      this.$router.push({ name: 'profile' });
     },
     openBeginnerTutorialModal() {
-      this.beginnerTutorialModalOpen = true;
+      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+        this.setTutorialMenuActive();
+      }
+    },
+    orgs() {
+      this.$router.push({
+        name: 'orgs',
+      });
     },
     signIn() {
       this.$router.push({
@@ -256,6 +275,7 @@ export default {
     &__icon-tutorial {
       color: $color-white;
       margin: 0;
+      cursor: pointer;
 
       &--center {
         align-self: center;

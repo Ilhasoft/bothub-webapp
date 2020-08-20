@@ -9,6 +9,7 @@ class NewRepositoryModel extends ModelBase {
       categories: [],
       description: '',
       is_private: false,
+      organization: null,
     };
   }
 
@@ -19,6 +20,7 @@ class NewRepositoryModel extends ModelBase {
       categories: Object,
       description: String,
       is_private: Boolean,
+      organization: Number,
     };
   }
 

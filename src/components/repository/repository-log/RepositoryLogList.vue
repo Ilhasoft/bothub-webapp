@@ -16,15 +16,22 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div @click="showModalTraining($t('webapp.inbox.training'))">
+          <div
+            @click="showModalTraining($t('webapp.inbox.training'))">
             <b-icon
+              id="tour-inbox-step-2"
+              :is-previous-disabled="true"
               icon="refresh"
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div @click="showModalSentence($t('webapp.inbox.test_sentences'))">
+          <div
+            @click="showModalSentence($t('webapp.inbox.test_sentences'))">
             <b-icon
+              id="tour-inbox-step-3"
+              :is-previous-disabled="true"
+              :is-next-disabled="true"
               icon="chat-processing"
               class="repository-log-list__section__icons"/>
           </div>
@@ -103,6 +110,7 @@ export default {
     ...mapGetters({
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
+      activeTutorial: 'activeTutorial',
     }),
     confidenceVerify() {
       if (this.logData.length > 1) {
@@ -150,6 +158,8 @@ export default {
       });
     },
     showModalTraining(typeModal) {
+      if (this.activeTutorial === 'inbox') return;
+
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
@@ -168,6 +178,8 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
+        canCancel: false,
+        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -200,13 +212,29 @@ export default {
         component: IntentModal,
         hasModalCard: false,
         trapFocus: true,
+        canCancel: false,
+        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
             this.addToSentences(value);
             this.intent = value;
+            if (this.activeTutorial === 'inbox') {
+              this.$emit('finishedTutorial');
+            }
+          },
+          closeModal: () => {
+            this.logData = [];
+            this.select = '';
+            this.$root.$emit('selectAll', false);
+            if (this.activeTutorial === 'inbox') {
+              this.$emit('dispatchSkip');
+            }
           },
         },
+      });
+      this.$nextTick(() => {
+        this.$emit('dispatchNext');
       });
     },
     verifyIsCorrected(value) {
@@ -260,15 +288,6 @@ export default {
         }
       });
     },
-    // showDeleteModal() {
-    //   console.log(this.logData);
-    //   this.$buefy.dialog.confirm({
-    //     message: 'Você tem certeza que deseja deletar as frases ?',
-    //     onConfirm: () => {
-    //       this.$buefy.toast.open('User confirmed');
-    //     },
-    //   });
-    // },
     showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       let message = Array.join(messages, ',');

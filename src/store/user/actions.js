@@ -37,18 +37,34 @@ export default {
       });
     }
   },
+  getPaymentHistory(store, limit = 20) {
+    return user.getPaymentHistory(limit);
+  },
   getMyRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.myRepositories(limit);
+  },
+  // TODO
+  getContributingRepositories(store, limit = 20) {
+    /* istanbul ignore next */
+    return user.permissionRepositories(limit);
+  },
+  // TODO
+  getUsingRepositories(store, limit = 20) {
+    /* istanbul ignore next */
+    return user.myRepositories(limit);
+  },
+  getUserReports(store, { query = {}, limit = 20 }) {
+    return user.getReports(limit, query);
   },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);
     return schema;
   },
   patchMyProfile(store, {
-    nickname, email, name, locale,
+    nickname, email, name, locale, biography,
   }) {
-    return user.updateMyProfile(nickname, email, name, locale);
+    return user.updateMyProfile(nickname, email, name, locale, biography);
   },
   async getChangePasswordSchema() {
     const schema = await user.getChangePasswordSchema();

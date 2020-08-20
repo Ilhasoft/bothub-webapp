@@ -1,10 +1,11 @@
 <template>
-  <bh-card
-    :class="[ single ? 'repository-card__single' : 'repository-card']"
-    shadow="light"
-    no-border>
-    <div class="repository-card__align-items">
-      <div class="repository-card__big-badge-wrapper">
+  <div
+    :class="[ single ? 'repository-card__single' : 'repository-card']">
+    <div
+      id="tour-create_intelligence-step-0"
+      class="repository-card__align-items">
+      <div
+        class="repository-card__big-badge-wrapper">
         <component
           :is="clickable ? 'router-link' : 'span'"
           :to="repositoryDetailsRouterParams">
@@ -69,7 +70,7 @@
         </div>
       </div>
     </div>
-  </bh-card>
+  </div>
 </template>
 
 <script>
@@ -115,15 +116,17 @@ export default {
       return [];
     },
     repositoryIcon() {
-      return (this.$attrs.categories[0] && this.$attrs.categories[0].icon) || 'botinho';
+      return ((this.$attrs.categories[0] && this.$attrs.categories[0].icon)
+      || (this.$attrs.categories_list[0] && this.$attrs.categories_list[0].icon))
+      || 'botinho';
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
 
 .repository-card {
@@ -133,6 +136,10 @@ export default {
   padding: 1rem 0;
   width: calc(100% * 1/3 - 1rem);
   word-break: break-all;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  box-shadow:0rem 0rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: $mobile-width) {
     width: calc(100% * 1/2 - 1rem);
@@ -148,6 +155,10 @@ export default {
     height: 100%;
     padding: 1rem 0;
     word-break: break-all;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    box-shadow:0rem 0rem 0.5rem 0.2rem rgba(0, 0, 0, 0.1);
   }
 
   &__align-items {

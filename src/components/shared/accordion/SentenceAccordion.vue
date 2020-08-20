@@ -84,8 +84,8 @@ export default {
 
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/utilities';
-  @import '~bh/src/assets/scss/colors.scss';
+  @import '~@/assets/scss/utilities';
+  @import '~@/assets/scss/colors.scss';
   @import '~@/assets/scss/variables.scss';
 
   .before-border {
@@ -109,12 +109,12 @@ export default {
 
   .accordion {
     overflow: hidden;
-    background: #fff;
+    background: $color-white;
     box-shadow: 0 1px 12px 1PX rgba(0,0,0,0.25);
   }
 
   .border {
-    border-color: #cfd5d9;
+    border-color: $color-border;
     border-width: 1px;
     border-style: solid;
     border-radius: 6px;

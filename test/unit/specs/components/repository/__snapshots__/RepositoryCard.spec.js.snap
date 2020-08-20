@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RepositoryCard.vue renders correctly 1`] = `
-<bh-card-stub shadow="light" noborder="true" class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
-  <div class="repository-card__align-items">
+<div class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
+  <div id="tour-create_intelligence-step-0" class="repository-card__align-items">
     <div class="repository-card__big-badge-wrapper">
       <router-link-stub to="[object Object]" tag="a" event="click">
         <div class="repository-card__big-badge">
@@ -26,5 +26,5 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
       </div>
     </div>
   </div>
-</bh-card-stub>
+</div>
 `;

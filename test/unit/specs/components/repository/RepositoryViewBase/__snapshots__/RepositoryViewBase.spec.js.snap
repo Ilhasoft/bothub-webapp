@@ -46,6 +46,6 @@ exports[`RepositoryViewBase.vue renders correctly 1`] = `
     <!---->
   </div>
   <!---->
-  <request-authorization-modal-stub repositoryuuid="null"></request-authorization-modal-stub>
+  <request-authorization-modal-stub repositoryuuid="null" available="true"></request-authorization-modal-stub>
 </div>
 `;

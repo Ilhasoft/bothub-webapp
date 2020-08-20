@@ -114,6 +114,5 @@ export const updateAttrsValues = (drfModel, data) => {
       }
     });
   });
-
   return Object.assign(drfModel, attrs);
 };

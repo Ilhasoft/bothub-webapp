@@ -52,10 +52,12 @@ class Repository extends ModelBase {
       available_request_authorization: null,
       request_authorization: null,
       languages_warnings: null,
+      authorizations: {},
       requirements_to_train: {},
       ready_for_train: false,
       repository_version: '',
       use_transformer_entities: false,
+      organization: null,
     };
   }
 
@@ -85,10 +87,12 @@ class Repository extends ModelBase {
       available_request_authorization: Boolean,
       request_authorization: Object,
       languages_warnings: Object,
+      authorizations: Object,
       requirements_to_train: Object,
       ready_for_train: Boolean,
       repository_version: String,
       use_transformer_entities: Boolean,
+      organization: Number,
     };
   }
 

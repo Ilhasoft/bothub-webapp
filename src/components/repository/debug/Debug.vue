@@ -116,7 +116,7 @@ export default {
       return Object.entries(this.relevantData).map(entry => ({
         text: entry[0],
         relevance: entry[1],
-      })).sort((a, b) => a.relevance.relevance < b.relevance.relevance);
+      })).sort((a, b) => (a.relevance.relevance < b.relevance.relevance ? 1 : -1));
     },
     maxRelevance() {
       if (this.tableData.length === 0) return 0;
@@ -175,6 +175,8 @@ export default {
 
 <style lang="scss" scoped>
 
+@import '~@/assets/scss/colors.scss';
+
     tr, td, table, th, .table {
     border: 0;
     padding: 0.35rem;
@@ -215,7 +217,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        border: 1px solid #CFD5D9;
+        border: 1px solid $color-border;
 
         > * {
           margin: 1rem 0;

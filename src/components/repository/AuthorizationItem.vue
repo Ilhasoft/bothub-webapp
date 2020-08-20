@@ -1,50 +1,48 @@
 <template>
-  <div class="bh-grid">
-    <div class="bh-grid__item bh-grid__item--grow-0">
-      <user-avatar :profile="getProfile(user__nickname)" />
+  <div class="authorization-item columns is-vcentered">
+    <div class="column authorization-item__info">
+      <user-avatar
+        :profile="getProfile(user__nickname)"
+        :clickable="false"
+        :is-organization="user__is_organization"
+        class="authorization-item__avatar" />
+      <p><strong>
+        {{ getProfile(user__nickname).name || user__nickname }} ({{ user__nickname }})
+      </strong></p>
+      <role-select
+        :editable="editable"
+        v-model="newRole"
+        size="is-small" />
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-1">
-      <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
-      <p><small>{{ user__nickname }}</small></p>
-    </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
-      <div
-        v-if="submitted || submitted || true"
-        class="bh-grid">
-        <div class="bh-grid__item">
-          <role-select
-            v-model="newRole"
-            size="is-small" />
-        </div>
-        <div class="bh-grid__item">
-          <bh-icon
-            v-if="submitting"
-            value="refresh" />
-        </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            v-if="submitted"
-            size="small"
-            class="text-color-primary"
-            value="check" />
-        </div>
-        <div class="bh-grid__item">
-          <bh-icon-button
-            value="close"
-            size="small"
-            @click="remove()"/>
-        </div>
-      </div>
+    <div class="column is-2 authorization-item__icon__container">
+      <b-icon
+        v-show="!submitting"
+        icon="delete"
+        class="authorization-item__icon authorization-item__icon--button"
+        @click.native="remove()"/>
+      <b-icon
+        v-show="!submitting"
+        icon="pencil"
+        class="authorization-item__icon authorization-item__icon--button"
+        @click.native="editable = !editable"/>
+      <b-icon
+        v-show="submitting"
+        class="authorization-item__icon icon-spin"
+        icon="refresh" />
+      <b-icon
+        v-show="submitted"
+        class="text-color-primary"
+        icon="check" />
     </div>
   </div>
 </template>
+
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
 import UserAvatar from '@/components/user/UserAvatar';
 import RoleSelect from '@/components/inputs/RoleSelect';
-
 
 export default {
   name: 'AuthorizationItem',
@@ -55,7 +53,7 @@ export default {
   props: {
     id_request_authorizations: {
       type: Number,
-      required: true,
+      default: null,
     },
     uuid: {
       type: String,
@@ -85,6 +83,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    user__is_organization: {
+      type: Boolean,
+      required: true,
+    },
   },
   data() {
     return {
@@ -92,6 +94,7 @@ export default {
       submitting: false,
       submitted: false,
       removeDialog: null,
+      editable: false,
     };
   },
   computed: {
@@ -117,8 +120,9 @@ export default {
     async remove() {
       return new Promise((resolve, reject) => {
         this.removeDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure?',
-          confirmText: 'Remove',
+          message: this.$t('webapp.settings.remove_user_confirm', { user: this.user__nickname }),
+          confirmText: this.$t('webapp.settings.remove'),
+          cancelText: this.$t('webapp.settings.cancel'),
           type: 'is-danger',
           onConfirm: async () => {
             this.submitting = true;
@@ -160,6 +164,7 @@ export default {
       this.submitting = false;
     },
     handlerError(error) {
+      this.newRole = this.role;
       const { response } = error;
 
       if (!response) {
@@ -168,9 +173,9 @@ export default {
 
       const { data } = response;
 
-      this.$bhToastNotification({
-        message: data.detail || 'Something wrong happened...',
-        type: 'danger',
+      this.$buefy.toast.open({
+        message: data.detail || this.$t('webapp.settings.default_error'),
+        type: 'is-danger',
       });
 
       if (!data.detail) {
@@ -180,3 +185,46 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+@import '~@/assets/scss/colors.scss';
+
+.authorization-item {
+    padding: 0 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    margin: 0.625rem 0;
+    border-radius: 5px;
+
+    &__info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      > * {
+        margin: 0.5rem 1rem 0.5rem 0;
+      }
+    }
+
+    &__avatar {
+        box-shadow: 0px 3px 6px #00000029;
+    }
+
+    &__icon {
+      color: $color-grey-dark;
+
+      &--button {
+        cursor: pointer;
+      }
+
+      &__container {
+        display: flex;
+        flex-direction: row-reverse;
+
+        > * {
+            margin: 0 0 0.5rem 1rem;
+        }
+      }
+    }
+}
+</style>
