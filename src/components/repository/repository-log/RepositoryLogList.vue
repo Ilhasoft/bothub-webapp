@@ -148,7 +148,6 @@ export default {
       this.logData.push(logValue);
     },
     removeLogStructure(logId) {
-      // eslint-disable-next-line array-callback-return
       this.logData = this.logData.filter(log => log.id !== logId);
     },
     showModalTraining(typeModal) {
