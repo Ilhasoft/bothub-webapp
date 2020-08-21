@@ -70,7 +70,7 @@ export const formatters = {
     .replace(/[\u0300-\u036f]/g, ''),
 
   versionItemKey: () => v => v
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>`´|]/g, '')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]\-_^"'~{}ç:<>`´|]/g, '')
     .replace(/[\s]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
