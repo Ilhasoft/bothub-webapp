@@ -48,7 +48,7 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import { generateTemporaryId } from '@/utils';
+import { generateTemporaryId, formatters } from '@/utils';
 import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
@@ -199,7 +199,7 @@ export default {
 
       this.entities.push({
         ...this.textSelected,
-        entity: this.textSelectedValue,
+        entity: formatters.bothubItemKey()(this.textSelectedValue),
         label: '',
         localLoadingLabel: true,
         localId: temporaryEntityId,
