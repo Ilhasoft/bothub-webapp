@@ -44,15 +44,16 @@
                   :value="isEdit.name"
                   :maxlength="maxEditLength"
                   :has-counter="false"
-                  icon-right-clickable="true"
+                  :icon-right-clickable="true"
                   icon-right="close"
-                  @icon-right-click="isEdit.edit = false"
+                  @icon-right-click="onCancelEdit"
                   @input="onEditNameChange"
                   @keyup.enter.native="handleEditVersion(isEdit.name, props.row.id)"/>
             </div></b-field>
             <span
               v-else
-              class="versions__table__version-number">
+              class="versions__table__version-number"
+              @click="handleVersion(props.row.id, props.row.name)">
               {{ props.row.name }}
             </span>
           </b-table-column>
@@ -190,8 +191,12 @@ export default {
       'setDefaultVersion',
       'deleteVersion',
       'editVersion',
+      'setRepositoryVersion',
       'setUpdateVersionsState',
     ]),
+    onCancelEdit() {
+      this.$nextTick(() => { this.isEdit.edit = false; });
+    },
     sort(orderField, asc) {
       this.orderField = orderField;
       this.asc = asc === 'asc';
@@ -224,12 +229,12 @@ export default {
     handleDefaultVersion(id, name) {
       this.$buefy.dialog.confirm({
         title: this.$t('webapp.versions.change_default_version'),
-        message: this.$t('webapp.versions.message_change_default_version'),
+        message: this.$t('webapp.versions.message_change_default_version', { name }),
         confirmText: this.$t('webapp.versions.confirm_change_default_version'),
         type: 'is-warning',
         hasIcon: true,
         onConfirm: () => this.setDefaultVersion({
-          repositoryUuid: this.repository.uuid,
+          repositoryUuid: this.repositoryUUID,
           id,
           name,
         }).then(() => this.updateVersions()),
@@ -249,7 +254,7 @@ export default {
         return;
       }
       this.editVersion({
-        repositoryUuid: this.repository.uuid,
+        repositoryUuid: this.repositoryUUID,
         id,
         name,
       }).then(() => {
@@ -265,6 +270,16 @@ export default {
           message: this.$t('webapp.versions.something_wrong'),
           type: 'is-danger',
         });
+      });
+    },
+    handleVersion(id, name) {
+      const version = {
+        id,
+        name,
+      };
+      this.setRepositoryVersion({
+        version,
+        repositoryUUID: this.repositoryUUID,
       });
     },
     copyVersion(version) {
