@@ -60,7 +60,7 @@ export default {
   },
   data() {
     return {
-      entity: formatters.bothubItemKey()(this.text),
+      entity: '',
     };
   },
   computed: {
@@ -73,15 +73,21 @@ export default {
       ];
     },
     selectedText() {
-      return this.text.substring(this.selectedTextStart, this.selectedTextEnd);
+      return formatters.bothubItemKey()(
+        this.text.substring(this.selectedTextStart, this.selectedTextEnd),
+      );
     },
   },
   watch: {
-    entity() {
+    async entity() {
       if (!this.entity || this.entity.length <= 0) return;
+      await this.$nextTick();
       this.entity = formatters.bothubItemKey()(this.entity);
       this.$emit('input', this.entity);
     },
+  },
+  mounted() {
+    this.entity = this.selectedText;
   },
   methods: {
     async removeEntity() {

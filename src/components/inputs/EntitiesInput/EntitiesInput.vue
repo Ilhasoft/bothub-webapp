@@ -121,7 +121,7 @@ export default {
       }
 
       const { start, end } = this.textSelected;
-      return this.text.substring(start, end);
+      return formatters.bothubItemKey()(this.text.substring(start, end));
     },
     preparedEntities() {
       return this.entities
@@ -199,7 +199,7 @@ export default {
 
       this.entities.push({
         ...this.textSelected,
-        entity: formatters.bothubItemKey()(this.textSelectedValue),
+        entity: this.textSelectedValue,
         label: '',
         localLoadingLabel: true,
         localId: temporaryEntityId,

@@ -154,10 +154,12 @@ export default {
     top: 0;
     left: 0;
     z-index: 0;
+    font-size: 0;
 
     &-before,
     &-text {
       color: transparent;
+      font-size: 1rem;
     }
 
     &-text {
