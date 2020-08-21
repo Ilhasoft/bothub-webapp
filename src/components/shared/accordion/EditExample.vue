@@ -9,9 +9,7 @@
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
-              :entities="entitiesToEdit"
-              :available-entities="entitiesToEdit"
-              :formatters="textFormatters"
+              :entities="allEntities"
               :placeholder="$t('webapp.example.enter_sentence')"
               size="normal"
               @textSelected="setTextSelected($event)"
@@ -99,7 +97,7 @@
           type="is-primary"
           @click.prevent.stop="addPendingEntity"
         >
-          {{ entityButtonText }}
+          <span class="edit-sentence__add-entity-button-text">{{ entityButtonText }} </span>
         </b-button>
         <div>
           <b-button
@@ -123,7 +121,6 @@
 
 <script>
 import Vue from 'vue';
-import BH from 'bh';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { formatters } from '@/utils';
@@ -183,6 +180,9 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
+    allEntities() {
+      return [...this.entitiesToEdit, ...this.pendingEntities];
+    },
     validationErrors() {
       const errors = [];
 
@@ -210,15 +210,6 @@ export default {
     },
     intentFormatters() {
       return formatters.bothubItemKey();
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     highlightedText() {
       return entity => this.text.slice(entity.start, entity.end);
@@ -422,6 +413,14 @@ export default {
      &__label /deep/ {
        font-weight: normal;
      }
+  }
+
+  &__add-entity-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 50vw;
   }
 
   &-input {

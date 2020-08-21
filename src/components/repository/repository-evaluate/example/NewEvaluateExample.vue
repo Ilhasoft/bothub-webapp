@@ -21,10 +21,7 @@
                 v-model="text"
                 :is-step-blocked="text.length === 0"
                 :entities="entities"
-                :available-entities="entitiesList"
-                :formatters="textFormatters"
                 :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
-                size="normal"
                 @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
@@ -102,7 +99,6 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import { mapActions, mapState, mapGetters } from 'vuex';
-import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -155,15 +151,6 @@ export default {
     },
     isValid() {
       return this.validationErrors.length === 0;
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];

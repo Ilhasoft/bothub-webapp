@@ -8,6 +8,7 @@
       class="news-modal">
       <h2> {{ $t(`${current}.title`) }} </h2>
       <p> {{ $t(`${current}.text`) }} </p>
+      <span> {{ $t(`${current}.subtext`) }} </span>
       <div class="news-modal__image__wrapper">
         <img
           v-show="images[current-1]"
@@ -120,11 +121,19 @@ export default {
         padding: 2rem;
         text-align: center;
         width: 42.5rem;
-        height: 30.625rem;
+        height: 33.625rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: space-around;
 
         &__texts{
           margin-left: 4rem;
           margin-right: 4rem;
+        }
+
+        h2{
+          font-weight: bold;
         }
 
         p {

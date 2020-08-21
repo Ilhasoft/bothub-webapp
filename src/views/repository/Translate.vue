@@ -123,7 +123,7 @@
                 <footer class="modal-card-foot">
                   <div class="repository-translate__modalStyle__styleButton">
                     <b-button
-                      class="repository-translate__buttons modalButton"
+                      class="modalButton"
                       type="is-white"
                       @click="closeImportModal()">
                       {{ $t('webapp.translate.import_button_cancel') }}
@@ -132,7 +132,7 @@
                     <b-button
                       :loading="waitDownloadFile"
                       :disabled="translationFile === null"
-                      class="repository-translate__buttons modalButton"
+                      class="modalButton"
                       type="is-primary"
                       @click="importTranslation()">
                       {{ $t('webapp.translate.import_button') }}
@@ -178,7 +178,7 @@
                 <footer class="modal-card-foot">
                   <div class="repository-translate__modalStyle__styleButton">
                     <b-button
-                      class="repository-translate__buttons modalButton"
+                      class="modalButton"
                       type="is-white"
                       @click="closeExportModal()">
                       {{ $t('webapp.translate.import_button_cancel') }}
@@ -186,7 +186,7 @@
                     <b-button
                       :loading="waitDownloadFile"
                       type="is-primary"
-                      class="repository-translate__buttons modalButton"
+                      class="modalButton"
                       @click="exportTranslation()">
                       {{ $t('webapp.translate.export_button') }}
                     </b-button>
@@ -514,9 +514,17 @@ export default {
     justify-content: flex-end;
     align-items: center;
 
-    .modalButton{
-      width: $button-width;
-      height: $button-height;
+    .modalButton {
+      cursor: pointer;
+      border: 1px solid #dbdbdb;
+      text-align: center;
+      border-radius: 4px;
+      box-shadow: none;
+      font-weight: bold;
+
+      &:hover{
+        border: 1px solid #c2c2c2;
+      }
     }
   }
 }
