@@ -73,9 +73,7 @@ export default {
       ];
     },
     selectedText() {
-      return formatters.bothubItemKey()(
-        this.text.substring(this.selectedTextStart, this.selectedTextEnd),
-      );
+      return this.text.substring(this.selectedTextStart, this.selectedTextEnd);
     },
   },
   watch: {
