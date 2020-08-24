@@ -26,7 +26,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <div class="columns is-variable is-1">
     <div class="column is-three-fifths">
       <b-field-stub addons="true">
-        <entities-input-stub value="" repository="[object Object]" text="" availableaddlabel="true" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" entitiesforedit="" available-labels=""></entities-input-stub>
       </b-field-stub>
     </div>
   </div>

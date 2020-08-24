@@ -114,6 +114,9 @@ export default {
     val() {
       this.$emit('input', this.val);
     },
+    value() {
+      this.val = this.value;
+    },
   },
   methods: {
     submit() {

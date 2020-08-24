@@ -65,12 +65,12 @@ export const formatters = {
   bothubItemKey: () => v => v
     .toLowerCase()
     .replace(/[\s]/g, '_')
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/g, '')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>`´|]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
 
   versionItemKey: () => v => v
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>`´|]/g, '')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]\-_^"'~{}ç:<>`´|]/g, '')
     .replace(/[\s]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
