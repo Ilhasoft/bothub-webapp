@@ -492,7 +492,7 @@
       "created_by": "Created by",
       "main": "Main",
       "change_default_version": "Change default version",
-      "message_change_default_version": "Are you sure you want to change this default version?",
+      "message_change_default_version": "Are you sure you want to change this default version to \"{name}\"?",
       "confirm_change_default_version": "Change default",
       "version_has_edited": "Version was edited",
       "something_wrong": "Something went wrong ):",
