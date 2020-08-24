@@ -490,7 +490,7 @@
       "created_by": "Criado por",
       "main": "Principal",
       "change_default_version": "Mude a versão padrão",
-      "message_change_default_version": "Você tem certeza que quer mudar a versão padrão?",
+      "message_change_default_version": "Você tem certeza que quer mudar a versão padrão para \"{name}\"?",
       "confirm_change_default_version": "Mudar padrão",
       "version_has_edited": "A versão foi editada",
       "something_wrong": "Algo deu errado ):",
