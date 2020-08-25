@@ -11,27 +11,48 @@
                 <h2>{{ $t('webapp.trainings.grid_text1') }}</h2>
                 <span>{{ $t('webapp.trainings.grid_text2') }}</span>
               </div>
-              <div
-                id="tour-training-step-6"
-                :is-next-disabled="true"
-                :is-previous-disabled="true"
-                class="trainings-repository__list-wrapper__tutorialStep">
-                <b-button
-                  v-if="repository.authorization.can_write"
-                  ref="training"
-                  :disabled="loadingStatus || repository.examples__count === 0"
-                  :loading="loadingStatus"
-                  type="is-secondary"
-                  class="trainings-repository__list-wrapper__button"
-                  @click="openTrainingModal">
-                  {{ $t('webapp.trainings.run_training') }}
-                </b-button>
-              </div>
             </div>
             <new-example-form
               :repository="repository"
               @created="updatedExampleList()"
               @eventStep="dispatchClick()"/>
+            <ExamplesPendingTraining
+              :query="query"
+              :update="update"
+              :text-data="textExample"
+              :is-train="checkTrainProgress"
+              class="trainings-repository__new-example__pending-example"
+              @exampleDeleted="onExampleDeleted"
+              @noPhrases="noPhrasesYet = false"
+            />
+            <button @click="increase">increase</button>
+            <div class="trainings-repository__new-example__train">
+              <div
+                v-if="checkTrainProgress"
+                class="trainings-repository__new-example__train__progress">
+                <div
+                  :style="{ width: getProgress + '%' }"
+                  class="trainings-repository__new-example__train__bar"/>
+                <p>{{ getProgress }}% do treinamento concluído</p>
+              </div>
+              <div
+                v-else-if="!noPhrasesYet"
+                id="tour-training-step-6"
+                :is-next-disabled="true"
+                :is-previous-disabled="true"
+                class="trainings-repository__list-wrapper__tutorialStep">
+                <b-button
+                  v-if="repository.authorization.can_write && !noPhrasesYet"
+                  ref="training"
+                  :disabled="loadingStatus || repository.examples__count === 0"
+                  :loading="loadingStatus"
+                  type="is-secondary"
+                  class="trainings-repository__list-wrapper__button"
+                  @click="dispatchTrain()">
+                  {{ $t('webapp.trainings.run_training') }}
+                </b-button>
+              </div>
+            </div>
           </div>
           <authorization-request-notification
             v-else
@@ -72,17 +93,13 @@
     <train-modal
       v-if="repository"
       :training="training"
-      :ready-for-train="repository.ready_for_train"
       :requirements-to-train="repository.requirements_to_train"
-      :open.sync="trainModalOpen"
+      :open="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @train="train(repository.uuid)"
       @finishedTutorial="dispatchFinish()"
-      @resetTutorial="dispatchReset()" />
-    <train-response
-      v-if="trainResponseData"
-      :train-response="trainResponseData"
-      :open.sync="trainResponseOpen" />
+      @resetTutorial="dispatchReset()"
+      @closeTrainModal="closeTrainModal()"/>
+    <train-response/>
     <tour
       v-if="activeTutorial === 'training'"
       :step-count="8"
@@ -99,6 +116,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import ExamplesList from '@/components/example/ExamplesList';
+import ExamplesPendingTraining from '@/components/example/ExamplesPendingTraining';
 import LoginForm from '@/components/auth/LoginForm';
 import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
@@ -121,6 +139,7 @@ export default {
     ExampleSearchInput,
     AuthorizationRequestNotification,
     RequestAuthorizationModal,
+    ExamplesPendingTraining,
     TrainModal,
     TrainResponse,
     Loading,
@@ -136,24 +155,55 @@ export default {
       query: {},
       update: false,
       training: false,
+      pendingList: false,
       loadingStatus: false,
       eventClick: false,
       eventClickFinish: false,
       eventReset: false,
       blockedNextStepTutorial: false,
+      repositoryStatus: {},
       textExample: '',
+      noPhrasesYet: true,
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
       'activeTutorial',
+      'getWhichRepositoryIsTrain',
+      'getSelectedVersionRepository',
     ]),
+    checkTrainProgress() {
+      if (this.getWhichRepositoryIsTrain.find(
+        repositoryId => repositoryId.id === this.repository.uuid,
+      )) {
+        return true;
+      }
+      return false;
+    },
+    getProgress() {
+      const repositoryTrain = this.getWhichRepositoryIsTrain.find(
+        train => train.id === this.repository.uuid,
+      );
+      const findIndex = this.getWhichRepositoryIsTrain.indexOf(repositoryTrain);
+      if (this.getWhichRepositoryIsTrain[findIndex] !== undefined) {
+        return this.getWhichRepositoryIsTrain[findIndex].progress;
+      }
+      return '';
+    },
   },
   methods: {
     ...mapActions([
       'trainRepository',
       'getTrainingStatus',
+      'getRepositoryStatusTraining',
+      'setRepositoryTraining',
+      'setWhichRepositoryIsTrain',
+      'finishRepositoryIsTrain',
+      'increaseTrainProgress',
+      'setTrainResponse',
+      'aumenta',
+      'pegar',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -188,14 +238,81 @@ export default {
         this.loadingStatus = false;
       }
     },
-    openTrainingModal() {
+    async getRepositoryStatus() {
+      const { data } = await this.getRepositoryStatusTraining({
+        repositoryUUID: this.repository.uuid,
+        repositoryVersion: this.repositoryVersion,
+      });
+      this.repositoryStatus = data;
+    },
+    increase() {
+      this.pegar();
+      this.aumenta({
+        slug: this.repository.slug,
+        id: this.repository.uuid,
+        progress: 20,
+      });
+    },
+
+    checkWhichStatus() {
+      try {
+        const refreshStatus = setInterval(async () => {
+          await this.getRepositoryStatus();
+          if (this.repositoryStatus.results !== undefined) {
+            if (this.repositoryStatus.results[0].status === 0) {
+              this.increaseTrainProgress({
+                id: this.repository.uuid,
+                progress: 10,
+              });
+              return;
+            }
+            if (this.repositoryStatus.results[0].status === 1) {
+              this.increaseTrainProgress({
+                id: this.repository.uuid,
+                progress: 50,
+              });
+              return;
+            }
+            if (this.repositoryStatus.results[0].status === 2) {
+              this.increaseTrainProgress({
+                id: this.repository.uuid,
+                progress: 100,
+              });
+              await this.finishRepositoryIsTrain({
+                id: this.repository.uuid,
+                version: this.repositoryVersion,
+              });
+              this.setTrainResponse(true);
+              clearInterval(refreshStatus);
+            }
+          } else {
+            clearInterval(refreshStatus);
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            this.setRepositoryTraining(false);
+          }
+        }, 100000);
+      } catch (error) {
+        this.error = error;
+      }
+    },
+    async dispatchTrain() {
       if (!this.authenticated) {
         this.signIn();
       }
       if (this.authenticated && this.repository.authorization.can_write) {
+        this.loadingStatus = true;
+        if (this.repository.ready_for_train) {
+          await this.train();
+          this.loadingStatus = false;
+          return;
+        }
+        this.loadingStatus = false;
         this.trainModalOpen = true;
       }
       this.dispatchClick();
+    },
+    closeTrainModal() {
+      this.trainModalOpen = false;
     },
     changedText(newText) {
       this.textExample = newText;
@@ -224,25 +341,31 @@ export default {
       this.updateTrainingStatus();
       this.updatedExampleList();
     },
-    async train(repositoryUuid) {
+    updateTrainButton() {
+      this.hideButton = true;
+    },
+    async train() {
       this.training = true;
       this.dispatchFinish();
       try {
-        const response = await this.trainRepository({
-          repositoryUuid,
+        await this.trainRepository({
+          repositoryUuid: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
         });
-        this.trainResponseData = response.data;
-        this.trainResponseOpen = true;
+        this.setRepositoryTraining(true);
+        await this.setWhichRepositoryIsTrain({
+          id: this.repository.uuid,
+          version: this.repositoryVersion,
+        });
+        await this.checkWhichStatus();
+        this.updateRepository(false);
       } catch (e) {
         this.$buefy.toast.open({
           message: 'Repository not trained :(',
           type: 'is-danger',
         });
       }
-      this.trainModalOpen = false;
       this.training = false;
-      await this.updateRepository(false);
     },
   },
 };
@@ -275,8 +398,34 @@ export default {
   &__new-example {
     margin-top: 1rem;
     background-color: $color-white;
+
+    &__pending-example{
+      margin-top: 2rem;
+    }
+    &__train {
+      display: flex;
+      margin-top: -1.8rem;
+      margin-bottom: 4rem;
+
+      &__progress {
+        height: 25px;
+        width: 60%;
+        background-color: #EAEAEA;
+        border-radius: 0px;
+
+        p{
+          font-size: 13px;
+          font-weight: $font-weight-bolder;
+        }
+      }
+
+      &__bar {
+        background: #312B53;
+        height: 25px;
+        width: 15px;
+      }
+    }
   }
 }
-
 
 </style>

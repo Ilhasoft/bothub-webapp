@@ -291,10 +291,12 @@
       "add_a_sentence": "Add a sentence",
       "intent": "Intent",
       "train_response_title": "Repository trained successfully!",
+      "train_response_subtitle": "Your sentences have been added to the training. You can consult the repository sentences in the sentence list.",
       "trained": "Trained",
       "processing": "Processing",
       "no_changes": "No Changes",
       "no_sentences": "No sentences.",
+      "no_sentences_to_train": "There are no phrases to train",
       "no_train_sentence": "This sentence has not yet been added to the training.",
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
@@ -309,11 +311,11 @@
     "train_modal": {
       "training_status": "Training Status",
       "status_ok": "Your bot is ready to be trained!",
-      "language_warning": "One or more languages cannot be trained in the moment.",
-      "missing_requirements": "Missing requirements",
+      "language_warning": "Couldn't execute training",
+      "missing_requirements": "Some errors were found and your training has not been completed Correct and try again.",
       "warnings": "Warnings",
       "train": "Train",
-      "ok": "Ok"
+      "ok": "ok!"
     },
     "translate": {
       "title_translate": "Translate a sentence",

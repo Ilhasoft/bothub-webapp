@@ -137,6 +137,9 @@ export default {
       newRole,
     );
   },
+  async setRepositoryTraining({ commit }, value) {
+    commit('updateRepositoryTraining', value);
+  },
   repositoryAuthorizationList(store, { repositoryUuid, limit = 20 }) {
     return repository.getAuthorizationList(repositoryUuid, limit);
   },
@@ -182,5 +185,28 @@ export default {
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
+  },
+  setWhichRepositoryIsTrain({ commit }, payload) {
+    commit('addRepositoryIsTrain', payload);
+  },
+  increaseTrainProgress({ commit }, payload) {
+    commit('updateValueProgress', payload);
+  },
+  finishRepositoryIsTrain({ commit }, payload) {
+    commit('removeRepositoryIsTrain', payload);
+  },
+  setTrainResponse({ commit }, payload) {
+    commit('updateTrainResponse', payload);
+  },
+  aumenta({ commit }, payload) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const progress = JSON.parse(progressTrain);
+    progress[payload.slug] = payload;
+    localStorage.setItem('trainProgress', JSON.stringify(progress));
+  },
+  pegar({ commit }, payload) {
+    const progress = localStorage.getItem('trainProgress') || '{}';
+    const train = JSON.parse(progress).id;
+    console.log(train);
   },
 };

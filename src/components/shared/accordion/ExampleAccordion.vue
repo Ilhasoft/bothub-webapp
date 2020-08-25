@@ -1,6 +1,7 @@
 <template>
   <sentence-accordion
-    :open.sync="open">
+    :open.sync="open"
+    :class="pendingExample ? 'pendingExample' : ''">
 
     <div
       slot="header"
@@ -133,6 +134,10 @@ export default {
       type: String,
       default: '',
     },
+    pendingExample: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -231,8 +236,14 @@ export default {
     }
 
     &__btns-wrapper {
-        display: flex;
-        justify-content: flex-end;
-      }
+      display: flex;
+      justify-content: flex-end;
+    }
+
   }
+
+  .pendingExample{
+    background-color: #f5f5f59c;
+  }
+
 </style>
