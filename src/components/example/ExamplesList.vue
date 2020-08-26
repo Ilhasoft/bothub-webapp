@@ -8,7 +8,6 @@
       :per-page="perPage"
       @itemSave="show"
       @itemDeleted="onItemDeleted($event)" />
-
     <br>
 
     <p
@@ -25,6 +24,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
+import ExampleAccordionWithTranslations from '@/components/shared/accordion/ExampleAccordionWithTranslations';
 
 const components = {
   PaginatedList,
@@ -50,11 +50,14 @@ export default {
       type: String,
       default: '',
     },
+    translationData: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
       examplesList: null,
-      exampleItemElem: ExampleItem,
     };
   },
   computed: {
@@ -62,6 +65,9 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',
     }),
+    exampleItemElem() {
+      return this.translationData ? ExampleAccordionWithTranslations : ExampleItem;
+    },
   },
   watch: {
     query() {
