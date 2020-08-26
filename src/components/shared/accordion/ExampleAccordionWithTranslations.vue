@@ -59,16 +59,36 @@
           @click.native.stop="deleteThisExample" />
       </span>
     </div>
+
+    <div slot="body">
+      <loading v-show="loadingTranslations" />
+      <p
+        v-if="translations && translations.length === 0"
+        class="has-text-centered"> No translations </p>
+      <div
+        v-for="(translation, index) in (translations || [])"
+        :key="translation.id" >
+        <example-translation
+          v-bind="translation"
+          @deleted="translationDeleted(translation.id)"
+        />
+        <div
+          v-if="index < (translations || []).length - 1"
+          class="example-item__separator" />
+      </div>
+    </div>
   </sentence-accordion>
 </template>
 
 <script>
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
+import ExampleTranslation from '@/components/shared/accordion/ExampleTranslation';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import EditExample from '@/components/shared/accordion/EditExample';
-import { mapState, mapActions } from 'vuex';
+import Loading from '@/components/shared/Loading';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'ExampleAccordionWithTranslations',
@@ -78,6 +98,8 @@ export default {
     LanguageBadge,
     EntityTag,
     EditExample,
+    ExampleTranslation,
+    Loading,
   },
   props: {
     id: {
@@ -110,6 +132,8 @@ export default {
       open: false,
       editing: false,
       highlighted: null,
+      translations: null,
+      loadingTranslations: false,
     };
   },
   computed: {
@@ -117,12 +141,36 @@ export default {
       return this.repository.entities;
     },
   },
+  watch: {
+    open() {
+      if (this.open && !this.translations) {
+        this.loadTranslations();
+      }
+    },
+  },
   methods: {
     ...mapActions([
       'deleteExample',
+      'getTranslations',
     ]),
+    translationDeleted(id) {
+      this.translations = this.translations.filter(translation => translation.id !== id);
+    },
     handleEdit() {
       this.editing = !this.editing;
+    },
+    async loadTranslations() {
+      this.loadingTranslations = true;
+      const translationsList = await this.getTranslations({
+        repositoryUuid: this.repository.uuid,
+        repositoryVersion: this.repositoryVersion,
+      });
+
+      try {
+        this.translations = await translationsList.getAllItems();
+      } finally {
+        this.loadingTranslations = false;
+      }
     },
     deleteThisExample() {
       return new Promise((resolve, reject) => {
@@ -140,7 +188,6 @@ export default {
             }
           },
           onCancel: () => {
-            /* istanbul ignore next */
             reject();
           },
         });
@@ -152,11 +199,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+
     .example-item {
         &__header {
             > * :not(:last-child) {
                 margin-bottom: 0.5rem;
             }
+        }
+
+        &__separator {
+            background-color: $color-grey;
+            width: 100%;
+            height: 2px;
         }
 
         &__entities {

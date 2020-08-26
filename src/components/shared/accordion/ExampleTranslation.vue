@@ -1,72 +1,41 @@
 <template>
   <div class="translation">
-    <div class="translation-text">
-      <div class="columns is-mobile">
-        <div class="column">
-          <highlighted-text
-            :text="currentText"
-            :entities="currentEntities"
-            :highlighted="highlighted"
-            :all-entities="repository.entities || repository.entities_list" />
-        </div>
-        <div class="column is-narrow">
-          <button
-            ref="showOriginal"
-            :disabled="loadingOriginal"
-            :class="{
-              button: true,
-              'is-small': true,
-              'is-primary': !showingOriginal,
-              'is-info': showingOriginal,
-              'is-loading': loadingOriginal,
-            }"
-            @click="toggleOriginal()">
-            <span v-if="showingOriginal">
-              {{ $t('webapp.translate.show_translated') }}
-            </span>
-            <span v-else>{{ $t('webapp.translate.show_original') }}</span>
-          </button>
+    <div class="columns">
+      <div class="column is-1">
+        <language-badge
+          :language="language"/>
+      </div>
+      <div class="column">
+        <highlighted-text
+          :text="text"
+          :entities="currentEntities"
+          :highlighted="highlighted"
+          class="translation__text" />
+        <div
+          v-if="entitiesList.length > 0"
+          class="translation__entities">
+          <entity-tag
+            v-for="(entity, i) in entitiesList"
+            :key="i"
+            :entity-name="entity"
+            :highlighted="highlighted === entity"
+            @mouseenter.native.stop="highlighted = entity"
+            @mouseleave.native.stop="highlighted = null"
+          />
         </div>
       </div>
-    </div>
-    <div
-      v-if="entitiesList.length > 0"
-      class="translation-entities">
-      <entity-tag
-        v-for="(entity, i) in entitiesList"
-        :key="i"
-        :entity-name="entity"
-        :highlighted="highlighted === entity"
-        @mouseenter.native.stop="highlighted = entity"
-        @mouseleave.native.stop="highlighted = null"
-      />
-    </div>
-    <div class="translation-infos level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          <strong>{{ $t('webapp.translate.translated_from') }}&nbsp;</strong>
-          <span>{{ from_language | languageVerbose }}&nbsp;</span>
-          <flag :language="from_language" />
-          <strong>&nbsp;</strong>
-          <strong>{{ $t('webapp.translate.to') }}&nbsp;</strong>
-          <span>{{ language | languageVerbose }}&nbsp;</span>
-          <flag :language="language" />
-        </div>
-        <div class="level-item has-text-grey-light">
-          {{ created_at | moment('from') }}
-        </div>
-      </div>
-      <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
-        class="level-right">
-        <div class="level-item">
-          <a
-            :href="`#delete-translation-${id}`"
-            class="has-text-danger"
-            @click.prevent="deleteThisTranslation()">
-            <b-icon icon="delete" />
-          </a>
-        </div>
+      <div class="translation__icons column is-2">
+        <span>
+          <b-icon
+            class="clickable"
+            size="is-small"
+            icon="pencil" />
+          <b-icon
+            class="clickable"
+            size="is-small"
+            icon="delete"
+            @click.native="deleteThisTranslation()" />
+        </span>
       </div>
     </div>
   </div>
@@ -76,16 +45,16 @@
 import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
+import LanguageBadge from '@/components/shared/LanguageBadge';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
-import Flag from '@/components/shared/Flag';
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'TranslationItem',
+  name: 'ExampleTranslation',
   components: {
     HighlightedText,
     EntityTag,
-    Flag,
+    LanguageBadge,
   },
   props: {
     id: {
@@ -131,11 +100,6 @@ export default {
     };
   },
   computed: {
-    currentText() {
-      return this.showingOriginal
-        ? this.original.text
-        : this.text;
-    },
     currentEntities() {
       return this.showingOriginal
         ? this.original.entities
@@ -176,54 +140,26 @@ export default {
         });
       });
     },
-    async toggleOriginal() {
-      if (!this.original) {
-        this.loadingOriginal = true;
-        const response = await this.getExample({
-          id: this.original_example,
-        });
-        this.original = response.data;
-        this.loadingOriginal = false;
-      }
-      this.showingOriginal = !this.showingOriginal;
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/colors.scss';
 
 .translation {
-  $radius: 8px;
+  padding: 0.7rem;
 
-  margin: 16px 8px;
-  background-color: $white-bis;
-  border-radius: $radius;
-  overflow: visible;
-
-  &:hover {
-    .translation-text {
-      background-color: $white;
-      box-shadow: 0 2px 8px rgba(100, 100, 100, .5);
-    }
+  &__text {
+    margin-bottom: 0.5rem;
   }
 
-  &-text {
-    font-size: 1.25rem;
-    background-color: $white-ter;
-    border-radius: $radius;
-    transition: box-shadow .2s ease;
-    padding: 8px 16px;
-    margin-bottom: 4px;
+  &__icons {
+      text-align: right;
+      color: $color-grey-dark;
   }
 
-  &-entities,
-  &-infos {
-    padding: 4px 8px 4px 16px;
-  }
-
-  &-entities {
+  &__entities {
     > * {
       margin: 0 8px 0 0;
 
