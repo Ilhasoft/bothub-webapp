@@ -1,9 +1,9 @@
 <template>
   <div class="translation-status-info">
     <numbers-card
-      :count="languages.length"
       :disabled="!languages"
       :help-text="(languages || []).join(', ')"
+      :count="(languages || []).length"
       :label="$tc('webapp.summary.information_language',
                   (languages || []).length)"
       size="medium" />
