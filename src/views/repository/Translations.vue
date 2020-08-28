@@ -34,7 +34,6 @@
         :query="statusQuery"
         :repository-uuid="repository.uuid"
         v-model="toLanguage"
-        :translation-list="isListEmpty"
         class="translations__status"
         @updated="statusUpdated"/>
       <hr>
@@ -85,7 +84,6 @@ export default {
         from: null,
         to: null,
       },
-      isListEmpty: true,
     };
   },
   computed: {
@@ -100,9 +98,6 @@ export default {
     statusUpdated({ completed, available }) {
       this.completedLanguages = completed;
       this.availableLanguages = available;
-    },
-    checkList() {
-      this.isListEmpty = false;
     },
     exampleUpdated() {
       this.updateStatus = !this.updateStatus;
