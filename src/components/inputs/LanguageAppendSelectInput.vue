@@ -12,15 +12,11 @@
         :language="val" />
       <b-icon
         v-else
-        class="language-icon"
+        class="language-icon language-icon__menu__no-val"
         size="is-small"
         icon="earth" />
       <b-icon
-        :class="{clickable: true,
-                 align: true,
-                 'language-icon': true,
-                 'language-icon__menu': true,
-                 'language-icon__menu__no-val': !val }"
+        class="clickable align language-icon language-icon__menu"
         size="is-small"
         icon="menu-down" />
     </span>
@@ -103,7 +99,7 @@ export default {
     width: 1rem !important;
 
     &__no-val {
-      left: 25px;
+      left: -1.5rem;
     }
   }
 }

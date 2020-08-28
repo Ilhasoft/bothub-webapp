@@ -32,7 +32,7 @@
               id="tour-evaluate-step-3"
               :is-previous-disabled="true"
               :message="errors.non_field_errors"
-              :is-step-blocked="intent.length === 0">
+              :is-step-blocked="(intent || '').length === 0">
               <b-select
                 v-model="intent"
                 :placeholder="$t('webapp.evaluate.intent')"
@@ -112,7 +112,7 @@ export default {
     return {
       textSelected: null,
       text: '',
-      intent: '',
+      intent: null,
       entities: [],
       errors: {},
       submitting: false,
@@ -132,9 +132,6 @@ export default {
     }),
     shouldSubmit() {
       return this.isValid && !this.submitting;
-    },
-    filteredData() {
-      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
     },
     validationErrors() {
       const errors = [];
@@ -231,7 +228,7 @@ export default {
           ...this.data,
         });
         this.text = '';
-        this.intent = '';
+        this.intent = null;
         this.entities = [];
         this.submitting = false;
 
@@ -243,7 +240,7 @@ export default {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
         /* istanbul ignore next */
-        if (data) {
+        if (data && data.non_field_errors && data.non_field_errors.length > 0) {
           /* istanbul ignore next */
           this.intentError = data;
           this.$buefy.toast.open({
