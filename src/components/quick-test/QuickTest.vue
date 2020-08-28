@@ -52,8 +52,7 @@
             :text="sentence.text"
             :language="sentence.language"
             :version="sentence.version"
-            :repository-uuid="sentence.repositoryUUID"
-            :all-entities="repository.entities" />
+            :repository-uuid="sentence.repositoryUUID" />
         </div>
         <div
           v-if="authenticated"

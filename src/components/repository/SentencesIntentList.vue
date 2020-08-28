@@ -14,8 +14,7 @@
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
-          :color-only="entitySelected"
-          :all-entities="repository.entities || repository.entities_list" />
+          :color-only="entitySelected" />
       </div>
     </div>
     <div

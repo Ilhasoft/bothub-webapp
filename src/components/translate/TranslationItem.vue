@@ -7,7 +7,7 @@
             :text="currentText"
             :entities="currentEntities"
             :highlighted="highlighted"
-            :all-entities="repository.entities || repository.entities_list" />
+            size="large" />
         </div>
         <div class="column is-narrow">
           <button
