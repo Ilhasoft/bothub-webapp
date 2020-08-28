@@ -156,7 +156,7 @@ export default {
 
   &__append {
     pointer-events: all !important;
-    width: 5.2rem !important;
+    width: $form-append-width !important;
   }
 
   &__input-wrapper {
