@@ -1,11 +1,11 @@
 <template>
   <div class="translation">
     <div class="columns">
-      <div class="column is-1">
+      <div class="column is-1 translation__language">
         <language-badge
           :language="language"/>
       </div>
-      <div class="column">
+      <div class="column translation__text__container">
         <highlighted-text
           :text="text"
           :entities="currentEntities"
@@ -152,6 +152,15 @@ export default {
 
   &__text {
     margin-bottom: 0.5rem;
+
+    &__container {
+      padding: 0.75rem 0;
+    }
+  }
+
+  &__language {
+    max-width: 5rem;
+    margin: 0 0.25rem;
   }
 
   &__icons {
