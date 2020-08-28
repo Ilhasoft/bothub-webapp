@@ -17,7 +17,7 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
         </div>
         <div>
           <b-field-stub addons="true" id="tour-evaluate-step-3" is-previous-disabled="true" is-step-blocked="true">
-            <b-select-stub value="" placeholder="some specific text" expanded="">
+            <b-select-stub placeholder="some specific text" expanded="">
               <option value="affirm">
                 affirm
               </option>
