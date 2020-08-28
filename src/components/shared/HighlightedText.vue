@@ -2,32 +2,21 @@
   <div class="highlighted">
     <div class="highlighted-base">{{ text }}</div>
     <div class="highlighted-text">{{ text }}</div>
-    <div v-if="prefixColorAvailable">
-      <div
-        v-for="(entity, i) in prefixEntities"
-        :key="i"
-        class="highlighted-entity">
-        <span class="highlighted-entity-before">{{ entity.before }}</span>
-        <span
-          :class="`highlighted-entity-text ${entity.colorClass} ${entitiesHasFailed} ${failed}`"
-        >{{ entity.text }}</span>
-      </div>
-    </div>
-    <div v-else>
-      <div
-        v-for="(entity, i) in entitiesBlocks"
-        :key="i"
-        class="highlighted-entity">
-        <span class="highlighted-entity-before">{{ entity.before }}</span>
-        <span
-          :class="['highlighted-entity-text',
-                   colorOnly && entity.entity !== colorOnly ? 'entity-selected' : entity.colorClass,
-                   entitiesHasFailed,
-                   failed,
-                   entity.entity === highlighted ? 'highlighted-selected' : '']">
-          {{ entity.text }}
-        </span>
-      </div>
+    <div
+      v-for="(entity, i) in entitiesBlocks"
+      :key="i"
+      class="highlighted-entity">
+      <span
+        :class="['highlighted-entity-before',
+                 `highlighted-text--size-${size}`]">{{ entity.before }}</span>
+      <span
+        :class="['highlighted-entity-text',
+                 `highlighted-text--size-${size}`,
+                 colorOnly && entity.entity !== colorOnly ? 'entity-selected' : entity.colorClass,
+                 failed,
+                 entity.entity === highlighted ? 'highlighted-selected' : '']">
+        {{ entity.text }}
+      </span>
     </div>
   </div>
 </template>
@@ -47,18 +36,6 @@ export default {
       type: Array,
       required: true,
     },
-    allEntities: {
-      type: Array,
-      default: () => ([]),
-    },
-    prefixColor: {
-      type: String,
-      default: '',
-    },
-    prefixColorAvailable: {
-      type: Boolean,
-      default: false,
-    },
     failed: {
       type: String,
       default: '',
@@ -71,6 +48,10 @@ export default {
       type: String,
       default: null,
     },
+    size: {
+      type: String,
+      default: 'normal',
+    },
   },
   computed: {
     ...mapState({
@@ -81,8 +62,6 @@ export default {
         .map(({ start, end, entity }) => {
           const color = getEntityColor(
             entity,
-            this.allEntities,
-            this.entities,
           );
           const colorClass = `entity-${color}`;
           const before = this.text.substring(0, start);
@@ -96,36 +75,6 @@ export default {
             text,
           };
         });
-    },
-    prefixEntities() {
-      const entitiesName = this.repository.other_group.entities.map(
-        entityValue => entityValue.value,
-      );
-      const entitiesGroup = this.repository.groups.map(
-        entityValue => entityValue.entities[0].value,
-      );
-      const allEntitiesName = [...entitiesName, ...entitiesGroup];
-
-      return this.entities
-        .map(({ start, end, entity }) => {
-          const color = getEntityColor(
-            entity,
-            allEntitiesName,
-          );
-          const colorClass = `entity-${color}`;
-          const before = this.text.substring(0, start);
-          const text = this.text.substring(start, end);
-          return {
-            start,
-            end,
-            colorClass,
-            before,
-            text,
-          };
-        });
-    },
-    entitiesHasFailed() {
-      return 'false';
     },
   },
 };
@@ -147,6 +96,20 @@ export default {
     left: 0;
     z-index: 1;
     pointer-events: none;
+
+    &--size {
+      &-normal {
+        font-size: 1rem;
+      }
+
+      &-medium {
+        font-size: 18px;
+      }
+
+      &-large {
+        font-size: 20px;
+      }
+    }
   }
 
   &-entity {
@@ -154,6 +117,7 @@ export default {
     top: 0;
     left: 0;
     z-index: 0;
+    font-size: 0;
 
     &-before,
     &-text {

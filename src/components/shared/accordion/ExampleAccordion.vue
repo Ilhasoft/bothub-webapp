@@ -21,8 +21,7 @@
           v-if="open && !editing"
           :text="text"
           :entities="entities"
-          :highlighted="highlighted"
-          :all-entities="repository.entities || repository.entities_list" />
+          :highlighted="highlighted" />
       </div>
     </div>
     <div

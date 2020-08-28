@@ -107,6 +107,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
     .self-adjust {
         resize: none;
         min-height: 36px;
@@ -118,7 +120,7 @@ export default {
         }
 
         &__appended {
-            padding: 0.3rem 4rem 0.3rem 1rem;
+            padding: 0.3rem $form-append-width 0.3rem 1rem;
         }
 
         &--transparent {
@@ -126,13 +128,18 @@ export default {
         }
 
         &--small {
-            font-size: 14px;
+            font-size: 12px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
     }
 
     .event-clickable {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: $form-append-width/4;
         pointer-events: all !important;
-        width: 5.2rem !important;
+        min-width: $form-append-width !important;
         > * {
             pointer-events: all !important;
         }

@@ -176,8 +176,9 @@ export default {
     },
   },
   watch: {
-    intent() {
+    async intent() {
       if (!this.intent || this.intent.length <= 0) return;
+      await this.$nextTick();
       this.intent = formatters.bothubItemKey()(this.intent);
     },
   },

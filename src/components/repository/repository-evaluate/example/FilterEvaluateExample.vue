@@ -210,13 +210,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 @import '~@/assets/scss/variables.scss';
-
-.field:not(:last-child) {
-  margin-bottom: 0;
-}
 
 .filter-evaluate-example {
   width: 100%;

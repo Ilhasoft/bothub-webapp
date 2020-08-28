@@ -13,13 +13,13 @@
           :is-previous-disabled="true">
           <b-autocomplete
             ref="entityInputField"
+            v-model="entity"
             :data="availableEntities"
             expanded
             open-on-focus
             dropdown-position="down"
             icon-right="close"
             icon-right-clickable
-            @input="handleChange"
             @icon-right-click="removeEntity()"/>
         </b-field>
       </div>
@@ -58,6 +58,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      entity: '',
+    };
+  },
   computed: {
     ...mapGetters([
       'activeTutorial',
@@ -71,10 +76,18 @@ export default {
       return this.text.substring(this.selectedTextStart, this.selectedTextEnd);
     },
   },
-  methods: {
-    handleChange(e) {
-      this.$emit('input', e);
+  watch: {
+    async entity() {
+      if (!this.entity || this.entity.length <= 0) return;
+      await this.$nextTick();
+      this.entity = formatters.bothubItemKey()(this.entity);
+      this.$emit('input', this.entity);
     },
+  },
+  mounted() {
+    this.entity = this.selectedText;
+  },
+  methods: {
     async removeEntity() {
       if (this.activeTutorial === 'training') return;
       await this.$nextTick;
