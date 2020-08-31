@@ -1,5 +1,18 @@
 <template>
-  <sentence-accordion :open.sync="open">
+  <edit-example-accordion
+    v-if="editing"
+    :entities="entities"
+    :intent-to-edit="intent"
+    :text-to-edit="text"
+    :sentence-id="id"
+    :language-edit="language"
+    :get-all-entities="allEntities"
+    edit-example
+    @cancel="editing = false"
+    @saveList="$emit('updateList')"/>
+  <sentence-accordion
+    v-else
+    :open.sync="open">
     <div slot="check">
       <language-badge
         :language="language"
@@ -24,18 +37,6 @@
           @mouseleave.native.stop="highlighted = null" />
       </div>
     </div>
-    <edit-example
-      v-else
-      slot="header"
-      :entities="entities"
-      :intent-to-edit="intent"
-      :text-to-edit="text"
-      :sentence-id="id"
-      :language-edit="language"
-      :get-all-entities="allEntities"
-      edit-example
-      @cancel="editing = false"
-      @saveList="$emit('updateList')"/>
     <div
       slot="options"
       class="example-item__faded">
@@ -88,6 +89,7 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import EditExample from '@/components/shared/accordion/EditExample';
 import Loading from '@/components/shared/Loading';
+import EditExampleAccordion from '@/components/shared/accordion/EditExampleAccordion';
 import { mapActions } from 'vuex';
 
 export default {
@@ -99,6 +101,7 @@ export default {
     EntityTag,
     EditExample,
     ExampleTranslation,
+    EditExampleAccordion,
     Loading,
   },
   props: {
@@ -138,7 +141,7 @@ export default {
   },
   computed: {
     allEntities() {
-      return this.repository.entities;
+      return this.repository.entities.map(entity => entity.value);
     },
   },
   watch: {
