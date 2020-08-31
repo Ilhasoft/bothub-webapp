@@ -109,6 +109,7 @@ export default {
     ...mapGetters([
       'getSelectedVersionRepository',
       'getSelectedVersion',
+      'getCurrentRepository',
     ]),
     entitiesNames() {
       if (!this.data || !this.data.entities_list) return [];
@@ -141,7 +142,7 @@ export default {
       const online = navigator.onLine;
       if (!online) return this.$t('webapp.quick_test.internet_off_quick_test');
 
-      if (this.repositoryStatus.count === 0) {
+      if (!this.getCurrentRepository.ready_for_parse) {
         return this.$t('webapp.quick_test.without_train_quick_test');
       }
 
@@ -150,12 +151,10 @@ export default {
   },
   mounted() {
     this.load();
-    this.trainingStatus();
   },
   methods: {
     ...mapActions([
       'analyzeText',
-      'getRepositoryStatusTraining',
     ]),
     async load() {
       this.loading = true;
@@ -183,13 +182,6 @@ export default {
         hasModalCard: false,
         trapFocus: true,
       });
-    },
-    async trainingStatus() {
-      const { data } = await this.getRepositoryStatusTraining({
-        repositoryUUID: this.getSelectedVersionRepository,
-        repositoryVersion: this.getSelectedVersion,
-      });
-      this.repositoryStatus = data;
     },
     debug() {
       this.$buefy.modal.open({
