@@ -30,9 +30,9 @@ export default {
     return response;
   },
   searchExamples(store, {
-    repositoryUuid, version, query, limit = 20,
+    repositoryUuid, version, query, limit = 20, startCreatedAt, endCreatedAt,
   }) {
-    return example.search(repositoryUuid, version, query, limit);
+    return example.search(repositoryUuid, version, query, limit, startCreatedAt, endCreatedAt);
   },
   async deleteExample(store, { id }) {
     await example.delete(id);

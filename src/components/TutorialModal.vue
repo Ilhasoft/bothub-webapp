@@ -133,7 +133,7 @@ export default {
       'getFinalMessage',
       'getSelectedVersion',
       'getSelectedVersionRepository',
-      'getRepositoryTraining',
+      'getCheckRepositoryTrain',
     ]),
     computedList() {
       return this.list.map(item => ({
@@ -152,7 +152,7 @@ export default {
         this.finished = { ...this.finishedTutorials };
         this.nickname = this.myProfile.nickname;
         this.checkIfDoneTutorial();
-        if (this.getRepositoryTraining) {
+        if (this.getCheckRepositoryTrain) {
           this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
           this.checkWhichStatus();
         }
@@ -295,7 +295,7 @@ export default {
             return;
           }
         } else {
-          if (this.getRepositoryTraining) {
+          if (this.getCheckRepositoryTrain) {
             this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
             return;
           }

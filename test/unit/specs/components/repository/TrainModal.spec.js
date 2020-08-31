@@ -65,23 +65,13 @@ describe('TrainModal.vue', () => {
     });
   });
 
-  describe('close modal via prop', () => {
+  describe('on click to close train status modal', () => {
     beforeEach(() => {
       wrapper.setProps({ open: false });
     });
 
-    test('event update:open was emitted', () => {
-      expect(wrapper.emitted('update:open')).toBeDefined();
-    });
-  });
-
-  describe('close modal openValue changed', () => {
-    beforeEach(() => {
-      wrapper.setData({ openValue: false });
-    });
-
-    test('event update:open was emitted', () => {
-      expect(wrapper.emitted('update:open')).toBeDefined();
+    test('when close modal prop open should be false', () => {
+      expect(wrapper.vm.open).toBeFalsy();
     });
   });
 });

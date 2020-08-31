@@ -300,10 +300,12 @@
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
+      "train_response_subtitle": "Suas sentenças foram adicionadas ao treinamento. Você pode consultar as sentenças do repositório em Sentence list.",
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
       "no_sentences": "Não há frases.",
+      "no_sentences_to_train": "Não há frases para treinar.",
       "no_train_sentence": "Essa frase ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
@@ -312,17 +314,20 @@
       "delete_button":"Deletar",
       "cancel_button":"Cancelar",
       "save_button":"Salvar",
+      "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
-      "intent_error": "Digite uma intenção"
+      "intent_error": "Digite uma intenção",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
+      
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
       "status_ok": "Seu bot está pronto para ser treinado!",
-      "language_warning": "Um ou mais idiomas não podem ser treinados no momento.",
-      "missing_requirements": "Requisitos não cumpridos",
+      "language_warning": "Não foi possível executar o treinamento",
+      "missing_requirements": "Alguns erros foram encontrados e o seu treinamento não foi concluído Corrija e tente novamente.",
       "warnings": "Alertas",
       "train": "Treinar",
-      "ok": "Ok"
+      "ok": "ok!"
     },
     "translate": {
       "title_translate": "Traduzir uma frase",
