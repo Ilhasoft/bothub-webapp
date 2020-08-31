@@ -21,61 +21,63 @@
             @entityAdded="onEntityAdded()"
           />
         </b-field>
-        <b-field grouped grouped-multiline>
-        <div
-          v-for="(entity, index) in entitiesToEdit"
-          :key="`entity-${index}`"
-          class="edit-sentence__input">
-          <b-field >
-            <span
-              slot="label"
-              class="edit-sentence__input__label"
-              v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-            <b-autocomplete
-              :data="getAllEntities || []"
-              v-model="entity.entity"
-              :placeholder="$t('webapp.example.entity')"
-              dropdown-position="bottom"
-              icon-right="close"
-              icon-right-clickable
-              open-on-focus
-              size="is-small"
-              class="edit-sentence-input"
-              @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
-              @icon-right-click="removeEntity(entity, index)"
-            />
-          </b-field>
-        </div>
-        <div
-          v-for="(entity, index) in pendingEntities"
-          :key="`pending-entity-${index}`"
-          class="edit-sentence__input">
-          <b-field>
-            <span
-              slot="label"
-              class="edit-sentence__input__label"
-              v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-            <b-autocomplete
-              :data="getAllEntities || []"
-              :custom-formatter="intentFormatters"
-              v-model="entity.entity"
-              :placeholder="$t('webapp.example.entity')"
-              dropdown-position="bottom"
-              icon-right="close"
-              class="edit-sentence-input"
-              size="is-small"
-              icon-right-clickable
-              open-on-focus
-              @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
-              @select="elevateToEntity(entity, index)"
-              @icon-right-click="removePendingEntity(entity, index)"
-            />
-          </b-field>
-          <b-field
-            :message="errors.entities"
-            type="is-danger" />
-        </div>
+        <b-field
+          grouped
+          group-multiline>
+          <div
+            v-for="(entity, index) in entitiesToEdit"
+            :key="`entity-${index}`"
+            class="edit-sentence__input">
+            <b-field >
+              <span
+                slot="label"
+                class="edit-sentence__input__label"
+                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
+              <b-autocomplete
+                :data="getAllEntities || []"
+                v-model="entity.entity"
+                :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
+                icon-right="close"
+                icon-right-clickable
+                open-on-focus
+                size="is-small"
+                class="edit-sentence-input"
+                @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
+                @icon-right-click="removeEntity(entity, index)"
+              />
             </b-field>
+          </div>
+          <div
+            v-for="(entity, index) in pendingEntities"
+            :key="`pending-entity-${index}`"
+            class="edit-sentence__input">
+            <b-field>
+              <span
+                slot="label"
+                class="edit-sentence__input__label"
+                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
+              <b-autocomplete
+                :data="getAllEntities || []"
+                :custom-formatter="intentFormatters"
+                v-model="entity.entity"
+                :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
+                icon-right="close"
+                class="edit-sentence-input"
+                size="is-small"
+                icon-right-clickable
+                open-on-focus
+                @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
+                @select="elevateToEntity(entity, index)"
+                @icon-right-click="removePendingEntity(entity, index)"
+              />
+            </b-field>
+            <b-field
+              :message="errors.entities"
+              type="is-danger" />
+          </div>
+        </b-field>
         <b-icon
           :disabled="textSelected === null"
           icon="plus"
@@ -151,8 +153,12 @@ export default {
 .edit-sentence {
     width: 100%;
     margin: 1rem;
-    &__input__label {
-        font-size: 12px;
+
+    &__input {
+        margin-right: 0.5rem;
+        &__label {
+            font-size: 12px;
+        }
     }
 }
 </style>
