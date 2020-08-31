@@ -33,7 +33,7 @@ export default {
 }
 .bothub-logo{
   width: 2.25rem;
-  position: absolute;
+  margin-right: -4rem;
 }
 
 .triple-spinner {

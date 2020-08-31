@@ -145,17 +145,10 @@ export default {
       'deleteExample',
     ]),
     addLogStructure(logValue) {
-      if (logValue.length !== 0) {
-        this.logData.push(logValue[0]);
-      }
+      this.logData.push(logValue);
     },
-    removeLogStructure(logValue) {
-      // eslint-disable-next-line array-callback-return
-      this.logData.map((log, i) => {
-        if (log.text === logValue[0].text) {
-          this.logData.splice(i, 1);
-        }
-      });
+    removeLogStructure(logId) {
+      this.logData = this.logData.filter(log => log.id !== logId);
     },
     showModalTraining(typeModal) {
       if (this.activeTutorial === 'inbox') return;
@@ -246,20 +239,20 @@ export default {
     },
     addToTraining(intent) {
       this.loadingLogs = true;
-      this.logData.map(async (log) => {
+      this.logData.map(async ({ data }) => {
         try {
           await this.newExample({
-            ...log,
+            ...data,
             intent,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error, log);
+          this.showError(error, data);
         } finally {
           this.loadingLogs = false;
           this.select = false;
@@ -268,20 +261,20 @@ export default {
     },
     addToSentences(intent) {
       this.loadingLogs = true;
-      this.logData.map(async (log) => {
+      this.logData.map(async ({ data }) => {
         try {
           await this.newEvaluateExample({
-            ...log,
+            ...data,
             intent,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${log.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
             type: 'is-success',
           });
         } catch (error) {
-          this.showError(error, log);
+          this.showError(error, data);
         } finally {
           this.loadingLogs = false;
           this.select = false;
@@ -290,14 +283,7 @@ export default {
     },
     showError(error, log) {
       const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
-      let message = Array.join(messages, ',');
-
-      if (message
-      === 'Intention and Sentence already exists' || 'Intenção e frase já existem') {
-        message = `${log.text.bold()}, ${this.$t('webapp.inbox.entry_error')}`;
-      } else {
-        message = `${log.text.bold()}, ${message}`;
-      }
+      const message = `${log.text.bold()}, ${Array.join(messages, ',')}`;
       this.$buefy.toast.open({
         message,
         type: 'is-danger',
@@ -326,26 +312,26 @@ export default {
       text-align: center;
     }
 
-      &__section{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: $color-grey-dark;
-      font-size: 1.1rem;
-      font-weight: bold;
-      padding: 0 0.6rem;
+      &__section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $color-grey-dark;
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: 0 0.6rem;
 
-      &__buttonsIcon{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: row;
-    }
-      &__icons{
-      color: $color-grey-dark;
-      margin-right: 0.7rem;
-      cursor: pointer;
-    }
+        &__buttonsIcon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+        }
+        &__icons {
+          color: $color-grey-dark;
+          margin-right: 0.7rem;
+          cursor: pointer;
+        }
     }
 
   }

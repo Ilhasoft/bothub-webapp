@@ -119,7 +119,7 @@
       <div
         v-else
         class="icon-list-wrapper">
-        <bh-icon
+        <custom-icon
           value="botinho"
           size="large"
           class="icon-list"
@@ -198,10 +198,13 @@
   </div>
 </template>
 <script>
+
 import { mapGetters } from 'vuex';
+import CustomIcon from '@/components/shared/CustomIcon';
 
 export default {
   name: 'SideBar',
+  components: { CustomIcon },
   data() {
     return {
       isSettingsActive: false,

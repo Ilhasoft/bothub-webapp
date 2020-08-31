@@ -16,14 +16,26 @@
       :repository-uuid="repository.uuid"
       @onAuthorizationRequested="updateRepository(false)" />
     <div v-else-if="repository">
-      <div class="translations__header">
-        <translations-status
-          ref="translationsStatus"
-          :update="updateStatus"
-          :repository-uuid="repository.uuid"
-          v-model="toLanguage"
-          :translation-list="isListEmpty"/>
+      <div class="columns">
+        <div class="column is-3">
+          <translation-status-search
+            v-model="statusQuery" />
+        </div>
+        <div class="column">
+          <translation-status-info
+            :completed-languages="completedLanguages"
+            :languages="availableLanguages"
+            :repository-uuid="repository.uuid" />
+        </div>
       </div>
+      <translations-status
+        ref="translationsStatus"
+        :update="updateStatus"
+        :query="statusQuery"
+        :repository-uuid="repository.uuid"
+        v-model="toLanguage"
+        class="translations__status"
+        @updated="statusUpdated"/>
       <hr>
       <div class="translations__list">
         <translations-list
@@ -41,7 +53,9 @@
 import { mapActions, mapGetters } from 'vuex';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import TranslationsStatus from '@/components/translate/TranslationsStatus';
+import TranslationsStatus from '@/components/translate/NewTranslationsStatus';
+import TranslationStatusInfo from '@/components/translate/TranslationStatusInfo';
+import TranslationStatusSearch from '@/components/translate/TranslationStatusSearch';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
@@ -53,20 +67,23 @@ export default {
     RepositoryViewBase,
     TranslationsStatus,
     TranslationsList,
-    mapGetters,
+    TranslationStatusInfo,
     AuthorizationRequestNotification,
+    TranslationStatusSearch,
     LoginForm,
   },
   extends: RepositoryBase,
   data() {
     return {
       toLanguage: null,
+      statusQuery: null,
       updateStatus: false,
+      availableLanguages: null,
+      completedLanguages: null,
       translate: {
         from: null,
         to: null,
       },
-      isListEmpty: true,
     };
   },
   computed: {
@@ -78,8 +95,9 @@ export default {
     ...mapActions([
       'getRepository',
     ]),
-    checkList() {
-      this.isListEmpty = false;
+    statusUpdated({ completed, available }) {
+      this.completedLanguages = completed;
+      this.availableLanguages = available;
     },
     exampleUpdated() {
       this.updateStatus = !this.updateStatus;
@@ -87,3 +105,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+  .translations {
+
+    &__status {
+      margin-top: 2.75rem;
+    }
+
+    &__header {
+      display: flex;
+    }
+  }
+</style>

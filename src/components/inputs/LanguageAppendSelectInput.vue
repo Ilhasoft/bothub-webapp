@@ -6,16 +6,17 @@
     class="language-append-select-input">
     <span
       slot="trigger"
-      class="clickable bh-grid language-append-select-input__language-select">
+      class="clickable language-append-select-input__language-select">
       <language-badge
         v-if="val"
         :language="val" />
       <b-icon
         v-else
+        class="language-icon language-icon__menu__no-val"
         size="is-small"
         icon="earth" />
       <b-icon
-        class="align"
+        class="clickable align language-icon language-icon__menu"
         size="is-small"
         icon="menu-down" />
     </span>
@@ -82,8 +83,24 @@ export default {
 
 <style lang="scss">
 .language-append-select-input {
+
+  min-height: 30px;
+
   &__language-select {
     align-items: center;
+  }
+}
+
+.language-icon {
+  color: black !important;
+  pointer-events: all !important;
+
+  &__menu {
+    width: 1rem !important;
+
+    &__no-val {
+      left: -1.5rem;
+    }
   }
 }
 </style>

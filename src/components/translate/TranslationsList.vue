@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div v-if="translationsList">
     <paginated-list
-      v-if="translationsList"
       :item-component="translationItemElem"
       :list="translationsList"
       :repository="repository"
+      @updated="isListEmpty"
       @itemDeleted="examplesDeleted()"/>
     <p
-      v-if="translationsList && translationsList.empty"
+      v-if="translationsList.empty"
       class="no-examples">{{ $t('webapp.translate.no_translation') }}
       <a
         class="outline-text"
@@ -51,11 +51,7 @@ export default {
     }),
   },
   watch: {
-    async toLanguage() { await this.updateTranslations(); },
-    async translationsList() {
-      const list = await this.translationsList.updateItems();
-      if (list.length !== 0) this.$emit('listNoEmpty');
-    },
+    toLanguage() { this.updateTranslations(); },
   },
   async mounted() {
     await this.updateTranslations();
@@ -65,7 +61,6 @@ export default {
       'getTranslations',
     ]),
     async updateTranslations() {
-      this.translationsList = null;
       this.translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         to_language: this.toLanguage,
@@ -80,6 +75,9 @@ export default {
     examplesDeleted() {
       this.updateTranslations();
       this.$emit('exampleUpdated');
+    },
+    isListEmpty() {
+      if (!this.translationsList.empty) this.$emit('listNoEmpty');
     },
   },
 };

@@ -117,7 +117,6 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import ExamplesList from '@/components/example/ExamplesList';
 import ExamplesPendingTraining from '@/components/example/ExamplesPendingTraining';
 import LoginForm from '@/components/auth/LoginForm';
-import ExampleSearchInput from '@/components/example/ExampleSearchInput';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TrainModal from '@/components/repository/TrainModal';
 import TrainResponse from '@/components/repository/TrainResponse';
@@ -135,7 +134,6 @@ export default {
     FilterExamples,
     ExamplesList,
     LoginForm,
-    ExampleSearchInput,
     AuthorizationRequestNotification,
     RequestAuthorizationModal,
     ExamplesPendingTraining,

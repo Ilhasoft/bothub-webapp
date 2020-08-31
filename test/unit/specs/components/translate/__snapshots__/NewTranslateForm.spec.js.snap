@@ -4,21 +4,21 @@ exports[`NewTranslateForm.vue renders correctly 1`] = `
 <div>
   <form class="columns is-variable is-2">
     <div class="column">
-      <bh-field-stub label="" errors="">
-        <example-text-with-highlighted-entities-input-stub entities="" availableentities="" id="tour-translate-step-4" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
-      </bh-field-stub>
+      <b-field-stub label="" addons="true">
+        <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-translate-step-4" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+      </b-field-stub>
     </div>
     <div class="column is-narrow">
-      <bh-field-stub label="" errors="">
-        <bh-button-stub disabled="true" size="normal" secondary="true" type="submit" id="tour-translate-step-5" is-next-disabled="true" is-previous-disabled="true">some specific text</bh-button-stub>
-      </bh-field-stub>
+      <b-field-stub addons="true">
+        <b-button-stub type="is-secondary" nativetype="submit" tag="button" id="tour-translate-step-5" is-next-disabled="true" is-previous-disabled="true" disabled="true">some specific text</b-button-stub>
+      </b-field-stub>
     </div>
   </form>
   <div class="columns is-variable is-1">
     <div class="column">
-      <bh-field-stub errors="">
-        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" availablelabels="" entitiesforedit=""></entities-input-stub>
-      </bh-field-stub>
+      <b-field-stub addons="true">
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" entitiesforedit=""></entities-input-stub>
+      </b-field-stub>
     </div>
   </div>
 </div>

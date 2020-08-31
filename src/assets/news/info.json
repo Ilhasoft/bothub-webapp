@@ -1,27 +1,36 @@
 {
     "max_version": "1.18.0",
-    "count": 4,
-    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif"],
+    "count": 5,
+    "images": ["mascot.svg", "1.gif", "2.gif", "3.gif", "4.gif"],
     "en": { 
         "back": "Back",
         "next": "Next",
         "cancel": "Cancel",
         "finish": "Finish",
         "1": {
-            "title": "Bothub has Changed!",
-            "text": "We're building a new experience inspired by you! Now, you can manage your intelligence entities."
+            "title": "Bothub has Updated!",
+            "text": "We are bringing constant updates to improve your experience!",
+            "subtext": "Now you can learn to use Bothub easily and dynamically, monitor numbers and have a more assertive feedback on intelligence responses."
         },
         "2": {
-            "title": "View sentences!",
-            "text": "View the sentences of each entity with one click.."
+            "title": "New tutorial!",
+            "text": "Learn how to use Bothub with a guided tutorial.",
+            "subtext": " "
         },
             "3": {
-            "title": "Edit sentences!",
-            "text": "And edit the sentences of an entity!"
+            "title": "Monitor your intelligence!",
+            "text": "Analyze intelligence information and make more informed decisions",
+            "subtext": " "
         },
         "4": {
-            "title": "Create and edit groups of entities!",
-            "text": "Or create groups and delete entities more easily."
+            "title": "Create an organization!",
+            "text": "You can now create an organization and group all your company information into it.",
+            "subtext": " "
+        },
+        "5": {
+            "title": "New algorithm!",
+            "text": "We added a new algorithm with the state-of-the-art model BERT, providing even greater accuracy of intelligence.",
+            "subtext": " "
         }
     },
     "pt_br": { 
@@ -30,20 +39,29 @@
         "cancel": "Cancelar",
         "finish": "Finalizar",
         "1": {
-            "title": "Bothub tem novidades!",
-            "text": "Estamos construindo uma nova experiência inspirada por você! Agora você pode gerenciar as entidades da sua inteligência."
+            "title": "O Bothub atualizou!",
+            "text": "Estamos trazendo atualizações constantes para melhorar sua experiência!",
+            "subtext": "Agora você pode aprender a usar o Bothub de forma fácil e dinâmica, monitora os números e tem um retorno mais assertivo nas respostas da inteligência."
         },
         "2": {
-            "title": "Visualize suas frases!",
-            "text": "Veja as frases com uma entidade com um clique"
+            "title": "Novo tutorial!",
+            "text": "Aprenda a usar o Bothub com um tutorial guiado.",
+            "subtext": " "
         },
         "3": {
-            "title": "Edite frases!",
-            "text": "Edite as frases pertencentes a uma entidade!"
+            "title": "Monitore suas inteligências!",
+            "text": "Analise as informações da inteligência e tome decisões mais acertivas",
+            "subtext": " "
         },
         "4": {
-            "title": "Crie ou edite grupos de entidades!",
-            "text": "Ficou mais fácil agrupar entidades."
+            "title": "Crie uma organização!",
+            "text": "Agora você pode criar uma organização e agrupar todas as informações da sua empresa nela.",
+            "subtext": " "
+        },
+        "5": {
+            "title": "Novo algoritmo!",
+            "text": "Adicionamos um novo algoritimo com o modelo de estado da arte BERT, provendo uma acuracia ainda maior da inteligência.",
+            "subtext": " "
         }
     }
 }

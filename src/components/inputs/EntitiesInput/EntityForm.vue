@@ -2,72 +2,26 @@
   <div>
     <div class="columns is-variable is-1">
       <div
-        :class="usesLabels ? 'is-half' : ''"
-        class="column">
-        <bh-field>
-          <label class="entity-form-label"><span
+        class="column is-half entity-form">
+        <span
+          slot="label"
+          class="entity-form__label"><span
             :class="entityClass"
-            class="is-rounded">{{ selectedText }}</span> is</label>
-          <bh-autocomplete
-            id="tour-training-step-3"
+            class="is-rounded">{{ selectedText }}</span> is</span>
+        <b-field
+          id="tour-training-step-3"
+          :is-previous-disabled="true">
+          <b-autocomplete
             ref="entityInputField"
-            :is-previous-disabled="true"
+            v-model="entity"
             :data="availableEntities"
-            :formatters="entityFormatters"
-            @input="handleChange"
-          >
-            <span slot="append">
-              <bh-icon-button
-                value="close"
-                size="small"
-                @click="removeEntity()"
-              />
-            </span>
-          </bh-autocomplete>
-        </bh-field>
-      </div>
-      <div
-        v-if="usesLabels"
-        class="column is-half"
-      >
-        <!-- <bh-field>
-          <label class="entity-form-label">{{ showingLabelForm ? 'Label' : '&nbsp;' }}</label>
-          <div>
-            <bh-button
-              v-if="!showingLabelForm"
-              ref="addLabelButton"
-              :disabled="loadingLabel"
-              type="button"
-              size="small"
-              rounded
-              primary
-              class="label-button"
-              @click.prevent.stop="showLabelForm"
-            >
-              <span>
-                <span v-if="loadingLabel">Loading...</span>
-                <span v-else>{{ label ? `Edit "${label}" label` : 'Add label' }}</span>
-              </span>
-            </bh-button>
-            <bh-autocomplete
-              v-else
-              ref="entityLabelField"
-              :value="label"
-              :data="availableLabels"
-              :formatters="labelFormatters"
-              @input="handleLabelChanged"
-            >
-              <span slot="append">
-                <bh-icon-button
-                  ref="removeLabelButton"
-                  value="close"
-                  size="small"
-                  @click="removeLabel()"
-                />
-              </span>
-            </bh-autocomplete>
-          </div>
-        </bh-field> -->
+            expanded
+            open-on-focus
+            dropdown-position="down"
+            icon-right="close"
+            icon-right-clickable
+            @icon-right-click="removeEntity()"/>
+        </b-field>
       </div>
     </div>
   </div>
@@ -103,26 +57,10 @@ export default {
       type: Number,
       required: true,
     },
-    usesLabels: {
-      type: Boolean,
-      default: () => true,
-    },
-    label: {
-      type: String,
-      default: () => '',
-    },
-    loadingLabel: {
-      type: Boolean,
-      default: false,
-    },
-    availableLabels: {
-      type: Array,
-      default: () => ([]),
-    },
   },
   data() {
     return {
-      showingLabelForm: false,
+      entity: '',
     };
   },
   computed: {
@@ -134,41 +72,40 @@ export default {
         formatters.bothubItemKey(),
       ];
     },
-    labelFormatters() {
-      return [
-        formatters.bothubItemKey(),
-      ];
-    },
     selectedText() {
       return this.text.substring(this.selectedTextStart, this.selectedTextEnd);
     },
   },
+  watch: {
+    async entity() {
+      if (!this.entity || this.entity.length <= 0) return;
+      await this.$nextTick();
+      this.entity = formatters.bothubItemKey()(this.entity);
+      this.$emit('input', this.entity);
+    },
+  },
+  mounted() {
+    this.entity = this.selectedText;
+  },
   methods: {
-    handleChange(e) {
-      this.$emit('input', e);
-    },
-    removeEntity() {
+    async removeEntity() {
       if (this.activeTutorial === 'training') return;
-
+      await this.$nextTick;
       this.$emit('removeEntity');
-    },
-    handleLabelChanged(newLabel) {
-      this.$emit('labelChanged', newLabel);
-    },
-    removeLabel() {
-      this.$emit('removeLabel');
-      this.showingLabelForm = false;
-    },
-    showLabelForm() {
-      this.showingLabelForm = true;
     },
   },
 };
 </script>
 
-<style scoped>
-  .entity-form-label {
-    margin-bottom: 6px;
-    display: block;
+<style lang="scss" scoped>
+
+  .entity-form{
+    margin-left: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    &__label{
+      margin-bottom: 6px;
+      display: block;
+    }
   }
 </style>

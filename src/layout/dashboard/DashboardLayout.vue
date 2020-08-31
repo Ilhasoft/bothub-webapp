@@ -6,7 +6,7 @@
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
-            <bh-icon
+            <custom-icon
               value="botinho"
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon"/>
@@ -119,6 +119,7 @@
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
+import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
 
@@ -128,6 +129,7 @@ export default {
     SideBar,
     UserAvatar,
     VersionDropdown,
+    CustomIcon,
     Tour,
   },
   data() {

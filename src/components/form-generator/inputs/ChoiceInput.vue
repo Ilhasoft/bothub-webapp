@@ -89,7 +89,11 @@ export default {
       }
     },
     selectOption(option) {
-      this.$emit('input', option.value);
+      if (option) {
+        this.$emit('input', option.value);
+      } else {
+        this.$emit('input', '');
+      }
     },
     update() {
       this.$emit('input', this.value);
