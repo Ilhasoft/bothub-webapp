@@ -1,100 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TrainResponse.vue add requirements renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
-  <bh-card-stub noborder="true">
-    <div class="bh-grid bh-grid--column align">
-      <div class="bh-grid__item bh-grid__item--nested text-center">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
-          </div>
-        </div>
-      </div>
-      <div class="bh-grid__item">
-        <table>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="bh-grid__item text-center">
-        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
-      </div>
-    </div>
-  </bh-card-stub>
-</bh-modal-stub>
-`;
-
-exports[`TrainResponse.vue add warning renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
-  <bh-card-stub noborder="true">
-    <div class="bh-grid bh-grid--column align">
-      <div class="bh-grid__item bh-grid__item--nested text-center">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
-          </div>
-        </div>
-      </div>
-      <div class="bh-grid__item">
-        <table>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="bh-grid__item text-center">
-        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
-      </div>
-    </div>
-  </bh-card-stub>
-</bh-modal-stub>
-`;
-
 exports[`TrainResponse.vue renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" readyfortrain="true" requirementstotrain="[object Object]" languagesreadyfortrain="[object Object]" languageswarnings="[object Object]">
-  <bh-card-stub noborder="true">
-    <div class="bh-grid bh-grid--column align">
-      <div class="bh-grid__item bh-grid__item--nested text-center">
-        <div class="bh-grid">
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-success" icon="check" size="is-small" class="text-color-primary"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub icon="sync" size="is-small" class="text-color-warning loading"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-info" icon="dots-horizontal" size="is-small" class="text-color-info"></b-icon-stub> <span>some specific text</span>
-          </div>
-          <div class="bh-grid__item">
-            <b-icon-stub type="is-danger" icon="close" size="is-small" class="text-color-danger"></b-icon-stub> <span>some specific text</span>
-          </div>
-        </div>
-      </div>
-      <div class="bh-grid__item">
-        <table>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="bh-grid__item text-center">
-        <bh-button-stub primary="true" type="button"><span>Ok</span></bh-button-stub>
-      </div>
+<b-modal-stub active="true" width="567" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true">
+  <div class="train-response">
+    <div class="train-response__close">
+      <b-icon-stub icon="close" class="train-response__close__icon"></b-icon-stub>
     </div>
-  </bh-card-stub>
-</bh-modal-stub>
+    <div class="train-response__container">
+      <h2>some specific text</h2>
+      <p>some specific text</p>
+      <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-response__container__button__style"><span>some specific text</span></b-button-stub>
+    </div>
+  </div>
+</b-modal-stub>
 `;

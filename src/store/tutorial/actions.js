@@ -53,9 +53,6 @@ export default {
   getRepositoryStatus(store, { repositoryUUID, repositoryVersion }) {
     return tutorial.trainingStatus(repositoryUUID, repositoryVersion);
   },
-  async setRepositoryTraining({ commit }, value) {
-    commit('updateRepositoryTraining', value);
-  },
   getRepositoryVersion(store, { query }) {
     return tutorial.repositoryVersion(query);
   },
