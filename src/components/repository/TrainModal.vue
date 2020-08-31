@@ -85,7 +85,8 @@
           </div>
         </div>
       </div>
-  </div></b-modal>
+    </div>
+  </b-modal>
 </template>
 
 <script>
