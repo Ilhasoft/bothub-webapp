@@ -1,21 +1,14 @@
 <template>
   <div>
     <entity-form
-      v-for="entity in entities"
+      v-for="entity in preparedEntities"
       :key="entity.localId"
       v-model="entity.entity"
       :available-entities="entitiesOptions"
-      :available-labels="availableLabels"
       :entity-class="getEntityClass(entity)"
-      :uses-labels="availableAddLabel"
       :text="text"
       :selected-text-start="entity.start"
       :selected-text-end="entity.end"
-      :label="entity.label"
-      :loading-label="entity.localLoadingLabel"
-
-      @removeLabel="() => entity.label = ''"
-      @labelChanged="(label) => entity.label = label"
       @removeEntity="() => removeEntity(entity)"
     />
 
@@ -35,7 +28,7 @@
         type="is-primary"
         @click.prevent.stop="addEntity()"
       >
-        <span>
+        <span class="add-entity-button-text">
           <span v-if="textSelectedValue">
             {{ $t('webapp.trainings.add_entity_for') }} "{{ textSelectedValue }}"
           </span>
@@ -48,8 +41,7 @@
 
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
-import { generateTemporaryId } from '@/utils';
-import Vue from 'vue';
+import { generateTemporaryId, formatters } from '@/utils';
 import { mapActions, mapGetters } from 'vuex';
 import _ from 'lodash';
 import EntityForm from './EntityForm';
@@ -76,21 +68,9 @@ export default {
       type: Object,
       default: null,
     },
-    availableAddLabel: {
-      type: Boolean,
-      default: true,
-    },
     availableEntities: {
       type: Array,
       default: () => ([]),
-    },
-    availableLabels: {
-      type: Array,
-      default: () => ([]),
-    },
-    customLabelDisabled: {
-      type: Boolean,
-      default: false,
     },
     entitiesForEdit: {
       type: Array,
@@ -110,10 +90,7 @@ export default {
       repositoryVersion: 'getSelectedVersion',
     }),
     entitiesOptions() {
-      if (this.allEntities !== undefined) {
-        return this.allEntities;
-      }
-      return [];
+      return this.allEntities || [];
     },
     textSelectedValue() {
       if (!this.textSelected) {
@@ -121,39 +98,10 @@ export default {
       }
 
       const { start, end } = this.textSelected;
-      return this.text.substring(start, end);
+      return formatters.bothubItemKey()(this.text.substring(start, end));
     },
     preparedEntities() {
-      return this.entities
-        .map(({
-          label,
-          pristineLabel,
-          entity,
-          ...others
-        }) => (label
-          ? {
-            label,
-            entity,
-            ...others,
-          }
-          : {
-            entity,
-            ...others,
-          }))
-        .sort((a, b) => (a.start - b.start));
-    },
-    labels() {
-      return this.entities.reduce((current, { entity, label, pristineLabel }) => {
-        if (label || pristineLabel) {
-          return Object.assign(current, { [entity]: label || pristineLabel });
-        }
-        return current;
-      }, {});
-    },
-    printableEntities() {
-      return this.preparedEntities.map(e => (this.labels[e.entity]
-        ? { ...e, label: this.labels[e.entity] }
-        : e));
+      return [...this.entities].sort((a, b) => (a.start - b.start));
     },
   },
   watch: {
@@ -187,11 +135,7 @@ export default {
       this.entities = this.entities.filter(e => e.localId !== entity.localId);
     },
     getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.availableEntities,
-        this.preparedEntities,
-      );
+      const color = getEntityColor(entity);
       return `entity-${color}`;
     },
     addEntity() {
@@ -200,49 +144,11 @@ export default {
       this.entities.push({
         ...this.textSelected,
         entity: this.textSelectedValue,
-        label: '',
-        localLoadingLabel: true,
         localId: temporaryEntityId,
       });
 
-      this.loadLabelFor(temporaryEntityId, this.textSelectedValue);
       this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
       this.$emit('entityAdded');
-    },
-    async loadLabelFor(entityId, entityText) {
-      let entities = [];
-      try {
-        entities = await this.getEntities({
-          repositoryUuid: this.repository.uuid || this.repository,
-          value: entityText,
-          repositoryVersion: this.repositoryVersion,
-        });
-      } catch (error) {
-        this.errors = error;
-      }
-      await entities.next();
-
-      const entityIndex = this.entities.findIndex(e => e.localId === entityId);
-
-      if (entityIndex === -1) {
-        return;
-      }
-
-      if (entities.items.length === 1) {
-        // eslint-disable-next-line prefer-destructuring
-        const label = entities.items[0].data.label;
-
-        Vue.set(this.entities, entityIndex, {
-          ...this.entities[entityIndex],
-          label,
-          localLoadingLabel: false,
-        });
-      } else {
-        Vue.set(this.entities, entityIndex, {
-          ...this.entities[entityIndex],
-          localLoadingLabel: false,
-        });
-      }
     },
     validateEntities(text, oldText) {
       /*
@@ -290,3 +196,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .add-entity-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 40vw;
+  }
+</style>

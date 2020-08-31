@@ -3,13 +3,13 @@
     class="quick-test-text">
     <p
       v-if="!data || entitiesList.length === 0"
-      class="quick-test-text__text">{{ displayText }}</p>
+      class="quick-test-text__text quick-test-text__text--before">{{ displayText }}</p>
     <highlighted-text
       v-else
       :text="displayText"
       :highlighted="highlighted"
       :entities="entitiesList"
-      :all-entities="allEntities"
+      size="medium"
       class="quick-test-text__text" />
     <div
       v-if="error"
@@ -95,10 +95,6 @@ export default {
       type: String,
       required: true,
     },
-    allEntities: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
@@ -135,8 +131,6 @@ export default {
       return this.entitiesList.reduce((list, entity) => {
         const color = getEntityColor(
           entity.entity,
-          this.allEntities,
-          this.entitiesList,
         );
         // eslint-disable-next-line no-param-reassign
         list[entity.entity] = `entity-${color}`;
@@ -183,6 +177,8 @@ export default {
       this.$buefy.modal.open({
         props: { info: this.data },
         parent: this,
+        width: 562,
+        canCancel: false,
         component: RawInfo,
         hasModalCard: false,
         trapFocus: true,
@@ -198,6 +194,7 @@ export default {
     debug() {
       this.$buefy.modal.open({
         parent: this,
+        canCancel: false,
         component: RepositoryDebug,
         props: {
           repositoryUUID: this.repositoryUuid,
@@ -226,7 +223,10 @@ export default {
         color: #707070;
         text-align: left;
         font-weight: bold;
-        font-size: 18px;
+
+        &--before {
+          font-size: 1.125rem;
+        }
     }
 
     &__button {

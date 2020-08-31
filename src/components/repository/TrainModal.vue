@@ -1,158 +1,309 @@
 <template>
   <b-modal
     :active="open"
+    :width="width"
     :can-cancel="false"
-    :width="665">
-    <div
-      id="tour-training-step-7"
-      :is-previous-disabled="true"
-      :is-finish-disabled="true">
-      <div
-        class="train-modal">
-        <div
-          class="train-modal__close">
+    @close="$emit('update:open', false)">
+    <div class="tutorial">
+      <div class="tutorial__title">
+        <h1> {{ $t('webapp.tutorial.title') }} </h1>
+        <p v-html="$t('webapp.tutorial.description')" />
+      </div>
+      <b-notification
+        :active.sync="openNotification"
+        :duration="4000"
+        :closable="false"
+        :auto-close="autoCloseNotification"
+        :type="typeNotification"
+        class="tutorial__notificationAlert"
+        animation="fade"
+        role="alert">
+        <div class="tutorial__notificationAlert__container">
+          <p>{{ notificationMessage }}</p>
           <b-icon
-            icon="close"
-            class="train-modal__close__icon"
-            @click.native="closeModal()"/>
+            v-if="typeNotification === 'is-warning'"
+            class="loading"
+            icon="sync" />
         </div>
-        <div class="train-modal__container">
-          <strong
-            class="train-modal__text-warning">
-            {{ $t('webapp.train_modal.language_warning') }}</strong>
-          <div
-            v-if="requirementsToTrainStatus || languagesWarningsStatus"
-            class="train-modal__wrapper">
-            <p class="train-modal__wrapper__subtitle">
-              {{ $t('webapp.train_modal.missing_requirements') }}
-            </p>
-            <div class="train-modal__wrapper__content">
-              <div v-if="requirementsToTrainStatus">
-                <div
-                  v-for="(requirements, lang) in requirementsToTrain"
-                  :key="lang"
-                  class="train-modal__wrapper__content__content-requirements">
-                  <div
-                    v-for="(requirement, i) in requirements"
-                    :key="i"
-                    class="train-modal__wrapper__content__content-requirements__item">
-                    <p>
-                      <strong>{{ firstText(requirement) }}</strong>
-                      <br>
-                      <span>{{ secondText(requirement) }}</span>
-                    </p>
-                    <div>
-                      <b-icon
-                        icon="close"
-                        class="train-modal__wrapper__content__content-requirements__item__icon"
-                        @click.native="closeModal()"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div v-if="languagesWarningsStatus">
-                <div class="train-modal__wrapper__content__content-requirements">
-                  <div
-                    v-for="(warnings, lang) in languagesWarnings"
-                    :key="lang"
-                    class="train-modal__wrapper__content__content-requirements__item">
-                    <p
-                      v-for="(warning, index) in warnings"
-                      :key="index">
-                      <strong>{{ firstText(warning) }}</strong>
-                      <br>
-                      <span>{{ secondText(warning) }}</span>
-                    </p>
-                    <div>
-                      <b-icon
-                        icon="close"
-                        class="train-modal__wrapper__content__content-requirements__item__icon"
-                        @click.native="closeModal()"/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="train-modal__buttons">
-              <b-button
-                ref="closeBtn"
-                type="is-primary"
-                class="train-modal__buttons__style"
-                @click="closeModal()">
-                <span>{{ $t('webapp.train_modal.ok') }}</span>
-              </b-button >
-            </div>
-          </div>
+      </b-notification>
+      <div class="tutorial__steps">
+        <div
+          v-for="(item, index) in computedList"
+          :key="index"
+          class="tutorial__item__wrapper">
+
+          <span
+            :class="{'tutorial__item__marker': true,
+                     'tutorial__item__marker--active': item.active}">
+            <b-icon
+              v-show="item.active"
+              size="is-small"
+              icon="check" />
+          </span>
+          <span
+            :class="{'tutorial__item': true,
+                     'tutorial__item--finished': item.active}"
+            @click="startTutorial(item.label, item.route, item.previous)">
+            {{ $t(`webapp.tutorial.items.${item.label}`) }}
+          </span>
         </div>
       </div>
-  </div></b-modal>
+      <div class="tutorial__skip">
+        <p
+          v-if="finisheButton"
+          @click="closeTutorialMenu()">
+          {{ $t('webapp.tutorial.finish_tutorial') }}
+        </p>
+        <p
+          v-else
+          @click="closeTutorialMenu()">
+          {{ $t('webapp.tutorial.skip') }}
+        </p>
+      </div>
+    </div>
+
+    <confetti-effect
+      v-if="finisheButton && getFinalMessage !== 'true'"
+      :config="confettiConfig"/>
+  </b-modal>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import LanguageBadge from '@/components/shared/LanguageBadge';
+import { mapActions, mapGetters } from 'vuex';
+import ConfettiEffect from './ConfettiEffect';
 
 export default {
-  name: 'TrainModal',
+  name: 'TutorialModal',
   components: {
-    LanguageBadge,
+    ConfettiEffect,
   },
   props: {
     open: {
       type: Boolean,
       default: false,
     },
-    requirementsToTrain: {
-      type: Object,
-      required: true,
-    },
-    languagesWarnings: {
-      type: Object,
-      required: true,
-    },
-    training: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
-      blockedNextStepTutorial: false,
+      width: 520,
+      list: [
+        { label: 'create_account', route: 'home', previous: '' },
+        { label: 'create_intelligence', route: 'new', previous: 'create_account' },
+        { label: 'training', route: 'training', previous: 'create_intelligence' },
+        { label: 'quick_test', route: '', previous: 'training' },
+        { label: 'evaluate', route: 'evaluate', previous: 'quick_test' },
+        { label: 'inbox', route: 'log', previous: 'evaluate' },
+        { label: 'translate', route: 'translate', previous: 'inbox' },
+        { label: 'integrate', route: 'Integration', previous: 'translate' },
+      ],
+      repositoryTutorial: null,
+      nickname: '',
+      openNotification: false,
+      error: null,
+      finished: {},
+      notificationMessage: '',
+      finisheButton: false,
       repositoryStatus: {},
+      typeNotification: '',
+      autoCloseNotification: false,
+      repository_uuid: '',
+      repository_version: 0,
+      confettiConfig: {
+        angle: 90,
+        spread: 200,
+        startVelocity: 45,
+        elementCount: 80,
+        dragFriction: 0.1,
+        duration: 4000,
+        stagger: 0,
+        width: '15px',
+        height: '30px',
+        colors: ['#A182BA', '#00ACEA', '#8AC13E', '#E81B26', '#FFEE00'],
+        random: Math.random,
+      },
     };
   },
   computed: {
     ...mapGetters([
+      'finishedTutorials',
       'activeTutorial',
-      'getCheckRepositoryTrain',
-      'getSelectedVersionRepository',
+      'checkFinishid',
+      'myProfile',
+      'getFinalModal',
+      'getFinalMessage',
       'getSelectedVersion',
+      'getSelectedVersionRepository',
+      'getCheckRepositoryTrain',
     ]),
-    requirementsToTrainStatus() {
-      return Object.keys(this.requirementsToTrain).length !== 0;
+    computedList() {
+      return this.list.map(item => ({
+        ...item,
+        active: item.label === 'create_account'
+        || (item.label === 'create_intelligence' && this.repositoryTutorial !== null)
+          ? true : this.finished[item.label] === 'finished',
+      }));
     },
-    languagesWarningsStatus() {
-      return Object.keys(this.languagesWarnings).length !== 0;
+  },
+  watch: {
+    open() {
+      if (this.open === true) {
+        this.updateMyRepositories();
+        this.updateTutorialsDone();
+        this.finished = { ...this.finishedTutorials };
+        this.nickname = this.myProfile.nickname;
+        this.checkIfDoneTutorial();
+        if (this.getCheckRepositoryTrain) {
+          this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
+          this.checkWhichStatus();
+        }
+      }
     },
   },
   methods: {
     ...mapActions([
-      'setRepositoryTraining',
+      'setTutorialActive',
+      'getUserRepositories',
+      'setTutorialMenuInactive',
+      'updateTutorialsDone',
+      'setCreateIntelligence',
+      'setFinalModal',
+      'updateFinalizationMessage',
+      'setTutorialInactive',
       'getRepositoryStatus',
+      'setRepositoryTraining',
+      'setFinalizationMessage',
+      'getRepositoryVersion',
     ]),
-    firstText(requirement) {
-      const initalText = requirement.split('\n');
-      return initalText[0];
-    },
-    secondText(requirement) {
-      const initalText = requirement.split('\n');
-      return initalText[1];
-    },
-    closeModal() {
-      if (this.activeTutorial === 'training') {
-        this.$emit('resetTutorial');
+    async updateMyRepositories() {
+      try {
+        const { data } = await this.getUserRepositories({
+          limit: 1,
+          offset: 0,
+        });
+        if (data.results.length === 0) {
+          return;
+        }
+        this.repositoryTutorial = data.results[0].slug;
+        this.repository_uuid = data.results[0].uuid;
+        this.checkRepositoryVersion();
+        this.hasIntelligence();
+      } catch (error) {
+        this.error = error;
       }
-      this.$emit('closeTrainModal');
+    },
+    async checkRepositoryVersion() {
+      const { data } = await this.getRepositoryVersion({
+        query: { repository: this.repository_uuid },
+      });
+      this.repository_version = data.results[0].id;
+    },
+    hasIntelligence() {
+      if (this.repositoryTutorial !== null) {
+        if (!Object.keys(this.finished).includes('create_intelligence')) {
+          this.setCreateIntelligence('create_intelligence');
+        }
+      }
+      return false;
+    },
+    checkIfDoneTutorial() {
+      if (Object.keys(this.finished).length === 7) {
+        this.updateFinalizationMessage();
+        this.finisheButton = true;
+        return;
+      }
+      this.finisheButton = false;
+    },
+    closeTutorialMenu() {
+      if (Object.keys(this.finished).length === 7) {
+        this.setFinalModal(true);
+        this.setFinalizationMessage();
+      }
+      this.openNotification = false;
+      this.typeNotification = '';
+      this.autoCloseNotification = false;
+      this.notificationMessage = '';
+      this.$emit('update:open', false);
+      this.setTutorialMenuInactive();
+    },
+    async getTrainingStatus() {
+      const { data } = await this.getRepositoryStatus({
+        repositoryUUID: this.repository_uuid,
+        repositoryVersion: this.repository_version,
+      });
+      this.repositoryStatus = data;
+    },
+    checkWhichStatus() {
+      try {
+        const refreshStatus = setInterval(async () => {
+          await this.getTrainingStatus();
+          if (this.repositoryStatus.count !== 0) {
+            if (this.repositoryStatus.results[0].status === 2) {
+              clearInterval(refreshStatus);
+              await this.setRepositoryTraining(false);
+              this.setNotificationAlert('is-success', true, this.$t('webapp.tutorial.training_success'));
+              return;
+            }
+            if (this.repositoryStatus.results[0].status === 3) {
+              clearInterval(refreshStatus);
+              await this.setRepositoryTraining(false);
+              this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            }
+          } else {
+            clearInterval(refreshStatus);
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            await this.setRepositoryTraining(false);
+          }
+        }, 100000);
+      } catch (error) {
+        this.error = error;
+      }
+    },
+    setNotificationAlert(type, autoClose, title) {
+      this.openNotification = true;
+      this.autoCloseNotification = autoClose;
+      this.typeNotification = type;
+      this.notificationMessage = title;
+    },
+    goToTutorial(name, target) {
+      this.setTutorialActive(name);
+      this.$router.push(`/dashboard/${this.nickname}/${this.repositoryTutorial}/${target}`);
+      this.openNotification = false;
+      this.closeTutorialMenu();
+    },
+    async startTutorial(name, target, previous) {
+      try {
+        if (target === 'home' || target === 'new') {
+          if (target === 'home') return;
+          this.setTutorialActive(name);
+          this.$router.push({
+            name: 'home',
+          });
+          this.closeTutorialMenu();
+        } else if (Object.keys(this.finished).includes(previous)
+        || (previous === 'create_intelligence' && this.repositoryTutorial !== null)) {
+          if (target === 'training') {
+            this.goToTutorial(name, target);
+            return;
+          }
+          await this.getTrainingStatus();
+          if (this.repositoryStatus.length !== 0 && this.repositoryStatus.results[0].status === 2) {
+            this.goToTutorial(name, target);
+            return;
+          }
+          if (this.repositoryStatus.length !== 0 && this.repositoryStatus.results[0].status === 3) {
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            return;
+          }
+        } else {
+          if (this.getCheckRepositoryTrain) {
+            this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
+            return;
+          }
+          this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.alert_message'));
+        }
+      } catch (error) {
+        this.error = error;
+      }
     },
   },
 };
@@ -160,110 +311,94 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
 
-::-webkit-scrollbar {
-  width: 0.6rem;
+.loading {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-::-webkit-scrollbar-track {
-  background: #e9e9ec;
-  border-radius: 10px;
+@keyframes spin {
+    from {transform:rotate(360deg);}
+    to {transform:rotate(0deg);}
 }
+.tutorial {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem 3rem;
+    width: 32.5rem;
 
-::-webkit-scrollbar-thumb {
-  background: $color-primary;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
-}
-
-:not(.quick-test) {
-  pointer-events: visible;
-}
-.train-modal {
-  max-height: 535px;
-  background-color: $color-white;
-  box-shadow: 0px 3px 6px #00000029;
-  border-radius: 8px;
-
-
-  &__close{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 1rem 1rem 0 0;
-    cursor: pointer;
-    &__icon{
-      color: $color-grey;
-    }
-  }
-
-  &__container{
-    padding: 1rem 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__text-ready-train{
-    font-size: 20px;
-    color: $color-primary;
-  }
-
-  &__text-warning{
-    font-size: 28px;
-  }
-
-  &__wrapper {
-    padding: 1rem;
-
-
-    &__subtitle{
-      margin-bottom: 1.5rem;
+    &__title {
+        text-align: center;
+        h1 {
+            color: $color-primary;
+            font-size: 2.4rem;
+        }
+        p{
+          font-size:0.940rem;
+        }
     }
 
-    &__content{
-      overflow: auto;
-      max-height: 220px;
+    &__steps {
+        margin: 1.5rem 0 1.5rem 1.5rem;
+    }
 
-      &__content-requirements {
+    &__item {
+        cursor: pointer;
+        &:hover {
+            font-weight: bold;
+        }
 
-        &__item {
-          display: flex;
-          justify-content: space-between;
-          padding: 2.1rem 1rem;
-          align-items: center;
-          margin: 0 1rem 0.6rem 0;
-          height: 65px;
-          border: 1.5px solid $color-danger;
-          background-color: $color-fake-white;
-          border-radius: 6px;
-            &__icon{
-              color:$color-danger;
+        &--finished {
+            text-decoration: line-through;
+        }
+
+        &__wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        &__marker {
+            color: white;
+            text-align: center;
+            border-radius: 50%;
+            border: 1px $color-grey-darker solid;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-block;
+            margin-right: 1rem;
+            &--active {
+                background-color: $color-success;
+                border: 1px $color-success solid;
             }
+        }
+    }
+    &__notificationAlert{
+      &__container{
+      display:flex;
+      justify-content: space-around;
+      align-items: center;
+        p{
+          margin:0;
+          text-align: center;
         }
       }
     }
-  }
-
-  &__buttons {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    &__style{
-      box-shadow: 0px 3px 6px #00000029;
-      width: 96px;
-      height: 43px;
-      font-weight: $font-weight-bolder;
+    &__skip{
+      p{
+        cursor: pointer;
+        margin: auto;
+        display:inline-block;
+        border-bottom: 2px solid rgba(117, 117, 117, 0.363);
+        margin-left: 1.2rem;
+        padding-bottom: 2px;
+        &:hover{
+          color : rgba(83, 83, 83, 0.884)
+        }
+      }
     }
-  }
-
 }
+
 </style>

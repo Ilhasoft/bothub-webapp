@@ -4,7 +4,7 @@
       class="columns is-variable is-2"
       @submit.prevent="onSubmit()">
       <div class="column">
-        <bh-field
+        <b-field
           :errors="errors.text"
           label>
           <example-text-with-highlighted-entities-input
@@ -18,24 +18,23 @@
             :placeholder="$t('webapp.translate.translate_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)" />
-        </bh-field>
+        </b-field>
       </div>
       <div class="column is-narrow">
-        <bh-field label>
-          <bh-button
+        <b-field>
+          <b-button
             id="tour-translate-step-5"
             :is-next-disabled="true"
             :is-previous-disabled="true"
             :disabled="!isValid || submitting"
-            secondary
-            size="normal"
-            type="submit">{{ $t('webapp.translate.submit_translation') }}</bh-button>
-        </bh-field>
+            type="is-secondary"
+            native-type="submit">{{ $t('webapp.translate.submit_translation') }}</b-button>
+        </b-field>
       </div>
     </form>
     <div class="columns is-variable is-1">
       <div class="column">
-        <bh-field :errors="errors.entities">
+        <b-field :message="errors.entities">
           <entities-input
             ref="entitiesInput"
             v-model="entities"
@@ -46,7 +45,7 @@
             :available-add-label="false"
             @entityAdded="onEntityAdded($event)"
             @entityEdited="onEditEntity($event)" />
-        </bh-field>
+        </b-field>
       </div>
     </div>
   </div>
@@ -156,9 +155,9 @@ export default {
 
         this.submitting = false;
         if (language) {
-          this.$bhToastNotification({
+          this.$buefy.notification.open({
             message: language.join(' '),
-            type: 'danger',
+            type: 'is-danger',
           });
         }
       }

@@ -23,7 +23,8 @@
       "no": "Não",
       "items_total": "{n} item no total | {n} itens no total",
       "type_here": "Digite aqui...",
-      "support": "Ajuda do Bothub"
+      "support": "Ajuda do Bothub",
+      "search_bots": "Procurar inteligências"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -125,7 +126,13 @@
       "intent": "Intenção",
       "relevance": "Relevância",
       "debug_description": "Algo inesperado aconteceu! Nos não pudemos debugar seu texto.",
-      "reload": "Recarregar"
+      "reload": "Recarregar",
+      "debug": "Debug",
+      "debug_subtitle": "Analise a relevância de cada palavra da frase e entenda o resultado do seu teste rápido."
+    },
+    "raw": {
+      "raw": "Raw",
+      "raw_subtitle": "Analise a confiança em cada intenção identificada para entender o resultado do teste rápido"
     },
     "evaluate": {
       "header_title": "Teste sua inteligência",
@@ -299,7 +306,7 @@
       "no_changes": "Sem alterações",
       "no_sentences": "Não há frases.",
       "no_sentences_to_train": "Não há frases para treinar.",
-      "no_train_sentence": "Essa sentença ainda não foi adicionada ao treinamento.",
+      "no_train_sentence": "Essa frase ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",
@@ -333,7 +340,7 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Você não tem sentenças traduzidas,",
+      "no_translation": "Você não tem frases traduzidas,",
       "click_here": "clique aqui para traduzir.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
@@ -341,8 +348,8 @@
       "languages_select": "Buscar idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
-      "import_title": "Importar sentenças",
-      "export_title": "Exportar sentenças",
+      "import_title": "Importar frases",
+      "export_title": "Exportar frases",
       "import_button": "Importar",
       "export_button": "Exportar",
       "import_field_text": "Nenhum arquivo selecionado",
@@ -350,7 +357,15 @@
       "import_select_error": "Ocorreu um erro com o arquivo.",
       "import_button_cancel": "Cancelar",
       "export_all_sentences": "Todas as senteças",
-      "export_only_translated": "Senteças não traduzidas"
+      "export_only_translated": "Senteças não traduzidas",
+      "translators": "Tradutores | Tradutor | Tradutores",
+      "completed": "Traduções completas | Tradução completa | Traduções completas",
+      "more_than_half": "Mais que 50% traduzidas",
+      "less_than_half": "Menos que 50% traduzidas",
+      "all": "Todos os idiomas",
+      "search": "Pesquisar",
+      "showing": "Mostrando {count} de {available} idiomas disponíveis",
+      "no_translated": "Nenhum idioma traduzido"
     },
     "orgs": {
       "owner": "Pertence a",
@@ -401,6 +416,7 @@
       "repositories": "Inteligências",
       "modal_edit_your_profile": "Edite seu perfil",
       "modal_change_password": "Mudar Senha",
+      "password_change_success": "Senha alterada!",
       "edit": "Salvar",
       "trained_at": "Treinado às {trained} por {by}",
       "train_fail": "Treinamento falhou às {failed}",
@@ -479,7 +495,7 @@
       "created_by": "Criado por",
       "main": "Principal",
       "change_default_version": "Mude a versão padrão",
-      "message_change_default_version": "Você tem certeza que quer mudar a versão padrão?",
+      "message_change_default_version": "Você tem certeza que quer mudar a versão padrão para \"{name}\"?",
       "confirm_change_default_version": "Mudar padrão",
       "version_has_edited": "A versão foi editada",
       "something_wrong": "Algo deu errado ):",
@@ -491,7 +507,7 @@
       "title": "Título",
       "version": "Versão",
       "cancel": "Cancelar",
-      "add_new": "Adicionar novo",
+      "add_new": "Adicionar nova",
       "signin": "Entre na sua conta para editar essa inteligência."
     },
     "inbox": {
@@ -501,16 +517,14 @@
       "version": "Versão",
       "cannot_edit_this_repository": "Você não pode editar essa inteligência",
       "signin_you_account": "Entre na sua conta para editar essa inteligência.",
-      "your_version": "Sua Versão",
-      "your_intent": "Sua Intenção",
-      "your_filter": "Seu Filtro",
+      "all_versions": "Todas as versões",
       "test_sentences": "Frases de Teste",
       "training": "Treinamento",
       "add_to": "Adicionar à",
       "list_empty": "Nenhuma frase.",
       "entry_has_add_to_train": "adicionada ao treinamento.",
       "entry_has_add_to_sentence": "adicionada às frases de teste.",
-      "entry_error": "Intenção e Sentença já existem.",
+      "entry_error": "Intenção e Frase já existem.",
       "add_to_train_error": "Aconteceu um erro",
       "add_to_sentences_error": "Um erro ocorreu.",
       "add_to_train_button": "Adicionar ao treinamento",
@@ -531,7 +545,7 @@
     },
     "entity":{
       "title": "Entidade",
-      "description": "Essa entidade contém {n} sentença | Essa entidade contém {n} sentenças.",
+      "description": "Essa entidade contém {n} frase | Essa entidade contém {n} frases.",
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
@@ -581,7 +595,7 @@
             "training": "Treinar sua inteligência",
             "quick_test": "Faça um teste rápido",
             "evaluate": "Teste sua inteligência",
-            "inbox": "Adicionar sentença ao inbox",
+            "inbox": "Adicionar frase ao inbox",
             "translate": "Traduzir para outro idioma",
             "integrate": "Integrar sua inteligência em uma plataforma"
         },
@@ -599,16 +613,16 @@
             "step_2": "Agora clique aqui passa classificar a palavra que você selecionou.",
             "step_3": "E escreva a classificação Ex: Se você selecionou ''pizza'' a classificação pode ser ''alimento''",
             "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",
-            "step_5": "Por fim, envie sua sentença.",
+            "step_5": "Por fim, envie sua frase.",
             "step_6": "Após adicionar as frases, clique aqui. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
             "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Treinar\" para prosseguir. <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, cliquem em \"Ok\" para repetir."
         },
         "evaluate": {
-          "step_0": "<strong> Vamos para o teste de sentenças! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
+          "step_0": "<strong> Vamos para o teste de frases! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
           "step_1": "Selecione um idioma para testar.",
           "step_2": "Digite aqui uma frase que você gostaria de testar. <br> Ex: quero uma pizza",
           "step_3": "E aqui, selecione a intenção que mais se identifica com a frase que você digitou. Ex: afirmativa.",
-          "step_4": "Por fim, envie sua sentença.",
+          "step_4": "Por fim, envie sua frase.",
           "step_5": "Clique aqui para executar seu teste. <br> <strong>Dica</strong>: Para testar, você deve adicionar pelo menos duas intenções com duas frases cada."
       },
         "evaluate_result": {

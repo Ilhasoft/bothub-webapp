@@ -135,9 +135,9 @@ export default {
       this.changePasswordModalOpen = true;
     },
     onPasswordChanged() {
-      this.$bhToastNotification({
-        message: 'Password changed!',
-        type: 'success',
+      this.$buefy.notification.open({
+        message: this.$t('webapp.my_profile.password_change_success'),
+        type: 'is-success',
       });
       this.changePasswordModalOpen = false;
     },

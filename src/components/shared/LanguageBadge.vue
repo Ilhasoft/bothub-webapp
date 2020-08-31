@@ -1,8 +1,7 @@
 <template>
-  <bh-badge
-    :transparent="!main"
-    :size="size"
-    color="primary">{{ language }}</bh-badge>
+  <b-tag
+    :class="{ badge: true, transparent: !main }"
+    rounded>{{ language }}</b-tag>
 </template>
 
 <script>
@@ -17,10 +16,24 @@ export default {
       type: Boolean,
       default: false,
     },
-    size: {
-      type: String,
-      default: 'small',
-    },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+@import '~@/assets/scss/colors.scss';
+
+  .badge {
+    border: 2px $color-primary solid !important;
+    color: $color-white;
+    background-color: $color-primary !important;
+    padding: 0.8rem 1rem;
+  }
+
+  .transparent {
+    color: $color-primary !important;
+    background-color: $color-white !important;
+  }
+
+</style>

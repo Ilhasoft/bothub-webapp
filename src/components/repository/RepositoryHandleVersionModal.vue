@@ -2,37 +2,29 @@
   <div class="repository-new-version-modal">
     <div class="repository-new-version-modal__container">
       <form @submit.prevent="onSubmit">
-        <div class="field">
-          <label class="label">{{ $t('webapp.versions.title') }}</label>
-          <div class="control">
-            <b-input
-              v-model="name"
-              :maxlength="maxLength"
-              :has-counter="false"
-            />
-          </div>
-        </div>
-        <div class="field">
-          <div class="control has-text-centered" />
-          <div class="control">
-            <label class="label">{{ $t('webapp.versions.version') }}</label>
-            <input
-              :placeholder="version.name"
-              class="input"
-              type="text"
-              disabled >
-            <div class="field repository-new-version-modal__button-container">
-              <b-button
-                type="is-light"
-                @click="onClose()">{{ $t('webapp.versions.cancel') }}</b-button>
-              <b-button
-                :loading="loading"
-                :disabled="!canSubmit"
-                type="is-primary"
-                native-type="submit"
-              >{{ $t('webapp.versions.add_new') }}</b-button>
-            </div>
-          </div>
+        <b-field :label="$t('webapp.versions.title')">
+          <b-input
+            v-model="name"
+            :maxlength="maxLength"
+            :has-counter="false"
+            @input="onNameChange"
+          />
+        </b-field>
+        <b-field :label="$t('webapp.versions.version')">
+          <b-input
+            :placeholder="version.name"
+            disabled />
+        </b-field>
+        <div class="field repository-new-version-modal__button-container">
+          <b-button
+            type="is-light"
+            @click="onClose()">{{ $t('webapp.versions.cancel') }}</b-button>
+          <b-button
+            :loading="loading"
+            :disabled="!canSubmit"
+            type="is-primary"
+            native-type="submit"
+          >{{ $t('webapp.versions.add_new') }}</b-button>
         </div>
       </form>
     </div>
@@ -42,6 +34,7 @@
 <script>
 
 import { mapActions } from 'vuex';
+import { formatters } from '@/utils/index';
 
 export default {
   name: 'RepositoryHandleVersionModal',
@@ -65,13 +58,18 @@ export default {
   },
   computed: {
     canSubmit() {
-      return !(!this.name || /^\s*$/.test(this.name));
+      return this.name && this.name.length > 0;
     },
   },
   methods: {
     ...mapActions(['addNewVersion']),
     onClose() {
       this.$emit('close');
+    },
+    onNameChange(value) {
+      this.$nextTick(() => {
+        this.name = formatters.versionItemKey()(value);
+      });
     },
     async onSubmit() {
       this.loading = true;

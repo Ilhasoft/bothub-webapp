@@ -3,12 +3,12 @@
     <sentence-accordion
       id="tour-inbox-step-1"
       :is-previous-disabled="true"
-      :is-step-blocked="data.length === 0"
+      :is-step-blocked="!checked"
       :open.sync="open">
 
       <div slot="check">
         <b-checkbox
-          v-model="data"
+          v-model="checked"
           :native-value="toExample"/>
       </div>
 
@@ -29,8 +29,7 @@
             v-if="open"
             :text="text"
             :entities="entitiesList"
-            :highlighted="highlighted"
-            :all-entities="repository.entities || repository.entities_list" />
+            :highlighted="highlighted" />
         </div>
 
       </div>
@@ -76,6 +75,10 @@ export default {
     IntentModal,
   },
   props: {
+    id: {
+      type: [String, Number],
+      required: true,
+    },
     text: {
       type: String,
       default: '',
@@ -105,7 +108,7 @@ export default {
       isRawInfoActive: false,
       intent: '',
       isCorrected: Boolean,
-      data: [],
+      checked: false,
       highlighted: null,
     };
   },
@@ -152,13 +155,13 @@ export default {
     },
   },
   watch: {
-    data(newValue, oldValue) {
-      if (this.data.length !== 0) {
+    checked() {
+      if (this.checked) {
         this.$emit('dispatchEvent', { event: 'event_nlp', value: this.nlp_log });
-        this.$emit('dispatchEvent', { event: 'event_addLog', value: this.data });
-        return '';
+        this.$emit('dispatchEvent', { event: 'event_addLog', value: { id: this.id, data: this.toExample } });
+      } else {
+        this.$emit('dispatchEvent', { event: 'event_removeLog', value: this.id });
       }
-      return this.$emit('dispatchEvent', { event: 'event_removeLog', value: oldValue });
     },
   },
   created() {
@@ -166,19 +169,10 @@ export default {
   },
   methods: {
     selectAll(value) {
-      if (value === true) {
-        this.data.push(this.toExample);
-      } else {
-        this.data = [];
-      }
+      this.checked = value;
     },
     getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.repository.entities || this.repository.entities_list,
-        this.entities,
-      );
-      return `entity-${color}`;
+      return `entity-${getEntityColor(entity)}`;
     },
     showRawInfo() {
       this.$buefy.modal.open({
@@ -208,18 +202,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../../assets/scss/utilities';
+  @import '~@/assets/scss/colors.scss';
 .log-accordion {
   &__menu-title {
     margin: 1rem;
   }
   &__version-name {
-    color: $primary;
+    color: $color-primary;
     font-weight: bold;
-  }
-  &__dropdown {
-    display: flex;
-    flex-wrap: wrap;
   }
 }
 </style>

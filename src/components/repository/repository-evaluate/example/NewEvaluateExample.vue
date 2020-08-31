@@ -21,10 +21,7 @@
                 v-model="text"
                 :is-step-blocked="text.length === 0"
                 :entities="entities"
-                :available-entities="entitiesList"
-                :formatters="textFormatters"
                 :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
-                size="normal"
                 @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
@@ -35,7 +32,7 @@
               id="tour-evaluate-step-3"
               :is-previous-disabled="true"
               :message="errors.non_field_errors"
-              :is-step-blocked="intent.length === 0">
+              :is-step-blocked="(intent || '').length === 0">
               <b-select
                 v-model="intent"
                 :placeholder="$t('webapp.evaluate.intent')"
@@ -102,7 +99,6 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import { mapActions, mapState, mapGetters } from 'vuex';
-import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -116,7 +112,7 @@ export default {
     return {
       textSelected: null,
       text: '',
-      intent: '',
+      intent: null,
       entities: [],
       errors: {},
       submitting: false,
@@ -137,9 +133,6 @@ export default {
     shouldSubmit() {
       return this.isValid && !this.submitting;
     },
-    filteredData() {
-      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
-    },
     validationErrors() {
       const errors = [];
 
@@ -155,15 +148,6 @@ export default {
     },
     isValid() {
       return this.validationErrors.length === 0;
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];
@@ -244,7 +228,7 @@ export default {
           ...this.data,
         });
         this.text = '';
-        this.intent = '';
+        this.intent = null;
         this.entities = [];
         this.submitting = false;
 
@@ -256,7 +240,7 @@ export default {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
         /* istanbul ignore next */
-        if (data) {
+        if (data && data.non_field_errors && data.non_field_errors.length > 0) {
           /* istanbul ignore next */
           this.intentError = data;
           this.$buefy.toast.open({

@@ -6,7 +6,6 @@
       :entities="entities"
       :intent="intent"
       :language="language"
-      :all-entities="allEntities"
       :available-to-example="true"
       :pending-example="pendingExample"
       training

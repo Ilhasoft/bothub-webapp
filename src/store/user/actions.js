@@ -21,7 +21,7 @@ export default {
       }
     }
   },
-  async updateProfile({ commit, getters }, { nickname, forced }) {
+  async updateProfile({ commit, getters }, { nickname, forced, isOrg }) {
     const lastUpdate = getters.getProfileLastUpdate(nickname);
     const profileVersionValidUntil = lastUpdate + (30 * 1000);
     if (profileVersionValidUntil < Date.now() || forced) {
@@ -29,7 +29,7 @@ export default {
         nickname,
         lastUpdate: Date.now(),
       });
-      const response = await user.profile(nickname);
+      const response = isOrg ? await user.org_profile(nickname) : await user.profile(nickname);
       commit(TYPES.SET_PROFILE, {
         nickname,
         data: response.data,
