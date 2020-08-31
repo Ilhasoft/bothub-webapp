@@ -10,8 +10,6 @@
       @itemDeleted="onItemDeleted($event)" />
 
     <br>
-    <button @click="dispatchSave">dispatchSave</button>
-
     <p
       v-if="examplesList && examplesList.empty && textData === ''"
       class="no-examples"

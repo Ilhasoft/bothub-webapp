@@ -307,8 +307,10 @@
       "delete_button":"Deletar",
       "cancel_button":"Cancelar",
       "save_button":"Salvar",
+      "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
-      "intent_error": "Digite uma intenção"
+      "intent_error": "Digite uma intenção",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
       
     },
     "train_modal": {

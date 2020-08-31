@@ -25,7 +25,6 @@
               @exampleDeleted="onExampleDeleted"
               @noPhrases="noPhrasesYet = false"
             />
-            <button @click="increase">increase</button>
             <div class="trainings-repository__new-example__train">
               <div
                 v-if="checkTrainProgress"
@@ -33,10 +32,10 @@
                 <div
                   :style="{ width: getProgress + '%' }"
                   class="trainings-repository__new-example__train__bar"/>
-                <p>{{ getProgress }}% do treinamento concluído</p>
+                <p v-html="$t('webapp.trainings.train_progress', {progress: getProgress})"/>
               </div>
               <div
-                v-else-if="!noPhrasesYet"
+                v-else-if="!noPhrasesYet && !getCheckRepositoryTrain"
                 id="tour-training-step-6"
                 :is-next-disabled="true"
                 :is-previous-disabled="true"
@@ -172,25 +171,22 @@ export default {
       'activeTutorial',
       'getWhichRepositoryIsTrain',
       'getSelectedVersionRepository',
+      'getRepositoriesTrain',
+      'getCheckRepositoryTrain',
     ]),
     checkTrainProgress() {
-      if (this.getWhichRepositoryIsTrain.find(
-        repositoryId => repositoryId.id === this.repository.uuid,
-      )) {
+      if (this.getRepositoriesTrain[this.repository.slug] !== undefined) {
+        this.getRepositoryTrain();
         return true;
       }
       return false;
     },
     getProgress() {
-      const repositoryTrain = this.getWhichRepositoryIsTrain.find(
-        train => train.id === this.repository.uuid,
-      );
-      const findIndex = this.getWhichRepositoryIsTrain.indexOf(repositoryTrain);
-      if (this.getWhichRepositoryIsTrain[findIndex] !== undefined) {
-        return this.getWhichRepositoryIsTrain[findIndex].progress;
-      }
-      return '';
+      return this.getRepositoriesTrain[this.repository.slug].progress;
     },
+  },
+  mounted() {
+    this.setTrainProgress();
   },
   methods: {
     ...mapActions([
@@ -199,11 +195,10 @@ export default {
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
       'setWhichRepositoryIsTrain',
-      'finishRepositoryIsTrain',
-      'increaseTrainProgress',
       'setTrainResponse',
-      'aumenta',
-      'pegar',
+      'setIncreaseTrainProgress',
+      'setTrainProgress',
+      'removeProgressTrain',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -245,56 +240,6 @@ export default {
       });
       this.repositoryStatus = data;
     },
-    increase() {
-      this.pegar();
-      this.aumenta({
-        slug: this.repository.slug,
-        id: this.repository.uuid,
-        progress: 20,
-      });
-    },
-
-    checkWhichStatus() {
-      try {
-        const refreshStatus = setInterval(async () => {
-          await this.getRepositoryStatus();
-          if (this.repositoryStatus.results !== undefined) {
-            if (this.repositoryStatus.results[0].status === 0) {
-              this.increaseTrainProgress({
-                id: this.repository.uuid,
-                progress: 10,
-              });
-              return;
-            }
-            if (this.repositoryStatus.results[0].status === 1) {
-              this.increaseTrainProgress({
-                id: this.repository.uuid,
-                progress: 50,
-              });
-              return;
-            }
-            if (this.repositoryStatus.results[0].status === 2) {
-              this.increaseTrainProgress({
-                id: this.repository.uuid,
-                progress: 100,
-              });
-              await this.finishRepositoryIsTrain({
-                id: this.repository.uuid,
-                version: this.repositoryVersion,
-              });
-              this.setTrainResponse(true);
-              clearInterval(refreshStatus);
-            }
-          } else {
-            clearInterval(refreshStatus);
-            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
-            this.setRepositoryTraining(false);
-          }
-        }, 100000);
-      } catch (error) {
-        this.error = error;
-      }
-    },
     async dispatchTrain() {
       if (!this.authenticated) {
         this.signIn();
@@ -310,6 +255,44 @@ export default {
         this.trainModalOpen = true;
       }
       this.dispatchClick();
+    },
+    async getRepositoryTrain() {
+      await this.getRepositoryStatus();
+      if (this.repositoryStatus.results[0].status === 0) {
+        setTimeout(() => {
+          this.setIncreaseTrainProgress({
+            slug: this.repository.slug,
+            id: this.repository.uuid,
+            progress: 32,
+          });
+        }, 100000);
+      }
+      if (this.repositoryStatus.results[0].status === 1) {
+        setTimeout(() => {
+          this.setIncreaseTrainProgress({
+            slug: this.repository.slug,
+            id: this.repository.uuid,
+            progress: 68,
+          });
+        }, 100000);
+      }
+      if (this.repositoryStatus.results[0].status === 2) {
+        setTimeout(() => {
+          if (this.getRepositoriesTrain[this.repository.slug] !== undefined) {
+            this.setIncreaseTrainProgress({
+              slug: this.repository.slug,
+              id: this.repository.uuid,
+              progress: 100,
+            });
+            this.removeProgressTrain({
+              slug: this.repository.slug,
+            });
+            this.setRepositoryTraining(false);
+            this.setTrainResponse(true);
+            this.noPhrasesYet = true;
+          }
+        }, 100000);
+      }
     },
     closeTrainModal() {
       this.trainModalOpen = false;
@@ -346,24 +329,27 @@ export default {
     },
     async train() {
       this.training = true;
-      this.dispatchFinish();
       try {
         await this.trainRepository({
           repositoryUuid: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
         });
-        this.setRepositoryTraining(true);
+        await this.setRepositoryTraining(true);
         await this.setWhichRepositoryIsTrain({
+          slug: this.repository.slug,
           id: this.repository.uuid,
           version: this.repositoryVersion,
+          progress: 5,
         });
-        await this.checkWhichStatus();
-        this.updateRepository(false);
+        await this.updateRepository(false);
       } catch (e) {
         this.$buefy.toast.open({
-          message: 'Repository not trained :(',
+          message: this.$t('webapp.trainings.default_error'),
           type: 'is-danger',
         });
+      }
+      if (this.repository.ready_for_train) {
+        this.dispatchFinish();
       }
       this.training = false;
     },

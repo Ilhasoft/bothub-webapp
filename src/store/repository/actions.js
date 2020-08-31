@@ -186,27 +186,33 @@ export default {
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
   },
-  setWhichRepositoryIsTrain({ commit }, payload) {
-    commit('addRepositoryIsTrain', payload);
-  },
-  increaseTrainProgress({ commit }, payload) {
-    commit('updateValueProgress', payload);
-  },
-  finishRepositoryIsTrain({ commit }, payload) {
-    commit('removeRepositoryIsTrain', payload);
-  },
   setTrainResponse({ commit }, payload) {
     commit('updateTrainResponse', payload);
   },
-  aumenta({ commit }, payload) {
+  setWhichRepositoryIsTrain({ commit }, payload) {
     const progressTrain = localStorage.getItem('trainProgress') || '{}';
     const progress = JSON.parse(progressTrain);
     progress[payload.slug] = payload;
     localStorage.setItem('trainProgress', JSON.stringify(progress));
+    commit('increaseTrainProgress', progress);
   },
-  pegar({ commit }, payload) {
-    const progress = localStorage.getItem('trainProgress') || '{}';
-    const train = JSON.parse(progress).id;
-    console.log(train);
+  setTrainProgress({ commit }) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const progress = JSON.parse(progressTrain);
+    commit('increaseTrainProgress', progress);
+  },
+  setIncreaseTrainProgress({ commit }, { slug, progress }) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const objectProgress = JSON.parse(progressTrain);
+    objectProgress[slug].progress = progress;
+    localStorage.setItem('trainProgress', JSON.stringify(objectProgress));
+    commit('increaseTrainProgress', objectProgress);
+  },
+  removeProgressTrain({ commit }, payload) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const objectProgress = JSON.parse(progressTrain);
+    delete objectProgress[payload.slug];
+    commit('increaseTrainProgress', objectProgress);
+    localStorage.setItem('trainProgress', JSON.stringify(objectProgress));
   },
 };

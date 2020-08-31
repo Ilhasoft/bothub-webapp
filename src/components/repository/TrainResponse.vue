@@ -7,6 +7,7 @@
       <div
         class="train-response__close">
         <b-icon
+          ref="buttonToClose"
           icon="close"
           class="train-response__close__icon"
           @click.native="closeModal()"/>
@@ -15,6 +16,7 @@
         <h2>{{ $t('webapp.trainings.train_response_title') }}</h2>
         <p>{{ $t('webapp.trainings.train_response_subtitle') }}</p>
         <b-button
+          ref="buttonToClose"
           type="is-primary"
           class="train-response__container__button__style"
           @click="closeModal()">
@@ -30,12 +32,6 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TrainResponse',
-  props: {
-    open: {
-      type: Boolean,
-      default: false,
-    },
-  },
   computed: {
     ...mapGetters(['getTrainResponse']),
   },

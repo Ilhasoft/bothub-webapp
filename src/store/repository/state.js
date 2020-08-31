@@ -9,6 +9,6 @@ export default {
   evaluateLanguage: '',
   updateVersions: false,
   repositoryIsTraining: false,
-  whichRepositoryIsTrain: [],
   TrainResponse: false,
+  whichRepositoryIsTrain: {},
 };

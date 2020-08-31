@@ -28,7 +28,7 @@ export default {
   getNameVersion(state) {
     return state.repositoryVersionName;
   },
-  getRepositoryTraining(state) {
+  getCheckRepositoryTrain(state) {
     return state.repositoryIsTraining;
   },
   getWhichRepositoryIsTrain(state) {
@@ -39,5 +39,8 @@ export default {
   },
   getTrainResponse(state) {
     return state.TrainResponse;
+  },
+  getRepositoriesTrain(state) {
+    return state.whichRepositoryIsTrain;
   },
 };

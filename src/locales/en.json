@@ -305,8 +305,10 @@
       "delete_button":"Delete",
       "cancel_button":"Cancel",
       "save_button":"Save",
+      "train_progress": "% of training completed",
       "empty_text_error": "You need type a text to sentence",
-      "intent_error": "Intent is required"
+      "intent_error": "Intent is required",
+      "default_error": "Something went wrong, try again later."
     },
     "train_modal": {
       "training_status": "Training Status",

@@ -37,7 +37,9 @@
                     :key="i"
                     class="train-modal__wrapper__content__content-requirements__item">
                     <p>
-                      <span>{{ requirement }}</span>
+                      <strong>{{ firstText(requirement) }}</strong>
+                      <br>
+                      <span>{{ secondText(requirement) }}</span>
                     </p>
                     <div>
                       <b-icon
@@ -57,7 +59,9 @@
                     <p
                       v-for="(warning, index) in warnings"
                       :key="index">
-                      <span>{{ warning }}</span>
+                      <strong>{{ firstText(warning) }}</strong>
+                      <br>
+                      <span>{{ secondText(warning) }}</span>
                     </p>
                     <div>
                       <b-icon
@@ -120,7 +124,7 @@ export default {
   computed: {
     ...mapGetters([
       'activeTutorial',
-      'getRepositoryTraining',
+      'getCheckRepositoryTrain',
       'getSelectedVersionRepository',
       'getSelectedVersion',
     ]),
@@ -136,6 +140,14 @@ export default {
       'setRepositoryTraining',
       'getRepositoryStatus',
     ]),
+    firstText(requirement) {
+      const initalText = requirement.split('\n');
+      return initalText[0];
+    },
+    secondText(requirement) {
+      const initalText = requirement.split('\n');
+      return initalText[1];
+    },
     closeModal() {
       if (this.activeTutorial === 'training') {
         this.$emit('resetTutorial');
@@ -224,9 +236,9 @@ export default {
         &__item {
           display: flex;
           justify-content: space-between;
-          padding: 0 1rem;
+          padding: 2.1rem 1rem;
           align-items: center;
-          margin-bottom: 0.6rem;
+          margin: 0 1rem 0.6rem 0;
           height: 65px;
           border: 1.5px solid $color-danger;
           background-color: $color-fake-white;

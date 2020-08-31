@@ -224,6 +224,8 @@ export default {
           ...this.data,
         });
 
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -231,7 +233,6 @@ export default {
 
         this.$emit('created');
         this.$emit('eventStep');
-        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
         return true;
       } catch (error) {
         /* istanbul ignore next */
