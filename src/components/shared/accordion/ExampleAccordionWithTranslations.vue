@@ -49,7 +49,7 @@
         <b-icon
           v-show="!editing"
           :icon="editing ? 'check' : 'pencil'"
-          class="clickable"
+          :class="{ clickable: true, 'icon-disabled': editingTranslation }"
           size="is-small"
           @click.native.stop="handleEdit" />
         <b-icon
@@ -70,7 +70,9 @@
         :key="translation.id" >
         <example-translation
           :all-entities="availableEntities"
+          :disable-edit="editing || editingTranslation && translation.id !== editingTranslation"
           v-bind="translation"
+          @edit="onEditTranslationChange"
           @deleted="translationDeleted(translation.id)"
         />
         <div
@@ -137,6 +139,7 @@ export default {
       highlighted: null,
       translations: null,
       loadingTranslations: false,
+      editingTranslation: null,
     };
   },
   computed: {
@@ -159,6 +162,9 @@ export default {
       'deleteExample',
       'getTranslations',
     ]),
+    onEditTranslationChange({ id, editing }) {
+      this.editingTranslation = editing ? id : null;
+    },
     onSaveList() {
       this.$emit('updateList');
     },

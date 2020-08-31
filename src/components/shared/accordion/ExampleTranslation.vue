@@ -38,7 +38,7 @@
       <div class="translation__icons column is-2">
         <span>
           <b-icon
-            class="clickable"
+            :class="{clickable: true, 'icon-disabled': disableEdit}"
             size="is-small"
             icon="pencil"
             @click.native.stop="editing = true" />
@@ -78,6 +78,10 @@ export default {
     text: {
       type: String,
       default: '...',
+    },
+    disableEdit: {
+      type: Boolean,
+      default: false,
     },
     entities: {
       type: Array,
@@ -126,6 +130,11 @@ export default {
     },
     entitiesList() {
       return getEntitiesList(this.currentEntities);
+    },
+  },
+  watch: {
+    editing() {
+      this.$emit('edit', { id: this.id, editing: this.editing });
     },
   },
   methods: {
