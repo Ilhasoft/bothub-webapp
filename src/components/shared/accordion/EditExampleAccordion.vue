@@ -1,5 +1,5 @@
 <template>
-  <sentence-accordion>
+  <sentence-accordion :open.sync="isOpen">
     <language-badge
       slot="check"
       :language="languageEdit"
@@ -144,6 +144,25 @@ export default {
     LanguageBadge,
   },
   extends: EditExampleBase,
+  props: {
+    open: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      isOpen: this.open,
+    };
+  },
+  watch: {
+    open() {
+      this.isOpen = this.open;
+    },
+    isOpen() {
+      this.$emit('update:open', this.isOpen);
+    },
+  },
 };
 </script>
 

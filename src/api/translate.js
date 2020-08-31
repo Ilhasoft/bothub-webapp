@@ -14,6 +14,15 @@ export default {
       },
     );
   },
+  edit(translationId, language, text, entities) {
+    return request.$http.patch(
+      `/v2/repository/translation/${translationId}/`,
+      {
+        text,
+        entities,
+      },
+    );
+  },
   translations(repositoryUuid, repositoryVersion, query = {}, limit) {
     return new utils.Page('/v2/repository/translation/', limit, {
       repository_uuid: repositoryUuid, repository_version: repositoryVersion, ...query,

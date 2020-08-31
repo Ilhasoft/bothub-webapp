@@ -1,5 +1,16 @@
 <template>
-  <div class="translation">
+  <edit-example-translation
+    v-if="editing"
+    :id="id"
+    :entities="entities"
+    :text-to-edit="text"
+    :sentence-id="id"
+    :language-edit="language"
+    :get-all-entities="allEntities"
+    @cancel="editing = false" />
+  <div
+    v-else
+    class="translation" >
     <div class="columns">
       <div class="column is-1 translation__language">
         <language-badge
@@ -29,7 +40,8 @@
           <b-icon
             class="clickable"
             size="is-small"
-            icon="pencil" />
+            icon="pencil"
+            @click.native.stop="editing = true" />
           <b-icon
             class="clickable"
             size="is-small"
@@ -47,6 +59,7 @@ import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+import EditExampleTranslation from '@/components/shared/accordion/EditExampleTranslation';
 import { mapActions } from 'vuex';
 
 export default {
@@ -55,6 +68,7 @@ export default {
     HighlightedText,
     EntityTag,
     LanguageBadge,
+    EditExampleTranslation,
   },
   props: {
     id: {
@@ -89,6 +103,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    allEntities: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
@@ -97,6 +115,7 @@ export default {
       showingOriginal: false,
       deleteDialog: null,
       highlighted: null,
+      editing: false,
     };
   },
   computed: {

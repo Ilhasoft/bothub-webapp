@@ -1,6 +1,7 @@
 <template>
-  <edit-example-accordion
-    v-if="editing"
+  <component
+    :is="editing ? 'edit-example-accordion' : 'sentence-accordion'"
+    :open.sync="open"
     :entities="entities"
     :intent-to-edit="intent"
     :text-to-edit="text"
@@ -9,10 +10,8 @@
     :get-all-entities="allEntities"
     edit-example
     @cancel="editing = false"
-    @saveList="$emit('updateList')"/>
-  <sentence-accordion
-    v-else
-    :open.sync="open">
+    @saveList="onSaveList"
+  >
     <div slot="check">
       <language-badge
         :language="language"
@@ -70,6 +69,7 @@
         v-for="(translation, index) in (translations || [])"
         :key="translation.id" >
         <example-translation
+          :all-entities="availableEntities"
           v-bind="translation"
           @deleted="translationDeleted(translation.id)"
         />
@@ -78,7 +78,7 @@
           class="example-item__separator" />
       </div>
     </div>
-  </sentence-accordion>
+  </component>
 </template>
 
 <script>
@@ -143,6 +143,9 @@ export default {
     allEntities() {
       return this.repository.entities.map(entity => entity.value);
     },
+    availableEntities() {
+      return this.entities.map(entity => entity.entity);
+    },
   },
   watch: {
     open() {
@@ -156,6 +159,9 @@ export default {
       'deleteExample',
       'getTranslations',
     ]),
+    onSaveList() {
+      this.$emit('updateList');
+    },
     translationDeleted(id) {
       this.translations = this.translations.filter(translation => translation.id !== id);
     },

@@ -7,6 +7,12 @@ export default {
     const response = await translate.new(exampleId, language, text, entities);
     return response;
   },
+  async editTranslation(store, {
+    translationId, language, text, entities,
+  }) {
+    const response = await translate.edit(translationId, language, text, entities);
+    return response;
+  },
   async getTranslations(store, {
     limit = 20, repositoryUuid, repositoryVersion, ...query
   }) {
