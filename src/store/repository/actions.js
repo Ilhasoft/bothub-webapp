@@ -137,6 +137,9 @@ export default {
       newRole,
     );
   },
+  async setRepositoryTraining({ commit }, value) {
+    commit('updateRepositoryTraining', value);
+  },
   repositoryAuthorizationList(store, { repositoryUuid, limit = 20 }) {
     return repository.getAuthorizationList(repositoryUuid, limit);
   },
@@ -182,5 +185,34 @@ export default {
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
+  },
+  setTrainResponse({ commit }, payload) {
+    commit('updateTrainResponse', payload);
+  },
+  setWhichRepositoryIsTrain({ commit }, payload) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const progress = JSON.parse(progressTrain);
+    progress[payload.slug] = payload;
+    localStorage.setItem('trainProgress', JSON.stringify(progress));
+    commit('increaseTrainProgress', progress);
+  },
+  setTrainProgress({ commit }) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const progress = JSON.parse(progressTrain);
+    commit('increaseTrainProgress', progress);
+  },
+  setIncreaseTrainProgress({ commit }, { slug, progress }) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const objectProgress = JSON.parse(progressTrain);
+    objectProgress[slug].progress = progress;
+    localStorage.setItem('trainProgress', JSON.stringify(objectProgress));
+    commit('increaseTrainProgress', objectProgress);
+  },
+  removeProgressTrain({ commit }, payload) {
+    const progressTrain = localStorage.getItem('trainProgress') || '{}';
+    const objectProgress = JSON.parse(progressTrain);
+    delete objectProgress[payload.slug];
+    commit('increaseTrainProgress', objectProgress);
+    localStorage.setItem('trainProgress', JSON.stringify(objectProgress));
   },
 };

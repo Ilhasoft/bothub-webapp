@@ -1,87 +1,64 @@
+import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import BH from 'bh';
 import TrainResponse from '@/components/repository/TrainResponse';
 import applyFilters from '@/utils/filters';
 
 
 const localVue = createLocalVue();
-localVue.use(BH);
 applyFilters(localVue);
+localVue.use(Vuex);
 
 describe('TrainResponse.vue', () => {
   let wrapper;
+  let store;
+  let getters;
   beforeEach(() => {
+    getters = {
+      getTrainResponse: () => (true),
+    };
+    store = new Vuex.Store({
+      modules: {
+        Repository: {
+          getters,
+        },
+      },
+    });
     wrapper = shallowMount(TrainResponse, {
       localVue,
+      store,
       mocks: {
         $t: () => 'some specific text',
       },
-      propsData: {
-        open: true,
-        readyForTrain: true,
-        requirementsToTrain: {},
-        languagesReadyForTrain: {
-          en: true,
-        },
-        languagesWarnings: {},
-        training: false,
-      },
     });
+  });
+
+  test('mount response modal', () => {
+    expect(wrapper.vm).toBeDefined();
   });
 
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('add requirements', () => {
+  describe('check initial modal state', () => {
+    let trainResponse;
     beforeEach(() => {
-      wrapper.setProps({
-        requirementsToTrain: {
-          en: [
-            'requirement 1',
-          ],
-        },
-      });
+      trainResponse = getters.getTrainResponse();
     });
 
-    test('renders correctly', () => {
-      expect(wrapper).toMatchSnapshot();
+    test('inital state should be true', () => {
+      expect(trainResponse).toBeTruthy();
     });
   });
 
-  describe('add warning', () => {
+  describe('on click to close modal', () => {
+    let trainResponse;
     beforeEach(() => {
-      wrapper.setProps({
-        languagesWarnings: {
-          en: [
-            'warning 1',
-          ],
-        },
-      });
+      const closeModal = wrapper.find({ ref: 'buttonToClose' });
+      closeModal.trigger('click');
     });
-
-    test('renders correctly', () => {
-      expect(wrapper).toMatchSnapshot();
-    });
-  });
-
-  describe('close modal via prop', () => {
-    beforeEach(() => {
-      wrapper.setProps({ open: false });
-    });
-
-    test('event update:open was emitted', () => {
-      expect(wrapper.emitted('update:open')).toBeDefined();
-    });
-  });
-
-  describe('close modal openValue changed', () => {
-    beforeEach(() => {
-      wrapper.setData({ openValue: false });
-    });
-
-    test('event update:open was emitted', () => {
-      expect(wrapper.emitted('update:open')).toBeDefined();
+    test('should be false when closed', () => {
+      expect(trainResponse).toBeFalsy();
     });
   });
 });
