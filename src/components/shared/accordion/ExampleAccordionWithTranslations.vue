@@ -8,6 +8,7 @@
     :sentence-id="id"
     :language-edit="language"
     :get-all-entities="allEntities"
+    align="top"
     edit-example
     @cancel="editing = false"
     @saveList="onSaveList"

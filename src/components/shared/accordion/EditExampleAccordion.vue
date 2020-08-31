@@ -1,5 +1,7 @@
 <template>
-  <sentence-accordion :open.sync="isOpen">
+  <sentence-accordion
+    :open.sync="isOpen"
+    align="top">
     <language-badge
       slot="check"
       :language="languageEdit"
@@ -77,13 +79,14 @@
               :message="errors.entities"
               type="is-danger" />
           </div>
+          <div class="edit-sentence__icon-container">
+            <b-icon
+              :class="{clickable: true, 'icon-disabled': textSelected === null}"
+              icon="plus-circle"
+              @click.native.stop="addPendingEntity"
+            />
+          </div>
         </b-field>
-        <b-icon
-          :disabled="textSelected === null"
-          icon="plus"
-          class="clickable"
-          @click.native.stop="addPendingEntity"
-        />
       </form>
     </div>
 
@@ -93,34 +96,35 @@
         :message="errors.non_field_errors"
         :type="{ 'is-danger': errors.non_field_errors && errors.non_field_errors.length > 0 }"
         :label="`${$t('webapp.example.intent')}:`"
-        horizontal>
+        horizontal
+        addons>
         <b-autocomplete
           v-model="intent"
           :data="repository.intents_list || []"
           :placeholder="$t('webapp.example.intent')"
           dropdown-position="bottom"
-          size="is-small"
           open-on-focus
           @input="intent = intentFormatters(intent)" />
-      </b-field>
-      <div>
-        <b-icon
-          icon="close"
-          class="clickable"
-          size="is-small"
-          @click.native.stop="cancelEditSentence" />
 
-        <b-tooltip
-          :active="!isValid"
-          :label="validationErrorsString">
+        <div class="edit-sentence__icon-container edit-sentence__icon-container--intent">
           <b-icon
-            :disabled="!isValid || submitting"
-            :icon="submitting ? 'refresh' : 'check'"
-            :class="{clickable: true, 'icon-spin': submitting }"
+            icon="close"
+            class="clickable"
             size="is-small"
-            @click.native.stop="onSubmit" />
-        </b-tooltip>
-      </div>
+            @click.native.stop="cancelEditSentence" />
+
+          <b-tooltip
+            :active="!isValid"
+            :label="validationErrorsString">
+            <b-icon
+              :icon="submitting ? 'refresh' : 'check'"
+              :class="{clickable: true, 'icon-spin icon-disabled': submitting }"
+              size="is-small"
+              @click.native.stop="onSubmit" />
+          </b-tooltip>
+        </div>
+
+      </b-field>
     </div>
 
     <div slot="body">
@@ -169,9 +173,13 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 
+.icon {
+  color: $color-grey-dark;
+}
+
 .edit-sentence {
     width: 100%;
-    margin: 1rem;
+    margin: 0 1rem 1rem 0;
 
     &__input {
         margin-right: 0.5rem;
@@ -179,5 +187,20 @@ export default {
             font-size: 12px;
         }
     }
+
+    &__icon-container {
+
+      .icon {
+        margin-top: 1.75rem;
+      }
+
+      &--intent {
+        display: flex;
+        align-items: center;
+        .icon {
+          margin-top: 0.5rem;
+        }
+    }
+  }
 }
 </style>

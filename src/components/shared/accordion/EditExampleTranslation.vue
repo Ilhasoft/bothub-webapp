@@ -108,17 +108,13 @@
             size="is-small"
             @click.native.stop="cancelEditSentence" />
 
-          <b-tooltip
-            :active="!isValid"
-            :label="validationErrorsString">
-            <b-icon
-              :icon="submitting ? 'refresh' : 'check'"
-              :class="{clickable: true,
-                       'icon-spin': submitting,
-                       'icon-disabled': !isValid || submitting }"
-              size="is-small"
-              @click.native.stop="onSubmit" />
-          </b-tooltip>
+          <b-icon
+            :icon="submitting ? 'refresh' : 'check'"
+            :class="{clickable: true,
+                     'icon-spin': submitting,
+                     'icon-disabled': submitting }"
+            size="is-small"
+            @click.native.stop="onSubmit" />
         </span>
       </div>
     </div>
@@ -133,7 +129,7 @@ import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
-  name: 'EditExampleAccordion',
+  name: 'EditExampleTranslation',
   components: {
     SentenceAccordion,
     ExampleTextWithHighlightedEntitiesInput,
@@ -174,11 +170,14 @@ export default {
 }
 
 .translation {
-  padding: 0.7rem;
+  padding: 0.75rem 0.75rem 1.5rem 0.75rem;
 
     &__icon-container {
       display: flex;
       align-items: center;
+      .icon {
+        margin-top: 1rem;
+      }
     }
 
     &__input {
