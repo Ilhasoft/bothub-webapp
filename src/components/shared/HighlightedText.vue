@@ -1,7 +1,7 @@
 <template>
   <div class="highlighted">
     <div class="highlighted-base">{{ text }}</div>
-    <div class="highlighted-text">{{ text }}</div>
+    <div :class="['highlighted-text', `highlighted-text--size-${size}`]">{{ text }}</div>
     <div
       v-for="(entity, i) in entitiesBlocks"
       :key="i"
