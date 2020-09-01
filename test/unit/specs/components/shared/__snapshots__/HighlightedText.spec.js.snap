@@ -3,7 +3,7 @@
 exports[`HighlightedText.vue renders correctly 1`] = `
 <div class="highlighted">
   <div class="highlighted-base">text</div>
-  <div class="highlighted-text">text</div>
+  <div class="highlighted-text highlighted-text--size-normal">text</div>
   <div class="highlighted-entity"><span class="highlighted-entity-before highlighted-text--size-normal"></span> <span class="highlighted-entity-text highlighted-text--size-normal entity-mediterranean-sea">
 
     </span></div>
