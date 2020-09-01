@@ -114,9 +114,6 @@ export default {
   },
   data() {
     return {
-      loadingOriginal: false,
-      original: null,
-      showingOriginal: false,
       deleteDialog: null,
       highlighted: null,
       editing: false,

@@ -82,7 +82,7 @@
           <div class="edit-sentence__icon-container">
             <b-icon
               :class="{clickable: true, 'icon-disabled': textSelected === null}"
-              icon="plus-circle"
+              icon="card-plus"
               @click.native.stop="addPendingEntity"
             />
           </div>

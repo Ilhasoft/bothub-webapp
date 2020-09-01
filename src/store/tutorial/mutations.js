@@ -14,7 +14,4 @@ export default {
   tutorialsDone(state, name) {
     state.finishedTutorial = name;
   },
-  updateRepositoryTraining(state, value) {
-    state.repositoryIsTraining = value;
-  },
 };

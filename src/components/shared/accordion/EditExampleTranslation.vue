@@ -93,7 +93,7 @@
                 :disabled="textSelected === null"
                 :class="{clickable: true,
                          'icon-disabled': textSelected === null}"
-                icon="plus-circle"
+                icon="card-plus"
                 @click.native.stop="addPendingEntity"
               />
             </div>

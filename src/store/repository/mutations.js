@@ -39,4 +39,13 @@ export default {
       state.repositoryVersionName = value.version.name;
     }
   },
+  updateRepositoryTraining(state, value) {
+    state.repositoryIsTraining = value;
+  },
+  updateTrainResponse(state, value) {
+    state.TrainResponse = value;
+  },
+  increaseTrainProgress(state, value) {
+    state.whichRepositoryIsTrain = value;
+  },
 };

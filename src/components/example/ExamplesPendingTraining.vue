@@ -6,16 +6,16 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      :pending-example="pendingExample"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)" />
+
     <br>
     <p
-      v-if="examplesList && examplesList.empty && textData === ''"
+      v-if="examplesList && examplesList.empty && !isTrain"
       class="no-examples"
-      v-html="$t('webapp.trainings.no_sentences')"/>
-    <p
-      v-if="textData !== '' && examplesList.empty"
-      v-html="$t('webapp.trainings.no_train_sentence')"/>
+      v-html="$t('webapp.trainings.no_sentences_to_train')"/>
+
   </div>
 </template>
 
@@ -23,14 +23,13 @@
 import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
-import ExampleAccordionWithTranslations from '@/components/shared/accordion/ExampleAccordionWithTranslations';
 
 const components = {
   PaginatedList,
 };
 
 export default {
-  name: 'ExamplesList',
+  name: 'ExamplesPendingTraining',
   components,
   props: {
     query: {
@@ -39,25 +38,28 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 20,
+      default: 12,
     },
     update: {
       type: Boolean,
       default: false,
     },
-    textData: {
-      type: String,
-      default: '',
-    },
-    translationData: {
+    pendingExample: {
       type: Boolean,
-      default: null,
+      default: true,
+    },
+    isTrain: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
     return {
       examplesList: null,
-      dateLastTrain: '',
+      exampleItemElem: ExampleItem,
+      repositoryStatus: null,
+      createdAtLastTrain: '',
+      dateNow: '',
     };
   },
   computed: {
@@ -65,9 +67,6 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',
     }),
-    exampleItemElem() {
-      return this.translationData ? ExampleAccordionWithTranslations : ExampleItem;
-    },
   },
   watch: {
     query() {
@@ -94,16 +93,24 @@ export default {
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
       if (this.repositoryStatus.count !== 0) {
-        this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        const date = new Date();
+        this.createdAtLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        this.dateNow = date.toISOString().replace(/[A-Za-z]/g, ' ');
       }
+
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
           query: this.query,
           limit: this.perPage,
-          endCreatedAt: this.dateLastTrain,
+          startCreatedAt: this.createdAtLastTrain,
+          endCreatedAt: this.dateNow,
         });
+        const hasPhrases = await this.examplesList.updateItems();
+        if (hasPhrases.length !== 0) {
+          this.$emit('noPhrases');
+        }
       }
     },
     async getRepositoryStatus() {
@@ -122,6 +129,6 @@ export default {
 
 <style lang="scss" scoped>
 .no-examples {
-  margin: 8px;
+  margin: 0;
 }
 </style>

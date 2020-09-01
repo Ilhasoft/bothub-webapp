@@ -26,10 +26,12 @@ export default {
   delete(exampleId) {
     return request.$http.delete(`/v2/repository/example/${exampleId}/`);
   },
-  search(repositoryUuid, version, query = {}, limit = 20) {
+  search(repositoryUuid, version, query = {}, limit = 20, startCreatedAt, endCreatedAt) {
     return new utils.Page('/v2/repository/examples/', limit, {
       repository_uuid: repositoryUuid,
       repository_version: version,
+      start_created_at: startCreatedAt,
+      end_created_at: endCreatedAt,
       ...query,
     });
   },

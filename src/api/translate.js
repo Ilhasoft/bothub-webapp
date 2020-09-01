@@ -14,7 +14,7 @@ export default {
       },
     );
   },
-  edit(translationId, language, text, entities) {
+  edit(translationId, text, entities) {
     return request.$http.patch(
       `/v2/repository/translation/${translationId}/`,
       {

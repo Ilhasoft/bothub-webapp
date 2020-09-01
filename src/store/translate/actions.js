@@ -8,9 +8,9 @@ export default {
     return response;
   },
   async editTranslation(store, {
-    translationId, language, text, entities,
+    translationId, text, entities,
   }) {
-    const response = await translate.edit(translationId, language, text, entities);
+    const response = await translate.edit(translationId, text, entities);
     return response;
   },
   async getTranslations(store, {

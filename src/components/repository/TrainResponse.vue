@@ -1,147 +1,100 @@
 <template>
-  <bh-modal
-    :open.sync="openValue"
-    :title="$t('webapp.trainings.train_response_title')">
-    <bh-card
-      v-if="!!trainResponse"
-      no-border>
-      <div class="bh-grid bh-grid--column align">
-        <div class="bh-grid__item bh-grid__item--nested text-center">
-          <div class="bh-grid">
-            <div class="bh-grid__item">
-              <b-icon
-                class="text-color-primary"
-                icon="check"
-                type="is-success"
-                size="is-small" />
-              <span>{{ $t('webapp.trainings.trained') }}</span>
-            </div>
-            <div class="bh-grid__item">
-              <b-icon
-                class="text-color-warning loading"
-                icon="sync"
-                size="is-small" />
-              <span>{{ $t('webapp.trainings.processing') }}</span>
-            </div>
-            <div class="bh-grid__item">
-              <b-icon
-                class="text-color-info"
-                icon="dots-horizontal"
-                type="is-info"
-                size="is-small" />
-              <span>{{ $t('webapp.trainings.no_changes') }}</span>
-            </div>
-            <div class="bh-grid__item">
-              <b-icon
-                class="text-color-danger"
-                icon="close"
-                type="is-danger"
-                size="is-small" />
-              <span>{{ $t('webapp.trainings.failed') }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="bh-grid__item">
-          <table>
-            <tbody>
-              <tr
-                v-for="(data, language) in trainResponse.languages_report"
-                :key="language">
-                <td>{{ language | languageVerbose }}</td>
-                <td class="text-right">
-                  <b-icon
-                    v-if="data.status === 'trained'"
-                    class="text-color-primary"
-                    icon="check"
-                    size="is-small" />
-                  <b-icon
-                    v-else-if="data.status === 'not_ready_for_train'"
-                    class="text-color-info"
-                    icon="dots-horizontal"
-                    size="is-small" />
-                  <b-icon
-                    v-else-if="data.status === 'processing'"
-                    class="text-color-warning loading"
-                    icon="sync"
-                    size="is-small" />
-                  <div v-else-if="data.status === 'failed'">
-                    <div>
-                      <b-icon
-                        icon="close"
-                        class="text-color-danger"
-                        size="is-small" />
-                    </div>
-                    <small>{{ data.error }}</small>
-                  </div>
-                  <span v-else>{{ data.status }}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="bh-grid__item text-center">
-          <bh-button
-            ref="closeBtn"
-            primary
-            @click="closeModal()">
-            <span>Ok</span>
-          </bh-button>
-        </div>
+  <b-modal
+    :active="getTrainResponse"
+    :width="567"
+    :can-cancel="false">
+    <div class="train-response">
+      <div
+        class="train-response__close">
+        <b-icon
+          ref="buttonToClose"
+          icon="close"
+          class="train-response__close__icon"
+          @click.native="closeModal()"/>
       </div>
-    </bh-card>
-  </bh-modal>
+      <div class="train-response__container">
+        <h2>{{ $t('webapp.trainings.train_response_title') }}</h2>
+        <p>{{ $t('webapp.trainings.train_response_subtitle') }}</p>
+        <b-button
+          ref="buttonToClose"
+          type="is-primary"
+          class="train-response__container__button__style"
+          @click="closeModal()">
+          <span>{{ $t('webapp.train_modal.ok') }}</span>
+        </b-button >
+      </div>
+    </div>
+  </b-modal>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'TrainResponse',
-  props: {
-    trainResponse: {
-      type: Object,
-      default: () => ({}),
-    },
-    open: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      openValue: this.open,
-    };
-  },
-  watch: {
-    open(value) {
-      this.openValue = value;
-    },
-    openValue(value) {
-      this.$emit('update:open', value);
-    },
+  computed: {
+    ...mapGetters(['getTrainResponse']),
   },
   methods: {
+    ...mapActions([
+      'setTrainResponse',
+    ]),
     closeModal() {
-      this.$emit('update:open', false);
+      this.setTrainResponse(false);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-table {
-  width: 70%;
-  margin: 1rem auto;
-}
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
-.loading {
-  animation-name: spin;
-  animation-duration: 2000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
+  .train-response{
+    height: 301px;
+    background-color: $color-white;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 8px;
 
-@keyframes spin {
-    from {transform:rotate(0deg);}
-    to {transform:rotate(360deg);}
-}
+    &__close{
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 1rem 1rem 0 0;
+      cursor: pointer;
+      &__icon{
+        color: #c7c5c5;
+      }
+    }
+
+    &__container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 2rem;
+
+      h2{
+        font-weight: $font-weight-bolder;
+      }
+
+      p{
+        padding: 0.5rem 3rem 1.6rem;
+        text-align: center;
+      }
+
+      &__button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      &__style{
+        box-shadow: 0px 3px 6px #00000029;
+        width: 96px;
+        height: 43px;
+        font-weight: $font-weight-bolder;
+      }
+      }
+    }
+  }
 </style>
