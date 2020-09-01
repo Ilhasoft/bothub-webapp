@@ -4,7 +4,7 @@
       v-for="entity in preparedEntities"
       :key="entity.localId"
       v-model="entity.entity"
-      :available-entities="entitiesOptions"
+      :available-entities="allEntities"
       :entity-class="getEntityClass(entity)"
       :text="text"
       :selected-text-start="entity.start"
@@ -80,7 +80,6 @@ export default {
   data() {
     return {
       entities: _.cloneDeep(this.value),
-      allEntities: [],
       errors: '',
       blockedNextStepTutorial: false,
     };
@@ -89,9 +88,6 @@ export default {
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
     }),
-    entitiesOptions() {
-      return this.allEntities || [];
-    },
     textSelectedValue() {
       if (!this.textSelected) {
         return null;
@@ -103,6 +99,10 @@ export default {
     preparedEntities() {
       return [...this.entities].sort((a, b) => (a.start - b.start));
     },
+    allEntities() {
+      if (!(this.repository && this.repository.entities)) return [];
+      return this.repository.entities.map(entity => entity.value);
+    },
   },
   watch: {
     preparedEntities(value) {
@@ -112,25 +112,7 @@ export default {
       this.validateEntities(text, oldText);
     },
   },
-  mounted() {
-    this.getEntitiesName();
-  },
   methods: {
-    ...mapActions([
-      'getEntities',
-      'getAllEntities',
-    ]),
-    async getEntitiesName() {
-      try {
-        const entities = await this.getAllEntities({
-          repositoryUuid: this.repository.uuid,
-          repositoryVersion: this.repository.version_default.id,
-        });
-        this.allEntities = entities.data.results.map(entity => entity.value);
-      } catch (error) {
-        this.errors = error;
-      }
-    },
     removeEntity(entity) {
       this.entities = this.entities.filter(e => e.localId !== entity.localId);
     },
