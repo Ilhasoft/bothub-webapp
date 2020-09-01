@@ -180,6 +180,7 @@ export default {
       const translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         repositoryVersion: this.repositoryVersion,
+        original_example_id: this.id,
       });
 
       try {

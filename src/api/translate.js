@@ -14,12 +14,14 @@ export default {
       },
     );
   },
-  edit(translationId, text, entities) {
+  edit(translationId, text, entities, language, originalExample) {
     return request.$http.patch(
       `/v2/repository/translation/${translationId}/`,
       {
         text,
         entities,
+        language,
+        original_example: originalExample,
       },
     );
   },

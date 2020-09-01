@@ -362,7 +362,8 @@
       "all": "All languages",
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
-      "no_translated": "No translated languages"
+      "no_translated": "No translated languages",
+      "invalid_entities": "Entities do not match the original translation's"
     },
     "orgs": {
       "owner": "Owned by",

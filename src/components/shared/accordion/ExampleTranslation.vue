@@ -4,7 +4,7 @@
     :id="id"
     :entities="entities"
     :text-to-edit="text"
-    :sentence-id="id"
+    :sentence-id="original_example"
     :language-edit="language"
     :get-all-entities="allEntities"
     @cancel="editing = false" />
@@ -19,12 +19,22 @@
       <div class="column translation__text__container">
         <highlighted-text
           :text="text"
-          :entities="currentEntities"
+          :entities="entities"
           :highlighted="highlighted"
           class="translation__text" />
         <div
           v-if="entitiesList.length > 0"
           class="translation__entities">
+          <b-tooltip
+            v-if="!has_valid_entities"
+            :label="$t('webapp.translate.invalid_entities')"
+            multilined
+            type="is-warning">
+            <b-icon
+              size="is-small"
+              class="is-warining"
+              icon="alert" />
+          </b-tooltip>
           <entity-tag
             v-for="(entity, i) in entitiesList"
             :key="i"
@@ -55,7 +65,6 @@
 
 <script>
 import { getEntitiesList } from '@/utils';
-import { getEntityColor } from '@/utils/entitiesColors';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
@@ -111,6 +120,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    has_valid_entities: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -120,13 +133,8 @@ export default {
     };
   },
   computed: {
-    currentEntities() {
-      return this.showingOriginal
-        ? this.original.entities
-        : this.entities;
-    },
     entitiesList() {
-      return getEntitiesList(this.currentEntities);
+      return getEntitiesList(this.entities);
     },
   },
   watch: {
@@ -139,14 +147,6 @@ export default {
       'getExample',
       'deleteTranslation',
     ]),
-    getEntityClass(entity) {
-      const color = getEntityColor(
-        entity,
-        this.repository.entities || this.repository.entities_list,
-        this.currentEntities,
-      );
-      return `entity-${color}`;
-    },
     deleteThisTranslation() {
       return new Promise((resolve, reject) => {
         this.deleteDialog = this.$buefy.dialog.confirm({
@@ -171,6 +171,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+
+.is-warning {
+  color: $color-warning;
+}
 
 .translation {
   padding: 0.7rem;

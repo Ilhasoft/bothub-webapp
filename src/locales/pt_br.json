@@ -365,7 +365,8 @@
       "all": "Todos os idiomas",
       "search": "Pesquisar",
       "showing": "Mostrando {count} de {available} idiomas disponíveis",
-      "no_translated": "Nenhum idioma traduzido"
+      "no_translated": "Nenhum idioma traduzido",
+      "invalid_entities": "As entidades não correspondem às da frase original"
     },
     "orgs": {
       "owner": "Pertence a",

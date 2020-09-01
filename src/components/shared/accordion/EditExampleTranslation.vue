@@ -148,11 +148,18 @@ export default {
     ]),
     async onSubmit() {
       this.submitting = true;
+      const entities = this.allEntities.map(({
+        start, end, entity, value,
+      }) => ({
+        start, end, entity, value,
+      }));
       try {
         await this.editTranslation({
           translationId: this.id,
           text: this.text,
-          entities: this.entities,
+          entities,
+          language: this.languageEdit,
+          originalExample: this.sentenceId,
         });
       } finally {
         this.submitting = false;
