@@ -16,7 +16,7 @@
             <p class="org-card__attrs__line"> <b-icon
               size="is-medium"
               class="org-card__icon"
-              icon="brain"/> {{ $tc('webapp.orgs.repositories', count_repositories) }} </p>
+              icon="head-snowflake"/> {{ $tc('webapp.orgs.repositories', count_repositories) }} </p>
             <p class="org-card__attrs__line"> <b-icon
               size="is-medium"
               class="org-card__icon"

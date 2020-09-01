@@ -11,7 +11,7 @@
         :errors="errors"
         hide-help
         class="field"/>
-      <div class="control has-text-centered">
+      <div>
         <b-button
           :disabled="submitting"
           native-type="submit"
@@ -54,7 +54,7 @@ export default {
   computed: {
     filteredSchema() {
       if (!this.formSchema) return null;
-      const { description, ...schema } = this.formSchema;
+      const { nickname, description, ...schema } = this.formSchema;
       description.type = 'text';
       return { ...schema, description };
     },
@@ -90,5 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .submit-button {
+    padding: 0 3rem;
+  }
 </style>

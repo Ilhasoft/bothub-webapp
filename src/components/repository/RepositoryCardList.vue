@@ -83,14 +83,13 @@ export default {
           limit: this.limit,
         });
       }
+      this.$emit('cardList', this.repositoryList);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
-
 
 .repository-card-list {
   &__item {

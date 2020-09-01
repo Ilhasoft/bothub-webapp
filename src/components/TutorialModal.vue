@@ -106,6 +106,8 @@ export default {
       repositoryStatus: {},
       typeNotification: '',
       autoCloseNotification: false,
+      repository_uuid: '',
+      repository_version: 0,
       confettiConfig: {
         angle: 90,
         spread: 200,
@@ -131,7 +133,7 @@ export default {
       'getFinalMessage',
       'getSelectedVersion',
       'getSelectedVersionRepository',
-      'getRepositoryTraining',
+      'getCheckRepositoryTrain',
     ]),
     computedList() {
       return this.list.map(item => ({
@@ -150,7 +152,7 @@ export default {
         this.finished = { ...this.finishedTutorials };
         this.nickname = this.myProfile.nickname;
         this.checkIfDoneTutorial();
-        if (this.getRepositoryTraining) {
+        if (this.getCheckRepositoryTrain) {
           this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
           this.checkWhichStatus();
         }
@@ -170,6 +172,7 @@ export default {
       'getRepositoryStatus',
       'setRepositoryTraining',
       'setFinalizationMessage',
+      'getRepositoryVersion',
     ]),
     async updateMyRepositories() {
       try {
@@ -181,10 +184,18 @@ export default {
           return;
         }
         this.repositoryTutorial = data.results[0].slug;
+        this.repository_uuid = data.results[0].uuid;
+        this.checkRepositoryVersion();
         this.hasIntelligence();
       } catch (error) {
         this.error = error;
       }
+    },
+    async checkRepositoryVersion() {
+      const { data } = await this.getRepositoryVersion({
+        query: { repository: this.repository_uuid },
+      });
+      this.repository_version = data.results[0].id;
     },
     hasIntelligence() {
       if (this.repositoryTutorial !== null) {
@@ -216,17 +227,16 @@ export default {
     },
     async getTrainingStatus() {
       const { data } = await this.getRepositoryStatus({
-        repositoryUUID: this.getSelectedVersionRepository,
-        repositoryVersion: this.getSelectedVersion,
+        repositoryUUID: this.repository_uuid,
+        repositoryVersion: this.repository_version,
       });
       this.repositoryStatus = data;
-      return this.repositoryStatus;
     },
     checkWhichStatus() {
       try {
         const refreshStatus = setInterval(async () => {
+          await this.getTrainingStatus();
           if (this.repositoryStatus.count !== 0) {
-            await this.getTrainingStatus();
             if (this.repositoryStatus.results[0].status === 2) {
               clearInterval(refreshStatus);
               await this.setRepositoryTraining(false);
@@ -238,6 +248,10 @@ export default {
               await this.setRepositoryTraining(false);
               this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
             }
+          } else {
+            clearInterval(refreshStatus);
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            await this.setRepositoryTraining(false);
           }
         }, 100000);
       } catch (error) {
@@ -261,10 +275,9 @@ export default {
         if (target === 'home' || target === 'new') {
           if (target === 'home') return;
           this.setTutorialActive(name);
-          if (this.$router.currentRoute.name !== 'home') {
-            this.setTutorialInactive();
-            return;
-          }
+          this.$router.push({
+            name: 'home',
+          });
           this.closeTutorialMenu();
         } else if (Object.keys(this.finished).includes(previous)
         || (previous === 'create_intelligence' && this.repositoryTutorial !== null)) {
@@ -277,8 +290,12 @@ export default {
             this.goToTutorial(name, target);
             return;
           }
+          if (this.repositoryStatus.length !== 0 && this.repositoryStatus.results[0].status === 3) {
+            this.setNotificationAlert('is-danger', true, this.$t('webapp.tutorial.training_error'));
+            return;
+          }
         } else {
-          if (this.getRepositoryTraining) {
+          if (this.getCheckRepositoryTrain) {
             this.setNotificationAlert('is-warning', false, this.$t('webapp.tutorial.training_wait'));
             return;
           }

@@ -1,17 +1,15 @@
 <template>
   <div class="edit-sentence">
     <form>
-      <div class="bh-grid">
-        <div class="bh-grid__item--grow-3 edit-sentence__input">
+      <div class="columns edit-sentence__wrapper">
+        <div class="column is-7">
           <b-field
             :errors="errors.text || errors.language"
             :label="$t('webapp.example.sentence')">
             <example-text-with-highlighted-entities-input
               ref="textInput"
               v-model="text"
-              :entities="entitiesToEdit"
-              :available-entities="entitiesToEdit"
-              :formatters="textFormatters"
+              :entities="allEntities"
               :placeholder="$t('webapp.example.enter_sentence')"
               size="normal"
               @textSelected="setTextSelected($event)"
@@ -20,28 +18,29 @@
             />
           </b-field>
         </div>
-        <div class="bh-grid__item edit-sentence__input">
+        <div class="column is-5">
           <b-field
-            :errors="errors.non_field_errors"
+            :message="errors.non_field_errors"
+            :type="{ 'is-danger': errors.non_field_errors && errors.non_field_errors.length > 0 }"
             :label="$t('webapp.example.intent')">
             <b-autocomplete
               v-model="intent"
               :data="repository.intents_list || []"
               :placeholder="$t('webapp.example.intent')"
-              size="normal"
+              dropdown-position="bottom"
+              open-on-focus
               @input="intent = intentFormatters(intent)" />
           </b-field>
         </div>
       </div>
-      <div class="edit-sentence__fields">
+      <div class="edit-sentence__wrapper">
         <div
           class="edit-sentence__input__wrapper">
           <div
             v-for="(entity, index) in entitiesToEdit"
             :key="`entity-${index}`"
             class="edit-sentence__input">
-            <b-field
-              :errors="entitiesError(index)">
+            <b-field >
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -50,22 +49,21 @@
                 :data="getAllEntities || []"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
                 icon-right="close"
                 icon-right-clickable
+                open-on-focus
                 class="edit-sentence-input"
                 @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
                 @icon-right-click="removeEntity(entity, index)"
               />
             </b-field>
           </div>
-        </div>
-        <div
-          class="edit-sentence__input__wrapper">
           <div
             v-for="(entity, index) in pendingEntities"
             :key="`pending-entity-${index}`"
             class="edit-sentence__input">
-            <b-field :errors="entitiesError(index)">
+            <b-field>
               <span
                 slot="label"
                 class="edit-sentence__input__label"
@@ -75,10 +73,11 @@
                 :custom-formatter="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
+                dropdown-position="bottom"
                 icon-right="close"
                 class="edit-sentence-input"
-                size="normal"
                 icon-right-clickable
+                open-on-focus
                 @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
                 @select="elevateToEntity(entity, index)"
                 @icon-right-click="removePendingEntity(entity, index)"
@@ -86,17 +85,20 @@
             </b-field>
           </div>
         </div>
+        <b-field
+          :message="errors.entities"
+          type="is-danger" />
       </div>
       <div
         class="edit-sentence__btn-wrapper">
-        <bh-button
+        <b-button
           :disabled="textSelected === null"
           rounded
-          primary
+          type="is-primary"
           @click.prevent.stop="addPendingEntity"
         >
-          {{ entityButtonText }}
-        </bh-button>
+          <span class="edit-sentence__add-entity-button-text">{{ entityButtonText }} </span>
+        </b-button>
         <div>
           <b-button
             class="edit-sentence__btn-wrapper__cancelButton"
@@ -119,7 +121,6 @@
 
 <script>
 import Vue from 'vue';
-import BH from 'bh';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { formatters } from '@/utils';
@@ -179,6 +180,9 @@ export default {
     ...mapGetters({
       version: 'getSelectedVersion',
     }),
+    allEntities() {
+      return [...this.entitiesToEdit, ...this.pendingEntities];
+    },
     validationErrors() {
       const errors = [];
 
@@ -195,15 +199,6 @@ export default {
     isValid() {
       return this.validationErrors.length === 0;
     },
-    entitiesError() {
-      return (index) => {
-        if (index === this.entitiesToEdit.length - 1) {
-          return this.errors.entities;
-        }
-
-        return [];
-      };
-    },
     entityButtonText() {
       if (this.textSelected === null) {
         return this.$t('webapp.trainings.add_entity');
@@ -215,15 +210,6 @@ export default {
     },
     intentFormatters() {
       return formatters.bothubItemKey();
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     highlightedText() {
       return entity => this.text.slice(entity.start, entity.end);
@@ -383,10 +369,6 @@ export default {
           });
         }
 
-        if (!this.repository.intents_list.includes(this.intent)) {
-          throw new Error('Intent MUST match existing intents for training.');
-        }
-
         this.$emit('saveList');
         return true;
       } catch (error) {
@@ -412,9 +394,10 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
 .edit-sentence {
-  &__fields {
-    display:flex;
-    flex-direction:column;
+
+  &__wrapper {
+    max-width: 100%;
+    margin: 0 1rem;
   }
 
   &__input {
@@ -424,11 +407,20 @@ export default {
        display: flex;
        flex-wrap: wrap;
        padding: 0.25rem;
+       width: 70%;
      }
 
      &__label /deep/ {
        font-weight: normal;
      }
+  }
+
+  &__add-entity-button-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 50vw;
   }
 
   &-input {
@@ -438,8 +430,7 @@ export default {
   &__btn-wrapper{
     display: flex;
     justify-content: space-between;
-    margin: .7rem;
-    margin-top: 1rem;
+    margin: 1rem 1.7rem 0.7rem 1.7rem;
 
     &__cancelButton{
       height: 2.25rem;

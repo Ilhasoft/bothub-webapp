@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationsStatus.vue renders correctly 1`] = `
+<div ownernickname="douglas" repositoryslug="repo1">
+  <!----> <span name="list" mode="out-in" tag="div"></span>
+  <p class="card-count" style="display: none;">
+    some specific text
+  </p>
+</div>
+`;

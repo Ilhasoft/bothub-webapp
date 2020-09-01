@@ -13,6 +13,7 @@ import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 import TutorialModal from '@/components/TutorialModal';
+import webchat from '@/utils/plugins/webchat';
 
 const components = {
   NewsModal,
@@ -29,6 +30,7 @@ export default {
   },
   mounted() {
     hotjar.addHotjar();
+    webchat.addWebchat({ title: this.$t('webapp.layout.support'), typeMessage: this.$t('webapp.layout.type_here') });
     this.safariDetected();
   },
   methods: {
@@ -54,6 +56,10 @@ export default {
 
 .container-padding {
   padding: 0 8px;
+}
+
+.button[disabled] {
+  background-color: $color-grey-dark !important;
 }
 
 // based on https://flatuicolors.com/palette/nl

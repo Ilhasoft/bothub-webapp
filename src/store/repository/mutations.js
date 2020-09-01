@@ -29,6 +29,8 @@ export default {
     state.evaluateLanguage = value;
   },
   setRepositoryVersion(state, value) {
+    if (!value || !value.version) return;
+
     if (state.repositoryVersion !== value.version.id) {
       state.repositoryVersion = {
         id: value.version.id,
@@ -36,5 +38,14 @@ export default {
       };
       state.repositoryVersionName = value.version.name;
     }
+  },
+  updateRepositoryTraining(state, value) {
+    state.repositoryIsTraining = value;
+  },
+  updateTrainResponse(state, value) {
+    state.TrainResponse = value;
+  },
+  increaseTrainProgress(state, value) {
+    state.whichRepositoryIsTrain = value;
   },
 };

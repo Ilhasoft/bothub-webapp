@@ -7,18 +7,14 @@
       class="entity-list">
       <div v-if="repository && repository.authorization.can_contribute">
         <intents-list
-          :intenties-list="examplesList"
-          :repository="repository"
-          @ableEditEntities="editEntity($event)"
-          @setAllEntities="getAllEntities($event)"/>
+          :intents-list="examplesList"
+          :repository="repository"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesIntenties"
           :list="examplesList"
           :repository="repository"
           :per-page="perPage"
-          :editable="entitiesEditable"
-          :all-entities="allEntities"
           @itemDeleted="onItemDeleted()"
           @itemSave="onItemSave()"/>
         <p
@@ -34,6 +30,7 @@
         <request-authorization-modal
           v-if="repository"
           :open.sync="requestAuthorizationModalOpen"
+          :available="!repository.available_request_authorization"
           :repository-uuid="repository.uuid"
           @requestDispatched="onAuthorizationRequested()" />
         <a
@@ -96,12 +93,10 @@ export default {
       intentSearch: {
         intent: this.$route.params.intent,
       },
-      entitiesEditable: false,
       query: {},
       sentencesIntenties: SentencesIntentList,
       requestAuthorizationModalOpen: false,
       querySchema: {},
-      allEntities: [],
     };
   },
   computed: {
@@ -131,9 +126,6 @@ export default {
     ...mapActions([
       'searchExamples',
     ]),
-    getAllEntities(value) {
-      this.allEntities = value;
-    },
     async updateExamples(force = false) {
       if (this.repositoryList.uuid !== undefined) {
         if (!this.examplesList || force) {
@@ -162,9 +154,6 @@ export default {
         type: 'success',
       });
       this.updateRepository(false);
-    },
-    editEntity(editValue) {
-      this.entitiesEditable = editValue;
     },
   },
 };

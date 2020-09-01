@@ -1,6 +1,6 @@
-'use strict'
-const merge = require('webpack-merge')
-const prodEnv = require('./prod.env')
+'use strict';
+const merge = require('webpack-merge');
+const prodEnv = require('./prod.env');
 
 module.exports = merge(prodEnv, {
   NODE_ENV: '"development"',
@@ -14,6 +14,6 @@ module.exports = merge(prodEnv, {
   BOTHUB_WEBAPP_HOTJAR_ID: JSON.stringify(process.env.BOTHUB_WEBAPP_HOTJAR_ID),
   BOTHUB_WEBAPP_LIGHTHOUSE_KEY: JSON.stringify(process.env.BOTHUB_WEBAPP_LIGHTHOUSE_KEY),
   BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID: JSON.stringify(process.env.BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID),
-  BOTHUB_WEBAPP_PAYMENT_ENABLED: JSON.stringify(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED || true),
-  BOTHUB_WEBAPP_TUTORIAL_ENABLED: JSON.stringify(process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED || true),
+  BOTHUB_WEBAPP_PAYMENT_ENABLED: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED || true,
+  BOTHUB_WEBAPP_TUTORIAL_ENABLED: process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED || true,
 })

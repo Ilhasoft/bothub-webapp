@@ -4,5 +4,4 @@ export default {
   finishedTutorial: [],
   finalModal: false,
   finalMessage: false,
-  repositoryIsTraining: false,
 };

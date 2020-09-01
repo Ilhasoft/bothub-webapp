@@ -7,6 +7,7 @@
           class="entity-edit__title entity-edit__entities-list__header__question">
           <b-tooltip
             :label="$t('webapp.summary.entity_question')"
+            class="tooltipStyle"
             multilined
             type="is-dark"
             position="is-right">
@@ -307,5 +308,10 @@ export default {
       margin-bottom: $between-subtitle-content;
     }
   }
+}
+.tooltipStyle::after {
+  font-size: 12px;
+  line-height: 13px;
+  padding: 1rem 0.5rem;
 }
 </style>

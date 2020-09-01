@@ -14,12 +14,10 @@
           :text="text"
           :highlighted="highlighted"
           :entities="entities"
-          :color-only="entitySelected"
-          :all-entities="repository.entities || repository.entities_list" />
+          :color-only="entitySelected" />
       </div>
     </div>
     <div
-      v-if="editing"
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
@@ -27,6 +25,7 @@
         class="level-right">
         <div class="level-item">
           <a
+            v-if="!editing || !open"
             :href="`#delete-example-${id}`"
             class="has-text-danger"
             @click.prevent.stop="editSentence()">
@@ -69,7 +68,7 @@
         :text-to-edit="text"
         :sentence-id="id"
         :language-edit="language"
-        :get-all-entities="allEntities"
+        :get-all-entities="getEntitiesName"
         @saveList="updateList"
         @cancel="cancelEditSentence"/>
     </div>
@@ -105,10 +104,6 @@ export default {
       type: String,
       default: '',
     },
-    allEntities: {
-      type: Array,
-      default: () => [],
-    },
     entities: {
       type: Array,
       default: /* istanbul ignore next */ () => ([]),
@@ -121,10 +116,6 @@ export default {
       type: String,
       default: '',
     },
-    editing: {
-      type: Boolean,
-      default: false,
-    },
     entitySelected: {
       type: String,
       default: null,
@@ -136,6 +127,7 @@ export default {
       deleteDialog: null,
       remove: true,
       highlighted: null,
+      editing: false,
     };
   },
 
@@ -151,6 +143,12 @@ export default {
           group: entity.group,
           ...entity,
         }));
+    },
+    getEntitiesName() {
+      const allEntitiesName = this.repository.entities.map(
+        entityValue => entityValue.value,
+      );
+      return allEntitiesName;
     },
   },
   methods: {
@@ -186,9 +184,11 @@ export default {
     },
     cancelEditSentence() {
       this.open = !this.open;
+      this.editing = false;
     },
     editSentence() {
-      this.open = !this.open;
+      this.open = true;
+      this.editing = true;
     },
     updateList() {
       this.$emit('updateList');

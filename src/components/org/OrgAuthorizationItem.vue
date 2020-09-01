@@ -1,44 +1,37 @@
 <template>
-  <div class="columns is-vcentered">
-    <div class="column is-1">
-      <user-avatar :profile="getProfile(user__nickname)" />
+  <div class="authorization-item columns is-vcentered">
+    <div class="authorization-item__info column">
+      <user-avatar
+        :profile="getProfile(user__nickname)"
+        :clickable="false"
+        class="authorization-item__avatar" />
+      <p><strong>
+        {{ getProfile(user__nickname).name || user__nickname }} ({{ user__nickname }})
+      </strong></p>
+      <role-select
+        :editable="editable"
+        v-model="newRole"
+        size="is-small" />
     </div>
-    <div class="column is-one-fifth">
-      <p><strong>{{ getProfile(user__nickname).name || user__nickname }}</strong></p>
-      <p><small>{{ user__nickname }}</small></p>
-    </div>
-    <div class="column">
-      <div
-        v-if="submitted || submitted || true"
-        class="columns is-vcentered">
-        <div class="column is-3 is-offset-3">
-          <role-select
-            v-model="newRole"
-            size="is-small" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="submitting"
-            class="icon-spin"
-            size="is-small"
-            icon="refresh" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="submitted"
-            size="is-small"
-            class="text-color-primary"
-            icon="check" />
-        </div>
-        <div class="column is-2 icon__container">
-          <b-icon
-            v-show="!submitting"
-            icon="close"
-            class="icon--button"
-            size="is-small"
-            @click.native="remove()"/>
-        </div>
-      </div>
+    <div class="column is-2 authorization-item__icon__container">
+      <b-icon
+        v-show="!submitting"
+        icon="delete"
+        class="authorization-item__icon authorization-item__icon--button"
+        @click.native="remove()"/>
+      <b-icon
+        v-show="!submitting"
+        icon="pencil"
+        class="authorization-item__icon authorization-item__icon--button"
+        @click.native="editable = !editable"/>
+      <b-icon
+        v-show="submitting"
+        class="authorization-item__icon icon-spin"
+        icon="refresh" />
+      <b-icon
+        v-show="submitted"
+        class="text-color-primary"
+        icon="check" />
     </div>
   </div>
 </template>
@@ -100,6 +93,7 @@ export default {
       submitting: false,
       submitted: false,
       removeDialog: null,
+      editable: false,
     };
   },
   computed: {
@@ -163,6 +157,7 @@ export default {
         this.submitted = true;
         this.$emit('updateList');
       } catch (error) {
+        this.newRole = this.role;
         this.handlerError(error);
       }
       this.submitting = false;
@@ -190,14 +185,44 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    .icon {
+
+@import '~@/assets/scss/colors.scss';
+
+.authorization-item {
+    padding: 0 1rem;
+    background-color: $color-white;
+    border: 1px solid $color-border;
+    margin: 0.625rem 0;
+    border-radius: 5px;
+
+    &__info {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      > * {
+        margin: 0.5rem 1rem 0.5rem 0;
+      }
+    }
+
+    &__avatar {
+        box-shadow: 0px 3px 6px #00000029;
+    }
+
+    &__icon {
+      color: $color-grey-dark;
+
       &--button {
         cursor: pointer;
       }
 
       &__container {
         display: flex;
-        justify-content: center;
+        flex-direction: row-reverse;
+
+        > * {
+            margin: 0 0 0.5rem 1rem;
+        }
       }
     }
+}
 </style>

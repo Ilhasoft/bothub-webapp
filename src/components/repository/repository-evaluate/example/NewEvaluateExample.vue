@@ -21,10 +21,7 @@
                 v-model="text"
                 :is-step-blocked="text.length === 0"
                 :entities="entities"
-                :available-entities="entitiesList"
-                :formatters="textFormatters"
                 :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
-                size="normal"
                 @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
@@ -35,16 +32,18 @@
               id="tour-evaluate-step-3"
               :is-previous-disabled="true"
               :message="errors.non_field_errors"
-              :is-step-blocked="intent.length === 0"
-            >
-              <b-autocomplete
+              :is-step-blocked="(intent || '').length === 0">
+              <b-select
                 v-model="intent"
                 :placeholder="$t('webapp.evaluate.intent')"
-                :data="filteredData"
-                :open-on-focus="true"
-                dropdown-position="bottom"
-                @keyup.enter.native="onEnter()"
-              />
+                expanded>
+                <option
+                  v-for="(intent, index) in repository.intents_list"
+                  :value="intent"
+                  :key="index">
+                  {{ intent }}
+                </option>
+              </b-select>
             </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -68,12 +67,12 @@
             </b-tooltip>
           </div>
         </div>
-        <bh-field
+        <b-field
           :errors="errors.entities"
           class="new-sentence__form__entities"
         >
           <div class="columns">
-            <div class="column is-three-fifths">
+            <div class="column is-one-third">
               <entities-input
                 ref="entitiesInput"
                 v-model="entities"
@@ -90,7 +89,7 @@
               />
             </div>
           </div>
-        </bh-field>
+        </b-field>
       </form>
     </div>
   </div>
@@ -100,7 +99,6 @@
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
 import { mapActions, mapState, mapGetters } from 'vuex';
-import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -114,13 +112,14 @@ export default {
     return {
       textSelected: null,
       text: '',
-      intent: '',
+      intent: null,
       entities: [],
       errors: {},
       submitting: false,
       entitiesList: [],
       testing: true,
       blockedNextStepTutorial: false,
+      intentError: {},
     };
   },
   computed: {
@@ -133,9 +132,6 @@ export default {
     }),
     shouldSubmit() {
       return this.isValid && !this.submitting;
-    },
-    filteredData() {
-      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
     },
     validationErrors() {
       const errors = [];
@@ -152,15 +148,6 @@ export default {
     },
     isValid() {
       return this.validationErrors.length === 0;
-    },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
     },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];
@@ -241,7 +228,7 @@ export default {
           ...this.data,
         });
         this.text = '';
-        this.intent = '';
+        this.intent = null;
         this.entities = [];
         this.submitting = false;
 
@@ -252,11 +239,15 @@ export default {
       } catch (error) {
         /* istanbul ignore next */
         const data = error.response && error.response.data;
-
         /* istanbul ignore next */
-        if (data) {
+        if (data && data.non_field_errors && data.non_field_errors.length > 0) {
           /* istanbul ignore next */
-          this.errors = data;
+          this.intentError = data;
+          this.$buefy.toast.open({
+            message: `${this.intentError.non_field_errors[0]}`,
+            type: 'is-danger',
+            duration: 5000,
+          });
         }
         /* istanbul ignore next */
         this.submitting = false;

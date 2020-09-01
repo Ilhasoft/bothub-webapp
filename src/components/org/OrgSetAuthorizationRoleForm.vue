@@ -15,6 +15,7 @@
         <p>&nbsp;</p>
         <b-button
           :disabled="usersProfile.length === 0 || !role"
+          class="submit-button"
           type="is-primary"
           native-type="submit"
           primary>{{ $t('webapp.settings.invite') }}</b-button>
@@ -90,3 +91,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+
+  .submit-button {
+    min-width: 100%;
+  }
+</style>

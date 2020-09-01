@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
@@ -186,5 +187,12 @@ export default {
   },
   rejectRequestAuthorization(id) {
     return request.$http.delete(`/v2/repository/authorization-requests/${id}/`);
+  },
+  repositoryStatusTraining(repositoryUUID, repositoryVersion) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUUID,
+      repository_version: repositoryVersion,
+    });
+    return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
 };

@@ -84,6 +84,8 @@ export default {
       return { ...this.data, ...this.groupData };
     },
     filteredSchema() {
+      if (!process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) return this.formSchema;
+
       if (!this.formSchema) return {};
       const { biography, ...schema } = this.formSchema;
       return schema;
@@ -133,9 +135,9 @@ export default {
       this.changePasswordModalOpen = true;
     },
     onPasswordChanged() {
-      this.$bhToastNotification({
-        message: 'Password changed!',
-        type: 'success',
+      this.$buefy.notification.open({
+        message: this.$t('webapp.my_profile.password_change_success'),
+        type: 'is-success',
       });
       this.changePasswordModalOpen = false;
     },

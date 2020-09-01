@@ -9,19 +9,16 @@
         <entities-list
           :entities-list="examplesList"
           :repository="repository"
-          :entity-name.sync="entitySelected"
-          @ableEditEntities="editEntity($event)"
-          @setAllEntities="getAllEntities($event)"/>
+          :entity-name.sync="entitySelected"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
           :list="examplesList"
           :repository="repository"
           :per-page="perPage"
-          :editable="entitiesEditable"
-          :all-entities="allEntities"
           :add-attributes="{ entitySelected }"
-          @itemDeleted="onItemDeleted()"/>
+          @itemDeleted="onItemDeleted()"
+          @itemSave="onItemSave()"/>
         <p
           v-if="examplesList && examplesList.empty"
           class="no-examples">{{ $t('webapp.entity.no_sentences') }}</p>
@@ -35,6 +32,7 @@
         <request-authorization-modal
           v-if="repository"
           :open.sync="requestAuthorizationModalOpen"
+          :available="!repository.available_request_authorization"
           :repository-uuid="repository.uuid"
           @requestDispatched="onAuthorizationRequested()" />
         <a
@@ -98,12 +96,10 @@ export default {
         entity_id: this.$route.params.entity_id,
       },
       entitySelected: '',
-      entitiesEditable: false,
       query: {},
       sentencesEntities: SentencesEntityList,
       requestAuthorizationModalOpen: false,
       querySchema: {},
-      allEntities: [],
     };
   },
   computed: {
@@ -133,9 +129,6 @@ export default {
     ...mapActions([
       'searchExamples',
     ]),
-    getAllEntities(value) {
-      this.allEntities = value;
-    },
     async updateExamples(force = false) {
       if (this.repositoryList.uuid !== undefined) {
         if (!this.examplesList || force) {
@@ -151,6 +144,9 @@ export default {
     onItemDeleted() {
       this.updateExamples(true);
     },
+    onItemSave() {
+      this.updateExamples(true);
+    },
     openRequestAuthorizationModal() {
       this.requestAuthorizationModalOpen = true;
     },
@@ -161,9 +157,6 @@ export default {
         type: 'success',
       });
       this.updateRepository(false);
-    },
-    editEntity(editValue) {
-      this.entitiesEditable = editValue;
     },
   },
 };

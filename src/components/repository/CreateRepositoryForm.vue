@@ -170,15 +170,13 @@ export default {
       }, {});
       // eslint-disable-next-line camelcase
       const { is_private, ...schema } = computed;
-      const orgField = {
-        organization: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? {
-          label: this.$t('webapp.orgs.owner'),
-          fetch: this.getOrgs,
-          type: 'choice',
-        } : {},
+      const organization = {
+        label: this.$t('webapp.orgs.owner'),
+        fetch: this.getOrgs,
+        type: 'choice',
       };
       // eslint-disable-next-line camelcase
-      if (is_private) { return { ...schema, ...orgField, is_private }; }
+      if (is_private) { return { ...schema, organization, is_private }; }
       return computed;
     },
     filteredSchema() {

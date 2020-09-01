@@ -8,4 +8,7 @@ export default {
   evaluateResultVersion: 0,
   evaluateLanguage: '',
   updateVersions: false,
+  repositoryIsTraining: false,
+  TrainResponse: false,
+  whichRepositoryIsTrain: {},
 };

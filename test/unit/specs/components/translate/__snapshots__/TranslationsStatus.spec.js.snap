@@ -2,6 +2,7 @@
 
 exports[`TranslationsStatus.vue renders correctly 1`] = `
 <div ownernickname="douglas" repositoryslug="repo1">
-  <b-loading-stub animation="fade" oncancel="function _default() {}"></b-loading-stub> <span name="list" mode="out-in" tag="div" class="columns is-multiline"></span>
+  <b-loading-stub animation="fade" oncancel="function _default() {}"></b-loading-stub>
+  <!---->
 </div>
 `;

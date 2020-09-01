@@ -28,7 +28,7 @@
             <li class="footer-sociallist-item">
               <a
                 href="https://github.com/Ilhasoft/bothub/"
-                target="_blank"><b-icon icon="github-circle" /></a>
+                target="_blank"><b-icon icon="github" /></a>
             </li>
           </ul>
         </div>

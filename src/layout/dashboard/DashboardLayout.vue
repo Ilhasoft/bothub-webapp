@@ -6,7 +6,7 @@
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
-            <bh-icon
+            <custom-icon
               value="botinho"
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon"/>
@@ -33,27 +33,6 @@
         </div>
         <div
           class="dashboard-layout__main-panel__header__right">
-          <div
-            v-show="hasLoaded"
-            class="dashboard-layout__main-panel__header__right__icons">
-            <bh-icon
-              value="language" />
-            <span>{{
-              getCurrentRepository.available_languages ?
-                getCurrentRepository.available_languages.length :
-            0 }} {{ $t('webapp.dashboard.languages') }}</span>
-          </div>
-          <div
-            v-show="hasLoaded"
-            class="dashboard-layout__main-panel__header__right__icons">
-            <b-icon
-              icon="chat-processing"
-              size="is-small"
-              type="is-white"/>
-            <span>
-              {{ getCurrentRepository.examples__count }} {{ $t('webapp.dashboard.sentences') }}
-            </span>
-          </div>
           <div
             v-show="hasLoaded"
             v-if="warningsCount > 0"
@@ -99,7 +78,11 @@
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
-                @click="routerHandle(profilePath)">{{ myProfile.name }}</b-dropdown-item>
+                @click="routerHandle('profile')">{{ myProfile.name }}</b-dropdown-item>
+              <b-dropdown-item
+                v-if="authenticated"
+                aria-role="listitem"
+                @click="routerHandle('orgs')">{{ $t('webapp.layout.orgs') }}</b-dropdown-item>
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
@@ -136,6 +119,7 @@
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
+import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
 
@@ -145,6 +129,7 @@ export default {
     SideBar,
     UserAvatar,
     VersionDropdown,
+    CustomIcon,
     Tour,
   },
   data() {
@@ -176,9 +161,6 @@ export default {
     },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
-    },
-    profilePath() {
-      return process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED ? 'profile' : 'myProfile';
     },
   },
   methods: {

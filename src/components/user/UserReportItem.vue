@@ -5,8 +5,8 @@
       <div
         v-if="categories && categories.length > 0"
         class="user-report-item__category__container">
-        <bh-icon
-          :value="categories[0].icon"
+        <custom-icon
+          :value="repository.categories[0].icon"
           class="user-report-item__category"
           size="large"/>
       </div>
@@ -32,8 +32,11 @@
 </template>
 
 <script>
+import CustomIcon from '@/components/shared/CustomIcon';
+
 export default {
   name: 'UserReportItem',
+  components: { CustomIcon },
   props: {
     name: {
       type: String,
