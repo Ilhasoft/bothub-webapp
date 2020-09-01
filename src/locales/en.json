@@ -362,7 +362,7 @@
       "all": "All languages",
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
-      "no_translated": "No translated languages"
+      "no_translated": "No languages to show"
     },
     "orgs": {
       "owner": "Owned by",

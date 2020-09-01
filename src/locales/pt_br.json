@@ -365,7 +365,7 @@
       "all": "Todos os idiomas",
       "search": "Pesquisar",
       "showing": "Mostrando {count} de {available} idiomas disponíveis",
-      "no_translated": "Nenhum idioma traduzido"
+      "no_translated": "Nenhum idioma encontrado"
     },
     "orgs": {
       "owner": "Pertence a",
