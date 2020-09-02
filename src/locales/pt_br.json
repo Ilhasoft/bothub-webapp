@@ -366,7 +366,9 @@
       "search": "Pesquisar",
       "showing": "Mostrando {count} de {available} idiomas disponíveis",
       "no_translated": "Nenhum idioma traduzido",
-      "invalid_entities": "As entidades não correspondem às da frase original"
+      "invalid_entities": "As entidades não correspondem às da frase original",
+      "translation_edited": "Tradução editada",
+      "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?"
     },
     "orgs": {
       "owner": "Pertence a",

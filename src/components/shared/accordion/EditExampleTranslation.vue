@@ -154,12 +154,22 @@ export default {
         start, end, entity, value,
       }));
       try {
-        await this.editTranslation({
+        const edited = await this.editTranslation({
           translationId: this.id,
           text: this.text,
           entities,
           language: this.languageEdit,
           originalExample: this.sentenceId,
+        });
+        this.$emit('edited', edited.data);
+        this.$buefy.toast.open({
+          message: this.$t('webapp.translate.translation_edited'),
+          type: 'is-success',
+        });
+      } catch (e) {
+        this.$buefy.toast.open({
+          message: e.data || this.$t('webapp.home.default_error'),
+          type: 'is-danger',
         });
       } finally {
         this.submitting = false;

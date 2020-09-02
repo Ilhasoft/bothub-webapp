@@ -74,6 +74,7 @@
           :disable-edit="editing || editingTranslation && translation.id !== editingTranslation"
           v-bind="translation"
           @edit="onEditTranslationChange"
+          @edited="onEdited"
           @deleted="translationDeleted(translation.id)"
         />
         <div
@@ -85,6 +86,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import ExampleTranslation from '@/components/shared/accordion/ExampleTranslation';
 import HighlightedText from '@/components/shared/HighlightedText';
@@ -163,6 +165,11 @@ export default {
       'deleteExample',
       'getTranslations',
     ]),
+    async onEdited(edited) {
+      const index = this.translations.findIndex(translation => translation.id === edited.id);
+      if (index < 0) return;
+      Vue.set(this.translations, index, edited);
+    },
     onEditTranslationChange({ id, editing }) {
       this.editingTranslation = editing ? id : null;
     },

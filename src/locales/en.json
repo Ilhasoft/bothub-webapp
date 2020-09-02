@@ -363,7 +363,9 @@
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
       "no_translated": "No translated languages",
-      "invalid_entities": "Entities do not match the original translation's"
+      "invalid_entities": "Entities do not match the original translation's",
+      "translation_edited": "Translation edited",
+      "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?"
     },
     "orgs": {
       "owner": "Owned by",
