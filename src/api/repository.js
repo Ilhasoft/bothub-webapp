@@ -131,9 +131,9 @@ export default {
       },
     );
   },
-  getLanguagesStatus(repositoryUUID) {
+  getLanguagesStatus(repositoryUUID, version) {
     return request.$http.get(
-      `/v2/repository/repository-details/${repositoryUUID}/languagesstatus/`,
+      `/v2/repository/info/${repositoryUUID}/${version}/languagesstatus/`,
     );
   },
   vote(ownerNickname, slug, value) {

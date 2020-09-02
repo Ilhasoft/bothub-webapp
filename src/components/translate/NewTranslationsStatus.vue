@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { formatters, languageListToDict } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
@@ -81,6 +81,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      version: 'getSelectedVersion',
+    }),
     languages() {
       if (!this.languagesStatus) return {};
       return languageListToDict(Object.keys(this.languagesStatus));
@@ -164,6 +167,7 @@ export default {
       try {
         const response = await this.getRepositoryLanguagesStatus({
           repositoryUUID: this.repositoryUuid,
+          version: this.version,
         });
         this.languagesStatus = response.data.languages_status;
       } catch (e) {
