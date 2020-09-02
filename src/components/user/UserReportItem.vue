@@ -22,21 +22,21 @@
       </div>
     </div>
     <div class="level-right">
-      <b-button
-        class="user-report-item__button"
-        type="is-primary">
+      <loading v-if="total_count == null" />
+      <strong v-else>
         {{ $tc('webapp.my_profile.reports.predictions', total_count) }}
-      </b-button>
+      </strong>
     </div>
   </div>
 </template>
 
 <script>
 import CustomIcon from '@/components/shared/CustomIcon';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'UserReportItem',
-  components: { CustomIcon },
+  components: { CustomIcon, Loading },
   props: {
     name: {
       type: String,
@@ -52,7 +52,7 @@ export default {
     },
     total_count: {
       type: Number,
-      default: 0,
+      default: null,
     },
     time: {
       type: String,

@@ -60,7 +60,7 @@ export default {
         repository: {
           name: this.$t('webapp.my_profile.reports.total'),
         },
-        predictions: 800,
+        predictions: null,
       },
     };
   },
@@ -76,8 +76,17 @@ export default {
     },
   },
   watch: {
-    filter() {
-      this.getList();
+    async filter() {
+      this.list = await this.getList();
+    },
+    async list() {
+      this.total.predictions = null;
+      const list = await this.getList();
+      const predictions = await list.getAllItems();
+      this.total.predictions = predictions.reduce(
+        (count, prediction) => count + prediction.total_count,
+        0,
+      );
     },
   },
   mounted() {
@@ -90,18 +99,20 @@ export default {
       'getOrgReports',
     ]),
     async getList() {
+      let list = null;
       if (this.orgNickname) {
-        this.list = await this.getOrgReports({
+        list = await this.getOrgReports({
           orgNickname: this.orgNickname,
           limit: this.perPage,
           ...this.timeFrame,
         });
       } else {
-        this.list = await this.getUserReports({
+        list = await this.getUserReports({
           limit: this.perPage,
           ...this.timeFrame,
         });
       }
+      return list;
     },
   },
 };
