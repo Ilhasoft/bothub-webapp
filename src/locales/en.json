@@ -362,7 +362,7 @@
       "all": "All languages",
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
-      "no_translated": "No translated languages"
+      "no_translated": "No languages to show"
     },
     "orgs": {
       "owner": "Owned by",
@@ -436,7 +436,7 @@
       },
       "reports": {
         "title": "Reports",
-        "predictions": "{n} predictions | {n} prediction | {n} predictions",
+        "predictions": "No predictions | {n} prediction | {n} predictions",
         "created_by": "Created by",
         "today": "Today",
         "this_week": "This week",

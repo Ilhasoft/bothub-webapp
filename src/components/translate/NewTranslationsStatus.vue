@@ -2,9 +2,9 @@
   <div>
     <loading
       v-if="loading" />
-    <h3
-      v-else-if="filteredLanguagesStatus.length === 0"
-      class="has-text-centered"> {{ $t('webapp.translate.no_translated') }} </h3>
+    <p
+      v-else-if="filteredLanguagesStatus.length === 0 && computedLanguagesStatus.length !== 0"
+      class="has-text-centered"> {{ $t('webapp.translate.no_translated') }} </p>
     <transition-group
       name="list"
       mode="out-in"
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { formatters, languageListToDict } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
@@ -81,6 +81,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      version: 'getSelectedVersion',
+    }),
     languages() {
       if (!this.languagesStatus) return {};
       return languageListToDict(Object.keys(this.languagesStatus));
@@ -164,6 +167,7 @@ export default {
       try {
         const response = await this.getRepositoryLanguagesStatus({
           repositoryUUID: this.repositoryUuid,
+          version: this.version,
         });
         this.languagesStatus = response.data.languages_status;
       } catch (e) {
