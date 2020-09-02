@@ -45,7 +45,6 @@ export default {
     );
   },
 
-  // TODO
   getReports(orgNickname, startDate, endDate, limit = 20) {
     return new utils.Page('/v2/repository/repository-reports/',
       limit,
