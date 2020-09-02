@@ -435,7 +435,7 @@
       },
       "reports": {
           "title": "Relatórios",
-          "predictions": "{n} predições | {n} predição | {n} predições",
+          "predictions": "Nenhuma predição | {n} predição | {n} predições",
           "created_by": "Criado por",
           "today": "Hoje",
           "this_week": "Essa semana",

@@ -163,7 +163,7 @@ export default {
         { label: this.$t('webapp.my_profile.profile'), value: 0 },
         { label: this.$t('webapp.my_profile.intelligences.title'), value: 1 },
         { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
-        { label: this.$t('webapp.my_profile.reports.title'), value: 3, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.reports.title'), value: 3 },
         { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,

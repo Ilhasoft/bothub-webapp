@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-show="list && !list.empty"
+      v-show="list"
       class="user-reports__filter">
       <b-select
         :disabled="list && list.loading"
@@ -15,16 +15,15 @@
       {{ $t('webapp.my_profile.reports.filter_by') }}
     </div>
     <user-report-item
-      :repository="total.repository"
-      :predictions="total.predictions"
+      :name="total.repository.name"
+      :total_count="total.predictions"
       :time="filter.label"/>
     <paginated-list
       v-if="list"
       :item-component="item"
       :per-page="perPage"
       :list="list"
-      :empty-message="$t('webapp.my_profile.reports.no_reports')"
-      @updated="mock"/>
+      :empty-message="$t('webapp.my_profile.reports.no_reports')" />
   </div>
 </template>
 
@@ -39,30 +38,55 @@ export default {
     PaginatedList,
     UserReportItem,
   },
+  props: {
+    orgNickname: {
+      type: String,
+      default: null,
+    },
+  },
   data() {
     return {
       list: null,
       perPage: 10,
-      query: {},
       item: UserReportItem,
       options: [
-        { label: this.$t('webapp.my_profile.reports.today'), value: 'today' },
-        { label: this.$t('webapp.my_profile.reports.this_week'), value: 'this_week' },
-        { label: this.$t('webapp.my_profile.reports.this_month'), value: 'this_month' },
-        { label: this.$t('webapp.my_profile.reports.last_three_months'), value: 'last_three' },
+        { label: this.$t('webapp.my_profile.reports.today'), value: 0 },
+        { label: this.$t('webapp.my_profile.reports.this_week'), value: 7 },
+        { label: this.$t('webapp.my_profile.reports.this_month'), value: 30 },
+        { label: this.$t('webapp.my_profile.reports.last_three_months'), value: 90 },
       ],
-      filter: { label: '', value: '' },
+      filter: { label: '', value: 0 },
       total: {
         repository: {
           name: this.$t('webapp.my_profile.reports.total'),
         },
-        predictions: 800,
+        predictions: null,
       },
     };
   },
+  computed: {
+    timeFrame() {
+      const endDate = new Date();
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - this.filter.value);
+      return {
+        startDate: startDate.toISOString().split('T')[0],
+        endDate: endDate.toISOString().split('T')[0],
+      };
+    },
+  },
   watch: {
-    filter() {
-      this.getList();
+    async filter() {
+      this.list = await this.getList();
+    },
+    async list() {
+      this.total.predictions = null;
+      const list = await this.getList();
+      const predictions = await list.getAllItems();
+      this.total.predictions = predictions.reduce(
+        (count, prediction) => count + prediction.total_count,
+        0,
+      );
     },
   },
   mounted() {
@@ -72,33 +96,23 @@ export default {
   methods: {
     ...mapActions([
       'getUserReports',
+      'getOrgReports',
     ]),
     async getList() {
-      this.list = await this.getUserReports({
-        limit: this.perPage,
-        query: this.query,
-      });
-    },
-    mock() {
-      this.list.total = 10;
-      this.list.items = new Array(10).fill(
-        {
-          repository: {
-            name: 'Repository',
-            owner: {
-              nickname: 'user',
-            },
-            categories: [
-              {
-                icon: 'botinho',
-                id: 2,
-                name: 'Category 2',
-              },
-            ],
-          },
-          predictions: 80,
-        },
-      );
+      let list = null;
+      if (this.orgNickname) {
+        list = await this.getOrgReports({
+          orgNickname: this.orgNickname,
+          limit: this.perPage,
+          ...this.timeFrame,
+        });
+      } else {
+        list = await this.getUserReports({
+          limit: this.perPage,
+          ...this.timeFrame,
+        });
+      }
+      return list;
     },
   },
 };
