@@ -120,7 +120,7 @@
         <div
           v-show="selected==3">
           <div class="org__edit__content">
-            <user-report-list />
+            <user-report-list :org-nickname="nickname"/>
           </div>
         </div>
         <div
