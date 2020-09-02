@@ -44,7 +44,6 @@ export default {
     /* istanbul ignore next */
     return user.myRepositories(limit);
   },
-  // TODO
   getContributingRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.permissionRepositories(limit);
