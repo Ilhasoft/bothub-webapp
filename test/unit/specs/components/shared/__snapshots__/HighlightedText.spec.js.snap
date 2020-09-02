@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HighlightedText.vue renders correctly 1`] = `
-<div class="highlighted">
+<div class="highlighted highlighted-text--size-normal">
   <div class="highlighted-base">text</div>
   <div class="highlighted-text">text</div>
   <div class="highlighted-entity"><span class="highlighted-entity-before highlighted-text--size-normal"></span> <span class="highlighted-entity-text highlighted-text--size-normal entity-mediterranean-sea">
