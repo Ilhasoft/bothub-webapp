@@ -42,7 +42,7 @@
 <script>
 import { getEntityColor } from '@/utils/entitiesColors';
 import { generateTemporaryId, formatters } from '@/utils';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import _ from 'lodash';
 import EntityForm from './EntityForm';
 

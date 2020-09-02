@@ -1,6 +1,4 @@
 import evaluateExample from '@/api/v2/evaluate-example';
-import entity from '@/api/entity';
-
 
 export default {
   async newEvaluateExample(store, {
