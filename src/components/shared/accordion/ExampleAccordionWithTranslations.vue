@@ -1,5 +1,6 @@
 <template>
   <component
+    ref="accordion"
     :is="editing ? 'edit-example-accordion' : 'sentence-accordion'"
     :open.sync="open"
     :entities="entities"
@@ -147,6 +148,7 @@ export default {
   },
   computed: {
     allEntities() {
+      if (!this.repository || !this.repository.entities) return [];
       return this.repository.entities.map(entity => entity.value);
     },
     availableEntities() {
@@ -183,13 +185,13 @@ export default {
       this.editing = !this.editing;
     },
     async loadTranslations() {
+      this.$emit('loadedTranslations');
       this.loadingTranslations = true;
       const translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         repositoryVersion: this.repositoryVersion,
         original_example_id: this.id,
       });
-
       try {
         this.translations = await translationsList.getAllItems();
       } finally {
