@@ -1,13 +1,12 @@
 <template>
   <b-modal
-    :active="getTrainResponse"
+    :active="open"
     :width="567"
     :can-cancel="false">
     <div class="train-response">
       <div
         class="train-response__close">
         <b-icon
-          ref="buttonToClose"
           icon="close"
           class="train-response__close__icon"
           @click.native="closeModal()"/>
@@ -16,7 +15,6 @@
         <h2>{{ $t('webapp.trainings.train_response_title') }}</h2>
         <p>{{ $t('webapp.trainings.train_response_subtitle') }}</p>
         <b-button
-          ref="buttonToClose"
           type="is-primary"
           class="train-response__container__button__style"
           @click="closeModal()">
@@ -28,19 +26,24 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'TrainResponse',
-  computed: {
-    ...mapGetters(['getTrainResponse']),
+  props: {
+    open: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     ...mapActions([
-      'setTrainResponse',
+      'setRepositoryTraining',
     ]),
     closeModal() {
-      this.setTrainResponse(false);
+      this.setRepositoryTraining(false);
+      this.$emit('dispatchCloseProgress');
+      this.$emit('resetProgressValue');
     },
   },
 };

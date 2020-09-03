@@ -1,6 +1,7 @@
 <template>
   <sentence-accordion
     :open.sync="open"
+    :pending-example="pendingExample"
     :class="pendingExample ? 'pendingExample' : ''">
 
     <div
@@ -8,7 +9,9 @@
       class="level">
 
       <div class="example-accordion__tag level-left">
-        <language-badge :language="language"/>
+        <language-badge
+          :language="language"
+          :is-pending-example="pendingExample"/>
       </div>
 
       <div
@@ -183,6 +186,7 @@ export default {
     deleteThisExample() {
       return new Promise((resolve, reject) => {
         this.deleteDialog = this.$buefy.dialog.confirm({
+          title: this.$t('webapp.trainings.delete_phrase_modal_title'),
           message: this.$t('webapp.trainings.delete_phrase_modal'),
           confirmText: this.$t('webapp.trainings.delete_button'),
           cancelText: this.$t('webapp.trainings.cancel_button'),
