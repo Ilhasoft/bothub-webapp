@@ -172,7 +172,7 @@ export default {
       if (this.lastSearch === text) return;
       this.lastSearch = text;
       this.$emit('textData', this.text);
-      this.$emit('queryStringFormated', { search: text });
+      this.emitText(this.text);
     },
     intent(value) {
       const intent = formatters.bothubItemKey()(value);
@@ -197,6 +197,9 @@ export default {
     },
   },
   methods: {
+    emitText: _.debounce(function emitIntent(text) {
+      this.$emit('queryStringFormated', { search: text });
+    }, 500),
     emitIntent: _.debounce(function emitIntent(intent) {
       this.$emit('queryStringFormated', { intent });
     }, 500),

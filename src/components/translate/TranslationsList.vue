@@ -4,7 +4,6 @@
       :item-component="translationItemElem"
       :list="translationsList"
       :repository="repository"
-      @updated="isListEmpty"
       @itemDeleted="examplesDeleted()"/>
     <p
       v-if="translationsList.empty"
@@ -75,9 +74,6 @@ export default {
     examplesDeleted() {
       this.updateTranslations();
       this.$emit('exampleUpdated');
-    },
-    isListEmpty() {
-      if (!this.translationsList.empty) this.$emit('listNoEmpty');
     },
   },
 };

@@ -2,7 +2,7 @@
 
 exports[`TranslationsStatus.vue renders correctly 1`] = `
 <div ownernickname="douglas" repositoryslug="repo1">
-  <h3 class="has-text-centered"> some specific text </h3> <span name="list" mode="out-in" tag="div"></span>
+  <!----> <span name="list" mode="out-in" tag="div"></span>
   <p class="card-count" style="display: none;">
     some specific text
   </p>

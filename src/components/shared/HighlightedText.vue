@@ -1,5 +1,5 @@
 <template>
-  <div class="highlighted">
+  <div :class="['highlighted', `highlighted-text--size-${size}`]">
     <div class="highlighted-base">{{ text }}</div>
     <div class="highlighted-text">{{ text }}</div>
     <div
