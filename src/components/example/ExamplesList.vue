@@ -6,12 +6,17 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
-      @itemSave="show"
+      @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)" />
 
+    <br>
     <p
-      v-if="examplesList && examplesList.empty"
-      class="no-examples">No examples.</p>
+      v-if="examplesList && examplesList.empty && textData === ''"
+      class="no-examples"
+      v-html="$t('webapp.trainings.no_sentences')"/>
+    <p
+      v-if="textData !== '' && examplesList.empty"
+      v-html="$t('webapp.trainings.no_train_sentence')"/>
   </div>
 </template>
 
@@ -40,11 +45,16 @@ export default {
       type: Boolean,
       default: false,
     },
+    textData: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
       examplesList: null,
       exampleItemElem: ExampleItem,
+      dateLastTrain: '',
     };
   },
   computed: {
@@ -70,19 +80,32 @@ export default {
   methods: {
     ...mapActions([
       'searchExamples',
+      'getRepositoryStatusTraining',
     ]),
-    show() {
+    dispatchSave() {
       this.updateExamples(true);
     },
     async updateExamples(force = false) {
+      await this.getRepositoryStatus();
+      if (this.repositoryStatus.count !== 0) {
+        this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+      }
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
           query: this.query,
           limit: this.perPage,
+          endCreatedAt: this.dateLastTrain,
         });
       }
+    },
+    async getRepositoryStatus() {
+      const { data } = await this.getRepositoryStatusTraining({
+        repositoryUUID: this.repository.uuid,
+        repositoryVersion: this.repositoryVersion,
+      });
+      this.repositoryStatus = data;
     },
     onItemDeleted() {
       this.$emit('exampleDeleted');

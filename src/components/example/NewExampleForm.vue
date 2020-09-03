@@ -15,8 +15,6 @@
             :is-step-blocked="textSelected === null"
             v-model="text"
             :entities="entities"
-            :available-entities="entitiesList"
-            :formatters="textFormatters"
             :placeholder="$t('webapp.trainings.add_a_sentence')"
             size="normal"
             @textSelected="setTextSelected($event)"
@@ -92,7 +90,6 @@ import EntitiesInput from '@/components/inputs/EntitiesInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
 import { mapActions, mapGetters } from 'vuex';
-import BH from 'bh';
 import { formatters } from '@/utils';
 
 
@@ -148,15 +145,6 @@ export default {
     isValid() {
       return this.validationErrors.length === 0;
     },
-    textFormatters() {
-      const formattersList = [
-        BH.utils.formatters.trimStart(),
-        BH.utils.formatters.removeBreakLines(),
-        BH.utils.formatters.removeMultipleWhiteSpaces(),
-      ];
-      formattersList.toString = () => 'textFormatters';
-      return formattersList;
-    },
     availableEntities() {
       const repositoryEntities = this.repository.entities_list || [];
       const entitiesFlat = this.entities.map(e => e.entity);
@@ -188,8 +176,9 @@ export default {
     },
   },
   watch: {
-    intent() {
+    async intent() {
       if (!this.intent || this.intent.length <= 0) return;
+      await this.$nextTick();
       this.intent = formatters.bothubItemKey()(this.intent);
     },
   },
@@ -224,6 +213,8 @@ export default {
           ...this.data,
         });
 
+        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
+
         this.text = '';
         this.intent = '';
         this.entities = [];
@@ -231,7 +222,6 @@ export default {
 
         this.$emit('created');
         this.$emit('eventStep');
-        this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
         return true;
       } catch (error) {
         /* istanbul ignore next */

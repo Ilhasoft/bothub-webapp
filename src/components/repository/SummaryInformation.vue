@@ -4,52 +4,44 @@
       <h2>{{ $t('webapp.summary.general_information') }}</h2>
       <div class="summary-information__info__container">
         <div class="summary-information__info__container__training">
-          <div @click="navigateToSentences">
-            <h1>{{ getCurrentRepository.examples__count }}</h1>
-            <p>
-              {{ $tc('webapp.summary.information_sentences',
-                     getCurrentRepository.examples__count) }}
-            </p>
-          </div>
-          <div @click="scrollToIntent">
-            <h1>{{ getCurrentRepository.intents_list.length }}</h1>
-            <p>
-              {{ $tc('webapp.summary.information_intents',
-                     getCurrentRepository.intents_list.length) }}
-            </p>
-          </div>
-          <div @click="scrollToEntity">
-            <h1>{{ getCurrentRepository.entities.length }}</h1>
-            <p>
-              {{ $tc('webapp.summary.information_entities',
-                     getCurrentRepository.entities.length) }}
-            </p>
-          </div>
+          <numbers-card
+            :count="getCurrentRepository.examples__count"
+            :label="$tc('webapp.summary.information_sentences',
+                        getCurrentRepository.examples__count)"
+            clickable
+            @click="navigateToSentences"
+          />
+          <numbers-card
+            :count="getCurrentRepository.intents_list.length"
+            :label="$tc('webapp.summary.information_intents',
+                        getCurrentRepository.intents_list.length)"
+            clickable
+            @click="scrollToIntent"
+          />
+          <numbers-card
+            :count="getCurrentRepository.entities.length"
+            :label="$tc('webapp.summary.information_entities',
+                        getCurrentRepository.entities.length)"
+            clickable
+            @click="scrollToEntity"
+          />
         </div>
         <div class="summary-information__info__container__general">
           <div class="summary-information__info__container__general__data">
-            <b-tooltip
-              :label="languagesList"
-              class="summary-information__info__container__tooltip"
-              multilined
-              type="is-dark"
-              position="is-bottom">
-              <h1>{{ getCurrentRepository.available_languages.length }}</h1>
-              <p>{{ $tc('webapp.summary.information_language',
-                        getCurrentRepository.available_languages.length) }} </p>
-            </b-tooltip>
+            <numbers-card
+              :help-text="languagesList"
+              :count="getCurrentRepository.available_languages.length"
+              :label="$tc('webapp.summary.information_language',
+                          getCurrentRepository.available_languages.length)"
+            />
           </div>
           <div class="summary-information__info__container__general__data">
-            <b-tooltip
-              :label="contributorsList"
-              class="summary-information__info__container__tooltip"
-              multilined
-              type="is-dark"
-              position="is-bottom">
-              <h1>{{ getCurrentRepository.authorizations.count }}</h1>
-              <p>{{ $tc('webapp.summary.information_contributors',
-                        getCurrentRepository.authorizations.count) }} </p>
-            </b-tooltip>
+            <numbers-card
+              :help-text="contributorsList"
+              :count="getCurrentRepository.authorizations.count"
+              :label="$tc('webapp.summary.information_contributors',
+                          getCurrentRepository.authorizations.count)"
+            />
           </div>
         </div>
       </div>
@@ -72,9 +64,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import { languageListToDict } from '@/utils';
+import NumbersCard from '@/components/shared/NumbersCard';
 
 export default {
   name: 'SummaryInformation',
+  components: {
+    NumbersCard,
+  },
   data() {
     return {
       collapse: true,
@@ -137,12 +133,6 @@ export default {
             width: 100%;
             display: flex;
 
-            &__tooltip{
-                    display: flex;
-                    flex-direction: column;
-                    cursor: pointer;
-            }
-
             &__training{
             display: flex;
             height: 156px;
@@ -152,21 +142,6 @@ export default {
             margin-right: 10px;
             width: 50%;
             border: 1px solid $color-border;
-
-              h1{
-                font-size: 47px;
-                font-weight: $font-weight-bolder;
-                font-family: $font-family;
-                margin:0;
-              }
-
-              div{
-
-                &:hover{
-                  cursor:pointer;
-                  color: $color-primary;
-                }
-              }
 
               @media screen and (max-width: 60em) {
                 width: 80%;
@@ -192,19 +167,6 @@ export default {
             @media screen and (max-width: 40em) {
               flex-direction: column;
               margin-bottom: 2rem;
-            }
-
-            h2{
-              color: $color-fake-black;
-              font-weight: $font-weight-bolder;
-              font-family: $font-family;
-            }
-
-            h1{
-              font-size: 47px;
-              font-weight: $font-weight-bolder;
-              font-family: $font-family;
-              margin:0;
             }
 
               &__data{

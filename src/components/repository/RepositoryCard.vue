@@ -10,11 +10,10 @@
           :is="clickable ? 'router-link' : 'span'"
           :to="repositoryDetailsRouterParams">
           <div class="repository-card__big-badge">
-            <component
-              :is="clickable ? 'bh-icon-button' : 'bh-icon'"
+            <custom-icon
               :value="repositoryIcon"
-              size="extra-large"
-              class="repository-card__big-badge__icon" />
+              :class="{'repository-card__big-badge__icon': true, clickable }"
+              size="extra-large" />
           </div>
         </component>
       </div>
@@ -24,10 +23,9 @@
             <component
               :is="clickable ? 'router-link' : 'span'"
               :to="repositoryDetailsRouterParams">
-              <component
-                :is="clickable ? 'bh-icon-button' : 'bh-icon'"
+              <custom-icon
                 :value="repositoryIcon"
-                class="repository-card__title__bagde__icon" /></component>
+                :class="{'repository-card__title__bagde__icon': true, clickable}" /></component>
           </span>
           <component
             :is="clickable ? 'router-link' : 'span'"
@@ -40,7 +38,7 @@
           <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
           || $attrs.owner__nickname }}</strong>
         </div>
-        <div class="repository-card__flags bh-grid bh-grid--row">
+        <div class="repository-card__flags">
           <span
             v-for="language in $attrs.available_languages"
             :key="language"
@@ -62,10 +60,11 @@
               path: '/home',
               query: { category: category.id },
           }">
-            <bh-badge
+            <b-tag
               color="grey-light"
-              size="small"
-              class="repository-card__categories__category">{{ category.name }}</bh-badge>
+              rounded
+              size="is-small"
+              class="repository-card__categories__category">{{ category.name }}</b-tag>
           </component>
         </div>
       </div>
@@ -76,12 +75,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-
+import CustomIcon from '@/components/shared/CustomIcon';
 
 export default {
   name: 'RepositoryCard',
   components: {
     LanguageBadge,
+    CustomIcon,
   },
   props: {
     single: {
@@ -251,6 +251,7 @@ export default {
 
     &__category {
       margin: .25rem;
+      padding: 0 1rem;
     }
   }
 }

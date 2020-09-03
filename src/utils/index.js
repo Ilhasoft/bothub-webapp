@@ -1,5 +1,5 @@
-import BH from 'bh';
 import uuid from 'uuid';
+import VERBOSE_LANGUAGES from './verbose_languages';
 
 export function generateTemporaryId() {
   return uuid.v4();
@@ -21,7 +21,7 @@ export const LEVEL_CONTRIBUTOR = 2;
 export const LEVEL_ADMIN = 3;
 
 export const languageListToDict = list => (list.reduce((current, lang) => {
-  Object.assign(current, { [lang]: BH.utils.VERBOSE_LANGUAGES[lang] || lang });
+  Object.assign(current, { [lang]: VERBOSE_LANGUAGES[lang] || lang });
   return current;
 }, {}));
 
@@ -65,9 +65,20 @@ export const formatters = {
   bothubItemKey: () => v => v
     .toLowerCase()
     .replace(/[\s]/g, '_')
-    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>|]/g, '')
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]^"'~{}ç:<>`´|]/g, '')
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, ''),
+
+  versionItemKey: () => v => v
+    .replace(/[,./\\;+=!?@#$%¨&*()[\]\-_^"'~{}ç:<>`´|]/g, '')
+    .replace(/[\s]/g, '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ''),
+
+  sentenceItemKey: () => v => v
+    .trimStart()
+    .replace('\n', '')
+    .replace(/\s{2,}/g, ' '),
 };
 
 const exampleSearchRegex = /((intent|label|entity|language):([a-zA-Z0-9_-]+))/g;

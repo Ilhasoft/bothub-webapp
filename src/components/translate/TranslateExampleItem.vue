@@ -5,7 +5,7 @@
         :text="text"
         :entities="entities"
         :highlighted="highlighted"
-        :all-entities="repository.entities || repository.entities_list" />
+        size="large" />
     </div>
     <div
       v-if="entitiesList.length > 0"
@@ -194,7 +194,6 @@ export default {
   }
 
   &-text {
-    font-size: 1.25rem;
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;

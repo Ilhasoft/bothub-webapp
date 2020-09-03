@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>NL@3x</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="7.86328125" cy="8.31542969" r="7.5"></circle>
+        <rect id="path-3" x="0" y="0" width="20.9394531" height="14.9567522" rx="2"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPhone-8" transform="translate(-112.000000, -20.000000)">
+            <g id="NL" transform="translate(111.714355, 19.379883)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(-2.606445, 0.837054)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <rect stroke="#F5F5F5" stroke-width="0.5" x="0.25" y="0.25" width="20.4394531" height="14.4567522" rx="2"></rect>
+                        <rect id="Rectangle-2" stroke="none" fill="#CA2B39" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="0" width="20.9394531" height="4.98558408"></rect>
+                        <rect id="Rectangle-2" stroke="none" fill="#2C56A2" fill-rule="evenodd" mask="url(#mask-4)" x="0" y="9.97116815" width="20.9394531" height="4.98558408"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

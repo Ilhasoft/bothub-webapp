@@ -51,4 +51,10 @@ export default {
   removeOrgAuthorization(store, { userNickname, orgNickname }) {
     return org.removeAuthorization(userNickname, orgNickname);
   },
+
+  getOrgReports(store, {
+    orgNickname, startDate, endDate, limit = 20,
+  }) {
+    return org.getReports(orgNickname, startDate, endDate, limit);
+  },
 };

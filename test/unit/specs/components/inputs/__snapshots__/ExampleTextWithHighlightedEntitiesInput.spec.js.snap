@@ -1,32 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ExampleTextWithHighlightedEntitiesInput.vue renders correctly 1`] = `
-<bh-input-stub data-v-73f15743="">
-  <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
-    <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
+<div class="field">
+  <div class="example-txt-w-highlighted-entities">
+    <div class="example-txt-w-highlighted-entities__input-wrapper">
+      <div class="field">
+        <div class="control has-icons-right">
+          <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
+          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="some specific text">
+            <!---->
+          </self-adjust-input-stub>
+        </div>
+      </div>
     </div>
   </div>
-</bh-input-stub>
-`;
-
-exports[`ExampleTextWithHighlightedEntitiesInput.vue set text select text renders correctly 1`] = `
-<bh-input-stub data-v-73f15743="">
-  <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
-    <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text">hi</span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
-    </div>
-  </div>
-</bh-input-stub>
+</div>
 `;
 
 exports[`ExampleTextWithHighlightedEntitiesInput.vue set text with entity renders correctly 1`] = `
-<bh-input-stub data-v-73f15743="">
-  <div data-v-73f15743="" class="bh-textarea example-txt-w-highlighted-entities">
-    <div data-v-73f15743="" class="example-txt-w-highlighted-entities__input-wrapper">
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before">hi </span><span data-v-73f15743="" class="entity-mediterranean-sea example-txt-w-highlighted-entities__entity__text">kids</span></div>
-      <div data-v-73f15743="" class="example-txt-w-highlighted-entities__entity"><span data-v-73f15743="" class="example-txt-w-highlighted-entities__entity__before"></span><span data-v-73f15743="" class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div> <textarea data-v-73f15743="" class="bh-textarea__input example-txt-w-highlighted-entities__input" style="height: 0px;"></textarea>
+<div class="field">
+  <div class="example-txt-w-highlighted-entities">
+    <div class="example-txt-w-highlighted-entities__input-wrapper">
+      <div class="field">
+        <div class="control has-icons-right">
+          <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-mediterranean-sea example-txt-w-highlighted-entities__entity__text"></span></div>
+          <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
+          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="some specific text">
+            <!---->
+          </self-adjust-input-stub>
+        </div>
+      </div>
     </div>
   </div>
-</bh-input-stub>
+</div>
 `;

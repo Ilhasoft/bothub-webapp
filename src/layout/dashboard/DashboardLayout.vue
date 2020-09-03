@@ -6,7 +6,7 @@
       <div class="dashboard-layout__main-panel__header">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
-            <bh-icon
+            <custom-icon
               value="botinho"
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon"/>
@@ -82,6 +82,10 @@
               <b-dropdown-item
                 v-if="authenticated"
                 aria-role="listitem"
+                @click="routerHandle('orgs')">{{ $t('webapp.layout.orgs') }}</b-dropdown-item>
+              <b-dropdown-item
+                v-if="authenticated"
+                aria-role="listitem"
                 @click="openNewRepository()">
                 {{ $t('webapp.layout.start_you_bot') }}
               </b-dropdown-item>
@@ -115,6 +119,7 @@
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
 import VersionDropdown from '@/layout/dashboard/VersionDropdown';
+import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
 
@@ -124,6 +129,7 @@ export default {
     SideBar,
     UserAvatar,
     VersionDropdown,
+    CustomIcon,
     Tour,
   },
   data() {

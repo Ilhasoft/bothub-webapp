@@ -36,7 +36,7 @@
           </div>
         </div>
         <authorization-request-notification
-          v-else-if="repository"
+          v-else
           :available="!repository.available_request_authorization"
           :repository-uuid="repository.uuid"
           @onAuthorizationRequested="updateRepository(false)" />
@@ -127,8 +127,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 
 .evaluate {

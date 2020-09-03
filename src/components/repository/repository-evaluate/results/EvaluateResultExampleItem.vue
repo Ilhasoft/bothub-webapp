@@ -11,8 +11,7 @@
       <highlighted-text
         v-if="open"
         :text="text"
-        :entities="allEntities"
-        :all-entities="repositoryEntities" />
+        :entities="allEntities" />
       <p
         v-else
         class="example-text"> {{ text }}</p>

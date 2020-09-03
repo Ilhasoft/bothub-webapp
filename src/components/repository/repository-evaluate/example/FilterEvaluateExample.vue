@@ -19,20 +19,21 @@
           :message="errors.intent">
           <b-autocomplete
             v-model="intent"
-            :open-on-focus="true"
             :data="optionsIntents"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_intents')"
+            open-on-focus
             dropdown-position="bottom" />
         </b-field>
         <b-field
-          :message="errors.intent">
+          v-if="entities"
+          :message="errors.entity">
           <b-autocomplete
             v-model="entity"
-            :open-on-focus="true"
             :data="optionsEntities"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_entities')"
+            open-on-focus
             dropdown-position="bottom" />
         </b-field>
         <b-field v-if="languageFilter && languages">
@@ -53,11 +54,21 @@
             </option>
           </b-select>
         </b-field>
+        <b-field
+          :message="errors.repository_version_name">
+          <b-autocomplete
+            v-if="versions"
+            v-model="versionName"
+            :loading="false && versionsList.loading"
+            :data="optionsVersions"
+            :placeholder="$t('webapp.inbox.all_versions')"
+            open-on-focus
+            dropdown-position="bottom"/>
+        </b-field>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import { formatters, LANGUAGES } from '@/utils/index';
 import { mapState } from 'vuex';
@@ -79,16 +90,22 @@ export default {
       type: Array,
       default: null,
     },
+    versions: {
+      type: Array,
+      default: null,
+    },
     languageFilter: {
       type: Boolean,
-      default: false,
+      default: null,
     },
   },
   data() {
     return {
       text: '',
+      lastSearch: '',
       intent: '',
       entity: '',
+      versionName: '',
       language: null,
       setTimeoutId: null,
       errors: {},
@@ -96,8 +113,11 @@ export default {
   },
   computed: {
     wrapperClasses() {
+      const fieldCount = [this.languageFilter, this.entities, this.versions]
+        .reduce((counter, condition) => (condition ? counter + 1 : counter), 1);
+
       return ['filter-evaluate-example__filters__wrapper',
-        this.languageFilter ? 'filter-evaluate-example__filters__wrapper__has-language-filter' : ''];
+        `filter-evaluate-example__filters__wrapper__has-${fieldCount}-fields`];
     },
     ...mapState({
       selectedRepository: state => state.Repository.selectedRepository,
@@ -134,6 +154,10 @@ export default {
     optionsEntities() {
       return this.filterEntities.map(entity => entity);
     },
+    optionsVersions() {
+      if (!this.versions) return null;
+      return this.versions.map(version => version.name);
+    },
     inputFormatters() {
       const formattersList = [
         formatters.bothubItemKey(),
@@ -144,28 +168,54 @@ export default {
   },
   watch: {
     text(value) {
-      this.$emit('queryStringFormated', { search: value });
+      const text = value.trim();
+      if (this.lastSearch === text) return;
+      this.lastSearch = text;
+      this.$emit('textData', this.text);
+      this.emitText(this.text);
     },
-    intent: _.debounce(function emitIntent(value) {
-      this.$emit('queryStringFormated', { intent: value });
-    }, 500),
-    entity: _.debounce(function emitEntity(value) {
-      this.$emit('queryStringFormated', { entity: value });
-    }, 500),
+    intent(value) {
+      const intent = formatters.bothubItemKey()(value);
+      this.intent = intent;
+      this.emitIntent(this.intent);
+    },
+    entity(value) {
+      const entity = formatters.bothubItemKey()(value);
+      this.entity = entity;
+      this.emitEntity(this.entity);
+    },
     language: _.debounce(function emitLanguage(value) {
       this.$emit('queryStringFormated', { language: value });
+    }, 500),
+    versionName(value) {
+      const versionName = formatters.versionItemKey()(value);
+      if (this.versionName === versionName) return;
+      this.$nextTick(() => {
+        this.versionName = versionName;
+      });
+      this.emitVersion(versionName);
+    },
+  },
+  methods: {
+    emitText: _.debounce(function emitIntent(text) {
+      this.$emit('queryStringFormated', { search: text });
+    }, 500),
+    emitIntent: _.debounce(function emitIntent(intent) {
+      this.$emit('queryStringFormated', { intent });
+    }, 500),
+    emitEntity: _.debounce(function emitEntity(entity) {
+      this.$emit('queryStringFormated', { entity });
+    }, 500),
+    emitVersion: _.debounce(function emitVersion(version) {
+      this.$emit('queryStringFormated', { repository_version_name: version });
     }, 500),
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 @import '~@/assets/scss/variables.scss';
-
-.field:not(:last-child) {
-  margin-bottom: 0;
-}
 
 .filter-evaluate-example {
   width: 100%;
@@ -188,18 +238,29 @@ export default {
     &__wrapper {
       display: grid;
       grid-gap: .5rem;
-      grid-template-columns: 1fr 2fr 2fr;
 
-      @media (max-width: $mobile-width) {
-        grid-template-columns: 1fr;
+      &__has-2-fields {
+        grid-template-columns: 1fr 2fr 2fr;
+
+        @media (max-width: $mobile-width) {
+          grid-template-columns: 1fr;
+        }
       }
 
-      &__has-language-filter {
+      &__has-3-fields {
         grid-template-columns: 1fr 2fr 2fr 2fr;
 
         @media (max-width: $mobile-width) {
-        grid-template-columns: 1fr;
+          grid-template-columns: 1fr;
+        }
       }
+
+      &__has-4-fields {
+        grid-template-columns: 1fr 2fr 2fr 2fr 2fr;
+
+        @media (max-width: $mobile-width) {
+          grid-template-columns: 1fr;
+        }
       }
 
       &__text {

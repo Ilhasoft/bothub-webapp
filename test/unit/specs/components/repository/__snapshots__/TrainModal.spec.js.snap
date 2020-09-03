@@ -1,80 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+<b-modal-stub active="true" width="665" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
-      <div class="bh-grid bh-grid--column"><strong class="text-color-danger text-center bh-grid__item">
+      <div class="train-modal__close">
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
+      </div>
+      <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
-        <!---->
-        <div class="train-modal__wrapper bh-grid__item--nested">
-          <div><strong>some specific text</strong>
-            <div class="train-modal__wrapper__content-requirements">
-              <div class="train-modal__wrapper__content__item">
-                <p><span>requirement 1</span>
-                  <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
-                </p>
+        <div class="train-modal__wrapper">
+          <p class="train-modal__wrapper__subtitle">
+            some specific text
+          </p>
+          <div class="train-modal__wrapper__content">
+            <div>
+              <div class="train-modal__wrapper__content__content-requirements">
+                <div class="train-modal__wrapper__content__content-requirements__item">
+                  <p><strong>requirement 1</strong> <br> <span></span></p>
+                  <div>
+                    <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
+                  </div>
+                </div>
               </div>
             </div>
+            <!---->
           </div>
-          <!---->
+          <div class="train-modal__buttons">
+            <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
-    </div>
   </div>
-</bh-modal-stub>
+</b-modal-stub>
 `;
 
 exports[`TrainModal.vue add warning renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+<b-modal-stub active="true" width="665" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
-      <div class="bh-grid bh-grid--column">
-        <!----> <strong class="text-color-primary text-center bh-grid__item">
+      <div class="train-modal__close">
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
+      </div>
+      <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
-        <div class="train-modal__wrapper bh-grid__item--nested">
-          <!---->
-          <div><strong>some specific text</strong>
-            <div class="train-modal__wrapper__content-warnings">
-              <div class="train-modal__wrapper__content__item">
-                <p><span>warning 1</span>
-                  <language-badge-stub language="en" size="small" class="train-modal__wrapper__content__item__flag"></language-badge-stub>
-                </p>
+        <div class="train-modal__wrapper">
+          <p class="train-modal__wrapper__subtitle">
+            some specific text
+          </p>
+          <div class="train-modal__wrapper__content">
+            <!---->
+            <div>
+              <div class="train-modal__wrapper__content__content-requirements">
+                <div class="train-modal__wrapper__content__content-requirements__item">
+                  <p><strong>warning 1</strong> <br> <span></span></p>
+                  <div>
+                    <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          <div class="train-modal__buttons">
+            <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
           </div>
         </div>
       </div>
     </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
-    </div>
   </div>
-</bh-modal-stub>
+</b-modal-stub>
 `;
 
 exports[`TrainModal.vue renders correctly 1`] = `
-<bh-modal-stub open="true" title="some specific text" backgroundcloses="true" languagesreadyfortrain="[object Object]">
-  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true" class="container">
+<b-modal-stub active="true" width="665" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+  <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
-      <div class="bh-grid bh-grid--column">
-        <!----> <strong class="text-color-primary text-center bh-grid__item">
+      <div class="train-modal__close">
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
+      </div>
+      <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
         <!---->
       </div>
     </div>
-    <div class="bh-grid__item text-center train-modal__buttons">
-      <bh-button-stub primary="true" type="button">
-        <bh-icon-stub value="school"></bh-icon-stub> <span>some specific text</span>
-      </bh-button-stub>
-    </div>
   </div>
-</bh-modal-stub>
+</b-modal-stub>
 `;

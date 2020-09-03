@@ -3,19 +3,18 @@
     class="quick-test-text">
     <p
       v-if="!data || entitiesList.length === 0"
-      class="quick-test-text__text">{{ displayText }}</p>
+      class="quick-test-text__text quick-test-text__text--before">{{ displayText }}</p>
     <highlighted-text
       v-else
       :text="displayText"
       :highlighted="highlighted"
       :entities="entitiesList"
-      :all-entities="allEntities"
+      size="medium"
       class="quick-test-text__text" />
     <div
       v-if="error"
       class="quick-test-text__subtext__container">
-      <p class="quick-test-text__subtext">
-        {{ $t('webapp.quick_test.error_quick_test') }} </p>
+      <p class="quick-test-text__subtext"> {{ checkQuickError }} </p>
     </div>
     <loading v-else-if="loading" />
     <div
@@ -66,7 +65,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import RepositoryDebug from '@/components/repository/debug/Debug';
 import Loading from '@/components/shared/Loading';
 import RawInfo from '@/components/shared/RawInfo';
@@ -96,10 +95,6 @@ export default {
       type: String,
       required: true,
     },
-    allEntities: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
@@ -107,9 +102,15 @@ export default {
       data: null,
       error: null,
       highlighted: null,
+      repositoryStatus: {},
     };
   },
   computed: {
+    ...mapGetters([
+      'getSelectedVersionRepository',
+      'getSelectedVersion',
+      'getCurrentRepository',
+    ]),
     entitiesNames() {
       if (!this.data || !this.data.entities_list) return [];
       return this.data.entities_list;
@@ -131,13 +132,21 @@ export default {
       return this.entitiesList.reduce((list, entity) => {
         const color = getEntityColor(
           entity.entity,
-          this.allEntities,
-          this.entitiesList,
         );
         // eslint-disable-next-line no-param-reassign
         list[entity.entity] = `entity-${color}`;
         return list;
       }, {});
+    },
+    checkQuickError() {
+      const online = navigator.onLine;
+      if (!online) return this.$t('webapp.quick_test.internet_off_quick_test');
+
+      if (!this.getCurrentRepository.ready_for_parse) {
+        return this.$t('webapp.quick_test.without_train_quick_test');
+      }
+
+      return this.$t('webapp.quick_test.default_error');
     },
   },
   mounted() {
@@ -167,6 +176,8 @@ export default {
       this.$buefy.modal.open({
         props: { info: this.data },
         parent: this,
+        width: 562,
+        canCancel: false,
         component: RawInfo,
         hasModalCard: false,
         trapFocus: true,
@@ -175,6 +186,7 @@ export default {
     debug() {
       this.$buefy.modal.open({
         parent: this,
+        canCancel: false,
         component: RepositoryDebug,
         props: {
           repositoryUUID: this.repositoryUuid,
@@ -203,7 +215,10 @@ export default {
         color: #707070;
         text-align: left;
         font-weight: bold;
-        font-size: 18px;
+
+        &--before {
+          font-size: 1.125rem;
+        }
     }
 
     &__button {

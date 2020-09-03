@@ -6,8 +6,8 @@
       :entities="entities"
       :intent="intent"
       :language="language"
-      :all-entities="allEntities"
       :available-to-example="true"
+      :pending-example="pendingExample"
       training
       @deleted="onExampleDeleted"
       @updateList="onExampleSave"
@@ -56,6 +56,10 @@ export default {
     repository: {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
+    },
+    pendingExample: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

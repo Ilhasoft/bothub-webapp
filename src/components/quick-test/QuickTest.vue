@@ -52,8 +52,7 @@
             :text="sentence.text"
             :language="sentence.language"
             :version="sentence.version"
-            :repository-uuid="sentence.repositoryUUID"
-            :all-entities="repository.entities" />
+            :repository-uuid="sentence.repositoryUUID" />
         </div>
         <div
           v-if="authenticated"
@@ -62,14 +61,14 @@
           :is-next-disabled="true"
           :is-step-blocked="sentences.length === 0"
           class="quick-test__input">
-          <text-area-input
+          <self-adjust-input
             ref="textInput"
             :placeholder="$t('webapp.quick_test.add_a_sentence')"
             v-model="sentenceInput"
             :update-value="selectedLanguage"
+            contained
             size="small"
-
-            @submit="sendMessage"
+            @keyup.enter="sendMessage"
           >
             <language-append-select-input
               slot="append"
@@ -78,7 +77,7 @@
               dropdown-direction="is-top-left"
               class="language-append"
             />
-          </text-area-input>
+          </self-adjust-input>
         </div>
       </div>
     </div>
@@ -95,18 +94,18 @@
 <script>
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import { mapGetters } from 'vuex';
-import TextAreaInput from '@/components/inputs/TextAreaInput';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 import QuickTestText from '@/components/quick-test/QuickTestText';
+import SelfAdjustInput from '@/components/inputs/SelfAdjustInput';
 import Tour from '@/components/Tour';
 
 export default {
   name: 'QuickTest',
   components: {
     LanguageBadge,
-    TextAreaInput,
     LanguageAppendSelectInput,
     QuickTestText,
+    SelfAdjustInput,
     Tour,
   },
   props: {
@@ -208,10 +207,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
 
-  :not(.quick-test) {
-    pointer-events: visible;
-  }
+::-webkit-scrollbar-track {
+  background: #e9e9ec;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $color-primary-dark;
+}
+
+:not(.quick-test) {
+  pointer-events: visible;
+}
 
   .is-text {
     text-decoration: none;

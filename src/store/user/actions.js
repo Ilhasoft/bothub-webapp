@@ -21,7 +21,7 @@ export default {
       }
     }
   },
-  async updateProfile({ commit, getters }, { nickname, forced }) {
+  async updateProfile({ commit, getters }, { nickname, forced, isOrg }) {
     const lastUpdate = getters.getProfileLastUpdate(nickname);
     const profileVersionValidUntil = lastUpdate + (30 * 1000);
     if (profileVersionValidUntil < Date.now() || forced) {
@@ -29,7 +29,7 @@ export default {
         nickname,
         lastUpdate: Date.now(),
       });
-      const response = await user.profile(nickname);
+      const response = isOrg ? await user.org_profile(nickname) : await user.profile(nickname);
       commit(TYPES.SET_PROFILE, {
         nickname,
         data: response.data,
@@ -44,7 +44,6 @@ export default {
     /* istanbul ignore next */
     return user.myRepositories(limit);
   },
-  // TODO
   getContributingRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.permissionRepositories(limit);
@@ -54,8 +53,8 @@ export default {
     /* istanbul ignore next */
     return user.myRepositories(limit);
   },
-  getUserReports(store, { query = {}, limit = 20 }) {
-    return user.getReports(limit, query);
+  getUserReports(store, { startDate, endDate, limit = 20 }) {
+    return user.getReports(startDate, endDate, limit);
   },
   async getMyProfileSchema(nickname) {
     const schema = await user.getMyProfileSchema(nickname);

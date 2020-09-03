@@ -1,48 +1,58 @@
 <template>
   <div
-    v-if="repository"
     class="user-report-item level is-mobile">
     <div class="level-left user-report-item__info">
       <div
-        v-if="repository.categories && repository.categories.length > 0"
+        v-if="categories && categories.length > 0"
         class="user-report-item__category__container">
-        <bh-icon
+        <custom-icon
           :value="repository.categories[0].icon"
           class="user-report-item__category"
           size="large"/>
       </div>
       <div>
-        <p class="user-report-item__name"> {{ repository.name || '' }} </p>
+        <p class="user-report-item__name"> {{ name || '' }} </p>
         <p
-          v-if="repository.owner"
+          v-if="owner"
           class="user-report-item__user"> {{ $t('webapp.my_profile.reports.created_by') }}
-        <a> {{ repository.owner.nickname || '' }} </a> </p>
+        <a> {{ owner.nickname || '' }} </a> </p>
         <p
           v-if="time"
           class="user-report-item__user"> {{ time }} </p>
       </div>
     </div>
     <div class="level-right">
-      <b-button
-        class="user-report-item__button"
-        type="is-primary">
-        {{ $tc('webapp.my_profile.reports.predictions', predictions) }}
-      </b-button>
+      <loading v-if="total_count == null" />
+      <strong v-else>
+        {{ $tc('webapp.my_profile.reports.predictions', total_count) }}
+      </strong>
     </div>
   </div>
 </template>
 
 <script>
+import CustomIcon from '@/components/shared/CustomIcon';
+import Loading from '@/components/shared/Loading';
+
 export default {
   name: 'UserReportItem',
+  components: { CustomIcon, Loading },
   props: {
-    repository: {
+    name: {
+      type: String,
+      default: '',
+    },
+    owner: {
       type: Object,
       default: null,
     },
-    predictions: {
+    categories: {
+      type: Array,
+      default: () => [],
+    },
+    total_count: {
       type: Number,
-      default: 0,
+      default: null,
     },
     time: {
       type: String,
