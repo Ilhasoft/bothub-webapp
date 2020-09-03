@@ -17,31 +17,29 @@
               @created="updatedExampleList()"
               @eventStep="dispatchClick()"/>
             <ExamplesPendingTraining
-              :query="query"
               :update="update"
-              :text-data="textExample"
-              :is-train="checkTrainProgress"
+              :is-train="trainProgress"
               class="trainings-repository__new-example__pending-example"
               @exampleDeleted="onExampleDeleted"
               @noPhrases="noPhrasesYet = false"
             />
             <div class="trainings-repository__new-example__train">
               <div
-                v-if="checkTrainProgress"
+                v-if="trainProgress"
                 class="trainings-repository__new-example__train__progress">
                 <div
-                  :style="{ width: getProgress + '%' }"
+                  :style="{ width: progress + '%' }"
                   class="trainings-repository__new-example__train__bar"/>
-                <p v-html="$t('webapp.trainings.train_progress', {progress: getProgress})"/>
+                <p v-html="$t('webapp.trainings.train_progress', {progress: progress})"/>
               </div>
               <div
-                v-else-if="!noPhrasesYet && !getCheckRepositoryTrain"
+                v-else-if="repository.authorization.can_write"
                 id="tour-training-step-6"
                 :is-next-disabled="true"
                 :is-previous-disabled="true"
                 class="trainings-repository__list-wrapper__tutorialStep">
                 <b-button
-                  v-if="repository.authorization.can_write && !noPhrasesYet"
+                  v-if="repository.ready_for_train || !noPhrasesYet"
                   ref="training"
                   :disabled="loadingStatus || repository.examples__count === 0"
                   :loading="loadingStatus"
@@ -98,7 +96,10 @@
       @finishedTutorial="dispatchFinish()"
       @resetTutorial="dispatchReset()"
       @closeTrainModal="closeTrainModal()"/>
-    <train-response/>
+    <train-response
+      :open="trainResults"
+      @dispatchCloseProgress="closeProgress()"
+      @resetProgressValue="progress = 10"/>
     <tour
       v-if="activeTutorial === 'training'"
       :step-count="8"
@@ -161,30 +162,29 @@ export default {
       repositoryStatus: {},
       textExample: '',
       noPhrasesYet: true,
+      trainProgress: false,
+      progress: 10,
+      trainResults: false,
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
       'activeTutorial',
-      'getWhichRepositoryIsTrain',
-      'getSelectedVersionRepository',
-      'getRepositoriesTrain',
-      'getCheckRepositoryTrain',
     ]),
-    checkTrainProgress() {
-      if (this.getRepositoriesTrain[this.repository.slug] !== undefined) {
-        this.getRepositoryTrain();
-        return true;
-      }
-      return false;
+    repositoryUUID() {
+      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      return this.repository.uuid;
     },
-    getProgress() {
-      return this.getRepositoriesTrain[this.repository.slug].progress;
+    repositoryCanWrite() {
+      if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
+      return this.repository.authorization.can_write;
     },
   },
-  mounted() {
-    this.setTrainProgress();
+  watch: {
+    repositoryCanWrite() {
+      this.getRepositoryStatus();
+    },
   },
   methods: {
     ...mapActions([
@@ -192,11 +192,6 @@ export default {
       'getTrainingStatus',
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
-      'setWhichRepositoryIsTrain',
-      'setTrainResponse',
-      'setIncreaseTrainProgress',
-      'setTrainProgress',
-      'removeProgressTrain',
     ]),
     onSearch(value) {
       Object.assign(this.querySchema, value);
@@ -231,12 +226,26 @@ export default {
         this.loadingStatus = false;
       }
     },
+    async closeProgress() {
+      this.trainResults = false;
+      this.trainProgress = false;
+      await this.updateRepository(false);
+    },
     async getRepositoryStatus() {
-      const { data } = await this.getRepositoryStatusTraining({
-        repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
-      });
-      this.repositoryStatus = data;
+      if (this.repositoryUUID !== null && this.repositoryCanWrite) {
+        const { data } = await this.getRepositoryStatusTraining({
+          repositoryUUID: this.repository.uuid,
+          repositoryVersion: this.repositoryVersion,
+        });
+        this.repositoryStatus = data;
+        if (this.repositoryStatus.results[0] !== undefined) {
+          if (this.repositoryStatus.results[0].status === 0
+                  || this.repositoryStatus.results[0].status === 1) {
+            this.trainProgress = true;
+            this.getRepositoryTrain();
+          }
+        }
+      }
     },
     async dispatchTrain() {
       if (!this.authenticated) {
@@ -244,7 +253,9 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (this.repository.ready_for_train) {
+        if (this.repository.ready_for_train
+          && Object.values(this.repository.requirements_to_train).length === 0
+          && Object.values(this.repository.languages_warnings).length === 0) {
           await this.train();
           this.loadingStatus = false;
           return;
@@ -254,43 +265,22 @@ export default {
       }
       this.dispatchClick();
     },
-    async getRepositoryTrain() {
-      await this.getRepositoryStatus();
+    getRepositoryTrain() {
       if (this.repositoryStatus.results[0].status === 0) {
-        setTimeout(() => {
-          this.setIncreaseTrainProgress({
-            slug: this.repository.slug,
-            id: this.repository.uuid,
-            progress: 32,
-          });
-        }, 100000);
+        this.progress = 26;
       }
       if (this.repositoryStatus.results[0].status === 1) {
-        setTimeout(() => {
-          this.setIncreaseTrainProgress({
-            slug: this.repository.slug,
-            id: this.repository.uuid,
-            progress: 68,
-          });
-        }, 100000);
+        this.progress = 68;
       }
-      if (this.repositoryStatus.results[0].status === 2) {
-        setTimeout(() => {
-          if (this.getRepositoriesTrain[this.repository.slug] !== undefined) {
-            this.setIncreaseTrainProgress({
-              slug: this.repository.slug,
-              id: this.repository.uuid,
-              progress: 100,
-            });
-            this.removeProgressTrain({
-              slug: this.repository.slug,
-            });
-            this.setRepositoryTraining(false);
-            this.setTrainResponse(true);
-            this.noPhrasesYet = true;
-          }
-        }, 100000);
-      }
+      setTimeout(async () => {
+        await this.getRepositoryStatus();
+        if (this.repositoryStatus.results[0].status === 2) {
+          this.progress = 100;
+          this.setRepositoryTraining(false);
+          this.trainResults = true;
+          this.noPhrasesYet = true;
+        }
+      }, 100000);
     },
     closeTrainModal() {
       this.trainModalOpen = false;
@@ -322,9 +312,6 @@ export default {
       this.updateTrainingStatus();
       this.updatedExampleList();
     },
-    updateTrainButton() {
-      this.hideButton = true;
-    },
     async train() {
       this.training = true;
       try {
@@ -333,13 +320,8 @@ export default {
           repositoryVersion: this.repositoryVersion,
         });
         await this.setRepositoryTraining(true);
-        await this.setWhichRepositoryIsTrain({
-          slug: this.repository.slug,
-          id: this.repository.uuid,
-          version: this.repositoryVersion,
-          progress: 5,
-        });
         await this.updateRepository(false);
+        await this.getRepositoryStatus();
       } catch (e) {
         this.$buefy.toast.open({
           message: this.$t('webapp.trainings.default_error'),
@@ -367,6 +349,7 @@ export default {
 
     &__button{
       color: $color-white;
+      margin-top: 1rem;
       width: 14rem;
 
       &:hover{
@@ -388,7 +371,7 @@ export default {
     }
     &__train {
       display: flex;
-      margin-top: -1.8rem;
+      /* margin-top: -1.8rem; */
       margin-bottom: 4rem;
 
       &__progress {

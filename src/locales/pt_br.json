@@ -310,6 +310,7 @@
       "failed": "Falhou",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",
+      "delete_phrase_modal_title":"Deletar frase",
       "delete_phrase_modal":"Você tem certeza que deseja deletar essa frase?",
       "delete_button":"Deletar",
       "cancel_button":"Cancelar",
