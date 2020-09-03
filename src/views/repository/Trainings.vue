@@ -371,7 +371,6 @@ export default {
     }
     &__train {
       display: flex;
-      /* margin-top: -1.8rem; */
       margin-bottom: 4rem;
 
       &__progress {
