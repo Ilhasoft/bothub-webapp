@@ -184,7 +184,7 @@ export default {
       return `entity-${color}`;
     },
     deleteThisExample() {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         this.deleteDialog = this.$buefy.dialog.confirm({
           title: this.$t('webapp.trainings.delete_phrase_modal_title'),
           message: this.$t('webapp.trainings.delete_phrase_modal'),
@@ -204,10 +204,6 @@ export default {
               this.$emit('deleted');
               resolve();
             }
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
           },
         });
       });

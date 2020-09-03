@@ -260,6 +260,17 @@ export default {
           this.loadingStatus = false;
           return;
         }
+        if (!this.repository.ready_for_train
+          && Object.values(this.repository.requirements_to_train).length === 0
+          && Object.values(this.repository.languages_warnings).length === 0) {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.train_modal.language_warning'),
+            type: 'is-danger',
+          });
+
+          this.loadingStatus = false;
+          return;
+        }
         this.loadingStatus = false;
         this.trainModalOpen = true;
       }
