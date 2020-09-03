@@ -1,6 +1,4 @@
 import evaluateExample from '@/api/v2/evaluate-example';
-import entity from '@/api/entity';
-
 
 export default {
   async newEvaluateExample(store, {
@@ -41,10 +39,6 @@ export default {
   async getEvaluateExample(store, { id, version }) {
     const response = await evaluateExample.get(id, version);
     return response.data;
-  },
-  async getEntitiesTest(store, { repositoryUuid, value }) {
-    const response = await entity.search(repositoryUuid, { value });
-    return response;
   },
   async runNewEvaluate(store, { repositoryUUID, language, version }) {
     const response = await evaluateExample.runEvaluate(repositoryUUID, language, version);
