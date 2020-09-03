@@ -32,10 +32,6 @@ export default {
   name: 'ExamplesPendingTraining',
   components,
   props: {
-    query: {
-      type: Object,
-      default: () => ({}),
-    },
     perPage: {
       type: Number,
       default: 12,
@@ -69,9 +65,6 @@ export default {
     }),
   },
   watch: {
-    query() {
-      this.updateExamples(true);
-    },
     update() {
       this.updateExamples(true);
     },
@@ -94,7 +87,12 @@ export default {
       await this.getRepositoryStatus();
       if (this.repositoryStatus.count !== 0) {
         const date = new Date();
-        this.createdAtLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        if (this.repositoryStatus.results[0].status !== 2
+          && this.repositoryStatus.results[0].status !== 3) {
+          this.createdAtLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
+        } else {
+          this.createdAtLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        }
         this.dateNow = date.toISOString().replace(/[A-Za-z]/g, ' ');
       }
 
@@ -102,7 +100,6 @@ export default {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
-          query: this.query,
           limit: this.perPage,
           startCreatedAt: this.createdAtLastTrain,
           endCreatedAt: this.dateNow,
