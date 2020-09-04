@@ -184,28 +184,24 @@ export default {
       return `entity-${color}`;
     },
     deleteThisExample() {
-      return new Promise((resolve) => {
-        this.deleteDialog = this.$buefy.dialog.confirm({
-          title: this.$t('webapp.trainings.delete_phrase_modal_title'),
-          message: this.$t('webapp.trainings.delete_phrase_modal'),
-          confirmText: this.$t('webapp.trainings.delete_button'),
-          cancelText: this.$t('webapp.trainings.cancel_button'),
-          type: 'is-danger',
-          onConfirm: async () => {
-            if (this.training) {
-              await this.deleteExample({ id: this.id });
-              this.$emit('deleted');
-              resolve();
-            } else {
-              await this.deleteEvaluateExample({
-                id: this.id,
-                repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-              });
-              this.$emit('deleted');
-              resolve();
-            }
-          },
-        });
+      this.deleteDialog = this.$buefy.dialog.confirm({
+        title: this.$t('webapp.trainings.delete_phrase_modal_title'),
+        message: this.$t('webapp.trainings.delete_phrase_modal'),
+        confirmText: this.$t('webapp.trainings.delete_button'),
+        cancelText: this.$t('webapp.trainings.cancel_button'),
+        type: 'is-danger',
+        onConfirm: async () => {
+          if (this.training) {
+            await this.deleteExample({ id: this.id });
+            this.$emit('deleted');
+          } else {
+            await this.deleteEvaluateExample({
+              id: this.id,
+              repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+            });
+            this.$emit('deleted');
+          }
+        },
       });
     },
     cancelEditSentence() {
