@@ -47,6 +47,7 @@ describe('TestView.vue', () => {
 
   test('emits queryStringFormated event when text changes', () => {
     wrapper.vm.text = 'i like to eat sushi';
+    clock.tick(500);
     expect(wrapper.emitted('queryStringFormated')).toBeDefined();
   });
 });

@@ -1,6 +1,6 @@
 <template>
   <b-tag
-    :class="{ badge: true, transparent: !main }"
+    :class="!isPendingExample ? { badge: true, transparent: !main } : 'pendingBadge'"
     rounded>{{ language }}</b-tag>
 </template>
 
@@ -13,6 +13,10 @@ export default {
       required: true,
     },
     main: {
+      type: Boolean,
+      default: false,
+    },
+    isPendingExample: {
       type: Boolean,
       default: false,
     },
@@ -31,9 +35,15 @@ export default {
     padding: 0.8rem 1rem;
   }
 
+  .pendingBadge {
+    padding: 0.8rem 1rem;
+    border: 2px $color-primary solid !important;
+    color: $color-primary !important;
+  }
+
   .transparent {
     color: $color-primary !important;
-    background-color: $color-white !important;
+    background-color: transparent !important;
   }
 
 </style>

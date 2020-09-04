@@ -31,16 +31,7 @@ export default {
   getCheckRepositoryTrain(state) {
     return state.repositoryIsTraining;
   },
-  getWhichRepositoryIsTrain(state) {
-    return state.whichRepositoryIsTrain;
-  },
   versionEnabled() {
     return process.env.VERSION_ENABLED;
-  },
-  getTrainResponse(state) {
-    return state.TrainResponse;
-  },
-  getRepositoriesTrain(state) {
-    return state.whichRepositoryIsTrain;
   },
 };

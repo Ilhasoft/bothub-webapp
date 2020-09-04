@@ -54,6 +54,26 @@ export default {
 @import '@mdi/font/css/materialdesignicons.css';
 @import 'highlight.js/styles/github.css';
 
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #e9e9ec;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $color-primary-dark;
+}
+
+:not(.quick-test) {
+  pointer-events: visible;
+}
 .container-padding {
   padding: 0 8px;
 }

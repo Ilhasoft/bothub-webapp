@@ -37,7 +37,7 @@
     <transition name="fade">
       <div
         v-show="open"
-        class="expander__body">
+        :class="pendingExample ? 'expander__body-pending' : 'expander__body'">
         <slot name="body"/>
       </div>
     </transition>
@@ -68,6 +68,10 @@ export default {
     align: {
       type: String,
       default: 'center',
+    },
+    pendingExample: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -185,6 +189,11 @@ export default {
     &__body {
       padding: .5rem 0;
       background: #f5f5f5;
+      border-radius: 4px;
+    }
+    &__body-pending{
+       padding: .5rem 0;
+      background: #EAEAEA;
       border-radius: 4px;
     }
   }

@@ -94,7 +94,12 @@ export default {
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
       if (this.repositoryStatus.count !== 0) {
-        this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        if (this.repositoryStatus.results[0].status !== 2
+          && this.repositoryStatus.results[0].status !== 3) {
+          this.dateLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
+        } else {
+          this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
+        }
       }
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
