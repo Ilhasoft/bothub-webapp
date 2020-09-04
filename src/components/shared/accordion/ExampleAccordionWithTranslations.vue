@@ -39,27 +39,26 @@
       </div>
     </div>
     <div
+      v-show="!editing"
       slot="options"
-      class="example-item__faded">
-      <span
+      class="example-item__intent example-item__faded">
+      <strong class="example-item__faded"> {{ $t('webapp.evaluate.intent') }}: </strong>
+      {{ intent }}
+    </div>
+    <div
+      slot="options"
+      class="example-item__faded example-item__options">
+      <b-icon
         v-show="!editing"
-        class="example-item__intent">
-        <strong class="example-item__faded"> {{ $t('webapp.evaluate.intent') }}: </strong>
-        {{ intent }}
-      </span>
-      <span>
-        <b-icon
-          v-show="!editing"
-          :icon="editing ? 'check' : 'pencil'"
-          :class="{ clickable: true, 'icon-disabled': editingTranslation }"
-          size="is-small"
-          @click.native.stop="handleEdit" />
-        <b-icon
-          class="clickable"
-          size="is-small"
-          icon="delete"
-          @click.native.stop="deleteThisExample" />
-      </span>
+        :icon="editing ? 'check' : 'pencil'"
+        :class="{ clickable: true, 'icon-disabled': editingTranslation }"
+        size="is-small"
+        @click.native.stop="handleEdit" />
+      <b-icon
+        class="clickable"
+        size="is-small"
+        icon="delete"
+        @click.native.stop="deleteThisExample" />
     </div>
 
     <div slot="body">
@@ -261,6 +260,14 @@ export default {
 
         &__intent {
             margin-right: 1rem;
+            text-align: right;
+        }
+
+        &__options {
+          display: flex;
+          > * {
+            margin-left: 0.25rem;
+          }
         }
     }
 </style>
