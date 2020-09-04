@@ -9,9 +9,13 @@ exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
     <highlighted-text-stub text="the possum" entities="" failed="" size="normal"></highlighted-text-stub>
     <div class="example-item__entities"></div>
   </div>
-  <div class="example-item__faded"><span class="example-item__intent"><strong class="example-item__faded"> some specific text: </strong>
-      true
-    </span> <span><b-icon-stub icon="pencil" size="is-small" class="clickable"></b-icon-stub> <b-icon-stub icon="delete" size="is-small" class="clickable"></b-icon-stub></span></div>
+  <div class="example-item__intent example-item__faded"><strong class="example-item__faded"> some specific text: </strong>
+    true
+  </div>
+  <div class="example-item__faded example-item__options">
+    <b-icon-stub icon="pencil" size="is-small" class="clickable"></b-icon-stub>
+    <b-icon-stub icon="delete" size="is-small" class="clickable"></b-icon-stub>
+  </div>
   <div>
     <loading-stub style="display: none;"></loading-stub>
     <!---->
