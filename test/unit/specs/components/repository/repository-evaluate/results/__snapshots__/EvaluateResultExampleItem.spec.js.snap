@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EvaluateResultExampleItem.vue renders 1`] = `
-<sentence-accordion-stub islight="true" type="is-success" thickborder="true" class="example fadeIn">
+<sentence-accordion-stub islight="true" type="is-success" thickborder="true" align="center" class="example fadeIn">
   <div>
     <p class="example-text"> hey</p>
   </div>

@@ -4,6 +4,5 @@ exports[`ExamplesList.vue renders correctly 1`] = `
 <div>
   <!----> <br>
   <!---->
-  <!---->
 </div>
 `;

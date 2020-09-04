@@ -71,7 +71,7 @@ export default {
   background: $color-primary-dark;
 }
 
-:not(.quick-test) {
+:not(.quick-test, .notices) {
   pointer-events: visible;
 }
 .container-padding {
@@ -107,6 +107,17 @@ $entities-colors: (
     color: $color;
     background-color: $bg;
   }
+}
+
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.icon-disabled {
+  opacity: 50%;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 @keyframes iconSpin {
