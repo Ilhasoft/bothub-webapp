@@ -9,13 +9,15 @@
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)" />
     <br>
-    <p
-      v-if="examplesList && examplesList.empty && textData === ''"
-      class="no-examples"
-      v-html="$t('webapp.trainings.no_sentences')"/>
-    <p
-      v-if="textData !== '' && examplesList.empty"
-      v-html="$t('webapp.trainings.no_train_sentence')"/>
+    <div v-if="examplesList && examplesList.empty">
+      <p
+        v-if="textData === ''"
+        class="no-examples"
+        v-html="$t('webapp.trainings.no_sentences')"/>
+      <p
+        v-else
+        v-html="$t('webapp.trainings.no_train_sentence')"/>
+    </div>
   </div>
 </template>
 
@@ -96,11 +98,14 @@ export default {
       if (this.repositoryStatus.count !== 0) {
         if (this.repositoryStatus.results[0].status !== 2
           && this.repositoryStatus.results[0].status !== 3) {
-          this.dateLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
-        } else {
+          if (this.repositoryStatus.results[1].created_at !== undefined) {
+            this.dateLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
+          }
+        } else if (this.repositoryStatus.results[0].created_at !== undefined) {
           this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
         }
       }
+
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,

@@ -71,7 +71,7 @@ export default {
   background: $color-primary-dark;
 }
 
-:not(.quick-test) {
+:not(.quick-test, .notices) {
   pointer-events: visible;
 }
 .container-padding {
