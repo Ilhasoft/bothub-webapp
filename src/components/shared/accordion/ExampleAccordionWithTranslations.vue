@@ -43,7 +43,7 @@
       slot="options"
       class="example-item__intent example-item__faded">
       <strong class="example-item__faded"> {{ $t('webapp.evaluate.intent') }}: </strong>
-      {{ intent }}
+      &nbsp;{{ intent }}
     </div>
     <div
       slot="options"
@@ -259,6 +259,7 @@ export default {
         }
 
         &__intent {
+            display: flex;
             margin-right: 1rem;
             text-align: right;
         }
