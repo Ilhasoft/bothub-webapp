@@ -215,6 +215,7 @@ export default {
         color: #707070;
         text-align: left;
         font-weight: bold;
+        font-size: 1.125rem;
 
         &--before {
           font-size: 1.125rem;
