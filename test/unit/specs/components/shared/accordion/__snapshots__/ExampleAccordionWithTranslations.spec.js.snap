@@ -10,7 +10,7 @@ exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
     <div class="example-item__entities"></div>
   </div>
   <div class="example-item__intent example-item__faded"><strong class="example-item__faded"> some specific text: </strong>
-    true
+    &nbsp;true
   </div>
   <div class="example-item__faded example-item__options">
     <b-icon-stub icon="pencil" size="is-small" class="clickable"></b-icon-stub>

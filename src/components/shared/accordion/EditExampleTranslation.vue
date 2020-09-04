@@ -8,7 +8,7 @@
       </div>
       <div class="column translation__text__container">
         <b-field
-          :errors="errors.text || errors.language">
+          :message="errors.text || errors.language">
           <example-text-with-highlighted-entities-input
             ref="textInput"
             v-model="text"
@@ -104,6 +104,7 @@
               </b-tooltip>
             </div>
           </b-field>
+          <b-field :message="errors.entities" />
         </div>
       </div>
       <div class="translation__icons column is-2">
@@ -180,10 +181,7 @@ export default {
           type: 'is-success',
         });
       } catch (e) {
-        this.$buefy.toast.open({
-          message: e.data || this.$t('webapp.home.default_error'),
-          type: 'is-danger',
-        });
+        this.errors = e.response.data;
       } finally {
         this.submitting = false;
       }
