@@ -41,12 +41,6 @@ describe('ExampleAccordionWithTranslations.vue', () => {
       expect(wrapper.emitted('loadedTranslations')).not.toBeDefined();
     });
 
-    // beforeEach(() => {
-    //   wrapper.vm.open = true;
-    // //   const accordion = wrapper.find({ ref: 'accordion' });
-    // //   accordion.trigger('click');
-    // });
-
     test('function is called', () => {
       wrapper.vm.open = true;
       expect(wrapper.emitted('loadedTranslations')).toBeDefined();

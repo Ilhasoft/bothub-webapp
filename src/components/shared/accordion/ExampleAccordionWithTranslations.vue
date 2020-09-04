@@ -65,8 +65,14 @@
     <div slot="body">
       <loading v-show="loadingTranslations" />
       <p
-        v-if="translations && translations.length === 0"
-        class="has-text-centered"> No translations </p>
+        v-if="translationLoadError"
+        class="has-text-centered">
+        {{ $t('webapp.translate.error_load_translation') }}
+        <a @click="loadTranslations"> {{ $t('webapp.translate.retry') }} </a>
+      </p>
+      <p
+        v-else-if="translations && translations.length === 0"
+        class="has-text-centered"> {{ $t('webapp.translate.no_translation') }} </p>
       <div
         v-for="(translation, index) in (translations || [])"
         :key="translation.id" >
@@ -144,6 +150,7 @@ export default {
       translations: null,
       loadingTranslations: false,
       editingTranslation: null,
+      translationLoadError: false,
     };
   },
   computed: {
@@ -187,6 +194,7 @@ export default {
     async loadTranslations() {
       this.$emit('loadedTranslations');
       this.loadingTranslations = true;
+      this.translationLoadError = false;
       const translationsList = await this.getTranslations({
         repositoryUuid: this.repository.uuid,
         repositoryVersion: this.repositoryVersion,
@@ -194,6 +202,8 @@ export default {
       });
       try {
         this.translations = await translationsList.getAllItems();
+      } catch (e) {
+        this.translationLoadError = true;
       } finally {
         this.loadingTranslations = false;
       }

@@ -80,11 +80,15 @@
               type="is-danger" />
           </div>
           <div class="edit-sentence__icon-container">
-            <b-icon
-              :class="{clickable: true, 'icon-disabled': textSelected === null}"
-              icon="card-plus"
-              @click.native.stop="addPendingEntity"
-            />
+            <b-tooltip
+              :label="addEntityHelpText"
+              multilined>
+              <b-icon
+                :class="{clickable: true, 'icon-disabled': textSelected === null}"
+                icon="card-plus"
+                @click.native.stop="addPendingEntity"
+              />
+            </b-tooltip>
           </div>
         </b-field>
       </form>
@@ -95,9 +99,11 @@
       <b-field
         :message="errors.non_field_errors"
         :type="{ 'is-danger': errors.non_field_errors && errors.non_field_errors.length > 0 }"
-        :label="`${$t('webapp.example.intent')}:`"
         horizontal
         addons>
+        <div class="edit-sentence__icon-container--intent">
+          {{ $t('webapp.example.intent') }}: <tr />
+        </div>
         <b-autocomplete
           v-model="intent"
           :data="repository.intents_list || []"
@@ -159,6 +165,12 @@ export default {
       isOpen: this.open,
     };
   },
+  computed: {
+    addEntityHelpText() {
+      if (this.textSelected === null) return this.$t('webapp.trainings.select_text');
+      return this.entityButtonText;
+    },
+  },
   watch: {
     open() {
       this.isOpen = this.open;
@@ -197,8 +209,9 @@ export default {
       &--intent {
         display: flex;
         align-items: center;
+        height: 100%;
         .icon {
-          margin-top: 0.5rem;
+          margin-top: 0;
         }
     }
   }

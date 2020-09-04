@@ -297,6 +297,7 @@
       "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para",
+      "select_text": "Selecione parte do texto para adicionar uma entidade",
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
@@ -340,11 +341,12 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Você não tem frases traduzidas,",
+      "no_translation": "Você não tem frases traduzidas",
       "click_here": "clique aqui para traduzir.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
+      "no_entities": "Nenhuma entidade para adicionar nessa tradução",
       "languages_select": "Buscar idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
@@ -368,7 +370,9 @@
       "no_translated": "Nenhum idioma traduzido",
       "invalid_entities": "As entidades não correspondem às da frase original",
       "translation_edited": "Tradução editada",
-      "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?"
+      "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
+      "error_load_translation": "Não foi possível carregar traduções.",
+      "retry": "Recarregar"
     },
     "orgs": {
       "owner": "Pertence a",

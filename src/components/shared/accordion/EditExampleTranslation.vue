@@ -89,13 +89,19 @@
                 type="is-danger" />
             </div>
             <div class="translation__icon-container">
-              <b-icon
-                :disabled="textSelected === null"
-                :class="{clickable: true,
-                         'icon-disabled': textSelected === null}"
-                icon="card-plus"
-                @click.native.stop="addPendingEntity"
-              />
+              <b-tooltip
+                :label="addEntityHelpText"
+                multilined>
+                <b-icon
+                  :disabled="textSelected === null"
+                  :class="{clickable: true,
+                           'icon-disabled': textSelected === null
+                             || !(getAllEntities || []).length
+                  }"
+                  icon="card-plus"
+                  @click.native.stop="addPendingEntity"
+                />
+              </b-tooltip>
             </div>
           </b-field>
         </div>
@@ -140,6 +146,13 @@ export default {
     id: {
       type: [Number, String],
       default: null,
+    },
+  },
+  computed: {
+    addEntityHelpText() {
+      if (!(this.getAllEntities && this.getAllEntities.length > 0)) return this.$t('webapp.translate.no_entities');
+      if (this.textSelected === null) return this.$t('webapp.trainings.select_text');
+      return this.entityButtonText;
     },
   },
   methods: {
