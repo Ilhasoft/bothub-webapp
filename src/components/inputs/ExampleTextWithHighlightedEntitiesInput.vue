@@ -3,7 +3,7 @@
     <div class="example-txt-w-highlighted-entities">
       <div class="example-txt-w-highlighted-entities__input-wrapper">
         <div class="field">
-          <div class="control has-icons-right">
+          <div class="control has-icons-right is-family-primary">
             <div
               v-for="(entity, i) in entitiesBlocks"
               :key="i"
@@ -177,11 +177,10 @@ export default {
     height: max-content !important;
     word-wrap: break-word;
     padding: 0.3rem 0.9rem;
-    font: inherit;
     line-height: 1.5;
     max-width: 100%;
     background: none;
-    border: 1px solid rgba(0, 0, 0, 0);
+    border: 1px solid transparent;
     pointer-events: none;
 
     &__with-append {
@@ -190,7 +189,7 @@ export default {
 
     &__before,
     &__text {
-      color: rgba(0, 0, 0, 0);
+      color: transparent;
       max-width: 100%;
       white-space: pre-line;
       pointer-events: none;

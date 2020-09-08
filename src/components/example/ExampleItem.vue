@@ -8,6 +8,7 @@
       :language="language"
       :available-to-example="true"
       :pending-example="pendingExample"
+      :all-entities="allEntities"
       training
       @deleted="onExampleDeleted"
       @updateList="onExampleSave"
@@ -62,21 +63,14 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      allEntities: [],
-    };
-  },
-  mounted() {
-    this.getEntitiesName();
-  },
-  methods: {
-    async getEntitiesName() {
-      const allEntitiesName = await this.repository.entities.map(
+  computed: {
+    allEntities() {
+      return this.repository.entities.map(
         entityValue => entityValue.value,
       );
-      this.allEntities = allEntitiesName;
     },
+  },
+  methods: {
     onExampleDeleted() {
       this.$emit('deleted');
     },
