@@ -125,7 +125,6 @@ export default {
     }
 
     &-text {
-      display: inline-block;
       opacity: .5;
       border-radius: 4px;
     }

@@ -10,13 +10,15 @@
       @itemDeleted="onItemDeleted($event)" />
 
     <br>
-    <p
-      v-if="examplesList && examplesList.empty && textData === ''"
-      class="no-examples"
-      v-html="$t('webapp.trainings.no_sentences')"/>
-    <p
-      v-if="textData !== '' && examplesList.empty"
-      v-html="$t('webapp.trainings.no_train_sentence')"/>
+    <div v-if="examplesList && examplesList.empty">
+      <p
+        v-if="textData === ''"
+        class="no-examples"
+        v-html="$t('webapp.trainings.no_sentences')"/>
+      <p
+        v-else
+        v-html="$t('webapp.trainings.no_train_sentence')"/>
+    </div>
   </div>
 </template>
 
