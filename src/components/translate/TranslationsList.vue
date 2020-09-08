@@ -7,7 +7,7 @@
       @itemDeleted="examplesDeleted()"/>
     <p
       v-if="translationsList.empty"
-      class="no-examples">{{ $t('webapp.translate.no_translation') }}
+      class="no-examples">{{ $t('webapp.translate.no_translation') }},
       <a
         class="outline-text"
         @click="goToTranslate()">{{ $t('webapp.translate.click_here') }}</a>

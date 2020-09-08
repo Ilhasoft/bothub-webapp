@@ -83,6 +83,7 @@
           :query="query"
           :update="update"
           :text-data="textExample"
+          translation-data
           @exampleDeleted="onExampleDeleted"
         />
       </div>
