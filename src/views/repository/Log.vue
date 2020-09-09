@@ -79,7 +79,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      perPage: 10,
+      perPage: 12,
       name: '',
       loading: false,
       versionsList: null,
