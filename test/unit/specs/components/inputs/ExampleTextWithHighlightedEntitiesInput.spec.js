@@ -1,10 +1,8 @@
-import BH from 'bh';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 
 
 const localVue = createLocalVue();
-localVue.use(BH);
 
 describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   let wrapper;

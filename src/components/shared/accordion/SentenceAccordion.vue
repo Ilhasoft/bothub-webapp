@@ -4,6 +4,7 @@
       ref="expander"
       :class="{
         'expander__trigger': true,
+        [`align-${align}`]: true,
         'active': isOpen,
         'before-border': !isOpen,
         'border-thick': thickBorder,
@@ -64,6 +65,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    align: {
+      type: String,
+      default: 'center',
+    },
     pendingExample: {
       type: Boolean,
       default: false,
@@ -91,6 +96,16 @@ export default {
   @import '~@/assets/scss/utilities';
   @import '~@/assets/scss/colors.scss';
   @import '~@/assets/scss/variables.scss';
+
+  .align {
+    &-center {
+      align-items: center;
+    }
+
+    &-top {
+      align-items: flex-start;
+    }
+  }
 
   .before-border {
     position: relative;
@@ -141,7 +156,6 @@ export default {
   .expander {
     &__trigger {
       display: flex;
-      align-items: center;
       padding: .7rem;
       margin-top: 0.5rem;
       cursor: pointer;
@@ -156,12 +170,12 @@ export default {
         margin: 1rem 0;
       }
     }
-    &__header{
+    &__header {
       display: flex;
       width: 80%;
       align-items: center;
     }
-    &__options{
+    &__options {
       min-width: 20%;
       display: flex;
       justify-content: flex-end;

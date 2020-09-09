@@ -16,7 +16,7 @@
               :repository="repository"
               @created="updatedExampleList()"
               @eventStep="dispatchClick()"/>
-            <ExamplesPendingTraining
+            <examples-pending-training
               :update="update"
               :is-train="trainProgress"
               class="trainings-repository__new-example__pending-example"
@@ -83,6 +83,7 @@
           :query="query"
           :update="update"
           :text-data="textExample"
+          translation-data
           @exampleDeleted="onExampleDeleted"
         />
       </div>
@@ -183,7 +184,10 @@ export default {
   },
   watch: {
     repositoryCanWrite() {
-      this.getRepositoryStatus();
+      if (this.repositoryCanWrite !== undefined) {
+        this.getRepositoryStatus();
+        this.resetTrainVariables();
+      }
     },
   },
   methods: {
@@ -239,12 +243,29 @@ export default {
         });
         this.repositoryStatus = data;
         if (this.repositoryStatus.results[0] !== undefined) {
-          if (this.repositoryStatus.results[0].status === 0
-                  || this.repositoryStatus.results[0].status === 1) {
+          if (this.repositoryStatus.results[0].status === 0) {
             this.trainProgress = true;
-            this.getRepositoryTrain();
+            this.progress = 26;
           }
+          if (this.repositoryStatus.results[0].status === 1) {
+            this.trainProgress = true;
+            this.progress = 68;
+          }
+          if (this.repositoryStatus.results[0].status === 2 && this.trainProgress) {
+            this.progress = 100;
+            this.setRepositoryTraining(false);
+            this.trainResults = true;
+            this.noPhrasesYet = true;
+          }
+          setTimeout(() => {
+            if (this.repositoryStatus.results[0].status === 0
+          || this.repositoryStatus.results[0].status === 1) {
+              this.getRepositoryStatus();
+            }
+          }, 100000);
         }
+      } else {
+        this.resetTrainVariables();
       }
     },
     async dispatchTrain() {
@@ -260,27 +281,26 @@ export default {
           this.loadingStatus = false;
           return;
         }
+        if (!this.repository.ready_for_train
+          && Object.values(this.repository.requirements_to_train).length === 0
+          && Object.values(this.repository.languages_warnings).length === 0) {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.train_modal.language_warning'),
+            type: 'is-danger',
+          });
+
+          this.loadingStatus = false;
+          return;
+        }
         this.loadingStatus = false;
         this.trainModalOpen = true;
       }
       this.dispatchClick();
     },
-    getRepositoryTrain() {
-      if (this.repositoryStatus.results[0].status === 0) {
-        this.progress = 26;
-      }
-      if (this.repositoryStatus.results[0].status === 1) {
-        this.progress = 68;
-      }
-      setTimeout(async () => {
-        await this.getRepositoryStatus();
-        if (this.repositoryStatus.results[0].status === 2) {
-          this.progress = 100;
-          this.setRepositoryTraining(false);
-          this.trainResults = true;
-          this.noPhrasesYet = true;
-        }
-      }, 100000);
+    resetTrainVariables() {
+      this.progress = 10;
+      this.trainResults = false;
+      this.trainProgress = false;
     },
     closeTrainModal() {
       this.trainModalOpen = false;

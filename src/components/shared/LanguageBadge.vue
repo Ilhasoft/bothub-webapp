@@ -43,7 +43,7 @@ export default {
 
   .transparent {
     color: $color-primary !important;
-    background-color: $color-white !important;
+    background-color: transparent !important;
   }
 
 </style>
