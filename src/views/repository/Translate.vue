@@ -197,6 +197,9 @@
             <hr>
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
+                <translation-sentence-status
+                  :repository-uuid="selectedRepository.uuid"
+                  :version="selectedRepository.repository_version_id"/>
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities_list"
@@ -252,6 +255,7 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import Tour from '@/components/Tour';
 
 export default {
@@ -264,6 +268,7 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    TranslationSentenceStatus,
     Tour,
   },
   extends: RepositoryBase,
