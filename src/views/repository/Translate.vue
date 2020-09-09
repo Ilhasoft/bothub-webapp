@@ -198,8 +198,11 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
+                  :key="`${translate.from} ${translate.to}`"
                   :repository-uuid="selectedRepository.uuid"
-                  :version="selectedRepository.repository_version_id"/>
+                  :version="selectedRepository.repository_version_id"
+                  :language="translate.from"
+                  :to-language="translate.to"/>
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities_list"

@@ -27,6 +27,10 @@ export default {
       type: Number,
       default: null,
     },
+    language: {
+      type: String,
+      default: null,
+    },
     toLanguage: {
       type: String,
       default: null,
@@ -36,8 +40,8 @@ export default {
     return {
       statusData: {
         sentences: { label: 'Sentences', count: null, query: {} },
-        translated: { label: 'Translated', count: null, query: { has_translation: true } },
-        notTranslated: { label: 'Not Translated', count: null, has_not_translation_to: 'pt_br' },
+        translated: { label: 'Translated', count: null, query: { language: this.language, has_translation: true } },
+        notTranslated: { label: 'Not Translated', count: null, query: { language: this.language, has_not_translation_to: this.toLanguage } },
         inconsistent: { label: 'Inconsistent', count: null, query: {} },
       },
     };
@@ -63,14 +67,18 @@ export default {
     async getStatusData() {
       if (!this.repositoryUuid || !this.version) return;
       Object.entries(this.statusData).forEach(([key, value]) => {
-        this.searchExamples({
-          limit: 1,
-          repositoryUuid: this.repositoryUuid,
-          version: this.version,
-          query: value.query,
-        })
-          .then(list => list.updateItems(1)
-            .then(() => { this.statusData[key].count = list.total; }));
+        try {
+          this.searchExamples({
+            limit: 1,
+            repositoryUuid: this.repositoryUuid,
+            version: this.version,
+            query: value.query,
+          })
+            .then(list => list.updateItems(1)
+              .then(() => { this.statusData[key].count = list.total; }));
+        } catch (e) {
+          this.statusData[key].count = null;
+        }
       });
     },
   },
