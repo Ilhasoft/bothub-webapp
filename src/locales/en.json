@@ -370,7 +370,11 @@
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
       "error_load_translation": "Could not load translations.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent"
     },
     "orgs": {
       "owner": "Owned by",

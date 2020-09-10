@@ -2,12 +2,15 @@
   <div class="translation-sentence-status">
     <numbers-card
       v-for="status in statusInfo"
-      :key="status.label"
+      :key="status.key"
       :count="status.count || 0"
       :disabled="status.count == null"
       :label="status.label"
-      clickable
-      class="translation-sentence-status__card"/>
+      :active="active === status.key"
+      :clickable="active !== status.key"
+      size="medium"
+      class="translation-sentence-status__card"
+      @click="onClick(status.key)"/>
   </div>
 </template>
 
@@ -38,11 +41,26 @@ export default {
   },
   data() {
     return {
+      active: 'all',
       statusData: {
-        sentences: { label: 'Sentences', count: null, query: {} },
-        translated: { label: 'Translated', count: null, query: { language: this.language, has_translation: true } },
-        notTranslated: { label: 'Not Translated', count: null, query: { language: this.language, has_not_translation_to: this.toLanguage } },
-        inconsistent: { label: 'Inconsistent', count: null, query: {} },
+        sentences: {
+          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: {},
+        },
+        translated: {
+          key: 'translated',
+          label: this.$t('webapp.translate.translated'),
+          count: null,
+          query: { language: this.language, has_translation: true },
+        },
+        notTranslated: {
+          key: 'not-translated',
+          label: this.$t('webapp.translate.not_translated'),
+          count: null,
+          query: { language: this.language, has_not_translation_to: this.toLanguage },
+        },
+        inconsistent: {
+          key: 'inconsistent', label: this.$t('webapp.translate.inconsistent'), count: null, query: {},
+        },
       },
     };
   },
@@ -64,6 +82,10 @@ export default {
   },
   methods: {
     ...mapActions(['searchExamples']),
+    onClick(key) {
+      this.$emit('search', key);
+      this.active = key;
+    },
     async getStatusData() {
       if (!this.repositoryUuid || !this.version) return;
       Object.entries(this.statusData).forEach(([key, value]) => {

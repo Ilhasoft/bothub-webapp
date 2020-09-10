@@ -84,9 +84,6 @@
                   icon="close"
                   @click.native.stop="removePendingEntity(entity, index)"/>
               </div>
-              <b-field
-                :message="errors.entities"
-                type="is-danger" />
             </div>
             <div class="translation__icon-container">
               <b-tooltip
@@ -104,7 +101,9 @@
               </b-tooltip>
             </div>
           </b-field>
-          <b-field :message="errors.entities" />
+          <b-field
+            :message="errors.entities"
+            type="is-danger" />
         </div>
       </div>
       <div class="translation__icons column is-2">

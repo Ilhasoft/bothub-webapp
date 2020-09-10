@@ -301,7 +301,7 @@
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
-      "train_response_subtitle": "Suas sentenças foram adicionadas ao treinamento. Você pode consultar as sentenças do repositório em Sentence list.",
+      "train_response_subtitle": "Suas frases foram adicionadas ao treinamento. Você pode consultar as frases do repositório em Sentence list.",
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
@@ -373,7 +373,11 @@
       "translation_edited": "Tradução editada",
       "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
       "error_load_translation": "Não foi possível carregar traduções.",
-      "retry": "Recarregar"
+      "retry": "Recarregar",
+      "sentences": "Frases",
+      "translated": "Traduzidas",
+      "not_translated": "Não traduzidas",
+      "inconsistent": "Inconsistentes"
     },
     "orgs": {
       "owner": "Pertence a",
