@@ -22,12 +22,13 @@
         </b-field>
         <div
           class="translation__entities">
-          <translate-entity-input
+          <example-entity-small-input
             v-model="allEntitiesInput"
             :text="text"
             :available-entities="getAllEntities"
             :entities="entities"
             :text-selected="textSelected"
+            constrict-entities
             @addedEntity="onEntityAdded" />
           <b-field :message="errors.entities" />
         </div>
@@ -59,7 +60,7 @@ import EditExampleBase from './EditExampleBase';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-import TranslateEntityInput from '@/components/translate/TranslateEntityInput';
+import ExampleEntitySmallInput from '@/components/example/ExampleEntitySmallInput';
 
 export default {
   name: 'EditExampleTranslation',
@@ -67,7 +68,7 @@ export default {
     SentenceAccordion,
     ExampleTextWithHighlightedEntitiesInput,
     LanguageBadge,
-    TranslateEntityInput,
+    ExampleEntitySmallInput,
   },
   extends: EditExampleBase,
   props: {

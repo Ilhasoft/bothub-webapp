@@ -14,6 +14,7 @@
             class="translation__input__label"
             v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
           <b-select
+            v-if="constrictEntities"
             v-model="entity.entity"
             expanded
             size="is-small"
@@ -24,9 +25,24 @@
               {{ entity }}
             </option>
           </b-select>
+          <b-autocomplete
+            v-else
+            :data="availableEntities || []"
+            v-model="entity.entity"
+            :placeholder="$t('webapp.example.entity')"
+            dropdown-position="bottom"
+            icon-right="close"
+            icon-right-clickable
+            open-on-focus
+            size="is-small"
+            class="edit-sentence-input"
+            @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
+            @icon-right-click="removeEntity(entity, index)"
+          />
         </b-field>
         <div class="translation__icon-container">
           <b-icon
+            v-if="constrictEntities"
             class="clickable"
             size="is-small"
             icon="close"
@@ -43,6 +59,7 @@
             class="translation__input__label"
             v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
           <b-select
+            v-if="constrictEntities"
             v-model="entity.entity"
             expanded
             size="is-small"
@@ -55,9 +72,26 @@
               {{ entity }}
             </option>
           </b-select>
+          <b-autocomplete
+            v-else
+            :data="availableEntities || []"
+            :custom-formatter="intentFormatters"
+            v-model="entity.entity"
+            :placeholder="$t('webapp.example.entity')"
+            dropdown-position="bottom"
+            icon-right="close"
+            class="edit-sentence-input"
+            size="is-small"
+            icon-right-clickable
+            open-on-focus
+            @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
+            @select="elevateToEntity(entity, index)"
+            @icon-right-click="removePendingEntity(entity, index)"
+          />
         </b-field>
         <div class="translation__icon-container">
           <b-icon
+            v-if="constrictEntities"
             class="clickable"
             size="is-small"
             icon="close"
@@ -88,7 +122,7 @@ import { formatters } from '@/utils';
 import Vue from 'vue';
 
 export default {
-  name: 'TranslateEntityInput',
+  name: 'ExampleEntitySmallInput',
   props: {
     availableEntities: {
       type: Array,
@@ -108,7 +142,7 @@ export default {
     },
     constrictEntities: {
       type: Boolean,
-      default: null,
+      default: false,
     },
   },
   data() {
