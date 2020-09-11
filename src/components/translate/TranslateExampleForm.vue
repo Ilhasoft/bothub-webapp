@@ -13,12 +13,12 @@
       @blur="focus = false"
     />
     <div
-      v-show="focus"
+      v-show="open"
       class="translate-form__entities">
       <example-entity-small-input
         v-model="allEntities"
         :text="text"
-        :available-entities="availableEntities"
+        :available-entities="entityOptions"
         :entities="entities"
         :text-selected="textSelected"
         constrict-entities
@@ -59,6 +59,11 @@ export default {
       focus: false,
     };
   },
+  computed: {
+    entityOptions() {
+      return this.availableEntities.map(entity => entity.entity);
+    },
+  },
   watch: {
     translation() {
       if (!this.translation) return;
@@ -67,14 +72,14 @@ export default {
       this.entities = entities;
     },
     focus() {
-      this.$emit('update:open', this.focus);
+    //   this.$emit('update:open', this.focus);
     },
     open() {
-      if (this.open) {
-        this.$refs.textInput.focus();
-      } else {
-        this.$refs.textInput.clearSelected();
-      }
+    //   if (this.open) {
+    //     this.$refs.textInput.focus();
+    //   } else {
+    //     this.$refs.textInput.clearSelected();
+    //   }
     },
   },
 };
@@ -85,7 +90,9 @@ export default {
     .translate-form {
         margin-top: 0.5rem;
         &__entities {
-            background-color: grey;
+            margin-top: -1rem;
+            padding: 1rem;
+            background-color: $color-grey-light;
         }
     }
 </style>

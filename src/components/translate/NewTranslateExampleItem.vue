@@ -1,6 +1,6 @@
 <template>
   <div class="translate-item">
-    <example-accordion
+    <translate-example-before
       v-bind="$props"
       :open.sync="open"
       pending-example/>
@@ -16,6 +16,7 @@
 import { mapActions } from 'vuex';
 import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
+import TranslateExampleBefore from './TranslateExampleBefore';
 import { getEntitiesList } from '@/utils';
 
 export default {
@@ -23,6 +24,7 @@ export default {
   components: {
     TranslateExampleForm,
     ExampleAccordion,
+    TranslateExampleBefore,
   },
   props: {
     id: {
