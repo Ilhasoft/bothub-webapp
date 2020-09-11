@@ -1,17 +1,17 @@
 <template>
   <div
-    class="translation__entities">
+    class="entity-input__entities">
     <b-field
       grouped
       group-multiline>
       <div
         v-for="(entity, index) in entitiesToEdit"
         :key="`entity-${index}`"
-        class="translation__input translation__icon-container">
+        class="entity-input__input entity-input__icon-container">
         <b-field>
           <span
             slot="label"
-            class="translation__input__label"
+            class="entity-input__input__label"
             v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
           <b-select
             v-if="constrictEntities"
@@ -40,7 +40,7 @@
             @icon-right-click="removeEntity(entity, index)"
           />
         </b-field>
-        <div class="translation__icon-container">
+        <div class="entity-input__icon-container">
           <b-icon
             v-if="constrictEntities"
             class="clickable"
@@ -52,11 +52,11 @@
       <div
         v-for="(entity, index) in pendingEntities"
         :key="`pending-entity-${index}`"
-        class="translation__input translation__icon-container">
+        class="entity-input__input entity-input__icon-container">
         <b-field>
           <span
             slot="label"
-            class="translation__input__label"
+            class="entity-input__input__label"
             v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
           <b-select
             v-if="constrictEntities"
@@ -89,7 +89,7 @@
             @icon-right-click="removePendingEntity(entity, index)"
           />
         </b-field>
-        <div class="translation__icon-container">
+        <div class="entity-input__icon-container">
           <b-icon
             v-if="constrictEntities"
             class="clickable"
@@ -98,7 +98,7 @@
             @click.native.stop="removePendingEntity(entity, index)"/>
         </div>
       </div>
-      <div class="translation__icon-container">
+      <div class="entity-input__icon-container">
         <b-tooltip
           :label="addEntityHelpText"
           multilined>
@@ -276,7 +276,7 @@ export default {
     .icon {
         color: $color-grey-dark
     }
-    .translation {
+    .entity-input {
       &__input {
         margin-right: 0.5rem;
         &__label {

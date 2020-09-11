@@ -20,18 +20,15 @@
             @entityAdded="onEntityAdded()"
           />
         </b-field>
-        <div
-          class="translation__entities">
-          <example-entity-small-input
-            v-model="allEntitiesInput"
-            :text="text"
-            :available-entities="getAllEntities"
-            :entities="entities"
-            :text-selected="textSelected"
-            constrict-entities
-            @addedEntity="onEntityAdded" />
-          <b-field :message="errors.entities" />
-        </div>
+        <example-entity-small-input
+          v-model="allEntitiesInput"
+          :text="text"
+          :available-entities="getAllEntities"
+          :entities="entities"
+          :text-selected="textSelected"
+          constrict-entities
+          @addedEntity="onEntityAdded" />
+        <b-field :message="errors.entities" />
       </div>
       <div class="translation__icons column is-2">
         <span>
@@ -144,13 +141,6 @@ export default {
       }
     }
 
-    &__input {
-      margin-right: 0.5rem;
-        &__label {
-            font-size: 12px;
-        }
-    }
-
   &__text {
     margin-bottom: 0.5rem;
 
@@ -167,16 +157,6 @@ export default {
   &__icons {
       text-align: right;
       color: $color-grey-dark;
-  }
-
-  &__entities {
-    > * {
-      margin: 0 8px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
   }
 }
 </style>
