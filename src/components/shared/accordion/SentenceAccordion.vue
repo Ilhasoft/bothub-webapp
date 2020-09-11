@@ -79,6 +79,11 @@ export default {
       isOpen: false,
     };
   },
+  watch: {
+    open() {
+      this.isOpen = this.open;
+    },
+  },
   mounted() {
     this.isOpen = this.open;
   },

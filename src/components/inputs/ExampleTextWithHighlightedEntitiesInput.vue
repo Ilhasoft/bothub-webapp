@@ -23,6 +23,8 @@
               v-model="val"
               transparent
               @select="emitTextSelected"
+              @blur="$emit('blur')"
+              @focus="$emit('focus')"
               @click.stop.prevent="emitTextSelected"
               @keyup.stop.prevent="emitTextSelected"
               @keyup.enter="submit()">
@@ -138,6 +140,9 @@ export default {
           ? null
           : { start: this.selectionStart, end: this.selectionEnd },
       );
+    },
+    focus() {
+      this.$refs.input.inputAction('focus');
     },
     clearSelected() {
       this.$nextTick(() => {

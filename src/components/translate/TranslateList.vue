@@ -21,7 +21,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
-import TranslateExampleItem from './TranslateExampleItem';
+import TranslateExampleItem from './NewTranslateExampleItem';
 
 export default {
   name: 'TranslateList',
@@ -73,18 +73,25 @@ export default {
   methods: {
     ...mapActions([
       'getExamplesToTranslate',
+      'searchExamples',
     ]),
     async updateList() {
       this.translateList = null;
       if (!!this.from && !!this.to) {
         await this.$nextTick();
-        this.translateList = await this.getExamplesToTranslate({
+        this.translateList = await this.searchExamples({
+          query: this.query,
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
-          from: this.from,
-          to: this.to,
-          query: this.query,
+          language: this.from,
         });
+        // this.translateList = await this.getExamplesToTranslate({
+        //   repositoryUuid: this.repository.uuid,
+        //   version: this.repositoryVersion,
+        //   from: this.from,
+        //   to: this.to,
+        //   query: this.query,
+        // });
       }
       this.$emit('listPhrase', this.translateList);
     },

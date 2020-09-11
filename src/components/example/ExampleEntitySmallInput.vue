@@ -174,6 +174,9 @@ export default {
     },
   },
   watch: {
+    entities() {
+      this.entitiesToEdit = this.entities;
+    },
     allEntities() {
       this.$emit('input', this.allEntities);
     },
