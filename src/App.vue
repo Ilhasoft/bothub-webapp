@@ -117,7 +117,7 @@ $entities-colors: (
 .icon-disabled {
   opacity: 50%;
   cursor: not-allowed;
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 @keyframes iconSpin {
