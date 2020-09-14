@@ -10,7 +10,7 @@
       :clickable="active !== status.key"
       size="medium"
       class="translation-sentence-status__card"
-      @click="onClick(status.key)"/>
+      @click="onClick(status.key, status.query)"/>
   </div>
 </template>
 
@@ -52,14 +52,17 @@ export default {
           count: null,
           query: { language: this.language, has_translation: true },
         },
-        notTranslated: {
-          key: 'not-translated',
+        not_translated: {
+          key: 'not_translated',
           label: this.$t('webapp.translate.not_translated'),
           count: null,
           query: { language: this.language, has_not_translation_to: this.toLanguage },
         },
         inconsistent: {
-          key: 'inconsistent', label: this.$t('webapp.translate.inconsistent'), count: null, query: {},
+          key: 'inconsistent',
+          label: this.$t('webapp.translate.inconsistent'),
+          count: null,
+          query: { language: this.language, inconsistent: true },
         },
       },
     };
@@ -82,8 +85,8 @@ export default {
   },
   methods: {
     ...mapActions(['searchExamples']),
-    onClick(key) {
-      this.$emit('search', key);
+    onClick(key, query) {
+      this.$emit('search', query);
       this.active = key;
     },
     async getStatusData() {

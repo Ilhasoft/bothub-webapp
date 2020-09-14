@@ -202,7 +202,8 @@
                   :repository-uuid="selectedRepository.uuid"
                   :version="selectedRepository.repository_version_id"
                   :language="translate.from"
-                  :to-language="translate.to"/>
+                  :to-language="translate.to"
+                  @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities_list"
@@ -256,7 +257,6 @@ import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
-import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import Tour from '@/components/Tour';
@@ -287,7 +287,6 @@ export default {
         update: false,
       },
       toLanguage: null,
-      query: {},
       querySchema: {},
       errors: '',
       errorMessage: '',
@@ -300,6 +299,8 @@ export default {
         { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
       ],
+      query: {},
+      sentenceFilter: {},
     };
   },
   computed: {
@@ -317,6 +318,12 @@ export default {
         return this.removeSelectedFile();
       }
       return '';
+    },
+    sentenceFilter() {
+      this.updateQuery();
+    },
+    querySchema() {
+      this.updateQuery();
     },
   },
   methods: {
@@ -419,20 +426,19 @@ export default {
     closeExportModal() {
       this.isExportFileVisible = false;
     },
+    onFilter(query) {
+      this.sentenceFilter = query;
+    },
     onSearch(value) {
-      Object.assign(this.querySchema, value);
-
-      if (!this.querySchema.intent) {
-        delete this.querySchema.intent;
-      }
-      if (!this.querySchema.entity) {
-        delete this.querySchema.entity;
-      }
-      if (!this.querySchema.label) {
-        delete this.querySchema.label;
-      }
-      const formattedQueryString = exampleSearchToString(this.querySchema);
-      this.query = exampleSearchToDicty(formattedQueryString);
+      this.querySchema = { ...value };
+    },
+    updateQuery() {
+      this.query = {
+        ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
+        ...this.querySchema.entity ? { intent: this.querySchema.entity } : {},
+        ...this.querySchema.label ? { intent: this.querySchema.label } : {},
+        ...this.sentenceFilter,
+      };
     },
   },
 };
