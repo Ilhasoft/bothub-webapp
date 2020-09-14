@@ -110,7 +110,7 @@ export default {
         }
 
         &__input {
-          background-color: $color-grey-lighter;
+          background-color: $color-fake-white;
           border-radius: 4px;
         }
     }

@@ -4,6 +4,7 @@
       ref="expander"
       :class="{
         'expander__trigger': true,
+        'expander__trigger--slim': slim,
         [`align-${align}`]: true,
         'active': isOpen,
         'before-border': !isOpen,
@@ -69,6 +70,10 @@ export default {
     align: {
       type: String,
       default: 'center',
+    },
+    slim: {
+      type: Boolean,
+      default: false,
     },
     pendingExample: {
       type: Boolean,
@@ -166,12 +171,16 @@ export default {
       margin-top: 0.5rem;
       cursor: pointer;
 
+      &--slim {
+        padding: .35rem;
+      }
+
       @media screen and (max-width: $mobile-width) {
         flex-wrap: wrap;
       }
 
       &--pending {
-        background-color: $color-grey-lighter;
+        background-color: $color-fake-white;
       }
 
     &__check{

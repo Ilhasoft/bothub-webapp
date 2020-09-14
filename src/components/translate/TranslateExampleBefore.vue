@@ -1,6 +1,7 @@
 <template>
   <sentence-accordion
     :open.sync="isOpen"
+    slim
     pending-example >
 
     <div slot="check">
@@ -12,14 +13,8 @@
       class="level">
 
       <div
-        v-if="!open"
-        class="level-right example-accordion__text">{{ text }}</div>
-
-      <div
-        v-else
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="open && !editing"
           :text="text"
           :entities="entities"
           :highlighted="highlighted" />
