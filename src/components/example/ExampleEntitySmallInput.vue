@@ -105,8 +105,7 @@
           <b-icon
             :disabled="textSelected === null"
             :class="{clickable: true,
-                     'icon-disabled': textSelected === null
-                       || !(availableEntities || []).length
+                     'icon-disabled': !addEntityEnabled
             }"
             icon="card-plus"
             @click.native.stop="addPendingEntity"
@@ -152,6 +151,10 @@ export default {
     };
   },
   computed: {
+    addEntityEnabled() {
+      if (this.constrictEntities && (this.availableEntities || []).length === 0) return false;
+      return this.textSelected != null;
+    },
     intentFormatters() {
       return formatters.bothubItemKey();
     },
@@ -191,6 +194,7 @@ export default {
   },
   methods: {
     addPendingEntity() {
+      if (!this.addEntityEnabled) return;
       // It will be added at the end of the list, so we already know its index.
       const newEntity = {
         start: this.textSelected.start,
