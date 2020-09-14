@@ -1,20 +1,29 @@
 <template>
   <div>
+    <div class="repository-translate__list__options">
+      <div class="repository-translate__list__options__check">
+        <b-checkbox /> Select All
+      </div>
+      <div class="repository-translate__list__options__buttons">
+        <b-button
+          type="is-primary"
+          icon-right="pencil" />
+        <b-button
+          type="is-primary"
+          icon-right="delete" />
+      </div>
+    </div>
     <paginatedList
       v-if="translateList"
       :list="translateList"
       :item-component="translateExampleItem"
       :repository="repository"
       :translate-to="to"
+      :empty-message="$t('webapp.translate.no_examples')"
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
       @update:loading="onLoading($event)"/>
-    <p
-      v-if="translateList && translateList.empty"
-      class="repository-translate__list">
-      {{ $t('webapp.translate.no_examples') }}
-    </p>
   </div>
 </template>
 
@@ -115,6 +124,21 @@ export default {
 .repository-translate{
   &__list{
     margin-left: 0.5rem;
+
+      &__options {
+        padding: 0 1rem 0 0.5rem;;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+      &__check {
+        display: flex;
+        align-items: center;
+      }
+
+      &__buttons {
+
+      }
+    }
   }
 }
 
