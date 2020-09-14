@@ -148,9 +148,6 @@ export default {
             height: 100%;
             margin-right: 1rem;
         }
-        &--dark {
-          background-color: red;
-        }
         margin-bottom: 1rem;
     }
 </style>

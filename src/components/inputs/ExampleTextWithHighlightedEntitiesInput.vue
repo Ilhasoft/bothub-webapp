@@ -1,7 +1,10 @@
 <template>
   <div class="field">
     <div class="example-txt-w-highlighted-entities">
-      <div class="example-txt-w-highlighted-entities__input-wrapper">
+      <div
+        :class="{
+          'example-txt-w-highlighted-entities__input-wrapper': true,
+          'example-txt-w-highlighted-entities__transparent': transparent}">
         <div class="field">
           <div class="control has-icons-right is-family-primary">
             <div
@@ -19,7 +22,7 @@
             </div>
             <self-adjust-input
               ref="input"
-              :placeholder="$t('webapp.trainings.add_a_sentence')"
+              :placeholder="placeholder"
               v-model="val"
               transparent
               @select="emitTextSelected"
@@ -60,6 +63,14 @@ export default {
     entities: {
       type: Array,
       default: () => ([]),
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    transparent: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -167,6 +178,10 @@ export default {
   &__input-wrapper {
     position: relative;
     background-color: white;
+  }
+
+  &__transparent {
+    background-color: transparent;
   }
 
   &__input {

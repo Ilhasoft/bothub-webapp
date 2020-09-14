@@ -181,7 +181,7 @@ export default {
       this.$emit('input', this.allEntities);
     },
     text(newText, oldText) {
-      if (newText !== oldText) {
+      if (newText !== oldText && oldText !== '') {
         this.recomputeEntitiesFor(newText, oldText);
       }
     },

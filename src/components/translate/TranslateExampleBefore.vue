@@ -1,8 +1,7 @@
 <template>
   <sentence-accordion
     :open.sync="isOpen"
-    :pending-example="pendingExample"
-    :class="pendingExample ? 'pendingExample' : ''">
+    pending-example >
 
     <div slot="check">
       <b-checkbox />
@@ -48,7 +47,7 @@ import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 
 export default {
-  name: 'ExampleAccordion',
+  name: 'TranslateExampleBefore',
   components: {
     SentenceAccordion,
     ExampleInfo,
@@ -89,10 +88,6 @@ export default {
       type: String,
       default: '',
     },
-    pendingExample: {
-      type: Boolean,
-      default: false,
-    },
     open: {
       type: Boolean,
       default: false,
@@ -123,9 +118,6 @@ export default {
       this.isOpen = this.open;
     },
     isOpen() {
-      if (!this.isOpen) {
-        this.cancelEditSentence();
-      }
       this.$emit('update:open', this.isOpen);
     },
   },
@@ -135,42 +127,10 @@ export default {
       'deleteExample',
     ]),
     getEntityClass(entity) {
-      const allEntitiesName = this.repository.entities.map(
-        entityValue => entityValue.value,
-      );
       const color = getEntityColor(
         entity,
-        allEntitiesName,
       );
       return `entity-${color}`;
-    },
-    deleteThisExample() {
-      this.deleteDialog = this.$buefy.dialog.confirm({
-        title: this.$t('webapp.trainings.delete_phrase_modal_title'),
-        message: this.$t('webapp.trainings.delete_phrase_modal'),
-        confirmText: this.$t('webapp.trainings.delete_button'),
-        cancelText: this.$t('webapp.trainings.cancel_button'),
-        type: 'is-danger',
-        onConfirm: async () => {
-          if (this.training) {
-            await this.deleteExample({ id: this.id });
-            this.$emit('deleted');
-          } else {
-            await this.deleteEvaluateExample({
-              id: this.id,
-              repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-            });
-            this.$emit('deleted');
-          }
-        },
-      });
-    },
-    cancelEditSentence() {
-      this.editing = false;
-    },
-    editSentence() {
-      this.editing = true;
-      this.open = true;
     },
     updateList() {
       this.$emit('updateList');

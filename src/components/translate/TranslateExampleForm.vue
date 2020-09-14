@@ -4,11 +4,11 @@
       ref="textInput"
       v-model="text"
       :entities="allEntities"
-      :placeholder="$t('webapp.example.enter_sentence')"
+      :placeholder="''"
+      :transparent="!focus && text.length === 0"
+      class="translate-form__input"
       size="normal"
       @textSelected="setTextSelected($event)"
-      @entityEdited="onEditEntity($event)"
-      @entityAdded="onEntityAdded()"
       @focus="focus = true"
       @blur="focus = false"
     />
@@ -57,6 +57,7 @@ export default {
       text: this.translation ? this.translation.text : '',
       entities: this.translation ? this.translation.entities : [],
       focus: false,
+      textSelected: null,
     };
   },
   computed: {
@@ -72,14 +73,27 @@ export default {
       this.entities = entities;
     },
     focus() {
-    //   this.$emit('update:open', this.focus);
+      if (!this.focus) return;
+      this.$emit('update:open', this.focus);
     },
     open() {
-    //   if (this.open) {
-    //     this.$refs.textInput.focus();
-    //   } else {
-    //     this.$refs.textInput.clearSelected();
-    //   }
+      if (this.open) {
+        this.$refs.textInput.focus();
+      } else {
+        this.$refs.textInput.clearSelected();
+      }
+    },
+  },
+  methods: {
+    setTextSelected(value) {
+      this.textSelected = value;
+    },
+    onEntityAdded() {
+      if (this.$refs.textInput.clearSelected) {
+        /* istanbul ignore next */
+        this.$refs.textInput.clearSelected();
+      }
+      this.$emit('eventStep');
     },
   },
 };
@@ -90,9 +104,14 @@ export default {
     .translate-form {
         margin-top: 0.5rem;
         &__entities {
-            margin-top: -1rem;
+            margin-top: -0.8rem;
             padding: 1rem;
             background-color: $color-grey-light;
+        }
+
+        &__input {
+          background-color: $color-grey-lighter;
+          border-radius: 4px;
         }
     }
 </style>

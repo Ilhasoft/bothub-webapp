@@ -10,8 +10,7 @@
 
       <div class="example-accordion__tag level-left">
         <language-badge
-          :language="language"
-          :is-pending-example="pendingExample"/>
+          :language="language" />
       </div>
 
       <div
@@ -242,11 +241,6 @@ export default {
       display: flex;
       justify-content: flex-end;
     }
-
-  }
-
-  .pendingExample{
-    background-color: #f5f5f59c;
   }
 
 </style>

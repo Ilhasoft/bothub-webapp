@@ -10,6 +10,7 @@
         'border-thick': thickBorder,
         'border-success': type === 'is-success',
         'border-danger': type === 'is-danger',
+        'expander__trigger--pending': pendingExample,
         'is-light': isLight,
         'border': !type,
       }"
@@ -37,7 +38,7 @@
     <transition name="fade">
       <div
         v-show="open"
-        :class="pendingExample ? 'expander__body-pending' : 'expander__body'">
+        :class="pendingExample ? 'expander__body--pending' : 'expander__body'">
         <slot name="body"/>
       </div>
     </transition>
@@ -168,6 +169,11 @@ export default {
       @media screen and (max-width: $mobile-width) {
         flex-wrap: wrap;
       }
+
+      &--pending {
+        background-color: $color-grey-lighter;
+      }
+
     &__check{
       margin: 0 1rem 0 0;
 
@@ -195,11 +201,12 @@ export default {
       padding: .5rem 0;
       background: #f5f5f5;
       border-radius: 4px;
-    }
-    &__body-pending{
-       padding: .5rem 0;
-      background: #EAEAEA;
-      border-radius: 4px;
+
+      &--pending{
+        padding: .5rem 0;
+        background: #EAEAEA;
+        border-radius: 4px;
+      }
     }
   }
 
