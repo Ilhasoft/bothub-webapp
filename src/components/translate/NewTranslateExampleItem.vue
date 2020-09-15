@@ -3,8 +3,13 @@
     <translate-example-before
       v-bind="$props"
       :open.sync="open"
+      :selected.sync="selected"
       pending-example/>
+    <loading v-show="loadingTranslations" />
     <translate-example-form
+      v-show="!loadingTranslations"
+      ref="form"
+      v-model="translationData"
       :class="{'translate-item--dark': !translation}"
       :available-entities="entities"
       :translation="translation"
@@ -18,6 +23,7 @@ import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 import TranslateExampleBefore from './TranslateExampleBefore';
 import { getEntitiesList } from '@/utils';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'TranslateExample',
@@ -25,6 +31,7 @@ export default {
     TranslateExampleForm,
     ExampleAccordion,
     TranslateExampleBefore,
+    Loading,
   },
   props: {
     id: {
@@ -66,11 +73,12 @@ export default {
       formOpen: false,
       highlighted: null,
       eventClick: false,
-      blockedNextStepTutorial: true,
       open: false,
       translation: null,
       translationLoadError: true,
       loadingTranslations: false,
+      selected: false,
+      translationData: {},
     };
   },
   computed: {
@@ -81,32 +89,54 @@ export default {
       return getEntitiesList(this.entities);
     },
   },
-  watch: {
-    formOpen() {
-      if (this.formOpen === true && this.activeTutorial === 'translate') {
-        this.$nextTick(() => {
-          this.dispatchStep();
-        });
-      }
-    },
+  created() {
+    this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
+    this.$root.$on('saveAll', () => {
+      this.open = false;
+      if (this.selected) this.save();
+    });
+    this.$root.$on('clearAll', () => { this.$refs.form.clear(); });
   },
   mounted() {
-    this.loadTranslations();
+    this.loadTranslation();
   },
   methods: {
     ...mapActions([
       'getTranslations',
+      'newTranslation',
+      'editTranslation',
+      'deleteTranslation',
     ]),
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
+    onSelectAll(value) {
+      this.selected = value;
     },
-    toggleFormOpen() {
-      /* istanbul ignore next */
-      this.formOpen = !this.formOpen;
-      this.blockedNextStepTutorial = false;
-    },
-    dispatchStep() {
-      this.$emit('dispatchEvent', { event: 'dispatchStep' });
+    async save() {
+      let error = null;
+      try {
+        if (this.translation) {
+          if (this.translationData.text && this.translationData.text.trim().length > 0) {
+            await this.editTranslation({
+              translationId: this.translation.id,
+              ...this.translationData,
+              language: this.translateTo,
+              originalExample: this.id,
+            });
+          } else {
+            this.deleteTranslation({ translationId: this.translation.id });
+          }
+        } else {
+          if (this.translationData.text.trim() === '') return;
+          await this.newTranslation({
+            exampleId: this.id,
+            ...this.translationData,
+            language: this.translateTo,
+          });
+        }
+      } catch (e) {
+        error = e;
+      }
+
+      if (!error) this.loadTranslation();
     },
     onTranslated() {
       /* istanbul ignore next */
@@ -117,7 +147,7 @@ export default {
       /* istanbul ignore next */
       this.$emit('dispatchEvent', 'translated');
     },
-    async loadTranslations() {
+    async loadTranslation() {
       this.$emit('loadedTranslations');
       this.translation = null;
       this.loadingTranslations = true;

@@ -1,17 +1,27 @@
 <template>
-  <div class="translate-form">
+  <div
+    class="translate-form">
     <example-text-with-highlighted-entities-input
       ref="textInput"
       v-model="text"
       :entities="allEntities"
       :placeholder="''"
-      :transparent="!focus && text.length === 0"
+      :transparent="!focus && (!translation || text.length === 0)"
       class="translate-form__input"
       size="normal"
       @textSelected="setTextSelected($event)"
-      @focus="focus = true"
+      @focus="onFocus"
       @blur="focus = false"
-    />
+    >
+      <div
+        slot="append"
+        class="translate-form__icon">
+        <b-icon
+          :icon="`chevron-${open ? 'up' : 'down'}`"
+          class="translate-form__icon clickable"
+          @click.native="open ? close() : onFocus()"/>
+      </div>
+    </example-text-with-highlighted-entities-input>
     <div
       v-show="open"
       class="translate-form__entities">
@@ -56,35 +66,50 @@ export default {
       allEntities: this.entities,
       text: this.translation ? this.translation.text : '',
       entities: this.translation ? this.translation.entities : [],
-      focus: false,
       textSelected: null,
+      focus: false,
     };
   },
   computed: {
     entityOptions() {
       return this.availableEntities.map(entity => entity.entity);
     },
+    input() {
+      return {
+        text: this.text,
+        entities: this.allEntities,
+      };
+    },
   },
   watch: {
+    input() {
+      this.$emit('input', this.input);
+    },
     translation() {
       if (!this.translation) return;
       const { text, entities } = this.translation;
       this.text = text;
       this.entities = entities;
     },
-    focus() {
-      if (!this.focus) return;
-      this.$emit('update:open', this.focus);
-    },
     open() {
-      if (this.open) {
-        this.$refs.textInput.focus();
-      } else {
-        this.$refs.textInput.clearSelected();
+      if (!this.open) {
+        this.close();
       }
     },
   },
   methods: {
+    onFocus() {
+      this.focus = true;
+      this.$refs.textInput.focus();
+      this.$emit('update:open', true);
+    },
+    close() {
+      this.$refs.textInput.clearSelected();
+      this.$emit('update:open', false);
+    },
+    clear() {
+      this.text = '';
+    },
     setTextSelected(value) {
       this.textSelected = value;
     },
@@ -107,11 +132,16 @@ export default {
             margin-top: -0.8rem;
             padding: 1rem;
             background-color: $color-grey-light;
+            border-radius: 4px;
         }
 
         &__input {
           background-color: $color-fake-white;
           border-radius: 4px;
+        }
+
+        &__icon {
+          width: 1rem;
         }
     }
 </style>

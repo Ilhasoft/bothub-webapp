@@ -2,7 +2,7 @@
   <div>
     <div class="repository-translate__list__options">
       <div class="repository-translate__list__options__check">
-        <b-checkbox /> Select All
+        <b-checkbox v-model="selectAll"/> Select All
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
@@ -10,7 +10,8 @@
           icon-right="pencil" />
         <b-button
           type="is-primary"
-          icon-right="delete" />
+          icon-right="eraser"
+          @click="clearAll" />
       </div>
     </div>
     <paginatedList
@@ -24,6 +25,10 @@
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
       @update:loading="onLoading($event)"/>
+
+    <b-button
+      type="is-secondary"
+      @click="saveAll"> Save selected </b-button>
   </div>
 </template>
 
@@ -63,6 +68,7 @@ export default {
     return {
       translateList: null,
       translateExampleItem: TranslateExampleItem,
+      selectAll: false,
     };
   },
   computed: {
@@ -75,6 +81,7 @@ export default {
     async to() { await this.updateList(); },
     query() { this.updateList(); },
     update() { this.updateList(); },
+    selectAll() { this.$root.$emit('selectAll', this.selectAll); },
   },
   async mounted() {
     await this.updateList();
@@ -84,6 +91,12 @@ export default {
       'getExamplesToTranslate',
       'searchExamples',
     ]),
+    clearAll() {
+      this.$root.$emit('clearAll');
+    },
+    saveAll() {
+      this.$root.$emit('saveAll');
+    },
     async updateList() {
       this.translateList = null;
       if (!!this.from && !!this.to) {

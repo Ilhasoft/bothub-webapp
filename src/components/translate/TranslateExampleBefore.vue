@@ -5,7 +5,7 @@
     pending-example >
 
     <div slot="check">
-      <b-checkbox />
+      <b-checkbox v-model="isSelected" />
     </div>
 
     <div
@@ -87,6 +87,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -94,6 +98,7 @@ export default {
       deleteDialog: null,
       editing: false,
       highlighted: null,
+      isSelected: this.selected,
     };
   },
   computed: {
@@ -109,6 +114,12 @@ export default {
     },
   },
   watch: {
+    isSelected() {
+      this.$emit('update:selected', this.isSelected);
+    },
+    selected() {
+      this.isSelected = this.selected;
+    },
     open() {
       this.isOpen = this.open;
     },
