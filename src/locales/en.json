@@ -330,7 +330,7 @@
     },
     "translate": {
       "title_translate": "Translate a sentence",
-      "subtitle_translate": "Click on a sentence to translate from your base language into other languages ​​supported by Bothub.",
+      "subtitle_translate": "Manage and translate the sentences of your intelligence.",
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
       "submit_translation": "Submit Translation",
@@ -345,7 +345,7 @@
       "translate_to": "Translate to:",
       "to": "to",
       "no_entities": "No entities to add in this translation",
-      "languages_select": "Search language",
+      "languages_select": "Choose a language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
       "import_title": "Import sentences",
