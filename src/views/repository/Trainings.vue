@@ -410,8 +410,6 @@ export default {
       &__bar {
       position: relative;
       display: block;
-      font-size: 16px;
-      line-height: 16px;
       width: 100%;
       background-color: #EAEAEA;
     }
@@ -420,7 +418,6 @@ export default {
       display: inline-block;
       vertical-align: middle;
       height: 25px;
-      overflow: hidden;
       background-color: #312B53;
     }
       &__bar span:after {
