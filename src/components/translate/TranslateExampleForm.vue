@@ -6,7 +6,7 @@
       v-model="text"
       :entities="allEntities"
       :placeholder="''"
-      :transparent="!focus && (!translation || text.length === 0)"
+      :transparent="!focus && !translation"
       small-icon
       class="translate-form__input"
       size="normal"
@@ -134,6 +134,7 @@ export default {
             padding: 1rem;
             background-color: $color-grey-light;
             border-radius: 4px;
+            min-height: 5rem;
         }
 
         &__input {

@@ -184,8 +184,9 @@ export default {
       this.$emit('input', this.allEntities);
     },
     text(newText, oldText) {
-      if (newText === '' || (newText !== oldText && oldText !== '')) {
+      if (newText !== oldText) {
         this.recomputeEntitiesFor(newText, oldText);
+        console.log('update');
       }
     },
   },
@@ -240,6 +241,7 @@ export default {
 
         const findClosestStart = (lastMatch) => {
           if (lastMatch === undefined) {
+            if (oldEntityText.length === 0 || text.length === 0) return -1;
             const index = text.indexOf(oldEntityText);
             return index === -1
               ? index

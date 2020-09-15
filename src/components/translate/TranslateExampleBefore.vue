@@ -26,7 +26,8 @@
         v-if="!editing"
         :entities-list="entitiesList"
         :highlighted.sync="highlighted"
-        :intent="intent" />
+        :intent="intent"
+        class="example-accordion__info" />
 
     </div>
   </sentence-accordion>
@@ -160,6 +161,10 @@ export default {
     &__btns-wrapper {
       display: flex;
       justify-content: flex-end;
+    }
+
+    &__info {
+      min-height: 4rem;
     }
 
   }
