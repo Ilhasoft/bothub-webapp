@@ -7,6 +7,7 @@
       :entities="allEntities"
       :placeholder="''"
       :transparent="!focus && (!translation || text.length === 0)"
+      small-icon
       class="translate-form__input"
       size="normal"
       @textSelected="setTextSelected($event)"

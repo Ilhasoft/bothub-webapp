@@ -23,6 +23,7 @@
             <self-adjust-input
               ref="input"
               :placeholder="placeholder"
+              :small-icon="smallIcon"
               v-model="val"
               transparent
               @select="emitTextSelected"
@@ -71,6 +72,10 @@ export default {
     transparent: {
       type: Boolean,
       default: false,
+    },
+    smallIcon: {
+      type: Boolean,
+      default: null,
     },
   },
   data() {
