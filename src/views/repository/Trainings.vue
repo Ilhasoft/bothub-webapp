@@ -27,9 +27,9 @@
               <div
                 v-if="trainProgress"
                 class="trainings-repository__new-example__train__progress">
-                <div
-                  :style="{ width: progress + '%' }"
-                  class="trainings-repository__new-example__train__bar"/>
+                <div class="trainings-repository__new-example__train__bar">
+                  <span :style="{ width: progress + '%' }"/>
+                </div>
                 <p v-html="$t('webapp.trainings.train_progress', {progress: progress})"/>
               </div>
               <div
@@ -361,6 +361,7 @@ export default {
   @import '~@/assets/scss/colors.scss';
   @import '~@/assets/scss/variables.scss';
 
+
 .trainings-repository {
   &__list-wrapper {
     display: flex;
@@ -387,17 +388,18 @@ export default {
     background-color: $color-white;
 
     &__pending-example{
-      margin-top: 2rem;
+      margin-top: 1.6rem;
+      min-height: 5rem;
     }
+
     &__train {
       display: flex;
+      margin-top: -2rem;
       margin-bottom: 4rem;
 
       &__progress {
         height: 25px;
         width: 60%;
-        background-color: #EAEAEA;
-        border-radius: 0px;
 
         p{
           font-size: 13px;
@@ -406,12 +408,55 @@ export default {
       }
 
       &__bar {
-        background: #312B53;
-        height: 25px;
-        width: 15px;
+      position: relative;
+      display: block;
+      width: 100%;
+      background-color: $color-grey-light;
+    }
+      &__bar span {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      height: 25px;
+      background-color: $color-secondary;
+    }
+      &__bar span:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      content: "";
+      background-size: 100%;
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.603) 25%,
+                                        rgba(0, 0, 0, 0) 25%,
+                                        rgba(0, 0, 0, 0) 50%,
+                                        rgba(255, 255, 255, 0.603) 50%,
+                                        rgba(255, 255, 255, 0.603) 75%,
+                                        rgba(0, 0, 0, 0) 75%,
+                                        rgba(0, 0, 0, 0));
+      background-size: 30px 30px;
+      opacity: 0.3;
+      animation: progress-animation 0.5s infinite linear;
+    }
+    @-webkit-keyframes progress-animation {
+      0% {
+        background-position: 0 100%;
+      }
+      100% {
+        background-position: 30px 100%;
       }
     }
-  }
+    @keyframes progress-animation {
+      0% {
+        background-position: 0 100%;
+      }
+      100% {
+        background-position: 30px 100%;
+      }
+    }
+      }
+    }
 }
 
 </style>
