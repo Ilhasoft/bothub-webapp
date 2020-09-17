@@ -411,14 +411,14 @@ export default {
       position: relative;
       display: block;
       width: 100%;
-      background-color: #EAEAEA;
+      background-color: $color-grey-light;
     }
       &__bar span {
       position: relative;
       display: inline-block;
       vertical-align: middle;
       height: 25px;
-      background-color: #312B53;
+      background-color: $color-secondary;
     }
       &__bar span:after {
       position: absolute;
