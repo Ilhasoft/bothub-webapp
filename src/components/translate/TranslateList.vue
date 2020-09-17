@@ -21,6 +21,7 @@
       :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
+      load-all
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"

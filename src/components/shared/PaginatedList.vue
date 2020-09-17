@@ -1,7 +1,8 @@
 <template>
   <div v-if="list && !list.empty">
     <component
-      v-for="item in list.items"
+      v-for="(item, index) in list.items"
+      v-show="shouldShow(index)"
       :key="item.key"
       :is="itemComponent"
       v-bind="addAttrs(item)"
@@ -74,6 +75,10 @@ export default {
       type: String,
       default: null,
     },
+    loadAll: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -96,6 +101,7 @@ export default {
       this.$emit('update:loading', this.isLoading);
     },
     async page() {
+      if (this.loadAll) return;
       await this.fetch();
     },
   },
@@ -106,6 +112,11 @@ export default {
     async fetch() {
       if (!(this.list && this.list.updateItems)) return false;
       try {
+        if (this.loadAll) {
+          await this.list.getAllItems();
+          this.$emit('updated');
+          return true;
+        }
         await this.list.updateItems(this.page);
         this.$emit('updated');
         return true;
@@ -117,6 +128,13 @@ export default {
         this.$emit('error', this.error);
       }
       return false;
+    },
+    shouldShow(index) {
+      if (!this.loadAll) return true;
+
+      const offset = (this.page - 1) * this.perPage;
+
+      return index >= offset && index < offset + this.perPage;
     },
     onDispatchEvent(arg) {
       const [event, value] = arg instanceof Object

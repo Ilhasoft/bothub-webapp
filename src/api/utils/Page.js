@@ -31,7 +31,7 @@ export default class Page {
     this.loading = true;
     try {
       this.items = await this.fetchAll([], 1);
-      this.total = this.items.count;
+      this.total = this.items.length;
       this.loading = false;
       this.page = 1;
       return this.items;

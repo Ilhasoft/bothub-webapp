@@ -69,10 +69,6 @@ export default {
   },
   data() {
     return {
-      deleteDialog: null,
-      formOpen: false,
-      highlighted: null,
-      eventClick: false,
       open: false,
       translation: null,
       translationLoadError: true,
@@ -95,7 +91,7 @@ export default {
       this.open = false;
       if (this.selected) this.save();
     });
-    this.$root.$on('clearAll', () => { this.$refs.form.clear(); });
+    this.$root.$on('clearAll', () => { this.open = false; if (this.selected) this.$refs.form.clear(); });
   },
   mounted() {
     this.loadTranslation();
@@ -111,32 +107,36 @@ export default {
       this.selected = value;
     },
     async save() {
-      let error = null;
       try {
-        if (this.translation) {
-          if (this.translationData.text && this.translationData.text.trim().length > 0) {
-            await this.editTranslation({
+        if (this.translationData.text.trim().length === 0) {
+          if (!this.translation) return;
+
+          await this.deleteTranslation({ translationId: this.translation.id });
+          this.translation = null;
+        } else {
+          this.loadingTranslations = true;
+          let response = null;
+          if (this.translation) {
+            response = await this.editTranslation({
               translationId: this.translation.id,
               ...this.translationData,
               language: this.translateTo,
               originalExample: this.id,
             });
           } else {
-            this.deleteTranslation({ translationId: this.translation.id });
+            response = await this.newTranslation({
+              exampleId: this.id,
+              ...this.translationData,
+              language: this.translateTo,
+            });
           }
-        } else {
-          if (this.translationData.text.trim() === '') return;
-          await this.newTranslation({
-            exampleId: this.id,
-            ...this.translationData,
-            language: this.translateTo,
-          });
+          this.translation = response.data;
         }
       } catch (e) {
-        error = e;
+        this.translationLoadError = true;
+      } finally {
+        this.loadingTranslations = false;
       }
-
-      if (!error) this.loadTranslation();
     },
     onTranslated() {
       /* istanbul ignore next */
