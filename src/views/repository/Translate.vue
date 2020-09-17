@@ -37,7 +37,8 @@
                   <b-field
                     id="tour-translate-step-2"
                     :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases">
-                    <language-autocomplete
+                    <language-select-input
+                      :exclude="repository.language"
                       v-model="translate.to" />
                   </b-field>
                 </b-field>
@@ -246,7 +247,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import LanguageAutocomplete from '@/components/inputs/LanguageSelectInput';
+import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
@@ -263,7 +264,7 @@ export default {
   components: {
     FilterExamples,
     RepositoryViewBase,
-    LanguageAutocomplete,
+    LanguageSelectInput,
     TranslateList,
     TranslationsList,
     LoginForm,
