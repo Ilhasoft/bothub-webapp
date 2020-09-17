@@ -11,6 +11,7 @@
       ref="form"
       v-model="translationData"
       :class="{'translate-item--dark': !translation}"
+      :editing="editing"
       :available-entities="entities"
       :translation="translation"
       :open.sync="open"/>
@@ -66,6 +67,10 @@ export default {
       type: String,
       required: true,
     },
+    editing: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -91,7 +96,12 @@ export default {
       this.open = false;
       if (this.selected) this.save();
     });
-    this.$root.$on('clearAll', () => { this.open = false; if (this.selected) this.$refs.form.clear(); });
+    this.$root.$on('deleteAll', () => {
+      this.open = false; if (this.selected) {
+        this.translationData.text = '';
+        this.save();
+      }
+    });
   },
   mounted() {
     this.loadTranslation();
@@ -110,7 +120,6 @@ export default {
       try {
         if (this.translationData.text.trim().length === 0) {
           if (!this.translation) return;
-
           await this.deleteTranslation({ translationId: this.translation.id });
           this.translation = null;
         } else {
@@ -178,6 +187,5 @@ export default {
             height: 100%;
             margin-right: 1rem;
         }
-        margin-bottom: 1rem;
     }
 </style>

@@ -5,14 +5,14 @@
       ref="textInput"
       v-model="text"
       :entities="allEntities"
+      :readonly="!editing"
       :placeholder="''"
-      :transparent="!focus && !translation"
+      :transparent="!editing && !translation"
       small-icon
       class="translate-form__input"
       size="normal"
       @textSelected="setTextSelected($event)"
       @focus="onFocus"
-      @blur="focus = false"
     >
       <div
         slot="append"
@@ -24,7 +24,7 @@
       </div>
     </example-text-with-highlighted-entities-input>
     <div
-      v-show="open"
+      v-show="open && editing"
       class="translate-form__entities">
       <example-entity-small-input
         v-model="allEntities"
@@ -61,6 +61,10 @@ export default {
       type: Object,
       default: null,
     },
+    editing: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -68,7 +72,6 @@ export default {
       text: this.translation ? this.translation.text : '',
       entities: this.translation ? this.translation.entities : [],
       textSelected: null,
-      focus: false,
     };
   },
   computed: {
@@ -87,7 +90,11 @@ export default {
       this.$emit('input', this.input);
     },
     translation() {
-      if (!this.translation) return;
+      if (!this.translation) {
+        this.text = '';
+        this.entities = [];
+        return;
+      }
       const { text, entities } = this.translation;
       this.text = text;
       this.entities = entities;
@@ -100,8 +107,8 @@ export default {
   },
   methods: {
     onFocus() {
-      this.focus = true;
-      this.$refs.textInput.focus();
+      if (!this.editing) this.$refs.textInput.clearSelected();
+      else this.$refs.textInput.focus();
       this.$emit('update:open', true);
     },
     close() {

@@ -25,6 +25,7 @@
               :placeholder="placeholder"
               :small-icon="smallIcon"
               v-model="val"
+              v-bind="$attrs"
               transparent
               @select="emitTextSelected"
               @blur="$emit('blur')"

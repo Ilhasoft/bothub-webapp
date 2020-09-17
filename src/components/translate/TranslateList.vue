@@ -6,12 +6,25 @@
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
+          v-show="!editing"
           type="is-primary"
-          icon-right="pencil" />
+          icon-right="pencil"
+          @click="editing = true"/>
         <b-button
+          v-show="!editing"
           type="is-primary"
-          icon-right="eraser"
-          @click="clearAll" />
+          icon-right="delete"
+          @click="deleteAll" />
+        <b-button
+          v-show="editing"
+          type="is-primary"
+          icon-right="check-bold"
+          @click="saveAll" />
+        <b-button
+          v-show="editing"
+          type="is-primary"
+          icon-right="close-thick"
+          @click="editing = false" />
       </div>
     </div>
     <paginatedList
@@ -21,15 +34,12 @@
       :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
+      :add-attributes="{editing}"
       load-all
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
       @update:loading="onLoading($event)"/>
-
-    <b-button
-      type="is-secondary"
-      @click="saveAll"> Save selected </b-button>
   </div>
 </template>
 
@@ -70,6 +80,7 @@ export default {
       translateList: null,
       translateExampleItem: TranslateExampleItem,
       selectAll: false,
+      editing: false,
     };
   },
   computed: {
@@ -92,11 +103,13 @@ export default {
       'getExamplesToTranslate',
       'searchExamples',
     ]),
-    clearAll() {
-      this.$root.$emit('clearAll');
-    },
     saveAll() {
       this.$root.$emit('saveAll');
+      this.editing = false;
+      this.selectAll = false;
+    },
+    deleteAll() {
+      this.$root.$emit('deleteAll');
     },
     async updateList() {
       this.translateList = null;
@@ -108,13 +121,6 @@ export default {
           version: this.repositoryVersion,
           language: this.from,
         });
-        // this.translateList = await this.getExamplesToTranslate({
-        //   repositoryUuid: this.repository.uuid,
-        //   version: this.repositoryVersion,
-        //   from: this.from,
-        //   to: this.to,
-        //   query: this.query,
-        // });
       }
       this.$emit('listPhrase', this.translateList);
     },
@@ -140,17 +146,14 @@ export default {
     margin-left: 0.5rem;
 
       &__options {
-        padding: 0 1rem 0 0.5rem;;
+        padding: 0 1rem 0 0.5rem;
+        margin-bottom: 2.1rem;
         width: 100%;
         display: flex;
         justify-content: space-between;
       &__check {
         display: flex;
         align-items: center;
-      }
-
-      &__buttons {
-
       }
     }
   }
