@@ -37,13 +37,10 @@
                   <b-field
                     id="tour-translate-step-2"
                     :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases">
-                    <b-autocomplete
-                      :data="filteredLanguage"
-                      v-model="languageTyped"
+                    <language-select-input
+                      :exclude="[repository.language]"
                       :placeholder="$t('webapp.translate.languages_select')"
-                      keep-first
-                      dropdown-position="bottom"
-                      @select="option => selectedLanguage = option"/>
+                      v-model="translate.to" />
                   </b-field>
                 </b-field>
               </div>
@@ -251,7 +248,7 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import LanguageSelect from '@/components/inputs/LanguageSelect';
+import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
@@ -260,7 +257,7 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import Tour from '@/components/Tour';
 import {
-  exampleSearchToDicty, exampleSearchToString, languageListToDict, LANGUAGES,
+  exampleSearchToDicty, exampleSearchToString, languageListToDict,
 } from '@/utils/index';
 
 export default {
@@ -268,7 +265,7 @@ export default {
   components: {
     FilterExamples,
     RepositoryViewBase,
-    LanguageSelect,
+    LanguageSelectInput,
     TranslateList,
     TranslationsList,
     LoginForm,
@@ -296,8 +293,6 @@ export default {
       loadingList: true,
       hasPhrases: false,
       allTranslations: false,
-      languageTyped: '',
-      selectedLanguage: null,
       exportOption: [
         { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
@@ -317,17 +312,6 @@ export default {
       );
       return languageObject;
     },
-    languages() {
-      return Object.keys(LANGUAGES)
-        .map(lang => (LANGUAGES[lang]))
-        .filter(lang => lang !== this.baseLanguage.toString());
-    },
-    filteredLanguage() {
-      return this.languages.filter(translate => translate
-        .toString()
-        .toLowerCase()
-        .indexOf(this.languageTyped.toLowerCase()) >= 0);
-    },
   },
   watch: {
     isImportFileVisible() {
@@ -336,17 +320,6 @@ export default {
         return this.removeSelectedFile();
       }
       return '';
-    },
-    selectedLanguage() {
-      const getLanguageIndex = this.languages.indexOf(this.selectedLanguage);
-      if (getLanguageIndex !== -1) {
-        this.translate.to = Object.keys(LANGUAGES)[getLanguageIndex];
-      }
-    },
-    languageTyped() {
-      if (this.languageTyped === '') {
-        this.translate.to = null;
-      }
     },
   },
   methods: {
