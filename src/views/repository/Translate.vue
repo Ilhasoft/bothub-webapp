@@ -38,7 +38,8 @@
                     id="tour-translate-step-2"
                     :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases">
                     <language-select-input
-                      :exclude="repository.language"
+                      :exclude="[repository.language]"
+                      :placeholder="$t('webapp.translate.languages_select')"
                       v-model="translate.to" />
                   </b-field>
                 </b-field>

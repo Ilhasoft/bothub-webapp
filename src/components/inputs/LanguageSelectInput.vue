@@ -1,7 +1,7 @@
 <template>
   <b-autocomplete
     v-model="value"
-    :placeholder="labelPlaceholder"
+    v-bind="$attrs"
     :custom-formatter="formatter"
     :data="filteredChoices"
     dropdown-position="bottom"
@@ -20,10 +20,6 @@ export default {
     initialData: {
       type: [Array, String],
       default: null,
-    },
-    labelPlaceholder: {
-      type: String,
-      default: '',
     },
     exclude: {
       type: Array,
