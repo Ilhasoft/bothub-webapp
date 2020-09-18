@@ -4,7 +4,7 @@
     <example-text-with-highlighted-entities-input
       ref="textInput"
       v-model="text"
-      :entities="allEntities"
+      :entities="entities"
       :readonly="!editing"
       :placeholder="''"
       :transparent="!editing && !translation"
@@ -27,7 +27,7 @@
       v-show="open && editing"
       class="translate-form__entities">
       <example-entity-small-input
-        v-model="allEntities"
+        v-model="entities"
         :text="text"
         :available-entities="entityOptions"
         :entities="entities"
@@ -65,12 +65,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    initialData: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
-      allEntities: this.entities,
-      text: this.translation ? this.translation.text : '',
-      entities: this.translation ? this.translation.entities : [],
+      text: '',
+      entities: [],
       textSelected: null,
     };
   },
@@ -81,7 +84,7 @@ export default {
     input() {
       return {
         text: this.text,
-        entities: this.allEntities,
+        entities: this.entities,
       };
     },
   },
@@ -90,20 +93,20 @@ export default {
       this.$emit('input', this.input);
     },
     translation() {
-      if (!this.translation) {
-        this.text = '';
-        this.entities = [];
-        return;
-      }
-      const { text, entities } = this.translation;
-      this.text = text;
-      this.entities = entities;
+      const { text, entities } = this.initialData ? this.initialData : this.translation || {};
+      this.text = text || '';
+      this.entities = entities || [];
     },
     open() {
       if (!this.open) {
         this.close();
       }
     },
+  },
+  mounted() {
+    const { text, entities } = this.initialData ? this.initialData : this.translation || {};
+    this.text = text || '';
+    this.entities = entities || [];
   },
   methods: {
     onFocus() {

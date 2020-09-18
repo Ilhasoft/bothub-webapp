@@ -13,6 +13,7 @@
       :class="{'translate-item--dark': !translation}"
       :editing="editing"
       :available-entities="entities"
+      :initial-data="initialData[id]"
       :translation="translation"
       :open.sync="open"/>
   </div>
@@ -71,6 +72,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    initialData: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
@@ -79,7 +84,10 @@ export default {
       translationLoadError: true,
       loadingTranslations: false,
       selected: false,
-      translationData: {},
+      translationData: {
+        text: '',
+        entities: [],
+      },
     };
   },
   computed: {
@@ -88,6 +96,21 @@ export default {
     // ]),
     entitiesList() {
       return getEntitiesList(this.entities);
+    },
+    isEmpty() {
+      return !(this.translationData && this.translationData.text.trim().length > 0);
+    },
+  },
+  watch: {
+    translationData() {
+      if (!this.translationData.text) return;
+      this.$emit('dispatchEvent', {
+        event: 'onChange',
+        value: {
+          id: this.id,
+          data: this.isEmpty ? null : this.translationData,
+        },
+      });
     },
   },
   created() {
@@ -104,6 +127,7 @@ export default {
     });
   },
   mounted() {
+    console.log('mounted');
     this.loadTranslation();
   },
   methods: {
@@ -118,7 +142,7 @@ export default {
     },
     async save() {
       try {
-        if (this.translationData.text.trim().length === 0) {
+        if (this.isEmpty) {
           if (!this.translation) return;
           await this.deleteTranslation({ translationId: this.translation.id });
           this.translation = null;
