@@ -22,7 +22,6 @@
             </div>
             <self-adjust-input
               ref="input"
-              :placeholder="placeholder"
               :small-icon="smallIcon"
               v-model="val"
               v-bind="$attrs"
@@ -65,10 +64,6 @@ export default {
     entities: {
       type: Array,
       default: () => ([]),
-    },
-    placeholder: {
-      type: String,
-      default: '',
     },
     transparent: {
       type: Boolean,
