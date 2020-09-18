@@ -5,7 +5,7 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
   <form class="columns wrapper is-vcentered is-variable is-2">
     <div class="column is-three-fifths">
       <b-field-stub addons="true">
-        <example-text-with-highlighted-entities-input-stub value="" entities="" placeholder="some specific text" id="tour-training-step-1" is-previous-disabled="true" is-step-blocked="true" size="normal">
+        <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-training-step-1" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal">
           <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append"></language-append-select-input-stub>
         </example-text-with-highlighted-entities-input-stub>
       </b-field-stub>
