@@ -80,7 +80,7 @@
           @queryStringFormated="onSearch($event)"
           @textData="changedText($event)"/>
         <examples-list
-          :query="query"
+          :query="translationQuery"
           :update="update"
           :text-data="textExample"
           translation-data
@@ -180,6 +180,10 @@ export default {
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
       return this.repository.authorization.can_write;
+    },
+    translationQuery() {
+      const { language, ...query } = this.query;
+      return { ...query, ...(language ? { is_available_language: language } : {}) };
     },
   },
   watch: {
