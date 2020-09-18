@@ -7,7 +7,7 @@ exports[`ExampleTextWithHighlightedEntitiesInput.vue renders correctly 1`] = `
       <div class="field">
         <div class="control has-icons-right is-family-primary">
           <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
-          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="some specific text">
+          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="">
             <!---->
           </self-adjust-input-stub>
         </div>
@@ -25,7 +25,7 @@ exports[`ExampleTextWithHighlightedEntitiesInput.vue set text with entity render
         <div class="control has-icons-right is-family-primary">
           <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-mediterranean-sea example-txt-w-highlighted-entities__entity__text"></span></div>
           <div class="example-txt-w-highlighted-entities__entity"><span class="example-txt-w-highlighted-entities__entity__before"></span><span class="entity-selected example-txt-w-highlighted-entities__entity__text"></span></div>
-          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="some specific text">
+          <self-adjust-input-stub value="" transparent="true" size="normal" placeholder="">
             <!---->
           </self-adjust-input-stub>
         </div>
