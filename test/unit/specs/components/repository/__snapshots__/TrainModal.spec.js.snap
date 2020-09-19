@@ -17,10 +17,11 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
             <div>
               <div class="train-modal__wrapper__content__content-requirements">
                 <div class="train-modal__wrapper__content__content-requirements__item">
-                  <p><strong>requirement 1</strong> <br> <span></span></p>
-                  <div>
-                    <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
+                  <div class="train-modal__wrapper__content__content-requirements__item__field">
+                    <b-tag-stub type="is-primary" rounded="true" tabstop="true">en</b-tag-stub>
                   </div>
+                  <p><strong>requirement 1</strong> <br> <span></span></p>
+                  <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
                 </div>
               </div>
             </div>
@@ -28,6 +29,7 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
           </div>
           <div class="train-modal__buttons">
             <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
+            <!---->
           </div>
         </div>
       </div>
@@ -54,16 +56,18 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
             <div>
               <div class="train-modal__wrapper__content__content-requirements">
                 <div class="train-modal__wrapper__content__content-requirements__item">
-                  <p><strong>warning 1</strong> <br> <span></span></p>
-                  <div>
-                    <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
+                  <div class="train-modal__wrapper__content__content-requirements__item__field">
+                    <b-tag-stub type="is-primary" rounded="true" tabstop="true">en</b-tag-stub>
                   </div>
+                  <p><strong>warning 1</strong> <br> <span></span></p>
+                  <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
                 </div>
               </div>
             </div>
           </div>
           <div class="train-modal__buttons">
             <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
+            <!---->
           </div>
         </div>
       </div>
