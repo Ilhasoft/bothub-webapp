@@ -323,9 +323,11 @@
       "status_ok": "Your bot is ready to be trained!",
       "language_warning": "Couldn't execute training",
       "missing_requirements": "Some errors were found and your training has not been completed Correct and try again.",
+      "ready_for_train_title": "Some errors were found",
+      "ready_for_train_subtitle": "Go back and correct any errors found or proceed and partially train.",
       "warnings": "Warnings",
-      "train": "Train",
-      "ok": "ok!"
+      "train": "Proceed",
+      "cancel": "Cancel"
     },
     "translate": {
       "title_translate": "Translate a sentence",
