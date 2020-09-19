@@ -616,7 +616,7 @@
             "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",
             "step_5": "Por fim, envie sua frase.",
             "step_6": "Após adicionar as frases, clique aqui. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
-            "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Treinar\" para prosseguir. <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, cliquem em \"Ok\" para repetir."
+            "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Prosseguir\". <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, clique em \"Cancelar\" para repetir."
         },
         "evaluate": {
           "step_0": "<strong> Vamos para o teste de frases! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",

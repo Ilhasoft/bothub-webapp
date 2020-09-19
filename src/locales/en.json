@@ -617,7 +617,7 @@
           "step_4": "Identify the intention of the phrase you typed. Ex: order",
           "step_5": "Finally, submit your sentence.",
           "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
-          "step_7": "Make sure your intelligence is ready to train and click \" Train \" to proceed. <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Ok \" to repeat."
+          "step_7": "Make sure your intelligence is ready to train and click \"Proceed\". <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Cancel \" to repeat."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",

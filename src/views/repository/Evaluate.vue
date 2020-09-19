@@ -16,7 +16,11 @@
             <div class="evaluate__content-header__wrapper">
               <div
                 class="evaluate__content-header__wrapper__language-select">
-                <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
+                <p>
+                  <strong>
+                    {{ $t('webapp.evaluate.header_title_lang') }}
+                  </strong>
+                </p>
                 <div
                   id="tour-evaluate-step-1"
                   :is-previous-disabled="true">

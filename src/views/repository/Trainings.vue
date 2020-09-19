@@ -338,6 +338,9 @@ export default {
           repositoryUuid: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
         });
+        if (this.activeTutorial === 'training') {
+          this.dispatchFinish();
+        }
         await this.setRepositoryTraining(true);
         await this.updateRepository(false);
         await this.getRepositoryStatus();
@@ -346,9 +349,6 @@ export default {
           message: this.$t('webapp.trainings.default_error'),
           type: 'is-danger',
         });
-      }
-      if (this.repository.ready_for_train) {
-        this.dispatchFinish();
       }
       this.training = false;
     },
@@ -368,7 +368,6 @@ export default {
 
     &__button{
       color: $color-white;
-      margin-top: 1rem;
       width: 14rem;
 
       &:hover{

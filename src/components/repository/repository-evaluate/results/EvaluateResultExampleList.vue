@@ -7,7 +7,7 @@
     <div
       v-if="busy"
       class="evaluate-result-example-list__loading">
-      <Loading/>
+      <loading/>
     </div>
     <p v-else-if="error">{{ $t('webapp.result.error') }}</p>
     <div v-else-if="resultExampleList && resultExampleList.length > 0">

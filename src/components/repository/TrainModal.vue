@@ -1,8 +1,7 @@
 <template>
   <b-modal
     :active="open"
-    :can-cancel="false"
-    :width="665">
+    :can-cancel="false">
     <div
       id="tour-training-step-7"
       :is-previous-disabled="true"
@@ -185,10 +184,12 @@ export default {
   pointer-events: visible;
 }
 .train-modal {
-  max-height: 535px;
+  max-height: 33.438rem;
+  width: 41.563rem;
   background-color: $color-white;
   box-shadow: 0px 3px 6px #00000029;
-  border-radius: 8px;
+  border-radius: 0.5rem;
+  margin: auto;
 
 
   &__close{
@@ -230,7 +231,7 @@ export default {
 
     &__content{
       overflow: auto;
-      max-height: 220px;
+      max-height: 13.75rem;
 
       &__content-requirements {
 
@@ -240,10 +241,10 @@ export default {
           padding: 2.1rem 1rem;
           align-items: center;
           margin: 0 1rem 0.6rem 0;
-          height: 65px;
+          height: 4.063rem;
           border: 1.5px solid $color-danger;
           background-color: $color-fake-white;
-          border-radius: 6px;
+          border-radius: 0.375rem;
             &__icon{
               color:$color-danger;
             }
@@ -260,8 +261,8 @@ export default {
 
     &__style{
       box-shadow: 0px 3px 6px #00000029;
-      width: 96px;
-      height: 43px;
+      width: 6rem;
+      height: 2.688rem;
       font-weight: $font-weight-bolder;
     }
   }
