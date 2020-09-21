@@ -323,9 +323,12 @@
       "status_ok": "Your bot is ready to be trained!",
       "language_warning": "Couldn't execute training",
       "missing_requirements": "Some errors were found and your training has not been completed Correct and try again.",
+      "ready_for_train_title": "Some errors were found",
+      "ready_for_train_subtitle": "Go back and correct any errors found or proceed and partially train.",
       "warnings": "Warnings",
-      "train": "Train",
-      "ok": "ok!"
+      "train": "Proceed",
+      "cancel": "Cancel",
+      "ok": "ok"
     },
     "translate": {
       "title_translate": "Translate a sentence",
@@ -617,7 +620,7 @@
           "step_4": "Identify the intention of the phrase you typed. Ex: order",
           "step_5": "Finally, submit your sentence.",
           "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
-          "step_7": "Make sure your intelligence is ready to train and click \" Train \" to proceed. <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Ok \" to repeat."
+          "step_7": "Make sure your intelligence is ready to train and click \"Proceed\". <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Cancel \" to repeat."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",

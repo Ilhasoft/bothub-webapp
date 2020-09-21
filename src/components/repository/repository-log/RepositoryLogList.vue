@@ -36,14 +36,6 @@
               class="repository-log-list__section__icons"/>
           </div>
         </b-tooltip>
-        <!--   <b-tooltip :label="$t('webapp.inbox.remove_log_button')">
-          <div @click="showDeleteModal">
-          <b-icon
-            icon="delete"
-            class="repository-log-list__section__icons"/>
-        </div>
-        </b-tooltip>-->
-
       </div>
     </div>
     <paginated-list
