@@ -21,7 +21,9 @@ export default {
   async getTranslationFromSentence(store, {
     repositoryUuid, repositoryVersion, originalId, toLanguage,
   }) {
-    return translate.translationFromSentence(repositoryUuid, repositoryVersion, originalId, toLanguage);
+    return translate.translationFromSentence(
+      repositoryUuid, repositoryVersion, originalId, toLanguage,
+    );
   },
   async deleteTranslation(store, { translationId }) {
     return translate.delete(translationId);
