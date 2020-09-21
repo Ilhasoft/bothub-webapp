@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainResponse.vue renders correctly 1`] = `
-<b-modal-stub active="true" width="567" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true">
+<b-modal-stub active="true" width="520" animation="zoom-out" oncancel="function _default() {}" scroll="clip" destroyonhide="true">
   <div class="train-response">
     <div class="train-response__close">
       <b-icon-stub icon="close" class="train-response__close__icon"></b-icon-stub>
