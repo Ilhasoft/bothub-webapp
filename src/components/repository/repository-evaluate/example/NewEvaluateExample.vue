@@ -108,6 +108,12 @@ export default {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
   },
+  props: {
+    language: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       textSelected: null,
@@ -123,9 +129,6 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      language: state => state.Repository.evaluateLanguage,
-    }),
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',

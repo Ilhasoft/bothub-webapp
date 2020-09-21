@@ -27,7 +27,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="evaluate__divider" /> -->
           <div class="evaluate__content-wrapper">
             <base-evaluate-results
               :result-id="resultId"
@@ -87,7 +86,6 @@ export default {
       selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
-      getEvaluateLanguage: 'getEvaluateLanguage',
       authenticated: 'authenticated',
     }),
     resultId() {
@@ -95,9 +93,6 @@ export default {
     },
   },
   watch: {
-    currentLanguage(language) {
-      this.setEvaluateLanguage(language);
-    },
     selectedRepository() {
       this.getExamples();
       if (this.currentLanguage === '') {
@@ -107,7 +102,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setEvaluateLanguage',
       'getEvaluateExample',
     ]),
     getExamples() {

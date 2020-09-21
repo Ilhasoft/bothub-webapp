@@ -64,28 +64,18 @@ export default {
   },
   computed: {
     ...mapState({
-      resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
-      getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
     }),
   },
   watch: {
-    currentLanguage(language) {
-      this.setEvaluateLanguage(language);
-    },
     selectedRepository() {
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
     },
-  },
-  methods: {
-    ...mapActions([
-      'setEvaluateLanguage',
-    ]),
   },
 };
 </script>

@@ -175,7 +175,6 @@ export default {
   computed: {
     ...mapState({
       repository: state => state.Repository.selectedRepository,
-      language: state => state.Repository.evaluateLanguage,
     }),
     ...mapGetters({
       version: 'getSelectedVersion',
@@ -365,7 +364,7 @@ export default {
             text: this.text,
             intent: this.intent,
             entities: entitiesSave,
-            language: this.language,
+            language: this.languageEdit,
           });
         }
 
