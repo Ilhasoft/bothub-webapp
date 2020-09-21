@@ -236,7 +236,7 @@
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
     },
     "intent":{
-      "title": "Entity",
+      "title": "Intent",
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
       "save_button": "Save",
