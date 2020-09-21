@@ -131,7 +131,7 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getTranslations',
+      'getTranslationFromSentence',
       'newTranslation',
       'editTranslation',
       'deleteTranslation',
@@ -144,6 +144,7 @@ export default {
         if (this.isEmpty) {
           if (!this.translation) return;
           await this.deleteTranslation({ translationId: this.translation.id });
+          this.clearCache();
           this.translation = null;
         } else {
           this.loadingTranslations = true;
@@ -162,6 +163,7 @@ export default {
               language: this.translateTo,
             });
           }
+          this.clearCache();
           this.translation = response.data;
         }
       } catch (e) {
@@ -169,6 +171,15 @@ export default {
       } finally {
         this.loadingTranslations = false;
       }
+    },
+    clearCache() {
+      this.$emit('dispatchEvent', {
+        event: 'onChange',
+        value: {
+          id: this.id,
+          data: null,
+        },
+      });
     },
     onTranslated() {
       /* istanbul ignore next */
@@ -184,14 +195,16 @@ export default {
       this.translation = null;
       this.loadingTranslations = true;
       this.translationLoadError = false;
-      const translationsList = await this.getTranslations({
-        repositoryUuid: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
-        original_example_id: this.id,
-      });
       try {
-        const items = await translationsList.updateItems(1);
-        if (items.length) [this.translation] = items;
+        const response = await this.getTranslationFromSentence({
+          repositoryUuid: this.repository.uuid,
+          repositoryVersion: this.repositoryVersion,
+          toLanguage: this.translateTo,
+          originalId: this.id,
+          limit: 1,
+        });
+        const [item] = response.data.results;
+        if (item) this.translation = JSON.parse(JSON.stringify(item));
       } catch (e) {
         this.translationLoadError = true;
       } finally {
