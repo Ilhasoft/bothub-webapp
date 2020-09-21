@@ -68,6 +68,10 @@ export default {
       type: String,
       required: true,
     },
+    perPage: {
+      type: Number,
+      default: 12,
+    },
     query: {
       type: Object,
       default: null,
@@ -125,6 +129,7 @@ export default {
           query: this.query,
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
+          limit: this.perPage,
           language: this.from,
         });
         if (this.translateList) this.translateList.updateList(list);

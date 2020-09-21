@@ -4,7 +4,7 @@
     <example-text-with-highlighted-entities-input
       ref="textInput"
       v-model="text"
-      :entities="entities"
+      :entities="allEntities"
       :readonly="!editing"
       :placeholder="''"
       :transparent="!editing && !translation"
@@ -27,7 +27,8 @@
       v-show="open && editing"
       class="translate-form__entities">
       <example-entity-small-input
-        v-model="entities"
+        v-if="entities"
+        v-model="allEntities"
         :text="text"
         :available-entities="entityOptions"
         :entities="entities"
@@ -73,7 +74,8 @@ export default {
   data() {
     return {
       text: '',
-      entities: [],
+      entities: null,
+      allEntities: this.entities,
       textSelected: null,
     };
   },
@@ -83,8 +85,8 @@ export default {
     },
     input() {
       return {
-        text: this.text,
-        entities: this.entities,
+        text: this.text || '',
+        entities: this.allEntities || [],
       };
     },
   },
@@ -92,7 +94,11 @@ export default {
     input() {
       this.$emit('input', this.input);
     },
+    entities() {
+      this.allEntities = this.entities;
+    },
     translation() {
+      if (this.initialData) return;
       const { text, entities } = this.initialData ? this.initialData : this.translation || {};
       this.text = text || '';
       this.entities = entities || [];

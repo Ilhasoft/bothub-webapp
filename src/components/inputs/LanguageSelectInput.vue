@@ -35,7 +35,7 @@ export default {
   computed: {
     choices() {
       return Object.keys(LANGUAGES)
-        .filter(([lang]) => !this.exclude.includes(lang))
+        .filter(lang => !this.exclude.includes(lang))
         .map(lang => ({ value: lang, display_name: LANGUAGES[lang] }));
     },
     filteredChoices() {
