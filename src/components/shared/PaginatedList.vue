@@ -2,8 +2,8 @@
   <div v-if="list && !list.empty">
     <component
       v-for="(item, index) in list.items"
-      v-show="shouldShow(index)"
-      :key="item.key"
+      v-show="!isLoading && shouldShow(index)"
+      :key="itemKey && item[itemKey] ? item[itemKey] : index"
       :is="itemComponent"
       v-bind="addAttrs(item)"
       @deleted="onItemDeleted(item.id)"
@@ -79,6 +79,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    itemKey: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -92,21 +96,27 @@ export default {
     isLoading() {
       return this.list && this.list.loading;
     },
+    params() {
+      return this.list.params;
+    },
   },
   watch: {
-    async list() {
-      await this.fetch();
+    list() {
+      this.fetch();
     },
     isLoading() {
       this.$emit('update:loading', this.isLoading);
     },
-    async page() {
+    page() {
       if (this.loadAll) return;
-      await this.fetch();
+      this.fetch();
+    },
+    params() {
+      this.fetch();
     },
   },
-  async mounted() {
-    await this.fetch();
+  mounted() {
+    this.fetch();
   },
   methods: {
     async fetch() {

@@ -13,7 +13,6 @@ export default class Page {
 
   async updateItems(page) {
     this.page = page;
-    this.items = [];
     this.loading = true;
     try {
       const response = await this.fetchItems(page);
@@ -23,8 +22,15 @@ export default class Page {
       return this.items;
     } catch (e) {
       this.loading = false;
+      this.items = [];
       throw e;
     }
+  }
+
+  async updateList(list) {
+    this.baseUrl = list.baseUrl;
+    this.perPage = list.perPage;
+    this.params = list.params;
   }
 
   async getAllItems() {
@@ -37,6 +43,7 @@ export default class Page {
       return this.items;
     } catch (e) {
       this.loading = false;
+      this.items = [];
       throw e;
     }
   }

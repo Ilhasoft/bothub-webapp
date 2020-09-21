@@ -25,6 +25,18 @@ export default {
       },
     );
   },
+  translationFromSentence(repositoryUuid, repositoryVersion, originalId, toLanguage) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUuid,
+      repository_Version: repositoryVersion,
+      original_example_id: originalId,
+      to_language: toLanguage,
+      limit: 1,
+    });
+    return request.$http.get(
+      `/v2/repository/translation/?${queryString}`,
+    );
+  },
   translations(repositoryUuid, repositoryVersion, query = {}, limit) {
     return new utils.Page('/v2/repository/translation/', limit, {
       repository_uuid: repositoryUuid, repository_version: repositoryVersion, ...query,

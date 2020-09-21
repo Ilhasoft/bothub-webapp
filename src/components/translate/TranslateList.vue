@@ -34,8 +34,10 @@
       :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
-      :add-attributes="{editing}"
+      :add-attributes="{editing, initialData: editCache}"
+      item-key="id"
       load-all
+      @onChange="updateCache($event)"
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
@@ -66,6 +68,10 @@ export default {
       type: String,
       required: true,
     },
+    perPage: {
+      type: Number,
+      default: 12,
+    },
     query: {
       type: Object,
       default: null,
@@ -81,6 +87,7 @@ export default {
       translateExampleItem: TranslateExampleItem,
       selectAll: false,
       editing: false,
+      editCache: {},
     };
   },
   computed: {
@@ -103,6 +110,10 @@ export default {
       'getExamplesToTranslate',
       'searchExamples',
     ]),
+    updateCache({ id, data }) {
+      if (!data) delete this.editCache[id];
+      else this.editCache[id] = data;
+    },
     saveAll() {
       this.$root.$emit('saveAll');
       this.editing = false;
@@ -112,15 +123,17 @@ export default {
       this.$root.$emit('deleteAll');
     },
     async updateList() {
-      this.translateList = null;
       if (!!this.from && !!this.to) {
         await this.$nextTick();
-        this.translateList = await this.searchExamples({
+        const list = await this.searchExamples({
           query: this.query,
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
+          limit: this.perPage,
           language: this.from,
         });
+        if (this.translateList) this.translateList.updateList(list);
+        else this.translateList = list;
       }
       this.$emit('listPhrase', this.translateList);
     },
