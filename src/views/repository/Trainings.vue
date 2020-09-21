@@ -93,8 +93,10 @@
       :requirements-to-train="repository.requirements_to_train"
       :open="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
+      :repository-train="repository.ready_for_train"
       @finishedTutorial="dispatchFinish()"
       @resetTutorial="dispatchReset()"
+      @proceedTrain="train()"
       @closeTrainModal="closeTrainModal()"/>
     <train-response
       :open="trainResults"
@@ -272,12 +274,10 @@ export default {
         this.signIn();
       }
       if (this.authenticated && this.repository.authorization.can_write) {
-        this.loadingStatus = true;
         if (this.repository.ready_for_train
           && Object.values(this.repository.requirements_to_train).length === 0
           && Object.values(this.repository.languages_warnings).length === 0) {
           await this.train();
-          this.loadingStatus = false;
           return;
         }
         if (!this.repository.ready_for_train
@@ -287,11 +287,8 @@ export default {
             message: this.$t('webapp.train_modal.language_warning'),
             type: 'is-danger',
           });
-
-          this.loadingStatus = false;
           return;
         }
-        this.loadingStatus = false;
         this.trainModalOpen = true;
       }
       this.dispatchClick();
@@ -333,12 +330,16 @@ export default {
     },
     async train() {
       this.training = true;
+      this.loadingStatus = true;
+      if (this.activeTutorial === 'training') {
+        this.dispatchFinish();
+      }
       try {
+        await this.setRepositoryTraining(true);
         await this.trainRepository({
           repositoryUuid: this.repository.uuid,
           repositoryVersion: this.repositoryVersion,
         });
-        await this.setRepositoryTraining(true);
         await this.updateRepository(false);
         await this.getRepositoryStatus();
       } catch (e) {
@@ -347,10 +348,8 @@ export default {
           type: 'is-danger',
         });
       }
-      if (this.repository.ready_for_train) {
-        this.dispatchFinish();
-      }
       this.training = false;
+      this.loadingStatus = false;
     },
   },
 };
@@ -368,7 +367,6 @@ export default {
 
     &__button{
       color: $color-white;
-      margin-top: 1rem;
       width: 14rem;
 
       &:hover{
