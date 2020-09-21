@@ -1,7 +1,10 @@
 <template>
   <div class="field">
     <div class="example-txt-w-highlighted-entities">
-      <div class="example-txt-w-highlighted-entities__input-wrapper">
+      <div
+        :class="{
+          'example-txt-w-highlighted-entities__input-wrapper': true,
+          'example-txt-w-highlighted-entities__transparent': transparent}">
         <div class="field">
           <div class="control has-icons-right is-family-primary">
             <div
@@ -19,10 +22,13 @@
             </div>
             <self-adjust-input
               ref="input"
-              :placeholder="$t('webapp.trainings.add_a_sentence')"
+              :small-icon="smallIcon"
               v-model="val"
+              v-bind="$attrs"
               transparent
               @select="emitTextSelected"
+              @blur="$emit('blur')"
+              @focus="$emit('focus')"
               @click.stop.prevent="emitTextSelected"
               @keyup.stop.prevent="emitTextSelected"
               @keyup.enter="submit()">
@@ -58,6 +64,14 @@ export default {
     entities: {
       type: Array,
       default: () => ([]),
+    },
+    transparent: {
+      type: Boolean,
+      default: false,
+    },
+    smallIcon: {
+      type: Boolean,
+      default: null,
     },
   },
   data() {
@@ -139,6 +153,9 @@ export default {
           : { start: this.selectionStart, end: this.selectionEnd },
       );
     },
+    focus() {
+      this.$refs.input.inputAction('focus');
+    },
     clearSelected() {
       this.$nextTick(() => {
         this.$refs.input.deselect();
@@ -162,6 +179,10 @@ export default {
   &__input-wrapper {
     position: relative;
     background-color: white;
+  }
+
+  &__transparent {
+    background-color: transparent;
   }
 
   &__input {

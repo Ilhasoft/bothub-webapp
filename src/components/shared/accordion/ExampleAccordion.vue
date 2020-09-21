@@ -1,6 +1,6 @@
 <template>
   <sentence-accordion
-    :open.sync="open"
+    :open.sync="isOpen"
     :pending-example="pendingExample"
     :class="pendingExample ? 'pendingExample' : ''">
 
@@ -10,8 +10,7 @@
 
       <div class="example-accordion__tag level-left">
         <language-badge
-          :language="language"
-          :is-pending-example="pendingExample"/>
+          :language="language" />
       </div>
 
       <div
@@ -140,10 +139,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    open: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      open: false,
+      isOpen: false,
       deleteDialog: null,
       editing: false,
       highlighted: null,
@@ -163,9 +166,13 @@ export default {
   },
   watch: {
     open() {
-      if (!this.open) {
+      this.isOpen = this.open;
+    },
+    isOpen() {
+      if (!this.isOpen) {
         this.cancelEditSentence();
       }
+      this.$emit('update:open', this.isOpen);
     },
   },
   methods: {
@@ -234,11 +241,6 @@ export default {
       display: flex;
       justify-content: flex-end;
     }
-
-  }
-
-  .pendingExample{
-    background-color: #f5f5f59c;
   }
 
 </style>

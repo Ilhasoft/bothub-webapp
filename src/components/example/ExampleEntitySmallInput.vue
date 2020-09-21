@@ -49,55 +49,6 @@
             @click.native.stop="removeEntity(entity, index)"/>
         </div>
       </div>
-      <div
-        v-for="(entity, index) in pendingEntities"
-        :key="`pending-entity-${index}`"
-        class="entity-input__input entity-input__icon-container">
-        <b-field>
-          <span
-            slot="label"
-            class="entity-input__input__label"
-            v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-          <b-select
-            v-if="constrictEntities"
-            v-model="entity.entity"
-            expanded
-            size="is-small"
-            @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
-            @select="elevateToEntity(entity, index)"
-            @icon-right-click="removePendingEntity(entity, index)">
-            <option
-              v-for="entity in (availableEntities || [])"
-              :key="entity">
-              {{ entity }}
-            </option>
-          </b-select>
-          <b-autocomplete
-            v-else
-            :data="availableEntities || []"
-            :custom-formatter="intentFormatters"
-            v-model="entity.entity"
-            :placeholder="$t('webapp.example.entity')"
-            dropdown-position="bottom"
-            icon-right="close"
-            class="edit-sentence-input"
-            size="is-small"
-            icon-right-clickable
-            open-on-focus
-            @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
-            @select="elevateToEntity(entity, index)"
-            @icon-right-click="removePendingEntity(entity, index)"
-          />
-        </b-field>
-        <div class="entity-input__icon-container">
-          <b-icon
-            v-if="constrictEntities"
-            class="clickable"
-            size="is-small"
-            icon="close"
-            @click.native.stop="removePendingEntity(entity, index)"/>
-        </div>
-      </div>
       <div class="entity-input__icon-container">
         <b-tooltip
           :label="addEntityHelpText"
@@ -105,11 +56,10 @@
           <b-icon
             :disabled="textSelected === null"
             :class="{clickable: true,
-                     'icon-disabled': textSelected === null
-                       || !(availableEntities || []).length
+                     'icon-disabled': !addEntityEnabled
             }"
             icon="card-plus"
-            @click.native.stop="addPendingEntity"
+            @click.native.stop="addEntity"
           />
         </b-tooltip>
       </div>
@@ -148,15 +98,15 @@ export default {
   data() {
     return {
       entitiesToEdit: this.entities,
-      pendingEntities: [],
     };
   },
   computed: {
+    addEntityEnabled() {
+      if (this.constrictEntities && (this.availableEntities || []).length === 0) return false;
+      return this.textSelected != null;
+    },
     intentFormatters() {
       return formatters.bothubItemKey();
-    },
-    allEntities() {
-      return [...this.entitiesToEdit, ...this.pendingEntities];
     },
     addEntityHelpText() {
       if (!(this.availableEntities && this.availableEntities.length > 0)) return this.$t('webapp.translate.no_entities');
@@ -174,8 +124,11 @@ export default {
     },
   },
   watch: {
-    allEntities() {
-      this.$emit('input', this.allEntities);
+    entities() {
+      this.entitiesToEdit = this.entities;
+    },
+    entitiesToEdit() {
+      this.$emit('input', this.entitiesToEdit);
     },
     text(newText, oldText) {
       if (newText !== oldText) {
@@ -184,10 +137,11 @@ export default {
     },
   },
   mounted() {
-    this.$emit('input', this.allEntities);
+    this.$emit('input', this.entitiesToEdit);
   },
   methods: {
-    addPendingEntity() {
+    addEntity() {
+      if (!this.addEntityEnabled) return;
       // It will be added at the end of the list, so we already know its index.
       const newEntity = {
         start: this.textSelected.start,
@@ -197,7 +151,7 @@ export default {
         ),
       };
 
-      this.pendingEntities.push({
+      this.entitiesToEdit.push({
         ...newEntity,
       });
 
@@ -208,20 +162,8 @@ export default {
         Vue.delete(this.entitiesToEdit, index);
       });
     },
-    removePendingEntity(entity, index) {
-      this.$nextTick(() => {
-        Vue.delete(this.pendingEntities, index);
-      });
-    },
     highlightedText(entity) {
       return this.text.slice(entity.start, entity.end);
-    },
-    elevateToEntity(entity, index) {
-      Vue.delete(this.pendingEntities, index);
-
-      this.entitiesToEdit.push({
-        ...entity,
-      });
     },
     recomputeEntitiesFor(text, oldText) {
       /*
@@ -233,6 +175,7 @@ export default {
 
         const findClosestStart = (lastMatch) => {
           if (lastMatch === undefined) {
+            if (oldEntityText.length === 0 || text.length === 0) return -1;
             const index = text.indexOf(oldEntityText);
             return index === -1
               ? index
