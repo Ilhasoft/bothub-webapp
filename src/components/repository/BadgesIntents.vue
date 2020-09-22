@@ -9,7 +9,7 @@
           :entity-name="item.value"
           :count="item.examples__count"
           class="badges-card__wrapper__badge"
-          @click.native="goToList(item.value)"/>
+          @click.native="goToList(item.id)"/>
       </div>
     </div>
     <div v-if="examplesCount">
