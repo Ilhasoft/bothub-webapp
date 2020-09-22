@@ -6,10 +6,14 @@
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
-    <span v-show="translationLoadError"> {{ $t('webapp.translate.error_load_translation') }}
-      <b-button @click="loadTranslation()">
+    <span
+      v-show="!loadingTranslations && translationLoadError"
+      class="translate-item__error">
+      {{ $t('webapp.translate.error_load_translation') }}
+
+      <a @click="loadTranslation()">
         {{ $t('webapp.translate.retry') }}
-      </b-button>
+      </a>
     </span>
     <translate-example-form
       v-if="!translationLoadError && !loadingTranslations"
@@ -122,13 +126,11 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
-      if (this.translationLoadError) return;
-      if (this.selected) this.save();
+      if (!this.translationLoadError && this.selected) this.save();
     });
     this.$root.$on('deleteAll', () => {
       this.open = false;
-      if (this.translationLoadError) return;
-      if (this.selected) {
+      if (!this.translationLoadError && this.selected) {
         this.translationData.text = '';
         this.save();
       }
@@ -219,6 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/scss/colors.scss';
     .translate-item {
         display: flex;
         > * {
@@ -226,5 +229,12 @@ export default {
             height: 100%;
             margin-right: 1rem;
         }
+      &__error {
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        text-align: center;
+        padding: .45rem 0;
+        margin-top: .5rem;
+      }
     }
 </style>
