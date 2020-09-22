@@ -4,7 +4,7 @@ exports[`TranslateList.vue renders correctly 1`] = `
 <div>
   <div class="repository-translate__list__options">
     <div class="repository-translate__list__options__check">
-      <b-checkbox-stub truevalue="true"></b-checkbox-stub> Select All
+      <b-checkbox-stub truevalue="true"></b-checkbox-stub> some specific text
     </div>
     <div class="repository-translate__list__options__buttons">
       <b-button-stub type="is-primary" iconright="pencil" nativetype="button" tag="button"></b-button-stub>
