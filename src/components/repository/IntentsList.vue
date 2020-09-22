@@ -85,10 +85,10 @@ export default {
       this.$emit('setAllEntities', this.allEntities);
     },
     async getSelectedIntent() {
-      const entity = await this.repository.intents.find(
+      const intent = await this.repository.intents.find(
         intentValue => intentValue.id === Number(this.intentId),
       );
-      this.intentSelected = entity.value;
+      this.intentSelected = intent.value;
     },
     async saveEdition() {
       try {
