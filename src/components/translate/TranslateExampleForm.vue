@@ -110,7 +110,7 @@ export default {
     },
   },
   mounted() {
-    const { text, entities } = this.initialData ? this.initialData : this.translation || {};
+    const { text, entities } = (this.initialData ? this.initialData : this.translation) || {};
     this.text = text || '';
     this.entities = entities || [];
   },
