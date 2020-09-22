@@ -372,7 +372,7 @@
       "invalid_entities": "As entidades não correspondem às da frase original",
       "translation_edited": "Tradução editada",
       "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
-      "error_load_translation": "Não foi possível carregar traduções.",
+      "error_load_translation": "Não foi possível carregar tradução.",
       "retry": "Recarregar",
       "sentences": "Frases",
       "translated": "Traduzidas",

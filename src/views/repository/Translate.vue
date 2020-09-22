@@ -202,11 +202,12 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from} ${translate.to}`"
+                  :key="`${translate.from} ${translate.to}-${translate.update}`"
                   :repository-uuid="selectedRepository.uuid"
                   :version="selectedRepository.repository_version_id"
-                  :language="translate.from"
+                  :language="repository.language"
                   :to-language="translate.to"
+                  :initial-data="sentenceFilter.key"
                   @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
@@ -214,7 +215,6 @@
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :update="translate.update"
                 :repository="repository"
                 :query="query"
                 :from="repository.language"
@@ -265,7 +265,7 @@ import AuthorizationRequestNotification from '@/components/repository/Authorizat
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import Tour from '@/components/Tour';
 import {
-  exampleSearchToDicty, exampleSearchToString, languageListToDict,
+  languageListToDict,
 } from '@/utils/index';
 
 export default {
@@ -306,7 +306,7 @@ export default {
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
       ],
       query: {},
-      sentenceFilter: {},
+      sentenceFilter: { key: null, query: null },
     };
   },
   computed: {
@@ -438,8 +438,8 @@ export default {
     closeExportModal() {
       this.isExportFileVisible = false;
     },
-    onFilter(query) {
-      this.sentenceFilter = query;
+    onFilter({ key, query }) {
+      this.sentenceFilter = { key, query };
     },
     onSearch(value) {
       this.querySchema = { ...value };
@@ -449,7 +449,7 @@ export default {
         ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
         ...this.querySchema.entity ? { intent: this.querySchema.entity } : {},
         ...this.querySchema.label ? { intent: this.querySchema.label } : {},
-        ...this.sentenceFilter,
+        ...this.sentenceFilter.query,
       };
     },
   },

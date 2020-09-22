@@ -7,7 +7,7 @@
       :disabled="status.count == null"
       :label="status.label"
       :active="active === status.key"
-      :clickable="active !== status.key"
+      clickable
       size="medium"
       class="translation-sentence-status__card"
       @click="onClick(status.key, status.query)"/>
@@ -38,13 +38,18 @@ export default {
       type: String,
       default: null,
     },
+    initialData: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
-      active: 'all',
+      active: this.initialData || 'all',
+      update: setTimeout(() => { this.getStatusData(); }, 1500),
       statusData: {
         sentences: {
-          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: {},
+          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
         },
         translated: {
           key: 'translated',
@@ -62,7 +67,7 @@ export default {
           key: 'inconsistent',
           label: this.$t('webapp.translate.inconsistent'),
           count: null,
-          query: { language: this.language, inconsistent: true },
+          query: { language: this.language, has_invalid_entities: this.toLanguage },
         },
       },
     };
@@ -80,13 +85,13 @@ export default {
       this.getStatusData();
     },
   },
-  mounted() {
-    this.getStatusData();
+  beforeDestroy() {
+    clearTimeout(this.update);
   },
   methods: {
     ...mapActions(['searchExamples']),
     onClick(key, query) {
-      this.$emit('search', query);
+      this.$emit('search', { key, query });
       this.active = key;
     },
     async getStatusData() {
