@@ -165,13 +165,21 @@ export default {
         width: 100%;
         display: flex;
         justify-content: space-between;
-      &__check {
-        margin-left: 1rem;
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        color: $color-grey-dark;
-      }
+
+        &__buttons {
+          display: flex;
+          > * {
+            margin-left: 0.5rem;
+          }
+        }
+
+        &__check {
+          margin-left: 1rem;
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          color: $color-grey-dark;
+        }
     }
   }
 }
