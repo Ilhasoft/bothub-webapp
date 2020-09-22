@@ -6,8 +6,13 @@
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
+    <span v-show="translationLoadError"> {{ $t('webapp.translate.error_load_translation') }}
+      <b-button @click="loadTranslation()">
+        {{ $t('webapp.translate.retry') }}
+      </b-button>
+    </span>
     <translate-example-form
-      v-if="!loadingTranslations"
+      v-if="!translationLoadError && !loadingTranslations"
       ref="form"
       v-model="translationData"
       :class="{'translate-item--dark': !translation}"
@@ -117,10 +122,13 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
+      if (this.translationLoadError) return;
       if (this.selected) this.save();
     });
     this.$root.$on('deleteAll', () => {
-      this.open = false; if (this.selected) {
+      this.open = false;
+      if (this.translationLoadError) return;
+      if (this.selected) {
         this.translationData.text = '';
         this.save();
       }
@@ -166,6 +174,7 @@ export default {
           this.clearCache();
           this.translation = response.data;
         }
+        this.onTranslated();
       } catch (e) {
         this.translationLoadError = true;
       } finally {
@@ -182,12 +191,6 @@ export default {
       });
     },
     onTranslated() {
-      /* istanbul ignore next */
-      this.$bhToastNotification({
-        message: this.$t('webapp.translate.example_translated'),
-        type: 'success',
-      });
-      /* istanbul ignore next */
       this.$emit('dispatchEvent', 'translated');
     },
     async loadTranslation() {
