@@ -142,7 +142,7 @@
       "run_test": "Run test",
       "you_can_not_edit": "You can not edit this repository",
       "login": "Sign in to your account to edit this repository.",
-      "get_examples_test_sentences": "test sentences",
+      "get_examples_test_sentences": "{n} test sentence | {n} test sentences",
       "all_intents": "All Intents",
       "all_entities": "All Entities",
       "all_languages": "All languages",

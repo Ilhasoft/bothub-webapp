@@ -140,7 +140,7 @@ export default {
         .map((lang, index) => ({
           id: index + 1,
           value: lang,
-          title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
+          title: `${LANGUAGES[lang]} (${this.$tc('webapp.evaluate.get_examples_test_sentences', this.selectedRepository.evaluate_languages_count[lang])})`,
         }));
     },
   },
@@ -194,7 +194,7 @@ export default {
       try {
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
-          language: this.getEvaluateLanguage,
+          language: this.currentLanguage,
           version: this.repositoryVersion,
         });
         this.evaluating = false;
