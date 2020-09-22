@@ -31,6 +31,7 @@
       v-if="translateList"
       :list="translateList"
       :item-component="translateExampleItem"
+      :per-page="perPage"
       :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
@@ -126,11 +127,10 @@ export default {
       if (!!this.from && !!this.to) {
         await this.$nextTick();
         const list = await this.searchExamples({
-          query: this.query,
+          query: { language: this.from, ...this.query },
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
           limit: this.perPage,
-          language: this.from,
         });
         if (this.translateList) this.translateList.updateList(list);
         else this.translateList = list;

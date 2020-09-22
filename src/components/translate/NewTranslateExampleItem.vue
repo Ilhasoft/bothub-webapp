@@ -7,7 +7,7 @@
       pending-example/>
     <loading v-show="loadingTranslations" />
     <translate-example-form
-      v-show="!loadingTranslations"
+      v-if="!loadingTranslations"
       ref="form"
       v-model="translationData"
       :class="{'translate-item--dark': !translation}"
@@ -82,7 +82,7 @@ export default {
       open: false,
       translation: null,
       translationLoadError: true,
-      loadingTranslations: false,
+      loadingTranslations: true,
       selected: false,
       translationData: {
         text: '',
