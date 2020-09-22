@@ -23,74 +23,16 @@
             @entityAdded="onEntityAdded()"
           />
         </b-field>
+        <example-entity-small-input
+          v-model="allEntitiesInput"
+          :text="text"
+          :available-entities="getAllEntities"
+          :entities="entities"
+          :text-selected="textSelected"
+          @addedEntity="onEntityAdded" />
         <b-field
-          grouped
-          group-multiline>
-          <div
-            v-for="(entity, index) in entitiesToEdit"
-            :key="`entity-${index}`"
-            class="edit-sentence__input">
-            <b-field >
-              <span
-                slot="label"
-                class="edit-sentence__input__label"
-                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-              <b-autocomplete
-                :data="getAllEntities || []"
-                v-model="entity.entity"
-                :placeholder="$t('webapp.example.entity')"
-                dropdown-position="bottom"
-                icon-right="close"
-                icon-right-clickable
-                open-on-focus
-                size="is-small"
-                class="edit-sentence-input"
-                @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)"
-                @icon-right-click="removeEntity(entity, index)"
-              />
-            </b-field>
-          </div>
-          <div
-            v-for="(entity, index) in pendingEntities"
-            :key="`pending-entity-${index}`"
-            class="edit-sentence__input">
-            <b-field>
-              <span
-                slot="label"
-                class="edit-sentence__input__label"
-                v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-              <b-autocomplete
-                :data="getAllEntities || []"
-                :custom-formatter="intentFormatters"
-                v-model="entity.entity"
-                :placeholder="$t('webapp.example.entity')"
-                dropdown-position="bottom"
-                icon-right="close"
-                class="edit-sentence-input"
-                size="is-small"
-                icon-right-clickable
-                open-on-focus
-                @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
-                @select="elevateToEntity(entity, index)"
-                @icon-right-click="removePendingEntity(entity, index)"
-              />
-            </b-field>
-            <b-field
-              :message="errors.entities"
-              type="is-danger" />
-          </div>
-          <div class="edit-sentence__icon-container">
-            <b-tooltip
-              :label="addEntityHelpText"
-              multilined>
-              <b-icon
-                :class="{clickable: true, 'icon-disabled': textSelected === null}"
-                icon="card-plus"
-                @click.native.stop="addPendingEntity"
-              />
-            </b-tooltip>
-          </div>
-        </b-field>
+          :message="errors.entities"
+          type="is-danger" />
       </form>
     </div>
 
@@ -145,6 +87,7 @@ import EditExampleBase from './EditExampleBase';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import ExampleEntitySmallInput from '@/components/example/ExampleEntitySmallInput';
 
 export default {
   name: 'EditExampleAccordion',
@@ -152,6 +95,7 @@ export default {
     SentenceAccordion,
     ExampleTextWithHighlightedEntitiesInput,
     LanguageBadge,
+    ExampleEntitySmallInput,
   },
   extends: EditExampleBase,
   props: {
@@ -163,12 +107,16 @@ export default {
   data() {
     return {
       isOpen: this.open,
+      allEntitiesInput: [],
     };
   },
   computed: {
     addEntityHelpText() {
       if (this.textSelected === null) return this.$t('webapp.trainings.select_text');
       return this.entityButtonText;
+    },
+    allEntities() {
+      return this.allEntitiesInput;
     },
   },
   watch: {
