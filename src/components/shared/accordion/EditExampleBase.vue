@@ -145,8 +145,6 @@ export default {
 
       const color = getEntityColor(
         entity,
-        [...this.entitiesToEdit, entity],
-        [],
       );
 
       this.entitiesToEdit.push({

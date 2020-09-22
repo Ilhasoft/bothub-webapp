@@ -9,6 +9,7 @@
       :available-to-example="true"
       :pending-example="pendingExample"
       :all-entities="allEntities"
+      :open.sync="open"
       training
       @deleted="onExampleDeleted"
       @updateList="onExampleSave"
@@ -62,6 +63,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      open: false,
+    };
   },
   computed: {
     allEntities() {

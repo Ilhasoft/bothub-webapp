@@ -41,7 +41,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 20,
+      default: 12,
     },
     update: {
       type: Boolean,

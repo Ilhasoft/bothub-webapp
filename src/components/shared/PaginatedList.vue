@@ -1,8 +1,9 @@
 <template>
   <div v-if="list && !list.empty">
     <component
-      v-for="item in list.items"
-      :key="item.key"
+      v-for="(item, index) in list.items"
+      v-show="!isLoading && shouldShow(index)"
+      :key="itemKey && item[itemKey] ? item[itemKey] : index"
       :is="itemComponent"
       v-bind="addAttrs(item)"
       @deleted="onItemDeleted(item.id)"
@@ -74,6 +75,14 @@ export default {
       type: String,
       default: null,
     },
+    loadAll: {
+      type: Boolean,
+      default: false,
+    },
+    itemKey: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -87,25 +96,37 @@ export default {
     isLoading() {
       return this.list && this.list.loading;
     },
+    params() {
+      return this.list.params;
+    },
   },
   watch: {
-    async list() {
-      await this.fetch();
+    list() {
+      this.fetch();
     },
     isLoading() {
       this.$emit('update:loading', this.isLoading);
     },
-    async page() {
-      await this.fetch();
+    page() {
+      if (this.loadAll) return;
+      this.fetch();
+    },
+    params() {
+      this.fetch();
     },
   },
-  async mounted() {
-    await this.fetch();
+  mounted() {
+    this.fetch();
   },
   methods: {
     async fetch() {
       if (!(this.list && this.list.updateItems)) return false;
       try {
+        if (this.loadAll) {
+          await this.list.getAllItems();
+          this.$emit('updated');
+          return true;
+        }
         await this.list.updateItems(this.page);
         this.$emit('updated');
         return true;
@@ -117,6 +138,13 @@ export default {
         this.$emit('error', this.error);
       }
       return false;
+    },
+    shouldShow(index) {
+      if (!this.loadAll) return true;
+
+      const offset = (this.page - 1) * this.perPage;
+
+      return index >= offset && index < offset + this.perPage;
     },
     onDispatchEvent(arg) {
       const [event, value] = arg instanceof Object
