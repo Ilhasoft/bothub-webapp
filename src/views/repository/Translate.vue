@@ -198,7 +198,6 @@
                 </footer>
               </div>
             </b-modal>
-            <hr>
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
@@ -208,6 +207,7 @@
                   :language="repository.language"
                   :to-language="translate.to"
                   :initial-data="sentenceFilter.key"
+                  class="repository-translate__list__search__status"
                   @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
@@ -489,6 +489,10 @@ export default {
     margin-left: 0.3rem;
   &__search {
     margin: 0.5rem;
+
+    &__status {
+      margin: 3rem 0 4.4rem 0;
+    }
   }
   }
 

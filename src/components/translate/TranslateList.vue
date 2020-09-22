@@ -2,7 +2,7 @@
   <div>
     <div class="repository-translate__list__options">
       <div class="repository-translate__list__options__check">
-        <b-checkbox v-model="selectAll"/> Select All
+        <b-checkbox v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
@@ -154,6 +154,8 @@ export default {
 <style lang="scss" scoped>
 
 .repository-translate{
+  @import '~@/assets/scss/colors.scss';
+
   &__list{
     margin-left: 0.5rem;
 
@@ -164,8 +166,11 @@ export default {
         display: flex;
         justify-content: space-between;
       &__check {
+        margin-left: 1rem;
         display: flex;
         align-items: center;
+        font-weight: bold;
+        color: $color-grey-dark;
       }
     }
   }

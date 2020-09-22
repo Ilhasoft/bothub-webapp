@@ -374,7 +374,8 @@
       "sentences": "Sentences",
       "translated": "Translated",
       "not_translated": "Not translated",
-      "inconsistent": "Inconsistent"
+      "inconsistent": "Inconsistent",
+      "select_all": "Select all"
     },
     "orgs": {
       "owner": "Owned by",

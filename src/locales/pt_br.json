@@ -377,7 +377,8 @@
       "sentences": "Frases",
       "translated": "Traduzidas",
       "not_translated": "Não traduzidas",
-      "inconsistent": "Inconsistentes"
+      "inconsistent": "Inconsistentes",
+      "select_all": "Selecionar todas"
     },
     "orgs": {
       "owner": "Pertence a",
