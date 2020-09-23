@@ -241,7 +241,8 @@
       "edit_button": "Editar intenção",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma frase.",
-      "error_entity": "Aconteceu um erro."
+      "error_intent": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "error_intent_exists": "Intenção já existe"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -557,7 +558,7 @@
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
-      "error_entity": "Aconteceu um erro.",
+      "error_entity": "Algo de errado aconteceu, tente novamente mais tarde.",
       "error_entity_exists": "Entidade já existe"
     },
     "payment": {
