@@ -6,8 +6,17 @@
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
+    <span
+      v-show="!loadingTranslations && translationLoadError"
+      class="translate-item__error">
+      {{ $t('webapp.translate.error_load_translation') }}
+
+      <a @click="loadTranslation()">
+        {{ $t('webapp.translate.retry') }}
+      </a>
+    </span>
     <translate-example-form
-      v-show="!loadingTranslations"
+      v-if="!translationLoadError && !loadingTranslations"
       ref="form"
       v-model="translationData"
       :class="{'translate-item--dark': !translation}"
@@ -82,7 +91,7 @@ export default {
       open: false,
       translation: null,
       translationLoadError: true,
-      loadingTranslations: false,
+      loadingTranslations: true,
       selected: false,
       translationData: {
         text: '',
@@ -117,10 +126,11 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
-      if (this.selected) this.save();
+      if (!this.translationLoadError && this.selected) this.save();
     });
     this.$root.$on('deleteAll', () => {
-      this.open = false; if (this.selected) {
+      this.open = false;
+      if (!this.translationLoadError && this.selected) {
         this.translationData.text = '';
         this.save();
       }
@@ -166,6 +176,7 @@ export default {
           this.clearCache();
           this.translation = response.data;
         }
+        this.onTranslated();
       } catch (e) {
         this.translationLoadError = true;
       } finally {
@@ -182,12 +193,6 @@ export default {
       });
     },
     onTranslated() {
-      /* istanbul ignore next */
-      this.$bhToastNotification({
-        message: this.$t('webapp.translate.example_translated'),
-        type: 'success',
-      });
-      /* istanbul ignore next */
       this.$emit('dispatchEvent', 'translated');
     },
     async loadTranslation() {
@@ -216,6 +221,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '~@/assets/scss/colors.scss';
     .translate-item {
         display: flex;
         > * {
@@ -223,5 +229,12 @@ export default {
             height: 100%;
             margin-right: 1rem;
         }
+      &__error {
+        border: 1px solid $color-border;
+        border-radius: 4px;
+        text-align: center;
+        padding: .45rem 0;
+        margin-top: .5rem;
+      }
     }
 </style>
