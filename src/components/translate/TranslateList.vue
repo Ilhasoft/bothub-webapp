@@ -41,6 +41,7 @@
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
+      @pageChanged="selectAll = false"
       @update:loading="onLoading($event)"/>
   </div>
 </template>

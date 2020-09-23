@@ -376,7 +376,7 @@
       "translated": "Translated",
       "not_translated": "Not translated",
       "inconsistent": "Inconsistent",
-      "select_all": "Select all"
+      "select_all": "Select all in this page"
     },
     "orgs": {
       "owner": "Owned by",
