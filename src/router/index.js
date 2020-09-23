@@ -12,6 +12,7 @@ import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
+import RepositoryTranslateExternal from '@/views/repository/TranslateExternal';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryIntegration from '@/views/repository/Integration';
@@ -112,7 +113,7 @@ export default new Router({
         {
           path: ':ownerNickname/:slug/translate/',
           name: 'repository-translate-external',
-          component: RepositoryTranslate,
+          component: RepositoryTranslateExternal,
         },
       ],
     },

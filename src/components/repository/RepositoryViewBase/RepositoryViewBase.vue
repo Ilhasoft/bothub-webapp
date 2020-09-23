@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="repository"
+        v-if="quickTest && repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -79,6 +79,10 @@ export default {
     title: {
       type: String,
       default: null,
+    },
+    quickTest: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
