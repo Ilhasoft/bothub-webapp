@@ -108,6 +108,7 @@ export default {
       this.$emit('update:loading', this.isLoading);
     },
     page() {
+      this.$emit('pageChanged', this.page);
       if (this.loadAll) return;
       this.fetch();
     },

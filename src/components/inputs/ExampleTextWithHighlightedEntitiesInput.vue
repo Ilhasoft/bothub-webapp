@@ -93,7 +93,7 @@ export default {
       }
 
       if (this.hasAppend) {
-        classes.push('example-txt-w-highlighted-entities__entity__with-append');
+        classes.push(`example-txt-w-highlighted-entities__entity__with-append${this.smallIcon ? '--small' : ''}`);
       }
 
       return classes;
@@ -206,6 +206,10 @@ export default {
 
     &__with-append {
       padding: 0.3rem 4rem 0.3rem 0.9rem;
+
+      &--small {
+        padding: 0.3rem 1.2rem 0.3rem 0.9rem;
+      }
     }
 
     &__before,
