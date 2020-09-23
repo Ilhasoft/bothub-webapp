@@ -198,16 +198,23 @@
                 </footer>
               </div>
             </b-modal>
-            <hr>
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
+                <translation-sentence-status
+                  :key="`${translate.from} ${translate.to}-${translate.update}`"
+                  :repository-uuid="selectedRepository.uuid"
+                  :version="selectedRepository.repository_version_id"
+                  :language="repository.language"
+                  :to-language="translate.to"
+                  :initial-data="sentenceFilter.key"
+                  class="repository-translate__list__search__status"
+                  @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities_list"
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :update="translate.update"
                 :repository="repository"
                 :query="query"
                 :from="repository.language"
@@ -255,9 +262,10 @@ import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import Tour from '@/components/Tour';
 import {
-  exampleSearchToDicty, exampleSearchToString, languageListToDict,
+  languageListToDict,
 } from '@/utils/index';
 
 export default {
@@ -270,6 +278,7 @@ export default {
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    TranslationSentenceStatus,
     Tour,
   },
   extends: RepositoryBase,
@@ -284,7 +293,6 @@ export default {
         update: false,
       },
       toLanguage: null,
-      query: {},
       querySchema: {},
       errors: '',
       errorMessage: '',
@@ -297,6 +305,8 @@ export default {
         { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
       ],
+      query: {},
+      sentenceFilter: { key: null, query: null },
     };
   },
   computed: {
@@ -320,6 +330,12 @@ export default {
         return this.removeSelectedFile();
       }
       return '';
+    },
+    sentenceFilter() {
+      this.updateQuery();
+    },
+    querySchema() {
+      this.updateQuery();
     },
   },
   methods: {
@@ -422,20 +438,19 @@ export default {
     closeExportModal() {
       this.isExportFileVisible = false;
     },
+    onFilter({ key, query }) {
+      this.sentenceFilter = { key, query };
+    },
     onSearch(value) {
-      Object.assign(this.querySchema, value);
-
-      if (!this.querySchema.intent) {
-        delete this.querySchema.intent;
-      }
-      if (!this.querySchema.entity) {
-        delete this.querySchema.entity;
-      }
-      if (!this.querySchema.label) {
-        delete this.querySchema.label;
-      }
-      const formattedQueryString = exampleSearchToString(this.querySchema);
-      this.query = exampleSearchToDicty(formattedQueryString);
+      this.querySchema = { ...value };
+    },
+    updateQuery() {
+      this.query = {
+        ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
+        ...this.querySchema.entity ? { intent: this.querySchema.entity } : {},
+        ...this.querySchema.label ? { intent: this.querySchema.label } : {},
+        ...this.sentenceFilter.query,
+      };
     },
   },
 };
@@ -474,6 +489,10 @@ export default {
     margin-left: 0.3rem;
   &__search {
     margin: 0.5rem;
+
+    &__status {
+      margin: 3rem 0 4.4rem 0;
+    }
   }
   }
 

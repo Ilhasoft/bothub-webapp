@@ -371,7 +371,12 @@
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
       "error_load_translation": "Could not load translation.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent",
+      "select_all": "Select all"
     },
     "orgs": {
       "owner": "Owned by",
