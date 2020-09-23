@@ -72,11 +72,6 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repositoryList: 'getCurrentRepository',
     }),
-    entityFormatters() {
-      return [
-        formatters.bothubItemKey(),
-      ];
-    },
     totalSentences() {
       if (this.entitiesList !== null) {
         return this.entitiesList.total;
@@ -131,7 +126,6 @@ export default {
           value: this.entitySelected,
           repositoryVersion: this.repositoryVersion,
         });
-        this.setUpdateRepository(true);
         this.$emit('saveEdition');
       } catch (error) {
         if (error.response.data.non_field_errors !== undefined) {

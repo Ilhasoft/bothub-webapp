@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntitiesList.vue renders correctly 1`] = `
+<div class="intent-list" intentselected="health" totalsentences="10">
+  <div class="intent-list__content">
+    <div class="intent-list__content__descriptions">
+      <h1><strong>some specific text</strong></h1>
+      <p><strong>"</strong> <strong>"</strong></p>
+    </div>
+    <div>
+      <b-button-stub nativetype="button" tag="button" class="intent-list__content__button-edit">some specific text</b-button-stub>
+    </div>
+  </div>
+  <div class="intent-list__header__options">
+    <p> some specific text</p>
+  </div>
+</div>
+`;

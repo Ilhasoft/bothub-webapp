@@ -241,7 +241,8 @@
       "edit_button": "Edit Intent",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured."
+      "error_intent": "Something went wrong, try again later.",
+      "error_intent_exists": "Intent already exists"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -314,7 +315,7 @@
       "delete_button":"Delete",
       "cancel_button":"Cancel",
       "save_button":"Save",
-      "train_progress": "% of training completed",
+      "train_progress": "{progress}% of training completed",
       "empty_text_error": "You need type a text to sentence",
       "intent_error": "Intent is required",
       "default_error": "Something went wrong, try again later."
@@ -330,7 +331,7 @@
     },
     "translate": {
       "title_translate": "Translate a sentence",
-      "subtitle_translate": "Click on a sentence to translate from your base language into other languages ​​supported by Bothub.",
+      "subtitle_translate": "Manage and translate the sentences of your intelligence.",
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
       "submit_translation": "Submit Translation",
@@ -345,7 +346,7 @@
       "translate_to": "Translate to:",
       "to": "to",
       "no_entities": "No entities to add in this translation",
-      "languages_select": "Search language",
+      "languages_select": "Choose a language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
       "import_title": "Import sentences",
@@ -369,8 +370,13 @@
       "invalid_entities": "Entities do not match the original translation's",
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
-      "error_load_translation": "Could not load translations.",
-      "retry": "Retry"
+      "error_load_translation": "Could not load translation.",
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent",
+      "select_all": "Select all in this page"
     },
     "orgs": {
       "owner": "Owned by",
@@ -558,7 +564,7 @@
       "edit_button": "Edit Entity",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured.",
+      "error_entity": "Something went wrong, try again later.",
       "error_entity_exists": "Entity already exists"
     },
     "payment": {

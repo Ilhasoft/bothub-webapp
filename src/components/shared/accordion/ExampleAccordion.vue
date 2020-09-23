@@ -1,6 +1,6 @@
 <template>
   <sentence-accordion
-    :open.sync="open"
+    :open.sync="isOpen"
     :pending-example="pendingExample"
     :class="pendingExample ? 'pendingExample' : ''">
 
@@ -10,19 +10,17 @@
 
       <div class="example-accordion__tag level-left">
         <language-badge
-          :language="language"
-          :is-pending-example="pendingExample"/>
+          :language="language" />
       </div>
 
       <div
-        v-if="!open"
+        v-show="!isOpen"
         class="level-right example-accordion__text">{{ text }}</div>
 
       <div
-        v-else
+        v-show="isOpen && !editing"
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="open && !editing"
           :text="text"
           :entities="entities"
           :highlighted="highlighted" />
@@ -66,7 +64,7 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="entitiesList"
+        :entities-list="entities"
         :highlighted.sync="highlighted"
         :intent="intent" />
 
@@ -140,10 +138,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    open: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      open: false,
+      isOpen: false,
       deleteDialog: null,
       editing: false,
       highlighted: null,
@@ -163,9 +165,13 @@ export default {
   },
   watch: {
     open() {
-      if (!this.open) {
+      this.isOpen = this.open;
+    },
+    isOpen() {
+      if (!this.isOpen) {
         this.cancelEditSentence();
       }
+      this.$emit('update:open', this.isOpen);
     },
   },
   methods: {
@@ -234,11 +240,6 @@ export default {
       display: flex;
       justify-content: flex-end;
     }
-
-  }
-
-  .pendingExample{
-    background-color: #f5f5f59c;
   }
 
 </style>

@@ -145,8 +145,6 @@ export default {
 
       const color = getEntityColor(
         entity,
-        [...this.entitiesToEdit, entity],
-        [],
       );
 
       this.entitiesToEdit.push({
@@ -215,12 +213,10 @@ export default {
       }
     },
     async onSubmit() {
-      const entitiesSave = [...this.pendingEntities, ...this.entitiesToEdit];
-
       this.errors = {};
       this.submitting = true;
 
-      const entitiesResponse = entitiesSave.map((entityValue) => {
+      const entitiesResponse = this.allEntities.map((entityValue) => {
         const { start, end, entity } = entityValue;
         return { start, end, entity };
       });
@@ -243,7 +239,7 @@ export default {
             version: this.version,
             text: this.text,
             intent: this.intent,
-            entities: entitiesSave,
+            entities: this.allEntities,
             language: this.language,
           });
         }

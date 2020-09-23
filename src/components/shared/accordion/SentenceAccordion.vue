@@ -4,12 +4,14 @@
       ref="expander"
       :class="{
         'expander__trigger': true,
+        'expander__trigger--slim': slim,
         [`align-${align}`]: true,
         'active': isOpen,
         'before-border': !isOpen,
         'border-thick': thickBorder,
         'border-success': type === 'is-success',
         'border-danger': type === 'is-danger',
+        'expander__trigger--pending': pendingExample,
         'is-light': isLight,
         'border': !type,
       }"
@@ -37,7 +39,7 @@
     <transition name="fade">
       <div
         v-show="open"
-        :class="pendingExample ? 'expander__body-pending' : 'expander__body'">
+        :class="pendingExample ? 'expander__body--pending' : 'expander__body'">
         <slot name="body"/>
       </div>
     </transition>
@@ -69,6 +71,10 @@ export default {
       type: String,
       default: 'center',
     },
+    slim: {
+      type: Boolean,
+      default: false,
+    },
     pendingExample: {
       type: Boolean,
       default: false,
@@ -78,6 +84,11 @@ export default {
     return {
       isOpen: false,
     };
+  },
+  watch: {
+    open() {
+      this.isOpen = this.open;
+    },
   },
   mounted() {
     this.isOpen = this.open;
@@ -160,11 +171,20 @@ export default {
       margin-top: 0.5rem;
       cursor: pointer;
 
+      &--slim {
+        padding: .35rem;
+      }
+
       @media screen and (max-width: $mobile-width) {
         flex-wrap: wrap;
       }
-    &__check{
-      margin: 0 1rem 0 0;
+
+      &--pending {
+        background-color: $color-fake-white;
+      }
+
+    &__check {
+      margin: 0 1rem;
 
       @media screen and (max-width: $mobile-width) {
         margin: 1rem 0;
@@ -190,11 +210,12 @@ export default {
       padding: .5rem 0;
       background: #f5f5f5;
       border-radius: 4px;
-    }
-    &__body-pending{
-       padding: .5rem 0;
-      background: #EAEAEA;
-      border-radius: 4px;
+
+      &--pending{
+        padding: .5rem 0;
+        background: #EAEAEA;
+        border-radius: 4px;
+      }
     }
   }
 

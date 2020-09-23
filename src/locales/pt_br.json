@@ -241,7 +241,8 @@
       "edit_button": "Editar intenção",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma frase.",
-      "error_entity": "Aconteceu um erro."
+      "error_intent": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "error_intent_exists": "Intenção já existe"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -301,7 +302,7 @@
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
-      "train_response_subtitle": "Suas sentenças foram adicionadas ao treinamento. Você pode consultar as sentenças do repositório em Sentence list.",
+      "train_response_subtitle": "Suas frases foram adicionadas ao treinamento. Você pode consultar as frases do repositório em Sentence list.",
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
@@ -333,7 +334,7 @@
     },
     "translate": {
       "title_translate": "Traduzir uma frase",
-      "subtitle_translate": "Clique em uma frase para traduzir do seu idioma base para outros idiomas suportados pelo Bothub.",
+      "subtitle_translate": "Gerencie e traduza as frases de sua inteligência.",
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
       "submit_translation": "Enviar Tradução",
@@ -348,7 +349,7 @@
       "translate_to": "Traduzir para:",
       "to": "para",
       "no_entities": "Nenhuma entidade para adicionar nessa tradução",
-      "languages_select": "Buscar idioma",
+      "languages_select": "Escolha um idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
       "import_title": "Importar frases",
@@ -372,8 +373,13 @@
       "invalid_entities": "As entidades não correspondem às da frase original",
       "translation_edited": "Tradução editada",
       "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
-      "error_load_translation": "Não foi possível carregar traduções.",
-      "retry": "Recarregar"
+      "error_load_translation": "Não foi possível carregar tradução.",
+      "retry": "Recarregar",
+      "sentences": "Frases",
+      "translated": "Traduzidas",
+      "not_translated": "Não traduzidas",
+      "inconsistent": "Inconsistentes",
+      "select_all": "Selecionar todas nesta página"
     },
     "orgs": {
       "owner": "Pertence a",
@@ -557,7 +563,7 @@
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
-      "error_entity": "Aconteceu um erro.",
+      "error_entity": "Algo de errado aconteceu, tente novamente mais tarde.",
       "error_entity_exists": "Entidade já existe"
     },
     "payment": {
