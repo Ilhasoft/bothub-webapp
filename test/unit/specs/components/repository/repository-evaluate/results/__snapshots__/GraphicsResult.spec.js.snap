@@ -9,7 +9,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
     </h2>
     <p>
       some specific text
-      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">some specific text</a>.
+      <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results">some specific text</a>.
     </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
@@ -18,7 +18,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       <p> some specific text </p>
       <p>
         some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports">some specific text</a>.
       </p>
     </div>
     <div>
@@ -41,7 +41,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </h3>
       <p>
         some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -58,7 +58,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </h3>
       <p>some specific text</p>
       <p>some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -80,7 +80,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
     </h2>
     <p>
       some specific text
-      <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process">some specific text</a>.
+      <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results">some specific text</a>.
     </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
@@ -89,7 +89,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
       <p> some specific text </p>
       <p>
         some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports">some specific text</a>.
       </p>
     </div>
     <div>
@@ -116,7 +116,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
       </h3>
       <p>
         some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
@@ -129,7 +129,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
       </h3>
       <p>some specific text</p>
       <p>some specific text
-        <a target="_blank" href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">some specific text</a>.
+        <a target="_blank" href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution">some specific text</a>.
       </p>
     </div>
     <div class="graphics-results__charts">
