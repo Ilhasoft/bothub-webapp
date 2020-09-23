@@ -1,6 +1,6 @@
 import example from '@/api/example';
 import entity from '@/api/entity';
-
+import _intent from '@/api/intent';
 
 export default {
   async newExample(store, {
@@ -63,6 +63,16 @@ export default {
     const response = await entity.editEntityName(
       entityId,
       value,
+      repositoryVersion,
+    );
+    return response;
+  },
+  async editIntentName(store, {
+    intentId, text, repositoryVersion,
+  }) {
+    const response = await _intent.editIntentName(
+      intentId,
+      text,
       repositoryVersion,
     );
     return response;

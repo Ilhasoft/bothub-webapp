@@ -1,6 +1,6 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import EntitiesList from '@/components/repository/EntitiesList';
+import IntentsList from '@/components/repository/IntentsList';
 
 
 const localVue = createLocalVue();
@@ -11,13 +11,9 @@ describe('EntitiesList.vue', () => {
   let store;
   let getters;
   beforeEach(() => {
-    const entity = 'health';
+    const intent = 'health';
     getters = {
-      getCurrentRepository: () => ({
-        groups: [
-          { entities: ['green_robot'] },
-        ],
-      }),
+      getCurrentRepository: () => ({}),
     };
     store = new Vuex.Store({
       modules: {
@@ -26,31 +22,22 @@ describe('EntitiesList.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(EntitiesList, {
+    wrapper = shallowMount(IntentsList, {
       localVue,
       store,
       mocks: {
         $t: () => 'some specific text',
         $tc: () => 'some specific text',
         $route: {
-          params: { entity },
+          params: { intent },
         },
       },
       propsData: {
-        entitiesList: {
+        IntentsList: {
           total: 10,
         },
-        entityName: {
-          entity: 'health',
-        },
-        repository: {
-          other_group: {
-            entities: ['robot', 'greenRobot'],
-          },
-          groups: {
-            entities: ['robot', 'greenRobot'],
-          },
-        },
+        intentSelected: intent,
+        totalSentences: 10,
       },
     });
   });
@@ -61,20 +48,20 @@ describe('EntitiesList.vue', () => {
 
   describe('click on edit button', () => {
     beforeEach(() => {
-      const editEntityEvent = wrapper.find({ ref: 'editEntityEvent' });
-      editEntityEvent.trigger('click');
+      const editIntentEvent = wrapper.find({ ref: 'editIntentEvent' });
+      editIntentEvent.trigger('click');
     });
 
     test('expanded should be truth', () => {
       expect(wrapper.vm.editSentences).toBeTruthy();
     });
 
-    test('Entity should be de defined', () => {
-      expect(wrapper.vm.entityName.entity).toBeDefined();
+    test('List of intents should be de defined', () => {
+      expect(wrapper.vm.IntentsList).toBeDefined();
     });
 
     test('total of sentences should be greater than 0', () => {
-      expect(wrapper.vm.entitiesList.total).toBeGreaterThan(0);
+      expect(wrapper.vm.IntentsList.total).toBeGreaterThan(0);
     });
   });
 });
