@@ -37,7 +37,6 @@
       :empty-message="$t('webapp.translate.no_examples')"
       :add-attributes="{editing, initialData: editCache}"
       item-key="id"
-      load-all
       @onChange="updateCache($event)"
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
