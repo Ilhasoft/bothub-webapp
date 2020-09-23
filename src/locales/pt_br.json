@@ -241,7 +241,8 @@
       "edit_button": "Editar intenção",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma frase.",
-      "error_entity": "Aconteceu um erro."
+      "error_intent": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "error_intent_exists": "Intenção já existe"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -301,7 +302,7 @@
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
-      "train_response_subtitle": "Suas sentenças foram adicionadas ao treinamento. Você pode consultar as sentenças do repositório em Sentence list.",
+      "train_response_subtitle": "Suas frases foram adicionadas ao treinamento. Você pode consultar as frases do repositório em Sentence list.",
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
@@ -373,7 +374,12 @@
       "translation_edited": "Tradução editada",
       "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
       "error_load_translation": "Não foi possível carregar tradução.",
-      "retry": "Recarregar"
+      "retry": "Recarregar",
+      "sentences": "Frases",
+      "translated": "Traduzidas",
+      "not_translated": "Não traduzidas",
+      "inconsistent": "Inconsistentes",
+      "select_all": "Selecionar todas"
     },
     "orgs": {
       "owner": "Pertence a",
@@ -557,7 +563,7 @@
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
-      "error_entity": "Aconteceu um erro.",
+      "error_entity": "Algo de errado aconteceu, tente novamente mais tarde.",
       "error_entity_exists": "Entidade já existe"
     },
     "payment": {

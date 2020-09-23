@@ -2,7 +2,7 @@
   <div>
     <div class="repository-translate__list__options">
       <div class="repository-translate__list__options__check">
-        <b-checkbox v-model="selectAll"/> Select All
+        <b-checkbox v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
@@ -143,7 +143,6 @@ export default {
       /* istanbul ignore next */
       this.$emit('translated');
       /* istanbul ignore next */
-      await this.updateList();
     },
     dispatchStep() {
       this.$emit('eventStep');
@@ -154,6 +153,8 @@ export default {
 <style lang="scss" scoped>
 
 .repository-translate{
+  @import '~@/assets/scss/colors.scss';
+
   &__list{
     margin-left: 0.5rem;
 
@@ -163,10 +164,21 @@ export default {
         width: 100%;
         display: flex;
         justify-content: space-between;
-      &__check {
-        display: flex;
-        align-items: center;
-      }
+
+        &__buttons {
+          display: flex;
+          > * {
+            margin-left: 0.5rem;
+          }
+        }
+
+        &__check {
+          margin-left: 1rem;
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          color: $color-grey-dark;
+        }
     }
   }
 }

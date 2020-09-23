@@ -241,7 +241,8 @@
       "edit_button": "Edit Intent",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured."
+      "error_intent": "Something went wrong, try again later.",
+      "error_intent_exists": "Intent already exists"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -370,7 +371,12 @@
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
       "error_load_translation": "Could not load translation.",
-      "retry": "Retry"
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent",
+      "select_all": "Select all"
     },
     "orgs": {
       "owner": "Owned by",
@@ -558,7 +564,7 @@
       "edit_button": "Edit Entity",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured.",
+      "error_entity": "Something went wrong, try again later.",
       "error_entity_exists": "Entity already exists"
     },
     "payment": {

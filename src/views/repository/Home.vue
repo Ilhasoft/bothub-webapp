@@ -67,7 +67,8 @@
           </div>
         </div>
 
-        <badges-intents :list="repository.intents"/>
+        <badges-intents
+          :list="repository.intents"/>
       </div>
 
       <entity-edit
