@@ -1,20 +1,22 @@
 <template>
-  <div>
+  <div class="train">
     <b-button
-      v-show="repository.authorization.can_write && (repository.ready_for_train || !noPhrasesYet)"
+      v-show="showButton
+        && !trainProgress
+      && repository.authorization.can_write"
       ref="training"
       :disabled="loading || repository.examples__count === 0"
       :loading="loading"
       type="is-secondary"
-      class="trainings-progress__button"
+      class="train__button"
       @click="dispatchTrain()">
       {{ $t('webapp.trainings.run_training') }}
     </b-button>
     <div
       v-if="trainProgress"
-      class="trainings-progress__progress">
-      <div class="trainings-progress__bar">
-        <span :style="{ width: progress + '%' }"/>
+      class="train__progress">
+      <div class="train__bar">
+        <span :style="{ width: `${progress}%` }"/>
       </div>
       <p v-html="$t('webapp.trainings.train_progress', {progress: progress})"/>
     </div>
@@ -62,6 +64,10 @@ export default {
       type: Function,
       default: async () => {},
     },
+    showButton: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -73,7 +79,6 @@ export default {
       progress: 0,
       trainProgress: false,
       repositoryStatus: {},
-      noPhrasesYet: false,
       loadingStatus: false,
     };
   },
@@ -84,10 +89,20 @@ export default {
     loading() {
       return this.load || this.loadingStatus;
     },
+    repositoryCanWrite() {
+      if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
+      return this.repository.authorization.can_write;
+    },
   },
   watch: {
     trainProgress() {
       this.$emit('statusChanged', this.trainProgress);
+    },
+    repositoryCanWrite() {
+      if (this.repositoryCanWrite !== undefined) {
+        this.getRepositoryStatus();
+        this.resetTrainVariables();
+      }
     },
   },
   mounted() {
@@ -155,12 +170,12 @@ export default {
         });
       }
       if (this.repository.ready_for_train) {
-        this.$emit('onTrainFinish');
+        this.$emit('onTrainReady');
       }
       this.training = false;
     },
     async getRepositoryStatus() {
-      if (this.repositoryUUID !== null && this.repositoryCanWrite) {
+      if (this.repository.uuid !== null && this.repositoryCanWrite) {
         const { data } = await this.getRepositoryStatusTraining({
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.version,
@@ -179,7 +194,7 @@ export default {
             this.progress = 100;
             this.setRepositoryTraining(false);
             this.trainResults = true;
-            this.noPhrasesYet = true;
+            this.$emit('onTrainComplete');
           }
           setTimeout(() => {
             if (this.repositoryStatus.results[0].status === 0
@@ -211,7 +226,8 @@ export default {
   @import '~@/assets/scss/variables.scss';
 
 
-trainings-progress {
+.train {
+
     &__button{
       color: $color-white;
       margin-top: 1rem;
@@ -222,30 +238,32 @@ trainings-progress {
       }
     }
 
-      &__progress {
-        height: 25px;
-        width: 60%;
+    &__progress {
+      height: 25px;
+      width: 60%;
 
-        p{
-          font-size: 13px;
-          font-weight: $font-weight-bolder;
-        }
+      p {
+        font-size: 13px;
+        font-weight: $font-weight-bolder;
       }
+    }
 
-      &__bar {
+    &__bar {
       position: relative;
       display: block;
       width: 100%;
       background-color: $color-grey-light;
     }
-      &__bar span {
+
+    &__bar span {
       position: relative;
       display: inline-block;
       vertical-align: middle;
       height: 25px;
       background-color: $color-secondary;
     }
-      &__bar span:after {
+
+    &__bar span:after {
       position: absolute;
       top: 0;
       left: 0;
@@ -264,6 +282,7 @@ trainings-progress {
       opacity: 0.3;
       animation: progress-animation 0.5s infinite linear;
     }
+
     @-webkit-keyframes progress-animation {
       0% {
         background-position: 0 100%;
@@ -278,8 +297,8 @@ trainings-progress {
       }
       100% {
         background-position: 30px 100%;
-      }
     }
+  }
 }
 
 </style>]
