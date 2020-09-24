@@ -226,8 +226,11 @@
             </div>
             <train
               v-if="repository"
+              :update-repository="async () => { updateRepository(true) }"
+              :show-button="repository.ready_for_train"
               :repository="repository"
-              :version="getSelectedVersion" />
+              :version="getSelectedVersion"
+              :authenticated="authenticated" />
           </div>
         </div>
         <authorization-request-notification
@@ -256,7 +259,7 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
 import TranslateList from '@/components/translate/TranslateList';
@@ -289,6 +292,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
+      update: null,
       translationFile: null,
       isExportFileVisible: false,
       isImportFileVisible: false,
@@ -316,6 +320,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'authenticated',
       'activeTutorial',
       'getSelectedVersion',
     ]),
@@ -422,6 +427,8 @@ export default {
     },
     examplesTranslated() {
       this.translate.update = !this.translate.update;
+      if (this.update) clearTimeout(this.update);
+      this.update = setTimeout(() => { this.updateRepository(false); }, 600);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {

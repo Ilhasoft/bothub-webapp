@@ -32,6 +32,7 @@
                 <train
                   :show-button="repository.ready_for_train || !noPhrasesYet"
                   :repository="repository"
+                  :authenticated="authenticated"
                   :version="repositoryVersion"
                   :update-repository="async () => { updateRepository(false) }"
                   @finishedTutorial="dispatchFinish()"

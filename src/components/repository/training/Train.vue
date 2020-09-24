@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import TrainModal from '@/components/repository/training/TrainModal';
 import TrainResponse from '@/components/repository/training/TrainResponse';
 
@@ -68,6 +68,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    authenticated: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -83,9 +87,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-    ]),
     loading() {
       return this.load || this.loadingStatus;
     },
