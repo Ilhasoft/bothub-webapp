@@ -23,6 +23,15 @@
               @exampleDeleted="onExampleDeleted"
               @noPhrases="noPhrasesYet = false"
             />
+            <train
+              :repository="repository"
+              :version="repositoryVersion"
+              :update-repository="async () => { updateRepository(false) }"
+              @finishedTutorial="dispatchFinish()"
+              @tutorialReset="dispatchReset()"
+              @onTrain="dispatchClick()"
+              @onTrainFinish="dispatchClick()"
+              @unauthorized="signIn()" />
             <div class="trainings-repository__new-example__train">
               <div
                 v-if="trainProgress"
@@ -126,6 +135,7 @@ import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
+import Train from '@/components/repository/training/Train';
 import Tour from '@/components/Tour';
 
 export default {
@@ -142,6 +152,7 @@ export default {
     TrainModal,
     TrainResponse,
     Loading,
+    Train,
     Tour,
   },
   extends: RepositoryBase,
@@ -151,6 +162,7 @@ export default {
       trainResponseData: null,
       trainResponseOpen: false,
       querySchema: {},
+      trainResults: false,
       query: {},
       update: false,
       training: false,

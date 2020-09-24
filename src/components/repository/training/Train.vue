@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-button
-      v-show="repository.authorization.can_write && repository.ready_for_train || !noPhrasesYet"
+      v-show="repository.authorization.can_write && (repository.ready_for_train || !noPhrasesYet)"
       ref="training"
       :disabled="loading || repository.examples__count === 0"
       :loading="loading"
@@ -24,8 +24,8 @@
       :requirements-to-train="repository.requirements_to_train"
       :open="trainModalOpen"
       :languages-warnings="repository.languages_warnings"
-      @finishedTutorial="$emit('finishedTutorial')"
-      @resetTutorial="$emit('resetTutorial')"
+      @finishedTutorial="finishedTutorial()"
+      @resetTutorial="resetTutorial()"
       @closeTrainModal="closeTrainModal()"/>
     <train-response
       :open="trainResults"
@@ -57,6 +57,10 @@ export default {
     version: {
       type: Number,
       required: true,
+    },
+    updateRepository: {
+      type: Function,
+      default: async () => {},
     },
   },
   data() {
@@ -96,27 +100,38 @@ export default {
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
     ]),
+    finishedTutorial() {
+      this.$emit('finishedTurorial');
+    },
+    resetTutorial() {
+      this.$emit('tutorialReset');
+    },
     closeTrainModal() {
       this.trainModalOpen = false;
     },
     async dispatchTrain() {
       if (!this.authenticated) {
         this.$emit('unauthorized');
-        return;
       }
-      if (this.repository.authorization.can_write) {
+      if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
         if (this.repository.ready_for_train
           && Object.values(this.repository.requirements_to_train).length === 0
           && Object.values(this.repository.languages_warnings).length === 0) {
           await this.train();
-        } else if (!this.repository.ready_for_train
+          this.loadingStatus = false;
+          return;
+        }
+        if (!this.repository.ready_for_train
           && Object.values(this.repository.requirements_to_train).length === 0
           && Object.values(this.repository.languages_warnings).length === 0) {
           this.$buefy.toast.open({
             message: this.$t('webapp.train_modal.language_warning'),
             type: 'is-danger',
           });
+
+          this.loadingStatus = false;
+          return;
         }
         this.loadingStatus = false;
         this.trainModalOpen = true;
@@ -131,7 +146,7 @@ export default {
           repositoryVersion: this.version,
         });
         await this.setRepositoryTraining(true);
-        await this.updateRepository(false);
+        await this.updateRepository();
         await this.getRepositoryStatus();
       } catch (e) {
         this.$buefy.toast.open({
