@@ -126,7 +126,6 @@ export default {
   data() {
     return {
       querySchema: {},
-      trainResults: false,
       query: {},
       update: false,
       pendingList: false,
