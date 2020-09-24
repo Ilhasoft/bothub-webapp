@@ -202,8 +202,8 @@
               <div class="repository-translate__list__search">
                 <translation-sentence-status
                   :key="`${translate.from} ${translate.to}-${translate.update}`"
-                  :repository-uuid="selectedRepository.uuid"
-                  :version="selectedRepository.repository_version_id"
+                  :repository-uuid="repository.uuid"
+                  :version="getSelectedVersion"
                   :language="repository.language"
                   :to-language="translate.to"
                   :initial-data="sentenceFilter.key"
@@ -224,7 +224,10 @@
                 @isLoadingContent="loadingList = $event"
                 @listPhrase="checkPhraseList($event)"/>
             </div>
-
+            <train
+              v-if="repository"
+              :repository="repository"
+              :version="getSelectedVersion" />
           </div>
         </div>
         <authorization-request-notification
@@ -243,12 +246,12 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
+    <!-- <tour
       v-if="activeTutorial === 'translate'"
       :step-count="7"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
-      name="translate" />
+      name="translate" /> -->
   </repository-view-base>
 </template>
 
@@ -263,6 +266,7 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import Train from '@/components/repository/training/Train';
 import Tour from '@/components/Tour';
 import {
   languageListToDict,
@@ -275,6 +279,7 @@ export default {
     RepositoryViewBase,
     LanguageSelectInput,
     TranslateList,
+    Train,
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
@@ -310,11 +315,9 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository,
-    }),
     ...mapGetters([
       'activeTutorial',
+      'getSelectedVersion',
     ]),
     baseLanguage() {
       const languageObject = Object.values(
@@ -348,8 +351,8 @@ export default {
       this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.getSelectedVersion,
           fromLanguage: this.repository.language,
           toLanguagem: this.translate.to,
           statusTranslation: !this.allTranslations,
@@ -373,8 +376,8 @@ export default {
 
       try {
         const importDownload = await this.importTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.curentVersion,
           formData,
         });
         this.forceFileDownload(importDownload);

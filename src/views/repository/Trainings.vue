@@ -120,8 +120,8 @@ import ExamplesList from '@/components/example/ExamplesList';
 import ExamplesPendingTraining from '@/components/example/ExamplesPendingTraining';
 import LoginForm from '@/components/auth/LoginForm';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
-import TrainModal from '@/components/repository/TrainModal';
-import TrainResponse from '@/components/repository/TrainResponse';
+import TrainModal from '@/components/repository/training/TrainModal';
+import TrainResponse from '@/components/repository/training/TrainResponse';
 import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import RepositoryBase from './Base';
@@ -165,7 +165,6 @@ export default {
       noPhrasesYet: true,
       trainProgress: false,
       progress: 10,
-      trainResults: false,
     };
   },
   computed: {
@@ -359,7 +358,7 @@ export default {
     },
   },
 };
-</script>
+</script>f
 
 <style lang="scss" scoped>
   @import '~@/assets/scss/colors.scss';
