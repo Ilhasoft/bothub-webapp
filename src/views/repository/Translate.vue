@@ -382,7 +382,7 @@ export default {
       try {
         const importDownload = await this.importTranslations({
           repositoryUuid: this.repository.uuid,
-          versionUUID: this.curentVersion,
+          versionUUID: this.getSelectedVersion,
           formData,
         });
         this.forceFileDownload(importDownload);
