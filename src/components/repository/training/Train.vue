@@ -109,6 +109,7 @@ export default {
   },
   mounted() {
     this.updateTrainingStatus();
+    this.getRepositoryStatus();
   },
   methods: {
     ...mapActions([
@@ -131,10 +132,10 @@ export default {
       try {
         const trainStatus = await this.getTrainingStatus({
           repositoryUUID: this.repository.uuid,
-          version: this.repositoryVersion,
+          version: this.version,
         });
         if (trainStatus) {
-          Object.assign(this.repository, trainStatus);
+          this.$emit('statusUpdated', trainStatus);
         }
       } finally {
         this.loadingStatus = false;
@@ -194,12 +195,11 @@ export default {
     },
     async getRepositoryStatus() {
       if (this.repository.uuid !== null && this.repositoryCanWrite) {
-        const status = await this.getRepositoryStatusTraining({
+        const { data } = await this.getRepositoryStatusTraining({
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.version,
         });
-        this.repositoryStatus = status.data;
-        this.$emit('statusUpdated', status);
+        this.repositoryStatus = data;
         if (this.repositoryStatus.results[0] !== undefined) {
           if (this.repositoryStatus.results[0].status === 0) {
             this.trainProgress = true;
