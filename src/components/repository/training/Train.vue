@@ -98,7 +98,7 @@ export default {
   },
   watch: {
     trainProgress() {
-      this.$emit('statusChanged', this.trainProgress);
+      this.$emit('trainProgressUpdated', this.trainProgress);
     },
     repositoryCanWrite() {
       if (this.repositoryCanWrite !== undefined) {
@@ -108,7 +108,7 @@ export default {
     },
   },
   mounted() {
-    this.getRepositoryStatus();
+    this.updateTrainingStatus();
   },
   methods: {
     ...mapActions([
