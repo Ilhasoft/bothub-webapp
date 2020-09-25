@@ -30,11 +30,14 @@
                 :is-previous-disabled="true"
                 class="trainings-repository__list-wrapper__tutorialStep">
                 <train
+                  :key="update"
                   :show-button="repository.ready_for_train || !noPhrasesYet"
                   :repository="repository"
                   :authenticated="authenticated"
                   :version="repositoryVersion"
                   :update-repository="async () => { updateRepository(false) }"
+                  @trainProgressUpdated="trainProgress = $event"
+                  @statusUpdated="updateTrainingStatus($event)"
                   @finishedTutorial="dispatchFinish()"
                   @tutorialReset="dispatchReset()"
                   @onTrain="dispatchClick()"
@@ -136,6 +139,7 @@ export default {
       repositoryStatus: {},
       textExample: '',
       noPhrasesYet: true,
+      trainProgress: false,
       progress: 10,
     };
   },
@@ -180,8 +184,8 @@ export default {
       const formattedQueryString = exampleSearchToString(this.querySchema);
       this.query = exampleSearchToDicty(formattedQueryString);
     },
-    closeTrainModal() {
-      this.trainModalOpen = false;
+    updateTrainingStatus(trainStatus) {
+      Object.assign(this.repository, trainStatus);
     },
     changedText(newText) {
       this.textExample = newText;
@@ -191,7 +195,7 @@ export default {
       this.eventClick = !this.eventClick;
     },
     dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
+      if (this.activeTutorial === 'training') this.eventClickFinish = !this.eventClickFinish;
     },
     dispatchReset() {
       this.eventReset = !this.eventReset;
@@ -202,7 +206,6 @@ export default {
       });
     },
     updatedExampleList() {
-      this.updateTrainingStatus();
       this.update = !this.update;
     },
     onExampleDeleted() {
@@ -227,7 +230,6 @@ export default {
 
     &__button{
       color: $color-white;
-      margin-top: 1rem;
       width: 14rem;
 
       &:hover{

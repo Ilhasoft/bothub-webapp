@@ -251,7 +251,7 @@
     </div>
     <!-- <tour
       v-if="activeTutorial === 'translate'"
-      :step-count="7"
+      :step-count="1"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       name="translate" /> -->

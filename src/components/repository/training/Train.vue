@@ -28,6 +28,7 @@
       :languages-warnings="repository.languages_warnings"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
+      @proceedTrain="train()"
       @closeTrainModal="closeTrainModal()"/>
     <train-response
       :open="trainResults"
@@ -97,7 +98,7 @@ export default {
   },
   watch: {
     trainProgress() {
-      this.$emit('statusChanged', this.trainProgress);
+      this.$emit('trainProgressUpdated', this.trainProgress);
     },
     repositoryCanWrite() {
       if (this.repositoryCanWrite !== undefined) {
@@ -107,7 +108,7 @@ export default {
     },
   },
   mounted() {
-    this.getRepositoryStatus();
+    this.updateTrainingStatus();
   },
   methods: {
     ...mapActions([
@@ -124,6 +125,20 @@ export default {
     },
     closeTrainModal() {
       this.trainModalOpen = false;
+    },
+    async updateTrainingStatus() {
+      this.loadingStatus = true;
+      try {
+        const trainStatus = await this.getTrainingStatus({
+          repositoryUUID: this.repository.uuid,
+          version: this.repositoryVersion,
+        });
+        if (trainStatus) {
+          Object.assign(this.repository, trainStatus);
+        }
+      } finally {
+        this.loadingStatus = false;
+      }
     },
     async dispatchTrain() {
       if (!this.authenticated) {
@@ -156,6 +171,7 @@ export default {
     },
     async train() {
       this.training = true;
+      this.loadingStatus = true;
       try {
         await this.trainRepository({
           repositoryUuid: this.repository.uuid,
@@ -174,14 +190,16 @@ export default {
         this.$emit('onTrainReady');
       }
       this.training = false;
+      this.loadingStatus = false;
     },
     async getRepositoryStatus() {
       if (this.repository.uuid !== null && this.repositoryCanWrite) {
-        const { data } = await this.getRepositoryStatusTraining({
+        const status = await this.getRepositoryStatusTraining({
           repositoryUUID: this.repository.uuid,
           repositoryVersion: this.version,
         });
-        this.repositoryStatus = data;
+        this.repositoryStatus = status.data;
+        this.$emit('statusUpdated', status);
         if (this.repositoryStatus.results[0] !== undefined) {
           if (this.repositoryStatus.results[0].status === 0) {
             this.trainProgress = true;

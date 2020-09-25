@@ -1,8 +1,7 @@
 <template>
   <b-modal
     :active="open"
-    :can-cancel="false"
-    :width="665">
+    :can-cancel="false">
     <div
       id="tour-training-step-7"
       :is-previous-disabled="true"
@@ -18,12 +17,24 @@
         </div>
         <div class="train-modal__container">
           <strong
+            v-if="repositoryTrain"
+            class="train-modal__text-warning">
+            {{ $t('webapp.train_modal.ready_for_train_title') }}</strong>
+          <strong
+            v-else
             class="train-modal__text-warning">
             {{ $t('webapp.train_modal.language_warning') }}</strong>
           <div
             v-if="requirementsToTrainStatus || languagesWarningsStatus"
             class="train-modal__wrapper">
-            <p class="train-modal__wrapper__subtitle">
+            <p
+              v-if="repositoryTrain"
+              class="train-modal__wrapper__subtitle">
+              {{ $t('webapp.train_modal.ready_for_train_subtitle') }}
+            </p>
+            <p
+              v-else
+              class="train-modal__wrapper__subtitle">
               {{ $t('webapp.train_modal.missing_requirements') }}
             </p>
             <div class="train-modal__wrapper__content">
@@ -36,17 +47,20 @@
                     v-for="(requirement, i) in requirements"
                     :key="i"
                     class="train-modal__wrapper__content__content-requirements__item">
+                    <div class="train-modal__wrapper__content__content-requirements__item__field">
+                      <b-tag
+                        type="is-primary"
+                        rounded>{{ lang }}</b-tag>
+                    </div>
                     <p>
                       <strong>{{ firstText(requirement) }}</strong>
                       <br>
                       <span>{{ secondText(requirement) }}</span>
                     </p>
-                    <div>
-                      <b-icon
-                        icon="close"
-                        class="train-modal__wrapper__content__content-requirements__item__icon"
-                        @click.native="closeModal()"/>
-                    </div>
+                    <b-icon
+                      icon="close"
+                      class="train-modal__wrapper__content__content-requirements__item__icon"
+                      @click.native="closeModal()"/>
                   </div>
                 </div>
               </div>
@@ -56,6 +70,11 @@
                     v-for="(warnings, lang) in languagesWarnings"
                     :key="lang"
                     class="train-modal__wrapper__content__content-requirements__item">
+                    <div class="train-modal__wrapper__content__content-requirements__item__field">
+                      <b-tag
+                        type="is-primary"
+                        rounded>{{ lang }}</b-tag>
+                    </div>
                     <p
                       v-for="(warning, index) in warnings"
                       :key="index">
@@ -63,12 +82,10 @@
                       <br>
                       <span>{{ secondText(warning) }}</span>
                     </p>
-                    <div>
-                      <b-icon
-                        icon="close"
-                        class="train-modal__wrapper__content__content-requirements__item__icon"
-                        @click.native="closeModal()"/>
-                    </div>
+                    <b-icon
+                      icon="close"
+                      class="train-modal__wrapper__content__content-requirements__item__icon"
+                      @click.native="closeModal()"/>
                   </div>
                 </div>
               </div>
@@ -79,7 +96,15 @@
                 type="is-primary"
                 class="train-modal__buttons__style"
                 @click="closeModal()">
-                <span>{{ $t('webapp.train_modal.ok') }}</span>
+                <span>{{ $t('webapp.train_modal.cancel') }}</span>
+              </b-button>
+              <b-button
+                v-if="repositoryTrain"
+                ref="trainBtn"
+                type="is-primary"
+                class="train-modal__buttons__style"
+                @click="dispatchTrain()">
+                <span>{{ $t('webapp.train_modal.train') }}</span>
               </b-button >
             </div>
           </div>
@@ -112,6 +137,10 @@ export default {
       required: true,
     },
     training: {
+      type: Boolean,
+      default: false,
+    },
+    repositoryTrain: {
       type: Boolean,
       default: false,
     },
@@ -155,6 +184,10 @@ export default {
       }
       this.$emit('closeTrainModal');
     },
+    dispatchTrain() {
+      this.$emit('proceedTrain');
+      this.$emit('closeTrainModal');
+    },
   },
 };
 </script>
@@ -184,12 +217,14 @@ export default {
 :not(.quick-test) {
   pointer-events: visible;
 }
+
 .train-modal {
-  max-height: 535px;
+  max-height: 33.438rem;
+  width: 41.563rem;
   background-color: $color-white;
   box-shadow: 0px 3px 6px #00000029;
-  border-radius: 8px;
-
+  border-radius: 0.5rem;
+  margin: auto;
 
   &__close{
     width: 100%;
@@ -230,7 +265,7 @@ export default {
 
     &__content{
       overflow: auto;
-      max-height: 220px;
+      max-height: 13.75rem;
 
       &__content-requirements {
 
@@ -240,12 +275,22 @@ export default {
           padding: 2.1rem 1rem;
           align-items: center;
           margin: 0 1rem 0.6rem 0;
-          height: 65px;
+          height: 4.063rem;
           border: 1.5px solid $color-danger;
           background-color: $color-fake-white;
-          border-radius: 6px;
+          border-radius: 0.375rem;
             &__icon{
               color:$color-danger;
+              padding-left: 1rem;
+            }
+
+            &__field{
+              width: 2.9rem;
+              display: flex;
+              padding-right: 1rem;
+              font-weight: $font-weight-bolder;
+              justify-content: center;
+              align-items: center;
             }
         }
       }
@@ -257,12 +302,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-
     &__style{
       box-shadow: 0px 3px 6px #00000029;
-      width: 96px;
-      height: 43px;
+      width: 6rem;
+      height: 2.688rem;
       font-weight: $font-weight-bolder;
+      font-family: $font-family;
+      margin: 0 1rem;
     }
   }
 

@@ -1,7 +1,7 @@
 <template>
   <b-modal
     :active="open"
-    :width="567"
+    :width="520"
     :can-cancel="false">
     <div class="train-response">
       <div
