@@ -8,7 +8,6 @@
       :per-page="perPage"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)" />
-
     <br>
     <div v-if="examplesList && examplesList.empty">
       <p
@@ -26,6 +25,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import ExampleItem from '@/components/example/ExampleItem';
+import ExampleAccordionWithTranslations from '@/components/shared/accordion/ExampleAccordionWithTranslations';
 
 const components = {
   PaginatedList,
@@ -41,7 +41,7 @@ export default {
     },
     perPage: {
       type: Number,
-      default: 20,
+      default: 12,
     },
     update: {
       type: Boolean,
@@ -51,11 +51,14 @@ export default {
       type: String,
       default: '',
     },
+    translationData: {
+      type: Boolean,
+      default: null,
+    },
   },
   data() {
     return {
       examplesList: null,
-      exampleItemElem: ExampleItem,
       dateLastTrain: '',
     };
   },
@@ -64,6 +67,9 @@ export default {
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',
     }),
+    exampleItemElem() {
+      return this.translationData ? ExampleAccordionWithTranslations : ExampleItem;
+    },
   },
   watch: {
     query() {

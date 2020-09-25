@@ -9,7 +9,8 @@
         <entities-list
           :entities-list="examplesList"
           :repository="repository"
-          :entity-name.sync="entitySelected"/>
+          :entity-name.sync="entitySelected"
+          @saveEdition="onItemSave()"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesEntities"
@@ -80,7 +81,7 @@ export default {
   props: {
     perPage: {
       type: Number,
-      default: 20,
+      default: 12,
     },
     update: {
       type: Boolean,

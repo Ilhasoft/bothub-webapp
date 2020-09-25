@@ -8,7 +8,8 @@
       <div v-if="repository && repository.authorization.can_contribute">
         <intents-list
           :intents-list="examplesList"
-          :repository="repository"/>
+          :repository="repository"
+          @saveEdition="onItemSave()"/>
         <paginated-list
           v-if="examplesList"
           :item-component="sentencesIntenties"
@@ -78,7 +79,7 @@ export default {
   props: {
     perPage: {
       type: Number,
-      default: 20,
+      default: 12,
     },
     update: {
       type: Boolean,
@@ -91,7 +92,7 @@ export default {
       examplesList: null,
       totalList: 0,
       intentSearch: {
-        intent: this.$route.params.intent,
+        intent_id: this.$route.params.intent,
       },
       query: {},
       sentencesIntenties: SentencesIntentList,

@@ -69,7 +69,7 @@ describe('EntitiesList.vue', () => {
       expect(wrapper.vm.editSentences).toBeTruthy();
     });
 
-    test('total of sentences should be greater than 0', () => {
+    test('Entity should be de defined', () => {
       expect(wrapper.vm.entityName.entity).toBeDefined();
     });
 

@@ -197,6 +197,7 @@ export default {
     background-color: $white-ter;
     border-radius: $radius;
     transition: box-shadow .2s ease;
+    font-size: 1.25rem;
     padding: 8px 16px;
     margin-bottom: 4px;
   }
