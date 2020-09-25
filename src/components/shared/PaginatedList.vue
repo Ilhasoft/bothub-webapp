@@ -97,6 +97,7 @@ export default {
       return this.list && this.list.loading;
     },
     params() {
+      if (!this.list) return null;
       return this.list.params;
     },
   },
