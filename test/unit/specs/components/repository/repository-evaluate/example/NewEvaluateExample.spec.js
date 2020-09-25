@@ -37,7 +37,7 @@ describe('NewEvaluateExample.vue', () => {
     });
     wrapper = shallowMount(NewEvaluateExample, {
       localVue,
-      props: {
+      propsData: {
         language: 'en',
       },
       store,
