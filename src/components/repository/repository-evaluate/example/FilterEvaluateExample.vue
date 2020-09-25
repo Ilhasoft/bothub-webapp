@@ -266,6 +266,8 @@ export default {
       &__text {
         white-space: nowrap;
         align-self: center;
+        height: 100%;
+        padding: .5rem;
       }
     }
   }

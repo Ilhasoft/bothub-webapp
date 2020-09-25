@@ -294,6 +294,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;
@@ -311,7 +312,11 @@ export default {
         color: $color-grey-dark;
         font-size: 1.1rem;
         font-weight: bold;
-        padding: 0 0.6rem;
+        padding: 0 .6rem 0 1.6rem;
+
+        @media screen and (max-width: $mobile-width) {
+        padding: 0.6rem;
+      }
 
         &__buttonsIcon {
           display: flex;

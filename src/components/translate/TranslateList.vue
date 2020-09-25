@@ -1,27 +1,55 @@
 <template>
   <div>
+    <div class="repository-translate__list__options">
+      <div class="repository-translate__list__options__check">
+        <b-checkbox v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
+      </div>
+      <div class="repository-translate__list__options__buttons">
+        <b-button
+          v-show="!editing"
+          type="is-primary"
+          icon-right="pencil"
+          @click="editing = true"/>
+        <b-button
+          v-show="!editing"
+          type="is-primary"
+          icon-right="delete"
+          @click="deleteAll" />
+        <b-button
+          v-show="editing"
+          type="is-primary"
+          icon-right="check-bold"
+          @click="saveAll" />
+        <b-button
+          v-show="editing"
+          type="is-primary"
+          icon-right="close-thick"
+          @click="editing = false" />
+      </div>
+    </div>
     <paginatedList
       v-if="translateList"
       :list="translateList"
       :item-component="translateExampleItem"
+      :per-page="perPage"
       :repository="repository"
       :translate-to="to"
+      :empty-message="$t('webapp.translate.no_examples')"
+      :add-attributes="{editing, initialData: editCache}"
+      item-key="id"
+      @onChange="updateCache($event)"
       @translated="onTranslated()"
       @eventStep="dispatchStep()"
       @dispatchStep="dispatchStep()"
+      @pageChanged="selectAll = false"
       @update:loading="onLoading($event)"/>
-    <p
-      v-if="translateList && translateList.empty"
-      class="repository-translate__list">
-      {{ $t('webapp.translate.no_examples') }}
-    </p>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
-import TranslateExampleItem from './TranslateExampleItem';
+import TranslateExampleItem from './NewTranslateExampleItem';
 
 export default {
   name: 'TranslateList',
@@ -41,6 +69,10 @@ export default {
       type: String,
       required: true,
     },
+    perPage: {
+      type: Number,
+      default: 12,
+    },
     query: {
       type: Object,
       default: null,
@@ -54,6 +86,9 @@ export default {
     return {
       translateList: null,
       translateExampleItem: TranslateExampleItem,
+      selectAll: false,
+      editing: false,
+      editCache: {},
     };
   },
   computed: {
@@ -66,6 +101,7 @@ export default {
     async to() { await this.updateList(); },
     query() { this.updateList(); },
     update() { this.updateList(); },
+    selectAll() { this.$root.$emit('selectAll', this.selectAll); },
   },
   async mounted() {
     await this.updateList();
@@ -73,18 +109,31 @@ export default {
   methods: {
     ...mapActions([
       'getExamplesToTranslate',
+      'searchExamples',
     ]),
+    updateCache({ id, data }) {
+      if (!data) delete this.editCache[id];
+      else this.editCache[id] = data;
+    },
+    saveAll() {
+      this.$root.$emit('saveAll');
+      this.editing = false;
+      this.selectAll = false;
+    },
+    deleteAll() {
+      this.$root.$emit('deleteAll');
+    },
     async updateList() {
-      this.translateList = null;
       if (!!this.from && !!this.to) {
         await this.$nextTick();
-        this.translateList = await this.getExamplesToTranslate({
+        const list = await this.searchExamples({
+          query: { language: this.from, ...this.query },
           repositoryUuid: this.repository.uuid,
           version: this.repositoryVersion,
-          from: this.from,
-          to: this.to,
-          query: this.query,
+          limit: this.perPage,
         });
+        if (this.translateList) this.translateList.updateList(list);
+        else this.translateList = list;
       }
       this.$emit('listPhrase', this.translateList);
     },
@@ -95,7 +144,6 @@ export default {
       /* istanbul ignore next */
       this.$emit('translated');
       /* istanbul ignore next */
-      await this.updateList();
     },
     dispatchStep() {
       this.$emit('eventStep');
@@ -106,8 +154,33 @@ export default {
 <style lang="scss" scoped>
 
 .repository-translate{
+  @import '~@/assets/scss/colors.scss';
+
   &__list{
     margin-left: 0.5rem;
+
+      &__options {
+        padding: 0 1rem 0 0.5rem;
+        margin-bottom: 2.1rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        &__buttons {
+          display: flex;
+          > * {
+            margin-left: 0.5rem;
+          }
+        }
+
+        &__check {
+          margin-left: 1rem;
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          color: $color-grey-dark;
+        }
+    }
   }
 }
 

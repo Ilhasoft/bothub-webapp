@@ -11,27 +11,11 @@
             <h2 class="evaluate__content-header__title">
               {{ $t('webapp.evaluate.detailed_results') }}
             </h2>
-            <div class="evaluate__content-header__wrapper">
-              <div class="evaluate__content-header__wrapper__language-select">
-                <!-- <b-select
-                  v-model="currentLanguage"
-                  expanded>
-                  <option
-                    v-for="language in languages"
-                    :key="language.id"
-                    :selected="language.value === currentLanguage"
-                    :value="language.value">
-                    {{ language.title }}
-                  </option>
-                </b-select> -->
-              </div>
-            </div>
           </div>
           <div class="evaluate__content-wrapper">
             <base-evaluate-results
               :result-id="resultId"
-              :repository="repository"
-              :filter-by-language="currentLanguage" />
+              :repository="repository" />
           </div>
         </div>
         <authorization-request-notification
@@ -57,8 +41,7 @@
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
-import { mapActions, mapState, mapGetters } from 'vuex';
-import { LANGUAGES } from '@/utils';
+import { mapGetters } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
@@ -75,46 +58,16 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      currentLanguage: '',
-      languages: [],
       evaluating: false,
       error: {},
     };
   },
   computed: {
-    ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository,
-    }),
     ...mapGetters({
       authenticated: 'authenticated',
     }),
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
-    },
-  },
-  watch: {
-    selectedRepository() {
-      this.getExamples();
-      if (this.currentLanguage === '') {
-        this.currentLanguage = this.selectedRepository.language;
-      }
-    },
-  },
-  methods: {
-    ...mapActions([
-      'getEvaluateExample',
-    ]),
-    getExamples() {
-      this.getEvaluateExample({
-        id: this.selectedRepository.uuid,
-      }).then(() => {
-        this.languages = Object.keys(this.selectedRepository.evaluate_languages_count)
-          .map((lang, index) => ({
-            id: index + 1,
-            value: lang,
-            title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
-          }));
-      });
     },
   },
 };
@@ -187,18 +140,6 @@ export default {
 
     &__title {
       margin-top: 2rem;
-    }
-
-    &__wrapper {
-      display: flex;
-      align-items: flex-end;
-      margin-top: 1rem;
-
-      &__language-select {
-        flex: 1;
-        margin-right: .5rem;
-        text-align: left;
-      }
     }
   }
 
