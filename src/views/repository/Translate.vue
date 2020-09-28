@@ -226,11 +226,12 @@
             </div>
             <train
               v-if="repository"
-              :update-repository="async () => { updateRepository(true) }"
+              :key="trainUpdate"
               :show-button="repository.ready_for_train"
               :repository="repository"
               :version="getSelectedVersion"
-              :authenticated="authenticated" />
+              :authenticated="authenticated"
+              @statusUpdated="updateTrainingStatus($event)" />
           </div>
         </div>
         <authorization-request-notification
@@ -316,6 +317,7 @@ export default {
       ],
       query: {},
       sentenceFilter: { key: null, query: null },
+      trainUpdate: false,
     };
   },
   computed: {
@@ -352,6 +354,9 @@ export default {
       'exportTranslations',
       'importTranslations',
     ]),
+    updateTrainingStatus(trainStatus) {
+      Object.assign(this.repository, trainStatus);
+    },
     async exportTranslation() {
       this.waitDownloadFile = !this.waitDownloadFile;
       try {
@@ -428,7 +433,7 @@ export default {
     examplesTranslated() {
       this.translate.update = !this.translate.update;
       if (this.update) clearTimeout(this.update);
-      this.update = setTimeout(() => { this.updateRepository(false); }, 600);
+      this.update = setTimeout(() => { this.trainUpdate = !this.trainUpdate; }, 600);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {

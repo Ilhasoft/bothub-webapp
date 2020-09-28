@@ -98,7 +98,7 @@
 <script>
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import EntitiesInput from '@/components/inputs/EntitiesInput';
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import { formatters } from '@/utils';
 
 
@@ -107,6 +107,12 @@ export default {
   components: {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
+  },
+  props: {
+    language: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -123,9 +129,6 @@ export default {
     };
   },
   computed: {
-    ...mapState({
-      language: state => state.Repository.evaluateLanguage,
-    }),
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
       repository: 'getCurrentRepository',
