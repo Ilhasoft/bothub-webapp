@@ -115,7 +115,7 @@ $entities-colors: (
 }
 
 .icon-disabled {
-  opacity: 50%;
+  opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none !important;
 }
