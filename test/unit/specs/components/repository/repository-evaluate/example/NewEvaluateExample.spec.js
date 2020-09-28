@@ -24,7 +24,6 @@ describe('NewEvaluateExample.vue', () => {
         uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
         intents_list: ['affirm', 'cuisine', 'greet'],
       },
-      evaluateLanguage: 'en',
     };
 
     store = new Vuex.Store({
@@ -38,6 +37,9 @@ describe('NewEvaluateExample.vue', () => {
     });
     wrapper = shallowMount(NewEvaluateExample, {
       localVue,
+      propsData: {
+        language: 'en',
+      },
       store,
       mocks: {
         $t: () => 'some specific text',
