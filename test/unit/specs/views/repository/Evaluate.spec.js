@@ -22,7 +22,6 @@ describe('TestView.vue', () => {
     };
     actions = {
       getEvaluateExample: jest.fn(),
-      setEvaluateLanguage: jest.fn(),
     };
     getters = {
       authenticated: jest.fn(),
