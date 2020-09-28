@@ -142,7 +142,7 @@
       "run_test": "Executar teste",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
-      "get_examples_test_sentences": "frases de teste",
+      "get_examples_test_sentences": "{n} frase de teste | {n} frases de teste",
       "all_intents": "Todas as Intenções",
       "all_entities": "Todas as Entidades",
       "all_labels": "Todas as Categorias",
@@ -321,16 +321,18 @@
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
-      
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
       "status_ok": "Seu bot está pronto para ser treinado!",
       "language_warning": "Não foi possível executar o treinamento",
       "missing_requirements": "Alguns erros foram encontrados e o seu treinamento não foi concluído Corrija e tente novamente.",
+      "ready_for_train_title": "Alguns erros foram encontrados",
+      "ready_for_train_subtitle": "Volte e corrija os erros encontrados ou prossiga e treine parcialmente.",
       "warnings": "Alertas",
-      "train": "Treinar",
-      "ok": "ok!"
+      "train": "Prosseguir",
+      "cancel": "Cancelar",
+      "ok": "ok"
     },
     "translate": {
       "title_translate": "Traduzir uma frase",
@@ -629,7 +631,7 @@
             "step_4": "Identifique a intenção da frase que você digitou. Ex: pedido",
             "step_5": "Por fim, envie sua frase.",
             "step_6": "Após adicionar as frases, clique aqui. <br> <strong>Dica</strong>: Para treinar, você deve adicionar pelo menos duas intenções com duas frases cada.",
-            "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Treinar\" para prosseguir. <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, cliquem em \"Ok\" para repetir."
+            "step_7": "Verifique se a sua inteligência está pronta para treinar e clique em \"Prosseguir\". <br> <br> <strong>Dica</strong>: Se algum requisito não for cumprido, clique em \"Cancelar\" para repetir."
         },
         "evaluate": {
           "step_0": "<strong> Vamos para o teste de frases! </strong> <br> Com o teste, você poderá avaliar facilmente o desempenho de sua inteligência.",
