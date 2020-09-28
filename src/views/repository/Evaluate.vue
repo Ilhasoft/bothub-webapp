@@ -126,11 +126,9 @@ export default {
   },
   computed: {
     ...mapState({
-      resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
-      getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
       activeTutorial: 'activeTutorial',
     }),
@@ -145,9 +143,6 @@ export default {
     },
   },
   watch: {
-    currentLanguage(language) {
-      this.setEvaluateLanguage(language);
-    },
     selectedRepository() {
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
@@ -156,7 +151,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setEvaluateLanguage',
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
