@@ -40,7 +40,7 @@
                   @statusUpdated="updateTrainingStatus($event)"
                   @finishedTutorial="dispatchFinish()"
                   @tutorialReset="dispatchReset()"
-                  @onTrain="dispatchClick()"
+                  @onTrain="sendEvent(); dispatchClick();"
                   @onTrainComplete="noPhrasesYet = true"
                   @onTrainReady="dispatchClick()"
                   @unauthorized="signIn()" />
@@ -96,6 +96,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Analytics from '@/utils/plugins/analytics';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import NewExampleForm from '@/components/example/NewExampleForm';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
@@ -165,6 +166,9 @@ export default {
     ...mapActions([
       'trainRepository',
     ]),
+    sendEvent() {
+      Analytics.send({ category: 'Intelligence', event: 'on train event' });
+    },
     onSearch(value) {
       Object.assign(this.querySchema, value);
 
