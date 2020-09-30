@@ -1,8 +1,18 @@
 <template>
   <div class="debug">
-    <div v-if="error">
+    <div
+      v-if="error"
+      class="debug__error">
+      <div class="debug__close">
+        <b-icon
+          icon="close"
+          @click.native="closeModal()"/>
+      </div>
       <p> {{ $t('webapp.debug.debug_description') }} </p>
-      <b-button @click="load()"> {{ $t('webapp.debug.reload') }} </b-button>
+      <b-button
+        class="debug__error__button"
+        type="is-primary"
+        @click="reload()"> {{ $t('webapp.debug.reload') }} </b-button>
     </div>
     <loading
       v-else-if="loading"
@@ -144,6 +154,10 @@ export default {
     closeModal() {
       this.$parent.close();
     },
+    reload() {
+      this.load();
+      this.closeModal();
+    },
     async load() {
       this.error = null;
       this.loading = true;
@@ -216,6 +230,14 @@ export default {
     }
     &__loading{
       padding: 1rem 0;
+    }
+
+    &__error{
+      text-align: center;
+
+      &__button{
+        font-display: $font-family;
+      }
     }
 
     &__table {

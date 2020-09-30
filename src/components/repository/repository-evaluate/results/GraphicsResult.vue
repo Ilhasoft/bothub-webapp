@@ -11,7 +11,7 @@
         {{ $t('webapp.result.evaluate_output_text') }}
         <a
           target="_blank"
-          href="https://docs.ilhasoft.mobi/bothub/testing-process">{{ $t('webapp.result.documentation') }}</a>.
+          href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results">{{ $t('webapp.result.documentation') }}</a>.
       </p>
 
       <div class="graphics-results__info">
@@ -23,7 +23,7 @@
           {{ $t('webapp.result.see_more_in') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#precision_and_recall_reports">{{ $t('webapp.result.documentation') }}</a>.
+            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
 
@@ -64,7 +64,7 @@
           {{ $t('webapp.result.intent_confusion_matrix_text') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confusion_matrix">{{ $t('webapp.result.documentation') }}</a>.
+            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
@@ -88,7 +88,7 @@
         <p>{{ $t('webapp.result.see_more_in') }}
           <a
             target="_blank"
-            href="https://docs.ilhasoft.mobi/bothub/testing-process#intent_confidence_distribution">{{ $t('webapp.result.documentation') }}</a>.
+            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">

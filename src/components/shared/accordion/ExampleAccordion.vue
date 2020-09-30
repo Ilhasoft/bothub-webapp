@@ -215,7 +215,7 @@ export default {
     },
     editSentence() {
       this.editing = true;
-      this.open = true;
+      this.isOpen = true;
     },
     updateList() {
       this.$emit('updateList');

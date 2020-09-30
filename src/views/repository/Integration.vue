@@ -6,34 +6,34 @@
       <div
         v-if="authenticated"
         class="repository-analyze-text" >
-        <div class="bh-grid">
-          <div class="bh-grid__item bh-grid__item--1-2">
+        <div class="columns">
+          <div class="column">
             <div class="repository-analyze-text__item">
               <p>{{ $t('webapp.analyze_text.grid1') }}</p>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>URL:</strong></p>
-              <bh-highlighted-pre
+              <highlighted-code
                 code-class="plaintext">{{
-                  repository.nlp_server }}parse/</bh-highlighted-pre>
+                  repository.nlp_server }}parse/</highlighted-code>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>Header:</strong></p>
-              <bh-highlighted-pre
+              <highlighted-code
                 code-class="plaintext">Authorization: Bearer {{
-                  repository.authorization.uuid }}</bh-highlighted-pre>
+                  repository.authorization.uuid }}</highlighted-code>
             </div>
             <div class="repository-analyze-text__item">
               <p><strong>{{ $t('webapp.analyze_text.method_send') }}</strong></p>
-              <bh-highlighted-pre code-class="plaintext">
+              <highlighted-code code-class="plaintext">
 language: [{{ $t('webapp.analyze_text.language_code') }}]
 text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
-              </bh-highlighted-pre>
+              </highlighted-code>
             </div>
             <div
               class="repository-analyze-text__item">
               <p><strong>{{ $t('webapp.analyze_text.response') }}</strong></p>
-              <bh-highlighted-pre code-class="json">{
+              <highlighted-code code-class="json">{
   "intent": {
     "name": "love",
     "confidence": 0.6943462393863934
@@ -65,10 +65,10 @@ text: [{{ $t('webapp.analyze_text.text_to_analyze') }}]"
   "text": "i love my puppy",
   "update_id": 47,
   "language": "en"
-}</bh-highlighted-pre>
+}</highlighted-code>
             </div>
           </div>
-          <div class="bh-grid__item bh-grid__item--1-2">
+          <div class="column">
             <div class="repository-analyze-text__item">
               <div><strong>{{ $t('webapp.analyze_text.code_generator') }}</strong></div>
               <div>{{ $t('webapp.analyze_text.code_generator_text') }}</div>
@@ -101,6 +101,7 @@ import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
+import HighlightedCode from '@/components/shared/HighlightedCode';
 import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
 
@@ -110,6 +111,7 @@ export default {
     RepositoryViewBase,
     RequestGenerator,
     LoginForm,
+    HighlightedCode,
     Tour,
   },
   extends: RepositoryBase,
