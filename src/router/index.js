@@ -111,7 +111,7 @@ export default new Router({
       component: DashboardExternalLayout,
       children: [
         {
-          path: ':ownerNickname/:slug/translate/',
+          path: ':ownerNickname/:slug/translate/:token',
           name: 'repository-translate-external',
           component: RepositoryTranslateExternal,
         },
