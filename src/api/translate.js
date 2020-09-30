@@ -28,7 +28,7 @@ export default {
   translationFromSentence(repositoryUuid, repositoryVersion, originalId, toLanguage) {
     const queryString = qs.stringify({
       repository_uuid: repositoryUuid,
-      repository_Version: repositoryVersion,
+      repository_version: repositoryVersion,
       original_example_id: originalId,
       to_language: toLanguage,
       limit: 1,
