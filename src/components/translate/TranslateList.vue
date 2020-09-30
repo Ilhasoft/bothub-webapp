@@ -2,7 +2,10 @@
   <div>
     <div class="repository-translate__list__options">
       <div class="repository-translate__list__options__check">
-        <b-checkbox v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
+        <b-checkbox
+          :disabled="editing"
+          :true-value="!editing"
+          v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
