@@ -3,6 +3,7 @@
     <translate-example-before
       v-bind="$props"
       :open.sync="open"
+      :selectable="!editing"
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
@@ -37,7 +38,7 @@ import { getEntitiesList } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 export default {
-  name: 'TranslateExample',
+  name: 'TranslateExampleItem',
   components: {
     TranslateExampleForm,
     ExampleAccordion,
@@ -126,7 +127,7 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
-      if (!this.translationLoadError && this.selected) this.save();
+      if (!this.translationLoadError) this.save();
     });
     this.$root.$on('deleteAll', () => {
       this.open = false;
@@ -149,6 +150,20 @@ export default {
     onSelectAll(value) {
       this.selected = value;
     },
+    saveTranslationData(data) {
+      if (!data) return {};
+      return {
+        text: data.text,
+        entities: (data.entities || []).map((entityObject) => {
+          const {
+            start, end, entity, value,
+          } = entityObject;
+          return {
+            start, end, entity, value,
+          };
+        }),
+      };
+    },
     async save() {
       try {
         if (this.isEmpty) {
@@ -162,14 +177,14 @@ export default {
           if (this.translation) {
             response = await this.editTranslation({
               translationId: this.translation.id,
-              ...this.translationData,
+              ...this.saveTranslationData(this.translationData),
               language: this.translateTo,
               originalExample: this.id,
             });
           } else {
             response = await this.newTranslation({
               exampleId: this.id,
-              ...this.translationData,
+              ...this.saveTranslationData(this.translationData),
               language: this.translateTo,
             });
           }
