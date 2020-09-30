@@ -215,7 +215,7 @@
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :repository="repository"
+                :repository-uuid="repository.uuid"
                 :query="query"
                 :from="repository.language"
                 :to="translate.to"

@@ -32,10 +32,9 @@
       :list="translateList"
       :item-component="translateExampleItem"
       :per-page="perPage"
-      :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
-      :add-attributes="{editing, initialData: editCache}"
+      :add-attributes="{repositoryUuid, editing, initialData: editCache}"
       item-key="id"
       @onChange="updateCache($event)"
       @translated="onTranslated()"
@@ -57,7 +56,7 @@ export default {
     PaginatedList,
   },
   props: {
-    repository: {
+    repositoryUuid: {
       type: Object,
       required: true,
     },
@@ -128,7 +127,7 @@ export default {
         await this.$nextTick();
         const list = await this.searchExamples({
           query: { language: this.from, ...this.query },
-          repositoryUuid: this.repository.uuid,
+          repositoryUuid: this.repositoryUuid,
           version: this.repositoryVersion,
           limit: this.perPage,
         });

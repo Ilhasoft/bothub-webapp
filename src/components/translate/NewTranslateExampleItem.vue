@@ -65,7 +65,7 @@ export default {
       type: String,
       default: '',
     },
-    repository: {
+    repositoryUuid: {
       type: Object,
       default: /* istanbul ignore next */ () => ({}),
     },
@@ -202,7 +202,7 @@ export default {
       this.translationLoadError = false;
       try {
         const response = await this.getTranslationFromSentence({
-          repositoryUuid: this.repository.uuid,
+          repositoryUuid: this.repositoryUuid,
           repositoryVersion: this.repositoryVersion,
           toLanguage: this.translateTo,
           originalId: this.id,
