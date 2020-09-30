@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 import TranslateExampleBefore from './TranslateExampleBefore';
@@ -101,9 +101,9 @@ export default {
     };
   },
   computed: {
-    // ...mapGetters([
-    //   'activeTutorial',
-    // ]),
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
     entitiesList() {
       return getEntitiesList(this.entities);
     },
