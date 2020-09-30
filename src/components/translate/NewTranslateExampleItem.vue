@@ -34,7 +34,7 @@ import { mapActions, mapGetters } from 'vuex';
 import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 import TranslateExampleBefore from './TranslateExampleBefore';
-import { getEntitiesList } from '@/utils';
+import { getEntitiesList, entityEquals } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 export default {
@@ -174,17 +174,21 @@ export default {
         } else {
           this.loadingTranslations = true;
           let response = null;
+          const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
+            if (saveData.text === this.translation.text
+            && entityEquals(saveData.entities, this.translation.entities)) return;
+
             response = await this.editTranslation({
               translationId: this.translation.id,
-              ...this.saveTranslationData(this.translationData),
+              ...saveData,
               language: this.translateTo,
               originalExample: this.id,
             });
           } else {
             response = await this.newTranslation({
               exampleId: this.id,
-              ...this.saveTranslationData(this.translationData),
+              ...saveData,
               language: this.translateTo,
             });
           }

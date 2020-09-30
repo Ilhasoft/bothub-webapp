@@ -4,7 +4,6 @@
       <div class="repository-translate__list__options__check">
         <b-checkbox
           :disabled="editing"
-          :true-value="!editing"
           v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
       </div>
       <div class="repository-translate__list__options__buttons">
@@ -18,11 +17,14 @@
           type="is-primary"
           icon-right="delete"
           @click="deleteAll" />
-        <b-button
-          v-show="editing"
-          type="is-primary"
-          icon-right="check-bold"
-          @click="saveAll" />
+        <b-tooltip
+          :label="$t('webapp.translate.save_all')">
+          <b-button
+            v-show="editing"
+            type="is-primary"
+            icon-right="check-bold"
+            @click="saveAll" />
+        </b-tooltip>
         <b-button
           v-show="editing"
           type="is-primary"
