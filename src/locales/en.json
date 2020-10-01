@@ -335,6 +335,8 @@
     "translate": {
       "title_translate": "Translate a sentence",
       "subtitle_translate": "Manage and translate the sentences of your intelligence.",
+      "title_export": "Export translation",
+      "subtitle_export": "If you prefer, you can export and import translations as a editable sheet.",
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
       "submit_translation": "Submit Translation",

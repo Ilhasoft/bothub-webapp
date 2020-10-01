@@ -337,6 +337,8 @@
     "translate": {
       "title_translate": "Traduzir uma frase",
       "subtitle_translate": "Gerencie e traduza as frases de sua inteligência.",
+      "title_export": "Exportar tradução",
+      "subtitle_export": "Se preferir, você pode exportar e importar transduções por uma planilha.",
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
       "submit_translation": "Enviar Tradução",
