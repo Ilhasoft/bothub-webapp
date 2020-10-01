@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
-<sentence-accordion-stub align="top" entities="" intent-to-edit="true" text-to-edit="the possum" sentence-id="0" language-edit="en" get-all-entities="" edit-example="">
+<sentence-accordion-stub align="top" customaccordion="true" entities="" intent-to-edit="true" text-to-edit="the possum" sentence-id="0" language-edit="en" get-all-entities="" edit-example="">
   <div>
     <language-badge-stub language="en"></language-badge-stub>
   </div>
