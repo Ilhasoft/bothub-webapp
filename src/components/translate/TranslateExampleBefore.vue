@@ -4,8 +4,12 @@
     slim
     pending-example >
 
-    <div slot="check">
-      <b-checkbox v-model="isSelected" />
+    <div
+      slot="check"
+      class="example-accordion__check">
+      <b-checkbox
+        v-show="selectable"
+        v-model="isSelected" />
     </div>
 
     <div
@@ -92,6 +96,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectable: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -165,6 +173,11 @@ export default {
 
     &__info {
       min-height: 4rem;
+    }
+
+    &__check {
+      min-width: 1.8rem;
+      min-height: 1.3rem;
     }
 
   }
