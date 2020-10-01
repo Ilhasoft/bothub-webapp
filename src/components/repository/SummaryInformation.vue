@@ -43,6 +43,13 @@
                           getCurrentRepository.authorizations.count)"
             />
           </div>
+          <div class="summary-information__info__container__general__data">
+            <numbers-card
+              :count="getCurrentRepository.count_authorizations"
+              :label="$tc('webapp.summary.information_integrations',
+                          getCurrentRepository.count_authorizations)"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -166,7 +173,7 @@ export default {
             }
             @media screen and (max-width: 40em) {
               flex-direction: column;
-              margin-bottom: 2rem;
+              margin-bottom: 8rem;
             }
 
               &__data{
@@ -177,12 +184,17 @@ export default {
                 height: 156px;
                 width: 49%;
                 border: 1px solid $color-border;
+                cursor: pointer;
 
                   @media screen and (max-width: 40em) {
                     width:100%;
                     height: 156px * 2;
                     margin-top: 10px;
                   }
+              }
+              &__data:nth-child(2){
+                margin-right: 0.3rem;
+                margin-left: 0.3rem;
               }
             }
               @media screen and (max-width: 60em) {
