@@ -193,8 +193,11 @@ export default {
                   }
               }
               &__data:nth-child(2){
-                margin-right: 0.3rem;
-                margin-left: 0.3rem;
+                margin: 0 0.3rem;
+
+                @media screen and (max-width: 40em) {
+                    margin-top: 0.6rem;
+                }
               }
             }
               @media screen and (max-width: 60em) {
