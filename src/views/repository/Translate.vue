@@ -51,26 +51,6 @@
             <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
           </div>
           <div
-            id="tour-translate-step-6"
-            :is-previous-disabled="true"
-            class="repository-translate__translateButtons">
-
-            <b-button
-              :class="{'is-primary': !!translate.to}"
-              class="repository-translate__buttons repository-translate__unableButton"
-              @click="checkLanguageToImport()">
-              {{ $t('webapp.translate.import_title') }}
-            </b-button>
-
-            <b-button
-              :class="{'is-primary': !!translate.to}"
-              class="repository-translate__buttons repository-translate__unableButton"
-              @click="checkLanguageToExport()">
-              {{ $t('webapp.translate.export_title') }}
-            </b-button>
-
-          </div>
-          <div
             v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
@@ -232,6 +212,34 @@
               :version="getSelectedVersion"
               :authenticated="authenticated"
               @statusUpdated="updateTrainingStatus($event)" />
+
+            <hr>
+
+            <div class="translate-description">
+              <h1>{{ $t('webapp.translate.title_export') }}</h1>
+              <p>{{ $t('webapp.translate.subtitle_export') }}</p>
+            </div>
+
+            <div
+              id="tour-translate-step-6"
+              :is-previous-disabled="true"
+              class="repository-translate__translateButtons">
+
+              <b-button
+                :class="{'is-primary': !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToImport()">
+                {{ $t('webapp.translate.import_title') }}
+              </b-button>
+
+              <b-button
+                :class="{'is-primary': !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToExport()">
+                {{ $t('webapp.translate.export_title') }}
+              </b-button>
+
+            </div>
           </div>
         </div>
         <authorization-request-notification

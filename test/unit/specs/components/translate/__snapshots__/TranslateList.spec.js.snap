@@ -9,7 +9,9 @@ exports[`TranslateList.vue renders correctly 1`] = `
     <div class="repository-translate__list__options__buttons">
       <b-button-stub type="is-primary" iconright="pencil" nativetype="button" tag="button"></b-button-stub>
       <b-button-stub type="is-primary" iconright="delete" nativetype="button" tag="button"></b-button-stub>
-      <b-button-stub type="is-primary" iconright="check-bold" nativetype="button" tag="button" style="display: none;"></b-button-stub>
+      <b-tooltip-stub active="true" label="some specific text" position="is-top" size="is-medium">
+        <b-button-stub type="is-primary" iconright="check-bold" nativetype="button" tag="button" style="display: none;"></b-button-stub>
+      </b-tooltip-stub>
       <b-button-stub type="is-primary" iconright="close-thick" nativetype="button" tag="button" style="display: none;"></b-button-stub>
     </div>
   </div>
