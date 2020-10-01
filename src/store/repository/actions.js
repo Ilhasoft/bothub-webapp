@@ -171,12 +171,6 @@ export default {
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);
   },
-  setUpdateEvaluateResultId({ commit }, payload) {
-    commit('updateEvaluateResultId', payload);
-  },
-  setEvaluateLanguage({ commit }, payload) {
-    commit('updateEvaluateLanguage', payload);
-  },
   setRepository({ commit }, payload) {
     commit('setRepository', payload);
   },

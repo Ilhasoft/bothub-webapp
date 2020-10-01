@@ -5,14 +5,8 @@ export default {
   getUpdateRepositoryState(state) {
     return state.updateRepository;
   },
-  getEvaluateResultId(state) {
-    return state.evaluateResultId;
-  },
   getCurrentRepository(state) {
     return state.selectedRepository;
-  },
-  getEvaluateLanguage(state) {
-    return state.evaluateLanguage ? state.evaluateLanguage : state.selectedRepository.language;
   },
   getUpdateVersionsState(state) {
     return state.updateVersions;
