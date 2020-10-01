@@ -16,25 +16,21 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div
-            @click="showModalTraining($t('webapp.inbox.training'))">
-            <b-icon
-              id="tour-inbox-step-2"
-              :is-previous-disabled="true"
-              icon="refresh"
-              class="repository-log-list__section__icons"/>
-          </div>
+          <b-button
+            id="tour-inbox-step-2"
+            :is-previous-disabled="true"
+            type="is-primary"
+            icon-right="refresh"
+            @click="showModalTraining($t('webapp.inbox.training'))" />
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div
-            @click="showModalSentence($t('webapp.inbox.test_sentences'))">
-            <b-icon
-              id="tour-inbox-step-3"
-              :is-previous-disabled="true"
-              :is-next-disabled="true"
-              icon="chat-processing"
-              class="repository-log-list__section__icons"/>
-          </div>
+          <b-button
+            id="tour-inbox-step-3"
+            :is-previous-disabled="true"
+            :is-next-disabled="true"
+            icon-right="chat-processing"
+            type="is-primary"
+            @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
         </b-tooltip>
       </div>
     </div>
@@ -330,11 +326,9 @@ export default {
           justify-content: center;
           align-items: center;
           flex-direction: row;
-        }
-        &__icons {
-          color: $color-grey-dark;
-          margin-right: 0.7rem;
-          cursor: pointer;
+          > * {
+            margin-left: 0.7rem;
+          }
         }
     }
 
