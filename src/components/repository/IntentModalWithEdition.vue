@@ -16,7 +16,7 @@
           :entities="getLogData.entities"
           :intent-to-edit="getLogData.intent"
           :text-to-edit="getLogData.text"
-          :sentence-id="logData[0].id"
+          :sentence-id="logData.id"
           :language-edit="getLogData.language"
           :get-all-entities="allEntities"
           :custom="true"
@@ -71,10 +71,10 @@ export default {
       default: false,
     },
     logData: {
-      type: Array,
+      type: Object,
       default: null,
+      required: true,
     },
-
   },
   data() {
     return {
@@ -92,7 +92,7 @@ export default {
       );
     },
     getLogData() {
-      const { data } = this.logData[0];
+      const { data } = this.logData;
       return data;
     },
     checkInputs() {
