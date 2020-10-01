@@ -38,7 +38,7 @@
     </div>
     <transition name="fade">
       <div
-        v-show="open"
+        v-show="open && customAccordion"
         :class="pendingExample ? 'expander__body--pending' : 'expander__body'">
         <slot name="body"/>
       </div>
@@ -78,6 +78,10 @@ export default {
     pendingExample: {
       type: Boolean,
       default: false,
+    },
+    customAccordion: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
