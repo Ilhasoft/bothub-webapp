@@ -13,17 +13,17 @@
       :is-previous-disabled="true"
       v-model="activeTab">
       <b-tab-item label="cURL">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.curl"
           code-class="bash" />
       </b-tab-item>
       <b-tab-item label="Python">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.python"
           code-class="python" />
       </b-tab-item>
       <b-tab-item label="Javascript">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.javascript"
           code-class="javascript" />
       </b-tab-item>
@@ -33,11 +33,13 @@
 
 <script>
 import LanguageSelect from '@/components/inputs/LanguageSelect';
+import HighlightedCode from '@/components/shared/HighlightedCode';
 import { LANGUAGES } from '@/utils';
 
 
 const components = {
   LanguageSelect,
+  HighlightedCode,
 };
 
 export default {

@@ -87,7 +87,8 @@
           >
             <b-button
               class="create-repository__form__final--message__button"
-              type="is-primary">
+              type="is-primary"
+              @click="sendEvent()">
               {{ $t('webapp.create_repository.start') }}
             </b-button>
           </router-link>
@@ -121,6 +122,7 @@ import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
+import Analytics from '@/utils/plugins/analytics';
 import Tour from '@/components/Tour';
 
 export default {
@@ -223,6 +225,9 @@ export default {
       'setFinalModal',
       'getAllOrgs',
     ]),
+    sendEvent() {
+      Analytics.send({ category: 'Intelligence', event: 'create intelligence event' });
+    },
     constructModels() {
       const Model = getModel(
         this.computedSchema,

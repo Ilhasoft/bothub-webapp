@@ -3,6 +3,7 @@
     <translate-example-before
       v-bind="$props"
       :open.sync="open"
+      :selectable="!editing"
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
@@ -29,15 +30,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 import TranslateExampleBefore from './TranslateExampleBefore';
-import { getEntitiesList } from '@/utils';
+import { getEntitiesList, entityEquals } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 export default {
-  name: 'TranslateExample',
+  name: 'TranslateExampleItem',
   components: {
     TranslateExampleForm,
     ExampleAccordion,
@@ -100,9 +101,9 @@ export default {
     };
   },
   computed: {
-    // ...mapGetters([
-    //   'activeTutorial',
-    // ]),
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
     entitiesList() {
       return getEntitiesList(this.entities);
     },
@@ -126,7 +127,7 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
-      if (!this.translationLoadError && this.selected) this.save();
+      if (!this.translationLoadError) this.save();
     });
     this.$root.$on('deleteAll', () => {
       this.open = false;
@@ -149,6 +150,20 @@ export default {
     onSelectAll(value) {
       this.selected = value;
     },
+    saveTranslationData(data) {
+      if (!data) return {};
+      return {
+        text: data.text,
+        entities: (data.entities || []).map((entityObject) => {
+          const {
+            start, end, entity, value,
+          } = entityObject;
+          return {
+            start, end, entity, value,
+          };
+        }),
+      };
+    },
     async save() {
       try {
         if (this.isEmpty) {
@@ -159,17 +174,21 @@ export default {
         } else {
           this.loadingTranslations = true;
           let response = null;
+          const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
+            if (saveData.text === this.translation.text
+            && entityEquals(saveData.entities, this.translation.entities)) return;
+
             response = await this.editTranslation({
               translationId: this.translation.id,
-              ...this.translationData,
+              ...saveData,
               language: this.translateTo,
               originalExample: this.id,
             });
           } else {
             response = await this.newTranslation({
               exampleId: this.id,
-              ...this.translationData,
+              ...saveData,
               language: this.translateTo,
             });
           }
