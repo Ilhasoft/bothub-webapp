@@ -46,6 +46,10 @@ export default {
     Loading,
   },
   props: {
+    externalToken: {
+      type: String,
+      default: null,
+    },
     id: {
       type: Number,
       required: true,
@@ -67,8 +71,8 @@ export default {
       default: '',
     },
     repositoryUuid: {
-      type: Object,
-      default: /* istanbul ignore next */ () => ({}),
+      type: String,
+      default: '',
     },
     language: {
       type: String,
@@ -76,7 +80,7 @@ export default {
     },
     translateTo: {
       type: String,
-      required: true,
+      default: null,
     },
     editing: {
       type: Boolean,
@@ -109,6 +113,51 @@ export default {
     },
     isEmpty() {
       return !(this.translationData && this.translationData.text.trim().length > 0);
+    },
+    actions() {
+      return {
+        create: () => (this.externalToken
+          ? this.newTranslationExternal({
+            token: this.externalToken,
+            exampleId: this.id,
+            ...this.saveTranslationData(this.translationData),
+          })
+          : this.newTranslation({
+            exampleId: this.id,
+            ...this.saveTranslationData(this.translationData),
+            language: this.translateTo,
+          })),
+        update: () => (this.externalToken
+          ? this.editTranslationExternal({
+            token: this.token,
+            translationId: this.translation.id,
+            ...this.saveTranslationData(this.translationData),
+            originalExample: this.id,
+          }) : this.editTranslation({
+            translationId: this.translation.id,
+            ...this.saveTranslationData(this.translationData),
+            language: this.translateTo,
+            originalExample: this.id,
+          })),
+        delete: () => (this.externalToken
+          ? this.deleteTranslationExternal(
+            { token: this.token, translationId: this.translation.id },
+          )
+          : this.deleteTranslation({ translationId: this.translation.id })),
+        getTranslation: () => (this.externalToken
+          ? this.getTranslationFromSentenceExternal({
+            token: this.token,
+            originalId: this.id,
+            limit: 1,
+          })
+          : this.getTranslationFromSentence({
+            repositoryUuid: this.repositoryUuid,
+            repositoryVersion: this.repositoryVersion,
+            toLanguage: this.translateTo,
+            originalId: this.id,
+            limit: 1,
+          })),
+      };
     },
   },
   watch: {
@@ -146,6 +195,10 @@ export default {
       'newTranslation',
       'editTranslation',
       'deleteTranslation',
+      'newTranslationExternal',
+      'editTranslationExternal',
+      'deleteTranslationExternal',
+      'getTranslationFromSentenceExternal',
     ]),
     onSelectAll(value) {
       this.selected = value;
@@ -168,29 +221,19 @@ export default {
       try {
         if (this.isEmpty) {
           if (!this.translation) return;
-          await this.deleteTranslation({ translationId: this.translation.id });
+          await this.actions.delete();
           this.clearCache();
           this.translation = null;
         } else {
           this.loadingTranslations = true;
           let response = null;
-          const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
-            if (saveData.text === this.translation.text
-            && entityEquals(saveData.entities, this.translation.entities)) return;
+            if (this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities, this.translation.entities)) return;
 
-            response = await this.editTranslation({
-              translationId: this.translation.id,
-              ...saveData,
-              language: this.translateTo,
-              originalExample: this.id,
-            });
+            response = await this.actions.update();
           } else {
-            response = await this.newTranslation({
-              exampleId: this.id,
-              ...saveData,
-              language: this.translateTo,
-            });
+            response = await this.actions.create();
           }
           this.clearCache();
           this.translation = response.data;
@@ -220,13 +263,7 @@ export default {
       this.loadingTranslations = true;
       this.translationLoadError = false;
       try {
-        const response = await this.getTranslationFromSentence({
-          repositoryUuid: this.repositoryUuid,
-          repositoryVersion: this.repositoryVersion,
-          toLanguage: this.translateTo,
-          originalId: this.id,
-          limit: 1,
-        });
+        const response = await this.actions.getTranslation();
         const [item] = response.data.results;
         if (item) this.translation = JSON.parse(JSON.stringify(item));
       } catch (e) {

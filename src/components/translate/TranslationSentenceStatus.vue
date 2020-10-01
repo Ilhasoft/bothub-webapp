@@ -22,6 +22,10 @@ export default {
   name: 'TranslationSentenceStatus',
   components: { NumbersCard },
   props: {
+    externalToken: {
+      type: String,
+      default: null,
+    },
     repositoryUuid: {
       type: String,
       default: null,
@@ -76,6 +80,20 @@ export default {
     statusInfo() {
       return Object.values(this.statusData);
     },
+    searchExamplesAction() {
+      return query => (this.externalToken
+        ? this.searchExamplesExternal({
+          limit: 1,
+          token: this.externalToken,
+          query,
+        })
+        : this.searchExamples({
+          limit: 1,
+          repositoryUuid: this.repositoryUuid,
+          version: this.version,
+          query,
+        }));
+    },
   },
   watch: {
     repositoryUuid() {
@@ -89,7 +107,7 @@ export default {
     clearTimeout(this.update);
   },
   methods: {
-    ...mapActions(['searchExamples']),
+    ...mapActions(['searchExamples', 'searchExamplesExternal']),
     onClick(key, query) {
       this.$emit('search', { key, query });
       this.active = key;
@@ -98,12 +116,7 @@ export default {
       if (!this.repositoryUuid || !this.version) return;
       Object.entries(this.statusData).forEach(([key, value]) => {
         try {
-          this.searchExamples({
-            limit: 1,
-            repositoryUuid: this.repositoryUuid,
-            version: this.version,
-            query: value.query,
-          })
+          this.searchExamplesAction(value.query)
             .then(list => list.updateItems(1)
               .then(() => { this.statusData[key].count = list.total; }));
         } catch (e) {

@@ -62,16 +62,16 @@ export default {
   },
   props: {
     repositoryUuid: {
-      type: Object,
-      required: true,
+      type: String,
+      default: null,
     },
     from: {
       type: String,
-      required: true,
+      default: null,
     },
     to: {
       type: String,
-      required: true,
+      default: null,
     },
     perPage: {
       type: Number,
@@ -84,6 +84,10 @@ export default {
     update: {
       type: Boolean,
       default: false,
+    },
+    externalToken: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -112,7 +116,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getExamplesToTranslate',
       'searchExamples',
     ]),
     updateCache({ id, data }) {
@@ -128,6 +131,19 @@ export default {
       this.$root.$emit('deleteAll');
     },
     async updateList() {
+      if (this.externalToken) {
+        await this.$nextTick();
+        const list = await this.searchExamplesExternal({
+          token: this.externalToken,
+          query: { ...this.query },
+          limit: this.perPage,
+        });
+        if (this.translateList) this.translateList.updateList(list);
+        else this.translateList = list;
+        this.$emit('listPhrase', this.translateList);
+        return;
+      }
+
       if (!!this.from && !!this.to) {
         await this.$nextTick();
         const list = await this.searchExamples({
