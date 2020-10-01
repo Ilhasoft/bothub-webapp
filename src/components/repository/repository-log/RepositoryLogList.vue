@@ -62,6 +62,7 @@ import { mapGetters, mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 import IntentModal from '@/components/repository/IntentModal';
+import IntentModalEdition from '@/components/repository/IntentModalWithEdition';
 
 export default {
   name: 'RepositoryLogList',
@@ -69,6 +70,7 @@ export default {
     PaginatedList,
     LogAccordion,
     IntentModal,
+    IntentModalEdition,
   },
   props: {
     query: {
@@ -158,13 +160,13 @@ export default {
           repository: this.repository,
           titleHeader: typeModal,
           confidenceVerify: this.confidenceVerify,
+          logData: this.logData[0],
         },
         parent: this,
-        component: IntentModal,
+        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
         hasModalCard: false,
         trapFocus: true,
         canCancel: false,
-        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -192,9 +194,10 @@ export default {
           info: this.nlp,
           repository: this.repository,
           titleHeader: typeModal,
+          logData: this.logData[0],
         },
         parent: this,
-        component: IntentModal,
+        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
         hasModalCard: false,
         trapFocus: true,
         canCancel: false,
@@ -229,18 +232,20 @@ export default {
         this.isCorrected = true;
       }
     },
-    addToTraining(intent) {
+    addToTraining(values) {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
           await this.newExample({
             ...data,
-            intent,
+            intent: values.intent,
+            text: values.text,
+            entities: values.entities,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
@@ -251,18 +256,20 @@ export default {
         }
       });
     },
-    addToSentences(intent) {
+    addToSentences(values) {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
           await this.newEvaluateExample({
             ...data,
-            intent,
+            intent: values.intent,
+            text: values.text,
+            entities: values.entities,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
             type: 'is-success',
           });
         } catch (error) {
