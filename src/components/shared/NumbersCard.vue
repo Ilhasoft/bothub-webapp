@@ -7,10 +7,12 @@
     position="is-bottom">
     <div
       :class="{ 'number-card': true,
+                'number-card--active': !disabled && active,
                 'number-card--hoverable': !disabled
                   && (clickable || (helpText && helpText.length > 0)),
                 'number-card--disabled': disabled,
-                'number-card--clickable': clickable && !disabled }"
+                'number-card--clickable': clickable && !disabled,
+                'number-card--clickable--inverted': !disabled && active && clickable }"
       @click="onClick">
       <h1 :class="['has-text-centered', `number-card__title--size-${size}`]">{{ count }}</h1>
       <p :class="['has-text-centered', `number-card__subtitle--size-${size}`]">{{ label }} </p>
@@ -29,6 +31,10 @@ export default {
     disabled: {
       type: Boolean,
       default: null,
+    },
+    active: {
+      type: Boolean,
+      default: false,
     },
     count: {
       type: Number,
@@ -67,6 +73,13 @@ export default {
             &:hover{
                 color: $color-primary;
             }
+            &--inverted:hover {
+              color: black;
+            }
+        }
+
+        &--active {
+          color: $color-primary;
         }
 
         &--hoverable {

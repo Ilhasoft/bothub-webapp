@@ -198,16 +198,23 @@
                 </footer>
               </div>
             </b-modal>
-            <hr>
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
+                <translation-sentence-status
+                  :key="`${translate.from} ${translate.to}-${translate.update}`"
+                  :repository-uuid="repository.uuid"
+                  :version="getSelectedVersion"
+                  :language="repository.language"
+                  :to-language="translate.to"
+                  :initial-data="sentenceFilter.key"
+                  class="repository-translate__list__search__status"
+                  @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities_list"
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <translate-list
-                :update="translate.update"
                 :repository="repository"
                 :query="query"
                 :from="repository.language"
@@ -217,7 +224,14 @@
                 @isLoadingContent="loadingList = $event"
                 @listPhrase="checkPhraseList($event)"/>
             </div>
-
+            <train
+              v-if="repository"
+              :key="trainUpdate"
+              :show-button="repository.ready_for_train"
+              :repository="repository"
+              :version="getSelectedVersion"
+              :authenticated="authenticated"
+              @statusUpdated="updateTrainingStatus($event)" />
           </div>
         </div>
         <authorization-request-notification
@@ -236,17 +250,17 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
+    <!-- <tour
       v-if="activeTutorial === 'translate'"
-      :step-count="7"
+      :step-count="1"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
-      name="translate" />
+      name="translate" /> -->
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
 import TranslateList from '@/components/translate/TranslateList';
@@ -255,9 +269,11 @@ import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import Train from '@/components/repository/training/Train';
 import Tour from '@/components/Tour';
 import {
-  exampleSearchToDicty, exampleSearchToString, languageListToDict,
+  languageListToDict,
 } from '@/utils/index';
 
 export default {
@@ -267,14 +283,17 @@ export default {
     RepositoryViewBase,
     LanguageSelectInput,
     TranslateList,
+    Train,
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    TranslationSentenceStatus,
     Tour,
   },
   extends: RepositoryBase,
   data() {
     return {
+      update: null,
       translationFile: null,
       isExportFileVisible: false,
       isImportFileVisible: false,
@@ -284,7 +303,6 @@ export default {
         update: false,
       },
       toLanguage: null,
-      query: {},
       querySchema: {},
       errors: '',
       errorMessage: '',
@@ -297,14 +315,16 @@ export default {
         { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
       ],
+      query: {},
+      sentenceFilter: { key: null, query: null },
+      trainUpdate: false,
     };
   },
   computed: {
-    ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository,
-    }),
     ...mapGetters([
+      'authenticated',
       'activeTutorial',
+      'getSelectedVersion',
     ]),
     baseLanguage() {
       const languageObject = Object.values(
@@ -321,6 +341,12 @@ export default {
       }
       return '';
     },
+    sentenceFilter() {
+      this.updateQuery();
+    },
+    querySchema() {
+      this.updateQuery();
+    },
   },
   methods: {
     ...mapActions([
@@ -328,12 +354,15 @@ export default {
       'exportTranslations',
       'importTranslations',
     ]),
+    updateTrainingStatus(trainStatus) {
+      Object.assign(this.repository, trainStatus);
+    },
     async exportTranslation() {
       this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.getSelectedVersion,
           fromLanguage: this.repository.language,
           toLanguagem: this.translate.to,
           statusTranslation: !this.allTranslations,
@@ -357,8 +386,8 @@ export default {
 
       try {
         const importDownload = await this.importTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.getSelectedVersion,
           formData,
         });
         this.forceFileDownload(importDownload);
@@ -403,6 +432,8 @@ export default {
     },
     examplesTranslated() {
       this.translate.update = !this.translate.update;
+      if (this.update) clearTimeout(this.update);
+      this.update = setTimeout(() => { this.trainUpdate = !this.trainUpdate; }, 600);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {
@@ -422,20 +453,19 @@ export default {
     closeExportModal() {
       this.isExportFileVisible = false;
     },
+    onFilter({ key, query }) {
+      this.sentenceFilter = { key, query };
+    },
     onSearch(value) {
-      Object.assign(this.querySchema, value);
-
-      if (!this.querySchema.intent) {
-        delete this.querySchema.intent;
-      }
-      if (!this.querySchema.entity) {
-        delete this.querySchema.entity;
-      }
-      if (!this.querySchema.label) {
-        delete this.querySchema.label;
-      }
-      const formattedQueryString = exampleSearchToString(this.querySchema);
-      this.query = exampleSearchToDicty(formattedQueryString);
+      this.querySchema = { ...value };
+    },
+    updateQuery() {
+      this.query = {
+        ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
+        ...this.querySchema.entity ? { intent: this.querySchema.entity } : {},
+        ...this.querySchema.label ? { intent: this.querySchema.label } : {},
+        ...this.sentenceFilter.query,
+      };
     },
   },
 };
@@ -474,6 +504,10 @@ export default {
     margin-left: 0.3rem;
   &__search {
     margin: 0.5rem;
+
+    &__status {
+      margin: 3rem 0 4.4rem 0;
+    }
   }
   }
 

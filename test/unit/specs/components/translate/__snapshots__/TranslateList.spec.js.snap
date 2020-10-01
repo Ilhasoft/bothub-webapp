@@ -4,7 +4,7 @@ exports[`TranslateList.vue renders correctly 1`] = `
 <div>
   <div class="repository-translate__list__options">
     <div class="repository-translate__list__options__check">
-      <b-checkbox-stub truevalue="true"></b-checkbox-stub> Select All
+      <b-checkbox-stub truevalue="true"></b-checkbox-stub> some specific text
     </div>
     <div class="repository-translate__list__options__buttons">
       <b-button-stub type="is-primary" iconright="pencil" nativetype="button" tag="button"></b-button-stub>
@@ -13,6 +13,6 @@ exports[`TranslateList.vue renders correctly 1`] = `
       <b-button-stub type="is-primary" iconright="close-thick" nativetype="button" tag="button" style="display: none;"></b-button-stub>
     </div>
   </div>
-  <paginatedlist-stub itemcomponent="[object Object]" list="[object Object]" perpage="20" addattributes="[object Object]" emptymessage="some specific text" loadall="true" itemkey="id" repository="[object Object]" translate-to="es"></paginatedlist-stub>
+  <paginatedlist-stub itemcomponent="[object Object]" list="[object Object]" perpage="12" addattributes="[object Object]" emptymessage="some specific text" itemkey="id" repository="[object Object]" translate-to="es"></paginatedlist-stub>
 </div>
 `;

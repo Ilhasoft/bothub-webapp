@@ -142,7 +142,7 @@
       "run_test": "Run test",
       "you_can_not_edit": "You can not edit this repository",
       "login": "Sign in to your account to edit this repository.",
-      "get_examples_test_sentences": "test sentences",
+      "get_examples_test_sentences": "{n} test sentence | {n} test sentences",
       "all_intents": "All Intents",
       "all_entities": "All Entities",
       "all_languages": "All languages",
@@ -236,12 +236,13 @@
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
     },
     "intent":{
-      "title": "Entity",
+      "title": "Intent",
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured."
+      "error_intent": "Something went wrong, try again later.",
+      "error_intent_exists": "Intent already exists"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -324,9 +325,12 @@
       "status_ok": "Your bot is ready to be trained!",
       "language_warning": "Couldn't execute training",
       "missing_requirements": "Some errors were found and your training has not been completed Correct and try again.",
+      "ready_for_train_title": "Some errors were found",
+      "ready_for_train_subtitle": "Go back and correct any errors found or proceed and partially train.",
       "warnings": "Warnings",
-      "train": "Train",
-      "ok": "ok!"
+      "train": "Proceed",
+      "cancel": "Cancel",
+      "ok": "ok"
     },
     "translate": {
       "title_translate": "Translate a sentence",
@@ -369,8 +373,13 @@
       "invalid_entities": "Entities do not match the original translation's",
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
-      "error_load_translation": "Could not load translations.",
-      "retry": "Retry"
+      "error_load_translation": "Could not load translation.",
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent",
+      "select_all": "Select all in this page"
     },
     "orgs": {
       "owner": "Owned by",
@@ -558,7 +567,7 @@
       "edit_button": "Edit Entity",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured.",
+      "error_entity": "Something went wrong, try again later.",
       "error_entity_exists": "Entity already exists"
     },
     "payment": {
@@ -624,7 +633,7 @@
           "step_4": "Identify the intention of the phrase you typed. Ex: order",
           "step_5": "Finally, submit your sentence.",
           "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
-          "step_7": "Make sure your intelligence is ready to train and click \" Train \" to proceed. <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Ok \" to repeat."
+          "step_7": "Make sure your intelligence is ready to train and click \"Proceed\". <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Cancel \" to repeat."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",

@@ -183,8 +183,8 @@ export default {
         background-color: $color-fake-white;
       }
 
-    &__check{
-      margin: 0 1rem 0 0;
+    &__check {
+      margin: 0 1rem;
 
       @media screen and (max-width: $mobile-width) {
         margin: 1rem 0;

@@ -32,14 +32,6 @@
             type="is-primary"
             @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
         </b-tooltip>
-        <!--   <b-tooltip :label="$t('webapp.inbox.remove_log_button')">
-          <div @click="showDeleteModal">
-          <b-icon
-            icon="delete"
-            class="repository-log-list__section__icons"/>
-        </div>
-        </b-tooltip>-->
-
       </div>
     </div>
     <paginated-list
@@ -298,6 +290,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;
@@ -315,7 +308,11 @@ export default {
         color: $color-grey-dark;
         font-size: 1.1rem;
         font-weight: bold;
-        padding: 0 0.6rem;
+        padding: 0 .6rem 0 1.6rem;
+
+        @media screen and (max-width: $mobile-width) {
+        padding: 0.6rem;
+      }
 
         &__buttonsIcon {
           display: flex;

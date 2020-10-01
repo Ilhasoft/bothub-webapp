@@ -42,6 +42,7 @@ module.exports = {
         'ignores': [
           'VElement[name=pre].children',
           'VElement[name=bh-highlighted-pre].children',
+          'VElement[name=highlighted-code].children',
         ],
       }
     ],

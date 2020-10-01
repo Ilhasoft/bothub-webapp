@@ -14,14 +14,13 @@
       </div>
 
       <div
-        v-if="!open"
+        v-show="!isOpen"
         class="level-right example-accordion__text">{{ text }}</div>
 
       <div
-        v-else
+        v-show="isOpen && !editing"
         class="level-right example-accordion__text">
         <highlighted-text
-          v-if="open && !editing"
           :text="text"
           :entities="entities"
           :highlighted="highlighted" />
@@ -65,7 +64,7 @@
     <div slot="body">
       <example-info
         v-if="!editing"
-        :entities-list="entitiesList"
+        :entities-list="entities"
         :highlighted.sync="highlighted"
         :intent="intent" />
 
@@ -216,7 +215,7 @@ export default {
     },
     editSentence() {
       this.editing = true;
-      this.open = true;
+      this.isOpen = true;
     },
     updateList() {
       this.$emit('updateList');
