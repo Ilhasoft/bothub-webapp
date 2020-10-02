@@ -586,8 +586,7 @@ export default {
   &__translateButtons{
     display: flex;
     width: 385px;
-    margin: 1rem 0.3rem;
-    margin-left: 0.8rem;
+    margin: 1rem 0;
     border-radius: 5px;
     justify-content: space-between;
   }
