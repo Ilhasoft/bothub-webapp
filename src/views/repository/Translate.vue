@@ -50,8 +50,7 @@
             <h1>{{ $t('webapp.translate.title_translate') }}</h1>
             <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
           </div>
-          <div
-            v-if="!!translate.to">
+          <div v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
               :destroy-on-hide="false"
@@ -211,6 +210,7 @@
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
+              class="repository-translate__train"
               @statusUpdated="updateTrainingStatus($event)" />
 
             <hr>
@@ -490,13 +490,16 @@ export default {
   justify-content: space-around;
   align-items: center;
 
+  &__train {
+    margin: 0 0 2.5rem 0;
+  }
+
   &__field {
     display: flex;
     justify-content: space-between;
-    padding: 0.25rem;
     width: 100%;
     &__item {
-      margin: 0.5rem;
+      margin: 0.5rem 0;
       width: 45%;
         &__label{
         font-weight: $font-weight-normal;
@@ -509,10 +512,7 @@ export default {
     color: $color-grey-dark;
   }
   &__list{
-    margin-left: 0.3rem;
   &__search {
-    margin: 0.5rem;
-
     &__status {
       margin: 3rem 0 4.4rem 0;
     }
@@ -612,7 +612,6 @@ export default {
 }
 
 .translate-description{
-  margin-left: 0.8rem;
   margin-top: $between-subtitle-content;
   h1{
     font-size: 28px;
