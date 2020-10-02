@@ -55,7 +55,7 @@ export default {
           key: 'translated',
           label: this.$t('webapp.translate.translated'),
           count: null,
-          query: { language: this.language, has_translation: true },
+          query: { language: this.language, has_translation_to: this.toLanguage },
         },
         not_translated: {
           key: 'not_translated',
