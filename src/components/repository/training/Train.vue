@@ -73,6 +73,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    updateOnLoad: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -108,7 +112,7 @@ export default {
     },
   },
   mounted() {
-    this.updateTrainingStatus();
+    if (this.updateOnLoad) this.updateTrainingStatus();
     this.getRepositoryStatus();
   },
   methods: {
