@@ -9,7 +9,7 @@
       <header class="modal-card-head">
         <p class="modal-card-title">{{ titleHeader }}</p>
       </header>
-      <section class="modal-card-body">
+      <section class="modal-card-body modalStyle__content__container">
         <edit-example-accordion
           ref="accordion"
           :pending-example="true"
@@ -132,14 +132,26 @@ export default {
   align-items: center;
 
   &__content{
-    width: $size-large + 45rem;
+    width: $size-large + 50rem;
+    min-height: $size-large + 23rem;
+
+    &__container{
+      overflow-y: hidden;
+    }
 
       &__footer{
       display: flex;
       justify-content: flex-end;
       align-items: center;
+
       }
   }
 
+}
+.button{
+    font-weight: bold;
+}
+p {
+    font-weight: 600;
 }
 </style>
