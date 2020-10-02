@@ -113,7 +113,17 @@ export default {
   },
   watch: {
     translationData() {
-      // this.updateOnChange();
+      if (this.unchanged()) {
+        this.clearCache();
+        return;
+      }
+      this.$emit('dispatchEvent', {
+        event: 'onChange',
+        value: {
+          id: this.id,
+          data: this.isEmpty ? null : this.translationData,
+        },
+      });
     },
   },
   created() {
@@ -140,20 +150,6 @@ export default {
       'editTranslation',
       'deleteTranslation',
     ]),
-    async updateOnChange() {
-      await this.$nextTick();
-      if (this.unchanged()) {
-        this.clearCache();
-        return;
-      }
-      this.$emit('dispatchEvent', {
-        event: 'onChange',
-        value: {
-          id: this.id,
-          data: this.isEmpty ? null : this.translationData,
-        },
-      });
-    },
     unchanged() {
       if (!this.translation) return false;
       if (!this.translationData) return true;
