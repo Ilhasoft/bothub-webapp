@@ -101,7 +101,7 @@ export default {
       if (this.initialData) return;
       const { text, entities } = this.initialData ? this.initialData : this.translation || {};
       this.text = text || '';
-      this.entities = entities || [];
+      this.entities = [...(entities || [])];
     },
     open() {
       if (!this.open) {
@@ -112,7 +112,7 @@ export default {
   mounted() {
     const { text, entities } = (this.initialData ? this.initialData : this.translation) || {};
     this.text = text || '';
-    this.entities = entities || [];
+    this.entities = [...(entities || [])];
   },
   methods: {
     onFocus() {
