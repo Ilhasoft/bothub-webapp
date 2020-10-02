@@ -180,7 +180,7 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from} ${translate.to}-${translate.update}`"
+                  :key="`${translate.from}-${translate.to}-${translate.update}`"
                   :repository-uuid="repository.uuid"
                   :version="getSelectedVersion"
                   :language="repository.language"
@@ -210,9 +210,9 @@
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
+              :update-on-load="false"
               class="repository-translate__train"
               @statusUpdated="updateTrainingStatus($event)" />
-
             <hr>
 
             <div class="translate-description">

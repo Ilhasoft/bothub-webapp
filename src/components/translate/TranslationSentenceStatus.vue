@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       active: this.initialData || 'all',
-      update: setTimeout(() => { this.getStatusData(); }, 1500),
+      update: setTimeout(() => { this.getStatusData(); }, 2000),
       statusData: {
         sentences: {
           key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
