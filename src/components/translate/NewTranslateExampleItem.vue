@@ -253,7 +253,10 @@ export default {
         > * {
             width: 50%;
             height: 100%;
-            margin-right: 1rem;
+
+            &:not(:last-child) {
+              margin-right: 1rem;
+            }
         }
       &__error {
         border: 1px solid $color-border;
