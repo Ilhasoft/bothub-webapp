@@ -180,7 +180,7 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from} ${translate.to}-${translate.update}`"
+                  :key="`${translate.from}-${translate.to}-${translate.update}`"
                   :repository-uuid="repository.uuid"
                   :version="getSelectedVersion"
                   :language="repository.language"
@@ -203,16 +203,19 @@
                 @isLoadingContent="loadingList = $event"
                 @listPhrase="checkPhraseList($event)"/>
             </div>
+          </div>
+
+          <div v-show="!!translate.to">
             <train
               v-if="repository"
-              :key="trainUpdate"
+              ref="train"
               :show-button="repository.ready_for_train"
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
+              :update-on-load="false"
               class="repository-translate__train"
               @statusUpdated="updateTrainingStatus($event)" />
-
             <hr>
 
             <div class="translate-description">
@@ -241,6 +244,7 @@
 
             </div>
           </div>
+
         </div>
         <authorization-request-notification
           v-else
@@ -325,7 +329,6 @@ export default {
       ],
       query: {},
       sentenceFilter: { key: null, query: null },
-      trainUpdate: false,
     };
   },
   computed: {
@@ -441,7 +444,7 @@ export default {
     examplesTranslated() {
       this.translate.update = !this.translate.update;
       if (this.update) clearTimeout(this.update);
-      this.update = setTimeout(() => { this.trainUpdate = !this.trainUpdate; }, 600);
+      this.update = setTimeout(() => { this.$refs.train.updateTrainingStatus(); }, 2000);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {
