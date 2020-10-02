@@ -444,7 +444,7 @@ export default {
     examplesTranslated() {
       this.translate.update = !this.translate.update;
       if (this.update) clearTimeout(this.update);
-      this.update = setTimeout(() => { this.$refs.train.updateTrainingStatus(); }, 600);
+      this.update = setTimeout(() => { this.$refs.train.updateTrainingStatus(); }, 2000);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {
