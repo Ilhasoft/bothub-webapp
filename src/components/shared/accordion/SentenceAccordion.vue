@@ -7,13 +7,13 @@
         'expander__trigger--slim': slim,
         [`align-${align}`]: true,
         'active': isOpen,
-        'before-border': !isOpen,
+        'before-border': !isOpen && customAccordion,
         'border-thick': thickBorder,
         'border-success': type === 'is-success',
         'border-danger': type === 'is-danger',
         'expander__trigger--pending': pendingExample,
         'is-light': isLight,
-        'border': !type,
+        'border': !type && customAccordion,
       }"
       @click="toggleAccordion()">
 
