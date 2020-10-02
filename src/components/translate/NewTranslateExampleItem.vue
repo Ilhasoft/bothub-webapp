@@ -2,6 +2,7 @@
   <div class="translate-item">
     <translate-example-before
       v-bind="$props"
+      :invalid="translation && !translation.has_valid_entities"
       :open.sync="open"
       :selectable="!editing"
       :selected.sync="selected"
