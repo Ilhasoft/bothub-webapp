@@ -153,9 +153,8 @@ export default {
     unchanged() {
       if (!this.translation) return false;
       if (!this.translationData) return true;
-      const unchanged = (this.translationData.text === this.translation.text
-            && entityEquals(this.translationData.entities || [], this.translation.entities || []));
-      return unchanged;
+      return this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities || [], this.translation.entities || []);
     },
     onSelectAll(value) {
       this.selected = value;
