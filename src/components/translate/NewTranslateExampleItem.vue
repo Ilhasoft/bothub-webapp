@@ -113,14 +113,7 @@ export default {
   },
   watch: {
     translationData() {
-      if (!this.translationData.text) return;
-      this.$emit('dispatchEvent', {
-        event: 'onChange',
-        value: {
-          id: this.id,
-          data: this.isEmpty ? null : this.translationData,
-        },
-      });
+      // this.updateOnChange();
     },
   },
   created() {
@@ -147,6 +140,27 @@ export default {
       'editTranslation',
       'deleteTranslation',
     ]),
+    async updateOnChange() {
+      await this.$nextTick();
+      if (this.unchanged()) {
+        this.clearCache();
+        return;
+      }
+      this.$emit('dispatchEvent', {
+        event: 'onChange',
+        value: {
+          id: this.id,
+          data: this.isEmpty ? null : this.translationData,
+        },
+      });
+    },
+    unchanged() {
+      if (!this.translation) return false;
+      if (!this.translationData) return true;
+      const unchanged = (this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities || [], this.translation.entities || []));
+      return unchanged;
+    },
     onSelectAll(value) {
       this.selected = value;
     },
@@ -166,6 +180,7 @@ export default {
     },
     async save() {
       try {
+        if (this.unchanged()) return;
         if (this.isEmpty) {
           if (!this.translation) return;
           await this.deleteTranslation({ translationId: this.translation.id });
@@ -176,9 +191,6 @@ export default {
           let response = null;
           const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
-            if (saveData.text === this.translation.text
-            && entityEquals(saveData.entities, this.translation.entities)) return;
-
             response = await this.editTranslation({
               translationId: this.translation.id,
               ...saveData,
