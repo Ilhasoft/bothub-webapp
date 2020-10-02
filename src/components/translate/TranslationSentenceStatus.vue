@@ -67,7 +67,11 @@ export default {
           key: 'inconsistent',
           label: this.$t('webapp.translate.inconsistent'),
           count: null,
-          query: { language: this.language, has_invalid_entities: this.toLanguage },
+          query: {
+            language: this.language,
+            has_invalid_entities: this.toLanguage,
+            has_translation_to: this.toLanguage,
+          },
         },
       },
     };
