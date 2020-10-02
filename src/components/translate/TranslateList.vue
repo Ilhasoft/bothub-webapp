@@ -117,7 +117,8 @@ export default {
       'searchExamples',
     ]),
     updateCache({ id, data }) {
-      if (!data) delete this.editCache[id];
+      if (!this.editCache[id] && !data) return;
+      if (this.editCache[id] && !data) delete this.editCache[id];
       else this.editCache[id] = data;
     },
     saveAll() {
