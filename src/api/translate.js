@@ -65,4 +65,16 @@ export default {
         responseType: 'arraybuffer',
       });
   },
+  auto(repositoryUuid, versionUUID, targetLanguage) {
+    return request.$http.post(`/v2/repository/info/${repositoryUuid}/${versionUUID}/auto_translation/`,
+      { target_language: targetLanguage });
+  },
+  autoTranslateStatus(repositoryUUID, repositoryVersion) {
+    const queryString = qs.stringify({
+      repository_uuid: repositoryUUID,
+      repository_version: repositoryVersion,
+      type_processing: 1,
+    });
+    return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
+  },
 };
