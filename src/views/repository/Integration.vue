@@ -155,7 +155,6 @@ export default {
   computed: {
     ...mapGetters([
       'activeTutorial',
-      'getCurrentRepository',
     ]),
     profileToken() {
       if (!this.repository || this.repository.authorization === 'null') { return null; }
