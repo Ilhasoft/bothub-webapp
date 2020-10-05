@@ -12,6 +12,19 @@
         v-model="isSelected" />
     </div>
 
+    <div slot="options">
+      <b-tooltip
+        v-if="invalid"
+        :label="$t('webapp.translate.invalid_entities')"
+        multilined
+        type="is-warning">
+        <b-icon
+          size="is-small"
+          class="is-warining"
+          icon="alert" />
+      </b-tooltip>
+    </div>
+
     <div
       slot="header"
       class="level">
@@ -100,6 +113,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    invalid: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -155,6 +172,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
+.is-warning {
+  color: $color-warning;
+}
 
   .example-accordion {
 
@@ -183,7 +205,7 @@ export default {
   }
 
   .pendingExample{
-    background-color: #f5f5f59c;
+    background-color: $color-fake-white;
   }
 
 </style>

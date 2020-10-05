@@ -2,6 +2,7 @@
   <div class="translate-item">
     <translate-example-before
       v-bind="$props"
+      :invalid="translation && !translation.has_valid_entities"
       :open.sync="open"
       :selectable="!editing"
       :selected.sync="selected"
@@ -113,7 +114,10 @@ export default {
   },
   watch: {
     translationData() {
-      if (!this.translationData.text) return;
+      if (this.unchanged()) {
+        this.clearCache();
+        return;
+      }
       this.$emit('dispatchEvent', {
         event: 'onChange',
         value: {
@@ -147,6 +151,12 @@ export default {
       'editTranslation',
       'deleteTranslation',
     ]),
+    unchanged() {
+      if (!this.translation) return false;
+      if (!this.translationData) return true;
+      return this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities || [], this.translation.entities || []);
+    },
     onSelectAll(value) {
       this.selected = value;
     },
@@ -166,6 +176,7 @@ export default {
     },
     async save() {
       try {
+        if (this.unchanged()) return;
         if (this.isEmpty) {
           if (!this.translation) return;
           await this.deleteTranslation({ translationId: this.translation.id });
@@ -176,9 +187,6 @@ export default {
           let response = null;
           const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
-            if (saveData.text === this.translation.text
-            && entityEquals(saveData.entities, this.translation.entities)) return;
-
             response = await this.editTranslation({
               translationId: this.translation.id,
               ...saveData,
@@ -246,7 +254,10 @@ export default {
         > * {
             width: 50%;
             height: 100%;
-            margin-right: 1rem;
+
+            &:not(:last-child) {
+              margin-right: 1rem;
+            }
         }
       &__error {
         border: 1px solid $color-border;
