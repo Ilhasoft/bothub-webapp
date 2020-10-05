@@ -6,7 +6,7 @@
       <div
         v-if="authenticated"
         class="repository-analyze-text" >
-        <div>
+        <div class="repository-analyze-text__title">
           <h2>{{ $t('webapp.integration.title') }}</h2>
           <span>{{ $t('webapp.integration.description') }}</span>
         </div>
@@ -214,6 +214,10 @@ export default {
 
 .repository-analyze-text {
   padding: 1rem;
+
+  &__title{
+    margin-bottom: $between-subtitle-content;
+  }
 
   &__item {
     margin: 1rem 0;
