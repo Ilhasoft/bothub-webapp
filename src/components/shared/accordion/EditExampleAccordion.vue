@@ -1,6 +1,7 @@
 <template>
   <sentence-accordion
     :open.sync="isOpen"
+    :custom-accordion="!custom"
     align="top">
     <language-badge
       slot="check"
@@ -29,7 +30,8 @@
           :available-entities="getAllEntities"
           :entities="entities"
           :text-selected="textSelected"
-          @addedEntity="onEntityAdded" />
+          :class="allEntitiesInput.length !== 0 && custom ? 'input-custom-style' : ''"
+          @addedEntity="onEntityAdded"/>
         <b-field
           :message="errors.entities"
           type="is-danger" />
@@ -37,7 +39,8 @@
     </div>
 
     <div
-      slot="options">
+      slot="options"
+      class="edit-sentence__options">
       <b-field
         :message="errors.non_field_errors"
         :type="{ 'is-danger': errors.non_field_errors && errors.non_field_errors.length > 0 }"
@@ -48,13 +51,16 @@
         </div>
         <b-autocomplete
           v-model="intent"
-          :data="repository.intents_list || []"
+          :data="optionsIntents"
           :placeholder="$t('webapp.example.intent')"
+          max-height="120px"
           dropdown-position="bottom"
           open-on-focus
           @input="intent = intentFormatters(intent)" />
 
-        <div class="edit-sentence__icon-container edit-sentence__icon-container--intent">
+        <div
+          v-show="!custom"
+          class="edit-sentence__icon-container edit-sentence__icon-container--intent">
           <b-icon
             icon="close"
             class="clickable"
@@ -103,6 +109,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    custom: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -118,6 +128,18 @@ export default {
     allEntities() {
       return this.allEntitiesInput;
     },
+    filterIntents() {
+      if (this.intents !== null) {
+        return this.repository.intents_list.filter(intent => intent
+          .toString()
+          .toLowerCase()
+          .indexOf(this.intent.toLowerCase()) >= 0);
+      }
+      return [];
+    },
+    optionsIntents() {
+      return this.filterIntents.map(intent => intent);
+    },
   },
   watch: {
     open() {
@@ -125,6 +147,15 @@ export default {
     },
     isOpen() {
       this.$emit('update:open', this.isOpen);
+    },
+    text() {
+      this.$emit('textInput', this.text);
+    },
+    allEntitiesInput() {
+      this.$emit('entitiesInput', this.allEntitiesInput);
+    },
+    intent() {
+      this.$emit('intentInput', this.intent);
     },
   },
 };
@@ -136,7 +167,11 @@ export default {
 .icon {
   color: $color-grey-dark;
 }
-
+.input-custom-style{
+  height: 130px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .edit-sentence {
     width: 100%;
     margin: 0 1rem 1rem 0;
@@ -162,6 +197,9 @@ export default {
           margin-top: 0;
         }
     }
+  }
+    &__options{
+    width: 40rem;
   }
 }
 </style>

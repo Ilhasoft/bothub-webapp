@@ -2,7 +2,9 @@
   <div>
     <div class="repository-translate__list__options">
       <div class="repository-translate__list__options__check">
-        <b-checkbox v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
+        <b-checkbox
+          :disabled="editing"
+          v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
@@ -15,11 +17,14 @@
           type="is-primary"
           icon-right="delete"
           @click="deleteAll" />
-        <b-button
-          v-show="editing"
-          type="is-primary"
-          icon-right="check-bold"
-          @click="saveAll" />
+        <b-tooltip
+          :label="$t('webapp.translate.save_all')">
+          <b-button
+            v-show="editing"
+            type="is-primary"
+            icon-right="check-bold"
+            @click="saveAll" />
+        </b-tooltip>
         <b-button
           v-show="editing"
           type="is-primary"
@@ -112,7 +117,8 @@ export default {
       'searchExamples',
     ]),
     updateCache({ id, data }) {
-      if (!data) delete this.editCache[id];
+      if (!this.editCache[id] && !data) return;
+      if (this.editCache[id] && !data) delete this.editCache[id];
       else this.editCache[id] = data;
     },
     saveAll() {

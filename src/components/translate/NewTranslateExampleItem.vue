@@ -2,7 +2,9 @@
   <div class="translate-item">
     <translate-example-before
       v-bind="$props"
+      :invalid="translation && !translation.has_valid_entities"
       :open.sync="open"
+      :selectable="!editing"
       :selected.sync="selected"
       pending-example/>
     <loading v-show="loadingTranslations" />
@@ -33,11 +35,11 @@ import { mapActions, mapGetters } from 'vuex';
 import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 import TranslateExampleBefore from './TranslateExampleBefore';
-import { getEntitiesList } from '@/utils';
+import { getEntitiesList, entityEquals } from '@/utils';
 import Loading from '@/components/shared/Loading';
 
 export default {
-  name: 'TranslateExample',
+  name: 'TranslateExampleItem',
   components: {
     TranslateExampleForm,
     ExampleAccordion,
@@ -112,7 +114,10 @@ export default {
   },
   watch: {
     translationData() {
-      if (!this.translationData.text) return;
+      if (this.unchanged()) {
+        this.clearCache();
+        return;
+      }
       this.$emit('dispatchEvent', {
         event: 'onChange',
         value: {
@@ -126,7 +131,7 @@ export default {
     this.$root.$on('selectAll', (value) => { this.onSelectAll(value); });
     this.$root.$on('saveAll', () => {
       this.open = false;
-      if (!this.translationLoadError && this.selected) this.save();
+      if (!this.translationLoadError) this.save();
     });
     this.$root.$on('deleteAll', () => {
       this.open = false;
@@ -146,11 +151,32 @@ export default {
       'editTranslation',
       'deleteTranslation',
     ]),
+    unchanged() {
+      if (!this.translation) return false;
+      if (!this.translationData) return true;
+      return this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities || [], this.translation.entities || []);
+    },
     onSelectAll(value) {
       this.selected = value;
     },
+    saveTranslationData(data) {
+      if (!data) return {};
+      return {
+        text: data.text,
+        entities: (data.entities || []).map((entityObject) => {
+          const {
+            start, end, entity, value,
+          } = entityObject;
+          return {
+            start, end, entity, value,
+          };
+        }),
+      };
+    },
     async save() {
       try {
+        if (this.unchanged()) return;
         if (this.isEmpty) {
           if (!this.translation) return;
           await this.deleteTranslation({ translationId: this.translation.id });
@@ -159,17 +185,18 @@ export default {
         } else {
           this.loadingTranslations = true;
           let response = null;
+          const saveData = this.saveTranslationData(this.translationData);
           if (this.translation) {
             response = await this.editTranslation({
               translationId: this.translation.id,
-              ...this.translationData,
+              ...saveData,
               language: this.translateTo,
               originalExample: this.id,
             });
           } else {
             response = await this.newTranslation({
               exampleId: this.id,
-              ...this.translationData,
+              ...saveData,
               language: this.translateTo,
             });
           }
@@ -227,7 +254,10 @@ export default {
         > * {
             width: 50%;
             height: 100%;
-            margin-right: 1rem;
+
+            &:not(:last-child) {
+              margin-right: 1rem;
+            }
         }
       &__error {
         border: 1px solid $color-border;

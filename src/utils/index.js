@@ -127,3 +127,17 @@ export const updateAttrsValues = (drfModel, data) => {
   });
   return Object.assign(drfModel, attrs);
 };
+
+export const entityEquals = (entities1, entities2) => {
+  if (entities1.length !== entities2.length) return false;
+  if (entities1.length === 0) return true;
+
+  return entities1.every((entity1) => {
+    const {
+      start, end, entity,
+    } = entity1;
+    return entities2.findIndex(entity2 => entity2.start === start
+      && entity2.end === end
+      && entity2.entity === entity) !== undefined;
+  });
+};

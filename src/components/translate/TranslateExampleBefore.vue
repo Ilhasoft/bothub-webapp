@@ -4,8 +4,25 @@
     slim
     pending-example >
 
-    <div slot="check">
-      <b-checkbox v-model="isSelected" />
+    <div
+      slot="check"
+      class="example-accordion__check">
+      <b-checkbox
+        v-show="selectable"
+        v-model="isSelected" />
+    </div>
+
+    <div slot="options">
+      <b-tooltip
+        v-if="invalid"
+        :label="$t('webapp.translate.invalid_entities')"
+        multilined
+        type="is-warning">
+        <b-icon
+          size="is-small"
+          class="is-warining"
+          icon="alert" />
+      </b-tooltip>
     </div>
 
     <div
@@ -92,6 +109,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectable: {
+      type: Boolean,
+      default: true,
+    },
+    invalid: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -147,6 +172,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
+.is-warning {
+  color: $color-warning;
+}
 
   .example-accordion {
 
@@ -167,10 +197,15 @@ export default {
       min-height: 4rem;
     }
 
+    &__check {
+      min-width: 1.8rem;
+      min-height: 1.3rem;
+    }
+
   }
 
   .pendingExample{
-    background-color: #f5f5f59c;
+    background-color: $color-fake-white;
   }
 
 </style>
