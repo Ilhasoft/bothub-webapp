@@ -11,9 +11,9 @@
       v-show="progress > 0"
       :progress="progress"
       type="is-primary"/>
-    <span v-show="progress > 0">
+    <p v-show="progress > 0">
       {{ $t('webapp.translate.auto_percentage', { progress }) }}
-    </span>
+    </p>
   </div>
 </template>
 
