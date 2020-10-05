@@ -14,7 +14,7 @@
           ref="accordion"
           :pending-example="true"
           :entities="getLogData.entities"
-          :intent-to-edit="getLogData.intent"
+          :intent-to-edit="info.intent.name"
           :text-to-edit="getLogData.text"
           :sentence-id="logData.id"
           :language-edit="getLogData.language"
@@ -136,7 +136,10 @@ export default {
     min-height: $size-large + 23rem;
 
     &__container{
-      overflow-y: hidden;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
       &__footer{
