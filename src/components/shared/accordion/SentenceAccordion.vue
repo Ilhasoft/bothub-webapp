@@ -7,13 +7,13 @@
         'expander__trigger--slim': slim,
         [`align-${align}`]: true,
         'active': isOpen,
-        'before-border': !isOpen,
+        'before-border': !isOpen && customAccordion,
         'border-thick': thickBorder,
         'border-success': type === 'is-success',
         'border-danger': type === 'is-danger',
         'expander__trigger--pending': pendingExample,
         'is-light': isLight,
-        'border': !type,
+        'border': !type && customAccordion,
       }"
       @click="toggleAccordion()">
 
@@ -38,7 +38,7 @@
     </div>
     <transition name="fade">
       <div
-        v-show="open"
+        v-show="open && customAccordion"
         :class="pendingExample ? 'expander__body--pending' : 'expander__body'">
         <slot name="body"/>
       </div>
@@ -78,6 +78,10 @@ export default {
     pendingExample: {
       type: Boolean,
       default: false,
+    },
+    customAccordion: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

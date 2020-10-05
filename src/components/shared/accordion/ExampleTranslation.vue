@@ -24,7 +24,6 @@
           :highlighted="highlighted"
           class="translation__text" />
         <div
-          v-if="entitiesList.length > 0"
           class="translation__entities">
           <b-tooltip
             v-if="!has_valid_entities"
