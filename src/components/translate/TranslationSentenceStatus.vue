@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       active: this.initialData || 'all',
-      update: setTimeout(() => { this.getStatusData(); }, 2000),
+      update: null,
       statusData: {
         sentences: {
           key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
@@ -84,20 +84,6 @@ export default {
     statusInfo() {
       return Object.values(this.statusData);
     },
-    searchExamplesAction() {
-      return query => (this.externalToken
-        ? this.searchExamplesExternal({
-          limit: 1,
-          token: this.externalToken,
-          query,
-        })
-        : this.searchExamples({
-          limit: 1,
-          repositoryUuid: this.repositoryUuid,
-          version: this.version,
-          query,
-        }));
-    },
   },
   watch: {
     repositoryUuid() {
@@ -107,17 +93,21 @@ export default {
       this.getStatusData();
     },
   },
+  mounted() {
+    this.update = setTimeout(() => { this.getStatusData(); }, 5);
+  },
   beforeDestroy() {
     clearTimeout(this.update);
   },
   methods: {
-    ...mapActions(['searchExamples', 'searchExamplesExternal']),
+    ...mapActions(['searchExamples',
+      'searchExamplesExternal']),
     onClick(key, query) {
       this.$emit('search', { key, query });
       this.active = key;
     },
     async getStatusData() {
-      if (!this.repositoryUuid || !this.version) return;
+      if (!(this.externalToken || (this.repositoryUuid && this.version))) return;
       Object.entries(this.statusData).forEach(([key, value]) => {
         try {
           this.searchExamplesAction(value.query)
@@ -126,6 +116,21 @@ export default {
         } catch (e) {
           this.statusData[key].count = null;
         }
+      });
+    },
+    searchExamplesAction(query) {
+      if (this.externalToken) {
+        return this.searchExamplesExternal({
+          limit: 1,
+          token: this.externalToken,
+          query,
+        });
+      }
+      return this.searchExamples({
+        limit: 1,
+        repositoryUuid: this.repositoryUuid,
+        version: this.version,
+        query,
       });
     },
   },

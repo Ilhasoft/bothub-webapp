@@ -6,7 +6,7 @@ export default {
       baseURL: process.env.API_BASE_URL,
       headers: {
         ...(token
-          ? { Authorization: `Token ${token}` } : {}),
+          ? { Authorization: `Translator ${token}` } : {}),
       },
     });
   },

@@ -117,6 +117,7 @@ export default {
   methods: {
     ...mapActions([
       'searchExamples',
+      'searchExamplesExternal',
     ]),
     updateCache({ id, data }) {
       if (!this.editCache[id] && !data) return;
