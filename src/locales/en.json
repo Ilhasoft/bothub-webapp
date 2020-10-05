@@ -372,7 +372,7 @@
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
       "no_translated": "No languages to show",
-      "invalid_entities": "Entities do not match the original translation's",
+      "invalid_entities": "Translation's entities do not match the original translation's",
       "translation_edited": "Translation edited",
       "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
       "error_load_translation": "Could not load translation.",
