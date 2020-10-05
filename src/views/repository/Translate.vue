@@ -46,16 +46,26 @@
               </div>
             </div>
           </div>
-          <div class="translate-description">
-            <h1>{{ $t('webapp.translate.title_translate') }}</h1>
-            <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+          <div class="repository-translate__header">
+            <div class="translate-description">
+              <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+              <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+            </div>
+            <div class="repository-translate__header__buttons">
+              <auto-translate
+                v-if="repository && repository.authorization.can_translate"
+                :translate-to="translate.to"
+                :repository-uuid="repository.uuid"
+                @onTranslate="translating = true"
+                @onTranslateComplete="translating = false" />
+              <b-button
+                :disabled="!(repository && translate.to)"
+                class="repository-translate__header__button"
+                type="is-primary"
+                label="Send to translators"
+                @click="onSendToTranslators()" />
+            </div>
           </div>
-          <auto-translate
-            v-if="repository && repository.authorization.can_translate"
-            :translate-to="translate.to"
-            :repository-uuid="repository.uuid"
-            @onTranslate="translating = true"
-            @onTranslateComplete="translating = false" />
           <div v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
@@ -298,6 +308,7 @@ import TranslationSentenceStatus from '@/components/translate/TranslationSentenc
 import AutoTranslate from '@/components/translate/AutoTranslate';
 import Train from '@/components/repository/training/Train';
 import Loading from '@/components/shared/Loading';
+import TranslateTokenModal from '@/components/translate/TranslateTokenModal';
 import Tour from '@/components/Tour';
 import {
   languageListToDict,
@@ -382,7 +393,38 @@ export default {
       'getRepository',
       'exportTranslations',
       'importTranslations',
+      'getExternalToken',
     ]),
+    async onSendToTranslators() {
+      this.loadingToken = true;
+      try {
+      // const response = await this.getExternalToken({
+        //   repositoryVersion: this.getSelectedVersion,
+        //   language: this.translate.to,
+        // });
+        // const { data } = response;
+        this.$buefy.modal.open({
+          component: TranslateTokenModal,
+          props: {
+            urlGenerator: (token) => {
+              const route = this.$router.resolve({
+                name: 'repository-translate-external',
+                params: {
+                  ownerNickname: this.repository.owner__nickname,
+                  slug: this.repository.slug,
+                  token,
+                },
+              }).href;
+              return `${window.location.origin}${route}`;
+            },
+            token: 'e7d5e26d-4002-4618-8ed4-1e8c9d1949ff',
+          },
+          width: 500,
+        });
+      } finally {
+        this.loadingToken = false;
+      }
+    },
     updateTrainingStatus(trainStatus) {
       Object.assign(this.repository, trainStatus);
     },
@@ -513,6 +555,20 @@ export default {
 
   &__train {
     margin: 0 0 2.5rem 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__button {
+      margin-left: 0.5rem;
+    }
+
+    &__buttons {
+      display: flex;
+    }
   }
 
   &__field {

@@ -77,4 +77,8 @@ export default {
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
+  getExternalToken(repositoryVersion, language) {
+    return request.$http.post('/v2/repository/translator/control/',
+      { language, repository_version: repositoryVersion });
+  },
 };

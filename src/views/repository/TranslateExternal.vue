@@ -9,9 +9,9 @@
     </div>
     <div class="repository-translate__list">
       <div class="repository-translate__list__search">
-        <auto-translate
+        <!-- <auto-translate
           :token="token"
-          translate-to="fr"/>
+          translate-to="fr"/> -->
         <translation-sentence-status
           :key="translateUpdate"
           :external-token="token"
@@ -47,6 +47,7 @@ export default {
     RepositoryViewBase,
     TranslateList,
     TranslationSentenceStatus,
+    AutoTranslate,
   },
   extends: RepositoryBase,
   data() {
@@ -61,9 +62,13 @@ export default {
       hasPhrases: false,
       allTranslations: false,
       query: {},
-      token: '',
       sentenceFilter: { key: null, query: null },
     };
+  },
+  computed: {
+    token() {
+      return this.$route.params.token;
+    },
   },
   watch: {
     querySchema() {
