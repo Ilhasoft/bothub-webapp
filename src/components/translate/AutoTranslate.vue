@@ -12,7 +12,7 @@
       :progress="progress"
       type="is-primary"/>
     <span v-show="progress > 0">
-      {{ $t('webapp.translate.auto_percentage', { progress }) }} 
+      {{ $t('webapp.translate.auto_percentage', { progress }) }}
     </span>
   </div>
 </template>
@@ -73,11 +73,20 @@ export default {
     },
     async sendAutoTranslate() {
       this.loading = true;
-      this.autoTranslate({
-        repositoryUUID: this.repositoryUuid,
-        repositoryVersion: this.version,
-        targetLanguage: this.translateTo,
-      });
+      try {
+        await this.autoTranslate({
+          repositoryUUID: this.repositoryUuid,
+          repositoryVersion: this.version,
+          targetLanguage: this.translateTo,
+        });
+      } catch (e) {
+        this.$buefy.toast.open({
+          message: this.$t(e.response.status === 500 ? 'webapp.translate.unsupported' : 'webapp.settings.default_error'),
+          type: 'is-danger',
+        });
+        this.loading = false;
+        return;
+      }
       this.$emit('onTranslate');
       await this.checkProgress(true);
       this.loading = false;

@@ -321,7 +321,8 @@
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
-      "auto_percentage": "{progress}% da tradução concluída"
+      "auto_percentage": "{progress}% da tradução concluída",
+      "usupported": "Idioma não está disponível para tradução automática"
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
