@@ -39,5 +39,10 @@ export default {
   }) {
     return translate.importTranslate(repositoryUuid, versionUUID, formData);
   },
-
+  async getAutoTranslateProgress(store, { repositoryUUID, repositoryVersion }) {
+    return translate.autoTranslateStatus(repositoryUUID, repositoryVersion);
+  },
+  async autoTranslate(store, { repositoryUUID, repositoryVersion, targetLanguage }) {
+    return translate.auto(repositoryUUID, repositoryVersion, targetLanguage);
+  },
 };

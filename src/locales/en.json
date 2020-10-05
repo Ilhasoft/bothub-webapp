@@ -382,7 +382,11 @@
       "not_translated": "Not translated",
       "inconsistent": "Inconsistent",
       "save_all": "Save all in this page",
-      "select_all": "Select all in this page"
+      "select_all": "Select all in this page",
+      "auto_translate": "Auto translate",
+      "auto_translate_progress": "Auto translate in progress",
+      "auto_translate_confirm": "Translate all untranslated sentences to {language}?",
+      "auto_percentage": "{progress}% of translation done"
     },
     "orgs": {
       "owner": "Owned by",

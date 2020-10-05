@@ -320,7 +320,8 @@
       "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "auto_percentage": "{progress}% da tradução concluída"
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
@@ -384,7 +385,10 @@
       "not_translated": "Não traduzidas",
       "inconsistent": "Inconsistentes",
       "save_all": "Salvar todas nesta página",
-      "select_all": "Selecionar todas nesta página"
+      "select_all": "Selecionar todas nesta página",
+      "auto_translate": "Tradução automática",
+      "auto_translate_progress": "Tradução automática em progresso",
+      "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?"
     },
     "orgs": {
       "owner": "Pertence a",
