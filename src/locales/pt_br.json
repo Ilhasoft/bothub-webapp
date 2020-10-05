@@ -235,6 +235,11 @@
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
       "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
     },
+    "integration":{
+      "title": "Integrações do Bothub",
+      "description": "Faça uma requesição HTTP para o serviço NLP, seguindo o exemplo abaixo",
+      "copy": "Token copiado"
+    },
     "intent":{
       "title": "Intenção",
       "description": "Essa intenção contém {n} frase | Essa intenção contém {n} frases.",

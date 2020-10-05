@@ -235,6 +235,11 @@
       "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
     },
+    "integration":{
+      "title": "Bothub integrations",
+      "description": "Make an HTTP request to the NLP service, following the example below",
+      "copy": "Token Copied"
+    },
     "intent":{
       "title": "Intent",
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
