@@ -197,7 +197,6 @@ export default {
         hasModalCard: false,
         trapFocus: true,
         canCancel: false,
-        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);

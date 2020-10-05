@@ -106,7 +106,7 @@ export default {
   methods: {
     initInputValues() {
       this.inputValues.text = this.getLogData.text;
-      this.inputValues.intent = this.getLogData.intent;
+      this.inputValues.intent = this.info.intent.name;
       this.inputValues.entities = this.getLogData.text;
     },
     addIntent() {
