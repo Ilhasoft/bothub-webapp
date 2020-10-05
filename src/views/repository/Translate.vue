@@ -196,7 +196,7 @@
                   @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
-                  :entities="repository.entities_list"
+                  :entities="repository.entities"
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <div
