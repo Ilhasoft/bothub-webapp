@@ -51,7 +51,7 @@
             <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
           </div>
           <auto-translate
-            v-if="repository"
+            v-if="repository && repository.authorization.can_translate"
             :translate-to="translate.to"
             :repository-uuid="repository.uuid"
             @onTranslate="translating = true"
@@ -196,7 +196,7 @@
                   @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
-                  :entities="repository.entities_list"
+                  :entities="repository.entities"
                   @queryStringFormated="onSearch($event)"/>
               </div>
               <div

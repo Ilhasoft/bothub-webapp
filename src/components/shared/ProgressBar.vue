@@ -2,7 +2,7 @@
   <div class="bar">
     <span
       :style="{ width: `${progress}%` }"
-      class="type"/>
+      :class="type || 'is-normal'"/>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default {
     },
     type: {
       type: String,
-      default: '',
+      default: null,
     },
   },
 };
@@ -32,20 +32,23 @@ export default {
       background-color: $color-grey-light;
     }
 
+    .bar span {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      height: 25px;
+    }
+
+    .is-normal {
+      background-color: $color-grey-dark;
+    }
+
     .is-secondary {
         background-color: $color-secondary;
     }
 
     .is-primary {
         background-color: $color-primary;
-    }
-
-    .bar span {
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
-      height: 25px;
-      background-color: $color-grey-dark;
     }
 
     .bar span:after {
