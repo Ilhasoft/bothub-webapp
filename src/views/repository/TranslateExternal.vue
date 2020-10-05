@@ -9,6 +9,9 @@
     </div>
     <div class="repository-translate__list">
       <div class="repository-translate__list__search">
+        <auto-translate
+          :token="token"
+          translate-to="fr"/>
         <translation-sentence-status
           :key="translateUpdate"
           :external-token="token"
@@ -35,6 +38,7 @@ import TranslateList from '@/components/translate/TranslateList';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import AutoTranslate from '@/components/translate/AutoTranslate';
 
 export default {
   name: 'RepositoryTranslateExternal',

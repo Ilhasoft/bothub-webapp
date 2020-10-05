@@ -30,7 +30,8 @@
           :available-entities="getAllEntities"
           :entities="entities"
           :text-selected="textSelected"
-          @addedEntity="onEntityAdded" />
+          :class="allEntitiesInput.length !== 0 && custom ? 'input-custom-style' : ''"
+          @addedEntity="onEntityAdded"/>
         <b-field
           :message="errors.entities"
           type="is-danger" />
@@ -52,7 +53,7 @@
           v-model="intent"
           :data="optionsIntents"
           :placeholder="$t('webapp.example.intent')"
-          :max-height="custom ? '70px' : '110px'"
+          max-height="120px"
           dropdown-position="bottom"
           open-on-focus
           @input="intent = intentFormatters(intent)" />
@@ -166,7 +167,11 @@ export default {
 .icon {
   color: $color-grey-dark;
 }
-
+.input-custom-style{
+  height: 130px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .edit-sentence {
     width: 100%;
     margin: 0 1rem 1rem 0;
@@ -194,7 +199,7 @@ export default {
     }
   }
     &__options{
-    width: 30rem;
+    width: 40rem;
   }
 }
 </style>

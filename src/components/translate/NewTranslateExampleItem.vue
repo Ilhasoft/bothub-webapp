@@ -2,6 +2,7 @@
   <div class="translate-item">
     <translate-example-before
       v-bind="$props"
+      :invalid="translation && !translation.has_valid_entities"
       :open.sync="open"
       :selectable="!editing"
       :selected.sync="selected"
@@ -162,7 +163,10 @@ export default {
   },
   watch: {
     translationData() {
-      if (!this.translationData.text) return;
+      if (this.unchanged()) {
+        this.clearCache();
+        return;
+      }
       this.$emit('dispatchEvent', {
         event: 'onChange',
         value: {
@@ -200,6 +204,12 @@ export default {
       'deleteTranslationExternal',
       'getTranslationFromSentenceExternal',
     ]),
+    unchanged() {
+      if (!this.translation) return false;
+      if (!this.translationData) return true;
+      return this.translationData.text === this.translation.text
+            && entityEquals(this.translationData.entities || [], this.translation.entities || []);
+    },
     onSelectAll(value) {
       this.selected = value;
     },
@@ -219,18 +229,18 @@ export default {
     },
     async save() {
       try {
+        if (this.unchanged()) return;
         if (this.isEmpty) {
           if (!this.translation) return;
+          this.loadingTranslations = true;
           await this.actions.delete();
           this.clearCache();
           this.translation = null;
+          this.loadingTranslations = false;
         } else {
           this.loadingTranslations = true;
           let response = null;
           if (this.translation) {
-            if (this.translationData.text === this.translation.text
-            && entityEquals(this.translationData.entities, this.translation.entities)) return;
-
             response = await this.actions.update();
           } else {
             response = await this.actions.create();
@@ -283,7 +293,10 @@ export default {
         > * {
             width: 50%;
             height: 100%;
-            margin-right: 1rem;
+
+            &:not(:last-child) {
+              margin-right: 1rem;
+            }
         }
       &__error {
         border: 1px solid $color-border;

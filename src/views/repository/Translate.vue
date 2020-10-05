@@ -50,8 +50,13 @@
             <h1>{{ $t('webapp.translate.title_translate') }}</h1>
             <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
           </div>
-          <div
-            v-if="!!translate.to">
+          <auto-translate
+            v-if="repository"
+            :translate-to="translate.to"
+            :repository-uuid="repository.uuid"
+            @onTranslate="translating = true"
+            @onTranslateComplete="translating = false" />
+          <div v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
               :destroy-on-hide="false"
@@ -181,7 +186,7 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from} ${translate.to}-${translate.update}`"
+                  :key="`${translate.from}-${translate.to}-${translate.update}`"
                   :repository-uuid="repository.uuid"
                   :version="getSelectedVersion"
                   :language="repository.language"
@@ -194,7 +199,14 @@
                   :entities="repository.entities_list"
                   @queryStringFormated="onSearch($event)"/>
               </div>
+              <div
+                v-if="translating"
+                class="has-text-centered">
+                <loading />
+                <span> {{ $t('webapp.translate.auto_translate_progress') }} </span>
+              </div>
               <translate-list
+                v-if="!translating"
                 :repository-uuid="repository.uuid"
                 :query="query"
                 :from="repository.language"
@@ -204,15 +216,19 @@
                 @isLoadingContent="loadingList = $event"
                 @listPhrase="checkPhraseList($event)"/>
             </div>
+          </div>
+
+          <div v-show="!!translate.to">
             <train
               v-if="repository"
-              :key="trainUpdate"
+              ref="train"
               :show-button="repository.ready_for_train"
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
+              :update-on-load="false"
+              class="repository-translate__train"
               @statusUpdated="updateTrainingStatus($event)" />
-
             <hr>
 
             <div class="translate-description">
@@ -241,6 +257,7 @@
 
             </div>
           </div>
+
         </div>
         <authorization-request-notification
           v-else
@@ -278,7 +295,9 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import AutoTranslate from '@/components/translate/AutoTranslate';
 import Train from '@/components/repository/training/Train';
+import Loading from '@/components/shared/Loading';
 import Tour from '@/components/Tour';
 import {
   languageListToDict,
@@ -297,6 +316,8 @@ export default {
     AuthorizationRequestNotification,
     TranslationSentenceStatus,
     Tour,
+    AutoTranslate,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
@@ -325,7 +346,7 @@ export default {
       ],
       query: {},
       sentenceFilter: { key: null, query: null },
-      trainUpdate: false,
+      translating: false,
     };
   },
   computed: {
@@ -441,7 +462,7 @@ export default {
     examplesTranslated() {
       this.translate.update = !this.translate.update;
       if (this.update) clearTimeout(this.update);
-      this.update = setTimeout(() => { this.trainUpdate = !this.trainUpdate; }, 600);
+      this.update = setTimeout(() => { this.$refs.train.updateTrainingStatus(); }, 2000);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {
@@ -490,13 +511,16 @@ export default {
   justify-content: space-around;
   align-items: center;
 
+  &__train {
+    margin: 0 0 2.5rem 0;
+  }
+
   &__field {
     display: flex;
     justify-content: space-between;
-    padding: 0.25rem;
     width: 100%;
     &__item {
-      margin: 0.5rem;
+      margin: 0.5rem 0;
       width: 45%;
         &__label{
         font-weight: $font-weight-normal;
@@ -509,10 +533,7 @@ export default {
     color: $color-grey-dark;
   }
   &__list{
-    margin-left: 0.3rem;
   &__search {
-    margin: 0.5rem;
-
     &__status {
       margin: 3rem 0 4.4rem 0;
     }
@@ -586,8 +607,7 @@ export default {
   &__translateButtons{
     display: flex;
     width: 385px;
-    margin: 1rem 0.3rem;
-    margin-left: 0.8rem;
+    margin: 1rem 0;
     border-radius: 5px;
     justify-content: space-between;
   }
@@ -612,7 +632,6 @@ export default {
 }
 
 .translate-description{
-  margin-left: 0.8rem;
   margin-top: $between-subtitle-content;
   h1{
     font-size: 28px;

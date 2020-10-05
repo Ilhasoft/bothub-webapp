@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       active: this.initialData || 'all',
-      update: setTimeout(() => { this.getStatusData(); }, 1500),
+      update: setTimeout(() => { this.getStatusData(); }, 2000),
       statusData: {
         sentences: {
           key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
@@ -59,7 +59,7 @@ export default {
           key: 'translated',
           label: this.$t('webapp.translate.translated'),
           count: null,
-          query: { language: this.language, has_translation: true },
+          query: { language: this.language, has_translation_to: this.toLanguage },
         },
         not_translated: {
           key: 'not_translated',
@@ -71,7 +71,11 @@ export default {
           key: 'inconsistent',
           label: this.$t('webapp.translate.inconsistent'),
           count: null,
-          query: { language: this.language, has_invalid_entities: this.toLanguage },
+          query: {
+            language: this.language,
+            has_invalid_entities: this.toLanguage,
+            has_translation_to: this.toLanguage,
+          },
         },
       },
     };
