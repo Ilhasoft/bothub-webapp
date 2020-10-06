@@ -93,6 +93,9 @@ export default {
     querySchema() {
       this.updateQuery();
     },
+    sentenceFilter() {
+      this.updateQuery();
+    },
   },
   async mounted() {
     const { ownerNickname, slug, token } = this.$route.params;

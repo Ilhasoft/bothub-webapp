@@ -53,26 +53,25 @@ export default {
       update: null,
       statusData: {
         sentences: {
-          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
+          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { },
         },
         translated: {
           key: 'translated',
           label: this.$t('webapp.translate.translated'),
           count: null,
-          query: { language: this.language, has_translation_to: this.toLanguage },
+          query: { has_translation_to: this.toLanguage },
         },
         not_translated: {
           key: 'not_translated',
           label: this.$t('webapp.translate.not_translated'),
           count: null,
-          query: { language: this.language, has_not_translation_to: this.toLanguage },
+          query: { has_not_translation_to: this.toLanguage },
         },
         inconsistent: {
           key: 'inconsistent',
           label: this.$t('webapp.translate.inconsistent'),
           count: null,
           query: {
-            language: this.language,
             has_invalid_entities: this.toLanguage,
             has_translation_to: this.toLanguage,
           },
@@ -103,7 +102,8 @@ export default {
     ...mapActions(['searchExamples',
       'searchExamplesExternal']),
     onClick(key, query) {
-      this.$emit('search', { key, query });
+      const sendQuery = this.externalToken ? query : { language: this.language, ...query };
+      this.$emit('search', { key, query: sendQuery });
       this.active = key;
     },
     async getStatusData() {
@@ -130,7 +130,7 @@ export default {
         limit: 1,
         repositoryUuid: this.repositoryUuid,
         version: this.version,
-        query,
+        query: { language: this.language, ...query },
       });
     },
   },
