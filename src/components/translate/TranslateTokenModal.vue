@@ -109,6 +109,11 @@ export default {
           language: this.language,
         });
         this.loadTokens();
+      } catch (e) {
+        this.$buefy.toast.open({
+          message: this.$t('webapp.trainings.default_error'),
+          type: 'is-danger',
+        });
       } finally {
         this.loading = false;
       }
