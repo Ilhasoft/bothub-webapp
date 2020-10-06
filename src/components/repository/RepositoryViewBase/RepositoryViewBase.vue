@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="repository"
+        v-if="quickTest && repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -80,6 +80,10 @@ export default {
       type: String,
       default: null,
     },
+    quickTest: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -107,6 +111,7 @@ export default {
       return undefined;
     },
     requirementsCount() {
+      if (!this.repository.requirements_to_train) return 0;
       return Object
         .keys(this.repository.requirements_to_train)
         .reduce(
@@ -115,6 +120,7 @@ export default {
         );
     },
     warningsCount() {
+      if (!this.repository.languages_warnings) return 0;
       return Object
         .keys(this.repository.languages_warnings)
         .reduce(

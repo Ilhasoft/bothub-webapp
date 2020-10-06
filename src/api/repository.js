@@ -192,6 +192,7 @@ export default {
     const queryString = qs.stringify({
       repository_uuid: repositoryUUID,
       repository_version: repositoryVersion,
+      type_processing: 0,
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },

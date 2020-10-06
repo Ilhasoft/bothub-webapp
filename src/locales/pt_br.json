@@ -24,7 +24,8 @@
       "items_total": "{n} item no total | {n} itens no total",
       "type_here": "Digite aqui...",
       "support": "Ajuda do Bothub",
-      "search_bots": "Procurar inteligências"
+      "search_bots": "Procurar inteligências",
+      "copied": "Conteúdo copiado para a área de transferência"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -235,6 +236,12 @@
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
       "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
     },
+    "integration":{
+      "title": "Integrações do Bothub",
+      "description": "Faça uma requesição HTTP para o serviço NLP, seguindo o exemplo abaixo",
+      "copy": "Token copiado",
+      "my_user":"Meu usuário"
+    },
     "intent":{
       "title": "Intenção",
       "description": "Essa intenção contém {n} frase | Essa intenção contém {n} frases.",
@@ -384,7 +391,18 @@
       "not_translated": "Não traduzidas",
       "inconsistent": "Inconsistentes",
       "save_all": "Salvar todas nesta página",
-      "select_all": "Selecionar todas nesta página"
+      "select_all": "Selecionar todas nesta página",
+      "auto_translate": "Tradução automática",
+      "auto_translate_progress": "Tradução automática em progresso",
+      "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?",
+      "auto_percentage": "{progress}% da tradução concluída",
+      "unsupported": "Idioma não está disponível para tradução automática",
+      "share_title": "Compartilhar link para tradução",
+      "share_subtitle": "Qualquer pessoa com este link poderá editar essa tradução.",
+      "create_new_token": "Gerar novo link",
+      "delete_confirm": "Apagar definitivamente todas as traduções selecionadas?",
+      "default_error": "Algo de errado ocorreu.",
+      "ok": "Ok"
     },
     "orgs": {
       "owner": "Pertence a",

@@ -14,7 +14,7 @@
           ref="accordion"
           :pending-example="true"
           :entities="getLogData.entities"
-          :intent-to-edit="getLogData.intent"
+          :intent-to-edit="info.intent.name"
           :text-to-edit="getLogData.text"
           :sentence-id="logData.id"
           :language-edit="getLogData.language"
@@ -106,7 +106,7 @@ export default {
   methods: {
     initInputValues() {
       this.inputValues.text = this.getLogData.text;
-      this.inputValues.intent = this.getLogData.intent;
+      this.inputValues.intent = this.info.intent.name;
       this.inputValues.entities = this.getLogData.text;
     },
     addIntent() {
@@ -132,11 +132,13 @@ export default {
   align-items: center;
 
   &__content{
-    width: $size-large + 50rem;
+    min-width: $size-large + 50rem;
     min-height: $size-large + 23rem;
 
     &__container{
-      overflow-y: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
       &__footer{
@@ -146,8 +148,8 @@ export default {
 
       }
   }
-
 }
+
 .button{
     font-weight: bold;
 }

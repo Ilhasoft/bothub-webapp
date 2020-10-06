@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TestView.vue renders correctly 1`] = `
-<repository-view-base-stub>
+<repository-view-base-stub quicktest="true">
   <!---->
   <!---->
 </repository-view-base-stub>

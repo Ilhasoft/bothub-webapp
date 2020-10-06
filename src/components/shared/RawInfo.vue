@@ -43,7 +43,7 @@ export default {
     copyText() {
       navigator.clipboard.writeText(this.text);
       this.$buefy.toast.open({
-        message: 'Json copied',
+        message: this.$t('webapp.layout.copied'),
         type: 'is-success',
       });
     },

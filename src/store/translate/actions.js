@@ -39,5 +39,19 @@ export default {
   }) {
     return translate.importTranslate(repositoryUuid, versionUUID, formData);
   },
-
+  async getAutoTranslateProgress(store, { repositoryUUID, repositoryVersion }) {
+    return translate.autoTranslateStatus(repositoryUUID, repositoryVersion);
+  },
+  async autoTranslate(store, { repositoryUUID, repositoryVersion, targetLanguage }) {
+    return translate.auto(repositoryUUID, repositoryVersion, targetLanguage);
+  },
+  createExternalToken(store, { repositoryVersion, language }) {
+    return translate.createExternalToken(repositoryVersion, language);
+  },
+  getExternalTokens(store, { repositoryUuid, limit = 12 }) {
+    return translate.getExternalTokens(repositoryUuid, limit);
+  },
+  deleteExternalToken(store, { uuid }) {
+    return translate.deleteExternalToken(uuid);
+  },
 };

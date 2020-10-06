@@ -22,6 +22,10 @@ export default {
   name: 'TranslationSentenceStatus',
   components: { NumbersCard },
   props: {
+    externalToken: {
+      type: String,
+      default: null,
+    },
     repositoryUuid: {
       type: String,
       default: null,
@@ -46,29 +50,28 @@ export default {
   data() {
     return {
       active: this.initialData || 'all',
-      update: setTimeout(() => { this.getStatusData(); }, 2000),
+      update: null,
       statusData: {
         sentences: {
-          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { language: this.language },
+          key: 'all', label: this.$t('webapp.translate.sentences'), count: null, query: { },
         },
         translated: {
           key: 'translated',
           label: this.$t('webapp.translate.translated'),
           count: null,
-          query: { language: this.language, has_translation_to: this.toLanguage },
+          query: { has_translation_to: this.toLanguage },
         },
         not_translated: {
           key: 'not_translated',
           label: this.$t('webapp.translate.not_translated'),
           count: null,
-          query: { language: this.language, has_not_translation_to: this.toLanguage },
+          query: { has_not_translation_to: this.toLanguage },
         },
         inconsistent: {
           key: 'inconsistent',
           label: this.$t('webapp.translate.inconsistent'),
           count: null,
           query: {
-            language: this.language,
             has_invalid_entities: this.toLanguage,
             has_translation_to: this.toLanguage,
           },
@@ -89,30 +92,45 @@ export default {
       this.getStatusData();
     },
   },
+  mounted() {
+    this.update = setTimeout(() => { this.getStatusData(); }, 5);
+  },
   beforeDestroy() {
     clearTimeout(this.update);
   },
   methods: {
-    ...mapActions(['searchExamples']),
+    ...mapActions(['searchExamples',
+      'searchExamplesExternal']),
     onClick(key, query) {
-      this.$emit('search', { key, query });
+      const sendQuery = this.externalToken ? query : { language: this.language, ...query };
+      this.$emit('search', { key, query: sendQuery });
       this.active = key;
     },
     async getStatusData() {
-      if (!this.repositoryUuid || !this.version) return;
+      if (!(this.externalToken || (this.repositoryUuid && this.version))) return;
       Object.entries(this.statusData).forEach(([key, value]) => {
         try {
-          this.searchExamples({
-            limit: 1,
-            repositoryUuid: this.repositoryUuid,
-            version: this.version,
-            query: value.query,
-          })
+          this.searchExamplesAction(value.query)
             .then(list => list.updateItems(1)
               .then(() => { this.statusData[key].count = list.total; }));
         } catch (e) {
           this.statusData[key].count = null;
         }
+      });
+    },
+    searchExamplesAction(query) {
+      if (this.externalToken) {
+        return this.searchExamplesExternal({
+          limit: 1,
+          token: this.externalToken,
+          query,
+        });
+      }
+      return this.searchExamples({
+        limit: 1,
+        repositoryUuid: this.repositoryUuid,
+        version: this.version,
+        query: { language: this.language, ...query },
       });
     },
   },
