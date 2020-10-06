@@ -50,6 +50,12 @@
             <h1>{{ $t('webapp.translate.title_translate') }}</h1>
             <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
           </div>
+          <auto-translate
+            v-if="repository && repository.authorization.can_translate"
+            :translate-to="translate.to"
+            :repository-uuid="repository.uuid"
+            @onTranslate="translating = true"
+            @onTranslateComplete="translating = false" />
           <div v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
@@ -193,7 +199,14 @@
                   :entities="repository.entities"
                   @queryStringFormated="onSearch($event)"/>
               </div>
+              <div
+                v-if="translating"
+                class="has-text-centered">
+                <loading />
+                <span> {{ $t('webapp.translate.auto_translate_progress') }} </span>
+              </div>
               <translate-list
+                v-if="!translating"
                 :repository="repository"
                 :query="query"
                 :from="repository.language"
@@ -282,7 +295,9 @@ import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import AutoTranslate from '@/components/translate/AutoTranslate';
 import Train from '@/components/repository/training/Train';
+import Loading from '@/components/shared/Loading';
 import Tour from '@/components/Tour';
 import {
   languageListToDict,
@@ -301,6 +316,8 @@ export default {
     AuthorizationRequestNotification,
     TranslationSentenceStatus,
     Tour,
+    AutoTranslate,
+    Loading,
   },
   extends: RepositoryBase,
   data() {
@@ -329,6 +346,7 @@ export default {
       ],
       query: {},
       sentenceFilter: { key: null, query: null },
+      translating: false,
     };
   },
   computed: {

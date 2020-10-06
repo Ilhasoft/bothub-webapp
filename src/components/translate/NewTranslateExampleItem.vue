@@ -179,9 +179,11 @@ export default {
         if (this.unchanged()) return;
         if (this.isEmpty) {
           if (!this.translation) return;
+          this.loadingTranslations = true;
           await this.deleteTranslation({ translationId: this.translation.id });
           this.clearCache();
           this.translation = null;
+          this.loadingTranslations = false;
         } else {
           this.loadingTranslations = true;
           let response = null;
