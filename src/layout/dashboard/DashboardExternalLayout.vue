@@ -7,7 +7,7 @@
           <div class="dashboard-layout__main-panel__logo clickable" />
         </router-link>
         <router-link
-          :to="`/dashboard/${getCurrentRepository.owner__nickname}/${getCurrentRepository.name}`">
+          :to="`/dashboard/${ownerNickname}/${getExternalRepository.name}`">
           <div
             v-show="hasLoaded"
             class="dashboard-layout__main-panel__header__right">
@@ -24,11 +24,11 @@
                 <p
                   class="
                dashboard-layout__main-panel__header__right__wrapper__title">
-                  {{ getCurrentRepository.name }}
+                  {{ getExternalRepository.name }}
                 </p>
               </div>
               <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
-                <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
+                <b class="has-text-primary">{{ ownerNickname }}</b>
               </span>
             </div>
           </div>
@@ -36,10 +36,6 @@
       </div>
       <router-view />
     </div>
-    <tour
-      v-if="getFinalModal && getFinalMessage !== 'true'"
-      :step-count="1"
-      name="tutorial_button" />
   </div>
 
 </template>
@@ -48,10 +44,10 @@
 <script>
 
 import CustomIcon from '@/components/shared/CustomIcon';
-import { mapActions, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: 'DashboardLayout',
+  name: 'DashboardExternalLayout',
   components: {
     CustomIcon,
   },
@@ -64,26 +60,16 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getCurrentRepository',
-      'myProfile',
-      'authenticated',
-      'versionEnabled',
-      'getFinalModal',
-      'getFinalMessage',
+      'getExternalRepository',
     ]),
+    ownerNickname() {
+      if (!this.getExternalRepository.owner) return null;
+      return this.getExternalRepository.owner.nickname;
+    },
     hasLoaded() {
-      if (this.getCurrentRepository.name) return true;
+      if (this.getExternalRepository.name) return true;
       return false;
     },
-    tutorialEnabled() {
-      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
-    },
-  },
-  methods: {
-    ...mapActions([
-      'logout',
-      'setTutorialMenuActive',
-    ]),
   },
 };
 </script>

@@ -41,6 +41,7 @@ import TranslateList from '@/components/translate/TranslateList';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import AutoTranslate from '@/components/translate/AutoTranslate';
+import ExternalRepository from '@/models/externalRepository';
 import { mapActions } from 'vuex';
 
 export default {
@@ -80,12 +81,21 @@ export default {
     },
   },
   async mounted() {
-    try {
-      const { data } = await this.getExternalInfo({ token: this.token });
-      this.repository = data;
-    } catch (e) {
-      this.errorCode = e.response.status;
+    const { ownerNickname, slug, token } = this.$route.params;
+
+    if (!ownerNickname || !slug) {
+      this.repository = null;
+      return this.repository;
     }
+
+    this.repository = new ExternalRepository({
+      uuid: token, owner: { nickname: ownerNickname }, slug,
+    });
+
+    this.repository.on('fetch', this.onReady);
+
+    await this.repository.fetch();
+    return this.repository;
   },
   methods: {
     ...mapActions(['getExternalInfo']),
@@ -97,6 +107,15 @@ export default {
     },
     onFilter({ key, query }) {
       this.sentenceFilter = { key, query };
+    },
+    onReady({ error }) {
+      if (error) {
+        const { response: { response } } = error;
+        if (response) {
+          const { status } = response;
+          this.errorCode = status;
+        }
+      }
     },
     updateQuery() {
       this.query = {

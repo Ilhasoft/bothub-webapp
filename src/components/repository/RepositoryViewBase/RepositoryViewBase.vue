@@ -111,6 +111,7 @@ export default {
       return undefined;
     },
     requirementsCount() {
+      if (!this.repository.requirements_to_train) return 0;
       return Object
         .keys(this.repository.requirements_to_train)
         .reduce(
@@ -119,6 +120,7 @@ export default {
         );
     },
     warningsCount() {
+      if (!this.repository.languages_warnings) return 0;
       return Object
         .keys(this.repository.languages_warnings)
         .reduce(
