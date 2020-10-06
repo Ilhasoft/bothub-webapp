@@ -414,36 +414,6 @@ export default {
       'importTranslations',
       'createExternalToken',
     ]),
-    async onSendToTranslators() {
-      this.loadingToken = true;
-      try {
-      // const response = await this.createExternalToken({
-        //   repositoryVersion: this.getSelectedVersion,
-        //   language: this.translate.to,
-        // });
-        // const { data } = response;
-        this.$buefy.modal.open({
-          component: TranslateTokenModal,
-          props: {
-            urlGenerator: (token) => {
-              const route = this.$router.resolve({
-                name: 'repository-translate-external',
-                params: {
-                  ownerNickname: this.repository.owner__nickname,
-                  slug: this.repository.slug,
-                  token,
-                },
-              }).href;
-              return `${window.location.origin}${route}`;
-            },
-            token: 'e7d5e26d-4002-4618-8ed4-1e8c9d1949ff',
-          },
-          width: 500,
-        });
-      } finally {
-        this.loadingToken = false;
-      }
-    },
     updateTrainingStatus(trainStatus) {
       Object.assign(this.repository, trainStatus);
     },
