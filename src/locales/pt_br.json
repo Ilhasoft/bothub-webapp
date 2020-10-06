@@ -394,6 +394,7 @@
       "share_title": "Compartilhar link para tradução",
       "share_subtitle": "Qualquer pessoa com este link poderá editar essa tradução.",
       "create_new_token": "Gerar novo link",
+      "delete_confirm": "Apagar definitivamente todas as traduções selecionadas?",
       "ok": "Ok"
     },
     "orgs": {

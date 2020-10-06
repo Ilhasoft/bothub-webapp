@@ -131,7 +131,17 @@ export default {
       this.selectAll = false;
     },
     deleteAll() {
-      this.$root.$emit('deleteAll');
+      this.$buefy.dialog.alert({
+        message: this.$t('webapp.translate.delete_confirm'),
+        confirmText: this.$t('webapp.home.delete'),
+        cancelText: this.$t('webapp.home.cancel'),
+        canCancel: true,
+        closeOnConfirm: true,
+        type: 'is-danger',
+        onConfirm: async () => {
+          this.$root.$emit('deleteAll');
+        },
+      });
     },
     async updateList() {
       if (this.externalToken) {

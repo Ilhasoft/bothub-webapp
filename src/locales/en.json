@@ -392,6 +392,7 @@
       "share_title": "Share link for translation",
       "share_subtitle": "Anyone on the Internet with this link will be able to edit this translation.",
       "create_new_token": "Generate a new link",
+      "delete_confirm": "Delete all selected translations?",
       "ok": "Ok"
     },
     "orgs": {
