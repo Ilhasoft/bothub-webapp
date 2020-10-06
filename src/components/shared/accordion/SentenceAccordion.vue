@@ -13,6 +13,7 @@
         'border-danger': type === 'is-danger',
         'expander__trigger--pending': pendingExample,
         'is-light': isLight,
+        'cursor-pointer': customAccordion,
         'border': !type && customAccordion,
       }"
       @click="toggleAccordion()">
@@ -173,7 +174,6 @@ export default {
       display: flex;
       padding: .7rem;
       margin-top: 0.5rem;
-      cursor: pointer;
 
       &--slim {
         padding: .35rem;
@@ -221,6 +221,9 @@ export default {
         border-radius: 4px;
       }
     }
+  }
+  .cursor-pointer{
+    cursor: pointer;
   }
 
   .is-light {
