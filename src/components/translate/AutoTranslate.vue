@@ -129,7 +129,7 @@ export default {
           || translateStatus.status === 1) {
           this.checkProgress(true);
         }
-      }, 500);
+      }, 60000);
     },
   },
 };
