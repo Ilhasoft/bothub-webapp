@@ -491,8 +491,8 @@ export default {
     updateQuery() {
       this.query = {
         ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
-        ...this.querySchema.entity ? { intent: this.querySchema.entity } : {},
-        ...this.querySchema.label ? { intent: this.querySchema.label } : {},
+        ...this.querySchema.entity ? { entity: this.querySchema.entity } : {},
+        ...this.querySchema.search ? { search: this.querySchema.search } : {},
         ...this.sentenceFilter.query,
       };
     },
