@@ -2,6 +2,7 @@
   <sentence-accordion
     :open.sync="isOpen"
     :custom-accordion="!custom"
+    :class="custom ? 'custom-accordion' : ''"
     align="top">
     <language-badge
       slot="check"
@@ -168,9 +169,8 @@ export default {
   color: $color-grey-dark;
 }
 .input-custom-style{
-  height: 130px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: 150px;
+  max-width: 100px;
 }
 .edit-sentence {
     width: 100%;
@@ -201,5 +201,8 @@ export default {
     &__options{
     width: 40rem;
   }
+}
+.custom-accordion{
+  max-width: 100%;
 }
 </style>
