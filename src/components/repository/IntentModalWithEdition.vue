@@ -132,11 +132,10 @@ export default {
   align-items: center;
 
   &__content{
-    width: $size-large + 50rem;
+    min-width: $size-large + 50rem;
     min-height: $size-large + 23rem;
 
     &__container{
-      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
