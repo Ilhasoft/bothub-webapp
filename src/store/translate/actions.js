@@ -45,7 +45,13 @@ export default {
   async autoTranslate(store, { repositoryUUID, repositoryVersion, targetLanguage }) {
     return translate.auto(repositoryUUID, repositoryVersion, targetLanguage);
   },
-  getExternalToken(store, { repositoryVersion, language }) {
-    return translate.getExternalToken(repositoryVersion, language);
+  createExternalToken(store, { repositoryVersion, language }) {
+    return translate.createExternalToken(repositoryVersion, language);
+  },
+  getExternalTokens(store, { repositoryUuid, limit = 12 }) {
+    return translate.getExternalTokens(repositoryUuid, limit);
+  },
+  deleteExternalToken(store, { uuid }) {
+    return translate.deleteExternalToken(uuid);
   },
 };

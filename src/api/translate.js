@@ -77,8 +77,14 @@ export default {
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
-  getExternalToken(repositoryVersion, language) {
+  createExternalToken(repositoryVersion, language) {
     return request.$http.post('/v2/repository/translator/control/',
       { language, repository_version: repositoryVersion });
+  },
+  deleteExternalToken(uuid) {
+    return request.$http.delete(`/v2/repository/translator/control/${uuid}/`);
+  },
+  getExternalTokens(repositoryUUID, limit = 12) {
+    return new utils.Page('/v2/repository/translator/control/', limit, { repository: repositoryUUID });
   },
 };

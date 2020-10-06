@@ -63,7 +63,7 @@
                 class="repository-translate__header__button"
                 type="is-primary"
                 label="Send to translators"
-                @click="onSendToTranslators()" />
+                @click="tokenModalOpen = true" />
             </div>
           </div>
           <div v-if="!!translate.to">
@@ -284,7 +284,13 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <!-- <tour
+    <translate-token-modal
+      v-if="repository"
+      :open.sync="tokenModalOpen"
+      :language="translate.to"
+      :url-generator="externalUrlGenerator"
+      :repository-uuid="repository.uuid" />
+      <!-- <tour
       v-if="activeTutorial === 'translate'"
       :step-count="1"
       :next-event="eventClick"
@@ -328,6 +334,7 @@ export default {
     Tour,
     AutoTranslate,
     Loading,
+    TranslateTokenModal,
   },
   extends: RepositoryBase,
   data() {
@@ -357,6 +364,18 @@ export default {
       query: {},
       sentenceFilter: { key: null, query: null },
       translating: false,
+      tokenModalOpen: false,
+      externalUrlGenerator: (token) => {
+        const route = this.$router.resolve({
+          name: 'repository-translate-external',
+          params: {
+            ownerNickname: this.repository.owner__nickname,
+            slug: this.repository.slug,
+            token,
+          },
+        }).href;
+        return `${window.location.origin}${route}`;
+      },
     };
   },
   computed: {
@@ -392,12 +411,12 @@ export default {
       'getRepository',
       'exportTranslations',
       'importTranslations',
-      'getExternalToken',
+      'createExternalToken',
     ]),
     async onSendToTranslators() {
       this.loadingToken = true;
       try {
-      // const response = await this.getExternalToken({
+      // const response = await this.createExternalToken({
         //   repositoryVersion: this.getSelectedVersion,
         //   language: this.translate.to,
         // });
