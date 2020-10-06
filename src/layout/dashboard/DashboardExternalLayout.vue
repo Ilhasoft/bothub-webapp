@@ -7,7 +7,7 @@
           <div class="dashboard-layout__main-panel__logo clickable" />
         </router-link>
         <router-link
-          :to="`/dashboard/${ownerNickname}/${getExternalRepository.name}`">
+          :to="`/dashboard/${ownerNickname}/${getExternalRepository.slug}`">
           <div
             v-show="hasLoaded"
             class="dashboard-layout__main-panel__header__right">
