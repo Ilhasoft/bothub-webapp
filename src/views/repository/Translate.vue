@@ -552,7 +552,7 @@ export default {
       this.query = {
         ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
         ...this.querySchema.entity ? { entity: this.querySchema.entity } : {},
-        ...this.querySchema.search ? { search: this.querySchema.label } : {},
+        ...this.querySchema.search ? { search: this.querySchema.search } : {},
         ...this.sentenceFilter.query,
       };
     },

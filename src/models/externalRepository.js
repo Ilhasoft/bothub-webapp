@@ -45,7 +45,7 @@ class ExternalRepository extends ModelBase {
       categories: Array,
       categories_list: Array,
       intents: Array,
-      intents_list: Array,
+      intents_list: Object,
       entities_list: Array,
       groups: Array,
       target_language: String,

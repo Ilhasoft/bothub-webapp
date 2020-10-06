@@ -22,8 +22,8 @@
           class="repository-translate__list__search__status"
           @search="onFilter"/>
         <filter-examples
-          :intents="[]"
-          :entities="[]"
+          :intents="repository.intents_list"
+          :entities="repository.entities"
           @queryStringFormated="onSearch($event)"/>
       </div>
       <translate-list
