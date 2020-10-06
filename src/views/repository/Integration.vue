@@ -172,7 +172,7 @@ export default {
           });
         }
         const { user__nickname: userNickname, uuid } = this.repository.authorization;
-        const profileAuthorization = `${userNickname} (My user) - Bearer ${uuid}`;
+        const profileAuthorization = `${userNickname} (${this.$t('webapp.integration.my_user')}) - Bearer ${uuid}`;
         authorization.unshift(profileAuthorization);
         return authorization;
       }
@@ -190,7 +190,7 @@ export default {
     profileToken() {
       if (this.profileToken !== undefined) {
         const { user__nickname: userNickname, uuid } = this.repository.authorization;
-        const profileAuthorization = `${userNickname} (My user) - Bearer ${uuid}`;
+        const profileAuthorization = `${userNickname} (${this.$t('webapp.integration.my_user')}) - Bearer ${uuid}`;
         this.profileAuth = profileAuthorization;
       }
     },
@@ -212,7 +212,6 @@ export default {
 @import '~@/assets/scss/variables.scss';
 
 .repository-analyze-text {
-  padding: 1rem;
 
   &__title{
     margin-bottom: $between-subtitle-content;
@@ -233,11 +232,6 @@ export default {
 
         strong {
           font-size: 18px;
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-          -khtml-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
           user-select: none;
         }
 

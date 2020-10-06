@@ -238,7 +238,8 @@
     "integration":{
       "title": "Bothub integrations",
       "description": "Make an HTTP request to the NLP service, following the example below",
-      "copy": "Token Copied"
+      "copy": "Token Copied",
+      "my_user":"My user"
     },
     "intent":{
       "title": "Intent",
