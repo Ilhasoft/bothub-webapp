@@ -185,7 +185,7 @@ export default {
       this.emitEntity(this.entity);
     },
     language: _.debounce(function emitLanguage(value) {
-      this.$emit('queryStringFormated', { language: value });
+      this.$emit('querystringformatted', { language: value });
     }, 500),
     versionName(value) {
       const versionName = formatters.versionItemKey()(value);
@@ -198,16 +198,16 @@ export default {
   },
   methods: {
     emitText: _.debounce(function emitIntent(text) {
-      this.$emit('queryStringFormated', { search: text });
+      this.$emit('querystringformatted', { search: text });
     }, 500),
     emitIntent: _.debounce(function emitIntent(intent) {
-      this.$emit('queryStringFormated', { intent });
+      this.$emit('querystringformatted', { intent });
     }, 500),
     emitEntity: _.debounce(function emitEntity(entity) {
-      this.$emit('queryStringFormated', { entity });
+      this.$emit('querystringformatted', { entity });
     }, 500),
     emitVersion: _.debounce(function emitVersion(version) {
-      this.$emit('queryStringFormated', { repository_version_name: version });
+      this.$emit('querystringformatted', { repository_version_name: version });
     }, 500),
   },
 };

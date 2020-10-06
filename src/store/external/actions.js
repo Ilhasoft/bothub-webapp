@@ -32,6 +32,9 @@ export default {
   async getExternalInfo(store, { token }) {
     return external.getExternalInfo(token);
   },
+  autoTranslateExternal(store, { token }) {
+    return external.autoTranslate(token);
+  },
   setExternalRepository({ commit }, payload) {
     commit('setExternalRepository', payload);
   },

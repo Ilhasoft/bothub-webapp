@@ -44,4 +44,7 @@ export default {
       `/v2/repository/translator/info/${token}/`,
     );
   },
+  autoTranslate(token) {
+    return request.$http(token).post('v2/repository/translator/translation/auto_translation/');
+  },
 };

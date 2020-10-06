@@ -54,6 +54,7 @@
             <div class="repository-translate__header__buttons">
               <auto-translate
                 v-if="repository && repository.authorization.can_translate"
+                :version="getSelectedVersion"
                 :translate-to="translate.to"
                 :repository-uuid="repository.uuid"
                 @onTranslate="translating = true"
@@ -207,7 +208,7 @@
                 <filter-examples
                   :intents="repository.intents_list"
                   :entities="repository.entities"
-                  @queryStringFormated="onSearch($event)"/>
+                  @querystringformatted="onSearch($event)"/>
               </div>
               <div
                 v-if="translating"
@@ -549,12 +550,16 @@ export default {
       this.querySchema = { ...value };
     },
     updateQuery() {
-      this.query = {
-        ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
-        ...this.querySchema.entity ? { entity: this.querySchema.entity } : {},
-        ...this.querySchema.search ? { search: this.querySchema.search } : {},
-        ...this.sentenceFilter.query,
-      };
+      if (!this.querySchema.intent) {
+        delete this.querySchema.intent;
+      }
+      if (!this.querySchema.entity) {
+        delete this.querySchema.entity;
+      }
+      if (!this.querySchema.search) {
+        delete this.querySchema.search;
+      }
+      this.query = { ...this.querySchema, ...this.sentenceFilter.query };
     },
   },
 };

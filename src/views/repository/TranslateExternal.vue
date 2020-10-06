@@ -12,8 +12,12 @@
     <div class="repository-translate__list">
       <div class="repository-translate__list__search">
         <auto-translate
-          :token="token"
-          :translate-to="repository.target_language"/>
+          :external-token="token"
+          :repository-uuid="repository.uuid"
+          :translate-to="repository.target_language"
+          :version="repository.repository_version_id"
+          @onTranslate="translating = true"
+          @onTranslateComplete="translating = false"/>
         <translation-sentence-status
           :key="translateUpdate"
           :external-token="token"
@@ -24,9 +28,16 @@
         <filter-examples
           :intents="repository.intents_list"
           :entities="repository.entities"
-          @queryStringFormated="onSearch($event)"/>
+          @querystringformatted="onSearch($event)"/>
+      </div>
+      <div
+        v-if="translating"
+        class="has-text-centered">
+        <loading />
+        <span> {{ $t('webapp.translate.auto_translate_progress') }} </span>
       </div>
       <translate-list
+        v-else
         :external-token="token"
         :query="query"
         @translated="examplesTranslated()"
@@ -68,6 +79,7 @@ export default {
       sentenceFilter: { key: null, query: null },
       repository: null,
       errorCode: null,
+      translating: false,
     };
   },
   computed: {
@@ -89,7 +101,7 @@ export default {
     }
 
     this.repository = new ExternalRepository({
-      uuid: token, owner: { nickname: ownerNickname }, slug,
+      token, owner: { nickname: ownerNickname }, slug,
     });
 
     this.repository.on('fetch', this.onReady);
@@ -118,12 +130,16 @@ export default {
       }
     },
     updateQuery() {
-      this.query = {
-        ...this.querySchema.intent ? { intent: this.querySchema.intent } : {},
-        ...this.querySchema.entity ? { entity: this.querySchema.entity } : {},
-        ...this.querySchema.search ? { search: this.querySchema.search } : {},
-        ...this.sentenceFilter.query,
-      };
+      if (!this.querySchema.intent) {
+        delete this.querySchema.intent;
+      }
+      if (!this.querySchema.entity) {
+        delete this.querySchema.entity;
+      }
+      if (!this.querySchema.search) {
+        delete this.querySchema.search;
+      }
+      this.query = { ...this.querySchema, ...this.sentenceFilter.query };
     },
   },
 };

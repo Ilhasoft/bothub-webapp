@@ -9,7 +9,7 @@
     <filter-evaluate-example
       :intents="repository.intents_list"
       :entities="repository.entities"
-      @queryStringFormated="onSearch($event)"/>
+      @querystringformatted="onSearch($event)"/>
     <evaluate-example-list
       :query="query"
       :update="update"

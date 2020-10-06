@@ -4,7 +4,7 @@ import ModelBase from './base';
 
 class ExternalRepository extends ModelBase {
   getRequest(config) {
-    const token = this.get('uuid');
+    const token = this.get('token');
     return super.getRequestExternal(
       Object.assign(
         {},
@@ -33,6 +33,7 @@ class ExternalRepository extends ModelBase {
       groups: [],
       target_language: null,
       repository_version_id: null,
+      token: null,
     };
   }
 
@@ -50,11 +51,12 @@ class ExternalRepository extends ModelBase {
       groups: Array,
       target_language: String,
       repository_version_id: Number,
+      token: String,
     };
   }
 
   routes() {
-    const route = '/v2/repository/translator/info/{uuid}/';
+    const route = '/v2/repository/translator/info/{token}/';
 
     return {
       fetch: route,
