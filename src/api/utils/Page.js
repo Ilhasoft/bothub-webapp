@@ -1,14 +1,16 @@
 import qs from 'query-string';
 import request from '../request';
+import requestExternal from '../requestExternal';
 
 export default class Page {
-  constructor(baseUrl, perPage, params = {}) {
+  constructor(baseUrl, perPage, params = {}, token = null) {
     this.total = 0;
     this.baseUrl = baseUrl;
     this.perPage = perPage;
     this.loading = false;
     this.params = params;
     this.items = [];
+    this.token = token;
   }
 
   async updateItems(page) {
@@ -54,7 +56,7 @@ export default class Page {
       offset: (page - 1) * this.perPage,
       ...this.params,
     });
-    return request.$http.get(`${this.baseUrl}?${queryString}`);
+    return this.pageRequest.get(`${this.baseUrl}?${queryString}`);
   }
 
   get empty() {
@@ -66,5 +68,10 @@ export default class Page {
     const updatedItems = [...items, ...response.data.results];
     if (response.data.next === null) { return updatedItems; }
     return this.fetchAll(updatedItems, startingPage + 1);
+  }
+
+  get pageRequest() {
+    if (this.token) return requestExternal.$http(this.token);
+    return request.$http;
   }
 }

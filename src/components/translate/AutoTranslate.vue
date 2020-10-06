@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import ProgressBar from '@/components/shared/ProgressBar';
 import { languageListToDict } from '@/utils';
 
@@ -34,6 +34,14 @@ export default {
       type: String,
       default: null,
     },
+    externalToken: {
+      type: String,
+      default: null,
+    },
+    version: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -42,9 +50,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters({
-      version: 'getSelectedVersion',
-    }),
     verboseLanguage() {
       if (!this.translateTo) return '';
       return languageListToDict([this.translateTo])[this.translateTo];
@@ -59,8 +64,17 @@ export default {
   methods: {
     ...mapActions([
       'autoTranslate',
+      'autoTranslateExternal',
       'getAutoTranslateProgress',
     ]),
+    autoTranslateAction() {
+      if (this.externalToken) return this.autoTranslateExternal({ token: this.externalToken });
+      return this.autoTranslate({
+        repositoryUUID: this.repositoryUuid,
+        repositoryVersion: this.version,
+        targetLanguage: this.translateTo,
+      });
+    },
     onClick() {
       this.$buefy.dialog.confirm({
         message: this.$t('webapp.translate.auto_translate_confirm', { language: this.verboseLanguage }),
@@ -74,11 +88,7 @@ export default {
     async sendAutoTranslate() {
       this.loading = true;
       try {
-        await this.autoTranslate({
-          repositoryUUID: this.repositoryUuid,
-          repositoryVersion: this.version,
-          targetLanguage: this.translateTo,
-        });
+        await this.autoTranslateAction();
       } catch (e) {
         this.$buefy.toast.open({
           message: this.$t(e.response.status === 500 ? 'webapp.translate.unsupported' : 'webapp.settings.default_error'),

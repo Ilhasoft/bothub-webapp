@@ -24,7 +24,8 @@
       "items_total": "{n} item no total | {n} itens no total",
       "type_here": "Digite aqui...",
       "support": "Ajuda do Bothub",
-      "search_bots": "Procurar inteligências"
+      "search_bots": "Procurar inteligências",
+      "copied": "Conteúdo copiado para a área de transferência"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -326,9 +327,7 @@
       "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
-      "auto_percentage": "{progress}% da tradução concluída",
-      "unsupported": "Idioma não está disponível para tradução automática"
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "train_modal": {
       "training_status": "Status do Treinamento",
@@ -395,7 +394,15 @@
       "select_all": "Selecionar todas nesta página",
       "auto_translate": "Tradução automática",
       "auto_translate_progress": "Tradução automática em progresso",
-      "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?"
+      "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?",
+      "auto_percentage": "{progress}% da tradução concluída",
+      "unsupported": "Idioma não está disponível para tradução automática",
+      "share_title": "Compartilhar link para tradução",
+      "share_subtitle": "Qualquer pessoa com este link poderá editar essa tradução.",
+      "create_new_token": "Gerar novo link",
+      "delete_confirm": "Apagar definitivamente todas as traduções selecionadas?",
+      "default_error": "Algo de errado ocorreu.",
+      "ok": "Ok"
     },
     "orgs": {
       "owner": "Pertence a",

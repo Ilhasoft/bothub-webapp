@@ -29,25 +29,25 @@ describe('TestView.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  test('emits queryStringFormated event when intent data changes', () => {
+  test('emits querystringformatted event when intent data changes', () => {
     wrapper.vm.intent = 'like';
 
     clock.tick(500);
 
-    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
+    expect(wrapper.emitted('querystringformatted')).toBeDefined();
   });
 
-  test('emits queryStringFormated event when entity changes', () => {
+  test('emits querystringformatted event when entity changes', () => {
     wrapper.vm.entity = 'cat';
 
     clock.tick(500);
 
-    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
+    expect(wrapper.emitted('querystringformatted')).toBeDefined();
   });
 
-  test('emits queryStringFormated event when text changes', () => {
+  test('emits querystringformatted event when text changes', () => {
     wrapper.vm.text = 'i like to eat sushi';
     clock.tick(500);
-    expect(wrapper.emitted('queryStringFormated')).toBeDefined();
+    expect(wrapper.emitted('querystringformatted')).toBeDefined();
   });
 });

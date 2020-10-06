@@ -13,6 +13,7 @@ import CachedFetch from './cached-fetch';
 import Entity from './entity';
 import News from './news';
 import Tutorial from './tutorial';
+import External from './external';
 
 Vue.use(Vuex);
 
@@ -30,6 +31,7 @@ const store = new Vuex.Store({
     Entity,
     News,
     Tutorial,
+    External,
   },
 });
 

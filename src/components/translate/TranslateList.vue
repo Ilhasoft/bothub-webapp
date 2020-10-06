@@ -37,10 +37,10 @@
       :list="translateList"
       :item-component="translateExampleItem"
       :per-page="perPage"
-      :repository="repository"
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
-      :add-attributes="{editing, initialData: editCache}"
+      :add-attributes="{repositoryUuid, editing, initialData: editCache}"
+      :external-token="externalToken"
       item-key="id"
       @onChange="updateCache($event)"
       @translated="onTranslated()"
@@ -62,17 +62,17 @@ export default {
     PaginatedList,
   },
   props: {
-    repository: {
-      type: Object,
-      required: true,
+    repositoryUuid: {
+      type: String,
+      default: null,
     },
     from: {
       type: String,
-      required: true,
+      default: null,
     },
     to: {
       type: String,
-      required: true,
+      default: null,
     },
     perPage: {
       type: Number,
@@ -85,6 +85,10 @@ export default {
     update: {
       type: Boolean,
       default: false,
+    },
+    externalToken: {
+      type: String,
+      default: null,
     },
   },
   data() {
@@ -113,8 +117,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getExamplesToTranslate',
       'searchExamples',
+      'searchExamplesExternal',
     ]),
     updateCache({ id, data }) {
       if (!this.editCache[id] && !data) return;
@@ -127,14 +131,37 @@ export default {
       this.selectAll = false;
     },
     deleteAll() {
-      this.$root.$emit('deleteAll');
+      this.$buefy.dialog.alert({
+        message: this.$t('webapp.translate.delete_confirm'),
+        confirmText: this.$t('webapp.home.delete'),
+        cancelText: this.$t('webapp.home.cancel'),
+        canCancel: true,
+        closeOnConfirm: true,
+        type: 'is-danger',
+        onConfirm: async () => {
+          this.$root.$emit('deleteAll');
+        },
+      });
     },
     async updateList() {
+      if (this.externalToken) {
+        await this.$nextTick();
+        const list = await this.searchExamplesExternal({
+          token: this.externalToken,
+          query: { ...this.query },
+          limit: this.perPage,
+        });
+        if (this.translateList) this.translateList.updateList(list);
+        else this.translateList = list;
+        this.$emit('listPhrase', this.translateList);
+        return;
+      }
+
       if (!!this.from && !!this.to) {
         await this.$nextTick();
         const list = await this.searchExamples({
           query: { language: this.from, ...this.query },
-          repositoryUuid: this.repository.uuid,
+          repositoryUuid: this.repositoryUuid,
           version: this.repositoryVersion,
           limit: this.perPage,
         });

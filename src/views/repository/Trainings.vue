@@ -73,7 +73,7 @@
           :intents="repository.intents_list"
           :entities="repository.entities"
           :language-filter="true"
-          @queryStringFormated="onSearch($event)"
+          @querystringformatted="onSearch($event)"
           @textData="changedText($event)"/>
         <examples-list
           :query="translationQuery"

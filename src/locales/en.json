@@ -24,7 +24,8 @@
       "items_total": "{n} item total | {n} items total",
       "type_here": "Type here...",
       "support": "Bothub Support",
-      "search_bots": "Search for bots"
+      "search_bots": "Search for bots",
+      "copied": "Content copied to clipboard"
     },
     "login_form": {
       "login": "Log in to your account",
@@ -393,7 +394,13 @@
       "auto_translate_progress": "Auto translate in progress",
       "auto_translate_confirm": "Translate all untranslated sentences to {language}?",
       "auto_percentage": "{progress}% of translation done",
-      "unsupported": "Language not supported for auto translate"
+      "unsupported": "Language not supported for auto translate",
+      "share_title": "Share link for translation",
+      "share_subtitle": "Anyone on the Internet with this link will be able to edit this translation.",
+      "create_new_token": "Generate a new link",
+      "delete_confirm": "Delete all selected translations?",
+      "default_error": "Something went wrong, try again later.",
+      "ok": "Ok"
     },
     "orgs": {
       "owner": "Owned by",

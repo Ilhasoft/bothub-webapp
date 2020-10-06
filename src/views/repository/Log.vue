@@ -15,7 +15,7 @@
           :intents="repository.intents_list"
           :versions="versions"
           language-filter
-          @queryStringFormated="onSearch($event)"/>
+          @querystringformatted="onSearch($event)"/>
         <repository-log-list
           :per-page="perPage"
           :query="query"
