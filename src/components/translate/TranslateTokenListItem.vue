@@ -58,7 +58,7 @@ export default {
     copy() {
       navigator.clipboard.writeText(this.url);
       this.$buefy.toast.open({
-        message: 'copied',
+        message: this.$t('webapp.layout.copied'),
         type: 'is-success',
       });
     },
@@ -79,7 +79,7 @@ export default {
         padding: 0.5rem;
 
         &__field {
-            min-width: 85%;
+            min-width: 75%;
         }
 
         &__button {

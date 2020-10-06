@@ -24,7 +24,8 @@
       "items_total": "{n} item no total | {n} itens no total",
       "type_here": "Digite aqui...",
       "support": "Ajuda do Bothub",
-      "search_bots": "Procurar inteligências"
+      "search_bots": "Procurar inteligências",
+      "copied": "Conteúdo copiado para a área de transferência"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -389,7 +390,11 @@
       "auto_translate_progress": "Tradução automática em progresso",
       "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?",
       "auto_percentage": "{progress}% da tradução concluída",
-      "unsupported": "Idioma não está disponível para tradução automática"
+      "unsupported": "Idioma não está disponível para tradução automática",
+      "share_title": "Compartilhar link para tradução",
+      "share_subtitle": "Qualquer pessoa com este link poderá editar essa tradução.",
+      "create_new_token": "Gerar novo link",
+      "ok": "Ok"
     },
     "orgs": {
       "owner": "Pertence a",

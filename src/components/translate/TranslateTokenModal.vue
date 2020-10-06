@@ -1,17 +1,23 @@
 <template>
   <b-modal
     :active="open"
+    :can-cancel="false"
+    width="700px"
     @close="onClose()">
     <div class="token-modal">
-      <h1 class="token-modal__header has-text-centered"> Share link for translation </h1>
+      <h1 class="token-modal__header has-text-centered">
+        {{ $t('webapp.translate.share_title') }}
+      </h1>
       <div class="token-modal__content">
-        <p class="token-modal__subtitle has-text-centered"> Anyone on the Internet with this link can contribute to the translation. </p>
+        <p class="token-modal__subtitle has-text-centered">
+          {{ $t('webapp.translate.share_subtitle') }}
+        </p>
         <div class="token-modal__create">
           <b-button
             :disabled="!language || loading"
             :loading="loading"
+            :label="$t('webapp.translate.create_new_token')"
             class="token-modal__create"
-            label="Create new"
             type="is-primary"
             @click="createToken()"/>
         </div>
@@ -25,8 +31,8 @@
       </div>
       <div class="token-modal__footer">
         <b-button
+          :label="$t('webapp.translate.ok')"
           type="is-primary"
-          label="ok"
           @click="onClose()" />
       </div>
     </div>
@@ -85,13 +91,6 @@ export default {
     onClose() {
       this.$emit('update:open', false);
     },
-    copy() {
-      navigator.clipboard.writeText(this.url);
-      this.$buefy.toast.open({
-        message: 'copied',
-        type: 'is-success',
-      });
-    },
     async onDelete(uuid) {
       await this.deleteExternalToken({ uuid });
       this.loadTokens();
@@ -103,7 +102,7 @@ export default {
       });
     },
     async createToken() {
-      this.laoding = true;
+      this.loading = true;
       try {
         await this.createExternalToken({
           repositoryVersion: this.getSelectedVersion,
@@ -127,7 +126,7 @@ export default {
         border-radius: 4px;
 
         &__content {
-          padding: 1rem;
+          padding: 1rem 2rem;
         }
 
         &__subtitle {
@@ -138,7 +137,8 @@ export default {
           display: flex;
           justify-content: center;
           background-color: $color-grey-light;
-          padding: 1.5rem 0;
+          padding: 2rem;
+          border: 1px solid $color-grey;
         }
 
         &__create {
