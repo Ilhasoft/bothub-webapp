@@ -26,7 +26,7 @@ export default {
       token, originalId,
     );
   },
-  async deleteTranslation(store, { token, translationId }) {
+  async deleteTranslationExternal(store, { token, translationId }) {
     return external.deleteTranslation(token, translationId);
   },
   async getExternalInfo(store, { token }) {

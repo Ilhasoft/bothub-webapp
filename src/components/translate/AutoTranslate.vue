@@ -68,7 +68,7 @@ export default {
       'getAutoTranslateProgress',
     ]),
     autoTranslateAction() {
-      if (this.externalToken) return this.autoTranslateExtenal({ token: this.externalToken });
+      if (this.externalToken) return this.autoTranslateExternal({ token: this.externalToken });
       return this.autoTranslate({
         repositoryUUID: this.repositoryUuid,
         repositoryVersion: this.version,

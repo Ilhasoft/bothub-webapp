@@ -53,6 +53,7 @@ import FilterExamples from '@/components/repository/repository-evaluate/example/
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import AutoTranslate from '@/components/translate/AutoTranslate';
 import ExternalRepository from '@/models/externalRepository';
+import Loading from '@/components/shared/Loading';
 import { mapActions } from 'vuex';
 
 export default {
@@ -63,6 +64,7 @@ export default {
     TranslateList,
     TranslationSentenceStatus,
     AutoTranslate,
+    Loading,
   },
   data() {
     return {
