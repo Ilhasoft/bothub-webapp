@@ -117,47 +117,48 @@ export default {
     },
     actions() {
       return {
-        create: () => (this.externalToken
-          ? this.newTranslationExternal({
+        create: this.externalToken
+          ? () => this.newTranslationExternal({
             token: this.externalToken,
             exampleId: this.id,
             ...this.saveTranslationData(this.translationData),
           })
-          : this.newTranslation({
+          : () => this.newTranslation({
             exampleId: this.id,
             ...this.saveTranslationData(this.translationData),
             language: this.translateTo,
-          })),
-        update: () => (this.externalToken
-          ? this.editTranslationExternal({
-            token: this.token,
+          }),
+        update: this.externalToken
+          ? () => this.editTranslationExternal({
+            token: this.externalToken,
             translationId: this.translation.id,
             ...this.saveTranslationData(this.translationData),
             originalExample: this.id,
-          }) : this.editTranslation({
+          })
+          : () => this.editTranslation({
             translationId: this.translation.id,
             ...this.saveTranslationData(this.translationData),
             language: this.translateTo,
             originalExample: this.id,
-          })),
-        delete: () => (this.externalToken
-          ? this.deleteTranslationExternal(
-            { token: this.token, translationId: this.translation.id },
+          }),
+        delete: this.externalToken
+          ? () => this.deleteTranslationExternal(
+            { token: this.externalToken, translationId: this.translation.id },
           )
-          : this.deleteTranslation({ translationId: this.translation.id })),
-        getTranslation: () => (this.externalToken
-          ? this.getTranslationFromSentenceExternal({
-            token: this.token,
+          : () => this.deleteTranslation({ translationId: this.translation.id }),
+        getTranslation: this.externalToken
+          ? () => this.getTranslationFromSentenceExternal({
+            token: this.externalToken,
             originalId: this.id,
             limit: 1,
           })
-          : this.getTranslationFromSentence({
+          : () => this.getTranslationFromSentence({
             repositoryUuid: this.repositoryUuid,
             repositoryVersion: this.repositoryVersion,
             toLanguage: this.translateTo,
             originalId: this.id,
             limit: 1,
-          })),
+          }),
       };
     },
   },

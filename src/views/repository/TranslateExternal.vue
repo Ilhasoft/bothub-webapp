@@ -1,20 +1,23 @@
 <template>
   <repository-view-base
+    v-if="repository"
     :repository="repository"
     :quick-test="false"
     :error-code="errorCode">
-    <div class="translate-description">
+    <div
+      class="translate-description">
       <h1>{{ $t('webapp.translate.title_translate') }}</h1>
       <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
     </div>
     <div class="repository-translate__list">
       <div class="repository-translate__list__search">
-        <!-- <auto-translate
+        <auto-translate
           :token="token"
-          translate-to="fr"/> -->
+          :translate-to="repository.target_language"/>
         <translation-sentence-status
           :key="translateUpdate"
           :external-token="token"
+          :to-language="repository.target_language"
           :initial-data="sentenceFilter.key"
           class="repository-translate__list__search__status"
           @search="onFilter"/>
@@ -35,10 +38,10 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import TranslateList from '@/components/translate/TranslateList';
-import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
 import AutoTranslate from '@/components/translate/AutoTranslate';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'RepositoryTranslateExternal',
@@ -49,7 +52,6 @@ export default {
     TranslationSentenceStatus,
     AutoTranslate,
   },
-  extends: RepositoryBase,
   data() {
     return {
       translateUpdate: false,
@@ -63,6 +65,8 @@ export default {
       allTranslations: false,
       query: {},
       sentenceFilter: { key: null, query: null },
+      repository: null,
+      errorCode: null,
     };
   },
   computed: {
@@ -75,7 +79,16 @@ export default {
       this.updateQuery();
     },
   },
+  async mounted() {
+    try {
+      const { data } = await this.getExternalInfo({ token: this.token });
+      this.repository = data;
+    } catch (e) {
+      this.errorCode = e.response.status;
+    }
+  },
   methods: {
+    ...mapActions(['getExternalInfo']),
     examplesTranslated() {
       this.translateUpdate = !this.translateUpdate;
     },

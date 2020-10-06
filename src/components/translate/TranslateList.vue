@@ -40,6 +40,7 @@
       :translate-to="to"
       :empty-message="$t('webapp.translate.no_examples')"
       :add-attributes="{repositoryUuid, editing, initialData: editCache}"
+      :external-token="externalToken"
       item-key="id"
       @onChange="updateCache($event)"
       @translated="onTranslated()"

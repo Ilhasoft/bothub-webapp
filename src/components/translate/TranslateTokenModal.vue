@@ -5,9 +5,9 @@
     width="700px"
     @close="onClose()">
     <div class="token-modal">
-      <h1 class="token-modal__header has-text-centered">
+      <h2 class="token-modal__header has-text-centered">
         {{ $t('webapp.translate.share_title') }}
-      </h1>
+      </h2>
       <div class="token-modal__content">
         <p class="token-modal__subtitle has-text-centered">
           {{ $t('webapp.translate.share_subtitle') }}

@@ -39,4 +39,9 @@ export default {
       },
     );
   },
+  getExternalInfo(token) {
+    return request.$http(token).get(
+      `/v2/repository/translator/info/${token}/`,
+    );
+  },
 };

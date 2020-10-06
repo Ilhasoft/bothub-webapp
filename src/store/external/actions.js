@@ -29,4 +29,7 @@ export default {
   async deleteTranslation(store, { token, translationId }) {
     return external.deleteTranslation(token, translationId);
   },
+  async getExternalInfo(store, { token }) {
+    return external.getExternalInfo(token);
+  },
 };
