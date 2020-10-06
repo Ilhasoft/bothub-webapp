@@ -148,8 +148,8 @@ export default {
 
       }
   }
-
 }
+
 .button{
     font-weight: bold;
 }
