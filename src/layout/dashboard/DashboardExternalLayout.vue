@@ -1,29 +1,29 @@
 <template>
-  <div class="dashboard-layout">
+  <div class="external-dashboard-layout">
     <div
-      class="dashboard-layout__main-panel">
-      <div class="dashboard-layout__main-panel__header">
+      class="external-dashboard-layout__main-panel">
+      <div class="external-dashboard-layout__main-panel__header">
         <router-link :to="'/home'">
-          <div class="dashboard-layout__main-panel__logo clickable" />
+          <div class="external-dashboard-layout__main-panel__logo clickable" />
         </router-link>
         <router-link
           :to="`/dashboard/${ownerNickname}/${getExternalRepository.slug}`">
           <div
             v-show="hasLoaded"
-            class="dashboard-layout__main-panel__header__right">
-            <div class="dashboard-layout__main-panel__header__info__badge">
+            class="external-dashboard-layout__main-panel__header__right">
+            <div class="external-dashboard-layout__main-panel__header__info__badge">
               <custom-icon
                 value="botinho"
                 size="large"
-                class="dashboard-layout__main-panel__header__info__badge__icon"/>
+                class="external-dashboard-layout__main-panel__header__info__badge__icon"/>
             </div>
-            <div class="dashboard-layout__main-panel__header__right__container">
+            <div class="external-dashboard-layout__main-panel__header__right__container">
               <div
                 class="
-              dashboard-layout__main-panel__header__right__wrapper">
+              external-dashboard-layout__main-panel__header__right__wrapper">
                 <p
                   class="
-               dashboard-layout__main-panel__header__right__wrapper__title">
+               external-dashboard-layout__main-panel__header__right__wrapper__title">
                   {{ getExternalRepository.name }}
                 </p>
               </div>
@@ -73,14 +73,11 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
 
+.external-dashboard-layout {
 
-html{
-  overflow-y:auto
-}
-.dashboard-layout {
   &__main-panel {
     width: 100%;
     position: relative;
@@ -104,7 +101,7 @@ html{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2.5rem 0 2rem;
+      padding: 0 7rem 0 5.7rem;
       box-shadow: 0px 3px 6px #00000029;
 
     &__right {

@@ -163,10 +163,7 @@ export default {
 
 
   &__list{
-    margin-left: 0.3rem;
   &__search {
-    margin: 0.5rem;
-
     &__status {
       margin: 3rem 0 4.4rem 0;
     }
@@ -175,7 +172,6 @@ export default {
 }
 
 .translate-description{
-  margin-left: 0.8rem;
   margin-top: $between-subtitle-content;
   h1{
     font-size: 28px;
