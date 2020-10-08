@@ -1,5 +1,11 @@
 <template>
   <div class="token-item">
+    <div class="token-item__info">
+      <language-badge
+        :language="language"
+        class="token-item__badge" />
+      {{ repository_version__name }}
+    </div>
     <b-field class="token-item__field">
       <b-input
         :value="url"
@@ -69,7 +75,7 @@ export default {
     .token-item {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         padding: 0.5rem;
 
         &__field {

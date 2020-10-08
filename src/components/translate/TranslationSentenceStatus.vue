@@ -46,10 +46,6 @@ export default {
       type: String,
       default: null,
     },
-    translateStatus: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
@@ -95,12 +91,15 @@ export default {
     version() {
       this.getStatusData();
     },
-    translateStatus() {
-      this.getStatusData();
-    },
   },
   mounted() {
-    this.getStatusData();
+    this.update = setTimeout(() => {
+      this.getStatusData();
+      console.log('here');
+    }, 2000);
+  },
+  beforeDestroy() {
+    clearTimeout(this.update);
   },
   methods: {
     ...mapActions(['searchExamples',
