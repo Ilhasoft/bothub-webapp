@@ -129,11 +129,11 @@ export default {
 
         &__content {
           padding: 0.5rem 0.5rem;
-          max-height: 380px;
+          max-height: 500px;
           overflow-y: auto;
 
           &__pagination{
-            padding-left: 2rem;
+            padding: 0 2rem;
           }
         }
 

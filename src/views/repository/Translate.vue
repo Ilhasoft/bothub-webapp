@@ -61,9 +61,9 @@
                 @onTranslateComplete="translating = false" />
               <b-button
                 :disabled="!(repository && translate.to)"
+                :label="$t('webapp.translate.send_to_translators')"
                 class="repository-translate__header__button"
                 type="is-primary"
-                label="Send to translators"
                 @click="tokenModalOpen = true" />
             </div>
           </div>
