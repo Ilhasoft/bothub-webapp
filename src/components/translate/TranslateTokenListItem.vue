@@ -75,7 +75,7 @@ export default {
     .token-item {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-around;
         padding: 0.5rem;
 
         &__field {
@@ -85,6 +85,7 @@ export default {
         &__button {
             color: $color-white;
             background-color: $color-grey;
+            margin-left: 0.5rem;
         }
 
         &__badge {

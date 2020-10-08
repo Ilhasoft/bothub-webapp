@@ -93,7 +93,10 @@ export default {
     },
   },
   mounted() {
-    this.update = setTimeout(() => { this.getStatusData(); }, 5);
+    this.update = setTimeout(() => {
+      this.getStatusData();
+      console.log('here');
+    }, 2000);
   },
   beforeDestroy() {
     clearTimeout(this.update);
