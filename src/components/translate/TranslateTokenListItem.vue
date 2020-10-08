@@ -75,7 +75,7 @@ export default {
     .token-item {
         padding: 0.5rem 0;
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 1fr 2.5fr;
 
         &__info {
           display: flex;
