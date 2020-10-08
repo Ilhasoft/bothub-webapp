@@ -17,10 +17,17 @@
       <div
         slot="append"
         class="translate-form__icon">
-        <b-icon
-          :icon="`chevron-${open ? 'up' : 'down'}`"
-          class="translate-form__icon clickable"
-          @click.native="open ? close() : onFocus()"/>
+        <b-tooltip
+          v-if="invalid"
+          :label="$t('webapp.translate.invalid_entities')"
+          class="translate-form__icon"
+          multilined
+          type="is-warning">
+          <b-icon
+            size="is-small"
+            class="is-warning"
+            icon="alert" />
+        </b-tooltip>
       </div>
     </example-text-with-highlighted-entities-input>
     <div
@@ -83,6 +90,9 @@ export default {
     entityOptions() {
       return this.availableEntities.map(entity => entity.entity);
     },
+    invalid() {
+      return this.translation && !this.translation.has_valid_entities;
+    },
     input() {
       return {
         text: this.text || '',
@@ -143,6 +153,11 @@ export default {
 
 <style lang="scss" scoped>
   @import '~@/assets/scss/colors.scss';
+
+  .is-warning {
+    color: $color-warning !important;
+  }
+
     .translate-form {
         margin-top: 0.5rem;
         &__entities {
@@ -160,6 +175,7 @@ export default {
 
         &__icon {
           width: 1rem;
+          position: static;
         }
     }
 </style>
