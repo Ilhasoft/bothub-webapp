@@ -211,7 +211,6 @@ export default {
     }
 
     &__text {
-        margin: 0 1.175rem 0 0;
         color: #707070;
         text-align: left;
         font-weight: bold;
