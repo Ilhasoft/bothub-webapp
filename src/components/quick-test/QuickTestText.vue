@@ -146,7 +146,7 @@ export default {
         return this.$t('webapp.quick_test.without_train_quick_test');
       }
 
-      return this.$t('webapp.quick_test.default_error');
+      return this.$t('webapp.quick_test.error_quick_test');
     },
   },
   mounted() {
