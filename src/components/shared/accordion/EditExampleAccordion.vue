@@ -62,20 +62,26 @@
         <div
           v-show="!custom"
           class="edit-sentence__icon-container edit-sentence__icon-container--intent">
-          <b-icon
-            icon="close"
-            class="clickable"
-            size="is-small"
-            @click.native.stop="cancelEditSentence" />
 
+          <b-button
+            class="edit-sentence__icon"
+            icon-right="close-thick"
+            @click.native.stop="cancelEditSentence" />
           <b-tooltip
             :active="!isValid"
             :label="validationErrorsString">
-            <b-icon
-              :icon="submitting ? 'refresh' : 'check'"
-              :class="{clickable: true, 'icon-spin icon-disabled': submitting }"
-              size="is-small"
-              @click.native.stop="onSubmit" />
+            <b-button
+              :disabled="submitting"
+              class="edit-sentence__icon">
+              <b-icon
+                :icon="submitting ? 'refresh' : 'check-bold'"
+                :class="{
+                  'edit-sentence__icon': true,
+                  'icon-spin': submitting
+                }"
+                size="is-small"
+                @click.native.stop="onSubmit" />
+            </b-button>
           </b-tooltip>
         </div>
 
@@ -183,7 +189,16 @@ export default {
         }
     }
 
+      &__icon {
+        background-color: $color-grey-dark;
+        color: white;
+      }
+
     &__icon-container {
+
+      > * {
+        margin-left: 0.25rem;
+      }
 
       .icon {
         margin-top: 1.75rem;
