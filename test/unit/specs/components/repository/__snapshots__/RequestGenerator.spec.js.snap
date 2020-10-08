@@ -11,10 +11,10 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
   <b-tabs-stub value="0" animated="true" id="tour-integrate-step-1" is-previous-disabled="true">
     <b-tab-item-stub label="cURL" visible="true">
       <highlighted-code-stub code="curl -X POST \\
-  -H 'Authorization: Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' \\
+  -H 'Authorization: 8511fd26-a3bc-4f74-9af1-176abca5401d' \\
   -F 'language=en' \\
   -F &quot;text=&quot; \\
-  http://localhost:2657/parse/" codeclass="bash"></highlighted-code-stub>
+  http://localhost:2657/v2/parse/" codeclass="bash"></highlighted-code-stub>
     </b-tab-item-stub>
     <b-tab-item-stub label="Python" visible="true">
       <highlighted-code-stub code="import requests
@@ -24,8 +24,8 @@ data = {
   'text': '',
 }
 
-headers = { 'Authorization': 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d' }
-r = requests.post('http://localhost:2657/parse/', headers=headers, data=data)
+headers = { 'Authorization': '8511fd26-a3bc-4f74-9af1-176abca5401d' }
+r = requests.post('http://localhost:2657/v2/parse/', headers=headers, data=data)
 print(r.json())" codeclass="python"></highlighted-code-stub>
     </b-tab-item-stub>
     <b-tab-item-stub label="Javascript" visible="true">
@@ -38,8 +38,8 @@ request.onload = function () {
   console.log(JSON.parse(request.response));
 };
 
-request.open('POST', 'http://localhost:2657/parse/');
-request.setRequestHeader('Authorization', 'Bearer 8511fd26-a3bc-4f74-9af1-176abca5401d');
+request.open('POST', 'http://localhost:2657/v2/parse/');
+request.setRequestHeader('Authorization', '8511fd26-a3bc-4f74-9af1-176abca5401d');
 request.send(data);" codeclass="javascript"></highlighted-code-stub>
     </b-tab-item-stub>
   </b-tabs-stub>
