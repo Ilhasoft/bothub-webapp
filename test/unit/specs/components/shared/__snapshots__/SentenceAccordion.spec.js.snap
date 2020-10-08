@@ -2,7 +2,7 @@
 
 exports[`SentenceAccordion.vue renders correctly 1`] = `
 <div class="expander">
-  <div class="expander__trigger before-border border">
+  <div class="expander__trigger before-border cursor-pointer border align-center">
     <div class="expander__trigger__check"></div>
     <div class="expander__trigger__header"></div>
     <div class="expander__trigger__options"></div>

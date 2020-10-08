@@ -159,21 +159,15 @@ export default {
       return `entity-${color}`;
     },
     deleteThisTranslation() {
-      return new Promise((resolve, reject) => {
-        this.deleteDialog = this.$buefy.dialog.confirm({
-          message: 'Are you sure? The translation will be deleted.',
-          confirmText: 'Delete',
-          type: 'is-danger',
-          onConfirm: async () => {
-            await this.deleteTranslation({ translationId: this.id });
-            this.$emit('deleted');
-            resolve();
-          },
-          onCancel: () => {
-            /* istanbul ignore next */
-            reject();
-          },
-        });
+      this.deleteDialog = this.$buefy.dialog.confirm({
+        message: this.$t('webapp.translate.translation_delete_confirm', { language: this.language }),
+        confirmText: this.$t('webapp.home.delete'),
+        cancelText: this.$t('webapp.home.cancel'),
+        type: 'is-danger',
+        onConfirm: async () => {
+          await this.deleteTranslation({ translationId: this.id });
+          this.$emit('deleted');
+        },
       });
     },
     async toggleOriginal() {

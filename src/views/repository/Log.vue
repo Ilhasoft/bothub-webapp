@@ -15,7 +15,7 @@
           :intents="repository.intents_list"
           :versions="versions"
           language-filter
-          @queryStringFormated="onSearch($event)"/>
+          @querystringformatted="onSearch($event)"/>
         <repository-log-list
           :per-page="perPage"
           :query="query"
@@ -79,7 +79,7 @@ export default {
   extends: RepositoryBase,
   data() {
     return {
-      perPage: 10,
+      perPage: 12,
       name: '',
       loading: false,
       versionsList: null,

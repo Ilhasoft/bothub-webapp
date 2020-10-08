@@ -122,6 +122,7 @@ import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
+import Analytics from '@/utils/plugins/analytics';
 
 export default {
   name: 'DashboardLayout',
@@ -178,6 +179,7 @@ export default {
     openBeginnerTutorialModal() {
       if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
         this.setTutorialMenuActive();
+        Analytics.send({ category: 'Tutorial', event: 'tutorial open event' });
       }
     },
     collapseHandle() {

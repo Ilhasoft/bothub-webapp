@@ -24,7 +24,8 @@
       "items_total": "{n} item no total | {n} itens no total",
       "type_here": "Digite aqui...",
       "support": "Ajuda do Bothub",
-      "search_bots": "Procurar inteligências"
+      "search_bots": "Procurar inteligências",
+      "copied": "Conteúdo copiado para a área de transferência"
     },
     "login_form": {
       "login": "Entre na sua conta",
@@ -96,7 +97,7 @@
     },
     "analyze_text": {
       "grid1": "Faça uma requisição HTTP ao serviço NLP, siga o exemplo abaixo.",
-      "method_send": "POST com form-data:",
+      "method_send": "POST com application/json:",
       "language_code": "código do idioma",
       "text_to_analyze": "texto para análise",
       "response": "Resposta:",
@@ -235,13 +236,20 @@
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
       "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
     },
+    "integration":{
+      "title": "Integrações do Bothub",
+      "description": "Faça uma requesição HTTP para o serviço NLP, seguindo o exemplo abaixo",
+      "copy": "Token copiado",
+      "my_user":"Meu usuário"
+    },
     "intent":{
       "title": "Intenção",
       "description": "Essa intenção contém {n} frase | Essa intenção contém {n} frases.",
       "edit_button": "Editar intenção",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma frase.",
-      "error_entity": "Aconteceu um erro."
+      "error_intent": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "error_intent_exists": "Intenção já existe"
     },
     "settings": {
       "title_edit_repository": "Editar Inteligência",
@@ -297,10 +305,11 @@
       "highlight_word": "Destaque palavras como entidade",
       "add_entity": "Adicionar entidade",
       "add_entity_for": "Adicionar entidade para",
+      "select_text": "Selecione parte do texto para adicionar uma entidade",
       "add_a_sentence": "Adicionar uma frase",
       "intent": "Intenção",
       "train_response_title": "Repositório treinado com sucesso!",
-      "train_response_subtitle": "Suas sentenças foram adicionadas ao treinamento. Você pode consultar as sentenças do repositório em Sentence list.",
+      "train_response_subtitle": "Suas frases foram adicionadas ao treinamento. Você pode consultar as frases do repositório em Sentence list.",
       "trained": "Treinado",
       "processing": "Processando",
       "no_changes": "Sem alterações",
@@ -334,7 +343,9 @@
     },
     "translate": {
       "title_translate": "Traduzir uma frase",
-      "subtitle_translate": "Clique em uma frase para traduzir do seu idioma base para outros idiomas suportados pelo Bothub.",
+      "subtitle_translate": "Gerencie e traduza as frases de sua inteligência.",
+      "title_export": "Exportar tradução",
+      "subtitle_export": "Se preferir, você pode exportar e importar traduções por uma planilha.",
       "not_can_edit_repository": "Você não pode contribuir com essa inteligência",
       "login": "Entre na sua conta para contribuir com essa inteligência.",
       "submit_translation": "Enviar Tradução",
@@ -343,12 +354,13 @@
       "show_translated": "Mostrar Tradução",
       "show_original": "Mostrar Original",
       "translated_from": "Traduzido de",
-      "no_translation": "Você não tem frases traduzidas,",
+      "no_translation": "Você não tem frases traduzidas",
       "click_here": "clique aqui para traduzir.",
       "translate_from": "Traduzir de:",
       "translate_to": "Traduzir para:",
       "to": "para",
-      "languages_select": "Buscar idioma",
+      "no_entities": "Nenhuma entidade para adicionar nessa tradução",
+      "languages_select": "Escolha um idioma",
       "translate_sentence": "Traduzir frase",
       "example_translated": "Exemplo traduzido!",
       "import_title": "Importar frases",
@@ -368,7 +380,31 @@
       "all": "Todos os idiomas",
       "search": "Pesquisar",
       "showing": "Mostrando {count} de {available} idiomas disponíveis",
-      "no_translated": "Nenhum idioma encontrado"
+      "no_translated": "Nenhum idioma encontrado",
+      "invalid_entities": "As entidades da tradução não correspondem às da frase original",
+      "translation_edited": "Tradução editada",
+      "translation_delete_confirm": "Essa tradução para \"{language}\" será excluída. Deseja continuar?",
+      "error_load_translation": "Não foi possível carregar tradução.",
+      "retry": "Recarregar",
+      "sentences": "Frases",
+      "translated": "Traduzidas",
+      "not_translated": "Não traduzidas",
+      "inconsistent": "Inconsistentes",
+      "delete_all": "Deletar Traduções",
+      "save_all": "Salvar todas nesta página",
+      "select_all": "Selecionar todas nesta página",
+      "auto_translate": "Tradução automática",
+      "auto_translate_progress": "Tradução automática em progresso",
+      "auto_translate_confirm": "Traduzir todas as frases não traduzidas para {language}?",
+      "auto_percentage": "{progress}% da tradução concluída",
+      "unsupported": "Idioma não está disponível para tradução automática",
+      "share_title": "Compartilhar link para tradução",
+      "share_subtitle": "Qualquer pessoa com este link poderá editar essa tradução.",
+      "create_new_token": "Gerar link",
+      "delete_confirm": "Apagar definitivamente todas as traduções selecionadas?",
+      "default_error": "Algo de errado ocorreu.",
+      "ok": "Ok",
+      "cancel": "Cancelar"
     },
     "orgs": {
       "owner": "Pertence a",
@@ -552,7 +588,7 @@
       "edit_button": "Editar Entidade",
       "save_button": "Salvar",
       "no_sentences": "Nenhuma senteça.",
-      "error_entity": "Aconteceu um erro.",
+      "error_entity": "Algo de errado aconteceu, tente novamente mais tarde.",
       "error_entity_exists": "Entidade já existe"
     },
     "payment": {

@@ -7,22 +7,19 @@
       <div v-if="authenticated">
         <div
           v-if="repository.authorization.can_contribute || repository.authorization.can_translate">
-          <div class="translate-description">
-            <h1>{{ $t('webapp.translate.title_translate') }}</h1>
-            <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
-          </div>
-
           <div class="repository-translate">
             <div class="repository-translate__field">
               <div class="repository-translate__field__item">
                 <b-field
                   :label="$t('webapp.translate.translate_from')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select
+                  <b-field
                     id="tour-translate-step-1"
-                    :is-previous-disabled="true"
-                    :is-step-blocked="translate.from === null"
-                    v-model="translate.from" />
+                    :is-previous-disabled="true">
+                    <b-input
+                      :placeholder="baseLanguage"
+                      disabled/>
+                  </b-field>
                 </b-field>
               </div>
               <div class="repository-translate__translate-arrow-icon">
@@ -37,37 +34,40 @@
                 <b-field
                   :label="$t('webapp.translate.translate_to')"
                   custom-class="repository-translate__field__item__label">
-                  <language-select
+                  <b-field
                     id="tour-translate-step-2"
-                    v-model="translate.to"
-                    :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases"
-                    :exclude="[translate.from]"/>
+                    :is-step-blocked="(translate.to === null || loadingList) || !hasPhrases">
+                    <language-select-input
+                      :exclude="[repository.language]"
+                      :placeholder="$t('webapp.translate.languages_select')"
+                      v-model="translate.to" />
+                  </b-field>
                 </b-field>
               </div>
             </div>
           </div>
-          <div
-            id="tour-translate-step-6"
-            :is-previous-disabled="true"
-            class="repository-translate__translateButtons">
-
-            <b-button
-              :class="{'is-primary':!!translate.from && !!translate.to}"
-              class="repository-translate__buttons repository-translate__unableButton"
-              @click="checkLanguageToImport()">
-              {{ $t('webapp.translate.import_title') }}
-            </b-button>
-
-            <b-button
-              :class="{'is-primary':!!translate.from && !!translate.to}"
-              class="repository-translate__buttons repository-translate__unableButton"
-              @click="checkLanguageToExport()">
-              {{ $t('webapp.translate.export_title') }}
-            </b-button>
-
+          <div class="repository-translate__header">
+            <div class="translate-description">
+              <h1>{{ $t('webapp.translate.title_translate') }}</h1>
+              <p>{{ $t('webapp.translate.subtitle_translate') }}</p>
+            </div>
+            <div class="repository-translate__header__buttons">
+              <auto-translate
+                v-if="repository && repository.authorization.can_translate"
+                :version="getSelectedVersion"
+                :translate-to="translate.to"
+                :repository-uuid="repository.uuid"
+                @onTranslate="translating = true"
+                @onTranslateComplete="translating = false" />
+              <b-button
+                :disabled="!(repository && translate.to)"
+                class="repository-translate__header__button"
+                type="is-primary"
+                label="Send to translators"
+                @click="tokenModalOpen = true" />
+            </div>
           </div>
-          <div
-            v-if="!!translate.from && !!translate.to">
+          <div v-if="!!translate.to">
             <b-modal
               :active.sync="isImportFileVisible"
               :destroy-on-hide="false"
@@ -194,27 +194,81 @@
                 </footer>
               </div>
             </b-modal>
-            <hr>
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
+                <translation-sentence-status
+                  :key="`${translate.from}-${translate.to}-${translate.update}-${translating}`"
+                  :repository-uuid="repository.uuid"
+                  :version="getSelectedVersion"
+                  :language="repository.language"
+                  :to-language="translate.to"
+                  :initial-data="sentenceFilter.key"
+                  :translate-status="translating"
+                  class="repository-translate__list__search__status"
+                  @search="onFilter"/>
                 <filter-examples
                   :intents="repository.intents_list"
-                  :entities="repository.entities_list"
-                  @queryStringFormated="onSearch($event)"/>
+                  :entities="repository.entities"
+                  @querystringformatted="onSearch($event)"/>
+              </div>
+              <div
+                v-if="translating"
+                class="has-text-centered">
+                <loading />
+                <span> {{ $t('webapp.translate.auto_translate_progress') }} </span>
               </div>
               <translate-list
-                :update="translate.update"
-                :repository="repository"
+                v-if="!translating"
+                :repository-uuid="repository.uuid"
                 :query="query"
-                :from="translate.from"
+                :from="repository.language"
                 :to="translate.to"
                 @translated="examplesTranslated()"
                 @eventStep="dispatchClick()"
-                @isLoadingContent="loadingList = $event"
-                @listPhrase="checkPhraseList($event)"/>
+                @isLoadingContent="loadingList = $event"/>
+            </div>
+          </div>
+
+          <div v-show="!!translate.to">
+            <train
+              v-if="repository"
+              ref="train"
+              :show-button="repository.ready_for_train"
+              :repository="repository"
+              :version="getSelectedVersion"
+              :authenticated="authenticated"
+              :update-on-load="false"
+              class="repository-translate__train"
+              @statusUpdated="updateTrainingStatus($event)" />
+            <hr>
+
+            <div class="translate-description">
+              <h1>{{ $t('webapp.translate.title_export') }}</h1>
+              <p>{{ $t('webapp.translate.subtitle_export') }}</p>
             </div>
 
+            <div
+              id="tour-translate-step-6"
+              :is-previous-disabled="true"
+              class="repository-translate__translateButtons">
+
+              <b-button
+                :class="{'is-primary': !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToImport()">
+                {{ $t('webapp.translate.import_title') }}
+              </b-button>
+
+              <b-button
+                :class="{'is-primary': !!translate.to}"
+                class="repository-translate__buttons repository-translate__unableButton"
+                @click="checkLanguageToExport()">
+                {{ $t('webapp.translate.export_title') }}
+              </b-button>
+
+            </div>
           </div>
+
         </div>
         <authorization-request-notification
           v-else
@@ -232,54 +286,71 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
+    <translate-token-modal
+      v-if="repository"
+      :open.sync="tokenModalOpen"
+      :language="translate.to"
+      :url-generator="externalUrlGenerator"
+      :repository-uuid="repository.uuid" />
+      <!-- <tour
       v-if="activeTutorial === 'translate'"
       :step-count="1"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
-      name="translate" />
+      name="translate" /> -->
   </repository-view-base>
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import LanguageSelect from '@/components/inputs/LanguageSelect';
+import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
 import TranslateList from '@/components/translate/TranslateList';
 import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
-import { exampleSearchToDicty, exampleSearchToString } from '@/utils/index';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
+import AutoTranslate from '@/components/translate/AutoTranslate';
+import Train from '@/components/repository/training/Train';
+import Loading from '@/components/shared/Loading';
+import TranslateTokenModal from '@/components/translate/TranslateTokenModal';
 import Tour from '@/components/Tour';
+import {
+  languageListToDict,
+} from '@/utils/index';
 
 export default {
   name: 'RepositoryTranslate',
   components: {
     FilterExamples,
     RepositoryViewBase,
-    LanguageSelect,
+    LanguageSelectInput,
     TranslateList,
+    Train,
     TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
+    TranslationSentenceStatus,
     Tour,
+    AutoTranslate,
+    Loading,
+    TranslateTokenModal,
   },
   extends: RepositoryBase,
   data() {
     return {
+      update: null,
       translationFile: null,
       isExportFileVisible: false,
       isImportFileVisible: false,
       waitDownloadFile: false,
       translate: {
-        from: null,
         to: null,
         update: false,
       },
       toLanguage: null,
-      query: {},
       querySchema: {},
       errors: '',
       errorMessage: '',
@@ -292,15 +363,35 @@ export default {
         { id: 0, label: this.$t('webapp.translate.export_all_sentences'), value: false },
         { id: 1, label: this.$t('webapp.translate.export_only_translated'), value: true },
       ],
+      query: {},
+      sentenceFilter: { key: null, query: null },
+      translating: false,
+      tokenModalOpen: false,
+      externalUrlGenerator: (token) => {
+        const route = this.$router.resolve({
+          name: 'repository-translate-external',
+          params: {
+            ownerNickname: this.repository.owner__nickname,
+            slug: this.repository.slug,
+            token,
+          },
+        }).href;
+        return `${window.location.origin}${route}`;
+      },
     };
   },
   computed: {
-    ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository,
-    }),
     ...mapGetters([
+      'authenticated',
       'activeTutorial',
+      'getSelectedVersion',
     ]),
+    baseLanguage() {
+      const languageObject = Object.values(
+        languageListToDict([this.repository.language]),
+      );
+      return languageObject;
+    },
   },
   watch: {
     isImportFileVisible() {
@@ -310,20 +401,30 @@ export default {
       }
       return '';
     },
+    sentenceFilter() {
+      this.updateQuery();
+    },
+    querySchema() {
+      this.updateQuery();
+    },
   },
   methods: {
     ...mapActions([
       'getRepository',
       'exportTranslations',
       'importTranslations',
+      'createExternalToken',
     ]),
+    updateTrainingStatus(trainStatus) {
+      Object.assign(this.repository, trainStatus);
+    },
     async exportTranslation() {
       this.waitDownloadFile = !this.waitDownloadFile;
       try {
         const xlsFile = await this.exportTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
-          fromLanguage: this.translate.from,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.getSelectedVersion,
+          fromLanguage: this.repository.language,
           toLanguagem: this.translate.to,
           statusTranslation: !this.allTranslations,
         });
@@ -346,8 +447,8 @@ export default {
 
       try {
         const importDownload = await this.importTranslations({
-          repositoryUuid: this.selectedRepository.uuid,
-          versionUUID: this.selectedRepository.repository_version_id,
+          repositoryUuid: this.repository.uuid,
+          versionUUID: this.getSelectedVersion,
           formData,
         });
         this.forceFileDownload(importDownload);
@@ -372,7 +473,7 @@ export default {
       result.click();
     },
     checkLanguageToImport() {
-      if (this.translate.from && this.translate.to) {
+      if (this.translate.to) {
         if (this.activeTutorial === 'translate') {
           return;
         }
@@ -380,7 +481,7 @@ export default {
       }
     },
     checkLanguageToExport() {
-      if (this.translate.from && this.translate.to) {
+      if (this.translate.to) {
         if (this.activeTutorial === 'translate') {
           return;
         }
@@ -392,6 +493,8 @@ export default {
     },
     examplesTranslated() {
       this.translate.update = !this.translate.update;
+      if (this.update) clearTimeout(this.update);
+      this.update = setTimeout(() => { this.$refs.train.updateTrainingStatus(); }, 2000);
     },
     async checkPhraseList(list) {
       if (this.activeTutorial === 'translate') {
@@ -411,20 +514,23 @@ export default {
     closeExportModal() {
       this.isExportFileVisible = false;
     },
+    onFilter({ key, query }) {
+      this.sentenceFilter = { key, query };
+    },
     onSearch(value) {
-      Object.assign(this.querySchema, value);
-
+      this.querySchema = { ...value };
+    },
+    updateQuery() {
       if (!this.querySchema.intent) {
         delete this.querySchema.intent;
       }
       if (!this.querySchema.entity) {
         delete this.querySchema.entity;
       }
-      if (!this.querySchema.label) {
-        delete this.querySchema.label;
+      if (!this.querySchema.search) {
+        delete this.querySchema.search;
       }
-      const formattedQueryString = exampleSearchToString(this.querySchema);
-      this.query = exampleSearchToDicty(formattedQueryString);
+      this.query = { ...this.querySchema, ...this.sentenceFilter.query };
     },
   },
 };
@@ -434,22 +540,6 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.translate-description{
-  margin-left: 0.8rem;
-  h1{
-    font-size: 28px;
-    margin-bottom: $between-title-subtitle;
-    color: $color-fake-black;
-    font-family: $font-family;
-    font-weight: $font-weight-bolder;
-  }
-  p{
-    margin-bottom: $between-subtitle-content;
-    color: $color-fake-black;
-    font-family: $font-family;
-    font-size: $font-size
-  }
-}
 .repository-translate {
   background-color: $color-white;
   display:flex;
@@ -457,13 +547,31 @@ export default {
   justify-content: space-around;
   align-items: center;
 
+  &__train {
+    margin: 0 0 2.5rem 0;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__button {
+      margin-left: 0.5rem;
+    }
+
+    &__buttons {
+      display: flex;
+    }
+  }
+
   &__field {
     display: flex;
-    padding: 0.25rem;
+    justify-content: space-between;
     width: 100%;
     &__item {
-      margin: 0.5rem;
-      width: 50%;
+      margin: 0.5rem 0;
+      width: 45%;
         &__label{
         font-weight: $font-weight-normal;
         }
@@ -475,9 +583,10 @@ export default {
     color: $color-grey-dark;
   }
   &__list{
-    margin-left: 0.3rem;
   &__search {
-    margin: 0.5rem;
+    &__status {
+      margin: 3rem 0 4.4rem 0;
+    }
   }
   }
 
@@ -548,8 +657,7 @@ export default {
   &__translateButtons{
     display: flex;
     width: 385px;
-    margin: 1rem 0.3rem;
-    margin-left: 0.8rem;
+    margin: 1rem 0;
     border-radius: 5px;
     justify-content: space-between;
   }
@@ -570,6 +678,23 @@ export default {
       border: 2px solid #D5D5D5;
       cursor:default
     }
+  }
+}
+
+.translate-description{
+  margin-top: $between-subtitle-content;
+  h1{
+    font-size: 28px;
+    margin-bottom: $between-title-subtitle;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-weight: $font-weight-bolder;
+  }
+  p{
+    margin-bottom: $between-subtitle-content;
+    color: $color-fake-black;
+    font-family: $font-family;
+    font-size: $font-size
   }
 }
 

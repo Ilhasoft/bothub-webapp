@@ -57,6 +57,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Analytics from '@/utils/plugins/analytics';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
 import BoardingLayout from '@/components/user/BoardingLayout';
@@ -104,6 +105,9 @@ export default {
         name: 'signIn',
       });
     },
+    sendEvent() {
+      Analytics.send({ category: 'Sign up', event: 'sign up event' });
+    },
     async getAllRegisterSchema() {
       const registerSchema = await this.getRegisterSchema();
       const { password } = registerSchema;
@@ -135,6 +139,7 @@ export default {
         delete this.data.confirmPassword;
         await this.register(this.data);
         this.loginUser();
+        this.sendEvent();
         return true;
       } catch (error) {
         const data = error.response && error.response.data;

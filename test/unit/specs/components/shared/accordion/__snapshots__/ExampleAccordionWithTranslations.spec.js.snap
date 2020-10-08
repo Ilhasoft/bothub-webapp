@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
+<sentence-accordion-stub align="top" customaccordion="true" entities="" intent-to-edit="true" text-to-edit="the possum" sentence-id="0" language-edit="en" get-all-entities="" edit-example="">
+  <div>
+    <language-badge-stub language="en"></language-badge-stub>
+  </div>
+  <div class="example-item__header">
+    <highlighted-text-stub text="the possum" entities="" failed="" size="normal"></highlighted-text-stub>
+    <div class="example-item__entities"></div>
+  </div>
+  <div class="example-item__intent example-item__faded"><strong class="example-item__faded"> some specific text: </strong>
+    &nbsp;true
+  </div>
+  <div class="example-item__faded example-item__options">
+    <b-icon-stub icon="pencil" size="is-small" class="clickable"></b-icon-stub>
+    <b-icon-stub icon="delete" size="is-small" class="clickable"></b-icon-stub>
+  </div>
+  <div>
+    <loading-stub style="display: none;"></loading-stub>
+    <!---->
+  </div>
+</sentence-accordion-stub>
+`;

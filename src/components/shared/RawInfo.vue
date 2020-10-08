@@ -10,21 +10,24 @@
       <p>{{ $t('webapp.raw.raw_subtitle') }}</p>
     </div>
     <div class="raw-info__json">
-      <textarea
-        :value="text"
-        class="column textarea has-fixed-size raw-info__input"
-        readonly/>
+      <highlighted-code
+        :code="text"
+        class="raw-info__input"
+        code-class="json" />
       <b-icon
         icon="content-copy"
-        class="raw-info__copy"
+        class="raw-info__copy clickable"
         @click.native="copyText()"/>
     </div>
   </div>
 </template>
 
 <script>
+import HighlightedCode from '@/components/shared/HighlightedCode';
+
 export default {
   name: 'RawInfo',
+  components: { HighlightedCode },
   props: {
     info: {
       type: Object,
@@ -40,7 +43,7 @@ export default {
     copyText() {
       navigator.clipboard.writeText(this.text);
       this.$buefy.toast.open({
-        message: 'Json copied',
+        message: this.$t('webapp.layout.copied'),
         type: 'is-success',
       });
     },
@@ -86,22 +89,16 @@ export default {
         }
 
         &__input{
-           padding: 1.3rem;
            height: 18.75rem;
-           font-family: 'Segoe UI', sans-serif;
            font-size: 1.1rem;
-           color: #707070;
+           overflow-y: scroll;
         }
 
         &__copy {
-          width: 80%;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
           color: $color-grey-dark;
           position: absolute;
-          margin-top: -15rem;
-          cursor: pointer;
+          top: 2.5rem;
+          right: 3rem;
         }
 
         &__close{

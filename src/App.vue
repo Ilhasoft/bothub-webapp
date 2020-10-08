@@ -109,6 +109,20 @@ $entities-colors: (
   }
 }
 
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.icon-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none !important;
+  > * {
+    pointer-events: none !important;
+  }
+}
+
 @keyframes iconSpin {
   from {
     transform: rotate(0deg);

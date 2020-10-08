@@ -4,13 +4,17 @@
       ref="expander"
       :class="{
         'expander__trigger': true,
+        'expander__trigger--slim': slim,
+        [`align-${align}`]: true,
         'active': isOpen,
-        'before-border': !isOpen,
+        'before-border': !isOpen && customAccordion,
         'border-thick': thickBorder,
         'border-success': type === 'is-success',
         'border-danger': type === 'is-danger',
+        'expander__trigger--pending': pendingExample,
         'is-light': isLight,
-        'border': !type,
+        'cursor-pointer': customAccordion,
+        'border': !type && customAccordion,
       }"
       @click="toggleAccordion()">
 
@@ -35,8 +39,8 @@
     </div>
     <transition name="fade">
       <div
-        v-show="open"
-        :class="pendingExample ? 'expander__body-pending' : 'expander__body'">
+        v-show="open && customAccordion"
+        :class="pendingExample ? 'expander__body--pending' : 'expander__body'">
         <slot name="body"/>
       </div>
     </transition>
@@ -64,15 +68,32 @@ export default {
       type: Boolean,
       default: null,
     },
+    align: {
+      type: String,
+      default: 'center',
+    },
+    slim: {
+      type: Boolean,
+      default: false,
+    },
     pendingExample: {
       type: Boolean,
       default: false,
+    },
+    customAccordion: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
     return {
       isOpen: false,
     };
+  },
+  watch: {
+    open() {
+      this.isOpen = this.open;
+    },
   },
   mounted() {
     this.isOpen = this.open;
@@ -91,6 +112,16 @@ export default {
   @import '~@/assets/scss/utilities';
   @import '~@/assets/scss/colors.scss';
   @import '~@/assets/scss/variables.scss';
+
+  .align {
+    &-center {
+      align-items: center;
+    }
+
+    &-top {
+      align-items: flex-start;
+    }
+  }
 
   .before-border {
     position: relative;
@@ -141,27 +172,34 @@ export default {
   .expander {
     &__trigger {
       display: flex;
-      align-items: center;
       padding: .7rem;
       margin-top: 0.5rem;
-      cursor: pointer;
+
+      &--slim {
+        padding: .35rem;
+      }
 
       @media screen and (max-width: $mobile-width) {
         flex-wrap: wrap;
       }
-    &__check{
-      margin: 0 1rem 0 0;
+
+      &--pending {
+        background-color: $color-fake-white;
+      }
+
+    &__check {
+      margin: 0 1rem;
 
       @media screen and (max-width: $mobile-width) {
         margin: 1rem 0;
       }
     }
-    &__header{
+    &__header {
       display: flex;
       width: 80%;
       align-items: center;
     }
-    &__options{
+    &__options {
       min-width: 20%;
       display: flex;
       justify-content: flex-end;
@@ -176,12 +214,16 @@ export default {
       padding: .5rem 0;
       background: #f5f5f5;
       border-radius: 4px;
+
+      &--pending{
+        padding: .5rem 0;
+        background: #EAEAEA;
+        border-radius: 4px;
+      }
     }
-    &__body-pending{
-       padding: .5rem 0;
-      background: #EAEAEA;
-      border-radius: 4px;
-    }
+  }
+  .cursor-pointer{
+    cursor: pointer;
   }
 
   .is-light {

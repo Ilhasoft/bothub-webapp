@@ -24,7 +24,8 @@
       "items_total": "{n} item total | {n} items total",
       "type_here": "Type here...",
       "support": "Bothub Support",
-      "search_bots": "Search for bots"
+      "search_bots": "Search for bots",
+      "copied": "Content copied to clipboard"
     },
     "login_form": {
       "login": "Log in to your account",
@@ -96,7 +97,7 @@
     },
     "analyze_text": {
       "grid1": "Make a HTTP request to NLP service, follow the example below.",
-      "method_send": "POST with form-data:",
+      "method_send": "POST with application/json:",
       "language_code": "language code",
       "text_to_analyze": "text to analyze",
       "response": "Response:",
@@ -235,13 +236,20 @@
       "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
     },
+    "integration":{
+      "title": "Bothub integrations",
+      "description": "Make an HTTP request to the NLP service, following the example below",
+      "copy": "Token Copied",
+      "my_user":"My user"
+    },
     "intent":{
       "title": "Intent",
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured."
+      "error_intent": "Something went wrong, try again later.",
+      "error_intent_exists": "Intent already exists"
     },
     "settings": {
       "title_edit_repository": "Edit Intelligence",
@@ -295,6 +303,7 @@
       "highlight_word": "Highlight words to mark as entity",
       "add_entity": "Add entity",
       "add_entity_for": "Add entity for",
+      "select_text": "Select part of your text to add an entity",
       "add_a_sentence": "Add a sentence",
       "intent": "Intent",
       "train_response_title": "Repository trained successfully!",
@@ -313,7 +322,7 @@
       "delete_button":"Delete",
       "cancel_button":"Cancel",
       "save_button":"Save",
-      "train_progress": "% of training completed",
+      "train_progress": "{progress}% of training completed",
       "empty_text_error": "You need type a text to sentence",
       "intent_error": "Intent is required",
       "default_error": "Something went wrong, try again later."
@@ -332,7 +341,9 @@
     },
     "translate": {
       "title_translate": "Translate a sentence",
-      "subtitle_translate": "Click on a sentence to translate from your base language into other languages ​​supported by Bothub.",
+      "subtitle_translate": "Manage and translate the sentences of your intelligence.",
+      "title_export": "Export translation",
+      "subtitle_export": "If you prefer, you can export and import translations as a editable sheet.",
       "not_can_edit_repository": "You can not contribute to this intelligence",
       "login": "Sign in to your account to contribute to this intelligence.",
       "submit_translation": "Submit Translation",
@@ -341,12 +352,13 @@
       "show_translated": "Show Translated",
       "show_original": "Show Original",
       "translated_from": "Translated from",
-      "no_translation": "You have no translated sentences,",
+      "no_translation": "You have no translated sentences",
       "click_here": "click here to translate.",
       "translate_from": "Translate from:",
       "translate_to": "Translate to:",
       "to": "to",
-      "languages_select": "Search language",
+      "no_entities": "No entities to add in this translation",
+      "languages_select": "Choose a language",
       "translate_sentence": "Translate sentence",
       "example_translated": "Example translated!",
       "import_title": "Import sentences",
@@ -366,7 +378,31 @@
       "all": "All languages",
       "search": "Search",
       "showing": "Showing {count} of {available} available languages",
-      "no_translated": "No languages to show"
+      "no_translated": "No languages to show",
+      "invalid_entities": "Translation's entities do not match the original translation's",
+      "translation_edited": "Translation edited",
+      "translation_delete_confirm": "This \"{language}\" translation will be deleted. Are you sure?",
+      "error_load_translation": "Could not load translation.",
+      "retry": "Retry",
+      "sentences": "Sentences",
+      "translated": "Translated",
+      "not_translated": "Not translated",
+      "inconsistent": "Inconsistent",
+      "delete_all": "Delete Translations",
+      "save_all": "Save all in this page",
+      "select_all": "Select all in this page",
+      "auto_translate": "Auto translate",
+      "auto_translate_progress": "Auto translate in progress",
+      "auto_translate_confirm": "Translate all untranslated sentences to {language}?",
+      "auto_percentage": "{progress}% of translation done",
+      "unsupported": "Language not supported for auto translate",
+      "share_title": "Share link for translation",
+      "share_subtitle": "Anyone on the Internet with this link will be able to edit this translation.",
+      "create_new_token": "Manage link",
+      "delete_confirm": "Delete all selected translations?",
+      "default_error": "Something went wrong, try again later.",
+      "ok": "Ok",
+      "cancel": "Cancel"
     },
     "orgs": {
       "owner": "Owned by",
@@ -554,7 +590,7 @@
       "edit_button": "Edit Entity",
       "save_button": "Save",
       "no_sentences": "No sentences.",
-      "error_entity": "An error occured.",
+      "error_entity": "Something went wrong, try again later.",
       "error_entity_exists": "Entity already exists"
     },
     "payment": {

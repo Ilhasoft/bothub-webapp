@@ -18,6 +18,21 @@ class ModelBase extends Model {
     );
   }
 
+  getRequestExternal(config, token) {
+    return super.getRequest(
+      Object.assign(
+        {},
+        config,
+        {
+          baseURL: process.env.API_BASE_URL,
+          headers: store.getters.authenticated
+            ? { Authorization: `Translator ${token}` }
+            : {},
+        },
+      ),
+    );
+  }
+
   onFetchNoCache() {
     return super.onFetch();
   }
