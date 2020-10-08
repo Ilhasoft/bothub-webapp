@@ -73,7 +73,7 @@ class="t">
             </div>
             <request-generator
               :default-language-field="repository.language"
-              :authorization-uuid="repository.authorization.uuid"/>
+              :authorization-uuid="getProfileName[1]"/>
           </div>
         </div>
       </div>
