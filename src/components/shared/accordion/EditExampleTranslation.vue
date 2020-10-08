@@ -2,7 +2,7 @@
   <div
     class="translation" >
     <div class="columns">
-      <div class="column is-1 translation__language">
+      <div class="translation__language">
         <language-badge
           :language="languageEdit"/>
       </div>
@@ -32,19 +32,22 @@
       </div>
       <div class="translation__icons column is-2">
         <span>
-          <b-icon
-            icon="close"
-            class="clickable"
-            size="is-small"
+          <b-button
+            class="translation__icon"
+            icon-right="close-thick"
             @click.native.stop="cancelEditSentence" />
-
-          <b-icon
-            :icon="submitting ? 'refresh' : 'check'"
-            :class="{clickable: true,
-                     'icon-spin': submitting,
-                     'icon-disabled': submitting }"
-            size="is-small"
-            @click.native.stop="onSubmit" />
+          <b-button
+            :disabled="submitting"
+            class="translation__icon">
+            <b-icon
+              :icon="submitting ? 'refresh' : 'check-bold'"
+              :class="{
+                'translation__icon': true,
+                'icon-spin': submitting
+              }"
+              size="is-small"
+              @click.native.stop="onSubmit" />
+          </b-button>
         </span>
       </div>
     </div>
@@ -150,13 +153,18 @@ export default {
   }
 
   &__language {
-    max-width: 5rem;
-    margin: 0 0.25rem;
+    margin: 0 0.25rem 0 1rem;
+    padding: 0.75rem;
   }
 
   &__icons {
       text-align: right;
       color: $color-grey-dark;
+  }
+
+  &__icon {
+    background-color: $color-grey-dark;
+    color: white;
   }
 }
 </style>

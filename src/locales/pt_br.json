@@ -97,7 +97,7 @@
     },
     "analyze_text": {
       "grid1": "Faça uma requisição HTTP ao serviço NLP, siga o exemplo abaixo.",
-      "method_send": "POST com form-data:",
+      "method_send": "POST com application/json:",
       "language_code": "código do idioma",
       "text_to_analyze": "texto para análise",
       "response": "Resposta:",
