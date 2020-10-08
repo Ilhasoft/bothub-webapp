@@ -4,7 +4,7 @@
       <language-badge
         :language="language"
         class="token-item__badge" />
-      {{ repository_version__name }}
+      <div class="token-item__version">{{ repository_version__name }}</div>
     </div>
     <b-field class="token-item__field">
       <b-input
@@ -73,23 +73,28 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
     .token-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        padding: 0.5rem;
+        padding: 0.5rem 0;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
 
-        &__field {
-            min-width: 75%;
+        &__info {
+          display: flex;
+          align-items: center;
+          > * {
+            margin-right: 1rem;
+          }
+        }
+
+        &__version {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          max-width: 5rem;
         }
 
         &__button {
             color: $color-white;
             background-color: $color-grey;
             margin-left: 0.5rem;
-        }
-
-        &__badge {
-            margin-right: 0.1rem;
         }
     }
 </style>

@@ -402,7 +402,8 @@
       "delete_confirm": "Delete all selected translations?",
       "default_error": "Something went wrong, try again later.",
       "ok": "Ok",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "send_to_translators": "Send to translators"
     },
     "orgs": {
       "owner": "Owned by",
