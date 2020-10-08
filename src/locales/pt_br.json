@@ -114,7 +114,7 @@
       "quick_test": "TESTE RÁPIDO",
       "internet_off_quick_test": "Você está offline, verifique sua conexão",
       "without_train_quick_test": "Você ainda não adicionou frases ao treinamento, adicione para testar.",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde",
+      "error_quick_test": "Algo de errado aconteceu, tente novamente mais tarde",
       "intent": "Intenção",
       "debug": "Debug",
       "raw": "Raw",
