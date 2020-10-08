@@ -132,6 +132,7 @@ export default {
     },
     deleteAll() {
       this.$buefy.dialog.alert({
+        title: this.$t('webapp.translate.delete_all'),
         message: this.$t('webapp.translate.delete_confirm'),
         confirmText: this.$t('webapp.home.delete'),
         cancelText: this.$t('webapp.home.cancel'),

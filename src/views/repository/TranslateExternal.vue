@@ -19,7 +19,7 @@
           @onTranslate="translating = true"
           @onTranslateComplete="translating = false"/>
         <translation-sentence-status
-          :key="translateUpdate"
+          :key="`${translateUpdate}-${translating}`"
           :external-token="token"
           :to-language="repository.target_language"
           :initial-data="sentenceFilter.key"

@@ -197,12 +197,13 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from}-${translate.to}-${translate.update}`"
+                  :key="`${translate.from}-${translate.to}-${translate.update}-${translating}`"
                   :repository-uuid="repository.uuid"
                   :version="getSelectedVersion"
                   :language="repository.language"
                   :to-language="translate.to"
                   :initial-data="sentenceFilter.key"
+                  :translate-status="translating"
                   class="repository-translate__list__search__status"
                   @search="onFilter"/>
                 <filter-examples
