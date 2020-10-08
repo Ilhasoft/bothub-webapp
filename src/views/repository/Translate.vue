@@ -203,6 +203,7 @@
                   :language="repository.language"
                   :to-language="translate.to"
                   :initial-data="sentenceFilter.key"
+                  :translate-status="translating"
                   class="repository-translate__list__search__status"
                   @search="onFilter"/>
                 <filter-examples
