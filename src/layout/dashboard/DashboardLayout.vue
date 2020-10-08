@@ -7,7 +7,7 @@
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
             <custom-icon
-              value="botinho"
+              :value="categoryIcon"
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon"/>
           </div>
@@ -162,6 +162,12 @@ export default {
     },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+    },
+    categoryIcon() {
+      if (!this.getCurrentRepository
+      || !this.getCurrentRepository.categories_list
+      || this.getCurrentRepository.categories_list.length < 1) return 'botinho';
+      return this.getCurrentRepository.categories_list[0].icon || 'botinho';
     },
   },
   methods: {
