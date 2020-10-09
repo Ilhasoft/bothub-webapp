@@ -84,8 +84,29 @@
                 type="is-primary"> {{ $t('webapp.orgs.add_repo') }} </b-button>
             </router-link>
           </div>
+          <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
+          <div
+            :class="{
+              'org__search-repository': true,
+              'org__search-repository__empty': repositoryLists.org.empty}">
+            <b-field class="org__search-repository__input">
+              <b-input
+                v-model="search"
+                :placeholder="$t('webapp.layout.search_bots')"
+                no-border
+                icon-right="magnify"
+              />
+            </b-field>
+            <div class="org__search-repository__categories">
+              <categories-list
+                v-model="category"/>
+              <languages-list
+                v-model="language"
+                open-position="bottom-left" />
+            </div>
+          </div>
           <div v-show="!repositoryLists.org.empty">
-            <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.mine') }} </h1>
+
             <paginated-list
               v-if="repositoryLists.org"
               :item-component="repositoryItemElem"
@@ -98,6 +119,11 @@
               v-if="!repositoryLists.using.empty"
               class="org__repositories__separator" />
           </div>
+          <p
+            v-if="repositoryLists.org.empty && checkInputs"
+            class="org__search-repository__empty__text">
+            {{ $t('webapp.my_profile.no_repo_filter') }}
+          </p>
 
           <div v-show="!repositoryLists.using.empty">
             <h1 class="org__title"> {{ $t('webapp.orgs.intelligences.using') }} </h1>
@@ -153,6 +179,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
 import EditOrgForm from '@/components/org/EditOrgForm';
@@ -165,6 +192,8 @@ import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
 import OrgSetAuthorizationRoleForm from '@/components/org/OrgSetAuthorizationRoleForm';
 import OrgAuthorizationsList from '@/components/org/OrgAuthorizationsList';
+import CategoriesList from '@/components/shared/CategoriesList';
+import LanguagesList from '@/components/shared/LanguagesList';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -178,6 +207,8 @@ export default {
     PaginatedList,
     Activities,
     UserReportList,
+    CategoriesList,
+    LanguagesList,
     PaymentForm,
     PaymentHistory,
     OrgSetAuthorizationRoleForm,
@@ -189,6 +220,9 @@ export default {
       errorMessage: null,
       loading: false,
       selected: 0,
+      category: 0,
+      language: '',
+      search: '',
       repositoryItemElem: RepositoryCard,
       paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
@@ -220,6 +254,13 @@ export default {
       if (!this.org || !this.org.authorization) return false;
       return this.org.authorization.can_write;
     },
+    checkInputs() {
+      if (this.language !== ''
+      || this.search !== ''
+      || this.category !== 0) return true;
+
+      return false;
+    },
   },
   watch: {
     authenticated() {
@@ -228,6 +269,15 @@ export default {
           name: 'signIn',
         });
       }
+    },
+    category() {
+      this.updateRepositoryList();
+    },
+    language() {
+      this.updateRepositoryList();
+    },
+    search() {
+      this.updateRepositoryList();
     },
   },
   mounted() {
@@ -240,6 +290,27 @@ export default {
       'getOrgRepositories',
       'getOrg',
     ]),
+    updateRepositoryList: _.debounce(async function debounceSearch() {
+      const { search } = this;
+      let repositorySearch;
+      if (this.category === 0) {
+        repositorySearch = await this.getOrgRepositories({
+          nickname: this.nickname,
+          language: this.language,
+          search,
+          limit: this.repositoriesLimit,
+        });
+      } else if (this.category > 0) {
+        repositorySearch = await this.getOrgRepositories({
+          nickname: this.nickname,
+          categories: this.category,
+          language: this.language,
+          search,
+          limit: this.repositoriesLimit,
+        });
+      }
+      this.repositoryLists.org = repositorySearch;
+    }, 1000),
     async loadOrg() {
       this.loading = true;
       try {
@@ -272,6 +343,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
+
 h1 {
         max-width: 58.25rem;
         padding: 0 1rem;
@@ -316,6 +390,46 @@ h1 {
               color: $color-grey-darker;
             }
         }
+        &__search-repository{
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          max-width: 72.875rem;
+          padding: 1rem;
+          margin: auto;
+
+          &__input{
+            padding-left: 1rem;
+            margin: 0;
+          }
+
+          &__empty{
+            margin-bottom: 5rem;
+
+            &__text{
+              font-weight: $font-weight-bolder;
+              text-align: center;
+              margin-bottom: 3rem;
+            }
+          }
+
+          &__categories{
+          display: flex;
+          justify-content: flex-end;
+
+          > * {
+            margin-left: 0.625rem;
+          }
+
+          @media screen and (max-width: $mobile-width) {
+           flex-direction: column;
+          }
+
+        }
+         @media screen and (max-width: $mobile-width) {
+           align-items: center;
+          }
+      }
 
         &__tabs {
           &__container {
@@ -326,7 +440,7 @@ h1 {
 
         &__add-repo {
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           > * {
             margin-right: 1rem;
           }

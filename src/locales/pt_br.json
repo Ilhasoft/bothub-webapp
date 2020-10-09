@@ -467,6 +467,7 @@
       "free_user": "USUÁRIO GRÁTIS",
       "profile": "Perfil",
       "no_repo": "Você ainda não possui nenhuma inteligência.",
+      "no_repo_filter": "Você ainda não possui esse tipo de inteligência.",
       "add_repo": "Criar inteligência",
       "activities": {
         "title": "Atividades",
