@@ -47,7 +47,7 @@ class="t">
               </b-select>
             </b-field>
             <div class="repository-analyze-text__item__authotization-container__copy">
-              <strong>{{ getProfileName[0] }} - </strong> <p> {{ getProfileName[1] }}</p>
+              <strong>{{ getProfileDetail[0] }} - </strong> <p> {{ getProfileDetail[1] }}</p>
               <b-icon
                 icon="content-copy"
                 class="repository-analyze-text__item__authotization-container__copy__icon"
@@ -73,7 +73,7 @@ class="t">
             </div>
             <request-generator
               :default-language-field="repository.language"
-              :authorization-uuid="repository.authorization.uuid"/>
+              :authorization-uuid="getProfileDetail[1]"/>
           </div>
         </div>
       </div>
@@ -178,7 +178,7 @@ export default {
       }
       return [];
     },
-    getProfileName() {
+    getProfileDetail() {
       if (this.profileToken !== undefined) {
         const splitProfile = this.profileAuth.split(' - ');
         return splitProfile;
@@ -197,7 +197,7 @@ export default {
   },
   methods: {
     copyText() {
-      navigator.clipboard.writeText(this.getProfileName[1]);
+      navigator.clipboard.writeText(this.getProfileDetail[1]);
       this.$buefy.toast.open({
         message: this.$t('webapp.integration.copy'),
         type: 'is-success',

@@ -95,7 +95,6 @@ export default {
   mounted() {
     this.update = setTimeout(() => {
       this.getStatusData();
-      console.log('here');
     }, 2000);
   },
   beforeDestroy() {
