@@ -248,8 +248,7 @@ export default {
       'getUsingRepositories',
       'updateMyProfile',
     ]),
-    // eslint-disable-next-line func-names
-    updateRepositoryList: _.debounce(async function () {
+    updateRepositoryList: _.debounce(async function debounceSearch() {
       const { search } = this;
       let repositorySearch;
       if (this.category === 0) {
