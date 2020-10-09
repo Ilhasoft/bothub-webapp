@@ -150,6 +150,7 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
 import EditProfileForm from '@/components/user/EditProfileForm';
@@ -163,7 +164,6 @@ import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
 import { mapGetters, mapActions } from 'vuex';
-import _ from 'lodash';
 
 export default {
   name: 'Profile',
