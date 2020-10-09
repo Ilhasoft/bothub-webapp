@@ -100,7 +100,6 @@ export default {
       const [translateStatus] = data.results;
 
       if (!translateStatus) {
-        this.resetProgress();
         this.loading = false;
         return;
       }
