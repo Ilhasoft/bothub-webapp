@@ -466,6 +466,7 @@
       "free_user": "FREE USER",
       "profile": "Profile",
       "no_repo": "You don't have any bots yet",
+      "no_repo_filter": "You don't have that kind of intelligence yet",
       "add_repo": "Create bot",
       "activities": {
         "title": "Activities",

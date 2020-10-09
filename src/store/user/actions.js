@@ -40,15 +40,16 @@ export default {
   getPaymentHistory(store, limit = 20) {
     return user.getPaymentHistory(limit);
   },
-  getMyRepositories(store, limit = 20) {
+  getMyRepositories(store, {
+    limit, search, categories, language,
+  }) {
     /* istanbul ignore next */
-    return user.myRepositories(limit);
+    return user.myRepositories(limit, search, categories, language);
   },
   getContributingRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.permissionRepositories(limit);
   },
-  // TODO
   getUsingRepositories(store, limit = 20) {
     /* istanbul ignore next */
     return user.myRepositories(limit);

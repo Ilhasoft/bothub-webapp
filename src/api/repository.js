@@ -64,7 +64,6 @@ export default {
         repository,
       });
   },
-  // Verificar
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
