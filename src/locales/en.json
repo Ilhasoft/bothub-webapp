@@ -97,7 +97,7 @@
     },
     "analyze_text": {
       "grid1": "Make a HTTP request to NLP service, follow the example below.",
-      "method_send": "POST with form-data:",
+      "method_send": "POST with application/json:",
       "language_code": "language code",
       "text_to_analyze": "text to analyze",
       "response": "Response:",
@@ -388,6 +388,7 @@
       "translated": "Translated",
       "not_translated": "Not translated",
       "inconsistent": "Inconsistent",
+      "delete_all": "Delete Translations",
       "save_all": "Save all in this page",
       "select_all": "Select all in this page",
       "auto_translate": "Auto translate",
@@ -397,10 +398,12 @@
       "unsupported": "Language not supported for auto translate",
       "share_title": "Share link for translation",
       "share_subtitle": "Anyone on the Internet with this link will be able to edit this translation.",
-      "create_new_token": "Generate a new link",
+      "create_new_token": "Manage link",
       "delete_confirm": "Delete all selected translations?",
       "default_error": "Something went wrong, try again later.",
-      "ok": "Ok"
+      "ok": "Ok",
+      "cancel": "Cancel",
+      "send_to_translators": "Send to translators"
     },
     "orgs": {
       "owner": "Owned by",

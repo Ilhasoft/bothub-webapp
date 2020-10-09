@@ -61,9 +61,9 @@
                 @onTranslateComplete="translating = false" />
               <b-button
                 :disabled="!(repository && translate.to)"
+                :label="$t('webapp.translate.send_to_translators')"
                 class="repository-translate__header__button"
                 type="is-primary"
-                label="Send to translators"
                 @click="tokenModalOpen = true" />
             </div>
           </div>
@@ -197,12 +197,13 @@
             <div class="repository-translate__list">
               <div class="repository-translate__list__search">
                 <translation-sentence-status
-                  :key="`${translate.from}-${translate.to}-${translate.update}`"
+                  :key="`${translate.from}-${translate.to}-${translate.update}-${translating}`"
                   :repository-uuid="repository.uuid"
                   :version="getSelectedVersion"
                   :language="repository.language"
                   :to-language="translate.to"
                   :initial-data="sentenceFilter.key"
+                  :translate-status="translating"
                   class="repository-translate__list__search__status"
                   @search="onFilter"/>
                 <filter-examples

@@ -13,16 +13,10 @@
     </div>
 
     <div slot="options">
-      <b-tooltip
-        v-if="invalid"
-        :label="$t('webapp.translate.invalid_entities')"
-        multilined
-        type="is-warning">
-        <b-icon
-          size="is-small"
-          class="is-warining"
-          icon="alert" />
-      </b-tooltip>
+      <b-icon
+        :icon="`chevron-${isOpen ? 'up' : 'down'}`"
+        class="example-accordion__icon"
+        @click.native="isOpen = !isOpen"/>
     </div>
 
     <div
@@ -113,10 +107,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    invalid: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {
@@ -174,11 +164,11 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 
-.is-warning {
-  color: $color-warning;
-}
-
   .example-accordion {
+
+    &__icon {
+      color: $color-grey-dark;
+    }
 
     &__text {
       max-width: 100%;
