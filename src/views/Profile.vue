@@ -77,7 +77,7 @@
         </div>
 
         <p
-          v-if="repositoryLists.mine.empty"
+          v-if="repositoryLists.mine.empty && checkInputs"
           class="profile__search-repository__empty__text">
           {{ $t('webapp.my_profile.no_repo_filter') }}
         </p>
@@ -210,6 +210,11 @@ export default {
     ]),
     noRepositories() {
       return Object.values(this.repositoryLists).every(value => value.empty);
+    },
+    checkInputs() {
+      if (this.language !== '' || this.search !== '' || this.category !== 0) return true;
+
+      return false;
     },
   },
   watch: {
