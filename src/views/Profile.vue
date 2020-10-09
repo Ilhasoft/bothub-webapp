@@ -212,7 +212,9 @@ export default {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
     checkInputs() {
-      if (this.language !== '' || this.search !== '' || this.category !== 0) return true;
+      if (this.language !== ''
+      || this.search !== ''
+      || this.category !== 0) return true;
 
       return false;
     },
