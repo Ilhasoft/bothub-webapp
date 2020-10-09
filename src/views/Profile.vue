@@ -163,6 +163,7 @@ import PaginatedList from '@/components/shared/PaginatedList';
 import PaymentForm from '@/components/payment/PaymentForm';
 import PaymentHistory from '@/components/payment/PaymentHistory';
 import { mapGetters, mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   name: 'Profile',
@@ -186,7 +187,6 @@ export default {
       category: 0,
       language: '',
       search: '',
-      repositorySearch: '',
       repositoryLists: {
         mine: { empty: false },
         contributing: { empty: false },
@@ -245,28 +245,27 @@ export default {
       'getContributingRepositories',
       'getUsingRepositories',
       'updateMyProfile',
-      'getinho',
     ]),
-    async updateRepositoryList() {
+    // eslint-disable-next-line func-names
+    updateRepositoryList: _.debounce(async function () {
       const { search } = this;
-      this.repositorySearch = null;
-
+      let repositorySearch;
       if (this.category === 0) {
-        this.repositorySearch = await this.getMyRepositories({
+        repositorySearch = await this.getMyRepositories({
           language: this.language,
           search,
           limit: this.repositoriesLimit,
         });
       } else if (this.category > 0) {
-        this.repositorySearch = await this.getMyRepositories({
+        repositorySearch = await this.getMyRepositories({
           categories: this.category,
           language: this.language,
           search,
           limit: this.repositoriesLimit,
         });
       }
-      this.repositoryLists.mine = this.repositorySearch;
-    },
+      this.repositoryLists.mine = repositorySearch;
+    }, 1000),
     submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
