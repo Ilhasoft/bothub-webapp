@@ -51,7 +51,7 @@ export default {
   },
   async mounted() {
     await this.updateRepository();
-    this.repositoryRequeriments();
+    this.repositoryRequirements();
     if (!this.repositoryVersion) {
       this.updateRepositoryVersion(
         this.repository.version_default,
@@ -70,7 +70,7 @@ export default {
       'getRepositoryRequirements',
       'setRequirements',
     ]),
-    async repositoryRequeriments() {
+    async repositoryRequirements() {
       try {
         const { data } = await this.getRepositoryRequirements({
           repositoryUuid: this.repository.uuid,

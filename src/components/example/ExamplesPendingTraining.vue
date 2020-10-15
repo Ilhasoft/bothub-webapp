@@ -88,7 +88,7 @@ export default {
     },
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
-      await this.repositoryRequeriments();
+      await this.repositoryRequirements();
       if (this.repositoryStatus.count !== 0) {
         const date = new Date();
         if (this.repositoryStatus.results[0].status !== 2
@@ -117,7 +117,7 @@ export default {
         }
       }
     },
-    async repositoryRequeriments() {
+    async repositoryRequirements() {
       try {
         const { data } = await this.getRepositoryRequirements({
           repositoryUuid: this.repository.uuid,
