@@ -16,7 +16,7 @@
       v-if="trainProgress"
       class="train__progress">
       <progress-bar
-        :progres="progress"
+        :progress="progress"
         type="is-secondary"/>
       <p v-html="$t('webapp.trainings.train_progress', {progress: progress})"/>
     </div>
