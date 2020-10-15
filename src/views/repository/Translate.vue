@@ -2,7 +2,6 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-
     <div v-if="repository">
       <div v-if="authenticated">
         <div
@@ -233,7 +232,8 @@
             <train
               v-if="repository"
               ref="train"
-              :show-button="repository.ready_for_train"
+              :show-button="getRequirements.ready_for_train"
+              :requirements="getRequirements"
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
@@ -292,12 +292,12 @@
       :language="translate.to"
       :url-generator="externalUrlGenerator"
       :repository-uuid="repository.uuid" />
-      <!-- <tour
+    <tour
       v-if="activeTutorial === 'translate'"
       :step-count="1"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
-      name="translate" /> -->
+      name="translate" />
   </repository-view-base>
 </template>
 
@@ -385,6 +385,7 @@ export default {
       'authenticated',
       'activeTutorial',
       'getSelectedVersion',
+      'getRequirements',
     ]),
     baseLanguage() {
       const languageObject = Object.values(

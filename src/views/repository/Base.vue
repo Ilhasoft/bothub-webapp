@@ -10,6 +10,7 @@ export default {
     return {
       repository,
       errorCode: null,
+      error: null,
     };
   },
   computed: {
@@ -50,6 +51,7 @@ export default {
   },
   async mounted() {
     await this.updateRepository();
+    this.repositoryRequirements();
     if (!this.repositoryVersion) {
       this.updateRepositoryVersion(
         this.repository.version_default,
@@ -65,7 +67,20 @@ export default {
     ...mapActions([
       'setUpdateRepository',
       'setRepositoryVersion',
+      'getRepositoryRequirements',
+      'setRequirements',
     ]),
+    async repositoryRequirements() {
+      try {
+        const { data } = await this.getRepositoryRequirements({
+          repositoryUuid: this.repository.uuid,
+          version: this.repository.repository_version_id,
+        });
+        this.setRequirements(data);
+      } catch (error) {
+        this.error = error;
+      }
+    },
     async updateRepository(silent = false) {
       const { ownerNickname, slug } = this.$route.params;
 

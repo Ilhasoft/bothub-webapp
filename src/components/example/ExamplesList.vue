@@ -109,7 +109,7 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
-          version: this.repositoryVersion,
+          version: this.repository.repository_version_id,
           query: this.query,
           limit: this.perPage,
           endCreatedAt: this.dateLastTrain,
@@ -119,7 +119,7 @@ export default {
     async getRepositoryStatus() {
       const { data } = await this.getRepositoryStatusTraining({
         repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
+        repositoryVersion: this.repository.repository_version_id,
       });
       this.repositoryStatus = data;
     },

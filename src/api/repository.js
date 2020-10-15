@@ -197,4 +197,9 @@ export default {
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
+  repositoryRequirements(repositoryUUID, version) {
+    return request.$http.get(
+      `/v2/repository/train/info/${repositoryUUID}/${version}/`,
+    );
+  },
 };
