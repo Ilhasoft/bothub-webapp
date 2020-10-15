@@ -56,6 +56,7 @@ export default {
       repositoryStatus: null,
       createdAtLastTrain: '',
       dateNow: '',
+      error: null,
     };
   },
   computed: {
@@ -78,13 +79,16 @@ export default {
   methods: {
     ...mapActions([
       'searchExamples',
+      'setRequirements',
       'getRepositoryStatusTraining',
+      'getRepositoryRequirements',
     ]),
     dispatchSave() {
       this.updateExamples(true);
     },
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
+      await this.repositoryRequirements();
       if (this.repositoryStatus.count !== 0) {
         const date = new Date();
         if (this.repositoryStatus.results[0].status !== 2
@@ -101,21 +105,33 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
-          version: this.repositoryVersion,
+          version: this.repository.repository_version_id,
           limit: this.perPage,
           startCreatedAt: this.createdAtLastTrain,
           endCreatedAt: this.dateNow,
         });
+
         const hasPhrases = await this.examplesList.updateItems();
         if (hasPhrases.length !== 0) {
           this.$emit('noPhrases');
         }
       }
     },
+    async repositoryRequirements() {
+      try {
+        const { data } = await this.getRepositoryRequirements({
+          repositoryUuid: this.repository.uuid,
+          version: this.repository.repository_version_id,
+        });
+        this.setRequirements(data);
+      } catch (error) {
+        this.error = error;
+      }
+    },
     async getRepositoryStatus() {
       const { data } = await this.getRepositoryStatusTraining({
         repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
+        repositoryVersion: this.repository.repository_version_id,
       });
       this.repositoryStatus = data;
     },

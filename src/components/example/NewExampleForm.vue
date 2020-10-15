@@ -210,7 +210,7 @@ export default {
       try {
         await this.newExample({
           repository: this.repository.uuid,
-          repositoryVersion: this.repositoryVersion,
+          repositoryVersion: this.repository.repository_version_id,
           ...this.data,
         });
 
