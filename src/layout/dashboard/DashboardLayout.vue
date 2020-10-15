@@ -23,7 +23,7 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <VersionDropdown
+              <version-dropdown
                 v-if="versionEnabled"/>
             </div>
             <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
@@ -150,6 +150,7 @@ export default {
       'versionEnabled',
       'getFinalModal',
       'getFinalMessage',
+      'getRequirements',
     ]),
     hasLoaded() {
       if (this.getCurrentRepository.name) return true;
@@ -158,7 +159,7 @@ export default {
     warningsCount() {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.selectedRepositoryselectedRepository) return 0;
-      return Object.keys(this.getCurrentRepository.languages_warnings).length;
+      return Object.keys(this.getRequirements.languages_warnings).length;
     },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;

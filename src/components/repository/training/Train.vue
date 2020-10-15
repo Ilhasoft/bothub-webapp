@@ -23,9 +23,9 @@
     <train-modal
       v-if="repository"
       :training="training"
-      :requirements-to-train="repository.requirements_to_train"
+      :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
-      :languages-warnings="repository.languages_warnings"
+      :languages-warnings="languagesWarnings"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -79,6 +79,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    requirements: {
+      type: Object,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -96,6 +100,16 @@ export default {
   computed: {
     loading() {
       return this.load || this.loadingStatus;
+    },
+    trainRequirements() {
+      if (!this.requirements
+      || this.requirements.requirements_to_train === undefined) { return {}; }
+      return this.requirements.requirements_to_train;
+    },
+    languagesWarnings() {
+      if (!this.requirements
+      || this.requirements.languages_warnings === undefined) { return {}; }
+      return this.requirements.languages_warnings;
     },
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
@@ -138,7 +152,7 @@ export default {
       try {
         const trainStatus = await this.getTrainingStatus({
           repositoryUUID: this.repository.uuid,
-          version: this.version,
+          version: this.repository.repository_version_id,
         });
         if (trainStatus) {
           this.$emit('statusUpdated', trainStatus);
@@ -153,16 +167,16 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (this.repository.ready_for_train
-          && Object.values(this.repository.requirements_to_train).length === 0
-          && Object.values(this.repository.languages_warnings).length === 0) {
+        if (this.requirements.ready_for_train
+          && Object.values(this.trainRequirements).length === 0
+          && Object.values(this.languagesWarnings).length === 0) {
           await this.train();
           this.loadingStatus = false;
           return;
         }
-        if (!this.repository.ready_for_train
-          && Object.values(this.repository.requirements_to_train).length === 0
-          && Object.values(this.repository.languages_warnings).length === 0) {
+        if (!this.requirements.ready_for_train
+          && Object.values(this.trainRequirements).length === 0
+          && Object.values(this.languagesWarnings).length === 0) {
           this.$buefy.toast.open({
             message: this.$t('webapp.train_modal.language_warning'),
             type: 'is-danger',
@@ -193,7 +207,7 @@ export default {
           type: 'is-danger',
         });
       }
-      if (this.repository.ready_for_train) {
+      if (this.requirements.ready_for_train) {
         this.$emit('onTrainReady');
       }
       this.training = false;

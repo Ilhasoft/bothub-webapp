@@ -25,16 +25,18 @@
             />
             <div class="trainings-repository__new-example__train">
               <div
-                :id="repository.ready_for_train || !noPhrasesYet ? 'tour-training-step-6' : ''"
+                :id="getRequirements.ready_for_train
+                || !noPhrasesYet ? 'tour-training-step-6' : ''"
                 :is-next-disabled="true"
                 :is-previous-disabled="true"
                 class="trainings-repository__list-wrapper__tutorialStep">
                 <train
                   :key="update"
-                  :show-button="repository.ready_for_train || !noPhrasesYet"
+                  :show-button="getRequirements.ready_for_train || !noPhrasesYet"
                   :repository="repository"
+                  :requirements="getRequirements"
                   :authenticated="authenticated"
-                  :version="repositoryVersion"
+                  :version="getSelectedVersion"
                   :update-repository="async () => { updateRepository(false) }"
                   @trainProgressUpdated="trainProgress = $event"
                   @statusUpdated="updateTrainingStatus($event)"
@@ -137,22 +139,19 @@ export default {
       eventClickFinish: false,
       eventReset: false,
       blockedNextStepTutorial: false,
-      repositoryStatus: {},
       textExample: '',
       noPhrasesYet: true,
       trainProgress: false,
-      progress: 10,
+      error: '',
     };
   },
   computed: {
     ...mapGetters([
       'authenticated',
       'activeTutorial',
+      'getSelectedVersion',
+      'getRequirements',
     ]),
-    repositoryUUID() {
-      if (!this.repository || this.repository.uuid === 'null') { return null; }
-      return this.repository.uuid;
-    },
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
       return this.repository.authorization.can_write;
