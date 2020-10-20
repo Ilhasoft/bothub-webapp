@@ -11,9 +11,6 @@
       <div
         :style="{ width: intelligenceForce + '%' }"
         class="intelligence-force__relevance__bar-field">
-        <img
-          src="@/assets/imgs/flags/de.svg"
-          class="intelligence-force__relevance__bar-field__icon" >
         <div class="intelligence-force__relevance__division">
           <div class="intelligence-force__relevance__division__stripe"/>
           <div class="intelligence-force__relevance__division__stripe"/>
@@ -31,20 +28,15 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'IntelligenceForce',
-  data() {
-    return {
-      collapse: true,
-    };
-  },
   computed: {
     ...mapGetters([
       'getCurrentRepository',
     ]),
     intelligenceForce() {
-      const score = this.getCurrentRepository.repository_score;
-      const sumScore = (score.evaluate_size_score
-      + score.intents_balance_score + score.intents_size_score);
-      return sumScore;
+      const scoreObject = this.getCurrentRepository.repository_score;
+      const scoreResult = (scoreObject.evaluate_size_score
+      + scoreObject.intents_balance_score + scoreObject.intents_size_score) / 3;
+      return scoreResult;
     },
     relevanceProgress() {
       if (this.intelligenceForce <= 33) {
@@ -107,6 +99,11 @@ export default {
           margin-left: 16%;
         }
       }
+    }
+    @media screen and (max-width: 45em) {
+        h2{
+            font-size: 1.4rem;
+        }
     }
 }
 
