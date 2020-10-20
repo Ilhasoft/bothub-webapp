@@ -17,7 +17,7 @@
     <div slot="check">
       <language-badge
         :language="language"
-        main />
+        :main="language === repository.language" />
     </div>
     <div
       v-if="!editing"

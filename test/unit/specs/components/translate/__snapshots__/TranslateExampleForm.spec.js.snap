@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslateExampleForm.vue renders correctly 1`] = `
+<div class="translate-form">
+  <example-text-with-highlighted-entities-input-stub value="" entities="" transparent="true" smallicon="true" readonly="true" placeholder="" size="normal" class="translate-form__input">
+    <div class="translate-form__icon" slot="append">
+      <!---->
+    </div>
+  </example-text-with-highlighted-entities-input-stub>
+  <div class="translate-form__entities" style="display: none;">
+    <example-entity-small-input-stub availableentities="" entities="" text="" constrictentities="true"></example-entity-small-input-stub>
+  </div>
+</div>
+`;

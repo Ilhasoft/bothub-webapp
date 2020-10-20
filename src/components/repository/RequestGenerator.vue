@@ -13,17 +13,17 @@
       :is-previous-disabled="true"
       v-model="activeTab">
       <b-tab-item label="cURL">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.curl"
           code-class="bash" />
       </b-tab-item>
       <b-tab-item label="Python">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.python"
           code-class="python" />
       </b-tab-item>
       <b-tab-item label="Javascript">
-        <bh-highlighted-pre
+        <highlighted-code
           :code="codes.javascript"
           code-class="javascript" />
       </b-tab-item>
@@ -33,11 +33,13 @@
 
 <script>
 import LanguageSelect from '@/components/inputs/LanguageSelect';
+import HighlightedCode from '@/components/shared/HighlightedCode';
 import { LANGUAGES } from '@/utils';
 
 
 const components = {
   LanguageSelect,
+  HighlightedCode,
 };
 
 export default {
@@ -78,10 +80,10 @@ export default {
       return {
         curl: [
           'curl -X POST \\',
-          `  -H 'Authorization: Bearer ${this.authorizationUuid}' \\`,
+          `  -H 'Authorization: ${this.authorizationUuid}' \\`,
           `  -F 'language=${this.language}' \\`,
           `  -F "text=${this.text_escaped.curl}" \\`,
-          `  ${process.env.BOTHUB_NLP_BASE_URL}parse/`,
+          `  ${process.env.BOTHUB_NLP_BASE_URL}v2/parse/`,
         ].join('\n'),
         python: [
           'import requests',
@@ -91,8 +93,8 @@ export default {
           `  'text': '${this.text_escaped.python}',`,
           '}',
           '',
-          `headers = { 'Authorization': 'Bearer ${this.authorizationUuid}' }`,
-          `r = requests.post('${process.env.BOTHUB_NLP_BASE_URL}parse/', headers=headers, data=data)`,
+          `headers = { 'Authorization': '${this.authorizationUuid}' }`,
+          `r = requests.post('${process.env.BOTHUB_NLP_BASE_URL}v2/parse/', headers=headers, data=data)`,
           'print(r.json())',
         ].join('\n'),
         javascript: [
@@ -105,8 +107,8 @@ export default {
           '  console.log(JSON.parse(request.response));',
           '};',
           '',
-          `request.open('POST', '${process.env.BOTHUB_NLP_BASE_URL}parse/');`,
-          `request.setRequestHeader('Authorization', 'Bearer ${this.authorizationUuid}');`,
+          `request.open('POST', '${process.env.BOTHUB_NLP_BASE_URL}v2/parse/');`,
+          `request.setRequestHeader('Authorization', '${this.authorizationUuid}');`,
           'request.send(data);',
         ].join('\n'),
       };

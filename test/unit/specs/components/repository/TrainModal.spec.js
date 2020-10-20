@@ -1,6 +1,6 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BH from 'bh';
-import TrainModal from '@/components/repository/TrainModal';
+import TrainModal from '@/components/repository/training/TrainModal';
 import applyFilters from '@/utils/filters';
 
 

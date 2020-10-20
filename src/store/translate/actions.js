@@ -18,6 +18,13 @@ export default {
   }) {
     return translate.translations(repositoryUuid, repositoryVersion, query, limit);
   },
+  async getTranslationFromSentence(store, {
+    repositoryUuid, repositoryVersion, originalId, toLanguage,
+  }) {
+    return translate.translationFromSentence(
+      repositoryUuid, repositoryVersion, originalId, toLanguage,
+    );
+  },
   async deleteTranslation(store, { translationId }) {
     return translate.delete(translationId);
   },
@@ -32,5 +39,19 @@ export default {
   }) {
     return translate.importTranslate(repositoryUuid, versionUUID, formData);
   },
-
+  async getAutoTranslateProgress(store, { repositoryUUID, repositoryVersion }) {
+    return translate.autoTranslateStatus(repositoryUUID, repositoryVersion);
+  },
+  async autoTranslate(store, { repositoryUUID, repositoryVersion, targetLanguage }) {
+    return translate.auto(repositoryUUID, repositoryVersion, targetLanguage);
+  },
+  createExternalToken(store, { repositoryVersion, language }) {
+    return translate.createExternalToken(repositoryVersion, language);
+  },
+  getExternalTokens(store, { repositoryUuid, limit = 12 }) {
+    return translate.getExternalTokens(repositoryUuid, limit);
+  },
+  deleteExternalToken(store, { uuid }) {
+    return translate.deleteExternalToken(uuid);
+  },
 };

@@ -3,6 +3,7 @@
     <form
       class="columns wrapper is-vcentered is-variable is-2"
       @submit.prevent="onSubmit()"
+      @keyup.enter="onEnter()"
     >
       <div class="column is-three-fifths">
         <b-field
@@ -39,8 +40,8 @@
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
             :open-on-focus="true"
+            :keep-first="true"
             dropdown-position="bottom"
-            @keyup.enter.native="onEnter()"
           />
         </b-field>
       </div>
@@ -209,7 +210,7 @@ export default {
       try {
         await this.newExample({
           repository: this.repository.uuid,
-          repositoryVersion: this.repositoryVersion,
+          repositoryVersion: this.repository.repository_version_id,
           ...this.data,
         });
 
@@ -245,6 +246,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .language-append {
   flex-grow: 0;
 }

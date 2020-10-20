@@ -67,9 +67,11 @@ export default {
   computed: {
     filteredChoices() {
       if (!this.value || this.value.length === 0) { return this.choices; }
-      const search = new RegExp(formatters.bothubItemKey()(this.value));
+      const search = new RegExp(formatters.bothubItemKey()(this.value.toLowerCase()));
       return this.choices
-        .filter(choice => search.test(formatters.bothubItemKey()(choice.display_name)));
+        .filter(
+          choice => search.test(formatters.bothubItemKey()(choice.display_name.toLowerCase())),
+        );
     },
   },
   mounted() {
@@ -77,9 +79,9 @@ export default {
   },
   methods: {
     updateInput() {
-      const search = formatters.bothubItemKey()(this.value);
+      const search = formatters.bothubItemKey()(this.value.toLowerCase());
       const option = this.choices.find(
-        choice => formatters.bothubItemKey()(choice.display_name)
+        choice => formatters.bothubItemKey()(choice.display_name.toLowerCase())
                     === search,
       );
       if (option) {

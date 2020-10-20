@@ -9,7 +9,7 @@
           :entity-name="item.value"
           :count="item.examples__count"
           class="badges-card__wrapper__badge"
-          @click.native="goToList(item.value)"/>
+          @click.native="goToIntentList(item.id)"/>
       </div>
     </div>
     <div v-if="examplesCount">
@@ -45,7 +45,7 @@ export default {
     },
   },
   methods: {
-    goToList(intent) {
+    goToIntentList(intent) {
       this.$router.push({ name: 'repository-intentlist', params: { intent } });
     },
   },

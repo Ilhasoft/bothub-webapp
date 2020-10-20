@@ -3,20 +3,27 @@
     <div class="intent-list__content">
       <div class="intent-list__content__descriptions">
         <h1> <strong>{{ $t('webapp.intent.title') }}</strong> </h1>
-        <p> <strong>"</strong> {{ intent }} <strong>"</strong> </p>
+        <p v-if="!editSentences">
+          <strong>"</strong> {{ intentSelected }} <strong>"</strong>
+        </p>
+        <b-field
+          v-else
+          class="intent-list__content__descriptions__edit-intent">
+          <b-input v-model="intentSelected"/>
+        </b-field>
       </div>
-      <!-- <div>
+      <div>
         <b-button
           v-if="!editSentences"
-          ref="editEntityEvent"
-          class="intent-list__content__buttonEdit"
-          @click.native="editOptionsEntity()">{{ $t('webapp.intent.edit_button') }}</b-button>
+          ref="editIntentEvent"
+          class="intent-list__content__button-edit"
+          @click.native="editOptionsIntent()">{{ $t('webapp.intent.edit_button') }}</b-button>
         <b-button
           v-else
-          ref="saveEntityEvent"
-          class="intent-list__content__buttonSave"
+          ref="saveIntentEvent"
+          class="intent-list__content__button-save"
           @click.native="saveEdition()">{{ $t('webapp.intent.save_button') }}</b-button>
-      </div> -->
+      </div>
     </div>
     <div class="intent-list__header__options">
       <p> {{ $tc('webapp.intent.description', totalSentences) }}</p>
@@ -25,7 +32,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import { formatters } from '@/utils';
 
 export default {
   name: 'IntentsList',
@@ -42,8 +50,9 @@ export default {
   data() {
     return {
       editSentences: false,
-      intent: this.$route.params.intent,
+      intentId: this.$route.params.intent,
       errors: {},
+      intentSelected: '',
     };
   },
   computed: {
@@ -58,17 +67,45 @@ export default {
       return 0;
     },
   },
+  watch: {
+    intentSelected() {
+      this.intentSelected = (formatters.bothubItemKey()(this.intentSelected));
+    },
+  },
   mounted() {
-    // this.getEntitiesName();
+    this.getSelectedIntent();
   },
   methods: {
-    // editOptionsEntity() {
-    //   this.editSentences = !this.editSentences;
-    //   this.$emit('setAllEntities', this.allEntities);
-    // },
-    // saveEdition() {
-    //   this.editOptionsEntity();
-    // },
+    ...mapActions([
+      'editIntentName',
+      'setUpdateRepository',
+    ]),
+    editOptionsIntent() {
+      this.editSentences = !this.editSentences;
+      this.$emit('setAllEntities', this.allEntities);
+    },
+    async getSelectedIntent() {
+      const intent = await this.repository.intents.find(
+        intentValue => intentValue.id === Number(this.intentId),
+      );
+      this.intentSelected = intent.value;
+    },
+    async saveEdition() {
+      try {
+        await this.editIntentName({
+          intentId: this.intentId,
+          text: this.intentSelected,
+          repositoryVersion: this.repositoryVersion,
+        });
+        this.$emit('saveEdition');
+      } catch (error) {
+        this.$buefy.toast.open({
+          message: this.$t('webapp.intent.error_intent'),
+          type: 'is-danger',
+        });
+      }
+      this.editOptionsIntent();
+    },
   },
 };
 </script>
@@ -117,19 +154,24 @@ export default {
             display: flex;
             flex-direction: column;
           }
+
+          &__edit-intent{
+          margin: 0.2rem 0.5rem;
+          width: 10rem;
+          }
       }
 
       h1{
         font-size: 1.75rem;
       }
 
-        &__buttonEdit{
+        &__button-edit{
           width: 9.9rem;
           margin-bottom:0.5rem;
           background-color: $color-primary;
           color: #FFFFFF;
         }
-        &__buttonSave{
+        &__button-save{
           width: 9.9rem;
           margin-bottom:0.5rem;
           background-color: $color-secondary-light;

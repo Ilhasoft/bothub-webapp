@@ -28,8 +28,10 @@ export default {
     return org.getAuthorizationList(orgNickname, limit);
   },
 
-  getOrgRepositories(store, { nickname, limit = 20 }) {
-    return repository.searchByOrg(nickname, limit);
+  getOrgRepositories(store, {
+    nickname, limit, search, categories, language,
+  }) {
+    return repository.searchByOrg(nickname, limit, search, categories, language);
   },
 
   getEditOrgSchema(store, { nickname }) {

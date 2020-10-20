@@ -2,7 +2,7 @@
   <div
     class="translation" >
     <div class="columns">
-      <div class="column is-1 translation__language">
+      <div class="translation__language">
         <language-badge
           :language="languageEdit"/>
       </div>
@@ -20,108 +20,34 @@
             @entityAdded="onEntityAdded()"
           />
         </b-field>
-        <div
-          class="translation__entities">
-          <b-field
-            grouped
-            group-multiline>
-            <div
-              v-for="(entity, index) in entitiesToEdit"
-              :key="`entity-${index}`"
-              class="translation__input translation__icon-container">
-              <b-field>
-                <span
-                  slot="label"
-                  class="translation__input__label"
-                  v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-                <b-select
-                  v-model="entity.entity"
-                  expanded
-                  size="is-small"
-                  @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)">
-                  <option
-                    v-for="entity in (getAllEntities || [])"
-                    :key="entity">
-                    {{ entity }}
-                  </option>
-                </b-select>
-              </b-field>
-              <div class="translation__icon-container">
-                <b-icon
-                  class="clickable"
-                  size="is-small"
-                  icon="close"
-                  @click.native.stop="removeEntity(entity, index)"/>
-              </div>
-            </div>
-            <div
-              v-for="(entity, index) in pendingEntities"
-              :key="`pending-entity-${index}`"
-              class="translation__input translation__icon-container">
-              <b-field>
-                <span
-                  slot="label"
-                  class="translation__input__label"
-                  v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
-                <b-select
-                  v-model="entity.entity"
-                  expanded
-                  size="is-small"
-                  @input="pendingEntities[index].entity = intentFormatters(entity.entity)"
-                  @select="elevateToEntity(entity, index)"
-                  @icon-right-click="removePendingEntity(entity, index)">
-                  <option
-                    v-for="entity in (getAllEntities || [])"
-                    :key="entity">
-                    {{ entity }}
-                  </option>
-                </b-select>
-              </b-field>
-              <div class="translation__icon-container">
-                <b-icon
-                  class="clickable"
-                  size="is-small"
-                  icon="close"
-                  @click.native.stop="removePendingEntity(entity, index)"/>
-              </div>
-              <b-field
-                :message="errors.entities"
-                type="is-danger" />
-            </div>
-            <div class="translation__icon-container">
-              <b-tooltip
-                :label="addEntityHelpText"
-                multilined>
-                <b-icon
-                  :disabled="textSelected === null"
-                  :class="{clickable: true,
-                           'icon-disabled': textSelected === null
-                             || !(getAllEntities || []).length
-                  }"
-                  icon="card-plus"
-                  @click.native.stop="addPendingEntity"
-                />
-              </b-tooltip>
-            </div>
-          </b-field>
-          <b-field :message="errors.entities" />
-        </div>
+        <example-entity-small-input
+          v-model="allEntitiesInput"
+          :text="text"
+          :available-entities="getAllEntities"
+          :entities="entities"
+          :text-selected="textSelected"
+          constrict-entities
+          @addedEntity="onEntityAdded" />
+        <b-field :message="errors.entities" />
       </div>
       <div class="translation__icons column is-2">
         <span>
-          <b-icon
-            icon="close"
-            class="clickable"
-            size="is-small"
+          <b-button
+            class="translation__icon"
+            icon-right="close-thick"
             @click.native.stop="cancelEditSentence" />
-
-          <b-icon
-            :icon="submitting ? 'refresh' : 'check'"
-            :class="{clickable: true,
-                     'icon-spin': submitting,
-                     'icon-disabled': submitting }"
-            size="is-small"
-            @click.native.stop="onSubmit" />
+          <b-button
+            :disabled="submitting"
+            class="translation__icon">
+            <b-icon
+              :icon="submitting ? 'refresh' : 'check-bold'"
+              :class="{
+                'translation__icon': true,
+                'icon-spin': submitting
+              }"
+              size="is-small"
+              @click.native.stop="onSubmit" />
+          </b-button>
         </span>
       </div>
     </div>
@@ -134,6 +60,7 @@ import EditExampleBase from './EditExampleBase';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import ExampleEntitySmallInput from '@/components/example/ExampleEntitySmallInput';
 
 export default {
   name: 'EditExampleTranslation',
@@ -141,6 +68,7 @@ export default {
     SentenceAccordion,
     ExampleTextWithHighlightedEntitiesInput,
     LanguageBadge,
+    ExampleEntitySmallInput,
   },
   extends: EditExampleBase,
   props: {
@@ -149,11 +77,19 @@ export default {
       default: null,
     },
   },
+  data() {
+    return {
+      allEntitiesInput: [],
+    };
+  },
   computed: {
     addEntityHelpText() {
       if (!(this.getAllEntities && this.getAllEntities.length > 0)) return this.$t('webapp.translate.no_entities');
       if (this.textSelected === null) return this.$t('webapp.trainings.select_text');
       return this.entityButtonText;
+    },
+    allEntities() {
+      return this.allEntitiesInput;
     },
   },
   methods: {
@@ -208,13 +144,6 @@ export default {
       }
     }
 
-    &__input {
-      margin-right: 0.5rem;
-        &__label {
-            font-size: 12px;
-        }
-    }
-
   &__text {
     margin-bottom: 0.5rem;
 
@@ -224,8 +153,8 @@ export default {
   }
 
   &__language {
-    max-width: 5rem;
-    margin: 0 0.25rem;
+    margin: 0 0.25rem 0 1rem;
+    padding: 0.75rem;
   }
 
   &__icons {
@@ -233,14 +162,9 @@ export default {
       color: $color-grey-dark;
   }
 
-  &__entities {
-    > * {
-      margin: 0 8px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
-    }
+  &__icon {
+    background-color: $color-grey-dark;
+    color: white;
   }
 }
 </style>

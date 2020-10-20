@@ -41,8 +41,28 @@
             <b-button type="is-primary"> {{ $t('webapp.my_profile.add_repo') }} </b-button>
           </router-link>
         </div>
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
+        <div
+          :class="{
+            'profile__search-repository': true,
+            'profile__search-repository__empty': repositoryLists.mine.empty}">
+          <b-field class="profile__search-repository__input">
+            <b-input
+              v-model="search"
+              :placeholder="$t('webapp.layout.search_bots')"
+              no-border
+              icon-right="magnify"
+            />
+          </b-field>
+          <div class="profile__search-repository__categories">
+            <categories-list
+              v-model="category"/>
+            <languages-list
+              v-model="language"
+              open-position="bottom-left" />
+          </div>
+        </div>
         <div v-show="!repositoryLists.mine.empty">
-          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
           <paginated-list
             v-if="repositoryLists.mine"
             :item-component="repositoryItemElem"
@@ -55,6 +75,12 @@
             v-if="!repositoryLists.contributing.empty || !repositoryLists.contributing.empty"
             class="profile__repositories__separator" />
         </div>
+
+        <p
+          v-if="repositoryLists.mine.empty && checkInputs"
+          class="profile__search-repository__empty__text">
+          {{ $t('webapp.my_profile.no_repo_filter') }}
+        </p>
 
         <div v-show="!repositoryLists.contributing.empty">
           <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
@@ -124,10 +150,13 @@
 </template>
 
 <script>
+import _ from 'lodash';
 import Layout from '@/components/shared/Layout';
 import UserAvatar from '@/components/user/UserAvatar';
 import EditProfileForm from '@/components/user/EditProfileForm';
 import RepositoryCard from '@/components/repository/RepositoryCard';
+import CategoriesList from '@/components/shared/CategoriesList';
+import LanguagesList from '@/components/shared/LanguagesList';
 import Activities from '@/components/user/Activities';
 import UserReportList from '@/components/user/UserReportList';
 import TabSelect from '@/components/shared/TabSelect';
@@ -145,6 +174,8 @@ export default {
     TabSelect,
     PaginatedList,
     Activities,
+    CategoriesList,
+    LanguagesList,
     UserReportList,
     PaymentForm,
     PaymentHistory,
@@ -153,6 +184,9 @@ export default {
     return {
       selected: 0,
       repositoryItemElem: RepositoryCard,
+      category: 0,
+      language: '',
+      search: '',
       repositoryLists: {
         mine: { empty: false },
         contributing: { empty: false },
@@ -177,6 +211,13 @@ export default {
     noRepositories() {
       return Object.values(this.repositoryLists).every(value => value.empty);
     },
+    checkInputs() {
+      if (this.language !== ''
+      || this.search !== ''
+      || this.category !== 0) return true;
+
+      return false;
+    },
   },
   watch: {
     authenticated() {
@@ -185,6 +226,15 @@ export default {
           name: 'signIn',
         });
       }
+    },
+    category() {
+      this.updateRepositoryList();
+    },
+    language() {
+      this.updateRepositoryList();
+    },
+    search() {
+      this.updateRepositoryList();
     },
   },
   mounted() {
@@ -198,6 +248,25 @@ export default {
       'getUsingRepositories',
       'updateMyProfile',
     ]),
+    updateRepositoryList: _.debounce(async function debounceSearch() {
+      const { search } = this;
+      let repositorySearch;
+      if (this.category === 0) {
+        repositorySearch = await this.getMyRepositories({
+          language: this.language,
+          search,
+          limit: this.repositoriesLimit,
+        });
+      } else if (this.category > 0) {
+        repositorySearch = await this.getMyRepositories({
+          categories: this.category,
+          language: this.language,
+          search,
+          limit: this.repositoriesLimit,
+        });
+      }
+      this.repositoryLists.mine = repositorySearch;
+    }, 1000),
     submitCoupon() {},
     async updateMyRepositories() {
       this.repositoryLists.mine = await this.getMyRepositories(this.repositoriesLimit);
@@ -214,7 +283,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
+
 $shadow-color: #00000029;
+
 h1 {
         max-width: 58.25rem;
         padding: 0 1rem;
@@ -253,6 +326,47 @@ h1 {
             margin: 0 auto;
         }
 
+        &__search-repository{
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-end;
+          max-width: 72.875rem;
+          padding: 1rem;
+          margin: auto;
+
+          &__input{
+            padding-left: 1rem;
+            margin: 0;
+          }
+
+          &__empty{
+            margin-bottom: 5rem;
+
+            &__text{
+              font-weight: $font-weight-bolder;
+              text-align: center;
+              margin-bottom: 3rem;
+            }
+          }
+
+          &__categories{
+          display: flex;
+          justify-content: flex-end;
+
+          > * {
+            margin-left: 0.625rem;
+          }
+
+          @media screen and (max-width: $mobile-width) {
+           flex-direction: column;
+          }
+
+        }
+         @media screen and (max-width: $mobile-width) {
+           align-items: center;
+          }
+      }
+
         &__content {
           padding: 3.875rem 0 6.563rem 0;
         }
@@ -287,7 +401,7 @@ h1 {
 
         &__add-repo {
           display: flex;
-          justify-content: center;
+          justify-content: flex-end;
           > * {
             margin-right: 1rem;
           }

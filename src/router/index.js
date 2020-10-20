@@ -12,6 +12,7 @@ import ResetPassword from '@/components/ResetPassword';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
+import RepositoryTranslateExternal from '@/views/repository/TranslateExternal';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryIntegration from '@/views/repository/Integration';
@@ -25,6 +26,7 @@ import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
+import DashboardExternalLayout from '@/layout/dashboard/DashboardExternalLayout';
 import PaymentOptions from '@/views/payment/PaymentOptions';
 import PaymentInfo from '@/views/payment/PaymentInfo';
 import Orgs from '@/views/Orgs';
@@ -102,6 +104,18 @@ export default new Router({
     {
       path: '/reset-password/:nickname/:token/',
       component: ResetPassword,
+    },
+    {
+      path: '/external',
+      name: 'external',
+      component: DashboardExternalLayout,
+      children: [
+        {
+          path: ':ownerNickname/:slug/translate/:token',
+          name: 'repository-translate-external',
+          component: RepositoryTranslateExternal,
+        },
+      ],
     },
     {
       path: '/dashboard',

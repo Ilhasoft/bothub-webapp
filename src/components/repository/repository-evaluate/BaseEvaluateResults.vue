@@ -1,7 +1,6 @@
 <template>
   <div
-    v-if="resultId"
-    class="bh-grid bh-grid--column">
+    v-if="resultId">
     <div>
       <evaluate-result-example-list
         :id="resultId"

@@ -7,7 +7,7 @@
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
             <custom-icon
-              value="botinho"
+              :value="categoryIcon"
               size="large"
               class="dashboard-layout__main-panel__header__info__badge__icon"/>
           </div>
@@ -23,7 +23,7 @@
                dashboard-layout__main-panel__header__info__left__wrapper__title">
                 {{ getCurrentRepository.name }}
               </p>
-              <VersionDropdown
+              <version-dropdown
                 v-if="versionEnabled"/>
             </div>
             <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
@@ -122,6 +122,7 @@ import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
+import Analytics from '@/utils/plugins/analytics';
 
 export default {
   name: 'DashboardLayout',
@@ -149,6 +150,7 @@ export default {
       'versionEnabled',
       'getFinalModal',
       'getFinalMessage',
+      'getRequirements',
     ]),
     hasLoaded() {
       if (this.getCurrentRepository.name) return true;
@@ -157,10 +159,16 @@ export default {
     warningsCount() {
       if (!this.getCurrentRepository
         || !this.getCurrentRepository.selectedRepositoryselectedRepository) return 0;
-      return Object.keys(this.getCurrentRepository.languages_warnings).length;
+      return Object.keys(this.getRequirements.languages_warnings).length;
     },
     tutorialEnabled() {
       return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+    },
+    categoryIcon() {
+      if (!this.getCurrentRepository
+      || !this.getCurrentRepository.categories_list
+      || this.getCurrentRepository.categories_list.length < 1) return 'botinho';
+      return this.getCurrentRepository.categories_list[0].icon || 'botinho';
     },
   },
   methods: {
@@ -172,6 +180,7 @@ export default {
     openBeginnerTutorialModal() {
       if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
         this.setTutorialMenuActive();
+        Analytics.send({ category: 'Tutorial', event: 'tutorial open event' });
       }
     },
     collapseHandle() {

@@ -16,34 +16,22 @@
       </div>
       <div class="repository-log-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
-          <div
-            @click="showModalTraining($t('webapp.inbox.training'))">
-            <b-icon
-              id="tour-inbox-step-2"
-              :is-previous-disabled="true"
-              icon="refresh"
-              class="repository-log-list__section__icons"/>
-          </div>
+          <b-button
+            id="tour-inbox-step-2"
+            :is-previous-disabled="true"
+            type="is-primary"
+            icon-right="refresh"
+            @click="showModalTraining($t('webapp.inbox.training'))" />
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
-          <div
-            @click="showModalSentence($t('webapp.inbox.test_sentences'))">
-            <b-icon
-              id="tour-inbox-step-3"
-              :is-previous-disabled="true"
-              :is-next-disabled="true"
-              icon="chat-processing"
-              class="repository-log-list__section__icons"/>
-          </div>
+          <b-button
+            id="tour-inbox-step-3"
+            :is-previous-disabled="true"
+            :is-next-disabled="true"
+            icon-right="chat-processing"
+            type="is-primary"
+            @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
         </b-tooltip>
-        <!--   <b-tooltip :label="$t('webapp.inbox.remove_log_button')">
-          <div @click="showDeleteModal">
-          <b-icon
-            icon="delete"
-            class="repository-log-list__section__icons"/>
-        </div>
-        </b-tooltip>-->
-
       </div>
     </div>
     <paginated-list
@@ -70,6 +58,7 @@ import { mapGetters, mapActions } from 'vuex';
 import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 import IntentModal from '@/components/repository/IntentModal';
+import IntentModalEdition from '@/components/repository/IntentModalWithEdition';
 
 export default {
   name: 'RepositoryLogList',
@@ -77,6 +66,7 @@ export default {
     PaginatedList,
     LogAccordion,
     IntentModal,
+    IntentModalEdition,
   },
   props: {
     query: {
@@ -166,13 +156,13 @@ export default {
           repository: this.repository,
           titleHeader: typeModal,
           confidenceVerify: this.confidenceVerify,
+          logData: this.logData[0],
         },
         parent: this,
-        component: IntentModal,
+        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
         hasModalCard: false,
         trapFocus: true,
         canCancel: false,
-        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -200,13 +190,13 @@ export default {
           info: this.nlp,
           repository: this.repository,
           titleHeader: typeModal,
+          logData: this.logData[0],
         },
         parent: this,
-        component: IntentModal,
+        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
         hasModalCard: false,
         trapFocus: true,
         canCancel: false,
-        width: 700,
         events: {
           addedIntent: (value) => {
             this.verifyIsCorrected(value);
@@ -237,18 +227,20 @@ export default {
         this.isCorrected = true;
       }
     },
-    addToTraining(intent) {
+    addToTraining(values) {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
           await this.newExample({
             ...data,
-            intent,
+            intent: values.intent,
+            text: values.text,
+            entities: values.entities,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
             type: 'is-success',
           });
         } catch (error) {
@@ -259,18 +251,20 @@ export default {
         }
       });
     },
-    addToSentences(intent) {
+    addToSentences(values) {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
           await this.newEvaluateExample({
             ...data,
-            intent,
+            intent: values.intent,
+            text: values.text,
+            entities: values.entities,
             isCorrected: this.isCorrected,
             repositoryVersion: this.version,
           });
           this.$buefy.toast.open({
-            message: `${data.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
             type: 'is-success',
           });
         } catch (error) {
@@ -302,6 +296,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
   .repository-log-list {
     &__pagination {
       margin-top: 1.25rem;
@@ -319,18 +314,20 @@ export default {
         color: $color-grey-dark;
         font-size: 1.1rem;
         font-weight: bold;
-        padding: 0 0.6rem;
+        padding: 0 .6rem 0 1.6rem;
+
+        @media screen and (max-width: $mobile-width) {
+        padding: 0.6rem;
+      }
 
         &__buttonsIcon {
           display: flex;
           justify-content: center;
           align-items: center;
           flex-direction: row;
-        }
-        &__icons {
-          color: $color-grey-dark;
-          margin-right: 0.7rem;
-          cursor: pointer;
+          > * {
+            margin-left: 0.7rem;
+          }
         }
     }
 

@@ -40,7 +40,7 @@
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
-import { mapActions, mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
@@ -64,28 +64,18 @@ export default {
   },
   computed: {
     ...mapState({
-      resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
-      getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
     }),
   },
   watch: {
-    currentLanguage(language) {
-      this.setEvaluateLanguage(language);
-    },
     selectedRepository() {
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
       }
     },
-  },
-  methods: {
-    ...mapActions([
-      'setEvaluateLanguage',
-    ]),
   },
 };
 </script>

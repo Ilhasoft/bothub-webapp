@@ -13,7 +13,7 @@
     v-else
     class="translation" >
     <div class="columns">
-      <div class="column is-1 translation__language">
+      <div class="translation__language">
         <language-badge
           :language="language"/>
       </div>
@@ -24,7 +24,6 @@
           :highlighted="highlighted"
           class="translation__text" />
         <div
-          v-if="entitiesList.length > 0"
           class="translation__entities">
           <b-tooltip
             v-if="!has_valid_entities"
@@ -187,8 +186,8 @@ export default {
   }
 
   &__language {
-    max-width: 5rem;
-    margin: 0 0.25rem;
+    margin: 0 0.25rem 0 1rem;
+    padding: 0.75rem;
   }
 
   &__icons {

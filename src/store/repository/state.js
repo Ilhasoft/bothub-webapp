@@ -4,9 +4,7 @@ export default {
   repositoryVersion: null,
   repositoryVersionName: null,
   updateRepository: false,
-  evaluateResultId: 0,
-  evaluateResultVersion: 0,
-  evaluateLanguage: '',
   updateVersions: false,
   repositoryIsTraining: false,
+  requirements: {},
 };

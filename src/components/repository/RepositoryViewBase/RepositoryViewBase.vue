@@ -6,7 +6,7 @@
       shadow="strong"
       class="rpstr-vw-bs__wrapper">
       <quick-test
-        v-if="repository"
+        v-if="quickTest && repository"
         :repository="repository" />
       <div
         v-if="repository && !repository.fatal && repository.name"
@@ -27,7 +27,7 @@
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"
       class="rpstr-vw-bs__loading">
-      <Loading/>
+      <loading/>
     </div>
     <request-authorization-modal
       v-if="repository"
@@ -80,6 +80,10 @@ export default {
       type: String,
       default: null,
     },
+    quickTest: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -90,6 +94,7 @@ export default {
     ...mapGetters([
       'authenticated',
       'myProfile',
+      'getRequirements',
     ]),
     currentTitle() {
       if (this.title) {
@@ -107,18 +112,20 @@ export default {
       return undefined;
     },
     requirementsCount() {
+      if (!this.getRequirements.requirements_to_train) return 0;
       return Object
-        .keys(this.repository.requirements_to_train)
+        .keys(this.getRequirements.requirements_to_train)
         .reduce(
-          (previous, lang) => this.repository.requirements_to_train[lang].length + previous,
+          (previous, lang) => this.getRequirements.requirements_to_train[lang].length + previous,
           0,
         );
     },
     warningsCount() {
+      if (!this.getRequirements.languages_warnings) return 0;
       return Object
-        .keys(this.repository.languages_warnings)
+        .keys(this.getRequirements.languages_warnings)
         .reduce(
-          (previous, lang) => this.repository.languages_warnings[lang].length + previous,
+          (previous, lang) => this.getRequirements.languages_warnings[lang].length + previous,
           0,
         );
     },
@@ -260,7 +267,7 @@ export default {
         margin: 1rem;
 
         @media screen and (min-width: 1200px) {
-          margin: 1.5rem  7.125rem 1.5rem 5.2rem;
+          margin: 1.5rem  7.125rem 1.5rem 5.5rem;
         }
       }
 

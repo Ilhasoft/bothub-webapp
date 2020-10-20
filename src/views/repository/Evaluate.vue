@@ -16,7 +16,11 @@
             <div class="evaluate__content-header__wrapper">
               <div
                 class="evaluate__content-header__wrapper__language-select">
-                <p><strong>{{ $t('webapp.evaluate.header_title_lang') }}</strong></p>
+                <p>
+                  <strong>
+                    {{ $t('webapp.evaluate.header_title_lang') }}
+                  </strong>
+                </p>
                 <div
                   id="tour-evaluate-step-1"
                   :is-previous-disabled="true">
@@ -122,11 +126,9 @@ export default {
   },
   computed: {
     ...mapState({
-      resultId: state => state.Repository.evaluateResultId,
       selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
-      getEvaluateLanguage: 'getEvaluateLanguage',
       repositoryVersion: 'getSelectedVersion',
       activeTutorial: 'activeTutorial',
     }),
@@ -136,14 +138,11 @@ export default {
         .map((lang, index) => ({
           id: index + 1,
           value: lang,
-          title: `${LANGUAGES[lang]} (${this.selectedRepository.evaluate_languages_count[lang]} ${this.$t('webapp.evaluate.get_examples_test_sentences')})`,
+          title: `${LANGUAGES[lang]} (${this.$tc('webapp.evaluate.get_examples_test_sentences', this.selectedRepository.evaluate_languages_count[lang])})`,
         }));
     },
   },
   watch: {
-    currentLanguage(language) {
-      this.setEvaluateLanguage(language);
-    },
     selectedRepository() {
       if (this.currentLanguage === '') {
         this.currentLanguage = this.selectedRepository.language;
@@ -152,7 +151,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setEvaluateLanguage',
       'runNewEvaluate',
       'getTrainingStatus',
     ]),
@@ -190,7 +188,7 @@ export default {
       try {
         const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
-          language: this.getEvaluateLanguage,
+          language: this.currentLanguage,
           version: this.repositoryVersion,
         });
         this.evaluating = false;

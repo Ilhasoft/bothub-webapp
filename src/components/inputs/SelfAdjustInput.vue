@@ -6,6 +6,7 @@
         :class="{textarea: true,
                  'self-adjust': true,
                  'self-adjust__appended': hasAppend,
+                 'self-adjust__appended--small': hasAppend && smallIcon,
                  'self-adjust--transparent': transparent,
                  'self-adjust__contained': contained,
                  [`self-adjust--${size}`]: true}"
@@ -14,7 +15,7 @@
         v-on="inputListeners"/>
       <span
         v-if="hasAppend"
-        class="icon is-right event-clickable">
+        :class="['icon is-right', `event-clickable${smallIcon ? '--small' : ''}`]">
         <slot name="append" />
       </span>
     </div>
@@ -44,6 +45,10 @@ export default {
       default: 'normal',
     },
     contained: {
+      type: Boolean,
+      default: null,
+    },
+    smallIcon: {
       type: Boolean,
       default: null,
     },
@@ -121,6 +126,10 @@ export default {
 
         &__appended {
             padding: 0.3rem $form-append-width 0.3rem 1rem;
+
+            &--small {
+              padding-right: 1rem;
+            }
         }
 
         &--transparent {
@@ -142,6 +151,10 @@ export default {
         min-width: $form-append-width !important;
         > * {
             pointer-events: all !important;
+        }
+
+        &--small {
+          margin-right: $form-append-width/8;
         }
     }
 </style>

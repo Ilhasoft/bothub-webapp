@@ -171,19 +171,19 @@ export default {
   setUpdateRepository({ commit }, payload) {
     commit('updateRepository', payload);
   },
-  setUpdateEvaluateResultId({ commit }, payload) {
-    commit('updateEvaluateResultId', payload);
-  },
-  setEvaluateLanguage({ commit }, payload) {
-    commit('updateEvaluateLanguage', payload);
-  },
   setRepository({ commit }, payload) {
     commit('setRepository', payload);
+  },
+  setRequirements({ commit }, payload) {
+    commit('updateRequirements', payload);
   },
   async setRepositoryRelatedUuid({ commit }, payload) {
     await commit(TYPES.SET_REPOSITORY_RELATED_UUID, payload);
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
+  },
+  getRepositoryRequirements(store, { repositoryUuid, version }) {
+    return repository.repositoryRequirements(repositoryUuid, version);
   },
 };
