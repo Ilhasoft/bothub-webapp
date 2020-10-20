@@ -46,18 +46,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="summary-information__intelligence-force">
-      <h2>Intelligence force: Regular</h2>
-      <div class="summary-information__intelligence-force__relevance__progress">
-        <div class="summary-information__intelligence-force__relevance__progress__division">
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        </div>
-      </div>
-    </div> -->
+    <intelligence-force/>
   </div>
 </template>
 
@@ -65,11 +54,13 @@
 import { mapGetters } from 'vuex';
 import { languageListToDict } from '@/utils';
 import NumbersCard from '@/components/shared/NumbersCard';
+import IntelligenceForce from '@/components/repository/IntelligenceForce';
 
 export default {
   name: 'SummaryInformation',
   components: {
     NumbersCard,
+    IntelligenceForce,
   },
   data() {
     return {
@@ -91,8 +82,30 @@ export default {
       const usersList = users.map(user => user.nickname);
       return usersList.join(', ');
     },
+    intelligenceForce() {
+      const score = this.getCurrentRepository.repository_score;
+      const sumScore = (score.evaluate_size_score
+      + score.intents_balance_score + score.intents_size_score);
+      return sumScore;
+    },
+    relevanceProgress() {
+      if (this.intelligenceForce <= 33) {
+        return this.$t('webapp.summary.intelligence_force_low');
+      }
+      if (this.intelligenceForce >= 34 && this.intelligenceForce <= 63) {
+        return this.$t('webapp.summary.intelligence_force_regular');
+      }
+      if (this.intelligenceForce >= 64 && this.intelligenceForce <= 100) {
+        return this.$t('webapp.summary.intelligence_force_high');
+      }
+
+      return '';
+    },
   },
   methods: {
+    show() {
+      console.log(this.intelligenceForce);
+    },
     scrollToEntity() {
       const el = document.querySelector('#entity-container');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -197,39 +210,6 @@ export default {
         flex-direction: column;
         align-items: flex-start;
       }
-    }
-
-    &__intelligence-force{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 3rem;
-        width: 98.5%;
-        margin-top: .8rem;
-        margin-left: 0.5rem;
-        border: 1px solid $color-border;
-        height: 147px;
-
-      &__relevance{
-          width: 80%;
-          height: 16px;
-          background-color: #F5F5F5;
-          box-shadow: 0px 3px 6px #00000029;
-        &__progress{
-          width: 80%;
-          background: linear-gradient(to right, #12A391 0%, #00FFDD 100%);
-
-          &__division{
-          display:flex;
-          &__bar{
-            border: 2px solid white;
-            height: 16px;
-            margin-left: 16%;
-          }
-      }
-
-          }
-        }
     }
 }
 
