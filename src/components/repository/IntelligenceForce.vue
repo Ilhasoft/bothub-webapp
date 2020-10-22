@@ -12,11 +12,10 @@
         :style="{ width: intelligenceForce + '%' }"
         class="intelligence-force__relevance__bar-field">
         <div class="intelligence-force__relevance__division">
-          <div class="intelligence-force__relevance__division__stripe"/>
-          <div class="intelligence-force__relevance__division__stripe"/>
-          <div class="intelligence-force__relevance__division__stripe"/>
-          <div class="intelligence-force__relevance__division__stripe"/>
-          <div class="intelligence-force__relevance__division__stripe"/>
+          <div
+            v-for="index in 5"
+            :key="index"
+            class="intelligence-force__relevance__division__stripe"/>
         </div>
       </div>
     </div>
