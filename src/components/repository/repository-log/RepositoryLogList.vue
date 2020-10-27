@@ -144,7 +144,6 @@ export default {
       this.logData = this.logData.filter(log => log.id !== logId);
     },
     pageChanged() {
-      console.log;
       this.pageWasChanged = !this.pageWasChanged;
     },
     showModalTraining(typeModal) {
