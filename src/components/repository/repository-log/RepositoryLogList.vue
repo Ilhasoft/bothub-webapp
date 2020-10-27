@@ -39,10 +39,12 @@
       :item-component="logAccordion"
       :list="list"
       :loading.sync="loading"
+      :is-accordion-open="pageWasChanged"
       :editable="editable"
       @event_nlp="nlp = $event"
       @event_addLog="addLogStructure($event)"
       @event_removeLog="removeLogStructure($event)"
+      @pageChanged="pageChanged()"
     />
 
     <h4
@@ -94,6 +96,7 @@ export default {
       selectAll: false,
       nlp: {},
       loadingLogs: false,
+      pageWasChanged: false,
     };
   },
   computed: {
@@ -139,6 +142,10 @@ export default {
     },
     removeLogStructure(logId) {
       this.logData = this.logData.filter(log => log.id !== logId);
+    },
+    pageChanged() {
+      console.log;
+      this.pageWasChanged = !this.pageWasChanged;
     },
     showModalTraining(typeModal) {
       if (this.activeTutorial === 'inbox') return;
