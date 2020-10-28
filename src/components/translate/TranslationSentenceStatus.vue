@@ -93,6 +93,7 @@ export default {
     },
   },
   mounted() {
+    this.initialStatus();
     this.update = setTimeout(() => {
       this.getStatusData();
     }, 2000);
@@ -107,6 +108,10 @@ export default {
       const sendQuery = this.externalToken ? query : { language: this.language, ...query };
       this.$emit('search', { key, query: sendQuery });
       this.active = key;
+    },
+    initialStatus() {
+      this.active = 'all';
+      this.$emit('search', { key: 'all', query: {} });
     },
     async getStatusData() {
       if (!(this.externalToken || (this.repositoryUuid && this.version))) return;
