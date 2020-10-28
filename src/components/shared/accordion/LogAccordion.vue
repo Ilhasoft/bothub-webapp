@@ -99,6 +99,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -162,6 +166,9 @@ export default {
       } else {
         this.$emit('dispatchEvent', { event: 'event_removeLog', value: this.id });
       }
+    },
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   created() {

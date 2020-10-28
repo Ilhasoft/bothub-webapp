@@ -140,6 +140,10 @@ export default {
       type: Object,
       default: null,
     },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -169,6 +173,9 @@ export default {
       if (this.open && !this.translations) {
         this.loadTranslations();
       }
+    },
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   methods: {

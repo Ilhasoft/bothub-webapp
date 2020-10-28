@@ -6,9 +6,11 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      :is-accordion-open="pageWasChanged"
       :pending-example="pendingExample"
       @itemSave="dispatchSave"
-      @itemDeleted="onItemDeleted($event)" />
+      @itemDeleted="onItemDeleted($event)"
+      @pageChanged="pageChanged()"/>
 
     <br>
     <p
@@ -56,6 +58,7 @@ export default {
       repositoryStatus: null,
       createdAtLastTrain: '',
       dateNow: '',
+      pageWasChanged: false,
     };
   },
   computed: {
@@ -82,6 +85,9 @@ export default {
     ]),
     dispatchSave() {
       this.updateExamples(true);
+    },
+    pageChanged() {
+      this.pageWasChanged = !this.pageWasChanged;
     },
     async updateExamples(force = false) {
       await this.getRepositoryStatus();

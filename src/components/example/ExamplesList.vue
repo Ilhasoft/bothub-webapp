@@ -6,8 +6,10 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      :is-accordion-open="pageWasChanged"
       @itemSave="dispatchSave"
-      @itemDeleted="onItemDeleted($event)" />
+      @itemDeleted="onItemDeleted($event)"
+      @pageChanged="pageChanged()"/>
     <br>
     <div v-if="examplesList && examplesList.empty">
       <p
@@ -60,6 +62,7 @@ export default {
     return {
       examplesList: null,
       dateLastTrain: '',
+      pageWasChanged: false,
     };
   },
   computed: {
@@ -90,6 +93,9 @@ export default {
       'searchExamples',
       'getRepositoryStatusTraining',
     ]),
+    pageChanged() {
+      this.pageWasChanged = !this.pageWasChanged;
+    },
     dispatchSave() {
       this.updateExamples(true);
     },
