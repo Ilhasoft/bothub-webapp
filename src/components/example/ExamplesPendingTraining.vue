@@ -58,6 +58,7 @@ export default {
       repositoryStatus: null,
       createdAtLastTrain: '',
       dateNow: '',
+      error: null,
       pageWasChanged: false,
     };
   },
@@ -81,6 +82,7 @@ export default {
   methods: {
     ...mapActions([
       'searchExamples',
+      'setRequirements',
       'getRepositoryStatusTraining',
     ]),
     dispatchSave() {
@@ -107,11 +109,12 @@ export default {
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({
           repositoryUuid: this.repository.uuid,
-          version: this.repositoryVersion,
+          version: this.repository.repository_version_id,
           limit: this.perPage,
           startCreatedAt: this.createdAtLastTrain,
           endCreatedAt: this.dateNow,
         });
+
         const hasPhrases = await this.examplesList.updateItems();
         if (hasPhrases.length !== 0) {
           this.$emit('noPhrases');
@@ -121,7 +124,7 @@ export default {
     async getRepositoryStatus() {
       const { data } = await this.getRepositoryStatusTraining({
         repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion,
+        repositoryVersion: this.repository.repository_version_id,
       });
       this.repositoryStatus = data;
     },

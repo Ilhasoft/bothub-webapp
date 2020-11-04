@@ -11,6 +11,9 @@ export default {
   getUpdateVersionsState(state) {
     return state.updateVersions;
   },
+  getRequirements(state) {
+    return state.requirements;
+  },
   getSelectedVersion(state) {
     if (!state.repositoryVersion) return null;
     return state.repositoryVersion.id;

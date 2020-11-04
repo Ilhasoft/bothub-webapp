@@ -20,8 +20,8 @@ export default {
       '/v2/account/my-profile/',
     );
   },
-  myRepositories(limit) {
-    return new utils.Page('/v2/repository/search-repositories/', limit);
+  myRepositories(limit = 6, search, categories, language) {
+    return new utils.Page('/v2/repository/search-repositories/', limit, { search, categories, language });
   },
   permissionRepositories(limit) {
     return new utils.Page('/v2/repository/repositories-permissions/', limit);

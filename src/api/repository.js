@@ -54,8 +54,10 @@ export default {
     return new utils.Page('/v2/repository/repositories/', limit, query);
   },
 
-  searchByOrg(orgNickname, limit = 20) {
-    return new utils.Page('/v2/repository/search-repositories/', limit, { nickname: orgNickname });
+  searchByOrg(orgNickname, limit = 20, search, categories, language) {
+    return new utils.Page('/v2/repository/search-repositories/', limit, {
+      nickname: orgNickname, search, categories, language,
+    });
   },
   editVersion(repository, id, name) {
     return request.$http.patch(`/v2/repository/version/${id}/`,
@@ -64,7 +66,6 @@ export default {
         repository,
       });
   },
-  // Verificar
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
@@ -195,5 +196,10 @@ export default {
       type_processing: 0,
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
+  },
+  repositoryRequirements(repositoryUUID, version) {
+    return request.$http.get(
+      `/v2/repository/train/info/${repositoryUUID}/${version}/`,
+    );
   },
 };
