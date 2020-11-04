@@ -101,7 +101,7 @@ import EntityTag from '@/components/repository/repository-evaluate/example/Entit
 import EditExample from '@/components/shared/accordion/EditExample';
 import Loading from '@/components/shared/Loading';
 import EditExampleAccordion from '@/components/shared/accordion/EditExampleAccordion';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'ExampleAccordionWithTranslations',
@@ -140,6 +140,10 @@ export default {
       type: Object,
       default: null,
     },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -153,6 +157,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
     allEntities() {
       if (!this.repository || !this.repository.entities) return [];
       return this.repository.entities.map(entity => entity.value);
@@ -166,6 +173,9 @@ export default {
       if (this.open && !this.translations) {
         this.loadTranslations();
       }
+    },
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   methods: {
