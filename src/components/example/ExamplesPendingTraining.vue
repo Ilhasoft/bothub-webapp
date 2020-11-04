@@ -81,14 +81,12 @@ export default {
       'searchExamples',
       'setRequirements',
       'getRepositoryStatusTraining',
-      'getRepositoryRequirements',
     ]),
     dispatchSave() {
       this.updateExamples(true);
     },
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
-      await this.repositoryRequirements();
       if (this.repositoryStatus.count !== 0) {
         const date = new Date();
         if (this.repositoryStatus.results[0].status !== 2
@@ -115,17 +113,6 @@ export default {
         if (hasPhrases.length !== 0) {
           this.$emit('noPhrases');
         }
-      }
-    },
-    async repositoryRequirements() {
-      try {
-        const { data } = await this.getRepositoryRequirements({
-          repositoryUuid: this.repository.uuid,
-          version: this.repository.repository_version_id,
-        });
-        this.setRequirements(data);
-      } catch (error) {
-        this.error = error;
       }
     },
     async getRepositoryStatus() {
