@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TrainModal from '@/components/repository/training/TrainModal';
 import ProgressBar from '@/components/shared/ProgressBar';
 import TrainResponse from '@/components/repository/training/TrainResponse';
@@ -79,10 +79,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    requirements: {
-      type: Object,
-      default: () => {},
-    },
   },
   data() {
     return {
@@ -98,18 +94,21 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'getRequirements',
+    ]),
     loading() {
       return this.load || this.loadingStatus;
     },
     trainRequirements() {
-      if (!this.requirements
-      || this.requirements.requirements_to_train === undefined) { return {}; }
-      return this.requirements.requirements_to_train;
+      if (!this.getRequirements
+      || this.getRequirements.requirements_to_train === undefined) { return {}; }
+      return this.getRequirements.requirements_to_train;
     },
     languagesWarnings() {
-      if (!this.requirements
-      || this.requirements.languages_warnings === undefined) { return {}; }
-      return this.requirements.languages_warnings;
+      if (!this.getRequirements
+      || this.getRequirements.languages_warnings === undefined) { return {}; }
+      return this.getRequirements.languages_warnings;
     },
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
@@ -130,6 +129,7 @@ export default {
   mounted() {
     if (this.updateOnLoad) this.updateTrainingStatus();
     this.getRepositoryStatus();
+    this.repositoryRequirements();
   },
   methods: {
     ...mapActions([
@@ -137,6 +137,8 @@ export default {
       'getTrainingStatus',
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
+      'getRepositoryRequirements',
+      'setRequirements',
     ]),
     finishedTutorial() {
       this.$emit('finishedTurorial');
@@ -146,6 +148,17 @@ export default {
     },
     closeTrainModal() {
       this.trainModalOpen = false;
+    },
+    async repositoryRequirements() {
+      try {
+        const { data } = await this.getRepositoryRequirements({
+          repositoryUuid: this.repository.uuid,
+          version: this.repository.repository_version_id,
+        });
+        this.setRequirements(data);
+      } catch (error) {
+        this.error = error;
+      }
     },
     async updateTrainingStatus() {
       this.loadingStatus = true;
@@ -167,14 +180,14 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (this.requirements.ready_for_train
+        if (this.getRequirements.ready_for_train
           && Object.values(this.trainRequirements).length === 0
           && Object.values(this.languagesWarnings).length === 0) {
           await this.train();
           this.loadingStatus = false;
           return;
         }
-        if (!this.requirements.ready_for_train
+        if (!this.getRequirements.ready_for_train
           && Object.values(this.trainRequirements).length === 0
           && Object.values(this.languagesWarnings).length === 0) {
           this.$buefy.toast.open({
@@ -207,7 +220,7 @@ export default {
           type: 'is-danger',
         });
       }
-      if (this.requirements.ready_for_train) {
+      if (this.getRequirements.ready_for_train) {
         this.$emit('onTrainReady');
       }
       this.training = false;
