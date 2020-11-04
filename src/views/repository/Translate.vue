@@ -232,8 +232,6 @@
             <train
               v-if="repository"
               ref="train"
-              :show-button="getRequirements.ready_for_train"
-              :requirements="getRequirements"
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
