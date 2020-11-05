@@ -53,6 +53,10 @@ export default {
     const response = await example.get(id);
     return response;
   },
+  async getExampleSuggestion(store, { id }) {
+    const response = await example.suggestions(id);
+    return response;
+  },
   async getEntities(store, { repositoryUuid, repositoryVersion, value }) {
     const response = await entity.search(repositoryUuid, repositoryVersion, { value });
     return response;

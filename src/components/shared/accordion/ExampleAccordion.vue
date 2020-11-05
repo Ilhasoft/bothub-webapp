@@ -27,26 +27,33 @@
       </div>
     </div>
     <div
+      v-if="repository.authorization && repository.authorization.can_contribute"
       slot="options"
       class="level example-accordion__btns-wrapper">
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
+        class="level-right">
+        <div class="level-item">
+          <word-suggestion
+            v-show="!editing && suggestion"
+            :get-sentence="sentenceDetail"
+            class="example-accordion__suggestion"/>
+        </div>
+      </div>
+      <div
         class="level-right">
         <div class="level-item">
           <a
             v-show="!editing"
-            :href="`#delete-example-${id}`"
             class="has-text-danger"
             @click.prevent.stop="editSentence()">
             <b-icon
               icon="pencil"
               size="is-small"
-              class="text-color-grey-dark example__icon" />
+              class="text-color-grey-dark example__icon teste" />
           </a>
         </div>
       </div>
       <div
-        v-if="repository.authorization && repository.authorization.can_contribute"
         class="level-right">
         <div class="level-item">
           <a
@@ -91,6 +98,7 @@ import EditExample from '@/components/shared/accordion/EditExample';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
+import WordSuggestion from '@/components/shared/WordSuggestion';
 
 export default {
   name: 'ExampleAccordion',
@@ -100,6 +108,7 @@ export default {
     EditExample,
     HighlightedText,
     LanguageBadge,
+    WordSuggestion,
   },
   props: {
     id: {
@@ -142,6 +151,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    suggestion: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -161,6 +174,15 @@ export default {
           class: this.getEntityClass(entity.entity),
           ...entity,
         }));
+    },
+    sentenceDetail() {
+      const detail = {
+        id: this.id,
+        text: this.text,
+        intent: this.intent,
+        language: this.language,
+      };
+      return detail;
     },
   },
   watch: {
@@ -237,8 +259,13 @@ export default {
     }
 
     &__btns-wrapper {
-      display: flex;
-      justify-content: flex-end;
+        display: flex;
+        align-items: center;
+    }
+
+    &__suggestion{
+      margin-top: 2px;
+      margin-right: 6px;
     }
   }
 

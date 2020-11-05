@@ -7,6 +7,7 @@
       :repository="repository"
       :per-page="perPage"
       :pending-example="pendingExample"
+      :is-suggestion="true"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)" />
 

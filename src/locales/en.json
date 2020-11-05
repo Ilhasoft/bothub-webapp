@@ -41,6 +41,9 @@
       "changed_password": "Password changed",
       "save_password": "Save password"
     },
+    "paginated_simple": {
+      "empty": "There are no phrases"
+    },
     "create_repository": {
       "create_repo": "Create an intelligence",
       "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then, choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
@@ -700,6 +703,13 @@
     "tutorial_button":{
       "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
+  },
+    "word_suggestion": {
+      "title": "Variation suggestion",
+      "subtitle": "Generate new sentences by varying training sentences.",
+      "cancel": "Cancel",
+      "add_training": "Add training",
+      "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
+    }
   }
-}
 }
