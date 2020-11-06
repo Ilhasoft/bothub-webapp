@@ -68,6 +68,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -79,6 +83,11 @@ export default {
       return this.repository.entities.map(
         entityValue => entityValue.value,
       );
+    },
+  },
+  watch: {
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   methods: {

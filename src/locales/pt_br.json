@@ -237,7 +237,11 @@
       "information_contributors": "Contribuidores | Contribuidor | Contribuidores",
       "information_integrations": "Integrações | Integração | Integrações",
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
-      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
+      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\".",
+      "intelligence_force" : "Força da inteligência",
+      "intelligence_force_low": "Baixa",
+      "intelligence_force_regular": "Regular",
+      "intelligence_force_high": "Alta"
     },
     "integration":{
       "title": "Integrações do Bothub",

@@ -98,7 +98,7 @@
 
 <script>
 import Vue from 'vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import ExampleTranslation from '@/components/shared/accordion/ExampleTranslation';
 import HighlightedText from '@/components/shared/HighlightedText';
@@ -151,6 +151,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -164,6 +168,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
     allEntities() {
       if (!this.repository || !this.repository.entities) return [];
       return this.repository.entities.map(entity => entity.value);
@@ -186,6 +193,9 @@ export default {
       if (this.open && !this.translations) {
         this.loadTranslations();
       }
+    },
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   methods: {
