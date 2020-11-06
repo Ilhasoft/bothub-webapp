@@ -325,6 +325,9 @@ export default {
             line-height: 0.95rem;
         }
       }
+       @media screen and (max-width: $mobile-width) {
+        width: 400px;
+      }
   }
 
 }

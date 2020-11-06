@@ -91,6 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .suggestion-accordion{
     width: 100%;
@@ -117,6 +118,9 @@ export default {
         width: 32rem;
         overflow: hidden;
         text-overflow: ellipsis;
+          @media screen and (max-width: $mobile-width) {
+            width: 12rem;
+          }
         }
     }
 
