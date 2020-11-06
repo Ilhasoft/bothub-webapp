@@ -1,11 +1,10 @@
 <template>
-
-  <div class="repository-log-list">
-    <div class="repository-log-list__section">
+  <div class="example-suggestion-list">
+    <div class="example-suggestion-list__section">
       <b-notification
-        v-if="loadingLogs"
+        v-if="loadingExamples"
         :closable="false">
-        <b-loading :active.sync="loadingLogs"/>
+        <b-loading :active.sync="loadingExamples"/>
       </b-notification>
       <div>
         <b-checkbox
@@ -14,42 +13,35 @@
           {{ $t('webapp.inbox.select_all') }}
         </b-checkbox>
       </div>
-      <div class="repository-log-list__section__buttonsIcon">
+      <div class="example-suggestion-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
           <b-button
-            id="tour-inbox-step-2"
-            :is-previous-disabled="true"
             type="is-primary"
             icon-right="refresh"
-            @click="showModalTraining($t('webapp.inbox.training'))" />
+            @click="()=>{}" />
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
           <b-button
-            id="tour-inbox-step-3"
-            :is-previous-disabled="true"
-            :is-next-disabled="true"
             icon-right="chat-processing"
             type="is-primary"
-            @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
+            @click="()=>{}" />
         </b-tooltip>
       </div>
     </div>
     <paginated-list
       :per-page="perPage"
-      :item-component="logAccordion"
+      :item-component="exampleSuggestion"
       :list="list"
       :loading.sync="loading"
-      :is-accordion-open="pageWasChanged"
       :editable="editable"
+      :repository="repository"
       @event_nlp="nlp = $event"
-      @event_addLog="addLogStructure($event)"
-      @event_removeLog="removeLogStructure($event)"
-      @pageChanged="pageChanged()"
+      @event_addLog="addExampleStructure($event)"
+      @event_removeLog="removeExampleStructure($event)"
     />
-
     <h4
       v-if="list && list.empty && !loading"
-      class="repository-log-list__empty-message">
+      class="example-suggestion-list__empty-message">
       {{ $t('webapp.inbox.list_empty') }}
     </h4>
   </div>
@@ -61,9 +53,10 @@ import PaginatedList from '@/components/shared/PaginatedList';
 import LogAccordion from '@/components/shared/accordion/LogAccordion';
 import IntentModal from '@/components/repository/IntentModal';
 import IntentModalEdition from '@/components/repository/IntentModalWithEdition';
+import ExampleSuggestion from '@/components/shared/accordion/ExampleSuggestion';
 
 export default {
-  name: 'RepositoryLogList',
+  name: 'ExampleSuggestionList',
   components: {
     PaginatedList,
     LogAccordion,
@@ -83,20 +76,21 @@ export default {
       type: Boolean,
       default: false,
     },
+    list: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
-      list: null,
       loading: false,
       logAccordion: LogAccordion,
-      versionsList: null,
-      versions: [],
+      exampleSuggestion: ExampleSuggestion,
       select: '',
-      logData: [],
+      exampleData: [],
       selectAll: false,
       nlp: {},
-      loadingLogs: false,
-      pageWasChanged: false,
+      loadingExamples: false,
     };
   },
   computed: {
@@ -106,7 +100,7 @@ export default {
       activeTutorial: 'activeTutorial',
     }),
     confidenceVerify() {
-      if (this.logData.length > 1) {
+      if (this.exampleData.length > 1) {
         return true;
       }
       return false;
@@ -114,128 +108,34 @@ export default {
   },
   watch: {
     loading() {
-      this.logData = [];
+      this.exampleData = [];
       this.select = '';
     },
     query() {
-      this.updateLogs();
+      this.$emit('updateExamples');
     },
     select() {
       if (this.select === true) {
-        this.logData = [];
+        this.exampleData = [];
       }
       this.$root.$emit('selectAll', this.select);
     },
   },
-  mounted() {
-    this.updateLogs();
-  },
   methods: {
     ...mapActions([
-      'searchLogs',
       'newEvaluateExample',
       'newExample',
       'deleteExample',
     ]),
-    addLogStructure(logValue) {
-      this.logData.push(logValue);
+    addExampleStructure(example) {
+      this.exampleData.push(example);
     },
-    removeLogStructure(logId) {
-      this.logData = this.logData.filter(log => log.id !== logId);
-    },
-    pageChanged() {
-      this.pageWasChanged = !this.pageWasChanged;
-    },
-    showModalTraining(typeModal) {
-      if (this.activeTutorial === 'inbox') return;
-
-      if (this.logData.length === 0) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
-        });
-        return;
-      }
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp,
-          repository: this.repository,
-          titleHeader: typeModal,
-          confidenceVerify: this.confidenceVerify,
-          logData: this.logData[0],
-        },
-        parent: this,
-        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        canCancel: false,
-        events: {
-          addedIntent: (value) => {
-            this.verifyIsCorrected(value);
-            this.addToTraining(value);
-            this.intent = value;
-          },
-          closeModal: () => {
-            this.logData = [];
-            this.select = '';
-            this.$root.$emit('selectAll', false);
-          },
-        },
-      });
-    },
-    showModalSentence(typeModal) {
-      if (this.logData.length === 0) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
-        });
-        return;
-      }
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp,
-          repository: this.repository,
-          titleHeader: typeModal,
-          logData: this.logData[0],
-        },
-        parent: this,
-        component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        canCancel: false,
-        events: {
-          addedIntent: (value) => {
-            this.verifyIsCorrected(value);
-            this.addToSentences(value);
-            this.intent = value;
-            if (this.activeTutorial === 'inbox') {
-              this.$emit('finishedTutorial');
-            }
-          },
-          closeModal: () => {
-            this.logData = [];
-            this.select = '';
-            this.$root.$emit('selectAll', false);
-            if (this.activeTutorial === 'inbox') {
-              this.$emit('dispatchSkip');
-            }
-          },
-        },
-      });
-      this.$nextTick(() => {
-        this.$emit('dispatchNext');
-      });
-    },
-    verifyIsCorrected(value) {
-      if (value === this.nlp.intent.name) {
-        this.isCorrected = false;
-      } else {
-        this.isCorrected = true;
-      }
+    removeExampleStructure(exampleId) {
+      this.exampleData = this.exampleData.filter(example => example.id !== exampleId);
     },
     addToTraining(values) {
-      this.loadingLogs = true;
-      this.logData.map(async ({ data }) => {
+      this.loadingExamples = true;
+      this.exampleData.map(async ({ data }) => {
         try {
           if (typeof values === 'string') {
             await this.newExample({
@@ -261,14 +161,14 @@ export default {
         } catch (error) {
           this.showError(error, data);
         } finally {
-          this.loadingLogs = false;
+          this.loadingExamples = false;
           this.select = false;
         }
       });
     },
     addToSentences(values) {
-      this.loadingLogs = true;
-      this.logData.map(async ({ data }) => {
+      this.loadingExamples = true;
+      this.exampleData.map(async ({ data }) => {
         try {
           if (typeof values === 'string') {
             await this.newEvaluateExample({
@@ -294,7 +194,7 @@ export default {
         } catch (error) {
           this.showError(error, data);
         } finally {
-          this.loadingLogs = false;
+          this.loadingExamples = false;
           this.select = false;
         }
       });
@@ -307,13 +207,6 @@ export default {
         type: 'is-danger',
       });
     },
-    async updateLogs() {
-      this.list = await this.searchLogs({
-        repositoryUUID: this.repository.uuid,
-        query: this.query,
-        limit: this.perPage,
-      });
-    },
   },
 };
 </script>
@@ -321,7 +214,8 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-  .repository-log-list {
+  .example-suggestion-list {
+
     &__pagination {
       margin-top: 1.25rem;
     }
@@ -338,7 +232,8 @@ export default {
         color: $color-grey-dark;
         font-size: 1.1rem;
         font-weight: bold;
-        padding: 0 .6rem 0 1.6rem;
+        margin-bottom: 2rem;
+        padding-left: 1.6rem;
 
         @media screen and (max-width: $mobile-width) {
         padding: 0.6rem;

@@ -517,6 +517,8 @@
     "menu": {
       "summary": "Summary",
       "training": "Training",
+      "train": "Train",
+      "suggestion": "Suggestion",
       "test": "Test",
       "sentences": "Sentences",
       "results": "Results",
@@ -528,6 +530,10 @@
       "settings": "Settings",
       "general":"General",
       "versions": "Versions"
+    },
+    "phrase-suggestion": {
+      "title": "Sentence suggestions",
+      "subtitle": "Select an intent and add suggested phrases to your training."
     },
     "dashboard": {
       "sentences": "sentences",

@@ -19,7 +19,9 @@
         <repository-log-list
           :per-page="perPage"
           :query="query"
+          :list="list"
           :editable="repository.authorization.can_contribute"
+          @updateExamples="updateLogs()"
           @dispatchNext="dispatchClick()"
           @dispatchSkip="dispatchClickSkip()"
           @finishedTutorial="dispatchClickFinish()"/>
@@ -53,32 +55,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
-import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
-import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
-import LoginForm from '@/components/auth/LoginForm';
-import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { LANGUAGES } from '@/utils';
-import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
-
+import RepositoryBase from './Base';
+import { mapGetters, mapActions } from 'vuex';
+import LoginForm from '@/components/auth/LoginForm';
 import IntentModal from '@/components/repository/IntentModal';
+import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 
 export default {
   name: 'RepositoryLog',
   components: {
-    RepositoryViewBase,
-    RepositoryLogList,
-    LoginForm,
-    AuthorizationRequestNotification,
-    FilterEvaluateExample,
     Tour,
+    LoginForm,
     IntentModal,
+    RepositoryLogList,
+    RepositoryViewBase,
+    FilterEvaluateExample,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
     return {
+      list: {},
       perPage: 12,
       name: '',
       loading: false,
@@ -119,10 +121,14 @@ export default {
       });
       this.versionsList = this.versionsList;
       this.versionsList.getAllItems();
+      this.updateLogs();
     },
   },
   methods: {
-    ...mapActions(['getVersions']),
+    ...mapActions([
+      'getVersions',
+      'searchLogs',
+    ]),
     onSearch(query) {
       const filteredQuery = {};
       Object.entries({ ...this.query, ...query }).forEach(([key, value]) => {
@@ -138,6 +144,13 @@ export default {
     },
     dispatchClick() {
       this.eventClick = !this.eventClick;
+    },
+    async updateLogs() {
+      this.list = await this.searchLogs({
+        repositoryUUID: this.repository.uuid,
+        query: this.query,
+        limit: this.perPage,
+      });
     },
   },
 };
