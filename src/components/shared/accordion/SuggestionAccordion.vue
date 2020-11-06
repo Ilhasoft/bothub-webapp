@@ -93,7 +93,7 @@ export default {
 @import '~@/assets/scss/colors.scss';
 
 .suggestion-accordion{
-    width: 450px;
+    width: 100%;
     height: 40px;
     margin: 0.4rem 0;
     background: $color-fake-white;
@@ -114,7 +114,7 @@ export default {
         margin-left: 1rem;
         p {
         white-space: nowrap;
-        width: 21rem;
+        width: 32rem;
         overflow: hidden;
         text-overflow: ellipsis;
         }
