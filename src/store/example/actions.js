@@ -32,7 +32,9 @@ export default {
   searchExamples(store, {
     repositoryUuid, version, query, limit = 20, startCreatedAt, endCreatedAt,
   }) {
-    return example.search(repositoryUuid, version, query, limit, startCreatedAt, endCreatedAt);
+    const response = example.search(repositoryUuid, version,
+      query, limit, startCreatedAt, endCreatedAt);
+    return response;
   },
   async deleteExample(store, { id }) {
     await example.delete(id);

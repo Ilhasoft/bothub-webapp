@@ -72,7 +72,7 @@ export default {
       margin: .75rem .5rem;
 
       &__badge {
-        height: 1.5rem;
+        height: 2.563rem;
         margin: .4rem .5rem 0 0;
         padding: 0 1rem 0 1rem;
         line-height: calc(1.5rem - 4px);

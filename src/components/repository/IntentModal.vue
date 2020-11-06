@@ -16,7 +16,6 @@
             :placeholder="$t('webapp.inbox.intent')"
             size="is-medium"
             expanded>
-
             <option
               v-for="intent in repository.intents_list"
               v-show="info.intent_ranking.length == 0 || confidenceVerify"

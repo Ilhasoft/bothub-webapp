@@ -21,6 +21,7 @@ import RepositoryResults from '@/views/repository/Results';
 import RepositoryResult from '@/views/repository/Result';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
+import PhraseSuggestion from '@/views/repository/PhraseSuggestion';
 import Entity from '@/views/repository/Entity';
 import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
@@ -131,6 +132,11 @@ export default new Router({
           path: ':ownerNickname/:slug/training/',
           name: 'repository-training',
           component: RepositoryTrainings,
+        },
+        {
+          path: ':ownerNickname/:slug/suggestion/',
+          name: 'repository-suggestion',
+          component: PhraseSuggestion,
         },
         {
           path: ':ownerNickname/:slug/translate/',

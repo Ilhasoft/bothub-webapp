@@ -2,82 +2,67 @@
   <repository-view-base
     :repository="repository"
     :error-code="errorCode">
-    <div
-      v-if="authenticated"
-      class="repository-log">
-      <div v-if="repository && repository.authorization.can_contribute">
-        <div class="repository-log__header">
-          <h1> {{ $t('webapp.menu.inbox') }} </h1>
-          <p> {{ $t('webapp.inbox.description') }} </p>
+    <div v-if="repository">
+      <div v-if="authenticated">
+        <div
+          v-if="repository.authorization.can_contribute"
+          class="phrase-suggestion">
+          <div class="phrase-suggestion__header">
+            <h2 class="phrase-suggestion__header__title">
+              {{ $t('webapp.phrase-suggestion.title') }}
+            </h2>
+            <p class="phrase-suggestion__header__subtitle">
+              {{ $t('webapp.phrase-suggestion.subtitle') }}
+            </p>
+          </div>
+          <badges-intents-suggestion
+            :list="repository.intents"/>
+          <select-all-examples
+            :per-page="perPage"
+            :query="query"
+            :list="list"
+            :editable="repository.authorization.can_contribute"
+            is-suggestion
+            @updateExamples="updateLogs()"/>
         </div>
-        <filter-evaluate-example
-          v-if="repository"
-          :intents="repository.intents_list"
-          :versions="versions"
-          language-filter
-          @querystringformatted="onSearch($event)"/>
-        <select-all-examples
-          :per-page="perPage"
-          :query="query"
-          :list="list"
-          :editable="repository.authorization.can_contribute"
-          @updateExamples="updateLogs()"
-          @dispatchNext="dispatchClick()"
-          @dispatchSkip="dispatchClickSkip()"
-          @finishedTutorial="dispatchClickFinish()"/>
+        <authorization-request-notification
+          v-else
+          :available="!repository.available_request_authorization"
+          :repository-uuid="repository.uuid"
+          @onAuthorizationRequested="updateRepository(false)" />
       </div>
-      <authorization-request-notification
-        v-else-if="repository"
-        :available="!repository.available_request_authorization"
-        :repository-uuid="repositoryUUID"
-        @onAuthorizationRequested="updateRepository(false)" />
+      <div
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.trainings.login') }}
+        </b-notification>
+        <login-form hide-forgot-password />
+      </div>
     </div>
-
-    <div
-      v-else>
-      <b-notification
-        :closable="false"
-        class="is-info">
-        {{ $t('webapp.inbox.signin_you_account') }}
-      </b-notification>
-      <login-form hide-forgot-password />
-    </div>
-
-    <tour
-      v-if="activeTutorial === 'inbox'"
-      :step-count="5"
-      :next-event="eventClick"
-      :skip-event="eventSkip"
-      :finish-event="eventClickFinish"
-      name="inbox" />
   </repository-view-base>
-
 </template>
 
 <script>
 import { LANGUAGES } from '@/utils';
-import Tour from '@/components/Tour';
 import RepositoryBase from './Base';
 import { mapGetters, mapActions } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
-import IntentModal from '@/components/repository/IntentModal';
 import SelectAllExamples from '@/components/shared/SelectAllExamples';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
-import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
-import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
+import BadgesIntentsSuggestion from '@/components/repository/BadgesIntentsSuggestion';
+import ExampleItem from '@/components/example/ExampleItem';
+import PaginatedList from '@/components/shared/PaginatedList';
 
 export default {
-  name: 'RepositoryLog',
+  name: 'PhraseSuggestion',
   components: {
-    Tour,
     LoginForm,
-    IntentModal,
-    RepositoryLogList,
     SelectAllExamples,
     RepositoryViewBase,
-    FilterEvaluateExample,
-    AuthorizationRequestNotification,
+    BadgesIntentsSuggestion,
+    PaginatedList,
   },
   extends: RepositoryBase,
   data() {
@@ -87,6 +72,8 @@ export default {
       name: '',
       loading: false,
       versionsList: null,
+      examplesList: null,
+      exampleItemElem: ExampleItem,
       query: {},
       eventClick: false,
       eventSkip: false,
@@ -123,13 +110,15 @@ export default {
       });
       this.versionsList = this.versionsList;
       this.versionsList.getAllItems();
-      this.updateLogs();
     },
+  },
+  mounted() {
+    this.getExamples();
   },
   methods: {
     ...mapActions([
       'getVersions',
-      'searchLogs',
+      'searchExamples',
     ]),
     onSearch(query) {
       const filteredQuery = {};
@@ -147,12 +136,14 @@ export default {
     dispatchClick() {
       this.eventClick = !this.eventClick;
     },
-    async updateLogs() {
-      this.list = await this.searchLogs({
-        repositoryUUID: this.repository.uuid,
+    async getExamples() {
+      this.list = await this.searchExamples({
+        repositoryUuid: this.repository.uuid,
+        version: this.repository.repository_version_id,
         query: this.query,
         limit: this.perPage,
       });
+      console.log(this.list);
     },
   },
 };
@@ -161,19 +152,20 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-  label {
-    vertical-align: middle;
-  }
-  .repository-log {
-    &__header {
-      margin-bottom: 3.5rem;
+
+.phrase-suggestion{
+
+    &__header{
+        &__title{
+            margin-bottom: $between-title-subtitle;
+            font-weight: $font-weight-medium;
+        }
+
+        &__subtitle{
+            margin-bottom: $between-subtitle-content
+        }
     }
 
-    &__icon {
-      pointer-events: initial !important;
-      cursor: pointer;
-    }
-  }
-
+}
 
 </style>

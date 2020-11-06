@@ -507,7 +507,9 @@
     },
     "menu": {
       "summary": "Resumo",
-      "training": "Treinar",
+      "training": "Treinamento",
+      "train": "Treinar",
+      "suggestion": "Sugestões",
       "test": "Testar",
       "sentences": "Frases",
       "results": "Resultados",
@@ -519,6 +521,10 @@
       "settings": "Ajustes",
       "general":"Geral",
       "versions": "Versões"
+    },
+    "phrase-suggestion": {
+      "title": "Sugestões de frases",
+      "subtitle": "Selecione uma intenção e adicione frases sugeridas ao seu treinamento."
     },
     "dashboard": {
       "sentences": "frases",
