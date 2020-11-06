@@ -8,6 +8,7 @@
       :language="language"
       :available-to-example="true"
       :pending-example="pendingExample"
+      :suggestion="isSuggestion"
       :all-entities="allEntities"
       :open.sync="open"
       training
@@ -63,6 +64,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    isSuggestion: {
+      type: Boolean,
+      default: false,
+    },
+    isAccordionOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -74,6 +83,11 @@ export default {
       return this.repository.entities.map(
         entityValue => entityValue.value,
       );
+    },
+  },
+  watch: {
+    isAccordionOpen() {
+      this.open = false;
     },
   },
   methods: {

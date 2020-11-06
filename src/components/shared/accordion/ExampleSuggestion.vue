@@ -1,11 +1,11 @@
 <template>
-  <div class="log-accordion" >
+  <div class="example-suggestion" >
     <sentence-accordion
-      id="tour-inbox-step-1"
       :pending-example="true"
       :is-previous-disabled="true"
-      :is-step-blocked="!checked"
-      :open.sync="open">
+      :is-step-blocked="!checked">
+      <!-- :open.sync="open" -->
+
 
       <div slot="check">
         <b-checkbox
@@ -34,10 +34,10 @@
       </div>
       <div
         slot="options">
-        <span class="column log-accordion__version-name"> {{ version_name }} </span>
+        <span class="column example-suggestion__version-name"> {{ version_name }} </span>
       </div>
       <div slot="body">
-        <h1>oi</h1>
+        <p>waiting content</p>
       </div>
     </sentence-accordion>
   </div>
@@ -74,10 +74,6 @@ export default {
       type: String,
       default: '',
     },
-    // nlp_log: {
-    //   type: Object,
-    //   required: true,
-    // },
     created_at: {
       type: String,
       default: '',
@@ -174,7 +170,7 @@ export default {
 
 <style lang="scss" scoped>
   @import '~@/assets/scss/colors.scss';
-.log-accordion {
+.example-suggestion {
   &__menu-title {
     margin: 1rem;
   }

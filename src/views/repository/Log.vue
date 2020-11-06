@@ -16,7 +16,7 @@
           :versions="versions"
           language-filter
           @querystringformatted="onSearch($event)"/>
-        <select-all-examples
+        <repository-log-list
           :per-page="perPage"
           :query="query"
           :list="list"
@@ -61,9 +61,8 @@ import RepositoryBase from './Base';
 import { mapGetters, mapActions } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
 import IntentModal from '@/components/repository/IntentModal';
-import SelectAllExamples from '@/components/shared/SelectAllExamples';
-import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryLogList from '@/components/repository/repository-log/RepositoryLogList';
+import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 
@@ -74,7 +73,6 @@ export default {
     LoginForm,
     IntentModal,
     RepositoryLogList,
-    SelectAllExamples,
     RepositoryViewBase,
     FilterEvaluateExample,
     AuthorizationRequestNotification,

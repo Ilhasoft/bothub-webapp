@@ -34,7 +34,6 @@
                   :key="update"
                   :show-button="getRequirements.ready_for_train || !noPhrasesYet"
                   :repository="repository"
-                  :requirements="getRequirements"
                   :authenticated="authenticated"
                   :version="getSelectedVersion"
                   :update-repository="async () => { updateRepository(false) }"
@@ -152,10 +151,6 @@ export default {
       'getSelectedVersion',
       'getRequirements',
     ]),
-    repositoryCanWrite() {
-      if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
-      return this.repository.authorization.can_write;
-    },
     translationQuery() {
       const { language, ...query } = this.query;
       return { ...query, ...(language ? { is_available_language: language } : {}) };

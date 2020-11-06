@@ -7,7 +7,7 @@
       :intent-count="false"
       :class="{
         'badges-container__badge': true,
-        'badges-container__style': checkSelectedIntents(item.value)
+        'badges-container__style': checkselectedIntent(item.value)
       }"
       @click.native="addIntents(item.value)"/>
   </div>
@@ -33,22 +33,23 @@ export default {
   },
   data() {
     return {
-      selectedIntents: [],
+      selectedIntent: '',
     };
   },
   methods: {
-    checkSelectedIntents(intent) {
-      if (this.selectedIntents.includes(intent)) { return true; }
+    checkselectedIntent(intent) {
+      if (intent === this.selectedIntent) { return true; }
 
       return false;
     },
     addIntents(intent) {
-      if (!this.checkSelectedIntents(intent)) {
-        this.selectedIntents.push(intent);
-        return;
-      }
-      const removeIntent = this.selectedIntents.filter(value => value !== intent);
-      this.selectedIntents = removeIntent;
+      this.selectedIntent = intent;
+      // if (!this.checkselectedIntent(intent)) {
+      //   this.selectedIntent.push(intent);
+      //   return;
+      // }
+      // const removeIntent = this.selectedIntent.filter(value => value !== intent);
+      // this.selectedIntent = removeIntent;
     },
   },
 };

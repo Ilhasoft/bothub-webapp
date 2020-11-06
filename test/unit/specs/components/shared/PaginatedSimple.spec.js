@@ -3,7 +3,7 @@ jest.mock('@/api/request');
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
-import Pagination from '@/components/shared/Pagination';
+import PaginatedSimple from '@/components/shared/PaginatedSimple';
 import utils from '@/api/utils';
 
 const localVue = createLocalVue();
@@ -11,11 +11,14 @@ localVue.use(applyFilters);
 
 const Foo = localVue.component('foo', { render: () => ('<div />') });
 
-describe('Pagination.vue', () => {
+describe('PaginatedSimple.vue', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Pagination, {
+    wrapper = shallowMount(PaginatedSimple, {
       localVue,
+      mocks: {
+        $t: () => 'some specific text',
+      },
       propsData: {
         itemComponent: Foo,
         list: new utils.List('/repository/repositories/'),
@@ -47,23 +50,13 @@ describe('Pagination.vue', () => {
     test('no items', () => {
       expect(wrapper.vm.list.items.length).toBe(0);
     });
-
-    describe('next', () => {
-      beforeEach(async () => {
-        await wrapper.vm.next();
-      });
-
-      test('has items', () => {
-        expect(wrapper.vm.list.items.length).toBeGreaterThan(0);
-      });
-    });
   });
 
   describe('on dispatch event', () => {
-    describe('without value', () => {
-      const event = 'event';
+    describe('dispatch save', () => {
+      const event = 'itemSave';
       beforeEach(() => {
-        wrapper.vm.onDispatchEvent(event);
+        wrapper.vm.onSaveUpdate(event);
       });
 
       test('emit event', () => {
@@ -71,16 +64,16 @@ describe('Pagination.vue', () => {
       });
     });
 
-    describe('with value', () => {
-      const event = 'event';
-      const value = { ok: true };
+    describe('dispatch delete', () => {
+      const event = 'itemDeleted';
+      const value = { event: 'itemDeleted', value: { ok: true } };
       beforeEach(() => {
-        wrapper.vm.onDispatchEvent({ event, value });
+        wrapper.vm.onItemDeleted({ event, value });
       });
 
       test('emit event', () => {
         expect(wrapper.emitted(event)).toBeDefined();
-        expect(wrapper.emitted(event)[0][0]).toMatchObject(value);
+        expect(wrapper.emitted(event)[0][0].value).toMatchObject(value);
       });
     });
   });

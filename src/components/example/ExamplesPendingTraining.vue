@@ -6,9 +6,12 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      :is-accordion-open="pageWasChanged"
       :pending-example="pendingExample"
+      :is-suggestion="true"
       @itemSave="dispatchSave"
-      @itemDeleted="onItemDeleted($event)" />
+      @itemDeleted="onItemDeleted($event)"
+      @pageChanged="pageChanged()"/>
 
     <br>
     <p
@@ -57,6 +60,7 @@ export default {
       createdAtLastTrain: '',
       dateNow: '',
       error: null,
+      pageWasChanged: false,
     };
   },
   computed: {
@@ -81,14 +85,15 @@ export default {
       'searchExamples',
       'setRequirements',
       'getRepositoryStatusTraining',
-      'getRepositoryRequirements',
     ]),
     dispatchSave() {
       this.updateExamples(true);
     },
+    pageChanged() {
+      this.pageWasChanged = !this.pageWasChanged;
+    },
     async updateExamples(force = false) {
       await this.getRepositoryStatus();
-      await this.repositoryRequirements();
       if (this.repositoryStatus.count !== 0) {
         const date = new Date();
         if (this.repositoryStatus.results[0].status !== 2
@@ -115,17 +120,6 @@ export default {
         if (hasPhrases.length !== 0) {
           this.$emit('noPhrases');
         }
-      }
-    },
-    async repositoryRequirements() {
-      try {
-        const { data } = await this.getRepositoryRequirements({
-          repositoryUuid: this.repository.uuid,
-          version: this.repository.repository_version_id,
-        });
-        this.setRequirements(data);
-      } catch (error) {
-        this.error = error;
       }
     },
     async getRepositoryStatus() {

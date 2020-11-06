@@ -17,7 +17,7 @@
           </div>
           <badges-intents-suggestion
             :list="repository.intents"/>
-          <select-all-examples
+          <example-suggestion-list
             :per-page="perPage"
             :query="query"
             :list="list"
@@ -49,7 +49,7 @@ import { LANGUAGES } from '@/utils';
 import RepositoryBase from './Base';
 import { mapGetters, mapActions } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
-import SelectAllExamples from '@/components/shared/SelectAllExamples';
+import ExampleSuggestionList from '@/components/shared/ExampleSuggestionList';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesIntentsSuggestion from '@/components/repository/BadgesIntentsSuggestion';
 import ExampleItem from '@/components/example/ExampleItem';
@@ -59,7 +59,7 @@ export default {
   name: 'PhraseSuggestion',
   components: {
     LoginForm,
-    SelectAllExamples,
+    ExampleSuggestionList,
     RepositoryViewBase,
     BadgesIntentsSuggestion,
     PaginatedList,
@@ -110,10 +110,8 @@ export default {
       });
       this.versionsList = this.versionsList;
       this.versionsList.getAllItems();
+      this.getExamples();
     },
-  },
-  mounted() {
-    this.getExamples();
   },
   methods: {
     ...mapActions([
@@ -138,12 +136,11 @@ export default {
     },
     async getExamples() {
       this.list = await this.searchExamples({
-        repositoryUuid: this.repository.uuid,
+        repositoryUuid: this.repositoryUUID,
         version: this.repository.repository_version_id,
         query: this.query,
         limit: this.perPage,
       });
-      console.log(this.list);
     },
   },
 };
@@ -158,7 +155,7 @@ export default {
     &__header{
         &__title{
             margin-bottom: $between-title-subtitle;
-            font-weight: $font-weight-medium;
+            font-weight: $font-weight-bolder;
         }
 
         &__subtitle{

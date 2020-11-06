@@ -1,7 +1,6 @@
 <template>
-
-  <div class="select-all-examples">
-    <div class="select-all-examples__section">
+  <div class="example-suggestion-list">
+    <div class="example-suggestion-list__section">
       <b-notification
         v-if="loadingExamples"
         :closable="false">
@@ -14,29 +13,24 @@
           {{ $t('webapp.inbox.select_all') }}
         </b-checkbox>
       </div>
-      <div class="select-all-examples__section__buttonsIcon">
+      <div class="example-suggestion-list__section__buttonsIcon">
         <b-tooltip :label="$t('webapp.inbox.add_to_train_button')">
           <b-button
-            id="tour-inbox-step-2"
-            :is-previous-disabled="true"
             type="is-primary"
             icon-right="refresh"
-            @click="showModalTraining($t('webapp.inbox.training'))" />
+            @click="()=>{}" />
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
           <b-button
-            id="tour-inbox-step-3"
-            :is-previous-disabled="true"
-            :is-next-disabled="true"
             icon-right="chat-processing"
             type="is-primary"
-            @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
+            @click="()=>{}" />
         </b-tooltip>
       </div>
     </div>
     <paginated-list
       :per-page="perPage"
-      :item-component="isSuggestion ? exampleSuggestion : logAccordion"
+      :item-component="exampleSuggestion"
       :list="list"
       :loading.sync="loading"
       :editable="editable"
@@ -47,7 +41,7 @@
     />
     <h4
       v-if="list && list.empty && !loading"
-      class="select-all-examples__empty-message">
+      class="example-suggestion-list__empty-message">
       {{ $t('webapp.inbox.list_empty') }}
     </h4>
   </div>
@@ -62,7 +56,7 @@ import IntentModalEdition from '@/components/repository/IntentModalWithEdition';
 import ExampleSuggestion from '@/components/shared/accordion/ExampleSuggestion';
 
 export default {
-  name: 'SelectAllExamples',
+  name: 'ExampleSuggestionList',
   components: {
     PaginatedList,
     LogAccordion,
@@ -85,10 +79,6 @@ export default {
     list: {
       type: Object,
       default: null,
-    },
-    isSuggestion: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
@@ -142,93 +132,6 @@ export default {
     },
     removeExampleStructure(exampleId) {
       this.exampleData = this.exampleData.filter(example => example.id !== exampleId);
-    },
-    showModalTraining(typeModal) {
-      if (this.activeTutorial === 'inbox') return;
-
-      if (this.exampleData.length === 0) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
-        });
-        return;
-      }
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp,
-          repository: this.repository,
-          titleHeader: typeModal,
-          confidenceVerify: this.confidenceVerify,
-          exampleData: this.exampleData[0],
-        },
-        parent: this,
-        component: this.exampleData.length === 1 ? IntentModalEdition : IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        canCancel: false,
-        events: {
-          addedIntent: (value) => {
-            this.verifyIsCorrected(value);
-            this.addToTraining(value);
-            this.intent = value;
-          },
-          closeModal: () => {
-            this.exampleData = [];
-            this.select = '';
-            this.$root.$emit('selectAll', false);
-          },
-        },
-      });
-    },
-    showModalSentence(typeModal) {
-      if (this.exampleData.length === 0) {
-        this.$buefy.toast.open({
-          message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
-        });
-        return;
-      }
-      this.$buefy.modal.open({
-        props: {
-          info: this.nlp,
-          repository: this.repository,
-          titleHeader: typeModal,
-          exampleData: this.exampleData[0],
-        },
-        parent: this,
-        component: this.exampleData.length === 1 ? IntentModalEdition : IntentModal,
-        hasModalCard: false,
-        trapFocus: true,
-        canCancel: false,
-        events: {
-          addedIntent: (value) => {
-            this.verifyIsCorrected(value);
-            this.addToSentences(value);
-            this.intent = value;
-            if (this.activeTutorial === 'inbox') {
-              this.$emit('finishedTutorial');
-            }
-          },
-          closeModal: () => {
-            this.exampleData = [];
-            this.select = '';
-            this.$root.$emit('selectAll', false);
-            if (this.activeTutorial === 'inbox') {
-              this.$emit('dispatchSkip');
-            }
-          },
-        },
-      });
-      this.$nextTick(() => {
-        this.$emit('dispatchNext');
-      });
-    },
-    verifyIsCorrected(value) {
-      if (value === this.nlp.intent.name) {
-        this.isCorrected = false;
-      } else {
-        this.isCorrected = true;
-      }
     },
     addToTraining(values) {
       this.loadingExamples = true;
@@ -311,7 +214,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-  .select-all-examples {
+  .example-suggestion-list {
 
     &__pagination {
       margin-top: 1.25rem;

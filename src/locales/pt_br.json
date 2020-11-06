@@ -41,6 +41,9 @@
       "changed_password": "Senha alterada",
       "save_password": "Salvar senha"
     },
+    "paginated_simple": {
+      "empty": "Não há frases"
+    },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
       "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
@@ -234,7 +237,11 @@
       "information_contributors": "Contribuidores | Contribuidor | Contribuidores",
       "information_integrations": "Integrações | Integração | Integrações",
       "intent_question": "INTENÇÃO é o desejo que a inteligência vai perceber que o usuário tem ao enviar uma mensagem específica. Por exemplo: ao enviar um \"obrigado\" a intenção do usuário é agradecer. Assim, a intenção para a frase poderia ser \"agradecimento\".",
-      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\"."
+      "entity_question": "ENTIDADE é o substantivo relacionado ao desejo que foi detectado pela inteligência. Por exemplo: Se a frase enviada pelo usuário for \"gerar novo relatório\", a entidade pode ser \"relatório\" ou \"novo relatório\".",
+      "intelligence_force" : "Força da inteligência",
+      "intelligence_force_low": "Baixa",
+      "intelligence_force_regular": "Regular",
+      "intelligence_force_high": "Alta"
     },
     "integration":{
       "title": "Integrações do Bothub",
@@ -703,6 +710,13 @@
       "tutorial_button":{
         "step_0": "<strong> Você terminou! </strong> <br> Se você quiser pode assistir o tutorial novamente clicando aqui."
       }
+    },
+    "word_suggestion": {
+      "title": "Sugestão de variação",
+      "subtitle": "Gere novas frases variando as frases de treinamento.",
+      "cancel": "Cancelar",
+      "add_training": "Adicionar ao treinamento",
+      "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento"
     }
   }
 }

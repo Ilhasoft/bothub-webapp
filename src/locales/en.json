@@ -41,6 +41,9 @@
       "changed_password": "Password changed",
       "save_password": "Save password"
     },
+    "paginated_simple": {
+      "empty": "There are no phrases"
+    },
     "create_repository": {
       "create_repo": "Create an intelligence",
       "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then, choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
@@ -234,7 +237,11 @@
       "information_contributors": "Contributors | Contributor | Contributors",
       "information_integrations": "Integrations | Integration | Integrations",
       "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
-      "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\""
+      "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\"",
+      "intelligence_force" : "Intelligence force",
+      "intelligence_force_low": "Low",
+      "intelligence_force_regular": "Regular",
+      "intelligence_force_high": "High"
     },
     "integration":{
       "title": "Bothub integrations",
@@ -706,6 +713,13 @@
     "tutorial_button":{
       "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
+  },
+    "word_suggestion": {
+      "title": "Variation suggestion",
+      "subtitle": "Generate new sentences by varying training sentences.",
+      "cancel": "Cancel",
+      "add_training": "Add training",
+      "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
+    }
   }
-}
 }
