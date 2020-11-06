@@ -38,7 +38,6 @@
           type="is-danger" />
       </form>
     </div>
-
     <div
       slot="options"
       class="edit-sentence__options">
