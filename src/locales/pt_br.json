@@ -41,6 +41,9 @@
       "changed_password": "Senha alterada",
       "save_password": "Salvar senha"
     },
+    "paginated_simple": {
+      "empty": "Não há frases"
+    },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
       "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
@@ -701,6 +704,13 @@
       "tutorial_button":{
         "step_0": "<strong> Você terminou! </strong> <br> Se você quiser pode assistir o tutorial novamente clicando aqui."
       }
+    },
+    "word_suggestion": {
+      "title": "Sugestão de variação",
+      "subtitle": "Gere novas frases variando as frases de treinamento.",
+      "cancel": "Cancelar",
+      "add_training": "Adicionar ao treinamento",
+      "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento"
     }
   }
 }

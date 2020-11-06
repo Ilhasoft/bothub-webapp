@@ -48,14 +48,19 @@
     <div
       slot="options"
       class="example-item__faded example-item__options">
+      <word-suggestion
+        v-show="!editing && isSuggestion"
+        :get-sentence="sentenceDetail"/>
       <b-icon
         v-show="!editing"
         :icon="editing ? 'check' : 'pencil'"
-        :class="{ clickable: true, 'icon-disabled': editingTranslation }"
+        :class="{ clickable: true,
+                  'icon-disabled': editingTranslation,
+                  'example-item__options__icon': !editing}"
         size="is-small"
         @click.native.stop="handleEdit" />
       <b-icon
-        class="clickable"
+        class="clickable example-item__options__icon"
         size="is-small"
         icon="delete"
         @click.native.stop="deleteThisExample" />
@@ -93,6 +98,7 @@
 
 <script>
 import Vue from 'vue';
+import { mapActions, mapGetters } from 'vuex';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import ExampleTranslation from '@/components/shared/accordion/ExampleTranslation';
 import HighlightedText from '@/components/shared/HighlightedText';
@@ -101,7 +107,7 @@ import EntityTag from '@/components/repository/repository-evaluate/example/Entit
 import EditExample from '@/components/shared/accordion/EditExample';
 import Loading from '@/components/shared/Loading';
 import EditExampleAccordion from '@/components/shared/accordion/EditExampleAccordion';
-import { mapActions, mapGetters } from 'vuex';
+import WordSuggestion from '@/components/shared/WordSuggestion';
 
 export default {
   name: 'ExampleAccordionWithTranslations',
@@ -114,6 +120,7 @@ export default {
     ExampleTranslation,
     EditExampleAccordion,
     Loading,
+    WordSuggestion,
   },
   props: {
     id: {
@@ -139,6 +146,10 @@ export default {
     repository: {
       type: Object,
       default: null,
+    },
+    isSuggestion: {
+      type: Boolean,
+      default: false,
     },
     isAccordionOpen: {
       type: Boolean,
@@ -166,6 +177,15 @@ export default {
     },
     availableEntities() {
       return this.entities.map(entity => entity.entity);
+    },
+    sentenceDetail() {
+      const detail = {
+        id: this.id,
+        text: this.text,
+        intent: this.intent,
+        language: this.language,
+      };
+      return detail;
     },
   },
   watch: {
@@ -276,9 +296,15 @@ export default {
 
         &__options {
           display: flex;
+          align-items: center;
           > * {
-            margin-left: 0.25rem;
+            margin-left: 0.40rem;
           }
+            &__icon:hover{
+              color: $color-fake-grey;
+              transition: 1s;
+            }
         }
+
     }
 </style>

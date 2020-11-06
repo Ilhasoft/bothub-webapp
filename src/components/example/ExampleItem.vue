@@ -8,6 +8,7 @@
       :language="language"
       :available-to-example="true"
       :pending-example="pendingExample"
+      :suggestion="isSuggestion"
       :all-entities="allEntities"
       :open.sync="open"
       training
@@ -60,6 +61,10 @@ export default {
       default: /* istanbul ignore next */ () => ({}),
     },
     pendingExample: {
+      type: Boolean,
+      default: false,
+    },
+    isSuggestion: {
       type: Boolean,
       default: false,
     },

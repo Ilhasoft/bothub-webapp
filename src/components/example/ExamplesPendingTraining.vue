@@ -8,6 +8,7 @@
       :per-page="perPage"
       :is-accordion-open="pageWasChanged"
       :pending-example="pendingExample"
+      :is-suggestion="true"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)"
       @pageChanged="pageChanged()"/>
