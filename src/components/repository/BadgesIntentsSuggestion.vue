@@ -39,17 +39,10 @@ export default {
   methods: {
     checkselectedIntent(intent) {
       if (intent === this.selectedIntent) { return true; }
-
       return false;
     },
     addIntents(intent) {
       this.selectedIntent = intent;
-      // if (!this.checkselectedIntent(intent)) {
-      //   this.selectedIntent.push(intent);
-      //   return;
-      // }
-      // const removeIntent = this.selectedIntent.filter(value => value !== intent);
-      // this.selectedIntent = removeIntent;
     },
   },
 };
