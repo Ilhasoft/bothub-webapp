@@ -27,7 +27,7 @@
     <div
       v-else-if="!repository || (repository && !repository.name && repository.loading)"
       class="rpstr-vw-bs__loading">
-      <Loading/>
+      <loading/>
     </div>
     <request-authorization-modal
       v-if="repository"
@@ -94,6 +94,7 @@ export default {
     ...mapGetters([
       'authenticated',
       'myProfile',
+      'getRequirements',
     ]),
     currentTitle() {
       if (this.title) {
@@ -111,20 +112,20 @@ export default {
       return undefined;
     },
     requirementsCount() {
-      if (!this.repository.requirements_to_train) return 0;
+      if (!this.getRequirements.requirements_to_train) return 0;
       return Object
-        .keys(this.repository.requirements_to_train)
+        .keys(this.getRequirements.requirements_to_train)
         .reduce(
-          (previous, lang) => this.repository.requirements_to_train[lang].length + previous,
+          (previous, lang) => this.getRequirements.requirements_to_train[lang].length + previous,
           0,
         );
     },
     warningsCount() {
-      if (!this.repository.languages_warnings) return 0;
+      if (!this.getRequirements.languages_warnings) return 0;
       return Object
-        .keys(this.repository.languages_warnings)
+        .keys(this.getRequirements.languages_warnings)
         .reduce(
-          (previous, lang) => this.repository.languages_warnings[lang].length + previous,
+          (previous, lang) => this.getRequirements.languages_warnings[lang].length + previous,
           0,
         );
     },

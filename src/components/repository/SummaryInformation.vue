@@ -53,18 +53,7 @@
         </div>
       </div>
     </div>
-    <!-- <div class="summary-information__intelligence-force">
-      <h2>Intelligence force: Regular</h2>
-      <div class="summary-information__intelligence-force__relevance__progress">
-        <div class="summary-information__intelligence-force__relevance__progress__division">
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        <div class="summary-information__intelligence-force__relevance__progress__division__bar"/>
-        </div>
-      </div>
-    </div> -->
+    <intelligence-force/>
   </div>
 </template>
 
@@ -72,11 +61,13 @@
 import { mapGetters } from 'vuex';
 import { languageListToDict } from '@/utils';
 import NumbersCard from '@/components/shared/NumbersCard';
+import IntelligenceForce from '@/components/repository/IntelligenceForce';
 
 export default {
   name: 'SummaryInformation',
   components: {
     NumbersCard,
+    IntelligenceForce,
   },
   data() {
     return {
@@ -151,7 +142,7 @@ export default {
             border: 1px solid $color-border;
 
               @media screen and (max-width: 60em) {
-                width: 80%;
+                width: 100%;
               }
               @media screen and (max-width: 45em) {
                 height: 140px * 3;
@@ -168,12 +159,12 @@ export default {
             width: 50%;
 
             @media screen and (max-width: 60em) {
-              width: 80%;
+              width: 100%;
               margin-top: 10px;
             }
             @media screen and (max-width: 40em) {
               flex-direction: column;
-              margin-bottom: 8rem;
+              margin-bottom: 10rem;
             }
 
               &__data{
@@ -203,7 +194,7 @@ export default {
               @media screen and (max-width: 60em) {
                 display: flex;
                 flex-direction: column;
-                width: 80%;
+                width: 100%;
               }
         }
 
@@ -212,39 +203,6 @@ export default {
         flex-direction: column;
         align-items: flex-start;
       }
-    }
-
-    &__intelligence-force{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 3rem;
-        width: 98.5%;
-        margin-top: .8rem;
-        margin-left: 0.5rem;
-        border: 1px solid $color-border;
-        height: 147px;
-
-      &__relevance{
-          width: 80%;
-          height: 16px;
-          background-color: #F5F5F5;
-          box-shadow: 0px 3px 6px #00000029;
-        &__progress{
-          width: 80%;
-          background: linear-gradient(to right, #12A391 0%, #00FFDD 100%);
-
-          &__division{
-          display:flex;
-          &__bar{
-            border: 2px solid white;
-            height: 16px;
-            margin-left: 16%;
-          }
-      }
-
-          }
-        }
     }
 }
 

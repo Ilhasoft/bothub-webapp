@@ -23,9 +23,9 @@
     <train-modal
       v-if="repository"
       :training="training"
-      :requirements-to-train="repository.requirements_to_train"
+      :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
-      :languages-warnings="repository.languages_warnings"
+      :languages-warnings="languagesWarnings"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import TrainModal from '@/components/repository/training/TrainModal';
 import ProgressBar from '@/components/shared/ProgressBar';
 import TrainResponse from '@/components/repository/training/TrainResponse';
@@ -94,8 +94,21 @@ export default {
     };
   },
   computed: {
+    ...mapGetters([
+      'getRequirements',
+    ]),
     loading() {
       return this.load || this.loadingStatus;
+    },
+    trainRequirements() {
+      if (!this.getRequirements
+      || this.getRequirements.requirements_to_train === undefined) { return {}; }
+      return this.getRequirements.requirements_to_train;
+    },
+    languagesWarnings() {
+      if (!this.getRequirements
+      || this.getRequirements.languages_warnings === undefined) { return {}; }
+      return this.getRequirements.languages_warnings;
     },
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
@@ -116,6 +129,7 @@ export default {
   mounted() {
     if (this.updateOnLoad) this.updateTrainingStatus();
     this.getRepositoryStatus();
+    this.repositoryRequirements();
   },
   methods: {
     ...mapActions([
@@ -123,6 +137,8 @@ export default {
       'getTrainingStatus',
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
+      'getRepositoryRequirements',
+      'setRequirements',
     ]),
     finishedTutorial() {
       this.$emit('finishedTurorial');
@@ -133,12 +149,23 @@ export default {
     closeTrainModal() {
       this.trainModalOpen = false;
     },
+    async repositoryRequirements() {
+      try {
+        const { data } = await this.getRepositoryRequirements({
+          repositoryUuid: this.repository.uuid,
+          version: this.repository.repository_version_id,
+        });
+        this.setRequirements(data);
+      } catch (error) {
+        this.error = error;
+      }
+    },
     async updateTrainingStatus() {
       this.loadingStatus = true;
       try {
         const trainStatus = await this.getTrainingStatus({
           repositoryUUID: this.repository.uuid,
-          version: this.version,
+          version: this.repository.repository_version_id,
         });
         if (trainStatus) {
           this.$emit('statusUpdated', trainStatus);
@@ -153,16 +180,16 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (this.repository.ready_for_train
-          && Object.values(this.repository.requirements_to_train).length === 0
-          && Object.values(this.repository.languages_warnings).length === 0) {
+        if (this.getRequirements.ready_for_train
+          && Object.values(this.trainRequirements).length === 0
+          && Object.values(this.languagesWarnings).length === 0) {
           await this.train();
           this.loadingStatus = false;
           return;
         }
-        if (!this.repository.ready_for_train
-          && Object.values(this.repository.requirements_to_train).length === 0
-          && Object.values(this.repository.languages_warnings).length === 0) {
+        if (!this.getRequirements.ready_for_train
+          && Object.values(this.trainRequirements).length === 0
+          && Object.values(this.languagesWarnings).length === 0) {
           this.$buefy.toast.open({
             message: this.$t('webapp.train_modal.language_warning'),
             type: 'is-danger',
@@ -193,7 +220,7 @@ export default {
           type: 'is-danger',
         });
       }
-      if (this.repository.ready_for_train) {
+      if (this.getRequirements.ready_for_train) {
         this.$emit('onTrainReady');
       }
       this.training = false;

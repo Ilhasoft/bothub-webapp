@@ -28,6 +28,9 @@ export default {
   updateEvaluateLanguage(state, value) {
     state.evaluateLanguage = value;
   },
+  updateRequirements(state, value) {
+    state.requirements = value;
+  },
   setRepositoryVersion(state, value) {
     if (!value || !value.version) return;
 

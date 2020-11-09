@@ -4,5 +4,6 @@ exports[`Translate.vue renders correctly 1`] = `
 <repository-view-base-stub quicktest="true">
   <!---->
   <!---->
+  <!---->
 </repository-view-base-stub>
 `;

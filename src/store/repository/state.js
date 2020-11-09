@@ -6,4 +6,5 @@ export default {
   updateRepository: false,
   updateVersions: false,
   repositoryIsTraining: false,
+  requirements: {},
 };

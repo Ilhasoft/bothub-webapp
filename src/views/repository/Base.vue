@@ -10,6 +10,7 @@ export default {
     return {
       repository,
       errorCode: null,
+      error: null,
     };
   },
   computed: {
