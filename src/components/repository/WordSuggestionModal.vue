@@ -11,7 +11,8 @@
       <h3>{{ $t('webapp.word_suggestion.title') }}</h3>
       <p>{{ $t('webapp.word_suggestion.subtitle') }}</p>
       <loading
-        v-if="loading"/>
+        v-if="loading"
+        class="modal-style__container__loading"/>
       <div
         v-else
         class="modal-style__container__body">
@@ -57,7 +58,7 @@
         </b-message>
 
         <edit-suggestion
-          :per-page="2"
+          :per-page="5"
           :key="updateSuggestion"
           :phrases-variation="phraseList"
           @dispatchDelete="deleteSentence($event)"
@@ -229,8 +230,8 @@ export default {
   align-items: center;
 
   &__container{
-    width: 567px;
-    min-height: 300px;
+    width: 700px;
+    min-height: 400px;
     padding: 1rem 3rem 1rem;
     background-color: $color-white;
     border-radius: 6px;
@@ -250,6 +251,10 @@ export default {
       cursor: pointer;
     }
 
+        &__loading{
+          margin-top: 4rem;
+        }
+
       &__body{
         height: 85%;
 
@@ -265,7 +270,7 @@ export default {
 
             &__icon {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 width: 20%;
 
                 .icon-style {
@@ -291,6 +296,7 @@ export default {
 
                 .select-input{
                     margin-right: 0.3rem;
+                    margin-bottom: 0.5rem;
                 }
             }
         }
@@ -301,10 +307,11 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: 6%;
         margin-bottom: 1rem;
 
         button{
-            width: 140px;
+            width: 160px;
             height: 43px;
             margin: 0 0.5rem;
             font-weight: $font-weight-bolder;
@@ -314,6 +321,9 @@ export default {
             word-wrap: break-word;
             line-height: 0.95rem;
         }
+      }
+       @media screen and (max-width: $mobile-width) {
+        width: 400px;
       }
   }
 
