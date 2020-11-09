@@ -1,8 +1,5 @@
 <template>
   <section
-    id="tour-inbox-step-4"
-    :is-previous-disabled="true"
-    :is-finish-disabled="true"
     class="modal-style">
     <div
       class="modal-style__container">
