@@ -13,8 +13,9 @@ exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
     &nbsp;true
   </div>
   <div class="example-item__faded example-item__options">
-    <b-icon-stub icon="pencil" size="is-small" class="clickable"></b-icon-stub>
-    <b-icon-stub icon="delete" size="is-small" class="clickable"></b-icon-stub>
+    <word-suggestion-stub getsentence="[object Object]" style="display: none;"></word-suggestion-stub>
+    <b-icon-stub icon="pencil" size="is-small" class="clickable example-item__options__icon"></b-icon-stub>
+    <b-icon-stub icon="delete" size="is-small" class="clickable example-item__options__icon"></b-icon-stub>
   </div>
   <div>
     <loading-stub style="display: none;"></loading-stub>

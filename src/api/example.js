@@ -52,4 +52,7 @@ export default {
   get(id) {
     return request.$http.get(`/v2/repository/example/${id}/`);
   },
+  suggestions(id) {
+    return request.$http.get(`/v2/repository/example/${id}/word_suggestions/`);
+  },
 };

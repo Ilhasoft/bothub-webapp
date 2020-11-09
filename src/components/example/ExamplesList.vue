@@ -6,6 +6,7 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
+      :is-suggestion="true"
       :is-accordion-open="pageWasChanged"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)"
