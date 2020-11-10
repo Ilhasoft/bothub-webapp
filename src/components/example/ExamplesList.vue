@@ -111,7 +111,8 @@ export default {
           this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
         }
       }
-      if (this.repositoryStatus.count === 0 && this.repositoryStatus.results.length === 0) return;
+
+      if (this.repositoryStatus.count === 0) return;
 
       if (this.repositoryStatus.count === 1
           && (this.repositoryStatus.results[0].status !== 2
