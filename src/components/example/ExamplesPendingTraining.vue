@@ -97,10 +97,10 @@ export default {
         const date = new Date();
         if (this.repositoryStatus.results[0].status !== 2
           && this.repositoryStatus.results[0].status !== 3) {
-          if (this.repositoryStatus.results[1].created_at !== undefined) {
+          if (this.repositoryStatus.results[1] !== undefined) {
             this.createdAtLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
           }
-        } else if (this.repositoryStatus.results[0].created_at !== undefined) {
+        } else if (this.repositoryStatus.results[0] !== undefined) {
           this.createdAtLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
         }
         this.dateNow = date.toISOString().replace(/[A-Za-z]/g, ' ');
