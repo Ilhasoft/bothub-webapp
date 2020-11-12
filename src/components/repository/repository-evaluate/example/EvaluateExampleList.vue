@@ -45,7 +45,6 @@ export default {
       exampleItemElem: ExampleAccordion,
       allEntities: [],
       searchingExample: false,
-      perPage: 10,
     };
   },
   computed: {
