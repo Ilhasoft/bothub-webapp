@@ -225,6 +225,12 @@ export default {
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
+      this.closeDropdowns();
+    },
+    closeDropdowns() {
+      this.isSettingsActive = false;
+      this.isTestsActive = false;
+      this.isTranslationsActive = false;
     },
   },
 };
