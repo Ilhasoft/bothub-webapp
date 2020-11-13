@@ -5,6 +5,7 @@
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
+      :is-searching="searchingExample"
       @itemDeleted="onItemDeleted($event)"
       @itemSave="onItemSave()" />
     <p
@@ -43,6 +44,7 @@ export default {
       examplesList: null,
       exampleItemElem: ExampleAccordion,
       allEntities: [],
+      searchingExample: false,
     };
   },
   computed: {
@@ -54,6 +56,12 @@ export default {
   watch: {
     query() {
       this.updateExamples(true);
+      const filterValue = Object.values(this.query);
+      if (filterValue[0] !== '' || filterValue.length > 2) {
+        this.searchingExample = true;
+        return;
+      }
+      this.searchingExample = false;
     },
     repsoitory() {
       this.updateExamples(true);

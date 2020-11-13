@@ -7,6 +7,7 @@
       :repository="repository"
       :per-page="perPage"
       :is-accordion-open="pageWasChanged"
+      :is-searching="searchingExample"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)"
       @pageChanged="pageChanged()"/>
@@ -63,6 +64,7 @@ export default {
       examplesList: null,
       dateLastTrain: '',
       pageWasChanged: false,
+      searchingExample: false,
     };
   },
   computed: {
@@ -77,6 +79,12 @@ export default {
   watch: {
     query() {
       this.updateExamples(true);
+      const filterValue = Object.values(this.query);
+      if (filterValue[0] !== '' || filterValue.length > 1) {
+        this.searchingExample = true;
+        return;
+      }
+      this.searchingExample = false;
     },
     update() {
       this.updateExamples(true);
