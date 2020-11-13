@@ -27,7 +27,7 @@
           </b-select>
           <b-autocomplete
             v-else
-            :data="availableEntities || []"
+            :data="filterEntities(index)"
             v-model="entity.entity"
             :placeholder="$t('webapp.example.entity')"
             dropdown-position="bottom"
@@ -140,6 +140,15 @@ export default {
     this.$emit('input', this.entitiesToEdit);
   },
   methods: {
+    filterEntities(index) {
+      if (this.availableEntities !== null) {
+        return this.availableEntities.filter(entity => entity
+          .toString()
+          .toLowerCase()
+          .indexOf(this.entitiesToEdit[index].entity.toLowerCase()) >= 0);
+      }
+      return [];
+    },
     addEntity() {
       if (!this.addEntityEnabled) return;
       // It will be added at the end of the list, so we already know its index.

@@ -59,6 +59,10 @@ export default {
       if (!this.validationErrors) return '';
       return this.validationErrors.join(',');
     },
+    filterIntents() {
+      return (this.repository.intents_list || []).filter(intent => intent
+        .startsWith(this.intent.toLowerCase()));
+    },
     allEntities() {
       return [...this.entitiesToEdit, ...this.pendingEntities];
     },
@@ -106,6 +110,15 @@ export default {
       'updateEvaluateExample',
       'editSentence',
     ]),
+    filterEntities(index, isPending) {
+      if (this.getAllEntities !== null) {
+        return this.getAllEntities.filter(entity => entity
+          .startsWith(isPending
+            ? this.pendingEntities[index].entity.toLowerCase()
+            : this.entitiesToEdit[index].entity.toLowerCase()));
+      }
+      return [];
+    },
     cancelEditSentence() {
       this.$emit('cancel');
     },
@@ -117,7 +130,7 @@ export default {
         Vue.delete(this.entitiesToEdit, index);
       });
     },
-    removePendingEntity(entity, index) {
+    removePendingEntity(index) {
       this.$nextTick(() => {
         Vue.delete(this.pendingEntities, index);
       });
@@ -141,18 +154,16 @@ export default {
       this.onEntityAdded();
     },
     elevateToEntity(entity, index) {
-      Vue.delete(this.pendingEntities, index);
-
       const color = getEntityColor(
         entity,
       );
 
-      this.entitiesToEdit.push({
-        ...entity,
-        class: `entity-${color}`,
-      });
+      const entityObject = entity;
+      entityObject.class = color;
 
+      this.entitiesToEdit.push(entityObject);
       this.onEntityAdded();
+      this.removePendingEntity(index);
     },
     onEditEntity(entity) {
       if (this.$refs.textInput.emitTextSelected) {
