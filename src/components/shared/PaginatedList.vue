@@ -83,6 +83,10 @@ export default {
       type: String,
       default: null,
     },
+    isSearching: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -103,6 +107,9 @@ export default {
   },
   watch: {
     list() {
+      if (this.isSearching) {
+        this.page = 1;
+      }
       this.fetch();
     },
     isLoading() {

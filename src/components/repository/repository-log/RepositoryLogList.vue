@@ -41,6 +41,7 @@
       :loading.sync="loading"
       :is-accordion-open="pageWasChanged"
       :editable="editable"
+      :is-searching="searchingLog"
       @event_nlp="nlp = $event"
       @event_addLog="addLogStructure($event)"
       @event_removeLog="removeLogStructure($event)"
@@ -97,6 +98,7 @@ export default {
       nlp: {},
       loadingLogs: false,
       pageWasChanged: false,
+      searchingLog: false,
     };
   },
   computed: {
@@ -119,6 +121,12 @@ export default {
     },
     query() {
       this.updateLogs();
+      const filterValue = Object.values(this.query);
+      if (filterValue.length !== 0) {
+        this.searchingLog = true;
+        return;
+      }
+      this.searchingLog = false;
     },
     select() {
       if (this.select === true) {
