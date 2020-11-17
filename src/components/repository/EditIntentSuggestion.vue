@@ -40,12 +40,6 @@ export default {
     }),
   },
   methods: {
-    dispatchAddEvent(value) {
-      this.$emit('dispatchAddSelected', value);
-    },
-    dispatchRemoveEvent(value) {
-      this.$emit('dispatchRemoveSelected', value);
-    },
     dispatchSave(sentence) {
       this.$emit('dispatchSave', sentence);
     },
