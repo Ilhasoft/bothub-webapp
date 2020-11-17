@@ -531,7 +531,10 @@
     },
     "phrase-suggestion": {
       "title": "Sugestões de frases",
-      "subtitle": "Selecione uma intenção e adicione frases sugeridas ao seu treinamento."
+      "subtitle": "Selecione uma intenção e adicione frases sugeridas ao seu treinamento.",
+      "empty": "Não há sugestões de frases para essa intenção",
+      "confirm-edit": "Confirmar edição",
+      "cancel-edit": "Cancelar edição"
     },
     "dashboard": {
       "sentences": "frases",
@@ -584,7 +587,7 @@
       "add_to_train_button": "Adicionar ao treinamento",
       "add_to_sentence_button": "Adicionar às frases de teste",
       "remove_log_button": "Deletar senteça",
-      "select_phrase":"Selecione uma frase",
+      "select_phrase":"Selecione pelo menos uma frase",
       "select_all":"Selecionar todos",
       "error": "Erro",
       "add_log": {

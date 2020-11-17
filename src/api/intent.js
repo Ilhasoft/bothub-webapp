@@ -10,4 +10,7 @@ export default {
       },
     );
   },
+  intentSuggestions(id) {
+    return request.$http.get(`/v2/repository/intent/${id}/intent_suggestions`);
+  },
 };

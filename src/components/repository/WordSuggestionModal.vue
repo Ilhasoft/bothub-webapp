@@ -60,7 +60,7 @@
           {{ message.text }}
         </b-message>
 
-        <edit-suggestion
+        <edit-word-suggestion
           :per-page="5"
           :key="updateSuggestion"
           :phrases-variation="phraseList"
@@ -84,13 +84,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import EditSuggestion from '@/components/repository/EditSuggestion';
+import EditWordSuggestion from '@/components/repository/EditWordSuggestion';
 import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'WordSuggestionModal',
   components: {
-    EditSuggestion,
+    EditWordSuggestion,
     Loading,
   },
   props: {

@@ -1,8 +1,8 @@
 <template>
-  <div class="suggestion-accordion">
+  <div class="word-suggestion-accordion">
     <b-field
       v-if="editing"
-      class="suggestion-accordion__field">
+      class="word-suggestion-accordion__field">
       <b-input
         v-model="suggestionWord"
         size="is-small"/>
@@ -10,27 +10,27 @@
 
     <div
       v-else
-      class="suggestion-accordion__phrase">
+      class="word-suggestion-accordion__phrase">
       <p>{{ suggestionWord }}</p>
     </div>
 
-    <div class="suggestion-accordion__icons">
+    <div class="word-suggestion-accordion__icons">
       <b-icon
         v-if="editing"
         icon="check-bold"
         size="is-small"
-        class="text-color-grey-dark suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__style"
         @click.native="saveEdition()" />
       <b-icon
         v-else
         icon="pencil"
         size="is-small"
-        class="text-color-grey-dark suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__style"
         @click.native="editPhrase()" />
       <b-icon
         icon="delete"
         size="is-small"
-        class="text-color-grey-dark suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__style"
         @click.native="deletePhrase()" />
     </div>
   </div>
@@ -41,7 +41,7 @@ import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
 
 
 export default {
-  name: 'SuggestionAccordion',
+  name: 'WordSuggestion',
   components: {
     ExampleAccordion,
   },
@@ -93,7 +93,7 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.suggestion-accordion{
+.word-suggestion-accordion{
     width: 100%;
     height: 40px;
     margin: 0.4rem 0;
