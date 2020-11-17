@@ -1,5 +1,5 @@
 <template>
-  <div v-if="list.total !== 0">
+  <div v-show="list.total !== 0">
     <component
       v-for="(item, index) in list.items"
       v-show="shouldShow(index)"
@@ -7,7 +7,8 @@
       :is="itemComponent"
       v-bind="addAttrs(item)"
       @deleted="onItemDeleted(item)"
-      @updateList="onSaveUpdate(index, $event)"/>
+      @updateList="onSaveUpdate(index, $event)"
+      @dispatchEvent="onDispatchEvent($event)"/>
     <loading
       v-if="isLoading"
       class="pagination__message" />
@@ -31,10 +32,6 @@
           aria-current-label="Current page"/>
       </div>
     </div>
-  </div>
-  <div v-else>
-    <p
-      class="pagination__message"> {{ $t('webapp.paginated_simple.empty') }} </p>
   </div>
 </template>
 
@@ -90,13 +87,18 @@ export default {
   methods: {
     shouldShow(index) {
       const offset = (this.page - 1) * this.perPage;
-
       return index >= offset && index < offset + this.perPage;
     },
     addAttrs(obj) {
       return {
         data: this.data, ...this.addAttributes, ...obj, ...this.$attrs,
       };
+    },
+    onDispatchEvent(arg) {
+      const [event, value] = arg instanceof Object
+        ? [arg.event, arg.value] : [arg, null];
+
+      this.$emit(event, value);
     },
     onItemDeleted(text) {
       this.$emit('itemDeleted', text);

@@ -16,14 +16,17 @@
             </p>
           </div>
           <badges-intents-suggestion
-            :list="repository.intents"/>
-          <example-suggestion-list
+            :list="repository.intents"
+            @phraseSuggestion="setPhraseSuggestion($event)"
+            @dispatchLoading="updateLoading($event)"/>
+          <loading
+            v-if="loading"/>
+          <intent-suggestion-list
+            v-else-if="intentSelected !== ''"
             :per-page="perPage"
-            :query="query"
-            :list="list"
-            :editable="repository.authorization.can_contribute"
-            is-suggestion
-            @updateExamples="updateLogs()"/>
+            :repository="repository"
+            :intent="intentSelected"
+            :phrase-list="phraseList"/>
         </div>
         <authorization-request-notification
           v-else
@@ -45,102 +48,86 @@
 </template>
 
 <script>
-import { LANGUAGES } from '@/utils';
 import RepositoryBase from './Base';
 import { mapGetters, mapActions } from 'vuex';
+import Loading from '@/components/shared/Loading';
 import LoginForm from '@/components/auth/LoginForm';
-import ExampleSuggestionList from '@/components/shared/ExampleSuggestionList';
+import IntentSuggestionList from '@/components/shared/IntentSuggestionList';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesIntentsSuggestion from '@/components/repository/BadgesIntentsSuggestion';
-import ExampleItem from '@/components/example/ExampleItem';
-import PaginatedList from '@/components/shared/PaginatedList';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 
 export default {
   name: 'PhraseSuggestion',
   components: {
+    Loading,
     LoginForm,
-    ExampleSuggestionList,
+    IntentSuggestionList,
     RepositoryViewBase,
     BadgesIntentsSuggestion,
-    PaginatedList,
+    AuthorizationRequestNotification,
   },
   extends: RepositoryBase,
   data() {
     return {
-      list: {},
-      perPage: 12,
-      name: '',
+      perPage: 10,
       loading: false,
-      versionsList: null,
-      examplesList: null,
-      exampleItemElem: ExampleItem,
-      query: {},
-      eventClick: false,
-      eventSkip: false,
-      eventClickFinish: false,
+      intentSelected: '',
+      phraseList: {
+        items: [],
+        total: 0,
+      },
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'activeTutorial',
-    ]),
-    languages() {
-      return Object.keys(this.repository.evaluate_languages_count)
-        .map(lang => ({
-          value: lang,
-          title: LANGUAGES[lang],
-        }));
-    },
-    repositoryUUID() {
-      if (!this.repository || this.repository.uuid === 'null') { return null; }
-      return this.repository.uuid;
-    },
-    versions() {
-      if (!this.versionsList) return [];
-      return this.versionsList.items;
-    },
+    ...mapGetters({
+      authenticated: 'authenticated',
+      repositoryVersion: 'getSelectedVersion',
+      repositoryUUID: 'getCurrentRepository',
+      versionSelected: 'getSelectedVersion',
+    }),
   },
   watch: {
-    async repositoryUUID() {
-      if (!this.repositoryUUID) { return; }
-      this.versionsList = await this.getVersions({
-        limit: this.perPage,
-        query: { repository: this.repositoryUUID },
-      });
-      this.versionsList = this.versionsList;
-      this.versionsList.getAllItems();
-      this.getExamples();
+    versionSelected() {
+      this.intentSelected = '';
     },
   },
   methods: {
     ...mapActions([
-      'getVersions',
-      'searchExamples',
+      'setEditingStatus',
+      'clearSelectedSuggestion',
+      'setUpdateRepository',
     ]),
-    onSearch(query) {
-      const filteredQuery = {};
-      Object.entries({ ...this.query, ...query }).forEach(([key, value]) => {
-        if (value && value.length > 0) filteredQuery[key] = value;
+    updateLoading(intent) {
+      this.loading = true;
+      this.intentSelected = intent;
+    },
+    async setPhraseSuggestion(value) {
+      const phraseValues = Object.values(value);
+      this.setEditingStatus(false);
+      if (phraseValues[0] === false) {
+        this.clearPhraseList();
+        this.loading = false;
+        return;
+      }
+      const phraseFiltered = phraseValues[0].map((text, id) => {
+        const phrase = {
+          id,
+          text,
+        };
+        return (
+          phrase
+        );
       });
-      this.query = filteredQuery;
+      await this.clearPhraseList();
+      this.phraseList.items.push(...phraseFiltered);
+      this.phraseList.total = phraseValues[0].length;
+      this.loading = false;
     },
-    dispatchClickSkip() {
-      this.eventSkip = !this.eventSkip;
-    },
-    dispatchClickFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
-    },
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    async getExamples() {
-      this.list = await this.searchExamples({
-        repositoryUuid: this.repositoryUUID,
-        version: this.repository.repository_version_id,
-        query: this.query,
-        limit: this.perPage,
-      });
+    clearPhraseList() {
+      this.phraseList.items = [];
+      this.phraseList.total = 0;
+      this.clearSelectedSuggestion();
     },
   },
 };
@@ -157,7 +144,6 @@ export default {
             margin-bottom: $between-title-subtitle;
             font-weight: $font-weight-bolder;
         }
-
         &__subtitle{
             margin-bottom: $between-subtitle-content
         }

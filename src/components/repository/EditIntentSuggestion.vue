@@ -1,32 +1,28 @@
 <template>
   <div>
     <paginated-simple
-      v-show="phrasesVariation.total !== 0"
       :item-component="suggestion"
       :list="phrasesVariation"
-      :repository="repository"
-      :per-page="perPage"
-      @itemDeleted="dispatchDelete($event)"
-      @itemSave="dispatchSave($event)"/>
+      :per-page="perPage"/>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import PaginatedSimple from '@/components/shared/PaginatedSimple';
-import SuggestionAccordion from '@/components/shared/accordion/SuggestionAccordion';
+import IntentSuggestion from '@/components/shared/accordion/IntentSuggestion';
 
 const components = {
   PaginatedSimple,
 };
 
 export default {
-  name: 'ExamplesList',
+  name: 'EditIntentSuggestion',
   components,
   props: {
     perPage: {
       type: Number,
-      default: 2,
+      default: 10,
     },
     phrasesVariation: {
       type: Object,
@@ -35,7 +31,7 @@ export default {
   },
   data() {
     return {
-      suggestion: SuggestionAccordion,
+      suggestion: IntentSuggestion,
     };
   },
   computed: {
@@ -44,8 +40,11 @@ export default {
     }),
   },
   methods: {
-    dispatchDelete(text) {
-      this.$emit('dispatchDelete', text);
+    dispatchAddEvent(value) {
+      this.$emit('dispatchAddSelected', value);
+    },
+    dispatchRemoveEvent(value) {
+      this.$emit('dispatchRemoveSelected', value);
     },
     dispatchSave(sentence) {
       this.$emit('dispatchSave', sentence);

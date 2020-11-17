@@ -533,7 +533,10 @@
     },
     "phrase-suggestion": {
       "title": "Sentence suggestions",
-      "subtitle": "Select an intent and add suggested phrases to your training."
+      "subtitle": "Select an intent and add suggested phrases to your training.",
+      "empty": "There are no suggested phrases for this intention",
+      "confirm-edit": "Confirm edit",
+      "cancel-edit": "Cancel edit"
     },
     "dashboard": {
       "sentences": "sentences",
@@ -586,7 +589,7 @@
       "add_to_train_button": "Add to Train",
       "add_to_sentence_button": "Add to Sentence",
       "remove_log_button": "Delete Sentece",
-      "select_phrase":"Select a phrase",
+      "select_phrase":"Select at least one sentence",
       "select_all":"Select all",
       "error": "Error",
       "add_log": {

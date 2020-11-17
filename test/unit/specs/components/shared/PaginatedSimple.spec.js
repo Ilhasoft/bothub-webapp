@@ -18,6 +18,7 @@ describe('PaginatedSimple.vue', () => {
       localVue,
       mocks: {
         $t: () => 'some specific text',
+        $tc: () => 'some specific text with paramaters',
       },
       propsData: {
         itemComponent: Foo,
