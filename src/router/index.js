@@ -134,7 +134,7 @@ export default new Router({
           component: RepositoryTrainings,
         },
         {
-          path: ':ownerNickname/:slug/suggestion/',
+          path: ':ownerNickname/:slug/suggestions/',
           name: 'repository-suggestion',
           component: PhraseSuggestion,
         },
