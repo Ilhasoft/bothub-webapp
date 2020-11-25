@@ -19,7 +19,7 @@
           class="progress-stages__bar__brooch">
           <img
             class="progress-stages__bar__brooch__icon"
-            src="@/assets/icons/bothub-black.svg">
+            src="@/assets/icons/bothub-white-icon.svg">
         </div>
       </div>
     </div>
