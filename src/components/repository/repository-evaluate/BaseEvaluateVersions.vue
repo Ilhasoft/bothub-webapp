@@ -1,5 +1,5 @@
 <template>
-  <div class="base-evaluate-versions bh-grid bh-grid--column">
+  <div class="base-evaluate-versions">
     <evaluate-version-list />
   </div>
 </template>

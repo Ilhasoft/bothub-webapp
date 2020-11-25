@@ -8,9 +8,14 @@
           v-if="repository.authorization.can_write"
           class="evaluate">
           <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">{{ $t('webapp.evaluate.results') }}</h2>
+            <h2 class="evaluate__content-header__title">
+              {{ $t('webapp.evaluate.results') }}
+            </h2>
+            <p
+              class="evaluate__content-header__description"
+              v-html="$t('webapp.evaluate.description')"/>
           </div>
-          <div class="evaluate__divider" />
+          <filter-result-example/>
           <div class="evaluate__content-wrapper">
             <base-evaluate-versions
               :repository="repository" />
@@ -37,11 +42,11 @@
 </template>
 
 <script>
-import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import { mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
-import { mapState, mapGetters } from 'vuex';
-
+import FilterResultExample from '@/components/repository/repository-evaluate/results/FilterResultExample';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -53,6 +58,7 @@ export default {
     LoginForm,
     BaseEvaluateVersions,
     AuthorizationRequestNotification,
+    FilterResultExample,
   },
   extends: RepositoryBase,
   data() {
@@ -120,7 +126,15 @@ export default {
     }
 
     &__title {
-      margin-top: 2rem;
+      margin-bottom: $between-title-subtitle + 0.5rem;
+    }
+
+    &__description {
+      margin-bottom: $between-subtitle-content + 0.5rem;
+      line-height: 0.8rem;
+      @media screen and (max-width: $mobile-width * 1.2) {
+        line-height: 1.2rem;
+      }
     }
 
     &__wrapper {

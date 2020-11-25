@@ -1,9 +1,9 @@
 <template>
   <div class="new-sentence">
     <div>
-      <h2>{{ $t('webapp.evaluate.add_new_test_sentence') }}</h2>
+      <h2>{{ $t('webapp.evaluate-manual.add_new_test_sentence') }}</h2>
       <span>
-        {{ $t('webapp.evaluate.create_a_bench_of_test') }}
+        {{ $t('webapp.evaluate-manual.create_a_bench_of_test') }}
       </span>
     </div>
     <div class="new-sentence__form">
@@ -21,7 +21,7 @@
                 v-model="text"
                 :is-step-blocked="text.length === 0"
                 :entities="entities"
-                :placeholder="$t('webapp.evaluate.enter_your_sentence_here')"
+                :placeholder="$t('webapp.evaluate-manual.enter_your_sentence_here')"
                 @submit="onEnter()"
                 @textSelected="setTextSelected($event)"
               />
@@ -62,7 +62,7 @@
                 :is-step-blocked="!blockedNextStepTutorial"
                 type="is-primary"
                 @click="submitSentence()">
-                <slot v-if="!submitting">{{ $t('webapp.evaluate.submit') }}</slot>
+                <slot v-if="!submitting">{{ $t('webapp.evaluate-manual.submit') }}</slot>
               </b-button>
             </b-tooltip>
           </div>
@@ -140,7 +140,7 @@ export default {
       const errors = [];
 
       if (!this.text) {
-        errors.push(this.$t('webapp.evaluate.you_need_type_a_text'));
+        errors.push(this.$t('webapp.evaluate-manual.you_need_type_a_text'));
       }
 
       if (!this.intent) {
