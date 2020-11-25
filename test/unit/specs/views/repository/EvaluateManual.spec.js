@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import RepositoryEvaluate from '@/views/repository/Evaluate';
+import RepositoryEvaluate from '@/views/repository/EvaluateManual';
 import BH from 'bh';
 import Vuex from 'vuex';
 

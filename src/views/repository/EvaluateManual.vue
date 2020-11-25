@@ -9,16 +9,16 @@
           class="evaluate">
           <div class="evaluate__content-header">
             <h2 class="evaluate__content-header__title">
-              {{ $t('webapp.evaluate.header_title') }}
+              {{ $t('webapp.evaluate-manual.header_title') }}
             </h2>
-            <p>{{ $t('webapp.evaluate.header_title_p') }}</p>
-            <p>{{ $t('webapp.evaluate.header_title_p2') }}</p>
+            <p>{{ $t('webapp.evaluate-manual.header_title_p') }}</p>
+            <p>{{ $t('webapp.evaluate-manual.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
               <div
                 class="evaluate__content-header__wrapper__language-select">
                 <p>
                   <strong>
-                    {{ $t('webapp.evaluate.header_title_lang') }}
+                    {{ $t('webapp.evaluate-manual.header_title_lang') }}
                   </strong>
                 </p>
                 <div
@@ -46,9 +46,9 @@
                 :loading="evaluating"
                 :disabled="evaluating"
                 type="is-secondary"
-                class="evaluate__content-header__wrapper__btn"
+                class="evaluate__content-header__wrapper__button"
                 @click="newEvaluate()">
-                {{ $t('webapp.evaluate.run_test') }}
+                {{ $t('webapp.evaluate-manual.run_test') }}
               </b-button>
             </div>
           </div>
@@ -77,7 +77,7 @@
         <b-notification
           :closable="false"
           type="is-info">
-          {{ $t('webapp.evaluate.login') }}
+          {{ $t('webapp.evaluate-manual.login') }}
         </b-notification>
         <login-form hide-forgot-password />
       </div>
@@ -104,7 +104,7 @@ import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
 export default {
-  name: 'RepositoryEvaluate',
+  name: 'RepositoryEvaluateManual',
   components: {
     RepositoryViewBase,
     LoginForm,
@@ -138,7 +138,7 @@ export default {
         .map((lang, index) => ({
           id: index + 1,
           value: lang,
-          title: `${LANGUAGES[lang]} (${this.$tc('webapp.evaluate.get_examples_test_sentences', this.selectedRepository.evaluate_languages_count[lang])})`,
+          title: `${LANGUAGES[lang]} (${this.$tc('webapp.evaluate-manual.get_examples_test_sentences', this.selectedRepository.evaluate_languages_count[lang])})`,
         }));
     },
   },
@@ -207,7 +207,7 @@ export default {
         this.error = error.response.data;
         this.evaluating = false;
         this.$buefy.toast.open({
-          message: `${this.error.detail || this.$t('webapp.evaluate.default_error')} `,
+          message: `${this.error.detail || this.$t('webapp.evaluate-manual.default_error')} `,
           type: 'is-danger',
           duration: 5000,
         });
@@ -303,6 +303,14 @@ export default {
         flex: 1;
         margin-right: .5rem;
         text-align: left;
+      }
+
+      &__button {
+        width: 11.188rem;
+        height: 2.25rem;
+        font-family: $font-family;
+        font-size: $font-size;
+        color: $color-white;
       }
     }
   }

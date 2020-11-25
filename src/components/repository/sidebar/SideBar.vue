@@ -65,8 +65,12 @@
                 class="is-pulled-right"/>
             </template>
             <b-menu-item
-              :to="{ name: 'repository-test' }"
-              :label="$t('webapp.menu.sentences')"
+              :to="{ name: 'repository-test-manual' }"
+              :label="$t('webapp.menu.test-manual')"
+              tag="router-link"/>
+            <b-menu-item
+              :to="{ name: 'repository-test-automatic' }"
+              :label="$t('webapp.menu.test-automatic')"
               tag="router-link"/>
             <b-menu-item
               :to="{ name: 'repository-results' }"
