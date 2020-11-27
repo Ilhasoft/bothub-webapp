@@ -12,8 +12,8 @@ export default {
     );
     return response;
   },
-  async getIntentSuggestion(store, { id }) {
-    const response = await intent.intentSuggestions(id);
+  async getIntentSuggestion(store, { id, language }) {
+    const response = await intent.intentSuggestions(id, language);
     return response;
   },
   setEditingStatus({ commit }, payload) {

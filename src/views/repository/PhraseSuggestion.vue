@@ -17,6 +17,7 @@
           </div>
           <badges-intents-suggestion
             :list="repository.intents"
+            :repository="repository"
             @phraseSuggestion="setPhraseSuggestion($event)"
             @dispatchLoading="updateLoading($event)"/>
           <loading
