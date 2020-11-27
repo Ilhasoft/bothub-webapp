@@ -106,7 +106,7 @@ export default {
     async setPhraseSuggestion(value) {
       const phraseValues = Object.values(value);
       this.setEditingStatus(false);
-      if (phraseValues[0] === false) {
+      if (phraseValues.length === 0) {
         this.clearPhraseList();
         this.loading = false;
         return;
