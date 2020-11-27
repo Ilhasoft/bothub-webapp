@@ -50,6 +50,7 @@ export default {
       this.selectedIntent = intent;
       const { data } = await this.getIntentSuggestion({
         id,
+        language: this.repository.language,
       });
       this.$emit('phraseSuggestion', data.suggestions);
     },
