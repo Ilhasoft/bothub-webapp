@@ -23,6 +23,7 @@
             :show-labels="false"
             :new-intelligence-forms="true"
             class="create-repository__form"/>
+          <import-intelligence v-show="formSchema"/>
           <div
             class="create-repository__form__style">
             <b-button
@@ -117,6 +118,7 @@
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
+import ImportIntelligence from '@/components/shared/ImportIntelligence';
 import { mapActions, mapGetters } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
@@ -128,11 +130,12 @@ import Tour from '@/components/Tour';
 export default {
   name: 'CreateRepositoryForm',
   components: {
+    Tour,
     Loading,
     FormGenerator,
     RepositoryCard,
     CategorySelect,
-    Tour,
+    ImportIntelligence,
   },
   props: {
     userName: {
@@ -432,6 +435,9 @@ export default {
                 width: 6.875rem;
                 height: 2.188rem;
               }
+            }
+            @media (max-width: $mobile-width) {
+              width: 25rem;
             }
         }
 
