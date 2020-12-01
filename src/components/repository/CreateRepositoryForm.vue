@@ -23,7 +23,7 @@
             :show-labels="false"
             :new-intelligence-forms="true"
             class="create-repository__form"/>
-          <import-intelligence/>
+          <import-intelligence v-show="formSchema"/>
           <div
             class="create-repository__form__style">
             <b-button
