@@ -44,7 +44,7 @@
             </b-button>
             <b-button
               :loading="isButtonLoading"
-              :disabled="isexportButtonVisible"
+              :disabled="isExportButtonVisible"
               class="modal-button"
               type="is-primary"
               @click="dispatchExport()">
@@ -65,7 +65,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    isexportButtonVisible: {
+    isExportButtonVisible: {
       type: Boolean,
       default: false,
     },

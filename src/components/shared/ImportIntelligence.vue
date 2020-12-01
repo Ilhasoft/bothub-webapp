@@ -25,7 +25,7 @@
         type="is-primary"
         class="import-intelligence__content__import-button"
         @click="setVisibleImportModal()">
-        Importar dados
+        Importar Dataset
       </b-button>
       <b-field
         v-else
