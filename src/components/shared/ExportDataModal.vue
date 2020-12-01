@@ -115,7 +115,8 @@ export default {
   &__modal-style{
       width: 22.5rem;
       @media (max-width: $mobile-width) {
-        padding-left: 5rem
+        width: 26.5rem;
+        padding-left: 3rem;
       }
     &__header{
       p{
