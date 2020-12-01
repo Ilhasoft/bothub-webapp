@@ -15,6 +15,11 @@
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
+
+            <hr>
+            <export-intelligence/>
+            <hr>
+
             <div class="settings__section">
               <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
               <set-authorization-role-form
@@ -64,6 +69,7 @@ import AuthorizationRequestsList from '@/components/repository/AuthorizationRequ
 
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
+import ExportIntelligence from '@/components/shared/ExportIntelligence';
 
 
 export default {
@@ -76,6 +82,7 @@ export default {
     AuthorizationRequestsList,
     LoginForm,
     AuthorizationRequestNotification,
+    ExportIntelligence,
   },
   extends: RepositoryBase,
   methods: {

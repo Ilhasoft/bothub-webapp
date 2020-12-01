@@ -42,7 +42,7 @@
 
     <import-data-modal
       :is-modal-visible="importModalVisible"
-      @translationFileChanged="intelligenceFile = $event"
+      @selectedFileChanged="intelligenceFile = $event"
       @dispatchCloseModal="closeImportModal()"
       @dispatchImportFile="importSelectedFile()"/>
   </div>

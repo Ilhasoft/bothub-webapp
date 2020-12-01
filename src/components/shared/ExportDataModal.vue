@@ -1,66 +1,54 @@
 <template>
-  <div class="import-data-modal">
+  <div class="export-data-modal">
     <b-modal
       :active.sync="isModalVisible"
       :destroy-on-hide="false"
       :can-cancel="false"
       has-modal-card
       aria-role="dialog"
-      class="import-data-modal__card"
+      class="export-data-modal__card"
       aria-modal>
       <div
-        class="modal-card import-data-modal__modal-style">
-        <header class="modal-card-head import-data-modal__modal-style__header">
-          <p>Importar Dataset</p>
+        class="modal-card export-data-modal__modal-style">
+        <header class="modal-card-head export-data-modal__modal-style__header">
+          <p>Exportar Dataset</p>
         </header>
-        <section class="modal-card-body">
-          <b-field
-            class="import-data-modal__custom-file-upload">
-            <div class="import-data-modal__custom-file-upload__input">
-              <b-upload v-model="selectedFile">
-                <a class="button import-data-modal__custom-file-upload__input__button">
-                  <b-icon
-                    icon="upload"
-                    type="is-white"/>
-                </a>
-              </b-upload>
-              <div
-                v-if="selectedFile"
-                class="import-data-modal__custom-file-upload__input__file">
-                {{ selectedFile.name }}
-                <div
-                  class="import-data-modal__custom-file-upload__input__icon"
-                  @click="removeSelectedFile">
-                  <b-icon
-                    icon="close-circle"
-                    custom-size="mdi-18px"
-                  />
-                </div>
-              </div>
-              <div
-                v-else
-                class="import-data-modal__custom-file-upload__input__file">
-                <span>Nenhum arquivo selecionado</span>
-              </div>
-            </div>
-            <p>{{ errorMessage }}</p>
-          </b-field>
+        <section class="modal-card-body export-data-modal__modal-style__selects">
+          <b-select
+            expanded
+            placeholder="Complete Intelligence"
+            class="export-data-modal__modal-style__selects__inputs"
+          >
+            <option value="flint">Complete Intelligence</option>
+            <option value="silver">Only Phrase</option>
+            <option value="vane">Only Entities</option>
+            <option value="billy">Only Translations</option>
+          </b-select>
+          <b-select
+            expanded
+            placeholder="Select which platform"
+            class="export-data-modal__modal-style__selects__inputs"
+          >
+            <option value="flint">Bothub</option>
+            <option value="silver">Rasa</option>
+            <option value="vane">Wit.AI</option>
+          </b-select>
         </section>
         <footer class="modal-card-foot">
-          <div class="import-data-modal__modal-style__style-button">
+          <div class="export-data-modal__modal-style__style-button">
             <b-button
               class="modal-button"
               type="is-white"
-              @click="dispatchCloseImportModal()">
+              @click="dispatchCloseExportModal()">
               Cancel
             </b-button>
             <b-button
               :loading="isButtonLoading"
-              :disabled="isImportButtonVisible"
+              :disabled="isexportButtonVisible"
               class="modal-button"
               type="is-primary"
-              @click="dispatchImport()">
-              Importar
+              @click="dispatchExport()">
+              Exportar
             </b-button>
           </div>
         </footer>
@@ -71,13 +59,13 @@
 
 <script>
 export default {
-  name: 'ImportDataModal',
+  name: 'ExportDataModal',
   props: {
     isModalVisible: {
       type: Boolean,
       default: false,
     },
-    isImportButtonVisible: {
+    isexportButtonVisible: {
       type: Boolean,
       default: false,
     },
@@ -106,11 +94,11 @@ export default {
     removeSelectedFile() {
       this.selectedFile = null;
     },
-    dispatchImport() {
+    dispatchExport() {
       this.selectedFile = null;
-      this.$emit('dispatchImportFile');
+      this.$emit('dispatchExportFile');
     },
-    dispatchCloseImportModal() {
+    dispatchCloseExportModal() {
       this.selectedFile = null;
       this.$emit('dispatchCloseModal');
     },
@@ -122,10 +110,10 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.import-data-modal {
+.export-data-modal {
 
   &__modal-style{
-      width: 26.5rem;
+      width: 22.5rem;
       @media (max-width: $mobile-width) {
         padding-left: 5rem
       }
@@ -133,6 +121,19 @@ export default {
       p{
         font-size: 1.5rem;
       }
+    }
+
+    &__selects{
+        padding: 2rem;
+        height: 10rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        &__inputs{
+            min-width: 18rem;
+        }
     }
 
     &__style-button{
