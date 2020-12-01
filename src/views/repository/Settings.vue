@@ -8,7 +8,7 @@
           <div
             v-if="repository.authorization.can_write">
             <div class="settings__section">
-              <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
+              <h2>{{ $t('webapp.settings.title_edit_repository') }}</h2>
               <edit-repository-form
                 :owner-nickname="repository.owner.nickname"
                 :slug="repository.slug"
@@ -21,7 +21,7 @@
             <hr>
 
             <div class="settings__section">
-              <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
+              <h2>{{ $t('webapp.settings.manage_your_team') }}</h2>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
                 :repository-uuid="repository.uuid"
@@ -31,7 +31,7 @@
                 :repository-uuid="repository.uuid" />
             </div>
             <div class="settings__section">
-              <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
+              <h2>{{ $t('webapp.settings.authorization_requests') }}</h2>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
                 @review="onReviewAuthorizationRequest()" />
