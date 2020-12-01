@@ -436,6 +436,9 @@ export default {
                 height: 2.188rem;
               }
             }
+            @media (max-width: $mobile-width) {
+              width: 25rem;
+            }
         }
 
         &__card {
