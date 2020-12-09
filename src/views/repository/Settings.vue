@@ -17,7 +17,7 @@
             </div>
 
             <hr>
-            <export-intelligence/>
+            <import-and-export-intelligence/>
             <hr>
 
             <div class="settings__section">
@@ -66,10 +66,9 @@ import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
-
+import ImportAndExportIntelligence from '@/components/repository/ImportAndExportIntelligence';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
-import ExportIntelligence from '@/components/shared/ExportIntelligence';
 
 
 export default {
@@ -82,7 +81,7 @@ export default {
     AuthorizationRequestsList,
     LoginForm,
     AuthorizationRequestNotification,
-    ExportIntelligence,
+    ImportAndExportIntelligence,
   },
   extends: RepositoryBase,
   methods: {

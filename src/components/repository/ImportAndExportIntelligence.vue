@@ -1,59 +1,51 @@
 <template>
-  <div class="import-intelligence">
+  <div class="import-and-export-intelligence">
     <h2
-      v-if="isTrainingPage"
-      class="import-intelligence__title">Importe sua inteligência</h2>
-    <p v-else>Importe sua inteligência</p>
-    <p
-      v-if="!isTrainingPage"
-      class="import-intelligence__description">
-      Caso você já possua uma inteligência de outra plataforma
-      que gostaria de usá-la aqui, basta selecionar o arquivo
-      correspondente aos modelos do Rasa, Wit.AI ou Bothub,
-      que automaticamente os dados serão reconhecidos
+      class="import-and-export-intelligence__title">
+      {{ $t('webapp.import_and_export_intelligence.title') }}
+    </h2>
+    <p>
+      {{ $t('webapp.import_and_export_intelligence.subtitle') }}
     </p>
-    <p
-      v-else
-      class="import-intelligence__description-train">
-      Para importar, basta selecionar o arquivo correspondente
-      aos modelos Rasa, Wit.AI ou Bothub, e os dados serão automaticamente
-      reconhecidos.
-    </p>
-    <div class="import-intelligence__content">
+    <div class="import-and-export-intelligence__buttons">
       <b-button
         v-if="intelligenceFile === null"
         type="is-primary"
-        class="import-intelligence__content__import-button"
+        class="import-and-export-intelligence__buttons__import-button"
         @click="setVisibleImportModal()">
-        Importar Dataset
+        {{ $t('webapp.import_and_export_intelligence.import_rasa') }}
       </b-button>
-      <b-field
-        v-else
-        class="import-intelligence__content__input">
-        <b-input
-          :placeholder="intelligenceFile.name"
-          icon="paperclip"
-          icon-right="close"
-          disabled
-          icon-right-clickable
-          @icon-right-click="clearImportedFile()"/>
-      </b-field>
+      <b-button
+        v-if="intelligenceFile === null"
+        type="is-primary"
+        class="import-and-export-intelligence__buttons__import-button"
+        @click="setVisibleMigrateModal()">
+        {{ $t('webapp.import_and_export_intelligence.migrate_wit') }}
+      </b-button>
     </div>
 
     <import-data-modal
       :is-modal-visible="importModalVisible"
+      :is-import-button-visible="intelligenceFile === null"
       @selectedFileChanged="intelligenceFile = $event"
       @dispatchCloseModal="closeImportModal()"
-      @dispatchImportFile="importSelectedFile()"/>
+      @dispatchImportNotification="dispatchNotification($event)"/>
+
+    <migrate-intelligence-modal
+      :is-modal-visible="migrateModalVisible"
+      @selectedFileChanged="intelligenceFile = $event"
+      @dispatchCloseModal="closeMigrateModal()"
+      @dispatchMigrateNotification="dispatchNotification($event)"/>
   </div>
 </template>
 
 <script>
-import ImportDataModal from './ImportDataModal';
+import ImportDataModal from '@/components/shared/ImportDataModal';
+import MigrateIntelligenceModal from '@/components/shared/MigrateIntelligenceModal';
 
 export default {
   name: 'ImportIntelligence',
-  components: { ImportDataModal },
+  components: { ImportDataModal, MigrateIntelligenceModal },
   props: {
     fileUploaded: {
       type: String,
@@ -68,6 +60,7 @@ export default {
     return {
       intelligenceFile: null,
       importModalVisible: false,
+      migrateModalVisible: false,
     };
   },
   methods: {
@@ -86,6 +79,18 @@ export default {
         this.intelligenceFile = null;
       });
     },
+    setVisibleMigrateModal() {
+      this.migrateModalVisible = true;
+    },
+    closeMigrateModal() {
+      this.migrateModalVisible = false;
+    },
+    dispatchNotification(value) {
+      this.$buefy.toast.open({
+        message: value.message,
+        type: `${value.type}`,
+      });
+    },
   },
 };
 </script>
@@ -94,21 +99,24 @@ export default {
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
-.import-intelligence{
+.import-and-export-intelligence{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     margin-top: -2rem;
+    padding-bottom: 1rem;
     width: 100%;
 
     &__title{
         margin-top: 2.2rem;
+        margin-bottom: $between-title-subtitle;
     }
 
     &__description {
         text-align: justify;
         font-size: 12px;
+        margin-bottom: $between-subtitle-content;
         @media (max-width: $mobile-width) {
             max-width: 80%;
         }
@@ -119,7 +127,7 @@ export default {
         max-width: 80%;
     }
 
-    &__content {
+    &__buttons {
         width: 100%;
         display: flex;
         justify-content: flex-start;
@@ -133,6 +141,7 @@ export default {
             font-family: $font-family;
             box-shadow: 0px 3px 6px #00000029;
             border-radius: 6px;
+            margin-right: 2rem;
 
         }
 

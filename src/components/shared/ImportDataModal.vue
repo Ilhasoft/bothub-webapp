@@ -11,7 +11,7 @@
       <div
         class="modal-card import-data-modal__modal-style">
         <header class="modal-card-head import-data-modal__modal-style__header">
-          <p>Importar Dataset</p>
+          <p>{{ $t('webapp.import_dataset.title') }}</p>
         </header>
         <section class="modal-card-body">
           <b-field
@@ -40,10 +40,9 @@
               <div
                 v-else
                 class="import-data-modal__custom-file-upload__input__file">
-                <span>Nenhum arquivo selecionado</span>
+                <span>{{ $t('webapp.import_dataset.empty_file') }}</span>
               </div>
             </div>
-            <p>{{ errorMessage }}</p>
           </b-field>
         </section>
         <footer class="modal-card-foot">
@@ -52,15 +51,15 @@
               class="modal-button"
               type="is-white"
               @click="dispatchCloseImportModal()">
-              Cancel
+              {{ $t('webapp.import_dataset.cancel') }}
             </b-button>
             <b-button
               :loading="isButtonLoading"
-              :disabled="isImportButtonVisible"
+              :disabled="selectedFile === null"
               class="modal-button"
               type="is-primary"
-              @click="dispatchImport()">
-              Importar
+              @click="dispatchUploadFile()">
+              {{ $t('webapp.import_dataset.importar') }}
             </b-button>
           </div>
         </footer>
@@ -70,6 +69,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
 export default {
   name: 'ImportDataModal',
   props: {
@@ -77,38 +78,44 @@ export default {
       type: Boolean,
       default: false,
     },
-    isImportButtonVisible: {
-      type: Boolean,
-      default: false,
-    },
-    isButtonLoading: {
-      type: Boolean,
-      default: false,
-    },
-    errorMessage: {
-      type: String,
-      default: '',
-    },
   },
   data() {
     return {
       selectedFile: null,
+      isButtonLoading: false,
     };
   },
-  watch: {
-    selectedFile() {
-      if (this.selectedFile !== null) {
-        this.$emit('selectedFileChanged', this.selectedFile);
-      }
-    },
+  computed: {
+    ...mapGetters([
+      'getCurrentRepository',
+    ]),
   },
   methods: {
+    ...mapActions([
+      'setUploadRasaDataset',
+    ]),
     removeSelectedFile() {
       this.selectedFile = null;
     },
-    dispatchImport() {
-      this.selectedFile = null;
-      this.$emit('dispatchImportFile');
+    async dispatchUploadFile() {
+      try {
+        this.isButtonLoading = true;
+        const formData = new FormData();
+        formData.append('file', this.selectedFile);
+        formData.append('language', this.getCurrentRepository.language);
+
+        await this.setUploadRasaDataset({
+          repositoryVersion: this.getCurrentRepository.repository_version_id,
+          repositoryUUID: this.getCurrentRepository.uuid,
+          formData,
+        });
+        this.$emit('dispatchImportNotification', { type: 'is-success', message: this.$t('webapp.import_dataset.import_success') });
+        this.dispatchCloseImportModal();
+      } catch (error) {
+        this.$emit('dispatchImportNotification', { type: 'is-danger', message: this.$t('webapp.import_dataset.import_error') });
+      } finally {
+        this.isButtonLoading = false;
+      }
     },
     dispatchCloseImportModal() {
       this.selectedFile = null;
