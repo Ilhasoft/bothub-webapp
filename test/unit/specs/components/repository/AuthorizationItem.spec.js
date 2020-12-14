@@ -21,7 +21,7 @@ describe('AuthorizationItem.vue', () => {
       Auth: {},
       User: { profiles: {} },
     });
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
     wrapper = shallowMount(AuthorizationItem, {
       localVue,
       mocks: {

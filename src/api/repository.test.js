@@ -52,7 +52,7 @@ describe('api/repository', () => {
   // });
 
   test('edit', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const response = await repository.edit(
       'fake',
@@ -74,7 +74,7 @@ describe('api/repository', () => {
     expect(response.status).toBe(200);
   });
   test('updateAuthorizationRole', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const response = await repository.updateAuthorizationRole(
       '8511fd26-a3bc-4f74-9af1-176abca5401d',
@@ -88,7 +88,7 @@ describe('api/repository', () => {
   });
 
   test('getAuthorizationList', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const list = repository.getAuthorizationList('8511fd26-a3bc-4f74-9af1-176abca5401d');
     await list.updateItems(0);
@@ -103,7 +103,7 @@ describe('api/repository', () => {
   });
 
   test('requestAuthorization', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const repositoryUuid = '8511fd26-a3bc-4f74-9af1-176abca5401d';
     const response = await repository.requestAuthorization(
@@ -116,7 +116,7 @@ describe('api/repository', () => {
   });
 
   test('getAuthorizationRequestsList', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const list = repository.getAuthorizationRequestsList('8511fd26-a3bc-4f74-9af1-176abca5401d');
     await list.next();
@@ -126,7 +126,7 @@ describe('api/repository', () => {
   });
 
   test('approveRequestAuthorization', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const response = await repository.approveRequestAuthorization(1);
     expect(response.status).toBe(200);
@@ -135,7 +135,7 @@ describe('api/repository', () => {
   });
 
   test('rejectRequestAuthorization', async () => {
-    store.commit(TYPES.SET_TOKEN, '1f5e7e21d331536b58448595f69eb50a6b5e49b8');
+    store.commit(TYPES.SET_TOKEN, 'Token 1f5e7e21d331536b58448595f69eb50a6b5e49b8');
 
     const response = await repository.rejectRequestAuthorization(1);
     expect(response.status).toBe(204);
