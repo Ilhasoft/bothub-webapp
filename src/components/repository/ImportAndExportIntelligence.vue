@@ -10,16 +10,18 @@
     <div class="import-and-export-intelligence__buttons">
       <b-button
         v-if="intelligenceFile === null"
+        ref="setVisibleImport"
         type="is-primary"
         class="import-and-export-intelligence__buttons__import-button"
-        @click="setVisibleImportModal()">
+        @click.native="setVisibleImportModal()">
         {{ $t('webapp.import_and_export_intelligence.import_rasa') }}
       </b-button>
       <b-button
         v-if="intelligenceFile === null"
+        ref="setVisibleMigrate"
         type="is-primary"
         class="import-and-export-intelligence__buttons__import-button"
-        @click="setVisibleMigrateModal()">
+        @click.native="setVisibleMigrateModal()">
         {{ $t('webapp.import_and_export_intelligence.migrate_wit') }}
       </b-button>
     </div>
@@ -46,16 +48,6 @@ import MigrateIntelligenceModal from '@/components/shared/MigrateIntelligenceMod
 export default {
   name: 'ImportIntelligence',
   components: { ImportDataModal, MigrateIntelligenceModal },
-  props: {
-    fileUploaded: {
-      type: String,
-      default: 'Wit.AI',
-    },
-    isTrainingPage: {
-      type: Boolean,
-      default: false,
-    },
-  },
   data() {
     return {
       intelligenceFile: null,
