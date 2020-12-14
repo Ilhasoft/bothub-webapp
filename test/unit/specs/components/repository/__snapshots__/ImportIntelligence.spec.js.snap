@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImportAndExportIntelligence renders correctly 1`] = `
+exports[`ImportIntelligence renders correctly 1`] = `
 <div class="import-and-export-intelligence">
   <h2 class="import-and-export-intelligence__title">
     some specific text

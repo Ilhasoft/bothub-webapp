@@ -1,13 +1,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import ImportAndExportIntelligence from '@/components/repository/ImportAndExportIntelligence';
+import ImportIntelligence from '@/components/repository/ImportIntelligence';
 import store from '@/store';
 
 const localVue = createLocalVue();
 
-describe('ImportAndExportIntelligence', () => {
+describe('ImportIntelligence', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ImportAndExportIntelligence, {
+    wrapper = shallowMount(ImportIntelligence, {
       localVue,
       store,
       mocks: {
