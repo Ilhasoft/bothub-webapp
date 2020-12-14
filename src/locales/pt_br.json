@@ -287,7 +287,7 @@
       "search_user": "Digite um nome ou username",
       "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
-      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
+      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?",
       "remove": "Remover",
       "cancel": "Cancelar",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
@@ -733,6 +733,28 @@
       "cancel": "Cancelar",
       "add_training": "Adicionar ao treinamento",
       "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento"
+    },
+    "import_and_export_intelligence":{
+      "title": "Importar sua inteligência",
+      "subtitle": "Para importar/migrar, basta selecionar o arquivo correspondente ao Rasa ou coloque o access token do Wit.AI, e os dados serão reconhecidos automaticamente",
+      "import_rasa": "Importar do Rasa",
+      "migrate_wit": "Migrar do Wit.AI"
+    },
+    "migrate_intelligence": {
+      "title": "Migrar inteligência Wit.AI",
+      "token_input": "Adicione seu Server Access Token aqui",
+      "language": "Seleciona o idioma",
+      "cancel": "Cancelar",
+      "migrate": "Confirmar",
+      "migrate_success": "Migração feita com sucesso."
+    },
+    "import_dataset": {
+      "title": "Importar Dataset",
+      "empty_file": "Não há arquivo selecionado",
+      "cancel": "Cancelar",
+      "importar": "Confirmar",
+      "import_success": "Importação feita com sucesso.",
+      "import_error": "Algo de errado aconteceu, tente novamente mais tarde."
     }
   }
 }

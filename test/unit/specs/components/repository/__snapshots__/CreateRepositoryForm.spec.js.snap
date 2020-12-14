@@ -9,7 +9,6 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <loading-stub></loading-stub>
       <div id="tour-create_intelligence_forms-step-0" is-next-disabled="true" class="create-repository__container">
         <!---->
-        <import-intelligence-stub fileuploaded="Wit.AI" style="display: none;"></import-intelligence-stub>
         <div class="create-repository__form__style">
           <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__style__button"> some specific text
           </b-button-stub>

@@ -83,8 +83,6 @@
           translation-data
           @exampleDeleted="onExampleDeleted"
         />
-        <hr>
-        <import-intelligence :is-training-page="true"/>
       </div>
     </div>
     <tour
@@ -113,7 +111,6 @@ import RepositoryBase from './Base';
 import Loading from '@/components/shared/Loading';
 import Train from '@/components/repository/training/Train';
 import Tour from '@/components/Tour';
-import ImportIntelligence from '@/components/shared/ImportIntelligence';
 
 export default {
   name: 'RepositoryTrainings',
@@ -126,7 +123,6 @@ export default {
     AuthorizationRequestNotification,
     RequestAuthorizationModal,
     ExamplesPendingTraining,
-    ImportIntelligence,
     Loading,
     Train,
     Tour,

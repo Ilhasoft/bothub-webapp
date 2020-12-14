@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImportIntelligence renders correctly 1`] = `
+<div class="import-and-export-intelligence">
+  <h2 class="import-and-export-intelligence__title">
+    some specific text
+  </h2>
+  <p>
+    some specific text
+  </p>
+  <div class="import-and-export-intelligence__buttons">
+    <b-button-stub type="is-primary" nativetype="button" tag="button" class="import-and-export-intelligence__buttons__import-button">
+      some specific text
+    </b-button-stub>
+    <b-button-stub type="is-primary" nativetype="button" tag="button" class="import-and-export-intelligence__buttons__import-button">
+      some specific text
+    </b-button-stub>
+  </div>
+  <import-data-modal-stub is-import-button-visible="true"></import-data-modal-stub>
+  <migrate-intelligence-modal-stub></migrate-intelligence-modal-stub>
+</div>
+`;
