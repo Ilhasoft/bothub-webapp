@@ -180,7 +180,7 @@ export default {
     async intent() {
       if (!this.intent || this.intent.length <= 0) return;
       await this.$nextTick();
-      this.intent = formatters.bothubItemKey()(this.intent);
+      this.intent = formatters.bothubItemKey()(this.intent.toLowerCase());
     },
   },
   mounted() {
