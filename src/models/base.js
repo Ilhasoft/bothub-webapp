@@ -11,7 +11,7 @@ class ModelBase extends Model {
         {
           baseURL: process.env.API_BASE_URL,
           headers: store.getters.authenticated
-            ? { Authorization: `Token ${store.getters.authToken}` }
+            ? { Authorization: `${store.getters.authToken}` }
             : {},
         },
       ),
