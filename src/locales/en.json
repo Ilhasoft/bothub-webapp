@@ -272,7 +272,7 @@
       "search_user": "Enter a name or username",
       "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
-      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?", 
+      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?",
       "remove": "Remove"
     },
     "roles": {
@@ -671,7 +671,7 @@
         "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
-    }, 
+    },
      "evaluate_result": {
       "step_0": "Here you can see the result of your intelligence test."
       },
