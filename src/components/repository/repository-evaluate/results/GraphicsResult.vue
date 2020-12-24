@@ -10,7 +10,7 @@
       <p>
         {{ $t('webapp.result.evaluate_output_text') }}
         <a
-          :href="checkDocLanguage[0]"
+          :href="checkDocLanguage.results"
           target="_blank">{{ $t('webapp.result.documentation') }}</a>.
       </p>
 
@@ -22,7 +22,7 @@
         <p>
           {{ $t('webapp.result.see_more_in') }}
           <a
-            :href="checkDocLanguage[1]"
+            :href="checkDocLanguage.precision_recall"
             target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
@@ -63,7 +63,7 @@
         <p>
           {{ $t('webapp.result.intent_confusion_matrix_text') }}
           <a
-            :href="checkDocLanguage[2]"
+            :href="checkDocLanguage.matrix"
             target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
@@ -87,7 +87,7 @@
         <p>{{ $t('webapp.result.intent_confidence_distribution_text') }}</p>
         <p>{{ $t('webapp.result.see_more_in') }}
           <a
-            :href="checkDocLanguage[3]"
+            :href="checkDocLanguage.confidence"
             target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
@@ -135,19 +135,19 @@ export default {
     }),
     checkDocLanguage() {
       if (I18n.locale === 'pt-BR') {
-        return [
-          'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#resultados',
-          'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#relat_rios_de_precis_o_e_cobertura_precision_and_recall_reports',
-          'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#matriz_de_confus_o_de_inten_es_intent_confusion_matrix',
-          'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#distribui_o_de_confian_a_de_inten_es_intent_confidence_distribuition',
-        ];
+        return {
+          results: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#resultados',
+          precision_recall: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#relat_rios_de_precis_o_e_cobertura_precision_and_recall_reports',
+          matrix: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#matriz_de_confus_o_de_inten_es_intent_confusion_matrix',
+          confidence: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#distribui_o_de_confian_a_de_inten_es_intent_confidence_distribuition',
+        };
       }
-      return [
-        'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results',
-        'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports',
-        'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix',
-        'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution',
-      ];
+      return {
+        results: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results',
+        precision_recall: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports',
+        matrix: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix',
+        confidence: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution',
+      };
     },
   },
   watch: {
