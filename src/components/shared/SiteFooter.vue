@@ -9,7 +9,7 @@
         <div class="footer-items">
           <div class="footer-item footer-brand">
             <img
-              src="~@/assets/imgs/logo-white.svg"
+              src="~@/assets/imgs/logo-new-white.svg"
               alt="bothub">
             <div>Webapp v{{ version }}</div>
           </div>
@@ -46,7 +46,7 @@
             <p>+55 82 3022.5978</p>
           </div>
         </div>
-        <div class="footer-items">
+        <!-- <div class="footer-items">
           <h4 class="footer-title">{{ $t('webapp.layout.subscribe') }}</h4>
           <div class="footer-section-item">
             <p>{{ $t('webapp.layout.newsletter') }}</p>
@@ -63,7 +63,7 @@
               />
             </div>
           </form>
-        </div>
+        </div> -->
       </div>
       <div class="footer-license">
         <p class="has-text-centered">{{ $t('webapp.layout.footer_license') }}</p>
@@ -131,7 +131,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-
+@import '~@/assets/scss/utilities.scss';
 
 footer {
   $margin-top: 12vw;
@@ -200,7 +200,7 @@ footer {
 
     &-brand {
       img {
-        width: 140px;
+        width: 160px;
       }
     }
 

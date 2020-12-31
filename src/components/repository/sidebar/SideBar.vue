@@ -237,6 +237,7 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
 
 .menu-list a {
   padding: 0.5em 1.6rem;
@@ -255,24 +256,28 @@ export default {
   color: white;
   cursor: pointer;
     &__logo{
-    background: url(~@/assets/imgs/bothub_white.svg) no-repeat;
+    background: url(~@/assets/imgs/logo-new-white.svg) no-repeat;
     width: 8rem;
-    height: 1.5rem;
+    height: 2.8rem;
   }
   &__logo:hover{
-    background: url(~@/assets/imgs/bothub_green.svg) no-repeat;
+    background: url(~@/assets/imgs/logo-new-sidebar.svg) no-repeat;
 
   }
 }
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 5.25rem;
   bottom: 0;
   left: 0;
   z-index: 10;
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
+
+  @media screen and (max-width: $mobile-width) {
+    top: 12rem;
+  }
 
   .sidebar-wrapper {
     z-index: 10;
