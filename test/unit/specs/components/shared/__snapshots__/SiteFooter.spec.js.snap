@@ -38,17 +38,6 @@ exports[`SiteFooter.vue renders correctly 1`] = `
           <p>+55 82 3022.5978</p>
         </div>
       </div>
-      <div class="footer-items">
-        <h4 class="footer-title">some specific text</h4>
-        <div class="footer-section-item">
-          <p>some specific text</p>
-        </div>
-        <form>
-          <div class="footer-has-input">
-            <b-input-stub value="" type="email" hascounter="true" customclass="" iconright="chevron-right" iconrightclickable="true" placeholder="some specific text"></b-input-stub>
-          </div>
-        </form>
-      </div>
     </div>
     <div class="footer-license">
       <p class="has-text-centered">some specific text</p>

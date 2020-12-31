@@ -261,7 +261,7 @@ export default {
     height: 2.8rem;
   }
   &__logo:hover{
-    background: url(~@/assets/imgs/logo-new-sidebar.svg) no-repeat;
+    background: url(~@/assets/imgs/logo-new-sidebars.svg) no-repeat;
 
   }
 }
