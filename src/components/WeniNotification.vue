@@ -52,6 +52,7 @@ export default {
   justify-content: center;
   align-items: center;
   margin: auto;
+
   @media screen and (max-width: $mobile-width) {
     height: 12rem;
   }
