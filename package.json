@@ -19,7 +19,7 @@
     "@mdi/font": "^5.2.45",
     "@sentry/browser": "^5.15.5",
     "@sentry/integrations": "^5.15.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bh": "./bh/",
     "buefy": "^0.8.20",
     "chart.js": "^2.8.0",
