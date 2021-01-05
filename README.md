@@ -2,6 +2,7 @@
     <img src="https://user-images.githubusercontent.com/5360835/65427083-1af35900-de01-11e9-86ef-59f1eee79a68.png" width="240" height="60" alt="Bothub" />
 </p>
 
+
 <p>
 BotHub is an open platform for predicting, training and sharing NLU (Natural Language Understanding) datasets in multiple languages in a cooperative way.
 
