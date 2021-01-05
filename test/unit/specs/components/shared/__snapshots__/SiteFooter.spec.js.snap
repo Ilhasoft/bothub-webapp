@@ -6,7 +6,7 @@ exports[`SiteFooter.vue renders correctly 1`] = `
   <div class="container">
     <div class="footer-content">
       <div class="footer-items">
-        <div class="footer-item footer-brand"><img src="~@/assets/imgs/logo-white.svg" alt="bothub">
+        <div class="footer-item footer-brand"><img src="~@/assets/imgs/logo-new-white.svg" alt="bothub">
           <div>Webapp v0.0.0</div>
         </div>
         <ul class="footer-item">
@@ -37,17 +37,6 @@ exports[`SiteFooter.vue renders correctly 1`] = `
         <div class="footer-section-item">
           <p>+55 82 3022.5978</p>
         </div>
-      </div>
-      <div class="footer-items">
-        <h4 class="footer-title">some specific text</h4>
-        <div class="footer-section-item">
-          <p>some specific text</p>
-        </div>
-        <form>
-          <div class="footer-has-input">
-            <b-input-stub value="" type="email" hascounter="true" customclass="" iconright="chevron-right" iconrightclickable="true" placeholder="some specific text"></b-input-stub>
-          </div>
-        </form>
       </div>
     </div>
     <div class="footer-license">

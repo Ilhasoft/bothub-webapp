@@ -12,7 +12,7 @@
       "subscribe": "Subscribe",
       "newsletter": "Enter your email to get notified about our news:",
       "you_best_email": "Your best email",
-      "footer_license": "Bothub is a project by Ilhasoft.\n        &copy; 2020 All rights reserved.",
+      "footer_license": "Copyright © 2012-2021 Weni. All rights reserved.",
       "created_by": "Created by",
       "read_for_train": "Your intelligence is ready to be trained",
       "request_authorization": "Request Authorization",
@@ -77,7 +77,7 @@
       "grid_text1": "Easy access for ready and multilingual datasets",
       "grid_text2": "Simply use, improve or translate, thousands of datasets published by people all over the world about uncountable subjects and languages.",
       "grid_text3": "Integrate with your chatbot platform",
-      "grid_text4": "Connect datasets to different chatbot platforms through BotHub API and make your bot more efficient.",
+      "grid_text4": "Connect datasets to different chatbot platforms through our API and make your bot more efficient.",
       "grid_text5": "Build and share your own AI",
       "grid_text6": "Build your own dataset that fit your chatbot needs. You can also allow other people to contribute on your dataset.",
       "best_bots": "Best bots",
@@ -704,6 +704,12 @@
     "tutorial_button":{
       "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
+  },
+  "weni_notification":{
+    "title": "Ilhasoft, Push and BotHub are now Weni.",
+    "subtitle": "From this merger of brands, our purpose is to continue to evolve the digital transformation in the communication of organizations.",
+    "button": "Learn more",
+    "link": "https://www.ilhasoft.com.br/we-are-weni"
   }
 }
 }

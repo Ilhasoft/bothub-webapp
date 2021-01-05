@@ -1,12 +1,14 @@
 <template>
   <div>
+    <weni-notification/>
     <nav class="landing-page__nav">
       <div class="bh-grid bh-grid--space-between bh-grid--row">
         <router-link
           class="bh-grid__item landing-page__nav__logo"
           to="/">
           <img
-            src="@/assets/imgs/logo.svg"
+            class="landing-page__nav__img"
+            src="@/assets/imgs/logo-new.svg"
             alt="Bothub">
         </router-link>
         <div class="text-color-primary landing-page__nav__login">
@@ -101,13 +103,14 @@ import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
 import { mapGetters } from 'vuex';
 import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-intro.svg';
-
+import WeniNotification from '@/components/WeniNotification';
 
 export default {
   name: 'LandingPage',
   components: {
     SiteFooter,
     RepositoryCardList,
+    WeniNotification,
   },
   data() {
     return {
@@ -178,7 +181,7 @@ export default {
 
       img {
         display: block;
-        height: $size-small;
+        height: $size-small * 1.4;
       }
     }
   }
