@@ -63,6 +63,7 @@ export default {
       align-items: center;
       justify-content: space-evenly;
       color: $color-fake-black;
+
       @media screen and (max-width: $mobile-width) {
         flex-direction: column;
         width: 100%;
