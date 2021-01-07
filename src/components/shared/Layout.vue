@@ -4,6 +4,7 @@
       layout: true,
       'layout--without-background': withoutBackground,
   }">
+    <weni-notification/>
     <div
       v-if="loading"
       class="layout__loading">
@@ -15,7 +16,7 @@
           class="bh-grid__item layout__header__logo"
           to="/">
           <img
-            src="@/assets/imgs/logo-white.svg"
+            src="@/assets/imgs/logo-new-white.svg"
             alt="Bothub"
             class="hide-mobile">
           <img
@@ -115,10 +116,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
+import WeniNotification from '@/components/WeniNotification';
 
 const components = {
   SiteFooter,
   UserAvatar,
+  WeniNotification,
 };
 
 export default {
@@ -260,11 +263,10 @@ export default {
 
     &__logo {
       min-width: ($size-normal * .75);
-      padding: ($size-normal * .125) 0;
 
       img {
         display: block;
-        height: 1.75rem;
+        height: $size-small * 1.3;
       }
     }
 
@@ -295,6 +297,7 @@ export default {
     }
     &__center {
       width: 50%;
+      margin-top: 0.9rem;
     }
   }
 
