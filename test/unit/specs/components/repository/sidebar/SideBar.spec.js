@@ -45,7 +45,6 @@ describe('SideBar.vue', () => {
   });
 
   describe('click on collapse button', () => {
-    console.log(wrapper);
     beforeEach(() => {
       const collapseButton = wrapper.find({ ref: 'collapseButton' });
       collapseButton.trigger('click');
