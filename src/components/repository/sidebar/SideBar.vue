@@ -28,7 +28,7 @@
             :active="checkSelectedMenu('repository-summary')"
             tag="router-link"
             icon="home"
-            @click.native="setSelectMenu('repository-summary', true)"/>
+            @click.native="setSelectMenu({name: 'repository-summary', hideDropdown: true})"/>
           <b-menu-item
             id="tour-training-step-0"
             :to="{ name: 'repository-training' }"
@@ -36,7 +36,7 @@
             :active="checkSelectedMenu('repository-training')"
             tag="router-link"
             icon="refresh"
-            @click.native="setSelectMenu('repository-training', true)"/>
+            @click.native="setSelectMenu({name: 'repository-training', hideDropdown: true})"/>
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -56,14 +56,14 @@
               :label="$t('webapp.menu.sentences')"
               :active="checkSelectedMenu('repository-test')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-test', false)"
+              @click.native="setSelectMenu({name: 'repository-test', hideDropdown: false})"
             />
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"
               :active="checkSelectedMenu('repository-results')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-results', false)"
+              @click.native="setSelectMenu({name: 'repository-results', hideDropdown: false})"
             />
           </b-menu-item>
           <b-menu-item
@@ -73,7 +73,7 @@
             :active="checkSelectedMenu('repository-log')"
             tag="router-link"
             icon="inbox"
-            @click.native="setSelectMenu('repository-log', true)"
+            @click.native="setSelectMenu({name: 'repository-log', hideDropdown: true})"
           />
           <b-menu-item
             id="tour-translate-step-0"
@@ -94,14 +94,16 @@
               :label="$t('webapp.menu.translate')"
               :active="checkSelectedMenu('repository-translate')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-translate', false)"
+              @click.native="setSelectMenu({name: 'repository-translate', hideDropdown: false})"
             />
             <b-menu-item
               :to="{ name: 'repository-translations-status' }"
               :label="$t('webapp.menu.translation_status')"
               :active="checkSelectedMenu('repository-translations-status')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-translations-status', false)"
+              @click.native="setSelectMenu(
+                {name: 'repository-translations-status', hideDropdown: false}
+              )"
             />
           </b-menu-item>
           <b-menu-item
@@ -111,7 +113,7 @@
             :active="checkSelectedMenu('repository-integration')"
             tag="router-link"
             icon="power-plug"
-            @click.native="setSelectMenu('repository-integration', true)"/>
+            @click.native="setSelectMenu({name: 'repository-integration', hideDropdown: true})"/>
           <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
@@ -130,7 +132,7 @@
               :label="$t('webapp.menu.general')"
               :active="checkSelectedMenu('repository-settings')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-settings', false)"
+              @click.native="setSelectMenu({name: 'repository-settings', hideDropdown: false})"
             />
             <b-menu-item
               v-if="versionEnabled"
@@ -138,7 +140,7 @@
               :label="$t('webapp.menu.versions')"
               :active="checkSelectedMenu('repository-versions')"
               tag="router-link"
-              @click.native="setSelectMenu('repository-versions', false)"/>
+              @click.native="setSelectMenu({name: 'repository-versions', hideDropdown: false})"/>
           </b-menu-item>
         </b-menu-list>
       </b-menu>
@@ -271,9 +273,9 @@ export default {
       if (menu === this.selectedMenu) { return true; }
       return false;
     },
-    setSelectMenu(menu, hideDropdown) {
-      this.selectedMenu = menu;
-      if (hideDropdown) {
+    setSelectMenu(option) {
+      this.selectedMenu = option.name;
+      if (option.hideDropdown) {
         this.closeDropdowns();
       }
     },
