@@ -25,14 +25,18 @@
           <b-menu-item
             :to="{ name: 'repository-summary' }"
             :label="$t('webapp.menu.summary')"
+            :active="checkSelectedMenu('repository-summary')"
             tag="router-link"
-            icon="home"/>
+            icon="home"
+            @click.native="setSelectMenu('repository-summary', true)"/>
           <b-menu-item
             id="tour-training-step-0"
             :to="{ name: 'repository-training' }"
             :label="$t('webapp.menu.training')"
+            :active="checkSelectedMenu('repository-training')"
             tag="router-link"
-            icon="refresh"/>
+            icon="refresh"
+            @click.native="setSelectMenu('repository-training', true)"/>
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -50,18 +54,27 @@
             <b-menu-item
               :to="{ name: 'repository-test' }"
               :label="$t('webapp.menu.sentences')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-test')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-test', false)"
+            />
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-results')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-results', false)"
+            />
           </b-menu-item>
           <b-menu-item
             id="tour-inbox-step-0"
             :to="{ name: 'repository-log' }"
             :label="$t('webapp.menu.inbox')"
+            :active="checkSelectedMenu('repository-log')"
             tag="router-link"
-            icon="inbox"/>
+            icon="inbox"
+            @click.native="setSelectMenu('repository-log', true)"
+          />
           <b-menu-item
             id="tour-translate-step-0"
             :active="isTranslationsActive"
@@ -79,18 +92,26 @@
             <b-menu-item
               :to="{ name: 'repository-translate' }"
               :label="$t('webapp.menu.translate')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-translate')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-translate', false)"
+            />
             <b-menu-item
               :to="{ name: 'repository-translations-status' }"
               :label="$t('webapp.menu.translation_status')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-translations-status')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-translations-status', false)"
+            />
           </b-menu-item>
           <b-menu-item
             id="tour-integrate-step-0"
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
+            :active="checkSelectedMenu('repository-integration')"
             tag="router-link"
-            icon="power-plug"/>
+            icon="power-plug"
+            @click.native="setSelectMenu('repository-integration', true)"/>
           <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
@@ -107,12 +128,17 @@
             <b-menu-item
               :to="{ name: 'repository-settings' }"
               :label="$t('webapp.menu.general')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-settings')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-settings', false)"
+            />
             <b-menu-item
               v-if="versionEnabled"
               :to="{ name: 'repository-versions' }"
               :label="$t('webapp.menu.versions')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-versions')"
+              tag="router-link"
+              @click.native="setSelectMenu('repository-versions', false)"/>
           </b-menu-item>
         </b-menu-list>
       </b-menu>
@@ -210,17 +236,46 @@ export default {
       isSettingsActive: false,
       isTestsActive: false,
       isTranslationsActive: false,
+      selectedMenu: '',
       collapse: true,
     };
   },
   computed: {
     ...mapGetters(['versionEnabled']),
   },
+  mounted() {
+    this.setInitialSelectedMenu();
+  },
   methods: {
     routerHandle(path) {
       this.$router.push({
         name: `${path}`,
       });
+    },
+    setInitialSelectedMenu() {
+      this.selectedMenu = this.$router.currentRoute.name;
+      if (this.$router.currentRoute.name === 'repository-settings'
+      || this.$router.currentRoute.name === 'repository-versions') {
+        this.isSettingsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-translate'
+      || this.$router.currentRoute.name === 'repository-translations-status') {
+        this.isTranslationsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-test'
+      || this.$router.currentRoute.name === 'repository-results') {
+        this.isTestsActive = true;
+      }
+    },
+    checkSelectedMenu(menu) {
+      if (menu === this.selectedMenu) { return true; }
+      return false;
+    },
+    setSelectMenu(menu, hideDropdown) {
+      this.selectedMenu = menu;
+      if (hideDropdown) {
+        this.closeDropdowns();
+      }
     },
     collapseHandle() {
       this.$emit('collapse');
@@ -231,6 +286,7 @@ export default {
       this.isSettingsActive = false;
       this.isTestsActive = false;
       this.isTranslationsActive = false;
+      this.setInitialSelectedMenu();
     },
   },
 };
