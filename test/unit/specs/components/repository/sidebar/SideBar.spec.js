@@ -32,11 +32,6 @@ describe('SideBar.vue', () => {
         $t: () => 'some specific text',
         $router,
       },
-      propsData: {
-        currentRoute: {
-          name: 'repository-summary',
-        },
-      },
     });
   });
 
