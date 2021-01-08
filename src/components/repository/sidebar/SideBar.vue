@@ -270,8 +270,7 @@ export default {
       }
     },
     checkSelectedMenu(menu) {
-      if (menu === this.selectedMenu) { return true; }
-      return false;
+      return menu === this.selectedMenu;
     },
     setSelectMenu(option) {
       this.selectedMenu = option.name;
