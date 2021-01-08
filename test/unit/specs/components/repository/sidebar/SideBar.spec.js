@@ -8,7 +8,6 @@ let store;
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Buefy);
-
 describe('SideBar.vue', () => {
   store = new Vuex.Store({
     modules: {
@@ -20,12 +19,18 @@ describe('SideBar.vue', () => {
     },
   });
   let wrapper;
+  const $router = {
+    currentRoute: {
+      name: 'repository-summary',
+    },
+  };
   beforeEach(() => {
     wrapper = shallowMount(SideBar, {
       localVue,
       store,
       mocks: {
         $t: () => 'some specific text',
+        $router,
       },
     });
   });
