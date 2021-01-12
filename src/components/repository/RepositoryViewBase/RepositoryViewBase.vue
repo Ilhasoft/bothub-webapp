@@ -163,12 +163,15 @@ export default {
 
 
   .rpstr-vw-bs {
-    margin-top: 9rem;
+    margin-top: 14.25rem;
     $navigation-height: 4rem;
     $medium-screen: 1035px;
     $header-height: (16rem + $navigation-height);
     $wrapper-width: 100%;
     height: 100%;
+    @media screen and (max-width: $mobile-width) {
+      margin-top: 26rem;
+    }
 
 
     &__status-bar {

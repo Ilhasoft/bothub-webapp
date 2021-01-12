@@ -58,7 +58,7 @@ export default {
   watch: {
     text() {
       if (!this.format || !this.text || this.text.length <= 0) return;
-      this.text = formatters.bothubItemKey()(this.text);
+      this.text = formatters.bothubItemKey()(this.text.toLowerCase());
     },
   },
   methods: {

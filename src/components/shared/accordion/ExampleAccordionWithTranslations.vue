@@ -11,7 +11,7 @@
     :get-all-entities="allEntities"
     align="top"
     edit-example
-    @cancel="editing = false"
+    @cancel="onCancelEdit"
     @saveList="onSaveList"
   >
     <div slot="check">
@@ -237,6 +237,10 @@ export default {
           },
         });
       });
+    },
+    onCancelEdit() {
+      this.editing = false;
+      this.$emit('updateList');
     },
   },
 };
