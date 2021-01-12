@@ -48,7 +48,7 @@
                 </b-button>
               </router-link>
             </div>
-            <div
+            <!-- <div
               v-if="authenticated && tutorialEnabled"
               class="bh-grid__item layout__header__icon-tutorial--center">
               <b-icon
@@ -57,7 +57,7 @@
                 icon="help-circle"
                 @click.native="openBeginnerTutorialModal()"
               />
-            </div>
+            </div> -->
             <div
               v-if="authenticated"
               class="bh-grid__item">

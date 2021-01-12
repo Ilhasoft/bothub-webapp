@@ -45,7 +45,7 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__container">
-            <div
+            <!-- <div
               class="dashboard-layout__main-panel__header__right__container__tutorial">
               <b-icon
                 v-if="authenticated && tutorialEnabled"
@@ -54,7 +54,7 @@
                 icon="help-circle"
                 @click.native="openBeginnerTutorialModal()"
               />
-            </div>
+            </div> -->
             <b-dropdown
               v-show="hasLoaded"
               position="is-bottom-left"

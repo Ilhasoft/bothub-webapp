@@ -17,17 +17,7 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
         </div>
         <div>
           <b-field-stub addons="true" id="tour-evaluate-step-3" is-previous-disabled="true" is-step-blocked="true">
-            <b-select-stub placeholder="some specific text" expanded="">
-              <option value="affirm">
-                affirm
-              </option>
-              <option value="cuisine">
-                cuisine
-              </option>
-              <option value="greet">
-                greet
-              </option>
-            </b-select-stub>
+            <b-autocomplete-stub value="" data="" field="value" openonfocus="true" dropdownposition="bottom" formatters="inputFormatters" placeholder="some specific text"></b-autocomplete-stub>
           </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">

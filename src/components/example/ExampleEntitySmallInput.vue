@@ -20,8 +20,8 @@
             size="is-small"
             @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)">
             <option
-              v-for="entity in (availableEntities || [])"
-              :key="entity">
+              v-for="(entity, index) in (availableEntities || [])"
+              :key="index">
               {{ entity }}
             </option>
           </b-select>
