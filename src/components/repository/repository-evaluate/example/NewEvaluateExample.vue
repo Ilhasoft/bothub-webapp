@@ -35,8 +35,7 @@
               :is-step-blocked="(intent || '').length === 0">
               <b-autocomplete
                 v-model="intent"
-                :data="optionsIntents"
-                :formatters="inputFormatters"
+                :data="filterIntents"
                 :placeholder="$t('webapp.evaluate.intent')"
                 open-on-focus
                 dropdown-position="bottom" />
@@ -137,23 +136,8 @@ export default {
       return this.isValid && !this.submitting;
     },
     filterIntents() {
-      if (this.intents !== null) {
-        return this.intents.filter(intent => intent
-          .toString()
-          .toLowerCase()
-          .indexOf(this.intent.toLowerCase()) >= 0);
-      }
-      return [];
-    },
-    optionsIntents() {
-      return this.filterIntents.map(intent => intent);
-    },
-    inputFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
-      formattersList.toString = () => 'inputFormatters';
-      return formattersList;
+      return (this.intents || []).filter(intent => intent
+        .startsWith(this.intent.toLowerCase()));
     },
     validationErrors() {
       const errors = [];
@@ -205,7 +189,7 @@ export default {
   watch: {
     intent() {
       if (!this.intent || this.intent.length <= 0) return;
-      this.intent = formatters.bothubItemKey()(this.intent);
+      this.intent = formatters.bothubItemKey()(this.intent.toLowerCase());
     },
   },
   mounted() {
@@ -250,7 +234,7 @@ export default {
           ...this.data,
         });
         this.text = '';
-        this.intent = null;
+        this.intent = '';
         this.entities = [];
         this.submitting = false;
 
