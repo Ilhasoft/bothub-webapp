@@ -33,17 +33,12 @@
               :is-previous-disabled="true"
               :message="errors.non_field_errors"
               :is-step-blocked="(intent || '').length === 0">
-              <b-select
+              <b-autocomplete
                 v-model="intent"
+                :data="filterIntents"
                 :placeholder="$t('webapp.evaluate.intent')"
-                expanded>
-                <option
-                  v-for="(intent, index) in repository.intents_list"
-                  :value="intent"
-                  :key="index">
-                  {{ intent }}
-                </option>
-              </b-select>
+                open-on-focus
+                dropdown-position="bottom" />
             </b-field>
           </div>
           <div class="new-sentence__form__wrapper__submit-btn">
@@ -113,12 +108,16 @@ export default {
       type: String,
       required: true,
     },
+    intents: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
       textSelected: null,
       text: '',
-      intent: null,
+      intent: '',
       entities: [],
       errors: {},
       submitting: false,
@@ -135,6 +134,10 @@ export default {
     }),
     shouldSubmit() {
       return this.isValid && !this.submitting;
+    },
+    filterIntents() {
+      return (this.intents || []).filter(intent => intent
+        .startsWith(this.intent.toLowerCase()));
     },
     validationErrors() {
       const errors = [];
@@ -186,7 +189,7 @@ export default {
   watch: {
     intent() {
       if (!this.intent || this.intent.length <= 0) return;
-      this.intent = formatters.bothubItemKey()(this.intent);
+      this.intent = formatters.bothubItemKey()(this.intent.toLowerCase());
     },
   },
   mounted() {
@@ -231,7 +234,7 @@ export default {
           ...this.data,
         });
         this.text = '';
-        this.intent = null;
+        this.intent = '';
         this.entities = [];
         this.submitting = false;
 

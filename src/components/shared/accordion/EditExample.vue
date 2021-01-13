@@ -25,7 +25,7 @@
             :label="$t('webapp.example.intent')">
             <b-autocomplete
               v-model="intent"
-              :data="repository.intents_list || []"
+              :data="filterIntents"
               :placeholder="$t('webapp.example.intent')"
               dropdown-position="bottom"
               open-on-focus
@@ -46,7 +46,7 @@
                 class="edit-sentence__input__label"
                 v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
               <b-autocomplete
-                :data="getAllEntities || []"
+                :data="filterEntities(index, false)"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"
                 dropdown-position="bottom"
@@ -69,7 +69,7 @@
                 class="edit-sentence__input__label"
                 v-html="$t('webapp.example.text_is', {text: highlightedText(entity) })" />
               <b-autocomplete
-                :data="getAllEntities || []"
+                :data="filterEntities(index, true)"
                 :custom-formatter="intentFormatters"
                 v-model="entity.entity"
                 :placeholder="$t('webapp.example.entity')"

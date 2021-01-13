@@ -31,7 +31,7 @@
         <entity-tag
           v-for="entity in entities"
           :entity-name="entity.entity"
-          :key="entity.entity"
+          :key="entity.id"
           :highlighted="highlighted === entity.entity"
           :group="entity.group"
           @mouseenter.native.stop="highlighted = entity.entity"

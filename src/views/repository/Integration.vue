@@ -131,7 +131,7 @@ export default {
             confidence: 0.30565376061360666,
           },
         ],
-        labels_list: [
+        groups_list: [
           'animal',
         ],
         entities_list: [],

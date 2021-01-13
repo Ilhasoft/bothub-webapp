@@ -128,7 +128,8 @@ export default {
       return this.isValid && !this.submitting;
     },
     filteredData() {
-      return (this.repository.intents_list || []).filter(intent => intent.startsWith(this.intent));
+      return (this.repository.intents_list || []).filter(intent => intent
+        .startsWith(this.intent.toLowerCase()));
     },
     validationErrors() {
       const errors = [];
