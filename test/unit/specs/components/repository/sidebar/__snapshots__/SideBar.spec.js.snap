@@ -11,7 +11,7 @@ exports[`SideBar.vue renders correctly 1`] = `
         <div class="menu-header__logo"></div>
       </div>
       <b-menu-list-stub ariarole="">
-        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" to="[object Object]" active="true"></b-menu-item-stub>
         <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" id="tour-training-step-0">
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>

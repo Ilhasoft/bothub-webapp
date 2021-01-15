@@ -248,7 +248,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         position: fixed;
-        bottom: 10%;
+        bottom: 1%;
         right: 0;
         z-index: 9;
         pointer-events: none;

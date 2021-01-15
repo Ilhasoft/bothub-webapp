@@ -14,7 +14,7 @@
           <b-autocomplete
             ref="entityInputField"
             v-model="entity"
-            :data="availableEntities"
+            :data="filteredData"
             expanded
             open-on-focus
             dropdown-position="down"
@@ -71,6 +71,10 @@ export default {
       return [
         formatters.bothubItemKey(),
       ];
+    },
+    filteredData() {
+      return (this.availableEntities || []).filter(entity => entity
+        .startsWith(this.entity.toLowerCase()));
     },
     selectedText() {
       return this.text.substring(this.selectedTextStart, this.selectedTextEnd);

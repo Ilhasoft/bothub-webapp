@@ -11,7 +11,7 @@
     :get-all-entities="allEntities"
     align="top"
     edit-example
-    @cancel="editing = false"
+    @cancel="onCancelEdit"
     @saveList="onSaveList"
   >
     <div slot="check">
@@ -31,7 +31,7 @@
         <entity-tag
           v-for="entity in entities"
           :entity-name="entity.entity"
-          :key="entity.entity"
+          :key="entity.id"
           :highlighted="highlighted === entity.entity"
           :group="entity.group"
           @mouseenter.native.stop="highlighted = entity.entity"
@@ -257,6 +257,10 @@ export default {
           },
         });
       });
+    },
+    onCancelEdit() {
+      this.editing = false;
+      this.$emit('updateList');
     },
   },
 };

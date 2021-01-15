@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard-layout">
+    <weni-notification class="dashboard-layout__notification"/>
     <div
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
@@ -44,7 +45,7 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__container">
-            <div
+            <!-- <div
               class="dashboard-layout__main-panel__header__right__container__tutorial">
               <b-icon
                 v-if="authenticated && tutorialEnabled"
@@ -53,7 +54,7 @@
                 icon="help-circle"
                 @click.native="openBeginnerTutorialModal()"
               />
-            </div>
+            </div> -->
             <b-dropdown
               v-show="hasLoaded"
               position="is-bottom-left"
@@ -123,6 +124,7 @@ import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
 import Analytics from '@/utils/plugins/analytics';
+import WeniNotification from '@/components/WeniNotification';
 
 export default {
   name: 'DashboardLayout',
@@ -132,6 +134,7 @@ export default {
     VersionDropdown,
     CustomIcon,
     Tour,
+    WeniNotification,
   },
   data() {
     return {
@@ -211,12 +214,19 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
-
+@import '~@/assets/scss/variables.scss';
 
 html{
   overflow-y:auto
 }
 .dashboard-layout {
+
+  &__notification{
+    top: 0;
+    position: fixed;
+    z-index: 9;
+  }
+
   &__main-panel {
     width: calc( 100% - #{$menu-expanded-size} - #{$menu-padding});
     position: relative;
@@ -227,13 +237,16 @@ html{
       width: inherit;
       z-index: 9;
       height: 6rem;
+      top: 5.25rem;
       background: #404143;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2.5rem 0 2rem;
       box-shadow: 0px 3px 6px #00000029;
-
+      @media screen and (max-width: $mobile-width) {
+        top: 12rem;
+      }
       &__info {
         display: flex;
         align-items: center;

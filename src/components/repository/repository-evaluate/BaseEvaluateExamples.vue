@@ -2,6 +2,7 @@
   <div class="base-example-evaluate bh-grid bh-grid--column">
     <new-evaluate-example
       :language="filterByLanguage"
+      :intents="repository.intents_list"
       @created="onEvaluateExampleCreated()"
       @eventStep="dispatchNextEvent()"/>
     <hr class="base-example-evaluate__divider">

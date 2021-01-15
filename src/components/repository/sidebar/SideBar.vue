@@ -25,8 +25,10 @@
           <b-menu-item
             :to="{ name: 'repository-summary' }"
             :label="$t('webapp.menu.summary')"
+            :active="checkSelectedMenu('repository-summary')"
             tag="router-link"
-            icon="home"/>
+            icon="home"
+            @click.native="setSelectMenu({name: 'repository-summary', hideDropdown: true})"/>
           <b-menu-item
             id="tour-training-step-0"
             :active="isTrainActive"
@@ -43,13 +45,19 @@
             </template>
             <b-menu-item
               :to="{ name: 'repository-training' }"
+              :active="checkSelectedMenu('repository-training')"
               :label="$t('webapp.menu.train')"
-              tag="router-link"/>
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-training', hideDropdown: false})"/>
             <b-menu-item
               :to="{ name: 'repository-suggestion' }"
+              :active="checkSelectedMenu('repository-suggestion')"
               :label="$t('webapp.menu.suggestion')"
-              tag="router-link"/>
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-suggestion', hideDropdown: false})"/>
           </b-menu-item>
+
+
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -67,22 +75,34 @@
             <b-menu-item
               :to="{ name: 'repository-test-manual' }"
               :label="$t('webapp.menu.test-manual')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-test-manual')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-test-manual', hideDropdown: false})"/>
             <b-menu-item
               :to="{ name: 'repository-test-automatic' }"
               :label="$t('webapp.menu.test-automatic')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-test-automatic')"
+              tag="router-link"
+              @click.native="setSelectMenu(
+                {name: 'repository-test-automatic', hideDropdown: false}
+            )"/>
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-results')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-results', hideDropdown: false})"
+            />
           </b-menu-item>
           <b-menu-item
             id="tour-inbox-step-0"
             :to="{ name: 'repository-log' }"
             :label="$t('webapp.menu.inbox')"
+            :active="checkSelectedMenu('repository-log')"
             tag="router-link"
-            icon="inbox"/>
+            icon="inbox"
+            @click.native="setSelectMenu({name: 'repository-log', hideDropdown: true})"
+          />
           <b-menu-item
             id="tour-translate-step-0"
             :active="isTranslationsActive"
@@ -100,18 +120,28 @@
             <b-menu-item
               :to="{ name: 'repository-translate' }"
               :label="$t('webapp.menu.translate')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-translate')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-translate', hideDropdown: false})"
+            />
             <b-menu-item
               :to="{ name: 'repository-translations-status' }"
               :label="$t('webapp.menu.translation_status')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-translations-status')"
+              tag="router-link"
+              @click.native="setSelectMenu(
+                {name: 'repository-translations-status', hideDropdown: false}
+              )"
+            />
           </b-menu-item>
           <b-menu-item
             id="tour-integrate-step-0"
             :to="{ name: 'repository-integration' }"
             :label="$t('webapp.menu.integration')"
+            :active="checkSelectedMenu('repository-integration')"
             tag="router-link"
-            icon="power-plug"/>
+            icon="power-plug"
+            @click.native="setSelectMenu({name: 'repository-integration', hideDropdown: true})"/>
           <b-menu-item
             :active="isSettingsActive"
             :expanded="isSettingsActive"
@@ -128,12 +158,17 @@
             <b-menu-item
               :to="{ name: 'repository-settings' }"
               :label="$t('webapp.menu.general')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-settings')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-settings', hideDropdown: false})"
+            />
             <b-menu-item
               v-if="versionEnabled"
               :to="{ name: 'repository-versions' }"
               :label="$t('webapp.menu.versions')"
-              tag="router-link"/>
+              :active="checkSelectedMenu('repository-versions')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-versions', hideDropdown: false})"/>
           </b-menu-item>
         </b-menu-list>
       </b-menu>
@@ -232,11 +267,15 @@ export default {
       isTestsActive: false,
       isTranslationsActive: false,
       isTrainActive: false,
+      selectedMenu: '',
       collapse: true,
     };
   },
   computed: {
     ...mapGetters(['versionEnabled']),
+  },
+  mounted() {
+    this.setInitialSelectedMenu();
   },
   methods: {
     routerHandle(path) {
@@ -244,15 +283,53 @@ export default {
         name: `${path}`,
       });
     },
+    setInitialSelectedMenu() {
+      this.selectedMenu = this.$router.currentRoute.name;
+      if (this.$router.currentRoute.name === 'repository-settings'
+      || this.$router.currentRoute.name === 'repository-versions') {
+        this.isSettingsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-translate'
+      || this.$router.currentRoute.name === 'repository-translations-status') {
+        this.isTranslationsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-test-automatic'
+      || this.$router.currentRoute.name === 'repository-test-manual'
+      || this.$router.currentRoute.name === 'repository-results') {
+        this.isTestsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-training'
+      || this.$router.currentRoute.name === 'repository-suggestion') {
+        this.isTrainActive = true;
+      }
+    },
+    checkSelectedMenu(menu) {
+      return menu === this.selectedMenu;
+    },
+    setSelectMenu(option) {
+      this.selectedMenu = option.name;
+      if (option.hideDropdown) {
+        this.closeDropdowns();
+      }
+    },
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
+      this.closeDropdowns();
+    },
+    closeDropdowns() {
+      this.isSettingsActive = false;
+      this.isTestsActive = false;
+      this.isTranslationsActive = false;
+      this.isTrainActive = false;
+      this.setInitialSelectedMenu();
     },
   },
 };
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
 
 .menu-list a {
   padding: 0.5em 1.6rem;
@@ -271,24 +348,28 @@ export default {
   color: white;
   cursor: pointer;
     &__logo{
-    background: url(~@/assets/imgs/bothub_white.svg) no-repeat;
+    background: url(~@/assets/imgs/logo-new-white.svg) no-repeat;
     width: 8rem;
-    height: 1.5rem;
+    height: 2.8rem;
   }
   &__logo:hover{
-    background: url(~@/assets/imgs/bothub_green.svg) no-repeat;
+    background: url(~@/assets/imgs/logo-new-sidebars.svg) no-repeat;
 
   }
 }
 
 .sidebar {
   position: fixed;
-  top: 0;
+  top: 5.25rem;
   bottom: 0;
   left: 0;
   z-index: 10;
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
+
+  @media screen and (max-width: $mobile-width) {
+    top: 12rem;
+  }
 
   .sidebar-wrapper {
     z-index: 10;
