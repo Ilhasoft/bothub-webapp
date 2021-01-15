@@ -11,11 +11,16 @@ exports[`SideBar.vue renders correctly 1`] = `
         <div class="menu-header__logo"></div>
       </div>
       <b-menu-list-stub ariarole="">
+<<<<<<< HEAD
         <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" id="tour-training-step-0">
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
+=======
+        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" to="[object Object]" active="true"></b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="refresh" animation="slide" tag="router-link" ariarole="" id="tour-training-step-0" to="[object Object]"></b-menu-item-stub>
+>>>>>>> 6c93607a2bcf94fe0b51b192e989d679a9809ac8
         <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" id="tour-evaluate-step-0">
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" to="[object Object]"></b-menu-item-stub>

@@ -20,14 +20,14 @@
             size="is-small"
             @input="entitiesToEdit[index].entity = intentFormatters(entity.entity)">
             <option
-              v-for="entity in (availableEntities || [])"
-              :key="entity">
+              v-for="(entity, index) in (availableEntities || [])"
+              :key="index">
               {{ entity }}
             </option>
           </b-select>
           <b-autocomplete
             v-else
-            :data="availableEntities || []"
+            :data="filteredData(index)"
             v-model="entity.entity"
             :placeholder="$t('webapp.example.entity')"
             dropdown-position="bottom"
@@ -140,6 +140,10 @@ export default {
     this.$emit('input', this.entitiesToEdit);
   },
   methods: {
+    filteredData(index) {
+      return (this.availableEntities || []).filter(entity => entity
+        .startsWith(this.entitiesToEdit[index].entity.toLowerCase()));
+    },
     addEntity() {
       if (!this.addEntityEnabled) return;
       // It will be added at the end of the list, so we already know its index.

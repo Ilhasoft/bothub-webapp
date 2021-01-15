@@ -8,6 +8,7 @@
       :per-page="perPage"
       :is-suggestion="true"
       :is-accordion-open="pageWasChanged"
+      :is-searching="searchingExample"
       @itemSave="dispatchSave"
       @itemDeleted="onItemDeleted($event)"
       @pageChanged="pageChanged()"/>
@@ -64,6 +65,7 @@ export default {
       examplesList: null,
       dateLastTrain: '',
       pageWasChanged: false,
+      searchingExample: false,
     };
   },
   computed: {
@@ -78,6 +80,12 @@ export default {
   watch: {
     query() {
       this.updateExamples(true);
+      const filterValue = Object.values(this.query);
+      if (filterValue[0] !== '' || filterValue.length > 1) {
+        this.searchingExample = true;
+        return;
+      }
+      this.searchingExample = false;
     },
     update() {
       this.updateExamples(true);
@@ -105,13 +113,20 @@ export default {
       if (this.repositoryStatus.count !== 0) {
         if (this.repositoryStatus.results[0].status !== 2
           && this.repositoryStatus.results[0].status !== 3) {
-          if (this.repositoryStatus.results[1].created_at !== undefined) {
+          if (this.repositoryStatus.results[1] !== undefined) {
             this.dateLastTrain = (this.repositoryStatus.results[1].created_at).replace(/[A-Za-z]/g, ' ');
           }
-        } else if (this.repositoryStatus.results[0].created_at !== undefined) {
+        } else if (this.repositoryStatus.results[0] !== undefined) {
           this.dateLastTrain = (this.repositoryStatus.results[0].created_at).replace(/[A-Za-z]/g, ' ');
         }
       }
+
+      if (this.repositoryStatus.count === 0) return;
+
+      if (this.repositoryStatus.count === 1
+          && (this.repositoryStatus.results[0].status !== 2
+          && this.repositoryStatus.results[0].status !== 3)
+      ) return;
 
       if (!this.examplesList || force) {
         this.examplesList = await this.searchExamples({

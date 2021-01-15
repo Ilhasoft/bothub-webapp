@@ -2,7 +2,7 @@
   <div class="boarding">
     <div class="boarding__header">
       <img
-        src="@/assets/imgs/logo-onboarding.svg"
+        src="@/assets/imgs/logo-new.svg"
         class="boarding__header__image"
         @click="goToLandingPage">
     </div>
@@ -28,7 +28,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/utilities.scss';
 
 .boarding {
 
@@ -51,8 +51,8 @@ export default {
     top: 0;
 
     &__image{
-      width: 12rem;
-      height: 3.25rem;
+      width: 15rem;
+      height: $size-small * 1.3;
       cursor: pointer;
     }
   }

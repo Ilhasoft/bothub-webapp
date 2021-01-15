@@ -3,8 +3,8 @@
     <bh-toast-notification />
     <news-modal />
     <router-view />
-    <tutorial-modal
-      :open="activeMenu"/>
+    <!-- <tutorial-modal
+      :open="activeMenu"/> -->
   </div>
 </template>
 
