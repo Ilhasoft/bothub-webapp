@@ -70,6 +70,16 @@ export default new Router({
       },
     },
     {
+      path: '/loginexternal/:token',
+      name: 'externalLogin',
+      component: null,
+      beforeEnter: async (to, from, next) => {
+        const { token } = to.params;
+        store.dispatch('externalLogin', { token: token.replace('+', ' ') });
+        next('/home');
+      },
+    },
+    {
       path: '/recoverpassword',
       name: 'recoverpassword',
       component: RecoverPassword,
