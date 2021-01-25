@@ -12,9 +12,10 @@ export default {
     commit(TYPES.SET_TOKEN, `Token ${response.data.token}`);
     dispatch('updateMyProfile');
   },
-  async iframeLogin({ commit }, { token }) {
+  async externalLogin({ commit }, { token }) {
     if (!token) return;
-    commit(TYPES.SET_TOKEN, `Bearer ${token}`);
+    console.log(token);
+    commit(TYPES.SET_TOKEN, token);
   },
   retriveAuthToken({ commit }) {
     /* istanbul ignore next */
