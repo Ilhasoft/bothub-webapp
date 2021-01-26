@@ -94,7 +94,6 @@ export default {
   methods: {
     ...mapActions([
       'setLastVersionSeen',
-      'setTutorialMenuActive',
     ]),
     next() {
       this.current = Math.min(this.current + 1, this.info.count);
@@ -105,9 +104,9 @@ export default {
     onClose() {
       this.active = false;
       this.setLastVersionSeen(this.currentVersion);
-      if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
-        this.setTutorialMenuActive();
-      }
+      // if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+      //   this.setTutorialMenuActive();
+      // }
     },
   },
 };
