@@ -224,18 +224,18 @@ export default {
       language: '',
       search: '',
       repositoryItemElem: RepositoryCard,
-      paymentEnabled: process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED,
+      paymentEnabled: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        using: { empty: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
         { label: this.$t('webapp.orgs.information'), value: 0 },
         { label: this.$t('webapp.orgs.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
         { label: this.$t('webapp.orgs.reports.title'), value: 3 },
-        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
@@ -365,6 +365,7 @@ h1 {
 
         &__content {
           padding: 3.875rem 0 6.563rem 0;
+          font-family: $font-family;
         }
 
         &__header {

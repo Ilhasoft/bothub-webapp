@@ -68,6 +68,13 @@ export default {
         border: 1px solid $color-border;
         height: 147px;
 
+        h2 {
+          font-family: $font-family;
+          color: $color-fake-black;
+          font-size: 1.75rem;
+          margin-bottom:0.6rem;
+        }
+
     &__relevance {
       display: flex;
       margin-bottom: 4rem;
@@ -79,7 +86,7 @@ export default {
         box-shadow: 0px 3px 6px #00000029;
       }
       &__bar-field {
-        background: linear-gradient(to right, #12A391 0%, #00FFDD 100%);
+        background: linear-gradient(to right, $color-primary-dark 0%, #00FFDD 100%);
         height: 20px;
         width: 15px;
 
@@ -93,7 +100,7 @@ export default {
         position:absolute;
 
         &__stripe{
-          border: 2px solid white;
+          border: 2px solid $color-white;
           height: 20px;
           margin-left: 16%;
         }

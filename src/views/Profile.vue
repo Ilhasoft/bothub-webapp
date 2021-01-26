@@ -190,15 +190,15 @@ export default {
       repositoryLists: {
         mine: { empty: false },
         contributing: { empty: false },
-        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        using: { empty: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
         { label: this.$t('webapp.my_profile.profile'), value: 0 },
         { label: this.$t('webapp.my_profile.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
         { label: this.$t('webapp.my_profile.reports.title'), value: 3 },
-        { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
@@ -273,7 +273,7 @@ export default {
       this.repositoryLists.contributing = await this.getContributingRepositories(
         this.repositoriesLimit,
       );
-      if (process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) {
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED) {
         this.repositoryLists.using = await this.getUsingRepositories(this.repositoriesLimit);
       }
     },
@@ -369,12 +369,14 @@ h1 {
 
         &__content {
           padding: 3.875rem 0 6.563rem 0;
+          font-family: $font-family;
         }
 
         &__header {
             background-color: $color-white;
             width: 100%;
             padding: 4rem 0;
+            font-family: $font-family;
             &__content {
                 display: flex;
                 justify-content: center;
@@ -393,6 +395,7 @@ h1 {
         }
 
         &__tabs {
+          font-family: $font-family;
           &__container {
             background-color: $color-white;
             width: 100%;

@@ -45,8 +45,7 @@
           />
         </div>
       </div>
-      <div class="translation__icons column is-2">
-        <span>
+      <div class="translation__icons">
           <b-icon
             :class="{clickable: true, 'icon-disabled': disableEdit}"
             size="is-small"
@@ -57,7 +56,6 @@
             size="is-small"
             icon="delete"
             @click.native="deleteThisTranslation()" />
-        </span>
       </div>
     </div>
   </div>
@@ -191,7 +189,11 @@ export default {
   }
 
   &__icons {
-      text-align: right;
+      width: 2.8rem;
+      display: flex;
+      margin-right: 0.5rem;
+      align-items: center;
+      justify-content: space-around;
       color: $color-grey-dark;
   }
 

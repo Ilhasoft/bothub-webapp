@@ -4,8 +4,8 @@
       "newbot": "new bot",
       "start_you_bot": "Start your Intelligence",
       "logout": "Logout",
-      "signin": "sign in",
-      "signup": "sign up",
+      "signin": "Sign in",
+      "signup": "Sign up",
       "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
@@ -41,9 +41,6 @@
       "changed_password": "Password changed",
       "save_password": "Save password"
     },
-    "paginated_simple": {
-      "empty": "There are no phrases"
-    },
     "create_repository": {
       "create_repo": "Create an intelligence",
       "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then, choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
@@ -74,6 +71,7 @@
     "landing_page": {
       "signin": "Sign in",
       "signup": "Sign up",
+      "or": "or",
       "header_content1": "Artificial Intelligence for chatbots",
       "header_content2": "Customize your chatbot with the ideal dataset in minutes, no need for knowledge in programming.",
       "join_for_free": "Sign up for free",
@@ -286,7 +284,7 @@
       "search_user": "Enter a name or username",
       "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
-      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?",
+      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?", 
       "remove": "Remove"
     },
     "roles": {
@@ -529,8 +527,8 @@
       "summary": "Summary",
       "training": "Training",
       "train": "Train",
-      "test": "Test",
       "suggestion": "Suggestion",
+      "test": "Test",
       "test-manual": "Manual",
       "test-automatic": "Automatic",
       "results": "Results",
@@ -601,7 +599,7 @@
       "add_to_train_button": "Add to Train",
       "add_to_sentence_button": "Add to Sentence",
       "remove_log_button": "Delete Sentece",
-      "select_phrase":"Select at least one sentence",
+      "select_phrase":"Select a phrase",
       "select_all":"Select all",
       "error": "Error",
       "add_log": {
@@ -695,7 +693,7 @@
         "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
-    },
+    }, 
      "evaluate_result": {
       "step_0": "Here you can see the result of your intelligence test."
       },
@@ -729,40 +727,40 @@
       "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
   },
-    "word_suggestion": {
-      "title": "Variation suggestion",
-      "subtitle": "Generate new sentences by varying training sentences.",
-      "cancel": "Cancel",
-      "add_training": "Add training",
-      "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
-    },
-    "import_and_export_intelligence":{
-      "title": "Import/Export your intelligence",
-      "subtitle": "To import/migrate, simply select the file corresponding to Rasa or place the token of Wit.AI, and the data will be recognized automatically",
-      "import_rasa": "Import from Rasa",
-      "migrate_wit": "Migrate from Wit.AI"
-    },
-    "migrate_intelligence": {
-      "title": "Migrate Wit.AI",
-      "token_input": "Enter your Server Access Token here",
-      "language": "Select the language",
-      "cancel": "Cancel",
-      "migrate": "Confirm",
-      "migrate_success": "Successful migration."
-    },
-    "import_dataset": {
-      "title": "Import Dataset",
-      "empty_file": "No file selected",
-      "cancel": "Cancel",
-      "importar": "Confirm",
-      "import_success": "Successful importation.",
-      "import_error": "Something went wrong, try again later."
-    },
-    "weni_notification":{
-      "title": "Ilhasoft, Push and BotHub are now Weni.",
-      "subtitle": "From this merger of brands, our purpose is to continue to evolve the digital transformation in the communication of organizations.",
-      "button": "Learn more",
-      "link": "https://www.ilhasoft.com.br/we-are-weni"
-    }
+  "word_suggestion": {
+    "title": "Variation suggestion",
+    "subtitle": "Generate new sentences by varying training sentences.",
+    "cancel": "Cancel",
+    "add_training": "Add training",
+    "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
+  },
+  "import_and_export_intelligence":{
+    "title": "Import/Export your intelligence",
+    "subtitle": "To import/migrate, simply select the file corresponding to Rasa or place the token of Wit.AI, and the data will be recognized automatically",
+    "import_rasa": "Import from Rasa",
+    "migrate_wit": "Migrate from Wit.AI"
+  },
+  "migrate_intelligence": {
+    "title": "Migrate Wit.AI",
+    "token_input": "Enter your Server Access Token here",
+    "language": "Select the language",
+    "cancel": "Cancel",
+    "migrate": "Confirm",
+    "migrate_success": "Successful migration."
+  },
+  "import_dataset": {
+    "title": "Import Dataset",
+    "empty_file": "No file selected",
+    "cancel": "Cancel",
+    "importar": "Confirm",
+    "import_success": "Successful importation.",
+    "import_error": "Something went wrong, try again later."
+  },
+  "weni_notification":{
+    "title": "Ilhasoft, Push and BotHub are now Weni.",
+    "subtitle": "From this merger of brands, our purpose is to continue to evolve the digital transformation in the communication of organizations.",
+    "button": "Learn more",
+    "link": "https://www.ilhasoft.com.br/we-are-weni"
   }
+}
 }

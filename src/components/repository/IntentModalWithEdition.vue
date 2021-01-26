@@ -13,11 +13,11 @@
         <edit-example-accordion
           ref="accordion"
           :pending-example="true"
-          :entities="getlogData.entities"
+          :entities="getLogData.entities"
           :intent-to-edit="info.intent.name"
-          :text-to-edit="getlogData.text"
+          :text-to-edit="getLogData.text"
           :sentence-id="logData.id"
-          :language-edit="getlogData.language"
+          :language-edit="getLogData.language"
           :get-all-entities="allEntities"
           :custom="true"
           :open="false"
@@ -91,7 +91,7 @@ export default {
         entityValue => entityValue.value,
       );
     },
-    getlogData() {
+    getLogData() {
       const { data } = this.logData;
       return data;
     },
@@ -105,9 +105,9 @@ export default {
   },
   methods: {
     initInputValues() {
-      this.inputValues.text = this.getlogData.text;
+      this.inputValues.text = this.getLogData.text;
       this.inputValues.intent = this.info.intent.name;
-      this.inputValues.entities = this.getlogData.text;
+      this.inputValues.entities = this.getLogData.text;
     },
     addIntent() {
       this.$emit('addedIntent', this.inputValues, this.titleHeader);

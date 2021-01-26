@@ -55,6 +55,7 @@
 
 <script>
 import Messages from '@/components/shared/Messages';
+import HelpWidget from '@/components/shared/HelpWidget';
 import StringInput from './inputs/StringInput';
 import ChoiceInput from './inputs/ChoiceInput';
 import BooleanInput from './inputs/BooleanInput';
@@ -63,7 +64,6 @@ import TextInput from './inputs/TextInput';
 import EmailInput from './inputs/EmailInput';
 import PasswordInput from './inputs/PasswordInput';
 import ImageInput from './inputs/ImageInput';
-import HelpWidget from '@/components/shared/HelpWidget';
 
 const relatedInputComponent = {
   field: StringInput,
@@ -168,7 +168,7 @@ export default {
         && this.errors.non_field_errors.map(text => ({ text, class: 'error' }))) || [];
     },
     helpArticleId() {
-      return process.env.BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID;
+      return process.env.VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID;
     },
   },
   mounted() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="base-example-evaluate bh-grid bh-grid--column">
+  <div class="base-example-evaluate">
     <new-evaluate-example
       :language="filterByLanguage"
       :intents="repository.intents_list"
@@ -91,10 +91,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .base-example-evaluate {
+
+  &__title{
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
+  }
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;

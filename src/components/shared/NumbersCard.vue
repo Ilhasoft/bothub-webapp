@@ -69,6 +69,8 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        color: $color-fake-black;
+
         &--clickable {
             &:hover{
                 color: $color-primary;

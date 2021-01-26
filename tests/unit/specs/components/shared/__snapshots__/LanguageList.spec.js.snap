@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LanguageList.vue renders correctly 1`] = `
+<div class="languages-list">
+  <b-field class="languages-list__field">
+    <b-autocomplete keep-first="true" open-on-focus="true" data="English,Brazilian Portuguese" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete>
+  </b-field>
+</div>
+`;

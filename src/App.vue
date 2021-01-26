@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <bh-toast-notification />
     <news-modal />
     <router-view />
     <!-- <tutorial-modal
@@ -12,12 +11,12 @@
 import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
-import TutorialModal from '@/components/TutorialModal';
+// import TutorialModal from '@/components/TutorialModal';
 import webchat from '@/utils/plugins/webchat';
 
 const components = {
   NewsModal,
-  TutorialModal,
+  // TutorialModal,
 };
 
 export default {
@@ -48,11 +47,11 @@ export default {
 
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/default.scss';
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
-@import '~bh/src/assets/scss/bh.scss';
-@import '@mdi/font/css/materialdesignicons.css';
-@import 'highlight.js/styles/github.css';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 ::-webkit-scrollbar {
   width: 0.6rem;
@@ -153,6 +152,10 @@ $entities-colors: (
 
 .align-items-center {
   align-items: center;
+}
+
+body {
+  font-family: $font-family;
 }
 
 </style>

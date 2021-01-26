@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TestView.vue renders correctly 1`] = `
+<div class="filter-evaluate-example" intent="like" entity="cat" text="i like to eat sushi">
+  <div class="filter-evaluate-example__filters">
+    <b-field class="filter-evaluate-example__filters__input-text">
+      <b-input debounce="750" icon-right="magnify"></b-input>
+    </b-field>
+    <div class="filter-evaluate-example__filters__wrapper filter-evaluate-example__filters__wrapper__has-1-fields">
+      <div class="filter-evaluate-example__filters__wrapper__text">
+        some specific text:
+      </div>
+      <b-field>
+        <b-autocomplete data="" formatters="inputFormatters" placeholder="some specific text" open-on-focus="" dropdown-position="bottom"></b-autocomplete>
+      </b-field>
+      <!---->
+      <!---->
+      <b-field>
+        <!---->
+      </b-field>
+    </div>
+  </div>
+</div>
+`;

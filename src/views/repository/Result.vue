@@ -140,6 +140,10 @@ export default {
 
     &__title {
       margin-top: 2rem;
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
     }
   }
 

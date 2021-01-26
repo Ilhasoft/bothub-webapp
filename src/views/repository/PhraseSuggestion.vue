@@ -143,7 +143,10 @@ export default {
     &__header{
         &__title{
             margin-bottom: $between-title-subtitle;
-            font-weight: $font-weight-bolder;
+            font-size: 1.75rem;
+            font-weight: $font-weight-medium;
+            color: $color-fake-black;
+            margin-bottom: $between-title-subtitle;
         }
         &__subtitle{
             margin-bottom: $between-subtitle-content

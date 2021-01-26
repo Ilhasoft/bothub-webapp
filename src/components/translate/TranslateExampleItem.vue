@@ -69,8 +69,8 @@ import { getEntitiesList } from '@/utils';
 import { getEntityColor } from '@/utils/entitiesColors';
 import { mapActions, mapGetters } from 'vuex';
 import HighlightedText from '@/components/shared/HighlightedText';
-import NewTranslateForm from './NewTranslateForm';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
+import NewTranslateForm from './NewTranslateForm';
 
 export default {
   name: 'TranslateExample',
@@ -164,9 +164,9 @@ export default {
     },
     onTranslated() {
       /* istanbul ignore next */
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: this.$t('webapp.translate.example_translated'),
-        type: 'success',
+        type: 'is-success',
       });
       /* istanbul ignore next */
       this.$emit('dispatchEvent', 'translated');

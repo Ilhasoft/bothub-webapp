@@ -27,8 +27,8 @@
               <version-dropdown
                 v-if="versionEnabled"/>
             </div>
-            <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
-              <b class="has-text-primary">{{ getCurrentRepository.owner__nickname }}</b>
+            <span>{{ $t('webapp.dashboard.created_by') }}
+              <b>{{ getCurrentRepository.owner__nickname }}</b>
             </span>
           </div>
         </div>
@@ -45,7 +45,7 @@
             <span>{{ warningsCount }} {{ $t('webapp.dashboard.warning') }}</span>
           </div>
           <div class="dashboard-layout__main-panel__header__right__container">
-            <!-- <div
+            <div
               class="dashboard-layout__main-panel__header__right__container__tutorial">
               <b-icon
                 v-if="authenticated && tutorialEnabled"
@@ -54,10 +54,11 @@
                 icon="help-circle"
                 @click.native="openBeginnerTutorialModal()"
               />
-            </div> -->
+            </div>
             <b-dropdown
               v-show="hasLoaded"
               position="is-bottom-left"
+              class="dashboard-layout__main-panel__header__right__container__dropdown"
               aria-role="list">
               <user-avatar
                 slot="trigger"
@@ -165,7 +166,7 @@ export default {
       return Object.keys(this.getRequirements.languages_warnings).length;
     },
     tutorialEnabled() {
-      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+      return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
     categoryIcon() {
       if (!this.getCurrentRepository
@@ -181,7 +182,7 @@ export default {
       'setTutorialMenuActive',
     ]),
     openBeginnerTutorialModal() {
-      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
         this.setTutorialMenuActive();
         Analytics.send({ category: 'Tutorial', event: 'tutorial open event' });
       }
@@ -214,6 +215,7 @@ export default {
 </script>
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
 
 html{
@@ -236,15 +238,15 @@ html{
       position: fixed;
       width: inherit;
       z-index: 9;
-      height: 6rem;
       top: 5.25rem;
-      background: #404143;
+      height: 6rem;
+      background: $color-fake-grey;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2.5rem 0 2rem;
       box-shadow: 0px 3px 6px #00000029;
-      @media screen and (max-width: $mobile-width) {
+       @media screen and (max-width: $mobile-width) {
         top: 12rem;
       }
       &__info {
@@ -259,7 +261,7 @@ html{
           width: 3.5rem;
           height: 3.5rem;
           border-radius: 50%;
-          background-color: #12a391;
+          background-color: $color-primary-dark;
           overflow: hidden;
 
           &__icon {
@@ -267,7 +269,7 @@ html{
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #FFFFFF;
+            color: $color-white;
           }
         }
 
@@ -280,17 +282,28 @@ html{
             justify-content: space-between;
 
             p {
-              color: #FFFFFF;
+              color: $color-white;
             }
 
             &__title {
-              font-weight: bold;
+              font-family: $font-family;
+              font-weight: $font-weight-medium;
               font-size: 1.3rem;
                 @media screen and (max-width: 52rem) {
                   font-size: 13px;
                 }
             }
           }
+
+            span {
+              font-family: $font-family;
+              color: $color-white;
+            }
+
+            b {
+              font-family: $font-family;
+              color: $color-primary;
+            }
         }
       }
 
@@ -303,7 +316,7 @@ html{
           display: flex;
           justify-content: space-between;
           align-items: center;
-          color: #FFFFFF;
+          color: $color-white;
 
           span {
             margin: 0 .3rem;
@@ -331,9 +344,13 @@ html{
             }
           }
 
+          &__dropdown{
+              font-family: $font-family;
+          }
+
           &__icon {
           margin-left: 0.5rem;
-          color: #FFFFFF;
+          color: $color-white;
           width: 1rem;
           height: 3rem;
           cursor: pointer;

@@ -8,20 +8,15 @@
           <div
             v-if="repository.authorization.can_write">
             <div class="settings__section">
-              <h2>{{ $t('webapp.settings.title_edit_repository') }}</h2>
+              <h1>{{ $t('webapp.settings.title_edit_repository') }}</h1>
               <edit-repository-form
                 :owner-nickname="repository.owner.nickname"
                 :slug="repository.slug"
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
-
-            <hr>
-            <import-intelligence/>
-            <hr>
-
             <div class="settings__section">
-              <h2>{{ $t('webapp.settings.manage_your_team') }}</h2>
+              <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
               <set-authorization-role-form
                 ref="setAuthorizationRoleForm"
                 :repository-uuid="repository.uuid"
@@ -31,7 +26,7 @@
                 :repository-uuid="repository.uuid" />
             </div>
             <div class="settings__section">
-              <h2>{{ $t('webapp.settings.authorization_requests') }}</h2>
+              <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
               <authorization-requests-list
                 :repository-uuid="repository.uuid"
                 @review="onReviewAuthorizationRequest()" />
@@ -44,6 +39,11 @@
             @onAuthorizationRequested="updateRepository(false)" />
         </div>
       </div>
+
+            <hr>
+            <import-intelligence/>
+            <hr>
+
       <div
         v-if="!authenticated">
         <div class="settings__section">
@@ -142,9 +142,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
   .settings {
+    font-family: $font-family;
+
     &__section {
       margin-bottom: 2rem;
+
+      h1 {
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
+      }
     }
   }
 </style>

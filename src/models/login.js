@@ -1,5 +1,5 @@
 /* eslint-disable class-methods-use-this */
-import store from '@/store';
+import store from '../store';
 import ModelBase from './base';
 
 

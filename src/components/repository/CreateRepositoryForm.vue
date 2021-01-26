@@ -128,11 +128,11 @@ import Tour from '@/components/Tour';
 export default {
   name: 'CreateRepositoryForm',
   components: {
-    Tour,
     Loading,
     FormGenerator,
     RepositoryCard,
     CategorySelect,
+    Tour,
   },
   props: {
     userName: {
@@ -432,9 +432,6 @@ export default {
                 width: 6.875rem;
                 height: 2.188rem;
               }
-            }
-            @media (max-width: $mobile-width) {
-              width: 25rem;
             }
         }
 

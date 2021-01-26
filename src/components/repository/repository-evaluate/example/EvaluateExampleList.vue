@@ -5,7 +5,6 @@
       :item-component="exampleItemElem"
       :list="examplesList"
       :repository="repository"
-      :all-entities="allEntities"
       :is-searching="searchingExample"
       @itemDeleted="onItemDeleted($event)"
       @itemSave="onItemSave()" />

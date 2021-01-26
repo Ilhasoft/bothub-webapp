@@ -27,12 +27,11 @@
           <a
             v-if="!editing || !open"
             :href="`#delete-example-${id}`"
-            class="has-text-danger"
             @click.prevent.stop="editSentence()">
             <b-icon
               icon="pencil"
               size="is-small"
-              class="text-color-grey-dark example__icon" />
+              class="example-accordion__icon example__icon" />
           </a>
         </div>
       </div>
@@ -42,12 +41,11 @@
         <div class="level-item">
           <a
             :href="`#delete-example-${id}`"
-            class="has-text-danger"
             @click.prevent.stop="deleteThisExample()">
             <b-icon
               icon="delete"
               size="is-small"
-              class="text-color-grey-dark example__icon" />
+              class="example-accordion__icon example__icon" />
           </a>
         </div>
       </div>
@@ -197,15 +195,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ @import '~@/assets/scss/colors.scss';
+ @import '~@/assets/scss/variables.scss';
 
   .example-accordion {
 
     &__text {
       max-width: 100%;
+      font-family: $font-family;
     }
 
     &__tag {
       margin-right: 0.5rem;
+    }
+
+    &__icon {
+      color: $color-grey-dark;
     }
 
     &__btns-wrapper {

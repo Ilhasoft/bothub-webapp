@@ -10,7 +10,7 @@
       <p>
         {{ $t('webapp.result.evaluate_output_text') }}
         <a
-          :href="checkDocLanguage.results"
+         :href="checkDocLanguage.results"
           target="_blank">{{ $t('webapp.result.documentation') }}</a>.
       </p>
 
@@ -28,7 +28,7 @@
       </div>
 
       <div>
-        <h5 class="graphics-results__title">
+        <h5 class="graphics-results__subtitle">
           {{ $t('webapp.result.intent_report') }}
         </h5>
         <div
@@ -41,7 +41,7 @@
           class="graphics-results__charts"/>
       </div>
       <div>
-        <h5 class="graphics-results__title">
+        <h5 class="graphics-results__subtitle">
           {{ $tc('webapp.result.entity', 2) }}
         </h5>
         <div
@@ -277,12 +277,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
 .graphics-results {
   margin: 0 auto;
+  font-family: $font-family;
 
   &__title {
     margin: 2rem 0 0.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: $font-weight-medium;
+    color: $color-fake-black;
+    margin-bottom: $between-title-subtitle;
+  }
+
+  &__subtitle {
+    margin: 2rem 0 0.5rem;
+    font-family: $font-family;
+    font-weight: $font-weight-bolder;
   }
 
   &__info {

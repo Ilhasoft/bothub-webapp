@@ -137,7 +137,7 @@ export default {
         dragFriction,
         decay,
         random,
-      } = Object.assign({}, this.defaults, this.backwardPatch(config));
+      } = ({ ...this.defaults, ...this.backwardPatch(config) });
       const elements = this.createElements(root, elementCount, colors, width, height);
       const fettis = elements.map(element => ({
         element,

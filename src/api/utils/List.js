@@ -16,10 +16,9 @@ export default class List {
       .map((data, i) => ({
         id: data.id || data.uuid || data.pk || data.key || i,
         key: data.id || data.uuid || data.pk || data.key || i,
-        data: Object.assign(
-          {},
-          data,
-        ),
+        data: {
+          ...data,
+        },
       }))
       .filter(item => !this.deletions.includes(item.id));
   }

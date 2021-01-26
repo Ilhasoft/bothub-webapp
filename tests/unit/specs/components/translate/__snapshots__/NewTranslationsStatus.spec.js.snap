@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationsStatus.vue renders correctly 1`] = `
+<div ownernickname="douglas" repositoryslug="repo1">
+  <!---->
+  <transition-group-stub tag="div" name="list" mode="out-in"></transition-group-stub>
+  <p class="card-count" style="display: none;">
+    some specific text
+  </p>
+</div>
+`;

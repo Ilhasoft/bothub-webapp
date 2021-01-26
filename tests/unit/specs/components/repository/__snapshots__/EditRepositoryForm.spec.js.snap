@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditRepositoryForm.vue renders correctly 1`] = `
+<form>
+  <loading-stub></loading-stub>
+  <!---->
+  <div class="text-center">
+    <b-button type="is-primary" native-type="submit">some specific text</b-button>
+  </div>
+</form>
+`;

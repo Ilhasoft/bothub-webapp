@@ -6,7 +6,6 @@
       :list="examplesList"
       :repository="repository"
       :per-page="perPage"
-      :is-suggestion="true"
       :is-accordion-open="pageWasChanged"
       :is-searching="searchingExample"
       @itemSave="dispatchSave"

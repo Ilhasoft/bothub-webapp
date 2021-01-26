@@ -4,8 +4,8 @@
       "newbot": "nova inteligência",
       "start_you_bot": "Comece sua inteligência",
       "logout": "Logout",
-      "signin": "entrar",
-      "signup": "cadastrar",
+      "signin": "Entrar",
+      "signup": "Cadastrar",
       "orgs": "Organizações",
       "terms_conditions": "Termos & condições",
       "contact_us": "Contate-nos",
@@ -41,9 +41,6 @@
       "changed_password": "Senha alterada",
       "save_password": "Salvar senha"
     },
-    "paginated_simple": {
-      "empty": "Não há frases"
-    },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
       "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
@@ -74,6 +71,7 @@
     "landing_page": {
       "signin": "Entrar",
       "signup": "Cadastrar",
+      "or": "ou",
       "header_content1": "Inteligência Artificial para chatbots",
       "header_content2": "Personalize seu chatbot com a inteligência ideal em poucos minutos e sem precisar entender programação.",
       "join_for_free": "Cadastre-se gratuitamente",
@@ -287,7 +285,7 @@
       "search_user": "Digite um nome ou username",
       "search_user_org": "Digite um nome ou username",
       "no_locale": "Sem local",
-      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?",
+      "remove_user_confirm": "Você tem certeza que deseja excluir <strong>{user}</strong> como <strong>{role}</strong>?", 
       "remove": "Remover",
       "cancel": "Cancelar",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
@@ -529,7 +527,7 @@
       "training": "Treinamento",
       "train": "Treinar",
       "suggestion": "Sugestões",
-      "test": "Teste",
+      "test": "Testar",
       "test-manual": "Manual",
       "test-automatic": "Automático",
       "results": "Resultados",
@@ -564,7 +562,7 @@
       "last_modified": "Última Modificação",
       "created_by": "Criado por",
       "main": "Principal",
-      "change_default_version": "Mude a versão padrão",
+      "change_default_version": "Mudar a Versão Padrão",
       "message_change_default_version": "Você tem certeza que quer mudar a versão padrão para \"{name}\"?",
       "confirm_change_default_version": "Mudar padrão",
       "version_has_edited": "A versão foi editada",
@@ -600,7 +598,7 @@
       "add_to_train_button": "Adicionar ao treinamento",
       "add_to_sentence_button": "Adicionar às frases de teste",
       "remove_log_button": "Deletar senteça",
-      "select_phrase":"Selecione pelo menos uma frase",
+      "select_phrase":"Selecione uma frase",
       "select_all":"Selecionar todos",
       "error": "Erro",
       "add_log": {

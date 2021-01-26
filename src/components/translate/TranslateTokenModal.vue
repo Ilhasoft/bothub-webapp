@@ -126,6 +126,7 @@ export default {
         overflow: hidden;
         background-color: white;
         border-radius: $radius-medium;
+        font-family: $font-family;
 
         &__content {
           padding: 0.5rem 0.5rem;
@@ -138,11 +139,19 @@ export default {
         }
 
         &__subtitle {
-          font-size: 1.25rem;
+          font-size: 1rem;
           text-align: center;
           margin: auto;
           margin-bottom: $between-subtitle-content;
           width:60%
+        }
+
+        &__header {
+
+          font-size: 1.5rem;
+          font-weight: $font-weight-medium;
+          color: $color-fake-black;
+          margin-bottom: $between-title-subtitle;
         }
 
         &__header, &__footer {

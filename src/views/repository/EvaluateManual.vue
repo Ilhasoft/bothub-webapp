@@ -16,7 +16,7 @@
             <div class="evaluate__content-header__wrapper">
               <div
                 class="evaluate__content-header__wrapper__language-select">
-                <p>
+                <p class="evaluate__content-header__wrapper__language-select__text">
                   <strong>
                     {{ $t('webapp.evaluate-manual.header_title_lang') }}
                   </strong>
@@ -46,7 +46,6 @@
                 :loading="evaluating"
                 :disabled="evaluating"
                 type="is-secondary"
-                class="evaluate__content-header__wrapper__button"
                 @click="newEvaluate()">
                 {{ $t('webapp.evaluate-manual.run_test') }}
               </b-button>
@@ -292,6 +291,10 @@ export default {
 
     &__title {
       margin-top: 2rem;
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
     }
 
     &__wrapper {
@@ -303,14 +306,10 @@ export default {
         flex: 1;
         margin-right: .5rem;
         text-align: left;
-      }
 
-      &__button {
-        width: 11.188rem;
-        height: 2.25rem;
-        font-family: $font-family;
-        font-size: $font-size;
-        color: $color-white;
+        &__text{
+          margin-bottom: 1rem;
+        }
       }
     }
   }

@@ -103,6 +103,10 @@ export default {
     &__title{
         margin-top: 2.2rem;
         margin-bottom: $between-title-subtitle;
+        font-size: 1.75rem;
+        font-weight: $font-weight-medium;
+        color: $color-fake-black;
+        margin-bottom: $between-title-subtitle;
     }
 
     &__description {

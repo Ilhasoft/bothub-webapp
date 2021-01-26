@@ -28,13 +28,13 @@
         backend-sorting
         @sort="'is_default'"
       >
-        <template slot-scope="props">
+        <template>
           <b-table-column
             :width="isEdit.edit ? 200 : 60"
-            field="name"
             label="version"
             sortable
             centered
+            v-slot="props"
             numeric>
             <b-field v-if="isEdit.edit === true && isEdit.id === props.row.id">
               <div class="versions__edit-input">
@@ -49,7 +49,8 @@
                   @icon-right-click="onCancelEdit"
                   @input="onEditNameChange"
                   @keyup.enter.native="handleEditVersion(isEdit.name, props.row.id)"/>
-            </div></b-field>
+              </div>
+            </b-field>
             <span
               v-else
               class="versions__table__version-number"
@@ -61,6 +62,7 @@
             :label="$t('webapp.versions.date_created')"
             centered
             field="created_at"
+            v-slot="props"
             sortable >
             {{ props.row.created_at | moment('from') }}
           </b-table-column>
@@ -68,6 +70,7 @@
             :label="$t('webapp.versions.last_modified')"
             centered
             field="last_update"
+            v-slot="props"
             sortable>
             {{ props.row.last_update | moment('from') }}
           </b-table-column>
@@ -75,6 +78,7 @@
             :label="$t('webapp.versions.created_by')"
             centered
             field="created_by"
+            v-slot="props"
             sortable>
             {{ props.row.created_by }}
           </b-table-column>
@@ -82,6 +86,7 @@
             centered
             width="180"
             field="is_default"
+            v-slot="props"
             label=""
             sortable>
             <div class="versions__table__buttons-wrapper">
@@ -342,6 +347,11 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/variables.scss';
 
+
+.version-list {
+   font-family: $font-family;
+}
+
 .icon {
   pointer-events: initial !important;
 }
@@ -349,6 +359,7 @@ export default {
 .versions {
   margin: auto;
   max-width: $max-repository-card-width;
+  font-family: $font-family;
 
   &__header {
     margin: 3.875rem 0 2.75rem 0;
@@ -381,6 +392,7 @@ export default {
       color: $primary;
       font-weight: bold;
       cursor: pointer;
+      font-family: $font-family;
     }
 
     &__buttons-wrapper {

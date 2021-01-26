@@ -73,7 +73,6 @@ export default {
       this.formSchema,
       LoginModel,
     );
-
     this.drfLoginModel = new Model(
       {},
       null,
@@ -90,7 +89,6 @@ export default {
     async onSubmit() {
       this.drfLoginModel = updateAttrsValues(this.drfLoginModel, this.data);
       this.drfLoginModel.getSaveData();
-
       this.submitting = true;
       this.errors = {};
       try {

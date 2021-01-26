@@ -1,7 +1,9 @@
 <template>
   <div class="summary-information">
     <div class="summary-information__info">
-      <h2>{{ $t('webapp.summary.general_information') }}</h2>
+      <span class="summary-information__info__title">
+        {{ $t('webapp.summary.general_information') }}
+      </span>
       <div class="summary-information__info__container">
         <div class="summary-information__info__container__training">
           <numbers-card
@@ -119,17 +121,18 @@ export default {
 
     &__info{
       margin-left: 0.5rem;
-        h2{
+
+        &__title{
           color: $color-fake-black;
-          font-weight: $font-weight-bolder;
+          font-weight: $font-weight-medium;
           font-family: $font-family;
-          margin-bottom: 1.2rem;
           font-size: 1.75rem;
         }
 
         &__container{
             width: 100%;
             display: flex;
+            margin-top: 1.2rem;
 
             &__training{
             display: flex;

@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout.vue loading renders correctly 1`] = `
+<div class="layout">
+  <weni-notification-stub></weni-notification-stub>
+  <div class="layout__loading">
+    <div class="layout__loading__progress"></div>
+  </div>
+  <div class="layout__header">
+    <div class="layout__header__container">
+      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <!---->
+      <div class="layout__header__container__fields">
+        <div class="layout__header__options">
+          <!---->
+          <!---->
+          <!---->
+          <div class="layout__header__options__buttons">
+            <b-button expanded="" class="layout__header__options__buttons__btn">some specific text</b-button>
+            <b-button expanded="" type="is-primary" class="layout__header__options__buttons__btn hide-mobile">some specific text</b-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout__content"></div>
+  <site-footer-stub></site-footer-stub>
+</div>
+`;
+
+exports[`Layout.vue renders correctly 1`] = `
+<div class="layout">
+  <weni-notification-stub></weni-notification-stub>
+  <!---->
+  <div class="layout__header">
+    <div class="layout__header__container">
+      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <!---->
+      <div class="layout__header__container__fields">
+        <div class="layout__header__options">
+          <!---->
+          <!---->
+          <!---->
+          <div class="layout__header__options__buttons">
+            <b-button expanded="" class="layout__header__options__buttons__btn">some specific text</b-button>
+            <b-button expanded="" type="is-primary" class="layout__header__options__buttons__btn hide-mobile">some specific text</b-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="layout__content"></div>
+  <site-footer-stub></site-footer-stub>
+</div>
+`;

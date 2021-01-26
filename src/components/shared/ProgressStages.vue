@@ -61,6 +61,13 @@ export default {
         border: 1px solid $color-border;
         height: 147px;
 
+        h3 {
+          font-size: 1.4rem;
+          font-weight: $font-weight-medium;
+          color: $color-fake-black;
+          margin-bottom: $between-title-subtitle;
+        }
+
     &__bar {
       display: flex;
       margin-bottom: 4rem;

@@ -366,6 +366,7 @@ export default {
   z-index: 10;
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
+  font-family: $font-family;
 
   @media screen and (max-width: $mobile-width) {
     top: 12rem;
@@ -377,6 +378,11 @@ export default {
     height: 100%;
     width: $menu-expanded-size + $menu-padding;
     transition: width .1s;
+    font-family: $font-family;
+
+    .side-bar-text {
+      margin-left: 0.3rem;
+    }
 
     &__collapse-button {
       border-radius: 50%;

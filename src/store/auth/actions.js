@@ -14,7 +14,6 @@ export default {
   },
   async externalLogin({ commit }, { token }) {
     if (!token) return;
-    console.log(token);
     commit(TYPES.SET_TOKEN, token);
   },
   retriveAuthToken({ commit }) {

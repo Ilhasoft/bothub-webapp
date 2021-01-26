@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryCard.vue renders correctly 1`] = `
+<div class="repository-card" uuid="dbe1539c-88ba-43e0-bed5-54729218cec9" owner="1" owner__nickname="fake" name="Repository" slug="repository" language="en" available_languages="en,pt" categories="1,2" categories_list="[object Object],[object Object]" description="" created_at="2018-04-20T17:05:42.035514Z">
+  <div id="tour-create_intelligence-step-0" class="repository-card__align-items">
+    <div class="repository-card__big-badge-wrapper">
+      <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
+        <div class="repository-card__big-badge">
+          <custom-icon-stub value="botinho" size="extra-large" class="repository-card__big-badge__icon clickable"></custom-icon-stub>
+        </div>
+      </router-link-stub>
+    </div>
+    <div class="repository-card__details">
+      <div class="repository-card__title"><span class="repository-card__title__bagde"><router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click"><custom-icon-stub value="botinho" fillmobile="true" class="repository-card__title__bagde__icon clickable"></custom-icon-stub></router-link-stub></span>
+        <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click"><span class="repository-card__title__repository">Repository</span></router-link-stub>
+      </div>
+      <div class="repository-card__info-item"><span>some specific text</span> <strong class="repository-card__info-item__created-by">
+          fake
+        </strong></div>
+      <div class="repository-card__flags"><span class="repository-card__flags__flag repository-card__flags__flag--main"><language-badge-stub language="en" main="true"></language-badge-stub></span><span class="repository-card__flags__flag"><language-badge-stub language="pt"></language-badge-stub></span></div>
+      <div class="repository-card__categories">
+        <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
+          <b-tag color="grey-light" rounded="" size="is-small" class="repository-card__categories__category">Business</b-tag>
+        </router-link-stub>
+        <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
+          <b-tag color="grey-light" rounded="" size="is-small" class="repository-card__categories__category">Technology</b-tag>
+        </router-link-stub>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslationsStatus.vue renders correctly 1`] = `
+<div ownernickname="douglas" repositoryslug="repo1">
+  <b-loading></b-loading>
+  <!---->
+</div>
+`;

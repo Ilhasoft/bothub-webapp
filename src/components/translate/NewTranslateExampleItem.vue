@@ -31,11 +31,11 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import TranslateExampleForm from './TranslateExampleForm';
 import ExampleAccordion from '@/components/shared/accordion/ExampleAccordion';
-import TranslateExampleBefore from './TranslateExampleBefore';
 import { getEntitiesList, entityEquals } from '@/utils';
 import Loading from '@/components/shared/Loading';
+import TranslateExampleBefore from './TranslateExampleBefore';
+import TranslateExampleForm from './TranslateExampleForm';
 
 export default {
   name: 'TranslateExampleItem',
