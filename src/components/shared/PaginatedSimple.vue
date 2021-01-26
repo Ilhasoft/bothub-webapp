@@ -62,14 +62,6 @@ export default {
       type: Object,
       default: () => {},
     },
-    emptyMessage: {
-      type: String,
-      default: null,
-    },
-    loadAll: {
-      type: Boolean,
-      default: false,
-    },
     itemKey: {
       type: String,
       default: null,
@@ -77,7 +69,6 @@ export default {
   },
   data() {
     return {
-      listStatusErrorCode: null,
       error: null,
       page: 1,
       data: false,
