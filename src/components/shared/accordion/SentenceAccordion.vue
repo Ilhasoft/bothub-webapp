@@ -84,10 +84,6 @@ export default {
       type: Boolean,
       default: true,
     },
-    suggestion: {
-      type: Boolean,
-      default: false,
-    },
   },
   data() {
     return {

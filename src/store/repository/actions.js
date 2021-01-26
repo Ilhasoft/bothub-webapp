@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 import repository from '@/api/repository';
 import update from '@/api/update';
-import TYPES from '../types';
-
+import TYPES from './types';
 
 export default {
 
@@ -185,5 +184,15 @@ export default {
   },
   getRepositoryRequirements(store, { repositoryUuid, version }) {
     return repository.repositoryRequirements(repositoryUuid, version);
+  },
+  setMigrateIntelligence(store, {
+    repositoryVersion, AuthToken, Language, Classifier,
+  }) {
+    return repository.repositoryMigrateData(repositoryVersion, AuthToken, Language, Classifier);
+  },
+  setUploadRasaDataset(store, {
+    formData, repositoryVersion, repositoryUUID,
+  }) {
+    return repository.repositoryUploadRasa(formData, repositoryVersion, repositoryUUID);
   },
 };

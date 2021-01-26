@@ -4,15 +4,15 @@
       "newbot": "new bot",
       "start_you_bot": "Start your Intelligence",
       "logout": "Logout",
-      "signin": "sign in",
-      "signup": "sign up",
+      "signin": "Sign in",
+      "signup": "Sign up",
       "orgs": "Organizations",
       "terms_conditions": "Terms & conditions",
       "contact_us": "Contact Us",
       "subscribe": "Subscribe",
       "newsletter": "Enter your email to get notified about our news:",
       "you_best_email": "Your best email",
-      "footer_license": "Bothub is a project by Ilhasoft.\n        &copy; 2020 All rights reserved.",
+      "footer_license": "Copyright © 2012-2021 Weni. All rights reserved.",
       "created_by": "Created by",
       "read_for_train": "Your intelligence is ready to be trained",
       "request_authorization": "Request Authorization",
@@ -40,9 +40,6 @@
       "confirm_password": "Confirm Password",
       "changed_password": "Password changed",
       "save_password": "Save password"
-    },
-    "paginated_simple": {
-      "empty": "There are no phrases"
     },
     "create_repository": {
       "create_repo": "Create an intelligence",
@@ -74,13 +71,14 @@
     "landing_page": {
       "signin": "Sign in",
       "signup": "Sign up",
+      "or": "or",
       "header_content1": "Artificial Intelligence for chatbots",
       "header_content2": "Customize your chatbot with the ideal dataset in minutes, no need for knowledge in programming.",
       "join_for_free": "Sign up for free",
       "grid_text1": "Easy access for ready and multilingual datasets",
       "grid_text2": "Simply use, improve or translate, thousands of datasets published by people all over the world about uncountable subjects and languages.",
       "grid_text3": "Integrate with your chatbot platform",
-      "grid_text4": "Connect datasets to different chatbot platforms through BotHub API and make your bot more efficient.",
+      "grid_text4": "Connect datasets to different chatbot platforms through our API and make your bot more efficient.",
       "grid_text5": "Build and share your own AI",
       "grid_text6": "Build your own dataset that fit your chatbot needs. You can also allow other people to contribute on your dataset.",
       "best_bots": "Best bots",
@@ -139,35 +137,46 @@
       "raw_subtitle": "Analyze the confidentiality on each intention identified to understand the result of the quick test"
     },
     "evaluate": {
+      "results": "Load a previous test result",
+      "description": "Every time you run a test, your results will be saved here for future reference. <br><br> You can select two tests to compare results.",
+      "you_can_not_edit": "You can not edit this repository",
+      "not_have_results": "You do not have results yet",
+      "entity_is_group": "<strong>{entity}</strong> grouped as <strong>{group}</strong>",
+      "no_sentences": "No sentences.",
+      "detailed_results": "Detailed Results",
+      "login": "Sign in to your account to edit this repository.",
+      "all_intents": "All Intents",
+      "all_entities": "All Entities",
+      "all_languages": "All languages",
+      "intent": "Intent",
+      "no_versions": "No results for this version"
+    },
+    "evaluate-manual": {
       "header_title": "Test your data set",
       "header_title_p": "How is your model performing? Do you have enough data? Are your intents and entities well-designed?",
       "header_title_p2": "Using our testing feature, you can evaluate your bot's performance easily.",
       "header_title_lang": "Select the language to run the test",
       "run_test": "Run test",
-      "you_can_not_edit": "You can not edit this repository",
       "login": "Sign in to your account to edit this repository.",
       "get_examples_test_sentences": "{n} test sentence | {n} test sentences",
-      "all_intents": "All Intents",
-      "all_entities": "All Entities",
-      "all_languages": "All languages",
-      "all_labels": "All Labels",
       "add_new_test_sentence": "Add a new test sentence",
       "create_a_bench_of_test": "Create a bench of test sentences to measure the accuracy of your training.",
       "enter_your_sentence_here": "Enter your sentence here",
-      "intent": "Intent",
       "submit": "Submit",
       "you_need_type_a_text": "You need type a text to sentence",
       "intent_is_required": "Intent is required",
-      "not_have_results": "You do not have results yet",
-      "no_versions": "No results for this version",
-      "no_sentences": "No sentences.",
-      "detailed_results": "Detailed Results",
-      "results": "Results",
-      "default_error": "Something went wrong, try again later.",
-      "entity_is_group": "<strong>{entity}</strong> grouped as <strong>{group}</strong>"
+      "default_error": "Something went wrong, try again later."
+    },
+    "evaluate-automatic": {
+      "header_title": "Test your intelligence",
+      "header_title_p": "How is your model performing? Do you have enough data? Are your intents and entities well-designed?",
+      "header_title_p2": "Using our testing feature, you can evaluate your bot's performance easily.",
+      "header_title_lang": "Select the language to run the test",
+      "run_test": "Run test"
     },
     "result": {
       "load_result": "Load Results",
+      "download": "Download",
       "test": "Test",
       "evaluate_output": "Evaluate output",
       "evaluate_output_text": "For more information about test results, see our",
@@ -517,8 +526,11 @@
     "menu": {
       "summary": "Summary",
       "training": "Training",
+      "train": "Train",
+      "suggestion": "Suggestion",
       "test": "Test",
-      "sentences": "Sentences",
+      "test-manual": "Manual",
+      "test-automatic": "Automatic",
       "results": "Results",
       "inbox": "Inbox",
       "translation": "Translation",
@@ -528,6 +540,13 @@
       "settings": "Settings",
       "general":"General",
       "versions": "Versions"
+    },
+    "phrase-suggestion": {
+      "title": "Sentence suggestions",
+      "subtitle": "Select an intent and add suggested phrases to your training.",
+      "empty": "There are no suggested phrases for this intention",
+      "confirm-edit": "Confirm edit",
+      "cancel-edit": "Cancel edit"
     },
     "dashboard": {
       "sentences": "sentences",
@@ -708,12 +727,40 @@
       "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
     }
   },
-    "word_suggestion": {
-      "title": "Variation suggestion",
-      "subtitle": "Generate new sentences by varying training sentences.",
-      "cancel": "Cancel",
-      "add_training": "Add training",
-      "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
-    }
+  "word_suggestion": {
+    "title": "Variation suggestion",
+    "subtitle": "Generate new sentences by varying training sentences.",
+    "cancel": "Cancel",
+    "add_training": "Add training",
+    "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
+  },
+  "import_and_export_intelligence":{
+    "title": "Import/Export your intelligence",
+    "subtitle": "To import/migrate, simply select the file corresponding to Rasa or place the token of Wit.AI, and the data will be recognized automatically",
+    "import_rasa": "Import from Rasa",
+    "migrate_wit": "Migrate from Wit.AI"
+  },
+  "migrate_intelligence": {
+    "title": "Migrate Wit.AI",
+    "token_input": "Enter your Server Access Token here",
+    "language": "Select the language",
+    "cancel": "Cancel",
+    "migrate": "Confirm",
+    "migrate_success": "Successful migration."
+  },
+  "import_dataset": {
+    "title": "Import Dataset",
+    "empty_file": "No file selected",
+    "cancel": "Cancel",
+    "importar": "Confirm",
+    "import_success": "Successful importation.",
+    "import_error": "Something went wrong, try again later."
+  },
+  "weni_notification":{
+    "title": "Ilhasoft, Push and BotHub are now Weni.",
+    "subtitle": "From this merger of brands, our purpose is to continue to evolve the digital transformation in the communication of organizations.",
+    "button": "Learn more",
+    "link": "https://www.ilhasoft.com.br/we-are-weni"
   }
+}
 }

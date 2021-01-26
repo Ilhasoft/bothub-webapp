@@ -55,7 +55,6 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import RepositoryBase from './Base';
 import LoginForm from '@/components/auth/LoginForm';
 import IntentsList from '@/components/repository/IntentsList';
 import PaginatedList from '@/components/shared/PaginatedList';
@@ -63,6 +62,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import SentencesIntentList from '@/components/repository/SentencesIntentList';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import Loading from '@/components/shared/Loading';
+import RepositoryBase from './Base';
 
 export default {
   name: 'Intent',

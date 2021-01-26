@@ -4,15 +4,15 @@
       "newbot": "nova inteligência",
       "start_you_bot": "Comece sua inteligência",
       "logout": "Logout",
-      "signin": "entrar",
-      "signup": "cadastrar",
+      "signin": "Entrar",
+      "signup": "Cadastrar",
       "orgs": "Organizações",
       "terms_conditions": "Termos & condições",
       "contact_us": "Contate-nos",
       "subscribe": "Inscreva-se",
       "newsletter": "Coloque seu email para receber novidades:",
       "you_best_email": "Seu email principal",
-      "footer_license": "Bothub é um projeto da Ilhasoft.\n &copy; 2020 Todos os direitos reservados.",
+      "footer_license": "Copyright © 2012-2021 Weni. Todos os direitos reservados.",
       "created_by": "Criado por",
       "read_for_train": "Sua inteligência está pronta para ser treinada",
       "request_authorization": "Solicitação de Autorização",
@@ -40,9 +40,6 @@
       "confirm_password": "Confirme a senha",
       "changed_password": "Senha alterada",
       "save_password": "Salvar senha"
-    },
-    "paginated_simple": {
-      "empty": "Não há frases"
     },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
@@ -74,13 +71,14 @@
     "landing_page": {
       "signin": "Entrar",
       "signup": "Cadastrar",
+      "or": "ou",
       "header_content1": "Inteligência Artificial para chatbots",
       "header_content2": "Personalize seu chatbot com a inteligência ideal em poucos minutos e sem precisar entender programação.",
       "join_for_free": "Cadastre-se gratuitamente",
       "grid_text1": "Fácil acesso a inteligêncies prontas e multilíngues",
       "grid_text2": "Use, melhore ou traduza milhares de inteligências publicadas por pessoas de todo o mundo sobre incontáveis assuntos e diversos idiomas.",
       "grid_text3": "Integre com sua plataforma de chatbot",
-      "grid_text4": "Conecte inteligências a várias plataformas de chatbot através da API do BotHub e deixe seu bot mais eficiente.",
+      "grid_text4": "Conecte inteligências a várias plataformas de chatbot através da nossa API e deixe seu bot mais eficiente.",
       "grid_text5": "Construa e compartilhe sua própria IA",
       "grid_text6": "Crie uma inteligência artificial que atenda às necessidades do seu chatbot. Você também pode permitir que outras pessoas vejam, contribuam e apliquem-na em seus projetos.",
       "best_bots": "Melhores inteligências",
@@ -139,35 +137,47 @@
       "raw_subtitle": "Analise a confiança em cada intenção identificada para entender o resultado do teste rápido"
     },
     "evaluate": {
+      "results": "Carregue um resultado de teste anterior",
+      "description": "Cada vez que você executa um teste, seus resultados serão salvos aqui para referência futura. <br><br> Você pode selecionar dois testes para comparar os resultados.",
+      "you_can_not_edit": "Você não pode editar essa inteligência",
+      "not_have_results": "Você não tem resultados ainda",
+      "entity_is_group": "<strong>{entity}</strong> pertence a <strong>{group}</strong>",
+      "no_sentences": "Não há frases.",
+      "detailed_results": "Resultados Detalhados",
+      "login": "Faça login na sua conta para editar essa inteligência.",
+      "all_intents": "Todas as Intenções",
+      "all_entities": "Todas as Entidades",
+      "all_labels": "Todas as Categorias",
+      "all_languages": "Todos os idiomas",
+      "intent": "Intenção",
+      "no_versions": "Sem resultados para esta versão"
+    },
+    "evaluate-manual": {
       "header_title": "Teste sua inteligência",
       "header_title_p": "Como seu modelo está performando? Você tem dados suficientes? Suas intenções e entidades foram bem desenhadas?",
       "header_title_p2": "Usando nossa função de teste, você pode avaliar a performance da sua inteligência facilmente.",
       "header_title_lang": "Selecione o idioma para executar o teste.",
       "run_test": "Executar teste",
-      "you_can_not_edit": "Você não pode editar essa inteligência",
       "login": "Faça login na sua conta para editar essa inteligência.",
       "get_examples_test_sentences": "{n} frase de teste | {n} frases de teste",
-      "all_intents": "Todas as Intenções",
-      "all_entities": "Todas as Entidades",
-      "all_labels": "Todas as Categorias",
-      "all_languages": "Todos os idiomas",
       "add_new_test_sentence": "Adicionar uma nova frase de teste",
       "create_a_bench_of_test": "Crie um conjunto de frases de teste para medir a precisão de seu treinamento.",
       "enter_your_sentence_here": "Coloque sua frase aqui",
-      "intent": "Intenção",
       "submit": "Enviar",
       "you_need_type_a_text": "Você precisa escrever uma frase",
       "intent_is_required": "Intenção é obrigatória",
-      "not_have_results": "Você não tem resultados ainda",
-      "no_versions": "Sem resultados para esta versão",
-      "no_sentences": "Não há frases.",
-      "detailed_results": "Resultados Detalhados",
-      "results": "Resultados",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
-      "entity_is_group": "<strong>{entity}</strong> pertence a <strong>{group}</strong>"
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
+    },
+    "evaluate-automatic": {
+      "header_title": "Teste sua inteligência",
+      "header_title_p": "Como seu modelo está performando? Você tem dados suficientes? Suas intenções e entidades foram bem desenhadas?",
+      "header_title_p2": "Usando nossa função de teste, você pode avaliar a performance da sua inteligência facilmente.",
+      "header_title_lang": "Selecione o idioma para executar o teste.",
+      "run_test": "Executar teste"
     },
     "result": {
       "load_result": "Carregar Resultados",
+      "download": "Download",
       "test": "Teste",
       "evaluate_output": "Resultados do teste",
       "evaluate_output_text": "Para mais informações, veja nossa",
@@ -514,9 +524,12 @@
     },
     "menu": {
       "summary": "Resumo",
-      "training": "Treinar",
+      "training": "Treinamento",
+      "train": "Treinar",
+      "suggestion": "Sugestões",
       "test": "Testar",
-      "sentences": "Frases",
+      "test-manual": "Manual",
+      "test-automatic": "Automático",
       "results": "Resultados",
       "inbox": "Inbox",
       "translation": "Tradução",
@@ -526,6 +539,13 @@
       "settings": "Ajustes",
       "general":"Geral",
       "versions": "Versões"
+    },
+    "phrase-suggestion": {
+      "title": "Sugestões de frases",
+      "subtitle": "Selecione uma intenção e adicione frases sugeridas ao seu treinamento.",
+      "empty": "Não há sugestões de frases para essa intenção",
+      "confirm-edit": "Confirmar edição",
+      "cancel-edit": "Cancelar edição"
     },
     "dashboard": {
       "sentences": "frases",
@@ -542,7 +562,7 @@
       "last_modified": "Última Modificação",
       "created_by": "Criado por",
       "main": "Principal",
-      "change_default_version": "Mude a versão padrão",
+      "change_default_version": "Mudar a Versão Padrão",
       "message_change_default_version": "Você tem certeza que quer mudar a versão padrão para \"{name}\"?",
       "confirm_change_default_version": "Mudar padrão",
       "version_has_edited": "A versão foi editada",
@@ -711,6 +731,34 @@
       "cancel": "Cancelar",
       "add_training": "Adicionar ao treinamento",
       "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento"
+    },
+    "import_and_export_intelligence":{
+      "title": "Importar sua inteligência",
+      "subtitle": "Para importar/migrar, basta selecionar o arquivo correspondente ao Rasa ou coloque o access token do Wit.AI, e os dados serão reconhecidos automaticamente",
+      "import_rasa": "Importar do Rasa",
+      "migrate_wit": "Migrar do Wit.AI"
+    },
+    "migrate_intelligence": {
+      "title": "Migrar inteligência Wit.AI",
+      "token_input": "Adicione seu Server Access Token aqui",
+      "language": "Seleciona o idioma",
+      "cancel": "Cancelar",
+      "migrate": "Confirmar",
+      "migrate_success": "Migração feita com sucesso."
+    },
+    "import_dataset": {
+      "title": "Importar Dataset",
+      "empty_file": "Não há arquivo selecionado",
+      "cancel": "Cancelar",
+      "importar": "Confirmar",
+      "import_success": "Importação feita com sucesso.",
+      "import_error": "Algo de errado aconteceu, tente novamente mais tarde."
+    },
+    "weni_notification":{
+      "title": "Ilhasoft, Push e BotHub agora são Weni.",
+      "subtitle": "A partir dessa fusão, nosso propósito é continuar evoluindo a transformação digital na comunicação das organizações.",
+      "button": "Saiba mais",
+      "link": "https://www.ilhasoft.com.br/somos-weni"
     }
   }
 }

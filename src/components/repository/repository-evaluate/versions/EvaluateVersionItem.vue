@@ -67,11 +67,13 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
 .version-test-item {
   margin: 1rem 0;
   border: 1px solid $color-grey;
   border-radius: 0.5rem;
+  font-family: $font-family;
 
   &__wrapper {
     display: flex;

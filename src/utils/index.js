@@ -1,8 +1,8 @@
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import VERBOSE_LANGUAGES from './verbose_languages';
 
 export function generateTemporaryId() {
-  return uuid.v4();
+  return uuidv4();
 }
 export const getWordIndex = (word, phrase) => {
   const regex = new RegExp(`\\b${word.toLowerCase()}\\b`);
@@ -25,8 +25,7 @@ export const languageListToDict = list => (list.reduce((current, lang) => {
   return current;
 }, {}));
 
-export const LANGUAGES = languageListToDict(process.env.SUPPORTED_LANGUAGES
-  .split('|')
+export const LANGUAGES = languageListToDict((process.env.VUE_APP_SUPPORTED_LANGUAGES).split('|')
   .map(v => v.split(':')[0]));
 
 export const ROLE_NOT_SETTED = 0;

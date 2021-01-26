@@ -90,9 +90,9 @@
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
-import RepositoryBase from './Base';
 import EntityEdit from '@/components/repository/EntityEdit';
 import SummaryInformation from '@/components/repository/SummaryInformation';
+import RepositoryBase from './Base';
 
 export default {
   name: 'RepositoryHome',
@@ -194,13 +194,15 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-@import 'github-markdown-css/github-markdown.css';
+
 .repository-home {
   &__title {
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: $font-weight-medium;
     display: flex;
     align-items: center;
+    font-family: $font-family;
+    color: $color-fake-black;
 
     div{
       margin: 0 0 0.2rem 0.2rem;
@@ -244,6 +246,7 @@ export default {
   font-size: 12px;
   line-height: 13px;
   padding: 1rem 0.5rem;
+  font-family: $font-family;
 }
 .markdown-body {
   a {

@@ -16,11 +16,13 @@ import RepositoryTranslateExternal from '@/views/repository/TranslateExternal';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryIntegration from '@/views/repository/Integration';
-import RepositoryEvaluate from '@/views/repository/Evaluate';
+import RepositoryEvaluateManual from '@/views/repository/EvaluateManual';
+import RepositoryEvaluateAutomatic from '@/views/repository/EvaluateAutomatic';
 import RepositoryResults from '@/views/repository/Results';
 import RepositoryResult from '@/views/repository/Result';
 import RepositoryVersions from '@/views/repository/Versions';
 import RepositoryLog from '@/views/repository/Log';
+import PhraseSuggestion from '@/views/repository/PhraseSuggestion';
 import Entity from '@/views/repository/Entity';
 import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
@@ -65,6 +67,16 @@ export default new Router({
         } else {
           next();
         }
+      },
+    },
+    {
+      path: '/loginexternal/:token',
+      name: 'externalLogin',
+      component: null,
+      beforeEnter: async (to, from, next) => {
+        const { token } = to.params;
+        store.dispatch('externalLogin', { token: token.replace('+', ' ') });
+        next('/home');
       },
     },
     {
@@ -133,6 +145,11 @@ export default new Router({
           component: RepositoryTrainings,
         },
         {
+          path: ':ownerNickname/:slug/suggestions/',
+          name: 'repository-suggestion',
+          component: PhraseSuggestion,
+        },
+        {
           path: ':ownerNickname/:slug/translate/',
           name: 'repository-translate',
           component: RepositoryTranslate,
@@ -153,9 +170,14 @@ export default new Router({
           component: RepositorySettings,
         },
         {
-          path: ':ownerNickname/:slug/evaluate/',
-          name: 'repository-test',
-          component: RepositoryEvaluate,
+          path: ':ownerNickname/:slug/evaluate/manual',
+          name: 'repository-test-manual',
+          component: RepositoryEvaluateManual,
+        },
+        {
+          path: ':ownerNickname/:slug/evaluate/automatic',
+          name: 'repository-test-automatic',
+          component: RepositoryEvaluateAutomatic,
         },
         {
           path: ':ownerNickname/:slug/log/',
@@ -182,7 +204,7 @@ export default new Router({
           name: 'repository-result',
           component: RepositoryResult,
         },
-        ...(process.env.VERSION_ENABLED
+        ...((process.env.VUE_APP_VERSION_ENABLED)
           ? [{
             path: ':ownerNickname/:slug/versions/',
             name: 'repository-versions',
@@ -226,7 +248,7 @@ export default new Router({
         }
       },
     },
-    ...(process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED
+    ...(process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED
       ? [{
         path: '/payment-options',
         name: 'payment-options',
@@ -270,7 +292,7 @@ export default new Router({
         {
           path: 'evaluate/',
           name: 'tutorial-evaluate',
-          component: RepositoryEvaluate,
+          component: RepositoryEvaluateManual,
         },
         {
           path: 'inbox/',

@@ -24,12 +24,11 @@ export default {
 .loading {
   display: flex;
   justify-content: center;
-  margin: auto;
 }
 
 .spin{
   margin: auto;
-  width: 5rem;
+  width: 7.1rem;
   text-align: center;
 }
 .bothub-logo{

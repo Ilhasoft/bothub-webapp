@@ -70,7 +70,7 @@ export default {
       'authenticated',
     ]),
     currentVersion() {
-      return process.env.VERSION;
+      return process.env.VUE_APP_VERSION;
     },
     shouldShow() {
       return this.authenticated
@@ -105,7 +105,7 @@ export default {
     onClose() {
       this.active = false;
       this.setLastVersionSeen(this.currentVersion);
-      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
         this.setTutorialMenuActive();
       }
     },
@@ -115,6 +115,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
     .news-modal {
         border-radius: 10px;
         background-color: white;
@@ -133,8 +135,12 @@ export default {
         }
 
         h2{
-          font-weight: bold;
-        }
+            font-weight: bold;
+            font-size: 1.75rem;
+            font-weight: $font-weight-medium;
+            color: $color-fake-black;
+            margin-bottom: $between-title-subtitle;
+          }
 
         p {
           margin: 0.8rem 0 1.7rem ;
@@ -161,7 +167,8 @@ export default {
                 height: 43px;
                 box-shadow: 0px 3px 6px #00000029;
                 border-radius: 6px;
-                font-weight: bold;
+                font-weight: $font-weight-medium;
+                font-family: $font-family;
             }
 
             &__hidden {

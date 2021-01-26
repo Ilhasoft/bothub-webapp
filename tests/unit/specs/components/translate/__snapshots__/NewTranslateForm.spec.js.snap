@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTranslateForm.vue renders correctly 1`] = `
+<div>
+  <form class="columns is-variable is-2">
+    <div class="column">
+      <b-field label="">
+        <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-translate-step-4" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal"></example-text-with-highlighted-entities-input-stub>
+      </b-field>
+    </div>
+    <div class="column is-narrow">
+      <b-field>
+        <b-button id="tour-translate-step-5" is-next-disabled="true" is-previous-disabled="true" disabled="true" type="is-secondary" native-type="submit">some specific text</b-button>
+      </b-field>
+    </div>
+  </form>
+  <div class="columns is-variable is-1">
+    <div class="column">
+      <b-field>
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" entitiesforedit=""></entities-input-stub>
+      </b-field>
+    </div>
+  </div>
+</div>
+`;

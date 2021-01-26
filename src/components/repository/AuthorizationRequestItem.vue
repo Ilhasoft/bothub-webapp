@@ -1,13 +1,13 @@
 <template>
-  <div class="bh-grid authorization-request-item">
-    <div class="bh-grid__item bh-grid__item--grow-0">
-      <user-avatar :profile="getProfile(user__nickname)" />
+  <div class="authorization">
+    <div class="authorization__left">
+        <user-avatar :profile="getProfile(user__nickname)" />
+      <div class="authorization__name">
+        <strong>{{ getProfile(user__nickname).nickname || user__nickname }}</strong>
+        <small>{{ text }}</small>
+      </div>
     </div>
-    <div class="bh-grid__item bh-grid__item--grow-1">
-      <div><strong>{{ getProfile(user__nickname).nickname || user__nickname }}</strong></div>
-      <div><small>{{ text }}</small></div>
-    </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
+    <div class="authorization__icons">
       <b-icon
         ref="approveBtn"
         class="clickable"
@@ -15,8 +15,6 @@
         icon="check"
         size="is-small"
         @click="approve()" />
-    </div>
-    <div class="bh-grid__item bh-grid__item--grow-0">
       <b-icon
         ref="rejectBtn"
         class="clickable"
@@ -126,9 +124,9 @@ export default {
 
       const { data } = response;
 
-      this.$bhToastNotification({
+      this.$buefy.toast.open({
         message: data.detail || 'Something wrong happened...',
-        type: 'danger',
+        type: 'is-danger',
       });
 
       if (!data.detail) {
@@ -140,10 +138,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 
 
-.authorization-request-item {
+.authorization{
   border-bottom: 1px solid $color-grey;
+  display: flex;
+
+  &__left{
+    display: flex;
+    flex: 1;
+  }
+  &__name {
+    margin-left: 1rem;
+    margin-bottom: 0.4rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__icons{
+    width: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
 }
 </style>

@@ -135,6 +135,10 @@ export default {
 
     &__wrapper {
       margin: 0 0 0 2.5rem;
+
+      strong {
+        margin-right: 0.5rem;
+      }
     }
 
     > * {

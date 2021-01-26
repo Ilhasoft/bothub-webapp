@@ -1,51 +1,61 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   env: {
-    browser: true,
+    node: true,
   },
-  extends: ['plugin:vue/recommended', 'airbnb-base'],
-  plugins: [
-    'vue'
+  extends: [
+    'plugin:vue/essential',
+    '@vue/airbnb',
   ],
+  parserOptions: {
+    parser: 'babel-eslint',
+  },
+  plugins: ['import'],
   settings: {
     'import/resolver': {
-      webpack: {
-        config: 'build/webpack.base.conf.js'
-      }
-    }
+      alias: {
+        map: [
+          ['@', './src'], // default @ -> ./src alias in Vue, it
+          // exists even if vue.config.js is not present
+          /*
+          *... add your own webpack aliases if you have them in
+          vue.config.js/other webpack config file
+          * if you forget to add them, eslint-plugin-import
+          will not throw linting error in .vue
+          * imports that contain the webpack alias you forgot to add
+          */
+        ],
+        extensions: ['.vue', '.json', '.js'],
+      },
+    },
   },
   rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'import/no-cycle': 'off',
+    'arrow-parens': 'off',
+    'import/order': 'off',
+    'vue/no-unused-components': 'off',
+    'no-unused-vars': 'off',
+    'import/no-unresolved': 'off',
+    'no-multiple-empty-lines': [2, { max: 2 }],
     'import/extensions': ['error', 'always', {
       js: 'never',
-      vue: 'never'
-    }],
-    'no-param-reassign': ['error', {
-      props: true,
-      ignorePropertyModificationsFor: [
-        'state',
-        'acc',
-        'e'
-      ]
+      vue: 'never',
     }],
     'import/no-extraneous-dependencies': ['error', {
-      optionalDependencies: ['test/unit/index.js']
+      optionalDependencies: ['test/unit/index.js'],
     }],
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'import/no-cycle': ['never'],
-    'vue/html-indent': [
-      'error',
-      2,
-      {
-        'ignores': [
-          'VElement[name=pre].children',
-          'VElement[name=bh-highlighted-pre].children',
-          'VElement[name=highlighted-code].children',
-        ],
-      }
-    ],
-    'import/no-webpack-loader-syntax': ['never'],
-  }
-}
+  },
+  overrides: [
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
+      ],
+      env: {
+        jest: true,
+      },
+    },
+  ],
+};

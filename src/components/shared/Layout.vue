@@ -4,18 +4,19 @@
       layout: true,
       'layout--without-background': withoutBackground,
   }">
+  <weni-notification/>
     <div
       v-if="loading"
       class="layout__loading">
       <div class="layout__loading__progress" />
     </div>
     <div class="layout__header">
-      <div class="bh-grid bh-grid--space-between bh-grid--row">
+      <div class="layout__header__container">
         <router-link
-          class="bh-grid__item layout__header__logo"
+          class="layout__header__container__logo"
           to="/">
           <img
-            src="@/assets/imgs/logo-white.svg"
+            src="@/assets/imgs/logo-new-white.svg"
             alt="Bothub"
             class="hide-mobile">
           <img
@@ -25,18 +26,18 @@
         </router-link>
         <div
           v-if="$slots.center"
-          class="bh-grid__item layout__header__center">
+          class="layout__header__container__center">
           <slot name="center" />
         </div>
-        <div class="bh-grid__item bh-grid__item--nested">
-          <div class="bh-grid bh-grid--row layout__header__options">
+        <div class="layout__header__container__fields">
+          <div class="layout__header__options">
             <div
               v-if="authenticated"
               id="tour-create_intelligence-step-1"
               :is-next-disabled="true"
               :is-previous-disabled="true"
               :is-step-blocked="!blockedNextStepTutorial"
-              class="bh-grid__item hide-mobile">
+              class="hide-mobile">
               <router-link :to="'/new'">
                 <b-button
                   type="is-primary"
@@ -49,7 +50,7 @@
             </div>
             <div
               v-if="authenticated && tutorialEnabled"
-              class="bh-grid__item layout__header__icon-tutorial--center">
+              class="layout__header__icon-tutorial--center">
               <b-icon
                 class="layout__header__icon-tutorial"
                 type="is-white"
@@ -58,8 +59,7 @@
               />
             </div>
             <div
-              v-if="authenticated"
-              class="bh-grid__item">
+              v-if="authenticated">
               <b-dropdown position="is-bottom-left">
                 <user-avatar
                   slot="trigger"
@@ -80,24 +80,16 @@
                 </b-dropdown-item>
               </b-dropdown>
             </div>
-            <div
-              v-if="!authenticated"
-              class="bh-grid__item">
-              <bh-button
-                color="fake-white"
-                transparent
-                max-content
-                @click="signIn()">{{ $t('webapp.layout.signin') }}</bh-button>
-            </div>
-            <div
-              v-if="!authenticated"
-              class="bh-grid__item">
-              <bh-button
-                primary
-                inverted
-                max-content
-                class="hide-mobile"
-                @click="signUp()">{{ $t('webapp.layout.signup') }}</bh-button>
+            <div class="layout__header__options__buttons" v-if="!authenticated" >
+              <b-button
+                expanded
+                class="layout__header__options__buttons__btn"
+                @click="signIn()">{{ $t('webapp.layout.signin') }}</b-button>
+              <b-button
+                expanded
+                type='is-primary'
+                class="layout__header__options__buttons__btn hide-mobile"
+                @click="signUp()">{{ $t('webapp.layout.signup') }}</b-button>
             </div>
           </div>
         </div>
@@ -115,10 +107,12 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
+import WeniNotification from '@/components/WeniNotification';
 
 const components = {
   SiteFooter,
   UserAvatar,
+  WeniNotification,
 };
 
 export default {
@@ -154,7 +148,7 @@ export default {
       'myProfile',
     ]),
     tutorialEnabled() {
-      return process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED;
+      return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
   },
   watch: {
@@ -178,10 +172,12 @@ export default {
       });
     },
     openMyProfile() {
-      this.$router.push({ name: 'profile' });
+      if (this.$router.currentRoute.name !== 'profile') {
+        this.$router.push({ name: 'profile' });
+      }
     },
     openBeginnerTutorialModal() {
-      if (process.env.BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
         this.setTutorialMenuActive();
       }
     },
@@ -205,7 +201,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/variables.scss';
+@import '~@/assets/scss/variables.scss';
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/colors.scss';
 
@@ -255,21 +251,57 @@ export default {
   }
 
   &__header {
-    padding: $loading-height 1rem;
+    padding: $loading-height*3.8 1rem;
     background-color: $color-fake-grey;
+
+    &__container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-around;
 
     &__logo {
       min-width: ($size-normal * .75);
-      padding: ($size-normal * .125) 0;
 
       img {
         display: block;
-        height: 1.75rem;
+        height: $size-small * 1.3;
+      }
+    }
+      &__center {
+        width: 50%;
+      }
+
+      &__fields{
+        display: flex;
+        justify-content: center;
+        width: 25%
+
       }
     }
 
     &__options {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
       align-items: center;
+
+      strong {
+        letter-spacing: 0.8px;
+      }
+
+      &__buttons{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        &__btn {
+          width: 40%;
+           @media screen and (max-width: $mobile-width) {
+              width: 100%;
+            }
+        }
+      }
     }
 
     &__icon-tutorial {

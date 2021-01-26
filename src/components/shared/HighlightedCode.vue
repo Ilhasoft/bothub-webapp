@@ -1,8 +1,8 @@
 <template>
-  <div
+  <pre
     v-highlightjs="finalCode"
     class="highlighted-pre"
-  ><code :class="codeClass" /></div>
+  ><code :class="codeClass" /></pre>
 </template>
 
 <script>
@@ -33,6 +33,7 @@ export default {
 <style lang="scss">
   .highlighted-pre {
     white-space: pre-wrap;
+    min-height: 90px;
 
     code {
       padding: 1rem;

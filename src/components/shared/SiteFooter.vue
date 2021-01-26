@@ -1,15 +1,12 @@
 <template>
   <footer>
-    <div
-      class="footer__background-svg"
-      v-html="BackgroundSvg"
-    />
-    <div class="container">
+    <div class="background"/>
+    <div class="wrapper">
       <div class="footer-content">
         <div class="footer-items">
           <div class="footer-item footer-brand">
             <img
-              src="~@/assets/imgs/logo-white.svg"
+              src="~@/assets/imgs/logo-new-white.svg"
               alt="bothub">
             <div>Webapp v{{ version }}</div>
           </div>
@@ -46,24 +43,6 @@
             <p>+55 82 3022.5978</p>
           </div>
         </div>
-        <div class="footer-items">
-          <h4 class="footer-title">{{ $t('webapp.layout.subscribe') }}</h4>
-          <div class="footer-section-item">
-            <p>{{ $t('webapp.layout.newsletter') }}</p>
-          </div>
-          <form @submit.prevent="onSubscribeSubmit()">
-            <div class="footer-has-input">
-              <b-input
-                v-model="email"
-                :placeholder="$t('webapp.layout.you_best_email')"
-                type="email"
-                icon-right="chevron-right"
-                icon-right-clickable
-                @icon-right-click="onSubscribeSubmit()"
-              />
-            </div>
-          </form>
-        </div>
       </div>
       <div class="footer-license">
         <p class="has-text-centered">{{ $t('webapp.layout.footer_license') }}</p>
@@ -75,83 +54,31 @@
 <script>
 import axios from 'axios';
 import qs from 'query-string';
-import BackgroundSvg from '!!svg-inline-loader!@/assets/imgs/bg-footer.svg';
 
 
 export default {
   name: 'SiteFooter',
   data() {
     return {
-      email: '',
-      submittingNewsletter: false,
-      version: process.env.VERSION,
-      BackgroundSvg,
+      version: process.env.VUE_APP_VERSION,
     };
-  },
-  methods: {
-    async onSubscribeSubmit() {
-      /* istanbul ignore next */
-      const {
-        MAILCHIMP_LOGIN,
-        MAILCHIMP_DATACENTER,
-        MAILCHIMP_USER_ID,
-        MAILCHIMP_LIST_ID,
-      } = process.env;
-      /* istanbul ignore next */
-      const baseUrl = `https://${MAILCHIMP_LOGIN}.${MAILCHIMP_DATACENTER}.list-manage.com/subscribe/post`;
-      /* istanbul ignore next */
-      const query = {
-        u: MAILCHIMP_USER_ID,
-        id: MAILCHIMP_LIST_ID,
-        EMAIL: this.email,
-      };
-      /* istanbul ignore next */
-      const url = `${baseUrl}?${qs.stringify(query)}`;
-      /* istanbul ignore next */
-      this.submittingNewsletter = true;
-      /* istanbul ignore next */
-      try {
-        await axios.get(url);
-      } catch (e) {
-        // eslint-disable-next-line no-empty
-      }
-      /* istanbul ignore next */
-      this.submittingNewsletter = false;
-      /* istanbul ignore next */
-      this.email = '';
-      /* istanbul ignore next */
-      this.$buefy.toast.open({
-        message: 'Thank you for subscribing!',
-        type: 'is-success',
-      });
-    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/utilities.scss';
 
 footer {
-  $margin-top: 12vw;
-  $background-gradient-color: #18a997;
-
-  position: relative;
   width: 100%;
-  margin-top: $margin-top;
-
-  $font-color: $color-white;
-  $font-color-lighten: $color-white;
-  $background-color: $color-primary;
-
-  background-color: $background-gradient-color;
-  color: $font-color;
+  color: $color-white;
 
   ul {
     li {
       a {
-        color: $font-color;
+        color: $color-white;
         transition: color .2s ease;
 
         &:hover {
@@ -161,24 +88,30 @@ footer {
     }
   }
 
+  .background {
+  background-image: url('~@/assets/imgs/bg-footer.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 30vh;
+  }
+
+  .wrapper {
+    width: 100%;
+    background-color: $color-primary;
+    margin: 0;
+    @media screen and (max-width: $mobile-width) {
+        margin-top: -16vh;
+        text-align: center;
+      }
+  }
 
   .footer {
-    &__background-svg {
-    position: absolute;
-    width: 100%;
-    top: -($margin-top);
-    z-index: 0;
-
-      svg {
-        position: absolute;
-        width: 100%;
-      }
-    }
-
     &-content {
-      padding: 64px 0;
       display: flex;
       justify-content: space-around;
+      width: 100%;
+      margin-bottom: 1rem;
+
        @media screen and (max-width: 50em) {
         flex-direction: column;
         justify-content: space-around;
@@ -200,17 +133,20 @@ footer {
 
     &-brand {
       img {
-        width: 140px;
+        width: 160px;
+        margin-bottom: 0.5rem;
       }
     }
 
     &-title {
+      font-weight: $font-weight-bolder;
+      font-size: 1.2rem;
       text-transform: uppercase;
-      margin-bottom: 16px;
+      margin-bottom: 0.375rem;
     }
 
     &-section-item {
-      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
     }
 
     &-has-input {
@@ -223,6 +159,9 @@ footer {
 
     &-sociallist {
       display: flex;
+       @media screen and (max-width: $mobile-width) {
+        justify-content: center;
+      }
 
       &-item {
         $size: 36px;
@@ -242,14 +181,14 @@ footer {
           display: block;
           width: 100%;
           height: 100%;
-          color: $background-color;
-          background-color: $font-color;
+          color: $color-primary;
+          background-color: $color-white;
           text-align: center;
           transition: background-color .2s ease;
 
           &:hover {
             color: $color-primary-dark;
-            background-color: $font-color-lighten;
+            background-color: $color-white
           }
 
           .icon {
@@ -262,8 +201,10 @@ footer {
     }
 
     &-license {
-      border-top: 1px solid $font-color;
+      border-top: 1px solid $color-white;
+      width: 80%;
       padding: 16px 0;
+      margin: auto;
     }
   }
 }

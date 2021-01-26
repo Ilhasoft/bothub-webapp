@@ -10,8 +10,8 @@
       <p>
         {{ $t('webapp.result.evaluate_output_text') }}
         <a
-          target="_blank"
-          href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results">{{ $t('webapp.result.documentation') }}</a>.
+         :href="checkDocLanguage.results"
+          target="_blank">{{ $t('webapp.result.documentation') }}</a>.
       </p>
 
       <div class="graphics-results__info">
@@ -22,32 +22,32 @@
         <p>
           {{ $t('webapp.result.see_more_in') }}
           <a
-            target="_blank"
-            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports">{{ $t('webapp.result.documentation') }}</a>.
+            :href="checkDocLanguage.precision_recall"
+            target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
 
       <div>
-        <h5 class="graphics-results__title">
+        <h5 class="graphics-results__subtitle">
           {{ $t('webapp.result.intent_report') }}
         </h5>
         <div
           v-if="!loadingIntentsChart"
           class="graphics-results__charts__loading">
-          <Loading/>
+          <loading/>
         </div>
         <canvas
           id="intentsChart"
           class="graphics-results__charts"/>
       </div>
       <div>
-        <h5 class="graphics-results__title">
+        <h5 class="graphics-results__subtitle">
           {{ $tc('webapp.result.entity', 2) }}
         </h5>
         <div
           v-if="!loadingEntitiesChart"
           class="graphics-results__charts__loading">
-          <Loading/>
+          <loading/>
         </div>
         <canvas
           id="entitiesChart"
@@ -63,15 +63,15 @@
         <p>
           {{ $t('webapp.result.intent_confusion_matrix_text') }}
           <a
-            target="_blank"
-            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix">{{ $t('webapp.result.documentation') }}</a>.
+            :href="checkDocLanguage.matrix"
+            target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.matrix_chart"
           class="graphics-results__charts__loading">
-          <Loading/>
+          <loading/>
         </div>
         <img
           v-if="chartData.matrix_chart"
@@ -87,15 +87,15 @@
         <p>{{ $t('webapp.result.intent_confidence_distribution_text') }}</p>
         <p>{{ $t('webapp.result.see_more_in') }}
           <a
-            target="_blank"
-            href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution">{{ $t('webapp.result.documentation') }}</a>.
+            :href="checkDocLanguage.confidence"
+            target="_blank">{{ $t('webapp.result.documentation') }}</a>.
         </p>
       </div>
       <div class="graphics-results__charts">
         <div
           v-if="!chartData.confidence_chart"
           class="graphics-results__charts__loading">
-          <Loading/>
+          <loading/>
         </div>
         <img
           v-if="chartData.confidence_chart"
@@ -110,6 +110,7 @@
 import { mapState } from 'vuex';
 import Chart from 'chart.js';
 import Loading from '@/components/shared/Loading';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'GraphicsResult',
@@ -132,6 +133,22 @@ export default {
     ...mapState({
       version: state => state.Repository.evaluateResultVersion,
     }),
+    checkDocLanguage() {
+      if (I18n.locale === 'pt-BR') {
+        return {
+          results: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#resultados',
+          precision_recall: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#relat_rios_de_precis_o_e_cobertura_precision_and_recall_reports',
+          matrix: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#matriz_de_confus_o_de_inten_es_intent_confusion_matrix',
+          confidence: 'https://docs.ilhasoft.mobi/l/pt/testes-categoria/testes#distribui_o_de_confian_a_de_inten_es_intent_confidence_distribuition',
+        };
+      }
+      return {
+        results: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results',
+        precision_recall: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#precision_and_recall_reports',
+        matrix: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix',
+        confidence: 'https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution',
+      };
+    },
   },
   watch: {
     chartData() {
@@ -260,12 +277,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
 .graphics-results {
   margin: 0 auto;
+  font-family: $font-family;
 
   &__title {
     margin: 2rem 0 0.5rem;
-    font-weight: 700;
+    font-size: 1.75rem;
+    font-weight: $font-weight-medium;
+    color: $color-fake-black;
+    margin-bottom: $between-title-subtitle;
+  }
+
+  &__subtitle {
+    margin: 2rem 0 0.5rem;
+    font-family: $font-family;
+    font-weight: $font-weight-bolder;
   }
 
   &__info {

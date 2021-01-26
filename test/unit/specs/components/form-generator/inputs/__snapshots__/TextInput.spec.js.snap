@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`TextInput.vue renders correctly 1`] = `<b-input-stub value="" type="textarea" hascounter="true" customclass="" placeholder=""></b-input-stub>`;

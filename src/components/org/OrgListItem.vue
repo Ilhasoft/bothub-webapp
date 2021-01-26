@@ -80,6 +80,7 @@ export default {
 .org-card {
   $org-card-margin: 1rem;
   cursor: pointer;
+  font-family: $font-family;
 
   margin: $org-card-margin 0 $org-card-margin 2*$org-card-margin;
   padding: 1rem 0;

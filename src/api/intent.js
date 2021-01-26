@@ -1,3 +1,4 @@
+import qs from 'query-string';
 import request from './request';
 
 export default {
@@ -9,5 +10,11 @@ export default {
         repository_version: repositoryVersion,
       },
     );
+  },
+  intentSuggestions(id, language) {
+    const queryString = qs.stringify({
+      language,
+    });
+    return request.$http.get(`/v2/repository/intent/${id}/intent_suggestions/?${queryString}`);
   },
 };

@@ -5,12 +5,9 @@ export default {
   [TYPES.CACHE_FETCH](state, {
     className, identifier, attributes,
   }) {
-    state.cachedFetch = Object.assign(
-      {},
-      state.cachedFetch,
-      {
-        [`${className}/${identifier}`]: attributes,
-      },
-    );
+    state.cachedFetch = {
+      ...state.cachedFetch,
+      [`${className}/${identifier}`]: attributes,
+    };
   },
 };

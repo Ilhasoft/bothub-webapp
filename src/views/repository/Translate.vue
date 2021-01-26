@@ -303,10 +303,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import LanguageSelectInput from '@/components/inputs/LanguageSelectInput';
-import TranslateList from '@/components/translate/TranslateList';
-import TranslationsList from '@/components/translate/TranslationsList';
 import LoginForm from '@/components/auth/LoginForm';
-import RepositoryBase from './Base';
 import FilterExamples from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import TranslationSentenceStatus from '@/components/translate/TranslationSentenceStatus';
@@ -314,10 +311,12 @@ import AutoTranslate from '@/components/translate/AutoTranslate';
 import Train from '@/components/repository/training/Train';
 import Loading from '@/components/shared/Loading';
 import TranslateTokenModal from '@/components/translate/TranslateTokenModal';
+import TranslateList from '@/components/translate/TranslateList';
 import Tour from '@/components/Tour';
 import {
   languageListToDict,
 } from '@/utils/index';
+import RepositoryBase from './Base';
 
 export default {
   name: 'RepositoryTranslate',
@@ -325,9 +324,7 @@ export default {
     FilterExamples,
     RepositoryViewBase,
     LanguageSelectInput,
-    TranslateList,
     Train,
-    TranslationsList,
     LoginForm,
     AuthorizationRequestNotification,
     TranslationSentenceStatus,
@@ -335,6 +332,7 @@ export default {
     AutoTranslate,
     Loading,
     TranslateTokenModal,
+    TranslateList,
   },
   extends: RepositoryBase,
   data() {
@@ -542,7 +540,7 @@ export default {
 .repository-translate {
   background-color: $color-white;
   display:flex;
-   flex-direction: column;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 

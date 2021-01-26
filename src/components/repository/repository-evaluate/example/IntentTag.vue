@@ -7,7 +7,11 @@
     @close="$emit('close')" >
     <div
       class="intent-tag__container">
-      <div class="intent-tag__container__countStyle">{{ count }}</div> {{ entityName }}
+      <div
+        v-if="intentCount"
+        class="intent-tag__container__count-style">
+        {{ count }}
+      </div> {{ entityName }}
     </div>
   </b-tag>
 </template>
@@ -28,6 +32,10 @@ export default {
     closable: {
       type: Boolean,
       default: false,
+    },
+    intentCount: {
+      type: Boolean,
+      default: true,
     },
   },
 };
@@ -51,7 +59,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-            &__countStyle{
+            &__count-style{
             font-size: 12px;
             font-weight: bold;
             border-radius: 1rem;

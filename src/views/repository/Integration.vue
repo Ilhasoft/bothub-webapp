@@ -13,21 +13,16 @@
         <div class="repository-analyze-text-header">
           <div class="repository-analyze-text-header-field">
             <p><strong>URL:</strong></p>
-              <highlighted-code
-code-class="plaintext"
-class="t">
-
-{{ repository.nlp_server }}v2/parse/
-
-
-</highlighted-code>
+              <highlighted-code code-class="plaintext">
+                {{ repository.nlp_server }}v2/parse/
+              </highlighted-code>
           </div>
           <div class="repository-analyze-text-header-field">
             <p><strong>{{ $t('webapp.analyze_text.method_send') }}</strong></p>
-            <highlighted-code code-class="plaintext">{
-  "language":"[{{ $t('webapp.analyze_text.language_code') }}]"
-  "text": "[{{ $t('webapp.analyze_text.text_to_analyze') }}]"
-}
+            <highlighted-code code-class="json">{
+                "language":"[{{ $t('webapp.analyze_text.language_code') }}]"
+                "text": "[{{ $t('webapp.analyze_text.text_to_analyze') }}]"
+              }
             </highlighted-code>
           </div>
         </div>
@@ -100,8 +95,8 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import HighlightedCode from '@/components/shared/HighlightedCode';
-import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
+import RepositoryBase from './Base';
 
 
 export default {
@@ -131,7 +126,7 @@ export default {
             confidence: 0.30565376061360666,
           },
         ],
-        labels_list: [
+        groups_list: [
           'animal',
         ],
         entities_list: [],
@@ -212,9 +207,17 @@ export default {
 @import '~@/assets/scss/variables.scss';
 
 .repository-analyze-text {
+    font-family: $font-family;
 
   &__title{
     margin-bottom: $between-subtitle-content;
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
+    }
   }
 
   &__item {

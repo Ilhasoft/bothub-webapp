@@ -11,6 +11,7 @@ import EvaluateExample from './evaluate-example';
 import Translate from './translate';
 import CachedFetch from './cached-fetch';
 import Entity from './entity';
+import Intent from './intent';
 import News from './news';
 import Tutorial from './tutorial';
 import External from './external';
@@ -32,6 +33,7 @@ const store = new Vuex.Store({
     News,
     Tutorial,
     External,
+    Intent,
   },
 });
 

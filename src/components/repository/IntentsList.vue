@@ -17,12 +17,12 @@
           v-if="!editSentences"
           ref="editIntentEvent"
           class="intent-list__content__button-edit"
-          @click.native="editOptionsIntent()">{{ $t('webapp.intent.edit_button') }}</b-button>
+          @click="editOptionsIntent()">{{ $t('webapp.intent.edit_button') }}</b-button>
         <b-button
           v-else
           ref="saveIntentEvent"
           class="intent-list__content__button-save"
-          @click.native="saveEdition()">{{ $t('webapp.intent.save_button') }}</b-button>
+          @click="saveEdition()">{{ $t('webapp.intent.save_button') }}</b-button>
       </div>
     </div>
     <div class="intent-list__header__options">

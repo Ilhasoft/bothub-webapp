@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewExampleForm.vue renders correctly 1`] = `
+<div>
+  <form class="columns wrapper is-vcentered is-variable is-2">
+    <div class="column is-three-fifths">
+      <b-field>
+        <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-training-step-1" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text" size="normal">
+          <language-append-select-input-stub dropdowndirection="is-bottom-left" class="language-append"></language-append-select-input-stub>
+        </example-text-with-highlighted-entities-input-stub>
+      </b-field>
+    </div>
+    <div class="column">
+      <b-field id="tour-training-step-4" is-previous-disabled="true" is-step-blocked="true">
+        <b-autocomplete placeholder="some specific text" data="" open-on-focus="true" keep-first="true" dropdown-position="bottom"></b-autocomplete>
+      </b-field>
+    </div>
+    <div class="column is-narrow">
+      <b-field>
+        <b-tooltip is-active="true" label="some specific text, some specific text" type="is-dark">
+          <b-button id="tour-training-step-5" is-previous-disabled="true" is-next-disabled="true" disabled="true" is-step-blocked="true" type="is-primary" native-type="submit">some specific text</b-button>
+        </b-tooltip>
+      </b-field>
+    </div>
+  </form>
+  <div class="columns is-variable is-1">
+    <div class="column is-three-fifths">
+      <b-field>
+        <entities-input-stub value="" repository="[object Object]" text="" availableentities="" entitiesforedit="" available-labels=""></entities-input-stub>
+      </b-field>
+    </div>
+  </div>
+</div>
+`;

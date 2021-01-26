@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TranslateList.vue renders correctly 1`] = `
+<div repository="[object Object]">
+  <div class="repository-translate__list__options">
+    <div class="repository-translate__list__options__check">
+      <b-checkbox></b-checkbox> <span>some specific text</span>
+    </div>
+    <div class="repository-translate__list__options__buttons">
+      <b-button type="is-primary" icon-right="pencil"></b-button>
+      <b-button type="is-primary" icon-right="delete"></b-button>
+      <b-tooltip label="some specific text">
+        <b-button type="is-primary" icon-right="check-bold" style="display: none;"></b-button>
+      </b-tooltip>
+      <b-button type="is-primary" icon-right="close-thick" style="display: none;"></b-button>
+    </div>
+  </div>
+  <!---->
+</div>
+`;

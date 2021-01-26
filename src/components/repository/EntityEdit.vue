@@ -272,11 +272,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
-  .entity-edit {
+.entity-edit {
   &__title {
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: $font-weight-medium;
+    font-family: $font-family;
+    color: $color-fake-black;
   }
 
   &__button {
@@ -309,9 +312,11 @@ export default {
     }
   }
 }
+
 .tooltipStyle::after {
   font-size: 12px;
   line-height: 13px;
   padding: 1rem 0.5rem;
+  font-family: $font-family;
 }
 </style>

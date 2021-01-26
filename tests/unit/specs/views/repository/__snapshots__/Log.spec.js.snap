@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RepositoryLog.vue renders correctly 1`] = `
+<repository-view-base-stub quicktest="true">
+  <div>
+    <b-notification class="is-info">
+      some specific text
+    </b-notification>
+    <login-form-stub hideforgotpassword="true"></login-form-stub>
+  </div>
+  <!---->
+</repository-view-base-stub>
+`;

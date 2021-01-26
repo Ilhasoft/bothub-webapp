@@ -2,7 +2,7 @@
   <div class="boarding">
     <div class="boarding__header">
       <img
-        src="@/assets/imgs/logo-onboarding.svg"
+        src="@/assets/imgs/logo-new.svg"
         class="boarding__header__image"
         @click="goToLandingPage">
     </div>

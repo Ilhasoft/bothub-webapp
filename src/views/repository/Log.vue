@@ -60,10 +60,10 @@ import AuthorizationRequestNotification from '@/components/repository/Authorizat
 import LoginForm from '@/components/auth/LoginForm';
 import FilterEvaluateExample from '@/components/repository/repository-evaluate/example/FilterEvaluateExample';
 import { LANGUAGES } from '@/utils';
-import RepositoryBase from './Base';
 import Tour from '@/components/Tour';
 
 import IntentModal from '@/components/repository/IntentModal';
+import RepositoryBase from './Base';
 
 export default {
   name: 'RepositoryLog',
@@ -117,7 +117,6 @@ export default {
         limit: this.perPage,
         query: { repository: this.repositoryUUID },
       });
-      this.versionsList = this.versionsList;
       this.versionsList.getAllItems();
     },
   },
@@ -150,8 +149,17 @@ export default {
     vertical-align: middle;
   }
   .repository-log {
+    font-family: $font-family;
+
     &__header {
       margin-bottom: 3.5rem;
+
+      h1 {
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
+      }
     }
 
     &__icon {

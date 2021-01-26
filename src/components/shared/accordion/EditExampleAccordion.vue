@@ -38,6 +38,7 @@
           type="is-danger" />
       </form>
     </div>
+
     <div
       slot="options"
       class="edit-sentence__options">
@@ -95,11 +96,11 @@
 </template>
 
 <script>
-import EditExampleBase from './EditExampleBase';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import LanguageBadge from '@/components/shared/LanguageBadge';
 import ExampleEntitySmallInput from '@/components/example/ExampleEntitySmallInput';
+import EditExampleBase from './EditExampleBase';
 
 export default {
   name: 'EditExampleAccordion',

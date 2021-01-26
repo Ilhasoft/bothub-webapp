@@ -147,6 +147,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -154,8 +156,8 @@ export default {
     border-radius: 6px;
 
     &__dark {
-      background-color: #F5F5F5;
-      border: 1px solid #F5F5F5;
+      background-color: $color-fake-white;
+      border: 1px solid $color-fake-white;
     }
 
     &__header {
@@ -163,6 +165,7 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
+      font-family: $font-family;
     }
 
     &__icon {

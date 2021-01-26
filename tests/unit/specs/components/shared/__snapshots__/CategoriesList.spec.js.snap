@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoriesList.vue renders correctly 1`] = `
+<div class="categories-list">
+  <b-field class="categories-list__field">
+    <b-autocomplete keep-first="true" open-on-focus="true" data="" placeholder="some specific text" dropdown-position="bottom" size="normal"></b-autocomplete>
+  </b-field>
+</div>
+`;
