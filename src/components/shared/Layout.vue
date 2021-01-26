@@ -48,7 +48,7 @@
                 </b-button>
               </router-link>
             </div>
-            <div
+            <!-- <div
               v-if="authenticated && tutorialEnabled"
               class="layout__header__icon-tutorial--center">
               <b-icon
@@ -57,7 +57,7 @@
                 icon="help-circle"
                 @click.native="openBeginnerTutorialModal()"
               />
-            </div>
+            </div> -->
             <div
               v-if="authenticated">
               <b-dropdown position="is-bottom-left">
@@ -270,21 +270,44 @@ export default {
     }
       &__center {
         width: 50%;
+        @media screen and (max-width: $mobile-width * 1.5) {
+          width: 40%;
+        }
+        @media screen and (max-width: $mobile-width * 1.2) {
+          width: 30%;
+        }
+        @media screen and (max-width: $mobile-width) {
+          width: 50%;
+        }
       }
 
       &__fields{
         display: flex;
         justify-content: center;
-        width: 25%
-
+        width: 25%;
+        @media screen and (max-width: $mobile-width * 1.5) {
+          width: 30%;
+        }
+        @media screen and (max-width: $mobile-width * 1.2) {
+          width: 35%;
+        }
+        @media screen and (max-width: $mobile-width) {
+          width: 15%;
+        }
       }
     }
 
     &__options {
-      width: 100%;
+      width: 85%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @media screen and (max-width: $mobile-width * 1.5) {
+          width: 100%;
+      }
+      @media screen and (max-width: $mobile-width) {
+        justify-content: center;
+      }
 
       strong {
         letter-spacing: 0.8px;

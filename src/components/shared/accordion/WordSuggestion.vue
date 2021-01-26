@@ -19,18 +19,18 @@
         v-if="editing"
         icon="check-bold"
         size="is-small"
-        class="text-color-grey-dark word-suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__icon"
         @click.native="saveEdition()" />
       <b-icon
         v-else
         icon="pencil"
         size="is-small"
-        class="text-color-grey-dark word-suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__icon"
         @click.native="editPhrase()" />
       <b-icon
         icon="delete"
         size="is-small"
-        class="text-color-grey-dark word-suggestion-accordion__icons__style"
+        class="text-color-grey-dark word-suggestion-accordion__icons__icon"
         @click.native="deletePhrase()" />
     </div>
   </div>
@@ -126,12 +126,17 @@ export default {
 
     &__icons{
         margin-right: 1rem;
+        width: 8%;
+        display: flex;
+        justify-content: space-between;
 
-        &__style{
+        &__icon{
             cursor: pointer;
-        }
-        &__style:hover{
-            color: $color-fake-grey;
+            color: $color-grey-dark;
+          &:hover{
+              color: $color-fake-grey;
+              transition: 1s;
+          }
         }
 
     }
