@@ -7,7 +7,7 @@ BotHub is an open platform for predicting, training and sharing NLU (Natural Lan
 
 With BotHub, you can not only create NLP datasets, but you can also access, use and evolve datasets that were already built by other users in the community!
 
-These collaboration methods + integration options makes it easier for the user to apply NLU concepts in different platforms and contexts.
+These collaboration methods + integration options make it easier for the user to apply NLU concepts in different platforms and contexts.
 </p>
 
 <p align="center">
@@ -50,7 +50,7 @@ First, clone this repository
 
 ## Development Workflow
 
-To start running bothub use this commands
+To start running bothub, use these commands:
 
 > Use ```yarn``` commands to ```install```, ```start```, ```build```, ```lint``` and ```test-watch```.
 
@@ -93,7 +93,7 @@ You can set environment variables in your OS or write on .env file.
 
 ### Guidelines
 
-If you want to contribute with bothub's projects we made a guideline to help you. see here [contributing guidelines](https://github.com/bothub-it/bothub-webapp/blob/master/CONTRIBUTING.md) for the appropriate contribution.
+If you want to contribute with bothub's projects, we made a guideline to help you. See here [contributing guidelines](https://github.com/bothub-it/bothub-webapp/blob/master/CONTRIBUTING.md) for the appropriate contribution.
 
 ## License
 
