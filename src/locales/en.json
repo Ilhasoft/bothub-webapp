@@ -137,7 +137,7 @@
       "raw_subtitle": "Analyze the confidentiality on each intention identified to understand the result of the quick test"
     },
     "evaluate": {
-      "results": "Load a previous test result",
+      "results": "Results",
       "description": "Every time you run a test, your results will be saved here for future reference. <br><br> You can select two tests to compare results.",
       "you_can_not_edit": "You can not edit this repository",
       "not_have_results": "You do not have results yet",

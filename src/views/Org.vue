@@ -227,15 +227,15 @@ export default {
       paymentEnabled: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED,
       repositoryLists: {
         org: { empty: false },
-        using: { empty: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        using: { empty: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
         { label: this.$t('webapp.orgs.information'), value: 0 },
         { label: this.$t('webapp.orgs.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
-        { label: this.$t('webapp.orgs.reports.title'), value: 3 },
-        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: !process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.activities.title'), value: 2, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.reports.title'), value: 3, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.orgs.payment.title'), value: 4, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
@@ -359,8 +359,13 @@ h1 {
             max-width: 56.25rem;
             font-size: 1.75rem;
             font-weight: bold;
-            padding: 0 1rem;
+            padding: 0 8rem;
             margin: 0 auto;
+
+            @media screen and (max-width: $mobile-width) {
+                text-align: center;
+                padding: 0 3rem;
+            }
         }
 
         &__content {
@@ -466,7 +471,7 @@ h1 {
         }
         &__edit {
           max-width: 40rem;
-          margin-top: 1.563rem;
+          margin: 1.563rem auto 0;
           padding: 0 0 4rem 0;
           &__content {
             max-width: 56.25rem;

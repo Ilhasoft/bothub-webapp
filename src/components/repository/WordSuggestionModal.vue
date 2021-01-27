@@ -237,7 +237,7 @@ export default {
     border-radius: 6px;
 
     h3{
-      font-weight: $font-weight-bolder;
+      font-weight: $font-weight-medium;
       font-size: 1.75rem;
     }
 
