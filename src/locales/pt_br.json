@@ -137,7 +137,7 @@
       "raw_subtitle": "Analise a confiança em cada intenção identificada para entender o resultado do teste rápido"
     },
     "evaluate": {
-      "results": "Carregue um resultado de teste anterior",
+      "results": "Resultados",
       "description": "Cada vez que você executa um teste, seus resultados serão salvos aqui para referência futura. <br><br> Você pode selecionar dois testes para comparar os resultados.",
       "you_can_not_edit": "Você não pode editar essa inteligência",
       "not_have_results": "Você não tem resultados ainda",

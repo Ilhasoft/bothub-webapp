@@ -174,11 +174,11 @@ export default new Router({
           name: 'repository-test-manual',
           component: RepositoryEvaluateManual,
         },
-        {
-          path: ':ownerNickname/:slug/evaluate/automatic',
-          name: 'repository-test-automatic',
-          component: RepositoryEvaluateAutomatic,
-        },
+        // {
+        //   path: ':ownerNickname/:slug/evaluate/automatic',
+        //   name: 'repository-test-automatic',
+        //   component: RepositoryEvaluateAutomatic,
+        // },
         {
           path: ':ownerNickname/:slug/log/',
           name: 'repository-log',

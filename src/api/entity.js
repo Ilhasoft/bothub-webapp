@@ -16,6 +16,17 @@ export default {
     );
   },
 
+  editGroupName(name, groupId, repositoryUUID, version){
+    return request.$http.put(
+      `v2/repository/entity/group/${groupId}/`,
+      {
+        value: name,
+        repository: repositoryUUID,
+        repository_version: version,
+      },
+    );
+  },
+
   deleteGroup(groupUuid) {
     return request.$http.delete(`v2/repository/entity/group/${groupUuid}/`);
   },

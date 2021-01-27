@@ -78,14 +78,14 @@
               :active="checkSelectedMenu('repository-test-manual')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-test-manual', hideDropdown: false})"/>
-            <b-menu-item
+            <!-- <b-menu-item
               :to="{ name: 'repository-test-automatic' }"
               :label="$t('webapp.menu.test-automatic')"
               :active="checkSelectedMenu('repository-test-automatic')"
               tag="router-link"
               @click.native="setSelectMenu(
                 {name: 'repository-test-automatic', hideDropdown: false}
-            )"/>
+            )"/> -->
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"

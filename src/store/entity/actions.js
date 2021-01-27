@@ -7,6 +7,10 @@ export default {
     return entity.editEntity(entityId, name, groupId, repositoryVersion);
   },
 
+  async editGroup(store, { name, groupId, repositoryId, version }) {
+    return entity.editGroupName(name, groupId, repositoryId, version);
+  },
+
   async addGroup(store, { name, repositoryId, version }) {
     return entity.addGroup(name, repositoryId, version);
   },
