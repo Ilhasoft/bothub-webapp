@@ -230,8 +230,9 @@
 
           <div v-show="!!translate.to">
             <train
-              v-if="repository"
               ref="train"
+              :key="update"
+              :show-button="getRequirements.ready_for_train"
               :repository="repository"
               :version="getSelectedVersion"
               :authenticated="authenticated"
