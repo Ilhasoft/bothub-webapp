@@ -14,7 +14,6 @@ exports[`Layout.vue loading renders correctly 1`] = `
         <div class="layout__header__options">
           <!---->
           <!---->
-          <!---->
           <div class="layout__header__options__buttons">
             <b-button expanded="" class="layout__header__options__buttons__btn">some specific text</b-button>
             <b-button expanded="" type="is-primary" class="layout__header__options__buttons__btn hide-mobile">some specific text</b-button>
@@ -38,7 +37,6 @@ exports[`Layout.vue renders correctly 1`] = `
       <!---->
       <div class="layout__header__container__fields">
         <div class="layout__header__options">
-          <!---->
           <!---->
           <!---->
           <div class="layout__header__options__buttons">

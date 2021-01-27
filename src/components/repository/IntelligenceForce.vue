@@ -1,11 +1,9 @@
 <template>
   <div class="intelligence-force">
-    <h2>
-      <strong>
-        {{ $t('webapp.summary.intelligence_force') }}:
-      </strong>
-      {{ relevanceProgress }}
-    </h2>
+    <div class="intelligence-force__title">
+    <h2>{{ $t('webapp.summary.intelligence_force') }}: </h2>
+      <span>{{ relevanceProgress }}</span>
+    </div>
     <div
       class="intelligence-force__relevance__progress">
       <div
@@ -68,12 +66,18 @@ export default {
         border: 1px solid $color-border;
         height: 147px;
 
-        h2 {
-          font-family: $font-family;
-          color: $color-fake-black;
-          font-size: 1.75rem;
-          margin-bottom:0.6rem;
+        &__title{
+            display: flex;
+            font-size: 1.75rem;
+          h2 {
+            font-family: $font-family;
+            color: $color-fake-black;
+            margin-bottom:0.6rem;
+            font-weight: $font-weight-medium;
+            margin-right: 0.6rem;
+          }
         }
+
 
     &__relevance {
       display: flex;

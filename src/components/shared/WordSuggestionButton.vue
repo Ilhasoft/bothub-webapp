@@ -3,7 +3,7 @@
     <b-icon
       icon="alpha-s-box"
       custom-size="mdi-24px"
-      class="text-color-grey-dark suggestion-icon"
+      class="suggestion-icon"
       @click.native.stop="openSuggestionModal()"/>
   </div>
 </template>
@@ -48,9 +48,12 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 
-.suggestion-icon:hover{
+.suggestion-icon {
+  color: $color-grey-dark;
+  &:hover {
    color: $color-fake-grey;
    transition: 1s;
+  }
 }
 
 </style>

@@ -28,9 +28,9 @@ exports[`EntityEdit renders correctly 1`] = `
           some specific text
         </span></span></div>
     <!---->
-    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="25"></badges-card-drag-drop-stub>
-    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" closable="true" identifier="66"></badges-card-drag-drop-stub>
+    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="3" closable="true" identifier="25" examplename="Animal"></badges-card-drag-drop-stub>
+    <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="3" closable="true" identifier="66" examplename="Flower"></badges-card-drag-drop-stub>
   </div>
-  <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="0" dark="true" identifier="ungrouped"></badges-card-drag-drop-stub>
+  <badges-card-drag-drop-stub title="some specific text" list="[object Object],[object Object],[object Object]" examplescount="3" dark="true" identifier="ungrouped" examplename=""></badges-card-drag-drop-stub>
 </div>
 `;

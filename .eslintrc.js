@@ -38,6 +38,10 @@ module.exports = {
     'vue/no-unused-components': 'off',
     'no-unused-vars': 'off',
     'import/no-unresolved': 'off',
+    'space-before-blocks': 'off',
+    'object-curly-newline': 'off',
+    'comma-dangle': 'off',
+    'semi': 'off',
     'no-multiple-empty-lines': [2, { max: 2 }],
     'import/extensions': ['error', 'always', {
       js: 'never',
