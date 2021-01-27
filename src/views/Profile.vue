@@ -99,7 +99,7 @@
             class="profile__repositories__separator" />
         </div>
 
-        <div v-show="!repositoryLists.using.empty">
+        <div v-show="repositoryLists.using.empty">
           <h1 class="repository__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
           <paginated-list
             v-if="repositoryLists.using"
