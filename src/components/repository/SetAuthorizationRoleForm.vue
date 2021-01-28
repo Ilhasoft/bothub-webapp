@@ -1,23 +1,19 @@
 <template>
   <form @submit.prevent="onSubmit()">
-    <div class="columns">
-      <div class="column is-three-fifths">
+    <div class="authorization">
+      <div class="authorization__user-field">
         <p><strong>{{ $t('webapp.settings.users') }}</strong></p>
         <select-users-input v-model="usersProfile" />
       </div>
-      <div class="column is-one-fifth">
+      <div class="authorization__user-role">
         <p><strong>{{ $t('webapp.settings.role') }}</strong></p>
         <role-select v-model="role" />
       </div>
-      <div class="column is-one-fifth">
-        <p>&nbsp;</p>
         <b-button
           :disabled="usersProfile.length === 0 || !role"
-          class="submit-button"
           type="is-primary"
           native-type="submit"
-          primary>{{ $t('webapp.settings.invite') }}</b-button>
-      </div>
+          class="authorization__send-authorization">{{ $t('webapp.settings.invite') }}</b-button>
     </div>
   </form>
 </template>
@@ -91,8 +87,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
 
-  .submit-button {
-    min-width: 100%;
+.authorization {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    @media screen and (max-width: $mobile-width) {
+      flex-direction: column;
+    }
+  &__user-field {
+    width: 50%;
+    @media screen and (max-width: $mobile-width) {
+      width: 100%;
+    }
   }
+
+  &__user-role {
+    width: 30%;
+    @media screen and (max-width: $mobile-width) {
+      width: 100%;
+    }
+  }
+
+  &__send-authorization {
+    margin-top: 1.3rem;
+  }
+}
+
 </style>
