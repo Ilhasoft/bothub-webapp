@@ -40,7 +40,6 @@
             :placeholder="$t('webapp.trainings.intent')"
             :data="filteredData"
             :open-on-focus="true"
-            :keep-first="true"
             dropdown-position="bottom"
           />
         </b-field>
@@ -48,7 +47,7 @@
       <div class="column is-narrow">
         <b-field>
           <b-tooltip
-            :is-active="!isValid && validationErrors.length > 0"
+            :active="!isValid && validationErrors.length > 0"
             :label="validationErrors.join(', ')"
             type="is-dark">
             <b-button

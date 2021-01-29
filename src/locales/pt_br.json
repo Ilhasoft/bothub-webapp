@@ -528,7 +528,7 @@
       "train": "Treinar",
       "suggestion": "Sugestões",
       "test": "Testar",
-      "test-manual": "Manual",
+      "test-manual": "Frases",
       "test-automatic": "Automático",
       "results": "Resultados",
       "inbox": "Inbox",
@@ -601,6 +601,7 @@
       "select_phrase":"Selecione uma frase",
       "select_all":"Selecionar todos",
       "error": "Erro",
+      "send_to_evaluate":"Intenção e frase já existem",
       "add_log": {
         "add": "Adicionar",
         "close": "Fechar"
