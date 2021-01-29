@@ -3,7 +3,7 @@
 exports[`TranslationItem.vue renders correctly 1`] = `
 <div class="translation">
   <div class="translation-text">
-    <div class="columns is-mobile">
+    <div class="columns is-mobile translation-text__field">
       <div class="column">
         <highlighted-text-stub text="oi" entities="" failed="" size="large"></highlighted-text-stub>
       </div>
@@ -12,9 +12,9 @@ exports[`TranslationItem.vue renders correctly 1`] = `
   </div>
   <!---->
   <div class="translation-infos level is-mobile">
-    <div class="level-left">
-      <div class="level-item"><strong>some specific text&nbsp;</strong> <span>en&nbsp;</span>
-        <flag-stub language="en"></flag-stub> <strong>&nbsp;</strong> <strong>some specific text&nbsp;</strong> <span>pt&nbsp;</span>
+    <div class="level-left translation-infos__container">
+      <div class="level-item translation-infos__container__text"><strong>some specific text&nbsp;</strong> <span>English&nbsp;</span>
+        <flag-stub language="en"></flag-stub> <strong>&nbsp;</strong> <strong>some specific text&nbsp;</strong> <span>Portuguese&nbsp;</span>
         <flag-stub language="pt"></flag-stub>
       </div>
       <div class="level-item has-text-grey-light">
