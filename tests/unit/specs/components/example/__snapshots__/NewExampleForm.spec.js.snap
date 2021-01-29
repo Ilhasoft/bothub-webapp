@@ -12,12 +12,12 @@ exports[`NewExampleForm.vue renders correctly 1`] = `
     </div>
     <div class="column">
       <b-field id="tour-training-step-4" is-previous-disabled="true" is-step-blocked="true">
-        <b-autocomplete placeholder="some specific text" data="" open-on-focus="true" keep-first="true" dropdown-position="bottom"></b-autocomplete>
+        <b-autocomplete placeholder="some specific text" data="" open-on-focus="true" dropdown-position="bottom"></b-autocomplete>
       </b-field>
     </div>
     <div class="column is-narrow">
       <b-field>
-        <b-tooltip is-active="true" label="some specific text, some specific text" type="is-dark">
+        <b-tooltip active="true" label="some specific text, some specific text" type="is-dark">
           <b-button id="tour-training-step-5" is-previous-disabled="true" is-next-disabled="true" disabled="true" is-step-blocked="true" type="is-primary" native-type="submit">some specific text</b-button>
         </b-tooltip>
       </b-field>
