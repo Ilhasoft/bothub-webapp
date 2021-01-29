@@ -13,7 +13,6 @@ exports[`ExampleAccordionWithTranslations.vue renders correctly 1`] = `
     &nbsp; true
   </div>
   <div class="example-item__faded example-item__options">
-    <word-suggestion-button-stub getsentence="[object Object]" style="display: none;"></word-suggestion-button-stub>
     <b-icon icon="pencil" size="is-small" class="clickable example-item__options__icon"></b-icon>
     <b-icon size="is-small" icon="delete" class="clickable example-item__options__icon"></b-icon>
   </div>
