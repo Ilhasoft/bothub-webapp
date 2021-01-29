@@ -1,7 +1,7 @@
 <template>
   <div class="translation">
     <div class="translation-text">
-      <div class="columns is-mobile">
+      <div class="columns is-mobile translation-text__field">
         <div class="column">
           <highlighted-text
             :text="currentText"
@@ -42,8 +42,8 @@
       />
     </div>
     <div class="translation-infos level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
+      <div class="level-left translation-infos__container">
+        <div class="level-item translation-infos__container__text">
           <strong>{{ $t('webapp.translate.translated_from') }}&nbsp;</strong>
           <span>{{ from_language | languageVerbose }}&nbsp;</span>
           <flag :language="from_language" />
@@ -62,9 +62,10 @@
         <div class="level-item">
           <a
             :href="`#delete-translation-${id}`"
-            class="has-text-danger"
+            class="delete-icon"
             @click.prevent="deleteThisTranslation()">
-            <b-icon icon="delete" />
+            <b-icon icon="delete"
+              class="level-left translation-infos__container__icon"/>
           </a>
         </div>
       </div>
@@ -187,6 +188,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
 .translation {
   $radius: 8px;
@@ -210,11 +213,42 @@ export default {
     transition: box-shadow .2s ease;
     padding: 8px 16px;
     margin-bottom: 4px;
+
+    &__field {
+      @media (max-width: $mobile-width) {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
   &-entities,
   &-infos {
     padding: 4px 8px 4px 16px;
+  &__container{
+    width: 35rem;
+    @media (max-width: $mobile-width) {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+    }
+    &__text{
+      display: flex;
+      justify-content: space-between;
+      @media (max-width: $mobile-width) {
+        width: 90%;
+      }
+      @media (max-width: $mobile-width - 150px) {
+        text-align: center;
+        flex-direction: column;
+      }
+    }
+    &__icon {
+      color: $color-grey-dark;
+      margin-right: 0.3rem;
+    }
+  }
   }
 
   &-entities {

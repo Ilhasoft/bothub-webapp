@@ -1,5 +1,6 @@
 import { ROLES } from '.';
 
+import VERBOSE_LANGUAGES from './verbose_languages'
 
 export default (Vue) => {
   /* istanbul ignore next */
@@ -10,6 +11,9 @@ export default (Vue) => {
 
   /* istanbul ignore next */
   Vue.filter('can_t', value => (value ? 'can' : 'can\'t'));
+
+  /* istanbul ignore next */
+  Vue.filter('languageVerbose', lang => VERBOSE_LANGUAGES[lang]);
 
   /* istanbul ignore next */
   Vue.filter('statusCodeVerbose', e => ({
