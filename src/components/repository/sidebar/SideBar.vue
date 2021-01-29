@@ -270,7 +270,6 @@ export default {
       isTrainActive: false,
       selectedMenu: '',
       collapse: true,
-      isSuggestionAvailable: process.env.VUE_APP_BOTHUB_WEBAPP_WORD_PHRASE_SUGGESTION
     };
   },
   computed: {
