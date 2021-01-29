@@ -14,7 +14,6 @@ exports[`SideBar.vue renders correctly 1`] = `
         <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
         <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" size="is-small" id="tour-training-step-0">
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
         </b-menu-item-stub>
         <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" size="is-small" id="tour-evaluate-step-0">
           <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
