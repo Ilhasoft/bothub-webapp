@@ -49,12 +49,13 @@
               :label="$t('webapp.menu.train')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-training', hideDropdown: false})"/>
-            <b-menu-item
+            <!-- <b-menu-item
               :to="{ name: 'repository-suggestion' }"
               :active="checkSelectedMenu('repository-suggestion')"
               :label="$t('webapp.menu.suggestion')"
               tag="router-link"
-              @click.native="setSelectMenu({name: 'repository-suggestion', hideDropdown: false})"/>
+              @click.native="setSelectMenu({name: 'repository-suggestion',
+              hideDropdown: false})"/> -->
           </b-menu-item>
 
 
@@ -269,6 +270,7 @@ export default {
       isTrainActive: false,
       selectedMenu: '',
       collapse: true,
+      isSuggestionAvailable: process.env.VUE_APP_BOTHUB_WEBAPP_WORD_PHRASE_SUGGESTION
     };
   },
   computed: {
