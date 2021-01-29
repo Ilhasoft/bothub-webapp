@@ -601,6 +601,7 @@
       "remove_log_button": "Delete Sentece",
       "select_phrase":"Select a phrase",
       "select_all":"Select all",
+      "send_to_evaluate":"Intent and sentence already exist",
       "error": "Error",
       "add_log": {
         "add": "Add",
