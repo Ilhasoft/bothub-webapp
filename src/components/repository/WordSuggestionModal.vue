@@ -8,7 +8,12 @@
           icon="close"
           @click.native="closeModal()"/>
       </div>
+      <div class="modal-style__container__header">
       <h3>{{ $t('webapp.word_suggestion.title') }}</h3>
+        <b-field>
+            <b-tag size="is-medium" type="is-primary">BETA</b-tag>
+        </b-field>
+      </div>
       <p>{{ $t('webapp.word_suggestion.subtitle') }}</p>
       <loading
         v-if="loading"
@@ -236,9 +241,15 @@ export default {
     background-color: $color-white;
     border-radius: 6px;
 
+    &__header {
+      display: flex;
+      align-items: center;
+    }
+
     h3{
       font-weight: $font-weight-medium;
       font-size: 1.75rem;
+      margin-right: 1rem;
     }
 
     &__close{

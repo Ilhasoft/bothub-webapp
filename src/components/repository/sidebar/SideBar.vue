@@ -49,13 +49,13 @@
               :label="$t('webapp.menu.train')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-training', hideDropdown: false})"/>
-            <!-- <b-menu-item
+            <b-menu-item
               :to="{ name: 'repository-suggestion' }"
               :active="checkSelectedMenu('repository-suggestion')"
               :label="$t('webapp.menu.suggestion')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-suggestion',
-              hideDropdown: false})"/> -->
+              hideDropdown: false})"/>
           </b-menu-item>
 
 
