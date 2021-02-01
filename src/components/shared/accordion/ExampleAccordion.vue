@@ -33,10 +33,10 @@
       <div
         class="level-right">
         <div class="level-item">
-          <!-- <word-suggestion-button
+          <word-suggestion-button
             v-show="!editing && suggestion"
             :get-sentence="sentenceDetail"
-            class="example-accordion__suggestion"/> -->
+            class="example-accordion__suggestion"/>
         </div>
       </div>
       <div
@@ -95,7 +95,7 @@ import EditExample from '@/components/shared/accordion/EditExample';
 import SentenceAccordion from '@/components/shared/accordion/SentenceAccordion';
 import HighlightedText from '@/components/shared/HighlightedText';
 import LanguageBadge from '@/components/shared/LanguageBadge';
-// import WordSuggestionButton from '@/components/shared/WordSuggestionButton';
+import WordSuggestionButton from '@/components/shared/WordSuggestionButton';
 
 export default {
   name: 'ExampleAccordion',
@@ -105,7 +105,7 @@ export default {
     EditExample,
     HighlightedText,
     LanguageBadge,
-    // WordSuggestionButton,
+    WordSuggestionButton,
   },
   props: {
     id: {
