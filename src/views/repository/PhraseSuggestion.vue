@@ -12,9 +12,12 @@
             <h2 class="phrase-suggestion__header__title">
               {{ $t('webapp.phrase-suggestion.title') }}
             </h2>
-            <b-field>
-              <b-tag size="is-medium" type="is-primary">BETA</b-tag>
-            </b-field>
+              <b-tooltip :label="$t('webapp.phrase-suggestion.tooltip_alert')"
+            position="is-right" multilined>
+              <b-field>
+                <b-tag size="is-medium" type="is-primary">BETA</b-tag>
+              </b-field>
+            </b-tooltip>
 
             </div>
             <p class="phrase-suggestion__header__subtitle">

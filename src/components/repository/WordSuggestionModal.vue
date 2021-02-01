@@ -10,9 +10,12 @@
       </div>
       <div class="modal-style__container__header">
       <h3>{{ $t('webapp.word_suggestion.title') }}</h3>
-        <b-field>
-            <b-tag size="is-medium" type="is-primary">BETA</b-tag>
-        </b-field>
+        <b-tooltip :label="$t('webapp.word_suggestion.tooltip_alert')"
+          position="is-bottom" multilined>
+          <b-field>
+              <b-tag size="is-medium" type="is-primary">BETA</b-tag>
+          </b-field>
+        </b-tooltip>
       </div>
       <p>{{ $t('webapp.word_suggestion.subtitle') }}</p>
       <loading
