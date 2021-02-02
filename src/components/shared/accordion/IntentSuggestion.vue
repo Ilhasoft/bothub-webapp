@@ -27,7 +27,7 @@
       <b-icon
         icon="pencil"
         size="is-small"
-        class="text-color-grey-dark intent-suggestion-accordion__icons__style"
+        class="intent-suggestion-accordion__icons__style"
         @click.native="!editing ? editPhrase() : ''" />
     </div>
   </div>
@@ -184,6 +184,7 @@ export default {
         margin-right: 1rem;
 
         &__style{
+            color: $color-grey-dark;
             cursor: pointer;
         }
         &__style:hover{
