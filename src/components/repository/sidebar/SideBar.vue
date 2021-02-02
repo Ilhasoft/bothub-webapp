@@ -57,8 +57,6 @@
               @click.native="setSelectMenu({name: 'repository-suggestion',
               hideDropdown: false})"/>
           </b-menu-item>
-
-
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -185,10 +183,23 @@
           class="icon-list"
           icon="home"
           @click.native="routerHandle('repository-summary')" />
-        <b-icon
-          class="icon-list"
-          icon="refresh"
-          @click.native="routerHandle('repository-training')" />
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+          icon="refresh"/>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-training')">
+            {{ $t('webapp.menu.train') }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-suggestion')">
+            {{ $t('webapp.menu.suggestion') }}
+          </b-dropdown-item>
+        </b-dropdown>
         <b-dropdown
           aria-role="list">
           <b-icon
@@ -198,7 +209,7 @@
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-test')">
-            {{ $t('webapp.menu.sentences') }}
+            {{ $t('webapp.menu.test-manual') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
