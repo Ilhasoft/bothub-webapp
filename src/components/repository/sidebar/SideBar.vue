@@ -198,7 +198,7 @@
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-test')">
-            {{ $t('webapp.menu.sentences') }}
+            {{ $t('webapp.menu.test-manual') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
