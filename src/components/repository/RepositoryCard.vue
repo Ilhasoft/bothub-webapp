@@ -24,19 +24,21 @@
               :is="clickable ? 'router-link' : 'span'"
               :to="repositoryDetailsRouterParams">
               <custom-icon
+                :fillMobile="true"
                 :value="repositoryIcon"
                 :class="{'repository-card__title__bagde__icon': true, clickable}" /></component>
           </span>
           <component
             :is="clickable ? 'router-link' : 'span'"
             :to="repositoryDetailsRouterParams">
-          <span class="text-color-fake-black">{{ $attrs.name }}</span></component>
+          <span class="repository-card__title__repository">{{ $attrs.name }}</span></component>
         </div>
 
         <div class="repository-card__info-item">
           <span>{{ $t('webapp.layout.created_by') }}</span>
-          <strong class="medium text-color-primary">{{ getProfile($attrs.owner__nickname).name
-          || $attrs.owner__nickname }}</strong>
+          <strong class="repository-card__info-item__created-by">
+            {{ getProfile($attrs.owner__nickname).name || $attrs.owner__nickname }}
+          </strong>
         </div>
         <div class="repository-card__flags">
           <span
@@ -201,7 +203,6 @@ export default {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      color: white;
     }
   }
 
@@ -223,10 +224,21 @@ export default {
         display: inline-block;
       }
     }
+
+    &__repository{
+      color: $color-fake-black;
+      font-family: $font-family;
+      font-weight: $font-weight-bolder;
+    }
   }
 
   &__info-item {
     color: $color-grey-dark;
+
+    &__created-by{
+      color: $color-primary;
+      font-weight: $font-weight-normal;
+    }
   }
 
   &__flags {

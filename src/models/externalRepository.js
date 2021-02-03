@@ -6,10 +6,9 @@ class ExternalRepository extends ModelBase {
   getRequest(config) {
     const token = this.get('token');
     return super.getRequestExternal(
-      Object.assign(
-        {},
-        config,
-      ), token,
+      ({
+        ...config,
+      }), token,
     );
   }
 

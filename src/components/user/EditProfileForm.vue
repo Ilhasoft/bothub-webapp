@@ -84,14 +84,14 @@ export default {
       return { ...this.data, ...this.groupData };
     },
     filteredSchema() {
-      if (!process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) return this.formSchema;
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED) return this.formSchema;
 
       if (!this.formSchema) return {};
       const { biography, ...schema } = this.formSchema;
       return schema;
     },
     groupSchema() {
-      if (!this.formSchema || !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) return {};
+      if (!this.formSchema || process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED) return {};
       const { biography } = this.formSchema;
       return {
         biography,

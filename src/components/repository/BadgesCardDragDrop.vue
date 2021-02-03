@@ -2,7 +2,30 @@
   <div
     :class="['badges-card', dark ? 'badges-card__dark' : '' ]">
     <div class="badges-card__header">
-      <div v-html="title" />
+      <div  v-show="!edit || !fieldInput">
+        <span v-html="title"></span>
+      <b-icon
+          v-if="edit && identifier !== 'ungrouped'"
+          icon="pencil"
+          size="is-small"
+          class="badges-card__header__edit__icon"
+          @click.native="changeEditingInput()" />
+      </div>
+      <div v-show="edit && fieldInput" class="badges-card__header__edit">
+        <p v-html="$tc('webapp.home.labeled', examplesCount)"></p>
+        <b-field class="badges-card__header__edit__field">
+          <b-input
+            v-model="groupName"
+            size="is-small"/>
+        </b-field>
+      <div class="badges-card__header__edit__icon">
+        <b-icon
+          v-if="edit"
+          icon="check-bold"
+          size="is-small"
+          @click.native="saveChange()" />
+      </div>
+      </div>
       <b-icon
         v-if="closable && edit"
         class="badges-card__icon"
@@ -32,9 +55,6 @@
         @close="close(item)"
         @click.native="goToEntity(item)"/>
     </draggable>
-    <div v-if="examplesCount">
-      <!-- <strong>{{ examplesCount }}</strong> {{ $t('webapp.dashboard.sentences') }} -->
-    </div>
   </div>
 </template>
 
@@ -42,6 +62,8 @@
 import { getEntityColor } from '@/utils/entitiesColors';
 import EntityTag from '@/components/repository/repository-evaluate/example/EntityTag';
 import draggable from 'vuedraggable';
+import { mapActions, mapGetters } from 'vuex';
+import { formatters } from '@/utils';
 
 export default {
   name: 'BadgesCardDragDrop',
@@ -78,6 +100,10 @@ export default {
       type: null,
       default: null,
     },
+    exampleName: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
@@ -85,9 +111,15 @@ export default {
       to: null,
       localList: [],
       targetList: [],
+      groupName: this.exampleName,
+      fieldInput: false
     };
   },
   computed: {
+    ...mapGetters({
+      version: 'getSelectedVersion',
+      repositoryUuid: 'getSelectedVersionRepository'
+    }),
     nameList() {
       return this.localList.map(item => item.value || item);
     },
@@ -96,16 +128,42 @@ export default {
     list() {
       this.updateLocalList();
     },
+    groupName(){
+      this.groupName = formatters.bothubItemKey()(this.groupName.toLowerCase());
+      this.$emit('changedName', this.groupName)
+    }
   },
   mounted() {
     this.updateLocalList();
   },
   methods: {
+    ...mapActions([
+      'editGroup'
+    ]),
     goToEntity(entity) {
       if (this.edit) return;
       // eslint-disable-next-line camelcase
       const { entity_id } = entity;
       this.$router.push({ name: 'repository-entitylist', params: { entity_id } });
+    },
+    changeEditingInput(){
+      this.fieldInput = !this.fieldInput
+    },
+    async saveChange(){
+      this.fieldInput = !this.fieldInput
+      try {
+        await this.editGroup({
+          name: this.groupName,
+          groupId: this.identifier,
+          repositoryId: this.repositoryUuid,
+          version: this.version,
+        });
+      } catch (err) {
+        this.$buefy.toast.open({
+          message: this.$t('webapp.settings.default_error'),
+          type: 'is-danger',
+        });
+      }
     },
     getEntityClass(entity) {
       const color = getEntityColor(
@@ -147,6 +205,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
   .badges-card {
     padding: .75rem;
     margin: .75rem 0;
@@ -154,8 +214,8 @@ export default {
     border-radius: 6px;
 
     &__dark {
-      background-color: #F5F5F5;
-      border: 1px solid #F5F5F5;
+      background-color: $color-fake-white;
+      border: 1px solid $color-fake-white;
     }
 
     &__header {
@@ -163,6 +223,20 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
+      font-family: $font-family;
+
+      &__edit{
+        display: flex;
+
+        p {
+          min-width: 50%;
+        }
+
+        &__icon{
+          color: $color-grey-dark;
+          margin-left: 0.4rem;
+        }
+      }
     }
 
     &__icon {

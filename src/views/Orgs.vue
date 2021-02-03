@@ -69,12 +69,15 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
     .form {
       margin-top: 2.188rem;
 
       &__title {
         margin-bottom: 0;
         color: $color-primary;
+        font-family: $font-family;
         font-size: 1.813rem;
       }
 

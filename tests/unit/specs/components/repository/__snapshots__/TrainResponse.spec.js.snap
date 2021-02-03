@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrainResponse.vue renders correctly 1`] = `
+<b-modal active="true" width="520">
+  <div class="train-response">
+    <div class="train-response__close">
+      <b-icon icon="close" class="train-response__close__icon"></b-icon>
+    </div>
+    <div class="train-response__container">
+      <h2>some specific text</h2>
+      <p>some specific text</p>
+      <b-button type="is-primary" class="train-response__container__button__style"><span>some specific text</span></b-button>
+    </div>
+  </div>
+</b-modal>
+`;

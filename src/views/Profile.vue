@@ -27,8 +27,8 @@
     <div class="profile__content">
       <div
         v-show="selected==0">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.personal_info' ) }} </h1>
         <div class="profile__edit__content">
+        <h1 class="profile__title"> {{ $t('webapp.my_profile.personal_info' ) }} </h1>
           <edit-profile-form class="profile__edit" />
         </div>
       </div>
@@ -41,7 +41,7 @@
             <b-button type="is-primary"> {{ $t('webapp.my_profile.add_repo') }} </b-button>
           </router-link>
         </div>
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
+        <h1 class="repository__title"> {{ $t('webapp.my_profile.intelligences.mine') }} </h1>
         <div
           :class="{
             'profile__search-repository': true,
@@ -83,7 +83,9 @@
         </p>
 
         <div v-show="!repositoryLists.contributing.empty">
-          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.contributing') }} </h1>
+          <h1 class="repository__title">
+            {{ $t('webapp.my_profile.intelligences.contributing') }}
+          </h1>
           <paginated-list
             v-if="repositoryLists.contributing"
             :item-component="repositoryItemElem"
@@ -97,8 +99,8 @@
             class="profile__repositories__separator" />
         </div>
 
-        <div v-show="!repositoryLists.using.empty">
-          <h1 class="profile__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
+        <div v-show="repositoryLists.using.empty">
+          <h1 class="repository__title"> {{ $t('webapp.my_profile.intelligences.using') }} </h1>
           <paginated-list
             v-if="repositoryLists.using"
             :item-component="repositoryItemElem"
@@ -110,7 +112,7 @@
       </div>
       <div
         v-show="selected==2">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.activities.recent' ) }} </h1>
+        <h1 class="repository__title"> {{ $t('webapp.my_profile.activities.recent' ) }} </h1>
         <div class="profile__edit__content">
           <activities class="profile__activities" />
         </div>
@@ -123,16 +125,16 @@
       </div>
       <div
         v-if="selected==4">
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
+        <h1 class="repository__title"> {{ $t('webapp.my_profile.payment.history') }} </h1>
         <div class="profile__edit__content profile__payment__content">
           <payment-history />
         </div>
         <div class="profile__repositories__separator" />
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.info') }} </h1>
+        <h1 class="repository__title"> {{ $t('webapp.my_profile.payment.info') }} </h1>
         <div class="profile__edit__content profile__payment__content">
           <payment-form class="profile__payment__form" />
         </div>
-        <h1 class="profile__title"> {{ $t('webapp.my_profile.payment.coupon_payment') }} </h1>
+        <h1 class="repository__title"> {{ $t('webapp.my_profile.payment.coupon_payment') }} </h1>
         <div class="profile__edit__content profile__payment__content">
           <b-field>
             <b-input
@@ -190,15 +192,15 @@ export default {
       repositoryLists: {
         mine: { empty: false },
         contributing: { empty: false },
-        using: { empty: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        using: { empty: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       },
       repositoriesLimit: 6,
       tabs: [
         { label: this.$t('webapp.my_profile.profile'), value: 0 },
         { label: this.$t('webapp.my_profile.intelligences.title'), value: 1 },
-        { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
-        { label: this.$t('webapp.my_profile.reports.title'), value: 3 },
-        { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: !process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.activities.title'), value: 2, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.reports.title'), value: 3, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
+        { label: this.$t('webapp.my_profile.payment.title'), value: 4, hide: process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED },
       ],
       coupon: null,
     };
@@ -273,7 +275,7 @@ export default {
       this.repositoryLists.contributing = await this.getContributingRepositories(
         this.repositoriesLimit,
       );
-      if (process.env.BOTHUB_WEBAPP_PAYMENT_ENABLED) {
+      if (process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED) {
         this.repositoryLists.using = await this.getUsingRepositories(this.repositoriesLimit);
       }
     },
@@ -286,19 +288,22 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/variables.scss';
 
-$shadow-color: #00000029;
-
-h1 {
-        max-width: 58.25rem;
-        padding: 0 1rem;
-        margin: 0.75rem auto;
-        display: block;
+    .repository {
+      &__title {
+            max-width: 68.875rem;
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin: auto;
+            @media screen and (max-width: $mobile-width) {
+                text-align: center;
+            }
       }
+    }
 
     .profile {
 
         &__avatar {
-            box-shadow: 0px 3px 6px $shadow-color;
+            box-shadow: 0px 3px 6px #00000029;
             background-color: $color-white !important;
 
             &__container {
@@ -322,8 +327,13 @@ h1 {
             max-width: 56.25rem;
             font-size: 1.75rem;
             font-weight: bold;
-            padding: 0 1rem;
+            padding: 0 7rem;
             margin: 0 auto;
+
+              @media screen and (max-width: $mobile-width) {
+                text-align: center;
+                padding: 0 5rem;
+              }
         }
 
         &__search-repository{
@@ -369,12 +379,14 @@ h1 {
 
         &__content {
           padding: 3.875rem 0 6.563rem 0;
+          font-family: $font-family;
         }
 
         &__header {
             background-color: $color-white;
             width: 100%;
             padding: 4rem 0;
+            font-family: $font-family;
             &__content {
                 display: flex;
                 justify-content: center;
@@ -384,7 +396,7 @@ h1 {
             }
             &__title {
               font-size: 1.5rem;
-              margin: 0 0 0.625rem 0;
+              margin: 0 0 0.625rem 1.2rem;
             }
             &__subtitle {
               font-size: 1.125rem;
@@ -393,6 +405,7 @@ h1 {
         }
 
         &__tabs {
+          font-family: $font-family;
           &__container {
             background-color: $color-white;
             width: 100%;
@@ -426,7 +439,7 @@ h1 {
         }
         &__edit {
           max-width: 40rem;
-          margin-top: 1.563rem;
+          margin: 1.563rem auto 0;
           &__content {
             max-width: 56.25rem;
             padding: 0 1rem;

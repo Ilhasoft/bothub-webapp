@@ -7,7 +7,7 @@ export default {
       mockupsPath: __dirname,
       headers: {
         ...((store.getters.authenticated)
-          ? { Authorization: `Token ${store.getters.authToken}` } : {}),
+          ? { Authorization: `${store.getters.authToken}` } : {}),
       },
     };
 

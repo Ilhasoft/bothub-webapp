@@ -39,6 +39,11 @@
             @onAuthorizationRequested="updateRepository(false)" />
         </div>
       </div>
+
+            <hr>
+            <import-intelligence/>
+            <hr>
+
       <div
         v-if="!authenticated">
         <div class="settings__section">
@@ -61,7 +66,7 @@ import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
 import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
 import AuthorizationsList from '@/components/repository/AuthorizationsList';
 import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
-
+import ImportIntelligence from '@/components/repository/ImportIntelligence';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -76,6 +81,7 @@ export default {
     AuthorizationRequestsList,
     LoginForm,
     AuthorizationRequestNotification,
+    ImportIntelligence,
   },
   extends: RepositoryBase,
   methods: {
@@ -136,9 +142,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
   .settings {
+    font-family: $font-family;
+
     &__section {
       margin-bottom: 2rem;
+
+      h1 {
+      font-size: 1.75rem;
+      font-weight: $font-weight-medium;
+      color: $color-fake-black;
+      margin-bottom: $between-title-subtitle;
+      }
     }
   }
 </style>

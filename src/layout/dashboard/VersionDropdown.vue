@@ -112,11 +112,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
+
     .version_dropdown {
         margin: 0 1rem;
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: $font-family;
 
             &__icon {
                 color: #FFFFFF;
@@ -125,9 +130,10 @@ export default {
             }
 
             &__number {
-                color: #12a391;
+                color:$color-primary-dark;
                 font-size: 1.1rem;
-                font-weight: bold;
+                font-family: $font-family;
+                font-weight: $font-weight-medium;
             }
     }
 </style>

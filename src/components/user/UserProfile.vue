@@ -25,7 +25,8 @@ export default {
   },
   computed: {
     profileURL() {
-      return `${process.env.BOTHUB_WEBAPP_BASE_URL}${this.profile.nickname}/`;
+      return `${process.env.VUE_APP_BOTHUB_WEBAPP_BASE_URL}
+      ${this.profile.nickname}/`;
     },
   },
 };

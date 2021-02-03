@@ -225,6 +225,7 @@ export default {
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 0.5rem;
   margin: auto;
+  font-family: $font-family;
 
   &__close{
     width: 100%;

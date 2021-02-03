@@ -8,7 +8,8 @@
     <custom-icon
       :value="icon"
       class="category-item__icon"
-      size="large"/>
+      size="large"
+      :fillPrimary="true"/>
   </div>
 </template>
 

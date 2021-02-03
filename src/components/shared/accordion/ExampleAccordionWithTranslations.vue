@@ -31,7 +31,7 @@
         <entity-tag
           v-for="entity in entities"
           :entity-name="entity.entity"
-          :key="entity.id"
+          :key="entity.entity"
           :highlighted="highlighted === entity.entity"
           :group="entity.group"
           @mouseenter.native.stop="highlighted = entity.entity"
@@ -43,19 +43,24 @@
       slot="options"
       class="example-item__intent example-item__faded">
       <strong class="example-item__faded"> {{ $t('webapp.evaluate.intent') }}: </strong>
-      &nbsp;{{ intent }}
+      &nbsp; {{ intent }}
     </div>
     <div
       slot="options"
       class="example-item__faded example-item__options">
+      <!-- <word-suggestion-button
+        v-show="!editing && isSuggestion"
+        :get-sentence="sentenceDetail"/> -->
       <b-icon
         v-show="!editing"
         :icon="editing ? 'check' : 'pencil'"
-        :class="{ clickable: true, 'icon-disabled': editingTranslation }"
+        :class="{ clickable: true,
+                  'icon-disabled': editingTranslation,
+                  'example-item__options__icon': !editing}"
         size="is-small"
         @click.native.stop="handleEdit" />
       <b-icon
-        class="clickable"
+        class="clickable example-item__options__icon"
         size="is-small"
         icon="delete"
         @click.native.stop="deleteThisExample" />
@@ -102,6 +107,7 @@ import EditExample from '@/components/shared/accordion/EditExample';
 import Loading from '@/components/shared/Loading';
 import EditExampleAccordion from '@/components/shared/accordion/EditExampleAccordion';
 import { mapActions, mapGetters } from 'vuex';
+// import WordSuggestionButton from '@/components/shared/WordSuggestionButton';
 
 export default {
   name: 'ExampleAccordionWithTranslations',
@@ -114,6 +120,7 @@ export default {
     ExampleTranslation,
     EditExampleAccordion,
     Loading,
+    // WordSuggestionButton,
   },
   props: {
     id: {
@@ -139,6 +146,10 @@ export default {
     repository: {
       type: Object,
       default: null,
+    },
+    isSuggestion: {
+      type: Boolean,
+      default: false,
     },
     isAccordionOpen: {
       type: Boolean,
@@ -166,6 +177,15 @@ export default {
     },
     availableEntities() {
       return this.entities.map(entity => entity.entity);
+    },
+    sentenceDetail() {
+      const detail = {
+        id: this.id,
+        text: this.text,
+        intent: this.intent,
+        language: this.language,
+      };
+      return detail;
     },
   },
   watch: {
@@ -248,6 +268,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
     .example-item {
         &__header {
@@ -270,6 +291,11 @@ export default {
 
         &__faded {
             color: $color-grey-dark;
+            font-family: $font-family;
+
+            strong {
+              margin-right: 0.5rem;
+            }
         }
 
         &__intent {
@@ -280,9 +306,14 @@ export default {
 
         &__options {
           display: flex;
+          align-items: center;
           > * {
-            margin-left: 0.25rem;
+            margin-left: 0.40rem;
           }
+            &__icon:hover{
+              color: $color-fake-grey;
+              transition: 1s;
+            }
         }
     }
 </style>

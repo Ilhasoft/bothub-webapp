@@ -251,7 +251,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../../../assets/scss/utilities.scss';
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 
 .entity {
   color: black;

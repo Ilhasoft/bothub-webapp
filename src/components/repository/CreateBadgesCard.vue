@@ -9,6 +9,7 @@
         <span>{{ title }}</span>
         <b-input
           v-model="text"
+          size="is-small"
           class="badges-card__input"
           @keyup.enter.native.prevent.stop="finished"/>
         <b-button

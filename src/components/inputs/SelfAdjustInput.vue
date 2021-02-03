@@ -67,11 +67,10 @@ export default {
       return this.$slots.append;
     },
     inputListeners() {
-      return Object.assign({},
-        this.$listeners,
-        {
-          input: () => {},
-        });
+      return {
+        ...this.$listeners,
+        input: () => {},
+      };
     },
   },
   watch: {

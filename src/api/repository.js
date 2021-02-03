@@ -202,4 +202,27 @@ export default {
       `/v2/repository/train/info/${repositoryUUID}/${version}/`,
     );
   },
+  repositoryMigrateData(repositoryVersion, AuthToken, Language, Classifier) {
+    return request.$http.post(
+      '/v2/repository/repository-migrate/',
+      {
+        repository_version: repositoryVersion,
+        auth_token: AuthToken,
+        language: Language,
+        classifier: Classifier,
+      },
+    );
+  },
+  repositoryUploadRasa(formData, repositoryVersion, repositoryUUID) {
+    return request.$http.put(
+      `/v2/repository/upload-rasa-file/${repositoryUUID}/${repositoryVersion}/`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        responseType: 'arraybuffer',
+      },
+    );
+  },
 };

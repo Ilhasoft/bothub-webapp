@@ -29,15 +29,15 @@ export default {
       default: 0,
     },
     language: {
-      type: '',
+      type: String,
       default: null,
     },
     search: {
-      type: '',
+      type: String,
       default: null,
     },
     limit: {
-      type: '',
+      type: String,
       default: null,
     },
   },

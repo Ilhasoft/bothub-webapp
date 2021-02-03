@@ -17,11 +17,13 @@
       <b-icon
         v-show="!submitting"
         icon="delete"
+        size="is-small"
         class="authorization-item__icon authorization-item__icon--button"
         @click.native="remove()"/>
       <b-icon
         v-show="!submitting"
         icon="pencil"
+        size="is-small"
         class="authorization-item__icon authorization-item__icon--button"
         @click.native="editable = !editable"/>
       <b-icon

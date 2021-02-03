@@ -5,10 +5,10 @@ import store from '../store';
 export default {
   get $http() {
     const client = axios.create({
-      baseURL: process.env.API_BASE_URL,
+      baseURL: process.env.VUE_APP_API_BASE_URL,
       headers: {
         ...(store.getters.authenticated
-          ? { Authorization: `Token ${store.getters.authToken}` } : {}),
+          ? { Authorization: `${store.getters.authToken}` } : {}),
       },
     });
     client.interceptors.response.use(

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginForm.vue renders correctly 1`] = `
+<boarding-layout-stub>
+  <div class="signup">
+    <div class="signup__content">
+      <div class="signup__content__field">
+        <div class="signup__content__field__header">
+          <p>some specific text</p>
+          <b-button type="is-primary" class="signup__content__field__header__createButton">
+            some specific text</b-button>
+        </div>
+        <div class="signup__content__field__forms">
+          <h1>some specific text</h1>
+          <form>
+            <loading-stub></loading-stub>
+            <!---->
+            <p class="signup__content__field__forms__passwordError">
+
+            </p>
+            <div class="field">
+              <div class="control has-text-centered">
+                <b-button expanded="" native-type="submit" class="signup__content__field__forms__button is-primary">some specific text</b-button>
+              </div>
+              <div class="signup__content__field__forms__agree-message"><small>
+                  <router-link-stub to="/terms" tag="a" ariacurrentvalue="page" event="click" class="signup__content__field__forms__terms">
+                    some specific text
+                  </router-link-stub>
+                </small></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer"></div>
+</boarding-layout-stub>
+`;

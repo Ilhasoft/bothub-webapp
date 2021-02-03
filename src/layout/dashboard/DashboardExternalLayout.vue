@@ -1,5 +1,6 @@
 <template>
   <div class="external-dashboard-layout">
+    <weni-notification class="external-dashboard-layout__notification"/>
     <div
       class="external-dashboard-layout__main-panel">
       <div class="external-dashboard-layout__main-panel__header">
@@ -45,11 +46,13 @@
 
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapGetters } from 'vuex';
+import WeniNotification from '@/components/WeniNotification';
 
 export default {
   name: 'DashboardExternalLayout',
   components: {
     CustomIcon,
+    WeniNotification,
   },
   data() {
     return {
@@ -75,34 +78,46 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/variables.scss';
 
 .external-dashboard-layout {
+
+    &__notification{
+    top: 0;
+    position: fixed;
+    z-index: 9;
+  }
 
   &__main-panel {
     width: 100%;
     position: relative;
     float: right;
 
-    &__logo {
-      background: url(~@/assets/imgs/bothub_white.svg) no-repeat;
-      width: 8rem;
-      height: 1.5rem;
-    }
-    &__logo:hover{
-      background: url(~@/assets/imgs/bothub_green.svg) no-repeat;
-    }
+    &__logo{
+    background: url(~@/assets/imgs/logo-new-white.svg) no-repeat;
+    width: 8rem;
+    height: 2.8rem;
+  }
+  &__logo:hover{
+    background: url(~@/assets/imgs/logo-new-sidebars.svg) no-repeat;
+
+  }
 
     &__header {
       position: fixed;
       width: inherit;
       z-index: 9;
       height: 6rem;
+      top: 5.25rem;
       background: #404143;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 7rem 0 5.7rem;
       box-shadow: 0px 3px 6px #00000029;
+      @media screen and (max-width: $mobile-width) {
+        top: 12rem;
+      }
 
     &__right {
       display: flex;

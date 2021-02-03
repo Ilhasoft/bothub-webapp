@@ -53,6 +53,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/variables.scss';
+
   /deep/ strong {
       color: inherit;
     }
@@ -60,4 +62,9 @@ export default {
     .highlighted {
         border: 2px solid red;
     }
+
+    span, strong{
+      font-family: $font-family;
+    }
+
 </style>

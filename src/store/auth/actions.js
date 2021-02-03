@@ -9,8 +9,12 @@ export default {
   },
   async login({ commit, dispatch }, { username, password }) {
     const response = await auth.login(username, password);
-    commit(TYPES.SET_TOKEN, response.data.token);
+    commit(TYPES.SET_TOKEN, `Token ${response.data.token}`);
     dispatch('updateMyProfile');
+  },
+  async externalLogin({ commit }, { token }) {
+    if (!token) return;
+    commit(TYPES.SET_TOKEN, token);
   },
   retriveAuthToken({ commit }) {
     /* istanbul ignore next */

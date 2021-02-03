@@ -31,12 +31,34 @@
             @click.native="setSelectMenu({name: 'repository-summary', hideDropdown: true})"/>
           <b-menu-item
             id="tour-training-step-0"
-            :to="{ name: 'repository-training' }"
-            :label="$t('webapp.menu.training')"
-            :active="checkSelectedMenu('repository-training')"
-            tag="router-link"
+            :active="isTrainActive"
+            :expanded="isTrainActive"
             icon="refresh"
-            @click.native="setSelectMenu({name: 'repository-training', hideDropdown: true})"/>
+            @click="isTrainActive = !isTrainActive">
+            <template
+              slot="label"
+              slot-scope="props">
+              <span class="menu-text">{{ $t('webapp.menu.training') }}</span>
+              <b-icon
+                :icon="props.expanded ? 'caret-down' : 'caret-up'"
+                class="is-pulled-right"/>
+            </template>
+            <b-menu-item
+              :to="{ name: 'repository-training' }"
+              :active="checkSelectedMenu('repository-training')"
+              :label="$t('webapp.menu.train')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-training', hideDropdown: false})"/>
+            <!-- <b-menu-item
+              :to="{ name: 'repository-suggestion' }"
+              :active="checkSelectedMenu('repository-suggestion')"
+              :label="$t('webapp.menu.suggestion')"
+              tag="router-link"
+              @click.native="setSelectMenu({name: 'repository-suggestion',
+              hideDropdown: false})"/> -->
+          </b-menu-item>
+
+
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -52,12 +74,19 @@
                 class="is-pulled-right"/>
             </template>
             <b-menu-item
-              :to="{ name: 'repository-test' }"
-              :label="$t('webapp.menu.sentences')"
-              :active="checkSelectedMenu('repository-test')"
+              :to="{ name: 'repository-test-manual' }"
+              :label="$t('webapp.menu.test-manual')"
+              :active="checkSelectedMenu('repository-test-manual')"
               tag="router-link"
-              @click.native="setSelectMenu({name: 'repository-test', hideDropdown: false})"
-            />
+              @click.native="setSelectMenu({name: 'repository-test-manual', hideDropdown: false})"/>
+            <!-- <b-menu-item
+              :to="{ name: 'repository-test-automatic' }"
+              :label="$t('webapp.menu.test-automatic')"
+              :active="checkSelectedMenu('repository-test-automatic')"
+              tag="router-link"
+              @click.native="setSelectMenu(
+                {name: 'repository-test-automatic', hideDropdown: false}
+            )"/> -->
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"
@@ -169,7 +198,7 @@
           <b-dropdown-item
             aria-role="listitem"
             @click="routerHandle('repository-test')">
-            {{ $t('webapp.menu.sentences') }}
+            {{ $t('webapp.menu.test-manual') }}
           </b-dropdown-item>
           <b-dropdown-item
             aria-role="listitem"
@@ -238,6 +267,7 @@ export default {
       isSettingsActive: false,
       isTestsActive: false,
       isTranslationsActive: false,
+      isTrainActive: false,
       selectedMenu: '',
       collapse: true,
     };
@@ -264,9 +294,14 @@ export default {
       || this.$router.currentRoute.name === 'repository-translations-status') {
         this.isTranslationsActive = true;
       }
-      if (this.$router.currentRoute.name === 'repository-test'
+      if (this.$router.currentRoute.name === 'repository-test-automatic'
+      || this.$router.currentRoute.name === 'repository-test-manual'
       || this.$router.currentRoute.name === 'repository-results') {
         this.isTestsActive = true;
+      }
+      if (this.$router.currentRoute.name === 'repository-training'
+      || this.$router.currentRoute.name === 'repository-suggestion') {
+        this.isTrainActive = true;
       }
     },
     checkSelectedMenu(menu) {
@@ -287,6 +322,7 @@ export default {
       this.isSettingsActive = false;
       this.isTestsActive = false;
       this.isTranslationsActive = false;
+      this.isTrainActive = false;
       this.setInitialSelectedMenu();
     },
   },
@@ -331,6 +367,7 @@ export default {
   z-index: 10;
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
+  font-family: $font-family;
 
   @media screen and (max-width: $mobile-width) {
     top: 12rem;
@@ -342,6 +379,11 @@ export default {
     height: 100%;
     width: $menu-expanded-size + $menu-padding;
     transition: width .1s;
+    font-family: $font-family;
+
+    .side-bar-text {
+      margin-left: 0.3rem;
+    }
 
     &__collapse-button {
       border-radius: 50%;

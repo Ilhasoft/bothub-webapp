@@ -71,7 +71,9 @@
         :key="`${group.group_id}-${needsUpdate}`"
         :list="group.entities"
         :title="$tc('webapp.home.labeled', group.entities.length, { label_value: group.value })"
-        :examples-count="0"
+        :examples-count="group.entities.length"
+        :example-name="group.value"
+        @changedName="group.value = $event"
         :edit="editing"
         closable
         @onMove="moveEntity"
@@ -82,7 +84,7 @@
     <badges-card-drag-drop
       :key="needsUpdate"
       :list="ungrouped"
-      :examples-count="0"
+      :examples-count="ungrouped.length"
       :edit="editing"
       :title="$tc('webapp.home.unlabeled', ungrouped.length)"
       identifier="ungrouped"
@@ -147,6 +149,7 @@ export default {
       'addGroup',
       'deleteEntity',
       'deleteGroup',
+      'editGroup'
     ]),
     showError(error) {
       let message = this.$t('webapp.home.default_error');
@@ -272,11 +275,14 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/variables.scss';
+@import '~@/assets/scss/colors.scss';
 
-  .entity-edit {
+.entity-edit {
   &__title {
     font-size: 1.75rem;
-    font-weight: 700;
+    font-weight: $font-weight-medium;
+    font-family: $font-family;
+    color: $color-fake-black;
   }
 
   &__button {
@@ -309,9 +315,11 @@ export default {
     }
   }
 }
+
 .tooltipStyle::after {
   font-size: 12px;
   line-height: 13px;
   padding: 1rem 0.5rem;
+  font-family: $font-family;
 }
 </style>

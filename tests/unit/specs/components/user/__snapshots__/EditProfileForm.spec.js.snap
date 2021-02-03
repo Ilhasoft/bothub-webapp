@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditProfileForm.vue renders correctly 1`] = `
+<form>
+  <loading-stub></loading-stub>
+  <b-loading></b-loading>
+  <!---->
+  <form-generator-stub schema="[object Object]" errors="[object Object]" showlabels="true" initialdata="[object Object]" grouped="true" hidehelp="true" value="[object Object]"></form-generator-stub>
+  <div><a>
+      some specific text </a>
+    <div class="control has-text-centered">
+      <b-button native-type="submit" type="is-primary" class="submit-button">some specific text</b-button>
+    </div>
+  </div>
+  <b-modal width="489">
+    <div class="change-password">
+      <h1>some specific text</h1>
+      <change-password-form-stub></change-password-form-stub>
+    </div>
+  </b-modal>
+</form>
+`;

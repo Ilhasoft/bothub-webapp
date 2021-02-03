@@ -1,6 +1,5 @@
 import example from '@/api/example';
 import entity from '@/api/entity';
-import _intent from '@/api/intent';
 
 export default {
   async newExample(store, {
@@ -32,7 +31,9 @@ export default {
   searchExamples(store, {
     repositoryUuid, version, query, limit = 20, startCreatedAt, endCreatedAt,
   }) {
-    return example.search(repositoryUuid, version, query, limit, startCreatedAt, endCreatedAt);
+    const response = example.search(repositoryUuid, version,
+      query, limit, startCreatedAt, endCreatedAt);
+    return response;
   },
   async deleteExample(store, { id }) {
     await example.delete(id);
@@ -53,6 +54,10 @@ export default {
     const response = await example.get(id);
     return response;
   },
+  async getExampleSuggestion(store, { id }) {
+    const response = await example.suggestions(id);
+    return response;
+  },
   async getEntities(store, { repositoryUuid, repositoryVersion, value }) {
     const response = await entity.search(repositoryUuid, repositoryVersion, { value });
     return response;
@@ -63,16 +68,6 @@ export default {
     const response = await entity.editEntityName(
       entityId,
       value,
-      repositoryVersion,
-    );
-    return response;
-  },
-  async editIntentName(store, {
-    intentId, text, repositoryVersion,
-  }) {
-    const response = await _intent.editIntentName(
-      intentId,
-      text,
       repositoryVersion,
     );
     return response;

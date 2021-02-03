@@ -26,7 +26,7 @@
         :intent-prediction="item.intent_prediction"
         :entities="item.true_entities || []"
         :added-entities="item.false_positive_entities || []"
-        :swapped-entities="item.swapped_error_entities || []" />
+        :swapped-entities="item.swapped_error_entities || []"/>
       <div class="evaluate-result-example-list__pagination">
         <b-pagination
           v-if="resultExampleList.length > 0"

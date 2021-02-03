@@ -4,7 +4,8 @@
       <div class="repository-translate__list__options__check">
         <b-checkbox
           :disabled="editing"
-          v-model="selectAll"/> {{ $t('webapp.translate.select_all') }}
+          v-model="selectAll"/>
+          <span>{{ $t('webapp.translate.select_all') }}</span>
       </div>
       <div class="repository-translate__list__options__buttons">
         <b-button
@@ -188,7 +189,8 @@ export default {
 <style lang="scss" scoped>
 
 .repository-translate{
-  @import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
 
   &__list{
     margin-left: 0.5rem;
@@ -199,6 +201,7 @@ export default {
         width: 100%;
         display: flex;
         justify-content: space-between;
+        font-family: $font-family;
 
         &__buttons {
           display: flex;

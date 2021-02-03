@@ -18,11 +18,11 @@
       class="versions">
       <div class="version__header">
         <div class="version__header__title__wrapper">
-          <h2>{{ $t('webapp.menu.versions') }}</h2>
+          <h2 class="title">{{ $t('webapp.menu.versions') }}</h2>
         </div>
-        <p> {{ $t('webapp.versions.edit_choose_version') }} </p>
+        <p class="description"> {{ $t('webapp.versions.edit_choose_version') }} </p>
       </div>
-      <RepositoryVersionList
+      <repository-version-list
         :repository="repository"
         :can-edit="repository.authorization.can_contribute"/>
     </div>
@@ -56,3 +56,17 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
+.title{
+  font-size: 1.75rem;
+  font-weight: $font-weight-medium;
+  color: $color-fake-black;
+  margin-bottom: $between-title-subtitle;
+}
+.description {
+  margin-bottom: $between-subtitle-content;
+}
+</style>

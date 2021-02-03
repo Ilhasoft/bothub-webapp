@@ -245,20 +245,36 @@ export default {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
-          await this.newExample({
-            ...data,
-            intent: values.intent,
-            text: values.text,
-            entities: values.entities,
-            isCorrected: this.isCorrected,
-            repositoryVersion: this.version,
-          });
-          this.$buefy.toast.open({
-            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
-            type: 'is-success',
-          });
+          if (this.logData.length > 1){
+            await this.newExample({
+              entities: data.entities,
+              repository: data.repository,
+              intent: values,
+              language: data.language,
+              text: data.text,
+              isCorrected: this.isCorrected,
+              repositoryVersion: this.version,
+            });
+            this.$buefy.toast.open({
+              message: `${data.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+              type: 'is-success',
+            });
+          } else {
+            await this.newExample({
+              ...data,
+              intent: values.intent,
+              text: values.text,
+              entities: values.entities,
+              isCorrected: this.isCorrected,
+              repositoryVersion: this.version,
+            });
+            this.$buefy.toast.open({
+              message: `${values.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
+              type: 'is-success',
+            });
+          }
         } catch (error) {
-          this.showError(error, data);
+          this.showError(error, data, 'training');
         } finally {
           this.loadingLogs = false;
           this.select = false;
@@ -269,29 +285,51 @@ export default {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
-          await this.newEvaluateExample({
-            ...data,
-            intent: values.intent,
-            text: values.text,
-            entities: values.entities,
-            isCorrected: this.isCorrected,
-            repositoryVersion: this.version,
-          });
-          this.$buefy.toast.open({
-            message: `${values.text.bold()} ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
-            type: 'is-success',
-          });
+          if (this.logData.length > 1){
+            await this.newEvaluateExample({
+              entities: data.entities,
+              repository: data.repository,
+              intent: values,
+              language: data.language,
+              text: data.text,
+              isCorrected: this.isCorrected,
+              repositoryVersion: this.version,
+            });
+            this.$buefy.toast.open({
+              message: `${data.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+              type: 'is-success',
+            });
+          } else {
+            await this.newEvaluateExample({
+              ...data,
+              intent: values.intent,
+              text: values.text,
+              entities: values.entities,
+              isCorrected: this.isCorrected,
+              repositoryVersion: this.version,
+            });
+            this.$buefy.toast.open({
+              message: `${values.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
+              type: 'is-success',
+            });
+          }
         } catch (error) {
-          this.showError(error, data);
+          this.showError(error, data, 'evaluate');
         } finally {
           this.loadingLogs = false;
           this.select = false;
         }
       });
     },
-    showError(error, log) {
-      const messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
-      const message = `${log.text.bold()}, ${Array.join(messages, ',')}`;
+    showError(error, log, type) {
+      let messages = ''
+      if (type === 'evaluate'){
+        console.log(error.response)
+        messages = Object.values(error.response.data.non_field_errors).length >= 1 ? this.$t('webapp.inbox.send_to_evaluate') : ''
+      } else {
+        messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
+      }
+      const message = `${log.text.bold()}, ${messages}`;
       this.$buefy.toast.open({
         message,
         type: 'is-danger',

@@ -28,7 +28,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-@import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/colors.scss';
 
 .boarding {
 
@@ -51,8 +51,8 @@ export default {
     top: 0;
 
     &__image{
-      width: 15rem;
-      height: $size-small * 1.3;
+      width: 12rem;
+      height: 3.25rem;
       cursor: pointer;
     }
   }

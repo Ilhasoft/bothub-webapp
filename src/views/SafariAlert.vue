@@ -10,9 +10,8 @@
       <h3 class="safari-alert__content__title">
         {{ $t('webapp.safari_alert.title2') }}
       </h3>
-      <div class="bh-grid">
+      <div class="safari-alert__content__grid">
         <a
-          class="bh-grid__item"
           href="https://www.google.com/intl/pt-BR_ALL/chrome/">
           <img
             src="@/assets/imgs/chrome.svg"
@@ -20,7 +19,6 @@
             class="safari-alert__content__browser-icon">
         </a>
         <a
-          class="bh-grid__item"
           href="https://www.mozilla.org/pt-BR/firefox/new/">
           <img
             src="@/assets/imgs/mozila.svg"
@@ -28,7 +26,6 @@
             class="safari-alert__content__browser-icon">
         </a>
         <a
-          class="bh-grid__item"
           href="https://www.opera.com/pt-br/download">
           <img
             src="@/assets/imgs/opera.svg"
@@ -36,13 +33,13 @@
             class="safari-alert__content__browser-icon">
         </a>
       </div>
-      <bh-button
+      <b-button
         class="safari-alert__content__button"
         size="normal"
-        primary
+        type="is-primary"
         @click="goToLandingPage()">
         {{ $t('webapp.safari_alert.keep_using_safari') }}
-      </bh-button>
+      </b-button>
     </div>
   </div>
 </template>
@@ -72,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bh/src/assets/scss/colors.scss';
+@import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/utilities.scss';
 
 
@@ -84,6 +81,11 @@ export default {
     margin: 4rem auto;
     text-align: center;
     max-width: $max-repository-card-width - 300px;
+
+    &__grid {
+      display: flex;
+      justify-content: space-around;
+    }
 
     &__title {
       margin: 3rem;

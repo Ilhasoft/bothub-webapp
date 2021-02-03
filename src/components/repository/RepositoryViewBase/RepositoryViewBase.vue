@@ -170,9 +170,8 @@ export default {
     $wrapper-width: 100%;
     height: 100%;
     @media screen and (max-width: $mobile-width) {
-      margin-top: 26rem;
+      margin-top: 20rem;
     }
-
 
     &__status-bar {
       background-color: $color-fake-white;

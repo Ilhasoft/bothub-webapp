@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideBar.vue renders correctly 1`] = `
+<div class="sidebar">
+  <div class="sidebar-wrapper">
+    <div class="sidebar-wrapper__collapse-button">
+      <b-icon-stub icon="chevron-left"></b-icon-stub>
+    </div>
+    <b-menu-stub accordion="true" activable="true">
+      <div class="menu-header">
+        <div class="menu-header__logo"></div>
+      </div>
+      <b-menu-list-stub ariarole="" size="is-small">
+        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" size="is-small" id="tour-training-step-0">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" size="is-small" id="tour-evaluate-step-0">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="inbox" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-inbox-step-0" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="translate" animation="slide" tag="a" ariarole="" size="is-small" id="tour-translate-step-0">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+        <b-menu-item-stub label="some specific text" icon="power-plug" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-integrate-step-0" to="[object Object]"></b-menu-item-stub>
+        <b-menu-item-stub icon="cog" animation="slide" tag="a" ariarole="" size="is-small">
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
+        </b-menu-item-stub>
+      </b-menu-list-stub>
+    </b-menu-stub>
+    <div></div>
+  </div>
+</div>
+`;

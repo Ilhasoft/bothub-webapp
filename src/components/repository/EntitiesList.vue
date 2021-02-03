@@ -23,12 +23,12 @@
           v-if="!editSentences"
           ref="editEntityEvent"
           class="entity-list__content__buttonEdit"
-          @click.native="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
+          @click="editOptionsEntity()">{{ $t('webapp.entity.edit_button') }}</b-button>
         <b-button
           v-else
           ref="saveEntityEvent"
           class="entity-list__content__buttonSave"
-          @click.native="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
+          @click="saveEdition()">{{ $t('webapp.entity.save_button') }}</b-button>
       </div>
     </div>
     <div class="entity-list__header__options">

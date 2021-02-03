@@ -87,7 +87,7 @@ export default {
       this.$emit(event, value);
     },
     addAttrs(obj) {
-      return Object.assign({}, obj, this.$attrs);
+      return { ...obj, ...this.$attrs };
     },
   },
 };
