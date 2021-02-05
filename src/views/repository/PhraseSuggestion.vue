@@ -8,9 +8,18 @@
           v-if="repository.authorization.can_contribute"
           class="phrase-suggestion">
           <div class="phrase-suggestion__header">
+            <div class="phrase-suggestion__header__container">
             <h2 class="phrase-suggestion__header__title">
               {{ $t('webapp.phrase-suggestion.title') }}
             </h2>
+              <b-tooltip :label="$t('webapp.phrase-suggestion.tooltip_alert')"
+            position="is-right" multilined>
+              <b-field>
+                <b-tag size="is-medium" type="is-primary">BETA</b-tag>
+              </b-field>
+            </b-tooltip>
+
+            </div>
             <p class="phrase-suggestion__header__subtitle">
               {{ $t('webapp.phrase-suggestion.subtitle') }}
             </p>
@@ -141,12 +150,17 @@ export default {
 .phrase-suggestion{
 
     &__header{
+        &__container{
+          display: flex;
+          align-items: center;
+          margin-bottom: $between-title-subtitle;
+        }
+
         &__title{
-            margin-bottom: $between-title-subtitle;
             font-size: 1.75rem;
             font-weight: $font-weight-medium;
             color: $color-fake-black;
-            margin-bottom: $between-title-subtitle;
+            margin-right: 1rem;
         }
         &__subtitle{
             margin-bottom: $between-subtitle-content

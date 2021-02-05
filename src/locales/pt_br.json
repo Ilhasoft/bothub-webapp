@@ -526,7 +526,7 @@
       "summary": "Resumo",
       "training": "Treinamento",
       "train": "Treinar",
-      "suggestion": "Sugestões",
+      "suggestion": "Sugestão",
       "test": "Testar",
       "test-manual": "Frases",
       "test-automatic": "Automático",
@@ -541,11 +541,12 @@
       "versions": "Versões"
     },
     "phrase-suggestion": {
-      "title": "Sugestões de frases",
+      "title": "Sugestão de frases",
       "subtitle": "Selecione uma intenção e adicione frases sugeridas ao seu treinamento.",
-      "empty": "Não há sugestões de frases para essa intenção",
+      "empty": "Não há sugestão de frases para essa intenção",
       "confirm-edit": "Confirmar edição",
-      "cancel-edit": "Cancelar edição"
+      "cancel-edit": "Cancelar edição",
+      "tooltip_alert": "As palavras sugeridas são geradas através de contextos retirados da internet, portanto, podem acontecer sugestões que fujam do controle da nossa equipe."
     },
     "dashboard": {
       "sentences": "frases",
@@ -731,7 +732,8 @@
       "subtitle": "Gere novas frases variando as frases de treinamento.",
       "cancel": "Cancelar",
       "add_training": "Adicionar ao treinamento",
-      "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento"
+      "phrase_added": "Frase adicionada a lista de esperando treinamento | Frases adicionadas a lista de esperando treinamento",
+      "tooltip_alert": "As palavras sugeridas são geradas através de contextos retirados da internet, portanto, podem acontecer sugestões que fujam do controle da nossa equipe."
     },
     "import_and_export_intelligence":{
       "title": "Importar sua inteligência",
