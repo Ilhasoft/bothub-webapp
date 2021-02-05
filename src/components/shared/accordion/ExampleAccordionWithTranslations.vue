@@ -48,9 +48,9 @@
     <div
       slot="options"
       class="example-item__faded example-item__options">
-      <!-- <word-suggestion-button
+      <word-suggestion-button
         v-show="!editing && isSuggestion"
-        :get-sentence="sentenceDetail"/> -->
+        :get-sentence="sentenceDetail"/>
       <b-icon
         v-show="!editing"
         :icon="editing ? 'check' : 'pencil'"
@@ -107,7 +107,7 @@ import EditExample from '@/components/shared/accordion/EditExample';
 import Loading from '@/components/shared/Loading';
 import EditExampleAccordion from '@/components/shared/accordion/EditExampleAccordion';
 import { mapActions, mapGetters } from 'vuex';
-// import WordSuggestionButton from '@/components/shared/WordSuggestionButton';
+import WordSuggestionButton from '@/components/shared/WordSuggestionButton';
 
 export default {
   name: 'ExampleAccordionWithTranslations',
@@ -120,7 +120,7 @@ export default {
     ExampleTranslation,
     EditExampleAccordion,
     Loading,
-    // WordSuggestionButton,
+    WordSuggestionButton,
   },
   props: {
     id: {

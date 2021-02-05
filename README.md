@@ -61,8 +61,8 @@ To start running bothub, use these commands:
 | yarn build | Build for production with minification
 | yarn build --report | Build for production and view the bundle analyzer report
 | yarn lint | Show lint warnings and errors
-| yarn test | Run all tests
-| yarn test-watch | Run test in watch mode
+| yarn test:unit | Run all tests
+| yarn test:unit --watch | Run test in watch mode
 
 ### Environment Variables
 

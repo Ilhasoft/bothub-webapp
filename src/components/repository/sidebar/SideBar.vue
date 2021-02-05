@@ -49,16 +49,14 @@
               :label="$t('webapp.menu.train')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-training', hideDropdown: false})"/>
-            <!-- <b-menu-item
+            <b-menu-item
               :to="{ name: 'repository-suggestion' }"
               :active="checkSelectedMenu('repository-suggestion')"
               :label="$t('webapp.menu.suggestion')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-suggestion',
-              hideDropdown: false})"/> -->
+              hideDropdown: false})"/>
           </b-menu-item>
-
-
           <b-menu-item
             id="tour-evaluate-step-0"
             :active="isTestsActive"
@@ -185,10 +183,23 @@
           class="icon-list"
           icon="home"
           @click.native="routerHandle('repository-summary')" />
-        <b-icon
-          class="icon-list"
-          icon="refresh"
-          @click.native="routerHandle('repository-training')" />
+        <b-dropdown
+          aria-role="list">
+          <b-icon
+            slot="trigger"
+            class="icon-list"
+          icon="refresh"/>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-training')">
+            {{ $t('webapp.menu.train') }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            aria-role="listitem"
+            @click="routerHandle('repository-suggestion')">
+            {{ $t('webapp.menu.suggestion') }}
+          </b-dropdown-item>
+        </b-dropdown>
         <b-dropdown
           aria-role="list">
           <b-icon

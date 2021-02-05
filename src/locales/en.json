@@ -546,7 +546,8 @@
       "subtitle": "Select an intent and add suggested phrases to your training.",
       "empty": "There are no suggested phrases for this intention",
       "confirm-edit": "Confirm edit",
-      "cancel-edit": "Cancel edit"
+      "cancel-edit": "Cancel edit",
+      "tooltip_alert": "The suggested words are generated through contexts taken from the internet, so there may be suggestions that are beyond the control of our team."
     },
     "dashboard": {
       "sentences": "sentences",
@@ -733,7 +734,8 @@
     "subtitle": "Generate new sentences by varying training sentences.",
     "cancel": "Cancel",
     "add_training": "Add training",
-    "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list "
+    "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list ",
+    "tooltip_alert": "The suggested words are generated through contexts taken from the internet, so there may be suggestions that are beyond the control of our team."
   },
   "import_and_export_intelligence":{
     "title": "Import/Export your intelligence",
