@@ -163,15 +163,12 @@ export default {
 
 
   .rpstr-vw-bs {
-    margin-top: 14.25rem;
+    margin-top: 1.5rem;
     $navigation-height: 4rem;
     $medium-screen: 1035px;
     $header-height: (16rem + $navigation-height);
     $wrapper-width: 100%;
     height: 100%;
-    @media screen and (max-width: $mobile-width) {
-      margin-top: 20rem;
-    }
 
     &__status-bar {
       background-color: $color-fake-white;
@@ -265,12 +262,7 @@ export default {
       }
 
       &__content {
-
-        margin: 1rem;
-
-        @media screen and (min-width: 1200px) {
-          margin: 1.5rem  7.125rem 1.5rem 5.5rem;
-        }
+        margin: 0.1rem 3rem;
       }
 
       @media screen and (max-width: $wrapper-width) {
