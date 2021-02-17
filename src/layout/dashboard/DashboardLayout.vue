@@ -18,7 +18,6 @@
 
 import SideBar from '@/components/repository/sidebar/SideBar';
 import UserAvatar from '@/components/user/UserAvatar';
-import VersionDropdown from '@/layout/dashboard/VersionDropdown';
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapActions, mapGetters } from 'vuex';
 import Tour from '@/components/Tour';
@@ -29,7 +28,6 @@ export default {
   components: {
     SideBar,
     UserAvatar,
-    VersionDropdown,
     CustomIcon,
     Tour,
   },
