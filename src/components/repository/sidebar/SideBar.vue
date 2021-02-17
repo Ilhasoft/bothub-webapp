@@ -185,16 +185,11 @@
 
 import { mapGetters, mapActions } from 'vuex';
 import CustomIcon from '@/components/shared/CustomIcon';
-import unnic from 'unnic-system-beta';
 
 export default {
   name: 'SideBar',
   components: {
     CustomIcon,
-    // UnnicSidebar: unnic.UnnicSidebar,
-    // UnnicSidebarMenu: unnic.UnnicSidebarMenu,
-    // UnnicSidebarItem: unnic.UnnicSidebarItem,
-    // UnnicIcon: unnic.UnnicIcon
   },
   data() {
     return {

@@ -11,6 +11,7 @@
 import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
+import unnic from 'unnic-system-beta';
 // import TutorialModal from '@/components/TutorialModal';
 const components = {
   NewsModal,
