@@ -2,37 +2,62 @@
 
 exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
-  <div class="sidebar-wrapper">
-    <div class="sidebar-wrapper__collapse-button">
-      <b-icon-stub icon="chevron-left"></b-icon-stub>
-    </div>
-    <b-menu-stub accordion="true" activable="true">
-      <div class="menu-header">
-        <div class="menu-header__logo"></div>
+  <unnnic-sidebar expanded="true" class="sidebar-wrapper">
+    <div slot="header" class="unnic--clickable sidebar-wrapper__header">
+      <div class="sidebar-wrapper__header__field">
+        <unnnic-icon icon="science-fiction-robot-1" scheme="aux-blue" size="sm" hasbackground=""></unnnic-icon>
+        <div class="sidebar-wrapper__header__field__description">
+          <div class="sidebar-wrapper__header__field__description__repository">
+            <p class="sidebar-wrapper__header__field__description__repository__title">
+              bothub
+            </p> <span><unnnic-icon hasbackground="" icon="button-refresh-arrows-1" size="sm" class="unnic--clickable
+         sidebar-wrapper__header__field__description__repository__icon"></unnnic-icon></span>
+          </div>
+          <p class="sidebar-wrapper__header__field__description__created-by">
+            CRIADO POR
+            <span class="sidebar-wrapper__header__field__description__created-by__nick">
+           WENI
+         </span>
+          </p>
+        </div>
       </div>
-      <b-menu-list-stub ariarole="" size="is-small">
-        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" size="is-small" id="tour-training-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" size="is-small" id="tour-evaluate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="inbox" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-inbox-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="translate" animation="slide" tag="a" ariarole="" size="is-small" id="tour-translate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="power-plug" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-integrate-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="cog" animation="slide" tag="a" ariarole="" size="is-small">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-      </b-menu-list-stub>
-    </b-menu-stub>
-    <div></div>
-  </div>
+      <unnnic-select selected="bothub" size="sm" class="unnic--clickable sidebar-wrapper__header__select">
+        <unnnic-select-item size="sm">
+          some specific text
+        </unnnic-select-item>
+      </unnnic-select>
+    </div>
+    <div class="sidebar-wrapper__body">
+      <unnnic-sidebar-menu>
+        <unnnic-sidebar-item icon="layout-dashboard-1" text="some specific text" class="sidebar-wrapper__body--active"></unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="flash-1-3" text="some specific text" class="">
+          <!---->
+        </unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="check-square-1" text="some specific text" class="">
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="download-bottom-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="translate-1" text="some specific text" class="">
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="charger-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="cog-1" text="some specific text" class="">
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </unnnic-sidebar-item>
+      </unnnic-sidebar-menu>
+    </div>
+    <div slot="footer">
+      <unnnic-sidebar-item icon="expand-8-1" text="Encolher"></unnnic-sidebar-item>
+    </div>
+  </unnnic-sidebar>
 </div>
 `;

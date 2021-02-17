@@ -222,7 +222,7 @@ export default {
   }
 
   &__description {
-    padding: 1rem .5rem;
+    padding: 0 .5rem;
 
     &__text {
       ul li {
