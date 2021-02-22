@@ -8,16 +8,23 @@
     slot="header">
 
     <div class="sidebar-wrapper__header__field">
+
       <unnnic-icon icon="arrow-left-1-1"
       class="sidebar-wrapper__header__field__icon"
       scheme="aux-blue" size="sm" hasBackground
       @click.native="routerHandle('home')"/>
 
+
       <div class="sidebar-wrapper__header__field__description">
         <div class="sidebar-wrapper__header__field__description__repository">
-          <p class="sidebar-wrapper__header__field__description__repository__title">
-            {{ getCurrentRepository.name }}
-          </p>
+          <unnnic-tool-tip
+            :text="getCurrentRepository.name"
+            enabled
+            side="right">
+            <p class="sidebar-wrapper__header__field__description__repository__title">
+              {{ getCurrentRepository.name }}
+            </p>
+          </unnnic-tool-tip>
         </div>
         <p class="sidebar-wrapper__header__field__description__created-by">
           <span class="sidebar-wrapper__header__field__description__created-by__text">
