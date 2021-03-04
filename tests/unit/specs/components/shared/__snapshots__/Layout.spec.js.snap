@@ -2,14 +2,11 @@
 
 exports[`Layout.vue loading renders correctly 1`] = `
 <div class="layout">
-  <weni-notification-stub></weni-notification-stub>
   <div class="layout__loading">
     <div class="layout__loading__progress"></div>
   </div>
   <div class="layout__header">
     <div class="layout__header__container">
-      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
-      <!---->
       <div class="layout__header__container__fields">
         <div class="layout__header__options">
           <!---->
@@ -29,12 +26,9 @@ exports[`Layout.vue loading renders correctly 1`] = `
 
 exports[`Layout.vue renders correctly 1`] = `
 <div class="layout">
-  <weni-notification-stub></weni-notification-stub>
   <!---->
   <div class="layout__header">
     <div class="layout__header__container">
-      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
-      <!---->
       <div class="layout__header__container__fields">
         <div class="layout__header__options">
           <!---->
