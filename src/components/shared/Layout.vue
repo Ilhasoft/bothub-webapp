@@ -4,7 +4,6 @@
       layout: true,
       'layout--without-background': withoutBackground,
   }">
-  <weni-notification/>
     <div
       v-if="loading"
       class="layout__loading">
@@ -12,23 +11,6 @@
     </div>
     <div class="layout__header">
       <div class="layout__header__container">
-        <router-link
-          class="layout__header__container__logo"
-          to="/">
-          <img
-            src="@/assets/imgs/logo-new-white.svg"
-            alt="Bothub"
-            class="hide-mobile">
-          <img
-            src="@/assets/imgs/icon-white.svg"
-            alt="Bothub"
-            class="hide-desktop">
-        </router-link>
-        <div
-          v-if="$slots.center"
-          class="layout__header__container__center">
-          <slot name="center" />
-        </div>
         <div class="layout__header__container__fields">
           <div class="layout__header__options">
             <div
@@ -48,16 +30,6 @@
                 </b-button>
               </router-link>
             </div>
-            <!-- <div
-              v-if="authenticated && tutorialEnabled"
-              class="layout__header__icon-tutorial--center">
-              <b-icon
-                class="layout__header__icon-tutorial"
-                type="is-white"
-                icon="help-circle"
-                @click.native="openBeginnerTutorialModal()"
-              />
-            </div> -->
             <div
               v-if="authenticated">
               <b-dropdown position="is-bottom-left">
@@ -69,14 +41,7 @@
                   icon="chevron-down"
                   class="layout__header__icon"/>
                 <b-dropdown-item @click="openMyProfile()">
-                  {{ myProfile.name || '...' }}
-                </b-dropdown-item>
-                <b-dropdown-item
-                  @click="orgs()">
-                  {{ $t('webapp.layout.orgs') }}
-                </b-dropdown-item>
-                <b-dropdown-item @click="logout()">
-                  {{ $t('webapp.layout.logout') }}
+                  {{ $t('webapp.layout.my_intelligence') }}
                 </b-dropdown-item>
               </b-dropdown>
             </div>
@@ -107,12 +72,10 @@ import { mapGetters, mapActions } from 'vuex';
 
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
-import WeniNotification from '@/components/WeniNotification';
 
 const components = {
   SiteFooter,
   UserAvatar,
-  WeniNotification,
 };
 
 export default {
@@ -251,14 +214,13 @@ export default {
   }
 
   &__header {
-    padding: $loading-height*3.8 1rem;
-    background-color: $color-fake-grey;
+    padding: $loading-height*3.8 5rem;
 
     &__container {
       display: flex;
       width: 100%;
       align-items: center;
-      justify-content: space-around;
+      justify-content: flex-end;
 
     &__logo {
       min-width: ($size-normal * .75);
@@ -284,15 +246,9 @@ export default {
       &__fields{
         display: flex;
         justify-content: center;
-        width: 25%;
-        @media screen and (max-width: $mobile-width * 1.5) {
-          width: 30%;
-        }
-        @media screen and (max-width: $mobile-width * 1.2) {
-          width: 35%;
-        }
+        width: 35%;
         @media screen and (max-width: $mobile-width) {
-          width: 15%;
+          width: 25%;
         }
       }
     }

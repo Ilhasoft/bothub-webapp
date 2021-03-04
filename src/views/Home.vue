@@ -77,10 +77,11 @@ export default {
 .home {
   margin: auto;
   max-width: $max-repository-card-width;
+  margin-top: -6.25rem;
 
   &__search {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     max-width: $max-repository-card-width;
     padding: 1.2rem 1rem;
     margin: auto;
