@@ -1,29 +1,5 @@
 <template>
   <layout :show-footer="false">
-    <div class="profile__header">
-      <div class="profile__header__content">
-        <div class="profile__avatar__container">
-          <user-avatar
-            :profile="myProfile"
-            :clickable="false"
-            size="full"
-            class="profile__avatar" />
-        </div>
-        <div class="profile__header__info">
-          <h1 class="profile__header__title"> {{ myProfile.name }} </h1>
-          <p
-            v-if="myProfile.locale"
-            class="profile__header__subtitle"> {{ myProfile.locale }} </p>
-          <span class="profile__plan"> {{ $t('webapp.my_profile.free_user' ) }} </span>
-        </div>
-      </div>
-    </div>
-    <div class="profile__tabs__container">
-      <tab-select
-        :options="tabs"
-        :selected.sync="selected"
-        class="profile__tabs" />
-    </div>
     <div class="profile__content">
       <div
         v-show="selected==0">
@@ -184,7 +160,7 @@ export default {
   },
   data() {
     return {
-      selected: 0,
+      selected: 1,
       repositoryItemElem: RepositoryCard,
       category: 0,
       language: '',
