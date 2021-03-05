@@ -77,7 +77,7 @@ export default {
 .home {
   margin: auto;
   max-width: $max-repository-card-width;
-  margin-top: -6.25rem;
+  margin-top: -5.7rem;
   @media screen and (max-width: $mobile-width) {
       margin-top: -2.5rem;
     }
