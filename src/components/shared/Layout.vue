@@ -32,18 +32,13 @@
             </div>
             <div
               v-if="authenticated">
-              <b-dropdown position="is-bottom-left">
-                <user-avatar
-                  slot="trigger"
-                  :profile="myProfile" />
-                <b-icon
-                  slot="trigger"
-                  icon="chevron-down"
-                  class="layout__header__icon"/>
-                <b-dropdown-item @click="openMyProfile()">
-                  {{ $t('webapp.layout.my_intelligence') }}
-                </b-dropdown-item>
-              </b-dropdown>
+                <b-button
+                  type="is-primary"
+                  inverted
+                  rounded
+                 @click="openMyProfile()">
+                  <strong> {{ $t('webapp.layout.my_intelligence') }}</strong>
+                </b-button>
             </div>
             <div class="layout__header__options__buttons" v-if="!authenticated" >
               <b-button
@@ -246,9 +241,12 @@ export default {
       &__fields{
         display: flex;
         justify-content: center;
-        width: 35%;
-        @media screen and (max-width: $mobile-width) {
-          width: 25%;
+        width: 45%;
+        @media screen and (max-width: $mobile-width * 1.3) {
+          width: 50%;
+        }
+        @media screen and (max-width: $mobile-width * 1.2) {
+          width: 52%;
         }
       }
     }
