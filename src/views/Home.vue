@@ -78,6 +78,9 @@ export default {
   margin: auto;
   max-width: $max-repository-card-width;
   margin-top: -6.25rem;
+  @media screen and (max-width: $mobile-width) {
+      margin-top: -2.5rem;
+    }
 
   &__search {
     display: flex;
