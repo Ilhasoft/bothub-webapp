@@ -1,59 +1,27 @@
 <template>
-  <layout>
-    <div slot="center">
-      <b-input
-        v-model="search"
-        :placeholder="$t('webapp.layout.search_bots')"
-        no-border
-        icon-right="magnify"
-      />
-    </div>
-    <div class="home">
-      <div class=" home__search">
-        <categories-list v-model="currentCategory" />
-        <languages-list
-          v-model="currentLanguage"
-          open-position="bottom-left" />
-      </div>
-      <div>
-        <repository-card-list
-          :category="currentCategory"
-          :language="currentLanguage"
-          :search="search"
-          @cardList="getCardList($event)"
-        />
-      </div>
-    </div>
-    <tour
-      v-if="activeTutorial === 'create_intelligence' && repositoryList !== null"
-      :step-count="3"
-      name="create_intelligence"/>
-  </layout>
+  <div class="home">
+    <section class="home__header">
+        <unnnic-card
+          title="Biblioteca de Inteligências"
+          icon="layout-dashboard-2"
+          type="title"
+          scheme="aux-blue"/>
+    </section>
+    <tab-navigation/>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Layout from '@/components/shared/Layout';
-import CategoriesList from '@/components/shared/CategoriesList';
-import LanguagesList from '@/components/shared/LanguagesList';
-import RepositoryCardList from '@/components/repository/RepositoryCardList';
-import Tour from '@/components/Tour';
+import TabNavigation from '@/components/repository/home/TabNavigation';
 
 export default {
   name: 'Home',
   components: {
-    Layout,
-    CategoriesList,
-    LanguagesList,
-    RepositoryCardList,
-    Tour,
+    TabNavigation,
   },
   data() {
     return {
-      currentLanguage: '',
-      currentCategory: 0,
-      repositoryList: null,
-      search: '',
     };
   },
   computed: {
@@ -72,31 +40,13 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/variables.scss';
-
+@import '~unnic-system-beta/dist/unnnic.css';
+@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
 
 .home {
-  margin: auto;
-  max-width: $max-repository-card-width;
-  margin-top: -5.7rem;
-  @media screen and (max-width: $mobile-width) {
-      margin-top: -2.5rem;
-    }
-
-  &__search {
-    display: flex;
-    justify-content: flex-start;
-    max-width: $max-repository-card-width;
-    padding: 1.2rem 1rem;
-    margin: auto;
-
-    > * {
-      margin-left: 0.625rem;
-    }
-
-    @media screen and (max-width: $mobile-width) {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+  background-color: $unnnic-color-background-snow;
+  &__header{
+    padding: $unnnic-inline-md;
   }
 }
 </style>
