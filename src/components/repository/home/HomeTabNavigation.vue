@@ -6,7 +6,10 @@
             clickable
             title="Inteligências no projeto"
             type="default"
-            description="São as inteligências em uso por Ilhasoft"/>
+            description="São as inteligências em uso por Ilhasoft"
+            :class="{'tab-navigation__container__content--selected': currentTab === 0}"
+            @click.native="handleChangeTag(0)"
+            />
         </div>
 
         <div class="tab-navigation__container__content">
@@ -14,7 +17,10 @@
             clickable
             title="Inteligências da organização"
             type="default"
-            description="Visualize e use as inteligências da organização."/>
+            description="Visualize e use as inteligências da organização."
+            :class="{'tab-navigation__container__content--selected': currentTab === 1}"
+            @click.native="handleChangeTag(1)"
+            />
         </div>
 
         <div class="tab-navigation__container__content">
@@ -22,7 +28,10 @@
             clickable
             title="Inteligências da comunidade"
             type="default"
-            description="Visualize e use as inteligências públicas."/>
+            description="Visualize e use as inteligências públicas."
+            :class="{'tab-navigation__container__content--selected': currentTab === 2}"
+            @click.native="handleChangeTag(2)"
+            />
         </div>
     </section>
   </div>
@@ -33,10 +42,19 @@ export default {
   name: 'TabNavigation',
   data(){
     return {
-
+      currentTab: 0,
     }
   },
-
+  watch: {
+    currentTab(){
+      this.$emit('changeTabValue', this.currentTab)
+    }
+  },
+  methods: {
+    handleChangeTag(tab){
+      this.currentTab = tab;
+    }
+  }
 }
 </script>
 
@@ -45,7 +63,6 @@ export default {
 @import '~unnic-system-beta/src/assets/scss/unnnic.scss';
 
 .tab-navigation{
-  height: 12.625rem;
   padding: 0 $unnnic-inline-md;
   background-color: $unnnic-color-background-snow;
 
@@ -59,6 +76,11 @@ export default {
     &__content{
       width: 32%;
       height: 6.125rem;
+
+      &--selected {
+        background-color: $unnnic-color-background-sky;
+        border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
+      }
     }
   }
 }

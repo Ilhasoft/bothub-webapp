@@ -50,8 +50,8 @@ export default {
   deleteVersion(id) {
     return request.$http.delete(`/v2/repository/version/${id}/`);
   },
-  search(query, limit = 20) {
-    return new utils.Page('/v2/repository/repositories/', limit, query);
+  search() {
+    return request.$http.get('/v2/repository/repositories/');
   },
 
   searchByOrg(orgNickname, limit = 20, search, categories, language) {
