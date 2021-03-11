@@ -11950,12 +11950,13 @@ universalify@^0.1.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 
-unnic-system-beta@0.0.72:
-  version "0.0.72"
-  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.72.tgz#c2af80eae9cb8b609075f432ec0a7d416b47bf16"
-  integrity sha512-HhoU8ETC9BRQDJlauktR8yDq8cqj5rOvHAyn4Md1STdXyYrfRjD8/SICwoZX3RP36WgzxvLGd2f+3E0oEP0Y9w==
+unnic-system-beta@0.0.80:
+  version "0.0.80"
+  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.80.tgz#095d9ba9693f2407658291d5ba95d5a15749ec00"
+  integrity sha512-5EGmLFOci72czbPWUUa1yWEBPgPs7bw3TeTOVBcga/gtCS0IjS4KduAOg64rVJpYRGVLyoT49wIzM4t9r7sgjw==
   dependencies:
     core-js "^3.6.5"
+    v-click-outside "^3.1.2"
     vue "^2.6.11"
 
 "unorm@>= 1.0.0":
@@ -12107,6 +12108,11 @@ uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+v-click-outside@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/v-click-outside/-/v-click-outside-3.1.2.tgz#1dbaa14bf09a21bd16f23a38f03bfa3988f71281"
+  integrity sha512-gMdRqfRE6m6XU6SiFi3dyBlFB2MWogiXpof8Aa3LQysrl9pzTndqp/iEaAphLoadaQUFnQ0ec6fLLaxr7LiY6A==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"

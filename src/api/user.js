@@ -20,11 +20,11 @@ export default {
       '/v2/account/my-profile/',
     );
   },
-  myRepositories(limit = 6, search, categories, language) {
-    return new utils.Page('/v2/repository/search-repositories/', limit, { search, categories, language });
+  myRepositories() {
+    return request.$http.get('/v2/repository/search-repositories/');
   },
-  permissionRepositories(limit) {
-    return new utils.Page('/v2/repository/repositories-permissions/', limit);
+  permissionRepositories() {
+    return request.$http.get('/v2/repository/repositories-permissions/');
   },
   async getMyProfileSchema() {
     const { data } = await request.$http.options('/v2/account/my-profile/');
