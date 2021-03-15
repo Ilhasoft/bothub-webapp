@@ -195,23 +195,20 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import '~unnic-system-beta/dist/unnnic.css';
+@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
 
-::-webkit-scrollbar {
-  width: 0.6rem;
+ ::-webkit-scrollbar {
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #e9e9ec;
-  border-radius: 10px;
+  background: $unnnic-color-neutral-soft;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $color-primary;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $unnnic-color-neutral-clean;
+  border-radius: $unnnic-border-radius-pill;
 }
 
 :not(.quick-test) {
