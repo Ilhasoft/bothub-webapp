@@ -15,7 +15,7 @@
           </unnnic-button>
         </div>
       </section>
-      <div class="home-intelligences-from-project__cards" v-else>
+      <div v-else class="home-intelligences-from-project__cards">
           <home-repository-card
             v-for="list in repositoryList"
             :key="list.uuid"
@@ -31,13 +31,11 @@ import HomeIntelligenceContainer from '@/components/repository/home/HomeIntellig
 export default {
   name: 'HomeIntelligenceFromProject',
   components: { HomeRepositoryCard, HomeIntelligenceContainer },
-  props: {
-    repositoryList: {
-      type: [Object, Array],
-      default: null,
-    }
-  }
-
+  data() {
+    return {
+      repositoryList: []
+    };
+  },
 }
 </script>
 
@@ -49,11 +47,12 @@ export default {
   &__content{
     margin: auto;
     width: 50%;
-    height: 100%;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 
     &__text{
       margin-bottom: 2.25rem
@@ -67,7 +66,10 @@ export default {
   &__cards {
     display: grid;
     justify-content: space-between;
-    grid-template-columns: repeat(3, 32%);
+    grid-template-columns: repeat(4, 24%);
+      @media screen and (max-width: 1400px) {
+        grid-template-columns: repeat(3, 32%);
+      }
   }
 }
 

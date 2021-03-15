@@ -3,7 +3,7 @@
   <div class="home-intelligences-from-org">
     <div class="home-intelligences-from-org__cards">
         <home-repository-card
-          v-for="list in repositoryList"
+          v-for="list in repositoryOrgList"
           :key="list.uuid"
           :repository-detail="list"/>
       </div>
@@ -11,17 +11,29 @@
 </home-intelligence-container>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 
 export default {
   name: 'HomeIntelligenceFromOrg',
   components: { HomeRepositoryCard, HomeIntelligenceContainer },
-  props: {
-    repositoryList: {
-      type: [Object, Array],
-      default: null,
+  data(){
+    return {
+      repositoryOrgList: []
     }
+  },
+  mounted(){
+    this.getOrgsRepositories()
+  },
+  methods: {
+    ...mapActions([
+      'getContributingRepositories',
+    ]),
+    async getOrgsRepositories(){
+      const { data: { results } } = await this.getContributingRepositories()
+      this.repositoryOrgList = results
+    },
   }
 }
 </script>
@@ -34,7 +46,10 @@ export default {
   &__cards {
     display: grid;
     justify-content: space-between;
-    grid-template-columns: repeat(3, 32%);
+    grid-template-columns: repeat(4, 24%);
+      @media screen and (max-width: 1400px) {
+        grid-template-columns: repeat(3, 32%);
+      }
   }
 }
 

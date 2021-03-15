@@ -32,9 +32,9 @@ export default {
     /* istanbul ignore next */
     return repository.getAll(limit);
   },
-  searchRepositories(store) {
+  searchRepositories(store, limit, offset) {
     /* istanbul ignore next */
-    return repository.search();
+    return repository.search(limit, offset);
   },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */

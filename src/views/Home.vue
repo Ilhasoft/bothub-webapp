@@ -11,16 +11,13 @@
     <home-tab-navigation @changeTabValue="howTabIsShown = $event"/>
 
     <home-intelligence-from-project
-      v-show="howTabIsShown === 0"
-      :repositoryList="repositoryLists.mine"/>
+      v-show="howTabIsShown === 0"/>
 
     <home-intelligence-from-org
-      v-show="howTabIsShown === 1"
-      :repositoryList="repositoryLists.org"/>
+      v-show="howTabIsShown === 1"/>
 
     <home-intelligence-from-community
-      v-show="howTabIsShown === 2"
-      :repositoryList="repositoryLists.community"/>
+      v-show="howTabIsShown === 2"/>
   </div>
 </template>
 
@@ -42,42 +39,12 @@ export default {
   data() {
     return {
       howTabIsShown: 0,
-      repositoryLists: {
-        mine: { empty: null },
-        org: { empty: null },
-        community: { empty: null },
-      },
     };
   },
   computed: {
     ...mapGetters([
       'activeTutorial',
     ]),
-  },
-  mounted(){
-    this.getOrgsRepositories()
-    this.getMineRepositories()
-    this.getCommunityRepositories()
-  },
-  methods: {
-    ...mapActions([
-      'getMyRepositories',
-      'getContributingRepositories',
-      'getUsingRepositories',
-      'searchRepositories',
-    ]),
-    async getCommunityRepositories(){
-      const { data: { results } } = await this.searchRepositories()
-      this.repositoryLists.community = results
-    },
-    async getOrgsRepositories(){
-      const { data: { results } } = await this.getContributingRepositories()
-      this.repositoryLists.org = results
-    },
-    async getMineRepositories(){
-      const { data: { results } } = await this.getMyRepositories()
-      this.repositoryLists.mine = results
-    }
   },
 };
 </script>

@@ -12,10 +12,11 @@
 
       <div class="unnnic-card-intelligence__header__buttons">
         <div>
-          <button class="unnnic-card-intelligence__header__buttons__tag"
-            @click="repositoryDetailsRouterParams()">
-            Abrir
-          </button>
+            <unnnic-tag
+            @click.native="repositoryDetailsRouterParams()"
+              text="Abrir"
+              scheme="aux-blue"
+              clickable/>
         </div>
 
         <unnnic-icon
