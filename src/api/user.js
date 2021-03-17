@@ -20,8 +20,9 @@ export default {
       '/v2/account/my-profile/',
     );
   },
-  myRepositories() {
-    return request.$http.get('/v2/repository/search-repositories/');
+  searchRepositories(limit, offset, nickname) {
+    const queryString = qs.stringify(limit, offset, nickname);
+    return request.$http.get(`/v2/repository/search-repositories/?${queryString}`);
   },
   permissionRepositories() {
     return request.$http.get('/v2/repository/repositories-permissions/');

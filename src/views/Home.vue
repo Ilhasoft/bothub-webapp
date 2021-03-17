@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
 import HomeTabNavigation from '@/components/repository/home/HomeTabNavigation';
 import HomeIntelligenceFromProject from '@/components/repository/home/HomeIntelligenceFromProject';
 import HomeIntelligenceFromCommunity from '../components/repository/home/HomeIntelligenceFromCommunity';
@@ -41,11 +40,6 @@ export default {
       howTabIsShown: 0,
     };
   },
-  computed: {
-    ...mapGetters([
-      'activeTutorial',
-    ]),
-  },
 };
 </script>
 
@@ -55,14 +49,14 @@ export default {
 @import '~unnic-system-beta/dist/unnnic.css';
 @import '~unnic-system-beta/src/assets/scss/unnnic.scss';
 
-
 .home {
   flex: 1;
   display: flex;
   flex-direction: column;
   background-color: $unnnic-color-background-snow;
-  &__header{
-    padding: $unnnic-inline-md;
-  }
+
+    &__header{
+      padding: $unnnic-inline-md;
+    }
 }
 </style>

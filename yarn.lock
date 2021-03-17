@@ -11950,10 +11950,10 @@ universalify@^0.1.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 
-unnic-system-beta@0.0.82:
-  version "0.0.82"
-  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.82.tgz#5d392baf7d2a41e05c2ce4d7f9e99bbf6aa5f1ef"
-  integrity sha512-LlMsNEGjKIdhGngydpXfse4p1WmzI8Od1q4F7A7g+l1Mo5wEgnI0X1inZBolmSpwDHtNlWgfmmaw1UUV0Vn9WQ==
+unnic-system-beta@0.0.83:
+  version "0.0.83"
+  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.83.tgz#30f4a40339ca3b7c5177caf38983eb671ebff5e2"
+  integrity sha512-zmki9MDxIJU5CLh2UAkoDpDCFib3vsw/J+Gw8VphkDRE/XjKs3u9c1PjZxHSNCzLMzze/vx3kpyCk2+Fz5Uwcw==
   dependencies:
     core-js "^3.6.5"
     v-click-outside "^3.1.2"

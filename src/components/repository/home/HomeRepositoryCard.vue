@@ -3,49 +3,82 @@
     <section class="unnnic-card-intelligence__header">
       <div class="unnnic-card-intelligence__header__detail">
         <div class="unnnic-card-intelligence__header__detail__title">
-          {{repositoryDetail.name}}
+          {{ repositoryDetail.name }}
         </div>
         <div class="unnnic-card-intelligence__header__detail__subtitle">
-          Criada por <strong>{{repositoryDetail.owner__nickname}}</strong>
+          Criada por <strong>{{ repositoryDetail.owner__nickname }}</strong>
         </div>
       </div>
 
       <div class="unnnic-card-intelligence__header__buttons">
         <div>
-            <unnnic-tag
+          <unnnic-tag
             @click.native="repositoryDetailsRouterParams()"
-              text="Abrir"
-              scheme="aux-blue"
-              clickable/>
+            text="Abrir"
+            scheme="aux-blue"
+            class="unnnic-card-intelligence__header__buttons__tag"
+            clickable
+          />
         </div>
 
-        <unnnic-icon
-          icon="navigation-menu-vertical-1"
-          class="unnnic-card-intelligence__header__buttons__icon"
-          size="sm"/>
+        <unnnic-dropdown position="bottom-left" :open.sync="dropdownOpen">
+          <div slot="trigger">
+            <unnnic-icon
+              icon="navigation-menu-vertical-1"
+              class="unnnic-card-intelligence__header__buttons__icon"
+              size="sm"
+              slot="trigger"
+              clickable
+            />
+          </div>
+
+          <unnnic-dropdown-item @click="dropdownOpen = false">
+            <div class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="graph-stats-1" />
+              <div>Visualizar intenções</div>
+            </div>
+          </unnnic-dropdown-item>
+
+          <unnnic-dropdown-item @click="dropdownOpen = false">
+            <div class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="translate-1" />
+              <div>Visualizar idiomas</div>
+            </div>
+          </unnnic-dropdown-item>
+        </unnnic-dropdown>
       </div>
     </section>
 
     <section class="unnnic-card-intelligence__description">
-      Inteligência criada especialmente para utilização
-      em chats de suporte ao cliente.
+      Inteligência criada especialmente para utilização em chats de suporte ao
+      cliente. Inteligência criada especialmente para utilização em chats de
+      suporte ao cliente.
     </section>
 
     <section class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
-          inteligência de Classificação
+        inteligência de Classificação
       </div>
-      <unnnic-icon icon="information-circle-4"
+      <!-- <unnnic-tool-tip
+        text="Utiliza intenções e entidades para
+            interpretar e segmentar as mensagens do usuário."
+        enabled
+        side="bottom"
+      > -->
+      <unnnic-icon
+        icon="information-circle-4"
         class="unnnic-card-intelligence__type__icon"
-        size="sm"/>
+        size="sm"
+      />
+      <!-- </unnnic-tool-tip> -->
     </section>
 
-    <div class="unnnic-card-intelligence__divider"/>
+    <div class="unnnic-card-intelligence__divider" />
 
     <section class="unnnic-card-intelligence__detail">
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-            Intenção
+          Intenção
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
@@ -53,9 +86,12 @@
             class="unnnic-card-intelligence__detail__content__data__info__icon"
             size="sm"
             scheme="aux-purple"
-            hasBackground/>
+            hasBackground
+          />
 
-          <div class="unnnic-card-intelligence__detail__content__data__info__number">
+          <div
+            class="unnnic-card-intelligence__detail__content__data__info__number"
+          >
             12
           </div>
         </div>
@@ -63,29 +99,36 @@
 
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-            Entidade
+          Entidade
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
-                                    <unnnic-icon              icon="translate-1"
-              class="unnnic-card-intelligence__detail__content__data__info__icon"
-              size="sm"
-              scheme="aux-purple"
-              hasBackground/>
+          <unnnic-icon
+            icon="translate-1"
+            class="unnnic-card-intelligence__detail__content__data__info__icon"
+            size="sm"
+            scheme="aux-purple"
+            hasBackground
+          />
 
-            <div class="unnnic-card-intelligence__detail__content__data__info__number">
-              10
-            </div>
+          <div
+            class="unnnic-card-intelligence__detail__content__data__info__number"
+          >
+            10
+          </div>
         </div>
       </div>
-
     </section>
-
   </div>
 </template>
 
 <script>
 export default {
   name: 'HomeRepositoryCard',
+  data() {
+    return {
+      dropdownOpen: false,
+    };
+  },
   props: {
     repositoryDetail: {
       type: [Object, Array],
@@ -102,13 +145,13 @@ export default {
         },
       });
     },
-  }
+  },
 };
 </script>
 
 <style lang="scss">
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import "~unnic-system-beta/dist/unnnic.css";
+@import "~unnic-system-beta/src/assets/scss/unnnic.scss";
 
 .unnnic-card-intelligence {
   display: flex;
@@ -129,25 +172,31 @@ export default {
     justify-content: space-between;
 
     &__detail {
-        &__title {
+      &__title {
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-bold;
         font-size: $unnnic-font-size-body-lg;
         line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
         color: $unnnic-color-neutral-darkest;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+        max-width: 15rem;
       }
 
-        &__subtitle {
-          font-family: $unnnic-font-family-secondary;
-          font-weight: $unnnic-font-weight-regular;
-          font-size: $unnnic-font-size-body-md;
-          line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-          color: $unnnic-color-neutral-cloudy;
+      &__subtitle {
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+        color: $unnnic-color-neutral-cloudy;
 
-          strong {
-            color: $unnnic-color-brand-weni;
-          }
+        strong {
+          color: $unnnic-color-brand-weni;
         }
+      }
     }
 
     &__buttons {
@@ -156,11 +205,25 @@ export default {
 
       &__tag {
         margin-left: $unnnic-inline-xs;
-        margin-right: $unnnic-inline-nano
+        margin-right: $unnnic-inline-nano;
       }
 
       &__icon {
         color: $unnnic-color-neutral-cleanest;
+      }
+
+      &__dropdown {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        div {
+          display: flex;
+          flex-wrap: nowrap;
+          /* justify-content: center; */
+          padding-left: $unnnic-inset-xs;
+          min-width: 7.6rem;
+        }
       }
     }
   }
@@ -171,7 +234,12 @@ export default {
     font-size: $unnnic-font-size-body-lg;
     color: $unnnic-color-neutral-cloudy;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-    padding: $unnnic-spacing-stack-sm 0;
+    margin: $unnnic-spacing-stack-sm 0;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   &__type {
@@ -193,7 +261,8 @@ export default {
   }
 
   &__divider {
-    border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-lightest;
+    border-bottom: $unnnic-border-width-thinner solid
+      $unnnic-color-neutral-lightest;
     margin: $unnnic-spacing-stack-xs 0;
   }
 
@@ -229,10 +298,8 @@ export default {
             color: $unnnic-color-neutral-darkest;
             padding-right: $unnnic-inline-xs;
           }
-
         }
       }
-
     }
   }
 }

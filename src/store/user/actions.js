@@ -40,9 +40,9 @@ export default {
   getPaymentHistory(store, limit = 20) {
     return user.getPaymentHistory(limit);
   },
-  getMyRepositories(store) {
+  getRepositories(store, limit, offset, nickname) {
     /* istanbul ignore next */
-    return user.myRepositories();
+    return user.searchRepositories(limit, offset, nickname);
   },
   getContributingRepositories(store) {
     /* istanbul ignore next */
