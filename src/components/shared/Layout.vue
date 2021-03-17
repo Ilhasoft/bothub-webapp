@@ -10,50 +10,7 @@
       <div class="layout__loading__progress" />
     </div>
     <div class="layout__header">
-      <div class="layout__header__container">
-        <div class="layout__header__container__fields">
-          <div class="layout__header__options">
-            <div
-              v-if="authenticated"
-              id="tour-create_intelligence-step-1"
-              :is-next-disabled="true"
-              :is-previous-disabled="true"
-              :is-step-blocked="!blockedNextStepTutorial"
-              class="hide-mobile">
-              <router-link :to="'/new'">
-                <b-button
-                  type="is-primary"
-                  inverted
-                  rounded
-                  @click="blockedNextStepTutorial = true">
-                  <strong>{{ $t('webapp.layout.newbot') }}</strong>
-                </b-button>
-              </router-link>
-            </div>
-            <div
-              v-if="authenticated">
-                <b-button
-                  type="is-primary"
-                  inverted
-                  rounded
-                 @click="openMyProfile()">
-                  <strong> {{ $t('webapp.layout.my_intelligence') }}</strong>
-                </b-button>
-            </div>
-            <div class="layout__header__options__buttons" v-if="!authenticated" >
-              <b-button
-                expanded
-                class="layout__header__options__buttons__btn"
-                @click="signIn()">{{ $t('webapp.layout.signin') }}</b-button>
-              <b-button
-                expanded
-                type='is-primary'
-                class="layout__header__options__buttons__btn hide-mobile"
-                @click="signUp()">{{ $t('webapp.layout.signup') }}</b-button>
-            </div>
-          </div>
-        </div>
-      </div>
+
     </div>
     <div class="layout__content">
       <slot/>

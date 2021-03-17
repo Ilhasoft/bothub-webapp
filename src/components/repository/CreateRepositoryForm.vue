@@ -26,6 +26,7 @@
           <div
             class="create-repository__form__style">
             <b-button
+              v-if="formSchema"
               :disabled="!checkFormData"
               type="is-primary"
               class="create-repository__form__style__button"
