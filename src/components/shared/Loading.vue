@@ -12,7 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "~@/assets/scss/utilities.scss";
-@import "~unnic-system-beta/src/assets/scss/unnnic.scss";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .loading {
   display: flex;

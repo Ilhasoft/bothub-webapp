@@ -2119,6 +2119,15 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@weni/unnnic-system@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@weni/unnnic-system/-/unnnic-system-1.0.0.tgz#4d20c1d6bc2de37be490f3d8828c83b2f5068737"
+  integrity sha512-6p6umaBkKTl+Pm4LtRzUwWmoBM8bSkHEqy/UJL7AfboK9nUvA+mbxNktqemjCCth65Da4Qq3yUZxRaEypcO8jA==
+  dependencies:
+    core-js "^3.6.5"
+    v-click-outside "^3.1.2"
+    vue "^2.6.11"
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -11949,15 +11958,6 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
-
-unnic-system-beta@0.0.83:
-  version "0.0.83"
-  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.83.tgz#30f4a40339ca3b7c5177caf38983eb671ebff5e2"
-  integrity sha512-zmki9MDxIJU5CLh2UAkoDpDCFib3vsw/J+Gw8VphkDRE/XjKs3u9c1PjZxHSNCzLMzze/vx3kpyCk2+Fz5Uwcw==
-  dependencies:
-    core-js "^3.6.5"
-    v-click-outside "^3.1.2"
-    vue "^2.6.11"
 
 "unorm@>= 1.0.0":
   version "1.6.0"

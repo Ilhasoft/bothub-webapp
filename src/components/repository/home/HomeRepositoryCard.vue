@@ -6,7 +6,8 @@
           {{ repositoryDetail.name }}
         </div>
         <div class="unnnic-card-intelligence__header__detail__subtitle">
-          Criada por <strong>{{ repositoryDetail.owner__nickname }}</strong>
+          {{$t('webapp.intelligences_lib.created_by')}}
+          <strong>{{ repositoryDetail.owner__nickname }}</strong>
         </div>
       </div>
 
@@ -14,7 +15,7 @@
         <div>
           <unnnic-tag
             @click.native="repositoryDetailsRouterParams()"
-            text="Abrir"
+            :text="$t('webapp.intelligences_lib.open')"
             scheme="aux-blue"
             class="unnnic-card-intelligence__header__buttons__tag"
             clickable
@@ -32,17 +33,17 @@
             />
           </div>
 
-          <unnnic-dropdown-item @click="dropdownOpen = false">
+          <unnnic-dropdown-item @click="showDetailModal(intentModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="graph-stats-1" />
-              <div>Visualizar intenções</div>
+              <div>{{$tc('webapp.intelligences_lib.show_intents', 2)}}</div>
             </div>
           </unnnic-dropdown-item>
 
-          <unnnic-dropdown-item @click="dropdownOpen = false">
+          <unnnic-dropdown-item @click="showDetailModal(laguagueModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="translate-1" />
-              <div>Visualizar idiomas</div>
+              <div>{{$tc('webapp.intelligences_lib.show_languages', 2)}}</div>
             </div>
           </unnnic-dropdown-item>
         </unnnic-dropdown>
@@ -57,20 +58,20 @@
 
     <section class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
-        inteligência de Classificação
+        {{$t('webapp.intelligences_lib.classification_intelligence')}}
       </div>
-      <!-- <unnnic-tool-tip
-        text="Utiliza intenções e entidades para
-            interpretar e segmentar as mensagens do usuário."
+      <unnnic-tool-tip
+        :text="$t('webapp.intelligences_lib.intelligence_tooltip')"
         enabled
         side="bottom"
-      > -->
+        max-width="17rem"
+      >
       <unnnic-icon
         icon="information-circle-4"
         class="unnnic-card-intelligence__type__icon"
         size="sm"
       />
-      <!-- </unnnic-tool-tip> -->
+      </unnnic-tool-tip>
     </section>
 
     <div class="unnnic-card-intelligence__divider" />
@@ -78,7 +79,7 @@
     <section class="unnnic-card-intelligence__detail">
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-          Intenção
+          {{$tc('webapp.intelligences_lib.intent', 10)}}
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
@@ -99,7 +100,7 @@
 
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-          Entidade
+          {{$tc('webapp.intelligences_lib.language', 10)}}
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
@@ -135,7 +136,28 @@ export default {
       default: null,
     },
   },
+  computed: {
+    intentModal() {
+      return {
+        title: this.$tc('webapp.intelligences_lib.intent_modal_title', 1,
+          { nick: this.repositoryDetail.name }),
+        subtitle: this.$tc('webapp.intelligences_lib.intent_modal_subtitle', 10),
+        type: 0
+      }
+    },
+    laguagueModal() {
+      return {
+        title: this.$tc('webapp.intelligences_lib.language_modal_title', 1,
+          { nick: this.repositoryDetail.name }),
+        subtitle: this.$t('webapp.intelligences_lib.language_modal_subtitle', 10),
+        type: 1
+      }
+    }
+  },
   methods: {
+    showDetailModal(value){
+      this.$emit('dispatchShowModal', value)
+    },
     repositoryDetailsRouterParams() {
       this.$router.push({
         name: 'repository-summary',
@@ -150,8 +172,8 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~unnic-system-beta/dist/unnnic.css";
-@import "~unnic-system-beta/src/assets/scss/unnnic.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .unnnic-card-intelligence {
   display: flex;
@@ -220,7 +242,6 @@ export default {
         div {
           display: flex;
           flex-wrap: nowrap;
-          /* justify-content: center; */
           padding-left: $unnnic-inset-xs;
           min-width: 7.6rem;
         }

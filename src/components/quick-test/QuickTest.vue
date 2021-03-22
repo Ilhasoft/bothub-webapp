@@ -208,8 +208,8 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
  ::-webkit-scrollbar {
   width: 4px;

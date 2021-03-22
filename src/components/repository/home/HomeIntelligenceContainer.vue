@@ -10,8 +10,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~unnic-system-beta/dist/unnnic.css";
-@import "~unnic-system-beta/src/assets/scss/unnnic.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .home-intelligences-container {
   height: 63vh;

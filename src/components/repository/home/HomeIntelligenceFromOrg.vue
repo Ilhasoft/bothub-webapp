@@ -4,7 +4,7 @@
       <div class="home-intelligences-from-org__cards">
         <unnnic-card
           clickable
-          text="Nova Inteligência"
+          :text="$t('webapp.intelligences_lib.new_intelligence')"
           type="blank"
           icon="add-1"
           class="home-intelligences-from-org__cards__new"
@@ -14,6 +14,7 @@
           v-for="list in repositoryOrgList"
           :key="list.uuid"
           :repository-detail="list"
+          @dispatchShowModal="showModal($event)"
         />
       </div>
       <infinite-scroll
@@ -21,6 +22,12 @@
         @intersect="getOrgsRepositories()"
       />
     </div>
+    <modal-container
+      :info-modal="modalInfo"
+      :show-modal="openModal"
+      @closeModal="openModal = false"
+    >
+    </modal-container>
   </home-intelligence-container>
 </template>
 <script>
@@ -28,20 +35,32 @@ import { mapActions } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 import infiniteScroll from '@/components/shared/infiniteScroll';
+import ModalContainer from '@/components/repository/home/ModalContainer';
 
 export default {
   name: 'HomeIntelligenceFromOrg',
-  components: { HomeRepositoryCard, HomeIntelligenceContainer, infiniteScroll },
+  components: {
+    HomeRepositoryCard,
+    HomeIntelligenceContainer,
+    infiniteScroll,
+    ModalContainer,
+  },
   data() {
     return {
       repositoryOrgList: [],
       page: 0,
       isComplete: false,
       error: null,
+      modalInfo: {},
+      openModal: false,
     };
   },
   methods: {
     ...mapActions(['getRepositories']),
+    showModal(value) {
+      this.openModal = true;
+      this.modalInfo = { ...value };
+    },
     async getOrgsRepositories() {
       try {
         const { data } = await this.getRepositories({
@@ -66,8 +85,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~unnic-system-beta/dist/unnnic.css";
-@import "~unnic-system-beta/src/assets/scss/unnnic.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .home-intelligences-from-org {
   &__cards {

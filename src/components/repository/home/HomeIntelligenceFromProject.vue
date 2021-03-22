@@ -4,14 +4,14 @@
     <section class="home-intelligences-from-project__content"
       v-if="repositoryList.length === 0">
         <div class="home-intelligences-from-project__content__text">
-          <p>Seu projeto não está fazendo uso de inteligências. Crie uma nova
-            ou explore entre as inteligências da sua organização ou comunidade
-          nas opções acima.</p>
+          <p>
+          {{$t('webapp.intelligences_lib.unused_projects')}}
+          </p>
         </div>
 
         <div class="home-intelligences-from-project__content__button">
-          <unnnic-button type="secondary" iconLeft="add-1">
-            Nova inteligência
+          <unnnic-button type="secondary" iconLeft="add-1" @click="createNewIntelligence()">
+            {{$t('webapp.intelligences_lib.new_intelligence')}}
           </unnnic-button>
         </div>
       </section>
@@ -36,12 +36,19 @@ export default {
       repositoryList: []
     };
   },
+  methods: {
+    createNewIntelligence() {
+      this.$router.push({
+        name: 'new',
+      });
+    },
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
 .home-intelligences-from-project{
   &__content{
