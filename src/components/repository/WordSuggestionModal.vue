@@ -227,9 +227,20 @@ export default {
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
-::-webkit-scrollbar {
-    height: 0.5rem;
+ ::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: $unnnic-color-neutral-soft;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $unnnic-color-neutral-clean;
+  border-radius: $unnnic-border-radius-pill;
 }
 
 .modal-style{

@@ -10,50 +10,6 @@
       <div class="layout__loading__progress" />
     </div>
     <div class="layout__header">
-      <div class="layout__header__container">
-        <div class="layout__header__container__fields">
-          <div class="layout__header__options">
-            <div
-              v-if="authenticated"
-              id="tour-create_intelligence-step-1"
-              :is-next-disabled="true"
-              :is-previous-disabled="true"
-              :is-step-blocked="!blockedNextStepTutorial"
-              class="hide-mobile">
-              <router-link :to="'/new'">
-                <b-button
-                  type="is-primary"
-                  inverted
-                  rounded
-                  @click="blockedNextStepTutorial = true">
-                  <strong>{{ $t('webapp.layout.newbot') }}</strong>
-                </b-button>
-              </router-link>
-            </div>
-            <div
-              v-if="authenticated">
-                <b-button
-                  type="is-primary"
-                  inverted
-                  rounded
-                 @click="openMyProfile()">
-                  <strong> {{ $t('webapp.layout.my_intelligence') }}</strong>
-                </b-button>
-            </div>
-            <div class="layout__header__options__buttons" v-if="!authenticated" >
-              <b-button
-                expanded
-                class="layout__header__options__buttons__btn"
-                @click="signIn()">{{ $t('webapp.layout.signin') }}</b-button>
-              <b-button
-                expanded
-                type='is-primary'
-                class="layout__header__options__buttons__btn hide-mobile"
-                @click="signUp()">{{ $t('webapp.layout.signup') }}</b-button>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="layout__content">
       <slot/>
@@ -94,20 +50,10 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      beginnerTutorialModalOpen: false,
-      blockedNextStepTutorial: false,
-    };
-  },
   computed: {
     ...mapGetters([
-      'authenticated',
       'myProfile',
     ]),
-    tutorialEnabled() {
-      return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
-    },
   },
   watch: {
     title() {
@@ -121,39 +67,7 @@ export default {
   methods: {
     ...mapActions([
       'updateMyProfile',
-      'logout',
-      'setTutorialMenuActive',
     ]),
-    openNewRepository() {
-      this.$router.push({
-        name: 'new',
-      });
-    },
-    openMyProfile() {
-      if (this.$router.currentRoute.name !== 'profile') {
-        this.$router.push({ name: 'profile' });
-      }
-    },
-    openBeginnerTutorialModal() {
-      if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
-        this.setTutorialMenuActive();
-      }
-    },
-    orgs() {
-      this.$router.push({
-        name: 'orgs',
-      });
-    },
-    signIn() {
-      this.$router.push({
-        name: 'signIn',
-      });
-    },
-    signUp() {
-      this.$router.push({
-        name: 'signUp',
-      });
-    },
   },
 };
 </script>
@@ -210,101 +124,6 @@ export default {
 
   &__header {
     padding: $loading-height*3.8 5rem;
-
-    &__container {
-      display: flex;
-      width: 100%;
-      align-items: center;
-      justify-content: flex-end;
-
-    &__logo {
-      min-width: ($size-normal * .75);
-
-      img {
-        display: block;
-        height: $size-small * 1.3;
-      }
-    }
-      &__center {
-        width: 50%;
-        @media screen and (max-width: $mobile-width * 1.5) {
-          width: 40%;
-        }
-        @media screen and (max-width: $mobile-width * 1.2) {
-          width: 30%;
-        }
-        @media screen and (max-width: $mobile-width) {
-          width: 50%;
-        }
-      }
-
-      &__fields{
-        display: flex;
-        justify-content: center;
-        width: 45%;
-        @media screen and (max-width: $mobile-width * 1.3) {
-          width: 50%;
-        }
-        @media screen and (max-width: $mobile-width * 1.2) {
-          width: 52%;
-        }
-      }
-    }
-
-    &__options {
-      width: 85%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      @media screen and (max-width: $mobile-width * 1.5) {
-          width: 100%;
-      }
-      @media screen and (max-width: $mobile-width) {
-        justify-content: center;
-      }
-
-      strong {
-        letter-spacing: 0.8px;
-      }
-
-      &__buttons{
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-
-        &__btn {
-          width: 40%;
-           @media screen and (max-width: $mobile-width) {
-              width: 100%;
-            }
-        }
-      }
-    }
-
-    &__icon-tutorial {
-      color: $color-white;
-      margin: 0;
-      cursor: pointer;
-
-      &--center {
-        align-self: center;
-      }
-
-      &:hover {
-        color: $color-fake-white;
-      }
-    }
-      &__icon {
-      margin-left: 0.5rem;
-      color: white;
-      width: 1rem;
-      height: 3rem;
-      cursor: pointer;
-      float: right;
-    }
-    &__center {
-      width: 50%;
-    }
   }
 
   &__content {

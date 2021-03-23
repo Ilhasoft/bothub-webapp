@@ -4,18 +4,18 @@
     <section class="home-intelligences-from-project__content"
       v-if="repositoryList.length === 0">
         <div class="home-intelligences-from-project__content__text">
-          <p>Seu projeto não está fazendo uso de inteligências. Crie uma nova
-            ou explore entre as inteligências da sua organização ou comunidade
-          nas opções acima.</p>
+          <p>
+          {{$t('webapp.intelligences_lib.unused_projects')}}
+          </p>
         </div>
 
         <div class="home-intelligences-from-project__content__button">
-          <unnnic-button type="secondary" iconLeft="add-1">
-            Nova inteligência
+          <unnnic-button type="secondary" iconLeft="add-1" @click="createNewIntelligence()">
+            {{$t('webapp.intelligences_lib.new_intelligence')}}
           </unnnic-button>
         </div>
       </section>
-      <div class="home-intelligences-from-project__cards" v-else>
+      <div v-else class="home-intelligences-from-project__cards">
           <home-repository-card
             v-for="list in repositoryList"
             :key="list.uuid"
@@ -31,29 +31,35 @@ import HomeIntelligenceContainer from '@/components/repository/home/HomeIntellig
 export default {
   name: 'HomeIntelligenceFromProject',
   components: { HomeRepositoryCard, HomeIntelligenceContainer },
-  props: {
-    repositoryList: {
-      type: [Object, Array],
-      default: null,
-    }
+  data() {
+    return {
+      repositoryList: []
+    };
+  },
+  methods: {
+    createNewIntelligence() {
+      this.$router.push({
+        name: 'new',
+      });
+    },
   }
-
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
 .home-intelligences-from-project{
   &__content{
     margin: auto;
     width: 50%;
-    height: 100%;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 
     &__text{
       margin-bottom: 2.25rem
@@ -67,7 +73,10 @@ export default {
   &__cards {
     display: grid;
     justify-content: space-between;
-    grid-template-columns: repeat(3, 32%);
+    grid-template-columns: repeat(4, 24%);
+      @media screen and (max-width: 1400px) {
+        grid-template-columns: repeat(3, 32%);
+      }
   }
 }
 

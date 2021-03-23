@@ -11,11 +11,10 @@
 import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
-import unnic from 'unnic-system-beta';
-// import TutorialModal from '@/components/TutorialModal';
+import unnic from '@weni/unnnic-system';
+
 const components = {
   NewsModal,
-  // TutorialModal,
 };
 
 export default {
@@ -50,22 +49,20 @@ export default {
 @import '~buefy/src/scss/buefy';
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
-::-webkit-scrollbar {
-  width: 0.6rem;
+ ::-webkit-scrollbar {
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #e9e9ec;
+  background: $unnnic-color-neutral-soft;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $color-primary;
-  border-radius: 1rem;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $unnnic-color-neutral-clean;
+  border-radius: $unnnic-border-radius-pill;
 }
 
 :not(.quick-test, .notices) {

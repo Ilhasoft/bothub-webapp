@@ -41,36 +41,6 @@ describe('Layout.vue', () => {
     });
   });
 
-  // describe('open new repository modal', () => {
-  //   beforeEach(() => {
-  //     wrapper.vm.openNewRepositoryModal();
-  //   });
-
-  //   test('newRepositoryModalOpen is true', () => {
-  //     expect(wrapper.vm.newRepositoryModalOpen).toBeTruthy();
-  //   });
-
-  //   describe('close new repository modal', () => {
-  //     beforeEach(() => {
-  //       wrapper.vm.closeNewRepositoryModal();
-  //     });
-
-  //     test('newRepositoryModalOpen is false', () => {
-  //       expect(wrapper.vm.newRepositoryModalOpen).toBeFalsy();
-  //     });
-  //   });
-  // });
-
-  describe('open my profile without being logged', () => {
-    beforeEach(async () => {
-      wrapper.vm.openMyProfile();
-    });
-
-    test('router path is "/signin"', () => {
-      expect(router.history.current.path).toBe('/signin');
-    });
-  });
-
   describe('loading', () => {
     beforeEach(() => {
       wrapper.setProps({ loading: true });

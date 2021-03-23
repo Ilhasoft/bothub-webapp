@@ -14,6 +14,7 @@ import '@mdi/font/css/materialdesignicons.css';
 import hljs from 'highlight.js';
 import VueHighlightJS from 'vue-highlightjs';
 
+
 Vue.use(Buefy);
 Vue.use(VueMoment);
 Vue.use(API);

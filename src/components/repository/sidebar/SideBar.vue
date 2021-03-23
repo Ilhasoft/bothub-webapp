@@ -363,8 +363,8 @@ export default {
 <style lang="scss">
 @import '~@/assets/scss/utilities.scss';
 @import '~@/assets/scss/variables.scss';
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
 .menu-list a {
   padding: 0.5em 1.6rem;

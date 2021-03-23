@@ -4,9 +4,9 @@
         <div class="tab-navigation__container__content">
           <unnnic-card
             clickable
-            title="Inteligências no projeto"
+            :title="$t('webapp.intelligences_lib.tab_project_title')"
             type="default"
-            description="São as inteligências em uso por Ilhasoft"
+            :description="$t('webapp.intelligences_lib.tab_project_subtitle', {org: 'Ilhasoft'})"
             :class="{'tab-navigation__container__content--selected': currentTab === 0}"
             @click.native="handleChangeTag(0)"
             />
@@ -15,9 +15,9 @@
         <div class="tab-navigation__container__content">
           <unnnic-card
             clickable
-            title="Inteligências da organização"
+            :title="$t('webapp.intelligences_lib.tab_org_title')"
             type="default"
-            description="Visualize e use as inteligências da organização."
+            :description="$t('webapp.intelligences_lib.tab_org_subtitle')"
             :class="{'tab-navigation__container__content--selected': currentTab === 1}"
             @click.native="handleChangeTag(1)"
             />
@@ -26,9 +26,9 @@
         <div class="tab-navigation__container__content">
           <unnnic-card
             clickable
-            title="Inteligências da comunidade"
+            :title="$t('webapp.intelligences_lib.tab_community_title')"
             type="default"
-            description="Visualize e use as inteligências públicas."
+            :description="$t('webapp.intelligences_lib.tab_community_subtitle')"
             :class="{'tab-navigation__container__content--selected': currentTab === 2}"
             @click.native="handleChangeTag(2)"
             />
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: 'TabNavigation',
+  name: 'HomeTabNavigation',
   data(){
     return {
       currentTab: 0,
@@ -59,8 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~unnic-system-beta/dist/unnnic.css';
-@import '~unnic-system-beta/src/assets/scss/unnnic.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
+
+.unnnic-card-content{
+  max-height: 6.25rem;
+}
 
 .tab-navigation{
   padding: 0 $unnnic-inline-md;
