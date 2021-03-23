@@ -83,7 +83,7 @@
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
-            icon="graph-stats-1"
+            icon="typing-1"
             class="unnnic-card-intelligence__detail__content__data__info__icon"
             size="sm"
             scheme="aux-purple"

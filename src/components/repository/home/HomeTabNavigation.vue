@@ -62,6 +62,10 @@ export default {
 @import '~@weni/unnnic-system/dist/unnnic.css';
 @import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
+.unnnic-card-content{
+  max-height: 6.25rem;
+}
+
 .tab-navigation{
   padding: 0 $unnnic-inline-md;
   background-color: $unnnic-color-background-snow;

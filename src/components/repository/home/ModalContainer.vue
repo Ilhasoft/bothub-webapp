@@ -1,12 +1,12 @@
 <template>
-  <transition name="fade" v-if="showModal">
+  <transition name="modal-transition" v-if="showModal">
     <div class="modal-container">
       <div class="modal-container__content">
         <div class="modal-container__content__background">
           <section class="modal-container__content__background__header">
             <unnnic-icon
               size="lg"
-              icon="keyboard-arrow-left-1"
+              icon="keyboard-arrow-down-1"
               @click="closeModal()"
               clickable
             />
@@ -79,6 +79,23 @@ export default {
 @import "~@weni/unnnic-system/dist/unnnic.css";
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
+.modal-transition-leave-to{
+  animation: transition .2s reverse;
+}
+
+.modal-transition-enter-active {
+  animation: transition .2s;
+}
+
+@keyframes transition {
+  100% {
+    transform: translateY(0%);
+  }
+  0% {
+    transform: translateY(100%);
+  }
+}
+
 .modal-container {
   position: fixed;
   z-index: 9998;
@@ -87,7 +104,6 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.24);
-  transition: opacity 0.9s;
 
   &__content {
     display: flex;
