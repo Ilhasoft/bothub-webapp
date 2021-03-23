@@ -1,6 +1,6 @@
 <template>
   <div
-    class="quick-test">
+    class="quick-test quick-test__non-printable">
     <div
       ref="expandQuickTest"
       class="quick-test__collapse-button"
@@ -252,6 +252,12 @@ export default {
         right: 0;
         z-index: 9;
         pointer-events: none;
+
+        @media print {
+          &__non-printable {
+            display: none;
+          }
+        }
 
         &__collapse-button {
           cursor: pointer;

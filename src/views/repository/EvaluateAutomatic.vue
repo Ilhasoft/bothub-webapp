@@ -50,7 +50,7 @@
                 {{ $t('webapp.evaluate-automatic.run_test') }}
               </b-button>
             </div>
-            <progress-stages/>
+            <progress-stages v-if="evaluateProgress" :progress-value="progress"/>
           </div>
         </div>
         <div class="evaluate__container">
@@ -103,6 +103,8 @@ export default {
       eventClickFinish: false,
       eventReset: false,
       eventSkip: false,
+      evaluateProgress: false,
+      progress: 0,
     };
   },
   computed: {
@@ -122,6 +124,10 @@ export default {
           title: `${LANGUAGES[lang]}`,
         }));
     },
+    repositoryUUID() {
+      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      return this.repository.uuid;
+    },
   },
   watch: {
     selectedRepository() {
@@ -129,11 +135,15 @@ export default {
         this.currentLanguage = this.selectedRepository.language;
       }
     },
+    async repositoryUUID() {
+      if (!this.repositoryUUID) { return; }
+      this.checkEvaluateProgress();
+    },
   },
   methods: {
     ...mapActions([
-      'runNewEvaluate',
-      'getTrainingStatus',
+      'runNewEvaluateAutomatic',
+      'getAutoEvaluateProgress',
     ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
@@ -155,34 +165,45 @@ export default {
       });
       this.updateRepository(false);
     },
-    async updateTrainingStatus() {
-      const trainStatus = await this.getTrainingStatus({
+    async checkEvaluateProgress(inProgress = false) {
+      const { data } = await this.getAutoEvaluateProgress({
         repositoryUUID: this.repository.uuid,
-        version: this.repositoryVersion,
+        repositoryVersion: this.repositoryVersion,
       });
-      if (trainStatus) {
-        Object.assign(this.repository, trainStatus);
+
+      const [evaluateStatus] = data.results;
+
+      if (!evaluateStatus) {
+        this.evaluating = false;
+        return;
+      }
+
+      if (evaluateStatus.status === 2) {
+        this.evaluating = false;
+        this.evaluateProgress = false;
+        return
+      }
+
+      if (evaluateStatus.status !== 2
+        || evaluateStatus.status !== 3){
+        this.evaluating = true;
+        this.evaluateProgress = true;
+        this.progress = evaluateStatus.status
+
+        setTimeout(() => {
+          this.checkEvaluateProgress(true);
+        }, 100000);
       }
     },
     async newEvaluate() {
       this.evaluating = true;
       try {
-        const result = await this.runNewEvaluate({
+        await this.runNewEvaluateAutomatic({
           repositoryUUID: this.repository.uuid,
           language: this.currentLanguage,
           version: this.repositoryVersion,
         });
-        this.evaluating = false;
-        this.$router.push({
-          name: 'repository-result',
-          params: {
-            ownerNickname: this.repository.owner.nickname,
-            slug: this.repository.slug,
-            resultId: result.data.evaluate_id,
-            version: result.data.evaluate_version,
-          },
-        });
-        return true;
+        await this.checkEvaluateProgress()
       } catch (error) {
         this.dispatchReset();
         this.error = error.response.data;

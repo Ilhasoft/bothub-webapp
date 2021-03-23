@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar sidebar__non-printable">
     <div :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'">
       <div
         ref="collapseButton"
@@ -77,14 +77,14 @@
               :active="checkSelectedMenu('repository-test-manual')"
               tag="router-link"
               @click.native="setSelectMenu({name: 'repository-test-manual', hideDropdown: false})"/>
-            <!-- <b-menu-item
+            <b-menu-item
               :to="{ name: 'repository-test-automatic' }"
               :label="$t('webapp.menu.test-automatic')"
               :active="checkSelectedMenu('repository-test-automatic')"
               tag="router-link"
               @click.native="setSelectMenu(
                 {name: 'repository-test-automatic', hideDropdown: false}
-            )"/> -->
+            )"/>
             <b-menu-item
               :to="{ name: 'repository-results' }"
               :label="$t('webapp.menu.results')"
@@ -307,7 +307,8 @@ export default {
       }
       if (this.$router.currentRoute.name === 'repository-test-automatic'
       || this.$router.currentRoute.name === 'repository-test-manual'
-      || this.$router.currentRoute.name === 'repository-results') {
+      || this.$router.currentRoute.name === 'repository-results'
+      || this.$router.currentRoute.name === 'repository-result') {
         this.isTestsActive = true;
       }
       if (this.$router.currentRoute.name === 'repository-training'
@@ -379,6 +380,12 @@ export default {
   box-shadow: 0px 3px 6px #000000;
   opacity: 1;
   font-family: $font-family;
+
+  @media print {
+    &__non-printable {
+      display: none;
+    }
+  }
 
   @media screen and (max-width: $mobile-width) {
     top: 12rem;

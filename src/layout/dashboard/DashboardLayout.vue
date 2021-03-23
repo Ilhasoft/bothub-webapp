@@ -4,7 +4,7 @@
     <div
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
-      <div class="dashboard-layout__main-panel__header">
+      <div class="dashboard-layout__main-panel__header dashboard-layout__non-printable">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
             <custom-icon
@@ -221,7 +221,14 @@ export default {
 html{
   overflow-y:auto
 }
+
 .dashboard-layout {
+
+  @media print {
+    &__non-printable {
+      display: none !important;
+    }
+  }
 
   &__notification{
     top: 0;
