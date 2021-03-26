@@ -175,7 +175,8 @@
       "header_title_p": "Como seu modelo está performando? Você tem dados suficientes? Suas intenções e entidades foram bem desenhadas?",
       "header_title_p2": "Usando nossa função de teste, você pode avaliar a performance da sua inteligência facilmente.",
       "header_title_lang": "Selecione o idioma para executar o teste.",
-      "run_test": "Executar teste"
+      "run_test": "Executar teste",
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "result": {
       "load_result": "Carregar Resultados",

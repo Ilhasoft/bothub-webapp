@@ -178,7 +178,8 @@ export default {
         return;
       }
 
-      if (evaluateStatus.status === 2) {
+      if (evaluateStatus.status === 2
+       || evaluateStatus.status === 3) {
         this.evaluating = false;
         this.evaluateProgress = false;
         return

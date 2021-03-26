@@ -174,7 +174,8 @@
       "header_title_p": "How is your model performing? Do you have enough data? Are your intents and entities well-designed?",
       "header_title_p2": "Using our testing feature, you can evaluate your bot's performance easily.",
       "header_title_lang": "Select the language to run the test",
-      "run_test": "Run test"
+      "run_test": "Run test",
+      "default_error": "Something went wrong, try again later."
     },
     "result": {
       "load_result": "Load Results",
