@@ -20,8 +20,9 @@ export default {
       '/v2/account/my-profile/',
     );
   },
-  searchRepositories(limit, offset, nickname) {
-    const queryString = qs.stringify(limit, offset, nickname);
+  // eslint-disable-next-line camelcase
+  searchByOwner(limit, offset, owner_id) {
+    const queryString = qs.stringify(limit, offset, owner_id);
     return request.$http.get(`/v2/repository/search-repositories/?${queryString}`);
   },
   permissionRepositories() {

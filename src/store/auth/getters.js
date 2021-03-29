@@ -5,4 +5,7 @@ export default {
   authenticated(state) {
     return !!state.token;
   },
+  getOrgSelected(state) {
+    return state.org;
+  },
 };

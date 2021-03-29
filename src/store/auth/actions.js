@@ -16,6 +16,10 @@ export default {
     if (!token) return;
     commit(TYPES.SET_TOKEN, token);
   },
+  async orgSelected({ commit }, { org }) {
+    if (!org) return;
+    commit(TYPES.SET_ORG, org);
+  },
   retriveAuthToken({ commit }) {
     /* istanbul ignore next */
     if (window.localStorage) {

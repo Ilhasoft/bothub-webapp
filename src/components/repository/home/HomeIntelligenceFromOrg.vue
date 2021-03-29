@@ -31,7 +31,7 @@
   </home-intelligence-container>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 import infiniteScroll from '@/components/shared/infiniteScroll';
@@ -55,6 +55,9 @@ export default {
       openModal: false,
     };
   },
+  computed: {
+    ...mapGetters(['getOrgSelected']),
+  },
   methods: {
     ...mapActions(['getRepositories']),
     showModal(value) {
@@ -66,7 +69,7 @@ export default {
         const { data } = await this.getRepositories({
           limit: 20,
           offset: this.page,
-          nickname: 'ilhasoft',
+          owner_id: this.getOrgSelected,
         });
         this.page += 20;
         this.repositoryOrgList = [...this.repositoryOrgList, ...data.results];
