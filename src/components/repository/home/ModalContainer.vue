@@ -15,39 +15,46 @@
               <div
                 class="modal-container__content__background__header__text__title"
               >
-                {{infoModal.title}}
+                {{ infoModal.title }}
               </div>
               <div
                 class="modal-container__content__background__header__text__subtitle"
               >
-                {{infoModal.subtitle}}
+                {{ infoModal.subtitle }}
               </div>
             </div>
           </section>
 
-          <section class="modal-container__content__background__content"
-            v-if="infoModal.type === 0">
-            <span :key="tag" v-for="tag in 100"
-            class="modal-container__content__background__content__tags">
-              <unnnic-tag
-                @click.native="repositoryDetailsRouterParams()"
-                text="calculate"
-                type="indicator"
-                :count="100"
-                scheme="aux-blue"
-                clickable
-              />
-            </span>
-          </section>
-
-          <section class="modal-container__content__background__content" v-else>
-            <div class="modal-container__content__background__content__list">
-              <span :key="tag" v-for="tag in 30">
-                  Portuguese
+          <section
+            class="modal-container__content__background__content"
+            v-if="infoModal.type === 0"
+          >
+            <div class="modal-container__content__background__content__tags">
+              <span :key="tag.id" v-for="tag in infoModal.intents">
+                <unnnic-tag
+                  @click.native="goToIntentList(tag.id)"
+                  :text="tag.value"
+                  type="indicator"
+                  :count="tag.examples__count"
+                  scheme="aux-blue"
+                  clickable
+                  enableTooltip
+                  :tooltipText="$t('webapp.intelligences_lib.intent_count')"
+                />
               </span>
             </div>
           </section>
 
+          <section class="modal-container__content__background__content" v-else>
+            <div class="modal-container__content__background__content__list">
+              <span
+                :key="language"
+                v-for="language in this.infoModal.languages"
+              >
+                {{ language | languageVerbose }}
+              </span>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -71,6 +78,16 @@ export default {
     closeModal() {
       this.$emit('closeModal');
     },
+    goToIntentList(intent) {
+      this.$router.push({
+        name: 'repository-intentlist',
+        params: {
+          ownerNickname: this.infoModal.ownerNickname,
+          slug: this.infoModal.slug,
+          intent,
+        },
+      });
+    },
   },
 };
 </script>
@@ -79,12 +96,12 @@ export default {
 @import "~@weni/unnnic-system/dist/unnnic.css";
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
-.modal-transition-leave-to{
-  animation: transition .2s reverse;
+.modal-transition-leave-to {
+  animation: transition 0.2s reverse;
 }
 
 .modal-transition-enter-active {
-  animation: transition .2s;
+  animation: transition 0.2s;
 }
 
 @keyframes transition {
@@ -148,16 +165,20 @@ export default {
       }
 
       &__content {
-        height: 80%;
-        display: flex;
         overflow: auto;
-        flex-wrap: wrap;
         margin-top: $unnnic-inset-md;
+        height: 80%;
 
-        &__tags{
-          margin: $unnnic-inset-nano;
+        &__tags {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+
+          span {
+            margin: $unnnic-inset-nano;
+          }
         }
-        &__list{
+        &__list {
           display: flex;
           flex-direction: column;
           overflow: auto;
@@ -167,7 +188,6 @@ export default {
           }
         }
       }
-
     }
   }
 }

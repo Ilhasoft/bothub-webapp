@@ -14,10 +14,11 @@ export default {
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .home-intelligences-container {
-  height: 63vh;
+  height: 70vh;
   overflow-y: auto;
   overflow-x: hidden;
   margin: $unnnic-inline-md;
   background-color: $unnnic-color-background-snow;
+  padding: 0 $unnnic-inline-nano;
 }
 </style>

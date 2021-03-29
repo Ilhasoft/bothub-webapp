@@ -5,6 +5,7 @@
           :title="$t('webapp.intelligences_lib.title')"
           icon="layout-dashboard-2"
           type="title"
+          :has-information-icon="false"
           scheme="aux-blue"/>
     </section>
 

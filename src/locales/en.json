@@ -63,7 +63,8 @@
       "tab_org_title": "Organization Intelligence",
       "tab_org_subtitle": "Visualize and use the organization's intelligence.",
       "tab_community_title": "Community Intelligence",
-      "tab_community_subtitle": "Visualize and use public intelligence." 
+      "tab_community_subtitle": "Visualize and use public intelligence.",
+      "intent_count": "Number of intention phrases" 
     },
     "create_repository": {
       "create_repo": "Create an intelligence",

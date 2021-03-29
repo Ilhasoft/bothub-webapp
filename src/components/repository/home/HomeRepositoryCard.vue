@@ -5,8 +5,9 @@
         <div class="unnnic-card-intelligence__header__detail__title">
           {{ repositoryDetail.name }}
         </div>
+
         <div class="unnnic-card-intelligence__header__detail__subtitle">
-          {{$t('webapp.intelligences_lib.created_by')}}
+          {{ $t("webapp.intelligences_lib.created_by") }}
           <strong>{{ repositoryDetail.owner__nickname }}</strong>
         </div>
       </div>
@@ -36,14 +37,14 @@
           <unnnic-dropdown-item @click="showDetailModal(intentModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="graph-stats-1" />
-              <div>{{$tc('webapp.intelligences_lib.show_intents', 2)}}</div>
+              <div>{{ $tc("webapp.intelligences_lib.show_intents", 2) }}</div>
             </div>
           </unnnic-dropdown-item>
 
           <unnnic-dropdown-item @click="showDetailModal(laguagueModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="translate-1" />
-              <div>{{$tc('webapp.intelligences_lib.show_languages', 2)}}</div>
+              <div>{{ $tc("webapp.intelligences_lib.show_languages", 2) }}</div>
             </div>
           </unnnic-dropdown-item>
         </unnnic-dropdown>
@@ -51,14 +52,12 @@
     </section>
 
     <section class="unnnic-card-intelligence__description">
-      Inteligência criada especialmente para utilização em chats de suporte ao
-      cliente. Inteligência criada especialmente para utilização em chats de
-      suporte ao cliente.
+        {{ repositoryDetail.description }}
     </section>
 
     <section class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
-        {{$t('webapp.intelligences_lib.classification_intelligence')}}
+        {{ $t("webapp.intelligences_lib.classification_intelligence") }}
       </div>
       <unnnic-tool-tip
         :text="$t('webapp.intelligences_lib.intelligence_tooltip')"
@@ -66,11 +65,11 @@
         side="bottom"
         max-width="17rem"
       >
-      <unnnic-icon
-        icon="information-circle-4"
-        class="unnnic-card-intelligence__type__icon"
-        size="sm"
-      />
+        <unnnic-icon
+          icon="information-circle-4"
+          class="unnnic-card-intelligence__type__icon"
+          size="sm"
+        />
       </unnnic-tool-tip>
     </section>
 
@@ -79,7 +78,12 @@
     <section class="unnnic-card-intelligence__detail">
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-          {{$tc('webapp.intelligences_lib.intent', 10)}}
+          {{
+            $tc(
+              "webapp.intelligences_lib.intent",
+              this.repositoryDetail.intents.length
+            )
+          }}
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
@@ -93,14 +97,19 @@
           <div
             class="unnnic-card-intelligence__detail__content__data__info__number"
           >
-            12
+            {{ repositoryDetail.intents.length }}
           </div>
         </div>
       </div>
 
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-          {{$tc('webapp.intelligences_lib.language', 10)}}
+          {{
+            $tc(
+              "webapp.intelligences_lib.language",
+              this.repositoryDetail.available_languages.length
+            )
+          }}
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
@@ -114,7 +123,7 @@
           <div
             class="unnnic-card-intelligence__detail__content__data__info__number"
           >
-            10
+            {{ repositoryDetail.available_languages.length }}
           </div>
         </div>
       </div>
@@ -139,24 +148,36 @@ export default {
   computed: {
     intentModal() {
       return {
-        title: this.$tc('webapp.intelligences_lib.intent_modal_title', 1,
-          { nick: this.repositoryDetail.name }),
-        subtitle: this.$tc('webapp.intelligences_lib.intent_modal_subtitle', 10),
-        type: 0
-      }
+        title: this.$tc('webapp.intelligences_lib.intent_modal_title', 1, {
+          nick: this.repositoryDetail.name,
+        }),
+        subtitle: this.$tc(
+          'webapp.intelligences_lib.intent_modal_subtitle',
+          10
+        ),
+        type: 0,
+        intents: this.repositoryDetail.intents,
+        ownerNickname: this.repositoryDetail.owner__nickname,
+        slug: this.repositoryDetail.slug,
+      };
     },
     laguagueModal() {
       return {
-        title: this.$tc('webapp.intelligences_lib.language_modal_title', 1,
-          { nick: this.repositoryDetail.name }),
-        subtitle: this.$t('webapp.intelligences_lib.language_modal_subtitle', 10),
-        type: 1
-      }
-    }
+        title: this.$tc('webapp.intelligences_lib.language_modal_title', 1, {
+          nick: this.repositoryDetail.name,
+        }),
+        subtitle: this.$t(
+          'webapp.intelligences_lib.language_modal_subtitle',
+          10
+        ),
+        type: 1,
+        languages: this.repositoryDetail.available_languages,
+      };
+    },
   },
   methods: {
-    showDetailModal(value){
-      this.$emit('dispatchShowModal', value)
+    showDetailModal(value) {
+      this.$emit('dispatchShowModal', value);
     },
     repositoryDetailsRouterParams() {
       this.$router.push({
@@ -205,7 +226,7 @@ export default {
         overflow: hidden;
         text-overflow: ellipsis;
         display: block;
-        max-width: 15rem;
+        max-width: 13rem;
       }
 
       &__subtitle {
@@ -256,6 +277,8 @@ export default {
     color: $unnnic-color-neutral-cloudy;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
     margin: $unnnic-spacing-stack-sm 0;
+    min-height: 3.125rem;
+    padding-top: $unnnic-inline-xs;
 
     overflow: hidden;
     display: -webkit-box;

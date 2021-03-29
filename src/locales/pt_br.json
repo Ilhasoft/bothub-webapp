@@ -63,7 +63,8 @@
       "tab_org_title": "Inteligências da Organização",
       "tab_org_subtitle": "Visualize e use as inteligências da organização.",
       "tab_community_title": "Inteligências da Comunidade",
-      "tab_community_subtitle": "Visualize e use as inteligências públicas." 
+      "tab_community_subtitle": "Visualize e use as inteligências públicas.",
+      "intent_count": "Número de frases da intenção"
     },
     "create_repository": {
       "create_repo": "Crie uma inteligência",
