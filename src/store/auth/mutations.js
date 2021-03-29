@@ -15,6 +15,6 @@ export default {
     }
   },
   [TYPES.SET_ORG](state, org) {
-    state.token = org;
+    state.org = org;
   },
 };
