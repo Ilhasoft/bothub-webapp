@@ -75,7 +75,6 @@ export default new Router({
       component: null,
       beforeEnter: async (to, from, next) => {
         const { token, org } = to.params;
-        console.log(org)
         store.dispatch('externalLogin', { token: token.replace('+', ' ') });
         store.dispatch('orgSelected', { org });
         next('/home');
