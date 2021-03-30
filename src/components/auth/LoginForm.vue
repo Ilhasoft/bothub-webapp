@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit" class="login-form">
+  <form @submit.prevent="onSubmit">
     <loading v-if="!formSchema" />
     <form-generator
       v-if="formSchema"
