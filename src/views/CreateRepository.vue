@@ -35,7 +35,7 @@ export default {
   height: 100vh;
   width: 100%;
     &__login-form {
-      margin: 5rem 5rem;
+      padding: 5rem 5rem;
     }
 }
 
