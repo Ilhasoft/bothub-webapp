@@ -1,83 +1,119 @@
 <template>
-  <repository-view-base
-    :repository="repository"
-    :error-code="errorCode">
+  <repository-view-base :repository="repository" :error-code="errorCode">
     <div v-if="repository">
-      <div
-        v-if="authenticated"
-        class="repository-analyze-text" >
+      <div v-if="authenticated" class="repository-analyze-text">
         <div class="repository-analyze-text__title">
-          <h2>{{ $t('webapp.integration.title') }}</h2>
-          <span>{{ $t('webapp.integration.description') }}</span>
+          <h2>{{ $t("webapp.integration.title") }}</h2>
+          <span>{{ $t("webapp.integration.description") }}</span>
         </div>
         <div class="repository-analyze-text-header">
           <div class="repository-analyze-text-header-field">
             <p><strong>URL:</strong></p>
-              <highlighted-code code-class="plaintext">
-                {{ repository.nlp_server }}v2/parse/
-              </highlighted-code>
+            <highlighted-code code-class="plaintext">
+              {{ repository.nlp_server }}v2/parse/
+            </highlighted-code>
           </div>
           <div class="repository-analyze-text-header-field">
-            <p><strong>{{ $t('webapp.analyze_text.method_send') }}</strong></p>
-            <highlighted-code code-class="json">{
-                "language":"[{{ $t('webapp.analyze_text.language_code') }}]"
-                "text": "[{{ $t('webapp.analyze_text.text_to_analyze') }}]"
-              }
+            <div class="repository-analyze-text-header-field__label">
+              <p>
+                <strong>{{ $t("webapp.analyze_text.method_send") }}</strong>
+              </p>
+
+              <b-tooltip
+                :label="$t('webapp.analyze_text.tooltip_send')"
+                type="is-dark"
+                position="is-right"
+              >
+                <b-icon
+                  custom-size="mdi-18px"
+                  type="is-dark"
+                  icon="help-circle"
+                />
+              </b-tooltip>
+            </div>
+            <highlighted-code code-class="json"
+              >{ "language":"[{{ $t("webapp.analyze_text.language_code") }}]"
+              "text": "[{{ $t("webapp.analyze_text.text_to_analyze") }}]" }
             </highlighted-code>
           </div>
         </div>
         <div class="repository-analyze-text__item">
           <p><strong>Header:</strong></p>
           <div class="repository-analyze-text__item__authotization-container">
-            <p>Authorization:</p>
+            <div
+              class="repository-analyze-text__item__authotization-container__title"
+            >
+              <p>Access token:</p>
+              <b-tooltip
+                label="Authorization"
+                type="is-dark"
+                position="is-right"
+              >
+                <b-icon
+                  custom-size="mdi-18px"
+                  type="is-dark"
+                  icon="help-circle"
+                />
+              </b-tooltip>
+            </div>
+
             <b-field>
               <b-select
                 v-model="profileAuth"
                 placeholder="Select a character"
-                expanded>
+                expanded
+              >
                 <option
                   v-for="option in getAuthorizations"
                   :value="option"
-                  :key="option.index">{{ option }}</option>
+                  :key="option.index"
+                >
+                  {{ option }}
+                </option>
               </b-select>
             </b-field>
-            <div class="repository-analyze-text__item__authotization-container__copy">
-              <strong>{{ getProfileDetail[0] }} - </strong> <p> {{ getProfileDetail[1] }}</p>
+            <div
+              class="repository-analyze-text__item__authotization-container__copy"
+            >
+              <strong>{{ getProfileDetail[0] }} - </strong>
+              <p>{{ getProfileDetail[1] }}</p>
               <b-icon
                 icon="content-copy"
                 class="repository-analyze-text__item__authotization-container__copy__icon"
-                @click.native="copyText()"/>
+                @click.native="copyText()"
+              />
             </div>
           </div>
         </div>
         <div class="columns">
           <div class="column">
             <div class="repository-analyze-text__item">
-              <p>{{ $t('webapp.analyze_text.grid1') }}</p>
+              <p>{{ $t("webapp.analyze_text.grid1") }}</p>
             </div>
-            <div
-              class="repository-analyze-text__item">
-              <p><strong>{{ $t('webapp.analyze_text.response') }}</strong></p>
+            <div class="repository-analyze-text__item">
+              <p>
+                <strong>{{ $t("webapp.analyze_text.response") }}</strong>
+              </p>
               <highlighted-code code-class="json">{{ json }}</highlighted-code>
             </div>
           </div>
           <div class="column">
             <div class="repository-analyze-text__item">
-              <div><strong>{{ $t('webapp.analyze_text.code_generator') }}</strong></div>
-              <div>{{ $t('webapp.analyze_text.code_generator_text') }}</div>
+              <div>
+                <strong>{{ $t("webapp.analyze_text.code_generator") }}</strong>
+              </div>
+              <div>{{ $t("webapp.analyze_text.code_generator_text") }}</div>
             </div>
             <request-generator
               :default-language-field="repository.language"
-              :authorization-uuid="getProfileDetail[1] || ''"/>
+              :authorization-uuid="getProfileDetail[1] || ''"
+            />
           </div>
         </div>
       </div>
-      <div
-        v-else>
-        <b-notification
-          :closable="false"
-          type="is-info">
-          {{ $t('webapp.analyze_text.notification_info') }}
+      <div v-else>
+        <b-notification :closable="false" type="is-info">
+          {{ $t("webapp.analyze_text.notification_info") }}
         </b-notification>
         <login-form hide-forgot-password />
       </div>
@@ -91,7 +127,6 @@ import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import HighlightedCode from '@/components/shared/HighlightedCode';
 import RepositoryBase from './Base';
-
 
 export default {
   name: 'RepositoryIntegration',
@@ -119,9 +154,7 @@ export default {
             confidence: 0.30565376061360666,
           },
         ],
-        groups_list: [
-          'animal',
-        ],
+        groups_list: ['animal'],
         entities_list: [],
         entities: {
           animal: [
@@ -142,19 +175,23 @@ export default {
   },
   computed: {
     profileToken() {
-      if (!this.repository || this.repository.authorization === 'null') { return null; }
+      if (!this.repository || this.repository.authorization === 'null') {
+        return null;
+      }
       return this.repository.authorization;
     },
     getAuthorizations() {
       if (this.repository.authorization.organizations !== undefined) {
         let authorization = [];
         if (this.repository.authorization.organizations.length !== 0) {
-          authorization = this.repository.authorization.organizations.map((auth) => {
-            const nickname = auth.user__nickname;
-            const id = auth.uuid;
+          authorization = this.repository.authorization.organizations.map(
+            (auth) => {
+              const nickname = auth.user__nickname;
+              const id = auth.uuid;
 
-            return `${nickname} - Bearer ${id}`;
-          });
+              return `${nickname} - Bearer ${id}`;
+            }
+          );
         }
         return authorization;
       }
@@ -170,11 +207,12 @@ export default {
   },
   watch: {
     profileToken() {
-      const { organizations } = this.repository.authorization
-      if (this.profileToken
-      && organizations
-      && organizations.length !== 0) {
-        const { user__nickname, uuid } = this.repository.authorization.organizations[0];
+      const { organizations } = this.repository.authorization;
+      if (this.profileToken && organizations && organizations.length !== 0) {
+        const {
+          user__nickname,
+          uuid,
+        } = this.repository.authorization.organizations[0];
         const profileAuthorization = `${user__nickname} - Bearer ${uuid}`;
         this.profileAuth = profileAuthorization;
       }
@@ -193,13 +231,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
 
 .repository-analyze-text {
-    font-family: $font-family;
+  font-family: $font-family;
 
-  &__title{
+  &__title {
     margin-bottom: $between-subtitle-content;
 
     h2 {
@@ -212,46 +250,52 @@ export default {
 
   &__item {
     margin: 1rem 0;
-    &__authotization-container{
+    &__authotization-container {
       padding: 1rem;
       background-color: rgb(248, 248, 248);
 
-      &__copy{
+      &__title {
+        display: flex;
+      }
+
+      &__copy {
         display: flex;
         text-align: center;
         justify-content: center;
         align-items: center;
-        margin:  1.5rem 0 1rem 0;
+        margin: 1.5rem 0 1rem 0;
 
         strong {
           font-size: 18px;
           user-select: none;
         }
 
-        p{
+        p {
           margin-left: 0.5rem;
         }
 
-        &__icon{
+        &__icon {
           margin-left: 2rem;
           color: $color-grey-dark;
           cursor: pointer;
         }
       }
-
     }
   }
 
-  &-header{
+  &-header {
     display: flex;
     width: 100%;
     justify-content: space-between;
     @media screen and (max-width: $mobile-width) {
       flex-direction: column;
       justify-content: center;
-        }
+    }
     &-field {
       width: 48%;
+      &__label{
+        display: flex;
+      }
       @media screen and (max-width: $mobile-width) {
         width: 100%;
       }

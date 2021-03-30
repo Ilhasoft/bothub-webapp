@@ -30,8 +30,6 @@ import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import DashboardExternalLayout from '@/layout/dashboard/DashboardExternalLayout';
 import PaymentOptions from '@/views/payment/PaymentOptions';
 import PaymentInfo from '@/views/payment/PaymentInfo';
-import Orgs from '@/views/Orgs';
-import Org from '@/views/Org';
 import store from '../store';
 
 Vue.use(Router);
@@ -211,30 +209,6 @@ export default new Router({
             component: RepositoryVersions,
           }] : []),
       ],
-    },
-    {
-      path: '/org/:org_nickname/',
-      name: 'org',
-      component: Org,
-      beforeEnter: async (to, from, next) => {
-        if (!store.getters.authenticated) {
-          next('/signin');
-        } else {
-          next();
-        }
-      },
-    },
-    {
-      path: '/orgs',
-      name: 'orgs',
-      component: Orgs,
-      beforeEnter: async (to, from, next) => {
-        if (!store.getters.authenticated) {
-          next('/signin');
-        } else {
-          next();
-        }
-      },
     },
     ...(process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED
       ? [{

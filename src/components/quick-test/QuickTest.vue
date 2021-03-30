@@ -26,7 +26,7 @@
           class="quick-test__login">
           {{ $t('webapp.quick_test.login_text') }}
           <b-field
-            grouped
+
             class="quick-test__login__buttons">
             <b-button
               type="is-primary"
@@ -284,7 +284,6 @@ export default {
           flex-direction: column;
 
           &__buttons {
-
             margin: 1rem 0;
 
             > * {

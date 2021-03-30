@@ -123,7 +123,8 @@
     },
     "analyze_text": {
       "grid1": "Faça uma requisição HTTP ao serviço NLP, siga o exemplo abaixo.",
-      "method_send": "POST com application/json:",
+      "method_send": "POST Corpo:",
+      "tooltip_send": "Post com Application Json",
       "language_code": "código do idioma",
       "text_to_analyze": "texto para análise",
       "response": "Resposta:",
@@ -556,11 +557,11 @@
       "test-manual": "Frases",
       "test-automatic": "Automático",
       "results": "Resultados",
-      "inbox": "Inbox",
+      "inbox": "Interações",
       "translation": "Tradução",
       "translation_status": "Status",
       "translate": "Traduzir",
-      "integration": "Integração",
+      "integration": "API",
       "settings": "Ajustes",
       "general":"Geral",
       "versions": "Versões"

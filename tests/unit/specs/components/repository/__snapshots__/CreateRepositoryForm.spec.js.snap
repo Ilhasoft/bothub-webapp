@@ -7,7 +7,7 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       <h1 class="create-repository__title"> some specific text </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <div id="tour-create_intelligence_forms-step-0" is-next-disabled="true" class="create-repository__container">
+      <div class="create-repository__container">
         <!---->
         <div class="create-repository__form__style">
           <!---->
@@ -20,11 +20,11 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       </h1>
       <p>some specific text</p>
       <loading-stub></loading-stub>
-      <div id="tour-create_intelligence_forms-step-1" is-finish-disabled="true" is-previous-disabled="true" class="">
+      <div>
         <!---->
         <div class="create-repository__buttons">
           <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
-          </b-button-stub> <span class=""><b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true" class="create-repository__form__buttons"> some specific text
+          </b-button-stub> <span class="create-repository__form__finishButton"><b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true" class="create-repository__form__buttons"> some specific text
             </b-button-stub></span>
         </div>
       </div>
@@ -36,6 +36,5 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
       </div>
     </div>
   </form>
-  <!---->
 </div>
 `;

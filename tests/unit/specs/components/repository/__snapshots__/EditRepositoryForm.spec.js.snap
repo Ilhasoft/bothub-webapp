@@ -5,7 +5,7 @@ exports[`EditRepositoryForm.vue renders correctly 1`] = `
   <loading-stub></loading-stub>
   <!---->
   <div class="text-center">
-    <b-button type="is-primary" native-type="submit">some specific text</b-button>
+    <!---->
   </div>
 </form>
 `;

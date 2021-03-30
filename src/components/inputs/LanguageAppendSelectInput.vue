@@ -83,7 +83,6 @@ export default {
 
 <style lang="scss">
 .language-append-select-input {
-
   min-height: 30px;
 
   &__language-select {
@@ -94,6 +93,7 @@ export default {
 .language-icon {
   color: black !important;
   pointer-events: all !important;
+  padding-bottom: 0.7rem;
 
   &__menu {
     width: 1rem !important;

@@ -42,7 +42,6 @@
 import { mapActions, mapGetters } from 'vuex';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
 import UserAvatar from '@/components/user/UserAvatar';
-import SiteFooter from '@/components/shared/SiteFooter';
 import QuickTest from '@/components/quick-test/QuickTest';
 import Loading from '@/components/shared/Loading';
 
@@ -58,7 +57,6 @@ export default {
     },
   },
   components: {
-    SiteFooter,
     QuickTest,
     UserAvatar,
     RequestAuthorizationModal,

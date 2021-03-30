@@ -149,7 +149,7 @@ export default {
         pointer-events: all !important;
         min-width: $form-append-width !important;
         > * {
-            pointer-events: all !important;
+          pointer-events: all !important;
         }
 
         &--small {
