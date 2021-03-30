@@ -1,25 +1,23 @@
 <template>
-  <layout>
+  <div class="create-repository">
     <login-form
       v-if="!authenticated"
-      class="login-form"
+      class="create-repository__login-form"
       hide-forgot-password />
     <create-repository-form
       v-else
       :user-name="myProfile.name"/>
-  </layout>
+  </div>
 </template>
 
 <script>
 import CreateRepositoryForm from '@/components/repository/CreateRepositoryForm';
-import Layout from '@/components/shared/Layout';
 import { mapGetters } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
 
 export default {
   name: 'CreateRepository',
   components: {
-    Layout,
     CreateRepositoryForm,
     LoginForm,
   },
@@ -33,9 +31,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-    .login-form {
+.create-repository {
+  height: 100vh;
+  width: 100%;
+    &__login-form {
       margin: 5rem 5rem;
     }
+}
 
 </style>

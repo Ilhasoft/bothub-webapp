@@ -15,10 +15,10 @@ exports[`SideBar.vue renders correctly 1`] = `
             </unnnic-tool-tip>
           </div>
           <p class="sidebar-wrapper__header__field__description__created-by"><span class="sidebar-wrapper__header__field__description__created-by__text">
-           CRIADO POR
-         </span> <span class="sidebar-wrapper__header__field__description__created-by__nick">
-           WENI
-         </span></p>
+              CRIADO POR
+            </span> <span class="sidebar-wrapper__header__field__description__created-by__nick">
+              WENI
+            </span></p>
         </div>
       </div>
       <unnnic-select selected="bothub" size="sm" placeholder="bothub" class="unnic--clickable sidebar-wrapper__header__select"></unnnic-select>

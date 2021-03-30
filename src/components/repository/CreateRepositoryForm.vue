@@ -10,13 +10,10 @@
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
         <div
-          id="tour-create_intelligence_forms-step-0"
-          :is-next-disabled="true"
           class="create-repository__container">
           <form-generator
             v-if="formSchema"
             :drf-model-instance="drfRepositoryModel"
-            :is-step-blocked="!checkFormData"
             :schema="filteredSchema"
             v-model="data"
             :errors="errors"
@@ -30,7 +27,7 @@
               :disabled="!checkFormData"
               type="is-primary"
               class="create-repository__form__style__button"
-              @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
+              @click="current = 1"> {{ $t('webapp.create_repository.next') }}
             </b-button>
           </div>
         </div>
@@ -43,27 +40,19 @@
         </h1>
         <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
-        <div
-          id="tour-create_intelligence_forms-step-1"
-          :is-finish-disabled="true"
-          :is-previous-disabled="true"
-          :class="activeTutorial === 'create_intelligence'
-          ? 'create-repository__form__tutorial' : ''">
+        <div>
           <category-select
             v-if="formSchema"
             v-model="categories"
-            :is-step-blocked="categories.length === 0"
             class="create-repository__form"/>
           <div class="create-repository__buttons">
             <b-button
-              :disabled="activeTutorial === 'create_intelligence'"
               type="is-primary"
               class="create-repository__form__buttons"
               @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
             </b-button>
             <span
-              :class="activeTutorial === 'create_intelligence'
-              ? 'create-repository__form__finishButton' : ''">
+              class="create-repository__form__finishButton">
               <b-button
                 :disabled="categories.length === 0"
                 native-type="submit"
@@ -104,13 +93,6 @@
         </div>
       </div>
     </form>
-    <tour
-      v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
-      :step-count="2"
-      :next-event="eventClick"
-      :finish-event="eventClickFinish"
-      :skip-if-back-page="eventClickBackPage"
-      name="create_intelligence_forms"/>
   </div>
 </template>
 
@@ -118,13 +100,12 @@
 import RepositoryCard from '@/components/repository/RepositoryCard';
 import FormGenerator from '@/components/form-generator/FormGenerator';
 import Loading from '@/components/shared/Loading';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import { updateAttrsValues } from '@/utils/index';
 import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
 import Analytics from '@/utils/plugins/analytics';
-import Tour from '@/components/Tour';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -133,7 +114,6 @@ export default {
     FormGenerator,
     RepositoryCard,
     CategorySelect,
-    Tour,
   },
   props: {
     userName: {
@@ -152,33 +132,22 @@ export default {
       categories: [],
       current: 0,
       resultParams: {},
-      eventClick: false,
-      eventClickFinish: false,
-      blockedNextStepTutorial: false,
-      eventClickBackPage: false,
     };
   },
   computed: {
-    ...mapGetters([
-      'activeTutorial',
-      'activeMenu',
-      'myProfile',
-    ]),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
-        // eslint-disable-next-line no-param-reassign
         if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
         return schema;
       }, {});
-      // eslint-disable-next-line camelcase
+      delete computed.available_languages
       const { is_private, ...schema } = computed;
       const organization = {
         label: this.$t('webapp.orgs.owner'),
         fetch: this.getOrgs,
         type: 'choice',
       };
-      // eslint-disable-next-line camelcase
       if (is_private) { return { ...schema, organization, is_private }; }
       return computed;
     },
@@ -212,9 +181,6 @@ export default {
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     this.constructModels();
-  },
-  beforeDestroy() {
-    this.checkIfIsTutorial();
   },
   methods: {
     ...mapActions([
@@ -250,17 +216,6 @@ export default {
           validateOnChange: true,
         });
     },
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
-    },
-    checkIfIsTutorial() {
-      if (this.activeTutorial === 'create_intelligence') {
-        this.setTutorialInactive();
-      }
-    },
     repositoryDetailsRouterParams() {
       return {
         name: 'repository-summary',
@@ -278,10 +233,7 @@ export default {
         label: org.name,
         value: org,
       }));
-      return [
-        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
-        ...options,
-      ];
+      return options
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
@@ -321,16 +273,9 @@ export default {
 
       try {
         const response = await updatedModel.save();
-        // eslint-disable-next-line camelcase
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
-        await this.clearTutorial();
-        await this.clearFinalizatioMessage();
-        await this.setFinalModal(false);
-        if (this.activeTutorial === 'create_intelligence') {
-          this.dispatchFinish();
-        }
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;
@@ -350,7 +295,9 @@ export default {
         display: flex;
         justify-content: space-around;
         text-align: center;
-        margin: 4rem 8rem;
+        padding: 2rem 4rem;
+
+        background-color: $color-fake-white;
 
         @media (max-width: $mobile-width * 1.5) {
           flex-direction: column;
@@ -374,7 +321,6 @@ export default {
 
         &__container{
           margin: 0;
-          padding: 0 0 1rem 0;
           width: 30.625rem;
         }
         &__form {
@@ -393,18 +339,8 @@ export default {
                 margin-top: 2rem;
               }
             }
-
-            &__tutorial{
-              margin: 0;
-              padding: 0;
-              height: 430px;
-              width: 480px;
-            }
             &__wrapper {
                 width: 32rem;
-                @media (max-width: $mobile-width*1.2) {
-                    padding: 0 3rem ;
-                }
             }
             &__finishButton{
               border-radius: 6px;
@@ -414,9 +350,6 @@ export default {
               border-radius: 6px;
               width: 6.875rem;
               height: 2.188rem;
-              @media (max-width: $mobile-width*1.2) {
-                 margin-top: 7rem;
-                }
             }
 
             &__style{

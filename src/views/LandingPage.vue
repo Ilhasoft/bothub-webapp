@@ -88,12 +88,10 @@
         </div>
       </div>
     </section>
-    <site-footer />
   </div>
 </template>
 
 <script>
-import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
 import { mapGetters } from 'vuex';
 import WeniNotification from '@/components/WeniNotification';
@@ -101,7 +99,6 @@ import WeniNotification from '@/components/WeniNotification';
 export default {
   name: 'LandingPage',
   components: {
-    SiteFooter,
     RepositoryCardList,
     WeniNotification,
   },

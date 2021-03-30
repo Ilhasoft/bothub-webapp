@@ -14,7 +14,7 @@ exports[`QuickTest.vue renders correctly 1`] = `
     <div class="quick-test__inner-container">
       <div class="quick-test__login">
         some specific text
-        <b-field-stub grouped="true" addons="true" class="quick-test__login__buttons">
+        <b-field-stub addons="true" class="quick-test__login__buttons">
           <b-button-stub type="is-primary" nativetype="button" tag="button">
             some specific text
           </b-button-stub>

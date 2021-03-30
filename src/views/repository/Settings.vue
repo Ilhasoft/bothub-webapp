@@ -15,22 +15,6 @@
                 :initial-data="getEditInitialData()"
                 @edited="onEdited($event)" />
             </div>
-            <div class="settings__section">
-              <h1>{{ $t('webapp.settings.manage_your_team') }}</h1>
-              <set-authorization-role-form
-                ref="setAuthorizationRoleForm"
-                :repository-uuid="repository.uuid"
-                @roleSetted="onRoleSetted()" />
-              <authorizations-list
-                ref="authorizationsList"
-                :repository-uuid="repository.uuid" />
-            </div>
-            <div class="settings__section">
-              <h1>{{ $t('webapp.settings.authorization_requests') }}</h1>
-              <authorization-requests-list
-                :repository-uuid="repository.uuid"
-                @review="onReviewAuthorizationRequest()" />
-            </div>
           </div>
           <authorization-request-notification
             v-else
@@ -63,9 +47,6 @@
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
-import SetAuthorizationRoleForm from '@/components/repository/SetAuthorizationRoleForm';
-import AuthorizationsList from '@/components/repository/AuthorizationsList';
-import AuthorizationRequestsList from '@/components/repository/AuthorizationRequestsList';
 import ImportIntelligence from '@/components/repository/ImportIntelligence';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
@@ -76,9 +57,6 @@ export default {
   components: {
     RepositoryViewBase,
     EditRepositoryForm,
-    SetAuthorizationRoleForm,
-    AuthorizationsList,
-    AuthorizationRequestsList,
     LoginForm,
     AuthorizationRequestNotification,
     ImportIntelligence,

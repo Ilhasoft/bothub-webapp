@@ -1,226 +1,364 @@
 <template>
- <div class="sidebar">
-   <unnnic-sidebar :expanded="collapse"
-    :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'">
-  <div
-    class="unnic--clickable sidebar-wrapper__header"
-    v-show="collapse"
-    slot="header">
-
-    <div class="sidebar-wrapper__header__field">
-
-      <unnnic-icon icon="arrow-left-1-1"
-      class="sidebar-wrapper__header__field__icon"
-      scheme="aux-blue" size="sm" hasBackground
-      @click.native="routerHandle('home')"/>
-
-
-      <div class="sidebar-wrapper__header__field__description">
-        <div class="sidebar-wrapper__header__field__description__repository">
-          <unnnic-tool-tip
-            :text="getCurrentRepository.name"
-            enabled
-            side="right">
-            <p class="sidebar-wrapper__header__field__description__repository__title">
-              {{ getCurrentRepository.name }}
-            </p>
-          </unnnic-tool-tip>
-        </div>
-        <p class="sidebar-wrapper__header__field__description__created-by">
-          <span class="sidebar-wrapper__header__field__description__created-by__text">
-            CRIADO POR
-          </span>
-          <span class="sidebar-wrapper__header__field__description__created-by__nick">
-            {{ formatUserNickName }}
-          </span>
-        </p>
-      </div>
-    </div>
-
-      <unnnic-select
-        :selected="getNameVersion" v-show="collapse"
-        class="unnic--clickable sidebar-wrapper__header__select" size="sm"
-        :placeholder="getNameVersion"
-        v-model="selectedVersion">
-        <option
-          v-for="(version, index) in allVersions"
-          :key="index" size="sm">
-          {{ version.name }}
-      </option>
-
-
-      </unnnic-select>
-    </div>
-    <div class="sidebar-wrapper__body">
-      <unnnic-sidebar-menu>
-
-        <unnnic-sidebar-item
-          :icon="checkSelectedMenu('repository-summary')
-          ? 'layout-dashboard-2' : 'layout-dashboard-1'"
-          :text="$t('webapp.menu.summary')"
-          :enableTooltip="!collapse"
-          @click.native="setSelectMenu({
-            name: 'repository-summary',
-            dropdown: '',
-            to: 'repository-summary',
-            closeDrop: true
-          })"
-            :class="
-            [checkSelectedMenu('repository-summary') ? 'sidebar-wrapper__body--active' : '']"
+  <div class="sidebar">
+    <unnnic-sidebar
+      :expanded="collapse"
+      :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'"
+    >
+      <div
+        class="unnic--clickable sidebar-wrapper__header"
+        v-show="collapse"
+        slot="header"
+      >
+        <div class="sidebar-wrapper__header__field">
+          <unnnic-icon
+            icon="arrow-left-1-1"
+            class="sidebar-wrapper__header__field__icon"
+            scheme="aux-blue"
+            size="sm"
+            hasBackground
+            @click.native="routerHandle('home')"
           />
 
-        <section class="training-menu">
-        <unnnic-sidebar-item
-          :icon="dropSelect === 'isTrainActive'
-          ? 'flash-1-4' : 'flash-1-3'"
-          :text="$t('webapp.menu.training')"
-          :enableTooltip="!collapse"
-          :active="dropSelect === 'isTrainActive'"
-          :class="{
-            'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTrainActive'
-            }"
-          @click.native="openDropdown('isTrainActive')">
-        </unnnic-sidebar-item>
-            <div v-show="dropSelect === 'isTrainActive' && collapse"
-            class="sidebar-wrapper__body__item">
+          <div class="sidebar-wrapper__header__field__description">
+            <div
+              class="sidebar-wrapper__header__field__description__repository"
+            >
+              <unnnic-tool-tip
+                :text="getCurrentRepository.name"
+                enabled
+                side="right"
+              >
+                <p
+                  class="sidebar-wrapper__header__field__description__repository__title"
+                >
+                  {{ getCurrentRepository.name }}
+                </p>
+              </unnnic-tool-tip>
+            </div>
+            <p class="sidebar-wrapper__header__field__description__created-by">
+              <span
+                class="sidebar-wrapper__header__field__description__created-by__text"
+              >
+                CRIADO POR
+              </span>
+              <span
+                class="sidebar-wrapper__header__field__description__created-by__nick"
+              >
+                {{ formatUserNickName }}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <unnnic-select
+          :selected="getNameVersion"
+          v-show="collapse"
+          class="unnic--clickable sidebar-wrapper__header__select"
+          size="sm"
+          :placeholder="getNameVersion"
+          v-model="selectedVersion"
+        >
+          <option
+            v-for="(version, index) in allVersions"
+            :key="index"
+            size="sm"
+          >
+            {{ version.name }}
+          </option>
+        </unnnic-select>
+      </div>
+      <div class="sidebar-wrapper__body">
+        <unnnic-sidebar-menu>
+          <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-summary')
+                ? 'layout-dashboard-2'
+                : 'layout-dashboard-1'
+            "
+            :text="$t('webapp.menu.summary')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-summary',
+                dropdown: '',
+                to: 'repository-summary',
+                closeDrop: true,
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-summary')
+                ? 'sidebar-wrapper__body--active'
+                : '',
+            ]"
+          />
+
+          <section class="training-menu">
+            <unnnic-sidebar-item
+              :icon="dropSelect === 'isTrainActive' ? 'flash-1-4' : 'flash-1-3'"
+              :text="$t('webapp.menu.training')"
+              :enableTooltip="!collapse"
+              :active="dropSelect === 'isTrainActive'"
+              :class="{
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTrainActive',
+              }"
+              @click.native="openDropdown('isTrainActive')"
+            >
+            </unnnic-sidebar-item>
+            <div
+              v-show="dropSelect === 'isTrainActive' && collapse"
+              class="sidebar-wrapper__body__item"
+            >
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.train')"
-                :class="
-                [checkSelectedMenu('repository-training') ? 'sidebar-wrapper__body--active' : '']"
-                @click="setSelectMenu({name: 'repository-training',
-                to: 'repository-training', closeDrop: false})"/>
+                :class="[
+                  checkSelectedMenu('repository-training')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-training',
+                    to: 'repository-training',
+                    closeDrop: false,
+                  })
+                "
+              />
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.suggestion')"
-                :class="
-                [checkSelectedMenu('repository-suggestion') ? 'sidebar-wrapper__body--active' : '']"
-                @click="setSelectMenu({name: 'repository-suggestion',
-                 to: 'repository-suggestion', closeDrop: false})"/>
+                :class="[
+                  checkSelectedMenu('repository-suggestion')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-suggestion',
+                    to: 'repository-suggestion',
+                    closeDrop: false,
+                  })
+                "
+              />
             </div>
-        </section>
+          </section>
 
-        <section class="evaluate-menu">
+          <section class="evaluate-menu">
+            <unnnic-sidebar-item
+              :icon="
+                dropSelect === 'isTestsActive'
+                  ? 'check-square-2'
+                  : 'check-square-1'
+              "
+              :text="$t('webapp.menu.test')"
+              :enableTooltip="!collapse"
+              :active="dropSelect === 'isTestsActive'"
+              :class="{
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTestsActive',
+              }"
+              @click="openDropdown('isTestsActive')"
+            >
+            </unnnic-sidebar-item>
+            <div
+              v-show="dropSelect === 'isTestsActive' && collapse"
+              class="sidebar-wrapper__body__item"
+            >
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.test-manual')"
+                :class="[
+                  checkSelectedMenu('repository-test-manual')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-test-manual',
+                    to: 'repository-test-manual',
+                    closeDrop: false,
+                  })
+                "
+              />
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.results')"
+                :class="[
+                  checkSelectedMenu('repository-results')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-results',
+                    to: 'repository-results',
+                    closeDrop: false,
+                  })
+                "
+              />
+            </div>
+          </section>
+
           <unnnic-sidebar-item
-          :icon="dropSelect === 'isTestsActive'
-          ? 'check-square-2' : 'check-square-1'"
-          :text="$t('webapp.menu.test')"
-          :enableTooltip="!collapse"
-          :active="dropSelect === 'isTestsActive'"
-          :class="{
-            'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTestsActive'}"
-          @click="openDropdown('isTestsActive')">
-        </unnnic-sidebar-item>
-          <div v-show="dropSelect === 'isTestsActive' && collapse"
-          class="sidebar-wrapper__body__item">
-            <unnnic-sidebar-item
-            :text="$t('webapp.menu.test-manual')"
-            :class="
-            [checkSelectedMenu('repository-test-manual') ? 'sidebar-wrapper__body--active' : '']"
-            @click="setSelectMenu(
-              {name: 'repository-test-manual',  to: 'repository-test-manual', closeDrop: false})"/>
-            <unnnic-sidebar-item
-            :text="$t('webapp.menu.results')"
-            :class="
-            [checkSelectedMenu('repository-results') ? 'sidebar-wrapper__body--active' : '']"
-            @click="setSelectMenu({name: 'repository-results',
-            to: 'repository-results', closeDrop: false})"/>
-          </div>
-        </section>
-
-        <unnnic-sidebar-item
-          :icon="checkSelectedMenu('repository-log')
-          ? 'download-thick-bottom-1' : 'download-bottom-1'"
-          :text="$t('webapp.menu.inbox')"
-          :enableTooltip="!collapse"
-          @click="setSelectMenu({name: 'repository-log', dropdown: '',
-          to: 'repository-log', closeDrop: true})"
-          :class="
-          [checkSelectedMenu('repository-log') ? 'sidebar-wrapper__body--active' : '']"
+            :icon="
+              checkSelectedMenu('repository-log')
+                ? 'download-thick-bottom-1'
+                : 'download-bottom-1'
+            "
+            :text="$t('webapp.menu.inbox')"
+            :enableTooltip="!collapse"
+            @click="
+              setSelectMenu({
+                name: 'repository-log',
+                dropdown: '',
+                to: 'repository-log',
+                closeDrop: true,
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-log')
+                ? 'sidebar-wrapper__body--active'
+                : '',
+            ]"
           />
 
-        <section class="translate-menu">
-        <unnnic-sidebar-item
-          :icon="dropSelect === 'isTranslationsActive'
-          ? 'translate-2' : 'translate-1'"
-          :text="$t('webapp.menu.translation')"
-          :enableTooltip="!collapse"
-          :active="dropSelect === 'isTranslationsActive'"
-          :class="{
-            'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTranslationsActive'}"
-          @click="openDropdown('isTranslationsActive')">
-        </unnnic-sidebar-item>
-          <div v-show="dropSelect === 'isTranslationsActive' && collapse"
-          class="sidebar-wrapper__body__item">
+          <section class="translate-menu">
             <unnnic-sidebar-item
-            :text="$t('webapp.menu.translate')"
-            @click="setSelectMenu({name: 'repository-translate',
-            to: 'repository-translate', closeDrop: false})"
-            :class="
-              [checkSelectedMenu('repository-translate') ? 'sidebar-wrapper__body--active' : '']"/>
-            <unnnic-sidebar-item
-            :text="$t('webapp.menu.translation_status')"
-            @click="setSelectMenu(
-              {name: 'repository-translations-status',
-              to: 'repository-translations-status', closeDrop: false})"
-            :class="[
-            checkSelectedMenu('repository-translations-status')
-            ? 'sidebar-wrapper__body--active' : '']"/>
-          </div>
-        </section>
+              :icon="
+                dropSelect === 'isTranslationsActive'
+                  ? 'translate-2'
+                  : 'translate-1'
+              "
+              :text="$t('webapp.menu.translation')"
+              :enableTooltip="!collapse"
+              :active="dropSelect === 'isTranslationsActive'"
+              :class="{
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTranslationsActive',
+              }"
+              @click="openDropdown('isTranslationsActive')"
+            >
+            </unnnic-sidebar-item>
+            <div
+              v-show="dropSelect === 'isTranslationsActive' && collapse"
+              class="sidebar-wrapper__body__item"
+            >
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.translate')"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-translate',
+                    to: 'repository-translate',
+                    closeDrop: false,
+                  })
+                "
+                :class="[
+                  checkSelectedMenu('repository-translate')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+              />
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.translation_status')"
+                @click="
+                  setSelectMenu({
+                    name: 'repository-translations-status',
+                    to: 'repository-translations-status',
+                    closeDrop: false,
+                  })
+                "
+                :class="[
+                  checkSelectedMenu('repository-translations-status')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+              />
+            </div>
+          </section>
 
-        <unnnic-sidebar-item
-          :icon="checkSelectedMenu('repository-integration')
-          ? 'phone-charger-1' : 'charger-1'"
-          :text="$t('webapp.menu.integration')"
-          :enableTooltip="!collapse"
-          @click="setSelectMenu(
-            {name: 'repository-integration', dropdown: '',
-            to: 'repository-integration', closeDrop: true})"
-            :class="[checkSelectedMenu('repository-integration')
-            ? 'sidebar-wrapper__body--active' : '']"/>
-
-        <section class="settings-menu">
           <unnnic-sidebar-item
-            :icon="dropSelect === 'isSettingsActive'
-            ? 'cog-2' : 'cog-1'"
-            :text="$t('webapp.menu.settings')"
+            :icon="
+              checkSelectedMenu('repository-integration')
+                ? 'phone-charger-1'
+                : 'charger-1'
+            "
+            :text="$t('webapp.menu.integration')"
             :enableTooltip="!collapse"
-            :active="dropSelect === 'isSettingsActive'"
-            :class="{'sidebar-wrapper__body--dropdown-open': dropSelect === 'isSettingsActive'}"
-            @click="openDropdown('isSettingsActive')">
-        </unnnic-sidebar-item>
-          <div v-show="dropSelect === 'isSettingsActive' && collapse"
-          class="sidebar-wrapper__body__item">
-            <unnnic-sidebar-item
-            :text="$t('webapp.menu.general')"
-            @click.native="setSelectMenu(
-              {name: 'repository-settings', to: 'repository-settings', closeDrop: false}
-            )"
+            @click="
+              setSelectMenu({
+                name: 'repository-integration',
+                dropdown: '',
+                to: 'repository-integration',
+                closeDrop: true,
+              })
+            "
             :class="[
-            checkSelectedMenu('repository-settings') ? 'sidebar-wrapper__body--active' : '']"
-            />
+              checkSelectedMenu('repository-integration')
+                ? 'sidebar-wrapper__body--active'
+                : '',
+            ]"
+          />
+
+          <section class="settings-menu">
             <unnnic-sidebar-item
-            :text="$t('webapp.menu.versions')"
-            @click.native="setSelectMenu(
-              {name: 'repository-versions', to: 'repository-versions', closeDrop: false}
-            )"
-            :class="[
-            checkSelectedMenu('repository-versions') ? 'sidebar-wrapper__body--active' : '']"
-            />
-          </div>
-        </section>
-    </unnnic-sidebar-menu>
+              :icon="dropSelect === 'isSettingsActive' ? 'cog-2' : 'cog-1'"
+              :text="$t('webapp.menu.settings')"
+              :enableTooltip="!collapse"
+              :active="dropSelect === 'isSettingsActive'"
+              :class="{
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isSettingsActive',
+              }"
+              @click="openDropdown('isSettingsActive')"
+            >
+            </unnnic-sidebar-item>
+            <div
+              v-show="dropSelect === 'isSettingsActive' && collapse"
+              class="sidebar-wrapper__body__item"
+            >
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.general')"
+                @click.native="
+                  setSelectMenu({
+                    name: 'repository-settings',
+                    to: 'repository-settings',
+                    closeDrop: false,
+                  })
+                "
+                :class="[
+                  checkSelectedMenu('repository-settings')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+              />
+              <unnnic-sidebar-item
+                :text="$t('webapp.menu.versions')"
+                @click.native="
+                  setSelectMenu({
+                    name: 'repository-versions',
+                    to: 'repository-versions',
+                    closeDrop: false,
+                  })
+                "
+                :class="[
+                  checkSelectedMenu('repository-versions')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
+                ]"
+              />
+            </div>
+          </section>
+        </unnnic-sidebar-menu>
       </div>
       <div slot="footer">
         <unnnic-sidebar-item
           icon="expand-8-1"
-          text="Encolher" @click="collapseHandle()"/>
+          text="Encolher"
+          @click="collapseHandle()"
+        />
       </div>
     </unnnic-sidebar>
-    <span class="sidebar__divider" />
+    <span class="sidebar__divider" v-show="collapse" />
   </div>
 </template>
 <script>
-
 import { mapGetters, mapActions } from 'vuex';
 import CustomIcon from '@/components/shared/CustomIcon';
 
@@ -239,7 +377,7 @@ export default {
       collapse: true,
       allVersions: [],
       dropSelect: '',
-      selectedVersion: this.getNameVersion
+      selectedVersion: this.getNameVersion,
     };
   },
   computed: {
@@ -248,15 +386,15 @@ export default {
       'authenticated',
       'getUpdateVersionsState',
       'versionEnabled',
-      'getNameVersion'
+      'getNameVersion',
     ]),
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.uuid;
     },
-    formatUserNickName(){
-      return this.getCurrentRepository.owner__nickname?.toUpperCase()
-    }
+    formatUserNickName() {
+      return this.getCurrentRepository.owner__nickname?.toUpperCase();
+    },
   },
   watch: {
     repositoryUUID() {
@@ -269,8 +407,8 @@ export default {
         this.getAllVersions();
       }
     },
-    selectedVersion(){
-      this.handleVersion(this.selectedVersion)
+    selectedVersion() {
+      this.handleVersion(this.selectedVersion);
     },
     getUpdateVersionsState() {
       if (this.getUpdateVersionsState) {
@@ -300,18 +438,20 @@ export default {
       }
     },
     handleVersion(value) {
-      const versionResult = this.allVersions.find(option => option.name === value)
+      const versionResult = this.allVersions.find(
+        (option) => option.name === value
+      );
       const version = {
         id: versionResult.id,
-        name: versionResult.name
-      }
+        name: versionResult.name,
+      };
       this.setRepositoryVersion({
         version,
         repositoryUUID: this.repositoryUUID,
       });
     },
     routerHandle(path) {
-      if (path !== this.$router.currentRoute.name){
+      if (path !== this.$router.currentRoute.name) {
         this.$router.push({
           name: `${path}`,
         });
@@ -319,38 +459,46 @@ export default {
     },
     setInitialSelectedMenu() {
       this.selectedMenu = this.$router.currentRoute.name;
-      if (this.$router.currentRoute.name === 'repository-settings'
-      || this.$router.currentRoute.name === 'repository-versions') {
-        this.dropSelect = 'isSettingsActive'
+      if (
+        this.$router.currentRoute.name === 'repository-settings'
+        || this.$router.currentRoute.name === 'repository-versions'
+      ) {
+        this.dropSelect = 'isSettingsActive';
       }
-      if (this.$router.currentRoute.name === 'repository-translate'
-      || this.$router.currentRoute.name === 'repository-translations-status') {
-        this.dropSelect = 'isTranslationsActive'
+      if (
+        this.$router.currentRoute.name === 'repository-translate'
+        || this.$router.currentRoute.name === 'repository-translations-status'
+      ) {
+        this.dropSelect = 'isTranslationsActive';
       }
-      if (this.$router.currentRoute.name === 'repository-test-automatic'
-      || this.$router.currentRoute.name === 'repository-test-manual'
-      || this.$router.currentRoute.name === 'repository-results') {
-        this.dropSelect = 'isTestsActive'
+      if (
+        this.$router.currentRoute.name === 'repository-test-automatic'
+        || this.$router.currentRoute.name === 'repository-test-manual'
+        || this.$router.currentRoute.name === 'repository-results'
+      ) {
+        this.dropSelect = 'isTestsActive';
       }
-      if (this.$router.currentRoute.name === 'repository-training'
-      || this.$router.currentRoute.name === 'repository-suggestion') {
-        this.dropSelect = 'isTrainActive'
+      if (
+        this.$router.currentRoute.name === 'repository-training'
+        || this.$router.currentRoute.name === 'repository-suggestion'
+      ) {
+        this.dropSelect = 'isTrainActive';
       }
     },
     checkSelectedMenu(menu) {
       return menu === this.selectedMenu;
     },
-    openDropdown(value){
-      this.dropSelect = value
-      this.selectedMenu = ''
+    openDropdown(value) {
+      this.dropSelect = value;
+      this.selectedMenu = '';
     },
     setSelectMenu(option) {
       this.selectedMenu = option.name;
-      if (option.to){
-        this.routerHandle(option.to)
+      if (option.to) {
+        this.routerHandle(option.to);
       }
-      if (option.closeDrop){
-        this.dropSelect = option.dropdown
+      if (option.closeDrop) {
+        this.dropSelect = option.dropdown;
       }
     },
     collapseHandle() {
@@ -361,10 +509,10 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '~@/assets/scss/utilities.scss';
-@import '~@/assets/scss/variables.scss';
-@import '~@weni/unnnic-system/dist/unnnic.css';
-@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
+@import "~@/assets/scss/utilities.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .menu-list a {
   padding: 0.5em 1.6rem;
@@ -382,14 +530,13 @@ export default {
   align-items: center;
   color: white;
   cursor: pointer;
-    &__logo{
+  &__logo {
     background: url(~@/assets/imgs/logo-new-white.svg) no-repeat;
     width: 8rem;
     height: 2.8rem;
   }
-  &__logo:hover{
+  &__logo:hover {
     background: url(~@/assets/imgs/logo-new-sidebars.svg) no-repeat;
-
   }
 }
 
@@ -408,7 +555,7 @@ export default {
     background-color: $unnnic-color-background-snow;
     height: 100%;
     width: $menu-expanded-size;
-    transition: width .1s;
+    transition: width 0.1s;
     font-family: $font-family;
 
     &__header {
@@ -422,96 +569,95 @@ export default {
         margin-top: 1.0625rem;
       }
 
-
-      &__field{
+      &__field {
         font-family: $unnnic-font-family-secondary;
         display: flex;
 
-        &__description{
+        &__description {
           display: flex;
           flex-direction: column;
           margin-left: 0.625rem;
           max-width: 6.875rem;
 
-          &__repository{
+          &__repository {
             display: flex;
 
-          &__title{
-            display: flex;
-            font-weight: $unnnic-font-weight-bold;
-            font-size: $unnnic-font-size-body-gt;
-            color: $unnnic-color-brand-weni;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-            max-width: 6.875rem;
+            &__title {
+              display: flex;
+              font-weight: $unnnic-font-weight-bold;
+              font-size: $unnnic-font-size-body-gt;
+              color: $unnnic-color-brand-weni;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: block;
+              max-width: 6.875rem;
+            }
           }
-
-      }
           &__created-by {
             font-size: 8px;
             font-weight: $unnnic-font-weight-bold;
-            line-height: ($unnnic-line-height-small + $unnnic-font-size-body-sm);
+            line-height: (
+              $unnnic-line-height-small + $unnnic-font-size-body-sm
+            );
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
 
             &__text {
-              color: $unnnic-color-neutral-cloudy
+              color: $unnnic-color-neutral-cloudy;
             }
-            &__nick{
-              color: $unnnic-color-brand-weni
+            &__nick {
+              color: $unnnic-color-brand-weni;
             }
           }
         }
-          &__icon{
-            cursor: pointer;
-          }
+        &__icon {
+          cursor: pointer;
+        }
       }
-
     }
 
-    &__body{
-        margin-top: -1.3rem ;
+    &__body {
+      margin-top: -1.3rem;
 
-        &--dropdown-open{
-          background-color: $unnnic-color-neutral-lightest;
-          color: $unnnic-color-neutral-darkest;
-          font-weight: $unnnic-font-weight-bold;
+      &--dropdown-open {
+        background-color: $unnnic-color-neutral-lightest;
+        color: $unnnic-color-neutral-darkest;
+        font-weight: $unnnic-font-weight-bold;
+      }
+
+      &--active {
+        background-color: $unnnic-color-neutral-lightest;
+        color: $unnnic-color-neutral-darkest;
+        font-weight: $unnnic-font-weight-bold;
+
+        .unnnic-icon {
+          color: $unnnic-color-brand-weni;
         }
+      }
 
-        &--active{
-          background-color: $unnnic-color-neutral-lightest;
-          color: $unnnic-color-neutral-darkest;
-          font-weight: $unnnic-font-weight-bold;
+      &__item {
+        margin: 1rem 0 1rem 1.2rem;
+        width: 130px;
+        border-bottom: 1px solid $unnnic-color-neutral-soft;
+      }
 
-          .unnnic-icon{
-            color: $unnnic-color-brand-weni
-          }
-        }
-
-        &__item {
-           margin: 1rem 0 1rem 1.2rem;
-           width: 130px;
-           border-bottom: 1px solid $unnnic-color-neutral-soft;
-        }
-
-        &__divider {
-          border-bottom: 1px solid $unnnic-color-neutral-soft;
-        }
+      &__divider {
+        border-bottom: 1px solid $unnnic-color-neutral-soft;
+      }
     }
 
     &--collapsed {
       height: 100%;
       padding: 1rem;
-      transition: width .1s;
+      transition: width 0.1s;
       width: $menu-collapsed-size;
       background-color: $unnnic-color-background-snow;
       border-right: 1px solid $unnnic-color-neutral-soft;
     }
   }
-    &__divider{
+  &__divider {
     border-left: 1px solid $unnnic-color-neutral-soft;
     height: 93%;
     width: 0.5px;
@@ -520,10 +666,10 @@ export default {
 }
 
 .icon-list {
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   cursor: pointer;
 }
 .icon-list:hover {
-  color: #12A391;
+  color: #12a391;
 }
 </style>
