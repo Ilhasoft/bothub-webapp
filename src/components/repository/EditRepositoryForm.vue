@@ -10,6 +10,7 @@
       :initial-data="initialData" />
     <div class="text-center">
       <b-button
+        v-if="formSchema"
         :disabled="submitting"
         type="is-primary"
         native-type="submit">{{ $t('webapp.settings.save') }}</b-button>
@@ -53,17 +54,22 @@ export default {
       errors: {},
     };
   },
-  async mounted() {
-    this.formSchema = await this.getEditRepositorySchema({
-      repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-      repositoryVersion: this.$store.state.Repository.repositoryVersion,
-    });
+  mounted() {
+    this.initiateForms()
   },
   methods: {
     ...mapActions([
       'getEditRepositorySchema',
       'editRepository',
     ]),
+    async initiateForms() {
+      this.formSchema = await this.getEditRepositorySchema({
+        repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+        repositoryVersion: this.$store.state.Repository.repositoryVersion,
+      });
+      delete this.formSchema.available_languages
+      delete this.formSchema.repository_type
+    },
     async onSubmit() {
       this.submitting = true;
       this.errors = {};

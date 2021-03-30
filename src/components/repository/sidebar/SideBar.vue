@@ -216,7 +216,7 @@
           text="Encolher" @click="collapseHandle()"/>
       </div>
     </unnnic-sidebar>
-    <span class="sidebar__divider" />
+    <span class="sidebar__divider" v-show="collapse"/>
   </div>
 </template>
 <script>

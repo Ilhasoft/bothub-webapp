@@ -8,8 +8,8 @@
       expanded
       @input="optionSelected">
       <option
-        v-for="option in options"
-        :key="option.label"
+        v-for="(option, index) in options"
+        :key="index"
         :value="option"> {{ option.label }} </option>
     </b-select>
   </b-field>

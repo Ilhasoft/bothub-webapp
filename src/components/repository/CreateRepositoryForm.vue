@@ -104,13 +104,6 @@
         </div>
       </div>
     </form>
-    <tour
-      v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
-      :step-count="2"
-      :next-event="eventClick"
-      :finish-event="eventClickFinish"
-      :skip-if-back-page="eventClickBackPage"
-      name="create_intelligence_forms"/>
   </div>
 </template>
 
@@ -124,7 +117,6 @@ import { getModel } from 'vue-mc-drf-model';
 import RepositoryModel from '@/models/newRepository';
 import CategorySelect from '@/components/repository/CategorySelect';
 import Analytics from '@/utils/plugins/analytics';
-import Tour from '@/components/Tour';
 
 export default {
   name: 'CreateRepositoryForm',
@@ -133,7 +125,6 @@ export default {
     FormGenerator,
     RepositoryCard,
     CategorySelect,
-    Tour,
   },
   props: {
     userName: {
@@ -152,10 +143,6 @@ export default {
       categories: [],
       current: 0,
       resultParams: {},
-      eventClick: false,
-      eventClickFinish: false,
-      blockedNextStepTutorial: false,
-      eventClickBackPage: false,
     };
   },
   computed: {
@@ -167,18 +154,16 @@ export default {
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
-        // eslint-disable-next-line no-param-reassign
         if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
         return schema;
       }, {});
-      // eslint-disable-next-line camelcase
+      delete computed.available_languages
       const { is_private, ...schema } = computed;
       const organization = {
         label: this.$t('webapp.orgs.owner'),
         fetch: this.getOrgs,
         type: 'choice',
       };
-      // eslint-disable-next-line camelcase
       if (is_private) { return { ...schema, organization, is_private }; }
       return computed;
     },
@@ -212,9 +197,6 @@ export default {
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
     this.constructModels();
-  },
-  beforeDestroy() {
-    this.checkIfIsTutorial();
   },
   methods: {
     ...mapActions([
@@ -250,17 +232,6 @@ export default {
           validateOnChange: true,
         });
     },
-    dispatchClick() {
-      this.eventClick = !this.eventClick;
-    },
-    dispatchFinish() {
-      this.eventClickFinish = !this.eventClickFinish;
-    },
-    checkIfIsTutorial() {
-      if (this.activeTutorial === 'create_intelligence') {
-        this.setTutorialInactive();
-      }
-    },
     repositoryDetailsRouterParams() {
       return {
         name: 'repository-summary',
@@ -278,10 +249,7 @@ export default {
         label: org.name,
         value: org,
       }));
-      return [
-        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
-        ...options,
-      ];
+      return options
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
@@ -321,16 +289,9 @@ export default {
 
       try {
         const response = await updatedModel.save();
-        // eslint-disable-next-line camelcase
         const { owner__nickname, slug } = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
-        await this.clearTutorial();
-        await this.clearFinalizatioMessage();
-        await this.setFinalModal(false);
-        if (this.activeTutorial === 'create_intelligence') {
-          this.dispatchFinish();
-        }
         return true;
       } catch (error) {
         this.errors = this.drfRepositoryModel.errors;

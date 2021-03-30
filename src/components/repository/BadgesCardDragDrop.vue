@@ -142,7 +142,6 @@ export default {
     ]),
     goToEntity(entity) {
       if (this.edit) return;
-      // eslint-disable-next-line camelcase
       const { entity_id } = entity;
       this.$router.push({ name: 'repository-entitylist', params: { entity_id } });
     },

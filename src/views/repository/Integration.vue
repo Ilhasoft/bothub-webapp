@@ -68,7 +68,7 @@
             </div>
             <request-generator
               :default-language-field="repository.language"
-              :authorization-uuid="getProfileDetail[1]"/>
+              :authorization-uuid="getProfileDetail[1] || ''"/>
           </div>
         </div>
       </div>
@@ -82,20 +82,14 @@
         <login-form hide-forgot-password />
       </div>
     </div>
-    <tour
-      v-if="activeTutorial === 'integrate'"
-      :step-count="2"
-      name="integrate" />
   </repository-view-base>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import HighlightedCode from '@/components/shared/HighlightedCode';
-import Tour from '@/components/Tour';
 import RepositoryBase from './Base';
 
 
@@ -106,7 +100,6 @@ export default {
     RequestGenerator,
     LoginForm,
     HighlightedCode,
-    Tour,
   },
   extends: RepositoryBase,
   data() {
@@ -148,9 +141,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      'activeTutorial',
-    ]),
     profileToken() {
       if (!this.repository || this.repository.authorization === 'null') { return null; }
       return this.repository.authorization;
@@ -166,15 +156,12 @@ export default {
             return `${nickname} - Bearer ${id}`;
           });
         }
-        const { user__nickname: userNickname, uuid } = this.repository.authorization;
-        const profileAuthorization = `${userNickname} (${this.$t('webapp.integration.my_user')}) - Bearer ${uuid}`;
-        authorization.unshift(profileAuthorization);
         return authorization;
       }
       return [];
     },
     getProfileDetail() {
-      if (this.profileToken !== undefined) {
+      if (this.profileToken) {
         const splitProfile = this.profileAuth.split(' - ');
         return splitProfile;
       }
@@ -183,9 +170,12 @@ export default {
   },
   watch: {
     profileToken() {
-      if (this.profileToken !== undefined) {
-        const { user__nickname: userNickname, uuid } = this.repository.authorization;
-        const profileAuthorization = `${userNickname} (${this.$t('webapp.integration.my_user')}) - Bearer ${uuid}`;
+      const { organizations } = this.repository.authorization
+      if (this.profileToken
+      && organizations
+      && organizations.length !== 0) {
+        const { user__nickname, uuid } = this.repository.authorization.organizations[0];
+        const profileAuthorization = `${user__nickname} - Bearer ${uuid}`;
         this.profileAuth = profileAuthorization;
       }
     },
