@@ -94,7 +94,8 @@
 
           <section class="training-menu">
             <unnnic-sidebar-item
-              :icon="dropSelect === 'isTrainActive' ? 'flash-1-4' : 'flash-1-3'"
+              :icon="dropSelect === 'isTrainActive'
+              ? 'graph-stats-circle-1-1' : 'graph-stats-circle-1'"
               :text="$t('webapp.menu.training')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isTrainActive'"
@@ -199,8 +200,8 @@
           <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-log')
-                ? 'download-thick-bottom-1'
-                : 'download-bottom-1'
+                ? 'email-action-unread-1-1'
+                : 'email-action-unread-1'
             "
             :text="$t('webapp.menu.inbox')"
             :enableTooltip="!collapse"
@@ -587,6 +588,7 @@ export default {
               font-weight: $unnnic-font-weight-bold;
               font-size: $unnnic-font-size-body-gt;
               color: $unnnic-color-brand-weni;
+              font-family: $unnnic-font-family-secondary;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
@@ -600,6 +602,7 @@ export default {
             line-height: (
               $unnnic-line-height-small + $unnnic-font-size-body-sm
             );
+            font-family: $unnnic-font-family-secondary;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
