@@ -27,7 +27,7 @@ exports[`SideBar.vue renders correctly 1`] = `
       <unnnic-sidebar-menu>
         <unnnic-sidebar-item icon="layout-dashboard-2" text="some specific text" class="sidebar-wrapper__body--active"></unnnic-sidebar-item>
         <section class="training-menu">
-          <unnnic-sidebar-item icon="flash-1-3" text="some specific text" class=""></unnnic-sidebar-item>
+          <unnnic-sidebar-item icon="graph-stats-circle-1" text="some specific text" class=""></unnnic-sidebar-item>
           <div class="sidebar-wrapper__body__item" style="display: none;">
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
@@ -40,7 +40,7 @@ exports[`SideBar.vue renders correctly 1`] = `
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
           </div>
         </section>
-        <unnnic-sidebar-item icon="download-bottom-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <unnnic-sidebar-item icon="email-action-unread-1" text="some specific text" class=""></unnnic-sidebar-item>
         <section class="translate-menu">
           <unnnic-sidebar-item icon="translate-1" text="some specific text" class=""></unnnic-sidebar-item>
           <div class="sidebar-wrapper__body__item" style="display: none;">
