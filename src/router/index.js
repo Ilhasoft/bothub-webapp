@@ -67,13 +67,14 @@ export default new Router({
       },
     },
     {
-      path: '/loginexternal/:token/:org',
+      path: '/loginexternal/:token/:org/:project',
       name: 'externalLogin',
       component: null,
       beforeEnter: async (to, from, next) => {
-        const { token, org } = to.params;
+        const { token, org, project } = to.params;
         store.dispatch('externalLogin', { token: token.replace('+', ' ') });
         store.dispatch('orgSelected', { org });
+        store.dispatch('projectSelected', { project });
         next('/home');
       },
     },

@@ -8,4 +8,7 @@ export default {
   getOrgSelected(state) {
     return state.org;
   },
+  getProjectSelected(state) {
+    return state.project;
+  },
 };
