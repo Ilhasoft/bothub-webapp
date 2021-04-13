@@ -12,6 +12,7 @@ import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 // import TutorialModal from '@/components/TutorialModal';
+import unnic from '@weni/unnnic-system';
 
 const components = {
   NewsModal,
@@ -50,6 +51,8 @@ export default {
 @import '~buefy/src/scss/buefy';
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
 ::-webkit-scrollbar {
   width: 0.6rem;
@@ -65,7 +68,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $color-primary;
 }
 
 :not(.quick-test, .notices) {

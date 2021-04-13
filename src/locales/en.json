@@ -532,11 +532,11 @@
       "test-manual": "Sentences",
       "test-automatic": "Automatic",
       "results": "Results",
-      "inbox": "Inbox",
+      "inbox": "Interactions",
       "translation": "Translation",
       "translation_status": "Translation Status",
       "translate": "Translate",
-      "integration": "Integration",
+      "integration": "API",
       "settings": "Settings",
       "general":"General",
       "versions": "Versions"
