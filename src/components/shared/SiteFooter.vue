@@ -6,7 +6,7 @@
         <div class="footer-items">
           <div class="footer-item footer-brand">
             <img
-              src="~@/assets/imgs/logo-new-white.svg"
+              src="~@/assets/imgs/weni-logo-white.svg"
               alt="bothub">
             <div>Webapp v{{ version }}</div>
           </div>
@@ -52,10 +52,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import qs from 'query-string';
-
-
 export default {
   name: 'SiteFooter',
   data() {
@@ -89,7 +85,7 @@ footer {
   }
 
   .background {
-  background-image: url('~@/assets/imgs/bg-footer.svg');
+  background-image: url('~@/assets/imgs/mask-footer.svg');
   background-repeat: no-repeat;
   background-size: 100%;
   height: 30vh;
@@ -99,7 +95,7 @@ footer {
     width: 100%;
     background-color: $color-primary;
     margin: 0;
-    @media screen and (max-width: $mobile-width) {
+    @media screen and (max-width: $mobile-width *1.2) {
         margin-top: -16vh;
         text-align: center;
       }
@@ -187,7 +183,7 @@ footer {
           transition: background-color .2s ease;
 
           &:hover {
-            color: $color-primary-dark;
+            color: $color-primary;
             background-color: $color-white
           }
 

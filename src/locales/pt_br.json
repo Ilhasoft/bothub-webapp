@@ -531,11 +531,11 @@
       "test-manual": "Frases",
       "test-automatic": "Automático",
       "results": "Resultados",
-      "inbox": "Inbox",
+      "inbox": "Interações",
       "translation": "Tradução",
       "translation_status": "Status",
       "translate": "Traduzir",
-      "integration": "Integração",
+      "integration": "API",
       "settings": "Ajustes",
       "general":"Geral",
       "versions": "Versões"

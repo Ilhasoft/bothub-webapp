@@ -124,13 +124,13 @@ export default {
         font-family: $font-family;
 
             &__icon {
-                color: #FFFFFF;
+                color: $color-fake-grey;
                 margin-top: .2rem;
                 cursor: pointer;
             }
 
             &__number {
-                color:$color-primary-dark;
+                color:$color-primary;
                 font-size: 1.1rem;
                 font-family: $font-family;
                 font-weight: $font-weight-medium;

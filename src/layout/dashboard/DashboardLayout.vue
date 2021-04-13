@@ -5,6 +5,7 @@
       :class="
       collapse ? 'dashboard-layout__main-panel': 'dashboard-layout__main-panel--collapsed'">
       <div class="dashboard-layout__main-panel__header">
+      <div class="dashboard-layout__main-panel__container">
         <div class="dashboard-layout__main-panel__header__info">
           <div class="dashboard-layout__main-panel__header__info__badge">
             <custom-icon
@@ -104,6 +105,7 @@
           </div>
           <side-bar @collapse="collapseHandle()" />
         </div>
+      </div>
       </div>
       <router-view />
     </div>
@@ -234,20 +236,30 @@ html{
     position: relative;
     float: right;
 
-    &__header {
-      position: fixed;
-      width: inherit;
-      z-index: 9;
-      top: 5.25rem;
-      height: 6rem;
-      background: $color-fake-grey;
+    &__container{
+      background-color: $color-white;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 2.5rem 0 2rem;
-      box-shadow: 0px 3px 6px #00000029;
+      border-top-left-radius: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    &__header {
+      position: fixed;
+      width: inherit;
+      z-index: 9;
+      top: 3.6rem;
+      height: 6rem;
+      background-color: #f4f6f8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
        @media screen and (max-width: $mobile-width) {
-        top: 12rem;
+        top: 10rem;
       }
       &__info {
         display: flex;
@@ -261,7 +273,7 @@ html{
           width: 3.5rem;
           height: 3.5rem;
           border-radius: 50%;
-          background-color: $color-primary-dark;
+          background-color: $color-primary;
           overflow: hidden;
 
           &__icon {
@@ -281,10 +293,6 @@ html{
             align-items: center;
             justify-content: space-between;
 
-            p {
-              color: $color-white;
-            }
-
             &__title {
               font-family: $font-family;
               font-weight: $font-weight-medium;
@@ -295,9 +303,8 @@ html{
             }
           }
 
-            span {
-              font-family: $font-family;
-              color: $color-white;
+            p, span {
+              color: $color-fake-grey;
             }
 
             b {
@@ -350,7 +357,7 @@ html{
 
           &__icon {
           margin-left: 0.5rem;
-          color: $color-white;
+          color: $color-fake-grey;
           width: 1rem;
           height: 3rem;
           cursor: pointer;
@@ -379,16 +386,12 @@ html{
         }
       }
 
-      @media screen and (max-width: 52rem) {
-            padding: 0 0 0 2rem;
-            height: 7rem;
-      }
     }
 
     &--collapsed {
        position: relative;
        float: right;
-       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding});
+       width: calc( 100% - #{$menu-collapsed-size} - #{$menu-padding-collapsed});
     }
   }
 }

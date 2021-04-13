@@ -19,9 +19,9 @@ export default {
         tooltipPayload: 'bothub',
         tooltipDelay: 200,
         customizeWidget: {
-          headerBackgroundColor: '#2BBFAC',
-          launcherColor: '#12A391',
-          userMessageBubbleColor: '#12A391',
+          headerBackgroundColor: '#009E96',
+          launcherColor: '#00756F',
+          userMessageBubbleColor: '#00756F',
         },
         params: {
           images: {
