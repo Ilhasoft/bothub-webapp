@@ -13,9 +13,11 @@ import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 // import TutorialModal from '@/components/TutorialModal';
 import unnic from '@weni/unnnic-system';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   NewsModal,
+  I18n
   // TutorialModal,
 };
 
@@ -26,8 +28,15 @@ export default {
     ...mapGetters([
       'activeMenu',
     ]),
+    dynamicTitle() {
+      if (I18n.locale === 'pt-BR') {
+        return 'Weni Inteligência Artificial'
+      }
+      return 'Weni Artificial Intelligence'
+    },
   },
   mounted() {
+    document.title = this.dynamicTitle;
     hotjar.addHotjar();
     this.safariDetected();
   },
