@@ -43,6 +43,8 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .notification {
   width: 100%;
@@ -58,7 +60,7 @@ export default {
   }
 
     &__field {
-      width: 95%;
+      width: 80%;
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -70,8 +72,9 @@ export default {
       }
 
       &__title {
-        font-family: Roboto slab;
+        font-family: $unnnic-font-family-primary;
         text-shadow: 0px 1px 1px #00000029;
+        font-weight: bold;
         @media screen and (max-width: $mobile-width) {
           width: 100%;
           text-align: center;
@@ -80,6 +83,7 @@ export default {
 
       &__subtitle {
         font-size: 0.8rem;
+        font-family: $unnnic-font-family-secondary;
         @media screen and (max-width: $mobile-width) {
            width: 100%;
            text-align: center;
