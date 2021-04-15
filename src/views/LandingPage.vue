@@ -145,7 +145,7 @@ export default {
   $moredate-margin: 3rem 0;
 
   &__nav {
-    padding: 0.25rem 1rem;
+    padding: 1.3rem 1rem 0.25rem;
     background-color: $color-white;
     width: 100%;
     display: flex;
