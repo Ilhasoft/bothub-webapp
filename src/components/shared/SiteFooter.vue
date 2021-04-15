@@ -6,8 +6,8 @@
         <div class="footer-items">
           <div class="footer-item footer-brand">
             <img
-              src="~@/assets/imgs/weni-logo-white.svg"
-              alt="bothub">
+              :src="weniDynamicLogo"
+              alt="Weni Inteligência Artificial">
             <div>Webapp v{{ version }}</div>
           </div>
           <ul class="footer-item">
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import I18n from '@/utils/plugins/i18n';
+
 export default {
   name: 'SiteFooter',
   data() {
@@ -56,6 +58,17 @@ export default {
       version: process.env.VUE_APP_VERSION,
     };
   },
+  components: {
+    I18n
+  },
+  computed: {
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-white.svg'
+      }
+      return '/weni-logo-white-en.svg'
+    },
+  }
 };
 </script>
 

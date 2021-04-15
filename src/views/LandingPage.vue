@@ -3,7 +3,7 @@
     <weni-notification />
     <nav class="landing-page__nav">
       <router-link class="landing-page__nav__logo" to="/">
-        <img src="@/assets/imgs/weni-logo-green.svg" alt="Bothub" />
+        <img :src="weniDynamicLogo" alt="Weni Inteligência Artificial" />
       </router-link>
       <div class="landing-page__nav__login">
         <strong class="landing-page__nav__button clickable" @click="signIn()">{{
@@ -91,6 +91,7 @@ import SiteFooter from '@/components/shared/SiteFooter';
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
 import { mapGetters } from 'vuex';
 import WeniNotification from '@/components/WeniNotification';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'LandingPage',
@@ -98,9 +99,16 @@ export default {
     SiteFooter,
     RepositoryCardList,
     WeniNotification,
+    I18n
   },
   computed: {
     ...mapGetters(['authenticated', 'myProfile']),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
   },
   watch: {
     authenticated() {
@@ -169,6 +177,7 @@ export default {
 
     &__logo {
       min-width: ($size-normal * 0.75);
+      max-width: ($size-normal * 4.3);
       padding: ($size-normal * 0.125) 0;
       align-self: center;
 
