@@ -32,9 +32,6 @@
         <div class="footer-items">
           <h4 class="footer-title">{{ $t('webapp.layout.contact_us') }}</h4>
           <div class="footer-section-item">
-            <p>bothub@ilhasoft.com.br</p>
-          </div>
-          <div class="footer-section-item">
             <p>Rua José Pontes de Magalhães 70,</p>
             <p>Empresarial JTR - Ed. Austrália, Sala 07</p>
             <p>Jatiúca - Maceió/AL</p>
