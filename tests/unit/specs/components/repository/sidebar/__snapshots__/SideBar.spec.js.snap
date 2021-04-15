@@ -4,7 +4,7 @@ exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
   <unnnic-sidebar expanded="true" class="sidebar-wrapper">
     <div slot="header" class="unnic--clickable sidebar-wrapper__header">
-      <router-link to="/"><img src="@/assets/imgs/weni-logo-green.svg"></router-link>
+      <router-link to="/"><img src="/weni-logo-green-en.svg"></router-link>
     </div>
     <div class="sidebar-wrapper__body">
       <unnnic-sidebar-menu>

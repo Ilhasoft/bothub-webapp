@@ -16,12 +16,12 @@
           class="layout__header__container__logo"
           to="/">
           <img
-            src="@/assets/imgs/weni-logo-green.svg"
-            alt="Bothub"
+            :src="weniDynamicLogo"
+            alt="Weni Inteligência Artificial"
             class="hide-mobile">
           <img
             src="@/assets/imgs/weni-logo-small.svg"
-            alt="Bothub"
+            alt="Weni Inteligência Artificial"
             class="hide-desktop">
         </router-link>
         <div
@@ -108,11 +108,13 @@ import { mapGetters, mapActions } from 'vuex';
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
 import WeniNotification from '@/components/WeniNotification';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   SiteFooter,
   UserAvatar,
   WeniNotification,
+  I18n
 };
 
 export default {
@@ -121,7 +123,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Bothub',
+      default: 'Weni Inteligência Artificial',
     },
     withoutBackground: {
       type: Boolean,
@@ -147,6 +149,12 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
     tutorialEnabled() {
       return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
@@ -261,6 +269,7 @@ export default {
 
     &__logo {
       min-width: ($size-normal * .75);
+      max-width: ($size-normal * 4);
 
       img {
         display: block;
