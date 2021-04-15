@@ -43,10 +43,12 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .notification {
   width: 100%;
-  height: 5.25rem;
+  height: 3.75rem;
   background-color: $color-primary-light;
   display: flex;
   justify-content: center;
@@ -54,14 +56,14 @@ export default {
   margin: auto;
 
   @media screen and (max-width: $mobile-width) {
-    height: 12rem;
+    height: 10rem;
   }
 
     &__field {
-      width: 70%;
+      width: 80%;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: space-around;
       color: $color-fake-black;
 
       @media screen and (max-width: $mobile-width) {
@@ -70,11 +72,9 @@ export default {
       }
 
       &__title {
-        font-size: 1.3rem;
-        font-family: Roboto slab;
-        line-height: 1.4rem;
-        width: 40%;
+        font-family: $unnnic-font-family-primary;
         text-shadow: 0px 1px 1px #00000029;
+        font-weight: bold;
         @media screen and (max-width: $mobile-width) {
           width: 100%;
           text-align: center;
@@ -82,8 +82,8 @@ export default {
       }
 
       &__subtitle {
-        font-size: 0.9rem;
-        width: 90%;
+        font-size: 0.8rem;
+        font-family: $unnnic-font-family-secondary;
         @media screen and (max-width: $mobile-width) {
            width: 100%;
            text-align: center;
@@ -93,10 +93,14 @@ export default {
 
       &__division{
         border-right: 2px solid $color-fake-grey;
-        height: 2rem;
-        margin-right: 3.5%;
+        height: 1rem;
+        margin-right: 0.5%;
+        @media screen and (max-width: $mobile-width * 1.6) {
+           margin-right: 2%;
+        }
          @media screen and (max-width: $mobile-width) {
            border-right: none;
+           height: 0.2rem;
         }
       }
 
@@ -105,13 +109,11 @@ export default {
       }
 
       &__button{
-        background-color: $color-primary-dark;
-        border-color: $color-primary-dark;
+        background-color: $color-primary;
+        border-color: $color-primary;
         color: $color-white;
         font-family: Roboto slab;
         transition: 0.5s ease;
-        font-size: 1.1rem;
-        margin-left: 2%;
         font-weight: $font-weight-medium;
 
         &:hover{

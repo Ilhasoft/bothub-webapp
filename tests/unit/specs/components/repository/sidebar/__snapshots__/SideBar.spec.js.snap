@@ -2,37 +2,48 @@
 
 exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
-  <div class="sidebar-wrapper">
-    <div class="sidebar-wrapper__collapse-button">
-      <b-icon-stub icon="chevron-left"></b-icon-stub>
+  <unnnic-sidebar expanded="true" class="sidebar-wrapper">
+    <div slot="header" class="unnic--clickable sidebar-wrapper__header">
+      <router-link to="/"><img src="@/assets/imgs/weni-logo-green.svg"></router-link>
     </div>
-    <b-menu-stub accordion="true" activable="true">
-      <div class="menu-header">
-        <div class="menu-header__logo"></div>
-      </div>
-      <b-menu-list-stub ariarole="" size="is-small">
-        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" size="is-small" id="tour-training-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" size="is-small" id="tour-evaluate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="inbox" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-inbox-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="translate" animation="slide" tag="a" ariarole="" size="is-small" id="tour-translate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="power-plug" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-integrate-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="cog" animation="slide" tag="a" ariarole="" size="is-small">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-      </b-menu-list-stub>
-    </b-menu-stub>
-    <div></div>
-  </div>
+    <div class="sidebar-wrapper__body">
+      <unnnic-sidebar-menu>
+        <unnnic-sidebar-item icon="layout-dashboard-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="training-menu">
+          <unnnic-sidebar-item icon="graph-stats-circle-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <section class="evaluate-menu">
+          <unnnic-sidebar-item icon="check-square-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <unnnic-sidebar-item icon="email-action-unread-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="translate-menu">
+          <unnnic-sidebar-item icon="translate-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <unnnic-sidebar-item icon="charger-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="settings-menu">
+          <unnnic-sidebar-item icon="cog-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+      </unnnic-sidebar-menu>
+    </div>
+    <div slot="footer" class="sidebar-wrapper__footer">
+      <unnnic-sidebar-item icon="expand-8-1" text="Encolher"></unnnic-sidebar-item>
+    </div>
+  </unnnic-sidebar>
 </div>
 `;

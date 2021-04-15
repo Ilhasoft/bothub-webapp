@@ -16,11 +16,11 @@
           class="layout__header__container__logo"
           to="/">
           <img
-            src="@/assets/imgs/logo-new-white.svg"
+            src="@/assets/imgs/weni-logo-green.svg"
             alt="Bothub"
             class="hide-mobile">
           <img
-            src="@/assets/imgs/icon-white.svg"
+            src="@/assets/imgs/weni-logo-small.svg"
             alt="Bothub"
             class="hide-desktop">
         </router-link>
@@ -40,9 +40,9 @@
               class="hide-mobile">
               <router-link :to="'/new'">
                 <b-button
-                  type="is-primary"
                   inverted
                   rounded
+                  class="layout__header__options__create-intelligence"
                   @click="blockedNextStepTutorial = true">
                   <strong>{{ $t('webapp.layout.newbot') }}</strong>
                 </b-button>
@@ -252,7 +252,6 @@ export default {
 
   &__header {
     padding: $loading-height*3.8 1rem;
-    background-color: $color-fake-grey;
 
     &__container {
       display: flex;
@@ -265,7 +264,6 @@ export default {
 
       img {
         display: block;
-        height: $size-small * 1.3;
       }
     }
       &__center {
@@ -309,6 +307,17 @@ export default {
         justify-content: center;
       }
 
+      &__create-intelligence{
+        background-color: #009E96;
+        border: none;
+        color: $color-white;
+        transition: 0.5s;
+
+        &:hover{
+          background-color: #00746f;
+        }
+      }
+
       strong {
         letter-spacing: 0.8px;
       }
@@ -342,7 +351,7 @@ export default {
     }
       &__icon {
       margin-left: 0.5rem;
-      color: white;
+      color: #3B414D;
       width: 1rem;
       height: 3rem;
       cursor: pointer;

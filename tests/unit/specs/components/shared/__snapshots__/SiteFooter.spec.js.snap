@@ -6,7 +6,7 @@ exports[`SiteFooter.vue renders correctly 1`] = `
   <div class="wrapper">
     <div class="footer-content">
       <div class="footer-items">
-        <div class="footer-item footer-brand"><img src="~@/assets/imgs/logo-new-white.svg" alt="bothub">
+        <div class="footer-item footer-brand"><img src="~@/assets/imgs/weni-logo-white.svg" alt="bothub">
           <div>Webapp v2.0.0</div>
         </div>
         <ul class="footer-item">
@@ -26,9 +26,6 @@ exports[`SiteFooter.vue renders correctly 1`] = `
       </div>
       <div class="footer-items">
         <h4 class="footer-title">some specific text</h4>
-        <div class="footer-section-item">
-          <p>bothub@ilhasoft.com.br</p>
-        </div>
         <div class="footer-section-item">
           <p>Rua José Pontes de Magalhães 70,</p>
           <p>Empresarial JTR - Ed. Austrália, Sala 07</p>

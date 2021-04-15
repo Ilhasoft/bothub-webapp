@@ -42,17 +42,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@/assets/scss/colors.scss';
+
     .intent-tag{
       border-radius: 0px !important;
       font-weight: none !important;
       height: 2.188rem;
 
       &:hover{
-        background-color: #2BBFAC;
+        background-color: $color-primary;
         color: #ffffff;
 
         div > div{
-        background-color: #12A391;
+        background-color: $color-primary;
         }
       }
         &__container{

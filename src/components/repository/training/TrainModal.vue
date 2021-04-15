@@ -214,7 +214,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $color-primary;
 }
 
 :not(.quick-test) {

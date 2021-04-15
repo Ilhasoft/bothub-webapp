@@ -3,7 +3,7 @@
     <div class="spin">
       <div class="spinner-loading">
         <img
-          src="@/assets/imgs/mascot.png"
+          src="@/assets/imgs/weni-logo-small.svg"
           class="bothub-logo"
           alt="bothub-loading">
         <div class="triple-spinner"/>
@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/colors.scss';
 
 .loading {
   display: flex;
@@ -39,8 +40,8 @@ export default {
 .triple-spinner {
   display: block;
   position: relative;
-  width: 5.625rem;
-  height: 5.625rem;
+  width: 5.7rem;
+  height: 5.7rem;
   border-radius: 50%;
   border: 2px solid transparent;
   -webkit-animation: spin 2s linear infinite;
@@ -64,7 +65,7 @@ export default {
   left: 10px;
   right: 10px;
   bottom: 10px;
-  border-top-color: #2bbfac;
+  border-top-color: $color-primary;
   -webkit-animation: spin2 0.55s linear infinite;
   animation: spin2 0.55s linear infinite;
 }
@@ -73,7 +74,7 @@ export default {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border-top-color: #2bbfac;
+  border-top-color: $color-primary;
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
 }

@@ -244,7 +244,7 @@ export default {
                 height: 36px;
                 color: white;
                 border-radius: 4px;
-                background-color: #00d1b2;
+                background-color: $color-primary;
                 }
 
                 &__icon-style:hover{
