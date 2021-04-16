@@ -4,7 +4,11 @@
     <div class="external-dashboard-layout__main-panel">
       <div class="external-dashboard-layout__main-panel__header">
         <router-link :to="'/home'">
-          <div class="external-dashboard-layout__main-panel__logo clickable" />
+      <img
+        :src="weniDynamicLogo"
+        class="external-dashboard-layout__main-panel__header__img clickable"
+        @click="goToLandingPage">
+
         </router-link>
         <router-link
           :to="`/dashboard/${ownerNickname}/${getExternalRepository.slug}`"
@@ -53,12 +57,14 @@
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapGetters } from 'vuex';
 import WeniNotification from '@/components/WeniNotification';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'DashboardExternalLayout',
   components: {
     CustomIcon,
     WeniNotification,
+    I18n
   },
   data() {
     return {
@@ -69,6 +75,12 @@ export default {
   },
   computed: {
     ...mapGetters(['getExternalRepository']),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
     ownerNickname() {
       if (!this.getExternalRepository.owner) return null;
       return this.getExternalRepository.owner.nickname;
@@ -78,6 +90,13 @@ export default {
       return false;
     },
   },
+  methods: {
+    goToLandingPage() {
+      this.$router.push({
+        name: 'landingPage',
+      });
+    },
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -116,6 +135,10 @@ export default {
       padding: 0 7rem 0 5.7rem;
       @media screen and (max-width: $mobile-width) {
         top: 10rem;
+      }
+
+      &__img{
+        max-height: 2rem;
       }
 
       &__right {

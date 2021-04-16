@@ -10,7 +10,7 @@
         slot="header"
       >
         <router-link to="/">
-          <img src="@/assets/imgs/weni-logo-green.svg" />
+          <img :src="weniDynamicLogo" />
         </router-link>
       </div>
       <div class="sidebar-wrapper__body">
@@ -311,11 +311,13 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import CustomIcon from '@/components/shared/CustomIcon';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'SideBar',
   components: {
     CustomIcon,
+    I18n
   },
   data() {
     return {
@@ -338,6 +340,12 @@ export default {
       'versionEnabled',
       'getNameVersion',
     ]),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.uuid;
