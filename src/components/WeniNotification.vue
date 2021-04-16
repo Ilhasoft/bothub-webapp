@@ -9,7 +9,7 @@
       <span class="notification__field__subtitle">
         {{ $t('webapp.weni_notification.subtitle') }}
       </span>
-      <a :href="checkLanguage.weni">
+      <a href="https://weni.ai/blog/modularizacao-plataformas/">
         <b-button
           rounded
           class="notification__field__button"
@@ -20,22 +20,9 @@
 </template>
 
 <script>
-import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'WeniNotication',
-  computed: {
-    checkLanguage() {
-      if (I18n.locale === 'pt-BR') {
-        return {
-          weni: 'https://www.ilhasoft.com.br/somos-weni ',
-        };
-      }
-      return {
-        weni: 'https://www.ilhasoft.com.br/we-are-weni ',
-      };
-    },
-  },
 };
 
 </script>
