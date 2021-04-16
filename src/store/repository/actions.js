@@ -182,6 +182,9 @@ export default {
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
   },
+  resetRepositoryVersion({ commit }) {
+    commit('resetVersion');
+  },
   getRepositoryRequirements(store, { repositoryUuid, version }) {
     return repository.repositoryRequirements(repositoryUuid, version);
   },
