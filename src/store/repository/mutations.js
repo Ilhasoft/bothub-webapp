@@ -30,7 +30,6 @@ export default {
   },
   setRepositoryVersion(state, value) {
     if (!value || !value.version) return;
-
     if (state.repositoryVersion !== value.version.id) {
       state.repositoryVersion = {
         id: value.version.id,
@@ -38,6 +37,9 @@ export default {
       };
       state.repositoryVersionName = value.version.name;
     }
+  },
+  resetVersion(state){
+    state.repositoryVersion = null;
   },
   updateRepositoryTraining(state, value) {
     state.repositoryIsTraining = value;
