@@ -31,16 +31,6 @@ describe('Layout.vue', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('set title to "abc"', () => {
-    beforeEach(() => {
-      wrapper.setProps({ title: 'abc' });
-    });
-
-    test('document title equal "abc"', () => {
-      expect(document.title).toBe('abc');
-    });
-  });
-
   // describe('open new repository modal', () => {
   //   beforeEach(() => {
   //     wrapper.vm.openNewRepositoryModal();

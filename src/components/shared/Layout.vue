@@ -159,13 +159,7 @@ export default {
       return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
   },
-  watch: {
-    title() {
-      document.title = this.title;
-    },
-  },
   mounted() {
-    document.title = this.title;
     this.updateMyProfile('user');
   },
   methods: {
