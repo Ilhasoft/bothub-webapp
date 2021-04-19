@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`EvaluateResultExampleItem.vue renders 1`] = `
-<sentence-accordion-stub islight="true" type="is-success" thickborder="true" align="center" customaccordion="true" class="example fadeIn">
+<sentence-accordion-stub islight="true" thickborder="true" align="center" customaccordion="true" class="example fadeIn">
+  <b-icon icon="check-bold" class="level-right success"></b-icon>
   <div>
     <p class="example-text"> hey</p>
   </div>
-  <b-icon icon="check-bold" class="level-right success"></b-icon>
   <div class="example-infos">
     <p><strong> some specific text: </strong> <span> greet
         (1.00

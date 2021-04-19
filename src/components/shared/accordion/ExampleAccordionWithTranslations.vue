@@ -43,11 +43,11 @@
       slot="options"
       class="example-item__intent example-item__faded">
       <strong class="example-item__faded"> {{ $t('webapp.evaluate.intent') }}: </strong>
-      &nbsp; {{ intent }}
+      &nbsp; <span class="example-item__faded__intent">{{ intent }}</span>
     </div>
     <div
       slot="options"
-      class="example-item__faded example-item__options">
+      class="example-item__options">
       <word-suggestion-button
         v-show="!editing && isSuggestion"
         :get-sentence="sentenceDetail"/>
@@ -272,6 +272,10 @@ export default {
 
     .example-item {
         &__header {
+          width: 80%;
+          @media screen and (max-width: $mobile-width) {
+            width: 100%;
+          }
             > * :not(:last-child) {
                 margin-bottom: 0.5rem;
             }
@@ -296,6 +300,14 @@ export default {
             strong {
               margin-right: 0.5rem;
             }
+
+            &__intent{
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: block;
+              max-width: 7.5rem;
+            }
         }
 
         &__intent {
@@ -307,6 +319,8 @@ export default {
         &__options {
           display: flex;
           align-items: center;
+          color: $color-grey-dark;
+          font-family: $font-family;
           > * {
             margin-left: 0.40rem;
           }

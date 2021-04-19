@@ -1,21 +1,20 @@
 <template>
   <div class="progress-stages">
     <h3>
-      Stage 4: In Progress
+      {{checkProgressStage.stage}}
     </h3>
     <div
       class="progress-stages__bar__progress">
       <div
-        :style="{ width: progress + '%' }"
+        :style="{ width: checkProgressStage.progress + '%' }"
         class="progress-stages__bar__field">
         <div class="progress-stages__bar__division">
           <div
-            v-for="index in 5"
+            v-for="index in 3"
             :key="index"
             class="progress-stages__bar__division__stripe"/>
         </div>
         <div
-          v-if="hasIconBrooch"
           class="progress-stages__bar__brooch">
           <img
             class="progress-stages__bar__brooch__icon"
@@ -31,19 +30,40 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'IntelligenceForce',
-  data() {
-    return {
-      progress: 50,
-    };
+  props: {
+    progressValue: {
+      type: Number,
+      default: 0
+    }
   },
   computed: {
     ...mapGetters([
       'getCurrentRepository',
     ]),
-    hasIconBrooch() {
-      if (this.progress < 5) { return false; }
-      return true;
-    },
+    checkProgressStage(){
+      if (this.progressValue === 0) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_1')}: 
+          ${this.$t('webapp.evaluate-automatic.starting_evaluate')} `,
+          progress: 25
+        }
+      }
+      if (this.progressValue === 1) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_2')}: 
+          ${this.$t('webapp.evaluate-automatic.progress_evaluate')} `,
+          progress: 65
+        }
+      }
+      if (this.progressValue === 2) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_3')}: 
+          ${this.$t('webapp.evaluate-automatic.finished_evaluate')} `,
+          progress: 100
+        }
+      }
+      return 5
+    }
   },
 };
 </script>
@@ -80,7 +100,7 @@ export default {
         box-shadow: 0px 3px 6px #00000029;
       }
       &__field {
-        background: linear-gradient(to right, #12A391 0%, #00FFDD 100%);
+        background: linear-gradient(to right, #00FFDD 0%, #12A391 100%);
         height: 20px;
         width: 15px;
 
@@ -96,7 +116,7 @@ export default {
         &__stripe{
           border: 2px solid white;
           height: 20px;
-          margin-left: 16%;
+          margin-left: 26.9%;
         }
       }
         &__brooch{

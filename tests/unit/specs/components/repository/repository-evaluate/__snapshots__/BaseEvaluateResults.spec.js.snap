@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BaseEvaluateResults.vue renders correctly 1`] = `<p>some specific text</p>`;
+exports[`BaseEvaluateResults.vue renders correctly 1`] = `
+<div>
+  <p>some specific text</p>
+</div>
+`;

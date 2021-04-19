@@ -1,9 +1,8 @@
 <template>
   <div>
-    <h3
-      class="evaluate-result-example-list__title">
-      {{ $t('webapp.result.sentence_details') }}
-    </h3>
+      <p>
+        {{ $t('webapp.result.sentence_results_text') }}
+      </p>
     <div
       v-if="busy"
       class="evaluate-result-example-list__loading">
@@ -11,9 +10,15 @@
     </div>
     <p v-else-if="error">{{ $t('webapp.result.error') }}</p>
     <div v-else-if="resultExampleList && resultExampleList.length > 0">
-      <p>
-        {{ $t('webapp.result.sentence_details_text') }}
-      </p>
+    <h3
+      class="evaluate-result-example-list__title">
+      {{ $t('webapp.result.sentence_entity_consider') }}
+    </h3>
+        <b-field>
+            <b-switch v-model="isEntityConsider">
+                {{ checkSwitchStatus }}
+            </b-switch>
+        </b-field>
       <evaluate-result-example-item
         v-for="(item, i) in resultExampleList"
         id="tour-evaluate_result-step-0"
@@ -76,6 +81,7 @@ export default {
       error: null,
       pages: 0,
       page: 1,
+      isEntityConsider: false
     };
   },
   computed: {
@@ -88,18 +94,28 @@ export default {
     total() {
       return this.limit * this.pages;
     },
+    checkSwitchStatus(){
+      if (this.isEntityConsider) return this.$t('webapp.evaluate.switch_activated')
+      return this.$t('webapp.evaluate.switch_disabled')
+    }
   },
   watch: {
     page() {
       this.updateList();
     },
+    isEntityConsider(){
+      this.updateList();
+    }
   },
   mounted() {
     this.updateList();
   },
   methods: {
     isSuccess(item) {
-      return (item.intent_status || item.status) === 'success' && (!item.entity_status || item.entity_status === 'success');
+      if (this.isEntityConsider){
+        return (item.intent_status || item.status) === 'success' && (!item.entity_status || item.entity_status === 'success');
+      }
+      return (item.intent_status || item.status) === 'success'
     },
     ...mapActions([
       'getAllResultsLog',
@@ -131,7 +147,7 @@ export default {
   width: 100%;
 
   &__title {
-    margin-top: 1rem;
+    margin: 2rem 0 0.8rem 0;
     font-weight: 700;
   }
 

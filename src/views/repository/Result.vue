@@ -7,16 +7,12 @@
         <div
           v-if="repository.authorization.can_write"
           class="evaluate">
-          <div class="evaluate__content-header">
-            <h2 class="evaluate__content-header__title">
-              {{ $t('webapp.evaluate.detailed_results') }}
-            </h2>
-          </div>
-          <div class="evaluate__content-wrapper">
-            <base-evaluate-results
-              :result-id="resultId"
-              :repository="repository" />
-          </div>
+                <div class="evaluate__content-wrapper">
+                  <base-evaluate-results
+                    :evaluate-results-by-id="formatResultID"
+                    :repository="repository"
+                    :cross-validation="crossValidation"/>
+                </div>
         </div>
         <authorization-request-notification
           v-else
@@ -41,8 +37,7 @@
 import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
-import { mapGetters } from 'vuex';
-
+import { mapActions, mapGetters } from 'vuex';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
@@ -66,10 +61,29 @@ export default {
     ...mapGetters({
       authenticated: 'authenticated',
     }),
+    crossValidation() {
+      const crossResult = this.$route.params.crossValidation
+      return !!crossResult
+    },
     resultId() {
       return parseInt(this.$route.params.resultId, 10);
     },
+    formatResultID(){
+      return [
+        parseInt(this.$route.params.resultId, 10),
+        this.$route.params.resultsecondId
+          && parseInt(this.$route.params.resultsecondId, 10)
+      ]
+    },
   },
+  beforeDestroy(){
+    this.setEmptyCompareEvaluate()
+  },
+  methods: {
+    ...mapActions([
+      'setEmptyCompareEvaluate',
+    ]),
+  }
 };
 </script>
 
@@ -79,6 +93,7 @@ export default {
 
 
 .evaluate {
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;
@@ -128,22 +143,6 @@ export default {
           }
         }
       }
-    }
-  }
-
-  &__content-header {
-    text-align: left;
-
-    &__buttons {
-      margin: 2rem 1rem;
-    }
-
-    &__title {
-      margin-top: 2rem;
-      font-size: 1.75rem;
-      font-weight: $font-weight-medium;
-      color: $color-fake-black;
-      margin-bottom: $between-title-subtitle;
     }
   }
 

@@ -53,7 +53,10 @@
                         rounded>{{ lang }}</b-tag>
                     </div>
                     <p>
-                      <strong>{{ firstText(requirement) }}</strong>
+                      <strong
+                        class="train-modal__wrapper__content__content-requirements__item__text">
+                        {{ firstText(requirement) }}
+                      </strong>
                       <br>
                       <span>{{ secondText(requirement) }}</span>
                     </p>
@@ -292,6 +295,13 @@ export default {
               font-weight: $font-weight-bolder;
               justify-content: center;
               align-items: center;
+            }
+            &__text{
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: block;
+              max-width: 28rem;
             }
         }
       }
