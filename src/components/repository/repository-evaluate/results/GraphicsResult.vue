@@ -201,7 +201,6 @@ export default {
         }
       }
       new Promise(() => {
-        // eslint-disable-next-line
         const intentChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -296,7 +295,6 @@ export default {
         }
       }
       new Promise(() => {
-      // eslint-disable-next-line
         const entitieChart = new Chart(ctx, {
           type: 'bar',
           data: {
