@@ -1,6 +1,6 @@
 <template>
   <div
-    class="notification">
+    class="notification notification__non-printable">
     <div class="notification__field">
       <span class="notification__field__title">
         {{ $t('webapp.weni_notification.title') }}
@@ -41,6 +41,12 @@ export default {
   justify-content: center;
   align-items: center;
   margin: auto;
+
+    @media print {
+    &__non-printable {
+      display: none;
+    }
+  }
 
   @media screen and (max-width: $mobile-width) {
     height: 10rem;

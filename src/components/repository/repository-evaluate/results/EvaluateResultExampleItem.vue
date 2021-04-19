@@ -1,12 +1,16 @@
 <template>
   <sentence-accordion
     :open.sync="open"
-    :type="success ? 'is-success' : 'is-danger'"
     :class="{ example: true,
               'fadeIn': true,
     }"
     thick-border
     is-light>
+    <b-icon
+      slot="check"
+      :class="['level-right', success ? 'success' : 'failed']"
+      :icon="success ? 'check-bold' : 'close-thick'" />
+
     <div slot="header">
       <highlighted-text
         v-if="open"
@@ -16,11 +20,6 @@
         v-else
         class="example-text"> {{ text }}</p>
     </div>
-
-    <b-icon
-      slot="options"
-      :class="['level-right', success ? 'success' : 'failed']"
-      :icon="success ? 'check-bold' : 'close-thick'" />
 
     <div
       slot="body"

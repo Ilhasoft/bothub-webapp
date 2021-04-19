@@ -1,6 +1,6 @@
 <template>
   <div class="base-evaluate-versions">
-    <evaluate-version-list />
+    <evaluate-version-list :crossValidation="crossValidationType"/>
   </div>
 </template>
 
@@ -17,6 +17,10 @@ export default {
       type: Object,
       required: true,
     },
+    crossValidationType: {
+      type: Boolean,
+      default: null,
+    }
   },
 };
 </script>

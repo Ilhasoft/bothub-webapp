@@ -14,14 +14,14 @@
         type="is-primary"
         icon="check"
         size="is-small"
-        @click="approve()" />
+        @click.native="approve()" />
       <b-icon
         ref="rejectBtn"
         class="clickable"
         type="is-danger"
         icon="close"
         size="is-small"
-        @click="reject()" />
+        @click.native="reject()" />
     </div>
   </div>
 </template>

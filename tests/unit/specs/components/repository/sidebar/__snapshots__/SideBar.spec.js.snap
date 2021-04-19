@@ -21,6 +21,7 @@ exports[`SideBar.vue renders correctly 1`] = `
           <div class="sidebar-wrapper__body__item" style="display: none;">
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
           </div>
         </section>
         <unnnic-sidebar-item icon="email-action-unread-1" text="some specific text" class=""></unnnic-sidebar-item>
