@@ -1,16 +1,16 @@
 <template>
   <div class="progress-stages">
     <h3>
-      Stage 4: In Progress
+      {{checkProgressStage.stage}}
     </h3>
     <div
       class="progress-stages__bar__progress">
       <div
-        :style="{ width: checkProgressStage + '%' }"
+        :style="{ width: checkProgressStage.progress + '%' }"
         class="progress-stages__bar__field">
         <div class="progress-stages__bar__division">
           <div
-            v-for="index in 5"
+            v-for="index in 3"
             :key="index"
             class="progress-stages__bar__division__stripe"/>
         </div>
@@ -41,10 +41,27 @@ export default {
       'getCurrentRepository',
     ]),
     checkProgressStage(){
-      if (this.progressValue === 0) return 28;
-      if (this.progressValue === 1) return 65;
-      if (this.progressValue === 2) return 100;
-
+      if (this.progressValue === 0) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_1')}: 
+          ${this.$t('webapp.evaluate-automatic.starting_evaluate')} `,
+          progress: 25
+        }
+      }
+      if (this.progressValue === 1) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_2')}: 
+          ${this.$t('webapp.evaluate-automatic.progress_evaluate')} `,
+          progress: 65
+        }
+      }
+      if (this.progressValue === 2) {
+        return {
+          stage: `${this.$t('webapp.evaluate-automatic.stage_3')}: 
+          ${this.$t('webapp.evaluate-automatic.finished_evaluate')} `,
+          progress: 100
+        }
+      }
       return 5
     }
   },
@@ -99,7 +116,7 @@ export default {
         &__stripe{
           border: 2px solid white;
           height: 20px;
-          margin-left: 16%;
+          margin-left: 26.9%;
         }
       }
         &__brooch{

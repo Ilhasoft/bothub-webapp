@@ -223,7 +223,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $color-primary;
 }
 
 :not(.quick-test) {
@@ -248,7 +248,7 @@ export default {
         display: flex;
         justify-content: flex-end;
         position: fixed;
-        bottom: 10%;
+        bottom: 5%;
         right: 0;
         z-index: 9;
         pointer-events: none;
@@ -261,7 +261,7 @@ export default {
 
         &__collapse-button {
           cursor: pointer;
-          background-color: #2BBFAC;
+          background-color: $color-primary;
           border-radius: 1rem 0 0 1rem;
           height: 3rem;
           width: 5rem;

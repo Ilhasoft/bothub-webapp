@@ -12,9 +12,12 @@ import { mapGetters } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 // import TutorialModal from '@/components/TutorialModal';
+import unnic from '@weni/unnnic-system';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   NewsModal,
+  I18n
   // TutorialModal,
 };
 
@@ -25,8 +28,15 @@ export default {
     ...mapGetters([
       'activeMenu',
     ]),
+    dynamicTitle() {
+      if (I18n.locale === 'pt-BR') {
+        return 'Weni Inteligência Artificial'
+      }
+      return 'Weni Artificial Intelligence'
+    },
   },
   mounted() {
+    document.title = this.dynamicTitle;
     hotjar.addHotjar();
     this.safariDetected();
   },
@@ -50,9 +60,11 @@ export default {
 @import '~buefy/src/scss/buefy';
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+@import '~@weni/unnnic-system/dist/unnnic.css';
+@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
 
 ::-webkit-scrollbar {
-  width: 0.6rem;
+  width: 0.3rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -65,7 +77,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $color-primary-dark;
+  background: $color-primary;
 }
 
 :not(.quick-test, .notices) {

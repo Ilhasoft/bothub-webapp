@@ -1,6 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideBar.vue renders correctly 1`] = `
+<<<<<<< HEAD
 <div class="sidebar sidebar__non-printable">
   <div class="sidebar-wrapper">
     <div class="sidebar-wrapper__collapse-button">
@@ -35,5 +36,51 @@ exports[`SideBar.vue renders correctly 1`] = `
     </b-menu-stub>
     <div></div>
   </div>
+=======
+<div class="sidebar">
+  <unnnic-sidebar expanded="true" class="sidebar-wrapper">
+    <div slot="header" class="unnic--clickable sidebar-wrapper__header">
+      <router-link to="/"><img src="/weni-logo-green-en.svg"></router-link>
+    </div>
+    <div class="sidebar-wrapper__body">
+      <unnnic-sidebar-menu>
+        <unnnic-sidebar-item icon="layout-dashboard-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="training-menu">
+          <unnnic-sidebar-item icon="graph-stats-circle-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <section class="evaluate-menu">
+          <unnnic-sidebar-item icon="check-square-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <unnnic-sidebar-item icon="email-action-unread-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="translate-menu">
+          <unnnic-sidebar-item icon="translate-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+        <unnnic-sidebar-item icon="charger-1" text="some specific text" class=""></unnnic-sidebar-item>
+        <section class="settings-menu">
+          <unnnic-sidebar-item icon="cog-1" text="some specific text" class=""></unnnic-sidebar-item>
+          <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
+          </div>
+        </section>
+      </unnnic-sidebar-menu>
+    </div>
+    <div slot="footer" class="sidebar-wrapper__footer">
+      <unnnic-sidebar-item icon="expand-8-1" text="Encolher"></unnnic-sidebar-item>
+    </div>
+  </unnnic-sidebar>
+>>>>>>> be1ad85ecc22c95d9950c60ee8e6e960e1f95a2a
 </div>
 `;

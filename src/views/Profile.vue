@@ -313,7 +313,7 @@ export default {
         }
 
         &__plan {
-            background-color: $color-primary-dark;
+            background-color: $color-primary;
             color: $color-white;
             text-align: center;
             border-radius: 12px;

@@ -6,7 +6,7 @@ export default {
     const img = require('../../assets/imgs/mascot.svg');
     window.hdlh = {
       widget_key: process.env.VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_KEY,
-      primary_color: '#2BBFAC',
+      primary_color: '#009E96',
       logo: img,
       brand: 'BotHub',
       disable_contact_button: true,

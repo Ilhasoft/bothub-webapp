@@ -176,7 +176,13 @@
       "header_title_p2": "Usando nossa função de teste, você pode avaliar a performance da sua inteligência facilmente.",
       "header_title_lang": "Selecione o idioma para executar o teste.",
       "run_test": "Executar teste",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "stage_1": "Estágio 1",
+      "stage_2": "Estágio 2",
+      "stage_3": "Estágio 3",
+      "starting_evaluate": "Iniciando",
+      "progress_evaluate": "Em andamento",
+      "finished_evaluate": "Concluído"
     },
     "result": {
       "load_result": "Carregar Resultados",
@@ -543,11 +549,11 @@
       "test-manual": "Manual",
       "test-automatic": "Automático",
       "results": "Resultados",
-      "inbox": "Inbox",
+      "inbox": "Interações",
       "translation": "Tradução",
       "translation_status": "Status",
       "translate": "Traduzir",
-      "integration": "Integração",
+      "integration": "API",
       "settings": "Ajustes",
       "general":"Geral",
       "versions": "Versões"
@@ -770,8 +776,8 @@
       "import_error": "Algo de errado aconteceu, tente novamente mais tarde."
     },
     "weni_notification":{
-      "title": "Ilhasoft, Push e BotHub agora são Weni.",
-      "subtitle": "A partir dessa fusão, nosso propósito é continuar evoluindo a transformação digital na comunicação das organizações.",
+      "title": "O Bothub agora é Weni Inteligência Artificial",
+      "subtitle": "Novo módulo que estará disponivel na nossa plataforma unificada em breve.",
       "button": "Saiba mais",
       "link": "https://www.ilhasoft.com.br/somos-weni"
     }

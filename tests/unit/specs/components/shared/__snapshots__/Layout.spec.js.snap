@@ -8,7 +8,7 @@ exports[`Layout.vue loading renders correctly 1`] = `
   </div>
   <div class="layout__header">
     <div class="layout__header__container">
-      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="/weni-logo-green-en.svg" alt="Weni Inteligência Artificial" class="hide-mobile"> <img src="@/assets/imgs/weni-logo-small.svg" alt="Weni Inteligência Artificial" class="hide-desktop"></router-link-stub>
       <!---->
       <div class="layout__header__container__fields">
         <div class="layout__header__options">
@@ -33,7 +33,7 @@ exports[`Layout.vue renders correctly 1`] = `
   <!---->
   <div class="layout__header">
     <div class="layout__header__container">
-      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="@/assets/imgs/logo-new-white.svg" alt="Bothub" class="hide-mobile"> <img src="@/assets/imgs/icon-white.svg" alt="Bothub" class="hide-desktop"></router-link-stub>
+      <router-link-stub to="/" tag="a" ariacurrentvalue="page" event="click" class="layout__header__container__logo"><img src="/weni-logo-green-en.svg" alt="Weni Inteligência Artificial" class="hide-mobile"> <img src="@/assets/imgs/weni-logo-small.svg" alt="Weni Inteligência Artificial" class="hide-desktop"></router-link-stub>
       <!---->
       <div class="layout__header__container__fields">
         <div class="layout__header__options">

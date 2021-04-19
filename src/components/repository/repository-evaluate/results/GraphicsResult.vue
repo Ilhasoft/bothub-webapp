@@ -231,7 +231,7 @@ export default {
               {
                 label: `${this.$t('webapp.result.precision')}`,
                 data: intentsPrecision,
-                backgroundColor: '#2BBFAC',
+                backgroundColor: '#009E96',
                 hidden: true,
                 barPercentage: 0.6,
               },
@@ -326,7 +326,7 @@ export default {
               {
                 label: `${this.$t('webapp.result.precision')}`,
                 data: entitiesPrecision,
-                backgroundColor: '#2BBFAC',
+                backgroundColor: '#009E96',
                 hidden: true,
                 barPercentage: 0.6,
               },

@@ -16,12 +16,12 @@
           class="layout__header__container__logo"
           to="/">
           <img
-            src="@/assets/imgs/logo-new-white.svg"
-            alt="Bothub"
+            :src="weniDynamicLogo"
+            alt="Weni Inteligência Artificial"
             class="hide-mobile">
           <img
-            src="@/assets/imgs/icon-white.svg"
-            alt="Bothub"
+            src="@/assets/imgs/weni-logo-small.svg"
+            alt="Weni Inteligência Artificial"
             class="hide-desktop">
         </router-link>
         <div
@@ -40,9 +40,9 @@
               class="hide-mobile">
               <router-link :to="'/new'">
                 <b-button
-                  type="is-primary"
                   inverted
                   rounded
+                  class="layout__header__options__create-intelligence"
                   @click="blockedNextStepTutorial = true">
                   <strong>{{ $t('webapp.layout.newbot') }}</strong>
                 </b-button>
@@ -108,11 +108,13 @@ import { mapGetters, mapActions } from 'vuex';
 import SiteFooter from '@/components/shared/SiteFooter';
 import UserAvatar from '@/components/user/UserAvatar';
 import WeniNotification from '@/components/WeniNotification';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   SiteFooter,
   UserAvatar,
   WeniNotification,
+  I18n
 };
 
 export default {
@@ -121,7 +123,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Bothub',
+      default: 'Weni Inteligência Artificial',
     },
     withoutBackground: {
       type: Boolean,
@@ -147,17 +149,17 @@ export default {
       'authenticated',
       'myProfile',
     ]),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
     tutorialEnabled() {
       return process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED;
     },
   },
-  watch: {
-    title() {
-      document.title = this.title;
-    },
-  },
   mounted() {
-    document.title = this.title;
     this.updateMyProfile('user');
   },
   methods: {
@@ -252,7 +254,6 @@ export default {
 
   &__header {
     padding: $loading-height*3.8 1rem;
-    background-color: $color-fake-grey;
 
     &__container {
       display: flex;
@@ -262,10 +263,10 @@ export default {
 
     &__logo {
       min-width: ($size-normal * .75);
+      max-width: ($size-normal * 4);
 
       img {
         display: block;
-        height: $size-small * 1.3;
       }
     }
       &__center {
@@ -309,6 +310,17 @@ export default {
         justify-content: center;
       }
 
+      &__create-intelligence{
+        background-color: #009E96;
+        border: none;
+        color: $color-white;
+        transition: 0.5s;
+
+        &:hover{
+          background-color: #00746f;
+        }
+      }
+
       strong {
         letter-spacing: 0.8px;
       }
@@ -342,7 +354,7 @@ export default {
     }
       &__icon {
       margin-left: 0.5rem;
-      color: white;
+      color: #3B414D;
       width: 1rem;
       height: 3rem;
       cursor: pointer;
