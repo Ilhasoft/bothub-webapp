@@ -1,42 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SideBar.vue renders correctly 1`] = `
-<<<<<<< HEAD
-<div class="sidebar sidebar__non-printable">
-  <div class="sidebar-wrapper">
-    <div class="sidebar-wrapper__collapse-button">
-      <b-icon-stub icon="chevron-left"></b-icon-stub>
-    </div>
-    <b-menu-stub accordion="true" activable="true">
-      <div class="menu-header">
-        <div class="menu-header__logo"></div>
-      </div>
-      <b-menu-list-stub ariarole="" size="is-small">
-        <b-menu-item-stub label="some specific text" icon="home" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="refresh" animation="slide" tag="a" ariarole="" size="is-small" id="tour-training-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub icon="wechat" animation="slide" tag="a" ariarole="" size="is-small" id="tour-evaluate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="inbox" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-inbox-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="translate" animation="slide" tag="a" ariarole="" size="is-small" id="tour-translate-step-0">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-        <b-menu-item-stub label="some specific text" icon="power-plug" animation="slide" tag="router-link" ariarole="" size="is-small" id="tour-integrate-step-0" to="[object Object]"></b-menu-item-stub>
-        <b-menu-item-stub icon="cog" animation="slide" tag="a" ariarole="" size="is-small">
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-          <b-menu-item-stub label="some specific text" animation="slide" tag="router-link" ariarole="" size="is-small" to="[object Object]"></b-menu-item-stub>
-        </b-menu-item-stub>
-      </b-menu-list-stub>
-    </b-menu-stub>
-    <div></div>
-  </div>
-=======
 <div class="sidebar">
   <unnnic-sidebar expanded="true" class="sidebar-wrapper">
     <div slot="header" class="unnic--clickable sidebar-wrapper__header">
@@ -55,6 +19,7 @@ exports[`SideBar.vue renders correctly 1`] = `
         <section class="evaluate-menu">
           <unnnic-sidebar-item icon="check-square-1" text="some specific text" class=""></unnnic-sidebar-item>
           <div class="sidebar-wrapper__body__item" style="display: none;">
+            <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
             <unnnic-sidebar-item text="some specific text" class=""></unnnic-sidebar-item>
           </div>
@@ -81,6 +46,5 @@ exports[`SideBar.vue renders correctly 1`] = `
       <unnnic-sidebar-item icon="expand-8-1" text="Encolher"></unnnic-sidebar-item>
     </div>
   </unnnic-sidebar>
->>>>>>> be1ad85ecc22c95d9950c60ee8e6e960e1f95a2a
 </div>
 `;
