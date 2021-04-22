@@ -63,20 +63,20 @@ export default {
   },
   methods: {
     ...mapActions([
-      'searchRepositories',
+      'getCommunityRepository',
     ]),
     async updateRepositoryList() {
       const { search } = this;
       this.repositoryList = null;
 
       if (this.category === 0) {
-        this.repositoryList = await this.searchRepositories({
+        this.repositoryList = await this.getCommunityRepository({
           language: this.language,
           search,
           limit: this.limit,
         });
       } else if (this.category > 0) {
-        this.repositoryList = await this.searchRepositories({
+        this.repositoryList = await this.getCommunityRepository({
           categories: this.category,
           language: this.language,
           search,

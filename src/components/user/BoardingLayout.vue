@@ -2,7 +2,7 @@
   <div class="boarding">
     <div class="boarding__header">
       <img
-        src="@/assets/imgs/logo-new.svg"
+        :src="weniDynamicLogo"
         class="boarding__header__image"
         @click="goToLandingPage">
     </div>
@@ -13,8 +13,21 @@
 </template>
 
 <script>
+import I18n from '@/utils/plugins/i18n';
+
 export default {
   name: 'BoardingLayout',
+  components: {
+    I18n
+  },
+  computed: {
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
+  },
   methods: {
     goToLandingPage() {
       this.$router.push({

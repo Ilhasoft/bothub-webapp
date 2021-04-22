@@ -90,7 +90,7 @@ export default {
         box-shadow: 0px 3px 6px #00000029;
       }
       &__bar-field {
-        background: linear-gradient(to right, $color-primary-dark 0%, #00FFDD 100%);
+        background: linear-gradient(to right, #00ded2 0%, $color-primary-dark 100%);
         height: 20px;
         width: 15px;
 
