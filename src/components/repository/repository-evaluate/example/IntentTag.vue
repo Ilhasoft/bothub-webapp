@@ -54,7 +54,7 @@ export default {
         color: #ffffff;
 
         div > div{
-        background-color: $color-primary;
+        background-color: $color-primary-dark;
         }
       }
         &__container{
