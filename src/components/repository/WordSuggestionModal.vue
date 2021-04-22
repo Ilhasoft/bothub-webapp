@@ -309,7 +309,7 @@ export default {
 
                 .icon-style:hover{
                     cursor: pointer;
-                    background-color: $color-primary-dark;
+                    background-color: $color-primary;
                 }
             }
 

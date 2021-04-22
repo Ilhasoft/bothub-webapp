@@ -1,79 +1,74 @@
 <template>
-  <b-tag
-    :closable="closable"
-    class="intent-tag"
-    size="is-medium"
-    rounded
-    @close="$emit('close')" >
-    <div
-      class="intent-tag__container">
-      <div
-        v-if="intentCount"
-        class="intent-tag__container__count-style">
+  <b-tag :closable="closable" class="intent-tag" size="is-medium" rounded
+    @close="$emit('close')">
+    <div class="intent-tag__container">
+      <div v-if="intentCount" class="intent-tag__container__count-style">
         {{ count }}
-      </div> {{ entityName }}
+      </div>
+      {{ entityName }}
     </div>
   </b-tag>
 </template>
 
 <script>
-
 export default {
   name: 'IntentTag',
   props: {
     entityName: {
       type: String,
-      default: '',
+      default: ''
     },
     count: {
       type: Number,
-      default: 0,
+      default: 0
     },
     closable: {
       type: Boolean,
-      default: false,
+      default: false
     },
     intentCount: {
       type: Boolean,
-      default: true,
-    },
-  },
+      default: true
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-    .intent-tag{
-      border-radius: 0px !important;
-      font-weight: none !important;
-      height: 2.188rem;
+@import "~@/assets/scss/colors.scss";
 
-      &:hover{
-        background-color: #2BBFAC;
-        color: #ffffff;
+.intent-tag {
+  border-radius: 0px !important;
+  font-weight: none !important;
+  height: 2.188rem;
 
-        div > div{
-        background-color: #12A391;
-        }
-      }
-        &__container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-            &__count-style{
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 1rem;
-            min-width:  20px;
-            height: 20px;
-            margin-right: 0.5rem;
-            padding: 0.19rem;
-            color: #FFFFFF;
-            background-color: #D5D5D5;
+  &:hover {
+    background-color: $color-primary;
+    color: #ffffff;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            }
-        }
+    div > div {
+      background-color: $color-primary-darker;
     }
+  }
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__count-style {
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 1rem;
+      min-width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+      padding: 0.19rem;
+      color: #ffffff;
+      background-color: #d5d5d5;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
 </style>

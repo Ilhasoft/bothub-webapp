@@ -1,34 +1,32 @@
 <template>
   <div class="external-dashboard-layout">
-    <weni-notification class="external-dashboard-layout__notification"/>
-    <div
-      class="external-dashboard-layout__main-panel">
+    <weni-notification class="external-dashboard-layout__notification" />
+    <div class="external-dashboard-layout__main-panel">
       <div class="external-dashboard-layout__main-panel__header">
         <router-link :to="'/home'">
-          <div class="external-dashboard-layout__main-panel__logo clickable" />
+          <img
+            :src="weniDynamicLogo"
+            class="external-dashboard-layout__main-panel__header__img clickable"
+            @click="goToLandingPage"
+          />
         </router-link>
-        <router-link
-          :to="`/dashboard/${ownerNickname}/${getExternalRepository.slug}`">
-          <div
-            v-show="hasLoaded"
-            class="external-dashboard-layout__main-panel__header__right">
+        <router-link :to="`/dashboard/${ownerNickname}/${getExternalRepository.slug}`">
+          <div v-show="hasLoaded" class="external-dashboard-layout__main-panel__header__right">
             <div class="external-dashboard-layout__main-panel__header__info__badge">
               <custom-icon
                 value="botinho"
                 size="large"
-                class="external-dashboard-layout__main-panel__header__info__badge__icon"/>
+                class="external-dashboard-layout__main-panel__header__info__badge__icon"
+              />
             </div>
             <div class="external-dashboard-layout__main-panel__header__right__container">
-              <div
-                class="
-              external-dashboard-layout__main-panel__header__right__wrapper">
-                <p
-                  class="
-               external-dashboard-layout__main-panel__header__right__wrapper__title">
+              <div class="external-dashboard-layout__main-panel__header__right__wrapper">
+                <p class="external-dashboard-layout__main-panel__header__right__wrapper__title">
                   {{ getExternalRepository.name }}
                 </p>
               </div>
-              <span class="has-text-white">{{ $t('webapp.dashboard.created_by') }}
+              <span class="external-dashboard-layout__main-panel__header__right__wrapper__subtitle"
+                >{{ $t("webapp.dashboard.created_by") }}
                 <b class="has-text-primary">{{ ownerNickname }}</b>
               </span>
             </div>
@@ -38,33 +36,36 @@
       <router-view />
     </div>
   </div>
-
 </template>
-<style lang="scss">
-</style>
+<style lang="scss"></style>
 <script>
-
 import CustomIcon from '@/components/shared/CustomIcon';
 import { mapGetters } from 'vuex';
 import WeniNotification from '@/components/WeniNotification';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'DashboardExternalLayout',
   components: {
     CustomIcon,
     WeniNotification,
+    I18n
   },
   data() {
     return {
       isLoading: false,
       isFullPage: true,
-      beginnerTutorialModalOpen: false,
+      beginnerTutorialModalOpen: false
     };
   },
   computed: {
-    ...mapGetters([
-      'getExternalRepository',
-    ]),
+    ...mapGetters(['getExternalRepository']),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg';
+      }
+      return '/weni-logo-green-en.svg';
+    },
     ownerNickname() {
       if (!this.getExternalRepository.owner) return null;
       return this.getExternalRepository.owner.nickname;
@@ -72,17 +73,24 @@ export default {
     hasLoaded() {
       if (this.getExternalRepository.name) return true;
       return false;
-    },
+    }
   },
+  methods: {
+    goToLandingPage() {
+      this.$router.push({
+        name: 'landingPage'
+      });
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/utilities.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@/assets/scss/colors.scss";
 
 .external-dashboard-layout {
-
-    &__notification{
+  &__notification {
     top: 0;
     position: fixed;
     z-index: 9;
@@ -93,51 +101,50 @@ export default {
     position: relative;
     float: right;
 
-    &__logo{
-    background: url(~@/assets/imgs/logo-new-white.svg) no-repeat;
-    width: 8rem;
-    height: 2.8rem;
-  }
-  &__logo:hover{
-    background: url(~@/assets/imgs/logo-new-sidebars.svg) no-repeat;
-
-  }
+    &__logo {
+      background: url(~@/assets/imgs/weni-logo-green.svg) no-repeat;
+      width: 10rem;
+      height: 2.8rem;
+    }
 
     &__header {
       position: fixed;
       width: inherit;
       z-index: 9;
       height: 6rem;
-      top: 5.25rem;
-      background: #404143;
+      top: 3.7rem;
       display: flex;
+      background-color: $color-white;
       justify-content: space-between;
       align-items: center;
       padding: 0 7rem 0 5.7rem;
-      box-shadow: 0px 3px 6px #00000029;
       @media screen and (max-width: $mobile-width) {
-        top: 12rem;
+        top: 10rem;
       }
 
-    &__right {
-      display: flex;
-      align-items: center;
+      &__img {
+        max-height: 2rem;
+      }
+
+      &__right {
+        display: flex;
+        align-items: center;
 
         &__wrapper {
           display: flex;
           align-items: center;
           justify-content: space-between;
 
-          p {
-            color: #FFFFFF;
-          }
-
           &__title {
             font-weight: bold;
             font-size: 1.3rem;
-              @media screen and (max-width: 52rem) {
-                font-size: 13px;
+            color: $color-fake-grey;
+            @media screen and (max-width: 52rem) {
+              font-size: 13px;
             }
+          }
+          &__subtitle {
+            color: $color-fake-grey;
           }
         }
       }
@@ -145,8 +152,8 @@ export default {
       &__info {
         display: flex;
         align-items: center;
-          @media screen and (max-width: 52rem) {
-                  font-size: 13px;
+        @media screen and (max-width: 52rem) {
+          font-size: 13px;
         }
         &__badge {
           margin-right: 1rem;
@@ -163,14 +170,14 @@ export default {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #FFFFFF;
+            color: #ffffff;
           }
         }
       }
 
       @media screen and (max-width: 52rem) {
-            padding: 0 0 0 2rem;
-            height: 7rem;
+        padding: 0 0 0 2rem;
+        height: 7rem;
       }
     }
   }

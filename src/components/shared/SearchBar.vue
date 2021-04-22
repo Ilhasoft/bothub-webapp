@@ -56,10 +56,11 @@ export default {
 
 <style lang="scss" scoped>
 @import '~@/assets/scss/utilities.scss';
+@import '~@/assets/scss/colors.scss';
 
 .search {
   position: relative;
-  border: 2px solid #2bbfac;
+  border: 2px solid $color-primary;
   border-radius: 5px;
   background-color: #fff;
   height: 50px;
