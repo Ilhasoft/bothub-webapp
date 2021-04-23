@@ -4,7 +4,11 @@
       :expanded="collapse"
       :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'"
     >
-      <div class="unnic--clickable sidebar-wrapper__header" v-show="collapse" slot="header">
+      <div
+        class="unnic--clickable sidebar-wrapper__header"
+        v-show="collapse"
+        slot="header"
+      >
         <router-link to="/">
           <img :src="weniDynamicLogo" />
         </router-link>
@@ -13,7 +17,9 @@
         <unnnic-sidebar-menu>
           <unnnic-sidebar-item
             :icon="
-              checkSelectedMenu('repository-summary') ? 'layout-dashboard-2' : 'layout-dashboard-1'
+              checkSelectedMenu('repository-summary')
+                ? 'layout-dashboard-2'
+                : 'layout-dashboard-1'
             "
             :text="$t('webapp.menu.summary')"
             :enableTooltip="!collapse"
@@ -22,24 +28,29 @@
                 name: 'repository-summary',
                 dropdown: '',
                 to: 'repository-summary',
-                closeDrop: true
+                closeDrop: true,
               })
             "
             :class="[
-              checkSelectedMenu('repository-summary') ? 'sidebar-wrapper__body--active' : ''
+              checkSelectedMenu('repository-summary')
+                ? 'sidebar-wrapper__body--active'
+                : '',
             ]"
           />
 
           <section class="training-menu">
             <unnnic-sidebar-item
               :icon="
-                dropSelect === 'isTrainActive' ? 'graph-stats-circle-1-1' : 'graph-stats-circle-1'
+                dropSelect === 'isTrainActive'
+                  ? 'graph-stats-circle-1-1'
+                  : 'graph-stats-circle-1'
               "
               :text="$t('webapp.menu.training')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isTrainActive'"
               :class="{
-                'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTrainActive'
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTrainActive',
               }"
               @click.native="openDropdown('isTrainActive')"
             >
@@ -51,26 +62,30 @@
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.train')"
                 :class="[
-                  checkSelectedMenu('repository-training') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-training')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
                 @click="
                   setSelectMenu({
                     name: 'repository-training',
                     to: 'repository-training',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
               />
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.suggestion')"
                 :class="[
-                  checkSelectedMenu('repository-suggestion') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-suggestion')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
                 @click="
                   setSelectMenu({
                     name: 'repository-suggestion',
                     to: 'repository-suggestion',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
               />
@@ -79,12 +94,17 @@
 
           <section class="evaluate-menu">
             <unnnic-sidebar-item
-              :icon="dropSelect === 'isTestsActive' ? 'check-square-2' : 'check-square-1'"
+              :icon="
+                dropSelect === 'isTestsActive'
+                  ? 'check-square-2'
+                  : 'check-square-1'
+              "
               :text="$t('webapp.menu.test')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isTestsActive'"
               :class="{
-                'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTestsActive'
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTestsActive',
               }"
               @click="openDropdown('isTestsActive')"
             >
@@ -96,40 +116,30 @@
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.test-manual')"
                 :class="[
-                  checkSelectedMenu('repository-test-manual') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-test-manual')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
                 @click="
                   setSelectMenu({
                     name: 'repository-test-manual',
                     to: 'repository-test-manual',
-                    closeDrop: false
-                  })
-                "
-              />
-              <unnnic-sidebar-item
-                :text="$t('webapp.menu.test-automatic')"
-                :class="[
-                  checkSelectedMenu('repository-test-automatic')
-                  ? 'sidebar-wrapper__body--active' : ''
-                ]"
-                @click="
-                  setSelectMenu({
-                    name: 'repository-test-automatic',
-                    to: 'repository-test-automatic',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
               />
               <unnnic-sidebar-item
                 :text="$t('webapp.menu.results')"
                 :class="[
-                  checkSelectedMenu('repository-results') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-results')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
                 @click="
                   setSelectMenu({
                     name: 'repository-results',
                     to: 'repository-results',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
               />
@@ -149,20 +159,29 @@
                 name: 'repository-log',
                 dropdown: '',
                 to: 'repository-log',
-                closeDrop: true
+                closeDrop: true,
               })
             "
-            :class="[checkSelectedMenu('repository-log') ? 'sidebar-wrapper__body--active' : '']"
+            :class="[
+              checkSelectedMenu('repository-log')
+                ? 'sidebar-wrapper__body--active'
+                : '',
+            ]"
           />
 
           <section class="translate-menu">
             <unnnic-sidebar-item
-              :icon="dropSelect === 'isTranslationsActive' ? 'translate-2' : 'translate-1'"
+              :icon="
+                dropSelect === 'isTranslationsActive'
+                  ? 'translate-2'
+                  : 'translate-1'
+              "
               :text="$t('webapp.menu.translation')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isTranslationsActive'"
               :class="{
-                'sidebar-wrapper__body--dropdown-open': dropSelect === 'isTranslationsActive'
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isTranslationsActive',
               }"
               @click="openDropdown('isTranslationsActive')"
             >
@@ -177,11 +196,13 @@
                   setSelectMenu({
                     name: 'repository-translate',
                     to: 'repository-translate',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
                 :class="[
-                  checkSelectedMenu('repository-translate') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-translate')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
               />
               <unnnic-sidebar-item
@@ -190,20 +211,24 @@
                   setSelectMenu({
                     name: 'repository-translations-status',
                     to: 'repository-translations-status',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
                 :class="[
                   checkSelectedMenu('repository-translations-status')
                     ? 'sidebar-wrapper__body--active'
-                    : ''
+                    : '',
                 ]"
               />
             </div>
           </section>
 
           <unnnic-sidebar-item
-            :icon="checkSelectedMenu('repository-integration') ? 'phone-charger-1' : 'charger-1'"
+            :icon="
+              checkSelectedMenu('repository-integration')
+                ? 'phone-charger-1'
+                : 'charger-1'
+            "
             :text="$t('webapp.menu.integration')"
             :enableTooltip="!collapse"
             @click="
@@ -211,11 +236,13 @@
                 name: 'repository-integration',
                 dropdown: '',
                 to: 'repository-integration',
-                closeDrop: true
+                closeDrop: true,
               })
             "
             :class="[
-              checkSelectedMenu('repository-integration') ? 'sidebar-wrapper__body--active' : ''
+              checkSelectedMenu('repository-integration')
+                ? 'sidebar-wrapper__body--active'
+                : '',
             ]"
           />
 
@@ -226,7 +253,8 @@
               :enableTooltip="!collapse"
               :active="dropSelect === 'isSettingsActive'"
               :class="{
-                'sidebar-wrapper__body--dropdown-open': dropSelect === 'isSettingsActive'
+                'sidebar-wrapper__body--dropdown-open':
+                  dropSelect === 'isSettingsActive',
               }"
               @click="openDropdown('isSettingsActive')"
             >
@@ -241,11 +269,13 @@
                   setSelectMenu({
                     name: 'repository-settings',
                     to: 'repository-settings',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
                 :class="[
-                  checkSelectedMenu('repository-settings') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-settings')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
               />
               <unnnic-sidebar-item
@@ -254,11 +284,13 @@
                   setSelectMenu({
                     name: 'repository-versions',
                     to: 'repository-versions',
-                    closeDrop: false
+                    closeDrop: false,
                   })
                 "
                 :class="[
-                  checkSelectedMenu('repository-versions') ? 'sidebar-wrapper__body--active' : ''
+                  checkSelectedMenu('repository-versions')
+                    ? 'sidebar-wrapper__body--active'
+                    : '',
                 ]"
               />
             </div>
@@ -297,7 +329,7 @@ export default {
       collapse: true,
       allVersions: [],
       dropSelect: '',
-      selectedVersion: this.getNameVersion
+      selectedVersion: this.getNameVersion,
     };
   },
   computed: {
@@ -306,13 +338,13 @@ export default {
       'authenticated',
       'getUpdateVersionsState',
       'versionEnabled',
-      'getNameVersion'
+      'getNameVersion',
     ]),
     weniDynamicLogo() {
       if (I18n.locale === 'pt-BR') {
-        return '/weni-logo-green.svg';
+        return '/weni-logo-green.svg'
       }
-      return '/weni-logo-green-en.svg';
+      return '/weni-logo-green-en.svg'
     },
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
@@ -320,7 +352,7 @@ export default {
     },
     formatUserNickName() {
       return this.getCurrentRepository.owner__nickname?.toUpperCase();
-    }
+    },
   },
   watch: {
     repositoryUUID() {
@@ -341,14 +373,18 @@ export default {
         this.getAllVersions();
         this.setUpdateVersionsState(false);
       }
-    }
+    },
   },
   mounted() {
     this.getAllVersions();
     this.setInitialSelectedMenu();
   },
   methods: {
-    ...mapActions(['getFirstFiveVersions', 'setRepositoryVersion', 'setUpdateVersionsState']),
+    ...mapActions([
+      'getFirstFiveVersions',
+      'setRepositoryVersion',
+      'setUpdateVersionsState',
+    ]),
     async getAllVersions() {
       if (!this.repositoryUUID) return;
       this.isLoading = true;
@@ -360,20 +396,22 @@ export default {
       }
     },
     handleVersion(value) {
-      const versionResult = this.allVersions.find(option => option.name === value);
+      const versionResult = this.allVersions.find(
+        (option) => option.name === value
+      );
       const version = {
         id: versionResult.id,
-        name: versionResult.name
+        name: versionResult.name,
       };
       this.setRepositoryVersion({
         version,
-        repositoryUUID: this.repositoryUUID
+        repositoryUUID: this.repositoryUUID,
       });
     },
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
         this.$router.push({
-          name: `${path}`
+          name: `${path}`,
         });
       }
     },
@@ -424,8 +462,8 @@ export default {
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -433,6 +471,7 @@ export default {
 @import "~@/assets/scss/variables.scss";
 @import "~@weni/unnnic-system/dist/unnnic.css";
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
+
 .sidebar {
   position: fixed;
   top: 3.6rem;
@@ -442,9 +481,10 @@ export default {
   opacity: 1;
   font-family: $font-family;
   display: flex;
-  @media screen and (max-width: $mobile-width) {
+   @media screen and (max-width: $mobile-width) {
     top: 10rem;
   }
+
   .sidebar-wrapper {
     z-index: 10;
     background-color: $unnnic-color-background-sky;
@@ -487,6 +527,7 @@ export default {
       width: $menu-collapsed-size + $menu-padding-collapsed;
       background-color: $unnnic-color-background-sky;
     }
+
     &__footer {
       transform: translatey(-2rem);
     }

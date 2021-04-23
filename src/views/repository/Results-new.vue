@@ -9,12 +9,15 @@
           class="evaluate">
           <div class="evaluate__content-header">
             <h2 class="evaluate__content-header__title">
-              {{ $t('webapp.evaluate.detailed_results') }}
+              {{ $t('webapp.evaluate.results') }}
             </h2>
+            <p
+              class="evaluate__content-header__description"
+              v-html="$t('webapp.evaluate.description')"/>
           </div>
+          <filter-result-example/>
           <div class="evaluate__content-wrapper">
-            <base-evaluate-results
-              :result-id="resultId"
+            <base-evaluate-versions
               :repository="repository" />
           </div>
         </div>
@@ -28,7 +31,8 @@
         v-else>
         <b-notification
           :closable="false"
-          type="is-info">
+          class="is-info"
+          role="alert">
           {{ $t('webapp.evaluate.login') }}
         </b-notification>
         <login-form hide-forgot-password />
@@ -38,36 +42,45 @@
 </template>
 
 <script>
-import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
+import { mapState, mapGetters } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
-import { mapGetters } from 'vuex';
-
+import BaseEvaluateVersions from '@/components/repository/repository-evaluate/BaseEvaluateVersions';
+import FilterResultExample from '@/components/repository/repository-evaluate/results/FilterResultExample';
+import AuthorizationRequestNotification from '@/components/repository/AuthorizationRequestNotification';
 import LoginForm from '@/components/auth/LoginForm';
 import RepositoryBase from './Base';
 
 
 export default {
-  name: 'RepositoryResult',
+  name: 'RepositoryResults',
   components: {
     RepositoryViewBase,
     LoginForm,
-    BaseEvaluateResults,
+    BaseEvaluateVersions,
     AuthorizationRequestNotification,
+    FilterResultExample,
   },
   extends: RepositoryBase,
   data() {
     return {
+      currentLanguage: '',
       evaluating: false,
       error: {},
     };
   },
   computed: {
-    ...mapGetters({
-      authenticated: 'authenticated',
+    ...mapState({
+      selectedRepository: state => state.Repository.selectedRepository,
     }),
-    resultId() {
-      return parseInt(this.$route.params.resultId, 10);
+    ...mapGetters({
+      repositoryVersion: 'getSelectedVersion',
+    }),
+  },
+  watch: {
+    selectedRepository() {
+      if (this.currentLanguage === '') {
+        this.currentLanguage = this.selectedRepository.language;
+      }
     },
   },
 };
@@ -76,7 +89,6 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
-
 
 .evaluate {
   &__divider {
@@ -92,43 +104,18 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
-    a {
-      position: relative;
-      display: inline-flex;
-      padding: 0 1.5rem 1rem;
-      color: $color-grey-dark;
-      font-weight: $font-weight-medium;
-      text-align: center;
+  &__requestAuthorization{
+    color: $color-fake-black;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    float: right;
+    text-decoration: none !important;
 
-      &:hover,
-      &.active {
-        color: $color-fake-black;
-
-        &::before {
-          $size: 10rem;
-
-          position: absolute;
-          content: "";
-          width: $size;
-          height: $size;
-          left: 50%;
-          bottom: -($size - .75rem);
-          transform: translateX(-50%);
-          background-color: $color-primary;
-          border-radius: 50%;
-          animation: nav-bubble-animation .25s ease;
-
-          @keyframes nav-bubble-animation {
-            from {
-              bottom: -($size);
-            }
-            to {
-              bottom: -($size - .75rem);
-            }
-          }
-        }
-      }
+     &:hover{
+      color: $color-grey-darker !important;
     }
+  }
+
   }
 
   &__content-header {
@@ -145,11 +132,32 @@ export default {
       color: $color-fake-black;
       margin-bottom: $between-title-subtitle;
     }
+
+    &__description {
+      margin-bottom: $between-subtitle-content + 0.5rem;
+      line-height: 0.8rem;
+      @media screen and (max-width: $mobile-width * 1.2) {
+        line-height: 1.2rem;
+      }
+    }
+
+    &__wrapper {
+      display: flex;
+      align-items: flex-end;
+      margin-top: 1rem;
+
+      &__language-select {
+        flex: 1;
+        margin-right: .5rem;
+        text-align: left;
+      }
+    }
   }
 
   &__content-wrapper {
     max-width: 100%;
     margin: 0 auto;
   }
+
 }
 </style>
