@@ -3,6 +3,7 @@ import request from './request';
 import utils from './utils';
 
 export default {
+
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-details');
     return data.actions.POST;

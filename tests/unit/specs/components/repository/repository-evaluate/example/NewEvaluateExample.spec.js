@@ -7,7 +7,7 @@ import Vuex from 'vuex';
 
 import NewEvaluateExample from '@/components/repository/repository-evaluate/example/NewEvaluateExample';
 import getters from '@/store/repository/getters';
-import actions from '@/store/evaluate/actions';
+import actions from '@/store/evaluate-example/actions';
 
 
 const localVue = createLocalVue();
