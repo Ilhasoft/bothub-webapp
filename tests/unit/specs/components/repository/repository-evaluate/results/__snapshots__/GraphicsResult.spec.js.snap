@@ -2,7 +2,15 @@
 
 exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
 <div class="graphics-results">
-  <div>
+  <div class="graphics-results__wrapper">
+    <h2 class="graphics-results__title">
+      some specific text
+      <!---->
+    </h2>
+    <p>
+      some specific text
+      <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results" target="_blank">some specific text</a>.
+    </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -19,10 +27,7 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
-      </div>
-      <p class="graphics-results__subtitle__center" style="display: none;">
-        some specific text
-      </p> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+      </div> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
     </div>
     <div>
       <h5 class="graphics-results__subtitle">
@@ -30,13 +35,10 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
-      </div>
-      <p class="graphics-results__subtitle__center" style="display: none;">
-        some specific text
-      </p> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+      </div> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
     </div>
   </div>
-  <div style="display: none;">
+  <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -46,9 +48,11 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
         <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix" target="_blank">some specific text</a>.
       </p>
     </div>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1">
+    </div>
   </div>
-  <div style="display: none;">
+  <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -58,14 +62,24 @@ exports[`GraphicsResult.vue renders re-renders after charts data changes 1`] = `
         <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution" target="_blank">some specific text</a>.
       </p>
     </div>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2">
+    </div>
   </div>
 </div>
 `;
 
 exports[`GraphicsResult.vue renders renders 1`] = `
 <div class="graphics-results">
-  <div>
+  <div class="graphics-results__wrapper">
+    <h2 class="graphics-results__title">
+      some specific text
+      <!---->
+    </h2>
+    <p>
+      some specific text
+      <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#results" target="_blank">some specific text</a>.
+    </p>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -82,10 +96,7 @@ exports[`GraphicsResult.vue renders renders 1`] = `
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
-      </div>
-      <p class="graphics-results__subtitle__center" style="display: none;">
-        some specific text
-      </p> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
+      </div> <canvas id="intentsChart" class="graphics-results__charts"></canvas>
     </div>
     <div>
       <h5 class="graphics-results__subtitle">
@@ -93,13 +104,10 @@ exports[`GraphicsResult.vue renders renders 1`] = `
       </h5>
       <div class="graphics-results__charts__loading">
         <loading-stub></loading-stub>
-      </div>
-      <p class="graphics-results__subtitle__center" style="display: none;">
-        some specific text
-      </p> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
+      </div> <canvas id="entitiesChart" class="graphics-results__charts"></canvas>
     </div>
   </div>
-  <div style="display: none;">
+  <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -109,9 +117,11 @@ exports[`GraphicsResult.vue renders renders 1`] = `
         <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confusion_matrix" target="_blank">some specific text</a>.
       </p>
     </div>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/confmat.png" alt="chart1">
+    </div>
   </div>
-  <div style="display: none;">
+  <div>
     <div class="graphics-results__info">
       <h3 class="graphics-results__title">
         some specific text
@@ -121,7 +131,9 @@ exports[`GraphicsResult.vue renders renders 1`] = `
         <a href="https://docs.ilhasoft.mobi/l/en/testing-category/testing-your-intelligence#intent_confidence_distribution" target="_blank">some specific text</a>.
       </p>
     </div>
-    <div class="graphics-results__charts"><img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2"></div>
+    <div class="graphics-results__charts">
+      <!----> <img src="https://s3.amazonaws.com/bothub-sample/hist.png" alt="chart2">
+    </div>
   </div>
 </div>
 `;

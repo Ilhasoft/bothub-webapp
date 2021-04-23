@@ -28,17 +28,6 @@ export default {
       versionsList: null,
     };
   },
-  props: {
-    crossValidation: {
-      type: Boolean,
-      default: null,
-    },
-  },
-  watch: {
-    crossValidation(){
-      this.updateVersionList()
-    }
-  },
   computed: {
     ...mapGetters({
       repository: 'getCurrentRepository',
@@ -57,7 +46,6 @@ export default {
         this.versionsList = await this.getAllResults({
           repositoryUuid: this.repository.uuid,
           version: this.version,
-          crossValidation: this.crossValidation
         });
       }
     },

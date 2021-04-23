@@ -59,12 +59,8 @@ export default {
   getAllResultsLog(repositoryUuid, resultId, page = 1) {
     return request.$http.get(`/v2/repository/evaluate/results/${resultId}/?repository_uuid=${repositoryUuid}&page_intent=${page}`);
   },
-  allVersions(repositoryUuid, version, perPage = 20, crossValidation) {
-    return new utils.Page('/v2/repository/evaluate/results/', perPage, {
-      repository_uuid: repositoryUuid,
-      repository_version: version,
-      cross_validation: crossValidation,
-    });
+  allVersions(repositoryUuid, version, perPage = 20) {
+    return new utils.Page('/v2/repository/evaluate/results/', perPage, { repository_uuid: repositoryUuid, repository_version: version });
   },
   async resultSearch(repositoryUuid, query = {}) {
     const queryString = qs.stringify({
@@ -82,21 +78,4 @@ export default {
       },
     );
   },
-  runEvaluateAutomatic(repositoryUUID, language, version) {
-    return request.$http.post(
-      `v2/repository/repository-details/${repositoryUUID}/automatic_evaluate/`,
-      {
-        language,
-        repository_version: version,
-      },
-    );
-  },
-  getEvaluateStatus(repositoryUUID, repositoryVersion) {
-    const queryString = qs.stringify({
-      repository_uuid: repositoryUUID,
-      repository_version: repositoryVersion,
-      type_processing: 2,
-    });
-    return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
-  },
-}
+};

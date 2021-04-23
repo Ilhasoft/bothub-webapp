@@ -1,29 +1,37 @@
 <template>
-  <repository-view-base :repository="repository" :error-code="errorCode">
+  <repository-view-base
+    :repository="repository"
+    :error-code="errorCode">
     <div v-if="repository">
       <div v-if="authenticated">
-        <div v-if="repository.authorization.can_write" class="evaluate">
+        <div
+          v-if="repository.authorization.can_write"
+          class="evaluate">
           <div class="evaluate__content-header">
             <h2 class="evaluate__content-header__title">
-              {{ $t("webapp.evaluate-automatic.header_title") }}
+              {{ $t('webapp.evaluate-automatic.header_title') }}
             </h2>
-            <p>{{ $t("webapp.evaluate-automatic.header_title_p") }}</p>
-            <p>{{ $t("webapp.evaluate-automatic.header_title_p2") }}</p>
+            <p>{{ $t('webapp.evaluate-automatic.header_title_p') }}</p>
+            <p>{{ $t('webapp.evaluate-automatic.header_title_p2') }}</p>
             <div class="evaluate__content-header__wrapper">
-              <div class="evaluate__content-header__wrapper__language-select">
+              <div
+                class="evaluate__content-header__wrapper__language-select">
                 <p class="evaluate__content-header__wrapper__language-select__text">
                   <strong>
-                    {{ $t("webapp.evaluate-automatic.header_title_lang") }}
+                    {{ $t('webapp.evaluate-automatic.header_title_lang') }}
                   </strong>
                 </p>
-                <div id="tour-evaluate-step-1" :is-previous-disabled="true">
-                  <b-select v-model="currentLanguage" expanded>
+                <div
+                  id="tour-evaluate-step-1"
+                  :is-previous-disabled="true">
+                  <b-select
+                    v-model="currentLanguage"
+                    expanded>
                     <option
                       v-for="language in languages"
                       :key="language.id"
                       :selected="language.value === currentLanguage"
-                      :value="language.value"
-                    >
+                      :value="language.value">
                       {{ language.title }}
                     </option>
                   </b-select>
@@ -38,12 +46,11 @@
                 :disabled="evaluating"
                 type="is-secondary"
                 class="evaluate__content-header__wrapper__button"
-                @click="newEvaluate()"
-              >
-                {{ $t("webapp.evaluate-automatic.run_test") }}
+                @click="newEvaluate()">
+                {{ $t('webapp.evaluate-automatic.run_test') }}
               </b-button>
             </div>
-            <progress-stages v-if="evaluateProgress" :progress-value="progress" />
+            <progress-stages/>
           </div>
         </div>
         <div class="evaluate__container">
@@ -52,14 +59,16 @@
               v-if="repository && !repository.authorization.can_write"
               :available="!repository.available_request_authorization"
               :repository-uuid="repository.uuid"
-              @onAuthorizationRequested="updateRepository(false)"
-            />
+              @onAuthorizationRequested="updateRepository(false)" />
           </div>
         </div>
       </div>
-      <div v-else>
-        <b-notification :closable="false" type="is-info">
-          {{ $t("webapp.evaluate-automatic.login") }}
+      <div
+        v-else>
+        <b-notification
+          :closable="false"
+          type="is-info">
+          {{ $t('webapp.evaluate-automatic.login') }}
         </b-notification>
         <login-form hide-forgot-password />
       </div>
@@ -82,7 +91,7 @@ export default {
     RepositoryViewBase,
     LoginForm,
     AuthorizationRequestNotification,
-    ProgressStages
+    ProgressStages,
   },
   extends: RepositoryBase,
   data() {
@@ -94,32 +103,25 @@ export default {
       eventClickFinish: false,
       eventReset: false,
       eventSkip: false,
-      evaluateProgress: false,
-      progress: 0
     };
   },
   computed: {
     ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository
+      selectedRepository: state => state.Repository.selectedRepository,
     }),
     ...mapGetters({
       repositoryVersion: 'getSelectedVersion',
-      activeTutorial: 'activeTutorial'
+      activeTutorial: 'activeTutorial',
     }),
     languages() {
       if (!this.selectedRepository || !this.selectedRepository.evaluate_languages_count) return [];
-      return Object.keys(this.selectedRepository.evaluate_languages_count).map((lang, index) => ({
-        id: index + 1,
-        value: lang,
-        title: `${LANGUAGES[lang]}`
-      }));
+      return Object.keys(this.selectedRepository.evaluate_languages_count)
+        .map((lang, index) => ({
+          id: index + 1,
+          value: lang,
+          title: `${LANGUAGES[lang]}`,
+        }));
     },
-    repositoryUUID() {
-      if (!this.repository || this.repository.uuid === 'null') {
-        return null;
-      }
-      return this.repository.uuid;
-    }
   },
   watch: {
     selectedRepository() {
@@ -127,15 +129,12 @@ export default {
         this.currentLanguage = this.selectedRepository.language;
       }
     },
-    async repositoryUUID() {
-      if (!this.repositoryUUID) {
-        return;
-      }
-      this.checkEvaluateProgress();
-    }
   },
   methods: {
-    ...mapActions(['runNewEvaluateAutomatic', 'getAutoEvaluateProgress']),
+    ...mapActions([
+      'runNewEvaluate',
+      'getTrainingStatus',
+    ]),
     dispatchClick() {
       this.eventClick = !this.eventClick;
     },
@@ -152,48 +151,38 @@ export default {
       this.requestAuthorizationModalOpen = false;
       this.$buefy.toast.open({
         message: this.$t('webapp.layout.authorization_success'),
-        type: 'success'
+        type: 'success',
       });
       this.updateRepository(false);
     },
-    async checkEvaluateProgress(inProgress = false) {
-      const { data } = await this.getAutoEvaluateProgress({
+    async updateTrainingStatus() {
+      const trainStatus = await this.getTrainingStatus({
         repositoryUUID: this.repository.uuid,
-        repositoryVersion: this.repositoryVersion
+        version: this.repositoryVersion,
       });
-
-      const [evaluateStatus] = data.results;
-
-      if (!evaluateStatus) {
-        this.evaluating = false;
-        return;
-      }
-
-      if (evaluateStatus.status === 2 || evaluateStatus.status === 3) {
-        this.evaluating = false;
-        this.evaluateProgress = false;
-        return;
-      }
-
-      if (evaluateStatus.status !== 2 || evaluateStatus.status !== 3) {
-        this.evaluating = true;
-        this.evaluateProgress = true;
-        this.progress = evaluateStatus.status;
-
-        setTimeout(() => {
-          this.checkEvaluateProgress(true);
-        }, 100000);
+      if (trainStatus) {
+        Object.assign(this.repository, trainStatus);
       }
     },
     async newEvaluate() {
       this.evaluating = true;
       try {
-        await this.runNewEvaluateAutomatic({
+        const result = await this.runNewEvaluate({
           repositoryUUID: this.repository.uuid,
           language: this.currentLanguage,
-          version: this.repositoryVersion
+          version: this.repositoryVersion,
         });
-        await this.checkEvaluateProgress();
+        this.evaluating = false;
+        this.$router.push({
+          name: 'repository-result',
+          params: {
+            ownerNickname: this.repository.owner.nickname,
+            slug: this.repository.slug,
+            resultId: result.data.evaluate_id,
+            version: result.data.evaluate_version,
+          },
+        });
+        return true;
       } catch (error) {
         this.dispatchReset();
         this.error = error.response.data;
@@ -201,20 +190,22 @@ export default {
         this.$buefy.toast.open({
           message: `${this.error.detail || this.$t('webapp.evaluate-automatic.default_error')} `,
           type: 'is-danger',
-          duration: 5000
+          duration: 5000,
         });
       }
       return false;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "~@/assets/scss/colors.scss";
-@import "~@/assets/scss/variables.scss";
+@import '~@/assets/scss/colors.scss';
+@import '~@/assets/scss/variables.scss';
+
 
 .evaluate {
+
   &__divider {
     height: 1px;
     background-color: #d5d5d5;
@@ -228,11 +219,11 @@ export default {
     overflow: hidden;
     border-bottom: 1px solid $color-grey;
 
-    &__requestAuthorization {
-      color: $color-fake-black;
+    &__requestAuthorization{
+       color: $color-fake-black;
       font-weight: $font-weight-medium;
       text-align: center;
-      float: right;
+      float: right
     }
     a {
       position: relative;
@@ -254,18 +245,18 @@ export default {
           width: $size;
           height: $size;
           left: 50%;
-          bottom: -($size - 0.75rem);
+          bottom: -($size - .75rem);
           transform: translateX(-50%);
           background-color: $color-primary;
           border-radius: 50%;
-          animation: nav-bubble-animation 0.25s ease;
+          animation: nav-bubble-animation .25s ease;
 
           @keyframes nav-bubble-animation {
             from {
               bottom: -($size);
             }
             to {
-              bottom: -($size - 0.75rem);
+              bottom: -($size - .75rem);
             }
           }
         }
@@ -295,10 +286,10 @@ export default {
 
       &__language-select {
         flex: 1;
-        margin-right: 0.5rem;
+        margin-right: .5rem;
         text-align: left;
 
-        &__text {
+        &__text{
           margin-bottom: 1rem;
         }
       }

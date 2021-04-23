@@ -7,7 +7,7 @@ import Org from './org';
 import Repository from './repository';
 import Category from './category';
 import Example from './example';
-import Evaluates from './evaluate';
+import EvaluateExample from './evaluate-example';
 import Translate from './translate';
 import CachedFetch from './cached-fetch';
 import Entity from './entity';
@@ -28,7 +28,7 @@ const store = new Vuex.Store({
     Example,
     Translate,
     CachedFetch,
-    Evaluates,
+    EvaluateExample,
     Entity,
     News,
     Tutorial,

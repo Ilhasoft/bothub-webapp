@@ -1,9 +1,9 @@
 <template>
   <b-tag
-    :type="evaluateType ? 'is-info' : 'is-warning'"
+    :type="evaluateType === 'Manual' ? 'is-warning' : 'is-info'"
     class="evaluate-type"
     rounded>
-    <p>{{ checkEvaluateType }}</p>
+    <p>{{ evaluateType }}</p>
   </b-tag>
 </template>
 
@@ -13,16 +13,10 @@ export default {
   name: 'EvaluateTypeTag',
   props: {
     evaluateType: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: '',
     },
   },
-  computed: {
-    checkEvaluateType() {
-      if (this.evaluateType) return this.$t('webapp.result.result_automatic')
-      return this.$t('webapp.result.result_manual')
-    }
-  }
 };
 </script>
 
