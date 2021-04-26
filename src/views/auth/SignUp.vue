@@ -30,7 +30,7 @@
                 {{ confirmError }}
               </p>
               <vue-recaptcha
-                sitekey="6LcwiLYaAAAAADdphWAXcEPfaoEnx35yd8xeqd60"
+                :sitekey="recaptchaToken"
                 :loadRecaptchaScript="true"
                 ref="recaptcha"
                 @verify="onVerify"
@@ -87,7 +87,8 @@ export default {
       submitting: false,
       errors: {},
       confirmError: '',
-      checkValue: ''
+      checkValue: '',
+      recaptchaToken: process.env.VUE_APP_RECAPTCHA_TOKEN
     };
   },
   computed: {
