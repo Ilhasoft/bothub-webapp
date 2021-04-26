@@ -29,6 +29,7 @@
               <p class="signup__content__field__forms__passwordError">
                 {{ confirmError }}
               </p>
+              <h1>token{{recaptchaToken}}</h1>
               <vue-recaptcha
                 :sitekey="recaptchaToken"
                 :loadRecaptchaScript="true"
