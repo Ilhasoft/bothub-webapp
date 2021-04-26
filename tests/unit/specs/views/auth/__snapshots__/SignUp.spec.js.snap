@@ -18,6 +18,7 @@ exports[`LoginForm.vue renders correctly 1`] = `
             <p class="signup__content__field__forms__passwordError">
 
             </p>
+            <vue-recaptcha-stub sitekey="6LcwiLYaAAAAADdphWAXcEPfaoEnx35yd8xeqd60" loadrecaptchascript="true" recaptchascriptid="__RECAPTCHA_SCRIPT" recaptchahost="www.google.com" language="" class="signup__content__field__forms__check"></vue-recaptcha-stub>
             <div class="field">
               <div class="control has-text-centered">
                 <b-button expanded="" native-type="submit" class="signup__content__field__forms__button is-primary">some specific text</b-button>

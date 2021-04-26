@@ -47,8 +47,8 @@ export default {
     return response;
   },
   async register(store, {
-    email, name, nickname, password,
+    email, name, nickname, password, recaptcha
   }) {
-    await auth.register(email, name, nickname, password);
+    await auth.register(email, name, nickname, password, recaptcha);
   },
 };
