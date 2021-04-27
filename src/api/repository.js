@@ -54,7 +54,6 @@ export default {
     const queryString = qs.stringify(limit, offset);
     return request.$http.get(`/v2/repository/repositories/?${queryString}`);
   },
-
   searchByOrg(orgNickname, limit = 20, search, categories, language) {
     return new utils.Page('/v2/repository/search-repositories/', limit, {
       nickname: orgNickname, search, categories, language,
@@ -89,6 +88,13 @@ export default {
   getRepositoryInfo(repositoryUUID, version) {
     return request.$http.get(
       `/v2/repository/info/${repositoryUUID}/${version}`,
+    );
+  },
+  getProjectsWithFlows(limit, offset, projectUUID) {
+    const queryString = qs.stringify(limit, offset);
+    console.log(limit, offset, projectUUID)
+    return request.$http.get(
+      `/v2/grpc/repositories/${projectUUID}/`,
     );
   },
   debugParse(repositoryUUID, repositoryVersion, language, text) {

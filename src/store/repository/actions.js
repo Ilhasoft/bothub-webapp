@@ -36,6 +36,10 @@ export default {
     /* istanbul ignore next */
     return repository.search(limit, offset);
   },
+  searchProjectWithFlow(store, { limit, offset, projectUUID }) {
+    /* istanbul ignore next */
+    return repository.getProjectsWithFlows(limit, offset, projectUUID);
+  },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
