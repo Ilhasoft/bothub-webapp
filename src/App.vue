@@ -8,13 +8,15 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   NewsModal,
+  I18n
 };
 
 export default {
@@ -24,12 +26,26 @@ export default {
     ...mapGetters([
       'activeMenu',
     ]),
+    dynamicTitle() {
+      if (I18n.locale === 'pt-BR') {
+        return 'Weni Inteligência Artificial'
+      }
+      return 'Weni Artificial Intelligence'
+    },
   },
   mounted() {
+    document.title = this.dynamicTitle;
     hotjar.addHotjar();
     this.safariDetected();
+    this.profileInfo();
   },
   methods: {
+    ...mapActions(['getMyProfileInfo']),
+    async profileInfo(){
+      const { data } = await this.getMyProfileInfo();
+
+      console.log('tee', data)
+    },
     safariDetected() {
       if (navigator.userAgent.indexOf('Safari') !== -1
       && navigator.userAgent.indexOf('Chrome') === -1) {

@@ -40,6 +40,10 @@ export default {
     /* istanbul ignore next */
     return repository.getProjectsWithFlows(limit, offset, projectUUID);
   },
+  getCommunityRepository(store, querys) {
+    /* istanbul ignore next */
+    return repository.communityRepository({ ...querys, limit: 21 });
+  },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);

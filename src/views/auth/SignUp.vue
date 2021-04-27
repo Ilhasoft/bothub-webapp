@@ -255,7 +255,7 @@ export default {
           font-family: $font-family;
           text-align: center;
           &:hover{
-            color: #2BBFAC;
+            color:  $color-primary;
           }
         }
         &__button{

@@ -253,7 +253,7 @@ export default {
 
         &__collapse-button {
           cursor: pointer;
-          background-color: #2BBFAC;
+          background-color: #009E96;
           border-radius: 1rem 0 0 1rem;
           height: 3rem;
           width: 5rem;
