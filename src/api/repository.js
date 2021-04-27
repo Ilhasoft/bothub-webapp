@@ -54,7 +54,9 @@ export default {
     const queryString = qs.stringify(limit, offset);
     return request.$http.get(`/v2/repository/repositories/?${queryString}`);
   },
-
+  communityRepository(query, limit = 20) {
+    return new utils.Page('/v2/repository/repositories/', limit, query);
+  },
   searchByOrg(orgNickname, limit = 20, search, categories, language) {
     return new utils.Page('/v2/repository/search-repositories/', limit, {
       nickname: orgNickname, search, categories, language,

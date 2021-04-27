@@ -10,7 +10,7 @@
           <div class="repository-analyze-text-header-field">
             <p><strong>URL:</strong></p>
             <highlighted-code code-class="plaintext">
-              {{ repository.nlp_server }}v2/parse/
+              {{ repository.nlp_server }}parse/
             </highlighted-code>
           </div>
           <div class="repository-analyze-text-header-field">

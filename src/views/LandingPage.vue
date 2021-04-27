@@ -1,93 +1,88 @@
 <template>
   <div>
-    <weni-notification/>
+    <weni-notification />
     <nav class="landing-page__nav">
-        <router-link
-          class="landing-page__nav__logo"
-          to="/">
-          <img
-            src="@/assets/imgs/logo-new.svg"
-            alt="Bothub">
-        </router-link>
-        <div class="landing-page__nav__login">
-          <strong
-            class="landing-page__nav__button clickable"
-            @click="signIn()">{{ $t('webapp.landing_page.signin') }}</strong>
-          <span>{{ $t('webapp.landing_page.or') }}</span>
-          <strong
-            class="landing-page__nav__button clickable"
-            @click="signUp()">{{ $t('webapp.landing_page.signup') }}</strong>
-        </div>
+      <router-link class="landing-page__nav__logo" to="/">
+        <img :src="weniDynamicLogo" alt="Weni Inteligência Artificial" />
+      </router-link>
+      <div class="landing-page__nav__login">
+        <strong class="landing-page__nav__button clickable" @click="signIn()">{{
+          $t("webapp.landing_page.signin")
+        }}</strong>
+        <span>{{ $t("webapp.landing_page.or") }}</span>
+        <strong class="landing-page__nav__button clickable" @click="signUp()">{{
+          $t("webapp.landing_page.signup")
+        }}</strong>
+      </div>
     </nav>
     <header class="landing-page__header">
       <div class="landing-page__header__content">
         <div class="landing-page__header__content__text">
-          <h1>{{ $t('webapp.landing_page.header_content1') }}</h1>
-          <p>{{ $t('webapp.landing_page.header_content2') }}</p>
-          <b-button
-            type='is-primary'
-            rounded
-            @click="signUp()">
-            {{ $t('webapp.landing_page.join_for_free') }}
+          <h1>{{ $t("webapp.landing_page.header_content1") }}</h1>
+          <p>{{ $t("webapp.landing_page.header_content2") }}</p>
+          <b-button type="is-primary" rounded @click="signUp()">
+            {{ $t("webapp.landing_page.join_for_free") }}
           </b-button>
         </div>
         <div class="landing-page__header__content__animation hide-mobile" />
       </div>
     </header>
     <section class="landing-page__intro">
-      <div
-        class="landing-page__intro__background-svg"/>
+      <div class="landing-page__intro__background-svg" />
       <div class="landing-page__intro__background">
         <div class="landing-page__intro__item">
-          <img src="~@/assets/imgs/hand.svg">
-          <h2>{{ $t('webapp.landing_page.grid_text1') }}</h2>
-          <span>{{ $t('webapp.landing_page.grid_text2') }}</span>
+          <img src="~@/assets/imgs/hand.svg" />
+          <h2>{{ $t("webapp.landing_page.grid_text1") }}</h2>
+          <span>{{ $t("webapp.landing_page.grid_text2") }}</span>
         </div>
         <div class="landing-page__intro__item">
-          <img src="~@/assets/imgs/cloud.svg">
-          <h2>{{ $t('webapp.landing_page.grid_text3') }}</h2>
-          <span>{{ $t('webapp.landing_page.grid_text4') }}</span>
+          <img src="~@/assets/imgs/cloud.svg" />
+          <h2>{{ $t("webapp.landing_page.grid_text3") }}</h2>
+          <span>{{ $t("webapp.landing_page.grid_text4") }}</span>
         </div>
         <div class="landing-page__intro__item">
-          <img src="~@/assets/imgs/talk-balloon.svg">
-          <h2>{{ $t('webapp.landing_page.grid_text5') }}</h2>
-          <span>{{ $t('webapp.landing_page.grid_text6') }}</span>
+          <img src="~@/assets/imgs/talk-balloon.svg" />
+          <h2>{{ $t("webapp.landing_page.grid_text5") }}</h2>
+          <span>{{ $t("webapp.landing_page.grid_text6") }}</span>
         </div>
       </div>
     </section>
     <section class="landing-page__bots">
       <div class="landing-page__bots__content text-center">
         <h1 class="landing-page__bots__content__title">
-          {{ $t('webapp.landing_page.best_bots') }}
+          {{ $t("webapp.landing_page.best_bots") }}
         </h1>
-        <repository-card-list
-          :show-more-button="false"
-          limit="6"/>
+        <repository-card-list :show-more-button="false" limit="6" />
         <b-button
           class="landing-page__bots__content__button"
           type="is-primary"
-          @click="showAllBots()"> {{ $t('webapp.landing_page.all_bots') }} </b-button>
+          @click="showAllBots()"
+        >
+          {{ $t("webapp.landing_page.all_bots") }}
+        </b-button>
       </div>
     </section>
     <section class="landing-page__signup">
       <div class="landing-page__signup__container">
         <div class="landing-page__signup__container__items">
           <h1>
-            {{ $t('webapp.landing_page.signup_grid') }}
-            </h1>
+            {{ $t("webapp.landing_page.signup_grid") }}
+          </h1>
           <b-button
             class="landing-page__signup__button"
             rounded
-            @click="signUp()">
-            {{ $t('webapp.landing_page.signup_forfree') }}
+            @click="signUp()"
+          >
+            {{ $t("webapp.landing_page.signup_forfree") }}
           </b-button>
         </div>
         <div class="landing-page__signup__animation">
-          <div class="landing-page__signup__animation__girl"/>
-          <div class="landing-page__signup__animation__shadow"/>
+          <div class="landing-page__signup__animation__girl" />
+          <div class="landing-page__signup__animation__shadow" />
         </div>
       </div>
     </section>
+    <site-footer />
   </div>
 </template>
 
@@ -95,18 +90,25 @@
 import RepositoryCardList from '@/components/repository/RepositoryCardList';
 import { mapGetters } from 'vuex';
 import WeniNotification from '@/components/WeniNotification';
+import SiteFooter from '@/components/shared/SiteFooter';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'LandingPage',
   components: {
     RepositoryCardList,
     WeniNotification,
+    I18n,
+    SiteFooter
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'myProfile',
-    ]),
+    ...mapGetters(['authenticated', 'myProfile']),
+    weniDynamicLogo() {
+      if (I18n.locale === 'pt-BR') {
+        return '/weni-logo-green.svg'
+      }
+      return '/weni-logo-green-en.svg'
+    },
   },
   watch: {
     authenticated() {
@@ -141,10 +143,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
-@import '~@/assets/scss/utilities.scss';
-
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@/assets/scss/utilities.scss";
 
 .landing-page {
   $max-width: 1200px;
@@ -152,17 +153,17 @@ export default {
   $moredate-margin: 3rem 0;
 
   &__nav {
-    padding: .25rem 1rem;
+    padding: 1.3rem 1rem 0.25rem;
     background-color: $color-white;
     width: 100%;
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     font-family: $font-family;
 
     &__button {
       color: $color-primary;
       &:hover {
-        color: $color-primary-dark;
+        color: $color-primary;
       }
     }
 
@@ -175,13 +176,13 @@ export default {
     }
 
     &__logo {
-      min-width: ($size-normal * .75);
-      padding: ($size-normal * .125) 0;
+      min-width: ($size-normal * 0.75);
+      max-width: ($size-normal * 4.3);
+      padding: ($size-normal * 0.125) 0;
       align-self: center;
 
       img {
         display: block;
-        height: $size-small * 1.4;
       }
     }
   }
@@ -204,11 +205,11 @@ export default {
 
       &__text {
         position: relative;
-        width:  calc(100% * 1/2 - 1rem);
+        width: calc(100% * 1 / 2 - 1rem);
         margin-top: 5vh;
 
         @media screen and (max-width: $mobile-width) {
-            width: 100%;
+          width: 100%;
         }
 
         h1 {
@@ -225,9 +226,9 @@ export default {
 
       &__animation {
         position: relative;
-        background-image: url('~@/assets/imgs/network.svg');
+        background-image: url("~@/assets/imgs/network.svg");
         background-repeat: no-repeat;
-        width:  calc(100% * 1/2 - 1rem);
+        width: calc(100% * 1 / 2 - 1rem);
         height: 400px;
         display: inline-block;
 
@@ -237,20 +238,26 @@ export default {
 
         &:before {
           position: absolute;
-          content: '';
+          content: "";
           height: 400px;
           width: 100%;
           left: 3rem;
-          background: url('~@/assets/imgs/floating-girl.svg') no-repeat;
+          background: url("~@/assets/imgs/floating-girl.svg") no-repeat;
           animation-name: floating;
           animation-duration: 3s;
           animation-iteration-count: infinite;
           animation-timing-function: ease-in-out;
 
           @keyframes floating {
-            0% { transform: translate(0,  0px); }
-            65%  { transform: translate(0, 15px); }
-            100%   { transform: translate(0, -0px); }
+            0% {
+              transform: translate(0, 0px);
+            }
+            65% {
+              transform: translate(0, 15px);
+            }
+            100% {
+              transform: translate(0, -0px);
+            }
           }
         }
       }
@@ -264,7 +271,7 @@ export default {
 
     &:after {
       position: absolute;
-      content: '';
+      content: "";
       width: 100%;
       height: 50%;
       bottom: 0;
@@ -273,11 +280,14 @@ export default {
 
     &__background-svg {
       height: 120vh;
-      background: url('~@/assets/imgs/bg-intro.svg') no-repeat;
+      background: url("~@/assets/imgs/bg-intro.svg") no-repeat;
       background-size: 100%;
       position: relative;
       width: 100%;
-      z-index:1;
+      z-index: 1;
+      @media screen and (max-height: $mobile-width) {
+        height: 130vh;
+      }
     }
 
     &__background {
@@ -285,12 +295,10 @@ export default {
       max-width: $max-width;
       left: 0;
       right: 0;
-      top: 50%;
-      transform: translateY(-50%);
       margin: auto;
       position: absolute;
       bottom: 50%;
-      z-index:1;
+      z-index: 1;
       text-align: center;
 
       @media screen and (max-width: $mobile-width * 1.2) {
@@ -301,11 +309,15 @@ export default {
         bottom: 10%;
         background-color: #12b3a0;
       }
+      @media screen and (max-height: $mobile-width) {
+        top: 50%;
+        transform: translateY(-60%);
+      }
     }
     &__item {
       align-items: center;
       align-self: center;
-      width:  calc(100% * 1/3 - 1rem);
+      width: calc(100% * 1 / 3 - 1rem);
 
       img {
         height: 8rem;
@@ -313,7 +325,8 @@ export default {
         border-radius: 50%;
       }
 
-      span, h2 {
+      span,
+      h2 {
         color: $color-white;
       }
 
@@ -334,8 +347,8 @@ export default {
     position: relative;
 
     @media screen and (max-width: $mobile-width) {
-        top: -90vh;
-      }
+      top: -90vh;
+    }
 
     &__content {
       margin: auto;
@@ -365,25 +378,25 @@ export default {
       height: 400px;
     }
     &__container {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        font-size: 1.75rem;
-        text-align: center;
-        color: $color-fake-black;
-        font-weight: $font-weight-medium;
-        font-family: $font-family;
-        height: 350px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 1.75rem;
+      text-align: center;
+      color: $color-fake-black;
+      font-weight: $font-weight-medium;
+      font-family: $font-family;
+      height: 350px;
+      @media screen and (max-width: $mobile-width) {
+        margin-top: -100vh;
+        height: 400px;
+      }
+      &__items {
+        width: 60%;
         @media screen and (max-width: $mobile-width) {
-          margin-top: -100vh;
-          height: 400px;
+          width: 90%;
         }
-        &__items {
-            width: 60%;
-            @media screen and (max-width: $mobile-width) {
-              width: 90%;
-            }
-        }
+      }
     }
 
     &__button {
@@ -399,7 +412,7 @@ export default {
       margin-top: 5rem;
       position: relative;
       align-items: center;
-      max-width: calc(100% * 1/4 - 1rem);
+      max-width: calc(100% * 1 / 4 - 1rem);
 
       @media screen and (max-width: $mobile-width) {
         display: none;
@@ -408,9 +421,9 @@ export default {
       &__girl {
         z-index: 1;
         position: relative;
-        background-image: url('~@/assets/imgs/girl-with-helmet.svg');
+        background-image: url("~@/assets/imgs/girl-with-helmet.svg");
         background-repeat: no-repeat;
-        width:  300px;
+        width: 300px;
         height: 300px;
         bottom: 5rem;
         animation-name: floating;
@@ -419,9 +432,15 @@ export default {
         animation-timing-function: ease-in-out;
 
         @keyframes floating {
-          0% { transform: translate(0,  0px); }
-          65%  { transform: translate(0, 15px); }
-          100%   { transform: translate(0, -0px); }
+          0% {
+            transform: translate(0, 0px);
+          }
+          65% {
+            transform: translate(0, 15px);
+          }
+          100% {
+            transform: translate(0, -0px);
+          }
         }
 
         @media screen and (max-width: $mobile-width) {
@@ -431,21 +450,27 @@ export default {
 
       &__shadow {
         position: relative;
-        content: '';
+        content: "";
         top: -5rem;
         height: 200px;
         width: 100px;
         left: 2rem;
-        background: url('~@/assets/imgs/girl-shadow.svg') no-repeat;
+        background: url("~@/assets/imgs/girl-shadow.svg") no-repeat;
         animation-name: floating-shadow;
         animation-duration: 3s;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in-out;
 
         @keyframes floating-shadow {
-          0% { transform: scale(1.2); }
-          65% { transform: scale(1.1); }
-          100% { transform: scale(1.2); }
+          0% {
+            transform: scale(1.2);
+          }
+          65% {
+            transform: scale(1.1);
+          }
+          100% {
+            transform: scale(1.2);
+          }
         }
       }
     }

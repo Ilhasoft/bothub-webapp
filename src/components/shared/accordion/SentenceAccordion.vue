@@ -132,7 +132,7 @@ export default {
       left: 0;
       width: 100%;
       content: '';
-      border-bottom: 1px solid #2bbfac;
+      border-bottom: 1px solid  $color-primary;
       transition: opacity .1s linear, transform .5s ease-in-out;
     }
 
