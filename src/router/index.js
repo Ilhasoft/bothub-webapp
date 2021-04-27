@@ -29,8 +29,6 @@ import NotFound from '@/views/NotFound';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import DashboardExternalLayout from '@/layout/dashboard/DashboardExternalLayout';
-import PaymentOptions from '@/views/payment/PaymentOptions';
-import PaymentInfo from '@/views/payment/PaymentInfo';
 import Orgs from '@/views/Orgs';
 import Org from '@/views/Org';
 import store from '../store';
@@ -248,32 +246,6 @@ export default new Router({
         }
       },
     },
-    ...(process.env.VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED
-      ? [{
-        path: '/payment-options',
-        name: 'payment-options',
-        component: PaymentOptions,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      },
-      {
-        path: '/payment-info',
-        name: 'payment-info',
-        component: PaymentInfo,
-        beforeEnter: async (to, from, next) => {
-          if (!store.getters.authenticated) {
-            next('/signin');
-          } else {
-            next();
-          }
-        },
-      },
-      ] : []),
     {
       path: '/tutorial',
       name: 'Tutorial',

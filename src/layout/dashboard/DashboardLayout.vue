@@ -157,6 +157,7 @@ export default {
       'getFinalModal',
       'getFinalMessage',
       'getRequirements',
+      'getSelectedVersion'
     ]),
     hasLoaded() {
       if (this.getCurrentRepository.name) return true;
@@ -177,11 +178,17 @@ export default {
       return this.getCurrentRepository.categories_list[0].icon || 'botinho';
     },
   },
+  destroyed(){
+    this.setRepository({})
+    this.resetRepositoryVersion()
+  },
   methods: {
     ...mapActions([
       'logout',
       'getFirstFiveVersions',
       'setTutorialMenuActive',
+      'setRepository',
+      'resetRepositoryVersion'
     ]),
     openBeginnerTutorialModal() {
       if (process.env.VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED) {
