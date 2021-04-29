@@ -60,7 +60,7 @@
 </template>
 <script>
 import { formatters, LANGUAGES } from '@/utils/index';
-import { mapState, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import _ from 'lodash';
 
 export default {
@@ -119,11 +119,8 @@ export default {
         `filter-evaluate-example__filters__wrapper__has-${fieldCount}-fields`
       ];
     },
-    ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository
-    }),
     languages() {
-      return Object.keys(this.selectedRepository.evaluate_languages_count).map((lang, index) => ({
+      return Object.keys(this.repository.evaluate_languages_count).map((lang, index) => ({
         id: index + 1,
         value: lang,
         title: `${LANGUAGES[lang]}`
