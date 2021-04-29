@@ -44,7 +44,7 @@ export default {
     const { data } = await request.$http.options('/v2/account/register/');
     return data.actions.POST;
   },
-  register(email, name, nickname, password) {
+  register(email, name, nickname, password, recaptcha) {
     return request.$http.post(
       '/v2/account/register/',
       {
@@ -52,6 +52,7 @@ export default {
         name,
         nickname,
         password,
+        recaptcha
       },
     );
   },
