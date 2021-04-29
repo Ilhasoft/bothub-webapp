@@ -1,61 +1,49 @@
 <template>
   <div class="filter-evaluate-example">
     <div class="filter-evaluate-example__filters">
-      <b-field
-        :errors="errors.intent"
-        class="filter-evaluate-example__filters__input-text">
-        <b-input
-          v-model="text"
-          :debounce="debounceTime"
-          icon-right="magnify"
-        />
+      <b-field :errors="errors.intent" class="filter-evaluate-example__filters__input-text">
+        <b-input v-model="text" :debounce="debounceTime" icon-right="magnify" />
       </b-field>
-      <div
-        :class="wrapperClasses">
+      <div :class="wrapperClasses">
         <div class="filter-evaluate-example__filters__wrapper__text">
-          {{ $t('webapp.dashboard.filter_by') }}:
+          {{ $t("webapp.dashboard.filter_by") }}:
         </div>
-        <b-field
-          :message="errors.intent">
+        <b-field :message="errors.intent">
           <b-autocomplete
             v-model="intent"
             :data="optionsIntents"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_intents')"
             open-on-focus
-            dropdown-position="bottom" />
+            dropdown-position="bottom"
+          />
         </b-field>
-        <b-field
-          v-if="entities"
-          :message="errors.entity">
+        <b-field v-if="entities" :message="errors.entity">
           <b-autocomplete
             v-model="entity"
             :data="optionsEntities"
             :formatters="inputFormatters"
             :placeholder="$t('webapp.evaluate.all_entities')"
             open-on-focus
-            dropdown-position="bottom" />
+            dropdown-position="bottom"
+          />
         </b-field>
         <b-field v-if="languageFilter && languages">
-          <b-select
-            v-model="language"
-            :placeholder="$t('webapp.evaluate.all_languages')"
-            expanded>
+          <b-select v-model="language" :placeholder="$t('webapp.evaluate.all_languages')" expanded>
             <option
               v-for="language in languages"
               :key="language.id"
               :selected="language.value === language"
-              :value="language.value">
+              :value="language.value"
+            >
               {{ language.title }}
             </option>
-            <option
-              :value="null">
-              {{ $t('webapp.home.all_languages') }}
+            <option :value="null">
+              {{ $t("webapp.home.all_languages") }}
             </option>
           </b-select>
         </b-field>
-        <b-field
-          :message="errors.repository_version_name">
+        <b-field :message="errors.repository_version_name" v-show="hasVersion">
           <b-autocomplete
             v-if="versions"
             v-model="versionName"
@@ -63,7 +51,8 @@
             :data="optionsVersions"
             :placeholder="$t('webapp.inbox.all_versions')"
             open-on-focus
-            dropdown-position="bottom"/>
+            dropdown-position="bottom"
+          />
         </b-field>
       </div>
     </div>
@@ -71,33 +60,36 @@
 </template>
 <script>
 import { formatters, LANGUAGES } from '@/utils/index';
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import _ from 'lodash';
-
 
 export default {
   name: 'FilterEvaluateExample',
   props: {
     debounceTime: {
       type: Number,
-      default: 750,
+      default: 750
     },
     intents: {
       type: Array,
-      default: null,
+      default: null
     },
     entities: {
       type: Array,
-      default: null,
+      default: null
     },
     versions: {
       type: Array,
-      default: null,
+      default: null
     },
     languageFilter: {
       type: Boolean,
-      default: null,
+      default: null
     },
+    hasVersion: {
+      type: Boolean,
+      default: true
+    }
   },
   data() {
     return {
@@ -108,34 +100,43 @@ export default {
       versionName: '',
       language: null,
       setTimeoutId: null,
-      errors: {},
+      errors: {}
     };
   },
   computed: {
+    ...mapGetters({
+      repository: 'getCurrentRepository'
+    }),
     wrapperClasses() {
-      const fieldCount = [this.languageFilter, this.entities, this.versions]
-        .reduce((counter, condition) => (condition ? counter + 1 : counter), 1);
+      const fieldCount = [
+        this.languageFilter,
+        this.entities,
+        this.hasVersion ? this.versions : ''
+      ].reduce((counter, condition) => (condition ? counter + 1 : counter), 1);
 
-      return ['filter-evaluate-example__filters__wrapper',
-        `filter-evaluate-example__filters__wrapper__has-${fieldCount}-fields`];
+      return [
+        'filter-evaluate-example__filters__wrapper',
+        `filter-evaluate-example__filters__wrapper__has-${fieldCount}-fields`
+      ];
     },
     ...mapState({
-      selectedRepository: state => state.Repository.selectedRepository,
+      selectedRepository: state => state.Repository.selectedRepository
     }),
     languages() {
-      return Object.keys(this.selectedRepository.evaluate_languages_count)
-        .map((lang, index) => ({
-          id: index + 1,
-          value: lang,
-          title: `${LANGUAGES[lang]}`,
-        }));
+      return Object.keys(this.selectedRepository.evaluate_languages_count).map((lang, index) => ({
+        id: index + 1,
+        value: lang,
+        title: `${LANGUAGES[lang]}`
+      }));
     },
     filterIntents() {
       if (this.intents !== null) {
-        return this.intents.filter(intent => intent
-          .toString()
-          .toLowerCase()
-          .indexOf(this.intent.toLowerCase()) >= 0);
+        return this.intents.filter(
+          intent => intent
+            .toString()
+            .toLowerCase()
+            .indexOf(this.intent.toLowerCase()) >= 0
+        );
       }
       return [];
     },
@@ -144,10 +145,12 @@ export default {
     },
     filterEntities() {
       if (this.entities !== null) {
-        return this.entities.filter(entity => entity.value
-          .toString()
-          .toLowerCase()
-          .indexOf(this.entity.toLowerCase()) >= 0);
+        return this.entities.filter(
+          entity => entity.value
+            .toString()
+            .toLowerCase()
+            .indexOf(this.entity.toLowerCase()) >= 0
+        );
       }
       return [];
     },
@@ -159,12 +162,10 @@ export default {
       return this.versions.map(version => version.name);
     },
     inputFormatters() {
-      const formattersList = [
-        formatters.bothubItemKey(),
-      ];
+      const formattersList = [formatters.bothubItemKey()];
       formattersList.toString = () => 'inputFormatters';
       return formattersList;
-    },
+    }
   },
   watch: {
     text(value) {
@@ -194,7 +195,10 @@ export default {
         this.versionName = versionName;
       });
       this.emitVersion(versionName);
-    },
+    }
+  },
+  mounted() {
+    this.setDefaultLanguage();
   },
   methods: {
     emitText: _.debounce(function emitIntent(text) {
@@ -209,17 +213,22 @@ export default {
     emitVersion: _.debounce(function emitVersion(version) {
       this.$emit('querystringformatted', { repository_version_name: version });
     }, 500),
-  },
+
+    setDefaultLanguage() {
+      if (!this.hasVersion) {
+        this.language = this.repository.language;
+      }
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/variables.scss";
 
 .filter-evaluate-example {
   width: 100%;
-  margin: 0 auto .5rem;
+  margin: 0 auto 0.5rem;
 
   &__filters {
     margin: 1.5rem 0;
@@ -228,7 +237,7 @@ export default {
     grid-gap: 3rem;
 
     @media (max-width: $mobile-width) {
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
 
     &__input-text {
@@ -237,7 +246,7 @@ export default {
 
     &__wrapper {
       display: grid;
-      grid-gap: .5rem;
+      grid-gap: 0.5rem;
 
       &__has-2-fields {
         grid-template-columns: 1fr 2fr 2fr;
@@ -267,13 +276,13 @@ export default {
         white-space: nowrap;
         align-self: center;
         height: 100%;
-        padding: .5rem;
+        padding: 0.5rem;
       }
     }
   }
 
   &__text {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   }
 }
 </style>

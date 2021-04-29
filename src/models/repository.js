@@ -57,6 +57,7 @@ class Repository extends ModelBase {
       repository_version: '',
       use_transformer_entities: false,
       organization: null,
+      repository_version_language: {}
     };
   }
 
@@ -91,6 +92,7 @@ class Repository extends ModelBase {
       repository_version: String,
       use_transformer_entities: Boolean,
       organization: Number,
+      repository_version_language: Object
     };
   }
 
