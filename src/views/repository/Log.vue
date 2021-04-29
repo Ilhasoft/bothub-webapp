@@ -1,42 +1,39 @@
 <template>
-  <repository-view-base
-    :repository="repository"
-    :error-code="errorCode">
-    <div
-      v-if="authenticated"
-      class="repository-log">
+  <repository-view-base :repository="repository" :error-code="errorCode">
+    <div v-if="authenticated" class="repository-log">
       <div v-if="repository && repository.authorization.can_contribute">
         <div class="repository-log__header">
-          <h1> {{ $t('webapp.menu.inbox') }} </h1>
-          <p> {{ $t('webapp.inbox.description') }} </p>
+          <h1>{{ $t("webapp.menu.inbox") }}</h1>
+          <p>{{ $t("webapp.inbox.description") }}</p>
         </div>
         <filter-evaluate-example
           v-if="repository"
           :intents="repository.intents_list"
           :versions="versions"
           language-filter
-          @querystringformatted="onSearch($event)"/>
+          :hasVersion="false"
+          @querystringformatted="onSearch($event)"
+        />
         <repository-log-list
           :per-page="perPage"
           :query="query"
           :editable="repository.authorization.can_contribute"
           @dispatchNext="dispatchClick()"
           @dispatchSkip="dispatchClickSkip()"
-          @finishedTutorial="dispatchClickFinish()"/>
+          @finishedTutorial="dispatchClickFinish()"
+        />
       </div>
       <authorization-request-notification
         v-else-if="repository"
         :available="!repository.available_request_authorization"
         :repository-uuid="repositoryUUID"
-        @onAuthorizationRequested="updateRepository(false)" />
+        @onAuthorizationRequested="updateRepository(false)"
+      />
     </div>
 
-    <div
-      v-else>
-      <b-notification
-        :closable="false"
-        class="is-info">
-        {{ $t('webapp.inbox.signin_you_account') }}
+    <div v-else>
+      <b-notification :closable="false" class="is-info">
+        {{ $t("webapp.inbox.signin_you_account") }}
       </b-notification>
       <login-form hide-forgot-password />
     </div>
@@ -47,9 +44,9 @@
       :next-event="eventClick"
       :skip-event="eventSkip"
       :finish-event="eventClickFinish"
-      name="inbox" />
+      name="inbox"
+    />
   </repository-view-base>
-
 </template>
 
 <script>
@@ -74,7 +71,7 @@ export default {
     AuthorizationRequestNotification,
     FilterEvaluateExample,
     Tour,
-    IntentModal,
+    IntentModal
   },
   extends: RepositoryBase,
   data() {
@@ -86,39 +83,39 @@ export default {
       query: {},
       eventClick: false,
       eventSkip: false,
-      eventClickFinish: false,
+      eventClickFinish: false
     };
   },
   computed: {
-    ...mapGetters([
-      'authenticated',
-      'activeTutorial',
-    ]),
+    ...mapGetters(['authenticated', 'activeTutorial']),
     languages() {
-      return Object.keys(this.repository.evaluate_languages_count)
-        .map(lang => ({
-          value: lang,
-          title: LANGUAGES[lang],
-        }));
+      return Object.keys(this.repository.evaluate_languages_count).map(lang => ({
+        value: lang,
+        title: LANGUAGES[lang]
+      }));
     },
     repositoryUUID() {
-      if (!this.repository || this.repository.uuid === 'null') { return null; }
+      if (!this.repository || this.repository.uuid === 'null') {
+        return null;
+      }
       return this.repository.uuid;
     },
     versions() {
       if (!this.versionsList) return [];
       return this.versionsList.items;
-    },
+    }
   },
   watch: {
     async repositoryUUID() {
-      if (!this.repositoryUUID) { return; }
+      if (!this.repositoryUUID) {
+        return;
+      }
       this.versionsList = await this.getVersions({
         limit: this.perPage,
-        query: { repository: this.repositoryUUID },
+        query: { repository: this.repositoryUUID }
       });
       this.versionsList.getAllItems();
-    },
+    }
   },
   methods: {
     ...mapActions(['getVersions']),
@@ -137,36 +134,34 @@ export default {
     },
     dispatchClick() {
       this.eventClick = !this.eventClick;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
-  label {
-    vertical-align: middle;
-  }
-  .repository-log {
-    font-family: $font-family;
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+label {
+  vertical-align: middle;
+}
+.repository-log {
+  font-family: $font-family;
 
-    &__header {
-      margin-bottom: 3.5rem;
+  &__header {
+    margin-bottom: 3.5rem;
 
-      h1 {
+    h1 {
       font-size: 1.75rem;
       font-weight: $font-weight-medium;
       color: $color-fake-black;
       margin-bottom: $between-title-subtitle;
-      }
-    }
-
-    &__icon {
-      pointer-events: initial !important;
-      cursor: pointer;
     }
   }
 
-
+  &__icon {
+    pointer-events: initial !important;
+    cursor: pointer;
+  }
+}
 </style>
