@@ -50,8 +50,8 @@ export default {
     /* istanbul ignore next */
     return repository.debugParse(repositoryUUID, repositoryVersion, language, text);
   },
-  searchLogs(store, { repositoryUUID, query, limit }) {
-    return repository.searchLogs(repositoryUUID, query, limit);
+  searchLogs(store, { repositoryVersionLanguage, query, limit }) {
+    return repository.searchLogs(repositoryVersionLanguage, query, limit);
   },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
