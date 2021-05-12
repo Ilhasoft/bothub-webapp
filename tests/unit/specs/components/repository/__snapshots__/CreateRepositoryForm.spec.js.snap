@@ -1,40 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CreateRepositoryForm renders correctly 1`] = `
-<div>
-  <form class="create-repository">
-    <div class="create-repository__form__wrapper">
-      <h1 class="create-repository__title"> some specific text </h1>
-      <p>some specific text</p>
-      <loading-stub></loading-stub>
-      <div class="create-repository__container">
-        <!---->
-        <div class="create-repository__form__style">
-          <!---->
-        </div>
-      </div>
+<div class="create-repository">
+  <div class="create-repository__container">
+    <div class="create-repository__container__indicator">
+      <unnnic-indicator numberofsteps="2" currentstep="1" titles="some specific text,some specific text"></unnnic-indicator>
     </div>
-    <div class="create-repository__form__wrapper" style="display: none;">
-      <h1 class="create-repository__title">
-        some specific text
-      </h1>
-      <p>some specific text</p>
-      <loading-stub></loading-stub>
-      <div>
-        <!---->
-        <div class="create-repository__buttons">
-          <b-button-stub type="is-primary" nativetype="button" tag="button" class="create-repository__form__buttons"> some specific text
-          </b-button-stub> <span class="create-repository__form__finishButton"><b-button-stub type="is-primary" nativetype="submit" tag="button" disabled="true" class="create-repository__form__buttons"> some specific text
-            </b-button-stub></span>
-        </div>
-      </div>
-    </div>
+    <section class="create-repository__container__steps">
+      <intelligence-tab-stub></intelligence-tab-stub>
+    </section>
+    <section class="create-repository__container__steps" style="display: none;">
+      <definitions-tab-stub></definitions-tab-stub>
+    </section>
     <!---->
-    <div class="create-repository__card__wrapper">
-      <div class="create-repository__card">
-        <repository-card-stub single="true" name="some specific text" available_languages="some specific text" language="some specific text" owner__nickname="" categories="[object Object]" categories_list="some specific text" slug="some specific text"></repository-card-stub>
-      </div>
-    </div>
-  </form>
+    <unnnic-modal text="some specific text" scheme="feedback-yellow" modal-icon="alert-circle-1"><span slot="message">some specific text</span>
+      <unnnic-button slot="options" type="terciary">
+        some specific text
+      </unnnic-button>
+      <unnnic-button slot="options" type="primary" class="create-repository__container__button">
+        some specific text
+      </unnnic-button>
+    </unnnic-modal>
+  </div>
 </div>
 `;
