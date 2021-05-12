@@ -29,7 +29,6 @@
           :tagItems="categoryList"
           v-if="categoryList.length > 0"
           @change-selected="selectCategory($event)"
-          class="teste"
         />
         <loading v-else />
       </section>

@@ -6,12 +6,16 @@
           :numberOfSteps="2"
           :currentStep="current + 1"
           :titles="[
-          `${$t('webapp.create_repository.first_indicator')}`,
-          `${$t('webapp.create_repository.second_indicator')}`]"
+            `${$t('webapp.create_repository.first_indicator')}`,
+            `${$t('webapp.create_repository.second_indicator')}`
+          ]"
         />
       </div>
       <section v-show="current === 0" class="create-repository__container__steps">
-        <intelligence-tab @nextStep="changeStepContent($event, 1)" @backModal="openModal = true" />
+        <intelligence-tab
+          @nextStep="changeStepContent($event, 1)"
+          @backModal="onChangeModalState(true)"
+        />
       </section>
       <section v-show="current === 1" class="create-repository__container__steps">
         <definitions-tab
@@ -19,7 +23,7 @@
           @createRepository="createRepository($event)"
         />
       </section>
-      <section v-if="current == 2" class="create-repository__container__steps">
+      <section v-show="current == 2" class="create-repository__container__steps">
         <div class="create-repository__container__steps__wrapper">
           <h1 class="create-repository__container__steps__wrapper__title">
             {{ $t("webapp.create_repository.repository_created_first") }} <br />
@@ -44,19 +48,19 @@
         :text="$t('webapp.create_repository.modal_title')"
         scheme="feedback-yellow"
         modal-icon="alert-circle-1"
-        @close="onClose()"
+        @close="onChangeModalState(false)"
       >
         <span slot="message" v-html="$t('webapp.create_repository.modal_description')" />
         <unnnic-button slot="options" type="terciary" @click="navigateToHomepage()">
-          {{$t('webapp.create_repository.modal_exit_button')}}
+          {{ $t("webapp.create_repository.modal_exit_button") }}
         </unnnic-button>
         <unnnic-button
           slot="options"
           class="create-repository__container__button"
           type="primary"
-          @click="onClose()"
+          @click="onChangeModalState(false)"
         >
-          {{$t('webapp.create_repository.modal_continue_button')}}
+          {{ $t("webapp.create_repository.modal_continue_button") }}
         </unnnic-button>
       </unnnic-modal>
     </div>
@@ -145,8 +149,8 @@ export default {
       this.changeStepContent(value, 2);
       this.onSubmit();
     },
-    onClose() {
-      this.openModal = false;
+    onChangeModalState(value) {
+      this.openModal = value;
     },
     navigateToHomepage() {
       this.openModal = false;
