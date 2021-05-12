@@ -12,7 +12,21 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
     <section class="create-repository__container__steps" style="display: none;">
       <definitions-tab-stub></definitions-tab-stub>
     </section>
-    <!---->
+    <section class="create-repository__container__steps" style="display: none;">
+      <div class="create-repository__container__steps__wrapper">
+        <h1 class="create-repository__container__steps__wrapper__title">
+          some specific text <br>
+          some specific text
+        </h1>
+        <div class="create-repository__container__steps__wrapper__button">
+          <router-link to="[object Object]">
+            <unnnic-button type="secondary" class="create-repository__container__steps__wrapper__button__btn">
+              some specific text
+            </unnnic-button>
+          </router-link>
+        </div>
+      </div>
+    </section>
     <unnnic-modal text="some specific text" scheme="feedback-yellow" modal-icon="alert-circle-1"><span slot="message">some specific text</span>
       <unnnic-button slot="options" type="terciary">
         some specific text
