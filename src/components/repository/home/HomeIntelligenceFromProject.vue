@@ -48,7 +48,6 @@ export default {
     ...mapGetters(['getProjectSelected']),
   },
   mounted(){
-    this.getProjectList();
   },
   methods: {
     ...mapActions(['searchProjectWithFlow']),

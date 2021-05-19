@@ -14,10 +14,13 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
     </section>
     <section class="create-repository__container__steps" style="display: none;">
       <div class="create-repository__container__steps__wrapper">
-        <h1 class="create-repository__container__steps__wrapper__title">
-          some specific text <br>
-          some specific text
-        </h1>
+        <div class="create-repository__container__steps__wrapper__title">
+          <h1>
+            some specific text <br>
+            some specific text
+            <emoji-stub name="Winking Face"></emoji-stub>
+          </h1>
+        </div>
         <div class="create-repository__container__steps__wrapper__button">
           <router-link to="[object Object]">
             <unnnic-button type="secondary" class="create-repository__container__steps__wrapper__button__btn">
