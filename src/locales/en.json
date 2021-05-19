@@ -84,6 +84,7 @@
       "navigate_to_next_button": "Next",
       "language_label":"Main language",
       "language_placeholder":"Select the language",
+      "language_placeholder_search":"Search for...",
       "category_label": "Category",
       "privacy_label": "Privacy",
       "privacy_type_public_title": "Public",

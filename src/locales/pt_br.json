@@ -67,23 +67,6 @@
       "intent_count": "Número de frases da intenção"
     },
     "create_repository": {
-<<<<<<< HEAD
-      "create_repo": "Nova inteligência",
-      "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
-      "choose_category": "Categorias",
-      "choose_category_text": "Escolha as categorias nas quais seu bot se encaixa. <br> Não se preocupe, isso poderá ser mudado depois.",
-      "repository_created": "Tudo pronto!",
-      "repository_created_text": "Sua inteligência está pronta para o uso. Você pode mudar essas e outras informações na seção de configurações. <br><br> Você pode começar a treinar seu bot agora!",
-      "next": "Próximo",
-      "previous": "Anterior",
-      "submit": "Enviar",
-      "start": "Começar",
-      "language": "idioma",
-      "category": "Categoria",
-      "new_repo": "NOVA INTELIGÊNCIA",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
-      "description_form": "Descrição"
-=======
       "intelligence": "Nova inteligência",
       "definitions": "Definições da inteligência",
       "first_indicator":"Inteligência",
@@ -101,6 +84,7 @@
       "navigate_to_next_button": "Avançar",
       "language_label":"Idioma principal",
       "language_placeholder":"Selecione o idioma",
+      "language_placeholder_search":"Buscar por...",
       "category_label": "Categoria",
       "privacy_label": "Privacidade",
       "privacy_type_public_title": "Pública",
@@ -116,7 +100,6 @@
       "modal_description": "Se você sair agora esta inteligência não será criada.",
       "modal_exit_button": "Sair e não criar",
       "modal_continue_button": "Continuar criando"
->>>>>>> 34e1b284f679fe5ecbab2bd6dc2b4828af541273
     },
     "register_form": {
       "already_have_account": "Já tem uma conta?",
