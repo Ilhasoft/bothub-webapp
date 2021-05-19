@@ -25,10 +25,13 @@
       </section>
       <section v-show="current == 2" class="create-repository__container__steps">
         <div class="create-repository__container__steps__wrapper">
-          <h1 class="create-repository__container__steps__wrapper__title">
-            {{ $t("webapp.create_repository.repository_created_first") }} <br />
-            {{ $t("webapp.create_repository.repository_created_second") }}
-          </h1>
+          <div class="create-repository__container__steps__wrapper__title">
+            <h1>
+              {{ $t("webapp.create_repository.repository_created_first") }} <br />
+              {{ $t("webapp.create_repository.repository_created_second") }}
+              <emoji name="Winking Face" />
+            </h1>
+          </div>
 
           <div class="create-repository__container__steps__wrapper__button">
             <router-link :to="repositoryDetailsRouterParams()">
@@ -75,12 +78,14 @@ import RepositoryModel from '@/models/newRepository';
 import Analytics from '@/utils/plugins/analytics';
 import IntelligenceTab from '@/components/repository/CreateRepository/IntelligenceTab';
 import DefinitionsTab from '@/components/repository/CreateRepository/DefinitionsTab';
+import Emoji from '@/components/shared/Emoji';
 
 export default {
   name: 'CreateRepositoryForm',
   components: {
     IntelligenceTab,
-    DefinitionsTab
+    DefinitionsTab,
+    Emoji
   },
   data() {
     return {
@@ -222,10 +227,6 @@ export default {
     &__steps {
       width: 100%;
 
-      &__wrapper * {
-        margin-bottom: 1.5rem;
-      }
-
       &__wrapper {
         display: flex;
         justify-content: center;
@@ -241,6 +242,7 @@ export default {
 
         &__button {
           width: 70%;
+          margin-top: 2rem;
 
           &__btn {
             width: 100%;

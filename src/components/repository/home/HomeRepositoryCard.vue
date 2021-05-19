@@ -37,14 +37,25 @@
           <unnnic-dropdown-item @click="showDetailModal(intentModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="graph-stats-1" />
-              <div>{{ $tc("webapp.intelligences_lib.show_intents", 2) }}</div>
+              <div>
+                {{
+                  $tc("webapp.intelligences_lib.show_intents", this.repositoryDetail.intents.length)
+                }}
+              </div>
             </div>
           </unnnic-dropdown-item>
 
           <unnnic-dropdown-item @click="showDetailModal(laguagueModal)">
             <div class="unnnic-card-intelligence__header__buttons__dropdown">
               <unnnic-icon size="sm" icon="translate-1" />
-              <div>{{ $tc("webapp.intelligences_lib.show_languages", 2) }}</div>
+              <div>
+                {{
+                  $tc(
+                    "webapp.intelligences_lib.show_languages",
+                    this.repositoryDetail.available_languages.length
+                  )
+                }}
+              </div>
             </div>
           </unnnic-dropdown-item>
         </unnnic-dropdown>
@@ -52,7 +63,7 @@
     </section>
 
     <section class="unnnic-card-intelligence__description">
-        {{ repositoryDetail.description }}
+      {{ repositoryDetail.description }}
     </section>
 
     <section class="unnnic-card-intelligence__type">
@@ -78,25 +89,18 @@
     <section class="unnnic-card-intelligence__detail">
       <div class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
-          {{
-            $tc(
-              "webapp.intelligences_lib.intent",
-              this.repositoryDetail.intents.length
-            )
-          }}
+          {{ $tc("webapp.intelligences_lib.intent", this.repositoryDetail.intents.length) }}
         </div>
         <div class="unnnic-card-intelligence__detail__content__data__info">
           <unnnic-icon
             icon="typing-1"
             class="unnnic-card-intelligence__detail__content__data__info__icon"
             size="sm"
-            scheme="aux-purple"
+            scheme="aux-pink"
             hasBackground
           />
 
-          <div
-            class="unnnic-card-intelligence__detail__content__data__info__number"
-          >
+          <div class="unnnic-card-intelligence__detail__content__data__info__number">
             {{ repositoryDetail.intents.length }}
           </div>
         </div>
@@ -120,9 +124,7 @@
             hasBackground
           />
 
-          <div
-            class="unnnic-card-intelligence__detail__content__data__info__number"
-          >
+          <div class="unnnic-card-intelligence__detail__content__data__info__number">
             {{ repositoryDetail.available_languages.length }}
           </div>
         </div>
@@ -136,44 +138,38 @@ export default {
   name: 'HomeRepositoryCard',
   data() {
     return {
-      dropdownOpen: false,
+      dropdownOpen: false
     };
   },
   props: {
     repositoryDetail: {
       type: [Object, Array],
-      default: null,
-    },
+      default: null
+    }
   },
   computed: {
     intentModal() {
       return {
         title: this.$tc('webapp.intelligences_lib.intent_modal_title', 1, {
-          nick: this.repositoryDetail.name,
+          nick: this.repositoryDetail.name
         }),
-        subtitle: this.$tc(
-          'webapp.intelligences_lib.intent_modal_subtitle',
-          10
-        ),
+        subtitle: this.$tc('webapp.intelligences_lib.intent_modal_subtitle', 10),
         type: 0,
         intents: this.repositoryDetail.intents,
         ownerNickname: this.repositoryDetail.owner__nickname,
-        slug: this.repositoryDetail.slug,
+        slug: this.repositoryDetail.slug
       };
     },
     laguagueModal() {
       return {
         title: this.$tc('webapp.intelligences_lib.language_modal_title', 1, {
-          nick: this.repositoryDetail.name,
+          nick: this.repositoryDetail.name
         }),
-        subtitle: this.$t(
-          'webapp.intelligences_lib.language_modal_subtitle',
-          10
-        ),
+        subtitle: this.$t('webapp.intelligences_lib.language_modal_subtitle', 10),
         type: 1,
-        languages: this.repositoryDetail.available_languages,
+        languages: this.repositoryDetail.available_languages
       };
-    },
+    }
   },
   methods: {
     showDetailModal(value) {
@@ -184,11 +180,11 @@ export default {
         name: 'repository-summary',
         params: {
           ownerNickname: this.repositoryDetail.owner__nickname,
-          slug: this.repositoryDetail.slug,
-        },
+          slug: this.repositoryDetail.slug
+        }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -305,8 +301,7 @@ export default {
   }
 
   &__divider {
-    border-bottom: $unnnic-border-width-thinner solid
-      $unnnic-color-neutral-lightest;
+    border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-lightest;
     margin: $unnnic-spacing-stack-xs 0;
   }
 

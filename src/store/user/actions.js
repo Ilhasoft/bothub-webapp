@@ -74,4 +74,8 @@ export default {
   searchUser(store, query) {
     return user.search(query);
   },
+  async getMyProfileInfo(nickname) {
+    const response = await user.myProfile(nickname);
+    return response;
+  },
 };

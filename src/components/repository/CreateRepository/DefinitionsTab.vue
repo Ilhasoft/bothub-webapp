@@ -11,6 +11,8 @@
           size="sm"
           :placeholder="$t('webapp.create_repository.language_placeholder')"
           v-model="definition.language"
+          search
+          :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
         >
           <option
             v-for="language in languages"
