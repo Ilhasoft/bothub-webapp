@@ -67,6 +67,7 @@
       "intent_count": "Número de frases da intenção"
     },
     "create_repository": {
+<<<<<<< HEAD
       "create_repo": "Nova inteligência",
       "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
       "choose_category": "Categorias",
@@ -82,6 +83,40 @@
       "new_repo": "NOVA INTELIGÊNCIA",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
       "description_form": "Descrição"
+=======
+      "intelligence": "Nova inteligência",
+      "definitions": "Definições da inteligência",
+      "first_indicator":"Inteligência",
+      "second_indicator":"Definições",
+      "intelligence_name_label":"Nome da Inteligência",
+      "intelligence_name_placeholder":"Defina o nome para a Inteligência",
+      "description_label":"Descrição",
+      "description_placeholder":"Descreva brevemente o propósito desta inteligência",
+      "intelligence_type": "Tipo",
+      "intelligence_type_classification_title":"Inteligência de Classificação (padrão)",
+      "intelligence_type_classification_description":"Treine frases de exemplo, atribuindo intenções e a inteligência conseguirá identificar essas intenções em novas frases enviadas.", 
+      "intelligence_type_content_title":"Inteligência de Conteúdo (novo)",
+      "intelligence_type_content_description":"Cadastre textos informativos e a inteligência será capaz de responder perguntas feitas por usuários com base no texto.",
+      "cancel_create_intelligence_button": "Cancelar",
+      "navigate_to_next_button": "Avançar",
+      "language_label":"Idioma principal",
+      "language_placeholder":"Selecione o idioma",
+      "category_label": "Categoria",
+      "privacy_label": "Privacidade",
+      "privacy_type_public_title": "Pública",
+      "privacy_type_public_description": "Nesta opção, qualquer usuário da Weni poderá ver e integrar esta inteligência.",
+      "privacy_type_private_title": "Privada",
+      "privacy_type_private_description": "Nesta opção, somente você ou convidados poderão ver e integrar esta inteligência.",
+      "navigate_to_previous_button": "Voltar",
+      "create_intelligence_button": "Criar inteligência",
+      "repository_created_first": "A inteligência foi criada e já pode ser",
+      "repository_created_second": "alimentada 😊",
+      "navigate_to_intelligence_button": "Ir até para a inteligência",
+      "modal_title": "Cancelar a criação da Inteligência?",
+      "modal_description": "Se você sair agora esta inteligência não será criada.",
+      "modal_exit_button": "Sair e não criar",
+      "modal_continue_button": "Continuar criando"
+>>>>>>> 34e1b284f679fe5ecbab2bd6dc2b4828af541273
     },
     "register_form": {
       "already_have_account": "Já tem uma conta?",

@@ -20,4 +20,5 @@ process.env.VUE_APP_BOTHUB_WEBAPP_SENTRY = (process.env.VUE_APP_BOTHUB_WEBAPP_SE
 process.env.VUE_APP_MAILCHIMP_DATACENTER = (process.env.VUE_APP_MAILCHIMP_DATACENTER || '');
 process.env.VUE_APP_MAILCHIMP_USER_ID = (process.env.VUE_APP_MAILCHIMP_USER_ID || '');
 process.env.VUE_APP_MAILCHIMP_LIST_ID = (process.env.VUE_APP_MAILCHIMP_LIST_ID || '');
+process.env.VUE_APP_RECAPTCHA_TOKEN = (process.env.VUE_APP_RECAPTCHA_TOKEN || '');
 
