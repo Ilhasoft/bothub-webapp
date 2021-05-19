@@ -4,8 +4,7 @@ import Vuex from 'vuex';
 import Buefy from 'buefy';
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-// import store from '@/store';
-import CreateRepositoryForm from '@/components/repository/CreateRepositoryForm';
+import CreateRepositoryForm from '@/components/repository/CreateRepository/CreateRepositoryForm';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);
@@ -67,7 +66,7 @@ describe('CreateRepositoryForm', () => {
 
     describe('on submit', () => {
       beforeEach(() => {
-        wrapper.find('form').trigger('submit');
+        wrapper.vm.onSubmit()
       });
 
       test('no errors', () => {

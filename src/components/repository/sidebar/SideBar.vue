@@ -88,7 +88,7 @@
             :class="[
               checkSelectedMenu('repository-summary')
                 ? 'sidebar-wrapper__body--active'
-                : '',
+                : 'sidebar-wrapper__body__element',
             ]"
           />
 
@@ -102,6 +102,7 @@
               :class="{
                 'sidebar-wrapper__body--dropdown-open':
                   dropSelect === 'isTrainActive',
+                'sidebar-wrapper__body__element': true
               }"
               @click.native="openDropdown('isTrainActive')"
             >
@@ -115,7 +116,7 @@
                 :class="[
                   checkSelectedMenu('repository-training')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
                 @click="
                   setSelectMenu({
@@ -130,7 +131,7 @@
                 :class="[
                   checkSelectedMenu('repository-suggestion')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
                 @click="
                   setSelectMenu({
@@ -156,6 +157,7 @@
               :class="{
                 'sidebar-wrapper__body--dropdown-open':
                   dropSelect === 'isTestsActive',
+                'sidebar-wrapper__body__element': true
               }"
               @click="openDropdown('isTestsActive')"
             >
@@ -169,7 +171,7 @@
                 :class="[
                   checkSelectedMenu('repository-test-manual')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
                 @click="
                   setSelectMenu({
@@ -184,7 +186,7 @@
                 :class="[
                   checkSelectedMenu('repository-results')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
                 @click="
                   setSelectMenu({
@@ -216,7 +218,7 @@
             :class="[
               checkSelectedMenu('repository-log')
                 ? 'sidebar-wrapper__body--active'
-                : '',
+                : 'sidebar-wrapper__body__element',
             ]"
           />
 
@@ -233,6 +235,7 @@
               :class="{
                 'sidebar-wrapper__body--dropdown-open':
                   dropSelect === 'isTranslationsActive',
+                'sidebar-wrapper__body__element': true
               }"
               @click="openDropdown('isTranslationsActive')"
             >
@@ -253,7 +256,7 @@
                 :class="[
                   checkSelectedMenu('repository-translate')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
               />
               <unnnic-sidebar-item
@@ -268,7 +271,7 @@
                 :class="[
                   checkSelectedMenu('repository-translations-status')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
               />
             </div>
@@ -293,7 +296,7 @@
             :class="[
               checkSelectedMenu('repository-integration')
                 ? 'sidebar-wrapper__body--active'
-                : '',
+                : 'sidebar-wrapper__body__element',
             ]"
           />
 
@@ -306,6 +309,7 @@
               :class="{
                 'sidebar-wrapper__body--dropdown-open':
                   dropSelect === 'isSettingsActive',
+                  'sidebar-wrapper__body__element': true
               }"
               @click="openDropdown('isSettingsActive')"
             >
@@ -326,7 +330,7 @@
                 :class="[
                   checkSelectedMenu('repository-settings')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
               />
               <unnnic-sidebar-item
@@ -341,7 +345,7 @@
                 :class="[
                   checkSelectedMenu('repository-versions')
                     ? 'sidebar-wrapper__body--active'
-                    : '',
+                    : 'sidebar-wrapper__body__element',
                 ]"
               />
             </div>
@@ -622,7 +626,13 @@ export default {
     }
 
     &__body {
-      margin-top: -1.3rem;
+      transform: translateY(-1.3rem);
+
+      &__element {
+        &:hover {
+          background-color: $unnnic-color-neutral-lightest;
+        }
+      }
 
       &--dropdown-open {
         background-color: $unnnic-color-neutral-lightest;

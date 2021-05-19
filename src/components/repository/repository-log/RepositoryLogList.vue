@@ -1,17 +1,12 @@
 <template>
-
   <div class="repository-log-list">
     <div class="repository-log-list__section">
-      <b-notification
-        v-if="loadingLogs"
-        :closable="false">
-        <b-loading :active.sync="loadingLogs"/>
+      <b-notification v-if="loadingLogs" :closable="false">
+        <b-loading :active.sync="loadingLogs" />
       </b-notification>
       <div>
-        <b-checkbox
-          v-model="select"
-          :native-value="selectAll">
-          {{ $t('webapp.inbox.select_all') }}
+        <b-checkbox v-model="select" :native-value="selectAll">
+          {{ $t("webapp.inbox.select_all") }}
         </b-checkbox>
       </div>
       <div class="repository-log-list__section__buttonsIcon">
@@ -21,7 +16,8 @@
             :is-previous-disabled="true"
             type="is-primary"
             icon-right="refresh"
-            @click="showModalTraining($t('webapp.inbox.training'))" />
+            @click="showModalTraining($t('webapp.inbox.training'))"
+          />
         </b-tooltip>
         <b-tooltip :label="$t('webapp.inbox.add_to_sentence_button')">
           <b-button
@@ -30,7 +26,8 @@
             :is-next-disabled="true"
             icon-right="chat-processing"
             type="is-primary"
-            @click="showModalSentence($t('webapp.inbox.test_sentences'))" />
+            @click="showModalSentence($t('webapp.inbox.test_sentences'))"
+          />
         </b-tooltip>
       </div>
     </div>
@@ -48,10 +45,8 @@
       @pageChanged="pageChanged()"
     />
 
-    <h4
-      v-if="list && list.empty && !loading"
-      class="repository-log-list__empty-message">
-      {{ $t('webapp.inbox.list_empty') }}
+    <h4 v-if="list && list.empty && !loading" class="repository-log-list__empty-message">
+      {{ $t("webapp.inbox.list_empty") }}
     </h4>
   </div>
 </template>
@@ -69,21 +64,21 @@ export default {
     PaginatedList,
     LogAccordion,
     IntentModal,
-    IntentModalEdition,
+    IntentModalEdition
   },
   props: {
     query: {
       type: Object,
-      default: null,
+      default: null
     },
     perPage: {
       type: Number,
-      default: 20,
+      default: 20
     },
     editable: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
@@ -98,14 +93,14 @@ export default {
       nlp: {},
       loadingLogs: false,
       pageWasChanged: false,
-      searchingLog: false,
+      searchingLog: false
     };
   },
   computed: {
     ...mapGetters({
       repository: 'getCurrentRepository',
       version: 'getSelectedVersion',
-      activeTutorial: 'activeTutorial',
+      activeTutorial: 'activeTutorial'
     }),
     confidenceVerify() {
       if (this.logData.length > 1) {
@@ -113,6 +108,12 @@ export default {
       }
       return false;
     },
+    repositoryList() {
+      if (!this.repository || this.repository.uuid === 'null') {
+        return null;
+      }
+      return this.repository;
+    }
   },
   watch: {
     loading() {
@@ -134,17 +135,15 @@ export default {
       }
       this.$root.$emit('selectAll', this.select);
     },
-  },
-  mounted() {
-    this.updateLogs();
+    async repositoryUUID() {
+      if (!this.repositoryUUID) {
+        return;
+      }
+      this.updateLogs();
+    }
   },
   methods: {
-    ...mapActions([
-      'searchLogs',
-      'newEvaluateExample',
-      'newExample',
-      'deleteExample',
-    ]),
+    ...mapActions(['searchLogs', 'newEvaluateExample', 'newExample', 'deleteExample']),
     addLogStructure(logValue) {
       this.logData.push(logValue);
     },
@@ -160,7 +159,7 @@ export default {
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
+          type: 'is-danger'
         });
         return;
       }
@@ -170,7 +169,7 @@ export default {
           repository: this.repository,
           titleHeader: typeModal,
           confidenceVerify: this.confidenceVerify,
-          logData: this.logData[0],
+          logData: this.logData[0]
         },
         parent: this,
         component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
@@ -178,7 +177,7 @@ export default {
         trapFocus: true,
         canCancel: false,
         events: {
-          addedIntent: (value) => {
+          addedIntent: value => {
             this.verifyIsCorrected(value);
             this.addToTraining(value);
             this.intent = value;
@@ -187,15 +186,15 @@ export default {
             this.logData = [];
             this.select = '';
             this.$root.$emit('selectAll', false);
-          },
-        },
+          }
+        }
       });
     },
     showModalSentence(typeModal) {
       if (this.logData.length === 0) {
         this.$buefy.toast.open({
           message: this.$t('webapp.inbox.select_phrase'),
-          type: 'is-danger',
+          type: 'is-danger'
         });
         return;
       }
@@ -204,7 +203,7 @@ export default {
           info: this.nlp,
           repository: this.repository,
           titleHeader: typeModal,
-          logData: this.logData[0],
+          logData: this.logData[0]
         },
         parent: this,
         component: this.logData.length === 1 ? IntentModalEdition : IntentModal,
@@ -212,7 +211,7 @@ export default {
         trapFocus: true,
         canCancel: false,
         events: {
-          addedIntent: (value) => {
+          addedIntent: value => {
             this.verifyIsCorrected(value);
             this.addToSentences(value);
             this.intent = value;
@@ -227,8 +226,8 @@ export default {
             if (this.activeTutorial === 'inbox') {
               this.$emit('dispatchSkip');
             }
-          },
-        },
+          }
+        }
       });
       this.$nextTick(() => {
         this.$emit('dispatchNext');
@@ -245,7 +244,7 @@ export default {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
-          if (this.logData.length > 1){
+          if (this.logData.length > 1) {
             await this.newExample({
               entities: data.entities,
               repository: data.repository,
@@ -253,11 +252,11 @@ export default {
               language: data.language,
               text: data.text,
               isCorrected: this.isCorrected,
-              repositoryVersion: this.version,
+              repositoryVersion: this.version
             });
             this.$buefy.toast.open({
               message: `${data.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
-              type: 'is-success',
+              type: 'is-success'
             });
           } else {
             await this.newExample({
@@ -266,11 +265,11 @@ export default {
               text: values.text,
               entities: values.entities,
               isCorrected: this.isCorrected,
-              repositoryVersion: this.version,
+              repositoryVersion: this.version
             });
             this.$buefy.toast.open({
               message: `${values.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_train')}`,
-              type: 'is-success',
+              type: 'is-success'
             });
           }
         } catch (error) {
@@ -285,7 +284,7 @@ export default {
       this.loadingLogs = true;
       this.logData.map(async ({ data }) => {
         try {
-          if (this.logData.length > 1){
+          if (this.logData.length > 1) {
             await this.newEvaluateExample({
               entities: data.entities,
               repository: data.repository,
@@ -293,11 +292,11 @@ export default {
               language: data.language,
               text: data.text,
               isCorrected: this.isCorrected,
-              repositoryVersion: this.version,
+              repositoryVersion: this.version
             });
             this.$buefy.toast.open({
               message: `${data.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
-              type: 'is-success',
+              type: 'is-success'
             });
           } else {
             await this.newEvaluateExample({
@@ -306,11 +305,13 @@ export default {
               text: values.text,
               entities: values.entities,
               isCorrected: this.isCorrected,
-              repositoryVersion: this.version,
+              repositoryVersion: this.version
             });
             this.$buefy.toast.open({
-              message: `${values.text.bold()}, ${this.$t('webapp.inbox.entry_has_add_to_sentence')}`,
-              type: 'is-success',
+              message: `${values.text.bold()}, ${this.$t(
+                'webapp.inbox.entry_has_add_to_sentence'
+              )}`,
+              type: 'is-success'
             });
           }
         } catch (error) {
@@ -322,66 +323,70 @@ export default {
       });
     },
     showError(error, log, type) {
-      let messages = ''
-      if (type === 'evaluate'){
-        console.log(error.response)
-        messages = Object.values(error.response.data.non_field_errors).length >= 1 ? this.$t('webapp.inbox.send_to_evaluate') : ''
+      let messages = '';
+      if (type === 'evaluate') {
+        messages = Object.values(error.response.data.non_field_errors).length >= 1
+          ? this.$t('webapp.inbox.send_to_evaluate')
+          : '';
       } else {
         messages = Object.values(error.response.data).map(errors => (typeof errors === 'string' ? errors : Array.join(errors, ',')));
       }
       const message = `${log.text.bold()}, ${messages}`;
       this.$buefy.toast.open({
         message,
-        type: 'is-danger',
+        type: 'is-danger'
       });
     },
     async updateLogs() {
+      const languageObject = this.repository.repository_version_language.find(
+        lang => lang.language === this.query.language
+      );
+      const { language, ...queryParams } = this.query;
       this.list = await this.searchLogs({
-        repositoryUUID: this.repository.uuid,
-        query: this.query,
-        limit: this.perPage,
+        repositoryVersionLanguage: languageObject.id,
+        query: queryParams,
+        limit: this.perPage
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
-  .repository-log-list {
-    &__pagination {
-      margin-top: 1.25rem;
-    }
-
-    &__empty-message {
-      margin: 2rem;
-      text-align: center;
-    }
-
-      &__section {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: $color-grey-dark;
-        font-size: 1.1rem;
-        font-weight: bold;
-        padding: 0 .6rem 0 1.6rem;
-
-        @media screen and (max-width: $mobile-width) {
-        padding: 0.6rem;
-      }
-
-        &__buttonsIcon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: row;
-          > * {
-            margin-left: 0.7rem;
-          }
-        }
-    }
-
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+.repository-log-list {
+  &__pagination {
+    margin-top: 1.25rem;
   }
+
+  &__empty-message {
+    margin: 2rem;
+    text-align: center;
+  }
+
+  &__section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color-grey-dark;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0 0.6rem 0 1.6rem;
+
+    @media screen and (max-width: $mobile-width) {
+      padding: 0.6rem;
+    }
+
+    &__buttonsIcon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      > * {
+        margin-left: 0.7rem;
+      }
+    }
+  }
+}
 </style>
