@@ -53,17 +53,22 @@ export default {
       errors: {},
     };
   },
-  async mounted() {
-    this.formSchema = await this.getEditRepositorySchema({
-      repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
-      repositoryVersion: this.$store.state.Repository.repositoryVersion,
-    });
+  mounted() {
+    this.getSchema();
   },
   methods: {
     ...mapActions([
       'getEditRepositorySchema',
       'editRepository',
     ]),
+    async getSchema(){
+      const schema = await this.getEditRepositorySchema({
+        repositoryUuid: this.$store.state.Repository.selectedRepository.uuid,
+        repositoryVersion: this.$store.state.Repository.repositoryVersion,
+      });
+      delete schema.available_languages
+      this.formSchema = schema
+    },
     async onSubmit() {
       this.submitting = true;
       this.errors = {};
