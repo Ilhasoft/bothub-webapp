@@ -186,6 +186,7 @@ export default {
       const { description } = schema;
       description.type = 'textarea';
       description.label = this.$t('webapp.create_repository.description_form');
+      delete schema.available_languages
       const formattedSchema = { ...schema, description };
       return formattedSchema;
     },
@@ -278,7 +279,6 @@ export default {
         value: org,
       }));
       return [
-        { value: null, label: `${this.myProfile.name} (${this.$t('webapp.orgs.my_user')})` },
         ...options,
       ];
     },
