@@ -55,8 +55,6 @@ export default {
     async getProjectList() {
       try {
         const { data } = await this.searchProjectWithFlow({
-          limit: 21,
-          offset: this.page,
           projectUUID: this.getProjectSelected
         });
 

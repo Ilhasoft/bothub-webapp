@@ -36,9 +36,9 @@ export default {
     /* istanbul ignore next */
     return repository.search(limit, offset);
   },
-  searchProjectWithFlow(store, { limit, offset, projectUUID }) {
+  searchProjectWithFlow(store, { projectUUID }) {
     /* istanbul ignore next */
-    return repository.getProjectsWithFlows(limit, offset, projectUUID);
+    return repository.getProjectsWithFlows(projectUUID);
   },
   getCommunityRepository(store, querys) {
     /* istanbul ignore next */
@@ -58,8 +58,8 @@ export default {
     /* istanbul ignore next */
     return repository.debugParse(repositoryUUID, repositoryVersion, language, text);
   },
-  searchLogs(store, { repositoryUUID, query, limit }) {
-    return repository.searchLogs(repositoryUUID, query, limit);
+  searchLogs(store, { repositoryVersionLanguage, query, limit }) {
+    return repository.searchLogs(repositoryVersionLanguage, query, limit);
   },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,

@@ -43,9 +43,9 @@
       "save_password": "Save password"
     },
     "intelligences_lib": {
-      "title": "Intelligence Library",
+      "title": "Intelligences Library",
       "new_intelligence": "New Intelligence",
-      "unused_projects": "Your project is not using intelligence. Create a new one or explore among the intelligence of your organization or community in the options above.",
+      "unused_projects": "Your project is not using intelligence linked by a classifier. Create a new one or explore among the intelligence of your organization or community in the options above.",
       "created_by": "Created by",
       "open": "Open",
       "show_intents": "View intentions | View intent | View intentions",
@@ -58,16 +58,16 @@
       "intent_modal_subtitle": "Visualize the intentions that are part of the selected intelligence.",
       "language_modal_title": "Languages of {nick} | Language of {nick} | Languages of {nick}",
       "language_modal_subtitle": "View the languages supported by the selected intelligence.",
-      "tab_project_title": "Project Intelligence",
-      "tab_project_subtitle": "Are the intelligences in use by {org}",     
-      "tab_org_title": "Organization Intelligence",
-      "tab_org_subtitle": "Visualize and use the organization's intelligence.",
+      "tab_project_title": "Intelligences of the Project",
+      "tab_project_subtitle": "They're intelligences in use at {org} linked by classifier.",
+      "tab_org_title": "Organization's Intelligences",
+      "tab_org_subtitle": "Visualize and access intelligences created by the organization.",
       "tab_community_title": "Community Intelligence",
-      "tab_community_subtitle": "Visualize and use public intelligence.",
-      "intent_count": "Number of intention phrases" 
+      "tab_community_subtitle": "Visualize and use intelligences that are public.",
+      "intent_count": "Number of intention phrases"
     },
     "create_repository": {
-      "create_repo": "Create an intelligence",
+      "create_repo": "New intelligence",
       "create_repo_text": "Now you can create intelligence quickly and easily. <br><br> Let's start now? First, give your repository a name. Then, choose the language in which it will be trained. Finally, determine whether it will be open to the public or private.",
       "choose_category": "Repository categories",
       "choose_category_text": "Choose the categories your repository fits into. <br> Don't worry, you can change them later.",
@@ -241,8 +241,8 @@
       "intents_list": "Intents List",
       "entities_list": "Entity Groups",
       "entities_label": "This intelligence has {n} entity group | This intelligence has {n} entity groups",
-      "non-grouped_entities":"and {n} non-grouped entity. | and {n} non-grouped entities.",
-      "only_non-grouped_entities":"This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
+      "non-grouped_entities": "and {n} non-grouped entity. | and {n} non-grouped entities.",
+      "only_non-grouped_entities": "This intelligence has {n} non-grouped entitie. | This intelligence has {n} non-grouped entities.",
       "bot_has_x_intents": "This bot has <strong>{intents}</strong> intents",
       "labeled": "<strong>{n}</strong> entities grouped as <strong>{label_value}</strong> | <strong>{n}</strong> entity grouped as <strong>{label_value}</strong> | <strong>{n}</strong> entities grouped as <strong>{label_value}</strong>",
       "unlabeled": "{n} ungrouped entities | <strong>{n}</strong> ungrouped entity | <strong>{n}</strong> ungrouped entities",
@@ -273,18 +273,18 @@
       "information_integrations": "Integrations | Integration | Integrations",
       "intent_question": "INTENT is what the chatbot will detect as being the user's intention when sending a specific message. For example: when sending \"thank you\", the user's intention is to show gratitude. So the intent for that sentece could be \"thanks\".",
       "entity_question": "ENTITY is the noun related to the desire that was detected by the chatbot. For example: If the user-submitted phrase is \"generate new report,\" the entity could be \"report\" or \"new report\"",
-      "intelligence_force" : "Intelligence force",
+      "intelligence_force": "Intelligence force",
       "intelligence_force_low": "Low",
       "intelligence_force_regular": "Regular",
       "intelligence_force_high": "High"
     },
-    "integration":{
+    "integration": {
       "title": "Bothub integrations",
       "description": "Make an HTTP request to the NLP service, following the example below",
       "copy": "Token Copied",
-      "my_user":"My user"
+      "my_user": "My user"
     },
-    "intent":{
+    "intent": {
       "title": "Intent",
       "description": "This intent contains {n} sentence. | This intent contains {n} sentences.",
       "edit_button": "Edit Intent",
@@ -310,7 +310,7 @@
       "search_user": "Enter a name or username",
       "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
-      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?", 
+      "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?",
       "remove": "Remove"
     },
     "roles": {
@@ -359,11 +359,11 @@
       "failed": "Failed",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "delete_title": "Delete sentence entity",
-      "delete_phrase_modal_title":"Delete sentence",
-      "delete_phrase_modal":"Are you sure? The example will be deleted",
-      "delete_button":"Delete",
-      "cancel_button":"Cancel",
-      "save_button":"Save",
+      "delete_phrase_modal_title": "Delete sentence",
+      "delete_phrase_modal": "Are you sure? The example will be deleted",
+      "delete_button": "Delete",
+      "cancel_button": "Cancel",
+      "save_button": "Save",
       "train_progress": "{progress}% of training completed",
       "empty_text_error": "You need type a text to sentence",
       "intent_error": "Intent is required",
@@ -473,7 +473,7 @@
       "reports": {
         "title": "Reports",
         "reports": "Organization Reports"
-    },
+      },
       "payment": {
         "title": "Payments",
         "history": "Payment History",
@@ -530,7 +530,7 @@
         "filter_by": "Filter by",
         "no_reports": "Nenhum relatório",
         "total": "Predictions total:"
-    },
+      },
       "payment": {
         "title": "Payments",
         "history": "Payment History",
@@ -564,7 +564,7 @@
       "translate": "Translate",
       "integration": "API",
       "settings": "Settings",
-      "general":"General",
+      "general": "General",
       "versions": "Versions"
     },
     "phrase-suggestion": {
@@ -626,9 +626,9 @@
       "add_to_train_button": "Add to Train",
       "add_to_sentence_button": "Add to Sentence",
       "remove_log_button": "Delete Sentece",
-      "select_phrase":"Select a phrase",
-      "select_all":"Select all",
-      "send_to_evaluate":"Intent and sentence already exist",
+      "select_phrase": "Select a phrase",
+      "select_all": "Select all",
+      "send_to_evaluate": "Intent and sentence already exist",
       "error": "Error",
       "add_log": {
         "add": "Add",
@@ -640,7 +640,7 @@
       "confidence": "Confidence",
       "entities": "Entity | Entities"
     },
-    "entity":{
+    "entity": {
       "title": "Entity",
       "description": "This entity contains {n} sentence. | This entity contains {n} sentences.",
       "edit_button": "Edit Entity",
@@ -680,39 +680,39 @@
       "previous_step": "Previous",
       "next_step": "Next",
       "finish_step": "Finish",
-      "confirm_step":"Confirm",
+      "confirm_step": "Confirm",
       "finish_tutorial": "Finish",
       "alert_message": "You need to follow the sequence of steps",
       "training_wait": "Your intelligence is being trained!",
       "training_error": "There was an error in training your intelligence.",
       "training_success": "Your intelligence has been successfully trained!",
       "items": {
-          "create_account": "Create account",
-          "create_intelligence": "Create your first intelligence",
-          "training": "Training this intelligence",
-          "quick_test": "Make a quick test",
-          "evaluate": "Test this intelligence",
-          "inbox": "Add sentences with inbox",
-          "translate": "Translate to another language",
-          "integrate": "Integrate your intelligence with a platform"
+        "create_account": "Create account",
+        "create_intelligence": "Create your first intelligence",
+        "training": "Training this intelligence",
+        "quick_test": "Make a quick test",
+        "evaluate": "Test this intelligence",
+        "inbox": "Add sentences with inbox",
+        "translate": "Translate to another language",
+        "integrate": "Integrate your intelligence with a platform"
       },
       "create_intelligence": {
-          "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
-          "step_1": "Or create your own intelligence by clicking here."
+        "step_0": "You can use one of the intelligences of the repository by choosing and clicking on one of them.",
+        "step_1": "Or create your own intelligence by clicking here."
       },
       "create_intelligence_forms": {
-          "step_0": "Fill in the form with your intelligence data like name, description and language",
-          "step_1": "Choose categories for your intelligence, based on the area in which it will be used, and submit."
+        "step_0": "Fill in the form with your intelligence data like name, description and language",
+        "step_1": "Choose categories for your intelligence, based on the area in which it will be used, and submit."
       },
       "training": {
-          "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
-          "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Then select one of the words to classify. Ex: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
-          "step_2": "Now click here to sort the word you selected.",
-          "step_3": "And write the rating Ex: If you selected ''pizza'' the rating could be ''food''",
-          "step_4": "Identify the intention of the phrase you typed. Ex: order",
-          "step_5": "Finally, submit your sentence.",
-          "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
-          "step_7": "Make sure your intelligence is ready to train and click \"Proceed\". <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Cancel \" to repeat."
+        "step_0": "<strong>Go to the feature training!</strong> <br> Here you will add sentences and sort words to train your intelligence",
+        "step_1": "Enter a sentence here that you would like your intelligence to understand. <br> Then select one of the words to classify. Ex: I want a <mark style='background-color: #FFDD57; border-radius: 10px; padding:2px'>pizza</mark>",
+        "step_2": "Now click here to sort the word you selected.",
+        "step_3": "And write the rating Ex: If you selected ''pizza'' the rating could be ''food''",
+        "step_4": "Identify the intention of the phrase you typed. Ex: order",
+        "step_5": "Finally, submit your sentence.",
+        "step_6": "After adding the phrases, click here. <br> <strong>Tip</strong>: To train, you must have add at least two intentions with two sentences each.",
+        "step_7": "Make sure your intelligence is ready to train and click \"Proceed\". <br> <br> <strong> Tip </strong>: If any requirements are not met, click \" Cancel \" to repeat."
       },
       "evaluate": {
         "step_0": "<strong>Go to the feature test!</strong>  <br> With the test you will be able to evaluate the performance of your intelligence easily",
@@ -721,16 +721,16 @@
         "step_3": "And here, select the intent that most identifies with the phrase you typed. Ex: affirmative",
         "step_4": "And finally, submit your sentence.",
         "step_5": "Click here to run your test. <br> <strong>Tip</strong>: To test you must have add at least two intentions with two sentences each."
-    }, 
-     "evaluate_result": {
-      "step_0": "Here you can see the result of your intelligence test."
+      },
+      "evaluate_result": {
+        "step_0": "Here you can see the result of your intelligence test."
       },
       "quick_test": {
         "step_0": "<strong> This's the feature quick test!</strong> <br> Here you can quickly test the sentences add to the training.",
         "step_1": "Enter your test phrase and confirm.",
         "step_2": "Click here to find out each word's relevance in the sentence within the chosen intention",
         "step_3": "Click here to see the Raw."
-        },
+      },
       "inbox": {
         "step_0": "<strong>This's the feature inbox!</strong> <br> Here you can add phrases from user interactions with your intelligence in training or test.",
         "step_1": "Select the sentences you want to add",
@@ -750,46 +750,49 @@
       "integrate": {
         "step_0": "<strong>The feature integrations!</strong> <br> With this feature you will be able to integrate your intelligence into a platform.",
         "step_1": "Copy this template in CURL, Python, or Javascript format for integration."
+      },
+      "tutorial_button": {
+        "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
+      }
     },
-    "tutorial_button":{
-      "step_0": "<strong>You finished!</strong> <br> If you want you can watch the tutorial again by clicking here."
+    "word_suggestion": {
+      "title": "Variation suggestion",
+      "subtitle": "Generate new sentences by varying training sentences.",
+      "cancel": "Cancel",
+      "add_training": "Add training",
+      "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list ",
+      "tooltip_alert": "The suggested words are generated through contexts taken from the internet, so there may be suggestions that are beyond the control of our team."
+    },
+    "import_and_export_intelligence": {
+      "title": "Import/Export your intelligence",
+      "subtitle": "To import/migrate, simply select the file corresponding to Rasa or place the token of Wit.AI, and the data will be recognized automatically",
+      "import_rasa": "Import from Rasa",
+      "migrate_wit": "Migrate from Wit.AI"
+    },
+    "migrate_intelligence": {
+      "title": "Migrate Wit.AI",
+      "token_input": "Enter your Server Access Token here",
+      "language": "Select the language",
+      "cancel": "Cancel",
+      "migrate": "Confirm",
+      "migrate_success": "Successful migration."
+    },
+    "import_dataset": {
+      "title": "Import Dataset",
+      "empty_file": "No file selected",
+      "cancel": "Cancel",
+      "importar": "Confirm",
+      "import_success": "Successful importation.",
+      "import_error": "Something went wrong, try again later."
+    },
+    "weni_notification": {
+      "title": "Bothub is now Weni Artificial Intelligence",
+      "subtitle": "New module that will be available on our unified platform soon.",
+      "button": "Learn more",
+      "link": "https://www.ilhasoft.com.br/we-are-weni"
+    },
+    "infinite_scroll": {
+      "title": "Loading"
     }
-  },
-  "word_suggestion": {
-    "title": "Variation suggestion",
-    "subtitle": "Generate new sentences by varying training sentences.",
-    "cancel": "Cancel",
-    "add_training": "Add training",
-    "phrase_added": "Phrase added to the waiting for training list | Phrases added to the waiting for training list ",
-    "tooltip_alert": "The suggested words are generated through contexts taken from the internet, so there may be suggestions that are beyond the control of our team."
-  },
-  "import_and_export_intelligence":{
-    "title": "Import/Export your intelligence",
-    "subtitle": "To import/migrate, simply select the file corresponding to Rasa or place the token of Wit.AI, and the data will be recognized automatically",
-    "import_rasa": "Import from Rasa",
-    "migrate_wit": "Migrate from Wit.AI"
-  },
-  "migrate_intelligence": {
-    "title": "Migrate Wit.AI",
-    "token_input": "Enter your Server Access Token here",
-    "language": "Select the language",
-    "cancel": "Cancel",
-    "migrate": "Confirm",
-    "migrate_success": "Successful migration."
-  },
-  "import_dataset": {
-    "title": "Import Dataset",
-    "empty_file": "No file selected",
-    "cancel": "Cancel",
-    "importar": "Confirm",
-    "import_success": "Successful importation.",
-    "import_error": "Something went wrong, try again later."
-  },
-  "weni_notification":{
-    "title": "Bothub is now Weni Artificial Intelligence",
-    "subtitle": "New module that will be available on our unified platform soon.",
-    "button": "Learn more",
-    "link": "https://www.ilhasoft.com.br/we-are-weni"
   }
-}
 }

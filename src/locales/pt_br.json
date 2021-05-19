@@ -45,7 +45,7 @@
     "intelligences_lib": {
       "title": "Biblioteca de Inteligências",
       "new_intelligence": "Nova Inteligência",
-      "unused_projects": "Seu projeto não está fazendo uso de inteligências. Crie uma nova ou explore entre as inteligências da sua organização ou comunidade nas opções acima.",
+      "unused_projects": "Seu projeto não está usando inteligência vinculada por um classificador. Crie um novo ou explore a inteligência de sua organização ou comunidade nas opções acima.",
       "created_by": "Criada por",
       "open": "Abrir",
       "show_intents": "Visualizar intenções | Visualizar intenção | Visualizar intenções",
@@ -59,15 +59,15 @@
       "language_modal_title": "Idiomas de {nick} | Idioma de {nick} | Idiomas de {nick}",
       "language_modal_subtitle": "Visualize os idiomas suportados pela inteligência selecionada.",
       "tab_project_title": "Inteligências no Projeto",
-      "tab_project_subtitle": "São as inteligências em uso por {org}",     
+      "tab_project_subtitle": "São as inteligências em uso por {org} vinculadas usando classificadores",     
       "tab_org_title": "Inteligências da Organização",
-      "tab_org_subtitle": "Visualize e use as inteligências da organização.",
+      "tab_org_subtitle": "Visualize e acesse as inteligências criadas pela organização.",
       "tab_community_title": "Inteligências da Comunidade",
-      "tab_community_subtitle": "Visualize e use as inteligências públicas.",
+      "tab_community_subtitle": "Visualize e use inteligências que são públicas.",
       "intent_count": "Número de frases da intenção"
     },
     "create_repository": {
-      "create_repo": "Crie uma inteligência",
+      "create_repo": "Nova inteligência",
       "create_repo_text": "Agora você pode criar uma inteligência de maneira rápida e fácil. <br><br> Vamos começar? Primeiro, dê um nome à sua inteligência. Depois, escolha o idioma a ser usado no treinamento. Por último, determine se será pública ou privada.",
       "choose_category": "Categorias",
       "choose_category_text": "Escolha as categorias nas quais seu bot se encaixa. <br> Não se preocupe, isso poderá ser mudado depois.",
@@ -788,6 +788,9 @@
       "subtitle": "Novo módulo que estará disponivel na nossa plataforma unificada em breve.",
       "button": "Saiba mais",
       "link": "https://www.ilhasoft.com.br/somos-weni"
+    },
+    "infinite_scroll": {
+      "title": "Carregando"
     }
   }
 }

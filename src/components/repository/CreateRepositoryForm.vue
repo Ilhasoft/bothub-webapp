@@ -1,42 +1,72 @@
 <template>
-  <div>
-    <form
-      class="create-repository"
-      @submit.prevent="onSubmit()">
-      <div
-        v-show="current==0"
-        class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
-        <p v-html="$t('webapp.create_repository.create_repo_text')" />
-        <loading v-if="!formSchema" />
-        <div
-          class="create-repository__container">
-          <form-generator
-            v-if="formSchema"
-            :drf-model-instance="drfRepositoryModel"
-            :schema="filteredSchema"
-            v-model="data"
-            :errors="errors"
-            :show-labels="false"
-            :new-intelligence-forms="true"
-            class="create-repository__form"/>
-          <div
-            class="create-repository__form__style">
-            <b-button
-              v-if="formSchema"
-              :disabled="!checkFormData"
-              type="is-primary"
-              class="create-repository__form__style__button"
-              @click="current = 1"> {{ $t('webapp.create_repository.next') }}
-            </b-button>
+  <div class="create-repository">
+    <form class="create-repository__container" @submit.prevent="onSubmit()">
+      <div class="create-repository__container__indicator">
+        <unnnic-indicator
+          :numberOfSteps="2"
+          :currentStep="current + 1"
+          :titles="['Inteligência', 'Definições']"
+        />
+      </div>
+      <section v-show="current == 0" class="create-repository__container__steps">
+        <h1 class="create-repository__container__steps__title">
+          {{ $t("webapp.create_repository.create_repo") }}
+        </h1>
+        <div class="create-repository__container__steps__wrapper">
+          <unnnic-input
+            v-model="data.name"
+            label="Nome da Inteligência"
+            placeholder="Defina o nome para a Inteligência"
+          />
+          <unnnic-input
+            v-model="data.description"
+            label="Descrição"
+            placeholder="Descreva brevemente o propósito desta inteligência"
+          />
+          <div class="create-repository__container__steps__intelligence-type">
+            <unnnic-card
+              clickable
+              title="Inteligência de Classificação (padrão)"
+              description="Treine frases de exemplo, atribuindo intenções e a inteligência
+              conseguirá identificar essas intenções em novas frases enviadas."
+              type="content"
+              icon="add-1"
+              :enabled="false"
+              class="create-repository__container__steps__intelligence-type__content"
+              @click.native="createNewIntelligence()"
+            />
+
+            <unnnic-card
+              clickable
+              title="Inteligência de Conteúdo (novo)"
+              description="Cadastre textos informativos e a inteligência
+               será capaz de responder perguntas feitas por usuários com base no texto."
+              type="content"
+              icon="add-1"
+              class="create-repository__container__steps__intelligence-type__content"
+              @click.native="createNewIntelligence()"
+            />
+          </div>
+          <div class="create-repository__container__steps__buttons">
+            <unnnic-button
+              type="terciary"
+              class="create-repository__container__steps__buttons__btn"
+            >
+              Cancelar
+            </unnnic-button>
+
+            <unnnic-button
+              type="secondary"
+              class="create-repository__container__steps__buttons__btn"
+            >
+              Avançar
+            </unnnic-button>
           </div>
         </div>
-      </div>
-      <div
-        v-show="current==1"
-        class="create-repository__form__wrapper">
-        <h1 class="create-repository__title">
-          {{ $t('webapp.create_repository.choose_category') }}
+      </section>
+      <section v-show="current == 1" class="create-repository__container__steps">
+        <h1 class="create-repository__wrapper__title">
+          {{ $t("webapp.create_repository.choose_category") }}
         </h1>
         <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
@@ -44,54 +74,46 @@
           <category-select
             v-if="formSchema"
             v-model="categories"
-            class="create-repository__form"/>
-          <div class="create-repository__buttons">
+            class="create-repository__wrapper__form"
+          />
+          <div class="create-repository__wrapper__buttons">
             <b-button
               type="is-primary"
-              class="create-repository__form__buttons"
-              @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
+              class="create-repository__wrapper__form__buttons"
+              @click="current = 0"
+            >
+              {{ $t("webapp.create_repository.previous") }}
             </b-button>
-            <span
-              class="create-repository__form__finishButton">
+            <span class="create-repository__wrapper__form__finishButton">
               <b-button
                 :disabled="categories.length === 0"
                 native-type="submit"
                 type="is-primary"
-                class="create-repository__form__buttons"
-              > {{ $t('webapp.create_repository.submit') }}
+                class="create-repository__wrapper__form__buttons"
+              >
+                {{ $t("webapp.create_repository.submit") }}
               </b-button>
             </span>
           </div>
         </div>
-      </div>
-      <div
-        v-if="current==2"
-        class="create-repository__form__wrapper create-repository__form__final--message">
-        <div class="create-repository__form__final--message__wrapper">
-          <h1 class="create-repository__title">
-            {{ $t('webapp.create_repository.repository_created') }}
+      </section>
+      <section v-if="current == 2" class="create-repository__container__steps">
+        <div class="create-repository__wrapper__form__final--message__wrapper">
+          <h1 class="create-repository__wrapper__title">
+            {{ $t("webapp.create_repository.repository_created") }}
           </h1>
           <p v-html="$t('webapp.create_repository.repository_created_text')" />
-          <router-link
-            :to="repositoryDetailsRouterParams()"
-          >
+          <router-link :to="repositoryDetailsRouterParams()">
             <b-button
-              class="create-repository__form__final--message__button"
+              class="create-repository__wrapper__form__final--message__button"
               type="is-primary"
-              @click="sendEvent()">
-              {{ $t('webapp.create_repository.start') }}
+              @click="sendEvent()"
+            >
+              {{ $t("webapp.create_repository.start") }}
             </b-button>
           </router-link>
         </div>
-      </div>
-      <div class="create-repository__card__wrapper">
-        <div class="create-repository__card">
-          <repository-card
-            v-bind="cardAttributes()"
-            :clickable="false"
-            single/>
-        </div>
-      </div>
+      </section>
     </form>
   </div>
 </template>
@@ -113,13 +135,13 @@ export default {
     Loading,
     FormGenerator,
     RepositoryCard,
-    CategorySelect,
+    CategorySelect
   },
   props: {
     userName: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
   data() {
     return {
@@ -131,24 +153,28 @@ export default {
       noOrgModel: {},
       categories: [],
       current: 0,
-      resultParams: {},
+      resultParams: {}
     };
   },
   computed: {
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
-        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
+        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) {
+          schema[key] = value;
+        }
         return schema;
       }, {});
-      delete computed.available_languages
+      delete computed.available_languages;
       const { is_private, ...schema } = computed;
       const organization = {
         label: this.$t('webapp.orgs.owner'),
         fetch: this.getOrgs,
-        type: 'choice',
+        type: 'choice'
       };
-      if (is_private) { return { ...schema, organization, is_private }; }
+      if (is_private) {
+        return { ...schema, organization, is_private };
+      }
       return computed;
     },
     filteredSchema() {
@@ -160,12 +186,16 @@ export default {
       return formattedSchema;
     },
     checkFormData() {
-      if (this.data.name === '' || this.data.description === ''
-        || this.data.language === null || this.data.language === '') {
+      if (
+        this.data.name === ''
+        || this.data.description === ''
+        || this.data.language === null
+        || this.data.language === ''
+      ) {
         return false;
       }
       return true;
-    },
+    }
   },
   watch: {
     errors() {
@@ -173,14 +203,14 @@ export default {
         this.current = 0;
         this.$buefy.toast.open({
           message: this.$t('webapp.create_repository.default_error'),
-          type: 'is-danger',
+          type: 'is-danger'
         });
       }
-    },
+    }
   },
   async mounted() {
-    this.formSchema = await this.getNewRepositorySchema();
-    this.constructModels();
+    // this.formSchema = await this.getNewRepositorySchema();
+    // this.constructModels();
   },
   methods: {
     ...mapActions([
@@ -190,39 +220,29 @@ export default {
       'clearTutorial',
       'clearFinalizatioMessage',
       'setFinalModal',
-      'getAllOrgs',
+      'getAllOrgs'
     ]),
     sendEvent() {
       Analytics.send({ category: 'Intelligence', event: 'create intelligence event' });
     },
     constructModels() {
-      const Model = getModel(
-        this.computedSchema,
-        RepositoryModel,
-      );
-      this.drfRepositoryModel = new Model({},
-        null,
-        {
-          validateOnChange: true,
-        });
+      const Model = getModel(this.computedSchema, RepositoryModel);
+      this.drfRepositoryModel = new Model({}, null, {
+        validateOnChange: true
+      });
       const { organization, ...schema } = this.computedSchema;
-      const NoOrgModel = getModel(
-        schema,
-        RepositoryModel,
-      );
-      this.noOrgModel = new NoOrgModel({},
-        null,
-        {
-          validateOnChange: true,
-        });
+      const NoOrgModel = getModel(schema, RepositoryModel);
+      this.noOrgModel = new NoOrgModel({}, null, {
+        validateOnChange: true
+      });
     },
     repositoryDetailsRouterParams() {
       return {
         name: 'repository-summary',
         params: {
           ownerNickname: this.resultParams.ownerNickname,
-          slug: this.resultParams.slug,
-        },
+          slug: this.resultParams.slug
+        }
       };
     },
     async getOrgs() {
@@ -231,9 +251,9 @@ export default {
       await list.getAllItems();
       const options = list.items.map(org => ({
         label: org.name,
-        value: org,
+        value: org
       }));
-      return options
+      return options;
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
@@ -253,7 +273,7 @@ export default {
         owner__nickname: organization || this.userName,
         categories,
         categories_list: categoryNames,
-        slug: this.$t('webapp.create_repository.new_repo'),
+        slug: this.$t('webapp.create_repository.new_repo')
       };
     },
     onSubmit() {
@@ -262,12 +282,11 @@ export default {
     async submit(model) {
       const categoryValues = this.categories.map(category => category.id);
       const { organization, ...data } = this.data;
-      const updatedModel = updateAttrsValues(model,
-        {
-          ...data,
-          organization: organization ? organization.id : null,
-          categories: categoryValues,
-        });
+      const updatedModel = updateAttrsValues(model, {
+        ...data,
+        organization: organization ? organization.id : null,
+        categories: categoryValues
+      });
       this.submitting = true;
       this.errors = {};
 
@@ -282,97 +301,74 @@ export default {
         this.submitting = false;
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
-    .create-repository {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        padding: 2rem 4rem;
+.create-repository {
+  padding: 2rem 4rem;
+  background-color: $unnnic-color-background-snow;
 
-        background-color: $color-fake-white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-        @media (max-width: $mobile-width * 1.5) {
-          flex-direction: column;
-          align-items: center;
-        }
+  @media (max-width: $mobile-width * 1.5) {
+    flex-direction: column;
+    align-items: center;
+  }
 
-        &__buttons {
-          margin-right: 1.1rem;
-          > * {
-            margin-right: 0.75rem;
-             &:last-child {
-              margin-right: 0;
-            }
-          }
-        }
+  &__container {
+    width: 68%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-        &__title {
-          color: $color-primary;
-          font-size: 3rem;
-        }
-
-        &__container{
-          margin: 0;
-          width: 30.625rem;
-        }
-        &__form {
-            text-align: left;
-            margin: 3rem 0;
-            width: 30.400rem;
-            &__final--message {
-              display: flex;
-              align-items: center;
-
-              &__wrapper {
-                margin: 4rem 0 0 0;
-              }
-
-              &__button {
-                margin-top: 2rem;
-              }
-            }
-            &__wrapper {
-                width: 32rem;
-            }
-            &__finishButton{
-              border-radius: 6px;
-            }
-            &__buttons{
-              box-shadow: 0px 3px 6px #00000029;
-              border-radius: 6px;
-              width: 6.875rem;
-              height: 2.188rem;
-            }
-
-            &__style{
-              margin: 3rem auto 0;
-              width: 6.875rem;
-              height: 2.188rem;
-              border-radius: 6px;
-              @media (max-width: $mobile-width*1.2) {
-                   margin-top: 6rem;
-              }
-              &__button{
-                box-shadow: 0px 3px 6px #00000029;
-                border-radius: 6px;
-                width: 6.875rem;
-                height: 2.188rem;
-              }
-            }
-        }
-
-        &__card {
-            margin: 4.5rem 0 0 0;
-            width: 23.167rem;
-            height: 20.668rem;
-        }
+    &__indicator {
+      width: 20%;
+      margin-bottom: 3.2rem;
     }
+
+    &__steps {
+      width: 100%;
+
+      &__title {
+        text-align: center;
+        color: $unnnic-color-neutral-darkest;
+        font-family: $unnnic-font-family-primary;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      &__wrapper * {
+        margin-bottom: 1.5rem;
+      }
+      &__intelligence-type {
+        display: flex;
+        justify-content: space-between;
+
+        &__content {
+          width: 47%;
+        }
+      }
+
+      &__buttons {
+        display: flex;
+        justify-content: space-between;
+
+        &__btn {
+          width: 47%;
+        }
+      }
+    }
+  }
+}
 </style>
