@@ -36,6 +36,14 @@ export default {
     /* istanbul ignore next */
     return repository.search(limit, offset);
   },
+  searchProjectWithFlow(store, { projectUUID }) {
+    /* istanbul ignore next */
+    return repository.getProjectsWithFlows(projectUUID);
+  },
+  getCommunityRepository(store, querys) {
+    /* istanbul ignore next */
+    return repository.communityRepository({ ...querys, limit: 21 });
+  },
   getRepository(store, { ownerNickname, slug }) {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
@@ -50,8 +58,8 @@ export default {
     /* istanbul ignore next */
     return repository.debugParse(repositoryUUID, repositoryVersion, language, text);
   },
-  searchLogs(store, { repositoryUUID, query, limit }) {
-    return repository.searchLogs(repositoryUUID, query, limit);
+  searchLogs(store, { repositoryVersionLanguage, query, limit }) {
+    return repository.searchLogs(repositoryVersionLanguage, query, limit);
   },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
@@ -181,6 +189,9 @@ export default {
   },
   setRepositoryVersion({ commit }, payload) {
     commit('setRepositoryVersion', payload);
+  },
+  resetRepositoryVersion({ commit }) {
+    commit('resetVersion');
   },
   getRepositoryRequirements(store, { repositoryUuid, version }) {
     return repository.repositoryRequirements(repositoryUuid, version);

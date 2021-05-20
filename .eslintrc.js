@@ -1,21 +1,18 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
-  extends: [
-    'plugin:vue/essential',
-    '@vue/airbnb',
-  ],
+  extends: ["plugin:vue/essential", "@vue/airbnb"],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser: "babel-eslint"
   },
-  plugins: ['import'],
+  plugins: ["import"],
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       alias: {
         map: [
-          ['@', './src'], // default @ -> ./src alias in Vue, it
+          ["@", "./src"] // default @ -> ./src alias in Vue, it
           // exists even if vue.config.js is not present
           /*
           *... add your own webpack aliases if you have them in
@@ -25,43 +22,49 @@ module.exports = {
           * imports that contain the webpack alias you forgot to add
           */
         ],
-        extensions: ['.vue', '.json', '.js'],
-      },
-    },
+        extensions: [".vue", ".json", ".js"]
+      }
+    }
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'import/no-cycle': 'off',
-    'arrow-parens': 'off',
-    'import/order': 'off',
-    'vue/no-unused-components': 'off',
-    'no-unused-vars': 'off',
-    'import/no-unresolved': 'off',
-    'space-before-blocks': 'off',
-    'object-curly-newline': 'off',
-    'comma-dangle': 'off',
-    'semi': 'off',
-    'camelcase': 'off',
-    'no-param-reassign': 'off',
-    'no-multiple-empty-lines': [2, { max: 2 }],
-    'import/extensions': ['error', 'always', {
-      js: 'never',
-      vue: 'never',
-    }],
-    'import/no-extraneous-dependencies': ['error', {
-      optionalDependencies: ['test/unit/index.js'],
-    }],
+    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
+    "import/no-dynamic-require": "off",
+    "global-require": "off",
+    "import/no-cycle": "off",
+    "arrow-parens": "off",
+    "import/order": "off",
+    "vue/no-unused-components": "off",
+    "no-unused-vars": "off",
+    "import/no-unresolved": "off",
+    "space-before-blocks": "off",
+    "object-curly-newline": "off",
+    "comma-dangle": "off",
+    semi: "off",
+    camelcase: "off",
+    "no-param-reassign": "off",
+    "no-multiple-empty-lines": [2, { max: 2 }],
+    "import/extensions": [
+      "error",
+      "always",
+      {
+        js: "never",
+        vue: "never"
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        optionalDependencies: ["test/unit/index.js"]
+      }
+    ]
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
+      files: ["**/__tests__/*.{j,t}s?(x)", "**/tests/unit/**/*.spec.{j,t}s?(x)"],
       env: {
-        jest: true,
-      },
-    },
-  ],
+        jest: true
+      }
+    }
+  ]
 };

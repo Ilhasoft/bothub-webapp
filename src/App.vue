@@ -8,51 +8,71 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
+import I18n from '@/utils/plugins/i18n';
 
 const components = {
   NewsModal,
+  I18n
 };
 
 export default {
   name: 'App',
   components,
   computed: {
-    ...mapGetters([
-      'activeMenu',
-    ]),
+    ...mapGetters(['activeMenu']),
+    dynamicTitle() {
+      if (I18n.locale === 'pt-BR') {
+        return 'Weni Inteligência Artificial';
+      }
+      return 'Weni Artificial Intelligence';
+    }
   },
   mounted() {
+    document.title = this.dynamicTitle;
     hotjar.addHotjar();
     this.safariDetected();
+    this.profileInfo();
   },
   methods: {
-    safariDetected() {
-      if (navigator.userAgent.indexOf('Safari') !== -1
-      && navigator.userAgent.indexOf('Chrome') === -1) {
-        this.$router.push({
-          name: 'safari-alert',
-        });
+    ...mapActions(['getMyProfileInfo']),
+    async profileInfo() {
+      const { data } = await this.getMyProfileInfo();
+      if (data.language) {
+        const [first, second] = data.language.split('-');
+        const secondUpperCase = second.toUpperCase();
+        const languageResult = `${first}-${secondUpperCase}`;
+        this.$i18n.locale = languageResult;
       }
     },
-  },
+    safariDetected() {
+      if (
+        navigator.userAgent.indexOf('Safari') !== -1
+        && navigator.userAgent.indexOf('Chrome') === -1
+      ) {
+        this.$router.push({
+          name: 'safari-alert'
+        });
+      }
+    }
+  }
 };
 </script>
 
 <style lang="scss">
-@import '~@/assets/scss/utilities.scss';
-@import '~@/assets/scss/default.scss';
-@import '~bulma';
-@import '~buefy/src/scss/buefy';
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
-@import '~@weni/unnnic-system/dist/unnnic.css';
-@import '~@weni/unnnic-system/src/assets/scss/unnnic.scss';
+@import "~@/assets/scss/utilities.scss";
+@import "~@/assets/scss/default.scss";
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 4px;
 }
 
@@ -78,17 +98,17 @@ export default {
 
 // based on https://flatuicolors.com/palette/nl
 $entities-colors: (
-  ('selected', $grey-lighter, black),
-  ('sunflower', #FFC312, black),
-  ('energos', #C4E538, black),
-  ('blue-martina', #12CBC4, black),
-  ('lavender-rose', #FDA7DF, black),
-  ('bara-red', #ED4C67, white),
-  ('radiant-yellow', #F79F1F, white),
-  ('android-green', #A3CB38, white),
-  ('mediterranean-sea', #1289A7, white),
-  ('lavender-tea', #D980FA, black),
-  ('very-berry', #B53471, white),
+  ("selected", $grey-lighter, black),
+  ("sunflower", #ffc312, black),
+  ("energos", #c4e538, black),
+  ("blue-martina", #12cbc4, black),
+  ("lavender-rose", #fda7df, black),
+  ("bara-red", #ed4c67, white),
+  ("radiant-yellow", #f79f1f, white),
+  ("android-green", #a3cb38, white),
+  ("mediterranean-sea", #1289a7, white),
+  ("lavender-tea", #d980fa, black),
+  ("very-berry", #b53471, white)
 );
 
 @each $entity-color in $entities-colors {
@@ -138,7 +158,7 @@ $entities-colors: (
 }
 
 .item-1-2 {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mh-200 {
@@ -152,5 +172,4 @@ $entities-colors: (
 body {
   font-family: $font-family;
 }
-
 </style>

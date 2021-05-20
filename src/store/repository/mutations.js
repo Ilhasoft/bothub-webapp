@@ -39,6 +39,9 @@ export default {
       state.repositoryVersionName = value.version.name;
     }
   },
+  resetVersion(state){
+    state.repositoryVersion = null;
+  },
   updateRepositoryTraining(state, value) {
     state.repositoryIsTraining = value;
   },

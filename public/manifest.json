@@ -1,0 +1,29 @@
+{
+    "name": "Weni Inteligência Artificial",
+    "short_name": "Weni Inteligência Artificial",
+    "start_url": "..",
+    "display": "standalone",
+    "background_color": "#f8f8f8",
+    "description": "Repository of examples for training and Natural Language Processing API.",
+    "icons": [
+      {
+        "src": "\/favicon-16x16.png",
+        "sizes": "16x16",
+        "type": "image\/png",
+        "density": "0.75"
+      },
+      {
+        "src": "\/favicon-32x32.png",
+        "sizes": "32x32",
+        "type": "image\/png",
+        "density": "1.0"
+      }
+    ],
+    "related_applications": [
+      {
+        "platform": "web",
+        "url": "https://bothub.it"
+      }
+    ]
+  }
+  

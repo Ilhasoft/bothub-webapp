@@ -14,8 +14,8 @@ export default {
   getVersions(limit, query) {
     return new utils.Page('/v2/repository/version/', limit, query);
   },
-  searchLogs(repositoryUUID, query, limit) {
-    return new utils.Page('/v2/repository/log/', limit, { repository_uuid: repositoryUUID, ...query });
+  searchLogs(repositoryVersionLanguage, query, limit) {
+    return new utils.Page('/v2/repository/log/', limit, { repository_version_language: repositoryVersionLanguage, ...query });
   },
   makeVersionDefault(repositoryUUID, versionUUID) {
     return request.$http.patch(
@@ -54,7 +54,9 @@ export default {
     const queryString = qs.stringify(limit, offset);
     return request.$http.get(`/v2/repository/repositories/?${queryString}`);
   },
-
+  communityRepository(query, limit = 20) {
+    return new utils.Page('/v2/repository/repositories/', limit, query);
+  },
   searchByOrg(orgNickname, limit = 20, search, categories, language) {
     return new utils.Page('/v2/repository/search-repositories/', limit, {
       nickname: orgNickname, search, categories, language,
@@ -89,6 +91,14 @@ export default {
   getRepositoryInfo(repositoryUUID, version) {
     return request.$http.get(
       `/v2/repository/info/${repositoryUUID}/${version}`,
+    );
+  },
+  getProjectsWithFlows(projectUUID) {
+    const queryString = qs.stringify({
+      project_uuid: projectUUID,
+    });
+    return request.$http.get(
+      `/v2/repository/repositories/list_project_organizatiton/?${queryString}`,
     );
   },
   debugParse(repositoryUUID, repositoryVersion, language, text) {

@@ -153,7 +153,7 @@ export default {
   }
 
   &__icon {
-    color: $color-primary-dark;
+    color: $color-primary;
   }
 
   &__flags {

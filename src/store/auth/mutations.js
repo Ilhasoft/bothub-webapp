@@ -17,4 +17,7 @@ export default {
   [TYPES.SET_ORG](state, org) {
     state.org = org;
   },
+  [TYPES.SET_PROJECT](state, project) {
+    state.project = project;
+  },
 };

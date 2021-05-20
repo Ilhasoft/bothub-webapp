@@ -1,7 +1,7 @@
 
 <template>
   <div class="observer">
-    <h1>Carregando...</h1>
+    <h1>{{$t('webapp.infinite_scroll.title')}}...</h1>
   </div>
 </template>
 
