@@ -56,7 +56,10 @@
       "category": "Categoria",
       "new_repo": "NOVA INTELIGÊNCIA",
       "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
-      "description_form": "Descrição"
+      "description_form": "Descrição",
+      "modal_title": "Crie uma Organização para Novas Inteligências",
+      "modal_description": "Atualizamos nossos sistemas e agora você só pode criar uma nova Inteligência quando seu usuário faz parte de uma organização. Clique para criar uma organização abaixo.",
+      "modal_button": "Criar organização"
     },
     "register_form": {
       "already_have_account": "Já tem uma conta?",
