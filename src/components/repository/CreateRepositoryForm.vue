@@ -1,18 +1,15 @@
 <template>
   <div>
-    <form
-      class="create-repository"
-      @submit.prevent="onSubmit()">
-      <div
-        v-show="current==0"
-        class="create-repository__form__wrapper">
-        <h1 class="create-repository__title"> {{ $t('webapp.create_repository.create_repo') }} </h1>
+    <form class="create-repository" @submit.prevent="onSubmit()">
+      <div v-show="current == 0" class="create-repository__form__wrapper">
+        <h1 class="create-repository__title">{{ $t("webapp.create_repository.create_repo") }}</h1>
         <p v-html="$t('webapp.create_repository.create_repo_text')" />
         <loading v-if="!formSchema" />
         <div
           id="tour-create_intelligence_forms-step-0"
           :is-next-disabled="true"
-          class="create-repository__container">
+          class="create-repository__container"
+        >
           <form-generator
             v-if="formSchema"
             :drf-model-instance="drfRepositoryModel"
@@ -22,23 +19,23 @@
             :errors="errors"
             :show-labels="false"
             :new-intelligence-forms="true"
-            class="create-repository__form"/>
-          <div
-            class="create-repository__form__style">
+            class="create-repository__form"
+          />
+          <div class="create-repository__form__style">
             <b-button
               :disabled="!checkFormData"
               type="is-primary"
               class="create-repository__form__style__button"
-              @click="current = 1, dispatchClick()"> {{ $t('webapp.create_repository.next') }}
+              @click="(current = 1), dispatchClick()"
+            >
+              {{ $t("webapp.create_repository.next") }}
             </b-button>
           </div>
         </div>
       </div>
-      <div
-        v-show="current==1"
-        class="create-repository__form__wrapper">
+      <div v-show="current == 1" class="create-repository__form__wrapper">
         <h1 class="create-repository__title">
-          {{ $t('webapp.create_repository.choose_category') }}
+          {{ $t("webapp.create_repository.choose_category") }}
         </h1>
         <p v-html="$t('webapp.create_repository.choose_category_text')" />
         <loading v-if="!formSchema" />
@@ -46,70 +43,95 @@
           id="tour-create_intelligence_forms-step-1"
           :is-finish-disabled="true"
           :is-previous-disabled="true"
-          :class="activeTutorial === 'create_intelligence'
-          ? 'create-repository__form__tutorial' : ''">
+          :class="
+            activeTutorial === 'create_intelligence' ? 'create-repository__form__tutorial' : ''
+          "
+        >
           <category-select
             v-if="formSchema"
             v-model="categories"
             :is-step-blocked="categories.length === 0"
-            class="create-repository__form"/>
+            class="create-repository__form"
+          />
           <div class="create-repository__buttons">
             <b-button
               :disabled="activeTutorial === 'create_intelligence'"
               type="is-primary"
               class="create-repository__form__buttons"
-              @click="current = 0"> {{ $t('webapp.create_repository.previous') }}
+              @click="current = 0"
+            >
+              {{ $t("webapp.create_repository.previous") }}
             </b-button>
             <span
-              :class="activeTutorial === 'create_intelligence'
-              ? 'create-repository__form__finishButton' : ''">
+              :class="
+                activeTutorial === 'create_intelligence'
+                  ? 'create-repository__form__finishButton'
+                  : ''
+              "
+            >
               <b-button
                 :disabled="categories.length === 0"
                 native-type="submit"
                 type="is-primary"
                 class="create-repository__form__buttons"
-              > {{ $t('webapp.create_repository.submit') }}
+              >
+                {{ $t("webapp.create_repository.submit") }}
               </b-button>
             </span>
           </div>
         </div>
       </div>
       <div
-        v-if="current==2"
-        class="create-repository__form__wrapper create-repository__form__final--message">
+        v-if="current == 2"
+        class="create-repository__form__wrapper create-repository__form__final--message"
+      >
         <div class="create-repository__form__final--message__wrapper">
           <h1 class="create-repository__title">
-            {{ $t('webapp.create_repository.repository_created') }}
+            {{ $t("webapp.create_repository.repository_created") }}
           </h1>
           <p v-html="$t('webapp.create_repository.repository_created_text')" />
-          <router-link
-            :to="repositoryDetailsRouterParams()"
-          >
+          <router-link :to="repositoryDetailsRouterParams()">
             <b-button
               class="create-repository__form__final--message__button"
               type="is-primary"
-              @click="sendEvent()">
-              {{ $t('webapp.create_repository.start') }}
+              @click="sendEvent()"
+            >
+              {{ $t("webapp.create_repository.start") }}
             </b-button>
           </router-link>
         </div>
       </div>
       <div class="create-repository__card__wrapper">
         <div class="create-repository__card">
-          <repository-card
-            v-bind="cardAttributes()"
-            :clickable="false"
-            single/>
+          <repository-card v-bind="cardAttributes()" :clickable="false" single />
         </div>
       </div>
     </form>
+    <unnnic-modal
+      :showModal="openModal"
+      :text="$t('webapp.create_repository.modal_title')"
+      scheme="feedback-yellow"
+      modal-icon="alert-circle-1"
+      @close="navigateToHome()"
+    >
+      <span slot="message" v-html="$t('webapp.create_repository.modal_description')" />
+      <unnnic-button
+        slot="options"
+        class="create-repository__modal__button"
+        type="primary"
+        @click="navigateToOrgs()"
+      >
+        {{ $t("webapp.create_repository.modal_button") }}
+      </unnnic-button>
+    </unnnic-modal>
     <tour
       v-if="activeTutorial === 'create_intelligence' && formSchema !== null"
       :step-count="2"
       :next-event="eventClick"
       :finish-event="eventClickFinish"
       :skip-if-back-page="eventClickBackPage"
-      name="create_intelligence_forms"/>
+      name="create_intelligence_forms"
+    />
   </div>
 </template>
 
@@ -132,13 +154,13 @@ export default {
     FormGenerator,
     RepositoryCard,
     CategorySelect,
-    Tour,
+    Tour
   },
   props: {
     userName: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
   },
   data() {
     return {
@@ -155,19 +177,16 @@ export default {
       eventClickFinish: false,
       blockedNextStepTutorial: false,
       eventClickBackPage: false,
+      openModal: false
     };
   },
   computed: {
-    ...mapGetters([
-      'activeTutorial',
-      'activeMenu',
-      'myProfile',
-    ]),
+    ...mapGetters(['activeTutorial', 'activeMenu', 'myProfile']),
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
         // eslint-disable-next-line no-param-reassign
-        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) schema[key] = value;
+        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) { schema[key] = value; }
         return schema;
       }, {});
       // eslint-disable-next-line camelcase
@@ -175,10 +194,12 @@ export default {
       const organization = {
         label: this.$t('webapp.orgs.owner'),
         fetch: this.getOrgs,
-        type: 'choice',
+        type: 'choice'
       };
       // eslint-disable-next-line camelcase
-      if (is_private) { return { ...schema, organization, is_private }; }
+      if (is_private) {
+        return { ...schema, organization, is_private };
+      }
       return computed;
     },
     filteredSchema() {
@@ -186,17 +207,21 @@ export default {
       const { description } = schema;
       description.type = 'textarea';
       description.label = this.$t('webapp.create_repository.description_form');
-      delete schema.available_languages
+      delete schema.available_languages;
       const formattedSchema = { ...schema, description };
       return formattedSchema;
     },
     checkFormData() {
-      if (this.data.name === '' || this.data.description === ''
-        || this.data.language === null || this.data.language === '') {
+      if (
+        this.data.name === ''
+        || this.data.description === ''
+        || this.data.language === null
+        || this.data.language === ''
+      ) {
         return false;
       }
       return true;
-    },
+    }
   },
   watch: {
     errors() {
@@ -204,10 +229,10 @@ export default {
         this.current = 0;
         this.$buefy.toast.open({
           message: this.$t('webapp.create_repository.default_error'),
-          type: 'is-danger',
+          type: 'is-danger'
         });
       }
-    },
+    }
   },
   async mounted() {
     this.formSchema = await this.getNewRepositorySchema();
@@ -224,31 +249,21 @@ export default {
       'clearTutorial',
       'clearFinalizatioMessage',
       'setFinalModal',
-      'getAllOrgs',
+      'getAllOrgs'
     ]),
     sendEvent() {
       Analytics.send({ category: 'Intelligence', event: 'create intelligence event' });
     },
     constructModels() {
-      const Model = getModel(
-        this.computedSchema,
-        RepositoryModel,
-      );
-      this.drfRepositoryModel = new Model({},
-        null,
-        {
-          validateOnChange: true,
-        });
+      const Model = getModel(this.computedSchema, RepositoryModel);
+      this.drfRepositoryModel = new Model({}, null, {
+        validateOnChange: true
+      });
       const { organization, ...schema } = this.computedSchema;
-      const NoOrgModel = getModel(
-        schema,
-        RepositoryModel,
-      );
-      this.noOrgModel = new NoOrgModel({},
-        null,
-        {
-          validateOnChange: true,
-        });
+      const NoOrgModel = getModel(schema, RepositoryModel);
+      this.noOrgModel = new NoOrgModel({}, null, {
+        validateOnChange: true
+      });
     },
     dispatchClick() {
       this.eventClick = !this.eventClick;
@@ -261,13 +276,25 @@ export default {
         this.setTutorialInactive();
       }
     },
+    navigateToOrgs(){
+      this.openModal = false
+      this.$router.push({
+        name: 'orgs',
+      });
+    },
+    navigateToHome(){
+      this.openModal = false
+      this.$router.push({
+        name: 'home',
+      });
+    },
     repositoryDetailsRouterParams() {
       return {
         name: 'repository-summary',
         params: {
           ownerNickname: this.resultParams.ownerNickname,
-          slug: this.resultParams.slug,
-        },
+          slug: this.resultParams.slug
+        }
       };
     },
     async getOrgs() {
@@ -276,11 +303,12 @@ export default {
       await list.getAllItems();
       const options = list.items.map(org => ({
         label: org.name,
-        value: org,
+        value: org
       }));
-      return [
-        ...options,
-      ];
+      if (options.length === 0){
+        this.openModal = true
+      }
+      return [...options];
     },
     cardAttributes() {
       const categoryNames = this.categories.length > 0
@@ -300,7 +328,7 @@ export default {
         owner__nickname: organization || this.userName,
         categories,
         categories_list: categoryNames,
-        slug: this.$t('webapp.create_repository.new_repo'),
+        slug: this.$t('webapp.create_repository.new_repo')
       };
     },
     onSubmit() {
@@ -309,12 +337,11 @@ export default {
     async submit(model) {
       const categoryValues = this.categories.map(category => category.id);
       const { organization, ...data } = this.data;
-      const updatedModel = updateAttrsValues(model,
-        {
-          ...data,
-          organization: organization ? organization.id : null,
-          categories: categoryValues,
-        });
+      const updatedModel = updateAttrsValues(model, {
+        ...data,
+        organization: organization ? organization.id : null,
+        categories: categoryValues
+      });
       this.submitting = true;
       this.errors = {};
 
@@ -336,109 +363,117 @@ export default {
         this.submitting = false;
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
-    .create-repository {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        margin: 4rem 8rem;
+.create-repository {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin: 4rem 8rem;
 
-        @media (max-width: $mobile-width * 1.5) {
-          flex-direction: column;
-          align-items: center;
-        }
+  @media (max-width: $mobile-width * 1.5) {
+    flex-direction: column;
+    align-items: center;
+  }
 
-        &__buttons {
-          margin-right: 1.1rem;
-          > * {
-            margin-right: 0.75rem;
-             &:last-child {
-              margin-right: 0;
-            }
-          }
-        }
-
-        &__title {
-          color: $color-primary;
-          font-size: 3rem;
-        }
-
-        &__container{
-          margin: 0;
-          padding: 0 0 1rem 0;
-          width: 30.625rem;
-        }
-        &__form {
-            text-align: left;
-            margin: 3rem 0;
-            width: 30.400rem;
-            &__final--message {
-              display: flex;
-              align-items: center;
-
-              &__wrapper {
-                margin: 4rem 0 0 0;
-              }
-
-              &__button {
-                margin-top: 2rem;
-              }
-            }
-
-            &__tutorial{
-              margin: 0;
-              padding: 0;
-              height: 430px;
-              width: 480px;
-            }
-            &__wrapper {
-                width: 32rem;
-                @media (max-width: $mobile-width*1.2) {
-                    padding: 0 3rem ;
-                }
-            }
-            &__finishButton{
-              border-radius: 6px;
-            }
-            &__buttons{
-              box-shadow: 0px 3px 6px #00000029;
-              border-radius: 6px;
-              width: 6.875rem;
-              height: 2.188rem;
-              @media (max-width: $mobile-width*1.2) {
-                 margin-top: 7rem;
-                }
-            }
-
-            &__style{
-              margin: 3rem auto 0;
-              width: 6.875rem;
-              height: 2.188rem;
-              border-radius: 6px;
-              @media (max-width: $mobile-width*1.2) {
-                   margin-top: 6rem;
-              }
-              &__button{
-                box-shadow: 0px 3px 6px #00000029;
-                border-radius: 6px;
-                width: 6.875rem;
-                height: 2.188rem;
-              }
-            }
-        }
-
-        &__card {
-            margin: 4.5rem 0 0 0;
-            width: 23.167rem;
-            height: 20.668rem;
-        }
+  &__buttons {
+    margin-right: 1.1rem;
+    > * {
+      margin-right: 0.75rem;
+      &:last-child {
+        margin-right: 0;
+      }
     }
+  }
+
+  &__title {
+    color: $color-primary;
+    font-size: 3rem;
+  }
+
+  &__container {
+    margin: 0;
+    padding: 0 0 1rem 0;
+    width: 30.625rem;
+  }
+  &__form {
+    text-align: left;
+    margin: 3rem 0;
+    width: 30.4rem;
+    &__final--message {
+      display: flex;
+      align-items: center;
+
+      &__wrapper {
+        margin: 4rem 0 0 0;
+      }
+
+      &__button {
+        margin-top: 2rem;
+      }
+    }
+
+    &__tutorial {
+      margin: 0;
+      padding: 0;
+      height: 430px;
+      width: 480px;
+    }
+    &__wrapper {
+      width: 32rem;
+      @media (max-width: $mobile-width*1.2) {
+        padding: 0 3rem;
+      }
+    }
+    &__finishButton {
+      border-radius: 6px;
+    }
+    &__buttons {
+      box-shadow: 0px 3px 6px #00000029;
+      border-radius: 6px;
+      width: 6.875rem;
+      height: 2.188rem;
+      @media (max-width: $mobile-width*1.2) {
+        margin-top: 7rem;
+      }
+    }
+
+    &__style {
+      margin: 3rem auto 0;
+      width: 6.875rem;
+      height: 2.188rem;
+      border-radius: 6px;
+      @media (max-width: $mobile-width*1.2) {
+        margin-top: 6rem;
+      }
+      &__button {
+        box-shadow: 0px 3px 6px #00000029;
+        border-radius: 6px;
+        width: 6.875rem;
+        height: 2.188rem;
+      }
+    }
+  }
+
+  &__card {
+    margin: 4.5rem 0 0 0;
+    width: 23.167rem;
+    height: 20.668rem;
+  }
+
+  &__modal {
+    &__button {
+            background-color: $unnnic-color-feedback-yellow;
+    }
+  }
+}
 </style>
