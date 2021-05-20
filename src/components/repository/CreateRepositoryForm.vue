@@ -177,7 +177,7 @@ export default {
       eventClickFinish: false,
       blockedNextStepTutorial: false,
       eventClickBackPage: false,
-      openModal: true
+      openModal: false
     };
   },
   computed: {
