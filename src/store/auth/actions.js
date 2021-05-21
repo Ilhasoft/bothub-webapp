@@ -22,7 +22,6 @@ export default {
   },
   async projectSelected({ commit }, { project }) {
     if (!project) return;
-    console.log('chegou', project)
     commit(TYPES.SET_PROJECT, project);
   },
   retriveAuthToken({ commit }) {
