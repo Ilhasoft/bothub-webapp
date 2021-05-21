@@ -1,8 +1,10 @@
 <template>
   <home-intelligence-container>
-    <div class="home-intelligences-from-project">
-      <section class="home-intelligences-from-project__content"
-      v-if="projectList.length === 0">
+    <div class="loading" v-if="loading">
+      <h1>{{ $t("webapp.infinite_scroll.title") }}...</h1>
+    </div>
+    <div class="home-intelligences-from-project" v-else>
+      <section class="home-intelligences-from-project__content" v-if="checkProjectLength">
         <div class="home-intelligences-from-project__content__text">
           <p>
             {{ $t("webapp.intelligences_lib.unused_projects") }}
@@ -14,55 +16,66 @@
           </unnnic-button>
         </div>
       </section>
-      <div v-else class="home-intelligences-from-project__cards">
+      <div class="home-intelligences-from-project__cards" v-else>
         <home-repository-card
           v-for="list in projectList"
           :key="list.uuid"
           :repository-detail="list"
+          @dispatchShowModal="showModal($event)"
         />
-        <infinite-scroll v-show="!isComplete" @intersect="getProjectList()" />
       </div>
     </div>
+    <modal-container
+      :info-modal="modalInfo"
+      :show-modal="openModal"
+      @closeModal="openModal = false"
+    >
+    </modal-container>
   </home-intelligence-container>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
-import infiniteScroll from '@/components/shared/infiniteScroll';
+import ModalContainer from '@/components/repository/home/ModalContainer';
 
 export default {
   name: 'HomeIntelligenceFromProject',
-  components: { HomeRepositoryCard, HomeIntelligenceContainer, infiniteScroll },
+  components: { HomeRepositoryCard, HomeIntelligenceContainer, ModalContainer },
   data() {
     return {
       projectList: [],
-      page: 0,
-      isComplete: false,
       error: null,
+      modalInfo: {},
       openModal: false,
-      modalInfo: {}
+      loading: true
     };
   },
   computed: {
     ...mapGetters(['getProjectSelected']),
+    checkProjectLength(){
+      return this.projectList.length === 0
+    },
   },
-  mounted(){
+  mounted() {
+    this.getProjectList();
   },
   methods: {
     ...mapActions(['searchProjectWithFlow']),
+    showModal(value) {
+      this.openModal = true;
+      this.modalInfo = { ...value };
+    },
     async getProjectList() {
       try {
         const { data } = await this.searchProjectWithFlow({
           projectUUID: this.getProjectSelected
         });
-
-        console.log('lista', data)
-        this.page += 21;
-        this.projectList = [...this.projectList, ...data.results];
-        this.isComplete = data.next == null;
+        this.projectList = data;
       } catch (err) {
         this.error = err;
+      } finally {
+        this.loading = false;
       }
     },
     createNewIntelligence() {
@@ -78,6 +91,13 @@ export default {
 @import "~@weni/unnnic-system/dist/unnnic.css";
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
+.loading {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $unnnic-color-neutral-cloudy;
+}
 .home-intelligences-from-project {
   &__content {
     margin: auto;
