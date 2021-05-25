@@ -3,27 +3,24 @@
 exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
   <unnnic-sidebar expanded="true" class="sidebar-wrapper">
-    <div slot="header" class="unnic--clickable sidebar-wrapper__header">
+    <section slot="header" class="unnic--clickable sidebar-wrapper__header">
       <div class="sidebar-wrapper__header__field">
-        <unnnic-icon icon="arrow-left-1-1" scheme="aux-blue" size="sm" hasbackground="" class="sidebar-wrapper__header__field__icon"></unnnic-icon>
-        <div class="sidebar-wrapper__header__field__description">
-          <div class="sidebar-wrapper__header__field__description__repository">
-            <unnnic-tool-tip text="bothub" enabled="" side="right">
-              <p class="sidebar-wrapper__header__field__description__repository__title">
-                bothub
-              </p>
-            </unnnic-tool-tip>
-          </div>
-          <p class="sidebar-wrapper__header__field__description__created-by"><span class="sidebar-wrapper__header__field__description__created-by__text">
-              CRIADO POR
-            </span> <span class="sidebar-wrapper__header__field__description__created-by__nick">
-              WENI
-            </span></p>
+        <div class="sidebar-wrapper__header__field__back">
+          <unnnic-icon icon="keyboard-arrow-left-1" size="xs"></unnnic-icon> <span class="sidebar-wrapper__header__field__back__text">some specific text</span>
+        </div>
+        <div class="sidebar-wrapper__header__field__detail"><span title="bothub" class="sidebar-wrapper__header__field__detail__title">
+            bothub
+          </span>
+          <div class="sidebar-wrapper__header__field__detail__created-by"><span class="sidebar-wrapper__header__field__detail__created-by__text">
+              some specific text
+            </span> <span title="weni" class="sidebar-wrapper__header__field__detail__created-by__nick">
+              weni
+            </span></div>
         </div>
       </div>
-      <unnnic-select selected="bothub" size="sm" placeholder="bothub" class="unnic--clickable sidebar-wrapper__header__select"></unnnic-select>
-    </div>
-    <div class="sidebar-wrapper__body">
+      <unnnic-select selected="bothub" size="sm" hascloudycolor="" placeholder="bothub" class="unnic--clickable sidebar-wrapper__header__select"></unnnic-select>
+    </section>
+    <section class="sidebar-wrapper__body">
       <unnnic-sidebar-menu>
         <unnnic-sidebar-item icon="layout-dashboard-2" text="some specific text" class="sidebar-wrapper__body--active"></unnnic-sidebar-item>
         <section class="training-menu">
@@ -57,9 +54,9 @@ exports[`SideBar.vue renders correctly 1`] = `
           </div>
         </section>
       </unnnic-sidebar-menu>
-    </div>
-    <div slot="footer">
-      <unnnic-sidebar-item icon="expand-8-1" text="Encolher"></unnnic-sidebar-item>
+    </section>
+    <div slot="footer" class="sidebar-wrapper__footer">
+      <unnnic-sidebar-item icon="expand-8-1" text="some specific text" class="sidebar-wrapper__footer__text"></unnnic-sidebar-item>
     </div>
   </unnnic-sidebar> <span class="sidebar__divider"></span>
 </div>
