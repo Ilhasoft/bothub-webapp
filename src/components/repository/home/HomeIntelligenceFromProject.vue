@@ -1,7 +1,7 @@
 <template>
   <home-intelligence-container>
     <div class="loading" v-if="loading">
-      <h1>{{ $t("webapp.infinite_scroll.title") }}...</h1>
+      <loading hasCleanestColor/>
     </div>
     <div class="home-intelligences-from-project" v-else>
       <section class="home-intelligences-from-project__content" v-if="checkProjectLength">
@@ -38,10 +38,11 @@ import { mapActions, mapGetters } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 import ModalContainer from '@/components/repository/home/ModalContainer';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'HomeIntelligenceFromProject',
-  components: { HomeRepositoryCard, HomeIntelligenceContainer, ModalContainer },
+  components: { HomeRepositoryCard, HomeIntelligenceContainer, ModalContainer, Loading },
   data() {
     return {
       projectList: [],
