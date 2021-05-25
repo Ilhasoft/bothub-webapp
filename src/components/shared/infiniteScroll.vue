@@ -1,16 +1,21 @@
 
 <template>
   <div class="observer">
-    <h1>{{$t('webapp.infinite_scroll.title')}}...</h1>
+    <loading hasCleanestColor/>
   </div>
 </template>
 
 <script>
+import Loading from '@/components/shared/Loading';
+
 export default {
   props: ['options'],
   data: () => ({
     observer: null,
   }),
+  components: {
+    Loading,
+  },
   mounted() {
     const options = this.options || {};
     this.observer = new IntersectionObserver(([entry]) => {

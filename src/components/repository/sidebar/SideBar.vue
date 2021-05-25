@@ -16,7 +16,12 @@
           </div>
           <div class="sidebar-wrapper__header__field__back--collapsed" v-else>
             <unnnic-tool-tip :text="$t('webapp.menu.back_text')" enabled side="right">
-              <unnnic-icon icon="keyboard-arrow-left-1" size="md" />
+              <unnnic-icon
+                icon="keyboard-arrow-left-1"
+                size="md"
+                @click.native="routerHandle('home')"
+                clickable
+              />
             </unnnic-tool-tip>
           </div>
 
@@ -28,9 +33,7 @@
               {{ getCurrentRepository.name }}
             </span>
             <div class="sidebar-wrapper__header__field__detail__created-by">
-              <span
-                class="sidebar-wrapper__header__field__detail__created-by__text"
-              >
+              <span class="sidebar-wrapper__header__field__detail__created-by__text">
                 {{ $t("webapp.menu.created_by") }}
               </span>
               <span
