@@ -1,12 +1,24 @@
 <template>
   <div class="loading">
-    <unnnic-icon class="icon-spin" icon="loading-circle-1" />
+    <img
+      src="../../assets/icons/logo-animated-circle-reduced.svg"
+      :class="{
+        'loading__icon': true,
+        'loading__icon--hasCleanestColor': hasCleanestColor
+      }"
+    />
   </div>
 </template>
 
 <script>
 export default {
   name: 'Loading',
+  props: {
+    hasCleanestColor: {
+      type: Boolean,
+      default: false
+    }
+  }
 };
 </script>
 
@@ -19,22 +31,13 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%;
-  span {
-    color: $unnnic-color-neutral-dark;
+  &__icon {
+    width: $unnnic-spacing-stack-xgiant;
+
+    &--hasCleanestColor {
+      filter: brightness(40%) contrast(100%) saturate(100%) invert(100%) sepia(35%)
+        hue-rotate(200deg);
+    }
   }
-}
-@keyframes iconSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-.icon-spin {
-  animation-name: iconSpin;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
 }
 </style>

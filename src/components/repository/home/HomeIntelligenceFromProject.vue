@@ -38,10 +38,11 @@ import { mapActions, mapGetters } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 import ModalContainer from '@/components/repository/home/ModalContainer';
+import Loading from '@/components/shared/Loading';
 
 export default {
   name: 'HomeIntelligenceFromProject',
-  components: { HomeRepositoryCard, HomeIntelligenceContainer, ModalContainer },
+  components: { HomeRepositoryCard, HomeIntelligenceContainer, ModalContainer, Loading },
   data() {
     return {
       projectList: [],

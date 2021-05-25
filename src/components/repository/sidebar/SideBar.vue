@@ -20,6 +20,7 @@
                 icon="keyboard-arrow-left-1"
                 size="md"
                 @click.native="routerHandle('home')"
+                clickable
               />
             </unnnic-tool-tip>
           </div>
