@@ -62,7 +62,7 @@
       "tab_project_subtitle": "They're intelligences in use at the project linked by classifier.",
       "tab_org_title": "Organization's Intelligences",
       "tab_org_subtitle": "Visualize and access intelligences created by the organization.",
-      "tab_community_title": "Community Intelligence",
+      "tab_community_title": "Community Intelligences",
       "tab_community_subtitle": "Visualize and use intelligences that are public.",
       "intent_count": "Number of intention phrases"
     },
@@ -568,6 +568,9 @@
       }
     },
     "menu": {
+      "hide": "Hide",
+      "created_by": "Created by",
+      "back_text": "Back",
       "summary": "Summary",
       "training": "Training",
       "train": "Train",
