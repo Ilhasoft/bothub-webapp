@@ -1,7 +1,7 @@
 <template>
   <home-intelligence-container>
     <div class="loading" v-if="loading">
-      <h1>{{ $t("webapp.infinite_scroll.title") }}...</h1>
+      <loading hasCleanestColor/>
     </div>
     <div class="home-intelligences-from-project" v-else>
       <section class="home-intelligences-from-project__content" v-if="checkProjectLength">
