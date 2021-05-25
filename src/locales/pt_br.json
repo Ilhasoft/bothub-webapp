@@ -567,6 +567,9 @@
       }
     },
     "menu": {
+      "hide": "Encolher",
+      "created_by": "Criado por",
+      "back_text": "Voltar",
       "summary": "Resumo",
       "training": "Treinamento",
       "train": "Treinar",
