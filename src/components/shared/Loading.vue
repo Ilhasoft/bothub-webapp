@@ -1,12 +1,12 @@
 <template>
   <div class="loading">
     <img
-      src="../../assets/icons/logo-animated-circle-reduced.svg"
-      :class="{
-        'loading__icon': true,
-        'loading__icon--hasCleanestColor': hasCleanestColor
-      }"
+      src="~@/assets/icons/logo-animated-circle-reduced-clearnest.svg"
+      class="loading__icon"
+      v-if="hasCleanestColor"
     />
+    <img src="~@/assets/icons/logo-animated-circle-reduced.svg"
+    class="loading__icon" v-else />
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
       type: Boolean,
       default: false
     }
-  }
+  },
 };
 </script>
 
@@ -33,11 +33,6 @@ export default {
   width: 100%;
   &__icon {
     width: $unnnic-spacing-stack-xgiant;
-
-    &--hasCleanestColor {
-      filter: brightness(40%) contrast(100%) saturate(100%) invert(100%) sepia(35%)
-        hue-rotate(200deg);
-    }
   }
 }
 </style>
