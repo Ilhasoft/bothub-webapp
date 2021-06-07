@@ -71,17 +71,6 @@ export default {
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .create-repository {
-  padding: 2rem 4rem;
-  background-color: $unnnic-color-background-snow;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: $mobile-width * 1.5) {
-    flex-direction: column;
-    align-items: center;
-  }
 
   &__intelligence {
     width: 100%;
