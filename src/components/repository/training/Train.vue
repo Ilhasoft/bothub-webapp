@@ -1,24 +1,19 @@
 <template>
   <div class="train">
     <b-button
-      v-show="showButton
-        && !trainProgress
-      && repository.authorization.can_write"
+      v-show="showButton && !trainProgress && repository.authorization.can_write"
       ref="training"
       :disabled="loading || repository.examples__count === 0"
       :loading="loading"
       type="is-secondary"
       class="train__button"
-      @click="dispatchTrain()">
-      {{ $t('webapp.trainings.run_training') }}
+      @click="dispatchTrain()"
+    >
+      {{ $t("webapp.trainings.run_training") }}
     </b-button>
-    <div
-      v-if="trainProgress"
-      class="train__progress">
-      <progress-bar
-        :progress="progress"
-        type="is-secondary"/>
-      <p v-html="$t('webapp.trainings.train_progress', {progress: progress})"/>
+    <div v-if="trainProgress" class="train__progress">
+      <progress-bar :progress="progress" type="is-secondary" />
+      <p v-html="$t('webapp.trainings.train_progress', { progress: progress })" />
     </div>
     <train-modal
       v-if="repository"
@@ -29,11 +24,13 @@
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
-      @closeTrainModal="closeTrainModal()"/>
+      @closeTrainModal="closeTrainModal()"
+    />
     <train-response
       :open="trainResults"
       @dispatchCloseProgress="closeProgress()"
-      @resetProgressValue="progress = 10"/>
+      @resetProgressValue="progress = 10"
+    />
   </div>
 </template>
 
@@ -48,37 +45,37 @@ export default {
   components: {
     TrainModal,
     TrainResponse,
-    ProgressBar,
+    ProgressBar
   },
   props: {
     load: {
       type: Boolean,
-      default: false,
+      default: false
     },
     repository: {
       type: Object,
-      required: true,
+      required: true
     },
     version: {
       type: Number,
-      required: true,
+      required: true
     },
     updateRepository: {
       type: Function,
-      default: async () => {},
+      default: async () => {}
     },
     showButton: {
       type: Boolean,
-      default: true,
+      default: true
     },
     authenticated: {
       type: Boolean,
-      default: false,
+      default: false
     },
     updateOnLoad: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   data() {
     return {
@@ -90,30 +87,32 @@ export default {
       progress: 0,
       trainProgress: false,
       repositoryStatus: {},
-      loadingStatus: false,
+      loadingStatus: false
     };
   },
   computed: {
-    ...mapGetters([
-      'getRequirements',
-    ]),
+    ...mapGetters(['getRequirements', 'getCurrentRepository']),
     loading() {
       return this.load || this.loadingStatus;
     },
     trainRequirements() {
-      if (!this.getRequirements
-      || this.getRequirements.requirements_to_train === undefined) { return {}; }
+      if (!this.getRequirements || this.getRequirements.requirements_to_train === undefined) {
+        return {};
+      }
       return this.getRequirements.requirements_to_train;
     },
     languagesWarnings() {
-      if (!this.getRequirements
-      || this.getRequirements.languages_warnings === undefined) { return {}; }
+      if (!this.getRequirements || this.getRequirements.languages_warnings === undefined) {
+        return {};
+      }
       return this.getRequirements.languages_warnings;
     },
     repositoryCanWrite() {
-      if (!this.repository || this.repository.authorization.can_write === 'null') { return null; }
+      if (!this.repository || this.repository.authorization.can_write === 'null') {
+        return null;
+      }
       return this.repository.authorization.can_write;
-    },
+    }
   },
   watch: {
     trainProgress() {
@@ -124,7 +123,7 @@ export default {
         this.getRepositoryStatus();
         this.resetTrainVariables();
       }
-    },
+    }
   },
   mounted() {
     if (this.updateOnLoad) this.updateTrainingStatus();
@@ -138,7 +137,7 @@ export default {
       'getRepositoryStatusTraining',
       'setRepositoryTraining',
       'getRepositoryRequirements',
-      'setRequirements',
+      'setRequirements'
     ]),
     finishedTutorial() {
       this.$emit('finishedTurorial');
@@ -151,11 +150,36 @@ export default {
     },
     async repositoryRequirements() {
       try {
-        const { data } = await this.getRepositoryRequirements({
-          repositoryUuid: this.repository.uuid,
-          version: this.repository.repository_version_id,
-        });
-        this.setRequirements(data);
+        const allRequirements = await Promise.all(
+          this.getCurrentRepository.available_languages.map(async language => {
+            const { data } = await this.getRepositoryRequirements({
+              repositoryUuid: this.repository.uuid,
+              version: this.repository.repository_version_id,
+              repositoryLanguage: language
+            });
+            const currentRequirements = {
+              ...data,
+              requirements_to_train:
+                data.requirements_to_train.length !== 0
+                  ? { [language]: data.requirements_to_train }
+                  : {},
+              languages_warnings:
+                data.languages_warnings.length !== 0 ? { [language]: data.languages_warnings } : {}
+            };
+            return currentRequirements;
+          })
+        );
+        const requirements = allRequirements.reduce((acumulator, requirement) => ({
+          repository_version_id: requirement.repository_version_id,
+          uuid: requirement.uuid,
+          ready_for_train: requirement.ready_for_train,
+          requirements_to_train: {
+            ...acumulator.requirements_to_train,
+            ...requirement.requirements_to_train
+          },
+          languages_warnings: requirement.languages_warnings
+        }));
+        this.setRequirements(requirements);
       } catch (error) {
         this.error = error;
       }
@@ -165,7 +189,7 @@ export default {
       try {
         const trainStatus = await this.getTrainingStatus({
           repositoryUUID: this.repository.uuid,
-          version: this.repository.repository_version_id,
+          version: this.repository.repository_version_id
         });
         if (trainStatus) {
           this.$emit('statusUpdated', trainStatus);
@@ -180,19 +204,23 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (this.getRequirements.ready_for_train
+        if (
+          this.getRequirements.ready_for_train
           && Object.values(this.trainRequirements).length === 0
-          && Object.values(this.languagesWarnings).length === 0) {
+          && Object.values(this.languagesWarnings).length === 0
+        ) {
           await this.train();
           this.loadingStatus = false;
           return;
         }
-        if (!this.getRequirements.ready_for_train
+        if (
+          !this.getRequirements.ready_for_train
           && Object.values(this.trainRequirements).length === 0
-          && Object.values(this.languagesWarnings).length === 0) {
+          && Object.values(this.languagesWarnings).length === 0
+        ) {
           this.$buefy.toast.open({
             message: this.$t('webapp.train_modal.language_warning'),
-            type: 'is-danger',
+            type: 'is-danger'
           });
 
           this.loadingStatus = false;
@@ -207,9 +235,12 @@ export default {
       this.training = true;
       this.loadingStatus = true;
       try {
-        await this.trainRepository({
-          repositoryUuid: this.repository.uuid,
-          repositoryVersion: this.version,
+        this.getCurrentRepository.available_languages.map(async language => {
+          await this.trainRepository({
+            repositoryUuid: this.repository.uuid,
+            repositoryVersion: this.version,
+            repositoryLanguage: language
+          });
         });
         await this.setRepositoryTraining(true);
         await this.updateRepository();
@@ -217,7 +248,7 @@ export default {
       } catch (e) {
         this.$buefy.toast.open({
           message: this.$t('webapp.trainings.default_error'),
-          type: 'is-danger',
+          type: 'is-danger'
         });
       }
       if (this.getRequirements.ready_for_train) {
@@ -230,7 +261,7 @@ export default {
       if (this.repository.uuid !== null && this.repositoryCanWrite) {
         const { data } = await this.getRepositoryStatusTraining({
           repositoryUUID: this.repository.uuid,
-          repositoryVersion: this.version,
+          repositoryVersion: this.version
         });
         this.repositoryStatus = data;
         if (this.repositoryStatus.results[0] !== undefined) {
@@ -249,8 +280,10 @@ export default {
             this.$emit('onTrainComplete');
           }
           setTimeout(() => {
-            if (this.repositoryStatus.results[0].status === 0
-          || this.repositoryStatus.results[0].status === 1) {
+            if (
+              this.repositoryStatus.results[0].status === 0
+              || this.repositoryStatus.results[0].status === 1
+            ) {
               this.getRepositoryStatus();
             }
           }, 100000);
@@ -268,37 +301,34 @@ export default {
       this.trainResults = false;
       this.trainProgress = false;
       await this.updateRepository(false);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-  @import '~@/assets/scss/colors.scss';
-  @import '~@/assets/scss/variables.scss';
-
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
 
 .train {
+  &__button {
+    color: $color-white;
+    margin-top: 1rem;
+    width: 14rem;
 
-    &__button{
+    &:hover {
       color: $color-white;
-      margin-top: 1rem;
-      width: 14rem;
-
-      &:hover{
-        color: $color-white;
-      }
     }
+  }
 
-    &__progress {
-      height: 25px;
-      width: 60%;
+  &__progress {
+    height: 25px;
+    width: 60%;
 
-      p {
-        font-size: 13px;
-        font-weight: $font-weight-bolder;
-      }
+    p {
+      font-size: 13px;
+      font-weight: $font-weight-bolder;
     }
-}
-
-</style>]
+  }
+}</style
+>]
