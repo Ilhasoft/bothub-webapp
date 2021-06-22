@@ -164,7 +164,8 @@ export default {
                   ? { [language]: data.requirements_to_train }
                   : {},
               languages_warnings:
-                data.languages_warnings.length !== 0 ? { [language]: data.languages_warnings } : {}
+                data.languages_warnings.length !== 0
+                  ? { [language]: data.languages_warnings } : {}
             };
             return currentRequirements;
           })
