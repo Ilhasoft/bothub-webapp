@@ -278,7 +278,11 @@
       "delete_group": "Delete Group",
       "delete_group_message": "Are you sure you want to delete entity group named \"{group}\"?",
       "delete": "Delete",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "integrate": "Integrate into the project",
+      "integrate_modal_title": "Integrate \"{intelligence}\" intelligence to the \"{project}\" project? ",
+      "integrate_modal_subtitle": "Intelligence will be added to Flows in this project and through the “Divide by Intent” feature you will be able to use the intentions of this intelligence.",
+      "confirm_integrate": "Confirm"
     },
     "summary": {
       "training_information": "Traning information",
@@ -294,7 +298,9 @@
       "intelligence_force": "Intelligence force",
       "intelligence_force_low": "Low",
       "intelligence_force_regular": "Regular",
-      "intelligence_force_high": "High"
+      "intelligence_force_high": "High",
+      "integrate": "Integrate to Flows",
+      "remove_integrate": "Remover from Flows"
     },
     "integration": {
       "title": "Bothub integrations",

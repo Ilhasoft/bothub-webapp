@@ -58,6 +58,15 @@
               </div>
             </div>
           </unnnic-dropdown-item>
+
+          <unnnic-dropdown-item @click="changeIntegrateModalState(true)">
+            <div class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="add-1" />
+              <div>
+                {{ $t("webapp.home.integrate") }}
+              </div>
+            </div>
+          </unnnic-dropdown-item>
         </unnnic-dropdown>
       </div>
     </section>
@@ -130,6 +139,29 @@
         </div>
       </div>
     </section>
+    <unnnic-modal
+        :showModal="integrateModal"
+        :text="$t('webapp.home.integrate_modal_title', {
+          intelligence: repositoryDetail.name,
+          project: 'projectName'
+          })"
+        scheme="feedback-yellow"
+        modal-icon="alert-circle-1"
+        @close="changeIntegrateModalState(false)"
+      >
+        <span slot="message" v-html="$t('webapp.home.integrate_modal_subtitle')" />
+        <unnnic-button slot="options" type="terciary" @click="changeIntegrateModalState(false)">
+          {{ $t("webapp.home.cancel") }}
+        </unnnic-button>
+        <unnnic-button
+          slot="options"
+          class="create-repository__container__button"
+          type="terciary"
+          @click="changeIntegrateModalState(false)"
+        >
+          {{ $t("webapp.home.confirm_integrate") }}
+        </unnnic-button>
+      </unnnic-modal>
   </div>
 </template>
 
@@ -138,7 +170,8 @@ export default {
   name: 'HomeRepositoryCard',
   data() {
     return {
-      dropdownOpen: false
+      dropdownOpen: false,
+      integrateModal: false
     };
   },
   props: {
@@ -174,6 +207,9 @@ export default {
   methods: {
     showDetailModal(value) {
       this.$emit('dispatchShowModal', value);
+    },
+    changeIntegrateModalState(value){
+      this.integrateModal = value
     },
     repositoryDetailsRouterParams() {
       this.$router.push({

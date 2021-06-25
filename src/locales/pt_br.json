@@ -279,7 +279,11 @@
       "delete_group": "Deletar grupo de entidades",
       "delete_group_message": "Tem certeza que deseja remover o grupo de entidades \"{group}\"?",
       "delete": "Deletar",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "integrate": "Integrar ao projeto",
+      "integrate_modal_title": "Integrar a inteligência \"{intelligence}\" ao projeto \"{project}\"? ",
+      "integrate_modal_subtitle": "A inteligência será adicionada ao Fluxos neste projeto e através do recurso “Dividir por Intenção” poderá utilizar as intenções desta inteligência.",
+      "confirm_integrate": "Integrar"
     },
     "summary": {
       "training_information": "Informações do Treinamento",
@@ -295,7 +299,9 @@
       "intelligence_force" : "Força da inteligência",
       "intelligence_force_low": "Baixa",
       "intelligence_force_regular": "Regular",
-      "intelligence_force_high": "Alta"
+      "intelligence_force_high": "Alta",
+      "integrate": "Integrar ao Fluxos",
+      "remove_integrate": "Remover do Fluxos"
     },
     "integration":{
       "title": "Integrações do Bothub",
