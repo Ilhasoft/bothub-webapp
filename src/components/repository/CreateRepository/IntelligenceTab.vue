@@ -4,32 +4,67 @@
       {{ $t("webapp.create_repository.intelligence") }}
     </h1>
     <div class="create-repository__intelligence__wrapper">
-      <unnnic-input
-        :label="$t('webapp.create_repository.intelligence_name_label')"
-       :placeholder="$t('webapp.create_repository.intelligence_name_placeholder')"
-        v-model="intelligence.name"
-      />
-      <unnnic-input
-        :label="$t('webapp.create_repository.description_label')"
-        :placeholder="$t('webapp.create_repository.description_placeholder')"
-        v-model="intelligence.description"
-      />
-      <div class="create-repository__intelligence__buttons">
+      <div>
+        <unnnic-input
+          :label="$t('webapp.create_repository.intelligence_name_label')"
+          :placeholder="$t('webapp.create_repository.intelligence_name_placeholder')"
+          v-model="intelligence.name"
+        />
+      </div>
+
+      <div>
+        <unnnic-input
+          :label="$t('webapp.create_repository.description_label')"
+          :placeholder="$t('webapp.create_repository.description_placeholder')"
+          v-model="intelligence.description"
+        />
+      </div>
+
+      <div>
+        <unnnic-label :label="$t('webapp.create_repository.intelligence_type')" />
+        <div class="create-repository__intelligence__wrapper__field">
+          <unnnic-card
+            clickable
+            :title="$t('webapp.create_repository.intelligence_type_classification_title')"
+            :description="
+              $t('webapp.create_repository.intelligence_type_classification_description')
+            "
+            type="content"
+            icon="typing-1"
+            class="create-repository__intelligence__wrapper__field__element"
+            :enabled="checkRepositoryType"
+            @click.native="intelligence.repository_type = 'classifier'"
+          />
+
+          <unnnic-card
+            clickable
+            :title="$t('webapp.create_repository.intelligence_type_content_title')"
+            :description="$t('webapp.create_repository.intelligence_type_content_description')"
+            type="content"
+            icon="paginate-filter-text-1"
+            class="create-repository__intelligence__wrapper__field__element"
+            :enabled="!checkRepositoryType"
+            @click.native="intelligence.repository_type = 'content'"
+          />
+        </div>
+      </div>
+
+      <div class="create-repository__intelligence__wrapper__field">
         <unnnic-button
           type="terciary"
-          class="create-repository__intelligence__buttons__btn"
+          class="create-repository__intelligence__wrapper__field__element"
           @click.native="dispatchBackModal()"
         >
-          {{$t('webapp.create_repository.cancel_create_intelligence_button')}}
+          {{ $t("webapp.create_repository.cancel_create_intelligence_button") }}
         </unnnic-button>
 
         <unnnic-button
           type="secondary"
-          class="create-repository__intelligence__buttons__btn"
+          class="create-repository__intelligence__wrapper__field__element"
           :disabled="!checkHasValue"
           @click.native="dispatchNextStep()"
         >
-          {{$t('webapp.create_repository.navigate_to_next_button')}}
+          {{ $t("webapp.create_repository.navigate_to_next_button") }}
         </unnnic-button>
       </div>
     </div>
@@ -43,14 +78,17 @@ export default {
     return {
       intelligence: {
         name: '',
-        description: ''
+        description: '',
+        repository_type: 'classifier'
       }
     };
   },
   computed: {
     checkHasValue() {
-      return (this.intelligence.name !== ''
-      && this.intelligence.description !== '');
+      return this.intelligence.name !== '' && this.intelligence.description !== '';
+    },
+    checkRepositoryType() {
+      return this.intelligence.repository_type === 'classifier';
     }
   },
   methods: {
@@ -95,25 +133,17 @@ export default {
       margin-bottom: 2rem;
     }
 
-    &__wrapper * {
-      margin-bottom: 2rem;
-    }
-
-    &__intelligence-type {
-      display: flex;
-      justify-content: space-between;
-
-      &__content {
-        width: 47%;
+    &__wrapper {
+      > div {
+        margin-bottom: 2rem;
       }
-    }
+      &__field {
+        display: flex;
+        justify-content: space-between;
 
-    &__buttons {
-      display: flex;
-      justify-content: space-between;
-
-      &__btn {
-        width: 47%;
+        &__element {
+          width: 48%;
+        }
       }
     }
   }

@@ -15,6 +15,7 @@ import RepositoryTranslateExternal from '@/views/repository/TranslateExternal';
 import RepositoryTranslations from '@/views/repository/Translations';
 import RepositorySettings from '@/views/repository/Settings';
 import RepositoryQASettings from '@/views/repository/QA/Settings';
+import RepositoryQAIntegration from '@/views/repository/QA/Integration';
 import RepositoryIntegration from '@/views/repository/Integration';
 import RepositoryEvaluateManual from '@/views/repository/EvaluateManual';
 import RepositoryEvaluateAutomatic from '@/views/repository/EvaluateAutomatic';
@@ -162,7 +163,7 @@ export default new Router({
         {
           path: ':ownerNickname/:slug/Integration/',
           name: 'repository-integration',
-          component: RepositoryIntegration,
+          component: RepositoryQAIntegration,
         },
         {
           path: ':ownerNickname/:slug/settings/',

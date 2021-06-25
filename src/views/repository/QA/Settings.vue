@@ -17,7 +17,7 @@
                   Content Intelligence
                 </p>
               </div>
-              <settings-form/>
+              <settings-form />
             </section>
           </div>
           <authorization-request-notification
@@ -99,7 +99,10 @@ export default {
       &__intelligence {
         margin: $unnnic-inline-xs 0 $unnnic-inline-md;
         font-size: $unnnic-font-size-body-gt;
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
         color: $unnnic-color-neutral-dark;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       }
     }
   }

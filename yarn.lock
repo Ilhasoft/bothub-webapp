@@ -2119,10 +2119,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@weni/unnnic-system@1.0.76":
-  version "1.0.76"
-  resolved "https://registry.yarnpkg.com/@weni/unnnic-system/-/unnnic-system-1.0.76.tgz#79f709b88549bb7872413e11bc1e101fb44f3a65"
-  integrity sha512-p7M1TwtbHF+akss2VMQ9jPA12Tm4cHRM/9EfJLlX4QQtdajqVdMbNwGeo/qZSAMdDLTSuwRWM4zgx7CbxiUoJw==
+"@weni/unnnic-system@1.0.93":
+  version "1.0.93"
+  resolved "https://registry.yarnpkg.com/@weni/unnnic-system/-/unnnic-system-1.0.93.tgz#451ddacd6416140badef5d1f6e98b8f88da27779"
+  integrity sha512-x1RWeCUIlIpwhwbQJIftYLaDlwg5amW/lIWbvrx7a0luz0VjYJqDrWiCxZdSCxa8hv39HNKZLjJhWAm68Gh+gQ==
   dependencies:
     core-js "^3.6.5"
     v-click-outside "^3.1.2"
