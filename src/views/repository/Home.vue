@@ -5,7 +5,6 @@
         <div class="repository-home__title">
           {{ $t("webapp.home.description") }}
         </div>
-
         <div class="repository-home__description__header">
           <div>
             <b-tag
@@ -19,10 +18,10 @@
           </div>
 
           <unnnic-button
-            v-if="!isIntegrate"
+            v-if="hasIntegration"
             type="primary"
             @click="changeIntegrateModalState(true)"
-            class="repository-home__description__header__integrate"
+            class="repository-home__description__header__remove-integrate"
           >
             {{ $t("webapp.summary.remove_integrate") }}
           </unnnic-button>
@@ -30,7 +29,7 @@
             v-else
             type="primary"
             @click="changeIntegrateModalState(true)"
-            class="repository-home__description__header__remove-integrate"
+            class="repository-home__description__header__integrate"
           >
             {{ $t("webapp.summary.integrate") }}
           </unnnic-button>
@@ -92,40 +91,24 @@
         @createdGroup="addedGroup"
       />
     </div>
-    <unnnic-modal
-      :showModal="integrateModal"
-      :text="
-        $t('webapp.home.integrate_modal_title', {
-          intelligence: repository.name,
-          project: 'projectName'
-        })
-      "
-      scheme="feedback-yellow"
-      modal-icon="alert-circle-1"
-      @close="changeIntegrateModalState(false)"
-    >
-      <span slot="message" v-html="$t('webapp.home.integrate_modal_subtitle')" />
-      <unnnic-button slot="options" type="terciary" @click="changeIntegrateModalState(false)">
-        {{ $t("webapp.home.cancel") }}
-      </unnnic-button>
-      <unnnic-button
-        slot="options"
-        class="create-repository__container__button"
-        type="terciary"
-        @click="changeIntegrateModalState(false)"
-      >
-        {{ $t("webapp.home.confirm_integrate") }}
-      </unnnic-button>
-    </unnnic-modal>
+    <h1>{{ repositoryVersion }}</h1>
+    <integration-modal
+      :openModal="integrateModal"
+      :repository="getCurrentRepository"
+      :hasIntegration="hasIntegration"
+      @closeIntegratationModal="changeIntegrateModalState(false)"
+    />
   </repository-view-base>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
 import EntityEdit from '@/components/repository/EntityEdit';
 import SummaryInformation from '@/components/repository/SummaryInformation';
+import IntegrationModal from '@/components/shared/IntegrationModal';
 import RepositoryBase from './Base';
 
 export default {
@@ -135,7 +118,8 @@ export default {
     BadgesIntents,
     VueMarkdown,
     EntityEdit,
-    SummaryInformation
+    SummaryInformation,
+    IntegrationModal
   },
   extends: RepositoryBase,
   data() {
@@ -158,10 +142,12 @@ export default {
       creating: false,
       newLabels: [],
       integrateModal: false,
-      isIntegrate: true
+      hasIntegration: false,
+      integrationError: null
     };
   },
   computed: {
+    ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
     unlabeled() {
       if (!this.repository || !this.repository.other_group) return [];
       return this.repository.other_group.entities;
@@ -180,9 +166,28 @@ export default {
   watch: {
     edit() {
       if (!this.edit) this.creating = false;
+    },
+    getCurrentRepository() {
+      if (this.getCurrentRepository) {
+        this.checkIfHasIntegration();
+      }
     }
   },
   methods: {
+    ...mapActions(['getIntegrationRepository']),
+    async checkIfHasIntegration() {
+      try {
+        const { data } = await this.getIntegrationRepository({
+          repository_version: this.getCurrentRepository.repository_version_id,
+          repository_uuid: this.getCurrentRepository.uuid,
+          project_uuid: this.getProjectSelected,
+          organization: this.getOrgSelected
+        });
+        this.hasIntegration = data.in_project;
+      } catch (err) {
+        this.integrationError = err.response && err.response.data;
+      }
+    },
     updatedGroup({ groupId, entities }) {
       const groupIndex = this.getGroupIndex(groupId);
       if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
@@ -191,6 +196,13 @@ export default {
       this.repository.other_group.entities = entities;
     },
     changeIntegrateModalState(value) {
+      if (this.integrationError !== null && value) {
+        this.$buefy.toast.open({
+          message: this.integrationError.detail,
+          type: 'is-danger'
+        });
+        return;
+      }
       this.integrateModal = value;
     },
     removeEntity({ entity, groupId }) {
@@ -278,7 +290,7 @@ export default {
         border: 1px solid $unnnic-color-feedback-red;
         color: $unnnic-color-feedback-red;
         background-color: $color-white;
-        transition: .1s;
+        transition: 0.1s;
 
         &:hover {
           border: 1px solid $unnnic-color-feedback-red;

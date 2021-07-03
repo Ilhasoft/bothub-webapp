@@ -280,9 +280,14 @@
       "delete": "Delete",
       "cancel": "Cancel",
       "integrate": "Integrate into the project",
-      "integrate_modal_title": "Integrate \"{intelligence}\" intelligence to the \"{project}\" project? ",
+      "integrate_modal_title": "Integrate \"{intelligence}\" intelligence to the project? ",
       "integrate_modal_subtitle": "Intelligence will be added to Flows in this project and through the “Divide by Intent” feature you will be able to use the intentions of this intelligence.",
-      "confirm_integrate": "Confirm"
+      "confirm_integrate": "Confirm",
+      "remove_integrate_modal_title": "Remover intelligence \"{intelligence}\" from project \"{project}\"? ",
+      "remove_integrate_modal_subtitle": "This intelligence will no longer be used in this project. If you change your mind, you will need to reintegrate and adjust the flows.",
+      "confirm_with_username": "Enter <strong>{username}</strong> to confirm the exit",
+      "confirm_with_username_placeholder": "Confirm your username to delete the account",
+      "confirm_remove_integrate": "Remove integration"
     },
     "summary": {
       "training_information": "Traning information",
@@ -303,10 +308,14 @@
       "remove_integrate": "Remover from Flows"
     },
     "integration": {
-      "title": "Bothub integrations",
+      "title": "API",
       "description": "Make an HTTP request to the NLP service, following the example below",
       "copy": "Token Copied",
-      "my_user": "My user"
+      "my_user": "My user",
+      "new": "New! ",
+      "news_text": "Integrate this intelligence to Weni Fluxos with one click, on the page of",
+      "summary": "Summary.",
+      "see_more": "know more"
     },
     "intent": {
       "title": "Intent",
