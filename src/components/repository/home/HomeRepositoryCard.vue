@@ -58,6 +58,15 @@
               </div>
             </div>
           </unnnic-dropdown-item>
+
+          <!-- <unnnic-dropdown-item @click="changeIntegrateModalState(true)">
+            <div class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="add-1" />
+              <div>
+                {{ $t("webapp.home.integrate") }}
+              </div>
+            </div>
+          </unnnic-dropdown-item> -->
         </unnnic-dropdown>
       </div>
     </section>
@@ -130,15 +139,24 @@
         </div>
       </div>
     </section>
+    <!-- <integration-modal
+      :openModal="integrateModal"
+      @closeIntegratationModal="changeIntegrateModalState(false)"
+    /> -->
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+import IntegrationModal from '@/components/shared/IntegrationModal';
+
 export default {
   name: 'HomeRepositoryCard',
+  components: { IntegrationModal },
   data() {
     return {
-      dropdownOpen: false
+      dropdownOpen: false,
+      integrateModal: false
     };
   },
   props: {
@@ -172,8 +190,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['setIntegrationRepository']),
     showDetailModal(value) {
       this.$emit('dispatchShowModal', value);
+    },
+    changeIntegrateModalState(value) {
+      this.integrateModal = value;
     },
     repositoryDetailsRouterParams() {
       this.$router.push({
