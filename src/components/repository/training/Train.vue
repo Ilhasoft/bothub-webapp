@@ -164,8 +164,7 @@ export default {
                   ? { [language]: data.requirements_to_train }
                   : {},
               languages_warnings:
-                data.languages_warnings.length !== 0
-                  ? { [language]: data.languages_warnings } : {}
+                data.languages_warnings.length !== 0 ? { [language]: data.languages_warnings } : {}
             };
             return currentRequirements;
           })
@@ -236,13 +235,15 @@ export default {
       this.training = true;
       this.loadingStatus = true;
       try {
-        this.getCurrentRepository.available_languages.map(async language => {
-          await this.trainRepository({
-            repositoryUuid: this.repository.uuid,
-            repositoryVersion: this.version,
-            repositoryLanguage: language
-          });
-        });
+        await Promise.all(
+          this.getCurrentRepository.available_languages.map(async language => {
+            await this.trainRepository({
+              repositoryUuid: this.repository.uuid,
+              repositoryVersion: this.version,
+              repositoryLanguage: language
+            });
+          })
+        );
         await this.setRepositoryTraining(true);
         await this.updateRepository();
         await this.getRepositoryStatus();
