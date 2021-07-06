@@ -13,7 +13,7 @@ import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
 import I18n from '@/utils/plugins/i18n';
-import store from '../src/store';
+import store from './store';
 
 const components = {
   NewsModal,
