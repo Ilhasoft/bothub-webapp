@@ -14,7 +14,6 @@ import hotjar from '@/utils/plugins/hotjar';
 // import TutorialModal from '@/components/TutorialModal';
 import unnic from '@weni/unnnic-system';
 import I18n from '@/utils/plugins/i18n';
-import store from '../src/store'
 
 const components = {
   NewsModal,
@@ -35,27 +34,6 @@ export default {
       }
       return 'Weni Artificial Intelligence'
     },
-  },
-  created() {
-    window.addEventListener('message', (event) => {
-      const prefix = 'connect:';
-
-      const content = String(event.data);
-
-      if (content.startsWith(prefix)) {
-        const eventMessage = content.substr(prefix.length);
-
-        const type = eventMessage.substr(0, eventMessage.indexOf(':'));
-        const data = {
-          ...JSON.parse(eventMessage.substr(type.length + 1)),
-          origin: event.origin,
-        };
-
-        if (type === 'updateExternalToken') {
-          store.dispatch('externalLogin', { token: data.data.token });
-        }
-      }
-    });
   },
   mounted() {
     document.title = this.dynamicTitle;
