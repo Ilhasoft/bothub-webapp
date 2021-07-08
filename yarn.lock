@@ -2119,7 +2119,7 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@weni/unnnic-system@1.1.21":
+"@weni/unnnic-system@1.1.20":
   version "1.1.20"
   resolved "https://registry.yarnpkg.com/@weni/unnnic-system/-/unnnic-system-1.1.20.tgz#ea6974edd12a5664a7cfcd5345badbbe0bc480ec"
   integrity sha512-siQ8b+EuvLWLL5YTNe8mwsUf7izgMI8yQV/HgWI+LoGTIe7Pnq5uWHAzGP2gJyIGKnWj25w3su3aCSwaDEBMPg==
