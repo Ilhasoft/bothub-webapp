@@ -1,0 +1,3 @@
+export default {
+  SET_UPDATE_PROJECTS: 'SET_UPDATE_PROJECTS',
+};

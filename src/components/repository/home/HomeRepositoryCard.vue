@@ -58,6 +58,27 @@
               </div>
             </div>
           </unnnic-dropdown-item>
+
+          <unnnic-dropdown-item
+            @click="changeIntegrateModalState(true)"
+            v-if="hasIntegrationDefined && !hasIntegrationCheckError"
+          >
+            <div class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="add-1" />
+              <div v-if="hasIntegration">
+                {{ $t("webapp.home.remove_integrate") }}
+              </div>
+              <div v-else>
+                {{ $t("webapp.home.integrate") }}
+              </div>
+            </div>
+          </unnnic-dropdown-item>
+
+          <unnnic-dropdown-item v-else-if="!hasIntegrationCheckError">
+            <div class="unnnic-card-intelligence__header__buttons__dropdown__loading">
+              <unnnic-icon size="md" icon="loading-circle-1" class="rotation" />
+            </div>
+          </unnnic-dropdown-item>
         </unnnic-dropdown>
       </div>
     </section>
@@ -130,15 +151,29 @@
         </div>
       </div>
     </section>
+    <integration-modal
+      :openModal="integrateModal"
+      :repository="getCurrentRepository"
+      :hasIntegration="hasIntegration"
+      @closeIntegratationModal="changeIntegrateModalState(false)"
+      @dispatchUpdateIntegration="changeIntegrationValue($event)"
+    />
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+import IntegrationModal from '@/components/shared/IntegrationModal';
+
 export default {
   name: 'HomeRepositoryCard',
+  components: { IntegrationModal },
   data() {
     return {
-      dropdownOpen: false
+      dropdownOpen: false,
+      integrateModal: false,
+      hasIntegration: null,
+      integrationError: null
     };
   },
   props: {
@@ -147,7 +182,24 @@ export default {
       default: null
     }
   },
+  mounted() {
+    this.checkIfHasIntegration();
+  },
   computed: {
+    ...mapGetters(['getProjectSelected', 'getOrgSelected']),
+    getCurrentRepository() {
+      return {
+        name: this.repositoryDetail.name,
+        repository_version_id: this.repositoryDetail.version_default.id,
+        uuid: this.repositoryDetail.uuid
+      };
+    },
+    hasIntegrationDefined() {
+      return this.hasIntegration !== null;
+    },
+    hasIntegrationCheckError() {
+      return this.integrationError !== null;
+    },
     intentModal() {
       return {
         title: this.$tc('webapp.intelligences_lib.intent_modal_title', 1, {
@@ -172,8 +224,33 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+      'setIntegrationRepository',
+      'getIntegrationRepository',
+      'updateIntegratedProjects'
+    ]),
+    async checkIfHasIntegration() {
+      try {
+        const { data } = await this.getIntegrationRepository({
+          repository_version: this.repositoryDetail.version_default.id,
+          repository_uuid: this.repositoryDetail.uuid,
+          project_uuid: this.getProjectSelected,
+          organization: this.getOrgSelected
+        });
+        this.hasIntegration = data.in_project;
+      } catch (err) {
+        this.integrationError = err.response && err.response.data;
+      }
+    },
+    changeIntegrationValue(value) {
+      this.hasIntegration = value;
+      this.updateIntegratedProjects();
+    },
     showDetailModal(value) {
       this.$emit('dispatchShowModal', value);
+    },
+    changeIntegrateModalState(value) {
+      this.integrateModal = value;
     },
     repositoryDetailsRouterParams() {
       this.$router.push({
@@ -261,6 +338,24 @@ export default {
           flex-wrap: nowrap;
           padding-left: $unnnic-inset-xs;
           min-width: 7.6rem;
+        }
+
+        &__loading {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .rotation {
+            animation: rotation 1300ms linear infinite;
+          }
+
+          @keyframes rotation {
+            0% {
+            }
+
+            100% {
+              transform: rotate(360deg);
+            }
+          }
         }
       }
     }

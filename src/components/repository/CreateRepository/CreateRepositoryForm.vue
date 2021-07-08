@@ -218,9 +218,10 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 6.25rem;
 
     &__indicator {
-      width: 20%;
+      width: 18%;
       margin-bottom: 3.2rem;
     }
 
