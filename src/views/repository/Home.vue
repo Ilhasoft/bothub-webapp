@@ -16,20 +16,23 @@
               {{ category }}
             </b-tag>
           </div>
-
           <unnnic-button
-            v-if="hasIntegration"
+            v-if="hasIntegration && !hasIntegrationCheckError"
             type="primary"
+            :loading="!hasIntegrationDefined"
             @click="changeIntegrateModalState(true)"
-            class="repository-home__description__header__remove-integrate"
+            :class="{
+              'repository-home__description__header__remove-integrate': hasIntegrationDefined
+            }"
           >
             {{ $t("webapp.summary.remove_integrate") }}
           </unnnic-button>
           <unnnic-button
-            v-else
+            v-else-if="!hasIntegrationCheckError"
             type="primary"
+            :loading="!hasIntegrationDefined"
             @click="changeIntegrateModalState(true)"
-            class="repository-home__description__header__integrate"
+            :class="{ 'repository-home__description__header__integrate': hasIntegrationDefined }"
           >
             {{ $t("webapp.summary.integrate") }}
           </unnnic-button>
@@ -97,6 +100,7 @@
       :repository="getCurrentRepository"
       :hasIntegration="hasIntegration"
       @closeIntegratationModal="changeIntegrateModalState(false)"
+      @dispatchUpdateIntegration="changeIntegrationValue()"
     />
   </repository-view-base>
 </template>
@@ -142,7 +146,7 @@ export default {
       creating: false,
       newLabels: [],
       integrateModal: false,
-      hasIntegration: false,
+      hasIntegration: null,
       integrationError: null
     };
   },
@@ -151,6 +155,12 @@ export default {
     unlabeled() {
       if (!this.repository || !this.repository.other_group) return [];
       return this.repository.other_group.entities;
+    },
+    hasIntegrationDefined() {
+      return this.hasIntegration !== null;
+    },
+    hasIntegrationCheckError() {
+      return this.integrationError !== null;
     },
     hasIntents() {
       return this.repository.intents_list.length > 0;
@@ -187,6 +197,9 @@ export default {
       } catch (err) {
         this.integrationError = err.response && err.response.data;
       }
+    },
+    changeIntegrationValue() {
+      this.hasIntegration = null;
     },
     updatedGroup({ groupId, entities }) {
       const groupIndex = this.getGroupIndex(groupId);

@@ -13,4 +13,7 @@ export default {
   [TYPES.SET_NICKNAME_AUTHENTICATED](state, { nickname }) {
     state.nicknameAuthenticated = nickname;
   },
+  [TYPES.SET_USERNAME](state, { username }) {
+    state.username = username;
+  },
 };

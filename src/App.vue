@@ -56,14 +56,17 @@ export default {
     this.profileInfo();
   },
   methods: {
-    ...mapActions(['getMyProfileInfo']),
+    ...mapActions(['getMyProfileInfo', 'setUserName']),
     async profileInfo() {
       const { data } = await this.getMyProfileInfo();
-      if (data.language) {
-        const [first, second] = data.language.split('-');
-        const secondUpperCase = second.toUpperCase();
-        const languageResult = `${first}-${secondUpperCase}`;
-        this.$i18n.locale = languageResult;
+      if (data){
+        this.setUserName(data.name)
+        if (data.language) {
+          const [first, second] = data.language.split('-');
+          const secondUpperCase = second.toUpperCase();
+          const languageResult = `${first}-${secondUpperCase}`;
+          this.$i18n.locale = languageResult;
+        }
       }
     },
     safariDetected() {

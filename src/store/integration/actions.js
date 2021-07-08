@@ -1,3 +1,4 @@
+import TYPES from './types';
 import integration from '@/api/integration';
 
 export default {
@@ -34,5 +35,8 @@ export default {
       project_uuid,
       organization
     );
-  }
+  },
+  updateIntegratedProjects({ commit }) {
+    commit(TYPES.SET_UPDATE_PROJECTS);
+  },
 };

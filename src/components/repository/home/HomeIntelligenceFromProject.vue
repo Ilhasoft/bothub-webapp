@@ -34,7 +34,7 @@
   </home-intelligence-container>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 import HomeIntelligenceContainer from '@/components/repository/home/HomeIntelligenceContainer';
 import ModalContainer from '@/components/repository/home/ModalContainer';
@@ -49,14 +49,22 @@ export default {
       error: null,
       modalInfo: {},
       openModal: false,
-      loading: true
+      loading: true,
     };
   },
   computed: {
     ...mapGetters(['getProjectSelected']),
+    ...mapState({
+      projectListWasUpdated: state => state.Integration.updateProjects,
+    }),
     checkProjectLength(){
       return this.projectList.length === 0
     },
+  },
+  watch: {
+    projectListWasUpdated(){
+      this.getProjectList();
+    }
   },
   mounted() {
     this.getProjectList();
