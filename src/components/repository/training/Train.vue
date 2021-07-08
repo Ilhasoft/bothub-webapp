@@ -87,7 +87,8 @@ export default {
       progress: 0,
       trainProgress: false,
       repositoryStatus: {},
-      loadingStatus: false
+      loadingStatus: false,
+      languageAvailableToTrain: []
     };
   },
   computed: {
@@ -164,10 +165,16 @@ export default {
                   ? { [language]: data.requirements_to_train }
                   : {},
               languages_warnings:
-                data.languages_warnings.length !== 0 ? { [language]: data.languages_warnings } : {}
+                data.languages_warnings.length !== 0 ? { [language]: data.languages_warnings } : {},
+              language
             };
             return currentRequirements;
           })
+        );
+        this.languageAvailableToTrain = allRequirements.filter(
+          language => language.ready_for_train
+            && Object.keys(language.requirements_to_train).length === 0
+            && Object.keys(language.languages_warnings).length === 0
         );
         const requirements = allRequirements.reduce((acumulator, requirement) => ({
           repository_version_id: requirement.repository_version_id,
@@ -204,25 +211,8 @@ export default {
       }
       if (this.authenticated && this.repository.authorization.can_write) {
         this.loadingStatus = true;
-        if (
-          this.getRequirements.ready_for_train
-          && Object.values(this.trainRequirements).length === 0
-          && Object.values(this.languagesWarnings).length === 0
-        ) {
+        if (this.languageAvailableToTrain.length > 0) {
           await this.train();
-          this.loadingStatus = false;
-          return;
-        }
-        if (
-          !this.getRequirements.ready_for_train
-          && Object.values(this.trainRequirements).length === 0
-          && Object.values(this.languagesWarnings).length === 0
-        ) {
-          this.$buefy.toast.open({
-            message: this.$t('webapp.train_modal.language_warning'),
-            type: 'is-danger'
-          });
-
           this.loadingStatus = false;
           return;
         }
@@ -236,7 +226,7 @@ export default {
       this.loadingStatus = true;
       try {
         await Promise.all(
-          this.getCurrentRepository.available_languages.map(async language => {
+          this.languageAvailableToTrain.map(async ({ language }) => {
             await this.trainRepository({
               repositoryUuid: this.repository.uuid,
               repositoryVersion: this.version,
