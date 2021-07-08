@@ -7,18 +7,17 @@
 
           <div class="repository-analyze-text__news">
             <span>
-              <strong class="repository-analyze-text__news__strong">{{
-                $t("webapp.integration.new")
-              }} </strong
+              <strong class="repository-analyze-text__news__strong"
+                >{{ $t("webapp.integration.new") }} </strong
               >{{ $t("webapp.integration.news_text") }}
-              <span class="repository-analyze-text__news__txt">{{
-                $t("webapp.integration.summary")
-              }}</span>
+              <span class="repository-analyze-text__news__txt" @click="goToSummary()">
+                {{ $t("webapp.integration.summary") }}
+              </span>
             </span>
 
-            <span class="repository-analyze-text__news__txt">{{
+            <a :href="goToDocumentation" class="repository-analyze-text__news__txt">{{
               $t("webapp.integration.see_more")
-            }}</span>
+            }}</a>
           </div>
 
           <span>{{ $t("webapp.integration.description") }}</span>
@@ -121,6 +120,7 @@ import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import HighlightedCode from '@/components/shared/HighlightedCode';
 import RepositoryBase from './Base';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'RepositoryIntegration',
@@ -128,7 +128,8 @@ export default {
     RepositoryViewBase,
     RequestGenerator,
     LoginForm,
-    HighlightedCode
+    HighlightedCode,
+    I18n
   },
   extends: RepositoryBase,
   data() {
@@ -174,6 +175,12 @@ export default {
       }
       return this.repository.authorization;
     },
+    goToDocumentation() {
+      if (I18n.locale === 'pt-BR') {
+        return 'https://docs.ilhasoft.mobi/l/pt/integracao-categoria/integrar-uma-intelig-ncia-ao-projeto-na-plataforma-weni';
+      }
+      return 'https://docs.ilhasoft.mobi/l/en/integration-dataset/integrate-an-intelligence-to-your-project-on-weni-platform';
+    },
     getAuthorizations() {
       if (this.repository.authorization.organizations !== undefined) {
         let authorization = [];
@@ -214,6 +221,11 @@ export default {
         message: this.$t('webapp.integration.copy'),
         type: 'is-success'
       });
+    },
+    goToSummary() {
+      this.$router.push({
+        name: 'repository-summary'
+      });
     }
   }
 };
@@ -236,15 +248,24 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0 $unnnic-inline-sm;
+    margin-bottom: $unnnic-inline-md;
 
     &__strong {
       color: $unnnic-color-neutral-dark;
+    }
+
+    a {
+      cursor: pointer;
+      &:hover {
+        color: $color-primary;
+      }
     }
 
     &__txt {
       color: $color-primary;
       font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-lg;
+      cursor: pointer;
     }
   }
 
