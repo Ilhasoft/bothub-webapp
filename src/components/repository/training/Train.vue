@@ -184,7 +184,10 @@ export default {
             ...acumulator.requirements_to_train,
             ...requirement.requirements_to_train
           },
-          languages_warnings: requirement.languages_warnings
+          languages_warnings: {
+            ...acumulator.languages_warnings,
+            ...requirement.languages_warnings
+          }
         }));
         this.setRequirements(requirements);
       } catch (error) {
