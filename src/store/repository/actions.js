@@ -48,9 +48,9 @@ export default {
     /* istanbul ignore next */
     return repository.get(ownerNickname, slug);
   },
-  trainRepository(store, { repositoryUuid, repositoryVersion }) {
+  trainRepository(store, { repositoryUuid, repositoryVersion, repositoryLanguage }) {
     /* istanbul ignore next */
-    return repository.train(repositoryUuid, repositoryVersion);
+    return repository.train(repositoryUuid, repositoryVersion, repositoryLanguage);
   },
   debugParse(store, {
     repositoryUUID, repositoryVersion, language, text,
@@ -193,8 +193,8 @@ export default {
   resetRepositoryVersion({ commit }) {
     commit('resetVersion');
   },
-  getRepositoryRequirements(store, { repositoryUuid, version }) {
-    return repository.repositoryRequirements(repositoryUuid, version);
+  getRepositoryRequirements(store, { repositoryUuid, version, repositoryLanguage }) {
+    return repository.repositoryRequirements(repositoryUuid, version, repositoryLanguage);
   },
   setMigrateIntelligence(store, {
     repositoryVersion, AuthToken, Language, Classifier,

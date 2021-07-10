@@ -72,11 +72,11 @@ export default {
   get(ownerNickname, slug) {
     return request.$http.get(`/v1/repository/${ownerNickname}/${slug}/`);
   },
-  train(repositoryUUID, repositoryVersion) {
-    return request.$http.post(
-      `/v2/repository/repository-details/${repositoryUUID}/train/`,
-      { repository_version: repositoryVersion },
-    );
+  train(repositoryUUID, repositoryVersion, repositoryLanguage) {
+    return request.$http.post(`/v2/repository/repository-details/${repositoryUUID}/train/`, {
+      repository_version: repositoryVersion,
+      language: repositoryLanguage
+    });
   },
   analyze(repositoryUUID, repositoryVersion, language, text) {
     return request.$http.post(
@@ -208,9 +208,9 @@ export default {
     });
     return request.$http.get(`/v2/repository/task-queue/?${queryString}`);
   },
-  repositoryRequirements(repositoryUUID, version) {
+  repositoryRequirements(repositoryUUID, version, repositoryLanguage) {
     return request.$http.get(
-      `/v2/repository/train/info/${repositoryUUID}/${version}/`,
+      `/v2/repository/train/info/${repositoryUUID}/${version}/${repositoryLanguage}`
     );
   },
   repositoryMigrateData(repositoryVersion, AuthToken, Language, Classifier) {
