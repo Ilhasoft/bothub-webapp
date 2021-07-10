@@ -4,6 +4,22 @@
       <div v-if="authenticated" class="repository-analyze-text">
         <div class="repository-analyze-text__title">
           <h2>{{ $t("webapp.integration.title") }}</h2>
+
+          <div class="repository-analyze-text__news">
+            <span>
+              <strong class="repository-analyze-text__news__strong"
+                >{{ $t("webapp.integration.new") }} </strong
+              >{{ $t("webapp.integration.news_text") }}
+              <span class="repository-analyze-text__news__txt" @click="goToSummary()">
+                {{ $t("webapp.integration.summary") }}
+              </span>
+            </span>
+
+            <a :href="goToDocumentation" class="repository-analyze-text__news__txt">{{
+              $t("webapp.integration.see_more")
+            }}</a>
+          </div>
+
           <span>{{ $t("webapp.integration.description") }}</span>
         </div>
         <div class="repository-analyze-text-header">
@@ -24,57 +40,34 @@
                 type="is-dark"
                 position="is-right"
               >
-                <b-icon
-                  custom-size="mdi-18px"
-                  type="is-dark"
-                  icon="help-circle"
-                />
+                <b-icon custom-size="mdi-18px" type="is-dark" icon="help-circle" />
               </b-tooltip>
             </div>
             <highlighted-code code-class="json"
-              >{ "language":"[{{ $t("webapp.analyze_text.language_code") }}]"
-              "text": "[{{ $t("webapp.analyze_text.text_to_analyze") }}]" }
+              >{ "language":"[{{ $t("webapp.analyze_text.language_code") }}]" "text": "[{{
+                $t("webapp.analyze_text.text_to_analyze")
+              }}]" }
             </highlighted-code>
           </div>
         </div>
         <div class="repository-analyze-text__item">
           <p><strong>Header:</strong></p>
           <div class="repository-analyze-text__item__authotization-container">
-            <div
-              class="repository-analyze-text__item__authotization-container__title"
-            >
+            <div class="repository-analyze-text__item__authotization-container__title">
               <p>Access token:</p>
-              <b-tooltip
-                label="Authorization"
-                type="is-dark"
-                position="is-right"
-              >
-                <b-icon
-                  custom-size="mdi-18px"
-                  type="is-dark"
-                  icon="help-circle"
-                />
+              <b-tooltip label="Authorization" type="is-dark" position="is-right">
+                <b-icon custom-size="mdi-18px" type="is-dark" icon="help-circle" />
               </b-tooltip>
             </div>
 
             <b-field>
-              <b-select
-                v-model="profileAuth"
-                placeholder="Select a character"
-                expanded
-              >
-                <option
-                  v-for="option in getAuthorizations"
-                  :value="option"
-                  :key="option.index"
-                >
+              <b-select v-model="profileAuth" placeholder="Select a character" expanded>
+                <option v-for="option in getAuthorizations" :value="option" :key="option.index">
                   {{ option }}
                 </option>
               </b-select>
             </b-field>
-            <div
-              class="repository-analyze-text__item__authotization-container__copy"
-            >
+            <div class="repository-analyze-text__item__authotization-container__copy">
               <strong>{{ getProfileDetail[0] }} - </strong>
               <p>{{ getProfileDetail[1] }}</p>
               <b-icon
@@ -127,6 +120,7 @@ import RequestGenerator from '@/components/repository/RequestGenerator';
 import LoginForm from '@/components/auth/LoginForm';
 import HighlightedCode from '@/components/shared/HighlightedCode';
 import RepositoryBase from './Base';
+import I18n from '@/utils/plugins/i18n';
 
 export default {
   name: 'RepositoryIntegration',
@@ -135,6 +129,7 @@ export default {
     RequestGenerator,
     LoginForm,
     HighlightedCode,
+    I18n
   },
   extends: RepositoryBase,
   data() {
@@ -142,17 +137,17 @@ export default {
       json: {
         intent: {
           name: 'love',
-          confidence: 0.6943462393863934,
+          confidence: 0.6943462393863934
         },
         intent_ranking: [
           {
             name: 'love',
-            confidence: 0.6943462393863934,
+            confidence: 0.6943462393863934
           },
           {
             name: 'hate',
-            confidence: 0.30565376061360666,
-          },
+            confidence: 0.30565376061360666
+          }
         ],
         groups_list: ['animal'],
         entities_list: [],
@@ -161,16 +156,16 @@ export default {
             {
               value: 'puppy',
               entity: 'dog',
-              confidence: 0.67255946125065845,
-            },
+              confidence: 0.67255946125065845
+            }
           ],
-          other: [],
+          other: []
         },
         text: 'i love my puppy',
         update_id: 47,
-        language: 'en',
+        language: 'en'
       },
-      profileAuth: '',
+      profileAuth: ''
     };
   },
   computed: {
@@ -180,18 +175,22 @@ export default {
       }
       return this.repository.authorization;
     },
+    goToDocumentation() {
+      if (I18n.locale === 'pt-BR') {
+        return 'https://docs.ilhasoft.mobi/l/pt/integracao-categoria/integrar-uma-intelig-ncia-ao-projeto-na-plataforma-weni';
+      }
+      return 'https://docs.ilhasoft.mobi/l/en/integration-dataset/integrate-an-intelligence-to-your-project-on-weni-platform';
+    },
     getAuthorizations() {
       if (this.repository.authorization.organizations !== undefined) {
         let authorization = [];
         if (this.repository.authorization.organizations.length !== 0) {
-          authorization = this.repository.authorization.organizations.map(
-            (auth) => {
-              const nickname = auth.user__nickname;
-              const id = auth.uuid;
+          authorization = this.repository.authorization.organizations.map(auth => {
+            const nickname = auth.user__nickname;
+            const id = auth.uuid;
 
-              return `${nickname} - Bearer ${id}`;
-            }
-          );
+            return `${nickname} - Bearer ${id}`;
+          });
         }
         return authorization;
       }
@@ -203,39 +202,72 @@ export default {
         return splitProfile;
       }
       return '';
-    },
+    }
   },
   watch: {
     profileToken() {
       const { organizations } = this.repository.authorization;
       if (this.profileToken && organizations && organizations.length !== 0) {
-        const {
-          user__nickname,
-          uuid,
-        } = this.repository.authorization.organizations[0];
+        const { user__nickname, uuid } = this.repository.authorization.organizations[0];
         const profileAuthorization = `${user__nickname} - Bearer ${uuid}`;
         this.profileAuth = profileAuthorization;
       }
-    },
+    }
   },
   methods: {
     copyText() {
       navigator.clipboard.writeText(this.getProfileDetail[1]);
       this.$buefy.toast.open({
         message: this.$t('webapp.integration.copy'),
-        type: 'is-success',
+        type: 'is-success'
       });
     },
-  },
+    goToSummary() {
+      this.$router.push({
+        name: 'repository-summary'
+      });
+    }
+  }
 };
 </script>
 
 <style lang="scss">
 @import "~@/assets/scss/colors.scss";
 @import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .repository-analyze-text {
   font-family: $font-family;
+
+  &__news {
+    background: rgba(0, 158, 150, 0.08);
+    height: 3.5rem;
+    border-radius: $unnnic-border-radius-sm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 $unnnic-inline-sm;
+    margin-bottom: $unnnic-inline-md;
+
+    &__strong {
+      color: $unnnic-color-neutral-dark;
+    }
+
+    a {
+      cursor: pointer;
+      &:hover {
+        color: $color-primary;
+      }
+    }
+
+    &__txt {
+      color: $color-primary;
+      font-weight: $unnnic-font-weight-bold;
+      font-size: $unnnic-font-size-body-lg;
+      cursor: pointer;
+    }
+  }
 
   &__title {
     margin-bottom: $between-subtitle-content;
@@ -293,7 +325,7 @@ export default {
     }
     &-field {
       width: 48%;
-      &__label{
+      &__label {
         display: flex;
       }
       @media screen and (max-width: $mobile-width) {

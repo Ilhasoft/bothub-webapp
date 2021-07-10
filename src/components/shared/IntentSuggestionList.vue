@@ -194,6 +194,7 @@ export default {
 <style lang="scss" scoped>
 @import '~@/assets/scss/colors.scss';
 @import '~@/assets/scss/variables.scss';
+
   .intent-suggestion-list {
 
     &__pagination {
@@ -244,7 +245,7 @@ export default {
                 height: 36px;
                 color: white;
                 border-radius: 4px;
-                background-color: #00d1b2;
+                background-color: $color-primary-soft;
                 }
 
                 &__icon-style:hover{

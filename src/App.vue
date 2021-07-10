@@ -13,6 +13,7 @@ import NewsModal from '@/components/NewsModal';
 import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
 import I18n from '@/utils/plugins/i18n';
+import store from './store';
 
 const components = {
   NewsModal,
@@ -31,6 +32,23 @@ export default {
       return 'Weni Artificial Intelligence';
     }
   },
+  created() {
+    window.addEventListener('message', (event) => {
+      const prefix = 'connect:';
+      const content = String(event.data);
+      if (content.startsWith(prefix)) {
+        const eventMessage = content.substr(prefix.length);
+        const type = eventMessage.substr(0, eventMessage.indexOf(':'));
+        const data = {
+          ...JSON.parse(eventMessage.substr(type.length + 1)),
+          origin: event.origin,
+        };
+        if (type === 'updateExternalToken') {
+          store.dispatch('externalLogin', { token: data.data.token });
+        }
+      }
+    });
+  },
   mounted() {
     document.title = this.dynamicTitle;
     hotjar.addHotjar();
@@ -38,14 +56,17 @@ export default {
     this.profileInfo();
   },
   methods: {
-    ...mapActions(['getMyProfileInfo']),
+    ...mapActions(['getMyProfileInfo', 'setUserName']),
     async profileInfo() {
       const { data } = await this.getMyProfileInfo();
-      if (data.language) {
-        const [first, second] = data.language.split('-');
-        const secondUpperCase = second.toUpperCase();
-        const languageResult = `${first}-${secondUpperCase}`;
-        this.$i18n.locale = languageResult;
+      if (data){
+        this.setUserName(data.name)
+        if (data.language) {
+          const [first, second] = data.language.split('-');
+          const secondUpperCase = second.toUpperCase();
+          const languageResult = `${first}-${secondUpperCase}`;
+          this.$i18n.locale = languageResult;
+        }
       }
     },
     safariDetected() {

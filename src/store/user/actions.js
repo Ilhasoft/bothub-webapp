@@ -37,6 +37,11 @@ export default {
       });
     }
   },
+  setUserName({ commit }, username){
+    commit(TYPES.SET_USERNAME, {
+      username,
+    })
+  },
   getPaymentHistory(store, limit = 20) {
     return user.getPaymentHistory(limit);
   },
