@@ -63,14 +63,21 @@
             @click="changeIntegrateModalState(true)"
             v-if="hasIntegrationDefined && !hasIntegrationCheckError"
           >
-            <div class="unnnic-card-intelligence__header__buttons__dropdown">
-              <unnnic-icon size="sm" icon="add-1" />
-              <div v-if="hasIntegration">
+            <div
+              v-if="hasIntegration"
+              :class="[
+                'unnnic-card-intelligence__header__buttons__dropdown',
+                'unnnic-card-intelligence__header__buttons__dropdown--reddish'
+              ]"
+            >
+              <unnnic-icon size="sm" icon="subtract-circle-1" />
+              <div>
                 {{ $t("webapp.home.remove_integrate") }}
               </div>
-              <div v-else>
-                {{ $t("webapp.home.integrate") }}
-              </div>
+            </div>
+            <div v-else class="unnnic-card-intelligence__header__buttons__dropdown">
+              <unnnic-icon size="sm" icon="add-1" />
+              <div>{{ $t("webapp.home.integrate") }}</div>
             </div>
           </unnnic-dropdown-item>
 
@@ -332,6 +339,10 @@ export default {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
+
+        &--reddish{
+        color: $unnnic-color-feedback-red;
+      }
 
         div {
           display: flex;
