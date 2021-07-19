@@ -60,7 +60,6 @@ export default {
     ...mapActions(['getMyProfileInfo', 'setUserName']),
     async profileInfo() {
       const { data } = await this.getMyProfileInfo();
-      console.log(data);
       if (data){
         this.setUserName(data.name)
         if (data.language) {
@@ -69,9 +68,9 @@ export default {
           const languageResult = `${first}-${secondUpperCase}`;
           this.$i18n.locale = languageResult;
         }
-        const hlp = initHelpHero('m7dO0to4OK');
+        const hlp = initHelpHero(process.env.VUE_APP_HELPHERO_ID);
         hlp.identify(data.nickname);
-        hlp.startTour('ZlUBE8O2Ik')
+        hlp.startTour(process.env.VUE_APP_HELPHERO_TOUR)
       }
     },
     safariDetected() {
