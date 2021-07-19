@@ -14,6 +14,7 @@ import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
 import I18n from '@/utils/plugins/i18n';
 import store from './store';
+import initHelpHero from 'helphero';
 
 const components = {
   NewsModal,
@@ -59,6 +60,7 @@ export default {
     ...mapActions(['getMyProfileInfo', 'setUserName']),
     async profileInfo() {
       const { data } = await this.getMyProfileInfo();
+      console.log(data);
       if (data){
         this.setUserName(data.name)
         if (data.language) {
@@ -67,6 +69,9 @@ export default {
           const languageResult = `${first}-${secondUpperCase}`;
           this.$i18n.locale = languageResult;
         }
+        const hlp = initHelpHero('m7dO0to4OK');
+        hlp.identify(data.nickname);
+        hlp.startTour('ZlUBE8O2Ik')
       }
     },
     safariDetected() {

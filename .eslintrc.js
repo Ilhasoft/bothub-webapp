@@ -42,6 +42,7 @@ module.exports = {
     "comma-dangle": "off",
     semi: "off",
     camelcase: "off",
+    "linebreak-style": 0,
     "no-param-reassign": "off",
     "no-multiple-empty-lines": [2, { max: 2 }],
     "import/extensions": [
