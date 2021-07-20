@@ -70,7 +70,7 @@ export default {
         }
         const hlp = initHelpHero(process.env.VUE_APP_HELPHERO_ID);
         hlp.identify(data.nickname);
-        hlp.startTour(process.env.VUE_APP_HELPHERO_TOUR)
+        hlp.startTour(process.env.VUE_APP_HELPHERO_TOUR);
       }
     },
     safariDetected() {
