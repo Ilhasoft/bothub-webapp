@@ -153,6 +153,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 12rem;
   h2{
     margin-top: 1.8rem;
     font-size: $size-small;
