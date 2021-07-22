@@ -1,5 +1,10 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
+    <div class="maintenance">
+      <img src="@/assets/imgs/maintance.svg" alt="" srcset="">
+      <h2>{{ $t("webapp.menu.maintenance-title") }}</h2>
+      <p>{{ $t("webapp.menu.maintenance-text") }}</p>
+    </div>
     <div v-if="authenticated" class="repository-log">
       <div v-if="repository && repository.authorization.can_contribute">
         <div class="repository-log__header">
@@ -142,11 +147,32 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/colors.scss";
 @import "~@/assets/scss/variables.scss";
+
+.maintenance{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h2{
+    margin-top: 1.8rem;
+    font-size: $size-small;
+    font-weight: $font-weight-medium;
+    margin-bottom: $between-title-subtitle;
+    color: $color-fake-black;
+    text-align: center;
+  }
+  p{
+    text-align: center;
+    color: $color-fake-black;
+    max-width: 700px;
+  }
+}
 label {
   vertical-align: middle;
 }
 .repository-log {
   font-family: $font-family;
+  display: none;
 
   &__header {
     margin-bottom: 3.5rem;
