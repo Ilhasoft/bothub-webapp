@@ -1,56 +1,60 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-    <div class="maintenance">
-      <img src="@/assets/imgs/maintance.svg" alt="" srcset="">
-      <h2>{{ $t("webapp.menu.maintenance-title") }}</h2>
-      <p>{{ $t("webapp.menu.maintenance-text") }}</p>
-    </div>
-    <div v-if="authenticated" class="repository-log">
-      <div v-if="repository && repository.authorization.can_contribute">
-        <div class="repository-log__header">
-          <h1>{{ $t("webapp.menu.inbox") }}</h1>
-          <p>{{ $t("webapp.inbox.description") }}</p>
+    <div v-if="allowId">
+      <div v-if="authenticated" class="repository-log">
+        <div v-if="repository && repository.authorization.can_contribute">
+          <div class="repository-log__header">
+            <h1>{{ $t("webapp.menu.inbox") }}</h1>
+            <p>{{ $t("webapp.inbox.description") }}</p>
+          </div>
+          <filter-evaluate-example
+            v-if="repository"
+            :intents="repository.intents_list"
+            :versions="versions"
+            language-filter
+            :hasVersion="false"
+            @querystringformatted="onSearch($event)"
+          />
+          <repository-log-list
+            :per-page="perPage"
+            :query="query"
+            :editable="repository.authorization.can_contribute"
+            @dispatchNext="dispatchClick()"
+            @dispatchSkip="dispatchClickSkip()"
+            @finishedTutorial="dispatchClickFinish()"
+          />
         </div>
-        <filter-evaluate-example
-          v-if="repository"
-          :intents="repository.intents_list"
-          :versions="versions"
-          language-filter
-          :hasVersion="false"
-          @querystringformatted="onSearch($event)"
-        />
-        <repository-log-list
-          :per-page="perPage"
-          :query="query"
-          :editable="repository.authorization.can_contribute"
-          @dispatchNext="dispatchClick()"
-          @dispatchSkip="dispatchClickSkip()"
-          @finishedTutorial="dispatchClickFinish()"
+        <authorization-request-notification
+          v-else-if="repository"
+          :available="!repository.available_request_authorization"
+          :repository-uuid="repositoryUUID"
+          @onAuthorizationRequested="updateRepository(false)"
         />
       </div>
-      <authorization-request-notification
-        v-else-if="repository"
-        :available="!repository.available_request_authorization"
-        :repository-uuid="repositoryUUID"
-        @onAuthorizationRequested="updateRepository(false)"
+
+      <div v-else>
+        <b-notification :closable="false" class="is-info">
+          {{ $t("webapp.inbox.signin_you_account") }}
+        </b-notification>
+        <login-form hide-forgot-password />
+      </div>
+
+      <tour
+        v-if="activeTutorial === 'inbox'"
+        :step-count="5"
+        :next-event="eventClick"
+        :skip-event="eventSkip"
+        :finish-event="eventClickFinish"
+        name="inbox"
       />
     </div>
-
     <div v-else>
-      <b-notification :closable="false" class="is-info">
-        {{ $t("webapp.inbox.signin_you_account") }}
-      </b-notification>
-      <login-form hide-forgot-password />
+       <div class="maintenance">
+        <img src="@/assets/imgs/maintance.svg" alt="" srcset="">
+        <h2>{{ $t("webapp.menu.maintenance-title") }}</h2>
+        <p>{{ $t("webapp.menu.maintenance-text") }}</p>
+        </div>
     </div>
-
-    <tour
-      v-if="activeTutorial === 'inbox'"
-      :step-count="5"
-      :next-event="eventClick"
-      :skip-event="eventSkip"
-      :finish-event="eventClickFinish"
-      name="inbox"
-    />
   </repository-view-base>
 </template>
 
@@ -88,11 +92,12 @@ export default {
       query: {},
       eventClick: false,
       eventSkip: false,
-      eventClickFinish: false
+      eventClickFinish: false,
+      allowedId: process.env.VUE_APP_ALLOW_INTERACTIONS_ID,
     };
   },
   computed: {
-    ...mapGetters(['authenticated', 'activeTutorial']),
+    ...mapGetters(['authenticated', 'activeTutorial', 'getCurrentRepository']),
     languages() {
       return Object.keys(this.repository.evaluate_languages_count).map(lang => ({
         value: lang,
@@ -108,6 +113,9 @@ export default {
     versions() {
       if (!this.versionsList) return [];
       return this.versionsList.items;
+    },
+    allowId() {
+      return this.allowedId.split(',').includes(this.getCurrentRepository.uuid);
     }
   },
   watch: {
@@ -142,6 +150,7 @@ export default {
     }
   }
 };
+
 </script>
 
 <style lang="scss" scoped>
@@ -168,12 +177,15 @@ export default {
     max-width: 700px;
   }
 }
+
+.dont-show{
+  display: none;
+}
 label {
   vertical-align: middle;
 }
 .repository-log {
   font-family: $font-family;
-  display: none;
 
   &__header {
     margin-bottom: 3.5rem;
