@@ -21,4 +21,4 @@ process.env.VUE_APP_MAILCHIMP_DATACENTER = (process.env.VUE_APP_MAILCHIMP_DATACE
 process.env.VUE_APP_MAILCHIMP_USER_ID = (process.env.VUE_APP_MAILCHIMP_USER_ID || '');
 process.env.VUE_APP_MAILCHIMP_LIST_ID = (process.env.VUE_APP_MAILCHIMP_LIST_ID || '');
 process.env.VUE_APP_RECAPTCHA_TOKEN = (process.env.VUE_APP_RECAPTCHA_TOKEN || '');
-
+process.env.VUE_APP_ALLOW_INTERACTIONS_ID = (process.env.VUE_APP_ALLOW_INTERACTIONS_ID || '');
