@@ -5884,6 +5884,11 @@ he@1.2.x, he@^1.1.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+helphero@^3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/helphero/-/helphero-3.5.3.tgz#a112051eeb04066098dcd67f2e40c16b40218b9d"
+  integrity sha512-purYPHdzrjvtZOiucqr1b6gD7zT5vqt+/lN927dnz1usunaD1ckQd2hB5bVPJphZUiRmgMXhVVIdN27CocuFfQ==
+
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
