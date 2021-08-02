@@ -1,7 +1,7 @@
 
 <template>
   <div class="observer">
-    <loading hasCleanestColor/>
+    <loading/>
   </div>
 </template>
 
