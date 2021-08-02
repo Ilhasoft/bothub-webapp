@@ -3,10 +3,11 @@
 exports[`RepositoryLog.vue renders correctly 1`] = `
 <repository-view-base-stub quicktest="true">
   <div>
-    <div class="maintenance"><img src="@/assets/imgs/maintance.svg" alt="" srcset="">
-      <h2>some specific text</h2>
-      <p>some specific text</p>
-    </div>
+    <b-notification class="is-info">
+      some specific text
+    </b-notification>
+    <login-form-stub hideforgotpassword="true"></login-form-stub>
   </div>
+  <!---->
 </repository-view-base-stub>
 `;
