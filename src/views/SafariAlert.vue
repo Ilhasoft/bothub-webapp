@@ -1,29 +1,30 @@
 <template>
   <div class="safari-alert">
     <div class="safari-alert__content">
-      <img
-        src="@/assets/imgs/botinho.png"
-        alt="botinho">
+      <article class="safari-alert__content__article">
       <h3 class="safari-alert__content__title">
-        {{ $t('webapp.safari_alert.title1') }}
+        {{ $t('webapp.safari_alert.title') }}
       </h3>
-      <h3 class="safari-alert__content__title">
-        {{ $t('webapp.safari_alert.title2') }}
-      </h3>
+      <p class="safari-alert__content__text">
+        {{ $t('webapp.safari_alert.text') }}
+      </p>
+      </article>
       <div class="safari-alert__content__grid">
-        <a
-          href="https://www.google.com/intl/pt-BR_ALL/chrome/">
-          <img
-            src="@/assets/imgs/chrome.svg"
-            alt="chrome"
-            class="safari-alert__content__browser-icon">
-        </a>
         <a
           href="https://www.mozilla.org/pt-BR/firefox/new/">
           <img
             src="@/assets/imgs/mozila.svg"
             alt="mozila"
             class="safari-alert__content__browser-icon">
+            Firefox
+        </a>
+         <a
+          href="https://www.google.com/intl/pt-BR_ALL/chrome/">
+          <img
+            src="@/assets/imgs/chrome.svg"
+            alt="chrome"
+            class="safari-alert__content__browser-icon">
+            Chrome
         </a>
         <a
           href="https://www.opera.com/pt-br/download">
@@ -31,14 +32,14 @@
             src="@/assets/imgs/opera.svg"
             alt="opera"
             class="safari-alert__content__browser-icon">
+            Opera
         </a>
       </div>
       <b-button
         class="safari-alert__content__button"
         size="normal"
-        type="is-primary"
         @click="goToLandingPage()">
-        {{ $t('webapp.safari_alert.keep_using_safari') }}
+        {{ $t('webapp.safari_alert.button') }}
       </b-button>
     </div>
   </div>
@@ -81,7 +82,10 @@ export default {
     margin: 4rem auto;
     text-align: center;
     max-width: $max-repository-card-width - 300px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
     &__grid {
       display: flex;
       justify-content: space-around;
@@ -89,8 +93,23 @@ export default {
 
     &__title {
       margin: 3rem;
+      font-size: 2rem;
     }
 
+    &__text{
+      margin: 1rem 1rem 3.3rem;
+      text-align: center;
+
+      @media (min-width: 992px){
+        margin: 1rem 14rem 3.3rem;
+      }
+    }
+    a {
+      display: flex;
+      flex-direction: column;
+      color: $dark;
+      margin-top: .3rem;
+    }
     &__browser-icon {
       height: 5rem;
       margin: 0 auto;
@@ -104,6 +123,8 @@ export default {
 
     &__button {
       margin-top: 2rem;
+      border: none;
+      text-decoration: underline;
     }
   }
 }
