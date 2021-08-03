@@ -14,7 +14,6 @@ import hotjar from '@/utils/plugins/hotjar';
 import unnic from '@weni/unnnic-system';
 import I18n from '@/utils/plugins/i18n';
 import store from './store';
-import initHelpHero from 'helphero';
 
 const components = {
   NewsModal,
@@ -68,9 +67,6 @@ export default {
           const languageResult = `${first}-${secondUpperCase}`;
           this.$i18n.locale = languageResult;
         }
-        const hlp = initHelpHero(process.env.VUE_APP_HELPHERO_ID);
-        hlp.identify(data.nickname);
-        hlp.startTour(process.env.VUE_APP_HELPHERO_TOUR);
       }
     },
     safariDetected() {
