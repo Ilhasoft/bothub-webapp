@@ -1,7 +1,7 @@
 <template>
   <home-intelligence-container>
     <div class="loading" v-if="loading">
-      <loading hasCleanestColor/>
+      <loading/>
     </div>
     <div class="home-intelligences-from-project" v-else>
       <section class="home-intelligences-from-project__content" v-if="checkProjectLength">
