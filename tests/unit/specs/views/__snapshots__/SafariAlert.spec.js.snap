@@ -12,11 +12,11 @@ exports[`SafariAlert.vue renders correctly 1`] = `
       </p>
     </article>
     <div class="safari-alert__content__grid"><a href="https://www.mozilla.org/pt-BR/firefox/new/"><img src="@/assets/imgs/mozila.svg" alt="mozila" class="safari-alert__content__browser-icon">
-        Firefox
+        <p>Firefox</p>
       </a> <a href="https://www.google.com/intl/pt-BR_ALL/chrome/"><img src="@/assets/imgs/chrome.svg" alt="chrome" class="safari-alert__content__browser-icon">
-        Chrome
+        <p>Chrome</p>
       </a> <a href="https://www.opera.com/pt-br/download"><img src="@/assets/imgs/opera.svg" alt="opera" class="safari-alert__content__browser-icon">
-        Opera
+        <p>Opera</p>
       </a></div>
     <b-button size="normal" class="safari-alert__content__button">
       some specific text
