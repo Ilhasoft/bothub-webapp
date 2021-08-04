@@ -82,7 +82,6 @@ export default {
   background-color: $color-white;
 
   &__content {
-    font-family: 'Aleo', serif;
     background-color: $color-white;
     margin: 4rem auto;
     text-align: center;
@@ -94,9 +93,11 @@ export default {
     &__grid {
       display: flex;
       justify-content: space-around;
+      margin: 0 10rem;
     }
 
     &__title {
+      font-family: 'Aleo', serif;
       margin-top: 3rem;
       font-size: 2rem;
     }
