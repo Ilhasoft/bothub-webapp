@@ -16,7 +16,7 @@
             src="@/assets/imgs/mozila.svg"
             alt="mozila"
             class="safari-alert__content__browser-icon">
-            Firefox
+            <p>Firefox</p>
         </a>
          <a
           href="https://www.google.com/intl/pt-BR_ALL/chrome/">
@@ -24,7 +24,7 @@
             src="@/assets/imgs/chrome.svg"
             alt="chrome"
             class="safari-alert__content__browser-icon">
-            Chrome
+            <p>Chrome</p>
         </a>
         <a
           href="https://www.opera.com/pt-br/download">
@@ -32,7 +32,7 @@
             src="@/assets/imgs/opera.svg"
             alt="opera"
             class="safari-alert__content__browser-icon">
-            Opera
+            <p>Opera</p>
         </a>
       </div>
       <b-button
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-
 export default {
   name: 'SafariAlert',
   beforeMount() {
@@ -70,14 +69,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/utilities.scss';
-
+@import "~@/assets/scss/utilities.scss";
+@import "~@/assets/scss/default.scss";
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@weni/unnnic-system/dist/unnnic.css";
+@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .safari-alert{
   background-color: $color-white;
 
   &__content {
+    font-family: 'Aleo', serif;
     background-color: $color-white;
     margin: 4rem auto;
     text-align: center;
@@ -92,39 +97,49 @@ export default {
     }
 
     &__title {
-      margin: 3rem;
+      margin-top: 3rem;
       font-size: 2rem;
     }
 
     &__text{
+      font-family: 'Lato', sans-serif;
       margin: 1rem 1rem 3.3rem;
       text-align: center;
+      line-height: 24px;
 
       @media (min-width: 992px){
-        margin: 1rem 14rem 3.3rem;
+        margin: 1rem 14rem 3rem;
       }
     }
     a {
       display: flex;
       flex-direction: column;
       color: $dark;
-      margin-top: .3rem;
+
+      p{
+        font-family: 'Lato', sans-serif;
+        margin-top: 5px;
+      }
     }
     &__browser-icon {
-      height: 5rem;
+      height: 2.5rem;
       margin: 0 auto;
       cursor: pointer;
       transition: all .3s ease-in-out;
 
       &:hover {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
 
     &__button {
-      margin-top: 2rem;
+      margin-top: 3rem;
       border: none;
       text-decoration: underline;
+
+      &:hover{
+        font-weight: 700;
+      }
     }
   }
 }
