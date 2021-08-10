@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-      - master
+      - staging
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -17,9 +17,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # - name: Build and push
+      #   id: docker_build
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     push: true
+      #     tags: bothubit/bothub-webapp:${GITHUB_REF#refs/*/}
       - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: bothubit/bothub-webapp:staging_id
+        run: echo bothubit/bothub-webapp:${GITHUB_REF#refs/*/}
+
