@@ -1,11 +1,8 @@
-
 name: Build Staging Image
-
 on:
   push:
     tags:
       - 'staging-v*.*.*'
-
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -53,3 +50,4 @@ jobs:
             VUE_APP_HELPHERO_ID=''
             VUE_APP_HELPHERO_TOUR=''
             VUE_APP_ALLOW_INTERACTIONS_ID=''
+
