@@ -31,7 +31,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: bothubit/bothub-webapp:staging_${{ steps.vars.outputs.tag }}
+          tags: bothubit/bothub-webapp:${{ steps.vars.outputs.tag }}
           build-args: |
             VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp-ai-staging.weni.ai/'
             VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://staging.weni.ai/'
