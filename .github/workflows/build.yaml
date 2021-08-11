@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: bothubit/bothub-webapp:staging_${GITHUB_REF#refs/*/}
+          tags: bothubit/bothub-webapp:${GITHUB_REF#refs/*/}
           build-args: |
             VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp-ai-staging.weni.ai/'
             VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://staging.weni.ai/'
