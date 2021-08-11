@@ -1,10 +1,10 @@
 
-name: Build Staging Image
+name: Build Develop Image
 
 on:
   push:
     tags:
-      - 'staging-v*.*.*'
+      - 'develop-v*.*.*'
 
 jobs:
   docker:
@@ -33,8 +33,8 @@ jobs:
           push: true
           tags: bothubit/bothub-webapp:${{ steps.vars.outputs.tag }}
           build-args: |
-            VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp-ai-staging.weni.ai/'
-            VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://staging.weni.ai/'
+            VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp-ai-development.weni.ai/'
+            VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://development.weni.ai/'
             VUE_APP_SUPPORTED_LANGUAGES='en|de|es|pt|fr|it|nl|pt_br|id|mn|ar|bn|hi|ru|th|vi|kh|sw|ca|da|el|fa|fi|ga|he|hr|hu|ja|nb|pl|ro|si|sv|te|tr|tt|ur|zh|ha|ka|kk|sq|hy|az|be|bs|bg|cs|ky|mk|sr|uk|uz|ab|aa|af|ak|am|an|as|av|ae|ay|bm|ba|eu|bh|bi|br|my|ch|ce|ny|kw|cv|co|cr|dv|dz|eo|et|ee|fo|fj|ff|gl|gu|ht|hz|ho|ia|ie|ig|ik|io|is|iu|jv|kl|kn|kr|ks|km|ki|rw|kv|kg|ko|ku|kj|la|lb|lg|li|ln|lo|lt|lu|lv|gv|mg|ms|ml|mt|mi|mr|mh|na|nv|nd|ne|ng|nn|no|ii|nr|oc|oj|cu|om|or|os|pa|pi|ps|qu|rm|rn|sa|sc|sd|se|sm|sg|gd|sn|sk|sl|so|st|su|ss|ta|tg|ti|bo|tk|tl|tn|to|tw|ty|ug|ve|vo|wa|cy|wo|fy|xh|yi|yo|za|zu'
             VUE_APP_MAILCHIMP_LOGIN='bothub'
             VUE_APP_MAILCHIMP_DATACENTER='us18'
