@@ -3,7 +3,7 @@ name: Build Staging Image
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - 'staging-v*.*.*'
 jobs:
   docker:
     runs-on: ubuntu-latest
