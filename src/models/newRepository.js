@@ -8,6 +8,7 @@ class NewRepositoryModel extends ModelBase {
       language: '',
       categories: [],
       description: '',
+      repository_type: '',
       is_private: false,
       organization: null,
     };
@@ -19,6 +20,7 @@ class NewRepositoryModel extends ModelBase {
       language: String,
       categories: Object,
       description: String,
+      type: String,
       is_private: Boolean,
       organization: Number,
     };

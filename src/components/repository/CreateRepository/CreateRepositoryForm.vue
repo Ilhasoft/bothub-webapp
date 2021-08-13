@@ -168,11 +168,11 @@ export default {
     },
     async submit(model) {
       const categoryValues = this.data.categories.map(category => category.id);
-      const { organization, categories, ...data } = this.data;
+      const { organization, categories, repository_type, ...data } = this.data;
       const updatedModel = updateAttrsValues(model, {
         ...data,
         organization: this.getOrgSelected,
-        categories: categoryValues
+        categories: categoryValues 
       });
       this.submitting = true;
       this.errors = {};

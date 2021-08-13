@@ -6,7 +6,7 @@
     <div class="create-repository__intelligence__wrapper">
       <unnnic-input
         :label="$t('webapp.create_repository.intelligence_name_label')"
-       :placeholder="$t('webapp.create_repository.intelligence_name_placeholder')"
+        :placeholder="$t('webapp.create_repository.intelligence_name_placeholder')"
         v-model="intelligence.name"
       />
       <unnnic-input
@@ -14,13 +14,35 @@
         :placeholder="$t('webapp.create_repository.description_placeholder')"
         v-model="intelligence.description"
       />
+      <div class="create-repository__intelligence__type">
+        <unnnic-card
+          clickable
+          :title="$t('webapp.create_repository.intelligence_type_classification_title')"
+          :description="$t('webapp.create_repository.intelligence_type_classification_description')"
+          type="content"
+          icon="lock-2-1"
+          class="create-repository__intelligence__type__content"
+          :enabled="intelligence.repository_type === 'classifier'"
+          @click.native="intelligence.repository_type = 'classifier'"
+        />
+        <unnnic-card
+          clickable
+          :title="$t('webapp.create_repository.intelligence_type_content_title')"
+          :description="$t('webapp.create_repository.intelligence_type_content_description')"
+          type="content"
+          icon="lock-2-1"
+          class="create-repository__intelligence__type__content"
+          :enabled="intelligence.repository_type === 'content'"
+          @click.native="intelligence.repository_type = 'content'"
+        />
+      </div>
       <div class="create-repository__intelligence__buttons">
         <unnnic-button
           type="terciary"
           class="create-repository__intelligence__buttons__btn"
           @click.native="dispatchBackModal()"
         >
-          {{$t('webapp.create_repository.cancel_create_intelligence_button')}}
+          {{ $t("webapp.create_repository.cancel_create_intelligence_button") }}
         </unnnic-button>
 
         <unnnic-button
@@ -29,7 +51,7 @@
           :disabled="!checkHasValue"
           @click.native="dispatchNextStep()"
         >
-          {{$t('webapp.create_repository.navigate_to_next_button')}}
+          {{ $t("webapp.create_repository.navigate_to_next_button") }}
         </unnnic-button>
       </div>
     </div>
@@ -43,14 +65,14 @@ export default {
     return {
       intelligence: {
         name: '',
-        description: ''
+        description: '',
+        repository_type: ''
       }
     };
   },
   computed: {
     checkHasValue() {
-      return (this.intelligence.name !== ''
-      && this.intelligence.description !== '');
+      return this.intelligence.name !== '' && this.intelligence.description !== '';
     }
   },
   methods: {
@@ -71,7 +93,6 @@ export default {
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
 .create-repository {
-
   &__intelligence {
     width: 100%;
     height: 30.625rem;
@@ -88,7 +109,7 @@ export default {
       margin-bottom: 2rem;
     }
 
-    &__intelligence-type {
+    &__type {
       display: flex;
       justify-content: space-between;
 
