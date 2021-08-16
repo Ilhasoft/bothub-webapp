@@ -55,3 +55,4 @@ jobs:
             VUE_APP_HELPHERO_ID=''
             VUE_APP_HELPHERO_TOUR=''
             VUE_APP_ALLOW_INTERACTIONS_ID=''
+            VUE_APP_API_BASE_URL='https://api-ai-development.weni.ai/'
