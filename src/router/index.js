@@ -8,6 +8,7 @@ import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
 import ResetPassword from '@/components/ResetPassword';
+import RepositoryContentBases from '@/views/repository/content/Bases';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
@@ -133,6 +134,11 @@ export default new Router({
       name: 'dashboard',
       component: DashboardLayout,
       children: [
+        {
+          path: ':ownerNickname/:slug/content/bases',
+          name: 'repository-content-bases',
+          component: RepositoryContentBases,
+        },
         {
           path: ':ownerNickname/:slug/',
           name: 'repository-summary',

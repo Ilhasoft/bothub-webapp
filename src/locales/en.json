@@ -602,7 +602,10 @@
       "integration": "API",
       "settings": "Settings",
       "general": "General",
-      "versions": "Versions"
+      "versions": "Versions",
+      "content": {
+        "bases": "Bases"
+      }
     },
     "phrase-suggestion": {
       "title": "Sentence suggestions",

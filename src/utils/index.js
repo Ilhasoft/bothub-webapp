@@ -117,6 +117,7 @@ export const normalize = (min, max, value) => {
 
 export const updateAttrsValues = (drfModel, data) => {
   const attrs = drfModel.defaults();
+  console.log(attrs, data)
   Object.keys(attrs).forEach((attrName) => {
     Object.keys(data).forEach((item) => {
       if (attrName === item) {

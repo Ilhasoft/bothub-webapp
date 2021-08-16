@@ -20,7 +20,7 @@ class NewRepositoryModel extends ModelBase {
       language: String,
       categories: Object,
       description: String,
-      type: String,
+      repository_type: String,
       is_private: Boolean,
       organization: Number,
     };

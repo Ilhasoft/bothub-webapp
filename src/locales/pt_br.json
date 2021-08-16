@@ -601,7 +601,10 @@
       "integration": "API",
       "settings": "Ajustes",
       "general":"Geral",
-      "versions": "Versões"
+      "versions": "Versões",
+      "content": {
+        "bases": "Bases"
+      }
     },
     "phrase-suggestion": {
       "title": "Sugestão de frases",
