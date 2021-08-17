@@ -50,7 +50,10 @@
       "open": "Open",
       "show_intents": "View intentions | View intent | View intentions",
       "show_languages": "View languages | View language | View languages",
-      "classification_intelligence": "Classification Intelligence",
+      "repository_type": {
+        "classifier": "Classification Intelligence",
+        "content": "Content Intelligence"
+      },
       "intelligence_tooltip": "Uses intentions and entities to interpret and segment user messages.",
       "intent": "Intents | Intent | Intents",
       "language": "Languages | Language | Languages",
@@ -288,7 +291,12 @@
       "remove_integrate_modal_subtitle": "This intelligence will no longer be used in this project. If you change your mind, you will need to reintegrate and adjust the flows.",
       "confirm_with_username": "Enter <strong>{username}</strong> to confirm the exit",
       "confirm_with_username_placeholder": "Confirm your username to delete the account",
-      "confirm_remove_integrate": "Remove integration"
+      "confirm_remove_integrate": "Remove integration",
+      "bases": {
+        "knowledge_bases": "Knowledge bases",
+        "description": "The Knowledge bases are text sources for a Content Intelligence. Distribute the text of the intelligence in bases, gathering on each one similar informations. Find out more on our documentation.",
+        "new_knowledge_base": "Add a new knowledge base"
+      }
     },
     "summary": {
       "training_information": "Traning information",

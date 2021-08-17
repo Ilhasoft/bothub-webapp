@@ -96,7 +96,7 @@
 
     <section class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
-        {{ $t("webapp.intelligences_lib.classification_intelligence") }}
+        {{ $t(`webapp.intelligences_lib.repository_type.${repositoryDetail.repository_type}`) }}
       </div>
       <unnnic-tool-tip
         :text="$t('webapp.intelligences_lib.intelligence_tooltip')"
@@ -260,8 +260,15 @@ export default {
       this.integrateModal = value;
     },
     repositoryDetailsRouterParams() {
+      let name;
+
+      if (this.repositoryDetail.repository_type === 'content') {
+        name = 'repository-content-bases';
+      } else if (this.repositoryDetail.repository_type === 'classifier') {
+        name = 'repository-summary';
+      }
       this.$router.push({
-        name: 'repository-summary',
+        name,
         params: {
           ownerNickname: this.repositoryDetail.owner__nickname,
           slug: this.repositoryDetail.slug

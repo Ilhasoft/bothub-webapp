@@ -1,43 +1,18 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-    <div v-if="repository" class="repository-home">
-      <div class="repository-home__description">
-        <div class="repository-home__title">
-          {{ $t("webapp.home.description") }}
+    <div v-if="repository" class="repository-base">
+      <div class="repository-base__description">
+        <div class="repository-base__title">
+            <unnnic-card
+            type="title"
+            :title="$t('webapp.home.description')"
+            enabled
+            icon="paginate-filter-text-1"
+            infoPosition="right"
+            :hasInformationIcon="false"
+            scheme="aux-orange"
+          />
         </div>
-        <div class="repository-home__description__header">
-          <div>
-            <b-tag
-              v-for="(category, index) in getAllCategories"
-              :key="index"
-              class="repository-home__header__tag"
-              rounded
-            >
-              {{ category }}
-            </b-tag>
-          </div>
-          <unnnic-button
-            v-if="hasIntegration && !hasIntegrationCheckError"
-            type="primary"
-            :loading="!hasIntegrationDefined"
-            @click="changeIntegrateModalState(true)"
-            :class="{
-              'repository-home__description__header__remove-integrate': hasIntegrationDefined
-            }"
-          >
-            {{ $t("webapp.summary.remove_integrate") }}
-          </unnnic-button>
-          <unnnic-button
-            v-else-if="!hasIntegrationCheckError"
-            type="primary"
-            :loading="!hasIntegrationDefined"
-            @click="changeIntegrateModalState(true)"
-            :class="{ 'repository-home__description__header__integrate': hasIntegrationDefined }"
-          >
-            {{ $t("webapp.summary.integrate") }}
-          </unnnic-button>
-        </div>
-
         <div>
           <vue-markdown
             :source="repository.description"
@@ -49,61 +24,61 @@
             :typographer="typographer"
             :toc="toc"
             toc-id="toc"
-            class="repository-home__description__text markdown-body"
+            class="repository-base__description__text markdown-body"
           />
-          <p v-if="repository.description" class="repository-home__description__text" />
+          <p v-if="repository.description" class="repository-base__description__text" />
           <p v-else>
             <i class="text-color-grey-dark">{{ $t("webapp.home.no_description") }}</i>
           </p>
         </div>
-      </div>
-
-      <summary-information />
-
-      <h1>Chegou aqui</h1>
-
-      <div v-if="hasIntents" class="repository-home__intents-list">
-        <div id="intent-container" class="repository-home__title">
-          <p>
-            {{ $t("webapp.home.intents_list") }}
-          </p>
+        <div class="repository-base__description__header">
           <div>
-            <b-tooltip
-              :label="$t('webapp.summary.intent_question')"
-              class="tooltipStyle"
-              multilined
-              type="is-dark"
-              position="is-right"
+            <b-tag
+              v-for="(category, index) in getAllCategories"
+              :key="index"
+              class="repository-base__header__tag"
+              rounded
             >
-              <b-icon custom-size="mdi-18px" type="is-dark" icon="help-circle" />
-            </b-tooltip>
+              {{ category }}
+            </b-tag>
           </div>
         </div>
-
-        <badges-intents :list="repository.intents" />
       </div>
-
-      <entity-edit
-        id="entity-container"
-        :groups="repository.groups || []"
-        :can-edit="repository.authorization.can_contribute"
-        :ungrouped="unlabeled"
-        :repository-uuid="repository.uuid"
-        @updateGroup="updatedGroup"
-        @updateUngrouped="updateUngrouped"
-        @removeGroup="removeGroup"
-        @removeEntity="removeEntity"
-        @createdGroup="addedGroup"
+      <hr />
+      <div>
+        <unnnic-card
+            type="title"
+            :title="$t('webapp.home.bases.knowledge_bases')"
+            enabled
+            icon="book-address-1-2"
+            infoPosition="right"
+            :hasInformationIcon="false"
+            scheme="aux-pink"
+          />
+          <p class="repository-base__description__text">
+            {{ $t("webapp.home.bases.description") }}
+          </p>
+      </div>
+      <div class="repository-base__cards">
+        <unnnic-card
+          clickable
+          :text="$t('webapp.home.bases.new_knowledge_base')"
+          type="blank"
+          icon="add-1"
+          class="repository-base__cards__new"
+        />
+        <home-repository-card
+          v-for="list in repositoryOrgList"
+          :key="list.uuid"
+          :repository-detail="list"
+          @dispatchShowModal="showModal($event)"
+        />
+      </div>
+      <infinite-scroll
+        v-show="!isComplete"
+        @intersect="getOrgsRepositories()"
       />
     </div>
-    <h1>{{ repositoryVersion }}</h1>
-    <integration-modal
-      :openModal="integrateModal"
-      :repository="getCurrentRepository"
-      :hasIntegration="hasIntegration"
-      @closeIntegratationModal="changeIntegrateModalState(false)"
-      @dispatchUpdateIntegration="changeIntegrationValue()"
-    />
   </repository-view-base>
 </template>
 
@@ -116,16 +91,18 @@ import EntityEdit from '@/components/repository/EntityEdit';
 import SummaryInformation from '@/components/repository/SummaryInformation';
 import IntegrationModal from '@/components/shared/IntegrationModal';
 import RepositoryBase from '../Base';
+import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 
 export default {
-  name: 'RepositoryHome',
+  name: 'RepositoryBase',
   components: {
     RepositoryViewBase,
     BadgesIntents,
     VueMarkdown,
     EntityEdit,
     SummaryInformation,
-    IntegrationModal
+    IntegrationModal,
+    HomeRepositoryCard
   },
   extends: RepositoryBase,
   data() {
@@ -265,7 +242,7 @@ export default {
 @import "~@weni/unnnic-system/dist/unnnic.css";
 @import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
 
-.repository-home {
+.repository-base {
   &__title {
     font-size: 1.75rem;
     font-weight: $font-weight-medium;
@@ -297,41 +274,30 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-
-      &__integrate {
-        background-color: $color-primary-soft;
-      }
-      &__remove-integrate {
-        border: 1px solid $unnnic-color-feedback-red;
-        color: $unnnic-color-feedback-red;
-        background-color: $color-white;
-        transition: 0.1s;
-
-        &:hover {
-          border: 1px solid $unnnic-color-feedback-red;
-          background-color: $unnnic-color-feedback-red;
-          color: $unnnic-color-background-snow;
-        }
-      }
     }
 
     &__text {
+      margin-top: 8px;
       ul li {
         list-style-type: disc;
       }
     }
   }
+  &__cards {
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, 24%);
+    margin-top: 24px;
+    @media screen and (max-width: 1400px) {
+      grid-template-columns: repeat(3, 32%);
+    }
 
-  &__intents-list {
-    margin-top: 2rem;
-    padding: 1rem 0.5rem;
-    &__header {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
+    &__new {
+      height: 16.8125rem;
+      margin-bottom: $unnnic-inline-sm;
     }
   }
+
 }
 .tooltipStyle::after {
   font-size: 12px;

@@ -50,7 +50,10 @@
       "open": "Abrir",
       "show_intents": "Visualizar intenções | Visualizar intenção | Visualizar intenções",
       "show_languages": "Visualizar idiomas | Visualizar idioma | Visualizar idiomas",
-      "classification_intelligence": "Inteligência de Classificação",
+      "repository_type": {
+        "classifier": "Inteligência de Classificação",
+        "content": "Inteligência de Conteúdo"
+      },
       "intelligence_tooltip": "Utiliza intenções e entidades para interpretar e segmentar as mensagens do usuário.",
       "intent": "Intenções | Intenção | Intenções",
       "language": "Idiomas | Idioma | Idiomas",
@@ -289,7 +292,12 @@
       "remove_integrate_modal_subtitle": "Esta inteligência não será mais usada neste projeto. Caso mude de ideia, você precisará integrar novamente e ajustar os fluxos.",
       "confirm_with_username": "Digite <strong>{username}</strong> para confirmar a saída",
       "confirm_with_username_placeholder": "Confirme seu nome de usuário para excluir a conta",
-      "confirm_remove_integrate": "Remover integração"
+      "confirm_remove_integrate": "Remover integração",
+      "bases": {
+        "knowledge_bases": "Bases de conhecimento",
+        "description": "As Bases de Conhecimento são as fontes de texto de uma Inteligência de Conteúdo. Distribua o texto da inteligência em bases, reunindo informações semelhantes sobre cada uma. Saiba mais em nossa documentação.",
+        "new_knowledge_base": "Adicionar nova base de conhecimento"
+      }
     },
     "summary": {
       "training_information": "Informações do Treinamento",
