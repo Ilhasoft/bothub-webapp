@@ -85,6 +85,28 @@
                 : 'sidebar-wrapper__body__element'
             ]"
           />
+           <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-content-adjustments') ?
+              'cog-2' :
+              'cog-1'
+            "
+            :text="$t('webapp.menu.content.adjustments')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-content-adjustments',
+                dropdown: '',
+                to: 'repository-content-adjustments',
+                closeDrop: true
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-content-adjustments')
+                ? 'sidebar-wrapper__body--active'
+                : 'sidebar-wrapper__body__element'
+            ]"
+          />
         </unnnic-sidebar-menu>
 
         <unnnic-sidebar-menu v-else-if="repositoryType === 'classifier'">
@@ -108,7 +130,6 @@
                 : 'sidebar-wrapper__body__element'
             ]"
           />
-
           <section class="training-menu">
             <unnnic-sidebar-item
               :icon="

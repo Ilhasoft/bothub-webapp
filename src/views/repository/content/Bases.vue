@@ -16,13 +16,13 @@
         <div>
           <vue-markdown
             :source="repository.description"
-            :show="show"
-            :html="html"
-            :breaks="breaks"
-            :linkify="linkify"
-            :emoji="emoji"
-            :typographer="typographer"
-            :toc="toc"
+            show
+            html
+            :breaks="false"
+            :linkify="false"
+            emoji
+            typographer
+            toc
             toc-id="toc"
             class="repository-base__description__text markdown-body"
           />
@@ -66,18 +66,22 @@
           type="blank"
           icon="add-1"
           class="repository-base__cards__new"
+          @click.native="createNewBase()"
         />
         <home-repository-card
-          v-for="list in repositoryOrgList"
-          :key="list.uuid"
-          :repository-detail="list"
-          @dispatchShowModal="showModal($event)"
+          type="base"
+          :repository-detail="{
+            id: 1234,
+            version_default: {},
+            name: 'Nome da pessoa',
+            owner__nickname: 'Nickname',
+            intents: [1, 2],
+            available_languages: [1, 2],
+            description: 'description aqui',
+            repository_type: 'content',
+          }"
         />
       </div>
-      <infinite-scroll
-        v-show="!isComplete"
-        @intersect="getOrgsRepositories()"
-      />
     </div>
   </repository-view-base>
 </template>
@@ -85,11 +89,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import BadgesIntents from '@/components/repository/BadgesIntents';
 import VueMarkdown from 'vue-markdown';
-import EntityEdit from '@/components/repository/EntityEdit';
-import SummaryInformation from '@/components/repository/SummaryInformation';
-import IntegrationModal from '@/components/shared/IntegrationModal';
 import RepositoryBase from '../Base';
 import HomeRepositoryCard from '@/components/repository/home/HomeRepositoryCard';
 
@@ -97,140 +97,30 @@ export default {
   name: 'RepositoryBase',
   components: {
     RepositoryViewBase,
-    BadgesIntents,
     VueMarkdown,
-    EntityEdit,
-    SummaryInformation,
-    IntegrationModal,
-    HomeRepositoryCard
+    HomeRepositoryCard,
   },
   extends: RepositoryBase,
   data() {
-    return {
-      initialTab: 0,
-      currentLanguage: '',
-      links: ['Sentences', 'Results', 'Versions'],
-      languages: [],
-      evaluating: false,
-      error: {},
-      source: '',
-      show: true,
-      html: true,
-      breaks: false,
-      linkify: false,
-      emoji: true,
-      typographer: true,
-      toc: true,
-      edit: false,
-      creating: false,
-      newLabels: [],
-      integrateModal: false,
-      hasIntegration: null,
-      integrationError: null
-    };
+    return {};
   },
   computed: {
     ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
-    unlabeled() {
-      if (!this.repository || !this.repository.other_group) return [];
-      return this.repository.other_group.entities;
-    },
-    hasIntegrationDefined() {
-      return this.hasIntegration !== null;
-    },
-    hasIntegrationCheckError() {
-      return this.integrationError !== null;
-    },
-    hasIntents() {
-      return this.repository.intents_list.length > 0;
-    },
-    repositoryIcon() {
-      return (this.repository.categories[0] && this.repository.categories[0].icon) || 'botinho';
-    },
+
     getAllCategories() {
       const categories = this.repository.categories_list.map(category => category.name);
       return categories;
     }
   },
   watch: {
-    edit() {
-      if (!this.edit) this.creating = false;
-    },
-    getCurrentRepository() {
-      if (this.getCurrentRepository) {
-        this.checkIfHasIntegration();
-      }
-    }
   },
   methods: {
-    ...mapActions(['getIntegrationRepository']),
-    async checkIfHasIntegration() {
-      try {
-        const { data } = await this.getIntegrationRepository({
-          repository_version: this.getCurrentRepository.repository_version_id,
-          repository_uuid: this.getCurrentRepository.uuid,
-          project_uuid: this.getProjectSelected,
-          organization: this.getOrgSelected
-        });
-        this.hasIntegration = data.in_project;
-      } catch (err) {
-        this.integrationError = err.response && err.response.data;
-      }
-    },
-    changeIntegrationValue() {
-      this.hasIntegration = null;
-    },
-    updatedGroup({ groupId, entities }) {
-      const groupIndex = this.getGroupIndex(groupId);
-      if (groupIndex >= 0) this.repository.groups[groupIndex].entities = entities;
-    },
-    updateUngrouped({ entities }) {
-      this.repository.other_group.entities = entities;
-    },
-    changeIntegrateModalState(value) {
-      if (this.integrationError !== null && value) {
-        this.$buefy.toast.open({
-          message: this.integrationError.detail,
-          type: 'is-danger'
-        });
-        return;
-      }
-      this.integrateModal = value;
-    },
-    removeEntity({ entity, groupId }) {
-      if (groupId != null) {
-        const groupIndex = this.getGroupIndex(groupId);
+    ...mapActions([]),
 
-        if (groupIndex < 0) return;
-
-        const removeIndex = this.repository.groups[groupIndex].entities.findIndex(
-          listEntity => listEntity.entity_id === entity.entity_id
-        );
-
-        if (removeIndex < 0) return;
-
-        this.repository.groups[groupIndex].entities.splice(removeIndex, 1);
-      } else {
-        const removeIndex = this.repository.other_group.entities.findIndex(
-          listEntity => listEntity.entity_id === entity.entity_id
-        );
-        if (removeIndex < 0) return;
-        this.repository.other_group.entities.splice(removeIndex, 1);
-      }
-    },
-    removeGroup(groupId) {
-      const groupIndex = this.getGroupIndex(groupId);
-      if (groupIndex < 0) return;
-      this.repository.other_group.entities = this.repository.other_group.entities.concat(
-        this.repository.groups[groupIndex].entities
-      );
-      this.repository.groups.splice(groupIndex, 1);
-    },
-    addedGroup(group) {
-      this.repository.groups.push(group);
-    },
-    getGroupIndex(groupId) {
-      return this.repository.groups.findIndex(group => group.group_id === groupId);
+    createNewBase(){
+      this.$router.push({
+        name: 'repository-content-bases-new'
+      });
     }
   }
 };

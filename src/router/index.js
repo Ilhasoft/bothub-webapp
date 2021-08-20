@@ -9,6 +9,8 @@ import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
 import ResetPassword from '@/components/ResetPassword';
 import RepositoryContentBases from '@/views/repository/content/Bases';
+import RepositoryContentBasesForm from '@/views/repository/content/BasesForm';
+import RepositoryContentAdjustment from '@/views/repository/content/ContentAdjustments';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
@@ -138,6 +140,21 @@ export default new Router({
           path: ':ownerNickname/:slug/content/bases',
           name: 'repository-content-bases',
           component: RepositoryContentBases,
+        },
+        {
+          path: ':ownerNickname/:slug/content/bases/new',
+          name: 'repository-content-bases-new',
+          component: RepositoryContentBasesForm,
+        },
+        {
+          path: ':ownerNickname/:slug/content/bases/:id/edit',
+          name: 'repository-content-bases-edit',
+          component: RepositoryContentBasesForm,
+        },
+        {
+          path: ':ownerNickname/:slug/content/adjustment',
+          name: 'repository-content-adjustments',
+          component: RepositoryContentAdjustment,
         },
         {
           path: ':ownerNickname/:slug/',

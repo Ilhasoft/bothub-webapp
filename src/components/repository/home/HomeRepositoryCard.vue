@@ -23,7 +23,11 @@
           />
         </div>
 
-        <unnnic-dropdown position="bottom-left" :open.sync="dropdownOpen">
+        <unnnic-dropdown
+          v-if="type === 'repository'"
+          position="bottom-left"
+          :open.sync="dropdownOpen"
+        >
           <div slot="trigger">
             <unnnic-icon
               icon="navigation-menu-vertical-1"
@@ -94,7 +98,7 @@
       {{ repositoryDetail.description }}
     </section>
 
-    <section class="unnnic-card-intelligence__type">
+    <section v-if="type === 'repository'" class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
         {{ $t(`webapp.intelligences_lib.repository_type.${repositoryDetail.repository_type}`) }}
       </div>
@@ -115,7 +119,7 @@
     <div class="unnnic-card-intelligence__divider" />
 
     <section class="unnnic-card-intelligence__detail">
-      <div class="unnnic-card-intelligence__detail__content">
+      <div v-if="type === 'repository'" class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
           {{ $tc("webapp.intelligences_lib.intent", this.repositoryDetail.intents.length) }}
         </div>
@@ -184,6 +188,11 @@ export default {
     };
   },
   props: {
+    type: {
+      type: String,
+      default: 'repository',
+    },
+
     repositoryDetail: {
       type: [Object, Array],
       default: null
@@ -260,20 +269,29 @@ export default {
       this.integrateModal = value;
     },
     repositoryDetailsRouterParams() {
-      let name;
+      if (this.type === 'repository') {
+        let name;
 
-      if (this.repositoryDetail.repository_type === 'content') {
-        name = 'repository-content-bases';
-      } else if (this.repositoryDetail.repository_type === 'classifier') {
-        name = 'repository-summary';
-      }
-      this.$router.push({
-        name,
-        params: {
-          ownerNickname: this.repositoryDetail.owner__nickname,
-          slug: this.repositoryDetail.slug
+        if (this.repositoryDetail.repository_type === 'content') {
+          name = 'repository-content-bases';
+        } else if (this.repositoryDetail.repository_type === 'classifier') {
+          name = 'repository-summary';
         }
-      });
+        this.$router.push({
+          name,
+          params: {
+            ownerNickname: this.repositoryDetail.owner__nickname,
+            slug: this.repositoryDetail.slug
+          }
+        });
+      } else if (this.type === 'base') {
+        this.$router.push({
+          name: 'repository-content-bases-edit',
+          params: {
+            id: this.repositoryDetail.id,
+          }
+        });
+      }
     }
   }
 };
