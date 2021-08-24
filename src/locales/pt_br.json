@@ -297,7 +297,12 @@
         "knowledge_bases": "Bases de conhecimento",
         "description": "As Bases de Conhecimento são as fontes de texto de uma Inteligência de Conteúdo. Distribua o texto da inteligência em bases, reunindo informações semelhantes sobre cada uma. Saiba mais em nossa documentação.",
         "new_knowledge_base": "Adicionar nova base de conhecimento",
-        "adjustments": "Ajustes"
+        "adjustments": "Ajustes",
+        "adjustments_subtitle": "Inteligência de conteúdo",
+        "adjustments_button": "Salvar alterações",
+        "adjustments_button_back": "Voltar",
+        "adjustuments_modal_title": "Alterações salvas!",
+        "adjustments_modal_description": "Ajustes feitos com sucesso 😉"
       }
     },
     "summary": {

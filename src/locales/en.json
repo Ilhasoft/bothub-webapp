@@ -296,7 +296,12 @@
         "knowledge_bases": "Knowledge bases",
         "description": "The Knowledge bases are text sources for a Content Intelligence. Distribute the text of the intelligence in bases, gathering on each one similar informations. Find out more on our documentation.",
         "new_knowledge_base": "Add a new knowledge base",
-        "adjustments": "Adjustments"
+        "adjustments": "Adjustments",
+        "adjustments_subtitle": "Content Intelligence",
+        "adjustments_button": "Save changes",
+        "adjustments_button_back": "Back",
+        "adjustumentes_modal_title": "The changes were saved!",
+        "adjustmentes_modal_description": "The adjusments were changed 😉"
       }
     },
     "summary": {
