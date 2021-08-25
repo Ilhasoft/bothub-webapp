@@ -88,11 +88,12 @@
                 </div>
             </section> <!-- privacy -->
             <section class="repository-adjustments__wrapper__buttons">
-               <unnnic-button
+              <unnnic-button
               type="terciary"
               size="large"
               :text="$t('webapp.home.bases.adjustments_button_back')"
               class="repository-adjustments__buttons"
+              @click="showModal()"
               >
               </unnnic-button>
               <unnnic-button
@@ -107,13 +108,39 @@
             </section>
         </section>
         <modal
-        v-if="isSavedModalOpen"
-        type="alert"
-        :data="{scheme:'feedback-green', icon:'check-circle-1-1',
-        title:$t('webapp.home.bases.adjustuments_modal_title'),
-        description: $t('webapp.home.bases.adjustments_modal_description')}"
-        @close="isSavedModalOpen = false"
+          v-if="isSavedModalOpen"
+          type="alert"
+          :data="{scheme:'feedback-green', icon:'check-circle-1-1',
+          title:$t('webapp.home.bases.adjustuments_modal_title'),
+          description: $t('webapp.home.bases.adjustments_modal_description')}"
+          @close="isSavedModalOpen = false"
         />
+        <unnnic-modal
+          :show-modal="openModal"
+          scheme='feedback-yellow'
+          modal-icon='alert-circle-1'
+          :text="$t('webapp.home.bases.adjustuments_modal_alert_title')"
+          :description="$t('webapp.home.bases.adjustments_modal_alert_description')"
+          @close="isDiscardModalOpen = false"
+        >
+          <unnnic-button
+            slot="options"
+            class="create-repository__container__button"
+            type="terciary"
+          >
+            {{ $t("webapp.home.bases.adjustments_modal_alert_discard") }}
+          </unnnic-button>
+          <unnnic-button
+            slot="options"
+            class="create-repository__container__button"
+            type="primary"
+            scheme="feedback-yellow"
+            @click="saveClose()"
+            :loading="submitting"
+          >
+            {{ $t("webapp.home.bases.adjustments_modal_alert_save") }}
+          </unnnic-button>
+        </unnnic-modal>
     </repository-view-base>
 </template>
 
@@ -141,7 +168,9 @@ export default {
       languages: LANGUAGES,
       submitting: false,
       errors: {},
-      isSavedModalOpen: false
+      isSavedModalOpen: false,
+      isDiscardModalOpen: false,
+      openModal: false,
     }
   },
   components: {
@@ -161,7 +190,6 @@ export default {
     },
     // eslint-disable-next-line
     'repository.description' (){
-      console.log(this.repository)
       this.intelligence.description = this.repository.description;
     },
     // eslint-disable-next-line
@@ -219,9 +247,14 @@ export default {
 
       return false;
     },
-    closeModal(){
-      this.open = false;
-    }
+    showModal(value){
+      this.openModal = true
+      this.modalInfo = { ...value }
+    },
+    saveClose() {
+      this.onSubmit()
+      this.close = true
+    },
   },
   mounted() {
     this.getCategories();

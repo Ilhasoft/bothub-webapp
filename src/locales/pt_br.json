@@ -302,7 +302,11 @@
         "adjustments_button": "Salvar alterações",
         "adjustments_button_back": "Voltar",
         "adjustuments_modal_title": "Alterações salvas!",
-        "adjustments_modal_description": "Ajustes feitos com sucesso 😉"
+        "adjustments_modal_description": "Ajustes feitos com sucesso 😉",
+        "adjustuments_modal_alert_title": "Salvar alterações antes de sair?",
+        "adjustments_modal_alert_description": "Os ajustes não serão aplicados a menos que você salve.",
+        "adjustments_modal_alert_save": "Salvar alterações",
+        "adjustments_modal_alert_discard": "Descartar alterações"
       }
     },
     "summary": {
