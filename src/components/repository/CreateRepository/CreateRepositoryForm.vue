@@ -105,7 +105,7 @@ export default {
     computedSchema() {
       const computed = Object.entries(this.formSchema).reduce((schema, entry) => {
         const [key, value] = entry;
-        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show)) {
+        if (!(value.style && typeof value.style.show === 'boolean' && !value.style.show) || key === 'repository_type') {
           schema[key] = value;
         }
         return schema;
@@ -168,9 +168,10 @@ export default {
     },
     async submit(model) {
       const categoryValues = this.data.categories.map(category => category.id);
-      const { organization, categories, ...data } = this.data;
+      const { organization, categories, isPrivate, ...data } = this.data;
       const updatedModel = updateAttrsValues(model, {
         ...data,
+        is_private: isPrivate,
         organization: this.getOrgSelected,
         categories: categoryValues
       });

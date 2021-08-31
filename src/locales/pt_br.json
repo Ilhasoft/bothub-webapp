@@ -50,7 +50,10 @@
       "open": "Abrir",
       "show_intents": "Visualizar intenções | Visualizar intenção | Visualizar intenções",
       "show_languages": "Visualizar idiomas | Visualizar idioma | Visualizar idiomas",
-      "classification_intelligence": "Inteligência de Classificação",
+      "repository_type": {
+        "classifier": "Inteligência de Classificação",
+        "content": "Inteligência de Conteúdo"
+      },
       "intelligence_tooltip": "Utiliza intenções e entidades para interpretar e segmentar as mensagens do usuário.",
       "intent": "Intenções | Intenção | Intenções",
       "language": "Idiomas | Idioma | Idiomas",
@@ -289,7 +292,22 @@
       "remove_integrate_modal_subtitle": "Esta inteligência não será mais usada neste projeto. Caso mude de ideia, você precisará integrar novamente e ajustar os fluxos.",
       "confirm_with_username": "Digite <strong>{username}</strong> para confirmar a saída",
       "confirm_with_username_placeholder": "Confirme seu nome de usuário para excluir a conta",
-      "confirm_remove_integrate": "Remover integração"
+      "confirm_remove_integrate": "Remover integração",
+      "bases": {
+        "knowledge_bases": "Bases de conhecimento",
+        "description": "As Bases de Conhecimento são as fontes de texto de uma Inteligência de Conteúdo. Distribua o texto da inteligência em bases, reunindo informações semelhantes sobre cada uma. Saiba mais em nossa documentação.",
+        "new_knowledge_base": "Adicionar nova base de conhecimento",
+        "adjustments": "Ajustes",
+        "adjustments_subtitle": "Inteligência de conteúdo",
+        "adjustments_button": "Salvar alterações",
+        "adjustments_button_back": "Voltar",
+        "adjustuments_modal_title": "Alterações salvas!",
+        "adjustments_modal_description": "Ajustes feitos com sucesso 😉",
+        "adjustuments_modal_alert_title": "Salvar alterações antes de sair?",
+        "adjustments_modal_alert_description": "Os ajustes não serão aplicados a menos que você salve.",
+        "adjustments_modal_alert_save": "Salvar alterações",
+        "adjustments_modal_alert_discard": "Descartar alterações"
+      }
     },
     "summary": {
       "training_information": "Informações do Treinamento",
@@ -601,7 +619,11 @@
       "integration": "API",
       "settings": "Ajustes",
       "general":"Geral",
-      "versions": "Versões"
+      "versions": "Versões",
+      "content": {
+        "bases": "Bases",
+        "adjustments": "Ajustes"
+      }
     },
     "phrase-suggestion": {
       "title": "Sugestão de frases",

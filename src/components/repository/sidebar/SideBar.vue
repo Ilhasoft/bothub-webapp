@@ -47,6 +47,7 @@
         </div>
 
         <unnnic-select
+          v-if="repositoryType === 'classifier'"
           :selected="getNameVersion"
           v-show="collapse"
           class="unnic--clickable sidebar-wrapper__header__select"
@@ -61,7 +62,54 @@
         </unnnic-select>
       </section>
       <section class="sidebar-wrapper__body">
-        <unnnic-sidebar-menu>
+        <unnnic-sidebar-menu v-if="repositoryType === 'content'">
+          <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-content-bases') ?
+              'layout-dashboard-2' :
+              'layout-dashboard-1'
+            "
+            :text="$t('webapp.menu.content.bases')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-content-bases',
+                dropdown: '',
+                to: 'repository-content-bases',
+                closeDrop: true
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-content-bases')
+                ? 'sidebar-wrapper__body--active'
+                : 'sidebar-wrapper__body__element'
+            ]"
+          />
+           <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-content-adjustments') ?
+              'cog-2' :
+              'cog-1'
+            "
+            :text="$t('webapp.menu.content.adjustments')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-content-adjustments',
+                dropdown: '',
+                to: 'repository-content-adjustments',
+                closeDrop: true
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-content-adjustments')
+                ? 'sidebar-wrapper__body--active'
+                : 'sidebar-wrapper__body__element'
+            ]"
+          />
+        </unnnic-sidebar-menu>
+
+        <unnnic-sidebar-menu v-else-if="repositoryType === 'classifier'">
           <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-summary') ? 'layout-dashboard-2' : 'layout-dashboard-1'
@@ -82,7 +130,6 @@
                 : 'sidebar-wrapper__body__element'
             ]"
           />
-
           <section class="training-menu">
             <unnnic-sidebar-item
               :icon="
@@ -373,6 +420,10 @@ export default {
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.uuid;
+    },
+    repositoryType() {
+      if (!this.getCurrentRepository) return null;
+      return this.getCurrentRepository.repository_type;
     }
   },
   watch: {
