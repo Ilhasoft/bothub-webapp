@@ -121,12 +121,13 @@
           modal-icon='alert-circle-1'
           :text="$t('webapp.home.bases.adjustuments_modal_alert_title')"
           :description="$t('webapp.home.bases.adjustments_modal_alert_description')"
-          @close="isDiscardModalOpen = false"
+          @close="openModal = false"
         >
           <unnnic-button
             slot="options"
             class="create-repository__container__button"
             type="terciary"
+            @click="discardUpdate()"
           >
             {{ $t("webapp.home.bases.adjustments_modal_alert_discard") }}
           </unnnic-button>
@@ -151,6 +152,8 @@ import { mapActions } from 'vuex';
 import { LANGUAGES } from '@/utils/index';
 import Loading from '@/components/shared/Loading';
 import Modal from '@/components/repository/CreateRepository/Modal'
+import Repository from '@/models/repository'
+import router from '@/router/index'
 
 export default {
   name: 'RepositoryContentAdjustment',
@@ -171,7 +174,24 @@ export default {
       isSavedModalOpen: false,
       isDiscardModalOpen: false,
       openModal: false,
+      localNext: null,
     }
+  },
+  computed: {
+    hasUpdates() {
+      if (
+        ['name', 'description', 'respository_type', 'is_private', 'language']
+          .some(key => this.intelligence[key] !== this.repository[key])
+      ) {
+        return true;
+      }
+
+      if (!this.isEqualsArrays(this.intelligence.categories, this.repository.categories)) {
+        return true;
+      }
+
+      return false;
+    },
   },
   components: {
     RepositoryViewBase,
@@ -182,30 +202,57 @@ export default {
   watch: {
     // eslint-disable-next-line
     'repository.is_private' (){
-      this.intelligence.is_private = this.repository.is_private;
+      this.setRealValues();
     },
     // eslint-disable-next-line
     'repository.name' (){
-      this.intelligence.name = this.repository.name;
+      this.setRealValues();
     },
     // eslint-disable-next-line
     'repository.description' (){
-      this.intelligence.description = this.repository.description;
+      this.setRealValues();
     },
     // eslint-disable-next-line
     'repository.repository_type' (){
-      this.intelligence.repository_type = this.repository.repository_type;
+      this.setRealValues();
     },
     // eslint-disable-next-line
     'repository.language' (){
-      this.intelligence.language = this.repository.language;
+      this.setRealValues();
     },
     // eslint-disable-next-line
     'repository.categories' (){
-      this.intelligence.categories = this.repository.categories;
+      this.setRealValues();
     }
   },
   methods: {
+    isEqualsArrays(arrayA, arrayB) {
+      const exclusiveItems = [];
+
+      arrayA.forEach(item => {
+        if (!arrayB.includes(item)) {
+          exclusiveItems.push(item);
+        }
+      });
+
+      arrayB.forEach(item => {
+        if (!arrayA.includes(item)) {
+          exclusiveItems.push(item);
+        }
+      });
+
+      return exclusiveItems.length === 0;
+    },
+
+    setRealValues() {
+      this.intelligence.is_private = this.repository.is_private;
+      this.intelligence.name = this.repository.name;
+      this.intelligence.description = this.repository.description;
+      this.intelligence.repository_type = this.repository.repository_type;
+      this.intelligence.language = this.repository.language;
+      this.intelligence.categories = this.repository.categories;
+    },
+
     ...mapActions(['getAllCategories', 'editRepository']),
     selectCategory(category) {
       this.intelligence.categories = category;
@@ -236,6 +283,7 @@ export default {
         });
         this.submitting = false;
         this.isSavedModalOpen = true;
+        this.repository = new Repository({ ...response.data });
         return true;
       } catch (error) {
         const data = error.response && error.response.data;
@@ -251,13 +299,39 @@ export default {
       this.openModal = true
       this.modalInfo = { ...value }
     },
-    saveClose() {
-      this.onSubmit()
-      this.close = true
+    discardUpdate() {
+      this.setRealValues();
+      this.openModal = false;
+
+      if (this.localNext) {
+        this.localNext();
+      }
+    },
+    async saveClose() {
+      await this.onSubmit()
+      this.openModal = false
+
+      if (this.localNext) {
+        this.localNext();
+      }
     },
   },
   mounted() {
     this.getCategories();
+
+    // console.log('router', router);
+
+    router.beforeEach((to, from, next) => {
+      if (this.hasUpdates) {
+        this.openModal = true;
+        this.localNext = next;
+      } else {
+        next();
+      }
+      // console.log('to', to);
+      // console.log('from', from);
+      // console.log('next', next);
+    });
   },
 }
 </script>
