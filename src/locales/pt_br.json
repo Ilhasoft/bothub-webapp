@@ -306,7 +306,9 @@
         "adjustuments_modal_alert_title": "Salvar alterações antes de sair?",
         "adjustments_modal_alert_description": "Os ajustes não serão aplicados a menos que você salve.",
         "adjustments_modal_alert_save": "Salvar alterações",
-        "adjustments_modal_alert_discard": "Descartar alterações"
+        "adjustments_modal_alert_discard": "Descartar alterações",
+        "tests": "Teste bases de conhecimento",
+        "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas."
       }
     },
     "summary": {
@@ -622,7 +624,9 @@
       "versions": "Versões",
       "content": {
         "bases": "Bases",
-        "adjustments": "Ajustes"
+        "adjustments": "Ajustes",
+        "api": "API",
+        "tests": "Testes"
       }
     },
     "phrase-suggestion": {

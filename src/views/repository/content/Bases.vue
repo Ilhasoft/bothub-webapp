@@ -70,16 +70,9 @@
         />
         <home-repository-card
           type="base"
-          :repository-detail="{
-            id: 1234,
-            version_default: {},
-            name: 'Nome da pessoa',
-            owner__nickname: 'Nickname',
-            intents: [1, 2],
-            available_languages: [1, 2],
-            description: 'description aqui',
-            repository_type: 'content',
-          }"
+          v-for="base in bases"
+          :key="base.id"
+          :repository-detail="base"
         />
       </div>
     </div>
@@ -102,7 +95,13 @@ export default {
   },
   extends: RepositoryBase,
   data() {
-    return {};
+    return {
+      repositoryUUID: null,
+
+      bases: [],
+    };
+  },
+  mounted() {
   },
   computed: {
     ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
@@ -113,16 +112,43 @@ export default {
     }
   },
   watch: {
+    // eslint-disable-next-line
+    'repository.uuid'() {
+      if (!this.repository.uuid || this.repository.uuid === 'null') {
+        return false;
+      }
+
+      this.repositoryUUID = this.repository.uuid;
+    },
+
+    async repositoryUUID() {
+      const response = await this.getQAKnowledgeBases({
+        repositoryUUID: this.repositoryUUID,
+        page: 0,
+      });
+
+      console.log('res', response);
+
+      response.data.results.forEach(({ id, title }) => {
+        this.bases.push({
+          id,
+          name: title,
+          owner__nickname: 'Nickname',
+          available_languages: [1, 2],
+          description: 'description aqui',
+        });
+      });
+    },
   },
   methods: {
-    ...mapActions([]),
+    ...mapActions(['getQAKnowledgeBases']),
 
     createNewBase(){
       this.$router.push({
         name: 'repository-content-bases-new'
       });
     }
-  }
+  },
 };
 </script>
 

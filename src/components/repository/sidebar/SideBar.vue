@@ -85,6 +85,50 @@
                 : 'sidebar-wrapper__body__element'
             ]"
           />
+          <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-content-tests') ?
+              'messages-bubble-3' :
+              'messages-bubble-1'
+            "
+            :text="$t('webapp.menu.content.tests')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-content-tests',
+                dropdown: '',
+                to: 'repository-content-tests',
+                closeDrop: true
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-content-tests')
+                ? 'sidebar-wrapper__body--active'
+                : 'sidebar-wrapper__body__element'
+            ]"
+          />
+          <unnnic-sidebar-item
+            :icon="
+              checkSelectedMenu('repository-content-api') ?
+              'phone-charger-1' :
+              'charger-1'
+            "
+            :text="$t('webapp.menu.content.api')"
+            :enableTooltip="!collapse"
+            @click.native="
+              setSelectMenu({
+                name: 'repository-content-api',
+                dropdown: '',
+                to: 'repository-content-api',
+                closeDrop: true
+              })
+            "
+            :class="[
+              checkSelectedMenu('repository-content-api')
+                ? 'sidebar-wrapper__body--active'
+                : 'sidebar-wrapper__body__element'
+            ]"
+          />
            <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-content-adjustments') ?
@@ -326,7 +370,7 @@
 
           <section class="settings-menu">
             <unnnic-sidebar-item
-              :icon="dropSelect === 'isSettingsActive' ? 'cog-2' : 'cog-1'"
+              :icon="dropSelect === 'isSettingsActive' ? 'cog-2' : 'charger-2'"
               :text="$t('webapp.menu.settings')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isSettingsActive'"
@@ -686,6 +730,6 @@ export default {
   cursor: pointer;
 }
 .icon-list:hover {
-  color: #12a391;
+  color: $unnnic-color-brand-weni-soft;
 }
 </style>

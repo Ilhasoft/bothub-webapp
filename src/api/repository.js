@@ -2,12 +2,34 @@ import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
+
+// https://api-ai-staging.weni.ai/v2/repository/qa/knowledge-base/
 export default {
 
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-details');
     return data.actions.POST;
   },
+  getQAKnowledgeBases(repositoryUUID, page = 0) {
+    const limit = 20;
+    const offset = limit * page;
+
+    return request.$http.get('v2/repository/qa/knowledge-base/', {
+      params: {
+        repository_uuid: repositoryUUID,
+        limit,
+        offset,
+      },
+    });
+  },
+  getQAKnowledgeBase(repositoryUUID, id) {
+    return request.$http.get(`v2/repository/qa/knowledge-base/${id}/`, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
+    });
+  },
+  // https://api-ai-staging.weni.ai/v2/repository/qa/text/
   getAll(limit = 20) {
     return new utils.Page('/repository/repositories/', limit);
   },
