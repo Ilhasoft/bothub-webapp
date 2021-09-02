@@ -305,7 +305,9 @@
         "adjustuments_modal_alert_title": "Save changes before leaving?",
         "adjustments_modal_alert_description": "The adjustments won’t be changed unless you save.",
         "adjustments_modal_alert_save": "Save changes",
-        "adjustments_modal_alert_discard": "Discard changes"
+        "adjustments_modal_alert_discard": "Discard changes",
+        "tests": "Test knowledge bases",
+        "tests_subtitle": "Test knowledge bases asking them questions and observing their answers."
       }
     },
     "summary": {
@@ -623,7 +625,9 @@
       "versions": "Versions",
       "content": {
         "bases": "Bases",
-        "adjustments": "Adjustments"
+        "adjustments": "Adjustments",
+        "api": "API",
+        "tests": "Tests"
       }
     },
     "phrase-suggestion": {

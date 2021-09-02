@@ -10,7 +10,7 @@
               icon="keyboard-arrow-left-1" size="md"
             />
           </span>
-          <h1 class="repository-base-edit__title">Química Ensino Médio</h1>
+          <h1 class="repository-base-edit__title">{{ knowledgeBase.title }}</h1>
           <unnnicButton
             size="large"
             text=""
@@ -39,7 +39,7 @@
             iconLeft="floppy-disk-1"
             :iconRight="null"
             :disabled="false"
-            :loading="false"
+            :loading="submitting"
           />
           <unnnicButton
             size="large"
@@ -72,126 +72,6 @@
           id="" cols="30" rows="10"
           class="repository-base-edit__textarea"
         >
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
-           John Dalton descobriu o átomo ao defender que a
-            matéria é feita de pequenas partículas.
-           É também um dos pioneiros na meteorologia,
-            sendo responsável por diversos estudos na área.
-           Suas observações experimentais permitiram-lhe
-            elaborar teorias sobre o vapor d'água e misturas
-           de gases, apresentando em 1801 sua lei das
-           pressões parciais: em uma mistura de gases, cada
-           componente exerce a mesma pressão como se
-           estivesse solitária no recipiente que a contém.
-            Dalton
-           concluiu que toda a matéria, não apenas gases,
         </textarea>
     </section>
   </repository-view-base>
@@ -200,18 +80,29 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from '../Base';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'RepositoryBaseEdit',
-  data(){
-    return {
-    }
-  },
   components: {
     RepositoryViewBase,
   },
   extends: RepositoryBase,
+  data() {
+    return {
+      repositoryUUID: null,
+      bases: [],
+      submitting: false,
+      knowledgeBase: {
+        title: '',
+      },
+    };
+  },
+  mounted() {
+  },
   methods: {
+    ...mapActions(['getQAKnowledgeBase']),
+
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
         this.$router.push({
@@ -219,7 +110,38 @@ export default {
         });
       }
     },
-  }
+  },
+  watch: {
+    // eslint-disable-next-line
+    'repository.uuid'() {
+      if (!this.repository.uuid || this.repository.uuid === 'null') {
+        return false;
+      }
+
+      this.repositoryUUID = this.repository.uuid;
+    },
+
+    async repositoryUUID() {
+      const response = await this.getQAKnowledgeBase({
+        repositoryUUID: this.repositoryUUID,
+        id: this.$route.params.id
+      });
+
+      const { title } = response.data;
+
+      this.knowledgeBase.title = title;
+
+      // response.data.results.forEach(({ id, title }) => {
+      //   this.bases.push({
+      //     id,
+      //     name: title,
+      //     owner__nickname: 'Nickname',
+      //     available_languages: [1, 2],
+      //     description: 'description aqui',
+      //   });
+      // });
+    },
+  },
 }
 </script>
 

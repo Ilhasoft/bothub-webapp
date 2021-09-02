@@ -10,6 +10,12 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
+  getQAKnowledgeBases(store, { repositoryUUID, page }) {
+    return repository.getQAKnowledgeBases(repositoryUUID, page);
+  },
+  getQAKnowledgeBase(store, { repositoryUUID, id }) {
+    return repository.getQAKnowledgeBase(repositoryUUID, id);
+  },
   getVersions(store, { limit, query }) {
     return repository.getVersions(limit, query);
   },

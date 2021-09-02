@@ -206,7 +206,7 @@ export default {
     getCurrentRepository() {
       return {
         name: this.repositoryDetail.name,
-        repository_version_id: this.repositoryDetail.version_default.id,
+        repository_version_id: this.repositoryDetail.version_default?.id,
         uuid: this.repositoryDetail.uuid
       };
     },

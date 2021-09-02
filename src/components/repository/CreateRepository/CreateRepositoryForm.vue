@@ -97,7 +97,8 @@ export default {
       categories: [],
       current: 0,
       resultParams: {},
-      openModal: false
+      openModal: false,
+      createdRepository: {},
     };
   },
   computed: {
@@ -142,11 +143,20 @@ export default {
       });
     },
     repositoryDetailsRouterParams() {
+      const { repository_type, owner__nickname, slug } = this.createdRepository;
+      let name;
+
+      if (repository_type === 'content') {
+        name = 'repository-content-bases';
+      } else if (repository_type === 'classifier') {
+        name = 'repository-summary';
+      }
+
       return {
-        name: 'repository-summary',
+        name,
         params: {
-          ownerNickname: this.resultParams.ownerNickname,
-          slug: this.resultParams.slug
+          ownerNickname: owner__nickname,
+          slug
         }
       };
     },
@@ -167,13 +177,12 @@ export default {
       this.submit(this.drfRepositoryModel);
     },
     async submit(model) {
-      const categoryValues = this.data.categories.map(category => category.id);
       const { organization, categories, isPrivate, ...data } = this.data;
       const updatedModel = updateAttrsValues(model, {
         ...data,
         is_private: isPrivate,
         organization: this.getOrgSelected,
-        categories: categoryValues
+        categories
       });
       this.submitting = true;
       this.errors = {};
@@ -181,6 +190,7 @@ export default {
       try {
         const response = await updatedModel.save();
         const { owner__nickname, slug } = response.response.data;
+        this.createdRepository = response.response.data;
         this.current = 2;
         this.resultParams = { ownerNickname: owner__nickname, slug };
         return true;

@@ -11,6 +11,8 @@ import ResetPassword from '@/components/ResetPassword';
 import RepositoryContentBases from '@/views/repository/content/Bases';
 import RepositoryContentBasesForm from '@/views/repository/content/BasesForm';
 import RepositoryContentAdjustment from '@/views/repository/content/ContentAdjustments';
+import RepositoryContentAPI from '@/views/repository/content/API';
+import RepositoryContentTests from '@/views/repository/content/Tests';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
@@ -155,6 +157,16 @@ export default new Router({
           path: ':ownerNickname/:slug/content/adjustment',
           name: 'repository-content-adjustments',
           component: RepositoryContentAdjustment,
+        },
+        {
+          path: ':ownerNickname/:slug/content/api',
+          name: 'repository-content-api',
+          component: RepositoryContentAPI,
+        },
+        {
+          path: ':ownerNickname/:slug/content/tests',
+          name: 'repository-content-tests',
+          component: RepositoryContentTests,
         },
         {
           path: ':ownerNickname/:slug/',
