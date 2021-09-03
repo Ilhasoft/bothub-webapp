@@ -13,8 +13,21 @@ export default {
   getQAKnowledgeBases(store, { repositoryUUID, page }) {
     return repository.getQAKnowledgeBases(repositoryUUID, page);
   },
+  createQAKnowledgeBase(store, { repositoryUUID, title }) {
+    return repository.createQAKnowledgeBase(repositoryUUID, title);
+  },
   getQAKnowledgeBase(store, { repositoryUUID, id }) {
     return repository.getQAKnowledgeBase(repositoryUUID, id);
+  },
+  getQATexts(store, { repositoryUUID, knowledgeBaseId, page }) {
+    console.log('action', page);
+    return repository.getQATexts(repositoryUUID, knowledgeBaseId, page);
+  },
+  createQAText(store, { repositoryUUID, knowledgeBaseId, text, language }) {
+    return repository.createQAText(repositoryUUID, knowledgeBaseId, text, language);
+  },
+  updateQAText(store, { repositoryUUID, knowledgeBaseId, id, text, language }) {
+    return repository.updateQAText(repositoryUUID, knowledgeBaseId, id, text, language);
   },
   getVersions(store, { limit, query }) {
     return repository.getVersions(limit, query);

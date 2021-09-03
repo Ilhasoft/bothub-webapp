@@ -40,6 +40,7 @@
             :iconRight="null"
             :disabled="false"
             :loading="submitting"
+            @click="saveText()"
           />
           <unnnicButton
             size="large"
@@ -56,7 +57,7 @@
               type="normal"
               placeholder=""
             >
-              <div slot="header">Português (Brasil)</div>
+              <div slot="header">{{}}</div>
               <option>None</option>
               <option>option1</option>
               <option>option2</option>
@@ -67,8 +68,10 @@
           </div>
       </section>   <!-- buttons and select -->
     </section>
-    <section >
-        <textarea name=""
+    <section>
+      {{ knowledgeBase.texts }}
+        <textarea v-if="knowledgeBase.texts[selectedLanguage]"
+          v-model="knowledgeBase.texts[selectedLanguage].value" name=""
           id="" cols="30" rows="10"
           class="repository-base-edit__textarea"
         >
@@ -93,15 +96,17 @@ export default {
       repositoryUUID: null,
       bases: [],
       submitting: false,
+      selectedLanguage: '',
       knowledgeBase: {
         title: '',
+        texts: {},
       },
     };
   },
   mounted() {
   },
   methods: {
-    ...mapActions(['getQAKnowledgeBase']),
+    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText']),
 
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
@@ -110,36 +115,89 @@ export default {
         });
       }
     },
+    async saveText(){
+      console.log('test', this.$route.name, this.$route.name === 'repository-content-bases-new');
+      if (this.$route.name === 'repository-content-bases-new') {
+        const response = await this.createQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          title: this.knowledgeBase.title,
+        });
+
+        this.$router.push({
+          name: 'repository-content-bases-edit',
+          params: {
+            id: response.data.id,
+          },
+        });
+      }
+
+      const data = {
+        id: this.knowledgeBase.texts[this.selectedLanguage].id,
+        repositoryUUID: this.repositoryUUID,
+        knowledgeBaseId: this.$route.params.id,
+        text: this.knowledgeBase.texts[this.selectedLanguage].value,
+        language: this.selectedLanguage,
+      };
+
+      if (data.id) {
+        const responseUpdateText = await this.updateQAText(data);
+      } else {
+        const responseCreateText = await this.createQAText(data);
+        this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
+      }
+    },
   },
   watch: {
     // eslint-disable-next-line
-    'repository.uuid'() {
-      if (!this.repository.uuid || this.repository.uuid === 'null') {
-        return false;
+    'repository.uuid': {
+      handler() {
+        if (!this.repository.uuid || this.repository.uuid === 'null') {
+          return false;
+        }
+
+        this.repositoryUUID = this.repository.uuid;
+
+        return true;
+      },
+
+      immediate: true,
+    },
+    async repositoryUUID() {
+      if (this.$route.name === 'repository-content-bases-edit') {
+        const response = await this.getQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          id: this.$route.params.id
+        });
+
+        const { title } = response.data;
+
+        this.knowledgeBase.title = title;
+        const responseText = await this.getQATexts({
+          repositoryUUID: this.repositoryUUID,
+          knowledgeBaseId: this.$route.params.id,
+          page: 0,
+        });
+
+        responseText.data.results.forEach(({ id, language, text }) => {
+          this.$set(this.knowledgeBase.texts, language, {
+            id,
+            value: text,
+          });
+        });
+      } else {
+        this.knowledgeBase.title = this.$t('webapp.home.no_description');
       }
 
-      this.repositoryUUID = this.repository.uuid;
+      this.selectedLanguage = this.repository.language;
     },
 
-    async repositoryUUID() {
-      const response = await this.getQAKnowledgeBase({
-        repositoryUUID: this.repositoryUUID,
-        id: this.$route.params.id
-      });
-
-      const { title } = response.data;
-
-      this.knowledgeBase.title = title;
-
-      // response.data.results.forEach(({ id, title }) => {
-      //   this.bases.push({
-      //     id,
-      //     name: title,
-      //     owner__nickname: 'Nickname',
-      //     available_languages: [1, 2],
-      //     description: 'description aqui',
-      //   });
-      // });
+    selectedLanguage() {
+      if (!this.knowledgeBase.texts[this.selectedLanguage]) {
+        this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
+          id: null,
+          value: '',
+        });
+      }
     },
   },
 }

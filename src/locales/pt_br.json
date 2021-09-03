@@ -308,7 +308,14 @@
         "adjustments_modal_alert_save": "Salvar alterações",
         "adjustments_modal_alert_discard": "Descartar alterações",
         "tests": "Teste bases de conhecimento",
-        "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas."
+        "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas.",
+        "api": "Integrar esta inteligência",
+        "api_subtitle": "Nossa API é compatível com diversas plataformas via integração por APIs REST. Para saber mais, acesse a documentação e a API explorer.",
+        "api_select": "Selecione a Base de Conhecimento e o idioma a serem integrados:",
+        "api_tabs": "Integrar ao Weni Fluxos ou Rapidpro",
+        "api_tabs_subtitle": "Insira os seguintes dados onde for solicitado na plataforma:",
+        "api_tabs_post_lang": "código do idioma",
+        "api_tabs_post_text": "texto para análise"
       }
     },
     "summary": {

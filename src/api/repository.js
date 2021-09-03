@@ -3,7 +3,6 @@ import request from './request';
 import utils from './utils';
 
 
-// https://api-ai-staging.weni.ai/v2/repository/qa/knowledge-base/
 export default {
 
   async getNewSchema() {
@@ -22,6 +21,12 @@ export default {
       },
     });
   },
+  createQAKnowledgeBase(repositoryUUID, title) {
+    return request.$http.post('v2/repository/qa/knowledge-base/', {
+      repository: repositoryUUID,
+      title,
+    });
+  },
   getQAKnowledgeBase(repositoryUUID, id) {
     return request.$http.get(`v2/repository/qa/knowledge-base/${id}/`, {
       params: {
@@ -29,7 +34,35 @@ export default {
       },
     });
   },
-  // https://api-ai-staging.weni.ai/v2/repository/qa/text/
+  getQATexts(repositoryUUID, knowledgeBaseId, page = 0) {
+    const limit = 20;
+    const offset = limit * page;
+    console.log('page', page, limit, offset);
+    return request.$http.get('v2/repository/qa/context/', {
+      params: {
+        repository_uuid: repositoryUUID,
+        knowledge_base_id: knowledgeBaseId,
+        limit,
+        offset,
+      },
+    });
+  },
+  createQAText(repositoryUUID, knowledgeBaseId, text, language) {
+    return request.$http.post('v2/repository/qa/context/', {
+      repository_uuid: repositoryUUID,
+      knowledge_base: knowledgeBaseId,
+      text,
+      language
+    });
+  },
+  updateQAText(repositoryUUID, knowledgeBaseId, id, text, language) {
+    return request.$http.put(`v2/repository/qa/context/${id}/`, {
+      repository_uuid: repositoryUUID,
+      knowledge_base: knowledgeBaseId,
+      text,
+      language
+    });
+  },
   getAll(limit = 20) {
     return new utils.Page('/repository/repositories/', limit);
   },
