@@ -19,8 +19,10 @@ export default {
   getQAKnowledgeBase(store, { repositoryUUID, id }) {
     return repository.getQAKnowledgeBase(repositoryUUID, id);
   },
+  deleteQAKnowledgeBase(store, { repositoryUUID, id }) {
+    return repository.deleteQAKnowledgeBase(repositoryUUID, id);
+  },
   getQATexts(store, { repositoryUUID, knowledgeBaseId, page }) {
-    console.log('action', page);
     return repository.getQATexts(repositoryUUID, knowledgeBaseId, page);
   },
   createQAText(store, { repositoryUUID, knowledgeBaseId, text, language }) {

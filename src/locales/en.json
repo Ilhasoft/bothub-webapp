@@ -314,7 +314,11 @@
         "api_tabs": "Integrate to Weni Flows or Rapidpro",
         "api_tabs_subtitle": "When asked, insert the following parameters on the platform:",
         "api_tabs_post_lang": "language_code",
-        "api_tabs_post_text": "Insert the text here"
+        "api_tabs_post_text": "Insert the text here",
+        "edit-base-notitle": "No title",
+        "edit-base-delete": "Delete base",
+        "edit-base-save": "Save",
+        "edit-base-test": "Test this base"
       }
     },
     "summary": {

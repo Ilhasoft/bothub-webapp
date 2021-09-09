@@ -34,10 +34,16 @@ export default {
       },
     });
   },
+  deleteQAKnowledgeBase(repositoryUUID, id) {
+    return request.$http.delete(`v2/repository/qa/knowledge-base/${id}/`, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
+    });
+  },
   getQATexts(repositoryUUID, knowledgeBaseId, page = 0) {
     const limit = 20;
     const offset = limit * page;
-    console.log('page', page, limit, offset);
     return request.$http.get('v2/repository/qa/context/', {
       params: {
         repository_uuid: repositoryUUID,
@@ -57,10 +63,13 @@ export default {
   },
   updateQAText(repositoryUUID, knowledgeBaseId, id, text, language) {
     return request.$http.put(`v2/repository/qa/context/${id}/`, {
-      repository_uuid: repositoryUUID,
       knowledge_base: knowledgeBaseId,
       text,
       language
+    }, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
     });
   },
   getAll(limit = 20) {

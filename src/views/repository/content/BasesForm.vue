@@ -31,6 +31,7 @@
             :iconRight="null"
             :disabled="false"
             :loading="false"
+            @click="openDeleteModal()"
           />
           <unnnicButton
             size="large"
@@ -69,7 +70,6 @@
       </section>   <!-- buttons and select -->
     </section>
     <section>
-      {{ knowledgeBase.texts }}
         <textarea v-if="knowledgeBase.texts[selectedLanguage]"
           v-model="knowledgeBase.texts[selectedLanguage].value" name=""
           id="" cols="30" rows="10"
@@ -77,23 +77,64 @@
         >
         </textarea>
     </section>
+
+    <modal
+      v-if="isDeleteModalOpen"
+      type="confirm"
+      :data="modalData"
+      @close="isDeleteModalOpen = false"
+    />
+    <unnnic-modal
+      :show-modal="openModal"
+      scheme='feedback-yellow'
+      modal-icon='alert-circle-1'
+      :text="$t('webapp.home.bases.adjustuments_modal_alert_title')"
+      :description="$t('webapp.home.bases.adjustments_modal_alert_description')"
+      @close="openModal = false"
+    >
+      <unnnic-button
+        slot="options"
+        class="create-repository__container__button"
+        type="terciary"
+        @click="discardUpdate()"
+      >
+      {{ $t("webapp.home.bases.adjustments_modal_alert_discard") }}
+      </unnnic-button>
+      <unnnic-button
+        slot="options"
+        class="create-repository__container__button"
+        type="primary"
+        scheme="feedback-yellow"
+        @click="saveClose()"
+        :loading="submitting"
+      >
+        {{ $t("webapp.home.bases.adjustments_modal_alert_save") }}
+      </unnnic-button>
+    </unnnic-modal>
   </repository-view-base>
 </template>
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import Modal from '@/components/repository/CreateRepository/Modal'
 import RepositoryBase from '../Base';
 import { mapActions } from 'vuex';
+import router from '@/router/index'
 
 export default {
   name: 'RepositoryBaseEdit',
   components: {
     RepositoryViewBase,
+    Modal,
   },
   extends: RepositoryBase,
   data() {
     return {
       repositoryUUID: null,
+      isDeleteModalOpen: false,
+      isSavedModalOpen: false,
+      openModal: false,
+      localNext: null,
       bases: [],
       submitting: false,
       selectedLanguage: '',
@@ -101,12 +142,12 @@ export default {
         title: '',
         texts: {},
       },
+      modalData: {},
+      destroyVerifying: null,
     };
   },
-  mounted() {
-  },
   methods: {
-    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText']),
+    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText', 'deleteQAKnowledgeBase']),
 
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
@@ -115,8 +156,33 @@ export default {
         });
       }
     },
+    openDeleteModal(){
+      this.isDeleteModalOpen = true;
+
+      this.modalData = {
+        icon: 'alert-circle-1',
+        scheme: 'feedback-red',
+        persistent: true,
+        title: 'LALA',
+        description: 'Enter <b>name</b> to confirm exclusivity',
+        validate: {
+          label: 'Enter <b>name</b> to confirm exclusivity',
+          placeholder: 'placeholder aqui',
+          text: this.knowledgeBase.title,
+        },
+        cancelText: 'cancelar botão',
+        confirmText: 'confirmar botão',
+        onConfirm: async (justClose, { setLoading }) => {
+          setLoading(true);
+          await this.deleteBase();
+          setLoading(false);
+          justClose();
+
+          this.routerHandle('repository-content-bases');
+        }
+      };
+    },
     async saveText(){
-      console.log('test', this.$route.name, this.$route.name === 'repository-content-bases-new');
       if (this.$route.name === 'repository-content-bases-new') {
         const response = await this.createQAKnowledgeBase({
           repositoryUUID: this.repositoryUUID,
@@ -139,19 +205,45 @@ export default {
         language: this.selectedLanguage,
       };
 
+      this.submitting = true;
+
       if (data.id) {
         const responseUpdateText = await this.updateQAText(data);
       } else {
         const responseCreateText = await this.createQAText(data);
         this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
       }
+
+      this.submitting = false;
     },
+    async deleteBase(){
+      const responseDeleteBase = await this.deleteQAKnowledgeBase({
+        repositoryUUID: this.repositoryUUID,
+        id: this.$route.params.id
+      });
+    },
+    discardUpdate() {
+      this.openModal = false;
+
+      if (this.localNext) {
+        this.localNext();
+      }
+    },
+    async saveClose() {
+      await this.saveText()
+      this.openModal = false
+
+      if (this.localNext) {
+        this.localNext();
+      }
+    }
   },
   watch: {
     // eslint-disable-next-line
-    'repository.uuid': {
+    'repository': {
       handler() {
-        if (!this.repository.uuid || this.repository.uuid === 'null') {
+        console.log('chamou');
+        if (!this.repository || !this.repository.uuid || this.repository.uuid === 'null') {
           return false;
         }
 
@@ -160,6 +252,7 @@ export default {
         return true;
       },
 
+      deep: true,
       immediate: true,
     },
     async repositoryUUID() {
@@ -185,7 +278,7 @@ export default {
           });
         });
       } else {
-        this.knowledgeBase.title = this.$t('webapp.home.no_description');
+        this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
       }
 
       this.selectedLanguage = this.repository.language;
@@ -199,6 +292,25 @@ export default {
         });
       }
     },
+  },
+  computed: {
+    hasUpdates() {
+      return true;
+    },
+  },
+  mounted() {
+    this.destroyVerifying = router.beforeEach((to, from, next) => {
+      if (this.hasUpdates) {
+        this.openModal = true;
+        this.localNext = next;
+      } else {
+        next();
+      }
+    });
+  },
+
+  destroyed() {
+    this.destroyVerifying();
   },
 }
 </script>
