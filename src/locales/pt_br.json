@@ -319,7 +319,14 @@
         "edit-base-notitle": "Sem título",
         "edit-base-delete": "Excluir base",
         "edit-base-save": "Salvar",
-        "edit-base-test": "Testar base"
+        "edit-base-test": "Testar base",
+        "edit-base_modal_delete_title": "Excluir a base",
+        "edit-base_modal_delete_text": "Excluir esta base removerá o texto nela inserido.  Não é possível desfazer esta ação.",
+        "edit-base_modal_delete_placeholder": "Confirme o nome da base de conhecimento para removê-la.",
+        "edit-base_modal_delete_button_confirm": "Excluir base",
+        "edit-base_modal_delete_button_cancel": "Cancelar",
+        "edit-base_modal_delete_button_validation": "Digite ${this.knowledgeBase.title} para confirmar a exclusão"
+
       }
     },
     "summary": {

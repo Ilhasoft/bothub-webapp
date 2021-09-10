@@ -1,26 +1,35 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
     <section class="repository-base-edit">
-      <section>
-        <div class="repository-base-edit__header">
-           <span
+      <section class="repository-base-edit__header">
+        <span
             @click="routerHandle('repository-content-bases')"
           >
             <unnnic-icon
               icon="keyboard-arrow-left-1" size="md"
             />
           </span>
-          <h1 class="repository-base-edit__title">{{ knowledgeBase.title }}</h1>
-          <unnnicButton
-            size="large"
-            text=""
-            type="terciary"
-            iconRight="pencil-write-1"
-            :disabled="false"
-            :loading="false"
-          />
+        <div>
+          <div class="repository-base-edit__header--content">
+            <h1 class="repository-base-edit__title">
+              <input type="text" :value= knowledgeBase.title
+                placeholder="Sem título" id="focusInput"
+                ref="focusInput"
+                contenteditable="true"
+              >
+            </h1>
+            <unnnicButton
+              size="medium"
+              text=""
+              type="terciary"
+              iconRight="pencil-write-1"
+              :disabled="false"
+              :loading="false"
+              @click.native="editTitleInput()"
+            />
+          </div>
+          <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
         </div>
-        <p class="repository-base-edit__text">Salvo por último hoje às 16h00</p>
       </section>
       <section class="repository-base-edit__header">
           <unnnicButton
@@ -163,15 +172,17 @@ export default {
         icon: 'alert-circle-1',
         scheme: 'feedback-red',
         persistent: true,
-        title: 'LALA',
-        description: 'Enter <b>name</b> to confirm exclusivity',
+        title: `${this.$t('webapp.home.bases.edit-base_modal_delete_title')} "${this.knowledgeBase.title}"?`,
+        description: this.$t('webapp.home.bases.edit-base_modal_delete_text'),
         validate: {
-          label: 'Enter <b>name</b> to confirm exclusivity',
-          placeholder: 'placeholder aqui',
+          label: ` 
+            Type <b>${this.knowledgeBase.title}</b> to confirm the deletion
+          `,
+          placeholder: this.$t('webapp.home.bases.edit-base_modal_delete_placeholder'),
           text: this.knowledgeBase.title,
         },
-        cancelText: 'cancelar botão',
-        confirmText: 'confirmar botão',
+        cancelText: this.$t('webapp.home.bases.edit-base_modal_delete_button_cancel'),
+        confirmText: this.$t('webapp.home.bases.edit-base_modal_delete_button_confirm'),
         onConfirm: async (justClose, { setLoading }) => {
           setLoading(true);
           await this.deleteBase();
@@ -236,13 +247,16 @@ export default {
       if (this.localNext) {
         this.localNext();
       }
+    },
+    editTitleInput() {
+      this.$refs.focusInput.focus()
+      // falta salvar a alteração
     }
   },
   watch: {
     // eslint-disable-next-line
     'repository': {
       handler() {
-        console.log('chamou');
         if (!this.repository || !this.repository.uuid || this.repository.uuid === 'null') {
           return false;
         }
@@ -329,15 +343,25 @@ export default {
   &__header{
     display: flex;
     align-items: center;
-
+    &--content{
+      display: flex;
+      align-items: center;
+    }
     span{
       cursor: pointer;
       margin-right: 1rem;
     }
   }
     &__title{
-      font-family: $unnnic-font-family-primary;
-      font-size: $unnnic-font-size-title-sm;
+      input{
+        border: none;
+        font-family: $unnnic-font-family-primary;
+        font-size: $unnnic-font-size-title-sm;
+        &::placeholder{
+          font-family: $unnnic-font-family-primary;
+          font-size: $unnnic-font-size-title-sm;
+        }
+      }
     }
 
     &__text{

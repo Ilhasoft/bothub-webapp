@@ -318,7 +318,12 @@
         "edit-base-notitle": "No title",
         "edit-base-delete": "Delete base",
         "edit-base-save": "Save",
-        "edit-base-test": "Test this base"
+        "edit-base-test": "Test this base",
+        "edit-base_modal_delete_title": "Delete the base",
+        "edit-base_modal_delete_text": "Deleting this base will remove its text. It is not possible to undo this action.",
+        "edit-base_modal_delete_placeholder": "Confirm the knowledge base name to remove it",
+        "edit-base_modal_delete_button_confirm": "Delete base",
+        "edit-base_modal_delete_button_cancel": "Cancel"
       }
     },
     "summary": {
