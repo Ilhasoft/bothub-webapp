@@ -308,7 +308,25 @@
         "adjustments_modal_alert_save": "Salvar alterações",
         "adjustments_modal_alert_discard": "Descartar alterações",
         "tests": "Teste bases de conhecimento",
-        "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas."
+        "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas.",
+        "api": "Integrar esta inteligência",
+        "api_subtitle": "Nossa API é compatível com diversas plataformas via integração por APIs REST. Para saber mais, acesse a documentação e a API explorer.",
+        "api_select": "Selecione a Base de Conhecimento:",
+        "api_tabs": "Integrar ao Weni Fluxos ou Rapidpro",
+        "api_tabs_subtitle": "Insira os seguintes dados onde for solicitado na plataforma:",
+        "api_tabs_post_lang": "código do idioma",
+        "api_tabs_post_text": "texto para análise",
+        "edit-base-notitle": "Sem título",
+        "edit-base-delete": "Excluir base",
+        "edit-base-save": "Salvar",
+        "edit-base-test": "Testar base",
+        "edit-base_modal_delete_title": "Excluir a base",
+        "edit-base_modal_delete_text": "Excluir esta base removerá o texto nela inserido.  Não é possível desfazer esta ação.",
+        "edit-base_modal_delete_placeholder": "Confirme o nome da base de conhecimento para removê-la.",
+        "edit-base_modal_delete_button_confirm": "Excluir base",
+        "edit-base_modal_delete_button_cancel": "Cancelar",
+        "edit-base_modal_delete_button_validation": "Digite ${this.knowledgeBase.title} para confirmar a exclusão"
+
       }
     },
     "summary": {

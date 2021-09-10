@@ -1,26 +1,35 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
     <section class="repository-base-edit">
-      <section>
-        <div class="repository-base-edit__header">
-           <span
+      <section class="repository-base-edit__header">
+        <span
             @click="routerHandle('repository-content-bases')"
           >
             <unnnic-icon
               icon="keyboard-arrow-left-1" size="md"
             />
           </span>
-          <h1 class="repository-base-edit__title">{{ knowledgeBase.title }}</h1>
-          <unnnicButton
-            size="large"
-            text=""
-            type="terciary"
-            iconRight="pencil-write-1"
-            :disabled="false"
-            :loading="false"
-          />
+        <div>
+          <div class="repository-base-edit__header--content">
+            <h1 class="repository-base-edit__title">
+              <input type="text" :value= knowledgeBase.title
+                placeholder="Sem título" id="focusInput"
+                ref="focusInput"
+                contenteditable="true"
+              >
+            </h1>
+            <unnnicButton
+              size="medium"
+              text=""
+              type="terciary"
+              iconRight="pencil-write-1"
+              :disabled="false"
+              :loading="false"
+              @click.native="editTitleInput()"
+            />
+          </div>
+          <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
         </div>
-        <p class="repository-base-edit__text">Salvo por último hoje às 16h00</p>
       </section>
       <section class="repository-base-edit__header">
           <unnnicButton
@@ -31,6 +40,7 @@
             :iconRight="null"
             :disabled="false"
             :loading="false"
+            @click="openDeleteModal()"
           />
           <unnnicButton
             size="large"
@@ -40,6 +50,7 @@
             :iconRight="null"
             :disabled="false"
             :loading="submitting"
+            @click="saveText()"
           />
           <unnnicButton
             size="large"
@@ -56,7 +67,7 @@
               type="normal"
               placeholder=""
             >
-              <div slot="header">Português (Brasil)</div>
+              <div slot="header">{{}}</div>
               <option>None</option>
               <option>option1</option>
               <option>option2</option>
@@ -67,41 +78,85 @@
           </div>
       </section>   <!-- buttons and select -->
     </section>
-    <section >
-        <textarea name=""
+    <section>
+        <textarea v-if="knowledgeBase.texts[selectedLanguage]"
+          v-model="knowledgeBase.texts[selectedLanguage].value" name=""
           id="" cols="30" rows="10"
           class="repository-base-edit__textarea"
         >
         </textarea>
     </section>
+
+    <modal
+      v-if="isDeleteModalOpen"
+      type="confirm"
+      :data="modalData"
+      @close="isDeleteModalOpen = false"
+    />
+    <unnnic-modal
+      :show-modal="openModal"
+      scheme='feedback-yellow'
+      modal-icon='alert-circle-1'
+      :text="$t('webapp.home.bases.adjustuments_modal_alert_title')"
+      :description="$t('webapp.home.bases.adjustments_modal_alert_description')"
+      @close="openModal = false"
+    >
+      <unnnic-button
+        slot="options"
+        class="create-repository__container__button"
+        type="terciary"
+        @click="discardUpdate()"
+      >
+      {{ $t("webapp.home.bases.adjustments_modal_alert_discard") }}
+      </unnnic-button>
+      <unnnic-button
+        slot="options"
+        class="create-repository__container__button"
+        type="primary"
+        scheme="feedback-yellow"
+        @click="saveClose()"
+        :loading="submitting"
+      >
+        {{ $t("webapp.home.bases.adjustments_modal_alert_save") }}
+      </unnnic-button>
+    </unnnic-modal>
   </repository-view-base>
 </template>
 
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
+import Modal from '@/components/repository/CreateRepository/Modal'
 import RepositoryBase from '../Base';
 import { mapActions } from 'vuex';
+import router from '@/router/index'
 
 export default {
   name: 'RepositoryBaseEdit',
   components: {
     RepositoryViewBase,
+    Modal,
   },
   extends: RepositoryBase,
   data() {
     return {
       repositoryUUID: null,
+      isDeleteModalOpen: false,
+      isSavedModalOpen: false,
+      openModal: false,
+      localNext: null,
       bases: [],
       submitting: false,
+      selectedLanguage: '',
       knowledgeBase: {
         title: '',
+        texts: {},
       },
+      modalData: {},
+      destroyVerifying: null,
     };
   },
-  mounted() {
-  },
   methods: {
-    ...mapActions(['getQAKnowledgeBase']),
+    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText', 'deleteQAKnowledgeBase']),
 
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
@@ -110,37 +165,166 @@ export default {
         });
       }
     },
-  },
-  watch: {
-    // eslint-disable-next-line
-    'repository.uuid'() {
-      if (!this.repository.uuid || this.repository.uuid === 'null') {
-        return false;
+    openDeleteModal(){
+      this.isDeleteModalOpen = true;
+
+      this.modalData = {
+        icon: 'alert-circle-1',
+        scheme: 'feedback-red',
+        persistent: true,
+        title: `${this.$t('webapp.home.bases.edit-base_modal_delete_title')} "${this.knowledgeBase.title}"?`,
+        description: this.$t('webapp.home.bases.edit-base_modal_delete_text'),
+        validate: {
+          label: ` 
+            Type <b>${this.knowledgeBase.title}</b> to confirm the deletion
+          `,
+          placeholder: this.$t('webapp.home.bases.edit-base_modal_delete_placeholder'),
+          text: this.knowledgeBase.title,
+        },
+        cancelText: this.$t('webapp.home.bases.edit-base_modal_delete_button_cancel'),
+        confirmText: this.$t('webapp.home.bases.edit-base_modal_delete_button_confirm'),
+        onConfirm: async (justClose, { setLoading }) => {
+          setLoading(true);
+          await this.deleteBase();
+          setLoading(false);
+          justClose();
+
+          this.routerHandle('repository-content-bases');
+        }
+      };
+    },
+    async saveText(){
+      if (this.$route.name === 'repository-content-bases-new') {
+        const response = await this.createQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          title: this.knowledgeBase.title,
+        });
+
+        this.$router.push({
+          name: 'repository-content-bases-edit',
+          params: {
+            id: response.data.id,
+          },
+        });
       }
 
-      this.repositoryUUID = this.repository.uuid;
-    },
+      const data = {
+        id: this.knowledgeBase.texts[this.selectedLanguage].id,
+        repositoryUUID: this.repositoryUUID,
+        knowledgeBaseId: this.$route.params.id,
+        text: this.knowledgeBase.texts[this.selectedLanguage].value,
+        language: this.selectedLanguage,
+      };
 
-    async repositoryUUID() {
-      const response = await this.getQAKnowledgeBase({
+      this.submitting = true;
+
+      if (data.id) {
+        const responseUpdateText = await this.updateQAText(data);
+      } else {
+        const responseCreateText = await this.createQAText(data);
+        this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
+      }
+
+      this.submitting = false;
+    },
+    async deleteBase(){
+      const responseDeleteBase = await this.deleteQAKnowledgeBase({
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
-
-      const { title } = response.data;
-
-      this.knowledgeBase.title = title;
-
-      // response.data.results.forEach(({ id, title }) => {
-      //   this.bases.push({
-      //     id,
-      //     name: title,
-      //     owner__nickname: 'Nickname',
-      //     available_languages: [1, 2],
-      //     description: 'description aqui',
-      //   });
-      // });
     },
+    discardUpdate() {
+      this.openModal = false;
+
+      if (this.localNext) {
+        this.localNext();
+      }
+    },
+    async saveClose() {
+      await this.saveText()
+      this.openModal = false
+
+      if (this.localNext) {
+        this.localNext();
+      }
+    },
+    editTitleInput() {
+      this.$refs.focusInput.focus()
+      // falta salvar a alteração
+    }
+  },
+  watch: {
+    // eslint-disable-next-line
+    'repository': {
+      handler() {
+        if (!this.repository || !this.repository.uuid || this.repository.uuid === 'null') {
+          return false;
+        }
+
+        this.repositoryUUID = this.repository.uuid;
+
+        return true;
+      },
+
+      deep: true,
+      immediate: true,
+    },
+    async repositoryUUID() {
+      if (this.$route.name === 'repository-content-bases-edit') {
+        const response = await this.getQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          id: this.$route.params.id
+        });
+
+        const { title } = response.data;
+
+        this.knowledgeBase.title = title;
+        const responseText = await this.getQATexts({
+          repositoryUUID: this.repositoryUUID,
+          knowledgeBaseId: this.$route.params.id,
+          page: 0,
+        });
+
+        responseText.data.results.forEach(({ id, language, text }) => {
+          this.$set(this.knowledgeBase.texts, language, {
+            id,
+            value: text,
+          });
+        });
+      } else {
+        this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
+      }
+
+      this.selectedLanguage = this.repository.language;
+    },
+
+    selectedLanguage() {
+      if (!this.knowledgeBase.texts[this.selectedLanguage]) {
+        this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
+          id: null,
+          value: '',
+        });
+      }
+    },
+  },
+  computed: {
+    hasUpdates() {
+      return true;
+    },
+  },
+  mounted() {
+    this.destroyVerifying = router.beforeEach((to, from, next) => {
+      if (this.hasUpdates) {
+        this.openModal = true;
+        this.localNext = next;
+      } else {
+        next();
+      }
+    });
+  },
+
+  destroyed() {
+    this.destroyVerifying();
   },
 }
 </script>
@@ -159,15 +343,25 @@ export default {
   &__header{
     display: flex;
     align-items: center;
-
+    &--content{
+      display: flex;
+      align-items: center;
+    }
     span{
       cursor: pointer;
       margin-right: 1rem;
     }
   }
     &__title{
-      font-family: $unnnic-font-family-primary;
-      font-size: $unnnic-font-size-title-sm;
+      input{
+        border: none;
+        font-family: $unnnic-font-family-primary;
+        font-size: $unnnic-font-size-title-sm;
+        &::placeholder{
+          font-family: $unnnic-font-family-primary;
+          font-size: $unnnic-font-size-title-sm;
+        }
+      }
     }
 
     &__text{

@@ -318,9 +318,6 @@ export default {
   },
   mounted() {
     this.getCategories();
-
-    // console.log('router', router);
-
     router.beforeEach((to, from, next) => {
       if (this.hasUpdates) {
         this.openModal = true;
@@ -328,9 +325,6 @@ export default {
       } else {
         next();
       }
-      // console.log('to', to);
-      // console.log('from', from);
-      // console.log('next', next);
     });
   },
 }

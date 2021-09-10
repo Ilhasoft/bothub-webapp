@@ -307,7 +307,23 @@
         "adjustments_modal_alert_save": "Save changes",
         "adjustments_modal_alert_discard": "Discard changes",
         "tests": "Test knowledge bases",
-        "tests_subtitle": "Test knowledge bases asking them questions and observing their answers."
+        "tests_subtitle": "Test knowledge bases asking them questions and observing their answers.",
+        "api": "Integrate this intelligence",
+        "api_subtitle": "Our API is compatible with many platforms via API REST integration. To know further, access our documentation and the API explorer.",
+        "api_select": "Select the knowledge base and the language to be integrated:",
+        "api_tabs": "Integrate to Weni Flows or Rapidpro",
+        "api_tabs_subtitle": "When asked, insert the following parameters on the platform:",
+        "api_tabs_post_lang": "language_code",
+        "api_tabs_post_text": "Insert the text here",
+        "edit-base-notitle": "No title",
+        "edit-base-delete": "Delete base",
+        "edit-base-save": "Save",
+        "edit-base-test": "Test this base",
+        "edit-base_modal_delete_title": "Delete the base",
+        "edit-base_modal_delete_text": "Deleting this base will remove its text. It is not possible to undo this action.",
+        "edit-base_modal_delete_placeholder": "Confirm the knowledge base name to remove it",
+        "edit-base_modal_delete_button_confirm": "Delete base",
+        "edit-base_modal_delete_button_cancel": "Cancel"
       }
     },
     "summary": {

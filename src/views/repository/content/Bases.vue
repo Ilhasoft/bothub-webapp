@@ -127,8 +127,6 @@ export default {
         page: 0,
       });
 
-      console.log('res', response);
-
       response.data.results.forEach(({ id, title }) => {
         this.bases.push({
           id,
