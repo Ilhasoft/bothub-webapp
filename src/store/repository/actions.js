@@ -16,6 +16,9 @@ export default {
   createQAKnowledgeBase(store, { repositoryUUID, title }) {
     return repository.createQAKnowledgeBase(repositoryUUID, title);
   },
+  editQAKnowledgeBase(store, { repositoryUUID, title, id }){
+    return repository.editQAKnowledgeBase(repositoryUUID, title, id);
+  },
   getQAKnowledgeBase(store, { repositoryUUID, id }) {
     return repository.getQAKnowledgeBase(repositoryUUID, id);
   },

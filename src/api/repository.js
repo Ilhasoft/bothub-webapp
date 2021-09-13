@@ -27,6 +27,15 @@ export default {
       title,
     });
   },
+  editQAKnowledgeBase(repositoryUUID, title, id){
+    return request.$http.patch(`v2/repository/qa/knowledge-base/${id}/`, {
+      title,
+    }, {
+      params: {
+        repository_uuid: repositoryUUID
+      },
+    });
+  },
   getQAKnowledgeBase(repositoryUUID, id) {
     return request.$http.get(`v2/repository/qa/knowledge-base/${id}/`, {
       params: {

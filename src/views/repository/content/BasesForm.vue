@@ -6,26 +6,24 @@
             @click="routerHandle('repository-content-bases')"
           >
             <unnnic-icon
-              icon="keyboard-arrow-left-1" size="md"
+              icon="keyboard-arrow-left-1"
             />
           </span>
         <div>
           <div class="repository-base-edit__header--content">
-            <h1 class="repository-base-edit__title">
-              <input type="text" :value= knowledgeBase.title
-                placeholder="Sem título" id="focusInput"
-                ref="focusInput"
-                contenteditable="true"
-              >
-            </h1>
+            <h1
+              ref="focusInput"
+              class="repository-base-edit__title"
+              contenteditable="true"
+              @input="onTitleChange"
+            >{{ provisoryTitle }}</h1>
             <unnnicButton
-              size="medium"
               text=""
               type="terciary"
               iconRight="pencil-write-1"
               :disabled="false"
               :loading="false"
-              @click.native="editTitleInput()"
+              @click.native="editTitle()"
             />
           </div>
           <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
@@ -33,7 +31,7 @@
       </section>
       <section class="repository-base-edit__header">
           <unnnicButton
-            size="large"
+            size="lg"
             text="Excluir base"
             type="terciary"
             iconLeft="bin-1-1"
@@ -43,7 +41,7 @@
             @click="openDeleteModal()"
           />
           <unnnicButton
-            size="large"
+            size="lg"
             text="Salvar"
             type="terciary"
             iconLeft="floppy-disk-1"
@@ -53,7 +51,7 @@
             @click="saveText()"
           />
           <unnnicButton
-            size="large"
+            size="lg"
             text="Testar base"
             type="terciary"
             iconLeft="messages-bubble-4"
@@ -62,19 +60,38 @@
             :loading="false"
           />
           <div>
-            <unnnicSelect
+            <!-- <unnnicSelect
               size="md"
               type="normal"
               placeholder=""
             >
               <div slot="header">{{}}</div>
               <option>None</option>
-              <option>option1</option>
-              <option>option2</option>
-              <option>option3</option>
-              <option>option4</option>
-              <option>option5</option>
-            </unnnicSelect>
+            </unnnicSelect> -->
+
+            <unnnic-input
+              disabled
+              :value="languages[selectedLanguage]"
+              icon-right="arrow-button-down-1"
+            />
+
+            <!-- <unnnic-select
+              class="unnic--clickable"
+              size="md"
+              v-model="selectedLanguage"
+              search
+              :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
+              disable
+            >
+              <option
+                v-for="(language, key) in languages"
+                :value="key"
+                :key="key"
+                size="md"
+              >
+              {{language}}
+              </option>
+            </unnnic-select> -->
           </div>
       </section>   <!-- buttons and select -->
     </section>
@@ -128,6 +145,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import Modal from '@/components/repository/CreateRepository/Modal'
 import RepositoryBase from '../Base';
 import { mapActions } from 'vuex';
+import { LANGUAGES } from '@/utils/index';
 import router from '@/router/index'
 
 export default {
@@ -153,11 +171,23 @@ export default {
       },
       modalData: {},
       destroyVerifying: null,
+      provisoryTitle: '',
+      languages: LANGUAGES,
     };
   },
   methods: {
-    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText', 'deleteQAKnowledgeBase']),
-
+    ...mapActions([
+      'createQAKnowledgeBase',
+      'getQAKnowledgeBase',
+      'getQATexts',
+      'createQAText',
+      'updateQAText',
+      'deleteQAKnowledgeBase',
+      'editQAKnowledgeBase'
+    ]),
+    onTitleChange(event) {
+      this.knowledgeBase.title = event.srcElement.textContent;
+    },
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
         this.$router.push({
@@ -220,6 +250,11 @@ export default {
 
       if (data.id) {
         const responseUpdateText = await this.updateQAText(data);
+        const responseEditKnowledgeBase = await this.editQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          id: this.$route.params.id,
+          title: this.knowledgeBase.title,
+        });
       } else {
         const responseCreateText = await this.createQAText(data);
         this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
@@ -248,20 +283,22 @@ export default {
         this.localNext();
       }
     },
-    editTitleInput() {
+    editTitle() {
       this.$refs.focusInput.focus()
-      // falta salvar a alteração
     }
   },
   watch: {
     // eslint-disable-next-line
     'repository': {
       handler() {
-        if (!this.repository || !this.repository.uuid || this.repository.uuid === 'null') {
+        if (!this.repository?.language || !this.repository?.uuid || this.repository?.uuid === 'null') {
           return false;
         }
 
         this.repositoryUUID = this.repository.uuid;
+        this.selectedLanguage = this.repository.language;
+
+        console.log('changed this.repository', this.repository?.uuid, this.repository?.language);
 
         return true;
       },
@@ -279,6 +316,7 @@ export default {
         const { title } = response.data;
 
         this.knowledgeBase.title = title;
+        this.provisoryTitle = title;
         const responseText = await this.getQATexts({
           repositoryUUID: this.repositoryUUID,
           knowledgeBaseId: this.$route.params.id,
@@ -289,13 +327,13 @@ export default {
           this.$set(this.knowledgeBase.texts, language, {
             id,
             value: text,
+            oldValue: text,
           });
         });
       } else {
+        console.log('cjegou aqui', this.repository, this.repository.language)
         this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
       }
-
-      this.selectedLanguage = this.repository.language;
     },
 
     selectedLanguage() {
@@ -303,13 +341,21 @@ export default {
         this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
           id: null,
           value: '',
+          oldValue: '',
         });
       }
     },
   },
   computed: {
     hasUpdates() {
-      return true;
+      if (this.$route.name === 'repository-content-bases-new') {
+        return false;
+      }
+      return Object.keys(this.knowledgeBase.texts)
+        .some(
+          (language) => this.knowledgeBase.texts[language].value
+          !== this.knowledgeBase.texts[language].oldValue
+        );
     },
   },
   mounted() {
@@ -353,16 +399,10 @@ export default {
     }
   }
     &__title{
-      input{
         border: none;
         font-family: $unnnic-font-family-primary;
         font-size: $unnnic-font-size-title-sm;
-        &::placeholder{
-          font-family: $unnnic-font-family-primary;
-          font-size: $unnnic-font-size-title-sm;
-        }
       }
-    }
 
     &__text{
       font-family: $unnnic-font-family-secondary;
