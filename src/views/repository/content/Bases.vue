@@ -107,6 +107,10 @@ export default {
     ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
 
     getAllCategories() {
+      if (!this.repository.categories_list) {
+        return [];
+      }
+
       const categories = this.repository.categories_list.map(category => category.name);
       return categories;
     }

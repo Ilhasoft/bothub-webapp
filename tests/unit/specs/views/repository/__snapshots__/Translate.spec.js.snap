@@ -1,9 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Translate.vue renders correctly 1`] = `
-<repository-view-base-stub quicktest="true">
-  <!---->
-  <!---->
+<repository-view-base-stub repository="[object Object]" quicktest="true">
+  <div>
+    <div>
+      <b-notification role="alert" class="is-info">
+        some specific text
+      </b-notification>
+      <login-form-stub hideforgotpassword="true"></login-form-stub>
+    </div>
+  </div>
+  <translate-token-modal-stub repositoryuuid="" urlgenerator="token => {
+          /* istanbul ignore next */
+          cov_ulm2v4grh.f[2]++;
+          const route =
+          /* istanbul ignore next */
+          (cov_ulm2v4grh.s[21]++, this.$router.resolve({
+            name: 'repository-translate-external',
+            params: {
+              ownerNickname: this.repository.owner__nickname,
+              slug: this.repository.slug,
+              token
+            }
+          }).href);
+
+          /* istanbul ignore next */
+          cov_ulm2v4grh.s[22]++;
+          return \`\${window.location.origin}\${route}\`;
+        }"></translate-token-modal-stub>
   <!---->
 </repository-view-base-stub>
 `;

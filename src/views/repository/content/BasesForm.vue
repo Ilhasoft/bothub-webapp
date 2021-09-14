@@ -24,6 +24,7 @@
               :disabled="false"
               :loading="false"
               @click.native="editTitle()"
+              class="repository-base-edit__header__button"
             />
           </div>
           <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
@@ -31,7 +32,7 @@
       </section>
       <section class="repository-base-edit__header">
           <unnnicButton
-            size="lg"
+            size="large"
             text="Excluir base"
             type="terciary"
             iconLeft="bin-1-1"
@@ -41,7 +42,7 @@
             @click="openDeleteModal()"
           />
           <unnnicButton
-            size="lg"
+            size="large"
             text="Salvar"
             type="terciary"
             iconLeft="floppy-disk-1"
@@ -51,7 +52,7 @@
             @click="saveText()"
           />
           <unnnicButton
-            size="lg"
+            size="large"
             text="Testar base"
             type="terciary"
             iconLeft="messages-bubble-4"
@@ -167,6 +168,7 @@ export default {
       selectedLanguage: '',
       knowledgeBase: {
         title: '',
+        oldTitle: '',
         texts: {},
       },
       modalData: {},
@@ -230,12 +232,16 @@ export default {
           title: this.knowledgeBase.title,
         });
 
+        this.knowledgeBase.oldTitle = response.data.title;
+
         this.$router.push({
           name: 'repository-content-bases-edit',
           params: {
             id: response.data.id,
           },
         });
+
+        this.init();
       }
 
       const data = {
@@ -249,15 +255,22 @@ export default {
       this.submitting = true;
 
       if (data.id) {
-        const responseUpdateText = await this.updateQAText(data);
+        if (!data.text) {
+          const responseUpdateText = await this.updateQAText(data);
+          this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseUpdateText.data.text;
+        }
+
         const responseEditKnowledgeBase = await this.editQAKnowledgeBase({
           repositoryUUID: this.repositoryUUID,
           id: this.$route.params.id,
           title: this.knowledgeBase.title,
         });
-      } else {
+
+        this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
+      } else if (!data.text) {
         const responseCreateText = await this.createQAText(data);
         this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
+        this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseCreateText.data.text;
       }
 
       this.submitting = false;
@@ -267,6 +280,8 @@ export default {
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
+
+      this.destroyVerifying();
     },
     discardUpdate() {
       this.openModal = false;
@@ -285,7 +300,31 @@ export default {
     },
     editTitle() {
       this.$refs.focusInput.focus()
-    }
+    },
+    async init() {
+      const response = await this.getQAKnowledgeBase({
+        repositoryUUID: this.repositoryUUID,
+        id: this.$route.params.id
+      });
+
+      const { title } = response.data;
+
+      this.knowledgeBase.title = title;
+      this.provisoryTitle = title;
+      const responseText = await this.getQATexts({
+        repositoryUUID: this.repositoryUUID,
+        knowledgeBaseId: this.$route.params.id,
+        page: 0,
+      });
+
+      responseText.data.results.forEach(({ id, language, text }) => {
+        this.$set(this.knowledgeBase.texts, language, {
+          id,
+          value: text,
+          oldValue: text,
+        });
+      });
+    },
   },
   watch: {
     // eslint-disable-next-line
@@ -298,8 +337,6 @@ export default {
         this.repositoryUUID = this.repository.uuid;
         this.selectedLanguage = this.repository.language;
 
-        console.log('changed this.repository', this.repository?.uuid, this.repository?.language);
-
         return true;
       },
 
@@ -308,30 +345,8 @@ export default {
     },
     async repositoryUUID() {
       if (this.$route.name === 'repository-content-bases-edit') {
-        const response = await this.getQAKnowledgeBase({
-          repositoryUUID: this.repositoryUUID,
-          id: this.$route.params.id
-        });
-
-        const { title } = response.data;
-
-        this.knowledgeBase.title = title;
-        this.provisoryTitle = title;
-        const responseText = await this.getQATexts({
-          repositoryUUID: this.repositoryUUID,
-          knowledgeBaseId: this.$route.params.id,
-          page: 0,
-        });
-
-        responseText.data.results.forEach(({ id, language, text }) => {
-          this.$set(this.knowledgeBase.texts, language, {
-            id,
-            value: text,
-            oldValue: text,
-          });
-        });
+        this.init();
       } else {
-        console.log('cjegou aqui', this.repository, this.repository.language)
         this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
       }
     },
@@ -348,9 +363,14 @@ export default {
   },
   computed: {
     hasUpdates() {
-      if (this.$route.name === 'repository-content-bases-new') {
-        return false;
+      // if (this.$route.name === 'repository-content-bases-new') {
+      //   return false;
+      // }
+
+      if (this.knowledgeBase.title !== this.knowledgeBase.oldTitle) {
+        return true;
       }
+
       return Object.keys(this.knowledgeBase.texts)
         .some(
           (language) => this.knowledgeBase.texts[language].value
@@ -396,6 +416,11 @@ export default {
     span{
       cursor: pointer;
       margin-right: 1rem;
+    }
+    &__button{
+      &:hover{
+        border: none;
+      }
     }
   }
     &__title{
