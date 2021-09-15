@@ -36,7 +36,7 @@ describe('TestView.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(EvaluateManual, { localVue, store });
+    wrapper = shallowMount(EvaluateManual, { localVue, store, mocks:{$t: ( ) => "Ola" }});
   });
 
   test('renders correctly', () => {
