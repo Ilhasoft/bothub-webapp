@@ -53,7 +53,7 @@ export default {
   getQATexts(repositoryUUID, knowledgeBaseId, page = 0) {
     const limit = 20;
     const offset = limit * page;
-    return request.$http.get('v2/repository/qa/context/', {
+    return request.$http.get('v2/repository/qa/text/', {
       params: {
         repository_uuid: repositoryUUID,
         knowledge_base_id: knowledgeBaseId,
@@ -63,7 +63,7 @@ export default {
     });
   },
   createQAText(repositoryUUID, knowledgeBaseId, text, language) {
-    return request.$http.post('v2/repository/qa/context/', {
+    return request.$http.post('v2/repository/qa/text/', {
       repository_uuid: repositoryUUID,
       knowledge_base: knowledgeBaseId,
       text,
@@ -71,7 +71,7 @@ export default {
     });
   },
   updateQAText(repositoryUUID, knowledgeBaseId, id, text, language) {
-    return request.$http.put(`v2/repository/qa/context/${id}/`, {
+    return request.$http.put(`v2/repository/qa/text/${id}/`, {
       knowledge_base: knowledgeBaseId,
       text,
       language

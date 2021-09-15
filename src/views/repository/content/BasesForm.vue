@@ -61,38 +61,11 @@
             :loading="false"
           />
           <div>
-            <!-- <unnnicSelect
-              size="md"
-              type="normal"
-              placeholder=""
-            >
-              <div slot="header">{{}}</div>
-              <option>None</option>
-            </unnnicSelect> -->
-
             <unnnic-input
               disabled
               :value="languages[selectedLanguage]"
               icon-right="arrow-button-down-1"
             />
-
-            <!-- <unnnic-select
-              class="unnic--clickable"
-              size="md"
-              v-model="selectedLanguage"
-              search
-              :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
-              disable
-            >
-              <option
-                v-for="(language, key) in languages"
-                :value="key"
-                :key="key"
-                size="md"
-              >
-              {{language}}
-              </option>
-            </unnnic-select> -->
           </div>
       </section>   <!-- buttons and select -->
     </section>
@@ -234,6 +207,8 @@ export default {
 
         this.knowledgeBase.oldTitle = response.data.title;
 
+        this.destroyVerifying();
+
         this.$router.push({
           name: 'repository-content-bases-edit',
           params: {
@@ -244,6 +219,8 @@ export default {
         this.init();
       }
 
+      console.log('chegou antes save text');
+
       const data = {
         id: this.knowledgeBase.texts[this.selectedLanguage].id,
         repositoryUUID: this.repositoryUUID,
@@ -251,11 +228,12 @@ export default {
         text: this.knowledgeBase.texts[this.selectedLanguage].value,
         language: this.selectedLanguage,
       };
+      console.log(data);
 
       this.submitting = true;
 
       if (data.id) {
-        if (!data.text) {
+        if (data.text) {
           const responseUpdateText = await this.updateQAText(data);
           this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseUpdateText.data.text;
         }
@@ -267,7 +245,7 @@ export default {
         });
 
         this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
-      } else if (!data.text) {
+      } else if (data.text) {
         const responseCreateText = await this.createQAText(data);
         this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
         this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseCreateText.data.text;
@@ -347,7 +325,8 @@ export default {
       if (this.$route.name === 'repository-content-bases-edit') {
         this.init();
       } else {
-        this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
+        this.provisoryTitle = this.$t('webapp.home.bases.edit-base-notitle');
+        this.knowledgeBase.title = this.provisoryTitle;
       }
     },
 
