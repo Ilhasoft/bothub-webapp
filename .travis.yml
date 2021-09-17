@@ -3,4 +3,4 @@ before_script:
   - yarn install
 script:
   - yarn lint
-  - yarn test:unit -u
+  - yarn test:unit
