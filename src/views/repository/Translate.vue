@@ -364,17 +364,6 @@ export default {
       sentenceFilter: { key: null, query: null },
       translating: false,
       tokenModalOpen: false,
-      externalUrlGenerator: (token) => {
-        const route = this.$router.resolve({
-          name: 'repository-translate-external',
-          params: {
-            ownerNickname: this.repository.owner__nickname,
-            slug: this.repository.slug,
-            token,
-          },
-        }).href;
-        return `${window.location.origin}${route}`;
-      },
     };
   },
   computed: {
@@ -529,6 +518,17 @@ export default {
         delete this.querySchema.search;
       }
       this.query = { ...this.querySchema, ...this.sentenceFilter.query };
+    },
+    externalUrlGenerator(token) {
+      const route = this.$router.resolve({
+        name: 'repository-translate-external',
+        params: {
+          ownerNickname: this.repository.owner__nickname,
+          slug: this.repository.slug,
+          token,
+        },
+      }).href;
+      return `${window.location.origin}${route}`;
     },
   },
 };
