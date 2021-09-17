@@ -118,6 +118,74 @@
                     </highlighted-code>
                 </div>
               </div>
+              <section class="repository-api__form">
+                <div class="repository-api__form__buttons">
+                  <unnnic-button
+                    @click.prevent="prev()"
+                    size="large"
+                    text=""
+                    type="terciary"
+                    iconLeft="arrow-left-1-1"
+                  >
+                  </unnnic-button>
+                  <unnnic-button
+                    @click.prevent="next()"
+                    size="large"
+                    text=""
+                    type="terciary"
+                    iconLeft="arrow-right-1-1"
+                  >
+                  </unnnic-button>
+                </div>
+                <form>
+                  <div v-if="step === 1" class="repository-api__form__step">
+                    <div>
+                      <p class="repository-api__form__step__title">
+                        Passo 1
+                      </p>
+                      <p class="repository-api__form__step__text">
+                        No Weni Fluxos, abra o fluxo desejado ou crie um novo fluxo.
+                      </p>
+                    </div>
+                  <img src="@/assets/imgs/step-one.png" alt="">
+                  </div> <!--passo 1 -->
+                  <div v-else-if="step===2" class="repository-api__form__step">
+                    <div>
+                      <p class="repository-api__form__step__title">
+                        Passo 2
+                      </p>
+                      <p class="repository-api__form__step__text">
+                        Insira uma nova caixa de fluxo e selecione a opção
+                        “Chamar um webhook”
+                      </p>
+                      </div>
+                    <img src="@/assets/imgs/step-two.png" alt="">
+                  </div> <!--passo 2 -->
+                  <div v-else-if="step===3" class="repository-api__form__step">
+                    <div>
+                      <p class="repository-api__form__step__title">
+                        Passo 3
+                      </p>
+                      <p class="repository-api__form__step__text">
+                        Selecione Post e insira a URL disponível acima
+                      </p>
+                      </div>
+                    <img src="@/assets/imgs/step-three.png" alt="">
+                  </div> <!--passo 2 -->
+                  <div v-else class="repository-api__form__step">
+                    <div>
+                      <p class="repository-api__form__step__title">
+                        Passo 4
+                      </p>
+                      <p class="repository-api__form__step__text">
+                        Clique em Post Corpo e insira o código acima correspondente ao POST Corpo.
+                        Você pode substituir os valores entre aspas por variáveis.
+                      </p>
+                      </div>
+                    <img src="@/assets/imgs/step-four.png" alt="">
+                  </div> <!--passo 2 -->
+                </form>
+              </section>
             </template>
           </unnnic-tab>
         </section>
@@ -155,6 +223,7 @@ export default {
           }
         ],
       },
+      step: 1
     }
   },
 
@@ -163,6 +232,14 @@ export default {
       return this.repository?.authorization?.organizations?.[0]?.uuid;
     },
   },
+  methods: {
+    prev() {
+      this.step--;
+    },
+    next() {
+      this.step++;
+    },
+  }
 }
 </script>
 
@@ -201,7 +278,6 @@ export default {
   &__tabs{
     margin-top: 24px;
   }
-
   &__box{
     display: flex;
     justify-content: space-between;
@@ -221,6 +297,32 @@ export default {
 
     &--second{
       width: 48%;
+    }
+  }
+  &__form{
+    border-radius: 4px;
+    border: 1px solid #E2E6ED;
+    padding: 28px 30px 40px 24px;
+    width: 507px;
+
+    &__buttons{
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-start;
+    }
+    &__step{
+      &__title{
+        font-size: $unnnic-font-size-title-sm;
+        color: $unnnic-color-neutral-darkest;
+        margin-bottom: 4px;
+        font-weight: $unnnic-font-weight-bold;
+        font-family: $unnnic-font-family-primary;
+      }
+      &__text{
+        font-family: $unnnic-font-family-secondary;
+        color: $unnnic-color-neutral-dark;
+        margin-bottom: 25px;
+      }
     }
   }
 }
