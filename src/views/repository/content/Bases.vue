@@ -104,9 +104,16 @@ export default {
   mounted() {
   },
   computed: {
-    ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
+    ...mapGetters([
+      'getCurrentRepository',
+      'getProjectSelected',
+      'getOrgSelected']),
 
     getAllCategories() {
+      if (!this.repository.categories_list) {
+        return [];
+      }
+
       const categories = this.repository.categories_list.map(category => category.name);
       return categories;
     }
@@ -127,13 +134,13 @@ export default {
         page: 0,
       });
 
-      response.data.results.forEach(({ id, title }) => {
+      response.data.results.forEach(({ id, title, user_name, language_count, description }) => {
         this.bases.push({
           id,
           name: title,
-          owner__nickname: 'Nickname',
-          available_languages: [1, 2],
-          description: 'description aqui',
+          owner__nickname: user_name,
+          available_languages: new Array(language_count),
+          description,
         });
       });
     },

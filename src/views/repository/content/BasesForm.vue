@@ -6,26 +6,25 @@
             @click="routerHandle('repository-content-bases')"
           >
             <unnnic-icon
-              icon="keyboard-arrow-left-1" size="md"
+              icon="keyboard-arrow-left-1"
             />
           </span>
         <div>
           <div class="repository-base-edit__header--content">
-            <h1 class="repository-base-edit__title">
-              <input type="text" :value= knowledgeBase.title
-                placeholder="Sem título" id="focusInput"
-                ref="focusInput"
-                contenteditable="true"
-              >
-            </h1>
+            <h1
+              ref="focusInput"
+              class="repository-base-edit__title"
+              contenteditable="true"
+              @input="onTitleChange"
+            >{{ provisoryTitle }}</h1>
             <unnnicButton
-              size="medium"
               text=""
               type="terciary"
               iconRight="pencil-write-1"
               :disabled="false"
               :loading="false"
-              @click.native="editTitleInput()"
+              @click.native="editTitle()"
+              class="repository-base-edit__header__button"
             />
           </div>
           <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
@@ -62,19 +61,11 @@
             :loading="false"
           />
           <div>
-            <unnnicSelect
-              size="md"
-              type="normal"
-              placeholder=""
-            >
-              <div slot="header">{{}}</div>
-              <option>None</option>
-              <option>option1</option>
-              <option>option2</option>
-              <option>option3</option>
-              <option>option4</option>
-              <option>option5</option>
-            </unnnicSelect>
+            <unnnic-input
+              disabled
+              :value="languages[selectedLanguage]"
+              icon-right="arrow-button-down-1"
+            />
           </div>
       </section>   <!-- buttons and select -->
     </section>
@@ -128,6 +119,7 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import Modal from '@/components/repository/CreateRepository/Modal'
 import RepositoryBase from '../Base';
 import { mapActions } from 'vuex';
+import { LANGUAGES } from '@/utils/index';
 import router from '@/router/index'
 
 export default {
@@ -149,15 +141,28 @@ export default {
       selectedLanguage: '',
       knowledgeBase: {
         title: '',
+        oldTitle: '',
         texts: {},
       },
       modalData: {},
       destroyVerifying: null,
+      provisoryTitle: '',
+      languages: LANGUAGES,
     };
   },
   methods: {
-    ...mapActions(['createQAKnowledgeBase', 'getQAKnowledgeBase', 'getQATexts', 'createQAText', 'updateQAText', 'deleteQAKnowledgeBase']),
-
+    ...mapActions([
+      'createQAKnowledgeBase',
+      'getQAKnowledgeBase',
+      'getQATexts',
+      'createQAText',
+      'updateQAText',
+      'deleteQAKnowledgeBase',
+      'editQAKnowledgeBase'
+    ]),
+    onTitleChange(event) {
+      this.knowledgeBase.title = event.srcElement.textContent;
+    },
     routerHandle(path) {
       if (path !== this.$router.currentRoute.name) {
         this.$router.push({
@@ -200,12 +205,18 @@ export default {
           title: this.knowledgeBase.title,
         });
 
+        this.knowledgeBase.oldTitle = response.data.title;
+
+        this.destroyVerifying();
+
         this.$router.push({
           name: 'repository-content-bases-edit',
           params: {
             id: response.data.id,
           },
         });
+
+        this.init();
       }
 
       const data = {
@@ -219,10 +230,22 @@ export default {
       this.submitting = true;
 
       if (data.id) {
-        const responseUpdateText = await this.updateQAText(data);
-      } else {
+        if (data.text) {
+          const responseUpdateText = await this.updateQAText(data);
+          this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseUpdateText.data.text;
+        }
+
+        const responseEditKnowledgeBase = await this.editQAKnowledgeBase({
+          repositoryUUID: this.repositoryUUID,
+          id: this.$route.params.id,
+          title: this.knowledgeBase.title,
+        });
+
+        this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
+      } else if (data.text) {
         const responseCreateText = await this.createQAText(data);
         this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
+        this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseCreateText.data.text;
       }
 
       this.submitting = false;
@@ -232,6 +255,8 @@ export default {
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
+
+      this.destroyVerifying();
     },
     discardUpdate() {
       this.openModal = false;
@@ -248,20 +273,44 @@ export default {
         this.localNext();
       }
     },
-    editTitleInput() {
+    editTitle() {
       this.$refs.focusInput.focus()
-      // falta salvar a alteração
-    }
+    },
+    async init() {
+      const response = await this.getQAKnowledgeBase({
+        repositoryUUID: this.repositoryUUID,
+        id: this.$route.params.id
+      });
+
+      const { title } = response.data;
+
+      this.knowledgeBase.title = title;
+      this.provisoryTitle = title;
+      const responseText = await this.getQATexts({
+        repositoryUUID: this.repositoryUUID,
+        knowledgeBaseId: this.$route.params.id,
+        page: 0,
+      });
+
+      responseText.data.results.forEach(({ id, language, text }) => {
+        this.$set(this.knowledgeBase.texts, language, {
+          id,
+          value: text,
+          oldValue: text,
+        });
+      });
+    },
   },
   watch: {
     // eslint-disable-next-line
     'repository': {
       handler() {
-        if (!this.repository || !this.repository.uuid || this.repository.uuid === 'null') {
+        if (!this.repository?.language || !this.repository?.uuid || this.repository?.uuid === 'null') {
           return false;
         }
 
         this.repositoryUUID = this.repository.uuid;
+        this.selectedLanguage = this.repository.language;
 
         return true;
       },
@@ -271,31 +320,11 @@ export default {
     },
     async repositoryUUID() {
       if (this.$route.name === 'repository-content-bases-edit') {
-        const response = await this.getQAKnowledgeBase({
-          repositoryUUID: this.repositoryUUID,
-          id: this.$route.params.id
-        });
-
-        const { title } = response.data;
-
-        this.knowledgeBase.title = title;
-        const responseText = await this.getQATexts({
-          repositoryUUID: this.repositoryUUID,
-          knowledgeBaseId: this.$route.params.id,
-          page: 0,
-        });
-
-        responseText.data.results.forEach(({ id, language, text }) => {
-          this.$set(this.knowledgeBase.texts, language, {
-            id,
-            value: text,
-          });
-        });
+        this.init();
       } else {
-        this.knowledgeBase.title = this.$t('webapp.home.bases.edit-base-notitle');
+        this.provisoryTitle = this.$t('webapp.home.bases.edit-base-notitle');
+        this.knowledgeBase.title = this.provisoryTitle;
       }
-
-      this.selectedLanguage = this.repository.language;
     },
 
     selectedLanguage() {
@@ -303,13 +332,26 @@ export default {
         this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
           id: null,
           value: '',
+          oldValue: '',
         });
       }
     },
   },
   computed: {
     hasUpdates() {
-      return true;
+      // if (this.$route.name === 'repository-content-bases-new') {
+      //   return false;
+      // }
+
+      if (this.knowledgeBase.title !== this.knowledgeBase.oldTitle) {
+        return true;
+      }
+
+      return Object.keys(this.knowledgeBase.texts)
+        .some(
+          (language) => this.knowledgeBase.texts[language].value
+          !== this.knowledgeBase.texts[language].oldValue
+        );
     },
   },
   mounted() {
@@ -351,18 +393,17 @@ export default {
       cursor: pointer;
       margin-right: 1rem;
     }
+    &__button{
+      &:hover{
+        border: none;
+      }
+    }
   }
     &__title{
-      input{
         border: none;
         font-family: $unnnic-font-family-primary;
         font-size: $unnnic-font-size-title-sm;
-        &::placeholder{
-          font-family: $unnnic-font-family-primary;
-          font-size: $unnnic-font-size-title-sm;
-        }
       }
-    }
 
     &__text{
       font-family: $unnnic-font-family-secondary;

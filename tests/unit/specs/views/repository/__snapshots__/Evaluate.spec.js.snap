@@ -1,8 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TestView.vue renders correctly 1`] = `
-<repository-view-base-stub quicktest="true">
-  <!---->
+<repository-view-base-stub repository="[object Object]" quicktest="true">
+  <div>
+    <div>
+      <b-notification type="is-info">
+        some specific text
+      </b-notification>
+      <login-form-stub hideforgotpassword="true"></login-form-stub>
+    </div>
+  </div>
   <!---->
 </repository-view-base-stub>
 `;

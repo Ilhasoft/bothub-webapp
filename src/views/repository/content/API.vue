@@ -40,14 +40,12 @@
           </div>
         </section>
         <section class="repository-api__tabs">
-          <unnnic-tab
-            initialTab="first"
-            :tabs='[$t("webapp.home.bases.api_tabs")]'
-          >
-            <template slot="tab-head-first">
-              <div>OI</div>
+          <unnnic-tab initialTab="integrate" :tabs="['integrate']">
+            <template slot="tab-head-integrate">
+              {{ $t("webapp.home.bases.api_tabs") }}
             </template>
-            <template slot="tab-panel-first">
+
+            <template slot="tab-panel-integrate">
               <p class="description">
                 Insira os seguintes dados onde for solicitado na plataforma:
               </p>
@@ -56,27 +54,28 @@
                   <p class="repository-api__box--first__text">URL:</p>
                   <unnnic-card
                     type="default"
-                    description="https://nlp.bothub.it/v2/parse/"
+                    :description="`${repository.nlp_server}v2/parse/`"
                     enabled
                     infoPosition="right"
                     hasInformationIcon
                     scheme="aux-blue"
                     class="repository-api__box--first__card"
                   />
-                  <p class="repository-api__box--first__text">Acess Token</p>
+                  <p class="repository-api__box--first__text">Access Token</p>
                   <unnnic-card
                     type="default"
-                    description="1e65416859c4cdff11cf94a70ce7395eba0f494d "
+                    :description="authorization"
                     enabled
                     infoPosition="right"
                     hasInformationIcon
                     scheme="aux-blue"
                     class="repository-api__box--first__card"
                   />
+
                   <p class="repository-api__box--first__text">Código da inteligência</p>
                   <unnnic-card
                     type="default"
-                    description="1044"
+                    :description="repository.repository_version_id"
                     enabled
                     infoPosition="right"
                     hasInformationIcon
@@ -88,7 +87,7 @@
                   <p class="description--darkest"> Como integrar ao Weni Fluxos ou Rapidpro.</p>
                 </div>
                 <div class="repository-api__box--second">
-                   <p><strong>POST corpo:</strong></p>
+                    <p><strong>POST corpo:</strong></p>
                     <highlighted-code code-class=""
                     >{
                       "language":"{{ $t("webapp.home.bases.api_tabs_post_lang") }}"
@@ -118,7 +117,7 @@
                     }
                     </highlighted-code>
                 </div>
-            </div>
+              </div>
             </template>
           </unnnic-tab>
         </section>
@@ -157,6 +156,12 @@ export default {
         ],
       },
     }
+  },
+
+  computed: {
+    authorization() {
+      return this.repository?.authorization?.organizations?.[0]?.uuid;
+    },
   },
 }
 </script>
