@@ -219,8 +219,6 @@ export default {
         this.init();
       }
 
-      console.log('chegou antes save text');
-
       const data = {
         id: this.knowledgeBase.texts[this.selectedLanguage].id,
         repositoryUUID: this.repositoryUUID,
@@ -228,7 +226,6 @@ export default {
         text: this.knowledgeBase.texts[this.selectedLanguage].value,
         language: this.selectedLanguage,
       };
-      console.log(data);
 
       this.submitting = true;
 

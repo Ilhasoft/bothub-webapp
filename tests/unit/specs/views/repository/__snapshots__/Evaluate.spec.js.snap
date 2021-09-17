@@ -5,7 +5,7 @@ exports[`TestView.vue renders correctly 1`] = `
   <div>
     <div>
       <b-notification type="is-info">
-        Ola
+        some specific text
       </b-notification>
       <login-form-stub hideforgotpassword="true"></login-form-stub>
     </div>

@@ -47,7 +47,7 @@
 
             <template slot="tab-panel-integrate">
               <p class="description">
-                BLIU
+                Insira os seguintes dados onde for solicitado na plataforma:
               </p>
               <div class="repository-api__box">
                 <div class="repository-api__box--first">
