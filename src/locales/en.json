@@ -313,7 +313,7 @@
         "api_select": "Select the knowledge base and the language to be integrated:",
         "api_tabs": "Integrate to Weni Flows or Rapidpro",
         "api_tabs_subtitle": "When asked, insert the following parameters on the platform:",
-        "api_tabs_intelligence_id": "Intelligence ID",
+        "api_tabs_intelligence_id": "Knowledge base ID",
         "api_guide": "See below a guide for integration and an example of what will be returned by the API.",
         "api_integrate": "How to integrate to Weni Flows or Rapidpro",
         "api_body": "body",
