@@ -61,17 +61,29 @@
             :loading="false"
           />
           <div>
-            <unnnic-input
-              disabled
-              :value="languages[selectedLanguage]"
-              icon-right="arrow-button-down-1"
-            />
+            <unnnic-select
+              class="unnic--clickable"
+              size="sm"
+              :placeholder="$t('webapp.create_repository.language_placeholder')"
+              v-model="knowledgeBase.text.language"
+              search
+              :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
+            >
+              <option
+                v-for="(language, key) in languages"
+                :value="key"
+                :key="key"
+                size="sm"
+              >
+              {{ language }}
+              </option>
+            </unnnic-select>
           </div>
       </section>   <!-- buttons and select -->
     </section>
     <section>
-        <textarea v-if="knowledgeBase.texts[selectedLanguage]"
-          v-model="knowledgeBase.texts[selectedLanguage].value" name=""
+        <textarea
+          v-model="knowledgeBase.text.value" name=""
           id="" cols="30" rows="10"
           class="repository-base-edit__textarea"
         >
@@ -142,7 +154,13 @@ export default {
       knowledgeBase: {
         title: '',
         oldTitle: '',
-        texts: {},
+        text: {
+          id: null,
+          value: '',
+          oldValue: '',
+          language: '',
+          oldLanguage: '',
+        },
       },
       modalData: {},
       destroyVerifying: null,
@@ -220,32 +238,32 @@ export default {
       }
 
       const data = {
-        id: this.knowledgeBase.texts[this.selectedLanguage].id,
+        id: this.knowledgeBase.text.id,
         repositoryUUID: this.repositoryUUID,
         knowledgeBaseId: this.$route.params.id,
-        text: this.knowledgeBase.texts[this.selectedLanguage].value,
-        language: this.selectedLanguage,
+        text: this.knowledgeBase.text.value,
+        language: this.knowledgeBase.text.language,
       };
 
       this.submitting = true;
 
-      if (data.id) {
-        if (data.text) {
-          const responseUpdateText = await this.updateQAText(data);
-          this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseUpdateText.data.text;
-        }
+      const responseEditKnowledgeBase = await this.editQAKnowledgeBase({
+        repositoryUUID: this.repositoryUUID,
+        id: this.$route.params.id,
+        title: this.knowledgeBase.title,
+      });
 
-        const responseEditKnowledgeBase = await this.editQAKnowledgeBase({
-          repositoryUUID: this.repositoryUUID,
-          id: this.$route.params.id,
-          title: this.knowledgeBase.title,
-        });
+      this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
 
-        this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
+      if (data.id && data.text) {
+        const responseUpdateText = await this.updateQAText(data);
+        this.knowledgeBase.text.oldValue = responseUpdateText.data.text;
+        this.knowledgeBase.text.oldLanguage = responseUpdateText.data.language;
       } else if (data.text) {
         const responseCreateText = await this.createQAText(data);
-        this.knowledgeBase.texts[this.selectedLanguage].id = responseCreateText.data.id;
-        this.knowledgeBase.texts[this.selectedLanguage].oldValue = responseCreateText.data.text;
+        this.knowledgeBase.text.id = responseCreateText.data.id;
+        this.knowledgeBase.text.oldValue = responseCreateText.data.text;
+        this.knowledgeBase.text.oldLanguage = responseCreateText.data.language;
       }
 
       this.submitting = false;
@@ -285,6 +303,7 @@ export default {
       const { title } = response.data;
 
       this.knowledgeBase.title = title;
+      this.knowledgeBase.oldTitle = title;
       this.provisoryTitle = title;
       const responseText = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
@@ -292,6 +311,20 @@ export default {
         page: 0,
       });
 
+      if (responseText.data.results.length) {
+        const { id, language, text } = responseText.data.results[0];
+
+        this.knowledgeBase.text.id = id;
+        this.knowledgeBase.text.value = text;
+        this.knowledgeBase.text.oldValue = text;
+        this.knowledgeBase.text.language = language;
+        this.knowledgeBase.text.oldLanguage = language;
+      } else {
+        this.knowledgeBase.text.language = this.repository.language;
+        this.knowledgeBase.text.oldLanguage = this.repository.language;
+      }
+
+      /*
       responseText.data.results.forEach(({ id, language, text }) => {
         this.$set(this.knowledgeBase.texts, language, {
           id,
@@ -299,6 +332,7 @@ export default {
           oldValue: text,
         });
       });
+      */
     },
   },
   watch: {
@@ -310,7 +344,6 @@ export default {
         }
 
         this.repositoryUUID = this.repository.uuid;
-        this.selectedLanguage = this.repository.language;
 
         return true;
       },
@@ -324,10 +357,13 @@ export default {
       } else {
         this.provisoryTitle = this.$t('webapp.home.bases.edit-base-notitle');
         this.knowledgeBase.title = this.provisoryTitle;
+        this.knowledgeBase.text.language = this.repository.language;
+        this.knowledgeBase.text.oldLanguage = this.repository.language;
       }
     },
 
     selectedLanguage() {
+      /*
       if (!this.knowledgeBase.texts[this.selectedLanguage]) {
         this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
           id: null,
@@ -335,6 +371,7 @@ export default {
           oldValue: '',
         });
       }
+      */
     },
   },
   computed: {
@@ -343,15 +380,26 @@ export default {
       //   return false;
       // }
 
+      console.log(this.knowledgeBase.title, this.knowledgeBase.oldTitle);
+      console.log(this.knowledgeBase.text.language, this.knowledgeBase.text.oldLanguage);
+      console.log(this.knowledgeBase.text.value, this.knowledgeBase.text.oldValue);
+
       if (this.knowledgeBase.title !== this.knowledgeBase.oldTitle) {
         return true;
       }
 
-      return Object.keys(this.knowledgeBase.texts)
+      if (this.knowledgeBase.text.language !== this.knowledgeBase.text.oldLanguage) {
+        return true;
+      }
+
+      return this.knowledgeBase.text.value !== this.knowledgeBase.text.oldValue;
+
+      /* return Object.keys(this.knowledgeBase.texts)
         .some(
           (language) => this.knowledgeBase.texts[language].value
           !== this.knowledgeBase.texts[language].oldValue
         );
+      */
     },
   },
   mounted() {

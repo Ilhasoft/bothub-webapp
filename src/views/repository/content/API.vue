@@ -55,7 +55,7 @@
                     <p class="repository-api__box__one__text">URL</p>
                     <div class="repository-api__info">
                       <p class="repository-api__info__text" ref="copyText">
-                        {{ `${repository.nlp_server}v2/parse/` }}
+                        {{ `${repository.nlp_server}v2/question-answering/` }}
                       </p>
                         <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
                           <unnnic-button
@@ -101,7 +101,7 @@
                     <p class="repository-api__box__one__text">
                       POST {{ $t("webapp.home.bases.api_body") }}
                     </p>
-                    <div class="repository-api__info">
+                    <div class="repository-api__info--json">
                       {
                       <br><br>
                       "language":"{{ $t("webapp.home.bases.api_tabs_post_lang") }}"
@@ -110,11 +110,20 @@
                         $t("webapp.home.bases.api_tabs_post_text")}}"
                       <br><br>
                       }
+                      <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
+                        <unnnic-button
+                          size="large"
+                          text=""
+                          type="secondary"
+                          iconLeft="copy-paste-1"
+                          @click.native="copyURL"
+                        />
+                      </unnnic-tool-tip>
                     </div>
                   </div>
                 </div>
                 <div class="repository-api__box__two">
-                  <div lass="repository-api__box__one--first">
+                  <div lass="repository-api__box__one--first" style="width: 48%;">
                     <p class="description--darkest">
                       {{ $t("webapp.home.bases.api_integrate") }}
                     </p>
@@ -126,6 +135,7 @@
                           text=""
                           type="terciary"
                           iconLeft="arrow-left-1-1"
+                          :disabled="disabledPrevious"
                         >
                         </unnnic-button>
                         <unnnic-button
@@ -134,6 +144,7 @@
                           text=""
                           type="terciary"
                           iconLeft="arrow-right-1-1"
+                          :disabled="disabledNext"
                         >
                         </unnnic-button>
                       </div>
@@ -201,26 +212,27 @@
                       {{ $t("webapp.home.bases.api_response") }}
                     </p>
                     <div class="repository-api__info">
-                      {
-                        <br><br>
+                      <pre>
+                        {
+
                           {
-                            <br><br>
-                            "intent": {<br>
-                              "name": "love",<br>
-                              "confidence": 0.6943462393863934<br>
+
+                            "intent": {
+                              "name": "love",
+                              "confidence": 0.6943462393863934
                             },
-                            <br><br>
-                            "intent_ranking": [<br>
-                              {<br>
-                                "name": "love",<br>
-                                "confidence": 0.6943462393863934<br>
-                              },<br>
-                              {<br>
-                                "name": "hate",<br>
-                                "confidence": 0.30565376061360666<br>
-                              }<br>
-                            ],<br>
+                            "intent_ranking": [
+                              {
+                                "name": "love",
+                                "confidence": 0.6943462393863934
+                              },
+                              {
+                                "name": "hate",
+                                "confidence": 0.30565376061360666
+                              }
+                            ],
                         }
+                      </pre>
                     </div>
                   </div>
                 </div>
@@ -278,6 +290,14 @@ export default {
   computed: {
     authorization() {
       return this.repository?.authorization?.organizations?.[0]?.uuid;
+    },
+
+    disabledPrevious() {
+      return this.step === 1;
+    },
+
+    disabledNext() {
+      return this.step === 5;
     },
   },
   methods: {
@@ -342,6 +362,8 @@ export default {
       justify-content: space-between;
       &--first{
         width: 48%;
+        display: flex;
+        flex-direction: column;
       }
       &__text{
          font-family: $unnnic-font-family-secondary;
@@ -373,6 +395,20 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       color: $unnnic-color-neutral-dark;
+    }
+
+    &--json{
+      border: 1px solid #E2E6ED;
+      border-radius: $unnnic-border-radius-sm;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 1rem;
+      font-family: $unnnic-font-family-secondary;
+      font-weight: $unnnic-font-weight-regular;
+      font-size: $unnnic-font-size-body-gt;
+      color: $unnnic-color-neutral-dark;
+      flex:1;
     }
   }
   &__form{
