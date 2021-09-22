@@ -75,31 +75,51 @@
                           />
                         </unnnic-tool-tip>
                     </div>
-                    <p class="repository-api__box__text">Access Token</p>
+                    <div class="repository-api__box__text" ref="copyText" contenteditable="true">
+                      Access Token
+                    </div>
                     <div class="repository-api__info">
                       <p class="repository-api__info__text">
                         {{ authorization }}
                       </p>
+                       <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                       <unnnic-button
                         size="large"
                         text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
+                        @click.native="copyURL()"
                       />
+                      </unnnic-tool-tip>
                     </div>
                     <p class="repository-api__box__text">
                       {{ $t("webapp.home.bases.api_tabs_intelligence_id") }}
                     </p>
                     <div class="repository-api__info">
-                      <p class="repository-api__info__text" >
+                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
                         {{ selectedBase }}
-                      </p>
+                      </div>
+                      <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                       <unnnic-button
                         size="large"
                         text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
+                        @click.native="copyURL()"
                       />
+                      </unnnic-tool-tip>
                     </div>
                     <p class="description">
                     {{ $t("webapp.home.bases.api_guide") }}
@@ -110,11 +130,17 @@
                       POST {{ $t("webapp.home.bases.api_body") }}
                     </p>
                     <div class="repository-api__info__json">
-                      <pre>{{ JSON.stringify({
+                      <pre ref="copyText" contenteditable="true">{{ JSON.stringify({
                         language: $t("webapp.home.bases.api_tabs_post_lang"),
                         text: $t("webapp.home.bases.api_tabs_post_text"),
                       }, null, '\t') }}</pre>
-                      <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
+                       <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                         <unnnic-button
                           size="large"
                           text=""
