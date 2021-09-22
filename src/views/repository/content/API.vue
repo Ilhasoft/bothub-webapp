@@ -56,10 +56,16 @@
                   <div  class="repository-api__box__content">
                     <p class="repository-api__box__text">URL</p>
                     <div class="repository-api__info">
-                      <p class="repository-api__info__text" id="copyText">
+                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
                         {{ `${repository.nlp_server}v2/question-answering/` }}
-                      </p>
-                        <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
+                      </div>
+                        <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                           <unnnic-button
                             size="large"
                             text=""
@@ -86,7 +92,7 @@
                     </p>
                     <div class="repository-api__info">
                       <p class="repository-api__info__text" >
-                        {{ selectedBaseObject.id }}
+                        {{ selectedBase }}
                       </p>
                       <unnnic-button
                         size="large"
@@ -104,14 +110,10 @@
                       POST {{ $t("webapp.home.bases.api_body") }}
                     </p>
                     <div class="repository-api__info__json">
-                      {
-                      <br><br>
-                      "language":"{{ $t("webapp.home.bases.api_tabs_post_lang") }}"
-                      <br><br>
-                        "text": "{{
-                        $t("webapp.home.bases.api_tabs_post_text")}}"
-                      <br><br>
-                      }
+                      <pre>{{ JSON.stringify({
+                        language: $t("webapp.home.bases.api_tabs_post_lang"),
+                        text: $t("webapp.home.bases.api_tabs_post_text"),
+                      }, null, '\t') }}</pre>
                       <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
                         <unnnic-button
                           size="large"
@@ -125,7 +127,7 @@
                   </div>
                 </div>
                 <div class="repository-api__box__two">
-                  <div lass="repository-api__box__content">
+                  <div class="repository-api__box__content">
                     <p class="description--darkest">
                       {{ $t("webapp.home.bases.api_integrate") }}
                     </p>
@@ -214,9 +216,7 @@
                       {{ $t("webapp.home.bases.api_response") }}
                     </p>
                     <div class="repository-api__info__json lg">
-                      <pre>
-                         {{ json }}
-                      </pre>
+                      <pre>{{ JSON.stringify(json, null, '\t') }}</pre>
                     </div>
                   </div>
                 </div>
@@ -262,7 +262,8 @@ export default {
             confidence: 0.30565376061360666
           }
         ]
-      }
+      },
+      copyLabel: 'Copiar',
     }
   },
   watch: {
@@ -303,11 +304,6 @@ export default {
     disabledNext() {
       return this.step === 5;
     },
-    selectedBaseObject() {
-      const index = this.bases.indexOf(base => base.id === this.selectedBase);
-      console.log('oi', this.bases[index])
-      return this.bases[index];
-    },
   },
   methods: {
     ...mapActions([
@@ -320,8 +316,14 @@ export default {
       this.step++;
     },
     copyURL() {
-      document.getElementById('copyText').select();
+      const range = document.createRange();
+      range.selectNode(this.$refs.copyText);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
       document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+
+      this.copyLabel = 'Copiado!';
     },
   }
 }

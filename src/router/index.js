@@ -39,7 +39,7 @@ import store from '../store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -324,3 +324,12 @@ export default new Router({
     return { x: 0, y: 0 };
   },
 });
+
+router.afterEach((to, from) => {
+  window.parent.postMessage({
+    event: 'changePathname',
+    pathname: window.location.pathname,
+  }, '*');
+});
+
+export default router;
