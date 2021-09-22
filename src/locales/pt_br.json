@@ -314,7 +314,7 @@
         "api_select": "Selecione a Base de Conhecimento:",
         "api_tabs": "Integrar ao Weni Fluxos ou Rapidpro",
         "api_tabs_subtitle": "Insira os seguintes dados onde for solicitado na plataforma:",
-        "api_tabs_intelligence_id": "Código da Inteligência",
+        "api_tabs_intelligence_id": "ID Base de Inteligência",
         "api_guide": "Confira abaixo um guia para integração e o exemplo do que a API retornará.",
         "api_body": "corpo",
         "api_tabs_post_lang": "código do idioma",

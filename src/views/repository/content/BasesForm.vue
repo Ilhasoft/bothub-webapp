@@ -379,11 +379,6 @@ export default {
       // if (this.$route.name === 'repository-content-bases-new') {
       //   return false;
       // }
-
-      console.log(this.knowledgeBase.title, this.knowledgeBase.oldTitle);
-      console.log(this.knowledgeBase.text.language, this.knowledgeBase.text.oldLanguage);
-      console.log(this.knowledgeBase.text.value, this.knowledgeBase.text.oldValue);
-
       if (this.knowledgeBase.title !== this.knowledgeBase.oldTitle) {
         return true;
       }

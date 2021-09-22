@@ -24,16 +24,18 @@
           <div class="repository-api__select__inputs">
             <div class="repository-api__select__input">
               <unnnicSelect
+                v-if="bases.length"
                 size="md"
-                type="normal"
                 placeholder=""
+                v-model="selectedBase"
               >
-                <div slot="header"
-                v-for="base in bases"
-                :key="base.id"
-                ></div>
-                <option>
-                {{ bases.title }}
+                <option
+                  v-for="base in bases"
+                  :value="base.id"
+                  :key="base.id"
+                  size="sm"
+                >
+                  {{ base.title }}
                 </option>
               </unnnicSelect>
             </div>
@@ -51,79 +53,107 @@
               </p>
               <div class="repository-api__box">
                 <div class="repository-api__box__one">
-                  <div  class="repository-api__box__one--first">
-                    <p class="repository-api__box__one__text">URL</p>
+                  <div  class="repository-api__box__content">
+                    <p class="repository-api__box__text">URL</p>
                     <div class="repository-api__info">
-                      <p class="repository-api__info__text" ref="copyText">
+                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
                         {{ `${repository.nlp_server}v2/question-answering/` }}
-                      </p>
-                        <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
+                      </div>
+                        <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                           <unnnic-button
                             size="large"
                             text=""
                             type="secondary"
                             iconLeft="copy-paste-1"
-                            @click.native="copyURL"
+                            @click.native="copyURL()"
                           />
                         </unnnic-tool-tip>
                     </div>
-                    <p class="repository-api__box__one__text">Access Token</p>
+                    <div class="repository-api__box__text" ref="copyText" contenteditable="true">
+                      Access Token
+                    </div>
                     <div class="repository-api__info">
                       <p class="repository-api__info__text">
                         {{ authorization }}
                       </p>
+                       <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                       <unnnic-button
                         size="large"
                         text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
+                        @click.native="copyURL()"
                       />
+                      </unnnic-tool-tip>
                     </div>
-                    <p class="repository-api__box__one__text">
+                    <p class="repository-api__box__text">
                       {{ $t("webapp.home.bases.api_tabs_intelligence_id") }}
                     </p>
                     <div class="repository-api__info">
-                      <p class="repository-api__info__text">
-                        {{ repository.repository_version_id }}
-                      </p>
+                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
+                        {{ selectedBase }}
+                      </div>
+                      <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                       <unnnic-button
                         size="large"
                         text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
+                        @click.native="copyURL()"
                       />
+                      </unnnic-tool-tip>
                     </div>
                     <p class="description">
                     {{ $t("webapp.home.bases.api_guide") }}
                     </p>
                   </div>
-                  <div class="repository-api__box__one--first">
-                    <p class="repository-api__box__one__text">
+                  <div class="repository-api__box__content">
+                    <p class="repository-api__box__text">
                       POST {{ $t("webapp.home.bases.api_body") }}
                     </p>
-                    <div class="repository-api__info--json">
-                      {
-                      <br><br>
-                      "language":"{{ $t("webapp.home.bases.api_tabs_post_lang") }}"
-                      <br><br>
-                        "text": "{{
-                        $t("webapp.home.bases.api_tabs_post_text")}}"
-                      <br><br>
-                      }
-                      <unnnic-tool-tip text="Copiar" enabled side="top" maxWidth="15rem">
+                    <div class="repository-api__info__json">
+                      <pre ref="copyText" contenteditable="true">{{ JSON.stringify({
+                        language: $t("webapp.home.bases.api_tabs_post_lang"),
+                        text: $t("webapp.home.bases.api_tabs_post_text"),
+                      }, null, '\t') }}</pre>
+                       <unnnic-tool-tip
+                          @mouseout.native="copyLabel = 'Copiar'"
+                          :text="copyLabel"
+                          enabled
+                          side="top"
+                          maxWidth="15rem"
+                        >
                         <unnnic-button
                           size="large"
                           text=""
                           type="secondary"
                           iconLeft="copy-paste-1"
-                          @click.native="copyURL"
+                          @click="copyURL()"
                         />
                       </unnnic-tool-tip>
                     </div>
                   </div>
                 </div>
                 <div class="repository-api__box__two">
-                  <div lass="repository-api__box__one--first" style="width: 48%;">
+                  <div class="repository-api__box__content">
                     <p class="description--darkest">
                       {{ $t("webapp.home.bases.api_integrate") }}
                     </p>
@@ -207,32 +237,12 @@
                       </form>
                     </section>
                   </div>
-                  <div class="repository-api__box__one--first">
-                    <p class="repository-api__box__one__text">
+                  <div class="repository-api__box__content">
+                    <p class="repository-api__box__text">
                       {{ $t("webapp.home.bases.api_response") }}
                     </p>
-                    <div class="repository-api__info">
-                      <pre>
-                        {
-
-                          {
-
-                            "intent": {
-                              "name": "love",
-                              "confidence": 0.6943462393863934
-                            },
-                            "intent_ranking": [
-                              {
-                                "name": "love",
-                                "confidence": 0.6943462393863934
-                              },
-                              {
-                                "name": "hate",
-                                "confidence": 0.30565376061360666
-                              }
-                            ],
-                        }
-                      </pre>
+                    <div class="repository-api__info__json lg">
+                      <pre>{{ JSON.stringify(json, null, '\t') }}</pre>
                     </div>
                   </div>
                 </div>
@@ -261,6 +271,25 @@ export default {
     return {
       step: 1,
       bases: [],
+      repositoryUUID: null,
+      selectedBase: null,
+      json: {
+        intent: {
+          name: 'love',
+          confidence: 0.6943462393863934
+        },
+        intent_ranking: [
+          {
+            name: 'love',
+            confidence: 0.6943462393863934
+          },
+          {
+            name: 'hate',
+            confidence: 0.30565376061360666
+          }
+        ]
+      },
+      copyLabel: 'Copiar',
     }
   },
   watch: {
@@ -279,10 +308,12 @@ export default {
         page: 0,
       });
 
+      this.selectedBase = String(response.data.results?.[0]?.id);
+
       response.data.results.forEach(({ id, title }) => {
         this.bases.push({
           id,
-          name: title,
+          title
         });
       });
     },
@@ -311,10 +342,14 @@ export default {
       this.step++;
     },
     copyURL() {
-      const url = this.$refs.copyText;
-      url.innerHTML = window.location.href;
-      url.select();
+      const range = document.createRange();
+      range.selectNode(this.$refs.copyText);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
       document.execCommand('copy');
+      window.getSelection().removeAllRanges();
+
+      this.copyLabel = 'Copiado!';
     },
   }
 }
@@ -356,11 +391,7 @@ export default {
     margin-top: 24px;
   }
   &__box{
-
-    &__one{
-      display: flex;
-      justify-content: space-between;
-      &--first{
+      &__content{
         width: 48%;
         display: flex;
         flex-direction: column;
@@ -371,16 +402,18 @@ export default {
          font-size: $unnnic-font-size-body-gt;
          margin-bottom: 8px;
       }
-      &__card{
-        margin-bottom: 24px;
-      }
+    &__one{
+      display: flex;
+      justify-content: space-between;
     }
 
     &__two{
       display: flex;
       justify-content: space-between;
+      margin-bottom: 1.5rem;
     }
   }
+
   &__info{
     border: 1px solid #E2E6ED;
     border-radius: $unnnic-border-radius-sm;
@@ -397,7 +430,7 @@ export default {
       color: $unnnic-color-neutral-dark;
     }
 
-    &--json{
+    &__json{
       border: 1px solid #E2E6ED;
       border-radius: $unnnic-border-radius-sm;
       display: flex;
@@ -408,7 +441,7 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       color: $unnnic-color-neutral-dark;
-      flex:1;
+      flex: 0.822;
     }
   }
   &__form{
@@ -451,5 +484,17 @@ export default {
     color: $unnnic-color-neutral-darkest;
     margin-bottom: 8px;
   }
+}
+
+.lg{
+  flex: 1;
+}
+
+pre{
+  background-color: white;
+  padding: 0;
+  font-family: $unnnic-font-family-secondary;
+  color: $unnnic-color-neutral-darkest;
+  font-size: $unnnic-font-size-body-gt;
 }
 </style>

@@ -165,7 +165,7 @@ export default {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, $unnnic-opacity-level-overlay);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   padding: 0 12.88%;
