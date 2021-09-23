@@ -81,7 +81,7 @@
       "intelligence_type": "Type",
       "intelligence_type_classification_title":"Classifier Intelligence (default)",
       "intelligence_type_classification_description":"Train sample phrases, attributing them intents and the intelligence will identify such intentions in new received phrases.", 
-      "intelligence_type_content_title":"Content Intelligence (new)",
+      "intelligence_type_content_title":"Content Intelligence (soon!)",
       "intelligence_type_content_description":"Upload informational texts and the intelligence will be able to answer questions made by users based on the texts.",
       "cancel_create_intelligence_button": "Cancel",
       "navigate_to_next_button": "Next",

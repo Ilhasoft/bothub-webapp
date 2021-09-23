@@ -16,20 +16,24 @@
                     {{$t('webapp.home.bases.tests_subtitle')}}
                     </p>
                 </div>
-                <div>
-                    <unnnicSelect
-                    size="md"
-                    type="normal"
-                    placeholder=""
-                    >
-                    <div slot="header">Português (Brasil)</div>
-                        <option>None</option>
-                        <option>option1</option>
-                        <option>option2</option>
-                        <option>option3</option>
-                        <option>option4</option>
-                        <option>option5</option>
-                    </unnnicSelect>
+                <div class="repository-api__select__inputs">
+                    <div class="repository-api__select__input">
+                        <unnnicSelect
+                            v-if="bases.length"
+                            size="md"
+                            placeholder=""
+                            v-model="selectedBase"
+                            >
+                            <option
+                            v-for="base in bases"
+                            :value="base.id"
+                            :key="base.id"
+                            size="sm"
+                            >
+                            {{ base.title }}
+                            </option>
+                        </unnnicSelect>
+                    </div>
                 </div>
             </section> <!-- title -->
         </section>
@@ -39,17 +43,52 @@
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from '../Base';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'RepositoryContentTests',
   data(){
     return {
+      bases: [],
+      repositoryUUID: null,
+      selectedBase: null,
     }
   },
   components: {
     RepositoryViewBase,
   },
   extends: RepositoryBase,
+  methods: {
+    ...mapActions([
+      'getQAKnowledgeBases'
+    ]),
+  },
+  watch: {
+    // eslint-disable-next-line
+    'repository.uuid'() {
+      if (!this.repository.uuid || this.repository.uuid === 'null') {
+        return false;
+      }
+
+      this.repositoryUUID = this.repository.uuid;
+    },
+
+    async repositoryUUID() {
+      const response = await this.getQAKnowledgeBases({
+        repositoryUUID: this.repositoryUUID,
+        page: 0,
+      });
+
+      this.selectedBase = String(response.data.results?.[0]?.id);
+
+      response.data.results.forEach(({ id, title }) => {
+        this.bases.push({
+          id,
+          title
+        });
+      });
+    },
+  }
 }
 </script>
 
@@ -66,6 +105,14 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        &__text{
+            margin-top: 8px;
+            font-family: $unnnic-font-family-secondary;
+            font-size: $unnnic-font-size-body-gt;
+            color: $unnnic-color-neutral-dark;
+        }
     }
+
 }
 </style>

@@ -128,4 +128,7 @@ export default {
     }
   }
 }
+.no-show{
+  display: none;
+}
 </style>
