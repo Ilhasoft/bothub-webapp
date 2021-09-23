@@ -56,7 +56,11 @@
                   <div  class="repository-api__box__content">
                     <p class="repository-api__box__text">URL</p>
                     <div class="repository-api__info">
-                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
+                      <div
+                        class="repository-api__info__text"
+                        ref="copyTextOne"
+                        contenteditable="true"
+                      >
                         {{ `${repository.nlp_server}v2/question-answering/` }}
                       </div>
                         <unnnic-tool-tip
@@ -68,10 +72,9 @@
                         >
                           <unnnic-button
                             size="large"
-                            text=""
                             type="secondary"
                             iconLeft="copy-paste-1"
-                            @click.native="copyURL()"
+                            @click.native="copyURL(copyTextOne)"
                           />
                         </unnnic-tool-tip>
                     </div>
@@ -91,7 +94,6 @@
                         >
                       <unnnic-button
                         size="large"
-                        text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
                         @click.native="copyURL()"
@@ -102,7 +104,8 @@
                       {{ $t("webapp.home.bases.api_tabs_intelligence_id") }}
                     </p>
                     <div class="repository-api__info">
-                      <div class="repository-api__info__text" ref="copyText" contenteditable="true">
+                      <div class="repository-api__info__text"
+                        ref="copyText" contenteditable="true">
                         {{ selectedBase }}
                       </div>
                       <unnnic-tool-tip
@@ -146,7 +149,7 @@
                           text=""
                           type="secondary"
                           iconLeft="copy-paste-1"
-                          @click="copyURL()"
+                          @click.native="copyURL()"
                         />
                       </unnnic-tool-tip>
                     </div>
@@ -255,7 +258,6 @@
 </template>
 <script>
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
-import HighlightedCode from '@/components/shared/HighlightedCode';
 import RepositoryBase from '../Base';
 import { mapActions } from 'vuex';
 
@@ -264,7 +266,6 @@ export default {
   name: 'RepositoryContentAPI',
   components: {
     RepositoryViewBase,
-    HighlightedCode,
   },
   extends: RepositoryBase,
   data(){
@@ -341,9 +342,9 @@ export default {
     next() {
       this.step++;
     },
-    copyURL() {
+    copyURL(refButton) {
       const range = document.createRange();
-      range.selectNode(this.$refs.copyText);
+      range.selectNode(this.$refs.refButton);
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(range);
       document.execCommand('copy');

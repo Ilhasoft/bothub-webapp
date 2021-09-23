@@ -26,14 +26,14 @@
           @click.native="intelligence.repository_type = 'classifier'"
         />
         <unnnic-card
-          clickable
+          :clickable = false
           :title="$t('webapp.create_repository.intelligence_type_content_title')"
           :description="$t('webapp.create_repository.intelligence_type_content_description')"
           type="content"
           icon="lock-2-1"
           class="create-repository__intelligence__type__content"
-          :enabled="intelligence.repository_type === 'content'"
-          @click.native="intelligence.repository_type = 'content'"
+          :enabled="false"
+          @click.native="false"
         />
       </div>
       <div class="create-repository__intelligence__buttons">
@@ -127,5 +127,8 @@ export default {
       }
     }
   }
+}
+.no-show{
+  display: none;
 }
 </style>
