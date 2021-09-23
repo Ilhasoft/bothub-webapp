@@ -58,7 +58,7 @@
                     <div class="repository-api__info">
                       <div
                         class="repository-api__info__text"
-                        ref="copyTextOne"
+                        ref="copyTextURL"
                         contenteditable="true"
                       >
                         {{ `${repository.nlp_server}v2/question-answering/` }}
@@ -74,15 +74,20 @@
                             size="large"
                             type="secondary"
                             iconLeft="copy-paste-1"
-                            @click.native="copyURL(copyTextOne)"
+                            @click.native="copyURL('copyTextURL')"
                           />
                         </unnnic-tool-tip>
                     </div>
-                    <div class="repository-api__box__text" ref="copyText" contenteditable="true">
+                    <div
+                      class="repository-api__box__text"
+                      >
                       Access Token
                     </div>
                     <div class="repository-api__info">
-                      <p class="repository-api__info__text">
+                      <p class="repository-api__info__text"
+                        ref="copyTextAuth"
+                        contenteditable="true"
+                      >
                         {{ authorization }}
                       </p>
                        <unnnic-tool-tip
@@ -96,7 +101,7 @@
                         size="large"
                         type="secondary"
                         iconLeft="copy-paste-1"
-                        @click.native="copyURL()"
+                        @click.native="copyURL('copyTextAuth')"
                       />
                       </unnnic-tool-tip>
                     </div>
@@ -105,7 +110,7 @@
                     </p>
                     <div class="repository-api__info">
                       <div class="repository-api__info__text"
-                        ref="copyText" contenteditable="true">
+                        ref="copyTextID" contenteditable="true">
                         {{ selectedBase }}
                       </div>
                       <unnnic-tool-tip
@@ -120,7 +125,7 @@
                         text=""
                         type="secondary"
                         iconLeft="copy-paste-1"
-                        @click.native="copyURL()"
+                        @click.native="copyURL('copyTextID')"
                       />
                       </unnnic-tool-tip>
                     </div>
@@ -133,7 +138,7 @@
                       POST {{ $t("webapp.home.bases.api_body") }}
                     </p>
                     <div class="repository-api__info__json">
-                      <pre ref="copyText" contenteditable="true">{{ JSON.stringify({
+                      <pre ref="copyTextPost" contenteditable="true">{{ JSON.stringify({
                         language: $t("webapp.home.bases.api_tabs_post_lang"),
                         text: $t("webapp.home.bases.api_tabs_post_text"),
                       }, null, '\t') }}</pre>
@@ -149,7 +154,7 @@
                           text=""
                           type="secondary"
                           iconLeft="copy-paste-1"
-                          @click.native="copyURL()"
+                          @click.native="copyURL('copyTextPost')"
                         />
                       </unnnic-tool-tip>
                     </div>
@@ -344,7 +349,7 @@ export default {
     },
     copyURL(refButton) {
       const range = document.createRange();
-      range.selectNode(this.$refs.refButton);
+      range.selectNode(this.$refs[refButton]);
       window.getSelection().removeAllRanges();
       window.getSelection().addRange(range);
       document.execCommand('copy');
