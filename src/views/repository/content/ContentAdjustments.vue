@@ -354,7 +354,7 @@ export default {
       display: flex;
       justify-content: space-between;
       &__content {
-        width: 47%;
+        width: 48.8%;
       }
     }
   }
