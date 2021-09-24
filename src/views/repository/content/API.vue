@@ -428,12 +428,18 @@ export default {
     align-items: center;
     padding: 1rem;
     margin-bottom: 1.5rem;
+    height: 68px;
+    outline: none;
 
     &__text{
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       color: $unnnic-color-neutral-dark;
+    &:focus{
+      outline: none;
+      border: none;
+      }
     }
 
     &__json{
@@ -448,6 +454,13 @@ export default {
       font-size: $unnnic-font-size-body-gt;
       color: $unnnic-color-neutral-dark;
       flex: 0.822;
+
+      pre{
+      &:focus{
+        outline: none;
+        border: none;
+        }
+      }
     }
   }
   &__form{

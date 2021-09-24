@@ -384,7 +384,7 @@ export default {
       }
   }
   &__buttons{
-    width: 47%;
+    width: 48.8%;
   }
 }
 </style>
