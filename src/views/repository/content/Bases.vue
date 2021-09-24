@@ -189,7 +189,7 @@ export default {
   }
 
   &__description {
-    padding: 0 0.5rem;
+
 
     &__header {
       display: flex;
@@ -199,6 +199,7 @@ export default {
 
     &__text {
       margin-top: 8px;
+      font-size: $unnnic-font-size-body-gt;
       ul li {
         list-style-type: disc;
       }

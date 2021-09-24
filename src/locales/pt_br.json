@@ -81,7 +81,7 @@
       "intelligence_type": "Tipo",
       "intelligence_type_classification_title":"Inteligência de Classificação (padrão)",
       "intelligence_type_classification_description":"Treine frases de exemplo, atribuindo intenções e a inteligência conseguirá identificar essas intenções em novas frases enviadas.", 
-      "intelligence_type_content_title":"Inteligência de Conteúdo (em breve!)",
+      "intelligence_type_content_title":"Inteligência de Conteúdo (novo!)",
       "intelligence_type_content_description":"Cadastre textos informativos e a inteligência será capaz de responder perguntas feitas por usuários com base no texto.",
       "cancel_create_intelligence_button": "Cancelar",
       "navigate_to_next_button": "Avançar",
@@ -296,7 +296,7 @@
       "bases": {
         "knowledge_bases": "Bases de conhecimento",
         "description": "As Bases de Conhecimento são as fontes de texto de uma Inteligência de Conteúdo. Distribua o texto da inteligência em bases, reunindo informações semelhantes sobre cada uma. Saiba mais em nossa documentação.",
-        "new_knowledge_base": "Adicionar nova base de conhecimento",
+        "new_knowledge_base": "Adicionar nova base",
         "adjustments": "Ajustes",
         "adjustments_subtitle": "Inteligência de conteúdo",
         "adjustments_button": "Salvar alterações",
