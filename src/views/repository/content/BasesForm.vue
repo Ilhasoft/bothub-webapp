@@ -31,6 +31,16 @@
         </div>
       </section>
       <section class="repository-base-edit__header">
+        <unnnicButton
+            size="large"
+            text="Salvar"
+            type="terciary"
+            iconLeft="floppy-disk-1"
+            :iconRight="null"
+            :disabled="false"
+            :loading="submitting"
+            @click="saveText()"
+          />
           <unnnicButton
             size="large"
             text="Excluir base"
@@ -43,22 +53,13 @@
           />
           <unnnicButton
             size="large"
-            text="Salvar"
-            type="terciary"
-            iconLeft="floppy-disk-1"
-            :iconRight="null"
-            :disabled="false"
-            :loading="submitting"
-            @click="saveText()"
-          />
-          <unnnicButton
-            size="large"
             text="Testar base"
             type="terciary"
             iconLeft="messages-bubble-4"
             :iconRight="null"
             :disabled="false"
             :loading="false"
+            class="repository-base-edit__test-button"
           />
           <div>
             <unnnic-select
@@ -436,18 +437,24 @@ export default {
       cursor: pointer;
       margin-right: 1rem;
     }
-    &__button{
-      &:hover{
-        border: none;
-      }
-    }
   }
     &__title{
         border: none;
         font-family: $unnnic-font-family-primary;
         font-size: $unnnic-font-size-title-sm;
+        margin-right: 8px;
+        padding: 0 4px;
+        &:focus{
+        border: none;
+        border-radius: 2pt;
+        box-shadow: 0 0 0 1pt grey;
+        outline: none;
+        transition: .1s;
       }
-
+      }
+    &__test-button{
+      margin-right: 8px;
+    }
     &__text{
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-md;
@@ -468,7 +475,13 @@ export default {
       line-height: 29px;
       text-align: justify;
       color: $unnnic-color-neutral-dark;
-
+      &:focus{
+        border: none;
+        border-radius: 2pt;
+        box-shadow: 0 0 0 1pt grey;
+        outline: none;
+        transition: .1s;
+      }
       &::-webkit-scrollbar {
         margin-right: 1rem;
       }
