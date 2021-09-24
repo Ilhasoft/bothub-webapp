@@ -3,8 +3,8 @@
     <b-button
       ref="training"
       :disabled="loading || repository.examples__count === 0
-        || !showButton && trainProgress &&
-        !repository.authorization.can_write"
+        || (!showButton && trainProgress &&
+        !repository.authorization.can_write)"
       :loading="loading"
       type="is-secondary"
       class="train__button"
