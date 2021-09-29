@@ -56,6 +56,7 @@ export default {
       bases: [],
       repositoryUUID: null,
       selectedBase: null,
+      textToSend: null,
     }
   },
   components: {
@@ -115,34 +116,38 @@ export default {
         return false;
       }
 
-      const script = document.createElement('script');
-      script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/widget-latest.js');
-      document.body.appendChild(script);
-      console.log(this.initText)
-      script.addEventListener('load', () => {
-        window.WebChat.default.init({
-          selector: '#webchat',
-          initPayload: this.initText,
-          showCloseButton: true,
-          channelUuid: 'a1472c7b-4c87-47b0-abfe-b0e73c780373',
-          host: 'https://new.push.al',
-          socketUrl: 'https://socket.push.al',
-          title: 'Title',
-          subtitle: 'Subtitle',
-          startFullScreen: false,
-          inputTextFieldHint: 'Faça uma pergunta para a base de conhecimento...',
-          customizeWidget: {
-            userMessageBubbleColor: '#edfffe',
-            userMessageTextColor: '#272B33',
-            fullScreenBotMessageBubbleColor: '#F9F9F9',
-            botMessageBubbleColor: '#272B33',
-            inputBackgroundColor: '#FFFFFF',
-            inputFontColor: '#4E5666',
-            inputPlaceholderColor: '#67738B',
-          },
+      const message = this.initText;
+
+      if (window.WebChat) {
+        window.WebChat.send(message);
+      } else {
+        const script = document.createElement('script');
+        script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/widget-latest.js');
+        document.body.appendChild(script);
+        script.addEventListener('load', () => {
+          window.WebChat.default.init({
+            selector: '#webchat',
+            initPayload: message,
+            channelUuid: 'a1472c7b-4c87-47b0-abfe-b0e73c780373',
+            host: 'https://new.push.al',
+            socketUrl: 'https://socket.push.al',
+            title: 'Title',
+            subtitle: 'Subtitle',
+            startFullScreen: false,
+            inputTextFieldHint: 'Faça uma pergunta para a base de conhecimento...',
+            customizeWidget: {
+              userMessageBubbleColor: '#edfffe',
+              userMessageTextColor: '#272B33',
+              fullScreenBotMessageBubbleColor: '#F9F9F9',
+              botMessageBubbleColor: '#272B33',
+              inputBackgroundColor: '#FFFFFF',
+              inputFontColor: '#4E5666',
+              inputPlaceholderColor: '#67738B',
+            },
+          });
         });
-        // window.WebChat.send(this.initText);
-      });
+      }
+
       return true;
     },
   }
@@ -169,25 +174,59 @@ export default {
             color: $unnnic-color-neutral-dark;
         }
     }
-
 }
-      .push-conversation-container .push-header.push-with-subtitle {
-         display: none;
+
+#webchat {
+  ::v-deep {
+    .push-widget-container {
+        position: unset;
+        width: 100%;
+        height: 500px;
+        box-shadow: none;
+
+        @media (min-width: 1440px) {
+           height: 700px;
+        }
+    }
+    .push-launcher{
+      display: none;
+    }
+    .push-header.push-with-subtitle {
+      display: none;
+    }
+    .push-conversation-container{
+      box-shadow: none;
+    }
+    .push-sender{
+      background-color: #F9F9F9!important;
+      padding: 32px 73px;
+      height: unset;
+
+      input{
+        border: solid #D0D3D9 1px;
+        border-radius: 4px;
+        padding: 12px 16px;
+        height: 46px;
+        margin-right: 16px;
       }
+      .push-send{
+        background-color: transparent!important;
+      }
+    }
 
       .push-full-screen .push-conversation-container .push-send {
-         height: 48px !important;
-         border: 1px solid #D0D3D9 !important;
-         background: RGBA(226, 230, 237, 0.16) !important;
-         border-radius: 4px !important;
+         height: 48px;
+         border: 1px solid #D0D3D9;
+         background: RGBA(226, 230, 237, 0.16);
+         border-radius: 4px;
       }
 
       .push-full-screen .push-conversation-container .push-send:hover {
-         border: 1px solid #FFF !important;
+         border: 1px solid #FFF;
       }
 
       .push-message-text {
-         font-family: Lato !important;
+         font-family: Lato;
          font-weight: 400;
          font-size: 14px;
          text-shadow: none;
@@ -198,23 +237,21 @@ export default {
       }
 
       .push-full-screen .push-conversation-container .push-new-message {
-         height: 48px !important;
-         font-family: Lato !important;
-         font-weight: 400 !important;
-         font-size: 14px !important;
+         height: 48px;
+         font-family: Lato;
+         font-weight: 400;
+         font-size: 14px;
          text-shadow: none;
          border-radius: 4px;
-         padding: 12px 16px 12px 16px !important;
-         border: 1px solid #e2e6ed !important;
+         padding: 12px 16px 12px 16px;
+         border: 1px solid #e2e6ed;
          line-height: 22px;
-         color: #4E5666 !important;
+         color: #4E5666;
          margin-right: 16px;
       }
 
-      .push-full-screen
-      .push-conversation-container
-      .push-new-message:focus {
-         border: 1px solid #9CACCC !important;
+      .push-full-screen .push-conversation-container .push-new-message:focus {
+         border: 1px solid #9CACCC;
          caret-color: #9CACCC;
       }
 
@@ -225,29 +262,24 @@ export default {
          color: #D0D3D9;
       }
 
-      .push-full-screen .push-conversation-container
-      .push-new-message:focus::-moz-placeholder {
+      .push-full-screen .push-conversation-container .push-new-message:focus::-moz-placeholder {
          /* Firefox 19+ */
          color: #D0D3D9;
       }
 
-      .push-full-screen
-      .push-conversation-container
-      .push-new-message:focus:-ms-input-placeholder {
+      .push-full-screen .push-conversation-container .push-new-message:focus:-ms-input-placeholder {
          /* IE 10+ */
          color: #D0D3D9;
       }
 
-      .push-full-screen
-      .push-conversation-container
-      .push-new-message:focus:-moz-placeholder {
+      .push-full-screen .push-conversation-container .push-new-message:focus:-moz-placeholder {
          /* Firefox 18- */
          color: #D0D3D9;
       }
 
       .push-client:before {
          content: "Sua pergunta\a";
-         font-family: Lato !important;
+         font-family: Lato;
          white-space: pre;
          font-weight: 700;
          font-size: 14px;
@@ -256,7 +288,7 @@ export default {
       }
 
       .push-markdown h4 {
-         font-family: Lato !important;
+         font-family: Lato;
          white-space: pre;
          font-weight: 700;
          font-size: 14px;
@@ -266,12 +298,12 @@ export default {
       }
 
       .push-full-screen .push-conversation-container .push-sender {
-         background-color: #F9F9F9 !important;
+         background-color: #F9F9F9;
          border-top: 1px solid #E2E6ED;
       }
 
       .push-full-screen .push-messages-container {
-         padding: 24px 24px 24px 24px !important;
+         padding: 24px 24px 24px 24px;
       }
 
       .push-full-screen .push-messages-container .push-message .push-response {
@@ -282,7 +314,9 @@ export default {
          max-width: 50%;
 
       }
-
+        .push-response{
+          background-color: #F9F9F9;
+        }
       .push-full-screen .push-messages-container .push-message .push-response:hover {
          background: #F5F6F6;
       }
@@ -291,7 +325,7 @@ export default {
          border: 1px solid #C2E8E6;
          border-radius: 32px 4px 32px 32px;
          padding: 24px 64px 24px 24px;
-         max-width: 35% !important;
+         max-width: 35%;
       }
 
       .push-full-screen .push-messages-container .push-message .push-client:hover {
@@ -313,7 +347,7 @@ export default {
       }
 
       .push-full-screen .push-conversation-container .push-send button {
-         height: 22px !important;
+         height: 22px;
          padding: 12px;
          border: 1px solid #D0D3D9;
          background: RGBA(226, 230, 237, 0.16);
@@ -326,15 +360,15 @@ export default {
 
       .push-full-screen .push-conversation-container .push-send:after {
          content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0Perguntar";
-         padding: 12px 16px 12px 16px !important;
-         height: 22px !important;
-         font-family: Lato !important;
+         padding: 12px 16px 12px 16px;
+         height: 22px;
+         font-family: Lato;
          white-space: pre;
          font-weight: 400;
          font-size: 16px;
          color: #4E5666;
          text-indent: 28px;
-        //  background-image: url('@/imgs/send.svg');
+        //  background-image: url('send.svg');
          background-repeat: no-repeat;
          background-attachment: unset;
          background-position: left;
@@ -346,15 +380,18 @@ export default {
       }
 
       *::-webkit-scrollbar {
-         width: 4px !important;
+         width: 4px;
       }
 
       *::-webkit-scrollbar-track {
-         background: #d0d3d9 !important;
-         border-radius: 37.5rem !important;
+         background: #d0d3d9;
+         border-radius: 37.5rem;
       }
 
       *::-webkit-scrollbar-thumb {
-         background: #e2e6ed !important;
+         background: #e2e6ed;
       }
+
+  }
+}
 </style>
