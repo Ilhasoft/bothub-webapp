@@ -33,7 +33,7 @@
       <section class="repository-base-edit__header">
         <unnnicButton
             size="large"
-            text="Salvar"
+            :text="$t('webapp.home.bases.edit-base-save')"
             type="terciary"
             iconLeft="floppy-disk-1"
             :iconRight="null"
@@ -43,7 +43,7 @@
           />
           <unnnicButton
             size="large"
-            text="Excluir base"
+            :text="$t('webapp.home.bases.edit-base-delete')"
             type="terciary"
             iconLeft="bin-1-1"
             :iconRight="null"
@@ -53,7 +53,7 @@
           />
           <unnnicButton
             size="large"
-            text="Testar base"
+            :text="$t('webapp.home.bases.edit-base-test')"
             type="terciary"
             iconLeft="messages-bubble-4"
             :iconRight="null"

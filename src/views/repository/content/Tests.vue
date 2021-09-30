@@ -13,11 +13,14 @@
                         scheme="aux-lemon"
                     />
                     <p class="repository-tests__description__text">
-                    {{$t('webapp.home.bases.tests_subtitle')}}
+                    {{ $t('webapp.home.bases.tests_subtitle') }}
                     </p>
                 </div>
-                <div class="repository-api__select__inputs">
-                    <div class="repository-api__select__input">
+                <div class="repository-tests__select__inputs">
+                    <div class="repository-tests__select__input">
+                      <p class="repository-tests__description__text">
+                        {{ $t('webapp.home.bases.tests_select') }}
+                      </p>
                         <unnnicSelect
                             v-if="bases.length"
                             size="md"
@@ -47,7 +50,6 @@
 import RepositoryViewBase from '@/components/repository/RepositoryViewBase';
 import RepositoryBase from '../Base';
 import { mapActions, mapGetters } from 'vuex';
-import repository from '../../../store/repository';
 
 export default {
   name: 'RepositoryContentTests',
@@ -134,7 +136,7 @@ export default {
             title: 'Title',
             subtitle: 'Subtitle',
             startFullScreen: false,
-            inputTextFieldHint: 'Faça uma pergunta para a base de conhecimento...',
+            inputTextFieldHint: this.$t('webapp.home.bases.tests_placeholder'),
             customizeWidget: {
               userMessageBubbleColor: '#edfffe',
               userMessageTextColor: '#272B33',
@@ -172,12 +174,21 @@ export default {
             font-family: $unnnic-font-family-secondary;
             font-size: $unnnic-font-size-body-gt;
             color: $unnnic-color-neutral-dark;
-        }
+            margin-right: 1rem;        }
     }
+    &__select{
+      &__input{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
 }
 
 #webchat {
   ::v-deep {
+    // container principal
     .push-widget-container {
         position: unset;
         width: 100%;
@@ -188,6 +199,9 @@ export default {
            height: 700px;
         }
     }
+    .push-poweredby-container {
+        display: none;
+    }
     .push-launcher{
       display: none;
     }
@@ -197,6 +211,7 @@ export default {
     .push-conversation-container{
       box-shadow: none;
     }
+    // area de pergunta
     .push-sender{
       background-color: #F9F9F9!important;
       padding: 32px 73px;
@@ -213,34 +228,82 @@ export default {
         background-color: transparent!important;
       }
     }
+    // caixa de resposta
+    .push-response{
+      padding: 20px;
+      box-shadow: lightgrey 0px 0px 5px 0px;
+    }
+    // texto da resposta
+    .push-markdown {
+       h4 {
+         strong{
+        font-family: $unnnic-font-family-secondary;
+        white-space: pre;
+        font-weight: 700;
+        font-size: $unnnic-font-size-body-gt;
+        color: #009E96!important;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+         }
 
-      .push-full-screen .push-conversation-container .push-send {
-         height: 48px;
+      }
+    }
+    // pergunta
+    .push-client{
+      border: 1px solid #009E963D;
+      box-shadow: lightgrey 0px 0px 5px 0px;
+    }
+    // texto da pergunta
+    .push-client:before {
+      content: "Sua pergunta\a";
+      font-family: $unnnic-font-family-secondary;
+      white-space: pre;
+      font-weight: 700;
+      font-size: $unnnic-font-size-body-gt;
+      color: #009E96;
+      padding-bottom: 8px;
+    }
+    // botao de perguntar
+    .push-send{
+      border: dashed #D0D3D9 1px;
+      padding: 12px 16px;
+      border-radius: 4px;
+      img{
+        display: none;
+      }
+      &:after {
+        background-image: url('~@/assets/imgs/send.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-position-x: left;
+        padding: .75rem 1rem .75rem 1.5rem;
+        content: "Perguntar";
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
+        font-size: $unnnic-font-size-body-lg;
+        color: #4E5666;
+
+      }
+      &:hover {
          border: 1px solid #D0D3D9;
-         background: RGBA(226, 230, 237, 0.16);
-         border-radius: 4px;
       }
+    }
+    // texto da pergunta
+    .push-message-text {
+      font-family: $unnnic-font-family-secondary;
+      font-weight: $unnnic-font-weight-regular;
+      font-size: $unnnic-font-size-body-gt;
+    }
+    .push-message{
+      margin-bottom: 1rem;
+    }
 
-      .push-full-screen .push-conversation-container .push-send:hover {
-         border: 1px solid #FFF;
-      }
-
-      .push-message-text {
-         font-family: Lato;
-         font-weight: 400;
-         font-size: 14px;
-         text-shadow: none;
-      }
-
-      .push-sender {
-         background-color: rgb(255, 255, 255);
-      }
 
       .push-full-screen .push-conversation-container .push-new-message {
          height: 48px;
-         font-family: Lato;
-         font-weight: 400;
-         font-size: 14px;
+         font-family: $unnnic-font-family-secondary;
+         font-weight: $unnnic-font-weight-regular;
+         font-size: $unnnic-font-size-body-gt;
          text-shadow: none;
          border-radius: 4px;
          padding: 12px 16px 12px 16px;
@@ -276,27 +339,6 @@ export default {
          /* Firefox 18- */
          color: #D0D3D9;
       }
-
-      .push-client:before {
-         content: "Sua pergunta\a";
-         font-family: Lato;
-         white-space: pre;
-         font-weight: 700;
-         font-size: 14px;
-         color: #009E96;
-         padding-bottom: 8px;
-      }
-
-      .push-markdown h4 {
-         font-family: Lato;
-         white-space: pre;
-         font-weight: 700;
-         font-size: 14px;
-         color: #009E96;
-         margin-block-start: 0px;
-         margin-block-end: 0px;
-      }
-
       .push-full-screen .push-conversation-container .push-sender {
          background-color: #F9F9F9;
          border-top: 1px solid #E2E6ED;
@@ -332,66 +374,11 @@ export default {
          background: #E1FFFD;
       }
 
-      .push-markdown h2 {
-         margin-block-start: 8px;
-         margin-block-end: 4px;
-         font-size: 18px;
-      }
-
-      .push-conversation-container .push-poweredby-container {
-         display: none;
-      }
-
-      .push-full-screen .push-conversation-container .push-send img {
-         display: none;
-      }
-
-      .push-full-screen .push-conversation-container .push-send button {
-         height: 22px;
-         padding: 12px;
-         border: 1px solid #D0D3D9;
-         background: RGBA(226, 230, 237, 0.16);
-         border-radius: 4px;
-      }
-
-      .push-full-screen .push-conversation-container .push-send button :hover {
-         border: none;
-      }
-
-      .push-full-screen .push-conversation-container .push-send:after {
-         content: "\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0Perguntar";
-         padding: 12px 16px 12px 16px;
-         height: 22px;
-         font-family: Lato;
-         white-space: pre;
-         font-weight: 400;
-         font-size: 16px;
-         color: #4E5666;
-         text-indent: 28px;
-        //  background-image: url('send.svg');
-         background-repeat: no-repeat;
-         background-attachment: unset;
-         background-position: left;
-         background-origin: content-box;
-      }
-
-      button {
-         padding: 0px;
-      }
-
-      *::-webkit-scrollbar {
-         width: 4px;
-      }
-
-      *::-webkit-scrollbar-track {
-         background: #d0d3d9;
-         border-radius: 37.5rem;
-      }
-
-      *::-webkit-scrollbar-thumb {
-         background: #e2e6ed;
-      }
-
+    .push-markdown h2 {
+      margin-block-start: 8px;
+      margin-block-end: 4px;
+      font-size: 18px;
+    }
   }
 }
 </style>

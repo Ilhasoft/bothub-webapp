@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar">
+  <div class="sidebar" v-if=dontShow>
     <unnnic-sidebar
       :expanded="collapse"
       :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'"
@@ -468,6 +468,10 @@ export default {
     repositoryType() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.repository_type;
+    },
+    dontShow(){
+      if (this.$route.name === 'repository-content-bases-new' || this.$route.name === 'repository-content-bases-edit') return false
+      return true;
     }
   },
   watch: {

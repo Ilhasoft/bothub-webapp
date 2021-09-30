@@ -80,7 +80,11 @@ const router = new Router({
         store.dispatch('externalLogin', { token: token.replace('+', ' ') });
         store.dispatch('orgSelected', { org });
         store.dispatch('projectSelected', { project });
-        next('/home');
+        if (to.query.next){
+          next(to.query.next)
+        } else {
+          next('/home');
+        }
       },
     },
     {

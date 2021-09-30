@@ -3,7 +3,10 @@
     <div
       :class="collapse
         ? 'dashboard-layout__main-panel'
-        : 'dashboard-layout__main-panel--collapsed'">
+        : 'dashboard-layout__main-panel--collapsed'"
+        id="dashboradSize"
+        v-if=dashboardSize
+        >
           <side-bar @collapse="collapseHandle()" />
       <router-view />
     </div>
@@ -68,6 +71,16 @@ export default {
       || this.getCurrentRepository.categories_list.length < 1) return 'botinho';
       return this.getCurrentRepository.categories_list[0].icon || 'botinho';
     },
+    dashboardSize() {
+      if (this.$route.name === 'repository-content-bases-new' || this.$route.name === 'repository-content-bases-edit'){
+        document.getElementById('dashboradSize')
+          .classList.add('none')
+      } else {
+        document.getElementById('dashboradSize')
+          .classList.remove('none')
+      }
+      return true;
+    }
   },
   destroyed(){
     this.setRepository({})
@@ -141,5 +154,8 @@ html{
        width: calc( 100% - #{$menu-collapsed-size - 30});
     }
   }
+}
+.none {
+  width: 100%;
 }
 </style>
