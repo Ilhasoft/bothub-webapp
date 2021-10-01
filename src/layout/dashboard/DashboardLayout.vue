@@ -1,21 +1,20 @@
 <template>
   <div class="dashboard-layout">
     <div
-      :class="collapse
+      :class="[collapse
         ? 'dashboard-layout__main-panel'
-        : 'dashboard-layout__main-panel--collapsed'"
-        id="dashboradSize"
-        v-if=dashboardSize
+        : 'dashboard-layout__main-panel--collapsed',
+        basesNewOrBasesEdit ? 'none' : null]"
         >
-          <side-bar @collapse="collapseHandle()" />
+          <side-bar v-if="!basesNewOrBasesEdit" @collapse="collapseHandle()" />
       <router-view />
     </div>
     <tour
       v-if="getFinalModal && getFinalMessage !== 'true'"
       :step-count="1"
-      name="tutorial_button" />
+      name="tutorial_button"
+      />
   </div>
-
 </template>
 <script>
 
@@ -54,7 +53,7 @@ export default {
       'getRequirements',
     ]),
     hasLoaded() {
-      if (this.getCurrentRepository.name) return true;
+      if (this.getCurrentRepository.params) return true;
       return false;
     },
     warningsCount() {
@@ -71,16 +70,11 @@ export default {
       || this.getCurrentRepository.categories_list.length < 1) return 'botinho';
       return this.getCurrentRepository.categories_list[0].icon || 'botinho';
     },
-    dashboardSize() {
-      if (this.$route.name === 'repository-content-bases-new' || this.$route.name === 'repository-content-bases-edit'){
-        document.getElementById('dashboradSize')
-          .classList.add('none')
-      } else {
-        document.getElementById('dashboradSize')
-          .classList.remove('none')
-      }
-      return true;
-    }
+
+    basesNewOrBasesEdit() {
+      return this.$route.name === 'repository-content-bases-new'
+        || this.$route.name === 'repository-content-bases-edit'
+    },
   },
   destroyed(){
     this.setRepository({})

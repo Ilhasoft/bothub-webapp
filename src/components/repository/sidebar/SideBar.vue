@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar" v-if=dontShow>
+  <div class="sidebar">
     <unnnic-sidebar
       :expanded="collapse"
       :class="collapse ? 'sidebar-wrapper' : 'sidebar-wrapper--collapsed'"
@@ -469,10 +469,6 @@ export default {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.repository_type;
     },
-    dontShow(){
-      if (this.$route.name === 'repository-content-bases-new' || this.$route.name === 'repository-content-bases-edit') return false
-      return true;
-    }
   },
   watch: {
     repositoryUUID() {
@@ -493,7 +489,7 @@ export default {
         this.getAllVersions();
         this.setUpdateVersionsState(false);
       }
-    }
+    },
   },
   mounted() {
     this.getAllVersions();
@@ -576,7 +572,7 @@ export default {
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
-    }
+    },
   }
 };
 </script>

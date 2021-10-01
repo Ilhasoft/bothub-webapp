@@ -1,3 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideBar.vue renders correctly 1`] = `undefined`;
+exports[`SideBar.vue renders correctly 1`] = `
+<div class="sidebar">
+  <unnnic-sidebar expanded="true" class="sidebar-wrapper">
+    <section slot="header" class="unnic--clickable sidebar-wrapper__header">
+      <div class="sidebar-wrapper__header__field">
+        <div class="sidebar-wrapper__header__field__back">
+          <unnnic-icon icon="keyboard-arrow-left-1" size="xs"></unnnic-icon> <span class="sidebar-wrapper__header__field__back__text">some specific text</span>
+        </div>
+        <div class="sidebar-wrapper__header__field__detail"><span title="bothub" class="sidebar-wrapper__header__field__detail__title">
+            bothub
+          </span>
+          <div class="sidebar-wrapper__header__field__detail__created-by"><span class="sidebar-wrapper__header__field__detail__created-by__text">
+              some specific text
+            </span> <span title="weni" class="sidebar-wrapper__header__field__detail__created-by__nick">
+              weni
+            </span></div>
+        </div>
+      </div>
+      <!---->
+    </section>
+    <section class="sidebar-wrapper__body">
+      <!---->
+    </section>
+    <div slot="footer" class="sidebar-wrapper__footer">
+      <unnnic-sidebar-item icon="expand-8-1" text="some specific text" class="sidebar-wrapper__footer__text"></unnnic-sidebar-item>
+    </div>
+  </unnnic-sidebar> <span class="sidebar__divider"></span>
+</div>
+`;
