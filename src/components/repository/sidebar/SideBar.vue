@@ -468,7 +468,7 @@ export default {
     repositoryType() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.repository_type;
-    }
+    },
   },
   watch: {
     repositoryUUID() {
@@ -489,7 +489,7 @@ export default {
         this.getAllVersions();
         this.setUpdateVersionsState(false);
       }
-    }
+    },
   },
   mounted() {
     this.getAllVersions();
@@ -572,7 +572,7 @@ export default {
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
-    }
+    },
   }
 };
 </script>
