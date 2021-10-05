@@ -28,7 +28,7 @@
             />
           </div>
           <p class="repository-base-edit__text">
-            {{ new Date(this.knowledgeBase.lastUpdate) }}
+            {{ formatDate(this.knowledgeBase.lastUpdate)  }}
           </p>
         </div>
       </section>
@@ -303,7 +303,6 @@ export default {
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
-      console.log(new Date(response.data.last_update))
       const { title } = response.data;
 
       this.knowledgeBase.title = title;
@@ -340,6 +339,11 @@ export default {
       });
       */
     },
+    formatDate(info) {
+      const date = new Date(info);
+
+      return date.getDate()
+    }
   },
   watch: {
     // eslint-disable-next-line

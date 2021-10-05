@@ -74,7 +74,7 @@ export default {
     initText() {
       const infos = [
         this.myProfile.language,
-        this.authToken,
+        // this.authToken,
         this.authorization,
         this.selectedBase,
         this.repository.language
