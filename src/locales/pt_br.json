@@ -335,6 +335,8 @@
         "api_integrate_step_final_text": "Seguindo esses passos você terá integrado a Inteligência Artificial.",
         "api_integrate_step_final_text_button": "Consulte nossa documentação para mais detalhes",
         "edit-base-notitle": "Sem título",
+        "edit-base-saved-at": "Salvo por último em",
+        "edit-base-saved-time": "às",
         "edit-base-delete": "Excluir base",
         "edit-base-save": "Salvar",
         "edit-base-test": "Testar base",

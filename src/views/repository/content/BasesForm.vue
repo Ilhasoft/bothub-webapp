@@ -341,8 +341,14 @@ export default {
     },
     formatDate(info) {
       const date = new Date(info);
-
-      return date.getDate()
+      const day = date.getDate().toString();
+      const dayFull = (day.length === 1) ? 0 + day : day;
+      const month = (date.getMonth() + 1).toString();
+      const monthFull = (month.length === 1) ? 0 + month : month;
+      const yearFull = date.getFullYear();
+      const minutes = date.getMinutes();
+      const hour = date.getHours();
+      return `${this.$t('webapp.home.bases.edit-base-saved-at')} ${dayFull}/${monthFull}/${yearFull} ${this.$t('webapp.home.bases.edit-base-saved-time')} ${hour}h${minutes}`
     }
   },
   watch: {
