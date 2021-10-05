@@ -27,7 +27,9 @@
               class="repository-base-edit__header__button"
             />
           </div>
-          <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
+          <p class="repository-base-edit__text">
+            {{ new Date(this.knowledgeBase.lastUpdate) }}
+          </p>
         </div>
       </section>
       <section class="repository-base-edit__header">
@@ -162,6 +164,7 @@ export default {
           language: '',
           oldLanguage: '',
         },
+        lastUpdate: ''
       },
       modalData: {},
       destroyVerifying: null,
@@ -300,12 +303,14 @@ export default {
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
-
+      console.log(new Date(response.data.last_update))
       const { title } = response.data;
 
       this.knowledgeBase.title = title;
       this.knowledgeBase.oldTitle = title;
       this.provisoryTitle = title;
+      this.knowledgeBase.lastUpdate = response.data.last_update;
+
       const responseText = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
         knowledgeBaseId: this.$route.params.id,
