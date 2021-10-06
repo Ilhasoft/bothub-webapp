@@ -78,7 +78,7 @@ export default {
         this.selectedBase,
         this.repository.language
       ];
-      console.log(this.authorization)
+
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },
@@ -115,8 +115,11 @@ export default {
 
     initText() {
       if (!this.initText) {
+        console.log('test não abriu', this.initText);
         return false;
       }
+
+      console.log('test abriu', this.initText);
 
       const message = this.initText;
 
@@ -127,6 +130,7 @@ export default {
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/widget-latest.js');
         document.body.appendChild(script);
         script.addEventListener('load', () => {
+          console.log('loaded script widget', window.WebChat, window.WebChat.default);
           window.WebChat.default.init({
             selector: '#webchat',
             initPayload: message,
