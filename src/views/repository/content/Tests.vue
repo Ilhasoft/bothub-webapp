@@ -68,17 +68,17 @@ export default {
   computed: {
     ...mapGetters(['myProfile', 'authToken']),
     authorization() {
-      return this.repository?.authorization?.organizations?.[0]?.uuid;
+      return `Bearer ${this.repository?.authorization?.organizations?.[0]?.uuid};`
     },
 
     initText() {
       const infos = [
         this.myProfile.language,
-        this.authToken,
         this.authorization,
         this.selectedBase,
         this.repository.language
       ];
+      console.log(this.authorization)
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },

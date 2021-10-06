@@ -27,7 +27,9 @@
               class="repository-base-edit__header__button"
             />
           </div>
-          <p class="repository-base-edit__text">Salvo por último hoje às 16h00 - estático ainda</p>
+          <p class="repository-base-edit__text">
+            {{ formatDate(this.knowledgeBase.lastUpdate)  }}
+          </p>
         </div>
       </section>
       <section class="repository-base-edit__header">
@@ -162,6 +164,7 @@ export default {
           language: '',
           oldLanguage: '',
         },
+        lastUpdate: ''
       },
       modalData: {},
       destroyVerifying: null,
@@ -300,12 +303,13 @@ export default {
         repositoryUUID: this.repositoryUUID,
         id: this.$route.params.id
       });
-
       const { title } = response.data;
 
       this.knowledgeBase.title = title;
       this.knowledgeBase.oldTitle = title;
       this.provisoryTitle = title;
+      this.knowledgeBase.lastUpdate = response.data.last_update;
+
       const responseText = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
         knowledgeBaseId: this.$route.params.id,
@@ -335,6 +339,17 @@ export default {
       });
       */
     },
+    formatDate(info) {
+      const date = new Date(info);
+      const day = date.getDate().toString();
+      const dayFull = (day.length === 1) ? 0 + day : day;
+      const month = (date.getMonth() + 1).toString();
+      const monthFull = (month.length === 1) ? 0 + month : month;
+      const yearFull = date.getFullYear();
+      const minutes = date.getMinutes();
+      const hour = date.getHours();
+      return `${this.$t('webapp.home.bases.edit-base-saved-at')} ${dayFull}/${monthFull}/${yearFull} ${this.$t('webapp.home.bases.edit-base-saved-time')} ${hour}h${minutes}`
+    }
   },
   watch: {
     // eslint-disable-next-line
