@@ -88,7 +88,7 @@
                         ref="copyTextAuth"
                         contenteditable="true"
                       >
-                        {{ authorization }}
+                        Bearer {{ authorization }}
                       </p>
                        <unnnic-tool-tip
                           @mouseout.native="copyLabel = 'Copiar'"

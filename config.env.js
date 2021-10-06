@@ -3,7 +3,7 @@
 const packageDict = require('./package.json');
 
 process.env.VUE_APP_VERSION = (packageDict.version);
-process.env.VUE_APP_API_BASE_URL = (process.env.VUE_APP_API_BASE_URL || 'http://localhost:8000/');
+process.env.VUE_APP_API_BASE_URL = (process.env.VUE_APP_API_BASE_URL || 'https://api-ai-development.weni.ai/');
 process.env.VUE_APP_BOTHUB_NLP_BASE_URL = (process.env.VUE_APP_BOTHUB_NLP_BASE_URL || 'http://localhost:2657/');
 process.env.VUE_APP_BOTHUB_WEBAPP_BASE_URL = (process.env.VUE_APP_BOTHUB_WEBAPP_BASE_URL || 'http://localhost:8080/');
 process.env.VUE_APP_VERSION_ENABLED = (process.env.VUE_APP_VERSION_ENABLED || true);

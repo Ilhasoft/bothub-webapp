@@ -41,6 +41,7 @@ module.exports = {
     'object-curly-newline': 'off',
     'no-plusplus': 0,
     'comma-dangle': 'off',
+    "linebreak-style": 0,
     semi: 'off',
     camelcase: 'off',
     'no-param-reassign': 'off',
