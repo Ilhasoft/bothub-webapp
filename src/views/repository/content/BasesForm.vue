@@ -27,8 +27,8 @@
               class="repository-base-edit__header__button"
             />
           </div>
-          <p class="repository-base-edit__text">
-            {{ formatDate(this.knowledgeBase.lastUpdate)  }}
+          <p v-if="knowledgeBase.text.lastUpdate" class="repository-base-edit__text">
+            {{ formatDate(this.knowledgeBase.text.lastUpdate)  }}
           </p>
         </div>
       </section>
@@ -163,8 +163,8 @@ export default {
           oldValue: '',
           language: '',
           oldLanguage: '',
+          lastUpdate: '',
         },
-        lastUpdate: ''
       },
       modalData: {},
       destroyVerifying: null,
@@ -226,7 +226,6 @@ export default {
           repositoryUUID: this.repositoryUUID,
           title: this.knowledgeBase.title,
         });
-
         this.knowledgeBase.oldTitle = response.data.title;
 
         this.destroyVerifying();
@@ -259,15 +258,18 @@ export default {
 
       this.knowledgeBase.oldTitle = responseEditKnowledgeBase.data.title;
 
-      if (data.id && data.text) {
-        const responseUpdateText = await this.updateQAText(data);
-        this.knowledgeBase.text.oldValue = responseUpdateText.data.text;
-        this.knowledgeBase.text.oldLanguage = responseUpdateText.data.language;
-      } else if (data.text) {
-        const responseCreateText = await this.createQAText(data);
-        this.knowledgeBase.text.id = responseCreateText.data.id;
-        this.knowledgeBase.text.oldValue = responseCreateText.data.text;
-        this.knowledgeBase.text.oldLanguage = responseCreateText.data.language;
+      if (data.text) {
+        const action = data.id ? this.updateQAText : this.createQAText;
+
+        const responseText = await action(data);
+
+        if (!this.knowledgeBase.text.id) {
+          this.knowledgeBase.text.id = responseText.data.id;
+        }
+
+        this.knowledgeBase.text.oldValue = responseText.data.text;
+        this.knowledgeBase.text.oldLanguage = responseText.data.language;
+        this.knowledgeBase.text.lastUpdate = responseText.data.last_update;
       }
 
       this.submitting = false;
@@ -308,7 +310,7 @@ export default {
       this.knowledgeBase.title = title;
       this.knowledgeBase.oldTitle = title;
       this.provisoryTitle = title;
-      this.knowledgeBase.lastUpdate = response.data.last_update;
+      this.knowledgeBase.text.lastUpdate = response.data.last_update;
 
       const responseText = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
@@ -341,14 +343,12 @@ export default {
     },
     formatDate(info) {
       const date = new Date(info);
-      const day = date.getDate().toString();
-      const dayFull = (day.length === 1) ? 0 + day : day;
-      const month = (date.getMonth() + 1).toString();
-      const monthFull = (month.length === 1) ? 0 + month : month;
-      const yearFull = date.getFullYear();
-      const minutes = date.getMinutes();
-      const hour = date.getHours();
-      return `${this.$t('webapp.home.bases.edit-base-saved-at')} ${dayFull}/${monthFull}/${yearFull} ${this.$t('webapp.home.bases.edit-base-saved-time')} ${hour}h${minutes}`
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const hour = date.getHours().toString().padStart(2, '0');
+      return `${this.$t('webapp.home.bases.edit-base-saved-at')} ${day}/${month}/${year} ${this.$t('webapp.home.bases.edit-base-saved-time')} ${hour}h${minutes}`
     }
   },
   watch: {
