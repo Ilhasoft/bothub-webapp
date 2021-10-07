@@ -1,0 +1,58 @@
+
+name: Build Staging Image
+on:
+  push:
+    tags:
+      - 'staging-v*.*.*'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          ref: staging
+      - name: Check Branch
+        run:  cat build-docs.sh
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Set output
+        id: vars
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: bothubit/bothub-webapp:${{ steps.vars.outputs.tag }}
+          build-args: |
+            VUE_APP_API_BASE_URL=https://api-ai-staging.weni.ai/
+            VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp-ai-staging.weni.ai/'
+            VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://staging.weni.ai/'
+            VUE_APP_SUPPORTED_LANGUAGES='en|de|es|pt|fr|it|nl|pt_br|id|mn|ar|bn|hi|ru|th|vi|kh|sw|ca|da|el|fa|fi|ga|he|hr|hu|ja|nb|pl|ro|si|sv|te|tr|tt|ur|zh|ha|ka|kk|sq|hy|az|be|bs|bg|cs|ky|mk|sr|uk|uz|ab|aa|af|ak|am|an|as|av|ae|ay|bm|ba|eu|bh|bi|br|my|ch|ce|ny|kw|cv|co|cr|dv|dz|eo|et|ee|fo|fj|ff|gl|gu|ht|hz|ho|ia|ie|ig|ik|io|is|iu|jv|kl|kn|kr|ks|km|ki|rw|kv|kg|ko|ku|kj|la|lb|lg|li|ln|lo|lt|lu|lv|gv|mg|ms|ml|mt|mi|mr|mh|na|nv|nd|ne|ng|nn|no|ii|nr|oc|oj|cu|om|or|os|pa|pi|ps|qu|rm|rn|sa|sc|sd|se|sm|sg|gd|sn|sk|sl|so|st|su|ss|ta|tg|ti|bo|tk|tl|tn|to|tw|ty|ug|ve|vo|wa|cy|wo|fy|xh|yi|yo|za|zu'
+            VUE_APP_MAILCHIMP_LOGIN='bothub'
+            VUE_APP_MAILCHIMP_DATACENTER='us18'
+            VUE_APP_MAILCHIMP_USER_ID='us18'
+            VUE_APP_MAILCHIMP_LIST_ID=${{ secrets.MAILCHIMP_LIST_ID }}
+            VUE_APP_VERSION_ENABLED=true
+            VUE_APP_BOTHUB_WEBAPP_USE_SENTRY=true
+            VUE_APP_BOTHUB_WEBAPP_SENTRY=${{ secrets.BOTHUB_WEBAPP_SENTRY }}
+            VUE_APP_BOTHUB_WEBAPP_USE_HOTJAR=true
+            VUE_APP_BOTHUB_WEBAPP_HOTJAR_ID=${{ secrets.BOTHUB_WEBAPP_HOTJAR_ID }}
+            VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_KEY=${{ secrets.BOTHUB_WEBAPP_LIGHTHOUSE_KEY }}
+            VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID='9q5m2ju7nz'
+            VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED=false
+            VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED=true
+            VUE_APP_RECAPTCHA_TOKEN=${{ secrets.RECAPTCHA_TOKEN }}
+            VUE_APP_ALLOW_INTERACTIONS_ID=''
+            VUE_APP_HELPHERO_ID=''
+            VUE_APP_HELPHERO_TOUR=''
