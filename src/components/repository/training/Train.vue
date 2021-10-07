@@ -3,8 +3,7 @@
     <b-button
       ref="training"
       :disabled="loading || repository.examples__count === 0
-        || (!showButton && trainProgress &&
-        !repository.authorization.can_write)"
+        || trainProgress && !repository.authorization.can_write || !readyForTrain"
       :loading="loading"
       type="is-secondary"
       class="train__button"
@@ -65,10 +64,6 @@ export default {
       type: Function,
       default: async () => {}
     },
-    showButton: {
-      type: Boolean,
-      default: true
-    },
     authenticated: {
       type: Boolean,
       default: false
@@ -114,6 +109,9 @@ export default {
         return null;
       }
       return this.repository.authorization.can_write;
+    },
+    readyForTrain() {
+      return this.languageAvailableToTrain.length > 0
     }
   },
   watch: {
@@ -297,7 +295,7 @@ export default {
       this.trainResults = false;
       this.trainProgress = false;
       await this.updateRepository(false);
-    }
+    },
   }
 };
 </script>
