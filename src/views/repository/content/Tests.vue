@@ -68,7 +68,7 @@ export default {
   computed: {
     ...mapGetters(['myProfile', 'authToken']),
     authorization() {
-      return `Bearer ${this.repository?.authorization?.organizations?.[0]?.uuid};`
+      return `Bearer ${this.repository?.authorization?.organizations?.[0]?.uuid}`;
     },
 
     initText() {
