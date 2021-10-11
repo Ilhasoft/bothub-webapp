@@ -85,6 +85,7 @@ export default {
       repositoryStatus: {},
       loadingStatus: false,
       languageAvailableToTrain: []
+
     };
   },
   computed: {
@@ -111,7 +112,11 @@ export default {
       return this.repository.authorization.can_write;
     },
     readyForTrain() {
+      console.log('lw', this.languagesWarnings.length)
+      console.log('rt', this.trainRequirements.length)
       return this.languageAvailableToTrain.length > 0
+      || this.languagesWarnings.length > 0
+      || this.trainRequirements.length > 0
     }
   },
   watch: {
