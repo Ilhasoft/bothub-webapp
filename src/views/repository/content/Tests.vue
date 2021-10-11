@@ -66,7 +66,7 @@ export default {
   },
   extends: RepositoryBase,
   computed: {
-    ...mapGetters(['myProfile', 'authToken']),
+    ...mapGetters(['myProfile']),
     authorization() {
       return `Bearer ${this.repository?.authorization?.organizations?.[0]?.uuid}`;
     },
@@ -115,11 +115,11 @@ export default {
 
     initText() {
       if (!this.initText) {
-        console.log('test não abriu', this.initText);
+        console.log('teste não abriu', this.initText);
         return false;
       }
 
-      console.log('test abriu', this.initText);
+      console.log('teste abriu', this.initText);
 
       const message = this.initText;
 
