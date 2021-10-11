@@ -127,16 +127,16 @@ export default {
         window.WebChat.send(message);
       } else {
         const script = document.createElement('script');
-        script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/widget-latest.js');
+        script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         document.body.appendChild(script);
         script.addEventListener('load', () => {
           console.log('loaded script widget', window.WebChat, window.WebChat.default);
           window.WebChat.default.init({
             selector: '#webchat',
             initPayload: message,
-            channelUuid: 'a1472c7b-4c87-47b0-abfe-b0e73c780373',
+            channelUuid: '378ed12c-0e1f-4d18-a1f4-69f52635b59d',
             host: 'https://new.push.al',
-            socketUrl: 'https://socket.push.al',
+            socketUrl: 'https://websocket.weni.ai',
             title: 'Title',
             subtitle: 'Subtitle',
             startFullScreen: false,
