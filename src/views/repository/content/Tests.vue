@@ -109,11 +109,8 @@ export default {
         console.log('teste não abriu', this.initText);
         return false;
       }
-
       console.log('teste abriu', this.initText);
-
       const message = this.initText;
-
       if (window.WebChat) {
         window.WebChat.send(message);
       } else {
@@ -142,9 +139,9 @@ export default {
               inputPlaceholderColor: '#67738B',
             },
           });
+          window.WebChat.open()
         });
       }
-
       return true;
     },
   }
