@@ -69,7 +69,6 @@ export default {
         this.selectedBase,
         this.repository.language
       ];
-
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },
@@ -84,10 +83,15 @@ export default {
       if (!this.repository.uuid || this.repository.uuid === 'null') {
         return false;
       }
-
       this.repositoryUUID = this.repository.uuid;
     },
-
+    // eslint-disable-next-line
+    'myProfile'() {
+      if (this.myProfile.language === null) {
+        this.myProfile.language = 'en-us'
+        return true
+      }
+    },
     async repositoryUUID() {
       const response = await this.getQAKnowledgeBases({
         repositoryUUID: this.repositoryUUID,
@@ -103,7 +107,6 @@ export default {
         });
       });
     },
-
     initText() {
       if (!this.initText) {
         console.log('teste não abriu', this.initText);
@@ -113,10 +116,11 @@ export default {
       const message = this.initText;
       if (window.WebChat) {
         window.WebChat.send(message);
-        console.log('mandou mgs?')
+        console.log('1', message)
       } else {
         const script = document.createElement('script');
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
+        script.setAttribute('id', 'removeScript')
         document.body.appendChild(script);
         script.addEventListener('load', () => {
           console.log('abriu o script', window.WebChat)
@@ -145,6 +149,9 @@ export default {
       }
       return true;
     },
+  },
+  beforeDestroy() {
+    window.location.reload(true)
   }
 }
 </script>
