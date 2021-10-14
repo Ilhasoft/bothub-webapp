@@ -109,20 +109,21 @@ export default {
         console.log('teste não abriu', this.initText);
         return false;
       }
-      console.log('teste abriu', this.initText);
+      console.log('mandou payload', this.initText);
       const message = this.initText;
       if (window.WebChat) {
         window.WebChat.send(message);
+        console.log('mandou mgs?')
       } else {
         const script = document.createElement('script');
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         document.body.appendChild(script);
         script.addEventListener('load', () => {
-          console.log('loaded script ', window.WebChat)
+          console.log('abriu o script', window.WebChat)
           window.WebChat.default.init({
             selector: '#webchat',
             initPayload: message,
-            channelUuid: '378ed12c-0e1f-4d18-a1f4-69f52635b59d',
+            channelUuid: '4c46585b-8393-415b-856a-280c7d9ca9af',
             host: 'https://new.push.al',
             socketUrl: 'https://websocket.weni.ai',
             title: 'Title',
