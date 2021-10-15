@@ -1,13 +1,7 @@
 <template>
   <div
     :class="['modal__bases', type]"
-    @click.self="
-      () => {
-        if (!isPersistent) {
-          close();
-        }
-      }
-    "
+    @click.self="clickSelf()"
   >
     <div class="modal-container">
       <div
@@ -151,6 +145,11 @@ export default {
     setLoading(loading) {
       this.loading = loading;
     },
+    clickSelf() {
+      if (!this.isPersistent) {
+        this.close();
+      }
+    }
   },
 };
 </script>

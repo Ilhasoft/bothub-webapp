@@ -179,11 +179,11 @@ export default {
 
   &__header {
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: $unnnic-inset-sm;
 
     &__tag {
       margin: 0.8rem 0.5rem 2.188rem 0;
-      padding: 0 2rem;
+      padding: 0 $unnnic-inset-lg;
       font-size: 15px;
     }
   }
@@ -198,7 +198,7 @@ export default {
     }
 
     &__text {
-      margin-top: 8px;
+      margin-top: $unnnic-inset-nano;
       font-size: $unnnic-font-size-body-gt;
       ul li {
         list-style-type: disc;
@@ -209,7 +209,7 @@ export default {
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(4, 24%);
-    margin-top: 24px;
+    margin-top: $unnnic-inset-md;
     @media screen and (max-width: 1400px) {
       grid-template-columns: repeat(3, 32%);
     }
@@ -222,7 +222,7 @@ export default {
 
 }
 .tooltipStyle::after {
-  font-size: 12px;
+  font-size: $unnnic-font-size-body-md;
   line-height: 13px;
   padding: 1rem 0.5rem;
   font-family: $font-family;
