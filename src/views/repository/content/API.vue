@@ -398,7 +398,6 @@ export default {
 
     authorization() {
       return this.repository?.authorization?.uuid;
-      // return this.repository?.authorization?.organizations?.[0]?.uuid;
     },
 
     disabledPrevious() {
@@ -449,7 +448,7 @@ export default {
         color: $unnnic-color-neutral-darkest;
       }
       &__subtitle{
-        margin-top: 8px;
+        margin-top: $unnnic-inset-nano;
         font-family: $unnnic-font-family-secondary;
         font-size: $unnnic-font-size-body-gt;
         color: $unnnic-color-neutral-dark;
@@ -460,13 +459,13 @@ export default {
     align-items: center;
 
     &__text{
-      margin-right: 1rem;
+      margin-right: $unnnic-inset-sm;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
     }
   }
   &__tabs{
-    margin-top: 24px;
+    margin-top: $unnnic-inset-md;
   }
   &__box{
       &__content{
@@ -478,7 +477,7 @@ export default {
          font-family: $unnnic-font-family-secondary;
          color: $unnnic-color-neutral-darkest;
          font-size: $unnnic-font-size-body-gt;
-         margin-bottom: 8px;
+         margin-bottom: $unnnic-inset-nano;
       }
     &__one{
       display: flex;
@@ -488,7 +487,7 @@ export default {
     &__two{
       display: flex;
       justify-content: space-between;
-      margin-bottom: 1.5rem;
+      margin-bottom: $unnnic-inset-md;
     }
   }
 
@@ -498,8 +497,8 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    padding: $unnnic-inset-sm;
+    margin-bottom: $unnnic-inset-md;
     height: 68px;
     outline: none;
 
@@ -520,7 +519,7 @@ export default {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 1rem;
+      padding: $unnnic-inset-sm;
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
@@ -536,7 +535,7 @@ export default {
     }
   }
   &__form{
-    border-radius: 4px;
+    border-radius: $unnnic-border-radius-sm;
     border: 1px solid #E2E6ED;
     padding: 28px 30px 40px 24px;
     width: 100%;
@@ -550,14 +549,14 @@ export default {
       &__title{
         font-size: $unnnic-font-size-title-sm;
         color: $unnnic-color-neutral-darkest;
-        margin-bottom: 4px;
+        margin-bottom: $unnnic-inline-nano;
         font-weight: $unnnic-font-weight-bold;
         font-family: $unnnic-font-family-primary;
       }
       &__text{
         font-family: $unnnic-font-family-secondary;
         color: $unnnic-color-neutral-dark;
-        margin-bottom: 25px;
+        margin-bottom: $unnnic-inset-md;
       }
     }
   }
@@ -567,13 +566,13 @@ export default {
   font-family: $unnnic-font-family-secondary;
   font-size: $unnnic-font-size-body-gt;
   color: $unnnic-color-neutral-dark;
-  margin-bottom: 24px;
+  margin-bottom: $unnnic-inset-md;
 
   &--darkest{
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     color: $unnnic-color-neutral-darkest;
-    margin-bottom: 8px;
+    margin-bottom: $unnnic-inset-nano;
   }
 }
 

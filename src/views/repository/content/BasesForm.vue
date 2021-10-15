@@ -330,16 +330,6 @@ export default {
         this.knowledgeBase.text.language = this.repository.language;
         this.knowledgeBase.text.oldLanguage = this.repository.language;
       }
-
-      /*
-      responseText.data.results.forEach(({ id, language, text }) => {
-        this.$set(this.knowledgeBase.texts, language, {
-          id,
-          value: text,
-          oldValue: text,
-        });
-      });
-      */
     },
     formatDate(info) {
       const date = new Date(info);
@@ -377,24 +367,9 @@ export default {
         this.knowledgeBase.text.oldLanguage = this.repository.language;
       }
     },
-
-    selectedLanguage() {
-      /*
-      if (!this.knowledgeBase.texts[this.selectedLanguage]) {
-        this.$set(this.knowledgeBase.texts, this.selectedLanguage, {
-          id: null,
-          value: '',
-          oldValue: '',
-        });
-      }
-      */
-    },
   },
   computed: {
     hasUpdates() {
-      // if (this.$route.name === 'repository-content-bases-new') {
-      //   return false;
-      // }
       if (this.knowledgeBase.title !== this.knowledgeBase.oldTitle) {
         return true;
       }
@@ -404,13 +379,6 @@ export default {
       }
 
       return this.knowledgeBase.text.value !== this.knowledgeBase.text.oldValue;
-
-      /* return Object.keys(this.knowledgeBase.texts)
-        .some(
-          (language) => this.knowledgeBase.texts[language].value
-          !== this.knowledgeBase.texts[language].oldValue
-        );
-      */
     },
   },
   mounted() {
@@ -450,14 +418,14 @@ export default {
     }
     span{
       cursor: pointer;
-      margin-right: 1rem;
+      margin-right: $unnnic-inset-sm;
     }
   }
     &__title{
         border: none;
         font-family: $unnnic-font-family-primary;
         font-size: $unnnic-font-size-title-sm;
-        margin-right: 8px;
+        margin-right: $unnnic-inset-nano;
         padding: 0 4px;
         &:focus{
         border: none;
@@ -468,7 +436,7 @@ export default {
       }
       }
     &__test-button{
-      margin-right: 8px;
+      margin-right: $unnnic-inset-nano;
     }
     &__text{
       font-family: $unnnic-font-family-secondary;
@@ -481,7 +449,7 @@ export default {
       resize: none;
       height: 100vh;
       border: 1px solid $unnnic-color-neutral-soft;
-      border-radius: 8px;
+      border-radius: $unnnic-border-radius-md;
       margin-top: 34px;
       padding: 40px 64px;
       font-family: $unnnic-font-family-primary;
@@ -498,7 +466,7 @@ export default {
         transition: .1s;
       }
       &::-webkit-scrollbar {
-        margin-right: 1rem;
+        margin-right: $unnnic-inset-sm;
       }
     }
 }

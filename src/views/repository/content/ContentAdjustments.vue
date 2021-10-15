@@ -348,7 +348,7 @@ export default {
   }
 
   &__privacy {
-    margin-bottom: 2rem;
+    margin-bottom: $unnnic-inset-lg;
 
     &__cards {
       display: flex;
@@ -360,17 +360,17 @@ export default {
   }
   &__wrapper {
     &__fields {
-      margin-bottom: 2rem;
+      margin-bottom: $unnnic-inset-lg;
     }
   }
   &__description{
     &__text{
       font-family: Lato, sans-serif;;
-      font-weight: 400;
+      font-weight: $unnnic-font-weight-regular;
       line-height: 1.375rem;
-      font-size: .875rem;
+      font-size: $unnnic-font-size-body-gt;
       color: #67738b;
-      margin-top: 8px;
+      margin-top: $unnnic-inset-nano;
       ul li {
         list-style-type: disc;
       }
@@ -380,7 +380,7 @@ export default {
       &__buttons{
         display: flex;
         justify-content: space-between;
-        margin-bottom: 2rem;
+        margin-bottom: $unnnic-inset-lg;
       }
   }
   &__buttons{

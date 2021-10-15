@@ -169,7 +169,7 @@ export default {
     align-items: center;
 
     &__text {
-      margin-top: 8px;
+      margin-top: $unnnic-inset-nano;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       color: $unnnic-color-neutral-dark;
@@ -218,10 +218,10 @@ export default {
 
       input {
         border: solid #d0d3d9 1px;
-        border-radius: 4px;
+        border-radius: $unnnic-border-radius-sm;
         padding: 12px 16px;
         height: 46px;
-        margin-right: 16px;
+        margin-right: $unnnic-inset-sm;
       }
       .push-send {
         background-color: transparent !important;
@@ -238,7 +238,7 @@ export default {
         strong {
           font-family: $unnnic-font-family-secondary;
           white-space: pre;
-          font-weight: 700;
+          font-weight: $unnnic-font-weight-bold;
           font-size: $unnnic-font-size-body-gt;
           color: #009e96 !important;
           margin-block-start: 0px;
@@ -256,16 +256,16 @@ export default {
       content: "Sua pergunta\a";
       font-family: $unnnic-font-family-secondary;
       white-space: pre;
-      font-weight: 700;
+      font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-gt;
       color: #009e96;
-      padding-bottom: 8px;
+      padding-bottom: $unnnic-inset-nano;
     }
     // botao de perguntar
     .push-send {
       border: dashed #d0d3d9 1px;
-      padding: 12px 16px;
-      border-radius: 4px;
+      padding: $unnnic-squish-xs;
+      border-radius: $unnnic-border-radius-sm;
       img {
         display: none;
       }
@@ -301,12 +301,12 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       text-shadow: none;
-      border-radius: 4px;
-      padding: 12px 16px 12px 16px;
+      border-radius: $unnnic-border-radius-sm;
+      padding: $unnnic-squish-xs;
       border: 1px solid #e2e6ed;
       line-height: 22px;
       color: #4e5666;
-      margin-right: 16px;
+      margin-right: $unnnic-inset-sm;
     }
 
     .push-full-screen .push-conversation-container .push-new-message:focus {
@@ -341,7 +341,7 @@ export default {
     }
 
     .push-full-screen .push-messages-container {
-      padding: 24px 24px 24px 24px;
+      padding: $unnnic-inset-md;
     }
 
     .push-full-screen .push-messages-container .push-message .push-response {
@@ -370,7 +370,7 @@ export default {
     }
 
     .push-markdown h2 {
-      margin-block-start: 8px;
+      margin-block-start: $unnnic-inset-nano;
       margin-block-end: 4px;
       font-size: 18px;
     }
