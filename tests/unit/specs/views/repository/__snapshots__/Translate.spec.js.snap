@@ -1,9 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Translate.vue renders correctly 1`] = `
-<repository-view-base-stub quicktest="true">
-  <!---->
-  <!---->
+<repository-view-base-stub repository="[object Object]" quicktest="true">
+  <div>
+    <div>
+      <b-notification role="alert" class="is-info">
+        some specific text
+      </b-notification>
+      <login-form-stub hideforgotpassword="true"></login-form-stub>
+    </div>
+  </div>
+  <translate-token-modal-stub repositoryuuid="" urlgenerator="function () { [native code] }"></translate-token-modal-stub>
   <!---->
 </repository-view-base-stub>
 `;

@@ -1,6 +1,8 @@
 <template>
   <div
-    class="quick-test">
+    class="quick-test"
+    v-if="dontShow"
+    >
     <div
       ref="expandQuickTest"
       class="quick-test__collapse-button"
@@ -143,6 +145,12 @@ export default {
       if (!this.repository) return null;
       return this.repository.uuid;
     },
+    dontShow(){
+      if (this.repository.repository_type === 'content'){
+        return false;
+      }
+      return true;
+    }
   },
   watch: {
     defaultLanguage() {

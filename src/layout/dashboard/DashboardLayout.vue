@@ -1,18 +1,20 @@
 <template>
   <div class="dashboard-layout">
     <div
-      :class="collapse
+      :class="[collapse
         ? 'dashboard-layout__main-panel'
-        : 'dashboard-layout__main-panel--collapsed'">
-          <side-bar @collapse="collapseHandle()" />
+        : 'dashboard-layout__main-panel--collapsed',
+        basesNewOrBasesEdit ? 'none' : null]"
+        >
+          <side-bar v-if="!basesNewOrBasesEdit" @collapse="collapseHandle()" />
       <router-view />
     </div>
     <tour
       v-if="getFinalModal && getFinalMessage !== 'true'"
       :step-count="1"
-      name="tutorial_button" />
+      name="tutorial_button"
+      />
   </div>
-
 </template>
 <script>
 
@@ -51,7 +53,7 @@ export default {
       'getRequirements',
     ]),
     hasLoaded() {
-      if (this.getCurrentRepository.name) return true;
+      if (this.getCurrentRepository.params) return true;
       return false;
     },
     warningsCount() {
@@ -67,6 +69,11 @@ export default {
       || !this.getCurrentRepository.categories_list
       || this.getCurrentRepository.categories_list.length < 1) return 'botinho';
       return this.getCurrentRepository.categories_list[0].icon || 'botinho';
+    },
+
+    basesNewOrBasesEdit() {
+      return this.$route.name === 'repository-content-bases-new'
+        || this.$route.name === 'repository-content-bases-edit'
     },
   },
   destroyed(){
@@ -141,5 +148,8 @@ html{
        width: calc( 100% - #{$menu-collapsed-size - 30});
     }
   }
+}
+.none {
+  width: 100%;
 }
 </style>

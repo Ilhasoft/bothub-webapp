@@ -30,7 +30,7 @@
         <unnnic-carousel
           :tagItems="categoryList"
           v-if="categoryList.length > 0"
-          @change-selected="selectCategory($event)"
+          v-model="definition.categories"
         />
         <loading v-else />
       </section>
@@ -125,9 +125,6 @@ export default {
   },
   methods: {
     ...mapActions(['getAllCategories']),
-    selectCategory(category) {
-      this.definition.categories = category;
-    },
     async getCategories() {
       this.loading = true;
       try {

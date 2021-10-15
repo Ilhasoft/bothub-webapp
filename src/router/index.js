@@ -8,6 +8,11 @@ import RecoverPassword from '@/views/auth/RecoverPassword';
 import Terms from '@/views/Terms';
 import CreateRepository from '@/views/CreateRepository';
 import ResetPassword from '@/components/ResetPassword';
+import RepositoryContentBases from '@/views/repository/content/Bases';
+import RepositoryContentBasesForm from '@/views/repository/content/BasesForm';
+import RepositoryContentAdjustment from '@/views/repository/content/ContentAdjustments';
+import RepositoryContentAPI from '@/views/repository/content/API';
+import RepositoryContentTests from '@/views/repository/content/Tests';
 import RepositoryHome from '@/views/repository/Home';
 import RepositoryTrainings from '@/views/repository/Trainings';
 import RepositoryTranslate from '@/views/repository/Translate';
@@ -34,7 +39,7 @@ import store from '../store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -75,7 +80,11 @@ export default new Router({
         store.dispatch('externalLogin', { token: token.replace('+', ' ') });
         store.dispatch('orgSelected', { org });
         store.dispatch('projectSelected', { project });
-        next('/home');
+        if (to.query.next){
+          next(to.query.next)
+        } else {
+          next('/home');
+        }
       },
     },
     {
@@ -133,6 +142,36 @@ export default new Router({
       name: 'dashboard',
       component: DashboardLayout,
       children: [
+        {
+          path: ':ownerNickname/:slug/content/bases',
+          name: 'repository-content-bases',
+          component: RepositoryContentBases,
+        },
+        {
+          path: ':ownerNickname/:slug/content/bases/new',
+          name: 'repository-content-bases-new',
+          component: RepositoryContentBasesForm,
+        },
+        {
+          path: ':ownerNickname/:slug/content/bases/:id/edit',
+          name: 'repository-content-bases-edit',
+          component: RepositoryContentBasesForm,
+        },
+        {
+          path: ':ownerNickname/:slug/content/adjustment',
+          name: 'repository-content-adjustments',
+          component: RepositoryContentAdjustment,
+        },
+        {
+          path: ':ownerNickname/:slug/content/api',
+          name: 'repository-content-api',
+          component: RepositoryContentAPI,
+        },
+        {
+          path: ':ownerNickname/:slug/content/tests',
+          name: 'repository-content-tests',
+          component: RepositoryContentTests,
+        },
         {
           path: ':ownerNickname/:slug/',
           name: 'repository-summary',
@@ -289,3 +328,12 @@ export default new Router({
     return { x: 0, y: 0 };
   },
 });
+
+router.afterEach((to, from) => {
+  window.parent.postMessage({
+    event: 'changePathname',
+    pathname: window.location.pathname,
+  }, '*');
+});
+
+export default router;

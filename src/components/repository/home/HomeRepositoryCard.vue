@@ -23,7 +23,11 @@
           />
         </div>
 
-        <unnnic-dropdown position="bottom-left" :open.sync="dropdownOpen">
+        <unnnic-dropdown
+          v-if="type === 'repository'"
+          position="bottom-left"
+          :open.sync="dropdownOpen"
+        >
           <div slot="trigger">
             <unnnic-icon
               icon="navigation-menu-vertical-1"
@@ -94,9 +98,9 @@
       {{ repositoryDetail.description }}
     </section>
 
-    <section class="unnnic-card-intelligence__type">
+    <section v-if="type === 'repository'" class="unnnic-card-intelligence__type">
       <div class="unnnic-card-intelligence__type__text">
-        {{ $t("webapp.intelligences_lib.classification_intelligence") }}
+        {{ $t(`webapp.intelligences_lib.repository_type.${repositoryDetail.repository_type}`) }}
       </div>
       <unnnic-tool-tip
         :text="$t('webapp.intelligences_lib.intelligence_tooltip')"
@@ -115,7 +119,7 @@
     <div class="unnnic-card-intelligence__divider" />
 
     <section class="unnnic-card-intelligence__detail">
-      <div class="unnnic-card-intelligence__detail__content">
+      <div v-if="type === 'repository'" class="unnnic-card-intelligence__detail__content">
         <div class="unnnic-card-intelligence__detail__content__data">
           {{ $tc("webapp.intelligences_lib.intent", this.repositoryDetail.intents.length) }}
         </div>
@@ -184,6 +188,11 @@ export default {
     };
   },
   props: {
+    type: {
+      type: String,
+      default: 'repository',
+    },
+
     repositoryDetail: {
       type: [Object, Array],
       default: null
@@ -197,7 +206,7 @@ export default {
     getCurrentRepository() {
       return {
         name: this.repositoryDetail.name,
-        repository_version_id: this.repositoryDetail.version_default.id,
+        repository_version_id: this.repositoryDetail.version_default?.id,
         uuid: this.repositoryDetail.uuid
       };
     },
@@ -260,13 +269,29 @@ export default {
       this.integrateModal = value;
     },
     repositoryDetailsRouterParams() {
-      this.$router.push({
-        name: 'repository-summary',
-        params: {
-          ownerNickname: this.repositoryDetail.owner__nickname,
-          slug: this.repositoryDetail.slug
+      if (this.type === 'repository') {
+        let name;
+
+        if (this.repositoryDetail.repository_type === 'content') {
+          name = 'repository-content-bases';
+        } else if (this.repositoryDetail.repository_type === 'classifier') {
+          name = 'repository-summary';
         }
-      });
+        this.$router.push({
+          name,
+          params: {
+            ownerNickname: this.repositoryDetail.owner__nickname,
+            slug: this.repositoryDetail.slug
+          }
+        });
+      } else if (this.type === 'base') {
+        this.$router.push({
+          name: 'repository-content-bases-edit',
+          params: {
+            id: this.repositoryDetail.id,
+          }
+        });
+      }
     }
   }
 };
