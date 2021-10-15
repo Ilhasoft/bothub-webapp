@@ -397,7 +397,8 @@ export default {
     ...mapGetters(['myProfile', 'authToken']),
 
     authorization() {
-      return this.repository?.authorization?.organizations?.[0]?.uuid;
+      return this.repository?.authorization?.uuid;
+      // return this.repository?.authorization?.organizations?.[0]?.uuid;
     },
 
     disabledPrevious() {

@@ -59,7 +59,7 @@ export default {
   computed: {
     ...mapGetters(['myProfile']),
     authorization() {
-      return `Bearer ${this.repository?.authorization?.organizations?.[0]?.uuid}`;
+      return `Bearer ${this.repository?.authorization?.uuid}`;
     },
 
     initText() {
