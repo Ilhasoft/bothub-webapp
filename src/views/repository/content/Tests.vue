@@ -188,7 +188,7 @@ export default {
     .push-widget-container {
       position: unset;
       width: 100%;
-      height: 499px;
+      height: 435px;
       box-shadow: none;
 
       @media (min-width: 1440px) {
