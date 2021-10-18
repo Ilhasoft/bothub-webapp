@@ -1,6 +1,5 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-    <section>
       <section v-if="repository" class="repository-tests">
           <section class="repository-tests__description">
             <div class="repository-tests__title">
@@ -19,10 +18,7 @@
             </div>
             <div class="repository-tests__select__inputs">
               <div class="repository-tests__select__input">
-                <p class="repository-tests__description__text">
-                  {{ $t("webapp.home.bases.tests_select") }}
-                </p>
-                <unnnicSelect v-if="bases.length" size="md" placeholder="" v-model="selectedBase">
+                <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="selectedBase">
                   <option v-for="base in bases" :value="base.id" :key="base.id" size="sm">
                     {{ base.title }}
                   </option>
@@ -36,7 +32,6 @@
       <section>
         <div id="webchat" />
       </section>
-    </section>
   </repository-view-base>
 </template>
 <script>
@@ -139,7 +134,7 @@ export default {
             customizeWidget: {
               userMessageBubbleColor: '#edfffe',
               userMessageTextColor: '#272B33',
-              fullScreenBotMessageBubbleColor: '#F9F9F9',
+              fullScreenBotMessageBubbleColor: '$unnnic-color-neutral-light',
               botMessageBubbleColor: '#272B33',
               inputBackgroundColor: '#FFFFFF',
               inputFontColor: '#4E5666',
@@ -193,7 +188,7 @@ export default {
     .push-widget-container {
       position: unset;
       width: 100%;
-      height: 500px;
+      height: 499px;
       box-shadow: none;
 
       @media (min-width: 1440px) {
@@ -214,14 +209,14 @@ export default {
     }
     // area de pergunta
     .push-sender {
-      background-color: #f9f9f9 !important;
-      padding: 32px 73px;
+      background-color: $unnnic-color-neutral-light !important;
+      padding: 48px 56px;
       height: unset;
 
       input {
-        border: solid #d0d3d9 1px;
+        border: solid $unnnic-color-neutral-clean 1px;
         border-radius: $unnnic-border-radius-sm;
-        padding: 12px 16px;
+        padding: $unnnic-squish-xs;
         height: 46px;
         margin-right: $unnnic-inset-sm;
       }
@@ -232,36 +227,58 @@ export default {
     // caixa de resposta
     .push-response {
       padding: 20px;
-      box-shadow: lightgrey 0px 0px 5px 0px;
+      border-radius: 4px 32px 32px 32px;
+      border:  1px solid $unnnic-color-neutral-soft;
+      max-width: 50%;
+      &:hover{
+        background-color: $unnnic-color-background-grass;
+      }
     }
     // texto da resposta
     .push-markdown {
+      h2{
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-bold;
+        color: $unnnic-color-neutral-darkest;
+        text-transform: capitalize;
+      }
       h4 {
         strong {
           font-family: $unnnic-font-family-secondary;
           white-space: pre;
           font-weight: $unnnic-font-weight-bold;
           font-size: $unnnic-font-size-body-gt;
-          color: #009e96 !important;
+          color: $unnnic-color-brand-weni-soft !important;
           margin-block-start: 0px;
           margin-block-end: 0px;
+        }
+      }
+      ul{
+        list-style-type: disc;
+        padding-inline-start: 40px;
+        li{
+          text-transform: capitalize;
         }
       }
     }
     // pergunta
     .push-client {
       border: 1px solid #009e963d;
-      box-shadow: lightgrey 0px 0px 5px 0px;
-    }
-    // texto da pergunta
-    .push-client:before {
-      content: "Sua pergunta\a";
-      font-family: $unnnic-font-family-secondary;
-      white-space: pre;
-      font-weight: $unnnic-font-weight-bold;
-      font-size: $unnnic-font-size-body-gt;
-      color: #009e96;
-      padding-bottom: $unnnic-inset-nano;
+      border-radius: 32px 4px 32px 32px;
+      padding: 24px 32px 24px 24px;
+          // texto da pergunta
+      &:before {
+        content: "Sua pergunta\a";
+        font-family: $unnnic-font-family-secondary;
+        white-space: pre;
+        font-weight: $unnnic-font-weight-bold;
+        font-size: $unnnic-font-size-body-gt;
+        color: #009e96;
+        padding-bottom: $unnnic-inset-nano;
+      }
+      &:hover{
+        background-color: #E1FFFD;
+      }
     }
     //clipe
     label[for=push-file-upload]{
@@ -269,9 +286,10 @@ export default {
     }
     // botao de perguntar
     .push-send {
-      border: dashed #d0d3d9 1px;
-      padding: $unnnic-squish-xs;
+      border: dashed $unnnic-color-neutral-clean 1px;
+      padding: .75rem;
       border-radius: $unnnic-border-radius-sm;
+      width: 45px;
       img {
         display: none;
       }
@@ -280,15 +298,15 @@ export default {
         background-repeat: no-repeat;
         background-position: center;
         background-position-x: left;
-        padding: 0.75rem 1rem 0.75rem 1.5rem;
-        content: "Perguntar";
+        padding: 0.75rem;
+        content: " ";
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-lg;
         color: #4e5666;
       }
       &:hover {
-        border: 1px solid #d0d3d9;
+        border: 1px solid $unnnic-color-neutral-clean;
       }
     }
     // texto da pergunta
@@ -309,7 +327,7 @@ export default {
       text-shadow: none;
       border-radius: $unnnic-border-radius-sm;
       padding: $unnnic-squish-xs;
-      border: 1px solid #e2e6ed;
+      border: 1px solid $unnnic-color-neutral-soft;
       line-height: 22px;
       color: #4e5666;
       margin-right: $unnnic-inset-sm;
@@ -324,26 +342,26 @@ export default {
       .push-conversation-container
       .push-new-message:focus::-webkit-input-placeholder {
       /* Chrome/Opera/Safari */
-      color: #d0d3d9;
+      color: $unnnic-color-neutral-clean;
     }
 
     .push-full-screen .push-conversation-container .push-new-message:focus::-moz-placeholder {
       /* Firefox 19+ */
-      color: #d0d3d9;
+      color: $unnnic-color-neutral-clean;
     }
 
     .push-full-screen .push-conversation-container .push-new-message:focus:-ms-input-placeholder {
       /* IE 10+ */
-      color: #d0d3d9;
+      color: $unnnic-color-neutral-clean;
     }
 
     .push-full-screen .push-conversation-container .push-new-message:focus:-moz-placeholder {
       /* Firefox 18- */
-      color: #d0d3d9;
+      color: $unnnic-color-neutral-clean;
     }
     .push-full-screen .push-conversation-container .push-sender {
-      background-color: #f9f9f9;
-      border-top: 1px solid #e2e6ed;
+      background-color: $unnnic-color-neutral-light;
+      border-top: 1px solid $unnnic-color-neutral-soft;
     }
 
     .push-full-screen .push-messages-container {
@@ -351,14 +369,14 @@ export default {
     }
 
     .push-full-screen .push-messages-container .push-message .push-response {
-      border: 1px solid #e2e6ed;
+      border: 1px solid $unnnic-color-neutral-soft;
       border-radius: 4px 32px 32px 32px;
       padding: 24px 80px 24px 24px;
-      color: #3b414d;
+      color: $unnnic-color-neutral-darkest;
       max-width: 50%;
     }
     .push-response {
-      background-color: #f9f9f9;
+      background-color: $unnnic-color-neutral-light;
     }
     .push-full-screen .push-messages-container .push-message .push-response:hover {
       background: #f5f6f6;
