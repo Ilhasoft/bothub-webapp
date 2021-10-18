@@ -1,39 +1,41 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-    <section v-if="repository" class="repository-tests">
-      <section class="repository-tests__description">
-        <div class="repository-tests__title">
-          <unnnic-card
-            type="title"
-            :title="$t('webapp.home.bases.tests')"
-            enabled
-            icon="messages-bubble-1"
-            infoPosition="right"
-            :hasInformationIcon="false"
-            scheme="aux-lemon"
-          />
-          <p class="repository-tests__description__text">
-            {{ $t("webapp.home.bases.tests_subtitle") }}
-          </p>
-        </div>
-        <div class="repository-tests__select__inputs">
-          <div class="repository-tests__select__input">
-            <p class="repository-tests__description__text">
-              {{ $t("webapp.home.bases.tests_select") }}
-            </p>
-            <unnnicSelect v-if="bases.length" size="md" placeholder="" v-model="selectedBase">
-              <option v-for="base in bases" :value="base.id" :key="base.id" size="sm">
-                {{ base.title }}
-              </option>
-            </unnnicSelect>
-          </div>
-        </div>
-      </section>
-      <!-- title -->
-    </section>
-    <hr />
     <section>
-      <div id="webchat" />
+      <section v-if="repository" class="repository-tests">
+          <section class="repository-tests__description">
+            <div class="repository-tests__title">
+              <unnnic-card
+                type="title"
+                :title="$t('webapp.home.bases.tests')"
+                enabled
+                icon="messages-bubble-1"
+                infoPosition="right"
+                :hasInformationIcon="false"
+                scheme="aux-lemon"
+              />
+              <p class="repository-tests__description__text">
+                {{ $t("webapp.home.bases.tests_subtitle") }}
+              </p>
+            </div>
+            <div class="repository-tests__select__inputs">
+              <div class="repository-tests__select__input">
+                <p class="repository-tests__description__text">
+                  {{ $t("webapp.home.bases.tests_select") }}
+                </p>
+                <unnnicSelect v-if="bases.length" size="md" placeholder="" v-model="selectedBase">
+                  <option v-for="base in bases" :value="base.id" :key="base.id" size="sm">
+                    {{ base.title }}
+                  </option>
+                </unnnicSelect>
+              </div>
+            </div>
+          </section>
+          <!-- title -->
+      </section>
+      <hr />
+      <section id="webchatBody">
+        <div id="webchat" />
+      </section>
     </section>
   </repository-view-base>
 </template>
@@ -119,6 +121,7 @@ export default {
         console.log('1', message)
       } else {
         const script = document.createElement('script');
+        // const bodyScript = document.getElementById('webchatBody');
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         script.setAttribute('id', 'removeScript')
         document.body.appendChild(script);
@@ -150,8 +153,8 @@ export default {
       return true;
     },
   },
-  beforeDestroy() {
-    window.location.reload(true)
+  beforeMount() {
+    window.WebChat = null;
   }
 }
 </script>
