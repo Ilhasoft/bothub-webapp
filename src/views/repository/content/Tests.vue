@@ -33,7 +33,7 @@
           <!-- title -->
       </section>
       <hr />
-      <section id="webchatBody">
+      <section>
         <div id="webchat" />
       </section>
     </section>
@@ -121,7 +121,6 @@ export default {
         console.log('1', message)
       } else {
         const script = document.createElement('script');
-        // const bodyScript = document.getElementById('webchatBody');
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         script.setAttribute('id', 'removeScript')
         document.body.appendChild(script);
@@ -263,6 +262,10 @@ export default {
       font-size: $unnnic-font-size-body-gt;
       color: #009e96;
       padding-bottom: $unnnic-inset-nano;
+    }
+    //clipe
+    label[for=push-file-upload]{
+      display: none;
     }
     // botao de perguntar
     .push-send {
