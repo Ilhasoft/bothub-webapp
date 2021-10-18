@@ -188,7 +188,7 @@ export default {
     .push-widget-container {
       position: unset;
       width: 100%;
-      height: 499px;
+      height: 434px;
       box-shadow: none;
 
       @media (min-width: 1440px) {
@@ -209,8 +209,8 @@ export default {
     }
     // area de pergunta
     .push-sender {
-      background-color: $unnnic-color-neutral-light !important;
-      padding: 48px 56px;
+      background-color: #FFF !important;
+      padding: 16px;
       height: unset;
 
       input {
