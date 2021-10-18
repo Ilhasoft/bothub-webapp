@@ -263,6 +263,10 @@ export default {
       color: #009e96;
       padding-bottom: $unnnic-inset-nano;
     }
+    //clipe
+    label[for=push-file-upload]{
+      display: none;
+    }
     // botao de perguntar
     .push-send {
       border: dashed #d0d3d9 1px;
