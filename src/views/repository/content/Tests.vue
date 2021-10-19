@@ -28,6 +28,7 @@
           </section>
           <!-- title -->
       </section>
+      {{ selectedBaseText }}
       <hr />
       <section>
         <div id="webchat" />
@@ -44,9 +45,11 @@ export default {
   data(){
     return {
       bases: [],
+      basesText: [],
       repositoryUUID: null,
       selectedBase: null,
       textToSend: null,
+      selectedBaseText: ''
     }
   },
   components: {
@@ -58,12 +61,12 @@ export default {
     authorization() {
       return `Bearer ${this.repository?.authorization?.uuid}`;
     },
-
     initText() {
       const infos = [
         this.myProfile.language,
         this.authorization,
         this.selectedBase,
+        this.selectedBaseText,
         this.repository.language
       ];
       return infos.every((info) => info) ? infos.join('⇝') : '';
@@ -71,7 +74,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getQAKnowledgeBases'
+      'getQAKnowledgeBases',
+      'getQATexts'
     ]),
   },
   watch: {
@@ -103,6 +107,13 @@ export default {
           title
         });
       });
+      const responseText = await this.getQATexts({
+        repositoryUUID: this.repositoryUUID,
+        knowledgeBaseId: this.$route.params.id,
+        page: 0,
+      });
+      this.selectedBaseText = String(responseText.data.results?.[0]?.language);
+      console.log('oi', responseText.data.results?.[0].language, this.selectedBaseText);
     },
     initText() {
       if (!this.initText) {
@@ -188,7 +199,7 @@ export default {
     .push-widget-container {
       position: unset;
       width: 100%;
-      height: 434px;
+      height: 430px;
       box-shadow: none;
 
       @media (min-width: 1440px) {
