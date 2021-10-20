@@ -61,15 +61,17 @@ export default {
   computed: {
     ...mapGetters(['myProfile']),
     authorization() {
-      return `Bearer ${this.repository?.authorization?.uuid}`;
+      return this.repository?.authorization?.uuid ? `Bearer ${this.repository?.authorization?.uuid}` : '';
     },
     initText() {
       const infos = [
         this.myProfile.language,
         this.authorization,
-        this.baseIdLang,
-        this.repository.language
+        this.baseIdLang
       ];
+
+      console.log('infos', infos);
+
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },
@@ -101,7 +103,7 @@ export default {
         page: 0,
       });
 
-      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}`;
+      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0]?.language)}`;
       console.log(this.baseIdLang)
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
@@ -157,6 +159,13 @@ export default {
   },
   beforeMount() {
     window.WebChat = null;
+  },
+  beforeDestroy() {
+    const script = document.querySelector('#removeScript');
+
+    if (script) {
+      script.parentNode.removeChild(script);
+    }
   },
 }
 </script>
