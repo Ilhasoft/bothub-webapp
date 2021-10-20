@@ -101,7 +101,8 @@ export default {
         page: 0,
       });
 
-      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0].language)}`;
+      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}`;
+      console.log(this.baseIdLang)
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
         this.bases.push({
@@ -156,7 +157,7 @@ export default {
   },
   beforeMount() {
     window.WebChat = null;
-  }
+  },
 }
 </script>
 
