@@ -111,8 +111,8 @@
           v-if="isSavedModalOpen"
           type="alert"
           :data="{scheme:'feedback-green', icon:'check-circle-1-1',
-          title:$t('webapp.home.bases.adjustuments_modal_title'),
-          description: $t('webapp.home.bases.adjustments_modal_description')}"
+          title:this.$t('webapp.home.bases.adjustuments_modal_title'),
+          description: this.$t('webapp.home.bases.adjustments_modal_description')}"
           @close="isSavedModalOpen = false"
         />
         <unnnic-modal

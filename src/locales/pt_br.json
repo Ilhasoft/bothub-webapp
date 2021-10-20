@@ -309,7 +309,6 @@
         "adjustments_modal_alert_discard": "Descartar alterações",
         "tests": "Teste bases de conhecimento",
         "tests_subtitle": "Teste a base de conhecimento fazendo perguntas e observando as respostas.",
-        "tests_select": "Selecione:",
         "tests_placeholder": "Faça uma pergunta para a base de conhecimento...",
         "api": "Integrar esta inteligência",
         "api_subtitle": "Nossa API é compatível com diversas plataformas via integração por APIs REST. Para saber mais, acesse a documentação e a API explorer.",
