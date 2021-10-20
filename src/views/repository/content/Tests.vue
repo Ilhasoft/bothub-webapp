@@ -18,8 +18,10 @@
             </div>
             <div class="repository-tests__select__inputs">
               <div class="repository-tests__select__input">
-                <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="selectedBase">
-                  <option v-for="base in bases" :value="base.id" :key="base.id" size="sm">
+                <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+                  <option v-for="base in bases"
+                    :value="[base.knowledge_base, base.language].join('⇝')"
+                    :key="base.knowledge_base" size="sm">
                     {{ base.title }}
                   </option>
                 </unnnicSelect>
@@ -28,7 +30,6 @@
           </section>
           <!-- title -->
       </section>
-      {{ selectedBaseText }}
       <hr />
       <section>
         <div id="webchat" />
@@ -49,7 +50,8 @@ export default {
       repositoryUUID: null,
       selectedBase: null,
       textToSend: null,
-      selectedBaseText: ''
+      selectedBaseText: null,
+      baseIdLang: ''
     }
   },
   components: {
@@ -65,8 +67,7 @@ export default {
       const infos = [
         this.myProfile.language,
         this.authorization,
-        this.selectedBase,
-        this.selectedBaseText,
+        this.baseIdLang,
         this.repository.language
       ];
       return infos.every((info) => info) ? infos.join('⇝') : '';
@@ -94,26 +95,21 @@ export default {
       }
     },
     async repositoryUUID() {
-      const response = await this.getQAKnowledgeBases({
-        repositoryUUID: this.repositoryUUID,
-        page: 0,
-      });
-
-      this.selectedBase = String(response.data.results?.[0]?.id);
-
-      response.data.results.forEach(({ id, title }) => {
-        this.bases.push({
-          id,
-          title
-        });
-      });
-      const responseText = await this.getQATexts({
+      const response = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
         knowledgeBaseId: this.$route.params.id,
         page: 0,
       });
-      this.selectedBaseText = String(responseText.data.results?.[0]?.language);
-      console.log('oi', responseText.data.results?.[0].language, this.selectedBaseText);
+
+      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0].language)}`;
+
+      response.data.results.forEach(({ knowledge_base, title, language }) => {
+        this.bases.push({
+          knowledge_base,
+          title,
+          language
+        });
+      });
     },
     initText() {
       if (!this.initText) {

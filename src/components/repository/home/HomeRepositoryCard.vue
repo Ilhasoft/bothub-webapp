@@ -24,6 +24,7 @@
         </div>
 
         <unnnic-dropdown
+          v-show=" repositoryDetail.repository_type === 'classifier'"
           v-if="type === 'repository'"
           position="bottom-left"
           :open.sync="dropdownOpen"
@@ -119,7 +120,8 @@
     <div class="unnnic-card-intelligence__divider" />
 
     <section class="unnnic-card-intelligence__detail">
-      <div v-if="type === 'repository'" class="unnnic-card-intelligence__detail__content">
+      <div v-if="type === 'repository'" class="unnnic-card-intelligence__detail__content"
+        v-show=" repositoryDetail.repository_type === 'classifier'">
         <div class="unnnic-card-intelligence__detail__content__data">
           {{ $tc("webapp.intelligences_lib.intent", this.repositoryDetail.intents.length) }}
         </div>
@@ -253,6 +255,7 @@ export default {
           project_uuid: this.getProjectSelected,
           organization: this.getOrgSelected
         });
+        console.log(data.in_project)
         this.hasIntegration = data.in_project;
       } catch (err) {
         this.integrationError = err.response && err.response.data;
