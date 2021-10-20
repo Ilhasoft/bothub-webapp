@@ -77,7 +77,6 @@ export default {
   },
   methods: {
     ...mapActions([
-      'getQAKnowledgeBases',
       'getQATexts'
     ]),
   },
@@ -133,10 +132,11 @@ export default {
           console.log('abriu o script', window.WebChat)
           window.WebChat.default.init({
             selector: '#webchat',
-            initPayload: message,
+            // initPayload: message,
             channelUuid: '4c46585b-8393-415b-856a-280c7d9ca9af',
             host: 'https://new.push.al',
             socketUrl: 'https://websocket.weni.ai',
+            sessionId: `${(Math.floor(Math.random() * 1e10)).toString(36) + (new Date().getTime()).toString(36)}`,
             title: 'Title',
             subtitle: 'Subtitle',
             startFullScreen: false,
@@ -152,6 +152,7 @@ export default {
             },
           });
           window.WebChat.open()
+          setTimeout(() => window.WebChat.send(message), 1000);
         });
       }
       return true;
