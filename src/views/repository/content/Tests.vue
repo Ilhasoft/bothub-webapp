@@ -61,21 +61,22 @@ export default {
   computed: {
     ...mapGetters(['myProfile']),
     authorization() {
-      return `Bearer ${this.repository?.authorization?.uuid}`;
+      return this.repository?.authorization?.uuid ? `Bearer ${this.repository?.authorization?.uuid}` : '';
     },
     initText() {
       const infos = [
         this.myProfile.language,
         this.authorization,
-        this.baseIdLang,
-        this.repository.language
+        this.baseIdLang
       ];
+
+      console.log('infos', infos);
+
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },
   methods: {
     ...mapActions([
-      'getQAKnowledgeBases',
       'getQATexts'
     ]),
   },
@@ -101,7 +102,8 @@ export default {
         page: 0,
       });
 
-      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0].language)}`;
+      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0]?.language)}`;
+      console.log(this.baseIdLang)
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
         this.bases.push({
@@ -130,10 +132,11 @@ export default {
           console.log('abriu o script', window.WebChat)
           window.WebChat.default.init({
             selector: '#webchat',
-            initPayload: message,
+            // initPayload: message,
             channelUuid: '4c46585b-8393-415b-856a-280c7d9ca9af',
             host: 'https://new.push.al',
             socketUrl: 'https://websocket.weni.ai',
+            sessionId: `${(Math.floor(Math.random() * 1e10)).toString(36) + (new Date().getTime()).toString(36)}`,
             title: 'Title',
             subtitle: 'Subtitle',
             startFullScreen: false,
@@ -149,6 +152,7 @@ export default {
             },
           });
           window.WebChat.open()
+          setTimeout(() => window.WebChat.send(message), 1000);
         });
       }
       return true;
@@ -156,7 +160,14 @@ export default {
   },
   beforeMount() {
     window.WebChat = null;
-  }
+  },
+  beforeDestroy() {
+    const script = document.querySelector('#removeScript');
+
+    if (script) {
+      script.parentNode.removeChild(script);
+    }
+  },
 }
 </script>
 
