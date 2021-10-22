@@ -125,6 +125,8 @@ export default {
         console.log('1', message)
       } else {
         const script = document.createElement('script');
+        const flowsUUID = process.env.VUE_APP_QA_FLOW_CHANNEL;
+        console.log('uuid channel', process.env.VUE_APP_QA_FLOW_CHANNEL)
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         script.setAttribute('id', 'removeScript')
         document.body.appendChild(script);
@@ -133,7 +135,7 @@ export default {
           window.WebChat.default.init({
             selector: '#webchat',
             // initPayload: message,
-            channelUuid: '4c46585b-8393-415b-856a-280c7d9ca9af',
+            channelUuid: flowsUUID,
             host: 'https://new.push.al',
             socketUrl: 'https://websocket.weni.ai',
             sessionId: `${(Math.floor(Math.random() * 1e10)).toString(36) + (new Date().getTime()).toString(36)}`,
