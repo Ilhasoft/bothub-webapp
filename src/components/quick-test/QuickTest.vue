@@ -1,8 +1,8 @@
 <template>
   <div
     class="quick-test"
-    v-if="dontShow"
-    >
+    v-show="this.repository.repository_type === 'classifier'"
+  >
     <div
       ref="expandQuickTest"
       class="quick-test__collapse-button"
@@ -144,12 +144,6 @@ export default {
     repositoryUUID() {
       if (!this.repository) return null;
       return this.repository.uuid;
-    },
-    dontShow(){
-      if (this.repository.repository_type === 'content'){
-        return false;
-      }
-      return true;
     }
   },
   watch: {

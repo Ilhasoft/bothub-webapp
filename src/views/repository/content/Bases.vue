@@ -139,7 +139,7 @@ export default {
           id,
           name: title,
           owner__nickname: user_name,
-          available_languages: new Array(language_count),
+          available_languages: false,
           description,
         });
       });
@@ -179,10 +179,9 @@ export default {
 
   &__header {
     display: flex;
-    margin-bottom: $unnnic-inset-sm;
 
     &__tag {
-      margin: 0.8rem 0.5rem 2.188rem 0;
+
       padding: 0 $unnnic-inset-lg;
       font-size: 15px;
     }
@@ -243,4 +242,13 @@ export default {
     border-bottom: 1px solid $color-primary;
   }
 }
+::v-deep {
+  .unnnic-card-intelligence__detail{
+    display: none;
+  }
+  .unnnic-card-intelligence__divider{
+    display: none;
+  }
+}
+
 </style>

@@ -17,15 +17,6 @@
               contenteditable="true"
               @input="onTitleChange"
             >{{ provisoryTitle }}</h1>
-            <unnnicButton
-              text=""
-              type="terciary"
-              iconRight="pencil-write-1"
-              :disabled="false"
-              :loading="false"
-              @click.native="editTitle()"
-              class="repository-base-edit__header__button"
-            />
           </div>
           <p v-if="knowledgeBase.text.lastUpdate" class="repository-base-edit__text">
             {{ formatDate(this.knowledgeBase.text.lastUpdate)  }}
@@ -33,36 +24,55 @@
         </div>
       </section>
       <section class="repository-base-edit__header">
-        <unnnicButton
-            size="large"
-            :text="$t('webapp.home.bases.edit-base-save')"
-            type="terciary"
-            iconLeft="floppy-disk-1"
-            :iconRight="null"
-            :disabled="false"
-            :loading="submitting"
-            @click="saveText()"
-          />
-          <unnnicButton
-            size="large"
-            :text="$t('webapp.home.bases.edit-base-delete')"
-            type="terciary"
-            iconLeft="bin-1-1"
-            :iconRight="null"
-            :disabled="false"
-            :loading="false"
-            @click="openDeleteModal()"
-          />
-          <unnnicButton
-            size="large"
-            :text="$t('webapp.home.bases.edit-base-test')"
-            type="terciary"
-            iconLeft="messages-bubble-4"
-            :iconRight="null"
-            :disabled="false"
-            :loading="false"
-            class="repository-base-edit__test-button"
-          />
+        <div class="repository-base-edit__header__buttons">
+            <unnnic-tool-tip
+              :text="$t('webapp.home.bases.edit-base-save')"
+              enabled side="top"
+              maxWidth="15rem"
+            >
+               <unnnicButton
+                size="large"
+                type="secondary"
+                iconLeft="floppy-disk-1"
+                :iconRight="null"
+                :disabled="false"
+                :loading="submitting"
+                @click="saveText()"
+                class="repository-base-edit__header__button"
+              />
+            </unnnic-tool-tip>
+            <unnnic-tool-tip
+              :text="$t('webapp.home.bases.edit-base-delete')"
+              enabled side="top"
+              maxWidth="15rem"
+            >
+              <unnnicButton
+                size="large"
+                type="secondary"
+                iconLeft="bin-1-1"
+                :iconRight="null"
+                :disabled="false"
+                :loading="false"
+                @click="openDeleteModal()"
+                class="repository-base-edit__header__button"
+              />
+            </unnnic-tool-tip>
+            <unnnic-tool-tip
+              :text="$t('webapp.home.bases.edit-base-test')"
+              enabled side="top"
+              maxWidth="15rem"
+            >
+              <unnnicButton
+                size="large"
+                type="secondary"
+                iconLeft="messages-bubble-4"
+                :iconRight="null"
+                :disabled="false"
+                :loading="false"
+                class="repository-base-edit__header__button"
+              />
+            </unnnic-tool-tip>
+        </div>
           <div>
             <unnnic-select
               class="unnic--clickable"
@@ -297,9 +307,6 @@ export default {
         this.localNext();
       }
     },
-    editTitle() {
-      this.$refs.focusInput.focus()
-    },
     async init() {
       const response = await this.getQAKnowledgeBase({
         repositoryUUID: this.repositoryUUID,
@@ -412,6 +419,23 @@ export default {
   &__header{
     display: flex;
     align-items: center;
+    &__buttons{
+      display: flex;
+      justify-content: space-between;
+
+      .unnnic-tooltip{
+        &:nth-child(2){
+          margin: 0 $unnnic-inset-nano;
+        }
+         &:nth-child(3){
+          margin-right: $unnnic-inset-nano;
+        }
+      }
+    }
+    &__button{
+      width: 44px;
+      height: 44px;
+      }
     &--content{
       display: flex;
       align-items: center;
@@ -435,9 +459,6 @@ export default {
         transition: .1s;
       }
       }
-    &__test-button{
-      margin-right: $unnnic-inset-nano;
-    }
     &__text{
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-md;

@@ -104,7 +104,21 @@
         {{ $t(`webapp.intelligences_lib.repository_type.${repositoryDetail.repository_type}`) }}
       </div>
       <unnnic-tool-tip
+        v-if="repositoryDetail.repository_type === 'classifier'"
         :text="$t('webapp.intelligences_lib.intelligence_tooltip')"
+        enabled
+        side="bottom"
+        max-width="17rem"
+      >
+        <unnnic-icon
+          icon="information-circle-4"
+          class="unnnic-card-intelligence__type__icon"
+          size="sm"
+        />
+      </unnnic-tool-tip>
+      <unnnic-tool-tip
+        v-else-if="repositoryDetail.repository_type === 'content'"
+        :text="$t('webapp.intelligences_lib.intelligence_tooltip_content')"
         enabled
         side="bottom"
         max-width="17rem"
@@ -121,7 +135,7 @@
 
     <section class="unnnic-card-intelligence__detail">
       <div v-if="type === 'repository'" class="unnnic-card-intelligence__detail__content"
-        v-show=" repositoryDetail.repository_type === 'classifier'">
+        v-show="repositoryDetail.repository_type === 'classifier'">
         <div class="unnnic-card-intelligence__detail__content__data">
           {{ $tc("webapp.intelligences_lib.intent", this.repositoryDetail.intents.length) }}
         </div>
