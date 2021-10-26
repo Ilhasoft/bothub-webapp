@@ -260,7 +260,6 @@ export default {
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-bold;
         color: $unnnic-color-neutral-darkest;
-        text-transform: capitalize;
       }
       h4 {
         strong {
@@ -276,9 +275,6 @@ export default {
       ul{
         list-style-type: disc;
         padding-inline-start: 40px;
-        li{
-          text-transform: capitalize;
-        }
       }
     }
     // pergunta

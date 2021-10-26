@@ -249,6 +249,9 @@ export default {
   .unnnic-card-intelligence__divider{
     display: none;
   }
+  .unnnic-card-intelligence__description{
+      -webkit-line-clamp: 5;
+  }
 }
 
 </style>
