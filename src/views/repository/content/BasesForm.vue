@@ -12,6 +12,7 @@
               class="repository-base-edit__title"
               contenteditable="true"
               @input="onTitleChange"
+              id="titleId"
             >
               {{ provisoryTitle }}
             </h1>
@@ -26,7 +27,7 @@
           <unnnic-tool-tip
             :text="$t('webapp.home.bases.edit-base-save')"
             enabled
-            side="top"
+            side="bottom"
             maxWidth="15rem"
           >
             <unnnicButton
@@ -43,7 +44,7 @@
           <unnnic-tool-tip
             :text="$t('webapp.home.bases.edit-base-delete')"
             enabled
-            side="top"
+            side="bottom"
             maxWidth="15rem"
           >
             <unnnicButton
@@ -60,7 +61,7 @@
           <unnnic-tool-tip
             :text="$t('webapp.home.bases.edit-base-test')"
             enabled
-            side="top"
+            side="bottom"
             maxWidth="15rem"
           >
             <unnnicButton
@@ -71,6 +72,7 @@
               :disabled="false"
               :loading="false"
               class="repository-base-edit__header__button"
+              @click="goToTests()"
             />
           </unnnic-tool-tip>
         </div>
@@ -95,7 +97,7 @@
       <textarea
         v-model="knowledgeBase.text.value"
         name=""
-        id=""
+        id="textId"
         cols="30"
         rows="10"
         class="repository-base-edit__textarea"
@@ -359,6 +361,11 @@ export default {
       return `${this.$t('webapp.home.bases.edit-base-saved-at')} ${day}/${month}/${year} ${this.$t(
         'webapp.home.bases.edit-base-saved-time'
       )} ${hour}h${minutes}`;
+    },
+    goToTests() {
+      this.$router.push({
+        name: 'repository-content-tests'
+      });
     }
   },
   watch: {
@@ -504,6 +511,25 @@ export default {
     }
     &::-webkit-scrollbar {
       margin-right: $unnnic-inset-sm;
+    }
+  }
+}
+
+::v-deep {
+  .unnnic-tooltip-label-bottom {
+    top: 75px !important;
+  }
+  .shake-me {
+    animation: shake 3s infinite alternate;
+
+    &:after {
+      content: "\10A50";
+      color: red !important;
+      font-size: 70px;
+
+      display: flex;
+      justify-content: left;
+      align-items: center;
     }
   }
 }
