@@ -375,7 +375,6 @@ export default {
       this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)},${String(
         response.data.results?.[0]?.language
       )}`;
-      console.log(this.baseIdLang);
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
         this.bases.push({

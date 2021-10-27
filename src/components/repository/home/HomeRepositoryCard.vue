@@ -269,7 +269,6 @@ export default {
           project_uuid: this.getProjectSelected,
           organization: this.getOrgSelected
         });
-        console.log(data.in_project)
         this.hasIntegration = data.in_project;
       } catch (err) {
         this.integrationError = err.response && err.response.data;

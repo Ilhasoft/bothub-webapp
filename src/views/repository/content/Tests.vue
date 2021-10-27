@@ -69,9 +69,6 @@ export default {
         this.authorization,
         this.baseIdLang
       ];
-
-      console.log('infos', infos);
-
       return infos.every((info) => info) ? infos.join('⇝') : '';
     },
   },
@@ -103,7 +100,6 @@ export default {
       });
 
       this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0]?.language)}`;
-      console.log(this.baseIdLang)
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
         this.bases.push({
@@ -115,23 +111,18 @@ export default {
     },
     initText() {
       if (!this.initText) {
-        console.log('teste não abriu', this.initText);
         return false;
       }
-      console.log('mandou payload', this.initText);
       const message = this.initText;
       if (window.WebChat) {
         window.WebChat.send(message);
-        console.log('1', message)
       } else {
         const script = document.createElement('script');
         const flowsUUID = process.env.VUE_APP_QA_FLOW_CHANNEL;
-        console.log('uuid channel', process.env.VUE_APP_QA_FLOW_CHANNEL)
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
         script.setAttribute('id', 'removeScript')
         document.body.appendChild(script);
         script.addEventListener('load', () => {
-          console.log('abriu o script', window.WebChat)
           window.WebChat.default.init({
             selector: '#webchat',
             // initPayload: message,
