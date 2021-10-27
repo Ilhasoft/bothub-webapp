@@ -3,7 +3,7 @@
     <div v-if="repository" class="repository-base">
       <div class="repository-base__description">
         <div class="repository-base__title">
-            <unnnic-card
+          <unnnic-card
             type="title"
             :title="$t('webapp.home.description')"
             enabled
@@ -47,17 +47,18 @@
       <hr />
       <div>
         <unnnic-card
-            type="title"
-            :title="$t('webapp.home.bases.knowledge_bases')"
-            enabled
-            icon="book-address-1-2"
-            infoPosition="right"
-            :hasInformationIcon="false"
-            scheme="aux-pink"
-          />
-          <p class="repository-base__description__text">
-            {{ $t("webapp.home.bases.description") }}
-          </p>
+          type="title"
+          :title="$t('webapp.home.bases.knowledge_bases')"
+          enabled
+          icon="book-address-1-2"
+          infoPosition="right"
+          :hasInformationIcon="false"
+          scheme="aux-pink"
+        />
+        <p
+          class="repository-base__description__text"
+          v-html="$t('webapp.home.bases.description')"
+        ></p>
       </div>
       <div class="repository-base__cards">
         <unnnic-card
@@ -91,23 +92,19 @@ export default {
   components: {
     RepositoryViewBase,
     VueMarkdown,
-    HomeRepositoryCard,
+    HomeRepositoryCard
   },
   extends: RepositoryBase,
   data() {
     return {
       repositoryUUID: null,
 
-      bases: [],
+      bases: []
     };
   },
-  mounted() {
-  },
+  mounted() {},
   computed: {
-    ...mapGetters([
-      'getCurrentRepository',
-      'getProjectSelected',
-      'getOrgSelected']),
+    ...mapGetters(['getCurrentRepository', 'getProjectSelected', 'getOrgSelected']),
 
     getAllCategories() {
       if (!this.repository.categories_list) {
@@ -120,7 +117,7 @@ export default {
   },
   watch: {
     // eslint-disable-next-line
-    'repository.uuid'() {
+    "repository.uuid"() {
       if (!this.repository.uuid || this.repository.uuid === 'null') {
         return false;
       }
@@ -131,7 +128,7 @@ export default {
     async repositoryUUID() {
       const response = await this.getQAKnowledgeBases({
         repositoryUUID: this.repositoryUUID,
-        page: 0,
+        page: 0
       });
 
       response.data.results.forEach(({ id, title, user_name, language_count, description }) => {
@@ -140,20 +137,20 @@ export default {
           name: title,
           owner__nickname: user_name,
           available_languages: false,
-          description,
+          description
         });
       });
-    },
+    }
   },
   methods: {
     ...mapActions(['getQAKnowledgeBases']),
 
-    createNewBase(){
+    createNewBase() {
       this.$router.push({
         name: 'repository-content-bases-new'
       });
     }
-  },
+  }
 };
 </script>
 
@@ -181,15 +178,13 @@ export default {
     display: flex;
 
     &__tag {
-
       padding: 0 $unnnic-inset-lg;
       font-size: 15px;
+      margin-right: $unnnic-inset-nano;
     }
   }
 
   &__description {
-
-
     &__header {
       display: flex;
       justify-content: space-between;
@@ -218,7 +213,6 @@ export default {
       margin-bottom: $unnnic-inline-sm;
     }
   }
-
 }
 .tooltipStyle::after {
   font-size: $unnnic-font-size-body-md;
@@ -243,15 +237,18 @@ export default {
   }
 }
 ::v-deep {
-  .unnnic-card-intelligence__detail{
+  .unnnic-card-intelligence__detail {
     display: none;
   }
-  .unnnic-card-intelligence__divider{
+  .unnnic-card-intelligence__divider {
     display: none;
   }
-  .unnnic-card-intelligence__description{
-      -webkit-line-clamp: 5;
+  .unnnic-card-intelligence__description {
+    -webkit-line-clamp: 5;
+  }
+  .repository-base__description__text--link {
+    color: $unnnic-color-neutral-dark;
+    text-decoration: underline;
   }
 }
-
 </style>
