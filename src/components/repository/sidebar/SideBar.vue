@@ -88,8 +88,8 @@
           <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-content-tests') ?
-              'messages-bubble-3' :
-              'messages-bubble-1'
+              'check-square-2' :
+              'check-square-1'
             "
             :text="$t('webapp.menu.content.tests')"
             :enableTooltip="!collapse"
@@ -279,8 +279,8 @@
           <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-log')
-                ? 'email-action-unread-1-1'
-                : 'email-action-unread-1'
+                ? 'messages-bubble-3'
+                : 'messages-bubble-1'
             "
             :text="$t('webapp.menu.inbox')"
             :enableTooltip="!collapse"
@@ -370,7 +370,7 @@
 
           <section class="settings-menu">
             <unnnic-sidebar-item
-              :icon="dropSelect === 'isSettingsActive' ? 'cog-2' : 'charger-2'"
+              :icon="dropSelect === 'isSettingsActive' ? 'cog-2' : 'cog-1'"
               :text="$t('webapp.menu.settings')"
               :enableTooltip="!collapse"
               :active="dropSelect === 'isSettingsActive'"
