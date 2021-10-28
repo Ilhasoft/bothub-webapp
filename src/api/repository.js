@@ -2,11 +2,84 @@ import qs from 'query-string';
 import request from './request';
 import utils from './utils';
 
+
 export default {
 
   async getNewSchema() {
     const { data } = await request.$http.options('/v2/repository/repository-details');
     return data.actions.POST;
+  },
+  getQAKnowledgeBases(repositoryUUID, page = 0) {
+    const limit = 20;
+    const offset = limit * page;
+
+    return request.$http.get('v2/repository/qa/knowledge-base/', {
+      params: {
+        repository_uuid: repositoryUUID,
+        limit,
+        offset,
+      },
+    });
+  },
+  createQAKnowledgeBase(repositoryUUID, title) {
+    return request.$http.post('v2/repository/qa/knowledge-base/', {
+      repository: repositoryUUID,
+      title,
+    });
+  },
+  editQAKnowledgeBase(repositoryUUID, title, id){
+    return request.$http.patch(`v2/repository/qa/knowledge-base/${id}/`, {
+      title,
+    }, {
+      params: {
+        repository_uuid: repositoryUUID
+      },
+    });
+  },
+  getQAKnowledgeBase(repositoryUUID, id) {
+    return request.$http.get(`v2/repository/qa/knowledge-base/${id}/`, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
+    });
+  },
+  deleteQAKnowledgeBase(repositoryUUID, id) {
+    return request.$http.delete(`v2/repository/qa/knowledge-base/${id}/`, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
+    });
+  },
+  getQATexts(repositoryUUID, knowledgeBaseId, page = 0) {
+    const limit = 20;
+    const offset = limit * page;
+    return request.$http.get('v2/repository/qa/text/', {
+      params: {
+        repository_uuid: repositoryUUID,
+        knowledge_base_id: knowledgeBaseId,
+        limit,
+        offset,
+      },
+    });
+  },
+  createQAText(repositoryUUID, knowledgeBaseId, text, language) {
+    return request.$http.post('v2/repository/qa/text/', {
+      repository_uuid: repositoryUUID,
+      knowledge_base: knowledgeBaseId,
+      text,
+      language
+    });
+  },
+  updateQAText(repositoryUUID, knowledgeBaseId, id, text, language) {
+    return request.$http.put(`v2/repository/qa/text/${id}/`, {
+      knowledge_base: knowledgeBaseId,
+      text,
+      language
+    }, {
+      params: {
+        repository_uuid: repositoryUUID,
+      },
+    });
   },
   getAll(limit = 20) {
     return new utils.Page('/repository/repositories/', limit);

@@ -3,7 +3,7 @@ import { mapGetters, mapActions, mapState } from 'vuex';
 import Repository from '@/models/repository';
 
 // eslint-disable-next-line prefer-const
-let repository = null;
+let repository = { uuid: '' };
 export default {
   name: 'RepositoryBase',
   data() {

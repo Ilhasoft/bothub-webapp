@@ -10,6 +10,30 @@ export default {
     const response = await repository.getNewSchema();
     return response;
   },
+  getQAKnowledgeBases(store, { repositoryUUID, page }) {
+    return repository.getQAKnowledgeBases(repositoryUUID, page);
+  },
+  createQAKnowledgeBase(store, { repositoryUUID, title }) {
+    return repository.createQAKnowledgeBase(repositoryUUID, title);
+  },
+  editQAKnowledgeBase(store, { repositoryUUID, title, id }){
+    return repository.editQAKnowledgeBase(repositoryUUID, title, id);
+  },
+  getQAKnowledgeBase(store, { repositoryUUID, id }) {
+    return repository.getQAKnowledgeBase(repositoryUUID, id);
+  },
+  deleteQAKnowledgeBase(store, { repositoryUUID, id }) {
+    return repository.deleteQAKnowledgeBase(repositoryUUID, id);
+  },
+  getQATexts(store, { repositoryUUID, knowledgeBaseId, page }) {
+    return repository.getQATexts(repositoryUUID, knowledgeBaseId, page);
+  },
+  createQAText(store, { repositoryUUID, knowledgeBaseId, text, language }) {
+    return repository.createQAText(repositoryUUID, knowledgeBaseId, text, language);
+  },
+  updateQAText(store, { repositoryUUID, knowledgeBaseId, id, text, language }) {
+    return repository.updateQAText(repositoryUUID, knowledgeBaseId, id, text, language);
+  },
   getVersions(store, { limit, query }) {
     return repository.getVersions(limit, query);
   },

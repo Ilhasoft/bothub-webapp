@@ -18,42 +18,10 @@ exports[`SideBar.vue renders correctly 1`] = `
             </span></div>
         </div>
       </div>
-      <unnnic-select selected="bothub" size="sm" hascloudycolor="" placeholder="bothub" class="unnic--clickable sidebar-wrapper__header__select"></unnnic-select>
+      <!---->
     </section>
     <section class="sidebar-wrapper__body">
-      <unnnic-sidebar-menu>
-        <unnnic-sidebar-item icon="layout-dashboard-2" text="some specific text" class="sidebar-wrapper__body--active"></unnnic-sidebar-item>
-        <section class="training-menu">
-          <unnnic-sidebar-item icon="graph-stats-circle-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          <div class="sidebar-wrapper__body__item" style="display: none;">
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          </div>
-        </section>
-        <section class="evaluate-menu">
-          <unnnic-sidebar-item icon="check-square-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          <div class="sidebar-wrapper__body__item" style="display: none;">
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          </div>
-        </section>
-        <unnnic-sidebar-item icon="email-action-unread-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-        <section class="translate-menu">
-          <unnnic-sidebar-item icon="translate-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          <div class="sidebar-wrapper__body__item" style="display: none;">
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          </div>
-        </section>
-        <unnnic-sidebar-item icon="charger-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-        <section class="settings-menu">
-          <unnnic-sidebar-item icon="cog-1" text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          <div class="sidebar-wrapper__body__item" style="display: none;">
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-            <unnnic-sidebar-item text="some specific text" class="sidebar-wrapper__body__element"></unnnic-sidebar-item>
-          </div>
-        </section>
-      </unnnic-sidebar-menu>
+      <!---->
     </section>
     <div slot="footer" class="sidebar-wrapper__footer">
       <unnnic-sidebar-item icon="expand-8-1" text="some specific text" class="sidebar-wrapper__footer__text"></unnnic-sidebar-item>

@@ -3,7 +3,7 @@
     <section class="home__header">
         <unnnic-card
           :title="$t('webapp.intelligences_lib.title')"
-          icon="layout-dashboard-2"
+          icon="science-fiction-robot-1"
           type="title"
           :has-information-icon="false"
           scheme="aux-blue"/>
