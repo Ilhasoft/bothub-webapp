@@ -20,7 +20,6 @@ describe('TrainModal.vue', () => {
         open: true,
         readyForTrain: true,
         requirementsToTrain: {},
-        languageAvailableToTrain: 1,
         languagesReadyForTrain: {
           en: true,
         },

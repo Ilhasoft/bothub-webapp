@@ -24,7 +24,7 @@
       :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
       :languages-warnings="languagesWarnings"
-      :language-available-to-train="languageAvailableToTrain"
+      :ready-for-train="readyForTrain"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -107,6 +107,9 @@ export default {
         return {};
       }
       return this.getRequirements.languages_warnings;
+    },
+    readyForTrain(){
+      return this.getRequirements.ready_for_train
     },
     repositoryCanWrite() {
       if (!this.repository || this.repository.authorization.can_write === 'null') {
@@ -229,8 +232,9 @@ export default {
       if (
         Object.keys(this.getRequirements.languages_warnings).length
         || Object.keys(this.getRequirements.requirements_to_train).length
-        || this.languageAvailableToTrain.length === 0
+        || this.getRequirements.ready_for_train === false
       ) {
+        console.log(this.getRequirements.ready_for_train)
         this.trainModalOpen = true;
         return;
       }
