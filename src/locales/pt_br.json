@@ -353,6 +353,7 @@
       "training_status": "Status do Treinamento",
       "status_ok": "Seu bot está pronto para ser treinado!",
       "language_warning": "Não foi possível executar o treinamento",
+      "language_available": "Não existem frases de idiomas novos para treinar. Adicione-os e tente novamente.",
       "missing_requirements": "Alguns erros foram encontrados e o seu treinamento não foi concluído Corrija e tente novamente.",
       "ready_for_train_title": "Alguns erros foram encontrados",
       "ready_for_train_subtitle": "Volte e corrija os erros encontrados ou prossiga e treine parcialmente.",
