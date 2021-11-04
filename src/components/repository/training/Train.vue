@@ -324,5 +324,5 @@ export default {
       font-weight: $font-weight-bolder;
     }
   }
-}</style
->]
+}
+</style>
