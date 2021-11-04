@@ -16,14 +16,17 @@
             v-if="
               requirementsToTrainStatus ||
                 languagesWarningsStatus ||
-                languageAvailableToTrain.length === 0
+                IsReadyForTrain === false
             "
             class="train-modal__wrapper"
           >
             <p v-if="repositoryTrain" class="train-modal__wrapper__subtitle">
               {{ $t("webapp.train_modal.ready_for_train_subtitle") }}
             </p>
-            <p v-else-if="languageAvailableToTrain.length === 0">
+            <p
+              v-else-if="IsReadyForTrain === false"
+              class="train-modal__wrapper__subtitle"
+            >
               {{ $t("webapp.train_modal.language_available") }}
             </p>
             <p v-else class="train-modal__wrapper__subtitle">
@@ -133,9 +136,9 @@ export default {
       type: Object,
       required: true
     },
-    languageAvailableToTrain: {
-      type: Array,
-      required: true
+    readyForTrain: {
+      type: Boolean,
+      default: true
     },
     training: {
       type: Boolean,
@@ -164,6 +167,9 @@ export default {
     },
     languagesWarningsStatus() {
       return Object.keys(this.languagesWarnings).length !== 0;
+    },
+    IsReadyForTrain(){
+      return this.readyForTrain;
     }
   },
   methods: {
