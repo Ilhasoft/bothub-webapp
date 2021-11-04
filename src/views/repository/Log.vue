@@ -1,6 +1,5 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-    <div v-if="allowId">
       <div v-if="authenticated" class="repository-log">
         <div v-if="repository && repository.authorization.can_contribute">
           <div class="repository-log__header">
@@ -47,14 +46,6 @@
         :finish-event="eventClickFinish"
         name="inbox"
       />
-    </div>
-    <div v-else>
-       <div class="maintenance">
-        <img src="@/assets/imgs/maintance.svg" alt="" srcset="">
-        <h2>{{ $t("webapp.menu.maintenance-title") }}</h2>
-        <p>{{ $t("webapp.menu.maintenance-text") }}</p>
-        </div>
-    </div>
   </repository-view-base>
 </template>
 
@@ -93,7 +84,6 @@ export default {
       eventClick: false,
       eventSkip: false,
       eventClickFinish: false,
-      allowedId: process.env.VUE_APP_ALLOW_INTERACTIONS_ID,
     };
   },
   computed: {
@@ -114,9 +104,6 @@ export default {
       if (!this.versionsList) return [];
       return this.versionsList.items;
     },
-    allowId() {
-      return this.allowedId.split(',').includes(this.getCurrentRepository.uuid);
-    }
   },
   watch: {
     async repositoryUUID() {
