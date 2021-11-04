@@ -23,11 +23,9 @@
             <p v-if="repositoryTrain" class="train-modal__wrapper__subtitle">
               {{ $t("webapp.train_modal.ready_for_train_subtitle") }}
             </p>
-            <div v-else-if="languageAvailableToTrain.length === 0">
-              <p>
-                {{ $t("webapp.train_modal.language_available") }}
-              </p>
-            </div>
+            <p v-else-if="languageAvailableToTrain.length === 0">
+              {{ $t("webapp.train_modal.language_available") }}
+            </p>
             <p v-else class="train-modal__wrapper__subtitle">
               {{ $t("webapp.train_modal.missing_requirements") }}
             </p>
