@@ -1,69 +1,65 @@
 <template>
-  <b-modal
-    :active="open"
-    :can-cancel="false">
-    <div
-      id="tour-training-step-7"
-      :is-previous-disabled="true"
-      :is-finish-disabled="true">
-      <div
-        class="train-modal">
-        <div
-          class="train-modal__close">
-          <b-icon
-            icon="close"
-            class="train-modal__close__icon"
-            @click.native="closeModal()"/>
+  <b-modal :active="open" :can-cancel="false">
+    <div id="tour-training-step-7" :is-previous-disabled="true" :is-finish-disabled="true">
+      <div class="train-modal">
+        <div class="train-modal__close">
+          <b-icon icon="close" class="train-modal__close__icon" @click.native="closeModal()" />
         </div>
         <div class="train-modal__container">
-          <strong
-            v-if="repositoryTrain"
-            class="train-modal__text-warning">
-            {{ $t('webapp.train_modal.ready_for_train_title') }}</strong>
-          <strong
-            v-else
-            class="train-modal__text-warning">
-            {{ $t('webapp.train_modal.language_warning') }}</strong>
+          <strong v-if="repositoryTrain" class="train-modal__text-warning">
+            {{ $t("webapp.train_modal.ready_for_train_title") }}</strong
+          >
+          <strong v-else class="train-modal__text-warning">
+            {{ $t("webapp.train_modal.language_warning") }}</strong
+          >
           <div
-            v-if="requirementsToTrainStatus || languagesWarningsStatus"
-            class="train-modal__wrapper">
-            <p
-              v-if="repositoryTrain"
-              class="train-modal__wrapper__subtitle">
-              {{ $t('webapp.train_modal.ready_for_train_subtitle') }}
+            v-if="
+              requirementsToTrainStatus ||
+                languagesWarningsStatus ||
+                languageAvailableToTrain.length === 0
+            "
+            class="train-modal__wrapper"
+          >
+            <p v-if="repositoryTrain" class="train-modal__wrapper__subtitle">
+              {{ $t("webapp.train_modal.ready_for_train_subtitle") }}
             </p>
-            <p
-              v-else
-              class="train-modal__wrapper__subtitle">
-              {{ $t('webapp.train_modal.missing_requirements') }}
+            <div v-else-if="languageAvailableToTrain.length === 0">
+              <p>
+                {{ $t("webapp.train_modal.language_available") }}
+              </p>
+            </div>
+            <p v-else class="train-modal__wrapper__subtitle">
+              {{ $t("webapp.train_modal.missing_requirements") }}
             </p>
             <div class="train-modal__wrapper__content">
               <div v-if="requirementsToTrainStatus">
                 <div
                   v-for="(requirements, lang) in requirementsToTrain"
                   :key="lang"
-                  class="train-modal__wrapper__content__content-requirements">
+                  class="train-modal__wrapper__content__content-requirements"
+                >
                   <div
                     v-for="(requirement, i) in requirements"
                     :key="i"
-                    class="train-modal__wrapper__content__content-requirements__item">
+                    class="train-modal__wrapper__content__content-requirements__item"
+                  >
                     <div class="train-modal__wrapper__content__content-requirements__item__field">
-                      <b-tag
-                        type="is-primary"
-                        rounded>{{ lang }}</b-tag>
+                      <b-tag type="is-primary" rounded>{{ lang }}</b-tag>
                     </div>
                     <p>
                       <strong
-                      class="train-modal__wrapper__content__content-requirements__item__text">
+                        class="train-modal__wrapper__content__content-requirements__item__text"
+                      >
                         {{ firstText(requirement) }}
-                        </strong>
-                      <br>
+                      </strong>
+                      <br />
                       <span>{{ secondText(requirement) }}</span>
                     </p>
                     <b-icon
                       icon="close"
                       class="train-modal__wrapper__content__content-requirements__item__icon"
-                      @click.native="closeModal()"/>
+                      @click.native="closeModal()"
+                    />
                   </div>
                 </div>
               </div>
@@ -72,23 +68,21 @@
                   <div
                     v-for="(warnings, lang) in languagesWarnings"
                     :key="lang"
-                    class="train-modal__wrapper__content__content-requirements__item">
+                    class="train-modal__wrapper__content__content-requirements__item"
+                  >
                     <div class="train-modal__wrapper__content__content-requirements__item__field">
-                      <b-tag
-                        type="is-primary"
-                        rounded>{{ lang }}</b-tag>
+                      <b-tag type="is-primary" rounded>{{ lang }}</b-tag>
                     </div>
-                    <p
-                      v-for="(warning, index) in warnings"
-                      :key="index">
+                    <p v-for="(warning, index) in warnings" :key="index">
                       <strong>{{ firstText(warning) }}</strong>
-                      <br>
+                      <br />
                       <span>{{ secondText(warning) }}</span>
                     </p>
                     <b-icon
                       icon="close"
                       class="train-modal__wrapper__content__content-requirements__item__icon"
-                      @click.native="closeModal()"/>
+                      @click.native="closeModal()"
+                    />
                   </div>
                 </div>
               </div>
@@ -98,17 +92,19 @@
                 ref="closeBtn"
                 type="is-primary"
                 class="train-modal__buttons__style"
-                @click="closeModal()">
-                <span>{{ $t('webapp.train_modal.cancel') }}</span>
+                @click="closeModal()"
+              >
+                <span>{{ $t("webapp.train_modal.cancel") }}</span>
               </b-button>
               <b-button
                 v-if="repositoryTrain"
                 ref="trainBtn"
                 type="is-primary"
                 class="train-modal__buttons__style"
-                @click="dispatchTrain()">
-                <span>{{ $t('webapp.train_modal.train') }}</span>
-              </b-button >
+                @click="dispatchTrain()"
+              >
+                <span>{{ $t("webapp.train_modal.train") }}</span>
+              </b-button>
             </div>
           </div>
         </div>
@@ -124,34 +120,38 @@ import LanguageBadge from '@/components/shared/LanguageBadge';
 export default {
   name: 'TrainModal',
   components: {
-    LanguageBadge,
+    LanguageBadge
   },
   props: {
     open: {
       type: Boolean,
-      default: false,
+      default: false
     },
     requirementsToTrain: {
       type: Object,
-      required: true,
+      required: true
     },
     languagesWarnings: {
       type: Object,
-      required: true,
+      required: true
+    },
+    languageAvailableToTrain: {
+      type: Array,
+      required: true
     },
     training: {
       type: Boolean,
-      default: false,
+      default: false
     },
     repositoryTrain: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       blockedNextStepTutorial: false,
-      repositoryStatus: {},
+      repositoryStatus: {}
     };
   },
   computed: {
@@ -159,20 +159,17 @@ export default {
       'activeTutorial',
       'getCheckRepositoryTrain',
       'getSelectedVersionRepository',
-      'getSelectedVersion',
+      'getSelectedVersion'
     ]),
     requirementsToTrainStatus() {
       return Object.keys(this.requirementsToTrain).length !== 0;
     },
     languagesWarningsStatus() {
       return Object.keys(this.languagesWarnings).length !== 0;
-    },
+    }
   },
   methods: {
-    ...mapActions([
-      'setRepositoryTraining',
-      'getRepositoryStatus',
-    ]),
+    ...mapActions(['setRepositoryTraining', 'getRepositoryStatus']),
     firstText(requirement) {
       const initalText = requirement.split('\n');
       return initalText[0];
@@ -190,14 +187,14 @@ export default {
     dispatchTrain() {
       this.$emit('proceedTrain');
       this.$emit('closeTrainModal');
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/colors.scss';
-@import '~@/assets/scss/variables.scss';
+@import "~@/assets/scss/colors.scss";
+@import "~@/assets/scss/variables.scss";
 
 ::-webkit-scrollbar {
   width: 0.6rem;
@@ -230,19 +227,19 @@ export default {
   margin: auto;
   font-family: $font-family;
 
-  &__close{
+  &__close {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 1rem 1rem 0 0;
     cursor: pointer;
-    &__icon{
+    &__icon {
       color: $color-grey;
     }
   }
 
-  &__container{
+  &__container {
     padding: 1rem 3rem;
     display: flex;
     flex-direction: column;
@@ -250,29 +247,27 @@ export default {
     align-items: center;
   }
 
-  &__text-ready-train{
+  &__text-ready-train {
     font-size: 20px;
     color: $color-primary;
   }
 
-  &__text-warning{
+  &__text-warning {
     font-size: 28px;
   }
 
   &__wrapper {
     padding: 1rem;
 
-
-    &__subtitle{
+    &__subtitle {
       margin-bottom: 1.5rem;
     }
 
-    &__content{
+    &__content {
       overflow: auto;
       max-height: 13.75rem;
 
       &__content-requirements {
-
         &__item {
           display: flex;
           justify-content: space-between;
@@ -283,27 +278,27 @@ export default {
           border: 1.5px solid $color-danger;
           background-color: $color-fake-white;
           border-radius: 0.375rem;
-            &__icon{
-              color:$color-danger;
-              padding-left: 1rem;
-            }
+          &__icon {
+            color: $color-danger;
+            padding-left: 1rem;
+          }
 
-            &__field{
-              width: 2.9rem;
-              display: flex;
-              padding-right: 1rem;
-              font-weight: $font-weight-bolder;
-              justify-content: center;
-              align-items: center;
-            }
+          &__field {
+            width: 2.9rem;
+            display: flex;
+            padding-right: 1rem;
+            font-weight: $font-weight-bolder;
+            justify-content: center;
+            align-items: center;
+          }
 
-            &__text{
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              display: block;
-              max-width: 28rem;
-            }
+          &__text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 28rem;
+          }
         }
       }
     }
@@ -314,7 +309,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    &__style{
+    &__style {
       box-shadow: 0px 3px 6px #00000029;
       width: 6rem;
       height: 2.688rem;
@@ -323,6 +318,5 @@ export default {
       margin: 0 1rem;
     }
   }
-
 }
 </style>

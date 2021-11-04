@@ -41,6 +41,7 @@ module.exports = {
     'space-before-blocks': 'off',
     'object-curly-newline': 'off',
     'comma-dangle': 'off',
+    "linebreak-style": 0,
     'semi': 'off',
     'no-multiple-empty-lines': [2, { max: 2 }],
     'import/extensions': ['error', 'always', {

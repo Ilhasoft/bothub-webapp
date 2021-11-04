@@ -2,12 +2,15 @@
   <div class="train">
     <b-button
       ref="training"
-      :disabled="loading || repository.examples__count === 0
-        || trainProgress && !repository.authorization.can_write || !readyForTrain"
+      :disabled="
+        loading ||
+          repository.examples__count === 0 ||
+          (trainProgress && !repository.authorization.can_write)
+      "
       :loading="loading"
       type="is-secondary"
       class="train__button"
-      @click="dispatchTrain()"
+      @click="verifyTrain()"
     >
       {{ $t("webapp.trainings.run_training") }}
     </b-button>
@@ -21,6 +24,7 @@
       :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
       :languages-warnings="languagesWarnings"
+      :language-available-to-train="languageAvailableToTrain"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -85,7 +89,6 @@ export default {
       repositoryStatus: {},
       loadingStatus: false,
       languageAvailableToTrain: []
-
     };
   },
   computed: {
@@ -111,13 +114,6 @@ export default {
       }
       return this.repository.authorization.can_write;
     },
-    readyForTrain() {
-      console.log('lw', this.languagesWarnings.length)
-      console.log('rt', this.trainRequirements.length)
-      return this.languageAvailableToTrain.length > 0
-      || this.languagesWarnings.length > 0
-      || this.trainRequirements.length > 0
-    }
   },
   watch: {
     trainProgress() {
@@ -228,6 +224,19 @@ export default {
       }
       this.$emit('onTrain');
     },
+    async verifyTrain() {
+      await this.repositoryRequirements();
+      if (
+        Object.keys(this.getRequirements.languages_warnings).length
+        || Object.keys(this.getRequirements.requirements_to_train).length
+        || this.languageAvailableToTrain.length === 0
+      ) {
+        this.trainModalOpen = true;
+        return;
+      }
+
+      this.dispatchTrain();
+    },
     async train() {
       this.training = true;
       this.loadingStatus = true;
@@ -300,7 +309,7 @@ export default {
       this.trainResults = false;
       this.trainProgress = false;
       await this.updateRepository(false);
-    },
+    }
   }
 };
 </script>
