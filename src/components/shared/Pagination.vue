@@ -6,20 +6,20 @@
       :is="itemComponent"
       v-bind="addAttrs(item.data)"
       @deleted="onItemDeleted(item.id)"
-      @dispatchEvent="onDispatchEvent($event)" />
+      @dispatchEvent="onDispatchEvent($event)"
+    />
     <div class="pagination__bottom">
       <loading v-if="list.loading" />
-      <p
-        class="text-center"
-        else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
-      <div
-        v-if="list.hasNext"
-        class="next has-text-centered">
+      <p class="text-center" else>{{ listStatusErrorCode | statusCodeVerbose }}</p>
+      <div v-if="list.hasNext" class="next has-text-centered">
         <button
           v-if="moreButton"
           :disabled="list.loading"
           class="button is-primary"
-          @click="next()">{{ moreText }}</button>
+          @click="next()"
+        >
+          {{ moreText }}
+        </button>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
 import Loading from '@/components/shared/Loading';
 
 const components = {
-  Loading,
+  Loading
 };
 
 export default {
@@ -38,30 +38,30 @@ export default {
   props: {
     itemComponent: {
       type: [Object, Function],
-      required: true,
+      required: true
     },
     list: {
       required: true,
-      type: Object,
+      type: Object
     },
     moreText: {
       type: String,
-      default: 'More',
+      default: 'More'
     },
     moreButton: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   data() {
     return {
-      listStatusErrorCode: null,
+      listStatusErrorCode: null
     };
   },
   watch: {
     async list() {
       await this.next();
-    },
+    }
   },
   async mounted() {
     await this.next();
@@ -71,9 +71,7 @@ export default {
       try {
         await this.list.next();
       } catch (e) {
-        this.listStatusErrorCode = e.request
-          ? e.request.status
-          : '';
+        this.listStatusErrorCode = e.request ? e.request.status : '';
       }
     },
     onItemDeleted(id) {
@@ -81,15 +79,14 @@ export default {
       this.$emit('itemDeleted', id);
     },
     onDispatchEvent(arg) {
-      const [event, value] = arg instanceof Object
-        ? [arg.event, arg.value] : [arg, null];
+      const [event, value] = arg instanceof Object ? [arg.event, arg.value] : [arg, null];
 
       this.$emit(event, value);
     },
     addAttrs(obj) {
       return { ...obj, ...this.$attrs };
-    },
-  },
+    }
+  }
 };
 </script>
 
