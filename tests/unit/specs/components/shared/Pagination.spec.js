@@ -12,6 +12,7 @@ localVue.use(applyFilters);
 const Foo = localVue.component('foo', { render: () => ('<div />') });
 
 describe('Pagination.vue', () => {
+  console.log('oi')
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(Pagination, {
