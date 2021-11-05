@@ -27,6 +27,7 @@
     "nth-check": "2.0.1",
     "path-parse": "1.0.7",
     "query-string": "^6.13.7",
+    "url-parse": "1.5.2",
     "set-value": "4.0.1",
     "tar": "4.4.18",
     "tmpl": "1.0.5",

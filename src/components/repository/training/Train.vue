@@ -1,13 +1,16 @@
 <template>
   <div class="train">
     <b-button
-      v-show="showButton && !trainProgress && repository.authorization.can_write"
       ref="training"
-      :disabled="loading || repository.examples__count === 0"
+      :disabled="
+        loading ||
+          repository.examples__count === 0 ||
+          (trainProgress && !repository.authorization.can_write)
+      "
       :loading="loading"
       type="is-secondary"
       class="train__button"
-      @click="dispatchTrain()"
+      @click="verifyTrain()"
     >
       {{ $t("webapp.trainings.run_training") }}
     </b-button>
@@ -21,6 +24,7 @@
       :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
       :languages-warnings="languagesWarnings"
+      :language-available-to-train="languageAvailableToTrain"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -63,10 +67,6 @@ export default {
     updateRepository: {
       type: Function,
       default: async () => {}
-    },
-    showButton: {
-      type: Boolean,
-      default: true
     },
     authenticated: {
       type: Boolean,
@@ -113,7 +113,7 @@ export default {
         return null;
       }
       return this.repository.authorization.can_write;
-    }
+    },
   },
   watch: {
     trainProgress() {
@@ -224,6 +224,20 @@ export default {
       }
       this.$emit('onTrain');
     },
+    async verifyTrain() {
+      await this.repositoryRequirements();
+
+      if (
+        Object.keys(this.getRequirements.languages_warnings).length
+        || Object.keys(this.getRequirements.requirements_to_train).length
+        || this.languageAvailableToTrain.length === 0
+      ) {
+        this.trainModalOpen = true;
+        return;
+      }
+
+      this.dispatchTrain();
+    },
     async train() {
       this.training = true;
       this.loadingStatus = true;
@@ -325,5 +339,5 @@ export default {
       font-weight: $font-weight-bolder;
     }
   }
-}</style
->]
+}
+</style>
