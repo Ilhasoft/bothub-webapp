@@ -9,7 +9,7 @@ import utils from '@/api/utils';
 const localVue = createLocalVue();
 localVue.use(applyFilters);
 
-const Foo = localVue.component('foo', { render: () => ('<div />') });
+const Foo = localVue.component('foo', { render: () => '<div />' });
 
 describe('Pagination.vue', () => {
   let wrapper;
@@ -18,8 +18,8 @@ describe('Pagination.vue', () => {
       localVue,
       propsData: {
         itemComponent: Foo,
-        list: new utils.List('/repository/repositories/'),
-      },
+        list: new utils.List('/repository/repositories/')
+      }
     });
   });
 
@@ -33,7 +33,7 @@ describe('Pagination.vue', () => {
     });
 
     test('item filtered', () => {
-      wrapper.vm.list.items.forEach((item) => {
+      wrapper.vm.list.items.forEach(item => {
         expect(item.id).not.toBe(0);
       });
     });
