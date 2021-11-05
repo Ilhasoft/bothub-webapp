@@ -227,14 +227,11 @@ export default {
     async verifyTrain() {
       await this.repositoryRequirements();
 
-      console.log('warnings', Object.keys(this.getRequirements.languages_warnings).length, Object.keys(this.getRequirements.requirements_to_train).length);
-
       if (
         Object.keys(this.getRequirements.languages_warnings).length
         || Object.keys(this.getRequirements.requirements_to_train).length
         || this.languageAvailableToTrain.length === 0
       ) {
-        console.log(this.languageAvailableToTrain.length)
         this.trainModalOpen = true;
         return;
       }
