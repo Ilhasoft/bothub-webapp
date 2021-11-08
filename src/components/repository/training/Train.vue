@@ -113,7 +113,7 @@ export default {
         return null;
       }
       return this.repository.authorization.can_write;
-    },
+    }
   },
   watch: {
     trainProgress() {
@@ -140,6 +140,9 @@ export default {
       'getRepositoryRequirements',
       'setRequirements'
     ]),
+    sleep(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     finishedTutorial() {
       this.$emit('finishedTurorial');
     },
@@ -216,6 +219,7 @@ export default {
         this.loadingStatus = true;
         if (this.languageAvailableToTrain.length > 0) {
           await this.train();
+          console.log('here', this.languageAvailableToTrain)
           this.loadingStatus = false;
           return;
         }
@@ -227,18 +231,22 @@ export default {
     async verifyTrain() {
       await this.repositoryRequirements();
 
-      console.log('warnings', Object.keys(this.getRequirements.languages_warnings).length, Object.keys(this.getRequirements.requirements_to_train).length);
-
+      console.log(
+        'warnings',
+        Object.keys(this.getRequirements.languages_warnings).length,
+        Object.keys(this.getRequirements.requirements_to_train).length
+      );
+      console.log('GG', this.languageAvailableToTrain);
       if (
+        // impede treinos em outras linguas de rodar, mesmo que elas sejam true
         Object.keys(this.getRequirements.languages_warnings).length
         || Object.keys(this.getRequirements.requirements_to_train).length
         || this.languageAvailableToTrain.length === 0
       ) {
-        console.log(this.languageAvailableToTrain.length)
+        console.log(this.languageAvailableToTrain.length);
         this.trainModalOpen = true;
         return;
       }
-
       this.dispatchTrain();
     },
     async train() {
@@ -247,11 +255,13 @@ export default {
       try {
         await Promise.all(
           this.languageAvailableToTrain.map(async ({ language }) => {
-            await this.trainRepository({
-              repositoryUuid: this.repository.uuid,
-              repositoryVersion: this.version,
-              repositoryLanguage: language
-            });
+            // await this.trainRepository({
+            //   repositoryUuid: this.repository.uuid,
+            //   repositoryVersion: this.version,
+            //   repositoryLanguage: language
+            // });
+            await this.sleep(1000)
+            console.log('lang', language)
           })
         );
         await this.setRepositoryTraining(true);
