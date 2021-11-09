@@ -289,13 +289,14 @@
                             {{ $t("webapp.home.bases.api_integrate_step_final_text") }}
                           </p>
                         </div>
-                        <unnnicButton
-                          size="large"
-                          :text="$t('webapp.home.bases.api_integrate_step_final_text_button')"
-                          type="secondary"
-                          iconLeft="paginate-filter-text-1"
-                          :disabled="false"
-                        />
+                          <unnnicButton
+                            size="large"
+                            :text="$t('webapp.home.bases.api_integrate_step_final_text_button')"
+                            type="secondary"
+                            iconLeft="paginate-filter-text-1"
+                            :disabled="false"
+                            @click.native='goToDocs()'
+                          />
                       </div>
                       <!--passo 5 -->
                     </form>
@@ -422,6 +423,9 @@ export default {
       window.getSelection().removeAllRanges();
 
       this.copyLabel = 'Copiado!';
+    },
+    goToDocs() {
+      window.open('https://docs.ilhasoft.mobi/l/pt/inteligencia-conteudo/integrando-uma-intelig-ncia-de-conte-do', '_blank');
     }
   }
 };
