@@ -139,9 +139,9 @@
       "create_bot": "Criar inteligência"
     },
     "safari_alert": {
-      "title1": "Desculpa, o navegador Safari não é compatível com todas as nossas funcionalidades.",
-      "title2": "Nós te recomendamos muito mudar para um navegador diferente.",
-      "keep_using_safari": "Continuar usando Safari"
+      "title": "Navegador não suportado",
+      "text": "Seu navegador ainda não é compatível com este serviço 😥 Recomendamos a utilização da plataforma em outro navegador, como um dos listados abaixo:",
+      "button": "← Voltar para a página inicial"
     },
     "analyze_text": {
       "grid1": "Faça uma requisição HTTP ao serviço NLP, siga o exemplo abaixo.",
