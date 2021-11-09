@@ -94,7 +94,7 @@
       "privacy_type_public_title": "Public",
       "privacy_type_public_description": "Any Weni user is able to see and integrate the intelligence.",
       "privacy_type_private_title": "Private",
-      "privacy_type_private_description": "Any Weni user is able to see and integrate the intelligence.",
+      "privacy_type_private_description": "Only you or users invited by you are able to see and integrate the intelligence.",
       "navigate_to_previous_button": "Back",
       "create_intelligence_button": "Create Intelligence",
       "repository_created_first": "The intelligence was created and now can be",
