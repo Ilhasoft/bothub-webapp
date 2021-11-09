@@ -42,6 +42,7 @@ module.exports = {
     'object-curly-newline': 'off',
     'comma-dangle': 'off',
     'semi': 'off',
+    "linebreak-style": 0,
     'no-multiple-empty-lines': [2, { max: 2 }],
     'import/extensions': ['error', 'always', {
       js: 'never',

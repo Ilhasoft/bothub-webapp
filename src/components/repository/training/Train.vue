@@ -4,10 +4,10 @@
       ref="training"
       :disabled="
         loading ||
-          repository.examples__count === 0 ||
-          (trainProgress && !repository.authorization.can_write)
+          repository.examples__count === 0
+          || !this.isItOkToEnableButton
       "
-      :loading="loading"
+      :loading="loading || !this.isItOkToEnableButton"
       type="is-secondary"
       class="train__button"
       @click="verifyTrain()"
@@ -88,7 +88,8 @@ export default {
       trainProgress: false,
       repositoryStatus: {},
       loadingStatus: false,
-      languageAvailableToTrain: []
+      languageAvailableToTrain: [],
+      isItOkToEnableButton: false
     };
   },
   computed: {
@@ -140,7 +141,7 @@ export default {
       'getRepositoryRequirements',
       'setRequirements'
     ]),
-    sleep(ms){
+    sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     finishedTutorial() {
@@ -192,6 +193,7 @@ export default {
             ...requirement.languages_warnings
           }
         }));
+        this.isItOkToEnableButton = true;
         this.setRequirements(requirements);
       } catch (error) {
         this.error = error;
@@ -219,7 +221,6 @@ export default {
         this.loadingStatus = true;
         if (this.languageAvailableToTrain.length > 0) {
           await this.train();
-          console.log('here', this.languageAvailableToTrain)
           this.loadingStatus = false;
           return;
         }
@@ -229,21 +230,11 @@ export default {
       this.$emit('onTrain');
     },
     async verifyTrain() {
-      await this.repositoryRequirements();
-
-      console.log(
-        'warnings',
-        Object.keys(this.getRequirements.languages_warnings).length,
-        Object.keys(this.getRequirements.requirements_to_train).length
-      );
-      console.log('GG', this.languageAvailableToTrain);
       if (
-        // impede treinos em outras linguas de rodar, mesmo que elas sejam true
         Object.keys(this.getRequirements.languages_warnings).length
         || Object.keys(this.getRequirements.requirements_to_train).length
         || this.languageAvailableToTrain.length === 0
       ) {
-        console.log(this.languageAvailableToTrain.length);
         this.trainModalOpen = true;
         return;
       }
@@ -255,13 +246,11 @@ export default {
       try {
         await Promise.all(
           this.languageAvailableToTrain.map(async ({ language }) => {
-            // await this.trainRepository({
-            //   repositoryUuid: this.repository.uuid,
-            //   repositoryVersion: this.version,
-            //   repositoryLanguage: language
-            // });
-            await this.sleep(1000)
-            console.log('lang', language)
+            await this.trainRepository({
+              repositoryUuid: this.repository.uuid,
+              repositoryVersion: this.version,
+              repositoryLanguage: language
+            });
           })
         );
         await this.setRepositoryTraining(true);
