@@ -3,7 +3,7 @@ FROM node:12-alpine as builder
 ENV WORKDIR /home/app
 WORKDIR $WORKDIR
 
-RUN apk update && apk add git yarn python
+RUN apk update && apk add git yarn
 
 COPY package.json .
 COPY yarn.lock .
@@ -58,3 +58,4 @@ FROM nginx
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /home/app/dist /usr/share/nginx/html/bothub-webapp
+
