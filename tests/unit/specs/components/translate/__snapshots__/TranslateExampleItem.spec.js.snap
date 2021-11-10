@@ -12,7 +12,7 @@ exports[`TranslateExampleItem.vue renders correctly 1`] = `
     <div class="level-left">
       <!---->
       <div class="level-item has-text-grey-light">
-        3 years ago
+        4 years ago
       </div>
     </div>
     <!---->

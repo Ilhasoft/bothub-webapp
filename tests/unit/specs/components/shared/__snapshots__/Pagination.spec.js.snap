@@ -25,7 +25,9 @@ exports[`Pagination.vue renders correctly 1`] = `
   <div class="pagination__bottom">
     <!---->
     <p else="" class="text-center"></p>
-    <div class="next has-text-centered"><button class="button is-primary">More</button></div>
+    <div class="next has-text-centered"><button class="button is-primary">
+        More
+      </button></div>
   </div>
 </div>
 `;
