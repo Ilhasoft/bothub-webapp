@@ -4,10 +4,10 @@
       ref="training"
       :disabled="
         loading ||
-          repository.examples__count === 0 ||
-          (trainProgress && !repository.authorization.can_write)
+          repository.examples__count === 0
+          || !this.isItOkToEnableButton
       "
-      :loading="loading"
+      :loading="loading || !this.isItOkToEnableButton"
       type="is-secondary"
       class="train__button"
       @click="verifyTrain()"
@@ -88,7 +88,8 @@ export default {
       trainProgress: false,
       repositoryStatus: {},
       loadingStatus: false,
-      languageAvailableToTrain: []
+      languageAvailableToTrain: [],
+      isItOkToEnableButton: false
     };
   },
   computed: {
@@ -113,7 +114,7 @@ export default {
         return null;
       }
       return this.repository.authorization.can_write;
-    },
+    }
   },
   watch: {
     trainProgress() {
@@ -140,6 +141,9 @@ export default {
       'getRepositoryRequirements',
       'setRequirements'
     ]),
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     finishedTutorial() {
       this.$emit('finishedTurorial');
     },
@@ -189,6 +193,7 @@ export default {
             ...requirement.languages_warnings
           }
         }));
+        this.isItOkToEnableButton = true;
         this.setRequirements(requirements);
       } catch (error) {
         this.error = error;
@@ -225,8 +230,6 @@ export default {
       this.$emit('onTrain');
     },
     async verifyTrain() {
-      await this.repositoryRequirements();
-
       if (
         Object.keys(this.getRequirements.languages_warnings).length
         || Object.keys(this.getRequirements.requirements_to_train).length
@@ -235,7 +238,6 @@ export default {
         this.trainModalOpen = true;
         return;
       }
-
       this.dispatchTrain();
     },
     async train() {
