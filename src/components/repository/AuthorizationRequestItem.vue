@@ -79,7 +79,6 @@ export default {
       }
     },
     async approve() {
-      console.log('clicado')
       try {
         await this.approveRequestAuthorization({
           id: this.id,
@@ -91,7 +90,6 @@ export default {
       }
     },
     reject() {
-      console.log('clicado')
       return new Promise((resolve, reject) => {
         this.rejectDialog = this.$buefy.dialog.confirm({
           message: 'Are you sure?',
