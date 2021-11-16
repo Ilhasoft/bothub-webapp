@@ -466,6 +466,7 @@
       "missing_requirements": "Some errors were found and your training has not been completed Correct and try again.",
       "ready_for_train_title": "Some errors were found",
       "ready_for_train_subtitle": "Go back and correct any errors found or proceed and partially train.",
+      "language_available": "There are no phrases from new languages to train. Please add them and try again.",
       "warnings": "Warnings",
       "train": "Proceed",
       "cancel": "Cancel",
