@@ -1,13 +1,16 @@
 <template>
   <div class="train">
     <b-button
-      v-show="showButton && !trainProgress && repository.authorization.can_write"
       ref="training"
-      :disabled="loading || repository.examples__count === 0"
-      :loading="loading"
+      :disabled="
+        loading ||
+          repository.examples__count === 0
+          || !this.isItOkToEnableButton
+      "
+      :loading="loading || !this.isItOkToEnableButton"
       type="is-secondary"
       class="train__button"
-      @click="dispatchTrain()"
+      @click="verifyTrain()"
     >
       {{ $t("webapp.trainings.run_training") }}
     </b-button>
@@ -21,6 +24,7 @@
       :requirements-to-train="trainRequirements"
       :open="trainModalOpen"
       :languages-warnings="languagesWarnings"
+      :language-available-to-train="languageAvailableToTrain"
       @finishedTutorial="finishedTutorial()"
       @resetTutorial="resetTutorial()"
       @proceedTrain="train()"
@@ -64,10 +68,6 @@ export default {
       type: Function,
       default: async () => {}
     },
-    showButton: {
-      type: Boolean,
-      default: true
-    },
     authenticated: {
       type: Boolean,
       default: false
@@ -88,7 +88,8 @@ export default {
       trainProgress: false,
       repositoryStatus: {},
       loadingStatus: false,
-      languageAvailableToTrain: []
+      languageAvailableToTrain: [],
+      isItOkToEnableButton: false
     };
   },
   computed: {
@@ -140,6 +141,9 @@ export default {
       'getRepositoryRequirements',
       'setRequirements'
     ]),
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
     finishedTutorial() {
       this.$emit('finishedTurorial');
     },
@@ -189,6 +193,7 @@ export default {
             ...requirement.languages_warnings
           }
         }));
+        this.isItOkToEnableButton = true;
         this.setRequirements(requirements);
       } catch (error) {
         this.error = error;
@@ -223,6 +228,17 @@ export default {
         this.trainModalOpen = true;
       }
       this.$emit('onTrain');
+    },
+    async verifyTrain() {
+      if (
+        Object.keys(this.getRequirements.languages_warnings).length
+        || Object.keys(this.getRequirements.requirements_to_train).length
+        || this.languageAvailableToTrain.length === 0
+      ) {
+        this.trainModalOpen = true;
+        return;
+      }
+      this.dispatchTrain();
     },
     async train() {
       this.training = true;
@@ -304,26 +320,22 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/colors.scss";
 @import "~@/assets/scss/variables.scss";
-
 .train {
   &__button {
     color: $color-white;
     margin-top: 1rem;
     width: 14rem;
-
     &:hover {
       color: $color-white;
     }
   }
-
   &__progress {
     height: 25px;
     width: 60%;
-
     p {
       font-size: 13px;
       font-weight: $font-weight-bolder;
     }
   }
-}</style
->]
+}
+</style>

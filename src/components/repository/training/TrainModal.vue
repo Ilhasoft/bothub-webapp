@@ -13,11 +13,18 @@
             {{ $t("webapp.train_modal.language_warning") }}</strong
           >
           <div
-            v-if="requirementsToTrainStatus || languagesWarningsStatus"
+            v-if="
+              requirementsToTrainStatus ||
+                languagesWarningsStatus ||
+                languageAvailableToTrain.length === 0
+            "
             class="train-modal__wrapper"
           >
             <p v-if="repositoryTrain" class="train-modal__wrapper__subtitle">
               {{ $t("webapp.train_modal.ready_for_train_subtitle") }}
+            </p>
+            <p v-else-if="languageAvailableToTrain.length === 0">
+              {{ $t("webapp.train_modal.language_available") }}
             </p>
             <p v-else class="train-modal__wrapper__subtitle">
               {{ $t("webapp.train_modal.missing_requirements") }}
@@ -38,7 +45,11 @@
                       <b-tag type="is-primary" rounded>{{ lang }}</b-tag>
                     </div>
                     <p>
-                      <strong>{{ firstText(requirement) }}</strong>
+                      <strong
+                        class="train-modal__wrapper__content__content-requirements__item__text"
+                      >
+                        {{ firstText(requirement) }}
+                      </strong>
                       <br />
                       <span>{{ secondText(requirement) }}</span>
                     </p>
@@ -122,6 +133,10 @@ export default {
       type: Object,
       required: true
     },
+    languageAvailableToTrain: {
+      type: Array,
+      required: true
+    },
     training: {
       type: Boolean,
       default: false
@@ -178,26 +193,23 @@ export default {
 <style lang="scss" scoped>
 @import "~@/assets/scss/colors.scss";
 @import "~@/assets/scss/variables.scss";
-@import "~@weni/unnnic-system/dist/unnnic.css";
-@import "~@weni/unnnic-system/src/assets/scss/unnnic.scss";
-
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 0.6rem;
 }
-
 ::-webkit-scrollbar-track {
-  background: $unnnic-color-neutral-soft;
+  background: #e9e9ec;
+  border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: $unnnic-color-neutral-clean;
-  border-radius: $unnnic-border-radius-pill;
+  background: $color-primary;
+  border-radius: 10px;
 }
-
+::-webkit-scrollbar-thumb:hover {
+  background: $color-primary;
+}
 :not(.quick-test) {
   pointer-events: visible;
 }
-
 .train-modal {
   max-height: 33.438rem;
   width: 41.563rem;
@@ -206,7 +218,6 @@ export default {
   border-radius: 0.5rem;
   margin: auto;
   font-family: $font-family;
-
   &__close {
     width: 100%;
     display: flex;
@@ -218,7 +229,6 @@ export default {
       color: $color-grey;
     }
   }
-
   &__container {
     padding: 1rem 3rem;
     display: flex;
@@ -226,27 +236,21 @@ export default {
     justify-content: center;
     align-items: center;
   }
-
   &__text-ready-train {
     font-size: 20px;
     color: $color-primary;
   }
-
   &__text-warning {
     font-size: 28px;
   }
-
   &__wrapper {
     padding: 1rem;
-
     &__subtitle {
       margin-bottom: 1.5rem;
     }
-
     &__content {
       overflow: auto;
       max-height: 13.75rem;
-
       &__content-requirements {
         &__item {
           display: flex;
@@ -262,7 +266,6 @@ export default {
             color: $color-danger;
             padding-left: 1rem;
           }
-
           &__field {
             width: 2.9rem;
             display: flex;
@@ -271,11 +274,17 @@ export default {
             justify-content: center;
             align-items: center;
           }
+          &__text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            max-width: 28rem;
+          }
         }
       }
     }
   }
-
   &__buttons {
     margin: 1rem 0;
     display: flex;
