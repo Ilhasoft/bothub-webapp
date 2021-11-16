@@ -1,39 +1,42 @@
 <template>
   <repository-view-base :repository="repository" :error-code="errorCode">
-      <section v-if="repository" class="repository-tests">
-          <section class="repository-tests__description">
-            <div class="repository-tests__title">
-              <unnnic-card
-                type="title"
-                :title="$t('webapp.home.bases.tests')"
-                enabled
-                icon="messages-bubble-1"
-                infoPosition="right"
-                :hasInformationIcon="false"
-                scheme="aux-lemon"
-              />
-              <p class="repository-tests__description__text">
-                {{ $t("webapp.home.bases.tests_subtitle") }}
-              </p>
-            </div>
-            <div class="repository-tests__select__inputs">
-              <div class="repository-tests__select__input">
-                <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
-                  <option v-for="base in bases"
-                    :value="[base.knowledge_base, base.language].join('⇝')"
-                    :key="base.knowledge_base" size="sm">
-                    {{ base.title }}
-                  </option>
-                </unnnicSelect>
-              </div>
-            </div>
-          </section>
-          <!-- title -->
+    <section v-if="repository" class="repository-tests">
+      <section class="repository-tests__description">
+        <div class="repository-tests__title">
+          <unnnic-card
+            type="title"
+            :title="$t('webapp.home.bases.tests')"
+            enabled
+            icon="messages-bubble-1"
+            infoPosition="right"
+            :hasInformationIcon="false"
+            scheme="aux-lemon"
+          />
+          <p class="repository-tests__description__text">
+            {{ $t("webapp.home.bases.tests_subtitle") }}
+          </p>
+        </div>
+        <div class="repository-tests__select__inputs">
+          <div class="repository-tests__select__input">
+            <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+              <option
+                v-for="base in bases"
+                :value="[base.knowledge_base, base.language].join('⇝')"
+                :key="base.knowledge_base"
+                size="sm"
+              >
+                {{ base.title }}
+              </option>
+            </unnnicSelect>
+          </div>
+        </div>
       </section>
-      <hr />
-      <section>
-        <div id="webchat" />
-      </section>
+      <!-- title -->
+    </section>
+    <hr />
+    <section>
+      <div id="webchat" />
+    </section>
   </repository-view-base>
 </template>
 <script>
@@ -43,7 +46,7 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'RepositoryContentTests',
-  data(){
+  data() {
     return {
       bases: [],
       basesText: [],
@@ -52,54 +55,52 @@ export default {
       textToSend: null,
       selectedBaseText: null,
       baseIdLang: ''
-    }
+    };
   },
   components: {
-    RepositoryViewBase,
+    RepositoryViewBase
   },
   extends: RepositoryBase,
   computed: {
     ...mapGetters(['myProfile']),
     authorization() {
-      return this.repository?.authorization?.uuid ? `Bearer ${this.repository?.authorization?.uuid}` : '';
+      return this.repository?.authorization?.uuid
+        ? `Bearer ${this.repository?.authorization?.uuid}`
+        : '';
     },
     initText() {
-      const infos = [
-        this.myProfile.language,
-        this.authorization,
-        this.baseIdLang
-      ];
-      return infos.every((info) => info) ? infos.join('⇝') : '';
-    },
+      const infos = [this.myProfile.language, this.authorization, this.baseIdLang];
+      return infos.every(info => info) ? infos.join('⇝') : '';
+    }
   },
   methods: {
-    ...mapActions([
-      'getQATexts'
-    ]),
+    ...mapActions(['getQATexts'])
   },
   watch: {
     // eslint-disable-next-line
-    'repository.uuid'() {
+    "repository.uuid"() {
       if (!this.repository.uuid || this.repository.uuid === 'null') {
         return false;
       }
       this.repositoryUUID = this.repository.uuid;
     },
     // eslint-disable-next-line
-    'myProfile'() {
+    myProfile() {
       if (this.myProfile.language === null) {
-        this.myProfile.language = 'en-us'
-        return true
+        this.myProfile.language = 'en-us';
+        return true;
       }
     },
     async repositoryUUID() {
       const response = await this.getQATexts({
         repositoryUUID: this.repositoryUUID,
         knowledgeBaseId: this.$route.params.id,
-        page: 0,
+        page: 0
       });
 
-      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(response.data.results?.[0]?.language)}`;
+      this.baseIdLang = `${String(response.data.results?.[0]?.knowledge_base)}⇝${String(
+        response.data.results?.[0]?.language
+      )}`;
 
       response.data.results.forEach(({ knowledge_base, title, language }) => {
         this.bases.push({
@@ -120,7 +121,7 @@ export default {
         const script = document.createElement('script');
         const flowsUUID = process.env.VUE_APP_QA_FLOW_CHANNEL;
         script.setAttribute('src', 'https://storage.googleapis.com/push-webchat/wwc-latest.js');
-        script.setAttribute('id', 'removeScript')
+        script.setAttribute('id', 'removeScript');
         document.body.appendChild(script);
         script.addEventListener('load', () => {
           window.WebChat.default.init({
@@ -129,7 +130,8 @@ export default {
             channelUuid: flowsUUID,
             host: 'https://new.push.al',
             socketUrl: 'https://websocket.weni.ai',
-            sessionId: `${(Math.floor(Math.random() * 1e10)).toString(36) + (new Date().getTime()).toString(36)}`,
+            sessionId: `${Math.floor(Math.random() * 1e10).toString(36)
+              + new Date().getTime().toString(36)}`,
             title: 'Title',
             subtitle: 'Subtitle',
             startFullScreen: false,
@@ -141,15 +143,15 @@ export default {
               botMessageBubbleColor: '#272B33',
               inputBackgroundColor: '#FFFFFF',
               inputFontColor: '#4E5666',
-              inputPlaceholderColor: '#67738B',
-            },
+              inputPlaceholderColor: '#67738B'
+            }
           });
-          window.WebChat.open()
+          window.WebChat.open();
           setTimeout(() => window.WebChat.send(message), 1000);
         });
       }
       return true;
-    },
+    }
   },
   beforeMount() {
     window.WebChat = null;
@@ -160,8 +162,8 @@ export default {
     if (script) {
       script.parentNode.removeChild(script);
     }
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -220,7 +222,7 @@ export default {
     }
     // area de pergunta
     .push-sender {
-      background-color: #FFF !important;
+      background-color: #fff !important;
       padding: 16px;
       height: unset;
 
@@ -239,15 +241,15 @@ export default {
     .push-response {
       padding: 20px;
       border-radius: 4px 32px 32px 32px;
-      border:  1px solid $unnnic-color-neutral-soft;
+      border: 1px solid $unnnic-color-neutral-soft;
       max-width: 50%;
-      &:hover{
+      &:hover {
         background-color: $unnnic-color-background-grass;
       }
     }
     // texto da resposta
     .push-markdown {
-      h2{
+      h2 {
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-bold;
         color: $unnnic-color-neutral-darkest;
@@ -263,7 +265,7 @@ export default {
           margin-block-end: 0px;
         }
       }
-      ul{
+      ul {
         list-style-type: disc;
         padding-inline-start: 40px;
       }
@@ -273,7 +275,7 @@ export default {
       border: 1px solid #009e963d;
       border-radius: 32px 4px 32px 32px;
       padding: 24px 32px 24px 24px;
-          // texto da pergunta
+      // texto da pergunta
       &:before {
         content: "Sua pergunta\a";
         font-family: $unnnic-font-family-secondary;
@@ -283,18 +285,18 @@ export default {
         color: #009e96;
         padding-bottom: $unnnic-inset-nano;
       }
-      &:hover{
-        background-color: #E1FFFD;
+      &:hover {
+        background-color: #e1fffd;
       }
     }
     //clipe
-    label[for=push-file-upload]{
+    label[for="push-file-upload"] {
       display: none;
     }
     // botao de perguntar
     .push-send {
       border: dashed $unnnic-color-neutral-clean 1px;
-      padding: .75rem;
+      padding: 0.75rem;
       border-radius: $unnnic-border-radius-sm;
       width: 45px;
       img {

@@ -56,8 +56,7 @@
                       class="repository-api__info__text"
                       ref="copyTextURL"
                       contenteditable="true"
-                    >
-                      {{ `${repository.nlp_server}v2/question-answering/` }}
+                    >{{`${repository.nlp_server}v2/question-answering/`}}
                     </div>
                     <unnnic-tool-tip
                       @mouseout.native="copyLabel = 'Copiar'"
@@ -212,6 +211,18 @@
                         <img src="@/assets/imgs/step-four.png" alt="" />
                       </div>
                       <!--passo 4 -->
+                      <div v-else-if="step === 5" class="repository-api__form__step">
+                        <div>
+                          <p class="repository-api__form__step__title">
+                            {{ $t("webapp.home.bases.api_integrate_step_five") }}
+                          </p>
+                          <p class="repository-api__form__step__text">
+                            {{ $t("webapp.home.bases.api_integrate_step_five_text") }}
+                          </p>
+                        </div>
+                        <img src="@/assets/imgs/step-five.png" alt="" />
+                      </div>
+                      <!--passo 5 -->
                       <div v-else class="repository-api__form__step">
                         <div>
                           <p class="repository-api__form__step__title">
@@ -229,7 +240,7 @@
                           :disabled="false"
                         />
                       </div>
-                      <!--passo 5 -->
+                      <!--passo 6 -->
                     </form>
                     <form v-else>
                       <div v-if="step === 1" class="repository-api__form__step">
@@ -280,6 +291,18 @@
                         <img src="@/assets/imgs/step-four-en.png" alt="" />
                       </div>
                       <!--passo 4 -->
+                      <div v-else-if="step === 5" class="repository-api__form__step">
+                        <div>
+                          <p class="repository-api__form__step__title">
+                            {{ $t("webapp.home.bases.api_integrate_step_five") }}
+                          </p>
+                          <p class="repository-api__form__step__text">
+                            {{ $t("webapp.home.bases.api_integrate_step_five_text") }}
+                          </p>
+                        </div>
+                        <img src="@/assets/imgs/step-five-en.png" alt="" />
+                      </div>
+                      <!--passo 5 -->
                       <div v-else class="repository-api__form__step">
                         <div>
                           <p class="repository-api__form__step__title">
@@ -289,16 +312,16 @@
                             {{ $t("webapp.home.bases.api_integrate_step_final_text") }}
                           </p>
                         </div>
-                          <unnnicButton
-                            size="large"
-                            :text="$t('webapp.home.bases.api_integrate_step_final_text_button')"
-                            type="secondary"
-                            iconLeft="paginate-filter-text-1"
-                            :disabled="false"
-                            @click.native='goToDocs()'
-                          />
+                        <unnnicButton
+                          size="large"
+                          :text="$t('webapp.home.bases.api_integrate_step_final_text_button')"
+                          type="secondary"
+                          iconLeft="paginate-filter-text-1"
+                          :disabled="false"
+                          @click.native="goToDocs()"
+                        />
                       </div>
-                      <!--passo 5 -->
+                      <!--passo 6 -->
                     </form>
                   </section>
                 </div>
@@ -398,7 +421,7 @@ export default {
     },
 
     disabledNext() {
-      return this.step === 5;
+      return this.step === 6;
     },
     idLang() {
       const infos = this.baseIdLang;
@@ -414,17 +437,19 @@ export default {
       this.step++;
     },
     copyURL(refButton) {
-      const range = document.createRange();
-      range.selectNode(this.$refs[refButton]);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
+      const input = document.createElement('input');
+      input.value = this.$refs[refButton].textContent.trim();
+      document.body.appendChild(input);
+      input.select();
       document.execCommand('copy');
-      window.getSelection().removeAllRanges();
-
+      document.body.removeChild(input);
       this.copyLabel = 'Copiado!';
     },
     goToDocs() {
-      window.open('https://docs.ilhasoft.mobi/l/pt/inteligencia-conteudo/integrando-uma-intelig-ncia-de-conte-do', '_blank');
+      window.open(
+        'https://docs.ilhasoft.mobi/l/pt/inteligencia-conteudo/integrando-uma-intelig-ncia-de-conte-do',
+        '_blank'
+      );
     }
   }
 };
