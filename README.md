@@ -97,5 +97,5 @@ If you want to contribute with bothub's projects, we made a guideline to help yo
 
 ## License
 
-- **[AGLP 3.0](https://github.com/bothub-it/bothub-webapp/blob/master/LICENSE)**
+- **[GPL 3.0](https://github.com/bothub-it/bothub-webapp/blob/master/LICENSE)**
 - Copyright 2020 ©  **<a href="https://github.com/bothub-iT">Bothub</a>**
