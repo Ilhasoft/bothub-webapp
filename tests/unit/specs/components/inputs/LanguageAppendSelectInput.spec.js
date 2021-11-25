@@ -1,9 +1,10 @@
-
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectInput';
 
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('LanguageAppendSelectInput.vue', () => {

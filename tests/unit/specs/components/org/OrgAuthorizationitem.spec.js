@@ -37,28 +37,4 @@ describe('AuthorizationItem.vue', () => {
   test('mount', () => {
     expect(wrapper.vm).toBeDefined();
   });
-
-  // describe('change role', () => {
-  //   beforeEach(async () => {
-  //     wrapper.vm.newRole = ROLE_USER;
-  //     await wrapper.vm.updateRole();
-  //   });
-
-  //   test('emit roleChanged event', () => {
-  //     expect(wrapper.emitted('updateList')).toBeDefined();
-  //   });
-  // });
-
-  // describe('remove', () => {
-  //   beforeEach(async () => {
-  //     const removePromise = wrapper.vm.remove();
-  //     await localVue.nextTick();
-  //     wrapper.vm.removeDialog.confirm();
-  //     await removePromise;
-  //   });
-
-  //   test('emit deleted event', () => {
-  //     expect(wrapper.emitted('deleted')).toBeDefined();
-  //   });
-  // });
 });

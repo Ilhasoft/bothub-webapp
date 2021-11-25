@@ -1,8 +1,10 @@
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import MultipleChoice from '@/components/form-generator/inputs/MultipleChoice';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('MultipleChoice.vue', () => {

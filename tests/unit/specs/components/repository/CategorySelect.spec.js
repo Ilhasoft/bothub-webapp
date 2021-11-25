@@ -1,7 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CategorySelect from '@/components/repository/CategorySelect';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 let store;
 

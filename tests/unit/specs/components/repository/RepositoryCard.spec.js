@@ -6,10 +6,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import Router from 'vue-router';
 import RepositoryCard from '@/components/repository/RepositoryCard';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 localVue.use(Router);
 
 describe('RepositoryCard.vue', () => {

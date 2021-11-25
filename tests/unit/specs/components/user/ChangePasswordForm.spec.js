@@ -4,9 +4,10 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import ChangePasswordForm from '@/components/user/ChangePasswordForm';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 describe('ChangePasswordForm.vue', () => {
   let wrapper;

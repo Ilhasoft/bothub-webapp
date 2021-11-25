@@ -5,9 +5,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
 import ForgotPasswordForm from '@/components/auth/ForgotPasswordForm';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 describe('ForgotPasswordForm.vue', () => {
   let wrapper;

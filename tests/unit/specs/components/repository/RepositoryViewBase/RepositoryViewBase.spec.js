@@ -4,9 +4,10 @@ import RepositoryViewBase from '@/components/repository/RepositoryViewBase/Repos
 import Repository from '@/models/repository';
 import store from '@/store';
 import Router from 'vue-router';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 localVue.use(Router);
 

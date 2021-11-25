@@ -5,9 +5,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import API from '@/utils/plugins/API';
 import EvaluateExampleList from '@/components/repository/repository-evaluate/example/EvaluateExampleList';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 localVue.use(API);
 localVue.use(Vuex);
 

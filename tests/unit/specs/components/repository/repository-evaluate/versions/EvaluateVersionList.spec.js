@@ -1,12 +1,11 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EvaluateVersionList from '@/components/repository/repository-evaluate/versions/EvaluateVersionList';
-
 import sinon from 'sinon';
 import Vuex from 'vuex';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 localVue.use(Vuex);
 
 describe('EvaluateVersionList.vue', () => {

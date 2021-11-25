@@ -3,9 +3,10 @@ import EvaluateVersionItem from '@/components/repository/repository-evaluate/ver
 
 import VueMoment from 'vue-moment';
 import store from '@/store';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 localVue.use(VueMoment);
 

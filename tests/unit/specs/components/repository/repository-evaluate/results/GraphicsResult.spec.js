@@ -1,9 +1,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import GraphicsResult from '@/components/repository/repository-evaluate/results/GraphicsResult';
-
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 localVue.use(Vuex);
 

@@ -1,8 +1,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EntityEdit from '@/components/repository/EntityEdit';
 import store from '@/store';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 describe('EntityEdit', () => {
   let wrapper;
@@ -38,11 +40,11 @@ describe('EntityEdit', () => {
 
   describe('editing button works', () => {
     beforeEach(() => {
-      const editButton = wrapper.find({ ref: 'editButton' });
+      const editButton = wrapper.findComponent({ ref: 'editButton' });
       editButton.trigger('click');
     });
     test('editing mode activates correctly', () => {
-      expect(wrapper.find({ ref: 'editButton' })).toBeTruthy();
+      expect(wrapper.findComponent({ ref: 'editButton' })).toBeTruthy();
     });
   });
 });

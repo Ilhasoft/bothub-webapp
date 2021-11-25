@@ -6,9 +6,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import NewTranslateForm from '@/components/translate/NewTranslateForm';
 import store from '@/store';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('NewTranslateForm.vue', () => {
