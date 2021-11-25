@@ -2,8 +2,8 @@
 
 exports[`CategoriesList.vue renders correctly 1`] = `
 <div class="categories-list">
-  <b-field class="categories-list__field">
-    <b-autocomplete keep-first="true" open-on-focus="true" data="" placeholder="some specific text" dropdown-position="bottom" size="normal"></b-autocomplete>
-  </b-field>
+  <b-field-stub addons="true" class="categories-list__field">
+    <b-autocomplete-stub size="normal" usehtml5validation="true" statusicon="true" value="" data="" field="value" keepfirst="true" openonfocus="true" dropdownposition="bottom" confirmkeys="Tab,Enter" placeholder="some specific text"></b-autocomplete-stub>
+  </b-field-stub>
 </div>
 `;

@@ -1,9 +1,10 @@
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import LanguageList from '@/components/shared/LanguagesList';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('LanguageList.vue', () => {

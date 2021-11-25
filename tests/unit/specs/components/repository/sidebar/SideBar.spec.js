@@ -1,11 +1,13 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import SideBar from '@/components/repository/sidebar/SideBar';
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 
 let store;
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 const currentRepository = {
   name: 'bothub',

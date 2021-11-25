@@ -5,8 +5,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import Pagination from '@/components/shared/Pagination';
 import utils from '@/api/utils';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 localVue.use(applyFilters);
 
 const Foo = localVue.component('foo', { render: () => '<div />' });

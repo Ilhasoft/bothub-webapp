@@ -1,9 +1,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import BaseEvaluateResults from '@/components/repository/repository-evaluate/BaseEvaluateResults';
 import store from '@/store';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('BaseEvaluateResults.vue', () => {

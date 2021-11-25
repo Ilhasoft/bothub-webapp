@@ -1,8 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Flag from '@/components/shared/Flag';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 describe('Flag.vue', () => {
   let wrapper;

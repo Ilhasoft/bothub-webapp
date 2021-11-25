@@ -3,8 +3,10 @@ import FilterEvaluateExample from '@/components/repository/repository-evaluate/e
 import store from '@/store';
 
 import sinon from 'sinon';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('TestView.vue', () => {

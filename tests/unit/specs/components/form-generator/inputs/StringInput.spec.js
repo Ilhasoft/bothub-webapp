@@ -1,8 +1,10 @@
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import StringInput from '@/components/form-generator/inputs/StringInput';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('StringInput.vue', () => {

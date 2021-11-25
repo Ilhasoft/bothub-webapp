@@ -5,10 +5,13 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import API from '@/utils/plugins/API';
 import ExamplesList from '@/components/example/ExamplesList';
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+
 localVue.use(API);
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 describe('ExamplesList.vue', () => {
   let wrapper;

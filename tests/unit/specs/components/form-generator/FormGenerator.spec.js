@@ -1,8 +1,10 @@
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import FormGenerator from '@/components/form-generator/FormGenerator';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('FormGenerator.vue', () => {

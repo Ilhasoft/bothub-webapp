@@ -4,15 +4,15 @@ exports[`TranslateList.vue renders correctly 1`] = `
 <div repository="[object Object]">
   <div class="repository-translate__list__options">
     <div class="repository-translate__list__options__check">
-      <b-checkbox></b-checkbox> <span>some specific text</span>
+      <b-checkbox-stub truevalue="true"></b-checkbox-stub> <span>some specific text</span>
     </div>
     <div class="repository-translate__list__options__buttons">
-      <b-button type="is-primary" icon-right="pencil"></b-button>
-      <b-button type="is-primary" icon-right="delete"></b-button>
-      <b-tooltip label="some specific text">
-        <b-button type="is-primary" icon-right="check-bold" style="display: none;"></b-button>
-      </b-tooltip>
-      <b-button type="is-primary" icon-right="close-thick" style="display: none;"></b-button>
+      <b-button-stub type="is-primary" iconright="pencil" nativetype="button" tag="button"></b-button-stub>
+      <b-button-stub type="is-primary" iconright="delete" nativetype="button" tag="button"></b-button-stub>
+      <b-tooltip-stub active="true" type="is-primary" label="some specific text" position="is-top" triggers="hover" size="is-medium" animated="true" animation="fade" autoclose="true">
+        <b-button-stub type="is-primary" iconright="check-bold" nativetype="button" tag="button" style="display: none;"></b-button-stub>
+      </b-tooltip-stub>
+      <b-button-stub type="is-primary" iconright="close-thick" nativetype="button" tag="button" style="display: none;"></b-button-stub>
     </div>
   </div>
   <!---->
