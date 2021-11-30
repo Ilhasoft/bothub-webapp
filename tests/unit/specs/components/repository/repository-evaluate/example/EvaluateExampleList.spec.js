@@ -20,14 +20,14 @@ describe('ExamplesList.vue', () => {
   let getters;
 
   beforeEach(() => {
+    getters = {
+      getCurrentRepository: () => ({}),
+      getSelectedVersion: () => ({}),
+    };
     state = {
       selectedRepository: {
         uuid: '8511fd26-a3bc-4f74-9af1-176abca5401d',
       },
-    };
-    getters = {
-      getCurrentRepository: () => ({}),
-      getSelectedVersion: () => ({}),
     };
     actions = {
       searchEvaluateExamples: ({
@@ -56,27 +56,4 @@ describe('ExamplesList.vue', () => {
   test('renders correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
-
-  // describe('update list', () => {
-  //   beforeEach(async () => {
-  //     await wrapper.vm.updateExamples();
-  //     await wrapper.vm.examplesList.updateItems(0);
-  //   });
-
-  //   test('have items', () => {
-  //     expect(wrapper.vm.examplesList.items.length).toBeGreaterThan(0);
-  //   });
-
-  //   test('update list when query changes', () => {
-  //     wrapper.setProps({ query: { language: 'pt' } });
-  //     expect(wrapper.vm.examplesList.items.length).toBe(0);
-  //   });
-
-  //   test('update list when repository changes', () => {
-  //     state.selectedRepository = {
-  //       id: '8871fd26-a3bc-4f74-9af1-176abca5971d',
-  //     };
-  //     expect(wrapper.vm.examplesList.items.length).toBe(0);
-  //   });
-  // });
 });
