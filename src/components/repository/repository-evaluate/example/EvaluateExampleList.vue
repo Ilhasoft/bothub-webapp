@@ -63,7 +63,7 @@ export default {
       }
       this.searchingExample = false;
     },
-    repsoitory() {
+    repository() {
       this.updateExamples(true);
     },
     repositoryVersion() {
