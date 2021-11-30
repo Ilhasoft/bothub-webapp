@@ -85,6 +85,9 @@ export default {
   searchLogs(store, { repositoryVersionLanguage, query, limit }) {
     return repository.searchLogs(repositoryVersionLanguage, query, limit);
   },
+  getLogs(store){
+    return repository.getLogs();
+  },
   analyzeText(store, {
     repositoryUUID, repositoryVersion, language, text,
   }) {

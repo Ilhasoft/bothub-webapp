@@ -1,5 +1,9 @@
 <template>
   <div class="filter-evaluate-example">
+    <!-- <pre>
+      {{Logs()}}
+    </pre> -->
+
     <div class="filter-evaluate-example__filters">
       <b-field :errors="errors.intent" class="filter-evaluate-example__filters__input-text">
         <b-input v-model="text" :debounce="debounceTime" icon-right="magnify" />
@@ -43,6 +47,28 @@
             </option>
           </b-select>
         </b-field>
+        <b-field>
+          <b-select v-model="intentConfidence" placeholder="Confidence" expanded>
+            <option
+              v-for="confidence in confidences"
+              :key="confidence.id"
+              :selected="confidence.value === confidence"
+              :value="confidence.value"
+            >
+              {{ confidenceRange(confidence.nlp_log.intent.confidence) }}
+            </option>
+          </b-select>
+        </b-field>
+        <b-field v-if="confidences" :message="errors.confidence">
+          <b-autocomplete
+            v-model="confidence"
+            :data="optionsConfidence"
+            :formatters="inputFormatters"
+            placeholder="novo"
+            open-on-focus
+            dropdown-position="bottom"
+          />
+        </b-field>
         <b-field :message="errors.repository_version_name" v-show="hasVersion">
           <b-autocomplete
             v-if="versions"
@@ -60,7 +86,7 @@
 </template>
 <script>
 import { formatters, LANGUAGES } from '@/utils/index';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import _ from 'lodash';
 
 export default {
@@ -100,7 +126,8 @@ export default {
       versionName: '',
       language: null,
       setTimeoutId: null,
-      errors: {}
+      errors: {},
+      confidences: []
     };
   },
   computed: {
@@ -125,6 +152,20 @@ export default {
         value: lang,
         title: `${LANGUAGES[lang]}`
       }));
+    },
+    filterConfidence(){
+      if (this.confidences !== null) {
+        return this.confidences.filter(
+          confidence => confidence
+            .toString()
+            .toLowerCase()
+            .indexOf(this.intent.toLowerCase()) >= 0
+        );
+      }
+      return [];
+    },
+    optionsConfidence(){
+      return this.filterConfidence.map(confidence => confidence);
     },
     filterIntents() {
       if (this.intents !== null) {
@@ -198,6 +239,7 @@ export default {
     this.setDefaultLanguage();
   },
   methods: {
+    ...mapActions(['getLogs']),
     emitText: _.debounce(function emitIntent(text) {
       this.$emit('querystringformatted', { search: text });
     }, 500),
@@ -210,11 +252,57 @@ export default {
     emitVersion: _.debounce(function emitVersion(version) {
       this.$emit('querystringformatted', { repository_version_name: version });
     }, 500),
-
+    emitConfidence: _.debounce(function emitConfidence(confidence) {
+      this.$emit('querystringformatted', { confidence });
+    }, 500),
     setDefaultLanguage() {
       if (!this.hasVersion) {
         this.language = this.repository.language;
       }
+    },
+    async Logs() {
+      const response = await this.getLogs();
+      this.intentConfidence = response.data.results?.[0]?.nlp_log.intent.confidence;
+
+      console.log(this.intentConfidence);
+      response.data.results.forEach(({ nlp_log }) => {
+        this.confidences.push({
+          nlp_log
+        });
+        console.log(this.confidences);
+      });
+    },
+    confidenceRange() {
+      if (this.intentConfidence >= 0.9) {
+        return '90% - 100%';
+      } if (this.intentConfidence >= 0.80 && this.intentConfidence < 0.90) {
+        return '80% - 90%';
+      }
+      if (this.intentConfidence >= 0.70 && this.intentConfidence < 0.80) {
+        return '70% - 80%';
+      }
+      if (this.intentConfidence >= 0.60 && this.intentConfidence < 0.70) {
+        return '60% - 70%';
+      }
+      if (this.intentConfidence >= 0.50 && this.intentConfidence < 0.60) {
+        return '50% - 60%';
+      }
+      if (this.intentConfidence >= 0.40 && this.intentConfidence < 0.50) {
+        return '40% - 50%';
+      }
+      if (this.intentConfidence >= 0.30 && this.intentConfidence < 0.40) {
+        return '30% - 40%';
+      }
+      if (this.intentConfidence >= 0.20 && this.intentConfidence < 0.30) {
+        return '20% - 30%';
+      }
+      if (this.intentConfidence >= 0.10 && this.intentConfidence < 0.20) {
+        return '10% - 20%';
+      }
+      if (this.intentConfidence >= 0 && this.intentConfidence < 0.10) {
+        return '0% - 10%';
+      }
+      return this.intentConfidence;
     }
   }
 };

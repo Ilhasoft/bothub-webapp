@@ -90,6 +90,9 @@ export default {
   searchLogs(repositoryVersionLanguage, query, limit) {
     return new utils.Page('/v2/repository/log/', limit, { repository_version_language: repositoryVersionLanguage, ...query });
   },
+  getLogs(){
+    return request.$http.get('v2/repository/log/')
+  },
   makeVersionDefault(repositoryUUID, versionUUID) {
     return request.$http.patch(
       `/v2/repository/version/${versionUUID}/`,
