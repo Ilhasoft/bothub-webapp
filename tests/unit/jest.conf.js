@@ -8,7 +8,7 @@ module.exports = {
     'vue',
   ],
   moduleNameMapper: {
-    '.*\\.(svg)$': '<rootDir>/test/__mocks__/fileMock.js',
+    '.*\\.(svg)$': '<rootDir>/tests/__mocks__/fileMock.js',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   transform: {
@@ -16,8 +16,8 @@ module.exports = {
     '.*\\.(vue)$': 'vue-jest',
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
-  setupFilesAfterEnv: ['<rootDir>/tests/unit/setup.js'],
-  coverageDirectory: '<rootDir>/test/unit/coverage',
+  setupFilesAfterEnv: ['<rootDir>/tests/unit/setup'],
+  coverageDirectory: '<rootDir>/tests/unit/coverage',
   collectCoverageFrom: [
     'src/**/*.js',
     'src/**/*.vue',
