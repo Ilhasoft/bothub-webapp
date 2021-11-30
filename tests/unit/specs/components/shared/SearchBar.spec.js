@@ -29,7 +29,7 @@ describe('SearchBar.vue', () => {
     let input;
     const value = 'hi';
     beforeEach(async () => {
-      input = wrapper.find({ ref: 'input' });
+      input = wrapper.findComponent({ ref: 'input' });
       input.element.value = value;
       input.trigger('input');
     });

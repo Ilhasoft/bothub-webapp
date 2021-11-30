@@ -23,7 +23,7 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   describe('set text', () => {
     const textareaValue = 'hi kids';
     beforeEach(() => {
-      const input = wrapper.find({ ref: 'input' });
+      const input = wrapper.findComponent({ ref: 'input' });
       input.element.value = textareaValue;
       input.trigger('input', textareaValue);
     });
@@ -51,7 +51,7 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
             },
           },
         });
-        const input = wrapper.find({ ref: 'input' });
+        const input = wrapper.findComponent({ ref: 'input' });
         input.element.setSelectionRange(0, 2);
       });
 

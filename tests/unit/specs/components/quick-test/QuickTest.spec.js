@@ -53,7 +53,7 @@ describe('QuickTest.vue', () => {
 
   describe('click on expand button', () => {
     beforeEach(() => {
-      const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
+      const expandQuickTest = wrapper.findComponent({ ref: 'expandQuickTest' });
       expandQuickTest.trigger('click');
     });
 
