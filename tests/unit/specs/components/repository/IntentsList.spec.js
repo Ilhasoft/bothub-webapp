@@ -1,10 +1,12 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import IntentsList from '@/components/repository/IntentsList';
+import Buefy from 'buefy';
 
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 describe('EntitiesList.vue', () => {
   let wrapper;
