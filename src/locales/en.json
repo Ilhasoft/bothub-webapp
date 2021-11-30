@@ -288,7 +288,7 @@
       "integrate_modal_title": "Integrate \"{intelligence}\" intelligence to the project? ",
       "integrate_modal_subtitle": "Intelligence will be added to Flows in this project and through the “Divide by Intent” feature you will be able to use the intentions of this intelligence.",
       "confirm_integrate": "Confirm",
-      "remove_integrate_modal_title": "Remover intelligence \"{intelligence}\" from project? ",
+      "remove_integrate_modal_title": "Remove intelligence \"{intelligence}\" from project? ",
       "remove_integrate_modal_subtitle": "This intelligence will no longer be used in this project. If you change your mind, you will need to reintegrate and adjust the flows.",
       "confirm_with_username": "Enter <strong>{username}</strong> to confirm the exit",
       "confirm_with_username_placeholder": "Confirm your username to delete the account",
@@ -364,7 +364,7 @@
       "intelligence_force_regular": "Regular",
       "intelligence_force_high": "High",
       "integrate": "Integrate to Flows",
-      "remove_integrate": "Remover from Flows"
+      "remove_integrate": "Remove from Flows"
     },
     "integration": {
       "title": "API",
