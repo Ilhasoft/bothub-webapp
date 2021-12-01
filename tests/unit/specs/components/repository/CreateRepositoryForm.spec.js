@@ -5,6 +5,7 @@ import Buefy from 'buefy';
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import CreateRepositoryForm from '@/components/repository/CreateRepository/CreateRepositoryForm';
+import unnic from '@weni/unnnic-system';
 
 const localVue = createLocalVue();
 localVue.use(Buefy);

@@ -5,12 +5,12 @@ exports[`EntitiesList.vue renders correctly 1`] = `
   <div class="entity-list__content">
     <div class="entity-list__content__descriptions">
       <h1><strong>some specific text</strong></h1>
-      <b-tag-stub size="is-medium" tabstop="true" class="entity-list__content__descriptions__tag entity-sunflower">
+      <b-tag size="is-medium" class="entity-list__content__descriptions__tag entity-sunflower">
         <div></div>
-      </b-tag-stub>
+      </b-tag>
     </div>
     <div>
-      <b-button-stub nativetype="button" tag="button" class="entity-list__content__buttonEdit">some specific text</b-button-stub>
+      <b-button class="entity-list__content__buttonEdit">some specific text</b-button>
     </div>
   </div>
   <div class="entity-list__header__options">

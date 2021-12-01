@@ -38,6 +38,7 @@ describe('ExamplesList.vue', () => {
     store = new Vuex.Store({
       modules: {
         Repository: {
+          getters,
           state,
           actions,
         },
