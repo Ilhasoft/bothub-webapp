@@ -1,9 +1,11 @@
 import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import EntitiesList from '@/components/repository/EntitiesList';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
 describe('EntitiesList.vue', () => {
   let wrapper;
@@ -60,19 +62,19 @@ describe('EntitiesList.vue', () => {
     beforeEach(() => {
       const editEntityEvent = wrapper.findComponent({ ref: 'editEntityEvent' });
       editEntityEvent.trigger('click');
-    });
 
-    test('expanded should be truth', () => {
-      console.log(wrapper.vm.editSentences);
-      expect(wrapper.vm.editSentences).toBeTruthy();
-    });
+      test('expanded should be truth', () => {
+        console.log(wrapper.vm.editSentences);
+        expect(wrapper.vm.editSentences).toBeTruthy();
+      });
 
-    test('Entity should be de defined', () => {
-      expect(wrapper.vm.entityName).toBeDefined();
-    });
+      test('Entity should be de defined', () => {
+        expect(wrapper.vm.entityName).toBeDefined();
+      });
 
-    test('total of sentences should be greater than 0', () => {
-      expect(wrapper.vm.entitiesList.total).toBeGreaterThan(0);
+      test('total of sentences should be greater than 0', () => {
+        expect(wrapper.vm.entitiesList.total).toBeGreaterThan(0);
+      });
     });
   });
 });

@@ -22,11 +22,11 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
           </h1>
         </div>
         <div class="create-repository__container__steps__wrapper__button">
-          <router-link to="[object Object]">
+          <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
             <unnnic-button-stub size="large" type="secondary" class="create-repository__container__steps__wrapper__button__btn">
               some specific text
             </unnnic-button-stub>
-          </router-link>
+          </router-link-stub>
         </div>
       </div>
     </section>
