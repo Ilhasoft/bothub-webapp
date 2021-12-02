@@ -39,9 +39,7 @@ describe('EntitiesList.vue', () => {
         entitiesList: {
           total: 10,
         },
-        entityName: {
-          entity: 'health',
-        },
+        entityName: 'health',
         repository: {
           other_group: {
             entities: ['robot', 'greenRobot'],
@@ -70,7 +68,7 @@ describe('EntitiesList.vue', () => {
     });
 
     test('Entity should be de defined', () => {
-      expect(wrapper.vm.entityName.entity).toBeDefined();
+      expect(wrapper.vm.entityName).toBeDefined();
     });
 
     test('total of sentences should be greater than 0', () => {

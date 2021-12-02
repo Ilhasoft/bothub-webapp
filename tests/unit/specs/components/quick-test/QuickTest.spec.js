@@ -9,8 +9,11 @@ localVue.use(Buefy);
 localVue.use(Vuex);
 let store;
 
+
 describe('QuickTest.vue', () => {
   let wrapper;
+  let getters;
+
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
