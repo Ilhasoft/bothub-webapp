@@ -8,7 +8,7 @@ exports[`EntitiesList.vue renders correctly 1`] = `
       <p><strong>"</strong> <strong>"</strong></p>
     </div>
     <div>
-      <b-button class="intent-list__content__button-edit">some specific text</b-button>
+      <b-button-stub nativetype="button" tag="button" class="intent-list__content__button-edit">some specific text</b-button-stub>
     </div>
   </div>
   <div class="intent-list__header__options">

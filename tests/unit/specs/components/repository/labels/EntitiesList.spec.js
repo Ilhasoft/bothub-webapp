@@ -60,21 +60,47 @@ describe('EntitiesList.vue', () => {
 
   describe('click on edit button', () => {
     beforeEach(() => {
+      const entity = 'health';
+      wrapper = shallowMount(EntitiesList, {
+        localVue,
+        store,
+        mocks: {
+          $t: () => 'some specific text',
+          $tc: () => 'some specific text',
+          $route: {
+            params: { entity },
+          },
+        },
+        propsData: {
+          entitiesList: {
+            total: 10,
+          },
+          entityName: 'health',
+          repository: {
+            other_group: {
+              entities: ['robot', 'greenRobot'],
+            },
+            groups: {
+              entities: ['robot', 'greenRobot'],
+            },
+          },
+        },
+      });
       const editEntityEvent = wrapper.findComponent({ ref: 'editEntityEvent' });
       editEntityEvent.trigger('click');
+      console.log(editEntityEvent);
+    });
+    test('expanded should be truth', () => {
+      console.log(wrapper.vm.editSentences);
+      expect(wrapper.vm.editSentences).toBeTruthy();
+    });
 
-      test('expanded should be truth', () => {
-        console.log(wrapper.vm.editSentences);
-        expect(wrapper.vm.editSentences).toBeTruthy();
-      });
+    test('Entity should be de defined', () => {
+      expect(wrapper.vm.entityName).toBeDefined();
+    });
 
-      test('Entity should be de defined', () => {
-        expect(wrapper.vm.entityName).toBeDefined();
-      });
-
-      test('total of sentences should be greater than 0', () => {
-        expect(wrapper.vm.entitiesList.total).toBeGreaterThan(0);
-      });
+    test('total of sentences should be greater than 0', () => {
+      expect(wrapper.vm.entitiesList.total).toBeGreaterThan(0);
     });
   });
 });
