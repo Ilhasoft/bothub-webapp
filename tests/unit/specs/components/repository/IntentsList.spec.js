@@ -1,11 +1,14 @@
 import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import IntentsList from '@/components/repository/IntentsList';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
+
+jest.spyOn(IntentsList, 'mounted').mockImplementation(() => {})
 describe('EntitiesList.vue', () => {
   let wrapper;
   let store;
@@ -22,7 +25,7 @@ describe('EntitiesList.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(IntentsList, {
+    wrapper = mount(IntentsList, {
       localVue,
       store,
       mocks: {

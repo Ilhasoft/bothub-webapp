@@ -4,7 +4,7 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
 <div class="create-repository">
   <div class="create-repository__container">
     <div class="create-repository__container__indicator">
-      <unnnic-indicator numberofsteps="2" currentstep="1" titles="some specific text,some specific text"></unnnic-indicator>
+      <unnnic-indicator-stub numberofsteps="2" titles="some specific text,some specific text" currentstep="1"></unnnic-indicator-stub>
     </div>
     <section class="create-repository__container__steps">
       <intelligence-tab-stub></intelligence-tab-stub>
@@ -22,22 +22,22 @@ exports[`CreateRepositoryForm renders correctly 1`] = `
           </h1>
         </div>
         <div class="create-repository__container__steps__wrapper__button">
-          <router-link to="[object Object]">
-            <unnnic-button type="secondary" class="create-repository__container__steps__wrapper__button__btn">
+          <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
+            <unnnic-button-stub size="large" type="secondary" class="create-repository__container__steps__wrapper__button__btn">
               some specific text
-            </unnnic-button>
-          </router-link>
+            </unnnic-button-stub>
+          </router-link-stub>
         </div>
       </div>
     </section>
-    <unnnic-modal text="some specific text" scheme="feedback-yellow" modal-icon="alert-circle-1"><span slot="message">some specific text</span>
-      <unnnic-button slot="options" type="terciary">
+    <unnnic-modal-stub text="some specific text" modalicon="alert-circle-1" closeicon="true" scheme="feedback-yellow"><span>some specific text</span>
+      <unnnic-button-stub size="large" type="terciary">
         some specific text
-      </unnnic-button>
-      <unnnic-button slot="options" type="primary" class="create-repository__container__button">
+      </unnnic-button-stub>
+      <unnnic-button-stub size="large" type="primary" class="create-repository__container__button">
         some specific text
-      </unnnic-button>
-    </unnnic-modal>
+      </unnnic-button-stub>
+    </unnnic-modal-stub>
   </div>
 </div>
 `;

@@ -90,7 +90,7 @@ describe('NewTranslateForm.vue', () => {
   describe('entitiesInput emit entityAdded', () => {
     let entitiesInput;
     beforeEach(() => {
-      entitiesInput = wrapper.find({ ref: 'entitiesInput' });
+      entitiesInput = wrapper.findComponent({ ref: 'entitiesInput' });
       entitiesInput.vm.$emit('entityAdded', {});
     });
 
@@ -102,7 +102,7 @@ describe('NewTranslateForm.vue', () => {
   describe('entitiesInput emit entityEdited', () => {
     let entitiesInput;
     beforeEach(() => {
-      entitiesInput = wrapper.find({ ref: 'entitiesInput' });
+      entitiesInput = wrapper.findComponent({ ref: 'entitiesInput' });
       entitiesInput.vm.$emit('entityEdited', {});
     });
 
@@ -116,7 +116,7 @@ describe('NewTranslateForm.vue', () => {
     const eventValue = { start: 0, end: 3 };
 
     beforeEach(() => {
-      textInput = wrapper.find({ ref: 'textInput' });
+      textInput = wrapper.findComponent({ ref: 'textInput' });
       textInput.vm.$emit('textSelected', eventValue);
     });
 
