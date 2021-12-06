@@ -115,7 +115,6 @@ export default {
     },
     editOptionsEntity() {
       this.editSentences = !this.editSentences;
-      console.log('here', this.editSentences)
     },
     async saveEdition() {
       try {

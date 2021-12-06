@@ -1,12 +1,14 @@
 import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import EntitiesList from '@/components/repository/EntitiesList';
 import Buefy from 'buefy';
+
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(Buefy);
 
+jest.spyOn(EntitiesList, 'mounted').mockImplementation(() => {})
 describe('EntitiesList.vue', () => {
   let wrapper;
   let store;
@@ -27,7 +29,7 @@ describe('EntitiesList.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(EntitiesList, {
+    wrapper = mount(EntitiesList, {
       localVue,
       store,
       mocks: {
@@ -59,39 +61,9 @@ describe('EntitiesList.vue', () => {
   });
 
   describe('click on edit button', () => {
-    beforeEach(() => {
-      const entity = 'health';
-      wrapper = shallowMount(EntitiesList, {
-        localVue,
-        store,
-        mocks: {
-          $t: () => 'some specific text',
-          $tc: () => 'some specific text',
-          $route: {
-            params: { entity },
-          },
-        },
-        propsData: {
-          entitiesList: {
-            total: 10,
-          },
-          entityName: 'health',
-          repository: {
-            other_group: {
-              entities: ['robot', 'greenRobot'],
-            },
-            groups: {
-              entities: ['robot', 'greenRobot'],
-            },
-          },
-        },
-      });
+    test('expanded should be truth', () => {
       const editEntityEvent = wrapper.findComponent({ ref: 'editEntityEvent' });
       editEntityEvent.trigger('click');
-      console.log(editEntityEvent);
-    });
-    test('expanded should be truth', () => {
-      console.log(wrapper.vm.editSentences);
       expect(wrapper.vm.editSentences).toBeTruthy();
     });
 
