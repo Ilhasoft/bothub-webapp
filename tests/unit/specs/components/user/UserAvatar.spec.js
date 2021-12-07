@@ -1,9 +1,10 @@
 
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import UserAvatar from '@/components/user/UserAvatar';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('UserAvatar.vue', () => {

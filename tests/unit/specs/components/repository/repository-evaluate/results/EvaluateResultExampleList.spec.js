@@ -3,9 +3,10 @@ import EvaluateResultExampleList from '@/components/repository/repository-evalua
 
 import sinon from 'sinon';
 import Vuex from 'vuex';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 localVue.use(Vuex);
 
 describe('EvaluateResultExampleList.vue', () => {

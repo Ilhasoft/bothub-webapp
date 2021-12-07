@@ -7,8 +7,10 @@ import TranslationsStatus from '@/components/translate/TranslationsStatus';
 import applyFilters from '@/utils/filters';
 
 import store from '@/store';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 applyFilters(localVue);
 

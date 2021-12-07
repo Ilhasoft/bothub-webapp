@@ -1,8 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ExampleTextWithHighlightedEntitiesInput from '@/components/inputs/ExampleTextWithHighlightedEntitiesInput';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   let wrapper;
@@ -22,7 +23,7 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
   describe('set text', () => {
     const textareaValue = 'hi kids';
     beforeEach(() => {
-      const input = wrapper.find({ ref: 'input' });
+      const input = wrapper.findComponent({ ref: 'input' });
       input.element.value = textareaValue;
       input.trigger('input', textareaValue);
     });
@@ -50,7 +51,7 @@ describe('ExampleTextWithHighlightedEntitiesInput.vue', () => {
             },
           },
         });
-        const input = wrapper.find({ ref: 'input' });
+        const input = wrapper.findComponent({ ref: 'input' });
         input.element.setSelectionRange(0, 2);
       });
 

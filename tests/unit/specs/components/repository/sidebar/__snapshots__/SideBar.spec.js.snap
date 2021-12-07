@@ -2,11 +2,11 @@
 
 exports[`SideBar.vue renders correctly 1`] = `
 <div class="sidebar">
-  <unnnic-sidebar expanded="true" class="sidebar-wrapper">
-    <section slot="header" class="unnic--clickable sidebar-wrapper__header">
+  <unnnic-sidebar-stub expanded="true" class="sidebar-wrapper">
+    <section class="unnic--clickable sidebar-wrapper__header">
       <div class="sidebar-wrapper__header__field">
         <div class="sidebar-wrapper__header__field__back">
-          <unnnic-icon icon="keyboard-arrow-left-1" size="xs"></unnnic-icon> <span class="sidebar-wrapper__header__field__back__text">some specific text</span>
+          <unnnic-icon-stub icon="keyboard-arrow-left-1" size="xs" scheme=""></unnnic-icon-stub> <span class="sidebar-wrapper__header__field__back__text">some specific text</span>
         </div>
         <div class="sidebar-wrapper__header__field__detail"><span title="bothub" class="sidebar-wrapper__header__field__detail__title">
             bothub
@@ -23,9 +23,9 @@ exports[`SideBar.vue renders correctly 1`] = `
     <section class="sidebar-wrapper__body">
       <!---->
     </section>
-    <div slot="footer" class="sidebar-wrapper__footer">
-      <unnnic-sidebar-item icon="expand-8-1" text="some specific text" class="sidebar-wrapper__footer__text"></unnnic-sidebar-item>
+    <div class="sidebar-wrapper__footer">
+      <unnnic-sidebar-item-stub icon="expand-8-1" text="some specific text" class="sidebar-wrapper__footer__text"></unnnic-sidebar-item-stub>
     </div>
-  </unnnic-sidebar> <span class="sidebar__divider"></span>
+  </unnnic-sidebar-stub> <span class="sidebar__divider"></span>
 </div>
 `;

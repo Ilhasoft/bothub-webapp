@@ -1,11 +1,14 @@
 import Vuex from 'vuex';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import EntitiesList from '@/components/repository/EntitiesList';
+import Buefy from 'buefy';
 
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
+localVue.use(Buefy);
 
+jest.spyOn(EntitiesList, 'mounted').mockImplementation(() => {})
 describe('EntitiesList.vue', () => {
   let wrapper;
   let store;
@@ -26,7 +29,7 @@ describe('EntitiesList.vue', () => {
         },
       },
     });
-    wrapper = shallowMount(EntitiesList, {
+    wrapper = mount(EntitiesList, {
       localVue,
       store,
       mocks: {
@@ -40,9 +43,7 @@ describe('EntitiesList.vue', () => {
         entitiesList: {
           total: 10,
         },
-        entityName: {
-          entity: 'health',
-        },
+        entityName: 'health',
         repository: {
           other_group: {
             entities: ['robot', 'greenRobot'],
@@ -60,18 +61,14 @@ describe('EntitiesList.vue', () => {
   });
 
   describe('click on edit button', () => {
-    beforeEach(() => {
+    test('expanded should be truth', () => {
       const editEntityEvent = wrapper.findComponent({ ref: 'editEntityEvent' });
       editEntityEvent.trigger('click');
-    });
-
-    test('expanded should be truth', () => {
-      console.log(wrapper.vm.editSentences);
       expect(wrapper.vm.editSentences).toBeTruthy();
     });
 
     test('Entity should be de defined', () => {
-      expect(wrapper.vm.entityName.entity).toBeDefined();
+      expect(wrapper.vm.entityName).toBeDefined();
     });
 
     test('total of sentences should be greater than 0', () => {

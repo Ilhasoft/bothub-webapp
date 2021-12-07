@@ -2,9 +2,10 @@ import Vuex from 'vuex';
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TranslateList from '@/components/translate/TranslateList';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 localVue.use(Vuex);
 
 describe('TranslateList.vue', () => {

@@ -13,28 +13,28 @@ exports[`NewEvaluateExample.vue renders correctly 1`] = `
     <form>
       <div class="new-sentence__form__wrapper">
         <div>
-          <b-field>
+          <b-field-stub addons="true">
             <example-text-with-highlighted-entities-input-stub value="" entities="" id="tour-evaluate-step-2" is-previous-disabled="true" is-step-blocked="true" placeholder="some specific text"></example-text-with-highlighted-entities-input-stub>
-          </b-field>
+          </b-field-stub>
         </div>
         <div>
-          <b-field id="tour-evaluate-step-3" is-previous-disabled="true" is-step-blocked="true">
-            <b-autocomplete data="" placeholder="some specific text" open-on-focus="" dropdown-position="bottom"></b-autocomplete>
-          </b-field>
+          <b-field-stub addons="true" id="tour-evaluate-step-3" is-previous-disabled="true" is-step-blocked="true">
+            <b-autocomplete-stub usehtml5validation="true" statusicon="true" value="" data="" field="value" openonfocus="true" dropdownposition="bottom" confirmkeys="Tab,Enter" placeholder="some specific text"></b-autocomplete-stub>
+          </b-field-stub>
         </div>
         <div class="new-sentence__form__wrapper__submit-btn">
-          <b-tooltip label="some specific text, some specific text" active="true" multilined="" type="is-dark">
-            <b-button id="tour-evaluate-step-4" is-next-disabled="true" is-previous-disabled="true" disabled="true" is-step-blocked="true" type="is-primary" class="new-sentence__form__wrapper__submit-btn__button">some specific text</b-button>
-          </b-tooltip>
+          <b-tooltip-stub active="true" type="is-dark" label="some specific text, some specific text" position="is-top" triggers="hover" multilined="true" size="is-medium" animated="true" animation="fade" autoclose="true">
+            <b-button-stub type="is-primary" nativetype="button" tag="button" id="tour-evaluate-step-4" is-next-disabled="true" is-previous-disabled="true" disabled="true" is-step-blocked="true" class="new-sentence__form__wrapper__submit-btn__button">some specific text</b-button-stub>
+          </b-tooltip-stub>
         </div>
       </div>
-      <b-field class="new-sentence__form__entities">
+      <b-field-stub addons="true" class="new-sentence__form__entities">
         <div class="columns">
           <div class="column is-one-third">
             <entities-input-stub value="" repository="[object Object]" text="" availableentities="" entitiesforedit="" available-labels="" testing="true"></entities-input-stub>
           </div>
         </div>
-      </b-field>
+      </b-field-stub>
     </form>
   </div>
 </div>

@@ -2,9 +2,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import TrainModal from '@/components/repository/training/TrainModal';
 import applyFilters from '@/utils/filters';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 applyFilters(localVue);
 

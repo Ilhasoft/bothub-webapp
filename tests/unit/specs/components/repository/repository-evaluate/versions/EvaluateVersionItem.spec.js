@@ -3,10 +3,12 @@ import EvaluateVersionItem from '@/components/repository/repository-evaluate/ver
 
 import VueMoment from 'vue-moment';
 import store from '@/store';
-
+import Buefy from 'buefy';
+import VueRouter from 'vue-router'
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
+localVue.use(VueRouter);
 localVue.use(VueMoment);
 
 describe('EvaluateVersionItem.vue', () => {

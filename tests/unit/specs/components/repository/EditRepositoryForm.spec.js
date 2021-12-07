@@ -6,9 +6,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import store from '@/store';
 import TYPES from '@/store/types';
 import EditRepositoryForm from '@/components/repository/EditRepositoryForm';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('EditRepositoryForm.vue', () => {

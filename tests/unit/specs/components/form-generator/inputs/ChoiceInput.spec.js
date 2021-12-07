@@ -2,8 +2,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import ChoiceInput from '@/components/form-generator/inputs/ChoiceInput';
 import sinon from 'sinon';
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('ChoiceInput.vue', () => {

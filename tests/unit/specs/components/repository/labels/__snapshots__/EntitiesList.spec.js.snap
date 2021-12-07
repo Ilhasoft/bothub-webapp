@@ -4,14 +4,13 @@ exports[`EntitiesList.vue renders correctly 1`] = `
 <div class="entity-list">
   <div class="entity-list__content">
     <div class="entity-list__content__descriptions">
-      <h1><strong>some specific text</strong></h1>
-      <b-tag size="is-medium" class="entity-list__content__descriptions__tag entity-sunflower">
-        <div></div>
-      </b-tag>
+      <h1><strong>some specific text</strong></h1> <span class="tag is-medium entity-list__content__descriptions__tag entity-sunflower"><span class=""><div></div></span>
+      <!----></span>
     </div>
-    <div>
-      <b-button class="entity-list__content__buttonEdit">some specific text</b-button>
-    </div>
+    <div><button type="button" class="button entity-list__content__buttonEdit">
+        <!----><span>some specific text</span>
+        <!---->
+      </button></div>
   </div>
   <div class="entity-list__header__options">
     <p> some specific text</p>
