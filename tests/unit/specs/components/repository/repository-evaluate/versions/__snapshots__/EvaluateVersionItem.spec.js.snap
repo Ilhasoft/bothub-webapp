@@ -2,7 +2,7 @@
 
 exports[`EvaluateVersionItem.vue renders 1`] = `
 <div class="version-test-item">
-  <router-link to="[object Object]">
+  <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
     <div class="version-test-item__wrapper">
       <div class="version-test-item__wrapper__info"><strong class="version-test-item__wrapper__info__item">
           some specific text #2
@@ -11,9 +11,9 @@ exports[`EvaluateVersionItem.vue renders 1`] = `
           3 years ago</small>
       </div>
       <div class="version-test-item__wrapper__links">
-        <router-link to="[object Object]"><a> some specific text </a></router-link>
+        <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click"><a> some specific text </a></router-link-stub>
       </div>
     </div>
-  </router-link>
+  </router-link-stub>
 </div>
 `;

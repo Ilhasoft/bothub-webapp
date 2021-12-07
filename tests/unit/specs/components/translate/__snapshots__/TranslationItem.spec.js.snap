@@ -18,7 +18,7 @@ exports[`TranslationItem.vue renders correctly 1`] = `
         <flag-stub language="pt"></flag-stub>
       </div>
       <div class="level-item has-text-grey-light">
-        3 years ago
+        4 years ago
       </div>
     </div>
     <!---->

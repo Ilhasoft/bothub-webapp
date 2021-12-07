@@ -4,9 +4,9 @@ exports[`TestView.vue renders correctly 1`] = `
 <repository-view-base-stub repository="[object Object]" quicktest="true">
   <div>
     <div>
-      <b-notification type="is-info">
+      <b-notification-stub active="true" type="is-info" duration="2000" animation="fade">
         some specific text
-      </b-notification>
+      </b-notification-stub>
       <login-form-stub hideforgotpassword="true"></login-form-stub>
     </div>
   </div>

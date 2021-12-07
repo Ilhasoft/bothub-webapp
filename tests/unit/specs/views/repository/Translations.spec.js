@@ -1,10 +1,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Translations from '@/views/repository/Translations';
 import store from '@/store';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 
 describe('Translations.vue', () => {
   let wrapper;

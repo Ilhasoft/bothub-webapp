@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrainModal.vue add requirements renders correctly 1`] = `
-<b-modal active="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+<b-modal-stub active="true" width="960" animation="zoom-out" oncancel="function _default() {}" scroll="clip" trapfocus="true" autofocus="true" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
   <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
       <div class="train-modal__close">
-        <b-icon icon="close" class="train-modal__close__icon"></b-icon>
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
       </div>
       <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
@@ -18,34 +18,34 @@ exports[`TrainModal.vue add requirements renders correctly 1`] = `
               <div class="train-modal__wrapper__content__content-requirements">
                 <div class="train-modal__wrapper__content__content-requirements__item">
                   <div class="train-modal__wrapper__content__content-requirements__item__field">
-                    <b-tag type="is-primary" rounded="">en</b-tag>
+                    <b-tag-stub type="is-primary" rounded="true" tabstop="true">en</b-tag-stub>
                   </div>
                   <p><strong class="train-modal__wrapper__content__content-requirements__item__text">
                       requirement 1
                     </strong> <br> <span></span></p>
-                  <b-icon icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon>
+                  <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
                 </div>
               </div>
             </div>
             <!---->
           </div>
           <div class="train-modal__buttons">
-            <b-button type="is-primary" class="train-modal__buttons__style"><span>some specific text</span></b-button>
+            <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
             <!---->
           </div>
         </div>
       </div>
     </div>
   </div>
-</b-modal>
+</b-modal-stub>
 `;
 
 exports[`TrainModal.vue add warning renders correctly 1`] = `
-<b-modal active="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+<b-modal-stub active="true" width="960" animation="zoom-out" oncancel="function _default() {}" scroll="clip" trapfocus="true" autofocus="true" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
   <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
       <div class="train-modal__close">
-        <b-icon icon="close" class="train-modal__close__icon"></b-icon>
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
       </div>
       <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
@@ -59,31 +59,31 @@ exports[`TrainModal.vue add warning renders correctly 1`] = `
               <div class="train-modal__wrapper__content__content-requirements">
                 <div class="train-modal__wrapper__content__content-requirements__item">
                   <div class="train-modal__wrapper__content__content-requirements__item__field">
-                    <b-tag type="is-primary" rounded="">en</b-tag>
+                    <b-tag-stub type="is-primary" rounded="true" tabstop="true">en</b-tag-stub>
                   </div>
                   <p><strong>warning 1</strong> <br> <span></span></p>
-                  <b-icon icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon>
+                  <b-icon-stub icon="close" class="train-modal__wrapper__content__content-requirements__item__icon"></b-icon-stub>
                 </div>
               </div>
             </div>
           </div>
           <div class="train-modal__buttons">
-            <b-button type="is-primary" class="train-modal__buttons__style"><span>some specific text</span></b-button>
+            <b-button-stub type="is-primary" nativetype="button" tag="button" class="train-modal__buttons__style"><span>some specific text</span></b-button-stub>
             <!---->
           </div>
         </div>
       </div>
     </div>
   </div>
-</b-modal>
+</b-modal-stub>
 `;
 
 exports[`TrainModal.vue renders correctly 1`] = `
-<b-modal active="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
+<b-modal-stub active="true" width="960" animation="zoom-out" oncancel="function _default() {}" scroll="clip" trapfocus="true" autofocus="true" destroyonhide="true" readyfortrain="true" languagesreadyfortrain="[object Object]">
   <div id="tour-training-step-7" is-previous-disabled="true" is-finish-disabled="true">
     <div class="train-modal">
       <div class="train-modal__close">
-        <b-icon icon="close" class="train-modal__close__icon"></b-icon>
+        <b-icon-stub icon="close" class="train-modal__close__icon"></b-icon-stub>
       </div>
       <div class="train-modal__container"><strong class="train-modal__text-warning">
           some specific text</strong>
@@ -91,5 +91,5 @@ exports[`TrainModal.vue renders correctly 1`] = `
       </div>
     </div>
   </div>
-</b-modal>
+</b-modal-stub>
 `;

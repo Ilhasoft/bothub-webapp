@@ -2,8 +2,8 @@
 
 exports[`LanguageList.vue renders correctly 1`] = `
 <div class="languages-list">
-  <b-field class="languages-list__field">
-    <b-autocomplete keep-first="true" open-on-focus="true" data="English,Brazilian Portuguese" placeholder="some specific text" dropdown-position="bottom"></b-autocomplete>
-  </b-field>
+  <b-field-stub addons="true" class="languages-list__field">
+    <b-autocomplete-stub usehtml5validation="true" statusicon="true" value="" data="English,Brazilian Portuguese" field="value" keepfirst="true" openonfocus="true" dropdownposition="bottom" confirmkeys="Tab,Enter" placeholder="some specific text"></b-autocomplete-stub>
+  </b-field-stub>
 </div>
 `;

@@ -1,9 +1,10 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import TrainResponse from '@/components/repository/training/TrainResponse';
 import applyFilters from '@/utils/filters';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 applyFilters(localVue);
 
 describe('TrainResponse.vue', () => {

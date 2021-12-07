@@ -4,10 +4,10 @@ jest.mock('@/api/request');
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import TranslateExampleForm from '@/components/translate/TranslateExampleForm';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 describe('TranslateExampleForm.vue', () => {
   let wrapper;
   beforeEach(() => {

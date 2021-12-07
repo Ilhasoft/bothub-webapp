@@ -20,10 +20,10 @@ exports[`RepositoryCard.vue renders correctly 1`] = `
       <div class="repository-card__flags"><span class="repository-card__flags__flag repository-card__flags__flag--main"><language-badge-stub language="en" main="true"></language-badge-stub></span><span class="repository-card__flags__flag"><language-badge-stub language="pt"></language-badge-stub></span></div>
       <div class="repository-card__categories">
         <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
-          <b-tag color="grey-light" rounded="" size="is-small" class="repository-card__categories__category">Business</b-tag>
+          <b-tag-stub size="is-small" rounded="true" tabstop="true" color="grey-light" class="repository-card__categories__category">Business</b-tag-stub>
         </router-link-stub>
         <router-link-stub to="[object Object]" tag="a" ariacurrentvalue="page" event="click">
-          <b-tag color="grey-light" rounded="" size="is-small" class="repository-card__categories__category">Technology</b-tag>
+          <b-tag-stub size="is-small" rounded="true" tabstop="true" color="grey-light" class="repository-card__categories__category">Technology</b-tag-stub>
         </router-link-stub>
       </div>
     </div>

@@ -5,9 +5,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import store from '@/store';
 import RequestAuthorizationModal from '@/components/repository/RequestAuthorizationModal';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('RequestAuthorizationModal.vue', () => {

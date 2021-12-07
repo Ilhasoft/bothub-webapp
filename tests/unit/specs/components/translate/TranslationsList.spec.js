@@ -5,9 +5,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import applyFilters from '@/utils/filters';
 import store from '@/store';
 import TranslationsList from '@/components/translate/TranslationsList';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 applyFilters(localVue);
 
 describe('TranslationsList.vue', () => {

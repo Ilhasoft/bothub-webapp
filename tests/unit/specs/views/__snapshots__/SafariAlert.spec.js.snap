@@ -18,9 +18,9 @@ exports[`SafariAlert.vue renders correctly 1`] = `
       </a> <a href="https://www.opera.com/pt-br/download"><img src="@/assets/imgs/opera.svg" alt="opera" class="safari-alert__content__browser-icon">
         <p>Opera</p>
       </a></div>
-    <b-button size="normal" class="safari-alert__content__button">
+    <b-button-stub size="normal" nativetype="button" tag="button" class="safari-alert__content__button">
       some specific text
-    </b-button>
+    </b-button-stub>
   </div>
 </div>
 `;

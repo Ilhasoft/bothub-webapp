@@ -23,7 +23,7 @@ describe('SentenceAccordion.vue', () => {
           open: false,
         },
       });
-      const check = wrapper.find({ ref: 'check' });
+      const check = wrapper.findComponent({ ref: 'check' });
       check.trigger('click');
     });
     test('expand should be false', () => {
@@ -38,7 +38,7 @@ describe('SentenceAccordion.vue', () => {
           open: false,
         },
       });
-      const colapseButton = wrapper.find({ ref: 'expander' });
+      const colapseButton = wrapper.findComponent({ ref: 'expander' });
       colapseButton.trigger('click');
     });
     test('Expand should be true', () => {
@@ -53,7 +53,7 @@ describe('SentenceAccordion.vue', () => {
           open: true,
         },
       });
-      const colapseButton = wrapper.find({ ref: 'expander' });
+      const colapseButton = wrapper.findComponent({ ref: 'expander' });
       colapseButton.trigger('click');
     });
     test('Expand should be true', () => {

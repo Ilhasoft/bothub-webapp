@@ -1,9 +1,9 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
 import HighlightedText from '@/components/shared/HighlightedText';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
-
+localVue.use(Buefy);
 describe('HighlightedText.vue', () => {
   let wrapper;
   beforeEach(() => {

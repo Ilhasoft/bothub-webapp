@@ -9,8 +9,11 @@ localVue.use(Buefy);
 localVue.use(Vuex);
 let store;
 
+
 describe('QuickTest.vue', () => {
   let wrapper;
+  let getters;
+
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
@@ -53,7 +56,7 @@ describe('QuickTest.vue', () => {
 
   describe('click on expand button', () => {
     beforeEach(() => {
-      const expandQuickTest = wrapper.find({ ref: 'expandQuickTest' });
+      const expandQuickTest = wrapper.findComponent({ ref: 'expandQuickTest' });
       expandQuickTest.trigger('click');
     });
 

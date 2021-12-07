@@ -4,9 +4,9 @@ exports[`Translate.vue renders correctly 1`] = `
 <repository-view-base-stub repository="[object Object]" quicktest="true">
   <div>
     <div>
-      <b-notification role="alert" class="is-info">
+      <b-notification-stub active="true" duration="2000" animation="fade" role="alert" class="is-info">
         some specific text
-      </b-notification>
+      </b-notification-stub>
       <login-form-stub hideforgotpassword="true"></login-form-stub>
     </div>
   </div>

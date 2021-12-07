@@ -6,9 +6,10 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 
 import NewExampleForm from '@/components/example/NewExampleForm';
 import store from '@/store';
-
+import Buefy from 'buefy';
 
 const localVue = createLocalVue();
+localVue.use(Buefy);
 
 
 describe('NewExampleForm.vue', () => {
@@ -124,7 +125,7 @@ describe('NewExampleForm.vue', () => {
   describe('entitiesInput emit entityAdded', () => {
     let entitiesInput;
     beforeEach(() => {
-      entitiesInput = wrapper.find({ ref: 'entitiesInput' });
+      entitiesInput = wrapper.findComponent({ ref: 'entitiesInput' });
       entitiesInput.vm.$emit('entityAdded', {});
     });
 
@@ -136,7 +137,7 @@ describe('NewExampleForm.vue', () => {
   describe('entitiesInput emit entityEdited', () => {
     let entitiesInput;
     beforeEach(() => {
-      entitiesInput = wrapper.find({ ref: 'entitiesInput' });
+      entitiesInput = wrapper.findComponent({ ref: 'entitiesInput' });
       entitiesInput.vm.$emit('entityEdited', {});
     });
 
@@ -150,7 +151,7 @@ describe('NewExampleForm.vue', () => {
     const eventValue = { start: 0, end: 3 };
 
     beforeEach(() => {
-      textInput = wrapper.find({ ref: 'textInput' });
+      textInput = wrapper.findComponent({ ref: 'textInput' });
       textInput.vm.$emit('textSelected', eventValue);
     });
 
