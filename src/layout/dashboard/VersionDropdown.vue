@@ -1,29 +1,27 @@
 <template>
-  <div
-    class="version_dropdown">
-    <span
-      class="version_dropdown__number">
+  <div class="version_dropdown">
+    <span class="version_dropdown__number">
       {{ $store.state.Repository.repositoryVersionName }}
     </span>
-    <b-dropdown
-      aria-role="list">
+    <b-dropdown aria-role="list">
       <Loading v-if="authenticated && isLoading" />
       <b-icon
         v-else-if="authenticated"
         :slot="authenticated ? 'trigger' : ''"
         class="version_dropdown__icon"
-        icon="chevron-down"/>
+        icon="chevron-down"
+      />
       <b-dropdown-item
         v-for="(version, index) in allVersions"
         :key="index"
         aria-role="listitem"
-        @click="handleVersion(version.id, version.name)">
+        @click="handleVersion(version.id, version.name)"
+      >
         {{ version.name }}
       </b-dropdown-item>
-      <b-dropdown-item
-        aria-role="listitem"
-        @click="routerHandle('repository-versions')">
-        {{ $t('webapp.dashboard.all_versions') }}
+      <hr>
+      <b-dropdown-item aria-role="listitem" @click="routerHandle('repository-versions')">
+        <strong>{{ $t("webapp.dashboard.all_versions") }}</strong>
       </b-dropdown-item>
     </b-dropdown>
   </div>
@@ -36,24 +34,20 @@ import Loading from '@/components/shared/Loading';
 export default {
   name: 'VersionDropdown',
   components: {
-    Loading,
+    Loading
   },
   data() {
     return {
       isLoading: false,
-      allVersions: [],
+      allVersions: []
     };
   },
   computed: {
-    ...mapGetters([
-      'getCurrentRepository',
-      'authenticated',
-      'getUpdateVersionsState',
-    ]),
+    ...mapGetters(['getCurrentRepository', 'authenticated', 'getUpdateVersionsState']),
     repositoryUUID() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.uuid;
-    },
+    }
   },
   watch: {
     repositoryUUID() {
@@ -71,17 +65,13 @@ export default {
         this.getAllVersions();
         this.setUpdateVersionsState(false);
       }
-    },
+    }
   },
   mounted() {
     this.getAllVersions();
   },
   methods: {
-    ...mapActions([
-      'getFirstFiveVersions',
-      'setRepositoryVersion',
-      'setUpdateVersionsState',
-    ]),
+    ...mapActions(['getFirstFiveVersions', 'setRepositoryVersion', 'setUpdateVersionsState']),
     async getAllVersions() {
       if (!this.repositoryUUID) return;
       this.isLoading = true;
@@ -94,46 +84,49 @@ export default {
     },
     routerHandle(path) {
       this.$router.push({
-        name: `${path}`,
+        name: `${path}`
       });
     },
     handleVersion(id, name) {
       const version = {
         id,
-        name,
+        name
       };
       this.setRepositoryVersion({
         version,
-        repositoryUUID: this.repositoryUUID,
+        repositoryUUID: this.repositoryUUID
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/scss/utilities.scss';
-@import '~@/assets/scss/variables.scss';
-@import '~@/assets/scss/colors.scss';
+@import "~@/assets/scss/utilities.scss";
+@import "~@/assets/scss/variables.scss";
+@import "~@/assets/scss/colors.scss";
 
-    .version_dropdown {
-        margin: 0 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: $font-family;
+.version_dropdown {
+  margin: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family;
 
-            &__icon {
-                color: $color-fake-grey;
-                margin-top: .2rem;
-                cursor: pointer;
-            }
+  &__icon {
+    color: $color-fake-grey;
+    margin-top: 0.2rem;
+    cursor: pointer;
+  }
 
-            &__number {
-                color:$color-primary;
-                font-size: 1.1rem;
-                font-family: $font-family;
-                font-weight: $font-weight-medium;
-            }
-    }
+  &__number {
+    color: $color-primary;
+    font-size: 1.1rem;
+    font-family: $font-family;
+    font-weight: $font-weight-medium;
+  }
+  hr{
+    margin: .5rem;
+  }
+}
 </style>
