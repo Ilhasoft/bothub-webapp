@@ -6,9 +6,8 @@ exports[`VersionDropdown.vue renders correctly 1`] = `
   </span>
   <b-dropdown-stub maxheight="200" triggers="click" mobilemodal="true" ariarole="list" animation="fade" trapfocus="true" closeonclick="true" canclose="true">
     <!---->
-    <b-dropdown-item-stub focusable="true" ariarole="listitem">
-      some specific text
-    </b-dropdown-item-stub>
+    <hr>
+    <b-dropdown-item-stub focusable="true" ariarole="listitem"><strong>some specific text</strong></b-dropdown-item-stub>
   </b-dropdown-stub>
 </div>
 `;
