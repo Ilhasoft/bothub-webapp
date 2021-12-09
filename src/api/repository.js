@@ -33,7 +33,7 @@ export default {
     });
   },
   getFirstFiveVersions(repositoryUuid) {
-    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5`);
+    return request.$http.get(`/v2/repository/version/?repository=${repositoryUuid}&limit=5&ordering=-last_update`);
   },
   setDefaultVersion(repositoryUuid, id) {
     return request.$http.patch(`/v2/repository/version/${id}/`, {
