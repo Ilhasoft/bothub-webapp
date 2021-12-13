@@ -59,15 +59,22 @@
           <option v-for="(version, index) in allVersions" :key="index" size="sm">
             {{ version.name }}
           </option>
+          <div
+            slot="header"
+            @click="routerHandle('repository-versions')"
+            class="sidebar-wrapper__header__versions"
+          >
+            {{ $t("webapp.dashboard.all_versions") }}
+          </div>
         </unnnic-select>
       </section>
       <section class="sidebar-wrapper__body">
         <unnnic-sidebar-menu v-if="repositoryType === 'content'">
           <unnnic-sidebar-item
             :icon="
-              checkSelectedMenu('repository-content-bases') ?
-              'layout-dashboard-2' :
-              'layout-dashboard-1'
+              checkSelectedMenu('repository-content-bases')
+                ? 'layout-dashboard-2'
+                : 'layout-dashboard-1'
             "
             :text="$t('webapp.menu.content.bases')"
             :enableTooltip="!collapse"
@@ -87,9 +94,7 @@
           />
           <unnnic-sidebar-item
             :icon="
-              checkSelectedMenu('repository-content-tests') ?
-              'check-square-2' :
-              'check-square-1'
+              checkSelectedMenu('repository-content-tests') ? 'check-square-2' : 'check-square-1'
             "
             :text="$t('webapp.menu.content.tests')"
             :enableTooltip="!collapse"
@@ -108,11 +113,7 @@
             ]"
           />
           <unnnic-sidebar-item
-            :icon="
-              checkSelectedMenu('repository-content-api') ?
-              'phone-charger-1' :
-              'charger-1'
-            "
+            :icon="checkSelectedMenu('repository-content-api') ? 'phone-charger-1' : 'charger-1'"
             :text="$t('webapp.menu.content.api')"
             :enableTooltip="!collapse"
             @click.native="
@@ -129,12 +130,8 @@
                 : 'sidebar-wrapper__body__element'
             ]"
           />
-           <unnnic-sidebar-item
-            :icon="
-              checkSelectedMenu('repository-content-adjustments') ?
-              'cog-2' :
-              'cog-1'
-            "
+          <unnnic-sidebar-item
+            :icon="checkSelectedMenu('repository-content-adjustments') ? 'cog-2' : 'cog-1'"
             :text="$t('webapp.menu.content.adjustments')"
             :enableTooltip="!collapse"
             @click.native="
@@ -277,11 +274,7 @@
           </section>
 
           <unnnic-sidebar-item
-            :icon="
-              checkSelectedMenu('repository-log')
-                ? 'messages-bubble-3'
-                : 'messages-bubble-1'
-            "
+            :icon="checkSelectedMenu('repository-log') ? 'messages-bubble-3' : 'messages-bubble-1'"
             :text="$t('webapp.menu.inbox')"
             :enableTooltip="!collapse"
             @click="
@@ -468,7 +461,7 @@ export default {
     repositoryType() {
       if (!this.getCurrentRepository) return null;
       return this.getCurrentRepository.repository_type;
-    },
+    }
   },
   watch: {
     repositoryUUID() {
@@ -489,7 +482,7 @@ export default {
         this.getAllVersions();
         this.setUpdateVersionsState(false);
       }
-    },
+    }
   },
   mounted() {
     this.getAllVersions();
@@ -572,7 +565,7 @@ export default {
     collapseHandle() {
       this.$emit('collapse');
       this.collapse = !this.collapse;
-    },
+    }
   }
 };
 </script>
