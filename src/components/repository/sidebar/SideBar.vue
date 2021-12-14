@@ -600,6 +600,10 @@ export default {
         padding-bottom: $unnnic-spacing-stack-sm;
       }
 
+      &__versions{
+        cursor: pointer;
+      }
+
       &__field {
         &__back {
           display: flex;
