@@ -334,6 +334,7 @@
       "no_sentences_to_train": "There are no phrases to train",
       "no_train_sentence": "This sentence has not yet been added to the training.",
       "failed": "Failed",
+      "error_caracter_type":"The phrase must contain letters or numbers. Include them to proceed.",
       "intention_or_sentence_already_exist": "Intention and Sentence already exists",
       "delete_title": "Delete sentence entity",
       "delete_phrase_modal_title":"Delete sentence",

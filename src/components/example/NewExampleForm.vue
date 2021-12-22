@@ -6,9 +6,7 @@
       @keyup.enter="onEnter()"
     >
       <div class="column is-three-fifths">
-        <b-field
-          :message="errors.text || errors.language"
-        >
+        <b-field :message="errors.text || errors.language">
           <example-text-with-highlighted-entities-input
             id="tour-training-step-1"
             ref="textInput"
@@ -34,7 +32,8 @@
           id="tour-training-step-4"
           :is-previous-disabled="true"
           :is-step-blocked="intent === ''"
-          :message="errors.intent">
+          :message="errors.intent"
+        >
           <b-autocomplete
             v-model="intent"
             :placeholder="$t('webapp.trainings.intent')"
@@ -49,7 +48,8 @@
           <b-tooltip
             :active="!isValid && validationErrors.length > 0"
             :label="validationErrors.join(', ')"
-            type="is-dark">
+            type="is-dark"
+          >
             <b-button
               id="tour-training-step-5"
               :is-previous-disabled="true"
@@ -58,8 +58,9 @@
               :loading="submitting"
               :is-step-blocked="!blockedNextStepTutorial"
               type="is-primary"
-              native-type="submit">
-              <slot v-if="!submitting">{{ $t('webapp.trainings.submit') }}</slot>
+              native-type="submit"
+            >
+              <slot v-if="!submitting">{{ $t("webapp.trainings.submit") }}</slot>
             </b-button>
           </b-tooltip>
         </b-field>
@@ -92,19 +93,18 @@ import LanguageAppendSelectInput from '@/components/inputs/LanguageAppendSelectI
 import { mapActions, mapGetters } from 'vuex';
 import { formatters } from '@/utils';
 
-
 export default {
   name: 'NewExampleForm',
   components: {
     ExampleTextWithHighlightedEntitiesInput,
     EntitiesInput,
-    LanguageAppendSelectInput,
+    LanguageAppendSelectInput
   },
   props: {
     repository: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
@@ -116,19 +116,19 @@ export default {
       errors: {},
       submitting: false,
       entitiesList: [],
-      blockedNextStepTutorial: false,
+      blockedNextStepTutorial: false
     };
   },
   computed: {
     ...mapGetters({
-      repositoryVersion: 'getSelectedVersion',
+      repositoryVersion: 'getSelectedVersion'
     }),
     shouldSubmit() {
       return this.isValid && !this.submitting;
     },
     filteredData() {
-      return (this.repository.intents_list || []).filter(intent => intent
-        .startsWith(this.intent.toLowerCase()));
+      return (this.repository.intents_list || [])
+        .filter(intent => intent.startsWith(this.intent.toLowerCase()));
     },
     validationErrors() {
       const errors = [];
@@ -151,45 +151,38 @@ export default {
       const entitiesFlat = this.entities.map(e => e.entity);
       return repositoryEntities
         .concat(entitiesFlat)
-        .filter((entity, index, current) => (current.indexOf(entity) === index));
+        .filter((entity, index, current) => current.indexOf(entity) === index);
     },
     availableLabels() {
       const repositoryLabels = this.repository.labels_list || [];
 
       return repositoryLabels
         .filter(label => !!label)
-        .filter((label, index, current) => (current.indexOf(label) === index));
+        .filter((label, index, current) => current.indexOf(label) === index);
     },
     data() {
-      const {
-        text,
-        language,
-        intent,
-        entities,
-      } = this;
+      const { text, language, intent, entities } = this;
 
       return {
         text,
         language,
         intent,
-        entities,
+        entities
       };
-    },
+    }
   },
   watch: {
     async intent() {
       if (!this.intent || this.intent.length <= 0) return;
       await this.$nextTick();
       this.intent = formatters.bothubItemKey()(this.intent.toLowerCase());
-    },
+    }
   },
   mounted() {
     this.entitiesList = this.availableEntities;
   },
   methods: {
-    ...mapActions([
-      'newExample',
-    ]),
+    ...mapActions(['newExample']),
     onEnter() {
       if (this.shouldSubmit) this.onSubmit();
     },
@@ -211,7 +204,7 @@ export default {
         await this.newExample({
           repository: this.repository.uuid,
           repositoryVersion: this.repository.repository_version_id,
-          ...this.data,
+          ...this.data
         });
 
         this.blockedNextStepTutorial = !this.blockedNextStepTutorial;
@@ -226,27 +219,34 @@ export default {
         return true;
       } catch (error) {
         /* istanbul ignore next */
-        const data = error.response && error.response.data;
+
+        const errorResponse = error.response;
+        const errorText = error.response.data;
         /* istanbul ignore next */
-        if (data) {
+        if (errorText.text[0] === 'Enter a valid value that has letters in it') {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.trainings.error_caracter_type'),
+            type: 'is-danger'
+          });
+        }
+        if (errorResponse && errorText.text[0] !== 'Enter a valid value that has letters in it') {
           /* istanbul ignore next */
           this.$buefy.toast.open({
             message: this.$t('webapp.trainings.intention_or_sentence_already_exist'),
-            type: 'is-danger',
+            type: 'is-danger'
           });
-          this.errors = data;
+          this.errors = errorResponse;
         }
         /* istanbul ignore next */
         this.submitting = false;
       }
       return false;
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-
 .language-append {
   flex-grow: 0;
 }
