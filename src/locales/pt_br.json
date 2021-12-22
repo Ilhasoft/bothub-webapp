@@ -337,6 +337,7 @@
       "no_sentences_to_train": "Não há frases para treinar.",
       "no_train_sentence": "Essa frase ainda não foi adicionada ao treinamento.",
       "failed": "Falhou",
+      "error_caracter_type":"A frase precisa conter letras ou números. Os inclua para continuar.",
       "intention_or_sentence_already_exist": "Intenção ou frase já existe",
       "delete_title": "Deletar frase da entidade",
       "delete_phrase_modal_title":"Deletar frase",
