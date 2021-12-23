@@ -226,21 +226,28 @@ export default {
         return true;
       } catch (error) {
         /* istanbul ignore next */
-        const data = error.response && error.response.data;
+        const errorResponse = error.response;
+        const errorText = error.response.data;
         /* istanbul ignore next */
-        if (data) {
+        if (errorText.text[0] === 'Enter a valid value that has letters in it') {
+          this.$buefy.toast.open({
+            message: this.$t('webapp.trainings.error_caracter_type'),
+            type: 'is-danger'
+          });
+        }
+        if (errorResponse && errorText.text[0] !== 'Enter a valid value that has letters in it') {
           /* istanbul ignore next */
           this.$buefy.toast.open({
             message: this.$t('webapp.trainings.intention_or_sentence_already_exist'),
-            type: 'is-danger',
+            type: 'is-danger'
           });
-          this.errors = data;
+          this.errors = errorResponse;
         }
         /* istanbul ignore next */
         this.submitting = false;
       }
       return false;
-    },
+    }
   },
 };
 </script>
