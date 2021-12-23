@@ -461,6 +461,7 @@
       "delete_button":"Deletar",
       "cancel_button":"Cancelar",
       "save_button":"Salvar",
+      "error_caracter_type": "A frase precisa conter letras ou números. Os inclua para continuar.", 
       "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
