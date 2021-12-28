@@ -27,7 +27,7 @@
     "glob-parent": "5.1.2",
     "global": "^4.4.0",
     "highlight.js": "10.4.1",
-    "is-svg": "4.2.2",
+    "is-svg": "4.3.0",
     "lodash": "^4.17.21",
     "node-notifier": "8.0.1",
     "nth-check": "2.0.1",
