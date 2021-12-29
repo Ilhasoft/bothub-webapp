@@ -148,15 +148,15 @@ jobs:
               )
             for e in ${ENV_DIR}; do
               echo "Update ${e}:"
-              if [ ! -d "kubernetes-manifests/${PROJECT_DIR}/${e}" ] ; then
-                echo "kubernetes-manifests/${PROJECT_DIR}/${e}: Does not exist, skipping"
-              elif [ ! -r "kubernetes-manifests/${PROJECT_DIR}/${e}/kustomization.yaml" ] ; then
-                echo "kubernetes-manifests/${PROJECT_DIR}/${e}/kustomization.yaml: Does not readable, skipping"
-              elif [ ! -r "kubernetes-manifests/${PROJECT_DIR}/${e}/${PATCH_TARGET}" ] ; then
-                echo "kubernetes-manifests/${PROJECT_DIR}/${e}/${PATCH_TARGET}: Does not readable, skipping"
+              if [ ! -d "${e}" ] ; then
+                echo "${e}: Does not exist, skipping"
+              elif [ ! -r "${e}/kustomization.yaml" ] ; then
+                echo "${e}/kustomization.yaml: Does not readable, skipping"
+              elif [ ! -r "${e}/${PATCH_TARGET}" ] ; then
+                echo "${e}/${PATCH_TARGET}: Does not readable, skipping"
               else
                 OLD_IMAGE=$(
-                  cat "kubernetes-manifests/${PROJECT_DIR}/${e}/${PATCH_TARGET}" \
+                  cat "${e}/${PATCH_TARGET}" \
                     | jq '.[] | select(.path == "/spec/template/spec/containers/0/image") | .value'
                 )
                 echo "Old image to replace: ${OLD_IMAGE}"
@@ -169,11 +169,11 @@ jobs:
                 if verlte "${OLD_VERSION}" "${{env.VERSION}}" ; then
                   echo 'New configurations:'
                   new_configuration=$(
-                    cat "kubernetes-manifests/${PROJECT_DIR}/${e}/${PATCH_TARGET}" \
+                    cat "${e}/${PATCH_TARGET}" \
                       | jq '(..|select(.path == "/spec/template/spec/containers/0/image")?) += {value: "'"${{env.IMAGE_TAG}}"'"}'
                   )
                   echo "${new_configuration}"
-                  echo "${new_configuration}" > "kubernetes-manifests/${PROJECT_DIR}/${e}/${PATCH_TARGET}"
+                  echo "${new_configuration}" > "${e}/${PATCH_TARGET}"
                 else
                   echo "Version in file is greater than build, skiping update yaml"
                 fi
