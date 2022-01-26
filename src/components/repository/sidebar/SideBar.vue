@@ -73,8 +73,8 @@
           <unnnic-sidebar-item
             :icon="
               checkSelectedMenu('repository-content-bases')
-                ? 'layout-dashboard-2'
-                : 'layout-dashboard-1'
+                ? 'book-library-2'
+                : 'book-library-1'
             "
             :text="$t('webapp.menu.content.bases')"
             :enableTooltip="!collapse"
@@ -728,5 +728,16 @@ export default {
 }
 .icon-list:hover {
   color: $unnnic-color-brand-weni-soft;
+}
+
+.sidebar .sidebar-wrapper__body__element {
+
+    svg{
+      path{
+    color: #009E96;
+      }
+    }
+
+
 }
 </style>

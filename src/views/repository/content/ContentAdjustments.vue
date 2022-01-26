@@ -36,13 +36,12 @@
         <unnnic-label :label="$t('webapp.create_repository.language_label')" />
         <unnnic-select
           class="unnic--clickable"
-          size="sm"
           :placeholder="$t('webapp.create_repository.language_placeholder')"
           v-model="intelligence.language"
           search
           :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
         >
-          <option v-for="(language, key) in languages" :value="key" :key="key" size="sm">
+          <option v-for="(language, key) in languages" :value="key" :key="key">
             {{ language }}
           </option>
         </unnnic-select>
@@ -390,7 +389,22 @@ export default {
 }
 ::v-deep {
   .unnnic-select.unnic--clickable {
-    width: 100%;
+    .dropdown {
+      width: 100%;
+      div {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .unnnic-select-item {
+    margin: 0;
+  }
+
+  .dropdown-data[data-v-6fe2671f] {
+    z-index: 2;
   }
 }
 </style>
