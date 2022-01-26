@@ -19,6 +19,20 @@
         <div class="repository-tests__select__inputs">
           <div class="repository-tests__select__input">
             <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+              <div
+                slot="header"
+                @click="routerHandle('repository-content-bases-new')"
+                class="repository-tests__select__input__header"
+              >
+                {{ $t("webapp.home.bases.add_base") }}
+              </div>
+              <div
+                slot="header"
+                @click="routerHandle('repository-content-bases')"
+                class="repository-tests__select__input__header"
+              >
+                {{ $t("webapp.home.bases.see-all_bases") }}
+              </div>
               <option
                 v-for="base in bases"
                 :value="[base.knowledge_base, base.language].join('⇝')"
@@ -74,7 +88,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getQATexts'])
+    ...mapActions(['getQATexts']),
+    routerHandle(path) {
+      if (path !== this.$router.currentRoute.name) {
+        this.$router.push({
+          name: `${path}`
+        });
+      }
+    }
   },
   watch: {
     // eslint-disable-next-line
@@ -191,6 +212,12 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      &__header {
+        &:first-child {
+          margin-bottom: 6px;
+        }
+      }
     }
   }
 }

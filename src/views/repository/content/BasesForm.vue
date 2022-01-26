@@ -30,16 +30,14 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
-              size="large"
-              type="secondary"
-              iconLeft="floppy-disk-1"
-              :iconRight="null"
-              :disabled="false"
-              :loading="submitting"
-              @click="saveText()"
-              class="repository-base-edit__header__button"
-            />
+          <unnnic-button-icon
+            size="large"
+            icon="floppy-disk-1"
+            :disabled="false"
+            :loading="submitting"
+            @click="saveText()"
+            class="repository-base-edit__header__button"
+          />
           </unnnic-tool-tip>
           <unnnic-tool-tip
             :text="$t('webapp.home.bases.edit-base-delete')"
@@ -47,16 +45,14 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
-              size="large"
-              type="secondary"
-              iconLeft="bin-1-1"
-              :iconRight="null"
-              :disabled="false"
-              :loading="false"
-              @click="openDeleteModal()"
-              class="repository-base-edit__header__button"
-            />
+          <unnnic-button-icon
+            size="large"
+            icon="bin-1-1"
+            :disabled="false"
+            :loading="false"
+            @click="openDeleteModal()"
+            class="repository-base-edit__header__button"
+          />
           </unnnic-tool-tip>
           <unnnic-tool-tip
             :text="$t('webapp.home.bases.edit-base-test')"
@@ -64,28 +60,25 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
-              size="large"
-              type="secondary"
-              iconLeft="messages-bubble-4"
-              :iconRight="null"
-              :disabled="false"
-              :loading="false"
-              class="repository-base-edit__header__button"
-              @click="goToTests()"
-            />
+          <unnnic-button-icon
+            size="large"
+            icon="messages-bubble-4"
+            :disabled="false"
+            :loading="false"
+            class="repository-base-edit__header__button"
+            @click="goToTests()"
+          />
           </unnnic-tool-tip>
         </div>
         <div>
           <unnnic-select
             class="unnic--clickable"
-            size="sm"
             :placeholder="$t('webapp.create_repository.language_placeholder')"
             v-model="knowledgeBase.text.language"
             search
             :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
           >
-            <option v-for="(language, key) in languages" :value="key" :key="key" size="sm">
+            <option v-for="(language, key) in languages" :value="key" :key="key">
               {{ language }}
             </option>
           </unnnic-select>
@@ -519,18 +512,11 @@ export default {
   .unnnic-tooltip-label-bottom {
     top: 75px !important;
   }
-  .shake-me {
-    animation: shake 3s infinite alternate;
-
-    &:after {
-      content: "\10A50";
-      color: red !important;
-      font-size: 70px;
-
-      display: flex;
-      justify-content: left;
-      align-items: center;
+  .unnnic-select.unnic--clickable{
+    .input{
+    height: 46px;
     }
+
   }
 }
 </style>

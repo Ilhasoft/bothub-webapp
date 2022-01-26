@@ -345,7 +345,9 @@
         "edit-base_modal_delete_text": "Deleting this base will remove its text. It is not possible to undo this action.",
         "edit-base_modal_delete_placeholder": "Confirm the knowledge base name to remove it",
         "edit-base_modal_delete_button_confirm": "Delete base",
-        "edit-base_modal_delete_button_cancel": "Cancel"
+        "edit-base_modal_delete_button_cancel": "Cancel",
+        "see-all_bases": "See all bases",
+        "add_base":"+ Add base"
       }
     },
     "summary": {

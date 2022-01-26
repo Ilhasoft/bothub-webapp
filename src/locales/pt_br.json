@@ -347,8 +347,9 @@
         "edit-base_modal_delete_placeholder": "Confirme o nome da base de conhecimento para removê-la.",
         "edit-base_modal_delete_button_confirm": "Excluir base",
         "edit-base_modal_delete_button_cancel": "Cancelar",
-        "edit-base_modal_delete_button_validation": "Digite ${this.knowledgeBase.title} para confirmar a exclusão"
-
+        "edit-base_modal_delete_button_validation": "Digite ${this.knowledgeBase.title} para confirmar a exclusão",
+        "see-all_bases": "Ver todas as bases",
+        "add_base":"+ Adicionar base"
       }
     },
     "summary": {
