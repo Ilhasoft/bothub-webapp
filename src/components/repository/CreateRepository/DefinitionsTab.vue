@@ -209,4 +209,24 @@ export default {
     }
   }
 }
+::v-deep {
+  .unnnic-select.unnic--clickable {
+    .dropdown {
+      width: 100%;
+      div {
+        width: 100%;
+        input {
+          width: 100%;
+        }
+      }
+    }
+  }
+  .unnnic-select-item {
+    margin: 0;
+  }
+
+  .dropdown-data[data-v-6fe2671f] {
+    z-index: 2;
+  }
+}
 </style>
