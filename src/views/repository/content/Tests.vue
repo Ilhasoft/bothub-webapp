@@ -18,7 +18,7 @@
         </div>
         <div class="repository-tests__select__inputs">
           <div class="repository-tests__select__input">
-            <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+            <unnnicSelect v-if="bases.length"  placeholder="" v-model="baseIdLang">
               <div
                 slot="header"
                 @click="routerHandle('repository-content-bases-new')"
@@ -37,7 +37,6 @@
                 v-for="base in bases"
                 :value="[base.knowledge_base, base.language].join('⇝')"
                 :key="base.knowledge_base"
-                size="sm"
               >
                 {{ base.title }}
               </option>
@@ -433,6 +432,16 @@ export default {
       margin-block-start: $unnnic-inset-nano;
       margin-block-end: 4px;
       font-size: 18px;
+    }
+  }
+}
+
+::v-deep {
+  .dropdown {
+    div {
+      input {
+        height: 46px;
+      }
     }
   }
 }

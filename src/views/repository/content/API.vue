@@ -24,7 +24,7 @@
         </p>
         <div class="repository-api__select__inputs">
           <div class="repository-api__select__input">
-            <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+            <unnnicSelect v-if="bases.length" placeholder="" v-model="baseIdLang">
                <div
                 slot="header"
                 @click="routerHandle('repository-content-bases-new')"
@@ -642,6 +642,13 @@ pre {
   .repository-api__header__subtitle--link {
     color: $unnnic-color-neutral-dark !important ;
     text-decoration: underline;
+  }
+   .dropdown {
+    div {
+      input {
+        height: 46px;
+      }
+    }
   }
 }
 </style>

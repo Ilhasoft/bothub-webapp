@@ -128,7 +128,22 @@ export default {
     }
   }
 }
-.no-show{
+.no-show {
   display: none;
+}
+
+::v-deep {
+  .dropdown {
+    div {
+      input {
+        height: 46px;
+      }
+    }
+  }
+  .unnnic-form-input {
+    input {
+      height: 46px;
+    }
+  }
 }
 </style>
