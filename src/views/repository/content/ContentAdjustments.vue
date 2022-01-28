@@ -24,11 +24,13 @@
           :label="$t('webapp.create_repository.intelligence_name_label')"
           :placeholder="$t('')"
           v-model="intelligence.name"
+          size="md"
         />
         <unnnic-input
           :label="$t('webapp.create_repository.description_label')"
           :placeholder="$t('')"
           v-model="intelligence.description"
+          size="md"
         />
       </section>
       <!-- name and description -->
@@ -359,6 +361,9 @@ export default {
     }
   }
   &__wrapper {
+    input {
+      height: 46px;
+    }
     &__fields {
       margin-bottom: $unnnic-inset-lg;
     }
@@ -395,6 +400,7 @@ export default {
         width: 100%;
         input {
           width: 100%;
+          height: 46px;
         }
       }
     }
@@ -405,6 +411,15 @@ export default {
 
   .dropdown-data[data-v-6fe2671f] {
     z-index: 2;
+  }
+  .unnnic-form-input {
+    input {
+      height: 46px;
+    }
+  }
+  .unnnic-icon__size--xs {
+    width: 1rem;
+    height: 1rem;
   }
 }
 </style>
