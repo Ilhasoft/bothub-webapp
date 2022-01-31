@@ -229,7 +229,15 @@ export default {
             type: 'is-danger'
           });
         }
-        if (errorResponse && errorText.text[0] !== 'Enter a valid value that has letters in it') {
+        if (errorText.text[0] === 'Enter a valid value that is in the range of 200 words') {
+          /* istanbul ignore next */
+          this.$buefy.toast.open({
+            message: this.$t('webapp.trainings.more_than_200_words'),
+            type: 'is-danger'
+          });
+          this.errors = errorResponse;
+        }
+        if (errorResponse && errorText.text[0] !== 'Enter a valid value that has letters in it' && errorText.text[0] !== 'Enter a valid value that is in the range of 200 words') {
           /* istanbul ignore next */
           this.$buefy.toast.open({
             message: this.$t('webapp.trainings.intention_or_sentence_already_exist'),
@@ -237,6 +245,7 @@ export default {
           });
           this.errors = errorResponse;
         }
+        console.log(errorText.text[0])
         /* istanbul ignore next */
         this.submitting = false;
       }
