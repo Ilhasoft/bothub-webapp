@@ -245,7 +245,6 @@ export default {
           });
           this.errors = errorResponse;
         }
-        console.log(errorText.text[0])
         /* istanbul ignore next */
         this.submitting = false;
       }
