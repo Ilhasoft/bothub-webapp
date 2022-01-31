@@ -466,7 +466,8 @@
       "train_progress": "{progress}% do treinamento concluído",
       "empty_text_error": "Digite uma frase",
       "intent_error": "Digite uma intenção",
-      "default_error": "Algo de errado aconteceu, tente novamente mais tarde."
+      "default_error": "Algo de errado aconteceu, tente novamente mais tarde.",
+      "more_than_200_words": "Limite de 200 palavras por frase atingido. Ajuste o texto se necessário ou quebre-o em frases menores."
     },
     "train_modal": {
       "training_status": "Status do Treinamento",

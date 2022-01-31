@@ -462,7 +462,8 @@
       "empty_text_error": "You need type a text to sentence",
       "error_caracter_type": "The phrase must contain letters or numbers. Include them to proceed.", 
       "intent_error": "Intent is required",
-      "default_error": "Something went wrong, try again later."
+      "default_error": "Something went wrong, try again later.",
+      "more_than_200_words": "You reached the limit of 200 words per phrase. Adjust the text if necessary or break it into smaller phrases."
     },
     "train_modal": {
       "training_status": "Training Status",
