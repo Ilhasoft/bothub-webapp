@@ -14,7 +14,7 @@
     "@mdi/font": "^5.2.45",
     "@sentry/browser": "^5.29.2",
     "@sentry/integrations": "^5.29.2",
-    "@weni/unnnic-system": "1.1.84",
+    "@weni/unnnic-system": "1.1.89",
     "ansi-regex": "5.0.1",
     "axios": "0.21.2",
     "buefy": "^0.9.4",
