@@ -729,15 +729,10 @@ export default {
 .icon-list:hover {
   color: $unnnic-color-brand-weni-soft;
 }
-
-.sidebar .sidebar-wrapper__body__element {
-
-    svg{
-      path{
-    color: #009E96;
-      }
-    }
-
-
+.sidebar-wrapper__body--active{
+  .unnnic-icon-scheme--neutral-cloudy .primary{
+  fill: $unnnic-color-brand-weni-soft;
+  }
 }
+
 </style>
