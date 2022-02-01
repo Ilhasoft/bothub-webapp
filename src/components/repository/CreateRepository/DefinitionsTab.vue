@@ -5,10 +5,9 @@
     </h1>
     <div class="create-repository__definitions__wrapper">
       <section class="create-repository__definitions__wrapper__fields">
-        <unnnic-label :label="$t('webapp.create_repository.language_label')"/>
+        <unnnic-label :label="$t('webapp.create_repository.language_label')" />
         <unnnic-select
           class="unnic--clickable"
-          size="sm"
           :placeholder="$t('webapp.create_repository.language_placeholder')"
           v-model="definition.language"
           search
@@ -68,7 +67,7 @@
           class="create-repository__definitions__buttons__btn"
           @click.native="dispatchPreviousStep()"
         >
-          {{$t('webapp.create_repository.navigate_to_previous_button')}}
+          {{ $t("webapp.create_repository.navigate_to_previous_button") }}
         </unnnic-button>
 
         <unnnic-button
@@ -77,7 +76,7 @@
           :disabled="!checkHasValue"
           @click.native="dispatchCreateRepository()"
         >
-          {{$t('webapp.create_repository.create_intelligence_button')}}
+          {{ $t("webapp.create_repository.create_intelligence_button") }}
         </unnnic-button>
       </section>
     </div>
@@ -207,6 +206,31 @@ export default {
         width: 47%;
       }
     }
+  }
+}
+::v-deep {
+  .unnnic-select.unnic--clickable {
+    .dropdown {
+      width: 100%;
+      div {
+        width: 100%;
+        input {
+          width: 100%;
+          height: 46px;
+        }
+      }
+    }
+  }
+  .unnnic-select-item {
+    margin: 0;
+  }
+
+  .dropdown-data[data-v-6fe2671f] {
+    z-index: 2;
+  }
+  .unnnic-icon__size--xs {
+    width: 1rem;
+    height: 1rem;
   }
 }
 </style>
