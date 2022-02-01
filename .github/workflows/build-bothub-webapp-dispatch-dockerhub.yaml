@@ -1,0 +1,153 @@
+name: Build Bothub WebApp (Dispatch)
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      source-branch:
+        description: 'Source branch in  repository (master, staging, develop, fix/sentry etc.)'
+        required: true
+        default: 'master'
+
+      tag-name:
+        description: 'Tag id (v0.0.1-develop, v0.0.2, etc.)'
+        required: true
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          ref: ${{github.event.inputs.source-branch}}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # - name: Login to ECR
+      #   uses: docker/login-action@v1
+      #   with:
+      #     registry: 869898323958.dkr.ecr.us-east-1.amazonaws.com
+      #     username: ${{ secrets.AWS_ACCESS_KEY_ID_SHARED }}
+      #     password: ${{ secrets.AWS_SECRET_ACCESS_KEY_SHARED }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push - Bothub WebApp Image
+        id: docker_build1
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          labels: branch=${{github.event.inputs.source-branch}},commit=${{env.GITHUB_SHA}},repository=https://github.com/Ilhasoft/bothub-webapp
+          file: Dockerfile
+          push: true
+          tags: bothubit/bothub-webapp:${{github.event.inputs.tag-name}}
+          no-cache: true
+          build-args: |
+            VUE_APP_API_BASE_URL=https://api.bothub.it/
+            VUE_APP_BOTHUB_NLP_BASE_URL='https://nlp.bothub.it/'
+            VUE_APP_BOTHUB_WEBAPP_BASE_URL='https://bothub.it/'
+            VUE_APP_SUPPORTED_LANGUAGES='en|de|es|pt|fr|it|nl|pt_br|id|mn|ar|bn|hi|ru|th|vi|kh|sw|ca|da|el|fa|fi|ga|he|hr|hu|ja|nb|pl|ro|si|sv|te|tr|tt|ur|zh|ha|ka|kk|sq|hy|az|be|bs|bg|cs|ky|mk|sr|uk|uz|ab|aa|af|ak|am|an|as|av|ae|ay|bm|ba|eu|bh|bi|br|my|ch|ce|ny|kw|cv|co|cr|dv|dz|eo|et|ee|fo|fj|ff|gl|gu|ht|hz|ho|ia|ie|ig|ik|io|is|iu|jv|kl|kn|kr|ks|km|ki|rw|kv|kg|ko|ku|kj|la|lb|lg|li|ln|lo|lt|lu|lv|gv|mg|ms|ml|mt|mi|mr|mh|na|nv|nd|ne|ng|nn|no|ii|nr|oc|oj|cu|om|or|os|pa|pi|ps|qu|rm|rn|sa|sc|sd|se|sm|sg|gd|sn|sk|sl|so|st|su|ss|ta|tg|ti|bo|tk|tl|tn|to|tw|ty|ug|ve|vo|wa|cy|wo|fy|xh|yi|yo|za|zu'
+            VUE_APP_MAILCHIMP_LOGIN='bothub'
+            VUE_APP_MAILCHIMP_DATACENTER='us18'
+            VUE_APP_MAILCHIMP_USER_ID='503b048b0ed01db127e66d354'
+            VUE_APP_MAILCHIMP_LIST_ID=${{ secrets.MAILCHIMP_LIST_ID }}
+            VUE_APP_VERSION_ENABLED=true
+            VUE_APP_BOTHUB_WEBAPP_USE_SENTRY=true
+            VUE_APP_BOTHUB_WEBAPP_SENTRY=${{ secrets.BOTHUB_WEBAPP_SENTRY }}
+            VUE_APP_BOTHUB_WEBAPP_USE_HOTJAR=true
+            VUE_APP_BOTHUB_WEBAPP_HOTJAR_ID=${{ secrets.BOTHUB_WEBAPP_HOTJAR_ID_PROD }}
+            VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_KEY=${{ secrets.BOTHUB_WEBAPP_LIGHTHOUSE_KEY }}
+            VUE_APP_BOTHUB_WEBAPP_LIGHTHOUSE_ALGORITHM_ARTICLE_ID='9q5m2ju7nz'
+            VUE_APP_BOTHUB_WEBAPP_PAYMENT_ENABLED=false
+            VUE_APP_BOTHUB_WEBAPP_TUTORIAL_ENABLED=true
+            VUE_APP_RECAPTCHA_TOKEN=${{ secrets.RECAPTCHA_TOKEN }}
+            VUE_APP_ALLOW_INTERACTIONS_ID=''
+            VUE_APP_HELPHERO_ID=''
+            VUE_APP_HELPHERO_TOUR=''
+
+      - name: Check out Kubernetes Manifests
+        uses: actions/checkout@master
+        with:
+          ref: main
+          repository: Ilhasoft/kubernetes-manifests-artificial-intelligence
+          token: ${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}
+          path: ./kubernetes-manifests/
+
+      - name: Set variable tag for jq
+        run: |
+          echo "IMAGE_TAG=bothubit/bothub-webapp:${{github.event.inputs.tag-name}}" >> $GITHUB_ENV
+
+      - name: Update image on deployment
+        run: |
+            which jq > /dev/null 2>&1 || ( sudo apt update ; sudo apt install -y jq )
+            # Dep: coreutils
+            verlte() {
+              [ "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
+            }
+            verlt(){
+              [ "$1" = "$2" ] && return 1 || verlte $1 $2
+            }
+            export PROJECT_DIR="inteligencia-artificial" PATCH_TARGET="deployment-webapp.json"
+            ENV_DIR=$(
+                find kubernetes-manifests/${PROJECT_DIR}/ -maxdepth 1 -mindepth 1 -type d \
+                  | egrep -v -e '.git' -e '/base$' \
+                  | while read dirname ; do
+                    test -r "${dirname}/kustomization.yaml" && echo "${dirname}"
+                  done
+              )
+            for e in ${ENV_DIR}; do
+              echo "Update ${e}:"
+              if [ ! -d "${e}" ] ; then
+                echo "${e}: Does not exist, skipping"
+              elif [ ! -r "${e}/kustomization.yaml" ] ; then
+                echo "${e}/kustomization.yaml: Does not readable, skipping"
+              elif [ ! -r "${e}/${PATCH_TARGET}" ] ; then
+                echo "${e}/${PATCH_TARGET}: Does not readable, skipping"
+              else
+                OLD_IMAGE=$(
+                  cat "${e}/${PATCH_TARGET}" \
+                    | jq '.[] | select(.path == "/spec/template/spec/containers/0/image") | .value'
+                )
+                echo "Old image to replace: ${OLD_IMAGE}"
+                OLD_VERSION=$(
+                  echo "${OLD_IMAGE}" \
+                    | sed s'/^.*[v:-]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'g \
+                    | head -n1
+                )
+                echo "Old image version to compare: ${OLD_VERSION}<=${{env.VERSION}}"
+                if verlte "${OLD_VERSION}" "${{env.VERSION}}" ; then
+                  echo 'New configurations:'
+                  new_configuration=$(
+                    cat "${e}/${PATCH_TARGET}" \
+                      | jq '(..|select(.path == "/spec/template/spec/containers/0/image")?) += {value: "'"${{env.IMAGE_TAG}}"'"}'
+                  )
+                  echo "${new_configuration}"
+                  echo "${new_configuration}" > "${e}/${PATCH_TARGET}"
+                else
+                  echo "Version in file is greater than build, skiping update yaml"
+                fi
+              fi
+            done
+
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}
+          repository: Ilhasoft/kubernetes-manifests-artificial-intelligence
+          directory: ./kubernetes-manifests/
+          branch: main
+          message: "From Bothub WebApp Build (Dispatch)"
+
+      - name: Generated Image URL to Copy
+        run: |
+            echo ${{ env.IMAGE_TAG }}
