@@ -24,7 +24,21 @@
         </p>
         <div class="repository-api__select__inputs">
           <div class="repository-api__select__input">
-            <unnnicSelect v-if="bases.length" size="sm" placeholder="" v-model="baseIdLang">
+            <unnnicSelect v-if="bases.length" placeholder="" v-model="baseIdLang">
+               <div
+                slot="header"
+                @click="routerHandle('repository-content-bases-new')"
+                class="repository-api__select__input__header"
+              >
+                {{ $t("webapp.home.bases.add_base") }}
+              </div>
+              <div
+                slot="header"
+                @click="routerHandle('repository-content-bases')"
+                class="repository-api__select__input__header"
+              >
+                {{ $t("webapp.home.bases.see-all_bases") }}
+              </div>
               <option
                 v-for="base in bases"
                 :value="[base.knowledge_base, base.language]"
@@ -450,6 +464,13 @@ export default {
         'https://docs.ilhasoft.mobi/l/pt/inteligencia-conteudo/integrando-uma-intelig-ncia-de-conte-do',
         '_blank'
       );
+    },
+    routerHandle(path) {
+      if (path !== this.$router.currentRoute.name) {
+        this.$router.push({
+          name: `${path}`
+        });
+      }
     }
   }
 };
@@ -484,6 +505,13 @@ export default {
       margin-right: $unnnic-inset-sm;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
+    }
+    &__input{
+      &__header{
+         &:first-child {
+          margin-bottom: 6px;
+        }
+      }
     }
   }
   &__tabs {
@@ -614,6 +642,13 @@ pre {
   .repository-api__header__subtitle--link {
     color: $unnnic-color-neutral-dark !important ;
     text-decoration: underline;
+  }
+   .dropdown {
+    div {
+      input {
+        height: 46px;
+      }
+    }
   }
 }
 </style>

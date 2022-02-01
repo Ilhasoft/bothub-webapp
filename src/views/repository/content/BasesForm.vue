@@ -30,11 +30,9 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
+            <unnnic-button-icon
               size="large"
-              type="secondary"
-              iconLeft="floppy-disk-1"
-              :iconRight="null"
+              icon="floppy-disk-1"
               :disabled="false"
               :loading="submitting"
               @click="saveText()"
@@ -47,11 +45,9 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
+            <unnnic-button-icon
               size="large"
-              type="secondary"
-              iconLeft="bin-1-1"
-              :iconRight="null"
+              icon="bin-1-1"
               :disabled="false"
               :loading="false"
               @click="openDeleteModal()"
@@ -64,11 +60,9 @@
             side="bottom"
             maxWidth="15rem"
           >
-            <unnnicButton
+            <unnnic-button-icon
               size="large"
-              type="secondary"
-              iconLeft="messages-bubble-4"
-              :iconRight="null"
+              icon="messages-bubble-4"
               :disabled="false"
               :loading="false"
               class="repository-base-edit__header__button"
@@ -79,13 +73,13 @@
         <div>
           <unnnic-select
             class="unnic--clickable"
-            size="sm"
             :placeholder="$t('webapp.create_repository.language_placeholder')"
             v-model="knowledgeBase.text.language"
             search
             :search-placeholder="$t('webapp.create_repository.language_placeholder_search')"
+            size="md"
           >
-            <option v-for="(language, key) in languages" :value="key" :key="key" size="sm">
+            <option v-for="(language, key) in languages" :value="key" :key="key">
               {{ language }}
             </option>
           </unnnic-select>
@@ -519,18 +513,14 @@ export default {
   .unnnic-tooltip-label-bottom {
     top: 75px !important;
   }
-  .shake-me {
-    animation: shake 3s infinite alternate;
-
-    &:after {
-      content: "\10A50";
-      color: red !important;
-      font-size: 70px;
-
-      display: flex;
-      justify-content: left;
-      align-items: center;
+  .unnnic-select.unnic--clickable {
+    .input {
+      height: 46px;
     }
+  }
+  .unnnic-icon__size--xs {
+    width: 1rem;
+    height: 1rem;
   }
 }
 </style>
