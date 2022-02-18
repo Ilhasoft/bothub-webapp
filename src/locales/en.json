@@ -405,7 +405,9 @@
       "search_user_org": "Enter a name or username",
       "no_locale": "No locale",
       "remove_user_confirm": "Are you sure you want to delete <strong>{user}</strong> as <strong>{role}</strong>?",
-      "remove": "Remove"
+      "remove": "Remove",
+      "cancel": "Cancel",
+      "default_error": "Something went wrong, try again later."
     },
     "roles": {
       "user": "User",
