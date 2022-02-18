@@ -44,6 +44,7 @@ module.exports = {
     semi: 'off',
     camelcase: 'off',
     'no-param-reassign': 'off',
+    'linebreak-style': 0,
     'no-multiple-empty-lines': [2, { max: 2 }],
     'import/extensions': [
       'error',

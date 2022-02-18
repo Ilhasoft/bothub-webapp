@@ -10,7 +10,7 @@ Vue.use(VueI18n);
 const languages = {
   'en-US': en,
   'pt-BR': ptbr,
-  es
+  'es-ES': es
 };
 
 const numberFormats = {
@@ -24,7 +24,7 @@ const numberFormats = {
       style: 'currency', currency: 'BRL', currencyDisplay: 'symbol',
     },
   },
-  es: {
+  'es-ES': {
     currency: {
       style: 'currency', currency: 'BRL', currencyDisplay: 'symbol',
     },
