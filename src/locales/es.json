@@ -25,7 +25,8 @@
       "type_here": "Escribe aquí...",
       "support": "Ayuda de Weni IA",
       "search_bots": "Búsqueda de inteligencias",
-      "copied": "Contenido copiado al portapapeles"
+      "copied": "Contenido copiado al portapapeles",
+      "my_intelligence": "Mis inteligencias"
     },
     "login_form": {
       "login": "Ingrese a su cuenta",
@@ -41,25 +42,68 @@
       "changed_password": "Contraseña cambiada",
       "save_password": "Guardar contraseña"
     },
+    "intelligences_lib": {
+      "title": "Intelligences Library",
+      "new_intelligence": "New Intelligence",
+      "unused_projects": "Your project is not using intelligence linked by a classifier. Create a new one or explore among the intelligence of your organization or community in the options above.",
+      "created_by": "Created by",
+      "open": "Open",
+      "show_intents": "View intentions | View intent | View intentions",
+      "show_languages": "View languages | View language | View languages",
+      "repository_type": {
+        "classifier": "Classification Intelligence",
+        "content": "Content Intelligence"
+      },
+      "intelligence_tooltip": "Uses intentions and entities to interpret and segment user messages.",
+      "intelligence_tooltip_content": "Upload informational texts and the intelligence will be able to answer questions made by users based on the texts.",
+      "intent": "Intents | Intent | Intents",
+      "language": "Languages | Language | Languages",
+      "intent_modal_title": "Intents of {nick} | Intent of {nick} | Intents of {nick}",
+      "intent_modal_subtitle": "Visualize the intentions that are part of the selected intelligence.",
+      "language_modal_title": "Languages of {nick} | Language of {nick} | Languages of {nick}",
+      "language_modal_subtitle": "View the languages supported by the selected intelligence.",
+      "tab_project_title": "Intelligences of the Project",
+      "tab_project_subtitle": "They're intelligences in use at the project linked by classifier.",
+      "tab_org_title": "Organization's Intelligences",
+      "tab_org_subtitle": "Visualize and access intelligences created by the organization.",
+      "tab_community_title": "Community Intelligences",
+      "tab_community_subtitle": "Visualize and use intelligences that are public.",
+      "intent_count": "Number of intention phrases"
+    },
     "create_repository": {
-        "create_repo": "Crear una inteligencia",
-        "create_repo_text": "Ahora puede crear una inteligencia rápida y fácilmente. <br><br> ¿Empecemos? Primero, nombra su inteligencia. A continuación, elija el idioma que utilizará para la formación. Finalmente, determinar[ si será público o privado.",
-        "choose_category": "Categorías",
-        "choose_category_text": "Elija las categorías en las que encaja su bot. <br> No te preocupes, esto se puede cambiar más adelante.",
-        "repository_created": "¡Listo!",
-        "repository_created_text": "Su inteligencia está lista para usar. Puede cambiar esta y otra información en la sección de configuración. <br><br> ¡Ya puedes empezar a entrenar su bot!",
-        "next": "próximo",
-        "previous": "Anterior",
-        "submit": "Mandar",
-        "start": "Empezar",
-        "language": "idioma",
-        "category": "Categoría",
-        "new_repo": "NUEVA INTELIGENCIA",
-        "default_error": "Algo salió mal, inténtalo de nuevo más tarde.",
-        "description_form": "Descripción",
-        "modal_title": "Crea una Organización para las Nuevas Inteligencias",
-        "modal_description": "Hemos actualizado nuestros sistemas y ahora solo puede crear una nueva inteligencia cuando su usuario es parte de una organización. Haga clic para crear una organización a continuación.",
-        "modal_button": "crear organización"
+      "intelligence": "New intelligence",
+      "definitions": "Intelligence attributes",
+      "first_indicator":"Intelligence",
+      "second_indicator":"Attributes",
+      "intelligence_name_label":"Name of the Intelligence",
+      "intelligence_name_placeholder":"Give a name to this intelligence",
+      "description_label":"Description",
+      "description_placeholder":"Describe briefly the purpose of this intelligence",
+      "intelligence_type": "Type",
+      "intelligence_type_classification_title":"Classifier Intelligence (default)",
+      "intelligence_type_classification_description":"Train sample phrases, attributing them intents and the intelligence will identify such intentions in new received phrases.", 
+      "intelligence_type_content_title":"Content Intelligence (new!)",
+      "intelligence_type_content_description":"Upload informational texts and the intelligence will be able to answer questions made by users based on the texts.",
+      "cancel_create_intelligence_button": "Cancel",
+      "navigate_to_next_button": "Next",
+      "language_label":"Main language",
+      "language_placeholder":"Select the language",
+      "language_placeholder_search":"Search for...",
+      "category_label": "Category",
+      "privacy_label": "Privacy",
+      "privacy_type_public_title": "Public",
+      "privacy_type_public_description": "Any Weni user is able to see and integrate the intelligence.",
+      "privacy_type_private_title": "Private",
+      "privacy_type_private_description": "Only you or users invited by you are able to see and integrate the intelligence.",
+      "navigate_to_previous_button": "Back",
+      "create_intelligence_button": "Create Intelligence",
+      "repository_created_first": "The intelligence was created and now can be",
+      "repository_created_second": "used",
+      "navigate_to_intelligence_button": "Go to the intelligence",
+      "modal_title": "Cancel the creation of the intelligence?",
+      "modal_description": "If you leave now this intelligence won’t be created.",
+      "modal_exit_button": "Leave and don’t create",
+      "modal_continue_button": "Continue creating"
     },
     "register_form": {
       "already_have_account": "¿Ya tienes una cuenta?",
@@ -95,13 +139,14 @@
       "create_bot": "crear inteligencia"
     },
     "safari_alert": {
-      "title1": "Lo sentimos, el navegador Safari no es compatible con todas nuestras funciones.",
-      "title2": "Recomendamos encarecidamente cambiar a un navegador diferente.",
-      "keep_using_safari": "Seguir utilizando Safari"
+      "title": "Lo sentimos, el navegador Safari no es compatible con todas nuestras funciones.",
+      "text": "Recomendamos encarecidamente cambiar a un navegador diferente.",
+      "button": "Seguir utilizando Safari"
     },
     "analyze_text": {
       "grid1": "Realice una solicitud HTTP al servicio NLP, siga el ejemplo a continuación.",
       "method_send": "POST con aplicación/json:",
+      "tooltip_send": "Post with Application Json",
       "language_code": "Código de idioma",
       "text_to_analyze": "Texto para analisis",
       "response": "Respuesta:",
@@ -238,6 +283,72 @@
       "delete_group_message": "¿Está seguro de que desea eliminar el grupo de entidades \"{group}\"?",
       "delete": "Borrar",
       "cancel": "Cancelar"
+      "remove_integrate": "Remove from project",
+      "integrate": "Integrate into the project",
+      "integrate_modal_title": "Integrate \"{intelligence}\" intelligence to the project? ",
+      "integrate_modal_subtitle": "Intelligence will be added to Flows in this project and through the “Divide by Intent” feature you will be able to use the intentions of this intelligence.",
+      "confirm_integrate": "Confirm",
+      "remove_integrate_modal_title": "Remove intelligence \"{intelligence}\" from project? ",
+      "remove_integrate_modal_subtitle": "This intelligence will no longer be used in this project. If you change your mind, you will need to reintegrate and adjust the flows.",
+      "confirm_with_username": "Enter <strong>{username}</strong> to confirm the exit",
+      "confirm_with_username_placeholder": "Confirm your username to delete the account",
+      "confirm_remove_integrate": "Remove integration",
+      "bases": {
+        "knowledge_bases": "Knowledge bases",
+        "description": "The Knowledge bases are text sources for a Content Intelligence. Distribute the text of the intelligence in bases, gathering on each one similar informations. Find out more on our <a href='https://docs.ilhasoft.mobi/l/en/content-intelligence/introducing-content-intelligence' target='_blank' class='repository-base__description__text--link'>documentation</a>.",
+        "new_knowledge_base": "Add a new base",
+        "adjustments": "Adjustments",
+        "adjustments_subtitle": "Content Intelligence",
+        "adjustments_button": "Save changes",
+        "adjustments_button_back": "Back",
+        "adjustuments_modal_title": "The changes were saved!",
+        "adjustments_modal_description": "The adjusments were changed 😉",
+        "adjustuments_modal_alert_title": "Save changes before leaving?",
+        "adjustments_modal_alert_description": "The adjustments won’t be changed unless you save.",
+        "adjustments_modal_alert_save": "Save changes",
+        "adjustments_modal_alert_discard": "Discard changes",
+        "tests": "Test knowledge bases",
+        "tests_subtitle": "Test knowledge bases asking them questions and observing their answers.",
+        "tests_placeholder": "Ask a question for the knowledge base...",
+        "api": "Integrate this intelligence",
+        "api_subtitle": "Our API is compatible with many platforms via API REST integration. To know further, access our <a href='https://docs.ilhasoft.mobi/l/en/content-intelligence/integrating-content-intelligence' target='_blank' class='repository-api__header__subtitle--link'>documentation</a> and the <a href='https://api.bothub.it/#tag/repository' target='_blank' class='repository-api__header__subtitle--link'>API explorer</a>.",
+        "api_select": "Select the knowledge base and the language to be integrated:",
+        "api_tabs": "Integrate to Weni Flows or Rapidpro",
+        "api_tabs_subtitle": "When asked, insert the following parameters on the platform:",
+        "api_tabs_intelligence_id": "Knowledge base ID",
+        "api_guide": "How to integrate to Weni Flows or Rapidpro",
+        "api_integrate": "How to integrate to Weni Flows or Rapidpro",
+        "api_body": "body",
+        "api_tabs_post_lang": "language code",
+        "api_tabs_post_text": "Your question",
+        "api_response": "API response example",
+        "api_integrate_step_one": "Step 1",
+        "api_integrate_step_one_text": "On Weni Flows or Rapidpro, open or create a new flow.",
+        "api_integrate_step_two": "Step 2",
+        "api_integrate_step_two_text": "Insert a new flow box and select the option called 'Call webhook'",
+        "api_integrate_step_three": "Step 3",
+        "api_integrate_step_three_text": "Select Post and insert the URL provided above",
+        "api_integrate_step_four": "Step 4",
+        "api_integrate_step_four_text": "On “HTTP Headers” add the Access Token provided above, with the word Bearer included.",
+        "api_integrate_step_five": "Step 4",
+        "api_integrate_step_five_text": "Click on POST Body and insert the code above related to the Post BODY. You can replace the quoted texts for variables.",
+        "api_integrate_step_final": "This is it! 😉",
+        "api_integrate_step_final_text": "Following these steps you will integrate your Artificial Intelligence.",
+        "api_integrate_step_final_text_button": "Read our documentation for further informations",
+        "edit-base-notitle": "No title",
+        "edit-base-saved-at": "Last saved",
+        "edit-base-saved-time": "at",
+        "edit-base-delete": "Delete",
+        "edit-base-save": "Save",
+        "edit-base-test": "Test",
+        "edit-base_modal_delete_title": "Delete the base",
+        "edit-base_modal_delete_text": "Deleting this base will remove its text. It is not possible to undo this action.",
+        "edit-base_modal_delete_placeholder": "Confirm the knowledge base name to remove it",
+        "edit-base_modal_delete_button_confirm": "Delete base",
+        "edit-base_modal_delete_button_cancel": "Cancel",
+        "see-all_bases": "See all bases",
+        "add_base":"+ Add base"
+      }
     },
     "summary": {
       "training_information": "Información de entrenamiento",
@@ -253,13 +364,19 @@
       "intelligence_force": "Fuerza de la inteligencia",
       "intelligence_force_low": "Bajo",
       "intelligence_force_regular": "Regular",
-      "intelligence_force_high": "Alto"
+      "intelligence_force_high": "Alto",
+      "integrate": "Integrate to Flows",
+      "remove_integrate": "Remove from Flows"
     },
     "integration":{
-       "title": "Integraciones de Bothub",
-            "description": "Realice una solicitud HTTP al servicio NLP, siguiendo el ejemplo a continuación",
-            "copy": "Token copiado",
-            "my_user": "Mi usuario"
+      "title": "Integraciones de Bothub",
+      "description": "Realice una solicitud HTTP al servicio NLP, siguiendo el ejemplo a continuación",
+      "copy": "Token copiado",
+      "my_user": "Mi usuario",
+      "new": "New! ",
+      "news_text": "Integrate this intelligence to Weni Fluxos with one click, on the page of",
+      "summary": "Summary.",
+      "see_more": "know more"
     },
     "intent":{
       "title": "Intención",
@@ -428,7 +545,7 @@
       "ok": "OK",
       "cancel": "Cancelar",
       "send_to_translators": "Enviar a los traductores"
-},
+    },
     "orgs": {
       "owner": "Pertenece a",
       "my_user": "Mi usuario",
@@ -455,13 +572,17 @@
       "reports": {
         "title": "Informes",
         "reports": "Informes de la organización"
-    },
+      },
       "payment": {
         "title": "Pagamentos",
         "history": "Histórico ",
         "info": "Informações de Pagamento",
+        "payment": "{period} payment",
         "credit_payment": "Por cartão de crédito",
-        "coupon_payment": "Com cupom"
+        "coupon_payment": "Com cupom",
+        "submit": "Submit",
+        "total": "Total:",
+        "no_payments": "No payments"
       },
       "intelligences": {
         "title": "Inteligencias",
@@ -528,24 +649,31 @@
       }
     },
     "menu": {
-      "summary": "Resumen",
-      "training": "Entrenamento",
-      "train": "Entrenar",
-      "suggestion": "Sugerencia",
-      "test": "Prueba",
-      "test-manual": "Frases",
-      "test-automatic": "Automático",
-      "results": "Resultados",
-      "inbox": "Interacciones",
-      "translation": "Traducción",
-      "translation_status": "Estado",
-      "translate": "Traducir",
+      "hide": "Hide",
+      "created_by": "Created by",
+      "back_text": "Back",
+      "summary": "Summary",
+      "training": "Training",
+      "train": "Train",
+      "suggestion": "Suggestion",
+      "test": "Test",
+      "test-manual": "Sentences",
+      "test-automatic": "Automatic",
+      "results": "Results",
+      "inbox": "Interactions",
+      "translation": "Translation",
+      "translation_status": "Translation Status",
+      "translate": "Translate",
       "integration": "API",
-      "settings": "Ajustes",
+      "settings": "Settings",
       "general": "General",
-      "versions": "Versiones",
-      "maintenance-title": "El área de Interacciones está en mantenimiento",
-      "maintenance-text": "Nuestro equipo está trabajando en mejoras de rendimiento."
+      "versions": "Versions",
+      "content": {
+        "bases": "Bases",
+        "adjustments": "Adjustments",
+        "api": "API",
+        "tests": "Tests"
+      }
     },
     "phrase-suggestion": {
       "title": "Sugerencia de frase",
@@ -647,25 +775,25 @@
       },
       "info": {
         "title": "Información del pago",
-            "subtitle": "Ingresa la información de su tarjeta de crédito o débito",
-            "back": "Regreso",
-            "save": "Ahorrar",
-            "card_name": "Nombre de tarjeta"
+        "subtitle": "Ingresa la información de su tarjeta de crédito o débito",
+        "back": "Regreso",
+        "save": "Ahorrar",
+        "card_name": "Nombre de tarjeta"
       }
     },
-      "tutorial": {
-        "title": "Bienvenido a Bothub",
-        "description": "Bothub es una plataforma abierta para predecir, entrenar y compartir conjuntos de datos de PNL en varios idiomas. <br> <br> Sigue los pasos para unirte a nuestra comunidad",
-        "skip": "Saltar por ahora",
-        "previous_step": "Anterior",
-        "next_step": "Próximo",
-        "finish_step": "Finalizar",
-        "confirm_step": "Confirmar",
-        "finish_tutorial": "Finalizar",
-        "alert_message": "Tienes que seguir la secuencia de pasos",
-        "training_wait": "¡Tu inteligencia está siendo entrenada!",
-        "training_error": "Hubo un error entrenando su inteligencia.",
-        "training_success": "¡Tu inteligencia ha sido entrenada con éxito!",
+    "tutorial": {
+      "title": "Bienvenido a Bothub",
+      "description": "Bothub es una plataforma abierta para predecir, entrenar y compartir conjuntos de datos de PNL en varios idiomas. <br> <br> Sigue los pasos para unirte a nuestra comunidad",
+      "skip": "Saltar por ahora",
+      "previous_step": "Anterior",
+      "next_step": "Próximo",
+      "finish_step": "Finalizar",
+      "confirm_step": "Confirmar",
+      "finish_tutorial": "Finalizar",
+      "alert_message": "Tienes que seguir la secuencia de pasos",
+      "training_wait": "¡Tu inteligencia está siendo entrenada!",
+      "training_error": "Hubo un error entrenando su inteligencia.",
+      "training_success": "¡Tu inteligencia ha sido entrenada con éxito!",
       "items": {
         "create_account": "Crea una cuenta",
         "create_intelligence": "Crea su primera inteligencia",
@@ -675,15 +803,15 @@
         "inbox": "Agregar frase a la bandeja de entrada",
         "translate": "Traducir a otro idioma",
         "integrate": "Integre su inteligencia en una sola plataforma"
-         },
+      },
         "create_intelligence": {
           "step_0": "Puede utilizar una de las inteligencias del repositorio eligiendo y haciendo clic en una de ellas.",
           "step_1": "O crea su propia inteligencia haciendo clic aquí."
-          },
+      },
         "create_intelligence_forms": {
           "step_0": "Rellene el formulario con sus datos de inteligencia como nombre, descripción e idioma.",
           "step_1": "Elija categorías para su inteligencia, según el área en la que se usará, y envíela."
-          },
+      },
         "training": {
           "step_0": "<strong> ¡Vamos a entrenar! </strong> <br> Aquí agregarás frases y ordenarás palabras para entrenar su inteligencia",
           "step_1": "Añade la frase que quieras que su inteligencia entienda. <br> Luego seleccione una de las palabras para clasificar. <br> Ej: quiero un <mark style='background-color: #1E30EF; color: #fff; relleno:2px'>pizza</mark>",
@@ -693,7 +821,7 @@
           "step_5": "Finalmente, envíe su frase.",
           "step_6": "Después de agregar las frases, haga clic aquí. <br> <strong>Consejo</strong>: Para entrenar, debes agregar al menos dos intentos con dos frases cada uno.",
           "step_7": "Asegúrese de que su inteligencia esté lista para entrenar y haga clic en \"Continuar\". <br> <br> <strong>Consejo</strong>: Si no se cumple algún requisito, haga clic en \"Cancelar\" para repetir."
-           },
+      },
         "evaluate": {
           "step_0": "<strong> ¡Vamos a la prueba de frase! </strong> <br> Con la prueba, podrá evaluar fácilmente el rendimiento de su inteligencia.",
           "step_1": "Seleccione un idioma para probar.",
@@ -701,15 +829,16 @@
           "step_3": "Y aquí, selecciona la intención que más se identifique con la frase que escribiste. Ej: afirmativo.",
           "step_4": "Finalmente, envíe su frase.",
           "step_5": "Haga clic aquí para ejecutar su prueba. <br> <strong>Consejo</strong>: Para probar, debe agregar al menos dos intentos con dos frases cada uno."
-         },
-        "evaluate_result": {
-             "step_0": "Aquí puede ver el resultado de su prueba de inteligencia."
       },
-        "quick_test": {
+      "evaluate_result": {
+        "step_0": "Aquí puede ver el resultado de su prueba de inteligencia."
+      },
+      "quick_test": {
        "step_0": "<strong> ¡Esta es la prueba rápida! </strong> <br> Aquí puede probar rápidamente las frases añadidas al entrenamiento.",
-            "step_1": "Introduzca su frase de prueba y confirme.",
-            "step_2": "Haga clic aquí para averiguar la relevancia de cada palabra en la frase dentro de la intención elegida."
-           },
+        "step_1": "Introduzca su frase de prueba y confirme.",
+        "step_2": "Haga clic aquí para averiguar la relevancia de cada palabra en la frase dentro de la intención elegida.",
+        "step_3": "Click here to see the Raw."
+      },
         "inbox": {
           "step_0": "<strong> ¡Esta es la bandeja de entrada! </strong> <br> Aquí puede agregar frases de las interacciones del usuario con su inteligencia en el entrenamiento o la prueba.",
             "step_1": "Seleccione las frases que desea agregar.",
@@ -758,17 +887,20 @@
       },
     "import_dataset": {
       "title": "Importar conjunto de datos",
-            "empty_file": "No hay ningún archivo seleccionado",
-            "cancel": "Cancelar",
-            "importar": "Confirmar",
-            "import_success": "Importación exitosa.",
-            "import_error": "Algo salió mal, inténtalo de nuevo más tarde."
+      "empty_file": "No hay ningún archivo seleccionado",
+      "cancel": "Cancelar",
+      "importar": "Confirmar",
+      "import_success": "Importación exitosa.",
+      "import_error": "Algo salió mal, inténtalo de nuevo más tarde."
      },
     "weni_notification":{
       "title": "Bothub es ahora Weni Inteligencia Artificial",
       "subtitle": "Nuevo módulo que estará disponible en nuestra plataforma unificada próximamente.",
       "button": "Sepa mas",
       "link": "https://www.ilhasoft.com.br/somos-weni"
-     }
+     },
+     "infinite_scroll": {
+      "title": "Loading"
+    }
   }
 }
