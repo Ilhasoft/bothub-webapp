@@ -250,7 +250,7 @@
       "no_expected_intent": "No hay intención esperada",
       "no_intent_predicted": "No se predijo intención",
       "confidence": "confianza",
-      "ok": "oK",
+      "ok": "ok",
       "is": "Es",
       "failed": "ha fallado",
       "not_predicted": "impredecible",
@@ -713,7 +713,7 @@
       "signin": "Ingrese su cuenta para editar esta inteligencia."
     },
     "inbox": {
-      "description": "Estas son las frases de las interacciones de los usuarios con su inteligencia.\nPodem será útil para su entrenamiento o prueba.",
+      "description": "Estas son las frases de las interacciones de los usuarios con su inteligencia.\nPueden ser útiles para su formación o sus pruebas.",
       "intent": "Intención",
       "language": "Idioma",
       "version": "Versión",
