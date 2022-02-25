@@ -38,7 +38,7 @@ if ((process.env.VUE_APP_BOTHUB_WEBAPP_USE_SENTRY)
 
 LogRocket.init('lqshel/test-weni-webapp', {
   mergeIframes: true,
-  childDomains: ['http://weni-webapp-development.weni.ai:9000'],
+  parentDomain: ['http://weni-webapp-development.weni.ai:9000'],
 });
 
 new Vue({
