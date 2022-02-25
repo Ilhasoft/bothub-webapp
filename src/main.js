@@ -13,7 +13,7 @@ import i18n from './utils/plugins/i18n';
 import '@mdi/font/css/materialdesignicons.css';
 import hljs from 'highlight.js';
 import VueHighlightJS from 'vue-highlightjs';
-
+import LogRocket from 'logrocket';
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
@@ -35,6 +35,11 @@ if ((process.env.VUE_APP_BOTHUB_WEBAPP_USE_SENTRY)
     logErrors: true,
   });
 }
+
+LogRocket.init('lqshel/test-weni-webapp', {
+  mergeIframes: true,
+  parentDomain: 'http://weni-webapp-development.weni.ai:9000',
+});
 
 new Vue({
   el: '#app',
