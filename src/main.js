@@ -13,7 +13,12 @@ import i18n from './utils/plugins/i18n';
 import '@mdi/font/css/materialdesignicons.css';
 import hljs from 'highlight.js';
 import VueHighlightJS from 'vue-highlightjs';
+import LogRocket from 'logrocket';
 
+LogRocket.init('lqshel/test-weni-webapp', {
+  mergeIframes: true,
+  parentDomain: 'https://dash-develop.weni.ai',
+});
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
