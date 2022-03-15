@@ -24,3 +24,5 @@ process.env.VUE_APP_RECAPTCHA_TOKEN = (process.env.VUE_APP_RECAPTCHA_TOKEN || ''
 process.env.VUE_APP_HELPHERO_ID = (process.env.VUE_APP_HELPHERO_ID || '');
 process.env.VUE_APP_HELPHERO_TOUR = (process.env.VUE_APP_HELPHERO_TOUR || '');
 process.env.VUE_APP_QA_FLOW_CHANNEL = (process.env.VUE_APP_QA_FLOW_CHANNEL || '');
+process.env.VUE_APP_LOGROCKET_ID = (process.env.VUE_APP_LOGROCKET_ID || '');
+process.env.VUE_APP_LOGROCKET_PARENT_DOMAIN = (process.env.VUE_APP_LOGROCKET_PARENT_DOMAIN || '');
