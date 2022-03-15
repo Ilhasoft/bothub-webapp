@@ -15,9 +15,9 @@ import hljs from 'highlight.js';
 import VueHighlightJS from 'vue-highlightjs';
 import LogRocket from 'logrocket';
 
-LogRocket.init('lqshel/test-weni-webapp', {
+LogRocket.init(process.env.VUE_APP_LOGROCKET_ID, {
   mergeIframes: true,
-  parentDomain: 'https://dash-develop.weni.ai',
+  parentDomain: process.env.VUE_APP_LOGROCKET_PARENT_DOMAIN,
 });
 
 Vue.use(Buefy);
