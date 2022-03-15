@@ -94,6 +94,8 @@ jobs:
             VUE_APP_ALLOW_INTERACTIONS_ID=''
             VUE_APP_HELPHERO_ID=''
             VUE_APP_HELPHERO_TOUR=''
+            VUE_APP_LOGROCKET_ID=${{github.event.inputs.logrocket-id}}
+            VUE_APP_LOGROCKET_PARENT_DOMAIN=${{github.event.inputs.logrocket-parent-domain}}
 
       - name: Check out Kubernetes Manifests
         uses: actions/checkout@master
