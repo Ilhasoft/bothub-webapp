@@ -13,6 +13,26 @@ on:
         description: 'Tag id (v0.0.1-develop, v0.0.2, etc.)'
         required: true
 
+      logrocket-id:
+        type: choice
+        description: 'LogRocket Id'
+        required: true
+        default: 'weni/develop'
+        options:
+        - weni/develop
+        - weni/staging-15tbe
+        - weni/production-rxhyp
+        
+      logrocket-parent-domain:
+        type: choice
+        description: 'LogRocket Parent Domain'
+        required: true
+        default: 'https://dash-develop.weni.ai/'
+        options:
+        - https://dash-develop.weni.ai/
+        - https://dash-staging.weni.ai/
+        - https://dash.weni.ai/
+
 jobs:
   docker:
     runs-on: ubuntu-latest
