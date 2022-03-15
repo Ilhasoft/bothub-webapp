@@ -34,7 +34,10 @@ export default {
       if (I18n.locale === 'pt-BR') {
         return 'Weni Inteligência Artificial';
       }
-      return 'Weni Artificial Intelligence';
+      if (I18n.locale === 'en-US'){
+        return 'Weni Artificial Intelligence';
+      }
+      return 'Weni Inteligencia Artificial'
     }
   },
   created() {
@@ -81,13 +84,16 @@ export default {
       const { data } = await this.getMyProfileInfo();
       if (data){
         this.setUserName(data.name)
-        if (data.language) {
+        if (data.language.includes('-')) {
           const [first, second] = data.language.split('-');
           const secondUpperCase = second.toUpperCase();
           const languageResult = `${first}-${secondUpperCase}`;
           this.$i18n.locale = languageResult;
+        } else {
+          this.$i18n.locale = data.language
         }
       }
+      return true
     },
     safariDetected() {
       if (
