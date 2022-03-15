@@ -13,7 +13,12 @@ import i18n from './utils/plugins/i18n';
 import '@mdi/font/css/materialdesignicons.css';
 import hljs from 'highlight.js';
 import VueHighlightJS from 'vue-highlightjs';
+import LogRocket from 'logrocket';
 
+LogRocket.init(process.env.VUE_APP_LOGROCKET_ID, {
+  mergeIframes: true,
+  parentDomain: process.env.VUE_APP_LOGROCKET_PARENT_DOMAIN,
+});
 
 Vue.use(Buefy);
 Vue.use(VueMoment);
