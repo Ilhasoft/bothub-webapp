@@ -9,7 +9,7 @@
       <span class="notification__field__subtitle">
         {{ $t('webapp.weni_notification.subtitle') }}
       </span>
-      <a href="https://weni.ai/blog/modularizacao-plataformas/">
+      <a href="https://dash.weni.ai/">
         <b-button
           rounded
           class="notification__field__button"
@@ -36,7 +36,7 @@ export default {
 .notification {
   width: 100%;
   height: 3.75rem;
-  background-color: $color-primary-light;
+  background-color: $color-aux-baby-yellow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,16 +96,16 @@ export default {
       }
 
       &__button{
-        background-color: $color-primary;
-        border-color: $color-primary;
+        background-color: $color-feedback-yellow;
+        border-color: $color-feedback-yellow;
         color: $color-white;
         font-family: Roboto slab;
         transition: 0.5s ease;
         font-weight: $font-weight-medium;
 
         &:hover{
-            background-color: $color-primary;
-            border-color: $color-primary;
+            background-color: $color-feedback-yellow;
+            border-color: $color-feedback-yellow;
         }
 
       }
