@@ -50,10 +50,6 @@ const router = new Router({
           next();
         }
       },
-      beforeLeave: async (to, from, next) => {
-        console.log(from)
-        next();
-      },
     },
     {
       path: '/terms',
