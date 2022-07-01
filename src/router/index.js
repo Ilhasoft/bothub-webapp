@@ -26,6 +26,7 @@ import PhraseSuggestion from '@/views/repository/PhraseSuggestion';
 import Entity from '@/views/repository/Entity';
 import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
+import Redirect from '@/views/Redirect';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import DashboardExternalLayout from '@/layout/dashboard/DashboardExternalLayout';
@@ -35,7 +36,7 @@ import store from '../store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -48,6 +49,10 @@ export default new Router({
         } else {
           next();
         }
+      },
+      beforeLeave: async (to, from, next) => {
+        console.log(from)
+        next();
       },
     },
     {
@@ -289,6 +294,11 @@ export default new Router({
       component: NotFound,
     },
     {
+      path: '/redirect',
+      name: 'redirect',
+      component: Redirect,
+    },
+    {
       path: '/safariAlert/',
       name: 'safari-alert',
       component: SafariAlert,
@@ -298,3 +308,15 @@ export default new Router({
     return { x: 0, y: 0 };
   },
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/' && to.path !== '/redirect') {
+    next({
+      path: '/redirect'
+    });
+  } else {
+    next();
+  }
+})
+
+export default router
