@@ -26,7 +26,6 @@ import PhraseSuggestion from '@/views/repository/PhraseSuggestion';
 import Entity from '@/views/repository/Entity';
 import Intent from '@/views/repository/Intent';
 import NotFound from '@/views/NotFound';
-import Redirect from '@/views/Redirect';
 import SafariAlert from '@/views/SafariAlert';
 import DashboardLayout from '@/layout/dashboard/DashboardLayout';
 import DashboardExternalLayout from '@/layout/dashboard/DashboardExternalLayout';
@@ -290,11 +289,6 @@ const router = new Router({
       component: NotFound,
     },
     {
-      path: '/redirect',
-      name: 'redirect',
-      component: Redirect,
-    },
-    {
       path: '/safariAlert/',
       name: 'safari-alert',
       component: SafariAlert,
@@ -306,9 +300,9 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/' && to.path !== '/redirect') {
+  if (to.path !== '/') {
     next({
-      path: '/redirect'
+      path: '/'
     });
   } else {
     next();
