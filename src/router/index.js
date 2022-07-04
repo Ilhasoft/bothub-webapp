@@ -42,13 +42,6 @@ const router = new Router({
       path: '/',
       name: 'landingPage',
       component: LandingPage,
-      beforeEnter: async (to, from, next) => {
-        if (store.getters.authenticated) {
-          next('/home');
-        } else {
-          next();
-        }
-      },
     },
     {
       path: '/terms',
