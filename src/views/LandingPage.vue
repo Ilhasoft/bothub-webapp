@@ -1,9 +1,9 @@
 <template>
    <div>
     <nav class="landing-page__nav">
-      <router-link class="landing-page__nav__logo" to="/">
+      <a href="https://dash.weni.ai/" class="landing-page__nav__logo">
         <img src="@/assets/imgs/weni_logo.svg" alt="Weni" />
-      </router-link>
+      </a>
     </nav>
     <section class="landing-page__intro">
       <div class="landing-page__intro__background-svg">
@@ -13,7 +13,7 @@
           </h1>
           <p class="mb-5">
             Agora você deve acessar seus projetos através da plataforma
-            <a href="https://dash.weni.ai/">www.dash.weni.ai</a>.
+            <a href="https://dash.weni.ai/">https://dash.weni.ai</a>.
           </p>
           <p>
             Em caso de dúvidas, entre em contato conosco através do e-mail <br>
