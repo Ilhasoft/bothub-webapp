@@ -51,15 +51,15 @@ describe('Layout.vue', () => {
   //   });
   // });
 
-  describe('open my profile without being logged', () => {
-    beforeEach(async () => {
-      wrapper.vm.openMyProfile();
-    });
+  // describe('open my profile without being logged', () => {
+  //   beforeEach(async () => {
+  //     wrapper.vm.openMyProfile();
+  //   });
 
-    test('router path is "/signin"', () => {
-      expect(router.history.current.path).toBe('/signin');
-    });
-  });
+  //   test('router path is "/signin"', () => {
+  //     expect(router.history.current.path).toBe('/signin');
+  //   });
+  // });
 
   describe('loading', () => {
     beforeEach(() => {

@@ -35,7 +35,7 @@ import store from '../store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -298,3 +298,15 @@ export default new Router({
     return { x: 0, y: 0 };
   },
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/') {
+    next({
+      path: '/'
+    });
+  } else {
+    next();
+  }
+})
+
+export default router
