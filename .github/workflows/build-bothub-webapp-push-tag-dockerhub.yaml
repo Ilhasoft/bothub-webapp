@@ -50,7 +50,7 @@ jobs:
 
   deploy:
     env:
-      MANIFESTS_APPLICATION: inteligencia-artificial
+      MANIFESTS_APPLICATION: webapp
       MANIFESTS_REPOSITORY: weni-ai/kubernetes-manifests-artificial-intelligence
       MANIFESTS_PATCH_TARGET: deployment-webapp.json
     needs: build
@@ -81,14 +81,8 @@ jobs:
             [ "$1" = "$2" ] && return 1 || verlte $1 $2
           }
 
-          ENV_DIR=$(
-            find . -maxdepth 1 -mindepth 1 -type d \
-              | egrep -v -e '.git' -e '/base$' \
-              | while read dirname; do
-                  test -r "${dirname}/kustomization.yaml" && echo "${dirname}"
-                done
-          )
 
+          ENV_DIR=$(echo $IMAGE_VERSION | grep -Eo 'staging|develop' || echo 'production')
           for e in ${ENV_DIR}; do
             echo "Update ${e}:"
 
