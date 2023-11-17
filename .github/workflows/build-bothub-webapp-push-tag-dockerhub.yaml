@@ -53,7 +53,7 @@ jobs:
       MANIFESTS_APPLICATION: webapp
       MANIFESTS_REPOSITORY: weni-ai/kubernetes-manifests-artificial-intelligence
       MANIFESTS_PATCH_TARGET: deployment-webapp.json
-    needs: build
+    needs: build_and_push
     runs-on: ubuntu-latest
     steps:
       - name: Check out Kubernetes Manifests
