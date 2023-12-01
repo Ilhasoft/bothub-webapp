@@ -8,7 +8,7 @@ on:
       - '*.*.*'
 
 jobs:
-  build_and_push:
+  call-workflow:
     uses: weni-ai/actions-workflows/.github/workflows/reusable-workflow.yaml@main
     with:
       docker_image: irdgss/sandbox
@@ -16,4 +16,8 @@ jobs:
       target_repository_branch: sandbox
       target_application: webapp
       target_patch_file: deployment-webapp.json
-    secrets: inherit
+        #secrets: inherit #WORKS ONLY IN SAME ORG
+    secrets:
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+      DEVOPS_GITHUB_PERMANENT_TOKEN: ${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}
