@@ -1,0 +1,19 @@
+name: Build Bothub WebApp (Push Tag)
+
+on:
+  push:
+    tags:
+      - '*.*.*-develop'
+      - '*.*.*-staging'
+      - '*.*.*'
+
+jobs:
+  build_and_push:
+    uses: weni-ai/actions-workflows/.github/workflows/reusable-workflow.yaml@main
+    with:
+      docker_image: irdgss/sandbox
+      target_repository: weni-ai/kubernetes-manifests-artificial-intelligence
+      target_repository_branch: sandbox
+      target_application: webapp
+      target_patch_file: deployment-webapp.json
+    secrets: inherit
