@@ -37,4 +37,5 @@ jobs:
       target_repository: weni-ai/kubernetes-manifests-artificial-intelligence
       target_application: webapp
       target_patch_file: deployment-webapp.json
+      kludge_webapp_secret_enable: true
     secrets: inherit
