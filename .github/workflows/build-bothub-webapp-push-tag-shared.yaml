@@ -1,0 +1,40 @@
+name: Build Bothub WebApp in Shared (Push Tag)
+
+on:
+  push:
+    tags:
+      - '*.*.*-develop*'
+      - '*.*.*-staging*'
+      - '*.*.*'
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      repository_name: ${{ steps.setup.outputs.repository_name }}
+    steps:
+      - name: Setup outputs
+        id: setup
+        run: |
+          export GITHUB_REPOSITORY_NAME="${GITHUB_REPOSITORY#$GITHUB_REPOSITORY_OWNER/}"
+          {
+            echo "repository_name=${GITHUB_REPOSITORY_NAME}"
+          } | tee -a "${GITHUB_OUTPUT}"
+
+          {
+            echo "### Workflow Outputs"
+            echo "| Variable        | Description     |"
+            echo "| --------------- | --------------- |"
+            echo "| repository_name | Repository name |"
+          } | tee -a "${GITHUB_STEP_SUMMARY}"
+
+  call-workflow:
+    uses: weni-ai/actions-workflows/.github/workflows/reusable-workflow.yaml@main
+    needs:
+      - setup
+    with:
+      image_repository: bothub-webapp
+      dockerfile: "Dockerfile"
+      target_repository: weni-ai/kubernetes-manifests-artificial-intelligence
+      target_application: webapp
+      target_patch_file: deployment-webapp.json
+    secrets: inherit
